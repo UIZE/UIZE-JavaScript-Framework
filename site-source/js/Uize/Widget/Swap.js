@@ -165,99 +165,22 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var
-				_true = true,
-				_false = false,
-				_Uize_Node = Uize.Node
-			;
+		var
+			/*** Variables for Scruncher Optimization ***/
+				_Uize_Node = Uize.Node,
 
-		/*** General Variables ***/
-			var
+			/*** General Variables ***/
 				_cropCoords = [],
 				_viewCoords = [],
 				_pos = []
-			;
+		;
 
 		/*** Utility Functions ***/
 			function _blendValues (_value1,_value2,_blend) {return _value1 + (_value2 - _value1) * _blend}
 
-		/*** Class Constructor ***/
-			var
-				_class = _superclass.subclass (
-					function () {
-						var m = this;
-						/*** Private Instance Properties ***/
-							m._viewFinalCoords =
-								m.viewFinalCoords = [0,0,0,0]
-								/*?
-									Instance Properties
-										viewFinalCoords
-											An array, representing the `view final` coordinates for the swap effect, where the elements of the array represent values for left, top, width, and height, respectively.
-
-											NOTES
-											- this property is intended to be used by subclasses
-								*/
-							;
-							m._cycleNo = 0;
-
-						/*** Public Instance Properties ***/
-							m.fade = Uize.Fade ({
-								duration:850,
-								curve:Uize.Fade.celeration (.5,0),
-								startValue:0,
-								endValue:1
-								/*?
-									Instance Properties
-										fade
-											An instance of the =Uize.Fade= class that drives the animation for the swap effect.
-
-											This property allows access to the fade instance that drives the swap animation. This allows us to modify properties of the animation, such as =duration=, =curve=, and any of the other state properties supported by the =Uize.Fade= class.
-								*/
-							});
-
-						/*** Initialization ***/
-							m.fade.wire (
-								'Changed.value',
-								function (_event) {
-									if (m.isWired) {
-										var _value = _event.newValue;
-										if (m._previousItem && m._crossFade) {
-											var
-												_crossFadeSize = m._crossFadeSize,
-												_fadeInStartPoint = _crossFadeSize < 0
-													? 1 - (1 + _crossFadeSize) * (1 - m._crossFadeAlign)
-													: (1 - _crossFadeSize) * m._crossFadeAlign
-												,
-												_fadeOutEndPoint = _fadeInStartPoint + _crossFadeSize
-											;
-											m._updateItem (
-												m._currentItem,
-												_fadeInStartPoint != 1
-													? Uize.constrain ((_value - 1) / (1 - _fadeInStartPoint) + 1,0,1)
-													: _value == 1 ? 1 : 0
-											);
-											m._updateItem (
-												m._previousItem,
-												_fadeOutEndPoint
-													? Uize.constrain (1 - _value / _fadeOutEndPoint,0,1)
-													: _value ? 0 : 1
-											);
-										} else {
-											m._updateItem (m._currentItem,_value);
-										}
-									}
-								}
-							);
-					}
-				),
-				_classPrototype = _class.prototype
-			;
-
 		/*** Private Instance Methods ***/
-			_classPrototype._updateItem = function (_item,_value,_updateAllProperties) {
+			function _updateItem (m,_item,_value,_updateAllProperties) {
 				var
-					m = this,
 					_styleProperties = m._dissolve
 						? _Uize_Node.Util.getOpacityProperties (_value)
 						: _updateAllProperties ? _Uize_Node.Util.getOpacityProperties (1) : {}
@@ -299,85 +222,154 @@ Uize.module ({
 					;
 				}
 				_Uize_Node.setStyle (_item,_styleProperties);
-			};
+			}
 
-		/*** Public Instance Methods ***/
-			_classPrototype.prepareForNextItem = function (_currentItem,_nextItem) {
-				var
-					m = this,
-					_node = m.getNode () || _nextItem,
-					_viewFinalDimsW = parseInt (_Uize_Node.getStyle (_node,'width')),
-					_viewFinalDimsH = parseInt (_Uize_Node.getStyle (_node,'height'))
-				;
-				m.fade.stop ();
-				m._cyclingPropertySets &&
-					m.set (m._cyclingPropertySets [m._cycleNo++ % m._cyclingPropertySets.length])
-				;
-				m._viewFinalCoords [2] = _viewFinalDimsW - 1;
-				m._viewFinalCoords [3] = _viewFinalDimsH - 1;
-				var
-					_seedW = Math.max (0,_viewFinalDimsW * m._viewSeedSizeX),
-					_seedH = Math.max (0,_viewFinalDimsH * m._viewSeedSizeY),
-					_seedL = (_viewFinalDimsW - _seedW) * m._viewSeedAlignX,
-					_seedT = (_viewFinalDimsH - _seedH) * m._viewSeedAlignY
-				;
-				m._viewSeedCoords = [_seedL,_seedT,_seedL + _seedW - 1,_seedT + _seedH - 1];
-				_currentItem && m._updateItem (_currentItem,1,_true);
-				_nextItem && m._updateItem (_nextItem,0,_true);
-				/*?
-					Instance Methods
-						prepareForNextItem
-							A hook method that is provided for subclasses.
-
-							SYNTAX
-							...............................................................
-							mySwap.prepareForNextItem (currentItemNodeOBJ,nextItemNodeOBJ);
-							...............................................................
-
-							This method updates internal state for the instance in preparation for building the next item and should be called before HTML for the next item is inserted into the next item's node.
-
-							NOTES
-							- to get a better sense of how this method is used, you can take a look at the implementation of the =Uize.Widget.Swap.Image= subclass
-							- see the related =setCurrentItem= instance method
-				*/
-			};
-
-			_classPrototype.setCurrentItem = function (_currentItem) {
+		return _superclass.subclass ({
+			alphastructor:function () {
 				var m = this;
-				m.setNodeStyle (m._previousItem = m._currentItem,{zIndex:0});
-				m.setNodeStyle (m._currentItem = _currentItem,{zIndex:1});
-				m.fade.start ();
-				/*?
-					Instance Methods
-						setCurrentItem
-							A hook method that is provided for subclasses.
+				/*** Private Instance Properties ***/
+					m._viewFinalCoords =
+						m.viewFinalCoords = [0,0,0,0]
+						/*?
+							Instance Properties
+								viewFinalCoords
+									An array, representing the `view final` coordinates for the swap effect, where the elements of the array represent values for left, top, width, and height, respectively.
 
-							SYNTAX
-							........................................
-							mySwap.setCurrentItem (nextItemNodeOBJ);
-							........................................
+									NOTES
+									- this property is intended to be used by subclasses
+						*/
+					;
+					m._cycleNo = 0;
 
-							This method initiates the fade that animates the swap effect to reveal the next item. Essentially, you are setting the current item to the next item, which has the effect of triggering the transition. The next item node should be ready to be revealed before this method is called (including all images being completely loaded). Before this method is called, the =prepareForNextItem= instance method should already have been called.
+				/*** Public Instance Properties ***/
+					m.fade = Uize.Fade ({
+						duration:850,
+						curve:Uize.Fade.celeration (.5,0),
+						startValue:0,
+						endValue:1
+						/*?
+							Instance Properties
+								fade
+									An instance of the =Uize.Fade= class that drives the animation for the swap effect.
 
-							NOTES
-							- to get a better sense of how this method is used, you can take a look at the implementation of the =Uize.Widget.Swap.Image= subclass
-							- see the related =prepareForNextItem= instance method
-				*/
-			};
+									This property allows access to the fade instance that drives the swap animation. This allows us to modify properties of the animation, such as =duration=, =curve=, and any of the other state properties supported by the =Uize.Fade= class.
+						*/
+					});
 
-			_classPrototype.wireUi = function () {
-				if (!this.isWired) {
-					this.setNodeStyle ('',{overflow:'hidden'});
+				/*** Initialization ***/
+					m.fade.wire (
+						'Changed.value',
+						function (_event) {
+							if (m.isWired) {
+								var _value = _event.newValue;
+								if (m._previousItem && m._crossFade) {
+									var
+										_crossFadeSize = m._crossFadeSize,
+										_fadeInStartPoint = _crossFadeSize < 0
+											? 1 - (1 + _crossFadeSize) * (1 - m._crossFadeAlign)
+											: (1 - _crossFadeSize) * m._crossFadeAlign
+										,
+										_fadeOutEndPoint = _fadeInStartPoint + _crossFadeSize
+									;
+									_updateItem (
+										m,
+										m._currentItem,
+										_fadeInStartPoint != 1
+											? Uize.constrain ((_value - 1) / (1 - _fadeInStartPoint) + 1,0,1)
+											: _value == 1 ? 1 : 0
+									);
+									_updateItem (
+										m,
+										m._previousItem,
+										_fadeOutEndPoint
+											? Uize.constrain (1 - _value / _fadeOutEndPoint,0,1)
+											: _value ? 0 : 1
+									);
+								} else {
+									_updateItem (m,m._currentItem,_value);
+								}
+							}
+						}
+					);
+			},
 
-					_superclass.doMy (this,'wireUi');
+			instanceMethods:{
+				prepareForNextItem:function (_currentItem,_nextItem) {
+					var
+						m = this,
+						_node = m.getNode () || _nextItem,
+						_viewFinalDimsW = parseInt (_Uize_Node.getStyle (_node,'width')),
+						_viewFinalDimsH = parseInt (_Uize_Node.getStyle (_node,'height'))
+					;
+					m.fade.stop ();
+					m._cyclingPropertySets &&
+						m.set (m._cyclingPropertySets [m._cycleNo++ % m._cyclingPropertySets.length])
+					;
+					m._viewFinalCoords [2] = _viewFinalDimsW - 1;
+					m._viewFinalCoords [3] = _viewFinalDimsH - 1;
+					var
+						_seedW = Math.max (0,_viewFinalDimsW * m._viewSeedSizeX),
+						_seedH = Math.max (0,_viewFinalDimsH * m._viewSeedSizeY),
+						_seedL = (_viewFinalDimsW - _seedW) * m._viewSeedAlignX,
+						_seedT = (_viewFinalDimsH - _seedH) * m._viewSeedAlignY
+					;
+					m._viewSeedCoords = [_seedL,_seedT,_seedL + _seedW - 1,_seedT + _seedH - 1];
+					_currentItem && _updateItem (m,_currentItem,1,true);
+					_nextItem && _updateItem (m,_nextItem,0,true);
+					/*?
+						Instance Methods
+							prepareForNextItem
+								A hook method that is provided for subclasses.
+
+								SYNTAX
+								...............................................................
+								mySwap.prepareForNextItem (currentItemNodeOBJ,nextItemNodeOBJ);
+								...............................................................
+
+								This method updates internal state for the instance in preparation for building the next item and should be called before HTML for the next item is inserted into the next item's node.
+
+								NOTES
+								- to get a better sense of how this method is used, you can take a look at the implementation of the =Uize.Widget.Swap.Image= subclass
+								- see the related =setCurrentItem= instance method
+					*/
+				},
+
+				setCurrentItem:function (_currentItem) {
+					var m = this;
+					m.setNodeStyle (m._previousItem = m._currentItem,{zIndex:0});
+					m.setNodeStyle (m._currentItem = _currentItem,{zIndex:1});
+					m.fade.start ();
+					/*?
+						Instance Methods
+							setCurrentItem
+								A hook method that is provided for subclasses.
+
+								SYNTAX
+								........................................
+								mySwap.setCurrentItem (nextItemNodeOBJ);
+								........................................
+
+								This method initiates the fade that animates the swap effect to reveal the next item. Essentially, you are setting the current item to the next item, which has the effect of triggering the transition. The next item node should be ready to be revealed before this method is called (including all images being completely loaded). Before this method is called, the =prepareForNextItem= instance method should already have been called.
+
+								NOTES
+								- to get a better sense of how this method is used, you can take a look at the implementation of the =Uize.Widget.Swap.Image= subclass
+								- see the related =prepareForNextItem= instance method
+					*/
+				},
+
+				wireUi:function () {
+					if (!this.isWired) {
+						this.setNodeStyle ('',{overflow:'hidden'});
+
+						_superclass.doMy (this,'wireUi');
+					}
 				}
-			};
+			},
 
-		/*** State Properties ***/
-			_class.stateProperties ({
+			stateProperties:{
 				_crossFade:{
 					name:'crossFade|wipeOut',
-					value:_false
+					value:false
 					/*?
 						State Properties
 							crossFade
@@ -433,7 +425,7 @@ Uize.module ({
 					*/
 				_dissolve:{
 					name:'dissolve',
-					value:_true
+					value:true
 					/*?
 						State Properties
 							dissolve
@@ -519,9 +511,8 @@ Uize.module ({
 								- the initial value is =.5=
 					*/
 				}
-			});
-
-		return _class;
+			}
+		});
 	}
 });
 

@@ -433,14 +433,16 @@ Uize = (function () {
 							Using this method on the value ='width'= would produce the result ='Width'=. This method is useful when concatenating one string to another, and where it is desirable for the new concatenated string to be camelCase. Consider the following example...
 
 							EXAMPLE
-							.................................................................
-							_classPrototype.displayPropertyValue = function (_propertyName) {
-								this.setNodeValue (
-									'valueOf' + Uize.capFirstChar (_propertyName),
-									this.get (_propertyName)
-								);
-							};
-							.................................................................
+							.......................................................
+							_class.instanceMethods ({
+								displayPropertyValue:function (_propertyName) {
+									this.setNodeValue (
+										'valueOf' + Uize.capFirstChar (_propertyName),
+										this.get (_propertyName)
+									);
+								}
+							});
+							.......................................................
 
 							In the above example, the instance method =displayPropertyValue= is being defined for a hypothetical widget class. This method accepts a string parameter, being the name of a state property whose value should be displayed in the page in an implied node of the widget, and where the implied node's name is constructed from the prefix ='valueOf'= and the name of the state property with its first letter capitalized. Using this method to display the value of a =width= state property, the value of this property would be displayed in the implied node named =valueOfWidth=.
 

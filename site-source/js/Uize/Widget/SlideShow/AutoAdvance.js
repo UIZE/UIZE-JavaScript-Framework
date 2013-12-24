@@ -29,75 +29,64 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		/*** Class Constructor ***/
-			var
-				_class = _superclass.subclass (
-					null,
-					function () {
-						var m = this;
-
-						/*** make play button ***/
-							(m._play = m._addChildButton ('play',function () {m.toggle ('playing')}))
-								.set ({playing:m._playing})
-							;
-
-						/*** pause auto-advance if the user interacts with the slideshow ***/
-							function _handleButtonClick (_buttonName) {
-								m.children [_buttonName].wire (
-									'Click',function () {m._playing && m.stopThenResume ()}
-								);
-							}
-							_handleButtonClick ('previous');
-							_handleButtonClick ('next');
-							_handleButtonClick ('first');
-							_handleButtonClick ('last');
-					}
-				),
-				_classPrototype = _class.prototype
-			;
-
 		/*** Private Instance Methods ***/
-			_classPrototype._addChildButton = Uize.Widget.Button.addChildButton;
-
-			_classPrototype._clearAutoAdvanceTimeout = function () {
-				var m = this;
+			function _clearAutoAdvanceTimeout (m) {
 				if (m._autoAdvanceTimeout) {
 					clearTimeout (m._autoAdvanceTimeout);
 					m._autoAdvanceTimeout = null;
 				}
-			};
+			}
 
-			_classPrototype._clearResumeTimeout = function () {
-				var m = this;
+			function _clearResumeTimeout (m) {
 				if (m._resumeTimeout) {
 					clearTimeout (m._resumeTimeout);
 					m._resumeTimeout = null;
 				}
-			};
+			}
 
-			_classPrototype._autoAdvance = function () {
-				var m = this;
-				m._clearAutoAdvanceTimeout ();
+			function _autoAdvance (m) {
+				_clearAutoAdvanceTimeout (m);
 				m.advance (1);
-			};
+			}
 
-		/*** Public Instance Methods ***/
-			_classPrototype.wipeDone = function () {
+		return _superclass.subclass ({
+			omegastructor:function () {
 				var m = this;
-				if (m._playing) {
-					m._clearAutoAdvanceTimeout ();
-					m._autoAdvanceTimeout = setTimeout (function () {m._autoAdvance ()},m._interSlideTime);
+
+				/*** make play button ***/
+					(m._play = Uize.Widget.Button.addChildButton.call (m,'play',function () {m.toggle ('playing')}))
+						.set ({playing:m._playing})
+					;
+
+				/*** pause auto-advance if the user interacts with the slideshow ***/
+					function _handleButtonClick (_buttonName) {
+						m.children [_buttonName].wire (
+							'Click',function () {m._playing && m.stopThenResume ()}
+						);
+					}
+					_handleButtonClick ('previous');
+					_handleButtonClick ('next');
+					_handleButtonClick ('first');
+					_handleButtonClick ('last');
+			},
+
+			instanceMethods:{
+				wipeDone:function () {
+					var m = this;
+					if (m._playing) {
+						_clearAutoAdvanceTimeout (m);
+						m._autoAdvanceTimeout = setTimeout (function () {_autoAdvance (m)},m._interSlideTime);
+					}
+				},
+
+				stopThenResume:function () {
+					var m = this;
+					m.set ({_playing:false});
+					m._resumeTimeout = setTimeout (function () {m.set ({_playing:true})},m._idleResumeTime);
 				}
-			};
+			},
 
-			_classPrototype.stopThenResume = function () {
-				var m = this;
-				m.set ({_playing:false});
-				m._resumeTimeout = setTimeout (function () {m.set ({_playing:true})},m._idleResumeTime);
-			};
-
-		/*** State Properties ***/
-			_class.stateProperties ({
+			stateProperties:{
 				_idleResumeTime:{
 					name:'idleResumeTime',
 					value:1000
@@ -114,21 +103,20 @@ Uize.module ({
 						if (m._interSlideTime && m._interSlideTime < 0) {
 							m.set({ playing: false });
 						} else {
-							m._clearResumeTimeout ();
-							m._clearAutoAdvanceTimeout ();
-							m._autoAdvanceTimeout = setTimeout (function () {m._autoAdvance ()},m._interSlideTime);
+							_clearResumeTimeout (m);
+							_clearAutoAdvanceTimeout (m);
+							m._autoAdvanceTimeout = setTimeout (function () {_autoAdvance (m)},m._interSlideTime);
 						}
 						} else {
-							m._clearAutoAdvanceTimeout ();
-							m._clearResumeTimeout ();
+							_clearAutoAdvanceTimeout (m);
+							_clearResumeTimeout (m);
 						}
 						m._play && m._play.set ({playing:m._playing});
 					},
 					value:false
 				}
-			});
-
-		return _class;
+			}
+		});
 	}
 });
 

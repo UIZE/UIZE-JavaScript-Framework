@@ -159,73 +159,20 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var _undefined;
+		var
+			/*** Variables for Scruncher Optimization ***/
+				_undefined,
 
-		/*** General Variables ***/
-			var
+			/*** General Variables ***/
 				_sacredEmptyArray = [],
 				_sacredEmptyObject = {}
-			;
-
-		/*** Class Constructor ***/
-			var
-				_class = _superclass.subclass (
-					null,
-					function () {
-						var m = this;
-
-						/*** add navigation buttons ***/
-							m._addChildButton ('previous',function () {m.advance (-1)});
-							m._addChildButton ('next',function () {m.advance (1)});
-							m._addChildButton ('first',function () {m.set ({_slideNo:0})});
-							m._addChildButton ('last',function () {m.set ({_slideNo:m._totalSlides - 1})});
-							/*?
-								Child Widgets
-									first
-										An instance of =Uize.Widget.Button=, that is wired up as part of the `navigation control`, and that advances the slideshow to the first slide in the set.
-
-										NOTES
-										- this button becomes disabled when the slideshow is at the first slide, or if the =slides= array is empty
-										- the markup for this child widget is optional, and a given implementation of a slideshow widget in HTML does not need to offer a =first= button
-
-									last
-										An instance of =Uize.Widget.Button=, that is wired up as part of the `navigation control`, and that advances the slideshow to the last slide in the set.
-
-										NOTES
-										- this button becomes disabled when the slideshow is at the last slide, or if the =slides= array is empty
-										- the markup for this child widget is optional, and a given implementation of a slideshow widget in HTML does not need to offer a =last= button
-
-									next
-										An instance of =Uize.Widget.Button=, that is wired up as part of the `navigation control`, and that advances the slideshow to the next slide.
-
-										NOTES
-										- this button becomes disabled when the slideshow is at the last slide and =wrap= is set to =false=, or if the =slides= array is empty
-										- the markup for this child widget is optional, and a given implementation of a slideshow widget in HTML does not need to offer a =next= button
-
-									previous
-										An instance of =Uize.Widget.Button=, that is wired up as part of the `navigation control`, and that advances the slideshow to the previous slide.
-
-										NOTES
-										- this button becomes disabled when the slideshow is at the first slide and =wrap= is set to =false=, or if the =slides= array is empty
-										- the markup for this child widget is optional, and a given implementation of a slideshow widget in HTML does not need to offer a =previous= button
-							*/
-
-						/*** Initialization ***/
-							m.updateUi (); // doing this early, because some updates are properties for child widgets
-					}
-				),
-				_classPrototype = _class.prototype
-			;
+		;
 
 		/*** Private Instance Methods ***/
-			_classPrototype._addChildButton = Uize.Widget.Button.addChildButton;
-
-			_classPrototype._conformSlideNo = function (_slide) {
+			function _conformSlideNo (m,_slide) {
 				var
-					m = this,
 					_result = -1,
-					_totalSlides = m._getTotalSlides ()
+					_totalSlides = _getTotalSlides (m)
 				;
 				if (_totalSlides) {
 					if (_slide == _undefined || typeof _slide == 'number') {
@@ -239,17 +186,13 @@ Uize.module ({
 					}
 				}
 				return _result;
-			};
+			}
 
-			_classPrototype._getSlide = function (_slideNo) {
-				return (this._slides || _sacredEmptyArray) [this._conformSlideNo (_slideNo)] || null;
-			};
+			function _getTotalSlides (m) {
+				return (m._slides || _sacredEmptyArray).length;
+			}
 
-			_classPrototype._getTotalSlides = function () {
-				return (this._slides || _sacredEmptyArray).length;
-			};
-
-			_classPrototype._updateUiButtonsEnabled = function () {
+			function _updateUiButtonsEnabled () {
 				var
 					m = this,
 					_children = m.children
@@ -269,11 +212,10 @@ Uize.module ({
 					_updateButtonState ('next',_notAtLast || m._wrap);
 					_updateButtonState ('last',_notAtLast);
 				}
-			};
+			}
 
-			_classPrototype._updateUiSlideProperty = function (_propertyName,_propertyValue,_propertyNodeId) {
+			function _updateUiSlideProperty (m,_propertyName,_propertyValue,_propertyNodeId) {
 				var
-					m = this,
 					_propertyBinding =
 						(m._slideBindings || _sacredEmptyObject) [_propertyName] ||
 						m.children ['slide' + Uize.capFirstChar (_propertyName)]
@@ -286,15 +228,12 @@ Uize.module ({
 					)
 					: m.isWired && m.setNodeValue (_propertyNodeId || _propertyName,_propertyValue)
 				;
-			};
+			}
 
-			_classPrototype._updateUiSlide = function () {
-				var
-					m = this,
-					_slide = m._slide
-				;
+			function _updateUiSlide (m) {
+				var _slide = m._slide;
 				for (var _slideProperty in _slide)
-					m._updateUiSlideProperty (_slideProperty,_slide [_slideProperty],'slide_' + _slideProperty)
+					_updateUiSlideProperty (m,_slideProperty,_slide [_slideProperty],'slide_' + _slideProperty)
 					/*?
 						Child Widgets
 							slide[PropertyName]
@@ -309,77 +248,124 @@ Uize.module ({
 								For example, an implied node that is intended to represent the value for a slide property named =imageUrl= should be named =slide_imageUrl=. An arbitrary number of implied nodes may exist in the DOM for an instance of the =Uize.Widget.SlideShow= class, for the purpose of representing the values of slide properties through the `implied node bindings` facility.
 					*/
 				;
-			};
+			}
 
-			_classPrototype._updateUiProgress = function () {
-				this._updateUiSlideProperty ('progress',this._progress);
-			};
+			function _updateUiProgress (m) {
+				_updateUiSlideProperty (m,'progress',m._progress);
+			}
 
-			_classPrototype._updateUiSlideNo = function () {
-				this._updateUiSlideProperty ('slideNumber',this._slideNo + 1);
-			};
+			function _updateUiSlideNo (m) {
+				_updateUiSlideProperty (m,'slideNumber',m._slideNo + 1);
+			}
 
-			_classPrototype._updateUiTotalSlides = function () {
-				this._updateUiSlideProperty ('totalSlides',this._totalSlides);
-			};
+			function _updateUiTotalSlides (m) {
+				_updateUiSlideProperty (m,'totalSlides',m._totalSlides);
+			}
 
-		/*** Public Instance Methods ***/
-			_classPrototype.updateUi = function () {
+		/*** shared onChange functions ***/
+			function _calculateProgress () {
+				var _totalSlides = this._totalSlides;
+				this.set ({_progress:_totalSlides ? Math.round ((this._slideNo + 1) / _totalSlides * 100) : 0});
+			}
+			function _calculateSlide () {
+				this.set ({_slide:(this._slides || _sacredEmptyArray) [_conformSlideNo (this,this._slideNo)] || null});
+			}
+
+		return _superclass.subclass ({
+			omegastructor:function () {
 				var m = this;
-				m._updateUiButtonsEnabled ();
-				m._updateUiSlideNo ();
-				m._updateUiProgress ();
-				m._updateUiTotalSlides ();
-				m._updateUiSlide ();
-			};
 
-			_classPrototype.advance = function (_direction) {
-				this.set ({_slideNo:this._slideNo + _direction});
-				/*?
-					Instance Methods
-						advance
-							Lets you advance the position within the slideshow by a specified amount.
+				/*** add navigation buttons ***/
+					function _addChildButton (_buttonName,_clickHandler) {
+						Uize.Widget.Button.addChildButton.call (m,_buttonName,_clickHandler);
+					}
+					_addChildButton ('previous',function () {m.advance (-1)});
+					_addChildButton ('next',function () {m.advance (1)});
+					_addChildButton ('first',function () {m.set ({_slideNo:0})});
+					_addChildButton ('last',function () {m.set ({_slideNo:m._totalSlides - 1})});
+					/*?
+						Child Widgets
+							first
+								An instance of =Uize.Widget.Button=, that is wired up as part of the `navigation control`, and that advances the slideshow to the first slide in the set.
 
-							SYNTAX
-							......................................
-							myInstance.advance (advanceAmountINT);
-							......................................
+								NOTES
+								- this button becomes disabled when the slideshow is at the first slide, or if the =slides= array is empty
+								- the markup for this child widget is optional, and a given implementation of a slideshow widget in HTML does not need to offer a =first= button
 
-							Specifying a positive number for the =advanceAmountINT= parameter navigates forwards in the slideshow, while specifying a negative number navigates backwards. Typically, this method would be used to advance one slide in either direction, as in...
+							last
+								An instance of =Uize.Widget.Button=, that is wired up as part of the `navigation control`, and that advances the slideshow to the last slide in the set.
 
-							..........................................
-							myInstance.advance (-1); // previous slide
-							myInstance.advance (1);  // next slide
-							..........................................
+								NOTES
+								- this button becomes disabled when the slideshow is at the last slide, or if the =slides= array is empty
+								- the markup for this child widget is optional, and a given implementation of a slideshow widget in HTML does not need to offer a =last= button
 
-							This method is offered merely as a convenience. There is nothing terribly special about it, and the same effect could be accomplished simply by modifying the value of the =slideNo= state property, as in...
+							next
+								An instance of =Uize.Widget.Button=, that is wired up as part of the `navigation control`, and that advances the slideshow to the next slide.
 
-							............................................................................
-							myInstance.set ({slideNo:myInstance.get ('slideNo') - 1}); // previous slide
-							myInstance.set ({slideNo:myInstance.get ('slideNo') + 1}); // next slide
-							............................................................................
+								NOTES
+								- this button becomes disabled when the slideshow is at the last slide and =wrap= is set to =false=, or if the =slides= array is empty
+								- the markup for this child widget is optional, and a given implementation of a slideshow widget in HTML does not need to offer a =next= button
 
-							The behavior when advancing in a negative direction beyond the first slide, or advancing in a positive direction beyond the last slide is governed by the =wrap= state property.
+							previous
+								An instance of =Uize.Widget.Button=, that is wired up as part of the `navigation control`, and that advances the slideshow to the previous slide.
 
-							NOTES
-							- see the =slideNo= and =wrap= state properties
-				*/
-			};
+								NOTES
+								- this button becomes disabled when the slideshow is at the first slide and =wrap= is set to =false=, or if the =slides= array is empty
+								- the markup for this child widget is optional, and a given implementation of a slideshow widget in HTML does not need to offer a =previous= button
+					*/
 
-		/*** State Properties ***/
-			/*** shared onChange functions ***/
-				function _calculateProgress () {
-					var _totalSlides = this._totalSlides;
-					this.set ({_progress:_totalSlides ? Math.round ((this._slideNo + 1) / _totalSlides * 100) : 0});
+				/*** Initialization ***/
+					m.updateUi (); // doing this early, because some updates are properties for child widgets
+			},
+
+			instanceMethods:{
+				updateUi:function () {
+					var m = this;
+					_updateUiButtonsEnabled.call (m);
+					_updateUiSlideNo (m);
+					_updateUiProgress (m);
+					_updateUiTotalSlides (m);
+					_updateUiSlide (m);
+				},
+
+				advance:function (_direction) {
+					this.set ({_slideNo:this._slideNo + _direction});
+					/*?
+						Instance Methods
+							advance
+								Lets you advance the position within the slideshow by a specified amount.
+
+								SYNTAX
+								......................................
+								myInstance.advance (advanceAmountINT);
+								......................................
+
+								Specifying a positive number for the =advanceAmountINT= parameter navigates forwards in the slideshow, while specifying a negative number navigates backwards. Typically, this method would be used to advance one slide in either direction, as in...
+
+								..........................................
+								myInstance.advance (-1); // previous slide
+								myInstance.advance (1);  // next slide
+								..........................................
+
+								This method is offered merely as a convenience. There is nothing terribly special about it, and the same effect could be accomplished simply by modifying the value of the =slideNo= state property, as in...
+
+								............................................................................
+								myInstance.set ({slideNo:myInstance.get ('slideNo') - 1}); // previous slide
+								myInstance.set ({slideNo:myInstance.get ('slideNo') + 1}); // next slide
+								............................................................................
+
+								The behavior when advancing in a negative direction beyond the first slide, or advancing in a positive direction beyond the last slide is governed by the =wrap= state property.
+
+								NOTES
+								- see the =slideNo= and =wrap= state properties
+					*/
 				}
-				function _calculateSlide () {
-					this.set ({_slide:this._getSlide ()});
-				}
+			},
 
-			_class.stateProperties ({
+			stateProperties:{
 				_progress:{
 					name:'progress',
-					onChange:_classPrototype._updateUiProgress
+					onChange:function () {_updateUiProgress (this)}
 					/*?
 						State Properties
 							progress
@@ -394,7 +380,7 @@ Uize.module ({
 				},
 				_slide:{
 					name:'slide',
-					onChange:_classPrototype._updateUiSlide
+					onChange:function () {_updateUiSlide (this)}
 					/*?
 						State Properties
 							slide
@@ -423,12 +409,12 @@ Uize.module ({
 					*/
 				_slideNo:{
 					name:'slideNo',
-					conformer:function (_value) {return this._conformSlideNo (_value)},
+					conformer:function (_value) {return _conformSlideNo (this,_value)},
 					onChange:[
 						_calculateSlide,
 						_calculateProgress,
-						_classPrototype._updateUiSlideNo,
-						_classPrototype._updateUiButtonsEnabled
+						function () {_updateUiSlideNo (this)},
+						_updateUiButtonsEnabled
 					],
 					value:-1
 					/*?
@@ -450,7 +436,7 @@ Uize.module ({
 						function () {
 							this.set ({
 								_slideNo:this._slideNo == -1 ? 0 : this._slideNo,
-								_totalSlides:this._getTotalSlides ()
+								_totalSlides:_getTotalSlides (this)
 							});
 						},
 						_calculateSlide
@@ -469,8 +455,8 @@ Uize.module ({
 					name:'totalSlides',
 					onChange:[
 						_calculateProgress,
-						_classPrototype._updateUiTotalSlides,
-						_classPrototype._updateUiButtonsEnabled
+						function () {_updateUiTotalSlides (this)},
+						_updateUiButtonsEnabled
 					]
 					/*?
 						State Properties
@@ -487,7 +473,7 @@ Uize.module ({
 				_wrap:{
 					name:'wrap',
 					value:false,
-					onChange:_classPrototype._updateUiButtonsEnabled
+					onChange:_updateUiButtonsEnabled
 					/*?
 						State Properties
 							wrap
@@ -503,9 +489,8 @@ Uize.module ({
 								- the initial value is =false=
 					*/
 				}
-			});
-
-		return _class;
+			}
+		});
 	}
 });
 

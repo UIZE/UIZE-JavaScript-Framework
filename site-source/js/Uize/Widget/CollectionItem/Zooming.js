@@ -33,32 +33,11 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var
+		var
+			/*** Variables for Scruncher Optimization ***/
 				_true = true,
 				_false = false,
 				_Uize_Node = Uize.Node
-			;
-
-		/*** Class Constructor ***/
-			var
-				_class = _superclass.subclass (
-					null,
-					function () {
-						var m = this;
-						m.wire (
-							'Changed.over',
-							function (_event) {
-								if (!_event.newValue) {
-									m.isWired && m.unwireNode (document.documentElement,'mousemove');
-									m.set ({inUse:_false});
-								}
-								m._updatePreviewZoomLowResDisplayed ();
-							}
-						);
-					}
-				),
-				_classPrototype = _class.prototype
 			;
 
 		/*** Utility Functions ***/
@@ -72,38 +51,39 @@ Uize.module ({
 			}
 
 		/*** Private Instance Methods ***/
-			_classPrototype._getPreviewZoomUrl = function () {
-				var _previewZoomUrl = this._previewZoomUrl;
-				return Uize.isFunction (_previewZoomUrl) ? _previewZoomUrl.call (this) : _previewZoomUrl;
-			};
+			function _getPreviewZoomUrl (m) {
+				var _previewZoomUrl = m._previewZoomUrl;
+				return Uize.isFunction (_previewZoomUrl) ? _previewZoomUrl.call (m) : _previewZoomUrl;
+			}
 
 			/*** State Updaters for Derived Properties ***/
-				var _updatePreviewZoomDisplayed = _classPrototype._updatePreviewZoomDisplayed = function () {
+				function _updatePreviewZoomDisplayed () {
 					this.set ({_previewZoomDisplayed:this._inUse && this._zoomPower > 1 && !!this._previewZoomUrl});
 					/* NOTE:
 						Should really be using _getPreviewZoomUrl method, but this can cause problems when the previewZoomUrl is a function, and the function specified is expecting a non-null value for previewUrl in order to form a URL.
 					*/
-				};
+				}
 
-				var _updatePreviewZoomVisible = _classPrototype._updatePreviewZoomVisible = function () {
+				function _updatePreviewZoomVisible () {
 					this.set ({_previewZoomVisible:this._inUse && this._previewZoomUrlLoaded});
-				};
+				}
 
-				var _updatePreviewZoomLowResDisplayed = _classPrototype._updatePreviewZoomLowResDisplayed = function () {
-					this.set ({
+				function _updatePreviewZoomLowResDisplayed () {
+					var m = this;
+					m.set ({
 						_previewZoomLowResDisplayed:
-							(this.get ('over') || this._inUse) && this._zoomPower > 1 && !!this._previewZoomUrl
+							(m.get ('over') || m._inUse) && m._zoomPower > 1 && !!m._previewZoomUrl
 							/* NOTE:
 								Should really be using _getPreviewZoomUrl method, but this can cause problems when the previewZoomUrl is a function, and the function specified is expecting a non-null value for previewUrl in order to form a URL.
 							*/
 					});
 				};
 
-				var _updatePreviewZoomLowResVisible = _classPrototype._updatePreviewZoomLowResVisible = function () {
+				function _updatePreviewZoomLowResVisible () {
 					this.set ({_previewZoomLowResVisible:this._inUse && !this._previewZoomUrlLoaded});
-				};
+				}
 
-				_classPrototype._updatePreviewZoomUrlLoaded = function () {
+				function _updatePreviewZoomUrlLoaded () {
 					var
 						m = this,
 						_previewZoomNode = m.isWired ? m.getNode ('previewZoom') : _false
@@ -111,13 +91,12 @@ Uize.module ({
 					m.set ({
 						_previewZoomUrlLoaded:
 							_previewZoomNode &&
-							_previewZoomNode.Uize_Widget_CollectionItem_Zooming_src == m._getPreviewZoomUrl ()
+							_previewZoomNode.Uize_Widget_CollectionItem_Zooming_src == _getPreviewZoomUrl (m)
 					});
-				};
+				}
 
 			/*** UI Updaters ***/
-				_classPrototype._updateUiPreviewZoomNodeDisplayed = function (_nodeName,_displayed) {
-					var m = this;
+				function _updateUiPreviewZoomNodeDisplayed (m,_nodeName,_displayed) {
 					if (m.isWired) {
 						var _nodeIsHighRes = _nodeName == 'previewZoom';
 						if (_displayed) {
@@ -195,21 +174,18 @@ Uize.module ({
 									}
 								);
 								_previewNode.parentNode.appendChild (_previewZoomNode);
-								_nodeIsHighRes
-									? m._updateUiPreviewZoomVisible ()
-									: m._updateUiPreviewZoomLowResVisible ()
-								;
+								(_nodeIsHighRes ? _updateUiPreviewZoomVisible : _updateUiPreviewZoomLowResVisible).call (m);
 
 								/*** wire event handler to watch on loading of high resolution image ***/
 									_nodeName == 'previewZoom' &&
-										m.wireNode (_nodeName,'load',function () {m._updatePreviewZoomUrlLoaded ()})
+										m.wireNode (_nodeName,'load',function () {_updatePreviewZoomUrlLoaded.call (m)})
 									;
 							}
 						}
 						m.displayNode (_nodeName,_displayed);
 						if (_displayed) {
 							var
-								_imageUrl = _nodeIsHighRes ? m._getPreviewZoomUrl () : m._previewUrl,
+								_imageUrl = _nodeIsHighRes ? _getPreviewZoomUrl (m) : m._previewUrl,
 								_node = m.getNode (_nodeName)
 							;
 							_imageUrl != _node.Uize_Widget_CollectionItem_Zooming_src && _imageUrl != _node.src &&
@@ -220,13 +196,13 @@ Uize.module ({
 							;
 						}
 					}
-				};
+				}
 
-				_classPrototype._updateUiPreview = function () {
-					this.isWired && this._previewUrl && this.setNodeProperties ('preview',{src:this._previewUrl});
-				};
+				function _updateUiPreview (m) {
+					m.isWired && m._previewUrl && m.setNodeProperties ('preview',{src:m._previewUrl});
+				}
 
-				var _updateUiPreviewZoomNodePosition = _classPrototype._updateUiPreviewZoomNodePosition = function () {
+				function _updateUiPreviewZoomNodePosition () {
 					var m = this;
 					if (
 						m.isWired && (
@@ -254,90 +230,97 @@ Uize.module ({
 						_updateCoordsForAxis (1);
 						m.setNodeStyle (m._previewZoomVisible ? 'previewZoom' : 'previewZoomLowRes',_coords);
 					}
-				};
+				}
 
-				_classPrototype._updateUiPreviewZoomLowResDisplayed = function () {
-					this._updateUiPreviewZoomNodeDisplayed ('previewZoomLowRes',this._previewZoomLowResDisplayed);
-				};
-
-				_classPrototype._updateUiPreviewZoomDisplayed = function () {
-					this._updateUiPreviewZoomNodeDisplayed ('previewZoom',this._previewZoomDisplayed);
-				};
-
-				_classPrototype._updateUiPreviewZoomNodeVisible = function (_nodeName,_visible) {
-					var m = this;
+				function _updateUiPreviewZoomNodeVisible (m,_nodeName,_visible) {
 					if (m.isWired) {
-						_visible && m._updateUiPreviewZoomNodePosition ();
+						_visible && _updateUiPreviewZoomNodePosition.call (m);
 						m.showNode (_nodeName,_visible);
 					}
-				};
-
-				_classPrototype._updateUiPreviewZoomLowResVisible = function () {
-					this._updateUiPreviewZoomNodeVisible ('previewZoomLowRes',this._previewZoomLowResVisible);
-				};
-
-				_classPrototype._updateUiPreviewZoomVisible = function () {
-					this._updateUiPreviewZoomNodeVisible ('previewZoom',this._previewZoomVisible);
-				};
-
-		/*** Public Instance Methods ***/
-			_classPrototype.updateUi = function () {
-				this._updateUiPreview ();
-				_superclass.doMy (this,'updateUi');
-			};
-
-			_classPrototype.wireUi = function () {
-				var m = this;
-				if (!m.isWired) {
-					var
-						_previewNode = m.getNode ('preview'),
-						_previewShellNode = m.getNode ('previewShell') || (_previewNode ? _previewNode.parentNode : null)
-					;
-
-					/*** set previewUrl from preview node (if it's not already set) ***/
-						m._previewUrl || m.set ({_previewUrl:_previewNode.src});
-
-					m.wireNode (
-						_previewShellNode,
-						Uize.Node.VirtualEvent.mouseRest (150),
-						function () {
-							if (!m.get ('over')) return;
-								/* HACK:
-									Dragging in Uize.Widget.Collection.Dynamic sets over to false. This hack wouldn't be necessary if mousing down prevented the mouserest event (implemented in Uize.Node) being fired, even on subsequent mouse moves.
-								*/
-
-							if (m._zoomPower > 1) {
-								m.set ({inUse:_true});
-
-								/*** wire up document mousemove event ***/
-									var _handleMouseMove = function () {
-										var
-											_eventAbsPos = _Uize_Node.getEventAbsPos (),
-											_deadMargin = m._deadMargin
-										;
-										function _getAlignForAxis (_axisIsY) {
-											return (
-												Uize.constrain (
-													(_eventAbsPos [_axisIsY ? 'top' : 'left'] - (m._previewShellNodeCoords [_axisIsY ? 'y' : 'x'] + _deadMargin)) / (m._previewShellNodeCoords [_axisIsY ? 'height' : 'width'] - _deadMargin * 2),
-													0,
-													1
-												)
-											)
-										}
-										m._previewShellNodeCoords && m.set ({_alignX:_getAlignForAxis (0),_alignY:_getAlignForAxis (1)});
-									};
-									_handleMouseMove ();
-									m.wireNode (document.documentElement,'mousemove',_handleMouseMove);
-							}
-						}
-					);
-
-					_superclass.doMy (m,'wireUi');
 				}
-			};
 
-		/*** State Properties ***/
-			_class.stateProperties ({
+				function _updateUiPreviewZoomLowResVisible () {
+					_updateUiPreviewZoomNodeVisible (this,'previewZoomLowRes',this._previewZoomLowResVisible);
+				}
+
+				function _updateUiPreviewZoomVisible () {
+					_updateUiPreviewZoomNodeVisible (this,'previewZoom',this._previewZoomVisible);
+				}
+
+
+		return _superclass.subclass ({
+			omegastructor:function () {
+				var m = this;
+				m.wire (
+					'Changed.over',
+					function (_event) {
+						if (!_event.newValue) {
+							m.isWired && m.unwireNode (document.documentElement,'mousemove');
+							m.set ({inUse:_false});
+						}
+						_updatePreviewZoomLowResDisplayed.call (m);
+					}
+				);
+			},
+
+			instanceMethods:{
+				updateUi:function () {
+					_updateUiPreview (this);
+					_superclass.doMy (this,'updateUi');
+				},
+
+				wireUi:function () {
+					var m = this;
+					if (!m.isWired) {
+						var
+							_previewNode = m.getNode ('preview'),
+							_previewShellNode = m.getNode ('previewShell') || (_previewNode ? _previewNode.parentNode : null)
+						;
+
+						/*** set previewUrl from preview node (if it's not already set) ***/
+							m._previewUrl || m.set ({_previewUrl:_previewNode.src});
+
+						m.wireNode (
+							_previewShellNode,
+							Uize.Node.VirtualEvent.mouseRest (150),
+							function () {
+								if (!m.get ('over')) return;
+									/* HACK:
+										Dragging in Uize.Widget.Collection.Dynamic sets over to false. This hack wouldn't be necessary if mousing down prevented the mouserest event (implemented in Uize.Node) being fired, even on subsequent mouse moves.
+									*/
+
+								if (m._zoomPower > 1) {
+									m.set ({inUse:_true});
+
+									/*** wire up document mousemove event ***/
+										var _handleMouseMove = function () {
+											var
+												_eventAbsPos = _Uize_Node.getEventAbsPos (),
+												_deadMargin = m._deadMargin
+											;
+											function _getAlignForAxis (_axisIsY) {
+												return (
+													Uize.constrain (
+														(_eventAbsPos [_axisIsY ? 'top' : 'left'] - (m._previewShellNodeCoords [_axisIsY ? 'y' : 'x'] + _deadMargin)) / (m._previewShellNodeCoords [_axisIsY ? 'height' : 'width'] - _deadMargin * 2),
+														0,
+														1
+													)
+												)
+											}
+											m._previewShellNodeCoords && m.set ({_alignX:_getAlignForAxis (0),_alignY:_getAlignForAxis (1)});
+										};
+										_handleMouseMove ();
+										m.wireNode (document.documentElement,'mousemove',_handleMouseMove);
+								}
+							}
+						);
+
+						_superclass.doMy (m,'wireUi');
+					}
+				}
+			},
+
+			stateProperties:{
 				_alignX:{
 					name:'alignX',
 					onChange:_updateUiPreviewZoomNodePosition,
@@ -419,7 +402,7 @@ Uize.module ({
 
 							if (m.isWired) {
 								if (m._inUse) {
-									var _previewZoomUrl = m._getPreviewZoomUrl ();
+									var _previewZoomUrl = _getPreviewZoomUrl (m);
 									if (_previewZoomUrl) {
 										if (m._zoomPower > 1) {
 											m._zoomShown = _true;
@@ -450,7 +433,7 @@ Uize.module ({
 										m.set ({_displayedZoomPower:1});
 										m._zoomShown = _false;
 									} else {
-										m._updateUiPreview ();
+										_updateUiPreview (m);
 									}
 									m.set ({_showingPreview:_false});
 								}
@@ -473,8 +456,8 @@ Uize.module ({
 				_previewUrl:{
 					name:'previewUrl',
 					onChange:[
-						_classPrototype._updatePreviewZoomUrlLoaded,
-						_classPrototype._updateUiPreview
+						_updatePreviewZoomUrlLoaded,
+						function () {_updateUiPreview (this)}
 					]
 					/*?
 						State Properties
@@ -590,24 +573,27 @@ Uize.module ({
 						value:_false
 					},
 					_previewZoomDisplayed:{ // whether or not the previewZoom node should be displayed
-						onChange:_classPrototype._updateUiPreviewZoomDisplayed,
+						onChange:function () {
+							_updateUiPreviewZoomNodeDisplayed (this,'previewZoom',this._previewZoomDisplayed);
+						},
 						value:_false
 					},
 					_previewZoomVisible:{ // whether or not the previewZoom node should be visible
-						onChange:_classPrototype._updateUiPreviewZoomVisible,
+						onChange:_updateUiPreviewZoomVisible,
 						value:_false
 					},
 					_previewZoomLowResDisplayed:{ // whether or not the previewZoomLowRes node should be displayed
-						onChange:_classPrototype._updateUiPreviewZoomLowResDisplayed,
+						onChange:function () {
+							_updateUiPreviewZoomNodeDisplayed (this,'previewZoomLowRes',this._previewZoomLowResDisplayed);
+						},
 						value:_false
 					},
 					_previewZoomLowResVisible:{ // whether or not the previewZoomLowRes node should be visible
-						onChange:_classPrototype._updateUiPreviewZoomLowResVisible,
+						onChange:_updateUiPreviewZoomLowResVisible,
 						value:_true
 					}
-			});
-
-		return _class;
+			}
+		});
 	}
 });
 

@@ -116,20 +116,8 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		/*** Class Constructor ***/
-			var
-				_class = _superclass.subclass (
-					function () {
-						var m = this;
-						/*** Private Instance Properties ***/
-							m._currentItemNo = -1;
-					}
-				),
-				_classPrototype = _class.prototype
-			;
-
-		/*** Private Instance Methods ***/
-			_classPrototype._getItemNodeName = function (_itemNo) {
+		/*** Utility Functions ***/
+			function _getItemNodeName (_itemNo) {
 				return _itemNo > -1 ? ('item' + _itemNo) : null;
 				/*?
 					Implied Nodes
@@ -138,42 +126,48 @@ Uize.module ({
 
 							There is an implied node name for each item in the deck, named according to the naming scheme =item[itemNo]=, where =[itemNo]= represents the number for an item. For example, an instance whose =totalItems= state property is set to =5= will have the five implied nodes named =item0=, =item1=, =item2=, =item3=, and =item4=. When wiring up an instance of the =Uize.Widget.Swap.Deck= class, be sure that HTML exists in the document that supplies a corresponding implied node for each item in the deck.
 				*/
-			};
+			}
 
-			_classPrototype._updateUiDeck = function () {
-				var m = this;
+		/*** Private Instance Methods ***/
+			function _updateUiDeck (m) {
 				if (m.isWired) {
 					m.showNode (m._itemNodeNames,false);
 					m.displayNode (m._itemNodeNames);
 				}
-			};
+			}
 
-			_classPrototype._updateUiItemNo = function () {
-				var m = this;
+			function _updateUiItemNo (m) {
 				if (m.isWired) {
 					var
-						_currentItem = m.getNode (m._getItemNodeName (m._currentItemNo)),
-						_nextItem = m.getNode (m._getItemNodeName (m._itemNo))
+						_currentItem = m.getNode (_getItemNodeName (m._currentItemNo)),
+						_nextItem = m.getNode (_getItemNodeName (m._itemNo))
 					;
-					m._updateUiDeck ();
+					_updateUiDeck (m);
 					m.prepareForNextItem (_currentItem,_nextItem);
 					m.setCurrentItem (_nextItem);
 					m.showNode ([_currentItem,_nextItem]);
 					m._currentItemNo = m._itemNo;
 				}
-			};
+			}
 
-		/*** Public Instance Methods ***/
-			_classPrototype.updateUi = function () {
-				this._updateUiDeck ();
-				this._updateUiItemNo ();
-			};
+		return _superclass.subclass ({
+			alphastructor:function () {
+				var m = this;
+				/*** Private Instance Properties ***/
+					m._currentItemNo = -1;
+			},
 
-		/*** State Properties ***/
-			_class.stateProperties ({
+			instanceMethods:{
+				updateUi:function () {
+					_updateUiDeck (this);
+					_updateUiItemNo (this);
+				}
+			},
+
+			stateProperties:{
 				_itemNo:{
 					name:'itemNo|value',
-					onChange:_classPrototype._updateUiItemNo,
+					onChange:function () {_updateUiItemNo (this)},
 					value:-1
 					/*?
 						State Properties
@@ -196,7 +190,7 @@ Uize.module ({
 						var m = this;
 						m._itemNodeNames = Uize.map (
 							m._totalItems,
-							function (_junkValue,_itemNo) {return m._getItemNodeName (_itemNo)}
+							function (_junkValue,_itemNo) {return _getItemNodeName (_itemNo)}
 						);
 					},
 					value:0
@@ -209,9 +203,8 @@ Uize.module ({
 								- the initial value is =0=
 					*/
 				}
-			});
-
-		return _class;
+			}
+		});
 	}
 });
 

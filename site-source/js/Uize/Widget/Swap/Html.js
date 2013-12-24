@@ -29,25 +29,12 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var
-				_Uize_Node = Uize.Node
-			;
+		return _superclass.subclass ({
+			alphastructor:function () {
+				this._currentItemNo = 0;
+			},
 
-		/*** Class Constructor ***/
-			var
-				_class = _superclass.subclass (
-					function () {
-						var m = this;
-						/*** Private Instance Properties ***/
-							m._currentItemNo = 0;
-					}
-				),
-				_classPrototype = _class.prototype
-			;
-
-		/*** State Properties ***/
-			_class.stateProperties ({
+			stateProperties:{
 				_background:{
 					name:'background',
 					value:'#000'
@@ -70,13 +57,12 @@ Uize.module ({
 					},
 					value:''
 				}
-			});
+			},
 
-		/*** Override Initial Values for Inherited State Properties ***/
-			_class.set ({
+			set:{
 				html:{
 					process:function (input) {
-						var _shellSize = _Uize_Node.getDimensions (this.getNode ());
+						var _shellSize = Uize.Node.getDimensions (this.getNode ());
 						function _getItemTag (_itemNo) {
 							return (
 								'<div id="' + input.idPrefix + '-item' + _itemNo +
@@ -88,9 +74,8 @@ Uize.module ({
 						return _getItemTag (0) + _getItemTag (1);
 					}
 				}
-			});
-
-		return _class;
+			}
+		});
 	}
 });
 
