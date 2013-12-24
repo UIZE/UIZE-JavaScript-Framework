@@ -137,9 +137,6 @@ Uize.module ({
 										var _handlersForEventName = _eventHandlers [_eventName];
 										if (_handlersForEventName) {
 											if (_handler) {
-												/* TO DO:
-													this is a candidate for factoring out as a generally useful array manipulation method: removeAllOfValue
-												*/
 												for (var _handlerNo = _handlersForEventName.length; --_handlerNo >= 0;)
 													_handlersForEventName [_handlerNo]._originalHandler == _handler &&
 														_handlersForEventName.splice (_handlerNo,1)
