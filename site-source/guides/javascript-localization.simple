@@ -138,7 +138,7 @@ The localized State Property
 	if (_inDrag)
 		_Uize_Node.setInnerHtml (
 			_draggingTooltip,
-			_this.localize (
+			m.localize (
 				'draggingToReorder' + (_itemsDraggedLength > 1 ? 'Plural' : 'Singular'),
 				{totalItems:_itemsDraggedLength}
 			)

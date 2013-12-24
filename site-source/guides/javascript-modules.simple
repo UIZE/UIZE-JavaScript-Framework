@@ -777,16 +777,16 @@ Dynamically Loading Modules
 			An Ajax based module loader can be defined to allow modules to be loaded through a Web service of your choosing.
 
 			EXAMPLE
-			.................................................................................
+			.............................................................................
 			Uize.moduleLoader = function (_moduleToLoad,_callback) {
-				_this._commObject.request ({
-					url:[_this.get ('env').service + 'getjs',{filename:_moduleToLoad + '.js'}],
+				m._commObject.request ({
+					url:[m.get ('env').service + 'getjs',{filename:_moduleToLoad + '.js'}],
 					returnType:'json',
 					requestMethod:'GET',
 					callback:_callback
 				});
 			};
-			.................................................................................
+			.............................................................................
 
 		Windows Script Host Module Loader
 			Build scripts written for the WSH (Windows Script Host) context can define a module loader that uses the =Scripting.FileSystemObject= ActiveX control to load modules.
