@@ -25,7 +25,6 @@
 
 Uize.module ({
 	name:'Uize.Widget.V2Mixin',
-	required:'Uize.Node',
 	builder:function () {
 		'use strict';
 
