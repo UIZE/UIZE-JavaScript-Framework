@@ -32,69 +32,63 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var
-				_true = true,
-				_false = false,
-				_Uize_Color = Uize.Color
-			;
+		var
+			/*** Variables for Scruncher Optimization ***/
+				_Uize_Color = Uize.Color,
+				_updateUi = 'updateUi'
+		;
 
-		/*** Class Constructor ***/
-			var
-				_class = _superclass.subclass (
-					function () {
-						var m = this;
-
-						/*** create the color objects that will be used in interpolation ***/
-							m._colorObjectTopLeft = new _Uize_Color;
-							m._colorObjectTopRight = new _Uize_Color;
-							m._colorObjectBottomLeft = new _Uize_Color;
-							m._colorObjectBottomRight = new _Uize_Color;
-							m._colorObjectLeft = new _Uize_Color;
-							m._colorObjectRight = new _Uize_Color;
-							m._colorObjectPoint = new _Uize_Color;
-					}
-				),
-				_classPrototype = _class.prototype
-			;
-
-		/*** Public Instance Methods ***/
-			var _updateUi = _classPrototype.updateUi = function () {
+		return _superclass.subclass ({
+			alphastructor:function () {
 				var m = this;
-				if (m.isWired) {
-					var
-						_colorObjectTopLeft = m._colorObjectTopLeft.from (m._colorTopLeft),
-						_colorObjectTopRight = m._colorObjectTopRight.from (m._colorTopRight),
-						_colorObjectBottomLeft = m._colorObjectBottomLeft.from (m._colorBottomLeft),
-						_colorObjectBottomRight = m._colorObjectBottomRight.from (m._colorBottomRight),
-						_primaryEncoding = _colorObjectTopLeft.encoding,
-						_colorObjectLeft = m._colorObjectLeft.setEncoding (_primaryEncoding),
-						_colorObjectRight = m._colorObjectRight.setEncoding (_primaryEncoding),
-						_colorObjectPoint = m._colorObjectPoint.setEncoding (_primaryEncoding),
-						_divisionsX = m._divisionsX,
-						_divisionsY = m._divisionsY,
-						_divisionSizeX = m._divisionSizeX,
-						_divisionSizeY = m._divisionSizeY,
-						_nodeNameSuffix
-					;
 
-					for (var _divisionY = -1; ++_divisionY < _divisionsY;) {
-						_nodeNameSuffix = 'y' + _divisionY;
-						var _blendY = _divisionY * _divisionSizeY;
-						_colorObjectLeft.blend (_colorObjectTopLeft,_colorObjectBottomLeft,_blendY);
-						_colorObjectRight.blend (_colorObjectTopRight,_colorObjectBottomRight,_blendY);
-						for (var _divisionX = -1; ++_divisionX < _divisionsX;) {
-							_colorObjectPoint.blend (_colorObjectLeft,_colorObjectRight,_divisionX * _divisionSizeX);
-							m.getNode ('x' + _divisionX + _nodeNameSuffix).style.backgroundColor =
-								_colorObjectPoint.to ('RGB string')
-							;
+				/*** create the color objects that will be used in interpolation ***/
+					m._colorObjectTopLeft = _Uize_Color ();
+					m._colorObjectTopRight = _Uize_Color ();
+					m._colorObjectBottomLeft = _Uize_Color ();
+					m._colorObjectBottomRight = _Uize_Color ();
+					m._colorObjectLeft = _Uize_Color ();
+					m._colorObjectRight = _Uize_Color ();
+					m._colorObjectPoint = _Uize_Color ();
+			},
+
+			instanceMethods:{
+				updateUi:function () {
+					var m = this;
+					if (m.isWired) {
+						var
+							_colorObjectTopLeft = m._colorObjectTopLeft.from (m._colorTopLeft),
+							_colorObjectTopRight = m._colorObjectTopRight.from (m._colorTopRight),
+							_colorObjectBottomLeft = m._colorObjectBottomLeft.from (m._colorBottomLeft),
+							_colorObjectBottomRight = m._colorObjectBottomRight.from (m._colorBottomRight),
+							_primaryEncoding = _colorObjectTopLeft.encoding,
+							_colorObjectLeft = m._colorObjectLeft.setEncoding (_primaryEncoding),
+							_colorObjectRight = m._colorObjectRight.setEncoding (_primaryEncoding),
+							_colorObjectPoint = m._colorObjectPoint.setEncoding (_primaryEncoding),
+							_divisionsX = m._divisionsX,
+							_divisionsY = m._divisionsY,
+							_divisionSizeX = m._divisionSizeX,
+							_divisionSizeY = m._divisionSizeY,
+							_nodeNameSuffix
+						;
+
+						for (var _divisionY = -1; ++_divisionY < _divisionsY;) {
+							_nodeNameSuffix = 'y' + _divisionY;
+							var _blendY = _divisionY * _divisionSizeY;
+							_colorObjectLeft.blend (_colorObjectTopLeft,_colorObjectBottomLeft,_blendY);
+							_colorObjectRight.blend (_colorObjectTopRight,_colorObjectBottomRight,_blendY);
+							for (var _divisionX = -1; ++_divisionX < _divisionsX;) {
+								_colorObjectPoint.blend (_colorObjectLeft,_colorObjectRight,_divisionX * _divisionSizeX);
+								m.getNode ('x' + _divisionX + _nodeNameSuffix).style.backgroundColor =
+									_colorObjectPoint.to ('RGB string')
+								;
+							}
 						}
 					}
 				}
-			};
+			},
 
-		/*** State Properties ***/
-			_class.stateProperties ({
+			stateProperties:{
 				_colorTopLeft:{
 					name:'colorTopLeft',
 					onChange:_updateUi,
@@ -125,10 +119,9 @@ Uize.module ({
 					onChange:function () {this._divisionSizeY = 1 / ((this._divisionsY - 1) || 1)},
 					value:10
 				}
-			});
+			},
 
-		/*** Override Initial Values for Inherited State Properties ***/
-			_class.set ({
+			set:{
 				html:{
 					process:function (input) {
 						/* compiled from...
@@ -148,9 +141,8 @@ Uize.module ({
 						return output.join("");
 					}
 				}
-			});
-
-		return _class;
+			}
+		});
 	}
 });
 

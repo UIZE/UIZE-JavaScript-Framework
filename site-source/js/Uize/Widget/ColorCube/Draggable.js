@@ -33,21 +33,13 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var
-				_true = true,
-				_false = false,
-				_Uize_Node = Uize.Node
-			;
+		var
+			/*** Variables for Scruncher Optimization ***/
+				_Uize_Node = Uize.Node,
 
-		/*** General Variables ***/
-			var _dummyColor = Uize.Color ();
-
-		/*** Class Constructor ***/
-			var
-				_class = _superclass.subclass (),
-				_classPrototype = _class.prototype
-			;
+			/*** General Variables ***/
+				_dummyColor = Uize.Color ()
+		;
 
 		/*** Utility Functions ***/
 			function _getColorAtRelativePoint (_cornerColors,_blendX,_blendY) {
@@ -80,96 +72,96 @@ Uize.module ({
 				return _dummyColor.to ();
 			}
 
-		/*** Public Instance Methods ***/
-			_classPrototype.wireUi = function () {
-				var m = this;
-				if (!m.isWired) {
-					var
-						_shell = m.getNode (),
-						_drag = Uize.Widget.Drag ({node:_shell}),
-						_xSideNames = ['Left','Right'],
-						_ySideNames = ['Top','Bottom'],
-						_eventStartPos = _drag.eventStartPos,
-						_eventDeltaPos = _drag.eventDeltaPos,
-						_eventPos = _drag.eventPos,
-						_cubeCoords, _cubeCoordsArray,
-						_cornerColorsAtDragStart = {}
-					;
-					_Uize_Node.showClickable (_shell);
-					_drag.wire ({
-						'Drag Start':
-							function (_event) {
-								m.set ({_inDrag:_true});
-								_cubeCoords = _Uize_Node.getCoords (_shell);
-								_cubeCoordsArray = [_cubeCoords.left,_cubeCoords.top,_cubeCoords.right,_cubeCoords.bottom];
-								function _initCornerColorAtDragStart (_cornerName) {
-									(
-										_cornerColorsAtDragStart [_cornerName] ||
-										(_cornerColorsAtDragStart [_cornerName] = Uize.Color ())
-									).from (m.get (_cornerName));
-								}
-								_initCornerColorAtDragStart ('colorTopLeft');
-								_initCornerColorAtDragStart ('colorTopRight');
-								_initCornerColorAtDragStart ('colorBottomLeft');
-								_initCornerColorAtDragStart ('colorBottomRight');
-							},
-						'Drag Update':
-							function (_event) {
-								var
-									_scaledCornerSides = [],
-									_newPropertyValues = {},
-									_newPropertyPoints = {},
-									_fixedCornerSides = []
-								;
-								function _setScaledCornerSides (_axisNo) {
-									_fixedCornerSides [_axisNo] = _eventDeltaPos [_axisNo] > 0 ? 0 : 1;
+		return _superclass.subclass ({
+			instanceMethods:{
+				wireUi:function () {
+					var m = this;
+					if (!m.isWired) {
+						var
+							_shell = m.getNode (),
+							_drag = Uize.Widget.Drag ({node:_shell}),
+							_xSideNames = ['Left','Right'],
+							_ySideNames = ['Top','Bottom'],
+							_eventStartPos = _drag.eventStartPos,
+							_eventDeltaPos = _drag.eventDeltaPos,
+							_eventPos = _drag.eventPos,
+							_cubeCoords, _cubeCoordsArray,
+							_cornerColorsAtDragStart = {}
+						;
+						_Uize_Node.showClickable (_shell);
+						_drag.wire ({
+							'Drag Start':
+								function (_event) {
+									m.set ({_inDrag:true});
+									_cubeCoords = _Uize_Node.getCoords (_shell);
+									_cubeCoordsArray = [_cubeCoords.left,_cubeCoords.top,_cubeCoords.right,_cubeCoords.bottom];
+									function _initCornerColorAtDragStart (_cornerName) {
+										(
+											_cornerColorsAtDragStart [_cornerName] ||
+											(_cornerColorsAtDragStart [_cornerName] = Uize.Color ())
+										).from (m.get (_cornerName));
+									}
+									_initCornerColorAtDragStart ('colorTopLeft');
+									_initCornerColorAtDragStart ('colorTopRight');
+									_initCornerColorAtDragStart ('colorBottomLeft');
+									_initCornerColorAtDragStart ('colorBottomRight');
+								},
+							'Drag Update':
+								function (_event) {
 									var
-										_fixedCornerPos = _cubeCoordsArray [_fixedCornerSides [_axisNo] * 2 + _axisNo],
-										_fixedCornerSide = _fixedCornerSides [_axisNo],
-										_fluidCornerSide = 1 - _fixedCornerSide
+										_scaledCornerSides = [],
+										_newPropertyValues = {},
+										_newPropertyPoints = {},
+										_fixedCornerSides = []
 									;
-									_scaledCornerSides [_fixedCornerSide * 2 + _axisNo] = _fixedCornerSide;
-									_scaledCornerSides [_fluidCornerSide * 2 + _axisNo] = _fixedCornerSide + (_fluidCornerSide - _fixedCornerSide) * (_eventPos [_axisNo] - _fixedCornerPos) / (_eventStartPos [_axisNo] - _fixedCornerPos);
-								}
-								_setScaledCornerSides (0);
-								_setScaledCornerSides (1);
-								function _setCornerColor (_xSide,_ySide) {
-									var _propertyName = 'color' + _ySideNames [_ySide] + _xSideNames [_xSide];
-									_newPropertyValues [_propertyName] =
-										_xSide == _fixedCornerSides [0] && _ySide == _fixedCornerSides [1]
-											? _cornerColorsAtDragStart [_propertyName].to ()
-											: _getColorAtRelativePoint (
-												_cornerColorsAtDragStart,
-												(_xSide - _scaledCornerSides [0]) / (_scaledCornerSides [2] - _scaledCornerSides [0]),
-												(_ySide - _scaledCornerSides [1]) / (_scaledCornerSides [3] - _scaledCornerSides [1])
-											)
-									;
-								}
-								_setCornerColor (0,0);
-								_setCornerColor (0,1);
-								_setCornerColor (1,0);
-								_setCornerColor (1,1);
-								m.set (_newPropertyValues);
-								m.fire ('Colors Changed');
-							},
-						'Drag Done':
-							function () {m.set ({_inDrag:_false})}
-					});
-					m.addChild ('drag',_drag);
+									function _setScaledCornerSides (_axisNo) {
+										_fixedCornerSides [_axisNo] = _eventDeltaPos [_axisNo] > 0 ? 0 : 1;
+										var
+											_fixedCornerPos = _cubeCoordsArray [_fixedCornerSides [_axisNo] * 2 + _axisNo],
+											_fixedCornerSide = _fixedCornerSides [_axisNo],
+											_fluidCornerSide = 1 - _fixedCornerSide
+										;
+										_scaledCornerSides [_fixedCornerSide * 2 + _axisNo] = _fixedCornerSide;
+										_scaledCornerSides [_fluidCornerSide * 2 + _axisNo] = _fixedCornerSide + (_fluidCornerSide - _fixedCornerSide) * (_eventPos [_axisNo] - _fixedCornerPos) / (_eventStartPos [_axisNo] - _fixedCornerPos);
+									}
+									_setScaledCornerSides (0);
+									_setScaledCornerSides (1);
+									function _setCornerColor (_xSide,_ySide) {
+										var _propertyName = 'color' + _ySideNames [_ySide] + _xSideNames [_xSide];
+										_newPropertyValues [_propertyName] =
+											_xSide == _fixedCornerSides [0] && _ySide == _fixedCornerSides [1]
+												? _cornerColorsAtDragStart [_propertyName].to ()
+												: _getColorAtRelativePoint (
+													_cornerColorsAtDragStart,
+													(_xSide - _scaledCornerSides [0]) / (_scaledCornerSides [2] - _scaledCornerSides [0]),
+													(_ySide - _scaledCornerSides [1]) / (_scaledCornerSides [3] - _scaledCornerSides [1])
+												)
+										;
+									}
+									_setCornerColor (0,0);
+									_setCornerColor (0,1);
+									_setCornerColor (1,0);
+									_setCornerColor (1,1);
+									m.set (_newPropertyValues);
+									m.fire ('Colors Changed');
+								},
+							'Drag Done':
+								function () {m.set ({_inDrag:false})}
+						});
+						m.addChild ('drag',_drag);
 
-					_superclass.doMy (m,'wireUi');
+						_superclass.doMy (m,'wireUi');
+					}
 				}
-			};
+			},
 
-		/*** State Properties ***/
-			_class.stateProperties ({
+			stateProperties:{
 				_inDrag:{
 					name:'inDrag',
-					value:_false
+					value:false
 				}
-			});
-
-		return _class;
+			}
+		});
 	}
 });
 

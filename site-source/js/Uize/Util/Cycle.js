@@ -29,52 +29,17 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var
-				_true = true,
-				_false = false
-			;
-
-		/*** Class Constructor ***/
-			var
-				_class = _superclass.subclass (
-					function () {
-						var m = this;
-						/*** Private Instance Properties ***/
-							m._cycleNo = 0;
-							m._running = _false;
-							m._advanceTimeout = null;
-
-						/*** Initialization ***/
-							/*
-							m.fade.wire (
-								'Done',
-								function () {
-									if (m._running && (m._cycleNo < m._images.length - 1 || m._loop))
-										m._advanceTimeout = setTimeout (function () {m._advance ()},m._interval)
-									;
-								}
-							);
-							*/
-					}
-				),
-				_classPrototype = _class.prototype
-			;
-
 		/*** Private Instance Methods ***/
-			_classPrototype._clearAdvanceTimeout = function () {
-				if (this._advanceTimeout) {
-					clearTimeout (this._advanceTimeout);
-					this._advanceTimeout = null;
+			function _clearAdvanceTimeout (m) {
+				if (m._advanceTimeout) {
+					clearTimeout (m._advanceTimeout);
+					m._advanceTimeout = null;
 				}
-			};
+			}
 
-			_classPrototype._advance = function () {
-				var
-					m = this,
-					_bindings = m._bindings
-				;
-				m._clearAdvanceTimeout ();
+			function _advance (m) {
+				var _bindings = m._bindings;
+				_clearAdvanceTimeout (m);
 				if (_bindings) {
 					for (
 						var _bindingNo = -1, _bindingsLength = _bindings.length;
@@ -96,24 +61,46 @@ Uize.module ({
 					}
 				}
 				if (m._running)
-					m._advanceTimeout = setTimeout (function () {m._advance ()},m._interval)
+					m._advanceTimeout = setTimeout (function () {_advance (m)},m._interval)
 				;
 				m._cycleNo++;
-			};
+			}
 
-		/*** Public Instance Methods ***/
-			_classPrototype.start = function () {
-				this._running = _true;
-				this._advance ();
-			};
+		return _superclass.subclass ({
+			alphastructor:function () {
+				var m = this;
 
-			_classPrototype.stop = function () {
-				this._clearAdvanceTimeout ();
-				this._running = _false;
-			};
+				/*** Private Instance Properties ***/
+					m._cycleNo = 0;
+					m._running = false;
+					m._advanceTimeout = null;
 
-		/*** State Properties ***/
-			_class.stateProperties ({
+				/*** Initialization ***/
+					/*
+					m.fade.wire (
+						'Done',
+						function () {
+							if (m._running && (m._cycleNo < m._images.length - 1 || m._loop))
+								m._advanceTimeout = setTimeout (function () {_advance (m)},m._interval)
+							;
+						}
+					);
+					*/
+			},
+
+			instanceMethods:{
+				start:function () {
+					this._running = true;
+					_advance (this);
+				},
+
+				stop:function () {
+					_clearAdvanceTimeout (this);
+					this._running = false;
+				}
+			},
+
+			stateProperties:{
 				_bindings:'bindings',
 				_interval:{
 					name:'interval',
@@ -121,11 +108,10 @@ Uize.module ({
 				},
 				_loop:{
 					name:'loop',
-					value:_true
+					value:true
 				}
-			});
-
-		return _class;
+			}
+		});
 	}
 });
 

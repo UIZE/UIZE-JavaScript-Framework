@@ -28,18 +28,13 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var _null = null;
-
-		/*** Class Constructor ***/
-			var
-				_class = _superclass.subclass (),
-				_classPrototype = _class.prototype
-			;
+		var
+			/*** Variables for Scruncher Optimization ***/
+				_null = null
+		;
 
 		/*** Private Instance Methods ***/
-			var _updateUiTextAndTitle = _classPrototype._updateUiTextAndTitle = function () {
-				var m = this;
+			function _updateUiTextAndTitle (m) {
 				if (m.isWired) {
 					var
 						_valueObject = m._valueObject,
@@ -47,7 +42,7 @@ Uize.module ({
 						_title = ''
 					;
 					if (_valueObject) {
-						var _nextValueObject = m._values [m._getNextValueNo ()];
+						var _nextValueObject = m._values [_getNextValueNo (m)];
 						_text = Uize.substituteInto (
 							m._textTemplate,
 							m._textShowNext ? _nextValueObject : _valueObject
@@ -60,55 +55,58 @@ Uize.module ({
 					m.set ('text',_text);
 					m.setNodeProperties ('',{title:_title});
 				}
-			};
+			}
 
-			_classPrototype._getNextValueNo = function () {
+			function _onChangeUpdateUiTextAndTitle () {_updateUiTextAndTitle (this)}
+
+			function _getNextValueNo (m) {
 				var
-					_values = this._values,
-					_valueNo = this._valueNo
+					_values = m._values,
+					_valueNo = m._valueNo
 				;
 				return _values ? (typeof _valueNo == 'number' ? (_valueNo + 1) % _values.length : 0) : _null;
-			};
+			}
 
-		/*** Public Instance Methods ***/
-			_classPrototype.toggleButton = function () {this.set ({_valueNo:this._getNextValueNo ()})};
+		return _superclass.subclass ({
+			instanceMethods:{
+				toggleButton:function () {this.set ({_valueNo:_getNextValueNo (this)})},
 
-			_classPrototype.updateUi = function () {
-				var m = this;
-				if (m.isWired) {
-					m._updateUiTextAndTitle ();
-					_superclass.doMy (m,'updateUi');
+				updateUi:function () {
+					var m = this;
+					if (m.isWired) {
+						_updateUiTextAndTitle (m);
+						_superclass.doMy (m,'updateUi');
+					}
+				},
+
+				wireUi:function () {
+					var m = this;
+					if (!m.isWired) {
+						m.wire ('Click',function () {m.toggleButton ()});
+						_superclass.doMy (m,'wireUi');
+					}
 				}
-			};
+			},
 
-			_classPrototype.wireUi = function () {
-				var m = this;
-				if (!m.isWired) {
-					m.wire ('Click',function () {m.toggleButton ()});
-					_superclass.doMy (m,'wireUi');
-				}
-			};
-
-		/*** State Properties ***/
-			_class.stateProperties ({
+			stateProperties:{
 				_textShowNext:{
 					name:'textShowNext',
-					onChange:_updateUiTextAndTitle,
+					onChange:_onChangeUpdateUiTextAndTitle,
 					value:true
 				},
 				_textTemplate:{
 					name:'textTemplate',
-					onChange:_updateUiTextAndTitle,
+					onChange:_onChangeUpdateUiTextAndTitle,
 					value:'Switch to [#displayName]'
 				},
 				_titleShowNext:{
 					name:'titleShowNext',
-					onChange:_updateUiTextAndTitle,
+					onChange:_onChangeUpdateUiTextAndTitle,
 					value:false
 				},
 				_titleTemplate:{
 					name:'titleTemplate',
-					onChange:_updateUiTextAndTitle,
+					onChange:_onChangeUpdateUiTextAndTitle,
 					value:'Currently [#displayName]'
 				},
 				_value:{
@@ -126,7 +124,7 @@ Uize.module ({
 							_valueObject:m._values && m._valueNo != _null ? m._values [m._valueNo] : _null
 						});
 						m.set ({_value:m._valueObject ? m._valueObject.value : _null});
-						m._updateUiTextAndTitle ();
+						_updateUiTextAndTitle (m);
 					},
 					value:_null
 				},
@@ -142,14 +140,13 @@ Uize.module ({
 							m._valueNo = _null;
 							m.set ({_valueNo:0});
 						} else {
-							m._updateUiTextAndTitle ();
+							_updateUiTextAndTitle (m);
 						}
 					},
 					value:_null
 				}
-			});
-
-		return _class;
+			}
+		});
 	}
 });
 

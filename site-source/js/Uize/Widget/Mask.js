@@ -29,32 +29,24 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var
-				_true = true,
-				_false = false,
-				_Uize_Node = Uize.Node
-			;
+		var
+			/*** Variables for Scruncher Optimization ***/
+				_Uize_Node = Uize.Node,
+				_updateUi = 'updateUi',
 
-		/*** General Variables ***/
-			var _propertiesAffectingDisplay = ['left','top','width','height','img'];
+			/*** General Variables ***/
+				_propertiesAffectingDisplay = ['left','top','width','height','img']
+		;
 
-		/*** Class Constructor ***/
-			var
-				_class = _superclass.subclass (),
-				_classPrototype = _class.prototype
-			;
-
-		/*** Private Methods ***/
-			_classPrototype._setImageNode = function () {
+		/*** Private Instance Methods ***/
+			function _setImageNode (m) {
 				var
-					m = this,
 					_img = m._img,
 					_imgNode = m.getNode('img')
 				;
 
 				if (_img) {
-					// temporary code while ie6 still exists. It makes the assumption that the img is transparent
+					// temporary code while IE6 still exists. It makes the assumption that the img is transparent
 					// because this is supposed to be a mask overlay, not a solid mask.
 					if (_Uize_Node.isIe && /MSIE 6.0/.test (navigator.appVersion)) {
 						_imgNode.style.filter = 'progid:DXImageTransform.Microsoft.AlphaImageLoader(src=\'' + _img + '\', sizingMethod=\'crop\')';
@@ -63,117 +55,116 @@ Uize.module ({
 					else
 						_imgNode.src = _img;
 				}
+			}
 
-			};
+		return _superclass.subclass ({
+			instanceMethods:{
+				getCoords:function () {
+					var m = this;
+					return {left:m._left,top:m._top,width:m._width,height:m._height};
+				},
 
-		/*** Public Instance Methods ***/
-			_classPrototype.getCoords = function () {
-				var m = this;
-				return {left:m._left,top:m._top,width:m._width,height:m._height};
-			};
-
-			_classPrototype.updateUi = function () {
-				var m = this;
-				if (m.isWired) {
-					/*** check to see if a property affecting display has changed since last updateUi ***/
-						var
-							_propertiesChanged = _false,
-							_lastDisplayPropertyValues = m._lastDisplayPropertyValues
-						;
-						if (!_lastDisplayPropertyValues)
-							_lastDisplayPropertyValues = m._lastDisplayPropertyValues = {}
-						;
-						for (
-							var _propertyNo = -1, _propertiesAffectingDisplayLength = _propertiesAffectingDisplay.length;
-							++_propertyNo < _propertiesAffectingDisplayLength;
-						) {
+				updateUi:function () {
+					var m = this;
+					if (m.isWired) {
+						/*** check to see if a property affecting display has changed since last updateUi ***/
 							var
-								_propertyName = _propertiesAffectingDisplay [_propertyNo],
-								_propertyValue = m.get (_propertyName)
+								_propertiesChanged = false,
+								_lastDisplayPropertyValues = m._lastDisplayPropertyValues
 							;
-							if (_propertyValue !== _lastDisplayPropertyValues [_propertyName]) {
-								_lastDisplayPropertyValues [_propertyName] = _propertyValue;
-								_propertiesChanged = _true;
+							if (!_lastDisplayPropertyValues)
+								_lastDisplayPropertyValues = m._lastDisplayPropertyValues = {}
+							;
+							for (
+								var _propertyNo = -1, _propertiesAffectingDisplayLength = _propertiesAffectingDisplay.length;
+								++_propertyNo < _propertiesAffectingDisplayLength;
+							) {
+								var
+									_propertyName = _propertiesAffectingDisplay [_propertyNo],
+									_propertyValue = m.get (_propertyName)
+								;
+								if (_propertyValue !== _lastDisplayPropertyValues [_propertyName]) {
+									_lastDisplayPropertyValues [_propertyName] = _propertyValue;
+									_propertiesChanged = true;
+								}
 							}
-						}
 
-					if (_propertiesChanged) {
+						if (_propertiesChanged) {
+							var
+								_img = m._img,
+								_imgNode = m.getNode('img'),
+								_shellWidth = m._shellBoundsObj.width,
+								_shellHeight = m._shellBoundsObj.height,
+								_left = m._left,
+								_top = m._top,
+								_width = m._width,
+								_height = m._height,
+								_viewBottom = _top + _height,
+								_setClipRect = _Uize_Node.setClipRect,
+								_maskNodeTop = m._maskNodeTop,
+								_maskNodeLeft = m._maskNodeLeft,
+								_maskNodeRight = m._maskNodeRight,
+								_maskNodeBottom = m._maskNodeBottom
+							;
+							if (_img)
+								_setImageNode (m);
+							else {
+								_setClipRect (_maskNodeTop,0,_shellWidth,_top,0);
+								_setClipRect (_maskNodeLeft,_top,_left,_viewBottom,0);
+								_setClipRect (_maskNodeRight,_top,_shellWidth,_viewBottom,_left + _width);
+								_setClipRect (_maskNodeBottom,_viewBottom,_shellWidth,_shellHeight,0);
+							}
+							m.displayNode(_imgNode, _img);
+							m.displayNode([_maskNodeTop, _maskNodeRight, _maskNodeLeft, _maskNodeBottom], !_img);
+						}
+					}
+				},
+
+				wireUi:function () {
+					var m = this;
+					if (!m.isWired) {
 						var
+							_shell = m.getNode (),
 							_img = m._img,
 							_imgNode = m.getNode('img'),
-							_shellWidth = m._shellBoundsObj.width,
-							_shellHeight = m._shellBoundsObj.height,
-							_left = m._left,
-							_top = m._top,
-							_width = m._width,
-							_height = m._height,
-							_viewBottom = _top + _height,
-							_setClipRect = _Uize_Node.setClipRect,
-							_maskNodeTop = m._maskNodeTop,
-							_maskNodeLeft = m._maskNodeLeft,
-							_maskNodeRight = m._maskNodeRight,
-							_maskNodeBottom = m._maskNodeBottom
+							_getClonedMaskNode = function () {
+								var _node = _shell.cloneNode (false);
+								_node.removeAttribute ('id');
+								_Uize_Node.setStyle (
+									_node,
+									{
+										position:'absolute',
+										display:_img ? 'none' : 'block',
+										visibility:'inherit'
+									}
+								);
+								_shell.appendChild (_node);
+								return _node;
+							}
 						;
-						if (_img)
-							m._setImageNode();
-						else {
-							_setClipRect (_maskNodeTop,0,_shellWidth,_top,0);
-							_setClipRect (_maskNodeLeft,_top,_left,_viewBottom,0);
-							_setClipRect (_maskNodeRight,_top,_shellWidth,_viewBottom,_left + _width);
-							_setClipRect (_maskNodeBottom,_viewBottom,_shellWidth,_shellHeight,0);
-						}
+						m._shellBoundsObj = _Uize_Node.getDimensions (_shell);
+						m._maskNodeTop = _getClonedMaskNode ();
+						m._maskNodeLeft = _getClonedMaskNode ();
+						m._maskNodeRight = _getClonedMaskNode ();
+						m._maskNodeBottom = _getClonedMaskNode ();
+						_img && _setImageNode (m);
+						_Uize_Node.setStyle (
+							_shell,
+							{
+								background:'transparent',
+								opacity:'',
+								filter:''
+							}
+						);
+
 						m.displayNode(_imgNode, _img);
-						m.displayNode([_maskNodeTop, _maskNodeRight, _maskNodeLeft, _maskNodeBottom], !_img);
+
+						_superclass.doMy (m,'wireUi');
 					}
 				}
-			};
+			},
 
-			_classPrototype.wireUi = function () {
-				var m = this;
-				if (!m.isWired) {
-					var
-						_shell = m.getNode (),
-						_img = m._img,
-						_imgNode = m.getNode('img'),
-						_getClonedMaskNode = function () {
-							var _node = _shell.cloneNode (_false);
-							_node.removeAttribute ('id');
-							_Uize_Node.setStyle (
-								_node,
-								{
-									position:'absolute',
-									display:_img ? 'none' : 'block',
-									visibility:'inherit'
-								}
-							);
-							_shell.appendChild (_node);
-							return _node;
-						}
-					;
-					m._shellBoundsObj = _Uize_Node.getDimensions (_shell);
-					m._maskNodeTop = _getClonedMaskNode ();
-					m._maskNodeLeft = _getClonedMaskNode ();
-					m._maskNodeRight = _getClonedMaskNode ();
-					m._maskNodeBottom = _getClonedMaskNode ();
-					_img && m._setImageNode();
-					_Uize_Node.setStyle (
-						_shell,
-						{
-							background:'transparent',
-							opacity:'',
-							filter:''
-						}
-					);
-
-					m.displayNode(_imgNode, _img);
-
-					_superclass.doMy (m,'wireUi');
-				}
-			};
-
-		/*** State Properties ***/
-			var _updateUi = 'updateUi';
-			_class.stateProperties ({
+			stateProperties:{
 				_height:{
 					name:'height',
 					onChange:_updateUi,
@@ -199,9 +190,8 @@ Uize.module ({
 					onChange:_updateUi,
 					value:200
 				}
-			});
-
-		return _class;
+			}
+		});
 	}
 });
 

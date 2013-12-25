@@ -31,63 +31,63 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var _undefined;
+		var
+			/*** Variables for Scruncher Optimization ***/
+				_undefined,
+				_callbackPrivateName
+		;
 
-		/*** Constructor ***/
-			var
-				_class = _superclass.subclass(
-					function () {
-						for (this._callbackHashName in {_callbacks:1});
-						if (!_class._callbacks) _class._callbacks = [];
-					}
-				),
-				_classPrototype = _class.prototype
-			;
+		for (_callbackPrivateName in {_callbacks:1});
 
-		/*** Public Methods ***/
-			_classPrototype.performRequest = function (_request, _callback) {
-				var
-					m = this,
-					_callbacks = _class._callbacks,
-					_serverHandlesCallback = m._callbackMode == 'server',
-					_scriptNode = document.createElement('script')
-				;
-				_callbacks.push(
-					function (_response) {
-						_request['response' + Uize.capFirstChar (_request.returnType)] = _response;
-						_callback();
-					}
-				);
+		return _superclass.subclass ({
+			alphastructor:function () {
+				var _class = this.Class;
+				if (!_class._callbacks) _class._callbacks = [];
+			},
 
-				var _callbackName = 'Uize.Comm.Script.' + m._callbackHashName + '[' + (_callbacks.length - 1) + ']';
-
-				_scriptNode.src = Uize.Url.resolve([
-					_request.url,
-					{comm_mode:'script'},
-					_serverHandlesCallback ? {callback:_callbackName} : _undefined,
-					_request.cache == 'never' ? {rnd:Uize.Url.getCacheDefeatStr()} : _undefined
-				]);
-
-				if (!_serverHandlesCallback) {
-					var _callbackFn = _class._callbacks[_callbacks.length - 1];
-					if (_scriptNode.readyState)
-						_scriptNode.onreadystatechange = function () {
-							if (_scriptNode.readyState == 'loaded' || _scriptNode.readyState == 'complete') {
-								_scriptNode.onreadystatechange = null;
-								_callbackFn ();
-							}
-						}
+			instanceMethods:{
+				performRequest:function (_request, _callback) {
+					var
+						m = this,
+						_callbacks = m.Class._callbacks,
+						_serverHandlesCallback = m._callbackMode == 'server',
+						_scriptNode = document.createElement('script')
 					;
-					else
-						_scriptNode.onload = _callbackFn;
+					_callbacks.push(
+						function (_response) {
+							_request['response' + Uize.capFirstChar (_request.returnType)] = _response;
+							_callback();
+						}
+					);
+
+					_scriptNode.src = Uize.Url.resolve([
+						_request.url,
+						{comm_mode:'script'},
+						_serverHandlesCallback
+							? {callback:'Uize.Comm.Script.' + _callbackPrivateName + '[' + (_callbacks.length - 1) + ']'}
+							: _undefined,
+						_request.cache == 'never' ? {rnd:Uize.Url.getCacheDefeatStr()} : _undefined
+					]);
+
+					if (!_serverHandlesCallback) {
+						var _callbackFn = _callbacks[_callbacks.length - 1];
+						if (_scriptNode.readyState)
+							_scriptNode.onreadystatechange = function () {
+								if (_scriptNode.readyState == 'loaded' || _scriptNode.readyState == 'complete') {
+									_scriptNode.onreadystatechange = null;
+									_callbackFn ();
+								}
+							}
+						;
+						else
+							_scriptNode.onload = _callbackFn;
+					}
+
+					document.body.appendChild(_scriptNode);
 				}
+			},
 
-				document.body.appendChild(_scriptNode);
-			};
-
-		/*** State Properties ***/
-			_class.stateProperties ({
+			stateProperties:{
 				_callbackMode:{
 					name:'callbackMode',
 					value:'server'
@@ -109,8 +109,8 @@ Uize.module ({
 								- the initial value is ='server'=
 					 */
 				}
-			});
-		return _class;
+			}
+		});
 	}
 });
 

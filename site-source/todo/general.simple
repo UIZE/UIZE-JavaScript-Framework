@@ -1219,21 +1219,24 @@ Key Aspects of a Framework
 	Portion of Implementation
 
 		.........................................................
-		_classPrototype.cancel = function () {
-			var m = this;
-			if (m._timeout) {
-				clearTimeout (m._timeout);
-				m._timeout = _null;
+		instanceMethods:{
+			cancel:function () {
+				var m = this;
+				if (m._timeout) {
+					clearTimeout (m._timeout);
+					m._timeout = _null;
+				}
+			},
+
+			perform:function (_actionFunction) { // support optional delay param
+				var
+					m = this,
+					_delay = m._delay
+				;
+				m.cancel ();
+				_delay ? (m._timeout = setTimeout (_actionFunction,_delay)) : _actionFunction ();
 			}
 		}
-		_classPrototype.perform (_actionFunction) { // support optional delay param
-			var
-				m = this,
-				_delay = m._delay
-			;
-			m.cancel ();
-			_delay ? (m._timeout = setTimeout (_actionFunction,_delay)) : _actionFunction ();
-		};
 		.........................................................
 
 	Another Possible Implementation

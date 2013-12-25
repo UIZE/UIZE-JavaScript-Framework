@@ -34,23 +34,16 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use string';
 
-		/*** Variables for Scruncher Optimization ***/
-			var
+		var
+			/*** Variables for Scruncher Optimization ***/
 				_true = true,
 				_false = false,
 				_undefined
-			;
-
-		/*** Class Constructor ***/
-			var
-				_class = _superclass.subclass (),
-				_classPrototype = _class.prototype
-			;
+		;
 
 		/*** Private Instance Methods ***/
-			_classPrototype._fadeToNewState = function (_suppressFade) {
+			function _fadeToNewState (m,_suppressFade) {
 				var
-					m = this,
 					_edge = m._edge,
 					_dimName = _edge == 'left' || _edge == 'right' ? 'width' : 'height',
 					_fadeProperties = Uize.copy (m._fadeProperties,_suppressFade ? {duration:0} : null),
@@ -96,91 +89,91 @@ Uize.module ({
 						minimized
 							.
 				*/
-			};
+			}
 
-			_classPrototype._updateCookie = function () {
-				var m = this;
+			function _updateCookie (m) {
 				m._cookieName &&
 					Uize.Cookie.setCookie (m._cookieName,m._contentId + '|' + +m._maximized,m._cookiePath)
 				;
-			};
+			}
 
-		/*** Public Instance Methods ***/
-			_classPrototype.wireUi = function () {
-				var m = this;
-				if (!m.isWired) {
-					var _mustFade = m._whenToFadeOnInit == 'always';
+		return _superclass.subclass ({
+			instanceMethods:{
+				wireUi:function () {
+					var m = this;
+					if (!m.isWired) {
+						var _mustFade = m._whenToFadeOnInit == 'always';
 
-					/*** read cookie, if configured to store state in cookie ***/
-						if (m._cookieName) {
-							var
-								_cookieValue = Uize.Cookie.getCookie (m._cookieName),
-								_cookieValueParts = _cookieValue.split ('|'),
-								_maximizedFromCookie = _cookieValueParts [1] != '0'
-							;
-							if (!_cookieValue || _cookieValueParts [0] != m._contentId) {
-								_maximizedFromCookie = _true;
-								_mustFade = m._whenToFadeOnInit != 'never';
+						/*** read cookie, if configured to store state in cookie ***/
+							if (m._cookieName) {
+								var
+									_cookieValue = Uize.Cookie.getCookie (m._cookieName),
+									_cookieValueParts = _cookieValue.split ('|'),
+									_maximizedFromCookie = _cookieValueParts [1] != '0'
+								;
+								if (!_cookieValue || _cookieValueParts [0] != m._contentId) {
+									_maximizedFromCookie = _true;
+									_mustFade = m._whenToFadeOnInit != 'never';
+								}
+								m.set ({_maximized:_maximizedFromCookie});
+								_updateCookie (m);
 							}
-							m.set ({_maximized:_maximizedFromCookie});
-							m._updateCookie ();
-						}
 
-					/*** wire links for maximizing / minimizing ***/
-						m.wireNode (
-							'maximize',
-							'click',
-							function () {m.set ({_maximized:_true})}
-							/*?
-								Implied Nodes
-									maximize
-										.
-							*/
-						);
-						m.wireNode (
-							'minimize',
-							'click',
-							function () {m.set ({_maximized:_false})}
-							/*?
-								Implied Nodes
-									minimize
-										.
-							*/
-						);
+						/*** wire links for maximizing / minimizing ***/
+							m.wireNode (
+								'maximize',
+								'click',
+								function () {m.set ({_maximized:_true})}
+								/*?
+									Implied Nodes
+										maximize
+											.
+								*/
+							);
+							m.wireNode (
+								'minimize',
+								'click',
+								function () {m.set ({_maximized:_false})}
+								/*?
+									Implied Nodes
+										minimize
+											.
+								*/
+							);
 
-					_superclass.doMy (m,'wireUi');
+						_superclass.doMy (m,'wireUi');
 
-					/*** workaround for IE6's lack of support for fixed positioning ***/
-						if (navigator.appVersion.indexOf ('MSIE 6') > -1) {
-							function _updateRootNodePositionForIe6 () {
-								var _windowCoords = Uize.Node.getCoords (window);
-								m.setNodeStyle (
-									'',
+						/*** workaround for IE6's lack of support for fixed positioning ***/
+							if (navigator.appVersion.indexOf ('MSIE 6') > -1) {
+								function _updateRootNodePositionForIe6 () {
+									var _windowCoords = Uize.Node.getCoords (window);
+									m.setNodeStyle (
+										'',
+										{
+											left:_windowCoords [m._edge == 'right' ? 'right' : 'left'],
+											top:_windowCoords [m._edge == 'bottom' ? 'bottom' : 'top']
+										}
+									);
+								}
+								m.globalizeNode ('');
+								m.setNodeStyle ('',{left:'',top:'',right:'',bottom:''});
+								_updateRootNodePositionForIe6 ();
+								m.wireNode (
+									window,
 									{
-										left:_windowCoords [m._edge == 'right' ? 'right' : 'left'],
-										top:_windowCoords [m._edge == 'bottom' ? 'bottom' : 'top']
+										scroll:_updateRootNodePositionForIe6,
+										resize:_updateRootNodePositionForIe6
 									}
 								);
 							}
-							m.globalizeNode ('');
-							m.setNodeStyle ('',{left:'',top:'',right:'',bottom:''});
-							_updateRootNodePositionForIe6 ();
-							m.wireNode (
-								window,
-								{
-									scroll:_updateRootNodePositionForIe6,
-									resize:_updateRootNodePositionForIe6
-								}
-							);
-						}
 
-					/*** reveal appropriate panel node ***/
-						m._fadeToNewState (!_mustFade);
+						/*** reveal appropriate panel node ***/
+							_fadeToNewState (m,!_mustFade);
+					}
 				}
-			};
+			},
 
-		/*** State Properties ***/
-			_class.stateProperties ({
+			stateProperties:{
 				_contentId:{
 					name:'contentId',
 					value:''
@@ -228,8 +221,8 @@ Uize.module ({
 					onChange:function () {
 						var m = this;
 						if (m.isWired) {
-							m._updateCookie ();
-							m._fadeToNewState ();
+							_updateCookie (m);
+							_fadeToNewState (m);
 						}
 					},
 					value:_true
@@ -260,9 +253,8 @@ Uize.module ({
 								.
 					*/
 				}
-			});
-
-		return _class;
+			}
+		});
 	}
 });
 

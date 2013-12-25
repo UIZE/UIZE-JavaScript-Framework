@@ -31,52 +31,47 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		/*** Constructor ***/
-			var
-				_class = _superclass.subclass (),
-				_classPrototype = _class.prototype
-			;
+		return _superclass.subclass ({
+			instanceMethods:{
+				initializeCaptcha:function () {
+					/*?
+						Instance Methods
+							initializeCaptcha
+								Loads and processes any data needed in order to display the captcha. This could include sourcing in external JS scripts, creating an external JS object, inserting the UI, etc. This is an empty method in =Uize.Widget.Captcha= and should be overridden by any subclasses.
 
-		/*** Public Instance Methods ***/
-			_classPrototype.initializeCaptcha = function () {
-				/*?
-					Instance Methods
-						initializeCaptcha
-							Loads and processes any data needed in order to display the captcha. This could include sourcing in external JS scripts, creating an external JS object, inserting the UI, etc. This is an empty method in =Uize.Widget.Captcha= and should be overridden by any subclasses.
+								SYNTAX
+								..............................
+								myWidget.initializeCaptcha ();
+								..............................
+					 */
+				},
 
-							SYNTAX
-							..............................
-							myWidget.initializeCaptcha ();
-							..............................
-				 */
-			};
+				validate:function ( _params ) {
+					return this._isValid = false
+					/*?
+						Instance Methods
+							validate
+								Validates the user response to the captcha.
 
-			_classPrototype.validate = function ( _params ) {
-				return this._isValid = false
-				/*?
-					Instance Methods
-						validate
-							Validates the user response to the captcha.
+								SYNTAX
+								..............................
+								myWidget.validate ( _params );
+								..............................
 
-							SYNTAX
-							..............................
-							myWidget.validate ( _params );
-							..............................
+								PARAMS
+								...................................................................................
+								{
+									callback:callbackFUNC		// a callback function once validation is complete.
+								}
+								...................................................................................
 
-							PARAMS
-							...................................................................................
-							{
-								callback:callbackFUNC		// a callback function once validation is complete.
-							}
-							...................................................................................
+								NOTES
+									No arguments are passed to the callback function. One can get the results of the validation by querying the =isValid= property.
+					*/
+				}
+			},
 
-							NOTES
-								No arguments are passed to the callback function. One can get the results of the validation by querying the =isValid= property.
-				*/
-			};
-
-		/*** State Properties ***/
-			_class.stateProperties ({
+			stateProperties:{
 				_isValid:{
 					name:'isValid',
 					value:false
@@ -92,8 +87,7 @@ Uize.module ({
 						value
 							An object representing the user response to the captcha's challenge. While generally a string (see reCaptcha's implementation), it can also represent other values, such as an option in a dropdown (ESP-PIX, http://server251.theory.cs.cmu.edu/cgi-bin/esp-pix/esp-pix).
 				*/
-			});
-
-		return _class;
+			}
+		});
 	}
 });

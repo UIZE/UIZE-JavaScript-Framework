@@ -34,45 +34,40 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		/*** Class Constructor ***/
-			var
-				_class = _superclass.subclass (),
-				_classPrototype = _class.prototype
-			;
-
-		/*** Public Instance Methods ***/
-			_classPrototype.performRequest = function (_request,_callback) {
-				var
-					m = this,
-					_iframe = Uize.Node.getById(m.iframeId),
-					_uploadForm = _request.uploadForm,
-					_uploadFormTarget = _uploadForm.target,
-					_returnType = _request.returnType,
-					_returnTypeIsObject = _returnType == 'object'
-				;
-				handleResponse = function (_responseResult) {
-					if (_returnTypeIsObject || _returnType == 'json')
-						_request.responseJson = Uize.clone (_responseResult)
+		return _superclass.subclass ({
+			instanceMethods:{
+				performRequest:function (_request,_callback) {
+					var
+						m = this,
+						_iframe = Uize.Node.getById(m.iframeId),
+						_uploadForm = _request.uploadForm,
+						_uploadFormTarget = _uploadForm.target,
+						_returnType = _request.returnType,
+						_returnTypeIsObject = _returnType == 'object'
 					;
-					Uize.Node.isIe && _iframe.contentWindow.history.go (-1);
-					_uploadForm.target = _uploadFormTarget;
-					_callback ();
-				};
+					handleResponse = function (_responseResult) {
+						if (_returnTypeIsObject || _returnType == 'json')
+							_request.responseJson = Uize.clone (_responseResult)
+						;
+						Uize.Node.isIe && _iframe.contentWindow.history.go (-1);
+						_uploadForm.target = _uploadFormTarget;
+						_callback ();
+					};
 
-				_uploadForm.action = Uize.Url.resolve(
-					_uploadForm.action,
-					{
-						comm_mode:'iframe',
-						output:'js',
-						rnd:Uize.Url.getCacheDefeatStr ()
-					}
-				);
+					_uploadForm.action = Uize.Url.resolve(
+						_uploadForm.action,
+						{
+							comm_mode:'iframe',
+							output:'js',
+							rnd:Uize.Url.getCacheDefeatStr ()
+						}
+					);
 
-				_uploadForm.target = _iframe.name;
-				_uploadForm.submit();
-			};
-
-		return _class;
+					_uploadForm.target = _iframe.name;
+					_uploadForm.submit();
+				}
+			}
+		});
 	}
 });
 
