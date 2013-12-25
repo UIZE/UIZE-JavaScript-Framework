@@ -72,17 +72,13 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var _undefined;
+		var
+			/*** Variables for Scruncher Optimization ***/
+				_undefined
+		;
 
-		/*** Class Constructor ***/
-			var
-				_class = _superclass.subclass (),
-				_classPrototype = _class.prototype
-			;
-
-		/*** State Properties ***/
-			_class.stateProperties ({
+		return _superclass.subclass ({
+			stateProperties:{
 				_instance:{
 					name:'instance',
 					conformer:function (_value) {
@@ -143,10 +139,9 @@ Uize.module ({
 								The value of the =instance= state property can be a reference to an instance of *any* =Uize.Class= subclass - not just widget classes (see `Watch Any Instance`). The value of the =instance= state property can be changed at any time - even after the log widget has already been wired up (see `Dynamic Switching`). When the =instance= property is set to the value =null= or =undefined=, then no instance will be watched (see `Nothing to Watch`).
 					*/
 				}
-			});
+			},
 
-		/*** Override Initial Values for Inherited State Properties ***/
-			_class.set ({
+			set:{
 				localized:{
 					customInstanceEvent:'INSTANCE EVENT',
 					nothingToWatch:'No valid object to watch',
@@ -169,9 +164,8 @@ Uize.module ({
 								A localizable string, that will be logged as a log message whenever the instance starts watching events on a new object.
 					*/
 				}
-			});
-
-		return _class;
+			}
+		});
 	}
 });
 

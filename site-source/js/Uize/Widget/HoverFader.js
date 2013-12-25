@@ -93,120 +93,22 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		/*** Class Constructor ***/
-			var
-				_class = _superclass.subclass (),
-				_classPrototype = _class.prototype
-			;
-
 		/*** Private Instance Methods ***/
-			_classPrototype._handleNodeMouseEvent = function (_node,_isOver,_fadeProperties) {
+			function _handleNodeMouseEvent (m,_node,_isOver,_fadeProperties) {
 				_isOver != (_fadeProperties.reverse || false)
-					? Uize.Fx.fadeStyle (_node,this._defaultStyle,this._hoverStyle,0,_fadeProperties)
-					: Uize.Fx.fadeStyle (_node,this._hoverStyle,this._defaultStyle,0,_fadeProperties)
+					? Uize.Fx.fadeStyle (_node,m._defaultStyle,m._hoverStyle,0,_fadeProperties)
+					: Uize.Fx.fadeStyle (_node,m._hoverStyle,m._defaultStyle,0,_fadeProperties)
 				;
-			};
+			}
 
-			_classPrototype._mouseoverNode = function (_node) {
-				this._handleNodeMouseEvent (_node,true,this._resolvedFadeIn);
-			};
+			function _mouseoverNode (m,_node) {
+				_handleNodeMouseEvent (m,_node,true,m._resolvedFadeIn);
+			}
 
-			_classPrototype._mouseoutNode = function (_node) {
-				this._handleNodeMouseEvent (_node,false,this._resolvedFadeOut);
-			};
+			function _mouseoutNode (m,_node) {
+				_handleNodeMouseEvent (m,_node,false,m._resolvedFadeOut);
+			}
 
-		/*** Public Instance Methods ***/
-			_classPrototype.tickle = function (_fadeProperties) {
-				var m = this;
-				if (m.isWired) {
-					var
-						_nodes = m._nodes,
-						_nodesLengthMinus1 = _nodes.length - 1,
-						_lastNodeNo
-					;
-					Uize.Fade.fade (
-						function (_nodeNo) {
-							if (_lastNodeNo == null)
-								_lastNodeNo = _nodeNo - 1
-							;
-							var _direction = _nodeNo > _lastNodeNo ? 1 : -1;
-							while (_lastNodeNo != _nodeNo)
-								m._mouseoutNode (_nodes [_lastNodeNo += _direction])
-							;
-						},
-						0,
-						_nodesLengthMinus1,
-						0,
-						_fadeProperties == null || typeof _fadeProperties != 'object'
-							? {quantization:1,duration:_nodesLengthMinus1 * (_fadeProperties == null ? 100 : _fadeProperties)}
-							: Uize.copyInto ({quantization:1,duration:750},_fadeProperties)
-					);
-				}
-				/*?
-					Instance Methods
-						tickle
-							Lets you initiate a "tickling" of the =nodes= of the instance, emulating the effect of the user moving their mouse across the nodes.
-
-							SYNTAX
-							................................
-							myInstance.tickle (intervalINT);
-							................................
-
-							The =intervalINT= parameter lets you specify an interval, measured in milliseconds, between triggering of the fade-outs for the different =nodes= of the instance.
-
-							VARIATION 1
-							.....................
-							myInstance.tickle ();
-							.....................
-
-							When no =intervalINT= parameter is specified, then its value will be defaulted to =100=.
-
-							VARIATION 2
-							......................................
-							myInstance.tickle (fadePropertiesOBJ);
-							......................................
-
-							When the =fadePropertiesOBJ= parameter is specified in place of the =intervalINT= parameter, then an object containing fade properties (ie. state properties of the =Uize.Fade= class) can be specified to configure the fade that drives the tickling of the =nodes=.
-
-							Among other things, this allows one to specify a =curve= property for the fade, so that the timing of the triggering of the fade-outs for the different =nodes= of the instance is not uniform. In addition, one can use the =reverse= fade property to control the order in which the tickling occurs. Specifying the value =true= for the =reverse= fade property will cause the tickling to start with the last node and end at the first node.
-
-							When using this parameter, it is not possible to specify an interval between triggering the different nodes. Instead, one specifies the duration of the overal tickling process in the =duration= fade property. Because a non-linear curve can be specified, a single interval value is not meaningful, anyway.
-
-							EXAMPLE 1
-							......................................
-							myHoverFader.tickle ({duration:1000});
-							......................................
-
-							In the above example, the =nodes= of the instance =myHoverFader= are being tickled over a period of 1000 milliseconds (1 second). Specifying the =fadePropertiesOBJ= parameter in place of the =intervalINT= parameter lets you control the overal duration of the tickling process with the =duration= fade property. The number of =nodes= can change, but the overal duration of the tickling will remain the same. By contrast, the overal duration would change as the number of =nodes= changes when using the =intervalINT= paramter.
-
-							EXAMPLE 2
-							.................................................................................
-							myHoverFader.tickle ({duration:1000,reverse:true,curve:Uize.Curve.resolve (-3)});
-							.................................................................................
-
-							In the above example, the =nodes= of the instance =myHoverFader= are being tickled over a period of 1000 milliseconds (1 second), starting from the last node and ending at the first node, and starting out slowly and accelerating towards the end (the expression =Uize.Curve.resolve (-3)= creates a cubic ease-in curve function).
-				*/
-			};
-
-			_classPrototype.wireUi = function () {
-				var
-					m = this,
-					_nodes = m._nodes
-				;
-				if (!m.isWired && _nodes) {
-					m.wireNode (
-						m._nodes = Uize.Node.find (_nodes),
-						{
-							mouseover:function () {m._mouseoverNode (this)},
-							mouseout:function () {m._mouseoutNode (this)}
-						}
-					);
-
-					_superclass.doMy (m,'wireUi');
-				}
-			};
-
-		/*** State Properties ***/
 			function _updateResolvedFadeInFadeOutProperties () {
 				var _fadeInOut = this._fadeInOut;
 				this._resolvedFadeIn = _fadeInOut ? Uize.copy (_fadeInOut,this._fadeIn) : this._fadeIn;
@@ -215,7 +117,101 @@ Uize.module ({
 					: this._fadeOut
 				;
 			}
-			_class.stateProperties ({
+
+		return _superclass.subclass ({
+			instanceMethods:{
+				tickle:function (_fadeProperties) {
+					var m = this;
+					if (m.isWired) {
+						var
+							_nodes = m._nodes,
+							_nodesLengthMinus1 = _nodes.length - 1,
+							_lastNodeNo
+						;
+						Uize.Fade.fade (
+							function (_nodeNo) {
+								if (_lastNodeNo == null)
+									_lastNodeNo = _nodeNo - 1
+								;
+								var _direction = _nodeNo > _lastNodeNo ? 1 : -1;
+								while (_lastNodeNo != _nodeNo)
+									_mouseoutNode (m,_nodes [_lastNodeNo += _direction])
+								;
+							},
+							0,
+							_nodesLengthMinus1,
+							0,
+							_fadeProperties == null || typeof _fadeProperties != 'object'
+								? {quantization:1,duration:_nodesLengthMinus1 * (_fadeProperties == null ? 100 : _fadeProperties)}
+								: Uize.copyInto ({quantization:1,duration:750},_fadeProperties)
+						);
+					}
+					/*?
+						Instance Methods
+							tickle
+								Lets you initiate a "tickling" of the =nodes= of the instance, emulating the effect of the user moving their mouse across the nodes.
+
+								SYNTAX
+								................................
+								myInstance.tickle (intervalINT);
+								................................
+
+								The =intervalINT= parameter lets you specify an interval, measured in milliseconds, between triggering of the fade-outs for the different =nodes= of the instance.
+
+								VARIATION 1
+								.....................
+								myInstance.tickle ();
+								.....................
+
+								When no =intervalINT= parameter is specified, then its value will be defaulted to =100=.
+
+								VARIATION 2
+								......................................
+								myInstance.tickle (fadePropertiesOBJ);
+								......................................
+
+								When the =fadePropertiesOBJ= parameter is specified in place of the =intervalINT= parameter, then an object containing fade properties (ie. state properties of the =Uize.Fade= class) can be specified to configure the fade that drives the tickling of the =nodes=.
+
+								Among other things, this allows one to specify a =curve= property for the fade, so that the timing of the triggering of the fade-outs for the different =nodes= of the instance is not uniform. In addition, one can use the =reverse= fade property to control the order in which the tickling occurs. Specifying the value =true= for the =reverse= fade property will cause the tickling to start with the last node and end at the first node.
+
+								When using this parameter, it is not possible to specify an interval between triggering the different nodes. Instead, one specifies the duration of the overal tickling process in the =duration= fade property. Because a non-linear curve can be specified, a single interval value is not meaningful, anyway.
+
+								EXAMPLE 1
+								......................................
+								myHoverFader.tickle ({duration:1000});
+								......................................
+
+								In the above example, the =nodes= of the instance =myHoverFader= are being tickled over a period of 1000 milliseconds (1 second). Specifying the =fadePropertiesOBJ= parameter in place of the =intervalINT= parameter lets you control the overal duration of the tickling process with the =duration= fade property. The number of =nodes= can change, but the overal duration of the tickling will remain the same. By contrast, the overal duration would change as the number of =nodes= changes when using the =intervalINT= paramter.
+
+								EXAMPLE 2
+								.................................................................................
+								myHoverFader.tickle ({duration:1000,reverse:true,curve:Uize.Curve.resolve (-3)});
+								.................................................................................
+
+								In the above example, the =nodes= of the instance =myHoverFader= are being tickled over a period of 1000 milliseconds (1 second), starting from the last node and ending at the first node, and starting out slowly and accelerating towards the end (the expression =Uize.Curve.resolve (-3)= creates a cubic ease-in curve function).
+					*/
+				},
+
+				wireUi:function () {
+					var
+						m = this,
+						_nodes = m._nodes
+					;
+					if (!m.isWired && _nodes) {
+						m.wireNode (
+							m._nodes = Uize.Node.find (_nodes),
+							{
+								mouseover:function () {_mouseoverNode (m,this)},
+								mouseout:function () {_mouseoutNode (m,this)}
+							}
+						);
+
+						_superclass.doMy (m,'wireUi');
+					}
+				}
+			},
+
+			stateProperties:{
 				_defaultStyle:{
 					name:'defaultStyle',
 					value:{color:'fff',backgroundColor:'000'}
@@ -413,9 +409,8 @@ Uize.module ({
 							NOTES
 							- the initial value is =undefined=
 				*/
-			});
-
-		return _class;
+			}
+		});
 	}
 });
 

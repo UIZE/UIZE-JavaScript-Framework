@@ -38,57 +38,27 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var
+		var
+			/*** Variables for Scruncher Optimization ***/
 				_true = true,
 				_false = false,
 				_undefined,
 				_null = null,
-				_Uize_Node = Uize.Node
-			;
+				_Uize_Node = Uize.Node,
 
-		/*** General Variables ***/
-			var _imagesCached = {};
-
-		/*** Class Constructor ***/
-			var
-				_class = _superclass.subclass (
-					function () {
-						var m = this;
-
-						/*** create the fade instance ***/
-							if (Uize.Fade) m._fade = Uize.Fade ({duration:450,curve:Uize.Fade.celeration (0,1)});
-
-						/*** create the mag image port widget ***/
-							m._magImagePort = m.addChild (
-								'magImagePort',
-								Uize.Widget.ImagePort,
-								{sizingUpperBound:'fill',sizingLowerBound:0}
-								/*?
-									Child Widgets
-										magImagePort
-											An instance of the =Uize.Widget.ImagePort= class, used for displaying the zoomed in image off to the side of the main image.
-								*/
-							);
-
-						/*** create the beam widget ***/
-							if (m._showBeam)
-								m._beam = m.addChild ('beam',Uize.Widget.Beam)
-							;
-					}
-				),
-				_classPrototype = _class.prototype
-			;
+			/*** General Variables ***/
+				_imagesCached = {}
+		;
 
 		/*** Private Instance Methods ***/
-			_classPrototype._magInUse = function () {return this.isWired && this._magShown};
+			function _magInUse (m) {return m.isWired && m._magShown}
 
-			_classPrototype._getLowestAndNextMagPower = function () {
+			function _getLowestAndNextMagPower (m) {
 				var
-					_currentMagPower = this._magPower,
+					_currentMagPower = m._magPower,
 					_lowestMagPower = _currentMagPower,
 					_nextMagPower = _currentMagPower,
-					_magPowers = this._magPowers
+					_magPowers = m._magPowers
 				;
 				if (_magPowers) {
 					var _magPowersLength = _magPowers.length;
@@ -110,21 +80,20 @@ Uize.module ({
 					_lowestMagPower:_lowestMagPower,
 					_nextMagPower:_nextMagPower
 				};
-			};
+			}
 
-			_classPrototype._getMagImageHighResUrl = function (_magPower) {
-				var _magImageHighResUrl = this._magImageHighResUrl;
+			function _getMagImageHighResUrl (m,_magPower) {
+				var _magImageHighResUrl = m._magImageHighResUrl;
 				return (
 					Uize.isFunction (_magImageHighResUrl)
-						? _magImageHighResUrl.call (this,_magPower)
+						? _magImageHighResUrl.call (m,_magPower)
 						: _magImageHighResUrl
 				);
-			};
+			}
 
-			_classPrototype._updateUiUrls = function () {
-				var m = this;
-				if (m._magInUse ()) {
-					var _magImageHighResUrl = m._getMagImageHighResUrl (m._magPower);
+			function _updateUiUrls (m) {
+				if (_magInUse (m)) {
+					var _magImageHighResUrl = _getMagImageHighResUrl (m,m._magPower);
 					if (_magImageHighResUrl !== m._displayedMagImageHighResUrl) {
 						/* NOTE: check if image in magImagePort needs to be updated */
 						var
@@ -152,7 +121,7 @@ Uize.module ({
 									) {
 										var _magPower = _magPowers [_magPowerNo];
 										if (_magPower < _currentMagPower && _magPower > _nearestLowerCachedMagPower) {
-											var _magImageUrlForLowerPower = m._getMagImageHighResUrl (_magPower);
+											var _magImageUrlForLowerPower = _getMagImageHighResUrl (m,_magPower);
 											if (_imagesCached [_magImageUrlForLowerPower]) {
 												_placeholderMagImageUrl = _magImageUrlForLowerPower;
 												_nearestLowerCachedMagPower = _magPower;
@@ -185,11 +154,10 @@ Uize.module ({
 						m.setNodeProperties ('magImageHighRes',{src:_magImageHighResUrl});
 					}
 				}
-			};
+			}
 
-			_classPrototype._updateUiCalibrateDuringUse = function () {
+			function _updateUiCalibrateDuringUse (m) {
 				var
-					m = this,
 					_magPower = m._magPower,
 					_regViewWidth = m._regViewWidth,
 					_regViewHeight = m._regViewHeight,
@@ -212,67 +180,10 @@ Uize.module ({
 							top:m._regViewY
 						})
 					;
-			};
+			}
 
-			_classPrototype._updateUiMagPower = function () {
-				var m = this;
-				function _updateAfterMagPowerReflected () {
-					m._lastDisplayedMagPower = m._magPower;
-					m._updateUiUrls ();
-
-					/*** set the cursor to indicate either zoom in or zoom out ability ***/
-						/*
-						var _isIe = _Uize_Node.isIe;
-						m.setNodeStyle (
-							'highlight',
-							{
-								cursor:
-									m._getLowestAndNextMagPower ()._nextMagPower > m._magPower
-										? (_isIe ? 'url(' + Uize.pathToResources + 'Uize/Node/zoomin.cur)' : '-moz-zoom-in')
-										: (_isIe ? 'url(' + Uize.pathToResources + 'Uize/Node/zoomout.cur)' : '-moz-zoom-out')
-							}
-						);
-						*/
-				}
-				if (m._magInUse ()) {
-					var _reflectChangedMagPower = function () {
-						m._updateUiCalibrateDuringUse ();
-						m._updateUiDuringUse ();
-					};
-					if (m._fade) {
-						var _fade = m._fade;
-						_fade.set ({
-							startValue:m._lastDisplayedMagPower,
-							endValue:m._magPower
-						});
-						var _fadeEventHandlers = {
-							'Changed.value':
-								function () {
-									m._magPower = +_fade;
-									_reflectChangedMagPower ();
-								},
-							Done:
-								function () {
-									_fade.unwire (_fadeEventHandlers);
-									_updateAfterMagPowerReflected ();
-									m._fadeInProgress = _false;
-								}
-						};
-						_fade.wire (_fadeEventHandlers);
-						m._fadeInProgress = _true;
-						m._fade.start ();
-					} else {
-						_reflectChangedMagPower ();
-						_updateAfterMagPowerReflected ();
-					}
-				} else {
-					_updateAfterMagPowerReflected ();
-				}
-			};
-
-			_classPrototype._updateUiDuringUse = function () {
+			function _updateUiDuringUse (m) {
 				var
-					m = this,
 					_alignX = Uize.constrain ((m._eventAbsPos.left - m._regViewX - m._highlightOffsetX) / m._regViewWidthMinusHighlightWidth,0,1),
 					_alignY = Uize.constrain ((m._eventAbsPos.top - m._regViewY - m._highlightOffsetY) / m._regViewHeightMinusHighlightHeight,0,1),
 					_highlightLeft = m._regViewX + m._regViewWidthMinusHighlightWidth * _alignX,
@@ -299,166 +210,191 @@ Uize.module ({
 						height:m._highlightHeight - 2
 					}
 				);
-			};
+			}
 
-		/*** Public Instance Methods ***/
-			_classPrototype.wireUi = function () {
+		return _superclass.subclass ({
+			alphastructor:function () {
 				var m = this;
-				if (!m.isWired) {
-					/*** capture dimensions of regular view ***/
-						var
-							_regViewDims = _Uize_Node.getDimensions (m.getNode ()),
-							_regViewWidth = m._regViewWidth = _regViewDims.width,
-							_regViewHeight = m._regViewHeight = _regViewDims.height
-						;
 
-					/*** wire up the mouseover and mouseout events ***/
-						var _displayMagUi = function (_mustDisplay) {
-							m.displayNode (
-								['magImagePortShell','highlight',m._showBeam ? m._beam.getNode () : _null],
-								_mustDisplay
-							);
-							m._magShown = _mustDisplay;
-						};
-						m.wireNode (
-							'',
-							'mouseover',
-							function (_event) {
-								_displayMagUi (_true);
+				/*** create the fade instance ***/
+					if (Uize.Fade) m._fade = Uize.Fade ({duration:450,curve:Uize.Fade.celeration (0,1)});
 
-								/*** move highlight, beam, and image port nodes to document root (if not already done) ***/
-									if (!m._nodesMovedToRoot) {
-										m._nodesMovedToRoot = _true;
+				/*** create the mag image port widget ***/
+					m._magImagePort = m.addChild (
+						'magImagePort',
+						Uize.Widget.ImagePort,
+						{sizingUpperBound:'fill',sizingLowerBound:0}
+						/*?
+							Child Widgets
+								magImagePort
+									An instance of the =Uize.Widget.ImagePort= class, used for displaying the zoomed in image off to the side of the main image.
+						*/
+					);
+
+				/*** create the beam widget ***/
+					if (m._showBeam)
+						m._beam = m.addChild ('beam',Uize.Widget.Beam)
+					;
+			},
+
+			instanceMethods:{
+				wireUi:function () {
+					var m = this;
+					if (!m.isWired) {
+						/*** capture dimensions of regular view ***/
+							var
+								_regViewDims = _Uize_Node.getDimensions (m.getNode ()),
+								_regViewWidth = m._regViewWidth = _regViewDims.width,
+								_regViewHeight = m._regViewHeight = _regViewDims.height
+							;
+
+						/*** wire up the mouseover and mouseout events ***/
+							var _displayMagUi = function (_mustDisplay) {
+								m.displayNode (
+									['magImagePortShell','highlight',m._showBeam ? m._beam.getNode () : _null],
+									_mustDisplay
+								);
+								m._magShown = _mustDisplay;
+							};
+							m.wireNode (
+								'',
+								'mouseover',
+								function (_event) {
+									_displayMagUi (_true);
+
+									/*** move highlight, beam, and image port nodes to document root (if not already done) ***/
+										if (!m._nodesMovedToRoot) {
+											m._nodesMovedToRoot = _true;
+											var
+												_docBody = document.body,
+												_moveNodeToRoot = function (_node) {
+													_docBody.insertBefore (_node,_docBody.childNodes [0]);
+													_Uize_Node.setStyle (
+														_node,
+														{
+															zIndex:100000,
+															position:'absolute'
+														}
+													);
+												}
+											;
+											_moveNodeToRoot (m.getNode ('magImagePortShell'));
+											_moveNodeToRoot (m.getNode ('highlight'));
+											m._showBeam && _moveNodeToRoot (m._beam.getNode ());
+										}
+
+									/*** perform calibration that persists for the duration of use ***/
+										/* NOTE:
+											This has to be done here after revealing the shell, otherwise all dimensions of display:none nodes register as zero. The other alternative is to require the width and height to be explicit in the style attribute of the nodes.
+										*/
 										var
-											_docBody = document.body,
-											_moveNodeToRoot = function (_node) {
-												_docBody.insertBefore (_node,_docBody.childNodes [0]);
-												_Uize_Node.setStyle (
-													_node,
-													{
-														zIndex:100000,
-														position:'absolute'
-													}
-												);
-											}
+											_regViewCoords = _Uize_Node.getCoords (m.getNode ()),
+											_magImagePortDims = _Uize_Node.getDimensions (m._magImagePort.getNode ())
 										;
-										_moveNodeToRoot (m.getNode ('magImagePortShell'));
-										_moveNodeToRoot (m.getNode ('highlight'));
-										m._showBeam && _moveNodeToRoot (m._beam.getNode ());
-									}
+										m._regViewX = _regViewCoords.x;
+										m._regViewY = _regViewCoords.y;
+										m._magImagePortWidth = _magImagePortDims.width;
+										m._magImagePortHeight = _magImagePortDims.height;
+										m._magImagePortWidthDivRegViewWidth = m._magImagePortWidth / _regViewWidth;
+										m._magImagePortHeightDivRegViewHeight = m._magImagePortHeight / _regViewHeight;
 
-								/*** perform calibration that persists for the duration of use ***/
-									/* NOTE:
-										This has to be done here after revealing the shell, otherwise all dimensions of display:none nodes register as zero. The other alternative is to require the width and height to be explicit in the style attribute of the nodes.
-									*/
+										/*** update the image port (per state that persists during mouse moves) ***/
+											m.setNodeStyle (
+												'magImagePortShell',
+												{
+													left:m._regViewX + _regViewWidth,
+													top:m._regViewY
+												}
+											);
+
+										_updateUiCalibrateDuringUse (m);
+
+									_updateUiUrls (m);
+
 									var
-										_regViewCoords = _Uize_Node.getCoords (m.getNode ()),
-										_magImagePortDims = _Uize_Node.getDimensions (m._magImagePort.getNode ())
+										_oldOnmousemove = document.onmousemove,
+										_oldOnclick = document.onclick
 									;
-									m._regViewX = _regViewCoords.x;
-									m._regViewY = _regViewCoords.y;
-									m._magImagePortWidth = _magImagePortDims.width;
-									m._magImagePortHeight = _magImagePortDims.height;
-									m._magImagePortWidthDivRegViewWidth = m._magImagePortWidth / _regViewWidth;
-									m._magImagePortHeightDivRegViewHeight = m._magImagePortHeight / _regViewHeight;
-
-									/*** update the image port (per state that persists during mouse moves) ***/
-										m.setNodeStyle (
-											'magImagePortShell',
-											{
-												left:m._regViewX + _regViewWidth,
-												top:m._regViewY
-											}
-										);
-
-									m._updateUiCalibrateDuringUse ();
-
-								m._updateUiUrls ();
-
-								var
-									_oldOnmousemove = document.onmousemove,
-									_oldOnclick = document.onclick
-								;
-								function _handleMouseMove () {
-									m._eventAbsPos = _Uize_Node.getEventAbsPos ();
-									if (
-										_Uize_Node.doRectanglesOverlap (
-											m._eventAbsPos.left,m._eventAbsPos.top,1,1,
-											m._regViewX,m._regViewY,_regViewWidth,_regViewHeight
-										)
-									) {
-										m._updateUiDuringUse ();
-									} else {
-										_displayMagUi (_false);
-										document.onmousemove = _oldOnmousemove;
-										document.onclick = _oldOnclick;
-										m._resetMagPowerOnOut &&
-											m.set ({_magPower:m._getLowestAndNextMagPower ()._lowestMagPower})
-										;
+									function _handleMouseMove () {
+										m._eventAbsPos = _Uize_Node.getEventAbsPos ();
+										if (
+											_Uize_Node.doRectanglesOverlap (
+												m._eventAbsPos.left,m._eventAbsPos.top,1,1,
+												m._regViewX,m._regViewY,_regViewWidth,_regViewHeight
+											)
+										) {
+											_updateUiDuringUse (m);
+										} else {
+											_displayMagUi (_false);
+											document.onmousemove = _oldOnmousemove;
+											document.onclick = _oldOnclick;
+											m._resetMagPowerOnOut &&
+												m.set ({_magPower:_getLowestAndNextMagPower (m)._lowestMagPower})
+											;
+										}
 									}
+									_handleMouseMove ();
+									document.onmousemove = _handleMouseMove;
+									document.onclick = function () {
+										m._fadeInProgress ||
+											m.set ({_magPower:_getLowestAndNextMagPower (m)._nextMagPower})
+										;
+									};
 								}
-								_handleMouseMove ();
-								document.onmousemove = _handleMouseMove;
-								document.onclick = function () {
-									m._fadeInProgress ||
-										m.set ({_magPower:m._getLowestAndNextMagPower ()._nextMagPower})
-									;
-								};
-							}
-						);
+							);
 
-					_superclass.doMy (m,'wireUi');
+						_superclass.doMy (m,'wireUi');
+					}
 				}
-			};
-			/*?
-				Implied Nodes
-					See the list of child widgets for other implied nodes that are not directly controlled by this widget.
+				/*?
+					Implied Nodes
+						See the list of child widgets for other implied nodes that are not directly controlled by this widget.
 
-					The Root Node
-						The root node captures mouse events and tracks the mouse movements in order to determine the region within the main image that the user would like to magnify. The root node should contain the =image= node.
+						The Root Node
+							The root node captures mouse events and tracks the mouse movements in order to determine the region within the main image that the user would like to magnify. The root node should contain the =image= node.
 
-						NOTES
-						- this node is required
+							NOTES
+							- this node is required
 
-					highlight
-						A =div= node that is sized and positioned as the user mouses over the main image and that serves to highlight the region of the image that will appear magnified in the mag image port.
+						highlight
+							A =div= node that is sized and positioned as the user mouses over the main image and that serves to highlight the region of the image that will appear magnified in the mag image port.
 
-						NOTES
-						- this node is required
+							NOTES
+							- this node is required
 
-					highResLoading
-						An optional node (of any type) that will be displayed when the high resolution mag image is loading and then hidden once it has completed loading.
+						highResLoading
+							An optional node (of any type) that will be displayed when the high resolution mag image is loading and then hidden once it has completed loading.
 
-						NOTES
-						- this node is optional
+							NOTES
+							- this node is optional
 
-					image
-						A node that is used to display the main image. This node should be contained inside and should exactly occupy the space in the root node. The node can be either a IMG node, or a DIV node with CSS background set to the image URL.
+						image
+							A node that is used to display the main image. This node should be contained inside and should exactly occupy the space in the root node. The node can be either a IMG node, or a DIV node with CSS background set to the image URL.
 
-						NOTES
-						- this node is required
+							NOTES
+							- this node is required
 
-					magImagePortShell
-						A node (of any type, but likely a DIV) that serves as a container for the magnified view's image port, and that is displayed when the user mouses over the main image and is hidden when the user mouses out of the main image.
+						magImagePortShell
+							A node (of any type, but likely a DIV) that serves as a container for the magnified view's image port, and that is displayed when the user mouses over the main image and is hidden when the user mouses out of the main image.
 
-						NOTES
-						- this node is required
+							NOTES
+							- this node is required
 
-					magImageLowRes
-						An image node whose src will be set to the src of the image being magnified, but that will be scaled up to provide a placeholder for the high resolution mag image while it is still loading in.
+						magImageLowRes
+							An image node whose src will be set to the src of the image being magnified, but that will be scaled up to provide a placeholder for the high resolution mag image while it is still loading in.
 
-						NOTES
-						- this node is required
+							NOTES
+							- this node is required
 
-					magImageHighRes
-						An image node whose src will be set to the value of the =magImageHighResUrl= state property when the mag view mode is activated.
+						magImageHighRes
+							An image node whose src will be set to the value of the =magImageHighResUrl= state property when the mag view mode is activated.
 
-						NOTES
-						- this node is required
-			*/
+							NOTES
+							- this node is required
+				*/
+			},
 
-		/*** State Properties ***/
-			_class.stateProperties ({
+			stateProperties:{
 				_cursorAlignX:{
 					name:'cursorAlignX',
 					value:.5
@@ -498,7 +434,7 @@ Uize.module ({
 					*/
 				_magImageHighResUrl:{
 					name:'magImageHighResUrl',
-					onChange:_classPrototype._updateUiUrls
+					onChange:function () {_updateUiUrls (this)}
 						/*?
 							State Properties
 								magImageHighResUrl
@@ -511,7 +447,61 @@ Uize.module ({
 				_magPower:{
 					name:'magPower',
 					value:1,
-					onChange:_classPrototype._updateUiMagPower
+					onChange:function () {
+						var m = this;
+						function _updateAfterMagPowerReflected () {
+							m._lastDisplayedMagPower = m._magPower;
+							_updateUiUrls (m);
+
+							/*** set the cursor to indicate either zoom in or zoom out ability ***/
+								/*
+								var _isIe = _Uize_Node.isIe;
+								m.setNodeStyle (
+									'highlight',
+									{
+										cursor:
+											_getLowestAndNextMagPower (m)._nextMagPower > m._magPower
+												? (_isIe ? 'url(' + Uize.pathToResources + 'Uize/Node/zoomin.cur)' : '-moz-zoom-in')
+												: (_isIe ? 'url(' + Uize.pathToResources + 'Uize/Node/zoomout.cur)' : '-moz-zoom-out')
+									}
+								);
+								*/
+						}
+						if (_magInUse (m)) {
+							var _reflectChangedMagPower = function () {
+								_updateUiCalibrateDuringUse (m);
+								_updateUiDuringUse (m);
+							};
+							if (m._fade) {
+								var _fade = m._fade;
+								_fade.set ({
+									startValue:m._lastDisplayedMagPower,
+									endValue:m._magPower
+								});
+								var _fadeEventHandlers = {
+									'Changed.value':
+										function () {
+											m._magPower = +_fade;
+											_reflectChangedMagPower ();
+										},
+									Done:
+										function () {
+											_fade.unwire (_fadeEventHandlers);
+											_updateAfterMagPowerReflected ();
+											m._fadeInProgress = _false;
+										}
+								};
+								_fade.wire (_fadeEventHandlers);
+								m._fadeInProgress = _true;
+								m._fade.start ();
+							} else {
+								_reflectChangedMagPower ();
+								_updateAfterMagPowerReflected ();
+							}
+						} else {
+							_updateAfterMagPowerReflected ();
+						}
+					}
 					/*?
 						State Properties
 							magPower
@@ -549,9 +539,8 @@ Uize.module ({
 					name:'showBeam',
 					value:_false
 				}
-			});
-
-		return _class;
+			}
+		});
 	}
 });
 

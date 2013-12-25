@@ -113,101 +113,14 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var _undefined;
-
-		/*** Class Constructor ***/
-			var
-				_class = _superclass.subclass (
-					null,
-					function () {
-						var m = this;
-
-						function _addText() {
-							if (m.children.add.get ('enabledInherited')) {
-								var
-									_listItemText = m._itemConformer ? m._itemConformer (_input + '') : _input + '',
-									_selectedIndex = Uize.indexIn (m._list,_listItemText)
-								;
-								if (_selectedIndex < 0) {
-									m._addNewOption (_listItemText);
-									var _list = m._list.concat ();
-									m._sort == 'prepend' ? _list.unshift (_listItemText) : _list.push (_listItemText);
-									m.set ({_list:_list});
-								} else if (m._listNode) {
-									m._listNode.selectedIndex = _selectedIndex;
-								}
-								m._updateUiRemoveButtonState ();
-								_clearInputNode();
-							}
-						}
-
-						/*** add text input widget ***/
-							var _input = m.addChild ('input',Uize.Widget.TextInput,{minLength:1});
-								/*?
-									Child Widgets
-										input
-											An instance of the =Uize.Widget.TextInput= class, that lets the user enter text for a new item to be added to the =list= array.
-
-											Text entered in the =input= child widget can be added to the =list= array by either pressing the enter key when the =input= child widget is focused, or by clicking on the =add= button. Upon adding the =input= widget's text to the =list= array, the value of the =input= widget is cleared (ie. set to an empty string). Pressing the escape key when the =input= child widget is focused will clear the value of the =input= widget without adding the item to the =list= array.
-
-											NOTES
-											- see the related =add= child widget
-											- this child widget is added in the constructor
-								*/
-
-							function _clearInputNode () {_input.set ({value:''})};
-
-							_input.wire({
-								Ok:function (_event) {
-									_event.cancelSubmit = true;
-									_addText ();
-								},
-								Cancel:_clearInputNode,
-								'Changed.isValid':function () {m._updateUiAddButtonState ()}
-							});
-
-						/*** button widgets ***/
-							m._addChildButton ('add',_addText);
-								/*?
-									Child Widgets
-										add
-											An instance of the =Uize.Widget.Button= class, that lets the user add the current text entered in the =input= child widget as a new item in the =list= array.
-
-											When the value of the =input= child widget's =isValid= state property is set to =false=, then the =add= button will be disabled. This typically occurs when the =input= child widget's value is =''= (an empty string), but could also occur if its value is non-empty but not valid according to a validator function specified by its =validator= state property.
-
-											When the =add= button is enabled and is clicked by the user, any text entered in the =input= child widget will first be processed by the =itemConformer= function (if specified) and will then be added to the =list= array. Where the new item appears in the =list= will depend on the value of the =sort= state property.
-
-											NOTES
-											- see the related =input= child widget
-											- this child widget is added in the constructor
-								*/
-							m._addChildButton ('remove',function () {m._removeSelected ()});
-								/*?
-									Child Widgets
-										remove
-											An instance of the =Uize.Widget.Button= class, that lets the user remove the items currently selected in the =list Implied Node= from the =list= array.
-
-											When no options of the =list Implied Node= are selected, then the =remove= button will be disabled. This may happen when there are no items in the =list= array, when the user has just removed the previously selected items, or if the user uses ctrl-click to deselect all selected items.
-
-											NOTES
-											- see the related =list Implied Node= and the =list= state property
-											- this child widget is added in the constructor
-								*/
-
-						m._childWidgetsAdded = true;
-						m._updateUiAddButtonState ();
-						m._updateUiRemoveButtonState ();
-					}
-				),
-				_classPrototype = _class.prototype
-			;
+		var
+			/*** Variables for Scruncher Optimization ***/
+				_undefined
+		;
 
 		/*** Private Instance Methods ***/
-			_classPrototype._addChildButton = Uize.Widget.Button.addChildButton;
-
-			_classPrototype._addNewOption = function (_listItemText,_append) {
-				var _listNode = this._listNode;
+			function _addNewOption (m,_listItemText,_append) {
+				var _listNode = m._listNode;
 				if (_listNode) {
 					var _newOption = document.createElement ('option');
 
@@ -228,14 +141,13 @@ Uize.module ({
 						}
 					}
 				}
-			};
+			}
 
-			_classPrototype._removeOption = function (_listItemNo) {
-				this._listNode && this._listNode.remove (_listItemNo);
-			};
+			function _removeOption (m,_listItemNo) {
+				m._listNode && m._listNode.remove (_listItemNo);
+			}
 
-			_classPrototype._removeSelected = function () {
-				var m = this;
+			function _removeSelected (m) {
 				if (m._listNode) {
 					var
 						_selectedIndices = [],
@@ -254,16 +166,16 @@ Uize.module ({
 						var _list = m._list.concat ();
 						for (var _indexToRemoveNo = _selectedIndices.length; --_indexToRemoveNo >= 0;) {
 							var _indexToRemove = _selectedIndices [_indexToRemoveNo];
-							m._removeOption (_indexToRemove);
+							_removeOption (m,_indexToRemove);
 							_list.splice (_indexToRemove, 1);
 						}
 						m.set ({_list:_list});
 					}
 				}
-			};
+			}
 
-			_classPrototype._sortList = function (_list) {
-				var _sort = this._sort;
+			function _sortList (m,_list) {
+				var _sort = m._sort;
 				if (_sort != 'prepend' && _sort != 'append') {
 					var _sortFunction = Uize.isFunction (_sort)
 						? _sort
@@ -272,30 +184,26 @@ Uize.module ({
 					_sortFunction ? _list.sort (_sortFunction) : _list.sort ();
 				}
 				return _list;
-			};
+			}
 
-			_classPrototype._setButtonEnabled = function (_widgetName,_enabled) {
-				this.children [_widgetName].set ({enabled:_enabled ? 'inherit' : false})
-			};
+			function _setButtonEnabled (m,_widgetName,_enabled) {
+				m.children [_widgetName].set ({enabled:_enabled ? 'inherit' : false})
+			}
 
-			_classPrototype._updateUiAddButtonState = function () {
-				this._childWidgetsAdded &&
-					this._setButtonEnabled ('add',this.children.input.get ('isValid'))
-				;
-			};
-
-			_classPrototype._updateUiRemoveButtonState = function () {
-				var m = this;
+			function _updateUiAddButtonState (m) {
 				m._childWidgetsAdded &&
-					m._setButtonEnabled ('remove',m._listNode && m._listNode.selectedIndex > -1)
+					_setButtonEnabled (m,'add',m.children.input.get ('isValid'))
 				;
-			};
+			}
 
-			_classPrototype._updateUiList = function () {
-				var
-					m = this,
-					_listNode = m._listNode
+			function _updateUiRemoveButtonState (m) {
+				m._childWidgetsAdded &&
+					_setButtonEnabled (m,'remove',m._listNode && m._listNode.selectedIndex > -1)
 				;
+			}
+
+			function _updateUiList (m) {
+				var _listNode = m._listNode;
 				if (m.isWired && _listNode) {
 					var
 						_options = _listNode.options,
@@ -320,12 +228,12 @@ Uize.module ({
 						if (_listLength > _optionsLength) {
 							// more options than in select element, so add new options
 							for (_optionNo = _optionsLength - 1; ++_optionNo < _listLength;)
-								m._addNewOption (_list [_optionNo],true)
+								_addNewOption (m,_list [_optionNo],true)
 							;
 						} else if (_listLength < _optionsLength) {
 							// fewer options than in select element, so remove extras
 							for (_optionNo = _optionsLength; --_optionNo >= _listLength;)
-								m._removeOption(_optionNo)
+								_removeOption (m,_optionNo)
 							;
 						}
 
@@ -359,48 +267,131 @@ Uize.module ({
 						}
 						m._lastDisplayedList = _list;
 
-					m._updateUiRemoveButtonState ();
+					_updateUiRemoveButtonState (m);
 				}
-			};
+			}
 
-		/*** Public Instance Methods ***/
-			_classPrototype.updateUi = function () {
+		return _superclass.subclass ({
+			omegastructor:function () {
 				var m = this;
-				if (m.isWired) {
-					m._updateUiList ();
-					m._updateUiRemoveButtonState ();
-				}
-			};
 
-			_classPrototype.wireUi = function () {
-				var m = this;
-				if (!m.isWired) {
-					m.wireNode (
-						m._listNode = m.getNode ('list'),
-						{
-							keyup:
-								function (_domEvent) {Uize.Node.Event.isKeyDelete (_domEvent) && m._removeSelected ()},
-							click:
-								function () {m._updateUiRemoveButtonState ()}
+				function _addText() {
+					if (m.children.add.get ('enabledInherited')) {
+						var
+							_listItemText = m._itemConformer ? m._itemConformer (_input + '') : _input + '',
+							_selectedIndex = Uize.indexIn (m._list,_listItemText)
+						;
+						if (_selectedIndex < 0) {
+							_addNewOption (m,_listItemText);
+							var _list = m._list.concat ();
+							m._sort == 'prepend' ? _list.unshift (_listItemText) : _list.push (_listItemText);
+							m.set ({_list:_list});
+						} else if (m._listNode) {
+							m._listNode.selectedIndex = _selectedIndex;
 						}
-						/*?
-							Implied Nodes
-								list Implied Node
-									A multiple select =select= tag (ie. where the =multiple= attribute is set to the value ='multiple'=), that is used to display the current items in the =list= array, and that allows the user to select one or more items to remove.
+						_updateUiRemoveButtonState (m);
+						_clearInputNode();
+					}
+				}
 
-									When the =list Implied Node= is focused and one or more options of the select tag are selected, then pressing the delete key will result in the selected items being removed from the list.
+				/*** add text input widget ***/
+					var _input = m.addChild ('input',Uize.Widget.TextInput,{minLength:1});
+						/*?
+							Child Widgets
+								input
+									An instance of the =Uize.Widget.TextInput= class, that lets the user enter text for a new item to be added to the =list= array.
+
+									Text entered in the =input= child widget can be added to the =list= array by either pressing the enter key when the =input= child widget is focused, or by clicking on the =add= button. Upon adding the =input= widget's text to the =list= array, the value of the =input= widget is cleared (ie. set to an empty string). Pressing the escape key when the =input= child widget is focused will clear the value of the =input= widget without adding the item to the =list= array.
 
 									NOTES
-									- see the related =list= state property
+									- see the related =add= child widget
+									- this child widget is added in the constructor
 						*/
-					);
 
-					_superclass.doMy (m,'wireUi');
+					function _clearInputNode () {_input.set ({value:''})};
+
+					_input.wire({
+						Ok:function (_event) {
+							_event.cancelSubmit = true;
+							_addText ();
+						},
+						Cancel:_clearInputNode,
+						'Changed.isValid':function () {_updateUiAddButtonState (m)}
+					});
+
+				/*** button widgets ***/
+					var _addChildButton = Uize.Widget.Button.addChildButton;
+
+					_addChildButton.call (m,'add',_addText);
+						/*?
+							Child Widgets
+								add
+									An instance of the =Uize.Widget.Button= class, that lets the user add the current text entered in the =input= child widget as a new item in the =list= array.
+
+									When the value of the =input= child widget's =isValid= state property is set to =false=, then the =add= button will be disabled. This typically occurs when the =input= child widget's value is =''= (an empty string), but could also occur if its value is non-empty but not valid according to a validator function specified by its =validator= state property.
+
+									When the =add= button is enabled and is clicked by the user, any text entered in the =input= child widget will first be processed by the =itemConformer= function (if specified) and will then be added to the =list= array. Where the new item appears in the =list= will depend on the value of the =sort= state property.
+
+									NOTES
+									- see the related =input= child widget
+									- this child widget is added in the constructor
+						*/
+					_addChildButton.call (m,'remove',function () {_removeSelected (m)});
+						/*?
+							Child Widgets
+								remove
+									An instance of the =Uize.Widget.Button= class, that lets the user remove the items currently selected in the =list Implied Node= from the =list= array.
+
+									When no options of the =list Implied Node= are selected, then the =remove= button will be disabled. This may happen when there are no items in the =list= array, when the user has just removed the previously selected items, or if the user uses ctrl-click to deselect all selected items.
+
+									NOTES
+									- see the related =list Implied Node= and the =list= state property
+									- this child widget is added in the constructor
+						*/
+
+				m._childWidgetsAdded = true;
+				_updateUiAddButtonState (m);
+				_updateUiRemoveButtonState (m);
+			},
+
+			instanceMethods:{
+				updateUi:function () {
+					var m = this;
+					if (m.isWired) {
+						_updateUiList (m);
+						_updateUiRemoveButtonState (m);
+					}
+				},
+
+				wireUi:function () {
+					var m = this;
+					if (!m.isWired) {
+						m.wireNode (
+							m._listNode = m.getNode ('list'),
+							{
+								keyup:
+									function (_domEvent) {Uize.Node.Event.isKeyDelete (_domEvent) && _removeSelected (m)},
+								click:
+									function () {_updateUiRemoveButtonState (m)}
+							}
+							/*?
+								Implied Nodes
+									list Implied Node
+										A multiple select =select= tag (ie. where the =multiple= attribute is set to the value ='multiple'=), that is used to display the current items in the =list= array, and that allows the user to select one or more items to remove.
+
+										When the =list Implied Node= is focused and one or more options of the select tag are selected, then pressing the delete key will result in the selected items being removed from the list.
+
+										NOTES
+										- see the related =list= state property
+							*/
+						);
+
+						_superclass.doMy (m,'wireUi');
+					}
 				}
-			};
+			},
 
-		/*** State Properties ***/
-			_class.stateProperties ({
+			stateProperties:{
 				_itemConformer:'itemConformer',
 					/*?
 						State Properties
@@ -428,10 +419,10 @@ Uize.module ({
 				_list:{
 					name:'list|value',
 					conformer:function (_value) {
-						this._sortList (_value);
+						_sortList (this,_value);
 						return _value + '' != this._list + '' ? _value : this._list;
 					},
-					onChange:_classPrototype._updateUiList,
+					onChange:function () {_updateUiList (this)},
 					value:[]
 					/*?
 						State Properties
@@ -492,7 +483,7 @@ Uize.module ({
 				},
 				_sort:{
 					name:'sort',
-					onChange:function () {this.set ({_list:this._sortList (this._list.concat ())})},
+					onChange:function () {this.set ({_list:_sortList (this,this._list.concat ())})},
 					value:'prepend'
 					/*?
 						State Properties
@@ -512,9 +503,8 @@ Uize.module ({
 								- the initial value is ='prepend'=
 					*/
 				}
-			});
-
-		return _class;
+			}
+		});
 	}
 });
 

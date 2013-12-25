@@ -692,17 +692,19 @@ Uize.module ({
 											Typically, =performAjax= is implemented at the page widget level, but it can also be overriden by parent widgets closer to the widget on which the =ajax= instance method is called. If no =performAjax= implementation is provided, anywhere up the parent chain, then no Ajax request would be made and the code will fail silently. There is no default implementation for =ajax= aside from supporting the variations outlined below.
 
 											SAMPLE IMPLEMENTATION
-											.........................................................................
-											_classPrototype.performAjax = function (_serviceParams,_requestParams) {
-												this._commObject.request ({
-													url:['http://www.somedomain.com/services',_requestParams],
-													returnType:'json',
-													requestMethod:_requestParams.requestMethod || 'POST',
-													cache:_requestParams.cache,
-													callback:_requestParams.callback
-												})
-											};
-											.........................................................................
+											...................................................................
+											_class.instanceMethods ({
+												performAjax:function (_serviceParams,_requestParams) {
+													this._commObject.request ({
+														url:['http://www.somedomain.com/services',_requestParams],
+														returnType:'json',
+														requestMethod:_requestParams.requestMethod || 'POST',
+														cache:_requestParams.cache,
+														callback:_requestParams.callback
+													})
+												}
+											});
+											...................................................................
 
 											The above sample implementation assumes that there is a private reference to a comm object, which could be an instance of either the =Uize.Comm.Ajax= or the =Uize.Comm.Iframe= class, and that was most likely created in the constructor of this widget.
 
@@ -1598,7 +1600,7 @@ Uize.module ({
 										- see also the =getProvider=, =getInherited=, and =setInherited= instance methods
 							*/
 						},
-						
+
 						childId:function (_childName) {
 							return _constructIdPrefix (this._idPrefix, this._idPrefix, _childName, this._idPrefixConstruction);
 							/*?
@@ -1736,21 +1738,23 @@ Uize.module ({
 
 										When creating a subclass of Uize.Widget, this method should be overrided according to the following structure...
 
-										................................................
-										_classPrototype.wireUi = function () {
-											var m = this;
-											if (!m.isWired) {
+										.......................................
+										_class.instanceMethods ({
+											wireUi:function () {
+												var m = this;
+												if (!m.isWired) {
 
-												// do a
-												// whole bunch
-												// of wiring
+													// do a
+													// whole bunch
+													// of wiring
 
-												_superclass.doMy (m,'wireUi');
+													_superclass.doMy (m,'wireUi');
+												}
 											}
-										};
-										................................................
+										});
+										.......................................
 
-										...where =_classPrototype= is the prototype property of the widget subclass being implemented, and =_superclass= is the superclass from which the new widget class is being subclassed.
+										...where =_superclass= is the superclass from which the new widget class is being subclassed.
 
 										NOTES
 										- if the widget's UI has already been wired, this method has no effect.

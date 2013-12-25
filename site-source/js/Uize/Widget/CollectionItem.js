@@ -42,76 +42,18 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var
+		var
+			/*** Variables for Scruncher Optimization ***/
 				_true = true,
 				_false = false,
 				_undefined
-			;
-
-		/*** Class Constructor ***/
-			var
-				_class = _superclass.subclass (
-					function () {
-						this._properties = {};
-					},
-					function () {
-						var m = this;
-
-						/*** add select button ***/
-							m._addChildButton (
-								'select',function (_event) {m._selectItem (_event.domEvent,_true)}
-								/*?
-									Child Widgets
-										select
-											An instance of the =Uize.Widget.Button= class, that lets the user toggle the =selected= state for the instance.
-
-											NOTES
-											- the markup for this child widget is optional, and a given implementation of this widget in HTML does not need to offer a =select= button
-								*/
-							).set ({
-								clickToSelect:_true,
-								clickToDeselect:_true
-							});
-							m._setSelectorState ();
-
-						/*** add remove button ***/
-							m._addChildButton (
-								'remove',
-								function () {m.fire ({name:'Remove',byUser:_true})}
-								/*?
-									Child Widgets
-										remove
-											An instance of the =Uize.Widget.Button= class, that lets the user remove the item represented by the instance, or the current selection of items.
-
-											Clicking on this button fires the =Remove= instance event, with a =byUser= property in the event object that is set to the value =true=.
-
-											NOTES
-											- the markup for this child widget is optional, and a given implementation of this widget in HTML does not need to offer a =remove= button
-											- see the related =Remove= instance event
-
-									Instance Events
-										Remove
-											An instance event that is fired when the user clicks on the =remove= button of an instance.
-
-											The =Uize.Widget.CollectionItem= class (or subclass) is not responsible for removing the item represented by an instance. Instead, the =Remove= event is fired and handled by an instance of the =Uize.Widget.Collection= class (or subclass) that owns the collection items as child widgets. The =Uize.Widget.Collection= class then performs the operations necessary to update the data set for the collection of items. Also, the =Uize.Widget.Collection= class is responsible for deciding if just the item whose =remove= button was clicked should be removed, or if all currently selected items should be removed.
-
-											NOTES
-											- see the related =remove= child widget
-								*/
-							);
-					}
-				),
-				_classPrototype = _class.prototype
-			;
+		;
 
 		/*** Private Instance Methods ***/
-			_classPrototype._addChildButton = _classPrototype.addChildButton = Uize.Widget.Button.addChildButton;
-
-			_classPrototype._updateUiTitle = function () {
-				if (this.isWired) {
-					var _title = this._title;
-					_title != _undefined && this.setNodeInnerHtml ('title',_title);
+			function _updateUiTitle (m) {
+				if (m.isWired) {
+					var _title = m._title;
+					_title != _undefined && m.setNodeInnerHtml ('title',_title);
 					/*?
 						Implied Nodes
 							title Implied Node
@@ -123,10 +65,9 @@ Uize.module ({
 								- this implied node is optional
 					*/
 				}
-			};
+			}
 
-			_classPrototype._updateUiState = function () {
-				var m = this;
+			function _updateUiState (m) {
 				if (m.isWired) {
 					/*** set CSS class for root node ***/
 						Uize.Node.Classes.setState(
@@ -169,10 +110,14 @@ Uize.module ({
 							)
 						;
 				}
-			};
+			}
 
-			_classPrototype._selectItem = function (_domEvent,_forceToggle) {
-				this.fire ({name:'Click Selected',domEvent:_domEvent,forceToggle:_forceToggle});
+			function _onChangeUpdateUiState () {
+				_updateUiState (this);
+			}
+
+			function _selectItem (m,_domEvent,_forceToggle) {
+				m.fire ({name:'Click Selected',domEvent:_domEvent,forceToggle:_forceToggle});
 				/*?
 					Instance Events
 						Click Selected
@@ -180,102 +125,154 @@ Uize.module ({
 
 							When this event is fired because the user clicks on the =previewShell= implied node and =previewClickAction= is set to ='Toggle Selected'=, then the event object will contain a =forceToggle= property that is set to =true=.
 				*/
-			};
+			}
 
-			_classPrototype._setSelectorState = function () {
-				var
-					_selectButton = this.children.select
-				;
-				_selectButton.get ('state') != 'over' && _selectButton.set ({selected:this._selected});
-			};
+			function _setSelectorState (m) {
+				var _selectButton = m.children.select;
+				_selectButton.get ('state') != 'over' && _selectButton.set ({selected:m._selected});
+			}
 
-		/*** Public Instance Methods ***/
-			_classPrototype.updateUi = function () {
-				this._updateUiState ();
-				this._updateUiTitle ();
-			};
+		return _superclass.subclass ({
+			alphastructor:function () {
+				this._properties = {};
+			},
 
-			_classPrototype.wireUi = function () {
+			omegastructor:function () {
 				var m = this;
-				if (!m.isWired) {
-					// NOTE: Ideally want to get rid of cssClassBase because we're using Uize.Node.Classes, but for backwards compatibility, need to still
-					// minimally support it.  If there was a case that an application was passing in cssClassBase in order to get the item to have a certain
-					// class (and it wasn't already in the markup), we need to set it here, so that would still operate correctly.
-					var _rootNode = m.getNode();
-					if (m._cssClassBase && _rootNode)
-						_rootNode.className = m._cssClassBase
-					;
 
-					/*** wire up the preview shell node ***/
-						var
-							_previewShellNode = m.getNode ('previewShell') || 'imageLink',
-								/*?
-									Implied Nodes
-										previewShell
-											A node that serves as a shell around the =preview= implied node.
+				/*** add select button ***/
+					m.addChildButton (
+						'select',function (_event) {_selectItem (m,_event.domEvent,_true)}
+						/*?
+							Child Widgets
+								select
+									An instance of the =Uize.Widget.Button= class, that lets the user toggle the =selected= state for the instance.
 
-											Mouseover, mouseout, and click events are wired for this node in order to manage =over= and =selected= state for the instance, and in order to fire instance events, such as the ='Click Preview'=, ='Click Selected'=, and ='Item Mouse Down'= events.
+									NOTES
+									- the markup for this child widget is optional, and a given implementation of this widget in HTML does not need to offer a =select= button
+						*/
+					).set ({
+						clickToSelect:_true,
+						clickToDeselect:_true
+					});
+					_setSelectorState (m);
 
-											NOTES
-											- this implied node is required, even if the optional =preview= implied node is omitted
+				/*** add remove button ***/
+					m.addChildButton (
+						'remove',
+						function () {m.fire ({name:'Remove',byUser:_true})}
+						/*?
+							Child Widgets
+								remove
+									An instance of the =Uize.Widget.Button= class, that lets the user remove the item represented by the instance, or the current selection of items.
 
-										imageLink -- DEPRECATED 2009-07-28
-											The deprecated =imageLink= implied node is an alternate / legacy name for the =previewShell= implied node.
+									Clicking on this button fires the =Remove= instance event, with a =byUser= property in the event object that is set to the value =true=.
 
-											If the =imageLink= implied node is used, it will behave in exactly the same way as the =previewShell= node. If you're writing new code, you should *not* use this implied node in your HTML markup.
+									NOTES
+									- the markup for this child widget is optional, and a given implementation of this widget in HTML does not need to offer a =remove= button
+									- see the related =Remove= instance event
 
-											NOTES
-											- this implied node is deprecated
-								*/
-							_fireItemMouseDownEvent = function (_event) {
-								m.fire ({name:'Item Mouse Down',domEvent:_event,bubble:_true});
-								/*?
-									Instance Events
-										Item Mouse Down
-											A bubbling instance event that is fired when the user mouses down on the =previewShell= implied node.
+							Instance Events
+								Remove
+									An instance event that is fired when the user clicks on the =remove= button of an instance.
 
-											As a bubbling event, a handler for this event can be wired by an instance of the =Uize.Widget.Collection= class (or subclass) - that owns the collection items as child widgets - on itself. This is the case with the =Uize.Widget.Collection.Dynamic= class, which manages drag-and-drop for reordering of items in a collection.
+									The =Uize.Widget.CollectionItem= class (or subclass) is not responsible for removing the item represented by an instance. Instead, the =Remove= event is fired and handled by an instance of the =Uize.Widget.Collection= class (or subclass) that owns the collection items as child widgets. The =Uize.Widget.Collection= class then performs the operations necessary to update the data set for the collection of items. Also, the =Uize.Widget.Collection= class is responsible for deciding if just the item whose =remove= button was clicked should be removed, or if all currently selected items should be removed.
 
-											When this event is fired, the event object contains a =domEvent= property that is a reference to the mousedown DOM event, and a =bubble= property that is set to =true=.
-								*/
-							}
+									NOTES
+									- see the related =remove= child widget
+						*/
+					);
+			},
+
+			instanceMethods:{
+				addChildButton:Uize.Widget.Button.addChildButton,
+
+				updateUi:function () {
+					_updateUiState (this);
+					_updateUiTitle (this);
+				},
+
+				wireUi:function () {
+					var m = this;
+					if (!m.isWired) {
+						// NOTE: Ideally want to get rid of cssClassBase because we're using Uize.Node.Classes, but for backwards compatibility, need to still
+						// minimally support it.  If there was a case that an application was passing in cssClassBase in order to get the item to have a certain
+						// class (and it wasn't already in the markup), we need to set it here, so that would still operate correctly.
+						var _rootNode = m.getNode();
+						if (m._cssClassBase && _rootNode)
+							_rootNode.className = m._cssClassBase
 						;
-						m.wireNode (
-							_previewShellNode,
-							{
-								mouseover:function () {m.set ({_over:_true})},
-								mouseout:function () {m.set ({_over:_false})},
-								touchend:_fireItemMouseDownEvent,
-								mousedown:_fireItemMouseDownEvent
-							}
-						);
 
-						if (m._previewClickAction)
+						/*** wire up the preview shell node ***/
+							var
+								_previewShellNode = m.getNode ('previewShell') || 'imageLink',
+									/*?
+										Implied Nodes
+											previewShell
+												A node that serves as a shell around the =preview= implied node.
+
+												Mouseover, mouseout, and click events are wired for this node in order to manage =over= and =selected= state for the instance, and in order to fire instance events, such as the ='Click Preview'=, ='Click Selected'=, and ='Item Mouse Down'= events.
+
+												NOTES
+												- this implied node is required, even if the optional =preview= implied node is omitted
+
+											imageLink -- DEPRECATED 2009-07-28
+												The deprecated =imageLink= implied node is an alternate / legacy name for the =previewShell= implied node.
+
+												If the =imageLink= implied node is used, it will behave in exactly the same way as the =previewShell= node. If you're writing new code, you should *not* use this implied node in your HTML markup.
+
+												NOTES
+												- this implied node is deprecated
+									*/
+								_fireItemMouseDownEvent = function (_event) {
+									m.fire ({name:'Item Mouse Down',domEvent:_event,bubble:_true});
+									/*?
+										Instance Events
+											Item Mouse Down
+												A bubbling instance event that is fired when the user mouses down on the =previewShell= implied node.
+
+												As a bubbling event, a handler for this event can be wired by an instance of the =Uize.Widget.Collection= class (or subclass) - that owns the collection items as child widgets - on itself. This is the case with the =Uize.Widget.Collection.Dynamic= class, which manages drag-and-drop for reordering of items in a collection.
+
+												When this event is fired, the event object contains a =domEvent= property that is a reference to the mousedown DOM event, and a =bubble= property that is set to =true=.
+									*/
+								}
+							;
 							m.wireNode (
 								_previewShellNode,
-								'click',
-								function (_event) {
-									var _forceToggle = m._previewClickAction == 'Toggle Selected';
-									_forceToggle || m._previewClickAction == 'Select'
-										? m._selectItem (_event,_forceToggle)
-										: m.fire ({name:'Click Preview',bubble:_true});
-											/*?
-												Instance Events
-													Click Preview
-														An instance event that is fired when the user clicks on the =previewShell= implied node and the =previewClickAction= state property is set to ='Preview'= or =null=, or left =undefined=.
-
-														As a bubbling event, a handler for this event can be wired by an instance of the =Uize.Widget.Collection= class (or subclass) - that owns the collection items as child widgets - on itself. When this event is fired, the event object contains a =bubble= property that is set to =true=.
-											*/
+								{
+									mouseover:function () {m.set ({_over:_true})},
+									mouseout:function () {m.set ({_over:_false})},
+									touchend:_fireItemMouseDownEvent,
+									mousedown:_fireItemMouseDownEvent
 								}
-							)
-						;
+							);
 
-					_superclass.doMy (m,'wireUi');
+							if (m._previewClickAction)
+								m.wireNode (
+									_previewShellNode,
+									'click',
+									function (_event) {
+										var _forceToggle = m._previewClickAction == 'Toggle Selected';
+										_forceToggle || m._previewClickAction == 'Select'
+											? _selectItem (m,_event,_forceToggle)
+											: m.fire ({name:'Click Preview',bubble:_true});
+												/*?
+													Instance Events
+														Click Preview
+															An instance event that is fired when the user clicks on the =previewShell= implied node and the =previewClickAction= state property is set to ='Preview'= or =null=, or left =undefined=.
+
+															As a bubbling event, a handler for this event can be wired by an instance of the =Uize.Widget.Collection= class (or subclass) - that owns the collection items as child widgets - on itself. When this event is fired, the event object contains a =bubble= property that is set to =true=.
+												*/
+									}
+								)
+							;
+
+						_superclass.doMy (m,'wireUi');
+					}
 				}
-			};
+			},
 
-		/*** State Properties ***/
-			_class.stateProperties ({
+			stateProperties:{
 				_cssClassActive:'cssClassActive',
 					/*?
 						State Properties
@@ -361,7 +358,7 @@ Uize.module ({
 								Uize.Tooltip.showTooltip (m._previewTooltip,m._over)
 							;
 						},
-						_classPrototype._updateUiState
+						_onChangeUpdateUiState
 					],
 					value:_false
 					/*?
@@ -424,10 +421,10 @@ Uize.module ({
 				},
 				_selected:{
 					name:'selected',
-					onChange:function () {
-						this.children.select && this._setSelectorState ();
-						this._updateUiState ();
-					},
+					onChange:[
+						function () {this.children.select && _setSelectorState (this)},
+						_onChangeUpdateUiState
+					],
 					value:_false
 					/*?
 						State Properties
@@ -449,7 +446,7 @@ Uize.module ({
 						;
 						if (_properties) {
 							_properties.title = m._title;
-							m._updateUiTitle ();
+							_updateUiTitle (m);
 							m.fire({ name: 'Title Changed', bubble: _true, value: m._title });
 						}
 					}
@@ -464,9 +461,8 @@ Uize.module ({
 								- the initial value is =undefined=
 					*/
 				}
-			});
-
-		return _class;
+			}
+		});
 	}
 });
 

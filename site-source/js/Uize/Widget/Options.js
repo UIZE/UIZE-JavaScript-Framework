@@ -32,29 +32,17 @@ Uize.module ({
 	name:'Uize.Widget.Options',
 	required:'Uize.Widget.Button',
 	builder:function (_superclass) {
-		/*** Variables for Scruncher Optimization ***/
-			var
+		'use strict';
+
+		var
+			/*** Variables for Scruncher Optimization ***/
 				_false = false,
 				_null = null,
 				_undefined
-			;
-
-		/*** Class Constructor ***/
-			var
-				_class = _superclass.subclass (
-					_null,
-					function () {
-						/*** Private Instance Properties ***/
-							this._lastValueNo = -1;
-							this._totalOptionChildButtons = 0;
-					}
-				),
-				_classPrototype = _class.prototype
-			;
+		;
 
 		/*** Private Instance Methods ***/
-			_classPrototype._updateUiOptionSelected = function () {
-				var m = this;
+			function _updateUiOptionSelected (m) {
 				if (m.isWired && m._valueNo != m._lastValueNo) {
 					var _setOptionSelected = function (_optionNo, _selected) {
 						_optionNo >= 0 &&
@@ -64,260 +52,15 @@ Uize.module ({
 					_setOptionSelected (m._lastValueNo,_false);
 					_setOptionSelected (m._lastValueNo = m._valueNo,true);
 				}
-			};
+			}
 
-			_classPrototype._updateValueNo = function () {
-				var
-					m = this,
-					_valueNo = m.getValueNoFromValue (m._value)
-				;
+			function _updateValueNo (m) {
+				var _valueNo = m.getValueNoFromValue (m._value);
 
 				m.set ({_valueNo:_valueNo, _tentativeValueNo:_valueNo});
-				m._updateUiOptionSelected ();
-			};
+				_updateUiOptionSelected (m);
+			}
 
-		/*** Public Instance Methods ***/
-			_classPrototype.forAll = function (_function) {
-				for (
-					var _valueNo = -1, _valuesLength = this._values.length, _children = this.children;
-					++_valueNo < _valuesLength;
-				)
-					if (_function (_children ['option' + _valueNo],_valueNo) === _false) break;
-				/*?
-					Instance Methods
-						forAll
-							An iterator method that is provided as a convenience and that lets you iterate over all the option buttons for the instance.
-
-							SYNTAX
-							..................................
-							myInstance.forAll (iterationFUNC);
-							..................................
-
-							The function specified in the =iterationFUNC= parameter will be called on each iteration and can expect to receive two parameters for the current iteration: an object reference to the option button widget, and an integer representing the index of the option. The function does not need to return any value. However, if the function wishes to terminate the iteration, it can return the boolean value =false=.
-
-							EXAMPLE
-							.....................................................................
-							myOptionsWidget.forAll (
-								function (optionButton,optionNo) {
-									optionButton.set ({enabled: optionNo % 2 ? 'inherit' : false});
-								}
-							);
-							.....................................................................
-
-							In the above example, the =forAll= instance method is being used to iterate over all the option buttons in order to disable every second option button - not a terribly practical example, but it illustrates the usage.
-				*/
-			};
-
-			_classPrototype.getValueNoFromValue = function (_value) {
-				var _values = this._values;
-				return (
-					_values.length
-						? (
-							typeof _values [0] == 'object'
-								? Uize.findRecordNo (_values,{name:_value})
-								: Uize.indexIn (_values,_value,_false,_false)
-						)
-						: -1
-				);
-				/*?
-					Instance Methods
-						getValueNoFromValue
-							Returns an integer, representing the index of the specified value in the =values= set. If the specified value is not one of the values in the =values= set, then this method returns =-1=.
-
-							SYNTAX
-							...........................................................
-							valueNoINT = myInstance.getValueNoFromValue (valueANYTYPE);
-							...........................................................
-							
-							NOTES
-							- See related =getValueObject= instance method
-				*/
-			};
-			
-			_classPrototype.getValueObject = function (_value) {
-				var
-					m = this,
-					_valueNo = m.getValueNoFromValue(_value === _undefined ? m._value : _value)
-				;
-				return _valueNo > -1 ? m._values[_valueNo] : _null;
-				/*?
-					Instance Methods
-						getValueObject
-							Returns an object, representing the data attached to the specified value in the =values= set. If the specified value is not one of the values in the =values= set, then this method returns =null=.
-
-							SYNTAX
-							...........................................................
-							valueObjOBJ = myInstance.getValueObject (valueANYTYPE);
-							...........................................................
-							
-							NOTES
-							- See related =getValueNoFromValue= instance method
-				*/
-			};
-
-			_classPrototype.getOptionProperties = function (/*_valueNo, _valueObject*/) {
-				return _null;
-			};
-				/*?
-					Instance Methods
-						getOptionProperties
-							A hook method for subclasses to provide additional state properties to add to the general =optionWidgetProperties= for a specific child option button widget. The base implementation returns =null=.
-
-							SYNTAX
-							...................................................................................
-							optionPropertiesOBJ = myInstance.getOptionProperties (valueNoINT, valueObjectOBJ);
-							...................................................................................
-
-							=valueNoINT= contains the child widget button index. =valueObjectOBJ= is the object in the =values= state property at index =valueNoINT=.
-
-							This hook method is useful when a =Uize.Widget.Options= subclass wants specific data from each value object within the =values= state property passed to the option button child widget when it is created. This data is added to the =optionWidgetProperties= which are common accross all option buton child widgets.
-
-							EXAMPLE
-							................................................................................
-							_class.prototype.getOptionProperties = function (valueNo, valueObject) {
-								return Uize.copyInto(
-									_superclass.doMy (this,'getOptionProperties',[valueNo,valueObject]) || {},
-									{
-										value:valueObject.name,
-										valueDetails:valueObject.valueDetails
-									}
-								);
-							};
-							................................................................................
-
-							In the above example, the =getOptionProperties= hook method was overridden in a subclass to add =value= and =valueDetails= properties to the state properties that will be set on the option button child widget. These values are retrieved from the =valueObjectOBJ=.
-				*/
-
-			_classPrototype.updateUi = function () {
-				var m = this;
-				if (m.isWired) {
-					m._updateUiOptionSelected();
-					_superclass.doMy (m,'updateUi');
-				}
-			};
-
-			_classPrototype.wireUi = function () {
-				var m = this;
-				if (!m.isWired) {
-					m._valueNo = -1;
-					var
-						_optionWidgetClass = m._optionWidgetClass || Uize.Widget.Button,
-						_optionWidgetProperties = m._optionWidgetProperties,
-						_values = m._values,
-						_valuesLength = m._totalOptionChildButtons = _values.length,
-						_restoreValueTimeout, _tentativeValueTimeout,
-						_restoreValue = function() {
-							_restoreValueTimeout = _null;
-							m.set ({
-								_tentativeValue:m._value,
-								_tentativeValueNo:m._valueNo
-							});
-						},
-						_clearTentativeValueTimeouts = function() {
-							_restoreValueTimeout && clearTimeout (_restoreValueTimeout);
-							_tentativeValueTimeout && clearTimeout (_tentativeValueTimeout);
-						}
-					;
-					Uize.forEach (
-						_values,
-						function _setupOption (_valueObject,_valueNo) {
-							var
-								_value =
-									((typeof _valueObject == 'object' && _valueObject) || (_valueObject = {name:_valueObject})).name,
-								_setValue = function() {
-									m.set (
-										m._setValueOnMouseover
-											? {_value:_value}
-											: {_tentativeValue:_value,_tentativeValueNo:_valueNo}
-									);
-								}
-							;
-							m.addChild (
-								'option' + _valueNo,
-								_optionWidgetClass,
-								Uize.copy (_optionWidgetProperties,m.getOptionProperties(_valueNo, _valueObject))
-							)
-								.wire (
-									'*',
-									function (_event) {
-										if (_event.name == 'Click') {
-											m.fire ({name:'Before Value Change',value:_value,valueNo:_valueNo}).cancel ||
-												m.set ({_value:_value})
-												/*?
-													Instance Events
-														Before Value Change
-															This event fires just as an option button is clicked, but before the =value= state property for the instance is updated.
-
-															This event offers the handler the opportunity to cancel the value change. The event contains a "value" property (which is the new value that would be set) and a "valueNo" property (which is the index of the new value that would be set). To cancel the set action, the handler can set the event object's "cancel" property to =true=. The handler can inspect the "value" and "valueNo" properties of the event to determine if the value change should be permitted.
-												*/
-											;
-											m.fire (_event);
-										} else if (_event.name == 'Over') {
-											_clearTentativeValueTimeouts ();
-											m._tentativeRestTime
-												? (_tentativeValueTimeout = setTimeout (_setValue,m._tentativeRestTime))
-												: _setValue ()
-											;
-										} else if (_event.name == 'Out') {
-											_clearTentativeValueTimeouts ();
-											_restoreValueTimeout = setTimeout (_restoreValue,50);
-										}
-										m.fire ({
-											name:'Option Event',
-											value:_value,
-											childEvent:_event
-											/*?
-												Instance Events
-													Option Event
-														Fires each time an event fires for one of the option button child widgets.
-
-														When this event fires, the event object will have a "value" property whose value corresponds to the value associated with the option, as well as a "childEvent" property that carries the event object associated with the option button event.
-											*/
-										});
-									}
-								)
-							;
-						}
-					);
-
-					/*** seed root node references for buttons, if possible (performance optimization) ***/
-						/* NOTE:
-							This is a performance optimization that relies on the fact that in many typical cases, the HTML for the option buttons will be child nodes of the root node. In such cases, iterating through and seeding the root node references for all the option buttons is more efficient than leaving it up to the button widgets to get their root node by id - especially for large options sets.
-						*/
-						if (_valuesLength) {
-							var _optionsNode = m.getNode ();
-							if (_optionsNode) {
-								for (
-									var
-										_childNodeNo = -1,
-										_childNode,
-										_childNodeId,
-										_child,
-										_childNodes = _optionsNode.childNodes || [],
-										_childNodesLength = _childNodes.length,
-										_children = m.children,
-										_idPrefix = m.get ('idPrefix'),
-										_idPrefixLength = _idPrefix.length
-									;
-									++_childNodeNo < _childNodesLength;
-								) {
-									if (
-										(_childNodeId = (_childNode = _childNodes [_childNodeNo]).id) &&
-										!_childNodeId.indexOf (_idPrefix) &&
-										(_child = _children [_childNodeId.slice (_idPrefixLength + 1)])
-									)
-										_child.set ({nodeMap:{'':_childNode,shell:_null,bed:_null}})
-									;
-								}
-							}
-						}
-
-					_superclass.doMy (m,'wireUi');
-					m._updateValueNo ();
-				}
-			};
-
-		/*** State Properties ***/
 			function _getValidValue(_value) {
 				var
 					m = this,
@@ -330,7 +73,257 @@ Uize.module ({
 						: (typeof _values[0] == 'object' ? _values[0].name : _values[0])
 				);
 			}
-			_class.stateProperties ({
+
+		return _superclass.subclass ({
+			omegastructor:function () {
+				/*** Private Instance Properties ***/
+					this._lastValueNo = -1;
+					this._totalOptionChildButtons = 0;
+			},
+
+			instanceMethods:{
+				forAll:function (_function) {
+					for (
+						var _valueNo = -1, _valuesLength = this._values.length, _children = this.children;
+						++_valueNo < _valuesLength;
+					)
+						if (_function (_children ['option' + _valueNo],_valueNo) === _false) break;
+					/*?
+						Instance Methods
+							forAll
+								An iterator method that is provided as a convenience and that lets you iterate over all the option buttons for the instance.
+
+								SYNTAX
+								..................................
+								myInstance.forAll (iterationFUNC);
+								..................................
+
+								The function specified in the =iterationFUNC= parameter will be called on each iteration and can expect to receive two parameters for the current iteration: an object reference to the option button widget, and an integer representing the index of the option. The function does not need to return any value. However, if the function wishes to terminate the iteration, it can return the boolean value =false=.
+
+								EXAMPLE
+								.....................................................................
+								myOptionsWidget.forAll (
+									function (optionButton,optionNo) {
+										optionButton.set ({enabled: optionNo % 2 ? 'inherit' : false});
+									}
+								);
+								.....................................................................
+
+								In the above example, the =forAll= instance method is being used to iterate over all the option buttons in order to disable every second option button - not a terribly practical example, but it illustrates the usage.
+					*/
+				},
+
+				getValueNoFromValue:function (_value) {
+					var _values = this._values;
+					return (
+						_values.length
+							? (
+								typeof _values [0] == 'object'
+									? Uize.findRecordNo (_values,{name:_value})
+									: Uize.indexIn (_values,_value,_false,_false)
+							)
+							: -1
+					);
+					/*?
+						Instance Methods
+							getValueNoFromValue
+								Returns an integer, representing the index of the specified value in the =values= set. If the specified value is not one of the values in the =values= set, then this method returns =-1=.
+
+								SYNTAX
+								...........................................................
+								valueNoINT = myInstance.getValueNoFromValue (valueANYTYPE);
+								...........................................................
+
+								NOTES
+								- See related =getValueObject= instance method
+					*/
+				},
+
+				getValueObject:function (_value) {
+					var
+						m = this,
+						_valueNo = m.getValueNoFromValue(_value === _undefined ? m._value : _value)
+					;
+					return _valueNo > -1 ? m._values[_valueNo] : _null;
+					/*?
+						Instance Methods
+							getValueObject
+								Returns an object, representing the data attached to the specified value in the =values= set. If the specified value is not one of the values in the =values= set, then this method returns =null=.
+
+								SYNTAX
+								...........................................................
+								valueObjOBJ = myInstance.getValueObject (valueANYTYPE);
+								...........................................................
+
+								NOTES
+								- See related =getValueNoFromValue= instance method
+					*/
+				},
+
+				getOptionProperties:function (/*_valueNo, _valueObject*/) {
+					return _null;
+					/*?
+						Instance Methods
+							getOptionProperties
+								A hook method for subclasses to provide additional state properties to add to the general =optionWidgetProperties= for a specific child option button widget. The base implementation returns =null=.
+
+								SYNTAX
+								...................................................................................
+								optionPropertiesOBJ = myInstance.getOptionProperties (valueNoINT, valueObjectOBJ);
+								...................................................................................
+
+								=valueNoINT= contains the child widget button index. =valueObjectOBJ= is the object in the =values= state property at index =valueNoINT=.
+
+								This hook method is useful when a =Uize.Widget.Options= subclass wants specific data from each value object within the =values= state property passed to the option button child widget when it is created. This data is added to the =optionWidgetProperties= which are common accross all option buton child widgets.
+
+								EXAMPLE
+								................................................................................
+								_class.prototype.getOptionProperties = function (valueNo, valueObject) {
+									return Uize.copyInto(
+										_superclass.doMy (this,'getOptionProperties',[valueNo,valueObject]) || {},
+										{
+											value:valueObject.name,
+											valueDetails:valueObject.valueDetails
+										}
+									);
+								};
+								................................................................................
+
+								In the above example, the =getOptionProperties= hook method was overridden in a subclass to add =value= and =valueDetails= properties to the state properties that will be set on the option button child widget. These values are retrieved from the =valueObjectOBJ=.
+					*/
+				},
+
+				updateUi:function () {
+					var m = this;
+					if (m.isWired) {
+						_updateUiOptionSelected (m);
+						_superclass.doMy (m,'updateUi');
+					}
+				},
+
+				wireUi:function () {
+					var m = this;
+					if (!m.isWired) {
+						m._valueNo = -1;
+						var
+							_optionWidgetClass = m._optionWidgetClass || Uize.Widget.Button,
+							_optionWidgetProperties = m._optionWidgetProperties,
+							_values = m._values,
+							_valuesLength = m._totalOptionChildButtons = _values.length,
+							_restoreValueTimeout, _tentativeValueTimeout,
+							_restoreValue = function() {
+								_restoreValueTimeout = _null;
+								m.set ({
+									_tentativeValue:m._value,
+									_tentativeValueNo:m._valueNo
+								});
+							},
+							_clearTentativeValueTimeouts = function() {
+								_restoreValueTimeout && clearTimeout (_restoreValueTimeout);
+								_tentativeValueTimeout && clearTimeout (_tentativeValueTimeout);
+							}
+						;
+						Uize.forEach (
+							_values,
+							function _setupOption (_valueObject,_valueNo) {
+								var
+									_value =
+										((typeof _valueObject == 'object' && _valueObject) || (_valueObject = {name:_valueObject})).name,
+									_setValue = function() {
+										m.set (
+											m._setValueOnMouseover
+												? {_value:_value}
+												: {_tentativeValue:_value,_tentativeValueNo:_valueNo}
+										);
+									}
+								;
+								m.addChild (
+									'option' + _valueNo,
+									_optionWidgetClass,
+									Uize.copy (_optionWidgetProperties,m.getOptionProperties(_valueNo, _valueObject))
+								)
+									.wire (
+										'*',
+										function (_event) {
+											if (_event.name == 'Click') {
+												m.fire ({name:'Before Value Change',value:_value,valueNo:_valueNo}).cancel ||
+													m.set ({_value:_value})
+													/*?
+														Instance Events
+															Before Value Change
+																This event fires just as an option button is clicked, but before the =value= state property for the instance is updated.
+
+																This event offers the handler the opportunity to cancel the value change. The event contains a "value" property (which is the new value that would be set) and a "valueNo" property (which is the index of the new value that would be set). To cancel the set action, the handler can set the event object's "cancel" property to =true=. The handler can inspect the "value" and "valueNo" properties of the event to determine if the value change should be permitted.
+													*/
+												;
+												m.fire (_event);
+											} else if (_event.name == 'Over') {
+												_clearTentativeValueTimeouts ();
+												m._tentativeRestTime
+													? (_tentativeValueTimeout = setTimeout (_setValue,m._tentativeRestTime))
+													: _setValue ()
+												;
+											} else if (_event.name == 'Out') {
+												_clearTentativeValueTimeouts ();
+												_restoreValueTimeout = setTimeout (_restoreValue,50);
+											}
+											m.fire ({
+												name:'Option Event',
+												value:_value,
+												childEvent:_event
+												/*?
+													Instance Events
+														Option Event
+															Fires each time an event fires for one of the option button child widgets.
+
+															When this event fires, the event object will have a "value" property whose value corresponds to the value associated with the option, as well as a "childEvent" property that carries the event object associated with the option button event.
+												*/
+											});
+										}
+									)
+								;
+							}
+						);
+
+						/*** seed root node references for buttons, if possible (performance optimization) ***/
+							/* NOTE:
+								This is a performance optimization that relies on the fact that in many typical cases, the HTML for the option buttons will be child nodes of the root node. In such cases, iterating through and seeding the root node references for all the option buttons is more efficient than leaving it up to the button widgets to get their root node by id - especially for large options sets.
+							*/
+							if (_valuesLength) {
+								var _optionsNode = m.getNode ();
+								if (_optionsNode) {
+									for (
+										var
+											_childNodeNo = -1,
+											_childNode,
+											_childNodeId,
+											_child,
+											_childNodes = _optionsNode.childNodes || [],
+											_childNodesLength = _childNodes.length,
+											_children = m.children,
+											_idPrefix = m.get ('idPrefix'),
+											_idPrefixLength = _idPrefix.length
+										;
+										++_childNodeNo < _childNodesLength;
+									) {
+										if (
+											(_childNodeId = (_childNode = _childNodes [_childNodeNo]).id) &&
+											!_childNodeId.indexOf (_idPrefix) &&
+											(_child = _children [_childNodeId.slice (_idPrefixLength + 1)])
+										)
+											_child.set ({nodeMap:{'':_childNode,shell:_null,bed:_null}})
+										;
+									}
+								}
+							}
+
+						_superclass.doMy (m,'wireUi');
+						_updateValueNo (m);
+					}
+				}
+			},
+
+			stateProperties:{
 				_ensureValueInValues:{
 					name:'ensureValueInValues',
 					onChange:function () {
@@ -433,7 +426,7 @@ Uize.module ({
 					conformer:_getValidValue,
 					onChange:function () {
 						var m = this;
-						m._updateValueNo ();
+						_updateValueNo (m);
 						m.set ({_tentativeValueNo:m._valueNo,_tentativeValue:m._value});
 					},
 					value:_null
@@ -521,9 +514,8 @@ Uize.module ({
 								- the initial value is =[]= (an empty array)
 					*/
 				}
-			});
-
-		return _class;
+			}
+		});
 	}
 });
 

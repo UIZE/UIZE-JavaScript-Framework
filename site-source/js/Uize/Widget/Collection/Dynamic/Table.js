@@ -30,27 +30,22 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		/*** Class Constructor ***/
-			var
-				_class = _superclass.subclass (),
-				_classPrototype = _class.prototype
-			;
-
-		/*** Public Instance Methods ***/
-			_classPrototype.processItemTemplate = function (_templateNode) {
-				var m = this;
-				return function (_input) {
-					var _dummyNode = document.createElement ('DIV');
-					_dummyNode.innerHTML =
-						'<table><tbody>' +
-						_superclass.doMy (m,'processItemTemplate',[_templateNode]) (_input) +
-						'</tbody></table>'
-					;
-					return Uize.map (_dummyNode.firstChild.firstChild.childNodes,'value');
-				};
-			};
-
-		return _class;
+		return _superclass.subclass ({
+			instanceMethods:{
+				processItemTemplate:function (_templateNode) {
+					var m = this;
+					return function (_input) {
+						var _dummyNode = document.createElement ('DIV');
+						_dummyNode.innerHTML =
+							'<table><tbody>' +
+							_superclass.doMy (m,'processItemTemplate',[_templateNode]) (_input) +
+							'</tbody></table>'
+						;
+						return Uize.map (_dummyNode.firstChild.firstChild.childNodes,'value');
+					};
+				}
+			}
+		});
 	}
 });
 

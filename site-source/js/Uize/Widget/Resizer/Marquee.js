@@ -29,46 +29,19 @@ Uize.module ({
 	builder:function  (_superclass) {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var
+		var
+			/*** Variables for Scruncher Optimization ***/
 				_true = true,
 				_false = false,
-				_Uize_Node = Uize.Node
-			;
+				_Uize_Node = Uize.Node,
 
-		/*** General Variables ***/
-			var
+			/*** General Variables ***/
 				_centerAlign = [.5,.5],
 				_sacredEmptyObject = {}
-			;
-
-		/*** Class Constructor ***/
-			var
-				_class = _superclass.subclass (
-					function () {
-						var m = this;
-
-						/*** watch for state changes that would require updating displayed handles ***/
-							function _updateUiHandlesDisplayedAndPositions () {
-								m._updateUiHandlesDisplayed ();
-								m._updateUiHandlesPositions ();
-							}
-							m.wire ({
-								'Changed.inDrag':_updateUiHandlesDisplayedAndPositions,
-								'Changed.creatingNew':_updateUiHandlesDisplayedAndPositions,
-								'Changed.fixedX':_updateUiHandlesDisplayedAndPositions,
-								'Changed.fixedY':_updateUiHandlesDisplayedAndPositions,
-								'Changed.activeHandleEffectivePointIdX':_updateUiHandlesDisplayedAndPositions,
-								'Changed.activeHandleEffectivePointIdY':_updateUiHandlesDisplayedAndPositions
-							});
-					}
-				),
-				_classPrototype = _class.prototype
-			;
+		;
 
 		/*** Private Instance Methods ***/
-			_classPrototype._updateUiHandlesDisplayed = function () {
-				var m = this;
+			function _updateUiHandlesDisplayed (m) {
 				if (m.isWired) {
 					var
 						_inDrag = m.get ('inDrag'),
@@ -77,7 +50,7 @@ Uize.module ({
 						_fixedY = m.get ('fixedY'),
 						_activeHandleEffectivePointIdX = m.get ('activeHandleEffectivePointIdX'),
 						_activeHandleEffectivePointIdY = m.get ('activeHandleEffectivePointIdY'),
-						_pointIdsMap = _class.pointIdsMap
+						_pointIdsMap = m.Class.pointIdsMap
 					;
 					for (var _handleName in _pointIdsMap) {
 						if (_handleName != 'move') {
@@ -100,20 +73,19 @@ Uize.module ({
 						}
 					}
 				}
-			};
+			}
 
-			_classPrototype._updateUiHandlesPositions = function () {
+			function _updateUiHandlesPositions (m) {
 				/* NOTE:
 					one might be tempted to optimize this code so that the positioning of the handles is not updated while they are not visible, so I tried this, but it actually turned out to incur greater re-rendering cost in IE -- go figure!
 				*/
-				var m = this;
 				if (m.isWired) {
 					var
 						_left = m.get ('left'),
 						_top = m.get ('top'),
 						_widthMinus1 = m.get ('width') - 1,
 						_heightMinus1 = m.get ('height') - 1,
-						_pointIdsMap = _class.pointIdsMap,
+						_pointIdsMap = m.Class.pointIdsMap,
 						_handlesAlign = m._handlesAlign || _sacredEmptyObject
 					;
 					for (var _handleName in _pointIdsMap) {
@@ -134,76 +106,92 @@ Uize.module ({
 						}
 					}
 				}
-			};
+			}
 
-			_classPrototype._updateUiRotate = function () {
-				var
-					m = this,
-					_canRotate = !!m._canRotate
-				;
+			function _updateUiRotate (m) {
+				var _canRotate = !!m._canRotate;
 
 				if (m.isWired && _canRotate) {
 					var _rotateNode = m.getNode ('rotate');
 					m.displayNode (_rotateNode, _canRotate);
 					m.children.rotate.set ({node:_rotateNode});
 				}
-			};
+			}
 
-		/*** Public Instance Methods ***/
-			_classPrototype.updateUi = function () {
+		return _superclass.subclass ({
+			alphastructor:function () {
 				var m = this;
-				if (m.isWired) {
-					/* NOTE:
-						For some inexplicable reason, calling updateUi on the superclass here improves the responsiveness of the marquee. This maintains the order of updating that existed prior to factoring out the common Uize.Widget.Resizer code from the old and defunct Uize.Widget.Marquee class. Something about updating the handles before updating the box (performed in the superclass) does not produce a favorable effect.
-					*/
-					_superclass.doMy (m,'updateUi');
 
-					m._updateUiHandlesPositions ();
-					m._updateUiRotate ();
-				}
-			};
+				/*** watch for state changes that would require updating displayed handles ***/
+					function _updateUiHandlesDisplayedAndPositions () {
+						_updateUiHandlesDisplayed (m);
+						_updateUiHandlesPositions (m);
+					}
+					m.wire ({
+						'Changed.inDrag':_updateUiHandlesDisplayedAndPositions,
+						'Changed.creatingNew':_updateUiHandlesDisplayedAndPositions,
+						'Changed.fixedX':_updateUiHandlesDisplayedAndPositions,
+						'Changed.fixedY':_updateUiHandlesDisplayedAndPositions,
+						'Changed.activeHandleEffectivePointIdX':_updateUiHandlesDisplayedAndPositions,
+						'Changed.activeHandleEffectivePointIdY':_updateUiHandlesDisplayedAndPositions
+					});
+			},
 
-			_classPrototype.wireUi = function () {
-				var m = this;
-				if (!m.isWired) {
-					/*** wire up the marquee shell ***/
-						if (m._shellLive) {
-							var
-								_shell = m.getNode ('shell'),
-								_initiateDrag = function (_event) {
-									if (m.get ('enabledInherited')) {
-										_event || (_event = event);
-										var
-											_handleName = m.get ('aspectRatio') == null ? 'northWest' : 'southEast',
-												/* NOTE:
-													because we have the don't-swap-sides hack for when an aspect ratio is set, we can only create marquee by dragging from top left to bottom right, and so we start drag with the bottom right handle
-												*/
-											_shellCoords = _Uize_Node.getCoords (_shell),
-											_eventAbsPos = _Uize_Node.getEventAbsPos (_event)
-										;
-										m.set ({creatingNew:_true});
-										m.setPositionDuringDrag (
-											_eventAbsPos.left - _shellCoords.left,
-											_eventAbsPos.top - _shellCoords.top,
-											m.get ('minWidth'),
-											m.get ('minHeight')
-										);
-										return m.children [_handleName].initiate (_event);
+			instanceMethods:{
+				updateUi:function () {
+					var m = this;
+					if (m.isWired) {
+						/* NOTE:
+							For some inexplicable reason, calling updateUi on the superclass here improves the responsiveness of the marquee. This maintains the order of updating that existed prior to factoring out the common Uize.Widget.Resizer code from the old and defunct Uize.Widget.Marquee class. Something about updating the handles before updating the box (performed in the superclass) does not produce a favorable effect.
+						*/
+						_superclass.doMy (m,'updateUi');
+
+						_updateUiHandlesPositions (m);
+						_updateUiRotate (m);
+					}
+				},
+
+				wireUi:function () {
+					var m = this;
+					if (!m.isWired) {
+						/*** wire up the marquee shell ***/
+							if (m._shellLive) {
+								var
+									_shell = m.getNode ('shell'),
+									_initiateDrag = function (_event) {
+										if (m.get ('enabledInherited')) {
+											_event || (_event = event);
+											var
+												_handleName = m.get ('aspectRatio') == null ? 'northWest' : 'southEast',
+													/* NOTE:
+														because we have the don't-swap-sides hack for when an aspect ratio is set, we can only create marquee by dragging from top left to bottom right, and so we start drag with the bottom right handle
+													*/
+												_shellCoords = _Uize_Node.getCoords (_shell),
+												_eventAbsPos = _Uize_Node.getEventAbsPos (_event)
+											;
+											m.set ({creatingNew:_true});
+											m.setPositionDuringDrag (
+												_eventAbsPos.left - _shellCoords.left,
+												_eventAbsPos.top - _shellCoords.top,
+												m.get ('minWidth'),
+												m.get ('minHeight')
+											);
+											return m.children [_handleName].initiate (_event);
+										}
 									}
-								}
-							;
-							_Uize_Node.setStyle (_shell,{cursor:'crosshair'});
-							m.wireNode (_shell,{mousedown:_initiateDrag,touchstart:_initiateDrag});
-						}
+								;
+								_Uize_Node.setStyle (_shell,{cursor:'crosshair'});
+								m.wireNode (_shell,{mousedown:_initiateDrag,touchstart:_initiateDrag});
+							}
 
-					_superclass.doMy (m,'wireUi');
+						_superclass.doMy (m,'wireUi');
 
-					m._updateUiHandlesDisplayed ();
+						_updateUiHandlesDisplayed (m);
+					}
 				}
-			};
+			},
 
-		/*** State Properties ***/
-			_class.stateProperties ({
+			stateProperties:{
 				_canRotate:{ // if true, show the rotation button
 					name:'canRotate',
 					onChange:function () {
@@ -306,11 +294,10 @@ Uize.module ({
 										}
 									});
 
-									m._updateUiRotate ();
+									_updateUiRotate (m);
 								}
 							);
-						else m._updateUiRotate ();
-
+						else _updateUiRotate (m);
 					}
 				},
 				_handlesAlign:'handlesAlign',
@@ -324,10 +311,9 @@ Uize.module ({
 					name:'shellLive',
 					value:_true
 				}
-			});
+			},
 
-		/*** Override Initial Values for Inherited State Properties ***/
-			_class.set ({
+			set:{
 				areaNodes:['move','border'],
 				html:{
 					process:function (input) {
@@ -353,9 +339,8 @@ Uize.module ({
 					}
 				},
 				nodeMap:{shell:''}
-			});
-
-		return _class;
+			}
+		});
 	}
 });
 

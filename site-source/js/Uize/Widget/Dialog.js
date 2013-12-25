@@ -34,228 +34,36 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var
+		var
+			/*** Variables for Scruncher Optimization ***/
 				_true = true,
 				_false = false,
 				_undefined,
 				_Uize_Node = Uize.Node,
 				_Uize_Widget = Uize.Widget,
-				_Uize_Widget_Drag = _Uize_Widget.Drag
-			;
+				_Uize_Widget_Drag = _Uize_Widget.Drag,
+				_updateUiDimsIfShown = 'updateUiDimsIfShown',
+				_updateUiPositionIfShown = 'updateUiPositionIfShown',
 
-		/*** General Variables ***/
-			var
+			/*** General Variables ***/
 				_sacredEmptyObject = {},
 				_zIndexSlots = {},
 				_totalShown = 0,
 				_browserHasSelectShowThroughIssue = _Uize_Node.ieMajorVersion == 6
-			;
-
-		/*** Class Constructor ***/
-			var
-				_class = _superclass.subclass (
-					function () {
-						var m = this;
-
-						/*** Private Instance Properties ***/
-							(
-								m._shieldFade = m.shieldFade = Uize.Fade ({
-									curve:Uize.Fade.celeration (0,1),
-									duration:750
-								})
-								/*?
-									Instance Properties
-										shieldFade
-											An instance of the =Uize.Fade= class, that is used to fade the opacity of the =shield= implied node when hiding it.
-
-											This property lets you customize the qualities of the opacity fade for the dialog's =shield=, by letting you set values for the state properties of the =Uize.Fade= instance (such as =duration=, =curve=, etc.).
-								*/
-							).wire (
-								'Changed.value',
-								function (_event) {m.set ({_currentShieldOpacity:_event.newValue})}
-							);
-							m.wire ({
-								'Drag Start':
-									function () {
-										if (!m._draggedSinceShown) {
-											m._draggedSinceShown = _true;
-											m.fire ('First Drag Since Shown');
-											/*?
-												Instance Events
-													First Drag Since Shown
-														An instance event that is fired for only the first time that the dialog is dragged after it has been shown.
-
-														NOTES
-														- compare to the =Drag Start= instance event
-														- see the related =Drag Done= instance event
-											*/
-											m._hideShieldOnDrag && m.set ({_shieldShown:_false});
-										}
-									},
-								'Drag Done':
-									function () {
-										var _mooringNode = _Uize_Node.getById (m._mooringNode);
-										if (_mooringNode) {
-											var
-												_mooringCoords = _Uize_Node.getCoords (_mooringNode),
-												_rootNode = m.getNode ()
-											;
-											m.set ({
-												offsetX:
-													parseInt (_Uize_Node.getStyle (_rootNode,'left')) - _mooringCoords.left,
-												offsetY:
-													parseInt (_Uize_Node.getStyle (_rootNode,'top')) - _mooringCoords.top
-											});
-										}
-									}
-							});
-					},
-					function () {
-						var m = this;
-
-						/*** create the drag widget for the drag-to-move behavior ***/
-							var
-								_rootNode,
-								_dragStartRootNodePos = [0,0]
-							;
-							(m._drag = m.addChild ('drag',_Uize_Widget_Drag,{cursor:'move'}))
-								.wire ({
-									'Before Drag Start':
-										function () {
-											_rootNode = m.getNode ();
-											_dragStartRootNodePos [0] = parseInt (_Uize_Node.getStyle (_rootNode,'left'));
-											_dragStartRootNodePos [1] = parseInt (_Uize_Node.getStyle (_rootNode,'top'));
-										},
-									'Changed.inDrag':function (_event) {m.set ({_inDrag:_event.newValue})},
-									'Drag Start':m,
-										/*?
-											Instance Events
-												Drag Start
-													An instance event that is fired each time the user starts dragging the dialog (either for moving or resizing).
-
-													NOTES
-													- compare to the =First Drag Since Shown= instance event
-													- see the related =Drag Done= instance event
-										*/
-									'Drag Update':
-										function () {
-											var _eventDeltaPos = m._drag.eventDeltaPos;
-											_Uize_Node.setStyle (
-												_rootNode,
-												{
-													left:_dragStartRootNodePos [0] + _eventDeltaPos [0],
-													top:_dragStartRootNodePos [1] + _eventDeltaPos [1]
-												}
-											);
-										},
-									'Drag Done':m
-										/*?
-											Instance Events
-												Drag Done
-													An instance event that is fired each time the user finishes dragging the dialog (either when moving or resizing).
-
-													NOTES
-													- see the related =Drag Start= instance event
-										*/
-								})
-								/*?
-									Child Widgets
-										drag
-											An instance of the =Uize.Widget.Drag= class, that is wired up to the =title Implied Node= to enable drag-to-move for the dialog.
-
-											Setting the =enabled= state property of this child widget to =false= will disable drag-to-move for the dialog.
-								*/
-							;
-
-						/*** create buttons ***/
-							function _dismiss (_dismissalEvent) { m._dismiss(_dismissalEvent) }
-							m._addChildButton ('close',function () {_dismiss ('Close')});
-								/*?
-									Child Widgets
-										close
-											A button instance, that lets the user close the dialog.
-
-											When this button is clicked, the =Close= event is fired on the dialog instance.
-
-									Instance Events
-										Close
-											An instance event that is fired when the user clicks the =close= button.
-
-											NOTES
-											- the handler for this event can abort the closing of the dialog by setting the =abort= property of the event object to =true=
-								*/
-							m._addChildButton ('qualifiedOk',function () {_dismiss ('Qualified Ok')});
-								/*?
-									Child Widgets
-										qualifiedOk
-											A button instance, that lets the user submit the dialog with a qualification.
-
-											The =qualifiedOk= button is like a second =ok= button (kind of like an "ok, but with this one condition..." action). Having a second ok-like button is useful in a few cases, bust most dialogs will not provide markup for this button. When this button is clicked, the =Qualified Ok= event is fired on the dialog instance.
-
-									Instance Events
-										Qualified Ok
-											An instance event that is fired when the user clicks the =qualifiedOk= button.
-
-											NOTES
-											- the handler for this event can abort the closing of the dialog by setting the =abort= property of the event object to =true=
-								*/
-							m._addChildButton ('ok',function () {_dismiss ('Ok')});
-								/*?
-									Child Widgets
-										ok
-											A button instance, that lets the user submit the dialog.
-
-											When this button is clicked, the =Ok= event is fired on the dialog instance. The text for this button can be controlled via the =okText= and =defaultOkText= state properties.
-
-									Instance Events
-										Ok
-											An instance event that is fired when the user clicks the =ok= button.
-
-											NOTES
-											- the handler for this event can abort the closing of the dialog by setting the =abort= property of the event object to =true=
-								*/
-							m._addChildButton ('cancel',function () {_dismiss ('Cancel')});
-								/*?
-									Child Widgets
-										cancel
-											A button instance, that lets the user cancel (and close) the dialog.
-
-											When this button is clicked, the =Cancel= event is fired on the dialog instance. The text for this button can be controlled via the =cancelText= and =defaultCancelText= state properties.
-
-									Instance Events
-										Cancel
-											An instance event that is fired when the user clicks the =cancel= button.
-
-											NOTES
-											- the handler for this event can abort the closing of the dialog by setting the =abort= property of the event object to =true=
-								*/
-
-						/*** initialization ***/
-							m._syncOkAndCancelText ();
-							m.atEndOfOmegaStructor ();
-					}
-				),
-				_classPrototype = _class.prototype
-			;
+		;
 
 		/*** Private Instance Methods ***/
-			_classPrototype._addChildButton = function (_name,_action) {
-				var _button = this.addChild (_name,this.Class.buttonWidgetClass);
+			function _addChildButton (m,_name,_action) {
+				var _button = m.addChild (_name,m.Class.buttonWidgetClass);
 				_button.wire ('Click',_action);
 				return _button;
-			};
+			}
 
-			_classPrototype._dismiss = function (_dismissalEvent) {
-				this.fire (_dismissalEvent).abort || this.set ({_shown:_false});
-			};
+			function _dismiss (m,_dismissalEvent) {
+				m.fire (_dismissalEvent).abort || m.set ({_shown:_false});
+			}
 
-			_classPrototype._updateUiShieldOpacity = function () {
-				var m = this;
-				m.isWired && m._shown && m.setNodeOpacity ('shield',m._currentShieldOpacity);
-			};
-
-			_classPrototype._updateUiTitle = function () {
+			function _updateUiTitle () {
 				var m = this;
 				if (m.isWired) {
 					var _defaultedTitle = m._title || m._defaultTitle;
@@ -272,9 +80,9 @@ Uize.module ({
 									- see also the =defaultTitle= and =title= state properties
 						*/
 				}
-			};
+			}
 
-			var _syncOkAndCancelText = _classPrototype._syncOkAndCancelText = function () {
+			function _syncOkAndCancelText () {
 				var
 					m = this,
 					_children = m.children
@@ -284,166 +92,345 @@ Uize.module ({
 				}
 				_updateTextForButton (_children.ok,m._okText || m._defaultOkText);
 				_updateTextForButton (_children.cancel,m._cancelText || m._defaultCancelText);
-			};
+			}
 
-		/*** Public Instance Methods ***/
-			/*** Hook Methods for Uize.Widget.Dialog.xResizable ***/
-				_classPrototype.atEndOfOmegaStructor = _classPrototype.afterWireUi = Uize.nop;
-
-			_classPrototype.responsiveUpdateUiPositionAndDimensions = function () {
-				var
-					m = this,
-					_rootNode = m.getNode(),
-					_nodeToSetDimension = m.getNode(m._nodeToSetDimension)
-				;
-				
-				// first clean out any max width/height from previous update
-				m.setNodeStyle(
-					_nodeToSetDimension,
-					{
-						maxWidth:'',
-						maxHeight:''
-					}
-				);
-				
-				// next determine if the dialog is too big
-				var
-					_windowCoords = _Uize_Node.getCoords(window),
-					_rootNodeDims = _Uize_Node.getDimensions(_rootNode),
-					_nodeToSetIsRoot = _nodeToSetDimension == _rootNode,
-					_nodeToSetDims = _nodeToSetIsRoot ? _rootNodeDims : _Uize_Node.getDimensions(_nodeToSetDimension)
-				;
-
-				// set max width/height such that the root node will be 100% in either dimension
-				m.setNodeStyle(
-					_nodeToSetDimension,
-					{
-						maxWidth:_rootNodeDims.width > _windowCoords.width ? _windowCoords.width - (_rootNodeDims.width - _nodeToSetDims.width) : '',
-						maxHeight:_rootNodeDims.height > _windowCoords.height ? _windowCoords.height - (_rootNodeDims.height - _nodeToSetDims.height) : ''
-					}
-				);
-				
-				// update the root node dims object if we set max width/height above
-				if (_rootNodeDims.width > _windowCoords.width || _rootNodeDims.height > _windowCoords.height)
-					_rootNodeDims = _Uize_Node.getDimensions(_rootNode);
-				
-				// lastly center position if small enough or 0,0 if too big
-				var
-					_leftCentered = _windowCoords.x + ((_windowCoords.width - _rootNodeDims.width) >> 1),
-					_topCentered = _windowCoords.y + ((_windowCoords.height - _rootNodeDims.height) >> 1)
-				;
-				
-				m.setNodeStyle(
-					_rootNode,
-					{
-						left: _leftCentered > 0 ? _leftCentered : 0,
-						top: _topCentered > 0 ? _topCentered : 0
-					}
-				);
-			};
-
-			_classPrototype.updateUiPositionIfShown = function () {
+		return _superclass.subclass ({
+			alphastructor:function () {
 				var m = this;
-				if (m.isWired && m._shown && !m._inDrag) {
-					_Uize_Widget_Drag.resizeShield (m.getNode ('shield'));
-					/*?
-						Implied Nodes
-							Root Node
-								A node that is the root for all of the dialog's HTML, excluding the =shield= implied node.
 
-								When a dialog is shown, its =Root Node= and =shield= implied nodes are displayed. Conversely, when a dialog is hidden, both its =Root Node= and =shield= implied nodes are hidden. When a dialog is dragged to a new position by the user, or if its position is programmatically changed, then the =Root Node= is repositioned through CSS. If the dialog is resized by the user, or if it is resized programmatically by setting values for its =width= and =height= state properties, the dimensions of the =Root Node= are modified through CSS. All chrome for the dialog should therefore be "pinned" to the =Root Node=, so that when the dialog is moved and resized, the chrome goes along for the ride.
+				/*** Private Instance Properties ***/
+					(
+						m._shieldFade = m.shieldFade = Uize.Fade ({
+							curve:Uize.Fade.celeration (0,1),
+							duration:750
+						})
+						/*?
+							Instance Properties
+								shieldFade
+									An instance of the =Uize.Fade= class, that is used to fade the opacity of the =shield= implied node when hiding it.
 
-							shield
-								A node that will be sized to fill the entire browser view port, in order to block events to the page behind the dialog.
+									This property lets you customize the qualities of the opacity fade for the dialog's =shield=, by letting you set values for the state properties of the =Uize.Fade= instance (such as =duration=, =curve=, etc.).
+						*/
+					).wire (
+						'Changed.value',
+						function (_event) {m.set ({_currentShieldOpacity:_event.newValue})}
+					);
+					m.wire ({
+						'Drag Start':
+							function () {
+								if (!m._draggedSinceShown) {
+									m._draggedSinceShown = _true;
+									m.fire ('First Drag Since Shown');
+									/*?
+										Instance Events
+											First Drag Since Shown
+												An instance event that is fired for only the first time that the dialog is dragged after it has been shown.
 
-								When the dialog is shown, the =shield= implied node is shown along with the =Root Node=. The shield can be set to hide when the user drag or resizes the dialog by setting the =hideShieldOnDrag= state property to =true=. When the dialog is shown, the shield can be hidden by setting the =shieldShown= state property to =false=. Even though the shield won't be visible, it will still block events to the page behind the dialog.
-
-								NOTES
-								- see also the =currentShieldOpacity=, =hideShieldOnDrag=, =shieldOpacity=, and =shieldShown= state properties
-								- see also the =shieldFade= instance property
-					*/
-					if (m._autoPosition) {
-						var
-							_rootNode = m.getNode (),
-							_mooringNode = _Uize_Node.getById (m._mooringNode),
-							_offsetX = m._offsetX,
-							_offsetY = m._offsetY
-						;
-						if (!_mooringNode || _offsetX == _undefined || _offsetY == _undefined) {
-							m.responsiveUpdateUiPositionAndDimensions();
-							//_Uize_Node.centerInWindow(_rootNode);
-						}
-						if (_mooringNode) {
-							if (_offsetX == 'adjacent' || _offsetY == 'adjacent') {
-								_Uize_Node.setAbsPosAdjacentTo (_rootNode, _mooringNode);
+												NOTES
+												- compare to the =Drag Start= instance event
+												- see the related =Drag Done= instance event
+									*/
+									m._hideShieldOnDrag && m.set ({_shieldShown:_false});
+								}
+							},
+						'Drag Done':
+							function () {
+								var _mooringNode = _Uize_Node.getById (m._mooringNode);
+								if (_mooringNode) {
+									var
+										_mooringCoords = _Uize_Node.getCoords (_mooringNode),
+										_rootNode = m.getNode ()
+									;
+									m.set ({
+										offsetX:
+											parseInt (_Uize_Node.getStyle (_rootNode,'left')) - _mooringCoords.left,
+										offsetY:
+											parseInt (_Uize_Node.getStyle (_rootNode,'top')) - _mooringCoords.top
+									});
+								}
 							}
-							else {
-								var _mooringCoords = _Uize_Node.getCoords (_mooringNode);
-								_Uize_Node.setStyle (
-									_rootNode,
-									Uize.copy (
-										_offsetX != _undefined ? {left:_mooringCoords.left + _offsetX} : _undefined,
-										_offsetY != _undefined ? {top:_mooringCoords.top + _offsetY} : _undefined
-									)
-								);
-							}
+					});
+			},
+
+			omegastructor:function () {
+				var m = this;
+
+				/*** create the drag widget for the drag-to-move behavior ***/
+					var
+						_rootNode,
+						_dragStartRootNodePos = [0,0]
+					;
+					(m._drag = m.addChild ('drag',_Uize_Widget_Drag,{cursor:'move'}))
+						.wire ({
+							'Before Drag Start':
+								function () {
+									_rootNode = m.getNode ();
+									_dragStartRootNodePos [0] = parseInt (_Uize_Node.getStyle (_rootNode,'left'));
+									_dragStartRootNodePos [1] = parseInt (_Uize_Node.getStyle (_rootNode,'top'));
+								},
+							'Changed.inDrag':function (_event) {m.set ({_inDrag:_event.newValue})},
+							'Drag Start':m,
+								/*?
+									Instance Events
+										Drag Start
+											An instance event that is fired each time the user starts dragging the dialog (either for moving or resizing).
+
+											NOTES
+											- compare to the =First Drag Since Shown= instance event
+											- see the related =Drag Done= instance event
+								*/
+							'Drag Update':
+								function () {
+									var _eventDeltaPos = m._drag.eventDeltaPos;
+									_Uize_Node.setStyle (
+										_rootNode,
+										{
+											left:_dragStartRootNodePos [0] + _eventDeltaPos [0],
+											top:_dragStartRootNodePos [1] + _eventDeltaPos [1]
+										}
+									);
+								},
+							'Drag Done':m
+								/*?
+									Instance Events
+										Drag Done
+											An instance event that is fired each time the user finishes dragging the dialog (either when moving or resizing).
+
+											NOTES
+											- see the related =Drag Start= instance event
+								*/
+						})
+						/*?
+							Child Widgets
+								drag
+									An instance of the =Uize.Widget.Drag= class, that is wired up to the =title Implied Node= to enable drag-to-move for the dialog.
+
+									Setting the =enabled= state property of this child widget to =false= will disable drag-to-move for the dialog.
+						*/
+					;
+
+				/*** create buttons ***/
+					_addChildButton (m,'close',function () {_dismiss (m,'Close')});
+						/*?
+							Child Widgets
+								close
+									A button instance, that lets the user close the dialog.
+
+									When this button is clicked, the =Close= event is fired on the dialog instance.
+
+							Instance Events
+								Close
+									An instance event that is fired when the user clicks the =close= button.
+
+									NOTES
+									- the handler for this event can abort the closing of the dialog by setting the =abort= property of the event object to =true=
+						*/
+					_addChildButton (m,'qualifiedOk',function () {_dismiss (m,'Qualified Ok')});
+						/*?
+							Child Widgets
+								qualifiedOk
+									A button instance, that lets the user submit the dialog with a qualification.
+
+									The =qualifiedOk= button is like a second =ok= button (kind of like an "ok, but with this one condition..." action). Having a second ok-like button is useful in a few cases, bust most dialogs will not provide markup for this button. When this button is clicked, the =Qualified Ok= event is fired on the dialog instance.
+
+							Instance Events
+								Qualified Ok
+									An instance event that is fired when the user clicks the =qualifiedOk= button.
+
+									NOTES
+									- the handler for this event can abort the closing of the dialog by setting the =abort= property of the event object to =true=
+						*/
+					_addChildButton (m,'ok',function () {_dismiss (m,'Ok')});
+						/*?
+							Child Widgets
+								ok
+									A button instance, that lets the user submit the dialog.
+
+									When this button is clicked, the =Ok= event is fired on the dialog instance. The text for this button can be controlled via the =okText= and =defaultOkText= state properties.
+
+							Instance Events
+								Ok
+									An instance event that is fired when the user clicks the =ok= button.
+
+									NOTES
+									- the handler for this event can abort the closing of the dialog by setting the =abort= property of the event object to =true=
+						*/
+					_addChildButton (m,'cancel',function () {_dismiss (m,'Cancel')});
+						/*?
+							Child Widgets
+								cancel
+									A button instance, that lets the user cancel (and close) the dialog.
+
+									When this button is clicked, the =Cancel= event is fired on the dialog instance. The text for this button can be controlled via the =cancelText= and =defaultCancelText= state properties.
+
+							Instance Events
+								Cancel
+									An instance event that is fired when the user clicks the =cancel= button.
+
+									NOTES
+									- the handler for this event can abort the closing of the dialog by setting the =abort= property of the event object to =true=
+						*/
+
+				/*** initialization ***/
+					_syncOkAndCancelText.call (m);
+					m.atEndOfOmegaStructor ();
+			},
+
+			instanceMethods:{
+				/*** Hook Methods for Uize.Widget.Dialog.xResizable ***/
+					atEndOfOmegaStructor:Uize.nop,
+					afterWireUi:Uize.nop,
+
+				responsiveUpdateUiPositionAndDimensions:function () {
+					var
+						m = this,
+						_rootNode = m.getNode(),
+						_nodeToSetDimension = m.getNode(m._nodeToSetDimension)
+					;
+
+					// first clean out any max width/height from previous update
+					m.setNodeStyle(
+						_nodeToSetDimension,
+						{
+							maxWidth:'',
+							maxHeight:''
 						}
-					}
-				}
-			};
-
-			_classPrototype.updateUiDimsIfShown = function () {
-				var m = this;
-				m.isWired && m._shown && !m._inDrag &&
-					m.setNodeStyle (m.getNode(m._nodeToSetDimension),{width:m._width,height:m._height})
-				;
-			};
-
-			_classPrototype.updateUi = function () {
-				var m = this;
-
-				if (m.isWired) {
-					m._updateUiTitle ();
-
-					_superclass.doMy (m,'updateUi');
-				}
-			};
-
-			_classPrototype.wireUi = function () {
-				var m = this;
-				if (!m.isWired) {
-					m.wireNode (window,'resize',function () {m.updateUiPositionIfShown ()});
-					m._drag.set ({node:m.getNode ('title')});
-
-					m.wireNode(
-						'shield',
-						'click',
-						function () { m._dismissOnShieldClick && m._dismiss ('Close') }
 					);
 
-					/*** fetch values for defaultTitle, defaultOkText, and defaultCancelText from markup ***/
-						var _initializeDefaultProperty = function (_defaultPropertyName,_widget,_impliedNodeName) {
-							if (!m.get (_defaultPropertyName)) {
-								var _innerHtml = (_widget.getNode (_impliedNodeName) || _sacredEmptyObject).innerHTML;
-								_innerHtml && m.set (_defaultPropertyName,_innerHtml);
+					// next determine if the dialog is too big
+					var
+						_windowCoords = _Uize_Node.getCoords(window),
+						_rootNodeDims = _Uize_Node.getDimensions(_rootNode),
+						_nodeToSetIsRoot = _nodeToSetDimension == _rootNode,
+						_nodeToSetDims = _nodeToSetIsRoot ? _rootNodeDims : _Uize_Node.getDimensions(_nodeToSetDimension)
+					;
+
+					// set max width/height such that the root node will be 100% in either dimension
+					m.setNodeStyle(
+						_nodeToSetDimension,
+						{
+							maxWidth:_rootNodeDims.width > _windowCoords.width ? _windowCoords.width - (_rootNodeDims.width - _nodeToSetDims.width) : '',
+							maxHeight:_rootNodeDims.height > _windowCoords.height ? _windowCoords.height - (_rootNodeDims.height - _nodeToSetDims.height) : ''
+						}
+					);
+
+					// update the root node dims object if we set max width/height above
+					if (_rootNodeDims.width > _windowCoords.width || _rootNodeDims.height > _windowCoords.height)
+						_rootNodeDims = _Uize_Node.getDimensions(_rootNode);
+
+					// lastly center position if small enough or 0,0 if too big
+					var
+						_leftCentered = _windowCoords.x + ((_windowCoords.width - _rootNodeDims.width) >> 1),
+						_topCentered = _windowCoords.y + ((_windowCoords.height - _rootNodeDims.height) >> 1)
+					;
+
+					m.setNodeStyle(
+						_rootNode,
+						{
+							left: _leftCentered > 0 ? _leftCentered : 0,
+							top: _topCentered > 0 ? _topCentered : 0
+						}
+					);
+				},
+
+				updateUiPositionIfShown:function () {
+					var m = this;
+					if (m.isWired && m._shown && !m._inDrag) {
+						_Uize_Widget_Drag.resizeShield (m.getNode ('shield'));
+						/*?
+							Implied Nodes
+								Root Node
+									A node that is the root for all of the dialog's HTML, excluding the =shield= implied node.
+
+									When a dialog is shown, its =Root Node= and =shield= implied nodes are displayed. Conversely, when a dialog is hidden, both its =Root Node= and =shield= implied nodes are hidden. When a dialog is dragged to a new position by the user, or if its position is programmatically changed, then the =Root Node= is repositioned through CSS. If the dialog is resized by the user, or if it is resized programmatically by setting values for its =width= and =height= state properties, the dimensions of the =Root Node= are modified through CSS. All chrome for the dialog should therefore be "pinned" to the =Root Node=, so that when the dialog is moved and resized, the chrome goes along for the ride.
+
+								shield
+									A node that will be sized to fill the entire browser view port, in order to block events to the page behind the dialog.
+
+									When the dialog is shown, the =shield= implied node is shown along with the =Root Node=. The shield can be set to hide when the user drag or resizes the dialog by setting the =hideShieldOnDrag= state property to =true=. When the dialog is shown, the shield can be hidden by setting the =shieldShown= state property to =false=. Even though the shield won't be visible, it will still block events to the page behind the dialog.
+
+									NOTES
+									- see also the =currentShieldOpacity=, =hideShieldOnDrag=, =shieldOpacity=, and =shieldShown= state properties
+									- see also the =shieldFade= instance property
+						*/
+						if (m._autoPosition) {
+							var
+								_rootNode = m.getNode (),
+								_mooringNode = _Uize_Node.getById (m._mooringNode),
+								_offsetX = m._offsetX,
+								_offsetY = m._offsetY
+							;
+							if (!_mooringNode || _offsetX == _undefined || _offsetY == _undefined) {
+								m.responsiveUpdateUiPositionAndDimensions();
+								//_Uize_Node.centerInWindow(_rootNode);
 							}
-						};
-						_initializeDefaultProperty ('defaultTitle',m,'title');
-						_initializeDefaultProperty ('defaultOkText',m.children.ok,'text');
-						_initializeDefaultProperty ('defaultCancelText',m.children.cancel,'text');
+							if (_mooringNode) {
+								if (_offsetX == 'adjacent' || _offsetY == 'adjacent') {
+									_Uize_Node.setAbsPosAdjacentTo (_rootNode, _mooringNode);
+								}
+								else {
+									var _mooringCoords = _Uize_Node.getCoords (_mooringNode);
+									_Uize_Node.setStyle (
+										_rootNode,
+										Uize.copy (
+											_offsetX != _undefined ? {left:_mooringCoords.left + _offsetX} : _undefined,
+											_offsetY != _undefined ? {top:_mooringCoords.top + _offsetY} : _undefined
+										)
+									);
+								}
+							}
+						}
+					}
+				},
 
-					_superclass.doMy (m,'wireUi');
+				updateUiDimsIfShown:function () {
+					var m = this;
+					m.isWired && m._shown && !m._inDrag &&
+						m.setNodeStyle (m.getNode(m._nodeToSetDimension),{width:m._width,height:m._height})
+					;
+				},
 
-					m.afterWireUi ();
+				updateUi:function () {
+					var m = this;
+
+					if (m.isWired) {
+						_updateUiTitle.call (m);
+
+						_superclass.doMy (m,'updateUi');
+					}
+				},
+
+				wireUi:function () {
+					var m = this;
+					if (!m.isWired) {
+						m.wireNode (window,'resize',function () {m.updateUiPositionIfShown ()});
+						m._drag.set ({node:m.getNode ('title')});
+
+						m.wireNode(
+							'shield',
+							'click',
+							function () { m._dismissOnShieldClick && _dismiss (m,'Close') }
+						);
+
+						/*** fetch values for defaultTitle, defaultOkText, and defaultCancelText from markup ***/
+							var _initializeDefaultProperty = function (_defaultPropertyName,_widget,_impliedNodeName) {
+								if (!m.get (_defaultPropertyName)) {
+									var _innerHtml = (_widget.getNode (_impliedNodeName) || _sacredEmptyObject).innerHTML;
+									_innerHtml && m.set (_defaultPropertyName,_innerHtml);
+								}
+							};
+							_initializeDefaultProperty ('defaultTitle',m,'title');
+							_initializeDefaultProperty ('defaultOkText',m.children.ok,'text');
+							_initializeDefaultProperty ('defaultCancelText',m.children.cancel,'text');
+
+						_superclass.doMy (m,'wireUi');
+
+						m.afterWireUi ();
+					}
 				}
-			};
+			},
 
-		/*** State Properties ***/
-			var
-				_updateUiDimsIfShown = 'updateUiDimsIfShown',
-				_updateUiPositionIfShown = 'updateUiPositionIfShown'
-			;
-			_class.stateProperties ({
+			stateProperties:{
 				_autoPosition:{
 					name:'autoPosition',
 					value:_true,
@@ -478,7 +465,10 @@ Uize.module ({
 				},
 				_currentShieldOpacity:{
 					name:'currentShieldOpacity',
-					onChange:_classPrototype._updateUiShieldOpacity
+					onChange:function () {
+						var m = this;
+						m.isWired && m._shown && m.setNodeOpacity ('shield',m._currentShieldOpacity);
+					}
 					/*?
 						State Properties
 							currentShieldOpacity
@@ -524,7 +514,7 @@ Uize.module ({
 				},
 				_defaultTitle:{
 					name:'defaultTitle',
-					onChange:_classPrototype._updateUiTitle
+					onChange:_updateUiTitle
 					/*?
 						State Properties
 							defaultTitle
@@ -625,9 +615,9 @@ Uize.module ({
 						State Properties
 							nodeToSetDimension
 								A node reference or node ID for a node to which the =height= and =width= should be set.
-			
+
 								The default value is the root node. Setting this property is useful when the main content of the dialog is in a child node.
-			
+
 								NOTES
 								- see the companion =height= set-get property
 								- see the companion =width= set-get property
@@ -840,7 +830,7 @@ Uize.module ({
 				},
 				_title:{
 					name:'title',
-					onChange:_classPrototype._updateUiTitle
+					onChange:_updateUiTitle
 					/*?
 						State Properties
 							title
@@ -871,13 +861,12 @@ Uize.module ({
 								- the initial value is =undefined=
 					*/
 				}
-			});
+			},
 
-		_class.staticProperties ({
-			buttonWidgetClass:Uize.Widget.Button
+			staticProperties:{
+				buttonWidgetClass:Uize.Widget.Button
+			}
 		});
-
-		return _class;
 	}
 });
 

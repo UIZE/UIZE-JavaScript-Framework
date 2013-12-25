@@ -29,59 +29,51 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		/*** Class Constructor ***/
-			var
-				_class = _superclass.subclass (
-					null,
-					function () {
-						var m = this;
-
-						/*** add the options widget ***/
-							var _options = m.addChild ('options',Uize.Widget.Options);
-
-							/*** keep options widget synchronized to slideshow ***/
-								m.wire ({
-									'Changed.slideNo':function (_event) {m.children.options.set ({value:_event.newValue})},
-									'Changed.totalSlides':function () {m._updateOptionsValueAndValues ()}
-								});
-
-							/*** keep slideshow synchronized to options widget ***/
-								_options.wire (
-									'Changed.value',
-									function (_event) {
-										var _newSlideNo = _event.newValue;
-										if (_newSlideNo != m.get ('slideNo')) {
-											m.stopThenResume ();
-											m.set ({slideNo:_newSlideNo});
-										}
-									}
-								);
-
-						/* HACK!!! */
-							m.wire ('Changed.slideNo',function () {m.wipeDone ()});
-
-						/*** initialization ***/
-							m._updateOptionsValueAndValues ();
-							m.set ({slideNo:m._startSlideNo}); // HACK
-					}
-				),
-				_classPrototype = _class.prototype
-			;
-
 		/*** Private Instance Methods ***/
-			_classPrototype._updateOptionsValueAndValues = function () {
-				this.children.options.set ({
-					value:this.get ('slideNo'),
-					values:Uize.map (this.get ('totalSlides'),'key')
+			function _updateOptionsValueAndValues (m) {
+				m.children.options.set ({
+					value:m.get ('slideNo'),
+					values:Uize.map (m.get ('totalSlides'),'key')
 				});
-			};
+			}
 
-		/*** State Properties ***/
-			_class.stateProperties ({
+		return _superclass.subclass ({
+			omegastructor:function () {
+				var m = this;
+
+				/*** add the options widget ***/
+					var _options = m.addChild ('options',Uize.Widget.Options);
+
+					/*** keep options widget synchronized to slideshow ***/
+						m.wire ({
+							'Changed.slideNo':function (_event) {m.children.options.set ({value:_event.newValue})},
+							'Changed.totalSlides':function () {_updateOptionsValueAndValues (m)}
+						});
+
+					/*** keep slideshow synchronized to options widget ***/
+						_options.wire (
+							'Changed.value',
+							function (_event) {
+								var _newSlideNo = _event.newValue;
+								if (_newSlideNo != m.get ('slideNo')) {
+									m.stopThenResume ();
+									m.set ({slideNo:_newSlideNo});
+								}
+							}
+						);
+
+				/* HACK!!! */
+					m.wire ('Changed.slideNo',function () {m.wipeDone ()});
+
+				/*** initialization ***/
+					_updateOptionsValueAndValues (m);
+					m.set ({slideNo:m._startSlideNo}); // HACK
+			},
+
+			stateProperties:{
 				_startSlideNo:'startSlideNo' // HACK
-			});
-
-		return _class;
+			}
+		});
 	}
 });
 

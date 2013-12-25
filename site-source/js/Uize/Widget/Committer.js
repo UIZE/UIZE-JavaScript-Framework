@@ -121,7 +121,7 @@ Uize.module ({
 
 				function _boundUpdateSummaryStateProperties() { _updateSummaryStateProperties(m) }
 
-				// any events that get wired here need to be unwired in _classPrototype.removeWatchedProperties.
+				// any events that get wired here need to be unwired in the removeWatchedProperties instance method
 				_watchedPropertyInstance.wire (
 					'Changed.' + _watchedPropertyName,
 					function () {

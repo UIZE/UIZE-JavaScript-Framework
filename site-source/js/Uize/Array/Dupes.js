@@ -38,87 +38,86 @@ Uize.module ({
 	builder:function () {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var
+		var
+			/*** Variables for Scruncher Optimization ***/
 				_true = true,
 				_false = false,
 				_undefined,
-				_Uize = Uize
-			;
+				_Uize = Uize,
+
+			/*** General Variables ***/
+				_objectTaggerValue = {}
+		;
 
 		/*** Utility Objects ***/
-			var _ValueIndexer = (
-				function () {
-					var
-						_objectTaggerValue = {},
-						_class = function (_canonicalizer) {
-							this._canonicalizer = _canonicalizer;
-							this._valuesLookup = _Uize.lookup (_undefined,1,_true);
-						},
-						_classPrototype = _class.prototype
-					;
-
-					_classPrototype.isIn = function (_value,_addToIfNot) {
-						var
-							m = this,
-							_canonicalizer = m._canonicalizer,
-							_canonicalizedValue = _canonicalizer ? _canonicalizer (_value) : _value,
-							_wasIn = _false
-						;
-						if (
-							_Uize.isPrimitive (_canonicalizedValue) ||
-							!(_Uize.isObject (_canonicalizedValue) || _Uize.isFunction (_canonicalizedValue))
-						) {
+			var _ValueIndexer = Uize.mergeInto (
+				function (_canonicalizer) {
+					this._canonicalizer = _canonicalizer;
+					this._valuesLookup = _Uize.lookup (_undefined,1,_true);
+				},
+				{
+					prototype:{
+						isIn:function (_value,_addToIfNot) {
 							var
-								_typeofCanonicalizedValue = typeof _canonicalizedValue,
-								_valuesLookup = m._valuesLookup
+								m = this,
+								_canonicalizer = m._canonicalizer,
+								_canonicalizedValue = _canonicalizer ? _canonicalizer (_value) : _value,
+								_wasIn = _false
 							;
 							if (
-								(_valuesLookup [_canonicalizedValue] || (_valuesLookup [_canonicalizedValue] = {})) [
-									_typeofCanonicalizedValue
-								]
+								_Uize.isPrimitive (_canonicalizedValue) ||
+								!(_Uize.isObject (_canonicalizedValue) || _Uize.isFunction (_canonicalizedValue))
 							) {
-								_wasIn = _true;
-							} else if (_addToIfNot) {
-								_valuesLookup [_canonicalizedValue] [_typeofCanonicalizedValue] = _true;
-							}
-						} else {
-							if (_canonicalizedValue.tagged == _objectTaggerValue) {
-								_wasIn = _true;
-							} else if (_addToIfNot) {
-								(m._taggedObjects || (m._taggedObjects = [])).push ({
-									_object:_canonicalizedValue,
-									_hadTaggedProperty:_canonicalizedValue.hasOwnProperty ('tagged'),
-									_taggedPropertyOldValue:_canonicalizedValue.tagged
-								});
-								_canonicalizedValue.tagged = _objectTaggerValue;
-							}
-						}
-						return _wasIn;
-					};
-
-					_classPrototype.addTo = function (_value) {
-						return !this.isIn (_value,_true);
-					};
-
-					_classPrototype.cleanUp = function () {
-						var _taggedObjects = this._taggedObjects;
-						if (_taggedObjects) {
-							for (
-								var _taggedObjectNo = _taggedObjects.length, _taggedObject, _object;
-								--_taggedObjectNo >= 0;
-							) {
-								_object = (_taggedObject = _taggedObjects [_taggedObjectNo])._object;
-								_taggedObject._hadTaggedProperty
-									? (_object.tagged = _taggedObject._taggedPropertyOldValue)
-									: delete _object.tagged
+								var
+									_typeofCanonicalizedValue = typeof _canonicalizedValue,
+									_valuesLookup = m._valuesLookup
 								;
+								if (
+									(_valuesLookup [_canonicalizedValue] || (_valuesLookup [_canonicalizedValue] = {})) [
+										_typeofCanonicalizedValue
+									]
+								) {
+									_wasIn = _true;
+								} else if (_addToIfNot) {
+									_valuesLookup [_canonicalizedValue] [_typeofCanonicalizedValue] = _true;
+								}
+							} else {
+								if (_canonicalizedValue.tagged == _objectTaggerValue) {
+									_wasIn = _true;
+								} else if (_addToIfNot) {
+									(m._taggedObjects || (m._taggedObjects = [])).push ({
+										_object:_canonicalizedValue,
+										_hadTaggedProperty:_canonicalizedValue.hasOwnProperty ('tagged'),
+										_taggedPropertyOldValue:_canonicalizedValue.tagged
+									});
+									_canonicalizedValue.tagged = _objectTaggerValue;
+								}
+							}
+							return _wasIn;
+						},
+
+						addTo:function (_value) {
+							return !this.isIn (_value,_true);
+						},
+
+						cleanUp:function () {
+							var _taggedObjects = this._taggedObjects;
+							if (_taggedObjects) {
+								for (
+									var _taggedObjectNo = _taggedObjects.length, _taggedObject, _object;
+									--_taggedObjectNo >= 0;
+								) {
+									_object = (_taggedObject = _taggedObjects [_taggedObjectNo])._object;
+									_taggedObject._hadTaggedProperty
+										? (_object.tagged = _taggedObject._taggedPropertyOldValue)
+										: delete _object.tagged
+									;
+								}
 							}
 						}
-					};
-
-					return _class;
-				}) ();
+					}
+				}
+			);
 
 			function _removeOrRetainValues (_source,_valuesToRemove,_canonicalizer,_target,_retain) {
 				var _valueIndexer = new _ValueIndexer (_canonicalizer);
