@@ -189,7 +189,7 @@ Uize.module ({
 				_isExpanded:{
 					name:'isExpanded',
 					value:false,
-					onChange:_classPrototype.updateUi
+					onChange:'updateUi'
 				}
 			}
 		});
