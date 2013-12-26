@@ -40,10 +40,10 @@ Uize.module ({
 				_false = false,
 				_null = null,
 				_undefined,
-				
 				_Uize = Uize,
 				_Uize_Node = _Uize.Node,
 				_Uize_Node_Event = _Uize_Node.Event,
+				_checkWarningShown = 'checkWarningShown',
 
 				/*** validation/warning variables ***/
 					_never = 'never',
@@ -54,38 +54,12 @@ Uize.module ({
 					_validatedAfterFirstFinish = 'validatedAfterFirstFinish'
 			;
 
-		/*** Class Constructor ***/
-			var
-				_class = _superclass.subclass (
-					_null,
-					function () {
-						var
-							m = this,
-							_warningWidget = m._warningWidget = m.addChild(
-								'warning',
-								m._warningWidgetClass || _Uize.Widget.FormElementWarning
-							),
-							_updateUiState = function () {m._updateUiState()}
-						;
-
-						m.wire ({
-							'Changed.busyInherited':_updateUiState,
-							'Changed.enabledInherited':_updateUiState
-						});
-
-						m._isInitialized = _true;
-						m._lastKeyDown = -1;
-					}
-				),
-				_classPrototype = _class.prototype
-			;
-
 		/*** Private Instance Methods ***/
-			_classPrototype._getInputNode = function () { return this.getNode('input') };
+			function _getInputNode (m) { return m.getNode('input') }
 
-			_classPrototype._getParentForm = function () {
+			function _getParentForm (m) {
 				var
-					_parentElementsWidget = this.parent,
+					_parentElementsWidget = m.parent,
 					_parentForm
 				;
 				if (_parentElementsWidget && _parentElementsWidget.parent) {
@@ -95,30 +69,28 @@ Uize.module ({
 						_parentForm = _null;
 				}
 				return _parentForm;
-			};
+			}
 
-			_classPrototype._updateUiState = function () {
-				var m = this;
+			function _updateUiState (m) {
 				if (m.isWired) {
 					var _enabled = m.get ('enabledInherited') && !m.get ('busyInherited');
-					m.setNodeProperties (m._getInputNode(), {disabled:!_enabled});
+					m.setNodeProperties (_getInputNode(m), {disabled:!_enabled});
 				}
-			};
+			}
 
-			_classPrototype._updateUiValue = function () {
-				var m = this;
+			function _updateUiValue (m) {
 				if (m.isWired) {
 					var
-						_inputNode = m._getInputNode(),
+						_inputNode = _getInputNode(m),
 						_value = m._value
 					;
 					_value != m.getNodeValue (_inputNode)
 						&& m.setNodeValue (_inputNode, _value === _undefined ? '' : _value)
 					;
 				}
-			};
+			}
 
-			_classPrototype._updateUiWarning = function () {
+			function _updateUiWarning () {
 				var
 					m = this,
 					_warningShown = m._warningShown,
@@ -137,258 +109,276 @@ Uize.module ({
 
 					// visual indicators of warning state
 					_Uize_Node.Classes.setState(
-						[m._getInputNode(),m.getNode('label'),m.getNode ('shell')],
+						[_getInputNode(m),m.getNode('label'),m.getNode ('shell')],
 						m._errorClassName,
 						_warningShown
 					);
 				}
-			};
+			}
 
-		/*** Public Methods ***/
-			// NOTE: can be overidden by subclasses
-			_classPrototype.fireOkOnEnter = _Uize.returnTrue;
-
-			_classPrototype.checkIsEmpty = function () { return this._value == _null || this._value === '' };
-
-			_classPrototype.checkWarningShown = _classPrototype._checkWarningShown = function () {
+		return _superclass.subclass ({
+			omegastructor:function () {
 				var
 					m = this,
-					_warningShownWhen = m._warningShownWhen,
-					_parentForm = m._getParentForm(),
-					_currentWarningShown = m._warningShown
+					_warningWidget = m._warningWidget = m.addChild(
+						'warning',
+						m._warningWidgetClass || _Uize.Widget.FormElementWarning
+					),
+					_boundUpdateUiState = function () {_updateUiState(m)}
 				;
 
-				m.set({
-					_warningShown:m._warningAllowedInherited
-						&& m._isValid == _false
-						&& (
-							_parentForm
-								? _parentForm.get('warningShown')
-								: (
-									m._isDirtyInherited
-										&& (
-											_warningShownWhen == _validated
-											// keep the current warningShown value if warningShowWhen is set to a value
-											// but that's not the current state
-											|| (_warningShownWhen == _finished && (m._isFinished || _currentWarningShown))
-											|| (_warningShownWhen == _validatedAfterFirstFinish && (m._finishedAtLeastOnce || _currentWarningShown))
-										)
-								)
-						)
+				m.wire ({
+					'Changed.busyInherited':_boundUpdateUiState,
+					'Changed.enabledInherited':_boundUpdateUiState
 				});
-			};
 
-			// To be overridden as necessary by subclasses (should return an array)
-			_classPrototype.getMoreValidators = _undefined;
+				m._isInitialized = _true;
+				m._lastKeyDown = -1;
+			},
 
-			_classPrototype.getRootNode = function () { return this.getNode() || this.getNode('input') };
+			instanceMethods:{
+				fireOkOnEnter:_Uize.returnTrue, // NOTE: can be overidden by subclasses
 
-			_classPrototype.restore = function () {
-				this.set({
-					_finishedAtLeastOnce:_false,
-					_isDirty:'inherit',
-					_value:this._initialValue
-				});
-			};
+				checkIsEmpty:function () { return this._value == _null || this._value === '' },
 
-			_classPrototype.updateUi = function () {
-				var m = this;
-
-				if (m.isWired) {
-					m._updateUiState();
-					m._updateUiValue();
-					m._updateUiWarning();
-
-					_superclass.doMy (m,'updateUi');
-				}
-			};
-			
-			_classPrototype.valueConformer = function(_value) {
-				return _Uize.isFunction (this._valueConformer) ? this._valueConformer(_value) : _value;
-			};
-
-			_classPrototype.validate = _classPrototype._validate = function () {
-				var m = this;
-
-				if (m._isInitialized) {
+				checkWarningShown:function () {
 					var
-						_validator = m._validator,
-						_validators =
-							(
-								_Uize.isArray(_validator)
-									? _validator
-									: (_validator != _null ? [_validator] : _null)
-							),
-						_moreValidators = m.getMoreValidators ? m.getMoreValidators() : _null
+						m = this,
+						_warningShownWhen = m._warningShownWhen,
+						_parentForm = _getParentForm(m),
+						_currentWarningShown = m._warningShown
 					;
 
-					if (_moreValidators)
-						_validators = _validators ? _validators.concat(_moreValidators) : _moreValidators
-					;
-
-					var _setIsValid = function (_isValid) { m.set({_isValid:_isValid}) };
-
-					if (_validators != _null) {
-						var
-							_value = m._validateWhen == _tentativeValueChanged
-								? m._tentativeValue : m._value,
-							_validatorsLength = _validators.length,
-							_validatorNo = -1,
-							_processNextValidator = function () {
-								if (++_validatorNo < _validatorsLength) {
-									var
-										_handleIsValid = function (_isValid, _newWarningMessage) {
-											if (_isValid == _false) {
-												m.set({_warningMessage:_newWarningMessage || m._initialWarningMessage});
-												_setIsValid(_false);
-											}
-											else _processNextValidator();
-										},
-										_validatorToEvaluate = _validators[_validatorNo],
-										_validatorFunction = _validatorToEvaluate.func || (_Uize.isFunction (_validatorToEvaluate) ? _validatorToEvaluate : _null),
-										_isValid = _validatorFunction
-											? _validatorFunction.call(m, _value, _handleIsValid)
-											: (
-												_validatorToEvaluate instanceof RegExp
-													? _validatorToEvaluate.test (_value)
-													: _value == _validatorToEvaluate
+					m.set({
+						_warningShown:m._warningAllowedInherited
+							&& m._isValid == _false
+							&& (
+								_parentForm
+									? _parentForm.get('warningShown')
+									: (
+										m._isDirtyInherited
+											&& (
+												_warningShownWhen == _validated
+												// keep the current warningShown value if warningShowWhen is set to a value
+												// but that's not the current state
+												|| (_warningShownWhen == _finished && (m._isFinished || _currentWarningShown))
+												|| (_warningShownWhen == _validatedAfterFirstFinish && (m._finishedAtLeastOnce || _currentWarningShown))
 											)
-									;
-
-									if (_isValid != _null)	// sign that the validation is asynchronous
-										_handleIsValid(_isValid, _validatorToEvaluate.msg);
-								}
-								else _setIsValid(_true);
-							}
-						;
-
-						_processNextValidator();
-					}
-					else _setIsValid(_true);
-				}
-			};
-
-			_classPrototype.wireUi = function () {
-				var m = this;
-
-				if (!m.isWired) {
-					var _inputNode = m._getInputNode();
-
-					if (_inputNode) {
-						/*** Set up the read-only state properties (attributes of the node) ***/
-							m._type = _inputNode.type;
-							m._elementName = _inputNode.name;
-
-						var
-							_fire = function (_eventName, _domEvent) { m.fire ({name:_eventName,domEvent:_domEvent}) },
-							_fireClick = function (_event) { _fire ('Click', _event) },
-							_fireKeyUp = function (_event) { _fire ('Key Up', _event) },
-							_setValue = function (_isInitial) {
-								m.set ({_value:m.getNodeValue(_inputNode)});
-								!_isInitial && m._isDirty != _true &&
-									m.set({_isDirty:_true});
-							},
-							_eventsToWire = {
-								blur:function () {
-									_setValue();
-									m.set({_focused:_false});
-								},
-								focus:function () { m.set({_focused:_true}) },
-								click:function (_event) {
-									_setValue();
-									_fireClick (_event);
-								},
-								keydown:function (_event) {
-									m._lastKeyDown = _event.keyCode;
-									_fire ('Key Down', _event);
-
-									_Uize_Node_Event.isKeyEnter(_event)
-										&& m._type != 'textarea'
-										&& _Uize_Node_Event.abort(_event)
-									;
-								}
-							}
-						;
-
-						// Build up events to wire
-						switch (m._type) {
-							case 'checkbox':
-								break;
-
-							case 'radio':	// operates on a group of like-named radio buttons, but one has to have the implied node id
-								m.set ({
-									nodeMap:_Uize.copyInto(
-										m.get('nodeMap') || {},
-										{
-											input:_Uize_Node.find({
-												tagName:'INPUT',
-												type:'radio',
-												name:m._elementName
-											})
-										}
 									)
-								});
-								_inputNode = m._getInputNode();
-								break;
+							)
+					});
+				},
 
-							case 'select-one':
-							case 'select-multiple':
-								_eventsToWire.change = _setValue;
-								_eventsToWire.keyup = function (_event) {
-									_setValue ();
-									_fireKeyUp (_event);
-								};
-								_eventsToWire.click = _fireClick;
-								break;
+				getMoreValidators:_undefined, // To be overridden as necessary by subclasses (should return an array)
 
-							default: // text, password, HTML5 text input, textarea, etc...
-								_eventsToWire.keyup = function (_event) {
-									// NOTE: When inputting Kanji, it's standard to use the enter button to choose kanji characters.
-									// So everytime a user wants to type a multi-kanji word, 'Ok' would fire (which could ultimately
-									// cause a form submission, which would be bad). So now the check to see if we should fire 'Ok'
-									// checks to see if both keydown AND keyup are ENTER (since when you type kanji, you keydown on
-									// a non-enter key, do stuff, then keyup to continue).
-									if (m._type != 'textarea' && m._lastKeyDown == _event.keyCode && _Uize_Node_Event.isKeyEnter (_event)) {
-										_setValue ();
-										m.fireOkOnEnter()
-											&& _fire ('Ok', _event)
+				getRootNode:function () { return this.getNode() || this.getNode('input') },
+
+				restore:function () {
+					this.set({
+						_finishedAtLeastOnce:_false,
+						_isDirty:'inherit',
+						_value:this._initialValue
+					});
+				},
+
+				updateUi:function () {
+					var m = this;
+
+					if (m.isWired) {
+						_updateUiState(m);
+						_updateUiValue(m);
+						_updateUiWarning.call(m);
+
+						_superclass.doMy (m,'updateUi');
+					}
+				},
+
+				valueConformer:function (_value) {
+					return _Uize.isFunction (this._valueConformer) ? this._valueConformer(_value) : _value;
+				},
+
+				validate:function () {
+					var m = this;
+
+					if (m._isInitialized) {
+						var
+							_validator = m._validator,
+							_validators =
+								(
+									_Uize.isArray(_validator)
+										? _validator
+										: (_validator != _null ? [_validator] : _null)
+								),
+							_moreValidators = m.getMoreValidators ? m.getMoreValidators() : _null
+						;
+
+						if (_moreValidators)
+							_validators = _validators ? _validators.concat(_moreValidators) : _moreValidators
+						;
+
+						var _setIsValid = function (_isValid) { m.set({_isValid:_isValid}) };
+
+						if (_validators != _null) {
+							var
+								_value = m._validateWhen == _tentativeValueChanged
+									? m._tentativeValue : m._value,
+								_validatorsLength = _validators.length,
+								_validatorNo = -1,
+								_processNextValidator = function () {
+									if (++_validatorNo < _validatorsLength) {
+										var
+											_handleIsValid = function (_isValid, _newWarningMessage) {
+												if (_isValid == _false) {
+													m.set({_warningMessage:_newWarningMessage || m._initialWarningMessage});
+													_setIsValid(_false);
+												}
+												else _processNextValidator();
+											},
+											_validatorToEvaluate = _validators[_validatorNo],
+											_validatorFunction = _validatorToEvaluate.func || (_Uize.isFunction (_validatorToEvaluate) ? _validatorToEvaluate : _null),
+											_isValid = _validatorFunction
+												? _validatorFunction.call(m, _value, _handleIsValid)
+												: (
+													_validatorToEvaluate instanceof RegExp
+														? _validatorToEvaluate.test (_value)
+														: _value == _validatorToEvaluate
+												)
+										;
+
+										if (_isValid != _null)	// sign that the validation is asynchronous
+											_handleIsValid(_isValid, _validatorToEvaluate.msg);
+									}
+									else _setIsValid(_true);
+								}
+							;
+
+							_processNextValidator();
+						}
+						else _setIsValid(_true);
+					}
+				},
+
+				wireUi:function () {
+					var m = this;
+
+					if (!m.isWired) {
+						var _inputNode = _getInputNode(m);
+
+						if (_inputNode) {
+							/*** Set up the read-only state properties (attributes of the node) ***/
+								m._type = _inputNode.type;
+								m._elementName = _inputNode.name;
+
+							var
+								_fire = function (_eventName, _domEvent) { m.fire ({name:_eventName,domEvent:_domEvent}) },
+								_fireClick = function (_event) { _fire ('Click', _event) },
+								_fireKeyUp = function (_event) { _fire ('Key Up', _event) },
+								_setValue = function (_isInitial) {
+									m.set ({_value:m.getNodeValue(_inputNode)});
+									!_isInitial && m._isDirty != _true &&
+										m.set({_isDirty:_true});
+								},
+								_eventsToWire = {
+									blur:function () {
+										_setValue();
+										m.set({_focused:_false});
+									},
+									focus:function () { m.set({_focused:_true}) },
+									click:function (_event) {
+										_setValue();
+										_fireClick (_event);
+									},
+									keydown:function (_event) {
+										m._lastKeyDown = _event.keyCode;
+										_fire ('Key Down', _event);
+
+										_Uize_Node_Event.isKeyEnter(_event)
+											&& m._type != 'textarea'
+											&& _Uize_Node_Event.abort(_event)
 										;
 									}
-									else if (_Uize_Node_Event.isKeyEscape (_event)) {
-										m._updateUiValue();		// replace with old (saved) value
-										_fire ('Cancel', _event);
-										_inputNode.blur();
-									}
-									else {
-										m.set({
-											_tentativeValue:m.getNodeValue(_inputNode),
-											_isFinished:_false
-										});
-									}
+								}
+							;
 
-									_fireKeyUp (_event);
-								};
-								_eventsToWire.click = _fireClick;
-								break;
+							// Build up events to wire
+							switch (m._type) {
+								case 'checkbox':
+									break;
+
+								case 'radio':	// operates on a group of like-named radio buttons, but one has to have the implied node id
+									m.set ({
+										nodeMap:_Uize.copyInto(
+											m.get('nodeMap') || {},
+											{
+												input:_Uize_Node.find({
+													tagName:'INPUT',
+													type:'radio',
+													name:m._elementName
+												})
+											}
+										)
+									});
+									_inputNode = _getInputNode(m);
+									break;
+
+								case 'select-one':
+								case 'select-multiple':
+									_eventsToWire.change = _setValue;
+									_eventsToWire.keyup = function (_event) {
+										_setValue ();
+										_fireKeyUp (_event);
+									};
+									_eventsToWire.click = _fireClick;
+									break;
+
+								default: // text, password, HTML5 text input, textarea, etc...
+									_eventsToWire.keyup = function (_event) {
+										// NOTE: When inputting Kanji, it's standard to use the enter button to choose kanji characters.
+										// So everytime a user wants to type a multi-kanji word, 'Ok' would fire (which could ultimately
+										// cause a form submission, which would be bad). So now the check to see if we should fire 'Ok'
+										// checks to see if both keydown AND keyup are ENTER (since when you type kanji, you keydown on
+										// a non-enter key, do stuff, then keyup to continue).
+										if (m._type != 'textarea' && m._lastKeyDown == _event.keyCode && _Uize_Node_Event.isKeyEnter (_event)) {
+											_setValue ();
+											m.fireOkOnEnter()
+												&& _fire ('Ok', _event)
+											;
+										}
+										else if (_Uize_Node_Event.isKeyEscape (_event)) {
+											_updateUiValue(m);		// replace with old (saved) value
+											_fire ('Cancel', _event);
+											_inputNode.blur();
+										}
+										else {
+											m.set({
+												_tentativeValue:m.getNodeValue(_inputNode),
+												_isFinished:_false
+											});
+										}
+
+										_fireKeyUp (_event);
+									};
+									_eventsToWire.click = _fireClick;
+									break;
+							}
+
+							m.wireNode(_inputNode, _eventsToWire);
+
+							// if no value was set, then grab the value from the node
+							m._value === _undefined
+								? _setValue(_true)
+								: _updateUiValue(m)
+							;
 						}
 
-						m.wireNode(_inputNode, _eventsToWire);
+						m.validate();
 
-						// if no value was set, then grab the value from the node
-						m._value === _undefined
-							? _setValue(_true)
-							: m._updateUiValue()
-						;
+						_superclass.doMy (m,'wireUi');
 					}
-
-					m._validate();
-
-					_superclass.doMy (m,'wireUi');
 				}
-			};
+			},
 
-		/*** State Properties ***/
-			_class.stateProperties({
+			stateProperties:{
 				_elementName:'elementName', // read-only
 					/*?
 						State Properties
@@ -418,7 +408,7 @@ Uize.module ({
 						_warningWidget && _warningWidget.set({focused:_focused});
 
 						if (m.isWired) {
-							var _inputNode = m._getInputNode();
+							var _inputNode = _getInputNode(m);
 
 							// If focused state property is out of sync with 'focused' state of the DOM node (via document.activeElement)
 							// then force a focus.  We don't force a blur because blurring isn't as important (an apparently it causes
@@ -447,7 +437,7 @@ Uize.module ({
 					onChange:function () {
 						var
 							m = this,
-							_parentForm = m._getParentForm(),
+							_parentForm = _getParentForm(m),
 							_isDirty = m._isDirty == 'inherit'
 								? (_parentForm ? _parentForm.get('isDirtyInherited') : _false)
 								: m._isDirty
@@ -459,7 +449,7 @@ Uize.module ({
 				},
 				_isDirtyInherited:{
 					name:'isDirtyInherited',
-					onChange:_classPrototype._checkWarningShown,
+					onChange:_checkWarningShown,
 					value:_false
 				},
 				_isFinished:{
@@ -469,25 +459,25 @@ Uize.module ({
 
 						if (m._isFinished && m._isInitialized) {
 							m._validateWhen == _finished
-								&& m._validate();
+								&& m.validate();
 							m._finishedAtLeastOnce
 								|| m.set({_finishedAtLeastOnce:_true});
 						}
 
-						m._checkWarningShown();
+						m.checkWarningShown();
 					},
 					value:_true
 				},
 				_isValid:{
 					name:'isValid',
-					onChange:_classPrototype._checkWarningShown,
+					onChange:_checkWarningShown,
 					value:_false
 				},
 				_tentativeValue:{	// readonly
 					name:'tentativeValue',
 					onChange:function () {
 						this._validateWhen == _tentativeValueChanged
-							&& this._validate()
+							&& this.validate()
 						;
 					},
 					value:_null
@@ -511,7 +501,7 @@ Uize.module ({
 				},
 				_validator:{
 					name:'validator',
-					onChange:_classPrototype._validate,
+					onChange:'validate',
 					value:_null
 				},
 				_value:{
@@ -542,9 +532,9 @@ Uize.module ({
 						});
 
 						m._validateWhen == _valueChanged
-							&& m._validate();
+							&& m.validate();
 
-						m._updateUiValue();
+						_updateUiValue(m);
 					}/*,
 					value:_null*/
 				},
@@ -554,7 +544,7 @@ Uize.module ({
 					onChange:function () {
 						var
 							m = this,
-							_parentForm = m._getParentForm(),
+							_parentForm = _getParentForm(m),
 							_warningAllowed = m._warningAllowed == 'inherit'
 								? (_parentForm ? _parentForm.get('warningAllowedInherited') : _true)
 								: m._warningAllowed
@@ -566,7 +556,7 @@ Uize.module ({
 				},
 				_warningAllowedInherited:{
 					name:'warningAllowedInherited',
-					onChange:_classPrototype._checkWarningShown,
+					onChange:_checkWarningShown,
 					value:_false
 				},
 				_warningMessage:{
@@ -578,28 +568,27 @@ Uize.module ({
 							if (!m.isWired)
 								m._initialWarningMessage = m._warningMessage;
 						},
-						_classPrototype._updateUiWarning
+						_updateUiWarning
 					]
 				},
 				_warningShown:{
 					name:'warningShown',
-					onChange:_classPrototype._updateUiWarning,
+					onChange:_updateUiWarning,
 					value:_false
 				},
 				_warningShownWhen:{
 					name:'warningShownWhen',
-					onChange:_classPrototype._checkWarningShown,
+					onChange:_checkWarningShown,
 					value:_validated	// valid values: 'validated', 'finished', validatedAfterFirstFinish'
 				},
 				_warningWidgetClass:'warningWidgetClass',
 
 				/*** Private properties used for managing internal state w/ onChange functionality ***/
 					_finishedAtLeastOnce:{
-						onChange:_classPrototype._checkWarningShown,
+						onChange:_checkWarningShown,
 						value:_false
 					}
-			});
-
-		return _class;
+			}
+		});
 	}
 });

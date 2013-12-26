@@ -29,113 +29,107 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		/*** Class Constructor ***/
-			var
-				_superclass = Uize.Widget,
-				_class = _superclass.subclass (
-					function () {
-						var m = this;
+		return _superclass.subclass ({
+			alphastructor:function () {
+				var m = this;
 
-						/*** Private Instance Properties ***/
-							m._timeout = null;
-							m._running = false;
-							m._callAdvance = function () {m.advance ()};
+				/*** Private Instance Properties ***/
+					m._timeout = null;
+					m._running = false;
+					m._callAdvance = function () {m.advance ()};
+			},
+
+			instanceMethods:{
+				advance:function () {
+					var m = this;
+					if( m._running ) {
+						m.children.seconds.down();
+						m._timeout = setTimeout( m._callAdvance, 1000 );
 					}
-				),
-				_classPrototype = _class.prototype
-			;
+				},
 
-		/*** Public Instance Methods ***/
-			_classPrototype.advance = function () {
-				var m = this;
-				if( m._running ) {
-					m.children.seconds.down();
+				resetTo:function (_timeObject) {
+					var m = this;
+					m._running = false;
+					m.set ({startTime:_timeObject});
+					m._showSeconds && m.children.seconds.setCount( _timeObject.seconds );
+					m._showMinutes && m.children.minutes.setCount( _timeObject.minutes );
+					m._showHours && m.children.hours.setCount( _timeObject.hours );
+					m._showDays && m.children.days.setCount( _timeObject.days );
+				},
+
+				reset:function () {
+					this.resetTo(this._startTime);
+				},
+
+				resume:function () {
+					var m = this;
+					m._running = true;
 					m._timeout = setTimeout( m._callAdvance, 1000 );
-				}
-			};
+				},
 
-			_classPrototype.resetTo = function (_timeObject) {
-				var m = this;
-				m._running = false;
-				m.set ({startTime:_timeObject});
-				m._showSeconds && m.children.seconds.setCount( _timeObject.seconds );
-				m._showMinutes && m.children.minutes.setCount( _timeObject.minutes );
-				m._showHours && m.children.hours.setCount( _timeObject.hours );
-				m._showDays && m.children.days.setCount( _timeObject.days );
-			};
+				stop:function () {
+					this._running = false;
+				},
 
-			_classPrototype.reset = function () {
-				this.resetTo(this._startTime);
-			};
-
-			_classPrototype.resume = function () {
-				var m = this;
-				m._running = true;
-				m._timeout = setTimeout( m._callAdvance, 1000 );
-			};
-
-			_classPrototype.stop = function () {
-				this._running = false;
-			};
-
-			_classPrototype.wireUi = function () {
-				var m = this;
-				if (!m.isWired) {
-					var
-						_idPrefix = m.get ('idPrefix'),
-						_newCount = function (_name, _count, _limit) {
-							var _countWidget = m.addChild (
-								_name,
-								Uize.Widget.Count,
-								{
-									digits: 2,
-									limit: _limit,
-									numbersImagesPath:m._numbersImagesPath,
-									numbersFiletype:m._numbersFiletype
+				wireUi:function () {
+					var m = this;
+					if (!m.isWired) {
+						var
+							_idPrefix = m.get ('idPrefix'),
+							_newCount = function (_name, _count, _limit) {
+								var _countWidget = m.addChild (
+									_name,
+									Uize.Widget.Count,
+									{
+										digits: 2,
+										limit: _limit,
+										numbersImagesPath:m._numbersImagesPath,
+										numbersFiletype:m._numbersFiletype
+									}
+								);
+								_countWidget.wireUi();
+								_countWidget.setCount( _count );
+								return _countWidget;
+							},
+							_zero = function () {
+								if( (!m._showMinutes || (m._showMinutes && !m.children.minutes.getCount()))
+									&& (!m._showHours || (m._showHours && !m.children.hours.getCount()))
+									&& (!m._showDays || (m._showDays && !m.children.days.getCount())) ) {
+									m._running = false;
+									m.fire('zero');
+									if(m._redirectUrl != '')
+										document.location.href=m._redirectUrl;
 								}
-							);
-							_countWidget.wireUi();
-							_countWidget.setCount( _count );
-							return _countWidget;
-						},
-						_zero = function () {
-							if( (!m._showMinutes || (m._showMinutes && !m.children.minutes.getCount()))
-								&& (!m._showHours || (m._showHours && !m.children.hours.getCount()))
-								&& (!m._showDays || (m._showDays && !m.children.days.getCount())) ) {
-								m._running = false;
-								m.fire('zero');
-								if(m._redirectUrl != '')
-									document.location.href=m._redirectUrl;
 							}
-						}
-					;
-					m._showSeconds &&
-						_newCount ('seconds',m._startTime.seconds,59)
-							.wire ({
-								zero:_zero,
-								limit:function () {m._showMinutes && m.children.minutes.down ()}
-							})
-					;
-					m._showMinutes &&
-						_newCount ('minutes',m._startTime.minutes,59)
-							.wire ('limit',function () {m._showHours && m.children.hours.down ()})
-					;
-					m._showHours &&
-						_newCount ('hours',m._startTime.hours,23)
-						.wire ('limit',function () {m._showDays && m.children.days.down ()})
-					;
-					m._showDays &&
-						_newCount ('days',m._startTime.days,99)
-					;
+						;
+						m._showSeconds &&
+							_newCount ('seconds',m._startTime.seconds,59)
+								.wire ({
+									zero:_zero,
+									limit:function () {m._showMinutes && m.children.minutes.down ()}
+								})
+						;
+						m._showMinutes &&
+							_newCount ('minutes',m._startTime.minutes,59)
+								.wire ('limit',function () {m._showHours && m.children.hours.down ()})
+						;
+						m._showHours &&
+							_newCount ('hours',m._startTime.hours,23)
+							.wire ('limit',function () {m._showDays && m.children.days.down ()})
+						;
+						m._showDays &&
+							_newCount ('days',m._startTime.days,99)
+						;
 
-					_superclass.doMy (m,'wireUi');
-					if( m._autoStart )
-						m.resume();
+						_superclass.doMy (m,'wireUi');
+						if( m._autoStart )
+							m.resume();
+					}
 				}
-			};
+			},
 
-		/*** State Properties ***/
-			_class.stateProperties ({
+			stateProperties:{
 				_autoStart:{
 					name:'autoStart',
 					value:false
@@ -180,9 +174,8 @@ Uize.module ({
 					name:'numbersFiletype',
 					value:'gif'
 				}
-			});
-
-		return _class;
+			}
+		});
 	}
 });
 

@@ -29,76 +29,71 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		/*** Class Constructor ***/
-			var
-				_class = _superclass.subclass (
-					function () {
-						/*** Private Instance Properties ***/
-							this._phase = 'idle';
+		return _superclass.subclass ({
+			alphastructor:function () {
+				/*** Private Instance Properties ***/
+					this._phase = 'idle';
 
-						/*** Public Instance Properties ***/
-							this.fade = Uize.Fade ({duration:400});
+				/*** Public Instance Properties ***/
+					this.fade = Uize.Fade ({duration:400});
+			},
+
+			instanceMethods:{
+				changeContent:function (_content, _direction) {
+					var m = this;
+
+					if (_content != m._newContent) {
+						m._newContent = _content;
+						m._phase = 'out';
+						m.set ({_direction:_direction});
+
+						m.fade.start ({
+							startValue: 0,
+							endValue:m._direction == 'down' ? 0-m._offset : m._offset-0,
+							curve:Uize.Fade.celeration (1,0)
+						});
 					}
-				),
-				_classPrototype = _class.prototype
-			;
+				},
 
-		/*** Public Instance Methods ***/
-			_classPrototype.changeContent = function (_content, _direction) {
-				var m = this;
+				wireUi:function () {
+					var m = this;
+					if (!m.isWired) {
+						var _contentNode = m.getNode();
 
-				if (_content != m._newContent) {
-					m._newContent = _content;
-					m._phase = 'out';
-					m.set ({_direction:_direction});
-
-					m.fade.start ({
-						startValue: 0,
-						endValue:m._direction == 'down' ? 0-m._offset : m._offset-0,
-						curve:Uize.Fade.celeration (1,0)
-					});
-				}
-			};
-
-			_classPrototype.wireUi = function () {
-				var m = this;
-				if (!m.isWired) {
-					var _contentNode = m.getNode();
-
-					m.fade.wire ({
-						'Changed.value':
-							function () {
-								m.setNodeStyle ('',{top:Math.round (m.fade)})
-							},
-						Done:
-							function () {
-								if( m._phase == 'out' ) {
-									m.setNodeInnerHtml (_contentNode,m._newContent);
-									m.fade.set ({
-										startValue:m._direction == 'down' ? m._offset-0 : 0-m._offset,
-										endValue:0,
-										curve:Uize.Fade.celeration (0,1)
-									});
-									m._phase = 'in';
-									m.fade.start ();
-									m.fire('Content Changed');
-								} else if( m._phase == 'in' ) {
-									m._phase = 'idle';
-									m.fire('Updated');
+						m.fade.wire ({
+							'Changed.value':
+								function () {
+									m.setNodeStyle ('',{top:Math.round (m.fade)})
+								},
+							Done:
+								function () {
+									if( m._phase == 'out' ) {
+										m.setNodeInnerHtml (_contentNode,m._newContent);
+										m.fade.set ({
+											startValue:m._direction == 'down' ? m._offset-0 : 0-m._offset,
+											endValue:0,
+											curve:Uize.Fade.celeration (0,1)
+										});
+										m._phase = 'in';
+										m.fade.start ();
+										m.fire('Content Changed');
+									} else if( m._phase == 'in' ) {
+										m._phase = 'idle';
+										m.fire('Updated');
+									}
 								}
-							}
-					});
+						});
 
-					if (_contentNode)
-						m._newContent = _contentNode.innerHTML
-					;
+						if (_contentNode)
+							m._newContent = _contentNode.innerHTML
+						;
 
-					_superclass.doMy (m,'wireUi');
+						_superclass.doMy (m,'wireUi');
+					}
 				}
-			};
+			},
 
-		/*** State Properties ***/
-			_class.stateProperties ({
+			stateProperties:{
 				_direction:{
 					name:'direction',
 					value:'down'
@@ -107,9 +102,8 @@ Uize.module ({
 					name:'offset',
 					value:'20'
 				}
-			});
-
-		return _class;
+			}
+		});
 	}
 });
 

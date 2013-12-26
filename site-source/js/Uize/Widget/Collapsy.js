@@ -29,20 +29,13 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var
-				_true = true,
-				_false = false
-			;
-
-		/*** Class Constructor ***/
-			var
-				_class = _superclass.subclass (),
-				_classPrototype = _class.prototype
-			;
+		/*** Utility Functions ***/
+			function _resolveMessage (_message) {
+				return Uize.isFunction (_message) ? _message() : _message;
+			}
 
 		/*** Private Instance Methods ***/
-			_classPrototype._updateUi = function () {
+			function _updateUi () {
 				var m = this;
 
 				if (m.isWired) {
@@ -51,7 +44,7 @@ Uize.module ({
 					m.setNodeStyle('', {display:_shown ? 'inline' : 'none'});
 
 					if (_shown) {
-						m.setNodeInnerHtml('text', m._getMessage(m._collapsed ? m._collapsedMessage : m._expandedMessage));
+						m.setNodeInnerHtml('text', _resolveMessage(m._collapsed ? m._collapsedMessage : m._expandedMessage));
 						Uize.Node.Classes.setState(
 							m.getNode(),
 							[m._expandedClass, m._collapsedClass],
@@ -59,72 +52,67 @@ Uize.module ({
 						);
 					}
 				}
-			};
+			}
 
-		/*** Private Instance Methods ***/
-			_classPrototype._getMessage = function (_message) {
-				return Uize.isFunction (_message) ? _message() : _message;
-			};
+		return _superclass.subclass ({
+			instanceMethods:{
+				getCollapsedMessage:function () { return _resolveMessage(this._collapsedMessage) },
 
-		/*** Public Instance Methods ***/
-			_classPrototype.getCollapsedMessage = function () { return this._getMessage(this._collapsedMessage) };
+				getExpandedMessage:function () { return _resolveMessage(this._expandedMessage) },
 
-			_classPrototype.getExpandedMessage = function () { return this._getMessage(this._expandedMessage) };
+				updateUi:function () {
+					_updateUi.call (this);
+					_superclass.doMy (this,'updateUi');
+				},
 
-			_classPrototype.updateUi = function () {
-				this._updateUi();
-				_superclass.doMy (this,'updateUi');
-			};
+				wireUi:function () {
+					var m = this;
 
-			_classPrototype.wireUi = function () {
-				var m = this;
+					if (!m.isWired) {
+						var _collapse = function (_collapsed) { m.set({_collapsed:_collapsed}) };
 
-				if (!m.isWired) {
-					var _collapse = function (_collapsed) { m.set({_collapsed:_collapsed}) };
+						m.wireNode (
+							'',
+							{
+								mouseover:function () { _collapse(false) },
+								mouseout:function () { _collapse(true) }
+							}
+						);
 
-					m.wireNode (
-						'',
-						{
-							mouseover:function () { _collapse(_false) },
-							mouseout:function () { _collapse(_true) }
-						}
-					);
-
-					_superclass.doMy (m,'wireUi');
+						_superclass.doMy (m,'wireUi');
+					}
 				}
-			};
+			},
 
-		/*** State Properties ***/
-			_class.stateProperties({
+			stateProperties:{
 				_collapsed:{
 					name:'collapsed',
-					onChange:_classPrototype._updateUi,
-					value:_true
+					onChange:_updateUi,
+					value:true
 				},
 				_collapsedClass:{
 					name:'collapsedClass',
-					onChange:_classPrototype._updateUi
+					onChange:_updateUi
 				},
 				_collapsedMessage:{
 					name:'collapsedMessage',
-					onChange:_classPrototype._updateUi,
+					onChange:_updateUi,
 					value:''
 				},
 				_expandedClass:{
 					name:'expandedClass',
-					onChange:_classPrototype._updateUi
+					onChange:_updateUi
 				},
 				_expandedMessage:{
 					name:'expandedMessage',
-					onChange:_classPrototype._updateUi
+					onChange:_updateUi
 				},
 				_shown:{
 					name:'shown',
-					onChange:_classPrototype._updateUi,
-					value:_false
+					onChange:_updateUi,
+					value:false
 				}
-			});
-
-		return _class;
+			}
+		});
 	}
 });

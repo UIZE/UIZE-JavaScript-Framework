@@ -29,7 +29,7 @@
 			<div id="page-actions" class="pageActions"><a href="source-code/web-browser.html" class="buttonLink">SOURCE</a></div>
 		</div>
 	</h1>
-	
+
 	<a id="page_browser_back" href="javascript://">&lt;</a>
 	<a id="page_browser_forward" href="javascript://">&gt;</a>
 	<input id="page_browser_location-input" type="text"/>
@@ -49,63 +49,55 @@ Uize.module ({
 		'Uize.Widget.TextInput'
 	],
 	builder:function (_superclass) {
-		/*** Class Constructor ***/
-			var
-				_class = _superclass.subclass (
-					null,
-					function () {
-						var m = this;
+		return _superclass.subclass ({
+			omegastructor:function () {
+				var m = this;
 
-						/*** add back and forward buttons ***/
-							function _addNavigationButton (_buttonName,_direction) {
-								var _button = m.addChild (_buttonName,Uize.Widget.Button);
-								_button.wire (
-									'Click',
-									function () {
-										var _contentWindow = m.getNode ('iframe').contentWindow;
-										if (_contentWindow && _contentWindow.history) {
-											try {
-												_contentWindow.history.go (_direction);
-											} catch (_error) {
-												_button.set ({enabled:false});
-											}
-										}
+				/*** add back and forward buttons ***/
+					function _addNavigationButton (_buttonName,_direction) {
+						var _button = m.addChild (_buttonName,Uize.Widget.Button);
+						_button.wire (
+							'Click',
+							function () {
+								var _contentWindow = m.getNode ('iframe').contentWindow;
+								if (_contentWindow && _contentWindow.history) {
+									try {
+										_contentWindow.history.go (_direction);
+									} catch (_error) {
+										_button.set ({enabled:false});
 									}
-								);
+								}
 							}
-							_addNavigationButton ('back',-1);
-							_addNavigationButton ('forward',1);
-
-						/*** add location widget ***/
-							var _location = m.addChild ('location',Uize.Widget.TextInput);
-
-							function _clearLocation () {_location.set ({value:''})};
-
-							_location.wire ({
-								Ok:function (_event) {
-									_event.cancelSubmit = true;
-									var _contentWindow = m.getNode ('iframe').contentWindow;
-									if (_contentWindow)
-										_contentWindow.location.href = _location + ''
-									;
-									_clearLocation ();
-								},
-								Cancel:_clearLocation
-							});
+						);
 					}
-				),
-				_classPrototype = _class.prototype
-			;
+					_addNavigationButton ('back',-1);
+					_addNavigationButton ('forward',1);
 
-		/*** State Properties ***/
-			_class.stateProperties ({
+				/*** add location widget ***/
+					var _location = m.addChild ('location',Uize.Widget.TextInput);
+
+					function _clearLocation () {_location.set ({value:''})};
+
+					_location.wire ({
+						Ok:function (_event) {
+							_event.cancelSubmit = true;
+							var _contentWindow = m.getNode ('iframe').contentWindow;
+							if (_contentWindow)
+								_contentWindow.location.href = _location + ''
+							;
+							_clearLocation ();
+						},
+						Cancel:_clearLocation
+					});
+			},
+
+			stateProperties:{
 				_url:{
 					name:'url',
 					onChange:function () {}
 				}
-			});
-
-		return _class;
+			}
+		});
 	}
 });
 

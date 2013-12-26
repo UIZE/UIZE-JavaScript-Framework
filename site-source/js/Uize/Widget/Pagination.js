@@ -36,70 +36,59 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		/*** Class Constructor ***/
-			var
-				_class = _superclass.subclass (
-					null,
-					function () {
-						var m = this;
+		/*** Utility Functions ***/
+			function _formatNumber (_number) {
+				var
+					_numberString = _number + '',
+					_numberStringLength = _numberString.length,
+					_formattedStringBuilder = []
+				;
 
-						m._addChildButton('prev', function () { m._gotoPage(m._value - 1) } );
-						m._addChildButton('next', function () { m._gotoPage(m._value + 1) } );
-					}
-				),
-				_classPrototype = _class.prototype,
-				_formatNumber = function(_number) {
-					var
-						_numberString = _number + '',
-						_numberStringLength = _numberString.length,
-						_formattedStringBuilder = []
-					;
-					
-					for (var _count = 0; ++_count <= _numberStringLength;) {
-						_formattedStringBuilder.unshift(_numberString.charAt(_numberStringLength - _count));
-						!(_count % 3)
-							&& _count < _numberStringLength
-							&& _formattedStringBuilder.unshift(',');
-					}
-					
-					return _formattedStringBuilder.join('');
+				for (var _count = 0; ++_count <= _numberStringLength;) {
+					_formattedStringBuilder.unshift(_numberString.charAt(_numberStringLength - _count));
+					!(_count % 3)
+						&& _count < _numberStringLength
+						&& _formattedStringBuilder.unshift(',');
 				}
-			;
+
+				return _formattedStringBuilder.join('');
+			}
 
 		/*** Private Methods ***/
-			_classPrototype._addChildButton = Uize.Widget.Button.addChildButton;
+			function _addChildButton (m,_buttonName,_clickHandler) {
+				return Uize.Widget.Button.addChildButton.call (m,_buttonName,_clickHandler);
+			}
 
-			_classPrototype._calculateMaxPages = function () { return Math.ceil(this._numResults / this._pageSize) };
+			function _calculateMaxPages (m) { return Math.ceil(m._numResults / m._pageSize) }
 
-			_classPrototype._calculatePagesStart = function () {
+			function _calculatePagesStart (m) {
 				var
-					m = this,
 					_value = m._value,
 					_numPagesToShow = m._numPagesToShow,
-					_maxPages = m._calculateMaxPages(),
+					_maxPages = _calculateMaxPages(m),
 					_minPagesStart = 1 + (m._showFirstPage && _value > 1), // i.e. if we're shhowing the first page we want to start at 2
 					_maxPagesEnd = _maxPages - (m._showLastPage && _value < _maxPages),	// i.e. if we're showing the last page we want to end at the page before
 					_deltaFromCurrentPage = Math.ceil(_numPagesToShow / 2),
 					_deltaLeft = _value - _deltaFromCurrentPage + 1,
 					_deltaRight = _value + (_numPagesToShow - _deltaFromCurrentPage)
 				;
+				return (
+					_deltaLeft >= _minPagesStart && _deltaRight <= _maxPagesEnd
+						? _deltaLeft
+						: _deltaLeft >= _minPagesStart
+							? Math.max(_minPagesStart, _maxPagesEnd - _numPagesToShow + 1)
+							: _minPagesStart
+				);
+			}
 
-				if (_deltaLeft >= _minPagesStart && _deltaRight <= _maxPagesEnd)
-					return _deltaLeft;
-				else if (_deltaLeft >= _minPagesStart)
-					return Math.max(_minPagesStart, _maxPagesEnd - _numPagesToShow + 1);
-				else
-					return _minPagesStart;
-			};
+			function _gotoPage (m,_pageNumber) { m.set({_value:_pageNumber}) }
 
-			_classPrototype._gotoPage = function (_pageNumber) { this.set({_value:_pageNumber}) };
-
-			_classPrototype._updatePages = function () {
+			function _updatePages () {
 				var
 					m = this,
 					_children = m.children,
 					_value = m._value,
-					_maxPages = m._calculateMaxPages(),
+					_maxPages = _calculateMaxPages(m),
 					_hasMultiplePages = _maxPages > 1,
 					_numResults = m._numResults
 				;
@@ -119,7 +108,7 @@ Uize.module ({
 							}
 						)
 					);
-					
+
 					m.setNodeInnerHtml(
 						'pageDisplay',
 						m.localize(
@@ -151,7 +140,7 @@ Uize.module ({
 						_display('last', _value < _maxPages);
 						m._setEdgeButtons && _setText('last', _maxPages);
 
-						var _pagesStart = m._calculatePagesStart();
+						var _pagesStart = _calculatePagesStart(m);
 
 						m.displayNode('less', _pagesStart > (1 + m._showFirstPage));
 						m.displayNode('more', (_pagesStart + m._numPagesToShow) < (_maxPages - m._showLastPage));
@@ -175,68 +164,77 @@ Uize.module ({
 						}
 					}
 				}
-			};
+			}
 
-		/*** Public Methods ***/
-			_classPrototype.updateUi = function () {
+		return _superclass.subclass ({
+			omegastructor:function () {
 				var m = this;
 
-				if (m.isWired) {
-					m._updatePages();
-					_superclass.doMy (m,'updateUi');
-				}
-			};
+				_addChildButton(m, 'prev', function () { _gotoPage(m,m._value - 1) } );
+				_addChildButton(m, 'next', function () { _gotoPage(m,m._value + 1) } );
+			},
 
-			_classPrototype.wireUi = function() {
-				var m = this;
+			instanceMethods:{
+				updateUi:function () {
+					var m = this;
 
-				if (!m.isWired) {
-					/*** Determine which page links exist ***/
-						var
-							_childExists = function(_childName) { return !!Uize.Node.getById(m.get('idPrefix') + '_' + _childName) },
-							_addPageButton = function(_pageNo) {
-								m._addChildButton(
-									'page' + _pageNo,
-									function() { m._gotoPage(m._calculatePagesStart() + _pageNo) }
-								);
-							}
+					if (m.isWired) {
+						_updatePages.call(m);
+						_superclass.doMy (m,'updateUi');
+					}
+				},
+
+				wireUi:function() {
+					var m = this;
+
+					if (!m.isWired) {
+						/*** Determine which page links exist ***/
+							var
+								_childExists = function(_childName) { return !!Uize.Node.getById(m.get('idPrefix') + '_' + _childName) },
+								_addPageButton = function(_pageNo) {
+									_addChildButton(
+										m,
+										'page' + _pageNo,
+										function() { _gotoPage(m,_calculatePagesStart(m) + _pageNo) }
+									);
+								}
+							;
+
+							m._showFirstPage = _childExists('first');
+							m._showLastPage = _childExists('last');
+
+							/** Calculate how many inner page linkss there are to show ***/
+								m._numPagesToShow = -1;
+								while (_childExists('page' + ++m._numPagesToShow));
+
+						m._showFirstPage
+							&& _addChildButton(m, 'first', function () { _gotoPage(m,1) } );
+						m._showLastPage
+							&& _addChildButton(m, 'last', function () { _gotoPage(m,_calculateMaxPages(m)) } );
+
+
+						for (var _pageNo = -1; ++_pageNo < m._numPagesToShow;)
+							_addPageButton(_pageNo)
 						;
 
-						m._showFirstPage = _childExists('first');
-						m._showLastPage = _childExists('last');
-
-						/** Calculate how many inner page linkss there are to show ***/
-							m._numPagesToShow = -1;
-							while (_childExists('page' + ++m._numPagesToShow));
-
-					m._showFirstPage
-						&& m._addChildButton('first', function () { m._gotoPage(1) } );
-					m._showLastPage
-						&& m._addChildButton('last', function () { m._gotoPage(m._calculateMaxPages()) } );
-
-
-					for (var _pageNo = -1; ++_pageNo < m._numPagesToShow;)
-						_addPageButton(_pageNo)
-					;
-
-					_superclass.doMy (m,'wireUi');
+						_superclass.doMy (m,'wireUi');
+					}
 				}
-			};
+			},
 
-		/*** State Properties ***/
-			_class.stateProperties ({
+			stateProperties:{
 				_classSelected:{
 					name:'classSelected',
 					value:'selected'
 				},
 				_numResults:{
 					name:'numResults',
-					onChange:_classPrototype._updatePages
+					onChange:_updatePages
 				},
 				_pageSize:{
 					name:'pageSize',
 					conformer:function(_newPageSize) { return _newPageSize ? _newPageSize : 30 },
-					onChange:_classPrototype._updatePages,
+					onChange:_updatePages,
 					value:30
 				},
 				_setEdgeButtons:{
@@ -245,7 +243,7 @@ Uize.module ({
 				},
 				_thousandsSeparator:{
 					name:'thousandsSeparator',
-					onChange:_classPrototype._updatePages,
+					onChange:_updatePages,
 					value:','
 				},
 				_urlAnchor:'urlAnchor',
@@ -257,14 +255,14 @@ Uize.module ({
 				_value:{
 					name:'value',
 					conformer:function (_newValue) {
-						var _maxPages = this._calculateMaxPages();
+						var _maxPages = _calculateMaxPages(this);
 
 						return _newValue ? (!_maxPages || _newValue < _maxPages ? Math.floor(_newValue) : _maxPages) : 1;
 					},
 					onChange:[
 						function () {
 							var m = this;
-							
+
 							if (m._urlBase && m.isWired)
 								location.href = Uize.Url.resolve(
 									m._urlBase,
@@ -272,12 +270,12 @@ Uize.module ({
 								)
 							;
 						},
-						_classPrototype._updatePages
+						_updatePages
 					],
 					value:1
 				}
-			});
-
-		return _class;
+			}
+		});
 	}
 });
+

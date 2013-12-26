@@ -35,124 +35,117 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		var
-			_class = _superclass.subclass (
-				null,
-				function () {
-					var m = this;
-					m._commObject = Uize.Comm.Script ({callbackMode:'client'});
-					m.initializeCaptcha ();
-				}
-			),
-			_classPrototype = _class.prototype
-		;
-
-		/*** Public Instance Methods ***/
-			_classPrototype.initializeCaptcha = function () {
-				var
-					m = this
-				;
-				// check to see if the Recaptcha object has already been sourced in. If not, we'll have to make a script call to load it.
-				if (!(m.recaptchaObject = window.Recaptcha) && m._loadingUrl)
-					m._commObject.request (
-						{
-							url:[m._loadingUrl],
-							returnType:'json',
-							requestMethod:'GET',
-							callback:
-							function () {
-								(m.recaptchaObject = window.Recaptcha) ?
-									m.recaptchaObjectCreate () :
-										m.callInherited ('inform') ({
-											state:'error',
-											message:m.localize('loadingError')
-										})
-								;
-							}
-						}
-					);
-				else m.recaptchaObjectCreate ();
-
-				/*?
-					Instance Methods
-						initializeCaptcha
-							Overridden method that loads the external Recaptcha JS object (if it isn't in the page already) and creates the UI provided by reCAPTCHA.
-				*/
-			};
-
-			_classPrototype.recaptchaObjectCreate = function () {
+		return _superclass.subclass ({
+			omegastructor:function () {
 				var m = this;
-				m.recaptchaObject && m.recaptchaObject.create (m._key, m.get('idPrefix'), {theme:'clean'});
-				/*?
-					Instance Methods
-						recaptchaObjectCreate
-							Calls the Recaptcha object to create the UI and challenge.
+				m._commObject = Uize.Comm.Script ({callbackMode:'client'});
+				m.initializeCaptcha ();
+			},
 
-							SYNTAX
-							..................................
-							myWidget.recaptchaObjectCreate ();
-							..................................
-				*/
-			};
-
-			_classPrototype.validate = function ( _params ) {
-				var
-					m = this,
-					_callback = _params.callback,
-					_recaptchaObj = m.recaptchaObject
-				;
-
-				// assume that the validationUrl can send a response, otherwise how will the isValid property change?
-				m._commObject.set ({callbackMode:'server'});
-				m._commObject.request ({
-					url:[
-						m._validationUrl,
-						{
-							recaptcha_response_field:_recaptchaObj.get_response(),
-							recaptcha_challenge_field:_recaptchaObj.get_challenge ()
-						}
-					],
-					returnType:'json',
-					requestMethod:'GET',
-					callback:function (_response) {
-						m.set ({isValid:_response && _response.isValid});
-
-						// if the response was not valid then destroy and create a new instance of the captcha
-						if (!m.get('isValid')) m.recaptchaObjectCreate ();
-
-						Uize.isFunction (_callback) && _callback ( _response );
-					}
-				});
-				/*?
-					Instance Methods
-						validate
-							Overridden method that validates the user response to the reCaptcha challenge.
-
-							SYNTAX
-							............................
-							myWidget.validate (_params);
-							............................
-
-							PARAMS
-							.......................................................................................
+			instanceMethods:{
+				initializeCaptcha:function () {
+					var m = this;
+					// check to see if the Recaptcha object has already been sourced in. If not, we'll have to make a script call to load it.
+					if (!(m.recaptchaObject = window.Recaptcha) && m._loadingUrl)
+						m._commObject.request (
 							{
-								callback:callbackFUNC	// callback function that executes after the server request
+								url:[m._loadingUrl],
+								returnType:'json',
+								requestMethod:'GET',
+								callback:
+								function () {
+									(m.recaptchaObject = window.Recaptcha) ?
+										m.recaptchaObjectCreate () :
+											m.callInherited ('inform') ({
+												state:'error',
+												message:m.localize('loadingError')
+											})
+									;
+								}
 							}
-							.......................................................................................
+						);
+					else m.recaptchaObjectCreate ();
 
-							How It Works
-								Because the reCAPTCHA validation API requires a POST request, and because javascript is unable to oblige using standard AJAX techniques (due to cross-site scripting restrictions), the =Uize.Widget.Captcha.ReCaptcha= class must incorporate an additional server in the validation request. The =validate= method will provide the server with both the challenge and the user response; that server must then submit a validation request to reCAPTCHA (and provide some additional parameters).
+					/*?
+						Instance Methods
+							initializeCaptcha
+								Overridden method that loads the external Recaptcha JS object (if it isn't in the page already) and creates the UI provided by reCAPTCHA.
+					*/
+				},
 
-								The server response is then relayed to the javascript widget. The =response= that is passed to the callback function from the =Uize.Comm.Script= call should have an =isValid= property that is used to set the =Uize.Widget.Captcha.Recaptcha= =isValid= property.
-								For further reading on the reCAPTCHA validation API, please visit http://recaptcha.net/apidocs/captcha/.
+				recaptchaObjectCreate:function () {
+					var m = this;
+					m.recaptchaObject && m.recaptchaObject.create (m._key, m.get('idPrefix'), {theme:'clean'});
+					/*?
+						Instance Methods
+							recaptchaObjectCreate
+								Calls the Recaptcha object to create the UI and challenge.
 
-							NOTES
-								The response from the server is passed to the provided callback function, in case any additional information that might be useful to the parent widget is provided from the server (a nonce, for example).
-				*/
-			};
+								SYNTAX
+								..................................
+								myWidget.recaptchaObjectCreate ();
+								..................................
+					*/
+				},
 
-		/*** State Properties ***/
-			_class.stateProperties ({
+				validate:function ( _params ) {
+					var
+						m = this,
+						_callback = _params.callback,
+						_recaptchaObj = m.recaptchaObject
+					;
+
+					// assume that the validationUrl can send a response, otherwise how will the isValid property change?
+					m._commObject.set ({callbackMode:'server'});
+					m._commObject.request ({
+						url:[
+							m._validationUrl,
+							{
+								recaptcha_response_field:_recaptchaObj.get_response(),
+								recaptcha_challenge_field:_recaptchaObj.get_challenge ()
+							}
+						],
+						returnType:'json',
+						requestMethod:'GET',
+						callback:function (_response) {
+							m.set ({isValid:_response && _response.isValid});
+
+							// if the response was not valid then destroy and create a new instance of the captcha
+							if (!m.get('isValid')) m.recaptchaObjectCreate ();
+
+							Uize.isFunction (_callback) && _callback ( _response );
+						}
+					});
+					/*?
+						Instance Methods
+							validate
+								Overridden method that validates the user response to the reCaptcha challenge.
+
+								SYNTAX
+								............................
+								myWidget.validate (_params);
+								............................
+
+								PARAMS
+								.......................................................................................
+								{
+									callback:callbackFUNC	// callback function that executes after the server request
+								}
+								.......................................................................................
+
+								How It Works
+									Because the reCAPTCHA validation API requires a POST request, and because javascript is unable to oblige using standard AJAX techniques (due to cross-site scripting restrictions), the =Uize.Widget.Captcha.ReCaptcha= class must incorporate an additional server in the validation request. The =validate= method will provide the server with both the challenge and the user response; that server must then submit a validation request to reCAPTCHA (and provide some additional parameters).
+
+									The server response is then relayed to the javascript widget. The =response= that is passed to the callback function from the =Uize.Comm.Script= call should have an =isValid= property that is used to set the =Uize.Widget.Captcha.Recaptcha= =isValid= property.
+									For further reading on the reCAPTCHA validation API, please visit http://recaptcha.net/apidocs/captcha/.
+
+								NOTES
+									The response from the server is passed to the provided callback function, in case any additional information that might be useful to the parent widget is provided from the server (a nonce, for example).
+					*/
+				}
+			},
+
+			stateProperties:{
 				_loadingUrl:'loadingUrl',
 				/*?
 					State properties
@@ -175,8 +168,7 @@ Uize.module ({
 						key
 							A string representing the public API key provided by reCAPTCHA.
 				*/
-			});
-
-		return _class;
+			}
+		});
 	}
 });

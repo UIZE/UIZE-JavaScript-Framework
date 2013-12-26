@@ -7,7 +7,7 @@ A Simple Example
 	In the following example, a subclass module is being declared.
 
 	EXAMPLE
-	..............................................
+	....................................
 	Uize.module ({
 		name:'Uize.Widget.MagView',
 		required:[
@@ -18,30 +18,22 @@ A Simple Example
 		builder:function (_superclass) {
 			'use strict';
 
-			/*** Object Constructor ***/
-				var
-					_class = _superclass.subclass (
-						function () {
-							/*
-							...SOME CODE HERE...
-							...SOME CODE HERE...
-							...SOME CODE HERE...
-							*/
-						}
-					),
-					_classPrototype = _class.prototype
-				;
+			return _superclass.subclass ({
+				alphastructor:function () {
+					// ... ... ...
+				},
 
-			/*
-			...SOME CODE HERE...
-			...SOME CODE HERE...
-			...SOME CODE HERE...
-			*/
+				instanceMethods:{
+					// ... ... ...
+				},
 
-			return _class;
+				stateProperties:{
+					// ... ... ...
+				}
+			});
 		}
 	});
-	..............................................
+	....................................
 
 	In the above example, the =Uize.Widget.MagView= module is being declared. Its name is specified by the =name= parameter. The modules that it immediately requires in order to be built are listed in the =required= parameter. And the function that is responsible for building and returning a reference to the module is specified by the =builder= parameter.
 
@@ -220,72 +212,60 @@ Types of Modules
 		When declaring a subclass module, the superclass can be specified using the optional superclass parameter. If no superclass is specified, then the "host" is assumed to be the superclass. The builder function should expect to receive one parameter, being an object reference to the superclass. The builder function should return an object reference to the subclass it creates, so this can be assigned to the "host".
 
 		SUBCLASS MODULE - EXAMPLE 1
-		..............................................
+		....................................
 		Uize.module ({
 			name:'Uize.Widget.MyWidgetClass',
 			builder:function (_superclass) {
 				'use strict';
 
-				/*** Object Constructor ***/
-					var
-						_class = _superclass.subclass (
-							/*
-							...SOME CODE HERE...
-							...SOME CODE HERE...
-							...SOME CODE HERE...
-							*/
-						),
-						_classPrototype = _class.prototype
-					;
+				return _superclass.subclass ({
+					alphastructor:function () {
+						// ... ... ...
+					},
 
-				/*
-				...SOME CODE HERE...
-				...SOME CODE HERE...
-				...SOME CODE HERE...
-				*/
+					instanceMethods:{
+						// ... ... ...
+					},
 
-				return _class;
+					stateProperties:{
+						// ... ... ...
+					}
+				});
 			}
 		});
-		..............................................
+		....................................
 
 		In the example above, the widget class =Uize.Widget.MyWidgetClass= is a subclass of =Uize.Widget=. It has a simple implementation and so doesn't have any requirements beyond the implicit requirement of the =Uize.Widget= superclass.
 
 		SUBCLASS MODULE - EXAMPLE 2
-		..............................................
+		....................................
 		Uize.module ({
 			name:'MyNamespace.MyWidgetClass',
 			superclass:'Uize.Widget',
 			builder:function (_superclass) {
 				'use strict';
 
-				/*** Object Constructor ***/
-					var
-						_class = _superclass.subclass (
-							/*
-							...SOME CODE HERE...
-							...SOME CODE HERE...
-							...SOME CODE HERE...
-							*/
-						),
-						_classPrototype = _class.prototype
-					;
+				return _superclass.subclass ({
+					alphastructor:function () {
+						// ... ... ...
+					},
 
-				/*
-				...SOME CODE HERE...
-				...SOME CODE HERE...
-				...SOME CODE HERE...
-				*/
+					instanceMethods:{
+						// ... ... ...
+					},
 
-				return _class;
+					stateProperties:{
+						// ... ... ...
+					}
+				});
 			}
 		});
-		..............................................
+		....................................
 
 		In the example above, the class =MyNamespace.MyWidgetClass= is not a subclass of the module =MyNamespace=. Rather, =MyNamespace= is merely the "host" for the =MyWidgetClass= property, and =MyNamespace.MyWidgetClass= is a means of referencing the class in code. Therefore, the fact that =MyNamespace.MyWidgetClass= is a subclass of =Uize.Widget= needs to be declared explicitly using the optional =superclass= parameter.
 
 		SUBCLASS MODULE - EXAMPLE 3
-		..............................................
+		....................................
 		Uize.module ({
 			name:'MyNamespace.MyWidgetClass',
 			superclass:'Uize.Widget',
@@ -296,28 +276,22 @@ Types of Modules
 			builder:function (_superclass) {
 				'use strict';
 
-				/*** Object Constructor ***/
-					var
-						_class = _superclass.subclass (
-							/*
-							...SOME CODE HERE...
-							...SOME CODE HERE...
-							...SOME CODE HERE...
-							*/
-						),
-						_classPrototype = _class.prototype
-					;
+				return _superclass.subclass ({
+					alphastructor:function () {
+						// ... ... ...
+					},
 
-				/*
-				...SOME CODE HERE...
-				...SOME CODE HERE...
-				...SOME CODE HERE...
-				*/
+					instanceMethods:{
+						// ... ... ...
+					},
 
-				return _class;
+					stateProperties:{
+						// ... ... ...
+					}
+				});
 			}
 		});
-		..............................................
+		....................................
 
 		In the above example, the implementation of the =MyNamespace.MyWidgetClass= module has become more complex and it now requires the additional modules =Uize.Node= and =Uize.Fade=. Notice, however, that the modules =MyNamespace= and =Uize.Widget= (the host and superclass, respectively) are not in the required list, since their requirement is implicit.
 
@@ -412,35 +386,29 @@ Types of Modules
 		The =Uize.module= method can also be used to simply declare a namespace. This is useful when declaring modules under that namespace, where it is implicit that the namespace must exit.
 
 		EXAMPLE
-		..............................................
+		....................................
 		Uize.module ({
 			name:'MyNamespace.MyWidgetClass',
 			superclass:'Uize.Widget',
 			builder:function (_superclass) {
 				'use strict';
 
-				/*** Object Constructor ***/
-					var
-						_class = _superclass.subclass (
-							/*
-							...SOME CODE HERE...
-							...SOME CODE HERE...
-							...SOME CODE HERE...
-							*/
-						),
-						_classPrototype = _class.prototype
-					;
+				return _superclass.subclass ({
+					alphastructor:function () {
+						// ... ... ...
+					},
 
-				/*
-				...SOME CODE HERE...
-				...SOME CODE HERE...
-				...SOME CODE HERE...
-				*/
+					instanceMethods:{
+						// ... ... ...
+					},
 
-				return _class;
+					stateProperties:{
+						// ... ... ...
+					}
+				});
 			}
 		});
-		..............................................
+		....................................
 
 		In the above example, it is implicit that =MyNamespace= must exist, so that the property =MyWidgetClass= can be assigned on it. Therefore, the module declaration will try to resolve this dependency, if =MyNamespace= is not already defined. The =Uize.module= method will try to load the module =MyNamespace=. If =MyNamespace= is intended to truly be just a namespace and have zero implementation "guts", then you can declare the namespace in a namespace module, as simply...
 

@@ -29,46 +29,14 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var
-				_true = true,
-				_false = false,
+		var
+			/*** Variables for Scruncher Optimization ***/
 				_undefined
-			;
-
-		/*** Class Constructor ***/
-			var
-				_class = _superclass.subclass (
-					function () {
-						var m = this;
-
-						/*** Private Instance Properties ***/
-							m._lifeTimeout = null;
-							m._showFade = Uize.Fade ({
-								curve:Uize.Fade.celeration (0,1),
-								duration:750
-							});
-							m._showFade.wire ({
-								Start:function () {
-									m._shown
-										&& m.displayNode ('',m._shown)
-									},
-								'Changed.value':function () {
-									m.setNodeOpacity ('', m._showFade)
-									},
-								Done:function () {
-									!m._shown
-										&& m.displayNode ('', m._shown)
-									}
-							});
-					}
-				),
-				_classPrototype = _class.prototype
-			;
+		;
 
 		/*** Private Instance Methods ***/
-			_classPrototype._updateUiText = function () {
-				this._text != _undefined && this.isWired && this.setNodeInnerHtml ('text',this._text);
+			function _updateUiText (m) {
+				m._text != _undefined && m.isWired && m.setNodeInnerHtml ('text',m._text);
 				/*?
 					Implied Nodes
 						text Implied Node
@@ -79,46 +47,71 @@ Uize.module ({
 							NOTES
 							- this implied node is optional
 				*/
-			};
+			}
 
-		/*** Public Instance Methods ***/
-			_classPrototype.show = function () {
+		return _superclass.subclass ({
+			alphastructor:function () {
 				var m = this;
 
-				if (m._lifeTimeout != null) {
-					clearTimeout (m._timeout);
-					m._timeout = null;
-				}
+				/*** Private Instance Properties ***/
+					m._lifeTimeout = null;
+					m._showFade = Uize.Fade ({
+						curve:Uize.Fade.celeration (0,1),
+						duration:750
+					});
+					m._showFade.wire ({
+						Start:function () {
+							m._shown
+								&& m.displayNode ('',m._shown)
+							},
+						'Changed.value':function () {
+							m.setNodeOpacity ('', m._showFade)
+							},
+						Done:function () {
+							!m._shown
+								&& m.displayNode ('', m._shown)
+							}
+					});
+			},
 
-				m.set ({_shown:_true});
-			};
+			instanceMethods:{
+				show:function () {
+					var m = this;
 
-			_classPrototype.updateUi = function () {
-				var m = this;
+					if (m._lifeTimeout != null) {
+						clearTimeout (m._timeout);
+						m._timeout = null;
+					}
 
-				if (m.isWired) {
-					m._updateUiText ();
-					_superclass.doMy (m,'updateUi');
-				}
-			};
+					m.set ({_shown:true});
+				},
 
-			_classPrototype.wireUi = function () {
-				var m = this;
-				if (!m.isWired) {
-					var _rootNode = m._rootNode = m.getNode ();
-					if (_rootNode) {
-						/*** initialize text value if undefined ***/
-							m._text == _undefined
-								&& m.set ({_text:m.getNodeValue('text')})
-							;
+				updateUi:function () {
+					var m = this;
 
-						_superclass.doMy (m,'wireUi');
+					if (m.isWired) {
+						_updateUiText (m);
+						_superclass.doMy (m,'updateUi');
+					}
+				},
+
+				wireUi:function () {
+					var m = this;
+					if (!m.isWired) {
+						var _rootNode = m._rootNode = m.getNode ();
+						if (_rootNode) {
+							/*** initialize text value if undefined ***/
+								m._text == _undefined
+									&& m.set ({_text:m.getNodeValue('text')})
+								;
+
+							_superclass.doMy (m,'wireUi');
+						}
 					}
 				}
-			};
+			},
 
-		/*** State Properties ***/
-			_class.stateProperties ({
+			stateProperties:{
 				_maxOpacity:{
 					name:'maxOpacity',
 					value:1
@@ -143,7 +136,7 @@ Uize.module ({
 
 							if (m._shown)
 								m._lifeTimeout = setTimeout(
-									function () { m.set({_shown:_false}) },
+									function () { m.set({_shown:false}) },
 									m._lifeSpan
 								)
 							;
@@ -152,11 +145,11 @@ Uize.module ({
 								&& m.fire('After Hide');
 						}
 					},
-					value:_false
+					value:false
 				},
 				_text:{
 					name:'text',
-					onChange:_classPrototype._updateUiText
+					onChange:function () {_updateUiText (this)}
 					/*?
 						State Properties
 							text
@@ -168,9 +161,8 @@ Uize.module ({
 								- the initial value is =undefined=
 					*/
 				}
-			});
-
-		return _class;
+			}
+		});
 	}
 });
 

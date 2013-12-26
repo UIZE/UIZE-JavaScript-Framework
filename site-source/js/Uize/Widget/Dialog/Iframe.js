@@ -28,60 +28,47 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var
-				_true = true,
-				_false = false,
-				_null = null
-			;
+		return _superclass.subclass ({
+			alphastructor:function () {
+				var m = this;
 
-		/*** Class Constructor ***/
-			var
-				_class = _superclass.subclass (
-					function () {
-						var m = this;
-
-						/*** initialization ***/
-							function _setIframeUrl (_url) {
-								if (_url != m._lastSetUrl) {
-									m._lastSetUrl = _url;
-									var _contentWindow = m.getContentWindow ();
-									_contentWindow && _contentWindow.location
-										? _contentWindow.location.replace (_url)
-										: (m.getNode ('content').src = _url)
-									;
-								}
-							}
-							m.wire ({
-								'Before Show':
-									function () {_setIframeUrl (Uize.isFunction (m._url) ? m._url () : m._url)},
-								'After Hide':
-									function () {m._resetUrl && _setIframeUrl ('about:blank')}
-							});
+				/*** initialization ***/
+					function _setIframeUrl (_url) {
+						if (_url != m._lastSetUrl) {
+							m._lastSetUrl = _url;
+							var _contentWindow = m.getContentWindow ();
+							_contentWindow && _contentWindow.location
+								? _contentWindow.location.replace (_url)
+								: (m.getNode ('content').src = _url)
+							;
+						}
 					}
-				),
-				_classPrototype = _class.prototype
-			;
+					m.wire ({
+						'Before Show':
+							function () {_setIframeUrl (Uize.isFunction (m._url) ? m._url () : m._url)},
+						'After Hide':
+							function () {m._resetUrl && _setIframeUrl ('about:blank')}
+					});
+			},
 
-		/*** Public Instance Methods ***/
-			_classPrototype.getContentWindow = function () {
-				var _contentNode = this.getNode ('content');
-				return _contentNode ? _contentNode.contentWindow : _null;
-			};
+			instanceMethods:{
+				getContentWindow:function () {
+					var _contentNode = this.getNode ('content');
+					return _contentNode ? _contentNode.contentWindow : null;
+				}
+			},
 
-		/*** State Properties ***/
-			_class.stateProperties ({
+			stateProperties:{
 				_resetUrl:{
 					name:'resetUrl',
-					value:_true
+					value:true
 				},
 				_url:{
 					name:'url',
 					value:'' /* QUESTION: is it really necessary to initialize this property to an empty string? */
 				}
-			});
-
-		return _class;
+			}
+		});
 	}
 });
 

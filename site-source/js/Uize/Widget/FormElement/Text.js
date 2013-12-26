@@ -29,55 +29,16 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var
-				_supportsPlaceholder = typeof document != 'undefined'
-					&& 'placeholder' in document.createElement('input'),
-				_undefined
-			;
+		var
+			/*** Variables for Scruncher Optimization ***/
+				_undefined,
 
-		/*** Class Constructor ***/
-			var
-				_class = _superclass.subclass(
-					null,
-					function () {
-						var m = this;
-
-						m.wire(
-							'Changed.focused',
-							function (_event) {
-								if (m.isWired) {
-									var
-										_focused = _event.newValue,
-										_placeholder = m._placeholder,
-										_value = m.valueOf()
-									;
-
-									if (_placeholder && !_supportsPlaceholder) {
-										var _newText;
-										if (_focused && _value == _placeholder)
-											_newText = '';
-										else if (!_focused && !_value)
-											_newText = _placeholder
-										;
-										_newText != _undefined && m.setNodeValue ('input', _newText);
-									}
-
-									_focused
-										&& _value
-										&& m.setCaretPosition(_value.length);
-								}
-							}
-						);
-
-						m._updateMoreValidators();
-					}
-				),
-				_classPrototype = _class.prototype
-			;
+			/*** General Variables ***/
+				_supportsPlaceholder = typeof document != 'undefined' && 'placeholder' in document.createElement('input')
+		;
 
 		/*** Private Instance Methods ***/
-			_classPrototype._updateMoreValidators = function () {
+			function _updateMoreValidators () {
 				var m = this;
 
 				m._moreValidators = [
@@ -90,123 +51,156 @@ Uize.module ({
 						return _valueLength >= m._minLength && _valueLength <= m._maxLength;
 					}
 				];
-			};
+			}
 
-			_classPrototype._updateUiPlaceholder = function () {
+			function _updateUiPlaceholder () {
 				this.isWired
 					&& _supportsPlaceholder
 					&& this.setNodeProperties('input', {placeholder:this._placeholder})
 				;
-			};
+			}
 
-		/*** Public Instance Methods ***/
-			_classPrototype.checkIsEmpty = function () {
-				return _superclass.doMy (this,'checkIsEmpty') || this.valueOf() == this._placeholder;
-			};
-
-			_classPrototype.getCaretPosition = function () {
-				var
-					m = this,
-					_caretPosition = -1
-				;
-
-				if (m.isWired && m.get ('focused')) {
-					var _input = m.getNode ('input');
-					if ('selectionStart' in _input)
-						_caretPosition = _input.selectionStart;
-					else if (_input.createTextRange) {
-						var _sel = _input.createTextRange ();
-						_sel.moveStart ('character', -m.get ('tentativeValue').length);
-						_caretPosition = _sel.text.length;
-					}
-				}
-				
-				return _caretPosition;
-			};
-			
-			_classPrototype.select = function(_startPosition, _endPosition) {
+		return _superclass.subclass ({
+			omegastructor:function () {
 				var m = this;
-				
-				if (m.isWired) {
+
+				m.wire(
+					'Changed.focused',
+					function (_event) {
+						if (m.isWired) {
+							var
+								_focused = _event.newValue,
+								_placeholder = m._placeholder,
+								_value = m.valueOf()
+							;
+
+							if (_placeholder && !_supportsPlaceholder) {
+								var _newText;
+								if (_focused && _value == _placeholder)
+									_newText = '';
+								else if (!_focused && !_value)
+									_newText = _placeholder
+								;
+								_newText != _undefined && m.setNodeValue ('input', _newText);
+							}
+
+							_focused
+								&& _value
+								&& m.setCaretPosition(_value.length);
+						}
+					}
+				);
+
+				_updateMoreValidators.call (m);
+			},
+
+			instanceMethods:{
+				checkIsEmpty:function () {
+					return _superclass.doMy (this,'checkIsEmpty') || this.valueOf() == this._placeholder;
+				},
+
+				getCaretPosition:function () {
 					var
-						_input = m.getNode ('input'),
-						_value = m.valueOf()
+						m = this,
+						_caretPosition = -1
 					;
-					
-					m.set('focused', true);
-					
-					if (_value) {
-						if (_startPosition == _undefined)
-							_input.select();
-						else {
-							_endPosition = _endPosition == _undefined ? _value.length : _endPosition;
-							
-							if (_input.setSelectionRange)
-								_input.setSelectionRange (_startPosition, _endPosition);
-							else if (_input.createTextRange) {
-								var _range = _input.createTextRange ();
-								_range.collapse (true);
-								_range.moveEnd ('character', _endPosition);
-								_range.moveStart ('character', _startPosition);
-								_range.select ();
+
+					if (m.isWired && m.get ('focused')) {
+						var _input = m.getNode ('input');
+						if ('selectionStart' in _input)
+							_caretPosition = _input.selectionStart;
+						else if (_input.createTextRange) {
+							var _sel = _input.createTextRange ();
+							_sel.moveStart ('character', -m.get ('tentativeValue').length);
+							_caretPosition = _sel.text.length;
+						}
+					}
+
+					return _caretPosition;
+				},
+
+				select:function(_startPosition, _endPosition) {
+					var m = this;
+
+					if (m.isWired) {
+						var
+							_input = m.getNode ('input'),
+							_value = m.valueOf()
+						;
+
+						m.set('focused', true);
+
+						if (_value) {
+							if (_startPosition == _undefined)
+								_input.select();
+							else {
+								_endPosition = _endPosition == _undefined ? _value.length : _endPosition;
+
+								if (_input.setSelectionRange)
+									_input.setSelectionRange (_startPosition, _endPosition);
+								else if (_input.createTextRange) {
+									var _range = _input.createTextRange ();
+									_range.collapse (true);
+									_range.moveEnd ('character', _endPosition);
+									_range.moveStart ('character', _startPosition);
+									_range.select ();
+								}
 							}
 						}
 					}
-				}
-			};
+				},
 
-			_classPrototype.setCaretPosition = function (_position) { this.select(_position, _position) };
+				setCaretPosition:function (_position) { this.select(_position, _position) },
 
-			_classPrototype.getMoreValidators = function () { return this._moreValidators };
+				getMoreValidators:function () { return this._moreValidators },
 
-			_classPrototype.updateUi = function () {
-				if (this.isWired) {
-					this._updateUiPlaceholder();
-					_superclass.doMy (this,'updateUi');
-				}
-			};
-
-			_classPrototype.wireUi = function () {
-				var m = this;
-
-				if (!m.isWired) {
-					var
-						_placeholder = m._placeholder,
-						_input = m.getNode ('input')
-					;
-
-					// Set input placeholder
-					if (_placeholder) {
-						if (_supportsPlaceholder)
-							m.setNodeProperties (_input, {placeholder:_placeholder});
-						else
-							m.set ('value', _placeholder);
+				updateUi:function () {
+					if (this.isWired) {
+						_updateUiPlaceholder.call (this);
+						_superclass.doMy (this,'updateUi');
 					}
+				},
 
-					_superclass.doMy (m,'wireUi');
+				wireUi:function () {
+					var m = this;
+
+					if (!m.isWired) {
+						var
+							_placeholder = m._placeholder,
+							_input = m.getNode ('input')
+						;
+
+						// Set input placeholder
+						if (_placeholder) {
+							if (_supportsPlaceholder)
+								m.setNodeProperties (_input, {placeholder:_placeholder});
+							else
+								m.set ('value', _placeholder);
+						}
+
+						_superclass.doMy (m,'wireUi');
+					}
 				}
-			};
+			},
 
-		/*** State Properties ***/
-			_class.stateProperties ({
+			stateProperties:{
 				_placeholder:{
 					name:'placeholder|defaultValue',
-					onChange:_classPrototype._updateUiPlaceholder,
+					onChange:_updateUiPlaceholder,
 					value:''
 				},
 				_minLength:{
 					name:'minLength',
-					onChange:_classPrototype._updateMoreValidators,
+					onChange:_updateMoreValidators,
 					value:0
 				},
 				_maxLength:{
 					name:'maxLength',
-					onChange:_classPrototype._updateMoreValidators,
+					onChange:_updateMoreValidators,
 					value:32767
 				}
-			});
-
-		return _class;
+			}
+		});
 	}
 });
 

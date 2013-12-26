@@ -29,19 +29,8 @@ Uize.module ({
 	builder:function  (_superclass) {
 		'use strict';
 
-		var
-			_null = null,
-			_Uize_Node = Uize.Node
-		;
-
-		/*** Class Constructor ***/
-			var
-				_class = _superclass.subclass (),
-				_classPrototype = _class.prototype
-			;
-
-		/*** Public Instance Methods ***/
-			var _updateUi = _classPrototype.updateUi = function () {
+		/*** Private Instance Methods ***/
+			function _updateUi () {
 				var m = this;
 				if (m.isWired) {
 					var
@@ -59,10 +48,17 @@ Uize.module ({
 					);
 					m.setNodeStyle ('middle',{left:0,top:_middleTop,width:_width,height:_beamThinSizePixels});
 				}
-			};
+			}
 
-		/*** State Properties ***/
-			_class.stateProperties ({
+		return _superclass.subclass ({
+			instanceMethods:{
+				updateUi:function () {
+					_superclass.doMy (this,'updateUi');
+					_updateUi.call (this);
+				}
+			},
+
+			stateProperties:{
 				_direction:{
 					name:'direction',
 					onChange:_updateUi,
@@ -98,9 +94,8 @@ Uize.module ({
 					onChange:_updateUi,
 					value:100
 				}
-			});
-
-		return _class;
+			}
+		});
 	}
 });
 

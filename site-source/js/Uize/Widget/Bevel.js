@@ -33,25 +33,12 @@ Uize.module ({
 		'use strict';
 
 		var
-			_null = null,
-			_Uize_Node = Uize.Node
+			/*** Variables for Scruncher Optimization ***/
+				_Uize_Node = Uize.Node
 		;
 
-		/*** Class Constructor ***/
-			var
-				_class = _superclass.subclass (
-					function () {
-						var m = this;
-
-						/*** Private Instance Properties ***/
-							m._imageDims = [0,0];
-					}
-				),
-				_classPrototype = _class.prototype
-			;
-
 		/*** Private Instance Methods ***/
-			_classPrototype._updateUi = function () {
+			function _updateUi () {
 				var
 					m = this,
 					_node = m.getNode ()
@@ -69,28 +56,35 @@ Uize.module ({
 					;
 					_node.innerHTML = _html;
 				}
-			};
+			}
 
-		/*** Public Instance Methods ***/
-			_classPrototype.insertUi = function () {
-				this._updateUi ();
-			};
+		return _superclass.subclass ({
+			alphastructor:function () {
+				var m = this;
 
-		/*** State Properties ***/
-			_class.stateProperties ({
+				/*** Private Instance Properties ***/
+					m._imageDims = [0,0];
+			},
+
+			instanceMethods:{
+				insertUi:function () {
+					_updateUi.call (this);
+				}
+			},
+
+			stateProperties:{
 				_opacity:{
 					name:'opacity',
-					onChange:_classPrototype._updateUi,
+					onChange:_updateUi,
 					value:.3
 				},
 				_thickness:{
 					name:'thickness',
-					onChange:_classPrototype._updateUi,
+					onChange:_updateUi,
 					value:10
 				}
-			});
-
-		return _class;
+			}
+		});
 	}
 });
 

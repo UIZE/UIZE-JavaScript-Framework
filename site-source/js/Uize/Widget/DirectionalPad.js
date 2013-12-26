@@ -31,51 +31,19 @@ Uize.module ({
 	],
 	builder:function (_superclass) {
 		'use strict';
-		
-		/*** Variables for Scruncher Optimization ***/
-			var
-				_Uize = Uize,
-				_Uize_Node_Classes = _Uize.Node.Classes
-			;
 
-		/*** Constructor ***/
-			var
-				_childrenInMini = {north:1,south:1,east:1,west:1,center:1},
-				_class = _superclass.subclass (
-					null,
-					function () {
-						var m = this;
-						if (!m._useLinks) {
-							var
-								_Uize_Widget_Button = _Uize.Widget.Button,
-								_buttonDictionary = m._buttonDictionary
-							;
-							_Uize.forEach(
-								_buttonDictionary,
-								function(_value, _key) {
-									m.addChild (_key, _Uize_Widget_Button).wire (
-										'Click',
-										function (_event) {
-											m.fire ({
-												name:'Move',
-												direction:_buttonDictionary [_key],
-												domEvent:_event.domEvent
-											});
-										}
-									);
-								}
-							);
-						}
-					}
-				),
-				_classPrototype = _class.prototype
-			;
+		var
+			/*** Variables for Scruncher Optimization ***/
+				_Uize = Uize,
+				_Uize_Node_Classes = _Uize.Node.Classes,
+
+			/*** General Variables ***/
+				_childrenInMini = {north:1,south:1,east:1,west:1,center:1}
+		;
 
 		/*** Private Instance Methods ***/
-			_classPrototype._updateUiMode = function () {
-				var
-					m = this
-				;
+			function _updateUiMode () {
+				var m = this;
 
 				if (m.isWired) {
 					if (m._useLinks) {
@@ -84,9 +52,7 @@ Uize.module ({
 							m.web (_name).display(m._mode == 'full' || _name in _childrenInMini)
 						;
 					} else {
-						var
-							_children = m.children
-						;
+						var _children = m.children;
 
 						// this only works if we have just two modes.
 						for (var _child in _children)
@@ -94,11 +60,10 @@ Uize.module ({
 						;
 					}
 				}
-			};
+			}
 
-			_classPrototype._updateUiEnabled = function () {
+			function _updateUiEnabled (m) {
 				var
-					m = this,
 					_children = m.children,
 					_enabled = m.get ('enabled'),
 					_cssClassDisabledButton = m._cssClassDisabledButton,
@@ -137,53 +102,77 @@ Uize.module ({
 					} else
 						Uize.callOn (_children,'set',[{enabled:_enabled}]);
 				}
-			};
+			}
 
-		/*** Wiring Methods ***/
-			_classPrototype.wireUi = function () {
-				var
-					m = this
-				;
-
-				if (!m.isWired) {
-					m.wire ('Changed.enabled',function () { m._updateUiEnabled () });
-
-					m._useLinks &&
-						_Uize.forEach (
-							m._buttonDictionary,
-							function (_direction, _name) {
-								m.wireNode (
-									_name,
-									'click',
-									function (_event) {
-										(m.get ('enabled') || m.get ('enabledInherited')) &&
-											m.fire ({
-												name:'Move',
-												direction:_direction,
-												domEvent:_event
-											})
-										;
-									}
-								);
-							}
-						)
-					;
-
-					_superclass.doMy (m,'wireUi');
-				}
-			};
-
-			_classPrototype.updateUi = function () {
+		return _superclass.subclass ({
+			omegastructor:function () {
 				var m = this;
-				if (m.isWired) {
-					_superclass.doMy (m,'updateUi');
-					m._updateUiMode ();
-					m._updateUiEnabled ();
+				if (!m._useLinks) {
+					var
+						_Uize_Widget_Button = _Uize.Widget.Button,
+						_buttonDictionary = m._buttonDictionary
+					;
+					_Uize.forEach(
+						_buttonDictionary,
+						function(_value, _key) {
+							m.addChild (_key, _Uize_Widget_Button).wire (
+								'Click',
+								function (_event) {
+									m.fire ({
+										name:'Move',
+										direction:_buttonDictionary [_key],
+										domEvent:_event.domEvent
+									});
+								}
+							);
+						}
+					);
 				}
-			};
+			},
 
-		/*** State Properties ***/
-			_class.stateProperties ({
+			instanceMethods:{
+				wireUi:function () {
+					var m = this;
+
+					if (!m.isWired) {
+						m.wire ('Changed.enabled',function () { _updateUiEnabled (m) });
+
+						m._useLinks &&
+							_Uize.forEach (
+								m._buttonDictionary,
+								function (_direction, _name) {
+									m.wireNode (
+										_name,
+										'click',
+										function (_event) {
+											(m.get ('enabled') || m.get ('enabledInherited')) &&
+												m.fire ({
+													name:'Move',
+													direction:_direction,
+													domEvent:_event
+												})
+											;
+										}
+									);
+								}
+							)
+						;
+
+						_superclass.doMy (m,'wireUi');
+					}
+				},
+
+				updateUi:function () {
+					var m = this;
+					if (m.isWired) {
+						_superclass.doMy (m,'updateUi');
+						_updateUiMode.call (m);
+						_updateUiEnabled (m);
+					}
+				}
+			},
+
+			stateProperties:{
 				_buttonDictionary:{
 					name:'buttonDictionary',
 					value:{
@@ -209,7 +198,7 @@ Uize.module ({
 				_cssClassDisabledButton:'cssClassDisabledButton',
 				_mode:{
 					name:'mode',
-					onChange:_classPrototype._updateUiMode,
+					onChange:_updateUiMode,
 					value:'full'
 					/*?
 						State properties
@@ -241,9 +230,8 @@ Uize.module ({
 						useLinks
 							A boolean used by the omegastructor and wireUi methods to determine whether to use child button widgets or links for the sub-actions.
 				*/
-			});
-
-			return _class;
+			}
+		});
 	}
 });
 

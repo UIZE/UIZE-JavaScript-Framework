@@ -87,27 +87,22 @@ Uize.module ({
 	builder:function (_class) {
 		'use strict';
 
-		/*** Names for Namespaced Privates ***/
-			var
-				_privatesNamespace = 'Uize.Widget.Dialog.xResizable.',
-				_pResizer = _privatesNamespace + 'resizer',
-				_pResizerInitialized = _privatesNamespace + 'resizerInitialized',
-				_pCreateResizerIfNecessary = _privatesNamespace + 'createResizerIfNecessary',
-				_pInitializeResizerNodesIfNecessary = _privatesNamespace + 'initializeResizerNodesIfNecessary',
+		var
+			/*** Variables for Scruncher Optimization ***/
 				_true = true,
 				_false = false,
 				_Uize = Uize,
-				_Uize_Node = _Uize.Node
+				_Uize_Node = _Uize.Node,
+
+			/*** Names for Namespaced Privates ***/
+				_privatesNamespace = 'Uize.Widget.Dialog.xResizable.',
+				_pResizer = _privatesNamespace + 'resizer',
+				_pResizerInitialized = _privatesNamespace + 'resizerInitialized'
 			;
 
-		var _classPrototype = _class.prototype;
-
 		/*** Private Instance Methods ***/
-			_classPrototype [_pCreateResizerIfNecessary] = function () {
-				var
-					m = this,
-					_resizer = m [_pResizer]
-				;
+			function _createResizerIfNecessary (m) {
+				var _resizer = m [_pResizer];
 				if (m.resizable && !_resizer) {
 					(
 						m [_pResizer] = _resizer = m.addChild (
@@ -184,17 +179,16 @@ Uize.module ({
 
 					/*** initialization ***/
 						if (m.isWired) {
-							m [_pInitializeResizerNodesIfNecessary] ();
+							_initializeResizerNodesIfNecessary (m);
 							m.get ('shown') && // sync position, if resizer created after dialog is shown
 								_syncResizerToDialogPosition ()
 							;
 							_resizer.wireUi (); // wire up, if resizer created after dialog is wired
 						}
 				}
-			};
+			}
 
-			_classPrototype [_pInitializeResizerNodesIfNecessary] = function () {
-				var m = this;
+			function _initializeResizerNodesIfNecessary (m) {
 				if (m.isWired && m.resizable && !m [_pResizerInitialized]) {
 					m [_pResizerInitialized] = _true;
 					m [_pResizer].set ({
@@ -205,10 +199,10 @@ Uize.module ({
 						}
 					});
 				}
-			};
+			}
 
-			_classPrototype._updateMaximizeUi = function () {
-				var 
+			function _updateMaximizeUi () {
+				var
 					m = this,
 					_maximize = m.children.maximize,
 					_restore = m.children.restore,
@@ -217,68 +211,68 @@ Uize.module ({
 
 				_maximize && _maximize.displayNode('', !_isMaximized);
 				_restore && _restore.displayNode('', _isMaximized);
-				
-			};
 
-		/*** implement hook methods ***/
-			_classPrototype.atEndOfOmegaStructor = function () {
-				var m = this;
+			}
 
-				m.addChild('maximize', _Uize.Widget.Button).wire('Click', function() {m.set({isMaximized:_true})});
-				m.addChild('restore', _Uize.Widget.Button).wire('Click', function() {m.set({isMaximized:_false})});
+		_class.declare ({
+			instanceMethods:{
+				atEndOfOmegaStructor:function () {
+					var m = this;
 
-				m [_pCreateResizerIfNecessary] ();
-			};
-			_classPrototype.afterWireUi = function () {
-				var m = this;
-				m.wireNode(window, 'resize', function () {
-					//This will resize the dialog to fit the screen if it is already maximized
-					m.get('isMaximized') && m.updateUiDimsIfShown();
-				});
+					m.addChild('maximize', _Uize.Widget.Button).wire('Click', function() {m.set({isMaximized:_true})});
+					m.addChild('restore', _Uize.Widget.Button).wire('Click', function() {m.set({isMaximized:_false})});
 
-				m._updateMaximizeUi();
+					_createResizerIfNecessary (m);
+				},
 
-				m [_pInitializeResizerNodesIfNecessary] ();
+				afterWireUi:function () {
+					var m = this;
+					m.wireNode(window, 'resize', function () {
+						//This will resize the dialog to fit the screen if it is already maximized
+						m.get('isMaximized') && m.updateUiDimsIfShown();
+					});
 
-			};
+					_updateMaximizeUi.call (m);
+					_initializeResizerNodesIfNecessary (m);
+				},
 
-			_classPrototype.updateUiDimsIfShown = function () {
-				var 
-					m = this,
-					_nodeToSetDimension = m.get('nodeToSetDimension')
-				;
-				if (m.isWired && m.get('shown') && !m.get('inDrag')) {
-					if (!m.get('isMaximized')) {
-						m.setNodeStyle(_nodeToSetDimension, { width: m.get('width'), height: m.get('height') });
-						//m.setNodeStyle('', { width: m.get('width') });
-					} else {
-						var
-							_contentDims = _Uize_Node.getDimensions(m.getNode(_nodeToSetDimension)),
-							_rootDims = _Uize_Node.getDimensions(m.getNode()),
-							_windowCoords = _Uize_Node.getCoords(window)
-						;
-						m.setNodeStyle(
-							'',
-							{
-								top: window.pageYOffset,
-								left: 0,
-								height: 'auto',
-								width:'auto'
-							}
-						);
-						m.setNodeStyle(
-							_nodeToSetDimension,
-							{
-								width: _windowCoords.width - (_rootDims.width - _contentDims.width),
-								height: _windowCoords.height - (_rootDims.height - _contentDims.height)
-							}
-						);
+				updateUiDimsIfShown:function () {
+					var
+						m = this,
+						_nodeToSetDimension = m.get('nodeToSetDimension')
+					;
+					if (m.isWired && m.get('shown') && !m.get('inDrag')) {
+						if (!m.get('isMaximized')) {
+							m.setNodeStyle(_nodeToSetDimension, { width: m.get('width'), height: m.get('height') });
+							//m.setNodeStyle('', { width: m.get('width') });
+						} else {
+							var
+								_contentDims = _Uize_Node.getDimensions(m.getNode(_nodeToSetDimension)),
+								_rootDims = _Uize_Node.getDimensions(m.getNode()),
+								_windowCoords = _Uize_Node.getCoords(window)
+							;
+							m.setNodeStyle(
+								'',
+								{
+									top: window.pageYOffset,
+									left: 0,
+									height: 'auto',
+									width:'auto'
+								}
+							);
+							m.setNodeStyle(
+								_nodeToSetDimension,
+								{
+									width: _windowCoords.width - (_rootDims.width - _contentDims.width),
+									height: _windowCoords.height - (_rootDims.height - _contentDims.height)
+								}
+							);
+						}
 					}
 				}
-			};
+			},
 
-		/*** State Properties ***/
-			_class.stateProperties ({
+			stateProperties:{
 				resizable:{
 					name:'resizable',
 					onChange:function () {
@@ -286,8 +280,8 @@ Uize.module ({
 							m = this,
 							_resizer = m [_pResizer]
 						;
-						m [_pCreateResizerIfNecessary] ();
-						m [_pInitializeResizerNodesIfNecessary] ();
+						_createResizerIfNecessary (m);
+						_initializeResizerNodesIfNecessary (m);
 						_resizer && _resizer.set ({enabled:m.resizable ? 'inherit' : _false});
 					}
 					/*?
@@ -305,8 +299,8 @@ Uize.module ({
 					name: 'isMaximized',
 					onChange: [
 						'updateUiDimsIfShown',
-						_classPrototype.updateUiPositionIfShown,
-						_classPrototype._updateMaximizeUi
+						'updateUiPositionIfShown',
+						_updateMaximizeUi
 					],
 					value: _false
 					/*?
@@ -318,7 +312,8 @@ Uize.module ({
 								- the initial value is =false=
 					*/
 				}
-			});
+			}
+		});
 	}
 });
 

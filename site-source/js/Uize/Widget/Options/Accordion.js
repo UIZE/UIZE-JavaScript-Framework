@@ -11,7 +11,7 @@
 
 /* Module Meta Data
 	type: Class
-	importance: 4
+	importance: 2
 	codeCompleteness: 100
 	docCompleteness: 2
 */
@@ -32,113 +32,24 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var
-				_true = true,
-				_false = false,
-
+		var
+			/*** Variables for Scruncher Optimization ***/
 				_Uize = Uize,
 				_Uize_Node = _Uize.Node,
 				_Uize_Fade = _Uize.Fade
-			;
-
-		/*** Class Constructor ***/
-			var
-				_class = _superclass.subclass (
-					null,
-					function () {
-						var
-							m = this,
-							_previousTabNodeHeight,
-							_newTabNodeHeight
-						;
-
-						function _tabBodyStart(_tabNo) {
-							m.isWired
-								// prepare the node to animate its height by 1) making sure it's visible
-								// and 2) it's in the flow of the the container
-								&& m.setNodeStyle(
-									m._getTabBodyNode(_tabNo),
-									{
-										display:'block',
-										position:'relative',
-										overflow:'hidden',
-										visibility:'visible'
-									}
-								)
-						}
-						function _setTabBodyHeight(_tabNo, _height) {
-							m.isWired
-								&& m.setNodeStyle(
-									m._getTabBodyNode(_tabNo),
-									{height:_height}
-								)
-						}
-						function _tabBodyDone(_tabNo, _mustDisplay) {
-							if (m.isWired) {
-								var _tabBodyNode = m._getTabBodyNode(_tabNo);
-
-								m.displayNode(_tabBodyNode, _mustDisplay);
-
-								// undo the explicit height & overflow we set
-								m.setNodeStyle(
-									_tabBodyNode,
-									{
-										height:'',
-										overflow:''
-									}
-								);
-							}
-						}
-
-						(m.fade = new _Uize_Fade).wire({
-							Start:function () {
-								_tabBodyStart(m._previousTabNo);
-								_tabBodyStart(m.get('valueNo'));
-								_previousTabNodeHeight = _Uize_Node.getDimensions(
-									m._getTabBodyNode(m._previousTabNo)
-								).height;
-								_newTabNodeHeight = m.fade.get('endValue');
-							},
-							'Changed.value':function () {
-								var _newHeight = +m.fade;
-
-								// Since we have only one fade object, the previous tab body node height
-								// needs to change inversely proportional to the change of the new tab body node
-								_previousTabNodeHeight
-									&& _setTabBodyHeight(
-										m._previousTabNo,
-										(1 - (_newHeight / _newTabNodeHeight)) * _previousTabNodeHeight
-									)
-								;
-								_setTabBodyHeight(m.get('valueNo'), _newHeight);
-							},
-							Done:function () {
-								var _newValueNo = m.get('valueNo');
-								_tabBodyDone(m._previousTabNo, _false);
-								_tabBodyDone(_newValueNo, _true);
-								m._previousTabNo = _newValueNo;
-							}
-						});
-
-						m.wire ('Changed.valueNo',function () { m._updateUiTabBodies() });
-					}
-				),
-				_classPrototype = _class.prototype
-			;
+		;
 
 		/*** Private Instance Methods ***/
-			_classPrototype._resolveToValueNo = function (_valueOrValueNo) {
-				return _Uize.isNumber (_valueOrValueNo) ? _valueOrValueNo : this.getValueNoFromValue (_valueOrValueNo)
-			};
+			function _resolveToValueNo (m,_valueOrValueNo) {
+				return _Uize.isNumber (_valueOrValueNo) ? _valueOrValueNo : m.getValueNoFromValue (_valueOrValueNo)
+			}
 
-			_classPrototype._getTabBodyNode = function (_valueOrValueNo) {
-				return this.getNode ('option' + this._resolveToValueNo (_valueOrValueNo) + 'TabBody')
-			};
+			function _getTabBodyNode (m,_valueOrValueNo) {
+				return m.getNode ('option' + _resolveToValueNo (m,_valueOrValueNo) + 'TabBody')
+			}
 
-			_classPrototype._updateUiTabBodies = function () {
+			function _updateUiTabBodies (m) {
 				var
-					m = this,
 					_previousTabNo = m._previousTabNo,
 					_newTabNo = m.get('valueNo')
 				;
@@ -188,61 +99,135 @@ Uize.module ({
 						)
 					;
 				}
-			};
+			}
 
-		/*** Public Instance Methods ***/
-			_classPrototype.enableTab = function (_value,_mustEnable) {
-				this.getOptionButton (_value).set ({enabled:_mustEnable ? 'inherit' : false});
-				this._updateUiTabBodies ();
-			};
+		return _superclass.subclass ({
+			omegastructor:function () {
+				var
+					m = this,
+					_previousTabNodeHeight,
+					_newTabNodeHeight
+				;
 
-			_classPrototype.getOptionButton = function (_valueOrValueNo) {
-				return this.children ['option' + this._resolveToValueNo (_valueOrValueNo)]
-			};
-
-			_classPrototype.tabExists = function (_valueOrValueNo) {
-				var _optionButton = this.getOptionButton (_valueOrValueNo);
-				return (
-					_optionButton && (_optionButton.getNode () || this._getTabBodyNode (_valueOrValueNo))
-						? _true
-						: _false
-				);
-			};
-
-			_classPrototype.updateUi = function () {
-				var m = this;
-				if (m.isWired) {
-					var _rootNode = m.getNode();
-
-					// Ensure that the root node is at least positioned relative
-					m.getNodeStyle(_rootNode, 'position') == 'static'
-						&& m.setNodeStyle(_rootNode, {position:'relative'})
-					;
-
-					m._updateUiTabBodies();
-
-					_superclass.doMy (m,'updateUi');
+				function _tabBodyStart(_tabNo) {
+					m.isWired
+						// prepare the node to animate its height by 1) making sure it's visible
+						// and 2) it's in the flow of the the container
+						&& m.setNodeStyle(
+							_getTabBodyNode(m,_tabNo),
+							{
+								display:'block',
+								position:'relative',
+								overflow:'hidden',
+								visibility:'visible'
+							}
+						)
 				}
-			};
-
-			_classPrototype.wireUi = function () {
-				var m = this;
-				if (!m.isWired) {
-					m._previousTabNo = m.get('valueNo');
-
-					_superclass.doMy (m,'wireUi');
+				function _setTabBodyHeight(_tabNo, _height) {
+					m.isWired
+						&& m.setNodeStyle(
+							_getTabBodyNode(m,_tabNo),
+							{height:_height}
+						)
 				}
-			};
+				function _tabBodyDone(_tabNo, _mustDisplay) {
+					if (m.isWired) {
+						var _tabBodyNode = _getTabBodyNode(m,_tabNo);
 
-		/*** State Properties ***/
-			_class.stateProperties ({
+						m.displayNode(_tabBodyNode, _mustDisplay);
+
+						// undo the explicit height & overflow we set
+						m.setNodeStyle(
+							_tabBodyNode,
+							{
+								height:'',
+								overflow:''
+							}
+						);
+					}
+				}
+
+				(m.fade = new _Uize_Fade).wire({
+					Start:function () {
+						_tabBodyStart(m._previousTabNo);
+						_tabBodyStart(m.get('valueNo'));
+						_previousTabNodeHeight = _Uize_Node.getDimensions(
+							_getTabBodyNode(m,m._previousTabNo)
+						).height;
+						_newTabNodeHeight = m.fade.get('endValue');
+					},
+					'Changed.value':function () {
+						var _newHeight = +m.fade;
+
+						// Since we have only one fade object, the previous tab body node height
+						// needs to change inversely proportional to the change of the new tab body node
+						_previousTabNodeHeight
+							&& _setTabBodyHeight(
+								m._previousTabNo,
+								(1 - (_newHeight / _newTabNodeHeight)) * _previousTabNodeHeight
+							)
+						;
+						_setTabBodyHeight(m.get('valueNo'), _newHeight);
+					},
+					Done:function () {
+						var _newValueNo = m.get('valueNo');
+						_tabBodyDone(m._previousTabNo, false);
+						_tabBodyDone(_newValueNo, true);
+						m._previousTabNo = _newValueNo;
+					}
+				});
+
+				m.wire ('Changed.valueNo',function () { _updateUiTabBodies(m) });
+			},
+
+			instanceMethods:{
+				enableTab:function (_value,_mustEnable) {
+					this.getOptionButton (_value).set ({enabled:_mustEnable ? 'inherit' : false});
+					this._updateUiTabBodies ();
+				},
+
+				getOptionButton:function (_valueOrValueNo) {
+					return this.children ['option' + _resolveToValueNo (this,_valueOrValueNo)]
+				},
+
+				tabExists:function (_valueOrValueNo) {
+					var _optionButton = this.getOptionButton (_valueOrValueNo);
+					return !!(_optionButton && (_optionButton.getNode () || this._getTabBodyNode (_valueOrValueNo)));
+				},
+
+				updateUi:function () {
+					var m = this;
+					if (m.isWired) {
+						var _rootNode = m.getNode();
+
+						// Ensure that the root node is at least positioned relative
+						m.getNodeStyle(_rootNode, 'position') == 'static'
+							&& m.setNodeStyle(_rootNode, {position:'relative'})
+						;
+
+						m._updateUiTabBodies();
+
+						_superclass.doMy (m,'updateUi');
+					}
+				},
+
+				wireUi:function () {
+					var m = this;
+					if (!m.isWired) {
+						m._previousTabNo = m.get('valueNo');
+
+						_superclass.doMy (m,'wireUi');
+					}
+				}
+			},
+
+			stateProperties:{
 				_animationCurve:'animationCurve',
 				_animationDuration:{
 					name:'animationDuration',
 					value:500
 				}
-			});
-
-		return _class;
+			}
+		});
 	}
 });

@@ -33,188 +33,187 @@ Uize.module ({
 	builder:function (_class) {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var
+		var
+			/*** Variables for Scruncher Optimization ***/
 				_true = true,
 				_false = false,
-				_Uize = Uize,
-				_classPrototype = _class.prototype
-			;
+				_Uize = Uize
+		;
 
-		/*** implement hook methods ***/
-			_classPrototype.afterWireUi = function () {
-				var m = this;
-				if (m._isEditable) {
-					// wire add item
-					m.wire('Item.add', function (_event) {
-						_event.bubble = _false;
-						m.addItemHandler(_event.properties);
-					});
-
-					// wire delete item
-					m.wire('Item.delete', function (_event) {
-						_event.bubble = _false;
-						m.deleteItemHandler(_event.source);
-					});
-
-					// wire edit item
-					m.wire('Item.edit', function (_event) {
-						_event.bubble = _false;
-						m.editItemHandler(_event.source, _event.properties);
-					});
-
-					m._uniqueIdentifierId = m.get('totalItems');
-
-					// By default, the items container for collections is this.getNode('items'). Override it.
-					m.set({ itemWidgetProperties: _Uize.copyInto(m.get('itemWidgetProperties'), { container: m.getContainerNode() }) });
-				}
-			};
-
-			/* may be overriden by subclasses */
-			_classPrototype.getCollectionItemControlName = function (/*_itemWidgetProperties*/) {
-				return this.get('collectionItemControlName');
-			};
-
-		/* default is to override the default items container, may be 'undone' in subclasses */
-			_classPrototype.getContainerNode = function () {
-				return this.getNode('itemsNode');
-			};
-
-		/*** Public Instance Methods ***/
-
-			_classPrototype.addNewItem = function (_properties, _callback) {
-				var m = this;
-				if (m.isWired) {
-					_properties = _properties || {};
-					var
-						_itemWidgetProperties = m.get('itemWidgetProperties'),
-						_itemWidgetName = m.get('itemWidgetNamePrefix') + m._uniqueIdentifierId++,
-						_collectionItemControlName = m.getCollectionItemControlName(_properties)
-					;
-
-					if (m.getNode('itemTemplate')) {
-						m.add([{ properties: _Uize.copyInto(_properties, { id: _itemWidgetName }), selected: _true }]);
-						_callback && _callback(m.children[_itemWidgetName]);
-						m.fire({ name: 'Item.added', bubble: _true });
-
-					}
-					else if (_collectionItemControlName) {
-						var _serializedProperties = m.serializeItemProperties(_properties);
-						m.callInherited('loadHtmlIntoNode')(
-							{
-								node: _itemWidgetProperties.container,
-								injectMode: _itemWidgetProperties.insertionMode
-							},
-							_Uize.copyInto(
-								{
-									cp: _collectionItemControlName,
-									idPrefix: m.get('idPrefix') + '_' + _itemWidgetName,
-									rootCssClassName: m.get('itemRootNodeCssClass')
-								},
-								_serializedProperties // doesn't handle objects w/ any depth...
-							),
-							{
-								cache: 'memory',
-								callback: function () {
-									_callback && _callback(m.children[_itemWidgetName]);
-									m.fire({ name: 'Item.added', bubble: _true });
-								}
-							}
-						);
-					}
-				}
-			};
-
-			_classPrototype.adaptFormValuesToItemProperties = function (_formValues) { return _formValues };
-			_classPrototype.adaptItemPropertiesToFormValues = function (_itemProperties) { return _itemProperties };
-
-			_classPrototype.mergeItemProperties = function (_oldItemProperties, _newItemProperties) {
-				return _Uize.copy(_oldItemProperties, _newItemProperties);
-			};
-
-			_classPrototype.serializeItemProperties = function (_itemProperties) {
-				var
-					_serializedProperties = _Uize.clone(_itemProperties),
-					_keys = _Uize.keys(_serializedProperties)
-				;
-				for (var _keyIndex in _keys) {
-					var
-						_propertyName = _keys[_keyIndex],
-						_propertyValue = _serializedProperties[_propertyName]
-					;
-
-					if (_Uize.isPlainObject (_propertyValue)) {
+		_class.declare ({
+			instanceMethods:{
+				addNewItem:function (_properties, _callback) {
+					var m = this;
+					if (m.isWired) {
+						_properties = _properties || {};
 						var
-							_isPropertyValueFlat = _true,
-							_keys2 = _Uize.keys(_propertyValue)
+							_itemWidgetProperties = m.get('itemWidgetProperties'),
+							_itemWidgetName = m.get('itemWidgetNamePrefix') + m._uniqueIdentifierId++,
+							_collectionItemControlName = m.getCollectionItemControlName(_properties)
 						;
-						for (var _keyIndex2 in _keys2) {
-							_Uize.isPlainObject (_propertyValue[_keys2[_keyIndex2]]) && (_isPropertyValueFlat = _false);
+
+						if (m.getNode('itemTemplate')) {
+							m.add([{ properties: _Uize.copyInto(_properties, { id: _itemWidgetName }), selected: _true }]);
+							_callback && _callback(m.children[_itemWidgetName]);
+							m.fire({ name: 'Item.added', bubble: _true });
+
 						}
-
-						if (_isPropertyValueFlat)
-							_serializedProperties[_propertyName] = _Uize.Url.toParams(_propertyValue);
-						else
-							_serializedProperties[_propertyName] = _Uize.Json.to(_propertyValue);
+						else if (_collectionItemControlName) {
+							var _serializedProperties = m.serializeItemProperties(_properties);
+							m.callInherited('loadHtmlIntoNode')(
+								{
+									node: _itemWidgetProperties.container,
+									injectMode: _itemWidgetProperties.insertionMode
+								},
+								_Uize.copyInto(
+									{
+										cp: _collectionItemControlName,
+										idPrefix: m.get('idPrefix') + '_' + _itemWidgetName,
+										rootCssClassName: m.get('itemRootNodeCssClass')
+									},
+									_serializedProperties // doesn't handle objects w/ any depth...
+								),
+								{
+									cache: 'memory',
+									callback: function () {
+										_callback && _callback(m.children[_itemWidgetName]);
+										m.fire({ name: 'Item.added', bubble: _true });
+									}
+								}
+							);
+						}
 					}
-				}
-				return _serializedProperties;
-			};
+				},
 
-			_classPrototype.launchFormDialog = function (_dialogParams, _itemWidget) {
-				var m = this;
-				if (m.isWired) {
+				adaptFormValuesToItemProperties:function (_formValues) { return _formValues },
+				adaptItemPropertiesToFormValues:function (_itemProperties) { return _itemProperties },
 
+				mergeItemProperties:function (_oldItemProperties, _newItemProperties) {
+					return _Uize.copy(_oldItemProperties, _newItemProperties);
+				},
+
+				serializeItemProperties:function (_itemProperties) {
 					var
-						_formDialogJsClass = m.get('formDialogJsClass'),
-						_itemProperties = (_itemWidget && _itemWidget.get('properties')) || {}
+						_serializedProperties = _Uize.clone(_itemProperties),
+						_keys = _Uize.keys(_serializedProperties)
 					;
+					for (var _keyIndex in _keys) {
+						var
+							_propertyName = _keys[_keyIndex],
+							_propertyValue = _serializedProperties[_propertyName]
+						;
 
-					_formDialogJsClass &&
-						m.callInherited('useDialog')({
-							component: {
-								name: _formDialogJsClass,
-								params: _Uize.copy(_dialogParams, m.adaptItemPropertiesToFormValues(_itemProperties), m._formDialogParams)
-							},
-							widgetProperties: { name: 'itemFormDialog' },
-							submitHandler: function (_newProperties) {
-								if (_itemWidget) {
-									_itemWidget.set({properties:m.mergeItemProperties(_itemProperties, m.adaptFormValuesToItemProperties(_newProperties))});
-									m.fire({name:'Item.edited', bubble:_true});
-								}
-								else {
-									m.addNewItem(m.adaptFormValuesToItemProperties(_newProperties));
-								}
+						if (_Uize.isPlainObject (_propertyValue)) {
+							var
+								_isPropertyValueFlat = _true,
+								_keys2 = _Uize.keys(_propertyValue)
+							;
+							for (var _keyIndex2 in _keys2) {
+								_Uize.isPlainObject (_propertyValue[_keys2[_keyIndex2]]) && (_isPropertyValueFlat = _false);
 							}
-						})
+
+							if (_isPropertyValueFlat)
+								_serializedProperties[_propertyName] = _Uize.Url.toParams(_propertyValue);
+							else
+								_serializedProperties[_propertyName] = _Uize.Json.to(_propertyValue);
+						}
+					}
+					return _serializedProperties;
+				},
+
+				launchFormDialog:function (_dialogParams, _itemWidget) {
+					var m = this;
+					if (m.isWired) {
+
+						var
+							_formDialogJsClass = m.get('formDialogJsClass'),
+							_itemProperties = (_itemWidget && _itemWidget.get('properties')) || {}
+						;
+
+						_formDialogJsClass &&
+							m.callInherited('useDialog')({
+								component: {
+									name: _formDialogJsClass,
+									params: _Uize.copy(_dialogParams, m.adaptItemPropertiesToFormValues(_itemProperties), m._formDialogParams)
+								},
+								widgetProperties: { name: 'itemFormDialog' },
+								submitHandler: function (_newProperties) {
+									if (_itemWidget) {
+										_itemWidget.set({properties:m.mergeItemProperties(_itemProperties, m.adaptFormValuesToItemProperties(_newProperties))});
+										m.fire({name:'Item.edited', bubble:_true});
+									}
+									else {
+										m.addNewItem(m.adaptFormValuesToItemProperties(_newProperties));
+									}
+								}
+							})
+						;
+					}
+				},
+
+				deleteItemHandler:function (_itemWidget) {
+					var m = this;
+					if (m.isWired && _itemWidget) {
+						m.remove([_itemWidget], _true);
+						m.fire({name:'Item.deleted', bubble:_true});
+					}
+				},
+
+				editItemHandler:function (_itemWidget, _dialogParams) {
+					var m = this;
+					m.isWired && _itemWidget &&
+						m.launchFormDialog(_dialogParams, _itemWidget)
 					;
-				}
-			};
+				},
 
-			_classPrototype.deleteItemHandler = function (_itemWidget) {
-				var m = this;
-				if (m.isWired && _itemWidget) {
-					m.remove([_itemWidget], _true);
-					m.fire({name:'Item.deleted', bubble:_true});
-				}
-			};
+				addItemHandler:function (_dialogParams) {
+					var m = this;
+					m.isWired &&
+						m.launchFormDialog(_dialogParams)
+					;
+				},
 
-			_classPrototype.editItemHandler = function (_itemWidget, _dialogParams) {
-				var m = this;
-				m.isWired && _itemWidget &&
-					m.launchFormDialog(_dialogParams, _itemWidget)
-				;
-			};
+				/*** Hook Method Implementations ***/
+					afterWireUi:function () {
+						var m = this;
+						if (m._isEditable) {
+							// wire add item
+							m.wire('Item.add', function (_event) {
+								_event.bubble = _false;
+								m.addItemHandler(_event.properties);
+							});
 
-			_classPrototype.addItemHandler = function (_dialogParams) {
-				var m = this;
-				m.isWired &&
-					m.launchFormDialog(_dialogParams)
-				;
-			};
+							// wire delete item
+							m.wire('Item.delete', function (_event) {
+								_event.bubble = _false;
+								m.deleteItemHandler(_event.source);
+							});
 
-		/*** State Properties ***/
-			_class.stateProperties ({
+							// wire edit item
+							m.wire('Item.edit', function (_event) {
+								_event.bubble = _false;
+								m.editItemHandler(_event.source, _event.properties);
+							});
+
+							m._uniqueIdentifierId = m.get('totalItems');
+
+							// By default, the items container for collections is this.getNode('items'). Override it.
+							m.set({ itemWidgetProperties: _Uize.copyInto(m.get('itemWidgetProperties'), { container: m.getContainerNode() }) });
+						}
+					},
+
+					/* may be overriden by subclasses */
+					getCollectionItemControlName:function (/*_itemWidgetProperties*/) {
+						return this.get('collectionItemControlName');
+					},
+
+					/* default is to override the default items container, may be 'undone' in subclasses */
+					getContainerNode:function () {
+						return this.getNode('itemsNode');
+					}
+			},
+
+			stateProperties:{
 				_collectionItemControlName:'collectionItemControlName',
 				_formDialogJsClass:'formDialogJsClass',
 				_formDialogParams:{
@@ -229,7 +228,8 @@ Uize.module ({
 					name:'itemsNode',
 					value:'items'
 				}
-			});
+			}
+		});
 	}
 });
 

@@ -32,77 +32,70 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var
-				_true = true,
-				_false = false,
+		var
+			/*** Variables for Scruncher Optimization ***/
 				_Uize_Node_Form = Uize.Node.Form
-			;
+		;
 
-		/*** Class Constructor ***/
-			var
-				_class = _superclass.subclass (
-					function () {
-						var m = this;
-
-						m._isModified = _false;
-
-						/*** add event handler ***/
-							function _handleOk(_qualifiedOk) {
-								if (!m._theForm)
-									return m.fire ('Submission Complete');
-
-								var _result = m.getResult();
-								if (_result.isModified)
-									m._formData = _result.formData;
-
-								_result.isQualifiedOk = _qualifiedOk;
-								m.fire ({name:'Submission Complete',result:_result});
-								m._isModified = _false;
-							}
-
-							m.wire ({
-								'Ok': function () { _handleOk(_false); },
-								'Qualified Ok': function () { _handleOk(_true); },
-								'Cancel': function () {
-									if (m._theForm) {
-										m._isModified = m.getResult().isModified;
-									}
-								},
-								'Before Show': function () {
-									m._theForm && m._formData && m._isModified &&
-										_Uize_Node_Form.setValues(m._formData)
-									;
-								}
-							});
-					}
-				),
-				_classPrototype = _class.prototype
-			;
-
-		/*** Public Instance Methods ***/
-			_classPrototype.wireUi = function () {
+		return _superclass.subclass ({
+			alphastructor:function () {
 				var m = this;
-				if (!m.isWired) {
-					/*** initialization ***/
-						var _theForm = m._theForm = m.getNode('form');
-						if (_theForm && !m._formData)
-							m._formData = _Uize_Node_Form.getValues(_theForm);
 
-						_superclass.doMy (m,'wireUi');
+				m._isModified = false;
+
+				/*** add event handler ***/
+					function _handleOk(_qualifiedOk) {
+						if (!m._theForm)
+							return m.fire ('Submission Complete');
+
+						var _result = m.getResult();
+						if (_result.isModified)
+							m._formData = _result.formData;
+
+						_result.isQualifiedOk = _qualifiedOk;
+						m.fire ({name:'Submission Complete',result:_result});
+						m._isModified = false;
+					}
+
+					m.wire ({
+						'Ok': function () { _handleOk(false); },
+						'Qualified Ok': function () { _handleOk(true); },
+						'Cancel': function () {
+							if (m._theForm) {
+								m._isModified = m.getResult().isModified;
+							}
+						},
+						'Before Show': function () {
+							m._theForm && m._formData && m._isModified &&
+								_Uize_Node_Form.setValues(m._formData)
+							;
+						}
+					});
+			},
+
+			instanceMethods:{
+				wireUi:function () {
+					var m = this;
+					if (!m.isWired) {
+						/*** initialization ***/
+							var _theForm = m._theForm = m.getNode('form');
+							if (_theForm && !m._formData)
+								m._formData = _Uize_Node_Form.getValues(_theForm);
+
+							_superclass.doMy (m,'wireUi');
+					}
+				},
+
+				getResult:function () {
+					var
+						m = this,
+						_formData = _Uize_Node_Form.getValues(m._theForm)
+					;
+					return {isModified:!Uize.Data.identical(m._formData, _formData), formData:_formData};
 				}
-			};
+			},
 
-			_classPrototype.getResult = function () {
-				var
-					m = this,
-					_formData = _Uize_Node_Form.getValues(m._theForm)
-				;
-				return {isModified:!Uize.Data.identical(m._formData, _formData), formData:_formData};
-			};
-
-		/*** State Properties ***/
-			_class.stateProperties ({
+			stateProperties:{
 				_formData:{
 					name:'formData',
 					value:null,
@@ -110,9 +103,8 @@ Uize.module ({
 						_Uize_Node_Form.setValues(this._formData);
 					}
 				}
-			});
-
-		return _class;
+			}
+		});
 	}
 });
 
