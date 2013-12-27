@@ -1,0 +1,92 @@
+The new =Uize.Data.Flatten= module provides methods for flattening a hierarchical / tree structured object to a flat, key/value hash table, as well as unflattening a key/value hash table to produce a hierarchical / tree structured object.
+
+The methods of the =Uize.Data.Flatten= module make it easy to represent a hierarchical, tree structure or graph object using a single level hash / dictionary / lookup object.
+
+Flattening a Hierarchical Object
+	When flattening a hierarchical object to a hash structure using the =Uize.Data.Flatten.flatten= method, information about the original structure of object being flattened is retained in the key names of the flattened object by using the dereferencing path to the leaf nodes to form the key names.
+
+	This has the advantage of providing a natural way to derive keys for the flattened object that don't collide for different leaf nodes, as well as retaining information necessary to reconstitute the original source object from a flattened object using the companion =Uize.Data.Flatten.unflatten= method.
+
+	EXAMPLE
+	......................................................................................
+	Uize.Data.Flatten.flatten ({
+		animals:{
+			pets:{
+				dogs:{
+					smallBreeds:['West Highland White','Miniature Chihuahua','Teacup Poodle'],
+					largeBreeds:['Afghan','Great Dane','Irish Wolfhound','St. Bernard']
+				},
+				cats:['Persian','Siamese','Hairless']
+			},
+			wildAnimals:{
+				dogs:['Coyote','Dingo'],
+				cats:['Bobcat','Cheetah','Leopard','Lion','Lynx','Mountain Lion','Tiger'],
+				other:['Aardvark','Elephant','Hedgehog','Opossum','Wildebeest','Zebra']
+			}
+		}
+	});
+	......................................................................................
+
+	In the above example, we are flattening a hierarchical object that contains a (somewhat unscientific) classification of animals. The =Uize.Data.Flatten.flatten= method creates the resulting hash / lookup object that contains only properties for the leaf node properties of the hierarchical object, and where the key names represent the dereferencing
+
+	RESULT
+	...................................................................................................
+	{
+		'animals.pets.dogs.smallBreeds':['West Highland White','Miniature Chihuahua','Teacup Poodle'],
+		'animals.pets.dogs.largeBreeds':['Afghan','Great Dane','Irish Wolfhound','St. Bernard'],
+		'animals.pets.cats':['Persian','Siamese','Hairless'],
+		'animals.wildAnimals.dogs':['Coyote','Dingo'],
+		'animals.wildAnimals.cats':['Bobcat','Cheetah','Leopard','Lion','Lynx','Mountain Lion','Tiger'],
+		'animals.wildAnimals.other':['Aardvark','Elephant','Hedgehog','Opossum','Wildebeest','Zebra']
+	}
+	...................................................................................................
+
+Unflattening a Flattened Object
+	The =Uize.Data.Flatten= module provides the =Uize.Data.Flatten.unflatten= method to allow the flattening performed by the =Uize.Data.Flatten.flatten= method to be reversed.
+
+	Using the =Uize.Data.Flatten.unflatten= method, a flattened object that was generated from a source object using the =Uize.Data.Flatten.flatten= method can be unflattened to produce an object with the contents of the original source object. Consider the following example...
+
+	EXAMPLE
+	...................................................................................................
+	Uize.Data.Flatten.unflatten ({
+		'animals.pets.dogs.smallBreeds':['West Highland White','Miniature Chihuahua','Teacup Poodle'],
+		'animals.pets.dogs.largeBreeds':['Afghan','Great Dane','Irish Wolfhound','St. Bernard'],
+		'animals.pets.cats':['Persian','Siamese','Hairless'],
+		'animals.wildAnimals.dogs':['Coyote','Dingo'],
+		'animals.wildAnimals.cats':['Bobcat','Cheetah','Leopard','Lion','Lynx','Mountain Lion','Tiger'],
+		'animals.wildAnimals.other':['Aardvark','Elephant','Hedgehog','Opossum','Wildebeest','Zebra']
+	});
+	...................................................................................................
+
+	In the above example, we are unflattening an object that contains a classification of animals, where the hierarchical classification information has been flattened into the key names using the =Uize.Data.Flatten.flatten= method with its default behavior of using the "." (period) character as a delimiter when generating key names from path segments. From the above statement, we get the following result...
+
+	RESULT
+	......................................................................................
+	{
+		animals:{
+			pets:{
+				dogs:{
+					smallBreeds:['West Highland White','Miniature Chihuahua','Teacup Poodle'],
+					largeBreeds:['Afghan','Great Dane','Irish Wolfhound','St. Bernard']
+				},
+				cats:['Persian','Siamese','Hairless']
+			},
+			wildAnimals:{
+				dogs:['Coyote','Dingo'],
+				cats:['Bobcat','Cheetah','Leopard','Lion','Lynx','Mountain Lion','Tiger'],
+				other:['Aardvark','Elephant','Hedgehog','Opossum','Wildebeest','Zebra']
+			}
+		}
+	}
+	......................................................................................
+
+Unit Tests and Documentation
+	The new =Uize.Data.Flatten= module has comprehensive unit tests along with very thorough documentation.
+
+	[[Uize.Data.Flatten][LEARN MORE]]
+
+....................................................................................
+<< metadata >>
+
+title: 2013-12-26 - NEW MODULE: Uize.Data.Flatten
+....................................................................................
