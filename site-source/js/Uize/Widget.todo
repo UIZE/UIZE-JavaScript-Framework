@@ -41,25 +41,29 @@ More Versatile wireNode Method
 			- perhaps this problem is averted by not flagging the properties, but rather by specifying the properties when registering updaters
 
 	BEFORE
-	..............................................
-	_classPrototype._updateUiValue = function () {
-		var _this = this;
-		if (_this.isWired) {
+	....................................
+	function _updateUiValue () {
+		var m = this;
+		if (m.isWired) {
 			// code to update UI for value
 		}
 	};
 
-	_classPrototype.updateUi = function () {
-		this._updateUiValue ();
-	};
+	_class.declare ({
+		instanceMethods:{
+			updateUi:function () {
+				_updateUiValue.call (this);
+			}
+		},
 
-	_class.stateProperties ({
-		_value:{
-			name:'value',
-			onChange:_classPrototype._updateUiValue
+		stateProperties:{
+			_value:{
+				name:'value',
+				onChange:_updateUiValue
+			}
 		}
 	});
-	..............................................
+	....................................
 
 	AFTER
 	....................................
@@ -70,7 +74,7 @@ More Versatile wireNode Method
 	_class.registerUiUpdater (
 		'value',
 		function () {
-			var _this = this;
+			var m = this;
 			// code to update UI for value
 		}
 	);
@@ -131,7 +135,7 @@ More Versatile wireNode Method
 - deprecate insertUi in favor of built property
 	- PROBLEM: can't rely on wireUi as single gatekeeper because it gets overrided by subclasses, unless you try to tuck the logic into the conditional check and change its semantics...
 		................................................................................
-		if (!_this.wired ()) {
+		if (!m.wired ()) {
 			// wire stuff up
 		}
 		................................................................................
@@ -139,7 +143,7 @@ More Versatile wireNode Method
 		BECOMES...
 
 		................................................................................
-		if (!_this.prepareToWire ()) {
+		if (!m.prepareToWire ()) {
 			// wire stuff up
 		}
 		................................................................................
@@ -176,17 +180,17 @@ New Mode for Building HTML
 - a generic way for a widget to be informed if it is being revealed as a result of a parent node in the DOM changing its display state or something else
 - idea: provide a way to expose all Uize.Node methods through Uize.Widget, without having to create instance methods for each...
 	eg.
-		................................................................................
-		_this.node (nodeName,'methodName',param1,param2,...)
+		..................................................
+		m.node (nodeName,'methodName',param1,param2,...)
 		a_a.node (nodeName,'methodName',param1,param2,...)
-		................................................................................
+		..................................................
 
 		vs.
 
-		................................................................................
-		_Uize_Node.methodName (_this.getNode (nodeName),param1,param2,...)
+		..............................................................
+		_Uize_Node.methodName (m.getNode (nodeName),param1,param2,...)
 		a_a.methodName (a_a.getNode (nodeName),param1,param2,...)
-		................................................................................
+		..............................................................
 
 	- benefits
 		- makes the code a tiny bit shorter
@@ -204,25 +208,4 @@ New Mode for Building HTML
 	- getText => getNodeText
 	- injectHtml => injectNodeHtml
 	- showInLayoutFlow => showNodeInLayoutFlow
-
-	- dynamically construct such methods, in order to avoid adding too much to code size
-		................................................................................
-		function _makeNodeMethod (_methodPrefix,_methodSuffix) {
-			_classPrototype [_methodPrefix + 'Node' + _methodSuffix] = Function ('arguments [0] = this.getNode (arguments [0]); return Uize.Node.' + _methodPrefix + _methodSuffix + '.apply (0,arguments)');
-		}
-
-		_makeNodeMethod ('set','Value'); // creates setNodeValue
-		_makeNodeMethod ('get','Style'); // creates getNodeStyle
-		................................................................................
-
-		- scrunched size before change = 8347
-		- scrunched size after change = 7921
-
-- solve the problem of some widget classes being used only for their static methods and not their full functionality. Perhaps some helper method functionality should be separated out into packages that can be used outside of the context of widgets. As a general rule, if some functionality might be useful without widgets being involved, then it should be implemented in a separate package module.
-	- Uize.Widget.Drag
-	- Uize.Widget.ImagePort
-	- Uize.Widget.Page
-	- Uize.Widget.Population
-	- Uize.Widget.Tree
-
 

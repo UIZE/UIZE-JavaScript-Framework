@@ -1384,23 +1384,6 @@ Advanced Topics
 
 		When creating subclasses, it is important not to access methods or properties defined in the superclass with private names. The code will work when it is unscrunched, but there is no guarantee *what* your subclass will be accessing when all the code is scrunched.
 
-		Private and Public References
-			Sometimes, for size optimization, it can be helpful to assign a private reference to a public instance method.
-
-			EXAMPLE
-			....................................................................................
-			_classPrototype.myInstanceMethod = _classPrototype._myInstanceMethod = function () {
-				// do stuff
-			};
-			....................................................................................
-
-			In this example, the private instance method =_myInstanceMethod= is mapped to the public instance method =myInstanceMethod=. Inside the class' implementation, the private name can be used. This is useful if there will be many calls - in the class' implementation - to an instance method that's publicly accessible, as the private name will be reduced in size by the Scruncher.
-
-			IMPORTANT
-			- Be careful when using this technique, because using a private reference to a public instance method doesn't ensure that a class' implementation will be calling a subclass' override of the instance method, since the subclass won't assign a value for the private identifier.
-			- This technique is not useful for public instance properties that are expected to be assigned through the public interface, since assigning a value using the public name will not assign that same value to the private version.
-			- This technique *could* be used for public instance properties that are intended to be read only and are not intended to be set outside of the class' implementation code. The technique *could* also be used if the value of the property was an object and was never intended to be changed, even if the contents of the object is expected to be modified by code outside of the class' implementation.
-
 	Non-inheritable Statics ~~ Non-inheritable Static
 		Unless otherwise specified, all static features - methods as well as properties - of a =Uize.Class= subclass are inherited in turn by their subclasses.
 

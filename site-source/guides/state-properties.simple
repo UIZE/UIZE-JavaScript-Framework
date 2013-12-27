@@ -151,11 +151,13 @@ More on Setting Values
 
 		Consider the following example...
 
-		...............................................................
-		_classPrototype.increment = function (_propertyName,_amount) {
-			this.set (_propertyName,this.get (_propertyName) + _amount);
-		};
-		...............................................................
+		..................................................................
+		_class.instanceMethods ({
+			increment:function (_propertyName,_amount) {
+				this.set (_propertyName,this.get (_propertyName) + _amount);
+			}
+		});
+		..................................................................
 
 		In the above example, an instance method has been defined that accepts the name of a state property as its first parameter and an increment amount as its second parameter. Once the current value for the specified property has been retrieved using the =get= method, it is then incremented and set using the form of the =set= method that takes property name and value as its two parameters. Easy.
 
@@ -220,11 +222,13 @@ More on Getting Values
 
 		Consider the following example...
 
-		...............................................................
-		_classPrototype.increment = function (_propertyName,_amount) {
-			this.set (_propertyName,this.get (_propertyName) + _amount);
-		};
-		...............................................................
+		..................................................................
+		_class.instanceMethods ({
+			increment:function (_propertyName,_amount) {
+				this.set (_propertyName,this.get (_propertyName) + _amount);
+			}
+		});
+		..................................................................
 
 		In the above example, an instance method has been defined that accepts the name of a state property as its first parameter and an increment amount as its second parameter. The method then proceeds to increment the specified state property by the specified amount. Nothing special needs to be done to access the state property's value because the =get= method already takes a parameter for specifying the property's name.
 
@@ -630,32 +634,30 @@ More on Declaring State Properties
 
 			In the above example, the =_updateArea= function is registered as the =onChange= handler for both the =width= and =height= state properties. Even though it is just a function and not declared as an instance method for the class (public *or* private), it is nevertheless called as a method of the instance whose state properties' values are changing. This is useful, because the handler code can then access state and methods for the instance. In this particular example, the handler is able to access the updated values for the =width= and =height= state properties in order to calculate a new value for the =area= state property.
 
-			Being aware of this behavior, you can avoid certain redundancies in your code. For example, you can provide direct references to instance methods in your state property profiles, rather than redundant anonymous wrapper functions that merely call the methods.
-
-			INSTEAD OF...
-			...................................................
-			MyClass.stateProperties ({
-				_title:{
-					name:'title',
-					onChange:function () {this._updateUiTitle ()}
-				}
-			});
-			...................................................
-
-			USE...
-			.............................................
-			MyClass.stateProperties ({
-				_title:{
-					name:'title',
-					onChange:_classPrototype._updateUiTitle
-				}
-			});
-			.............................................
-
-			NOTE: The variable =_classPrototype= is a common convention for a captured reference to a class' prototype object. In this case, =_classPrototype= would be equivalent to =MyClass.prototype=.
-
 		### more to discuss
-			- use string value for method name for ensuring call to subclass version of instance method
+			String Type onChange Handlers
+				Use string value for method name for ensuring call to subclass version of instance method.
+
+				INSTEAD OF...
+				..................................................
+				MyClass.stateProperties ({
+					_title:{
+						name:'title',
+						onChange:function () {this.updateUiTitle ()}
+					}
+				});
+				..................................................
+
+				USE...
+				..............................
+				MyClass.stateProperties ({
+					_title:{
+						name:'title',
+						onChange:'updateUiTitle'
+					}
+				});
+				..............................
+
 			- all onChange handlers executed for all state properties are executed after the values for all state properties have been updated by a call to =set=
 			- types
 				- function
@@ -1241,18 +1243,20 @@ Advanced Topics
 
 	### traditional approach vs. state properties approach
 		INSTEAD OF...
-		......................................................
-		_classPrototype.setMyProperty = function (_newValue) {
-			if (_newValue != this._myProperty) {
-				this._myProperty = _newValue;
-				this.fire ('My Property Changed');
-			}
-		};
+		...........................................
+		_class.instanceMethods ({
+			setMyProperty:function (_newValue) {
+				if (_newValue != this._myProperty) {
+					this._myProperty = _newValue;
+					this.fire ('My Property Changed');
+				}
+			},
 
-		_classPrototype.getMyProperty = function () {
-			return this._myProperty;
-		};
-		......................................................
+			getMyProperty:function () {
+				return this._myProperty;
+			}
+		});
+		...........................................
 
 		USE...
 		....................................................

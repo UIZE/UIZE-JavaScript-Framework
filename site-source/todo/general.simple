@@ -107,7 +107,7 @@ Code Size Optimization
 			Remove Uize.toString
 				It's confusing because it doesn't behave in the way that =Uize.toNumber= behaves - it doesn't something completely different and unexpected.
 
-				Moreover, as it is used for classes for the string serialization overriding, it actually introduces obstacles and annoyanes during debugging with =console.log=. If this were removed, the Delve tool would probably need to be updated. Perhaps this method could be moved to =Uize.Util.Oop=. Would need to also update documentation that speaks to how the old behavior could be used in debugging and troubleshooting.
+				Moreover, as it is used for classes for the string serialization overriding, it actually introduces obstacles and annoyances during debugging with =console.log=. If this were removed, the Delve tool would probably need to be updated. Perhaps this method could be moved to =Uize.Util.Oop=. Would need to also update documentation that speaks to how the old behavior could be used in debugging and troubleshooting.
 
 		Uize.Class
 			Remove =Uize.Class.valueOf= static method.
@@ -187,14 +187,19 @@ Eliminate Private Methods As Properties
 	- there will be a few cases where private instance methods are provided as =onChange= handlers for state properties - these will have to be left as is, and if they are also called on =this=, then they will have to be called using the =call= or =apply= methods
 
 Possible New Namespaces
-	- Uize.Web (or Uize.Browser? or Uize.Html? or Uize.WebBrowser? or Uize.Wb? or Uize.Www?)
 	- Uize.Crypto
 
 Code to Factor Out
 	Code to factor out of widget classes into non-Web specific modules...
 
+	- =Uize.Widget.Drag= - the =Uize.Widget.Drag.insertShield= and =Uize.Widget.Drag.resizeShield= static methods should maybe be factored out into a generic shield module (possibly a package module under the =Uize.Node= namespace)
+	- =Uize.Widget.ImagePort= - the =Uize.Widget.ImagePort.getScaledRect= and =Uize.Widget.ImagePort.getSizingAndAlign= static methods have been factored out into the =Uize.Math.LogicalPos= module, so they should now be deprecated in the =Uize.Widget.ImagePort= module
 	- =Uize.Widget.Population= - pure population string functionality should be migrated into a new =Uize.Str.Population= module (or =Uize.Template.Population=?)
 	- =Uize.Widget.Tree= - model stuff for the data structure that represents a tree (=Uize.Data.Tree=?)
+
+	Solve the problem of some widget classes being used only for their static methods and not their full functionality. Perhaps some helper method functionality should be separated out into packages that can be used outside of the context of widgets. As a general rule, if some functionality might be useful without widgets being involved, then it should be implemented in a separate package module.
+
+	- =Uize.Widget.Page= - the =Uize.Widget.Page.launchPopup= static method
 
 General Drag and Drop Framework
 	Virtual dom events to mimic new HTML5 dnd events.
@@ -289,8 +294,10 @@ Safe Privates
 			_myMethod = _class.priv ('myMethod')
 		});
 
-	_classPrototype [_myProperty] = 'blah';        // declaring instance property
-	_classPrototype [_myMethod] = function () {};  // declaring instance method
+	_class.declare ({
+		instanceProperties:Uize.pairUp (_myProperty,'initial value'),
+		instanceMethods:Uize.pairUp (_myMethod,function () {/* method implementation */})
+	});
 
 	alert (this [_myProperty]); // accessing instance property
 	this [_myMethod] ();        // calling instance method
