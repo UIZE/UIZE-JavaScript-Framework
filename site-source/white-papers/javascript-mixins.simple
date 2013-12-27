@@ -485,11 +485,12 @@ Considerations for Implementing Mixins
 Special Design Requirements
 	- loading a mixin should not have side effects
 	- a mixin should be able to aggregate one or more other mixins
-	- a mixin should be able to use and augment another mixin
+	- a mixin should be able to augment another mixin to produce a new mixin
 	- if two mixins require a common mixin, then applying both of them should not redundantly apply the common mixin
 	- it should be possible to determine what mixins have been applied to an object
 	- subclasses should inherit the information about applied mixins
 	- it should be possible to determine the mixin origin of a mixed in feature of a class
+	- the documentation system should be able to detect the features of a mixin in order to produce generated documentation for mixin modules (perhaps this argues in favor of making class mixins actual classes)
 
 Open Questions
 	Can Mixins be Standalone?
