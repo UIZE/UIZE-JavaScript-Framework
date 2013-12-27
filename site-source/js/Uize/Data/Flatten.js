@@ -61,8 +61,130 @@
 			}
 			...................................................................................................
 
-			### A Real World Example
-				To illustrate the value of the =Uize.Data.Flatten= module, let's consider a real world example.
+			A Real World Example
+				To illustrate how the =Uize.Data.Flatten= module might be used, let's consider a real world example.
+
+				In our example, we have a hierarchical object that contains all the resource strings that need to be translated for an entire Web application, where that object is structured according to the various sections of the application and the UI components used in each section. The object may look something like the following...
+
+				RESOURCE STRINGS OBJECT
+				......................................................
+				var resourceStrings = {
+					login:{
+						username:'Username',
+						password:'Password'
+					},
+					account:{
+						password:{
+							changePassword:'Change Your Password',
+							forgotPassword:'Forgot Your Password?'
+						},
+						changeEmail:'Change Your Primary Email Address',
+						changeUsername:'Change Your Username',
+						notification:'Modify Your Notification Settings'
+					},
+					home:{
+						newForYou:'New Articles for You',
+						friendActivity:'News from Your Social Circle'
+					},
+					feeds:{
+						worldNews:'World News',
+						localNews:'News in Your Local Area',
+						aroundTheWeb:'Recommended from Around the Web',
+						editFeeds:'Edit Your Feeds and Settings'
+					}
+				};
+				......................................................
+
+				In reality, there would be many more resource strings than just these, and the structure of the object could be arbitarily deep, depending on the organization of the sections, subsections, UI components, etc.
+
+				Now, let's say that a translation agency that we wish to use to translate our English strings into German wishes to receive the list of strings in a simple, flat CSV file with only two columns for string key-value pairs - not an unrealistic scenario. If we wanted to take the above object and convert it to a flat CSV file of pure key-value pairs, we could do so using the =Uize.Data.Flatten= module with the following statement...
+
+				RESOURCE STRINGS OBJECT TO CSV
+				..................................................
+				var csvText = Uize.Data.Csv.to (
+					Uize.Data.NameValueRecords.fromHash (
+						Uize.Data.Flatten.flatten (resourceStrings),
+						0,
+						1
+					)
+				);
+				..................................................
+
+				Admittedly, we're getting a little help here from two other modules: the =Uize.Data.NameValueRecords= module and the =Uize.Data.Csv= module.
+
+				In our statement, we are first flattening the =resourceStrings= object using the =Uize.Data.Flatten.flatten= method to produce a simple hash object, as follows...
+
+				FLATTENED HASH
+				..............................................................
+				{
+					'login.username':'Username',
+					'login.password':'Password',
+					'account.password.changePassword':'Change Your Password',
+					'account.password.forgotPassword':'Forgot Your Password?',
+					'account.changeEmail':'Change Your Primary Email Address',
+					'account.changeUsername':'Change Your Username',
+					'account.notification':'Modify Your Notification Settings',
+					'home.newForYou':'New Articles for You',
+					'home.friendActivity':'News from Your Social Circle',
+					'feeds.worldNews':'World News',
+					'feeds.localNews':'News in Your Local Area',
+					'feeds.aroundTheWeb':'Recommended from Around the Web',
+					'feeds.editFeeds':'Edit Your Feeds and Settings'
+				}
+				..............................................................
+
+				Then, we take this hash object and use the =Uize.Data.NameValueRecords.fromHash= method to turn it into a name-value records array where name-value pairs are represented by two element arrays, as follows...
+
+				AS A NAME-VALUE RECORDS ARRAY
+				................................................................
+				[
+					['login.username','Username'],
+					['login.password','Password'],
+					['account.password.changePassword','Change Your Password'],
+					['account.password.forgotPassword','Forgot Your Password?'],
+					['account.changeEmail','Change Your Primary Email Address'],
+					['account.changeUsername','Change Your Username'],
+					['account.notification','Modify Your Notification Settings'],
+					['home.newForYou','New Articles for You'],
+					['home.friendActivity','News from Your Social Circle'],
+					['feeds.worldNews','World News'],
+					['feeds.localNews','News in Your Local Area'],
+					['feeds.aroundTheWeb','Recommended from Around the Web'],
+					['feeds.editFeeds','Edit Your Feeds and Settings']
+				]
+				................................................................
+
+				Now that we have essentially a table structure with rows and columns, we can easily serialize this as a CSV string using the =Uize.Data.Csv.to= method to produce a string that we can write to a =.csv= file that would look as follows...
+
+				CSV FILE
+				......................................................
+				login.username,Username
+				login.password,Password
+				account.password.changePassword,Change Your Password
+				account.password.forgotPassword,Forgot Your Password?
+				account.changeEmail,Change Your Primary Email Address
+				account.changeUsername,Change Your Username
+				account.notification,Modify Your Notification Settings
+				home.newForYou,New Articles for You
+				home.friendActivity,News from Your Social Circle
+				feeds.worldNews,World News
+				feeds.localNews,News in Your Local Area
+				feeds.aroundTheWeb,Recommended from Around the Web
+				feeds.editFeeds,Edit Your Feeds and Settings
+				......................................................
+
+				Once we have shipped our CSV formatted resource strings object off to the translators and they load the file into their translation management system to produce the translations and then provide us with the German translations in a new CSV file, we can import the translated strings from that CSV file using a reverse process as follows...
+
+				CSV BACK TO RESOURCE STRINGS
+				...................................................
+				var resourceStrings = Uize.Data.Flatten.unflatten (
+					Uize.Data.NameValueRecords.toHash (
+						Uize.Data.Csv.from (csvText),
+						0,
+						1
+					)
+				);
+				...................................................
 
 			Unflattening a Flattened Object
 				The =Uize.Data.Flatten= module provides the =Uize.Data.Flatten.unflatten= method to allow the flattening performed by the =Uize.Data.Flatten.flatten= method to be reversed.
