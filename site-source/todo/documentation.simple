@@ -1,8 +1,16 @@
 This document lists to do tasks relating to the documentation and Web site for the UIZE JavaScript Framework.
 
-Site Nav Left Pane
-	Implement a left pane site nav for the site.
+Doc Lint
+	Implement a doc lint / audit tool to assess quality of documentation according to the following criteria...
 
+	- sections that are missing documentation (such as with a "document..." or "." placeholder
+	- sections that are commented out (such as with "###" style comments)
+	- ambiguous links (multiple sections with the same title)
+	- dead links (to sections that don't exist or are commented out)
+	- sections that have multi-sentence (or very long single sentence) first paragraphs
+	- for modules, methods or properties that are introduced or overridden by the module and that have no documentation
+
+Site Nav Left Pane
 	Remaining to do...
 
 	- figure out how to get item text to wrap (there's currently a =nobr= tag around items)
