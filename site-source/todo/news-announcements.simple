@@ -13,6 +13,13 @@ NEW MODULE: Uize.Event.Bus
 	- write documentation
 	- write news announcement
 
+NEW MODULE: Uize.Loc.Pseudo
+	Still to do...
+
+	- write unit tests
+	- write documentation
+	- write news announcement
+
 Shorter This Reference
 	Switched all modules over to using "m" for capturing a reference to this.
 
