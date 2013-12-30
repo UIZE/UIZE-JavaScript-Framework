@@ -4115,8 +4115,6 @@ Uize.module ({
 						}
 					]],
 
-					['Uize.toString',[
-					]],
 					['Uize.module',[
 					]],
 					['Uize.getModuleByName',[

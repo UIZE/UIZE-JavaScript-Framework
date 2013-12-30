@@ -380,96 +380,10 @@ Uize.module ({
 		;
 
 		function _createSubclass (_class,_alphastructor,_omegastructor) {
-			function _toString () {
-				var
-					_propertiesLines = [],
-					_Uize_toString = _Uize.toString
-				;
-				_forEach (
-					this.get (),
-					function (_propertyValue,_propertyName) {
-						_propertiesLines.push (
-							_propertyName + ' : ' +
-							(
-								_propertyValue && (_isInstance (_propertyValue) || _isFunction (_propertyValue))
-									? _Uize_toString.call (_propertyValue)
-									: _propertyValue
-							)
-						);
-					}
-				);
-				return _Uize_toString.call (this) + '\n\n' + _propertiesLines.sort ().join ('\n');
-			}
-
 			function _valueOf () {
 				return this [_getPropertyPrivateName (this,'value')];
 				/*?
 					Instance Methods
-						toString Intrinsic Method
-							Returns a string, providing summary info for the instance on which the method is called.
-
-							SYNTAX
-							............................................
-							instanceSummarySTR = myInstance.toString ();
-							............................................
-
-							The string returned by this method provides a summary that includes the instance's class name and the state of its state properties. Among other things, this method provides a convenient and lightweight way to gather information about instances of =Uize.Class= subclasses during debugging and troubleshooting. The =toString Intrinsic Method= is invoked automatically in certain contexts in order to convert an object to a string form, such as when alerting an object using the =alert= global function.
-
-							EXAMPLE
-							.............................
-							alert (page.children.slider);
-							.............................
-
-							In the above example, if the =page= widget has a =slider= child widget that is an instance of the class =Uize.Widget.Bar.Slider=, then the output of the =alert= statement could look something like...
-
-							EXAMPLE OUTPUT
-							........................................
-							[object Uize.Widget.Bar.Slider]
-
-							built : true
-							busy : inherit
-							busyInherited : false
-							confirm : undefined
-							container : undefined
-							decimalPlacesToDisplay : undefined
-							enabled : inherit
-							enabledInherited : true
-							html : undefined
-							idPrefix : page_slider
-							idPrefixConstruction : concatenated
-							inDrag : false
-							increments : 1
-							inform : undefined
-							insertionMode: undefined
-							localized : undefined
-							maxValidValue : undefined
-							maxValue : 200
-							minValidValue : undefined
-							minValue : 0
-							name : slider
-							nodeMap : undefined
-							orientation : vertical
-							parent : [class MyCompanySite.Page]
-							restTime : 250
-							scaleFunc : [object Function]
-							value : 0
-							valueFunc : [object Function]
-							wired : true
-							........................................
-
-							In certain contexts, providing a reference to a =Uize.Class= subclass instance as a parameter to some method will result in the =valueOf Intrinsic Method= of that instance being invoked in order to coerce it to a simple value. If it is your desire to have the instance summary be used rather than the instance's value, then you should explicitly call the =toString Intrinsic Method=, as follows...
-
-							EXAMPLE
-							........................................................................................
-							Uize.Node.setInnerHtml ('sliderWidgetSummaryForDebug',page.children.slider.toString ());
-							Uize.Node.setInnerHtml ('sliderWidgetCurrentValue',page.children.slider);
-							........................................................................................
-
-							In this example, the =sliderWidgetSummaryForDebug= node will contain the summary info for the instance, while the =sliderWidgetCurrentValue= node will just show the slider widget's current value.
-
-							NOTES
-							- see also the =Uize.toString= static intrinsic method
-
 						valueOf Intrinsic Method
 							Returns the value of the instance's =value= state property.
 
@@ -495,14 +409,14 @@ Uize.module ({
 							markedUpPrice = price * (1 + page.children.markupPercentSlider / 100);
 							....................................................................................
 
-							In certain contexts, providing a reference to a =Uize.Class= subclass instance as a parameter to some method will result in the =toString Intrinsic Method= of that instance being invoked in order to resolve it to a string value. If it is your desire to have the value used rather than the instance summary, then you should explicitly call the =valueOf Intrinsic Method=, as follows...
+							In certain contexts, providing a reference to a =Uize.Class= subclass instance as a parameter to some method will result in the =toString Intrinsic Method= of that instance being invoked in order to resolve it to a string value. If it is your desire to have the value used rather than the string serialization, then you should explicitly call the =valueOf Intrinsic Method=, as follows...
 
 							EXAMPLE
 							.....................................................
 							alert (page.children.markupPercentSlider.valueOf ());
 							.....................................................
 
-							In this example, the current value of the =markupPercentSlider= widget will be displayed in the alert dialog, rather than the instance summary. You can also use shortcuts, as follows...
+							In this example, the current value of the =markupPercentSlider= widget will be displayed in the alert dialog, rather than the string serialization. You can also use shortcuts, as follows...
 
 							COERCE TO NUMBER
 							...........................................
@@ -517,7 +431,6 @@ Uize.module ({
 							Both of the above examples will cause JavaScript to invoke the =valueOf Intrinsic Method= rather than the =toString Intrinsic Method=, but the first will coerce the value to a number type, while the second will coerce the value to a string type.
 
 							NOTES
-							- compare to the =toString Intrinsic Method=, and the =Uize.toString= static intrinsic method
 							- see also the =Uize.Class.valueOf= static intrinsic method
 							- if the instance's class does not declare a =value= state property, then this method will return the value of the instance's =value= property, and if the instance has no =value= property, then this method will simply return =undefined=
 
@@ -533,7 +446,6 @@ Uize.module ({
 							The =Uize.Class.valueOf= static intrinsic method is invoked automatically in certain contexts in order to convert a class to a value, such as when using a class reference in an expression (eg. =Uize.Widget.Bar.Slider + 0=). This static method is implemented primarily to provide parity with the =valueOf Intrinsic Method=. Its behavior is largely equivalent to that of the instance method, excepting that it applies to the static value of the =value= state property.
 
 							NOTES
-							- compare to the =toString Intrinsic Method=, and the =Uize.toString= static intrinsic method
 							- see also the =valueOf Intrinsic Method=
 							- if the class does not declare a =value= state property, then this method will return the value of the class' =value= property, and if the class has no =value= property, then this method will simply return =undefined=
 				*/
@@ -564,9 +476,8 @@ Uize.module ({
 				/*** Inherit instance properties and methods from base class (from prototype) ***/
 					_copyInto (_subclassPrototype,_class.prototype);
 
-					/*** Make sure toString and valueOf are copied ***/
-						/* NOTE: in IE, toString and valueOf aren't enumerable properties of the prototype object */
-						_subclassPrototype.toString = _toString;
+					/*** Make sure valueOf is copied ***/
+						/* NOTE: in IE, valueOf isn't an enumerable property of the prototype object */
 						_subclassPrototype.valueOf = _valueOf;
 
 				/*** Non-inherited Public Instance Properties ***/
@@ -593,7 +504,7 @@ Uize.module ({
 						*/
 
 				/*** Non-inherited Public Static Properties ***/
-					_subclass.nonInheritableStatics = {_singletons:1,nonInheritableStatics:1,toString:0,valueOf:0};
+					_subclass.nonInheritableStatics = {_singletons:1,nonInheritableStatics:1,valueOf:0};
 						/*?
 							Static Properties
 								Uize.Class.nonInheritableStatics
@@ -640,7 +551,6 @@ Uize.module ({
 						*/
 
 				/*** Non-inherited Public Static Methods ***/
-					_subclass.toString = _toString;
 					_subclass.valueOf = _valueOf;
 
 			/*** Initialize Alphastructors and Omegastructors ***/

@@ -1,0 +1,13 @@
+The custom =toString= methods - defined for all modules in the =Uize= base module, and defined for all classes and instances of classes in the =Uize.Class= module - have been eliminated.
+
+These custom, overridden versions of the =toString= method were originally designed to provide developers with a quick way to get a summary for instances, classes, and modules for displaying in =alert= statements as a troubleshooting aid, and were implemented back in a time when the debugging tools built into browsers (especially IE6) were less mature. Things have improved a lot since then in the area of Web inspectors, especially in more recent versions of MSIE.
+
+As a result, most modern debugging involves logging to the browser's console using =console.log= or =console.dir= calls, and so the summary behavior of the overridden =toString= methods have become under-utilized and their implementations represented unwelcome extra code bloat. Consequently, they have been eliminated from the =Uize= and =Uize.Class= modules. The summary behavior can still be accessed through the =Uize.Util.Debug.summary= static method of the new =Uize.Util.Debug= module.
+
+This change was deemed low risk and is, therefore, not backwards compatible in order that developers can immediately benefit from the code size reduction.
+
+....................................................................................
+<< metadata >>
+
+title: 2013-12-30 - Custom toString Methods Eliminated
+....................................................................................

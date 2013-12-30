@@ -103,12 +103,6 @@ Code Size Optimization
 	Migrate or Remove Features
 		Look at migrating some lesser used features out of core modules into new / other modules.
 
-		Uize
-			Remove Uize.toString
-				It's confusing because it doesn't behave in the way that =Uize.toNumber= behaves - it doesn't something completely different and unexpected.
-
-				Moreover, as it is used for classes for the string serialization overriding, it actually introduces obstacles and annoyances during debugging with =console.log=. If this were removed, the Delve tool would probably need to be updated. Perhaps this method could be moved to =Uize.Util.Oop=. Would need to also update documentation that speaks to how the old behavior could be used in debugging and troubleshooting.
-
 		Uize.Class
 			Remove =Uize.Class.valueOf= static method.
 
