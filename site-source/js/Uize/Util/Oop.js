@@ -28,19 +28,21 @@ Uize.module ({
 	builder:function () {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var
+		var
+			/*** Variables for Scruncher Optimization ***/
 				_undefined,
-				_isFunction = Uize.isFunction
-			;
+				_isFunction = Uize.isFunction,
 
-		/*** General Variables ***/
-			var
+			/*** General Variables ***/
 				_package,
 				_sacredEmptyArray = [],
-				_typicalPackageFunction = function () {},
-				_implicitMethodNames = {toString:1,valueOf:1}
-			;
+
+				/*** used by the Uize.Util.Oop.isPackage method ***/
+					_typicalPackageFunction = Uize.package (),
+					_typicalPackageFunctionPrototype = _typicalPackageFunction.prototype,
+					_typicalPackageFunctionToString = _typicalPackageFunction.toString,
+					_typicalPackageFunctionAsString = _typicalPackageFunction.toString ()
+		;
 
 		/*** Utility Functions ***/
 			function _isClass (_object) {
@@ -153,35 +155,21 @@ Uize.module ({
 			isClass:_isClass,
 
 			isPackage:function (_object) {
-				if (!_isClass (_object)) return false;
+				if (
+					!_isClass (_object) ||
+						// if object is not a function, then we don't consider it a package
+					_typicalPackageFunctionToString.call (_object) != _typicalPackageFunctionAsString
+						// if function has any construction code, then we don't consider it a package
+				)
+					return false
+				;
 
-				/*** object must be a function / constructor, so check to see if function has code ***/
-					var
-						_objectToString = _object.toString,
-						_typicalPackageFunctionToString = _typicalPackageFunction.toString,
-						_toStringOverridden = _objectToString != _typicalPackageFunctionToString
-					;
-					if (_toStringOverridden)
-						delete _object.toString
-					;
-					var _hasAnyConstruction = _object.toString () != _typicalPackageFunction.toString ();
-					if (_toStringOverridden)
-						_object.toString = _objectToString
-					;
-					if (_hasAnyConstruction) return false;
-
-				/*** check to see if function's prototype has anything beyond what's in typical package function ***/
-					var
-						_objectPrototype = _object.prototype,
-						_typicalPackageFunctionPrototype = _typicalPackageFunction.prototype
-					;
+				/*** check to see if function's prototype differs from typical package function's prototype ***/
+					var _objectPrototype = _object.prototype;
 					for (var _propertyName in _objectPrototype)
 						if (
-							!_implicitMethodNames [_propertyName] &&
-							(
-								!(_propertyName in _typicalPackageFunctionPrototype) ||
-								_objectPrototype [_propertyName] != _typicalPackageFunctionPrototype [_propertyName]
-							)
+							_objectPrototype [_propertyName] !== _typicalPackageFunctionPrototype [_propertyName] ||
+							!(_propertyName in _typicalPackageFunctionPrototype)
 						)
 							return false
 					;
@@ -190,6 +178,9 @@ Uize.module ({
 			},
 
 			isUizeClass:function (_object) {
+				/* NOTE:
+					We employ duck-typing here because we want this method to also work for object refeences that come from different windows, so we can't rely on instanceof or similar approaches.
+				*/
 				return (
 					_isClass (_object) &&
 					_isFunction (_object.subclass) &&
