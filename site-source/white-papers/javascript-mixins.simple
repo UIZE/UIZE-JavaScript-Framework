@@ -490,13 +490,13 @@ Special Design Requirements
 	- it should be possible to determine what mixins have been applied to an object
 	- subclasses should inherit the information about applied mixins
 	- it should be possible to determine the mixin origin of a mixed in feature of a class
-	- the documentation system should be able to detect the features of a mixin in order to produce generated documentation for mixin modules (perhaps this argues in favor of making class mixins actual classes)
+	- the documentation system should be able to detect the features of a mixin in order to produce generated documentation for mixin modules. Perhaps this argues in favor of making class mixins actual classes. If this approach were taken, the mixins could be implemented as classes that also implement a special method for mixing in their features into other classes (which would also be used internally in the implementation of the classes). Some alternative approaches: 1) the process of declaring features for a class could result in the features being stored in such a way that they could be declared again for a class into which they are to be mixed, 2) the entire module builder for a mixin could be applied, by supplying the mixin host as the value for the _superclass variable of the builder.
 
 Open Questions
 	Can Mixins be Standalone?
 		For example, if two widget classes existed that implemented some part of a UI, would it be possible to create a new subclass and then mixin those two widget classes?
 
-		An issue with mixing in standalone classes is that one can perform duplicate / redundant / wasted effort in copying in the guts of the classes to be mixed in. Ideally, if one create a new widget class and wanted to mix in the features of two other widget classes, only the modications made in those widget classes to the features inherited from the widget base class would be carried on the class into which the classes are being mixed in.
+		An issue with mixing in standalone classes is that one can perform duplicate / redundant / wasted effort in copying in the guts of the classes to be mixed in. Ideally, if one created a new widget class and wanted to mix in the features of two other widget classes, only the modifications made in those widget classes to the features inherited from the widget base class would be copied over to the class into which the classes are being mixed in.
 
 		So, if widget A, widget B, and widget C all subclassed =Uize.Widget=, then mixing in widget B and widget C into widget A would only mix in the feature deltas between =Uize.Widget= and widget B and =Uize.Widget= and widget C. In order to achieve this, the mixin logic would need to trace up the inheritance chain and find the common base class for all the classes involved.
 

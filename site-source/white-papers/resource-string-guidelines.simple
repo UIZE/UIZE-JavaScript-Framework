@@ -1,0 +1,73 @@
+Resource Files
+	Resource File Formats
+		Use a Standard Resource File Format
+			Ideally, use one of the established resource file formats.
+
+			Examples of well established, standard resource file formats include...
+
+			- =.strings= - [[https://developer.apple.com/library/ios/documentation/cocoa/conceptual/LoadingResources/Strings/Strings.html][iOS and MacOS]] resource strings file format (often as =Localizable.strings=)
+			- =.xlf= - XML using the [[http://en.wikipedia.org/wiki/XLIFF][XLIFF schema]]
+			- =.properties= - [[http://docs.oracle.com/javase/tutorial/i18n/resbundle/propfile.html][Java properties file]] format
+			- =.po=, =.pot= - PO (Portable Object) and POT (Portable Object Template) files used by [[http://www.gnu.org/savannah-checkouts/gnu/gettext/manual/html_node/PO-Files.html][GNU's gettext]], and also by [[https://drupal.org/node/1814954][Drupal]] and [[http://php.net/manual/en/book.gettext.php][PHP]]
+			- =.resx= - resource file format for [[http://msdn.microsoft.com/en-us/library/ekyft91f(v=vs.90).aspx][Microsoft .NET applications]]
+			- =.rc= - [[http://msdn.microsoft.com/en-us/library/cc194804.aspx][Windows resource files]] (older format, typically used for C/C++ desktop applications)
+			- =.yaml= - YAML formatted resource string files for [[http://guides.rubyonrails.org/i18n.html][Ruby on Rails]]
+
+			Failure to use a standard resource file format will result in the need to implement specialized parsing and serialization code in a custom adapter for the localization automation system.
+
+	### Resource File Organization
+		.
+
+### Resource Strings
+	Resource String Naming
+		.
+
+	Resource String Values
+		.
+
+		- long resource strings
+		- HTML content inside resource strings
+
+	Resource String Metadata
+		.
+
+	Substitution Tokens
+		.
+
+		Substitution Token Naming
+			Use named tokens rather than numbered tokens, where possible.
+
+			- in the absence of a system for providing meta data to describe substitution tokens and to provide translators with necessary cues to inform their translation, named tokens provide a baseline level of information as a fallback. For example, the token "{newMessagesCount}" is more informative than "{0}" and helps to create clearer code and clearer resource string files.
+
+		Substitution Token Metadata
+			.
+
+	Handling Inflections
+		Supporting Gender Correctly
+				When This Applies
+					This will apply in situations where a substitution value has a gender, such as with personal names or objects that have an associated gender in a specific language.
+
+		Supporting Pluralization Correctly
+				When This Applies
+					.
+
+		Beware of Inflection Combinations
+			- beware of combinations of inflections in the same sentence
+
+### Brand-specific Overrides
+	.
+
+	Using Substitution Tokens for Brand-specific Overrides
+		.
+
+	Using Brand-specific Overrides Files
+		.
+
+### Avoid Programmatic Construction
+
+	- don't programmatically construct using sentence fragments
+		- provide examples
+
+	- construction using multiple sentences is acceptable, though not recommended
+		- provide examples
+
