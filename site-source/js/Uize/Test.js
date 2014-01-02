@@ -1975,19 +1975,23 @@ Uize.module ({
 											m = this,
 											_testModuleInstance = Uize.getModuleByName (_testModule) ()
 										;
-										_testModuleInstance.wire (
-											'Done',
-											function (_event) {
-												var _eventSource = _event.source;
-												_eventSource._reasonForFailure && m.set ({
-													_reasonForFailure:
-														'running test module failed with the following synopsis...\n\n' +
-														_eventSource.getSynopsis ()
-												});
-												_eventSource.parent || _continue (_eventSource._result);
-											}
-										);
-										_testModuleInstance.run ();
+										if (_testModuleInstance) {
+											_testModuleInstance.wire (
+												'Done',
+												function (_event) {
+													var _eventSource = _event.source;
+													_eventSource._reasonForFailure && m.set ({
+														_reasonForFailure:
+															'running test module failed with the following synopsis...\n\n' +
+															_eventSource.getSynopsis ()
+													});
+													_eventSource.parent || _continue (_eventSource._result);
+												}
+											);
+											_testModuleInstance.run ();
+										} else {
+											_continue (_true);
+										}
 									}
 								}
 							]

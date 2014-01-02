@@ -235,6 +235,9 @@ Uize.require (
 					});
 					_callback && _callback ();
 				}
+				function _instantiateRequiredModuleTest (_testName) {
+					_instantiateTestSuite (Uize.Test.requiredModulesTest (_testName));
+				}
 
 				_testSuite && _testSuite.stop ();
 				_setWidgetsEnabled (false);
@@ -255,9 +258,23 @@ Uize.require (
 					}
 					_instantiateTestSuite (_RunAllTests);
 				} else if (_testsSubTreeLookup [_testName]) {
-					Uize.require ('Uize.Test.' + _testName,_instantiateTestSuite);
+					Uize.require (
+						'Uize.Test.' + _testName,
+						function (_testClass) {
+							/* NOTE:
+								It may be that the test module that is loaded is just a generated namespace module (such as the Uize.Test.Uize.Array generated namespace module that is not really a test module for the Uize.Array generated namespace module, but actually a namespace module for real test modules like Uize.Test.Uize.Array.Dupes.
+
+								Hopefully, a more correct and robust way of dealing with this situation can be developed in future. One possible solution would be to move to an organization where test modules are always peers alongside the modules they test, possibly using a naming scheme (like Uize.Array.Dupes_TEST as the test module for Uize.Array.Dupes).
+							*/
+							if (_testClass.prototype.getTotalTests) {
+								_instantiateTestSuite (_testClass);
+							} else {
+								_instantiateRequiredModuleTest (_testName);
+							}
+						}
+					);
 				} else {
-					_instantiateTestSuite (Uize.Test.requiredModulesTest (_testName));
+					_instantiateRequiredModuleTest (_testName);
 				}
 			}
 			_page.wireNode ('testSelector','change',function () {_selectTest ()});
