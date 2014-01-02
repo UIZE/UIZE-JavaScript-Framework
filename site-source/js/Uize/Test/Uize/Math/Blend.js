@@ -60,8 +60,8 @@ Uize.module ({
 										;
 										return (
 											this.expect (_valueA,_blended) &&
-											!this.expectSameAs (_valueA,_blended) &&
-											!this.expectSameAs (_valueB,_blended)
+											this.expectNotSameAs (_valueA,_blended) &&
+											this.expectNotSameAs (_valueB,_blended)
 										);
 									}
 								},
@@ -75,8 +75,8 @@ Uize.module ({
 										;
 										return (
 											this.expect (_valueB,_blended) &&
-											!this.expectSameAs (_valueA,_blended) &&
-											!this.expectSameAs (_valueB,_blended)
+											this.expectNotSameAs (_valueA,_blended) &&
+											this.expectNotSameAs (_valueB,_blended)
 										);
 									}
 								},
@@ -90,8 +90,8 @@ Uize.module ({
 										;
 										return (
 											this.expect ([25,22.5,20,17.5],_blended) &&
-											!this.expectSameAs (_valueA,_blended) &&
-											!this.expectSameAs (_valueB,_blended)
+											this.expectNotSameAs (_valueA,_blended) &&
+											this.expectNotSameAs (_valueB,_blended)
 										);
 									}
 								},
@@ -107,8 +107,8 @@ Uize.module ({
 										;
 										return (
 											this.expect (_valueA,_blended) &&
-											!this.expectSameAs (_valueA,_blended) &&
-											!this.expectSameAs (_valueB,_blended)
+											this.expectNotSameAs (_valueA,_blended) &&
+											this.expectNotSameAs (_valueB,_blended)
 										);
 									}
 								},
@@ -122,8 +122,8 @@ Uize.module ({
 										;
 										return (
 											this.expect (_valueB,_blended) &&
-											!this.expectSameAs (_valueA,_blended) &&
-											!this.expectSameAs (_valueB,_blended)
+											this.expectNotSameAs (_valueA,_blended) &&
+											this.expectNotSameAs (_valueB,_blended)
 										);
 									}
 								},
@@ -137,8 +137,8 @@ Uize.module ({
 										;
 										return (
 											this.expect ({propA:25,propB:22.5,propC:20,propD:17.5},_blended) &&
-											!this.expectSameAs (_valueA,_blended) &&
-											!this.expectSameAs (_valueB,_blended)
+											this.expectNotSameAs (_valueA,_blended) &&
+											this.expectNotSameAs (_valueB,_blended)
 										);
 									}
 								},
@@ -154,8 +154,8 @@ Uize.module ({
 										;
 										return (
 											this.expect (_valueA,_blended) &&
-											!this.expectSameAs (_valueA,_blended) &&
-											!this.expectSameAs (_valueB,_blended)
+											this.expectNotSameAs (_valueA,_blended) &&
+											this.expectNotSameAs (_valueB,_blended)
 										);
 									}
 								},
@@ -169,8 +169,8 @@ Uize.module ({
 										;
 										return (
 											this.expect (_valueB,_blended) &&
-											!this.expectSameAs (_valueA,_blended) &&
-											!this.expectSameAs (_valueB,_blended)
+											this.expectNotSameAs (_valueA,_blended) &&
+											this.expectNotSameAs (_valueB,_blended)
 										);
 									}
 								},
@@ -184,8 +184,8 @@ Uize.module ({
 										;
 										return (
 											this.expect ([[25,{foo:22.5}],{bar:20,baz:[17.5]}],_blended) &&
-											!this.expectSameAs (_valueA,_blended) &&
-											!this.expectSameAs (_valueB,_blended)
+											this.expectNotSameAs (_valueA,_blended) &&
+											this.expectNotSameAs (_valueB,_blended)
 										);
 									}
 								},
@@ -309,8 +309,8 @@ Uize.module ({
 									;
 									return (
 										this.expect ([[24,{foo:23}],{bar:19,baz:[18]}],_blended) &&
-										!this.expectSameAs (_valueA,_blended) &&
-										!this.expectSameAs (_valueB,_blended)
+										this.expectNotSameAs (_valueA,_blended) &&
+										this.expectNotSameAs (_valueB,_blended)
 									);
 								}
 							},
@@ -324,8 +324,8 @@ Uize.module ({
 									;
 									return (
 										this.expect ([[24,{foo:21}],{bar:22,baz:[17]}],_blended) &&
-										!this.expectSameAs (_valueA,_blended) &&
-										!this.expectSameAs (_valueB,_blended)
+										this.expectNotSameAs (_valueA,_blended) &&
+										this.expectNotSameAs (_valueB,_blended)
 									);
 								}
 							},
@@ -339,8 +339,8 @@ Uize.module ({
 									;
 									return (
 										this.expect ({foo:[24,23],bar:[{baz:22},19]},_blended) &&
-										!this.expectSameAs (_valueA,_blended) &&
-										!this.expectSameAs (_valueB,_blended)
+										this.expectNotSameAs (_valueA,_blended) &&
+										this.expectNotSameAs (_valueB,_blended)
 									);
 								}
 							},
@@ -429,7 +429,7 @@ Uize.module ({
 										)
 									;
 									return (
-										!this.expectSameAs (_valuesUnchanged,_blendResult) &&
+										this.expectNotSameAs (_valuesUnchanged,_blendResult) &&
 										this.expect ([[30,{foo:26}],{bar:22,baz:[18]}],_blendResult)
 									);
 								}
@@ -444,7 +444,7 @@ Uize.module ({
 										_valueB = _valueA,
 										_blendResult = Uize.Math.Blend.blend (_valueA,_valueB,.5)
 									;
-									return !this.expectSameAs (_valueA,_blendResult) && this.expect (_valueA,_blendResult);
+									return this.expectNotSameAs (_valueA,_blendResult) && this.expect (_valueA,_blendResult);
 								}
 							}
 					]]
