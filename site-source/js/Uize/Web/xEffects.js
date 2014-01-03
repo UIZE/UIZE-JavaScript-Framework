@@ -74,7 +74,6 @@ Uize.module ({
 					curve:'celeration',
 					params:[0.1, 0.9]
 				},
-				_queueLookup = {},	// global effects queue for each selector / root node combination so that duplicate selections will share the same queue for adds/stops
 				_timings = {
 					linear:{
 						curve:'linear'
@@ -114,19 +113,15 @@ Uize.module ({
 		/*** Implement Hook Methods ***/
 			var _previousAtEndOfConstructor = _objectPrototype.atEndOfConstructor;
 			
-			_objectPrototype.atEndOfConstructor = function(_selectInfo) {
-				var
-					m = this,
-					_key = m._key = _selectInfo.key,
-					_queueInfo = /*_queueLookup[_key] =*/ (_queueLookup[_key] || {_queue:[], _activeFadeObjects:[]})
-				;
+			_objectPrototype.atEndOfConstructor = function(_nodes) {
+				var m = this;
 				
 				// call previous first just in case it's defined by base (or another extension)
-				_previousAtEndOfConstructor.call(m, _selectInfo);
+				_previousAtEndOfConstructor.call(m, _nodes);
 				
 				/* effects queue */
-					m._queue = _queueInfo._queue;
-					m._activeFadeObjects = _queueInfo._activeFadeObjects;
+					m._queue = [];
+					m._activeFadeObjects = [];
 			};
 			
 		/*** Private Instance Methods ***/
