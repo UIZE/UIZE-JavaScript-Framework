@@ -336,7 +336,7 @@ Uize.module ({
 								m[_nodeNo] = _nodes[_nodeNo];
 
 						/* call constructor hook method for extensions */
-							m.atEndOfConstructor(_selectInfo);
+							m.atEndOfConstructor(_nodes);
 
 						/*?
 							Constructor
