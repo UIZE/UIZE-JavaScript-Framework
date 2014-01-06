@@ -1,5 +1,6 @@
-Implement Next Generation Localization
+This is a TO DO document for the =Uize.Widget.V2= module.
 
+Implement Next Generation Localization
 	Locale Strings as State Properties
 		All locale strings should be represented as state properties.
 
@@ -270,6 +271,11 @@ Implement New Binding Features
 			Perhaps bindings to the style object could be treated as bindings on the style of a child widget's root node, but this could be quite complicated for rendering of HTML, since the HTML generation for a child widget is opaque to the template for a widget and cannot be easily co-compiled.
 
 			Perhaps a more reasonable approach would be to treat bindings to the style object of a child widget as bindings to a =style= state property that is implemented in the =Uize.Widget.V2= base class and that is bound to the style object of the widget's root node. Then, bindings to a child widget's style object would be propagated through the =style= state property of the child widget to its root node's =style= property.
+
+Implement Way of Declaring UI Wirers
+	Implement a new feature for UI wirers for widgets and switch away from old =wireUi= approach.
+
+	Gone will be the need for the "if (m.isWired)" safety wrapper and the "_superclass.doMy ('wireUi')" call to the superclass' implementation.
 
 Possible New Tree-inherited Properties
 	- =theme=
