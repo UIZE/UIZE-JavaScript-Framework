@@ -32,7 +32,7 @@
 	<!-- explanation copy -->
 
 	<div class="explanation">
-		<p>In this example, the <code>Uize.Array.Order.outsideIn</code> method of the <a href="../reference/Uize.Array.Order.html"><code>Uize.Array.Order</code></a> package is being used in conjunction with the <code>Uize.Node.find</code> method in order to sequence the showing of thumbnail images in a grid. The <a href="../reference/Uize.Widget.ThumbZoom"><code>Uize.Widget.ThumbZoom</code></a> widget is being used to provide a JavaScript animation zoomed view effect when you click on the thumbnails.</p>
+		<p>In this example, the <code>Uize.Array.Order.outsideIn</code> method of the <a href="../reference/Uize.Array.Order.html"><code>Uize.Array.Order</code></a> package is being used in conjunction with the <code>Uize.Dom.Basics.find</code> method in order to sequence the showing of thumbnail images in a grid. The <a href="../reference/Uize.Widget.ThumbZoom"><code>Uize.Widget.ThumbZoom</code></a> widget is being used to provide a JavaScript animation zoomed view effect when you click on the thumbnails.</p>
 	</div>
 
 	<!-- grid containing lots and lots of thumbnail images -->
@@ -85,7 +85,7 @@ Uize.require (
 		'UizeSite.Page.Example.library',
 		'UizeSite.Page.Example',
 		'Uize.Array.Order',
-		'Uize.Node',
+		'Uize.Dom.Basics',
 		'Uize.Fade',
 		'Uize.Widget.ThumbZoom'
 	],
@@ -100,7 +100,7 @@ Uize.require (
 		*/
 
 		/*** common code ***/
-			var thumbNodes = Uize.Array.Order.outsideIn (Uize.Node.find ({tagName:'IMG',className:'thumbnail'}));
+			var thumbNodes = Uize.Array.Order.outsideIn (Uize.Dom.Basics.find ({tagName:'IMG',className:'thumbnail'}));
 
 		/*** wire up sequenced reveal behavior ***/
 			var
@@ -113,7 +113,7 @@ Uize.require (
 			;
 			thumbNodeFade.wire ({
 				'Changed.value':function () {
-					Uize.Node.setOpacity (currentThumbNode,thumbNodeFade.get ('progress'));
+					Uize.Dom.Basics.setOpacity (currentThumbNode,thumbNodeFade.get ('progress'));
 				},
 				Done:revealNextThumbNode
 			});
@@ -121,8 +121,8 @@ Uize.require (
 				currentThumbNodeNo++;
 				if (currentThumbNodeNo < thumbNodes.length) {
 					currentThumbNode = thumbNodes [currentThumbNodeNo];
-					Uize.Node.setOpacity (currentThumbNode,0);
-					Uize.Node.setStyle (currentThumbNode,{visibility:'visible'});
+					Uize.Dom.Basics.setOpacity (currentThumbNode,0);
+					Uize.Dom.Basics.setStyle (currentThumbNode,{visibility:'visible'});
 					thumbNodeFade.start ();
 				}
 			}

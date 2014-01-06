@@ -1342,7 +1342,8 @@ Uize.require (
 		'Uize.Fx',
 		'Uize.Color',
 		'Uize.Color.xUtil',
-		'Uize.Node'
+		'Uize.Dom.Basics',
+		'Uize.Dom.Pos'
 	],
 	function () {
 		'use strict';
@@ -1362,7 +1363,7 @@ Uize.require (
 				var
 					htmlChunks = [],
 					rootNode = page.getNode (rootNodeName),
-					rootNodeWidth = Uize.Node.getDimensions (rootNode).width,
+					rootNodeWidth = Uize.Dom.Pos.getDimensions (rootNode).width,
 					segmentWidth = rootNodeWidth / totalSegments,
 					currentPos = 0,
 					newPos
@@ -1373,7 +1374,7 @@ Uize.require (
 					currentPos = newPos;
 				}
 				page.setNodeInnerHtml (rootNode,htmlChunks.join (''));
-				return Uize.Node.find ({root:rootNode,tagName:'div'})
+				return Uize.Dom.Basics.find ({root:rootNode,tagName:'div'})
 			}
 
 			var
@@ -1409,7 +1410,7 @@ Uize.require (
 					if (!curveIsCurrent) {
 						lastPreviewedCurve = curve;
 						var
-							graphRootNodeHeight = Uize.Node.getDimensions (page.getNode ('curveGraph')).height - 3,
+							graphRootNodeHeight = Uize.Dom.Pos.getDimensions (page.getNode ('curveGraph')).height - 3,
 							previousCurveValue
 						;
 						for (var segmentNo = -1; ++segmentNo < totalSegments;) {
@@ -1418,7 +1419,7 @@ Uize.require (
 								Uize.Color.blend (gradientStartColor,gradientEndColor,curveValue,'#hex')
 							;
 							if (previousCurveValue == null) previousCurveValue = curveValue;
-							Uize.Node.setStyle (
+							Uize.Dom.Basics.setStyle (
 								graphNodes [segmentNo],
 								{
 									bottom:Math.min (curveValue,previousCurveValue) * graphRootNodeHeight,

@@ -28,7 +28,8 @@
 Uize.module ({
 	name:'Uize.Widget.ImagePort',
 	required:[
-		'Uize.Node',
+		'Uize.Dom.Basics',
+		'Uize.Dom.Pos',
 		'Uize.Math.LogicalPos'
 	],
 	builder:function (_superclass) {
@@ -36,10 +37,12 @@ Uize.module ({
 
 		var
 			/*** Variables for Scruncher Optimization ***/
-				_Uize_Node = Uize.Node,
+				_Uize_Dom_Basics = Uize.Dom.Basics,
+				_Uize_Dom_Pos = Uize.Dom.Pos,
 				_Uize_Math_LogicalPos = Uize.Math.LogicalPos,
 
 			/*** General Variables ***/
+				_isIe = Uize.Dom.Basics.isIe,
 				_paramsToDefaultForGetScaledRect = [
 					'coordConverter','sizingLowerBound','sizingUpperBound','sizingValue','maxScaling','alignX','alignY'
 				],
@@ -73,9 +76,9 @@ Uize.module ({
 				updateUi:function () {
 					var m = this;
 					if (m.isWired) {
-						var _shellDims = _Uize_Node.getDimensions (m.getNode ());
+						var _shellDims = _Uize_Dom_Pos.getDimensions (m.getNode ());
 						if (!m._imageNaturalWidth) {
-							var _imageDims = _Uize_Node.getDimensions (m.getNode ('image'));
+							var _imageDims = _Uize_Dom_Pos.getDimensions (m.getNode ('image'));
 							m._imageNaturalWidth = _imageDims.width;
 							m._imageNaturalHeight = _imageDims.height;
 						}
@@ -85,7 +88,7 @@ Uize.module ({
 							rectWidth:m._imageNaturalWidth,
 							rectHeight:m._imageNaturalHeight
 						};
-						Uize.Node.isIe && m.setNodeStyle ('image',{msInterpolationMode:'bicubic'});
+						_isIe && m.setNodeStyle ('image',{msInterpolationMode:'bicubic'});
 						_updateUiPosition (m);
 					}
 				},

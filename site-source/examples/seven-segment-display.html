@@ -275,7 +275,6 @@ Uize.require (
 		'UizeSite.Page.Example',
 		'Uize.Widget.SegmentDisplay.Seven',
 		'Uize.Templates.SevenSegmentDisplay',
-		'Uize.Node',
 		'Uize.Fade',
 		'Uize.Fade.xFactory',
 		'Uize.Curve'
@@ -379,7 +378,7 @@ Uize.require (
 						value
 					);
 				}
-	
+
 			/*** wire events for the value selector ***/
 				function syncSeventSegmentDisplayToValueSelector () {
 					sevenSegmentDisplay.set ({value:page.getNodeValue ('valueSelector')});

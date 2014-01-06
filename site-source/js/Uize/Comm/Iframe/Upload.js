@@ -28,7 +28,7 @@
 Uize.module ({
 	name:'Uize.Comm.Iframe.Upload',
 	required:[
-		'Uize.Node',
+		'Uize.Dom.Basics',
 		'Uize.Url'
 	],
 	builder:function (_superclass) {
@@ -39,7 +39,7 @@ Uize.module ({
 				performRequest:function (_request,_callback) {
 					var
 						m = this,
-						_iframe = Uize.Node.getById(m.iframeId),
+						_iframe = Uize.Dom.Basics.getById(m.iframeId),
 						_uploadForm = _request.uploadForm,
 						_uploadFormTarget = _uploadForm.target,
 						_returnType = _request.returnType,
@@ -49,7 +49,7 @@ Uize.module ({
 						if (_returnTypeIsObject || _returnType == 'json')
 							_request.responseJson = Uize.clone (_responseResult)
 						;
-						Uize.Node.isIe && _iframe.contentWindow.history.go (-1);
+						Uize.Dom.Basics.isIe && _iframe.contentWindow.history.go (-1);
 						_uploadForm.target = _uploadFormTarget;
 						_callback ();
 					};

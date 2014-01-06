@@ -26,7 +26,7 @@
 Uize.module ({
 	name:'Uize.Widget.Stretchy',
 	required:[
-		'Uize.Node',
+		'Uize.Dom.Pos',
 		'Uize.Fade'
 	],
 	builder:function (_superclass) {
@@ -34,9 +34,9 @@ Uize.module ({
 
 		var
 			/*** Variables for Scruncher Optimization ***/
-				_Uize_Node = Uize.Node,
-				_getCoords = _Uize_Node.getCoords,
-				_setStyle = _Uize_Node.setStyle
+				_Uize_Dom_Pos = Uize.Dom.Pos,
+				_getCoords = _Uize_Dom_Pos.getCoords,
+				_setStyle = _Uize_Dom_Pos.setStyle
 		;
 
 		return _superclass.subclass ({

@@ -26,7 +26,7 @@
 Uize.module ({
 	name:'Uize.Widget.Dialog.Picker.Palette',
 	required:[
-		'Uize.Node',
+		'Uize.Dom.Basics',
 		'Uize.Util.Coupler'
 	],
 	builder:function (_superclass) {
@@ -39,8 +39,8 @@ Uize.module ({
 						'',
 						{minWidth:m._minWidth}
 					);
-					Uize.Node.isIe
-						&& Uize.Node.ieMajorVersion <= 7
+					Uize.Dom.Basics.isIe
+						&& Uize.Dom.Basics.ieMajorVersion <= 7
 						&& m.setNodeStyle (
 							'valueShell',
 							{minWidth:m._minWidth}

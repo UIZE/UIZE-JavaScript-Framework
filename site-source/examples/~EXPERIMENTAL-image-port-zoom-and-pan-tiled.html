@@ -41,7 +41,7 @@
 			<div id="page-actions" class="pageActions"><a href="source-code/image-port-zoom-and-pan-tiled.html" class="buttonLink">SOURCE</a></div>
 		</div>
 	</h1>
-	
+
 	<table border="0" cellspacing="1" cellpadding="0" style="margin:auto;">
 		<tr>
 			<td>
@@ -88,7 +88,7 @@ Uize.require (
 	[
 		'UizeSite.Page.Example.library',
 		'UizeSite.Page.Example',
-		'Uize.Node',
+		'Uize.Dom.Basics',
 		'Uize.Widget',
 		'Uize.Fade',
 		'Uize.Widget.ImagePort.Draggable',
@@ -102,7 +102,7 @@ Uize.require (
 
 		setTimeout (
 			function () {
-				var imagePortNodes = Uize.Node.find ({className:'porthole'});
+				var imagePortNodes = Uize.Dom.Basics.find ({className:'porthole'});
 
 				/*** create and wire the ImagePort instances ***/
 					var imagePorts = Uize.Widget.ImagePort.Draggable.spawn ({
@@ -115,7 +115,7 @@ Uize.require (
 						alignX:.5,
 						alignY:.5
 					});
-					Uize.Node.show ('portholes');
+					Uize.Dom.Basics.show ('portholes');
 
 				/*** generate interface for changing the image set ***/
 					var
@@ -164,7 +164,7 @@ Uize.require (
 							'</a>'
 						;
 					}
-					Uize.Node.injectHtml ('imageSetSelector',html);
+					Uize.Dom.Basics.injectHtml ('imageSetSelector',html);
 			},
 			1000
 		);

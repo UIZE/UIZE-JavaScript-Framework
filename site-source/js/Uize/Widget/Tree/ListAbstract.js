@@ -26,7 +26,7 @@
 Uize.module ({
 	name:'Uize.Widget.Tree.ListAbstract',
 	required:[
-		'Uize.Node',
+		'Uize.Dom.Basics',
 		'Uize.Tooltip',
 		'Uize.Util.Html.Encode'
 	],
@@ -37,7 +37,7 @@ Uize.module ({
 			var
 				_true = true,
 				_false = false,
-				_Uize_Node = Uize.Node,
+				_Uize_Dom_Basics = Uize.Dom.Basics,
 				_Uize_Tooltip = Uize.Tooltip,
 				_htmlEncode = Uize.Util.Html.Encode.encode
 			;
@@ -54,7 +54,7 @@ Uize.module ({
 						var
 							_tooltip = m._tooltip,
 							_tooltipIsPlainObject = Uize.isPlainObject (_tooltip),
-							_tooltipNode = Uize.Node.getById (_tooltipIsPlainObject ? _tooltip.node : _tooltip)
+							_tooltipNode = _Uize_Dom_Basics.getById (_tooltipIsPlainObject ? _tooltip.node : _tooltip)
 						;
 						m.traverseTree ({
 							itemHandler:
@@ -79,7 +79,7 @@ Uize.module ({
 																		_tooltipHtml = _htmlEncode (_itemDescription)
 																	;
 																}
-																_tooltipHtml && _Uize_Node.setInnerHtml (_tooltipNode,_tooltipHtml);
+																_tooltipHtml && _Uize_Dom_Basics.setInnerHtml (_tooltipNode,_tooltipHtml);
 															}
 															if (_tooltipHtml) {
 																_Uize_Tooltip.showTooltip (_tooltipNode,_true);

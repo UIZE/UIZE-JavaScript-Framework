@@ -374,17 +374,20 @@ Uize.module ({
 	name:'Uize.Fx.xShadows',
 	required:[
 		'Uize.Color',
-		'Uize.Node'
+		'Uize.Dom.Basics'
 	],
 	builder:function (_package) {
 		'use strict';
 
-		/*** General Variables ***/
-			var
+		var
+			/*** Variables for Scruncher Optimization ***/
+				_Uize_Dom_Basics = Uize.Dom.Basics,
+
+			/*** General Variables ***/
 				_extension = function () {},
 				_shadowPropertiesRegExp,
 				_encoderExpression = 'Uize.Fx.xShadows.toShadow(VALUE)'
-			;
+		;
 
 		/*** Utility Functions ***/
 			function _initializeShadowPropertiesRegExp () {
@@ -464,7 +467,7 @@ Uize.module ({
 
 		_package.defineStylePropertiesProfile ({
 			test:'boxShadow',
-			remappedProperty:Uize.Node.isSafari ? 'WebkitBoxShadow' : Uize.Node.isMozilla ? 'MozBoxShadow' : 'boxShadow',
+			remappedProperty:_Uize_Dom_Basics.isSafari ? 'WebkitBoxShadow' : _Uize_Dom_Basics.isMozilla ? 'MozBoxShadow' : 'boxShadow',
 			decoder:_fromShadow,
 			encoderExpression:_encoderExpression
 		});

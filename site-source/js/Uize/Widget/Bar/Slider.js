@@ -31,7 +31,7 @@
 Uize.module ({
 	name:'Uize.Widget.Bar.Slider',
 	required:[
-		'Uize.Node',
+		'Uize.Dom.Pos',
 		'Uize.Widget.Drag'
 	],
 	builder:function (_superclass) {
@@ -39,7 +39,7 @@ Uize.module ({
 
 		/*** Variables for Scruncher Optimization ***/
 			var
-				_Uize_Node = Uize.Node,
+				_Uize_Dom_Pos = Uize.Dom.Pos,
 				_Uize_Widget_Drag = Uize.Widget.Drag
 			;
 
@@ -90,9 +90,9 @@ Uize.module ({
 							_valueFunc = m.get ('valueFunc'),
 							_calculateCommonCoords = function () {
 								_orientationNo = m.get ('orientation') == 'vertical' ? 1 : 0;
-								_trackDimsObj = _Uize_Node.getDimensions (_track);
+								_trackDimsObj = _Uize_Dom_Pos.getDimensions (_track);
 								_trackDims = [_trackDimsObj.width,_trackDimsObj.height];
-								_knobDimsObj = _Uize_Node.getDimensions (_knob);
+								_knobDimsObj = _Uize_Dom_Pos.getDimensions (_knob);
 								_knobDims = [_knobDimsObj.width,_knobDimsObj.height];
 							},
 							_pixelsToScale = function (_pixels) {
@@ -142,8 +142,8 @@ Uize.module ({
 								if (m.get ('enabledInherited')) {
 									_calculateCommonCoords ();
 									var
-										_trackCoords = _Uize_Node.getCoords (_track),
-										_eventAbsPos = _Uize_Node.getEventAbsPos (_event)
+										_trackCoords = _Uize_Dom_Pos.getCoords (_track),
+										_eventAbsPos = _Uize_Dom_Pos.getEventAbsPos (_event)
 									;
 									_setValueInDrag.call (
 										m,

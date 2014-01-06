@@ -51,16 +51,16 @@ Uize.module ({
 							['Uize','Uize.Widget']
 						],
 						['Test that a child node supports everything that the root node supports',
-							{Uize:{Node:0,Widget:{Bar:0,Form:0}}},
-							['Uize','Uize.Node','Uize.Widget','Uize.Widget.Bar','Uize.Widget.Form']
+							{Uize:{Dom:0,Widget:{Bar:0,Form:0}}},
+							['Uize','Uize.Dom','Uize.Widget','Uize.Widget.Bar','Uize.Widget.Form']
 						],
 						['Test that a complex tree is encoded correctly',
-							{Uize:{Fade:0,Color:0,Node:0,Widget:{Bar:{Slider:0},Form:0}},MyCompanySite:{Dialog:0,Page:0}},
+							{Uize:{Fade:0,Color:0,Dom:0,Widget:{Bar:{Slider:0},Form:0}},MyCompanySite:{Dialog:0,Page:0}},
 							[
 								'Uize',
 								'Uize.Fade',
 								'Uize.Color',
-								'Uize.Node',
+								'Uize.Dom',
 								'Uize.Widget',
 								'Uize.Widget.Bar',
 								'Uize.Widget.Bar.Slider',
@@ -71,19 +71,19 @@ Uize.module ({
 							]
 						],
 						['Test that a custom delimiter is handled correctly',
-							[{Uize:{Node:0,Widget:{Bar:0,Form:0}}},'_'],
-							['Uize','Uize_Node','Uize_Widget','Uize_Widget_Bar','Uize_Widget_Form']
+							[{Uize:{Dom:0,Widget:{Bar:0,Form:0}}},'_'],
+							['Uize','Uize_Dom','Uize_Widget','Uize_Widget_Bar','Uize_Widget_Form']
 						],
 						['Test that the custom delimiter can be an empty string',
-							[{Uize:{Node:0,Widget:{Bar:0,Form:0}}},''],							['Uize','UizeNode','UizeWidget','UizeWidgetBar','UizeWidgetForm']
+							[{Uize:{Dom:0,Widget:{Bar:0,Form:0}}},''],							['Uize','UizeDom','UizeWidget','UizeWidgetBar','UizeWidgetForm']
 						],
 						['Test that the value null for the custom delimiter is defaulted correctly',
-							[{Uize:{Node:0,Widget:{Bar:0,Form:0}}},null],
-							['Uize','Uize.Node','Uize.Widget','Uize.Widget.Bar','Uize.Widget.Form']
+							[{Uize:{Dom:0,Widget:{Bar:0,Form:0}}},null],
+							['Uize','Uize.Dom','Uize.Widget','Uize.Widget.Bar','Uize.Widget.Form']
 						],
 						['Test that the value undefined for the custom delimiter is defaulted correctly',
-							[{Uize:{Node:0,Widget:{Bar:0,Form:0}}},undefined],
-							['Uize','Uize.Node','Uize.Widget','Uize.Widget.Bar','Uize.Widget.Form']
+							[{Uize:{Dom:0,Widget:{Bar:0,Form:0}}},undefined],
+							['Uize','Uize.Dom','Uize.Widget','Uize.Widget.Bar','Uize.Widget.Form']
 						]
 					]],
 					['Uize.Data.PathsTree.fromList',[
@@ -104,8 +104,8 @@ Uize.module ({
 							{Uize:{Widget:0}}
 						],
 						['Test that a subpath supports everything that a root path supports',
-							[['Uize','Uize.Node','Uize.Widget','Uize.Widget.Bar','Uize.Widget.Form']],
-							{Uize:{Node:0,Widget:{Bar:0,Form:0}}}
+							[['Uize','Uize.Dom','Uize.Widget','Uize.Widget.Bar','Uize.Widget.Form']],
+							{Uize:{Dom:0,Widget:{Bar:0,Form:0}}}
 						],
 						['Test that a complex paths list is decoded correctly to a paths tree',
 							[
@@ -113,7 +113,7 @@ Uize.module ({
 									'Uize',
 									'Uize.Fade',
 									'Uize.Color',
-									'Uize.Node',
+									'Uize.Dom',
 									'Uize.Widget',
 									'Uize.Widget.Bar',
 									'Uize.Widget.Bar.Slider',
@@ -123,19 +123,19 @@ Uize.module ({
 									'MyCompanySite.Page'
 								]
 							],
-							{Uize:{Fade:0,Color:0,Node:0,Widget:{Bar:{Slider:0},Form:0}},MyCompanySite:{Dialog:0,Page:0}}
+							{Uize:{Fade:0,Color:0,Dom:0,Widget:{Bar:{Slider:0},Form:0}},MyCompanySite:{Dialog:0,Page:0}}
 						],
 						['Test that a custom delimiter is handled correctly',
-							[['Uize','Uize_Node','Uize_Widget','Uize_Widget_Bar','Uize_Widget_Form'],'_'],
-							{Uize:{Node:0,Widget:{Bar:0,Form:0}}}
+							[['Uize','Uize_Dom','Uize_Widget','Uize_Widget_Bar','Uize_Widget_Form'],'_'],
+							{Uize:{Dom:0,Widget:{Bar:0,Form:0}}}
 						],
 						['Test that the value null for the custom delimiter is defaulted correctly',
-							[['Uize','Uize.Node','Uize.Widget','Uize.Widget.Bar','Uize.Widget.Form'],null],
-							{Uize:{Node:0,Widget:{Bar:0,Form:0}}}
+							[['Uize','Uize.Dom','Uize.Widget','Uize.Widget.Bar','Uize.Widget.Form'],null],
+							{Uize:{Dom:0,Widget:{Bar:0,Form:0}}}
 						],
 						['Test that the value undefined for the custom delimiter is defaulted correctly',
-							[['Uize','Uize.Node','Uize.Widget','Uize.Widget.Bar','Uize.Widget.Form'],undefined],
-							{Uize:{Node:0,Widget:{Bar:0,Form:0}}}
+							[['Uize','Uize.Dom','Uize.Widget','Uize.Widget.Bar','Uize.Widget.Form'],undefined],
+							{Uize:{Dom:0,Widget:{Bar:0,Form:0}}}
 						]
 					]]
 				])

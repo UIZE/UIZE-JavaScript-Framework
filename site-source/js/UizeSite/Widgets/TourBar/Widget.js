@@ -36,7 +36,7 @@ Uize.module ({
 	name:'UizeSite.Widgets.TourBar.Widget',
 	superclass:'Uize.Widget.V2',
 	required:[
-		'Uize.Node',
+		'Uize.Dom.Basics',
 		'UizeSite.Examples',
 		'Uize.Url',
 		'Uize.Tooltip',
@@ -77,9 +77,9 @@ Uize.module ({
 							_tooltip = m.children.tooltip,
 							_tooltipNode = _tooltip.getNode ()
 						;
-						Uize.Node.display (_tooltipNode,false);
+						Uize.Dom.Basics.display (_tooltipNode,false);
 						m.wireNode (
-							Uize.Node.find ({root:m.getNode (),tagName:'a'}),
+							Uize.Dom.Basics.find ({root:m.getNode (),tagName:'a'}),
 							{
 								mouseover:function () {
 									var _tourExample = _getTourExampleByUrl (this.getAttribute ('href'));

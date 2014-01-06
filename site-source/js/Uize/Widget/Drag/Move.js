@@ -25,13 +25,13 @@
 
 Uize.module ({
 	name:'Uize.Widget.Drag.Move',
-	required:'Uize.Node',
+	required:'Uize.Dom.Basics',
 	builder:function  (_superclass) {
 		'use strict';
 
 		var
 			/*** Variables for Scruncher Optimization ***/
-				_Uize_Node = Uize.Node
+				_Uize_Dom_Basics = Uize.Dom.Basics
 		;
 
 		/*** Private Instance Methods ***/
@@ -63,7 +63,7 @@ Uize.module ({
 								var
 									_axisSideNames = _sideNames [_axis],
 									_dragSide = _dragSides [_axis] = _node.style [_axisSideNames [1]] ? 1 : 0,
-									_dragSidePosStr = _Uize_Node.getStyle (_node,_axisSideNames [_dragSide]),
+									_dragSidePosStr = _Uize_Dom_Basics.getStyle (_node,_axisSideNames [_dragSide]),
 									_dragSideUnit = _getPosUnit (_dragSidePosStr)
 								;
 								_dragStartNodePos [_axis] = _dragSideUnit == '%' ? (parseFloat (_dragSidePosStr) / 100 * _node.offsetParent ['offset' + (_axis ? 'Height' : 'Width')]) : parseFloat (_dragSidePosStr);

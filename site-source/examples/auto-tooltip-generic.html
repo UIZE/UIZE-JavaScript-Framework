@@ -37,7 +37,7 @@
 	<!-- explanation copy -->
 
 	<div class="explanation">
-		<p>In this example, an instance of <a href="../reference/Uize.Widget.AutoTooltip.html"><code>Uize.Widget.AutoTooltip</code></a> is wired to a bunch of external links that appear within a discussion of the <b>electronica</b> music genre down below (courtesy of Wikipedia). Each link tag has summary info for the link, tucked away inside the tag's <code>title</code> attribute. When you mouse over the links, the summary info is displayed in a table format inside a tooltip that follows the mouse position. The tooltip HTML for the summary table is produced by an instance of the <a href="../reference/Uize.Widgets.Tooltip.KeysValues.Widget.html"><code>Uize.Widgets.Tooltip.KeysValues.Widget</code></a> class. The set of links to wire up with tooltips is obtained using the <code>Uize.Node.find</code> static method, and is specified by setting the instance's <code>nodes</code> state property.</p>
+		<p>In this example, an instance of <a href="../reference/Uize.Widget.AutoTooltip.html"><code>Uize.Widget.AutoTooltip</code></a> is wired to a bunch of external links that appear within a discussion of the <b>electronica</b> music genre down below (courtesy of Wikipedia). Each link tag has summary info for the link, tucked away inside the tag's <code>title</code> attribute. When you mouse over the links, the summary info is displayed in a table format inside a tooltip that follows the mouse position. The tooltip HTML for the summary table is produced by an instance of the <a href="../reference/Uize.Widgets.Tooltip.KeysValues.Widget.html"><code>Uize.Widgets.Tooltip.KeysValues.Widget</code></a> class. The set of links to wire up with tooltips is obtained using the <code>Uize.Dom.Basics.find</code> static method, and is specified by setting the instance's <code>nodes</code> state property.</p>
 
 		<p>Tucking the summary info for the links into the HTML provides relevancy information for search engines that index the page, but also adds value to the page in the case that JavaScript is disabled, if the JavaScript breaks, or if it just takes long for the JavaScript to load and wire up the behavior. To demonstrate the fallback experience, click on the <b>"UNWIRE AUTO TOOLTIPS"</b> button to unwire the widget. With the widget unwired, mousing over the links gives you the experience without the auto tooltip behavior - just the regular browser tooltips. To go back to decorated tooltips, click the <b>"WIRE AUTO TOOLTIPS"</b> button.</p>
 	</div>
@@ -66,7 +66,7 @@ Uize.require (
 	[
 		'UizeSite.Page.Example.library',
 		'UizeSite.Page.Example',
-		'Uize.Node',
+		'Uize.Dom.Basics',
 		'Uize.Widgets.Tooltip.KeysValues.Widget',
 		'Uize.Widget.AutoTooltip',
 		'Uize.Widget.V2',
@@ -78,7 +78,7 @@ Uize.require (
 		/*** create the example page widget ***/
 			var page = window.page = UizeSite.Page.Example ();
 
-		var linkNodes = Uize.Node.find ({root:page.getNode ('sampleCopy'),tagName:'A',className:'externalSiteLink'});
+		var linkNodes = Uize.Dom.Basics.find ({root:page.getNode ('sampleCopy'),tagName:'A',className:'externalSiteLink'});
 
 		/*** add the keys-values tooltip widget ***/
 			var keysValuesTooltip = page.addChild (

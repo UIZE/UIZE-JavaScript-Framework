@@ -31,7 +31,7 @@
 Uize.module ({
 	name:'Uize.Widget',
 	superclass:'Uize.Class',
-	required:'Uize.Node',
+	required:'Uize.Dom.Basics',
 	builder:function (_superclass) {
 		'use strict';
 
@@ -46,14 +46,14 @@ Uize.module ({
 				_isFunction = _Uize.isFunction,
 				_concatenated = 'concatenated',
 				_undefined,
-				_Uize_Node = _Uize.Node,
-				_doForAll = _Uize_Node.doForAll,
+				_Uize_Dom_Basics = _Uize.Dom.Basics,
+				_doForAll = _Uize_Dom_Basics.doForAll,
 				_callOn = _Uize.callOn,
 				_substituteInto = _Uize.substituteInto,
 
 			/*** References for Performance Optimization ***/
-				_isNode = _Uize_Node.isNode,
-				_getById = _Uize_Node.getById
+				_isNode = _Uize_Dom_Basics.isNode,
+				_getById = _Uize_Dom_Basics.getById
 		;
 
 		/*** Utility Functions ***/
@@ -492,7 +492,7 @@ Uize.module ({
 							'arguments.length' +
 								'?(arguments[0]=this.getNode(arguments[0]))' +
 								':(arguments[arguments.length++]=this.getNode());' +
-							'return Uize.Node.' + _methodName.replace ('Node','') + '.apply(0,arguments)'
+							'return Uize.Dom.Basics.' + _methodName.replace ('Node','') + '.apply(0,arguments)'
 						);
 					}
 				),
@@ -891,7 +891,7 @@ Uize.module ({
 										? {
 											process:_Uize.Template.compile (
 												(
-													_Uize_Node.find ({root:_nodeToInjectInto,tagName:'SCRIPT',type:'text/jst'}) [0] ||
+													_Uize_Dom_Basics.find ({root:_nodeToInjectInto,tagName:'SCRIPT',type:'text/jst'}) [0] ||
 													_nodeToInjectInto
 												).innerHTML,
 												{openerToken:'[%',closerToken:'%]'}
@@ -931,7 +931,7 @@ Uize.module ({
 							;
 							if (_html != _undefined) {
 								var _nodeToInjectInto = _getNodeToInjectInto (m);
-								_Uize_Node.injectHtml (
+								_Uize_Dom_Basics.injectHtml (
 									_nodeToInjectInto || document.body,
 									_html,
 									m._insertionMode || (_nodeToInjectInto ? 'inner replace' : 'inner bottom')
@@ -972,7 +972,7 @@ Uize.module ({
 
 					/*** General Node Methods ***/
 						nodeId:function (_nodeName) {
-							return _Uize_Node.joinIdPrefixAndNodeId (this._idPrefix,_nodeName || '');
+							return _Uize_Dom_Basics.joinIdPrefixAndNodeId (this._idPrefix,_nodeName || '');
 							/*?
 								Instance Methods
 									nodeId
@@ -1077,7 +1077,7 @@ Uize.module ({
 								function (_node) {
 									if (_node.parentNode != _docBody) {
 										(m._globalizedNodes || (m._globalizedNodes = [])).push (_node);
-										_Uize_Node.setStyle (_node,{position:'absolute',left:-10000,top:-10000});
+										_Uize_Dom_Basics.setStyle (_node,{position:'absolute',left:-10000,top:-10000});
 										_docBody.appendChild (_node);
 									}
 								}
@@ -1093,7 +1093,7 @@ Uize.module ({
 						},
 
 						removeNode:function (_impliedNode) {
-							_Uize_Node.remove (this.getNode (_impliedNode));
+							_Uize_Dom_Basics.remove (this.getNode (_impliedNode));
 							this.flushNodeCache (_impliedNode);
 								/* TO DO!!!
 									if a node blob is specified for _impliedNode, the current implementation of flushNodeCache will not succeed in flushing the specified nodes
@@ -1113,8 +1113,8 @@ Uize.module ({
 						wireNode:function (_impliedNode,_eventNameOrEventsMap,_handler) {
 							var m = this;
 							arguments.length == 3
-								? _Uize_Node.wire (m.getNode (_impliedNode),_eventNameOrEventsMap,_handler,m.instanceId)
-								: _Uize_Node.wire (m.getNode (_impliedNode),_eventNameOrEventsMap,m.instanceId)
+								? _Uize_Dom_Basics.wire (m.getNode (_impliedNode),_eventNameOrEventsMap,_handler,m.instanceId)
+								: _Uize_Dom_Basics.wire (m.getNode (_impliedNode),_eventNameOrEventsMap,m.instanceId)
 							;
 							/*?
 								Instance Methods
@@ -1193,8 +1193,8 @@ Uize.module ({
 							typeof _eventNameOrEventsMap == 'object' &&
 							_eventNameOrEventsMap &&
 							!_eventNameOrEventsMap.virtualDomEvent
-								? _Uize_Node.unwire (_impliedNode,_eventNameOrEventsMap,this.instanceId)
-								: _Uize_Node.unwire (_impliedNode,_eventNameOrEventsMap,_handler,this.instanceId)
+								? _Uize_Dom_Basics.unwire (_impliedNode,_eventNameOrEventsMap,this.instanceId)
+								: _Uize_Dom_Basics.unwire (_impliedNode,_eventNameOrEventsMap,_handler,this.instanceId)
 							;
 							/*?
 								Instance Methods
@@ -1679,7 +1679,7 @@ Uize.module ({
 							var m = this;
 							m.unwireUi ();
 							m.removeNode ();
-							_Uize_Node.remove (m._globalizedNodes);
+							_Uize_Dom_Basics.remove (m._globalizedNodes);
 							m._globalizedNodes = _undefined;
 							_callOn (m._children,'removeUi');
 							m.set ({_built:_false});
@@ -2145,7 +2145,7 @@ Uize.module ({
 						_parentIdPrefixPlusLength = _parentIdPrefixPlus.length
 					;
 					_doForAll (
-						_Uize_Node.find (_properties.idPrefix),
+						_Uize_Dom_Basics.find (_properties.idPrefix),
 						function (_node) {
 							_properties.idPrefix = _node;
 							_parent

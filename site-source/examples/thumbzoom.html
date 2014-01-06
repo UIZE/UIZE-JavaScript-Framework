@@ -68,7 +68,7 @@
 	<!-- explanation copy -->
 
 	<div class="explanation">
-		<p>In this example, an instance of the <a href="../reference/Uize.Widget.ThumbZoom.html"><code>Uize.Widget.ThumbZoom</code></a> widget class is created and wired up to the thumbnail images on the page. This is done by specifying the thumbnail <code>img</code> nodes through the <code>thumbNodes</code> state property on the <code>Uize.Widget.ThumbZoom</code> instance. The nodes to wire up are determined using the <code>Uize.Node.find</code> static method.</p>
+		<p>In this example, an instance of the <a href="../reference/Uize.Widget.ThumbZoom.html"><code>Uize.Widget.ThumbZoom</code></a> widget class is created and wired up to the thumbnail images on the page. This is done by specifying the thumbnail <code>img</code> nodes through the <code>thumbNodes</code> state property on the <code>Uize.Widget.ThumbZoom</code> instance.</p>
 		<p>The <code>Uize.Widget.ThumbZoom</code> class wires a lightweight, inline preview behavior to these images. The URL for the larger version of each image is found from the <code>href</code> of the <code>img</code> tag's containing <code>a</code> tag. This provides the benefits of SEO indexing of the large images, as well as a fallback behavior should JavaScript be disabled or some failure occurs (so, a progressive enhancement approach). When you click on a thumbnail, the larger version is loaded and zooms out from the thumbnail using a JavaScript animation effect. Moving the mouse dismisses the large view. This provides a lightweight and easily discoverable and learnable interaction that makes it quick to go from one preview to the next. Additionally, there is some very simple CSS and JavaScript as part of the page wiring that dims the grid when you mouse over it, but for the thumbnail that you mouse over, helping to make the thumbnails "pop".</p>
 	</div>
 
@@ -121,8 +121,7 @@ Uize.require (
 	[
 		'UizeSite.Page.Example.library',
 		'UizeSite.Page.Example',
-		'Uize.Widget.ThumbZoom',
-		'Uize.Node'
+		'Uize.Widget.ThumbZoom'
 	],
 	function () {
 		'use strict';

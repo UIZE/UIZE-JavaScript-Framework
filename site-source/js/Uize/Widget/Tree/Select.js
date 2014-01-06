@@ -25,7 +25,6 @@
 
 Uize.module ({
 	name:'Uize.Widget.Tree.Select',
-	required:'Uize.Node',
 	builder:function (_superclass) {
 		'use strict';
 

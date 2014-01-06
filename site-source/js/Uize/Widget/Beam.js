@@ -25,7 +25,6 @@
 
 Uize.module ({
 	name:'Uize.Widget.Beam',
-	required:'Uize.Node',
 	builder:function  (_superclass) {
 		'use strict';
 

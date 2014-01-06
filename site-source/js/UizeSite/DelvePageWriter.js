@@ -19,7 +19,7 @@
 Uize.module ({
 	name:'UizeSite.DelvePageWriter',
 	required:[
-		'Uize.Node',
+		'Uize.Dom.Basics',
 		'UizeSite.Templates.DelvePageHtml'
 	],
 	builder:function () {
@@ -27,14 +27,14 @@ Uize.module ({
 
 		return Uize.package ({
 			initialize:function () {
-				Uize.Node.setStyle (document.body,{margin:0});
+				Uize.Dom.Basics.setStyle (document.body,{margin:0});
 				var
 					_html = UizeSite.Templates.DelvePageHtml.process ({
 						pathToResources:Uize.pathToResources
 					}),
 					_srcAttributeValue = 'javascript:\'' + encodeURIComponent (_html.replace (/'/g,'\\\'').replace (/\r|\n|\r\n/g,'')) + '\''
 				;
-				Uize.Node.injectHtml (
+				Uize.Dom.Basics.injectHtml (
 					document.body,
 					'<iframe src="' + _srcAttributeValue + '" frameborder="0" style="width:100%; height:100%; border:0;"></iframe>'
 				);

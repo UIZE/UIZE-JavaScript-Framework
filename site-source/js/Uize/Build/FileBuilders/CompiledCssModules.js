@@ -58,7 +58,7 @@ Uize.module ({
 
 				return Uize.Build.Util.moduleAsText ({
 					name:_moduleName,
-					superclass:'Uize.Node.CssModule',
+					superclass:'Uize.Dom.CssModule',
 					builder:[
 						'function (_superclass) {',
 						'	\'use strict\';',

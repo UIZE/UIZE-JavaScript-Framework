@@ -59,164 +59,123 @@
 
 Uize.module ({
 	name:'Uize.Node',
-	required:'Uize.Event.Bus',
+	required:[
+		'Uize.Dom.Basics',
+		'Uize.Dom.Pos'
+	],
 	builder:function () {
 		'use strict';
 
 		var
 			/*** Variables for Scruncher Optimization ***/
-				_package,
 				_undefined,
 				_typeString = 'string',
-				_typeObject = 'object',
-				_true = true,
-				_false = false,
-				_null = null,
 				_Uize = Uize,
-				_copyInto = _Uize.copyInto,
-				_returnFalse = _Uize.returnFalse,
-				_Math = Math,
+				_Uize_Dom = _Uize.Dom,
+				_Uize_Dom_Basics = _Uize_Dom.Basics,
 
-			/*** references to static methods used internally ***/
-				_getDocumentScrollElement,
-				_doForAll,
-				_doRectanglesOverlap,
-				_getById,
-				_getCoords,
-				_getDimensions,
-				_getStyle,
-				_getText,
-				_isNode,
-				_isOnNodeTree,
-				_joinIdPrefixAndNodeId,
-				_setAbsPos,
-				_setStyle,
-				_unwire,
+				/*** features pulled in from Uize.Dom.Basics ***/
+					_getById = _Uize_Dom_Basics.getById,
 
-			/*** General Variables ***/
-				_isBrowser = typeof navigator != 'undefined',
-				_navigator = _isBrowser ? navigator : {userAgent:'',appName:''},
-				_userAgent = _navigator.userAgent.toLowerCase (),
-				_isIe = _navigator.appName == 'Microsoft Internet Explorer',
-				_isSafari = _userAgent.indexOf ('applewebkit') > -1,
-				_isMozilla = _userAgent.indexOf ('gecko') > -1,
-				_isOpera = _userAgent.indexOf ('opera') > -1,
-				_isMozillaOrOpera = _isMozilla || _isOpera,
-				_ieMajorVersion = +(_isIe && (_userAgent.match (/MSIE\s*(\d+)/i) || [0,0]) [1]),
-				_useHandForPointerCursor = _isIe && _ieMajorVersion < 9,
-				_wirings = {},
-				_wiringIdsByOwnerId = {},
-				_totalWirings = 0,
-				_mousePos = {clientX:0,clientY:0,pageX:0,pageY:0},
-				_ieInnerHtmlReadOnly = {
-					TABLE:_true, THEAD:_true, TFOOT:_true, TBODY:_true, TR:_true, COL:_true, COLGRPUP:_true,
-					FRAMESET:_true, HEAD:_true, HTML:_true, STYLE:_true, TITLE:_true
-				},
-
-			/*** variables for display method ***/
-				_tableDisplayValuePrefix = 'table-',
-				_tableRowDisplayValue = _tableDisplayValuePrefix + 'row',
-				_tableCellDisplayValue = _tableDisplayValuePrefix + 'cell',
-				_tagSpecificDisplayValues = _copyInto (
-					{
-						SPAN:'inline',
-						THEAD:_tableDisplayValuePrefix + 'header-group',
-						TFOOT:_tableDisplayValuePrefix + 'footer-group',
-						LI:'list-item'
-					},
-					_isIe && typeof DOMImplementation == 'undefined'
-						/* NOTE:
-							IE8 supports all the display values, and also the DOMImplementation object (so we use it for testing for older IE)
-						*/
-						? _null
-						: {
-							TABLE:'table',
-							TR:_tableRowDisplayValue,
-							TH:_tableCellDisplayValue,
-							TD:_tableCellDisplayValue,
-							TBODY:_tableRowDisplayValue + '-group',
-							COLGROUP:_tableDisplayValuePrefix + 'column-group',
-							COL:_tableDisplayValuePrefix + 'column',
-							CAPTION:_tableDisplayValuePrefix + 'caption'
-						}
-				),
-
-			/*** variables for getStyle method ***/
-				_trblStylePropertiesMap = {
-					borderColor:['border','Color'],
-					borderWidth:['border','Width'],
-					padding:1,
-					margin:1
-				},
-
-			/*** variables for setCoords method ***/
-				_coordNames = ['left','top','width','height'],
-
-			/*** variables for setOpacity method ***/
-				_opacityStyleProperty = {}
+			/*** variables for showClickable method ***/
+				_useHandForPointerCursor = _Uize_Dom_Basics.isIe && _Uize_Dom_Basics.ieMajorVersion < 9
 		;
 
-		/*** Utility Functions ***/
-			function _captureMousePos (_event) {
-				_mousePos.clientX = _event.clientX;
-				_mousePos.clientY = _event.clientY;
-				_mousePos.pageX = _event.pageX;
-				_mousePos.pageY = _event.pageY;
-			}
-
-			function _getElementById (_nodeId) {
-				var _result = document.getElementById (_nodeId);
-				return (!_isIe || (_result && _result.id == _nodeId)) ? _result : _null;
-				/* WORKAROUND:
-					stupid issue in IE, where document.getElementById will return a reference to a node that has a name attribute with the specified ID value, if no node has an id with that value
-				*/
-			}
-
-			function _resolveStringEventName (_eventName) {
-				return (
-					_package.VirtualEvent && _eventName.charCodeAt (_eventName.length - 1) == 41
-						? _package.VirtualEvent.resolve (_eventName)
-						: _eventName.charCodeAt (0) == 111 && _eventName.charCodeAt (1) == 110
-							? _eventName.slice (2)
-							: _eventName
-				);
-			}
-
-		_package = _Uize.package ({
-			/*** Private Static Properties ***/
-				_wirings:_wirings,
-				_captureMousePos:_captureMousePos, // NOTE: this is needed for the quarantined mouseover handler
-
-			/*** Public Static Methods ***/
-				getDocumentScrollElement:_getDocumentScrollElement = function () {
-					return document [_isSafari ? 'body' : 'documentElement']
-					/*?
-						Static Methods
-							Uize.Node.getDocumentScrollElement
-								A utility function that returns the DOM node on which you can scroll the document.
-
-								SYNTAX
-								......................................
-								Uize.Node.getDocumentScrollElement ();
-								......................................
-
-								This method abstracts the difference between WebKit browsers (Safari, Chrome, etc.) and other browsers as to which DOM node is the one that allows changing the scrolling position of the document.
-
-								EXAMPLE
-								......................................................................................
-								Uize.Node.getDocumentScrollElement ().scrollTop = 0;  // scroll to the top of the page
-								......................................................................................
-					*/
-				},
-
-				display:function (_nodeBlob,_mustDisplay) {
-					_mustDisplay = _mustDisplay === _undefined || !!_mustDisplay;
-					_doForAll (
-						_nodeBlob,
-						function (_node) {
-							_node.style.display = _mustDisplay ? (_tagSpecificDisplayValues [_node.tagName] || 'block') : 'none';
+		return _Uize.package (
+			_Uize.copyInto (
+				{
+					getText:function (_node) {
+						var _text = '';
+						if (_node = _getById (_node)) {
+							var  _gatherText = function (_node) {
+								if (typeof _node.innerText == _typeString) {
+									_text += _node.innerText.replace (/\r|\n|\r\n/g,'');
+								} else if (typeof _node.textContent == _typeString) {
+									_text += _node.textContent;
+								} else {
+									if (_node.nodeType == 3) _text += _node.data;
+									_node.childNodes && _Uize.forEach (_node.childNodes,_gatherText);
+								}
+							};
+							_gatherText (_node);
 						}
-					);
+						return _text;
+						/*?
+							Static Methods
+								Uize.Node.getText
+									Returns a string, representing the text content of the specified node.
+
+									SYNTAX
+									...............................................
+									nodeTextSTR = Uize.Node.getText (nodeSTRorOBJ);
+									...............................................
+
+									In Internet Explorer, this method employs the =innerText= property, removing all linebreaks. In other browsers that support the =textContent= property, this is used. For browsers that support neither, this method iterates recursively through the child nodes and cumulatively harvests the text content using the data property of all the text nodes.
+
+									EXAMPLE
+									............................
+									<div id="testNode">
+										<p>This is a test</p>
+										<table>
+											<tr>
+												<td> of</td>
+												<td> the</td>
+											</tr>
+										</table>
+										<blockquote>
+											<ul>
+												<li> emergency
+												<li> broadcasting
+											</ul>
+											<p> network</p>
+										</blockquote>
+									</div>
+									............................
+
+									In the above example, the statement =Uize.Node.getText ('testNode')= would return roughly ='this is a test of the emergency broadcasting network'= (between browsers there might be variability with the whitespace content).
+
+									NOTES
+									- this method is not quaranteed to return exactly the same value for the exact same markup in all browsers
+						*/
+					},
+
+					showClickable:function (_nodeBlob,_clickable) {
+						_Uize_Dom_Basics.setStyle (
+							_nodeBlob,
+							{
+								cursor:
+									_clickable || _clickable === _undefined
+										? (_useHandForPointerCursor ? 'hand' : 'pointer')
+										: 'default'
+							}
+						);
+						/*?
+							Static Methods
+								Uize.Node.showClickable
+									Sets the value of the "cursor" style property of the specified `node blob` so that the node(s) appear either clickable or not, depending on the specified boolean value.
+
+									This method is useful for DOM nodes that need to be wired up with click actions by JavaScript code, but that don't have CSS selectors from the document applying the appropriate cursor style to them.
+
+									SYNTAX
+									....................................................
+									Uize.Node.showClickable (nodeBLOB,clickableANYTYPE);
+									....................................................
+
+									While typically a Boolean, the =clickableANYTYPE= parameter can be of any type and the node(s) will be set to appear clickable if it resolves to =true=, and not clickable if it resolves to =false= - with the exception of =undefined=, when the node(s) will be set to appear clickable (see explanation below).
+
+									VARIATION
+									...................................
+									Uize.Node.showClickable (nodeBLOB);
+									...................................
+
+									When no =clickableANYTYPE= parameter is specified (or when its value is =undefined=), the node(s) will be set to appear clickable.
+
+									NOTES
+									- this method can operate on multiple nodes at a time. For more details, see the section on `node blob`
+						*/
+					}
+				},
+				_Uize_Dom_Basics,
 					/*?
 						Static Methods
 							Uize.Node.display
@@ -240,34 +199,7 @@ Uize.module ({
 								- compare to the =Uize.Node.show= static method
 								- this method can operate on multiple nodes at a time. For more details, see the section on `node blob`
 					*/
-				},
 
-				doForAll:_doForAll = function (_nodeBlob,_function,_idPrefix,_nodeCache) {
-					if (typeof _nodeBlob == _typeString)
-						_nodeBlob = _getById (_nodeBlob,_idPrefix,_nodeCache)
-					;
-					if (_nodeBlob != _undefined) {
-						if (_isNode (_nodeBlob)) {
-							_function (_nodeBlob);
-						} else {
-							var _typeofNodeBlob = typeof _nodeBlob;
-							if (
-								(_typeofNodeBlob == _typeObject || _typeofNodeBlob == 'function') &&
-								typeof _nodeBlob.length == 'number'
-							) {
-								for (
-									var _subNodeBlobNo = -1, _nodeBlobLength = _nodeBlob.length;
-									++_subNodeBlobNo < _nodeBlobLength;
-								)
-									_doForAll (_nodeBlob [_subNodeBlobNo],_function,_idPrefix,_nodeCache)
-								;
-							} else if (_typeofNodeBlob == _typeObject) {
-								for (var _subNodeBlobName in _nodeBlob)
-									_doForAll (_nodeBlob [_subNodeBlobName],_function,_idPrefix,_nodeCache)
-								;
-							}
-						}
-					}
 					/*?
 						Static Methods
 							Uize.Node.doForAll
@@ -297,62 +229,7 @@ Uize.module ({
 
 								When the optional =idPrefixSTR= parameter is specified, then any nodes specified in the =nodeBLOB= using a string ID are resolved by first applying the ID prefix.
 					*/
-				},
 
-				doRectanglesOverlap:_doRectanglesOverlap = function (
-					_aLeft,_aTop,_aWidth,_aHeight,_bLeft,_bTop,_bWidth,_bHeight
-				) {
-					return (
-						_aWidth - 1 + +_aLeft >= _bLeft && _bWidth - 1 + +_bLeft >= _aLeft &&
-						_aHeight - 1 + +_aTop >= _bTop && _bHeight - 1 + +_bTop >= _aTop
-					);
-					/*?
-						Static Methods
-							Uize.Node.doRectanglesOverlap
-								Returns a boolean, indicating whether or not the rectangles specified by the two coordinate sets overlap one another. Two rectangles are considered to overlap if any part of either rectangle is contained by the other.
-
-								SYNTAX
-								.................................................................
-								rectanglesOverlapBOOL = Uize.Node.doRectanglesOverlap (
-									aLeftPixelsINT,aTopPixelsINT,aWidthPixelsINT,aHeightPixelsINT,
-									bLeftPixelsINT,bTopPixelsINT,bWidthPixelsINT,bHeightPixelsINT
-								);
-								.................................................................
-
-								TEST FOR OVERLAPPING LINES
-
-								To use this method to test if two lines overlap (rather than two rectangles), you can use dummy values for one of the axes, as in...
-
-								..................................................
-								linesOverlapBOOL = Uize.Node.doRectanglesOverlap (
-									aPosINT,0,aDimINT,1,bPosINT,0,bDimINT,1
-								);
-								..................................................
-
-								By specifying =0= for both the =aTopPixelsINT= and =bTopPixelsINT= parameters, and =1= for both the =aHeightPixelsINT= and =bHeightPixelsINT= parameters, you are essentially guaranteeing that the two rectangles overlap on the vertical axis (since their vertical coordinates are identical), and this has the effect of making the vertical test redundant, so the horizontal values can then be used to test for overlapping of two line segments.
-
-								Of course, you can use this technique to test for overlapping of any two line segments - it doesn't matter if those lines are from a vertical or horizontal axis, since we've collapsed a test in 2D space to being a test in 1D space.
-
-								NOTES
-								- any parameter of this method can be an object that implements a =valueOf= interface (such as an instance of a =Uize.Class= subclass that implements the =value= state property)
-					*/
-				},
-
-				getById:_getById = function (_node,_idPrefix,_nodeCache) {
-					if (typeof _node != _typeString) return _node;
-
-					var _result = _nodeCache ? _nodeCache [_node] : _undefined;
-					if (_result === _undefined) {
-						var _nodeIdOrName = _joinIdPrefixAndNodeId (_idPrefix,_node);
-						(_result = _getElementById (_nodeIdOrName)) ||
-							(
-								(_result = document.getElementsByName (_nodeIdOrName)).length < 2 &&
-								(_result = _result [0] || _null)
-							)
-						;
-						if (_nodeCache) _nodeCache [_node] = _result;
-					}
-					return _result;
 					/*?
 						Static Methods
 							Uize.Node.getById
@@ -370,99 +247,6 @@ Uize.module ({
 								- in the event that a node specified by ID does not exist in the DOM, then the value =null= will be returned
 								- see also the =Uize.Node.find= static method
 					*/
-				},
-
-				find:function (_properties) {
-					/*** return early if the parameter for find is already resolved to a node or array of nodes ***/
-						if (
-							typeof _properties != _typeObject || !_properties ||
-							typeof _properties.length == 'number' || _isNode (_properties)
-						)
-							return _properties
-						;
-
-					var
-						_document = document,
-						_isPrimitive = _Uize.isPrimitive,
-						_nodePool = [],
-						_unusedProperties = _copyInto ({},_properties),
-						_root = 'root' in _unusedProperties ? _getById (_unusedProperties.root) : _document
-					;
-					delete _unusedProperties.root;
-
-					/*** narrow down node pool, consuming root, id, name, and tagName tests, where possible ***/
-						if (_root) {
-							var _tagName = _unusedProperties.tagName;
-							if ('id' in _unusedProperties && _isPrimitive (_unusedProperties.id)) {
-								/* NOTE: optimization for when id is specified and has a simple value */
-								var _node = _getElementById (_unusedProperties.id);
-								_node && _nodePool.push (_node);
-								delete _unusedProperties.id;
-							} else if ('name' in _unusedProperties && _isPrimitive (_unusedProperties.name)) {
-								/* NOTE: optimization for when name is specified and has a simple value */
-								_nodePool = _document.getElementsByName (_unusedProperties.name);
-								delete _unusedProperties.name;
-							} else {
-								/* NOTE:
-									populate the node pool using getElementsByTagName, with optimization for when tagName is specified and has a simple value
-								*/
-								var _tagNameIsSimplyType = _isPrimitive (_tagName);
-								_tagNameIsSimplyType && delete _unusedProperties.tagName;
-								_nodePool = _root.getElementsByTagName (_tagName && _tagNameIsSimplyType ? _tagName : '*');
-								_root = _null;
-							}
-							if (_root == _document)
-								/* NOTE:
-									By this point, if the root has not been consumed and *is* the document, then eliminate it as a test, since all nodes in the pool will fall under this root.
-								*/
-								_root = _null
-							;
-							if (!_tagName || _tagName == '*')
-								/* NOTE:
-									By this point, if we weren't able to consume tagName (because we fell into the id case or the name case) and it is the wildcard character (or an empty string or null or undefined), then eliminate it as a test, since it will have no limiting effect (being the wildcard that it is).
-								*/
-								delete _unusedProperties.tagName
-							;
-						}
-
-					/*** return early (which I generally hate doing) if node pool is empty, or no unused properties ***/
-						var _nodePoolLength = _nodePool.length;
-						for (var _firstUnusedPropertyName in _unusedProperties) break;
-						if (!_nodePoolLength || (_firstUnusedPropertyName == _undefined && !_root)) return _nodePool;
-
-					/*** test each node in node pool against remaining unused properties (and possible root test) ***/
-						var
-							_matchingNodes = [],
-							_isMatch
-						;
-						for (var _nodeNo = -1; ++_nodeNo < _nodePoolLength;) {
-							var _node = _nodePool [_nodeNo];
-							if (_isMatch = _root ? _isOnNodeTree (_node,_root) : _true) {
-								for (var _propertyName in _unusedProperties) {
-									var
-										_nodePropertyValue = _node [_propertyName],
-										_test = _unusedProperties [_propertyName],
-										_isFunction = _Uize.isFunction
-									;
-									if (
-										!(
-											_isPrimitive (_test)
-												? _nodePropertyValue == _test
-												: (
-													_test instanceof RegExp
-														? _test.test (_nodePropertyValue || '')
-														: (_isFunction (_test) ? _test.call (_node,_nodePropertyValue) : _true)
-												)
-										)
-									) {
-										_isMatch = _false;
-										break;
-									}
-								}
-							}
-							_isMatch && _matchingNodes.push (_node);
-						}
-						return _matchingNodes;
 
 					/*?
 						Static Methods
@@ -588,262 +372,7 @@ Uize.module ({
 								- when the value of the =findExpressionOBJ= parameter is an array, node reference, or string, then that value will simply be returned as is and no find operation will be performed, making this method convenient to use in classes where either a find expression object or a node or array of nodes may be specified
 								- see also the =Uize.Node.getById= static method
 					*/
-				},
 
-				getCoords:_getCoords = function (_node) {
-					var
-						_x = 0,
-						_y = 0,
-						_width = 0,
-						_height = 0,
-						_seen = _true,
-						_percentSeen = 100,
-						_documentElement = _getDocumentScrollElement (),
-						_windowDims = _getDimensions (window)
-					;
-					function _factorInDocScroll () {
-						_x += _documentElement.scrollLeft;
-						_y += _documentElement.scrollTop;
-					}
-					if (_node == window) {
-						_factorInDocScroll ();
-						_width = _windowDims.width;
-						_height = _windowDims.height;
-					} else if (_isNode (_node = _getById (_node))) {
-						/*** calculate dimensions ***/
-							_width = _node.offsetWidth;
-							_height = _node.offsetHeight;
-							if (!(_width && _height) && _node.tagName == 'DIV') {
-								/* NOTE:
-									This is a workaround to handle the fact that a container DIV may report offset dimensions of 0, even though it contain many child nodes.
-								*/
-								for (
-									var _childNodes = _node.childNodes, _childNodeNo = _childNodes.length;
-									--_childNodeNo >= 0;
-								) {
-									if (_childNodes [_childNodeNo].nodeName.charAt (0) != '#') {
-										var _childCoords = _getCoords (_childNodes [_childNodeNo]);
-										if (_childCoords.width || _childCoords.height) {
-											_width = _Math.max (_width,_childCoords.right - _x + 1);
-											_height = _Math.max (_height,_childCoords.bottom - _y + 1);
-										}
-									}
-								}
-							}
-
-						if (_node.tagName == 'A' && _node.childNodes.length == 1 && _node.childNodes [0].tagName == 'IMG')
-							/* NOTE:
-								this is a workaround for Mozilla, which doesn't seem to be able to give reliable values for determining coordinates of links that fully enclose IMG tags. In such cases, using the child IMG tag for determining coordinates is reliable. This workaround has no negative effect in IE, so it is not conditionalized
-							*/
-							_node = _node.childNodes [0]
-						;
-						var
-							 _nodeHidden = function (_node) {
-								return _getStyle (_node,'display') == 'none' || _getStyle (_node,'visibility') == 'hidden';
-							},
-							_nodeVisible = _seen = !_nodeHidden (_node),
-							_offsetParent = _node,
-							_currentNode = _node,
-							_windowWidth = _windowDims.width,
-							_windowHeight = _windowDims.height,
-							_documentElementScrollLeft = _documentElement.scrollLeft,
-							_documentElementScrollTop = _documentElement.scrollTop,
-							_documentElementRight = _documentElementScrollLeft + _windowWidth,
-							_documentElementBottom = _documentElementScrollTop + _windowHeight
-						;
-						while (_currentNode.parentNode && typeof _currentNode.parentNode != 'unknown') {
-							var
-								_currentNodeOffsetLeft = _currentNode.offsetLeft || 0,
-								_currentNodeOffsetTop = _currentNode.offsetTop || 0,
-								_currentNodeOffsetWidth = _currentNode.offsetWidth,
-								_currentNodeOffsetHeight = _currentNode.offsetHeight
-							;
-							if (_seen && _nodeHidden (_currentNode))
-								_seen = _false
-							;
-							if (_currentNode == _offsetParent) {
-								_x += _currentNodeOffsetLeft + (parseInt (_getStyle (_currentNode,'borderLeftWidth')) || 0);
-								_y += _currentNodeOffsetTop + (parseInt (_getStyle (_currentNode,'borderTopWidth')) || 0);
-								_offsetParent = _currentNode.offsetParent;
-								_getStyle (_currentNode,'position') == 'fixed' &&
-									_factorInDocScroll ()
-								;
-							}
-							if (
-								_currentNode != _node &&
-								_currentNode != document.body &&
-								_currentNode != document.documentElement &&
-								(
-									_currentNode.scrollWidth > _currentNodeOffsetWidth ||
-									_currentNode.scrollHeight > _currentNodeOffsetHeight
-									/* NOTE:
-										it's not just for container nodes that are scrolled, but also container nodes that are scrollable (that's where the scrollWidth is greater than the offsetWidth)
-									*/
-								)
-							) {
-								_x -= _currentNode.scrollLeft;
-								_y -= _currentNode.scrollTop;
-								if (_isIe) {
-									_x += _currentNode.clientLeft;
-									_y += _currentNode.clientTop;
-								}
-								if (_seen)
-									_seen = _doRectanglesOverlap (
-										_x,_y,_width,_height,
-										_currentNodeOffsetLeft,_currentNodeOffsetTop,_currentNodeOffsetWidth,_currentNodeOffsetHeight
-									)
-								;
-							}
-							_currentNode = _currentNode.parentNode;
-						}
-
-						/*** test if node is in portion of document scrolled into view ***/
-							if (_seen)
-								_seen = _doRectanglesOverlap (
-									_x,_y,_width,_height,
-									_documentElementScrollLeft,_documentElementScrollTop,_windowWidth,_windowHeight
-								)
-							;
-
-							// if the node is seen, calculate how much of its area is seen
-							_percentSeen = _seen ?
-								((_Math.min (_x + _width, _documentElementRight) - _Math.min (_Math.max (_x, _documentElementScrollLeft), _documentElementRight))
-									* (_Math.min (_y + _height, _documentElementBottom) - _Math.min (_Math.max (_y, _documentElementScrollTop), _documentElementBottom)))
-									/ (_width * _height)
-									* 100 :
-								0
-							;
-					}
-					return {
-						x:_x,
-						y:_y,
-						width:_width,
-						height:_height,
-						area:_width * _height,
-						left:_x,
-						top:_y,
-						right:_x + _width - 1,
-						bottom:_y + _height - 1,
-						seen:_seen,
-						percentSeen:_percentSeen
-					};
-					/*?
-						Static Methods
-							Uize.Node.getCoords
-								Returns an object, representing the coordinates of the specified node, relative to the top left of the document.
-
-								SYNTAX
-								...................................................
-								nodeCoordsOBJ = Uize.Node.getCoords (nodeSTRorOBJ);
-								...................................................
-
-								RETURN
-								............................
-								{
-									x : xPixelsINT,
-									y : yPixelsINT,
-									width : widthPixelsINT,
-									height : heightPixelsINT,
-									area : areaPixelsINT,
-									left : leftPixelsINT,
-									top : topPixelsINT,
-									right : rightPixelsINT,
-									bottom : bottomPixelsINT,
-									seen : seenBOOL
-								}
-								............................
-
-								The "x" and "left" properties of the return object are equivalent, as are the "y" and "top" properties.
-
-								NOTES
-								- compare to the =Uize.Node.getDimensions= static method
-					*/
-				},
-
-				getDimensions:_getDimensions = function (_node) {
-					if (_node == window) {
-						var _documentElement = document.documentElement;
-						return {
-							width:_documentElement.clientWidth || window.innerWidth || _documentElement.offsetWidth,
-							height:_documentElement.clientHeight || window.innerHeight || _documentElement.offsetHeight
-						};
-					} else if (_node = _getById (_node)) {
-						return {
-							width:_node.offsetWidth || parseInt (_getStyle (_node,'width')) || 0,
-							height:_node.offsetHeight || parseInt (_getStyle (_node,'height')) || 0
-						};
-					} else {
-						return {width:0,height:0};
-					}
-					/*?
-						Static Methods
-							Uize.Node.getDimensions
-								Returns an object, containing =width= and =height= properties that reflect the displayed dimensions for the specified node.
-
-								SYNTAX
-								.....................................................
-								nodeDimsOBJ = Uize.Node.getDimensions (nodeSTRorOBJ);
-								.....................................................
-
-								RETURN VALUE
-								................
-								{
-									width : INT,
-									height : INT
-								}
-								................
-					*/
-				},
-
-				getStyle:_getStyle = function (_node,_property) {
-					var
-						_typeofPropertyIsString = typeof _property == _typeString,
-						_value = _typeofPropertyIsString ? '' : {}
-					;
-					if (_node = _getById (_node)) {
-						if (_typeofPropertyIsString) {
-							var
-								_opacityInIe = _isIe && _property == 'opacity',
-								_documentDefaultView = document.defaultView,
-								_computedStyle = _documentDefaultView && _documentDefaultView.getComputedStyle (_node,'')
-							;
-							if (_opacityInIe) _property = 'filter';
-							if (_computedStyle) {
-								if (!(_value = _computedStyle [_property])) {
-									var _trblStylePropertyPrefixSuffix = _trblStylePropertiesMap [_property];
-									if (_trblStylePropertyPrefixSuffix) {
-										var
-											_stylePropertyPrefix = _trblStylePropertyPrefixSuffix [0] || _property,
-											_stylePropertySuffix = _trblStylePropertyPrefixSuffix [1] || '',
-											_top = _computedStyle [_stylePropertyPrefix + 'Top' + _stylePropertySuffix],
-											_right = _computedStyle [_stylePropertyPrefix + 'Right' + _stylePropertySuffix],
-											_bottom = _computedStyle [_stylePropertyPrefix + 'Bottom' + _stylePropertySuffix],
-											_left = _computedStyle [_stylePropertyPrefix + 'Left' + _stylePropertySuffix]
-										;
-										_value = _top == _right && _right == _bottom && _bottom == _left
-											? _left
-											: _top + ' ' + _right + ' ' + _bottom + ' ' + _left
-										;
-									}
-								}
-							} else {
-								var _nodeCurrentStyle = _node.currentStyle;
-								_value = _nodeCurrentStyle
-									? _nodeCurrentStyle.getAttribute (_property)
-									: _node.style [_property]
-								;
-							}
-							if (_opacityInIe) {
-								var _match = (_value || '').match (/alpha\s*\(\s*opacity\s*=([^\)]*)\)/i);
-								_value = _match ? _match [1] / 100 : 1;
-							}
-						} else {
-							for (_property in _property)
-								_value [_property] = _getStyle (_node,_property)
-							;
-						}
-					}
-					return _value;
 					/*?
 						Static Methods
 							Uize.Node.getStyle
@@ -895,92 +424,7 @@ Uize.module ({
 								NOTES
 								- see also the companion =Uize.Node.setStyle= static method
 					*/
-				},
 
-				getText:_getText = function (_node) {
-					var _text = '';
-					if (_node = _getById (_node)) {
-						var  _gatherText = function (_node) {
-							if (typeof _node.innerText == _typeString) {
-								_text += _node.innerText.replace (/\r|\n|\r\n/g,'');
-							} else if (typeof _node.textContent == _typeString) {
-								_text += _node.textContent;
-							} else {
-								if (_node.nodeType == 3) _text += _node.data;
-								_node.childNodes && _Uize.forEach (_node.childNodes,_gatherText);
-							}
-						};
-						_gatherText (_node);
-					}
-					return _text;
-					/*?
-						Static Methods
-							Uize.Node.getText
-								Returns a string, representing the text content of the specified node.
-
-								SYNTAX
-								...............................................
-								nodeTextSTR = Uize.Node.getText (nodeSTRorOBJ);
-								...............................................
-
-								In Internet Explorer, this method employs the =innerText= property, removing all linebreaks. In other browsers that support the =textContent= property, this is used. For browsers that support neither, this method iterates recursively through the child nodes and cumulatively harvests the text content using the data property of all the text nodes.
-
-								EXAMPLE
-								............................
-								<div id="testNode">
-									<p>This is a test</p>
-									<table>
-										<tr>
-											<td> of</td>
-											<td> the</td>
-										</tr>
-									</table>
-									<blockquote>
-										<ul>
-											<li> emergency
-											<li> broadcasting
-										</ul>
-										<p> network</p>
-									</blockquote>
-								</div>
-								............................
-
-								In the above example, the statement =Uize.Node.getText ('testNode')= would return roughly ='this is a test of the emergency broadcasting network'= (between browsers there might be variability with the whitespace content).
-
-								NOTES
-								- this method is not quaranteed to return exactly the same value for the exact same markup in all browsers
-					*/
-				},
-
-				getValue:function (_node) {
-					var _value;
-					if (_node = _getById (_node)) {
-						if (_isNode (_node)) {
-							var _nodeTagName = _node.tagName;
-							if (_nodeTagName == 'TEXTAREA') {
-								_value = _node.value;
-							} else if (_nodeTagName == 'INPUT') {
-								_value = _node.type == 'checkbox' ? _node.checked : _node.value;
-							} else if (_nodeTagName == 'SELECT') {
-								if (_node.multiple) {
-									_value = [];
-									_Uize.forEach (
-										_node.options,
-										function (_option) {_option.selected && _value.push (_option.value)}
-									);
-								} else {
-									_value = _node.value;
-								}
-							} else if (_nodeTagName == 'IMG') {
-								_value = _node.src;
-							} else {
-								_value = _node.innerHTML.replace (/<br\/?>/gi,'\n').replace (/&nbsp;/g,' ');
-							}
-						} else {
-							_value = (_Uize.findRecord (_node,{tagName:'INPUT',type:'radio',checked:_true}) || {}).value;
-						}
-					}
-					return _value;
 					/*?
 						Static Methods
 							Uize.Node.getValue
@@ -1021,186 +465,7 @@ Uize.module ({
 								NOTES
 								- see the corresponding =Uize.Node.setValue= static method
 					*/
-				},
 
-				injectHtml:function (_nodeBlob,_htmlToInject,_mode) {
-					var
-						_isInnerReplace, _isOuterReplace, _isInnerTop, _isOuterTop, _isOuterBottom, _isInnerBottom,
-						_areNodes =
-							_Uize.isList (_htmlToInject) ||
-							(_isNode (_htmlToInject) && (_htmlToInject = [_htmlToInject]))
-					;
-					(
-						(_isInnerReplace = _mode == 'inner replace') ||
-						(_isOuterReplace = _mode == 'outer replace') ||
-						(_isInnerTop = _mode == 'inner top') ||
-						(_isOuterTop = _mode == 'outer top') ||
-						(_isOuterBottom = _mode == 'outer bottom') ||
-						(_isInnerBottom = _true)
-					);
-					_areNodes || (_htmlToInject += ''); // coerce to a string value by invoking valueOf method
-
-					_doForAll (
-						_nodeBlob,
-						function (_node) {
-							var _nodeChildNodes = _node.childNodes;
-							function _htmlHasScript (_html) {
-								return _html && /<script/i.test (_html)
-							}
-							function _htmlToInjectHasScript () {
-								return _htmlHasScript (_htmlToInject)
-							}
-							if (
-								(_isInnerReplace || (!_nodeChildNodes.length && (_isInnerTop || _isInnerBottom))) &&
-								!_isNode &&
-								!_htmlToInjectHasScript ()
-							) {
-								_node.innerHTML = _htmlToInject;
-							} else if (_isOuterReplace && _isIe && !_isNode && !_htmlToInjectHasScript ()) {
-								_node.outerHTML = _htmlToInject;
-							} else {
-								var _nodesToInject = [];
-								if (_isInnerReplace)
-									if (_isIe && _ieInnerHtmlReadOnly [_node.tagName]) {
-										var _newNode = _node.cloneNode ();
-										_node.replaceNode (_newNode);
-										_node = _newNode;
-									} else
-										_node.innerHTML = '';
-								if (_areNodes) {
-									for (var _nodeNo = -1, _nodesLength = _htmlToInject.length; ++_nodeNo < _nodesLength;) {
-										var _nodeToInject = _htmlToInject [_nodeNo];
-										if (_nodeToInject) {
-											if (_nodeToInject.parentNode)
-												_nodeToInject = _nodeToInject.cloneNode (_true);
-											_nodesToInject.push (_nodeToInject);
-										}
-									}
-								}
-								else {
-									// IE is "special" in that it has nodes that don't accept innerHTML, so the solution to parse
-									// the HTML string is to parse it as XML with the XMLDOM ACtiveX control. But XmlDom is different
-									// than HtmlDom nodes, so we have to traverse the XmlDom tree creating corresponding HtmlDom nodes
-									if (_isIe && _ieInnerHtmlReadOnly [_node.tagName] && ActiveXObject) {
-										var _activeXObject = new ActiveXObject('Microsoft.XMLDOM');
-										_activeXObject.async = _false;
-										_activeXObject.loadXML('<foo>' + _htmlToInject.replace(/&/g, '&amp;') + '</foo>');
-
-										var
-											_xmlChildNodes = _activeXObject.documentElement.childNodes,
-											_convertToHtmlNode = function (_xmlNode) {
-												var _htmlNode;
-												switch (_xmlNode.nodeType) {
-													case 1: // element
-														_htmlNode = document.createElement(_xmlNode.tagName);
-
-														// add attributes
-														for (
-															var
-																_xmlNodeAttributes = _xmlNode.attributes,
-																_attributeNo = _xmlNodeAttributes.length
-															;
-															--_attributeNo >= 0;
-														) {
-															var _attribute = _xmlNodeAttributes[_attributeNo];
-															_htmlNode.setAttribute(_attribute.nodeName, _attribute.nodeValue);
-														}
-
-														// handle scripts specially but just getting text contents
-														if (_htmlNode.tagName == 'SCRIPT')
-															_htmlNode.text = _xmlNode.text;
-														else {
-															// all others iterate through child nodes and get their html equivalents
-															for (var _childNodeNo = -1; ++_childNodeNo < _xmlNode.childNodes.length;) {
-																var _htmlChildNode = _convertToHtmlNode(_xmlNode.childNodes[_childNodeNo]);
-
-																_htmlChildNode
-																	&& _htmlNode.appendChild(_htmlChildNode)
-																;
-															}
-														}
-
-														break;
-													case 3:	// text
-														_htmlNode = document.createTextNode(_xmlNode.nodeValue);
-														break;
-													case 8: // comment
-														_htmlNode = document.createComment(_xmlNode.nodeValue);
-														break;
-												}
-												return _htmlNode;
-											}
-										;
-
-										// iterate through XML nodes and convert to their HTML equivalents
-										for (var _nodeNo = -1; ++_nodeNo < _xmlChildNodes.length;)
-											_nodesToInject.push(
-												_convertToHtmlNode(_xmlChildNodes[_nodeNo])
-											)
-										;
-
-										// we have an array of nodes as opposed to a NodeList
-										_areNodes = _true;
-									}
-									else {
-										var _dummyNode = document.createElement (_node.tagName);
-										_dummyNode.innerHTML = '<i>e</i>'	// fix for IE NoScope issue (http://www.thecssninja.com/javascript/noscope)
-											+ _htmlToInject
-										;
-											_nodesToInject = _dummyNode.childNodes;
-									}
-								}
-								var
-									_nodeToInsertBefore = _isInnerTop
-										? _nodeChildNodes [0]
-										: _isOuterBottom ? _node.nextSibling : _node
-									,
-									_nodeParentNode = _node.parentNode,
-									_nodesToSkip = +!_areNodes, // IE NoScope fix not needed when given dom nodes
-									_fixCrippledScripts = function (_node) {
-										if (_node.tagName == 'SCRIPT') {
-											/* WORKAROUND:
-												This is a workaround for an issue where script tags, that are part of HTML that is injected through innerHTML replacement, become crippled in the document. This is particularly an issue for component markup that is loaded and inserted dynamically and that may wish to define properties in companion script tags using the $[idPrefix] syntax.
-											*/
-											var _activatedScriptNode = document.createElement ('script');
-
-											/*** transfer properties of crippled script node to fresh script node ***/
-												if (_node.id) _activatedScriptNode.id = _node.id;
-												if (_node.type) _activatedScriptNode.type = _node.type;
-												_activatedScriptNode.text = _node.text;
-												if (_node.src) _activatedScriptNode.src = _node.src;
-
-											_node.parentNode.replaceChild (_activatedScriptNode,_node);
-										} else if (_htmlHasScript (_node.innerHTML)) {
-											_Uize.forEach (_node.childNodes,_fixCrippledScripts);
-										}
-									}
-								;
-								while (_nodesToInject.length > _nodesToSkip) {
-									var _childNodeToInject = _areNodes ?
-										_nodesToInject.shift () :
-										_nodesToInject [_nodesToSkip];
-									if (_isInnerBottom || _isInnerReplace) {
-										_node.appendChild (_childNodeToInject);
-									} else if (_isInnerTop) {
-										_nodeToInsertBefore
-											? _node.insertBefore (_childNodeToInject,_nodeToInsertBefore)
-											: _node.appendChild (_childNodeToInject)
-										;
-									} else if (_isOuterTop || _isOuterReplace) {
-										_nodeParentNode.insertBefore (_childNodeToInject,_nodeToInsertBefore);
-									} else if (_isOuterBottom) {
-										_nodeToInsertBefore
-											? _nodeParentNode.insertBefore (_childNodeToInject,_nodeToInsertBefore)
-											: _nodeParentNode.appendChild (_childNodeToInject)
-										;
-									}
-									_areNodes || _fixCrippledScripts (_childNodeToInject); // Assume if given nodes that the proper fixes have already been applied
-								}
-								_isOuterReplace && _nodeParentNode.removeChild (_node);
-							}
-						}
-					);
 					/*?
 						Static Methods
 							Uize.Node.injectHtml
@@ -1234,13 +499,7 @@ Uize.module ({
 								- this method can operate on multiple nodes at a time. For more details, see the section on `node blob`
 								- compare to the =Uize.Node.setInnerHtml= static method
 					*/
-				},
 
-				isNode:_isNode = function (_node) {
-					return !!(
-						_node && typeof _node == _typeObject &&
-						(_node.nodeType || _node.getAttribute || _node.documentElement || _node.self == _node)
-					);
 					/*?
 						Static Methods
 							Uize.Node.isNode
@@ -1253,16 +512,7 @@ Uize.module ({
 
 								In order for this method to return =true=, the value of the =possibleNodeANYTYPE= parameter *must* be an object reference to an element node, and not merely a string whose value is the ID of a node.
 					*/
-				},
 
-				isOnNodeTree:_isOnNodeTree = function (_node,_rootNode) {
-					_node = _getById (_node);
-					_rootNode = _getById (_rootNode);
-					while (_node) {
-						if (_node == _rootNode) return _true;
-						_node = _node.parentNode;
-					}
-					return _false;
 					/*?
 						Static Methods
 							Uize.Node.isOnNodeTree
@@ -1276,14 +526,13 @@ Uize.module ({
 								NOTES
 								- returns =true= if the =nodeSTRorOBJ= and =rootNodeSTRorOBJ= parameters both specify the same node
 					*/
-				},
 
-				joinIdPrefixAndNodeId:_joinIdPrefixAndNodeId = function (_idPrefix,_nodeId) {
-					return (_idPrefix || '') + (_idPrefix && _nodeId ? '-' : '') + _nodeId;
-				},
+					/*?
+						Static Methods
+							Uize.Node.joinIdPrefixAndNodeId
+								.
+					*/
 
-				remove:function (_nodeBlob) {
-					_doForAll (_nodeBlob,function (_node) {_node.parentNode.removeChild (_node)});
 					/*?
 						Static Methods
 							Uize.Node.remove
@@ -1298,11 +547,7 @@ Uize.module ({
 								- if other references to nodes being removed are still being maintained, those nodes will not be freed from memory until all those other references are nulled
 								- this method can operate on multiple nodes at a time. For more details, see the section on `node blob`
 					*/
-				},
 
-				setClipRect:function (_nodeBlob,_top,_right,_bottom,_left) {
-					var _clipValue = 'rect(' + _top + 'px, ' + _right + 'px, ' + _bottom + 'px, ' + _left + 'px)';
-					_doForAll (_nodeBlob,function (_node) {_node.style.clip = _clipValue});
 					/*?
 						Static Methods
 							Uize.Node.setClipRect
@@ -1316,317 +561,7 @@ Uize.module ({
 								NOTES
 								- this method can operate on multiple nodes at a time. For more details, see the section on `node blob`
 					*/
-				},
 
-				setCoords:function (_nodeBlob,_coords) {
-					_setStyle (_nodeBlob,_Uize.isArray (_coords) ? _Uize.meldKeysValues (_coordNames,_coords) : _coords);
-					/*?
-						Static Methods
-							Uize.Node.setCoords
-								Sets the left, top, width, and height coordinates for the specified `node blob`.
-
-								SYNTAX
-								................................................
-								Uize.Node.setCoords (nodeBLOB,coordsARRAYorOBJ);
-								................................................
-
-								The =coordsARRAYorOBJ= parameter can be an object of the form...
-
-								...........................................
-								{
-									left: leftINTorSTRorOBJ,     // optional
-									top: topINTorSTRorOBJ,       // optional
-									width: widthINTorSTRorOBJ,   // optional
-									height: heightINTorSTRorOBJ  // optional
-								}
-								...........................................
-
-								...or an array of the form...
-
-								...........................................................................
-								[leftINTorSTRorOBJ,topINTorSTRorOBJ,widthINTorSTRorOBJ,heightINTorSTRorOBJ]
-								...........................................................................
-
-								...or...
-
-								....................................
-								[leftINTorSTRorOBJ,topINTorSTRorOBJ]
-								....................................
-
-								When number type values are specified for =leftINTorSTRorOBJ=, =topINTorSTRorOBJ=, =widthINTorSTRorOBJ=, or =heightINTorSTRorOBJ=, those values will be converted to strings by appending the "px" unit. When string type values are specified, the unit should already be present in the value. =Uize.Class= subclass instances can also be specified, and they will be converted to values by invoking their =valueOf Intrinsic Method=.
-
-								EXAMPLES
-								.......................................................................................
-								// just left and top coordinates
-
-								Uize.Node.setCoords ('nodeId',[0,0]);
-								Uize.Node.setCoords ('nodeId',['0px','0px']);
-								Uize.Node.setCoords ('nodeId',[sliderL,sliderT]);
-								Uize.Node.setCoords ('nodeId',{left:0,top:0});
-								Uize.Node.setCoords ('nodeId',{left:'0px',top:'0px'});
-								Uize.Node.setCoords ('nodeId',{left:sliderL,top:sliderT});
-
-
-								// left, top, width, and height
-
-								Uize.Node.setCoords ('nodeId',[0,0,200,100]);
-								Uize.Node.setCoords ('nodeId',['0px','0px','200px','100px']);
-								Uize.Node.setCoords ('nodeId',[sliderL,sliderT,sliderW,sliderH]);
-								Uize.Node.setCoords ('nodeId',{left:0,top:0,width:200,height:100});
-								Uize.Node.setCoords ('nodeId',{left:'0px',top:'0px',width:'200px',height:'100px'});
-								Uize.Node.setCoords ('nodeId',{left:sliderL,top:sliderT,width:sliderW,height:sliderH});
-
-
-								// just width and height
-
-								Uize.Node.setCoords ('nodeId',{width:200,height:100});
-								Uize.Node.setCoords ('nodeId',{width:'200px',height:'100px'});
-								Uize.Node.setCoords ('nodeId',{width:sliderW,height:sliderH});
-								.......................................................................................
-
-								In the above example, =sliderL=, =sliderT=, =sliderW=, and =sliderH= are instances of the =Uize.Widget.Bar.Slider= class.
-
-								NOTES
-								- this method can operate on multiple nodes at a time. For more details, see the section on `node blob`
-								- see also the =Uize.Node.getCoords= static method
-					*/
-				},
-
-				centerInWindow:function (_nodeBlob) {
-					var _windowCoords = _getCoords (window);
-					_doForAll (
-						_nodeBlob,
-						function (_node) {
-							var _nodeDims = _getDimensions (_node);
-							_package.setCoords (
-								_node,
-								{
-									left:_windowCoords.x + ((_windowCoords.width - _nodeDims.width) >> 1),
-									top:_windowCoords.y + ((_windowCoords.height - _nodeDims.height) >> 1)
-								}
-							);
-						}
-					);
-					/*?
-						Static Methods
-							Uize.Node.centerInWindow
-								Positions the specified absolutely positioned node (or `node blob`) to be centered in the window.
-
-								SYNTAX
-								....................................
-								Uize.Node.centerInWindow (nodeBLOB);
-								....................................
-
-								This method can be useful for positioning dialogs, loading indicator overlays, splashscreens, etc.
-
-								NOTES
-								- this method can operate on multiple nodes at a time. For more details, see the section on `node blob`
-								- nodes centered using this method should be absolutely positioned and should not be set to =display:none= at the time of being centered
-					*/
-				},
-
-				getEventAbsPos:function (_eventOrPosObj) {
-					var _targetTouches = (_eventOrPosObj || (_eventOrPosObj = _mousePos)).targetTouches;
-					if (_targetTouches && _targetTouches.length)
-						_eventOrPosObj = _targetTouches [0]
-					;
-					if (_eventOrPosObj.pageX != _undefined) {
-						return {left:_eventOrPosObj.pageX,top:_eventOrPosObj.pageY};
-					} else {
-						var _documentElement = _getDocumentScrollElement ();
-						return {
-							left:_eventOrPosObj.clientX + _documentElement.scrollLeft,
-							top:_eventOrPosObj.clientY + _documentElement.scrollTop
-						};
-					}
-					/*?
-						Static Methods
-							Uize.Node.getEventAbsPos
-								Returns an object, representing the coordinates of the specified DOM event, relative to the top left of the document.
-
-								SYNTAX
-								........................................................
-								eventAbsPosOBJ = Uize.Node.getEventAbsPos (domEventOBJ);
-								........................................................
-
-								RETURN
-								........................
-								{
-									left : leftPixelsINT,
-									top : topPixelsINT
-								}
-								........................
-
-								VARIATION
-								.............................................
-								eventAbsPosOBJ = Uize.Node.getEventAbsPos ();
-								.............................................
-
-								When no =domEventOBJ= parameter is specified, this method returns the absolute coordinates for the mouse's current position. This is useful, because sometimes the reference to an initiating DOM event might get lost through multiple layers of handler code in your application. In such cases, this variation provides a fallback for getting the current mouse coordinates for use in positioning popups, dialogs, etc.
-					*/
-				},
-
-				setAbsPos:_setAbsPos = function (_nodeBlob,_absPos,_coordMargin) {
-					_coordMargin = typeof _coordMargin == 'number'
-						? {x:_coordMargin,y:_coordMargin}
-						: (_coordMargin || {x:0,y:0})
-					;
-					var
-						_documentElement = _getDocumentScrollElement (),
-						_viewDims = _getDimensions (window)
-					;
-					_doForAll (
-						_nodeBlob,
-						function (_node) {
-							function _getAxisConstrainedPos (_posName,_scrollPosName,_dimName,_axisName) {
-								var
-									_absPosForAxis = _absPos [_posName],
-									_coordMarginForAxis = _coordMargin [_axisName],
-									_preferredViewPos = _absPosForAxis - _documentElement [_scrollPosName],
-									_coordsMarginPlusNodeDim = _coordMarginForAxis + _nodeDims [_dimName]
-								;
-								return (
-									_absPosForAxis +
-									(
-										_preferredViewPos + _coordsMarginPlusNodeDim > _viewDims [_dimName]
-											? _Math.max (-_coordsMarginPlusNodeDim,-_preferredViewPos)
-											: _coordMarginForAxis
-									)
-								);
-							}
-							var _nodeDims = _getDimensions (_node);
-							_setStyle (
-								_node,
-								{
-									left:_getAxisConstrainedPos ('left','scrollLeft','width','x'),
-									top:_getAxisConstrainedPos ('top','scrollTop','height','y'),
-									right:'auto',
-									bottom:'auto'
-								}
-							);
-						}
-					);
-					/*?
-						Static Methods
-							Uize.Node.setAbsPos
-								Positions the specified absolutely positioned node (or `node blob`) to be adjacent to the specified absolute position coordinates.
-
-								SYNTAX
-								.............................................................
-								Uize.Node.setAbsPos (nodeBLOB,absPosOBJ,coordMarginINTorOBJ);
-								.............................................................
-
-								This method is useful for displaying an absolutely positioned node adjacent to absolute position coordinates, in such a way that the node being positioned is kept within view in the browser window. This comes in handy, for example, when positioning tooltips that track the mouse cursor position. If the default positioning of the node causes some part of it to fall out of view in a given axis, then its position will be flipped to the other side of the absolute position coordinate for that axis, according to the `flipping behavior` described below.
-
-								The absPosOBJ Parameter
-									The =absPosOBJ= parameter specifies the center of the region, adjacent to which the node should be positioned.
-
-									The value of this parameter should be an object of the form...
-
-									........................
-									{
-										left : leftPixelsINT,
-										top : topPixelsINT
-									}
-									........................
-
-								The coordMarginINTorOBJ Parameter
-									The optional =coordMarginINTorOBJ= parameter specifies a margin around the coordinates specified in the =absPosOBJ= parameter that should be avoided when positioning the node.
-
-									This parameter is useful for positioning tooltips that should track the cursor position and that should avoid obscuring - or being obscured by - the cursor pointer. The value of this parameter should be either an integer that specifies a margin for both the x and y axes, or an object of the form...
-
-									........................
-									{
-										x : xMarginPixelsINT,
-										y : yMarginPixelsINT
-									}
-									........................
-
-								Combining absPosOBJ and coordMarginINTorOBJ
-									Essentially, the combination of the =absPosOBJ= and =coordMarginINTorOBJ= parameters defines a region, adjacent to which the node should be positioned, and that should be avoided when positioning the node, and where the margin specified by the =coordMarginINTorOBJ= parameter extends the region to either side of the point specified by the =absPosOBJ= paramter on each axis, by the number of pixels specified for each axis in the =coordMarginINTorOBJ= parameter.
-
-								Flipping Behavior
-									By default, this method will first try to position the node so that its top edge butts up against the bottom edge of the region defined by the combination of the =absPosOBJ= and =coordMarginINTorOBJ= parameters, and so that its left edge butts up against this region's right edge.
-
-									If, with this positioning, the node is not fully in view vertically, then its position will be flipped on the y axis so that its bottom edge butts up against the top edge of the region. And if, with this positioning, the node is not fully in view horizontally, then its position will be flipped about on the x axis so that its right edge butts up against the left edge of the region.
-
-								VARIATION
-								.........................................
-								Uize.Node.setAbsPos (nodeBLOB,absPosOBJ);
-								.........................................
-
-								When the optional =coordMarginINTorOBJ= parameter is not specified, then its value will be defaulted to ={x:0,y:0}=.
-
-								NOTES
-								- compare to the =Uize.Node.setAbsPosAdjacentTo= static method
-					*/
-				},
-
-				setAbsPosAdjacentTo:function (_nodeBlob,_referenceNode,_pivotAxis) {
-					_referenceNode = _getById (_referenceNode);
-					var
-						_referenceNodeCoords = _getCoords (_referenceNode),
-						_referenceNodeWidthDiv2 = _referenceNodeCoords.width / 2,
-						_referenceNodeHeightDiv2 = _referenceNodeCoords.height / 2,
-						_pivotSign = _pivotAxis == 'x' ? -1 : 1
-					;
-					if (!_referenceNodeWidthDiv2 && !_referenceNodeHeightDiv2)
-						_referenceNodeCoords = _package.getEventAbsPos ()
-					;
-					_doForAll (
-						_nodeBlob,
-						function (_node) {
-							_setAbsPos (
-								_node,
-								{
-									left:_referenceNodeCoords.left + _referenceNodeWidthDiv2,
-									top:_referenceNodeCoords.top + _referenceNodeHeightDiv2
-								},
-								{x:-_referenceNodeWidthDiv2 * _pivotSign,y:_referenceNodeHeightDiv2 * _pivotSign}
-							);
-						}
-					);
-					/*?
-						Static Methods
-							Uize.Node.setAbsPosAdjacentTo
-								Positions the specified absolutely positioned node (or `node blob`) to be adjacent to the specified reference node.
-
-								SYNTAX
-								.......................................................................
-								Uize.Node.setAbsPosAdjacentTo (nodeBLOB,referenceNodeOBJ,pivotAxisSTR);
-								.......................................................................
-
-								This method is useful for displaying an absolutely positioned node adjacent to a reference node, in such a way that the node being positioned is kept within view in the browser window. This comes in handy for positioning tooltips, droplists, popup palettes, etc. If the default positioning of the node causes some part of it to fall out of view, then the position will be flipped to the other side of the reference node on the specified pivot axis.
-
-								Y Pivot Axis
-									When the value ='y'= is specified for the =pivotAxisSTR= parameter, then this method will first try to position the node so that its top edge butts up against the bottom edge of the reference node, and so that its left edge is aligned with the left edge of the reference node. If the node being positioned is not fully in view vertically, then its position will be flipped about the y pivot axis so that its bottom edge butts up against the top edge of the reference node. If the node being positioned is not fully in view horizontally, then its position will be flipped about on the x axis so that its right edge is aligned with the right edge of the reference node. The y pivot axis mode is useful for droplists / dropdown menus.
-
-								X Pivot Axis
-									When the value ='x'= is specified for the =pivotAxisSTR= parameter, then this method will first try to position the node so that its left edge butts up against the right edge of the reference node, and so that its top edge is aligned with the top edge of the reference node. If the node being positioned is not fully in view horizontally, then its position will be flipped about the x pivot axis so that its right edge butts up against the left edge of the reference node. If the node being positioned is not fully in view vertically, then its position will be flipped about on the y axis so that its bottom edge is aligned with the bottom edge of the reference node. The x pivot axis mode is useful for submenus of a dropdown menu, or for the top level menus of a vertically arranged menu.
-
-								VARIATION 1
-								..........................................................
-								Uize.Node.setAbsPosAdjacentTo (nodeBLOB,referenceNodeOBJ);
-								..........................................................
-
-								When the optional =pivotAxisSTR= parameter is not specified, then its value will be defaulted to ='y'=.
-
-								VARIATION 2
-								.........................................
-								Uize.Node.setAbsPosAdjacentTo (nodeBLOB);
-								.........................................
-
-								When only the =nodeBLOB= parameter is specified, then the current absolute position of the mouse cursor will be used as the reference point for positioning, and the =pivotAxisSTR= parameter will be defaulted to ='y'=.
-
-								NOTES
-								- when the value of the =referenceNodeOBJ= parameter is =null=, =undefined=, or is a string value representing the id for a node that is not in the document, or if the node is not displayed when this method is called and its dimensions are reported as 0x0, then this method will use the current absolute position of the mouse cursor as the reference point for positioning
-								- compare to the =Uize.Node.setAbsPos= static method
-					*/
-				},
-
-				setInnerHtml:function (_nodeBlob,_html) {
-					_html += ''; // coerce to a string value by invoking valueOf method
-					_doForAll (_nodeBlob,function (_node) {_node.innerHTML = _html});
 					/*?
 						Static Methods
 							Uize.Node.setInnerHtml
@@ -1643,11 +578,7 @@ Uize.module ({
 								- this method can operate on multiple nodes at a time. For more details, see the section on `node blob`
 								- compare to the =Uize.Node.injectHtml= static method
 					*/
-				},
 
-				setOpacity:function (_nodeBlob,_opacity) {
-					_opacityStyleProperty.opacity = _opacity;
-					_setStyle (_nodeBlob,_opacityStyleProperty);
 					/*?
 						Static Methods
 							Uize.Node.setOpacity
@@ -1664,10 +595,7 @@ Uize.module ({
 								- this method can operate on multiple nodes at a time. For more details, see the section on `node blob`
 								- the =opacityFLOATorOBJ= parameter can be an object that implements a =valueOf= interface (such as an instance of a =Uize.Class= subclass that implements the =value= state property)
 					*/
-				},
 
-				setProperties:function (_nodeBlob,_properties) {
-					_doForAll (_nodeBlob,function (_node) {_copyInto (_node,_properties)});
 					/*?
 						Static Methods
 							Uize.Node.setProperties
@@ -1695,41 +623,7 @@ Uize.module ({
 								NOTES
 								- this method can operate on multiple nodes at a time. For more details, see the section on `node blob`
 					*/
-				},
 
-				setStyle:_setStyle = function (_nodeBlob,_properties) {
-					_doForAll (
-						_nodeBlob,
-						function (_node) {
-							var
-								_nodeStyle = _node.style,
-								_propertyValue
-							;
-							if (_isIe && 'opacity' in _properties)
-								_nodeStyle.filter =
-									/* NOTE:
-										if the value is an empty string, it will be turned into #, which will produce NaN when multiplied by 100, and NaN is not less than 100. For the number 0, the string '0' will be retained and coerced back to 0 when multiplied. This is more compact and does not involve an additional function call, which is more important for animations for opacity where it is called repeatedly.
-									*/
-									(_propertyValue = _Math.round ((_properties.opacity + '' || '#') * 100)) < 100
-										? 'alpha(opacity=' + _propertyValue + ')'
-										: ''
-							;
-							for (var _property in _properties)
-								_nodeStyle [_property] =
-									(
-										typeof (_propertyValue = _properties [_property]) == _typeObject && _propertyValue
-											? (_propertyValue = _propertyValue.valueOf ())
-											: _propertyValue
-									) != _undefined
-										? (
-											typeof _propertyValue == 'number' && _property != 'opacity' && _property != 'zIndex'
-												? _Math.round (_propertyValue) + 'px'
-												: _propertyValue + ''
-										)
-										: ''
-							;
-						}
-					);
 					/*?
 						Static Methods
 							Uize.Node.setStyle
@@ -1801,54 +695,7 @@ Uize.module ({
 								- this method can operate on multiple nodes at a time. For more details, see the section on `node blob`
 								- see also the companion =Uize.Node.getStyle= static method
 					*/
-				},
 
-				setValue:function (_nodeBlob,_value) {
-					_value += ''; // coerce to a string value by invoking valueOf method
-					_doForAll (
-						_nodeBlob,
-						function (_node) {
-							var
-								_nodeTagName = _node.tagName,
-								_oldReadOnly = _node.readOnly
-							;
-							if (_oldReadOnly) _node.readOnly = _false;
-							if (_nodeTagName == 'TEXTAREA') {
-								_node.value = _value;
-							} else if (_nodeTagName == 'INPUT') {
-								var _nodeType = _node.type;
-								if (_nodeType == 'checkbox') {
-									_node.checked = _value == 'true';
-								} else if (_nodeType == 'radio') {
-									_node.checked = _node.value == _value;
-								} else {	// text, password, hidden, HTML5 types, etc.
-									_node.value = _value
-								}
-							} else if (_nodeTagName == 'SELECT') {
-								if (!_value) {
-									_node.selectedIndex = -1;
-								} else {
-									var _options = _node.options;
-									if (_node.multiple && (_value == '*' || _value.indexOf (',') > -1)) {
-										var _valuesMap = _value != '*' ? _Uize.lookup (_value.split (',')) : _undefined;
-										for (var _optionNo = _options.length, _option; --_optionNo >= 0;)
-											(_option = _options [_optionNo]).selected = !_valuesMap || _valuesMap [_option.value]
-										;
-									} else {
-										_node.selectedIndex = _Uize.findRecordNo (_options,{value:_value},_node.selectedIndex);
-									}
-								}
-							} else if (_nodeTagName == 'IMG') {
-								if (_value) _node.src = _value;
-							} else {
-								_nodeTagName == 'PRE' && _isIe
-									? (_node.innerText = _value)
-									: (_node.innerHTML = _value.replace (/</g,'&lt;').replace (/\n/g,'<br/>'))
-								;
-							}
-							if (_oldReadOnly) _node.readOnly = _oldReadOnly;
-						}
-					);
 					/*?
 						Static Methods
 							Uize.Node.setValue
@@ -2001,10 +848,7 @@ Uize.module ({
 								- see the corresponding =Uize.Node.getValue= static method
 								- the =value= parameter can be an object that implements a =valueOf= interface (such as an instance of a =Uize.Class= subclass that implements the =value= state property)
 					*/
-				},
 
-				show:function (_nodeBlob,_mustShow) {
-					_setStyle (_nodeBlob,{visibility:_mustShow || _mustShow === _undefined ? 'inherit' : 'hidden'});
 					/*?
 						Static Methods
 							Uize.Node.show
@@ -2020,64 +864,7 @@ Uize.module ({
 								NOTES
 								- this method can operate on multiple nodes at a time. For more details, see the section on `node blob`
 					*/
-				},
 
-				showClickable:function (_nodeBlob,_clickable) {
-					_setStyle (
-						_nodeBlob,
-						{
-							cursor:
-								_clickable || _clickable === _undefined
-									? (_useHandForPointerCursor ? 'hand' : 'pointer')
-									: 'default'
-						}
-					);
-					/*?
-						Static Methods
-							Uize.Node.showClickable
-								Sets the value of the "cursor" style property of the specified `node blob` so that the node(s) appear either clickable or not, depending on the specified boolean value.
-
-								This method is useful for DOM nodes that need to be wired up with click actions by JavaScript code, but that don't have CSS selectors from the document applying the appropriate cursor style to them.
-
-								SYNTAX
-								....................................................
-								Uize.Node.showClickable (nodeBLOB,clickableANYTYPE);
-								....................................................
-
-								While typically a Boolean, the =clickableANYTYPE= parameter can be of any type and the node(s) will be set to appear clickable if it resolves to =true=, and not clickable if it resolves to =false= - with the exception of =undefined=, when the node(s) will be set to appear clickable (see explanation below).
-
-								VARIATION
-								...................................
-								Uize.Node.showClickable (nodeBLOB);
-								...................................
-
-								When no =clickableANYTYPE= parameter is specified (or when its value is =undefined=), the node(s) will be set to appear clickable.
-
-								NOTES
-								- this method can operate on multiple nodes at a time. For more details, see the section on `node blob`
-					*/
-				},
-
-				unwire:_unwire = function (_nodeBlob,_eventNameOrEventsMap,_argument3,_argument4) {
-					if (
-						typeof _eventNameOrEventsMap == _typeObject &&
-						_eventNameOrEventsMap &&
-						!_eventNameOrEventsMap.virtualDomEvent
-					) {
-						// _argument3 is _wiringOwnerId
-						for (var _eventName in _eventNameOrEventsMap)
-							_unwire (_nodeBlob,_eventName,_eventNameOrEventsMap [_eventName],_argument3)
-						;
-					} else {
-						// _argument3 is _handler
-						// _argument4 is _wiringOwnerId
-						_package.unwireEventsByOwnerId (
-							_argument4,
-							_nodeBlob !== _undefined || _eventNameOrEventsMap != _undefined || _argument3 != _undefined
-								? {node:_nodeBlob,eventName:_eventNameOrEventsMap,handler:_argument3}
-								: _undefined
-						);
-					}
 					/*?
 						Static Methods
 							Uize.Node.unwire
@@ -2192,65 +979,7 @@ Uize.module ({
 								- compare to the =Uize.Node.unwireEventsByOwnerId= static method
 								- compare to the =wireNode=, =unwireNode=, and =unwireNodeEventsByMatch= instance methods of the =Uize.Widget= module
 					*/
-				},
 
-				unwireEventsByOwnerId:function (_wiringOwnerId,_eventMatch) {
-					var _wiringIds = _wiringIdsByOwnerId [_wiringOwnerId = _wiringOwnerId || ''];
-					if (_wiringIds) {
-						var _unwireWiringForNode = function (_eventMatchNode) {
-							if (_eventMatchNode !== _null) {
-								var
-									_eventMatchEventName = _eventMatch && _eventMatch.eventName,
-									_eventMatchHandler = _eventMatch && _eventMatch.handler,
-									_effectivelyHasEventMatch = _eventMatchNode || _eventMatchEventName || _eventMatchHandler
-								;
-								if (_eventMatchEventName && _eventMatchEventName.charCodeAt)
-									_eventMatchEventName = _resolveStringEventName (_eventMatchEventName)
-								;
-								for (var _wiringIdNo = _wiringIds.length; --_wiringIdNo >= 0;) {
-									var
-										_wiringId = _wiringIds [_wiringIdNo],
-										_wiring = _wirings [_wiringId],
-										_node = _wiring._node,
-										_eventName = _wiring._eventName
-									;
-									if (
-										!_effectivelyHasEventMatch ||
-										(
-											(!_eventMatchNode || _eventMatchNode == (_wiring._unremappedNode || _node)) &&
-											(!_eventMatchEventName || _eventMatchEventName == _eventName) &&
-											(!_eventMatchHandler || _eventMatchHandler == _wiring._handler)
-										)
-									) {
-										_effectivelyHasEventMatch && _wiringIds.splice (_wiringIdNo,1);
-										if (_wiring._subWiringsOwnerId) {
-											_package.unwireEventsByOwnerId (_wiring._subWiringsOwnerId)
-											/* NOTE:
-												the wiring is for a virtual DOM event that holds references to supporting events that form part of its implementation and which must also be unwired
-											*/
-										} else {
-											try {
-												_node == window
-													? _windowEventVehicle.unwire (_eventName,_wiring._handlerCaller)
-													: _isIe
-														? _node.detachEvent ('on' + _eventName,_wiring._handlerCaller)
-														: _node.removeEventListener (_eventName,_wiring._handlerCaller,_false)
-												;
-											} catch (_error) {
-												// the node must be gone already, so don't do anything
-											}
-										}
-										delete _wirings [_wiringId];
-									}
-								}
-								(_effectivelyHasEventMatch && _wiringIds.length) || delete _wiringIdsByOwnerId [_wiringOwnerId];
-							}
-						};
-						_eventMatch && _eventMatch.node !== _undefined
-							? _doForAll (_eventMatch.node,_unwireWiringForNode)
-							: _unwireWiringForNode ()
-						;
-					}
 					/*?
 						Static Methods
 							Uize.Node.unwireEventsByOwnerId
@@ -2287,286 +1016,98 @@ Uize.module ({
 								NOTES
 								- see also the =Uize.Node.wire= static method
 					*/
-				},
 
-				wire:(function () {
-					var
-						_quarantine = _Uize.quarantine,
-						_makeWindowEventHandlerCaller = _quarantine (
-							function (_wiringId) {
-								return (
-									function (_event) {
-										var _wiring = window.Uize && Uize.Node._wirings [_wiringId];
-											/* NOTE: test on window.Uize in case page is being torn down */
-										return _wiring && _wiring._handler.call (_wiring._node,_event.windowEvent);
-											/* NOTE:
-												_wiring could be undefined if window.Uize is undefined because the page is being torn down, or in some cases in IE if the DOM event is still fired after the wiring is removed (some kind of a threading issue?)
-											*/
-									}
-								);
-							}
-						),
-						_makeGenericHandlerCaller = _quarantine (
-							function (_wiringId) {
-								return (
-									function (_event) {
-										var _wiring = window.Uize && Uize.Node._wirings [_wiringId];
-											/* NOTE: test on window.Uize in case page is being torn down */
-										return _wiring && _wiring._handler.call (_wiring._node,_event || window.event);
-											/* NOTE:
-												_wiring could be undefined if window.Uize is undefined because the page is being torn down, or in some cases in IE if the DOM event is still fired after the wiring is removed (some kind of a threading issue?)
-											*/
-									}
-								);
-							}
-						),
-						_handlerCallerMakersByEvent = {
-							click:_makeGenericHandlerCaller,
-							mouseover:_quarantine (
-								function (_wiringId) {
-									return (
-										function (_event) {
-											var
-												_wiring = window.Uize && Uize.Node._wirings [_wiringId],
-													/* NOTE: test on window.Uize in case page is being torn down */
-												_exitNode = (_event || (_event = window.event)).fromElement || _event.relatedTarget
-											;
-											if (_wiring) {
-												/* NOTE:
-													_wiring could be undefined if window.Uize is undefined because the page is being torn down, or in some cases in IE if the DOM event is still fired after the wiring is removed (some kind of a threading issue?)
-												*/
-												if (_exitNode) {
-													try {
-														if (
-															!_exitNode.Uize_Widget_Drag_shield &&
-															!Uize.Node.isOnNodeTree (_exitNode,_wiring._node)
-														)
-															_exitNode = null
-														;
-													} catch (_error) {
-														/* NOTE:
-															In some cases in Firefox, trying to get a property of form nodes results in a weird permission denied exception. In this case we can't determine if the node is in the tree.
-															In that case, pass the event along
-														*/
-														_exitNode = null;
-													}
-												}
-												if (!_exitNode) {
-													Uize.Node._captureMousePos (_event);
-													return _wiring._handler.call (_wiring._node,_event);
-												}
-											}
-										}
-									);
+					/*?
+						Static Methods
+							Uize.Node.wire
+								Wires the specified handler function to the specified event, or the specified handlers to the specified events, of the specified node or `node blob`.
+
+								SYNTAX
+								........................................................
+								Uize.Node.wire (nodeBLOB,eventNameSTR,eventHandlerFUNC);
+								........................................................
+
+								Different browsers provide different ways of registering event handlers for nodes. This method acts as an abstraction so you can manage event handlers in a standard way in your code.
+
+								VARIATION 1
+								.....................................................
+								Uize.Node.wire (nodeBLOB,eventNamesToHandlersMapOBJ);
+								.....................................................
+
+								When the =eventNamesToHandlersMapOBJ= parameter is specified in place of the =eventNameSTR= and =eventHandlerFUNC= parameters, then this method has the effect of iterating through the event-name-to-handler mappings in the =eventNamesToHandlersMapOBJ= object and wiring the handler for each mapping.
+
+								The contents of the =eventNamesToHandlersMapOBJ= object must be of the form...
+
+								................................
+								{
+									event1Name:event1HandlerFUNC,
+									event2Name:event2HandlerFUNC,
+									...
+									eventNName:eventNHandlerFUNC
 								}
-							),
-							mouseout:_quarantine (
-								function (_wiringId) {
-									return (
-										function (_event) {
-											var
-												_wiring = window.Uize && Uize.Node._wirings [_wiringId],
-													/* NOTE: test on window.Uize in case page is being torn down */
-												_entryNode = (_event || (_event = window.event)).toElement || _event.relatedTarget
-											;
-											if (_wiring) {
-												/* NOTE:
-													_wiring could be undefined if window.Uize is undefined because the page is being torn down, or in some cases in IE if the DOM event is still fired after the wiring is removed (some kind of a threading issue?)
-												*/
-												if (_entryNode) {
-													try {
-														if (
-															!_entryNode.Uize_Widget_Drag_shield &&
-															!Uize.Node.isOnNodeTree (_entryNode,_wiring._node)
-														)
-															_entryNode = null
-														;
-													} catch (_error) {
-														/* NOTE:
-															In some cases in Firefox, trying to get a property of form nodes results in a weird permission denied exception. In this case we can't determine if the node is in the tree.
-															In that case, pass the event along
-														*/
-														_entryNode = null;
-													}
-												}
-												if (!_entryNode)
-													return _wiring._handler.call (_wiring._node,_event)
-												;
-											}
-										}
-									);
-								}
-							),
-							mousedown:_makeGenericHandlerCaller,
-							mouseup:_makeGenericHandlerCaller
-						}
-					;
-					return function (_nodeBlob,_eventName,_handler,_wiringOwnerId) {
-						if (!_eventName) return;
+								................................
 
-						if (_wiringOwnerId == _undefined) _wiringOwnerId = '';
-						var _isVirtualDomEvent;
-						if (_eventName.charCodeAt)
-							_eventName = _resolveStringEventName (_eventName)
-						;
-						if (typeof _eventName == _typeObject && !(_isVirtualDomEvent = !!_eventName.virtualDomEvent)) {
-							_wiringOwnerId = arguments [2] || ''; // third argument is wiring owner ID in this variation
-							for (var _event in _eventName)
-								_package.wire (_nodeBlob,_event,_eventName [_event],_wiringOwnerId)
-							;
-							return;
-						}
-						_doForAll (
-							_nodeBlob,
-							function (_node) {
-								var _nodeTagName = _node.tagName;
-
-								/*** update handler mapping info ***/
-									(_wiringIdsByOwnerId [_wiringOwnerId] || (_wiringIdsByOwnerId [_wiringOwnerId] = [])).push (
-										_totalWirings
-									);
-
-								/*** make handler caller function ***/
-									var _handlerCaller =
-										(
-											_isVirtualDomEvent
-												? _returnFalse
-												: _node == window
-													? _makeWindowEventHandlerCaller
-													: _handlerCallerMakersByEvent [_eventName] || _makeGenericHandlerCaller
-										) (_totalWirings)
-									;
-
-								/*** add entry in handler map ***/
-									var _wiring = _wirings [_totalWirings++] = {
-										_node:_node,
-										_eventName:_eventName,
-										_handler:_handler,
-										_handlerCaller:_handlerCaller
-									};
-									if (_isMozillaOrOpera && _nodeTagName == 'BODY' && _eventName == 'scroll') {
-										/* NOTE:
-											special node remapping for Firefox, so that the scroll event can be wired for the body node (from the application's perspective), even though FF only supports this event for the document object.
-										*/
-										_wiring._unremappedNode = _node;
-										_node = _wiring._node = document;
-									}
-
-								if (_handlerCaller) {
-									/*** wire the event ***/
-										var _eventPropertyName = 'on' + _eventName;
-										_node == window
-											? _windowEventVehicle.wire (_eventName,_handlerCaller)
-											: _node.attachEvent
-												? _node.attachEvent (_eventPropertyName,_handlerCaller)
-												: _node.addEventListener (_eventName,_handlerCaller,_false)
-										;
-										if (
-											_nodeTagName == 'A' &&
-											(_eventName == 'mousedown' || _eventName == 'click' || _eventName == 'touchstart') && !_node [_eventPropertyName]
-										)
-											_node [_eventPropertyName] = _returnFalse
-										;
-								} else if (_isVirtualDomEvent) {
-									_eventName.wire (_node,_handler,_wiring._subWiringsOwnerId = _Uize.getGuid ());
-								}
-							}
-						);
-						/*?
-							Static Methods
-								Uize.Node.wire
-									Wires the specified handler function to the specified event, or the specified handlers to the specified events, of the specified node or `node blob`.
-
-									SYNTAX
-									........................................................
-									Uize.Node.wire (nodeBLOB,eventNameSTR,eventHandlerFUNC);
-									........................................................
-
-									Different browsers provide different ways of registering event handlers for nodes. This method acts as an abstraction so you can manage event handlers in a standard way in your code.
-
-									VARIATION 1
-									.....................................................
-									Uize.Node.wire (nodeBLOB,eventNamesToHandlersMapOBJ);
-									.....................................................
-
-									When the =eventNamesToHandlersMapOBJ= parameter is specified in place of the =eventNameSTR= and =eventHandlerFUNC= parameters, then this method has the effect of iterating through the event-name-to-handler mappings in the =eventNamesToHandlersMapOBJ= object and wiring the handler for each mapping.
-
-									The contents of the =eventNamesToHandlersMapOBJ= object must be of the form...
-
-									................................
+								EXAMPLE
+								...................................................................
+								Uize.Node.wire (
+									'infoLink',
 									{
-										event1Name:event1HandlerFUNC,
-										event2Name:event2HandlerFUNC,
-										...
-										eventNName:eventNHandlerFUNC
+										mouseover:
+											function () {Uize.Node.display ('infoLinkPreview')},
+										mouseout:
+											function () {Uize.Node.display ('infoLinkPreview',false)},
+										click:
+											function () {Uize.Node.display ('info')}
 									}
-									................................
+								);
+								...................................................................
 
-									EXAMPLE
-									...................................................................
+								VARIATION 2
+								...................................................................
+								Uize.Node.wire (nodeBLOB,eventNameSTR,eventHandlerFUNC,ownerIdSTR);
+								Uize.Node.wire (nodeBLOB,eventNamesToHandlersMapOBJ,ownerIdSTR);
+								...................................................................
+
+								When the optional =ownerIdSTR= parameter is specified, then the wired node events will be associated to the specified owner, thus allowing easy unwiring of all wired node events of a specific owner using the =Uize.Node.unwireEventsByOwnerId= or =Uize.Node.unwire= static methods. This ownership mechanism is primarily intended for the implementation of the =Uize.Widget= class, but may also be useful when coding less formal mappings of interaction logic to sets of DOM nodes.
+
+								Window Events
+									The =Uize.Node.wire= method supports wiring handlers for events of the =window= object.
+
+									Handlers can be wired for the =focus=, =blur=, =load=, =beforeunload=, =unload=, =resize=, and =scroll= events.
+
+									EXAMPLE 1
+									.........................................
 									Uize.Node.wire (
-										'infoLink',
-										{
-											mouseover:
-												function () {Uize.Node.display ('infoLinkPreview')},
-											mouseout:
-												function () {Uize.Node.display ('infoLinkPreview',false)},
-											click:
-												function () {Uize.Node.display ('info')}
+										window,
+										'load',
+										function () {
+											// do something when document loads
 										}
 									);
-									...................................................................
+									.........................................
 
-									VARIATION 2
-									...................................................................
-									Uize.Node.wire (nodeBLOB,eventNameSTR,eventHandlerFUNC,ownerIdSTR);
-									Uize.Node.wire (nodeBLOB,eventNamesToHandlersMapOBJ,ownerIdSTR);
-									...................................................................
+									EXAMPLE 2
+									..............................................................
+									Uize.Node.wire (
+										window,
+										{
+											resize:
+												function () {
+													// do something when window is resized
+												},
+											scroll:
+												function () {
+													// do something when window / document is scrolled
+												}
+										}
+									);
+									..............................................................
 
-									When the optional =ownerIdSTR= parameter is specified, then the wired node events will be associated to the specified owner, thus allowing easy unwiring of all wired node events of a specific owner using the =Uize.Node.unwireEventsByOwnerId= or =Uize.Node.unwire= static methods. This ownership mechanism is primarily intended for the implementation of the =Uize.Widget= class, but may also be useful when coding less formal mappings of interaction logic to sets of DOM nodes.
+								NOTES
+								- this method can operate on multiple nodes at a time. For more details, see the section on `node blob`
+								- see also the companion =Uize.Node.unwire= static method
+					*/
 
-									Window Events
-										The =Uize.Node.wire= method supports wiring handlers for events of the =window= object.
-
-										Handlers can be wired for the =focus=, =blur=, =load=, =beforeunload=, =unload=, =resize=, and =scroll= events.
-
-										EXAMPLE 1
-										.........................................
-										Uize.Node.wire (
-											window,
-											'load',
-											function () {
-												// do something when document loads
-											}
-										);
-										.........................................
-
-										EXAMPLE 2
-										..............................................................
-										Uize.Node.wire (
-											window,
-											{
-												resize:
-													function () {
-														// do something when window is resized
-													},
-												scroll:
-													function () {
-														// do something when window / document is scrolled
-													}
-											}
-										);
-										..............................................................
-
-									NOTES
-									- this method can operate on multiple nodes at a time. For more details, see the section on `node blob`
-									- see also the companion =Uize.Node.unwire= static method
-						*/
-					}
-				}) (),
-
-			/*** Public Static Properties ***/
-				ieMajorVersion:_ieMajorVersion,
 					/*?
 						Static Properties
 							Uize.Node.ieMajorVersion
@@ -2577,7 +1118,6 @@ Uize.module ({
 								- see also the =Uize.Node.isSafari= and =Uize.Node.isMozilla= static properties
 					*/
 
-				isIe:_isIe,
 					/*?
 						Static Properties
 							Uize.Node.isIe
@@ -2588,7 +1128,6 @@ Uize.module ({
 								- see also the =Uize.Node.isSafari= and =Uize.Node.isMozilla= static properties
 					*/
 
-				isSafari:_isSafari,
 					/*?
 						Static Properties
 							Uize.Node.isSafari
@@ -2598,7 +1137,6 @@ Uize.module ({
 								- see also the =Uize.Node.isIe= and =Uize.Node.isMozilla= static properties
 					*/
 
-				isMozilla:_isMozilla
 					/*?
 						Static Properties
 							Uize.Node.isMozilla
@@ -2607,35 +1145,315 @@ Uize.module ({
 								NOTES
 								- see also the =Uize.Node.isIe= and =Uize.Node.isSafari= static properties
 					*/
-		});
 
-		/*** Initialization ***/
-			if (_isBrowser) {
-				/*** wire up document mousemove to keep track of mouse position ***/
-					_package.wire (document.documentElement,'mousemove',_captureMousePos);
+				_Uize_Dom.Pos
+					/*?
+						Static Methods
+							Uize.Node.centerInWindow
+								Positions the specified absolutely positioned node (or `node blob`) to be centered in the window.
 
-				/*** wire up window events to fire events on window event vehicle ***/
-					var
-						_windowEventVehicle = new _Uize.Event.Bus,
-						_documentLoadedTimeout = setTimeout (function () {_windowEventVehicle.fire ('load')},15000)
-					;
-					_Uize.forEach (
-						['focus','blur','load','beforeunload','unload','resize','scroll','hashchange'],
-						function (_windowEventName) {
-							var
-								_windowEventPropertyName = 'on' + _windowEventName,
-								_oldWindowEventHandler = window [_windowEventPropertyName] || _returnFalse
-							;
-							window [_windowEventPropertyName] = function (_event) {
-								_windowEventName == 'load' && clearTimeout (_documentLoadedTimeout);
-								_oldWindowEventHandler.call (window,_event || (_event = window.event));
-								_windowEventVehicle.fire ({name:_windowEventName,windowEvent:_event});
-							};
-						}
-					);
-			}
+								SYNTAX
+								....................................
+								Uize.Node.centerInWindow (nodeBLOB);
+								....................................
 
-		return _package;
+								This method can be useful for positioning dialogs, loading indicator overlays, splashscreens, etc.
+
+								NOTES
+								- this method can operate on multiple nodes at a time. For more details, see the section on `node blob`
+								- nodes centered using this method should be absolutely positioned and should not be set to =display:none= at the time of being centered
+					*/
+
+					/*?
+						Static Methods
+							Uize.Node.doRectanglesOverlap
+								Returns a boolean, indicating whether or not the rectangles specified by the two coordinate sets overlap one another. Two rectangles are considered to overlap if any part of either rectangle is contained by the other.
+
+								SYNTAX
+								.................................................................
+								rectanglesOverlapBOOL = Uize.Node.doRectanglesOverlap (
+									aLeftPixelsINT,aTopPixelsINT,aWidthPixelsINT,aHeightPixelsINT,
+									bLeftPixelsINT,bTopPixelsINT,bWidthPixelsINT,bHeightPixelsINT
+								);
+								.................................................................
+
+								TEST FOR OVERLAPPING LINES
+
+								To use this method to test if two lines overlap (rather than two rectangles), you can use dummy values for one of the axes, as in...
+
+								..................................................
+								linesOverlapBOOL = Uize.Node.doRectanglesOverlap (
+									aPosINT,0,aDimINT,1,bPosINT,0,bDimINT,1
+								);
+								..................................................
+
+								By specifying =0= for both the =aTopPixelsINT= and =bTopPixelsINT= parameters, and =1= for both the =aHeightPixelsINT= and =bHeightPixelsINT= parameters, you are essentially guaranteeing that the two rectangles overlap on the vertical axis (since their vertical coordinates are identical), and this has the effect of making the vertical test redundant, so the horizontal values can then be used to test for overlapping of two line segments.
+
+								Of course, you can use this technique to test for overlapping of any two line segments - it doesn't matter if those lines are from a vertical or horizontal axis, since we've collapsed a test in 2D space to being a test in 1D space.
+
+								NOTES
+								- any parameter of this method can be an object that implements a =valueOf= interface (such as an instance of a =Uize.Class= subclass that implements the =value= state property)
+					*/
+
+					/*?
+						Static Methods
+							Uize.Node.getCoords
+								Returns an object, representing the coordinates of the specified node, relative to the top left of the document.
+
+								SYNTAX
+								...................................................
+								nodeCoordsOBJ = Uize.Node.getCoords (nodeSTRorOBJ);
+								...................................................
+
+								RETURN
+								............................
+								{
+									x : xPixelsINT,
+									y : yPixelsINT,
+									width : widthPixelsINT,
+									height : heightPixelsINT,
+									area : areaPixelsINT,
+									left : leftPixelsINT,
+									top : topPixelsINT,
+									right : rightPixelsINT,
+									bottom : bottomPixelsINT,
+									seen : seenBOOL
+								}
+								............................
+
+								The "x" and "left" properties of the return object are equivalent, as are the "y" and "top" properties.
+
+								NOTES
+								- compare to the =Uize.Node.getDimensions= static method
+					*/
+
+					/*?
+						Static Methods
+							Uize.Node.getDimensions
+								Returns an object, containing =width= and =height= properties that reflect the displayed dimensions for the specified node.
+
+								SYNTAX
+								.....................................................
+								nodeDimsOBJ = Uize.Node.getDimensions (nodeSTRorOBJ);
+								.....................................................
+
+								RETURN VALUE
+								................
+								{
+									width : INT,
+									height : INT
+								}
+								................
+					*/
+
+					/*?
+						Static Methods
+							Uize.Node.getDocumentScrollElement
+								A utility function that returns the DOM node on which you can scroll the document.
+
+								SYNTAX
+								......................................
+								Uize.Node.getDocumentScrollElement ();
+								......................................
+
+								This method abstracts the difference between WebKit browsers (Safari, Chrome, etc.) and other browsers as to which DOM node is the one that allows changing the scrolling position of the document.
+
+								EXAMPLE
+								......................................................................................
+								Uize.Node.getDocumentScrollElement ().scrollTop = 0;  // scroll to the top of the page
+								......................................................................................
+					*/
+
+					/*?
+						Static Methods
+							Uize.Node.getEventAbsPos
+								Returns an object, representing the coordinates of the specified DOM event, relative to the top left of the document.
+
+								SYNTAX
+								........................................................
+								eventAbsPosOBJ = Uize.Node.getEventAbsPos (domEventOBJ);
+								........................................................
+
+								RETURN
+								........................
+								{
+									left : leftPixelsINT,
+									top : topPixelsINT
+								}
+								........................
+
+								VARIATION
+								.............................................
+								eventAbsPosOBJ = Uize.Node.getEventAbsPos ();
+								.............................................
+
+								When no =domEventOBJ= parameter is specified, this method returns the absolute coordinates for the mouse's current position. This is useful, because sometimes the reference to an initiating DOM event might get lost through multiple layers of handler code in your application. In such cases, this variation provides a fallback for getting the current mouse coordinates for use in positioning popups, dialogs, etc.
+					*/
+
+					/*?
+						Static Methods
+							Uize.Node.setAbsPos
+								Positions the specified absolutely positioned node (or `node blob`) to be adjacent to the specified absolute position coordinates.
+
+								SYNTAX
+								.............................................................
+								Uize.Node.setAbsPos (nodeBLOB,absPosOBJ,coordMarginINTorOBJ);
+								.............................................................
+
+								This method is useful for displaying an absolutely positioned node adjacent to absolute position coordinates, in such a way that the node being positioned is kept within view in the browser window. This comes in handy, for example, when positioning tooltips that track the mouse cursor position. If the default positioning of the node causes some part of it to fall out of view in a given axis, then its position will be flipped to the other side of the absolute position coordinate for that axis, according to the `flipping behavior` described below.
+
+								The absPosOBJ Parameter
+									The =absPosOBJ= parameter specifies the center of the region, adjacent to which the node should be positioned.
+
+									The value of this parameter should be an object of the form...
+
+									........................
+									{
+										left : leftPixelsINT,
+										top : topPixelsINT
+									}
+									........................
+
+								The coordMarginINTorOBJ Parameter
+									The optional =coordMarginINTorOBJ= parameter specifies a margin around the coordinates specified in the =absPosOBJ= parameter that should be avoided when positioning the node.
+
+									This parameter is useful for positioning tooltips that should track the cursor position and that should avoid obscuring - or being obscured by - the cursor pointer. The value of this parameter should be either an integer that specifies a margin for both the x and y axes, or an object of the form...
+
+									........................
+									{
+										x : xMarginPixelsINT,
+										y : yMarginPixelsINT
+									}
+									........................
+
+								Combining absPosOBJ and coordMarginINTorOBJ
+									Essentially, the combination of the =absPosOBJ= and =coordMarginINTorOBJ= parameters defines a region, adjacent to which the node should be positioned, and that should be avoided when positioning the node, and where the margin specified by the =coordMarginINTorOBJ= parameter extends the region to either side of the point specified by the =absPosOBJ= paramter on each axis, by the number of pixels specified for each axis in the =coordMarginINTorOBJ= parameter.
+
+								Flipping Behavior
+									By default, this method will first try to position the node so that its top edge butts up against the bottom edge of the region defined by the combination of the =absPosOBJ= and =coordMarginINTorOBJ= parameters, and so that its left edge butts up against this region's right edge.
+
+									If, with this positioning, the node is not fully in view vertically, then its position will be flipped on the y axis so that its bottom edge butts up against the top edge of the region. And if, with this positioning, the node is not fully in view horizontally, then its position will be flipped about on the x axis so that its right edge butts up against the left edge of the region.
+
+								VARIATION
+								.........................................
+								Uize.Node.setAbsPos (nodeBLOB,absPosOBJ);
+								.........................................
+
+								When the optional =coordMarginINTorOBJ= parameter is not specified, then its value will be defaulted to ={x:0,y:0}=.
+
+								NOTES
+								- compare to the =Uize.Node.setAbsPosAdjacentTo= static method
+					*/
+
+					/*?
+						Static Methods
+							Uize.Node.setAbsPosAdjacentTo
+								Positions the specified absolutely positioned node (or `node blob`) to be adjacent to the specified reference node.
+
+								SYNTAX
+								.......................................................................
+								Uize.Node.setAbsPosAdjacentTo (nodeBLOB,referenceNodeOBJ,pivotAxisSTR);
+								.......................................................................
+
+								This method is useful for displaying an absolutely positioned node adjacent to a reference node, in such a way that the node being positioned is kept within view in the browser window. This comes in handy for positioning tooltips, droplists, popup palettes, etc. If the default positioning of the node causes some part of it to fall out of view, then the position will be flipped to the other side of the reference node on the specified pivot axis.
+
+								Y Pivot Axis
+									When the value ='y'= is specified for the =pivotAxisSTR= parameter, then this method will first try to position the node so that its top edge butts up against the bottom edge of the reference node, and so that its left edge is aligned with the left edge of the reference node. If the node being positioned is not fully in view vertically, then its position will be flipped about the y pivot axis so that its bottom edge butts up against the top edge of the reference node. If the node being positioned is not fully in view horizontally, then its position will be flipped about on the x axis so that its right edge is aligned with the right edge of the reference node. The y pivot axis mode is useful for droplists / dropdown menus.
+
+								X Pivot Axis
+									When the value ='x'= is specified for the =pivotAxisSTR= parameter, then this method will first try to position the node so that its left edge butts up against the right edge of the reference node, and so that its top edge is aligned with the top edge of the reference node. If the node being positioned is not fully in view horizontally, then its position will be flipped about the x pivot axis so that its right edge butts up against the left edge of the reference node. If the node being positioned is not fully in view vertically, then its position will be flipped about on the y axis so that its bottom edge is aligned with the bottom edge of the reference node. The x pivot axis mode is useful for submenus of a dropdown menu, or for the top level menus of a vertically arranged menu.
+
+								VARIATION 1
+								..........................................................
+								Uize.Node.setAbsPosAdjacentTo (nodeBLOB,referenceNodeOBJ);
+								..........................................................
+
+								When the optional =pivotAxisSTR= parameter is not specified, then its value will be defaulted to ='y'=.
+
+								VARIATION 2
+								.........................................
+								Uize.Node.setAbsPosAdjacentTo (nodeBLOB);
+								.........................................
+
+								When only the =nodeBLOB= parameter is specified, then the current absolute position of the mouse cursor will be used as the reference point for positioning, and the =pivotAxisSTR= parameter will be defaulted to ='y'=.
+
+								NOTES
+								- when the value of the =referenceNodeOBJ= parameter is =null=, =undefined=, or is a string value representing the id for a node that is not in the document, or if the node is not displayed when this method is called and its dimensions are reported as 0x0, then this method will use the current absolute position of the mouse cursor as the reference point for positioning
+								- compare to the =Uize.Node.setAbsPos= static method
+					*/
+
+					/*?
+						Static Methods
+							Uize.Node.setCoords
+								Sets the left, top, width, and height coordinates for the specified `node blob`.
+
+								SYNTAX
+								................................................
+								Uize.Node.setCoords (nodeBLOB,coordsARRAYorOBJ);
+								................................................
+
+								The =coordsARRAYorOBJ= parameter can be an object of the form...
+
+								...........................................
+								{
+									left: leftINTorSTRorOBJ,     // optional
+									top: topINTorSTRorOBJ,       // optional
+									width: widthINTorSTRorOBJ,   // optional
+									height: heightINTorSTRorOBJ  // optional
+								}
+								...........................................
+
+								...or an array of the form...
+
+								...........................................................................
+								[leftINTorSTRorOBJ,topINTorSTRorOBJ,widthINTorSTRorOBJ,heightINTorSTRorOBJ]
+								...........................................................................
+
+								...or...
+
+								....................................
+								[leftINTorSTRorOBJ,topINTorSTRorOBJ]
+								....................................
+
+								When number type values are specified for =leftINTorSTRorOBJ=, =topINTorSTRorOBJ=, =widthINTorSTRorOBJ=, or =heightINTorSTRorOBJ=, those values will be converted to strings by appending the "px" unit. When string type values are specified, the unit should already be present in the value. =Uize.Class= subclass instances can also be specified, and they will be converted to values by invoking their =valueOf Intrinsic Method=.
+
+								EXAMPLES
+								.......................................................................................
+								// just left and top coordinates
+
+								Uize.Node.setCoords ('nodeId',[0,0]);
+								Uize.Node.setCoords ('nodeId',['0px','0px']);
+								Uize.Node.setCoords ('nodeId',[sliderL,sliderT]);
+								Uize.Node.setCoords ('nodeId',{left:0,top:0});
+								Uize.Node.setCoords ('nodeId',{left:'0px',top:'0px'});
+								Uize.Node.setCoords ('nodeId',{left:sliderL,top:sliderT});
+
+
+								// left, top, width, and height
+
+								Uize.Node.setCoords ('nodeId',[0,0,200,100]);
+								Uize.Node.setCoords ('nodeId',['0px','0px','200px','100px']);
+								Uize.Node.setCoords ('nodeId',[sliderL,sliderT,sliderW,sliderH]);
+								Uize.Node.setCoords ('nodeId',{left:0,top:0,width:200,height:100});
+								Uize.Node.setCoords ('nodeId',{left:'0px',top:'0px',width:'200px',height:'100px'});
+								Uize.Node.setCoords ('nodeId',{left:sliderL,top:sliderT,width:sliderW,height:sliderH});
+
+
+								// just width and height
+
+								Uize.Node.setCoords ('nodeId',{width:200,height:100});
+								Uize.Node.setCoords ('nodeId',{width:'200px',height:'100px'});
+								Uize.Node.setCoords ('nodeId',{width:sliderW,height:sliderH});
+								.......................................................................................
+
+								In the above example, =sliderL=, =sliderT=, =sliderW=, and =sliderH= are instances of the =Uize.Widget.Bar.Slider= class.
+
+								NOTES
+								- this method can operate on multiple nodes at a time. For more details, see the section on `node blob`
+								- see also the =Uize.Node.getCoords= static method
+					*/
+			)
+		);
 	}
 });
 

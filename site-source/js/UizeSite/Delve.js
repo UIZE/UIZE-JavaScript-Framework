@@ -27,7 +27,7 @@ Uize.module ({
 		'Uize.Widget.TableSort',
 		'Uize.Util.Html.Encode',
 		'Uize.Util.Oop',
-		'Uize.Node',
+		'Uize.Dom.Basics',
 		'Uize.Str.Has',
 		'Uize.Str.Limit',
 		'Uize.Str.Repeat',
@@ -43,11 +43,12 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var
+		var
+			/*** Variables for Scruncher Optimization ***/
 				_undefined,
-				_htmlEncode = Uize.Util.Html.Encode.encode
-			;
+				_htmlEncode = Uize.Util.Html.Encode.encode,
+				_Uize_Dom_Basics = Uize.Dom.Basics
+		;
 
 		/*** Utility Functions ***/
 			function _getNodeOuterHtml (_node) {
@@ -485,7 +486,7 @@ Uize.module ({
 							? 'widget'
 							: Uize.Util.Oop.isUizeClass (_object)
 								? 'class'
-								: Uize.Node.isNode (_object)
+								: _Uize_Dom_Basics.isNode (_object)
 									? 'DOM node'
 									: _object.constructor == m._window.Object
 										? 'simple object'
@@ -615,6 +616,16 @@ Uize.module ({
 				return _widget [m._widgetNodeCachePropertyName] || {};
 			}
 
+			function _windowFind (m) {
+				var _windowUize = m._window.Uize;
+				return (_windowUize.Node || _windowUize.Dom.Basics).find;
+			}
+
+			function _windowGetCoords (m) {
+				var _windowUize = m._window.Uize;
+				return (_windowUize.Node || _windowUize.Dom.Pos).getCoords;
+			}
+
 			function _getWidgetNodesInfo (m,_widget) {
 				var
 					_nodeCache = _getWidgetNodeCache (m,_widget),
@@ -636,7 +647,7 @@ Uize.module ({
 						_totalMissingAccessedNodes++;
 					}
 				}
-				m._window.Uize.Node.find ({
+				_windowFind (m) ({
 					id:function (_nodeId) {
 						if (
 							_nodeId &&
@@ -880,7 +891,7 @@ Uize.module ({
 
 				return Uize.Array.Sort.sortBy (
 					Uize.map (
-						m._window.Uize.Node.find ({
+						_windowFind (m) ({
 							id:function (_nodeId) {
 								if (!_nodeId || _accessedNodesLookup [_nodeId]) return false;
 								var _nodeBelongsToWidget = _idPrefixMap [_nodeId];
@@ -1214,7 +1225,7 @@ Uize.module ({
 										'no widgets of this class instantiated'
 									)
 								;
-						} else if (Uize.Node.isNode (_object)) {
+						} else if (_Uize_Dom_Basics.isNode (_object)) {
 							var _widget = _getWidgetFromNodeId (m,_object.id);
 							_addTabContentsSection (
 								_htmlChunks,
@@ -1452,12 +1463,12 @@ Uize.module ({
 				var
 					_object = _resolveToObject (m,_objectPath),
 					_objectIsWidget = _isWidget (m,_object),
-					_objectIsNode = !_objectIsWidget && Uize.Node.isNode (_object)
+					_objectIsNode = !_objectIsWidget && _Uize_Dom_Basics.isNode (_object)
 				;
 				if (_objectIsWidget || _objectIsNode) {
 					var
 						_window = m._window,
-						_getCoords = _window.Uize.Node.getCoords,
+						_getCoords = _windowGetCoords (m),
 						_coords
 					;
 					if (_objectIsNode) {
@@ -1515,7 +1526,7 @@ Uize.module ({
 					if (_coords && _coords.area && _coords.seen) {
 						var _document = _window.document;
 						_document.body.appendChild (m._highlightNode = _document.createElement ('DIV'));
-						Uize.Node.setStyle (
+						_Uize_Dom_Basics.setStyle (
 							m._highlightNode,
 							{
 								position:'absolute',
@@ -1527,13 +1538,13 @@ Uize.module ({
 								background:'#ffa200'
 							}
 						);
-						Uize.Node.setOpacity (m._highlightNode,.5);
+						_Uize_Dom_Basics.setOpacity (m._highlightNode,.5);
 					}
 				}
 			}
 
 			function _removeObjectHighlight (m) {
-				Uize.Node.remove (m._highlightNode);
+				_Uize_Dom_Basics.remove (m._highlightNode);
 				m._highlightNode = null;
 			}
 
@@ -1552,7 +1563,7 @@ Uize.module ({
 				_wrapperWidget.setNodeProperties ('',{scrollTop:0});
 				_wrapperWidget.wireUi ();
 				_wrapperWidget.wireNode (
-					Uize.Node.find ({
+					_Uize_Dom_Basics.find ({
 						root:_wrapperWidget.getNode (),
 						tagName:'a',
 						className:'objectLink'

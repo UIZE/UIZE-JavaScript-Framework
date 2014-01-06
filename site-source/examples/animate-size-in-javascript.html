@@ -528,7 +528,7 @@ Uize.require (
 		'Uize.Curve.Mod',
 		'Uize.Fx',
 		'Uize.Json',
-		'Uize.Node'
+		'Uize.Dom.Pos'
 	],
 	function () {
 		'use strict';
@@ -539,7 +539,7 @@ Uize.require (
 		var minDimEachAxis = 40;
 
 		function getSizeAndPositionStyleProperties (dims) {
-			var previewPaneCoords = Uize.Node.getCoords (page.getNode ('previewPane'));
+			var previewPaneCoords = Uize.Dom.Pos.getCoords (page.getNode ('previewPane'));
 			return {
 				left:(previewPaneCoords.width - dims.width) >> 1,
 				top:(previewPaneCoords.height - dims.height) >> 1,
@@ -596,7 +596,7 @@ Uize.require (
 			).wire (
 				'Preset Selected',
 				function () {
-					var previewPaneCoords = Uize.Node.getCoords (page.getNode ('previewPane'));
+					var previewPaneCoords = Uize.Dom.Pos.getCoords (page.getNode ('previewPane'));
 					fadeSize ({
 						width:minDimEachAxis + Math.round (Math.random () * (previewPaneCoords.width - minDimEachAxis)),
 						height:minDimEachAxis + Math.round (Math.random () * (previewPaneCoords.height - minDimEachAxis))
@@ -607,8 +607,8 @@ Uize.require (
 		/*** wire clicking on preview pane to trigger animation to new size ***/
 			function getDimPropertiesFromEvent (e) {
 				var
-					eventAbsPos = Uize.Node.getEventAbsPos (e),
-					previewPaneCoords = Uize.Node.getCoords (page.getNode ('previewPane'))
+					eventAbsPos = Uize.Dom.Pos.getEventAbsPos (e),
+					previewPaneCoords = Uize.Dom.Pos.getCoords (page.getNode ('previewPane'))
 				;
 				return {
 					width:

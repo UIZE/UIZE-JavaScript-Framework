@@ -26,7 +26,8 @@
 Uize.module ({
 	name:'Uize.Tooltip',
 	required:[
-		'Uize.Node',
+		'Uize.Dom.Basics',
+		'Uize.Dom.Pos',
 		'Uize.Fade'
 	],
 	builder:function () {
@@ -38,7 +39,8 @@ Uize.module ({
 				_true = true,
 				_false = false,
 				_undefined,
-				_Uize_Node = Uize.Node
+				_Uize_Dom_Basics = Uize.Dom.Basics,
+				_Uize_Dom_Pos = Uize.Dom.Pos
 			;
 
 		/*** General Variables ***/
@@ -51,7 +53,7 @@ Uize.module ({
 
 		/*** Tooltip Display Management Functions ***/
 			function _resolveTooltipNode (_tooltipNode) {
-				return _Uize_Node.getById (Uize.isFunction (_tooltipNode) ? _tooltipNode () : _tooltipNode);
+				return _Uize_Dom_Basics.getById (Uize.isFunction (_tooltipNode) ? _tooltipNode () : _tooltipNode);
 			}
 
 			function _updateShownTooltipPosition () {_positionTooltip ()}
@@ -64,22 +66,32 @@ Uize.module ({
 							_endFade ();
 						}
 						if (!_tooltip._manualPositioning) {
-							_Uize_Node.wire (document.body,'scroll',_updateShownTooltipPosition,_packageGuid);
-							_Uize_Node.wire (document.documentElement,'mousemove',_updateShownTooltipPosition,_packageGuid);
+							_Uize_Dom_Basics.wire (
+								document.body,
+								'scroll',
+								_updateShownTooltipPosition,
+								_packageGuid
+							);
+							_Uize_Dom_Basics.wire (
+								document.documentElement,
+								'mousemove',
+								_updateShownTooltipPosition,
+								_packageGuid
+							);
 						}
 						_shownTooltip = _tooltip;
-						_Uize_Node.setStyle (
+						_Uize_Dom_Basics.setStyle (
 							_shownTooltip._node,
 							{position:'absolute',zIndex:5000,left:-50000,top:-50000}
 						);
-						_Uize_Node.display (_shownTooltip._node);
+						_Uize_Dom_Basics.display (_shownTooltip._node);
 						_positionTooltip ();
 					} else {
 						_fade.get ('duration') > 0 ? _fade.start () : _endFade ();
 					}
 				} else if (_tooltip) {
 					_fade.stop ();
-					_Uize_Node.setOpacity (_shownTooltip._node,1);
+					_Uize_Dom_Basics.setOpacity (_shownTooltip._node,1);
 				}
 			}
 
@@ -110,20 +122,20 @@ Uize.module ({
 						? (_tooltipNode = _shownTooltip._node)
 						: _shownTooltip._node == _resolveTooltipNode (_tooltipNode)
 				) &&
-					_Uize_Node.setAbsPos (_tooltipNode,_Uize_Node.getEventAbsPos (_domEvent),_tooltipBreatherMargin)
+					_Uize_Dom_Pos.setAbsPos (_tooltipNode,_Uize_Dom_Pos.getEventAbsPos (_domEvent),_tooltipBreatherMargin)
 				;
 			};
 
 		/*** Fadeout Management ***/
 			var _fade = _package.fade = Uize.Fade ({duration:0});
 			function _endFade () {
-				_shownTooltip._manualPositioning || _Uize_Node.unwireEventsByOwnerId (_packageGuid);
-				_Uize_Node.display (_shownTooltip._node,_false);
-				_Uize_Node.setOpacity (_shownTooltip._node,1);
+				_shownTooltip._manualPositioning || _Uize_Dom_Basics.unwireEventsByOwnerId (_packageGuid);
+				_Uize_Dom_Basics.display (_shownTooltip._node,_false);
+				_Uize_Dom_Basics.setOpacity (_shownTooltip._node,1);
 				_shownTooltip = null;
 			}
 			_fade.wire ({
-				'Changed.value':function () {_Uize_Node.setOpacity (_shownTooltip._node,1 - _fade.get ('progress'))},
+				'Changed.value':function () {_Uize_Dom_Basics.setOpacity (_shownTooltip._node,1 - _fade.get ('progress'))},
 				Done:_endFade
 			});
 

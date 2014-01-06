@@ -18,16 +18,16 @@
 
 /*?
 	Introduction
-		The =Uize.Widget.Page.xDeferredLinks= module extends the =Uize.Widget.Page= base class by adding functionality for defer wiring links on the page. 
+		The =Uize.Widget.Page.xDeferredLinks= module extends the =Uize.Widget.Page= base class by adding functionality for defer wiring links on the page.
 
 		*DEVELOPERS:* `Ben Ilegbodu`, original code donated by `Zazzle Inc.`
-		
+
 		Instead of relying on search engines or scrapers to adhere to rel="nofollow", you can include link tags in the page with dummy =href= attributes (such as ="javascript://"=), and set the =href= in the JavaScript.
 */
 
 Uize.module ({
 	name:'Uize.Widget.Page.xDeferredLinks',
-	required:'Uize.Node',
+	required:'Uize.Dom.Basics',
 	builder:function (_class) {
 		'use strict';
 
@@ -42,7 +42,7 @@ Uize.module ({
 			(function _wireLinks() {
 				function _wireLink(_link) {
 					var
-						_linkNode = Uize.Node.getById(_link[0]),
+						_linkNode = Uize.Dom.Basics.getById(_link[0]),
 						_linkInfo = _link[1]
 					;
 

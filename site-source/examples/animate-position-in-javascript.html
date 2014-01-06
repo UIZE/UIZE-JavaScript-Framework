@@ -506,7 +506,7 @@ Uize.require (
 		'Uize.Curve.Mod',
 		'Uize.Fx',
 		'Uize.Json',
-		'Uize.Node'
+		'Uize.Dom.Pos'
 	],
 	function () {
 		'use strict';
@@ -516,7 +516,7 @@ Uize.require (
 
 		/*** code for positioning ghost ***/
 			function positionGhost (centerCoords) {
-				var ghostDims = Uize.Node.getDimensions (page.getNode ('objectToAnimateGhost'));
+				var ghostDims = Uize.Dom.Pos.getDimensions (page.getNode ('objectToAnimateGhost'));
 				page.setNodeStyle (
 					'objectToAnimateGhost',
 					{
@@ -536,7 +536,7 @@ Uize.require (
 				positionGhost (centerCoords);
 				var
 					curve = (values = page.children.paramsInspector.getValues ()).curve,
-					objectDims = Uize.Node.getDimensions (page.getNode ('objectToAnimate'))
+					objectDims = Uize.Dom.Pos.getDimensions (page.getNode ('objectToAnimate'))
 				;
 				Uize.Fx.fadeStyle (
 					page.getNode ('objectToAnimate'),
@@ -560,7 +560,7 @@ Uize.require (
 			).wire (
 				'Preset Selected',
 				function () {
-					var previewPaneCoords = Uize.Node.getCoords (page.getNode ('previewPane'));
+					var previewPaneCoords = Uize.Dom.Pos.getCoords (page.getNode ('previewPane'));
 					fadePosition ({
 						x:Math.round (Math.random () * previewPaneCoords.width),
 						y:Math.round (Math.random () * previewPaneCoords.height)
@@ -571,8 +571,8 @@ Uize.require (
 		/*** wire clicking on preview pane to trigger animation to new position ***/
 			function getPositionPropertiesFromEvent () {
 				var
-					eventAbsPos = Uize.Node.getEventAbsPos (),
-					previewPaneCoords = Uize.Node.getCoords (page.getNode ('previewPane'))
+					eventAbsPos = Uize.Dom.Pos.getEventAbsPos (),
+					previewPaneCoords = Uize.Dom.Pos.getCoords (page.getNode ('previewPane'))
 				;
 				return {x:eventAbsPos.left - previewPaneCoords.left,y:eventAbsPos.top - previewPaneCoords.top};
 			}

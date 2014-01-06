@@ -37,7 +37,7 @@
 	<!-- explanation copy -->
 
 	<div class="explanation">
-		<p>In this example, the <code>Uize.Array.Order.jumble</code> method of the <a href="../reference/Uize.Array.Order.html"><code>Uize.Array.Order</code></a> package is used in conjunction with the <code>Uize.Node.find</code> method in order to sequence the showing of thumbnail images in a grid. Each thumbnail is revealed using a JavaScript animation effect provided by the <a href="../reference/Uize.Widget.Swap.html"><code>Uize.Widget.Swap</code></a> class. Additionally, the <a href="../reference/Uize.Widget.ThumbZoom.html"><code>Uize.Widget.ThumbZoom</code></a> widget is being used to provide a JavaScript animation zoomed view effect when you click on the thumbnails.</p>
+		<p>In this example, the <code>Uize.Array.Order.jumble</code> method of the <a href="../reference/Uize.Array.Order.html"><code>Uize.Array.Order</code></a> package is used in conjunction with the <code>Uize.Dom.Basics.find</code> method in order to sequence the showing of thumbnail images in a grid. Each thumbnail is revealed using a JavaScript animation effect provided by the <a href="../reference/Uize.Widget.Swap.html"><code>Uize.Widget.Swap</code></a> class. Additionally, the <a href="../reference/Uize.Widget.ThumbZoom.html"><code>Uize.Widget.ThumbZoom</code></a> widget is being used to provide a JavaScript animation zoomed view effect when you click on the thumbnails.</p>
 	</div>
 
 	<!-- grid containing lots and lots of thumbnail images -->
@@ -90,7 +90,7 @@ Uize.require (
 		'UizeSite.Page.Example.library',
 		'UizeSite.Page.Example',
 		'Uize.Array.Order',
-		'Uize.Node',
+		'Uize.Dom.Basics',
 		'Uize.Widget.Swap',
 		'Uize.Widget.ThumbZoom'
 	],
@@ -105,7 +105,7 @@ Uize.require (
 		*/
 
 		/*** common code ***/
-			var thumbNodes = Uize.Array.Order.jumble (Uize.Node.find ({tagName:'IMG',className:'thumbnail'}));
+			var thumbNodes = Uize.Array.Order.jumble (Uize.Dom.Basics.find ({tagName:'IMG',className:'thumbnail'}));
 
 		/*** wire up sequenced reveal behavior ***/
 			var
@@ -133,7 +133,7 @@ Uize.require (
 				if (currentThumbNodeNo < thumbNodes.length) {
 					currentThumbNode = thumbNodes [currentThumbNodeNo];
 					thumbNodeSwap.prepareForNextItem (null,currentThumbNode);
-					Uize.Node.setStyle (currentThumbNode,{visibility:'visible'});
+					Uize.Dom.Basics.setStyle (currentThumbNode,{visibility:'visible'});
 					thumbNodeSwap.setCurrentItem (currentThumbNode);
 				}
 			}

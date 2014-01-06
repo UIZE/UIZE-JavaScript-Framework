@@ -39,25 +39,24 @@ Uize.module ({
 	name:'Uize.Fx',
 	required:[
 		'Uize.Fade.xFactory',
-		'Uize.Node',
+		'Uize.Dom.Basics',
 		'Uize.Color'
 	],
 	builder:function () {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var
+		var
+			/*** Variables for Scruncher Optimization ***/
 				_package = function () {},
-				_undefined
-			;
+				_undefined,
+				_Uize_Dom_Basics = Uize.Dom.Basics,
 
-		/*** General Variables ***/
-			var
+			/*** General Variables ***/
 				_stylePropertiesProfiles = [],
 				_stylePropertiesProfilesMap,
 				_updaterFunctions = {},
-				_isIe = Uize.Node.isIe
-			;
+				_isIe = _Uize_Dom_Basics.isIe
+		;
 
 		/*** Utility Functions ***/
 			function _getStylePropertiesProfile (_styleProperty) {
@@ -166,16 +165,18 @@ Uize.module ({
 								The following example shows a style properties profile that supports just the =opacity= style property...
 
 								EXAMPLE
-								............................................................................................
+								................................................................
 								Uize.Fx.defineStylePropertiesProfile ({
 									test:'opacity',
-									remappedProperty:Uize.Node.isIe ? 'filter' : 'opacity',
+									remappedProperty:Uize.Dom.Basics.isIe ? 'filter' : 'opacity',
 									decoder:function (_value) {return +_value},
-									encoderExpression:Uize.Node.isIe ? '"alpha(opacity="+Math.round(VALUE*100)+")"' : 'VALUE'
+									encoderExpression:Uize.Dom.Basics.isIe
+										? '"alpha(opacity="+Math.round(VALUE*100)+")"'
+										: 'VALUE'
 								});
-								............................................................................................
+								................................................................
 
-								Because we're only supporting the =opacity= style property in this profile, we can use the string value ='opacity'= for the =test= property of the =stylePropertiesProfileOBJ= parameter. To deal with the fact that supporting opacity fades in Internet Explorer involves using the non-standard =filter= style property, we specify a value for the =remappedProperty= property of the =stylePropertiesProfileOBJ= parameter, where this value is conditionalized using the =Uize.Node.isIe= static property.
+								Because we're only supporting the =opacity= style property in this profile, we can use the string value ='opacity'= for the =test= property of the =stylePropertiesProfileOBJ= parameter. To deal with the fact that supporting opacity fades in Internet Explorer involves using the non-standard =filter= style property, we specify a value for the =remappedProperty= property of the =stylePropertiesProfileOBJ= parameter, where this value is conditionalized using the =Uize.Dom.Basics.isIe= static property.
 
 								The =decoder= is easy in this case - all our decoder function does is coerce the =opacity= property value to a number. Our =encoder= is also conditionalized, based upon whether or not we're dealing with Internet Explorer. For IE the expression constructs an alpha filter value for the non-standard =filter= style property, and for all other browsers the interpolated value is simply used as is. Finally, because opacity is interpolated as a floating point number in the range of =0= to =1=, we don't specify any =quantization= property in this profile, which defaults the quantization to =0= for this profile.
 
@@ -185,7 +186,7 @@ Uize.module ({
 			};
 
 			_package.fadeStyle = function (_node,_startStyle,_endStyle,_duration,_fadeProperties,_startNow) {
-				if (!(_node = Uize.Node.getById (_node))) return;
+				if (!(_node = _Uize_Dom_Basics.getById (_node))) return;
 
 				/*** form a map of the superset of style properties between the start style and end style ***/
 					var
@@ -209,7 +210,7 @@ Uize.module ({
 							_decoder (
 								_stylePropertyValue != _undefined
 									? _stylePropertyValue
-									: Uize.Node.getStyle (_node,_styleProperty)
+									: _Uize_Dom_Basics.getStyle (_node,_styleProperty)
 							)
 						);
 					}
@@ -414,7 +415,7 @@ Uize.module ({
 						We need to make sure that the updater function gets called for the very first loop iteration (it's triggered by a change in the progress property's value, and progress is initially set to 0 when a fade is created).
 					*/
 				for (
-					var _nodeNo = -1, _nodesLengthMinus1 = (_nodes = Uize.Node.find (_nodes)).length - 1;
+					var _nodeNo = -1, _nodesLengthMinus1 = (_nodes = _Uize_Dom_Basics.find (_nodes)).length - 1;
 					++_nodeNo <= _nodesLengthMinus1;
 				) {
 					_nodesLengthMinus1 &&
@@ -443,7 +444,7 @@ Uize.module ({
 							findExpressionOBJ
 								An object, specifying the series of nodes across which the CSS style fade should be applied.
 
-								The value of the =findExpressionOBJ= parameter is resolved to an array of nodes using the =Uize.Node.find= static method that is implemented in the =Uize.Node= module. This means that any facilities provided by that method are available when specifying nodes in a call to the =Uize.Fx.fadeStyleAcrossNodes= method. If you already have an array of nodes, then this array can be supplied as the value of the =findExpressionOBJ= parameter.
+								The value of the =findExpressionOBJ= parameter is resolved to an array of nodes using the =Uize.Dom.Basics.find= static method that is implemented in the =Uize.Dom.Basics= module. This means that any facilities provided by that method are available when specifying nodes in a call to the =Uize.Fx.fadeStyleAcrossNodes= method. If you already have an array of nodes, then this array can be supplied as the value of the =findExpressionOBJ= parameter.
 
 							startStylePropertiesOBJ
 								An object, specifying the start values for an arbitrary number of CSS style properties.

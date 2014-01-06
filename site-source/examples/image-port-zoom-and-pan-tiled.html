@@ -106,7 +106,6 @@ Uize.require (
 	[
 		'UizeSite.Page.Example.library',
 		'UizeSite.Page.Example',
-		'Uize.Node',
 		'Uize.Widget',
 		'Uize.Fade',
 		'Uize.Widget.ImagePort.Draggable',
@@ -180,7 +179,7 @@ Uize.require (
 					'</a>'
 				);
 			}
-			Uize.Node.injectHtml (page.getNode ('imageSelector'),htmlChunks.join (''));
+			page.injectNodeHtml ('imageSelector',htmlChunks.join (''));
 
 		/*** wire up the page widget ***/
 			page.wireUi ();
