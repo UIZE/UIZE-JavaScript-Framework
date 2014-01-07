@@ -1,9 +1,13 @@
 This document lists official news announcements that need to be created for developments that have already taken place.
 
 Deprecated Uize.Node Modules
-	- Uize.Node
-	- Uize.Node.Event
-	- Uize.Node.CssModule
+	........................................................
+	=Uize.Node=
+	=Uize.Node.Event=      >> BECOMES >>  Uize.Dom.Event
+	=Uize.Node.Classes=    >> BECOMES >>  Uize.Dom.Classes
+	=Uize.Node.CssModule=  >> BECOMES >>  Uize.Dom.CssModule
+	=Uize.Node.Tree=       >> BECOMES >>  Uize.Dom.Tree
+	........................................................
 
 NEW MODULE: Uize.Loc.Pseudo
 	Still to do...
