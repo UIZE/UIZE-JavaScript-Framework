@@ -229,30 +229,75 @@ Implement New Binding Features
 		Provide a way to declare wirings for instance events and child widget events.
 
 	Add Feature for Declaring UI Wirer
-		Provide a way to declare the UI wirer for a widget.
+		Provide a way to declare the UI wirer for a widget and switch away from old =wireUi= approach.
 
 		EXAMPLE
 		..........................
-		Uize.Widget.V2.subclass ({
-			uiWirer:function () {
-				var m = this;
-				// do wiring stuff
+		_superclass.subclass ({
+			uiWirer:function (m) {
+				// wiring logic here
 			}
 		});
 		..........................
 
-		When the =wireUi= method of the =Uize.Widget.V2= base class is executed, it will iterate through all the declared UI wirers for the class, from the shallowest base class to the deepest subclass. Adding a way to declare the UI wirer for a widget class would have the following benefits...
+		When the =wireUi= method of the =Uize.Widget.V2= base class is executed, it will iterate through all the declared UI wirers for the class, from the shallowest base class to the deepest subclass, passing the reference to the instance as the single argument to the wirer functions.
 
-		- the code inside the UI wirer function would not need to be wrapped inside a =if (m.isWired)= safety check, since this would be taken care of by the =wireUI= implementation in the base class
-		- the UI wirer function would not need to call the UI wirer for the superclass, since this would be taken care of by the =wireUI= implementation in the base class (an added benefit of the UI wirer declarative approach is that it would enforce the additive subclassing pattern, so every wirer would count on the fact that the wirers for all shallower classes along the inheritance chain have already been executed by the time that the UI wirer for the current subclass is executed)
+		This approach has the following benefits...
+
+		No More Safety Wrapping
+			The code inside the UI wirer function would not need to be wrapped inside a =if (m.isWired)= safety check, since this would be taken care of by the =wireUI= implementation in the base class.
+
+		No More Calling Superclass Wirer
+			The UI wirer function would not need to call the UI wirer for the superclass, since this would be taken care of by the =wireUI= implementation in the base class.
+
+			An added benefit of the UI wirer declarative approach is that it would enforce the additive subclassing pattern, so every wirer would count on the fact that the wirers for all shallower classes along the inheritance chain have already been executed by the time that the UI wirer for the current subclass is executed.
 
 		Passing the Instance Reference
-			As an enhancement, it might be desirable to pass the instance reference as the first argument, so that it doesn't need to be captured with an additional statement to assign a local variable, as in...
+			As an enhancement, the instance reference is passed to the wirer functions as the first argument.
 
+			This means that the value of =this= doesn't need to be captured with an additional statement to assign it to a local variable, thereby reducing code size and making coding easier.
+
+			EXAMPLE
 			..........................
-			Uize.Widget.V2.subclass ({
+			_superclass.subclass ({
 				uiWirer:function (m) {
-					// do wiring stuff
+					// wiring logic here
+				}
+			});
+			..........................
+
+			The wirer functions would still be called with the instance as context, so the old approach would still be supported as well...
+
+			STILL SUPPORTED
+			..........................
+			_superclass.subclass ({
+				uiWirer:function () {
+					var m = this;
+					// wiring logic here
+				}
+			});
+			..........................
+
+		Old vs New Comparison
+
+			OLD APPROACH...
+			.......................................
+			_superclass.subclass ({
+				wireUi:function () {
+					var m = this;
+					if (!m.isWired) {
+						// wiring logic here
+						_superclass.doMy (m,'wireUi');
+					}
+				}
+			});
+			.......................................
+
+			NEW APPROACH...
+			..........................
+			_superclass.subclass ({
+				uiWirer:function (m) {
+					// wiring logic here
 				}
 			});
 			..........................
@@ -271,11 +316,6 @@ Implement New Binding Features
 			Perhaps bindings to the style object could be treated as bindings on the style of a child widget's root node, but this could be quite complicated for rendering of HTML, since the HTML generation for a child widget is opaque to the template for a widget and cannot be easily co-compiled.
 
 			Perhaps a more reasonable approach would be to treat bindings to the style object of a child widget as bindings to a =style= state property that is implemented in the =Uize.Widget.V2= base class and that is bound to the style object of the widget's root node. Then, bindings to a child widget's style object would be propagated through the =style= state property of the child widget to its root node's =style= property.
-
-Implement Way of Declaring UI Wirers
-	Implement a new feature for UI wirers for widgets and switch away from old =wireUi= approach.
-
-	Gone will be the need for the "if (m.isWired)" safety wrapper and the "_superclass.doMy ('wireUi')" call to the superclass' implementation.
 
 Possible New Tree-inherited Properties
 	- =theme=
