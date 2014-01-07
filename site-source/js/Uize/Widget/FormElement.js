@@ -28,8 +28,8 @@ Uize.module ({
 	required:[
 		'Uize.Node',
 		'Uize.Dom.Event',
-		'Uize.Widget.FormElementWarning',
-		'Uize.Node.Classes'
+		'Uize.Dom.Classes',
+		'Uize.Widget.FormElementWarning'
 	],
 	builder:function (_superclass) {
 		'use strict';
@@ -108,7 +108,7 @@ Uize.module ({
 						);
 
 					// visual indicators of warning state
-					_Uize_Node.Classes.setState(
+					Uize.Dom.Classes.setState(
 						[_getInputNode(m),m.getNode('label'),m.getNode ('shell')],
 						m._errorClassName,
 						_warningShown

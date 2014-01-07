@@ -39,12 +39,12 @@ Uize.module ({
 		'Uize.Widget.V2Mixin',
 		'Uize.Widgets.NavTree.List.Html',
 		'Uize.Widgets.NavTree.List.Css',
-		'Uize.Node.Classes'
+		'Uize.Dom.Classes'
 	],
 	builder:function (_superclass) {
 		'use strict';
 
-		var _Uize_Node_Classes = Uize.Node.Classes;
+		var _Uize_Dom_Classes = Uize.Dom.Classes;
 
 		return Uize.Widget.V2Mixin (_superclass.subclass ()).declare ({
 			instanceMethods:{
@@ -57,7 +57,7 @@ Uize.module ({
 						;
 						_expanded = _item.expanded = typeof _expanded == 'boolean' ? _expanded : _item.expanded === false;
 						m.setNodeProperties (_togglerLink,{title:m.getTogglerTitle (_item)});
-						_Uize_Node_Classes.setState (
+						_Uize_Dom_Classes.setState (
 							_togglerLink,
 							[m.cssClass ('collapsed'),m.cssClass ('expanded')],
 							_expanded

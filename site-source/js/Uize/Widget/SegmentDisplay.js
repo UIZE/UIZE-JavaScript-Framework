@@ -25,12 +25,12 @@
 
 Uize.module ({
 	name:'Uize.Widget.SegmentDisplay',
-	required:'Uize.Node.Classes',
+	required:'Uize.Dom.Classes',
 	builder:function (_superclass) {
 		'use strict';
 
 		/*** Variables for Performance Optimization ***/
-			var _Uize_Node_Classes_setState = Uize.Node.Classes.setState;
+			var _Uize_Dom_Classes_setState = Uize.Dom.Classes.setState;
 
 		/*** Private Instance Methods ***/
 			function _updateUiSegmentsState () {
@@ -44,7 +44,7 @@ Uize.module ({
 						function (_segmentNo,_segmentCode,_segmentMask) {
 							var _segmentNewState = _segmentsState & _segmentMask;
 							if (_lastSegmentsState == null || _segmentNewState != (_lastSegmentsState & _segmentMask))
-								_Uize_Node_Classes_setState (
+								_Uize_Dom_Classes_setState (
 									m.getNode ('segment' + _segmentCode),
 									[m._cssClassSegmentOff,m._cssClassSegmentOn],
 									!!_segmentNewState

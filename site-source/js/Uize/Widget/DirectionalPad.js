@@ -27,7 +27,7 @@ Uize.module ({
 	name:'Uize.Widget.DirectionalPad',
 	required:[
 		'Uize.Widget.Button',
-		'Uize.Node.Classes'
+		'Uize.Dom.Classes'
 	],
 	builder:function (_superclass) {
 		'use strict';
@@ -35,7 +35,7 @@ Uize.module ({
 		var
 			/*** Variables for Scruncher Optimization ***/
 				_Uize = Uize,
-				_Uize_Node_Classes = _Uize.Node.Classes,
+				_Uize_Dom_Classes = _Uize.Dom.Classes,
 
 			/*** General Variables ***/
 				_childrenInMini = {north:1,south:1,east:1,west:1,center:1}
@@ -85,7 +85,7 @@ Uize.module ({
 							var _childEnabled = _childNameInEnabled ? _enabled [_childName] : _default;
 
 							if (_useLinks) {
-								_Uize_Node_Classes.setState(m.getNode (_childName), _cssClassDisabledButton, _childEnabled);
+								_Uize_Dom_Classes.setState(m.getNode (_childName), _cssClassDisabledButton, _childEnabled);
 							}
 							else
 								_children [_childName].set ({
@@ -97,7 +97,7 @@ Uize.module ({
 					if (_useLinks) {
 						var _buttonName;
 						for (_buttonName in _buttonDictionary) {
-							_Uize_Node_Classes.setState(m.getNode (_buttonName), _cssClassDisabledButton, _enabled);
+							_Uize_Dom_Classes.setState(m.getNode (_buttonName), _cssClassDisabledButton, _enabled);
 						}
 					} else
 						Uize.callOn (_children,'set',[{enabled:_enabled}]);

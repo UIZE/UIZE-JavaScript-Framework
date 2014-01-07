@@ -18,9 +18,12 @@
 
 /* Library Contents
 	Uize
-	Uize.Class
+	Uize.Dom
+	Uize.Dom.Basics
+	Uize.Dom.Pos
+	Uize.Event.Bus
 	Uize.Node
-	Uize.Node.Classes
+	Uize.Dom.Classes
 	Uize.Web
 	Uize.Web.xEffects
 	Uize.Web.xFilters

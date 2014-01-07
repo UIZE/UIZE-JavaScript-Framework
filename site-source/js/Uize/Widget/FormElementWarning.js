@@ -26,14 +26,14 @@
 
 Uize.module ({
 	name:'Uize.Widget.FormElementWarning',
-	required:'Uize.Node.Classes',
+	required:'Uize.Dom.Classes',
 	builder:function (_superclass) {
 		'use strict';
 
 		/*** Private Instance Methods ***/
 			function _updateUiFocused (m) {
 				m.isWired
-					&& Uize.Node.Classes.setState(
+					&& Uize.Dom.Classes.setState(
 						m.getNode(),
 						['', m._cssClassFocused],
 						m._focused

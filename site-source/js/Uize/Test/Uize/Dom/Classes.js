@@ -1,7 +1,7 @@
 /*______________
 |       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
 |     /      /  |   ---------------------------------------------------
-|    /    O /   |    MODULE : Uize.Test.Uize.Node.Classes Class
+|    /    O /   |    MODULE : Uize.Test.Uize.Dom.Classes Class
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
 | /____/ /__/_| | COPYRIGHT : (c)2010-2013 UIZE
@@ -18,19 +18,19 @@
 
 /*?
 	Introduction
-		The =Uize.Test.Uize.Node.Classes= module defines a suite of unit tests for the =Uize.Node.Classes= module.
+		The =Uize.Test.Uize.Dom.Classes= module defines a suite of unit tests for the =Uize.Dom.Classes= module.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 */
 
 Uize.module ({
-	name:'Uize.Test.Uize.Node.Classes',
+	name:'Uize.Test.Uize.Dom.Classes',
 	builder:function () {
 		'use strict';
 
 		function _mockNodeWithClassName (_className) {
 			/* NOTE:
-				returns an object designed to fool the Uize.Node.isNode method into thinking it's a node, so we can test the classes methods without having to have a browser or a document, allowing this test module to run in Windows Script Host or other non-browser host
+				returns an object designed to fool the Uize.Dom.Basics.isNode method into thinking it's a node, so we can test the classes methods without having to have a browser or a document, allowing this test module to run in Windows Script Host or other non-browser host
 			*/
 			return {
 				className:_className,
@@ -97,11 +97,11 @@ Uize.module ({
 		}
 
 		return Uize.Test.resolve ({
-			title:'Test for Uize.Node.Classes Module',
+			title:'Test for Uize.Dom.Classes Module',
 			test:[
-				Uize.Test.requiredModulesTest ('Uize.Node.Classes'),
+				Uize.Test.requiredModulesTest ('Uize.Dom.Classes'),
 				Uize.Test.staticMethodsTest ([
-					['Uize.Node.Classes.getState',[
+					['Uize.Dom.Classes.getState',[
 						/*** test handling of invalid node cases ***/
 							['Test that the integer -1 is returned when the node is null',
 								[null,['disabled','enabled']],
@@ -185,7 +185,7 @@ Uize.module ({
 									-1
 								]
 					]],
-					['Uize.Node.Classes.hasClass',[
+					['Uize.Dom.Classes.hasClass',[
 						/*** test handling of invalid node cases ***/
 							['Test that the boolean false is returned when the node is null',
 								[null,['selected']],
@@ -228,7 +228,7 @@ Uize.module ({
 					]]
 				]),
 				_modifyClassesStaticMethodsTest ([
-					['Uize.Node.Classes.setState',[
+					['Uize.Dom.Classes.setState',[
 						['Test that setting state for a class that is the empty string has no effect',
 							'populated selected featured',
 							['',true],
@@ -448,7 +448,7 @@ Uize.module ({
 									'BEFORE AFTER'
 								]
 					]],
-					['Uize.Node.Classes.removeState',[
+					['Uize.Dom.Classes.removeState',[
 						/*** test support for first state class being empty string ***/
 							['Test that removing a state when none of the state classes is present in the node\'s className string results in no change',
 								'BEFORE AFTER',
@@ -507,7 +507,7 @@ Uize.module ({
 								'BEFORE selected AFTER'
 							]
 					]],
-					['Uize.Node.Classes.toggleState',[
+					['Uize.Dom.Classes.toggleState',[
 						['Test that toggling state for a class that is the empty string has no effect',
 							'populated selected featured',
 							[''],
@@ -585,7 +585,7 @@ Uize.module ({
 								'BEFORE state0Class AFTER'
 							]
 					]],
-					['Uize.Node.Classes.addClass',[
+					['Uize.Dom.Classes.addClass',[
 						['Test that adding a class to a node that has no classes works correctly',
 							'',
 							'selected',
@@ -612,7 +612,7 @@ Uize.module ({
 							'populated selected'
 						]
 					]],
-					['Uize.Node.Classes.removeClass',[
+					['Uize.Dom.Classes.removeClass',[
 						['Test that removing a class from a node that has no classes works correctly',
 							'',
 							'selected',
@@ -654,7 +654,7 @@ Uize.module ({
 							'populated selected featured'
 						]
 					]],
-					['Uize.Node.Classes.toggleClass',[
+					['Uize.Dom.Classes.toggleClass',[
 						/*** test when specified class is present ***/
 							['Test that toggling a class that is at the beginning of a node\'s className string is handled correctly',
 								'populated selected featured',

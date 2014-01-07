@@ -25,13 +25,13 @@
 
 Uize.module ({
 	name:'Uize.Widget.Options.Tabbed',
-	required:'Uize.Node.Classes',
+	required:'Uize.Dom.Classes',
 	builder:function (_superclass) {
 		'use strict';
 
 		var
 			/*** Variables for Scruncher Optimization ***/
-				_Uize_Node_Classes = Uize.Node.Classes
+				_Uize_Dom_Classes = Uize.Dom.Classes
 		;
 
 		/*** Private Instance Methods ***/
@@ -55,8 +55,8 @@ Uize.module ({
 						_bodyClassInactive = m._bodyClassInactive,
 						_tabBody = _getTabBodyNode(m,_valueNo)
 					;
-					_Uize_Node_Classes.addClass(_tabBody, _isValue ? _bodyClassActive : _bodyClassInactive);
-					_Uize_Node_Classes.removeClass(_tabBody, _isValue ? _bodyClassInactive : _bodyClassActive);
+					_Uize_Dom_Classes.addClass(_tabBody, _isValue ? _bodyClassActive : _bodyClassInactive);
+					_Uize_Dom_Classes.removeClass(_tabBody, _isValue ? _bodyClassInactive : _bodyClassActive);
 				}
 			}
 

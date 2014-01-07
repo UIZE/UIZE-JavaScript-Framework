@@ -87,7 +87,7 @@ Uize.module ({
 	name:'Uize.Web',
 	required:[
 		'Uize.Node',
-		'Uize.Node.Classes'
+		'Uize.Dom.Classes'
 	],
 	builder:function () {
 		'use strict';
@@ -101,7 +101,7 @@ Uize.module ({
 
 				_Uize = Uize,
 				_Uize_Node = _Uize.Node,
-				_Uize_Node_Classes = _Uize_Node.Classes,
+				_Uize_Dom_Classes = _Uize.Dom.Classes,
 
 				_Uize_isString = _Uize.isString,
 				_Uize_isArray = _Uize.isArray,
@@ -916,13 +916,13 @@ Uize.module ({
 						_objectPrototype[_methodName] = function(_classNameSTRorFUNC) {
 							return this._handleSetAction(
 								_classNameSTRorFUNC,
-								function(_node, _className) { _Uize_Node_Classes[_methodName](_node, _className) }
+								function(_node, _className) { _Uize_Dom_Classes[_methodName](_node, _className) }
 							);
 						};
 					},
-					_makeUizeNodeClassesVoidStateMethod = function(_methodName, _uizeNodeClassesMethodName) { // class state methods
+					_makeUizeNodeClassesVoidStateMethod = function(_methodName, _uizeDomClassesMethodName) { // class state methods
 						_objectPrototype[_methodName] = function() {
-							_Uize_Node_Classes[_uizeNodeClassesMethodName].apply(0, [this._nodes].concat(Array.prototype.slice.call(arguments)));
+							_Uize_Dom_Classes[_uizeDomClassesMethodName].apply(0, [this._nodes].concat(Array.prototype.slice.call(arguments)));
 							return this;
 						};
 					}
@@ -949,12 +949,12 @@ Uize.module ({
 								- See the companion =removeClass= method
 								- See the related =hasClass= and =toggleClass= methods
 								- See also the =setClassState= method
-								- For more details see the =addClass= method of the =Uize.Node.Classes= module
+								- For more details see the =addClass= method of the =Uize.Dom.Classes= module
 					*/
 
 				_objectPrototype.getClassState = function(_stateClasses, _returnAll) {
 					return this._handleGetAction(
-						function(_node) { return _Uize_Node_Classes.getState(_node, _stateClasses) },
+						function(_node) { return _Uize_Dom_Classes.getState(_node, _stateClasses) },
 						_returnAll
 					);
 					/*?
@@ -975,7 +975,7 @@ Uize.module ({
 								NOTES
 								- If =returnAllBOOL= is set to =true=, then the return value for each of the matched nodes is wrapped in an array (even if there's only one matched node). If =returnAllBOOL= is =false= or unspecified (=undefined=), only the value for the first matched node is returned. See `Dynamic Methods Return Values` for more info.
 								- See the companion =setClassState=, =toggleClassState=, and =removeClassState= methods
-								- For more details see the =getState= method of the =Uize.Node.Classes= module
+								- For more details see the =getState= method of the =Uize.Dom.Classes= module
 					*/
 				};
 				_objectPrototype.hasClass = function(_class) {
@@ -987,7 +987,7 @@ Uize.module ({
 					;
 
 					for (; ++_nodeNo < _nodesLength;)
-						if (_Uize_Node_Classes.hasClass(_nodes[_nodeNo], _class))
+						if (_Uize_Dom_Classes.hasClass(_nodes[_nodeNo], _class))
 							return _true;
 
 					return _false;
@@ -1004,7 +1004,7 @@ Uize.module ({
 								NOTES
 								- See the related =addClass=, =toggleClass=, and =removeClass= methods
 								- See also the =getClassState= method
-								- For more details see the =hasClass= method of the =Uize.Node.Classes= module
+								- For more details see the =hasClass= method of the =Uize.Dom.Classes= module
 					*/
 				};
 				_makeUizeNodeClassesVoidMethod('removeClass');
@@ -1028,7 +1028,7 @@ Uize.module ({
 								- See the companion =addClass= method
 								- See the related =hasClass= and =toggleClass= methods
 								- See also the =removeClassState= method
-								- For more details see the =removeClass= method of the =Uize.Node.Classes= module
+								- For more details see the =removeClass= method of the =Uize.Dom.Classes= module
 					*/
 				_makeUizeNodeClassesVoidStateMethod('removeClassState', 'removeState');
 					/*?
@@ -1049,7 +1049,7 @@ Uize.module ({
 								NOTES
 								- Returns a reference to the same =Uize.Web= object
 								- See the companion =getClassState=, =setClassState= and =toggleClassState= methods
-								- For more details see the =removeState= method of the =Uize.Node.Classes= module
+								- For more details see the =removeState= method of the =Uize.Dom.Classes= module
 					*/
 				_makeUizeNodeClassesVoidStateMethod('setClassState', 'setState');
 					/*?
@@ -1070,7 +1070,7 @@ Uize.module ({
 								NOTES
 								- Returns a reference to the same =Uize.Web= object
 								- See the companion =getClassState=, =removeClassState= and =toggleClassState= methods
-								- For more details see the =setState= method of the =Uize.Node.Classes= module
+								- For more details see the =setState= method of the =Uize.Dom.Classes= module
 					*/
 				_makeUizeNodeClassesVoidMethod('toggleClass');
 					/*?
@@ -1092,7 +1092,7 @@ Uize.module ({
 								- Returns a reference to the same =Uize.Web= object
 								- See the related =addClass=, =hasClass= and =removeClass= methods
 								- See also the =toggleClassState= method
-								- For more details see the =toggleClass= method of the =Uize.Node.Classes= module
+								- For more details see the =toggleClass= method of the =Uize.Dom.Classes= module
 					*/
 				_makeUizeNodeClassesVoidStateMethod('toggleClassState', 'toggleState');
 					/*?
@@ -1114,7 +1114,7 @@ Uize.module ({
 								- Returns a reference to the same =Uize.Web= object
 								- See the companion =getClassState=, =setClassState= and =removeClassState= methods
 								- See the related =toggleClass= method
-								- For more details see the =toggleState= method of the =Uize.Node.Classes= module
+								- For more details see the =toggleState= method of the =Uize.Dom.Classes= module
 					*/
 
 			/** Events **/

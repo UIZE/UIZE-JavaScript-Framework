@@ -25,7 +25,7 @@
 
 Uize.module ({
 	name:'Uize.Widget.Collapsy',
-	required:'Uize.Node.Classes',
+	required:'Uize.Dom.Classes',
 	builder:function (_superclass) {
 		'use strict';
 
@@ -45,7 +45,7 @@ Uize.module ({
 
 					if (_shown) {
 						m.setNodeInnerHtml('text', _resolveMessage(m._collapsed ? m._collapsedMessage : m._expandedMessage));
-						Uize.Node.Classes.setState(
+						Uize.Dom.Classes.setState(
 							m.getNode(),
 							[m._expandedClass, m._collapsedClass],
 							m._collapsed

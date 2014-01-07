@@ -30,7 +30,7 @@ Uize.module ({
 	required:[
 		'Uize.Widget.Button',
 		'Uize.Node',
-		'Uize.Node.Classes',
+		'Uize.Dom.Classes',
 		'Uize.Url'
 	],
 	builder:function (_superclass) {
@@ -160,7 +160,7 @@ Uize.module ({
 									: _pageNumber
 							);
 							_display(_pageName, _pageNumber == _value || _pageNumber <= (_maxPages - m._showLastPage));
-							Uize.Node.Classes.setState(_pageLinkNode, m._classSelected, _isCurrentPage);
+							Uize.Dom.Classes.setState(_pageLinkNode, m._classSelected, _isCurrentPage);
 						}
 					}
 				}

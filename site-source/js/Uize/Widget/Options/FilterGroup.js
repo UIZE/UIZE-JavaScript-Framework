@@ -27,7 +27,7 @@ Uize.module ({
 	name:'Uize.Widget.Options.FilterGroup',
 	required:[
 		'Uize.Widget.Button.Filter',
-		'Uize.Node.Classes'
+		'Uize.Dom.Classes'
 	],
 	builder:function (_superclass) {
 		'use strict';
@@ -36,13 +36,13 @@ Uize.module ({
 			/*** Variables for Scruncher Optimization ***/
 				_true = true,
 				_false = false,
-				_Uize_Node_Classes = Uize.Node.Classes
+				_Uize_Dom_Classes = Uize.Dom.Classes
 		;
 
 		/*** Private Instance Methods ***/
 			function _updateUiExpanded (m) {
 				m.isWired
-					&& _Uize_Node_Classes.setState(
+					&& _Uize_Dom_Classes.setState(
 						m.getNode('options'),
 						['', m._expandedCssClass],
 						m._expanded
