@@ -27,7 +27,7 @@ Uize.module ({
 	name:'Uize.Widget.TextInput',
 	required:[
 		'Uize.Node',
-		'Uize.Node.Event',
+		'Uize.Dom.Event',
 		'Uize.Tooltip'
 	],
 	builder:function (_superclass) {
@@ -145,7 +145,7 @@ Uize.module ({
 									keydown:function (_domEvent) {
 										if (
 											m._inputNodeIsInputTag &&
-											Uize.Node.Event.isKeyEnter (_domEvent) &&
+											Uize.Dom.Event.isKeyEnter (_domEvent) &&
 											m.fire ({name:'Ok',domEvent:_domEvent}).cancelSubmit
 										) {
 											var _inputNodeForm = m._inputNode.form;
@@ -158,7 +158,7 @@ Uize.module ({
 									},
 									keypress:function (_domEvent) {
 										m._keyAborted = m.fire ({name:'Key Press',domEvent:_domEvent}).abort &&
-											Uize.Node.Event.abort (_domEvent)
+											Uize.Dom.Event.abort (_domEvent)
 										;
 									},
 									keyup:function (_domEvent) {
@@ -169,7 +169,7 @@ Uize.module ({
 												m._inputNode.form.onsubmit = m._storedFormOnsubmit;
 												m._storedFormOnsubmit = m._blockedFormSubmit = _undefined;
 											}
-											Uize.Node.Event.isKeyEscape (_domEvent) &&
+											Uize.Dom.Event.isKeyEscape (_domEvent) &&
 												m.fire ({name:'Cancel',domEvent:_domEvent})
 											;
 											m.set ({_value:m._inputNode.value});

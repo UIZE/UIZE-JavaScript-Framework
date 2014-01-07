@@ -32,7 +32,7 @@ Uize.module ({
 		'Uize.Widget.FormWarnings',
 		'Uize.Widget.Button',
 		'Uize.Node',
-		'Uize.Node.Event',
+		'Uize.Dom.Event',
 		'Uize.Data'
 	],
 	builder:function (_superclass) {
@@ -54,7 +54,7 @@ Uize.module ({
 				_validated = 'validated',
 				_finished = 'finished',
 				_validatedAfterFirstFinish = 'validatedAfterFirstFinish',
-				
+
 			/*** Helper Methods ***/
 				_checkWarningShown = function () {
 					var
@@ -92,7 +92,7 @@ Uize.module ({
 				},
 				_updateFormAttributes = function () {
 					var m = this;
-	
+
 					if (m.isWired) {
 						m.setNodeProperties(
 							'form',
@@ -112,18 +112,18 @@ Uize.module ({
 						_formWarnings = m._formWarnings,
 						_warningShown = m._warningShown
 					;
-	
+
 					if (m.isWired) {
 						if (_formWarnings) {
 							_formWarnings.set({shown:_warningShown});
-	
+
 							if (_warningShown && m.isWired) {
 							// hide any server warnings if we're showing the client-side warnings
 								m.displayNode('serverWarnings', _false);
-								
+
 								if (m._scrollToWarnings) {
 									var _formWarningsRootNode = _formWarnings.getNode();
-									
+
 									_formWarningsRootNode
 										&& Uize.require(
 											'Uize.Fx.Scroll',
@@ -137,7 +137,7 @@ Uize.module ({
 				},
 				_validate = function () { this.set({_isValid:this._committer.get('allValid')}) }
 		;
-		
+
 		return _superclass.subclass({
 			alphastructor:function () {
 				// this is just a dummy private variable so that when we are examining
@@ -219,7 +219,7 @@ Uize.module ({
 								// if form widget is added as child of another form, then it can't be using normal
 								// submit since it's part of a bigger form
 								_childElement.set({_useNormalSubmit:_false});
-								
+
 								_childElement.wire(
 									'Changed.isSubmitting',
 									function (_event) { _event.newValue && m._submit() }
@@ -253,7 +253,7 @@ Uize.module ({
 
 				m._isInitialized = _true;
 			},
-			
+
 			instanceMethods:{
 				/** Private **/
 					_addChildElement:function (_elementName, _elementClass, _elementProperties) {
@@ -263,10 +263,10 @@ Uize.module ({
 					_forEachElement:function (_function) {
 						if (this._elements) {
 							var _elements = this._elements.children;
-		
+
 							for (var _elementName in _elements) {
 								var _element = _elements[_elementName];
-		
+
 								if (_function (_element, _element.get('name'), _element.isForm) === _false) break;
 							}
 						}
@@ -276,25 +276,25 @@ Uize.module ({
 							_parentElementsWidget = this.parent,
 							_parentForm
 						;
-		
+
 						if (_parentElementsWidget && _parentElementsWidget.parent) {
 							_parentForm = _parentElementsWidget.parent;
-		
+
 							if (!_parentForm.isForm)
 								_parentForm = _null;
 						}
-		
+
 						return _parentForm;
 					},
 					_restore:function (_committerMethod) {
 						var m = this;
-		
+
 						m.set({
 							_finishedAtLeastOnce:_false,
 							_isSubmitting:_false,
 							_isDirty:'inherit'
 						});
-		
+
 						m._forEachElement(  function (_element) { _element.restore()} );
 						m._committer[_committerMethod]();
 					},
@@ -305,7 +305,7 @@ Uize.module ({
 							m = this,
 							_committer = m._committer
 						;
-		
+
 						// NOTE: until there's a way to cause changing the contents of an object to fire
 						// onChange, we'll just have to create a new object
 						m.set({
@@ -318,7 +318,7 @@ Uize.module ({
 					},
 					_updateUiWarning:_updateUiWarning,
 					_validate:_validate,
-					
+
 				/** Public **/
 					addForm:function (_formName, _formClass, _formProperties) {
 						return this._addChildElement(_formName, _formClass || _Uize_Widget.Form, _formProperties);
@@ -331,7 +331,7 @@ Uize.module ({
 							_elements = this._elements.children,
 							_isEmpty = _true
 						;
-		
+
 						if (_elements) {
 							for (var _elementName in _elements) {
 								if (!_elements[_elementName].get('isEmpty')) {
@@ -340,23 +340,23 @@ Uize.module ({
 								}
 							}
 						}
-		
+
 						return _isEmpty;
 					},
 					checkWarningShown:_checkWarningShown, // NOTE: duplicated from Uize.Widget.FormElement.  mix-in?
 					clear:function () { this._restore('clearAll') },
 					getFormElement:function(_elementName) {
 						var _formElement;
-						
+
 						if (this._elements) {
 							var _elementsChildren = this._elements.children;
-							
+
 							_formElement = _elementName == _undefined
 								? _Uize.values(_elementsChildren)
 								: _elementsChildren[_elementName]
 							;
 						}
-						
+
 						return _formElement;
 					},
 					removeFormElement:function(_elementName) {
@@ -369,7 +369,7 @@ Uize.module ({
 							_element = m.getFormElement(_elementName),
 							_formElementsToRemove = _Uize.isArray(_element) ? _element : [_element]
 						;
-						
+
 						_Uize.forEach(
 							_formElementsToRemove,
 							function(_formElementToRemove) {
@@ -389,53 +389,53 @@ Uize.module ({
 					submit:_submit,
 					updateUi:function () {
 						var m = this;
-		
+
 						if (m.isWired) {
 							m._updateFormAttributes();
 							m._updateUiWarning();
 							m._forEachElement(  function (_element) { _element.updateUi()} );
-		
+
 							_superclass.doMy (m,'updateUi');
 						}
 					},
 					validate:_validate,
 					wireUi:function () {
 						var m = this;
-		
+
 						if (!m.isWired) {
 							var _formNode = m.getNode('form');
-		
+
 							/*** Initialize get-set properties to be form attributes if not specified ***/
 								if (_formNode) {
 									var _hasNoValue = function (_propertyValue) {
 										return _propertyValue == _null;
 									};
-		
+
 									if (_hasNoValue(m._action)) m._action = _formNode.action;
 									if (_hasNoValue(m._enctype)) m._enctype = _formNode.enctype;
 									if (_hasNoValue(m._method)) m._method = _formNode.method;
 									if (_hasNoValue(m._target)) m._target = _formNode.target;
-		
+
 									m.wireNode(
 										_formNode,
 										'submit',
 										function (_event) {
-											Uize.Node.Event.abort(_event);
+											Uize.Dom.Event.abort(_event);
 											// NOTE: this will fire before any events on the form elements
 											// to sync their values
 											m._submit();
 										}
 									);
 								}
-		
+
 							_superclass.doMy (m,'wireUi');
-		
+
 							m._updateValue();
 							m._validate();
 						}
 					}
 			},
-			
+
 			stateProperties:{
 				_action:{
 					name:'action',
@@ -567,28 +567,28 @@ Uize.module ({
 					},
 					onChange:function () {
 						var m = this;
-						
+
 						m.set({_tentativeValue:_Uize.clone(m._value)});
-						
+
 						if (m._elements) {
 							var
 								_elements = m._elements.children,
 								_value = m._value || {}
 							;
-	
+
 							for (var _fieldName in _value) {
 								var _element = _elements[_fieldName];
-	
+
 								_element	// can we assume field name and widget name are the same?
 									&& _element.set({value:_value[_fieldName]});
 							}
-	
+
 							m.set({
 								_isSubmitting:_false,
 								_isFinished:_false,
 								_isEmpty:m.checkIsEmpty()
 							});
-	
+
 							m._validateWhen == _valueChanged
 								&& m._validate();
 						}
@@ -619,7 +619,7 @@ Uize.module ({
 					onChange:[
 						function () {
 							var m = this;
-	
+
 							m._forEachElement( function(_element) { _element.checkWarningShown() } );
 						},
 						_updateUiWarning

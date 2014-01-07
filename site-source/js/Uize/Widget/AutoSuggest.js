@@ -43,7 +43,7 @@ Uize.module({
 	required: [
 		'Uize.Data.NameValueRecords',
 		'Uize.Node',
-		'Uize.Node.Event',
+		'Uize.Dom.Event',
 		'Uize.Str.Trim',
 		'Uize.Widget.Options.Selector'
 	],
@@ -60,7 +60,7 @@ Uize.module({
 				_Uize = Uize,
 				_Uize_Data = _Uize.Data,
 				_Uize_Node = _Uize.Node,
-				_Uize_Node_Event = _Uize_Node.Event,
+				_Uize_Dom_Event = _Uize.Dom.Event,
 				_trim = Uize.Str.Trim.trim,
 				_supportsPlaceholder = typeof document != 'undefined'
 					&& 'placeholder' in document.createElement('input'),
@@ -165,7 +165,7 @@ Uize.module({
 					position: _tokens.splice(0, _index + 1).join('').length
 				};
 			}
-			
+
 			function _getNormalizedQuery (m, _tokenInfo) {
 				var _normalizedQuery = _tokenInfo && _trim(_tokenInfo.tokens.concat()[_tokenInfo.tokenIndex]).replace(/\s+/g, ' ');
 				return _tokenInfo ?
@@ -252,12 +252,12 @@ Uize.module({
 						m.getNodeStyle('suggestionsPalette', 'display') != 'none'
 					) {
 						// "hover" over suggestions via up/down arrows
-						if (_Uize_Node_Event.isKeyUpArrow(_domEvent) || _Uize_Node_Event.isKeyDownArrow(_domEvent)) {
+						if (_Uize_Dom_Event.isKeyUpArrow(_domEvent) || _Uize_Dom_Event.isKeyDownArrow(_domEvent)) {
 							var
 								_curNumSuggestions = _suggestions.get('values').length,
 								_increment =
-									_Uize_Node_Event.isKeyUpArrow(_domEvent) ? -1 :
-									_Uize_Node_Event.isKeyDownArrow(_domEvent) ? 1 :
+									_Uize_Dom_Event.isKeyUpArrow(_domEvent) ? -1 :
+									_Uize_Dom_Event.isKeyDownArrow(_domEvent) ? 1 :
 									0,
 								_curValueNo = _suggestions.get('tentativeValueNo'),
 								_curSuggestion = _suggestions.children['option' + _curValueNo],
@@ -280,13 +280,13 @@ Uize.module({
 						} else if (
 							_suggestions.get('tentativeValue') &&
 							(
-								_Uize_Node_Event.isKeyEnter(_domEvent) ||
-								_Uize_Node_Event.isKeyTab(_domEvent)
+								_Uize_Dom_Event.isKeyEnter(_domEvent) ||
+								_Uize_Dom_Event.isKeyTab(_domEvent)
 							)
 						) {
 							_fireSuggestionSelected(m, _suggestions.children['option' + _suggestions.get('tentativeValueNo')]);
 							// select first suggestion on tab
-						} else if (_Uize_Node_Event.isKeyTab(_domEvent)) {
+						} else if (_Uize_Dom_Event.isKeyTab(_domEvent)) {
 							var _firstSuggestion = _suggestions.children['option0'];
 							_firstSuggestion.set('state', 'over');
 							_firstSuggestion.fire('Over');
@@ -499,7 +499,7 @@ Uize.module({
 						;
 
 						// re-tokenize input, taking care that it is done at-most once per user-action
-						if (_Uize_Node_Event.isKeyEscape(_domEvent)) {
+						if (_Uize_Dom_Event.isKeyEscape(_domEvent)) {
 							m._typedQueryTokenInfo =
 								m._tokenInfo =
 								_getTokenInfo(m,_preFocusQuery, -1);
@@ -509,8 +509,8 @@ Uize.module({
 								m._allowKeypress &&
 								m.getNodeStyle('suggestionsPalette', 'display') != 'none' &&
 								(
-									_Uize_Node_Event.isKeyUpArrow(_domEvent) ||
-									_Uize_Node_Event.isKeyDownArrow(_domEvent)
+									_Uize_Dom_Event.isKeyUpArrow(_domEvent) ||
+									_Uize_Dom_Event.isKeyDownArrow(_domEvent)
 								)
 							)
 						) {
@@ -588,20 +588,20 @@ Uize.module({
 									var _suggestions = m.children.suggestions;
 									m._allowKeypress &&
 										(
-											_Uize_Node_Event.isKeyUpArrow(_domEvent) ||
-											_Uize_Node_Event.isKeyDownArrow(_domEvent) ||
+											_Uize_Dom_Event.isKeyUpArrow(_domEvent) ||
+											_Uize_Dom_Event.isKeyDownArrow(_domEvent) ||
 											(
-												_Uize_Node_Event.isKeyTab(_domEvent) &&
+												_Uize_Dom_Event.isKeyTab(_domEvent) &&
 												_suggestions &&
 												_suggestions.get('values').length
 											) ||
 											(
-												_Uize_Node_Event.isKeyEnter(_domEvent) &&
+												_Uize_Dom_Event.isKeyEnter(_domEvent) &&
 												_suggestions &&
 												_suggestions.get('tentativeValue')
 											)
 										) &&
-										_Uize_Node_Event.preventDefault(_domEvent)
+										_Uize_Dom_Event.preventDefault(_domEvent)
 									;
 								}
 							}

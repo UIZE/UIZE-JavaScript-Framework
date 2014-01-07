@@ -1,5 +1,10 @@
 This document lists official news announcements that need to be created for developments that have already taken place.
 
+Deprecated Uize.Node Modules
+	- Uize.Node
+	- Uize.Node.Event
+	- Uize.Node.CssModule
+
 NEW MODULE: Uize.Loc.Pseudo
 	Still to do...
 

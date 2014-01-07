@@ -145,10 +145,10 @@ Uize.module ({
 											|| (_handler[_handlerWrapperKey] = function(_event) {
 													var _node = this;
 													_Uize.require(
-														'Uize.Node.Event',
-														function(_Uize_Node_Event) {
+														'Uize.Dom.Event',
+														function(_Uize_Dom_Event) {
 															// always fix the event to make life easier for everyone
-															_Uize_Node_Event.fix(_event);
+															_Uize_Dom_Event.fix(_event);
 
 															// optionally filter target by by selector
 															_isMatch(_event.target, _selector)

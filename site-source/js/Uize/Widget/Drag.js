@@ -27,7 +27,7 @@ Uize.module ({
 	name:'Uize.Widget.Drag',
 	required:[
 		'Uize.Node',
-		'Uize.Node.Event'
+		'Uize.Dom.Event'
 	],
 	builder:function  (_superclass) {
 		'use strict';
@@ -226,7 +226,7 @@ Uize.module ({
 
 				m.set ({_inDrag:_true,_isTouch:_isTouch});
 				_updateUiCursor (m);
-				Uize.Node.Event.abort (_event);
+				Uize.Dom.Event.abort (_event);
 				m._dragAxisMode = _event.shiftKey ? 'one' : 'both';
 
 				m.fire ({name:'Before Drag Start',domEvent:_event});
@@ -287,7 +287,7 @@ Uize.module ({
 						return _false;
 					};
 					document.onkeyup = function (_event) {
-						Uize.Node.Event.isKeyEscape (_event) && m._inDrag && _cancelDrag (_event);
+						Uize.Dom.Event.isKeyEscape (_event) && m._inDrag && _cancelDrag (_event);
 					};
 				}
 			}

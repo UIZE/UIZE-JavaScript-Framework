@@ -303,7 +303,7 @@ Uize.require (
 		'Uize.Color.xUtil',
 		'Uize.Widgets.ColorInfo.Widget',
 		'Uize.Node',
-		'Uize.Node.Event',
+		'Uize.Dom.Event',
 		'Uize.Tooltip'
 	],
 	function () {
@@ -386,7 +386,7 @@ Uize.require (
 						Uize.Tooltip.hideTooltip (colorInfo.getNode ());
 						prompt (
 							'Here is the color you selected...',
-							Uize.Color.to (Uize.Node.getStyle (Uize.Node.Event.target (event),'backgroundColor'),'#hex')
+							Uize.Color.to (Uize.Node.getStyle (Uize.Dom.Event.target (event),'backgroundColor'),'#hex')
 						);
 					}
 				}

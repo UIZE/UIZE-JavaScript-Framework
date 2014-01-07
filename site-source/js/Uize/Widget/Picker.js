@@ -35,7 +35,7 @@ Uize.module ({
 	superclass:'Uize.Widget.FormElement',
 	required:[
 		'Uize.Widget.Button.ValueDisplay',
-		'Uize.Node.Event'
+		'Uize.Dom.Event'
 	],
 	builder:function (_superclass) {
 		'use strict';
@@ -149,7 +149,7 @@ Uize.module ({
 							'mousedown',
 							function (_event) {
 								if (!m._allowManualEntry) {
-									Uize.Node.Event.abort (_event);
+									Uize.Dom.Event.abort (_event);
 									m.pickValue ();
 								}
 							}

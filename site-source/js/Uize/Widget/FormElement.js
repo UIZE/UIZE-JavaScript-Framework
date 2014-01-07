@@ -27,7 +27,7 @@ Uize.module ({
 	name:'Uize.Widget.FormElement',
 	required:[
 		'Uize.Node',
-		'Uize.Node.Event',
+		'Uize.Dom.Event',
 		'Uize.Widget.FormElementWarning',
 		'Uize.Node.Classes'
 	],
@@ -42,7 +42,7 @@ Uize.module ({
 				_undefined,
 				_Uize = Uize,
 				_Uize_Node = _Uize.Node,
-				_Uize_Node_Event = _Uize_Node.Event,
+				_Uize_Dom_Event = _Uize.Dom.Event,
 				_checkWarningShown = 'checkWarningShown',
 
 				/*** validation/warning variables ***/
@@ -292,9 +292,9 @@ Uize.module ({
 										m._lastKeyDown = _event.keyCode;
 										_fire ('Key Down', _event);
 
-										_Uize_Node_Event.isKeyEnter(_event)
+										_Uize_Dom_Event.isKeyEnter(_event)
 											&& m._type != 'textarea'
-											&& _Uize_Node_Event.abort(_event)
+											&& _Uize_Dom_Event.abort(_event)
 										;
 									}
 								}
@@ -338,13 +338,13 @@ Uize.module ({
 										// cause a form submission, which would be bad). So now the check to see if we should fire 'Ok'
 										// checks to see if both keydown AND keyup are ENTER (since when you type kanji, you keydown on
 										// a non-enter key, do stuff, then keyup to continue).
-										if (m._type != 'textarea' && m._lastKeyDown == _event.keyCode && _Uize_Node_Event.isKeyEnter (_event)) {
+										if (m._type != 'textarea' && m._lastKeyDown == _event.keyCode && _Uize_Dom_Event.isKeyEnter (_event)) {
 											_setValue ();
 											m.fireOkOnEnter()
 												&& _fire ('Ok', _event)
 											;
 										}
-										else if (_Uize_Node_Event.isKeyEscape (_event)) {
+										else if (_Uize_Dom_Event.isKeyEscape (_event)) {
 											_updateUiValue(m);		// replace with old (saved) value
 											_fire ('Cancel', _event);
 											_inputNode.blur();

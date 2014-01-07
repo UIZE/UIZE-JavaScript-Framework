@@ -34,7 +34,7 @@ Uize.module ({
 	required:[
 		'Uize.Comm.Script',
 		'Uize.Node',
-		'Uize.Node.Event'
+		'Uize.Dom.Event'
 	],
 	builder:function (_superclass) {
 		'use strict';
@@ -45,7 +45,7 @@ Uize.module ({
 				_false = false,
 				_Uize = Uize,
 				_Uize_Node = _Uize.Node,
-				_Uize_Node_Event = _Uize_Node.Event,
+				_Uize_Dom_Event = _Uize.Dom.Event,
 				_isFunction = _Uize.isFunction
 		;
 
@@ -84,10 +84,10 @@ Uize.module ({
 										{
 											// Copied from Uize.Widget.FormElement
 											keyup:function (_event) {
-												if (m._lastKeyDown == _event.keyCode && _Uize_Node_Event.isKeyEnter (_event)) {
+												if (m._lastKeyDown == _event.keyCode && _Uize_Dom_Event.isKeyEnter (_event)) {
 													_setValue ();
 													m.fireOkOnEnter () && _fire ('Ok', _event);
-												} else if (_Uize_Node_Event.isKeyEscape (_event)) {
+												} else if (_Uize_Dom_Event.isKeyEscape (_event)) {
 													_fire ('Cancel', _event);
 													_Uize_Node.getById (_recaptchaInputId).blur ();
 												} else {
