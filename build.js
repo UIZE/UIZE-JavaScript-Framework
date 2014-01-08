@@ -224,7 +224,7 @@ function _eval (_toEval) {
 						_moduleSourcePath =
 							(
 								/^Uize(\.|$)/.test (_moduleName)
-									? env.uizePath + '/js'
+									? env.uizePath + '/' + (_params.uizeModulesFolder || 'js')
 									: _params.sourcePath + '/' + _modulesFolder
 							) + _moduleFilePath,
 						_moduleBuiltPath = _params.builtPath + '/' + _modulesFolder + _moduleFilePath,

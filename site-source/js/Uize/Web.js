@@ -272,23 +272,14 @@ Uize.module ({
 				},
 				_isWeb = function(_param) { return _Uize.getClass(_param) == _object },
 				_select = function(_param, _rootNode) {
-					var
-						_nodes,
-						_key
-					;
+					var _nodes;
 
-					if (_Uize_isString(_param)) { // selector string
-						_nodes = _object.selectCss(_param, _rootNode = _select(_rootNode).nodes[0]);
-						_key = _param + (_rootNode ? '|' + _getNodeUid(_rootNode) : '');
-					}
-					else if (_Uize_Node_isNode(_param)) { // node reference
+					if (_param && _Uize_isString(_param)) // selector string
+						_nodes = _object.selectCss(_param, _rootNode = _select(_rootNode)[0]);
+					else if (_Uize_Node_isNode(_param)) // node reference
 						_nodes = [_param];
-						_key = _getNodeUid(_param);
-					}
-					else if (_isWeb(_param)) { // Uize.Web object
+					else if (_isWeb(_param)) // Uize.Web object
 						_nodes = _param.element();
-						_key = _param._key;
-					}
 					else if (_Uize_isList(_param)) { // node list, to be converted to a unique set
 						var _nodeLookup = {};
 
@@ -304,14 +295,11 @@ Uize.module ({
 								}
 							}
 						}
-						_key = _Uize.map(_nodes, function(_node) { return _getNodeUid(_node) }).join('|');
 					}
-					else {
+					else
 						_nodes = [];
-						_key = '';
-					}
 
-					return {nodes:_nodes, key:_key};
+					return _nodes;
 				},
 				_supportsCss = function(_propertyName, _nodeBlobToTest) {
 					var _supportsCss = _object._cssSupport[_propertyName];
@@ -334,8 +322,7 @@ Uize.module ({
 					function (_selector, _rootNode) {
 						var
 							m = this,
-							_selectInfo = _select(_selector, _rootNode),
-							_nodes = m._nodes = _selectInfo.nodes,
+							_nodes = m._nodes = _select(_selector, _rootNode),
 
 							_nodesLength = m.length = _nodes.length, // add public length property
 							_nodeNo = -1
@@ -349,7 +336,7 @@ Uize.module ({
 								m[_nodeNo] = _nodes[_nodeNo];
 
 						/* call constructor hook method for extensions */
-							m.atEndOfConstructor(_selectInfo);
+							m.atEndOfConstructor(_nodes);
 
 						/*?
 							Constructor
@@ -631,32 +618,32 @@ Uize.module ({
 
 							SYNTAX
 							.....................................................
-							selectInfoOBJ = Uize.Web.select(selectorSTR, rootNodeBLOB);
+							nodesARRAY = Uize.Web.select(selectorSTR, rootNodeBLOB);
 							.....................................................
 
 							VARIATION 1
 							.....................................
-							selectInfoOBJ = Uize.Web.select(selectorSTR, rootNodeBLOB);
+							nodesARRAY = Uize.Web.select(selectorSTR, rootNodeBLOB);
 							.....................................
 
 							VARIATION 2
 							.....................................
-							selectInfoOBJ = Uize.Web.select(node);
+							nodesARRAY = Uize.Web.select(node);
 							.....................................
 
 							VARIATION 3
 							.....................................
-							selectInfoOBJ = Uize.Web.select(nodesARRAY);
+							nodesARRAY = Uize.Web.select(nodesARRAY);
 							.....................................
 
 							VARIATION 4
 							.....................................
-							selectInfoOBJ = Uize.Web.select(webOBJ);
+							nodesARRAY = Uize.Web.select(webOBJ);
 							.....................................
 
 							VARIATION 5
 							.....................................
-							selectInfoOBJ = Uize.Web.select();
+							nodesARRAY = Uize.Web.select();
 							.....................................
 
 							NOTES
@@ -2636,34 +2623,7 @@ Uize.module ({
 								)
 							;
 						};
-					}/*,
-					_makeContentDimMethod = function(_propertyName, _paddingProperties) {
-						var
-							_propertyNameCap = _Uize.capFirstChar(_propertyName),
-							_clientDimName = 'client' + _propertyNameCap,
-							_paddingPropertiesLength = _paddingProperties.length
-						;
-						_objectPrototype['content' + _propertyNameCap] = function(_param) {
-							return this._handleGetOrSetAction(
-								function(_node) {
-									var
-										_dim = _node[_clientDimName],
-										_propNo = -1
-									;
-
-									if (_dim) {
-										for (; ++_propNo < _paddingPropertiesLength;)
-											_dim -= parseInt(_Uize_Node_getStyle(_node, _paddingProperties[_propNo]))
-										;
-									}
-
-									return _dim;
-								},
-								_param,
-								function(_node, _propertyValue) { _Uize_Node_setStyle(_node, _Uize.pairUp(_propertyName, _propertyValue)) }
-							);
-						};
-					}*/
+					}
 				;
 
 				_makeCssMethod('contentHeight', 'height');

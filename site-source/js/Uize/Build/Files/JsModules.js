@@ -40,10 +40,11 @@ Uize.module ({
 						m = this,
 						_fileSystem = m.fileSystem,
 						_modulesFolder = _params.modulesFolder,
+						_uizeModulesFolder = _params.uizeModulesFolder || 'js',
 						_sourcePath = _params.sourcePath,
 						_uizePath = _params.uizePath,
 						_sourceModulesPath = _sourcePath + '/' + _modulesFolder,
-						_uizeModulesPath = _uizePath + '/js',
+						_uizeModulesPath = _uizePath + '/' + _uizeModulesFolder,
 						_isUizeWebSite = _uizeModulesPath == _sourceModulesPath,
 						_jsModuleExtensionRegExp = Uize.Build.Util.jsModuleExtensionRegExp
 					;
@@ -103,7 +104,7 @@ Uize.module ({
 							_addFilesForGeneratedNamespaceModulesForFolders (_sourceModulesPath,_modulesFolder);
 
 						/*** folders under UIZE site's modules folder ***/
-							_isUizeWebSite || _addFilesForGeneratedNamespaceModulesForFolders (_uizeModulesPath,'js');
+							_isUizeWebSite || _addFilesForGeneratedNamespaceModulesForFolders (_uizeModulesPath,_uizeModulesFolder);
 				}
 			}
 		});

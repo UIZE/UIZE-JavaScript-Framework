@@ -365,7 +365,7 @@ Uize.module ({
 
 				_objectPrototype.has = function(_selector) {
 					return this._appendListHelper(
-						function() { return [_object.select(_selector, this).nodes.length ? this : null] }
+						function() { return [_object.select(_selector, this).length ? this : null] }
 					);
 					/*?
 						Instance Methods
@@ -559,7 +559,7 @@ Uize.module ({
 					// add the nodes to add
 					_mergedNodes.push.apply(
 						_mergedNodes,
-						_object.select(_selector, _rootSelector).nodes // nodes we're adding
+						_object.select(_selector, _rootSelector) // nodes we're adding
 					);
 
 					// create new object w/ merged set of nodes (which will have a new _key)
@@ -753,9 +753,9 @@ Uize.module ({
 				_objectPrototype.find = function(_selector) {
 					return this._appendListHelper(
 						function() {
-							return _Uize.isPlainObject(_selector)
+							return !_selector || _Uize.isPlainObject(_selector)
 								? _Uize_Dom_Basics.find(_Uize.copy(_selector, {root:this})) // force node as root
-								: _object.select(_selector, this).nodes
+								: _object.select(_selector, this)
 							;
 						}
 					);
@@ -787,6 +787,11 @@ Uize.module ({
 								VARIATION 4
 								........................................................
 								newWeb = myWeb.find(propertiesOBJ);
+								........................................................
+
+								VARIATION 5
+								........................................................
+								newWeb = myWeb.find();
 								........................................................
 
 								NOTES
