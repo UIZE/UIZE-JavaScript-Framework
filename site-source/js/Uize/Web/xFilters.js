@@ -788,16 +788,12 @@ Uize.module ({
 								........................................................
 								newWeb = myWeb.find(propertiesOBJ);
 								........................................................
-<<<<<<< HEAD
-								
+
 								VARIATION 5
 								........................................................
 								newWeb = myWeb.find();
 								........................................................
-								
-=======
 
->>>>>>> upstream/master
 								NOTES
 								- Returns a reference to the a new =Uize.Web= object
 								- See related =ancestors= and =has= methods
