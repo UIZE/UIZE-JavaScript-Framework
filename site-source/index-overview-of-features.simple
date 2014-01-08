@@ -92,7 +92,7 @@ Basic Utility Belt Features
 		The utility methods that make their way into the =Uize= base module are given careful consideration, and are often given the greenlight because they are needed by other core modules that are very likely to be used, so why not make them public for all to use.
 
 	Util Namespaces
-		Instead of throwing everything including the kitchen sink into the =Uize= base module, utilities for other kinds of situations are organized into other namespaces in the framework, such as the =Uize.Util=, =Uize.Node.Util=, =Uize.Color.xUtil=, =Uize.Build.Util=, and =Uize.Array.Util= namespaces.
+		Instead of throwing everything including the kitchen sink into the =Uize= base module, utilities for other kinds of situations are organized into other namespaces in the framework, such as the =Uize.Util=, =Uize.Dom.Util=, =Uize.Color.xUtil=, =Uize.Build.Util=, and =Uize.Array.Util= namespaces.
 
 Classes, Inheritance, OOP
 	UIZE makes it dead easy to create classes that come with support for events (thanks to a built-in `event infrastructure`) and `state properties and binding`.

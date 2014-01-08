@@ -29,7 +29,7 @@ Uize.module ({
 	name:'Uize.Widget.Bar.Slider.xSkin',
 	required:[
 		'Uize.Node',
-		'Uize.Node.Util'
+		'Uize.Dom.Util'
 	],
 	builder:function (_class) {
 		'use strict';
@@ -45,14 +45,14 @@ Uize.module ({
 							_opacity = _opacity || 0;
 							return (
 								_opacity
-									? ('background:' + _color + ';' + (_opacity < 100 ? _Uize_Node_Util_getOpacityStr (_opacity / 100) : ''))
+									? ('background:' + _color + ';' + (_opacity < 100 ? _getOpacityStr (_opacity / 100) : ''))
 									: 'display:none;'
 							);
 						}
 						var
 							m = this,
 							_Uize_Node = Uize.Node,
-							_Uize_Node_Util_getOpacityStr = _Uize_Node.Util.getOpacityStr,
+							_getOpacityStr = Uize.Dom.Util.getOpacityStr,
 							_idPrefix = _input.idPrefix,
 							_orientation = _input.orientation,
 							_orientationNo = _orientation == 'vertical' ? 1 : 0,
