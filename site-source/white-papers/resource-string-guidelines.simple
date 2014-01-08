@@ -7,7 +7,7 @@ Resource Files
 
 			- =.strings= - [[https://developer.apple.com/library/ios/documentation/cocoa/conceptual/LoadingResources/Strings/Strings.html][iOS and MacOS]] resource strings file format (often as =Localizable.strings=)
 			- =.xlf= - XML using the [[http://en.wikipedia.org/wiki/XLIFF][XLIFF schema]]
-			- =.properties= - [[http://docs.oracle.com/javase/tutorial/i18n/resbundle/propfile.html][Java properties file]] format
+			- =.properties= - [[http://docs.oracle.com/javase/tutorial/i18n/resbundle/propfile.html][Java properties file]] format (also see [[http://en.wikipedia.org/wiki/.properties][Wikipedia article]])
 			- =.po=, =.pot= - PO (Portable Object) and POT (Portable Object Template) files used by [[http://www.gnu.org/savannah-checkouts/gnu/gettext/manual/html_node/PO-Files.html][GNU's gettext]], and also by [[https://drupal.org/node/1814954][Drupal]] and [[http://php.net/manual/en/book.gettext.php][PHP]]
 			- =.resx= - resource file format for [[http://msdn.microsoft.com/en-us/library/ekyft91f(v=vs.90).aspx][Microsoft .NET applications]]
 			- =.rc= - [[http://msdn.microsoft.com/en-us/library/cc194804.aspx][Windows resource files]] (older format, typically used for C/C++ desktop applications)
