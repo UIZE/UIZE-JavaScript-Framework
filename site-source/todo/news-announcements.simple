@@ -1,5 +1,20 @@
 This document lists official news announcements that need to be created for developments that have already taken place.
 
+Deprecated Uize.Node Modules
+	........................................................
+	=Uize.Node=
+	=Uize.Node.Event=      >> BECOMES >>  Uize.Dom.Event
+	=Uize.Node.Classes=    >> BECOMES >>  Uize.Dom.Classes
+	=Uize.Node.CssModule=  >> BECOMES >>  Uize.Dom.CssModule
+	=Uize.Node.Form=       >> BECOMES >>  Uize.Dom.Form
+	=Uize.Node.Tree=       >> BECOMES >>  Uize.Dom.Tree
+	=Uize.Node.Util=       >> BECOMES >>  Uize.Dom.Util
+	........................................................
+
+	Still to do...
+
+	- create alias module unit tests
+
 NEW MODULE: Uize.Loc.Pseudo
 	Still to do...
 
@@ -14,10 +29,12 @@ NEW MODULE: Uize.Event.Bus
 	- write documentation
 	- write news announcement
 
-Shorter This Reference
-	Switched all modules over to using "m" for capturing a reference to this.
+Uize.Node Modules Deprecated
+	Still to do...
 
-	Because "_this" is scrunched to "a_a" (for example) in most modules, using simply unscrunched "m" will reduce size, especially given how pervasive "_this" is. Furthermore, typing "m." is much smoother and more natural than typing "_this.", and it will also reduce clutter / noise in the source. All in all, "m." wins at all levels. It beats "self.", "me.", "my.", "_." (which I've seen in some code), and most anything else in terms of typing friction.
+	- finish migrating modules and unit tests to under new =Uize.Dom= namespace
+	- create alias modules for old modules under =Uize.Node= namespace
+	- write news announcement
 
 NEW MODULE: Uize.Math.Blend
 	Still to do...
@@ -32,6 +49,11 @@ NEW MODULE: Uize.Math.LogicalPos
 	- write unit tests
 	- write documentation
 	- write news announcement
+
+Shorter This Reference
+	Switched all modules over to using "m" for capturing a reference to this.
+
+	Because "_this" is scrunched to "a_a" (for example) in most modules, using simply unscrunched "m" will reduce size, especially given how pervasive "_this" is. Furthermore, typing "m." is much smoother and more natural than typing "_this.", and it will also reduce clutter / noise in the source. All in all, "m." wins at all levels. It beats "self.", "me.", "my.", "_." (which I've seen in some code), and most anything else in terms of typing friction.
 
 NEW MODULE: Uize.Build.Search
 	Still to do...

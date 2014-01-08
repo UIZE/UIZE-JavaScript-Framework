@@ -26,7 +26,8 @@
 Uize.module ({
 	name:'Uize.Widget.Collection.Dynamic',
 	required:[
-		'Uize.Node',
+		'Uize.Dom.Basics',
+		'Uize.Dom.Pos',
 		'Uize.Widget.Drag',
 		'Uize.Tooltip'
 	],
@@ -38,7 +39,9 @@ Uize.module ({
 				_true = true,
 				_false = false,
 				_null = null,
-				_Uize_Node = Uize.Node,
+				_Uize_Dom = Uize.Dom,
+				_Uize_Dom_Basics = _Uize_Dom.Basics,
+				_Uize_Dom_Pos = _Uize_Dom.Pos,
 				_Uize_Tooltip = Uize.Tooltip,
 
 			/*** General Variables ***/
@@ -101,7 +104,7 @@ Uize.module ({
 							_itemsDragged [_itemDraggedNo].setNodeOpacity ('',_opacity)
 						;
 						_inDrag &&
-							_Uize_Node.setInnerHtml (
+							_Uize_Dom_Basics.setInnerHtml (
 								_draggingTooltip,
 								m.localize (
 									'draggingToReorder' + (_itemsDraggedLength > 1 ? 'Plural' : 'Singular'),
@@ -157,7 +160,7 @@ Uize.module ({
 								_itemsCoords = [];
 								m.forAll (
 									function (_itemWidget) {
-										_itemsCoords.push (_Uize_Node.getCoords (_itemWidget.getNode ()));
+										_itemsCoords.push (_Uize_Dom_Pos.getCoords (_itemWidget.getNode ()));
 									}
 								);
 
@@ -177,7 +180,7 @@ Uize.module ({
 								_axisDimName = _orientationNo ? 'height' : 'width';
 								_insertPointItem = _insertPointModeNo = _insertPointCoords = _lastInsertPointItem = _lastInsertPointModeNo = _null;
 								_insertionMarkerNode = m.getNode ('insertionMarker');
-								_insertionMarkerDims = _Uize_Node.getDimensions (_insertionMarkerNode);
+								_insertionMarkerDims = _Uize_Dom_Pos.getDimensions (_insertionMarkerNode);
 
 								/*** expand drop coordinates for item widgets (performance optimization) ***/
 									for (
@@ -213,7 +216,7 @@ Uize.module ({
 								function _pointWithinCoords (_coords) {
 									return (
 										_coords &&
-										_Uize_Node.doRectanglesOverlap (
+										_Uize_Dom_Pos.doRectanglesOverlap (
 											_coords.left,_coords.top,_coords.width,_coords.height,
 											_dragEventPos [0],_dragEventPos [1],1,1
 										)
@@ -260,7 +263,7 @@ Uize.module ({
 											- _insertionMarkerDims [_axisDimName] / 2
 										;
 										delete _insertionMarkerCoords [_axisDimName];
-										_Uize_Node.setCoords (_insertionMarkerNode,_insertionMarkerCoords);
+										_Uize_Dom_Pos.setCoords (_insertionMarkerNode,_insertionMarkerCoords);
 									}
 									_lastInsertPointItem = _insertPointItem;
 									_lastInsertPointModeNo = _insertPointModeNo;

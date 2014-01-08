@@ -106,7 +106,7 @@ Uize.require (
 		Uize.require (
 			[
 				'UizeSite.Page',
-				'Uize.Node',
+				'Uize.Dom.Basics',
 				'Uize.Url',
 				'Uize.Widget.HoverFader',
 				'Uize.Curve'
@@ -142,7 +142,7 @@ Uize.require (
 				/*** initialization ***/
 					/*** code for managing search term ***/
 						var
-							_searchQueryPreviewNodes = Uize.Node.find ({className:'searchQuery'}),
+							_searchQueryPreviewNodes = Uize.Dom.Basics.find ({className:'searchQuery'}),
 							_searchQueryNode = _page.getNode ('searchQuery'),
 							_searchQuery = _page.getNodeValue (_searchQueryNode)
 						;
@@ -151,7 +151,7 @@ Uize.require (
 							if (_searchQuery) _searchQuery = '"' + Uize.Url.fromPiece (_searchQuery) + '"';
 						}
 						function _updateSearchTermPreviewNodes () {
-							Uize.Node.setInnerHtml (_searchQueryPreviewNodes,_searchQuery);
+							Uize.Dom.Basics.setInnerHtml (_searchQueryPreviewNodes,_searchQuery);
 						}
 						if (_searchQuery) {
 							_page.setNodeValue (_searchQueryNode,_searchQuery);

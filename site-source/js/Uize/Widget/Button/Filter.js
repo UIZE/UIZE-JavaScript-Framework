@@ -25,7 +25,7 @@
 
 Uize.module ({
 	name:'Uize.Widget.Button.Filter',
-	required:'Uize.Node.Classes',
+	required:'Uize.Dom.Classes',
 	builder:function (_superclass) {
 		'use strict';
 
@@ -58,21 +58,21 @@ Uize.module ({
 
 				if (m.isWired) {
 					var
-						_Uize_Node_Classes = Uize.Node.Classes,
+						_Uize_Dom_Classes = Uize.Dom.Classes,
 						_rootNode = m.getNode()
 					;
 
-					_Uize_Node_Classes.setState(
+					_Uize_Dom_Classes.setState(
 						_rootNode,
 						['', m._cssClassFeatured],
 						m._featured
 					);
-					_Uize_Node_Classes.setState(
+					_Uize_Dom_Classes.setState(
 						_rootNode,
 						['', m._cssClassDisabled],
 						!m.get('enabledInherited')
 					);
-					_Uize_Node_Classes.setState(
+					_Uize_Dom_Classes.setState(
 						_rootNode,
 						['', m._cssClassSelected],
 						m.get('selected')

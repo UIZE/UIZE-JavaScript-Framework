@@ -827,7 +827,7 @@ Uize.require (
 		'Uize.Curve',
 		'Uize.Curve.Rubber',
 		'Uize.Curve.Mod',
-		'Uize.Node',
+		'Uize.Dom.Basics',
 		'Uize.Json'
 	],
 	function () {
@@ -838,8 +838,8 @@ Uize.require (
 
 		/*** create the params inspector widget ***/
 			var
-				menuNodes = Uize.Node.find ({className:'menuLink'}),
-				initialStyle = Uize.Node.getStyle (
+				menuNodes = Uize.Dom.Basics.find ({className:'menuLink'}),
+				initialStyle = Uize.Dom.Basics.getStyle (
 					menuNodes [0],
 					{color:null,backgroundColor:null,borderColor:null,textShadow:null}
 				),
@@ -858,7 +858,7 @@ Uize.require (
 				function () {
 					var values = page.children.paramsInspector.getValues ();
 					if (values.settings != lastSettings) {
-						Uize.Node.setStyle (menuNodes,initialStyle); // reset all nodes to initial style, so there's no style lingering from previous CSS fade
+						Uize.Dom.Basics.setStyle (menuNodes,initialStyle); // reset all nodes to initial style, so there's no style lingering from previous CSS fade
 						Uize.eval (lastSettings = values.settings);
 					}
 				}

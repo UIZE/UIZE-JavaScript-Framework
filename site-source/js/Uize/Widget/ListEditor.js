@@ -108,7 +108,7 @@ Uize.module ({
 	required:[
 		'Uize.Widget.Button',
 		'Uize.Widget.TextInput',
-		'Uize.Node.Event'
+		'Uize.Dom.Event'
 	],
 	builder:function (_superclass) {
 		'use strict';
@@ -370,7 +370,7 @@ Uize.module ({
 							m._listNode = m.getNode ('list'),
 							{
 								keyup:
-									function (_domEvent) {Uize.Node.Event.isKeyDelete (_domEvent) && _removeSelected (m)},
+									function (_domEvent) {Uize.Dom.Event.isKeyDelete (_domEvent) && _removeSelected (m)},
 								click:
 									function () {_updateUiRemoveButtonState (m)}
 							}

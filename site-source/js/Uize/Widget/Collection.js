@@ -92,7 +92,7 @@ Uize.module ({
 	name:'Uize.Widget.Collection',
 	required:[
 		'Uize.Widget.Button',
-		'Uize.Node.Event'
+		'Uize.Dom.Event'
 	],
 	builder:function (_superclass) {
 		'use strict';
@@ -423,7 +423,7 @@ Uize.module ({
 									_ctrlKey = (!_shiftKey && _event.forceToggle) || (_domEvent && (_domEvent.ctrlKey || _domEvent.metaKey)),
 									_selectWithModifier = _ctrlKey || _shiftKey
 								;
-								_selectWithModifier && Uize.Node.Event.abort (_domEvent); // prevent browser spawning new window
+								_selectWithModifier && Uize.Dom.Event.abort (_domEvent); // prevent browser spawning new window
 								if (
 									(m._selectionMode == 'single' && !(_ctrlKey && _itemWidget.get ('selected'))) ||
 									!_selectWithModifier

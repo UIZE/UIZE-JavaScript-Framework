@@ -159,7 +159,7 @@ Uize.module ({
 	name:'Uize.Widget.Swap',
 	required:[
 		'Uize.Node',
-		'Uize.Node.Util',
+		'Uize.Dom.Util',
 		'Uize.Fade'
 	],
 	builder:function (_superclass) {
@@ -168,6 +168,7 @@ Uize.module ({
 		var
 			/*** Variables for Scruncher Optimization ***/
 				_Uize_Node = Uize.Node,
+				_getOpacityProperties = Uize.Dom.Util.getOpacityProperties,
 
 			/*** General Variables ***/
 				_cropCoords = [],
@@ -182,8 +183,8 @@ Uize.module ({
 			function _updateItem (m,_item,_value,_updateAllProperties) {
 				var
 					_styleProperties = m._dissolve
-						? _Uize_Node.Util.getOpacityProperties (_value)
-						: _updateAllProperties ? _Uize_Node.Util.getOpacityProperties (1) : {}
+						? _getOpacityProperties (_value)
+						: _updateAllProperties ? _getOpacityProperties (1) : {}
 				;
 				if (_updateAllProperties || m._viewSeedSizeX != 1 || m._viewSeedSizeY != 1) {
 					for (var _coordNo = -1; ++_coordNo < 4;)

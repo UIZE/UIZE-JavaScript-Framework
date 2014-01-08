@@ -29,7 +29,7 @@ Uize.module ({
 	name:'Uize.Comm.Iframe',
 	required:[
 		'Uize.Url',
-		'Uize.Node'
+		'Uize.Dom.Basics'
 	],
 	builder:function (_superclass) {
 		'use strict';
@@ -52,8 +52,8 @@ Uize.module ({
 					This puts the iframe in the page. Ideally, there should be a unique iframe per instance. The iframe insertion could even be deferred until the first request is performed.
 				*/
 				var _iframeId = this.iframeId = 'Uize_Comm_Iframe_iframe' + Uize.Url.getCacheDefeatStr ();
-				Uize.Node.injectHtml (
-					Uize.Node.getById ('globalContent') || document.body,
+				Uize.Dom.Basics.injectHtml (
+					Uize.Dom.Basics.getById ('globalContent') || document.body,
 					'<form id="CommIframe_form" style="display:none;" target="' + _iframeId + '" method="POST" accept-charset="utf-8">' +
 						'<input id="CommIframe_params" name="params" type="hidden"/>' +
 					'</form>' +
@@ -64,7 +64,7 @@ Uize.module ({
 			instanceMethods:{
 				performRequest:function (_request,_callback) {
 					var
-						_iframe = Uize.Node.getById (this.iframeId),
+						_iframe = Uize.Dom.Basics.getById (this.iframeId),
 						_requestUrl = Uize.Url.resolve (
 							_request.url,
 							{
@@ -80,13 +80,13 @@ Uize.module ({
 						if (_returnTypeIsObject || _returnType == 'json')
 							_request.responseJson = Uize.clone (_responseResult)
 						;
-						Uize.Node.isIe && _iframe.contentWindow.history.go (-1);
+						Uize.Dom.Basics.isIe && _iframe.contentWindow.history.go (-1);
 						_callback ();
 					};
 					if (_request.requestMethod == 'POST') {
 						var
-							_form = Uize.Node.getById ('CommIframe_form'),
-							_paramsField = Uize.Node.getById ('CommIframe_params'),
+							_form = Uize.Dom.Basics.getById ('CommIframe_form'),
+							_paramsField = Uize.Dom.Basics.getById ('CommIframe_params'),
 							_queryPos = _requestUrl.indexOf ('?')
 						;
 						_paramsField.value = _queryPos > -1 ? _requestUrl.substr (_queryPos + 1) : '';

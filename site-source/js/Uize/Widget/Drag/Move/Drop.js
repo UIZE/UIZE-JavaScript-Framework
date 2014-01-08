@@ -25,38 +25,38 @@
 
 Uize.module ({
 	name:'Uize.Widget.Drag.Move.Drop',
-	required:'Uize.Node',
+	required:'Uize.Dom.Pos',
 	builder:function  (_superclass) {
 		'use strict';
-		
+
 		var
 			/*** Variables for Scruncher Optimization ***/
-				_Uize_Node = Uize.Node,	
-		
+				_Uize_Dom_Pos = Uize.Dom.Pos,
+
 			/*** General Variables ***/
 				_dropTargets = [] // widgets onto which draggable widgets can be dropped
 		;
-		
+
 		return _superclass.subclass ({
 			staticProperties:{
 				dropTargets:_dropTargets
 			},
-			
+
 			staticMethods:{
 				addDropTarget:function (_widget, _node) {
 					_dropTargets.push ({_widget:_widget, _node:_node});
-	
+
 					/**
 						Registers the passed-in widget as a potential drop target for any Uize.Widget.Drag.Move.Drop instance. When a drag instance is dragged, the position of the drag instance is checked against the positions of the drop targets and certain events are fired:
-	
+
 						'Drag Enter': fired when the drag instance and drop target's physical positions first intersect.
 						'Drag Over': fired when the drag instance is over the drop target.
 						'Drag Leave': fired when the drag instance and the drop target's physical positions no longer intersect.
 						'Drop': fired when a Drag action terminates while the drag instance and drop target's physical positions intersect.
 						'Drag Cancel': fired when a Drag is cancelled.
-	
+
 						Each of these events contains a =dragObject= parameter which points to the drag instance. It is up to each individual drop target to determine whether or not it should respond to the event or dragObject.
-	
+
 						If the _node parameter is specified, that will be the node used to calculate to drop target's current coordinates.
 					*/
 				},
@@ -73,7 +73,7 @@ Uize.module ({
 					*/
 				}
 			},
-			
+
 			omegastructor:function() {
 				var
 					m = this,
@@ -94,18 +94,18 @@ Uize.module ({
 						 */
 						var
 							_dropTargetsLength = _dropTargets.length,
-							_coords = _Uize_Node.getCoords (m.getNode())
+							_coords = _Uize_Dom_Pos.getCoords (m.getNode())
 						;
 						for (_dropTargetIndex = _dropTargetsLength; --_dropTargetIndex >= 0;) {
 							var
 								_currDropTarget = _dropTargets [_dropTargetIndex],
 								_currDropTargetWidget = _currDropTarget._widget,
 								_instanceId = _currDropTargetWidget.instanceId,
-								_currDropTargetNodeCoords = _Uize_Node.getCoords((_currDropTarget._node || (_currDropTarget._node = _currDropTargetWidget.getNode ()))), // these always have to be re-calculated (and not pre-calculated) because the drop target could also be moving
+								_currDropTargetNodeCoords = _Uize_Dom_Pos.getCoords((_currDropTarget._node || (_currDropTarget._node = _currDropTargetWidget.getNode ()))), // these always have to be re-calculated (and not pre-calculated) because the drop target could also be moving
 								_hadEntered = _dropTargetsEntered [_instanceId]
 							;
 
-							if (_Uize_Node.doRectanglesOverlap (_coords.left, _coords.top, _coords.width, _coords.height, _currDropTargetNodeCoords.left, _currDropTargetNodeCoords.top, _currDropTargetNodeCoords.width, _currDropTargetNodeCoords.height)) {
+							if (_Uize_Dom_Pos.doRectanglesOverlap (_coords.left, _coords.top, _coords.width, _coords.height, _currDropTargetNodeCoords.left, _currDropTargetNodeCoords.top, _currDropTargetNodeCoords.width, _currDropTargetNodeCoords.height)) {
 								_currDropTargetWidget.fire ({
 									name:_hadEntered ? 'Drag Over' : 'Drag Enter',
 									dragObject:m
@@ -167,19 +167,19 @@ Uize.module ({
 						_updateTimeout && clearTimeout (_updateTimeout);
 						var
 							_dropTargetsLength = _dropTargets.length,
-							_coords = _Uize_Node.getCoords (m.getNode()),
+							_coords = _Uize_Dom_Pos.getCoords (m.getNode()),
 							_droppedOn = []
 						;
 
 						for (_dropTargetIndex = _dropTargetsLength; --_dropTargetIndex >= 0;) {
-							var 
+							var
 								_currDropTarget = _dropTargets [_dropTargetIndex],
 								_currDropTargetWidget = _currDropTarget._widget,
 								_instanceId = _currDropTargetWidget.instanceId,
-								_currDropTargetNodeCoords = _Uize_Node.getCoords((_currDropTarget._node || (_currDropTarget._node = _currDropTargetWidget.getNode ())))
+								_currDropTargetNodeCoords = _Uize_Dom_Pos.getCoords((_currDropTarget._node || (_currDropTarget._node = _currDropTargetWidget.getNode ())))
 							;
 
-							if (_Uize_Node.doRectanglesOverlap (_coords.left, _coords.top, _coords.width, _coords.height, _currDropTargetNodeCoords.left, _currDropTargetNodeCoords.top, _currDropTargetNodeCoords.width, _currDropTargetNodeCoords.height)) {
+							if (_Uize_Dom_Pos.doRectanglesOverlap (_coords.left, _coords.top, _coords.width, _coords.height, _currDropTargetNodeCoords.left, _currDropTargetNodeCoords.top, _currDropTargetNodeCoords.width, _currDropTargetNodeCoords.height)) {
 								_currDropTargetWidget.fire ({
 									name:'Drop',
 									dragObject:m,

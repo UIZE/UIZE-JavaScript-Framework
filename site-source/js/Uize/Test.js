@@ -13,7 +13,7 @@
 	type: Class
 	importance: 9
 	codeCompleteness: 50
-	docCompleteness: 85
+	docCompleteness: 80
 */
 
 /*?
@@ -133,6 +133,15 @@ Uize.module ({
 								- compare to the =expect= instance method
 								- this method is one of the many available `expectation methods`
 					*/
+				},
+
+				expectNotSameAs:function (_expectedNotSameAsValue,_value) {
+					return _expectSuccess (
+						this,
+						!Uize.isSameAs (_value,_expectedNotSameAsValue),
+						function () {return 'not same as ' + Uize.Json.to (_expectedNotSameAsValue)},
+						_valueToJsonSerializer (_value)
+					);
 				},
 
 				expectNonNull:function (_value) {

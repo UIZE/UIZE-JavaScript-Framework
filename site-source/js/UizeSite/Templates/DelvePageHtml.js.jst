@@ -27,12 +27,12 @@ Uize.require (
 		Uize.require (
 			[
 				'UizeSite.Templates.DelveUiHtml',
-				'Uize.Node',
+				'Uize.Dom.Basics',
 				'UizeSite.Delve'
 			],
 			function () {
 				/*** inject the guts of the page ***/
-					Uize.Node.injectHtml (document.body,UizeSite.Templates.DelveUiHtml.process ());
+					Uize.Dom.Basics.injectHtml (document.body,UizeSite.Templates.DelveUiHtml.process ());
 
 				/*** create the example page widget ***/
 					var _page = window.page = UizeSite.Delve ({baseUrl:<%= _baseUrl -> json %>,window:top.opener});

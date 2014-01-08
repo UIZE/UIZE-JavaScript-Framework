@@ -106,26 +106,8 @@ Code Size Optimization
 		Uize.Class
 			Remove =Uize.Class.valueOf= static method.
 
-		Uize.Node
-			Factor out Positioning Methods
-				Factor out the positioning-related methods into a separate =Uize.Node.Pos= module.
-
-				- =Uize.Node.getCoords=
-				- =Uize.Node.doRectanglesOverlap=
-				- =Uize.Node.setCoords=
-				- =Uize.Node.centerInWindow=
-				- =Uize.Node.setAbsPos=
-				- =Uize.Node.getEventAbsPos=
-				- =Uize.Node.setAbsPosAdjacentTo=
-
 		Uize.Widget
 			Specific features to be decided.
-
-	Improvements in Uize.Widget
-		Implement Way of Declaring UI Wirers
-			Implement a new feature for UI wirers for widgets and switch away from old =wireUi= approach.
-
-			Gone will be the need for the "if (this.isWired)" safety wrapper and the "_superclass.doMy ('wireUi')" call to the superclass' implementation.
 
 	Tougher to Accomplish
 		Eliminate Uize.Class Dependency in Uize.Node

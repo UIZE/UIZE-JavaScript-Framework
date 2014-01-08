@@ -27,14 +27,14 @@ Uize.module ({
 	name:'Uize.Widget.Bevel',
 	required:[
 		'Uize.Node',
-		'Uize.Node.Util'
+		'Uize.Dom.Util'
 	],
 	builder:function (_superclass) {
 		'use strict';
 
 		var
 			/*** Variables for Scruncher Optimization ***/
-				_Uize_Node = Uize.Node
+				_isIe = Uize.Node.isIe
 		;
 
 		/*** Private Instance Methods ***/
@@ -47,10 +47,10 @@ Uize.module ({
 					m._imageDims [0] = _node.offsetWidth;
 					m._imageDims [1] = _node.offsetHeight;
 					var
-						_boxModelDimOffset = (_Uize_Node.isIe == 'Microsoft Internet Explorer' && document.compatMode != 'CSS1Compat') ? 0 : m._thickness * 2,
+						_boxModelDimOffset = (_isIe && document.compatMode != 'CSS1Compat') ? 0 : m._thickness * 2,
 						_borderCommon = 'solid ' + m._thickness + 'px ',
 						_html =
-							'<div style="width:' + (m._imageDims [0] - _boxModelDimOffset) + 'px; height:' + (m._imageDims [1] - _boxModelDimOffset) + 'px; border-left:' + _borderCommon + '#ccc; border-top:' + _borderCommon + '#fff; border-right:' + _borderCommon + '#444; border-bottom:' + _borderCommon + '#000;' + _Uize_Node.Util.getOpacityStr (m._opacity) + '">' +
+							'<div style="width:' + (m._imageDims [0] - _boxModelDimOffset) + 'px; height:' + (m._imageDims [1] - _boxModelDimOffset) + 'px; border-left:' + _borderCommon + '#ccc; border-top:' + _borderCommon + '#fff; border-right:' + _borderCommon + '#444; border-bottom:' + _borderCommon + '#000;' + Uize.Dom.Util.getOpacityStr (m._opacity) + '">' +
 							'&nbsp' +
 							'</div>'
 					;

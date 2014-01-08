@@ -112,7 +112,7 @@ Uize.require (
 		'UizeSite.Page.Example.library',
 		'UizeSite.Page.Example',
 		'Uize.Widget.CollectionItem.Zooming',
-		'Uize.Node',
+		'Uize.Dom.Basics',
 		'Uize.Url'
 	],
 	function () {
@@ -136,7 +136,7 @@ Uize.require (
 
 		/*** wire up image selector links to set image for zooming collection item upon click ***/
 			page.wireNode (
-				Uize.Node.find ({className:'imageSelector'}),
+				Uize.Dom.Basics.find ({className:'imageSelector'}),
 				'click',
 				function () {
 					zoomingCollectionItem.set ({

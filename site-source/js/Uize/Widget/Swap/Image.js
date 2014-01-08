@@ -25,7 +25,10 @@
 
 Uize.module ({
 	name:'Uize.Widget.Swap.Image',
-	required:'Uize.Node',
+	required:[
+		'Uize.Node',
+		'Uize.Dom.Util'
+	],
 	builder:function (_superclass) {
 		'use strict';
 
@@ -141,7 +144,7 @@ Uize.module ({
 							m = this,
 							_shellNode = this.getNode (),
 							_shellSize = _Uize_Node.getDimensions (_shellNode),
-							_background = input.background || _Uize_Node.Util.getEffectiveBgColor (_shellNode)
+							_background = input.background || Uize.Dom.Util.getEffectiveBgColor (_shellNode)
 						;
 						function _getItemTag (_itemNo) {
 							return (

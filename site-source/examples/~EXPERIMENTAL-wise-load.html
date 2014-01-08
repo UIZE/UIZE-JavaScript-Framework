@@ -4,7 +4,7 @@
 <head>
 	<title>Lazy Loading of Images | JavaScript Examples | UIZE JavaScript Framework</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-	<meta name="keywords" content="Uize.Node"/>
+	<meta name="keywords" content="Uize.Dom.Basics Uize.Dom.Pos"/>
 	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
 	<link rel="stylesheet" href="../css/page.css"/>
 	<link rel="stylesheet" href="../css/page.example.css"/>
@@ -36,7 +36,7 @@
 			<div id="page-actions" class="pageActions"><a href="source-code/wise-load.html" class="buttonLink">SOURCE</a></div>
 		</div>
 	</h1>
-	
+
 	<!-- scrollable DIV containing lots and lots of thumbnail images -->
 
 	<center>
@@ -91,7 +91,8 @@ Uize.require (
 	[
 		'UizeSite.Page.Example.library',
 		'UizeSite.Page.Example',
-		'Uize.Node'
+		'Uize.Dom.Basics',
+		'Uize.Dom.Pos'
 	],
 	function () {
 		'use strict';
@@ -104,7 +105,7 @@ Uize.require (
 
 		/*** find all images that need "wise load" applied to them ***/
 			var
-				_imageNodes = Uize.Node.find ({tagName:'IMG'}),
+				_imageNodes = Uize.Dom.Basics.find ({tagName:'IMG'}),
 				_imagesToLazyLoad = []
 			;
 			for (var _imageNo = -1; ++_imageNo < _imageNodes.length;)
@@ -116,14 +117,14 @@ Uize.require (
 				if (_imagesToLazyLoad.length) {
 					for (var _imageNo = -1; ++_imageNo < _imagesToLazyLoad.length;) {
 						var _image = _imagesToLazyLoad [_imageNo];
-						if (_image && Uize.Node.getCoords (_image).seen) {
+						if (_image && Uize.Dom.Pos.getCoords (_image).seen) {
 							_image.src = _image.alt;
 							_imagesToLazyLoad.splice (_imageNo--,1);
 						}
 					}
 				}
 			}
-			Uize.Node.wire ('scrollingDiv','scroll',loadImagesBecomingSeen);
+			Uize.Dom.Basics.wire ('scrollingDiv','scroll',loadImagesBecomingSeen);
 
 		loadImagesBecomingSeen ();
 	}

@@ -25,7 +25,7 @@
 
 Uize.module ({
 	name:'Uize.Widget.Tree.MenuAbstract',
-	required:'Uize.Node',
+	required:'Uize.Dom.Pos',
 	builder:function (_superclass) {
 		'use strict';
 
@@ -117,7 +117,7 @@ Uize.module ({
 
 								/*** position the submenu ***/
 									m.setNodeStyle (_itemChildrenNode,{zIndex:_zIndex + _depth});
-									Uize.Node.setAbsPosAdjacentTo (
+									Uize.Dom.Pos.setAbsPosAdjacentTo (
 										_itemChildrenNode,
 										m.getNode (_itemSpecifier + 'TitleLink'),
 										_depth ? 'x' : 'y'

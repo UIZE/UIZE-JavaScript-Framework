@@ -1,7 +1,7 @@
 /*______________
 |       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
 |     /      /  |   ---------------------------------------------------
-|    /    O /   |    MODULE : Uize.Node.CssModule Class
+|    /    O /   |    MODULE : Uize.Dom.CssModule Class
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
 | /____/ /__/_| | COPYRIGHT : (c)2013 UIZE
@@ -18,21 +18,22 @@
 
 /*?
 	Introduction
-		The =Uize.Node.CssModule= class....
+		The =Uize.Dom.CssModule= class....
 
 		*DEVELOPERS:* `Chris van Rensburg`
 */
 
 Uize.module ({
-	name:'Uize.Node.CssModule',
+	name:'Uize.Dom.CssModule',
 	superclass:'Uize.Class',
 	builder:function (_superclass) {
 		'use strict';
 
 		/*** General Variables ***/
 			var
+				_isIe = typeof navigator != 'undefined' && navigator.appName == 'Microsoft Internet Explorer',
 				_rulesPerStylesheet =
-					Uize.Node.isIe
+					_isIe
 						? navigator.appVersion.match (/MSIE (\d+(\.\d*)?)/) [1] < 10 ? 4095 : 65534
 							/*
 								http://blogs.msdn.com/b/ieinternals/archive/2011/05/14/internet-explorer-stylesheet-rule-selector-import-sheet-limit-maximum.aspx
@@ -63,7 +64,7 @@ Uize.module ({
 						_head.appendChild (_styleNode);
 
 						if (_styleSheets.length == _previousStyleSheetsLength) {
-							if (Uize.Node.isIe) {
+							if (_isIe) {
 								/*** find all stylesheets created by UIZE ***/
 									var
 										_uizeStyleSheets = [],

@@ -159,8 +159,8 @@ Uize.module ({
 						var _syncResizerToDialogPosition = function () {
 							if (m.isWired && m.get ('shown')) {
 								var _rootNode = m.getNode ();
-								if (Uize.Node.getStyle (_rootNode,'display') != 'none') {
-									var _rootNodeCoords = Uize.Node.getCoords (_rootNode);
+								if (_Uize_Node.getStyle (_rootNode,'display') != 'none') {
+									var _rootNodeCoords = _Uize_Node.getCoords (_rootNode);
 									_resizer.set ({
 										left:_rootNodeCoords.left,
 										top:_rootNodeCoords.top,

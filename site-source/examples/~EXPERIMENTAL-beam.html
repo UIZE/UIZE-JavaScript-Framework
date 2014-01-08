@@ -49,7 +49,7 @@ Uize.require (
 	[
 		'UizeSite.Page.Example.library',
 		'UizeSite.Page.Example',
-		'Uize.Node',
+		'Uize.Dom.Pos',
 		'Uize.Widget.Resizer.Marquee',
 		'Uize.Widget.Beam',
 		'Uize.Widget.Mask'
@@ -81,7 +81,7 @@ Uize.require (
 			var beam = page.addChild ('beam',Uize.Widget.Beam,{direction:'right'});
 
 		/*** display marquee position while dragging ***/
-			var marqueeShellDimensions = Uize.Node.getDimensions (marquee.getNode ('shell'));
+			var marqueeShellDimensions = Uize.Dom.Pos.getDimensions (marquee.getNode ('shell'));
 			function updateBeam () {
 				mask.set (marquee.getCoords ());
 				var marqueeRight = marquee.get ('left') + marquee.get ('width');
@@ -91,7 +91,7 @@ Uize.require (
 					thinSize:marquee.get ('height') / marqueeShellDimensions.height,
 					thinAlign:marquee.get ('top') / (marqueeShellDimensions.height - marquee.get ('height')) || 0
 				});
-				Uize.Node.setCoords (beam.getNode (),{left:marqueeRight});
+				Uize.Dom.Pos.setCoords (beam.getNode (),{left:marqueeRight});
 			}
 			marquee.wire ('Position Changed',updateBeam);
 			updateBeam ();

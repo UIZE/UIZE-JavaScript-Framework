@@ -20,7 +20,7 @@ Uize.module ({
 	name:'UizeSite.Page.Doc',
 	required:[
 		'Uize.Node',
-		'Uize.Node.Tree',
+		'Uize.Dom.Tree',
 		'Uize.Widgets.NavTree.List.Widget',
 		'Uize.Url',
 		'Uize.Widgets.Tooltip.Widget',
@@ -92,7 +92,7 @@ Uize.module ({
 						/*** populate contents tree's data ***/
 							var
 								_contents = m.children.contents,
-								_contentsTreeItems = Uize.Node.Tree.getTreeFromList (_contents.getNode ('shell'))
+								_contentsTreeItems = Uize.Dom.Tree.getTreeFromList (_contents.getNode ('shell'))
 							;
 							m.set ({contentsTreeItems:_contentsTreeItems});
 							_contents.set ({items:_contentsTreeItems});

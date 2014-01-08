@@ -85,7 +85,7 @@ What They Look Like
 						UizeSite.WidgetToGoPage
 
 					// Modules with a high likelihood of being needed by one widget or another
-						Uize.Node.Event
+						Uize.Dom.Event
 						Uize.Fade
 						Uize.Tooltip
 						Uize.Widget.Button
@@ -148,7 +148,8 @@ What They Look Like
 				....................................................................
 				/* Library Contents
 					Uize.Class
-					Uize.Node
+					Uize.Dom
+					Uize.Dom.Basics
 					Uize.Widget
 					Uize.Widget.Page
 				*/
@@ -156,7 +157,8 @@ What They Look Like
 				Uize.module ({
 					name:'Uize.Widget.Page.library',
 					required:[
-						'Uize.Node',        // <-- WRONG! Don't require listed modules
+						'Uize.Dom',         // <-- WRONG! Don't require listed modules
+						'Uize.Dom.Basics',  // <-- WRONG! Don't require listed modules
 						'Uize.Widget',      // <-- WRONG! Don't require listed modules
 						'Uize.Widget.Page'  // <-- WRONG! Don't require listed modules
 					]

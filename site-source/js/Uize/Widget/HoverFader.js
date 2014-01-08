@@ -51,7 +51,7 @@
 		Any Nodes
 			The nodes that you wire up with this widget can be of any type: links, divs, spans, etc.
 
-			Each instance of the =Uize.Widget.HoverFader= class manages the hover fade effect for a set of nodes. The class doesn't much care what the relationship between the nodes is. They can be clumped together in the layout in the form of a set of menu links, or they can be inline links interspersed throughout a paragraph, or just plain old anywhere. To supply the class with your nodes, you can use any means for gathering those nodes. One approach would be to use the =Uize.Node.find= static method to find nodes that match given criteria - such as class name, or tag type, or a combination thereof.
+			Each instance of the =Uize.Widget.HoverFader= class manages the hover fade effect for a set of nodes. The class doesn't much care what the relationship between the nodes is. They can be clumped together in the layout in the form of a set of menu links, or they can be inline links interspersed throughout a paragraph, or just plain old anywhere. To supply the class with your nodes, you can use any means for gathering those nodes. One approach would be to use the =Uize.Dom.Basics.find= static method to find nodes that match given criteria - such as class name, or tag type, or a combination thereof.
 
 		Progressive Enhancement
 			The =Uize.Widget.HoverFader= widget class falls into the category of [[http://en.wikipedia.org/wiki/Progressive_enhancement][Progressive Enhancement]] (or "unobtrusive JavaScript") widgets.
@@ -67,7 +67,7 @@
 				'menuHoverFader',
 				Uize.Widget.HoverFader,
 				{
-					nodes:Uize.Node.find ({root:'menu',className:/\bmenuLink\b/}),
+					nodes:Uize.Dom.Basics.find ({root:'menu',className:/\bmenuLink\b/}),
 					defaultStyle:{color:'bbb',backgroundColor:'000',borderColor:'555'},
 					hoverStyle:{color:'fff',backgroundColor:'77a',borderColor:'000'},
 					fadeIn:{duration:500,curve:Uize.Fade.celeration (0,1)},
@@ -76,7 +76,7 @@
 			);
 			..........................................................................
 
-			In the above example, the =Uize.Widget.HoverFader= instance is being added as a child widget to a page widget instance, so the effect will be wired up when the page widget instance is wired. The value for the =nodes= state property specifies the nodes that should be wired up with the effect. The nodes being supplied in this case are obtained through a call to the =Uize.Node.find= static method. Based on the options specified in the call, the =Uize.Node.find= method will find all nodes with a class name of "menuLink" that are in a node tree with a node of the id "menu" at its root.
+			In the above example, the =Uize.Widget.HoverFader= instance is being added as a child widget to a page widget instance, so the effect will be wired up when the page widget instance is wired. The value for the =nodes= state property specifies the nodes that should be wired up with the effect. The nodes being supplied in this case are obtained through a call to the =Uize.Dom.Basics.find= static method. Based on the options specified in the call, the =Uize.Dom.Basics.find= method will find all nodes with a class name of "menuLink" that are in a node tree with a node of the id "menu" at its root.
 
 			The =defaultStyle= state property specifies the color style property values for the default state of the nodes (ie. when not mousing over them), in this case light gray text on a black background with a dark gray border. The =hoverStyle= state property specifies the color style property values for the hover state of the nodes (ie. when mousing over them), in this case white text on a pastel blue background with a black border.
 
@@ -88,7 +88,7 @@ Uize.module ({
 	required:[
 		'Uize.Fx',
 		'Uize.Fade.xFactory',
-		'Uize.Node'
+		'Uize.Dom.Basics'
 	],
 	builder:function (_superclass) {
 		'use strict';
@@ -199,7 +199,7 @@ Uize.module ({
 					;
 					if (!m.isWired && _nodes) {
 						m.wireNode (
-							m._nodes = Uize.Node.find (_nodes),
+							m._nodes = Uize.Dom.Basics.find (_nodes),
 							{
 								mouseover:function () {_mouseoverNode (m,this)},
 								mouseout:function () {_mouseoutNode (m,this)}
@@ -381,7 +381,7 @@ Uize.module ({
 							- a *string*, being the id of a single node to wire up
 							- a *node reference* to a single node to wire up
 							- an *array* of nodes to wire up, where each element can be a string, or node reference
-							- an *object*, being a find expression (see the =Uize.Node.find= static method)
+							- an *object*, being a find expression (see the =Uize.Dom.Basics.find= static method)
 
 							EXAMPLE 1
 							..........................................

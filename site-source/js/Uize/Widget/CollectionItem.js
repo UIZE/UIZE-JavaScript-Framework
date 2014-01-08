@@ -37,7 +37,7 @@ Uize.module ({
 	required:[
 		'Uize.Node',
 		'Uize.Widget.Button',
-		'Uize.Node.Classes'
+		'Uize.Dom.Classes'
 	],
 	builder:function (_superclass) {
 		'use strict';
@@ -70,7 +70,7 @@ Uize.module ({
 			function _updateUiState (m) {
 				if (m.isWired) {
 					/*** set CSS class for root node ***/
-						Uize.Node.Classes.setState(
+						Uize.Dom.Classes.setState(
 							m.getNode(),
 							['', m._cssClassOver, m._cssClassActive],
 							(m._selected ? 2 : m._over && 1) || 0
@@ -92,7 +92,7 @@ Uize.module ({
 							_cssClassImageOver = m._cssClassImageOver
 						;
 						typeof _cssClassImage == 'string' && typeof _cssClassImageOver == 'string' &&
-							Uize.Node.Classes.setState(
+							Uize.Dom.Classes.setState(
 								m.getNode('preview'),
 								[_cssClassImage, _cssClassImageOver],
 								m._over
@@ -195,7 +195,7 @@ Uize.module ({
 				wireUi:function () {
 					var m = this;
 					if (!m.isWired) {
-						// NOTE: Ideally want to get rid of cssClassBase because we're using Uize.Node.Classes, but for backwards compatibility, need to still
+						// NOTE: Ideally want to get rid of cssClassBase because we're using Uize.Dom.Classes, but for backwards compatibility, need to still
 						// minimally support it.  If there was a case that an application was passing in cssClassBase in order to get the item to have a certain
 						// class (and it wasn't already in the markup), we need to set it here, so that would still operate correctly.
 						var _rootNode = m.getNode();

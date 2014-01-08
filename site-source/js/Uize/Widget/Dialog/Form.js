@@ -27,14 +27,14 @@ Uize.module ({
 	name:'Uize.Widget.Dialog.Form',
 	required:[
 		'Uize.Data',
-		'Uize.Node.Form'
+		'Uize.Dom.Form'
 	],
 	builder:function (_superclass) {
 		'use strict';
 
 		var
 			/*** Variables for Scruncher Optimization ***/
-				_Uize_Node_Form = Uize.Node.Form
+				_Uize_Dom_Form = Uize.Dom.Form
 		;
 
 		return _superclass.subclass ({
@@ -67,7 +67,7 @@ Uize.module ({
 						},
 						'Before Show': function () {
 							m._theForm && m._formData && m._isModified &&
-								_Uize_Node_Form.setValues(m._formData)
+								_Uize_Dom_Form.setValues(m._formData)
 							;
 						}
 					});
@@ -80,7 +80,7 @@ Uize.module ({
 						/*** initialization ***/
 							var _theForm = m._theForm = m.getNode('form');
 							if (_theForm && !m._formData)
-								m._formData = _Uize_Node_Form.getValues(_theForm);
+								m._formData = _Uize_Dom_Form.getValues(_theForm);
 
 							_superclass.doMy (m,'wireUi');
 					}
@@ -89,7 +89,7 @@ Uize.module ({
 				getResult:function () {
 					var
 						m = this,
-						_formData = _Uize_Node_Form.getValues(m._theForm)
+						_formData = _Uize_Dom_Form.getValues(m._theForm)
 					;
 					return {isModified:!Uize.Data.identical(m._formData, _formData), formData:_formData};
 				}
@@ -100,7 +100,7 @@ Uize.module ({
 					name:'formData',
 					value:null,
 					onChange:function () {
-						_Uize_Node_Form.setValues(this._formData);
+						_Uize_Dom_Form.setValues(this._formData);
 					}
 				}
 			}

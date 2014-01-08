@@ -467,7 +467,7 @@ Event Wiring Basics
 
 	### Cross-browser Event Object Issues
 
-	### The Uize.Node.Event Module
+	### The Uize.Dom.Event Module
 		.
 
 		### show preventDefault use case

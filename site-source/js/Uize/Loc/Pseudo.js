@@ -36,6 +36,9 @@ Uize.module ({
 		'use strict';
 
 		var
+			/*** Variables for Scruncher Optimization ***/
+				_undefined,
+
 			/*** Variables for Performance Optimization ***/
 				_repeat = Uize.Str.Repeat.repeat,
 				_split = Uize.Str.Split.split,
@@ -114,6 +117,16 @@ Uize.module ({
 
 		return Uize.package ({
 			accent:_accentString,
+				/*?
+					Static Methods
+						Uize.Loc.Pseudo.accent
+							.
+
+							SYNTAX
+							.................................................
+							accentedSTR = Uize.Loc.Pseudo.accent (sourceSTR);
+							.................................................
+				*/
 
 			pseudoLocalize:function (_sourceStr,_options) {
 				/*** default options ***/
@@ -121,11 +134,11 @@ Uize.module ({
 						_options = _sacredEmptyObject
 					;
 					var
+						_accent = _options.accent != _undefined ? _options.accent : true,
 						_wordSplitter = _options.wordSplitter || _defaultWordSplitterRegExp,
 						_expansion = Uize.toNumber (_options.expansion,1.3),
 						_expansionChar = _options.expansionChar || '_',
-						_wrapper = _options.wrapper != undefined ? _options.wrapper : '[]',
-						_accent = _options.accent !== false
+						_wrapper = _options.wrapper != _undefined ? _options.wrapper : '[]'
 					;
 
 				/*** calculate total word char count (to be used in expansion) ***/
@@ -183,6 +196,268 @@ Uize.module ({
 						).join ('') +
 						_wrapperCloser
 					);
+
+				/*?
+					Static Methods
+						Uize.Loc.Pseudo.pseudoLocalize
+							Returns a string, being a pseudo-localized version of the specified source string.
+
+							`Pseudo-localize a String Using the Option Defaults`
+							................................................................
+							pseudoLocalizedSTR = Uize.Loc.Pseudo.pseudoLocalize (sourceSTR);
+							................................................................
+
+							`Pseudo-localize a String, Specifying Custom Options`
+							...........................................................................
+							pseudoLocalizedSTR = Uize.Loc.Pseudo.pseudoLocalize (sourceSTR,optionsOBJ);
+							...........................................................................
+
+							`Pseudo-localize a String, But Without Accenting`
+							..................................................................................
+							pseudoLocalizedSTR = Uize.Loc.Pseudo.pseudoLocalize (sourceSTR,{accenting:false});
+							..................................................................................
+
+							`Pseudo-localize a String, But Without Expansion`
+							..............................................................................
+							pseudoLocalizedSTR = Uize.Loc.Pseudo.pseudoLocalize (sourceSTR,{expansion:0});
+							..............................................................................
+
+							`Pseudo-localize a String, Specifying a Custom Expansion Factor`
+							...............................................................................................
+							pseudoLocalizedSTR = Uize.Loc.Pseudo.pseudoLocalize (sourceSTR,{expansion:expansionFactorNUM});
+							...............................................................................................
+
+							`Pseudo-localize a String, Specifying a Custom Expansion Character`
+							.....................................................
+							pseudoLocalizedSTR = Uize.Loc.Pseudo.pseudoLocalize (
+								sourceSTR,
+								{expansionChar:expansionCharSTR}
+							);
+							.....................................................
+
+							`Pseudo-localize a String, But Without Adding a Wrapper`
+							.............................................................................
+							pseudoLocalizedSTR = Uize.Loc.Pseudo.pseudoLocalize (sourceSTR,{wrapper:''});
+							.............................................................................
+
+							`Pseudo-localize a String, Specifying a Custom Wrapper`
+							.....................................................................................
+							pseudoLocalizedSTR = Uize.Loc.Pseudo.pseudoLocalize (sourceSTR,{wrapper:wrapperSTR});
+							.....................................................................................
+
+							`Pseudo-localize a String, Specifying a Custom Word Splitter`
+							.....................................................
+							pseudoLocalizedSTR = Uize.Loc.Pseudo.pseudoLocalize (
+								sourceSTR,
+								{wordSplitter:wordSplitterSTRorREGEXP}
+							);
+							.....................................................
+
+							Pseudo-localize a String Using the Option Defaults
+								In the simplest usage, a source string can be pseudo-localized using the option defaults by specifying the source string as the single argument. 
+
+								SYNTAX
+								................................................................
+								pseudoLocalizedSTR = Uize.Loc.Pseudo.pseudoLocalize (sourceSTR);
+								................................................................
+
+								EXAMPLE
+								...
+								Uize.Loc.Pseudo.pseudoLocalize ('This pseudo-localization thing is pretty cool!');
+								...
+
+								RESULT
+								............................................................
+								[Ţĥîš_ þšéûðö-ļöçåļîžåţîöñ______ ţĥîñĝ_ îš_ þŕéţţý__ çööļ_!]
+								............................................................
+
+							Pseudo-localize a String, Specifying Custom Options
+								In cases where the option defaults do not satisfy the needs, a string can be pseudo-localized with custom options by speciying an options object for the optional =optionsOBJ= parameter.
+
+								SYNTAX
+								...........................................................................
+								pseudoLocalizedSTR = Uize.Loc.Pseudo.pseudoLocalize (sourceSTR,optionsOBJ);
+								...........................................................................
+	
+								optionsOBJ
+									The value for the =optionsOBJ= parameter should be an object containing any of the following option properties, in any combination...
+	
+									accent
+										A boolean, specifying whether ot not accenting of characters should be applied.
+
+										- when the value =null= or =undefined= is specified for this property, its value will be defaulted to =true= and character accenting will be applied
+										- when a non-nully value is specified for this property, then character accenting will be applied if the value is truthy and not applied if the value is falsy
+										- to see an example of this option in use, see the use case `Pseudo-localize a String, But Without Accenting`
+
+									expansion
+										A number, specifying an expansion factor to be used when producing a pseudo-localized string from the source string.
+
+										- when a number value less than or equal to =1= is specified for this property, then no expansion will take place
+										- when a number value greater than =1= is specified for this property, then the words of the source string will be expanded by the factor specified by the =expansioin= property, using the expansion character specified by the companion =expansionChar= property (eg. if the value =2= is specified, then the word length in the pseudo-localized string will be double that of the source string)
+										- when the value =null= or =undefined= is specified for this property, its value will be defaulted to =1.3=
+										- when a non-number value is specified for this property, it will be coerced to a number, so specifying the string ='1.5'= would be equivalent to specifying the number =1.5=
+										- to see examples of this option in use, see the use cases `Pseudo-localize a String, But Without Expansion` and `Pseudo-localize a String, Specifying a Custom Expansion Factor`
+
+									expansionChar
+										A string, specifying a character that should be used for the expansion of words in the source string.
+	
+										- when the value =null= or =undefined= is specified for this property, then its value will be defaulted to the "_" (underscore) character
+										- the character specified for this option will be repeated as necessary to expand words from the source string to produce words in the pseudo-localized string
+										- to see an example of this option in use, see the use case `Pseudo-localize a String, Specifying a Custom Expansion Character`
+
+									wordSplitter
+										.
+	
+									wrapper
+										.
+
+							Pseudo-localize a String, But Without Accenting
+
+								SYNTAX
+								...............................................................................
+								pseudoLocalizedSTR = Uize.Loc.Pseudo.pseudoLocalize (sourceSTR,{accent:false});
+								...............................................................................
+
+								EXAMPLE
+								....................................................
+								Uize.Loc.Pseudo.pseudoLocalize (
+									'This pseudo-localization thing is pretty cool!',
+									{accent:false}
+								);
+								....................................................
+
+								RESULT
+								............................................................
+								[This_ pseudo-localization______ thing_ is_ pretty__ cool_!]
+								............................................................
+								
+							Pseudo-localize a String, But Without Expansion
+
+								SYNTAX
+								..............................................................................
+								pseudoLocalizedSTR = Uize.Loc.Pseudo.pseudoLocalize (sourceSTR,{expansion:0});
+								..............................................................................
+
+								EXAMPLE
+								....................................................
+								Uize.Loc.Pseudo.pseudoLocalize (
+									'This pseudo-localization thing is pretty cool!',
+									{expansion:0}
+								);
+								....................................................
+
+								RESULT
+								................................................
+								[Ţĥîš þšéûðö-ļöçåļîžåţîöñ ţĥîñĝ îš þŕéţţý çööļ!]
+								................................................
+								
+							Pseudo-localize a String, Specifying a Custom Expansion Factor
+
+								SYNTAX
+								...............................................................................................
+								pseudoLocalizedSTR = Uize.Loc.Pseudo.pseudoLocalize (sourceSTR,{expansion:expansionFactorNUM});
+								...............................................................................................
+
+								EXAMPLE
+								....................................................
+								Uize.Loc.Pseudo.pseudoLocalize (
+									'This pseudo-localization thing is pretty cool!',
+									{expansion:2}
+								);
+								....................................................
+
+								RESULT
+								........................................................................................
+								[Ţĥîš____ þšéûðö-ļöçåļîžåţîöñ___________________ ţĥîñĝ_____ îš__ þŕéţţý______ çööļ____!]
+								........................................................................................
+								
+							Pseudo-localize a String, Specifying a Custom Expansion Character
+
+								SYNTAX
+								.....................................................
+								pseudoLocalizedSTR = Uize.Loc.Pseudo.pseudoLocalize (
+									sourceSTR,
+									{expansionChar:expansionCharSTR}
+								);
+								.....................................................
+
+								EXAMPLE
+								....................................................
+								Uize.Loc.Pseudo.pseudoLocalize (
+									'This pseudo-localization thing is pretty cool!',
+									{expansionChar:'~'}
+								);
+								....................................................
+
+								RESULT
+								............................................................
+								[Ţĥîš~ þšéûðö-ļöçåļîžåţîöñ~~~~~~ ţĥîñĝ~ îš~ þŕéţţý~~ çööļ~!]
+								............................................................
+								
+							Pseudo-localize a String, But Without Adding a Wrapper
+
+								SYNTAX
+								.............................................................................
+								pseudoLocalizedSTR = Uize.Loc.Pseudo.pseudoLocalize (sourceSTR,{wrapper:''});
+								.............................................................................
+
+								EXAMPLE
+								....................................................
+								Uize.Loc.Pseudo.pseudoLocalize (
+									'This pseudo-localization thing is pretty cool!',
+									{wrapper:''}
+								);
+								....................................................
+
+								RESULT
+								..........................................................
+								Ţĥîš_ þšéûðö-ļöçåļîžåţîöñ______ ţĥîñĝ_ îš_ þŕéţţý__ çööļ_!
+								..........................................................
+								
+							Pseudo-localize a String, Specifying a Custom Wrapper
+
+								SYNTAX
+								.....................................................................................
+								pseudoLocalizedSTR = Uize.Loc.Pseudo.pseudoLocalize (sourceSTR,{wrapper:wrapperSTR});
+								.....................................................................................
+
+								EXAMPLE
+								....................................................
+								Uize.Loc.Pseudo.pseudoLocalize (
+									'This pseudo-localization thing is pretty cool!',
+									{wrapper:'[-  -]'}
+								);
+								....................................................
+
+								RESULT
+								................................................................
+								[- Ţĥîš_ þšéûðö-ļöçåļîžåţîöñ______ ţĥîñĝ_ îš_ þŕéţţý__ çööļ_! -]
+								................................................................
+
+							Pseudo-localize a String, Specifying a Custom Word Splitter
+
+								SYNTAX
+								.....................................................
+								pseudoLocalizedSTR = Uize.Loc.Pseudo.pseudoLocalize (
+									sourceSTR,
+									{wordSplitter:wordSplitterSTRorREGEXP}
+								);
+								.....................................................
+
+								EXAMPLE
+								......................................................................
+								Uize.Loc.Pseudo.pseudoLocalize (
+									'<div>This <b>pseudo-localization</b> thing is pretty cool!</div>',
+									{wordSplitter:/((?:<.+?>|\{[^\}]+\}|\s|[\?!\.;,&=\(\)\[\]"])+)/g}
+								);
+								......................................................................
+
+								RESULT
+								..............................................................................
+								[<div>Ţĥîš_ <b>þšéûðö-ļöçåļîžåţîöñ______</b> ţĥîñĝ_ îš_ þŕéţţý__ çööļ_!</div>]
+								..............................................................................
+
+				*/
 			}
 		});
 	}

@@ -306,7 +306,7 @@ Uize.module ({
 	name:'Uize.Widget.CalculatorAbstract',
 	required:[
 		'Uize.Widget.TextInput',
-		'Uize.Node.Event'
+		'Uize.Dom.Event'
 	],
 	builder:function (_superclass) {
 		'use strict';
@@ -413,12 +413,12 @@ Uize.module ({
 						_releaseLastButtonClicked ();
 						var
 							_domEvent = _event.domEvent,
-							_isKeyEscape = Uize.Node.Event.isKeyEscape (_domEvent),
+							_isKeyEscape = Uize.Dom.Event.isKeyEscape (_domEvent),
 							_keyChar = _isKeyEscape
 								? ' '
-								: Uize.Node.Event.isKeyEnter (_domEvent)
+								: Uize.Dom.Event.isKeyEnter (_domEvent)
 									? '='
-									: String.fromCharCode (Uize.Node.Event.charCode (_domEvent))
+									: String.fromCharCode (Uize.Dom.Event.charCode (_domEvent))
 						;
 						if (_keyChar) {
 							var _buttonId = _entryCharToButtonIdMap [_keyChar];

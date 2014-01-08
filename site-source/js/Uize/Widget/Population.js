@@ -25,7 +25,7 @@
 
 Uize.module ({
 	name:'Uize.Widget.Population',
-	required:'Uize.Node',
+	required:'Uize.Dom.Basics',
 	builder:function (_superclass) {
 		'use strict';
 
@@ -239,7 +239,7 @@ Uize.module ({
 						m.get ('enabledInherited')
 					) {
 						var _nodeToInjectInto =
-							Uize.Node.getById (m.get ('container')) || m.getNode ('shell') || m.getNode ()
+							Uize.Dom.Basics.getById (m.get ('container')) || m.getNode ('shell') || m.getNode ()
 						;
 						if (_nodeToInjectInto) {
 							if (!m._templateStr) m._templateStr = _nodeToInjectInto.innerHTML;

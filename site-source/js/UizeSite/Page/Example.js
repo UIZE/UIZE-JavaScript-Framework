@@ -20,7 +20,7 @@ Uize.module ({
 	name:'UizeSite.Page.Example',
 	required:[
 		'Uize.Node',
-		'Uize.Node.Classes',
+		'Uize.Dom.Classes',
 		'Uize.Url'
 	],
 	builder:function (_superclass) {
@@ -102,7 +102,7 @@ Uize.module ({
 							var _tour = Uize.Url.fromParams (location.href).tour;
 							if (_tour) {
 								var _documentBody = document.body;
-								Uize.Node.Classes.addClass (_documentBody,'inTour');
+								Uize.Dom.Classes.addClass (_documentBody,'inTour');
 								Uize.Node.injectHtml (_documentBody,'<div id="page-tourBarShell"></div>');
 								Uize.require (
 									'UizeSite.Widgets.TourBar.Widget',

@@ -25,7 +25,7 @@
 
 Uize.module ({
 	name:'Uize.Widget.Swap.Html',
-	required:'Uize.Node',
+	required:'Uize.Dom.Pos',
 	builder:function (_superclass) {
 		'use strict';
 
@@ -62,7 +62,7 @@ Uize.module ({
 			set:{
 				html:{
 					process:function (input) {
-						var _shellSize = Uize.Node.getDimensions (this.getNode ());
+						var _shellSize = Uize.Dom.Pos.getDimensions (this.getNode ());
 						function _getItemTag (_itemNo) {
 							return (
 								'<div id="' + input.idPrefix + '-item' + _itemNo +

@@ -246,7 +246,7 @@ function _eval (_toEval) {
 						_moduleText =
 							'Uize.module ({\n' +
 							'	name:\'' + _moduleName + '\',\n' +
-							'	superclass:\'Uize.Node.CssModule\',\n' +
+							'	superclass:\'Uize.Dom.CssModule\',\n' +
 							'	builder:function (_superclass) {return _superclass.subclass ()}\n' +
 							'});';
 					} else if (_folderExists (_moduleSourcePath.replace (/\.js$/,''))) {

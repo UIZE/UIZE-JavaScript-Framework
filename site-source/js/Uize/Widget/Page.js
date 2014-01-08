@@ -38,7 +38,7 @@
 
 Uize.module ({
 	name:'Uize.Widget.Page',
-	required:'Uize.Node',
+	required:'Uize.Dom.Basics',
 	builder:function (_superclass) {
 		'use strict';
 
@@ -48,7 +48,7 @@ Uize.module ({
 				_false = false,
 				_null = null,
 				_undefined,
-				_Uize_Node = Uize.Node,
+				_Uize_Dom_Basics = Uize.Dom.Basics,
 
 			/*** General Variables ***/
 				_equivalentToTrue = {yes:1,on:1,1:1,'true':1}
@@ -218,10 +218,10 @@ Uize.module ({
 										_documentBody = document.body,
 										_node = _injectionParams.node != undefined
 											? m.getNode (_injectionParams.node)
-											: (_rootNodeId ? _Uize_Node.getById (_rootNodeId + '-shell') : _null) || _documentBody
+											: (_rootNodeId ? _Uize_Dom_Basics.getById (_rootNodeId + '-shell') : _null) || _documentBody
 									;
 
-									_Uize_Node.injectHtml (
+									_Uize_Dom_Basics.injectHtml (
 										_node,
 										_html,
 										_injectionParams.injectMode || (_node == _documentBody ? 'inner bottom' : 'inner replace')
@@ -240,7 +240,7 @@ Uize.module ({
 							}
 						}
 					;
-					_injectionParams.alwaysReplace === _false && _rootNodeId && _Uize_Node.getById (_rootNodeId)
+					_injectionParams.alwaysReplace === _false && _rootNodeId && _Uize_Dom_Basics.getById (_rootNodeId)
 						? _callback ()
 						: m.loadHtml (
 							_htmlParams,
@@ -289,7 +289,7 @@ Uize.module ({
 										injectMode
 											A string, specifying how the HTML should be injected into the node(s) specified by the =node= property.
 
-											The value specified for this property can be any value that can be specified for the =injectModeSTR= parameter of the =Uize.Node.injectHtml= static method and its sister =injectNodeHtml= instance method of the =Uize.Widget= class.
+											The value specified for this property can be any value that can be specified for the =injectModeSTR= parameter of the =Uize.Dom.Basics.injectHtml= static method and its sister =injectNodeHtml= instance method of the =Uize.Widget= class.
 
 											NOTES
 											- optional

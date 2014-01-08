@@ -143,7 +143,7 @@ Uize.module ({
 	name:'Uize.Widget.ImageWipe',
 	required:[
 		'Uize.Node',
-		'Uize.Node.Util',
+		'Uize.Dom.Util',
 		'Uize.Fade',
 		'Uize.Array.Order'
 	],
@@ -729,7 +729,7 @@ Uize.module ({
 							m = this,
 							_shellNode = m.getNode (),
 							_shellSize = _Uize_Node.getDimensions (_shellNode),
-							_background = input.background || _Uize_Node.Util.getEffectiveBgColor (_shellNode),
+							_background = input.background || Uize.Dom.Util.getEffectiveBgColor (_shellNode),
 							_htmlChunks = []
 						;
 						m._imageDims = [_shellSize.width,_shellSize.height];

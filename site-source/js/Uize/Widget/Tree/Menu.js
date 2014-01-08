@@ -26,7 +26,6 @@
 Uize.module ({
 	name:'Uize.Widget.Tree.Menu',
 	superclass:'Uize.Widget.Tree.MenuAbstract',
-	required:'Uize.Node',
 	builder:function (_superclass) {
 		'use strict';
 

@@ -29,7 +29,7 @@ Uize.module ({
 		'Uize.Fx',
 		'Uize.Fade',
 		'Uize.Cookie',
-		'Uize.Node'
+		'Uize.Dom.Pos'
 	],
 	builder:function (_superclass) {
 		'use string';
@@ -59,7 +59,7 @@ Uize.module ({
 						m.getNode (_panelNode),
 						Uize.pairUp (
 							_edge,
-							-m.get (_panelNode + 'Height') || -Uize.Node.getCoords (m.getNode (_panelNode)) [_dimName]
+							-m.get (_panelNode + 'Height') || -Uize.Dom.Pos.getCoords (m.getNode (_panelNode)) [_dimName]
 						),
 						Uize.pairUp (_edge,0),
 						0,
@@ -146,7 +146,7 @@ Uize.module ({
 						/*** workaround for IE6's lack of support for fixed positioning ***/
 							if (navigator.appVersion.indexOf ('MSIE 6') > -1) {
 								function _updateRootNodePositionForIe6 () {
-									var _windowCoords = Uize.Node.getCoords (window);
+									var _windowCoords = Uize.Dom.Pos.getCoords (window);
 									m.setNodeStyle (
 										'',
 										{

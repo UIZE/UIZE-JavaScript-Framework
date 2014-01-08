@@ -103,7 +103,7 @@
 			<div id="page-actions" class="pageActions"><a href="source-code/seven-segment-display-using-css-template.html" class="buttonLink">SOURCE</a></div>
 		</div>
 	</h1>
-	
+
 	<!-- explanation copy -->
 
 	<div class="explanation">
@@ -211,7 +211,7 @@ Uize.require (
 		'Uize.Widget.SegmentDisplay.Seven',
 		'Uize.Templates.SevenSegmentDisplay',
 		'Uize.Templates.SevenSegmentDisplayDimsCss',
-		'Uize.Node',
+		'Uize.Dom.Basics',
 		'Uize.Fade',
 		'Uize.Fade.xFactory',
 		'Uize.Curve'
@@ -243,7 +243,7 @@ Uize.require (
 			);
 
 		/*** use the CSS template to generate the CSS for the seven segment display ***/
-			Uize.Node.injectHtml (
+			Uize.Dom.Basics.injectHtml (
 				document.body,
 				'<style type="text/css">' +
 					Uize.Templates.SevenSegmentDisplayDimsCss.process ({

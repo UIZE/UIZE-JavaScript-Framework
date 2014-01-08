@@ -168,7 +168,7 @@ Uize.require (
 		'UizeSite.Page.Example',
 		'Uize.Widget.Options.Tabbed',
 		'Uize.Json',
-		'Uize.Node.Form',
+		'Uize.Dom.Form',
 		'UizeSite.TestData.Object',
 		'Uize.Widget.V2',
 		'Uize.Widgets.Button.Widget'
@@ -229,14 +229,14 @@ Uize.require (
 				}
 			};
 			function choosePreset (presetName) {
-				Uize.Node.Form.setValues (presets [presetName],page.get ('idPrefix') + '-');
+				Uize.Dom.Form.setValues (presets [presetName],page.get ('idPrefix') + '-');
 			}
 			function serializeUsingCurrentSettings () {
 				page.setNodeValue (
 					'serializedJson',
 					Uize.Json.to (
 						Uize.Json.from (page.getNodeValue ('sourceJson')),
-						Uize.Node.Form.getValues (page.getNode ('paramsTable'),true,page.get ('idPrefix') + '-')
+						Uize.Dom.Form.getValues (page.getNode ('paramsTable'),true,page.get ('idPrefix') + '-')
 					)
 				);
 				tabs.set ({value:'serialized'});

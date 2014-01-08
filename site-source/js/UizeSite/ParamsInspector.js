@@ -23,7 +23,7 @@ Uize.module ({
 		'Uize.Widget.Options.Tabbed',
 		'Uize.Data',
 		'Uize.Json',
-		'Uize.Node.Form',
+		'Uize.Dom.Form',
 		'UizeSite.Templates.ParamsInspector'
 	],
 	builder:function (_superclass) {
@@ -32,7 +32,7 @@ Uize.module ({
 		/*** Private Instance Methods ***/
 			function _choosePreset (m,_presetName) {
 				var _params = m._params;
-				Uize.Node.Form.setValues (
+				Uize.Dom.Form.setValues (
 					Uize.map (
 						m._presets [_presetName],
 						function (_value,_key) {return _params [_key] == 'json' ? Uize.Json.to (_value,'mini') : _value}
@@ -72,7 +72,7 @@ Uize.module ({
 					var _params = this._params;
 					return (
 						Uize.map (
-							Uize.Node.Form.getValues (this.getNode (),true,this.get ('idPrefix') + '_'),
+							Uize.Dom.Form.getValues (this.getNode (),true,this.get ('idPrefix') + '_'),
 							function (_value,_key) {
 								var _paramType = _params [_key];
 								return (

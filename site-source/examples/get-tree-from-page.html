@@ -3,7 +3,7 @@
 <head>
 	<title>Get Tree from Page | JavaScript Examples | UIZE JavaScript Framework</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-	<meta name="keywords" content="Uize.Node.Tree"/>
+	<meta name="keywords" content="Uize.Dom.Tree"/>
 	<meta name="description" content="See how a tree data object can be created by analyzing the occurrence of different CSS classes for section headings at different depths of a document."/>
 	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
 	<link rel="stylesheet" href="../css/page.css"/>
@@ -97,7 +97,7 @@
 	<!-- explanation copy -->
 
 	<div class="explanation">
-		<p>In this example, the <code>Uize.Node.Tree.getTreeFromPage</code> static method of the <a href="reference/Uize.Node.Tree.html"><code>Uize.Node.Tree</code></a> module is being used to build a tree data object respresenting the structure of the document, by analyzing the occurrence of different CSS classes for section headings at different depths of the document (in this case, the CSS classes <code>level1Header</code>, <code>level2Header</code>, and <code>level3Header</code>). A tree data object like this can be supplied to a tree menu widget, or can otherwise be used to build UI for navigating to different sections of the document (a contents tree, for example). A tree data object can also be generated from nested lists using the <code>Uize.Node.Tree.getTreeFromList</code> method (see the <a href="get-tree-from-list.html">Get Tree from List</a> example).</p>
+		<p>In this example, the <code>Uize.Dom.Tree.getTreeFromPage</code> static method of the <a href="reference/Uize.Dom.Tree.html"><code>Uize.Dom.Tree</code></a> module is being used to build a tree data object respresenting the structure of the document, by analyzing the occurrence of different CSS classes for section headings at different depths of the document (in this case, the CSS classes <code>level1Header</code>, <code>level2Header</code>, and <code>level3Header</code>). A tree data object like this can be supplied to a tree menu widget, or can otherwise be used to build UI for navigating to different sections of the document (a contents tree, for example). A tree data object can also be generated from nested lists using the <code>Uize.Dom.Tree.getTreeFromList</code> method (see the <a href="get-tree-from-list.html">Get Tree from List</a> example).</p>
 	</div>
 
 	<table border="0" cellspacing="0" cellpadding="0" style="margin:auto;">
@@ -172,7 +172,7 @@ Uize.require (
 	[
 		'UizeSite.Page.Example.library',
 		'UizeSite.Page.Example',
-		'Uize.Node.Tree',
+		'Uize.Dom.Tree',
 		'Uize.Json'
 	],
 	function () {
@@ -188,7 +188,7 @@ Uize.require (
 			page.setNodeValue (
 				'treeAsJson',
 				Uize.Json.to (
-					Uize.Node.Tree.getTreeFromPage (['level1Header','level2Header','level3Header'],Infinity),
+					Uize.Dom.Tree.getTreeFromPage (['level1Header','level2Header','level3Header'],Infinity),
 					{indentChars:'   '}
 				)
 			);

@@ -91,7 +91,7 @@
 			<li>
 				Current state:
 				<ul>
-					<li id="buttonValueObject"></li>
+					<li id="page-buttonValueObject"></li>
 				</ul>
 			</li>
 		</ul>
@@ -106,8 +106,7 @@ Uize.require (
 	[
 		'UizeSite.Page.Example.library',
 		'UizeSite.Page.Example',
-		'Uize.Widget.Button.Toggle',
-		'Uize.Node'
+		'Uize.Widget.Button.Toggle'
 	],
 	function () {
 		'use strict';
@@ -146,7 +145,7 @@ Uize.require (
 						html += '<b>' + propertyName + ' : </b>' + valueObject [propertyName] + '<br/>'
 					;
 				}
-				Uize.Node.setInnerHtml ('buttonValueObject',html);
+				page.setNodeInnerHtml ('buttonValueObject',html);
 			}
 			toggleButton.wire ('Changed.value',updateValueObjectDisplay);
 

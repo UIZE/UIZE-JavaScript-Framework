@@ -25,13 +25,13 @@
 
 Uize.module ({
 	name:'Uize.Widget.Button.ValueDisplay.Selector',
-	required:'Uize.Node.Classes',
+	required:'Uize.Dom.Classes',
 	builder:function (_superclass) {
 		'use strict';
 
 		var
 			/*** Variables for Scruncher Optimization ***/
-				_Uize_Node_Classes = Uize.Node.Classes
+				_Uize_Dom_Classes = Uize.Dom.Classes
 		;
 
 		/*** Private Instance Methods ***/
@@ -71,7 +71,7 @@ Uize.module ({
 						}
 					);
 
-					_Uize_Node_Classes.setState(
+					_Uize_Dom_Classes.setState(
 						m.getNode(),
 						['', m._cssClassTentativeSelected, m._cssClassActive, m._cssClassDisabled],
 						(!_enabled
@@ -90,7 +90,7 @@ Uize.module ({
 
 					_setInputNodeProperties(m,{checked:_selected});
 
-					_Uize_Node_Classes.setState(
+					_Uize_Dom_Classes.setState(
 						m.getNode(),
 						m._cssClassSelected,
 						_selected
