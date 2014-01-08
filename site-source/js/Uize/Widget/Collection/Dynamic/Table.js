@@ -41,7 +41,7 @@ Uize.module ({
 							_superclass.doMy (m,'processItemTemplate',[_templateNode]) (_input) +
 							'</tbody></table>'
 						;
-						return Uize.map (_dummyNode.firstChild.firstChild.childNodes,'value');
+						return Array.prototype.slice.call(_dummyNode.firstChild.firstChild.childNodes);
 					};
 				}
 			}
