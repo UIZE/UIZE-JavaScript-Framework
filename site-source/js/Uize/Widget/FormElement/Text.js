@@ -4,7 +4,7 @@
 |    /    O /   |    MODULE : Uize.Widget.FormElement.Text Class
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
-| /____/ /__/_| | COPYRIGHT : (c)2007-2013 UIZE
+| /____/ /__/_| | COPYRIGHT : (c)2007-2014 UIZE
 |          /___ |   LICENSE : Available under MIT License or GNU General Public License
 |_______________|             http://www.uize.com/license.html
 */

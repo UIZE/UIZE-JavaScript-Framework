@@ -4,7 +4,7 @@
 |    /    O /   |    MODULE : UizeSite.Build.File Namespace
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
-| /____/ /__/_| | COPYRIGHT : (c)2012-2013 UIZE
+| /____/ /__/_| | COPYRIGHT : (c)2012-2014 UIZE
 |          /___ |   LICENSE : Available under MIT License or GNU General Public License
 |_______________|             http://www.uize.com/license.html
 */
