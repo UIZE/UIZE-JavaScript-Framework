@@ -3,7 +3,7 @@
 <head>
 	<title>Virtual DOM Events | JavaScript Examples | UIZE JavaScript Framework</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-	<meta name="keywords" content="Uize.Node.VirtualEvent"/>
+	<meta name="keywords" content="Uize.Dom.VirtualEvent Uize.Dom.VirtualEvents.Remain Uize.Dom.VirtualEvent.ModClick"/>
 	<meta name="description" content="A demonstration of various virtual DOM events, such as mouseRest, mouseRemainOver, mouseRemainDown, remainFocused, ctrlClick, shiftClick, and more."/>
 	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
 	<link rel="stylesheet" href="../css/page.css"/>
@@ -82,7 +82,7 @@
 	<!-- explanation copy -->
 
 	<div class="explanation">
-		<p>This example demonstrates virtual DOM events - such as <code>mouseRest</code>, <code>mouseRemainDown</code>, <code>remainFocused</code>, <code>ctrlClick</code>, etc. - that are available in the <a href="../reference/Uize.Node.VirtualEvent.html"><code>Uize.Node.VirtualEvent</code></a> package.</p>
+		<p>This example demonstrates virtual DOM events - such as <code>mouseRest</code>, <code>mouseRemainDown</code>, <code>remainFocused</code>, <code>ctrlClick</code>, etc. - that are available in the <a href="../reference/Uize.Dom.VirtualEvents.Remain.html"><code>Uize.Dom.VirtualEvents.Remain</code></a> and <a href="../reference/Uize.Dom.VirtualEvents.ModClick.html"><code>Uize.Dom.VirtualEvents.ModClick</code></a> packages.</p>
 
 		<p>Each of the pods below is a test for a type of virtual DOM event. Each pod has a colorful test node, with handlers registered for various virtual DOM events, and with instructions on how to interact with the test node in order to trigger the virtual events. Below each test node is a mini log console, which will fill up with log entries as the virtual DOM events are fired (a clear link lets you clear a log).</p>
 	</div>
@@ -170,7 +170,8 @@ Uize.require (
 	[
 		'UizeSite.Page.Example.library',
 		'UizeSite.Page.Example',
-		'Uize.Node.VirtualEvent',
+		'Uize.Dom.VirtualEvents.Remain',
+		'Uize.Dom.VirtualEvents.ModClick',
 		'Uize.Widget.Log'
 	],
 	function () {

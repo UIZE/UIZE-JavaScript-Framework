@@ -91,7 +91,7 @@ Coverage
 	The UIZE JavaScript Framework has been covered and reviewed in influential Web 2.0 / Ajax community Web sites.
 
 	2010-01-13 - Virtual DOM Events (ajaxian.com)
-		Dion Almaer, co-founder of *ajaxian.com*, reports on the UIZE JavaScript Framework's support for a useful new construct called [[../reference/Uize.Node.VirtualEvent.html][Virtual DOM Events]].
+		Dion Almaer, co-founder of *ajaxian.com*, reports on the UIZE JavaScript Framework's support for a useful new construct called [[../reference/Uize.Dom.VirtualEvent.html][Virtual DOM Events]].
 
 		Response to the article by readers is overwhelmingly positive, with a high rating from many votes and a healthy serving of lively comments and feedback. From the feedback, it is clear that the folks behind YUI are thinking along similar lines, although their "synthetic events" feature is not as fleshed out at the time, nor is it thoroughly documented like the UIZE Virtual DOM Events feature. This article struck a chord, and it took all of a day for developers behind jQuery to transcode the UIZE implementation and offer equivalent features. Well, you know what they say: "Imitation is the sincerest form of flattery". UIZE considers itself flattered. Dion links to two examples on the UIZE Web site in this article: the [[examples/edge-virtual-dom-events.html][Edge Virtual DOM Events]] and [[examples/virtual-dom-events.html][Virtual DOM Events]] examples.
 

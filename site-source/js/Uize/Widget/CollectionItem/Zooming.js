@@ -27,7 +27,7 @@ Uize.module ({
 	name:'Uize.Widget.CollectionItem.Zooming',
 	required:[
 		'Uize.Node',
-		'Uize.Node.VirtualEvent',
+		'Uize.Dom.VirtualEvents.Remain',
 		'Uize.Fade'
 	],
 	builder:function (_superclass) {
@@ -282,7 +282,7 @@ Uize.module ({
 
 						m.wireNode (
 							_previewShellNode,
-							Uize.Node.VirtualEvent.mouseRest (150),
+							Uize.Dom.VirtualEvents.Remain.mouseRest (150),
 							function () {
 								if (!m.get ('over')) return;
 									/* HACK:

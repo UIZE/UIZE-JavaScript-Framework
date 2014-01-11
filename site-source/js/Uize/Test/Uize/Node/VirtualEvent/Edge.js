@@ -1,7 +1,7 @@
 /*______________
 |       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
 |     /      /  |   ---------------------------------------------------
-|    /    O /   |    MODULE : Uize.Node.VirtualEvent.Edge Package
+|    /    O /   |    MODULE : Uize.Test.Uize.Node.VirtualEvent.Edge Class
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
 | /____/ /__/_| | COPYRIGHT : (c)2014 UIZE
@@ -10,7 +10,7 @@
 */
 
 /* Module Meta Data
-	type: Object
+	type: Test
 	importance: 1
 	codeCompleteness: 100
 	docCompleteness: 100
@@ -18,14 +18,17 @@
 
 /*?
 	Introduction
-		The =Uize.Node.VirtualEvent.Edge= module is deprecated *(DEPRECATED 2014-01-07)* and is an alias to the =Uize.Dom.VirtualEvents.Edge= module, which is effectively the same module migrated to under the =Uize.Dom= namespace.
+		The =Uize.Test.Uize.Node.VirtualEvent.Edge= module defines unit tests to verify that the deprecated =Uize.Node.VirtualEvent.Edge= module is still supported and is a reference to the newer =Uize.Dom.VirtualEvents.Edge= module.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 */
 
 Uize.module ({
-	name:'Uize.Node.VirtualEvent.Edge',
-	required:'Uize.Dom.VirtualEvents.Edge',
-	builder:function () {return Uize.Dom.VirtualEvents.Edge}
+	name:'Uize.Test.Uize.Node.VirtualEvent.Edge',
+	builder:function () {
+		'use strict';
+
+		return Uize.Test.moduleAliasTest ('Uize.Node.VirtualEvent.Edge','Uize.Dom.VirtualEvents.Edge');
+	}
 });
 

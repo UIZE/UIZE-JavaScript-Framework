@@ -130,10 +130,7 @@ Uize.module ({
 			}
 
 			function _resolveStringEventName (_eventName) {
-				var
-					_Uize_Node = _Uize.Node,
-					_VirtualEvent = _Uize_Node && _Uize_Node.VirtualEvent
-				;
+				var _VirtualEvent = _Uize.Dom.VirtualEvent;
 				return (
 					_VirtualEvent && _eventName.charCodeAt (_eventName.length - 1) == 41
 						? _VirtualEvent.resolve (_eventName)

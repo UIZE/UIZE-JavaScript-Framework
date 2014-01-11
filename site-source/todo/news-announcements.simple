@@ -1,19 +1,22 @@
 This document lists official news announcements that need to be created for developments that have already taken place.
 
 Deprecated Uize.Node Modules
-	........................................................
-	=Uize.Node=
-	=Uize.Node.Event=      >> BECOMES >>  Uize.Dom.Event
-	=Uize.Node.Classes=    >> BECOMES >>  Uize.Dom.Classes
-	=Uize.Node.CssModule=  >> BECOMES >>  Uize.Dom.CssModule
-	=Uize.Node.Form=       >> BECOMES >>  Uize.Dom.Form
-	=Uize.Node.Tree=       >> BECOMES >>  Uize.Dom.Tree
-	=Uize.Node.Util=       >> BECOMES >>  Uize.Dom.Util
-	........................................................
+	........................................................................
+	Uize.Node                    >> BECOMES >>  ---
+	Uize.Node.Event              >> BECOMES >>  Uize.Dom.Event
+	Uize.Node.Classes            >> BECOMES >>  Uize.Dom.Classes
+	Uize.Node.CssModule          >> BECOMES >>  Uize.Dom.CssModule
+	Uize.Node.Form               >> BECOMES >>  Uize.Dom.Form
+	Uize.Node.Tree               >> BECOMES >>  Uize.Dom.Tree
+	Uize.Node.Util               >> BECOMES >>  Uize.Dom.Util
+	Uize.Node.VirtualEvent       >> BECOMES >>  ---
+	Uize.Node.VirtualEvent.Edge  >> BECOMES >>  Uize.Dom.VirtualEvents.Edge
+	........................................................................
 
 	Still to do...
 
 	- create alias module unit tests
+	- finish up dividing Uize.Node.VirtualEvent into new Uize.Dom.VirtualEvent, Uize.Dom.VirtualEvents.Remain and Uize.Dom.VirtualEvents.ModClick modules, and turn Uize.Node.VirtualEvent into an aggregator
 
 NEW MODULE: Uize.Loc.Pseudo
 	Still to do...

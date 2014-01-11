@@ -35,7 +35,7 @@ Introduction
 		Extended Capabilities
 			The framework's DOM event management methods also provide extended capabilities beyond what is offered by the DOM event systems of the browsers.
 
-			An example of this is the =mouserest= virtual DOM event. This event is not a real DOM event - it is implemented by the UIZE JavaScript Framework. Using this event, you can wire handlers that will be executed when the user rests their mouse over a DOM node for a specifiable amount of time - you get to decide how long. This and other virtual DOM events are implemented in the module =Uize.Node.VirtualEvent=.
+			An example of this is the =mouserest= virtual DOM event. This event is not a real DOM event - it is implemented by UIZE. Using this event, you can wire handlers that will be executed when the user rests their mouse over a DOM node for a specifiable amount of time - you get to decide how long. This and other virtual DOM events are implemented in various modules under the =Uize.Dom.VirtualEvents= namespace, such as the =Uize.Dom.VirtualEvents.Remain= and =Uize.Dom.VirtualEvents.ModClick= modules.
 
 Event Wiring Basics
 	In this section we will take a look at the basics of wiring and unwiring event handlers for DOM nodes.
@@ -457,7 +457,7 @@ Event Wiring Basics
 		.
 
 	### Virtual DOM Events
-		[ factor documentation out of reference doc for Uize.Node.VirtualEvent module ]
+		[ factor documentation out of reference doc for Uize.Dom.VirtualEvent module ]
 
 ### The Event Object
 	.
