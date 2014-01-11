@@ -25,22 +25,22 @@
 
 Uize.module ({
 	name:'Uize.Test.Uize.String',
-	required:[
-		'Uize.Array.Join',
-		'Uize.Str.Camel',
-		'Uize.Str.Has',
-		'Uize.Str.Limit',
-		'Uize.Str.Split',
-		'Uize.Str.Trim',
-		'Uize.Str.Repeat'
-	],
 	builder:function () {
 		'use strict';
 
 		return Uize.Test.resolve ({
 			title:'Test for Uize.String Module',
 			test:[
-				Uize.Test.requiredModulesTest ('Uize.String'),
+				Uize.Test.requiredModulesTest ([
+					'Uize.Array.Join',
+					'Uize.Str.Camel',
+					'Uize.Str.Has',
+					'Uize.Str.Limit',
+					'Uize.Str.Split',
+					'Uize.Str.Trim',
+					'Uize.Str.Repeat',
+					'Uize.String'
+				]),
 				Uize.Test.migratedStaticMethodsTest ([
 					['Uize.String.contains','Uize.Str.Has.has'],
 					['Uize.String.endsWith','Uize.Str.Has.hasSuffix'],

@@ -25,17 +25,17 @@
 
 Uize.module ({
 	name:'Uize.Test.Uize.Xml',
-	required:[
-		'Uize.Util.Html.Encode',
-		'Uize.Class.Value'
-	],
+	required:'Uize.Class.Value',
 	builder:function () {
 		'use strict';
 
 		return Uize.Test.resolve ({
 			title:'Test for Uize.Xml Module',
 			test:[
-				Uize.Test.requiredModulesTest ('Uize.Xml'),
+				Uize.Test.requiredModulesTest ([
+					'Uize.Util.Html.Encode',
+					'Uize.Xml'
+				]),
 				Uize.Test.staticMethodsTest ([
 					['Uize.Xml.toAttributes',[
 						['Test that calling with no parameters produces an empty string',
