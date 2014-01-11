@@ -1,13 +1,6 @@
-This is a proposal document for a =Uize.Xml.Parser= module.
+This is a proposal document for a =Uize.Util.Xml.Document= module.
 
 This module would provide a versatile parser and serializer to support schema-agnostic parsing of XML / xHTML / HTML documents.
-
-Static Methods
-	Uize.Xml.Parser.parse
-		Parses an XML document string to produce a document object.
-
-	Uize.Xml.Parser.serialize
-		Serializes a document object to produce an XML document string.
 
 To Work Out
 	The following issues need to be worked out...
@@ -25,15 +18,15 @@ To Work Out
 
 		................................
 		Xml
-			XmlText
-			XmlTag
-				XmlTagName
-				XmlTagAttributes
-					XmlTagAttribute
-						XmlTagAttributeName
-						XmlTagAttributeValue
-			XmlCdata
-			XmlComment
+			Tag
+				TagName
+				TagAttributes
+					TagAttribute
+						TagAttributeName
+						TagAttributeValue
+			Cdata
+			Comment
+			Text
 		................................
 
 		At any point in parsing a segment of text for a given parser, there will be an expected set of possible next characters. If a possible next character is an expected first character for any of the sub-parsers, then the first candidate sub-parser will be used and added to the parser stack. This could be accomplished plain through recursion, or through a single, managed stack.
