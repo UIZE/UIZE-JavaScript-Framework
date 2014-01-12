@@ -74,7 +74,7 @@ Uize.require (
 		'Uize.Color.xUtil',
 		'Uize.Widgets.RgbSliders.Widget',
 		'Uize.Widgets.ColorInfo.Widget',
-		'Uize.Node',
+		'Uize.Dom.Basics',
 		'Uize.Dom.Event',
 		'Uize.Tooltip',
 		'Uize.Fade.xFactory',
@@ -147,7 +147,7 @@ Uize.require (
 							Uize.Fade.fade (
 								function (value) {page.children.desiredColor.set ({value:Uize.Color.to (value,'hex')})},
 								[Uize.Color.to (page.children.desiredColor + '','RGB array')],
-								[Uize.Color.to (Uize.Node.getStyle (target,'backgroundColor'),'RGB array')],
+								[Uize.Color.to (Uize.Dom.Basics.getStyle (target,'backgroundColor'),'RGB array')],
 								1500,
 								{curve:Uize.Curve.easeInOutPow (4)}
 							);

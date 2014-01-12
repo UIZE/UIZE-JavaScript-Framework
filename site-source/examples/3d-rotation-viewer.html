@@ -184,7 +184,7 @@ Uize.require (
 			;
 
 		/*** initialization ***/
-			Uize.Node.wire (window,'load',function () {spin (360,2700,Uize.Curve.easeInOutPow (4))});
+			page.wireNode (window,'load',function () {spin (360,2700,Uize.Curve.easeInOutPow (4))});
 
 		/*** wire up the page widget ***/
 			page.wireUi ();

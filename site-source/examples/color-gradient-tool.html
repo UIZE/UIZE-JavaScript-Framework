@@ -302,7 +302,8 @@ Uize.require (
 		'Uize.Color',
 		'Uize.Color.xUtil',
 		'Uize.Widgets.ColorInfo.Widget',
-		'Uize.Node',
+		'Uize.Dom.Basics',
+		'Uize.Dom.Pos',
 		'Uize.Dom.Event',
 		'Uize.Tooltip'
 	],
@@ -320,7 +321,7 @@ Uize.require (
 				var
 					htmlChunks = [],
 					rootNode = page.getNode (rootNodeName),
-					rootNodeHeight = Uize.Node.getDimensions (rootNode).height,
+					rootNodeHeight = Uize.Dom.Pos.getDimensions (rootNode).height,
 					segmentHeight = rootNodeHeight / totalSegments,
 					currentPos = 0,
 					newPos
@@ -331,7 +332,7 @@ Uize.require (
 					currentPos = newPos;
 				}
 				page.setNodeInnerHtml (rootNode,htmlChunks.join (''));
-				return Uize.Node.find ({root:rootNode,tagName:'div'})
+				return Uize.Dom.Basics.find ({root:rootNode,tagName:'div'})
 			}
 
 			var gradientNodes = buildSegmentsHtml (
@@ -386,7 +387,7 @@ Uize.require (
 						Uize.Tooltip.hideTooltip (colorInfo.getNode ());
 						prompt (
 							'Here is the color you selected...',
-							Uize.Color.to (Uize.Node.getStyle (Uize.Dom.Event.target (event),'backgroundColor'),'#hex')
+							Uize.Color.to (Uize.Dom.Basics.getStyle (Uize.Dom.Event.target (event),'backgroundColor'),'#hex')
 						);
 					}
 				}
