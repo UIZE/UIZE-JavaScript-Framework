@@ -2834,33 +2834,6 @@ Uize.module ({
 					*/
 				};
 
-				_objectPrototype.showClickable = function(_clickable) {
-					return this._handleSetAction(_clickable, _Uize_Node.showClickable);
-					/*?
-						Instance Methods
-							showClickable
-								Sets the value of the =cursor= CSS property for the set of matched DOM nodes so that the node(s) appear either clickable or not.
-
-								SYNTAX
-								........................................................
-								myWeb = myWeb.showClickable(clickableBOOL);
-								........................................................
-
-								VARIATION 1
-								........................................................
-								myWeb = myWeb.showClickable();
-								........................................................
-
-								VARIATION 2
-								........................................................
-								myWeb = myWeb.showClickable(clickableFUNC);
-								........................................................
-
-								NOTES
-								- Returns a reference to the same =Uize.Web= object
-					*/
-				};
-
 				_objectPrototype.supportsCss = function(_propertyName, _returnAll) {
 					return this._handleGetAction(
 						function(_node) { return _supportsCss(_propertyName, _node) },

@@ -62,7 +62,8 @@ Uize.module ({
 	required:[
 		'Uize.Dom.Basics',
 		'Uize.Dom.Pos',
-		'Uize.Dom.Text'
+		'Uize.Dom.Text',
+		'Uize.Dom.Util'
 	],
 	builder:function () {
 		'use strict';
@@ -72,51 +73,12 @@ Uize.module ({
 				_undefined,
 				_Uize = Uize,
 				_Uize_Dom = _Uize.Dom,
-				_Uize_Dom_Basics = _Uize_Dom.Basics,
-
-			/*** variables for showClickable method ***/
-				_useHandForPointerCursor = _Uize_Dom_Basics.isIe && _Uize_Dom_Basics.ieMajorVersion < 9
+				_Uize_Dom_Basics = _Uize_Dom.Basics
 		;
 
 		return _Uize.package (
 			_Uize.copyInto (
-				{
-					showClickable:function (_nodeBlob,_clickable) {
-						_Uize_Dom_Basics.setStyle (
-							_nodeBlob,
-							{
-								cursor:
-									_clickable || _clickable === _undefined
-										? (_useHandForPointerCursor ? 'hand' : 'pointer')
-										: 'default'
-							}
-						);
-						/*?
-							Static Methods
-								Uize.Node.showClickable
-									Sets the value of the "cursor" style property of the specified `node blob` so that the node(s) appear either clickable or not, depending on the specified boolean value.
-
-									This method is useful for DOM nodes that need to be wired up with click actions by JavaScript code, but that don't have CSS selectors from the document applying the appropriate cursor style to them.
-
-									SYNTAX
-									....................................................
-									Uize.Node.showClickable (nodeBLOB,clickableANYTYPE);
-									....................................................
-
-									While typically a Boolean, the =clickableANYTYPE= parameter can be of any type and the node(s) will be set to appear clickable if it resolves to =true=, and not clickable if it resolves to =false= - with the exception of =undefined=, when the node(s) will be set to appear clickable (see explanation below).
-
-									VARIATION
-									...................................
-									Uize.Node.showClickable (nodeBLOB);
-									...................................
-
-									When no =clickableANYTYPE= parameter is specified (or when its value is =undefined=), the node(s) will be set to appear clickable.
-
-									NOTES
-									- this method can operate on multiple nodes at a time. For more details, see the section on `node blob`
-						*/
-					}
-				},
+				{showClickable:_Uize_Dom.Util.showClickable},
 				_Uize_Dom_Basics,
 					/*?
 						Static Methods

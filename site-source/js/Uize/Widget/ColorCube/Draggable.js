@@ -26,7 +26,8 @@
 Uize.module ({
 	name:'Uize.Widget.ColorCube.Draggable',
 	required:[
-		'Uize.Node',
+		'Uize.Dom.Util',
+		'Uize.Dom.Pos',
 		'Uize.Widget.Drag',
 		'Uize.Color'
 	],
@@ -34,9 +35,6 @@ Uize.module ({
 		'use strict';
 
 		var
-			/*** Variables for Scruncher Optimization ***/
-				_Uize_Node = Uize.Node,
-
 			/*** General Variables ***/
 				_dummyColor = Uize.Color ()
 		;
@@ -88,12 +86,12 @@ Uize.module ({
 							_cubeCoords, _cubeCoordsArray,
 							_cornerColorsAtDragStart = {}
 						;
-						_Uize_Node.showClickable (_shell);
+						Uize.Dom.Util.showClickable (_shell);
 						_drag.wire ({
 							'Drag Start':
 								function (_event) {
 									m.set ({_inDrag:true});
-									_cubeCoords = _Uize_Node.getCoords (_shell);
+									_cubeCoords = Uize.Dom.Pos.getCoords (_shell);
 									_cubeCoordsArray = [_cubeCoords.left,_cubeCoords.top,_cubeCoords.right,_cubeCoords.bottom];
 									function _initCornerColorAtDragStart (_cornerName) {
 										(

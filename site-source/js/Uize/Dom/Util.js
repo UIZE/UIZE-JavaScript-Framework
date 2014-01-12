@@ -35,7 +35,10 @@ Uize.module ({
 
 			/*** references to static methods used internally ***/
 				_getOpacityProperties,
-				_stylePropertiesAsStr
+				_stylePropertiesAsStr,
+
+			/*** variables for showClickable method ***/
+				_useHandForPointerCursor = _Uize_Dom_Basics.isIe && _Uize_Dom_Basics.ieMajorVersion < 9
 		;
 
 		return Uize.package ({
@@ -79,11 +82,11 @@ Uize.module ({
 
 							For standards compliant browsers, the returned object contains an "opacity" property, while for Internet Explorer it contains a "filter" property.
 
-							The returned object can be "stitched" into a style properties parameter, using the =Uize.copyInto= static method, in order to prepare a subsequent call to the =Uize.Node.setStyle= static method, as follows...
+							The returned object can be "stitched" into a style properties parameter, using the =Uize.copyInto= static method, in order to prepare a subsequent call to the =Uize.Dom.Basics.setStyle= static method, as follows...
 
 							EXAMPLE
-							..............................................
-							Uize.Node.setStyle (
+							.............................................
+							Uize.Dom.Basics.setStyle (
 								'someNodeId',
 								Uize.copyInto (
 									{
@@ -95,7 +98,7 @@ Uize.module ({
 									Uize.Dom.Util.getOpacityProperties (.5)
 								)
 							);
-							..............................................
+							.............................................
 
 							NOTES
 							- the =opacityFLOATorOBJ= parameter can be an object that implements a =valueOf= interface (such as an instance of a =Uize.Class= subclass that implements the =value= state property)
@@ -119,6 +122,42 @@ Uize.module ({
 
 							NOTES
 							- see also the =Uize.Dom.Util.getOpacityProperties= static method
+				*/
+			},
+
+			showClickable:function (_nodeBlob,_clickable) {
+				_Uize_Dom_Basics.setStyle (
+					_nodeBlob,
+					{
+						cursor:
+							_clickable || _clickable === _undefined
+								? (_useHandForPointerCursor ? 'hand' : 'pointer')
+								: 'default'
+					}
+				);
+				/*?
+					Static Methods
+						Uize.Dom.Utils.showClickable
+							Sets the value of the "cursor" style property of the specified `node blob` so that the node(s) appear either clickable or not, depending on the specified boolean value.
+
+							This method is useful for DOM nodes that need to be wired up with click actions by JavaScript code, but that don't have CSS selectors from the document applying the appropriate cursor style to them.
+
+							SYNTAX
+							.........................................................
+							Uize.Dom.Utils.showClickable (nodeBLOB,clickableANYTYPE);
+							.........................................................
+
+							While typically a Boolean, the =clickableANYTYPE= parameter can be of any type and the node(s) will be set to appear clickable if it resolves to =true=, and not clickable if it resolves to =false= - with the exception of =undefined=, when the node(s) will be set to appear clickable (see explanation below).
+
+							VARIATION
+							........................................
+							Uize.Dom.Utils.showClickable (nodeBLOB);
+							........................................
+
+							When no =clickableANYTYPE= parameter is specified (or when its value is =undefined=), the node(s) will be set to appear clickable.
+
+							NOTES
+							- this method can operate on multiple nodes at a time. For more details, see the section on `node blob`
 				*/
 			},
 
