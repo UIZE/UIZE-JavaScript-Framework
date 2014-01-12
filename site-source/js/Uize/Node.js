@@ -61,7 +61,8 @@ Uize.module ({
 	name:'Uize.Node',
 	required:[
 		'Uize.Dom.Basics',
-		'Uize.Dom.Pos'
+		'Uize.Dom.Pos',
+		'Uize.Dom.Text'
 	],
 	builder:function () {
 		'use strict';
@@ -69,13 +70,9 @@ Uize.module ({
 		var
 			/*** Variables for Scruncher Optimization ***/
 				_undefined,
-				_typeString = 'string',
 				_Uize = Uize,
 				_Uize_Dom = _Uize.Dom,
 				_Uize_Dom_Basics = _Uize_Dom.Basics,
-
-				/*** features pulled in from Uize.Dom.Basics ***/
-					_getById = _Uize_Dom_Basics.getById,
 
 			/*** variables for showClickable method ***/
 				_useHandForPointerCursor = _Uize_Dom_Basics.isIe && _Uize_Dom_Basics.ieMajorVersion < 9
@@ -84,61 +81,6 @@ Uize.module ({
 		return _Uize.package (
 			_Uize.copyInto (
 				{
-					getText:function (_node) {
-						var _text = '';
-						if (_node = _getById (_node)) {
-							var  _gatherText = function (_node) {
-								if (typeof _node.innerText == _typeString) {
-									_text += _node.innerText.replace (/\r|\n|\r\n/g,'');
-								} else if (typeof _node.textContent == _typeString) {
-									_text += _node.textContent;
-								} else {
-									if (_node.nodeType == 3) _text += _node.data;
-									_node.childNodes && _Uize.forEach (_node.childNodes,_gatherText);
-								}
-							};
-							_gatherText (_node);
-						}
-						return _text;
-						/*?
-							Static Methods
-								Uize.Node.getText
-									Returns a string, representing the text content of the specified node.
-
-									SYNTAX
-									...............................................
-									nodeTextSTR = Uize.Node.getText (nodeSTRorOBJ);
-									...............................................
-
-									In Internet Explorer, this method employs the =innerText= property, removing all linebreaks. In other browsers that support the =textContent= property, this is used. For browsers that support neither, this method iterates recursively through the child nodes and cumulatively harvests the text content using the data property of all the text nodes.
-
-									EXAMPLE
-									............................
-									<div id="testNode">
-										<p>This is a test</p>
-										<table>
-											<tr>
-												<td> of</td>
-												<td> the</td>
-											</tr>
-										</table>
-										<blockquote>
-											<ul>
-												<li> emergency
-												<li> broadcasting
-											</ul>
-											<p> network</p>
-										</blockquote>
-									</div>
-									............................
-
-									In the above example, the statement =Uize.Node.getText ('testNode')= would return roughly ='this is a test of the emergency broadcasting network'= (between browsers there might be variability with the whitespace content).
-
-									NOTES
-									- this method is not quaranteed to return exactly the same value for the exact same markup in all browsers
-						*/
-					},
-
 					showClickable:function (_nodeBlob,_clickable) {
 						_Uize_Dom_Basics.setStyle (
 							_nodeBlob,
@@ -1146,7 +1088,7 @@ Uize.module ({
 								- see also the =Uize.Node.isIe= and =Uize.Node.isSafari= static properties
 					*/
 
-				_Uize_Dom.Pos
+				_Uize_Dom.Pos,
 					/*?
 						Static Methods
 							Uize.Node.centerInWindow
@@ -1452,6 +1394,8 @@ Uize.module ({
 								- this method can operate on multiple nodes at a time. For more details, see the section on `node blob`
 								- see also the =Uize.Node.getCoords= static method
 					*/
+
+				_Uize_Dom.Text
 			)
 		);
 	}

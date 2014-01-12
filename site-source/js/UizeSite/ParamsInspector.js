@@ -24,6 +24,7 @@ Uize.module ({
 		'Uize.Data',
 		'Uize.Json',
 		'Uize.Dom.Form',
+		'Uize.Dom.Text',
 		'UizeSite.Templates.ParamsInspector'
 	],
 	builder:function (_superclass) {
@@ -102,7 +103,7 @@ Uize.module ({
 								function (_event) {
 									var _eventTarget = _event.target || _event.srcElement;
 									if (_eventTarget.tagName == 'A') {
-										_choosePreset (m,Uize.Node.getText (_eventTarget));
+										_choosePreset (m,Uize.Dom.Text.getText (_eventTarget));
 										_firePresetSelectedEvent (m);
 									}
 								}

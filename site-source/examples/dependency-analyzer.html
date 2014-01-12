@@ -113,7 +113,7 @@ Uize.require (
 		'Uize.Widgets.SimpleStatsTable.Widget',
 		'Uize.Widgets.SimpleStatsTable.Sortable.Widget',
 		'Uize.Dom.Basics',
-		'Uize.Node',
+		'Uize.Dom.Text',
 		'Uize.Tooltip',
 		'Uize.Widgets.Tooltip.Widget'
 	],
@@ -453,7 +453,7 @@ Uize.require (
 											mouseover:function () {
 												var
 													_link = this,
-													_moduleName = Uize.Node.getText (_link)
+													_moduleName = Uize.Dom.Text.getText (_link)
 												;
 												_tooltip.set ({
 													heading:_moduleName,

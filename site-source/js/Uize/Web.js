@@ -87,7 +87,8 @@ Uize.module ({
 	name:'Uize.Web',
 	required:[
 		'Uize.Node',
-		'Uize.Dom.Classes'
+		'Uize.Dom.Classes',
+		'Uize.Dom.Text'
 	],
 	builder:function () {
 		'use strict';
@@ -101,7 +102,8 @@ Uize.module ({
 
 				_Uize = Uize,
 				_Uize_Node = _Uize.Node,
-				_Uize_Dom_Classes = _Uize.Dom.Classes,
+				_Uize_Dom = _Uize.Dom,
+				_Uize_Dom_Classes = _Uize_Dom.Classes,
 
 				_Uize_isString = _Uize.isString,
 				_Uize_isArray = _Uize.isArray,
@@ -3668,7 +3670,7 @@ Uize.module ({
 
 				_objectPrototype.text = function(_returnAllOrValueToSet) {
 					return this._handleGetOrSetAction(
-						_Uize_Node.getText,
+						_Uize_Dom.Text.getText,
 						_returnAllOrValueToSet,
 						function(_node, _text) {
 							_node.appendChild(_document.createTextNode(_text + '')); // coerce to a string value by invoking valueOf method

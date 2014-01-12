@@ -49,6 +49,7 @@ Uize.require (
 		Uize.require (
 			[
 				'Uize.Dom.Basics',
+				'Uize.Dom.Text',
 				'Uize.Tooltip',
 				'Uize.Widgets.Tooltip.Widget',
 				'UizeSite.Sotu',
@@ -165,7 +166,7 @@ Uize.require (
 									_link.title = '';
 								}
 								_tooltip.set ({
-									heading:Uize.Dom.Basics.getText (_link),
+									heading:Uize.Dom.Text.getText (_link),
 									body:_link.oldTitle
 								});
 								Uize.Tooltip.showTooltip (_tooltipNode);

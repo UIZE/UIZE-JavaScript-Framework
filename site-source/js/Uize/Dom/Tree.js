@@ -596,12 +596,9 @@
 
 Uize.module ({
 	name:'Uize.Dom.Tree',
-	required:'Uize.Node',
+	required:'Uize.Dom.Text',
 	builder:function () {
 		'use strict';
-
-		/*** Variables for Scruncher Optimization ***/
-			var _Uize_Node = Uize.Node;
 
 		/*** Utility Functions ***/
 			function _setItemExpanded (_item,_expanded) {if (!_expanded) _item.expanded = false}
@@ -703,7 +700,8 @@ Uize.module ({
 						_anchorPrefix = 'Uize_Node_Tree_',
 						_itemSpecifier = [],
 						_linkPrefix = location.href.replace (/#[^#]*$/,'') + '#',
-						_levelClassMatch
+						_levelClassMatch,
+						_getText = Uize.Dom.Text.getText
 					;
 					++_nodeNo < _nodesLength;
 				) {
@@ -725,7 +723,7 @@ Uize.module ({
 							}
 							_itemSpecifier.push (_currentLevel.items.length + 1);
 							var _item = {
-								title:_Uize_Node.getText (_node).replace (/^\s+/,'').replace (/\s+$/,''),
+								title:_getText (_node).replace (/^\s+/,'').replace (/\s+$/,''),
 								link:_linkPrefix + (_node.id || (_node.id = _anchorPrefix + _itemSpecifier.join ('_')))
 							};
 							if (_node.title) _item.description = _node.title;
