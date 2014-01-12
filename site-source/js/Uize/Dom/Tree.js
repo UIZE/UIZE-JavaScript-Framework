@@ -596,9 +596,17 @@
 
 Uize.module ({
 	name:'Uize.Dom.Tree',
-	required:'Uize.Dom.Text',
+	required:[
+		'Uize.Dom.Basics',
+		'Uize.Dom.Text'
+	],
 	builder:function () {
 		'use strict';
+
+		var
+			/*** Variables for Performance Optimization ***/
+				_getById = Uize.Dom.Basics.getById
+		;
 
 		/*** Utility Functions ***/
 			function _setItemExpanded (_item,_expanded) {if (!_expanded) _item.expanded = false}
@@ -650,9 +658,7 @@ Uize.module ({
 					}
 					return _item;
 				}
-				var _item = _getItemFromListItem (
-					_isListNode (_node = _Uize_Node.getById (_node)) ? _node.parentNode : _node
-				);
+				var _item = _getItemFromListItem (_isListNode (_node = _getById (_node)) ? _node.parentNode : _node);
 				return (_item && (/\S/.test (_item.title) ? [_item] : _item.items)) || [];
 				/*?
 					Static Methods
