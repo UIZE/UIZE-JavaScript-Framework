@@ -28,14 +28,6 @@ Uize.module ({
 	builder:function () {
 		'use strict';
 
-		var
-			/*** Variables for Scruncher Optimization ***/
-				// ...
-
-			/*** General Variables ***/
-				// ...
-		;
-
 		/*** Utility Functions ***/
 			// ...
 
@@ -43,16 +35,18 @@ Uize.module ({
 			function () {
 			},
 
-			prototype:{
-				source:'',
-				index:0,
-				length:0,
-				isValid:false,
+			{
+				prototype:{
+					source:'',
+					index:0,
+					length:0,
+					isValid:false,
 
-				parse:function (_source,_index) {
-				},
+					parse:function (_source,_index) {
+					},
 
-				serialize:function () {
+					serialize:function () {
+					}
 				}
 			}
 		);

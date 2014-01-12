@@ -46,17 +46,19 @@ Uize.module ({
 				m._attributes = m.attributes = [];
 			},
 
-			prototype:{
-				source:'',
-				index:0,
-				length:0,
-				isValid:false,
+			{
+				prototype:{
+					source:'',
+					index:0,
+					length:0,
+					isValid:false,
 
-				parse:function (_source,_index) {
-				},
+					parse:function (_source,_index) {
+					},
 
-				serialize:function () {
-					return this.isValid ? Uize.map (this._attributes,'value.serialize ()').join (' ') : '';
+					serialize:function () {
+						return this.isValid ? Uize.map (this._attributes,'value.serialize ()').join (' ') : '';
+					}
 				}
 			}
 		);

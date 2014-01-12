@@ -51,23 +51,25 @@ Uize.module ({
 				m.value = new _Uize_Util_Xml_TagAttributeValue;
 			},
 
-			prototype:{
-				source:'',
-				index:0,
-				length:0,
-				isValid:false,
+			{
+				prototype:{
+					source:'',
+					index:0,
+					length:0,
+					isValid:false,
 
-				parse:function (_source,_index) {
-					/*
-						expect name
-						if whitespace
-							eat whitespace
-							expect possible value
-					*/
-				},
+					parse:function (_source,_index) {
+						/*
+							expect name
+							if whitespace
+								eat whitespace
+								expect possible value
+						*/
+					},
 
-				serialize:function () {
-					return this.isValid ? this.name.serialize () + ' ' + this.value.serialize () : '';
+					serialize:function () {
+						return this.isValid ? this.name.serialize () + ' ' + this.value.serialize () : '';
+					}
 				}
 			}
 		);

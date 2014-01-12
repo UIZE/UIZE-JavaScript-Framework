@@ -40,7 +40,7 @@ Uize.module ({
 			/*** Variables for Performance Optimization ***/
 				_Uize_Util_Xml_TagName = _Uize_Util_Xml.TagName,
 				_Uize_Util_Xml_TagAttributes = _Uize_Util_Xml.TagAttributes,
-				_Uize_Util_Xml_NodeList = _Uize_Util_Xml.NodeList,
+				_Uize_Util_Xml_NodeList = _Uize_Util_Xml.NodeList
 		;
 
 		return Uize.copyInto (
@@ -51,58 +51,60 @@ Uize.module ({
 				m._childNodes = m.childNodes = new _Uize_Util_Xml_NodeList;
 			},
 
-			prototype:{
-				source:'',
-				index:0,
-				length:0,
-				isValid:false,
+			{
+				prototype:{
+					source:'',
+					index:0,
+					length:0,
+					isValid:false,
 
-				parse:function (_source,_index) {
-					var
-						m = this,
-						_sourceLength = (m.source = _source).length
-					;
-					m.index = _index || (_index = 0);
-					m.length = 0;
-					if (m.isValid = _source.charAt (_index) == '<') {
-						_index++;
-						/*
-							eat whitespace
-							then expect tagName
-							if whitespace, eat whitespace
-							then expect possible attributes
-							then expect possible ">" or "/>"
-							if "/>" then
-								end parsing
-							else
-								then expect possible nodes
-								then expect closing tag to match opening tag
-								then end parsing
-						*/
-					};
-				},
-
-				serialize:function () {
-					var m = this;
-					if (m.isValid) {
+					parse:function (_source,_index) {
 						var
-							_tagNameSerialized = m.tagName.serialize (),
-							_tagAttributesSerialized = m.tagAttributes.serialize (),
-							_childNodesSerialized = m._childNodes.serialize ()
+							m = this,
+							_sourceLength = (m.source = _source).length
 						;
-						return (
-							'<' +
-								_tagNameSerialized +
-								(_tagAttributesSerialized && ' ') + _tagAttributesSerialized +
-								(_childNodesSerialized ? '' : '/') +
-							'>' + 
-							_childNodesSerialized && (
-								_childNodesSerialized +
-								'</' + _tagNameSerialized + '>'
-							)
-						);
-					} else {
-						return '';
+						m.index = _index || (_index = 0);
+						m.length = 0;
+						if (m.isValid = _source.charAt (_index) == '<') {
+							_index++;
+							/*
+								eat whitespace
+								then expect tagName
+								if whitespace, eat whitespace
+								then expect possible attributes
+								then expect possible ">" or "/>"
+								if "/>" then
+									end parsing
+								else
+									then expect possible nodes
+									then expect closing tag to match opening tag
+									then end parsing
+							*/
+						};
+					},
+
+					serialize:function () {
+						var m = this;
+						if (m.isValid) {
+							var
+								_tagNameSerialized = m.tagName.serialize (),
+								_tagAttributesSerialized = m.tagAttributes.serialize (),
+								_childNodesSerialized = m._childNodes.serialize ()
+							;
+							return (
+								'<' +
+									_tagNameSerialized +
+									(_tagAttributesSerialized && ' ') + _tagAttributesSerialized +
+									(_childNodesSerialized ? '' : '/') +
+								'>' +
+								_childNodesSerialized && (
+									_childNodesSerialized +
+									'</' + _tagNameSerialized + '>'
+								)
+							);
+						} else {
+							return '';
+						}
 					}
 				}
 			}

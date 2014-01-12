@@ -48,43 +48,45 @@ Uize.module ({
 				m._nodes = m.nodes = [];
 			},
 
-			prototype:{
-				source:'',
-				index:0,
-				length:0,
-				isValid:true,
+			{
+				prototype:{
+					source:'',
+					index:0,
+					length:0,
+					isValid:true,
 
-				parse:function (_source,_index) {
-					var
-						m = this,
-						_sourceLength = _source.length,
-						_nodes = m._nodes
-					;
-					m.source = _source;
-					m.index = _index || (_index = 0);
-					_nodes.length = 0;
+					parse:function (_source,_index) {
+						var
+							m = this,
+							_sourceLength = _source.length,
+							_nodes = m._nodes
+						;
+						m.source = _source;
+						m.index = _index || (_index = 0);
+						_nodes.length = 0;
 
-					function _tryParseNode (_nodeType) {
-						var _node = _currentNodes [_nodeType] || (_currentNodes [_nodeType] = new _Uize_Util_Xml [_nodeType]);
-						_node.parse (_source,_index);
-						if (_node.isValid) {
-							_nodes.push (_node);
-							_currentNodes [_nodeType] = null;
-							_index += _node.length;
+						function _tryParseNode (_nodeType) {
+							var _node = _currentNodes [_nodeType] || (_currentNodes [_nodeType] = new _Uize_Util_Xml [_nodeType]);
+							_node.parse (_source,_index);
+							if (_node.isValid) {
+								_nodes.push (_node);
+								_currentNodes [_nodeType] = null;
+								_index += _node.length;
+							}
+							return _node.isValid;
 						}
-						return _node.isValid;
-					}
-					while (_index < _sourceLength) {
-						_tryParseNode ('Tag') ||
-						_tryParseNode ('Cdata') ||
-						_tryParseNode ('Comment') ||
-						_tryParseNode ('Text');
-					}
-					m.length = _index - m.index;
-				},
+						while (_index < _sourceLength) {
+							_tryParseNode ('Tag') ||
+							_tryParseNode ('Cdata') ||
+							_tryParseNode ('Comment') ||
+							_tryParseNode ('Text');
+						}
+						m.length = _index - m.index;
+					},
 
-				serialize:function () {
-					return this.isValid ? Uize.map (this._nodes,'value.serialize ()').join ('') : '';
+					serialize:function () {
+						return this.isValid ? Uize.map (this._nodes,'value.serialize ()').join ('') : '';
+					}
 				}
 			}
 		);
