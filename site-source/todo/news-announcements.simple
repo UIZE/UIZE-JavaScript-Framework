@@ -15,9 +15,9 @@ Deprecated Uize.Node Modules
 
 	Still to do...
 
-	- write unit test for Uize.Node to test that it correctly aggregates all the migrated static methods
 	- move all documentation of Uize.Node methods to the new migrated methods
 	- document all deprecated Uize.Node methods as being migrated
+	- write unit test for Uize.Node to test that it correctly aggregates all the migrated static methods
 
 NEW MODULE: Uize.Loc.Pseudo
 	Still to do...
