@@ -33,27 +33,28 @@ Uize.module ({
 	builder:function () {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var
+		var
+			/*** Variables for Scruncher Optimization ***/
 				_undefined,
 				_string = 'string',
-				_package = function () {}
-			;
 
-		/*** General Variables ***/
-			var
+			/*** references to static methods used internally ***/
+				_getIndentationLevel,
+				_collapseChildren,
+
+			/*** General Variables ***/
 				_arrayDelimiter = '\\s*\\|\\s*',
 				_arrayDelimiterRegExp = new RegExp (_arrayDelimiter),
 				_arrayStartRegExp = new RegExp ('^' + _arrayDelimiter),
 				_arrayEndRegExp = new RegExp (_arrayDelimiter + '$')
-			;
+		;
 
-		/*** Public Static Methods ***/
-			var _getIndentationLevel = _package.getIndentationLevel = function (_line) {
+		return Uize.package ({
+			getIndentationLevel:_getIndentationLevel = function (_line) {
 				return _line.length - _line.replace (/^\s*/,'').length;
-			};
+			},
 
-			_package.parse = function (_params) {
+			parse:function (_params) {
 				var
 					_simple = _params.simple,
 					_parseName = _params.parseName !== false,
@@ -363,9 +364,9 @@ Uize.module ({
 				}
 				_params.collapseChildren && _collapseChildren (_data);
 				return _data;
-			};
+			},
 
-			var _collapseChildren = _package.collapseChildren = function (_data,_defaultForUndefinedValues) {
+			collapseChildren:_collapseChildren = function (_data,_defaultForUndefinedValues) {
 				var _dataChildren = _data.children;
 				delete _data.name;
 				delete _data.children;
@@ -403,8 +404,7 @@ Uize.module ({
 					;
 				}
 				return _data;
-			};
-
-		return _package;
+			}
+		});
 	}
 });

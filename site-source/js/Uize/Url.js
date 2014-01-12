@@ -28,31 +28,27 @@ Uize.module ({
 	builder:function () {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var
-				_package = function () {},
+		var
+			/*** Variables for Scruncher Optimization ***/
 				_undefined,
-				_Uize_isArray = Uize.isArray
-			;
+				_isArray = Uize.isArray,
 
-		/*** General Variables ***/
-			var
+			/*** references to static methods used internally ***/
+				_from,
+				_fromParams,
+				_toParams,
+				_fromPiece,
+				_toPiece,
+
+			/*** General Variables ***/
 				_sacredEmptyArray = [],
 				_sacredEmptyObject = {},
 				_cacheDefeatStrCallCount = 0,
 				_paramsDecodingOptionsDontFavorQuery = {favorQuery:false},
 				_leadingBackFoldersRegExp = /^(\.\.\/)*/
-			;
+		;
 
 		/*** Utility Functions ***/
-			function _decodeUrlPiece (_toDecode) {
-				return _toDecode != _undefined ? decodeURIComponent (_toDecode) : '';
-			}
-
-			function _encodeUrlPiece (_toEncode) {
-				return encodeURIComponent (_toEncode + '');
-			}
-
 			function _splitOnQuery (_url,_favorQuery) {
 				var _queryPos = (_url += '').indexOf ('?');
 				if (_queryPos < 0 && !_favorQuery) _queryPos = _url.length;
@@ -62,8 +58,8 @@ Uize.module ({
 				};
 			}
 
-		/*** Public Static Methods ***/
-			var _from = _package.from = function (_urlStr) {
+		return Uize.package ({
+			from:_from = function (_urlStr) {
 				var _urlSegmentsMatch =
 					_urlStr &&
 					_urlStr.match (
@@ -397,9 +393,9 @@ Uize.module ({
 							NOTES
 							- see also the =Uize.Url.fromParams= and =Uize.Url.fromPiece= static methods
 				*/
-			};
+			},
 
-			_package.fromParams = function (_urlParamsStr,_decodingOptions) {
+			fromParams:_fromParams = function (_urlParamsStr,_decodingOptions) {
 				var _urlParams = {};
 				if (
 					_urlParamsStr = _splitOnQuery (
@@ -418,7 +414,7 @@ Uize.module ({
 						++_urlParamPairNo < _urlParamPairsLength;
 					) {
 						if (_urlParamNameEncoded = (_urlParamPair = _urlParamPairs [_urlParamPairNo].split ('=')) [0])
-							_urlParams [_decodeUrlPiece (_urlParamNameEncoded)] = _decodeUrlPiece (_urlParamPair [1])
+							_urlParams [_fromPiece (_urlParamNameEncoded)] = _fromPiece (_urlParamPair [1])
 						;
 					}
 				}
@@ -456,9 +452,10 @@ Uize.module ({
 							- when parsing the query string, all parameter values are treated as strings
 							- see also the corresponding =Uize.Url.toParams= static method
 				*/
-			};
+			},
 
-			_package.fromPiece = _decodeUrlPiece;
+			fromPiece:_fromPiece = function (_toDecode) {
+				return _toDecode != _undefined ? decodeURIComponent (_toDecode) : '';
 				/*?
 					Static Methods
 						Uize.Url.fromPiece
@@ -479,8 +476,9 @@ Uize.module ({
 							NOTES
 							- see also the corresponding =Uize.Url.toPiece= static method
 				*/
+			},
 
-			_package.getCacheDefeatStr = function () {
+			getCacheDefeatStr:function () {
 				return Uize.now () + '' + Math.round (Math.random () * 1000) + _cacheDefeatStrCallCount++;
 				/*?
 					Static Methods
@@ -495,9 +493,9 @@ Uize.module ({
 							NOTES
 							- this method takes no parameters
 				*/
-			};
+			},
 
-			_package.toRelative = function (_baseUrl,_urlToRelativize) {
+			toRelative:function (_baseUrl,_urlToRelativize) {
 				if (!_baseUrl) {
 					return _urlToRelativize;
 				} else {
@@ -700,11 +698,11 @@ Uize.module ({
 							NOTES
 							- see the related =Uize.Url.toAbsolute= static method
 				*/
-			};
+			},
 
-			_package.toAbsolute = function (_baseUrl,_urlToAbsolutize) {
-				var _baseUrlPieces = _urlToAbsolutize ? _package.from (_urlToAbsolutize) : _sacredEmptyObject;
-				_baseUrlPieces.fullDomain ? (_urlToAbsolutize = '') : (_baseUrlPieces = _package.from (_baseUrl));
+			toAbsolute:function (_baseUrl,_urlToAbsolutize) {
+				var _baseUrlPieces = _urlToAbsolutize ? _from (_urlToAbsolutize) : _sacredEmptyObject;
+				_baseUrlPieces.fullDomain ? (_urlToAbsolutize = '') : (_baseUrlPieces = _from (_baseUrl));
 				var
 					_lastFolderPathAndFilename,
 					_folderPathAndFilename = _baseUrlPieces.folderPath + _urlToAbsolutize
@@ -751,21 +749,21 @@ Uize.module ({
 							NOTES
 							- see the related =Uize.Url.toAbsolute= static method
 				*/
-			};
+			},
 
-			_package.toParams = function (_urlParams) {
+			toParams:_toParams = function (_urlParams) {
 				var
 					_urlParamPairs = [],
 					_paramValue
 				;
-				if (_Uize_isArray (_urlParams))
+				if (_isArray (_urlParams))
 					_urlParams = _urlParams.length < 2
 						? _urlParams [0]
 						: Uize.copyInto.apply (Uize,[{}].concat (_urlParams))
 				;
 				for (var _paramName in _urlParams)
 					_paramName && (_paramValue = _urlParams [_paramName]) != _undefined &&
-						_urlParamPairs.push (_encodeUrlPiece (_paramName) + '=' + _encodeUrlPiece (_paramValue))
+						_urlParamPairs.push (_toPiece (_paramName) + '=' + _toPiece (_paramValue))
 				;
 				return _urlParamPairs.join ('&');
 				/*?
@@ -820,9 +818,10 @@ Uize.module ({
 							- this method does not prepend the query '?' character to the params string
 							- see also the corresponding =Uize.Url.fromParams= static method
 				*/
-			};
+			},
 
-			_package.toPiece = _encodeUrlPiece;
+			toPiece:_toPiece = function _encodeUrlPiece (_toEncode) {
+				return encodeURIComponent (_toEncode + '');
 				/*?
 					Static Methods
 						Uize.Url.toPiece
@@ -843,15 +842,16 @@ Uize.module ({
 							NOTES
 							- see also the corresponding =Uize.Url.fromPiece= static method
 				*/
+			},
 
-			_package.resolve = function (_url,_urlParams) {
-				if (_Uize_isArray (_url)) {
+			resolve:function (_url,_urlParams) {
+				if (_isArray (_url)) {
 					_urlParams = _url.slice (1).concat (_urlParams || _sacredEmptyArray);
 					_url = _url [0];
 				}
-				var _urlParamsStr = _package.toParams (
-					[_package.fromParams (_url,_paramsDecodingOptionsDontFavorQuery)].concat (
-						_Uize_isArray (_urlParams) ? _urlParams : [_urlParams]
+				var _urlParamsStr = _toParams (
+					[_fromParams (_url,_paramsDecodingOptionsDontFavorQuery)].concat (
+						_isArray (_urlParams) ? _urlParams : [_urlParams]
 					)
 				);
 				return _splitOnQuery (_url)._urlPath + (_urlParamsStr ? '?' : '') + _urlParamsStr;
@@ -1089,9 +1089,8 @@ Uize.module ({
 							NOTES
 							- see also the =Uize.Url.toParams= static method
 				*/
-			};
-
-		return _package;
+			}
+		});
 	}
 });
 

@@ -84,14 +84,16 @@ Uize.module ({
 	builder:function () {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var _package = function () {};
+		var
+			/*** references to static methods used internally ***/
+				_reorder
+		;
 
 		/*** Utility Functions ***/
 			function _randomSorter () {return Math.random () - .5}
 
-		/*** Public Static Methods ***/
-			var _reorder = _package.reorder = function (_source,_reorderScheme,_target) {
+		return Uize.package ({
+			reorder:_reorder = function (_source,_reorderScheme,_target) {
 				if (typeof _target != 'object')
 					_target = _target === false ? _source : []
 				;
@@ -179,9 +181,9 @@ Uize.module ({
 							NOTES
 							- see the related =Uize.Array.Order.insideOut=, =Uize.Array.Order.jumble=, =Uize.Array.Order.outsideIn=, and =Uize.Array.Order.reverse= static methods
 				*/
-			};
+			},
 
-			_package.insideOut = function (_elements,_target) {
+			insideOut:function (_elements,_target) {
 				return _reorder (_elements,'inside out',_target)
 				/*?
 					Static Methods
@@ -212,9 +214,9 @@ Uize.module ({
 							NOTES
 							- see the related =Uize.Array.Order.jumble=, =Uize.Array.Order.outsideIn=, =Uize.Array.Order.reorder=, and =Uize.Array.Order.reverse= static methods
 				*/
-			};
+			},
 
-			_package.jumble = function (_elements,_target) {
+			jumble:function (_elements,_target) {
 				return _reorder (_elements,'jumbled',_target)
 				/*?
 					Static Methods
@@ -243,9 +245,9 @@ Uize.module ({
 							NOTES
 							- see the related =Uize.Array.Order.insideOut=, =Uize.Array.Order.outsideIn=, =Uize.Array.Order.reorder=, and =Uize.Array.Order.reverse= static methods
 				*/
-			};
+			},
 
-			_package.outsideIn = function (_elements,_target) {
+			outsideIn:function (_elements,_target) {
 				return _reorder (_elements,'outside in',_target)
 				/*?
 					Static Methods
@@ -276,9 +278,9 @@ Uize.module ({
 							NOTES
 							- see the related =Uize.Array.Order.insideOut=, =Uize.Array.Order.jumble=, =Uize.Array.Order.reorder=, and =Uize.Array.Order.reverse= static methods
 				*/
-			};
+			},
 
-			_package.reverse = function (_elements,_target) {
+			reverse:function (_elements,_target) {
 				return _reorder (_elements,'reverse',_target)
 				/*?
 					Static Methods
@@ -305,7 +307,8 @@ Uize.module ({
 							NOTES
 							- see the related =Uize.Array.Order.insideOut=, =Uize.Array.Order.jumble=, =Uize.Array.Order.outsideIn=, and =Uize.Array.Order.reorder= static methods
 				*/
-			};
+			}
+		});
 
 		/*?
 			Value Types
@@ -332,8 +335,6 @@ Uize.module ({
 
 					- When an *array* is explicitly specified, then the result of an array method's processing will be packaged into the specified target array. This is convenient if you already have an array into which you wish to package the result. Incidentally, specifying the source array that you supplied to an array method as also the target array has the same effect as specifying the value =false= for =targetARRAYorBOOL= (ie. use the source as the target, don't use a different target).
 		*/
-
-		return _package;
 	}
 });
 
