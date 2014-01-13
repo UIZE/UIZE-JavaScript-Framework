@@ -137,22 +137,22 @@ Uize.module ({
 				);
 				/*?
 					Static Methods
-						Uize.Dom.Utils.showClickable
+						Uize.Dom.Util.showClickable
 							Sets the value of the "cursor" style property of the specified `node blob` so that the node(s) appear either clickable or not, depending on the specified boolean value.
 
 							This method is useful for DOM nodes that need to be wired up with click actions by JavaScript code, but that don't have CSS selectors from the document applying the appropriate cursor style to them.
 
 							SYNTAX
-							.........................................................
-							Uize.Dom.Utils.showClickable (nodeBLOB,clickableANYTYPE);
-							.........................................................
+							........................................................
+							Uize.Dom.Util.showClickable (nodeBLOB,clickableANYTYPE);
+							........................................................
 
 							While typically a Boolean, the =clickableANYTYPE= parameter can be of any type and the node(s) will be set to appear clickable if it resolves to =true=, and not clickable if it resolves to =false= - with the exception of =undefined=, when the node(s) will be set to appear clickable (see explanation below).
 
 							VARIATION
-							........................................
-							Uize.Dom.Utils.showClickable (nodeBLOB);
-							........................................
+							.......................................
+							Uize.Dom.Util.showClickable (nodeBLOB);
+							.......................................
 
 							When no =clickableANYTYPE= parameter is specified (or when its value is =undefined=), the node(s) will be set to appear clickable.
 
