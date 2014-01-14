@@ -52,10 +52,17 @@ Uize.module ({
 						m.index = _index || (_index = 0);
 						m.length = 0;
 						m.tagName = '';
+
+						/*** eat whitespace ***/
+							/*
+							while (_source.charAt (_index)) {
+							}
+							*/
 						/*
-							eat whitespace
-							expect alphanumeric characters
+
+							expect alphanumeric character, eat alphanumeric characters up until colon or whitespace
 							expect possible colon, followed by alphanumeric characters
+							expect whitespace or end of string
 						*/
 					},
 
