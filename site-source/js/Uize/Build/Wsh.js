@@ -4,7 +4,7 @@
 |    /    O /   |    MODULE : Uize.Build.Wsh Package
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
-| /____/ /__/_| | COPYRIGHT : (c)2005-2013 UIZE
+| /____/ /__/_| | COPYRIGHT : (c)2005-2014 UIZE
 |          /___ |   LICENSE : Available under MIT License or GNU General Public License
 |_______________|             http://www.uize.com/license.html
 */
@@ -30,13 +30,18 @@ Uize.module ({
 	builder:function () {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var
-				_package = function () {},
+		var
+			/*** Variables for Scruncher Optimization ***/
 				_undefined,
 				_wshShell,
-				_fileSystemObject
-			;
+				_fileSystemObject,
+
+			/*** references to static methods used internally ***/
+				_getScriptFolderPath,
+				_readFile,
+				_writeFile,
+				_exec
+		;
 
 		/*** Utility Functions ***/
 			function _getFileSystemObject (_params) {
@@ -51,8 +56,8 @@ Uize.module ({
 				return _wshShell || (_wshShell = new ActiveXObject ('WScript.Shell'));
 			}
 
-		/*** Public Static Methods ***/
-			var _getScriptFolderPath = _package.getScriptFolderPath = function () {
+		return Uize.package ({
+			getScriptFolderPath:_getScriptFolderPath = function () {
 				return WScript.ScriptFullName.slice (0,-WScript.ScriptName.length - 1);
 				/*?
 					Static Methods
@@ -64,9 +69,9 @@ Uize.module ({
 							scriptFolderPathSTR = Uize.Build.Wsh.getScriptFolderPath ();
 							............................................................
 				*/
-			};
+			},
 
-			var _readFile = _package.readFile = function (_params) {
+			readFile:_readFile = function (_params) {
 				var
 					_fileSystemObject = _getFileSystemObject (_params),
 					_path = typeof _params == 'string' ? _params : _params.path
@@ -105,9 +110,9 @@ Uize.module ({
 							- the optional =fileSystemObject= parameter should specify an instance of =Scripting.FileSystemObject=
 							- see also the =Uize.Build.Wsh.writeFile= static method
 				*/
-			};
+			},
 
-			var _writeFile = _package.writeFile = function (_params) {
+			writeFile:_writeFile = function (_params) {
 				var
 					_path = _params.path,
 					_fileSystemObject = _getFileSystemObject (_params)
@@ -155,9 +160,9 @@ Uize.module ({
 							- the optional =fileSystemObject= parameter should specify an instance of =Scripting.FileSystemObject=
 							- see also the =Uize.Build.Wsh.readFile= static method
 				*/
-			};
+			},
 
-			_package.buildFiles = function (_params) {
+			buildFiles:function (_params) {
 				var
 					_alwaysBuild = _params.alwaysBuild,
 					_dryRun = _params.dryRun,
@@ -319,9 +324,9 @@ Uize.module ({
 								NOTES
 								- If no =logFilePath= parameter is specified, or if it's value is an empty string, =null=, or =undefined=, then the filename for the log file will be derived from the filename of the build script, with the ".js" file extension replaced with the extension ".log".
 				*/
-			};
+			},
 
-			_package.exec = function (_commands) {
+			exec:_exec = function (_commands) {
 				var _error;
 				if (!Uize.isArray (_commands)) _commands = [_commands];
 				for (
@@ -340,15 +345,14 @@ Uize.module ({
 						}
 				;
 				return _error;
-			};
+			},
 
-			_package.runScripts = function (_scripts) {
-				return _package.exec (
+			runScripts:function (_scripts) {
+				return _exec (
 					Uize.map (Uize.isArray (_scripts) ? _scripts : [_scripts],'\'WScript \' + value')
 				);
-			};
-
-		return _package;
+			}
+		});
 	}
 });
 

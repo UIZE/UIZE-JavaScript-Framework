@@ -4,7 +4,7 @@
 |    /    O /   |    MODULE : Uize.Dom.Tree Package
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
-| /____/ /__/_| | COPYRIGHT : (c)2003-2013 UIZE
+| /____/ /__/_| | COPYRIGHT : (c)2003-2014 UIZE
 |          /___ |   LICENSE : Available under MIT License or GNU General Public License
 |_______________|             http://www.uize.com/license.html
 */
@@ -596,12 +596,17 @@
 
 Uize.module ({
 	name:'Uize.Dom.Tree',
-	required:'Uize.Node',
+	required:[
+		'Uize.Dom.Basics',
+		'Uize.Dom.Text'
+	],
 	builder:function () {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var _Uize_Node = Uize.Node;
+		var
+			/*** Variables for Performance Optimization ***/
+				_getById = Uize.Dom.Basics.getById
+		;
 
 		/*** Utility Functions ***/
 			function _setItemExpanded (_item,_expanded) {if (!_expanded) _item.expanded = false}
@@ -653,9 +658,7 @@ Uize.module ({
 					}
 					return _item;
 				}
-				var _item = _getItemFromListItem (
-					_isListNode (_node = _Uize_Node.getById (_node)) ? _node.parentNode : _node
-				);
+				var _item = _getItemFromListItem (_isListNode (_node = _getById (_node)) ? _node.parentNode : _node);
 				return (_item && (/\S/.test (_item.title) ? [_item] : _item.items)) || [];
 				/*?
 					Static Methods
@@ -703,7 +706,8 @@ Uize.module ({
 						_anchorPrefix = 'Uize_Node_Tree_',
 						_itemSpecifier = [],
 						_linkPrefix = location.href.replace (/#[^#]*$/,'') + '#',
-						_levelClassMatch
+						_levelClassMatch,
+						_getText = Uize.Dom.Text.getText
 					;
 					++_nodeNo < _nodesLength;
 				) {
@@ -725,7 +729,7 @@ Uize.module ({
 							}
 							_itemSpecifier.push (_currentLevel.items.length + 1);
 							var _item = {
-								title:_Uize_Node.getText (_node).replace (/^\s+/,'').replace (/\s+$/,''),
+								title:_getText (_node).replace (/^\s+/,'').replace (/\s+$/,''),
 								link:_linkPrefix + (_node.id || (_node.id = _anchorPrefix + _itemSpecifier.join ('_')))
 							};
 							if (_node.title) _item.description = _node.title;

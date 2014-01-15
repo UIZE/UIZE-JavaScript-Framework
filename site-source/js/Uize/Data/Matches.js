@@ -4,7 +4,7 @@
 |    /    O /   |    MODULE : Uize.Data.Matches Package
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
-| /____/ /__/_| | COPYRIGHT : (c)2012-2013 UIZE
+| /____/ /__/_| | COPYRIGHT : (c)2012-2014 UIZE
 |          /___ |   LICENSE : Available under MIT License or GNU General Public License
 |_______________|             http://www.uize.com/license.html
 */
@@ -164,18 +164,78 @@ Uize.module ({
 	builder:function () {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var
-				_package = function () {},
+		var
+			/*** Variables for Scruncher Optimization ***/
 				_true = true,
 				_false = false,
 				_undefined,
 				_Uize = Uize,
-				_resolveMatcher = _Uize.resolveMatcher
-			;
+				_resolveMatcher = _Uize.resolveMatcher,
 
-		/*** Public Static Methods ***/
-			_package.forEach = function (_source,_matcher,_iterator,_maxMatches) {
+			/*** references to static methods used internally ***/
+				_forEach
+		;
+
+		/*** Utility Functions ***/
+			function _filter (_source,_matcher,_maxMatches,_target,_remove) {
+				var
+					_sourceIsNumber = typeof _source == 'number',
+					_sourceActsLikeArray = _sourceIsNumber || _Uize.isArray (_source)
+				;
+				if (_maxMatches == _undefined)
+					_maxMatches = Infinity
+				;
+				if (typeof _target != 'object')
+					_target = _sourceIsNumber
+						? []
+						: _target === _false
+							? _source
+							: _sourceActsLikeArray ? [] : {}
+				;
+				var
+					_targetIsArray = _Uize.isArray (_target),
+					_totalRemoved = 0,
+					_targetLength = 0
+				;
+				if (!_targetIsArray) {
+					if (_target == _source)
+						_source = _Uize.copy (_target)
+					;
+					_Uize.emptyOut (_target);
+				}
+				if (_remove) {
+					var _resolvedMatcher = _resolveMatcher (_matcher);
+					_matcher = function (_value,_key) {
+						var _mustRemove = _totalRemoved < _maxMatches && _resolvedMatcher (_value,_key);
+						_mustRemove && _totalRemoved++;
+						return !_mustRemove;
+					};
+				}
+				_forEach (
+					_source,
+					_matcher,
+					function (_value,_key) {_target [_sourceActsLikeArray ? _targetLength++ : _key] = _value},
+					_remove ? _undefined : _maxMatches
+				);
+				if (_sourceActsLikeArray || _targetIsArray)
+					_target.length = _targetLength
+				;
+				return _target;
+			}
+
+			function _getMatchesAsArray (_source,_matcher,_maxMatches,_returnKeys) {
+				var _result = [];
+				_forEach (
+					_source,
+					_matcher,
+					function (_value,_key) {_result.push (_returnKeys ? _key : _value)},
+					_maxMatches
+				);
+				return _result;
+			}
+
+		return _Uize.package ({
+			forEach:_forEach = function (_source,_matcher,_iterator,_maxMatches) {
 				if (_maxMatches == _undefined)
 					_maxMatches = Infinity
 				;
@@ -290,55 +350,9 @@ Uize.module ({
 								..........................................................................................
 
 				*/
-			};
+			},
 
-			function _filter (_source,_matcher,_maxMatches,_target,_remove) {
-				var
-					_sourceIsNumber = typeof _source == 'number',
-					_sourceActsLikeArray = _sourceIsNumber || _Uize.isArray (_source)
-				;
-				if (_maxMatches == _undefined)
-					_maxMatches = Infinity
-				;
-				if (typeof _target != 'object')
-					_target = _sourceIsNumber
-						? []
-						: _target === _false
-							? _source
-							: _sourceActsLikeArray ? [] : {}
-				;
-				var
-					_targetIsArray = _Uize.isArray (_target),
-					_totalRemoved = 0,
-					_targetLength = 0
-				;
-				if (!_targetIsArray) {
-					if (_target == _source)
-						_source = _Uize.copy (_target)
-					;
-					_Uize.emptyOut (_target);
-				}
-				if (_remove) {
-					var _resolvedMatcher = _resolveMatcher (_matcher);
-					_matcher = function (_value,_key) {
-						var _mustRemove = _totalRemoved < _maxMatches && _resolvedMatcher (_value,_key);
-						_mustRemove && _totalRemoved++;
-						return !_mustRemove;
-					};
-				}
-				_package.forEach (
-					_source,
-					_matcher,
-					function (_value,_key) {_target [_sourceActsLikeArray ? _targetLength++ : _key] = _value},
-					_remove ? _undefined : _maxMatches
-				);
-				if (_sourceActsLikeArray || _targetIsArray)
-					_target.length = _targetLength
-				;
-				return _target;
-			}
-
-			_package.remove = function (_source,_matcher,_maxMatches,_target) {
+			remove:function (_source,_matcher,_maxMatches,_target) {
 				return _filter (_source,_matcher,_maxMatches,_target,_true);
 				/*?
 					Static Methods
@@ -438,9 +452,9 @@ Uize.module ({
 							NOTES
 							- see also the companion `Uize.Data.Matches.retain` static method
 				*/
-			};
+			},
 
-			_package.retain = function (_source,_matcher,_maxMatches,_target) {
+			retain:function (_source,_matcher,_maxMatches,_target) {
 				return _filter (_source,_matcher,_maxMatches,_target,_false);
 				/*?
 					Static Methods
@@ -450,31 +464,20 @@ Uize.module ({
 							NOTES
 							- see also the companion `Uize.Data.Matches.remove` static method
 				*/
-			};
+			},
 
-			_package.count = function (_source,_matcher,_maxMatches) {
+			count:function (_source,_matcher,_maxMatches) {
 				var _result = 0;
-				_package.forEach (_source,_matcher,function () {_result++},_maxMatches);
+				_forEach (_source,_matcher,function () {_result++},_maxMatches);
 				return _result;
 				/*?
 					Static Methods
 						Uize.Data.Matches.count
 							Returns an integer, representing the number of elements in the specified source array, or properties in the specified source object, or values in the specified source range, that match the specified matching criteria.
 				*/
-			};
+			},
 
-			function _getMatchesAsArray (_source,_matcher,_maxMatches,_returnKeys) {
-				var _result = [];
-				_package.forEach (
-					_source,
-					_matcher,
-					function (_value,_key) {_result.push (_returnKeys ? _key : _value)},
-					_maxMatches
-				);
-				return _result;
-			}
-
-			_package.keys = function (_source,_matcher,_maxMatches) {
+			keys:function (_source,_matcher,_maxMatches) {
 				return _getMatchesAsArray (_source,_matcher,_maxMatches,_true);
 				/*?
 					Static Methods
@@ -484,9 +487,9 @@ Uize.module ({
 							NOTES
 							- see also the companion `Uize.Data.Matches.values` static method
 				*/
-			};
+			},
 
-			_package.values = function (_source,_matcher,_maxMatches) {
+			values:function (_source,_matcher,_maxMatches) {
 				return _getMatchesAsArray (_source,_matcher,_maxMatches,_false);
 				/*?
 					Static Methods
@@ -496,9 +499,9 @@ Uize.module ({
 							NOTES
 							- see also the companion `Uize.Data.Matches.keys` static method
 				*/
-			};
+			},
 
-			_package.firstKey = function (_source,_matcher) {
+			firstKey:function (_source,_matcher) {
 				return _getMatchesAsArray (_source,_matcher,1,_true) [0];
 				/*?
 					Static Methods
@@ -508,9 +511,9 @@ Uize.module ({
 							NOTES
 							- see also the companion `Uize.Data.Matches.firstValue` static method
 				*/
-			};
+			},
 
-			_package.firstValue = function (_source,_matcher) {
+			firstValue:function (_source,_matcher) {
 				return _getMatchesAsArray (_source,_matcher,1,_false) [0];
 				/*?
 					Static Methods
@@ -520,9 +523,8 @@ Uize.module ({
 							NOTES
 							- see also the companion `Uize.Data.Matches.firstKey` static method
 				*/
-			};
-
-		return _package;
+			}
+		});
 	}
 });
 

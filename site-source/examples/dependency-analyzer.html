@@ -112,7 +112,8 @@ Uize.require (
 		'Uize.Util.Dependencies.Async',
 		'Uize.Widgets.SimpleStatsTable.Widget',
 		'Uize.Widgets.SimpleStatsTable.Sortable.Widget',
-		'Uize.Node',
+		'Uize.Dom.Basics',
+		'Uize.Dom.Text',
 		'Uize.Tooltip',
 		'Uize.Widgets.Tooltip.Widget'
 	],
@@ -443,12 +444,16 @@ Uize.require (
 									var _tooltipNode = _tooltip.getNode ();
 
 									_page.wireNode (
-										Uize.Node.find ({root:_dependenciesListTable.getNode (),tagName:'A',href:/\?module=/}),
+										Uize.Dom.Basics.find ({
+											root:_dependenciesListTable.getNode (),
+											tagName:'A',
+											href:/\?module=/
+										}),
 										{
 											mouseover:function () {
 												var
 													_link = this,
-													_moduleName = Uize.Node.getText (_link)
+													_moduleName = Uize.Dom.Text.getText (_link)
 												;
 												_tooltip.set ({
 													heading:_moduleName,

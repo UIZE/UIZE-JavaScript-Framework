@@ -4,7 +4,7 @@
 |    /    O /   |    MODULE : Uize.Str.Replace Package
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
-| /____/ /__/_| | COPYRIGHT : (c)2013 UIZE
+| /____/ /__/_| | COPYRIGHT : (c)2013-2014 UIZE
 |          /___ |   LICENSE : Available under MIT License or GNU General Public License
 |_______________|             http://www.uize.com/license.html
 */
@@ -28,11 +28,13 @@ Uize.module ({
 	builder:function () {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var _package = function () {};
+		var
+			/*** references to static methods used internally ***/
+				_replacerByLookup
+		;
 
-		/*** Static Methods ***/
-			_package.replacerByLookup = function (_replacementsLookup) {
+		return Uize.package ({
+			replacerByLookup:_replacerByLookup = function (_replacementsLookup) {
 				var
 					_regExpPipedSegments = [],
 					_singleCharReplacements = []
@@ -67,10 +69,10 @@ Uize.module ({
 							replacerFUNC = Uize.Str.Replace.replacerByLookup (replacementsLookupOBJ);
 							.........................................................................
 				*/
-			};
+			},
 
-			_package.replaceByLookup = function (_sourceStr,_replacementsLookup) {
-				return _package.replacerByLookup (_replacementsLookup) (_sourceStr);
+			replaceByLookup:function (_sourceStr,_replacementsLookup) {
+				return _replacerByLookup (_replacementsLookup) (_sourceStr);
 				/*?
 					Static Methods
 						Uize.Str.Replace.replaceByLookup
@@ -81,9 +83,8 @@ Uize.module ({
 							resultSTR = Uize.Str.Replace.replaceByLookup (sourceSTR,replacementsLookupOBJ);
 							...............................................................................
 				*/
-			};
-
-		return _package;
+			}
+		});
 	}
 });
 

@@ -49,7 +49,7 @@ Terms
 		...................
 
 	CRIS
-		A mechanism called a Circular Reference Isolation System is employed in the event wiring mechanism of the =Uize.Node= package and acts to isolate DOM nodes from their true event handler code, thereby avoiding all circular references and possible DOM node memory leaks in Internet Explorer 6.
+		A mechanism called a Circular Reference Isolation System is employed in the event wiring mechanism of the =Uize.Dom.Basics= package and acts to isolate DOM nodes from their true event handler code, thereby avoiding all circular references and possible DOM node memory leaks in Internet Explorer 6.
 
 	fade
 		In the context of the UIZE JavaScript Framework, the term "fade" is used to refer to an automated interpolation of a value between a start value and an end value.
@@ -81,7 +81,7 @@ Terms
 		For more information on JavaScript libraries, consult the guide [[../guides/javascript-modules.html][JavaScript Modules]].
 
 	Node Blob
-		A node blob is a concept that exists in the =Uize.Node= and =Uize.Widget= classes, whereby one ore more DOM nodes can be specified using an arbitrarily complex data structure.
+		A node blob is a concept that exists in the =Uize.Dom.Basics= and =Uize.Widget= classes, whereby one ore more DOM nodes can be specified using an arbitrarily complex data structure.
 
 		Such a data structure may employ an arbitrary mix of objects, arrays, and simple values that are node references or strings representing node ID's.
 

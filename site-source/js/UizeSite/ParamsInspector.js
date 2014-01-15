@@ -4,7 +4,7 @@
 |    /    O /   |    MODULE : UizeSite.ParamsInspector
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
-| /____/ /__/_| | COPYRIGHT : (c)2009-2013 UIZE
+| /____/ /__/_| | COPYRIGHT : (c)2009-2014 UIZE
 |          /___ |   LICENSE : Available under MIT License or GNU General Public License
 |_______________|             http://www.uize.com/license.html
 */
@@ -24,6 +24,7 @@ Uize.module ({
 		'Uize.Data',
 		'Uize.Json',
 		'Uize.Dom.Form',
+		'Uize.Dom.Text',
 		'UizeSite.Templates.ParamsInspector'
 	],
 	builder:function (_superclass) {
@@ -102,7 +103,7 @@ Uize.module ({
 								function (_event) {
 									var _eventTarget = _event.target || _event.srcElement;
 									if (_eventTarget.tagName == 'A') {
-										_choosePreset (m,Uize.Node.getText (_eventTarget));
+										_choosePreset (m,Uize.Dom.Text.getText (_eventTarget));
 										_firePresetSelectedEvent (m);
 									}
 								}

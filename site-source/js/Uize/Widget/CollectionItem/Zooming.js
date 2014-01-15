@@ -4,7 +4,7 @@
 |    /    O /   |    MODULE : Uize.Widget.CollectionItem.Zooming Class
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
-| /____/ /__/_| | COPYRIGHT : (c)2008-2013 UIZE
+| /____/ /__/_| | COPYRIGHT : (c)2008-2014 UIZE
 |          /___ |   LICENSE : Available under MIT License or GNU General Public License
 |_______________|             http://www.uize.com/license.html
 */
@@ -27,7 +27,7 @@ Uize.module ({
 	name:'Uize.Widget.CollectionItem.Zooming',
 	required:[
 		'Uize.Node',
-		'Uize.Node.VirtualEvent',
+		'Uize.Dom.VirtualEvents.Remain',
 		'Uize.Fade'
 	],
 	builder:function (_superclass) {
@@ -282,7 +282,7 @@ Uize.module ({
 
 						m.wireNode (
 							_previewShellNode,
-							Uize.Node.VirtualEvent.mouseRest (150),
+							Uize.Dom.VirtualEvents.Remain.mouseRest (150),
 							function () {
 								if (!m.get ('over')) return;
 									/* HACK:

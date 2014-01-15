@@ -4,7 +4,7 @@
 |    /    O /   |    MODULE : Uize.Widget.TableSort Class
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
-| /____/ /__/_| | COPYRIGHT : (c)2005-2013 UIZE
+| /____/ /__/_| | COPYRIGHT : (c)2005-2014 UIZE
 |          /___ |   LICENSE : Available under MIT License or GNU General Public License
 |_______________|             http://www.uize.com/license.html
 */
@@ -25,17 +25,21 @@
 
 Uize.module ({
 	name:'Uize.Widget.TableSort',
-	required:'Uize.Node',
+	required:[
+		'Uize.Dom.Basics',
+		'Uize.Dom.Text'
+	],
 	builder:function (_superclass) {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var
+		var
+			/*** Variables for Scruncher Optimization ***/
 				_null = null,
 				_true = true,
-				_Uize_Node = Uize.Node,
-				_updateUi = 'updateUi'
-			;
+				_updateUi = 'updateUi',
+				_getById = Uize.Dom.Basics.getById,
+				_getText = Uize.Dom.Text.getText
+		;
 
 		/*** Utility Functions ***/
 			function _getChildNodesByTagName (_node,_tagName) {
@@ -52,7 +56,7 @@ Uize.module ({
 			}
 
 			function _getTableBody (_node) {
-				return _Uize_Node.getById (_node).getElementsByTagName ('tbody') [0];
+				return _getById (_node).getElementsByTagName ('tbody') [0];
 			}
 
 			function _getRowCells (_row) {
@@ -156,7 +160,7 @@ Uize.module ({
 								if (_rowNo != m._headingsRowNo) {
 									var _cells = _getRowCells (_rows [_rowNo]);
 									if (_cells.length == m._headings.length) {
-										var _cellText = _Uize_Node.getText (_cells [_columnNo]);
+										var _cellText = _getText (_cells [_columnNo]);
 										if (_cellText) {
 											var _cellTestIsPureNumber = !Uize.isNaN (+_cellText);
 											_columnIsPureNumber = _columnIsPureNumber && _cellTestIsPureNumber;
@@ -325,7 +329,7 @@ Uize.module ({
 										_tableBodyRowsLength = _tableBodyRows.length,
 										_headingsText = Uize.map (
 											m._headings,
-											function (_heading) {return _Uize_Node.getText (_heading)}
+											function (_heading) {return _getText (_heading)}
 										),
 										_wireRow = function (_row) {
 											_row.Uize_Widget_TableSort_oldClassName = _row.className;

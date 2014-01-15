@@ -60,6 +60,23 @@ Uize.module ({
 		return _Uize.package ({
 			getDocumentScrollElement:_getDocumentScrollElement = function () {
 				return document [_Uize_Dom_Basics.isSafari ? 'body' : 'documentElement']
+				/*?
+					Static Methods
+						Uize.Dom.Pos.getDocumentScrollElement
+							A utility function that returns the DOM node on which you can scroll the document.
+
+							SYNTAX
+							.........................................
+							Uize.Dom.Pos.getDocumentScrollElement ();
+							.........................................
+
+							This method abstracts the difference between WebKit browsers (Safari, Chrome, etc.) and other browsers as to which DOM node is the one that allows changing the scrolling position of the document.
+
+							EXAMPLE
+							.........................................................................................
+							Uize.Dom.Pos.getDocumentScrollElement ().scrollTop = 0;  // scroll to the top of the page
+							.........................................................................................
+				*/
 			},
 
 			doRectanglesOverlap:_doRectanglesOverlap = function (
@@ -69,6 +86,36 @@ Uize.module ({
 					_aWidth - 1 + +_aLeft >= _bLeft && _bWidth - 1 + +_bLeft >= _aLeft &&
 					_aHeight - 1 + +_aTop >= _bTop && _bHeight - 1 + +_bTop >= _aTop
 				);
+				/*?
+					Static Methods
+						Uize.Dom.Pos.doRectanglesOverlap
+							Returns a boolean, indicating whether or not the rectangles specified by the two coordinate sets overlap one another. Two rectangles are considered to overlap if any part of either rectangle is contained by the other.
+
+							SYNTAX
+							.................................................................
+							rectanglesOverlapBOOL = Uize.Dom.Pos.doRectanglesOverlap (
+								aLeftPixelsINT,aTopPixelsINT,aWidthPixelsINT,aHeightPixelsINT,
+								bLeftPixelsINT,bTopPixelsINT,bWidthPixelsINT,bHeightPixelsINT
+							);
+							.................................................................
+
+							TEST FOR OVERLAPPING LINES
+
+							To use this method to test if two lines overlap (rather than two rectangles), you can use dummy values for one of the axes, as in...
+
+							.....................................................
+							linesOverlapBOOL = Uize.Dom.Pos.doRectanglesOverlap (
+								aPosINT,0,aDimINT,1,bPosINT,0,bDimINT,1
+							);
+							.....................................................
+
+							By specifying =0= for both the =aTopPixelsINT= and =bTopPixelsINT= parameters, and =1= for both the =aHeightPixelsINT= and =bHeightPixelsINT= parameters, you are essentially guaranteeing that the two rectangles overlap on the vertical axis (since their vertical coordinates are identical), and this has the effect of making the vertical test redundant, so the horizontal values can then be used to test for overlapping of two line segments.
+
+							Of course, you can use this technique to test for overlapping of any two line segments - it doesn't matter if those lines are from a vertical or horizontal axis, since we've collapsed a test in 2D space to being a test in 1D space.
+
+							NOTES
+							- any parameter of this method can be an object that implements a =valueOf= interface (such as an instance of a =Uize.Class= subclass that implements the =value= state property)
+				*/
 			},
 
 			getCoords:_getCoords = function (_node) {
@@ -208,6 +255,37 @@ Uize.module ({
 					seen:_seen,
 					percentSeen:_percentSeen
 				};
+				/*?
+					Static Methods
+						Uize.Dom.Pos.getCoords
+							Returns an object, representing the coordinates of the specified node, relative to the top left of the document.
+
+							SYNTAX
+							......................................................
+							nodeCoordsOBJ = Uize.Dom.Pos.getCoords (nodeSTRorOBJ);
+							......................................................
+
+							RETURN
+							............................
+							{
+								x : xPixelsINT,
+								y : yPixelsINT,
+								width : widthPixelsINT,
+								height : heightPixelsINT,
+								area : areaPixelsINT,
+								left : leftPixelsINT,
+								top : topPixelsINT,
+								right : rightPixelsINT,
+								bottom : bottomPixelsINT,
+								seen : seenBOOL
+							}
+							............................
+
+							The "x" and "left" properties of the return object are equivalent, as are the "y" and "top" properties.
+
+							NOTES
+							- compare to the =Uize.Dom.Pos.getDimensions= static method
+				*/
 			},
 
 			getDimensions:_getDimensions = function (_node) {
@@ -225,10 +303,98 @@ Uize.module ({
 				} else {
 					return {width:0,height:0};
 				}
+				/*?
+					Static Methods
+						Uize.Dom.Pos.getDimensions
+							Returns an object, containing =width= and =height= properties that reflect the displayed dimensions for the specified node.
+
+							SYNTAX
+							........................................................
+							nodeDimsOBJ = Uize.Dom.Pos.getDimensions (nodeSTRorOBJ);
+							........................................................
+
+							RETURN VALUE
+							................
+							{
+								width : INT,
+								height : INT
+							}
+							................
+				*/
 			},
 
 			setCoords:_setCoords = function (_nodeBlob,_coords) {
 				_setStyle (_nodeBlob,_Uize.isArray (_coords) ? _Uize.meldKeysValues (_coordNames,_coords) : _coords);
+				/*?
+					Static Methods
+						Uize.Dom.Pos.setCoords
+							Sets the left, top, width, and height coordinates for the specified `node blob`.
+
+							SYNTAX
+							...................................................
+							Uize.Dom.Pos.setCoords (nodeBLOB,coordsARRAYorOBJ);
+							...................................................
+
+							The =coordsARRAYorOBJ= parameter can be an object of the form...
+
+							...........................................
+							{
+								left: leftINTorSTRorOBJ,     // optional
+								top: topINTorSTRorOBJ,       // optional
+								width: widthINTorSTRorOBJ,   // optional
+								height: heightINTorSTRorOBJ  // optional
+							}
+							...........................................
+
+							...or an array of the form...
+
+							...........................................................................
+							[leftINTorSTRorOBJ,topINTorSTRorOBJ,widthINTorSTRorOBJ,heightINTorSTRorOBJ]
+							...........................................................................
+
+							...or...
+
+							....................................
+							[leftINTorSTRorOBJ,topINTorSTRorOBJ]
+							....................................
+
+							When number type values are specified for =leftINTorSTRorOBJ=, =topINTorSTRorOBJ=, =widthINTorSTRorOBJ=, or =heightINTorSTRorOBJ=, those values will be converted to strings by appending the "px" unit. When string type values are specified, the unit should already be present in the value. =Uize.Class= subclass instances can also be specified, and they will be converted to values by invoking their =valueOf Intrinsic Method=.
+
+							EXAMPLES
+							..........................................................................................
+							// just left and top coordinates
+
+							Uize.Dom.Pos.setCoords ('nodeId',[0,0]);
+							Uize.Dom.Pos.setCoords ('nodeId',['0px','0px']);
+							Uize.Dom.Pos.setCoords ('nodeId',[sliderL,sliderT]);
+							Uize.Dom.Pos.setCoords ('nodeId',{left:0,top:0});
+							Uize.Dom.Pos.setCoords ('nodeId',{left:'0px',top:'0px'});
+							Uize.Dom.Pos.setCoords ('nodeId',{left:sliderL,top:sliderT});
+
+
+							// left, top, width, and height
+
+							Uize.Dom.Pos.setCoords ('nodeId',[0,0,200,100]);
+							Uize.Dom.Pos.setCoords ('nodeId',['0px','0px','200px','100px']);
+							Uize.Dom.Pos.setCoords ('nodeId',[sliderL,sliderT,sliderW,sliderH]);
+							Uize.Dom.Pos.setCoords ('nodeId',{left:0,top:0,width:200,height:100});
+							Uize.Dom.Pos.setCoords ('nodeId',{left:'0px',top:'0px',width:'200px',height:'100px'});
+							Uize.Dom.Pos.setCoords ('nodeId',{left:sliderL,top:sliderT,width:sliderW,height:sliderH});
+
+
+							// just width and height
+
+							Uize.Dom.Pos.setCoords ('nodeId',{width:200,height:100});
+							Uize.Dom.Pos.setCoords ('nodeId',{width:'200px',height:'100px'});
+							Uize.Dom.Pos.setCoords ('nodeId',{width:sliderW,height:sliderH});
+							..........................................................................................
+
+							In the above example, =sliderL=, =sliderT=, =sliderW=, and =sliderH= are instances of the =Uize.Widget.Bar.Slider= class.
+
+							NOTES
+							- this method can operate on multiple nodes at a time. For more details, see the section on `node blob`
+							- see also the =Uize.Dom.Pos.getCoords= static method
+				*/
 			},
 
 			centerInWindow:function (_nodeBlob) {
@@ -246,6 +412,22 @@ Uize.module ({
 						);
 					}
 				);
+				/*?
+					Static Methods
+						Uize.Dom.Pos.centerInWindow
+							Positions the specified absolutely positioned node (or `node blob`) to be centered in the window.
+
+							SYNTAX
+							.......................................
+							Uize.Dom.Pos.centerInWindow (nodeBLOB);
+							.......................................
+
+							This method can be useful for positioning dialogs, loading indicator overlays, splashscreens, etc.
+
+							NOTES
+							- this method can operate on multiple nodes at a time. For more details, see the section on `node blob`
+							- nodes centered using this method should be absolutely positioned and should not be set to =display:none= at the time of being centered
+				*/
 			},
 
 			getEventAbsPos:_getEventAbsPos = function (_eventOrPosObj) {
@@ -262,6 +444,31 @@ Uize.module ({
 						top:_eventOrPosObj.clientY + _documentElement.scrollTop
 					};
 				}
+				/*?
+					Static Methods
+						Uize.Dom.Pos.getEventAbsPos
+							Returns an object, representing the coordinates of the specified DOM event, relative to the top left of the document.
+
+							SYNTAX
+							...........................................................
+							eventAbsPosOBJ = Uize.Dom.Pos.getEventAbsPos (domEventOBJ);
+							...........................................................
+
+							RETURN
+							........................
+							{
+								left : leftPixelsINT,
+								top : topPixelsINT
+							}
+							........................
+
+							VARIATION
+							................................................
+							eventAbsPosOBJ = Uize.Dom.Pos.getEventAbsPos ();
+							................................................
+
+							When no =domEventOBJ= parameter is specified, this method returns the absolute coordinates for the mouse's current position. This is useful, because sometimes the reference to an initiating DOM event might get lost through multiple layers of handler code in your application. In such cases, this variation provides a fallback for getting the current mouse coordinates for use in positioning popups, dialogs, etc.
+				*/
 			},
 
 			setAbsPos:_setAbsPos = function (_nodeBlob,_absPos,_coordMargin) {
@@ -304,6 +511,60 @@ Uize.module ({
 						);
 					}
 				);
+				/*?
+					Static Methods
+						Uize.Dom.Pos.setAbsPos
+							Positions the specified absolutely positioned node (or `node blob`) to be adjacent to the specified absolute position coordinates.
+
+							SYNTAX
+							................................................................
+							Uize.Dom.Pos.setAbsPos (nodeBLOB,absPosOBJ,coordMarginINTorOBJ);
+							................................................................
+
+							This method is useful for displaying an absolutely positioned node adjacent to absolute position coordinates, in such a way that the node being positioned is kept within view in the browser window. This comes in handy, for example, when positioning tooltips that track the mouse cursor position. If the default positioning of the node causes some part of it to fall out of view in a given axis, then its position will be flipped to the other side of the absolute position coordinate for that axis, according to the `flipping behavior` described below.
+
+							The absPosOBJ Parameter
+								The =absPosOBJ= parameter specifies the center of the region, adjacent to which the node should be positioned.
+
+								The value of this parameter should be an object of the form...
+
+								........................
+								{
+									left : leftPixelsINT,
+									top : topPixelsINT
+								}
+								........................
+
+							The coordMarginINTorOBJ Parameter
+								The optional =coordMarginINTorOBJ= parameter specifies a margin around the coordinates specified in the =absPosOBJ= parameter that should be avoided when positioning the node.
+
+								This parameter is useful for positioning tooltips that should track the cursor position and that should avoid obscuring - or being obscured by - the cursor pointer. The value of this parameter should be either an integer that specifies a margin for both the x and y axes, or an object of the form...
+
+								........................
+								{
+									x : xMarginPixelsINT,
+									y : yMarginPixelsINT
+								}
+								........................
+
+							Combining absPosOBJ and coordMarginINTorOBJ
+								Essentially, the combination of the =absPosOBJ= and =coordMarginINTorOBJ= parameters defines a region, adjacent to which the node should be positioned, and that should be avoided when positioning the node, and where the margin specified by the =coordMarginINTorOBJ= parameter extends the region to either side of the point specified by the =absPosOBJ= paramter on each axis, by the number of pixels specified for each axis in the =coordMarginINTorOBJ= parameter.
+
+							Flipping Behavior
+								By default, this method will first try to position the node so that its top edge butts up against the bottom edge of the region defined by the combination of the =absPosOBJ= and =coordMarginINTorOBJ= parameters, and so that its left edge butts up against this region's right edge.
+
+								If, with this positioning, the node is not fully in view vertically, then its position will be flipped on the y axis so that its bottom edge butts up against the top edge of the region. And if, with this positioning, the node is not fully in view horizontally, then its position will be flipped about on the x axis so that its right edge butts up against the left edge of the region.
+
+							VARIATION
+							............................................
+							Uize.Dom.Pos.setAbsPos (nodeBLOB,absPosOBJ);
+							............................................
+
+							When the optional =coordMarginINTorOBJ= parameter is not specified, then its value will be defaulted to ={x:0,y:0}=.
+
+							NOTES
+							- compare to the =Uize.Dom.Pos.setAbsPosAdjacentTo= static method
+				*/
 			},
 
 			setAbsPosAdjacentTo:function (_nodeBlob,_referenceNode,_pivotAxis) {
@@ -330,6 +591,42 @@ Uize.module ({
 						);
 					}
 				);
+				/*?
+					Static Methods
+						Uize.Dom.Pos.setAbsPosAdjacentTo
+							Positions the specified absolutely positioned node (or `node blob`) to be adjacent to the specified reference node.
+
+							SYNTAX
+							..........................................................................
+							Uize.Dom.Pos.setAbsPosAdjacentTo (nodeBLOB,referenceNodeOBJ,pivotAxisSTR);
+							..........................................................................
+
+							This method is useful for displaying an absolutely positioned node adjacent to a reference node, in such a way that the node being positioned is kept within view in the browser window. This comes in handy for positioning tooltips, droplists, popup palettes, etc. If the default positioning of the node causes some part of it to fall out of view, then the position will be flipped to the other side of the reference node on the specified pivot axis.
+
+							Y Pivot Axis
+								When the value ='y'= is specified for the =pivotAxisSTR= parameter, then this method will first try to position the node so that its top edge butts up against the bottom edge of the reference node, and so that its left edge is aligned with the left edge of the reference node. If the node being positioned is not fully in view vertically, then its position will be flipped about the y pivot axis so that its bottom edge butts up against the top edge of the reference node. If the node being positioned is not fully in view horizontally, then its position will be flipped about on the x axis so that its right edge is aligned with the right edge of the reference node. The y pivot axis mode is useful for droplists / dropdown menus.
+
+							X Pivot Axis
+								When the value ='x'= is specified for the =pivotAxisSTR= parameter, then this method will first try to position the node so that its left edge butts up against the right edge of the reference node, and so that its top edge is aligned with the top edge of the reference node. If the node being positioned is not fully in view horizontally, then its position will be flipped about the x pivot axis so that its right edge butts up against the left edge of the reference node. If the node being positioned is not fully in view vertically, then its position will be flipped about on the y axis so that its bottom edge is aligned with the bottom edge of the reference node. The x pivot axis mode is useful for submenus of a dropdown menu, or for the top level menus of a vertically arranged menu.
+
+							VARIATION 1
+							.............................................................
+							Uize.Dom.Pos.setAbsPosAdjacentTo (nodeBLOB,referenceNodeOBJ);
+							.............................................................
+
+							When the optional =pivotAxisSTR= parameter is not specified, then its value will be defaulted to ='y'=.
+
+							VARIATION 2
+							............................................
+							Uize.Dom.Pos.setAbsPosAdjacentTo (nodeBLOB);
+							............................................
+
+							When only the =nodeBLOB= parameter is specified, then the current absolute position of the mouse cursor will be used as the reference point for positioning, and the =pivotAxisSTR= parameter will be defaulted to ='y'=.
+
+							NOTES
+							- when the value of the =referenceNodeOBJ= parameter is =null=, =undefined=, or is a string value representing the id for a node that is not in the document, or if the node is not displayed when this method is called and its dimensions are reported as 0x0, then this method will use the current absolute position of the mouse cursor as the reference point for positioning
+							- compare to the =Uize.Dom.Pos.setAbsPos= static method
+				*/
 			}
 		});
 	}

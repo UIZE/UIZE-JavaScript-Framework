@@ -4,7 +4,7 @@
 |    /    O /   |    MODULE : Uize.Web Object
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
-| /____/ /__/_| | COPYRIGHT : (c)1997-2013 UIZE
+| /____/ /__/_| | COPYRIGHT : (c)1997-2014 UIZE
 |          /___ |   LICENSE : Available under MIT License or GNU General Public License
 |_______________|             http://www.uize.com/license.html
 */
@@ -87,7 +87,8 @@ Uize.module ({
 	name:'Uize.Web',
 	required:[
 		'Uize.Node',
-		'Uize.Dom.Classes'
+		'Uize.Dom.Classes',
+		'Uize.Dom.Text'
 	],
 	builder:function () {
 		'use strict';
@@ -101,7 +102,8 @@ Uize.module ({
 
 				_Uize = Uize,
 				_Uize_Node = _Uize.Node,
-				_Uize_Dom_Classes = _Uize.Dom.Classes,
+				_Uize_Dom = _Uize.Dom,
+				_Uize_Dom_Classes = _Uize_Dom.Classes,
 
 				_Uize_isString = _Uize.isString,
 				_Uize_isArray = _Uize.isArray,
@@ -2792,33 +2794,6 @@ Uize.module ({
 					*/
 				};
 
-				_objectPrototype.showClickable = function(_clickable) {
-					return this._handleSetAction(_clickable, _Uize_Node.showClickable);
-					/*?
-						Instance Methods
-							showClickable
-								Sets the value of the =cursor= CSS property for the set of matched DOM nodes so that the node(s) appear either clickable or not.
-
-								SYNTAX
-								........................................................
-								myWeb = myWeb.showClickable(clickableBOOL);
-								........................................................
-
-								VARIATION 1
-								........................................................
-								myWeb = myWeb.showClickable();
-								........................................................
-
-								VARIATION 2
-								........................................................
-								myWeb = myWeb.showClickable(clickableFUNC);
-								........................................................
-
-								NOTES
-								- Returns a reference to the same =Uize.Web= object
-					*/
-				};
-
 				_objectPrototype.supportsCss = function(_propertyName, _returnAll) {
 					return this._handleGetAction(
 						function(_node) { return _supportsCss(_propertyName, _node) },
@@ -3628,7 +3603,7 @@ Uize.module ({
 
 				_objectPrototype.text = function(_returnAllOrValueToSet) {
 					return this._handleGetOrSetAction(
-						_Uize_Node.getText,
+						_Uize_Dom.Text.getText,
 						_returnAllOrValueToSet,
 						function(_node, _text) {
 							_node.appendChild(_document.createTextNode(_text + '')); // coerce to a string value by invoking valueOf method

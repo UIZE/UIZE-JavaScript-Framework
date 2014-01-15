@@ -4,7 +4,7 @@
 |    /    O /   |    MODULE : Uize.Test.Uize.String Class
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
-| /____/ /__/_| | COPYRIGHT : (c)2010-2013 UIZE
+| /____/ /__/_| | COPYRIGHT : (c)2010-2014 UIZE
 |          /___ |   LICENSE : Available under MIT License or GNU General Public License
 |_______________|             http://www.uize.com/license.html
 */
@@ -25,22 +25,22 @@
 
 Uize.module ({
 	name:'Uize.Test.Uize.String',
-	required:[
-		'Uize.Array.Join',
-		'Uize.Str.Camel',
-		'Uize.Str.Has',
-		'Uize.Str.Limit',
-		'Uize.Str.Split',
-		'Uize.Str.Trim',
-		'Uize.Str.Repeat'
-	],
 	builder:function () {
 		'use strict';
 
 		return Uize.Test.resolve ({
 			title:'Test for Uize.String Module',
 			test:[
-				Uize.Test.requiredModulesTest ('Uize.String'),
+				Uize.Test.requiredModulesTest ([
+					'Uize.Array.Join',
+					'Uize.Str.Camel',
+					'Uize.Str.Has',
+					'Uize.Str.Limit',
+					'Uize.Str.Split',
+					'Uize.Str.Trim',
+					'Uize.Str.Repeat',
+					'Uize.String'
+				]),
 				Uize.Test.migratedStaticMethodsTest ([
 					['Uize.String.contains','Uize.Str.Has.has'],
 					['Uize.String.endsWith','Uize.Str.Has.hasSuffix'],

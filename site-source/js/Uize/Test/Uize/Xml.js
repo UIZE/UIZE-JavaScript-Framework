@@ -4,7 +4,7 @@
 |    /    O /   |    MODULE : Uize.Test.Uize.Xml Class
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
-| /____/ /__/_| | COPYRIGHT : (c)2010-2013 UIZE
+| /____/ /__/_| | COPYRIGHT : (c)2010-2014 UIZE
 |          /___ |   LICENSE : Available under MIT License or GNU General Public License
 |_______________|             http://www.uize.com/license.html
 */
@@ -25,17 +25,17 @@
 
 Uize.module ({
 	name:'Uize.Test.Uize.Xml',
-	required:[
-		'Uize.Util.Html.Encode',
-		'Uize.Class.Value'
-	],
+	required:'Uize.Class.Value',
 	builder:function () {
 		'use strict';
 
 		return Uize.Test.resolve ({
 			title:'Test for Uize.Xml Module',
 			test:[
-				Uize.Test.requiredModulesTest ('Uize.Xml'),
+				Uize.Test.requiredModulesTest ([
+					'Uize.Util.Html.Encode',
+					'Uize.Xml'
+				]),
 				Uize.Test.staticMethodsTest ([
 					['Uize.Xml.toAttributes',[
 						['Test that calling with no parameters produces an empty string',

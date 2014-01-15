@@ -3,7 +3,7 @@
 <head>
 	<title>Edge Virtual DOM Events | JavaScript Examples | UIZE JavaScript Framework</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-	<meta name="keywords" content="Uize.Node.VirtualEvent.Edge"/>
+	<meta name="keywords" content="Uize.Dom.VirtualEvent Uize.Dom.VirtualEvents.Edge"/>
 	<meta name="description" content="Edge related virtual DOM events let you perform different actions based upon from which edge the mouse enters or exits a node. See how this works."/>
 	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
 	<link rel="stylesheet" href="../css/page.css"/>
@@ -40,9 +40,9 @@
 	<!-- explanation copy -->
 
 	<div class="explanation">
-		<p>This example demonstrates the edge related virtual DOM events - such as <code>mouseEnterLeft</code>, <code>mouseEnterBottom</code>, <code>mouseExitTop</code>, <code>mouseExitRight</code>, etc. - that are available in the <a href="../reference/Uize.Node.VirtualEvent.Edge.html"><code>Uize.Node.VirtualEvent.Edge</code></a> module.</p>
+		<p>This example demonstrates the edge related virtual DOM events - such as <code>mouseEnterLeft</code>, <code>mouseEnterBottom</code>, <code>mouseExitTop</code>, <code>mouseExitRight</code>, etc. - that are available in the <a href="../reference/Uize.Dom.VirtualEvents.Edge.html"><code>Uize.Dom.VirtualEvents.Edge</code></a> module.</p>
 
-		<p>Each of the squares below is wired up with handlers for enter and exit events for all of their edges. The enter events are wired to fade the color of the border at which the mouse enters a square from orange to black. The exit events are wired to fade the color of the border at which the mouse exits a square from cyan to black. The animation of the border color is done using the <code>Uize.Fx.fadeStyle</code> method of the <a href="../reference/Uize.Fx.html"><code>Uize.Fx</code></a> module. Move your mouse around the squares and see how the various edges light up in response to executing the handlers for the edge virtual DOM events that are wired up. All of the enter and exit events for all edges are wired up for all the squares - in a single statement - by using the <code>Uize.Node.find</code> method of the <a href="../reference/Uize.Node.html"><code>Uize.Node</code></a> module to obtain a list of the nodes with the value "testNode" for their <code>class</code> attribute.</p>
+		<p>Each of the squares below is wired up with handlers for enter and exit events for all of their edges. The enter events are wired to fade the color of the border at which the mouse enters a square from orange to black. The exit events are wired to fade the color of the border at which the mouse exits a square from cyan to black. The animation of the border color is done using the <code>Uize.Fx.fadeStyle</code> method of the <a href="../reference/Uize.Fx.html"><code>Uize.Fx</code></a> module. Move your mouse around the squares and see how the various edges light up in response to executing the handlers for the edge virtual DOM events that are wired up. All of the enter and exit events for all edges are wired up for all the squares - in a single statement - by using the <code>Uize.Dom.Basics.find</code> method of the <a href="../reference/Uize.Dom.Basics.html"><code>Uize.Dom.Basics</code></a> module to obtain a list of the nodes with the value "testNode" for their <code>class</code> attribute.</p>
 	</div>
 
 	<!-- HTML with multiple nodes for wiring mouseEnter[Edge] virtual DOM events -->
@@ -88,8 +88,8 @@ Uize.require (
 	[
 		'UizeSite.Page.Example.library',
 		'UizeSite.Page.Example',
-		'Uize.Node',
-		'Uize.Node.VirtualEvent.Edge',
+		'Uize.Dom.Basics',
+		'Uize.Dom.VirtualEvents.Edge',
 		'Uize.Fx'
 	],
 	function () {
@@ -110,7 +110,7 @@ Uize.require (
 			function fadeNodeBorderColorOnExit (node,edge) {fadeNodeBorderColorToBlack (node,edge,'0c8')}
 
 			page.wireNode (
-				Uize.Node.find ({className:/\btestNode\b/}),
+				Uize.Dom.Basics.find ({className:/\btestNode\b/}),
 				{
 					'mouseEnterLeft()':function () {fadeNodeBorderColorOnEnter (this,'Left')},
 					'mouseEnterRight()':function () {fadeNodeBorderColorOnEnter (this,'Right')},

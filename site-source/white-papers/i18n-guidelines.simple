@@ -1,0 +1,23 @@
+Expose Resource Strings to Localization
+	All resource strings that need to be translated should be "visible" to the localization process.
+
+	This means that the strings should be contained inside an agreed upon resource file format and located according to an agreed upon organization for resource files (see [[resource-string-guidelines.html][Resource String Guidelines]]).
+
+	Surfacing Resource Strings
+		In particular, this means that some strings used in some atypical ways should also be "surfaced" so that they can be picked up by the localization process and translated accordingly.
+
+		Externalize Resources for Files That Require Post-Processing
+			Consider the example of source image files (eg. Photoshop =.psd= files) that contain text that needs to be translated and rasterized to produce unique =.jpeg= files per language.
+
+			With just a source file in a project's codebase, the strings will not be automatically translated. In order to have these strings translated so that the post-processing can be performed to generate the language specific JPEGs, the strings should be in a resource file that is recognized by the localization process.
+
+		Internationalize Files for Translation
+			.
+
+			- cite example of a downloadable Excel Spreadsheet (=.xls=) files
+
+....................................................................................
+<< metadata >>
+
+title: i18n Guidelines
+....................................................................................

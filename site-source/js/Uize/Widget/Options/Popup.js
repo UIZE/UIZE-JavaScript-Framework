@@ -4,7 +4,7 @@
 |    /    O /   |    MODULE : Uize.Widget.Options.Popup Class
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
-| /____/ /__/_| | COPYRIGHT : (c)2007-2013 UIZE
+| /____/ /__/_| | COPYRIGHT : (c)2007-2014 UIZE
 |          /___ |   LICENSE : Available under MIT License or GNU General Public License
 |_______________|             http://www.uize.com/license.html
 */
@@ -25,7 +25,10 @@
 
 Uize.module ({
 	name:'Uize.Widget.Options.Popup',
-	required:'Uize.Widget.PopupPalette',
+	required:[
+		'Uize.Widget.PopupPalette',
+		'Uize.Dom.Text'
+	],
 	builder:function (_superclass) {
 		'use strict';
 
@@ -78,7 +81,7 @@ Uize.module ({
 						var _selector = m._popupPalette.children.selector;
 						/* NOTE: need to investigate why it's not initially safe to assume that the selector widget exists -- may have something to do with a non-standard wireUi sequence for this code */
 						_selector && _selector.set ({enabled:m.get ('values').length > 1 ? 'inherit' : false});
-						m.setNodeInnerHtml ('label',Uize.Node.getText (_getSelectedOptionNode (m)) || m._emptyLabel);
+						m.setNodeInnerHtml ('label',Uize.Dom.Text.getText (_getSelectedOptionNode (m)) || m._emptyLabel);
 					}
 				}
 			},

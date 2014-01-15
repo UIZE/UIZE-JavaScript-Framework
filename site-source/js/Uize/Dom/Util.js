@@ -4,7 +4,7 @@
 |    /    O /   |    MODULE : Uize.Dom.Util Package
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
-| /____/ /__/_| | COPYRIGHT : (c)2004-2013 UIZE
+| /____/ /__/_| | COPYRIGHT : (c)2004-2014 UIZE
 |          /___ |   LICENSE : Available under MIT License or GNU General Public License
 |_______________|             http://www.uize.com/license.html
 */
@@ -29,14 +29,20 @@ Uize.module ({
 	builder:function () {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var
-				_package = function () {},
-				_Uize_Dom_Basics = Uize.Dom.Basics
-			;
+		var
+			/*** Variables for Scruncher Optimization ***/
+				_Uize_Dom_Basics = Uize.Dom.Basics,
 
-		/*** Public Static Methods ***/
-			_package.getEffectiveBgColor = function (_node) {
+			/*** references to static methods used internally ***/
+				_getOpacityProperties,
+				_stylePropertiesAsStr,
+
+			/*** variables for showClickable method ***/
+				_useHandForPointerCursor = _Uize_Dom_Basics.isIe && _Uize_Dom_Basics.ieMajorVersion < 9
+		;
+
+		return Uize.package ({
+			getEffectiveBgColor:function (_node) {
 				var _background = '';
 				_node = _Uize_Dom_Basics.getById (_node);
 				while ((!_background || _background == 'transparent' || _background == 'none') && _node) {
@@ -56,9 +62,9 @@ Uize.module ({
 
 							This method will ascend the parent hierarchy until a node is found whose background is not set to ='transparent'= or ='none'=. So, for example, if the specified node has its background set to ='none'= but its parent node has its background set to ='#fff'=, then this method will return the value ='#fff'=.
 				*/
-			};
+			},
 
-			var _getOpacityProperties = _package.getOpacityProperties = function (_opacity) {
+			getOpacityProperties:_getOpacityProperties = function (_opacity) {
 				return (
 					_Uize_Dom_Basics.isIe
 						? {filter:'alpha(opacity=' + Math.round (_opacity * 100) + ')'}
@@ -76,11 +82,11 @@ Uize.module ({
 
 							For standards compliant browsers, the returned object contains an "opacity" property, while for Internet Explorer it contains a "filter" property.
 
-							The returned object can be "stitched" into a style properties parameter, using the =Uize.copyInto= static method, in order to prepare a subsequent call to the =Uize.Node.setStyle= static method, as follows...
+							The returned object can be "stitched" into a style properties parameter, using the =Uize.copyInto= static method, in order to prepare a subsequent call to the =Uize.Dom.Basics.setStyle= static method, as follows...
 
 							EXAMPLE
-							..............................................
-							Uize.Node.setStyle (
+							.............................................
+							Uize.Dom.Basics.setStyle (
 								'someNodeId',
 								Uize.copyInto (
 									{
@@ -92,15 +98,15 @@ Uize.module ({
 									Uize.Dom.Util.getOpacityProperties (.5)
 								)
 							);
-							..............................................
+							.............................................
 
 							NOTES
 							- the =opacityFLOATorOBJ= parameter can be an object that implements a =valueOf= interface (such as an instance of a =Uize.Class= subclass that implements the =value= state property)
 							- see also the =Uize.Dom.Util.getOpacityStr= static method
 				*/
-			};
+			},
 
-			_package.getOpacityStr = function (_opacity) {
+			getOpacityStr:function (_opacity) {
 				return _stylePropertiesAsStr (_getOpacityProperties (_opacity));
 				/*?
 					Static Methods
@@ -117,9 +123,45 @@ Uize.module ({
 							NOTES
 							- see also the =Uize.Dom.Util.getOpacityProperties= static method
 				*/
-			};
+			},
 
-			_package.showInLayoutFlow = function (_nodeBlob,_mustShow) {
+			showClickable:function (_nodeBlob,_clickable) {
+				_Uize_Dom_Basics.setStyle (
+					_nodeBlob,
+					{
+						cursor:
+							_clickable || _clickable === _undefined
+								? (_useHandForPointerCursor ? 'hand' : 'pointer')
+								: 'default'
+					}
+				);
+				/*?
+					Static Methods
+						Uize.Dom.Util.showClickable
+							Sets the value of the "cursor" style property of the specified `node blob` so that the node(s) appear either clickable or not, depending on the specified boolean value.
+
+							This method is useful for DOM nodes that need to be wired up with click actions by JavaScript code, but that don't have CSS selectors from the document applying the appropriate cursor style to them.
+
+							SYNTAX
+							........................................................
+							Uize.Dom.Util.showClickable (nodeBLOB,clickableANYTYPE);
+							........................................................
+
+							While typically a Boolean, the =clickableANYTYPE= parameter can be of any type and the node(s) will be set to appear clickable if it resolves to =true=, and not clickable if it resolves to =false= - with the exception of =undefined=, when the node(s) will be set to appear clickable (see explanation below).
+
+							VARIATION
+							.......................................
+							Uize.Dom.Util.showClickable (nodeBLOB);
+							.......................................
+
+							When no =clickableANYTYPE= parameter is specified (or when its value is =undefined=), the node(s) will be set to appear clickable.
+
+							NOTES
+							- this method can operate on multiple nodes at a time. For more details, see the section on `node blob`
+				*/
+			},
+
+			showInLayoutFlow:function (_nodeBlob,_mustShow) {
 				_mustShow = _mustShow !== _false;
 				_setStyle (
 					_nodeBlob,
@@ -145,9 +187,9 @@ Uize.module ({
 							NOTES
 							- this method can operate on multiple nodes at a time. For more details, see the section on `node blob`
 				*/
-			};
+			},
 
-			var _stylePropertiesAsStr = _package.stylePropertiesAsStr = function (_properties) {
+			stylePropertiesAsStr:_stylePropertiesAsStr = function (_properties) {
 				var _resultChunks = [];
 				for (var _property in _properties)
 					_resultChunks.push (_property,':',_properties [_property],'; ')
@@ -175,9 +217,8 @@ Uize.module ({
 
 							In the above example, the =Uize.Dom.Util.stylePropertiesAsStr= method call would return the string output ='display:block; position:absolute; visibility:inherit; top:100px;'=.
 				*/
-			};
-
-		return _package;
+			}
+		});
 	}
 });
 

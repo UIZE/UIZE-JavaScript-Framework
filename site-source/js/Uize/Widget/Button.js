@@ -4,7 +4,7 @@
 |    /    O /   |    MODULE : Uize.Widget.Button Class
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
-| /____/ /__/_| | COPYRIGHT : (c)2004-2013 UIZE
+| /____/ /__/_| | COPYRIGHT : (c)2004-2014 UIZE
 |          /___ |   LICENSE : Available under MIT License or GNU General Public License
 |_______________|             http://www.uize.com/license.html
 */
@@ -25,7 +25,11 @@
 
 Uize.module ({
 	name:'Uize.Widget.Button',
-	required:'Uize.Node',
+	required:[
+		'Uize.Dom.Util',
+		'Uize.Dom.Pos',
+		'Uize.Dom.Basics'
+	],
 	builder:function (_superclass) {
 		'use strict';
 
@@ -34,7 +38,6 @@ Uize.module ({
 				_undefined,
 				_true = true,
 				_false = false,
-				_Uize_Node = Uize.Node,
 
 			/*** General Variables ***/
 				_class,
@@ -193,8 +196,8 @@ Uize.module ({
 					}
 					/*** reflect busy state ***/
 						m.get ('busyInherited')
-							? _Uize_Node.setStyle (_rootNode,{cursor:'wait'})
-							: _Uize_Node.showClickable (_rootNode,_isClickable (m))
+							? m.setNodeStyle (_rootNode,{cursor:'wait'})
+							: Uize.Dom.Util.showClickable (_rootNode,_isClickable (m))
 						;
 
 					/*** set attributes ***/
@@ -335,7 +338,7 @@ Uize.module ({
 										optimized to avoid extra node lookup by id for buttons that are a single node (like a link tag) decorated only with CSS images, or a single node (like a link tag) containing only a single text child node (ie. a simple text button)
 									*/
 									m._mode = 'frames';
-									m._framesParentNodeDims = _Uize_Node.getDimensions (m._framesNode.parentNode);
+									m._framesParentNodeDims = Uize.Dom.Pos.getDimensions (m._framesNode.parentNode);
 								}
 
 							/*** wire up event handlers ***/
