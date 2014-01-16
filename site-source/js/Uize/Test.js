@@ -63,6 +63,36 @@ Uize.module ({
 				return function () {return Uize.Json.to (_value)};
 			}
 
+			function _migratedStaticFeaturesTest (_migratedFeatures,_featureType) {
+				var _featureTypeIsMethod = _featureType == 'method';
+				return {
+					title:'Test that various deprecated static ' + (_featureTypeIsMethod ? 'methods' : 'properties') + ' that have been migrated are still supported and map correctly to their new locations',
+					test:Uize.map (
+						_migratedFeatures,
+						function (_migratedFeature) {
+							var
+								_oldName = _migratedFeature [0],
+								_newName = _migratedFeature [1]
+							;
+							return {
+								title:'Test that the deprecated ' + _oldName + ' static ' + _featureType + ' still exists and is simply a reference to the new ' + _newName + ' static ' + _featureType,
+								test:function () {
+									function _getStatic (_staticName) {
+										var _hostAndProperty = _splitHostAndProperty (_staticName);
+										return Uize.getModuleByName (_hostAndProperty.host) [_hostAndProperty.property];
+									}
+									var _newStatic = _getStatic (_newName);
+									return (
+										(!_featureTypeIsMethod || this.expectFunction (_newStatic)) &&
+										this.expectSameAs (_getStatic (_oldName),_newStatic)
+									);
+								}
+							};
+						}
+					)
+				};
+			}
+
 		/*** Private Instance Methods ***/
 			function _expectSuccess (m,_succeeded,_serializeExpected,_serializeActual) {
 				_succeeded ||
@@ -2094,29 +2124,11 @@ Uize.module ({
 					},
 
 					migratedStaticMethodsTest:function (_migratedMethods) {
-						return {
-							title:'Test that various deprecated static methods that have been migrated are still supported and map correctly to their new locations',
-							test:Uize.map (
-								_migratedMethods,
-								function (_migratedMethod) {
-									var
-										_oldName = _migratedMethod [0],
-										_newName = _migratedMethod [1]
-									;
-									return {
-										title:'Test that the deprecated ' + _oldName + ' method still exists and is simply a reference to the new ' + _newName + ' method',
-										test:function () {
-											function _getStatic (_staticName) {
-												var _hostAndProperty = _splitHostAndProperty (_staticName);
-												return Uize.getModuleByName (_hostAndProperty.host) [_hostAndProperty.property];
-											}
-											var _newStatic = _getStatic (_newName);
-											return this.expectFunction (_newStatic) && this.expectSameAs (_getStatic (_oldName),_newStatic);
-										}
-									};
-								}
-							)
-						};
+						return _migratedStaticFeaturesTest (_migratedMethods,'method');
+					},
+
+					migratedStaticPropertiesTest:function (_migratedProperties) {
+						return _migratedStaticFeaturesTest (_migratedProperties,'property');
 					}
 			},
 
