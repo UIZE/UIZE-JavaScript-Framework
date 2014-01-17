@@ -81,9 +81,6 @@ Uize.module ({
 							Uize.Node.isOnNodeTree
 								This method has been deprecated *(DEPRECATED 2014-01-07)* in favor of the newer =Uize.Dom.Basics.isOnNodeTree= method of the =Uize.Dom.Basics= module.
 
-							Uize.Node.isOnNodeTree
-								This method has been deprecated *(DEPRECATED 2014-01-07)* in favor of the newer =Uize.Dom.Basics.isOnNodeTree= method of the =Uize.Dom.Basics= module.
-
 							Uize.Node.joinIdPrefixAndNodeId
 								This method has been deprecated *(DEPRECATED 2014-01-07)* in favor of the newer =Uize.Dom.Basics.joinIdPrefixAndNodeId= method of the =Uize.Dom.Basics= module.
 
