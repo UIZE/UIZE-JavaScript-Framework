@@ -57,7 +57,7 @@ Uize.module ({
 				if (m.isWired) {
 					if (_newTabNo > -1 && _newTabNo != _previousTabNo) {
 						var
-							_newTabBodyNode = m._getTabBodyNode(_newTabNo),
+							_newTabBodyNode = _getTabBodyNode(m, _newTabNo),
 							_newTabBodyNodeStyleHeight = m.getNodeStyle(_newTabBodyNode, 'height')
 						;
 
@@ -92,7 +92,7 @@ Uize.module ({
 							function (_optionButton, _optionNo) {
 								// hide all the tab bodies that should be hidden
 								m.displayNode(
-									m._getTabBodyNode(_optionNo),
+									_getTabBodyNode(m, _optionNo),
 									_optionNo === _previousTabNo
 								)
 							}
@@ -183,7 +183,7 @@ Uize.module ({
 			instanceMethods:{
 				enableTab:function (_value,_mustEnable) {
 					this.getOptionButton (_value).set ({enabled:_mustEnable ? 'inherit' : false});
-					this._updateUiTabBodies ();
+					_updateUiTabBodies (this);
 				},
 
 				getOptionButton:function (_valueOrValueNo) {
@@ -192,7 +192,7 @@ Uize.module ({
 
 				tabExists:function (_valueOrValueNo) {
 					var _optionButton = this.getOptionButton (_valueOrValueNo);
-					return !!(_optionButton && (_optionButton.getNode () || this._getTabBodyNode (_valueOrValueNo)));
+					return !!(_optionButton && (_optionButton.getNode () || _getTabBodyNode (this,_valueOrValueNo)));
 				},
 
 				updateUi:function () {
@@ -205,7 +205,7 @@ Uize.module ({
 							&& m.setNodeStyle(_rootNode, {position:'relative'})
 						;
 
-						m._updateUiTabBodies();
+						_updateUiTabBodies(m);
 
 						_superclass.doMy (m,'updateUi');
 					}

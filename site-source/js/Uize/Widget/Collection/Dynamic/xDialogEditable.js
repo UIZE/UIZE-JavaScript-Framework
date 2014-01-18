@@ -208,24 +208,22 @@ Uize.module ({
 					},
 
 					/* default is to override the default items container, may be 'undone' in subclasses */
-					getContainerNode:function () {
-						return this.getNode('itemsNode');
+					getContainerNode: function () {
+						var m = this;
+						return m.getNode(m._itemsContainerNode);
 					}
 			},
 
 			stateProperties:{
 				_collectionItemControlName:'collectionItemControlName',
 				_formDialogJsClass:'formDialogJsClass',
-				_formDialogParams:{
-					name:'formDialogParams',
-					value:{}
-				},
+				_formDialogParams:'formDialogParams',
 				_isEditable:{
 					name:'isEditable',
 					value:_false
 				},
 				_itemsContainerNode:{
-					name:'itemsNode',
+					name:'itemsContainerNode',
 					value:'items'
 				}
 			}
