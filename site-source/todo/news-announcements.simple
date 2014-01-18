@@ -1,22 +1,5 @@
 This document lists official news announcements that need to be created for developments that have already taken place.
 
-Deprecated Uize.Node Modules
-	.......................................................................
-	Uize.Node                    >> BECOMES >>  ---
-	Uize.Node.Event              >> BECOMES >>  Uize.Dom.Event
-	Uize.Node.Classes            >> BECOMES >>  Uize.Dom.Classes
-	Uize.Node.CssModule          >> BECOMES >>  Uize.Dom.CssModule
-	Uize.Node.Form               >> BECOMES >>  Uize.Dom.Form
-	Uize.Node.Tree               >> BECOMES >>  Uize.Dom.Tree
-	Uize.Node.Util               >> BECOMES >>  Uize.Dom.Util
-	Uize.Node.VirtualEvent       >> BECOMES >>  ---
-	Uize.Node.VirtualEvent.Edge  >> BECOMES >>  Uize.Dom.VirtualEvents.Edge
-	.......................................................................
-
-	Still to do...
-
-	- consider possibly migrating DOM event wiring methods into Uize.Dom.Event module (consider the size increase for current modules that need the events fundamentals), or possibly a new Uize.Dom.Wiring module
-
 NEW MODULE: Uize.Loc.Pseudo
 	Still to do...
 
@@ -29,13 +12,6 @@ NEW MODULE: Uize.Event.Bus
 
 	- write unit tests
 	- write documentation
-	- write news announcement
-
-Uize.Node Modules Deprecated
-	Still to do...
-
-	- finish migrating modules and unit tests to under new =Uize.Dom= namespace
-	- create alias modules for old modules under =Uize.Node= namespace
 	- write news announcement
 
 NEW MODULE: Uize.Math.Blend
@@ -51,6 +27,27 @@ NEW MODULE: Uize.Math.LogicalPos
 	- write unit tests
 	- write documentation
 	- write news announcement
+
+Uize.Node Modules Deprecated
+
+	DEPRECATED
+	.......................................................................
+	Uize.Node                    >> BECOMES >>  ---
+	Uize.Node.Event              >> BECOMES >>  Uize.Dom.Event
+	Uize.Node.Classes            >> BECOMES >>  Uize.Dom.Classes
+	Uize.Node.CssModule          >> BECOMES >>  Uize.Dom.CssModule
+	Uize.Node.Form               >> BECOMES >>  Uize.Dom.Form
+	Uize.Node.Tree               >> BECOMES >>  Uize.Dom.Tree
+	Uize.Node.Util               >> BECOMES >>  Uize.Dom.Util
+	Uize.Node.VirtualEvent       >> BECOMES >>  ---
+	Uize.Node.VirtualEvent.Edge  >> BECOMES >>  Uize.Dom.VirtualEvents.Edge
+	.......................................................................
+
+	Still to do...
+
+	- Update documentation to change all references to Uize.Node.* to new Uize.Dom.* equivalents
+	- consider renaming Uize.Dom.Basics to Uize.Dom.Core
+	- consider possibly migrating DOM event wiring methods into Uize.Dom.Event module (consider the size increase for current modules that need the events fundamentals), or possibly a new Uize.Dom.Wiring module
 
 Shorter This Reference
 	Switched all modules over to using "m" for capturing a reference to this.
