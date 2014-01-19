@@ -313,6 +313,7 @@ Uize.module ({
 				_true = true,
 				_false = false,
 				_undefined,
+				_Uize_Dom_Event = Uize.Dom.Event,
 
 			/*** General Variables ***/
 				_binaryOperatorsMap = {divide:1,multiply:1,subtract:1,add:1},
@@ -410,12 +411,12 @@ Uize.module ({
 						_releaseLastButtonClicked ();
 						var
 							_domEvent = _event.domEvent,
-							_isKeyEscape = Uize.Dom.Event.isKeyEscape (_domEvent),
+							_isKeyEscape = _Uize_Dom_Event.isKeyEscape (_domEvent),
 							_keyChar = _isKeyEscape
 								? ' '
-								: Uize.Dom.Event.isKeyEnter (_domEvent)
+								: _Uize_Dom_Event.isKeyEnter (_domEvent)
 									? '='
-									: String.fromCharCode (Uize.Dom.Event.charCode (_domEvent))
+									: String.fromCharCode (_Uize_Dom_Event.charCode (_domEvent))
 						;
 						if (_keyChar) {
 							var _buttonId = _entryCharToButtonIdMap [_keyChar];
