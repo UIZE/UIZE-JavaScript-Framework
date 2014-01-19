@@ -38,6 +38,7 @@ Uize.module ({
 	required:[
 		'Uize.Widget.V2Mixin',
 		'Uize.Widgets.Buttons.Char.Widget',
+		'Uize.Widget.TextInputBasic',
 		'Uize.Widgets.Calculator.Html',
 		'Uize.Widgets.Calculator.Css'
 	],
@@ -60,6 +61,7 @@ Uize.module ({
 
 			staticProperties:{
 				buttonWidgetClass:Uize.Widgets.Buttons.Char.Widget,
+				textInputWidgetClass:Uize.Widget.TextInputBasic,
 				cssModule:Uize.Widgets.Calculator.Css
 			},
 

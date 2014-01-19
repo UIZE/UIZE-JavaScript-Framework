@@ -304,10 +304,7 @@
 
 Uize.module ({
 	name:'Uize.Widget.CalculatorAbstract',
-	required:[
-		'Uize.Widget.TextInput',
-		'Uize.Dom.Event'
-	],
+	required:'Uize.Dom.Event',
 	builder:function (_superclass) {
 		'use strict';
 
@@ -395,11 +392,11 @@ Uize.module ({
 				}
 
 				/*** add entry form element ***/
-					var _entry = m.addChild ('entry',Uize.Widget.TextInput,{value:m._value});
+					var _entry = m.addChild ('entry',m.Class.textInputWidgetClass,{value:m._value});
 					/*?
 						Child Widgets
 							entry
-								An instance of the =Uize.Widget.TextInput= class, that is used both to display the calculator's current value and also to allow the user to enter numbers and trigger operations by `using the regular keyboard`.
+								A text input widget that is used both to display the calculator's current value and also to allow the user to enter numbers and trigger operations by `using the regular keyboard`.
 
 								When the calculator is in the `error state`, the =entry= child widget will be set to the value ='ERROR'=. For more information on using the =entry= text input field to drive the calculator, see the section `Using the Regular Keyboard`.
 					*/
@@ -1087,7 +1084,8 @@ Uize.module ({
 			},
 
 			staticProperties:{
-				buttonWidgetClass:null
+				buttonWidgetClass:null,
+				textInputWidgetClass:null
 			}
 		});
 	}
