@@ -20,7 +20,7 @@ Mixins as Augmenter Modules
 			EXAMPLE
 			................................................
 			var MyNamespace.MyClass = Uize.Class.subclass ({
-				mixin:MyNamespace.MyAwesomeMixin
+				mixins:MyNamespace.MyAwesomeMixin
 			});
 			................................................
 
@@ -107,28 +107,47 @@ The Uize.mixin Method
 
 		IMPLEMENTATION
 		.............................................................
-		Uize.mixin = function (_source,_mixinOrMixins,_mixer) {
-			function _mixIntoSource (_mixinOrMixins) {
-				if (!Uize.isIn (_source.mixins,_mixinOrMixins))
-					Uize.isFunction (_mixinOrMixins)
-						? _mixinOrMixins (_source)
-						: Uize.isArray (_mixinOrMixins)
-							? Uize.forEach (_mixinOrMixins,_mixIntoSource)
+		Uize.mixin = function (_source,_mixin,_mixer) {
+			function _mixIntoSource (_mixin) {
+				Uize.isIn (_source.appliedMixins,_mixin)
+					? 0
+					: Uize.isFunction (_mixin)
+						/* TODO:
+							What about the case where the mixin is a class, so that its type would be a function? Perhaps we should check for a method that performs the mixin of the features from the class, and where this method could be implemented in the Uize.Class base class with a base implementation that mixes in all the static and instance features.
+						*/
+						? _mixin (_source)
+						: Uize.isArray (_mixin)
+							? Uize.forEach (_mixin,_mixIntoSource)
 							: _mixer
-								? _mixer (_source,_mixinOrMixins)
-								: Uize.mergeInto (_source,_mixinOrMixins)
+								? _mixer (_source,_mixin)
+								: Uize.mergeInto (_source,_mixin)
 				;
 			}
-			_mixIntoSource (_mixinOrMixins);
+			_mixIntoSource (_mixin);
 			return _source;
 		};
 
-		function _mixer (_source,_mixin) {
-			_source.declare (_mixin);
-		}
+		Uize.Class.mixins = function (_mixin) {
+			return Uize.mixin (this,_mixin,function (_source,_mixin) {_source.declare (_mixin)});
+		};
+		.............................................................
 
-		Uize.Class.mixin = function (_mixinOrMixins) {
-			return Uize.mixin (this,_mixinOrMixins,_mixer);
+		.............................................................
+		Uize.Class.mixins = function (_source,_mixin) {
+			function _mixIntoSource (_mixin) {
+				if (!Uize.isIn (_source.appliedMixins,_mixin)) {
+					_source.appliedMixins.push (_mixin);
+					Uize.isFunction (_mixin)
+						/* TODO:
+							What about the case where the mixin is a class, so that its type would be a function? Perhaps we should check for a method that performs the mixin of the features from the class, and where this method could be implemented in the Uize.Class base class with a base implementation that mixes in all the static and instance features.
+						*/
+						? _mixin (_source)
+						: Uize.isArray (_mixin)
+							? Uize.forEach (_mixin,_mixIntoSource)
+							: _source.declare (_mixin)
+				}
+			}
+			_mixIntoSource (_mixin);
 		};
 		.............................................................
 
@@ -204,7 +223,7 @@ Class Mixins
 						required:'MyNamespace.WidthAndHeightMixin',
 						builder:function (_superclass) {
 							return _superclass.subclass ({
-								mixin:MyNamespace.WidthAndHeightMixin
+								mixins:MyNamespace.WidthAndHeightMixin
 							});
 						}
 					});
@@ -224,7 +243,7 @@ Class Mixins
 						],
 						builder:function (_superclass) {
 							return _superclass.subclass ({
-								mixin:[
+								mixins:[
 									MyNamespace.WidthAndHeightMixin,
 									MyNamespace.AreaMixin
 								]
@@ -347,7 +366,7 @@ Class Mixins
 			],
 			builder:function (_superclass) {
 				return _superclass.subclass ({
-					mixin:[MyNamespace.WidthAndHeightMixin,MyNamespace.AreaMixin]
+					mixins:[MyNamespace.WidthAndHeightMixin,MyNamespace.AreaMixin]
 				});
 			}
 		});
@@ -362,7 +381,7 @@ Class Mixins
 			],
 			builder:function (_superclass) {
 				return _superclass.subclass ({
-					mixin:[MyNamespace.DepthMixin,MyNamespace.VolumeMixin]
+					mixins:[MyNamespace.DepthMixin,MyNamespace.VolumeMixin]
 				});
 			}
 		});
