@@ -29,9 +29,7 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		var _class = _superclass.subclass ();
-		Uize.Widget.V2Mixin (_class);
-		return _class;
+		return _superclass.subclass ({mixins:Uize.Widget.V2Mixin});
 	}
 });
 

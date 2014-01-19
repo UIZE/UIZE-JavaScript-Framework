@@ -43,7 +43,9 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		return Uize.Widget.V2Mixin (_superclass.subclass ()).declare ({
+		return _superclass.subclass ({
+			mixins:Uize.Widget.V2Mixin,
+
 			instanceMethods:{
 				getItemClassName:function (_item,_depth) {
 					var m = this;

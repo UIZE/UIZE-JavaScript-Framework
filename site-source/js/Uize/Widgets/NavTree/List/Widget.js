@@ -46,7 +46,9 @@ Uize.module ({
 
 		var _Uize_Dom_Classes = Uize.Dom.Classes;
 
-		return Uize.Widget.V2Mixin (_superclass.subclass ()).declare ({
+		return _superclass.subclass ({
+			mixins:Uize.Widget.V2Mixin,
+
 			instanceMethods:{
 				setItemExpanded:function (_itemSpecifier,_expanded) {
 					var m = this;
