@@ -45,10 +45,6 @@ Uize.module ({
 
 		return _superclass.subclass ({
 			stateProperties:{
-				_size:{
-					name:'size',
-					value:'medium'
-				},
 				_value:{
 					name:'value',
 					value:'#000000'
@@ -75,10 +71,6 @@ Uize.module ({
 
 			staticProperties:{
 				cssModule:Uize.Widgets.ColorSwatch.Css
-			},
-
-			cssBindings:{
-				size:'value'
 			},
 
 			htmlBindings:{

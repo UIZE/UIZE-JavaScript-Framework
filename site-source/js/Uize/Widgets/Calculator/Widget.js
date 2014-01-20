@@ -52,21 +52,10 @@ Uize.module ({
 				html:Uize.Widgets.Calculator.Html
 			},
 
-			stateProperties:{
-				_size:{
-					name:'size',
-					value:'medium'
-				}
-			},
-
 			staticProperties:{
 				buttonWidgetClass:Uize.Widgets.Buttons.Char.Widget,
 				textInputWidgetClass:Uize.Widget.TextInputBasic,
 				cssModule:Uize.Widgets.Calculator.Css
-			},
-
-			cssBindings:{
-				size:'value'
 			}
 		});
 	}

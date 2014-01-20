@@ -52,21 +52,10 @@ Uize.module ({
 				html:Uize.Widgets.Calendar.Html
 			},
 
-			stateProperties:{
-				_size:{
-					name:'size',
-					value:'medium'
-				}
-			},
-
 			staticProperties:{
 				cssModule:Uize.Widgets.Calendar.Css,
 				buttonWidgetClass:Uize.Widgets.Button.Widget,
 				useV2CssClasses:true
-			},
-
-			cssBindings:{
-				size:'value'
 			}
 		});
 	}

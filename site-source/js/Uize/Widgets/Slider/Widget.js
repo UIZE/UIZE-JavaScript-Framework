@@ -49,10 +49,6 @@ Uize.module ({
 			mixins:Uize.Widget.V2Mixin,
 
 			stateProperties:{
-				_size:{
-					name:'size',
-					value:'medium'
-				},
 				_trackLength:{
 					name:'trackLength',
 					value:''
@@ -75,8 +71,7 @@ Uize.module ({
 			},
 
 			cssBindings:{
-				orientation:'value',
-				size:'value'
+				orientation:'value'
 			},
 
 			htmlBindings:{

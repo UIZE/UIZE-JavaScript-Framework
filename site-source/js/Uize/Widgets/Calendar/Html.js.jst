@@ -1,7 +1,6 @@
 <%@
 	input ({idPrefix:'string'});
 %><%
-	var _size = input.size;
 %><div class="<%= m.rootNodeCssClasses () %>">
 	<div id="<%. idPrefix %>-controls" class="<%= m.cssClass ('controls') %>">
 		<div class="<%= m.cssClass ('indicator') %>">
@@ -13,7 +12,6 @@
 				name:'previousMonth',
 				text:'&lt;',
 				tipText:'jump to previous month',
-				size:_size,
 				extraClasses:m.cssClass ('previousMonth')
 			})
 		%>
@@ -22,7 +20,6 @@
 				name:'nextMonth',
 				text:'&gt;',
 				tipText:'jump to next month',
-				size:_size,
 				extraClasses:m.cssClass ('nextMonth')
 			})
 		%>

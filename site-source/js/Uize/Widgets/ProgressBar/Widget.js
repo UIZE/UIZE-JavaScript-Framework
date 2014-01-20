@@ -66,11 +66,6 @@ Uize.module ({
 					}
 				},
 
-				_size:{
-					name:'size',
-					value:'medium'
-				},
-
 				_statusText:{
 					name:'statusText',
 					value:'',
@@ -85,10 +80,6 @@ Uize.module ({
 				orientation:'horizontal',
 				minValue:0,
 				value:0
-			},
-
-			cssBindings:{
-				size:'value'
 			},
 
 			htmlBindings:{
