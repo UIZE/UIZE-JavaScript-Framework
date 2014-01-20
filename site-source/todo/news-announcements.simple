@@ -28,6 +28,14 @@ NEW MODULE: Uize.Math.LogicalPos
 	- write documentation
 	- write news announcement
 
+NEW MODULE: Uize.Oop.mTreeInheritance
+	Still to do...
+
+	- write unit tests
+	- write documentation
+	- update documentation in Uize.Widget class to refer to reference for =Uize.Oop.mTreeInheritance= module
+	- write news announcement
+
 Uize.Node Modules Deprecated
 
 	DEPRECATED
