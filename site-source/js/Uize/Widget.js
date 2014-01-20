@@ -31,7 +31,10 @@
 Uize.module ({
 	name:'Uize.Widget',
 	superclass:'Uize.Class',
-	required:'Uize.Dom.Basics',
+	required:[
+		'Uize.Dom.Basics',
+		'Uize.Oop.mTreeInheritance'
+	],
 	builder:function (_superclass) {
 		'use strict';
 
@@ -88,41 +91,6 @@ Uize.module ({
 				);
 			}
 
-			function _treeInheritedPropertyProfile (_propertyPrivateToPublicNameMapping,_defaultValue) {
-				var
-					_propertyPrivateNames = _Uize.keys (_propertyPrivateToPublicNameMapping),
-					_propertyPublicNames = _Uize.values (_propertyPrivateToPublicNameMapping),
-					_propertyPrivateName = _propertyPrivateNames [0],
-					_propertyInheritedPrivateName = _propertyPrivateNames [1]
-				;
-				function _checkInherited () {
-					var
-						m = this,
-						_value = m [_propertyPrivateName]
-					;
-					if (_value == 'inherit')
-						_value = m.parent ? m.parent [_propertyInheritedPrivateName] : _defaultValue
-					;
-					if (_value != m [_propertyInheritedPrivateName])
-						m.set (_propertyInheritedPrivateName,_value)
-					;
-				}
-				return _Uize.pairUp (
-					_propertyPrivateName,
-					{
-						name:_propertyPublicNames [0],
-						onChange:_checkInherited,
-						value:'inherit'
-					},
-					_propertyInheritedPrivateName,
-					{
-						name:_propertyPublicNames [1],
-						onChange:function () {_callOn (this._children,_checkInherited)},
-						value:_defaultValue
-					}
-				);
-			}
-
 		/*** Private Instance Methods ***/
 			function _applyDeclarativeWidgetProperties (m) {
 				var _declarativeWidgetProperties = _harvestDeclarativeWidgetProperties (m._idPrefix,m.parent);
@@ -173,6 +141,8 @@ Uize.module ({
 			}
 
 		return _superclass.subclass ({
+			mixins:Uize.Oop.mTreeInheritance,
+
 			alphastructor:function (_properties) {
 				var m = this;
 
@@ -1477,124 +1447,83 @@ Uize.module ({
 							*/
 						},
 
-						getProvider:function (_property) {
-							var
-								_instance = this,
-								_value
-							;
-							while (
-								((_value = _instance.get (_property)) === 'inherit' || _value === _undefined) &&
-								(_instance = _instance.parent)
-							);
-							return _instance;
-							/*?
-								Instance Methods
-									getProvider
-										Returns a reference to the nearest widget instance up the parent widget chain that provides a value for the specified state property.
+						/*?
+							Instance Methods
+								getProvider
+									Returns a reference to the nearest widget instance up the parent widget chain that provides a value for the specified state property.
 
-										SYNTAX
-										.............................................................
-										providerWidgetOBJ = myWidget.getProvider (setGetPropertySTR);
-										.............................................................
+									SYNTAX
+									.............................................................
+									providerWidgetOBJ = myWidget.getProvider (setGetPropertySTR);
+									.............................................................
 
-										If a value other than ='inherit'= or =undefined= is set for the specified state property of the instance, then a reference to the instance will be returned. Otherwise, this method will walk up the parent widget chain until a widget is found that has a value other than ='inherit'= or =undefined= set for this state property. If none is found, then the value =undefined= will be returned.
+									If a value other than ='inherit'= or =undefined= is set for the specified state property of the instance, then a reference to the instance will be returned. Otherwise, this method will walk up the parent widget chain until a widget is found that has a value other than ='inherit'= or =undefined= set for this state property. If none is found, then the value =undefined= will be returned.
 
-										NOTES
-										- see also the =callInherited=, =getInherited=, and =setInherited= instance methods
-							*/
-						},
+									NOTES
+									- see also the =callInherited=, =getInherited=, and =setInherited= instance methods
+						*/
 
-						getInherited:function (_property) {
-							var _provider = this.getProvider (_property);
-							return _provider && _provider.get (_property);
-							/*?
-								Instance Methods
-									getInherited
-										Returns the value for the specified state property, as inherited from the widget's parent chain.
+						/*?
+							Instance Methods
+								getInherited
+									Returns the value for the specified state property, as inherited from the widget's parent chain.
 
-										SYNTAX
-										.............................................................
-										inheritedANYTYPE = myWidget.getInherited (setGetPropertySTR);
-										.............................................................
+									SYNTAX
+									.............................................................
+									inheritedANYTYPE = myWidget.getInherited (setGetPropertySTR);
+									.............................................................
 
-										If a value other than ='inherit'= or =undefined= is set for the specified state property of the instance, then the property's value will be returned. Otherwise, this method will walk up the parent widget chain until a widget is found that has a value other than ='inherit'= or =undefined= set for this state property. If none is found, then the value =undefined= will be returned.
+									If a value other than ='inherit'= or =undefined= is set for the specified state property of the instance, then the property's value will be returned. Otherwise, this method will walk up the parent widget chain until a widget is found that has a value other than ='inherit'= or =undefined= set for this state property. If none is found, then the value =undefined= will be returned.
 
-										NOTES
-										- see also the =callInherited=, =getProvider=, and =setInherited= instance methods
-							*/
-						},
+									NOTES
+									- see also the =callInherited=, =getProvider=, and =setInherited= instance methods
+						*/
 
-						setInherited:function (_properties) {
-							var _provider;
-							for (var _propertyName in _properties) {
-								if (_provider = this.getProvider (_propertyName))
-									_provider.set (_propertyName,_properties [_propertyName])
-								;
-							}
-							/*?
-								Instance Methods
-									setInherited
-										Allows us to set values for the specified state properties on the instance in the widget's parent chain from which the properties are inherited.
+						/*?
+							Instance Methods
+								setInherited
+									Allows us to set values for the specified state properties on the instance in the widget's parent chain from which the properties are inherited.
 
-										SYNTAX
-										............................................
-										myWidget.setInherited (setGetPropertiesOBJ);
-										............................................
+									SYNTAX
+									............................................
+									myWidget.setInherited (setGetPropertiesOBJ);
+									............................................
 
-										NOTES
-										- see also the =callInherited=, =getProvider=, and =getInherited= instance methods
-							*/
-						},
+									NOTES
+									- see also the =callInherited=, =getProvider=, and =getInherited= instance methods
+						*/
 
-						callInherited:function (_property) {
-							var m = this;
-							return (
-								function () {
-									var
-										_provider = m.getProvider (_property),
-										_result
-									;
-									if (_provider) {
-										var _inheritedMethod = _provider.get (_property);
-										if (_isFunction (_inheritedMethod))
-											_result = _inheritedMethod.apply (_provider,arguments)
-										;
-									}
-									return _result;
-								}
-							);
-							/*?
-								Instance Methods
-									callInherited
-										Returns a function, being a caller for the specified instance method, as inherited from the widget's parent chain.
+						/*?
+							Instance Methods
+								callInherited
+									Returns a function, being a caller for the specified instance method, as inherited from the widget's parent chain.
 
-										SYNTAX
-										......................................................
-										callerFUNC = myInstance.callInherited (methodNameSTR);
-										......................................................
+									SYNTAX
+									......................................................
+									callerFUNC = myInstance.callInherited (methodNameSTR);
+									......................................................
 
-										Once you have a caller function for calling an instance method inherited from up the parent chain, then you can call it and pass parameters as if you were calling that method on the instance that provides the method.
+									Once you have a caller function for calling an instance method inherited from up the parent chain, then you can call it and pass parameters as if you were calling that method on the instance that provides the method.
 
-										EXAMPLE
-										.........................................................
-										myWidget.callInherited ('useDialog') ({
-											widgetClassName:'MyNamespace.SomeDialogWidget',
-											widgetProperties:{
-												name:'myDialog',
-												title:'This is My Diaog, Hear it Roar'
-											},
-											submitHandler:function (_confirmed) {
-												// handle dialog being submitted (ie. OK or CANCEL)
-											}
-										});
-										.........................................................
+									EXAMPLE
+									.........................................................
+									myWidget.callInherited ('useDialog') ({
+										widgetClassName:'MyNamespace.SomeDialogWidget',
+										widgetProperties:{
+											name:'myDialog',
+											title:'This is My Diaog, Hear it Roar'
+										},
+										submitHandler:function (_confirmed) {
+											// handle dialog being submitted (ie. OK or CANCEL)
+										}
+									});
+									.........................................................
 
-										In the above example, =myWidget= is a widget instance that is on a widget tree with a page widget instance (an instance of =Uize.Widget.Page=, or a subclass of it) at the root. The =Uize.Widget.Page= class implements a =useDialog= instance method. Now, even though the widget class of the =myWidget= instance doesn't implement a =useDialog= instance method, and even though it isn't a subclass of =Uize.Widget.Page= and, therefore, doesn't inherit the implementation from the page widget class, the =callInherited= instance method is able to "locate" the provider of this method up the parent widget chain and returns a function that will call the method as an instance method on its provider.
+									In the above example, =myWidget= is a widget instance that is on a widget tree with a page widget instance (an instance of =Uize.Widget.Page=, or a subclass of it) at the root. The =Uize.Widget.Page= class implements a =useDialog= instance method. Now, even though the widget class of the =myWidget= instance doesn't implement a =useDialog= instance method, and even though it isn't a subclass of =Uize.Widget.Page= and, therefore, doesn't inherit the implementation from the page widget class, the =callInherited= instance method is able to "locate" the provider of this method up the parent widget chain and returns a function that will call the method as an instance method on its provider.
 
-										NOTES
-										- see also the =getProvider=, =getInherited=, and =setInherited= instance methods
-							*/
-						},
+									NOTES
+									- see also the =getProvider=, =getInherited=, and =setInherited= instance methods
+						*/
 
 						childId:function (_childName) {
 							return _constructIdPrefix (this._idPrefix, this._idPrefix, _childName, this._idPrefixConstruction);
@@ -1783,298 +1712,301 @@ Uize.module ({
 				}
 			),
 
-			stateProperties:_copyInto (
-				{
-					_built:{
-						name:'built',
-						value:_true
-						/*?
-							State Properties
-								built
-									A boolean, indicating whether or not a specific child widget's UI has already been built and inserted into the DOM by the time that its parent widget wires up the child widgets.
+			stateProperties:{
+				_built:{
+					name:'built',
+					value:_true
+					/*?
+						State Properties
+							built
+								A boolean, indicating whether or not a specific child widget's UI has already been built and inserted into the DOM by the time that its parent widget wires up the child widgets.
 
-									NOTES
-									- the initial value is =true=
-						*/
-					},
-					_children:{
-						name:'children',
-						conformer:function (_value) {
-							if (_value) {
-								var
-									_children = this._children,
-									_unappliedChildrenProperties = this._unappliedChildrenProperties
-								;
-								for (var _childName in _value) {
-									var _childProperties = _value [_childName];
-									_children [_childName]
-										? _children [_childName].set (_childProperties)
-										: _unappliedChildrenProperties [_childName] = _childProperties
-									;
-								}
-							}
-							return this._children;
-						}
-						/*?
-							State Properties
-								children ~~ children State Property
-									A special state property that provides a way to distribute widget properties to any or all of the widget's child widgets, or even child widgets of the widget's child widgets - all the way down to the deepest child widgets in the widget's widget tree.
-
-									For a detailed discussion of the =children= state property, consult the [[../guides/javascript-widgets.html][JavaScript Widgets]] guide and read through specifically the section entitled "The children State Property".
-
-									NOTES
-									- see also the companion `children instance property`
-									- see also the related =parent= instance property
-						*/
-					},
-					_container:'container',
-						/*?
-							State Properties
-								container
-									A string, representing the ID of a container node, or an object reference to a container node, into which the HTML for a widget should be inserted when the =insertUi= instance method is called.
-
-									NOTES
-									- the initial value is =undefined=
-						*/
-					_html:'html',
-						/*?
-							State Properties
-								html
-									A string, function, object, or boolean value, specifying the HTML that should be inserted into the document by the =insertUi= instance method.
-
-									Values Types
-										The following value types are supported for the =html= state property...
-
-										String
-											Lets you specify a template string for the HTML of a widget.
-
-											A string value specified for this property may contain tokens of the form =[#setGetPropertyName]=, which will be substituted by the values of the corresponding state properties of the widget.
-
-										Function
-											Lets you specify a generator function for a widget's markup.
-
-											A function that you register as an HTML generator for your widget using the =html= state property should expect to receive one parameter, being an object containing the `HTML generator input`. The function should return either a string, being the generated HTML markup for the widget, or a DOM node or array of DOM nodes. While the generator function can use the values in the `HTML generator input` object when constructing the HTML for the widget, the string returned by the function may also contain tokens of the form =[#setGetPropertyName]=, which will be substituted by the values of the corresponding state properties of the widget.
-
-										Object
-											Lets you supply a JavaScript Template Module as the HTML generator for a widget.
-
-											When specifying an object for this property, the object should contain a =process= property that is a generator function. That generator function should expect to receive one parameter, being an object containing the `HTML generator input`. The function should return a string, being the generated HTML markup for the widget. The string returned will *not* be processed any further and will be inserted into the document as is, so it is the reponsibility of the generator function in this case to stitch in any values it cares to from the `HTML generator input`.
-
-											Now, typically an object specified for the =html= state property will be a JavaScript Template Module, but you can supply any object - the only requirement is that it have a =process= property that is a generator function. Since the function type value for the =html= state property results in the string returned by the function being processed further with token substitution, using the object type is one way to dodge that extra processing if it's not desired - without actually having to create a full-blown JavaScript Template Module.
-
-											INSTEAD OF...
-											....................................................
-											myWidget.set ({html:myWidgetHtmlGeneratorFunction});
-											....................................................
-
-											YOU COULD USE...
-											..............................................................
-											myWidget.set ({html:{process:myWidgetHtmlGeneratorFunction}});
-											..............................................................
-
-										Boolean
-											Lets you embed a JavaScript Template inside a widget's markup, which will then be used for generating the widget's UI.
-
-											When the boolean value =true= is set for this property, and if the =Uize.Template= module is loaded, then the =Uize.Widget= class will attempt to find a =script= tag inside the container, shell, or `root node` of the widget with the type "text/jst" (JavaScript Template). If such a =script= tag is found, then its contents will be compiled by the =Uize.Template= module and the resulting JST module will be set on the =html= state property.
-
-									HTML Generator Input
-										When a generator function is called, it is supplied with an object that contains the current state of the state properties for the widget instance.
-
-										This allows the generator function to use any - or all - of the state properties when constructing the HTML for a specific instance of the widget.
-
-										SPECIAL PATH PROPERTIES
-
-										In addition to the state property values, the HTML Generator Input object also contains the two special properties =pathToResources= and =blankGif=, where =pathToResources= is set to the value of the =Uize.pathToResources= static property, and =blankGif= is set to the result from calling the =Uize.Widget.getBlankImageUrl= static method.
-
-										These special path properties allow widgets to generate HTML that references assets that are located in directories relative to the JavaScript modules that implement the widgets.
-
-									NOTES
-									- the initial value is =undefined=
-						*/
-					_idPrefix:{
-						name:'idPrefix|node',
-						conformer:function (_idPrefix) {
-							/* NOTE:
-								if the idPrefix is a node reference, convert it to a string whose value is the id of the node
-							*/
-							return _isNode (_idPrefix) ? (_idPrefix.id || (_idPrefix.id = _Uize.getGuid ())) : _idPrefix;
-						},
-						onChange:function () {
-							var
-								m = this,
-								_idPrefix = m._idPrefix
-							;
-							m._nodeCache = _null;
-							if (_idPrefix != _undefined) {
-								_applyDeclarativeWidgetProperties (m);
-
-								/*** set idPrefix for every child widget that doesn't have a value set for this property ***/
-									var
-										_children = m._children,
-										_child
-									;
-									for (var _childName in _children)
-										(_child = _children [_childName]).set ({
-											_idPrefix:
-												_constructIdPrefix (_idPrefix,_child._idPrefix,_childName,_child._idPrefixConstruction)
-										})
-									;
-
-								/*** rewire the widget, if it's already wired ***/
-									if (m.isWired) {
-										// perhaps any previously wired nodes should also be unwired first
-										m.set ({wired:_false});
-										m.wireUi ();
-									}
-							}
-						}
-						/*?
-							State Properties
-								idPrefix
-									A string, specifying the ID prefix to be used when resolving implied nodes and child widgets to DOM node references.
-
-									NOTES
-									- see the related =idPrefixConstruction= state property
-									- the initial value is =undefined=
-						*/
-					},
-					_idPrefixConstruction:'idPrefixConstruction',
-						/*?
-							State Properties
-								idPrefixConstruction
-									A string, specifying the mode of construction of the value for the =idPrefix= state property.
-
-									The value of the =idPrefixConstruction= property is used when the value of the =idPrefix= property is constructed. This happens either at the time that a widget is added as a child widget of a parent widget using the =addChild= instance method, or when the =idPrefix= value of a child widget's parent widget is modified *after* it has already been added as a child.
-
-									VALUES
-
-									- ='same as parent'= - When =idPrefixConstruction= is set to ='same as parent'=, the =idPrefix= property will be set to the value of a widget's parent widget whenever the =idPrefix= value needs to be constructed.
-
-									- ='concatenated'= - When =idPrefixConstruction= is set to ='concatenated'=, the =idPrefix= property will be constructed using the =idPrefix= value of a widget's parent widget as a prefix, and using the value of the widget's =name= property as a suffix, with the prefix and suffix separated by a "_" (underscore) character. For example, if a button widget has the name ='selectAll'=, and its parent widget has the =idPrefix= value of ='page_collection'=, then the =idPrefix= value produced for the button widget using this =idPrefixConstruction= mode would be ='page_collection_selectAll'=.
-
-									- ='explicit'= - When =idPrefixConstruction= is set to ='explicit'=, an explicit value specified for a widget's =idPrefix= property will be used throughout the lifetime of the widget, and the =idPrefix= will not be otherwise derived.
-
-									- =undefined= (the default value) - When =idPrefixConstruction= is set to =undefined=, the behavior for the value ='concatenated'= will be used (ie. the value =undefined= is equivalent to the value ='concatenated'=).
-
-									NOTES
-									- see the related =idPrefix= state property
-									- the initial value is =undefined= (equivalent to the value ='concatenated'=)
-						*/
-					_insertionMode:'insertionMode',
-						/*?
-							State Properties
-								insertionMode
-									A string, specifying the injection mode that should be used when inserting the HTML for a widget into the page.
-
-									This property works in conjunction with the =built=, =container=, and =html= state properties. If the value for the =built= property is =true= for a widget instance, then =insertionMode= is not applicable. But if the value for =built= is =false=, then the HTML generated using the =html= state property will be injected into a container node specified by the =container= state property (or the =shell= implied node, or the `root node` of the widget instance, or the document's body, whichever is non-null) using the mode specified by =insertionMode=.
-
-									EXAMPLE
-									......................................................
-									page.addChild (
-										'quantitySlider',
-										Uize.Widget.Bar.Slider,
-										{
-											html:MySiteNamespace.Templates.Slider,
-											built:false,
-											container:Uize.Node.getById ('quantityUiShell'),
-											insertionMode:'inner bottom'
-										}
-									);
-									......................................................
-
-									In the above example, an instance of the =Uize.Widget.Bar.Slider= class will have its HTML generated by the template module =MySiteNamespace.Templates.Slider= and then inserted into the container node =quantityUiShell=, using the ='inner bottom'= insertion mode. This means that if the =quantityUiShell= node already contained contents, that contents will not be replaced by insertion of the widget's HTML, but the widget's HTML will be inserted at the bottom - under the existing contents.
-
-									Values
-										The possible values for the =insertionMode= state property are the same as the valid values for the =injectModeSTR= parameter of the =Uize.Node.injectHtml= static method: ='inner bottom'=, ='inner top'=, ='outer bottom'=, ='outer top'=, ='inner replace'=, and ='outer replace'=. For a more in-depth discussion of insertion modes and how they behave, consult the reference for the =Uize.Node.injectHtml= static method.
-
-										If the value of the =insertionMode= state property is =null=, =undefined=, or an empty string, then an insertion mode is chosen automatically based upon the node that the HTML is being inserted into: ='inner replace'= if a container node is specified, and ='inner bottom'= into the document body if no container node is specified or if the document body is specified for the container.
-
-									NOTES
-									- the initial value is =undefined= (which results in default auto behavior)
-									- see also the =built=, =container=, and =html= state properties
-						*/
-					_localized:'localized',
-						/*?
-							State Properties
-								localized
-									An object which, if defined, lets you specify localized strings that can be accessed using the =localized= instance method.
-
-									EXAMPLE
-									..........................................................................
-									myWidget.set ({
-										localized:{welcomeMessage:'Welcome, {firstName} of {state}, {country}'}
-									});
-									var localWelcome = myWidget.localize (
-										'welcomeMessage',
-										{firstName:'Chris',state:'California',country:'USA'}
-									);
-									..........................................................................
-
-									The above example would produce the result ='Welcome, Chris of California, USA'=.
-
-									NOTES
-									- the initial value is =undefined=
-									- see also the =localize= instance method
-						*/
-					_name:'name',
-						/*?
-							State Properties
-								name
-									A read-only string, specifying the name of the widget if it is added as a child widget of another widget by calling the =addChild= instance method on that other widget.
-
-									The value of this property is set for an instance when the instance is added as a child widget of another widget instance. The value is read-only and is not intended to be set later.
-
-									NOTES
-									- this property is read-only
-									- the initial value is =undefined=
-						*/
-					_nodeMap:'nodeMap',
-						/*?
-							State Properties
-								nodeMap
-									An object which, if defined, lets you provide override mappings for implied nodes. Each property's name-value pair is a single implied node mapping, where the property name is the natural name (as implemented in the widget subclass) for the implied node, and where the property value is the override (which can be either an alternate node name, or an actual node reference).
-
-									NOTES
-									- the initial value is =undefined=
-						*/
-					isWired:{
-						name:'wired',
-						value:_false
-						/*?
-							State Properties
-								wired
-									A boolean, indicating whether or not the widget's UI has been wired up. This property is set to =true= after the =wireUi= instance method has been called on a widget and all its child widgets.
-
-									NOTES
-									- the initial value is =false=
-									- see also the =isWired= instance property
-
-							Instance Properties
-								isWired
-									An alternate way of accessing the value of the =wired= state property, that doesn't require using the =get= instance method.
-
-									Using this property is functionally equivalent to =myWidget.get ('wired')=. This property is provided primarily as a convenience and to improve performance, since the =wired= state property is accessed many times in many widget class files, and often in heavily hit areas of code. Using this property to access the value of the =wired= state property offers slightly better performance than using the =get= instance method, which may help a little with performance optimization.
-
-									INSTEAD OF...
-									............................
-									if (!this.get ('wired')) {
-										// code to perform wiring
-									}
-									............................
-
-									USE...
-									............................
-									if (!this.isWired) {
-										// code to perform wiring
-									}
-									............................
-
-									NOTES
-									- see also the =wired= state property
-						*/
-					}
+								NOTES
+								- the initial value is =true=
+					*/
 				},
-				_treeInheritedPropertyProfile ({_busy:'busy',_busyInherited:'busyInherited'},_false),
+				_children:{
+					name:'children',
+					conformer:function (_value) {
+						if (_value) {
+							var
+								_children = this._children,
+								_unappliedChildrenProperties = this._unappliedChildrenProperties
+							;
+							for (var _childName in _value) {
+								var _childProperties = _value [_childName];
+								_children [_childName]
+									? _children [_childName].set (_childProperties)
+									: _unappliedChildrenProperties [_childName] = _childProperties
+								;
+							}
+						}
+						return this._children;
+					}
+					/*?
+						State Properties
+							children ~~ children State Property
+								A special state property that provides a way to distribute widget properties to any or all of the widget's child widgets, or even child widgets of the widget's child widgets - all the way down to the deepest child widgets in the widget's widget tree.
+
+								For a detailed discussion of the =children= state property, consult the [[../guides/javascript-widgets.html][JavaScript Widgets]] guide and read through specifically the section entitled "The children State Property".
+
+								NOTES
+								- see also the companion `children instance property`
+								- see also the related =parent= instance property
+					*/
+				},
+				_container:'container',
+					/*?
+						State Properties
+							container
+								A string, representing the ID of a container node, or an object reference to a container node, into which the HTML for a widget should be inserted when the =insertUi= instance method is called.
+
+								NOTES
+								- the initial value is =undefined=
+					*/
+				_html:'html',
+					/*?
+						State Properties
+							html
+								A string, function, object, or boolean value, specifying the HTML that should be inserted into the document by the =insertUi= instance method.
+
+								Values Types
+									The following value types are supported for the =html= state property...
+
+									String
+										Lets you specify a template string for the HTML of a widget.
+
+										A string value specified for this property may contain tokens of the form =[#setGetPropertyName]=, which will be substituted by the values of the corresponding state properties of the widget.
+
+									Function
+										Lets you specify a generator function for a widget's markup.
+
+										A function that you register as an HTML generator for your widget using the =html= state property should expect to receive one parameter, being an object containing the `HTML generator input`. The function should return either a string, being the generated HTML markup for the widget, or a DOM node or array of DOM nodes. While the generator function can use the values in the `HTML generator input` object when constructing the HTML for the widget, the string returned by the function may also contain tokens of the form =[#setGetPropertyName]=, which will be substituted by the values of the corresponding state properties of the widget.
+
+									Object
+										Lets you supply a JavaScript Template Module as the HTML generator for a widget.
+
+										When specifying an object for this property, the object should contain a =process= property that is a generator function. That generator function should expect to receive one parameter, being an object containing the `HTML generator input`. The function should return a string, being the generated HTML markup for the widget. The string returned will *not* be processed any further and will be inserted into the document as is, so it is the reponsibility of the generator function in this case to stitch in any values it cares to from the `HTML generator input`.
+
+										Now, typically an object specified for the =html= state property will be a JavaScript Template Module, but you can supply any object - the only requirement is that it have a =process= property that is a generator function. Since the function type value for the =html= state property results in the string returned by the function being processed further with token substitution, using the object type is one way to dodge that extra processing if it's not desired - without actually having to create a full-blown JavaScript Template Module.
+
+										INSTEAD OF...
+										....................................................
+										myWidget.set ({html:myWidgetHtmlGeneratorFunction});
+										....................................................
+
+										YOU COULD USE...
+										..............................................................
+										myWidget.set ({html:{process:myWidgetHtmlGeneratorFunction}});
+										..............................................................
+
+									Boolean
+										Lets you embed a JavaScript Template inside a widget's markup, which will then be used for generating the widget's UI.
+
+										When the boolean value =true= is set for this property, and if the =Uize.Template= module is loaded, then the =Uize.Widget= class will attempt to find a =script= tag inside the container, shell, or `root node` of the widget with the type "text/jst" (JavaScript Template). If such a =script= tag is found, then its contents will be compiled by the =Uize.Template= module and the resulting JST module will be set on the =html= state property.
+
+								HTML Generator Input
+									When a generator function is called, it is supplied with an object that contains the current state of the state properties for the widget instance.
+
+									This allows the generator function to use any - or all - of the state properties when constructing the HTML for a specific instance of the widget.
+
+									SPECIAL PATH PROPERTIES
+
+									In addition to the state property values, the HTML Generator Input object also contains the two special properties =pathToResources= and =blankGif=, where =pathToResources= is set to the value of the =Uize.pathToResources= static property, and =blankGif= is set to the result from calling the =Uize.Widget.getBlankImageUrl= static method.
+
+									These special path properties allow widgets to generate HTML that references assets that are located in directories relative to the JavaScript modules that implement the widgets.
+
+								NOTES
+								- the initial value is =undefined=
+					*/
+				_idPrefix:{
+					name:'idPrefix|node',
+					conformer:function (_idPrefix) {
+						/* NOTE:
+							if the idPrefix is a node reference, convert it to a string whose value is the id of the node
+						*/
+						return _isNode (_idPrefix) ? (_idPrefix.id || (_idPrefix.id = _Uize.getGuid ())) : _idPrefix;
+					},
+					onChange:function () {
+						var
+							m = this,
+							_idPrefix = m._idPrefix
+						;
+						m._nodeCache = _null;
+						if (_idPrefix != _undefined) {
+							_applyDeclarativeWidgetProperties (m);
+
+							/*** set idPrefix for every child widget that doesn't have a value set for this property ***/
+								var
+									_children = m._children,
+									_child
+								;
+								for (var _childName in _children)
+									(_child = _children [_childName]).set ({
+										_idPrefix:
+											_constructIdPrefix (_idPrefix,_child._idPrefix,_childName,_child._idPrefixConstruction)
+									})
+								;
+
+							/*** rewire the widget, if it's already wired ***/
+								if (m.isWired) {
+									// perhaps any previously wired nodes should also be unwired first
+									m.set ({wired:_false});
+									m.wireUi ();
+								}
+						}
+					}
+					/*?
+						State Properties
+							idPrefix
+								A string, specifying the ID prefix to be used when resolving implied nodes and child widgets to DOM node references.
+
+								NOTES
+								- see the related =idPrefixConstruction= state property
+								- the initial value is =undefined=
+					*/
+				},
+				_idPrefixConstruction:'idPrefixConstruction',
+					/*?
+						State Properties
+							idPrefixConstruction
+								A string, specifying the mode of construction of the value for the =idPrefix= state property.
+
+								The value of the =idPrefixConstruction= property is used when the value of the =idPrefix= property is constructed. This happens either at the time that a widget is added as a child widget of a parent widget using the =addChild= instance method, or when the =idPrefix= value of a child widget's parent widget is modified *after* it has already been added as a child.
+
+								VALUES
+
+								- ='same as parent'= - When =idPrefixConstruction= is set to ='same as parent'=, the =idPrefix= property will be set to the value of a widget's parent widget whenever the =idPrefix= value needs to be constructed.
+
+								- ='concatenated'= - When =idPrefixConstruction= is set to ='concatenated'=, the =idPrefix= property will be constructed using the =idPrefix= value of a widget's parent widget as a prefix, and using the value of the widget's =name= property as a suffix, with the prefix and suffix separated by a "_" (underscore) character. For example, if a button widget has the name ='selectAll'=, and its parent widget has the =idPrefix= value of ='page_collection'=, then the =idPrefix= value produced for the button widget using this =idPrefixConstruction= mode would be ='page_collection_selectAll'=.
+
+								- ='explicit'= - When =idPrefixConstruction= is set to ='explicit'=, an explicit value specified for a widget's =idPrefix= property will be used throughout the lifetime of the widget, and the =idPrefix= will not be otherwise derived.
+
+								- =undefined= (the default value) - When =idPrefixConstruction= is set to =undefined=, the behavior for the value ='concatenated'= will be used (ie. the value =undefined= is equivalent to the value ='concatenated'=).
+
+								NOTES
+								- see the related =idPrefix= state property
+								- the initial value is =undefined= (equivalent to the value ='concatenated'=)
+					*/
+				_insertionMode:'insertionMode',
+					/*?
+						State Properties
+							insertionMode
+								A string, specifying the injection mode that should be used when inserting the HTML for a widget into the page.
+
+								This property works in conjunction with the =built=, =container=, and =html= state properties. If the value for the =built= property is =true= for a widget instance, then =insertionMode= is not applicable. But if the value for =built= is =false=, then the HTML generated using the =html= state property will be injected into a container node specified by the =container= state property (or the =shell= implied node, or the `root node` of the widget instance, or the document's body, whichever is non-null) using the mode specified by =insertionMode=.
+
+								EXAMPLE
+								......................................................
+								page.addChild (
+									'quantitySlider',
+									Uize.Widget.Bar.Slider,
+									{
+										html:MySiteNamespace.Templates.Slider,
+										built:false,
+										container:Uize.Node.getById ('quantityUiShell'),
+										insertionMode:'inner bottom'
+									}
+								);
+								......................................................
+
+								In the above example, an instance of the =Uize.Widget.Bar.Slider= class will have its HTML generated by the template module =MySiteNamespace.Templates.Slider= and then inserted into the container node =quantityUiShell=, using the ='inner bottom'= insertion mode. This means that if the =quantityUiShell= node already contained contents, that contents will not be replaced by insertion of the widget's HTML, but the widget's HTML will be inserted at the bottom - under the existing contents.
+
+								Values
+									The possible values for the =insertionMode= state property are the same as the valid values for the =injectModeSTR= parameter of the =Uize.Node.injectHtml= static method: ='inner bottom'=, ='inner top'=, ='outer bottom'=, ='outer top'=, ='inner replace'=, and ='outer replace'=. For a more in-depth discussion of insertion modes and how they behave, consult the reference for the =Uize.Node.injectHtml= static method.
+
+									If the value of the =insertionMode= state property is =null=, =undefined=, or an empty string, then an insertion mode is chosen automatically based upon the node that the HTML is being inserted into: ='inner replace'= if a container node is specified, and ='inner bottom'= into the document body if no container node is specified or if the document body is specified for the container.
+
+								NOTES
+								- the initial value is =undefined= (which results in default auto behavior)
+								- see also the =built=, =container=, and =html= state properties
+					*/
+				_localized:'localized',
+					/*?
+						State Properties
+							localized
+								An object which, if defined, lets you specify localized strings that can be accessed using the =localized= instance method.
+
+								EXAMPLE
+								..........................................................................
+								myWidget.set ({
+									localized:{welcomeMessage:'Welcome, {firstName} of {state}, {country}'}
+								});
+								var localWelcome = myWidget.localize (
+									'welcomeMessage',
+									{firstName:'Chris',state:'California',country:'USA'}
+								);
+								..........................................................................
+
+								The above example would produce the result ='Welcome, Chris of California, USA'=.
+
+								NOTES
+								- the initial value is =undefined=
+								- see also the =localize= instance method
+					*/
+				_name:'name',
+					/*?
+						State Properties
+							name
+								A read-only string, specifying the name of the widget if it is added as a child widget of another widget by calling the =addChild= instance method on that other widget.
+
+								The value of this property is set for an instance when the instance is added as a child widget of another widget instance. The value is read-only and is not intended to be set later.
+
+								NOTES
+								- this property is read-only
+								- the initial value is =undefined=
+					*/
+				_nodeMap:'nodeMap',
+					/*?
+						State Properties
+							nodeMap
+								An object which, if defined, lets you provide override mappings for implied nodes. Each property's name-value pair is a single implied node mapping, where the property name is the natural name (as implemented in the widget subclass) for the implied node, and where the property value is the override (which can be either an alternate node name, or an actual node reference).
+
+								NOTES
+								- the initial value is =undefined=
+					*/
+				isWired:{
+					name:'wired',
+					value:_false
+					/*?
+						State Properties
+							wired
+								A boolean, indicating whether or not the widget's UI has been wired up. This property is set to =true= after the =wireUi= instance method has been called on a widget and all its child widgets.
+
+								NOTES
+								- the initial value is =false=
+								- see also the =isWired= instance property
+
+						Instance Properties
+							isWired
+								An alternate way of accessing the value of the =wired= state property, that doesn't require using the =get= instance method.
+
+								Using this property is functionally equivalent to =myWidget.get ('wired')=. This property is provided primarily as a convenience and to improve performance, since the =wired= state property is accessed many times in many widget class files, and often in heavily hit areas of code. Using this property to access the value of the =wired= state property offers slightly better performance than using the =get= instance method, which may help a little with performance optimization.
+
+								INSTEAD OF...
+								............................
+								if (!this.get ('wired')) {
+									// code to perform wiring
+								}
+								............................
+
+								USE...
+								............................
+								if (!this.isWired) {
+									// code to perform wiring
+								}
+								............................
+
+								NOTES
+								- see also the =wired= state property
+					*/
+				}
+			},
+
+			treeInheritedStateProperties:{
+				_busy:{
+					name:'busy',
+					value:_false
 					/*?
 						State Properties
 							busy
@@ -2096,8 +2028,10 @@ Uize.module ({
 								- see also the =busy= state property
 								- see also the =getInherited= instance method
 					*/
-
-				_treeInheritedPropertyProfile ({_enabled:'enabled',_enabledInherited:'enabledInherited'},_true)
+				},
+				_enabled:{
+					name:'enabled',
+					value:_true
 					/*?
 						State Properties
 							enabled
@@ -2119,7 +2053,8 @@ Uize.module ({
 								- see also the =enabled= state property
 								- see also the =getInherited= instance method
 					*/
-			),
+				}
+			},
 
 			staticMethods:{
 				getBlankImageUrl:function () {
