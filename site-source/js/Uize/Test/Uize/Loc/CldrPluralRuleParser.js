@@ -34,12 +34,14 @@ Uize.module ({
 				Uize.Test.requiredModulesTest ('Uize.Loc.CldrPluralRuleParser'),
 				Uize.Test.staticMethodsTest ([
 					['Uize.Loc.CldrPluralRuleParser.toJsExpression',[
-						/*
-						['Test that max length of zero produces empty string',
-							['0123456789',0],
+						['',
+							'n % 10 = 3..4,9 and n % 100 != 10..19,70..79,90..99',
+							''
+						],
+						['',
+							'v = 0 and i % 10 = 1 and i % 100 != 11 or f % 10 = 1 and f % 100 != 11 @integer 1, 21, 31, 41, 51, 61, 71, 81, 101, 1001, … @decimal 0.1, 1.1, 2.1, 3.1, 4.1, 5.1, 6.1, 7.1, 10.1, 100.1, 1000.1, …',
 							''
 						]
-						*/
 					]]
 				])
 			]
