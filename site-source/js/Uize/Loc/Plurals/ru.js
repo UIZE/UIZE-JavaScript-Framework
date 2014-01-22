@@ -1,8 +1,19 @@
+/*______________
+|       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
+|     /      /  |   ---------------------------------------------------
+|    /    O /   |    MODULE : Uize.Loc.Plurals.ru Package
+|   /    / /    |
+|  /    / /  /| |    ONLINE : http://www.uize.com
+| /____/ /__/_| | COPYRIGHT : (c)2014 UIZE
+|          /___ |   LICENSE : Available under MIT License or GNU General Public License
+|_______________|             http://www.uize.com/license.html
+*/
+
 /* Module Meta Data
-	type: Class
+	type: Package
 	importance: 1
-	codeCompleteness: 5
-	docCompleteness: 5
+	codeCompleteness: 100
+	docCompleteness: 100
 */
 
 /*?
@@ -10,6 +21,18 @@
 		The =Uize.Loc.Plurals.ru= module implements a .
 
 		*DEVELOPERS:* `Chris van Rensburg`
+
+		Plural Categories
+			........................................................
+			<< table >>
+
+			title: Plural Categories
+			data:
+			:| Category | CLDR Plural Rule |
+			:| one | v = 0 and i % 10 = 1 and i % 100 != 11 @integer 1, 21, 31, 41, 51, 61, 71, 81, 101, 1001, … |
+			:| many | v = 0 and i % 10 = 0 or v = 0 and i % 10 = 5..9 or v = 0 and i % 100 = 11..14 @integer 0, 5~19, 100, 1000, 10000, 100000, 1000000, … |
+			:| other |  @integer 2~4, 22~24, 32~34, 42~44, 52~54, 62, 102, 1002, … @decimal 0.0~1.5, 10.0, 100.0, 1000.0, 10000.0, 100000.0, 1000000.0, … |
+			........................................................
 */
 
 Uize.module ({

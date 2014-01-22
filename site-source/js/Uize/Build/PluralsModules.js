@@ -64,6 +64,7 @@ Uize.module ({
 							contents:Uize.Loc.Plurals.ModuleTemplate.process ({
 								namespace:'Uize.Loc.Plurals',
 								language:_language,
+								pluralRules:_pluralRulesMap,
 								pluralRulesFunction:Uize.Loc.CldrPluralRuleParser.rulesToJsFunctionStr (_pluralRulesMap)
 							})
 						});

@@ -1,6 +1,7 @@
 <%@
 	required (
-		'Uize.Str.Lines'
+		'Uize.Str.Lines',
+		'Uize.Build.Templates.Module.HeadComment'
 	);
 	input ({
 		namespace:'string',
@@ -10,15 +11,20 @@
 %><%
 	var
 		_input = input,
-		_moduleName = _input.namespace + '.' + _input.language
+		_moduleName = _input.namespace + '.' + _input.language,
+		_pluralRules = _input.pluralRules
 	;
-%><%
-	.headComment
+%><%=
+	Uize.Build.Templates.Module.HeadComment.process ({
+		moduleName:_moduleName,
+		moduleType:'Package',
+		creationYear:(new Date).getFullYear ()
+	})
 %>/* Module Meta Data
-	type: Class
+	type: Package
 	importance: 1
-	codeCompleteness: 5
-	docCompleteness: 5
+	codeCompleteness: 100
+	docCompleteness: 100
 */
 
 /*?
@@ -26,6 +32,20 @@
 		The =<%= _moduleName %>= module implements a .
 
 		*DEVELOPERS:* `Chris van Rensburg`
+
+		Plural Categories
+			........................................................
+			<< table >>
+
+			title: Plural Categories
+			data:
+			:| Category | Rule |
+<%
+	for (var _pluralRuleName in _pluralRules) {
+%>			:| <%= _pluralRuleName %> | <%= _pluralRules [_pluralRuleName] %> |
+<%
+	}
+%>			........................................................
 */
 
 Uize.module ({
