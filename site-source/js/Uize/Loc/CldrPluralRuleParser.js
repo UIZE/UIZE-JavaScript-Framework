@@ -57,6 +57,10 @@ Uize.module ({
 			/*** Variables for Scruncher Optimization ***/
 				_split = Uize.Str.Split.split,
 
+			/*** references to static methods used internally ***/
+				_ruleToJs,
+				_rulesToJs,
+
 			/*** General Variables ***/
 				_segmentRegularExpressions = _resolveRegularExpressions ({
 					digit:/\d/,
@@ -75,13 +79,11 @@ Uize.module ({
 		;
 
 		return Uize.package ({
-			toJsExpression:function (_pluralRuleStr) {
-				console.log (_pluralRuleStr.replace (_samplesRegExp,''));
+			ruleToJs:_ruleToJs = function (_pluralRuleStr) {
 				return Uize.Str.Trim.trim (
 					Uize.map (
 						_split (_pluralRuleStr.replace (_samplesRegExp,''),_orRegExp), // remove samples, split or conditions
 						function (_andCondition) {
-							console.log (_andCondition);
 							return Uize.map (
 								_split (_andCondition,_andRegExp),
 								function (_relation) {
@@ -117,14 +119,42 @@ Uize.module ({
 				);
 				/*?
 					Static Methods
-						Uize.Loc.CldrPluralRuleParser.toJsExpression
+						Uize.Loc.CldrPluralRuleParser.ruleToJs
 							Returns a string, representing the CLDR plural rule in the form of a JavaScript expression.
 
 							SYNTAX
-							...............................................................................
-							jsExpressionSTR = Uize.Loc.CldrPluralRuleParser.toJsExpression (pluralRuleSTR);
-							...............................................................................
+							.........................................................................
+							jsExpressionSTR = Uize.Loc.CldrPluralRuleParser.ruleToJs (pluralRuleSTR);
+							.........................................................................
 				*/
+			},
+
+			rulesToJs:_rulesToJs = function (_pluralRulesMap) {
+				delete (_pluralRulesMap = Uize.copy (_pluralRulesMap)).other;
+				var
+					_pluralRuleNo = -1,
+					_pluralRuleNames = Uize.keys (_pluralRulesMap)
+				;
+				function _getPluralRuleCondition () {
+					var _pluralRuleName = _pluralRuleNames [++_pluralRuleNo];
+					return (
+						_pluralRuleName
+							? (
+								_ruleToJs (_pluralRulesMap [_pluralRuleName]) +
+								' ? \'' + _pluralRuleName + '\'' +
+								' : ' + _getPluralRuleCondition ()
+							)
+							: '\'other\''
+					);
+				}
+				return _getPluralRuleCondition ();
+			},
+
+			rulesToJsFunction:function (_pluralRulesMap) {
+				return Function (
+					'n', 'i', 'f', 't', 'v', 'w', 'within',
+					'return ' + _rulesToJs (_pluralRulesMap) + ';'
+				);
 			}
 		});
 	}
