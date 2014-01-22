@@ -150,6 +150,14 @@ Uize.module ({
 				return _getPluralRuleCondition ();
 			},
 
+			rulesToJsFunctionStr:function (_pluralRulesMap) {
+				return (
+					'function (n,i,f,t,v,w,within) {\n' +
+						'\treturn ' + _rulesToJs (_pluralRulesMap) + ';\n' +
+					'}\n'
+				);
+			},
+
 			rulesToJsFunction:function (_pluralRulesMap) {
 				return Function (
 					'n', 'i', 'f', 't', 'v', 'w', 'within',
