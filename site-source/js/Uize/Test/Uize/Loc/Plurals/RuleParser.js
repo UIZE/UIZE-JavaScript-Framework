@@ -44,7 +44,6 @@ Uize.module ({
 							''
 						]
 					]]
-					*/
 					['Uize.Loc.Plurals.RuleParser.rulesToJsFunction',[
 						['',
 							{
@@ -58,6 +57,7 @@ Uize.module ({
 							''
 						]
 					]]
+					*/
 				])
 			]
 		});
