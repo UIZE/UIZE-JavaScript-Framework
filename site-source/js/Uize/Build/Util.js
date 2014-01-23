@@ -52,11 +52,11 @@ Uize.module ({
 
 		/*** Utility Functions ***/
 			function _moduleNameFromModulePath (_modulePath,_removeExtension) {
-				return (
-					_removeExtension ? _modulePath.replace (_jsModuleExtensionRegExp,'') : _modulePath
-				).replace (
-					/[\/_]/g,'.'
-				);
+				var _modulePathParts =
+					(_removeExtension ? _modulePath.replace (_jsModuleExtensionRegExp,'') : _modulePath).split ('/')
+				;
+				_modulePathParts [0] = _modulePathParts [0].replace (/_/g,'.');
+				return _modulePathParts.join ('.');
 			}
 
 		return _package = Uize.package ({
