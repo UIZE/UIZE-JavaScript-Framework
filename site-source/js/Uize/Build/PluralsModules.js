@@ -33,7 +33,7 @@ Uize.module ({
 	required:[
 		'Uize.Services.FileSystem',
 		'Uize.Json',
-		'Uize.Loc.CldrPluralRuleParser',
+		'Uize.Loc.Plurals.RuleParser',
 		'Uize.Loc.Plurals.ModuleTemplate'
 	],
 	builder:function () {
@@ -65,7 +65,7 @@ Uize.module ({
 								namespace:'Uize.Loc.Plurals',
 								language:_language,
 								pluralRules:_pluralRulesMap,
-								pluralRulesFunction:Uize.Loc.CldrPluralRuleParser.rulesToJsFunctionStr (_pluralRulesMap)
+								pluralRulesFunction:Uize.Loc.Plurals.RuleParser.rulesToJsFunctionStr (_pluralRulesMap)
 							})
 						});
 					}

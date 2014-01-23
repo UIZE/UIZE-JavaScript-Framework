@@ -1,7 +1,7 @@
 /*______________
 |       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
 |     /      /  |   ---------------------------------------------------
-|    /    O /   |    MODULE : Uize.Loc.CldrPluralRuleParser Package
+|    /    O /   |    MODULE : Uize.Loc.Plurals.RuleParser Package
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
 | /____/ /__/_| | COPYRIGHT : (c)2014 UIZE
@@ -18,13 +18,13 @@
 
 /*?
 	Introduction
-		The =Uize.Loc.CldrPluralRuleParser= module provides methods for parsing [[http://unicode.org/repos/cldr-tmp/trunk/diff/supplemental/language_plural_rules.html][CLDR plural rules]] defined using the [[http://unicode.org/reports/tr35/tr35-numbers.html#Language_Plural_Rules][CLDR plural rule syntax]].
+		The =Uize.Loc.Plurals.RuleParser= module provides methods for parsing [[http://unicode.org/repos/cldr-tmp/trunk/diff/supplemental/language_plural_rules.html][CLDR plural rules]] defined using the [[http://unicode.org/reports/tr35/tr35-numbers.html#Language_Plural_Rules][CLDR plural rule syntax]].
 
 		*DEVELOPERS:* `Chris van Rensburg`
 */
 
 Uize.module ({
-	name:'Uize.Loc.CldrPluralRuleParser',
+	name:'Uize.Loc.Plurals.RuleParser',
 	required:[
 		'Uize.Str.Split',
 		'Uize.Str.Trim'
@@ -119,12 +119,12 @@ Uize.module ({
 				);
 				/*?
 					Static Methods
-						Uize.Loc.CldrPluralRuleParser.ruleToJs
+						Uize.Loc.Plurals.RuleParser.ruleToJs
 							Returns a string, representing the CLDR plural rule in the form of a JavaScript expression.
 
 							SYNTAX
 							.........................................................................
-							jsExpressionSTR = Uize.Loc.CldrPluralRuleParser.ruleToJs (pluralRuleSTR);
+							jsExpressionSTR = Uize.Loc.Plurals.RuleParser.ruleToJs (pluralRuleSTR);
 							.........................................................................
 				*/
 			},

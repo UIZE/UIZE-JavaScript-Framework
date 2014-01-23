@@ -1,10 +1,30 @@
 This document lists official news announcements that need to be created for developments that have already taken place.
 
+NEW MODULE: Uize.Loc.Plurals.RuleParser
+	Still to do...
+
+	- write unit tests
+	- write documentation
+	- write news announcement
+
+NEW MODULE: Uize.Loc.PLurals.Util
+	Still to do...
+
+	- write unit tests
+	- write documentation
+	- write news announcement
+
 NEW MODULE: Uize.Loc.Pseudo
 	Still to do...
 
 	- write unit tests
 	- write documentation
+	- write news announcement
+
+New Localization Plurals Modules
+	Still to do...
+
+	- polish documentation created by build script
 	- write news announcement
 
 NEW MODULE: Uize.Event.Bus

@@ -1,7 +1,7 @@
 /*______________
 |       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
 |     /      /  |   ---------------------------------------------------
-|    /    O /   |    MODULE : Uize.Test.Uize.Loc.CldrPluralRuleParser Class
+|    /    O /   |    MODULE : Uize.Test.Uize.Loc.Plurals.RuleParser Class
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
 | /____/ /__/_| | COPYRIGHT : (c)2014 UIZE
@@ -18,23 +18,23 @@
 
 /*?
 	Introduction
-		The =Uize.Test.Uize.Loc.CldrPluralRuleParser= module defines a suite of unit tests for the =Uize.Loc.CldrPluralRuleParser= module.
+		The =Uize.Test.Uize.Loc.Plurals.RuleParser= module defines a suite of unit tests for the =Uize.Loc.Plurals.RuleParser= module.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 */
 
 Uize.module ({
-	name:'Uize.Test.Uize.Loc.CldrPluralRuleParser',
+	name:'Uize.Test.Uize.Loc.Plurals.RuleParser',
 	builder:function () {
 		'use strict';
 
 		return Uize.Test.resolve ({
-			title:'Test for Uize.Loc.CldrPluralRuleParser Module',
+			title:'Test for Uize.Loc.Plurals.RuleParser Module',
 			test:[
-				Uize.Test.requiredModulesTest ('Uize.Loc.CldrPluralRuleParser'),
+				Uize.Test.requiredModulesTest ('Uize.Loc.Plurals.RuleParser'),
 				Uize.Test.staticMethodsTest ([
 					/*
-					['Uize.Loc.CldrPluralRuleParser.ruleToJs',[
+					['Uize.Loc.Plurals.RuleParser.ruleToJs',[
 						['',
 							'n % 10 = 3..4,9 and n % 100 != 10..19,70..79,90..99',
 							''
@@ -45,7 +45,7 @@ Uize.module ({
 						]
 					]]
 					*/
-					['Uize.Loc.CldrPluralRuleParser.rulesToJsFunction',[
+					['Uize.Loc.Plurals.RuleParser.rulesToJsFunction',[
 						['',
 							{
 							  zero:'n = 0 @integer 0 @decimal 0.0, 0.00, 0.000, 0.0000',
