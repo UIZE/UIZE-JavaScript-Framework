@@ -39,7 +39,7 @@
 
 Uize.module ({
 	name:'Uize.Web.xEffects',
-	required:'Uize.Node',
+	required:'Uize.Dom.Basics',
 	builder:function (_object) {
 		'use strict';
 		
@@ -51,14 +51,14 @@ Uize.module ({
 				_undefined,
 
 				_Uize = Uize,
-				_Uize_Node = _Uize.Node,
+				_Uize_Dom_Basics = _Uize.Dom.Basics,
 
 				_Uize_isFunction = _Uize.isFunction,
 				_Uize_isPlainObject = _Uize.isPlainObject,
 				_Uize_copyInto = _Uize.copyInto,
 				
-				_Uize_Node_getStyle = _Uize_Node.getStyle,
-				_Uize_Node_setStyle = _Uize_Node.setStyle,
+				_Uize_Dom_Basics_getStyle = _Uize_Dom_Basics.getStyle,
+				_Uize_Dom_Basics_setStyle = _Uize_Dom_Basics.setStyle,
 
 				_objectPrototype = _object.prototype
 			;
@@ -128,7 +128,7 @@ Uize.module ({
 			_objectPrototype._animateDisplay = function(_mustDisplay, _displayProperties, _duration, _callback, _timing) {
 				var
 					m = this,
-					_Uize_Node_display = _Uize_Node.display
+					_Uize_Dom_Basics_display = _Uize_Dom_Basics.display
 				;
 
 				m._enqueue( // add to effects queue
@@ -185,7 +185,7 @@ Uize.module ({
 								var
 									_node = this,
 									_nodeMustDisplay = _mustDisplay,
-									_nodeIsHidden = _Uize_Node_getStyle(_node, 'display') == 'none'
+									_nodeIsHidden = _Uize_Dom_Basics_getStyle(_node, 'display') == 'none'
 								;
 								
 								// _mustDisplay will be null or undefined if we're trying to do a toggle operation.
@@ -198,14 +198,14 @@ Uize.module ({
 								// - second removing display value on the node
 								// - third explicitly setting display to a non-"none" value
 								if (_nodeIsHidden) {
-									_Uize_Node_setStyle(_node, {display:''});
-									_Uize_Node_getStyle(_node, 'display') == 'none'
-										&& _Uize_Node_display(_node);
+									_Uize_Dom_Basics_setStyle(_node, {display:''});
+									_Uize_Dom_Basics_getStyle(_node, 'display') == 'none'
+										&& _Uize_Dom_Basics_display(_node);
 								}
 		
 								var
 									_propertiesFinal = _nodeMustDisplay
-										? _Uize_Node_getStyle(_node, _animateProperties)
+										? _Uize_Dom_Basics_getStyle(_node, _animateProperties)
 										: _animateProperties,
 									_initialProperties = _Uize_copyInto(
 										{},
@@ -232,7 +232,7 @@ Uize.module ({
 								// NOTE: setting here instead of as the "start" property of animate
 								// so that it happens immediately and not after all the processing/queueing
 								// going on in animate (particularly defer loading modules)
-								_Uize_Node_setStyle(
+								_Uize_Dom_Basics_setStyle(
 									_node,
 									_Uize_copyInto(
 										_animateX || _animateY
@@ -246,24 +246,23 @@ Uize.module ({
 											}
 											: {},
 										_animateProperties,
-										_Uize_Node_getStyle(_node, _initialProperties)
+										_Uize_Dom_Basics_getStyle(_node, _initialProperties)
 									)
 								);
 
 								// create a throw-away Uize.Web. object so we can call animate on it and leverage existing code
 								_object(_node).animate(
 									_propertiesFinal,
-									_Uize_copyInto(
-										{},
+									_Uize.copy(
 										_animationOptions,
 										{
 											// override the callback in _animationOptions w/ our own, but call it in the function
 											callback:function() {
 												// Now that we're done, "cleanse" the style properties by resetting them
-												_Uize_Node_setStyle(_node, _propertiesToRestore);
+												_Uize_Dom_Basics_setStyle(_node, _propertiesToRestore);
 												
 												// Hide the node if we were actually trying to hide it
-												!_nodeMustDisplay && _Uize_Node_display(_node, _false);
+												!_nodeMustDisplay && _Uize_Dom_Basics_display(_node, _false);
 												
 												// finally call callback
 												_Uize_isFunction(_callback) && _callback.call(_node);
@@ -613,7 +612,7 @@ Uize.module ({
 								
 								// set the end value of each node if _jumpToEnd is true
 								_jumpToEnd
-									&& _Uize_Node_setStyle(m[_fadeNo], _activeFadeObject.get('endValue'))
+									&& _Uize_Dom_Basics_setStyle(m[_fadeNo], _activeFadeObject.get('endValue'))
 								;
 							}
 						}

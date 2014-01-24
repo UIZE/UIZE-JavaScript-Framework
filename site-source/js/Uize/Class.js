@@ -348,7 +348,7 @@ Uize.module ({
 		'Uize.Util.Dependencies',
 		'Uize.Event.Bus'
 	],
-	builder:function (_superclass) {
+	builder:function () {
 		'use strict';
 
 		var
@@ -846,6 +846,7 @@ Uize.module ({
 								: _isArray (_mixins)
 									? _forEach (_mixins,_applyMixins)
 									: m.declare (_mixins)
+							;
 						}
 					}
 					_applyMixins (_mixins);
