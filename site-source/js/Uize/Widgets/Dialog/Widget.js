@@ -36,7 +36,9 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		return Uize.Widget.V2Mixin (_superclass.subclass ()).declare ({
+		return _superclass.subclass ({
+			mixins:Uize.Widget.V2Mixin,
+
 			set:{
 				html:Uize.Widgets.Dialog.Html
 			},

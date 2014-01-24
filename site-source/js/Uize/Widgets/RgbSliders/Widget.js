@@ -87,10 +87,6 @@ Uize.module ({
 
 			stateProperties:{
 				_sliderHeight:'sliderHeight',
-				_size:{
-					name:'size',
-					value:'medium'
-				},
 				_value:{
 					name:'value',
 					conformer:function (_value) {return Uize.Color.to (_value,'hex')},
@@ -120,10 +116,6 @@ Uize.module ({
 
 			staticProperties:{
 				cssModule:Uize.Widgets.RgbSliders.Css
-			},
-
-			cssBindings:{
-				size:'value'
 			},
 
 			htmlBindings:{

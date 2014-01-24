@@ -45,12 +45,10 @@ Uize.module ({
 
 		var _superUpdateUi = _superclass.prototype.updateUi;
 
-		return Uize.Widget.V2Mixin (_superclass.subclass ()).declare ({
+		return _superclass.subclass ({
+			mixins:Uize.Widget.V2Mixin,
+
 			stateProperties:{
-				_size:{
-					name:'size',
-					value:'medium'
-				},
 				_trackLength:{
 					name:'trackLength',
 					value:''
@@ -73,8 +71,7 @@ Uize.module ({
 			},
 
 			cssBindings:{
-				orientation:'value',
-				size:'value'
+				orientation:'value'
 			},
 
 			htmlBindings:{

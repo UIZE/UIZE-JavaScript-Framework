@@ -130,7 +130,7 @@ Uize.module ({
 					_nodeBlob,
 					{
 						cursor:
-							_clickable || _clickable === _undefined
+							_clickable || _clickable === undefined
 								? (_useHandForPointerCursor ? 'hand' : 'pointer')
 								: 'default'
 					}

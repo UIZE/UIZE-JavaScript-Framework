@@ -37,18 +37,21 @@ Uize.module ({
 			/*** Variables for Scruncher Optimization ***/
 				_Uize_Util_Xml = Uize.Util.Xml,
 
-			/*** Variables for Performance Optimization ***/
-				_Uize_Util_Xml_TagName = _Uize_Util_Xml.TagName,
-				_Uize_Util_Xml_TagAttributes = _Uize_Util_Xml.TagAttributes,
-				_Uize_Util_Xml_NodeList = _Uize_Util_Xml.NodeList
+			/*** General Variables ***/
+				_whitespaceCharsLookup = _charsLookup (' \t\r\n') // TODO: make this more exhaustive
 		;
+
+		/*** Utility Functions ***/
+			function _charsLookup (_charsStr) {
+				return Uize.lookup (_charsStr.split (''));
+			}
 
 		return Uize.copyInto (
 			function () {
 				var m = this;
-				m.tagName = new _Uize_Util_Xml_TagName;
+				m.tagName = new _Uize_Util_Xml.TagName;
 				m.tagAttributes = new _Uize_Util_Xml.TagAttributes;
-				m._childNodes = m.childNodes = new _Uize_Util_Xml_NodeList;
+				m._childNodes = m.childNodes = new _Uize_Util_Xml.NodeList;
 			},
 
 			{
@@ -64,23 +67,36 @@ Uize.module ({
 							_sourceLength = (m.source = _source).length
 						;
 						m.index = _index || (_index = 0);
-						m.length = 0;
-						if (m.isValid = _source.charAt (_index) == '<') {
+
+						function _eatWhitespace () {
+							while (_index < _sourceLength && _whitespaceCharsLookup [_source.charAt (_index)])
+								_index++
+							;
+						}
+
+						if (_source.charAt (_index) == '<') {
 							_index++;
-							/*
-								eat whitespace
-								then expect tagName
-								if whitespace, eat whitespace
-								then expect possible attributes
-								then expect possible ">" or "/>"
-								if "/>" then
-									end parsing
-								else
-									then expect possible nodes
-									then expect closing tag to match opening tag
-									then end parsing
-							*/
+							_eatWhitespace ();
+							m.tagName.parse (_source,_index);
+							if (m.tagName.isValid) {
+								_index += m.tagName.length;
+								_eatWhitespace ();
+								/*
+									then expect possible attributes
+									then expect possible ">" or "/>"
+									if "/>" then
+										end parsing
+									else
+										then expect possible nodes
+										then expect closing tag to match opening tag
+										then end parsing
+								*/
+							} else {
+								_index = m.index;
+							}
 						};
+						m.tag = _source.slice (m.index,_index);
+						m.isValid = !!(m.length = _index - m.index);
 					},
 
 					serialize:function () {

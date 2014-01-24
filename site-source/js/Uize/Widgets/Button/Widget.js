@@ -484,10 +484,6 @@ Uize.module ({
 								- the initial value is ='false'=
 					*/
 				},
-				_size:{
-					name:'size',
-					value:'medium'
-				},
 				_state:{
 					name:'state',
 					onChange:[
@@ -599,8 +595,7 @@ Uize.module ({
 
 			cssBindings:{
 				displayState:'value',
-				busyInherited:['','busy'],
-				size:'value'
+				busyInherited:['','busy']
 			}
 		});
 	}

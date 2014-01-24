@@ -28,8 +28,17 @@ Uize.module ({
 	builder:function () {
 		'use strict';
 
+		var
+			/*** General Variables ***/
+				_tagNameStartChars = '_abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ',
+				_tagNameStartCharsLookup = _charsLookup (_tagNameStartChars),
+				_tagNameContinueCharsLookup = _charsLookup (_tagNameStartChars + '-0123456789')
+		;
+
 		/*** Utility Functions ***/
-			// ...
+			function _charsLookup (_charsStr) {
+				return Uize.lookup (_charsStr.split (''));
+			}
 
 		return Uize.copyInto (
 			function () {
@@ -48,22 +57,15 @@ Uize.module ({
 							m = this,
 							_sourceLength = (m.source = _source).length
 						;
-						m.isValid = false;
 						m.index = _index || (_index = 0);
-						m.length = 0;
-						m.tagName = '';
-
-						/*** eat whitespace ***/
-							/*
-							while (_source.charAt (_index)) {
-							}
-							*/
-						/*
-
-							expect alphanumeric character, eat alphanumeric characters up until colon or whitespace
-							expect possible colon, followed by alphanumeric characters
-							expect whitespace or end of string
-						*/
+						if (_tagNameStartCharsLookup [_source.charAt (_index)]) {
+							_index++;
+							while (_index < _sourceLength && _tagNameContinueCharsLookup [_source.charAt (_index)])
+								_index++
+							;
+						}
+						m.tagName = _source.slice (m.index,_index);
+						m.isValid = !!(m.length = _index - m.index);
 					},
 
 					serialize:function () {

@@ -38,31 +38,24 @@ Uize.module ({
 	required:[
 		'Uize.Widget.V2Mixin',
 		'Uize.Widgets.Buttons.Char.Widget',
+		'Uize.Widget.TextInputBasic',
 		'Uize.Widgets.Calculator.Html',
 		'Uize.Widgets.Calculator.Css'
 	],
 	builder:function (_superclass) {
 		'use strict';
 
-		return Uize.Widget.V2Mixin (_superclass.subclass ()).declare ({
+		return _superclass.subclass ({
+			mixins:Uize.Widget.V2Mixin,
+
 			set:{
 				html:Uize.Widgets.Calculator.Html
 			},
 
-			stateProperties:{
-				_size:{
-					name:'size',
-					value:'medium'
-				}
-			},
-
 			staticProperties:{
 				buttonWidgetClass:Uize.Widgets.Buttons.Char.Widget,
+				textInputWidgetClass:Uize.Widget.TextInputBasic,
 				cssModule:Uize.Widgets.Calculator.Css
-			},
-
-			cssBindings:{
-				size:'value'
 			}
 		});
 	}

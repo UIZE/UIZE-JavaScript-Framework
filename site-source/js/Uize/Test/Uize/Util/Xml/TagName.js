@@ -28,6 +28,22 @@ Uize.module ({
 	builder:function () {
 		'use strict';
 
+		function _parserTest (_title,_sourceStr,_expectedParsedSegment,_index) {
+			_index = _index || 0;
+			return {
+				title:_title,
+				test:function () {
+					var _parser = new Uize.Util.Xml.TagName;
+					_parser.parse (_sourceStr);
+					return (
+						this.expect (_expectedParsedSegment,_parser.tagName) &&
+						this.expect (_expectedParsedSegment.length,_parser.length) &&
+						this.expect (!!_expectedParsedSegment,_parser.isValid)
+					);
+				}
+			};
+		}
+
 		return Uize.Test.resolve ({
 			title:'Test for Uize.Util.Xml.TagName Module',
 			test:[
@@ -35,14 +51,21 @@ Uize.module ({
 				{
 					title:'',
 					test:[
-						{
-							title:'Test that a string fails parsing as a tag name if any of the contiguous characters after the leading whitespace are not valid tag name characters',
-							test:function () {
-								var _parser = new Uize.Util.Xml.TagName;
-								_parser.parse ('');
-								return true;
-							}
-						}
+						_parserTest (
+							'Test that a string fails parsing as a tag name if the first character is not a valid tag name start character',
+							'0img',
+							''
+						),
+						_parserTest (
+							'Test that a string is successfully parsed as a tag name if its first character is a valid tag name start character',
+							'_:::',
+							'_'
+						),
+						_parserTest (
+							'Test that all characters, following the initial start character, that are valid tag name continuation characters are included in the parse tag name',
+							'__abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-0123456789:::',
+							'__abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-0123456789'
+						)
 					]
 				}
 			]

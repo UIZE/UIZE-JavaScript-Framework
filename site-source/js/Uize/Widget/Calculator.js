@@ -28,13 +28,17 @@
 Uize.module ({
 	name:'Uize.Widget.Calculator',
 	superclass:'Uize.Widget.CalculatorAbstract',
-	required:'Uize.Widget.Button',
+	required:[
+		'Uize.Widget.Button',
+		'Uize.Widget.TextInput'
+	],
 	builder:function (_superclass) {
 		'use strict';
 
 		return _superclass.subclass ({
 			staticProperties:{
-				buttonWidgetClass:Uize.Widget.Button
+				buttonWidgetClass:Uize.Widget.Button,
+				textInputWidgetClass:Uize.Widget.TextInput
 			}
 		});
 	}

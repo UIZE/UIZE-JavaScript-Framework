@@ -12,7 +12,7 @@
 /* Module Meta Data
 	type: Package
 	importance: 2
-	codeCompleteness: 5
+	codeCompleteness: 100
 	docCompleteness: 5
 */
 
@@ -254,7 +254,7 @@ Uize.module ({
 							.....................................................
 
 							Pseudo-localize a String Using the Option Defaults
-								In the simplest usage, a source string can be pseudo-localized using the option defaults by specifying the source string as the single argument. 
+								In the simplest usage, a source string can be pseudo-localized using the option defaults by specifying the source string as the single argument.
 
 								SYNTAX
 								................................................................
@@ -278,10 +278,10 @@ Uize.module ({
 								...........................................................................
 								pseudoLocalizedSTR = Uize.Loc.Pseudo.pseudoLocalize (sourceSTR,optionsOBJ);
 								...........................................................................
-	
+
 								optionsOBJ
 									The value for the =optionsOBJ= parameter should be an object containing any of the following option properties, in any combination...
-	
+
 									accent
 										A boolean, specifying whether ot not accenting of characters should be applied.
 
@@ -300,14 +300,14 @@ Uize.module ({
 
 									expansionChar
 										A string, specifying a character that should be used for the expansion of words in the source string.
-	
+
 										- when the value =null= or =undefined= is specified for this property, then its value will be defaulted to the "_" (underscore) character
 										- the character specified for this option will be repeated as necessary to expand words from the source string to produce words in the pseudo-localized string
 										- to see an example of this option in use, see the use case `Pseudo-localize a String, Specifying a Custom Expansion Character`
 
 									wordSplitter
 										.
-	
+
 									wrapper
 										.
 
@@ -330,7 +330,7 @@ Uize.module ({
 								............................................................
 								[This_ pseudo-localization______ thing_ is_ pretty__ cool_!]
 								............................................................
-								
+
 							Pseudo-localize a String, But Without Expansion
 
 								SYNTAX
@@ -350,7 +350,7 @@ Uize.module ({
 								................................................
 								[Ţĥîš þšéûðö-ļöçåļîžåţîöñ ţĥîñĝ îš þŕéţţý çööļ!]
 								................................................
-								
+
 							Pseudo-localize a String, Specifying a Custom Expansion Factor
 
 								SYNTAX
@@ -370,7 +370,7 @@ Uize.module ({
 								........................................................................................
 								[Ţĥîš____ þšéûðö-ļöçåļîžåţîöñ___________________ ţĥîñĝ_____ îš__ þŕéţţý______ çööļ____!]
 								........................................................................................
-								
+
 							Pseudo-localize a String, Specifying a Custom Expansion Character
 
 								SYNTAX
@@ -393,7 +393,7 @@ Uize.module ({
 								............................................................
 								[Ţĥîš~ þšéûðö-ļöçåļîžåţîöñ~~~~~~ ţĥîñĝ~ îš~ þŕéţţý~~ çööļ~!]
 								............................................................
-								
+
 							Pseudo-localize a String, But Without Adding a Wrapper
 
 								SYNTAX
@@ -413,7 +413,7 @@ Uize.module ({
 								..........................................................
 								Ţĥîš_ þšéûðö-ļöçåļîžåţîöñ______ ţĥîñĝ_ îš_ þŕéţţý__ çööļ_!
 								..........................................................
-								
+
 							Pseudo-localize a String, Specifying a Custom Wrapper
 
 								SYNTAX

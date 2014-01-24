@@ -830,6 +830,27 @@ Uize.module ({
 					*/
 				};
 
+				_class.mixins = function (_mixins) {
+					var
+						m = this,
+						_appliedMixins = m._appliedMixins || (m._appliedMixins = [])
+					;
+					function _applyMixins (_mixins) {
+						if (!_Uize.isIn (_appliedMixins,_mixins)) {
+							_appliedMixins.push (_mixins);
+							_isFunction (_mixins)
+								/* TODO:
+									What about the case where the mixin is a class, so that its type would be a function? Perhaps we should check for a method that performs the mixin of the features from the class, and where this method could be implemented in the Uize.Class base class with a base implementation that mixes in all the static and instance features.
+								*/
+								? _mixins (m)
+								: _isArray (_mixins)
+									? _forEach (_mixins,_applyMixins)
+									: m.declare (_mixins)
+						}
+					}
+					_applyMixins (_mixins);
+				};
+
 		/*** Property System Support Code ***/
 			function _getPropertyProfile (m,_propertyPublicOrPrivateName) {
 				var _class = _getClass (m);

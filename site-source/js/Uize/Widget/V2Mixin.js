@@ -511,6 +511,13 @@ Uize.module ({
 					extraClasses:{value:''}
 				},
 
+				treeInheritedStateProperties:{
+					_size:{
+						name:'size',
+						value:'medium'
+					}
+				},
+
 				set:{
 					html:{
 						process:function () {
@@ -526,11 +533,15 @@ Uize.module ({
 							return '<div id="' + m.nodeId () + '">' + _htmlChunks.join ('') + '</div>';
 						}
 					}
-				}
-			});
+				},
 
-			_class.htmlBindings ({
-				v2RootNodeCssClasses:':className'
+				htmlBindings:{
+					v2RootNodeCssClasses:':className'
+				},
+
+				cssBindings:{
+					sizeInherited:'value'
+				}
 			});
 
 			_copyInto (

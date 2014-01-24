@@ -44,7 +44,9 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		return Uize.Widget.V2Mixin (_superclass.subclass ()).declare ({
+		return _superclass.subclass ({
+			mixins:Uize.Widget.V2Mixin,
+
 			stateProperties:{
 				_displayedStatusText:{
 					name:'displayedStatusText',
@@ -64,11 +66,6 @@ Uize.module ({
 					}
 				},
 
-				_size:{
-					name:'size',
-					value:'medium'
-				},
-
 				_statusText:{
 					name:'statusText',
 					value:'',
@@ -83,10 +80,6 @@ Uize.module ({
 				orientation:'horizontal',
 				minValue:0,
 				value:0
-			},
-
-			cssBindings:{
-				size:'value'
 			},
 
 			htmlBindings:{
