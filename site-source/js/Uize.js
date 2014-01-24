@@ -5399,6 +5399,13 @@ Uize = (function () {
 			_resolveModuleDefinition
 		;
 
+		function _wrapModuleNameSegments (_moduleName) {
+			return _moduleName.replace (
+				/\.([^\.]+)/g,
+				function (_match,_nameSegment) {return '[\'' + _nameSegment + '\']'}
+			);
+		}
+
 		_copySourceIntoTarget (
 			_package,
 			{
@@ -5410,7 +5417,11 @@ Uize = (function () {
 								_modulesByName [_moduleName] ||
 								(_moduleName == '*' && _modulesByName) ||
 								(
-									(_module = _Function ('try {return ' + _moduleName + '} catch (e) {}') ()) &&
+									(
+										_module = _Function (
+											'try {return ' + _wrapModuleNameSegments (_moduleName) + '} catch (e) {}'
+										) ()
+									) &&
 									(_modulesByName [_moduleName] = _module)
 								)
 							)
@@ -5800,7 +5811,7 @@ Uize = (function () {
 									_module = _modulesByName [_name] = _module || function () {};
 
 									// create a reference on the host
-									(_Function (_name + '=arguments[0]')) (_module);
+									(_Function (_wrapModuleNameSegments (_name) + '=arguments[0]')) (_module);
 
 									// this is needed for the Uize.Class inheritance mechanism
 									var _lastPeriodPos = _name.lastIndexOf ('.');
