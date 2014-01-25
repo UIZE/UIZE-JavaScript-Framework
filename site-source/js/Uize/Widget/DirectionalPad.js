@@ -27,7 +27,8 @@ Uize.module ({
 	name:'Uize.Widget.DirectionalPad',
 	required:[
 		'Uize.Widget.Button',
-		'Uize.Dom.Classes'
+		'Uize.Dom.Classes',
+		'Uize.Widget.mWeb'
 	],
 	builder:function (_superclass) {
 		'use strict';
@@ -56,7 +57,7 @@ Uize.module ({
 
 						// this only works if we have just two modes.
 						for (var _child in _children)
-							_children [_child].web().display(m._mode == 'full' || _child in _childrenInMini )
+							m.web(_children [_child]).display(m._mode == 'full' || _child in _childrenInMini )
 						;
 					}
 				}
@@ -105,6 +106,8 @@ Uize.module ({
 			}
 
 		return _superclass.subclass ({
+			mixins:_Uize.Widget.mWeb,
+			
 			omegastructor:function () {
 				var m = this;
 				if (!m._useLinks) {
