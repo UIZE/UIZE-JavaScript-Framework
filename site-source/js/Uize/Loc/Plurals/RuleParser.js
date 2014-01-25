@@ -27,31 +27,11 @@ Uize.module ({
 	name:'Uize.Loc.Plurals.RuleParser',
 	required:[
 		'Uize.Str.Split',
-		'Uize.Str.Trim'
+		'Uize.Str.Trim',
+		'Uize.Util.RegExpComposition'
 	],
 	builder:function () {
 		'use strict';
-
-		/*** Utility Functions ***/
-			function _resolveRegularExpressions (_regExpLookup) {
-				var _resolved = {};
-				function _resolveRegularExpression (_regExp,_regExpName) {
-					if (!_resolved [_regExpName]) {
-						_resolved [_regExpName] = new RegExp (
-							_regExp.source.replace (
-								/{([a-zA-Z_$][a-zA-Z_$\d]*)}/g,
-								function (_match,_subRegExpName) {
-									_resolveRegularExpression (_regExpLookup [_subRegExpName],_subRegExpName);
-									return '(' + _resolved [_subRegExpName].source + ')';
-								}
-							),
-							'g'
-						)
-					}
-				}
-				Uize.forEach (_regExpLookup,_resolveRegularExpression);
-				return _resolved;
-			}
 
 		var
 			/*** Variables for Scruncher Optimization ***/
@@ -62,7 +42,7 @@ Uize.module ({
 				_rulesToJs,
 
 			/*** General Variables ***/
-				_segmentRegularExpressions = _resolveRegularExpressions ({
+				_ruleRegExpComposition = Uize.Util.RegExpComposition ({
 					digit:/\d/,
 					value:/{digit}+/,
 					decimalValue:/{value}(\.{value})?/,
@@ -71,7 +51,7 @@ Uize.module ({
 					samples:/{sampleRange}(\s*,\s*{sampleRange})*(\s*,\s*(…|\.\.\.))?/,
 					integerOrDecimalSamples:/@(integer|decimal)\s+{samples}/g
 				}),
-				_samplesRegExp = _segmentRegularExpressions.integerOrDecimalSamples,
+				_samplesRegExp = _ruleRegExpComposition.get ('integerOrDecimalSamples'),
 				_orRegExp = /\s+or\s+/,
 				_andRegExp = /\s+and\s+/,
 				_relationPartsRegExp = /^\s*(.+?)\s*(!?=)\s*(.+?)\s*$/,
