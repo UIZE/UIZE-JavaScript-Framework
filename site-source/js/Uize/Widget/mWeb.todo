@@ -1,13 +1,6 @@
-This is a TO DO document for the =Uize.Widget.WebMixin= module.
+This is a TO DO document for the =Uize.Widget.mWeb= module.
 
 Proposed Methods
-	web
-		Constructs a =Uize.Web= object from the specified node.
-		
-		NOTES
-		- web(impliedNodeSTRorBLOB)
-		- basically bases the result of =getNode= to the =Uize.Web= constructor
-
 	selectNodes
 		Selects nodes based on CSS selection syntax within the root node, returning a =Uize.Web= object.
 		

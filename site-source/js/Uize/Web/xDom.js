@@ -36,7 +36,7 @@
 
 Uize.module ({
 	name:'Uize.Web.xDom',
-	required:'Uize.Node',
+	required:'Uize.Dom.Basics',
 	builder:function (_object) {
 		'use strict';
 		
@@ -45,7 +45,7 @@ Uize.module ({
 				_true = true,
 
 				_Uize = Uize,
-				_Uize_Node = _Uize.Node,
+				_Uize_Dom_Basics = _Uize.Dom.Basics,
 
 				_objectPrototype = _object.prototype
 			;
@@ -72,13 +72,13 @@ Uize.module ({
 							if (_removeRoot || _node != _rootNode) {
 								// if the node is an element than unwire it (no point unwiring text nodes)
 								_node.nodeType == 1
-									&& _Uize_Node.unwire(_node);
+									&& _Uize_Dom_Basics.unwire(_node);
 
 								// if the node is a child of the root node, remove it (an optimization since
 								// we don't actually need to remove deep descendent nodes because removing their
 								// parent will remove them too)
 								(_parentNode == _rootNode || (_removeRoot && (_node == _rootNode)))
-									&& _Uize_Node.remove(_node);
+									&& _Uize_Dom_Basics.remove(_node);
 							}
 						}
 					;
@@ -120,10 +120,10 @@ Uize.module ({
 													// But if there is more than one target node, injectHtml will clone since the nodes will have
 													// parents
 													_length == 1
-														&& _Uize_Node.isNode(_contentToAdd)
-														&& _Uize_Node.remove(_contentToAdd)
+														&& _Uize_Dom_Basics.isNode(_contentToAdd)
+														&& _Uize_Dom_Basics.remove(_contentToAdd)
 													;
-													_Uize_Node.injectHtml(_node, _contentToAdd, _injectMode);
+													_Uize_Dom_Basics.injectHtml(_node, _contentToAdd, _injectMode);
 												}
 											);
 										}
@@ -372,7 +372,7 @@ Uize.module ({
 			
 			/** Removal **/
 				_objectPrototype.detach = function(_selector) {
-					return this.each(function() { _isMatch(this, _selector) && _Uize_Node.remove(this) }); // NOTE: "this" in each is a reference to the node
+					return this.each(function() { _isMatch(this, _selector) && _Uize_Dom_Basics.remove(this) }); // NOTE: "this" in each is a reference to the node
 					/*?
 						Instance Methods
 							detach

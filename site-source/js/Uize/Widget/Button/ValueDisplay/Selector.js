@@ -25,7 +25,10 @@
 
 Uize.module ({
 	name:'Uize.Widget.Button.ValueDisplay.Selector',
-	required:'Uize.Dom.Classes',
+	required:[
+		'Uize.Dom.Classes',
+		'Uize.Widget.mWeb'
+	],
 	builder:function (_superclass) {
 		'use strict';
 
@@ -52,7 +55,7 @@ Uize.module ({
 						;
 					}
 
-					m.displayNode('',_valueDetails);
+					m.web().display(_valueDetails);
 				}
 			}
 
@@ -99,6 +102,8 @@ Uize.module ({
 			}
 
 		return _superclass.subclass ({
+			mixins:Uize.Widget.mWeb,
+
 			omegastructor:function () {
 				var m = this;
 
