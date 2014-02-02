@@ -1,11 +1,21 @@
 .`` {
+	position: relative;
 	width: 100%;
+	height: 185px;
+}
+
+.`contents` {
+	position: absolute;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
 }
 
 .`heading` {
 	position: relative;
 	text-align: center;
-	min-height: 17px;
+	height: 17px;
 }
 
 .`heading` span {
@@ -19,17 +29,26 @@
 }
 
 .`body` {
-	padding: 0 2px 2px 2px;
+	position: absolute;
+	padding: 0;
+	left: 0;
+	top: 29px;
+	right: 0;
+	bottom: 0;
 }
 
 .`messages` {
+	position: absolute;
+	left: 2px;
+	top: 0;
+	right: 2px;
+	bottom: 2px;
 	font-family: Courier;
 	white-space: nowrap;
 	font-size: 10px;
 	color: #000;
 	border: 1px solid #ddd;
 	padding: 4px;
-	height: 140px;
 	overflow: auto;
 }
 

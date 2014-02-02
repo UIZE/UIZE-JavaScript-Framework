@@ -128,9 +128,6 @@
 			............................................
 
 			In the above example, even though the log instance is not yet wired when the =log= instance method is called, wiring the instance will result in the logged message being displayed because it was added to the Queued Log Messages.
-
-		Log Widget Markup
-			For an example of HTML markup that is compatible with the =Uize.Widget.Log= class, see the template module =Uize.Templates.Log=.
 */
 
 Uize.module ({

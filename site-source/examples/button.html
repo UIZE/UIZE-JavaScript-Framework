@@ -8,7 +8,6 @@
 	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
 	<link rel="stylesheet" href="../css/page.css"/>
 	<link rel="stylesheet" href="../css/page.example.css"/>
-	<link rel="stylesheet" href="../css/widget.log.css"/>
 
 </head>
 
@@ -71,8 +70,7 @@ Uize.require (
 		'UizeSite.Page.Example.library',
 		'UizeSite.Page.Example',
 		'Uize.Widgets.Button.Widget',
-		'Uize.Widget.Log.InstanceEvents',
-		'Uize.Templates.Log'
+		'Uize.Widgets.Log.InstanceEvents.Widget'
 	],
 	function () {
 		'use strict';
@@ -86,8 +84,8 @@ Uize.require (
 		/*** create the instance event log widget ***/
 			page.addChild (
 				'log',
-				Uize.Widget.Log.InstanceEvents,
-				{instance:button,built:false,html:Uize.Templates.Log,title:'BUTTON EVENTS'}
+				Uize.Widgets.Log.InstanceEvents.Widget,
+				{instance:button,built:false,title:'BUTTON EVENTS'}
 			);
 
 		/*** wire up the page widget ***/
