@@ -7,13 +7,17 @@ Uize.module ({
 		'Uize.Data.NameValueRecords',
 		'Uize.Data.Csv',
 		'Uize.Loc.Pseudo',
-		'Uize.Build.Util'
+		'Uize.Build.Util',
+		'Uize.Str.Split'
 	],
 	superclass:'Uize.Service.Adapter',
 	builder:function (_superclass) {
 		'use strict';
 
-		var _fileSystem = Uize.Services.FileSystem.singleton ();
+		var
+			_fileSystem = Uize.Services.FileSystem.singleton (),
+			_split = _split = Uize.Str.Split.split
+		;
 
 		return _superclass.subclass ({
 			instanceMethods:{
@@ -78,15 +82,22 @@ Uize.module ({
 					// this method should be implemented by subclasses
 				},
 
-				getStringMetrics:function (_value) {
-					// this method should be implemented by subclasses
-					/* NOTES:
-						method should return an object of the form...
-						{
-							words:wordsINT, // an estimate of the number of words in the string
-							chars:charsINT  // an estimate of the number of characters in the string
-						}
-					*/
+				getStringMetrics:function (_sourceStr) {
+					var
+						_stringSegments = _split (_sourceStr,this.wordSplitter),
+						_words = 0,
+						_chars = 0
+					;
+					for (
+						var _stringSegmentNo = -2, _stringSegmentsLength = _stringSegments.length;
+						(_stringSegmentNo += 2) < _stringSegmentsLength;
+					)
+						_chars += _stringSegments [_stringSegmentNo].length
+					;
+					return {
+						words:(_stringSegmentsLength + 1) / 2,
+						chars:_chars
+					};
 				},
 
 				isBrandResourceFile:function (_filename) {
@@ -264,7 +275,7 @@ Uize.module ({
 			},
 
 			instanceProperties:{
-				wordSplitter:null  // a regular expression that will be used to split words during pseudo-localization
+				wordSplitter:/([\s\?!\.;,&=\(\)\[\]"<>]+)/g
 			}
 		});
 	}
