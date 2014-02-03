@@ -34,6 +34,7 @@ Uize.module ({
 	required:[
 		'Uize.Test',
 		'Uize.Build.Util',
+		'Uize.Util.ModuleNaming',
 		'Uize.Build.ModuleInfo',
 		'Uize.Data.Matches'
 	],
@@ -83,7 +84,7 @@ Uize.module ({
 							_modulesInDependencyOrder,
 							function (_moduleName) {
 								return (
-									_modulesLookup [_testModuleName = _Uize_Build.Util.getTestModuleName (_moduleName)]
+									_modulesLookup [_testModuleName = _Uize.Util.ModuleNaming.getTestModuleName (_moduleName)]
 										? _Uize.Test.testModuleTest (_testModuleName)
 										: _Uize.Test.requiredModulesTest (_moduleName)
 								);

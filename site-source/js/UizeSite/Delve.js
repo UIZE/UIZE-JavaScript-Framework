@@ -23,7 +23,7 @@ Uize.module ({
 		'Uize.Widgets.NavTree.List.Widget',
 		'Uize.Widget.TextInput',
 		'Uize.Widget.Options.Tabbed',
-		'Uize.Widget.Log.InstanceEvents',
+		'Uize.Widgets.Log.InstanceEvents.Widget',
 		'Uize.Widget.TableSort',
 		'Uize.Util.Html.Encode',
 		'Uize.Util.Oop',
@@ -1662,7 +1662,11 @@ Uize.module ({
 					;
 
 				/*** add events log widget ***/
-					m.addChild ('objectInspectorEventsLog',Uize.Widget.Log.InstanceEvents);
+					m.addChild (
+						'objectInspectorEventsLog',
+						Uize.Widgets.Log.InstanceEvents.Widget,
+						{built:false,extraClasses:'objectInspectorEventsLog'}
+					);
 
 				/*** initialization ***/
 					_updateTreeListItems.call (m);

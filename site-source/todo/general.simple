@@ -110,11 +110,6 @@ Code Size Optimization
 			Specific features to be decided.
 
 	Tougher to Accomplish
-		Eliminate Uize.Class Dependency in Uize.Node
-			For the =Uize.Node= module, explore eliminating the dependency on =Uize.Class=.
-
-			The =Uize.Class= module is used purely for creating a wrapper for managing event wiring on the =window= object. Perhaps this can be factored out into a module that represents the browser window, or perhaps there's a cheaper way to implement the wrapper. The latter option is more desirable, since it is the least disruptive to other modules that use =Uize.Node=.
-
 		Pure Namespace Modules at Second Level
 			Try to make all modules at the second level purely namespace modules.
 

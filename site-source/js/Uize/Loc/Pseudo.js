@@ -137,7 +137,7 @@ Uize.module ({
 						_accent = _options.accent != _undefined ? _options.accent : true,
 						_wordSplitter = _options.wordSplitter || _defaultWordSplitterRegExp,
 						_expansion = Uize.toNumber (_options.expansion,1.3),
-						_expansionChar = _options.expansionChar || '_',
+						_expansionChar = _options.expansionChar != _undefined ? _options.expansionChar : '_',
 						_wrapper = _options.wrapper != _undefined ? _options.wrapper : '[]'
 					;
 

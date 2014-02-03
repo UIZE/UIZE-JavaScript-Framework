@@ -194,7 +194,7 @@ hr {
 					padding: 3px 10px;
 					background: #eee;
 				}
-	
+
 		/*** features tab ***/
 			.objectInspectorFeatures table {
 				width: 100%;
@@ -225,11 +225,16 @@ hr {
 				height: 100%;
 				border: none;
 			}
-	
+
 		/*** events tab ***/
-			.objectInspectorEventsLogClearButton {
-				position: absolute;
-				right: 30px;
-				top: 10px;
+			#page_objectInspectorEventsLog-shell {
+				position: relative;
+				width: 100%;
+				height: 100%;
+			}
+			.objectInspectorEventsLog {
+				position: absolute!important;
+				top: 0;
+				height: 100%!important;
 			}
 

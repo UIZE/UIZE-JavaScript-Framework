@@ -175,20 +175,37 @@ Uize.module ({
 							['Test that the number of expansion characters is based only on the lengths of the words and not whitespace, punctuation characters, or added wrapper characters',
 								['The cat,     which was big and fat,     shat on the mat!!!',{expansion:2,wrapper:'<<<>>>'}],
 								'<<<Ţĥé___ çåţ___,     ŵĥîçĥ_____ ŵåš___ ƀîĝ___ åñð___ ƒåţ___,     šĥåţ____ öñ__ ţĥé___ ɱåţ___!!!>>>'
-							]
+							],
 
 						/*** test handling for the expansionChar option ***/
+							['Test that, when the optional options argument is specified, the value of the expansionChar option is defaulted to an underscore if it is not specified',
+								['This pseudo-localization thing is pretty cool!',{}],
+								'[Ţĥîš_ þšéûðö-ļöçåļîžåţîöñ______ ţĥîñĝ_ îš_ þŕéţţý__ çööļ_!]'
+							],
+							['Test that, when an empty string is specified for the expansionChar option, in effect no expansion characters are added',
+								['This pseudo-localization thing is pretty cool!',{expansion:2,expansionChar:''}],
+								'[Ţĥîš þšéûðö-ļöçåļîžåţîöñ ţĥîñĝ îš þŕéţţý çööļ!]'
+							],
+							['Test that, when a character is specified for the expansionChar option, then the specified expansion character is used for the word expansion',
+								['This pseudo-localization thing is pretty cool!',{expansionChar:'#'}],
+								'[Ţĥîš# þšéûðö-ļöçåļîžåţîöñ###### ţĥîñĝ# îš# þŕéţţý## çööļ#!]'
+							],
 
 						/*** test handling for the wordSplitter option ***/
-							/*
-							['',
-								'',
-								1
+							['Test that, when the optional options argument is specified, the value of the wordSplitter option is defaulted to split on whitespace and punctuation',
+								[
+									'11 22	33\n44! 55,  66 - - 77? 88. 99; 00: 11. 22 (33\'s) "44" < 55 > [66 & 77 = 88]',
+									{expansion:2}
+								],
+								'[11__ 22__	33__\n44__! 55__,  66__ -_ -_ 77__? 88__. 99__; 00:___ 11__. 22__ (33\'š____) "44__" < 55__ > [66__ & 77__ = 88__]]'
+							],
+							['Test that, when a custom word splitter regular expression is specified, it is used as expected to split the words in the source string',
+								[
+									'<div>This <b>pseudo-localization</b> thing is pretty cool!</div>',
+									{wordSplitter:/((?:<.+?>|\{[^\}]+\}|\s|[\?!\.;,&=\(\)\[\]"])+)/g}
+								],
+								'[<div>Ţĥîš_ <b>þšéûðö-ļöçåļîžåţîöñ______</b> ţĥîñĝ_ îš_ þŕéţţý__ çööļ_!</div>]'
 							]
-							*/
-							/*
-								-
-							*/
 					]]
 				])
 			]

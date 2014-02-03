@@ -24,7 +24,8 @@ Uize.module ({
 		'Uize.Widgets.NavTree.List.Widget',
 		'Uize.Url',
 		'Uize.Widgets.Tooltip.Widget',
-		'Uize.Flo'
+		'Uize.Flo',
+		'Uize.Util.ModuleNaming'
 	],
 	builder:function (_superclass) {
 		'use strict';
@@ -129,7 +130,7 @@ Uize.module ({
 									function () {
 										m.navigateTo (
 											'examples/uize-unit-tests.html',
-											{runtest:_pageTitle.replace (/^Uize\.Test\./,'')}
+											{runtest:Uize.Util.ModuleNaming.getModuleNameFromTestModuleName (_pageTitle)}
 										);
 									}
 								);

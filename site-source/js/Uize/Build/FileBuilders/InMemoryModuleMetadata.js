@@ -28,7 +28,7 @@
 Uize.module ({
 	name:'Uize.Build.FileBuilders.InMemoryModuleMetadata',
 	required:[
-		'Uize.Build.Util',
+		'Uize.Util.ModuleNaming',
 		'Uize.Data.Simple',
 		'Uize.Str.Lines'
 	],
@@ -53,7 +53,7 @@ Uize.module ({
 					},
 					_testModulePath =
 						m.params.modulesFolder + '/' +
-						Uize.Build.Util.getTestModuleName (_urlParts.file.replace (_moduleMetaDataExtensionRegExp,'')) +
+						Uize.Util.ModuleNaming.getTestModuleName (_urlParts.file.replace (_moduleMetaDataExtensionRegExp,'')) +
 						'.js'
 				;
 				if (m.fileExists ({path:m.sourceUrl (_testModulePath)}))

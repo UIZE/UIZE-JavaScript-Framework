@@ -5816,7 +5816,7 @@ Uize = (function () {
 									// this is needed for the Uize.Class inheritance mechanism
 									var _lastPeriodPos = _name.lastIndexOf ('.');
 									if (_lastPeriodPos > -1)
-										(_package.eval (_name.slice (0,_lastPeriodPos)).nonInheritableStatics || {}) [
+										(_getModuleByName (_name.slice (0,_lastPeriodPos)).nonInheritableStatics || {}) [
 											_name.slice (_lastPeriodPos + 1)
 										] = 1
 									;

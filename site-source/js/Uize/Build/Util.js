@@ -34,21 +34,23 @@ Uize.module ({
 		'Uize.Str.Lines',
 		'Uize.Json',
 		'Uize.Array.Sort',
-		'Uize.Services.FileSystem'
+		'Uize.Services.FileSystem',
+		'Uize.Util.ModuleNaming'
 	],
 	builder:function () {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var _undefined;
+		var
+			/*** Variables for Scruncher Optimization ***/
+				_undefined,
+				_Uize_Util_ModuleNaming = Uize.Util.ModuleNaming,
 
-		/*** General Variables ***/
-			var
+			/*** General Variables ***/
 				_fileSystem = Uize.Services.FileSystem.singleton (),
 				_compiledJstFilesByPath = {},
 				_package,
 				_jsModuleExtensionRegExp = /(\.js|\.js\.jst|\.csst)$/
-			;
+		;
 
 		/*** Utility Functions ***/
 			function _moduleNameFromModulePath (_modulePath,_removeExtension) {
@@ -230,21 +232,12 @@ Uize.module ({
 					*/
 				},
 
-				getTestModuleName:function (_moduleName) {
-					return _moduleName.match (/([^\.]*)(\.|$)/) [1] + '.Test.' + _moduleName;
+				getTestModuleName:_Uize_Util_ModuleNaming.getTestModuleName,
 					/*?
 						Static Methods
 							Uize.Build.Util.getTestModuleName
-								Returns a string, representing the name of the corresponding unit tests module for the specified module.
-
-								SYNTAX
-								......................................................................
-								testModuleNameSTR = Uize.Build.Util.getTestModuleName (moduleNameSTR);
-								......................................................................
-
-								This method follows the convention that the name for a unit tests module is derived from the module it is intended to test, by using the top level namespace for that module as a prefix, appending the path segment ".Test.", and then finally appending the name of the module. Using this rule, the test module for the module =MyNamespace.MyClass.MySubclass= would be named =MyNamespace.Test.MyNamespace.MyClass.MySubclass=.
+								This method has been deprecated *(DEPRECATED 2014-02-02)* in favor of the newer =Uize.Util.ModuleNaming.getTestModuleName= method of the =Uize.Util.ModuleNaming= module.
 					*/
-				},
 
 				getJsModules:function (_params) {
 					var
@@ -317,26 +310,12 @@ Uize.module ({
 					*/
 				},
 
-				getModuleNamespace:function (_moduleName) {
-					return _moduleName.slice (0,((_moduleName.indexOf ('.') + 1) || _moduleName.length + 1) - 1);
+				getModuleNamespace:_Uize_Util_ModuleNaming.getNamespace,
 					/*?
 						Static Methods
 							Uize.Build.Util.getModuleNamespace
-								Returns a string, representing the top level namespace for the specified module.
-
-								SYNTAX
-								........................................................................
-								moduleNamespaceSTR = Uize.Build.Util.getModuleNamespace (moduleNameSTR);
-								........................................................................
-
-								EXAMPLES
-								.........................................................................................
-								Uize.Build.Util.getModuleNamespace ('Uize');                     // returns 'Uize'
-								Uize.Build.Util.getModuleNamespace ('Uize.Widgets.Log.Widget');  // returns 'Uize'
-								Uize.Build.Util.getModuleNamespace ('MyNamespace.MyClass');      // returns 'MyNamespace'
-								.........................................................................................
+								This method has been deprecated *(DEPRECATED 2014-02-02)* in favor of the newer =Uize.Util.ModuleNaming.getNamespace= method of the =Uize.Util.ModuleNaming= module.
 					*/
-				},
 
 				readSimpleDataFile:function (_simpleDataFilePath) {
 					return Uize.Data.Simple.parse ({
@@ -445,7 +424,7 @@ Uize.module ({
 						_unitTests.run ();
 					}
 					typeof _unitTestsClass == 'string'
-						? Uize.require (_unitTestsClass,_runUnitTests)
+						? Uize.require (Uize.Util.ModuleNaming.getTestModuleName (_unitTestsClass),_runUnitTests)
 						: _runUnitTests (_unitTestsClass)
 					;
 					/*?

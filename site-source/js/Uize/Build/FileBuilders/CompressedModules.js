@@ -32,7 +32,7 @@ Uize.module ({
 		'Uize.Util.Oop',
 		'Uize.Build.Scruncher',
 		'Uize.Date',
-		'Uize.Build.Util',
+		'Uize.Util.ModuleNaming',
 		'Uize.Str.Has'
 	],
 	builder:function () {
@@ -63,7 +63,7 @@ Uize.module ({
 					_scrunchedHeadComments = _params.scrunchedHeadComments,
 					_scrunchedHeadCommentModule =
 						_scrunchedHeadComments &&
-						_scrunchedHeadComments [Uize.Build.Util.getModuleNamespace (_moduleName)]
+						_scrunchedHeadComments [Uize.Util.ModuleNaming.getNamespace (_moduleName)]
 				;
 				if (_scrunchedHeadCommentModule)
 					_builderInputs.scrunchedHeadComment = m.memoryUrl (
