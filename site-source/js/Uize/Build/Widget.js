@@ -36,7 +36,7 @@
 Uize.module ({
 	name:'Uize.Build.Widget',
 	required:[
-		'Uize.Build.Util',
+		'Uize.Util.ModuleNaming',
 		'Uize.Services.FileSystem',
 		'Uize.Build.Templates.Module.Widget.Widget',
 		'Uize.Build.Templates.Module.Widget.VisualSampler',
@@ -94,7 +94,7 @@ Uize.module ({
 
 				/*** create the JavaScript modules ***/
 					var
-						_headCommentModule = (_params.headComments || {}) [Uize.Build.Util.getModuleNamespace (_namespace)],
+						_headCommentModule = (_params.headComments || {}) [Uize.Util.ModuleNaming.getNamespace (_namespace)],
 						_headCommentGenerator
 					;
 					Uize.Flo.block (

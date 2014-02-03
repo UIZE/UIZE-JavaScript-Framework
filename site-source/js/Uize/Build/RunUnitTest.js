@@ -22,10 +22,21 @@
 
 		*DEVELOPERS:* `Chris van Rensburg`
 
-		EXAMPLE
-		....................................................................
-		node build.js Uize.Build.RunUnitTest testModule=Uize.Test.Uize.Class
-		....................................................................
+		Specify a Test Module
+			When the value specified for the =testModule= parameter is a test module, then the test suite defined by the test module will be run.
+
+			EXAMPLE
+			....................................................................
+			node build.js Uize.Build.RunUnitTest testModule=Uize.Test.Uize.Class
+			....................................................................
+
+		Specify a Module
+			When the value specified for the =testModule= parameter is a non-test module, then the corresponding test module for the specified module will be run.
+
+			EXAMPLE
+			..........................................................
+			node build.js Uize.Build.RunUnitTest testModule=Uize.Class
+			..........................................................
 */
 
 Uize.module ({
