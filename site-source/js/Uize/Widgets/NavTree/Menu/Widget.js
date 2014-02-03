@@ -36,7 +36,7 @@ Uize.module ({
 	name:'Uize.Widgets.NavTree.Menu.Widget',
 	superclass:'Uize.Widget.Tree.MenuAbstract',
 	required:[
-		'Uize.Widget.V2Mixin',
+		'Uize.Widget.mV2',
 		'Uize.Widgets.NavTree.Menu.Html',
 		'Uize.Widgets.NavTree.Menu.Css'
 	],
@@ -44,7 +44,7 @@ Uize.module ({
 		'use strict';
 
 		return _superclass.subclass ({
-			mixins:Uize.Widget.V2Mixin,
+			mixins:Uize.Widget.mV2,
 
 			instanceMethods:{
 				getItemClassName:function (_item,_depth) {

@@ -25,11 +25,11 @@
 
 Uize.module ({
 	name:'Uize.Widget.V2',
-	required:'Uize.Widget.V2Mixin',
+	required:'Uize.Widget.mV2',
 	builder:function (_superclass) {
 		'use strict';
 
-		return _superclass.subclass ({mixins:Uize.Widget.V2Mixin});
+		return _superclass.subclass ({mixins:Uize.Widget.mV2});
 	}
 });
 

@@ -1,7 +1,7 @@
 /*______________
 |       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
 |     /      /  |   ---------------------------------------------------
-|    /    O /   |    MODULE : Uize.Widget.V2Mixin Class
+|    /    O /   |    MODULE : Uize.Widget.mV2 Class
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
 | /____/ /__/_| | COPYRIGHT : (c)2013-2014 UIZE
@@ -18,13 +18,13 @@
 
 /*?
 	Introduction
-		The =Uize.Widget.V2Mixin= class implements the next generation widget base class and is currently under development.
+		The =Uize.Widget.mV2= class implements the next generation widget base class and is currently under development.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 */
 
 Uize.module ({
-	name:'Uize.Widget.V2Mixin',
+	name:'Uize.Widget.mV2',
 	builder:function () {
 		'use strict';
 
@@ -372,7 +372,7 @@ Uize.module ({
 						_copyInto (this.v2CssBindings,_Uize.map (_bindings,_Uize.resolveTransformer));
 						/*?
 							Static Methods
-								Uize.Widget.V2Mixin.cssBindings
+								Uize.Widget.mV2.cssBindings
 									Lets you declare one or more bindings of state properties to CSS classes on the root node.
 
 									SYNTAX
@@ -382,7 +382,7 @@ Uize.module ({
 
 									EXAMPLE
 									......................................................
-									MyNamespace.MyWidgetClass = Uize.Widget.V2Mixin.subclass ({
+									MyNamespace.MyWidgetClass = Uize.Widget.mV2.subclass ({
 										stateProperties:{
 											size:{value:'small'}
 										},
@@ -450,7 +450,7 @@ Uize.module ({
 						);
 						/*?
 							Static Methods
-								Uize.Widget.V2Mixin.htmlBindings
+								Uize.Widget.mV2.htmlBindings
 									.
 
 									SYNTAX
@@ -460,7 +460,7 @@ Uize.module ({
 
 									EXAMPLE
 									......................................................
-									MyNamespace.MyWidgetClass = Uize.Widget.V2Mixin.subclass ({
+									MyNamespace.MyWidgetClass = Uize.Widget.mV2.subclass ({
 										stateProperties:{
 											foo:{value:'bar'}
 										},
@@ -487,7 +487,7 @@ Uize.module ({
 											.
 
 									NOTES
-									- see also the companion `Uize.Widget.V2Mixin.cssBindings` feature declaration method
+									- see also the companion `Uize.Widget.mV2.cssBindings` feature declaration method
 						*/
 					}
 				},

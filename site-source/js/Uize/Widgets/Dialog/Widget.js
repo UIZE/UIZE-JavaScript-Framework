@@ -27,7 +27,7 @@ Uize.module ({
 	name:'Uize.Widgets.Dialog.Widget',
 	superclass:'Uize.Widget.Dialog',
 	required:[
-		'Uize.Widget.V2Mixin',
+		'Uize.Widget.mV2',
 		'Uize.Widgets.Button.Widget',
 		'Uize.Widget.Dialog.xResizable',
 		'Uize.Widgets.Dialog.Html',
@@ -37,7 +37,7 @@ Uize.module ({
 		'use strict';
 
 		return _superclass.subclass ({
-			mixins:Uize.Widget.V2Mixin,
+			mixins:Uize.Widget.mV2,
 
 			set:{
 				html:Uize.Widgets.Dialog.Html

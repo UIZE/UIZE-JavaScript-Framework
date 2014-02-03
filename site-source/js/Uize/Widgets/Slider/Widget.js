@@ -36,7 +36,7 @@ Uize.module ({
 	name:'Uize.Widgets.Slider.Widget',
 	superclass:'Uize.Widget.Bar.Slider',
 	required:[
-		'Uize.Widget.V2Mixin',
+		'Uize.Widget.mV2',
 		'Uize.Widgets.Slider.Html',
 		'Uize.Widgets.Slider.Css'
 	],
@@ -46,7 +46,7 @@ Uize.module ({
 		var _superUpdateUi = _superclass.prototype.updateUi;
 
 		return _superclass.subclass ({
-			mixins:Uize.Widget.V2Mixin,
+			mixins:Uize.Widget.mV2,
 
 			stateProperties:{
 				_trackLength:{
