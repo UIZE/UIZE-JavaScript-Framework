@@ -38,36 +38,10 @@ Uize.module ({
 
 			/*** General Variables ***/
 				_trueFlag = {},
-				_cssAddedLookup = {}
+				_cssAddedLookup = {},
+				_classPrefixPerCssModule = {},
+				_cssClassNameGenerators = {}
 		;
-
-		/*** Utility Functions ***/
-			function _cssClassPrefixFromModuleName (_moduleName) {
-				return _moduleName.replace (/\./g,'_');
-			}
-
-			function _cssClassPrefixFromModule (_module) {
-				return (
-					_module.v2ClassPrefix || (_module.v2ClassPrefix = _cssClassPrefixFromModuleName (_module.moduleName))
-				);
-			}
-
-			function _cssClassNameGeneratorFromModules (_modules) {
-				var _classNameGeneratorStr = '';
-				for (var _moduleNo = -1, _modulesLength = _modules.length, _cssModule; ++_moduleNo < _modulesLength;) {
-					_cssModule = _modules [_moduleNo].cssModule;
-					if (_cssModule)
-						_classNameGeneratorStr +=
-							(_classNameGeneratorStr && ' + \' \' + ') +
-							'\'' + _cssClassPrefixFromModule (_cssModule) + '\' + classSuffix'
-					;
-				}
-				return Function (
-					'nodeName',
-					'var classSuffix = (nodeName || \'\') && \'-\' + nodeName;' +
-					'return ' + _classNameGeneratorStr + ';'
-				);
-			}
 
 		/*** Private Instance Methods ***/
 			function _updateRootNodeClasses (m) {
@@ -340,20 +314,38 @@ Uize.module ({
 					cssClass:function (_className) {
 						var
 							_thisClass = this.Class,
-							_thisClassName = _thisClass.moduleName,
-							_cssClassNameGenerators =
-								_thisClass.v2CssClassNameGenerators || (_thisClass.v2CssClassNameGenerators = {})
+							_thisClassName = _thisClass.moduleName
 						;
 						if (!_cssClassNameGenerators [_thisClassName]) {
 							var
-								_inheritanceChain = [],
-								_module = _thisClass
+								_module = _thisClass,
+								_cssModule,
+								_cssModuleName,
+								_classNameGeneratorChunks = [],
+								_cssModulesApplied = {}
 							;
 							while (_module) {
-								_inheritanceChain.unshift (_module);
+								if (
+									(_cssModule = _module.cssModule) &&
+									!(_cssModulesApplied [_cssModuleName = _cssModule.moduleName])
+								) {
+									_cssModulesApplied [_cssModuleName] = 1;
+									_classNameGeneratorChunks.unshift (
+										'\'' +
+										(
+											_classPrefixPerCssModule [_cssModuleName] ||
+											(_classPrefixPerCssModule [_cssModuleName] = _cssModuleName.replace (/\./g,'_'))
+										) +
+										'\' + classSuffix'
+									);
+								}
 								_module = _module.superclass;
 							}
-							_cssClassNameGenerators [_thisClassName] = _cssClassNameGeneratorFromModules (_inheritanceChain);
+							_cssClassNameGenerators [_thisClassName] =  Function (
+								'nodeName',
+								'var classSuffix = (nodeName || \'\') && \'-\' + nodeName;' +
+								'return ' + _classNameGeneratorChunks.join (' + \' \' + ') + ';'
+							);
 						}
 						return _cssClassNameGenerators [_thisClassName] (_className);
 					},
@@ -543,17 +535,6 @@ Uize.module ({
 					sizeInherited:'value'
 				}
 			});
-
-			_copyInto (
-				_class.nonInheritableStatics,
-				{
-					v2ClassPrefix:1,
-					v2CssClassNameGenerators:1,
-					cssModule:1
-				}
-			);
-
-			return _class;
 		};
 	}
 });
