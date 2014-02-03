@@ -148,16 +148,11 @@ Uize.module ({
 					;
 					if (_expansion > 1) {
 						for (
-							var
-								_stringSegmentNo = -1,
-								_stringSegmentsLength = _stringSegments.length
-							;
-							++_stringSegmentNo < _stringSegmentsLength;
-						) {
-							if (_stringSegmentNo % 2 == 0)
-								_totalWordCharCount += _stringSegments [_stringSegmentNo].length
-							;
-						}
+							var _stringSegmentNo = -2, _stringSegmentsLength = _stringSegments.length;
+							(_stringSegmentNo += 2) < _stringSegmentsLength;
+						)
+							_totalWordCharCount += _stringSegments [_stringSegmentNo].length
+						;
 					}
 
 				/*** perform pseudo-localization (on a word-by-word basis) and return result ***/
