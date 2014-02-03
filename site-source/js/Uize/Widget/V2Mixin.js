@@ -394,7 +394,7 @@ Uize.module ({
 										stateProperties:{
 											size:{value:'small'}
 										},
-										htmlBindings:{
+										cssBindings:{
 											size:'value'
 										}
 									});

@@ -6,5 +6,6 @@ Proposed Methods
 		
 		NOTES
 		- selectNodes(selector)
-		- CSS classes could be auto-prefixed using the widget classes CSS class prefix
+		- CSS classes could be auto-prefixed using the widget class' CSS class prefix
+		- IDs could be auto-prefixed usign the widget class' ID prefix
 	
