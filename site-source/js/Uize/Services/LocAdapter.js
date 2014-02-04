@@ -59,15 +59,15 @@ Uize.module ({
 						},
 						fileBuilder:function (_sourceFileName,_sourceFileText) {
 							var
-								_namespaces,
+								_strings,
 								_errorWithFile
 							;
 							try {
-								_namespaces = m.parseResourceFile (_sourceFileText);
+								_strings = m.parseResourceFile (_sourceFileText);
 							} catch (_error) {
 								_errorWithFile = _error + '';
 							}
-							_resources [_currentFolderRelativePath + '/' + _sourceFileName] = _namespaces;
+							_resources [_currentFolderRelativePath + '/' + _sourceFileName] = _strings;
 							return {logDetails:_errorWithFile ? '\tERROR: ' + _errorWithFile : ''};
 						},
 						alwaysBuild:true,
@@ -118,7 +118,7 @@ Uize.module ({
 					// this method should be implemented by subclasses
 				},
 
-				serializeResourceFile:function (_namespaces) {
+				serializeResourceFile:function (_strings) {
 					// this method should be implemented by subclasses
 				},
 
