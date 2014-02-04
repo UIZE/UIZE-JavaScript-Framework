@@ -102,6 +102,12 @@ Uize.module ({
 
 				isBrandResourceFile:function (_filename) {
 					// this method should be implemented by subclasses
+					return false;
+				},
+
+				isBrandResourceString:function (_resourceStringPath,_resourceStringText) {
+					// this method should be implemented by subclasses
+					return false;
 				},
 
 				isResourceFile:function (_filename) {
@@ -116,23 +122,18 @@ Uize.module ({
 					// this method should be implemented by subclasses
 				},
 
-				processStrings:function (_namespaces,_stringProcessor) {
-					Uize.forEach (
-						_namespaces,
-						function (_namespace) {
-							function _processSection (_section) {
-								for (var _key in _section) {
-									var _value = _section [_key];
-									if (Uize.isObject (_value)) {
-										_processSection (_value);
-									} else if (typeof _value == 'string') {
-										_section [_key] = _stringProcessor (_section [_key]);
-									}
-								}
+				processStrings:function (_strings,_stringProcessor) {
+					function _processSection (_section,_path) {
+						for (var _key in _section) {
+							var _value = _section [_key];
+							if (Uize.isObject (_value)) {
+								_processSection (_value,_path.concat (_key));
+							} else if (typeof _value == 'string') {
+								_section [_key] = _stringProcessor (_section [_key],_path);
 							}
-							_processSection (_namespace);
 						}
-					);
+					}
+					_processSection (_strings,[]);
 				},
 
 				import:function (_params,_callback) {
@@ -189,6 +190,8 @@ Uize.module ({
 						m = this,
 						_totalResourceFiles = 0,
 						_totalBrandSpecificResourceFiles = 0,
+						_totalResourceStrings = 0,
+						_totalBrandSpecificResourceStrings = 0,
 						_totalWordCount = 0,
 						_totalBrandSpecificWordCount = 0,
 						_totalCharCount = 0,
@@ -209,8 +212,12 @@ Uize.module ({
 							);
 							m.processStrings (
 								_resourceFileNamespaces,
-								function (_value) {
+								function (_value,_path) {
 									var _stringMetrics = m.getStringMetrics (_value);
+									_totalResourceStrings++;
+									(_currentResourceFileIsBrandSpecific || m.isBrandResourceString (_path,_value)) &&
+										_totalBrandSpecificResourceStrings++
+									;
 									_wordCount += _stringMetrics.words;
 									_charCount += _stringMetrics.chars;
 									return _value;
@@ -231,6 +238,9 @@ Uize.module ({
 							resourceFiles:_totalResourceFiles,
 							brandSpecificResourceFiles:_totalBrandSpecificResourceFiles,
 							brandSpecificResourceFilesPercent:_totalBrandSpecificResourceFiles / _totalResourceFiles * 100,
+							resourceStrings:_totalResourceStrings,
+							brandSpecificResourceStrings:_totalBrandSpecificResourceStrings,
+							brandSpecificResourceStringsPercent:_totalBrandSpecificResourceStrings / _totalResourceStrings * 100,
 							wordCount:_totalWordCount,
 							brandSpecificWordCount:_totalBrandSpecificWordCount,
 							brandSpecificWordCountPercent:_totalBrandSpecificWordCount / _totalWordCount * 100,
