@@ -319,32 +319,23 @@ Uize.module ({
 						if (!_cssClassNameGenerators [_thisClassName]) {
 							var
 								_module = _thisClass,
-								_cssModule,
-								_cssModuleName,
+								_classPrefix,
 								_classNameGeneratorChunks = [],
-								_cssModulesApplied = {}
+								_classPrefixesUsed = {}
 							;
 							while (_module) {
 								if (
-									(_cssModule = _module.cssModule) &&
-									!(_cssModulesApplied [_cssModuleName = _cssModule.moduleName])
+									(_classPrefix = _thisClass.cssClassPrefix.call (_module)) != _undefined &&
+									!_classPrefixesUsed [_classPrefix]
 								) {
-									_cssModulesApplied [_cssModuleName] = 1;
-									_classNameGeneratorChunks.unshift (
-										'\'' +
-										(
-											_classPrefixPerCssModule [_cssModuleName] ||
-											(_classPrefixPerCssModule [_cssModuleName] = _cssModuleName.replace (/\./g,'_'))
-										) +
-										'\' + classSuffix'
-									);
+									_classPrefixesUsed [_classPrefix] = 1;
+									_classNameGeneratorChunks.unshift ('"' + _classPrefix + '"+cs');
 								}
 								_module = _module.superclass;
 							}
 							_cssClassNameGenerators [_thisClassName] =  Function (
-								'nodeName',
-								'var classSuffix = (nodeName || \'\') && \'-\' + nodeName;' +
-								'return ' + _classNameGeneratorChunks.join (' + \' \' + ') + ';'
+								'nn',
+								'var cs=(nn||"")&&"-"+nn;return ' + _classNameGeneratorChunks.join ('+" "+') + ';'
 							);
 						}
 						return _cssClassNameGenerators [_thisClassName] (_className);
@@ -356,6 +347,20 @@ Uize.module ({
 				},
 
 				staticMethods:{
+					cssClassPrefix:function () {
+						var
+							_cssModule = this.cssModule,
+							_cssModuleName
+						;
+						return (
+							_cssModule &&
+							(
+								_classPrefixPerCssModule [_cssModuleName = _cssModule.moduleName] ||
+								(_classPrefixPerCssModule [_cssModuleName] = _cssModuleName.replace (/\./g,'_'))
+							)
+						);
+					},
+
 					v2NeedCss:function () {
 						var
 							m = this,

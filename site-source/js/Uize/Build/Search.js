@@ -19,8 +19,13 @@
 /*?
 	Introduction
 		The =Uize.Build.Search= package lets you execute one of the regular expression based codebase searches configured for your project.
-		
+
 		*DEVELOPERS:* `Chris van Rensburg`
+
+		USAGE
+		...............................................................................................................
+		node build.js Uize.Build.Search preset=[presetName] rootFolderPath=[rootFolderPath] contextLines=[contextLines]
+		...............................................................................................................
 */
 
 Uize.module ({
@@ -34,9 +39,7 @@ Uize.module ({
 	builder:function () {
 		'use strict';
 
-		var
-			_repeat = Uize.Str.Repeat.repeat
-		;
+		var _repeat = Uize.Str.Repeat.repeat;
 
 		/*** Utility Functions ***/
 			function _getLineAndChar (_text,_charPos) {
@@ -179,7 +182,7 @@ Uize.module ({
 																	: ' '
 															) + '|' +
 															_line
-														); 
+														);
 													}
 												).join ('\n') + '\n' +
 												_separator

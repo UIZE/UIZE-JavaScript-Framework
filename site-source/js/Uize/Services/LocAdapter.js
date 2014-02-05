@@ -7,13 +7,17 @@ Uize.module ({
 		'Uize.Data.NameValueRecords',
 		'Uize.Data.Csv',
 		'Uize.Loc.Pseudo',
-		'Uize.Build.Util'
+		'Uize.Build.Util',
+		'Uize.Str.Split'
 	],
 	superclass:'Uize.Service.Adapter',
 	builder:function (_superclass) {
 		'use strict';
 
-		var _fileSystem = Uize.Services.FileSystem.singleton ();
+		var
+			_fileSystem = Uize.Services.FileSystem.singleton (),
+			_split = _split = Uize.Str.Split.split
+		;
 
 		return _superclass.subclass ({
 			instanceMethods:{
@@ -55,15 +59,15 @@ Uize.module ({
 						},
 						fileBuilder:function (_sourceFileName,_sourceFileText) {
 							var
-								_namespaces,
+								_strings,
 								_errorWithFile
 							;
 							try {
-								_namespaces = m.parseResourceFile (_sourceFileText);
+								_strings = m.parseResourceFile (_sourceFileText);
 							} catch (_error) {
 								_errorWithFile = _error + '';
 							}
-							_resources [_currentFolderRelativePath + '/' + _sourceFileName] = _namespaces;
+							_resources [_currentFolderRelativePath + '/' + _sourceFileName] = _strings;
 							return {logDetails:_errorWithFile ? '\tERROR: ' + _errorWithFile : ''};
 						},
 						alwaysBuild:true,
@@ -78,19 +82,32 @@ Uize.module ({
 					// this method should be implemented by subclasses
 				},
 
-				getStringMetrics:function (_value) {
-					// this method should be implemented by subclasses
-					/* NOTES:
-						method should return an object of the form...
-						{
-							words:wordsINT, // an estimate of the number of words in the string
-							chars:charsINT  // an estimate of the number of characters in the string
-						}
-					*/
+				getStringMetrics:function (_sourceStr) {
+					var
+						_stringSegments = _split (_sourceStr,this.wordSplitter),
+						_words = 0,
+						_chars = 0
+					;
+					for (
+						var _stringSegmentNo = -2, _stringSegmentsLength = _stringSegments.length;
+						(_stringSegmentNo += 2) < _stringSegmentsLength;
+					)
+						_chars += _stringSegments [_stringSegmentNo].length
+					;
+					return {
+						words:(_stringSegmentsLength + 1) / 2,
+						chars:_chars
+					};
 				},
 
 				isBrandResourceFile:function (_filename) {
 					// this method should be implemented by subclasses
+					return false;
+				},
+
+				isBrandResourceString:function (_resourceStringPath,_resourceStringText) {
+					// this method should be implemented by subclasses
+					return false;
 				},
 
 				isResourceFile:function (_filename) {
@@ -101,27 +118,22 @@ Uize.module ({
 					// this method should be implemented by subclasses
 				},
 
-				serializeResourceFile:function (_namespaces) {
+				serializeResourceFile:function (_strings) {
 					// this method should be implemented by subclasses
 				},
 
-				processStrings:function (_namespaces,_stringProcessor) {
-					Uize.forEach (
-						_namespaces,
-						function (_namespace) {
-							function _processSection (_section) {
-								for (var _key in _section) {
-									var _value = _section [_key];
-									if (Uize.isObject (_value)) {
-										_processSection (_value);
-									} else if (typeof _value == 'string') {
-										_section [_key] = _stringProcessor (_section [_key]);
-									}
-								}
+				processStrings:function (_strings,_stringProcessor) {
+					function _processSection (_section,_path) {
+						for (var _key in _section) {
+							var _value = _section [_key];
+							if (Uize.isObject (_value)) {
+								_processSection (_value,_path.concat (_key));
+							} else if (typeof _value == 'string') {
+								_section [_key] = _stringProcessor (_section [_key],_path);
 							}
-							_processSection (_namespace);
 						}
-					);
+					}
+					_processSection (_strings,[]);
 				},
 
 				import:function (_params,_callback) {
@@ -178,6 +190,8 @@ Uize.module ({
 						m = this,
 						_totalResourceFiles = 0,
 						_totalBrandSpecificResourceFiles = 0,
+						_totalResourceStrings = 0,
+						_totalBrandSpecificResourceStrings = 0,
 						_totalWordCount = 0,
 						_totalBrandSpecificWordCount = 0,
 						_totalCharCount = 0,
@@ -198,8 +212,12 @@ Uize.module ({
 							);
 							m.processStrings (
 								_resourceFileNamespaces,
-								function (_value) {
+								function (_value,_path) {
 									var _stringMetrics = m.getStringMetrics (_value);
+									_totalResourceStrings++;
+									(_currentResourceFileIsBrandSpecific || m.isBrandResourceString (_path,_value)) &&
+										_totalBrandSpecificResourceStrings++
+									;
 									_wordCount += _stringMetrics.words;
 									_charCount += _stringMetrics.chars;
 									return _value;
@@ -220,6 +238,9 @@ Uize.module ({
 							resourceFiles:_totalResourceFiles,
 							brandSpecificResourceFiles:_totalBrandSpecificResourceFiles,
 							brandSpecificResourceFilesPercent:_totalBrandSpecificResourceFiles / _totalResourceFiles * 100,
+							resourceStrings:_totalResourceStrings,
+							brandSpecificResourceStrings:_totalBrandSpecificResourceStrings,
+							brandSpecificResourceStringsPercent:_totalBrandSpecificResourceStrings / _totalResourceStrings * 100,
 							wordCount:_totalWordCount,
 							brandSpecificWordCount:_totalBrandSpecificWordCount,
 							brandSpecificWordCountPercent:_totalBrandSpecificWordCount / _totalWordCount * 100,
@@ -264,7 +285,7 @@ Uize.module ({
 			},
 
 			instanceProperties:{
-				wordSplitter:null  // a regular expression that will be used to split words during pseudo-localization
+				wordSplitter:/([\s\?!\.;,&=\(\)\[\]"<>]+)/g
 			}
 		});
 	}
