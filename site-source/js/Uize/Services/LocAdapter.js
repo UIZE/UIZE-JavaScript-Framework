@@ -92,9 +92,18 @@ Uize.module ({
 						_stringSegments = _split (_sourceStr,this.wordSplitter),
 						_words = 0,
 						_chars = 0,
-						_tokens = 0
+						_tokenAdded = {},
+						_tokens = []
 					;
-					_sourceStr.replace (this.tokenRegExp,function () {_tokens++});
+					_sourceStr.replace (
+						this.tokenRegExp,
+						function (_match,_tokenName) {
+							if (!_tokenAdded [_tokenName]) {
+								_tokens.push (_tokenName);
+								_tokenAdded [_tokenName] = 1;
+							}
+						}
+					);
 					for (
 						var _stringSegmentNo = -2, _stringSegmentsLength = _stringSegments.length;
 						(_stringSegmentNo += 2) < _stringSegmentsLength;
@@ -210,7 +219,8 @@ Uize.module ({
 						_currentResourceFileIsBrandSpecific,
 						_project = m.project,
 						_valuesLookup = {},
-						_dupedResourceStringsDetails = {}
+						_dupedResourceStringsDetails = {},
+						_tokenUsage = {}
 					;
 					Uize.forEach (
 						m.gatherResources (),
@@ -243,20 +253,33 @@ Uize.module ({
 									/*** get metrics for string ***/
 										var
 											_stringMetrics = m.getStringMetrics (_value),
-											_stringTokens = _stringMetrics.tokens
+											_stringTokens = _stringMetrics.tokens,
+											_stringTokensLength = _stringTokens.length
 										;
-										if (_stringTokens) {
-											_totalTokens += _stringTokens;
-											_totalTokenizedResourceStrings++;
-										}
-										_totalResourceStrings++;
-										_wordCount += _stringMetrics.words;
-										_charCount += _stringMetrics.chars;
-										if (_currentResourceFileIsBrandSpecific || m.isBrandResourceString (_path,_value)) {
-											_totalBrandSpecificResourceStrings++;
-											_brandSpecificWordCount += _stringMetrics.words;
-											_brandSpecificCharCount += _stringMetrics.chars;
-										}
+
+										/*** update general metrics ***/
+											_totalResourceStrings++;
+											_wordCount += _stringMetrics.words;
+											_charCount += _stringMetrics.chars;
+											if (_currentResourceFileIsBrandSpecific || m.isBrandResourceString (_path,_value)) {
+												_totalBrandSpecificResourceStrings++;
+												_brandSpecificWordCount += _stringMetrics.words;
+												_brandSpecificCharCount += _stringMetrics.chars;
+											}
+
+										/*** update metrics on tokenized strings and token usage ***/
+											if (_stringTokensLength) {
+												Uize.forEach (
+													_stringTokens,
+													function (_tokenName) {
+														(_tokenUsage [_tokenName] || (_tokenUsage [_tokenName] = [])).push (
+															_stringFullPath
+														);
+													}
+												);
+												_totalTokens += _stringTokensLength;
+												_totalTokenizedResourceStrings++;
+											}
 
 									return _value;
 								}
@@ -287,7 +310,8 @@ Uize.module ({
 							tokenizedResourceStringsPercent:_totalTokenizedResourceStrings / _totalResourceStrings * 100,
 							dupedResourceStrings:_totalDupedResourceStrings,
 							dupedResourceStringsPercent:_totalDupedResourceStrings / _totalResourceStrings * 100,
-							dupedResourceStringsDetails:_dupedResourceStringsDetails
+							dupedResourceStringsDetails:_dupedResourceStringsDetails,
+							tokenUsage:_tokenUsage
 						})
 					});
 					_callback ();
