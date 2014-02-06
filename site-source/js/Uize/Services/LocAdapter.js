@@ -28,13 +28,13 @@ Uize.module ({
 					;
 					Uize.forEach (
 						_resources,
-						function (_resourceFileNamespaces,_resourceFileSubPath) {
+						function (_resourceFileStrings,_resourceFileSubPath) {
 							var _resourceFileFullPath =
 								_rootFolderPath + '/' + m.getLanguageResourcePath (_resourceFileSubPath,_language)
 							;
 							_fileSystem.writeFile ({
 								path:_resourceFileFullPath,
-								contents:m.serializeResourceFile (_resourceFileNamespaces)
+								contents:m.serializeResourceFile (_resourceFileStrings)
 							});
 						}
 					);
@@ -45,6 +45,7 @@ Uize.module ({
 						m = this,
 						_project = m.project,
 						_currentFolderRelativePath,
+						_currentFileRelativePath,
 						_resources = {},
 						_rootFolderPath = _project.rootFolderPath,
 						_rootFolderPathLength = _rootFolderPath.length
@@ -55,7 +56,11 @@ Uize.module ({
 							return _folderPath;
 						},
 						targetFilenameCreator:function (_sourceFileName) {
-							return m.isResourceFile (_sourceFileName) ? _sourceFileName : null;
+							return (
+								m.isResourceFile (_currentFileRelativePath = _currentFolderRelativePath + '/' + _sourceFileName)
+									? _sourceFileName
+									: null
+							);
 						},
 						fileBuilder:function (_sourceFileName,_sourceFileText) {
 							var
@@ -67,7 +72,7 @@ Uize.module ({
 							} catch (_error) {
 								_errorWithFile = _error + '';
 							}
-							_resources [_currentFolderRelativePath + '/' + _sourceFileName] = _strings;
+							_resources [_currentFileRelativePath] = _strings;
 							return {logDetails:_errorWithFile ? '\tERROR: ' + _errorWithFile : ''};
 						},
 						alwaysBuild:true,
@@ -100,7 +105,7 @@ Uize.module ({
 					};
 				},
 
-				isBrandResourceFile:function (_filename) {
+				isBrandResourceFile:function (_filePath) {
 					// this method should be implemented by subclasses
 					return false;
 				},
@@ -110,7 +115,7 @@ Uize.module ({
 					return false;
 				},
 
-				isResourceFile:function (_filename) {
+				isResourceFile:function (_filePath) {
 					// this method should be implemented by subclasses
 				},
 
@@ -129,7 +134,7 @@ Uize.module ({
 							if (Uize.isObject (_value)) {
 								_processSection (_value,_path.concat (_key));
 							} else if (typeof _value == 'string') {
-								_section [_key] = _stringProcessor (_section [_key],_path);
+								_section [_key] = _stringProcessor (_section [_key],_path.concat (_key));
 							}
 						}
 					}
@@ -196,12 +201,15 @@ Uize.module ({
 						_totalBrandSpecificWordCount = 0,
 						_totalCharCount = 0,
 						_totalBrandSpecificCharCount = 0,
+						_totalDupedResourceStrings = 0,
 						_currentResourceFileIsBrandSpecific,
-						_project = m.project
+						_project = m.project,
+						_valuesLookup = {},
+						_dupedResourceStringsDetails = {}
 					;
 					Uize.forEach (
 						m.gatherResources (),
-						function (_resourceFileNamespaces,_resourceFileSubPath) {
+						function (_resourceFileStrings,_resourceFileSubPath) {
 							var
 								_wordCount = 0,
 								_charCount = 0
@@ -211,15 +219,29 @@ Uize.module ({
 								_currentResourceFileIsBrandSpecific = m.isBrandResourceFile (_resourceFileSubPath)
 							);
 							m.processStrings (
-								_resourceFileNamespaces,
+								_resourceFileStrings,
 								function (_value,_path) {
-									var _stringMetrics = m.getStringMetrics (_value);
-									_totalResourceStrings++;
-									(_currentResourceFileIsBrandSpecific || m.isBrandResourceString (_path,_value)) &&
-										_totalBrandSpecificResourceStrings++
-									;
-									_wordCount += _stringMetrics.words;
-									_charCount += _stringMetrics.chars;
+									/*** update information on duplicates ***/
+										var _stringFullPath = _resourceFileSubPath + ' : ' + _path.join ('.');
+										if (_valuesLookup [_value]) {
+											_totalDupedResourceStrings++;
+											(
+												_dupedResourceStringsDetails [_value] ||
+												(_dupedResourceStringsDetails [_value] = [_valuesLookup [_value]])
+											).push (_stringFullPath);
+										} else {
+											_valuesLookup [_value] = _stringFullPath;
+										}
+
+									/*** get metrics for string ***/
+										var _stringMetrics = m.getStringMetrics (_value);
+										_totalResourceStrings++;
+										(_currentResourceFileIsBrandSpecific || m.isBrandResourceString (_path,_value)) &&
+											_totalBrandSpecificResourceStrings++
+										;
+										_wordCount += _stringMetrics.words;
+										_charCount += _stringMetrics.chars;
+
 									return _value;
 								}
 							);
@@ -246,7 +268,10 @@ Uize.module ({
 							brandSpecificWordCountPercent:_totalBrandSpecificWordCount / _totalWordCount * 100,
 							charCount:_totalCharCount,
 							brandSpecificCharCount:_totalBrandSpecificCharCount,
-							brandSpecificCharCountPercent:_totalBrandSpecificCharCount / _totalCharCount * 100
+							brandSpecificCharCountPercent:_totalBrandSpecificCharCount / _totalCharCount * 100,
+							dupedResourceStrings:_totalDupedResourceStrings,
+							dupedResourceStringsPercent:_totalDupedResourceStrings / _totalResourceStrings * 100,
+							dupedResourceStringsDetails:_dupedResourceStringsDetails
 						})
 					});
 					_callback ();
