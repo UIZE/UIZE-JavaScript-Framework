@@ -212,7 +212,9 @@ Uize.module ({
 						function (_resourceFileStrings,_resourceFileSubPath) {
 							var
 								_wordCount = 0,
-								_charCount = 0
+								_brandSpecificWordCount = 0,
+								_charCount = 0,
+								_brandSpecificCharCount = 0
 							;
 							_totalResourceFiles++;
 							_totalBrandSpecificResourceFiles += (
@@ -236,22 +238,21 @@ Uize.module ({
 									/*** get metrics for string ***/
 										var _stringMetrics = m.getStringMetrics (_value);
 										_totalResourceStrings++;
-										(_currentResourceFileIsBrandSpecific || m.isBrandResourceString (_path,_value)) &&
-											_totalBrandSpecificResourceStrings++
-										;
 										_wordCount += _stringMetrics.words;
 										_charCount += _stringMetrics.chars;
+										if (_currentResourceFileIsBrandSpecific || m.isBrandResourceString (_path,_value)) {
+											_totalBrandSpecificResourceStrings++;
+											_brandSpecificWordCount += _stringMetrics.words;
+											_brandSpecificCharCount += _stringMetrics.chars;
+										}
 
 									return _value;
 								}
 							);
 							_totalWordCount += _wordCount;
 							_totalCharCount += _charCount;
-							if (_currentResourceFileIsBrandSpecific) {
-								_totalBrandSpecificWordCount += _wordCount;
-								_totalBrandSpecificCharCount += _charCount;
-							}
-
+							_totalBrandSpecificWordCount += _brandSpecificWordCount;
+							_totalBrandSpecificCharCount += _brandSpecificCharCount;
 						}
 					);
 					_fileSystem.writeFile ({
