@@ -91,8 +91,10 @@ Uize.module ({
 					var
 						_stringSegments = _split (_sourceStr,this.wordSplitter),
 						_words = 0,
-						_chars = 0
+						_chars = 0,
+						_tokens = 0
 					;
+					_sourceStr.replace (this.tokenRegExp,function () {_tokens++});
 					for (
 						var _stringSegmentNo = -2, _stringSegmentsLength = _stringSegments.length;
 						(_stringSegmentNo += 2) < _stringSegmentsLength;
@@ -101,7 +103,8 @@ Uize.module ({
 					;
 					return {
 						words:(_stringSegmentsLength + 1) / 2,
-						chars:_chars
+						chars:_chars,
+						tokens:_tokens
 					};
 				},
 
@@ -201,6 +204,8 @@ Uize.module ({
 						_totalBrandSpecificWordCount = 0,
 						_totalCharCount = 0,
 						_totalBrandSpecificCharCount = 0,
+						_totalTokens = 0,
+						_totalTokenizedResourceStrings = 0,
 						_totalDupedResourceStrings = 0,
 						_currentResourceFileIsBrandSpecific,
 						_project = m.project,
@@ -236,7 +241,14 @@ Uize.module ({
 										}
 
 									/*** get metrics for string ***/
-										var _stringMetrics = m.getStringMetrics (_value);
+										var
+											_stringMetrics = m.getStringMetrics (_value),
+											_stringTokens = _stringMetrics.tokens
+										;
+										if (_stringTokens) {
+											_totalTokens += _stringTokens;
+											_totalTokenizedResourceStrings++;
+										}
 										_totalResourceStrings++;
 										_wordCount += _stringMetrics.words;
 										_charCount += _stringMetrics.chars;
@@ -270,6 +282,9 @@ Uize.module ({
 							charCount:_totalCharCount,
 							brandSpecificCharCount:_totalBrandSpecificCharCount,
 							brandSpecificCharCountPercent:_totalBrandSpecificCharCount / _totalCharCount * 100,
+							tokens:_totalTokens,
+							tokenizedResourceStrings:_totalTokenizedResourceStrings,
+							tokenizedResourceStringsPercent:_totalTokenizedResourceStrings / _totalResourceStrings * 100,
 							dupedResourceStrings:_totalDupedResourceStrings,
 							dupedResourceStringsPercent:_totalDupedResourceStrings / _totalResourceStrings * 100,
 							dupedResourceStringsDetails:_dupedResourceStringsDetails
@@ -311,7 +326,8 @@ Uize.module ({
 			},
 
 			instanceProperties:{
-				wordSplitter:/([\s\?!\.;,&=\(\)\[\]"<>]+)/g
+				wordSplitter:/([\s\?!\.;,&=\(\)\[\]"<>]+)/g,
+				tokenRegExp:null
 			}
 		});
 	}
