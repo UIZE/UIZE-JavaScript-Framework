@@ -8,7 +8,8 @@ Uize.module ({
 		'Uize.Data.Csv',
 		'Uize.Loc.Pseudo',
 		'Uize.Build.Util',
-		'Uize.Str.Split'
+		'Uize.Str.Split',
+		'Uize.Util.RegExpComposition'
 	],
 	superclass:'Uize.Service.Adapter',
 	builder:function (_superclass) {
@@ -16,7 +17,13 @@ Uize.module ({
 
 		var
 			_fileSystem = Uize.Services.FileSystem.singleton (),
-			_split = _split = Uize.Str.Split.split
+			_split = _split = Uize.Str.Split.split,
+			_wordSplitterRegExpComposition = Uize.Util.RegExpComposition ({
+				punctuation:/[\?!\.;,&=\-\(\)\[\]"<>]+/,
+				number:/\d+(?:\.\d+)?/,
+				whitespace:/\s+/,
+				wordSplitter:/({whitespace}|{punctuation}|{number})/
+			})
 		;
 
 		return _superclass.subclass ({
@@ -350,7 +357,7 @@ Uize.module ({
 			},
 
 			instanceProperties:{
-				wordSplitter:/([\s\?!\.;,&=\(\)\[\]"<>]+)/g,
+				wordSplitter:_wordSplitterRegExpComposition.get ('wordSplitter'),
 				tokenRegExp:null
 			}
 		});
