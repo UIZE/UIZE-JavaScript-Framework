@@ -45,7 +45,7 @@ Uize.module ({
 
 		/*** Private Instance Methods ***/
 			function _updateRootNodeClasses (m) {
-				m.Class.enableRootNodeCssClasses && m.set ({v2RootNodeCssClasses:m.rootNodeCssClasses ()});
+				m.Class.enableRootNodeCssClasses && m.set ({mV2_rootNodeCssClasses:m.rootNodeCssClasses ()});
 			}
 
 		return function (_class) {
@@ -53,13 +53,13 @@ Uize.module ({
 				alphastructor:function () {
 					var m = this;
 
-					m.Class.v2NeedCss ();
+					m.Class.mV2_needCss ();
 					m.once (
 						'wired',
 						function () {
 							/*** wire up handlers for state properties that have CSS bindings ***/
 								var
-									_cssBindings = m.Class.v2CssBindings,
+									_cssBindings = m.Class.mV2_cssBindings,
 									_boundUpdateRootNodeClasses = function () {_updateRootNodeClasses (m)},
 									_wiringsForCssBindings = {}
 								;
@@ -71,7 +71,7 @@ Uize.module ({
 							/*** wire up handlers for state properties that have HTML bindings ***/
 								var _wiringsForHtmlBindings = {};
 								_forEach (
-									m.Class.v2HtmlBindings,
+									m.Class.mV2_htmlBindings,
 									function (_bindings,_property) {
 										_wiringsForHtmlBindings ['Changed.' + _property] = function () {
 											_applyAll (m,_bindings,[m.get (_property)]);
@@ -238,7 +238,7 @@ Uize.module ({
 								_properties.name ||
 								(
 									'generatedChildName' +
-									(m.v2GeneratedChildNames == _undefined ? (m.v2GeneratedChildNames = 0) : m.v2GeneratedChildNames++)
+									(m.mV2_generatedChildNames == _undefined ? (m.mV2_generatedChildNames = 0) : m.mV2_generatedChildNames++)
 								),
 							_widgetClass = _Uize.getModuleByName (_properties.widgetClass) || _class,
 							_widgetClassName = _widgetClass.moduleName,
@@ -287,7 +287,7 @@ Uize.module ({
 						var
 							m = this,
 							_extraClasses = m.extraClasses,
-							_cssBindings = m.Class.v2CssBindings,
+							_cssBindings = m.Class.mV2_cssBindings,
 							_cssClasses = [m.cssClass ()],
 							_cssClassSuffix
 						;
@@ -361,20 +361,20 @@ Uize.module ({
 						);
 					},
 
-					v2NeedCss:function () {
+					mV2_needCss:function () {
 						var
 							m = this,
 							_moduleName = m.moduleName
 						;
 						if (_cssAddedLookup [_moduleName] != _trueFlag) {
 							_cssAddedLookup [_moduleName] = _trueFlag;
-							m.superclass.v2NeedCss && m.superclass.v2NeedCss ();
+							m.superclass.mV2_needCss && m.superclass.mV2_needCss ();
 							m.cssModule && m.cssModule.add ();
 						}
 					},
 
 					cssBindings:function (_bindings) {
-						_copyInto (this.v2CssBindings,_Uize.map (_bindings,_Uize.resolveTransformer));
+						_copyInto (this.mV2_cssBindings,_Uize.map (_bindings,_Uize.resolveTransformer));
 						/*?
 							Static Methods
 								Uize.Widget.mV2.cssBindings
@@ -439,7 +439,7 @@ Uize.module ({
 							}
 							return _updater;
 						}
-						var _htmlBindings = this.v2HtmlBindings;
+						var _htmlBindings = this.mV2_htmlBindings;
 						_forEach (
 							_bindings,
 							function (_updater,_property) {
@@ -498,21 +498,18 @@ Uize.module ({
 				},
 
 				staticProperties:{
-					v2CssBindings:{},
-					v2HtmlBindings:{},
+					mV2_cssBindings:{},
+					mV2_htmlBindings:{},
 					enableRootNodeCssClasses:true
 				},
 
 				stateProperties:{
-					v2RootNodeCssClasses:{value:''},
+					mV2_rootNodeCssClasses:{value:''},
 					extraClasses:{value:''}
 				},
 
 				treeInheritedStateProperties:{
-					_size:{
-						name:'size',
-						value:'medium'
-					}
+					size:{value:'medium'}
 				},
 
 				set:{
@@ -533,7 +530,7 @@ Uize.module ({
 				},
 
 				htmlBindings:{
-					v2RootNodeCssClasses:':className'
+					mV2_rootNodeCssClasses:':className'
 				},
 
 				cssBindings:{
