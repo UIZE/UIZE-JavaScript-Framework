@@ -42,7 +42,7 @@ Uize.module ({
 						_properties,
 						function (_propertyProfile,_propertyPrivateName) {
 							var
-								_propertyPublicName = _propertyProfile.name,
+								_propertyPublicName = _propertyProfile.name || _propertyPrivateName,
 								_propertyInheritedName = _propertyPublicName + 'Inherited',
 								_defaultValue = _propertyProfile.value
 							;
