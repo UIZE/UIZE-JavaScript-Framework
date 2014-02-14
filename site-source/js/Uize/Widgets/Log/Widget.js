@@ -143,7 +143,7 @@ Uize.module ({
 	name:'Uize.Widgets.Log.Widget',
 	superclass:'Uize.Widgets.BoxWithHeading.Widget',
 	required:[
-		'Uize.Widgets.Button.Widget',
+		'Uize.Widgets.Buttons.Clear.Widget',
 		'Uize.Util.Html.Encode',
 		'Uize.Date.Formatter',
 		'Uize.Widgets.Log.Html',
@@ -166,14 +166,14 @@ Uize.module ({
 				var m = this;
 
 				/*** add the clear button ***/
-					m.addChild ('clear',Uize.Widgets.Button.Widget).wire (
+					m.addChild ('clear',Uize.Widgets.Buttons.Clear.Widget).wire (
 						'Click',
 						function () {m.clear ()}
 					);
 					/*?
 						Child Widgets
 							clear Child Widget
-								An instance of the =Uize.Widgets.Button.Widget= class, which is wired to call the =clear= instance method when it is clicked.
+								An instance of the =Uize.Widgets.Buttons.Clear.Widget= class, which is wired to call the =clear= instance method when it is clicked.
 
 								NOTES
 								- see the related =clear= instance method

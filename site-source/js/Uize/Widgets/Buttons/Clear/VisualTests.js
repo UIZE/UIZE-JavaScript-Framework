@@ -1,10 +1,10 @@
 /*______________
 |       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
 |     /      /  |   ---------------------------------------------------
-|    /    O /   |    MODULE : Uize.Widgets.Log.VisualTests Class
+|    /    O /   |    MODULE : Uize.Widgets.Buttons.Clear.VisualTests Class
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
-| /____/ /__/_| | COPYRIGHT : (c)2013-2014 UIZE
+| /____/ /__/_| | COPYRIGHT : (c)2014 UIZE
 |          /___ |   LICENSE : Available under MIT License or GNU General Public License
 |_______________|             http://www.uize.com/license.html
 */
@@ -18,41 +18,37 @@
 
 /*?
 	Introduction
-		The =Uize.Widgets.Log.VisualTests= class implements a set of visual tests for the =Uize.Widgets.Log.Widget= class.
+		The =Uize.Widgets.Buttons.Clear.VisualTests= class implements a set of visual tests for the =Uize.Widgets.Buttons.Clear.Widget= class.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 */
 
 Uize.module ({
-	name:'Uize.Widgets.Log.VisualTests',
+	name:'Uize.Widgets.Buttons.Clear.VisualTests',
 	superclass:'Uize.Widgets.VisualTests.Widget',
-	required:'Uize.Widgets.Log.Widget',
+	required:'Uize.Widgets.Buttons.Clear.Widget',
 	builder:function (_superclass) {
 		'use strict';
 
 		var
+			_allSizes = ['tiny','small','medium','large'],
 			_allLocales = ['en-US','de-DE','fr-FR','ja_JP','nl-NL','ru-RU','zh-CN']
 		;
 
 		return _superclass.subclass ({
 			omegastructor:function () {
-				var m = this;
-				function _addTestCaseWithDummyMessages (_totalMessages,_properties) {
-					var _log = m.addStateTestCase (_properties);
-					Uize.forEach (_totalMessages,function () {_log.log ('a log message')});
-				}
-				_addTestCaseWithDummyMessages (0);
-				_addTestCaseWithDummyMessages (1);
-				_addTestCaseWithDummyMessages (5);
-				_addTestCaseWithDummyMessages (20);
-				Uize.forEach (
-					_allLocales,
-					function (_locale) {_addTestCaseWithDummyMessages (1,{locale:_locale})}
-				);
+				this.addStateCombinationTestCases ({
+					locale:_allLocales,
+					size:_allSizes
+				});
+				this.addStateCombinationTestCases ({
+					enabled:[true,false],
+					selected:[false,true]
+				});
 			},
 
 			staticProperties:{
-				widgetClass:Uize.Widgets.Log.Widget
+				widgetClass:Uize.Widgets.Buttons.Clear.Widget
 			}
 		});
 	}
