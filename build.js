@@ -152,35 +152,64 @@ function _eval (_toEval) {
 						) == 1;
 					};
 
-					var
-						_timeouts = [],
-						_timeoutsAdded = 0,
-						_timeoutByLookup = {}
-					;
-					setTimeout = function (_function,_timeFromNow) {
-						_timeouts.push (
-							_timeoutByLookup [_timeoutsAdded] = {
-								func:_function,
-								when:+new Date + Math.max (_timeFromNow || 0,0)
-							}
-						);
-						return _timeoutsAdded++;
-					};
+					/*** timeouts emulation code for WSH ***/
+						var
+							_timeouts = [],
+							_timeoutsAdded = 0,
+							_timeoutByLookup = {}
+						;
+						setTimeout = function (_function,_timeFromNow) {
+							_timeouts.push (
+								_timeoutByLookup [_timeoutsAdded] = {
+									func:_function,
+									when:+new Date + Math.max (_timeFromNow || 0,0)
+								}
+							);
+							return _timeoutsAdded++;
+						};
 
-					clearTimeout = function (_timeoutId) {
-						var _timeout = _timeoutByLookup [_timeoutId];
-						if (_timeout) {
-							for (
-								var _timeoutNo = -1, _timeoutsLength = _timeouts.length;
-								++_timeoutNo < _timeoutsLength;
-							) {
-								if (_timeouts [_timeoutNo] == _timeout) {
-									_timeouts.splice (_timeoutNo,1);
-									break;
+						clearTimeout = function (_timeoutId) {
+							var _timeout = _timeoutByLookup [_timeoutId];
+							if (_timeout) {
+								for (
+									var _timeoutNo = -1, _timeoutsLength = _timeouts.length;
+									++_timeoutNo < _timeoutsLength;
+								) {
+									if (_timeouts [_timeoutNo] == _timeout) {
+										_timeouts.splice (_timeoutNo,1);
+										break;
+									}
 								}
 							}
-						}
-					};
+						};
+
+						executeTimeouts = function () {
+							while (_timeouts.length) {
+								var
+									_nextTimeoutNo,
+									_minWhen = Infinity
+								;
+								for (
+									var _timeoutNo = -1, _timeoutsLength = _timeouts.length;
+									++_timeoutNo < _timeoutsLength;
+								) {
+									var _timeout = _timeouts [_timeoutNo];
+									if (_timeout.when < _minWhen) {
+										_minWhen = _timeout.when;
+										_nextTimeoutNo = _timeoutNo;
+									}
+								}
+								var
+									_nextTimeout = _timeouts [_nextTimeoutNo],
+									_sleepTime = _nextTimeout.when - new Date
+								;
+								_timeouts.splice (_nextTimeoutNo,1);
+								if (_sleepTime > 0)
+									WScript.Sleep (_sleepTime)
+								;
+								_nextTimeout.func ();
+							}
+						};
 
 					/* TO DO:
 						for prompt, try to figure out how to use VBSCRIPT's InputBox built-in function
@@ -249,6 +278,12 @@ function _eval (_toEval) {
 							'	superclass:\'Uize.Dom.CssModule\',\n' +
 							'	builder:function (_superclass) {return _superclass.subclass ()}\n' +
 							'});';
+					} else if (_fileExists (_modulePath.replace (/\.js$/,'.loc'))) {
+						_moduleText =
+							'Uize.module ({\n' +
+							'	name:\'' + _moduleName + '\',\n' +
+							'	builder:function () {return Uize.package ()}\n' +
+							'});';
 					} else if (_folderExists (_moduleSourcePath.replace (/\.js$/,''))) {
 						_moduleText = 'Uize.module ({name:\'' + _moduleName + '\'});';
 					} else {
@@ -280,33 +315,7 @@ function _eval (_toEval) {
 							_buildModuleName,
 							function (_buildModule) {
 								_buildModule.perform (_params);
-								if (_isWsh) {
-									while (_timeouts.length) {
-										var
-											_nextTimeoutNo,
-											_minWhen = Infinity
-										;
-										for (
-											var _timeoutNo = -1, _timeoutsLength = _timeouts.length;
-											++_timeoutNo < _timeoutsLength;
-										) {
-											var _timeout = _timeouts [_timeoutNo];
-											if (_timeout.when < _minWhen) {
-												_minWhen = _timeout.when;
-												_nextTimeoutNo = _timeoutNo;
-											}
-										}
-										var
-											_nextTimeout = _timeouts [_nextTimeoutNo],
-											_sleepTime = _nextTimeout.when - new Date
-										;
-										_timeouts.splice (_nextTimeoutNo,1);
-										if (_sleepTime > 0)
-											WScript.Sleep (_sleepTime)
-										;
-										_nextTimeout.func ();
-									}
-								}
+								_isWsh && executeTimeouts ();
 							}
 						)
 					;
