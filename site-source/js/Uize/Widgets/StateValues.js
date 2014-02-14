@@ -31,7 +31,7 @@ Uize.module ({
 
 		return Uize.package ({
 			size:Uize.keys (Uize.Widgets.CssUtil.sizes),
-			locale:['en-US','de-DE','fr-FR','ja_JP','nl-NL','ru-RU','zh-CN']
+			locale:['en-US','pseudo','de-DE','fr-FR','ja_JP','nl-NL','ru-RU','zh-CN']
 		});
 	}
 });

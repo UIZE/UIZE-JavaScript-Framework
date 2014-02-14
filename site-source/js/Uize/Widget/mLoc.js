@@ -53,10 +53,27 @@ Uize.module ({
 									);
 								}
 								if (_module.mLoc_hasLoc) {
-									Uize.require (
-										_moduleName.replace (/\.Widget$/,'.Loc.' + _locale.replace ('-','_')),
-										_setLocaleStringsAndProvide
-									);
+									var
+										_isPseudoLocale = _locale == 'pseudo',
+										_locModuleNamespace = _moduleName.replace (/\.Widget$/,'.Loc.')
+									;
+									_isPseudoLocale
+										? Uize.require (
+											['Uize.Loc.Pseudo',_locModuleNamespace + 'en_US'],
+											function (_Uize_Loc_Pseudo,_moduleLocaleStrings) {
+												_setLocaleStringsAndProvide (
+													Uize.map (
+														_moduleLocaleStrings,
+														function (_value) {return _Uize_Loc_Pseudo.pseudoLocalize (_value)}
+													)
+												);
+											}
+										)
+										: Uize.require (
+											_locModuleNamespace + _locale.replace ('-','_'),
+											_setLocaleStringsAndProvide
+										)
+									;
 								} else {
 									_setLocaleStringsAndProvide ();
 								}
