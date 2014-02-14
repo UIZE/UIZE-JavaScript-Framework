@@ -26,20 +26,23 @@
 Uize.module ({
 	name:'Uize.Widgets.Buttons.Clear.VisualSampler',
 	superclass:'Uize.Widgets.VisualSampler.Widget',
-	required:'Uize.Widgets.Buttons.Clear.Widget',
+	required:[
+		'Uize.Widgets.Buttons.Clear.Widget',
+		'Uize.Widgets.StateValues'
+	],
 	builder:function (_superclass) {
 		'use strict';
 
 		return _superclass.subclass ({
 			omegastructor:function () {
 				this.addStateCombinationSamples ({
-					locale:['en-US','de-DE','fr-FR','ja_JP','nl-NL','ru-RU','zh-CN']
+					locale:Uize.Widgets.StateValues.locale
 				});
 				this.addStateCombinationSamples ({
 					flavor:['normal','negative','positive','primary']
 				});
 				this.addStateCombinationSamples ({
-					size:['tiny','small','medium','large']
+					size:Uize.Widgets.StateValues.size
 				});
 			},
 

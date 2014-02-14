@@ -26,14 +26,17 @@
 Uize.module ({
 	name:'Uize.Widgets.Button.Toggle.OnOff.VisualSampler',
 	superclass:'Uize.Widgets.VisualSampler.Widget',
-	required:'Uize.Widgets.Button.Toggle.OnOff.Widget',
+	required:[
+		'Uize.Widgets.Button.Toggle.OnOff.Widget',
+		'Uize.Widgets.StateValues'
+	],
 	builder:function (_superclass) {
 		'use strict';
 
 		return _superclass.subclass ({
 			omegastructor:function () {
 				this.addStateCombinationSamples ({
-					size:['tiny','small','medium','large'],
+					size:Uize.Widgets.StateValues.size,
 					selected:[false,true]
 				});
 			},

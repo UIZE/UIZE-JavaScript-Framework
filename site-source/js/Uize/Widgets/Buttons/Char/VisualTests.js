@@ -28,12 +28,12 @@ Uize.module ({
 	superclass:'Uize.Widgets.VisualTests.Widget',
 	required:[
 		'Uize.Widgets.Buttons.Char.Widget',
-		'Uize.Widgets.CssUtil'
+		'Uize.Widgets.StateValues'
 	],
 	builder:function (_superclass) {
 		'use strict';
 
-		var _allSizes = Uize.keys (Uize.Widgets.CssUtil.sizes);
+		var _allSizes = Uize.Widgets.StateValues.sizes;
 		return _superclass.subclass ({
 			omegastructor:function () {
 				this.addStateCombinationTestCases ({

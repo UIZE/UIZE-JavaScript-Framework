@@ -18,7 +18,7 @@
 
 /*?
 	Introduction
-		The =Uize.Widgets.CssUtil= class provides utilities to facilitate ensuring standardized styling throughout the various built-in widgets of the UIZE JavaScript Framework.
+		The =Uize.Widgets.CssUtil= module provides utilities to facilitate ensuring standardized styling throughout the various built-in widgets of the UIZE JavaScript Framework.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 */
@@ -30,7 +30,7 @@ Uize.module ({
 
 		var _highlightColor = '#ffa200';
 
-		return {
+		return Uize.package ({
 			box:{
 				border:{
 					color:'#ccc',
@@ -78,7 +78,7 @@ Uize.module ({
 					';'
 				);
 			}
-		};
+		});
 	}
 });
 

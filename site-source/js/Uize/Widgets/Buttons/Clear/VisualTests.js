@@ -26,20 +26,18 @@
 Uize.module ({
 	name:'Uize.Widgets.Buttons.Clear.VisualTests',
 	superclass:'Uize.Widgets.VisualTests.Widget',
-	required:'Uize.Widgets.Buttons.Clear.Widget',
+	required:[
+		'Uize.Widgets.Buttons.Clear.Widget',
+		'Uize.Widgets.StateValues'
+	],
 	builder:function (_superclass) {
 		'use strict';
-
-		var
-			_allSizes = ['tiny','small','medium','large'],
-			_allLocales = ['en-US','de-DE','fr-FR','ja_JP','nl-NL','ru-RU','zh-CN']
-		;
 
 		return _superclass.subclass ({
 			omegastructor:function () {
 				this.addStateCombinationTestCases ({
-					locale:_allLocales,
-					size:_allSizes
+					locale:Uize.Widgets.StateValues.locale,
+					size:Uize.Widgets.StateValues.size
 				});
 				this.addStateCombinationTestCases ({
 					enabled:[true,false],

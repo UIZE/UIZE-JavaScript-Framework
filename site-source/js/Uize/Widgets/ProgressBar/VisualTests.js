@@ -26,7 +26,10 @@
 Uize.module ({
 	name:'Uize.Widgets.ProgressBar.VisualTests',
 	superclass:'Uize.Widgets.VisualTests.Widget',
-	required:'Uize.Widgets.ProgressBar.Widget',
+	required:[
+		'Uize.Widgets.ProgressBar.Widget',
+		'Uize.Widgets.StateValues'
+	],
 	builder:function (_superclass) {
 		'use strict';
 
@@ -40,7 +43,7 @@ Uize.module ({
 						'<%. stepsCompleted %> of <%. totalSteps %> tests completed (<%. percentComplete %>%)'
 					],
 					value:[0,15,30],
-					size:['tiny','small','medium','large'],
+					size:Uize.Widgets.StateValues.size,
 					maxValue:30
 				});
 			},

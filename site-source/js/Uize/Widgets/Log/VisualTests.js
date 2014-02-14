@@ -26,13 +26,12 @@
 Uize.module ({
 	name:'Uize.Widgets.Log.VisualTests',
 	superclass:'Uize.Widgets.VisualTests.Widget',
-	required:'Uize.Widgets.Log.Widget',
+	required:[
+		'Uize.Widgets.Log.Widget',
+		'Uize.Widgets.StateValues'
+	],
 	builder:function (_superclass) {
 		'use strict';
-
-		var
-			_allLocales = ['en-US','de-DE','fr-FR','ja_JP','nl-NL','ru-RU','zh-CN']
-		;
 
 		return _superclass.subclass ({
 			omegastructor:function () {
@@ -46,7 +45,7 @@ Uize.module ({
 				_addTestCaseWithDummyMessages (5);
 				_addTestCaseWithDummyMessages (20);
 				Uize.forEach (
-					_allLocales,
+					Uize.Widgets.StateValues.locale,
 					function (_locale) {_addTestCaseWithDummyMessages (1,{locale:_locale})}
 				);
 			},

@@ -26,11 +26,14 @@
 Uize.module ({
 	name:'Uize.Widgets.Button.VisualSampler',
 	superclass:'Uize.Widgets.VisualSampler.Widget',
-	required:'Uize.Widgets.Button.Widget',
+	required:[
+		'Uize.Widgets.Button.Widget',
+		'Uize.Widgets.StateValues'
+	],
 	builder:function (_superclass) {
 		'use strict';
 
-		var _allSizes = ['tiny','small','medium','large'];
+		var _allSizes = Uize.Widgets.StateValues.size;
 
 		return _superclass.subclass ({
 			omegastructor:function () {

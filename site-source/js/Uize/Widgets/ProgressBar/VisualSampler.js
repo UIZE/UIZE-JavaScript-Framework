@@ -30,8 +30,6 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		var _allSizes = ['tiny','small','medium','large'];
-
 		return _superclass.subclass ({
 			omegastructor:function () {
 				this.addStateCombinationSamples ({
