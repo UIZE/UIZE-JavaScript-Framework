@@ -12,7 +12,7 @@
 /* Module Meta Data
 	type: Class
 	importance: 1
-	codeCompleteness: 5
+	codeCompleteness: 20
 	docCompleteness: 100
 */
 
@@ -26,14 +26,16 @@
 Uize.module ({
 	name:'Uize.Widgets.SimpleStatsTable.VisualTests',
 	superclass:'Uize.Widgets.VisualTests.Widget',
-	required:'Uize.Widgets.SimpleStatsTable.Widget',
+	required:[
+		'Uize.Widgets.SimpleStatsTable.Widget',
+		'Uize.Widgets.SimpleStatsTable.TestsData'
+	],
 	builder:function (_superclass) {
 		'use strict';
 
 		return _superclass.subclass ({
 			omegastructor:function () {
-				this.addStateTestCase ({
-				});
+				this.addStateTestCase (Uize.Widgets.SimpleStatsTable.TestsData);
 			},
 
 			staticProperties:{

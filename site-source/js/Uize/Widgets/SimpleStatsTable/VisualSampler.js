@@ -26,44 +26,16 @@
 Uize.module ({
 	name:'Uize.Widgets.SimpleStatsTable.VisualSampler',
 	superclass:'Uize.Widgets.VisualSampler.Widget',
-	required:'Uize.Widgets.SimpleStatsTable.Widget',
+	required:[
+		'Uize.Widgets.SimpleStatsTable.Widget',
+		'Uize.Widgets.SimpleStatsTable.TestsData'
+	],
 	builder:function (_superclass) {
 		'use strict';
 
 		return _superclass.subclass ({
 			omegastructor:function () {
-				this.addSample ({
-					title:'This is the Table Heading',
-					columns:[
-						{
-							title:'Item Type Heading'
-						},
-						{
-							title:'Column 1 Heading',
-							minColor:'hsl(200,100,0)',
-							maxColor:'hsl(200,100,75)'
-						},
-						{
-							title:'Column 2 Heading',
-							minColor:'hsl(120,100,50)',
-							maxColor:'hsl(0,100,50)'
-						},
-						{
-							title:'Column 3 Heading',
-							minColor:'hsl(120,100,50)',
-							maxColor:'hsl(0,100,50)',
-							minValue:0,
-							maxValue:100
-						}
-					],
-					rows:[
-						['Row 1',0,12,100],
-						['Row 2',15,-5,32],
-						['Row 3',27,5,70],
-						['Row 4',3,19,50],
-						['Row 5',20,1,79]
-					]
-				});
+				this.addSample (Uize.Widgets.SimpleStatsTable.TestsData);
 			},
 
 			staticProperties:{
