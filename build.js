@@ -161,8 +161,8 @@ function _eval (_toEval) {
 						setTimeout = function (_function,_timeFromNow) {
 							_timeouts.push (
 								_timeoutByLookup [_timeoutsAdded] = {
-									func:_function,
-									when:+new Date + Math.max (_timeFromNow || 0,0)
+									_func:_function,
+									_when:+new Date + Math.max (_timeFromNow || 0,0)
 								}
 							);
 							return _timeoutsAdded++;
@@ -194,20 +194,20 @@ function _eval (_toEval) {
 									++_timeoutNo < _timeoutsLength;
 								) {
 									var _timeout = _timeouts [_timeoutNo];
-									if (_timeout.when < _minWhen) {
-										_minWhen = _timeout.when;
+									if (_timeout._when < _minWhen) {
+										_minWhen = _timeout._when;
 										_nextTimeoutNo = _timeoutNo;
 									}
 								}
 								var
 									_nextTimeout = _timeouts [_nextTimeoutNo],
-									_sleepTime = _nextTimeout.when - new Date
+									_sleepTime = _nextTimeout._when - new Date
 								;
 								_timeouts.splice (_nextTimeoutNo,1);
 								if (_sleepTime > 0)
 									WScript.Sleep (_sleepTime)
 								;
-								_nextTimeout.func ();
+								_nextTimeout._func ();
 							}
 						};
 
