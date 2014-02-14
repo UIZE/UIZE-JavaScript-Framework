@@ -34,7 +34,7 @@ Uize.module ({
 	],
 	builder:function () {
 		function _locFileSourceUrlFromTempUrl (m,_urlParts) {
-			return m.sourceUrlFromTempUrl (_urlParts).replace ('_','-').replace (/\.js$/,'.loc');
+			return m.sourceUrlFromTempUrl (_urlParts).replace (/\.js$/,'.loc');
 		}
 
 		return Uize.package ({
@@ -66,7 +66,6 @@ Uize.module ({
 						_source
 							.slice ((_params.sourcePath + '/' + _params.modulesFolder + '/').length)
 							.replace (/\.loc$/,'')
-							.replace ('-','_')
 					),
 					builder:[
 						'function () {',
