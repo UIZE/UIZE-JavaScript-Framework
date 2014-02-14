@@ -49,7 +49,10 @@ Uize.module ({
 				_fileSystem = Uize.Services.FileSystem.singleton (),
 				_compiledJstFilesByPath = {},
 				_package,
-				_jsModuleExtensionRegExp = /(\.js|\.js\.jst|\.csst)$/
+				_jsModuleExtensions = ['.js','.js.jst','.csst','.loc'],
+				_jsModuleExtensionRegExp = new RegExp (
+					'(' + Uize.map (_jsModuleExtensions,'Uize.escapeRegExpLiteral (value)').join ('|') + ')$'
+				)
 		;
 
 		/*** Utility Functions ***/
@@ -63,13 +66,33 @@ Uize.module ({
 
 		return _package = Uize.package ({
 			/*** Public Static Properties ***/
+				jsModuleExtensions:_jsModuleExtensions,
+					/*?
+						Static Properties
+							Uize.Build.Util.jsModuleExtensions
+								An array, containing a list of the file extensions for the source files from which JavaScript modules are built.
+
+								This list includes the string elements...
+
+								- ='.js'= - for regular JavaScript source files
+								- ='.js.jst'= - for JavaScript template source files
+								- ='.csst'= - for CSS template source files
+								- ='.loc'= - for locale strings source files
+
+								NOTES
+								- see also the companion =Uize.Build.Util.jsModuleExtensionRegExp= static property
+					*/
+
 				jsModuleExtensionRegExp:_jsModuleExtensionRegExp,
 					/*?
 						Static Properties
 							Uize.Build.Util.jsModuleExtensionRegExp
 								A regular expression that is used in determining source files for JavaScript modules.
 
-								This regular expression matches files with =.js= (JavaScript), =.js.jst= (JavaScript template), and =.csst= (CSS template) file extensions, and can be used in build scripts and file builder modules.
+								This regular expression matches files with any of the file extensions contained in the =Uize.Build.Util.jsModuleExtensions= array.
+
+								NOTES
+								- see also the companion =Uize.Build.Util.jsModuleExtensions= static property
 					*/
 
 			/*** Public Static Methods ***/
@@ -275,7 +298,7 @@ Uize.module ({
 								jsModulesARRAY = Uize.Build.Util.getJsModules (paramsOBJ);
 								..........................................................
 
-								This array of module names returned by this method will include modules that are generated from JavaScript template (=.js.jst=) files, CSS template (=.csst=) files, and folder paths for folders that are under folder organized namespaces.
+								The array of module names returned by this method will include modules that are built from various non-JavaScript source files (such as CSS template files with the =.csst= file extension). For a comprehensive list of such source file types, consult the reference for the =Uize.Build.Util.jsModuleExtensions= static property.
 
 								Params
 									The =paramsOBJ= object should have the following properties...

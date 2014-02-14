@@ -30,10 +30,14 @@ Uize.module ({
 	required:[
 		'Uize.Url',
 		'Uize.Doc.Sucker',
+		'Uize.Build.Util',
 		'UizeSite.Build.Util'
 	],
 	builder:function () {
-		var _visualTestsModuleNameFromWidgetClass = UizeSite.Build.Util.visualTestsModuleNameFromWidgetClass;
+		var
+			_visualTestsModuleNameFromWidgetClass = UizeSite.Build.Util.visualTestsModuleNameFromWidgetClass,
+			_jsModuleExtensions = Uize.Build.Util.jsModuleExtensions
+		;
 
 		function _hasDeepReference (object,_deepReference) {
 			try {
@@ -47,15 +51,24 @@ Uize.module ({
 			description:'Module reference page',
 			urlMatcher:function (_urlParts) {
 				var m = this;
+				function _anyOfFilesExists (_files) {
+					for (var _fileNo = -1, _filesLength = _files.length; ++_fileNo < _filesLength;)
+						if (m.fileExists ({path:_files [_fileNo]})) return true
+					;
+					return false;
+				}
 				if (
 					_urlParts.fileType == 'html' &&
 					_urlParts.folderPath == m.builtUrl ('reference/')
 				) {
 					var _sourcePathSansExtension = m.sourceUrl (m.getModuleUrl (_urlParts.fileName,false));
 					return (
-						m.fileExists ({path:_sourcePathSansExtension + '.js'}) ||
-						m.fileExists ({path:_sourcePathSansExtension + '.js.jst'}) ||
-						m.fileExists ({path:_sourcePathSansExtension + '.csst'}) ||
+						_anyOfFilesExists (
+							Uize.map (
+								_jsModuleExtensions,
+								function (_extension) {return _sourcePathSansExtension + _extension}
+							)
+						) ||
 						m.folderExists ({path:_sourcePathSansExtension})
 					);
 				} else {
