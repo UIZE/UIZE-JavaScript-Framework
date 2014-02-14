@@ -69,9 +69,9 @@ Uize.module ({
 					),
 					builder:[
 						'function () {',
-						'	return Uize.package (' +
+						'	return ' +
 							Uize.Str.Lines.indent (Uize.Json.to (_stringsAsStateProperties),1,'\t',false) +
-							');',
+							';',
 						'}'
 					].join ('\n')
 				});
