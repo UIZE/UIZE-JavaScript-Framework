@@ -35,6 +35,27 @@
 	testSequence:[
 		'build.js Uize.Build.RunUnitTests silent=true',
 		'build.js Uize.Build.RunUnitTests useSource=false silent=true'
-	]
+	],
+	moduleConfigs:{
+		'Uize.Build.Loc':{
+			stringsFolder:'strings',
+			projects:{
+				Uize:{
+					serviceAdapter:'Uize.Services.LocAdapter.Uize',
+					rootFolderPath:'site-source/js',
+					languages:[
+						'en-US',
+						'pseudo',
+						'de-DE',
+						'fr-FR',
+						'ja_JP',
+						'nl-NL',
+						'ru-RU',
+						'zh-CN'
+					]
+				}
+			}
+		}
+	}
 }
 

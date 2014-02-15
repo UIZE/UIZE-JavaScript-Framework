@@ -72,7 +72,7 @@ Uize.module ({
 					_scriptConfig = _params.moduleConfigs ['Uize.Build.Loc'],
 					_projects = _scriptConfig.projects
 				;
-				_projectName == '*'
+				!_projectName || _projectName == '*'
 					? Uize.forEach (_projects,_performLocMethodForProject)
 					: _performLocMethodForProject (_projects [_projectName],_projectName)
 				;
