@@ -170,7 +170,7 @@ Uize.module ({
 						_project.languages,
 						function (_language) {
 							if (_language != 'en-US') {
-								var _languageFilename = 'strings/' + _projectName + '/' + _language + '.csv';
+								var _languageFilename = m._stringsFolder + '/' + _projectName + '/' + _language + '.csv';
 								if (_fileSystem.fileExists ({path:_languageFilename})) {
 									m.distributeResources (
 										Uize.Data.Flatten.unflatten (
@@ -197,7 +197,7 @@ Uize.module ({
 						_projectName = _project.name
 					;
 					_fileSystem.writeFile ({
-						path:'strings/' + _projectName + '/en-US.csv',
+						path:this._stringsFolder + '/' + _projectName + '/en-US.csv',
 						contents:Uize.Data.Csv.to (
 							Uize.Data.NameValueRecords.fromHash (
 								Uize.Data.Flatten.flatten (this.gatherResources (),'|'),
@@ -327,7 +327,8 @@ Uize.module ({
 				pseudoLocalize:function (_params,_callback) {
 					var
 						_pseudoLocalizeOptions = {wordSplitter:this.wordSplitter},
-						_projectName = this.project.name
+						_projectName = this.project.name,
+						_stringsFolder = this._stringsFolder
 					;
 
 					function _pseudoLocalizeString (_string) {
@@ -335,10 +336,12 @@ Uize.module ({
 					}
 
 					_fileSystem.writeFile ({
-						path:'strings/' + _projectName + '/pseudo.csv',
+						path:_stringsFolder + '/' + _projectName + '/pseudo.csv',
 						contents:Uize.Data.Csv.to (
 							Uize.map (
-								Uize.Data.Csv.from (_fileSystem.readFile ({path:'strings/' + _projectName + '/en-US.csv'})),
+								Uize.Data.Csv.from (
+									_fileSystem.readFile ({path:_stringsFolder + '/' + _projectName + '/en-US.csv'})
+								),
 								function (_keyValueArray) {
 									_keyValueArray [1] = _pseudoLocalizeString (_keyValueArray [1] || '');
 									return _keyValueArray;
@@ -352,6 +355,7 @@ Uize.module ({
 
 				init:function (_params,_callback) {
 					this.project = _params.project;
+					this._stringsFolder = _params.stringsFolder;
 					_callback ();
 				}
 			},
