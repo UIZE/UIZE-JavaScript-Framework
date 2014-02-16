@@ -44,7 +44,8 @@ Uize.module ({
 				var
 					_fileSystem = Uize.Services.FileSystem.singleton (),
 					_pluralRules = Uize.Json.from (_fileSystem.readFile ({path:_params.pluralRules})),
-					_modulesPath = _params.uizePath + '/' + _params.modulesFolder + '/'
+					_modulesPath = _params.uizePath + '/' + _params.modulesFolder + '/',
+					_modulesNamespace = 'Uize.Loc.Plurals.Langs'
 				;
 				Uize.forEach (
 					_pluralRules.supplemental ['plurals-type-cardinal'],
@@ -60,9 +61,9 @@ Uize.module ({
 							}
 						);
 						_fileSystem.writeFile ({
-							path:_modulesPath + Uize.modulePathResolver ('Uize.Loc.Plurals.' + _language) + '.js',
+							path:_modulesPath + Uize.modulePathResolver (_modulesNamespace + '.' + _language) + '.js',
 							contents:Uize.Loc.Plurals.ModuleTemplate.process ({
-								namespace:'Uize.Loc.Plurals',
+								namespace:_modulesNamespace,
 								language:_language,
 								pluralRules:_pluralRulesMap,
 								pluralRulesFunction:Uize.Loc.Plurals.RuleParser.rulesToJsFunctionStr (_pluralRulesMap)
