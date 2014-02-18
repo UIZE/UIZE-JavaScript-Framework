@@ -179,7 +179,7 @@ Uize.module ({
 
 			isUizeClass:function (_object) {
 				/* NOTE:
-					We employ duck-typing here because we want this method to also work for object refeences that come from different windows, so we can't rely on instanceof or similar approaches.
+					We employ duck-typing here because we want this method to also work for object references that come from different windows, so we can't rely on instanceof or similar approaches.
 				*/
 				return (
 					_isClass (_object) &&

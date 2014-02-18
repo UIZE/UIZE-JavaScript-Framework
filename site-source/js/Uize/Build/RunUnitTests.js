@@ -52,7 +52,7 @@ Uize.module ({
 				var
 					_libraryModuleSuffixRegExp = /\.library$/i,
 					_testIgnoreNamespaces = _params.testIgnoreNamespaces,
-					_modulesToIgnoreRegExp = _Uize.isArray(_testIgnoreNamespaces)
+					_modulesToIgnoreRegExp = _Uize.isArray(_testIgnoreNamespaces) && !_Uize.isEmpty(_testIgnoreNamespaces)
 						? new RegExp (
 							'^('
 								+ _Uize.map (_testIgnoreNamespaces, _Uize.escapeRegExpLiteral).join ('|')

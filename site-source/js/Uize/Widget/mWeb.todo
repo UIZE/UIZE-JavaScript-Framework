@@ -1,11 +1,2 @@
 This is a TO DO document for the =Uize.Widget.mWeb= module.
 
-Proposed Methods
-	selectNodes
-		Selects nodes based on CSS selection syntax within the root node, returning a =Uize.Web= object.
-		
-		NOTES
-		- selectNodes(selector)
-		- CSS classes could be auto-prefixed using the widget class' CSS class prefix
-		- IDs could be auto-prefixed usign the widget class' ID prefix
-	

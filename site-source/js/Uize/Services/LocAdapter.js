@@ -17,7 +17,7 @@ Uize.module ({
 
 		var
 			_fileSystem = Uize.Services.FileSystem.singleton (),
-			_split = _split = Uize.Str.Split.split,
+			_split = Uize.Str.Split.split,
 			_wordSplitterRegExpComposition = Uize.Util.RegExpComposition ({
 				punctuation:/[\?!\.;,&=\-\(\)\[\]"<>]+/,
 				number:/\d+(?:\.\d+)?/,
@@ -160,7 +160,7 @@ Uize.module ({
 					_processSection (_strings,[]);
 				},
 
-				import:function (_params,_callback) {
+				'import':function (_params,_callback) {
 					var
 						m = this,
 						_project = m.project,
@@ -191,7 +191,7 @@ Uize.module ({
 					_callback ();
 				},
 
-				export:function (_params,_callback) {
+				'export':function (_params,_callback) {
 					var
 						_project = this.project,
 						_projectName = _project.name
