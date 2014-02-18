@@ -248,6 +248,10 @@ Uize.module ({
 					size:{value:'medium'}
 				},
 
+				cssBindings:{
+					sizeInherited:'value'
+				},
+
 				set:{
 					html:{
 						process:function () {
