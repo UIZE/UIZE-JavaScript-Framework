@@ -312,10 +312,6 @@ Uize.module ({
 
 				htmlBindings:{
 					mBindings_rootNodeClasses:':className'
-				},
-
-				cssBindings:{
-					sizeInherited:'value'
 				}
 			});
 		};
