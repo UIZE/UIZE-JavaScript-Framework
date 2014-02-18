@@ -26,7 +26,10 @@
 Uize.module ({
 	name:'Uize.Widgets.Button.Toggle.OnOff.VisualTests',
 	superclass:'Uize.Widgets.VisualTests.Widget',
-	required:'Uize.Widgets.Button.Toggle.OnOff.Widget',
+	required:[
+		'Uize.Widgets.Button.Toggle.OnOff.Widget',
+		'Uize.Widgets.StateValues'
+	],
 	builder:function (_superclass) {
 		'use strict';
 
@@ -35,7 +38,7 @@ Uize.module ({
 				this.addStateCombinationTestCases ({
 					enabled:[true,false],
 					selected:[false,true],
-					size:['tiny','small','medium','large']
+					size:Uize.Widgets.StateValues.size
 				});
 			},
 

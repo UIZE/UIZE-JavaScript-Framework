@@ -8,7 +8,8 @@ Uize.module ({
 		'Uize.Data.Csv',
 		'Uize.Loc.Pseudo',
 		'Uize.Build.Util',
-		'Uize.Str.Split'
+		'Uize.Str.Split',
+		'Uize.Util.RegExpComposition'
 	],
 	superclass:'Uize.Service.Adapter',
 	builder:function (_superclass) {
@@ -16,7 +17,13 @@ Uize.module ({
 
 		var
 			_fileSystem = Uize.Services.FileSystem.singleton (),
-			_split = _split = Uize.Str.Split.split
+			_split = _split = Uize.Str.Split.split,
+			_wordSplitterRegExpComposition = Uize.Util.RegExpComposition ({
+				punctuation:/[\?!\.;,&=\-\(\)\[\]"<>]+/,
+				number:/\d+(?:\.\d+)?/,
+				whitespace:/\s+/,
+				wordSplitter:/({whitespace}|{punctuation}|{number})/
+			})
 		;
 
 		return _superclass.subclass ({
@@ -28,13 +35,13 @@ Uize.module ({
 					;
 					Uize.forEach (
 						_resources,
-						function (_resourceFileNamespaces,_resourceFileSubPath) {
+						function (_resourceFileStrings,_resourceFileSubPath) {
 							var _resourceFileFullPath =
 								_rootFolderPath + '/' + m.getLanguageResourcePath (_resourceFileSubPath,_language)
 							;
 							_fileSystem.writeFile ({
 								path:_resourceFileFullPath,
-								contents:m.serializeResourceFile (_resourceFileNamespaces)
+								contents:m.serializeResourceFile (_resourceFileStrings)
 							});
 						}
 					);
@@ -45,6 +52,7 @@ Uize.module ({
 						m = this,
 						_project = m.project,
 						_currentFolderRelativePath,
+						_currentFileRelativePath,
 						_resources = {},
 						_rootFolderPath = _project.rootFolderPath,
 						_rootFolderPathLength = _rootFolderPath.length
@@ -55,7 +63,11 @@ Uize.module ({
 							return _folderPath;
 						},
 						targetFilenameCreator:function (_sourceFileName) {
-							return m.isResourceFile (_sourceFileName) ? _sourceFileName : null;
+							return (
+								m.isResourceFile (_currentFileRelativePath = _currentFolderRelativePath + '/' + _sourceFileName)
+									? _sourceFileName
+									: null
+							);
 						},
 						fileBuilder:function (_sourceFileName,_sourceFileText) {
 							var
@@ -67,7 +79,7 @@ Uize.module ({
 							} catch (_error) {
 								_errorWithFile = _error + '';
 							}
-							_resources [_currentFolderRelativePath + '/' + _sourceFileName] = _strings;
+							_resources [_currentFileRelativePath] = _strings;
 							return {logDetails:_errorWithFile ? '\tERROR: ' + _errorWithFile : ''};
 						},
 						alwaysBuild:true,
@@ -86,8 +98,19 @@ Uize.module ({
 					var
 						_stringSegments = _split (_sourceStr,this.wordSplitter),
 						_words = 0,
-						_chars = 0
+						_chars = 0,
+						_tokenAdded = {},
+						_tokens = []
 					;
+					_sourceStr.replace (
+						this.tokenRegExp,
+						function (_match,_tokenName) {
+							if (!_tokenAdded [_tokenName]) {
+								_tokens.push (_tokenName);
+								_tokenAdded [_tokenName] = 1;
+							}
+						}
+					);
 					for (
 						var _stringSegmentNo = -2, _stringSegmentsLength = _stringSegments.length;
 						(_stringSegmentNo += 2) < _stringSegmentsLength;
@@ -96,11 +119,12 @@ Uize.module ({
 					;
 					return {
 						words:(_stringSegmentsLength + 1) / 2,
-						chars:_chars
+						chars:_chars,
+						tokens:_tokens
 					};
 				},
 
-				isBrandResourceFile:function (_filename) {
+				isBrandResourceFile:function (_filePath) {
 					// this method should be implemented by subclasses
 					return false;
 				},
@@ -110,7 +134,7 @@ Uize.module ({
 					return false;
 				},
 
-				isResourceFile:function (_filename) {
+				isResourceFile:function (_filePath) {
 					// this method should be implemented by subclasses
 				},
 
@@ -129,7 +153,7 @@ Uize.module ({
 							if (Uize.isObject (_value)) {
 								_processSection (_value,_path.concat (_key));
 							} else if (typeof _value == 'string') {
-								_section [_key] = _stringProcessor (_section [_key],_path);
+								_section [_key] = _stringProcessor (_section [_key],_path.concat (_key));
 							}
 						}
 					}
@@ -146,7 +170,7 @@ Uize.module ({
 						_project.languages,
 						function (_language) {
 							if (_language != 'en-US') {
-								var _languageFilename = 'strings/' + _projectName + '/' + _language + '.csv';
+								var _languageFilename = m._stringsFolder + '/' + _projectName + '/' + _language + '.csv';
 								if (_fileSystem.fileExists ({path:_languageFilename})) {
 									m.distributeResources (
 										Uize.Data.Flatten.unflatten (
@@ -173,7 +197,7 @@ Uize.module ({
 						_projectName = _project.name
 					;
 					_fileSystem.writeFile ({
-						path:'strings/' + _projectName + '/en-US.csv',
+						path:this._stringsFolder + '/' + _projectName + '/en-US.csv',
 						contents:Uize.Data.Csv.to (
 							Uize.Data.NameValueRecords.fromHash (
 								Uize.Data.Flatten.flatten (this.gatherResources (),'|'),
@@ -196,40 +220,81 @@ Uize.module ({
 						_totalBrandSpecificWordCount = 0,
 						_totalCharCount = 0,
 						_totalBrandSpecificCharCount = 0,
+						_totalTokens = 0,
+						_totalTokenizedResourceStrings = 0,
+						_totalDupedResourceStrings = 0,
 						_currentResourceFileIsBrandSpecific,
-						_project = m.project
+						_project = m.project,
+						_valuesLookup = {},
+						_dupedResourceStringsDetails = {},
+						_tokenUsage = {}
 					;
 					Uize.forEach (
 						m.gatherResources (),
-						function (_resourceFileNamespaces,_resourceFileSubPath) {
+						function (_resourceFileStrings,_resourceFileSubPath) {
 							var
 								_wordCount = 0,
-								_charCount = 0
+								_brandSpecificWordCount = 0,
+								_charCount = 0,
+								_brandSpecificCharCount = 0
 							;
 							_totalResourceFiles++;
 							_totalBrandSpecificResourceFiles += (
 								_currentResourceFileIsBrandSpecific = m.isBrandResourceFile (_resourceFileSubPath)
 							);
 							m.processStrings (
-								_resourceFileNamespaces,
+								_resourceFileStrings,
 								function (_value,_path) {
-									var _stringMetrics = m.getStringMetrics (_value);
-									_totalResourceStrings++;
-									(_currentResourceFileIsBrandSpecific || m.isBrandResourceString (_path,_value)) &&
-										_totalBrandSpecificResourceStrings++
-									;
-									_wordCount += _stringMetrics.words;
-									_charCount += _stringMetrics.chars;
+									/*** update information on duplicates ***/
+										var _stringFullPath = _resourceFileSubPath + ' : ' + _path.join ('.');
+										if (_valuesLookup [_value]) {
+											_totalDupedResourceStrings++;
+											(
+												_dupedResourceStringsDetails [_value] ||
+												(_dupedResourceStringsDetails [_value] = [_valuesLookup [_value]])
+											).push (_stringFullPath);
+										} else {
+											_valuesLookup [_value] = _stringFullPath;
+										}
+
+									/*** get metrics for string ***/
+										var
+											_stringMetrics = m.getStringMetrics (_value),
+											_stringTokens = _stringMetrics.tokens,
+											_stringTokensLength = _stringTokens.length
+										;
+
+										/*** update general metrics ***/
+											_totalResourceStrings++;
+											_wordCount += _stringMetrics.words;
+											_charCount += _stringMetrics.chars;
+											if (_currentResourceFileIsBrandSpecific || m.isBrandResourceString (_path,_value)) {
+												_totalBrandSpecificResourceStrings++;
+												_brandSpecificWordCount += _stringMetrics.words;
+												_brandSpecificCharCount += _stringMetrics.chars;
+											}
+
+										/*** update metrics on tokenized strings and token usage ***/
+											if (_stringTokensLength) {
+												Uize.forEach (
+													_stringTokens,
+													function (_tokenName) {
+														(_tokenUsage [_tokenName] || (_tokenUsage [_tokenName] = [])).push (
+															_stringFullPath
+														);
+													}
+												);
+												_totalTokens += _stringTokensLength;
+												_totalTokenizedResourceStrings++;
+											}
+
 									return _value;
 								}
 							);
 							_totalWordCount += _wordCount;
 							_totalCharCount += _charCount;
-							if (_currentResourceFileIsBrandSpecific) {
-								_totalBrandSpecificWordCount += _wordCount;
-								_totalBrandSpecificCharCount += _charCount;
-							}
-
+							_totalBrandSpecificWordCount += _brandSpecificWordCount;
+							_totalBrandSpecificCharCount += _brandSpecificCharCount;
 						}
 					);
 					_fileSystem.writeFile ({
@@ -246,7 +311,14 @@ Uize.module ({
 							brandSpecificWordCountPercent:_totalBrandSpecificWordCount / _totalWordCount * 100,
 							charCount:_totalCharCount,
 							brandSpecificCharCount:_totalBrandSpecificCharCount,
-							brandSpecificCharCountPercent:_totalBrandSpecificCharCount / _totalCharCount * 100
+							brandSpecificCharCountPercent:_totalBrandSpecificCharCount / _totalCharCount * 100,
+							tokens:_totalTokens,
+							tokenizedResourceStrings:_totalTokenizedResourceStrings,
+							tokenizedResourceStringsPercent:_totalTokenizedResourceStrings / _totalResourceStrings * 100,
+							dupedResourceStrings:_totalDupedResourceStrings,
+							dupedResourceStringsPercent:_totalDupedResourceStrings / _totalResourceStrings * 100,
+							dupedResourceStringsDetails:_dupedResourceStringsDetails,
+							tokenUsage:_tokenUsage
 						})
 					});
 					_callback ();
@@ -255,7 +327,8 @@ Uize.module ({
 				pseudoLocalize:function (_params,_callback) {
 					var
 						_pseudoLocalizeOptions = {wordSplitter:this.wordSplitter},
-						_projectName = this.project.name
+						_projectName = this.project.name,
+						_stringsFolder = this._stringsFolder
 					;
 
 					function _pseudoLocalizeString (_string) {
@@ -263,10 +336,12 @@ Uize.module ({
 					}
 
 					_fileSystem.writeFile ({
-						path:'strings/' + _projectName + '/pseudo.csv',
+						path:_stringsFolder + '/' + _projectName + '/pseudo.csv',
 						contents:Uize.Data.Csv.to (
 							Uize.map (
-								Uize.Data.Csv.from (_fileSystem.readFile ({path:'strings/' + _projectName + '/en-US.csv'})),
+								Uize.Data.Csv.from (
+									_fileSystem.readFile ({path:_stringsFolder + '/' + _projectName + '/en-US.csv'})
+								),
 								function (_keyValueArray) {
 									_keyValueArray [1] = _pseudoLocalizeString (_keyValueArray [1] || '');
 									return _keyValueArray;
@@ -280,12 +355,14 @@ Uize.module ({
 
 				init:function (_params,_callback) {
 					this.project = _params.project;
+					this._stringsFolder = _params.stringsFolder;
 					_callback ();
 				}
 			},
 
 			instanceProperties:{
-				wordSplitter:/([\s\?!\.;,&=\(\)\[\]"<>]+)/g
+				wordSplitter:_wordSplitterRegExpComposition.get ('wordSplitter'),
+				tokenRegExp:null
 			}
 		});
 	}

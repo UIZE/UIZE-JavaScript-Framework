@@ -26,15 +26,20 @@
 Uize.module ({
 	name:'Uize.Widgets.Slider.VisualTests',
 	superclass:'Uize.Widgets.VisualTests.Widget',
-	required:'Uize.Widgets.Slider.Widget',
+	required:[
+		'Uize.Widgets.Slider.Widget',
+		'Uize.Widgets.StateValues'
+	],
 	builder:function (_superclass) {
 		'use strict';
+
+		var _allSizes = Uize.Widgets.StateValues.size;
 
 		return _superclass.subclass ({
 			omegastructor:function () {
 				this.addStateCombinationTestCases ({
 					fullColor:['#f00','#0f0','#00f'],
-					size:['tiny','small','medium','large'],
+					size:_allSizes,
 					trackLength:400,
 					orientation:'horizontal',
 					value:750,
@@ -43,7 +48,7 @@ Uize.module ({
 				this.addStateCombinationTestCases ({
 					fullColor:'#fff',
 					emptyColor:'#666',
-					size:['tiny','small','medium','large'],
+					size:_allSizes,
 					trackLength:400,
 					orientation:'horizontal',
 					value:750,
@@ -53,7 +58,7 @@ Uize.module ({
 					trackLength:400,
 					orientation:['horizontal','vertical'],
 					value:[0,500,1000],
-					size:['tiny','small','medium','large'],
+					size:_allSizes,
 					maxValue:1000
 				});
 			},

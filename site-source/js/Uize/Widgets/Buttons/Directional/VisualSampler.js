@@ -28,7 +28,7 @@ Uize.module ({
 	superclass:'Uize.Widgets.VisualSampler.Widget',
 	required:[
 		'Uize.Widgets.Buttons.Directional.Widget',
-		'Uize.Widgets.CssUtil'
+		'Uize.Widgets.StateValues'
 	],
 	builder:function (_superclass) {
 		'use strict';
@@ -38,7 +38,7 @@ Uize.module ({
 				this.addStateCombinationSamples ({
 					directionX:[-1,0,1],
 					directionY:[-1,0,1],
-					size:Uize.keys (Uize.Widgets.CssUtil.sizes)
+					size:Uize.Widgets.StateValues.size
 				});
 				this.addStateCombinationSamples ({
 					flavor:['positive','negative','primary'],

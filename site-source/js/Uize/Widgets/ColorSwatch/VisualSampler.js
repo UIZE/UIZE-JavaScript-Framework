@@ -26,14 +26,17 @@
 Uize.module ({
 	name:'Uize.Widgets.ColorSwatch.VisualSampler',
 	superclass:'Uize.Widgets.VisualSampler.Widget',
-	required:'Uize.Widgets.ColorSwatch.Widget',
+	required:[
+		'Uize.Widgets.ColorSwatch.Widget',
+		'Uize.Widgets.StateValues'
+	],
 	builder:function (_superclass) {
 		'use strict';
 
 		return _superclass.subclass ({
 			omegastructor:function () {
 				this.addStateCombinationSamples ({
-					size:['tiny','small','medium','large'],
+					size:Uize.Widgets.StateValues.size,
 					value:['red','green','blue','#f0f','#5f9ea0','#556b2f','#ffdead','#90ee90','#e99975','','#4c7cd1','#000','#fff','#888']
 				});
 			},

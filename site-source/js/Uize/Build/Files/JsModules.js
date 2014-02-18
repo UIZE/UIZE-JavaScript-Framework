@@ -18,7 +18,7 @@
 
 /*?
 	Introduction
-		The =Uize.Build.Files.JsModules= build script generates built [[javascript-modules.html][JavaScript modules]] from all the source JavaScript modules, [[javascript-templates.html][JavaScript template]] (=.js.jst=) files, and CSS template (=.csst=) files that it finds in the modules folder.
+		The =Uize.Build.Files.JsModules= build script generates built [[javascript-modules.html][JavaScript modules]] from all the source JavaScript modules, including various non-JavaScript source files (such as CSS template files with the =.csst= file extension).
 
 		*DEVELOPERS:* `Chris van Rensburg`
 */
@@ -48,34 +48,34 @@ Uize.module ({
 						_isUizeWebSite = _uizeModulesPath == _sourceModulesPath,
 						_jsModuleExtensionRegExp = Uize.Build.Util.jsModuleExtensionRegExp
 					;
-					/*** add JavaScript modules located throughout site (not just modules folder) ***/
-						m.addFiles (
-							_fileSystem.getFiles ({
-								path:_sourcePath,
-								recursive:true,
-								pathMatcher:_jsModuleExtensionRegExp,
-								pathTransformer:function (_path) {return _path.replace (_jsModuleExtensionRegExp,'.js')}
-							})
-						);
 
-					/*** add JavaScript modules located in the UIZE modules folder (if not the UIZE Web site) ***/
-						_isUizeWebSite ||
+					/*** add URLs for JavaScript modules ***/
+						function _addUrlsForJavaScriptModules (_sourceModulesPath,_modulesFolder) {
 							m.addFiles (
 								_fileSystem.getFiles ({
-									path:_uizeModulesPath,
+									path:_sourceModulesPath,
 									recursive:true,
 									pathMatcher:function (_path) {
-										return _jsModuleExtensionRegExp.test (_path) && Uize.Str.Has.hasPrefix (_path,'Uize.');
+										return (
+											_jsModuleExtensionRegExp.test (_path) &&
+											(_isUizeWebSite || Uize.Str.Has.hasPrefix (_path,'Uize.'))
+										);
 									},
-									pathTransformer:function (_path) {
-										return _modulesFolder + '/' + _path.replace (_jsModuleExtensionRegExp,'.js');
+									pathTransformer:function (_modulePath) {
+										return _modulesFolder + '/' + _modulePath.replace (_jsModuleExtensionRegExp,'.js');
 									}
 								})
-							)
-						;
+							);
+						}
+
+						/*** folders under site's modules folder ***/
+							_addUrlsForJavaScriptModules (_sourceModulesPath,_modulesFolder);
+
+						/*** folders under UIZE site's modules folder ***/
+							_isUizeWebSite || _addUrlsForJavaScriptModules (_uizeModulesPath,_uizeModulesFolder);
 
 					/*** add URLs for generated namespace modules ***/
-						function _addFilesForGeneratedNamespaceModulesForFolders (_sourceModulesPath,_modulesFolder) {
+						function _addUrlsForGeneratedNamespaceModules (_sourceModulesPath,_modulesFolder) {
 							var _moduleNameFromModulePath = Uize.Build.Util.moduleNameFromModulePath;
 							m.addFiles (
 								_fileSystem.getFolders ({
@@ -101,10 +101,10 @@ Uize.module ({
 						}
 
 						/*** folders under site's modules folder ***/
-							_addFilesForGeneratedNamespaceModulesForFolders (_sourceModulesPath,_modulesFolder);
+							_addUrlsForGeneratedNamespaceModules (_sourceModulesPath,_modulesFolder);
 
 						/*** folders under UIZE site's modules folder ***/
-							_isUizeWebSite || _addFilesForGeneratedNamespaceModulesForFolders (_uizeModulesPath,_uizeModulesFolder);
+							_isUizeWebSite || _addUrlsForGeneratedNamespaceModules (_uizeModulesPath,_uizeModulesFolder);
 				}
 			}
 		});

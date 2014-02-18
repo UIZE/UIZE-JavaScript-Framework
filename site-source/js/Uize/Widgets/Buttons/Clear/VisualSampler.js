@@ -1,10 +1,10 @@
 /*______________
 |       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
 |     /      /  |   ---------------------------------------------------
-|    /    O /   |    MODULE : Uize.Widgets.Button.Toggle.OnOff.VisualSampler Class
+|    /    O /   |    MODULE : Uize.Widgets.Buttons.Clear.VisualSampler Class
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
-| /____/ /__/_| | COPYRIGHT : (c)2013-2014 UIZE
+| /____/ /__/_| | COPYRIGHT : (c)2014 UIZE
 |          /___ |   LICENSE : Available under MIT License or GNU General Public License
 |_______________|             http://www.uize.com/license.html
 */
@@ -18,16 +18,16 @@
 
 /*?
 	Introduction
-		The =Uize.Widgets.Button.Toggle.OnOff.VisualSampler= class implements a visual sampler widget for the =Uize.Widgets.Button.Toggle.OnOff.Widget= class.
+		The =Uize.Widgets.Buttons.Clear.VisualSampler= class implements a visual sampler widget for the =Uize.Widgets.Buttons.Clear.Widget= class.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 */
 
 Uize.module ({
-	name:'Uize.Widgets.Button.Toggle.OnOff.VisualSampler',
+	name:'Uize.Widgets.Buttons.Clear.VisualSampler',
 	superclass:'Uize.Widgets.VisualSampler.Widget',
 	required:[
-		'Uize.Widgets.Button.Toggle.OnOff.Widget',
+		'Uize.Widgets.Buttons.Clear.Widget',
 		'Uize.Widgets.StateValues'
 	],
 	builder:function (_superclass) {
@@ -36,13 +36,18 @@ Uize.module ({
 		return _superclass.subclass ({
 			omegastructor:function () {
 				this.addStateCombinationSamples ({
-					size:Uize.Widgets.StateValues.size,
-					selected:[false,true]
+					locale:Uize.Widgets.StateValues.locale
+				});
+				this.addStateCombinationSamples ({
+					flavor:['normal','negative','positive','primary']
+				});
+				this.addStateCombinationSamples ({
+					size:Uize.Widgets.StateValues.size
 				});
 			},
 
 			staticProperties:{
-				widgetClass:Uize.Widgets.Button.Toggle.OnOff.Widget
+				widgetClass:Uize.Widgets.Buttons.Clear.Widget
 			}
 		});
 	}

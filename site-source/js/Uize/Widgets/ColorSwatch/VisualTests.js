@@ -26,14 +26,17 @@
 Uize.module ({
 	name:'Uize.Widgets.ColorSwatch.VisualTests',
 	superclass:'Uize.Widgets.VisualTests.Widget',
-	required:'Uize.Widgets.ColorSwatch.Widget',
+	required:[
+		'Uize.Widgets.ColorSwatch.Widget',
+		'Uize.Widgets.StateValues'
+	],
 	builder:function (_superclass) {
 		'use strict';
 
 		return _superclass.subclass ({
 			omegastructor:function () {
 				this.addStateCombinationTestCases ({
-					size:['tiny','small','medium','large'],
+					size:Uize.Widgets.StateValues.size,
 					value:['#f00','#0f0','#00f','white','black']
 				});
 			},

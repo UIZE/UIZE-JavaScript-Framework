@@ -28,7 +28,7 @@ Uize.module ({
 	superclass:'Uize.Widgets.VisualSampler.Widget',
 	required:[
 		'Uize.Widgets.Button.Square.Widget',
-		'Uize.Widgets.CssUtil'
+		'Uize.Widgets.StateValues'
 	],
 	builder:function (_superclass) {
 		'use strict';
@@ -37,7 +37,7 @@ Uize.module ({
 			omegastructor:function () {
 				this.addStateCombinationSamples ({
 					flavor:['normal','positive','negative','primary'],
-					size:Uize.keys (Uize.Widgets.CssUtil.sizes)
+					size:Uize.Widgets.StateValues.size
 				});
 			},
 

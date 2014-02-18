@@ -26,21 +26,28 @@
 Uize.module ({
 	name:'Uize.Widgets.Log.VisualTests',
 	superclass:'Uize.Widgets.VisualTests.Widget',
-	required:'Uize.Widgets.Log.Widget',
+	required:[
+		'Uize.Widgets.Log.Widget',
+		'Uize.Widgets.StateValues'
+	],
 	builder:function (_superclass) {
 		'use strict';
 
 		return _superclass.subclass ({
 			omegastructor:function () {
 				var m = this;
-				function _addTestCaseWithDummyMessages (_totalMessages) {
-					var _log = m.addStateTestCase ();
+				function _addTestCaseWithDummyMessages (_totalMessages,_properties) {
+					var _log = m.addStateTestCase (_properties);
 					Uize.forEach (_totalMessages,function () {_log.log ('a log message')});
 				}
 				_addTestCaseWithDummyMessages (0);
 				_addTestCaseWithDummyMessages (1);
 				_addTestCaseWithDummyMessages (5);
 				_addTestCaseWithDummyMessages (20);
+				Uize.forEach (
+					Uize.Widgets.StateValues.locale,
+					function (_locale) {_addTestCaseWithDummyMessages (1,{locale:_locale})}
+				);
 			},
 
 			staticProperties:{

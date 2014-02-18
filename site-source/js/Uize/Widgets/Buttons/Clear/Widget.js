@@ -1,10 +1,10 @@
 /*______________
 |       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
 |     /      /  |   ---------------------------------------------------
-|    /    O /   |    MODULE : Uize.Widgets.Calendar.VisualTests Class
+|    /    O /   |    MODULE : Uize.Widgets.Buttons.Clear.Widget Class
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
-| /____/ /__/_| | COPYRIGHT : (c)2013-2014 UIZE
+| /____/ /__/_| | COPYRIGHT : (c)2014 UIZE
 |          /___ |   LICENSE : Available under MIT License or GNU General Public License
 |_______________|             http://www.uize.com/license.html
 */
@@ -18,30 +18,31 @@
 
 /*?
 	Introduction
-		The =Uize.Widgets.Calendar.VisualTests= class implements a set of visual tests for the =Uize.Widgets.Calendar.Widget= class.
+		The =Uize.Widgets.Buttons.Clear.Widget= class implements a localized clear button.
 
 		*DEVELOPERS:* `Chris van Rensburg`
+
+		Visual Sampler
+			Below is a visual sampler of the =Uize.Widgets.Buttons.Clear.Widget= class...
+
+			.....................................................
+			<< widget >>
+
+			widgetClass: Uize.Widgets.Buttons.Clear.VisualSampler
+			.....................................................
 */
 
 Uize.module ({
-	name:'Uize.Widgets.Calendar.VisualTests',
-	superclass:'Uize.Widgets.VisualTests.Widget',
-	required:[
-		'Uize.Widgets.Calendar.Widget',
-		'Uize.Widgets.StateValues'
-	],
+	name:'Uize.Widgets.Buttons.Clear.Widget',
+	superclass:'Uize.Widgets.Button.Widget',
 	builder:function (_superclass) {
 		'use strict';
 
 		return _superclass.subclass ({
-			omegastructor:function () {
-				this.addStateCombinationTestCases ({
-					size:Uize.Widgets.StateValues.size
-				});
-			},
+			hasLoc:true,
 
-			staticProperties:{
-				widgetClass:Uize.Widgets.Calendar.Widget
+			stateProperties:{
+				text:{derived:'loc_label'}
 			}
 		});
 	}

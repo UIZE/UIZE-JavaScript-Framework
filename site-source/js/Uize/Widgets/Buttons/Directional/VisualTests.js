@@ -28,7 +28,7 @@ Uize.module ({
 	superclass:'Uize.Widgets.VisualTests.Widget',
 	required:[
 		'Uize.Widgets.Buttons.Directional.Widget',
-		'Uize.Widgets.CssUtil'
+		'Uize.Widgets.StateValues'
 	],
 	builder:function (_superclass) {
 		'use strict';
@@ -38,7 +38,7 @@ Uize.module ({
 				this.addStateCombinationTestCases ({
 					directionX:[-1,0,1],
 					directionY:[-1,0,1],
-					size:Uize.keys (Uize.Widgets.CssUtil.sizes)
+					size:Uize.Widgets.StateValues.sizes
 				});
 				this.addStateCombinationTestCases ({
 					directionX:1,

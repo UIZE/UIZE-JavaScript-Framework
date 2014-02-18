@@ -1622,7 +1622,14 @@ Uize.module ({
 							_propertyProfile._publicName = _propertyPrimaryPublicName;
 						}
 						if (_rawPropertyProfileIsObject) {
-							if (_rawPropertyProfile.onChange) _propertyProfile._onChange = _rawPropertyProfile.onChange;
+							var _rawPropertyProfileOnChange = _rawPropertyProfile.onChange;
+							if (_rawPropertyProfileOnChange) {
+								var _propertyProfileOnChange = _propertyProfile._onChange;
+								_propertyProfile._onChange = _propertyProfileOnChange
+									? [].concat (_propertyProfileOnChange,_rawPropertyProfileOnChange)
+									: _rawPropertyProfileOnChange
+								;
+							}
 							if (_rawPropertyProfile.conformer) _propertyProfile._conformer = _rawPropertyProfile.conformer;
 							if (_rawPropertyProfile.derived) {
 								_declaredDerivedProperties = true;
@@ -1640,23 +1647,29 @@ Uize.module ({
 					}
 					var _instancePropertyDefaults = m._instancePropertyDefaults = m.get ();
 					if (_declaredDerivedProperties) {
-						var
-							_derivedProperties = [],
-							_nonDerivedProperties = []
-						;
-						for (var _propertyPublicName in _instancePropertyDefaults) {
-							var _propertyProfile = _propertyProfilesByPublicName [_propertyPublicName];
-							(_propertyProfile._derivation ? _derivedProperties : _nonDerivedProperties).push (
-								_propertyPublicName
-							);
+						for (
+							var
+								_getDerivation = function (_property) {
+									return (_propertyProfilesByPublicName [_property] || _sacredEmptyObject)._derivation;
+								},
+								_derivedProperties = m._derivedProperties = [],
+								_properties = _traceDependencies (
+									_Uize.keys (_instancePropertyDefaults),
+									function (_property) {
+										var _derivation = _getDerivation (_property);
+										return _derivation ? _derivation._determinants : _sacredEmptyArray;
+									}
+								),
+								_propertiesLength = _properties.length,
+								_propertyPublicName,
+								_propertyNo = -1
+							;
+							++_propertyNo < _propertiesLength;
+						) {
+							_getDerivation (_propertyPublicName = _properties [_propertyNo]) &&
+								_derivedProperties.push (_propertyPublicName)
+							;
 						}
-						m._derivedProperties = _traceDependencies (
-							_derivedProperties,
-							function (_derivedProperty) {
-								return _propertyProfilesByPublicName [_derivedProperty]._derivation._determinants;
-							},
-							_nonDerivedProperties
-						);
 					}
 					/*?
 						Static Methods

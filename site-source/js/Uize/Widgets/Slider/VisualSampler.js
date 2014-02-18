@@ -26,11 +26,14 @@
 Uize.module ({
 	name:'Uize.Widgets.Slider.VisualSampler',
 	superclass:'Uize.Widgets.VisualSampler.Widget',
-	required:'Uize.Widgets.Slider.Widget',
+	required:[
+		'Uize.Widgets.Slider.Widget',
+		'Uize.Widgets.StateValues'
+	],
 	builder:function (_superclass) {
 		'use strict';
 
-		var _allSizes = ['tiny','small','medium','large'];
+		var _allSizes = Uize.Widgets.StateValues.size;
 
 		return _superclass.subclass ({
 			omegastructor:function () {
@@ -46,7 +49,7 @@ Uize.module ({
 						orientation:'horizontal',
 						value:30,
 						maxValue:100,
-						size:['tiny','small','medium','large']
+						size:_allSizes
 					});
 
 				/*** vertical sliders ***/
@@ -63,7 +66,7 @@ Uize.module ({
 						trackLength:300,
 						value:30,
 						maxValue:100,
-						size:['tiny','small','medium','large']
+						size:_allSizes
 					});
 			},
 
