@@ -132,7 +132,7 @@ Uize.module ({
 							],
 							['Test that, when a string with an odd number of characters is specified for the wrapper option, the first half is used as the opener and the second half is used as the closer, and the opener has one less character than the closer',
 								['This pseudo-localization thing is pretty cool!',{wrapper:'<~=+=~>'}],
-								'<~=Ţĥîš_ þšéûðö-ļöçåļîžåţîöñ______ ţĥîñĝ_ îš_ þŕéţţý__ çööļ_!+=~>'
+								'<~=+Ţĥîš_ þšéûðö-ļöçåļîžåţîöñ______ ţĥîñĝ_ îš_ þŕéţţý__ çööļ_!=~>'
 							],
 							['Test that, when an empty string is specified for the wrapper option, the returned result has no wrapper characters',
 								['This pseudo-localization thing is pretty cool!',{wrapper:''}],

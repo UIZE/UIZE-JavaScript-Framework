@@ -15,7 +15,7 @@ Uize.module ({
 				number:/\d+(?:\.\d+)?/,
 				whitespace:/\s+/,
 				tokenName:/[\da-zA-Z]+/,
-				token:/%{tokenName}%/,
+				token:/\{{tokenName}\}/,
 				tokenWithNameCapture:/%({tokenName})%/,
 				wordSplitter:/({whitespace}|{token}|{punctuation}|{number})/
 			})

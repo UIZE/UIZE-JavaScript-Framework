@@ -13,7 +13,7 @@
 	type: Package
 	importance: 2
 	codeCompleteness: 100
-	docCompleteness: 5
+	docCompleteness: 55
 */
 
 /*?
@@ -23,6 +23,13 @@
 		*DEVELOPERS:* `Chris van Rensburg`
 
 		The =Uize.Loc.Pseudo= module is inspired by the work done by engineers at Microsoft and Google in the area of psueo-localization.
+
+		###
+			Accenting
+				.
+
+			Expansion
+				.
 */
 
 Uize.module ({
@@ -120,12 +127,29 @@ Uize.module ({
 				/*?
 					Static Methods
 						Uize.Loc.Pseudo.accent
-							.
+							Returns an accented version of the specified source string, where all alphabetical characters are replaced with correponding accented versions of those characters from the extended Unicode character set.
 
 							SYNTAX
 							.................................................
 							accentedSTR = Uize.Loc.Pseudo.accent (sourceSTR);
 							.................................................
+
+							The =Uize.Loc.Pseudo.accent= method is useful in the process of pseudo-localization, as it provides a way to create readable versions of English source strings that are very visibly different and that can be used to test a system's support for characters outside of the standard ASCII character set.
+
+							When used as a part of pseudo-localization, accenting of strings can be a valuable aid during the internationalization process of an application and can help to expose those strings that are still hard-coded in the code and have not been externalized to resource files.
+
+							EXAMPLE
+							..........................................................................
+							Uize.Loc.Pseudo.accent ('This pseudo-localization thing is pretty cool!');
+							..........................................................................
+
+							RESULT
+							..............................................
+							Ţĥîš þšéûðö-ļöçåļîžåţîöñ ţĥîñĝ îš þŕéţţý çööļ!
+							..............................................
+
+							NOTES
+							- see also the =Uize.Loc.Pseudo.pseudoLocalize= static method
 				*/
 
 			pseudoLocalize:function (_sourceStr,_options) {
@@ -157,7 +181,7 @@ Uize.module ({
 
 				/*** perform pseudo-localization (on a word-by-word basis) and return result ***/
 					var
-						_wrapperCenterPos = _wrapper.length / 2,
+						_wrapperCenterPos = Math.ceil (_wrapper.length / 2),
 						_wrapperOpener = _wrapper.slice (0,_wrapperCenterPos),
 						_wrapperCloser = _wrapper.slice (_wrapperCenterPos),
 						_expansionCharsToAdd = _totalWordCharCount * (_expansion - 1),
@@ -195,7 +219,7 @@ Uize.module ({
 				/*?
 					Static Methods
 						Uize.Loc.Pseudo.pseudoLocalize
-							Returns a string, being a pseudo-localized version of the specified source string.
+							Returns a pseudo-localized version of the specified source string.
 
 							`Pseudo-localize a String Using the Option Defaults`
 							................................................................
@@ -257,9 +281,9 @@ Uize.module ({
 								................................................................
 
 								EXAMPLE
-								...
+								..................................................................................
 								Uize.Loc.Pseudo.pseudoLocalize ('This pseudo-localization thing is pretty cool!');
-								...
+								..................................................................................
 
 								RESULT
 								............................................................
@@ -301,10 +325,106 @@ Uize.module ({
 										- to see an example of this option in use, see the use case `Pseudo-localize a String, Specifying a Custom Expansion Character`
 
 									wordSplitter
-										.
+										A regular expression, specifying a match expression that should be used to split a source string into words and non-words.
+
+										### Example
+											.
+
+										A Single Capture
+											The regular expression specified for the =wordSplitter= option should contain a single capturing group that encloses the entire pattern.
+
+											This is important, as it allows the =Uize.Loc.Pseudo.pseudoLocalize= method to split the source string exactly into alternating words and non-words, allowing the method to apply the pseudo-localization transformations like `accenting` and `expansion` for only the word parts of the source string, leaving the non-word parts unaffected.
+
+											In such an event that a word splitter regular expression needs to use grouping, the group sub-patterns should use the "?:" no-capture qualifier, as follows...
+
+											EXAMPLE
+											................................................................
+											/(\s+|\{[\da-zA-Z]+\}|[\?!\.;,&=\-\(\)\[\]"<>]+|\d+(?:\.\d+)?)/g
+											................................................................
+
+											In the above example, the word splitter regular expression is matching whitespace, substitution tokens of the form "{token}", various punctuation characters, and numbers. Specifically, the sub-pattern for numbers is =\d+(?:\.\d+)?=, which is using the "?:" no-capture qualifier for its optional decimal part group. This prevents the decimal part group from entering into the words and non-words array as a separate element if matched, which would throw off the pseudo-localization code.
 
 									wrapper
-										.
+										A string, specifying the characters that should be used to wrap the source string when performing pseudo-localization on it.
+
+										The wrapper string is split down the middle to form two parts: the opener characters and the closer characters. The opener characters are used as the prefix while the closer characters are used as the suffix.
+
+										A Two Character Wrapper
+											In the simplest case, specifying a two character wrapper will result in the first character being used as the opener / prefix and the second character as the closer.
+
+											EXAMPLE
+											....................................................
+											Uize.Loc.Pseudo.pseudoLocalize (
+												'This pseudo-localization thing is pretty cool!',
+												{wrapper:'<>'}
+											);
+											....................................................
+
+											RESULT
+											............................................................
+											<Ţĥîš_ þšéûðö-ļöçåļîžåţîöñ______ ţĥîñĝ_ îš_ þŕéţţý__ çööļ_!>
+											............................................................
+
+										Wrappers With More Than Teo Characters
+											.
+
+											EXAMPLE
+											....................................................
+											Uize.Loc.Pseudo.pseudoLocalize (
+												'This pseudo-localization thing is pretty cool!',
+												{wrapper:'[-  -]'}
+											);
+											....................................................
+
+											RESULT
+											................................................................
+											[- Ţĥîš_ þšéûðö-ļöçåļîžåţîöñ______ ţĥîñĝ_ îš_ þŕéţţý__ çööļ_! -]
+											................................................................
+
+										An Odd Length Wrapper
+											.
+
+											EXAMPLE
+											....................................................
+											Uize.Loc.Pseudo.pseudoLocalize (
+												'This pseudo-localization thing is pretty cool!',
+												{wrapper:'<#>'}
+											);
+											....................................................
+
+											RESULT
+											.............................................................
+											<#Ţĥîš_ þšéûðö-ļöçåļîžåţîöñ______ ţĥîñĝ_ îš_ þŕéţţý__ çööļ_!>
+											.............................................................
+
+										No Wrapper
+											.
+
+											EXAMPLE
+											....................................................
+											Uize.Loc.Pseudo.pseudoLocalize (
+												'This pseudo-localization thing is pretty cool!',
+												{wrapper:''}
+											);
+											....................................................
+
+											RESULT
+											..........................................................
+											Ţĥîš_ þšéûðö-ļöçåļîžåţîöñ______ ţĥîñĝ_ îš_ þŕéţţý__ çööļ_!
+											..........................................................
+
+										The Default Wrapper
+											.
+
+											EXAMPLE
+											..................................................................................
+											Uize.Loc.Pseudo.pseudoLocalize ('This pseudo-localization thing is pretty cool!');
+											..................................................................................
+
+											RESULT
+											............................................................
+											[Ţĥîš_ þšéûðö-ļöçåļîžåţîöñ______ ţĥîñĝ_ îš_ þŕéţţý__ çööļ_!]
+											............................................................
 
 							Pseudo-localize a String, But Without Accenting
 
