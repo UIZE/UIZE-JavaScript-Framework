@@ -106,26 +106,26 @@ Uize.module ({
 	builder:function () {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var
+		var
+			/*** Variables for Scruncher Optimization ***/
 				_true = true,
 				_false = false,
 				_undefined,
 				_Uize_Str_Trim = Uize.Str.Trim,
 				_trim = _Uize_Str_Trim.trim,
-				_hasPadding = _Uize_Str_Trim.hasPadding
-			;
+				_hasPadding = _Uize_Str_Trim.hasPadding,
 
-		/*** General Variables ***/
-			var _optionDefaults = {
-				columns:'all',              // 'all' | an array of column names
-				hasHeader:false,            // true | false
-				trimPaddingOnParse:false,   // true | false
-				quoteChar:'"',              // '"' | '\'' | any single char
-				rowType:'auto',             // 'array' | 'object' | 'auto'
-				valueDelimiter:',',         // ',' | ';' | '\t' | any single char
-				whenToQuoteValues:'auto'    // 'auto' | 'always'
-			};
+			/*** General Variables ***/
+				_optionDefaults = {
+					columns:'all',              // 'all' | an array of column names
+					hasHeader:false,            // true | false
+					trimPaddingOnParse:false,   // true | false
+					quoteChar:'"',              // '"' | '\'' | any single char
+					rowType:'auto',             // 'array' | 'object' | 'auto'
+					valueDelimiter:',',         // ',' | ';' | '\t' | any single char
+					whenToQuoteValues:'auto'    // 'auto' | 'always'
+				}
+		;
 
 		/*** Utility Functions ***/
 			function _getDefaultedOption (_options,_optionName) {
