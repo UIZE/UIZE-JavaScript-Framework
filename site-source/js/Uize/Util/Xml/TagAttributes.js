@@ -40,7 +40,7 @@ Uize.module ({
 				// ...
 		;
 
-		return Uize.copyInto (
+		return Uize.mergeInto (
 			function () {
 				var m = this;
 				m._attributes = m.attributes = [];

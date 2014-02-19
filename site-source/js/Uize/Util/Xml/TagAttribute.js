@@ -44,7 +44,7 @@ Uize.module ({
 		/*** Utility Functions ***/
 			// ...
 
-		return Uize.copyInto (
+		return Uize.mergeInto (
 			function () {
 				var m = this;
 				m.name = new _Uize_Util_Xml_TagAttributeName;

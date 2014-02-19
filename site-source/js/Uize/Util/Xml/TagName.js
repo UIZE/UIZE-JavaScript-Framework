@@ -40,7 +40,7 @@ Uize.module ({
 				return Uize.lookup (_charsStr.split (''));
 			}
 
-		return Uize.copyInto (
+		return Uize.mergeInto (
 			function () {
 			},
 

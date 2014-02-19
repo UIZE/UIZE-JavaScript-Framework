@@ -42,7 +42,7 @@ Uize.module ({
 				_currentNodes = {}
 		;
 
-		return Uize.copyInto (
+		return Uize.mergeInto (
 			function () {
 				var m = this;
 				m._nodes = m.nodes = [];

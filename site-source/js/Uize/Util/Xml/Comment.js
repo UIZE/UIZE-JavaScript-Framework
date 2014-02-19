@@ -31,7 +31,7 @@ Uize.module ({
 		/*** Utility Functions ***/
 			// ...
 
-		return Uize.copyInto (
+		return Uize.mergeInto (
 			function () {
 			},
 

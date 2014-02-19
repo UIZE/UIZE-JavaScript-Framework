@@ -46,7 +46,7 @@ Uize.module ({
 				return Uize.lookup (_charsStr.split (''));
 			}
 
-		return Uize.copyInto (
+		return Uize.mergeInto (
 			function () {
 				var m = this;
 				m.tagName = new _Uize_Util_Xml.TagName;
