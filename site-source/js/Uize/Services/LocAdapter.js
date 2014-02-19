@@ -160,7 +160,7 @@ Uize.module ({
 					_processSection (_strings,[]);
 				},
 
-				import:function (_params,_callback) {
+				'import':function (_params,_callback) {
 					var
 						m = this,
 						_project = m.project,
@@ -179,7 +179,7 @@ Uize.module ({
 												0,
 												1
 											),
-											'|'
+											Uize.Json.from
 										),
 										_language,
 										_project
@@ -191,7 +191,7 @@ Uize.module ({
 					_callback ();
 				},
 
-				export:function (_params,_callback) {
+				'export':function (_params,_callback) {
 					var
 						_project = this.project,
 						_projectName = _project.name
@@ -200,7 +200,10 @@ Uize.module ({
 						path:this._stringsFolder + '/' + _projectName + '/en-US.csv',
 						contents:Uize.Data.Csv.to (
 							Uize.Data.NameValueRecords.fromHash (
-								Uize.Data.Flatten.flatten (this.gatherResources (),'|'),
+								Uize.Data.Flatten.flatten (
+									this.gatherResources (),
+									function (_path) {return Uize.Json.to (_path,'mini')}
+								),
 								0,
 								1
 							)
@@ -246,7 +249,14 @@ Uize.module ({
 								_resourceFileStrings,
 								function (_value,_path) {
 									/*** update information on duplicates ***/
-										var _stringFullPath = _resourceFileSubPath + ' : ' + _path.join ('.');
+										var _stringFullPath = Uize.Json.to (
+											[_resourceFileSubPath].concat (_path),
+											{
+												quoteChar:'"',
+												indentChars:'',
+												linebreakChars:''
+											}
+										);
 										if (_valuesLookup [_value]) {
 											_totalDupedResourceStrings++;
 											(
