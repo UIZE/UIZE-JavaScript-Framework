@@ -34,12 +34,6 @@ Uize.module ({
 				Uize.Test.requiredModulesTest ('Uize.Data.MacStrings'),
 				Uize.Test.staticMethodsTest ([
 					['Uize.Data.MacStrings.from',[
-						['',
-							'"foo" = "\\n";\n',
-							{
-								'foo':'\n'
-							}
-						],
 						['Test that parsing an empty string produces an empty strings object',
 							'',
 							{}
