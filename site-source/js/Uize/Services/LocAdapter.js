@@ -17,13 +17,7 @@ Uize.module ({
 
 		var
 			_fileSystem = Uize.Services.FileSystem.singleton (),
-			_split = _split = Uize.Str.Split.split,
-			_wordSplitterRegExpComposition = Uize.Util.RegExpComposition ({
-				punctuation:/[\?!\.;,&=\-\(\)\[\]"<>]+/,
-				number:/\d+(?:\.\d+)?/,
-				whitespace:/\s+/,
-				wordSplitter:/({whitespace}|{punctuation}|{number})/
-			})
+			_split = _split = Uize.Str.Split.split
 		;
 
 		return _superclass.subclass ({
@@ -371,7 +365,7 @@ Uize.module ({
 			},
 
 			instanceProperties:{
-				wordSplitter:_wordSplitterRegExpComposition.get ('wordSplitter'),
+				wordSplitter:null,
 				tokenRegExp:null
 			}
 		});
