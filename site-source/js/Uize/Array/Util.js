@@ -28,8 +28,8 @@ Uize.module ({
 	builder:function () {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var
+		var
+			/*** Variables for Scruncher Optimization ***/
 				_package,
 				_undefined,
 				_ArrayPrototype = Array.prototype,
@@ -38,7 +38,7 @@ Uize.module ({
 				_ArraySplice = _ArrayPrototype.splice,
 				_Infinity = Infinity,
 				_fullArraySpliceArgs = [0,_Infinity]
-			;
+		;
 
 		return _package = Uize.package ({
 			replaceContents:function (_array1,_array2) {

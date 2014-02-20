@@ -34,8 +34,8 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var
+		var
+			/*** Variables for Scruncher Optimization ***/
 				_true = true,
 				_false = false,
 				_null = null,
@@ -52,7 +52,7 @@ Uize.module ({
 					_validated = 'validated',
 					_finished = 'finished',
 					_validatedAfterFirstFinish = 'validatedAfterFirstFinish'
-			;
+		;
 
 		/*** Private Instance Methods ***/
 			function _getInputNode (m) { return m.getNode('input') }

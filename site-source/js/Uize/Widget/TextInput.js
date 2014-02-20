@@ -33,12 +33,12 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var
+		var
+			/*** Variables for Scruncher Optimization ***/
 				_true = true,
 				_false = false,
 				_undefined
-			;
+		;
 
 		/*** Private Instance Methods ***/
 			function _validate () {

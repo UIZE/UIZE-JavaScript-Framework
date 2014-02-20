@@ -33,23 +33,21 @@ Uize.module ({
 	builder:function () {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var
+		var
+			/*** Variables for Scruncher Optimization ***/
 				_package = function () {},
 				_true = true,
 				_false = false,
 				_undefined,
 				_Uize_Dom_Basics = Uize.Dom.Basics,
-				_Uize_Dom_Pos = Uize.Dom.Pos
-			;
+				_Uize_Dom_Pos = Uize.Dom.Pos,
 
-		/*** General Variables ***/
-			var
+			/*** General Variables ***/
 				_packageGuid = Uize.getGuid (),
 				_tooltips = [],
 				_shownTooltip,
 				_tooltipBreatherMargin = 16
-			;
+		;
 
 		/*** Tooltip Display Management Functions ***/
 			function _resolveTooltipNode (_tooltipNode) {

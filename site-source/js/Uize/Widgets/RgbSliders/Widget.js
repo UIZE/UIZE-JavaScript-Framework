@@ -44,12 +44,12 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var
+		var
+			/*** Variables for Scruncher Optimization ***/
 				_undefined,
 				_true = true,
 				_false = false
-			;
+		;
 
 		return _superclass.subclass ({
 			alphastructor:function () {

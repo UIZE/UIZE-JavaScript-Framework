@@ -57,8 +57,11 @@ Uize.module ({
 	builder:function () {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var
+		var
+			/*** Variables for Scruncher Optimization ***/
+				_undefined,
+
+			/*** General Variables ***/
 				_package = function (_year,_month,_dayNo,_hours,_minutes,_seconds,_milliseconds) {
 					/* NOTE:
 						This is a workaround for the issue where the variation of the Date object constructor that takes year, month, date, hour, minute, second, and millisecond arguments considers the years 0-99 to be in the 1900's (20th century). To avoid messups with leap years, we shift 0-99 to 400-499 (0 is a leap year just like 400). Then we use the setFullYear method to correct the year (this method *does* respect years from 0-99).
@@ -74,9 +77,8 @@ Uize.module ({
 					);
 					_year < 100 && _date.setFullYear (_year);
 					return _date;
-				},
-				_undefined
-			;
+				}
+		;
 
 		/*** Utility Functions ***/
 			function _twoDigit (_value) {return isNaN (_value) ? '??' : (_value < 10 ? '0' : '') + _value}

@@ -34,18 +34,18 @@ Uize.module ({
 	builder:function (_class) {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var
+		var
+			/*** Variables for Scruncher Optimization ***/
 				_true = true,
 				_false = false,
 				_undefined,
 				_Uize_totalKeys = Uize.totalKeys,
 				_Uize_isObject = Uize.isObject,
-				_pTarget = 'Uize.Fade.xFactory.target'
-			;
+				_pTarget = 'Uize.Fade.xFactory.target',
 
-		/*** General Variables ***/
-			var _fadePool = [];
+			/*** General Variables ***/
+				_fadePool = []
+		;
 
 		/*** Public Static Methods ***/
 			_class.fade = function (_target,_startValue,_endValue,_duration,_fadeProperties,_startNow) {

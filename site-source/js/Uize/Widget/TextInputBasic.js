@@ -29,13 +29,13 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var
+		var
+			/*** Variables for Scruncher Optimization ***/
 				_true = true,
 				_false = false,
 				_undefined,
 				_Uize_Dom_Event = Uize.Dom.Event
-			;
+		;
 
 		return _superclass.subclass ({
 			instanceMethods:{

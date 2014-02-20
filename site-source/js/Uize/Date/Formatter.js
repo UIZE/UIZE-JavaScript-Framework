@@ -285,14 +285,12 @@ Uize.module ({
 	builder:function () {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var
+		var
+			/*** Variables for Scruncher Optimization ***/
 				_Uize_Date = Uize.Date,
-				_format = _Uize_Date.format
-			;
+				_format = _Uize_Date.format,
 
-		/*** General Variables ***/
-			var
+			/*** General Variables ***/
 				_tokenMatcherRegExp,
 				_tokenNameToValueRegExpString = {
 					YYYY:'\\d{4}',
@@ -315,7 +313,7 @@ Uize.module ({
 				},
 				_dynamicTokenValueRegExpStrings = ['monthName','shortMonthName','dayName','shortDayName'],
 				_ctrlG = String.fromCharCode (7)
-			;
+		;
 
 		/*** Utility Functions ***/
 			function _findValueInArrayCaseInsensitive (_values,_value) {

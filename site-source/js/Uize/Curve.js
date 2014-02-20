@@ -39,10 +39,13 @@ Uize.module ({
 	builder:function () {
 		'use strict';
 
-		var _package = function () {};
+		var
+			/*** Variables for Scruncher Optimization ***/
+				_undefined,
 
-		/*** Variables for Scruncher Optimization ***/
-			var _undefined;
+			/*** General Variables ***/
+				_package = function () {}
+		;
 
 		/*** Public Static Methods ***/
 			var

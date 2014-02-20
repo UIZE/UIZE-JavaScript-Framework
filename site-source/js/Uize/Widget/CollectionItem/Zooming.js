@@ -38,7 +38,7 @@ Uize.module ({
 				_true = true,
 				_false = false,
 				_Uize_Node = Uize.Node
-			;
+		;
 
 		/*** Utility Functions ***/
 			function _getNodeBorderWidth (_node,_edge) {

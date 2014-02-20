@@ -466,12 +466,12 @@ Uize.module ({
 	builder:function () {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var
+		var
+			/*** Variables for Scruncher Optimization ***/
 				_package,
 				_undefined,
 				_isList = Uize.isList
-			;
+		;
 
 		return _package = Uize.package ({
 			generate:function (_combinationsSpecifier,_combinationTransformer,_combinationMatcher) {

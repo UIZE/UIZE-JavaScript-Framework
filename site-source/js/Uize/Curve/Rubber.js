@@ -67,12 +67,12 @@ Uize.module ({
 	builder:function (_host) {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var
+		var
+			/*** Variables for Scruncher Optimization ***/
 				_package = function () {},
 				_makeEasingCurveGenerators = _host.makeEasingCurveGenerators,
 				_resolve = _host.resolve
-			;
+		;
 
 		/*** Curve Function Generators ***/
 			/*** elastic easing ***/

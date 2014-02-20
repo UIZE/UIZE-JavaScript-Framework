@@ -28,11 +28,11 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var
+		var
+			/*** Variables for Scruncher Optimization ***/
 				_undefined,
 				_false = false
-			;
+		;
 
 		/*** Private Instance Methods ***/
 			function _canonicalizeItemSpecifier (m,_itemSpecifier) {

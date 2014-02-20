@@ -37,11 +37,11 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var
+		var
+			/*** Variables for Scruncher Optimization ***/
 				_Uize_Dom_Pos = Uize.Dom.Pos,
 				_Uize_Widget_Drag = Uize.Widget.Drag
-			;
+		;
 
 		/*** Private Instance Methods ***/
 			function _fireValueChangeAfterRestEvent () {

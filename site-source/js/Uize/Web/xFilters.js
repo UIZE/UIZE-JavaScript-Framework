@@ -40,8 +40,8 @@ Uize.module ({
 	builder:function (_object) {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var
+		var
+			/*** Variables for Scruncher Optimization ***/
 				_true = true,
 				_false = false,
 				_undefined,
@@ -50,9 +50,8 @@ Uize.module ({
 				_isNode = _Uize_Dom_Basics.isNode,
 				_window = _Uize.global(),
 				_document = _window.document,
-
 				_objectPrototype = _object.prototype
-			;
+		;
 
 		/*** Utility Functions ***/
 			var

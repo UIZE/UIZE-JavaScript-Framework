@@ -29,8 +29,10 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		/*** Variables for Performance Optimization ***/
-			var _Uize_Dom_Classes_setState = Uize.Dom.Classes.setState;
+		var
+			/*** Variables for Performance Optimization ***/
+				_Uize_Dom_Classes_setState = Uize.Dom.Classes.setState
+		;
 
 		/*** Private Instance Methods ***/
 			function _updateUiSegmentsState () {

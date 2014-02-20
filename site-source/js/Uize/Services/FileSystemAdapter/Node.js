@@ -29,15 +29,13 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var
+		var
+			/*** Variables for Scruncher Optimization ***/
 				_undefined,
 				_true = true,
-				_false = false
-			;
-
-		/*** Utility Functions ***/
-			var _getParentFolderPath = _superclass.getParentFolderPath;
+				_false = false,
+				_getParentFolderPath = _superclass.getParentFolderPath
+		;
 
 		return _superclass.subclass ({
 			instanceMethods:{

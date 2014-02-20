@@ -21,18 +21,18 @@
 		The =Uize.Web.xEffects= module extends the =Uize.Web= object by adding functionality for animation effects.
 
 		*DEVELOPERS:* `Ben Ilegbodu`, original code donated by `Zazzle Inc.`
-		
+
 		The =Uize.Web.xEffects= module is an extension module that extends the =Uize.Web= class. Pages that want to leverage the syntax-friendly nature of =Uize.Web= may not need to leverage any animation effects. Therefore, the animation effects functionality is not implemented in the =Uize.Web= class in order to reduce the need for loading the extra code.  Instead, in order to include the animation effects, one needs to require the =Uize.Web.xEffects= extension module.
-		
+
 		Key Features
 			The =Uize.Web.xEffects= extension module provides the following features...
-			
+
 			Queued Animations Methods
 				document...
-				
+
 			Queue Management Methods
 				document...
-				
+
 			Display Animations Methods
 				document...
 */
@@ -42,29 +42,23 @@ Uize.module ({
 	required:'Uize.Dom.Basics',
 	builder:function (_object) {
 		'use strict';
-		
-		/*** Variables for Scruncher Optimization ***/
-			var
+
+		var
+			/*** Variables for Scruncher Optimization ***/
 				_true = true,
 				_false = false,
 				_null = null,
 				_undefined,
-
 				_Uize = Uize,
 				_Uize_Dom_Basics = _Uize.Dom.Basics,
-
 				_Uize_isFunction = _Uize.isFunction,
 				_Uize_isPlainObject = _Uize.isPlainObject,
 				_Uize_copyInto = _Uize.copyInto,
-				
 				_Uize_Dom_Basics_getStyle = _Uize_Dom_Basics.getStyle,
 				_Uize_Dom_Basics_setStyle = _Uize_Dom_Basics.setStyle,
+				_objectPrototype = _object.prototype,
 
-				_objectPrototype = _object.prototype
-			;
-
-		/*** General Variables ***/
-			var
+			/*** General Variables ***/
 				_animationSpeeds = {
 					slow:600,
 					fast:200
@@ -95,7 +89,7 @@ Uize.module ({
 						curve:'easeOutBounce'
 					}
 				}
-			;
+		;
 
 		/*** Utility Functions ***/
 			var
@@ -109,21 +103,21 @@ Uize.module ({
 					);
 				}
 			;
-			
+
 		/*** Implement Hook Methods ***/
 			var _previousAtEndOfConstructor = _objectPrototype.atEndOfConstructor;
-			
+
 			_objectPrototype.atEndOfConstructor = function(_nodes) {
 				var m = this;
-				
+
 				// call previous first just in case it's defined by base (or another extension)
 				_previousAtEndOfConstructor.call(m, _nodes);
-				
+
 				/* effects queue */
 					m._queue = [];
 					m._activeFadeObjects = [];
 			};
-			
+
 		/*** Private Instance Methods ***/
 			_objectPrototype._animateDisplay = function(_mustDisplay, _displayProperties, _duration, _callback, _timing) {
 				var
@@ -137,7 +131,7 @@ Uize.module ({
 							_opacityProperties = {opacity:0},
 							_xProperties = {
 								width:0,
-								
+
 								// need to do margins & paddings since we're using the style width and not offsetWidth
 								marginRight:0,
 								marginLeft:0,
@@ -146,25 +140,25 @@ Uize.module ({
 							},
 							_yProperties = {
 								height:0,
-								
+
 								// need to do margins & paddings since we're using the style height and not offsetHeight
 								marginTop:0,
 								marginBottom:0,
 								paddingTop:0,
 								paddingBottom:0
 							},
-							
+
 							_animateOpacity = _displayProperties._opacity,
 							_animateX = _displayProperties._x,
 							_animateY = _displayProperties._y,
-							
+
 							_animateProperties = _Uize_copyInto(
 								{},
 								_animateOpacity ? _opacityProperties : _null,
 								_animateX ? _xProperties : _null,
 								_animateY ? _yProperties : _null
 							),
-							
+
 							_nodesLength = m.length,
 							_doneNo = 0,
 							_animationOptions = _Uize_isPlainObject(_duration)
@@ -179,7 +173,7 @@ Uize.module ({
 						// update the reference to callback, since we want everything
 						// drived from _animationOptions
 						_callback = _animationOptions.callback;
-						
+
 						m.each(
 							function() {
 								var
@@ -187,12 +181,12 @@ Uize.module ({
 									_nodeMustDisplay = _mustDisplay,
 									_nodeIsHidden = _Uize_Dom_Basics_getStyle(_node, 'display') == 'none'
 								;
-								
+
 								// _mustDisplay will be null or undefined if we're trying to do a toggle operation.
 								// then _mustDisplay will be fixed based upon whether or not the node is hidden
 								if (_nodeMustDisplay == _null)
 									_nodeMustDisplay = _nodeIsHidden;
-								
+
 								// display the node (for style calculations) by:
 								// - first checking to see if it's already visible
 								// - second removing display value on the node
@@ -202,7 +196,7 @@ Uize.module ({
 									_Uize_Dom_Basics_getStyle(_node, 'display') == 'none'
 										&& _Uize_Dom_Basics_display(_node);
 								}
-		
+
 								var
 									_propertiesFinal = _nodeMustDisplay
 										? _Uize_Dom_Basics_getStyle(_node, _animateProperties)
@@ -220,14 +214,14 @@ Uize.module ({
 									),
 									_propertiesToRestore = {}
 								;
-								
+
 								// build list of style properties actually set on the node itself
 								// so we can set them back when we're done
 								for (var _styleProperty in _restoreProperties) {
 									var _styleValue = _node.style[_styleProperty];
 									_propertiesToRestore[_styleProperty] = _styleValue != 'auto' ? _styleValue : '';
 								}
-	
+
 								// set initial state before
 								// NOTE: setting here instead of as the "start" property of animate
 								// so that it happens immediately and not after all the processing/queueing
@@ -239,7 +233,7 @@ Uize.module ({
 											? {
 												// for clipping while animating (won't actually get animated)
 												overflow:'hidden',
-										
+
 												// Apparently IE doesn't update overflow when overflowX/Y are the same
 												overflowX:'hidden',
 												overflowY:'hidden'
@@ -260,13 +254,13 @@ Uize.module ({
 											callback:function() {
 												// Now that we're done, "cleanse" the style properties by resetting them
 												_Uize_Dom_Basics_setStyle(_node, _propertiesToRestore);
-												
+
 												// Hide the node if we were actually trying to hide it
 												!_nodeMustDisplay && _Uize_Dom_Basics_display(_node, _false);
-												
+
 												// finally call callback
 												_Uize_isFunction(_callback) && _callback.call(_node);
-												
+
 												// go to the next element in the effects queue (if any)
 												// when all nodes have been animated
 												// we could call this before the callback, just in case the callback takes
@@ -281,7 +275,7 @@ Uize.module ({
 						);
 					}
 				);
-				
+
 				return m;
 			};
 
@@ -297,14 +291,14 @@ Uize.module ({
 					_queue.shift()(); // dequeue and call immediately
 				}
 			};
-		
+
 			_objectPrototype._enqueue = function(_effectToExec) {
 				this._queue.push(_effectToExec) == 1
 					&& !this._queueInUse
 					&& this._dequeue() // if this is the first effect added to the queue we need to start it
 				;
 			};
-		
+
 		/*** Public Instance Methods ***/
 			/** Animation **/
 				_objectPrototype.animate = function(_styleProperties, _duration, _callback, _timing) {
@@ -317,7 +311,7 @@ Uize.module ({
 						_stepCallback = _options.stepCallback,
 						_startStyleProperties = _options.start
 					;
-					
+
 					if (!_Uize.isEmpty(_options)) {
 						_duration = _options.duration;
 						_callback = _options.callback;
@@ -329,10 +323,10 @@ Uize.module ({
 						_timingInfo = !_timingIsFunction ? _timings[_timing] || _defaultTimingInfo : _null,
 						_execAnimation = function() {
 							var _modulesToRequire = ['Uize.Fx'];
-							
+
 							// ensure valid duration
 							_duration = _getDuration(_duration);
-							
+
 							// get timing info if timing isn't a function so we can build a timing function
 							!_timingIsFunction
 								&& _modulesToRequire.push( // also need to require curve module (if we don't already have a timing function
@@ -377,11 +371,11 @@ Uize.module ({
 														Done:function() {
 															// remove in FIFO order
 															_activeFadeObjects.shift();
-															
+
 															// call user-supplied callback
 															_Uize_isFunction(_callback)
 																&& _callback.call(_node);
-																
+
 															// if we used the queue, move on to the next effect in the queue
 															if (++_doneNo == _nodesLength && _useQueue)
 																m._dequeue()
@@ -409,60 +403,60 @@ Uize.module ({
 						? _execAnimation() // just call immediately
 						: m._enqueue(_execAnimation) // add to the queue
 					;
-					
+
 					return m;
 					/*?
 						Instance Methods
 							animate
 								Performs custom animation of a set of CSS style properties on the matched set of DOM nodes.
-	
+
 								SYNTAX
 								........................................................
 								myWeb = myWeb.animate(stylePropertiesOBJ, durationMsINT, callbackFUNC, timingSTRorFUNC);
 								........................................................
-								
+
 								The stylePropertiesOBJ Parameter
 									document...
-									
+
 								The durationMsINT Parameter
 									document...
-									
+
 								The callbackFUNC Parameter
 									document...
-									
+
 								The timingSTRorFUNC Parameter
 									document...
-								
+
 								VARIATION
 								........................................................
 								myWeb = myWeb.animate(stylePropertiesOBJ, animationOptionsOBJ);
 								........................................................
-								
+
 								The animationOptionsOBJ Parameter
 									duration
 										document
-										
+
 									callback
 										document
-										
+
 									timing
 										document
-										
+
 									start
 										document
-										
+
 									startCallback
 										document
-										
+
 									step
 										document
-										
+
 									stepCallback
 										document
-										
+
 									useQueue
 										document
-								
+
 								NOTES
 								- Returns a reference to the same =Uize.Web= object
 								- See also related =delay= method
@@ -477,12 +471,12 @@ Uize.module ({
 						Instance Methods
 							clearQueue
 								Remove all items from the queue that have not yet been run.
-	
+
 								SYNTAX
 								........................................................
 								myWeb = myWeb.clearQueue();
 								........................................................
-								
+
 								NOTES
 								- Returns a reference to the same =Uize.Web= object
 					*/
@@ -502,7 +496,7 @@ Uize.module ({
 									_getDuration(_duration)
 								)
 							;
-							
+
 							// instead of adding a fade object, just add "stop" function
 							_activeFadeObjects.push(function() { clearTimeout(_timeoutId) });
 						}
@@ -512,31 +506,31 @@ Uize.module ({
 						Instance Methods
 							delay
 								Sets a timer for the specified duration to delay the execution of subsequent items in the queue.
-	
+
 								SYNTAX
 								........................................................
 								myWeb = myWeb.delay(durationMsINT);
 								........................................................
-	
+
 								VARIATION 1
 								........................................................
 								myWeb = myWeb.delay(durationMsINT, callbackFUNC);
 								........................................................
-	
+
 								VARIATION 2
 								........................................................
 								myWeb = myWeb.delay();
 								........................................................
-								
+
 								NOTES
 								- Returns a reference to the same =Uize.Web= object
 								- See also related =animate= method
 					*/
 				};
-				
+
 				_objectPrototype.queue = function(_param) {
 					var m = this;
-					
+
 					if (_param == _undefined)
 						return m._queue;
 					else {
@@ -558,7 +552,7 @@ Uize.module ({
 							m.clearQueue();
 							_Uize.forEach(_param, _enqueueCallbackWithDequeue);
 						}
-						
+
 						return m;
 					}
 				};
@@ -567,93 +561,93 @@ Uize.module ({
 							queue
 								get
 									Returns the current queue of effects to be executed on the matched set of DOM nodes.
-		
+
 									SYNTAX
 									........................................................
 									queueARRAY = myWeb.queue();
 									........................................................
-									
+
 									NOTES
 									- Returns a reference to the actual effects queue, so manipulating the array affects the underlying queue as well.
-									
+
 								set
 									Adds a callback to the effects queue to be executed once for each of the matched set of DOM nodes.
-		
+
 									SYNTAX
 									........................................................
 									myWeb = myWeb.queue(callbackFUNC);
 									........................................................
-		
+
 									SYNTAX
 									........................................................
 									myWeb = myWeb.queue(newQueueARRAY);
 									........................................................
-									
+
 									NOTES
 									- Returns a reference to the same =Uize.Web= object
 									- See also related =animate= & =delay= methods
 					*/
-			
+
 				_objectPrototype.stop = function(_jumpToEnd, _clearQueue) {
 					var
 						m = this,
 						_activeFadeObjects = m._activeFadeObjects
 					;
-					
+
 					if (_activeFadeObjects.length) {
 						for (var _fadeNo = -1, _activeFadeObjectsLength = _activeFadeObjects.length; ++_fadeNo < _activeFadeObjectsLength;) {
 							var _activeFadeObject = _activeFadeObjects[_fadeNo];
-							
+
 							if (_Uize_isFunction(_activeFadeObject))
 								_activeFadeObject(); // delay setTimeout
 							else {
 								// stop the fade
 								_activeFadeObject.stop();
-								
+
 								// set the end value of each node if _jumpToEnd is true
 								_jumpToEnd
 									&& _Uize_Dom_Basics_setStyle(m[_fadeNo], _activeFadeObject.get('endValue'))
 								;
 							}
 						}
-						
+
 						// we stopped them all, so there should be no more active ones
 						_activeFadeObjects.length = 0;
 					}
-					
+
 					if (_clearQueue) // remove all queued animations
 						m.clearQueue();
-					
+
 					// go to the next queued animation (if one exists)
 					m._dequeue();
-					
+
 					return m;
 					/*?
 						Instance Methods
 							stop
 								Stops the currently running animation on the matched set of DOM nodes.
-	
+
 								SYNTAX
 								........................................................
 								myWeb = myWeb.stop();
 								........................................................
-	
+
 								VARIATION 1
 								........................................................
 								myWeb = myWeb.stop(jumpToEndBOOL);
 								........................................................
-	
+
 								VARIATION 2
 								........................................................
 								myWeb = myWeb.stop(jumpToEndBOOL, clearQueueBOOL);
 								........................................................
-								
+
 								NOTES
 								- Returns a reference to the same =Uize.Web= object
 								- See related =animate= method
 					*/
 				};
-				
+
 			/** Display-related methods **/
 				var _makeDisplayMethods = function(_methodNames, _displayProperties, _animationOptional) {
 					// NOTE: The array of methodNames contains three method names:
@@ -709,113 +703,113 @@ Uize.module ({
 						);
 					};
 				};
-				
+
 				_makeDisplayMethods(['show', 'hide', 'toggleShow', 'display'], {_opacity:1,_x:1,_y:1}, _true);
 					/*?
 						Instance Methods
 							show
 								Displays each of the set of matched DOM nodes by both fading in and sliding out horizontally & vertically.
-	
+
 								SYNTAX
 								........................................................
 								myWeb = myWeb.show(durationMsINTorSTR);
 								........................................................
-	
+
 								VARIATION 1
 								........................................................
 								myWeb = myWeb.show(durationMsINTorSTR, callbackFUNC);
 								........................................................
-	
+
 								VARIATION 2
 								........................................................
 								myWeb = myWeb.show(durationMsINTorSTR, callbackFUNC, timingSTRorFUNC);
 								........................................................
-	
+
 								VARIATION 3
 								........................................................
 								myWeb = myWeb.show(animationOptionsOBJ);
 								........................................................
-								
+
 								NOTES
 								- Returns a reference to the same =Uize.Web= object
 								- See =Uize.Web= base module for calling =show= without any animation
 								- See the companion =hide= and =toggleShow= methods
 								- See the related =fadeIn=, =slideDown= and =slideOut= methods
 								- See =animate= method for more details on animation
-								
+
 							hide
 								Hides each of the set of matched DOM nodes by both fading out and sliding in horizontally & vertically.
-	
+
 								SYNTAX
 								........................................................
 								myWeb = myWeb.hide(durationMsINTorSTR);
 								........................................................
-	
+
 								VARIATION 3
 								........................................................
 								myWeb = myWeb.hide(animationOptionsOBJ);
 								........................................................
-								
+
 								NOTES
 								- Returns a reference to the same =Uize.Web= object
 								- See =Uize.Web= base module for calling =hide= without any animation
 								- See the companion =display= and =toggleShow= methods
 								- See the related =fadeOut=, =slideUp= and =slideIn= methods
 								- See =animate= method for more details on animation
-								
+
 							toggleShow
 								Displays or hides each of the set of matched DOM nodes by both fading and sliding horizontally & vertically, depending on their current displayed state.
-	
+
 								SYNTAX
 								........................................................
 								myWeb = myWeb.toggleShow(durationMsINTorSTR);
 								........................................................
-	
+
 								VARIATION 1
 								........................................................
 								myWeb = myWeb.toggleShow(durationMsINTorSTR, callbackFUNC);
 								........................................................
-	
+
 								VARIATION 2
 								........................................................
 								myWeb = myWeb.toggleShow(durationMsINTorSTR, callbackFUNC, timingSTRorFUNC);
 								........................................................
-	
+
 								VARIATION 3
 								........................................................
 								myWeb = myWeb.toggleShow(animationOptionsOBJ);
 								........................................................
-								
+
 								NOTES
 								- Returns a reference to the same =Uize.Web= object
 								- See =Uize.Web= base module for calling =toggleShow= without any animation
 								- See the companion =display= and =hide= methods
 								- See the related =toggleFade=, =toggleSlideY= and =toggleSlideX= methods
 								- See =animate= method for more details on animation
-								
+
 							display
 								Displays or hides each of the set of matched DOM nodes by both fading in/out and sliding out horizontally & vertically.
-	
+
 								SYNTAX
 								........................................................
 								myWeb = myWeb.display(mustDisplayBOOL, durationMsINTorSTR);
 								........................................................
-	
+
 								VARIATION 1
 								........................................................
 								myWeb = myWeb.display(mustDisplayBOOL, durationMsINTorSTR, callbackFUNC);
 								........................................................
-	
+
 								VARIATION 2
 								........................................................
 								myWeb = myWeb.display(mustDisplayBOOL, durationMsINTorSTR, callbackFUNC, timingSTRorFUNC);
 								........................................................
-	
+
 								VARIATION 3
 								........................................................
 								myWeb = myWeb.display(mustDisplayBOOL, animationOptionsOBJ);
 								........................................................
-								
+
 								NOTES
 								- Returns a reference to the same =Uize.Web= object
 								- See =Uize.Web= base module for calling =display= without any animation
@@ -828,129 +822,129 @@ Uize.module ({
 						Instance Methods
 							fadeIn
 								Displays each of the set of matched DOM nodes by fading them to opaque.
-	
+
 								SYNTAX
 								........................................................
 								myWeb = myWeb.fadeIn();
 								........................................................
-	
+
 								VARIATION 1
 								........................................................
 								myWeb = myWeb.fadeIn(durationMsINTorSTR);
 								........................................................
-	
+
 								VARIATION 2
 								........................................................
 								myWeb = myWeb.fadeIn(durationMsINTorSTR, callbackFUNC);
 								........................................................
-	
+
 								VARIATION 3
 								........................................................
 								myWeb = myWeb.fadeIn(durationMsINTorSTR, callbackFUNC, timingSTRorFUNC);
 								........................................................
-	
+
 								VARIATION 4
 								........................................................
 								myWeb = myWeb.fadeIn(animationOptionsOBJ);
 								........................................................
-								
+
 								NOTES
 								- Returns a reference to the same =Uize.Web= object
 								- See the companion =fadeTo=, =fadeOut= and =toggleFade= methods
 								- See the related =display=, =slideDown= and =slideOut= methods
 								- See =animate= method for more details on animation
-								
+
 							fadeOut
 								Hides each of the set of matched DOM nodes by fading them to transparent.
-	
+
 								SYNTAX
 								........................................................
 								myWeb = myWeb.fadeOut();
 								........................................................
-	
+
 								VARIATION 1
 								........................................................
 								myWeb = myWeb.fadeOut(durationMsINTorSTR);
 								........................................................
-	
+
 								VARIATION 2
 								........................................................
 								myWeb = myWeb.fadeOut(durationMsINTorSTR, callbackFUNC);
 								........................................................
-	
+
 								VARIATION 3
 								........................................................
 								myWeb = myWeb.fadeOut(durationMsINTorSTR, callbackFUNC, timingSTRorFUNC);
 								........................................................
-	
+
 								VARIATION 4
 								........................................................
 								myWeb = myWeb.fadeOut(animationOptionsOBJ);
 								........................................................
-								
+
 								NOTES
 								- Returns a reference to the same =Uize.Web= object
 								- See the companion =fadeTo=, =fadeIn= and =toggleFade= methods
 								- See the related =hide=, =slideUp= and =slideIn= methods
 								- See =animate= method for more details on animation
-								
+
 							toggleFade
 								Displays or hides each of the set of matched DOM nodes by animating their opacity, depending on their current displayed state.
-	
+
 								SYNTAX
 								........................................................
 								myWeb = myWeb.toggleFade();
 								........................................................
-	
+
 								VARIATION 1
 								........................................................
 								myWeb = myWeb.toggleFade(durationMsINTorSTR);
 								........................................................
-	
+
 								VARIATION 2
 								........................................................
 								myWeb = myWeb.toggleFade(durationMsINTorSTR, callbackFUNC);
 								........................................................
-	
+
 								VARIATION 3
 								........................................................
 								myWeb = myWeb.toggleFade(durationMsINTorSTR, callbackFUNC, timingSTRorFUNC);
 								........................................................
-	
+
 								VARIATION 4
 								........................................................
 								myWeb = myWeb.toggleFade(animationOptionsOBJ);
 								........................................................
-								
+
 								NOTES
 								- Returns a reference to the same =Uize.Web= object
 								- See the companion =fadeTo=, =fadeIn= and =fadeOut= methods
 								- See the related =toggleShow=, =toggleSlideY= and =toggleSlideX= methods
 								- See =animate= method for more details on animation
-								
+
 							fade
 								Displays or hides each of the set of matched DOM nodes by animating their opacity.
-	
+
 								SYNTAX
 								........................................................
 								myWeb = myWeb.fade(mustDisplayBOOL, durationMsINTorSTR);
 								........................................................
-	
+
 								VARIATION 1
 								........................................................
 								myWeb = myWeb.fade(mustDisplayBOOL, durationMsINTorSTR, callbackFUNC);
 								........................................................
-	
+
 								VARIATION 2
 								........................................................
 								myWeb = myWeb.fade(mustDisplayBOOL, durationMsINTorSTR, callbackFUNC, timingSTRorFUNC);
 								........................................................
-	
+
 								VARIATION 3
 								........................................................
 								myWeb = myWeb.fade(mustDisplayBOOL, animationOptionsOBJ);
 								........................................................
-								
+
 								NOTES
 								- Returns a reference to the same =Uize.Web= object
 								- See the companion =fadeIn=, =fadeTo=, =fadeOut= and =toggleFade= methods
@@ -964,167 +958,167 @@ Uize.module ({
 						Instance Methods
 							fadeTo
 								Adjusts the opacity of each of the set of matched DOM nodes
-	
+
 								SYNTAX
 								........................................................
 								myWeb = myWeb.fadeTo(opacityFLOAT);
 								........................................................
-	
+
 								VARIATION 1
 								........................................................
 								myWeb = myWeb.fadeTo(opacityFLOAT, durationMsINTorSTR);
 								........................................................
-	
+
 								VARIATION 2
 								........................................................
 								myWeb = myWeb.fadeTo(opacityFLOAT, durationMsINTorSTR, callbackFUNC);
 								........................................................
-	
+
 								VARIATION 3
 								........................................................
 								myWeb = myWeb.fadeTo(opacityFLOAT, durationMsINTorSTR, callbackFUNC, timingSTRorFUNC);
 								........................................................
-	
+
 								VARIATION 4
 								........................................................
 								myWeb = myWeb.fadeTo(opacityFLOAT, animationOptionsOBJ);
 								........................................................
-								
+
 								NOTES
 								- Returns a reference to the same =Uize.Web= object
 								- See the companion =fadeIn=, =fadeOut= and =toggleFade= methods
 								- See =animate= method for more details on animation
 					*/
 				};
-				
+
 				_makeDisplayMethods(['slideDown', 'slideUp', 'toggleSlideY', 'slideY'], {_y:1});
 					/*?
 						Instance Methods
 							slideDown
 								Displays each of the set of matched DOM nodes with a vertical sliding motion.
-	
+
 								SYNTAX
 								........................................................
 								myWeb = myWeb.slideDown();
 								........................................................
-	
+
 								VARIATION 1
 								........................................................
 								myWeb = myWeb.slideDown(durationMsINTorSTR);
 								........................................................
-	
+
 								VARIATION 2
 								........................................................
 								myWeb = myWeb.slideDown(durationMsINTorSTR, callbackFUNC);
 								........................................................
-	
+
 								VARIATION 3
 								........................................................
 								myWeb = myWeb.slideDown(durationMsINTorSTR, callbackFUNC, timingSTRorFUNC);
 								........................................................
-	
+
 								VARIATION 4
 								........................................................
 								myWeb = myWeb.slideDown(animationOptionsOBJ);
 								........................................................
-								
+
 								NOTES
 								- Returns a reference to the same =Uize.Web= object
 								- See the companion =slideUp= and =toggleSlideY= methods
 								- See the related =display=, =fadeIn= and =slideOut= methods
 								- See =animate= method for more details on animation
-								
+
 							slideUp
 								Hides each of the set of matched DOM nodes with a vertical sliding motion.
-	
+
 								SYNTAX
 								........................................................
 								myWeb = myWeb.slideUp();
 								........................................................
-	
+
 								VARIATION 1
 								........................................................
 								myWeb = myWeb.slideUp(durationMsINTorSTR);
 								........................................................
-	
+
 								VARIATION 2
 								........................................................
 								myWeb = myWeb.slideUp(durationMsINTorSTR, callbackFUNC);
 								........................................................
-	
+
 								VARIATION 3
 								........................................................
 								myWeb = myWeb.slideUp(durationMsINTorSTR, callbackFUNC, timingSTRorFUNC);
 								........................................................
-	
+
 								VARIATION 4
 								........................................................
 								myWeb = myWeb.slideUp(animationOptionsOBJ);
 								........................................................
-								
+
 								NOTES
 								- Returns a reference to the same =Uize.Web= object
 								- See the companion =slideDown= and =toggleSlideY= methods
 								- See the related =hide=, =fadeOut= and =slideIn= methods
 								- See =animate= method for more details on animation
-								
+
 							toggleSlideY
 								Displays or hides each of the set of matched DOM nodes with a vertical sliding motion, depending on their current displayed state.
-	
+
 								SYNTAX
 								........................................................
 								myWeb = myWeb.toggleSlideY();
 								........................................................
-	
+
 								VARIATION 1
 								........................................................
 								myWeb = myWeb.toggleSlideY(durationMsINTorSTR);
 								........................................................
-	
+
 								VARIATION 2
 								........................................................
 								myWeb = myWeb.toggleSlideY(durationMsINTorSTR, callbackFUNC);
 								........................................................
-	
+
 								VARIATION 3
 								........................................................
 								myWeb = myWeb.toggleSlideY(durationMsINTorSTR, callbackFUNC, timingSTRorFUNC);
 								........................................................
-	
+
 								VARIATION 4
 								........................................................
 								myWeb = myWeb.toggleSlideY(animationOptionsOBJ);
 								........................................................
-								
+
 								NOTES
 								- Returns a reference to the same =Uize.Web= object
 								- See the companion =slideDown= and =slideUp= methods
 								- See the related =toggleShow=, =toggleFade= and =toggleSlideX= methods
 								- See =animate= method for more details on animation
-								
+
 							slideY
 								Displays or hides each of the set of matched DOM nodes with a vertical sliding motion.
-	
+
 								SYNTAX
 								........................................................
 								myWeb = myWeb.slideY(mustDisplayBOOL, durationMsINTorSTR);
 								........................................................
-	
+
 								VARIATION 1
 								........................................................
 								myWeb = myWeb.toggleSlideY(mustDisplayBOOL, durationMsINTorSTR, callbackFUNC);
 								........................................................
-	
+
 								VARIATION 2
 								........................................................
 								myWeb = myWeb.toggleSlideY(mustDisplayBOOL, durationMsINTorSTR, callbackFUNC, timingSTRorFUNC);
 								........................................................
-	
+
 								VARIATION 3
 								........................................................
 								myWeb = myWeb.slideY(mustDisplayBOOL, animationOptionsOBJ);
 								........................................................
-								
+
 								NOTES
 								- Returns a reference to the same =Uize.Web= object
 								- See the companion =slideDown=, =slideUp= and =toggleSlideY= methods
@@ -1136,129 +1130,129 @@ Uize.module ({
 						Instance Methods
 							slideOut
 								Displays each of the set of matched DOM nodes with a horizontal sliding motion.
-	
+
 								SYNTAX
 								........................................................
 								myWeb = myWeb.slideOut();
 								........................................................
-	
+
 								VARIATION 1
 								........................................................
 								myWeb = myWeb.slideOut(durationMsINTorSTR);
 								........................................................
-	
+
 								VARIATION 2
 								........................................................
 								myWeb = myWeb.slideOut(durationMsINTorSTR, callbackFUNC);
 								........................................................
-	
+
 								VARIATION 3
 								........................................................
 								myWeb = myWeb.slideOut(durationMsINTorSTR, callbackFUNC, timingSTRorFUNC);
 								........................................................
-	
+
 								VARIATION 4
 								........................................................
 								myWeb = myWeb.slideOut(animationOptionsOBJ);
 								........................................................
-								
+
 								NOTES
 								- Returns a reference to the same =Uize.Web= object
 								- See the companion =slideIn= and =toggleSlideX= methods
 								- See the related =display=, =fadeIn= and =slideDown= methods
 								- See =animate= method for more details on animation
-								
+
 							slideIn
 								Hides each of the set of matched DOM nodes with a horizontal sliding motion.
-	
+
 								SYNTAX
 								........................................................
 								myWeb = myWeb.slideIn();
 								........................................................
-	
+
 								VARIATION 1
 								........................................................
 								myWeb = myWeb.slideIn(durationMsINTorSTR);
 								........................................................
-	
+
 								VARIATION 2
 								........................................................
 								myWeb = myWeb.slideIn(durationMsINTorSTR, callbackFUNC);
 								........................................................
-	
+
 								VARIATION 3
 								........................................................
 								myWeb = myWeb.slideIn(durationMsINTorSTR, callbackFUNC, timingSTRorFUNC);
 								........................................................
-	
+
 								VARIATION 4
 								........................................................
 								myWeb = myWeb.slideIn(animationOptionsOBJ);
 								........................................................
-								
+
 								NOTES
 								- Returns a reference to the same =Uize.Web= object
 								- See the companion =slideOut= and =toggleSlideX= methods
 								- See the related =hide=, =fadeOut= and =slideUp= methods
 								- See =animate= method for more details on animation
-								
+
 							toggleSlideX
 								Displays or hides each of the set of matched DOM nodes with a horizontal sliding motion, depending on their current displayed state.
-	
+
 								SYNTAX
 								........................................................
 								myWeb = myWeb.toggleSlideX();
 								........................................................
-	
+
 								VARIATION 1
 								........................................................
 								myWeb = myWeb.toggleSlideX(durationMsINTorSTR);
 								........................................................
-	
+
 								VARIATION 2
 								........................................................
 								myWeb = myWeb.toggleSlideX(durationMsINTorSTR, callbackFUNC);
 								........................................................
-	
+
 								VARIATION 3
 								........................................................
 								myWeb = myWeb.toggleSlideX(durationMsINTorSTR, callbackFUNC, timingSTRorFUNC);
 								........................................................
-	
+
 								VARIATION 4
 								........................................................
 								myWeb = myWeb.toggleSlideX(animationOptionsOBJ);
 								........................................................
-								
+
 								NOTES
 								- Returns a reference to the same =Uize.Web= object
 								- See the companion =slideOut= and =slideIn= methods
 								- See the related =toggleShow=, =toggleFade= and =toggleSlideY= methods
 								- See =animate= method for more details on animation
-								
+
 							slideX
 								Displays or hides each of the set of matched DOM nodes with a horizontal sliding motion.
-	
+
 								SYNTAX
 								........................................................
 								myWeb = myWeb.slideX(mustDisplayBOOL, durationMsINTorSTR);
 								........................................................
-	
+
 								VARIATION 1
 								........................................................
 								myWeb = myWeb.slideX(mustDisplayBOOL, durationMsINTorSTR, callbackFUNC);
 								........................................................
-	
+
 								VARIATION 2
 								........................................................
 								myWeb = myWeb.slideX(mustDisplayBOOL, durationMsINTorSTR, callbackFUNC, timingSTRorFUNC);
 								........................................................
-	
+
 								VARIATION 3
 								........................................................
 								myWeb = myWeb.slideX(mustDisplayBOOL, animationOptionsOBJ);
 								........................................................
-								
+
 								NOTES
 								- Returns a reference to the same =Uize.Web= object
 								- See the companion =slideOut=, =slideIn= and =toggleSlidex= methods

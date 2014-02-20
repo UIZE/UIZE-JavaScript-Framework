@@ -31,11 +31,11 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var
+		var
+			/*** Variables for Scruncher Optimization ***/
 				_undefined,
 				_Uize_Node = Uize.Node
-			;
+		;
 
 		/*** Private Instance Methods ***/
 			function _conformValue (_value) {

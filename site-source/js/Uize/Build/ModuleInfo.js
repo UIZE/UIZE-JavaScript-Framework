@@ -228,8 +228,8 @@ Uize.module ({
 	builder:function () {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var
+		var
+			/*** Variables for Scruncher Optimization ***/
 				_package,
 				_traceDependencies = Uize.Util.Dependencies.traceDependencies,
 				_getRawDefinitionFromCode = Uize.quarantine (
@@ -242,7 +242,7 @@ Uize.module ({
 						return _result;
 					}
 				)
-			;
+		;
 
 		return _package = Uize.package ({
 			getDefinitionFromCode:function (_moduleCode) {

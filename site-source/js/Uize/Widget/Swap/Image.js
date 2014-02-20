@@ -32,8 +32,10 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var _Uize_Node = Uize.Node;
+		var
+			/*** Variables for Scruncher Optimization ***/
+				_Uize_Node = Uize.Node
+		;
 
 		function _updateUiSrc () {
 			var m = this;

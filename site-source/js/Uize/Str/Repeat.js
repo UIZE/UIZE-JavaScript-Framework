@@ -29,15 +29,16 @@ Uize.module ({
 		'use strict';
 
 		var
-			/*** Variables for Scruncher Optimization ***/
-				_repeat,
-
 			/*** General Variables ***/
-				_repeaterArray = []
+				_repeaterArray = [],
+				_manySpaces,
+				_manySpacesLength,
+
+			/*** references to static methods used internally ***/
+				_repeat
 		;
 
 		/*** Utility Functions ***/
-			var _manySpaces, _manySpacesLength;
 			function _getManySpaces (_amount) {
 				if (!_manySpacesLength)
 					_manySpacesLength = (_manySpaces = '          '.replace (/ /g,'          ')).length // 100 spaces

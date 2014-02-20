@@ -28,11 +28,11 @@ Uize.module ({
 	builder:function () {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var
+		var
+			/*** Variables for Scruncher Optimization ***/
 				_undefined,
 				_null = null
-			;
+		;
 
 		return Uize.package ({
 			setCookie:function (_name,_value,_path,_expiration) {

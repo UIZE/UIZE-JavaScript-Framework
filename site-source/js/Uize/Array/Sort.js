@@ -209,17 +209,17 @@ Uize.module ({
 	builder:function () {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var _Function = Function;
+		var
+			/*** Variables for Scruncher Optimization ***/
+				_Function = Function,
 
-		/*** General Variables ***/
-			var
+			/*** General Variables ***/
 				_sortValues = [],
 				_ascendingSort = _Function ('a,b','return a.v<b.v?-1:a.v>b.v?1:0'),
 				_descendingSort = _Function ('a,b','return a.v<b.v?1:a.v>b.v?-1:0'),
 				_ascendingSimpleSort = _Function ('a,b','return a<b?-1:a>b?1:0'),
 				_descendingSimpleSort = _Function ('a,b','return a<b?1:a>b?-1:0')
-			;
+		;
 
 		return Uize.package ({
 			sortBy:function (_elements,_sortValueGenerator,_direction) {

@@ -98,7 +98,7 @@ Uize.module ({
 				_privatesNamespace = 'Uize.Widget.Dialog.xResizable.',
 				_pResizer = _privatesNamespace + 'resizer',
 				_pResizerInitialized = _privatesNamespace + 'resizerInitialized'
-			;
+		;
 
 		/*** Private Instance Methods ***/
 			function _createResizerIfNecessary (m) {

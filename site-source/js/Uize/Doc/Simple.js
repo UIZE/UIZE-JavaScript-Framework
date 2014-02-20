@@ -38,16 +38,14 @@ Uize.module ({
 	builder:function () {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var
+		var
+			/*** Variables for Scruncher Optimization ***/
 				_undefined,
 				_string = 'string',
 				_limitLength = Uize.Str.Limit.limitLength,
-				_htmlEncode = Uize.Util.Html.Encode.encode
-			;
+				_htmlEncode = Uize.Util.Html.Encode.encode,
 
-		/*** General Variables ***/
-			var
+			/*** General Variables ***/
 				_bulletCharRegExpStr = '[-\\*~:\\.]',
 				_bulletCharRegExp = new RegExp (_bulletCharRegExpStr),
 				_onlyBulletCharRegExp = new RegExp ('^\\s*' + _bulletCharRegExpStr + '\\s*$'),
@@ -145,7 +143,7 @@ Uize.module ({
 					}
 				},
 				_slashCharCodesMap = {47:1,92:1} // 47 is forward slash, 92 is backslash
-			;
+		;
 
 		/*** Utility Functions ***/
 			var _sectionIdToPathMap = {};

@@ -33,14 +33,14 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var
+		var
+			/*** Variables for Scruncher Optimization ***/
 				_true = true,
 				_false = false,
 				_Uize_Dom_Basics = Uize.Dom.Basics,
 				_Uize_Tooltip = Uize.Tooltip,
 				_htmlEncode = Uize.Util.Html.Encode.encode
-			;
+		;
 
 		return _superclass.subclass ({
 			instanceMethods:{

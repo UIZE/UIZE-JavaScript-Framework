@@ -150,8 +150,10 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var _Uize_Node = Uize.Node;
+		var
+			/*** Variables for Scruncher Optimization ***/
+				_Uize_Node = Uize.Node
+		;
 
 		return _superclass.subclass ({
 			alphastructor:function (_properties) {

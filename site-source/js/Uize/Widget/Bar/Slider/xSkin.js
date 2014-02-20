@@ -34,8 +34,10 @@ Uize.module ({
 	builder:function (_class) {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var _undefined;
+		var
+			/*** Variables for Scruncher Optimization ***/
+				_undefined
+		;
 
 		/*** Extend the Class ***/
 			_class.presets.Skin = {

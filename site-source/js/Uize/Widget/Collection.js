@@ -102,7 +102,7 @@ Uize.module ({
 				_true = true,
 				_false = false,
 				_undefined
-			;
+		;
 
 		/*** Private Instance Methods ***/
 			function _fireItemsChangedEvent (m) {

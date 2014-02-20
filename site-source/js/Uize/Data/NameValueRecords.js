@@ -370,11 +370,11 @@ Uize.module ({
 	builder:function () {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var
+		var
+			/*** Variables for Scruncher Optimization ***/
 				_undefined,
 				_Uize_defaultNully = Uize.defaultNully
-			;
+		;
 
 		return Uize.package ({
 			fromHash:function (_hash,_nameProperty,_valueProperty) {

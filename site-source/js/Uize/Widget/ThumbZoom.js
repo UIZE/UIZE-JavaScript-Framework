@@ -39,16 +39,16 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var
+		var
+			/*** Variables for Scruncher Optimization ***/
 				_true = true,
 				_false = false,
 				_Uize_Node = Uize.Node,
-				_Uize_Widget = Uize.Widget
-			;
+				_Uize_Widget = Uize.Widget,
 
-		/*** General Variables ***/
-			var _shield;
+			/*** General Variables ***/
+				_shield
+		;
 
 		return _superclass.subclass ({
 			alphastructor:function () {

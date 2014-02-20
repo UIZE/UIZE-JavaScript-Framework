@@ -152,8 +152,10 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var _htmlEncode = Uize.Util.Html.Encode.encode;
+		var
+			/*** Variables for Scruncher Optimization ***/
+				_htmlEncode = Uize.Util.Html.Encode.encode
+		;
 
 		/*** Private Instance Methods ***/
 			function _updateClearButtonState (m) {

@@ -32,10 +32,10 @@ Uize.module ({
 	builder:function () {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var
+		var
+			/*** Variables for Scruncher Optimization ***/
 				_undefined
-			;
+		;
 
 		return Uize.package ({
 			scrollToNode:function (_targetNode, _scrollParams) {

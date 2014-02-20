@@ -29,18 +29,16 @@ Uize.module ({
 	builder:function (_object) {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var
+		var
+			/*** Variables for Scruncher Optimization ***/
 				_undefined,
-				_objectPrototype = _object.prototype
-			;
+				_objectPrototype = _object.prototype,
 
-		/*** General Variables ***/
-			var
+			/*** General Variables ***/
 				_dummyColor1 = new _object,
 				_dummyColor2 = new _object,
 				_sacredEmptyObject = {}
-			;
+		;
 
 		/*** Utility Functions ***/
 			function _blendValues (_valueA,_valueB,_blendAmount) {

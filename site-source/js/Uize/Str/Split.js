@@ -28,16 +28,16 @@ Uize.module ({
 	builder:function () {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var _undefined;
+		var
+			/*** Variables for Scruncher Optimization ***/
+				_undefined,
 
-		/*** General Variables ***/
-			var
+			/*** General Variables ***/
 				_sacredEmptyArray = [],
 				_hasSplitUsingRegExpIssue =
 					'a,,b'.split (/,/) != 3 ||                // incorrectly dropping empty string values
 					'1-2'.split (/(-)/).join ('|') != '1|-|2' // not storing captures in result array
-			;
+		;
 
 		return Uize.package ({
 			split:function (_sourceStr,_splitter,_limit) {

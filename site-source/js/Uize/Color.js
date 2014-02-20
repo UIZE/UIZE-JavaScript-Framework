@@ -141,14 +141,14 @@ Uize.module ({
 	builder:function () {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var _undefined;
+		var
+			/*** Variables for Scruncher Optimization ***/
+				_undefined,
 
-		/*** General Variables ***/
-			var
+			/*** General Variables ***/
 				_colorNamesLookup,
 				_tupleRegExp = /(\w+)\s*\(\s*([^,\)]+)\s*,\s*([^,\)]+)\s*,\s*([^,\)]+)\s*(?:,\s*([^,\)]+)\s*)?\)/i
-			;
+		;
 
 		/*** Utility Functions ***/
 			function _byte (_value) {

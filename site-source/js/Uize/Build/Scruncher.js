@@ -70,19 +70,19 @@ Uize.module ({
 	builder:function () {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var
-				_true = true,
-				_false = false
-			;
-
 		/*** Utility Functions ***/
 			function _makeCharLookup (_charsStr,_lookupValue) {
 				return Uize.lookup (_charsStr.split (''),_lookupValue != null ? _lookupValue : _true);
 			}
 
-		/*** General Variables ***/
-			var
+		var
+			/*** Variables for Scruncher Optimization ***/
+				_true = true,
+				_false = false,
+
+			/*** General Variables ***/
+				_settings = {},
+
 				/*** token types ***/
 					_NONE = 0,
 					_WORD = 1,
@@ -141,10 +141,7 @@ Uize.module ({
 					/* TODO:
 						There might be a better way of handling this. Perhaps one builds up an operator as large as one can make it without it becoming not a valid operator, at which point one terminates the token. This approach would involve maintaining a list of valid operators, rather than a list of valid operator characters and an exception mechanism for detecting invalid operators.
 					*/
-			;
-
-		/*** Private Static Properties ***/
-			var _settings = {};
+		;
 
 		return Uize.package ({
 			scrunch:function (_sourceCode,_scruncherSettings) {

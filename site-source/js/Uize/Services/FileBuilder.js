@@ -29,13 +29,10 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var _false = false;
-
 		return _superclass.subclass ({
 			serviceMethods:{
 				buildFile:{
-					async:_false
+					async:false
 					/*?
 						Instance Methods
 							buildFile
@@ -66,7 +63,7 @@ Uize.module ({
 				},
 
 				init:{
-					async:_false
+					async:false
 					/*?
 						Instance Methods
 							init

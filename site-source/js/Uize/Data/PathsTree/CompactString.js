@@ -28,11 +28,11 @@ Uize.module ({
 	builder:function () {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var
+		var
+			/*** Variables for Scruncher Optimization ***/
 				_sacredEmptyObject = {},
 				_Uize_defaultNully = Uize.defaultNully
-			;
+		;
 
 		return Uize.package ({
 			fromCompactString:function (_compactStr,_encodingOptions) {

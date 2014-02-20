@@ -41,16 +41,14 @@ Uize.module ({
 	builder:function  (_superclass) {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var
+		var
+			/*** Variables for Scruncher Optimization ***/
 				_true = true,
 				_false = false,
 				_Uize_Node = Uize.Node,
-				_isIe = _Uize_Node.isIe
-			;
+				_isIe = _Uize_Node.isIe,
 
-		/*** General Variables ***/
-			var
+			/*** General Variables ***/
 				_ieQuirkyBoxes = _isIe && document.compatMode != 'CSS1Compat',
 				_pointIdsMap = {
 					northWest:[0,0],
@@ -63,7 +61,7 @@ Uize.module ({
 					south:[.5,1],
 					southEast:[1,1]
 				}
-			;
+		;
 
 		/*** Private Instance Methods ***/
 			function _canResizeAxis (m,_axis,_pointIds) {
@@ -187,7 +185,7 @@ Uize.module ({
 					var m = this;
 					return {left:m._left,top:m._top,width:m._width,height:m._height};
 				},
-				
+
 				initiateDrag:function (_domEvent) { this.children.move.initiate (_domEvent) },
 
 				updateUi:function () {
@@ -208,7 +206,7 @@ Uize.module ({
 										),
 										_newAreaHeight = Math.max (m._height - (_ieQuirkyBoxes ? _getBorderWidth ('Top') + _getBorderWidth ('Bottom') : 0),0)
 									;
-	
+
 									if (_isIe)
 										_newAreaWidth == m._lastAreaWidth [_areaNode]
 											? m.displayNode ('jiggler',m._jigglerShown = !m._jigglerShown)
@@ -223,14 +221,14 @@ Uize.module ({
 											height:_newAreaHeight
 										}
 									);
-	
+
 									if (Uize.isNumber (m._rotation) && _setRotation) {
 										var
 											_rotation = m._rotation,
 											_rotationString = _rotation ? 'rotate(' + Math.round (m._rotation) + 'deg)' : '',
 											_origin = _rotation ? (m._left + _newAreaWidth / 2) + 'px ' + (m._top + _newAreaHeight / 2) + 'px' : ''
 										;
-	
+
 										m.setNodeStyle (
 											'',
 											{
@@ -247,7 +245,7 @@ Uize.module ({
 												transform:_rotationString
 											}
 										);
-	
+
 										_setRotation = _false;
 									}
 								}

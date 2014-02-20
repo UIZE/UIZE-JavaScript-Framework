@@ -27,15 +27,17 @@ Uize.module ({
 	name:'Uize.Service',
 	superclass:'Uize.Class',
 	builder:function (_superclass) {
-		/*** Variables for Scruncher Optimization ***/
-			var
+		'use strict';
+
+		var
+			/*** Variables for Scruncher Optimization ***/
 				_undefined,
 				_false = false,
 				_true = true,
 
-				/*** constants ***/
-					_SERVICE_TAKING_TOO_LONG = 5000
-			;
+			/*** constants ***/
+				_SERVICE_TAKING_TOO_LONG = 5000
+		;
 
 		/*** Utility Functions ***/
 			function _log (_message) {

@@ -56,14 +56,14 @@ Uize.module ({
 	builder:function (_host) {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var
+		var
+			/*** Variables for Scruncher Optimization ***/
 				_package,
 				_undefined,
 				_blendFloats = _host.blendFloats,
 				_resolve = _host.resolve,
 				_linear = _host.linear
-			;
+		;
 
 		return _package = Uize.package ({
 			band:function (_curveFunction,_sizeX,_alignX,_sizeY,_alignY) {

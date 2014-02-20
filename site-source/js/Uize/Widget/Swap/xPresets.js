@@ -58,12 +58,12 @@ Uize.module ({
 	builder:function (_class) {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var
+		var
+			/*** Variables for Scruncher Optimization ***/
 				_true = true,
 				_false = false,
 				_none = 'none'
-			;
+		;
 
 		/*** Public Static Properties ***/
 			var

@@ -28,8 +28,8 @@ Uize.module ({
 	builder:function () {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var
+		var
+			/*** Variables for Scruncher Optimization ***/
 				_string = 'string',
 				_true = true,
 				_false = false,
@@ -37,7 +37,7 @@ Uize.module ({
 				_undefined,
 				_Infinity = Infinity,
 				_Uize_totalKeys = Uize.totalKeys
-			;
+		;
 
 		/*** General Variables ***/
 			var

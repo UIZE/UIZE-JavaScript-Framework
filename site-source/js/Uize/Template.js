@@ -138,8 +138,8 @@ Uize.module ({
 	builder:function () {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var
+		var
+			/*** Variables for Scruncher Optimization ***/
 				_package = function () {},
 				_true = true,
 				_false = false,
@@ -151,11 +151,9 @@ Uize.module ({
 					'\n':'\\n',
 					'\r':'\\r',
 					'\'':'\\\''
-				})
-			;
+				}),
 
-		/*** General Variables ***/
-			var
+			/*** General Variables ***/
 				_sacredEmptyObject = {},
 				_codeChunkStartsWithEqualsRegExp = /^\s*=/,
 				_codeChunkStartsWithAtRegExp = /^\s*@/,
@@ -165,7 +163,7 @@ Uize.module ({
 				_precedingLinebreakInPossibleWhitespaceRegExp = /^[ \t]*(\r|\n|\r\n)[ \t]*/,
 				_encodingsDelimiter = '->',
 				_encodingsChainCache = {}
-			;
+		;
 
 		/*** Utility Functions ***/
 			function _expandEncodingsChain (_expression,_encodings,_reverse,_requiredHandler) {

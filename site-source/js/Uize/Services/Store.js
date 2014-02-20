@@ -29,11 +29,11 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var
+		var
+			/*** Variables for Scruncher Optimization ***/
 				_false = false,
 				_true = true
-			;
+		;
 
 		return _superclass.subclass ({
 			serviceMethods:{

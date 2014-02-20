@@ -60,8 +60,8 @@ Uize.module ({
 	builder:function (_class) {
 		'use strict';
 
-		/*** Variables for Scruncher Optimization ***/
-			var
+		var
+			/*** Variables for Scruncher Optimization ***/
 				_true = true,
 				_false = false,
 				_outsideIn = 'outside in',
@@ -74,7 +74,7 @@ Uize.module ({
 				_start0End1KeyedToPane = {start:0,end:1,keyedTo:'pane'},
 				_start1End0KeyedToPane = {start:1,end:0,keyedTo:'pane'},
 				_start1EndPoint5KeyedToPane = {start:1,end:.5,keyedTo:'pane'}
-			;
+		;
 
 		/*** Public Static Properties ***/
 			var
