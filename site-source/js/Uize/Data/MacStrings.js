@@ -34,9 +34,6 @@ Uize.module ({
 				_undefined,
 
 			/*** General Variables ***/
-				_optionDefaults = {
-					stringComments:false  // true | false
-				},
 				_escapedCharsLookup = {
 					'\\':'\\\\',
 					'\n':'\\n',
@@ -48,11 +45,6 @@ Uize.module ({
 		;
 
 		/*** Utility Functions ***/
-			function _getDefaultedOption (_options,_optionName) {
-				var _optionValue = _options ? _options [_optionName] : _undefined;
-				return _optionValue == _undefined ? _optionDefaults [_optionName] : _optionValue;
-			}
-
 			function _getQuotedStr (_string) {
 				return '"' + _escapeReplacer (_string) + '"';
 			}
@@ -258,9 +250,8 @@ Uize.module ({
 			;
 
 		return Uize.package ({
-			from:function (_toDecode,_decodingOptions) {
+			from:function (_toDecode) {
 				var
-					_stringComments = _getDefaultedOption (_decodingOptions,'stringComments'),
 					_itemsList = new _ItemsList,
 					_strings = {}
 				;
@@ -311,11 +302,8 @@ Uize.module ({
 				*/
 			},
 
-			to:function (_toEncode,_encodingOptions) {
-				var
-					_stringComments = _getDefaultedOption (_encodingOptions,'stringComments'),
-					_lines = []
-				;
+			to:function (_toEncode) {
+				var _lines = [];
 				Uize.forEach (
 					_toEncode,
 					function (_value,_key) {_lines.push (_getQuotedStr (_key) + ' = ' + _getQuotedStr (_value) + ';')}
