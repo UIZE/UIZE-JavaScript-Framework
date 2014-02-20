@@ -25,7 +25,7 @@
 
 Uize.module ({
 	name:'Uize.Data.MacStrings',
-	required:'Uize.Data.NameValueRecords',
+	required:'Uize.Str.Replace',
 	builder:function () {
 		'use strict';
 
@@ -36,7 +36,15 @@ Uize.module ({
 			/*** General Variables ***/
 				_optionDefaults = {
 					stringComments:false  // true | false
-				}
+				},
+				_escapedCharsLookup = {
+					'\\':'\\\\',
+					'\n':'\\n',
+					'\r':'\\r',
+					'"':'\\"'
+				},
+				_escapeReplacer = Uize.Str.Replace.replacerByLookup (_escapedCharsLookup),
+				_unescapeReplacer = Uize.Str.Replace.replacerByLookup (Uize.reverseLookup (_escapedCharsLookup))
 		;
 
 		/*** Utility Functions ***/
@@ -46,15 +54,7 @@ Uize.module ({
 			}
 
 			function _getQuotedStr (_string) {
-				return (
-					'"' +
-					_string
-						.replace (/\\/g,'\\\\')
-						.replace (/\n/g,'\\n')
-						.replace (/\r/g,'\\r')
-						.replace (/"/g,'\\"') +
-					'"'
-				);
+				return '"' + _escapeReplacer (_string) + '"';
 			}
 
 			function _charsLookup (_charsStr) {
@@ -72,8 +72,7 @@ Uize.module ({
 				_currentItems = {},
 				_ItemsList = _parserClass (
 					function () {
-						var m = this;
-						m._items = m.items = [];
+						this._items = this.items = [];
 					},
 					{
 						parse:function (_source,_index) {
@@ -117,14 +116,13 @@ Uize.module ({
 						},
 
 						serialize:function () {
-							return this.isValid ? Uize.map (this._items,'value.serialize ()').join ('') : '';
+							return this.isValid ? Uize.map (this._items,'value.serialize ()').join ('\n') : '';
 						}
 					}
 				),
 
 				_SingleLineComment = _parserClass (
-					function () {
-					},
+					function () {},
 					{
 						parse:function (_source,_index) {
 							var
@@ -151,8 +149,7 @@ Uize.module ({
 				),
 
 				_MultiLineComment = _parserClass (
-					function () {
-					},
+					function () {},
 					{
 						parse:function (_source,_index) {
 							var
@@ -226,8 +223,7 @@ Uize.module ({
 				),
 
 				_StringKeyOrValue = _parserClass (
-					function () {
-					},
+					function () {},
 					{
 						parse:function (_source,_index) {
 							var
@@ -245,13 +241,7 @@ Uize.module ({
 									var _char = _source.charAt (_index);
 									if (_char == '"' && !_inEscape) {
 										m.isValid = true;
-										m.value = _source.slice (m.index + 1,_index)
-											.replace (/\\n/g,'\n')
-											.replace (/\\r/g,'\r')
-											.replace (/\\"/g,'"')
-											.replace (/\\\\/g,'\\')
-											/* TODO: implement a more robust approach to unescaping */
-										;
+										m.value = _unescapeReplacer (_source.slice (m.index + 1,_index));
 										m.length = ++_index - m.index;
 										break;
 									} else {
@@ -323,14 +313,14 @@ Uize.module ({
 
 			to:function (_toEncode,_encodingOptions) {
 				var
-					_stringComments = _getDefaultedOption (_encodingOptions,'stringComments')
+					_stringComments = _getDefaultedOption (_encodingOptions,'stringComments'),
+					_lines = []
 				;
-				return Uize.map (
-					Uize.Data.NameValueRecords.fromHash (_toEncode),
-					function (_nameValue) {
-						return _getQuotedStr (_nameValue.name) + ' = ' + _getQuotedStr (_nameValue.value) + ';';
-					}
-				).join ('\n');
+				Uize.forEach (
+					_toEncode,
+					function (_value,_key) {_lines.push (_getQuotedStr (_key) + ' = ' + _getQuotedStr (_value) + ';')}
+				);
+				return _lines.join ('\n');
 				/*?
 					Static Methods
 						Uize.Data.MacStrings.to
