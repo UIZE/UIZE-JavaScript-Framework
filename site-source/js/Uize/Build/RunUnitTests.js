@@ -40,43 +40,59 @@ Uize.module ({
 	],
 	builder:function () {
 		'use strict';
+		
+		var
+			/*** Variables for Scruncher Optimization ***/
+				_Uize = Uize,
+				_Uize_Build = _Uize.Build
+		;
 
-		return Uize.package ({
+		return _Uize.package ({
 			perform:function (_params) {
 				var
 					_libraryModuleSuffixRegExp = /\.library$/i,
-					_modulesExcludingLibraryModules = Uize.Data.Matches.values (
-						Uize.Build.Util.getJsModules (_params),
+					_testIgnoreNamespaces = _params.testIgnoreNamespaces,
+					_modulesToIgnoreRegExp = _Uize.isArray(_testIgnoreNamespaces) && !_Uize.isEmpty(_testIgnoreNamespaces)
+						? new RegExp (
+							'^('
+								+ _Uize.map (_testIgnoreNamespaces, _Uize.escapeRegExpLiteral).join ('|')
+								+ ')(\\..+|$)'
+						)
+						: null,
+					_modulesExcludingLibraryModules = _Uize.Data.Matches.values (
+						_Uize_Build.Util.getJsModules (_params),
 						function (_moduleName) {
-							return !_libraryModuleSuffixRegExp.test (_moduleName); // ignore .library modules
+							return !_libraryModuleSuffixRegExp.test (_moduleName) // ignore .library modules
+								&& (!_modulesToIgnoreRegExp || !_modulesToIgnoreRegExp.test(_moduleName))
+							;
 						}
 					),
-					_modulesLookup = Uize.lookup (_modulesExcludingLibraryModules),
+					_modulesLookup = _Uize.lookup (_modulesExcludingLibraryModules),
 					_testModuleName,
 					_testModuleRegExp = /^[a-zA-Z_\$][a-zA-Z0-9_\$]*\.Test($|\.)/,
-					_modulesInDependencyOrder = Uize.Build.ModuleInfo.traceDependencies (
-						Uize.Data.Matches.values (
+					_modulesInDependencyOrder = _Uize_Build.ModuleInfo.traceDependencies (
+						_Uize.Data.Matches.values (
 							_modulesExcludingLibraryModules,
 							function (_moduleName) {
 								return !_testModuleRegExp.test (_moduleName); // ignore test modules
 							}
 						)
 					),
-					_unitTestSuite = Uize.Test.resolve ({
+					_unitTestSuite = _Uize.Test.resolve ({
 						title:'Unit Tests Suite',
-						test:Uize.map (
+						test:_Uize.map (
 							_modulesInDependencyOrder,
 							function (_moduleName) {
 								return (
-									_modulesLookup [_testModuleName = Uize.Util.ModuleNaming.getTestModuleName (_moduleName)]
-										? Uize.Test.testModuleTest (_testModuleName)
-										: Uize.Test.requiredModulesTest (_moduleName)
+									_modulesLookup [_testModuleName = _Uize.Util.ModuleNaming.getTestModuleName (_moduleName)]
+										? _Uize.Test.testModuleTest (_testModuleName)
+										: _Uize.Test.requiredModulesTest (_moduleName)
 								);
 							}
 						)
 					})
 				;
-				Uize.Build.Util.runUnitTests (_unitTestSuite,_params.silent == 'true',_params.logFilePath);
+				_Uize_Build.Util.runUnitTests (_unitTestSuite,_params.silent == 'true',_params.logFilePath);
 			}
 		});
 	}

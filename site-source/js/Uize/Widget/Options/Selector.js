@@ -78,6 +78,7 @@ Uize.module ({
 					'Changed.values':function () {
 						_valueDetailsCache = {};
 						_addToValueDetailsCache(m.valueOf(), m._valueDetails);
+						_syncValueDetails(_valueString);
 					}
 				});
 

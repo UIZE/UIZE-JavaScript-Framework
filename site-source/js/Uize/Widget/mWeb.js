@@ -31,7 +31,7 @@ Uize.module ({
 		
 		var
 			/*** Variables for Scruncher Optimization ***/
-				_Uize = Uize;
+				_Uize = Uize
 		;
 		
 		return function(_class) {
@@ -42,8 +42,7 @@ Uize.module ({
 							_Uize.isObject(_nodeBlobOrChildWidget) && _Uize.isFunction(_nodeBlobOrChildWidget.getNode)
 								? _nodeBlobOrChildWidget.getNode() // want to wrap a Uize.Web object on the child widget's root node
 								: this.getNode(_nodeBlobOrChildWidget) // want to wrap a Uize.Web object around a child node
-						)
-					},
+						);
 						/*?
 							Instance Methods
 								web
@@ -86,7 +85,8 @@ Uize.module ({
 									- When the =impliedNodeSTRorBLOB= parameter has a value of =undefined= or is not specified, then the root node of the widget is contained by the returned =Uize.Web= object. This has the same effect as specifying the empty string. (ie. =web()= is equivalent to =web('')=)
 									- See related =getNode= instance method of =Uize.Widget=
 									- See also =Uize.Web= object
-						*/	
+						*/
+					}
 				}
 			});
 		};

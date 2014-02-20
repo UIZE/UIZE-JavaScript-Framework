@@ -291,11 +291,11 @@ Uize.module ({
 					);
 				},
 				_isWeb = function(_param) { return _Uize.getClass(_param) == _object },
-				_select = function(_param, _rootNode) {
+				_select = function(_param, _rootSelector) {
 					var _nodes;
 
 					if (_param && _Uize_isString(_param)) // selector string
-						_nodes = _object.selectCss(_param, _rootNode = _select(_rootNode)[0]);
+						_nodes = _object.selectCss(_param, _select(_rootSelector)[0]);
 					else if (_Uize_Dom_Basics_isNode(_param)) // node reference
 						_nodes = [_param];
 					else if (_isWeb(_param)) // Uize.Web object
@@ -339,10 +339,10 @@ Uize.module ({
 		/*** Constructor ***/
 			var
 				_object = Uize.noNew (
-					function (_selector, _rootNode) {
+					function (_selector, _rootSelector) {
 						var
 							m = this,
-							_nodes = m._nodes = _select(_selector, _rootNode),
+							_nodes = m._nodes = _select(_selector, _rootSelector),
 
 							_nodesLength = m.length = _nodes.length, // add public length property
 							_nodeNo = -1
@@ -1436,14 +1436,17 @@ Uize.module ({
 
 				var
 					_makeWireMethod = function(_methodName, _eventNameorNames) {
-						_objectPrototype[_methodName] = function(_handler) { return this.wire(_eventNameorNames || _methodName, _handler); };
+						_objectPrototype[_methodName] = function(_handler, _target) { return this.wire(_eventNameorNames || _methodName, _handler, _target) };
 					},
-					_wireAndTriggerComboFunc = function(_eventName, _handler, _throttle) {
-						var _throttleTimeout = 0;
+					_wireAndTriggerComboFunc = function(_eventName, _handler, _param3, _param4) {
+						var
+							_throttleTimeout = 0,
+							_param3IsNumber = _Uize.isNumber(_param3) // _param3 is throttle when a number, otherwise selector
+						;
 						return _Uize_isFunction(_handler)
 							? this.wire(
 								_eventName,
-								_Uize.isNumber(_throttle)
+								_param3IsNumber
 									? function(_event) {
 										if (!_throttleTimeout) {
 											_throttleTimeout = setTimeout(
@@ -1451,18 +1454,19 @@ Uize.module ({
 													_throttleTimeout = 0;
 													_handler(_event);
 												},
-												_throttle
+												_param3
 											);
 										}
 									}
-									: _handler
+									: _handler,
+								_param3IsNumber ? _param4 : _param3
 							)
 							: this.trigger(_eventName)
 						;
 					},
 					_makeWireAndTriggerComboMethod = function(_eventName) {
-						_objectPrototype[_eventName] = function(_handler, _throttle) {
-							return _wireAndTriggerComboFunc.call(this, _eventName, _handler, _throttle);
+						_objectPrototype[_eventName] = function(_handler, _param2, _param3) {
+							return _wireAndTriggerComboFunc.call(this, _eventName, _handler, _param2, _param3);
 						};
 					}
 				;

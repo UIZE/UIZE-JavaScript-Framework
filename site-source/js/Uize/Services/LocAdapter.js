@@ -17,7 +17,7 @@ Uize.module ({
 
 		var
 			_fileSystem = Uize.Services.FileSystem.singleton (),
-			_split = _split = Uize.Str.Split.split,
+			_split = Uize.Str.Split.split,
 			_wordSplitterRegExpComposition = Uize.Util.RegExpComposition ({
 				punctuation:/[\?!\.;,&=\-\(\)\[\]"<>]+/,
 				number:/\d+(?:\.\d+)?/,
