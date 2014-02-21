@@ -25,13 +25,17 @@
 
 Uize.module ({
 	name:'Uize.Data.MacStrings',
-	required:'Uize.Str.Replace',
+	required:[
+		'Uize.Str.Replace',
+		'Uize.Str.Whitespace'
+	],
 	builder:function () {
 		'use strict';
 
 		var
 			/*** Variables for Scruncher Optimization ***/
 				_undefined,
+				_indexOfNonWhitespace = Uize.Str.Whitespace.indexOfNonWhitespace,
 
 			/*** General Variables ***/
 				_escapedCharsLookup = {
@@ -49,10 +53,6 @@ Uize.module ({
 				return '"' + _escapeReplacer (_string) + '"';
 			}
 
-			function _charsLookup (_charsStr) {
-				return Uize.lookup (_charsStr.split (''));
-			}
-
 			function _parserClass (_constructor,_instanceMethods) {
 				Uize.copyInto (_constructor.prototype,_instanceMethods);
 				return _constructor;
@@ -60,7 +60,6 @@ Uize.module ({
 
 		/*** Parser Objects ***/
 			var
-				_whitespaceCharsLookup = _charsLookup (' \t\r\n'), // TODO: make this more exhaustive
 				_currentItems = {},
 				_ItemsList = _parserClass (
 					function () {
@@ -69,9 +68,7 @@ Uize.module ({
 					{
 						parse:function (_source,_index) {
 							function _eatWhitespace () {
-								while (_index < _sourceLength && _whitespaceCharsLookup [_source.charAt (_index)])
-									_index++
-								;
+								_index = (_indexOfNonWhitespace (_source,_index) + 1 || _sourceLength + 1) - 1;
 							}
 							var
 								m = this,
@@ -176,9 +173,7 @@ Uize.module ({
 					{
 						parse:function (_source,_index) {
 							function _eatWhitespace () {
-								while (_index < _sourceLength && _whitespaceCharsLookup [_source.charAt (_index)])
-									_index++
-								;
+								_index = (_indexOfNonWhitespace (_source,_index) + 1 || _sourceLength + 1) - 1;
 							}
 							var
 								m = this,
@@ -275,28 +270,6 @@ Uize.module ({
 							stringsOBJ = Uize.Data.MacStrings.from (macStringsSTR);
 							.......................................................
 
-							VARIATION
-							..........................................................................
-							stringsOBJ = Uize.Data.MacStrings.from (macStringsSTR,decodingOptionsOBJ);
-							..........................................................................
-
-							When the optional =decodingOptionsOBJ= parameter is specified, then...
-
-							The value of the =encodingOptionsOBJ= parameter should be an object, with properties as follows...
-
-							DECODING OPTIONS
-							....................................................................
-							{
-								stringComments:stringCommentsBOOL  // optional, defaults to false
-							}
-							....................................................................
-
-							stringComments
-								A boolean, specifying whether or not comments preceding string entries should be expressed in the resulting object as properties.
-
-								NOTES
-								- the default value for this option is =false=
-
 							NOTES
 							- see the companion =Uize.Data.MacStrings.to= static method
 				*/
@@ -318,28 +291,6 @@ Uize.module ({
 							.....................................................
 							macStringsSTR = Uize.Data.MacStrings.to (stringsOBJ);
 							.....................................................
-
-							VARIATION
-							........................................................................
-							macStringsSTR = Uize.Data.MacStrings.to (stringsOBJ,encodingOptionsOBJ);
-							........................................................................
-
-							When the optional =encodingOptionsOBJ= parameter is specified, then...
-
-							The value of the =encodingOptionsOBJ= parameter should be an object, with properties as follows...
-
-							ENCODING OPTIONS
-							....................................................................
-							{
-								stringComments:stringCommentsBOOL  // optional, defaults to false
-							}
-							....................................................................
-
-							stringComments
-								A boolean, specifying whether or not comments preceding string entries should be expressed in the resulting object as properties.
-
-								NOTES
-								- the default value for this option is =false=
 
 							NOTES
 							- see the companion =Uize.Data.MacStrings.from= static method

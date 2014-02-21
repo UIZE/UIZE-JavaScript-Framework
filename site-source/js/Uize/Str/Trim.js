@@ -25,29 +25,29 @@
 
 Uize.module ({
 	name:'Uize.Str.Trim',
+	required:'Uize.Str.Whitespace',
 	builder:function () {
 		'use strict';
 
 		var
 			/*** Variables for Scruncher Optimization ***/
-				_hasPadding,
-				_trim,
+				_Uize_Str_Whitespace = Uize.Str.Whitespace,
+				_isWhitespace = _Uize_Str_Whitespace.isWhitespace,
+				_indexOfNonWhitespace = _Uize_Str_Whitespace.indexOfNonWhitespace,
+				_lastIndexOfNonWhitespace = _Uize_Str_Whitespace.lastIndexOfNonWhitespace,
 
-			/*** General Variables ***/
-				_nonWhitespaceCharRegExp = new RegExp ('[^ \\n\\r\\t\\f\\x0b\\xa0\\u2000\\u2001\\u2002\\u2003\\u2004\\u2005\\u2006\\u2007\\u2008\\u2009\\u200a\\u200b\\u2028\\u2029\\u3000]'),
-				_whiteSpaceCharCodes = {
-					9:1, 10:1, 11:1, 12:1, 13:1, 32:1, 160:1, 8192:1, 8193:1, 8194:1, 8195:1, 8196:1, 8197:1, 8198:1, 8199:1, 8200:1, 8201:1, 8202:1, 8203:1, 8232:1, 8233:1, 12288:1
-				}
+			/*** references to static methods used internally ***/
+				_trim
 		;
 
 		return Uize.package ({
-			hasPadding:_hasPadding = function (_sourceStr) {
+			hasPadding:function (_sourceStr) {
 				var _sourceStrLength = _sourceStr.length;
 				return !!(
 					_sourceStrLength &&
 					(
-						_whiteSpaceCharCodes [_sourceStr.charCodeAt (0)] ||
-						_whiteSpaceCharCodes [_sourceStr.charCodeAt (_sourceStrLength - 1)]
+						_isWhitespace (_sourceStr.charAt (0)) ||
+						_isWhitespace (_sourceStr.charAt (_sourceStrLength - 1))
 					)
 				);
 				/*?
@@ -76,26 +76,13 @@ Uize.module ({
 			},
 
 			trim:_trim = function (_sourceStr,_side) {
-				/* NOTES:
-					- performance
-						- return early for empty string and string with no padding (avoid doing any string operation if there is no whitespace to trim)
-						- don't create regular expression (use pre-created, if necessary)
-						- try to avoid use of regular expression
-						- don't perform multiple string operations or assignments
-						- to find a non-whitespace character, check charCode and look in hash
-						- perform trim by doing slice - not replace
-					- what is whitespace? Different JS interpreters apparently interpret \s differently
-				*/
-				if (!_hasPadding (_sourceStr)) return _sourceStr;
+				if (!_sourceStr) return _sourceStr;
 				var
-					_firstNonSpaceCharPos = _side == 1 ? 0 : _sourceStr.search (_nonWhitespaceCharRegExp),
-					_lastNonSpaceCharPos = _sourceStr.length - 1
+					_sourceStrLength = _sourceStr.length,
+					_startPos = _side != 1 ? (_indexOfNonWhitespace (_sourceStr) + 1 || _sourceStrLength + 1) - 1 : 0,
+					_endPos = _side != -1 ? _lastIndexOfNonWhitespace (_sourceStr) + 1 : _sourceStrLength
 				;
-				if (_firstNonSpaceCharPos == -1) return '';
-				if (_side != -1)
-					while (_whiteSpaceCharCodes [_sourceStr.charCodeAt (_lastNonSpaceCharPos)]) _lastNonSpaceCharPos--
-				;
-				return _sourceStr.slice (_firstNonSpaceCharPos,_lastNonSpaceCharPos + 1);
+				return _startPos > 0 || _endPos < _sourceStrLength ? _sourceStr.slice (_startPos,_endPos) : _sourceStr;
 				/*?
 					Static Methods
 						Uize.Str.Trim.trim
