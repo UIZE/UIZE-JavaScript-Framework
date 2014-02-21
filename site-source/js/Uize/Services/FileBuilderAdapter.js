@@ -335,7 +335,7 @@ Uize.module ({
 										_builderInputModifiedDate,
 										_maxBuilderInputModifiedDate = _staleBefore,
 										_processBuilderInput = function (_builderInput) {
-											if (Uize.isString(_builderInput)) {
+											if (typeof _builderInput == 'string') {
 												if (
 													(_subLog = _ensureFileCurrent (_builderInput)) &&
 													(_subLog.built || _subLog.buildError)
