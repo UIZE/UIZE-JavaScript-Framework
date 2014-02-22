@@ -41,21 +41,21 @@ Uize.module ({
 			}
 
 		return Uize.mergeInto (
-			function () {
+			function (_source,_index) {
+				this.parse (_source,_index);
 			},
-
 			{
 				prototype:{
 					source:'',
 					index:0,
 					length:0,
 					isValid:false,
-					tagName:'',
+					name:'',
 
 					parse:function (_source,_index) {
 						var
 							m = this,
-							_sourceLength = (m.source = _source).length
+							_sourceLength = (m.source = _source = _source || '').length
 						;
 						m.index = _index || (_index = 0);
 						if (_tagNameStartCharsLookup [_source.charAt (_index)]) {
@@ -64,12 +64,12 @@ Uize.module ({
 								_index++
 							;
 						}
-						m.tagName = _source.slice (m.index,_index);
+						m.name = _source.slice (m.index,_index);
 						m.isValid = !!(m.length = _index - m.index);
 					},
 
 					serialize:function () {
-						return this.tagName;
+						return this.name;
 					}
 				}
 			}

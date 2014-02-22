@@ -26,6 +26,7 @@
 Uize.module ({
 	name:'Uize.Util.Xml.Tag',
 	required:[
+		'Uize.Str.Whitespace',
 		'Uize.Util.Xml.TagName',
 		'Uize.Util.Xml.TagAttributes'
 		// 'Uize.Util.Xml.NodeList'  // ISSUE: circular dependency
@@ -36,22 +37,16 @@ Uize.module ({
 		var
 			/*** Variables for Scruncher Optimization ***/
 				_Uize_Util_Xml = Uize.Util.Xml,
-
-			/*** General Variables ***/
-				_whitespaceCharsLookup = _charsLookup (' \t\r\n') // TODO: make this more exhaustive
+				_indexOfNonWhitespace = Uize.Str.Whitespace.indexOfNonWhitespace
 		;
 
-		/*** Utility Functions ***/
-			function _charsLookup (_charsStr) {
-				return Uize.lookup (_charsStr.split (''));
-			}
-
 		return Uize.mergeInto (
-			function () {
+			function (_source,_index) {
 				var m = this;
 				m.tagName = new _Uize_Util_Xml.TagName;
 				m.tagAttributes = new _Uize_Util_Xml.TagAttributes;
 				m._childNodes = m.childNodes = new _Uize_Util_Xml.NodeList;
+				m.parse (_source,_index);
 			},
 
 			{
@@ -62,18 +57,14 @@ Uize.module ({
 					isValid:false,
 
 					parse:function (_source,_index) {
+						function _eatWhitespace () {
+							_index = (_indexOfNonWhitespace (_source,_index) + 1 || _sourceLength + 1) - 1;
+						}
 						var
 							m = this,
-							_sourceLength = (m.source = _source).length
+							_sourceLength = (m.source = _source = _source || '').length
 						;
 						m.index = _index || (_index = 0);
-
-						function _eatWhitespace () {
-							while (_index < _sourceLength && _whitespaceCharsLookup [_source.charAt (_index)])
-								_index++
-							;
-						}
-
 						if (_source.charAt (_index) == '<') {
 							_index++;
 							_eatWhitespace ();
@@ -81,16 +72,25 @@ Uize.module ({
 							if (m.tagName.isValid) {
 								_index += m.tagName.length;
 								_eatWhitespace ();
-								/*
-									then expect possible attributes
-									then expect possible ">" or "/>"
-									if "/>" then
-										end parsing
-									else
-										then expect possible nodes
-										then expect closing tag to match opening tag
-										then end parsing
-								*/
+								m.tagAttributes.parse (_source,_index);
+								_index += m.tagAttributes.length;
+								_eatWhitespace ();
+								if (_source.charAt (_index) == '>') {
+									_index++;
+									m._childNodes.parse (_source,_index);
+									_index += m._childNodes.length;
+									_eatWhitespace ();
+									var
+										_closingTag = '</' + m.tagName.name + '>',
+										_closingTagLength = _closingTag.length
+									;
+									if (_source.slice (_index,_closingTagLength) == _closingTag)
+										_index += _closingTagLength
+									;
+								} else if (_source.substr (_index,2) == '/>') {
+									_index += 2;
+									m._childNodes.parse ();
+								}
 							} else {
 								_index = m.index;
 							}

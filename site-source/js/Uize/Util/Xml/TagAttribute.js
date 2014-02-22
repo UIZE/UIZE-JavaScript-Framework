@@ -26,6 +26,7 @@
 Uize.module ({
 	name:'Uize.Util.Xml.TagAttribute',
 	requires:[
+		'Uize.Str.Whitespace',
 		'Uize.Util.Xml.TagAttributeName',
 		'Uize.Util.Xml.TagAttributeValue'
 	],
@@ -35,20 +36,16 @@ Uize.module ({
 		var
 			/*** Variables for Performance Optimization ***/
 				_Uize_Util_Xml_TagAttributeName = Uize.Util.Xml.TagAttributeName,
-				_Uize_Util_Xml_TagAttributeValue = Uize.Util.Xml.TagAttributeValue
-
-			/*** General Variables ***/
-				// ...
+				_Uize_Util_Xml_TagAttributeValue = Uize.Util.Xml.TagAttributeValue,
+				_indexOfNonWhitespace = Uize.Str.Whitespace.indexOfNonWhitespace
 		;
 
-		/*** Utility Functions ***/
-			// ...
-
 		return Uize.mergeInto (
-			function () {
+			function (_source,_index) {
 				var m = this;
 				m.name = new _Uize_Util_Xml_TagAttributeName;
 				m.value = new _Uize_Util_Xml_TagAttributeValue;
+				m.parse (_source,_index);
 			},
 
 			{
@@ -59,12 +56,25 @@ Uize.module ({
 					isValid:false,
 
 					parse:function (_source,_index) {
-						/*
-							expect name
-							if whitespace
-								eat whitespace
-								expect possible value
-						*/
+						function _eatWhitespace () {
+							_index = (_indexOfNonWhitespace (_source,_index) + 1 || _sourceLength + 1) - 1;
+						}
+						var
+							m = this,
+							_sourceLength = (m.source = _source = _source || '').length
+						;
+						m.index = _index || (_index = 0);
+						m.name.parse (_source,_index);
+						if (m.name.isValid) {
+							_index += m.name.length;
+							_eatWhitespace ();
+							if (_source.charAt (_index) == "=") {
+								_index++;
+								_eatWhitespace ();
+								m.value.parse (_source,_index);
+							}
+						}
+						m.isValid = !!(m.length = _index - m.index);
 					},
 
 					serialize:function () {

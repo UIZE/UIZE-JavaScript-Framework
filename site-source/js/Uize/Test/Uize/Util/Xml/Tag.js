@@ -54,6 +54,14 @@ Uize.module ({
 				{
 					title:'',
 					test:[
+						{
+							title:'',
+							test:function () {
+								var _tagParser = new Uize.Util.Xml.Tag ('<img src="foo.png" with="100" height="200"/>');
+								console.log (_tagParser);
+								return true;
+							}
+						},
 						_parserTest (
 							'',
 							'<',
@@ -67,7 +75,7 @@ Uize.module ({
 						_parserTest (
 							'',
 							'<img>',
-							'<img'
+							'<img>'
 						)
 					]
 				}
