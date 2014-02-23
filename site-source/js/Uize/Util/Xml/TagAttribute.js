@@ -25,9 +25,9 @@
 
 Uize.module ({
 	name:'Uize.Util.Xml.TagAttribute',
-	requires:[
+	required:[
 		'Uize.Str.Whitespace',
-		'Uize.Util.Xml.TagAttributeName',
+		'Uize.Util.Xml.TagOrAttributeName',
 		'Uize.Util.Xml.TagAttributeValue'
 	],
 	builder:function () {
@@ -35,7 +35,7 @@ Uize.module ({
 
 		var
 			/*** Variables for Performance Optimization ***/
-				_Uize_Util_Xml_TagAttributeName = Uize.Util.Xml.TagAttributeName,
+				_Uize_Util_Xml_TagOrAttributeName = Uize.Util.Xml.TagOrAttributeName,
 				_Uize_Util_Xml_TagAttributeValue = Uize.Util.Xml.TagAttributeValue,
 				_indexOfNonWhitespace = Uize.Str.Whitespace.indexOfNonWhitespace
 		;
@@ -43,7 +43,7 @@ Uize.module ({
 		return Uize.mergeInto (
 			function (_source,_index) {
 				var m = this;
-				m.name = new _Uize_Util_Xml_TagAttributeName;
+				m.name = new _Uize_Util_Xml_TagOrAttributeName;
 				m.value = new _Uize_Util_Xml_TagAttributeValue;
 				m.parse (_source,_index);
 			},
@@ -72,13 +72,14 @@ Uize.module ({
 								_index++;
 								_eatWhitespace ();
 								m.value.parse (_source,_index);
+								_index += m.value.length;
 							}
 						}
 						m.isValid = !!(m.length = _index - m.index);
 					},
 
 					serialize:function () {
-						return this.isValid ? this.name.serialize () + ' ' + this.value.serialize () : '';
+						return this.isValid ? this.name.serialize () + '=' + this.value.serialize () : '';
 					}
 				}
 			}

@@ -43,9 +43,10 @@ Uize.module ({
 		;
 
 		return Uize.mergeInto (
-			function () {
+			function (_source,_index) {
 				var m = this;
 				m._nodes = m.nodes = [];
+				m.parse (_source,_index);
 			},
 
 			{
@@ -56,17 +57,11 @@ Uize.module ({
 					isValid:true,
 
 					parse:function (_source,_index) {
-						var
-							m = this,
-							_sourceLength = _source.length,
-							_nodes = m._nodes
-						;
-						m.source = _source;
-						m.index = _index || (_index = 0);
-						_nodes.length = 0;
-
 						function _tryParseNode (_nodeType) {
-							var _node = _currentNodes [_nodeType] || (_currentNodes [_nodeType] = new _Uize_Util_Xml [_nodeType]);
+							var _node =
+								_currentNodes [_nodeType] ||
+								(_currentNodes [_nodeType] = new _Uize_Util_Xml [_nodeType])
+							;
 							_node.parse (_source,_index);
 							if (_node.isValid) {
 								_nodes.push (_node);
@@ -75,6 +70,13 @@ Uize.module ({
 							}
 							return _node.isValid;
 						}
+						var
+							m = this,
+							_sourceLength = (m.source = _source = _source || '').length,
+							_nodes = m._nodes
+						;
+						_nodes.length = 0;
+						m.index = _index || (_index = 0);
 						while (_index < _sourceLength) {
 							_tryParseNode ('Tag') ||
 							_tryParseNode ('Cdata') ||

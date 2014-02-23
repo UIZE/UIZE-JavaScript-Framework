@@ -25,14 +25,27 @@
 
 Uize.module ({
 	name:'Uize.Util.Xml.TagAttributeValue',
+	required:[
+		'Uize.Util.Html.Encode',
+		'Uize.Str.Whitespace'
+	],
 	builder:function () {
 		'use strict';
 
-		/*** Utility Functions ***/
-			// ...
+		var
+			/*** Variables for Scruncher Optimization ***/
+				_undefined,
+				_Uize_Util_Html_Encode = Uize.Util.Html.Encode,
+
+			/*** Variables for Performance Optimization ***/
+				_htmlEncode = _Uize_Util_Html_Encode.encode,
+				_htmlDecode = _Uize_Util_Html_Encode.decode,
+				_indexOfWhitespace = Uize.Str.Whitespace.indexOfWhitespace
+		;
 
 		return Uize.mergeInto (
-			function () {
+			function (_source,_index) {
+				this.parse (_source,_index);
 			},
 
 			{
@@ -41,11 +54,33 @@ Uize.module ({
 					index:0,
 					length:0,
 					isValid:false,
+					value:'',
 
 					parse:function (_source,_index) {
+						var
+							m = this,
+							_sourceLength = (m.source = _source = _source || '').length
+						;
+						m.index = _index || (_index = 0);
+						var
+							_currentChar = _source.charAt (_index),
+							_currentCharIsQuote = _currentChar == '"' || _currentChar == '\'';
+						;
+						_index = (
+							_currentCharIsQuote
+								? _source.indexOf (_currentChar,_index + 1)
+								: _indexOfWhitespace (_source,_index)
+						);
+						if (_index < 0)
+							_index = _sourceLength
+						;
+						m.value = _htmlDecode (_source.slice (m.index + _currentCharIsQuote,_index));
+						m.length = _index + _currentCharIsQuote - m.index;
+						m.isValid = true;
 					},
 
 					serialize:function () {
+						return this.isValid ? '"' + _htmlEncode (this.value) + '"' : '';
 					}
 				}
 			}

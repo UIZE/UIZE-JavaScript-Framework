@@ -27,7 +27,7 @@ Uize.module ({
 	name:'Uize.Util.Xml.Tag',
 	required:[
 		'Uize.Str.Whitespace',
-		'Uize.Util.Xml.TagName',
+		'Uize.Util.Xml.TagOrAttributeName',
 		'Uize.Util.Xml.TagAttributes'
 		// 'Uize.Util.Xml.NodeList'  // ISSUE: circular dependency
 	],
@@ -43,7 +43,7 @@ Uize.module ({
 		return Uize.mergeInto (
 			function (_source,_index) {
 				var m = this;
-				m.tagName = new _Uize_Util_Xml.TagName;
+				m.tagName = new _Uize_Util_Xml.TagOrAttributeName;
 				m.tagAttributes = new _Uize_Util_Xml.TagAttributes;
 				m._childNodes = m.childNodes = new _Uize_Util_Xml.NodeList;
 				m.parse (_source,_index);
@@ -113,9 +113,11 @@ Uize.module ({
 									(_tagAttributesSerialized && ' ') + _tagAttributesSerialized +
 									(_childNodesSerialized ? '' : '/') +
 								'>' +
-								_childNodesSerialized && (
-									_childNodesSerialized +
-									'</' + _tagNameSerialized + '>'
+								(
+									_childNodesSerialized && (
+										_childNodesSerialized +
+										'</' + _tagNameSerialized + '>'
+									)
 								)
 							);
 						} else {
