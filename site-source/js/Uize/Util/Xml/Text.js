@@ -25,9 +25,18 @@
 
 Uize.module ({
 	name:'Uize.Util.Xml.Text',
+	required:'Uize.Util.Html.Encode',
 	builder:function () {
 		'use strict';
 
+		var
+			/*** Variables for Scruncher Optimization ***/
+				_Uize_Util_Html_Encode = Uize.Util.Html.Encode,
+
+			/*** Variables for Performance Optimization ***/
+				_htmlEncode = _Uize_Util_Html_Encode.encode,
+				_htmlDecode = _Uize_Util_Html_Encode.decode
+		;
 		return Uize.mergeInto (
 			function (_source,_index) {
 				this.parse (_source,_index);
@@ -49,7 +58,7 @@ Uize.module ({
 						m.index = _index || (_index = 0);
 						if (m.isValid = _source.charAt (_index) != '<') {
 							var _endPos = ((_source.indexOf ('<',_index + 1)) + 1 || _sourceLength + 1) - 1;
-							m.text = _source.slice (_index,_endPos);
+							m.text = _htmlDecode (_source.slice (_index,_endPos));
 							m.length = _endPos - _index;
 						} else {
 							m.text = '';
@@ -58,7 +67,7 @@ Uize.module ({
 					},
 
 					serialize:function () {
-						return this.text;
+						return _htmlEncode (this.text);
 					}
 				}
 			}
