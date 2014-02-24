@@ -66,11 +66,10 @@ Uize.module ({
 							_currentChar = _source.charAt (_index),
 							_currentCharIsQuote = _currentChar == '"' || _currentChar == '\'';
 						;
-						_index = (
-							_currentCharIsQuote
-								? _source.indexOf (_currentChar,_index + 1)
-								: _indexOfWhitespace (_source,_index)
-						);
+						_index = _currentCharIsQuote
+							? _source.indexOf (_currentChar,_index + 1)
+							: _indexOfWhitespace (_source,_index)
+						;
 						if (_index < 0)
 							_index = _sourceLength
 						;
