@@ -77,12 +77,15 @@ Uize.module ({
 						;
 						_nodes.length = 0;
 						m.index = _index || (_index = 0);
-						while (_index < _sourceLength) {
-							_tryParseNode ('Tag') ||
-							_tryParseNode ('Cdata') ||
-							_tryParseNode ('Comment') ||
-							_tryParseNode ('Text');
-						}
+						while (
+							_index < _sourceLength &&
+							(
+								_tryParseNode ('Tag') ||
+								_tryParseNode ('Comment') ||
+								_tryParseNode ('Cdata') ||
+								_tryParseNode ('Text')
+							)
+						);
 						m.length = _index - m.index;
 					},
 

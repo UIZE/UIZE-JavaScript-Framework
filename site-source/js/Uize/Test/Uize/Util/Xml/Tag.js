@@ -57,9 +57,9 @@ Uize.module ({
 						{
 							title:'',
 							test:function () {
-								var _tagParser = new Uize.Util.Xml.Tag ('<img src="foo.png" width="100" height="200"/>');
-								console.log (_tagParser);
-								console.log (_tagParser.serialize ());
+								var _tagParser = new Uize.Util.Xml.Tag ('<div id="goo">text node 1<!-- this is a comment --><img src="foo.png" width="100" height="200"/>text node 2<![CDATA[ this is some cdata </div> ]]>text node 3</div>');
+								//console.log (_tagParser);
+								//console.log (_tagParser.serialize ());
 								return true;
 							}
 						},

@@ -28,11 +28,9 @@ Uize.module ({
 	builder:function () {
 		'use strict';
 
-		/*** Utility Functions ***/
-			// ...
-
 		return Uize.mergeInto (
-			function () {
+			function (_source,_index) {
+				this.parse (_source,_index);
 			},
 
 			{
@@ -44,9 +42,19 @@ Uize.module ({
 					text:'',
 
 					parse:function (_source,_index) {
-						var m = this;
-						m.isValid = false;
-						m.text = '';
+						var
+							m = this,
+							_sourceLength = (m.source = _source = _source || '').length
+						;
+						m.index = _index || (_index = 0);
+						if (m.isValid = _source.charAt (_index) != '<') {
+							var _endPos = ((_source.indexOf ('<',_index + 1)) + 1 || _sourceLength + 1) - 1;
+							m.text = _source.slice (_index,_endPos);
+							m.length = _endPos - _index;
+						} else {
+							m.text = '';
+							m.length = 0;
+						}
 					},
 
 					serialize:function () {
