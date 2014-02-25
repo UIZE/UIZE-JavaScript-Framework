@@ -84,7 +84,7 @@ Uize.module ({
 										_closingTag = '</' + m.tagName.serialize () + '>',
 										_closingTagLength = _closingTag.length
 									;
-									if (_source.slice (_index,_closingTagLength) == _closingTag)
+									if (_source.substr (_index,_closingTagLength) == _closingTag)
 										_index += _closingTagLength
 									;
 								} else if (_source.substr (_index,2) == '/>') {
