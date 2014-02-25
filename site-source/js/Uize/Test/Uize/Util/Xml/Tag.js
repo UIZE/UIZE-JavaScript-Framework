@@ -58,7 +58,7 @@ Uize.module ({
 							title:'',
 							test:function () {
 								var _tagParser = new Uize.Util.Xml.NodeList (
-									'<div id="goo">text node 1<!-- this is a comment --><img src="foo.png" width="100" height="200"/><namespace:tag namespace:attr="foo">stuff</namespace:tag>text node 2<![CDATA[ this is some cdata </div> ]]>text node 3</div>'
+									'<div id="goo">text\nnode 1<!-- this is a comment --><img src="foo.png" width="100" height="200"/><namespace:tag namespace:attr="foo">stuff</namespace:tag>text node 2<![CDATA[ this is some cdata </div> ]]>text node 3</div>'
 								);
 								console.log (_tagParser);
 								console.log (_tagParser.serialize ());

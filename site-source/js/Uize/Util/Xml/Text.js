@@ -25,17 +25,21 @@
 
 Uize.module ({
 	name:'Uize.Util.Xml.Text',
-	required:'Uize.Util.Html.Encode',
+	required:[
+		'Uize.Str.Replace',
+		'Uize.Util.Html.Encode'
+	],
 	builder:function () {
 		'use strict';
 
 		var
-			/*** Variables for Scruncher Optimization ***/
-				_Uize_Util_Html_Encode = Uize.Util.Html.Encode,
-
 			/*** Variables for Performance Optimization ***/
-				_htmlEncode = _Uize_Util_Html_Encode.encode,
-				_htmlDecode = _Uize_Util_Html_Encode.decode
+				_htmlEncode = Uize.Str.Replace.replacerByLookup ({
+					'&':'&amp;',
+					'<':'&lt;',
+					'>':'&gt;'
+				}),
+				_htmlDecode = Uize.Util.Html.Encode.decode
 		;
 		return Uize.mergeInto (
 			function (_source,_index) {

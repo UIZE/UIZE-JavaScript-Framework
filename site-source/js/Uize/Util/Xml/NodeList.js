@@ -25,8 +25,6 @@
 
 /* TODO:
 	- for XML documents, support <?xml tag
-	- for tag names and attribute names, support XML namespaces
-	- for serializing text nodes, don't HTML encode linebreak characters
 */
 
 Uize.module ({
