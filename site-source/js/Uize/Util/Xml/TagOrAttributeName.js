@@ -50,6 +50,7 @@ Uize.module ({
 					index:0,
 					length:0,
 					isValid:false,
+					namespace:'',
 					name:'',
 
 					parse:function (_source,_index) {
@@ -58,18 +59,34 @@ Uize.module ({
 							_sourceLength = (m.source = _source = _source || '').length
 						;
 						m.index = _index || (_index = 0);
+						m.namespace = m.name = '';
+						m.isValid = false;
 						if (_tagNameStartCharsLookup [_source.charAt (_index)]) {
+							m.isValid = true;
 							_index++;
 							while (_index < _sourceLength && _tagNameContinueCharsLookup [_source.charAt (_index)])
 								_index++
 							;
+							if (_source.charAt (_index) == ':') {
+								m.namespace = _source.slice (m.index,_index);
+								var _namePos = ++_index;
+								if (_tagNameStartCharsLookup [_source.charAt (_index)]) {
+									_index++
+									while (_index < _sourceLength && _tagNameContinueCharsLookup [_source.charAt (_index)])
+										_index++
+									;
+									m.name = _source.slice (_namePos,_index);
+								}
+							} else {
+								m.name = _source.slice (m.index,_index);
+							}
+							m.length = _index - m.index;
 						}
-						m.name = _source.slice (m.index,_index);
-						m.isValid = !!(m.length = _index - m.index);
 					},
 
 					serialize:function () {
-						return this.name;
+						var m = this;
+						return m.isValid ? (m.namespace + (m.namespace && ':') + m.name) : '';
 					}
 				}
 			}

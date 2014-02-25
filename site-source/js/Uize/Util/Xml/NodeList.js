@@ -23,6 +23,12 @@
 		*DEVELOPERS:* `Chris van Rensburg`
 */
 
+/* TODO:
+	- for XML documents, support <?xml tag
+	- for tag names and attribute names, support XML namespaces
+	- for serializing text nodes, don't HTML encode linebreak characters
+*/
+
 Uize.module ({
 	name:'Uize.Util.Xml.NodeList',
 	required:[
@@ -36,16 +42,14 @@ Uize.module ({
 
 		var
 			/*** Variables for Scruncher Optimization ***/
-				_Uize_Util_Xml = Uize.Util.Xml,
-
-			/*** General Variables ***/
-				_currentNodes = {}
+				_Uize_Util_Xml = Uize.Util.Xml
 		;
 
 		return Uize.mergeInto (
 			function (_source,_index) {
 				var m = this;
 				m._nodes = m.nodes = [];
+				m._currentNodes = {};
 				m.parse (_source,_index);
 			},
 
@@ -59,13 +63,13 @@ Uize.module ({
 					parse:function (_source,_index) {
 						function _tryParseNode (_nodeType) {
 							var _node =
-								_currentNodes [_nodeType] ||
-								(_currentNodes [_nodeType] = new _Uize_Util_Xml [_nodeType])
+								m._currentNodes [_nodeType] ||
+								(m._currentNodes [_nodeType] = new _Uize_Util_Xml [_nodeType])
 							;
 							_node.parse (_source,_index);
 							if (_node.isValid) {
 								_nodes.push (_node);
-								_currentNodes [_nodeType] = null;
+								m._currentNodes [_nodeType] = null;
 								_index += _node.length;
 							}
 							return _node.isValid;

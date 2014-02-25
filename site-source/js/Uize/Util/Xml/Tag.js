@@ -81,7 +81,7 @@ Uize.module ({
 									_index += m._childNodes.length;
 									_eatWhitespace ();
 									var
-										_closingTag = '</' + m.tagName.name + '>',
+										_closingTag = '</' + m.tagName.serialize () + '>',
 										_closingTagLength = _closingTag.length
 									;
 									if (_source.slice (_index,_closingTagLength) == _closingTag)
