@@ -1,40 +1,25 @@
-This is a proposal document for a =Uize.Util.Xml.Document= module.
+This is a TO DO document for the =Uize.Util.Xml.Document= module.
 
-This module would provide a versatile parser and serializer to support schema-agnostic parsing of XML / xHTML / HTML documents.
+Support XML Prolog Tags
+	The parser must support XML prolog tags that could be at the start of the document and have the form...
+
+	.......................................................
+	<?xml version="1.0"?>
+	<?xml-stylesheet type="text/css" href="nutrition.css"?>
+	.......................................................
+
+Support DOCTYPE Tag
+	The parser must support DOCTYPE tags of the form...
+
+	......................................
+	<!DOCTYPE greeting SYSTEM "hello.dtd">
+	......................................
 
 To Work Out
-	The following issues need to be worked out...
-
-	Parsing Technique
-		One of the following parsing techniques should be chosen...
-
-	- *streaming* - SAX-like, with support for streamed parsing and serialization, and parse events
-	- *forwards w/ state machine* - a forward parsing approach using a state machine approach, which could be powered by a configurable pattern engine
-	- *forwards w/ parser stack* - a forward parsing approach with a parser stack, with different flavors of parser for different of the sub-components of an XML document (tag, tag name, tag attributes, etc.)
-	- *forwards regular expression* - a forward parsing approach relying on regular expressions (probably not viable)
-
-	Using a Parser Stack Approach
-		Using a parser stack approach, the parsing jobs for parsing an XML document can be handed off to different parsers, as follows...
-
-		................................
-		Xml
-			Tag
-				TagName
-				TagAttributes
-					TagAttribute
-						TagAttributeName
-						TagAttributeValue
-			Cdata
-			Comment
-			Text
-		................................
-
-		At any point in parsing a segment of text for a given parser, there will be an expected set of possible next characters. If a possible next character is an expected first character for any of the sub-parsers, then the first candidate sub-parser will be used and added to the parser stack. This could be accomplished plain through recursion, or through a single, managed stack.
-
 	Object Representation
 		JSON Representation
 			What's the best way to represent an XML document using a simple JSON object?
-			
+
 			POSSIBILITY
 			.....................
 			[
