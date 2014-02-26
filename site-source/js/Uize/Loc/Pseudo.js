@@ -153,34 +153,25 @@ Uize.module ({
 				*/
 
 			pseudoLocalize:function (_sourceStr,_options) {
-				/*** default options ***/
-					if (!_options)
-						_options = _sacredEmptyObject
-					;
-					var
-						_accent = _options.accent != _undefined ? _options.accent : true,
-						_wordSplitter = _options.wordSplitter || _defaultWordSplitterRegExp,
-						_expansion = Uize.toNumber (_options.expansion,1.3),
-						_expansionChar = _options.expansionChar != _undefined ? _options.expansionChar : '_',
-						_wrapper = _options.wrapper != _undefined ? _options.wrapper : '[]'
-					;
+				if (!_options)
+					_options = _sacredEmptyObject
+				;
 
 				/*** calculate total word char count (to be used in expansion) ***/
 					var
-						_stringSegments = _split (_sourceStr,_wordSplitter),
+						_stringSegments = _split (_sourceStr,_options.wordSplitter || _defaultWordSplitterRegExp),
 						_totalWordCharCount = 0
 					;
-					if (_expansion > 1) {
-						for (
-							var _stringSegmentNo = -2, _stringSegmentsLength = _stringSegments.length;
-							(_stringSegmentNo += 2) < _stringSegmentsLength;
-						)
-							_totalWordCharCount += _stringSegments [_stringSegmentNo].length
-						;
-					}
+					for (var _stringSegmentNo = _stringSegments.length + 1; (_stringSegmentNo -= 2) >= 0;)
+						_totalWordCharCount += _stringSegments [_stringSegmentNo].length
+					;
 
 				/*** perform pseudo-localization (on a word-by-word basis) and return result ***/
 					var
+						_accent = _options.accent != _undefined ? _options.accent : true,
+						_expansion = Uize.toNumber (_options.expansion,1.3),
+						_expansionChar = _options.expansionChar != _undefined ? _options.expansionChar : '_',
+						_wrapper = _options.wrapper != _undefined ? _options.wrapper : '[]',
 						_wrapperCenterPos = Math.ceil (_wrapper.length / 2),
 						_wrapperOpener = _wrapper.slice (0,_wrapperCenterPos),
 						_wrapperCloser = _wrapper.slice (_wrapperCenterPos),
