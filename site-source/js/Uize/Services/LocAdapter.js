@@ -96,15 +96,17 @@ Uize.module ({
 						_tokenAdded = {},
 						_tokens = []
 					;
-					_sourceStr.replace (
-						this.tokenRegExp,
-						function (_match,_tokenName) {
-							if (!_tokenAdded [_tokenName]) {
-								_tokens.push (_tokenName);
-								_tokenAdded [_tokenName] = 1;
+					if (this.tokenRegExp)
+						_sourceStr.replace (
+							this.tokenRegExp,
+							function (_match,_tokenName) {
+								if (!_tokenAdded [_tokenName]) {
+									_tokens.push (_tokenName);
+									_tokenAdded [_tokenName] = 1;
+								}
 							}
-						}
-					);
+						)
+					;
 					for (
 						var _stringSegmentNo = -2, _stringSegmentsLength = _stringSegments.length;
 						(_stringSegmentNo += 2) < _stringSegmentsLength;
