@@ -189,7 +189,7 @@ Uize.module ({
 						_wordCharCount = 0
 					;
 					return (
-						_wrapperOpener +
+						(_totalWordCharCount ? _wrapperOpener : '') +
 						Uize.map (
 							_stringSegments,
 							function (_stringSegment,_stringSegmentNo) {
@@ -213,7 +213,7 @@ Uize.module ({
 							},
 							false
 						).join ('') +
-						_wrapperCloser
+						(_totalWordCharCount ? _wrapperCloser : '')
 					);
 
 				/*?
