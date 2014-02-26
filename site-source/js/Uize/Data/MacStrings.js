@@ -27,7 +27,9 @@ Uize.module ({
 	name:'Uize.Data.MacStrings',
 	required:[
 		'Uize.Str.Replace',
-		'Uize.Str.Whitespace'
+		'Uize.Str.Whitespace',
+		'Uize.Parsers.Code.CStyleSingleLineComment',
+		'Uize.Parsers.Code.CStyleMultiLineComment'
 	],
 	builder:function () {
 		'use strict';
@@ -110,59 +112,8 @@ Uize.module ({
 					}
 				),
 
-				_SingleLineComment = _parserClass (
-					function () {},
-					{
-						parse:function (_source,_index) {
-							var
-								m = this,
-								_sourceLength = (m.source = _source).length
-							;
-							m.isValid = false;
-							m.index = _index || (_index = 0);
-							m.length = 0;
-							m.comment = '';
-							if (m.isValid = _source.substr (_index,2) == '//') {
-								_index += 2;
-								_index = Math.min (
-									(_source.indexOf ('\r',_index) + 1 || _sourceLength + 1) - 1,
-									(_source.indexOf ('\n',_index) + 1 || _sourceLength + 1) - 1
-								);
-								m.comment = _source.slice (m.index,_index);
-								m.length = _index - m.index;
-							}
-						},
-
-						serialize:function () {return this.comment}
-					}
-				),
-
-				_MultiLineComment = _parserClass (
-					function () {},
-					{
-						parse:function (_source,_index) {
-							var
-								m = this,
-								_sourceLength = (m.source = _source).length
-							;
-							m.isValid = false;
-							m.index = _index || (_index = 0);
-							m.length = 0;
-							m.comment = '';
-							if (
-								m.isValid =
-									_source.substr (_index,2) == '/*' &&
-									(_index = _source.indexOf ('*/',_index + 2)) > -1
-							) {
-								_index += 2;
-								m.comment = _source.slice (m.index,_index);
-								m.length = _index - m.index;
-							}
-						},
-
-						serialize:function () {return this.comment}
-					}
-				),
+				_SingleLineComment = Uize.Parsers.Code.CStyleSingleLineComment,
+				_MultiLineComment = Uize.Parsers.Code.CStyleMultiLineComment,
 
 				_String = _parserClass (
 					function () {
