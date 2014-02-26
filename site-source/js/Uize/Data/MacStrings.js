@@ -28,8 +28,8 @@ Uize.module ({
 	required:[
 		'Uize.Str.Replace',
 		'Uize.Str.Whitespace',
-		'Uize.Parsers.Code.CStyleSingleLineComment',
-		'Uize.Parsers.Code.CStyleMultiLineComment'
+		'Uize.Parse.Code.CStyleSingleLineComment',
+		'Uize.Parse.Code.CStyleMultiLineComment'
 	],
 	builder:function () {
 		'use strict';
@@ -112,8 +112,8 @@ Uize.module ({
 					}
 				),
 
-				_SingleLineComment = Uize.Parsers.Code.CStyleSingleLineComment,
-				_MultiLineComment = Uize.Parsers.Code.CStyleMultiLineComment,
+				_SingleLineComment = Uize.Parse.Code.CStyleSingleLineComment,
+				_MultiLineComment = Uize.Parse.Code.CStyleMultiLineComment,
 
 				_String = _parserClass (
 					function () {

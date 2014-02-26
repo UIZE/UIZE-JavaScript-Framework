@@ -1,7 +1,7 @@
 /*______________
 |       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
 |     /      /  |   ---------------------------------------------------
-|    /    O /   |    MODULE : Uize.Test.Uize.Util.Xml.Tag Class
+|    /    O /   |    MODULE : Uize.Test.Uize.Parse.Xml.Tag Class
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
 | /____/ /__/_| | COPYRIGHT : (c)2014 UIZE
@@ -18,13 +18,13 @@
 
 /*?
 	Introduction
-		The =Uize.Test.Uize.Util.Xml.Tag= module defines a suite of unit tests for the =Uize.Util.Xml.Tag= module.
+		The =Uize.Test.Uize.Parse.Xml.Tag= module defines a suite of unit tests for the =Uize.Parse.Xml.Tag= module.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 */
 
 Uize.module ({
-	name:'Uize.Test.Uize.Util.Xml.Tag',
+	name:'Uize.Test.Uize.Parse.Xml.Tag',
 	builder:function () {
 		'use strict';
 
@@ -33,7 +33,7 @@ Uize.module ({
 			return {
 				title:_title,
 				test:function () {
-					var _parser = new Uize.Util.Xml.Tag;
+					var _parser = new Uize.Parse.Xml.Tag;
 					_parser.parse (_sourceStr);
 					return (
 						this.expect (_expectedParsedSegment,_parser.tag) &&
@@ -45,11 +45,11 @@ Uize.module ({
 		}
 
 		return Uize.Test.resolve ({
-			title:'Test for Uize.Util.Xml.Tag Module',
+			title:'Test for Uize.Parse.Xml.Tag Module',
 			test:[
 				Uize.Test.requiredModulesTest ([
-					'Uize.Util.Xml.NodeList',
-					'Uize.Util.Xml.Tag'
+					'Uize.Parse.Xml.NodeList',
+					'Uize.Parse.Xml.Tag'
 				]),
 				{
 					title:'',
@@ -57,7 +57,7 @@ Uize.module ({
 						{
 							title:'',
 							test:function () {
-								var _tagParser = new Uize.Util.Xml.NodeList (
+								var _tagParser = new Uize.Parse.Xml.NodeList (
 									'<div id="goo">text\nnode 1<!-- this is a comment --><img src="foo.png" width="100" height="200"/><namespace:tag namespace:attr="foo">stuff</namespace:tag>text node 2<![CDATA[ this is some cdata </div> ]]>text node 3</div>'
 								);
 								console.log (_tagParser);

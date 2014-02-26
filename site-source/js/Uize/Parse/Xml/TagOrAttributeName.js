@@ -1,7 +1,7 @@
 /*______________
 |       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
 |     /      /  |   ---------------------------------------------------
-|    /    O /   |    MODULE : Uize.Util.Xml.TagOrAttributeName Object
+|    /    O /   |    MODULE : Uize.Parse.Xml.TagOrAttributeName Object
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
 | /____/ /__/_| | COPYRIGHT : (c)2014 UIZE
@@ -18,13 +18,13 @@
 
 /*?
 	Introduction
-		The =Uize.Util.Xml.TagOrAttributeName= module provides methods for parsing and serializing tag names of XML tags.
+		The =Uize.Parse.Xml.TagOrAttributeName= module provides methods for parsing and serializing tag names of XML tags.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 */
 
 Uize.module ({
-	name:'Uize.Util.Xml.TagOrAttributeName',
+	name:'Uize.Parse.Xml.TagOrAttributeName',
 	builder:function () {
 		'use strict';
 

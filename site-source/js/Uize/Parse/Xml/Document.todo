@@ -1,4 +1,4 @@
-This is a TO DO document for the =Uize.Util.Xml.Document= module.
+This is a TO DO document for the =Uize.Parse.Xml.Document= module.
 
 Support XML Prolog Tags
 	The parser must support XML prolog tags that could be at the start of the document and have the form...

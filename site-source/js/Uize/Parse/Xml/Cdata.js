@@ -1,7 +1,7 @@
 /*______________
 |       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
 |     /      /  |   ---------------------------------------------------
-|    /    O /   |    MODULE : Uize.Util.Xml.Comment Object
+|    /    O /   |    MODULE : Uize.Parse.Xml.Cdata Object
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
 | /____/ /__/_| | COPYRIGHT : (c)2014 UIZE
@@ -18,13 +18,13 @@
 
 /*?
 	Introduction
-		The =Uize.Util.Xml.Comment= module provides methods for parsing and serializing comments of XML documents.
+		The =Uize.Parse.Xml.Cdata= module provides methods for parsing and serializing CDATA sections of XML documents.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 */
 
 Uize.module ({
-	name:'Uize.Util.Xml.Comment',
+	name:'Uize.Parse.Xml.Cdata',
 	builder:function () {
 		'use strict';
 
@@ -39,7 +39,7 @@ Uize.module ({
 					index:0,
 					length:0,
 					isValid:false,
-					comment:'',
+					cdata:'',
 
 					parse:function (_source,_index) {
 						var
@@ -47,18 +47,18 @@ Uize.module ({
 							_sourceLength = (m.source = _source = _source || '').length
 						;
 						m.index = _index || (_index = 0);
-						if (m.isValid = _source.substr (_index,4) == '<!--') {
-							var _endPos = ((_source.indexOf ('-->',_index += 4)) + 1 || _sourceLength + 1) - 1;
-							m.comment = _source.slice (_index,_endPos);
-							m.length = _endPos - _index + 7;
+						if (m.isValid = _source.substr (_index,9) == '<![CDATA[') {
+							var _endPos = ((_source.indexOf (']]>',_index += 9)) + 1 || _sourceLength + 1) - 1;
+							m.cdata = _source.slice (_index,_endPos);
+							m.length = _endPos - _index + 12;
 						} else {
-							m.comment = '';
+							m.cdata = '';
 							m.length = 0;
 						}
 					},
 
 					serialize:function () {
-						return this.isValid ? '<!--' + this.comment + '-->' : '';
+						return this.isValid ? '<![CDATA[' + this.cdata + ']]>' : '';
 					}
 				}
 			}

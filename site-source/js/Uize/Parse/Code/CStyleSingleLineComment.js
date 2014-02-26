@@ -1,7 +1,7 @@
 /*______________
 |       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
 |     /      /  |   ---------------------------------------------------
-|    /    O /   |    MODULE : Uize.Parsers.Code.CStyleSingleLineComment Object
+|    /    O /   |    MODULE : Uize.Parse.Code.CStyleSingleLineComment Object
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
 | /____/ /__/_| | COPYRIGHT : (c)2014 UIZE
@@ -18,13 +18,13 @@
 
 /*?
 	Introduction
-		The =Uize.Parsers.Code.CStyleSingleLineComment= module defines a parser object for C-style single line comments.
+		The =Uize.Parse.Code.CStyleSingleLineComment= module defines a parser object for C-style single line comments.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 */
 
 Uize.module ({
-	name:'Uize.Parsers.Code.CStyleSingleLineComment',
+	name:'Uize.Parse.Code.CStyleSingleLineComment',
 	builder:function () {
 		'use strict';
 

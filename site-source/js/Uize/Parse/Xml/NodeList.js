@@ -1,7 +1,7 @@
 /*______________
 |       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
 |     /      /  |   ---------------------------------------------------
-|    /    O /   |    MODULE : Uize.Util.Xml.NodeList Object
+|    /    O /   |    MODULE : Uize.Parse.Xml.NodeList Object
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
 | /____/ /__/_| | COPYRIGHT : (c)2014 UIZE
@@ -18,7 +18,7 @@
 
 /*?
 	Introduction
-		The =Uize.Util.Xml.NodeList= module provides methods for parsing and serializing XML nodes.
+		The =Uize.Parse.Xml.NodeList= module provides methods for parsing and serializing XML nodes.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 */
@@ -28,19 +28,19 @@
 */
 
 Uize.module ({
-	name:'Uize.Util.Xml.NodeList',
+	name:'Uize.Parse.Xml.NodeList',
 	required:[
-		'Uize.Util.Xml.Tag',
-		'Uize.Util.Xml.Cdata',
-		'Uize.Util.Xml.Comment',
-		'Uize.Util.Xml.Text'
+		'Uize.Parse.Xml.Tag',
+		'Uize.Parse.Xml.Cdata',
+		'Uize.Parse.Xml.Comment',
+		'Uize.Parse.Xml.Text'
 	],
 	builder:function () {
 		'use strict';
 
 		var
 			/*** Variables for Scruncher Optimization ***/
-				_Uize_Util_Xml = Uize.Util.Xml
+				_Uize_Util_Xml = Uize.Parse.Xml
 		;
 
 		return Uize.mergeInto (

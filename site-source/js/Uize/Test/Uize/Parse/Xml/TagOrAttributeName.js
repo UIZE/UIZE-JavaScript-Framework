@@ -1,7 +1,7 @@
 /*______________
 |       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
 |     /      /  |   ---------------------------------------------------
-|    /    O /   |    MODULE : Uize.Test.Uize.Util.Xml.TagOrAttributeName Class
+|    /    O /   |    MODULE : Uize.Test.Uize.Parse.Xml.TagOrAttributeName Class
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
 | /____/ /__/_| | COPYRIGHT : (c)2014 UIZE
@@ -18,13 +18,13 @@
 
 /*?
 	Introduction
-		The =Uize.Test.Uize.Util.Xml.TagOrAttributeName= module defines a suite of unit tests for the =Uize.Util.Xml.TagOrAttributeName= module.
+		The =Uize.Test.Uize.Parse.Xml.TagOrAttributeName= module defines a suite of unit tests for the =Uize.Parse.Xml.TagOrAttributeName= module.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 */
 
 Uize.module ({
-	name:'Uize.Test.Uize.Util.Xml.TagOrAttributeName',
+	name:'Uize.Test.Uize.Parse.Xml.TagOrAttributeName',
 	builder:function () {
 		'use strict';
 
@@ -33,7 +33,7 @@ Uize.module ({
 			return {
 				title:_title,
 				test:function () {
-					var _parser = new Uize.Util.Xml.TagOrAttributeName;
+					var _parser = new Uize.Parse.Xml.TagOrAttributeName;
 					_parser.parse (_sourceStr,_index);
 					return (
 						this.expect (_expectedParsedSegment,_parser.name) &&
@@ -45,9 +45,9 @@ Uize.module ({
 		}
 
 		return Uize.Test.resolve ({
-			title:'Test for Uize.Util.Xml.TagOrAttributeName Module',
+			title:'Test for Uize.Parse.Xml.TagOrAttributeName Module',
 			test:[
-				Uize.Test.requiredModulesTest ('Uize.Util.Xml.TagOrAttributeName'),
+				Uize.Test.requiredModulesTest ('Uize.Parse.Xml.TagOrAttributeName'),
 				{
 					title:'Test that the parser works correctly',
 					test:[
@@ -95,7 +95,7 @@ Uize.module ({
 					title:'Test that arguments passed to the parser object\'s constructor are used for initial parsing during construction',
 					test:function () {
 						var
-							_classPrototype = Uize.Util.Xml.TagOrAttributeName.prototype,
+							_classPrototype = Uize.Parse.Xml.TagOrAttributeName.prototype,
 							_parse = _classPrototype.parse,
 							_actualParseSource,
 							_actualParseIndex
@@ -104,7 +104,7 @@ Uize.module ({
 							_actualParseSource = _source;
 							_actualParseIndex = _index;
 						};
-						var _parser = new Uize.Util.Xml.TagOrAttributeName ('foo',10);
+						var _parser = new Uize.Parse.Xml.TagOrAttributeName ('foo',10);
 						_classPrototype.parse = _parse;
 						return this.expect ('foo',_actualParseSource) && this.expect (10,_actualParseIndex);
 					}

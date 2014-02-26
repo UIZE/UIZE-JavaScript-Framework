@@ -1,7 +1,7 @@
 /*______________
 |       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
 |     /      /  |   ---------------------------------------------------
-|    /    O /   |    MODULE : Uize.Util.Xml.Text Object
+|    /    O /   |    MODULE : Uize.Parse.Code.CStyleMultiLineComment Object
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
 | /____/ /__/_| | COPYRIGHT : (c)2014 UIZE
@@ -11,36 +11,23 @@
 
 /* Module Meta Data
 	type: Object
-	importance: 4
-	codeCompleteness: 1
-	docCompleteness: 2
+	importance: 1
+	codeCompleteness: 100
+	docCompleteness: 5
 */
 
 /*?
 	Introduction
-		The =Uize.Util.Xml.Text= module provides methods for parsing and serializing text nodes of XML documents.
+		The =Uize.Parse.Code.CStyleMultiLineComment= module defines a parser object for C-style multi-line comments.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 */
 
 Uize.module ({
-	name:'Uize.Util.Xml.Text',
-	required:[
-		'Uize.Str.Replace',
-		'Uize.Util.Html.Encode'
-	],
+	name:'Uize.Parse.Code.CStyleMultiLineComment',
 	builder:function () {
 		'use strict';
 
-		var
-			/*** Variables for Performance Optimization ***/
-				_htmlEncode = Uize.Str.Replace.replacerByLookup ({
-					'&':'&amp;',
-					'<':'&lt;',
-					'>':'&gt;'
-				}),
-				_htmlDecode = Uize.Util.Html.Encode.decode
-		;
 		return Uize.mergeInto (
 			function (_source,_index) {
 				this.parse (_source,_index);
@@ -52,7 +39,7 @@ Uize.module ({
 					index:0,
 					length:0,
 					isValid:false,
-					text:'',
+					comment:'',
 
 					parse:function (_source,_index) {
 						var
@@ -60,18 +47,22 @@ Uize.module ({
 							_sourceLength = (m.source = _source = _source || '').length
 						;
 						m.index = _index || (_index = 0);
-						if (m.isValid = _source.charAt (_index) != '<') {
-							var _endPos = ((_source.indexOf ('<',_index + 1)) + 1 || _sourceLength + 1) - 1;
-							m.text = _htmlDecode (_source.slice (_index,_endPos));
-							m.length = _endPos - _index;
+						if (
+							m.isValid =
+								_source.substr (_index,2) == '/*' &&
+								(_index = _source.indexOf ('*/',_index + 2)) > -1
+						) {
+							m.comment = _source.slice (m.index + 2,_index);
+							m.length = _index + 2 - m.index;
+							console.log (m);
 						} else {
-							m.text = '';
+							m.comment = '';
 							m.length = 0;
 						}
 					},
 
 					serialize:function () {
-						return _htmlEncode (this.text);
+						return this.isValid ? '/*' + this.comment + '*/' : '';
 					}
 				}
 			}

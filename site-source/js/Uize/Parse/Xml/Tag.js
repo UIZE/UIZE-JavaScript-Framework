@@ -1,7 +1,7 @@
 /*______________
 |       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
 |     /      /  |   ---------------------------------------------------
-|    /    O /   |    MODULE : Uize.Util.Xml.Tag Object
+|    /    O /   |    MODULE : Uize.Parse.Xml.Tag Object
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
 | /____/ /__/_| | COPYRIGHT : (c)2014 UIZE
@@ -18,25 +18,25 @@
 
 /*?
 	Introduction
-		The =Uize.Util.Xml.Tag= module provides methods for parsing and serializing individual XML tags.
+		The =Uize.Parse.Xml.Tag= module provides methods for parsing and serializing individual XML tags.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 */
 
 Uize.module ({
-	name:'Uize.Util.Xml.Tag',
+	name:'Uize.Parse.Xml.Tag',
 	required:[
 		'Uize.Str.Whitespace',
-		'Uize.Util.Xml.TagOrAttributeName',
-		'Uize.Util.Xml.TagAttributes'
-		// 'Uize.Util.Xml.NodeList'  // ISSUE: circular dependency
+		'Uize.Parse.Xml.TagOrAttributeName',
+		'Uize.Parse.Xml.TagAttributes'
+		// 'Uize.Parse.Xml.NodeList'  // ISSUE: circular dependency
 	],
 	builder:function () {
 		'use strict';
 
 		var
 			/*** Variables for Scruncher Optimization ***/
-				_Uize_Util_Xml = Uize.Util.Xml,
+				_Uize_Util_Xml = Uize.Parse.Xml,
 				_indexOfNonWhitespace = Uize.Str.Whitespace.indexOfNonWhitespace
 		;
 
