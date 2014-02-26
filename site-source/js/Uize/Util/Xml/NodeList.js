@@ -1,7 +1,7 @@
 /*______________
 |       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
 |     /      /  |   ---------------------------------------------------
-|    /    O /   |    MODULE : Uize.Util.Xml.NodeList Package
+|    /    O /   |    MODULE : Uize.Util.Xml.NodeList Object
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
 | /____/ /__/_| | COPYRIGHT : (c)2014 UIZE
@@ -10,7 +10,7 @@
 */
 
 /* Module Meta Data
-	type: Package
+	type: Object
 	importance: 4
 	codeCompleteness: 1
 	docCompleteness: 2
