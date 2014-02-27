@@ -63,6 +63,20 @@ Uize.module ({
 					*/
 				},
 
+				extract:{
+					async:_true
+					/*?
+						Instance Methods
+							extract
+								Extracts resource strings from a project's source code files so that they can be organized into resource files for the project.
+
+								Depending on the type of project, this service method may have no implementation and may, therefore, not perform any action. It may not be feasible for all types of projects to support scripted extraction of strings from the source code and it may, therefore, be the developers' responsibility to manually enter resource strings into resource files for the project.
+
+								NOTES
+								- this service method is asynchronous
+					*/
+				},
+
 				metrics:{
 					async:_true
 					/*?

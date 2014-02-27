@@ -208,6 +208,10 @@ Uize.module ({
 					_callback ();
 				},
 
+				extract:function (_params,_callback) {
+					_callback ();
+				},
+
 				metrics:function (_params,_callback) {
 					var
 						m = this,
