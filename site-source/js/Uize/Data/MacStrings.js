@@ -26,10 +26,10 @@
 Uize.module ({
 	name:'Uize.Data.MacStrings',
 	required:[
-		'Uize.Str.Replace',
 		'Uize.Str.Whitespace',
 		'Uize.Parse.Code.CStyleSingleLineComment',
-		'Uize.Parse.Code.CStyleMultiLineComment'
+		'Uize.Parse.Code.CStyleMultiLineComment',
+		'Uize.Parse.Code.StringLiteral'
 	],
 	builder:function () {
 		'use strict';
@@ -38,23 +38,10 @@ Uize.module ({
 			/*** Variables for Scruncher Optimization ***/
 				_undefined,
 				_indexOfNonWhitespace = Uize.Str.Whitespace.indexOfNonWhitespace,
-
-			/*** General Variables ***/
-				_escapedCharsLookup = {
-					'\\':'\\\\',
-					'\n':'\\n',
-					'\r':'\\r',
-					'"':'\\"'
-				},
-				_escapeReplacer = Uize.Str.Replace.replacerByLookup (_escapedCharsLookup),
-				_unescapeReplacer = Uize.Str.Replace.replacerByLookup (Uize.reverseLookup (_escapedCharsLookup))
+				_Uize_Parse_Code_StringLiteral = Uize.Parse.Code.StringLiteral
 		;
 
 		/*** Utility Functions ***/
-			function _getQuotedStr (_string) {
-				return '"' + _escapeReplacer (_string) + '"';
-			}
-
 			function _parserClass (_constructor,_instanceMethods) {
 				Uize.copyInto (_constructor.prototype,_instanceMethods);
 				return _constructor;
@@ -114,6 +101,7 @@ Uize.module ({
 
 				_SingleLineComment = Uize.Parse.Code.CStyleSingleLineComment,
 				_MultiLineComment = Uize.Parse.Code.CStyleMultiLineComment,
+				_StringKeyOrValue = _Uize_Parse_Code_StringLiteral,
 
 				_String = _parserClass (
 					function () {
@@ -158,40 +146,6 @@ Uize.module ({
 							return this.isValid ? this.stringKey.serialize () + ' = ' + this.stringValue.serialize () : '';
 						}
 					}
-				),
-
-				_StringKeyOrValue = _parserClass (
-					function () {},
-					{
-						parse:function (_source,_index) {
-							var
-								m = this,
-								_sourceLength = (m.source = _source).length
-							;
-							m.isValid = false;
-							m.index = _index || (_index = 0);
-							m.length = 0;
-							m.value = '';
-							if (_source.charAt (_index) == '"') {
-								_index++;
-								var _inEscape = false;
-								while (_index < _sourceLength) {
-									var _char = _source.charAt (_index);
-									if (_char == '"' && !_inEscape) {
-										m.isValid = true;
-										m.value = _unescapeReplacer (_source.slice (m.index + 1,_index));
-										m.length = ++_index - m.index;
-										break;
-									} else {
-										_inEscape = _inEscape ? false : _char == '\\';
-										_index++;
-									}
-								}
-							}
-						},
-
-						serialize:function () {return this.isValid ? _getQuotedStr (this.value) : ''}
-					}
 				)
 			;
 
@@ -227,7 +181,15 @@ Uize.module ({
 			},
 
 			to:function (_toEncode) {
-				var _lines = [];
+				function _getQuotedStr (_value) {
+					_stringLiteralParser.value = _value;
+					_stringLiteralParser.isValid = true;
+					return _stringLiteralParser.serialize ();
+				}
+				var
+					_lines = [],
+					_stringLiteralParser = new _Uize_Parse_Code_StringLiteral
+				;
 				Uize.forEach (
 					_toEncode,
 					function (_value,_key) {_lines.push (_getQuotedStr (_key) + ' = ' + _getQuotedStr (_value) + ';')}

@@ -25,8 +25,22 @@
 
 Uize.module ({
 	name:'Uize.Parse.Code.StringLiteral',
+	required:'Uize.Str.Replace',
 	builder:function () {
 		'use strict';
+
+		var
+			/*** General Variables ***/
+				_escapedCharsLookup = {
+					'\\':'\\\\',
+					'\n':'\\n',
+					'\r':'\\r',
+					'"':'\\"',
+					'\'':'\\\''
+				},
+				_escapeReplacer = Uize.Str.Replace.replacerByLookup (_escapedCharsLookup),
+				_unescapeReplacer = Uize.Str.Replace.replacerByLookup (Uize.reverseLookup (_escapedCharsLookup))
+		;
 
 		return Uize.mergeInto (
 			function (_source,_index) {
@@ -50,23 +64,26 @@ Uize.module ({
 						var _currentChar = _source.charAt (_index);
 						if (m.isValid = _currentChar == '"' || _currentChar == '\'') {
 							_index++;
-							/*
-								- iterate over characters until end of string literal or end of source
-								- maintain escaping state
-								- escape characters from map
-							*/
+							var _inEscape = false;
+							while (_index < _sourceLength) {
+								var _char = _source.charAt (_index);
+								if (_char == '"' && !_inEscape) {
+									m.isValid = true;
+									m.value = _unescapeReplacer (_source.slice (m.index + 1,_index));
+									m.length = ++_index - m.index;
+									break;
+								} else {
+									_inEscape = _inEscape ? false : _char == '\\';
+									_index++;
+								}
+							}
 						} else {
 							m.value = '';
 							m.length = 0;
 						}
 					},
 
-					serialize:function () {
-						/*
-							- escape characters, as necessary
-						*/
-						return this.isValid ? '"' + this.value + '"' : '';
-					}
+					serialize:function () {return this.isValid ? '"' + _escapeReplacer (this.value) + '"' : ''}
 				}
 			}
 		);

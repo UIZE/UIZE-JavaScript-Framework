@@ -1,0 +1,7 @@
+This is a TO DO document for the =Uize.Parse.Xml.Document= module.
+
+Support Comprehensive Unescaping
+	Update the unescaping logic to be comprehensive.
+
+	Currently, the unescaping logic uses only the escaping map in reverse, but clearly there are escape codes for numerous characters that are not essential to escape. Therefore, the unescaping logic is deficient and would not unescape escape sequences like "\g". Additionally, there are escape sequences for ASCII and extended character codes of the form "\xff" and "\uffff".
+
