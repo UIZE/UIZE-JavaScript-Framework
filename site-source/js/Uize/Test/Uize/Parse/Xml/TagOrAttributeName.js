@@ -65,13 +65,13 @@ Uize.module ({
 						),
 						_parserTest (
 							'Test that a string is successfully parsed as a tag/attribute name if its first character is a valid tag/attribute name start character',
-							'_:::',
+							'_###',
 							'_',
 							true
 						),
 						_parserTest (
 							'Test that all characters, following the initial start character, that are valid tag/attribute name continuation characters are included in the parse tag/attribute name',
-							'__abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-0123456789:::',
+							'__abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-0123456789###',
 							'__abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-0123456789',
 							true
 						),
