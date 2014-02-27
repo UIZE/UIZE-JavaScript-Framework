@@ -54,7 +54,6 @@ Uize.module ({
 						) {
 							m.comment = _source.slice (m.index + 2,_index);
 							m.length = _index + 2 - m.index;
-							console.log (m);
 						} else {
 							m.comment = '';
 							m.length = 0;
