@@ -30,6 +30,18 @@
 
 			Expansion
 				.
+
+				Expansion Character
+					.
+
+			Wrapping
+				.
+
+				Wrapper
+					.
+
+				Bracketing
+					.
 */
 
 Uize.module ({
@@ -357,7 +369,7 @@ Uize.module ({
 											............................................................
 
 										Wrappers With More Than Teo Characters
-											.
+											When a wrapper string with more than two characters is specified, the wrapper string is split in half to produce multi-character prefix and suffix strings.
 
 											EXAMPLE
 											....................................................
@@ -373,7 +385,7 @@ Uize.module ({
 											................................................................
 
 										An Odd Length Wrapper
-											.
+											When a wrapper string with an odd number of characters is specified, then the wrapper string will be split in half in such a way that the prefix string contains one more character than the suffix string.
 
 											EXAMPLE
 											....................................................
@@ -388,8 +400,8 @@ Uize.module ({
 											<#Ţĥîš_ þšéûðö-ļöçåļîžåţîöñ______ ţĥîñĝ_ îš_ þŕéţţý__ çööļ_!>
 											.............................................................
 
-										No Wrapper
-											.
+										An Empty Wrapper
+											The wrapper behavior can be disabled by specifying an empty wrapper string.
 
 											EXAMPLE
 											....................................................
@@ -405,7 +417,7 @@ Uize.module ({
 											..........................................................
 
 										The Default Wrapper
-											.
+											When the =wrapper= option is not specified, or if the values =null= or =undefined= are specified for this option, then the option is defaulted to the value ='[]'= to provide a "bracketing" behavior.
 
 											EXAMPLE
 											..................................................................................
@@ -418,6 +430,7 @@ Uize.module ({
 											............................................................
 
 							Pseudo-localize a String, But Without Accenting
+								In cases where `accenting` is not desired, it can be disabled by specifying the value =false= for the =accent= property in the options object (as specified by the =optionsOBJ= parameter).
 
 								SYNTAX
 								...............................................................................
@@ -438,6 +451,7 @@ Uize.module ({
 								............................................................
 
 							Pseudo-localize a String, But Without Expansion
+								In cases where `expansion` is not desired, it can be disabled by specifying the value =0= for the =expansion= property in the options object (as specified by the =optionsOBJ= parameter).
 
 								SYNTAX
 								..............................................................................
@@ -458,6 +472,7 @@ Uize.module ({
 								................................................
 
 							Pseudo-localize a String, Specifying a Custom Expansion Factor
+								When a custom `expansion` factor is desired, the desired expansion can be specified as a number for the =expansion= property in the options object (as specified by the =optionsOBJ= parameter).
 
 								SYNTAX
 								...............................................................................................
@@ -478,6 +493,7 @@ Uize.module ({
 								........................................................................................
 
 							Pseudo-localize a String, Specifying a Custom Expansion Character
+								When a custom `expansion character` is desired, it can be specified as a string for the =expansionChar= property in the options object (as specified by the =optionsOBJ= parameter).
 
 								SYNTAX
 								.....................................................
