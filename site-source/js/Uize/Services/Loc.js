@@ -37,7 +37,7 @@ Uize.module ({
 
 		return _superclass.subclass ({
 			serviceMethods:{
-				import:{
+				'import':{
 					async:_true
 					/*?
 						Instance Methods
@@ -50,7 +50,7 @@ Uize.module ({
 					*/
 				},
 
-				export:{
+				'export':{
 					async:_true
 					/*?
 						Instance Methods
