@@ -1,15 +1,5 @@
 <%
 	var _sliderHeight = input.sliderHeight != undefined ? input.sliderHeight : 286;
-	function _getSliderTdTag (_colorLetter) {
-		return (
-			'<td style="height:' + _sliderHeight + 'px;">' +
-				m.childHtml ({
-					name:'slider' + _colorLetter,
-					trackLength:'100%'
-				}) +
-			'</td>'
-		);
-	}
 %>
 <table id="<%. idPrefix %>" class="<%= m.rootNodeCssClasses () %>">
 	<tr>
@@ -21,11 +11,17 @@
 		<td colspan="5" class="<%= m.cssClass ('verticalSpacer') %>"></td>
 	</tr>
 	<tr>
-		<%= _getSliderTdTag ('R') %>
+		<td style="height:<%= _sliderHeight %>px;"><%=
+			m.childHtml ({name:'sliderR',trackLength:'100%'})
+		%></td>
 		<td class="<%= m.cssClass ('horizontalSpacer') %>"></td>
-		<%= _getSliderTdTag ('G') %>
+		<td style="height:<%= _sliderHeight %>px;"><%=
+			m.childHtml ({name:'sliderG',trackLength:'100%'})
+		%></td>
 		<td class="<%= m.cssClass ('horizontalSpacer') %>"></td>
-		<%= _getSliderTdTag ('B') %>
+		<td style="height:<%= _sliderHeight %>px;"><%=
+			m.childHtml ({name:'sliderB',trackLength:'100%'})
+		%></td>
 	</tr>
 	<tr>
 		<td colspan="5" class="<%= m.cssClass ('verticalSpacer') %>"></td>
