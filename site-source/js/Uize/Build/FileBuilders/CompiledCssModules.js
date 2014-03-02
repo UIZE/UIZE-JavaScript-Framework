@@ -43,16 +43,15 @@ Uize.module ({
 				);
 			},
 			builderInputs:function (_urlParts) {
-				return {compressedCss:_urlParts.pathname.replace (/\.js$/,'.min.css')};
+				return {source:_urlParts.pathname.replace (/\.js$/,'.min.css')};
 			},
-			builder:function (_inputs) {
+			builder:function (_inputs,_urlParts) {
 				var
-					_compressedCss = _inputs.compressedCss,
 					_params = this.params,
 					_moduleName = Uize.Build.Util.moduleNameFromModulePath (
-						_compressedCss
+						_urlParts.pathname
 							.slice ((_params.tempPath + '/' + _params.modulesFolder + '/').length)
-							.replace (/\.min\.css$/i,'')
+							.replace (/\.js$/i,'')
 					)
 				;
 
@@ -68,7 +67,7 @@ Uize.module ({
 						'			css:function (_input) {',
 						'				' +
 							'return ' +
-								Uize.Json.to (this.readFile ({path:_compressedCss}))
+								Uize.Json.to (this.readFile ({path:_inputs.source}))
 									.replace (
 										/(url\s*\(\s*)([\'"]?)([^\'"\)]+)\2(\s*\))/g,
 										function (_match,_open,_quote,_path,_close) {
