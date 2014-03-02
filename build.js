@@ -248,7 +248,7 @@ function _eval (_toEval) {
 					_moduleText = 'Uize.module ({name:\'' + _moduleName + '\'})';
 				} else {
 					var
-						_moduleFilePath = '/' + _modulePathResolver (_moduleName) + '.js',
+						_moduleFilePath = '/' + _modulePathResolver (_moduleName),
 						_modulesFolder = _params.modulesFolder,
 						_moduleSourcePath =
 							(
@@ -259,35 +259,38 @@ function _eval (_toEval) {
 						_moduleBuiltPath = _params.builtPath + '/' + _modulesFolder + _moduleFilePath,
 						_modulePath = _useSource ? _moduleSourcePath : _moduleBuiltPath
 					;
-					if (_fileExists (_modulePath)) {
-						_moduleText = _readFile (_modulePath);
-					} else if (_fileExists (_modulePath + '.jst')) {
+					if (_fileExists (_modulePath + '.js')) {
+						_moduleText = _readFile (_modulePath + '.js');
+					} else if (_fileExists (_modulePath + '.js.jst')) {
 						Uize.require (
 							'Uize.Template.Module',
 							function (_Uize_Template_Module) {
 								_moduleText = _Uize_Template_Module.buildTemplateModuleText (
 									_moduleName,
-									_readFile (_modulePath + '.jst')
+									_readFile (_modulePath + '.js.jst')
 								);
 							}
 						);
-					} else if (_fileExists (_modulePath.replace (/\.js$/,'.csst'))) {
+					} else if (_fileExists (_modulePath + '.csst')) {
 						_moduleText =
 							'Uize.module ({\n' +
 							'	name:\'' + _moduleName + '\',\n' +
 							'	superclass:\'Uize.Dom.CssModule\',\n' +
 							'	builder:function (_superclass) {return _superclass.subclass ()}\n' +
 							'});';
-					} else if (_fileExists (_modulePath.replace (/\.js$/,'.loc'))) {
+					} else if (
+						_fileExists (_modulePath + '.loc') ||
+						_fileExists (_modulePath + '.htmlt')
+					) {
 						_moduleText =
 							'Uize.module ({\n' +
 							'	name:\'' + _moduleName + '\',\n' +
 							'	builder:function () {return Uize.package ()}\n' +
 							'});';
-					} else if (_folderExists (_moduleSourcePath.replace (/\.js$/,''))) {
+					} else if (_folderExists (_moduleSourcePath)) {
 						_moduleText = 'Uize.module ({name:\'' + _moduleName + '\'});';
 					} else {
-						throw Error ('Module loader can\'t find module ' + _moduleName + ' at path ' + _modulePath);
+						throw Error ('Module loader can\'t find module ' + _moduleName + ' at path ' + _modulePath + '.js');
 					}
 				}
 				_callback (_moduleText);
