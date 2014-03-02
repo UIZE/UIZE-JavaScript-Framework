@@ -37,9 +37,10 @@ Uize.module ({
 		'Uize.Build.FileBuilders.TempJsModules',
 		'Uize.Build.FileBuilders.CompiledCss',
 		'Uize.Build.FileBuilders.CompressedCssFiles',
+		'Uize.Build.FileBuilders.CompiledCssModules',
 		'Uize.Build.FileBuilders.CompiledLocModules',
 		'Uize.Build.FileBuilders.CompiledJstModules',
-		'Uize.Build.FileBuilders.CompiledCssModules',
+		'Uize.Build.FileBuilders.CompiledWidgetHtmltModules',
 		'Uize.Build.FileBuilders.TempGeneratedNamespaceModules'
 	],
 	builder:function (_superclass) {
@@ -61,8 +62,9 @@ Uize.module ({
 						Uize.Build.FileBuilders.CompiledCss,
 						Uize.Build.FileBuilders.CompressedCssFiles,
 						Uize.Build.FileBuilders.CompiledCssModules,
-						Uize.Build.FileBuilders.CompiledJstModules,
 						Uize.Build.FileBuilders.CompiledLocModules,
+						Uize.Build.FileBuilders.CompiledJstModules,
+						Uize.Build.FileBuilders.CompiledWidgetHtmltModules,
 						Uize.Build.FileBuilders.TempGeneratedNamespaceModules
 					);
 
