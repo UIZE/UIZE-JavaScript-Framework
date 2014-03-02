@@ -99,7 +99,7 @@ Uize.module ({
 											_replacementTokenOpener + _replacementName + _replacementTokenCloser
 										;
 										_replacements [_replacementName] = _attributeName == 'id'
-											? 'm.nodeId (\'' + _attributeValue + '\')'
+											? '_idPrefix' + (_attributeValue && ' + \'-' + _attributeValue + '\'')
 											: 'm.cssClass (\'' + _attributeValue + '\')'
 										;
 									}
@@ -136,7 +136,7 @@ Uize.module ({
 						'',
 						'	return Uize.package ({',
 						'		process:function (i) {',
-						'			var m = this;',
+						'			var m = this, _idPrefix = i.idPrefix;',
 						'			return ' + _templateExpression + ';',
 						'		}',
 						'	});',
