@@ -36,6 +36,7 @@ Uize.module ({
 
 		var
 			/*** Variables for Scruncher Optimization ***/
+				_undefined,
 				_Uize_Util_Xml = Uize.Parse.Xml,
 				_indexOfNonWhitespace = Uize.Str.Whitespace.indexOfNonWhitespace
 		;
@@ -45,7 +46,7 @@ Uize.module ({
 				var m = this;
 				m.tagName = new _Uize_Util_Xml.TagOrAttributeName;
 				m.tagAttributes = new _Uize_Util_Xml.TagAttributes;
-				m._childNodes = m.childNodes = new _Uize_Util_Xml.NodeList;
+				m.childNodes = _undefined;
 				m.parse (_source,_index);
 			},
 
@@ -76,9 +77,8 @@ Uize.module ({
 								_index += m.tagAttributes.length;
 								_eatWhitespace ();
 								if (_source.charAt (_index) == '>') {
-									_index++;
-									m._childNodes.parse (_source,_index);
-									_index += m._childNodes.length;
+									m.childNodes = new _Uize_Util_Xml.NodeList (_source,++_index);
+									_index += m.childNodes.length;
 									_eatWhitespace ();
 									var
 										_closingTag = '</' + m.tagName.serialize () + '>',
@@ -89,7 +89,7 @@ Uize.module ({
 									;
 								} else if (_source.substr (_index,2) == '/>') {
 									_index += 2;
-									m._childNodes.parse ();
+									m.childNodes = _undefined;
 								}
 							} else {
 								_index = m.index;
@@ -105,20 +105,15 @@ Uize.module ({
 							var
 								_tagNameSerialized = m.tagName.serialize (),
 								_tagAttributesSerialized = m.tagAttributes.serialize (),
-								_childNodesSerialized = m._childNodes.serialize ()
+								_childNodes = m.childNodes
 							;
 							return (
 								'<' +
 									_tagNameSerialized +
 									(_tagAttributesSerialized && ' ') + _tagAttributesSerialized +
-									(_childNodesSerialized ? '' : '/') +
+									(_childNodes ? '' : '/') +
 								'>' +
-								(
-									_childNodesSerialized && (
-										_childNodesSerialized +
-										'</' + _tagNameSerialized + '>'
-									)
-								)
+								(_childNodes ? (_childNodes.serialize () + '</' + _tagNameSerialized + '>') : '')
 							);
 						} else {
 							return '';
