@@ -27,7 +27,7 @@
 
 /* TODO
 	- load widget's JS module
-	- evaluate widget's declared html and CSS bindings
+	- evaluate widget's declared html bindings
 	- use bindings to stitch in additional template logic
 */
 
