@@ -92,7 +92,8 @@ Uize.module ({
 	name:'Uize.Widget.Collection',
 	required:[
 		'Uize.Widget.Button',
-		'Uize.Dom.Event'
+		'Uize.Dom.Event',
+		'Uize.Widget.CollectionItem'
 	],
 	builder:function (_superclass) {
 		'use strict';
@@ -102,7 +103,7 @@ Uize.module ({
 				_true = true,
 				_false = false,
 				_undefined
-		;
+			;
 
 		/*** Private Instance Methods ***/
 			function _fireItemsChangedEvent (m) {
@@ -341,10 +342,14 @@ Uize.module ({
 
 				isCollectionItem:function (_childWidget) {
 					var
-						m = this
+						_testClass = _childWidget.constructor,
+						_baseClass = Uize.Widget.CollectionItem
 					;
-					// test to make sure the widget being added is actually a collection item widget
-					return (m._itemWidgetClass && _childWidget.Class.moduleName == m._itemWidgetClass.moduleName);
+
+					// test to make sure the widget being added is actually a collection item widget (walk up the superclass tree)
+					while (_testClass != _baseClass && Uize.isFunction(_testClass = _testClass.superclass));
+					return _testClass == _baseClass;
+
 					/*?
 						Instance Methods
 							isCollectionItem
