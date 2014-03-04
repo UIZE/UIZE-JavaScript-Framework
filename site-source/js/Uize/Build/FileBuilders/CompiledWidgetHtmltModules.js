@@ -27,8 +27,7 @@
 
 /* TODO
 	- load widget's JS module
-	- evaluate widget's declared html bindings
-	- use bindings to stitch in additional template logic
+	- use widget's declared html bindings to stitch in additional template logic
 */
 
 Uize.module ({
@@ -36,6 +35,7 @@ Uize.module ({
 	required:[
 		'Uize.Build.Util',
 		'Uize.Parse.Xml.NodeList',
+		'Uize.Parse.Xml.TagAttribute',
 		'Uize.Json',
 		'Uize.Str.Split'
 	],
@@ -81,7 +81,37 @@ Uize.module ({
 					_nodeListParser = new Uize.Parse.Xml.NodeList (this.readFile ({path:_inputs.source})),
 					_replacements = {}
 				;
-				console.log (_nodeListParser.serialize ());
+
+				/*** find root tag node and give it special treatment for id and class attributes ***/
+					function _findAttribute (_node,_attributeName) {
+						return Uize.findRecord (
+							_node.tagAttributes.attributes,
+							function (_attribute) {return _attribute.name.name == _attributeName}
+						);
+					}
+
+					function _ensureRootNodeAttribute (_attributeName,_attributeValue) {
+						var _attribute = _findAttribute (_rootNode,_attributeName);
+						_attribute ||
+							_rootNode.tagAttributes.attributes.push (
+								_attribute = new Uize.Parse.Xml.TagAttribute (_attributeName + '=""')
+							)
+						;
+						_attribute.value.value = _attributeValue;
+					}
+
+					var _rootNode = Uize.findRecord (
+						_nodeListParser.nodes,
+						function (_node) {
+							if (!_node.tagName) return false;
+							var _idAttribute = _findAttribute (_node,'id');
+							return !_idAttribute || !_idAttribute.value.value;
+						}
+					);
+					if (_rootNode) {
+						_ensureRootNodeAttribute ('id','');
+						_ensureRootNodeAttribute ('class','*');
+					}
 
 				/*** recurse parser object tree, process tag nodes and build replacements lookup ***/
 					function _processNode (_node) {
@@ -100,7 +130,11 @@ Uize.module ({
 										;
 										_replacements [_replacementName] = _attributeName == 'id'
 											? '_idPrefix' + (_attributeValue && ' + \'-' + _attributeValue + '\'')
-											: 'm.cssClass (\'' + _attributeValue + '\')'
+											: (
+												_attributeValue == '*'
+													? 'm.rootNodeCssClasses ()'
+													: 'm.cssClass (\'' + _attributeValue + '\')'
+											)
 										;
 									}
 								}
@@ -110,13 +144,6 @@ Uize.module ({
 						_childNodes && Uize.forEach (_childNodes.nodes,_processNode);
 					}
 					_processNode ({childNodes:_nodeListParser});
-
-				/*** find root tag node and give it special treatment ***/
-					/*
-						- it's the first tag node at the root level that has no id or has an empty id
-						- ensure it has an id attribute whose value is empty
-						- ensure it has a class attribute with a special token
-					*/
 
 				/*** re-serialize processed parser object tree, split HTML by replacement tokens ***/
 					var _templateExpression =
