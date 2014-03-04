@@ -71,7 +71,7 @@ Uize.module ({
 								m.namespace = _source.slice (m.index,_index);
 								var _namePos = ++_index;
 								if (_tagNameStartCharsLookup [_source.charAt (_index)]) {
-									_index++
+									_index++;
 									while (_index < _sourceLength && _tagNameContinueCharsLookup [_source.charAt (_index)])
 										_index++
 									;
