@@ -133,8 +133,21 @@ Uize.module ({
 			}
 
 		return _superclass.subclass ({
-			alphastructor:function () {
+			alphastructor: function () {
+				var m = this;
 				this._properties = {};
+
+				/*** Private-public Instance Properties ***/
+				m._isCollectionItem = m.isCollectionItem = _true;
+				/*?
+					Instance Properties
+						isCollectionItem
+							A boolean specifying whether or not this class supports the collection item interface (not yet formally defined)
+
+							NOTES
+							- for now, this is only used to determine if this class is indeed a =CollectionItem=
+							- see the =isCollectionItem= method =Uize.Widget.Collection=
+				*/
 			},
 
 			omegastructor:function () {

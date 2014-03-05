@@ -341,14 +341,7 @@ Uize.module ({
 				},
 
 				isCollectionItem:function (_childWidget) {
-					var
-						_testClass = _childWidget.constructor,
-						_baseClass = Uize.Widget.CollectionItem
-					;
-
-					// test to make sure the widget being added is actually a collection item widget (walk up the superclass tree)
-					while (_testClass != _baseClass && Uize.isFunction(_testClass = _testClass.superclass));
-					return _testClass == _baseClass;
+					return _childWidget.isCollectionItem;
 
 					/*?
 						Instance Methods
