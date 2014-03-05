@@ -25,33 +25,14 @@
 		Functions defined in the file builder are called as instance methods on an instance of a subclass of the =Uize.Services.FileBuilderAdapter= class, so the functions can access instance methods implemented in this class.
 */
 
-/* TODO
-	- load widget's JS module
-	- use widget's declared html bindings to stitch in additional template logic
-*/
-
 Uize.module ({
 	name:'Uize.Build.FileBuilders.CompiledWidgetHtmltModules',
 	required:[
 		'Uize.Build.Util',
-		'Uize.Parse.Xml.NodeList',
-		'Uize.Parse.Xml.TagAttribute',
-		'Uize.Json',
-		'Uize.Str.Split'
+		'Uize.Widget.HtmltCompiler',
+		'Uize.Str.Lines'
 	],
 	builder:function () {
-		var
-			/*** General Variables ***/
-				_replacementTokenOpener = '{{[[',
-				_replacementTokenCloser = ']]}}',
-				_replacementTokenRegExp = new RegExp (
-					Uize.escapeRegExpLiteral (_replacementTokenOpener) +
-					'(.+?)' +
-					Uize.escapeRegExpLiteral (_replacementTokenCloser),
-					'g'
-				)
-		;
-
 		/*** Utility Functions ***/
 			function _sourceUrlFromTempUrl (m,_pathname) {
 				return m.sourceUrlFromTempUrl (_pathname).replace (/\.js$/,'.htmlt');
@@ -72,104 +53,42 @@ Uize.module ({
 			},
 			builder:function (_inputs,_urlParts) {
 				var
-					_params = this.params,
+					m = this,
+					_params = m.params,
 					_moduleName = Uize.Build.Util.moduleNameFromModulePath (
 						_urlParts.pathname
 							.slice ((_params.tempPath + '/' + _params.modulesFolder + '/').length)
 							.replace (/\.js$/i,'')
 					),
-					_nodeListParser = new Uize.Parse.Xml.NodeList (this.readFile ({path:_inputs.source})),
-					_replacements = {}
+					_result
 				;
-
-				/*** find root tag node and give it special treatment for id and class attributes ***/
-					function _findAttribute (_node,_attributeName) {
-						return Uize.findRecord (
-							_node.tagAttributes.attributes,
-							function (_attribute) {return _attribute.name.name == _attributeName}
-						);
+				Uize.require (
+					_moduleName.replace (/\.Html$/,'.Widget'),
+					function (_widgetClass) {
+						_result = Uize.Build.Util.moduleAsText ({
+							name:_moduleName,
+							builder:[
+								'function () {',
+								'	\'use strict\';',
+								'',
+								'	return Uize.package ({',
+								'		process:function (i) {',
+								Uize.Str.Lines.indent (
+									Uize.Widget.HtmltCompiler.compileToFunctionBody (
+										m.readFile ({path:_inputs.source}),
+										_widgetClass
+									),
+									3
+								),
+								'		}',
+								'	});',
+								'}'
+							].join ('\n')
+						});
 					}
+				);
 
-					function _ensureRootNodeAttribute (_attributeName,_attributeValue) {
-						var _attribute = _findAttribute (_rootNode,_attributeName);
-						_attribute ||
-							_rootNode.tagAttributes.attributes.push (
-								_attribute = new Uize.Parse.Xml.TagAttribute (_attributeName + '=""')
-							)
-						;
-						_attribute.value.value = _attributeValue;
-					}
-
-					var _rootNode = Uize.findRecord (
-						_nodeListParser.nodes,
-						function (_node) {
-							if (!_node.tagName) return false;
-							var _idAttribute = _findAttribute (_node,'id');
-							return !_idAttribute || !_idAttribute.value.value;
-						}
-					);
-					if (_rootNode) {
-						_ensureRootNodeAttribute ('id','');
-						_ensureRootNodeAttribute ('class','*');
-					}
-
-				/*** recurse parser object tree, process tag nodes and build replacements lookup ***/
-					function _processNode (_node) {
-						if (_node.tagName) {
-							Uize.forEach (
-								_node.tagAttributes.attributes,
-								function (_attributeParser) {
-									var _attributeName = _attributeParser.name.name;
-									if (_attributeName == 'id' || _attributeName == 'class') {
-										var
-											_attributeValue = _attributeParser.value.value,
-											_replacementName = _attributeName + ' ~ ' + _attributeValue
-										;
-										_attributeParser.value.value =
-											_replacementTokenOpener + _replacementName + _replacementTokenCloser
-										;
-										_replacements [_replacementName] = _attributeName == 'id'
-											? '_idPrefix' + (_attributeValue && ' + \'-' + _attributeValue + '\'')
-											: (
-												_attributeValue == '*'
-													? 'm.rootNodeCssClasses ()'
-													: 'm.cssClass (\'' + _attributeValue + '\')'
-											)
-										;
-									}
-								}
-							);
-						}
-						var _childNodes = _node.childNodes;
-						_childNodes && Uize.forEach (_childNodes.nodes,_processNode);
-					}
-					_processNode ({childNodes:_nodeListParser});
-
-				/*** re-serialize processed parser object tree, split HTML by replacement tokens ***/
-					var _templateExpression =
-						Uize.map (
-							Uize.Str.Split.split (_nodeListParser.serialize (),_replacementTokenRegExp),
-							function (_segment,_segmentNo) {
-								return _segmentNo % 2 ? _replacements [_segment] : Uize.Json.to (_segment);
-							}
-						).join (' + ')
-					;
-
-				return Uize.Build.Util.moduleAsText ({
-					name:_moduleName,
-					builder:[
-						'function () {',
-						'	\'use strict\';',
-						'',
-						'	return Uize.package ({',
-						'		process:function (i) {',
-						'			var m = this, _idPrefix = i.idPrefix;',
-						'			return ' + _templateExpression + ';',
-						'		}',
-						'	});',
-						'}'
-					].join ('\n')
-				});
+				return _result;
 			}
 		});
 	}

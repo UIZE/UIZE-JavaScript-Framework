@@ -213,9 +213,9 @@ Uize.module ({
 								var
 									_nodeNameAndBindingType = _updater.split (':'),
 									_nodeName = _nodeNameAndBindingType [0],
-									_bindingType = _nodeNameAndBindingType [1]
+									_bindingType = _nodeNameAndBindingType [1] || 'value'
 								;
-								if (!_bindingType) {
+								if (_bindingType == 'value') {
 									_updater = function (_propertyValue) {
 										this.setNodeValue (
 											_nodeName,
@@ -238,6 +238,9 @@ Uize.module ({
 										this.setNodeProperties (_nodeName,_Uize.pairUp (_bindingType,_propertyValue));
 									};
 								}
+								_updater.propertyName = _propertyName;
+								_updater.nodeName = _nodeName;
+								_updater.bindingType = _bindingType;
 							}
 							return _updater;
 						}
