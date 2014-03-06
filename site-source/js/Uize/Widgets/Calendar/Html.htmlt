@@ -1,0 +1,11 @@
+<div>
+	<div id="controls" class="controls">
+		<div class="indicator">
+			<span id="month">Month</span>
+			<span id="year">Year</span>
+		</div>
+		<child name="previousMonth" text="&lt;" tipText="jump to previous month" extraClasses="previousMonth"/>
+		<child name="nextMonth" text="&gt;" tipText="jump to next month" extraClasses="nextMonth"/>
+	</div>
+	<div id="grid" class="grid"></div>
+</div>

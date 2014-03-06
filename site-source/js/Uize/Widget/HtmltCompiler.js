@@ -28,6 +28,7 @@ Uize.module ({
 	required:[
 		'Uize.Parse.Xml.NodeList',
 		'Uize.Parse.Xml.TagAttribute',
+		'Uize.Parse.Xml.Text',
 		'Uize.Json',
 		'Uize.Str.Split',
 		'Uize.Str.Trim'
@@ -52,7 +53,8 @@ Uize.module ({
 					'(.+?)' +
 					Uize.escapeRegExpLiteral (_replacementTokenCloser),
 					'g'
-				)
+				),
+				_extraClassesToken = _replacementTokenOpener + 'extraClasses' + _replacementTokenCloser
 		;
 
 		return Uize.package ({
@@ -119,6 +121,13 @@ Uize.module ({
 
 				/*** recurse parser object tree, process tag nodes and build replacements lookup ***/
 					function _processNode (_node) {
+						function _classNamespacerExpression (_classes) {
+							return Uize.map (
+								_split (_trim (_classes),/\s+/),
+								function (_class) {return 'm.cssClass (\'' + _class + '\')'}
+							).join (' + \' \' + ');
+						}
+
 						if (_node.tagName) {
 							Uize.forEach (
 								_node.tagAttributes.attributes,
@@ -141,10 +150,7 @@ Uize.module ({
 												: (
 													_attributeValue == '*'
 														? 'm.rootNodeCssClasses ()'
-														: Uize.map (
-															_split (_trim (_attributeValue),/\s+/),
-															function (_cssClass) {return 'm.cssClass (\'' + _cssClass + '\')'}
-														).join (' + \' \' + ')
+														: _classNamespacerExpression (_attributeValue)
 												)
 										);
 
@@ -196,21 +202,58 @@ Uize.module ({
 							);
 						}
 						var _childNodes = _node.childNodes;
-						if (_childNodes)
+						if (_childNodes) {
+							var _nodes = _childNodes.nodes;
 							Uize.forEach (
-								_childNodes.nodes,
-								function (_node) {
+								_nodes,
+								function (_node,_nodeNo) {
 									var _tagName = _node.tagName;
 									if (_tagName) {
 										if (_tagName.name == 'child') {
+											/*** build lookup of attributes, to be used for child widget properties ***/
+												var _attributesLookup = {};
+												Uize.forEach (
+													_node.tagAttributes.attributes,
+													function (_attribute) {
+														_attributesLookup [_attribute.name.name] = _attribute.value.value;
+													}
+												);
+												var _childName = _attributesLookup.name;
 
+											/*** special handling for the extraClasses property ***/
+												var _extraClasses = _attributesLookup.extraClasses;
+												if (_extraClasses) {
+													_extraClasses = _classNamespacerExpression (_extraClasses);
+													_attributesLookup.extraClasses = _extraClassesToken;
+												}
+
+											/*** add replacement and replace child tag node with text node ***/
+												var
+													_replacementName = 'child ~ ' + _childName,
+													_serializedProperties = Uize.Json.to (_attributesLookup)
+												;
+												_replacements [_replacementName] =
+													'm.childHtml (' +
+													(
+														_extraClasses
+															? _serializedProperties.replace (
+																'\'' + _extraClassesToken + '\'',
+																_extraClasses
+															)
+															: _serializedProperties
+													) +
+													')'
+												;
+												_nodes [_nodeNo] = new Uize.Parse.Xml.Text (
+													_replacementTokenOpener + _replacementName + _replacementTokenCloser
+												);
 										} else {
 											_processNode (_node);
 										}
 									}
 								}
-							)
-						;
+							);
+						}
 					}
 					_processNode ({childNodes:_nodeListParser});
 
