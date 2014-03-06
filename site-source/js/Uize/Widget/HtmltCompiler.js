@@ -196,7 +196,21 @@ Uize.module ({
 							);
 						}
 						var _childNodes = _node.childNodes;
-						_childNodes && Uize.forEach (_childNodes.nodes,_processNode);
+						if (_childNodes)
+							Uize.forEach (
+								_childNodes.nodes,
+								function (_node) {
+									var _tagName = _node.tagName;
+									if (_tagName) {
+										if (_tagName.name == 'child') {
+
+										} else {
+											_processNode (_node);
+										}
+									}
+								}
+							)
+						;
 					}
 					_processNode ({childNodes:_nodeListParser});
 
