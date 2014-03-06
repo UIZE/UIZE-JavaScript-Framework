@@ -29,12 +29,17 @@ Uize.module ({
 		'Uize.Parse.Xml.NodeList',
 		'Uize.Parse.Xml.TagAttribute',
 		'Uize.Json',
-		'Uize.Str.Split'
+		'Uize.Str.Split',
+		'Uize.Str.Trim'
 	],
 	builder:function () {
 		var
 			/*** Variables for Scruncher Optimization ***/
 				_undefined,
+				_split = Uize.Str.Split.split,
+
+			/*** Variables for Performance Optimization ***/
+				_trim = Uize.Str.Trim.trim,
 
 			/*** references to static methods used internally ***/
 				_compileToFunctionBody,
@@ -136,7 +141,10 @@ Uize.module ({
 												: (
 													_attributeValue == '*'
 														? 'm.rootNodeCssClasses ()'
-														: 'm.cssClass (\'' + _attributeValue + '\')'
+														: Uize.map (
+															_split (_trim (_attributeValue),/\s+/),
+															function (_cssClass) {return 'm.cssClass (\'' + _cssClass + '\')'}
+														).join (' + \' \' + ')
 												)
 										);
 
