@@ -92,7 +92,7 @@ Uize.module ({
 	name:'Uize.Widget.Collection',
 	required:[
 		'Uize.Widget.Button',
-		'Uize.Dom.Event',
+		'Uize.Dom.Event'
 	],
 	builder:function (_superclass) {
 		'use strict';
