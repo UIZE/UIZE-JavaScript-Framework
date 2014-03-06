@@ -131,11 +131,6 @@ Implement New Binding Features
 		]
 		............................................
 
-	Add Feature for Declaring Child Widgets
-		It will be interesting to see from real world use cases how declarative this can realistically be made.
-
-		It may only be in the truly most simple cases where declaring child widgets at the class level is workable. Often there is associated, instance-specific, programmatic setup and initialization that may be needed.
-
 	Add Feature for Declaring Child State Bindings
 		A way to declare one or more bindings of state properties to child widget state properties.
 

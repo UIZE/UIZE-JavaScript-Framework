@@ -58,7 +58,7 @@ Implement New Binding Features
 		Short-hand Syntax
 			The short-hand syntax mirrors the htmlBinding syntax providing a majority of the syntax in a string.
 		
-			SHORT-HAND SYNTAX EXAMPLE
+			EXAMPLE
 			.................................................
 			eventBindings:{
 				'menu:click':function() { },
@@ -116,3 +116,90 @@ Implement New Binding Features
 				]
 			]
 			..........................
+
+	Add Feature for Declaring Child Widgets
+		It will be interesting to see from real world use cases how declarative this can realistically be made.
+
+		It may only be in the truly most simple cases where declaring child widgets at the class level is workable. Often there is associated, instance-specific, programmatic setup and initialization that may be needed. However child widgets that are getting their initialization from other sources (for example via $ syntax) could benefit from this declarative approach.
+
+		Verbose/Canonical Syntax
+			The verbsoe/canonical syntax allows for specifying the child widget's initial state properties, including its widget class.
+		
+			EXAMPLE
+			..........................
+			children:{
+				menu:{
+					text:'Ok',
+					widgetClass:Uize.Widget,
+					value:'foo',
+					values:[
+						{
+							name:'foo',
+							value:'Foo'
+						},
+						{
+							name:'bar',
+							value:'Bar'
+						}
+					]
+				},
+				cancel:{
+					text:'Cancel',
+					widgetClass:Uize.Widget.Button,
+					selected:true
+				}
+			}
+			..........................
+			
+			NOTES
+			- Key is the name of the child widget
+			- Value is an object specifying values for a child widget's initial state properties
+			- The widget class for a child widget is specified using the special =widgetClass= widget property
+			
+		Short-hand Syntax
+			The short-hand syntax allows for only specifying the child widget's name and widget class.
+		
+			EXAMPLE
+			..........................
+			children:{
+				menu:Uize.Widget,
+				cancel:Uize.Button
+			}
+			..........................
+			
+			NOTES
+			- Key is the name of the child widget
+			- Value is the widget class of child widget
+			- Most useful if the child widget doesn't need to override default state properties or its state properties are set else (for example via $ syntax)
+		
+		Other Possible Syntaxes
+			EXAMPLE
+			................................
+			children:[
+				{
+					name:'menu',
+					text:'Ok',
+					widgetClass:Uize.Widget,
+					value:'foo',
+					values:[
+						{
+							name:'foo',
+							value:'Foo'
+						},
+						{
+							name:'bar',
+							value:'Bar'
+						}
+					]
+				},
+				{
+					name:'cancel',
+					text:'Cancel',
+					widgetClass:Uize.Widget.Button,
+					selected:true
+				}
+			]
+			................................
+			
+			NOTES
+			- The name for the child widget is specified using the special =name= property
