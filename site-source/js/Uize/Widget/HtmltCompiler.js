@@ -186,7 +186,7 @@ Uize.module ({
 															}
 														) +
 														':'
-													) + ' + ' + _propertyReference (_bindingProperty)
+													) + ' + ' + _propertyReference (_bindingProperty) + ' + \';\''
 												);
 											}
 										}
