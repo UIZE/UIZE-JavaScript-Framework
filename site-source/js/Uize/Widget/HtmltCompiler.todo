@@ -8,10 +8,10 @@ Implement Support for value Binding
 Miscellaneous
 	Other things to do include...
 
-	- provide special handling of class binding
 	- achieve parity for style bindings compiled to template code
-	- add support for attribute bindings
-		- reconcile attribute bindings and property bindings
+	- attribute bindings
+		- support attribute bindings in the mBindings mixin
+		- reconcile attribute bindings and property bindings (is this possible?)
 	- state binding to children
 
 Child Widgets
