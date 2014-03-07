@@ -11,7 +11,7 @@ Implement New Binding Features
 			.................................................
 			eventBindings:{
 				menu:{ // DOM node
-					click:function (_event) { }
+					click:function (_event) { },
 					mouseover:function(_event) { }
 				},
 				'children.sliderG':{ // child widget
