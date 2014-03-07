@@ -86,7 +86,14 @@ Uize.module ({
 			},
 
 			stateProperties:{
-				_sliderHeight:'sliderHeight',
+				_sliderHeight:{
+					name:'sliderHeight',
+					value:286
+				},
+				_sliderHeightPx:{
+					name:'sliderHeightPx',
+					derived:'sliderHeight: sliderHeight + "px"'
+				},
 				_value:{
 					name:'value',
 					conformer:function (_value) {return Uize.Color.to (_value,'hex')},
@@ -119,7 +126,12 @@ Uize.module ({
 			},
 
 			htmlBindings:{
-				valueAsHexRgb:['swatch:html','swatch:style.background']
+				valueAsHexRgb:['swatch:html','swatch:style.background'],
+				sliderHeightPx:[
+					'sliderRShell:style.height',
+					'sliderGShell:style.height',
+					'sliderBShell:style.height'
+				]
 			}
 		});
 	}

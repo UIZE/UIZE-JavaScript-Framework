@@ -45,6 +45,16 @@ Uize.module ({
 
 		var _superUpdateUi = _superclass.prototype.updateUi;
 
+		function _displayedStyleWidthHeight (_orientation,_trackLength,_isWidth) {
+			return (
+				(_orientation != 'horizontal') == _isWidth
+					? ''
+					: typeof _trackLength == 'number'
+						? _trackLength + 'px'
+						: _trackLength
+			);
+		}
+
 		return _superclass.subclass ({
 			mixins:Uize.Widget.mV2,
 
@@ -57,11 +67,15 @@ Uize.module ({
 				_fullColor:'fullColor',
 				_displayedStyleWidth:{
 					name:'displayedStyleWidth',
-					derived:'orientation,trackLength: orientation == "horizontal" ? trackLength : ""'
+					derived:function (orientation,trackLength) {
+						return _displayedStyleWidthHeight (orientation,trackLength,true);
+					}
 				},
 				_displayedStyleHeight:{
 					name:'displayedStyleHeight',
-					derived:'orientation,trackLength: orientation == "horizontal" ? "" : trackLength'
+					derived:function (orientation,trackLength) {
+						return _displayedStyleWidthHeight (orientation,trackLength,false);
+					}
 				}
 			},
 
