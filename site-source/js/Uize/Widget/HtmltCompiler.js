@@ -48,6 +48,7 @@ Uize.module ({
 			/*** General Variables ***/
 				_replacementTokenOpener = '{{[[',
 				_replacementTokenCloser = ']]}}',
+				_replacementNameDelimiter = ' ~ ',
 				_replacementTokenRegExp = new RegExp (
 					Uize.escapeRegExpLiteral (_replacementTokenOpener) +
 					'(.+?)' +
@@ -139,12 +140,16 @@ Uize.module ({
 										;
 									}
 
+									function _propertyReference (_propertyName) {
+										return 'i[' + Uize.Json.to (_propertyName) + ']';
+									}
+
 									var _attributeName = _attributeParser.name.name;
 									if (_attributeName == 'id' || _attributeName == 'class') {
 										var _attributeValue = _attributeParser.value.value;
 										_addReplacement (
 											_attributeParser,
-											_attributeName + ' ~ ' + _attributeValue,
+											_attributeName + _replacementNameDelimiter + _attributeValue,
 											_attributeName == 'id'
 												? '_idPrefix' + (_attributeValue && ' + \'-' + _attributeValue + '\'')
 												: (
@@ -162,8 +167,21 @@ Uize.module ({
 													Uize.forEach (
 														_bindings,
 														function (_binding) {
-															var _bindingType = _binding.bindingType;
-															if (_bindingType.slice (0,6) == 'style.') {
+															var
+																_bindingType = _binding.bindingType,
+																_bindingProperty = _binding.propertyName
+															;
+															if (_bindingType == 'html' || _bindingType == 'innerHTML') {
+																var _replacementName =
+																	'innerHTML' + _replacementNameDelimiter + _attributeValue
+																;
+																_replacements [_replacementName] =
+																	_propertyReference (_bindingProperty)
+																;
+																_node.childNodes.parse (
+																	_replacementTokenOpener + _replacementName + _replacementTokenCloser
+																);
+															} else if (_bindingType.slice (0,6) == 'style.') {
 																var _stylePropertyName = _bindingType.slice (6);
 																_styleExpressionParts.push (
 																	Uize.Json.to (
@@ -181,7 +199,7 @@ Uize.module ({
 																		':'
 																	) +
 																	' + ' +
-																	'i[' + Uize.Json.to (_binding.propertyName) + ']'
+																	_propertyReference (_bindingProperty)
 																);
 															}
 														}
@@ -190,7 +208,7 @@ Uize.module ({
 														var _styleAttribute = _ensureNodeAttribute (_node,'style');
 														_addReplacement (
 															_styleAttribute,
-															'style ~ ' + _attributeValue,
+															'style' + _replacementNameDelimiter + _attributeValue,
 															Uize.Json.to (_styleAttribute.value.value) + ' + ' +
 																_styleExpressionParts.join (' + ')
 														);
@@ -229,7 +247,7 @@ Uize.module ({
 
 											/*** add replacement and replace child tag node with text node ***/
 												var
-													_replacementName = 'child ~ ' + _childName,
+													_replacementName = 'child' + _replacementNameDelimiter + _childName,
 													_serializedProperties = Uize.Json.to (_attributesLookup)
 												;
 												_replacements [_replacementName] =

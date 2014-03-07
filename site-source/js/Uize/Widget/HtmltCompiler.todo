@@ -1,8 +1,5 @@
 This is a TO DO document for the =Uize.Widget.HtmltCompiler= module.
 
-Implement Support for html and innerHTML Bindings
-	Will need to replace child nodes of node with this binding type to a simple text node with the replacement token.
-
 Implement Support for value Binding
 	How this binding type is compiled with have to be affected by the node type, since the current runtime binding logic leverages the =setNodeValue= method, and this method is an abstraction that provides different handling for different node types.
 
@@ -11,8 +8,13 @@ Implement Support for value Binding
 Miscellaneous
 	Other things to do include...
 
-	- achieve parity for style bindings compiled to template code
 	- provide special handling of class binding
+	- achieve parity for style bindings compiled to template code
 	- add support for attribute bindings
 		- reconcile attribute bindings and property bindings
 	- state binding to children
+
+Child Widgets
+	- support JSON for specifying properties of child widgets
+	- provide special handling for widgetClass attribute, by adding explicitly declared widget classes as dependencies for compiled template modules
+
