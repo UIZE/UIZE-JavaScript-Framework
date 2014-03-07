@@ -1,0 +1,28 @@
+<table>
+	<tr>
+		<td colspan="5">
+			<div id="swatch" colspan="5" class="swatch">&nbsp;</div>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="5" class="verticalSpacer"></td>
+	</tr>
+	<tr>
+		<td id="sliderRShell"><child name="sliderR" trackLength="100%"/></td>
+		<td class="horizontalSpacer"></td>
+		<td id="sliderGShell"><child name="sliderG" trackLength="100%"/></td>
+		<td class="horizontalSpacer"></td>
+		<td id="sliderBShell"><child name="sliderB" trackLength="100%"/></td>
+	</tr>
+	<tr>
+		<td colspan="5" class="verticalSpacer"></td>
+	</tr>
+	<tr>
+		<td><div class="sliderLabel">R</div></td>
+		<td width="3"></td>
+		<td><div class="sliderLabel">G</div></td>
+		<td width="3"></td>
+		<td><div class="sliderLabel">B</div></td>
+	</tr>
+</table>
+

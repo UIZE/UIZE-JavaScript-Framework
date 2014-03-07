@@ -74,40 +74,6 @@ Uize.module ({
 		;
 
 		/*** Private Instance Methods ***/
-			function _updateUiText () {
-				var m = this;
-				m.isWired && m._text != _undefined &&
-					m.setNodeInnerHtml (m.getNode ('text') || m.getNode (),m._text)
-				;
-				/*?
-					Implied Nodes
-						text Implied Node
-							An optional node whose contents will be replaced with the value of the =text= state property, if this property's value is not =null= or =undefined=.
-
-							The =innerHTML= value of the =text Implied Node= will be updated to reflect the value of the =text= state property whenever the value of this property is changed, is not =null= or =undefined=, and the instance is wired up.
-
-							NOTES
-							- this implied node is optional
-				*/
-			}
-
-			function _updateUiDisplayedTipText () {
-				var m = this;
-				m.isWired && m._displayedTipText != _undefined &&
-					m.setNodeProperties ('',{title:m._displayedTipText})
-				;
-				/*?
-					Implied Nodes
-						Root Node
-							The root node is the implied node with the name =''= (empty string), and is required for this widget class.
-
-							The =className= property of this node is updated to reflect the state of the instance's =playing=, =selected=, and =state= state properties. In such cases, the value used to set the =className= property is constructed by using the values of the =state=, =selected=, =playing=, =busyInherited=, =enabledInherited=, and =statePrecedenceMap= state properties.
-
-							NOTES
-							- this implied node is required
-				*/
-			}
-
 			function _updateDisplayState () {
 				var m = this;
 				if (m._created) {
@@ -266,13 +232,6 @@ Uize.module ({
 			},
 
 			instanceMethods:{
-				updateUi:function () {
-					if (this.isWired) {
-					 	_updateUiText.call (this);
-						_updateUiDisplayedTipText.call (this);
-					}
-				},
-
 				wireUi:function () {
 					var m = this;
 					if (!m.isWired) {
@@ -546,7 +505,7 @@ Uize.module ({
 				},
 				_text:{
 					name:'text',
-					onChange:_updateUiText
+					value:''
 					/*?
 						State Properties
 							text
@@ -560,16 +519,17 @@ Uize.module ({
 				},
 				_displayedTipText:{
 					name:'displayedTipText',
-					derived:
-						'tipText,enabledInherited,busyInherited: tipText == undefined ? undefined : enabledInherited && !busyInherited ? tipText : ""',
-					onChange:_updateUiDisplayedTipText
+					derived:'tipText,enabledInherited,busyInherited: enabledInherited && !busyInherited ? tipText : ""'
 				},
-				_tipText:'tipText',
+				_tipText:{
+					name:'tipText',
+					value:''
 					/*?
 						State Properties
 							tipText
 								.
 					*/
+				},
 				_tooltip:'tooltip',
 					/*?
 						State Properties
@@ -596,6 +556,31 @@ Uize.module ({
 			cssBindings:{
 				displayState:'value',
 				busyInherited:['','busy']
+			},
+
+			htmlBindings:{
+				text:'text:html',
+					/*?
+						Implied Nodes
+							text Implied Node
+								An optional node whose contents will be replaced with the value of the =text= state property, if this property's value is not =null= or =undefined=.
+
+								The =innerHTML= value of the =text Implied Node= will be updated to reflect the value of the =text= state property whenever the value of this property is changed, is not =null= or =undefined=, and the instance is wired up.
+
+								NOTES
+								- this implied node is optional
+					*/
+				displayedTipText:':title'
+					/*?
+						Implied Nodes
+							Root Node
+								The root node is the implied node with the name =''= (empty string), and is required for this widget class.
+
+								The =className= property of this node is updated to reflect the state of the instance's =playing=, =selected=, and =state= state properties. In such cases, the value used to set the =className= property is constructed by using the values of the =state=, =selected=, =playing=, =busyInherited=, =enabledInherited=, and =statePrecedenceMap= state properties.
+
+								NOTES
+								- this implied node is required
+					*/
 			}
 		});
 	}
