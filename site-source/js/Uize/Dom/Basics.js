@@ -90,6 +90,7 @@ Uize.module ({
 				_navigator = _isBrowser ? navigator : {userAgent:'',appName:''},
 				_userAgent = _navigator.userAgent.toLowerCase (),
 				_isIe = _navigator.appName == 'Microsoft Internet Explorer',
+				_ieMajorVersion = +(_isIe && (_userAgent.match (/MSIE\s*(\d+)/i) || [0,0]) [1]),
 				_isMozilla = _userAgent.indexOf ('gecko') > -1,
 				_isOpera = _userAgent.indexOf ('opera') > -1,
 				_isMozillaOrOpera = _isMozilla || _isOpera,
@@ -100,6 +101,7 @@ Uize.module ({
 				_wirings = {},
 				_wiringIdsByOwnerId = {},
 				_totalWirings = 0,
+				_needsWindowEventVehicle = _isIe && _ieMajorVersion < 7,
 
 			/*** variables for display method ***/
 				_tableDisplayValuePrefix = 'table-',
@@ -1568,7 +1570,7 @@ Uize.module ({
 											*/
 										} else {
 											try {
-												_node == window
+												_node == window && _needsWindowEventVehicle
 													? _windowEventVehicle.unwire (_eventName,_wiring._handlerCaller)
 													: _isIe
 														? _node.detachEvent ('on' + _eventName,_wiring._handlerCaller)
@@ -1759,7 +1761,10 @@ Uize.module ({
 						_doForAll (
 							_nodeBlob,
 							function (_node) {
-								var _nodeTagName = _node.tagName;
+								var
+									_nodeTagName = _node.tagName,
+									_useWindowEventVehicle = _node == window && _needsWindowEventVehicle
+								;
 
 								/*** update handler mapping info ***/
 									(_wiringIdsByOwnerId [_wiringOwnerId] || (_wiringIdsByOwnerId [_wiringOwnerId] = [])).push (
@@ -1771,7 +1776,7 @@ Uize.module ({
 										(
 											_isVirtualDomEvent
 												? _returnFalse
-												: _node == window
+												: _useWindowEventVehicle
 													? _makeWindowEventHandlerCaller
 													: _handlerCallerMakersByEvent [_eventName] || _makeGenericHandlerCaller
 										) (_totalWirings)
@@ -1795,7 +1800,7 @@ Uize.module ({
 								if (_handlerCaller) {
 									/*** wire the event ***/
 										var _eventPropertyName = 'on' + _eventName;
-										_node == window
+										_useWindowEventVehicle
 											? _windowEventVehicle.wire (_eventName,_handlerCaller)
 											: _node.attachEvent
 												? _node.attachEvent (_eventPropertyName,_handlerCaller)
@@ -1906,7 +1911,7 @@ Uize.module ({
 				}) (),
 
 			/*** Static Properties ***/
-				ieMajorVersion:+(_isIe && (_userAgent.match (/MSIE\s*(\d+)/i) || [0,0]) [1]),
+				ieMajorVersion:_ieMajorVersion,
 					/*?
 						Static Properties
 							Uize.Dom.Basics.ieMajorVersion
@@ -1957,7 +1962,7 @@ Uize.module ({
 		});
 
 		/*** Initialization ***/
-			if (_isBrowser) {
+			if (_isBrowser && _needsWindowEventVehicle) {
 				/*** wire up document mousemove to keep track of mouse position ***/
 					_package.wire (document.documentElement,'mousemove',_captureMousePos);
 
