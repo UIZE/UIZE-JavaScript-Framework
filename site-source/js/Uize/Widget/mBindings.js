@@ -100,6 +100,10 @@ Uize.module ({
 					);
 				},
 
+				omegastructor:function () {
+					_updateRootNodeClasses (this);
+				},
+
 				instanceMethods:{
 					rootNodeCssClasses:function () {
 						var
