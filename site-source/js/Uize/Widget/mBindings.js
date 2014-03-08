@@ -54,9 +54,18 @@ Uize.module ({
 				}
 			}
 
-		/*** Private Instance Methods ***/
-			function _updateRootNodeClasses (m) {
-				m.Class.enableRootNodeCssClasses && m.set ({mBindings_rootNodeClasses:m.rootNodeCssClasses ()});
+			function _declareRootNodeClassesStateProperty (m) {
+				m.stateProperties ({
+					mBindings_rootNodeClasses:{
+						derived:Function.apply (
+							Function,
+							Uize.keys (m.mBindings_css).concat (
+								'extraClasses',
+								'return this.mBindings_computeRootNodeClasses ()'
+							)
+						)
+					}
+				});
 			}
 
 		return function (_class) {
@@ -68,17 +77,6 @@ Uize.module ({
 					m.once (
 						'wired',
 						function () {
-							/*** wire up handlers for state properties that have CSS bindings ***/
-								var
-									_cssBindings = m.Class.mBindings_css,
-									_boundUpdateRootNodeClasses = function () {_updateRootNodeClasses (m)},
-									_wiringsForCssBindings = {}
-								;
-								for (var _property in _cssBindings)
-									_wiringsForCssBindings ['Changed.' + _property] = _boundUpdateRootNodeClasses
-								;
-								m.wire (_wiringsForCssBindings);
-
 							/*** wire up handlers for state properties that have HTML bindings ***/
 								var _wiringsForHtmlBindings = {};
 								_forEach (
@@ -92,7 +90,6 @@ Uize.module ({
 								m.wire (_wiringsForHtmlBindings);
 
 							/*** update UI ***/
-								_updateRootNodeClasses (m);
 								for (var _eventName in _wiringsForHtmlBindings)
 									_wiringsForHtmlBindings [_eventName] ()
 								;
@@ -100,12 +97,8 @@ Uize.module ({
 					);
 				},
 
-				omegastructor:function () {
-					_updateRootNodeClasses (this);
-				},
-
 				instanceMethods:{
-					rootNodeCssClasses:function () {
+					mBindings_computeRootNodeClasses:function () {
 						var
 							m = this,
 							_extraClasses = m.extraClasses,
@@ -118,6 +111,10 @@ Uize.module ({
 								_cssClasses.push (m.cssClass (_cssClassSuffix))
 						;
 						return _cssClasses.join (' ') + (_extraClasses && ' ' + _extraClasses);
+					},
+
+					rootNodeCssClasses:function () {
+						return this.mBindings_rootNodeClasses;
 						/*?
 							Instance Methods
 								rootNodeCssClasses
@@ -181,6 +178,7 @@ Uize.module ({
 
 					cssBindings:function (_bindings) {
 						_Uize.copyInto (this.mBindings_css,_Uize.map (_bindings,_Uize.resolveTransformer));
+						_declareRootNodeClassesStateProperty (this);
 						/*?
 							Static Methods
 								Uize.Widget.mBindings.cssBindings
@@ -313,7 +311,6 @@ Uize.module ({
 				},
 
 				stateProperties:{
-					mBindings_rootNodeClasses:{value:''},
 					extraClasses:{value:''}
 				},
 
@@ -321,6 +318,8 @@ Uize.module ({
 					mBindings_rootNodeClasses:':className'
 				}
 			});
+
+			_declareRootNodeClassesStateProperty (_class);
 		};
 	}
 });

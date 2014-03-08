@@ -18,3 +18,6 @@ Child Widgets
 	- support JSON for specifying properties of child widgets
 	- provide special handling for widgetClass attribute, by adding explicitly declared widget classes as dependencies for compiled template modules
 
+Optimizations
+	- when a CSS class is referenced multiple times in the same template, create a local variable in the compiled code to avoid repeated calls to the cssClass method
+
