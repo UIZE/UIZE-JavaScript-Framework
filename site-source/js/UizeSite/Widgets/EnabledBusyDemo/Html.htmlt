@@ -1,0 +1,25 @@
+<div>
+	<div id="heading" class="heading"/>
+	<div class="body">
+		ENABLED:&nbsp;
+			<select id="enabledSelector">
+				<option value="inherit" selected>inherit</option>
+				<option value="true">true</option>
+				<option value="false">false</option>
+			</select>
+		&nbsp;&nbsp;|&nbsp;&nbsp;
+		BUSY:&nbsp;
+			<select id="busySelector">
+				<option value="inherit" selected>inherit</option>
+				<option value="true">true</option>
+				<option value="false">false</option>
+			</select>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<child name="button1" text="BUTTON 1" size="small"/>
+		<child name="button2" text="BUTTON 2" size="small"/>
+		<br clear="left"/>
+		<child name="childWidget0"/>
+		<child name="childWidget1"/>
+	</div>
+</div>
+

@@ -44,6 +44,10 @@ Uize.module ({
 
 			set:{
 				html:Uize.Widgets.VisualTests.TestCase.Html
+			},
+
+			htmlBindings:{
+				heading:'heading:html'
 			}
 		});
 	}

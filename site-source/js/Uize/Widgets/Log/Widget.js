@@ -287,6 +287,10 @@ Uize.module ({
 								- the initial value is =true=
 					*/
 				},
+				_title:{
+					name:'title',
+					value:''
+				},
 				_timestampFormat:{
 					name:'timestampFormat',
 					value:'{hh}:{mm}:{ss}.{zzz}'
@@ -310,6 +314,10 @@ Uize.module ({
 
 			staticProperties:{
 				cssModule:Uize.Widgets.Log.Css
+			},
+
+			htmlBindings:{
+				title:'title:html'
 			}
 		});
 	}

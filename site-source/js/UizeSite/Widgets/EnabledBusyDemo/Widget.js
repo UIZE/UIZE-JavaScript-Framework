@@ -119,6 +119,10 @@ Uize.module ({
 
 			cssBindings:{
 				depth:'"depth" + value'
+			},
+
+			htmlBindings:{
+				idPrefix:'heading:html'
 			}
 		});
 	}

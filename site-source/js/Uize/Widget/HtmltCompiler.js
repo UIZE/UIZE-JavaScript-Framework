@@ -165,7 +165,7 @@ Uize.module ({
 											if (_bindingType == 'html' || _bindingType == 'innerHTML') {
 												var _replacementName = 'innerHTML' + _replacementNameDelimiter + _nodeId;
 												_replacements [_replacementName] = _propertyReference (_bindingProperty);
-												_node.childNodes.parse (
+												(_node.childNodes || (_node.childNodes = new Uize.Parse.Xml.NodeList)).parse (
 													_replacementTokenOpener + _replacementName + _replacementTokenCloser
 												);
 											} else if (_bindingType.charCodeAt (0) == 64) {

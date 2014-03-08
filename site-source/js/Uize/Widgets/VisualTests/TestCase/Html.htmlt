@@ -1,0 +1,6 @@
+<div>
+	<div class="contents">
+		<div id="heading" class="heading"/>
+		<div id="body" class="body"><child name="widget"/></div>
+	</div>
+</div>

@@ -32,7 +32,7 @@ Uize.module ({
 
 		return _superclass.subclass ({
 			omegastructor:function () {
-				var _log = this.addSample ();
+				var _log = this.addSample ({title:'LOG TITLE'});
 				Uize.forEach (20,function () {_log.log ('a log message')});
 			},
 

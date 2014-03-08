@@ -78,7 +78,7 @@ Uize.module ({
 
 			htmlBindings:{
 				valueAsHexRgb:[
-					'heading',
+					'heading:html',
 					'swatch:style.backgroundColor',
 					'asBackground:style.backgroundColor',
 					'asForeground:style.color'

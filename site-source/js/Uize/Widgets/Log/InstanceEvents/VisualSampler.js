@@ -32,7 +32,7 @@ Uize.module ({
 
 		return _superclass.subclass ({
 			omegastructor:function () {
-				var _log = this.addSample ();
+				var _log = this.addSample ({title:'INSTANCE EVENTS'});
 				_log.set ({instance:_log.children.clear});
 			},
 

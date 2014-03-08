@@ -1,0 +1,20 @@
+<div>
+	<div class="contents">
+		<div id="heading" class="heading"/>
+		<div id="body" class="body">
+			<div id="swatch" class="swatch"></div>
+			<div class="subheader">As a background</div>
+			<div id="asBackground" class="asBg">
+				<span class="whiteText">white text</span>&nbsp;&nbsp;
+				<span class="blackText">black text</span>
+			</div>
+			<div class="subheader">As a text color</div>
+			<div id="asForeground" class="asColor">
+				<div class="onWhite"></div>
+				<div class="onBlack"></div>
+				<div style="position:relative; width:100%;">on white&nbsp;&nbsp;&nbsp;&nbsp;on black</div>
+			</div>
+		</div>
+	</div>
+</div>
+
