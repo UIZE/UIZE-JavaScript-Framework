@@ -141,7 +141,7 @@ Uize.module ({
 			}
 
 		return _superclass.subclass ({
-			mixins:Uize.Oop.mTreeInheritance,
+			mixins:_Uize.Oop.mTreeInheritance,
 
 			alphastructor:function (_properties) {
 				var m = this;
@@ -190,6 +190,8 @@ Uize.module ({
 									- see also the special `children state property`
 									- see also the related =parent= instance property
 						*/
+						
+					m.addedChildren = m._addedChildren = new _Uize.Class;
 			},
 
 			instanceMethods:_copyInto (
@@ -1378,7 +1380,9 @@ Uize.module ({
 								}
 
 							_child && _child.set (_properties);
-							return m._children [_childName] = _child || new _childInstanceOrClass (_properties);
+							_child = m._children [_childName] = _child || new _childInstanceOrClass (_properties);
+							m._addedChildren.met(_childName);
+							return _child;
 							/*?
 								Instance Methods
 									addChild
@@ -1429,6 +1433,7 @@ Uize.module ({
 								_child.unwireUi ();
 								delete _child.parent;
 								delete _children [_childName];
+								m._addedChildren.unmet(_childName);
 							}
 							/*?
 								Instance Methods
