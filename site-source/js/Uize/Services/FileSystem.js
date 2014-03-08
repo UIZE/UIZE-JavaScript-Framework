@@ -20,7 +20,7 @@
 	Introduction
 		The =Uize.Services.FileSystem= module defines a class for a file system service.
 
-		*DEVELOPERS:* `Chris van Rensburg`
+		*DEVELOPERS:* `Chris van Rensburg` & `Ben Ilegbodu`
 */
 
 Uize.module ({
@@ -192,6 +192,24 @@ Uize.module ({
 								..........................................
 								fileSystemInstance.makeFolder (paramsOBJ);
 								..........................................
+
+								Params
+									path
+										.
+					*/
+				},
+
+				moveFile:{
+					async:_false
+					/*?
+						Instance Methods
+							moveFile
+								.
+
+								SYNTAX
+								..........................................................
+								fileContentsSTR = fileSystemInstance.moveFile (paramsOBJ);
+								..........................................................
 
 								Params
 									path

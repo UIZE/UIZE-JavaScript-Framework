@@ -12,7 +12,7 @@
 /* Module Meta Data
 	type: Class
 	importance: 8
-	codeCompleteness: 50
+	codeCompleteness: 100
 	docCompleteness: 100
 */
 
@@ -55,7 +55,7 @@ Uize.module ({
 		
 									EXAMPLE
 									...........................................
-									var Knob = this.web('knob');
+									var knob = this.web('knob');
 									...........................................
 		
 									Returns a =Uize.Web= object that contains the "knob" implied node of the widget.

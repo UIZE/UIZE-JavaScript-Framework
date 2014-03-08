@@ -20,7 +20,7 @@
 	Introduction
 		The =Uize.Widget.mBindings= mixin implements features to provide various different ways to bind state properties to DOM nodes.
 
-		*DEVELOPERS:* `Chris van Rensburg`
+		*DEVELOPERS:* `Chris van Rensburg`, `Ben Ilegbodu`
 */
 
 Uize.module ({
@@ -53,6 +53,20 @@ Uize.module ({
 					m.cssModule && m.cssModule.add ();
 				}
 			}
+			function _wrapEventBindings(m, _bindings) {
+				var _wrappedBindings = {};
+										
+				_forEach(
+					_bindings,
+					function(_handler, _eventName) {
+						_wrappedBindings[_eventName] = function(_event) {
+							_handler.call(m, _event, this);
+						};
+					}
+				);
+				
+				return _wrappedBindings;
+			}
 
 		/*** Private Instance Methods ***/
 			function _updateRootNodeClasses (m) {
@@ -62,15 +76,18 @@ Uize.module ({
 		return function (_class) {
 			_class.declare ({
 				alphastructor:function () {
-					var m = this;
+					var
+						m = this,
+						_mClass = m.Class
+					;
 
-					_needCss (m.Class);
+					_needCss (_mClass);
 					m.once (
 						'wired',
 						function () {
 							/*** wire up handlers for state properties that have CSS bindings ***/
 								var
-									_cssBindings = m.Class.mBindings_css,
+									_cssBindings = _mClass.mBindings_css,
 									_boundUpdateRootNodeClasses = function () {_updateRootNodeClasses (m)},
 									_wiringsForCssBindings = {}
 								;
@@ -82,7 +99,7 @@ Uize.module ({
 							/*** wire up handlers for state properties that have HTML bindings ***/
 								var _wiringsForHtmlBindings = {};
 								_forEach (
-									m.Class.mBindings_html,
+									_mClass.mBindings_html,
 									function (_bindings,_property) {
 										_wiringsForHtmlBindings ['Changed.' + _property] = function () {
 											_applyAll (m,_bindings,[m.get (_property)]);
@@ -90,6 +107,14 @@ Uize.module ({
 									}
 								);
 								m.wire (_wiringsForHtmlBindings);
+								
+							/*** wire up event handlers for DOM nodes ***/
+								_forEach(
+									_mClass.mBindings_domEvent,
+									function (_bindings, _nodeName) {
+										m.wireNode(_nodeName, _wrapEventBindings(m, _bindings));
+									}
+								);
 
 							/*** update UI ***/
 								_updateRootNodeClasses (m);
@@ -101,7 +126,25 @@ Uize.module ({
 				},
 
 				omegastructor:function () {
-					_updateRootNodeClasses (this);
+					var
+						m = this,
+						_addedChildren = m.addedChildren,
+						_children = m.children
+					;
+					
+					_updateRootNodeClasses (m);
+					
+					/*** wire self & child widget events ***/
+						_forEach(
+							m.Class.mBindings_widgetEvent,
+							function(_bindings, _widgetName) {
+								function _wire(_widget) { _widget.wire( _wrapEventBindings(m, _bindings)) }
+								_widgetName != '~'
+									? _addedChildren.once(_widgetName, function() { _wire(_children[_widgetName]) })
+									: _wire(m)
+								;
+							}
+						);
 				},
 
 				instanceMethods:{
@@ -197,7 +240,7 @@ Uize.module ({
 										stateProperties:{
 											size:{value:'small'}
 										},
-										htmlBindings:{
+										cssBindings:{
 											size:'value'
 										}
 									});
@@ -209,6 +252,34 @@ Uize.module ({
 										Using a Function Class Name Generator
 											.
 						*/
+					},
+					
+					eventBindings:function(_bindings) {
+						var
+							_domEventBindings = this.mBindings_domEvent,
+							_widgetEventBindings = this.mBindings_widgetEvent
+						;
+						
+						_forEach(
+							_bindings,
+							function(_eventBindingValue, _eventBindingKey) {
+								var
+									_eventBindingKeyTokens = _eventBindingKey.split(':'), // NOTE: widget events with colons won't work
+									_nodeOrWidgetName = _eventBindingKeyTokens[0],
+									_dotIndex = -1,
+									_eventBindings = _nodeOrWidgetName == '~' || ((_dotIndex = _nodeOrWidgetName.indexOf('.')) > -1 ? (_nodeOrWidgetName = _nodeOrWidgetName.substr(_dotIndex + 1)) : _undefined)
+										? _widgetEventBindings
+										: _domEventBindings
+								;
+								
+								_Uize.copyInto(
+									_eventBindings[_nodeOrWidgetName] || (_eventBindings[_nodeOrWidgetName] = {}),
+									_eventBindingKeyTokens.length > 1
+										? _Uize.pairUp(_eventBindingKeyTokens[1], _eventBindingValue)
+										: _eventBindingValue
+								);
+							}
+						);
 					},
 
 					htmlBindings:function (_bindings) {
@@ -309,6 +380,8 @@ Uize.module ({
 				staticProperties:{
 					mBindings_css:{},
 					mBindings_html:{},
+					mBindings_domEvent:{},
+					mBindings_widgetEvent:{},
 					enableRootNodeCssClasses:true
 				},
 

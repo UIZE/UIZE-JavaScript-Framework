@@ -102,7 +102,7 @@ Uize.module ({
 				_true = true,
 				_false = false,
 				_undefined
-		;
+			;
 
 		/*** Private Instance Methods ***/
 			function _fireItemsChangedEvent (m) {
@@ -340,11 +340,8 @@ Uize.module ({
 				},
 
 				isCollectionItem:function (_childWidget) {
-					var
-						m = this
-					;
-					// test to make sure the widget being added is actually a collection item widget
-					return (m._itemWidgetClass && _childWidget.Class.moduleName == m._itemWidgetClass.moduleName);
+					return _childWidget.isCollectionItem;
+
 					/*?
 						Instance Methods
 							isCollectionItem
