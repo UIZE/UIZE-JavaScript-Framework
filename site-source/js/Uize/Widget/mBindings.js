@@ -41,7 +41,8 @@ Uize.module ({
 				_trueFlag = {},
 				_cssAddedLookup = {},
 				_classPrefixPerCssModule = {},
-				_cssClassNameGenerators = {}
+				_cssClassNameGenerators = {},
+				_cssClassCachePerModule = {}
 		;
 
 		/*** Utility Functions ***/
@@ -133,31 +134,39 @@ Uize.module ({
 					cssClass:function (_className) {
 						var
 							_thisClass = this.Class,
-							_thisClassName = _thisClass.moduleName
+							_thisClassName = _thisClass.moduleName,
+							_cssClassCache =
+								_cssClassCachePerModule [_thisClassName] ||
+								(_cssClassCachePerModule [_thisClassName] = {}),
+							_cssClass = _cssClassCache [_className]
 						;
-						if (!_cssClassNameGenerators [_thisClassName]) {
-							var
-								_module = _thisClass,
-								_classPrefix,
-								_classNameGeneratorChunks = [],
-								_classPrefixesUsed = {}
-							;
-							while (_module) {
-								if (
-									(_classPrefix = _thisClass.cssClassPrefix.call (_module)) != _undefined &&
-									!_classPrefixesUsed [_classPrefix]
-								) {
-									_classPrefixesUsed [_classPrefix] = 1;
-									_classNameGeneratorChunks.unshift ('"' + _classPrefix + '"+cs');
+						if (!_cssClass) {
+							var _cssClassNameGenerator = _cssClassNameGenerators [_thisClassName];
+							if (!_cssClassNameGenerator) {
+								var
+									_module = _thisClass,
+									_classPrefix,
+									_classNameGeneratorChunks = [],
+									_classPrefixesUsed = {}
+								;
+								while (_module) {
+									if (
+										(_classPrefix = _thisClass.cssClassPrefix.call (_module)) != _undefined &&
+										!_classPrefixesUsed [_classPrefix]
+									) {
+										_classPrefixesUsed [_classPrefix] = 1;
+										_classNameGeneratorChunks.unshift ('"' + _classPrefix + '"+cs');
+									}
+									_module = _module.superclass;
 								}
-								_module = _module.superclass;
+								_cssClassNameGenerator = _cssClassNameGenerators [_thisClassName] =  Function (
+									'cn',
+									'var cs=(cn||"")&&"-"+cn;return ' + _classNameGeneratorChunks.join ('+" "+') + ';'
+								);
 							}
-							_cssClassNameGenerators [_thisClassName] =  Function (
-								'nn',
-								'var cs=(nn||"")&&"-"+nn;return ' + _classNameGeneratorChunks.join ('+" "+') + ';'
-							);
+							_cssClass = _cssClassCache [_className] = _cssClassNameGenerator (_className);
 						}
-						return _cssClassNameGenerators [_thisClassName] (_className);
+						return _cssClass;
 					}
 				},
 
