@@ -119,11 +119,12 @@ Uize.module ({
 
 				/*** recurse parser object tree, process tag nodes and build replacements lookup ***/
 					function _processNode (_node) {
-						function _classNamespacerExpression (_classes) {
-							return Uize.map (
-								_split (_trim (_classes),/\s+/),
-								function (_class) {return 'm.cssClass (\'' + _class + '\')'}
-							).join (' + \' \' + ');
+						function _splitCssClasses (_classes) {
+							return _split (_trim (_classes),/\s+/);
+						}
+
+						function _classNamespacerExpression (_class) {
+							return '_cssClass (\'' + _class + '\')';
 						}
 
 						function _addAttributeReplacement (_attribute,_replacementName,_replacementValue) {
@@ -205,12 +206,18 @@ Uize.module ({
 							if (_nodeId !== '') {
 								var _classAttribute = _findAttribute (_node,'class');
 								if (_classAttribute) {
-									var _cssClasses = _classAttribute.value.value;
-									_addAttributeReplacement (
-										_classAttribute,
-										'class' + _replacementNameDelimiter + _cssClasses,
-										_classNamespacerExpression (_cssClasses)
+									var _classTokens = [];
+									Uize.forEach (
+										_splitCssClasses (_classAttribute.value.value),
+										function (_cssClass) {
+											var _replacementName = 'class' + _replacementNameDelimiter + _cssClass;
+											_replacements [_replacementName] = _classNamespacerExpression (_cssClass);
+											_classTokens.push (
+												_replacementTokenOpener + _replacementName + _replacementTokenCloser
+											);
+										}
 									);
+									_classAttribute.value.value = _classTokens.join (' ');
 								}
 							}
 						}
@@ -236,7 +243,10 @@ Uize.module ({
 											/*** special handling for the extraClasses property ***/
 												var _extraClasses = _attributesLookup.extraClasses;
 												if (_extraClasses) {
-													_extraClasses = _classNamespacerExpression (_extraClasses);
+													_extraClasses = Uize.map (
+														_splitCssClasses (_extraClasses),
+														_classNamespacerExpression
+													).join (' + \' \' + ');
 													_attributesLookup.extraClasses = _extraClassesToken;
 												}
 
@@ -246,7 +256,7 @@ Uize.module ({
 													_serializedProperties = Uize.Json.to (_attributesLookup)
 												;
 												_replacements [_replacementName] =
-													'm.childHtml (' +
+													'_childHtml (' +
 													(
 														_extraClasses
 															? _serializedProperties.replace (
@@ -270,14 +280,57 @@ Uize.module ({
 					}
 					_processNode ({childNodes:_nodeListParser});
 
-				return (
-					'var m = this, i = arguments [0], _idPrefix = i.idPrefix;\n' +
-					'return ' +
-						Uize.map (
+				/*** split re-serialized HTML by replacement tokens and resolve all fragments to expressions ***/
+					var
+						_fragmentOccurrences = {},
+						_fragmentsToCapture = {},
+						_fragments = Uize.map (
 							Uize.Str.Split.split (_nodeListParser.serialize (),_replacementTokenRegExp),
 							function (_segment,_segmentNo) {
-								return _segmentNo % 2 ? _replacements [_segment] : Uize.Json.to (_segment);
+								var _fragment = _segmentNo % 2 ? _replacements [_segment] : Uize.Json.to (_segment);
+								if (!_fragmentsToCapture [_fragment]) {
+									var
+										_fragmentLength = _fragment.length,
+										_occurrences =
+											_fragmentOccurrences [_fragment] = (_fragmentOccurrences [_fragment] || 0) + 1
+									;
+									if (_occurrences * _fragmentLength > 3 + _fragmentLength + _occurrences * 2)
+										_fragmentsToCapture [_fragment] = true
+									;
+								}
+								return _fragment;
 							}
+						)
+					;
+
+				var
+					_fragmentNo = 0,
+					_varChunks = [
+						'm = this',
+						'i = arguments [0]',
+						'_idPrefix = i.idPrefix'
+					]
+				;
+
+				Uize.forEach (
+					_fragmentsToCapture,
+					function (_true,_fragmentToCapture) {
+						var _fragmentVar = '_fragment' + _fragmentNo++;
+						_varChunks.push (_fragmentVar + ' = ' + _fragmentToCapture);
+						_fragmentsToCapture [_fragmentToCapture] = _fragmentVar;
+					}
+				);
+
+				return (
+					'function _cssClass (_class) {return m.cssClass (_class)}\n' +
+					'function _childHtml (_properties) {return m.childHtml (_properties)}\n' +
+					'var\n' +
+						'\t' + _varChunks.join (',\n\t') + '\n' +
+					';\n' +
+					'return ' +
+						Uize.map (
+							_fragments,
+							function (_fragment) {return _fragmentsToCapture [_fragment] || _fragment}
 						).join (' + ') + ';\n'
 				);
 			}
