@@ -65,21 +65,24 @@ Uize.module ({
 				Uize.require (
 					_moduleName.replace (/\.Html$/,'.Widget'),
 					function (_widgetClass) {
+						var _compiledTemplate = Uize.Widget.HtmltCompiler.compile (
+							m.readFile ({path:_inputs.source}),
+							{
+								widgetClass:_widgetClass,
+								result:'full'
+							}
+						);
+
 						_result = Uize.Build.Util.moduleAsText ({
 							name:_moduleName,
+							required:_compiledTemplate.required,
 							builder:[
 								'function () {',
 								'	\'use strict\';',
 								'',
 								'	return Uize.package ({',
 								'		process:function (i) {',
-								Uize.Str.Lines.indent (
-									Uize.Widget.HtmltCompiler.compileToFunctionBody (
-										m.readFile ({path:_inputs.source}),
-										_widgetClass
-									),
-									3
-								),
+								Uize.Str.Lines.indent (_compiledTemplate.code,3),
 								'		}',
 								'	});',
 								'}'

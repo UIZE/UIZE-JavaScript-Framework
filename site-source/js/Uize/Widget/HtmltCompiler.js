@@ -42,10 +42,8 @@ Uize.module ({
 			/*** Variables for Performance Optimization ***/
 				_trim = Uize.Str.Trim.trim,
 
-			/*** references to static methods used internally ***/
-				_compileToFunctionBody,
-
 			/*** General Variables ***/
+				_sacredEmptyObject = {},
 				_replacementTokenOpener = '{{[[',
 				_replacementTokenCloser = ']]}}',
 				_replacementNameDelimiter = ' ~ ',
@@ -59,14 +57,14 @@ Uize.module ({
 		;
 
 		return Uize.package ({
-			compile:function (_source,_widgetClass) {
-				return new Function (_compileToFunctionBody (_source,_widgetClass));
-			},
-
-			compileToFunctionBody:_compileToFunctionBody = function (_source,_widgetClass) {
+			compile:function (_source,_templateOptions) {
+				_templateOptions = _templateOptions || _sacredEmptyObject;
 				var
 					_nodeListParser = new Uize.Parse.Xml.NodeList (_source),
-					_replacements = {}
+					_replacements = {},
+					_required = [],
+					_alreadyRequired = {},
+					_widgetClass = _templateOptions.widgetClass
 				;
 
 				function _ensureNodeAttribute (_node,_attributeName,_attributeValue) {
@@ -250,6 +248,12 @@ Uize.module ({
 													_attributesLookup.extraClasses = _extraClassesToken;
 												}
 
+											/*** special handling for the widgetClass property ***/
+												var _widgetClass = _attributesLookup.widgetClass;
+												_widgetClass && !_alreadyRequired [_widgetClass] &&
+													_required.push (_widgetClass)
+												;
+
 											/*** add replacement and replace child tag node with text node ***/
 												var
 													_replacementName = 'child' + _replacementNameDelimiter + _childName,
@@ -321,17 +325,29 @@ Uize.module ({
 					}
 				);
 
+				var
+					_templateFunctionCode =
+						'function _cssClass (_class) {return m.cssClass (_class)}\n' +
+						'function _childHtml (_properties) {return m.childHtml (_properties)}\n' +
+						'var\n' +
+							'\t' + _varChunks.join (',\n\t') + '\n' +
+						';\n' +
+						'return ' +
+							Uize.map (
+								_fragments,
+								function (_fragment) {return _fragmentsToCapture [_fragment] || _fragment}
+							).join (' + ') + ';\n',
+					_templateFunction = Function (_templateFunctionCode)
+				;
+
 				return (
-					'function _cssClass (_class) {return m.cssClass (_class)}\n' +
-					'function _childHtml (_properties) {return m.childHtml (_properties)}\n' +
-					'var\n' +
-						'\t' + _varChunks.join (',\n\t') + '\n' +
-					';\n' +
-					'return ' +
-						Uize.map (
-							_fragments,
-							function (_fragment) {return _fragmentsToCapture [_fragment] || _fragment}
-						).join (' + ') + ';\n'
+					_templateOptions.result == 'full'
+					? {
+						required:_required,
+						code:_templateFunctionCode,
+						templateFunction:_templateFunction
+					}
+					: _templateFunction
 				);
 			}
 		});

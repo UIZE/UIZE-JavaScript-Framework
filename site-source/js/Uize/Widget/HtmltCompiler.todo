@@ -27,5 +27,4 @@ Miscellaneous
 
 Child Widgets
 	- support JSON for specifying properties of child widgets
-	- provide special handling for widgetClass attribute, by adding explicitly declared widget classes as dependencies for compiled template modules
 
