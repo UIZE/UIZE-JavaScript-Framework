@@ -200,11 +200,11 @@ Uize.module ({
 
 									EXAMPLE
 									......................................................
-									MyNamespace.MyWidgetClass = Uize.Widget.mBindings.subclass ({
+									MyNamespace.MyWidgetClass = Uize.Widget.V2.subclass ({
 										stateProperties:{
 											size:{value:'small'}
 										},
-										htmlBindings:{
+										cssBindings:{
 											size:'value'
 										}
 									});
@@ -315,8 +315,7 @@ Uize.module ({
 
 				staticProperties:{
 					mBindings_css:{},
-					mBindings_html:{},
-					enableRootNodeCssClasses:true
+					mBindings_html:{}
 				},
 
 				stateProperties:{

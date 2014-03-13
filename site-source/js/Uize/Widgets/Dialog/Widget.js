@@ -45,8 +45,7 @@ Uize.module ({
 
 			staticProperties:{
 				cssModule:Uize.Widgets.Dialog.Css,
-				buttonWidgetClass:Uize.Widgets.Button.Widget,
-				enableRootNodeCssClasses:true
+				buttonWidgetClass:Uize.Widgets.Button.Widget
 			}
 		});
 	}

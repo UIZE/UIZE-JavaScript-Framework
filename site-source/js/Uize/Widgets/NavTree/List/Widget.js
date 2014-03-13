@@ -77,8 +77,7 @@ Uize.module ({
 			},
 
 			staticProperties:{
-				cssModule:Uize.Widgets.NavTree.List.Css,
-				enableRootNodeCssClasses:true
+				cssModule:Uize.Widgets.NavTree.List.Css
 			}
 		});
 	}
