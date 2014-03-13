@@ -1,0 +1,106 @@
+<table>
+	<tr>
+		<td colspan="5">
+			<div class="entryShell">
+				<div class="entryBevel"><
+					child name="entry" extraClasses="entry"
+				/></div>
+			</div>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<div class="buttonShell operatorButton operatorButtonNegate"><
+				child name="negate" text="+/&minus;" tipText="negate / invert sign" doubleChar="true"
+			/></div>
+		</td>
+		<td>
+			<div class="buttonShell memoryButton memoryButtonPlus"><
+				child name="memoryPlus" text="M+" tipText="memory plus" doubleChar="true"
+			/></div>
+		</td>
+		<td>
+			<div class="buttonShell memoryButton memoryButtonMinus"><
+				child name="memoryMinus" text="M&minus;" tipText="memory minus" doubleChar="true"
+			/></div>
+		</td>
+		<td>
+			<div class="buttonShell memoryButton memoryButtonRecall"><
+				child name="memoryRecall" text="MR" tipText="memory recall" doubleChar="true"
+			/></div>
+		</td>
+		<td>
+			<div class="buttonShell memoryButton memoryButtonClear"><
+				child name="memoryClear" text="MC" tipText="memory clear" doubleChar="true"
+			/></div>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<div class="buttonShell operatorButton operatorButtonPercent"><
+				child name="percent" text="%" tipText="percent" doubleChar="true"
+			/></div>
+		</td>
+		<td><div class="buttonShell digitButton digitButton7"><child name="digit7" text="7"/></div></td>
+		<td><div class="buttonShell digitButton digitButton8"><child name="digit8" text="8"/></div></td>
+		<td><div class="buttonShell digitButton digitButton9"><child name="digit9" text="9"/></div></td>
+		<td>
+			<div class="buttonShell operatorButtonBasic operatorButtonDivide"><
+				child name="divide" text="&divide;" tipText="divide"
+			/></div>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<div class="buttonShell operatorButton operatorButtonSquareRoot"><
+				child name="squareRoot" text="&radic;" tipText="square root"
+			/></div>
+		</td>
+		<td><div class="buttonShell digitButton digitButton4"><child name="digit4" text="4"/></div></td>
+		<td><div class="buttonShell digitButton digitButton5"><child name="digit5" text="5"/></div></td>
+		<td><div class="buttonShell digitButton digitButton6"><child name="digit6" text="6"/></div></td>
+		<td>
+			<div class="buttonShell operatorButtonBasic operatorButtonMultiply"><
+				child name="multiply" text="&times;" tipText="multiply / times"
+			/></div>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<div class="buttonShell operatorButton operatorButtonClearEntry"><
+				child name="clearEntry" text="CE" tipText="clear entry" doubleChar="true"
+			/></div>
+		</td>
+		<td><div class="buttonShell digitButton digitButton1"><child name="digit1" text="1"/></div></td>
+		<td><div class="buttonShell digitButton digitButton2"><child name="digit2" text="2"/></div></td>
+		<td><div class="buttonShell digitButton digitButton3"><child name="digit3" text="3"/></div></td>
+		<td>
+			<div class="buttonShell operatorButtonBasic operatorButtonSubtract"><
+				child name="subtract" text="&minus;" tipText="minus / subtract"
+			/></div>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<div class="buttonShell operatorButton operatorButtonClear"><
+				child name="clear" text="C" tipText="clear all"
+			/></div>
+		</td>
+		<td><div class="buttonShell digitButton digitButton0"><child name="digit0" text="0"/></div></td>
+		<td>
+			<div class="buttonShell digitButton digitButtonPoint"><
+				child name="point" text="." tipText="decimal point"
+			/></div>
+		</td>
+		<td>
+			<div class="buttonShell operatorButtonBasic operatorButtonEquals"><
+				child name="equals" text="=" tipText="equals / calculate result"
+			/></div>
+		</td>
+		<td>
+			<div class="buttonShell operatorButtonBasic operatorButtonAdd"><
+				child name="add" text="+" tipText="plus / add"
+			/></div>
+		</td>
+	</tr>
+</table>

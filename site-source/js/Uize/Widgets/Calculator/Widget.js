@@ -12,7 +12,7 @@
 /* Module Meta Data
 	type: Class
 	importance: 1
-	codeCompleteness: 5
+	codeCompleteness: 100
 	docCompleteness: 100
 */
 
@@ -38,7 +38,7 @@ Uize.module ({
 	required:[
 		'Uize.Widget.mV2',
 		'Uize.Widgets.Buttons.Char.Widget',
-		'Uize.Widget.TextInputBasic',
+		'Uize.Widgets.Calculator.Entry.Widget',
 		'Uize.Widgets.Calculator.Html',
 		'Uize.Widgets.Calculator.Css'
 	],
@@ -54,7 +54,7 @@ Uize.module ({
 
 			staticProperties:{
 				buttonWidgetClass:Uize.Widgets.Buttons.Char.Widget,
-				textInputWidgetClass:Uize.Widget.TextInputBasic,
+				textInputWidgetClass:Uize.Widgets.Calculator.Entry.Widget,
 				cssModule:Uize.Widgets.Calculator.Css
 			}
 		});

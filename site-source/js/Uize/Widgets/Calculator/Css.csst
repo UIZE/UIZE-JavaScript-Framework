@@ -1,9 +1,8 @@
-<%@ required ('Uize.Widgets.CssUtil'); %>
-<%
+<%@
+	required ('Uize.Widgets.CssUtil');
+%><%
 	var
 		_cssUtil = Uize.Widgets.CssUtil,
-		_boxBorderWidth = _cssUtil.box.border.width,
-		_horizontalMargin = 2,
 		_cellPadding = 2,
 		_buttonShellPadding = 1,
 		_buttonShellBorderWidth = 1,
@@ -23,23 +22,21 @@
 	margin: 0;
 }
 
-/*** entry field ***/
-	.`entryShell` {
-		position: relative;
-	}
+.`entryShell` {
+	position: relative;
+	background: #000;
+	height: 30px;
+}
 
-	input.`entry`, input.`entry`:focus {
-		font-family: Courier;
-		color: #0fb;
-		text-align: right;
-		padding: 0;
-		padding-right: <%= _entryPaddingRight %>px;
-		border: 1px solid #ccc;
-		border-color: #ccc #fff #fff #ccc;
-		background: #000;
-		outline: none;
-		text-shadow: 0 -3px 10px #0cf, 0 5px 10px #0fc, 0 0 4px #0fc, 0 0 3px #0cf;
-	}
+.`entryBevel` {
+	position: absolute;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	border: 1px solid #ccc;
+	border-color: #ccc #fff #fff #ccc;
+}
 
 /*** buttons ***/
 	.`buttonShell` {
@@ -68,19 +65,15 @@
 	Uize.forEach (
 		_cssUtil.sizes,
 		function (_size,_sizeName) {
-			var
-				_sizeOuter = _size.outer,
-				_entryBevelWidth = _size.sizeNo + 1
-			;%>
+			var _bevelWidth = _size.sizeNo + 1;
+			%>
 	/*** <%= _sizeName %> ***/
-		.`<%= _sizeName %>` input.`entry`,
-		.`<%= _sizeName %>` input.`entry`:focus {
-			border-width: <%= _entryBevelWidth %>px;
-			font-size: <%= _sizeOuter * .8 %>px;
-			width: <%= (_sizeOuter + (_buttonShellPadding + _buttonShellBorderWidth) * 2) * 5 + _cellPadding * 2 * 4 - _entryBevelWidth * 2 - _entryPaddingRight %>px;
-			height: <%= _sizeOuter %>px;
+		.`<%= _sizeName %>` .`entryShell` {
+			height: <%= _size.outer + _bevelWidth * 2 %>px;
 		}
-
+		.`<%= _sizeName %>` .`entryBevel` {
+			border-width: <%= _bevelWidth %>px;
+		}
 <%		}
 	);
 %>

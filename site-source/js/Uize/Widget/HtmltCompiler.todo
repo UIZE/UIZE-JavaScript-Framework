@@ -5,6 +5,17 @@ Implement Support for value Binding
 
 	For some of the node types that can have this binding, it will not be easy to achieve a compiled template equivalent. One example is a radio button list, where the binding on one node ID is actually affecting multiple nodes in a group of related nodes. It may be that some runtime bindings will simply have no compiled htmls equivalent and will not be handled in the compiled templates. This may be ok if the runtime code synchronizes the UI state to the widget's state upon initial update of the UI.
 
+Issues
+	Fix Encoding Issue
+		Fix the issue where HTML entities that are being decoded to extended characters are not being re-encoded to HTML entities when the XML is serialized.
+
+		Perhaps there should be a few encoding options for the Uize.Util.Html.Encode.encode method...
+
+		- encode all characters possible to entities
+		- encode for attribute value target
+		- encode for text node target
+		- encoding all extended characters
+
 Miscellaneous
 	Other things to do include...
 
@@ -17,7 +28,4 @@ Miscellaneous
 Child Widgets
 	- support JSON for specifying properties of child widgets
 	- provide special handling for widgetClass attribute, by adding explicitly declared widget classes as dependencies for compiled template modules
-
-Optimizations
-	- when a CSS class is referenced multiple times in the same template, create a local variable in the compiled code to avoid repeated calls to the cssClass method
 
