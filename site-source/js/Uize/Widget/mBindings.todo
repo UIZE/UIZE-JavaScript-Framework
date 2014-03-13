@@ -1,12 +1,33 @@
 This is a TO DO document for the =Uize.Widget.mBindings= mix-in module.
 
+HTML Bindings Improvements
+	Optimize no Initial UI Updates for Bindings
+		In cases where templates "consume" initial state for their rendering, it should be possible to avoid unnecessary / wasteful UI updates for that initial state as part of a widget's initial rendering.
+
+		State Consumption Versus Bindings Consumption
+			It's important to note that it's not so much any specific state that is consumed and is, therefore, guaranteed to be reflected correctly in the generated HTML.
+
+			Rather, it is specific bindings of state in the UI. So, for example, a template may use a specific state property only in one instance in rendering the HTML, whereas the state may have runtime bindings to multiple targets in the DOM.
+
+			This discrepancy should be largely alleviated by =htmlt= templates, where a majority of the bindings can be compiled to equivalent string rendering operations, but there still might be some bindings that would not be "consumed" during HTML rendering by the template. Therefore, the template system in general should provide a way for a template to declare the bindings that it consumes/implements/observes so that the runtime code can execute just the UI updaters for the uncomsumed bindings upon first wiring a widget.
+
+	Attribute Bindings
+		Support attribute bindings.
+
+		EXAMPLE
+		..........................
+		htmlBindings:{
+			tipText:'header:@title'
+		}
+		..........................
+
 Implement New Binding Features
 	Add Feature for Declaring Self, Child and DOM Event Wirings
 		Provide a way to declare one or more self event, child event and/or DOM node event wirings for the widget, using a universal syntax.
-		
+
 		Verbose/Canonical Syntax
 			The verbose/canonical syntax provides ability to wire multiple events for the DOM node or widget.
-			
+
 			EXAMPLE
 			.................................................
 			eventBindings:{
@@ -24,15 +45,15 @@ Implement New Binding Features
 				}
 			}
 			.................................................
-			
+
 			NOTES
 			- Top-level keys are the widget or node names (special '~' syntax for self)
 			- Second-level keys are the event names
 			- Values are functions executed in the scope of the widget, passing appropriate event object
-			
+
 		Semi-Verbose Syntax
 			The semi-verbose syntax is most useful when only wanting to wire one event for the widget or DOM node.
-			
+
 			EXAMPLE
 			.................................................
 			eventBindings:{
@@ -50,14 +71,14 @@ Implement New Binding Features
 				]
 			}
 			.................................................
-			
+
 			NOTES:
 			- Top-level keys are the widget or node names (special '~' syntax for self)
 			- Array values are in pairs: even index is event name and odd index are functions executed in the scope of the widget, passing appropriate event object
-			
+
 		Short-hand Syntax
 			The short-hand syntax mirrors the htmlBinding syntax providing a majority of the syntax in a string.
-		
+
 			EXAMPLE
 			.................................................
 			eventBindings:{
@@ -69,11 +90,11 @@ Implement New Binding Features
 				'~:Update':function(_event) { }
 			}
 			.................................................
-			
+
 			NOTES
 			- Keys are colon-separate key-value pair, with widget or DOM node as the key and the event name as the value
 			- Values are functions executed in the scope of the widget, passing appropriate event object
-		
+
 		Other Possible Syntaxes
 			EXAMPLE
 			................................
@@ -98,7 +119,7 @@ Implement New Binding Features
 				}
 			]
 			................................
-	
+
 			EXAMPLE
 			..........................
 			eventBindings:[
@@ -120,11 +141,11 @@ Implement New Binding Features
 	Add Feature for Declaring Child Widgets
 		It will be interesting to see from real world use cases how declarative this can realistically be made.
 
-		It may only be in the truly most simple cases where declaring child widgets at the class level is workable. Often there is associated, instance-specific, programmatic setup and initialization that may be needed. However child widgets that are getting their initialization from other sources (for example via $ syntax) could benefit from this declarative approach.
+		It may only be in the truly most simple cases where declaring child widgets at the class level is workable. Often there is associated, instance-specific, programmatic setup and initialization that may be needed. However, child widgets that are getting their initialization from other sources (for example via $ syntax) could benefit from this declarative approach.
 
 		Verbose/Canonical Syntax
-			The verbsoe/canonical syntax allows for specifying the child widget's initial state properties, including its widget class.
-		
+			The verbose/canonical syntax allows for specifying the child widget's initial state properties, including its widget class.
+
 			EXAMPLE
 			..........................
 			children:{
@@ -150,15 +171,15 @@ Implement New Binding Features
 				}
 			}
 			..........................
-			
+
 			NOTES
 			- Key is the name of the child widget
 			- Value is an object specifying values for a child widget's initial state properties
 			- The widget class for a child widget is specified using the special =widgetClass= widget property
-			
+
 		Short-hand Syntax
 			The short-hand syntax allows for only specifying the child widget's name and widget class.
-		
+
 			EXAMPLE
 			..........................
 			children:{
@@ -166,12 +187,12 @@ Implement New Binding Features
 				cancel:Uize.Button
 			}
 			..........................
-			
+
 			NOTES
 			- Key is the name of the child widget
 			- Value is the widget class of child widget
 			- Most useful if the child widget doesn't need to override default state properties or its state properties are set else (for example via $ syntax)
-		
+
 		Other Possible Syntaxes
 			EXAMPLE
 			................................
@@ -200,6 +221,12 @@ Implement New Binding Features
 				}
 			]
 			................................
-			
+
 			NOTES
 			- The name for the child widget is specified using the special =name= property
+
+	State Bindings to Children
+		Implement feature for declaring state bindings to child widgets.
+
+		Consider whether or not bi-directional bindings should be supported and, if so, how. What would the syntax be? What about cases of parent-to-many-children and many-children-to-parent bindings, such as an RgbSliders widget that breaks up an RGB color value and distributes it to three slider child widgets. Keep these kinds of use cases in mind when working out a declarative binding syntax.
+
