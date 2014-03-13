@@ -74,18 +74,20 @@ Uize.module ({
 					},
 					recursive:true,
 					pathTransformer:function (_path) {
-						_fileSystem.copyFile ({
-							path:_modulesFolderPath + '/' + _path,
-							targetPath:
-								_modulesFolderPath + '/' +
-								_namespace + '/' +
-								_path
-									.slice (_namespace.length + 1)
-									.replace (_fileExtensionRegExp,'')
-									.replace (/[\._]/g,'/') +
-								_path.match (_fileExtensionRegExp) [1]
-						});
-						_fileSystem.deleteFile ({path:_modulesFolderPath + '/' + _path});
+						var _fileExtension = _path.match(_fileExtensionRegExp)[0];
+						if (_path != _namespace + _fileExtension) {
+							_fileSystem.moveFile ({
+								path:_modulesFolderPath + '/' + _path,
+								targetPath:
+									_modulesFolderPath + '/' +
+									_namespace + '/' +
+									_path
+										.slice (_namespace.length + 1)
+										.replace (_fileExtension,'')
+										.replace (/[\._]/g,'/') +
+									_path.match (_fileExtensionRegExp) [1]
+							});
+						}
 					}
 				});
 			}

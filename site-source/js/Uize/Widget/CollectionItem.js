@@ -133,7 +133,7 @@ Uize.module ({
 			}
 
 		return _superclass.subclass ({
-			alphastructor:function () {
+			alphastructor: function () {
 				this._properties = {};
 			},
 
@@ -270,6 +270,19 @@ Uize.module ({
 						_superclass.doMy (m,'wireUi');
 					}
 				}
+			},
+
+			instanceProperties:{
+				isCollectionItem: _true
+				/*?
+					Instance Properties
+						isCollectionItem
+							A boolean specifying whether or not this class supports the collection item interface (not yet formally defined)
+
+							NOTES
+							- for now, this is only used to determine if this class is indeed a =CollectionItem=
+							- see the =isCollectionItem= method =Uize.Widget.Collection=
+				*/
 			},
 
 			stateProperties:{

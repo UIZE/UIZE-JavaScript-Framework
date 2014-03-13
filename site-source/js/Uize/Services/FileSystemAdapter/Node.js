@@ -20,7 +20,7 @@
 	Introduction
 		The =Uize.Services.FileSystemAdapter.Node= module defines an adapter for the file system service (=Uize.Services.FileSystem=) for the NodeJS environment.
 
-		*DEVELOPERS:* `Chris van Rensburg`
+		*DEVELOPERS:* `Chris van Rensburg` & `Ben Ilegbodu`
 */
 
 Uize.module ({
@@ -138,6 +138,16 @@ Uize.module ({
 
 					makeFolder:function (_params,_callback) {
 						this._makeFolder (_params.path);
+						_callback ();
+					},
+
+					moveFile:function (_params,_callback) {
+						var
+							m = this,
+							_targetPath = _params.targetPath
+						;
+						m._makeFolder (_getParentFolderPath (_targetPath));
+						m._fileSystem.renameSync (_params.path, _targetPath);
 						_callback ();
 					},
 

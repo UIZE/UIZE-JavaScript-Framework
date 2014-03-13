@@ -1,0 +1,205 @@
+This is a TO DO document for the =Uize.Widget.mBindings= mix-in module.
+
+Implement New Binding Features
+	Add Feature for Declaring Self, Child and DOM Event Wirings
+		Provide a way to declare one or more self event, child event and/or DOM node event wirings for the widget, using a universal syntax.
+		
+		Verbose/Canonical Syntax
+			The verbose/canonical syntax provides ability to wire multiple events for the DOM node or widget.
+			
+			EXAMPLE
+			.................................................
+			eventBindings:{
+				menu:{ // DOM node
+					click:function (_event) { },
+					mouseover:function(_event) { }
+				},
+				'children.sliderG':{ // child widget
+					'Changed.value':function (_event) { },
+					Update:function(_event) { }
+				},
+				'~':{ // self
+					'Changed.value':function (_event) { },
+					Update:function(_event) { }
+				}
+			}
+			.................................................
+			
+			NOTES
+			- Top-level keys are the widget or node names (special '~' syntax for self)
+			- Second-level keys are the event names
+			- Values are functions executed in the scope of the widget, passing appropriate event object
+			
+		Semi-Verbose Syntax
+			The semi-verbose syntax is most useful when only wanting to wire one event for the widget or DOM node.
+			
+			EXAMPLE
+			.................................................
+			eventBindings:{
+				menu:[ // DOM node
+					'click', function() { },
+					'mouseover', function(_event) { }
+				],
+				'children.sliderG':{ // child widget
+					'Changed.value', function (_event) { },
+					'Update', function(_event) { }
+				},
+				'~':[ // self
+					'Changed.value', function (_event) { },
+					'Update', function(_event) { }
+				]
+			}
+			.................................................
+			
+			NOTES:
+			- Top-level keys are the widget or node names (special '~' syntax for self)
+			- Array values are in pairs: even index is event name and odd index are functions executed in the scope of the widget, passing appropriate event object
+			
+		Short-hand Syntax
+			The short-hand syntax mirrors the htmlBinding syntax providing a majority of the syntax in a string.
+		
+			EXAMPLE
+			.................................................
+			eventBindings:{
+				'menu:click':function() { },
+				'menu:mouseover':function(_event) { }
+				'children.sliderG:Changed.value':function (_event) { },
+				'children.sliderG:Update':function(_event) { },
+				'~:Changed.value':function (_event) { },
+				'~:Update':function(_event) { }
+			}
+			.................................................
+			
+			NOTES
+			- Keys are colon-separate key-value pair, with widget or DOM node as the key and the event name as the value
+			- Values are functions executed in the scope of the widget, passing appropriate event object
+		
+		Other Possible Syntaxes
+			EXAMPLE
+			................................
+			eventBindings:[
+				{
+					source:'menu',
+					event:'click',
+					handler:function () {
+					}
+				},
+				{
+					source:'children.sliderG',
+					event:'Changed.value',
+					handler:function () {
+					}
+				},
+				{
+					source:'~',
+					event:'Changed.value',
+					handler:function () {
+					}
+				}
+			]
+			................................
+	
+			EXAMPLE
+			..........................
+			eventBindings:[
+				[
+					'menu',
+					'click',
+					function () {
+					}
+				],
+				[
+					'children.sliderG',
+					'Changed.value',
+					function () {
+					}
+				]
+			]
+			..........................
+
+	Add Feature for Declaring Child Widgets
+		It will be interesting to see from real world use cases how declarative this can realistically be made.
+
+		It may only be in the truly most simple cases where declaring child widgets at the class level is workable. Often there is associated, instance-specific, programmatic setup and initialization that may be needed. However child widgets that are getting their initialization from other sources (for example via $ syntax) could benefit from this declarative approach.
+
+		Verbose/Canonical Syntax
+			The verbsoe/canonical syntax allows for specifying the child widget's initial state properties, including its widget class.
+		
+			EXAMPLE
+			..........................
+			children:{
+				menu:{
+					text:'Ok',
+					widgetClass:Uize.Widget,
+					value:'foo',
+					values:[
+						{
+							name:'foo',
+							value:'Foo'
+						},
+						{
+							name:'bar',
+							value:'Bar'
+						}
+					]
+				},
+				cancel:{
+					text:'Cancel',
+					widgetClass:Uize.Widget.Button,
+					selected:true
+				}
+			}
+			..........................
+			
+			NOTES
+			- Key is the name of the child widget
+			- Value is an object specifying values for a child widget's initial state properties
+			- The widget class for a child widget is specified using the special =widgetClass= widget property
+			
+		Short-hand Syntax
+			The short-hand syntax allows for only specifying the child widget's name and widget class.
+		
+			EXAMPLE
+			..........................
+			children:{
+				menu:Uize.Widget,
+				cancel:Uize.Button
+			}
+			..........................
+			
+			NOTES
+			- Key is the name of the child widget
+			- Value is the widget class of child widget
+			- Most useful if the child widget doesn't need to override default state properties or its state properties are set else (for example via $ syntax)
+		
+		Other Possible Syntaxes
+			EXAMPLE
+			................................
+			children:[
+				{
+					name:'menu',
+					text:'Ok',
+					widgetClass:Uize.Widget,
+					value:'foo',
+					values:[
+						{
+							name:'foo',
+							value:'Foo'
+						},
+						{
+							name:'bar',
+							value:'Bar'
+						}
+					]
+				},
+				{
+					name:'cancel',
+					text:'Cancel',
+					widgetClass:Uize.Widget.Button,
+					selected:true
+				}
+			]
+			................................
+			
+			NOTES
+			- The name for the child widget is specified using the special =name= property

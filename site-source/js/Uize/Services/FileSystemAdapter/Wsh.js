@@ -20,7 +20,7 @@
 	Introduction
 		The =Uize.Services.FileSystemAdapter.Wsh= module defines an adapter for the file system service (=Uize.Services.FileSystem=) for the WSH (Windows Script Host) environment.
 
-		*DEVELOPERS:* `Chris van Rensburg`
+		*DEVELOPERS:* `Chris van Rensburg` & `Ben Ilegbodu`
 */
 
 Uize.module ({
@@ -126,6 +126,16 @@ Uize.module ({
 
 					makeFolder:function (_params,_callback) {
 						this._makeFolder (_params.path);
+						_callback ();
+					},
+
+					moveFile:function (_params,_callback) {
+						var
+							m = this,
+							_targetPath = _params.targetPath
+						;
+						m._makeFolder (_getParentFolderPath (_targetPath));
+						m._fileSystemObject.MoveFile (_params.path,_targetPath);
 						_callback ();
 					},
 
