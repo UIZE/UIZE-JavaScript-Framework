@@ -239,6 +239,12 @@ Uize.module ({
 									};
 								} else if (_bindingType == '?') {
 									_updater = function (_propertyValue) {this.displayNode (_nodeName,!!_propertyValue)};
+								} else if (_bindingType.charCodeAt (0) == 64) {
+									var _attributeName = _bindingType.slice (1);
+									_updater = function (_propertyValue) {
+										var _node = this.getNode (_nodeName);
+										_node && _node.setAttribute (_attributeName,_propertyValue);
+									};
 								} else if (_bindingType.slice (0,6) == 'style.') {
 									var _stylePropertyName = _bindingType.slice (6);
 									_updater = function (_propertyValue) {
