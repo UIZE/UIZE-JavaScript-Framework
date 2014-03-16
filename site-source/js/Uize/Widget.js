@@ -190,7 +190,7 @@ Uize.module ({
 									- see also the special `children state property`
 									- see also the related =parent= instance property
 						*/
-						
+
 					m.addedChildren = m._addedChildren = new _Uize.Class;
 			},
 
@@ -1381,7 +1381,7 @@ Uize.module ({
 
 							_child && _child.set (_properties);
 							_child = m._children [_childName] = _child || new _childInstanceOrClass (_properties);
-							m._addedChildren.met(_childName);
+							m._addedChildren.met (_childName);
 							return _child;
 							/*?
 								Instance Methods
@@ -1422,7 +1422,8 @@ Uize.module ({
 
 						removeChild:function (_childNameOrInstance) {
 							var
-								_children = this._children,
+								m = this,
+								_children = m._children,
 								_childName =
 									typeof _childNameOrInstance == _typeString || _Uize.isNumber (_childNameOrInstance)
 										? _childNameOrInstance
@@ -1433,7 +1434,7 @@ Uize.module ({
 								_child.unwireUi ();
 								delete _child.parent;
 								delete _children [_childName];
-								m._addedChildren.unmet(_childName);
+								m._addedChildren.unmet (_childName);
 							}
 							/*?
 								Instance Methods
