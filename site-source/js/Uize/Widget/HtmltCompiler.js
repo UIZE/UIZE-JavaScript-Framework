@@ -55,10 +55,8 @@ Uize.module ({
 				_extraClassesToken = _replacementTokenOpener + 'extraClasses' + _replacementTokenCloser,
 				_trueFlag = {},
 				_tagsThatSupportValueLookup = {
-					select:_trueFlag,
 					option:_trueFlag,
-					input:_trueFlag,
-					textarea:_trueFlag
+					input:_trueFlag
 				}
 		;
 
@@ -123,13 +121,14 @@ Uize.module ({
 						);
 					}
 
+					function _getAttributeValue (_node,_attributeName) {
+						var _attribute = _findAttribute (_node,_attributeName);
+						return _attribute && _attribute.value.value;
+					}
+
 					var _rootNode = Uize.findRecord (
 						_nodeListParser.nodes,
-						function (_node) {
-							if (!_node.tagName) return false;
-							var _idAttribute = _findAttribute (_node,'id');
-							return !_idAttribute || !_idAttribute.value.value;
-						}
+						function (_node) {return !!_node.tagName && !_getAttributeValue (_node,'id')}
 					);
 					_rootNode && _ensureNodeAttribute (_rootNode,'id','');
 
@@ -213,13 +212,22 @@ Uize.module ({
 											/*** remap binding types ***/
 												if (_bindingType == 'className') {
 													_bindingType = '@class';
-												} else if (_bindingType == 'value' && _tagName == 'input') {
-													_bindingType = '@value';
 												}
 
 											if (_bindingType == 'value') {
 												if (_tagsThatSupportValueLookup [_tagName]) {
-													if (_tagName == 'select') {
+													if (_tagName == 'input') {
+														var _inputType = _getAttributeValue (_node,'type');
+														if (_inputType == 'text') {
+															_addAttributeReplacement (
+																_ensureNodeAttribute (_node,'value'),
+																_helperFunctionCall (
+																	'_encodeAttributeValue',
+																	_propertyReference (_bindingProperty)
+																)
+															);
+														} else if (_inputType == 'checkbox') {
+														}
 													} else {
 													}
 												} else {
