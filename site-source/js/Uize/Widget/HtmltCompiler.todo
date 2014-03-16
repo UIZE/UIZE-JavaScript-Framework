@@ -13,7 +13,15 @@ Achieve Parity for Bindings
 	Implement Support for value Binding
 		How this binding type is compiled with have to be affected by the node type, since the current runtime binding logic leverages the =setNodeValue= method, and this method is an abstraction that provides different handling for different node types.
 
-		For some of the node types that can have this binding, it will not be easy to achieve a compiled template equivalent. One example is a radio button list, where the binding on one node ID is actually affecting multiple nodes in a group of related nodes. It may be that some runtime bindings will simply have no compiled htmls equivalent and will not be handled in the compiled templates. This may be ok if the runtime code synchronizes the UI state to the widget's state upon initial update of the UI.
+		Nodes Without Value Interface
+			For nodes without a value interface (such as =div= tag or =span= tag nodes), the value binding type will be compiled to an innerHTML replacement with literal value display (ie. entity-escaped HTML delimiters).
+
+		Nodes With Value Interface
+			For some of the node types that can have this binding, it will not be easy to achieve a compiled template equivalent.
+
+			One example is a radio button list, where the binding on one node ID is actually affecting multiple nodes in a group of related nodes. Another example is a select tag, where the binding to the select tag would actually need to be compiled to bindings to the select tag's various child option tags. In both such cases, the target of the binding is not a single node, and so replacement expressions would have to be injected into one or more associated nodes.
+
+			It may also just be that some runtime bindings will simply have no compiled htmls equivalent and will not be handled in the compiled templates. This may be ok if the runtime code synchronizes the UI state to the widget's state upon initial update of the UI.
 
 Issues
 	Fix Encoding Issue

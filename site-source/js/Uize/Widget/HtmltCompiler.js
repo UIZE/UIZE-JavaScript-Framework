@@ -46,14 +46,20 @@ Uize.module ({
 				_sacredEmptyObject = {},
 				_replacementTokenOpener = '{{[[',
 				_replacementTokenCloser = ']]}}',
-				_replacementNameDelimiter = ' ~ ',
 				_replacementTokenRegExp = new RegExp (
 					Uize.escapeRegExpLiteral (_replacementTokenOpener) +
 					'(.+?)' +
 					Uize.escapeRegExpLiteral (_replacementTokenCloser),
 					'g'
 				),
-				_extraClassesToken = _replacementTokenOpener + 'extraClasses' + _replacementTokenCloser
+				_extraClassesToken = _replacementTokenOpener + 'extraClasses' + _replacementTokenCloser,
+				_trueFlag = {},
+				_tagsThatSupportValueLookup = {
+					select:_trueFlag,
+					option:_trueFlag,
+					input:_trueFlag,
+					textarea:_trueFlag
+				}
 		;
 
 		return Uize.package ({
@@ -62,10 +68,39 @@ Uize.module ({
 				var
 					_nodeListParser = new Uize.Parse.Xml.NodeList (_source),
 					_replacements = {},
+					_replacementNamesByValue = {},
+					_totalGeneratedReplacementNames = 0,
 					_required = [],
 					_alreadyRequired = {},
-					_widgetClass = _templateOptions.widgetClass
+					_widgetClass = _templateOptions.widgetClass,
+					_helperFunctions = {
+						'_cssClass':{
+							_source:'function _cssClass (_class) {return m.cssClass (_class)}'
+						},
+						'_childHtml':{
+							_source:'function _childHtml (_properties) {return m.childHtml (_properties)}'
+						},
+						'_encodeAttributeValue':{
+							_source:'function _encodeAttributeValue (_value) {return Uize.Util.Html.Encode.encode (_value)}',
+							_required:['Uize.Util.Html.Encode']
+						}
+					}
 				;
+
+				function _addRequired (_moduleOrModules) {
+					if (_moduleOrModules) {
+						function _addSingleRequired (_module) {
+							if (_alreadyRequired [_module] != _trueFlag) {
+								_alreadyRequired [_module] = _trueFlag;
+								_required.push (_module);
+							}
+						}
+						typeof _moduleOrModules == 'string'
+							? _addSingleRequired (_moduleOrModules)
+							: Uize.forEach (_moduleOrModules,_addSingleRequired)
+						;
+					}
+				}
 
 				function _ensureNodeAttribute (_node,_attributeName,_attributeValue) {
 					var _attribute = _findAttribute (_node,_attributeName);
@@ -117,34 +152,53 @@ Uize.module ({
 
 				/*** recurse parser object tree, process tag nodes and build replacements lookup ***/
 					function _processNode (_node) {
+						function _helperFunctionCall (_helperFunctionName,_serializedArguments) {
+							var _helperFunction = _helperFunctions [_helperFunctionName];
+							_helperFunction._totalCalls = (_helperFunction._totalCalls || 0) + 1;
+							return _helperFunctionName + ' (' + _serializedArguments + ')';
+						}
+
 						function _splitCssClasses (_classes) {
 							return _split (_trim (_classes),/\s+/);
 						}
 
 						function _classNamespacerExpression (_class) {
-							return '_cssClass (\'' + _class + '\')';
-						}
-
-						function _addAttributeReplacement (_attribute,_replacementName,_replacementValue) {
-							_replacements [_replacementName] = _replacementValue;
-							_attribute.value.value = _replacementTokenOpener + _replacementName + _replacementTokenCloser;
+							return _helperFunctionCall ('_cssClass','\'' + _class + '\'');
 						}
 
 						function _propertyReference (_propertyName) {
 							return 'i[' + Uize.Json.to (_propertyName) + ']';
 						}
 
-						if (_node.tagName) {
+						function _getReplacementTokenByValue (_replacementValue) {
+							var _replacementName = _replacementNamesByValue [_replacementValue];
+							if (!_replacementName)
+								_replacements [
+									_replacementName = _replacementNamesByValue [_replacementValue] =
+										'r' + _totalGeneratedReplacementNames++
+								] = _replacementValue
+							;
+							return _replacementTokenOpener + _replacementName + _replacementTokenCloser;
+						}
+
+						function _addAttributeReplacement (_attribute,_replacementValue) {
+							_attribute.value.value = _getReplacementTokenByValue (_replacementValue);
+						}
+
+						function _addInnerHtmlReplacement (_node,_replacementValue) {
+							(_node.childNodes || (_node.childNodes = new Uize.Parse.Xml.NodeList)).parse (
+								_getReplacementTokenByValue (_replacementValue)
+							);
+						}
+
+						var _tagName = (_node.tagName || _sacredEmptyObject).name;
+						if (_tagName) {
 							var
 								_idAttribute = _findAttribute (_node,'id'),
 								_nodeId = _idAttribute && _idAttribute.value.value
 							;
 							if (_idAttribute) {
-								_addAttributeReplacement (
-									_idAttribute,
-									'id' + _replacementNameDelimiter + _nodeId,
-									'_idPrefix' + (_nodeId && ' + \'-' + _nodeId + '\'')
-								);
+								_addAttributeReplacement (_idAttribute,'_idPrefix' + (_nodeId && ' + \'-' + _nodeId + '\''));
 
 								var _bindings = _bindingsById [_nodeId];
 								if (_bindings) {
@@ -159,19 +213,36 @@ Uize.module ({
 											/*** remap binding types ***/
 												if (_bindingType == 'className') {
 													_bindingType = '@class';
+												} else if (_bindingType == 'value' && _tagName == 'input') {
+													_bindingType = '@value';
 												}
 
-											if (_bindingType == 'html' || _bindingType == 'innerHTML') {
-												var _replacementName = 'innerHTML' + _replacementNameDelimiter + _nodeId;
-												_replacements [_replacementName] = _propertyReference (_bindingProperty);
-												(_node.childNodes || (_node.childNodes = new Uize.Parse.Xml.NodeList)).parse (
-													_replacementTokenOpener + _replacementName + _replacementTokenCloser
-												);
+											if (_bindingType == 'value') {
+												if (_tagsThatSupportValueLookup [_tagName]) {
+													if (_tagName == 'select') {
+													} else {
+													}
+												} else {
+													_addInnerHtmlReplacement (
+														_node,
+														_helperFunctionCall (
+															'_encodeAttributeValue',
+															_propertyReference (_bindingProperty)
+														)
+													);
+												}
+											} else if (_bindingType == 'html' || _bindingType == 'innerHTML') {
+												_addInnerHtmlReplacement (_node,_propertyReference (_bindingProperty));
 											} else if (_bindingType.charCodeAt (0) == 64) {
+												var
+													_attributeName = _bindingType.slice (1),
+													_propertyReferenceExpression = _propertyReference (_bindingProperty)
+												;
 												_addAttributeReplacement (
-													_ensureNodeAttribute (_node,_bindingType.slice (1)),
-													_bindingType + _replacementNameDelimiter + _nodeId,
-													_propertyReference (_bindingProperty)
+													_ensureNodeAttribute (_node,_attributeName),
+													_attributeName == 'class'
+														? _propertyReferenceExpression
+														: _helperFunctionCall ('_encodeAttributeValue',_propertyReferenceExpression)
 												);
 											} else if (_bindingType.slice (0,6) == 'style.') {
 												var _stylePropertyName = _bindingType.slice (6);
@@ -194,7 +265,6 @@ Uize.module ({
 										var _styleAttribute = _ensureNodeAttribute (_node,'style');
 										_addAttributeReplacement (
 											_styleAttribute,
-											'style' + _replacementNameDelimiter + _nodeId,
 											Uize.Json.to (_styleAttribute.value.value) + ' + ' +
 												_styleExpressionParts.join (' + ')
 										);
@@ -208,10 +278,8 @@ Uize.module ({
 									Uize.forEach (
 										_splitCssClasses (_classAttribute.value.value),
 										function (_cssClass) {
-											var _replacementName = 'class' + _replacementNameDelimiter + _cssClass;
-											_replacements [_replacementName] = _classNamespacerExpression (_cssClass);
 											_classTokens.push (
-												_replacementTokenOpener + _replacementName + _replacementTokenCloser
+												_getReplacementTokenByValue (_classNamespacerExpression (_cssClass))
 											);
 										}
 									);
@@ -248,31 +316,22 @@ Uize.module ({
 													_attributesLookup.extraClasses = _extraClassesToken;
 												}
 
-											/*** special handling for the widgetClass property ***/
-												var _widgetClass = _attributesLookup.widgetClass;
-												_widgetClass && !_alreadyRequired [_widgetClass] &&
-													_required.push (_widgetClass)
-												;
+											_widgetClass && _addRequired (_widgetClass);
 
 											/*** add replacement and replace child tag node with text node ***/
-												var
-													_replacementName = 'child' + _replacementNameDelimiter + _childName,
-													_serializedProperties = Uize.Json.to (_attributesLookup)
-												;
-												_replacements [_replacementName] =
-													'_childHtml (' +
-													(
-														_extraClasses
-															? _serializedProperties.replace (
-																'\'' + _extraClassesToken + '\'',
-																_extraClasses
-															)
-															: _serializedProperties
-													) +
-													')'
-												;
+												var _serializedProperties = Uize.Json.to (_attributesLookup);
 												_nodes [_nodeNo] = new Uize.Parse.Xml.Text (
-													_replacementTokenOpener + _replacementName + _replacementTokenCloser
+													_getReplacementTokenByValue (
+														_helperFunctionCall (
+															'_childHtml',
+															_extraClasses
+																? _serializedProperties.replace (
+																	'\'' + _extraClassesToken + '\'',
+																	_extraClasses
+																)
+																: _serializedProperties
+														)
+													)
 												);
 										} else {
 											_processNode (_node);
@@ -327,8 +386,18 @@ Uize.module ({
 
 				var
 					_templateFunctionCode =
-						'function _cssClass (_class) {return m.cssClass (_class)}\n' +
-						'function _childHtml (_properties) {return m.childHtml (_properties)}\n' +
+						Uize.map (
+							Uize.keys (_helperFunctions),
+							function (_helperFunctionName) {
+								var _helperFunction = _helperFunctions [_helperFunctionName];
+								if (_helperFunction._totalCalls) {
+									_addRequired (_helperFunction._required);
+									return _helperFunction._source + '\n';
+								} else {
+									return '';
+								}
+							}
+						).join ('') +
 						'var\n' +
 							'\t' + _varChunks.join (',\n\t') + '\n' +
 						';\n' +
