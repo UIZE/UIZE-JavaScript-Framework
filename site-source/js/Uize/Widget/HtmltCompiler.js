@@ -135,7 +135,7 @@ Uize.module ({
 				/*** build a lookup of HTML bindings by node ID ***/
 					var _bindingsById = {};
 					_widgetClass && Uize.forEach (
-						_widgetClass.mBindings_html,
+						_widgetClass.mHtmlBindings_bindings,
 						function (_bindings) {
 							Uize.forEach (
 								_bindings,

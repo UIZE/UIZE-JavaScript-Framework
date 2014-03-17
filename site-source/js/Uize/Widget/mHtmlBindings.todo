@@ -1,0 +1,12 @@
+This is a TO DO document for the =Uize.Widget.mHtmlBindings= mix-in module.
+
+Optimize no Initial UI Updates for Bindings
+	In cases where templates "consume" initial state for their rendering, it should be possible to avoid unnecessary / wasteful UI updates for that initial state as part of a widget's initial rendering.
+
+	State Consumption Versus Bindings Consumption
+		It's important to note that it's not so much any specific state that is consumed and is, therefore, guaranteed to be reflected correctly in the generated HTML.
+
+		Rather, it is specific bindings of state in the UI. So, for example, a template may use a specific state property only in one instance in rendering the HTML, whereas the state may have runtime bindings to multiple targets in the DOM.
+
+		This discrepancy should be largely alleviated by =htmlt= templates, where a majority of the bindings can be compiled to equivalent string rendering operations, but there still might be some bindings that would not be "consumed" during HTML rendering by the template. Therefore, the template system in general should provide a way for a template to declare the bindings that it consumes/implements/observes so that the runtime code can execute just the UI updaters for the uncomsumed bindings upon first wiring a widget.
+
