@@ -39,41 +39,47 @@ Uize.module ({
 				_cssAddedLookup = {},
 				_classPrefixPerCssModule = {},
 				_cssClassNameGenerators = {},
-				_cssClassCachePerModule = {}
+				_cssClassCachePerModule = {},
+				_cachedRootNodeClassesDerivations = {}
 		;
 
 		/*** Utility Functions ***/
+		var _foo = {};
 			function _declareRootNodeClassesStateProperty (m) {
 				var
 					_cssBindings = m [_mCssBindings_bindings],
-					_bindingProperties = _Uize.keys (_cssBindings)
+					_bindingProperties = _Uize.keys (_cssBindings),
+					_cachedDerivationKey = _bindingProperties.join ()
 				;
 				m.stateProperties ({
 					mCssBindings_rootNodeClasses:{
-						derived:Function.apply (
-							0,
-							_bindingProperties.concat (
-								'extraClasses',
-								'var ' +
-									'm=this,c=m.Class,b=c.' + _mCssBindings_bindings +
-									Uize.map (
-										_bindingProperties,
-										function (_property,_propertyNo) {
-											return ',c' + _propertyNo + '=m.cssClass(b[\'' + _property + '\'](m.get(\'' + _property + '\')))';
-										}
-									).join ('') +
-									',e=m.extraClasses' +
-								';' +
-								'return ' +
-									'm.cssClass()' +
-									Uize.map (
-										_bindingProperties,
-										function (_property,_propertyNo) {
-											return '+(c' + _propertyNo + '?\' \'+c' + _propertyNo + ':\'\')';
-										}
-									).join ('') +
-									'+(e?\' \'+e:\'\')' +
-								';'
+						derived:_cachedRootNodeClassesDerivations [_cachedDerivationKey] ||
+						(
+							_cachedRootNodeClassesDerivations [_cachedDerivationKey] = Function.apply (
+								0,
+								_bindingProperties.concat (
+									'extraClasses',
+									'var ' +
+										'm=this,c=m.Class,b=c.' + _mCssBindings_bindings +
+										Uize.map (
+											_bindingProperties,
+											function (_property,_propertyNo) {
+												return ',c' + _propertyNo + '=m.cssClass(b[\'' + _property + '\'](m.get(\'' + _property + '\')))';
+											}
+										).join ('') +
+										',e=m.extraClasses' +
+									';' +
+									'return ' +
+										'm.cssClass()' +
+										Uize.map (
+											_bindingProperties,
+											function (_property,_propertyNo) {
+												return '+(c' + _propertyNo + '?\' \'+c' + _propertyNo + ':\'\')';
+											}
+										).join ('') +
+										'+(e?\' \'+e:\'\')' +
+									';'
+								)
 							)
 						)
 					}
