@@ -26,7 +26,8 @@
 Uize.module ({
 	name:'Uize.Widget.mV2',
 	required:[
-		'Uize.Widget.mBindings',
+		'Uize.Widget.mHtmlBindings',
+		'Uize.Widget.mCssBindings',
 		'Uize.Widget.mLoc'
 	],
 	builder:function () {
@@ -41,7 +42,8 @@ Uize.module ({
 		return function (_class) {
 			_class.declare ({
 				mixins:[
-					Uize.Widget.mBindings,
+					Uize.Widget.mHtmlBindings,
+					Uize.Widget.mCssBindings,
 					Uize.Widget.mLoc
 				],
 
