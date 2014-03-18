@@ -205,6 +205,21 @@ Uize.module ({
 									Uize.forEach (
 										_bindings,
 										function (_binding) {
+											function _addStylePropertyReplacement (_stylePropertyName,_replacementValue) {
+												_styleExpressionParts.push (
+													Uize.Json.to (
+														_stylePropertyName.replace (
+															/* TODO: put this into a separate Uize.Str.* module */
+															/([a-z])([A-Z])/g,
+															function (_match,_lowerCaseLetter,_upperCaseLetter) {
+																return _lowerCaseLetter + '-' + _upperCaseLetter.toLowerCase ();
+															}
+														) +
+														':'
+													) + ' + ' + _replacementValue + ' + \';\''
+												);
+											}
+
 											var
 												_bindingType = _binding.bindingType,
 												_bindingProperty = _binding.propertyName
@@ -241,6 +256,11 @@ Uize.module ({
 												}
 											} else if (_bindingType == 'html' || _bindingType == 'innerHTML') {
 												_addInnerHtmlReplacement (_node,_propertyReference (_bindingProperty));
+											} else if (_bindingType == '?') {
+												_addStylePropertyReplacement (
+													'display',
+													'(' + _propertyReference (_bindingProperty) + ' ? \'\' : \'none\')'
+												);
 											} else if (_bindingType.charCodeAt (0) == 64) {
 												var
 													_attributeName = _bindingType.slice (1),
@@ -253,28 +273,22 @@ Uize.module ({
 														: _helperFunctionCall ('_encodeAttributeValue',_propertyReferenceExpression)
 												);
 											} else if (_bindingType.slice (0,6) == 'style.') {
-												var _stylePropertyName = _bindingType.slice (6);
-												_styleExpressionParts.push (
-													Uize.Json.to (
-														_stylePropertyName.replace (
-															/* TODO: put this into a separate Uize.Str.* module */
-															/([a-z])([A-Z])/g,
-															function (_match,_lowerCaseLetter,_upperCaseLetter) {
-																return _lowerCaseLetter + '-' + _upperCaseLetter.toLowerCase ();
-															}
-														) +
-														':'
-													) + ' + ' + _propertyReference (_bindingProperty) + ' + \';\''
+												_addStylePropertyReplacement (
+													_bindingType.slice (6),
+													_propertyReference (_bindingProperty)
 												);
 											}
 										}
 									);
 									if (_styleExpressionParts.length) {
-										var _styleAttribute = _ensureNodeAttribute (_node,'style');
+										var
+											_styleAttribute = _ensureNodeAttribute (_node,'style'),
+											_styleAttributeValue = _styleAttribute.value.value
+										;
 										_addAttributeReplacement (
 											_styleAttribute,
-											Uize.Json.to (_styleAttribute.value.value) + ' + ' +
-												_styleExpressionParts.join (' + ')
+											(_styleAttributeValue ? Uize.Json.to (_styleAttributeValue) + ' + ' : '') +
+											_styleExpressionParts.join (' + ')
 										);
 									}
 								}
