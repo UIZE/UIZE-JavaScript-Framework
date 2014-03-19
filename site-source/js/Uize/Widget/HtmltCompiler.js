@@ -180,8 +180,14 @@ Uize.module ({
 							return _replacementTokenOpener + _replacementName + _replacementTokenCloser;
 						}
 
-						function _addAttributeReplacement (_attribute,_replacementValue) {
+						function _addAttributeValueReplacement (_attribute,_replacementValue) {
 							_attribute.value.value = _getReplacementTokenByValue (_replacementValue);
+						}
+
+						function _addWholeAttributeReplacement (_node,_attributeName,_replacementValue) {
+							_ensureNodeAttribute (_node,_attributeName).serialize = function () {
+								return _getReplacementTokenByValue (_replacementValue);
+							};
 						}
 
 						function _addInnerHtmlReplacement (_node,_replacementValue) {
@@ -197,7 +203,10 @@ Uize.module ({
 								_nodeId = _idAttribute && _idAttribute.value.value
 							;
 							if (_idAttribute) {
-								_addAttributeReplacement (_idAttribute,'_idPrefix' + (_nodeId && ' + \'-' + _nodeId + '\''));
+								_addAttributeValueReplacement (
+									_idAttribute,
+									'_idPrefix' + (_nodeId && ' + \'-' + _nodeId + '\'')
+								);
 
 								var _bindings = _bindingsById [_nodeId];
 								if (_bindings) {
@@ -222,7 +231,8 @@ Uize.module ({
 
 											var
 												_bindingType = _binding.bindingType,
-												_bindingProperty = _binding.propertyName
+												_bindingProperty = _binding.propertyName,
+												_bindingPropertyReference = _propertyReference (_bindingProperty)
 											;
 											/*** remap binding types ***/
 												if (_bindingType == 'className') {
@@ -234,49 +244,45 @@ Uize.module ({
 													if (_tagName == 'input') {
 														var _inputType = _getAttributeValue (_node,'type');
 														if (_inputType == 'text') {
-															_addAttributeReplacement (
+															_addAttributeValueReplacement (
 																_ensureNodeAttribute (_node,'value'),
-																_helperFunctionCall (
-																	'_encodeAttributeValue',
-																	_propertyReference (_bindingProperty)
-																)
+																_helperFunctionCall ('_encodeAttributeValue',_bindingPropertyReference)
 															);
 														} else if (_inputType == 'checkbox') {
+															_addWholeAttributeReplacement (
+																_node,
+																'checked',
+																'(' + _bindingPropertyReference + ' ? \'checked="checked"\' : \'\')'
+															);
 														}
-													} else {
+													} else if (_tagName == 'select') {
+														/*
+															- must iterate over child nodes to find option nodes and add replacement expression for selected attribute
+														*/
 													}
 												} else {
 													_addInnerHtmlReplacement (
 														_node,
-														_helperFunctionCall (
-															'_encodeAttributeValue',
-															_propertyReference (_bindingProperty)
-														)
+														_helperFunctionCall ('_encodeAttributeValue',_bindingPropertyReference)
 													);
 												}
 											} else if (_bindingType == 'html' || _bindingType == 'innerHTML') {
-												_addInnerHtmlReplacement (_node,_propertyReference (_bindingProperty));
+												_addInnerHtmlReplacement (_node,_bindingPropertyReference);
 											} else if (_bindingType == '?') {
 												_addStylePropertyReplacement (
 													'display',
-													'(' + _propertyReference (_bindingProperty) + ' ? \'\' : \'none\')'
+													'(' + _bindingPropertyReference + ' ? \'\' : \'none\')'
 												);
 											} else if (_bindingType.charCodeAt (0) == 64) {
-												var
-													_attributeName = _bindingType.slice (1),
-													_propertyReferenceExpression = _propertyReference (_bindingProperty)
-												;
-												_addAttributeReplacement (
+												var _attributeName = _bindingType.slice (1);
+												_addAttributeValueReplacement (
 													_ensureNodeAttribute (_node,_attributeName),
 													_attributeName == 'class'
-														? _propertyReferenceExpression
-														: _helperFunctionCall ('_encodeAttributeValue',_propertyReferenceExpression)
+														? _bindingPropertyReference
+														: _helperFunctionCall ('_encodeAttributeValue',_bindingPropertyReference)
 												);
 											} else if (_bindingType.slice (0,6) == 'style.') {
-												_addStylePropertyReplacement (
-													_bindingType.slice (6),
-													_propertyReference (_bindingProperty)
-												);
+												_addStylePropertyReplacement (_bindingType.slice (6),_bindingPropertyReference);
 											}
 										}
 									);
@@ -285,7 +291,7 @@ Uize.module ({
 											_styleAttribute = _ensureNodeAttribute (_node,'style'),
 											_styleAttributeValue = _styleAttribute.value.value
 										;
-										_addAttributeReplacement (
+										_addAttributeValueReplacement (
 											_styleAttribute,
 											(_styleAttributeValue ? Uize.Json.to (_styleAttributeValue) + ' + ' : '') +
 											_styleExpressionParts.join (' + ')

@@ -3,13 +3,6 @@ This is a TO DO document for the =Uize.Widget.HtmltCompiler= module.
 Achieve Parity for Bindings
 	Achieve parity for style bindings compiled to template code.
 
-	Implement Support for ? Binding Type
-		The "?" binding type can be resolved to a style binding on the display property.
-
-		...................
-		value ? '' : 'none'
-		...................
-
 	Implement Support for value Binding
 		How this binding type is compiled with have to be affected by the node type, since the current runtime binding logic leverages the =setNodeValue= method, and this method is an abstraction that provides different handling for different node types.
 
