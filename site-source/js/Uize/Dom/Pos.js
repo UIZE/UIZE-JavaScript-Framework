@@ -229,17 +229,17 @@ Uize.module ({
 							_transformStyle = _style.transform || _style.webkitTransform
 							;
 						if (_transformStyle) {
-							var _components = _transformStyle.replace(/ /g, '').match(/(translate[a-z0-9]*)\((-?[0-9a-z\.]+),?(-?[0-9a-z\.]+)?.*?\)/);
+							var _components = _transformStyle.toLowerCase().replace(/ /g, '').match(/(translate[a-z0-9]*)\((-?[0-9a-z\.]+),?(-?[0-9a-z\.]+)?.*?\)/);
 							switch (_components[1]) {
 								case 'translate':
 								case 'translate3d':
 									_x += parseInt(_components[2]);
 									_y += parseInt(_components[3]);
 									break;
-								case 'translateX':
+								case 'translatex':
 									_x += parseInt(_components[2]);
 									break;
-								case 'translateY':
+								case 'translatey':
 									_y += parseInt(_components[2]);
 									break;
 							}
