@@ -157,7 +157,7 @@ Uize.module ({
 											- see the companion =Click=, =Double Click=, =Down=, =Out=, and =Over= instance events
 								*/
 								if (_isClickEvent) {
-									m._action && m._action ();
+									m._action && m._action (_domEvent);
 									(m._selected ? m._clickToDeselect : m._clickToSelect) && m.toggle ('selected');
 								}
 							}
