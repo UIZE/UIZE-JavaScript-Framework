@@ -27,33 +27,35 @@ Uize.module ({
 				var m = this;
 
 				/*** add performTest child buttonm ***/
-					var _performTestButton = Uize.Widget.Button.addChildButton.call (
-						this,
+					var _performTestButton = m.addChild (
 						'performTest',
-						function () {
-							_performTestButton.set ({busy:true});
-							m.setNodeInnerHtml (
-								'testResults',
-								'<div style="font-size:30px; text-align:center;">BUSY PERFORMING TEST</div>' +
-								'<div style="font-size:11px; text-align:center;">-- you get no progress bar because we don\'t want to pollute the results --</div>'
-							);
-							setTimeout (
-								function () {
-									m.performTest (
-										function (_testResults) {
-											m.setNodeInnerHtml ('testResults',_testResults);
-											/*?
-												Implied Nodes
-													testResults
-														A node whose innerHTML will be replaced with the test results HTML reported back from the call to the =performTest= instance method.
-											*/
-											_performTestButton.set ({busy:'inherit'});
-											_performTestButton.setNodeInnerHtml ('','PERFORM TEST AGAIN');
-										}
-									);
-								},
-								500
-							);
+						Uize.Widget.Button,
+						{
+							action:function () {
+								_performTestButton.set ({busy:true});
+								m.setNodeInnerHtml (
+									'testResults',
+									'<div style="font-size:30px; text-align:center;">BUSY PERFORMING TEST</div>' +
+									'<div style="font-size:11px; text-align:center;">-- you get no progress bar because we don\'t want to pollute the results --</div>'
+								);
+								setTimeout (
+									function () {
+										m.performTest (
+											function (_testResults) {
+												m.setNodeInnerHtml ('testResults',_testResults);
+												/*?
+													Implied Nodes
+														testResults
+															A node whose innerHTML will be replaced with the test results HTML reported back from the call to the =performTest= instance method.
+												*/
+												_performTestButton.set ({busy:'inherit'});
+												_performTestButton.setNodeInnerHtml ('','PERFORM TEST AGAIN');
+											}
+										);
+									},
+									500
+								);
+							}
 						}
 						/*?
 							Child Widgets
