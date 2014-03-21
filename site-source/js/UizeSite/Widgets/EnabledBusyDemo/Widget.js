@@ -48,17 +48,12 @@ Uize.module ({
 				var m = this;
 
 				/*** add child button widgets ***/
-					m._addChildButton (
-						'button1',
-						function () {
-							alert (m.get ('idPrefix') + ' --- click button 1');
-						}
-					);
-					m._addChildButton (
-						'button2',
-						function () {
-							alert (m.get ('idPrefix') + ' --- click button 2');
-						}
+					m.addChildren (
+						{
+							button1:{action:function () {alert (m.get ('idPrefix') + ' --- click button 1')}},
+							button2:{action:function () {alert (m.get ('idPrefix') + ' --- click button 2')}}
+						},
+						{widgetClass:Uize.Widgets.Button.Widget}
 					);
 
 				/*** code to update UI whenever enabled and busy state properties change ***/
@@ -70,8 +65,6 @@ Uize.module ({
 			},
 
 			instanceMethods:{
-				_addChildButton:Uize.Widgets.Button.Widget.addChildButton,
-
 				updateUi:function () {
 					var m = this;
 					if (m.isWired) {

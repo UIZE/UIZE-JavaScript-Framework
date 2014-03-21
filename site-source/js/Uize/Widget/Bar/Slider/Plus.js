@@ -33,25 +33,27 @@ Uize.module ({
 			omegastructor:function () {
 				var m = this;
 
-				function _stepButtonHandler (_event) {
+				function _stepButtonHandler (_direction,_domEvent) {
 					function _roundOffJsMathError (_value) {
 						return Math.round (_value * Math.pow (10,14)) / Math.pow (10,14); /* NOTE: this is a workaround for a REALLY ridiculous math inaccuracy in JavaScript when certain numbers are involved in multiplications. For example, .07 * 100 gives you 7.000000000000001 !!! */
 					}
 					var
-						_domEvent = _event.domEvent,
 						_divisions = _domEvent.shiftKey ? m._stepsCoarse : (_domEvent.ctrlKey ? m._stepsFine : m._stepsNormal),
 						_minValue = m.get ('minValue'),
-						_divisionSize = (m.get ('maxValue') - _minValue) / _divisions,
-						_direction = _event.source.get ('name') == 'stepToMin' ? -1 : 1
+						_divisionSize = (m.get ('maxValue') - _minValue) / _divisions
 					;
 					m.set ({value:(Math [_direction < 0 ? 'ceil' : 'floor'] (_roundOffJsMathError ((m - _minValue) / _divisionSize)) + _direction) * _divisionSize + _minValue});
 				}
 
-				var _addChildButton = Uize.Widget.Button.addChildButton;
-				_addChildButton.call (m,'setToMin',function () {m.set ({value:m.get ('minValue')})});
-				_addChildButton.call (m,'setToMax',function () {m.set ({value:m.get ('maxValue')})});
-				_addChildButton.call (m,'stepToMin',_stepButtonHandler);
-				_addChildButton.call (m,'stepToMax',_stepButtonHandler);
+				m.addChildren (
+					{
+						setToMin:{action:function () {m.set ({value:m.get ('minValue')})}},
+						setToMax:{action:function () {m.set ({value:m.get ('maxValue')})}},
+						stepToMin:{action:function (_domEvent) {_stepButtonHandler (-1,_domEvent)}},
+						stepToMax:{action:function (_domEvent) {_stepButtonHandler (1,_domEvent)}}
+					},
+					{widgetClass:Uize.Widget.Button}
+				);
 
 				m.onChange (
 					'value',
