@@ -54,9 +54,14 @@ Uize.module ({
 				var m = this;
 
 				/*** make play button ***/
-					(m._play = Uize.Widget.Button.addChildButton.call (m,'play',function () {m.toggle ('playing')}))
-						.set ({playing:m._playing})
-					;
+					m._play = m.addChild (
+						'play',
+						Uize.Widget.Button,
+						{
+							action:function () {m.toggle ('playing')},
+							playing:m._playing
+						}
+					);
 
 				/*** pause auto-advance if the user interacts with the slideshow ***/
 					function _handleButtonClick (_buttonName) {

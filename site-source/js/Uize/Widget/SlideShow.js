@@ -276,13 +276,16 @@ Uize.module ({
 				var m = this;
 
 				/*** add navigation buttons ***/
-					function _addChildButton (_buttonName,_clickHandler) {
-						Uize.Widget.Button.addChildButton.call (m,_buttonName,_clickHandler);
-					}
-					_addChildButton ('previous',function () {m.advance (-1)});
-					_addChildButton ('next',function () {m.advance (1)});
-					_addChildButton ('first',function () {m.set ({_slideNo:0})});
-					_addChildButton ('last',function () {m.set ({_slideNo:m._totalSlides - 1})});
+					m.addChildren (
+						{
+							previous:{action:function () {m.advance (-1)}},
+							next:{action:function () {m.advance (1)}},
+							first:{action:function () {m.set ({_slideNo:0})}},
+							last:{action:function () {m.set ({_slideNo:m._totalSlides - 1})}}
+						},
+						{widgetClass:Uize.Widget.Button}
+					);
+
 					/*?
 						Child Widgets
 							first

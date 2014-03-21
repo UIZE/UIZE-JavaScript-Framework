@@ -320,34 +320,41 @@ Uize.module ({
 					});
 
 				/*** button widgets ***/
-					var _addChildButton = Uize.Widget.Button.addChildButton;
+					m.addChildren (
+						{
+							add:{
+								action:_addText
+								/*?
+									Child Widgets
+										add
+											An instance of the =Uize.Widget.Button= class, that lets the user add the current text entered in the =input= child widget as a new item in the =list= array.
 
-					_addChildButton.call (m,'add',_addText);
-						/*?
-							Child Widgets
-								add
-									An instance of the =Uize.Widget.Button= class, that lets the user add the current text entered in the =input= child widget as a new item in the =list= array.
+											When the value of the =input= child widget's =isValid= state property is set to =false=, then the =add= button will be disabled. This typically occurs when the =input= child widget's value is =''= (an empty string), but could also occur if its value is non-empty but not valid according to a validator function specified by its =validator= state property.
 
-									When the value of the =input= child widget's =isValid= state property is set to =false=, then the =add= button will be disabled. This typically occurs when the =input= child widget's value is =''= (an empty string), but could also occur if its value is non-empty but not valid according to a validator function specified by its =validator= state property.
+											When the =add= button is enabled and is clicked by the user, any text entered in the =input= child widget will first be processed by the =itemConformer= function (if specified) and will then be added to the =list= array. Where the new item appears in the =list= will depend on the value of the =sort= state property.
 
-									When the =add= button is enabled and is clicked by the user, any text entered in the =input= child widget will first be processed by the =itemConformer= function (if specified) and will then be added to the =list= array. Where the new item appears in the =list= will depend on the value of the =sort= state property.
+											NOTES
+											- see the related =input= child widget
+											- this child widget is added in the constructor
+								*/
+							},
+							remove:{
+								action:function () {_removeSelected (m)}
+								/*?
+									Child Widgets
+										remove
+											An instance of the =Uize.Widget.Button= class, that lets the user remove the items currently selected in the =list Implied Node= from the =list= array.
 
-									NOTES
-									- see the related =input= child widget
-									- this child widget is added in the constructor
-						*/
-					_addChildButton.call (m,'remove',function () {_removeSelected (m)});
-						/*?
-							Child Widgets
-								remove
-									An instance of the =Uize.Widget.Button= class, that lets the user remove the items currently selected in the =list Implied Node= from the =list= array.
+											When no options of the =list Implied Node= are selected, then the =remove= button will be disabled. This may happen when there are no items in the =list= array, when the user has just removed the previously selected items, or if the user uses ctrl-click to deselect all selected items.
 
-									When no options of the =list Implied Node= are selected, then the =remove= button will be disabled. This may happen when there are no items in the =list= array, when the user has just removed the previously selected items, or if the user uses ctrl-click to deselect all selected items.
-
-									NOTES
-									- see the related =list Implied Node= and the =list= state property
-									- this child widget is added in the constructor
-						*/
+											NOTES
+											- see the related =list Implied Node= and the =list= state property
+											- this child widget is added in the constructor
+								*/
+							}
+						},
+						{widgetClass:Uize.Widget.Button}
+					);
 
 				m._childWidgetsAdded = true;
 				_updateUiAddButtonState (m);
