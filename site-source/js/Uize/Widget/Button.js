@@ -283,9 +283,10 @@ Uize.module ({
 									NOTES
 									- see the companion =Click=, =Double Click=, =Down=, =Out=, and =Over= instance events
 						*/
-						_isClickEvent && (m._selected ? m._clickToDeselect : m._clickToSelect) &&
-							m.set ({_selected:!m._selected})
-						;
+						if (_isClickEvent) {
+							m._action && m._action (_domEvent);
+							(m._selected ? m._clickToDeselect : m._clickToSelect) && m.toggle ('selected');
+						}
 					}
 				}
 			}
@@ -466,6 +467,14 @@ Uize.module ({
 			},
 
 			stateProperties:{
+				_action:'action',
+					/*?
+						State Properties
+							action
+
+								NOTES
+								- the initial value is =undefined=
+					*/
 				_allowClickWhenSelected:{
 					name:'allowClickWhenSelected',
 					onChange:_updateUiState
