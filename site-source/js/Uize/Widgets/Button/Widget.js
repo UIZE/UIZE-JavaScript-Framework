@@ -190,10 +190,10 @@ Uize.module ({
 				addChildButton:function (_buttonName,_clickHandler) {
 					var
 						m = this,
-						_button
+						_button = m.children [_buttonName]
 					;
-					function _wireButtonClickEvent () {
-						_button.wire (
+					_button ||
+						(_button = m.addChild (_buttonName,_class)).wire (
 							'Click',
 							function (_event) {
 								if (_clickHandler)
@@ -201,20 +201,8 @@ Uize.module ({
 								;
 								m.fire (_event);
 							}
-						);
-					}
-					if (Uize.isInstance (m)) {
-						/* NOTE: being used as an instance method, stitched in on some other widget class */
-						if (!(_button = m.children [_buttonName])) {
-							_button = m.addChild (_buttonName,_class);
-							_wireButtonClickEvent ();
-						}
-					} else {
-						/* NOTE: being used as a static method */
-						_button = m ({idPrefix:_buttonName,name:_buttonName});
-						_wireButtonClickEvent ();
-						(window [_button.instanceId] = _button).wireUi ();
-					}
+						)
+					;
 					return _button;
 					/*?
 						Static Properties
@@ -266,21 +254,6 @@ Uize.module ({
 									...........................................................................................
 									myButton = Uize.Widgets.Button.Widget.addChildButton.call (myWidgetInstance,buttonNameSTR);
 									...........................................................................................
-
-								Calling As a Static Method
-
-									SYNTAX
-									..........................................................
-									myLinkButton = Uize.Widgets.Button.Widget.addChildButton (
-										buttonNameSTR,
-										clickHandlerFUNCorEventNameSTR
-									);
-									..........................................................
-
-									VARIATION
-									.........................................................................
-									myLinkButton = Uize.Widgets.Button.Widget.addChildButton (buttonNameSTR);
-									.........................................................................
 					*/
 				}
 			},
