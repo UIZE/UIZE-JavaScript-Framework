@@ -73,77 +73,7 @@ Uize.module ({
 					}
 		;
 
-		/*** Private Instance Methods ***/
-			function _updateDisplayState () {
-				var m = this;
-				if (m._created) {
-					var
-						_enabledInherited = m.get ('enabledInherited'),
-						_busyInherited = m.get ('busyInherited'),
-						_stateCombinationNo =
-							/* disabled state  */ (!_enabledInherited ? 16 : 0) |
-							/* default state */ (!m._state || _busyInherited ? 8 : 0) |
-							/* over state    */ (m == _overButton ? 4 : 0) |
-							/* active state  */ (m._state == 'down' || m._selected ? 2 : 0) |
-							/* playing state */ (m._playing ? 1 : 0)
-						,
-						_displayState = m._statePrecedenceMap [_stateCombinationNo]
-					;
-					if (_displayState == _undefined) {
-						for (
-							var
-								_stateNo = -1,
-								_statePrecedence = m._statePrecedence,
-								_statePrecedenceLength = _statePrecedence.length
-							;
-							++_stateNo < _statePrecedenceLength;
-						) {
-							var _stateName = _statePrecedence [_stateNo];
-							if (_stateCombinationNo & _stateNamesToBitMasks [_stateName]) {
-								_displayState = _stateName;
-								break;
-							}
-						}
-						m._statePrecedenceMap [_stateCombinationNo] = _displayState;
-					}
-					m.set ({_displayState:m._flavor + (_displayState && ('-' + _displayState))});
-
-					if (m.isWired && m._tooltip && Uize.Tooltip) {
-						var _newTooltipShown = m._state == 'over' && _enabledInherited && !m._selected;
-						_newTooltipShown != m._tooltipShown &&
-							Uize.Tooltip.showTooltip (m._tooltip,m._tooltipShown = _newTooltipShown)
-						;
-					}
-				}
-			}
-
-			function _isClickable (m,_ignoreSelected) {
-				return !!(
-					m.get ('enabledInherited') && !m.get ('busyInherited') &&
-					(_ignoreSelected || !m._selected || m._clickToDeselect || m._allowClickWhenSelected)
-				);
-			}
-
 		return _class = _superclass.subclass ({
-			omegastructor:function () {
-				var m = this;
-				m._created = _true;
-
-				function _setStateAndUpdateDisplayState () {
-					_isClickable (m) || m.set ({_state:''});
-					_updateDisplayState.call (m);
-				}
-				m.wire ({
-					'Changed.busyInherited':_setStateAndUpdateDisplayState,
-					'Changed.enabledInherited':_setStateAndUpdateDisplayState
-				});
-				_updateDisplayState.call (m);
-			},
-
-			instanceProperties:{
-				_tooltipShown:_false
-			},
-
 			instanceMethods:{
 				wireUi:function () {
 					function _setStateAndFireEvent (_domEvent) {
@@ -168,7 +98,11 @@ Uize.module ({
 								}
 
 							if (_isClickEvent) _domEvent.cancelBubble = _true;
-							if (_isClickable (m,_domEventType == 'dblclick')) {
+
+							if (
+								m.get ('enabledInherited') && !m.get ('busyInherited') &&
+								(_domEventType == 'dblclick' || !m._selected || m._clickToDeselect || m._allowClickWhenSelected)
+							) {
 								var _eventInfo = _eventInfoMap [_domEventType];
 								m.set ({_state:_eventInfo [0]});
 								m.fire ({name:_eventInfo [1],domEvent:_domEvent});
@@ -223,10 +157,8 @@ Uize.module ({
 											- see the companion =Click=, =Double Click=, =Down=, =Out=, and =Over= instance events
 								*/
 								if (_isClickEvent) {
-									Uize.isFunction (m._action) && m._action ();
-									(m._selected ? m._clickToDeselect : m._clickToSelect) &&
-										m.set ({_selected:!m._selected})
-									;
+									m._action && m._action ();
+									(m._selected ? m._clickToDeselect : m._clickToSelect) && m.toggle ('selected');
 								}
 							}
 						}
@@ -365,9 +297,7 @@ Uize.module ({
 								NOTES
 								- the initial value is =undefined=
 					*/
-				_allowClickWhenSelected:{
-					name:'allowClickWhenSelected',
-					onChange:_updateDisplayState
+				_allowClickWhenSelected:'allowClickWhenSelected',
 					/*?
 						State Properties
 							allowClickWhenSelected
@@ -375,7 +305,6 @@ Uize.module ({
 								NOTES
 								- the initial value is =undefined=
 					*/
-				},
 				_clickToSelect:'clickToSelect',
 					/*?
 						State Properties
@@ -384,9 +313,7 @@ Uize.module ({
 								NOTES
 								- the initial value is =undefined=
 					*/
-				_clickToDeselect:{
-					name:'clickToDeselect',
-					onChange:_updateDisplayState
+				_clickToDeselect:'clickToDeselect',
 					/*?
 						State Properties
 							clickToDeselect
@@ -394,9 +321,43 @@ Uize.module ({
 								NOTES
 								- the initial value is =undefined=
 					*/
-				},
 				_displayState:{
-					name:'displayState'
+					name:'displayState',
+					derived:function (
+						state, isOver, selected, playing, flavor, enabledInherited, busyInherited, statePrecedence, statePrecedenceMap
+					) {
+						var
+							m = this,
+							_state = state,
+							_stateCombinationNo =
+								/* disabled state  */ !enabledInherited * 16 |
+								/* default state */ (!_state || busyInherited) * 8 |
+								/* over state    */ isOver * 4 |
+								/* active state  */ (_state == 'down' || selected) * 2 |
+								/* playing state */ +playing
+							,
+							_statePrecedenceMap = statePrecedenceMap,
+							_displayState = _statePrecedenceMap [_stateCombinationNo]
+						;
+						if (_displayState == _undefined) {
+							for (
+								var
+									_stateNo = -1,
+									_statePrecedence = statePrecedence,
+									_statePrecedenceLength = _statePrecedence.length
+								;
+								++_stateNo < _statePrecedenceLength;
+							) {
+								var _stateName = _statePrecedence [_stateNo];
+								if (_stateCombinationNo & _stateNamesToBitMasks [_stateName]) {
+									_displayState = _stateName;
+									break;
+								}
+							}
+							_statePrecedenceMap [_stateCombinationNo] = _displayState;
+						}
+						return flavor + (_displayState && ('-' + _displayState));
+					}
 					/*?
 						State Properties
 							displayState
@@ -418,7 +379,6 @@ Uize.module ({
 				},
 				_playing:{
 					name:'playing',
-					onChange:_updateDisplayState,
 					value:_false
 					/*?
 						State Properties
@@ -430,7 +390,6 @@ Uize.module ({
 				},
 				_selected:{
 					name:'selected',
-					onChange:_updateDisplayState,
 					value:_false
 					/*?
 						State Properties
@@ -442,20 +401,17 @@ Uize.module ({
 				},
 				_state:{
 					name:'state',
-					onChange:[
-						function () {
-							var m = this;
-							if (!m._state) {
-								if (_overButton == m)
-									_overButton = _undefined
-								;
-							} else if (m._state == 'over') {
-								_overButton && _overButton != m && _overButton.set ({_state:''});
-								_overButton = m;
-							}
-						},
-						_updateDisplayState
-					],
+					onChange:function () {
+						var m = this;
+						if (!m._state) {
+							if (_overButton == m)
+								_overButton = _undefined
+							;
+						} else if (m._state == 'over') {
+							_overButton && _overButton != m && _overButton.set ({_state:''});
+							_overButton = m;
+						}
+					},
 					value:''
 					/*?
 						State Properties
@@ -474,23 +430,12 @@ Uize.module ({
 								- while the instance is not wired, the value of this property will remain =''= (empty string)
 					*/
 				},
+				_isOver:{
+					name:'isOver',
+					derived:'state: state == "over" || state == "down"'
+				},
 				_statePrecedence:{
 					name:'statePrecedence',
-					onChange:[
-						function () {
-							var
-								m = this,
-								_statePrecedenceAsJoinedStr =
-									m._statePrecedence._asJoinedStr ||
-									(m._statePrecedence._asJoinedStr = m._statePrecedence.join (','))
-							;
-							m._statePrecedenceMap =
-								_statePrecedenceMaps [_statePrecedenceAsJoinedStr] ||
-								(_statePrecedenceMaps [_statePrecedenceAsJoinedStr] = {})
-							;
-						},
-						_updateDisplayState
-					],
 					value:['playing','active','disabled','over','']
 					/*?
 						State Properties
@@ -499,6 +444,21 @@ Uize.module ({
 								NOTES
 								- the initial value is =['playing','active','disabled','over','']=
 					*/
+				},
+				_statePrecedenceMap:{
+					name:'statePrecedenceMap',
+					derived:function (statePrecedence) {
+						var
+							_statePrecedence = statePrecedence,
+							_statePrecedenceAsJoinedStr =
+								_statePrecedence._asJoinedStr ||
+								(_statePrecedence._asJoinedStr = _statePrecedence.join (','))
+						;
+						return (
+							_statePrecedenceMaps [_statePrecedenceAsJoinedStr] ||
+							(_statePrecedenceMaps [_statePrecedenceAsJoinedStr] = {})
+						);
+					}
 				},
 				_text:{
 					name:'text',
@@ -539,10 +499,18 @@ Uize.module ({
 								- the initial value is =undefined=
 								- in order for the value of this property to be honored, the =Uize.Tooltip= module must already be loaded, but the =Uize.Widgets.Button.Widget= module does not explicitly require the =Uize.Tooltip= module
 					*/
+				_tooltipShown:{
+					name:'tooltipShown',
+					derived:function (tooltip,wired,state,enabledInherited,selected) {
+						return !!(tooltip && wired && state == 'over' && enabledInherited && !selected);
+					},
+					onChange:function () {
+						Uize.Tooltip && Uize.Tooltip.showTooltip (this._tooltip,this._tooltipShown);
+					}
+				},
 				_flavor:{
 					name:'flavor',
-					value:'normal', // values can be 'normal' | 'primary' | 'positive' | 'negative'
-					onChange:_updateDisplayState
+					value:'normal' // values can be 'normal' | 'primary' | 'positive' | 'negative'
 				}
 			},
 
