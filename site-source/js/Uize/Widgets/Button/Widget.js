@@ -183,26 +183,22 @@ Uize.module ({
 			},
 
 			staticProperties:{
-				cssModule:Uize.Widgets.Button.Css
-			},
+				cssModule:Uize.Widgets.Button.Css,
 
-			staticMethods:{
 				addChildButton:function (_buttonName,_clickHandler) {
 					var
 						m = this,
-						_button = m.children [_buttonName]
+						_button = m.addChild (_buttonName,_class)
 					;
-					_button ||
-						(_button = m.addChild (_buttonName,_class)).wire (
-							'Click',
-							function (_event) {
-								if (_clickHandler)
-									typeof _clickHandler == 'string' ? m.fire (_clickHandler) : _clickHandler (_event)
-								;
-								m.fire (_event);
-							}
-						)
-					;
+					_button.wire (
+						'Click',
+						function (_event) {
+							if (_clickHandler)
+								typeof _clickHandler == 'string' ? m.fire (_clickHandler) : _clickHandler (_event)
+							;
+							m.fire (_event);
+						}
+					);
 					return _button;
 					/*?
 						Static Properties
