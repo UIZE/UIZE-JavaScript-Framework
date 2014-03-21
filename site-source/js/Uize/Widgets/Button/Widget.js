@@ -168,9 +168,6 @@ Uize.module ({
 						var _rootNode = m._rootNode = m.getNode ();
 						if (_rootNode) {
 							/*** wire up event handlers ***/
-								if (m._followLink && _rootNode.tagName == 'A' && !_rootNode.onclick)
-									_rootNode.onclick = Uize.returnTrue
-								;
 								m.wireNode (
 									_rootNode,
 									{
@@ -214,7 +211,7 @@ Uize.module ({
 						}
 					} else {
 						/* NOTE: being used as a static method */
-						_button = m ({idPrefix:_buttonName,name:_buttonName,_followLink:_true});
+						_button = m ({idPrefix:_buttonName,name:_buttonName});
 						_wireButtonClickEvent ();
 						(window [_button.instanceId] = _button).wireUi ();
 					}
@@ -364,17 +361,6 @@ Uize.module ({
 
 								NOTES
 								- the initial value is =''= (empty string)
-					*/
-				},
-				_followLink:{
-					name:'followLink',
-					value:_false
-					/*?
-						State Properties
-							followLink
-
-								NOTES
-								- the initial value is =false=
 					*/
 				},
 				_playing:{
