@@ -30,26 +30,33 @@ Uize.module ({
 	required:'Uize.Build.Util',
 	builder:function () {
 		var _jsExtensionRegExp = /\.js$/;
+
+		function _removeJsFileExtension (_path) {return _path.replace (_jsExtensionRegExp,'')}
+		function _sourceFolderPath (m,_path) {return _removeJsFileExtension (m.sourceUrlFromTempUrl (_path))}
+
 		return Uize.package ({
 			description:'Generated JavaScript namespace modules under temp',
 			urlMatcher:function (_urlParts) {
-				var _pathname = _urlParts.pathname;
+				var
+					m = this,
+					_pathname = _urlParts.pathname
+				;
 				return (
 					_urlParts.fileType == 'js' &&
-					this.isTempUrl (_pathname) &&
-					this.fileSystem.folderExists ({
-						path:this.sourceUrlFromTempUrl (_pathname).replace (_jsExtensionRegExp,'')
-					})
+					m.isTempUrl (_pathname) &&
+					m.fileSystem.folderExists ({path:_sourceFolderPath (m,_pathname)})
 				);
 			},
 			builderInputs:function (_urlParts) {
-				return {sourceFolderPath:this.sourceUrlFromTempUrl (_urlParts.pathname).replace (_jsExtensionRegExp,'')};
+				return {sourceFolderPath:_sourceFolderPath (this,_urlParts.pathname)};
 			},
-			builder:function (_inputs) {
+			builder:function (_inputs,_urlParts) {
 				var _params = this.params;
 				return Uize.Build.Util.moduleAsText ({
 					name:Uize.Build.Util.moduleNameFromModulePath (
-						_inputs.sourceFolderPath.slice ((_params.sourcePath + '/' + _params.modulesFolder + '/').length)
+						_removeJsFileExtension (
+							_urlParts.pathname.slice ((_params.tempPath + '/' + _params.modulesFolder + '/').length)
+						)
 					)
 				});
 			}
