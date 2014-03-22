@@ -223,19 +223,20 @@ Uize.module ({
 				var m = this;
 
 				/*** create the button widgets ***/
-					var _addChildButton = Uize.Widget.Button.addChildButton;
 					function _addNavigationButton (_buttonName,_shiftX,_shiftY) {
-						_addChildButton.call (
-							m,
+						m.addChild (
 							_buttonName,
-							function (_event) {
-								var
-									_factor = _event.domEvent.shiftKey ? Infinity : 1,
-									_properties = {}
-								;
-								if (_shiftX) _properties._pageX = m._pageX + _shiftX * _factor;
-								if (_shiftY) _properties._pageY = m._pageY + _shiftY * _factor;
-								m.set (_properties);
+							Uize.Widget.Button,
+							{
+								action:function (_domEvent) {
+									var
+										_factor = _domEvent.shiftKey ? Infinity : 1,
+										_properties = {}
+									;
+									if (_shiftX) _properties._pageX = m._pageX + _shiftX * _factor;
+									if (_shiftY) _properties._pageY = m._pageY + _shiftY * _factor;
+									m.set (_properties);
+								}
 							}
 						);
 					}
