@@ -347,7 +347,7 @@ Uize.module ({
 											_widgetClass && _addRequired (_widgetClass);
 
 											/*** add replacement and replace child tag node with text node ***/
-												var _serializedProperties = Uize.Json.to (_attributesLookup);
+												var _serializedProperties = Uize.Json.to (_attributesLookup,'mini');
 												_nodes [_nodeNo] = new Uize.Parse.Xml.Text (
 													_getReplacementTokenByValue (
 														_helperFunctionCall (
@@ -374,19 +374,19 @@ Uize.module ({
 				/*** split re-serialized HTML by replacement tokens and resolve all fragments to expressions ***/
 					var
 						_fragmentOccurrences = {},
-						_fragmentsToCapture = {},
+						_fragmentsToVarize = {},
 						_fragments = Uize.map (
 							Uize.Str.Split.split (_nodeListParser.serialize (),_replacementTokenRegExp),
 							function (_segment,_segmentNo) {
 								var _fragment = _segmentNo % 2 ? _replacements [_segment] : Uize.Json.to (_segment);
-								if (!_fragmentsToCapture [_fragment]) {
+								if (!_fragmentsToVarize [_fragment]) {
 									var
 										_fragmentLength = _fragment.length,
 										_occurrences =
 											_fragmentOccurrences [_fragment] = (_fragmentOccurrences [_fragment] || 0) + 1
 									;
 									if (_occurrences * _fragmentLength > 3 + _fragmentLength + _occurrences * 2)
-										_fragmentsToCapture [_fragment] = true
+										_fragmentsToVarize [_fragment] = true
 									;
 								}
 								return _fragment;
@@ -404,11 +404,11 @@ Uize.module ({
 				;
 
 				Uize.forEach (
-					_fragmentsToCapture,
+					_fragmentsToVarize,
 					function (_true,_fragmentToCapture) {
 						var _fragmentVar = '_fragment' + _fragmentNo++;
 						_varChunks.push (_fragmentVar + ' = ' + _fragmentToCapture);
-						_fragmentsToCapture [_fragmentToCapture] = _fragmentVar;
+						_fragmentsToVarize [_fragmentToCapture] = _fragmentVar;
 					}
 				);
 
@@ -429,11 +429,13 @@ Uize.module ({
 						'var\n' +
 							'\t' + _varChunks.join (',\n\t') + '\n' +
 						';\n' +
-						'return ' +
+						'return (\n' +
+							'\t' +
 							Uize.map (
 								_fragments,
-								function (_fragment) {return _fragmentsToCapture [_fragment] || _fragment}
-							).join (' + ') + ';\n',
+								function (_fragment) {return _fragmentsToVarize [_fragment] || _fragment}
+							).join (' + ') +
+						'\n);\n',
 					_templateFunction = Function (_templateFunctionCode)
 				;
 
