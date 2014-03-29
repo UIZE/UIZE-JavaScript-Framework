@@ -50,9 +50,9 @@ Eliminate All Extension Modules
 
 Code Size Optimization
 	Lightweight JSON Module
-		Implement lighter weight JSON module that can be used by =Uize.Widget.V2=.
+		Implement lighter weight JSON module.
 
-		It's time. There are now enough clients that support the built-in =JSON= object that it's time to create a lightweight, non-pretty print serializer and parser for JSON objects that can be used in the =Uize.Widget.V2= module and other modules where control over formatting is not needed.
+		It's time. There are now enough clients that support the built-in =JSON= object that it's time to create a lightweight, non-pretty print serializer and parser for JSON objects that can be used in modules where control over formatting is not needed.
 
 	Improved Module Declaration Semantics
 		Module Declaration Short Form
