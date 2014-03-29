@@ -111,23 +111,6 @@ Uize.module ({
 
 				cssBindings:{
 					sizeInherited:'value'
-				},
-
-				set:{
-					html:{
-						process:function () {
-							var
-								m = this,
-								_children = m.children,
-								_htmlChunks = [],
-								_htmlChunksLength = 0
-							;
-							for (var _childName in _children)
-								_htmlChunks [_htmlChunksLength++] = _children [_childName].getHtml ()
-							;
-							return '<div id="' + m.nodeId () + '">' + _htmlChunks.join ('') + '</div>';
-						}
-					}
 				}
 			});
 		};

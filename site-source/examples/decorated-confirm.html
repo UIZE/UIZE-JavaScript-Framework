@@ -52,7 +52,7 @@ Uize.require (
 	[
 		'UizeSite.Page.Example.library',
 		'UizeSite.Page.Example',
-		'Uize.Widget.V2',
+		'Uize.Widgets.Container.Widget',
 		'Uize.Widgets.Button.Widget'
 	],
 	function () {
@@ -62,7 +62,7 @@ Uize.require (
 			var page = window.page = UizeSite.Page.Example ();
 
 		/*** add the buttons for showing the dialogs ***/
-			var buttons = page.addChild ('buttons',Uize.Widget.V2,{built:false});
+			var buttons = page.addChild ('buttons',Uize.Widgets.Container.Widget,{built:false});
 
 			/*** add the button for showing the delete confirmation dialog ***/
 				buttons.addChild (

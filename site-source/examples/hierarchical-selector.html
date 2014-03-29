@@ -60,7 +60,7 @@ Uize.require (
 		'UizeSite.Page.Example.library',
 		'UizeSite.Page.Example',
 		'Uize.Widget.Tree.Select',
-		'Uize.Widget.V2',
+		'Uize.Widgets.Container.Widget',
 		'Uize.Widgets.Button.Widget',
 		'Uize.Test.TestData.Animals',
 		'Uize.Test.TestData.Plants'
@@ -75,7 +75,7 @@ Uize.require (
 			var selectTree = page.addChild ('selectTree',Uize.Widget.Tree.Select,{items:Uize.Test.TestData.Animals ()});
 
 		/*** add the populator buttons ***/
-			var buttons = page.addChild ('buttons',Uize.Widget.V2,{built:false});
+			var buttons = page.addChild ('buttons',Uize.Widgets.Container.Widget,{built:false});
 			buttons.addChild (
 				'populateWithAnimals',
 				Uize.Widgets.Button.Widget,

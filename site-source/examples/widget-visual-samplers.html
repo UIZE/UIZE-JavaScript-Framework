@@ -70,7 +70,7 @@ Uize.require (
 		'Uize.Data.PathsTree',
 		'Uize.Data.Matches',
 		'Uize.Str.Has',
-		'Uize.Widget.V2',
+		'Uize.Widgets.Container.Widget',
 		'Uize.Flo'
 	],
 	function () {
@@ -164,7 +164,13 @@ Uize.require (
 					_visualSamplers = null;
 				}
 				if (_selectedNamespace != _selectorPlaceholderText) {
-					(_visualSamplers = _page.addChild ('visualSamplers',Uize.Widget.V2,{built:false})).insertUi ();
+					(
+						_visualSamplers = _page.addChild (
+							'visualSamplers',
+							Uize.Widgets.Container.Widget,
+							{built:false}
+						)
+					).insertUi ();
 					var _visualSamplerProperties = {
 						built:false,
 						container:_visualSamplers.getNode (),

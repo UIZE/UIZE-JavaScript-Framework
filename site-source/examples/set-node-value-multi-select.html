@@ -73,7 +73,7 @@ Uize.require (
 		'UizeSite.Page.Example.library',
 		'UizeSite.Page.Example',
 		'Uize.Json',
-		'Uize.Widget.V2',
+		'Uize.Widgets.Container.Widget',
 		'Uize.Widgets.Button.Widget'
 	],
 	function () {
@@ -83,7 +83,7 @@ Uize.require (
 			var page = window.page = UizeSite.Page.Example ();
 
 		/*** add the buttons ***/
-			page.addChild ('buttons',Uize.Widget.V2,{built:false}).addChildren (
+			page.addChild ('buttons',Uize.Widgets.Container.Widget,{built:false}).addChildren (
 				{
 					selectNone:{
 						text:'Select None',

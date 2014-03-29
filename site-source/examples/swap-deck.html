@@ -137,7 +137,7 @@ Uize.require (
 		'UizeSite.Page.Example.library',
 		'UizeSite.Page.Example',
 		'Uize.Widget.Swap.Deck',
-		'Uize.Widget.V2',
+		'Uize.Widgets.Container.Widget',
 		'Uize.Widgets.Button.Widget'
 	],
 	function () {
@@ -166,7 +166,7 @@ Uize.require (
 			swap.fade.set ({duration:1000})
 
 		/*** add the buttons for selecting items ***/
-			var buttons = page.addChild ('buttons',Uize.Widget.V2,{built:false});
+			var buttons = page.addChild ('buttons',Uize.Widgets.Container.Widget,{built:false});
 			Uize.forEach (
 				6,
 				function (_itemNo) {

@@ -24,46 +24,15 @@
 */
 
 Uize.module ({
-	name:'Uize.Widgets.VisualSampler.Widget',
-	superclass:'Uize.Widgets.BoxWithHeading.Widget',
-	required:[
-		'Uize.Widgets.Container.Widget',
-		'Uize.Widgets.VisualSampler.Html',
-		'Uize.Data.Combinations'
-	],
+	name:'Uize.Widgets.Container.Widget',
+	superclass:'Uize.Widget.V2',
+	required:'Uize.Widgets.Container.Html',
 	builder:function (_superclass) {
 		'use strict';
 
 		return _superclass.subclass ({
-			alphastructor:function () {
-				this._totalSamples = 0;
-			},
-
-			omegastructor:function () {
-				this._samples = this.addChild ('samples',Uize.Widgets.Container.Widget);
-			},
-
-			instanceMethods:{
-				addStateCombinationSamples:function (_stateCombinationsSpecifier) {
-					var m = this;
-					Uize.Data.Combinations.forEach (
-						_stateCombinationsSpecifier,
-						function (_state) {m.addSample (_state)}
-					);
-				},
-
-				addSample:function (_state) {
-					var m = this;
-					return m._samples.addChild ('sample' + m._totalSamples++,m.Class.widgetClass,_state);
-				}
-			},
-
-			staticProperties:{
-				widgetClass:null // override this in a subclass
-			},
-
 			set:{
-				html:Uize.Widgets.VisualSampler.Html
+				html:Uize.Widgets.Container.Html
 			}
 		});
 	}

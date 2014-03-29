@@ -73,7 +73,7 @@ Uize.require (
 		'Uize.Fade.xFactory',
 		'Uize.Curve.Rubber',
 		'Uize.Curve.Mod',
-		'Uize.Widget.V2',
+		'Uize.Widgets.Container.Widget',
 		'Uize.Widgets.Button.Widget'
 	],
 	function () {
@@ -152,7 +152,7 @@ Uize.require (
 			}
 
 		/*** add the buttons for triggering different spins ***/
-			page.addChild ('spinButtons',Uize.Widget.V2,{built:false})
+			page.addChild ('spinButtons',Uize.Widgets.Container.Widget,{built:false})
 				.addChildren (
 					{
 						clockwise:{

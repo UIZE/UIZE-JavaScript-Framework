@@ -114,7 +114,7 @@ Uize.require (
 	[
 		'UizeSite.Page.Example.library',
 		'UizeSite.Page.Example',
-		'Uize.Widget.V2',
+		'Uize.Widgets.Container.Widget',
 		'Uize.Widgets.Button.Widget'
 	],
 	function () {
@@ -132,7 +132,7 @@ Uize.require (
 			}
 
 		/*** add the buttons ***/
-			page.addChild ('buttons',Uize.Widget.V2,{built:false})
+			page.addChild ('buttons',Uize.Widgets.Container.Widget,{built:false})
 				.addChildren (
 					{
 						setAllToFalse:{

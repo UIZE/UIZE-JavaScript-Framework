@@ -27,9 +27,10 @@ Uize.module ({
 	name:'Uize.Widgets.VisualTests.Widget',
 	superclass:'Uize.Widget.V2',
 	required:[
-		'Uize.Widget.V2',
+		'Uize.Widgets.Container.Widget',
 		'Uize.Widgets.VisualTests.TestCase.Widget',
-		'Uize.Data.Combinations'
+		'Uize.Data.Combinations',
+		'Uize.Widgets.Container.Html'
 	],
 	builder:function (_superclass) {
 		'use strict';
@@ -42,7 +43,7 @@ Uize.module ({
 			},
 
 			omegastructor:function () {
-				this._testCases = this.addChild ('testCases',Uize.Widget.V2);
+				this._testCases = this.addChild ('testCases',Uize.Widgets.Container.Widget);
 			},
 
 			instanceMethods:{
@@ -68,7 +69,8 @@ Uize.module ({
 			},
 
 			set:{
-				built:false
+				built:false,
+				html:Uize.Widgets.Container.Html
 			}
 		});
 	}

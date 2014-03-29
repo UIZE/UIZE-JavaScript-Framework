@@ -49,7 +49,7 @@ Uize.require (
 		'UizeSite.Page.Example.library',
 		'UizeSite.Page.Example',
 		'Uize.Widget.Swap.Html',
-		'Uize.Widget.V2',
+		'Uize.Widgets.Container.Widget',
 		'Uize.Widgets.Button.Widget'
 	],
 	function () {
@@ -77,7 +77,7 @@ Uize.require (
 			).fade.set ({duration:1000});
 
 		/*** add the content selector buttons ***/
-			page.addChild ('buttons',Uize.Widget.V2,{built:false})
+			page.addChild ('buttons',Uize.Widgets.Container.Widget,{built:false})
 				.addChildren (
 					{
 						content1:{

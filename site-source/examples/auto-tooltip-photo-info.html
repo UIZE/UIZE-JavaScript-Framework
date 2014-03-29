@@ -166,7 +166,7 @@ Uize.require (
 		'Uize.Dom.Basics',
 		'Uize.Template',
 		'Uize.Widget.AutoTooltip',
-		'Uize.Widget.V2',
+		'Uize.Widgets.Container.Widget',
 		'Uize.Widgets.Button.Widget'
 	],
 	function () {
@@ -184,7 +184,7 @@ Uize.require (
 			var photoInfoTooltip = page.addChild ('photoInfoTooltip',Uize.Widget.AutoTooltip,{nodes:thumbNodes,html:true});
 
 		/*** add the buttons for unwiring and wiring auto tooltips ***/
-			var buttons = page.addChild ('buttons',Uize.Widget.V2,{built:false});
+			var buttons = page.addChild ('buttons',Uize.Widgets.Container.Widget,{built:false});
 			function toggleButtonEnabledStates () {
 				buttons.children.unwireAutoTooltips.toggle ('enabled');
 				buttons.children.wireAutoTooltips.toggle ('enabled');
