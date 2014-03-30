@@ -856,7 +856,7 @@ Uize.module ({
 								m = this,
 								_html = m._html
 							;
-							if (_html != _undefined) {
+							if (_html) {
 								if (_html === _true) {
 									var _nodeToInjectInto = _getNodeToInjectInto (m);
 									_html = m._html = _Uize.Template && _nodeToInjectInto
@@ -888,12 +888,12 @@ Uize.module ({
 									? _html.process.call (m,_templateInput)
 									: _isFunction (_html)
 										? typeof (_htmlFuncOutput = _html (_templateInput)) === 'string'
-											? _substituteInto (_htmlFuncOutput, _templateInput)
+											? _substituteInto (_htmlFuncOutput,_templateInput)
 											: _htmlFuncOutput
-										: _substituteInto (_html, _templateInput)
+										: _substituteInto (_html,_templateInput)
 								;
 							}
-							return _html;
+							return _html || '';
 						},
 
 						buildHtml:function (_alternateTemplateInput) {
