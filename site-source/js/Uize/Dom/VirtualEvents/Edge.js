@@ -124,13 +124,13 @@ Uize.module ({
 						return Uize.Dom.VirtualEvent.getCached (
 							_eventName + '()',
 							function (_node,_handler,_subWiringsOwnerId) {
-								_Uize_Dom_Basics.wire (
+								_Uize_Dom.Basics.wire (
 									_node,
 									_triggerEventName,
 									function (_event) {
 										var
-											_eventAbsPos = _Uize_Node_Pos.getEventAbsPos (_event),
-											_nodeCoords = _Uize_Node_Pos.getCoords (this)
+											_eventAbsPos = _Uize_Dom_Pos.getEventAbsPos (_event),
+											_nodeCoords = _Uize_Dom_Pos.getCoords (this)
 										;
 										var
 											_xRelative =
