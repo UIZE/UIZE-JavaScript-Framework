@@ -1,5 +1,12 @@
 This document lists to do tasks that relate to the UIZE JavaScript Framework in general - not relating to the documentation or the site (see [[documentation.html][TO DO - Documentation]]), or specific JavaScript modules (see [[modules.html][TO DO - Modules]]).
 
+Fix Broken Examples
+	http://dev.uize.com:1337/examples/animate-position-in-javascript.html?tour=all
+		- background images are broken
+
+	http://dev.uize.com:1337/examples/animate-size-in-javascript.html?tour=all
+		- background images are broken
+
 Eliminate All Extension Modules
 	Eliminate all extension modules and replace them with either helper objects containing purely static methods or mixin modules.
 
@@ -1350,14 +1357,8 @@ Code Development (in order of priority)
 	- ordering widget (for customizing table column order, etc.)
 
 BUGS
-	Firefox
-		- in the button-types example, the frames style button does not fire the "Click" event (seems to have something to do with the mousedown event handler's execution)
-
 	Safari
 		- for all behaviors that are modified using the Ctrl key, should also be modified by the metaKey (for Mac users)
-		- the slideshow stuff is not working
-		- the ThumbZoom class zoom out effect is not centering in the window when the window is scrolled
-		- after an image has zoomed out, there is a brief moment where the shield displays all solid before the opacity kicks in
 
 		...ImagePort.Draggable
 			no way to initiate Ctrl modifier key behaviors
