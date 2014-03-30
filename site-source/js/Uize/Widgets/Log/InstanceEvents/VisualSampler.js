@@ -36,8 +36,8 @@ Uize.module ({
 				_log.set ({instance:_log.children.clear});
 			},
 
-			staticProperties:{
-				widgetClass:Uize.Widgets.Log.InstanceEvents.Widget
+			set:{
+				samplerWidgetClass:Uize.Widgets.Log.InstanceEvents.Widget
 			}
 		});
 	}

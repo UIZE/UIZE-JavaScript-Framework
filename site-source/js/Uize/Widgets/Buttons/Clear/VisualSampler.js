@@ -46,8 +46,8 @@ Uize.module ({
 				});
 			},
 
-			staticProperties:{
-				widgetClass:Uize.Widgets.Buttons.Clear.Widget
+			set:{
+				samplerWidgetClass:Uize.Widgets.Buttons.Clear.Widget
 			}
 		});
 	}

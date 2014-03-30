@@ -41,8 +41,8 @@ Uize.module ({
 				});
 			},
 
-			staticProperties:{
-				widgetClass:Uize.Widgets.ColorSwatch.Widget
+			set:{
+				samplerWidgetClass:Uize.Widgets.ColorSwatch.Widget
 			}
 		});
 	}

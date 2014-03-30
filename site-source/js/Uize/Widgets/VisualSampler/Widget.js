@@ -35,10 +35,6 @@ Uize.module ({
 		'use strict';
 
 		return _superclass.subclass ({
-			alphastructor:function () {
-				this._totalSamples = 0;
-			},
-
 			omegastructor:function () {
 				this._samples = this.addChild ('samples',Uize.Widgets.Container.Widget);
 			},
@@ -54,16 +50,27 @@ Uize.module ({
 
 				addSample:function (_state) {
 					var m = this;
-					return m._samples.addChild ('sample' + m._totalSamples++,m.Class.widgetClass,_state);
+					return m._samples.addChild ('sample' + m._totalSamples++,m._samplerWidgetClass,_state);
 				}
 			},
 
-			staticProperties:{
-				widgetClass:null // override this in a subclass
+			instanceProperties:{
+				_totalSamples:0
+			},
+
+			stateProperties:{
+				_samplerWidgetClass:'samplerWidgetClass', // set a value for this in a subclass
+				heading:{
+					derived:'samplerWidgetClass: "WIDGET CLASS: " + samplerWidgetClass.moduleName'
+				}
 			},
 
 			set:{
 				html:Uize.Widgets.VisualSampler.Html
+			},
+
+			htmlBindings:{
+				heading:'heading:html'
 			}
 		});
 	}

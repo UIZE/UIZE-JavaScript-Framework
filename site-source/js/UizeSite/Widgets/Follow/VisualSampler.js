@@ -35,8 +35,8 @@ Uize.module ({
 				this.addSample ({});
 			},
 
-			staticProperties:{
-				widgetClass:UizeSite.Widgets.Follow.Widget
+			set:{
+				samplerWidgetClass:UizeSite.Widgets.Follow.Widget
 			}
 		});
 	}

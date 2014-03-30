@@ -38,8 +38,8 @@ Uize.module ({
 				});
 			},
 
-			staticProperties:{
-				widgetClass:Uize.Widgets.Tooltip.Widget
+			set:{
+				samplerWidgetClass:Uize.Widgets.Tooltip.Widget
 			}
 		});
 	}

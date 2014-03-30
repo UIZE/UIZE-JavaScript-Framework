@@ -36,8 +36,8 @@ Uize.module ({
 				Uize.forEach (20,function () {_log.log ('a log message')});
 			},
 
-			staticProperties:{
-				widgetClass:Uize.Widgets.Log.Widget
+			set:{
+				samplerWidgetClass:Uize.Widgets.Log.Widget
 			}
 		});
 	}

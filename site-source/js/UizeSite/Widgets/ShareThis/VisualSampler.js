@@ -35,8 +35,8 @@ Uize.module ({
 				this.addSample ();
 			},
 
-			staticProperties:{
-				widgetClass:UizeSite.Widgets.ShareThis.Widget
+			set:{
+				samplerWidgetClass:UizeSite.Widgets.ShareThis.Widget
 			}
 		});
 	}

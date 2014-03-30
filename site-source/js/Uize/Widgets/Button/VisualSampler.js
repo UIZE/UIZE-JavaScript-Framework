@@ -59,8 +59,8 @@ Uize.module ({
 				});
 			},
 
-			staticProperties:{
-				widgetClass:Uize.Widgets.Button.Widget
+			set:{
+				samplerWidgetClass:Uize.Widgets.Button.Widget
 			}
 		});
 	}

@@ -38,8 +38,8 @@ Uize.module ({
 				});
 			},
 
-			staticProperties:{
-				widgetClass:Uize.Widgets.BoxWithHeading.Widget
+			set:{
+				samplerWidgetClass:Uize.Widgets.BoxWithHeading.Widget
 			}
 		});
 	}

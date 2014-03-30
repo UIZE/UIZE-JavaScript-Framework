@@ -41,8 +41,8 @@ Uize.module ({
 				});
 			},
 
-			staticProperties:{
-				widgetClass:Uize.Widgets.Button.Toggle.OnOff.Widget
+			set:{
+				samplerWidgetClass:Uize.Widgets.Button.Toggle.OnOff.Widget
 			}
 		});
 	}

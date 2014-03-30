@@ -38,8 +38,8 @@ Uize.module ({
 				this.addSample (Uize.Widgets.SimpleStatsTable.TestsData);
 			},
 
-			staticProperties:{
-				widgetClass:Uize.Widgets.SimpleStatsTable.Sortable.Widget
+			set:{
+				samplerWidgetClass:Uize.Widgets.SimpleStatsTable.Sortable.Widget
 			}
 		});
 	}

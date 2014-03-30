@@ -40,8 +40,8 @@ Uize.module ({
 				});
 			},
 
-			staticProperties:{
-				widgetClass:Uize.Widgets.ProgressBar.Widget
+			set:{
+				samplerWidgetClass:Uize.Widgets.ProgressBar.Widget
 			}
 		});
 	}

@@ -38,8 +38,8 @@ Uize.module ({
 				this.addSample ({items:Uize.Test.TestData.Animals ()});
 			},
 
-			staticProperties:{
-				widgetClass:Uize.Widgets.NavTree.List.Widget
+			set:{
+				samplerWidgetClass:Uize.Widgets.NavTree.List.Widget
 			}
 		});
 	}

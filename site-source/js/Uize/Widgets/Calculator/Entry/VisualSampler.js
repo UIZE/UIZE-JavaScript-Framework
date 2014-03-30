@@ -40,8 +40,8 @@ Uize.module ({
 				});
 			},
 
-			staticProperties:{
-				widgetClass:Uize.Widgets.Calculator.Entry.Widget
+			set:{
+				samplerWidgetClass:Uize.Widgets.Calculator.Entry.Widget
 			}
 		});
 	}

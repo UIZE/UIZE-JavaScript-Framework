@@ -37,8 +37,8 @@ Uize.module ({
 				});
 			},
 
-			staticProperties:{
-				widgetClass:Uize.Widgets.ColorInfo.Widget
+			set:{
+				samplerWidgetClass:Uize.Widgets.ColorInfo.Widget
 			}
 		});
 	}

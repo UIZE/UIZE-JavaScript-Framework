@@ -37,8 +37,8 @@ Uize.module ({
 				});
 			},
 
-			staticProperties:{
-				widgetClass:UizeSite.Widgets.TourBar.Widget
+			set:{
+				samplerWidgetClass:UizeSite.Widgets.TourBar.Widget
 			}
 		});
 	}

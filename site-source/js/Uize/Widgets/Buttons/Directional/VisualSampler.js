@@ -48,8 +48,8 @@ Uize.module ({
 				});
 			},
 
-			staticProperties:{
-				widgetClass:Uize.Widgets.Buttons.Directional.Widget
+			set:{
+				samplerWidgetClass:Uize.Widgets.Buttons.Directional.Widget
 			}
 		});
 	}

@@ -36,8 +36,8 @@ Uize.module ({
 				});
 			},
 
-			staticProperties:{
-				widgetClass:Uize.Widgets.Dialog.Widget
+			set:{
+				samplerWidgetClass:Uize.Widgets.Dialog.Widget
 			}
 		});
 	}

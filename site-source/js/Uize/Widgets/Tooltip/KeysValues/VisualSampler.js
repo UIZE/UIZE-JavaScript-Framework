@@ -50,8 +50,8 @@ Uize.module ({
 				});
 			},
 
-			staticProperties:{
-				widgetClass:Uize.Widgets.Tooltip.KeysValues.Widget
+			set:{
+				samplerWidgetClass:Uize.Widgets.Tooltip.KeysValues.Widget
 			}
 		});
 	}

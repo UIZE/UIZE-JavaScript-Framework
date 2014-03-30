@@ -41,8 +41,8 @@ Uize.module ({
 				});
 			},
 
-			staticProperties:{
-				widgetClass:Uize.Widgets.Button.Square.Widget
+			set:{
+				samplerWidgetClass:Uize.Widgets.Button.Square.Widget
 			}
 		});
 	}

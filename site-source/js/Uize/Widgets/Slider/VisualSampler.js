@@ -70,8 +70,8 @@ Uize.module ({
 					});
 			},
 
-			staticProperties:{
-				widgetClass:Uize.Widgets.Slider.Widget
+			set:{
+				samplerWidgetClass:Uize.Widgets.Slider.Widget
 			}
 		});
 	}

@@ -38,8 +38,8 @@ Uize.module ({
 				});
 			},
 
-			staticProperties:{
-				widgetClass:Uize.Widgets.RgbSliders.Widget
+			set:{
+				samplerWidgetClass:Uize.Widgets.RgbSliders.Widget
 			}
 		});
 	}

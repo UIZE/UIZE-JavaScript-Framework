@@ -37,8 +37,8 @@ Uize.module ({
 				});
 			},
 
-			staticProperties:{
-				widgetClass:Uize.Widgets.Calendar.Widget
+			set:{
+				samplerWidgetClass:Uize.Widgets.Calendar.Widget
 			}
 		});
 	}

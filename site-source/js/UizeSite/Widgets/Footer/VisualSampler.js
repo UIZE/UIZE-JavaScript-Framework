@@ -36,8 +36,8 @@ Uize.module ({
 				});
 			},
 
-			staticProperties:{
-				widgetClass:UizeSite.Widgets.Footer.Widget
+			set:{
+				samplerWidgetClass:UizeSite.Widgets.Footer.Widget
 			}
 		});
 	}

@@ -37,8 +37,8 @@ Uize.module ({
 				});
 			},
 
-			staticProperties:{
-				widgetClass:Uize.Widgets.Calculator.Widget
+			set:{
+				samplerWidgetClass:Uize.Widgets.Calculator.Widget
 			}
 		});
 	}

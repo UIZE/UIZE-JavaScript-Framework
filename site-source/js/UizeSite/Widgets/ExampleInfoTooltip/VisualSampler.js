@@ -38,8 +38,8 @@ Uize.module ({
 				});
 			},
 
-			staticProperties:{
-				widgetClass:UizeSite.Widgets.ExampleInfoTooltip.Widget
+			set:{
+				samplerWidgetClass:UizeSite.Widgets.ExampleInfoTooltip.Widget
 			}
 		});
 	}

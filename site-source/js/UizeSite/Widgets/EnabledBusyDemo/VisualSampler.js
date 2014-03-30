@@ -35,8 +35,8 @@ Uize.module ({
 				this.addSample ();
 			},
 
-			staticProperties:{
-				widgetClass:UizeSite.Widgets.EnabledBusyDemo.Widget
+			set:{
+				samplerWidgetClass:UizeSite.Widgets.EnabledBusyDemo.Widget
 			}
 		});
 	}
