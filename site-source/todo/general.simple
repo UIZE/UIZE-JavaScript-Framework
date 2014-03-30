@@ -1,12 +1,5 @@
 This document lists to do tasks that relate to the UIZE JavaScript Framework in general - not relating to the documentation or the site (see [[documentation.html][TO DO - Documentation]]), or specific JavaScript modules (see [[modules.html][TO DO - Modules]]).
 
-Fix Broken Examples
-	http://dev.uize.com:1337/examples/animate-position-in-javascript.html?tour=all
-		- background images are broken
-
-	http://dev.uize.com:1337/examples/animate-size-in-javascript.html?tour=all
-		- background images are broken
-
 Eliminate All Extension Modules
 	Eliminate all extension modules and replace them with either helper objects containing purely static methods or mixin modules.
 
