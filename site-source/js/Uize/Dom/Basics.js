@@ -1962,29 +1962,31 @@ Uize.module ({
 		});
 
 		/*** Initialization ***/
-			if (_isBrowser && _needsWindowEventVehicle) {
+			if (_isBrowser) {
 				/*** wire up document mousemove to keep track of mouse position ***/
 					_package.wire (document.documentElement,'mousemove',_captureMousePos);
 
-				/*** wire up window events to fire events on window event vehicle ***/
-					var
-						_windowEventVehicle = new _Uize.Event.Bus,
-						_documentLoadedTimeout = setTimeout (function () {_windowEventVehicle.fire ('load')},15000)
-					;
-					_Uize.forEach (
-						['focus','blur','load','beforeunload','unload','resize','scroll','hashchange'],
-						function (_windowEventName) {
-							var
-								_windowEventPropertyName = 'on' + _windowEventName,
-								_oldWindowEventHandler = window [_windowEventPropertyName] || _returnFalse
-							;
-							window [_windowEventPropertyName] = function (_event) {
-								_windowEventName == 'load' && clearTimeout (_documentLoadedTimeout);
-								_oldWindowEventHandler.call (window,_event || (_event = window.event));
-								_windowEventVehicle.fire ({name:_windowEventName,windowEvent:_event});
-							};
-						}
-					);
+				/*** wire up window events to fire events on window event vehicle (if necessary) ***/
+					if (_needsWindowEventVehicle) {
+						var
+							_windowEventVehicle = new _Uize.Event.Bus,
+							_documentLoadedTimeout = setTimeout (function () {_windowEventVehicle.fire ('load')},15000)
+						;
+						_Uize.forEach (
+							['focus','blur','load','beforeunload','unload','resize','scroll','hashchange'],
+							function (_windowEventName) {
+								var
+									_windowEventPropertyName = 'on' + _windowEventName,
+									_oldWindowEventHandler = window [_windowEventPropertyName] || _returnFalse
+								;
+								window [_windowEventPropertyName] = function (_event) {
+									_windowEventName == 'load' && clearTimeout (_documentLoadedTimeout);
+									_oldWindowEventHandler.call (window,_event || (_event = window.event));
+									_windowEventVehicle.fire ({name:_windowEventName,windowEvent:_event});
+								};
+							}
+						);
+					}
 			}
 
 		return _package;
