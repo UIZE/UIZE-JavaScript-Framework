@@ -46,22 +46,10 @@ Uize.module ({
 					m.once (
 						'wired',
 						function () {
-							/*** wire up handlers for state properties that have HTML bindings ***/
-								var _wiringsForHtmlBindings = {};
-								_forEach (
-									m.Class.mHtmlBindings_bindings,
-									function (_bindings,_property) {
-										_wiringsForHtmlBindings ['Changed.' + _property] = function () {
-											_applyAll (m,_bindings,[m.get (_property)]);
-										};
-									}
-								);
-								m.wire (_wiringsForHtmlBindings);
-
-							/*** update UI ***/
-								for (var _eventName in _wiringsForHtmlBindings)
-									_wiringsForHtmlBindings [_eventName] ()
-								;
+							var _htmlBindings = m.Class.mHtmlBindings_bindings;
+							for (var _property in _htmlBindings)
+								_applyAll (m,_htmlBindings [_property],[m.get (_property)])
+							;
 						}
 					);
 				},
@@ -110,13 +98,26 @@ Uize.module ({
 							}
 							return _updater;
 						}
-						var _htmlBindings = this.mHtmlBindings_bindings;
+						var
+							m = this,
+							_htmlBindings = m.mHtmlBindings_bindings
+						;
 						_forEach (
 							_bindings,
 							function (_updater,_property) {
 								var _propertyHtmlBindings = _htmlBindings [_property] || (_htmlBindings [_property] = []);
 								function _resolveAndPushUpdater (_updater) {
-									_propertyHtmlBindings.push (_resolvePropertyUpdater (_property,_updater));
+									_propertyHtmlBindings.push (_updater = _resolvePropertyUpdater (_property,_updater));
+									m.stateProperties (
+										Uize.pairUp (
+											_property,
+											{
+												onChange:function (_propertiesBeingSet) {
+													this.isWired && _updater.call (this,_propertiesBeingSet [_property]);
+												}
+											}
+										)
+									);
 								}
 								_Uize.isArray (_updater)
 									? _forEach (_updater,_resolveAndPushUpdater)
