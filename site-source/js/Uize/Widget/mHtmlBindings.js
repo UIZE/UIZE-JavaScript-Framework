@@ -56,48 +56,6 @@ Uize.module ({
 
 				staticMethods:{
 					htmlBindings:function (_bindings) {
-						function _resolvePropertyUpdater (_propertyName,_updater) {
-							if (typeof _updater == 'string') {
-								var
-									_nodeNameAndBindingType = _updater.split (':'),
-									_nodeName = _nodeNameAndBindingType [0],
-									_bindingType = _nodeNameAndBindingType [1] || 'value'
-								;
-								if (_bindingType == 'value') {
-									_updater = function (_propertyValue) {
-										this.setNodeValue (
-											_nodeName,
-											_propertyValue == null ? '' : _propertyValue
-										);
-									};
-								} else if (_bindingType == 'html' || _bindingType == 'innerHTML') {
-									_updater = function (_propertyValue) {
-										this.setNodeInnerHtml (_nodeName,_propertyValue == null ? '' : _propertyValue);
-									};
-								} else if (_bindingType == '?') {
-									_updater = function (_propertyValue) {this.displayNode (_nodeName,!!_propertyValue)};
-								} else if (_bindingType.charCodeAt (0) == 64) {
-									var _attributeName = _bindingType.slice (1);
-									_updater = function (_propertyValue) {
-										var _node = this.getNode (_nodeName);
-										_node && _node.setAttribute (_attributeName,_propertyValue);
-									};
-								} else if (_bindingType.slice (0,6) == 'style.') {
-									var _stylePropertyName = _bindingType.slice (6);
-									_updater = function (_propertyValue) {
-										this.setNodeStyle (_nodeName,_pairUp (_stylePropertyName,_propertyValue));
-									};
-								} else {
-									_updater = function (_propertyValue) {
-										this.setNodeProperties (_nodeName,_pairUp (_bindingType,_propertyValue));
-									};
-								}
-								_updater.propertyName = _propertyName;
-								_updater.nodeName = _nodeName;
-								_updater.bindingType = _bindingType;
-							}
-							return _updater;
-						}
 						var
 							m = this,
 							_htmlBindings = m.mHtmlBindings_bindings
@@ -107,7 +65,46 @@ Uize.module ({
 							function (_updater,_property) {
 								var _propertyHtmlBindings = _htmlBindings [_property] || (_htmlBindings [_property] = []);
 								function _resolveAndPushUpdater (_updater) {
-									_propertyHtmlBindings.push (_updater = _resolvePropertyUpdater (_property,_updater));
+									if (typeof _updater == 'string') {
+										var
+											_nodeNameAndBindingType = _updater.split (':'),
+											_nodeName = _nodeNameAndBindingType [0],
+											_bindingType = _nodeNameAndBindingType [1] || 'value'
+										;
+										if (_bindingType == 'value') {
+											_updater = function (_propertyValue) {
+												this.setNodeValue (
+													_nodeName,
+													_propertyValue == null ? '' : _propertyValue
+												);
+											};
+										} else if (_bindingType == 'html' || _bindingType == 'innerHTML') {
+											_updater = function (_propertyValue) {
+												this.setNodeInnerHtml (_nodeName,_propertyValue == null ? '' : _propertyValue);
+											};
+										} else if (_bindingType == '?') {
+											_updater = function (_propertyValue) {this.displayNode (_nodeName,!!_propertyValue)};
+										} else if (_bindingType.charCodeAt (0) == 64) {
+											var _attributeName = _bindingType.slice (1);
+											_updater = function (_propertyValue) {
+												var _node = this.getNode (_nodeName);
+												_node && _node.setAttribute (_attributeName,_propertyValue);
+											};
+										} else if (_bindingType.slice (0,6) == 'style.') {
+											var _stylePropertyName = _bindingType.slice (6);
+											_updater = function (_propertyValue) {
+												this.setNodeStyle (_nodeName,_pairUp (_stylePropertyName,_propertyValue));
+											};
+										} else {
+											_updater = function (_propertyValue) {
+												this.setNodeProperties (_nodeName,_pairUp (_bindingType,_propertyValue));
+											};
+										}
+										_updater.propertyName = _property;
+										_updater.nodeName = _nodeName;
+										_updater.bindingType = _bindingType;
+									}
+									_propertyHtmlBindings.push (_updater);
 									m.stateProperties (
 										Uize.pairUp (
 											_property,
