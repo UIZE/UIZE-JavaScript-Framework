@@ -16,7 +16,7 @@
 
 Uize.module ({
 	name:'UizeSite.TestData.Fruits',
-	required:'Uize.Data',
+	required:'Uize.Data.Util',
 	builder:function () {
 		'use strict';
 
@@ -352,7 +352,7 @@ Uize.module ({
 			_package.getValueBoundsForProperty = function (_propertyName) {
 				var
 					_fruits = _package (),
-					_valuesForProperty = Uize.Data.getColumn (_fruits,_propertyName),
+					_valuesForProperty = Uize.Data.Util.getColumn (_fruits,_propertyName),
 					_minValue = Uize.min (_valuesForProperty),
 					_maxValue = Uize.max (_valuesForProperty)
 				;

@@ -48,52 +48,65 @@ Uize.module ({
 					title:'Test creating an instance with no constructor arguments (should initialize to empty string)',
 					test:function () {
 						var _stringBuilder = Uize.Str.Builder ();
-						return _stringBuilder.length === 0 && _stringBuilder.valueOf () === '';
+						return this.expect (0,_stringBuilder.length) && this.expect ('',_stringBuilder.valueOf ());
 					}
 				},
 				{
 					title:'Test creating an instance with a non-empty string as initial value',
 					test:function () {
 						var _stringBuilder = Uize.Str.Builder ('hello');
-						return _stringBuilder.length === 5 && _stringBuilder.valueOf () == 'hello';
+						return this.expect (5,_stringBuilder.length) && this.expect ('hello',_stringBuilder.valueOf ());
 					}
 				},
 				{
 					title:'Test creating an instance with a number as initial value',
-					test:function () {return (Uize.Str.Builder (1234567)).valueOf () === '1234567'}
+					test:function () {
+						return this.expect ('1234567',(Uize.Str.Builder (1234567)).valueOf ());
+					}
 				},
 				{
 					title:'Test creating an instance with a boolean as initial value',
-					test:function () {return (Uize.Str.Builder (true)).valueOf () === 'true'}
+					test:function () {
+						return this.expect ('true',(Uize.Str.Builder (true)).valueOf ());
+					}
 				},
 				{
 					title:'Test that equals instance method works when strings are equal',
-					test:function () {return (Uize.Str.Builder ('hello')).equals ('hello')}
+					test:function () {
+						return this.expect (true,(Uize.Str.Builder ('hello')).equals ('hello'));
+					}
 				},
 				{
 					title:'Test that equals instance method works with no parameters (ie. testing for empty string)',
 					test:function () {
-						return Uize.Str.Builder ().equals () && !Uize.Str.Builder ('hello').equals ();
+						return (
+							this.expect (true,Uize.Str.Builder ().equals ()) &&
+							this.expect (false,Uize.Str.Builder ('hello').equals ())
+						);
 					}
 				},
 				{
 					title:'Test that equals instance method works when strings are not equal',
-					test:function () {return !Uize.Str.Builder ('hello').equals ('goodbye')}
+					test:function () {
+						return this.expect (false,Uize.Str.Builder ('hello').equals ('goodbye'));
+					}
 				},
 				{
 					title:'Test that getValue, valueOf, and toString instance methods all return the same result',
 					test:function () {
 						var _stringBuilder = Uize.Str.Builder ('hello');
 						return (
-							_stringBuilder.getValue () == 'hello' &&
-							_stringBuilder.valueOf () == 'hello' &&
-							_stringBuilder.toString () == 'hello'
+							this.expect ('hello',_stringBuilder.getValue ()) &&
+							this.expect ('hello',_stringBuilder.valueOf ()) &&
+							this.expect ('hello',_stringBuilder.toString ())
 						);
 					}
 				},
 				{
 					title:'Test that coercion of instance to string works correctly',
-					test:function () {return Uize.Str.Builder ('hello') + '' == 'hello'}
+					test:function () {
+						return this.expect ('hello',Uize.Str.Builder ('hello') + '');
+					}
 				},
 				{
 					title:'Test that append instance method works correctly',
@@ -104,7 +117,7 @@ Uize.module ({
 						_stringBuilder.append ('l');
 						_stringBuilder.append ('l');
 						_stringBuilder.append ('o');
-						return _stringBuilder.length === 5 && _stringBuilder.valueOf () == 'hello';
+						return this.expect (5,_stringBuilder.length) && this.expect ('hello',_stringBuilder.valueOf ());
 					}
 				},
 				{
@@ -116,7 +129,7 @@ Uize.module ({
 						_stringBuilder.prepend ('l');
 						_stringBuilder.prepend ('e');
 						_stringBuilder.prepend ('h');
-						return _stringBuilder.length === 5 && _stringBuilder.valueOf () == 'hello';
+						return this.expect (5,_stringBuilder.length) && this.expect ('hello',_stringBuilder.valueOf ());
 					}
 				},
 				{
@@ -128,7 +141,7 @@ Uize.module ({
 						_stringBuilder.append ('l');
 						_stringBuilder.prepend ('h');
 						_stringBuilder.append ('o');
-						return _stringBuilder.length === 5 && _stringBuilder.valueOf () == 'hello';
+						return this.expect (5,_stringBuilder.length) && this.expect ('hello',_stringBuilder.valueOf ());
 					}
 				},
 				{
@@ -136,7 +149,7 @@ Uize.module ({
 					test:function () {
 						var _stringBuilder = Uize.Str.Builder (123);
 						_stringBuilder.append (4567);
-						return _stringBuilder.length === 7 && _stringBuilder.valueOf () == '1234567';
+						return this.expect (7,_stringBuilder.length) && this.expect ('1234567',_stringBuilder.valueOf ());
 					}
 				},
 				{
@@ -144,7 +157,7 @@ Uize.module ({
 					test:function () {
 						var _stringBuilder = Uize.Str.Builder (false);
 						_stringBuilder.append (true);
-						return _stringBuilder.length === 9 && _stringBuilder.valueOf () == 'falsetrue';
+						return this.expect (9,_stringBuilder.length) && this.expect ('falsetrue',_stringBuilder.valueOf ());
 					}
 				},
 				{
@@ -152,7 +165,7 @@ Uize.module ({
 					test:function () {
 						var _stringBuilder = Uize.Str.Builder (4567);
 						_stringBuilder.prepend (123);
-						return _stringBuilder.length === 7 && _stringBuilder.valueOf () == '1234567';
+						return this.expect (7,_stringBuilder.length) && this.expect ('1234567',_stringBuilder.valueOf ());
 					}
 				},
 				{
@@ -160,7 +173,7 @@ Uize.module ({
 					test:function () {
 						var _stringBuilder = Uize.Str.Builder (true);
 						_stringBuilder.prepend (false);
-						return _stringBuilder.length === 9 && _stringBuilder.valueOf () == 'falsetrue';
+						return this.expect (9,_stringBuilder.length) && this.expect ('falsetrue',_stringBuilder.valueOf ());
 					}
 				},
 				{
@@ -168,7 +181,7 @@ Uize.module ({
 					test:function () {
 						var _stringBuilder = Uize.Str.Builder ('hello');
 						_stringBuilder.clear ();
-						return _stringBuilder.length === 0 && _stringBuilder.valueOf () === '';
+						return this.expect (0,_stringBuilder.length) && this.expect ('',_stringBuilder.valueOf ());
 					}
 				},
 				{
@@ -176,7 +189,7 @@ Uize.module ({
 					test:function () {
 						var _stringBuilder = Uize.Str.Builder ('hello');
 						_stringBuilder.setValue ('goodbye');
-						return _stringBuilder.length === 7 && _stringBuilder.valueOf () == 'goodbye';
+						return this.expect (7,_stringBuilder.length) && this.expect ('goodbye',_stringBuilder.valueOf ());
 					}
 				},
 				{
@@ -184,7 +197,7 @@ Uize.module ({
 					test:function () {
 						var _stringBuilder = Uize.Str.Builder ('hello');
 						_stringBuilder.setValue ();
-						return _stringBuilder.length === 0 && _stringBuilder.valueOf () === '';
+						return this.expect (0,_stringBuilder.length) && this.expect ('',_stringBuilder.valueOf ());
 					}
 				},
 				{
@@ -192,7 +205,7 @@ Uize.module ({
 					test:function () {
 						var _stringBuilder = Uize.Str.Builder ('hello');
 						_stringBuilder.setValue (1234567);
-						return _stringBuilder.length === 7 && _stringBuilder.valueOf () === '1234567';
+						return this.expect (7,_stringBuilder.length) && this.expect ('1234567',_stringBuilder.valueOf ());
 					}
 				},
 				{
@@ -200,80 +213,82 @@ Uize.module ({
 					test:function () {
 						var _stringBuilder = Uize.Str.Builder ('hello');
 						_stringBuilder.setValue (true);
-						return _stringBuilder.length === 4 && _stringBuilder.valueOf () === 'true';
+						return this.expect (4,_stringBuilder.length) && this.expect ('true',_stringBuilder.valueOf ());
 					}
 				},
 				{
 					title:'Test that charAt instance method works correctly',
-					test:function () {return _getHelloStringBuilderAppended ().charAt (4) == 'o'}
+					test:function () {return this.expect ('o',_getHelloStringBuilderAppended ().charAt (4))}
 				},
 				{
 					title:'Test that charCodeAt instance method works correctly',
-					test:function () {return _getHelloStringBuilderAppended ().charCodeAt (4) == 111}
+					test:function () {return this.expect (111,_getHelloStringBuilderAppended ().charCodeAt (4))}
 				},
 				{
 					title:'Test that concat instance method works correctly',
-					test:function () {return _getHelloStringBuilderAppended ().concat (' there',' you') == 'Hello there you'}
+					test:function () {
+						return this.expect ('Hello there you',_getHelloStringBuilderAppended ().concat (' there',' you'));
+					}
 				},
 				{
 					title:'Test that indexOf instance method works correctly',
-					test:function () {return _getHelloStringBuilderAppended ().indexOf ('l') == 2}
+					test:function () {return this.expect (2,_getHelloStringBuilderAppended ().indexOf ('l'))}
 				},
 				{
 					title:'Test that lastIndexOf instance method works correctly',
-					test:function () {return _getHelloStringBuilderAppended ().lastIndexOf ('l') == 3}
+					test:function () {return this.expect (3,_getHelloStringBuilderAppended ().lastIndexOf ('l'))}
 				},
 				{
 					title:'Test that match instance method works correctly',
-					test:function () {return _getHelloStringBuilderAppended ().match (/l+/) [0] == 'll'}
+					test:function () {return this.expect ('ll',_getHelloStringBuilderAppended ().match (/l+/) [0])}
 				},
 				{
 					title:'Test that replace instance method works correctly',
-					test:function () {return _getHelloStringBuilderAppended ().replace (/l+/,'') == 'Heo'}
+					test:function () {return this.expect ('Heo',_getHelloStringBuilderAppended ().replace (/l+/,''))}
 				},
 				{
 					title:'Test that search instance method works correctly',
-					test:function () {return _getHelloStringBuilderAppended ().search (/l+/) == 2}
+					test:function () {return this.expect (2,_getHelloStringBuilderAppended ().search (/l+/))}
 				},
 				{
 					title:'Test that slice instance method works correctly',
-					test:function () {return _getHelloStringBuilderAppended ().slice (1,3) == 'el'}
+					test:function () {return this.expect ('el',_getHelloStringBuilderAppended ().slice (1,3))}
 				},
 				{
 					title:'Test that split instance method works correctly',
 					test:function () {
-						return Uize.Data.identical (_getHelloStringBuilderAppended ().split (''),['H','e','l','l','o'])
+						return this.expect (['H','e','l','l','o'],_getHelloStringBuilderAppended ().split (''));
 					}
 				},
 				{
 					title:'Test that substr instance method works correctly',
-					test:function () {return _getHelloStringBuilderAppended ().substr (1,2) == 'el'}
+					test:function () {return this.expect ('el',_getHelloStringBuilderAppended ().substr (1,2))}
 				},
 				{
 					title:'Test that substring instance method works correctly',
-					test:function () {return _getHelloStringBuilderAppended ().substring (1,2) == 'e'}
+					test:function () {return this.expect ('e',_getHelloStringBuilderAppended ().substring (1,2))}
 				},
 				{
 					title:'Test that toLowerCase instance method works correctly',
-					test:function () {return _getHelloStringBuilderAppended ().toLowerCase () == 'hello'}
+					test:function () {return this.expect ('hello',_getHelloStringBuilderAppended ().toLowerCase ())}
 				},
 				{
 					title:'Test the HTML related instance methods to make sure they work correctly',
 					test:function () {
-						return !!(
-							_getHelloStringBuilderAppended ().anchor ('blah') == 'Hello'.anchor ('blah') &&
-							_getHelloStringBuilderAppended ().big () == 'Hello'.big () &&
-							_getHelloStringBuilderAppended ().blink () == 'Hello'.blink () &&
-							_getHelloStringBuilderAppended ().bold () == 'Hello'.bold () &&
-							_getHelloStringBuilderAppended ().fixed () == 'Hello'.fixed () &&
-							_getHelloStringBuilderAppended ().fontcolor ('FFFFFF') == 'Hello'.fontcolor ('FFFFFF') &&
-							_getHelloStringBuilderAppended ().fontsize ('12px') == 'Hello'.fontsize ('12px') &&
-							_getHelloStringBuilderAppended ().italics () == 'Hello'.italics () &&
-							_getHelloStringBuilderAppended ().link ('uize.com') == 'Hello'.link ('uize.com') &&
-							_getHelloStringBuilderAppended ().small () == 'Hello'.small () &&
-							_getHelloStringBuilderAppended ().strike () == 'Hello'.strike () &&
-							_getHelloStringBuilderAppended ().sub () == 'Hello'.sub () &&
-							_getHelloStringBuilderAppended ().sup () == 'Hello'.sup ()
+						return (
+							this.expect ('Hello'.anchor ('blah'),_getHelloStringBuilderAppended ().anchor ('blah')) &&
+							this.expect ('Hello'.big (),_getHelloStringBuilderAppended ().big ()) &&
+							this.expect ('Hello'.blink (),_getHelloStringBuilderAppended ().blink ()) &&
+							this.expect ('Hello'.bold (),_getHelloStringBuilderAppended ().bold ()) &&
+							this.expect ('Hello'.fixed (),_getHelloStringBuilderAppended ().fixed ()) &&
+							this.expect ('Hello'.fontcolor ('FFFFFF'),_getHelloStringBuilderAppended ().fontcolor ('FFFFFF')) &&
+							this.expect ('Hello'.fontsize ('12px'),_getHelloStringBuilderAppended ().fontsize ('12px')) &&
+							this.expect ('Hello'.italics (),_getHelloStringBuilderAppended ().italics ()) &&
+							this.expect ('Hello'.link ('uize.com'),_getHelloStringBuilderAppended ().link ('uize.com')) &&
+							this.expect ('Hello'.small (),_getHelloStringBuilderAppended ().small ()) &&
+							this.expect ('Hello'.strike (),_getHelloStringBuilderAppended ().strike ()) &&
+							this.expect ('Hello'.sub (),_getHelloStringBuilderAppended ().sub ()) &&
+							this.expect ('Hello'.sup (),_getHelloStringBuilderAppended ().sup ())
 						);
 					}
 				}

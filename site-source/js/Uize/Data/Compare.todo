@@ -1,0 +1,13 @@
+This is a TO DO document for the =Uize.Data= module.
+
+Uize.Data.Compare.identical
+	- finish up support for tree equality mode
+		- support a Date and a RegExp instance being considered tree identical (because they shouldn't be recursed)
+	- handle recursion (safeguard against infinite loops). Do this by marking objects / arrays as encountered?
+	- how to support comparison of Uize subclass instances? Is there a meaningful way to do this?
+		- can two instances of classes that support the value interface simply be compared by their respective values?
+		- can two instances of any Uize subclass simply be compared by the values of all their state properties?
+
+Uize.Data.Compare.conjoined
+	- improve implementation to use object tagging technique employed in Uize.Array.Dupes
+

@@ -138,7 +138,7 @@ Uize.module ({
 								}
 							} else {
 								var _doSignaturesMatch = function (_startValue,_endValue,_newFadeStartValue,_newFadeEndValue) {
-									/* NOTE: this code is loosely based on Uize.Data.identical */
+									/* NOTE: this code is loosely based on Uize.Data.Compare.identical */
 									var _signaturesMatch;
 									if (_startValue == _endValue) {
 										_signaturesMatch = _newFadeStartValue == _startValue && _newFadeEndValue == _startValue;

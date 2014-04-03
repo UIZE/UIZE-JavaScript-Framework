@@ -256,11 +256,11 @@ Uize.module ({
 							;
 							m.setNodeValue (_listNode,_selected);
 
-							/* or, if there was a filter out option in Uize.Data.filter...
+							/* or, if there was a filter out option in Uize.Data.Util.filter...
 								m.setNodeValue (
 									_listNode,
 									Uize.keys (
-										Uize.Data.filter (Uize.lookup (_list),m._lastDisplayedList,true)
+										Uize.Data.Util.filter (Uize.lookup (_list),m._lastDisplayedList,true)
 									)
 								)
 							*/

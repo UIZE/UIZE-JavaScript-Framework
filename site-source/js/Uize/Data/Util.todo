@@ -1,0 +1,16 @@
+This is a TO DO document for the =Uize.Data.Util= module.
+
+Uize.Data.Util.filter
+	- support for new filter types
+		- regular expression type filter
+			- when regular expression is specified for filter, properties are filtered that match the regular expression
+		- function type filter
+			- when function is specified for filter, function receives property name and must return boolean indicating match
+		- object type filter
+			- filter source object to have only properties contained in filter object
+		- string type filter
+			- only permit the exactly matching property name? How else would this be handled?
+		- array -- CHANGE IMPLEMENTATION?
+			- already supported, but need to change implementation? Change implementation for performance, or code size?
+	- support for target property
+

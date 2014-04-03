@@ -104,24 +104,22 @@ Uize.module ({
 							title:'With Header Row, Rows Are Arrays, Get Back Column Names',
 							test:function () {
 								var _columnNames = [];
-								return this.expect (
-									true,
-									Uize.Data.identical (
+								return (
+									this.expect (
+										[
+											['John','Wilkey','(650) 123-4567'],
+											['Marie','Stevenson','(415) 456-7890'],
+											['Craig','Pollack','(310) 987-6543']
+										],
 										Uize.Data.Csv.from (
 											'firstName,lastName,phone\n' +
 											'John,Wilkey,(650) 123-4567\n' +
 											'Marie,Stevenson,(415) 456-7890\n' +
 											'Craig,Pollack,(310) 987-6543',
 											{hasHeader:true,rowType:'array',columns:_columnNames}
-										),
-										[
-											['John','Wilkey','(650) 123-4567'],
-											['Marie','Stevenson','(415) 456-7890'],
-											['Craig','Pollack','(310) 987-6543']
-										]
-									)
-									&&
-									Uize.Data.identical (_columnNames,['firstName','lastName','phone'])
+										)
+									) &&
+									this.expect (['firstName','lastName','phone'],_columnNames)
 								);
 							}
 						},

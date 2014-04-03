@@ -1,6 +1,6 @@
 <%@
 	required (
-		'Uize.Data',
+		'Uize.Data.Util',
 		'Uize.Color',
 		'Uize.Color.xUtil'
 	)
@@ -15,7 +15,7 @@
 	Uize.forEach (
 		_columns,
 		function (_column,_columnNo) {
-			var _columnValues = Uize.Data.getColumn (_rows,_columnNo);
+			var _columnValues = Uize.Data.Util.getColumn (_rows,_columnNo);
 			if (!('minValue' in _column)) _column.minValue = Uize.min (_columnValues);
 			if (!('maxValue' in _column)) _column.maxValue = Uize.max (_columnValues);
 			if (_column.minColor) _column.minColor = Uize.Color (_column.minColor);

@@ -78,7 +78,7 @@
 
 		<p>The photo records do not contain a URL for the thumbnail, but only a title. So, in order to substitute the correct thumbnail URL into the HTML template when populating, a phantom property called <code>thumbnailUrl</code> is declared with the <code>Uize.Widget.Population</code> instance using the <code>itemPhantomProperties</code> state property. Similarly, in order to show the ratings for each record, a <code>ratingStarsCrop</code> phantom property is declared, and this is substituted into the correct place in the HTML in order to achieve crop rects for the rating stars HTML that would correctly reflect the rating value.</p>
 
-		<p>Finally, a category selector is provided to let you choose from category subselections of the complete photos record set (methods of the <a href="../reference/Uize.Data.html"><code>Uize.Data</code></a> package come in handy here). Each time you select a new category, the <code>items</code> state property of the <code>Uize.Widget.Population</code> is updated. Updating this property automatically results in the population instance re-populating its container node to reflect its new data set.</p>
+		<p>Finally, a category selector is provided to let you choose from category subselections of the complete photos record set (methods of the <a href="../reference/Uize.Data.Util.html"><code>Uize.Data.Util</code></a> package come in handy here). Each time you select a new category, the <code>items</code> state property of the <code>Uize.Widget.Population</code> is updated. Updating this property automatically results in the population instance re-populating its container node to reflect its new data set.</p>
 
 		<p>Scroll down, as necessary, to get the full effect.</p>
 	</div>
@@ -114,7 +114,7 @@ Uize.require (
 		'UizeSite.Page.Example.library',
 		'UizeSite.Page.Example',
 		'UizeSite.TestData.Photos',
-		'Uize.Data',
+		'Uize.Data.Util',
 		'Uize.Widget.Population'
 	],
 	function () {
@@ -126,7 +126,7 @@ Uize.require (
 		/*** set up the category selector ***/
 			var
 				photos = UizeSite.TestData.Photos (),
-				categories = Uize.Data.getColumn (photos,'category',true),
+				categories = Uize.Data.Util.getColumn (photos,'category',true),
 				categorySelectorOptions = page.getNode ('categorySelector').options
 			;
 			for (var categoryNo = -1, categoriesLength = categories.length; ++categoryNo < categoriesLength;) {
@@ -158,7 +158,9 @@ Uize.require (
 
 		/*** populate photo details from selected category ***/
 			function populatePhotoDetails () {
-				population.set ({items:Uize.Data.findRecords (photos,{category:page.getNodeValue ('categorySelector')})});
+				population.set ({
+					items:Uize.Data.Util.findRecords (photos,{category:page.getNodeValue ('categorySelector')})
+				});
 			}
 			populatePhotoDetails (); // initialize
 			page.wireNode ('categorySelector','change',populatePhotoDetails);

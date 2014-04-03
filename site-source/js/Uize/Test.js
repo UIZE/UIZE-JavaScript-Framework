@@ -31,7 +31,7 @@ Uize.module ({
 	name:'Uize.Test',
 	superclass:'Uize.Class',
 	required:[
-		'Uize.Data',
+		'Uize.Data.Compare',
 		'Uize.Json',
 		'Uize.Util.Oop'
 	],
@@ -112,7 +112,7 @@ Uize.module ({
 				expect:function (_expectedValue,_value) {
 					return _expectSuccess (
 						this,
-						Uize.Data.identical (_expectedValue,_value),
+						Uize.Data.Compare.identical (_expectedValue,_value),
 						_valueToJsonSerializer (_expectedValue),
 						_valueToJsonSerializer (_value)
 					);

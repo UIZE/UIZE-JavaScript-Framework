@@ -55,7 +55,7 @@ Uize.require (
 		'UizeSite.Page.Example',
 		'Uize.Widget.Swap.Image.Cycle',
 		'Uize.Widget.Swap.xPresets',
-		'Uize.Data',
+		'Uize.Data.Util',
 		'UizeSite.TestData.Photos'
 	],
 	function () {
@@ -70,7 +70,7 @@ Uize.require (
 				Uize.Widget.Swap.Image.Cycle,
 				{
 					background:'none',
-					images:Uize.Data.getColumn (UizeSite.TestData.Photos (),'image'),
+					images:Uize.Data.Util.getColumn (UizeSite.TestData.Photos (),'image'),
 					interval:3000,
 					cycleSettings:Uize.Widget.Swap.presets,
 					crossFade:true,

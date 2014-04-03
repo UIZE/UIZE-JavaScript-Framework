@@ -33,7 +33,7 @@ Uize.module ({
 		'Uize.Widget.Button',
 		'Uize.Node',
 		'Uize.Dom.Event',
-		'Uize.Data'
+		'Uize.Data.Compare'
 	],
 	builder:function (_superclass) {
 		'use strict';
@@ -47,6 +47,7 @@ Uize.module ({
 
 				_Uize = Uize,
 				_Uize_Widget = _Uize.Widget,
+				_identical = _Uize.Data.Compare,
 
 			/*** validation/warning variables ***/
 				_never = 'never',
@@ -548,7 +549,7 @@ Uize.module ({
 				_tentativeValue:{	// readonly
 					name:'tentativeValue',
 					conformer:function(_tentativeValue) {
-						return _Uize.Data.identical(_tentativeValue, this._tentativeValue) ? this._tentativeValue : _tentativeValue;
+						return _identical(_tentativeValue, this._tentativeValue) ? this._tentativeValue : _tentativeValue;
 					},
 					value:_null
 				},
@@ -563,7 +564,7 @@ Uize.module ({
 				_value:{
 					name:'value',
 					conformer:function(_value) {
-						return _Uize.Data.identical(_value, this._value) ? this._value : _value;
+						return _identical(_value, this._value) ? this._value : _value;
 					},
 					onChange:function () {
 						var m = this;

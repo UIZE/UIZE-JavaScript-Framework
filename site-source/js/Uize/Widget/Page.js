@@ -486,8 +486,9 @@ Uize.module ({
 						_dialogWidget &&
 						(
 							_dialogWidget._componentProfile == _componentProfile ||
-								// HACK: avoid requiring Uize.Data for most cases (it's a component specific thing)
-							Uize.Data.identical (_dialogWidget._componentProfile,_componentProfile)
+								// HACK: avoid requiring Uize.Data.Compare for most cases (it's a component specific thing)
+								// ISSUE: why is code using Uize.Data.Compare when this module is not in the required list?
+							Uize.Data.Compare.identical (_dialogWidget._componentProfile,_componentProfile)
 						)
 					) {
 						_showDialog ('subsequent');

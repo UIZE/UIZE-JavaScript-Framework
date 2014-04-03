@@ -67,7 +67,7 @@ Uize.module ({
 		'Uize.Services.FileBuilder',
 		'Uize.Services.FileSystem',
 		'Uize.Build.ModuleInfo',
-		'Uize.Data',
+		'Uize.Data.Util',
 		'Uize.Json'
 	],
 	builder:function () {
@@ -85,7 +85,7 @@ Uize.module ({
 					_dependenciesByStateCombination = {},
 					_excludeModules = _params.excludeModules ? _params.excludeModules.split (',') : [],
 					_states = Uize.Json.from (_fileSystem.readFile ({path:_params.stateDefinitionsPath})),
-					_stateNames = Uize.Data.getColumn (_states,'name'),
+					_stateNames = Uize.Data.Util.getColumn (_states,'name'),
 					_statesLookup = {},
 					_builtModuleFileCache = {}
 				;
@@ -98,7 +98,7 @@ Uize.module ({
 						var _modulePath = _modulesFolder + '/' + Uize.modulePathResolver (_moduleName) + '.js';
 						_fileBuilder.buildFile (
 							Uize.copyInto (
-								Uize.Data.filter (
+								Uize.Data.Util.filter (
 									_params,
 									['builtPath', 'sourcePath', 'memoryPath', 'tempPath', 'staleBefore', 'isDev']
 								),

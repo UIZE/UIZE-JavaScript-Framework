@@ -27,6 +27,7 @@ Uize.module ({
 	name:'Uize.Test.Uize',
 	required:[
 		'Uize.Data',
+		'Uize.Data.Compare',
 		'Uize.Class',
 		'Uize.Class.Value',
 		'Uize.Json'
@@ -4261,7 +4262,7 @@ Uize.module ({
 							Uize.module ({
 								required:'MyNamespace.AllEmployees',
 								builder:function () {
-									_result = Uize.Data.identical (
+									_result = Uize.Data.Compare.identical (
 										MyNamespace.AllEmployees (),
 										[
 											{firstName:'John',lastName:'Wilkey',department:'engineering'},

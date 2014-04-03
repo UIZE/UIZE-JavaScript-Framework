@@ -64,31 +64,6 @@ Uize.Data.resolveSourceAndTarget
 	_target = _sourceAndTarget._target;
 	................................................................................
 
-Uize.Data.filter
-	- support for new filter types
-		- regular expression type filter
-			- when regular expression is specified for filter, properties are filtered that match the regular expression
-		- function type filter
-			- when function is specified for filter, function receives property name and must return boolean indicating match
-		- object type filter
-			- filter source object to have only properties contained in filter object
-		- string type filter
-			- only permit the exactly matching property name? How else would this be handled?
-		- array -- CHANGE IMPLEMENTATION?
-			- already supported, but need to change implementation? Change implementation for performance, or code size?
-	- support for target property
-
-Uize.Data.identical
-	- finish up support for tree equality mode
-		- support a Date and a RegExp instance being considered tree identical (because they shouldn't be recursed)
-	- handle recursion (safeguard against infinite loops). Do this by marking objects / arrays as encountered?
-	- how to support comparison of Uize subclass instances? Is there a meaningful way to do this?
-		- can two instances of classes that support the value interface simply be compared by their respective values?
-		- can two instances of any Uize subclass simply be compared by the values of all their state properties?
-
-Uize.Data.conjoined
-	- improve implementation to use object tagging technique employed in Uize.Array.Dupes
-
 Uize.Data.hasCircularity
 	- tests to see if the object contains circular references / reference loops
 	- for implementation, use object tagging

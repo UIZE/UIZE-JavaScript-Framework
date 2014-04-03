@@ -27,7 +27,7 @@ Uize.module ({
 	name:'Uize.Widget.FilterGroups',
 	required:[
 		'Uize.Widget.Options.FilterGroup',
-		'Uize.Data'
+		'Uize.Data.Compare'
 	],
 	builder:function (_superclass) {
 		'use strict';
@@ -59,7 +59,7 @@ Uize.module ({
 						}
 					);
 
-					if (!_Uize.Data.clones(_selectedFilters, m._previousSelectedFilters)) {
+					if (!_Uize.Data.Compare.clones(_selectedFilters, m._previousSelectedFilters)) {
 						_selectedFilters = m._allowMultiple || !_changedValue
 							? _selectedFilters
 							: (_Uize.indexIn(_selectedFilters, _changedValue) > -1

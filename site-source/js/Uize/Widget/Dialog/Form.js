@@ -26,7 +26,7 @@
 Uize.module ({
 	name:'Uize.Widget.Dialog.Form',
 	required:[
-		'Uize.Data',
+		'Uize.Data.Compare',
 		'Uize.Dom.Form'
 	],
 	builder:function (_superclass) {
@@ -91,7 +91,7 @@ Uize.module ({
 						m = this,
 						_formData = _Uize_Dom_Form.getValues(m._theForm)
 					;
-					return {isModified:!Uize.Data.identical(m._formData, _formData), formData:_formData};
+					return {isModified:!Uize.Data.Compare.identical(m._formData, _formData), formData:_formData};
 				}
 			},
 
