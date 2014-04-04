@@ -1,0 +1,25 @@
+The =Uize.Data= module has been deprecated as a package module containing static methods, in favor of it becoming a pure namespace module.
+
+All the static methods of the =Uize.Data= module have been migrated to the new =Uize.Data.Compare= and =Uize.Data.Util= modules as follows...
+
+SUMMARY
+.....................................................................
+Uize.Data.clones        >> BECOMES >>  Uize.Data.Compare.clones
+Uize.Data.conjoined     >> BECOMES >>  Uize.Data.Compare.conjoined
+Uize.Data.identical     >> BECOMES >>  Uize.Data.Compare.identical
+Uize.Data.intersection  >> BECOMES >>  Uize.Data.Compare.intersection
+
+Uize.Data.filter        >> BECOMES >>  Uize.Data.Util.filter
+Uize.Data.findRecords   >> BECOMES >>  Uize.Data.Util.findRecords
+Uize.Data.getColumn     >> BECOMES >>  Uize.Data.Util.getColumn
+.....................................................................
+
+BACKWARDS COMPATIBILITY
+
+Because the =Uize.Data= module has only been deprecated and has not yet been eliminated, code currently using it should continue to work. However, code that was previously using the methods of the =Uize.Data= module should be updated to use those methods from their new locations in the =Uize.Data.Compare= and =Uize.Data.Util= modules.
+
+....................................................................................
+<< metadata >>
+
+title: 2014-04-04 - DEPRECATED MODULE - Uize.Data
+....................................................................................
