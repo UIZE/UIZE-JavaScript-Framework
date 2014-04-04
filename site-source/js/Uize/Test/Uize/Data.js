@@ -32,8 +32,22 @@ Uize.module ({
 		return Uize.Test.resolve ({
 			title:'Test for Uize.Data Module',
 			test:[
-				Uize.Test.requiredModulesTest ('Uize.Data'),
-				Uize.Test.staticMethodsTest ([
+				Uize.Test.requiredModulesTest ([
+					'Uize.Data',
+					'Uize.Data.Compare',
+					'Uize.Data.Util'
+				]),
+				Uize.Test.migratedStaticMethodsTest ([
+					/*** static methods migrated to the Uize.Data.Compare module ***/
+						['Uize.Data.clones','Uize.Data.Compare.clones'],
+						['Uize.Data.conjoined','Uize.Data.Compare.conjoined'],
+						['Uize.Data.identical','Uize.Data.Compare.identical'],
+						['Uize.Data.intersection','Uize.Data.Compare.intersection'],
+
+					/*** static methods migrated to the Uize.Data.Util module ***/
+						['Uize.Data.filter','Uize.Data.Util.filter'],
+						['Uize.Data.findRecords','Uize.Data.Util.findRecords'],
+						['Uize.Data.getColumn','Uize.Data.Util.getColumn']
 				])
 			]
 		});
