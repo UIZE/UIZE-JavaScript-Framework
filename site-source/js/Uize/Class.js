@@ -1707,16 +1707,6 @@ Uize.module ({
 								NOTES
 								- this method may be called multiple times for a class to cumulatively define or override features
 								- see the other `feature declaration methods`
-
-						Deprecated Features
-							Uize.Class.registerProperties -- DEPRECATED 2013-01-02
-								The =Uize.Class.registerProperties= static method has been deprecated in favor of the newly added =Uize.Class.stateProperties= static method.
-
-								......................................................................
-								Uize.Class.registerProperties >> BECOMES >> Uize.Class.stateProperties
-								......................................................................
-
-								The =Uize.Class.stateProperties= method is essentially just a renaming of the deprecated =Uize.Class.registerProperties= method and behaves in exactly the same way. The new name was chosen to be consistent with documentation that refers to these properties universally as state properties. The new name is also more concise.
 					*/
 				},
 

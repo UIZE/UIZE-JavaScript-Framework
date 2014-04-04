@@ -4497,18 +4497,6 @@ Uize = (function () {
 							NOTES
 							- compare to the companion =Uize.eval= static method
 							- compare to the related =Uize.quarantine= static method
-
-					Deprecated Features
-						Uize.globalEval -- DEPRECATED 2013-01-14
-							The =Uize.globalEval= static method has been deprecated in favor of the newly added =Uize.laxEval= static method.
-
-							..........................................
-							Uize.globalEval >> BECOMES >> Uize.laxEval
-							..........................................
-
-							The =Uize.laxEval= method is essentially just a renaming of the deprecated =Uize.globalEval= method and behaves in exactly the same way. The old name was deemed to be misleading.
-
-							While the =Uize.globalEval= method could be used to evaluate JavaScript code outside of the scope of the current function, that scope was actually a root level *function* defined in the global scope - the evaluated code itself could not truly be evaluated at the very root of the global scope. The spirit of the method was never so much about evaluating code in the global scope as it was about evaluating the code in a way that was quarantined from the current scope (see `Quarantined Code Evaluation`), so as not to risk side effects of local variable access and closure memory reference implications that would arise from evaluating the code within the current function's scope.
 				*/
 			),
 
