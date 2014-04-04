@@ -38,55 +38,55 @@ Uize.module ({
 				// implementation remains in the Uize.Data module until end of the deprecation grace period
 				/*?
 					Static Methods
-						Uize.Data.getColumn
+						Uize.Data.Util.getColumn
 							Returns an array of the values for the specified column of the specified record set.
 
 							SYNTAX
-							..................................................................
-							columnValuesARRAY = Uize.Data.getColumn (rowsARRAY,columnNameSTR);
-							..................................................................
+							.......................................................................
+							columnValuesARRAY = Uize.Data.Util.getColumn (rowsARRAY,columnNameSTR);
+							.......................................................................
 
 							EXAMPLE
-							..........................................................
+							...............................................................
 							var
 								peopleNames = [
 									{first:'John',last:'Wilkey'},
 									{first:'Marie',last:'Stevenson'},
 									{first:'Craig',last:'Pollack'}
 								],
-								firstNames = Uize.Data.getColumn (peopleNames,'first'),
-								lastNames = Uize.Data.getColumn (peopleNames,'last')
+								firstNames = Uize.Data.Util.getColumn (peopleNames,'first'),
+								lastNames = Uize.Data.Util.getColumn (peopleNames,'last')
 							;
-							..........................................................
+							...............................................................
 
 							In the above example, the variable =firstNames= would be an array with the value =['John','Marie','Craig']= and the variable =lastNames= would be an array with the value =['Wilkey','Stevenson','Pollack']=.
 
 							The records / rows in the record set do not need to be objects - they can also be arrays.
 
 							EXAMPLE
-							....................................................
+							.........................................................
 							var
 								peopleNames = [
 									['John','Wilkey'],
 									['Marie','Stevenson'],
 									['Craig','Pollack']
 								],
-								firstNames = Uize.Data.getColumn (peopleNames,0),
-								lastNames = Uize.Data.getColumn (peopleNames,1)
+								firstNames = Uize.Data.Util.getColumn (peopleNames,0),
+								lastNames = Uize.Data.Util.getColumn (peopleNames,1)
 							;
-							....................................................
+							.........................................................
 
 							In the above example, the =firstNames= and =lastNames= variables would have the same values as in the previous example.
 
 							VARIATION
-							..................................................................................
-							columnValuesARRAY = Uize.Data.getColumn (rowsARRAY,columnNameSTR,onlyUniquesBOOL);
-							..................................................................................
+							.......................................................................................
+							columnValuesARRAY = Uize.Data.Util.getColumn (rowsARRAY,columnNameSTR,onlyUniquesBOOL);
+							.......................................................................................
 
 							When the value =true= is specified for the optional =onlyUniquesBOOL= parameter, then this method will only return the unique values for the specified column.
 
 							EXAMPLE
-							......................................................................
+							.......................................................................
 							var
 								employees = [
 									{firstName:'John',lastName:'Wilkey',department:'engineering'},
@@ -95,9 +95,9 @@ Uize.module ({
 									{firstName:'Nick',lastName:'Arendsen',department:'engineering'},
 									{firstName:'Mark',lastName:'Strathley',department:'engineering'}
 								],
-								departments = Uize.Data.getColumn (employees,'department',true)
+								departments = Uize.Data.Util.getColumn (employees,'department',true)
 							;
-							......................................................................
+							.......................................................................
 
 							In the above example, the variable =departments= would be an array with the value =['engineering','finance']=.
 				*/
@@ -106,16 +106,16 @@ Uize.module ({
 				// implementation remains in the Uize.Data module until end of the deprecation grace period
 				/*?
 					Static Methods
-						Uize.Data.findRecords
+						Uize.Data.Util.findRecords
 							Returns an array of records from the specified record set that match the specified criteria.
 
 							SYNTAX
-							.....................................................................
-							matchingRecordsARRAY = Uize.Data.findRecords (recordsARRAY,matchOBJ);
-							.....................................................................
+							..........................................................................
+							matchingRecordsARRAY = Uize.Data.Util.findRecords (recordsARRAY,matchOBJ);
+							..........................................................................
 
 							EXAMPLE
-							..............................................................................
+							...................................................................................
 							var
 								employees = [
 									{firstName:'John',lastName:'Wilkey',department:'engineering'},
@@ -124,9 +124,9 @@ Uize.module ({
 									{firstName:'Nick',lastName:'Arendsen',department:'engineering'},
 									{firstName:'Mark',lastName:'Strathley',department:'engineering'}
 								],
-								financeEmployees = Uize.Data.findRecords (employees,{department:'finance'})
+								financeEmployees = Uize.Data.Util.findRecords (employees,{department:'finance'})
 							;
-							..............................................................................
+							...................................................................................
 
 							In the above example, the variable =financeEmployees= would be an array with the value...
 
@@ -140,7 +140,7 @@ Uize.module ({
 							If the records in your record set are arrays, rather than objects, then you can specify a match object where the keys are numerical indexes representing the array element index / column index, as in...
 
 							EXAMPLE
-							.....................................................................
+							..........................................................................
 							var
 								employees = [
 									['John','Wilkey','engineering'],
@@ -149,9 +149,9 @@ Uize.module ({
 									['Nick','Arendsen','engineering'],
 									['Mark','Strathley','engineering']
 								],
-								financeEmployees = Uize.Data.findRecords (employees,{2:'finance'})
+								financeEmployees = Uize.Data.Util.findRecords (employees,{2:'finance'})
 							;
-							.....................................................................
+							..........................................................................
 
 							In the above example, the =financeEmployees= variable would have the same value as in the previous example.
 
@@ -163,18 +163,18 @@ Uize.module ({
 				// implementation remains in the Uize.Data module until end of the deprecation grace period
 				/*?
 					Static Methods
-						Uize.Data.filter
+						Uize.Data.Util.filter
 							Returns an object with only the properties of the source object that are specified by an array of property names.
 
 							SYNTAX
-							....................................................................
-							filteredOBJ = Uize.Data.filter (sourceObjectOBJ,propertyNamesARRAY);
-							....................................................................
+							.........................................................................
+							filteredOBJ = Uize.Data.Util.filter (sourceObjectOBJ,propertyNamesARRAY);
+							.........................................................................
 
 							This method can be useful when receiving an info package of which only a subset needs to be stored or passed on to a subsequent process.
 
 							EXAMPLE
-							...................................................................................
+							........................................................................................
 							var someNodeStyle = {
 								color:'#fff',
 								left:'10px',
@@ -186,9 +186,9 @@ Uize.module ({
 								overflow:'hidden'
 							};
 							Uize.Node.setStyle (
-								'someOtherNode',Uize.Data.filter (someNodeStyle,['left','top','width','height'])
+								'someOtherNode',Uize.Data.Util.filter (someNodeStyle,['left','top','width','height'])
 							);
-							...................................................................................
+							........................................................................................
 
 							In this example, a node style object that is being used for some node is being filtered for just its dimensions and positioning properties, to then be applied to some other node.
 
