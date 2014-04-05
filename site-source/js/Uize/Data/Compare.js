@@ -30,8 +30,22 @@ Uize.module ({
 
 		var
 			/*** Variables for Scruncher Optimization ***/
-				_Uize_Data = Uize.Data
+				_Uize_Data = Uize.Data,
+				_isPlainObject = Uize.isPlainObject
 		;
+
+		/*** Utility Functions ***/
+			function _diffDefaultPropertyComparer (_object1Property,_object2Property) {
+				return {
+					value:_object1Property && !_object2Property
+						? 'removed'
+						: !_object1Property && _object2Property
+							? 'added'
+							: _object1Property.value === _object2Property.value
+								? 'unchanged'
+								: 'modified'
+				};
+			}
 
 		return Uize.package ({
 			identical:_Uize_Data.identical,
@@ -126,7 +140,7 @@ Uize.module ({
 							- =Uize.Data.Compare.clones (myObjectOBJ,myObjectOBJ)= will return =false=, since they are one and the same and not clones.
 				*/
 
-			intersection:_Uize_Data.intersection
+			intersection:_Uize_Data.intersection,
 				// implementation remains in the Uize.Data module until end of the deprecation grace period
 				/*?
 					Static Methods
@@ -159,6 +173,65 @@ Uize.module ({
 
 							In the above example, the variable =employeeInCommon= would have the value ={firstName:'John',startYear:'2008'}=.
 				*/
+
+			diff:function (_object1,_object2,_propertyComparer) {
+				_propertyComparer || (_propertyComparer = _diffDefaultPropertyComparer);
+				/*
+					- recurse object, using source object as authority
+						- construct a comparison result with the following info...
+							- removed
+								- properties that have been removed (present in the source but not in the comparison object)
+								- terminate recursion at removed properties
+							- added
+								- properties that have been added (not present in source, but present in comparison object)
+								- terminate recursion at source node
+							- modified
+								- properties that have been modified
+								- properties that are present in both the source and the comparison object, and where the value for the property in the source is different to the value of the property in the comparison object, and where the value of the property in the source and the comparison object are not both plain object types
+
+						.................
+						{
+							removed:{...},
+							added:{...},
+							modified:{...}
+						}
+						.................
+				*/
+				function _compareNode (_object1,_object2) {
+					var
+						_added = {},
+						_removed = {},
+						_modified = {}
+					;
+					for (var _object1Property in _object1) {
+						if (_object1Property in _object2) {
+							var
+								_object1PropertyValue = _object1 [_object1Property],
+								_object2PropertyValue = _object2 [_object1Property]
+							;
+							if (_object1PropertyValue !== _object2PropertyValue) {
+								if (_isPlainObject (_object1PropertyValue) && _isPlainObject (_object2PropertyValue)) {
+									_compareNode (_object1PropertyValue,_object2PropertyValue);
+								} else {
+									_modified [_object1Property] = 1;
+								}
+							}
+						} else {
+							_removed [_object1Property] = 1;
+						}
+					}
+					for (var _object2Property in _object2)
+						if (!(_object2Property in _object1))
+							_added [_object2Property] = 1
+					;
+					return {
+						added:_added,
+						removed:_removed,
+						modified:_modified
+					};
+				}
+				return _compareNode (_object1,_object2);
+			}
 		});
 	}
 });

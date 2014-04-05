@@ -567,6 +567,21 @@ Uize.module ({
 							[{foo:1,bar:_identicalTestObjectA},{foo:1,bar:_identicalTestObjectA}],
 							false
 						]
+					]],
+					['Uize.Data.Compare.diff',[
+						['',
+							[
+								{foo:'bar'},
+								{foo:'BAR'}
+							],
+							{
+								added:{},
+								removed:{},
+								modified:{
+									foo:1
+								}
+							}
+						]
 					]]
 				])
 			]
