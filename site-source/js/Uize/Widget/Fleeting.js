@@ -105,13 +105,23 @@ Uize.module ({
 									&& m.set ({_text:m.getNodeValue('text')})
 								;
 
+							/*** click to dismiss ***/
+								m.wireNode('', 'click', function () {
+									if (m._clickToDismiss)
+										m.set({ _shown: false });
+								});
+
 							_superclass.doMy (m,'wireUi');
 						}
 					}
 				}
 			},
 
-			stateProperties:{
+			stateProperties: {
+				_clickToDismiss: {
+					name: 'clickToDismiss',
+					value: false
+				},
 				_maxOpacity:{
 					name:'maxOpacity',
 					value:1
