@@ -1,0 +1,15 @@
+This is a TO DO document for the =Uize.Services.LocAdapter= module.
+
+Repair on Export
+	The export implementation should be updated to perform repair / synchronization for non-primary language files.
+
+	Export should gather resources for each of the supported languages, and then serialize the single resources file per language. Upon gathering the resources for the primary language, the export process should determine which resource strings have changed for the primary language. For resource strings that have changed, the equivalent for each of the languages should be removed or blanked out. For any resource strings that have been removed, the equivalent for each of the languages should be removed.
+
+	Once the resources have been updated for each language to reflect changes made in the resources for the primary language, the single resource file for each language can be serialized and written. By gathering the resources per language during the export process, this opens up the possibility of blanking out an individual resource string in the codebase if the translations is problematic, and this blanked out resource string will then appear as a new string that needs translation when a job is created for translation.
+
+Export Translation Job
+	There needs to be a method for exporting a translation job that will submit just the resource strings that need translation.
+
+Import Translation Job
+	There needs to be a method for importing the translated strings from a translation job, once an exported translation job has been submitted to a translator and translated.
+
