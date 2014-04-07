@@ -10,6 +10,21 @@ Repair on Export
 Export Translation Job
 	There needs to be a method for exporting a translation job that will submit just the resource strings that need translation.
 
+	Exporting a translation job would...
+
+	- iterate through the supported languages
+	- for each supported language, find all resource strings for which the value is blank but the value in the source language is not blank
+	- create a data object that has all the untranslated strings, along with their source language version
+	- serialize and write the data object
+
 Import Translation Job
 	There needs to be a method for importing the translated strings from a translation job, once an exported translation job has been submitted to a translator and translated.
+
+	Importing a translatiob job would...
+
+	- iterate through the supported languages
+	- for each supported language, open the translation job file for the language
+	- open the resouce strings file for the language
+	- stitch the translated resource strings from the translation job file into the resource strings file
+	- serialize the resource strings file and write it
 
