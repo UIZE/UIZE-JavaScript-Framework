@@ -21,6 +21,122 @@
 		The =Uize.Data.Diff= module provides methods for comparing the contents of two data objects and reporting the differences.
 
 		*DEVELOPERS:* `Chris van Rensburg`
+
+		In a Nutshell
+			The =Uize.Data.Diff= module makes it easy to compare two objects to determine how they differ.
+
+			The =Uize.Data.Diff.diff= method accepts two objects are arguments, along with an optional `property comparer` function, and then compares those two objects and returns a `diff result`.
+
+			Diff Result
+				When the =Uize.Data.Diff.diff= method is used to compare two objects, it produces a diff result.
+
+				The diff result is an object whose structure is based on a union of the structures of the two objects being compared. Depending on the `property comparer` function that is used when performing the diff, the diff result can be a complete or sparse union of the structurs of the objects being compared.
+
+				The diff result object is best explained with an example...
+
+				EXAMPLE
+				......................
+				Uize.Data.Diff.diff (
+					// object 1
+					{
+						foo:'fooValue',
+						bar:'barValue',
+						qux:'quxValue'
+					},
+
+					// object 2
+					{
+						foo:'FOO_VALUE',
+						baz:'bazValue',
+						qux:'quxValue'
+					}
+				);
+				......................
+
+				RESULT
+				..................
+				{
+					foo:'modified',
+					bar:'removed',
+					baz:'added',
+					qux:'unchanged'
+				},
+				..................
+
+			Diffing is Recursive
+				.
+
+			Diffing Asymmetrical Objects
+				.
+
+				EXAMPLE
+				........................
+				Uize.Data.Diff.diff (
+					// object 1
+					{
+						foo:{
+							bar:'barValue',
+							baz:'bazValue'
+						},
+						qux:'quxValue'
+					},
+
+					// object 2
+					{
+						bar:{
+							foo:'fooValue',
+							baz:'bazValue'
+						},
+						qux:'quxValue'
+					}
+				);
+				........................
+
+				RESULT
+				....................
+				{
+					foo:{
+						bar:'removed',
+						baz:'removed'
+					},
+					qux:'unchanged',
+					bar:{
+						foo:'added',
+						baz:'added'
+					},
+				}
+				....................
+
+			How Diffing is Performed
+				.
+
+			Property Comparer
+				.
+
+				Property Comparer Function
+
+					A property comparer function must...
+
+					- accept two `value descriptor` arguments
+					- return a `value comparison result`
+
+					Value Descriptor
+						In the context of a `property comparer function`, a value descriptor is either...
+
+						- an object, containing a =value= property that provides the value of the property for the object
+						- the value =undefined=, indicating that the property is missing for the object
+
+					Value Comparison Result
+						In the context of a `property comparer function`, a value comparison result is either...
+
+						- an object, containing a =value= property that provides the value that should be placed into the diff result object for the current property being compared
+						- the value =undefined=, indicating that no value should be placed into the diff result object for the current property being compared
+
+				Default Property Comparer
+					.
+
+				Finding Added or Modified Values
+					.
 */
 
 Uize.module ({
@@ -39,7 +155,7 @@ Uize.module ({
 		;
 
 		/*** Utility Functions ***/
-			function _diffDefaultPropertyComparer (_object1Property,_object2Property) {
+			function _defaultPropertyComparer (_object1Property,_object2Property) {
 				return {
 					value:_object1Property && !_object2Property
 						? 'removed'
@@ -53,7 +169,7 @@ Uize.module ({
 
 		return Uize.package ({
 			diff:function (_object1,_object2,_propertyComparer) {
-				_propertyComparer || (_propertyComparer = _diffDefaultPropertyComparer);
+				_propertyComparer || (_propertyComparer = _defaultPropertyComparer);
 				function _compareNode (_object1,_object2) {
 					var _result = {};
 					for (var _property in Uize.copy (_object1,_object2)) {
@@ -85,12 +201,33 @@ Uize.module ({
 				}
 				return _compareNode (_object1,_object2);
 				/*?
-					### Static Methods
+					Static Methods
 						Uize.Data.Diff.diff
+							Performs a diff comparison between two objects, comparing all the corresponding leaf node properties, and reports the diff result as an object.
 
-							SYNTAX
-							...
-							...
+							DIFFERENT USAGES
+
+							`Diff Two Objects, Using the Default Property Comparer`
+							............................................................
+							diffResultOBJ = Uize.Data.Diff.diff (object1OBJ,object2OBJ);
+							............................................................
+
+							`Diff Two Objects, Using a Custom Property Comparer`
+							.................................................................................
+							diffResultOBJ = Uize.Data.Diff.diff (object1OBJ,object2OBJ,propertyComparerFUNC);
+							.................................................................................
+
+							Diff Two Objects, Using the Default Property Comparer
+								SYNTAX
+								............................................................
+								diffResultOBJ = Uize.Data.Diff.diff (object1OBJ,object2OBJ);
+								............................................................
+
+							Diff Two Objects, Using a Custom Property Comparer
+								SYNTAX
+								.................................................................................
+								diffResultOBJ = Uize.Data.Diff.diff (object1OBJ,object2OBJ,propertyComparerFUNC);
+								.................................................................................
 				*/
 			}
 		});
