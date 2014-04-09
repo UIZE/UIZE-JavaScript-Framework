@@ -104,9 +104,9 @@ Uize.module ({
 									_eventBindingKeyTokens = _eventBindingKey.split(':'), // NOTE: widget events with colons won't work as a result
 									_nodeOrWidgetName = _eventBindingKeyTokens[0],
 									_dotIndex = -1,
-									_eventBindings = _nodeOrWidgetName == '~' || ((_dotIndex = _nodeOrWidgetName.indexOf('.')) > -1 ? (_nodeOrWidgetName = _nodeOrWidgetName.substr(_dotIndex + 1)) : _undefined)
-										? _widgetEventBindings
-										: _domEventBindings
+									_eventBindings = ((_dotIndex = _nodeOrWidgetName.indexOf('.')) > -1 ? (_nodeOrWidgetName = _nodeOrWidgetName.substr(_dotIndex + 1)) : _undefined)
+										? _domEventBindings
+										: _widgetEventBindings
 								;
 								
 								_Uize.copyInto(
@@ -131,11 +131,11 @@ Uize.module ({
 									......................................................
 									MyNamespace.MyWidgetClass = Uize.Widget.mEventBindings.subclass ({
 										eventBindings:{
-											menu:{ // DOM node
+											'node.menu':{ // DOM node
 												click:function (event, sourceNode) { },
 												mouseover:function(_event, sourceNode) { }
 											},
-											'children.sliderG':{ // child widget
+											'sliderG':{ // child widget
 												'Changed.value':function (event) { },
 												Update:function(_event) { }
 											},
@@ -154,10 +154,10 @@ Uize.module ({
 									......................................................
 									MyNamespace.MyWidgetClass = Uize.Widget.mEventBindings.subclass ({
 										eventBindings:{
-											'menu:click':function(event, sourceNode) { },
-											'menu:mouseover':function(event, sourceNode) { }
-											'children.sliderG:Changed.value':function (_event) { },
-											'children.sliderG:Update':function(event) { },
+											'node.menu:click':function(event, sourceNode) { },
+											'node.menu:mouseover':function(event, sourceNode) { }
+											'sliderG:Changed.value':function (_event) { },
+											'sliderG:Update':function(event) { },
 											'~:Changed.value':function (event) { },
 											'~:Update':{
 												handler:function(event) { },
