@@ -104,11 +104,11 @@ Uize.module ({
 									_eventBindingKeyTokens = _eventBindingKey.split(':'), // NOTE: widget events with colons won't work as a result
 									_nodeOrWidgetName = _eventBindingKeyTokens[0],
 									_dotIndex = -1,
-									_eventBindings = ((_dotIndex = _nodeOrWidgetName.indexOf('.')) > -1 ? (_nodeOrWidgetName = _nodeOrWidgetName.substr(_dotIndex + 1)) : _undefined)
+									_eventBindings = ((_dotIndex = _nodeOrWidgetName.indexOf('.')) > -1 ? (_nodeOrWidgetName = _nodeOrWidgetName.substr(_dotIndex + 1)) : _undefined) != _undefined
 										? _domEventBindings
 										: _widgetEventBindings
 								;
-								
+
 								_Uize.copyInto(
 									_eventBindings[_nodeOrWidgetName] || (_eventBindings[_nodeOrWidgetName] = {}),
 									_eventBindingKeyTokens.length > 1 // short-hand syntax where the 2nd token is the event
