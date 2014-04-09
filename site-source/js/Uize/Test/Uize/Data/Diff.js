@@ -145,6 +145,13 @@ Uize.module ({
 									}
 								}
 							],
+							['When the objects being compared contain the same top-level property and identical structure, the result is not an empty object (this was a bug that was discovered)',
+								[
+									{foo:{bar:{baz:{qux:'QUX'}}}},
+									{foo:{bar:{baz:{qux:'QUX'}}}}
+								],
+								{foo:{bar:{baz:{qux:'unchanged'}}}}
+							],
 
 						/*** test a custom added-or-modified property comparer ***/
 							['With a custom added-or-modified property comparer, modified properties are marked by their new value',
