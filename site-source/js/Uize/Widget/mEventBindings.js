@@ -81,7 +81,7 @@ Uize.module ({
 							_mClass.mEventBindings_widget,
 							function(_bindings, _widgetName) {
 								function _wire(_widget) { _widget.wire( _wrapBindings(m, _bindings)) }
-								_widgetName != '~'
+								_widgetName // '' is self
 									? _addedChildren.once(_widgetName, function() { _wire(_children[_widgetName]) })
 									: _wire(m)
 								;
@@ -104,7 +104,7 @@ Uize.module ({
 									_eventBindingKeyTokens = _eventBindingKey.split(':'), // NOTE: widget events with colons won't work as a result
 									_nodeOrWidgetName = _eventBindingKeyTokens[0],
 									_dotIndex = -1,
-									_eventBindings = ((_dotIndex = _nodeOrWidgetName.indexOf('.')) > -1 ? (_nodeOrWidgetName = _nodeOrWidgetName.substr(_dotIndex + 1)) : _undefined) != _undefined
+									_eventBindings = (!_nodeOrWidgetName.indexOf('#') ? (_nodeOrWidgetName = _nodeOrWidgetName.substr(1)) : _undefined) != _undefined // DOM references start with #
 										? _domEventBindings
 										: _widgetEventBindings
 								;
@@ -131,7 +131,7 @@ Uize.module ({
 									......................................................
 									MyNamespace.MyWidgetClass = Uize.Widget.mEventBindings.subclass ({
 										eventBindings:{
-											'node.menu':{ // DOM node
+											'#menu':{ // DOM node
 												click:function (event, sourceNode) { },
 												mouseover:function(_event, sourceNode) { }
 											},
@@ -139,7 +139,7 @@ Uize.module ({
 												'Changed.value':function (event) { },
 												Update:function(_event) { }
 											},
-											'~':{ // self
+											'':{ // self
 												'Changed.value':function (event) { },
 												Update:{
 													handler:function(_event) { },
@@ -154,12 +154,12 @@ Uize.module ({
 									......................................................
 									MyNamespace.MyWidgetClass = Uize.Widget.mEventBindings.subclass ({
 										eventBindings:{
-											'node.menu:click':function(event, sourceNode) { },
-											'node.menu:mouseover':function(event, sourceNode) { }
+											'#menu:click':function(event, sourceNode) { },
+											'#menu:mouseover':function(event, sourceNode) { }
 											'sliderG:Changed.value':function (_event) { },
 											'sliderG:Update':function(event) { },
-											'~:Changed.value':function (event) { },
-											'~:Update':{
+											':Changed.value':function (event) { },
+											':Update':{
 												handler:function(event) { },
 												required:['sliderG']
 											}
