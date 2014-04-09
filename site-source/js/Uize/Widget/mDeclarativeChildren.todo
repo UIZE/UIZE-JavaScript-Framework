@@ -37,7 +37,7 @@ Add Feature for Declaring Child Widgets
 		NOTES
 		- Key is the name of the child widget
 		- Value is an object specifying values for a child widget's initial state properties
-		- The widget class for a child widget is specified using the special =widgetClass= widget property
+		- The widget class for a child widget is specified using the special =widgetClass= widget property. Omitting it is an indication that the child widget is deferred and will be added by some other means.
 
 	Short-hand Syntax
 		The short-hand syntax allows for only specifying the child widget's name and widget class.
@@ -54,6 +54,7 @@ Add Feature for Declaring Child Widgets
 		- Key is the name of the child widget
 		- Value is the widget class of child widget
 		- Most useful if the child widget doesn't need to override default state properties or its state properties are set else (for example via $ syntax)
+		- Question: what happens if you want the widget to be deferred, what is the value in the key-value pair?
 
 	Other Possible Syntaxes
 		EXAMPLE
