@@ -47,7 +47,7 @@ Uize.module ({
 
 				_Uize = Uize,
 				_Uize_Widget = _Uize.Widget,
-				_identical = _Uize.Data.Compare,
+				_identical = _Uize.Data.Compare.identical,
 
 			/*** validation/warning variables ***/
 				_never = 'never',
