@@ -17,8 +17,28 @@ Uize.module ({
 
 		var
 			_fileSystem = Uize.Services.FileSystem.singleton (),
-			_split = Uize.Str.Split.split
+			_split = Uize.Str.Split.split,
+			_primaryLanguage = 'en-US',
+				// TODO: move this into the config and make sure there are no assumptions about US English being the primary language baked into the code anywhere
+			_pseudoLocale = 'pseudo'
+				// TODO: move this into the config and make sure there are no assumptions about "pseudo" being the name of the pseudo-locale in the code anywhere
 		;
+
+		/*** Private Instance Methods ***/
+			function _loadAndParseLanguageResourcesFile (_languageResourcesFilePath) {
+				return (
+					_fileSystem.fileExists ({path:_languageResourcesFilePath})
+						? Uize.Data.Flatten.unflatten (
+							Uize.Data.NameValueRecords.toHash (
+								Uize.Data.Csv.from (_fileSystem.readFile ({path:_languageResourcesFilePath})),
+								0,
+								1
+							),
+							Uize.Json.from
+						)
+						: undefined
+				);
+			}
 
 		return _superclass.subclass ({
 			instanceMethods:{
@@ -165,22 +185,11 @@ Uize.module ({
 					Uize.forEach (
 						_project.languages,
 						function (_language) {
-							if (_language != 'en-US') {
-								var _languageFilename = m._stringsFolder + '/' + _projectName + '/' + _language + '.csv';
-								if (_fileSystem.fileExists ({path:_languageFilename})) {
-									m.distributeResources (
-										Uize.Data.Flatten.unflatten (
-											Uize.Data.NameValueRecords.toHash (
-												Uize.Data.Csv.from (_fileSystem.readFile ({path:_languageFilename})),
-												0,
-												1
-											),
-											Uize.Json.from
-										),
-										_language,
-										_project
-									);
-								}
+							if (_language != _primaryLanguage) {
+								var _resources = _loadAndParseLanguageResourcesFile (
+									m._stringsFolder + '/' + _projectName + '/' + _language + '.csv'
+								);
+								_resources && m.distributeResources (_resources,_language,_project);
 							}
 						}
 					);
@@ -189,15 +198,58 @@ Uize.module ({
 
 				'export':function (_params,_callback) {
 					var
-						_project = this.project,
-						_projectName = _project.name
+						m = this,
+						_project = m.project,
+						_projectName = _project.name,
+						_rootFolderPath = _project.rootFolderPath,
+						_primaryLanguageResources = m.gatherResources (),
+						_resoucesByLanguage = Uize.pairUp (_primaryLanguage,_primaryLanguageResources),
+						_primaryLanguageResourcesFilePath =
+							m._stringsFolder + '/' + _projectName + '/' + _primaryLanguage + '.csv',
+						_primaryLanguageResourcesLast = _loadAndParseLanguageResourcesFile (_primaryLanguageResourcesFilePath)
 					;
+						console.log (_primaryLanguageResourcesLast);
+
+					/*** gather resources for all other supported languages ***/
+						Uize.forEach (
+							_project.languages,
+							function (_language) {
+								if (_language != _primaryLanguage && _language != _pseudoLocale) {
+									_resoucesByLanguage [_language] = {};
+									Uize.forEach (
+										_primaryLanguageResources,
+										function (_resourceFileStrings,_resourceFileSubPath) {
+											var
+												_resourceFileFullPath =
+													_rootFolderPath + '/' +
+													m.getLanguageResourcePath (_resourceFileSubPath,_language),
+												_resources = _fileSystem.fileExists ({path:_resourceFileFullPath})
+													? m.parseResourceFile (_fileSystem.readFile ({path:_resourceFileFullPath}))
+													: {}
+											;
+											_resoucesByLanguage [_language] [_resourceFileFullPath] = _resources;
+										}
+									);
+								}
+							}
+						);
+						console.log (_resoucesByLanguage);
+
+					/*
+						TODO:
+							- load and parse exported file for primary language
+							- perform repair of resources gathered for other languages, according to the following rules...
+								- if a resource string has been added for the primary language, add the resource string for all the other supported languages with the value being empty (unless the resource string is already defined for a language, in which case leave it untouched for that language)
+								- if a resource string has been modified for the primary language, blank out that resource string for all the other supported languages
+								- if a resource string has been removed for the primary language, remove that resource string for all the other supported languages
+					*/
+
 					_fileSystem.writeFile ({
-						path:this._stringsFolder + '/' + _projectName + '/en-US.csv',
+						path:_primaryLanguageResourcesFilePath,
 						contents:Uize.Data.Csv.to (
 							Uize.Data.NameValueRecords.fromHash (
 								Uize.Data.Flatten.flatten (
-									this.gatherResources (),
+									_primaryLanguageResources,
 									function (_path) {return Uize.Json.to (_path,'mini')}
 								),
 								0,
@@ -346,11 +398,13 @@ Uize.module ({
 					}
 
 					_fileSystem.writeFile ({
-						path:_stringsFolder + '/' + _projectName + '/pseudo.csv',
+						path:_stringsFolder + '/' + _projectName + '/' + _pseudoLocale + '.csv',
 						contents:Uize.Data.Csv.to (
 							Uize.map (
 								Uize.Data.Csv.from (
-									_fileSystem.readFile ({path:_stringsFolder + '/' + _projectName + '/en-US.csv'})
+									_fileSystem.readFile ({
+										path:_stringsFolder + '/' + _projectName + '/' + _primaryLanguage + '.csv'
+									})
 								),
 								function (_keyValueArray) {
 									_keyValueArray [1] = _pseudoLocalizeString (_keyValueArray [1] || '');
