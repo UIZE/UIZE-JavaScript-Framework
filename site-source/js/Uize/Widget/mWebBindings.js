@@ -18,7 +18,7 @@
 
 /*?
 	Introduction
-		The =Uize.Widget.mWebBindings= module is an aggregator mixin module that allows widget classes to mix in both =Uize.Widget.mWeb= and =Uize.Widget.mBindings= with additional helpful functionality.
+		The =Uize.Widget.mWebBindings= module is an aggregator mixin module that allows widget classes to more easily mix in =Uize.Widget.mWeb= and other widget binding modules with additional helpful functionality.
 
 		*DEVELOPERS:* `Ben Ilegbodu`
 */
@@ -27,15 +27,27 @@ Uize.module ({
 	name:'Uize.Widget.mWebBindings',
 	required:[
 		'Uize.Widget.mWeb',
-		'Uize.Widget.mBindings',
+		'Uize.Widget.mHtmlBindings',
+		'Uize.Widget.mCssBindings',
+		'Uize.Widget.mEventBindings',
 		'Uize.Web'
 	],
 	builder:function () {
 		'use strict';
 		
+		var
+			/*** Variables for Scruncher Optimization ***/
+				_Uize_Widget = Uize.Widget
+		;
+		
 		return function(_class) {
 			_class.declare({
-				mixins:[Uize.Widget.mWeb, Uize.Widget.mBindings],
+				mixins:[
+					_Uize_Widget.mWeb,
+					_Uize_Widget.mHtmlBindings,
+					_Uize_Widget.mCssBindings,
+					_Uize_Widget.mEventBindings
+				],
 				
 				instanceMethods:{
 					webSelect:function(_selector) {

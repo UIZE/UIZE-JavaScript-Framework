@@ -178,7 +178,7 @@ Uize.module ({
 				var _scrollNodeCoords = _scrollableContainerNodeIsBodyNode ? _targetNodeCoords : _scrollableContainerNodeCoords;
 				_wireAndStartFade(
 					_scrollableBodyNode,
-					_scrollNodeCoords.y,
+					_scrollNodeCoords.y + (Uize.isNumber(_scrollParams.offset) ? _scrollParams.offset : 0),
 					function () { _bodyNodeDone = true },
 					_scrollParams.scrollToTop || !_isNodeVisible(_scrollNodeCoords, true)
 				);
@@ -228,6 +228,9 @@ Uize.module ({
 
 								callbackFUNC
 									A callback function to be called once scrolling complete.
+									
+								offsetINT
+									Specifies an optional vertical pixel offset from the top of the =targetNodeSTRorOBJ=.
 
 							EXAMPLE
 							......
