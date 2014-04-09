@@ -44,7 +44,6 @@ Uize.module ({
 		;
 
 		/*** Utility Functions ***/
-		var _foo = {};
 			function _declareRootNodeClassesStateProperty (m) {
 				var
 					_cssBindings = m [_mCssBindings_bindings],
