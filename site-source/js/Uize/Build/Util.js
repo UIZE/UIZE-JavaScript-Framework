@@ -404,16 +404,21 @@ Uize.module ({
 					*/
 				},
 
-				runUnitTests:function (_unitTestsClass,_silent,_logFilePath) {
+				runUnitTests:function (_unitTestsClass,_console,_logFilePath) {
+					_console || (_console = 'summary');
 					function _runUnitTests (_unitTestsClass) {
 						var
 							_unitTests = new _unitTestsClass,
 							_logChunks = []
 						;
+						function _log (_logChunk) {
+							_console == 'verbose' && console.log (_logChunk);
+							_logChunks.push (_logChunk);
+						}
 						_unitTests.wire ({
 							Start:
 								function (_event) {
-									_logChunks.push (
+									_log (
 										Uize.Str.Repeat.repeat ('\t',_event.source.getDepth ()) + _event.source.get ('title')
 									);
 								},
@@ -424,7 +429,7 @@ Uize.module ({
 										_reasonForFailure = _test.get ('reasonForFailure')
 									;
 									/*** add to log ***/
-										_logChunks.push (
+										_log (
 											Uize.Str.Repeat.repeat ('\t',_test.getDepth () + 1) +
 											(
 												_test.get ('result')
@@ -432,11 +437,11 @@ Uize.module ({
 													: ('*** FAILED *** ' + (_reasonForFailure || ''))
 											)
 										);
-										_reasonForFailure && _logChunks.push ('','',_test.getSynopsis ());
+										_reasonForFailure && _log ('','',_test.getSynopsis ());
 
 									/*** finish up if the test fails or if unit tests complete ***/
 										if (_test == _unitTests || !_test.get ('result')) {
-											_silent || console.log (_test.getSynopsis ());
+											_console == 'summary' && console.log (_test.getSynopsis ());
 											_logFilePath &&
 												_fileSystem.writeFile ({path:_logFilePath,contents:_logChunks.join ('\n')})
 											;
@@ -457,14 +462,14 @@ Uize.module ({
 
 								SYNTAX
 								..................................................................................
-								Uize.Build.Util.runUnitTests (unitTestsClassSTRorCLASS,silentBOOL,logFilePathSTR);
+								Uize.Build.Util.runUnitTests (unitTestsClassSTRorCLASS,consoleSTR,logFilePathSTR);
 								..................................................................................
 
 								Parameters
 									This method supports the following parameters...
 
 									- =unitTestsClassSTRorCLASS= - either a string, specifying the name of a unit tests module, or a reference to a unit tests module
-									- =silentBOOL= - a boolean, specifing whether or not the test runner should be silent (unless the value =true= is specified, the test runner will output a synopsis to the console)
+									- =consoleSTR= - a string, specifying the amount of information that should be logged to the console while the tests are being run. The value =silent= indicates that nothing should be logged to the console. The value =summary= (the default) indicates that only the summary information from running the tests should be logged. And the value =verbose= indicates that information from running all tests (including deeply nested tests) should be logged.
 									- =logFilePathSTR= - a string, optionally specifying the path for where a log file should be written (if not specified, no log file will be written)
 					*/
 				},

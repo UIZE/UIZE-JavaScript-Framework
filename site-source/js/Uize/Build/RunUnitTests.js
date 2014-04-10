@@ -40,7 +40,7 @@ Uize.module ({
 	],
 	builder:function () {
 		'use strict';
-		
+
 		var
 			/*** Variables for Scruncher Optimization ***/
 				_Uize = Uize,
@@ -92,7 +92,11 @@ Uize.module ({
 						)
 					})
 				;
-				_Uize_Build.Util.runUnitTests (_unitTestSuite,_params.silent == 'true',_params.logFilePath);
+				_Uize_Build.Util.runUnitTests (
+					_unitTestSuite,
+					_params.silent == 'true' ? 'silent' : _params.console,
+					_params.logFilePath
+				);
 			}
 		});
 	}
