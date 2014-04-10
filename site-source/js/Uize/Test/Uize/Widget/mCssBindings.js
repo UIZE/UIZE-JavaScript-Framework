@@ -25,7 +25,6 @@
 
 Uize.module ({
 	name:'Uize.Test.Uize.Widget.mCssBindings',
-	required:'Uize.Test.Uize',
 	builder:function () {
 		'use strict';
 
