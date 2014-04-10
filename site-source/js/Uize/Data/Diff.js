@@ -183,7 +183,7 @@ Uize.module ({
 								_object1PropertyValue || _sacredEmpyObject,
 								_object2PropertyValue || _sacredEmpyObject
 							);
-							_propertyComparisonResult = _isEmpty (_propertyComparisonResult)
+							_propertyComparisonResult = _isEmpty (_subNodeComparison)
 								? _undefined
 								: {value:_subNodeComparison}
 							;

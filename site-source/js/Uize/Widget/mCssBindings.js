@@ -25,6 +25,7 @@
 
 Uize.module ({
 	name:'Uize.Widget.mCssBindings',
+	required:'Uize.Widget.mHtmlBindings',
 	builder:function () {
 		'use strict';
 
@@ -63,13 +64,13 @@ Uize.module ({
 										Uize.map (
 											_bindingProperties,
 											function (_property,_propertyNo) {
-												return ',c' + _propertyNo + '=m.cssClass(b[\'' + _property + '\'](m.get(\'' + _property + '\')))';
+												return ',p' + _propertyNo + '=m.get(\'' + _property + '\'),c' + _propertyNo + '=p' + _propertyNo + '&&m.cssClass(b[\'' + _property + '\'](p' + _propertyNo + '))';
 											}
 										).join ('') +
 										',e=m.extraClasses' +
 									';' +
 									'return ' +
-										'm.cssClass()' +
+										'm.cssClass(\'\')' +
 										Uize.map (
 											_bindingProperties,
 											function (_property,_propertyNo) {
@@ -87,6 +88,8 @@ Uize.module ({
 
 		return function (_class) {
 			_class.declare ({
+				mixins:Uize.Widget.mHtmlBindings,
+
 				alphastructor:function () {
 					function _needCss (m) {
 						var _moduleName = m.moduleName;
