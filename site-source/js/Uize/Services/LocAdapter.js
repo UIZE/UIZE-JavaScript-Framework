@@ -6,6 +6,7 @@ Uize.module ({
 		'Uize.Data.Flatten',
 		'Uize.Data.NameValueRecords',
 		'Uize.Data.Csv',
+		'Uize.Data.Diff',
 		'Uize.Loc.Pseudo',
 		'Uize.Build.Util',
 		'Uize.Str.Split',
@@ -203,19 +204,23 @@ Uize.module ({
 						_projectName = _project.name,
 						_rootFolderPath = _project.rootFolderPath,
 						_primaryLanguageResources = m.gatherResources (),
-						_resoucesByLanguage = Uize.pairUp (_primaryLanguage,_primaryLanguageResources),
-						_primaryLanguageResourcesFilePath =
-							m._stringsFolder + '/' + _projectName + '/' + _primaryLanguage + '.csv',
-						_primaryLanguageResourcesLast = _loadAndParseLanguageResourcesFile (_primaryLanguageResourcesFilePath)
+						_primaryLanguageResourcesLast =
+							_loadAndParseLanguageResourcesFile (
+								m._stringsFolder + '/' + _projectName + '/' + _primaryLanguage + '.csv'
+							) || {},
+						_primaryLanguageResourcesDiff = Uize.Data.Diff.diff (
+							_primaryLanguageResourcesLast,
+							_primaryLanguageResources
+						),
+						_resoucesByLanguage = Uize.pairUp (_primaryLanguage,_primaryLanguageResources)
 					;
-						console.log (_primaryLanguageResourcesLast);
 
 					/*** gather resources for all other supported languages ***/
 						Uize.forEach (
 							_project.languages,
 							function (_language) {
 								if (_language != _primaryLanguage && _language != _pseudoLocale) {
-									_resoucesByLanguage [_language] = {};
+									var _languageResources = _resoucesByLanguage [_language] = {};
 									Uize.forEach (
 										_primaryLanguageResources,
 										function (_resourceFileStrings,_resourceFileSubPath) {
@@ -227,36 +232,46 @@ Uize.module ({
 													? m.parseResourceFile (_fileSystem.readFile ({path:_resourceFileFullPath}))
 													: {}
 											;
-											_resoucesByLanguage [_language] [_resourceFileFullPath] = _resources;
+											_languageResources [_resourceFileFullPath] = Uize.Data.Diff.diff (
+												_resources,
+												_primaryLanguageResourcesDiff [_resourceFileSubPath],
+												function (_gatheredProperty,_propertyDiff) {
+													return (
+														!_propertyDiff || _propertyDiff.value == 'removed'
+															? undefined
+															: {
+																value:
+																	_propertyDiff.value == 'modified' || _propertyDiff.value == 'added'
+																		? ''
+																		: _gatheredProperty ? _gatheredProperty.value : ''
+															}
+													);
+												}
+											);
 										}
 									);
 								}
 							}
 						);
-						console.log (_resoucesByLanguage);
 
-					/*
-						TODO:
-							- load and parse exported file for primary language
-							- perform repair of resources gathered for other languages, according to the following rules...
-								- if a resource string has been added for the primary language, add the resource string for all the other supported languages with the value being empty (unless the resource string is already defined for a language, in which case leave it untouched for that language)
-								- if a resource string has been modified for the primary language, blank out that resource string for all the other supported languages
-								- if a resource string has been removed for the primary language, remove that resource string for all the other supported languages
-					*/
-
-					_fileSystem.writeFile ({
-						path:_primaryLanguageResourcesFilePath,
-						contents:Uize.Data.Csv.to (
-							Uize.Data.NameValueRecords.fromHash (
-								Uize.Data.Flatten.flatten (
-									_primaryLanguageResources,
-									function (_path) {return Uize.Json.to (_path,'mini')}
-								),
-								0,
-								1
-							)
-						)
-					});
+					Uize.forEach (
+						_resoucesByLanguage,
+						function (_languageResources,_language) {
+							_fileSystem.writeFile ({
+								path:m._stringsFolder + '/' + _projectName + '/' + _language + '.csv',
+								contents:Uize.Data.Csv.to (
+									Uize.Data.NameValueRecords.fromHash (
+										Uize.Data.Flatten.flatten (
+											_languageResources,
+											function (_path) {return Uize.Json.to (_path,'mini')}
+										),
+										0,
+										1
+									)
+								)
+							});
+						}
+					);
 					_callback ();
 				},
 
