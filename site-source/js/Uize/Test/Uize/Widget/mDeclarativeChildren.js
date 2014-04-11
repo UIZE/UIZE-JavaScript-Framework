@@ -141,15 +141,15 @@ Uize.module ({
 				{
 					title:'Empty Tests',
 					test:[
-						_generateTest('Test that no declarative children results in no children added'),
-						_generateTest('Test that empty declarative children results in no children added', {})
+						_generateTest('When no declarative children are specified, no children are added to the widget'),
+						_generateTest('When an empty declarative children is specified, no children are added to the widget', {})
 					]
 				},
 				{
 					title:'Verbose Syntax Tests',
 					test:[
 						_generateTest(
-							'Test that single declarative children results in only 1 child added with appopriate state properties',
+							'When a single declarative children is specified, only one child is added to the widget with appopriate state properties',
 							{
 								foo:{
 									widgetClass:'Uize.Widget',
@@ -160,7 +160,7 @@ Uize.module ({
 							}
 						),
 						_generateTest(
-							'Test that multiple declarative children results in only equal number of children added with appopriate state properties',
+							'When multiple declarative children are specified, an equal number of children are added added to the widget, each with their appopriate state properties',
 							{
 								foo:{
 									widgetClass:'Uize.Widget',
@@ -181,7 +181,7 @@ Uize.module ({
 							}
 						),
 						_generateTest(
-							'Test that declared child does not get added to children when widgetClass is omitted',
+							'When a declared child omits its widgetClass, it does not getting added to the widget',
 							{
 								ipsum:{
 									enabled:false,
@@ -197,6 +197,30 @@ Uize.module ({
 									widgetClass:'Uize.Widget',
 									foo:2,
 									regexp:/\w+/g
+								},
+								blah:{}
+							}
+						),
+						_generateTest(
+							'When a declared child has a falsy value for widgetClass, it does not getting added to the widget',
+							{
+								foo:{
+									widgetClass:''
+								},
+								bar:{
+									widgetClass:null
+								},
+								bat:{
+									widgetClass:undefined
+								},
+								baz:{
+									widgetClass:0
+								},
+								lorem:{
+									widgetClass:false
+								},
+								ipsum:{
+									widgetClass:NaN
 								}
 							}
 						)
@@ -206,13 +230,13 @@ Uize.module ({
 					title:'Shorthand Syntax Tests',
 					test:[
 						_generateTest(
-							'Test that single declarative children results in only 1 child added with appopriate state properties',
+							'When a single declarative children is specified, only one child is added to the widget with appopriate state properties',
 							{
 								foo:'Uize.Widget'
 							}
 						),
 						_generateTest(
-							'Test that multiple declarative children results in only equal number of children added with appopriate state properties',
+							'When multiple declarative children are specified, an equal number of children are added added to the widget, each with their appopriate state properties',
 							{
 								foo:'Uize.Widget',
 								bar:'Uize.Widget',
@@ -220,7 +244,7 @@ Uize.module ({
 							}
 						),
 						_generateTest(
-							'Test that declared child does not get added to children when widgetClass is omitted',
+							'When a declared child omits its widgetClass, it does not get added to the widget',
 							{
 								ipsum:'',
 								dolor:'Uize.Widget',
@@ -228,7 +252,7 @@ Uize.module ({
 							}
 						),
 						_generateTest(
-							'Test different ways that the widgetClass can be omitted w/ a falsy value',
+							'When a falsy value is specified for widgetClass of a declared child, it does not get added to the widget',
 							{
 								foo:'',
 								bar:null,
