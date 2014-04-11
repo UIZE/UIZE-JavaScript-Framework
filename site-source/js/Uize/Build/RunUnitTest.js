@@ -47,7 +47,7 @@ Uize.module ({
 
 		return Uize.package ({
 			perform:function (_params) {
-				Uize.Build.Util.runUnitTests (_params.testModule,_params.silent == 'true');
+				Uize.Build.Util.runUnitTests (_params.testModule,_params.console,_params.logFilePath);
 			}
 		});
 	}
