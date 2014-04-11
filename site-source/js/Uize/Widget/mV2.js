@@ -29,6 +29,7 @@ Uize.module ({
 		'Uize.Widget.mHtmlBindings',
 		'Uize.Widget.mCssBindings',
 		'Uize.Widget.mEventBindings',
+		'Uize.Widget.mDeclarativeChildren',
 		'Uize.Widget.mLoc'
 	],
 	builder:function () {
@@ -47,6 +48,7 @@ Uize.module ({
 					_Uize_Widget.mHtmlBindings,
 					_Uize_Widget.mCssBindings,
 					_Uize_Widget.mEventBindings,
+					_Uize_Widget.mDeclarativeChildren,
 					_Uize_Widget.mLoc
 				],
 

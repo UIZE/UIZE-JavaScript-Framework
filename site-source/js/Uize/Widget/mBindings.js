@@ -28,7 +28,8 @@ Uize.module ({
 	required:[
 		'Uize.Widget.mHtmlBindings',
 		'Uize.Widget.mCssBindings',
-		'Uize.Widget.mEventBindings'
+		'Uize.Widget.mEventBindings',
+		'Uize.Widget.mDeclarativeChildren'
 	],
 	builder:function () {
 		'use strict';
@@ -36,7 +37,8 @@ Uize.module ({
 		return [
 			Uize.Widget.mHtmlBindings,
 			Uize.Widget.mCssBindings,
-			Uize.Widget.mEventBindings
+			Uize.Widget.mEventBindings,
+			Uize.Widget.mDeclarativeChildren
 		];
 	}
 });
