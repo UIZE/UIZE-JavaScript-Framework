@@ -139,10 +139,15 @@ Uize.module ({
 					'Uize.Widget.mDeclarativeChildren'
 				]),
 				{
-					title:'Verbose Syntax Tests',
+					title:'Empty Tests',
 					test:[
 						_generateTest('Test that no declarative children results in no children added'),
-						_generateTest('Test that empty declarative children results in no children added', {}),
+						_generateTest('Test that empty declarative children results in no children added', {})
+					]
+				},
+				{
+					title:'Verbose Syntax Tests',
+					test:[
 						_generateTest(
 							'Test that single declarative children results in only 1 child added with appopriate state properties',
 							{
@@ -173,6 +178,64 @@ Uize.module ({
 									foo:2,
 									regexp:/\w+/g
 								}
+							}
+						),
+						_generateTest(
+							'Test that declared child does not get added to children when widgetClass is omitted',
+							{
+								ipsum:{
+									enabled:false,
+									busy:true,
+									container:'shell'
+								},
+								dolor:{
+									widgetClass:'Uize.Widget',
+									value:'foo',
+									values:['foo', 'bar', 'baz', 'bat']
+								},
+								sit:{
+									widgetClass:'Uize.Widget',
+									foo:2,
+									regexp:/\w+/g
+								}
+							}
+						)
+					]
+				},
+				{
+					title:'Shorthand Syntax Tests',
+					test:[
+						_generateTest(
+							'Test that single declarative children results in only 1 child added with appopriate state properties',
+							{
+								foo:'Uize.Widget'
+							}
+						),
+						_generateTest(
+							'Test that multiple declarative children results in only equal number of children added with appopriate state properties',
+							{
+								foo:'Uize.Widget',
+								bar:'Uize.Widget',
+								lorem:'Uize.Widget'
+							}
+						),
+						_generateTest(
+							'Test that declared child does not get added to children when widgetClass is omitted',
+							{
+								ipsum:'',
+								dolor:'Uize.Widget',
+								sit:'Uize.Widget'
+							}
+						),
+						_generateTest(
+							'Test different ways that the widgetClass can be omitted w/ a falsy value',
+							{
+								foo:'',
+								bar:null,
+								bat:undefined,
+								baz:0,
+								lorem:false,
+								ipsum:NaN
 							}
 						)
 					]
