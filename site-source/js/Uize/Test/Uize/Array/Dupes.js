@@ -47,30 +47,30 @@ Uize.module ({
 					['Uize.Array.Dupes.dedupe',
 						[
 							/*** test that duplicates are removed correctly, for each possible value type ***/
-								['Test that multiple duplicate number values are removed, and that non-duplicate values are not removed',
+								['Multiple duplicate number values are removed, and non-duplicate values are not removed',
 									[[1,2,NaN,1,1,2,2,NaN,NaN,Infinity]],
 									[1,2,NaN,Infinity]
 								],
-								['Test that multiple duplicate string values are removed, and that non-duplicate values are not removed',
+								['Multiple duplicate string values are removed, and non-duplicate values are not removed',
 									[['foo','bar','foo','foo','bar','bar','hello']],
 									['foo','bar','hello']
 								],
-								['Test that multiple duplicate boolean values are removed, and that non-duplicate values are not removed',
+								['Multiple duplicate boolean values are removed, and non-duplicate values are not removed',
 									[[false,false,false,true]],
 									[false,true]
 								],
-								['Test that multiple duplicate undefined values are removed',
+								['Multiple duplicate undefined values are removed',
 									[[undefined,undefined,undefined]],
 									[undefined]
 								],
-								['Test that multiple duplicate undefined values are removed',
+								['Multiple duplicate null values are removed',
 									[[null,null,null]],
 									[null]
 								],
 
 							/*** test support for object type values ***/
 								{
-									title:'Test that multiple duplicate object values are removed, and that non-duplicate values are not removed',
+									title:'Multiple duplicate object values are removed, and non-duplicate values are not removed',
 									test:function () {
 										return this.expect (
 											[_objectA,_objectB,_objectC],
@@ -81,7 +81,7 @@ Uize.module ({
 									}
 								},
 								{
-									title:'Test that multiple duplicate array values are removed, and that non-duplicate values are not removed',
+									title:'Multiple duplicate array values are removed, and non-duplicate values are not removed',
 									test:function () {
 										return this.expect (
 											[_arrayA,_arrayB,_arrayC],
@@ -92,7 +92,7 @@ Uize.module ({
 									}
 								},
 								{
-									title:'Test that multiple duplicate function values are removed, and that non-duplicate values are not removed',
+									title:'Multiple duplicate function values are removed, and non-duplicate values are not removed',
 									test:function () {
 										return this.expect (
 											[_functionA,_functionB,_functionC],
@@ -103,7 +103,7 @@ Uize.module ({
 									}
 								},
 								{
-									title:'Test that all value types can be present in the source array and duplicates of each type are removed correctly',
+									title:'All value types can be present in the source array and duplicates of each type are removed',
 									test:function () {
 										return this.expect (
 											[undefined,null,NaN,1,true,'foo',_objectA,_arrayA,_functionA],
@@ -125,15 +125,15 @@ Uize.module ({
 								},
 
 							/*** test that type is taken into account when determining if values are duplicates ***/
-								['Test that string serializations of number values are not considered duplicates of those number values',
+								['String serializations of number values are not considered duplicates of those number values',
 									[[1,'1',-1,'-1',NaN,'NaN',Infinity,'Infinity']],
 									[1,'1',-1,'-1',NaN,'NaN',Infinity,'Infinity']
 								],
-								['Test that string serializations of boolean values are not considered duplicates of those boolean values',
+								['String serializations of boolean values are not considered duplicates of those boolean values',
 									[[false,'false',true,'true']],
 									[false,'false',true,'true']
 								],
-								['Test that strings serializations of the values null and undefined are not considered duplicates of those values',
+								['String serializations of the values null and undefined are not considered duplicates of those values',
 									[[null,'null',undefined,'undefined']],
 									[null,'null',undefined,'undefined']
 								],
@@ -142,7 +142,7 @@ Uize.module ({
 							*/
 
 							/*** test optional canonicalizer parameter ***/
-								['Test that the optional canonicalizer parameter is observed correctly',
+								['When a canonicalizer function is provided, the values it returns are used to determine whether or not elements are duplicates',
 									[
 										['hello','world','Hello','HELLO','World','WORLD','foo'],
 										function (_value) {return _value.toLowerCase ()}
@@ -155,7 +155,7 @@ Uize.module ({
 					],
 					['Uize.Array.Dupes.removeValues',[
 						{
-							title:'',
+							title:'The specified list of values is removed from the source array',
 							test:function () {
 								var
 									_source = [

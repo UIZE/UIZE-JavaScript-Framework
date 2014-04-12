@@ -441,7 +441,9 @@ Uize.module ({
 
 									/*** finish up if the test fails or if unit tests complete ***/
 										if (_test == _unitTests || !_test.get ('result')) {
-											_console == 'summary' && console.log (_test.getSynopsis ());
+											var _synopsis = _test.getSynopsis ();
+											_console != 'silent' && console.log (_synopsis);
+											_logChunks.push (_synopsis);
 											_logFilePath &&
 												_fileSystem.writeFile ({path:_logFilePath,contents:_logChunks.join ('\n')})
 											;

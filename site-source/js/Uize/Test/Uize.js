@@ -113,7 +113,7 @@ Uize.module ({
 			function _toNumberTest (_value,_expectedValue) {
 				return {
 					title:
-						'Test that ' + Uize.Json.to (_value) + ' is coerced to ' + Uize.Json.to (_expectedValue) +
+						'The value ' + Uize.Json.to (_value) + ' is coerced to ' + Uize.Json.to (_expectedValue) +
 						' (' +
 							'wrapped with object = ' + _wrapValueWithObject + ', ' +
 							'wrapped with function = ' + _wrapValueWithFunction +
@@ -135,7 +135,7 @@ Uize.module ({
 				};
 			}
 			return {
-				title:'Test coercion of value to number',
+				title:'Various types of values are coerced to number',
 				test:[
 					_toNumberTest (42,42),
 					_toNumberTest (Infinity,Infinity),
@@ -159,53 +159,53 @@ Uize.module ({
 
 		function _returnXTest (_functionGenerator) {
 			return {
-				title:'Test that the function always returns the value of its first argument, unmodified',
+				title:'The function always returns the value of its first argument, unmodified',
 				test:[
 					{
-						title:'Test that calling with no parameters returns undefined',
+						title:'Calling with no parameters returns undefined',
 						test:function () {
 							return this.expect (undefined,_functionGenerator () ());
 						}
 					},
 					{
-						title:'Test that calling with the value undefined returns the value undefined',
+						title:'Calling with the value undefined returns the value undefined',
 						test:function () {
 							return this.expect (undefined,_functionGenerator () (undefined));
 						}
 					},
 					{
-						title:'Test that calling with the value null returns the value null',
+						title:'Calling with the value null returns the value null',
 						test:function () {
 							return this.expect (null,_functionGenerator () (null));
 						}
 					},
 					{
-						title:'Test that calling with a number value returns that same number value',
+						title:'Calling with a number value returns that same number value',
 						test:function () {
 							return this.expect (42,_functionGenerator () (42));
 						}
 					},
 					{
-						title:'Test that calling with a boolean value returns that same boolean value',
+						title:'Calling with a boolean value returns that same boolean value',
 						test:function () {
 							return this.expect (false,_functionGenerator () (false));
 						}
 					},
 					{
-						title:'Test that calling with a string value returns that same string value',
+						title:'Calling with a string value returns that same string value',
 						test:function () {
 							return this.expect ('foo',_functionGenerator () ('foo'));
 						}
 					},
 					{
-						title:'Test that calling with a function value returns that same function value',
+						title:'Calling with a function value returns that same function value',
 						test:function () {
 							function _function () {}
 							return this.expectSameAs (_function,_functionGenerator () (_function));
 						}
 					},
 					{
-						title:'Test that calling with an array value returns that same array, unmodified',
+						title:'Calling with an array value returns that same array, unmodified',
 						test:function () {
 							var _array = ['foo','bar'];
 							return (
@@ -215,7 +215,7 @@ Uize.module ({
 						}
 					},
 					{
-						title:'Test that calling with an object value returns that same object, unmodified',
+						title:'Calling with an object value returns that same object, unmodified',
 						test:function () {
 							var _object = {foo:'bar'};
 							return (
@@ -225,7 +225,7 @@ Uize.module ({
 						}
 					},
 					{
-						title:'Test that calling with a regular expression value returns that same regular expression value',
+						title:'Calling with a regular expression value returns that same regular expression value',
 						test:function () {
 							var _regExp = /^\d+$/;
 							return (
@@ -245,17 +245,17 @@ Uize.module ({
 			;
 			function _inputValueTest (_inputValue,_inputValueName) {
 				return {
-					title:'Test that calling with ' + _inputValueName + ' returns the result ' + _expectedReturnValue,
+					title:'Calling with ' + _inputValueName + ' returns the result ' + _expectedReturnValue,
 					test:function () {
 						return this.expect (_expectedReturnValue,_function (_inputValueName));
 					}
 				};
 			}
 			return {
-				title:'Test that the method always returns the value ' + _expectedReturnValue + ', regardless of its input',
+				title:'The method always returns the value ' + _expectedReturnValue + ', regardless of its input',
 				test:[
 					{
-						title:'Test that calling with no parameters returns ' + _expectedReturnValue,
+						title:'Calling with no parameters returns ' + _expectedReturnValue,
 						test:function () {return this.expect (_expectedReturnValue,_function ())}
 					},
 					_inputValueTest (undefined,'undefined'),
@@ -294,10 +294,10 @@ Uize.module ({
 				_target = _host [_methodName].apply (_host,_arguments);
 			}
 			return Uize.Test.resolve ({
-				title:'Test that the targetARRAYorBOOL parameter is handled correctly for various types of values',
+				title:'The targetARRAYorBOOL parameter is handled correctly for various types of values',
 				test:[
 					{
-						title:'Test that specifying the value false for the optional targetARRAYorBOOL parameter is handled correctly',
+						title:'Specifying the value false for the optional targetARRAYorBOOL parameter is handled correctly',
 						test:function () {
 							_callMethodWithTargetArgumentValue (false);
 							return (
@@ -307,7 +307,7 @@ Uize.module ({
 						}
 					},
 					{
-						title:'Test that specifying the value true for the optional targetARRAYorBOOL parameter is handled correctly',
+						title:'Specifying the value true for the optional targetARRAYorBOOL parameter is handled correctly',
 						test:function () {
 							_callMethodWithTargetArgumentValue (true);
 							return (
@@ -317,7 +317,7 @@ Uize.module ({
 						}
 					},
 					{
-						title:'Test that specifying an empty array for the optional targetARRAYorBOOL parameter is handled correctly',
+						title:'Specifying an empty array for the optional targetARRAYorBOOL parameter is handled correctly',
 						test:function () {
 							_callMethodWithTargetArgumentValue ([]);
 							return (
@@ -327,7 +327,7 @@ Uize.module ({
 						}
 					},
 					{
-						title:'Test that specifying an array that is already populated with more elements for the optional targetARRAYorBOOL parameter is handled correctly',
+						title:'Specifying an array that is already populated with more elements for the optional targetARRAYorBOOL parameter is handled correctly',
 						test:function () {
 							var _someExtraCrud = ['some','extra','crud'];
 							_callMethodWithTargetArgumentValue (_sourceArrayContents.concat (_someExtraCrud));
@@ -338,7 +338,7 @@ Uize.module ({
 						}
 					},
 					{
-						title:'Test that specifying an array that is already populated, but with the same number of elements, for the optional targetARRAYorBOOL parameter is handled correctly',
+						title:'Specifying an array that is already populated, but with the same number of elements, for the optional targetARRAYorBOOL parameter is handled correctly',
 						test:function () {
 							_callMethodWithTargetArgumentValue (_sourceArrayContents.concat ());
 							return (
@@ -348,7 +348,7 @@ Uize.module ({
 						}
 					},
 					{
-						title:'Test that specifying the source array for the optional targetARRAYorBOOL parameter is handled correctly',
+						title:'Specifying the source array for the optional targetARRAYorBOOL parameter is handled correctly',
 						test:function () {
 							_callMethodWithTargetArgumentValue ();
 							return (
@@ -358,7 +358,7 @@ Uize.module ({
 						}
 					},
 					{
-						title:'Test that specifying an empty object for the optional targetARRAYorBOOL parameter is handled correctly',
+						title:'Specifying an empty object for the optional targetARRAYorBOOL parameter is handled correctly',
 						test:function () {
 							_callMethodWithTargetArgumentValue ({});
 							return (
@@ -368,7 +368,7 @@ Uize.module ({
 						}
 					},
 					{
-						title:'Test that specifying an object that already has some properties for the optional targetARRAYorBOOL parameter is handled correctly',
+						title:'Specifying an object that already has some properties for the optional targetARRAYorBOOL parameter is handled correctly',
 						test:function () {
 							var _someExtraCrud = {some:1,extra:1,crud:1};
 							_callMethodWithTargetArgumentValue (Uize.copy (_someExtraCrud));
@@ -388,7 +388,7 @@ Uize.module ({
 				Uize.Test.staticMethodsTest ([
 					['Uize.noNew',[
 						{
-							title:'Test that this method returns a wrapper object constructor that is not the same as the wrapped object constructor',
+							title:'A wrapper object constructor is returned that is not the same as the wrapped object constructor',
 							test:function () {
 								var
 									_wrappedConstructor = function () {},
@@ -401,7 +401,7 @@ Uize.module ({
 							}
 						},
 						{
-							title:'Test that calling the wrapper object constructor results in the wrapped object constructor being called once',
+							title:'Calling the wrapper object constructor results in the wrapped object constructor being called once',
 							test:function () {
 								var
 									_timesWrappedConstructorCalled = 0,
@@ -413,7 +413,7 @@ Uize.module ({
 							}
 						},
 						{
-							title:'Test that, when the wrapper object constructor is called using the new operator, an instance of the wrapper object is successfully created',
+							title:'When the wrapper object constructor is called using the new operator, an instance of the wrapper object is successfully created',
 							test:function () {
 								var
 									_wrappedConstructor = function () {},
@@ -424,7 +424,7 @@ Uize.module ({
 							}
 						},
 						{
-							title:'Test that, when the wrapper object constructor is called without using the new operator, an instance of the wrapper object is successfully created',
+							title:'When the wrapper object constructor is called without using the new operator, an instance of the wrapper object is successfully created',
 							test:function () {
 								var
 									_wrappedConstructor = function () {},
@@ -435,7 +435,7 @@ Uize.module ({
 							}
 						},
 						{
-							title:'Test that, when the wrapper object constructor is called with a context of undefined, an instance of the wrapper object is created',
+							title:'When the wrapper object constructor is called with a context of undefined, an instance of the wrapper object is created',
 							test:function () {
 								var
 									_wrappedConstructor = function () {},
@@ -446,7 +446,7 @@ Uize.module ({
 							}
 						},
 						{
-							title:'Test that, when the wrapper object constructor is called with a context of null, an instance of the wrapper object is created',
+							title:'When the wrapper object constructor is called with a context of null, an instance of the wrapper object is created',
 							test:function () {
 								var
 									_wrappedConstructor = function () {},
@@ -457,7 +457,7 @@ Uize.module ({
 							}
 						},
 						{
-							title:'Test that the wrapped object constructor is called as a method on the same instance as is returned by the wrapper object constructor',
+							title:'The wrapped object constructor is called as a method on the same instance as is returned by the wrapper object constructor',
 							test:function () {
 								var
 									_instanceSeenByWrappedConstructor,
@@ -472,7 +472,7 @@ Uize.module ({
 							}
 						},
 						{
-							title:'Test that, when the wrapper object constructor is called as a method on an instance of the wrapper object constructor, the wrapped object constructor is called as a method on that same instance, and that same instance is returned',
+							title:'When the wrapper object constructor is called as a method on an instance of the wrapper object constructor, the wrapped object constructor is called as a method on that same instance, and that same instance is returned',
 							test:function () {
 								var
 									_instanceSeenByWrappedConstructor,
@@ -488,7 +488,7 @@ Uize.module ({
 							}
 						},
 						{
-							title:'Test that, when the wrapper object constructor is called as a method on an instance of an object other than the wrapper object, an instance of the wrapper object is created',
+							title:'When the wrapper object constructor is called as a method on an instance of an object other than the wrapper object, an instance of the wrapper object is created',
 							test:function () {
 								var
 									_wrappedConstructor = function () {},
@@ -499,7 +499,7 @@ Uize.module ({
 							}
 						},
 						{
-							title:'Test that arguments supplied to the wrapper object constructor when creating an instance are supplied also to the wrapped object constructor',
+							title:'The arguments supplied to the wrapper object constructor when creating an instance are supplied also to the wrapped object constructor',
 							test:function () {
 								var
 									_argumentsSuppliedToWrapper = ['foo','bar'],
@@ -512,7 +512,7 @@ Uize.module ({
 							}
 						},
 						{
-							title:'Test that, when two different wrapper object constructors are created for two different wrapped object constructors, there is no cross contamination of static and instance methods between the wrapper object constructors',
+							title:'When two different wrapper object constructors are created for two different wrapped object constructors, there is no cross contamination of static and instance methods between the wrapper object constructors',
 							test:function () {
 								var
 									_wrappedConstructorA = function () {},
@@ -537,7 +537,7 @@ Uize.module ({
 							}
 						},
 						{
-							title:'Test that properties of the wrapped object constructor are not transferred to the wrapper object constructor',
+							title:'The properties of the wrapped object constructor are not transferred to the wrapper object constructor',
 							test:function () {
 								var _wrappedConstructor = function () {};
 								_wrappedConstructor.staticMethod = function () {};
@@ -561,101 +561,101 @@ Uize.module ({
 						['Empty string','','']
 					]],
 					['Uize.constrain',[
-						['Test that constraining a value that is lower than the lower limit returns the lower limit',
+						['When the value is lower than the lower limit of the range, then the lower limit is returned',
 							[-20,-10,10],
 							-10
 						],
-						['Test that constraining a value that is equal to the lower limit returns that value',
+						['When the value is equal to the lower limit of the range, then the lower limit is returned',
 							[-10,-10,10],
 							-10
 						],
-						['Test that constraining a value that is higher than the upper limit returns the upper limit',
+						['When the value is higher than the upper limit of the range, then the upper limit is returned',
 							[20,-10,10],
 							10
 						],
-						['Test that constraining a value that is equal to the upper limit returns that value',
+						['When the value is equal to the upper limit of the range, then the upper limit is returned',
 							[10,-10,10],
 							10
 						],
-						['Test that constraining value that is within the range simply returns that value',
+						['When the value is between the lower and upper limits of the range, then the value is returned',
 							[1,-10,10],
 							1
 						],
-						['Test that, when the range is reversed, constraining a value that is lower than the lower limit returns the lower limit',
+						['When the range is reversed, constraining a value that is lower than the lower limit returns the lower limit',
 							[-20,10,-10],
 							-10
 						],
-						['Test that, when the range is reversed, constraining a value that is equal to the lower limit returns that value',
+						['When the range is reversed, constraining a value that is equal to the lower limit returns that value',
 							[-10,10,-10],
 							-10
 						],
-						['Test that, when the range is reversed, constraining a value that is higher than the upper limit returns the upper limit',
+						['When the range is reversed, constraining a value that is higher than the upper limit returns the upper limit',
 							[20,10,-10],
 							10
 						],
-						['Test that, when the range is reversed, constraining a value that is equal to the upper limit returns that value',
+						['When the range is reversed, constraining a value that is equal to the upper limit returns that value',
 							[10,10,-10],
 							10
 						],
-						['Test that, when the range is reversed, constraining value that is within the range simply returns that value',
+						['When the range is reversed, constraining value that is within the range simply returns that value',
 							[1,10,-10],
 							1
 						],
-						['Test that, when the lower limit and the upper limit are equal, constraining a value that is lower than the lower limit returns the lower limit',
+						['When the lower limit and the upper limit are equal, constraining a value that is lower than the lower limit returns the lower limit',
 							[5,10,10],
 							10
 						],
-						['Test that, when the lower limit and the upper limit are equal, constraining a value that is higher than the upper limit returns the upper limit',
+						['When the lower limit and the upper limit are equal, constraining a value that is higher than the upper limit returns the upper limit',
 							[15,10,10],
 							10
 						]
 					]],
 					['Uize.inRange',[
-						['Test that a number that is lower than the lower bound of a range is not considered in range',
+						['A number that is lower than the lower bound of a range is not considered in range',
 							[-50,100,0],
 							false
 						],
-						['Test that a number that is at the lower bound of a range is considered in range',
+						['A number that is at the lower bound of a range is considered in range',
 							[0,100,0],
 							true
 						],
-						['Test that a number that is between the lower and upper bounds of a range is considered in range',
+						['A number that is between the lower and upper bounds of a range is considered in range',
 							[50,100,0],
 							true
 						],
-						['Test that a number that is at the upper bound of a range is considered in range',
+						['A number that is at the upper bound of a range is considered in range',
 							[100,100,0],
 							true
 						],
-						['Test that a number that is higher than the upper bound of a range is not considered in range',
+						['A number that is higher than the upper bound of a range is not considered in range',
 							[150,100,0],
 							false
 						],
 
 						/*** test support for date values ***/
-							['Test that a date that falls before the lower bound of a date range is not considered in range',
+							['A date that falls before the lower bound of a date range is not considered in range',
 								[new Date ('01/01/1999'),new Date ('01/01/2000'),new Date ('01/01/2010')],
 								false
 							],
-							['Test that a date that is at the lower bound of a date range is considered in range',
+							['A date that is at the lower bound of a date range is considered in range',
 								[new Date ('01/01/2000'),new Date ('01/01/2000'),new Date ('01/01/2010')],
 								true
 							],
-							['Test that a date that is between the lower and upper bounds of a date range is considered in range',
+							['A date that is between the lower and upper bounds of a date range is considered in range',
 								[new Date ('01/01/2005'),new Date ('01/01/2000'),new Date ('01/01/2010')],
 								true
 							],
-							['Test that a date that is at the upper bound of a date range is considered in range',
+							['A date that is at the upper bound of a date range is considered in range',
 								[new Date ('01/01/2010'),new Date ('01/01/2000'),new Date ('01/01/2010')],
 								true
 							],
-							['Test that a date that falls after the upper bound of a date range is not considered in range',
+							['A date that falls after the upper bound of a date range is not considered in range',
 								[new Date ('01/01/2011'),new Date ('01/01/2000'),new Date ('01/01/2010')],
 								false
 							],
 
 						/*** test support for object's with valueOf implemented ***/
-							['Test that an object whose value is lower than the lower bound of a range is not considered in range',
+							['An object whose value is lower than the lower bound of a range is not considered in range',
 								[
 									Uize.Class.Value ({value:-50}),
 									Uize.Class.Value ({value:0}),
@@ -663,7 +663,7 @@ Uize.module ({
 								],
 								false
 							],
-							['Test that an object whose value is at the lower bound of a range is considered in range',
+							['An object whose value is at the lower bound of a range is considered in range',
 								[
 									Uize.Class.Value ({value:0}),
 									Uize.Class.Value ({value:0}),
@@ -671,7 +671,7 @@ Uize.module ({
 								],
 								true
 							],
-							['Test that an object whose value is between the lower and upper bounds of a range is considered in range',
+							['An object whose value is between the lower and upper bounds of a range is considered in range',
 								[
 									Uize.Class.Value ({value:50}),
 									Uize.Class.Value ({value:0}),
@@ -679,7 +679,7 @@ Uize.module ({
 								],
 								true
 							],
-							['Test that an object whose value is at the upper bound of a range is considered in range',
+							['An object whose value is at the upper bound of a range is considered in range',
 								[
 									Uize.Class.Value ({value:100}),
 									Uize.Class.Value ({value:0}),
@@ -687,7 +687,7 @@ Uize.module ({
 								],
 								true
 							],
-							['Test that an object whose value is higher than the upper bound of a range is not considered in range',
+							['An object whose value is higher than the upper bound of a range is not considered in range',
 								[
 									Uize.Class.Value ({value:150}),
 									Uize.Class.Value ({value:0}),
@@ -697,72 +697,72 @@ Uize.module ({
 							],
 
 						/*** test support for strings ***/
-							['Test that a string that falls before the lower bound of a string range is not considered in range',
+							['A string that falls before the lower bound of a string range is not considered in range',
 								['a','b','y'],
 								false
 							],
-							['Test that a string that is at the lower bound of a string range is considered in range',
+							['A string that is at the lower bound of a string range is considered in range',
 								['b','b','y'],
 								true
 							],
-							['Test that a string that is between the lower and upper bounds of a string range is considered in range',
+							['A string that is between the lower and upper bounds of a string range is considered in range',
 								['m','b','y'],
 								true
 							],
-							['Test that a string that is at the upper bound of a string range is considered in range',
+							['A string that is at the upper bound of a string range is considered in range',
 								['y','b','y'],
 								true
 							],
-							['Test that a string that falls after the upper bound of a string range is not considered in range',
+							['A string that falls after the upper bound of a string range is not considered in range',
 								['z','b','y'],
 								false
 							],
 
 						/*** test support for reversed range bounds ***/
-							['Test that, when the bounds of a range are reversed, a value that is lower than the lower bound of the range is not considered in range',
+							['When the bounds of a range are reversed, a value that is lower than the lower bound of the range is not considered in range',
 								[-50,100,0],
 								false
 							],
-							['Test that, when the bounds of a range are reversed, a value that is at the lower bound of the range is considered in range',
+							['When the bounds of a range are reversed, a value that is at the lower bound of the range is considered in range',
 								[0,100,0],
 								true
 							],
-							['Test that, when the bounds of a range are reversed, a value that is between the lower and upper bounds of the range is considered in range',
+							['When the bounds of a range are reversed, a value that is between the lower and upper bounds of the range is considered in range',
 								[50,100,0],
 								true
 							],
-							['Test that, when the bounds of a range are reversed, a value that is at the upper bound of the range is considered in range',
+							['When the bounds of a range are reversed, a value that is at the upper bound of the range is considered in range',
 								[100,100,0],
 								true
 							],
-							['Test that, when the bounds of a range are reversed, a value that is higher than the upper bound of the range is not considered in range',
+							['When the bounds of a range are reversed, a value that is higher than the upper bound of the range is not considered in range',
 								[150,100,0],
 								false
 							]
 					]],
 					['Uize.defaultNully',[
-						['Test that the value null is defaulted',[null,'foo'],'foo'],
-						['Test that the value undefined is defaulted',[undefined,'foo'],'foo'],
-						['Test that the boolean value false is not defaulted',[false,'foo'],false],
-						['Test that an empty string is not defaulted',['','foo'],''],
-						['Test that the number value 0 is not defaulted',[0,'foo'],0],
-						['Test that the special value NaN is not defaulted',[NaN,'foo'],NaN],
+						['The value null is defaulted',[null,'foo'],'foo'],
+						['The value undefined is defaulted',[undefined,'foo'],'foo'],
+						['The boolean value false is not defaulted',[false,'foo'],false],
+						['An empty string is not defaulted',['','foo'],''],
+						['The number value 0 is not defaulted',[0,'foo'],0],
+						['The special value NaN is not defaulted',[NaN,'foo'],NaN],
 						{
-							title:'Test that an object type value is not defaulted',
+							title:'An object type value is not defaulted',
 							test:function () {
 								var _object = {};
 								return this.expectSameAs (_object,Uize.defaultNully (_object,'foo'));
 							}
 						},
 						{
-							title:'Test that an array type value is not defaulted',
+							title:'An array type value is not defaulted',
 							test:function () {
 								var _array = [];
 								return this.expectSameAs (_array,Uize.defaultNully (_array,'foo'));
 							}
 						},
 						{
-							title:'Test that a function type value is not defaulted',
+							title:'A function type value is not defaulted',
 							test:function () {
 								var _function = Uize.nop;
 								return this.expectSameAs (_function,Uize.defaultNully (_function,'foo'));
@@ -770,56 +770,56 @@ Uize.module ({
 						}
 					]],
 					['Uize.isArray',[
-						['Test that calling with no parameters returns false',[],false],
-						['Test that the value undefined is not regarded as an array',undefined,false],
-						['Test that the value null is not regarded as an array',null,false],
-						['Test that a string type value is not regarded as an array','hello',false],
-						['Test that a String object instance is not regarded as an array',new String ('hello'),false],
-						['Test that a number type value is not regarded as an array',5,false],
-						['Test that a Number object instance is not regarded as an array',new Number (5),false],
-						['Test that a boolean type value is not regarded as an array',true,false],
-						['Test that a Boolean object instance is not regarded as an array',new Boolean (true),false],
-						['Test that an empty object is not regarded as an array',{},false],
-						['Test that a function is not regarded as an array',Uize.nop,false],
-						['Test that a regular expression instance is not regarded as an array',/\d+/,false],
-						['Test that an empty array is regarded as an array',[[]],true],
-						['Test that an array with elements is regarded as an array',[[1,2,3,4]],true]
+						['Calling with no parameters returns false',[],false],
+						['The value undefined is not regarded as an array',undefined,false],
+						['The value null is not regarded as an array',null,false],
+						['A string type value is not regarded as an array','hello',false],
+						['A String object instance is not regarded as an array',new String ('hello'),false],
+						['A number type value is not regarded as an array',5,false],
+						['A Number object instance is not regarded as an array',new Number (5),false],
+						['A boolean type value is not regarded as an array',true,false],
+						['A Boolean object instance is not regarded as an array',new Boolean (true),false],
+						['An empty object is not regarded as an array',{},false],
+						['A function is not regarded as an array',Uize.nop,false],
+						['A regular expression instance is not regarded as an array',/\d+/,false],
+						['An empty array is regarded as an array',[[]],true],
+						['An array with elements is regarded as an array',[[1,2,3,4]],true]
 					]],
 					['Uize.isList',[
 						/*** test values that should be considered to be list ***/
-							['Test that an empty JavaScript array is considered to be a list',
+							['An empty JavaScript array is considered to be a list',
 								[[]],
 								true
 							],
-							['Test that a JavaScript array with elements is considered to be a list',
+							['A JavaScript array with elements is considered to be a list',
 								[['foo','bar','hello','world']],
 								true
 							],
 							{
-								title:'Test that JavaScript\'s special arguments variable inside functions is considered to be a list',
+								title:'JavaScript\'s special arguments variable inside functions is considered to be a list',
 								test:function () {
 									return this.expect (true,Uize.isList (arguments));
 								}
 							},
-							['Test that an object with length property that is a number is considered to be a list',
+							['An object with length property that is a number is considered to be a list',
 								[_arrayToListObject (['foo','bar','hello','world'])],
 								true
 							],
 
 						/*** test values that should not be considered to be list ***/
-							['Test that a number is not considered to be a list',42,false],
-							['Test that a boolean is not considered to be a list',true,false],
-							['Test that a string is not considered to be a list','foo',false],
-							['Test that the value null is not considered to be a list',null,false],
-							['Test that the value undefined is not considered to be a list',null,false],
-							['Test that a regular expression is not considered to be a list',/\d+/,false],
-							['Test that a function is not considered to be a list',function () {},false],
-							['Test that an object that has no length property is not considered to be a list',
+							['A number is not considered to be a list',42,false],
+							['A boolean is not considered to be a list',true,false],
+							['A string is not considered to be a list','foo',false],
+							['The value null is not considered to be a list',null,false],
+							['The value undefined is not considered to be a list',null,false],
+							['A regular expression is not considered to be a list',/\d+/,false],
+							['A function is not considered to be a list',function () {},false],
+							['An object that has no length property is not considered to be a list',
 								[{0:'foo',1:'bar'}],
 								false
 							],
 							{
-								title:'Test that an object that has a length property that is not a number is not considered to be a list',
+								title:'An object that has a length property that is not a number is not considered to be a list',
 								test:function () {
 									var _object = {0:'foo',1:'bar'};
 									_object.length = '2';
@@ -828,175 +828,175 @@ Uize.module ({
 							}
 					]],
 					['Uize.isArguments',[
-						['Test that a non-empty arguments list object is correctly considered to be an arguments object',
+						['A non-empty arguments list object is considered to be an arguments object',
 							[(function () {return arguments}) ('foo','bar')],
 							true
 						],
-						['Test that an empty arguments list object is correctly considered to be an arguments object',
+						['An empty arguments list object is considered to be an arguments object',
 							[(function () {return arguments}) ()],
 							true
 						],
-						['Test that a regular array is not considered to be an arguments object',
+						['A regular array is not considered to be an arguments object',
 							[['foo','bar']],
 							false
 						],
-						['Test that a listy object is not considered to be an arguments object',
+						['A listy object is not considered to be an arguments object',
 							{0:'foo',1:'bar',length:2},
 							false
 						],
-						['Test that a non-listy object is not considered to be an arguments object',
+						['A non-listy object is not considered to be an arguments object',
 							{foo:'bar'},
 							false
 						],
-						['Test that a function is not considered to be an arguments object',
+						['A function is not considered to be an arguments object',
 							function () {},
 							false
 						],
-						['Test that a regular expression is not considered to be an arguments object',
+						['A regular expression is not considered to be an arguments object',
 							/foo/gi,
 							false
 						],
-						['Test that a string value is not considered to be an arguments object',
+						['A string value is not considered to be an arguments object',
 							'foo',
 							false
 						],
-						['Test that a boolean value is not considered to be an arguments object',
+						['A boolean value is not considered to be an arguments object',
 							true,
 							false
 						],
-						['Test that a number value is not considered to be an arguments object',
+						['A number value is not considered to be an arguments object',
 							42,
 							false
 						],
-						['Test that the value undefined is not considered to be an arguments object',
+						['The value undefined is not considered to be an arguments object',
 							undefined,
 							false
 						],
-						['Test that the value null is not considered to be an arguments object',
+						['The value null is not considered to be an arguments object',
 							null,
 							false
 						]
 					]],
 					['Uize.isNumber',[
-						['Test that calling with no parameters returns false',[],false],
-						['Test that the value undefined is not regarded as a number',undefined,false],
-						['Test that the value null is not regarded as a number',null,false],
-						['Test that a number format string type value is not regarded as a number','5',false],
-						['Test that a number format String object instance is not regarded as a number',new String ('5'),false],
-						['Test that a boolean type value is not regarded as a number',true,false],
-						['Test that a Boolean object instance is not regarded as a number',new Boolean (true),false],
-						['Test that an object is not regarded as a number',{},false],
-						['Test that an array is not regarded as a number',[[]],false],
-						['Test that a function is not regarded as a number',Uize.nop,false],
-						['Test that a regular expression instance is not regarded as a number',/\d+/,false],
-						['Test that a number type value is regarded as a number',5,true],
-						['Test that the special value Infinity is regarded as a number',Infinity,true],
-						['Test that the special value -Infinity is regarded as a number',-Infinity,true],
-						['Test that the special value NaN is not regarded as a number',NaN,false],
-						['Test that a Number object instance is not regarded as a number',new Number (5),false]
+						['Calling with no parameters returns false',[],false],
+						['The value undefined is not regarded as a number',undefined,false],
+						['The value null is not regarded as a number',null,false],
+						['A number format string type value is not regarded as a number','5',false],
+						['A number format String object instance is not regarded as a number',new String ('5'),false],
+						['A boolean type value is not regarded as a number',true,false],
+						['A Boolean object instance is not regarded as a number',new Boolean (true),false],
+						['An object is not regarded as a number',{},false],
+						['An array is not regarded as a number',[[]],false],
+						['A function is not regarded as a number',Uize.nop,false],
+						['A regular expression instance is not regarded as a number',/\d+/,false],
+						['A number type value is regarded as a number',5,true],
+						['The special value Infinity is regarded as a number',Infinity,true],
+						['The special value -Infinity is regarded as a number',-Infinity,true],
+						['The special value NaN is not regarded as a number',NaN,false],
+						['A Number object instance is not regarded as a number',new Number (5),false]
 					]],
 					['Uize.isString',[
-						['Test that calling with no parameters returns false',[],false],
-						['Test that the value undefined is not regarded as a string',undefined,false],
-						['Test that the value null is not regarded as a string',null,false],
-						['Test that a boolean type value is not regarded as a string',true,false],
-						['Test that a Boolean object instance is not regarded as a string',new Boolean (true),false],
-						['Test that an object is not regarded as a string',{},false],
-						['Test that an array is not regarded as a string',[[]],false],
-						['Test that a function is not regarded as a string',Uize.nop,false],
-						['Test that a regular expression instance is not regarded as a string',/\d+/,false],
-						['Test that a non-empty string value is regarded as a string','foo',true],
-						['Test that an empty string value is regarded as a string','',true],
-						['Test that a String object instance is not regarded as a string',new String ('foo'),false]
+						['Calling with no parameters returns false',[],false],
+						['The value undefined is not regarded as a string',undefined,false],
+						['The value null is not regarded as a string',null,false],
+						['A boolean type value is not regarded as a string',true,false],
+						['A Boolean object instance is not regarded as a string',new Boolean (true),false],
+						['An object is not regarded as a string',{},false],
+						['An array is not regarded as a string',[[]],false],
+						['A function is not regarded as a string',Uize.nop,false],
+						['A regular expression instance is not regarded as a string',/\d+/,false],
+						['A non-empty string value is regarded as a string','foo',true],
+						['An empty string value is regarded as a string','',true],
+						['A String object instance is not regarded as a string',new String ('foo'),false]
 					]],
 					['Uize.isBoolean',[
-						['Test that calling with no parameters returns false',[],false],
-						['Test that the value undefined is not regarded as a boolean',undefined,false],
-						['Test that the value null is not regarded as a boolean',null,false],
-						['Test that a string value is not regarded as a boolean','foo',false],
-						['Test that an object is not regarded as a boolean',{},false],
-						['Test that an array is not regarded as a boolean',[[]],false],
-						['Test that a function is not regarded as a boolean',Uize.nop,false],
-						['Test that a regular expression instance is not regarded as a boolean',/\d+/,false],
-						['Test that the boolean value false is regarded as a boolean',false,true],
-						['Test that the boolean value true is regarded as a boolean',true,true],
-						['Test that a Boolean object instance is not regarded as a boolean',new Boolean (true),false]
+						['Calling with no parameters returns false',[],false],
+						['The value undefined is not regarded as a boolean',undefined,false],
+						['The value null is not regarded as a boolean',null,false],
+						['A string value is not regarded as a boolean','foo',false],
+						['An object is not regarded as a boolean',{},false],
+						['An array is not regarded as a boolean',[[]],false],
+						['A function is not regarded as a boolean',Uize.nop,false],
+						['A regular expression instance is not regarded as a boolean',/\d+/,false],
+						['The boolean value false is regarded as a boolean',false,true],
+						['The boolean value true is regarded as a boolean',true,true],
+						['A Boolean object instance is not regarded as a boolean',new Boolean (true),false]
 					]],
 					['Uize.isFunction',[
-						['Test that calling with no parameters returns false',[],false],
-						['Test that the value undefined is not regarded as a function',undefined,false],
-						['Test that the value null is not regarded as a function',null,false],
-						['Test that a string value is not regarded as a function','foo',false],
-						['Test that a boolean value is not regarded as a function',true,false],
-						['Test that a number value is not regarded as a function',42,false],
-						['Test that an object is not regarded as a function',{},false],
-						['Test that an array is not regarded as a function',[[]],false],
-						['Test that a regular expression instance is not regarded as a function',/\d+/,false],
-						['Test that a function *is* regarded as a function',Uize.nop,true]
+						['Calling with no parameters returns false',[],false],
+						['The value undefined is not regarded as a function',undefined,false],
+						['The value null is not regarded as a function',null,false],
+						['A string value is not regarded as a function','foo',false],
+						['A boolean value is not regarded as a function',true,false],
+						['A number value is not regarded as a function',42,false],
+						['An object is not regarded as a function',{},false],
+						['An array is not regarded as a function',[[]],false],
+						['A regular expression instance is not regarded as a function',/\d+/,false],
+						['A function *is* regarded as a function',Uize.nop,true]
 					]],
 					['Uize.isNully',[
-						['Test that calling with no parameters returns true',[],true],
-						['Test that the value undefined is regarded as being nully',undefined,true],
-						['Test that the value null is regarded as being nully',null,true],
-						['Test that a string value is not regarded as being nully','',false],
-						['Test that a boolean value is not regarded as being nully',false,false],
-						['Test that a number value is not regarded as being nully',0,false],
-						['Test that the special value NaN is not regarded as being nully',NaN,false],
-						['Test that an object is not regarded as being nully',{},false],
-						['Test that an array is not regarded as being nully',[[]],false],
-						['Test that a function is not regarded as being nully',Uize.nop,false],
-						['Test that a regular expression instance is not regarded as being nully',/\d+/,false]
+						['Calling with no parameters returns true',[],true],
+						['The value undefined is regarded as being nully',undefined,true],
+						['The value null is regarded as being nully',null,true],
+						['A string value is not regarded as being nully','',false],
+						['A boolean value is not regarded as being nully',false,false],
+						['A number value is not regarded as being nully',0,false],
+						['The special value NaN is not regarded as being nully',NaN,false],
+						['An object is not regarded as being nully',{},false],
+						['An array is not regarded as being nully',[[]],false],
+						['A function is not regarded as being nully',Uize.nop,false],
+						['A regular expression instance is not regarded as being nully',/\d+/,false]
 					]],
 					['Uize.isObject',[
-						['Test that calling with no parameters returns false',[],false],
-						['Test that the value undefined is not regarded as being an object',undefined,false],
-						['Test that the value null is not regarded as being an object',null,false],
-						['Test that a string value is not regarded as being an object','foo',false],
-						['Test that a boolean value is not regarded as being an object',true,false],
-						['Test that a number value is not regarded as being an object',42,false],
-						['Test that the special value NaN is not regarded as being an object',NaN,false],
-						['Test that a function is not regarded as being an object',Uize.nop,false],
-						['Test that an object *is* regarded as being an object',{},true],
-						['Test that an array is regarded as being an object',[[]],true],
-						['Test that a regular expression instance is regarded as being an object',/\d+/,true],
-						['Test that a String object instance is regarded as being an object',new String (''),true],
-						['Test that a Boolean object instance is regarded as being an object',new Boolean (false),true],
-						['Test that a Number object instance is regarded as being an object',new Number (0),true]
+						['Calling with no parameters returns false',[],false],
+						['The value undefined is not regarded as being an object',undefined,false],
+						['The value null is not regarded as being an object',null,false],
+						['A string value is not regarded as being an object','foo',false],
+						['A boolean value is not regarded as being an object',true,false],
+						['A number value is not regarded as being an object',42,false],
+						['The special value NaN is not regarded as being an object',NaN,false],
+						['A function is not regarded as being an object',Uize.nop,false],
+						['An object *is* regarded as being an object',{},true],
+						['An array is regarded as being an object',[[]],true],
+						['A regular expression instance is regarded as being an object',/\d+/,true],
+						['A String object instance is regarded as being an object',new String (''),true],
+						['A Boolean object instance is regarded as being an object',new Boolean (false),true],
+						['A Number object instance is regarded as being an object',new Number (0),true]
 					]],
 					['Uize.canExtend',[
-						['Test that calling with no parameters returns false',[],false],
-						['Test that the value undefined is not regarded as being extendable',undefined,false],
-						['Test that the value null is not regarded as being extendable',null,false],
-						['Test that a string value is not regarded as being extendable','foo',false],
-						['Test that a boolean value is not regarded as being extendable',true,false],
-						['Test that a number value is not regarded as being extendable',42,false],
-						['Test that the special value NaN is not regarded as being extendable',NaN,false],
-						['Test that a function is regarded as being extendable',Uize.nop,true],
-						['Test that an object is regarded as being extendable',{},true],
-						['Test that an array is regarded as being extendable',[[]],true],
-						['Test that a regular expression instance is regarded as being extendable',/\d+/,true],
-						['Test that a String object instance is regarded as being extendable',new String (''),true],
-						['Test that a Boolean object instance is regarded as being extendable',new Boolean (false),true],
-						['Test that a Number object instance is regarded as being extendable',new Number (0),true]
+						['Calling with no parameters returns false',[],false],
+						['The value undefined is not regarded as being extendable',undefined,false],
+						['The value null is not regarded as being extendable',null,false],
+						['A string value is not regarded as being extendable','foo',false],
+						['A boolean value is not regarded as being extendable',true,false],
+						['A number value is not regarded as being extendable',42,false],
+						['The special value NaN is not regarded as being extendable',NaN,false],
+						['A function is regarded as being extendable',Uize.nop,true],
+						['An object is regarded as being extendable',{},true],
+						['An array is regarded as being extendable',[[]],true],
+						['A regular expression instance is regarded as being extendable',/\d+/,true],
+						['A String object instance is regarded as being extendable',new String (''),true],
+						['A Boolean object instance is regarded as being extendable',new Boolean (false),true],
+						['A Number object instance is regarded as being extendable',new Number (0),true]
 					]],
 					['Uize.isPlainObject',[
-						['Test that calling with no parameters returns false',[],false],
-						['Test that the value undefined is not regarded as being a plain object',undefined,false],
-						['Test that the value null is not regarded as being a plain object',null,false],
-						['Test that a string value is not regarded as being a plain object','foo',false],
-						['Test that a boolean value is not regarded as being a plain object',true,false],
-						['Test that a number value is not regarded as being a plain object',42,false],
-						['Test that the special value NaN is not regarded as being a plain object',NaN,false],
-						['Test that a function is not regarded as being a plain object',Uize.nop,false],
-						['Test that a plain object *is* regarded as being a plain object',{},true],
-						['Test that an array is not regarded as being a plain object',[[]],false],
-						['Test that a regular expression instance is not regarded as being a plain object',/\d+/,false],
-						['Test that a String object instance is not regarded as being a plain object',new String (''),false],
-						['Test that a Boolean object instance is not regarded as being a plain object',new Boolean (false),false],
-						['Test that a Number object instance is not regarded as being a plain object',new Number (0),false],
-						['Test that a Uize class instance is not regarded as being a plain object',Uize.Class (),false],
+						['Calling with no parameters returns false',[],false],
+						['The value undefined is not regarded as being a plain object',undefined,false],
+						['The value null is not regarded as being a plain object',null,false],
+						['A string value is not regarded as being a plain object','foo',false],
+						['A boolean value is not regarded as being a plain object',true,false],
+						['A number value is not regarded as being a plain object',42,false],
+						['The special value NaN is not regarded as being a plain object',NaN,false],
+						['A function is not regarded as being a plain object',Uize.nop,false],
+						['A plain object *is* regarded as being a plain object',{},true],
+						['An array is not regarded as being a plain object',[[]],false],
+						['A regular expression instance is not regarded as being a plain object',/\d+/,false],
+						['A String object instance is not regarded as being a plain object',new String (''),false],
+						['A Boolean object instance is not regarded as being a plain object',new Boolean (false),false],
+						['A Number object instance is not regarded as being a plain object',new Number (0),false],
+						['A Uize class instance is not regarded as being a plain object',Uize.Class (),false],
 						{
-							title:'Test that an object that doesn\'t have a hasOwnProperty method is not regarded as being a plain object',
+							title:'An object that doesn\'t have a hasOwnProperty method is not regarded as being a plain object',
 							test:function () {
 								function _TestObject () {}
 								_TestObject.prototype.hasOwnProperty = null;
@@ -1005,68 +1005,68 @@ Uize.module ({
 						}
 					]],
 					['Uize.isPrimitive',[
-						['Test that calling with no parameters returns false',[],false],
-						['Test that the value undefined is not regarded as being a primitive',undefined,false],
-						['Test that the value null is not regarded as being a primitive',null,false],
-						['Test that a string value is regarded as being a primitive','',true],
-						['Test that a boolean value is regarded as being a primitive',false,true],
-						['Test that a number value is regarded as being a primitive',0,true],
-						['Test that the special value NaN is regarded as being a primitive',NaN,true],
-						['Test that a function is not regarded as being a primitive',Uize.nop,false],
-						['Test that an object is not regarded as being a primitive',{},false],
-						['Test that an array is not regarded as being a primitive',[[]],false],
-						['Test that a regular expression instance is not regarded as being a primitive',/\d+/,false],
-						['Test that a String object instance is not regarded as being a primitive',new String ('foo'),false],
-						['Test that a Boolean object instance is not regarded as being a primitive',new Boolean (true),false],
-						['Test that a Number object instance is not regarded as being a primitive',new Number (42),false]
+						['Calling with no parameters returns false',[],false],
+						['The value undefined is not regarded as being a primitive',undefined,false],
+						['The value null is not regarded as being a primitive',null,false],
+						['A string value is regarded as being a primitive','',true],
+						['A boolean value is regarded as being a primitive',false,true],
+						['A number value is regarded as being a primitive',0,true],
+						['The special value NaN is regarded as being a primitive',NaN,true],
+						['A function is not regarded as being a primitive',Uize.nop,false],
+						['An object is not regarded as being a primitive',{},false],
+						['An array is not regarded as being a primitive',[[]],false],
+						['A regular expression instance is not regarded as being a primitive',/\d+/,false],
+						['A String object instance is not regarded as being a primitive',new String ('foo'),false],
+						['A Boolean object instance is not regarded as being a primitive',new Boolean (true),false],
+						['A Number object instance is not regarded as being a primitive',new Number (42),false]
 					]],
 					['Uize.isRegExp',[
-						['Test that calling with no parameters returns false',[],false],
-						['Test that the value undefined is not regarded as being a regular expression',undefined,false],
-						['Test that the value null is not regarded as being a regular expression',null,false],
-						['Test that a string value is not regarded as being a regular expression','foo',false],
-						['Test that a boolean value is not regarded as being a regular expression',true,false],
-						['Test that a number value is not regarded as being a regular expression',42,false],
-						['Test that a function is not regarded as being a regular expression',Uize.nop,false],
-						['Test that an object is not regarded as being a regular expression',{foo:'bar'},false],
-						['Test that an array is not regarded as being a regular expression',[['foo','bar']],false],
-						['Test that a regular expression instance is regarded as being a regular expression',/\d+/,true],
-						['Test that a regular expression instance created using the RegExp constructor is regarded as being a regular expression',
+						['Calling with no parameters returns false',[],false],
+						['The value undefined is not regarded as being a regular expression',undefined,false],
+						['The value null is not regarded as being a regular expression',null,false],
+						['A string value is not regarded as being a regular expression','foo',false],
+						['A boolean value is not regarded as being a regular expression',true,false],
+						['A number value is not regarded as being a regular expression',42,false],
+						['A function is not regarded as being a regular expression',Uize.nop,false],
+						['An object is not regarded as being a regular expression',{foo:'bar'},false],
+						['An array is not regarded as being a regular expression',[['foo','bar']],false],
+						['A regular expression instance is regarded as being a regular expression',/\d+/,true],
+						['A regular expression instance created using the RegExp constructor is regarded as being a regular expression',
 							new RegExp ('\\d+'),
 							true
 						],
-						['Test that an empty regular expression instance is regarded as being a regular expression',
+						['An empty regular expression instance is regarded as being a regular expression',
 							new RegExp (''),
 							true
 						]
 					]],
 					['Uize.isNaN',[
-						['Test that the value NaN is considered to be NaN',NaN,true],
-						['Test that a function is not considered to be NaN',function () {},false],
-						['Test that a Number object initialized with the value NaN is not considered to be NaN',
+						['The value NaN is considered to be NaN',NaN,true],
+						['A function is not considered to be NaN',function () {},false],
+						['A Number object initialized with the value NaN is not considered to be NaN',
 							new Number (NaN),
 							false
 						],
-						['Test that a Date object instance, even if set to an invalid date, is not considered to be NaN',
+						['A Date object instance, even if set to an invalid date, is not considered to be NaN',
 							new Date ('foo'),
 							false
 						],
-						['Test that undefined is not considered to be NaN',undefined,false],
-						['Test that null is not considered to be NaN',null,false],
-						['Test that an empty string is not considered to be NaN','',false],
-						['Test that a string value, even if it is not coercible to a number, is not considered to be NaN',
+						['The value undefined is not considered to be NaN',undefined,false],
+						['The value null is not considered to be NaN',null,false],
+						['An empty string is not considered to be NaN','',false],
+						['A string value, even if it is not coercible to a number, is not considered to be NaN',
 							'foo',
 							false
 						],
-						['Test that a number is not considered to be NaN',42,false],
-						['Test that a boolean value is not considered to be NaN',true,false],
-						['Test that an object is not considered to be NaN',{foo:'bar'},false],
-						['Test that an array is not considered to be NaN',[['foo','bar']],false]
+						['A number is not considered to be NaN',42,false],
+						['A boolean value is not considered to be NaN',true,false],
+						['An object is not considered to be NaN',{foo:'bar'},false],
+						['An array is not considered to be NaN',[['foo','bar']],false]
 					]],
 					['Uize.isSameAs',[
-						['Test that NaN is considered to be the same as NaN',[NaN,NaN],true],
+						['The value NaN is considered to be the same as NaN',[NaN,NaN],true],
 						{
-							title:'Test that only values that are equal in a strict equality are considered to be the same as one another',
+							title:'Only values that are equal in a strict equality are considered to be the same as one another',
 							test:function () {
 								var
 									_values = [
@@ -1100,32 +1100,32 @@ Uize.module ({
 					]],
 					['Uize.resolveTransformer',[
 						{
-							title:'Test that calling with no parameters produces a transformer function that always returns the value of its first argument',
+							title:'Calling with no parameters produces a transformer function that always returns the value of its first argument',
 							test:[
 								_returnXTest (function () {return Uize.resolveTransformer ()})
 							]
 						},
 						{
-							title:'Test that specifying the value undefined produces a transformer function that always returns the value of its first argument',
+							title:'Specifying the value undefined produces a transformer function that always returns the value of its first argument',
 							test:[
 								_returnXTest (function () {return Uize.resolveTransformer (undefined)})
 							]
 						},
 						{
-							title:'Test that specifying the value null produces a transformer function that always returns the value of its first argument',
+							title:'Specifying the value null produces a transformer function that always returns the value of its first argument',
 							test:[
 								_returnXTest (function () {return Uize.resolveTransformer (null)})
 							]
 						},
 						{
-							title:'Test that specifying a function type transformer results in that exact function being returned',
+							title:'Specifying a function type transformer results in that exact function being returned',
 							test:function () {
 								function _function () {}
 								return this.expectSameAs (_function,Uize.resolveTransformer (_function));
 							}
 						},
 						{
-							title:'Test that specifying a string type transformer results in a function being created using that transformer expression string as the function body and accepting value and key arguments',
+							title:'Specifying a string type transformer results in a function being created using that transformer expression string as the function body and accepting value and key arguments',
 							test:function () {
 								var _resolvedTransformer = Uize.resolveTransformer ('value + "|" + key');
 								return (
@@ -1135,7 +1135,7 @@ Uize.module ({
 							}
 						},
 						{
-							title:'Test that specifying a regular expression transformer results in a function being created that uses the regular expression to test the value parameter after it\'s been coerced to a string',
+							title:'Specifying a regular expression transformer results in a function being created that uses the regular expression to test the value parameter after it\'s been coerced to a string',
 							test:function () {
 								var _resolvedTransformer = Uize.resolveTransformer (/^42$/);
 								return (
@@ -1147,7 +1147,7 @@ Uize.module ({
 							}
 						},
 						{
-							title:'Test that specifying an object type transformer results in a function that uses the object transformer as a lookup for remapping the input value, leaving the input value unchanged if it is not found in the lookup',
+							title:'Specifying an object type transformer results in a function that uses the object transformer as a lookup for remapping the input value, leaving the input value unchanged if it is not found in the lookup',
 							test:function () {
 								var _resolvedTransformer = Uize.resolveTransformer ({
 									foo:'bar',
@@ -1162,7 +1162,7 @@ Uize.module ({
 							}
 						},
 						{
-							title:'Test that specifying a number type transformer results in a function being created that returns that exact number value as its result',
+							title:'Specifying a number type transformer results in a function being created that returns that exact number value as its result',
 							test:function () {
 								var _resolvedTransformer = Uize.resolveTransformer (42);
 								return (
@@ -1172,7 +1172,7 @@ Uize.module ({
 							}
 						},
 						{
-							title:'Test that specifying a boolean type transformer results in a function being created that returns that exact boolean value as its result',
+							title:'Specifying a boolean type transformer results in a function being created that returns that exact boolean value as its result',
 							test:function () {
 								var _resolvedTransformer = Uize.resolveTransformer (false);
 								return (
@@ -1184,32 +1184,32 @@ Uize.module ({
 					]],
 					['Uize.resolveMatcher',[
 						{
-							title:'Test that calling with no parameters produces a matcher function that always returns true',
+							title:'Calling with no parameters produces a matcher function that always returns true',
 							test:[
 								_returnsSpecificValueTest (function () {return Uize.resolveMatcher ()},true)
 							]
 						},
 						{
-							title:'Test that specifying the value undefined produces a matcher function that always returns true',
+							title:'Specifying the value undefined produces a matcher function that always returns true',
 							test:[
 								_returnsSpecificValueTest (function () {return Uize.resolveMatcher (undefined)},true)
 							]
 						},
 						{
-							title:'Test that specifying the value null produces a matcher function that always returns true',
+							title:'Specifying the value null produces a matcher function that always returns true',
 							test:[
 								_returnsSpecificValueTest (function () {return Uize.resolveMatcher (null)},true)
 							]
 						},
 						{
-							title:'Test that specifying a function type matcher results in that exact function being returned',
+							title:'Specifying a function type matcher results in that exact function being returned',
 							test:function () {
 								function _function () {}
 								return this.expectSameAs (_function,Uize.resolveMatcher (_function));
 							}
 						},
 						{
-							title:'Test that specifying a string type matcher results in a function being created using that matcher expression string as the function body and accepting value and key arguments',
+							title:'Specifying a string type matcher results in a function being created using that matcher expression string as the function body and accepting value and key arguments',
 							test:function () {
 								var _resolvedMatcher = Uize.resolveMatcher ('value + "|" + key');
 								return (
@@ -1219,7 +1219,7 @@ Uize.module ({
 							}
 						},
 						{
-							title:'Test that specifying a regular expression matcher results in a function being created that uses the regular expression to test the value parameter after it\'s been coerced to a string',
+							title:'Specifying a regular expression matcher results in a function being created that uses the regular expression to test the value parameter after it\'s been coerced to a string',
 							test:function () {
 								var _resolvedMatcher = Uize.resolveMatcher (/^42$/);
 								return (
@@ -1231,7 +1231,7 @@ Uize.module ({
 							}
 						},
 						{
-							title:'Test that specifying a boolean type matcher results in a function being created that returns that exact boolean value as its result',
+							title:'Specifying a boolean type matcher results in a function being created that returns that exact boolean value as its result',
 							test:function () {
 								var _resolvedMatcher = Uize.resolveMatcher (false);
 								return (
@@ -1242,17 +1242,17 @@ Uize.module ({
 						}
 					]],
 					['Uize.escapeRegExpLiteral',[
-						['Test that all of the regular expression special characters are escaped correctly',
+						['All of the regular expression special characters are escaped',
 							'^$|{}[]()?.*+\\',
 							'\\^\\$\\|\\{\\}\\[\\]\\(\\)\\?\\.\\*\\+\\\\'
 						],
-						['Test that characters that are not regular expression special characters are not escaped',
+						['Characters that are not regular expression special characters are not escaped',
 							'foobar,:;\'"~`<>/!@#%&_-=',
 							'foobar,:;\'"~`<>/!@#%&_-='
 						]
 					]],
 					['Uize.toNumber',[
-						['Test that calling with no parameters produces the result NaN',[],NaN],
+						['Calling with no parameters produces the result NaN',[],NaN],
 
 						/*** test coercion of value to number, not wrapped in object or function ***/
 							_toNumberTestBatch (false,false),
@@ -1267,61 +1267,61 @@ Uize.module ({
 							_toNumberTestBatch (true,true),
 
 						/*** test that the optional default value is returned if value can't be coerced to number ***/
-							['Test that the optional default value is returned when trying to coerce NaN to a number',
+							['The optional default value is returned when trying to coerce NaN to a number',
 								[NaN,42],
 								42
 							],
-							['Test that the optional default value is returned when trying to coerce an empty object to a number',
+							['The optional default value is returned when trying to coerce an empty object to a number',
 								[{},42],
 								42
 							],
-							['Test that the optional default value is returned when trying to coerce an array to a number',
+							['The optional default value is returned when trying to coerce an array to a number',
 								[[1],42],
 								42
 							],
-							['Test that the optional default value is returned when trying to coerce a regular expression to a number',
+							['The optional default value is returned when trying to coerce a regular expression to a number',
 								[/\d+/,42],
 								42
 							],
-							['Test that the optional default value is returned when trying to coerce an empty string to a number',
+							['The optional default value is returned when trying to coerce an empty string to a number',
 								['',42],
 								42
 							],
-							['Test that the optional default value is returned when a string can\'t be successfully coerced to a number',
+							['The optional default value is returned when a string can\'t be successfully coerced to a number',
 								['foo',42],
 								42
 							],
-							['Test that the optional default value is returned when trying to coerce undefined to a number',
+							['The optional default value is returned when trying to coerce undefined to a number',
 								[undefined,42],
 								42
 							],
-							['Test that the optional default value is returned when trying to coerce null to a number',
+							['The optional default value is returned when trying to coerce null to a number',
 								[null,42],
 								42
 							],
 
 						/*** test that the optional default value is not itself coerced to a number ***/
-							['Test that a string type default value is not coerced to a number',['foo','bar'],'bar'],
-							['Test that a boolean type default value is not coerced to a number',['foo',true],true],
-							['Test that the default value null is not coerced to a number',['foo',null],null],
-							['Test that the default value undefined is not coerced to a number',['foo',undefined],undefined],
-							['Test that the default value NaN is not coerced to a number',['foo',NaN],NaN],
+							['A string type default value is not coerced to a number',['foo','bar'],'bar'],
+							['A boolean type default value is not coerced to a number',['foo',true],true],
+							['The default value null is not coerced to a number',['foo',null],null],
+							['The default value undefined is not coerced to a number',['foo',undefined],undefined],
+							['The default value NaN is not coerced to a number',['foo',NaN],NaN],
 							{
-								title:'Test that an object type default value is not coerced to a number',
+								title:'An object type default value is not coerced to a number',
 								test:function () {
 									var _defaultValue = {};
 									return this.expectSameAs (Uize.toNumber ('foo',_defaultValue),_defaultValue);
 								}
 							},
 							{
-								title:'Test that an array type default value is not coerced to a number',
+								title:'An array type default value is not coerced to a number',
 								test:function () {
 									var _defaultValue = [];
 									return this.expectSameAs (Uize.toNumber ('foo',_defaultValue),_defaultValue);
 								}
 							},
 							{
-								title:'Test that a regular expression default value is not coerced to a number',
+								title:'A regular expression default value is not coerced to a number',
 								test:function () {
 									var _defaultValue = /\d+/;
 									return this.expectSameAs (Uize.toNumber ('foo',_defaultValue),_defaultValue);
@@ -1329,45 +1329,45 @@ Uize.module ({
 							},
 
 						/*** miscellaneous ***/
-							['Test that if the value is a function that returns a function, it cannot be coerced to a number',
+							['If the value is a function that returns a function, it cannot be coerced to a number',
 								[function () {return function () {return 5}},42],
 								42
 							],
-							['Test that if the value is an object whose valueOf method returns an object, it cannot be coerced to a number',
+							['If the value is an object whose valueOf method returns an object, it cannot be coerced to a number',
 								[{valueOf:function () {return {valueOf:function () {return 5}}}},42],
 								42
 							],
-							['Test that if the value is an object whose valueOf method returns a function, it cannot be coerced to a number',
+							['If the value is an object whose valueOf method returns a function, it cannot be coerced to a number',
 								[{valueOf:function () {return function () {}}},42],
 								42
 							]
 					]],
 					['Uize.copyInto',
 						[
-							['Test that calling with only a target object and no source object results in the target object being returned unchanged',
+							['Calling with only a target object and no source object results in the target object being returned unchanged',
 								{foo:'bar',hello:'world'},
 								{foo:'bar',hello:'world'}
 							],
-							['Test that specifying the value null for the source object results in the target object being returned unchanged',
+							['Specifying the value null for the source object results in the target object being returned unchanged',
 								[{foo:'bar',hello:'world'},null],
 								{foo:'bar',hello:'world'}
 							],
-							['Test that specifying the value undefined for the source object results in the target object being returned unchanged',
+							['Specifying the value undefined for the source object results in the target object being returned unchanged',
 								[{foo:'bar',hello:'world'},undefined],
 								{foo:'bar',hello:'world'}
 							],
-							['Test that copying a source object into a target object works correctly',
+							['A source object is copied into a target object',
 								[{foo:'foo',hello:'there',otherInTarget:'blah'},{foo:'bar',hello:'world',otherInSource:'yawn'}],
 								{foo:'bar',hello:'world',otherInTarget:'blah',otherInSource:'yawn'}
 							],
 							{
-								title:'Test that the target object is returned and not a new object',
+								title:'The target object is returned and not a new object',
 								test:function () {
 									var _target = {foo:'bar'};
 									return this.expectSameAs (_target,Uize.copyInto (_target,{hello:'world'}));
 								}
 							},
-							['Test that an arbitrary number of source objects is supported',
+							['There can be an arbitrary number of source objects',
 								[
 									{propFromTarget:'foo'},
 									{propFromSource1:'bar'},
@@ -1381,7 +1381,7 @@ Uize.module ({
 									propFromSource3:'world'
 								}
 							],
-							['Test that the contents of source objects are copied into the target in the order in which the source objects are specified',
+							['The contents of source objects are copied into the target in the order in which the source objects are specified',
 								[
 									{foo:'foo',otherInTarget:'blah'},
 									{foo:'bar',fancy:'pants'},
@@ -1390,22 +1390,22 @@ Uize.module ({
 								],
 								{foo:'bar',otherInTarget:'blah',fancy:'schmancy',la:'dolce vita',fin:'ished'}
 							],
-							['Test that specifying the value null or undefined for all of the source objects results in the target object being returned unchanged',
+							['Specifying the value null or undefined for all of the source objects results in the target object being returned unchanged',
 								[{foo:'bar',hello:'world'},null,undefined,undefined,null],
 								{foo:'bar',hello:'world'}
 							],
-							['Test that specifying the value null for the target object results in the value null being returned',
+							['Specifying the value null for the target object results in the value null being returned',
 								[null,{foo:'bar',hello:'world'}],
 								null
 							],
-							['Test that specifying the value undefined for the target object results in the value undefined being returned',
+							['Specifying the value undefined for the target object results in the value undefined being returned',
 								[undefined,{foo:'bar',hello:'world'}],
 								undefined
 							],
 
 							/*** test support for function target and sources ***/
 								{
-									title:'Test that the target can be a function, and that the properties from the sources will be copied in as custom properties of the function',
+									title:'When the target is a function, the properties from the sources are copied in as custom properties of the function',
 									test:function () {
 										var
 											_target = function () {},
@@ -1420,7 +1420,7 @@ Uize.module ({
 									}
 								},
 								{
-									title:'Test that any source can be a function that has custom properties, and that the properties from all such sources will be copied into the target',
+									title:'When any of the sources are functions, then any custom properties of those function type sources will be copied into the target',
 									test:function () {
 										var
 											_source1 = function () {},
@@ -1448,24 +1448,24 @@ Uize.module ({
 					],
 					['Uize.copy',
 						[
-							['Test that calling with no arguments results in an empty object being returned',
+							['Calling with no arguments results in an empty object being returned',
 								[],
 								{}
 							],
-							['Test that specifying the value null for the source object results in an empty object being returned',
+							['Specifying the value null for the source object results in an empty object being returned',
 								null,
 								{}
 							],
-							['Test that specifying the value undefined for the source object results in an empty object being returned',
+							['Specifying the value undefined for the source object results in an empty object being returned',
 								undefined,
 								{}
 							],
-							['Test that copying a source object works correctly',
+							['Copying a source object produces a copy of the source object',
 								{foo:'bar',hello:'world',otherInSource:'yawn'},
 								{foo:'bar',hello:'world',otherInSource:'yawn'}
 							],
 							{
-								title:'Test that a fresh object is returned and not the source object',
+								title:'A fresh object is returned and not the source object',
 								test:function () {
 									var
 										_source = {foo:'bar'},
@@ -1474,7 +1474,7 @@ Uize.module ({
 									return this.expect (_source,_copy) && _copy != _source;
 								}
 							},
-							['Test that an arbitrary number of source objects is supported',
+							['There can be an arbitrary number of source objects',
 								[
 									{propFromSource1:'bar'},
 									{propFromSource2:'hello'},
@@ -1486,7 +1486,7 @@ Uize.module ({
 									propFromSource3:'world'
 								}
 							],
-							['Test that the contents of source objects are copied into the fresh object in the order in which the source objects are specified',
+							['The contents of source objects are copied into the fresh object in the order in which the source objects are specified',
 								[
 									{foo:'bar',fancy:'pants'},
 									{fancy:'schmancy',la:'dee dah'},
@@ -1494,14 +1494,14 @@ Uize.module ({
 								],
 								{foo:'bar',fancy:'schmancy',la:'dolce vita',fin:'ished'}
 							],
-							['Test that specifying the value null or undefined for all of the source objects results in an empty object being returned',
+							['Specifying the value null or undefined for all of the source objects results in an empty object being returned',
 								[null,undefined,undefined,null],
 								{}
 							],
 
 							/*** test support for function sources ***/
 								{
-									title:'Test that any source can be a function that has custom properties, and that the properties from all such sources will be copied into the fresh object returned',
+									title:'When any of the sources are functions, then any custom properties of those function type sources will be copied into the fresh object returned',
 									test:function () {
 										var
 											_source1 = function () {},
@@ -1527,20 +1527,20 @@ Uize.module ({
 						{cloneArguments:true}
 					],
 					['Uize.copyList',[
-						['Test that an empty list object is copied correctly',
+						['When an empty list object is copied, an empty array is produced',
 							{length:0},
 							[]
 						],
-						['Test that a populated list object is copied correctly',
+						['When a populated list object is copied, an array containing the values in the list is produced',
 							{0:'foo',1:'bar',2:'baz',3:'qux',length:4},
 							['foo','bar','baz','qux']
 						],
-						['Test that a sparsely populated list object is copied correctly',
+						['When a sparsely populated list object is copied, an array containing undefined values for the missing elements is produced',
 							{0:'foo',3:'qux',length:4},
 							['foo',undefined,undefined,'qux']
 						],
 						{
-							title:'Test that a function\'s arguments object is copied correctly',
+							title:'When a function\'s arguments object is copied, an array containing the argument values is produced',
 							test:function () {
 								var _result;
 								function _variadicFunction () {
@@ -1551,7 +1551,7 @@ Uize.module ({
 							}
 						},
 						{
-							title:'Test that creating a copy of an array does not modify the source array',
+							title:'Creating a copy of an array does not modify the source array',
 							test:function () {
 								var _source = ['foo','bar','baz','qux'];
 								Uize.copyList (_source);
@@ -1559,17 +1559,17 @@ Uize.module ({
 							}
 						},
 						{
-							title:'Test that creating a copy of an array returns a fresh array and not the source array',
+							title:'Creating a copy of an array returns a fresh array and not the source array',
 							test:function () {
 								var _source = [];
 								return this.expect (true,Uize.copy (_source) != _source);
 							}
 						},
-						['Test that copying an empty array creates an empty array',
+						['Copying an empty array creates an empty array',
 							[[]],
 							[]
 						],
-						['Test that a copy of a populated source array contains the elements of the source array',
+						['A copy of a populated source array contains the elements of the source array',
 							[['foo','bar','baz','qux']],
 							['foo','bar','baz','qux']
 						]
@@ -1580,7 +1580,7 @@ Uize.module ({
 								title:'General tests',
 								test:[
 									{
-										title:'Test that a reference to the target is returned, when the target is an array',
+										title:'When the target is an array, then a reference to the target is returned',
 										test:function () {
 											var
 												_target = [],
@@ -1590,7 +1590,7 @@ Uize.module ({
 										}
 									},
 									{
-										title:'Test that a reference to the target is returned, when the target is a list object',
+										title:'When the target is a list object, then a reference to the target is returned',
 										test:function () {
 											var
 												_target = {length:0},
@@ -1600,7 +1600,7 @@ Uize.module ({
 										}
 									},
 									{
-										title:'Test that the source is not modified',
+										title:'The source is not modified',
 										test:function () {
 											var _source = ['foo','bar','baz','qux'];
 											Uize.push ([],_source);
@@ -1610,34 +1610,34 @@ Uize.module ({
 								]
 							},
 							{
-								title:'Test pushing onto a target array',
+								title:'Items can be pushed onto a target array',
 								test:[
-									['Test that pushing the elements of an empty list object onto a target array works correctly',
+									['The elements of an empty list object can be pushed onto a target array',
 										[['foo','bar'],{length:0}],
 										['foo','bar']
 									],
-									['Test that pushing the elements of a populated list object onto a target array works correctly',
+									['The elements of a populated list object can be pushed onto a target array',
 										[['foo','bar'],{0:'baz',1:'qux',length:2}],
 										['foo','bar','baz','qux']
 									],
-									['Test that pushing the elements of a sparsely populated list object onto a target array works correctly',
+									['The elements of a sparsely populated list object can be pushed onto a target array',
 										[['foo','bar'],{0:'baz',3:'qux',length:4}],
 										['foo','bar','baz',undefined,undefined,'qux']
 									],
-									['Test that pushing the elements of an empty array onto a target array works correctly',
+									['The elements of an empty array can be pushed onto a target array',
 										[['foo','bar'],[]],
 										['foo','bar']
 									],
-									['Test that pushing the elements of a populated array onto a target array works correctly',
+									['The elements of a populated array can be pushed onto a target array',
 										[['foo','bar'],['baz','qux']],
 										['foo','bar','baz','qux']
 									],
-									['Test that pushing the elements of a sparsely populated array onto a target array works correctly',
+									['The elements of a sparsely populated array can be pushed onto a target array',
 										[['foo','bar'],Uize.copyInto ([],{1:'baz',3:'qux'})],
 										['foo','bar',undefined,'baz',undefined,'qux']
 									],
 									{
-										title:'Test that pushing the elements of a function\'s arguments list object onto a target array works correctly',
+										title:'The elements of a function\'s arguments list object can be pushed onto a target array',
 										test:function () {
 											var _target = ['foo','bar'];
 											function _variadicFunction () {
@@ -1650,34 +1650,34 @@ Uize.module ({
 								]
 							},
 							{
-								title:'Test pushing onto a target list object',
+								title:'Items can be pushed onto a target list object',
 								test:[
-									['Test that pushing the elements of an empty list object onto a target list object works correctly',
+									['The elements of an empty list object can be pushed onto a target list object',
 										[{0:'foo',1:'bar',length:2},{length:0}],
 										{0:'foo',1:'bar',length:2}
 									],
-									['Test that pushing the elements of a populated list object onto a target list object works correctly',
+									['The elements of a populated list object can be pushed onto a target list object',
 										[{0:'foo',1:'bar',length:2},{0:'baz',1:'qux',length:2}],
 										{0:'foo',1:'bar',2:'baz',3:'qux',length:4}
 									],
-									['Test that pushing the elements of a sparsely populated list object onto a target list object works correctly',
+									['The elements of a sparsely populated list object can be pushed onto a target list object',
 										[{0:'foo',1:'bar',length:2},{1:'qux',length:2}],
 										{0:'foo',1:'bar',2:undefined,3:'qux',length:4}
 									],
-									['Test that pushing the elements of an empty array onto a target list object works correctly',
+									['The elements of an empty array can be pushed onto a target list object',
 										[{0:'foo',1:'bar',length:2},[]],
 										{0:'foo',1:'bar',length:2}
 									],
-									['Test that pushing the elements of a populated array onto a target list object works correctly',
+									['The elements of a populated array can be pushed onto a target list object',
 										[{0:'foo',1:'bar',length:2},['baz','qux']],
 										{0:'foo',1:'bar',2:'baz',3:'qux',length:4}
 									],
-									['Test that pushing the elements of a sparsely populated array onto a target list object works correctly',
+									['The elements of a sparsely populated array can be pushed onto a target list',
 										[{0:'foo',1:'bar',length:2},Uize.copyInto ([],{1:'baz',3:'qux'})],
 										{0:'foo',1:'bar',2:undefined,3:'baz',4:undefined,5:'qux',length:6}
 									],
 									{
-										title:'Test that pushing the elements of a function\'s arguments list object onto a target list object works correctly',
+										title:'The elements of a function\'s arguments list object can be pushed onto a target list object',
 										test:function () {
 											var _target = {0:'foo',1:'bar',length:2};
 											function _variadicFunction () {
@@ -1695,30 +1695,30 @@ Uize.module ({
 					],
 					['Uize.mergeInto',
 						[
-							['Test that calling with only a target object and no source object results in the target object being returned unchanged',
+							['Calling with only a target object and no source object results in the target object being returned unchanged',
 								{foo:'bar',hello:'world'},
 								{foo:'bar',hello:'world'}
 							],
-							['Test that specifying the value null for the source object results in the target object being returned unchanged',
+							['Specifying the value null for the source object results in the target object being returned unchanged',
 								[{foo:'bar',hello:'world'},null],
 								{foo:'bar',hello:'world'}
 							],
-							['Test that specifying the value undefined for the source object results in the target object being returned unchanged',
+							['Specifying the value undefined for the source object results in the target object being returned unchanged',
 								[{foo:'bar',hello:'world'},undefined],
 								{foo:'bar',hello:'world'}
 							],
-							['Test that merging a one level deep source object into a one level deep target object works correctly',
+							['A one level deep source object can be merged into a one level deep target object',
 								[{foo:'foo',hello:'there',otherInTarget:'blah'},{foo:'bar',hello:'world',otherInSource:'yawn'}],
 								{foo:'bar',hello:'world',otherInTarget:'blah',otherInSource:'yawn'}
 							],
 							{
-								title:'Test that the target object is returned and not a new object',
+								title:'The target object is returned and not a new object',
 								test:function () {
 									var _target = {foo:'bar'};
 									return this.expectSameAs (_target,Uize.mergeInto (_target,{hello:'world'}));
 								}
 							},
-							['Test that an arbitrary number of source objects is supported',
+							['There can be an arbitrary number of source objects',
 								[
 									{propFromTarget:'foo'},
 									{propFromSource1:'bar'},
@@ -1732,7 +1732,7 @@ Uize.module ({
 									propFromSource3:'world'
 								}
 							],
-							['Test that the contents of source objects are merged into the target in the order in which the source objects are specified',
+							['The contents of source objects are merged into the target in the order in which the source objects are specified',
 								[
 									{foo:'foo',otherInTarget:'blah'},
 									{foo:'bar',fancy:'pants'},
@@ -1741,20 +1741,20 @@ Uize.module ({
 								],
 								{foo:'bar',otherInTarget:'blah',fancy:'schmancy',la:'dolce vita',fin:'ished'}
 							],
-							['Test that specifying the value null or undefined for all of the source objects results in the target object being returned unchanged',
+							['Specifying the value null or undefined for all of the source objects results in the target object being returned unchanged',
 								[{foo:'bar',hello:'world'},null,undefined,undefined,null],
 								{foo:'bar',hello:'world'}
 							],
-							['Test that specifying the value null for the target object results in the value null being returned',
+							['Specifying the value null for the target object results in the value null being returned',
 								[null,{foo:'bar',hello:'world'}],
 								null
 							],
-							['Test that specifying the value undefined for the target object results in the value undefined being returned',
+							['Specifying the value undefined for the target object results in the value undefined being returned',
 								[undefined,{foo:'bar',hello:'world'}],
 								undefined
 							],
 							{
-								title:'Test that, if the values of a property in the target object and the source object are not both plain objects, then the value of the property in the target object is simply overwritten by the value from the source object (no recursive merging takes place)',
+								title:'If the values of a property in the target object and the source object are not both plain objects, then the value of the property in the target object is simply overwritten by the value from the source object (no recursive merging takes place)',
 								test:function () {
 									var
 										_values = [
@@ -1783,15 +1783,15 @@ Uize.module ({
 									return _result;
 								}
 							},
-							['Test that, when the value of a property is a plain object in both the source and target objects, then the contents of the property from the source object are merged into the property in the target object',
+							['When the value of a property is a plain object in both the source and target objects, then the contents of the property from the source object are merged into the property in the target object',
 								[{foo:{bar:1}},{foo:{hello:'world'}}],
 								{foo:{bar:1,hello:'world'}}
 							],
-							['Test that, when the target object has properties that the source object doesn\'t, those properties are left in the target object',
+							['When the target object has properties that the source object doesn\'t, those properties are left in the target object',
 								[{foo:'bar',junk:{hello:'world'}},{simple:'simon',junk:{bye:'bye'}}],
 								{foo:'bar',simple:'simon',junk:{hello:'world',bye:'bye'}}
 							],
-							['Test that merging complex objects, requiring merging at multiple depths, is handled correctly',
+							['Complex objects can be merged, requiring merging at multiple depths',
 								[
 									{
 										foo:'bar',
@@ -1824,7 +1824,7 @@ Uize.module ({
 									}
 								}
 							],
-							['Test that deep merging is handled correctly for multiple sources',
+							['Deep merging is carried out for all sources, even when multiple sources are specified',
 								[
 									{
 										foo:'bar',
@@ -1871,7 +1871,7 @@ Uize.module ({
 								}
 							],
 							{
-								title:'Test that merging object type properties from a source object into a target object results in the object type properties being copied by reference',
+								title:'Merging object type properties from a source object into a target object results in the object type properties being copied by reference',
 								test:function () {
 									var
 										_objectProperty = {
@@ -1888,7 +1888,7 @@ Uize.module ({
 
 							/*** test support for function target and sources ***/
 								{
-									title:'Test that the target can be a function, and that the properties from the sources will be merged in as custom properties of the function',
+									title:'When the target is a function, the properties from the sources will be merged in as custom properties of the function',
 									test:function () {
 										var
 											_target = function () {},
@@ -1903,7 +1903,7 @@ Uize.module ({
 									}
 								},
 								{
-									title:'Test that any source can be a function that has custom properties, and that the properties from all such sources will be merged into the target',
+									title:'When any of the sources are functions, then any custom properties of those function type sources will be merged into the target',
 									test:function () {
 										var
 											_source1 = function () {},
@@ -1931,19 +1931,19 @@ Uize.module ({
 					],
 					['Uize.merge',
 						[
-							['Test that calling with no source object results in an empty object being returned',
+							['Calling with no source object results in an empty object being returned',
 								[],
 								{}
 							],
-							['Test that specifying the value null for the source object results in an empty object being returned',
+							['Specifying the value null for the source object results in an empty object being returned',
 								null,
 								{}
 							],
-							['Test that specifying the value undefined for the source object results in an empty object being returned',
+							['Specifying the value undefined for the source object results in an empty object being returned',
 								undefined,
 								{}
 							],
-							['Test that an arbitrary number of source objects is supported',
+							['There can be an arbitrary number of source objects',
 								[
 									{propFromSource1:'bar'},
 									{propFromSource2:'hello'},
@@ -1955,7 +1955,7 @@ Uize.module ({
 									propFromSource3:'world'
 								}
 							],
-							['Test that the contents of source objects are merged in the order in which the source objects are specified',
+							['The contents of source objects are merged in the order in which the source objects are specified',
 								[
 									{foo:'bar',fancy:'pants'},
 									{fancy:'schmancy',la:'dee dah'},
@@ -1963,12 +1963,12 @@ Uize.module ({
 								],
 								{foo:'bar',fancy:'schmancy',la:'dolce vita',fin:'ished'}
 							],
-							['Test that specifying the value null or undefined for all of the source objects results in an empty object being returned',
+							['Specifying the value null or undefined for all of the source objects results in an empty object being returned',
 								[null,undefined,undefined,null],
 								{}
 							],
 							{
-								title:'Test that, if the values of a property in two source objects are not both plain objects, then the value of the property from the first is simply overwritten by the value from the second source object (no recursive merging takes place)',
+								title:'If the values of a property in two source objects are not both plain objects, then the value of the property from the first is simply overwritten by the value from the second source object (no recursive merging takes place)',
 								test:function () {
 									var
 										_values = [
@@ -2003,11 +2003,11 @@ Uize.module ({
 									return _result;
 								}
 							},
-							['Test that, when the value of a property is a plain object in two source objects, then the contents of the property from the second source object are merged with the contents of the property from the first source object',
+							['When the value of a property is a plain object in two source objects, then the contents of the property from the second source object are merged with the contents of the property from the first source object',
 								[{foo:{bar:1}},{foo:{hello:'world'}}],
 								{foo:{bar:1,hello:'world'}}
 							],
-							['Test that merging complex objects, requiring merging at multiple depths, is handled correctly',
+							['Complex objects can be merged, requiring merging at multiple depths',
 								[
 									{
 										foo:'bar',
@@ -2040,7 +2040,7 @@ Uize.module ({
 									}
 								}
 							],
-							['Test that deep merging is handled correctly for multiple sources',
+							['Deep merging is carried out for all sources, even when multiple sources are specified',
 								[
 									{
 										foo:'bar',
@@ -2087,7 +2087,7 @@ Uize.module ({
 								}
 							],
 							{
-								title:'Test that merging object type properties from a source object results in the object type properties being copied by reference',
+								title:'Merging object type properties from a source object results in the object type properties being copied by reference',
 								test:function () {
 									var
 										_objectProperty = {
@@ -2101,7 +2101,7 @@ Uize.module ({
 								}
 							},
 							{
-								title:'Test that a fresh object is returned, and not a reference to any of the source objects being merged',
+								title:'A fresh object is returned, and not a reference to any of the source objects being merged',
 								test:function () {
 									var
 										_source1 = {propertyFromSource1:'propertyFromSource1Value'},
@@ -2125,7 +2125,7 @@ Uize.module ({
 								}
 							},
 							{
-								title:'Test that any source can be a function that has custom properties, and that the properties from all such sources will be merged into the target',
+								title:'When any of the sources are functions, then any custom properties of those function type sources will be merged into the target',
 								test:function () {
 									var
 										_source1 = function () {},
@@ -2151,24 +2151,24 @@ Uize.module ({
 						{cloneArguments:true}
 					],
 					['Uize.pairUp',[
-						['Test that calling with no parameters returns {undefined:undefined}',[],{undefined:undefined}],
-						['Test that undefined is the default for the valueANYTYPE parameter',['key'],{key:undefined}],
-						['Test that the key can be a string','key',{key:undefined}],
-						['Test that the key can be a number',5,{5:undefined}],
-						['Test that the key can be the special value Infinity',Infinity,{Infinity:undefined}],
-						['Test that the key can be the special value NaN',NaN,{NaN:undefined}],
-						['Test that the key can be a boolean',false,{'false':undefined}],
-						['Test that the key can be undefined',undefined,{undefined:undefined}],
-						['Test that the key can be null',null,{'null':undefined}],
-						['Test that the value can be a string',['key','value'],{key:'value'}],
-						['Test that the value can be a number',['key',5],{key:5}],
-						['Test that the value can be the special value Infinity',['key',Infinity],{key:Infinity}],
-						['Test that the value can be the special value NaN',['key',NaN],{key:NaN}],
-						['Test that the value can be a boolean',['key',false],{key:false}],
-						['Test that the value can be undefined',['key',undefined],{key:undefined}],
-						['Test that the value can be null',['key',null],{key:null}],
-						['Test that the value can be an object',['key',{propName:'propValue'}],{key:{propName:'propValue'}}],
-						['Test that an arbitrary number of arguments is supported',
+						['Calling with no parameters returns {undefined:undefined}',[],{undefined:undefined}],
+						['The value undefined is the default for the valueANYTYPE parameter',['key'],{key:undefined}],
+						['The key can be a string','key',{key:undefined}],
+						['The key can be a number',5,{5:undefined}],
+						['The key can be the special value Infinity',Infinity,{Infinity:undefined}],
+						['The key can be the special value NaN',NaN,{NaN:undefined}],
+						['The key can be a boolean',false,{'false':undefined}],
+						['The key can be undefined',undefined,{undefined:undefined}],
+						['The key can be null',null,{'null':undefined}],
+						['The value can be a string',['key','value'],{key:'value'}],
+						['The value can be a number',['key',5],{key:5}],
+						['The value can be the special value Infinity',['key',Infinity],{key:Infinity}],
+						['The value can be the special value NaN',['key',NaN],{key:NaN}],
+						['The value can be a boolean',['key',false],{key:false}],
+						['The value can be undefined',['key',undefined],{key:undefined}],
+						['The value can be null',['key',null],{key:null}],
+						['The value can be an object',['key',{propName:'propValue'}],{key:{propName:'propValue'}}],
+						['There can be an arbitrary number of arguments',
 							[
 								'string','foo',
 								'number',42,
@@ -2192,7 +2192,7 @@ Uize.module ({
 								'array':[]
 							}
 						],
-						['Test that if there is only one argument whose value is an array, then that array is treated as the arguments list',
+						['If there is only one argument whose value is an array, then that array is treated as the arguments list',
 							[
 								[
 									'string','foo',
@@ -2220,75 +2220,75 @@ Uize.module ({
 						]
 					]],
 					['Uize.substituteInto',[
-						['Test that calling with no parameters produces an empty string',
+						['Calling with no parameters produces an empty string',
 							[],
 							''
 						],
-						['Test that calling with just a source string simply produces that string',
+						['Calling with just a source string simply produces that string',
 							'Hello, world!',
 							'Hello, world!'
 						],
-						['Test that specifying the value null for substitutions produces the source string',
+						['Specifying the value null for substitutions produces the source string',
 							['Hello, world!',null,'[#KEY]'],
 							'Hello, world!'
 						],
-						['Test that specifying the value undefined for substitutions produces the source string',
+						['Specifying the value undefined for substitutions produces the source string',
 							['Hello, world!',undefined,'[#KEY]'],
 							'Hello, world!'
 						],
-						['Test that substituting into an empty string produces an empty string',
+						['Substituting into an empty string produces an empty string',
 							['',{name:'Eric'},'[#KEY]'],
 							''
 						],
-						['Test that substitution of a single token works correctly',
+						['Substitution of a single token works correctly',
 							['My name is [#name].',{name:'Eric'},'[#KEY]'],
 							'My name is Eric.'
 						],
-						['Test that multiple substitutions are handled corretly',
+						['There can be multiple substitutions in the same string',
 							['My name is [#name], and I am a [#occupation].',{name:'Eric',occupation:'viking'},'[#KEY]'],
 							'My name is Eric, and I am a viking.'
 						],
-						['Test that a custom token naming specifier is handled correctly',
+						['A custom token naming specifier can be provided',
 							['My name is <%name%>, and I am a <%occupation%>.',{name:'Eric',occupation:'viking'},'<%KEY%>'],
 							'My name is Eric, and I am a viking.'
 						],
-						['Test that token naming where token opener and closer are empty strings is handled correcly',
+						['The token opener and closer can be empty strings',
 							['I am name, and I am a occupation.',{name:'Eric',occupation:'viking'},'KEY'],
 							'I am Eric, and I am a viking.'
 						],
-						['Test that default for token naming is [#KEY]',
+						['The default for token naming is [#KEY]',
 							['My name is [#name].',{name:'Eric'}],
 							'My name is Eric.'
 						],
-						['Test that specifying an empty object for substitutions simply produces the source string',
+						['Specifying an empty object for substitutions simply produces the source string',
 							['Hello, world!',{}],
 							'Hello, world!'
 						],
-						['Test that the same substitution can be used multiple times',
+						['The same substitution can be used multiple times',
 							['My name is [#name]. [#name] is my name. You can call me [#name].',{name:'Eric'}],
 							'My name is Eric. Eric is my name. You can call me Eric.'
 						],
-						['Test that substitution values that contain tokens are not further substituted into',
+						['Substitution values that contain tokens are not further substituted into',
 							['[#token1][#token2]',{token1:'[#token2]foo',token2:'bar'}],
 							'[#token2]foobar'
 						],
-						['Test that tokens in the source string for which there aren\'t substitutions are left in the source string',
+						['Tokens in the source string for which there aren\'t substitutions are left in the source string',
 							['My name is [#name].',{occupation:'viking'}],
 							'My name is [#name].'
 						],
-						['Test that substitutions for which there aren\'t tokens in the source string are ignored',
+						['Substitutions for which there aren\'t tokens in the source string are ignored',
 							['My name is [#name].',{name:'Eric',occupation:'viking'}],
 							'My name is Eric.'
 						],
-						['Test that specifying an array for substitutions is handled correctly',
+						['Specifying an array for substitutions is handled correctly',
 							['My name is [#0], and I am a [#1].',['Eric','viking']],
 							'My name is Eric, and I am a viking.'
 						],
-						['Test that specifying an empty array for substitutions simply produces the source string',
+						['Specifying an empty array for substitutions simply produces the source string',
 							['Hello, world!',[]],
 							'Hello, world!'
 						],
-						['Test that non-string substitution values are correctly coerced to strings',
+						['Non-string substitution values are coerced to strings',
 							[
 								'[#int] [#neg] [#float] [#nan] [#infinity] [#true] [#false] [#obj] [#null] [#undefined]',
 								{
@@ -2300,104 +2300,104 @@ Uize.module ({
 							],
 							'5 -5 5.5 NaN Infinity true false OBJECT null undefined'
 						],
-						['Test that a string type substitution is treated as a substitutions array with one element',
+						['A string type substitution is treated as a substitutions array with one element',
 							['My name is [#0].','Eric'],
 							'My name is Eric.'
 						],
-						['Test that a number type substitution is treated as a substitutions array with one element',
+						['A number type substitution is treated as a substitutions array with one element',
 							['Pi is approximately [#0].',3.14159265359],
 							'Pi is approximately 3.14159265359.'
 						],
-						['Test that a boolean type substitution is treated as a substitutions array with one element',
+						['A boolean type substitution is treated as a substitutions array with one element',
 							['It is not [#0] that the Earth is flat.',true],
 							'It is not true that the Earth is flat.'
 						],
-						['Test that substitution keys are case-sensitive, as designed',
+						['Substitution keys are case-sensitive',
 							['My name is [#name], and not [#NAME]!',{name:'Eric',NAME:'Derrick'}],
 							'My name is Eric, and not Derrick!'
 						],
-						['Test that substitution keys are space-sensitive, as designed',
+						['Substitution keys are space-sensitive',
 							['My name is [#name], and not [# name ]!',{name:'Eric',' name ':'Derrick'}],
 							'My name is Eric, and not Derrick!'
 						],
-						['Test that spaces in the token opener and token closer are significant, as designed',
+						['Spaces in the token opener and token closer are significant',
 							['[name] [ name] [name ] [ name ]',{name:'Eric'},'[ KEY ]'],
 							'[name] [ name] [name ] Eric'
 						],
-						['Test that a token opener containing regular expression special characters is handled correctly',
+						['A token opener may contain regular expression special characters',
 							['My name is [^$|{}[]()?.*+\\name].',{name:'Eric'},'[^$|{}[]()?.*+\\KEY]'],
 							'My name is Eric.'
 						],
-						['Test that a token closer containing regular expression special characters is handled correctly',
+						['A token closer may contain regular expression special characters',
 							['My name is [name^$|{}[]()?.*+\\].',{name:'Eric'},'[KEY^$|{}[]()?.*+\\]'],
 							'My name is Eric.'
 						],
-						['Test that a substitution key containing regular expression special characters is handled correctly',
+						['A substitution key may contain regular expression special characters',
 							['My name is [^$|{}[]()?.*+\\].',{'^$|{}[]()?.*+\\':'Eric'},'[KEY]'],
 							'My name is Eric.'
 						],
-						['Test that the source for substituting into can be a number',
+						['The source for substituting into can be a number',
 							[3.14159265359,{'.':','},'KEY'],
 							'3,14159265359'
 						],
-						['Test that the source for substituting into can be a boolean',
+						['The source for substituting into can be a boolean',
 							[true,{ru:'Russia'},'KEY'],
 							'tRussiae'
 						],
-						['Test that the source for substituting into can be an object that implements a value interface',
+						['The source for substituting into can be an object that implements a value interface',
 							[Uize.Class.Value ({value:'My name is [#name].'}),{name:'Eric'}],
 							'My name is Eric.'
 						],
-						['Test that the source for substituting into can be an array, whose elements will be concatenated',
+						['The source for substituting into can be an array, whose elements will be concatenated',
 							[['[#name]','[#occupation]'],{name:'Eric',occupation:'viking'}],
 							'Eric,viking'
 						]
 					]],
 					['Uize.indexIn',[
 						/*** test support for source being an array ***/
-							['Test that specifying an empty array for the source parameter produces the result -1',
+							['Specifying an empty array for the source parameter produces the result -1',
 								[[],1],
 								-1
 							],
-							['Test that the fromEndBOOL and strictEqualityBOOL parameters are observed correctly',
+							['The fromEndBOOL and strictEqualityBOOL parameters are observed correctly',
 								[[0,1,'1','1',1,2],'1',true,false],
 								4
 							],
-							['Test that the strictEqualityBOOL parameter is defaulted to true, as designed',
+							['The strictEqualityBOOL parameter is defaulted to true',
 								[[0,1,'1','1',1,2],'1',true],
 								3
 							],
-							['Test that the fromEndBOOL parameter is defaulted to false, as designed',
+							['The fromEndBOOL parameter is defaulted to false',
 								[[0,1,'1','1',1,2],'1'],
 								2
 							],
-							['Test that -1 is returned when the value is not found in the source array',
+							['The value -1 is returned when the value is not found in the source array',
 								[[0,1,'1','1',1,2],'0'],
 								-1
 							],
-							['Test that the method doesn\'t scan past the end of the source array and find a match for undefined in the first element beyond the end of the array',
+							['The method doesn\'t scan past the end of the source array and find a match for undefined in the first element beyond the end of the array',
 								[[0,1,'1','1',1,2],undefined],
 								-1
 							],
 
 						/*** test support for source being a list object ***/
-							['Test that specifying an empty list object for the source parameter produces the result -1',
+							['Specifying an empty list object for the source parameter produces the result -1',
 								[_arrayToListObject ([]),1],
 								-1
 							],
-							['Test that, when the source is a list object, the fromEndBOOL and strictEqualityBOOL parameters are observed correctly',
+							['When the source is a list object, the fromEndBOOL and strictEqualityBOOL parameters are observed correctly',
 								[_arrayToListObject ([0,1,'1','1',1,2]),'1',true,false],
 								4
 							],
-							['Test that, when the source is a list object, the strictEqualityBOOL parameter is defaulted to true, as designed',
+							['When the source is a list object, the strictEqualityBOOL parameter is defaulted to true',
 								[_arrayToListObject ([0,1,'1','1',1,2]),'1',true],
 								3
 							],
-							['Test that, when the source is a list object, the fromEndBOOL parameter is defaulted to false, as designed',
+							['When the source is a list object, the fromEndBOOL parameter is defaulted to false',
 								[_arrayToListObject ([0,1,'1','1',1,2]),'1'],
 								2
 							],
-							['Test that, when the source is a list object, -1 is returned when the value is not found in the source list object',
+							['When the source is a list object, -1 is returned when the value is not found in the source list object',
 								[_arrayToListObject ([0,1,'1','1',1,2]),'0'],
 								-1
 							],
@@ -2412,157 +2412,157 @@ Uize.module ({
 							},
 
 						/*** test support for source being a non-list object ***/
-							['Test that specifying an empty non-list object for the source parameter produces the result -1',
+							['Specifying an empty non-list object for the source parameter produces the result -1',
 								[{},1],
 								-1
 							],
-							['Test that, when the source is a non-list object, the fromEndBOOL and strictEqualityBOOL parameters are observed correctly',
+							['When the source is a non-list object, the fromEndBOOL and strictEqualityBOOL parameters are observed correctly',
 								[{p0:0,p1:1,p2:'1',p3:'1',p4:1,p5:2},'1',true,false],
 								'p4'
 							],
-							['Test that, when the source is a non-list object, the strictEqualityBOOL parameter is defaulted to true, as designed',
+							['When the source is a non-list object, the strictEqualityBOOL parameter is defaulted to true',
 								[{p0:0,p1:1,p2:'1',p3:'1',p4:1,p5:2},'1',true],
 								'p3'
 							],
-							['Test that, when the source is a non-list object, the fromEndBOOL parameter is defaulted to false, as designed',
+							['When the source is a non-list object, the fromEndBOOL parameter is defaulted to false',
 								[{p0:0,p1:1,p2:'1',p3:'1',p4:1,p5:2},'1'],
 								'p2'
 							],
-							['Test that, when the source is a non-list object, -1 is returned when the value is not found in the object',
+							['When the source is a non-list object, -1 is returned when the value is not found in the object',
 								[{p0:0,p1:1,p2:'1',p3:'1',p4:1,p5:2},'0'],
 								-1
 							],
 
 						/*** test handling of source being neither array nor object ***/
-							['Test that calling with no parameters produces the result -1',
+							['Calling with no parameters produces the result -1',
 								[],
 								-1
 							],
-							['Test that specifying null for the source parameter produces the result -1',
+							['Specifying null for the source parameter produces the result -1',
 								[null,null],
 								-1
 							],
-							['Test that specifying undefined for the source parameter produces the result -1',
+							['Specifying undefined for the source parameter produces the result -1',
 								[undefined,undefined],
 								-1
 							],
-							['Test that specifying a number for the source parameter produces the result -1',
+							['Specifying a number for the source parameter produces the result -1',
 								[5,5],
 								-1
 							],
-							['Test that specifying a string for the source parameter produces the result -1',
+							['Specifying a string for the source parameter produces the result -1',
 								['hello','hello'],
 								-1
 							],
-							['Test that specifying a boolean for the source parameter produces the result -1',
+							['Specifying a boolean for the source parameter produces the result -1',
 								[true,true],
 								-1
 							]
 					]],
 					['Uize.isIn',[
-						['Test that calling with no parameters produces the result false',
+						['Calling with no parameters produces the result false',
 							[],
 							false
 						],
-						['Test that specifying null for the source parameter produces the result false',
+						['Specifying null for the source parameter produces the result false',
 							[null,null],
 							false
 						],
-						['Test that specifying undefined for the source parameter produces the result false',
+						['Specifying undefined for the source parameter produces the result false',
 							[undefined,undefined],
 							false
 						],
-						['Test that specifying a number for the source parameter produces the result false',
+						['Specifying a number for the source parameter produces the result false',
 							[5,5],
 							false
 						],
-						['Test that specifying a string for the source parameter produces the result false',
+						['Specifying a string for the source parameter produces the result false',
 							['hello','hello'],
 							false
 						],
-						['Test that specifying a boolean for the source parameter produces the result false',
+						['Specifying a boolean for the source parameter produces the result false',
 							[true,true],
 							false
 						],
-						['Test that specifying an empty array for the source parameter produces the result false',
+						['Specifying an empty array for the source parameter produces the result false',
 							[[],1],
 							false
 						],
-						['Test that the value false for the strictEqualityBOOL parameter ia observed correctly',
+						['When the value false is specified for the strictEqualityBOOL parameter, then an element that is only loosely equal with be found',
 							[[0,1],'1',false],
 							true
 						],
-						['Test that the value true for the strictEqualityBOOL parameter ia observed correctly',
+						['When the value true is specified for the strictEqualityBOOL parameter, then an element that is only loosely equal will not be found',
 							[[0,1],'1',true],
 							false
 						],
-						['Test that the strictEqualityBOOL parameter is defaulted to true, as designed',
+						['The strictEqualityBOOL parameter is defaulted to true',
 							[[0,1],'1'],
 							false
 						],
-						['Test that false is returned when the value is not found in the source array',
+						['The value false is returned when the value is not found in the source array',
 							[[0,1],2],
 							false
 						],
 
 						/*** test support for object source ***/
-							['Test that true is returned when the source is an object, and the value is the value of one of the source object\'s properties',
+							['The value true is returned when the source is an object, and the value is the value of one of the source object\'s properties',
 								[{foo:'bar',hello:'world'},'bar'],
 								true
 							],
-							['Test that false is returned when the source is an object, and the value is not one of the object\'s propertes\' values',
+							['The value false is returned when the source is an object, and the value is not one of the object\'s propertes\' values',
 								[{foo:'bar',hello:'world'},'blah'],
 								false
 							],
-							['Test that the value false for the strictEqualityBOOL parameter ia observed correctly when the source is an object',
+							['The value false for the strictEqualityBOOL parameter ia observed correctly when the source is an object',
 								[{prop1:0,prop2:1},'1',false],
 								true
 							],
-							['Test that the value true for the strictEqualityBOOL parameter ia observed correctly when the source is an object',
+							['The value true for the strictEqualityBOOL parameter ia observed correctly when the source is an object',
 								[{prop1:0,prop2:1},'1',true],
 								false
 							]
 					]],
 					['Uize.isEmpty',[
-						['Test that empty object is considered empty',[{}],true],
-						['Test that empty array is considered empty',[[]],true],
-						['Test that empty string is considered empty',[''],true],
-						['Test that String object initialized to empty string is considered empty',[new String ('')],true],
-						['Test that the number zero is considered empty',[0],true],
-						['Test that Number object initialized to zero is considered empty',[new Number (0)],true],
-						['Test that the boolean false is considered empty',[false],true],
-						['Test that Boolean object initialized to false is considered empty',[new Boolean (false)],true],
-						['Test that null is considered empty',[null],true],
-						['Test that undefined is considered empty',[undefined],true],
-						['Test that NaN is considered empty',[NaN],true],
-						['Test that class instance with empty value state property is considered empty',
+						['An empty object is considered empty',[{}],true],
+						['An empty array is considered empty',[[]],true],
+						['An empty string is considered empty',[''],true],
+						['A String object initialized to empty string is considered empty',[new String ('')],true],
+						['The number zero is considered empty',[0],true],
+						['A Number object initialized to zero is considered empty',[new Number (0)],true],
+						['The boolean false is considered empty',[false],true],
+						['A Boolean object initialized to false is considered empty',[new Boolean (false)],true],
+						['The value null is considered empty',[null],true],
+						['The value undefined is considered empty',[undefined],true],
+						['The value NaN is considered empty',[NaN],true],
+						['A class instance with an empty value state property is considered empty',
 							[Uize.Class.Value ({value:0})],
 							true
 						],
-						['Test that a non-empty object is not considered empty',[{blah:0}],false],
-						['Test that a non-empty array is not considered empty',[['blah']],false],
-						['Test that a non-empty string is not considered empty',['blah'],false],
-						['Test that String object initialized to non-empty string is not considered empty',
+						['A non-empty object is not considered empty',[{blah:0}],false],
+						['A non-empty array is not considered empty',[['blah']],false],
+						['A non-empty string is not considered empty',['blah'],false],
+						['A String object initialized to non-empty string is not considered empty',
 							[new String ('foo')],
 							false
 						],
-						['Test that a non-zero number is not considered empty',[1],false],
-						['Test that Number object initialized to non-zero number is not considered empty',
+						['A non-zero number is not considered empty',[1],false],
+						['A Number object initialized to non-zero number is not considered empty',
 							[new Number (1)],
 							false
 						],
-						['Test that the boolean true is not considered empty',[true],false],
-						['Test that Boolean object initialized to true is not considered empty',[new Boolean (true)],false],
-						//['Test that a regular expression is not considered empty',[/^.+$/],false],
-						['Test that a function (even an empty one) is not considered empty',function () {},false],
-						['Test that class instance with non-empty value state property is not considered empty',
+						['The boolean true is not considered empty',[true],false],
+						['A Boolean object initialized to true is not considered empty',[new Boolean (true)],false],
+						//['A regular expression is not considered empty',[/^.+$/],false],
+						['A function (even an empty one) is not considered empty',function () {},false],
+						['A class instance with a non-empty value state property is not considered empty',
 							[Uize.Class.Value ({value:1})],
 							false
 						]
 					]],
 					['Uize.emptyOut',[
 						{
-							title:'Test that emptying out an already empty array produces that same empty array as the result',
+							title:'Emptying out an already empty array produces that same empty array as the result',
 							test:function () {
 								var
 									_source = [],
@@ -2572,7 +2572,7 @@ Uize.module ({
 							}
 						},
 						{
-							title:'Test that emptying out an already empty object produces that same empty object as the result',
+							title:'Emptying out an already empty object produces that same empty object as the result',
 							test:function () {
 								var
 									_source = {},
@@ -2582,7 +2582,7 @@ Uize.module ({
 							}
 						},
 						{
-							title:'Test that emptying out an array with contents produces that same array with no contents as the result',
+							title:'Emptying out an array with contents produces that same array with no contents as the result',
 							test:function () {
 								var
 									_source = [1,2,3,4,5],
@@ -2592,7 +2592,7 @@ Uize.module ({
 							}
 						},
 						{
-							title:'Test that emptying out an object with contents produces that same object with no contents as the result',
+							title:'Emptying out an object with contents produces that same object with no contents as the result',
 							test:function () {
 								var
 									_source = {foo:1,bar:1},
@@ -2601,136 +2601,136 @@ Uize.module ({
 								return this.expect (true,_source == _result) && this.expect (_source,{});
 							}
 						},
-						['Test that specifying the value null for the source produces the value null as the result',
+						['Specifying the value null for the source produces the value null as the result',
 							null,
 							null
 						],
-						['Test that specifying the value undefined for the source produces the value undefined as the result',
+						['Specifying the value undefined for the source produces the value undefined as the result',
 							undefined,
 							undefined
 						]
 					]],
 					['Uize.recordMatches',[
-						['Test that specifying the value null for the record produces the result false',
+						['Specifying the value null for the record produces the result false',
 							[null,{foo:'bar'}],
 							false
 						],
-						['Test that specifying the value undefined for the record produces the result false',
+						['Specifying the value undefined for the record produces the result false',
 							[undefined,{foo:'bar'}],
 							false
 						],
-						['Test that specifying the value null for the match object produces the result true',
+						['Specifying the value null for the match object produces the result true',
 							[{foo:'bar'},null],
 							true
 						],
-						['Test that specifying the value undefined for the match object produces the result true',
+						['Specifying the value undefined for the match object produces the result true',
 							[{foo:'bar'},undefined],
 							true
 						],
-						['Test that specifying an empty match object produces the result true',
+						['Specifying an empty match object produces the result true',
 							[{foo:'bar'},{}],
 							true
 						],
-						['Test that specifying a match object that contains properties that aren\'t in the record produces the result false',
+						['Specifying a match object that contains properties that aren\'t in the record produces the result false',
 							[{foo:'bar'},{hello:'world'}],
 							false
 						],
-						['Test that specifying a match object with a property that is in the record but whose value is not the same produces the result false',
+						['Specifying a match object with a property that is in the record but whose value is not the same produces the result false',
 							[{meaningOfLife:42},{meaningOfLife:'dunno'}],
 							false
 						],
-						['Test that specifying a match object with a property that is in the record and whose values is equal but not in a strict equality produces the result false',
+						['Specifying a match object with a property that is in the record and whose values is equal but not in a strict equality produces the result false',
 							[{meaningOfLife:42},{meaningOfLife:'42'}],
 							false
 						],
-						['Test that specifying a match object with a property that is in the record and whose values is equal in a strict equality produces the result true',
+						['Specifying a match object with a property that is in the record and whose values is equal in a strict equality produces the result true',
 							[{meaningOfLife:42},{meaningOfLife:42}],
 							true
 						],
-						['Test that specifying a match object with multiple properties and that is only a partial match with the record produces the result false',
+						['Specifying a match object with multiple properties and that is only a partial match with the record produces the result false',
 							[{foo:'bar',hello:'world',meaningOfLife:42},{foo:'bar',hello:'there',meaningOfLife:42}],
 							false
 						],
-						['Test that specifying a match object with multiple properties and that is a complete match with the record produces the result true',
+						['Specifying a match object with multiple properties and that is a complete match with the record produces the result true',
 							[{foo:'bar',hello:'world',meaningOfLife:42},{foo:'bar',hello:'world',meaningOfLife:42}],
 							true
 						],
-						['Test that properties that are in the record but that are not in the match object are not considered and do not affect the success of the match',
+						['Properties that are in the record but that are not in the match object are not considered and do not affect the success of the match',
 							[{foo:'bar',hello:'world',meaningOfLife:42},{meaningOfLife:42}],
 							true
 						]
 					]],
 					['Uize.findRecordNo',[
-						['Test that specifying null for the records results in the value -1 being returned, regardless of what the specified default value is',
+						['Specifying null for the records results in the value -1 being returned, regardless of what the specified default value is',
 							[null,{},5],
 							-1
 						],
-						['Test that specifying undefined for the records results in the value -1 being returned, regardless of what the specified default value is',
+						['Specifying undefined for the records results in the value -1 being returned, regardless of what the specified default value is',
 							[undefined,{},5],
 							-1
 						],
-						['Test that not specifying a default number results in the value -1 being used for default number',
+						['Not specifying a default number results in the value -1 being used for default number',
 							[[{foo:'boo'},{foo:'bar'},{foo:'foo'}],{foo:'woo'}],
 							-1
 						],
-						['Test that specifying the value null for default number is treated as a default number of -1',
+						['Specifying the value null for default number is treated as a default number of -1',
 							[[{foo:'boo'},{foo:'bar'},{foo:'foo'}],{foo:'woo'},null],
 							-1
 						],
-						['Test that specifying the value undefined for default number is treated as a default number of -1',
+						['Specifying the value undefined for default number is treated as a default number of -1',
 							[[{foo:'boo'},{foo:'bar'},{foo:'foo'}],{foo:'woo'},undefined],
 							-1
 						],
-						['Test that specifying a string value for detault number results in it being coerced to a number',
+						['Specifying a string value for detault number results in it being coerced to a number',
 							[[{foo:'boo'},{foo:'bar'},{foo:'foo'}],{foo:'woo'},'2'],
 							2
 						],
-						['Test that specifying a boolean value for the default number results in it being coerced to a number',
+						['Specifying a boolean value for the default number results in it being coerced to a number',
 							[[{foo:'boo'},{foo:'bar'},{foo:'foo'}],{foo:'woo'},true],
 							1
 						],
-						['Test that specifying an object value for the default number results in it being coerced to a number',
+						['Specifying an object value for the default number results in it being coerced to a number',
 							[[{foo:'boo'},{foo:'bar'},{foo:'foo'}],{foo:'woo'},Uize.Class.Value ({value:2})],
 							2
 						],
-						['Test that specifying an object value for the default number that cannot be coerced to a number results in the value -1 being used for the default number',
+						['Specifying an object value for the default number that cannot be coerced to a number results in the value -1 being used for the default number',
 							[[{foo:'boo'},{foo:'bar'},{foo:'foo'}],{foo:'woo'},Uize.Class.Value ({value:'blah'})],
 							-1
 						],
-						['Test that the index of the first matching record is returned when the match matches a record',
+						['The index of the first matching record is returned when the match matches a record',
 							[[{foo:'boo'},{foo:'bar'},{foo:'foo'}],{foo:'bar'}],
 							1
 						],
-						['Test that the value 0 is returned when the value null is specified for the match',
+						['The value 0 is returned when the value null is specified for the match',
 							[[{foo:'boo'},{foo:'bar'},{foo:'foo'}],null],
 							0
 						]
 					]],
 					['Uize.findRecord',[
-						['Test that specifying null for the records results in the value null being returned',
+						['Specifying null for the records results in the value null being returned',
 							[null,{},5],
 							null
 						],
-						['Test that specifying undefined for the records results in the value null being returned',
+						['Specifying undefined for the records results in the value null being returned',
 							[undefined,{},5],
 							null
 						],
 						{
-							title:'Test that the first matching record is returned when the match matches a record',
+							title:'The first matching record is returned when the match matches a record',
 							test:function () {
 								var _records = [{foo:'boo'},{foo:'bar'},{foo:'foo'}];
 								return this.expectSameAs (_records [1],Uize.findRecord (_records,{foo:'bar'}));
 							}
 						},
 						{
-							title:'Test that the first record is returned when the value null is specified for the match',
+							title:'The first record is returned when the value null is specified for the match',
 							test:function () {
 								var _records = [{foo:'boo'},{foo:'bar'},{foo:'foo'}];
 								return this.expectSameAs (_records [0],Uize.findRecord (_records,null));
 							}
 						},
 						{
-							title:'Test that the record for the specified default record number is returned when no matching record is found',
+							title:'The record for the specified default record number is returned when no matching record is found',
 							test:function () {
 								var _records = [{foo:'boo'},{foo:'bar'},{foo:'foo'}];
 								return this.expectSameAs (_records [2],Uize.findRecord (_records,{foo:'woo'},2));
@@ -2739,11 +2739,11 @@ Uize.module ({
 					]],
 					['Uize.getGuid',[
 						{
-							title:'Test that a string type value is returned, as expected',
+							title:'A string type value is returned',
 							test:function () {return this.expectNonEmptyString (Uize.getGuid ())}
 						},
 						{
-							title:'Test that result is different across ten successive calls',
+							title:'The result is different across ten successive calls',
 							test:function () {
 								var _callResults = [];
 								for (var _callNo = -1; ++_callNo < 10;)
@@ -2755,7 +2755,7 @@ Uize.module ({
 					]],
 					['Uize.global',[
 						{
-							title:'Test that the method returns a reference to the global object',
+							title:'A reference to the global object is returned',
 							test:function () {
 								return this.expectSameAs (
 									Function ('return (function () {return this}) ()') (),
@@ -2765,12 +2765,12 @@ Uize.module ({
 						}
 					]],
 					['Uize.eval',[
-						['Test that the specified code is evaluated and that the result of the evaluated code is returned',
+						['The specified code is evaluated and that the result of the evaluated code is returned',
 							'2 + 3',
 							5
 						],
 						{
-							title:'Test that the specified code is evaluated in a quarantined fashion, having access only to the global scope',
+							title:'The specified code is evaluated in a quarantined fashion, having access only to the global scope',
 							test:function () {
 								var
 									_Uize_eval = Uize.eval,
@@ -2787,7 +2787,7 @@ Uize.module ({
 							}
 						},
 						{
-							title:'Test that the specified code is evaluated using JavaScript strict mode',
+							title:'The specified code is evaluated using JavaScript strict mode',
 							test:function () {
 								var _errorThrown = false;
 								try {
@@ -2800,12 +2800,12 @@ Uize.module ({
 						}
 					]],
 					['Uize.laxEval',[
-						['Test that the specified code is evaluated and that the result of the evaluated code is returned',
+						['The specified code is evaluated and that the result of the evaluated code is returned',
 							'2 + 3',
 							5
 						],
 						{
-							title:'Test that the specified code is evaluated in a quarantined fashion, having access only to the global scope',
+							title:'The specified code is evaluated in a quarantined fashion, having access only to the global scope',
 							test:function () {
 								var
 									_Uize_laxEval = Uize.laxEval,
@@ -2822,7 +2822,7 @@ Uize.module ({
 							}
 						},
 						{
-							title:'Test that the specified code is evaluated using non-strict mode',
+							title:'The specified code is evaluated using non-strict mode',
 							test:function () {
 								var _errorThrown = false;
 								try {
@@ -2836,7 +2836,7 @@ Uize.module ({
 					]],
 					['Uize.quarantine',[
 						{
-							title:'Test that the method returns a function that is not just a reference to the source function',
+							title:'A new function is returned, and not just a reference to the source function',
 							test:function () {
 								var
 									_functionToQuarantine = function () {},
@@ -2849,7 +2849,7 @@ Uize.module ({
 							}
 						},
 						{
-							title:'Test that the quarantined function is equivalent to the source function in its behavior',
+							title:'The quarantined function is equivalent to the source function in its behavior',
 							test:function () {
 								var
 									_functionToQuarantine = function (a,b) {return Math.pow (a,b)},
@@ -2859,7 +2859,7 @@ Uize.module ({
 							}
 						},
 						{
-							title:'Test that the quarantined function is truly quarantined from the scope of the source function',
+							title:'The quarantined function is quarantined from the scope of the source function',
 							test:function () {
 								var
 									_quarantinedFunction = Uize.quarantine (function () {return Uize.quarantine}),
@@ -2879,55 +2879,55 @@ Uize.module ({
 					]],
 					['Uize.getClass',[
 						/*** test when value can't be resolved to a class ***/
-							['Test that calling with no parameters produces the result undefined',[],undefined],
-							['Test that the value null is resolved to result undefined',null,undefined],
-							['Test that the value undefined is resolved to result undefined',null,undefined],
+							['Calling with no parameters produces the result undefined',[],undefined],
+							['The value null is resolved to result undefined',null,undefined],
+							['The value undefined is resolved to result undefined',null,undefined],
 
 						/*** test resolving JavaScript primitives to a class ***/
-							['Test that a number primitive is resolved to the Number object',42,Number],
-							['Test that the special number value Infinity is resolved to the Number object',Infinity,Number],
-							['Test that the special number value NaN is resolved to the Number object',NaN,Number],
-							['Test that a string value is resolved to the String object','foo',String],
-							['Test that boolean value is resolved to the Boolean object',true,Boolean],
+							['A number primitive is resolved to the Number object',42,Number],
+							['The special number value Infinity is resolved to the Number object',Infinity,Number],
+							['The special number value NaN is resolved to the Number object',NaN,Number],
+							['A string value is resolved to the String object','foo',String],
+							['A boolean value is resolved to the Boolean object',true,Boolean],
 
 						/*** test resolving instances of JavaScript's built-in objects to a class ***/
-							['Test that a Number object instance is resolved to the Number object',new Number (42),Number],
-							['Test that a String object instance is resolved to the String object',new String ('foo'),String],
-							['Test that a Boolean object instance is resolved to the Boolean object',
+							['A Number object instance is resolved to the Number object',new Number (42),Number],
+							['A String object instance is resolved to the String object',new String ('foo'),String],
+							['A Boolean object instance is resolved to the Boolean object',
 								new Boolean (true),
 								Boolean
 							],
-							['Test that a RegExp object instance is resolved to the RegExp object',new RegExp ('\\d+'),RegExp],
+							['A RegExp object instance is resolved to the RegExp object',new RegExp ('\\d+'),RegExp],
 
 						/*** test resolving implicitly created instances of JavaScript's built-in objects to a class ***/
-							['Test that an object created using literal syntax is resolved to the Object object',
+							['An object created using literal syntax is resolved to the Object object',
 								{foo:'bar'},
 								Object
 							],
-							['Test that an array created using literal syntax is resolved to the Array object',
+							['An array created using literal syntax is resolved to the Array object',
 								[['foo','bar']],
 								Array
 							],
-							['Test that a regular expression created using literal syntax is resolved to the RegExp object',
+							['A regular expression created using literal syntax is resolved to the RegExp object',
 								/\d+/,
 								RegExp
 							],
 
 						/*** test resolving instances of Uize.Class subclasses ***/
-							['Test that an instance of the Uize.Class base class is resolved to the Uize.Class class',
+							['An instance of the Uize.Class base class is resolved to the Uize.Class class',
 								Uize.Class (),
 								Uize.Class
 							],
 
 						/*** test resolving classes and object constructors to a class ***/
-							['Test that the Object object is resolved to the Object object',Object,Object],
-							['Test that the Number object is resolved to the Number object',Number,Number],
-							['Test that the String object is resolved to the String object',String,String],
-							['Test that the Boolean object is resolved to the Boolean object',Boolean,Boolean],
-							['Test that the RegExp object is resolved to the RegExp object',RegExp,RegExp],
-							['Test that the Uize.Class object is resolved to the Uize.Class object',Uize.Class,Uize.Class],
+							['The Object object is resolved to the Object object',Object,Object],
+							['The Number object is resolved to the Number object',Number,Number],
+							['The String object is resolved to the String object',String,String],
+							['The Boolean object is resolved to the Boolean object',Boolean,Boolean],
+							['The RegExp object is resolved to the RegExp object',RegExp,RegExp],
+							['The Uize.Class object is resolved to the Uize.Class object',Uize.Class,Uize.Class],
 							{
-								title:'Test that resolving a function to a class results in the function being returned',
+								title:'Resolving a function to a class results in the function being returned',
 								test:function () {
 									var _function = function () {};
 									return this.expectSameAs (_function,Uize.getClass (_function));
@@ -2935,93 +2935,93 @@ Uize.module ({
 							}
 					]],
 					['Uize.isInstance',[
-						['Test that calling with no parameters produces the result false',[],false],
-						['Test that null is not regarded as a Uize subclass instance',null,false],
-						['Test that undefined is not regarded as a Uize subclass instance',undefined,false],
-						['Test that a string is not regarded as a Uize subclass instance','hello',false],
-						['Test that a number is not regarded as a Uize subclass instance',5,false],
-						['Test that a boolean is not regarded as a Uize subclass instance',true,false],
-						['Test that a simple object is not regarded as a Uize subclass instance',{},false],
-						['Test that an array is not regarded as a Uize subclass instance',[],false],
-						['Test that a regular expression is not regarded as a Uize subclass instance',/\d+/,false],
-						['Test that a function is not regarded as a Uize subclass instance',Uize.nop,false],
-						['Test that a Uize class is not regarded as a Uize subclass instance',Uize,false],
-						['Test that a Uize package is not regarded as a Uize subclass instance',Uize.Data,false],
-						['Test that a Uize instance is correctly regarded as a Uize subclass instance',Uize.Class (),true]
+						['Calling with no parameters produces the result false',[],false],
+						['The value null is not regarded as a Uize subclass instance',null,false],
+						['The value undefined is not regarded as a Uize subclass instance',undefined,false],
+						['A string is not regarded as a Uize subclass instance','hello',false],
+						['A number is not regarded as a Uize subclass instance',5,false],
+						['A boolean is not regarded as a Uize subclass instance',true,false],
+						['A simple object is not regarded as a Uize subclass instance',{},false],
+						['An array is not regarded as a Uize subclass instance',[],false],
+						['A regular expression is not regarded as a Uize subclass instance',/\d+/,false],
+						['A function is not regarded as a Uize subclass instance',Uize.nop,false],
+						['A Uize class is not regarded as a Uize subclass instance',Uize,false],
+						['A Uize package is not regarded as a Uize subclass instance',Uize.Data,false],
+						['A Uize instance is correctly regarded as a Uize subclass instance',Uize.Class (),true]
 					]],
 					['Uize.clone',[
 						/*** test cloning of null values ***/
-							['Test that cloning the value null produces the value null',null,null],
-							['Test that cloning the value undefined produces the value undefined',undefined,undefined],
+							['Cloning the value null produces the value null',null,null],
+							['Cloning the value undefined produces the value undefined',undefined,undefined],
 
 						/*** test cloning of string valus ***/
-							['Test that cloning an empty string produces an empty string','',''],
-							['Test that cloning a non-empty string is handled correctly','solar','solar'],
+							['Cloning an empty string produces an empty string','',''],
+							['Cloning a non-empty string returns that same string','solar','solar'],
 
 						/*** test cloning of number values ***/
-							['Test that cloning the value 0 produces the value 0',0,0],
-							['Test that cloning a negative number is handled correctly',-1,-1],
-							['Test that cloning a positive number is handled correctly',1,1],
-							['Test that cloning the special number value NaN is handled correctly',NaN,NaN],
-							['Test that cloning the special number value Infinity is handled correctly',Infinity,Infinity],
-							['Test that cloning the special number value -Infinity is handled correctly',-Infinity,-Infinity],
+							['Cloning the value 0 produces the value 0',0,0],
+							['Cloning a negative number produces that same number',-1,-1],
+							['Cloning a positive number produces that same number',1,1],
+							['Cloning the special number value NaN produces the value NaN',NaN,NaN],
+							['Cloning the special number value Infinity produces the value Infinity',Infinity,Infinity],
+							['Cloning the special number value -Infinity produces the value -Infinity',-Infinity,-Infinity],
 
 						/*** test cloning of boolean values ***/
-							['Test that cloning the boolean value false produces the value false',false,false],
-							['Test that cloning the boolean value true produces the value true',true,true],
+							['Cloning the boolean value false produces the value false',false,false],
+							['Cloning the boolean value true produces the value true',true,true],
 
 						/*** test cloning of instances of JavaScript's built-in objects ***/
 							_cloneObjectTest (
-								'Test that cloning an instance of the RegExp object is handled correctly',
+								'Cloning an instance of the RegExp object produces an equivalent clone',
 								RegExp,
 								new RegExp ('^\\s+$','gim')
 							),
 							_cloneObjectTest (
-								'Test that cloning an instance of the Date object is handled correctly',
+								'Cloning an instance of the Date object produces an equivalent clone',
 								Date,
 								'2001/9/11'
 							),
 							_cloneObjectTest (
-								'Test that cloning an instance of the String object is handled correctly',
+								'Cloning an instance of the String object produces an equivalent clone',
 								String,
 								'solar'
 							),
 							_cloneObjectTest (
-								'Test that cloning an instance of the Number object is handled correctly',
+								'Cloning an instance of the Number object produces an equivalent clone',
 								Number,
 								42
 							),
 							_cloneObjectTest (
-								'Test that cloning an instance of the Boolean object is handled correctly',
+								'Cloning an instance of the Boolean object produces an equivalent clone',
 								Boolean,
 								true
 							),
 
 						/*** test cloning of one level deep simple objects ***/
-							['Test that cloning an empty object produces an empty object',{},{}],
+							['Cloning an empty object produces an empty object',{},{}],
 							_cloneObjectTest (
-								'Test that the clone of an object is not a reference to that object, but is a new object',
+								'The clone of an object is not a reference to that object, but is a new object',
 								Object,
 								{}
 							),
-							['Test that cloning a non-empty object produces an identical copy of that object',
+							['Cloning a non-empty object produces an identical copy of that object',
 								_oneLevelDeepTestObjectForCloning,
 								_oneLevelDeepTestObjectForCloning
 							],
 
 						/*** test cloning of one level deep arrays ***/
-							['Test that cloning an empty array produces an empty array',[[]],[]],
+							['Cloning an empty array produces an empty array',[[]],[]],
 							_cloneObjectTest (
-								'Test that the clone of an array is not a reference to that array, but is a new array',
+								'The clone of an array is not a reference to that array, but is a new array',
 								Array,
 								[]
 							),
-							['Test that cloning a non-empty array produces an identical copy of that array',
+							['Cloning a non-empty array produces an identical copy of that array',
 								[_oneLevelDeepTestArrayForCloning],
 								_oneLevelDeepTestArrayForCloning
 							],
 							{
-								title:'Test that cloning a non-empty array with custom properties preserves the custom properties in the clone',
+								title:'Cloning a non-empty array with custom properties preserves the custom properties in the clone',
 								test:function () {
 									var _arrayWithCustomProperties = [0,1,2];
 									_arrayWithCustomProperties.foo = 'bar';
@@ -3030,25 +3030,25 @@ Uize.module ({
 							},
 
 						/*** test cloning of complex data structures ***/
-							['Test that cloning a complex object data structure is handled correctly',
+							['Cloning a complex object data structure produces an equivalent clone',
 								[_complexObjectDataStructure],
 								_complexObjectDataStructure
 							],
-							['Test that cloning a complex array data structure is handled correctly',
+							['Cloning a complex array data structure produces an equivalent clone',
 								[_complexArrayDataStructure],
 								_complexArrayDataStructure
 							],
 
 						/*** test cloning of value types that should just be copied by reference ***/
 							{
-								title:'Test that cloning a function simply returns a reference to that function',
+								title:'Cloning a function simply returns a reference to that function',
 								test:function () {
 									var _toClone = Uize.nop;
 									return this.expectSameAs (_toClone,Uize.clone (_toClone))
 								}
 							},
 							{
-								title:'Test that cloning a Uize class instance simply returns a reference to that instance',
+								title:'Cloning a Uize class instance simply returns a reference to that instance',
 								test:function () {
 									var _toClone = Uize.Class ();
 									return this.expectSameAs (_toClone,Uize.clone (_toClone))
@@ -3056,59 +3056,59 @@ Uize.module ({
 							},
 
 						/*** miscellaneous ***/
-							['Test that specifying no parameter is equivalent to cloning the value undefined',
+							['Specifying no parameter is equivalent to cloning the value undefined',
 								[],
 								undefined
 							]
 					]],
 					['Uize.map',[
-						['Test that function mapper gets element value as a parameter correctly',
+						['A function mapper gets each element\'s value as the first argument',
 							[['a','b','c'],function (_value) {return _value.toUpperCase ()}],
 							['A','B','C']
 						],
-						['Test that function mapper gets element key as a parameter correctly',
+						['A function mapper gets each element\'s key as the second argument',
 							[['a','b','c'],function (_value,_key) {return _key}],
 							[0,1,2]
 						],
-						['Test that function mapper is called as instance method on array correctly',
+						['A function mapper is called as an instance method on the source array',
 							[['a','b','c'],function () {return this.length}],
 							[3,3,3]
 						],
-						['Test that number can be specified in place of a source array',
+						['A number can be specified in place of a source array',
 							[['a','b','c'],function (_value,_key) {return (_key + 1) + ' of ' + this.length + ' = ' + _value}],
 							['1 of 3 = a','2 of 3 = b','3 of 3 = c']
 						],
-						['Test that a string can be used to specify a mapper',
+						['A string can be used to specify a mapper',
 							[['a','b','c'],'(key + 1) + \' of \' + this.length + \' = \' + value'],
 							['1 of 3 = a','2 of 3 = b','3 of 3 = c']
 						],
-						['Test that a source object is automatically mapped to a object',
+						['A source object is automatically mapped to a object',
 							[{a:0,b:1,c:2},'key + value'],
 							{a:'a0',b:'b1',c:'c2'}
 						],
-						['Test that an empty array maps to an empty array',
+						['An empty array maps to an empty array',
 							[[],'value'],
 							[]
 						],
-						['Test that an empty object maps to an empty object',
+						['An empty object maps to an empty object',
 							[{},'value'],
 							{}
 						],
 
 						/*** test target parameter ***/
-							['Test that map can be used to convert an array to an object by specifying an empty object target',
+							['An array source can be converted to an object by specifying an empty object target',
 								[['a','b','c'],'value',{}],
 								{0:'a',1:'b',2:'c'}
 							],
-							['Test that map can be used to convert an object to an array by specifying an empty array target',
+							['An object source can be converted to an array by specifying an empty array target',
 								[{0:'a',1:'b',2:'c'},'value',[]],
 								['a','b','c']
 							],
-							['Test that an empty array maps to an empty object, when an empty object target is specified',
+							['When an empty object target is specified, then an empty array source maps to an empty object',
 								[[],'value',{}],
 								{}
 							],
-							['Test that an empty object maps to an empty array, when an empty array target is specified',
+							['When an empty array target is specified, then an empty object source maps to an empty array',
 								[{},'value',[]],
 								[]
 							],
@@ -3125,7 +3125,7 @@ Uize.module ({
 					['Uize.forEach',[
 						/*** test support for the source being an array ***/
 							{
-								title:'Test that, when the source is an empty array, the iterator is never called',
+								title:'When the source is an empty array, then the iterator is never called',
 								test:function () {
 									var _iteratorCalled = false;
 									Uize.forEach ([],function () {_iteratorCalled = true});
@@ -3133,7 +3133,7 @@ Uize.module ({
 								}
 							},
 							{
-								title:'Test that, when the source is an array, the iteration handler is called as a method on the optionally specified context',
+								title:'When the source is an array, then the iteration handler is called as a method on the optionally specified context',
 								test:function () {
 									var
 										_context = {},
@@ -3144,7 +3144,7 @@ Uize.module ({
 								}
 							},
 							{
-								title:'Test that, when the source is an array, the iteration handler receives the value of elements of the array as its first argument',
+								title:'When the source is an array, then the iteration handler receives the value of elements of the array as its first argument',
 								test:function () {
 									var _seenValues = [];
 									Uize.forEach (['foo','bar'],function (_value) {_seenValues.push (_value)});
@@ -3152,7 +3152,7 @@ Uize.module ({
 								}
 							},
 							{
-								title:'Test that, when the source is an array, the iteration handler receives the index of elements of the array as its second argument',
+								title:'When the source is an array, then the iteration handler receives the index of elements of the array as its second argument',
 								test:function () {
 									var _seenKeys = [];
 									Uize.forEach (['foo','bar'],function (_value,_key) {_seenKeys.push (_key)});
@@ -3160,7 +3160,7 @@ Uize.module ({
 								}
 							},
 							{
-								title:'Test that, when the source is an array, the iteration handler receives a reference to the source array as its third argument',
+								title:'When the source is an array, then the iteration handler receives a reference to the source array as its third argument',
 								test:function () {
 									var
 										_source = ['foo'],
@@ -3171,7 +3171,7 @@ Uize.module ({
 								}
 							},
 							{
-								title:'Test that, when the source is an array, the iteration handler is called only for assigned elements of the source array when the optional allArrayElemnts parameter is not specified',
+								title:'When the source is an array, then the iteration handler is called only for assigned elements of the source array when the optional allArrayElemnts parameter is not specified',
 								test:function () {
 									var
 										_source = [],
@@ -3184,7 +3184,7 @@ Uize.module ({
 								}
 							},
 							{
-								title:'Test that, when the source is an array, the iteration handler is called only for assigned elements of the source array when false is specified for the optional allArrayElemnts parameter',
+								title:'When the source is an array, then the iteration handler is called only for assigned elements of the source array when false is specified for the optional allArrayElemnts parameter',
 								test:function () {
 									var
 										_source = [],
@@ -3197,7 +3197,7 @@ Uize.module ({
 								}
 							},
 							{
-								title:'Test that, when the source is an array, the iteration handler is called even for unassigned elements of the source array when true is specified for the optional allArrayElemnts parameter',
+								title:'When the source is an array, then the iteration handler is called even for unassigned elements of the source array when true is specified for the optional allArrayElemnts parameter',
 								test:function () {
 									var
 										_source = [],
@@ -3212,7 +3212,7 @@ Uize.module ({
 
 						/*** test support for the source being an object ***/
 							{
-								title:'Test that, when the source is an empty object, the iterator is never called',
+								title:'When the source is an empty object, then the iterator is never called',
 								test:function () {
 									var _iteratorCalled = false;
 									Uize.forEach ({},function () {_iteratorCalled = true});
@@ -3220,7 +3220,7 @@ Uize.module ({
 								}
 							},
 							{
-								title:'Test that, when the source is an object, the iteration handler is called as a method on the optionally specified context',
+								title:'When the source is an object, then the iteration handler is called as a method on the optionally specified context',
 								test:function () {
 									var
 										_context = {},
@@ -3231,7 +3231,7 @@ Uize.module ({
 								}
 							},
 							{
-								title:'Test that, when the source is an object, the iteration handler receives the value of properties of the object as its first argument',
+								title:'When the source is an object, then the iteration handler receives the value of properties of the object as its first argument',
 								test:function () {
 									var _seenValues = [];
 									Uize.forEach ({foo:'bar',hello:'world'},function (_value) {_seenValues.push (_value)});
@@ -3239,7 +3239,7 @@ Uize.module ({
 								}
 							},
 							{
-								title:'Test that, when the source is an object, the iteration handler receives the name of properties of the object as its second argument',
+								title:'When the source is an object, then the iteration handler receives the name of properties of the object as its second argument',
 								test:function () {
 									var _seenKeys = [];
 									Uize.forEach ({foo:'bar',hello:'world'},function (_value,_key) {_seenKeys.push (_key)});
@@ -3247,7 +3247,7 @@ Uize.module ({
 								}
 							},
 							{
-								title:'Test that, when the source is an object, the iteration handler receives a reference to the source object as its third argument',
+								title:'When the source is an object, then the iteration handler receives a reference to the source object as its third argument',
 								test:function () {
 									var
 										_source = {foo:'bar'},
@@ -3258,7 +3258,7 @@ Uize.module ({
 								}
 							},
 							{
-								title:'Test that, when the source is an object, specifying false for the optional allArrayElemnts parameter doesn\'t cause the method to fail',
+								title:'When the source is an object, then specifying false for the optional allArrayElemnts parameter doesn\'t cause the method to fail',
 								test:function () {
 									var
 										_source = {foo:'bar'},
@@ -3283,7 +3283,7 @@ Uize.module ({
 								}
 							},
 							{
-								title:'Test that, when the source is an object, specifying true for the optional allArrayElemnts parameter doesn\'t cause the method to fail',
+								title:'When the source is an object, then specifying true for the optional allArrayElemnts parameter doesn\'t cause the method to fail',
 								test:function () {
 									var
 										_source = {foo:'bar'},
@@ -3310,7 +3310,7 @@ Uize.module ({
 
 						/*** test support for source being a length ***/
 							{
-								title:'Test that, when the source is the number zero, the iterator is never called',
+								title:'When the source is the number zero, then the iterator is never called',
 								test:function () {
 									var _iteratorCalled = false;
 									Uize.forEach (0,function () {_iteratorCalled = true});
@@ -3318,7 +3318,7 @@ Uize.module ({
 								}
 							},
 							{
-								title:'Test that, when the source is a number, the iteration handler is called as a method on the optionally specified context',
+								title:'When the source is a number, then the iteration handler is called as a method on the optionally specified context',
 								test:function () {
 									var
 										_context = {},
@@ -3329,7 +3329,7 @@ Uize.module ({
 								}
 							},
 							{
-								title:'Test that, when the source is a number, the iteration handler receives the iteration index as its first argument',
+								title:'When the source is a number, then the iteration handler receives the iteration index as its first argument',
 								test:function () {
 									var _seenValues = [];
 									Uize.forEach (10,function (_value) {_seenValues.push (_value)});
@@ -3337,7 +3337,7 @@ Uize.module ({
 								}
 							},
 							{
-								title:'Test that, when the source is a number, the iteration handler receives the iteration index as its second argument',
+								title:'When the source is a number, then the iteration handler receives the iteration index as its second argument',
 								test:function () {
 									var _seenKeys = [];
 									Uize.forEach (10,function (_value,_key) {_seenKeys.push (_key)});
@@ -3345,7 +3345,7 @@ Uize.module ({
 								}
 							},
 							{
-								title:'Test that, when the source is a number, the iteration handler receives the source as its third argument',
+								title:'When the source is a number, then the iteration handler receives the source as its third argument',
 								test:function () {
 									var _seenSource;
 									Uize.forEach (10,function (_value,_key,_source) {_seenSource = _source});
@@ -3353,7 +3353,7 @@ Uize.module ({
 								}
 							},
 							{
-								title:'Test that, when the source is a number, specifying false for the optional allArrayElemnts parameter doesn\'t cause the method to fail',
+								title:'When the source is a number, then specifying false for the optional allArrayElemnts parameter doesn\'t cause the method to fail',
 								test:function () {
 									var
 										_seenValue,
@@ -3377,7 +3377,7 @@ Uize.module ({
 								}
 							},
 							{
-								title:'Test that, when the source is a number, specifying true for the optional allArrayElemnts parameter doesn\'t cause the method to fail',
+								title:'When the source is a number, then specifying true for the optional allArrayElemnts parameter doesn\'t cause the method to fail',
 								test:function () {
 									var
 										_seenValue,
@@ -3403,7 +3403,7 @@ Uize.module ({
 
 						/*** test support for string iteration handler ***/
 							{
-								title:'Test that, when the iteration handler is a string, the iteration handler is called as a method on the optionally specified context',
+								title:'When the iteration handler is a string, then the iteration handler is called as a method on the optionally specified context',
 								test:function () {
 									var _context = {};
 									Uize.forEach (1,'this.foo = "bar"',_context);
@@ -3411,7 +3411,7 @@ Uize.module ({
 								}
 							},
 							{
-								title:'Test that, when the iteration handler is a string, the iteration handler receives the iteration index as its first argument',
+								title:'When the iteration handler is a string, then the iteration handler receives the iteration index as its first argument',
 								test:function () {
 									var _seenValues = [];
 									Uize.forEach (['foo','bar'],'this.push (value)',_seenValues);
@@ -3419,7 +3419,7 @@ Uize.module ({
 								}
 							},
 							{
-								title:'Test that, when the iteration handler is a string, the iteration handler receives the iteration index as its second argument',
+								title:'When the iteration handler is a string, then the iteration handler receives the iteration index as its second argument',
 								test:function () {
 									var _seenKeys = [];
 									Uize.forEach (['foo','bar'],'this.push (key)',_seenKeys);
@@ -3427,7 +3427,7 @@ Uize.module ({
 								}
 							},
 							{
-								title:'Test that, when the iteration handler is a string, the iteration handler receives the source as its third argument',
+								title:'When the iteration handler is a string, then the iteration handler receives the source as its third argument',
 								test:function () {
 									var
 										_source = {foo:'bar'},
@@ -3440,7 +3440,7 @@ Uize.module ({
 
 						/*** test support for source being an arguments object ***/
 							{
-								title:'Test that, when the source is an arguments object, it is iterated over like an array',
+								title:'When the source is an arguments object, it is iterated over like an array',
 								test:function () {
 									var
 										_context = {},
@@ -3475,7 +3475,7 @@ Uize.module ({
 
 						/*** test handling of a non-object source ***/
 							{
-								title:'Test that, when the source is neither an array, object, nor length, the iterator is never called',
+								title:'When the source is neither an array, object, nor length, then the iterator is never called',
 								test:function () {
 									var _timesIteratorCalled = 0;
 									function _iterator () {_timesIteratorCalled++}
@@ -3492,7 +3492,7 @@ Uize.module ({
 					]],
 					['Uize.applyAll',[
 						{
-							title:'Test that an array of functions is executed in the correct sequence, and called on the specified context for every call',
+							title:'An array of functions is executed in the specified sequence, and called on the specified context for every call',
 							test:function () {
 								var
 									_actualCalls = [],
@@ -3523,7 +3523,7 @@ Uize.module ({
 							}
 						},
 						{
-							title:'Test that a list object of functions is treated in the same way as an array of functions',
+							title:'A list object of functions is treated in the same way as an array of functions',
 							test:function () {
 								var
 									_actualCalls = [],
@@ -3555,7 +3555,7 @@ Uize.module ({
 							}
 						},
 						{
-							title:'Test that, when an optional arguments list is provided, the arguments list is used for each function call',
+							title:'When an optional arguments list is provided, the arguments list is used for each function call',
 							test:function () {
 								var
 									_argsForCalls = ['foo','bar',42,true,null,undefined,NaN],
@@ -3576,7 +3576,7 @@ Uize.module ({
 					]],
 					['Uize.callOn',[
 						{
-							title:'Test that specifying null for the object results in no action',
+							title:'Specifying null for the object results in no action',
 							test:function () {
 								var _success = true;
 								Uize.callOn (null,function () {_success = false});
@@ -3584,7 +3584,7 @@ Uize.module ({
 							}
 						},
 						{
-							title:'Test that specifying undefined for the object results in no action',
+							title:'Specifying undefined for the object results in no action',
 							test:function () {
 								var _success = true;
 								Uize.callOn (undefined,function () {_success = false});
@@ -3593,7 +3593,7 @@ Uize.module ({
 						},
 						{
 							title:
-								'Test that specifying a value for method that is neither a string nor a function results in no error being produced',
+								'Specifying a value for method that is neither a string nor a function results in no error being produced',
 							test:function () {
 								var _target = Uize.Class ();
 								Uize.callOn (_target);
@@ -3608,7 +3608,7 @@ Uize.module ({
 						},
 						{
 							title:
-								'Test that specifying a function as the method and an instance as the target results in the function being called as an instance method on the instance',
+								'Specifying a function as the method and an instance as the target results in the function being called as an instance method on the instance',
 							test:function () {
 								var
 									_target = Uize.Class (),
@@ -3620,7 +3620,7 @@ Uize.module ({
 						},
 						{
 							title:
-								'Test that when the optional arguments parameter is not specified, the arguments are defaulted to an empty array',
+								'When the optional arguments parameter is not specified, then the arguments are defaulted to an empty array',
 							test:function () {
 								var
 									_target = Uize.Class (),
@@ -3632,7 +3632,7 @@ Uize.module ({
 						},
 						{
 							title:
-								'Test that when the optional arguments parameter is specified, those arguments are passed in the call correctly',
+								'When the optional arguments parameter is specified, those arguments are passed in the call correctly',
 							test:function () {
 								var
 									_target = Uize.Class (),
@@ -3649,7 +3649,7 @@ Uize.module ({
 						},
 						{
 							title:
-								'Test that specifying the target as an instance and the method as a string does not result in an error being produced when the method is not defined on the instance',
+								'Specifying the target as an instance and the method as a string does not result in an error being produced when the method is not defined on the instance',
 							test:function () {
 								var
 									_target = Uize.Class (),
@@ -3662,7 +3662,7 @@ Uize.module ({
 						},
 						{
 							title:
-								'Test that specifying the target as an instance and the method as a string results in the specified method being called as an instance method on the instance',
+								'Specifying the target as an instance and the method as a string results in the specified method being called as an instance method on the instance',
 							test:function () {
 								var
 									_target = Uize.Class (),
@@ -3677,7 +3677,7 @@ Uize.module ({
 						},
 						{
 							title:
-								'Test that specifying an array as the target results in the method being called correctly on all elements of the array',
+								'Specifying an array as the target results in the method being called correctly on all elements of the array',
 							test:function () {
 								var
 									_callLog = [],
@@ -3710,7 +3710,7 @@ Uize.module ({
 						},
 						{
 							title:
-								'Test that specifying an object as the target results in the method being called correctly on all property values of the object',
+								'Specifying an object as the target results in the method being called correctly on all property values of the object',
 							test:function () {
 								var
 									_callLog = [],
@@ -3742,7 +3742,7 @@ Uize.module ({
 							}
 						},
 						{
-							title:'Test that recursion is handled correctly when the target is a complex data structure',
+							title:'When the target is a complex data structure, it is fully recursed',
 							test:function () {
 								var
 									_expectedCallLog = [],
@@ -3792,7 +3792,7 @@ Uize.module ({
 							}
 						},
 						{
-							title:'Test that a function can be called as a method on values that are primitives or instances of objects that are not Uize subclasses',
+							title:'A function can be called as a method on values that are primitives or instances of objects that are not Uize subclasses',
 							test:function () {
 								var
 									_values = [true,42,'foo',NaN,new Date ('01/01/2011'),/\d+/],
@@ -3808,109 +3808,109 @@ Uize.module ({
 						}
 					]],
 					['Uize.keys',[
-						['Test that an object\'s keys are reported correctly',[{foo:1,bar:2}],['foo','bar']],
-						['Test that a populated array\'s keys are reported correctly',[['a','b','c','d']],['0','1','2','3']],
-						['Test that a sparsely populated array\'s keys are reported correctly',
+						['An array containing the keys of the source object is returned',[{foo:1,bar:2}],['foo','bar']],
+						['When the source is a populated array, then an array containing the indexes of the elements is returned',[['a','b','c','d']],['0','1','2','3']],
+						['When the source is a sparsely populated array, then an array containing the indexes of only the populated elements is returned',
 							[_sparselyPopulatedArray],
 							['2','7']
 						],
-						['Test that a non-zero length array that is unpopulated has no keys',[new Array (5)],[]],
-						['Test that an empty array has no keys',[[]],[]],
-						['Test that an empty object has no keys',[{}],[]],
-						['Test that null has no keys',null,[]],
-						['Test that undefined has no keys',undefined,[]],
-						['Test that a boolean value has no keys',false,[]],
-						['Test that a number value has no keys',5,[]],
-						['Test that a string value has no keys','hello',[]]
+						['A non-zero length array that is unpopulated has no keys',[new Array (5)],[]],
+						['An empty array has no keys',[[]],[]],
+						['An empty object has no keys',[{}],[]],
+						['The value null has no keys',null,[]],
+						['The value undefined has no keys',undefined,[]],
+						['A boolean value has no keys',false,[]],
+						['A number value has no keys',5,[]],
+						['A string value has no keys','hello',[]]
 					]],
 					['Uize.totalKeys',[
-						['Test that an object\'s total keys are reported correctly',[{foo:1,bar:2}],2],
-						['Test that a populated array\'s total keys are reported correctly',[['a','b','c','d']],4],
-						['Test that a sparsely populated array\'s total keys are reported correctly',
+						['The total number of keys of the source object is returned',[{foo:1,bar:2}],2],
+						['When the source is a populated array, then the length of the array is returned',[['a','b','c','d']],4],
+						['When the source is a sparsely populated array, then the total number of populated elements is returned',
 							[_sparselyPopulatedArray],
 							2
 						],
-						['Test that a non-zero length array that is unpopulated has 0 keys',[new Array (5)],0],
-						['Test that an empty array has 0 keys',[[]],0],
-						['Test that an empty object has 0 keys',[{}],0],
-						['Test that null has 0 keys',null,0],
-						['Test that undefined has 0 keys',undefined,0],
-						['Test that a boolean value has 0 keys',false,0],
-						['Test that a number value has 0 keys',5,0],
-						['Test that a string value has 0 keys','hello',0]
+						['A non-zero length array that is unpopulated has 0 keys',[new Array (5)],0],
+						['An empty array has 0 keys',[[]],0],
+						['An empty object has 0 keys',[{}],0],
+						['The value null has 0 keys',null,0],
+						['The value undefined has 0 keys',undefined,0],
+						['A boolean value has 0 keys',false,0],
+						['A number value has 0 keys',5,0],
+						['A string value has 0 keys','hello',0]
 					]],
 					['Uize.values',[
-						['Test that an object\'s values are reported correctly',[{foo:1,bar:2}],[1,2]],
-						['Test that a populated array\'s values are reported correctly',
+						['An array containing the values of the source object\'s properties is returned',[{foo:1,bar:2}],[1,2]],
+						['When the source is a populated array, then an array containing the values of the elements is returned',
 							[['a','b','c','d']],
 							['a','b','c','d']
 						],
 						{
-							title:'Test that getting values for an array simply returns the array',
+							title:'Getting values for an array simply returns the array',
 							test:function () {return Uize.values (_sparselyPopulatedArray) == _sparselyPopulatedArray}
 						},
-						['Test that a sparsely populated array\'s values are reported correctly',
+						['When the source is a sparsely populated array, then an equivalent sparsely populated array is returned',
 							[_sparselyPopulatedArray],
 							_sparselyPopulatedArray
 						],
-						['Test that a non-zero length array that is unpopulated has no values',
+						['When the source is a non-zero length unpopulated array, then an unpopulated array of equal length is returned',
 							[new Array (5)],
 							new Array (5)
 						],
-						['Test that an empty array has no values',[[]],[]],
-						['Test that an empty object has no values',[{}],[]],
-						['Test that null has no values',null,[]],
-						['Test that undefined has no values',undefined,[]],
-						['Test that a boolean value has no values',false,[]],
-						['Test that a number value has no values',5,[]],
-						['Test that a string value has no values','hello',[]]
+						['An empty array has no values',[[]],[]],
+						['An empty object has no values',[{}],[]],
+						['The value null has no values',null,[]],
+						['The value undefined has no values',undefined,[]],
+						['A boolean value has no values',false,[]],
+						['A number value has no values',5,[]],
+						['A string value has no values','hello',[]]
 					]],
 					['Uize.meldKeysValues',[
-						['Test that the method correctly melds together the specified keys and values',
+						['The specified keys and values are melded together to form a single object, where the keys are paired with corresponding values to form object properties',
 							[['foo','hello'],['bar','world']],
 							{foo:'bar',hello:'world'}
 						],
-						['Test that surplus values are ignored',
+						['Surplus values are ignored',
 							[['foo'],['bar','world']],
 							{foo:'bar'}
 						],
-						['Test that surplus keys are ignored',
+						['Surplus keys are ignored',
 							[['foo','hello'],['bar']],
 							{foo:'bar'}
 						]
 					]],
 					['Uize.lookup',[
-						['Test that true is the default value for the lookupValue paramter',
+						['The value true is the default value for the lookupValue paramter',
 							[['foo','bar']],
 							{foo:true,bar:true}
 						],
-						['Test that default can be specified as a value for the lookupValue paramter',
+						['The value undefined can be specified as a value for the lookupValue paramter',
 							[['foo','bar'],undefined],
 							{foo:undefined,bar:undefined}
 						],
-						['Test that a values array with duplicate values is handled correctly',
+						['The source values array may contain duplicate values',
 							[['foo','foo','bar','bar']],
 							{foo:true,bar:true}
 						],
-						['Test that a values array with different types of values is handled correctly',
+						['If the source values array contains non-string values, they will be coerced to strings to form key names in the resulting lookup',
 							[['','string',true,4.01,NaN,Infinity,null,undefined],1],
 							{'':1,'string':1,'true':1,'4.01':1,'NaN':1,'Infinity':1,'null':1,'undefined':1}
 						],
-						['Test that an empty values array produces an empty lookup object',
+						['An empty values array produces an empty lookup object',
 							[[]],
 							{}
 						],
-						['Test that a sparsely populated values array produces a lookup object with a single "undefined" key for all the missing/undefined element values',
+						['A sparsely populated values array produces a lookup object with a single "undefined" key for all the missing/undefined element values',
 							[_sparselyPopulatedArray],
 							{1:true,2:true,'undefined':true}
 						],
-						['Test that a non-zero length values array that is unpopulated produces a lookup object with a single "undefined" key for all the undefined element values',
+						['A non-zero length values array that is unpopulated produces a lookup object with a single "undefined" key for all the undefined element values',
 							[new Array (5)],
 							{'undefined':true}
 						],
 
 						/*** test handling of the optional safeOrTarget parameter ***/
-							['Test that specifying the value true for the optional safeOrTarget parameter results in a safe lookup object being created',
+							['Specifying the value true for the optional safeOrTarget parameter results in a safe lookup object being created',
 								[['foo','bar'],1,true],
 								{
 									foo:1,
@@ -3922,7 +3922,7 @@ Uize.module ({
 								}
 							],
 							{
-								title:'Test that specifying the value false for the optional safeOrTarget parameter results in an unsafe lookup object being created',
+								title:'Specifying the value false for the optional safeOrTarget parameter results in an unsafe lookup object being created',
 								test:function () {
 									var _lookup = Uize.lookup (null,1,false);
 									return this.expect (
@@ -3931,7 +3931,7 @@ Uize.module ({
 									);
 								}
 							},
-							['Test that specifying the value true for the optional safeOrTarget parameter is handled correctly when the source array contains values that coincide with properties of the Object prototype',
+							['Specifying the value true for the optional safeOrTarget parameter is handled correctly when the source array contains values that coincide with properties of the Object prototype',
 								[['foo','bar','constructor','toLocaleString','toString','valueOf'],1,true],
 								{
 									foo:1,
@@ -3943,7 +3943,7 @@ Uize.module ({
 								}
 							],
 							{
-								title:'Test that specifying a target object for the optional safeOrTarget parameter is handled correctly',
+								title:'When a target object is specified for the optional safeOrTarget parameter, then that target object is populated with the lookup keys',
 								test:function () {
 									var
 										_target = {foo:1},
@@ -3957,58 +3957,58 @@ Uize.module ({
 							}
 					]],
 					['Uize.reverseLookup',[
-						['Test that calling with no parameter produces an empty object',
+						['Calling with no parameter produces an empty object',
 							[],
 							{}
 						],
-						['Test that calling with the value null specified produces an empty object',
+						['Calling with the value null specified produces an empty object',
 							[null],
 							{}
 						],
-						['Test that calling with the value undefined specified produces an empty object',
+						['Calling with the value undefined specified produces an empty object',
 							[undefined],
 							{}
 						],
-						['Test that an object with no duplicate values is handled correctly',
+						['A reverse lookup can be produced from a source object',
 							[{foo:1,bar:2}],
 							{1:'foo',2:'bar'}
 						],
-						['Test that an object with duplicate values is handled as expected (last mapping wins)',
+						['When the source object contains duplicate values, the name of the last property having the duplicate value will be used as the value in the reverse lookup (last mapping wins)',
 							[{foo:1,bar:1}],
 							{1:'bar'}
 						],
-						['Test that an empty object produces an empty reverse lookup object',
+						['An empty object produces an empty reverse lookup object',
 							[{}],
 							{}
 						],
-						['Test that an object with different types of values is handled correctly',
+						['If the properties of the source object have non-string values, they will be coerced to strings to form key names in the resulting reverse lookup',
 							[{prop1:'',prop2:'string',prop3:true,prop4:4.01,prop5:NaN,prop6:Infinity,prop7:null,prop8:undefined}],
 							{'':'prop1','string':'prop2','true':'prop3','4.01':'prop4','NaN':'prop5',Infinity:'prop6','null':'prop7','undefined':'prop8'}
 						],
-						['Test that an array can be specified as a source object',
+						['An array can be specified as a source object',
 							[['foo','bar']],
 							{foo:'0',bar:'1'}
 						],
-						['Test that an empty array produces an empty reverse lookup object',
+						['An empty array produces an empty reverse lookup object',
 							[{}],
 							{}
 						],
-						['Test that a sparsely populated values array produces a reverse lookup object with no "undefined" key for missing/undefined element values',
+						['A sparsely populated values array produces a reverse lookup object with no "undefined" key for missing/undefined element values',
 							[_sparselyPopulatedArray],
 							{1:'2',2:'7'}
 						],
-						['Test that a non-zero length values array that is unpopulated produces an empty reverse lookup object',
+						['A non-zero length values array that is unpopulated produces an empty reverse lookup object',
 							[new Array (5)],
 							{}
 						],
-						['Test that null produces an empty reverse lookup object',null,{}],
-						['Test that undefined produces an empty reverse lookup object',undefined,{}],
-						['Test that a boolean value produces an empty reverse lookup object',false,{}],
-						['Test that a number value produces an empty reverse lookup object',5,{}],
-						['Test that a string value produces an empty reverse lookup object','hello',{}],
+						['The value null produces an empty reverse lookup object',null,{}],
+						['The value undefined produces an empty reverse lookup object',undefined,{}],
+						['A boolean value produces an empty reverse lookup object',false,{}],
+						['A number value produces an empty reverse lookup object',5,{}],
+						['A string value produces an empty reverse lookup object','hello',{}],
 
 						/*** test handling of the optional safeOrTarget parameter ***/
-							['Test that specifying the value true for the optional safeOrTarget parameter results in a safe reverse lookup object being created',
+							['Specifying the value true for the optional safeOrTarget parameter results in a safe reverse lookup object being created',
 								[{foo:'bar'},true],
 								{
 									bar:'foo',
@@ -4019,7 +4019,7 @@ Uize.module ({
 								}
 							],
 							{
-								title:'Test that specifying the value false for the optional safeOrTarget parameter results in an unsafe reverse lookup object being created',
+								title:'Specifying the value false for the optional safeOrTarget parameter results in an unsafe reverse lookup object being created',
 								test:function () {
 									var _reverseLookup = Uize.reverseLookup ({foo:'bar'},false);
 									return this.expect (
@@ -4033,7 +4033,7 @@ Uize.module ({
 									);
 								}
 							},
-							['Test that specifying the value true for the optional safeOrTarget parameter is handled correctly when the source object contains values that coincide with properties of the Object prototype',
+							['Specifying the value true for the optional safeOrTarget parameter is handled correctly when the source object contains values that coincide with properties of the Object prototype',
 								[{foo:'bar',prop1:'constructor',prop2:'toLocaleString',prop3:'toString',prop4:'valueOf'},true],
 								{
 									bar:'foo',
@@ -4044,7 +4044,7 @@ Uize.module ({
 								}
 							],
 							{
-								title:'Test that specifying a target object for the optional safeOrTarget parameter is handled correctly',
+								title:'When a target object is specified for the optional safeOrTarget parameter, then that target object is populated with the lookup keys',
 								test:function () {
 									var
 										_target = {foo:'bar',hello:'world'},
@@ -4058,50 +4058,62 @@ Uize.module ({
 							}
 					]],
 					['Uize.max',[
-						['Test that the maximum value from an object is reported correctly',[{foo:1,bar:2}],2],
-						['Test that the maximum value from an array is reported correctly',[[1,2]],2],
-						['Test that the maximum value from a sparsely populated array is NaN',
+						['The maximum value is obtained from the values of all the properties of a source object',
+							[{foo:1,bar:2}],
+							2
+						],
+						['The maximum value is obtained from the values of all the elements of a source array',
+							[[1,2]],
+							2
+						],
+						['The maximum value from a sparsely populated array is NaN',
 							[_sparselyPopulatedArray],
 							NaN
 						],
-						['Test that the maximum value from a non-zero length array that is unpopulated is NaN',
+						['The maximum value from a non-zero length array that is unpopulated is NaN',
 							[new Array (5)],
 							NaN
 						],
-						['Test that the maximum value from an empty array is -Infinity',[[]],-Infinity],
-						['Test that the maximum value from an empty object is -Infinity',[{}],-Infinity],
-						['Test that the maximum value from null is -Infinity',null,-Infinity],
-						['Test that the maximum value from undefined is -Infinity',undefined,-Infinity],
-						['Test that the maximum value from a boolean value is -Infinity',false,-Infinity],
-						['Test that the maximum value from a number value is -Infinity',5,-Infinity],
-						['Test that the maximum value from a string value is -Infinity','hello',-Infinity]
+						['The maximum value from an empty array is -Infinity',[[]],-Infinity],
+						['The maximum value from an empty object is -Infinity',[{}],-Infinity],
+						['The maximum value from null is -Infinity',null,-Infinity],
+						['The maximum value from undefined is -Infinity',undefined,-Infinity],
+						['The maximum value from a boolean value is -Infinity',false,-Infinity],
+						['The maximum value from a number value is -Infinity',5,-Infinity],
+						['The maximum value from a string value is -Infinity','hello',-Infinity]
 					]],
 					['Uize.min',[
-						['Test that the minimum value from an object is reported correctly',[{foo:1,bar:2}],1],
-						['Test that the minimum value from an array is reported correctly',[[1,2]],1],
-						['Test that the minimum value from a sparsely populated array is NaN',
+						['The minimum value is obtained from the values of all the properties of a source object',
+							[{foo:1,bar:2}],
+							1
+						],
+						['The minimum value is obtained from the values of all the elements of a source array',
+							[[1,2]],
+							1
+						],
+						['The minimum value from a sparsely populated array is NaN',
 							[_sparselyPopulatedArray],
 							NaN
 						],
-						['Test that the minimum value from a non-zero length array that is unpopulated is NaN',
+						['The minimum value from a non-zero length array that is unpopulated is NaN',
 							[new Array (5)],
 							NaN
 						],
-						['Test that the minimum value from an empty array is Infinity',[[]],Infinity],
-						['Test that the minimum value from an empty object is Infinity',[{}],Infinity],
-						['Test that the minimum value from null is Infinity',null,Infinity],
-						['Test that the minimum value from undefined is Infinity',undefined,Infinity],
-						['Test that the minimum value from a boolean value is Infinity',false,Infinity],
-						['Test that the minimum value from a number value is Infinity',5,Infinity],
-						['Test that the minimum value from a string value is Infinity','hello',Infinity]
+						['The minimum value from an empty array is Infinity',[[]],Infinity],
+						['The minimum value from an empty object is Infinity',[{}],Infinity],
+						['The minimum value from null is Infinity',null,Infinity],
+						['The minimum value from undefined is Infinity',undefined,Infinity],
+						['The minimum value from a boolean value is Infinity',false,Infinity],
+						['The minimum value from a number value is Infinity',5,Infinity],
+						['The minimum value from a string value is Infinity','hello',Infinity]
 					]],
 					['Uize.now',[
 						{
-							title:'Test that the method returns an integer',
+							title:'An integer is returned',
 							test:function () {return this.expectInteger (Uize.now ())}
 						},
 						{
-							title:'Test that the method returns the current time in milliseconds',
+							title:'The current time in milliseconds is returned',
 							test:function () {
 								var
 									_nowMs = +new Date,
@@ -4128,13 +4140,13 @@ Uize.module ({
 					]],
 					['Uize.package',[
 						{
-							title:'Test that the method returns a function object',
+							title:'A function object is returned',
 							test:function () {
 								return this.expectFunction (Uize.package ());
 							}
 						},
 						{
-							title:'Test that the method returns a new function object each time it is called',
+							title:'A new function object is returned each time',
 							test:function () {
 								var
 									_package1 = Uize.package (),
@@ -4152,7 +4164,7 @@ Uize.module ({
 							}
 						},
 						{
-							title:'Test that, when no statics are specified, the method returns a function object containing no additional properties',
+							title:'When no statics are specified, a function object is returned that contains no additional properties',
 							test:function () {
 								var
 									_package = Uize.package (),
@@ -4168,7 +4180,7 @@ Uize.module ({
 							}
 						},
 						{
-							title:'Test that, when statics are specified, those statics are all copied into the function object that is returned',
+							title:'When statics are specified, those statics are all copied into the function object that is returned',
 							test:function () {
 								var
 									_method1 = function () {},

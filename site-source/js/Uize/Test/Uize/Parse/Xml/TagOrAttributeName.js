@@ -49,41 +49,41 @@ Uize.module ({
 			test:[
 				Uize.Test.requiredModulesTest ('Uize.Parse.Xml.TagOrAttributeName'),
 				{
-					title:'Test that the parser works correctly',
+					title:'A tag or attribute name can be parsed',
 					test:[
 						_parserTest (
-							'Test that an empty strings fails parsing as a tag/attribute name',
+							'An empty strings fails parsing as a tag/attribute name',
 							'',
 							'',
 							false
 						),
 						_parserTest (
-							'Test that a string fails parsing as a tag/attribute name if the first character is not a valid tag/attribute name start character',
+							'A string fails parsing as a tag/attribute name if the first character is not a valid tag/attribute name start character',
 							'0img',
 							'',
 							false
 						),
 						_parserTest (
-							'Test that a string is successfully parsed as a tag/attribute name if its first character is a valid tag/attribute name start character',
+							'A string is successfully parsed as a tag/attribute name if its first character is a valid tag/attribute name start character',
 							'_###',
 							'_',
 							true
 						),
 						_parserTest (
-							'Test that all characters, following the initial start character, that are valid tag/attribute name continuation characters are included in the parse tag/attribute name',
+							'All characters, following the initial start character, that are valid tag/attribute name continuation characters are included in the parse tag/attribute name',
 							'__abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-0123456789###',
 							'__abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-0123456789',
 							true
 						),
 						_parserTest (
-							'Test that, when the value specified for the optional starting index starts the parser at a valid tag start character, then parsing succeeds',
+							'When the value specified for the optional starting index starts the parser at a valid tag start character, then parsing succeeds',
 							'%%% img',
 							'img',
 							true,
 							4
 						),
 						_parserTest (
-							'Test that, when the value specified for the optional starting index starts the parser at a non-valid tag start character, then parsing fails',
+							'When the value specified for the optional starting index starts the parser at a non-valid tag start character, then parsing fails',
 							'img %%%',
 							'',
 							false,
@@ -92,7 +92,7 @@ Uize.module ({
 					]
 				},
 				{
-					title:'Test that arguments passed to the parser object\'s constructor are used for initial parsing during construction',
+					title:'Arguments passed to the parser object\'s constructor are used for initial parsing during construction',
 					test:function () {
 						var
 							_classPrototype = Uize.Parse.Xml.TagOrAttributeName.prototype,

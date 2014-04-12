@@ -34,36 +34,36 @@ Uize.module ({
 				Uize.Test.requiredModulesTest ('Uize.Str.Repeat'),
 				Uize.Test.staticMethodsTest ([
 					['Uize.Str.Repeat.repeat',[
-						['Test that repeating an empty string one time produces an empty string',
+						['Repeating an empty string one time produces an empty string',
 							['',10],
 							''
 						],
-						['Test that repeating an empty string a positive number of times produces an empty string',
+						['Repeating an empty string a positive number of times produces an empty string',
 							['',10],
 							''
 						],
-						['Test that repeating a non-empty string zero times produces an empty string',
+						['Repeating a non-empty string zero times produces an empty string',
 							['Blah',0],
 							''
 						],
-						['Test that repeating a non-empty string a negative number of times produces an empty string',
+						['Repeating a non-empty string a negative number of times produces an empty string',
 							['Blah',-10],
 							''
 						],
-						['Test that repeating a non-empty string one time produces that same string',
+						['Repeating a non-empty string one time produces that same string',
 							['Blah',1],
 							'Blah'
 						],
-						['Test that repeating a non-empty string a positive number of times works correctly',
+						['Repeating a non-empty string a positive number of times produces a string with the specified number of repititions of the string',
 							['Blah',10],
 							'BlahBlahBlahBlahBlahBlahBlahBlahBlahBlah'
 						],
-						['Test that repeating a single space a positive number of times works correctly',
+						['Repeating a single space a positive number of times produces a string with the specified number of spaces',
 							[' ',10],
 							'          '
 						],
 						{
-							title:'Test that repeated use of repeating a single space works correctly (given the way that this special case is handled)',
+							title:'The method can be used repeatedly to produce a different number of repititions of a single space (so, the optimization to handle this special case doesn\'t break the behavior)',
 							test:function () {
 								return (
 									Uize.Str.Repeat.repeat (' ',15) == '               ' &&
