@@ -75,32 +75,32 @@ Uize.module ({
 				title:_title,
 				test:[
 					{
-						title:_title + ' (children object not null)',
+						title:'Children object is not null',
 						test:function() { return this.expectObject(_getDeclaredChildren()) }
 					},
 					{
-						title:_title + ' (children object has the same child names as defined in declarative children w/ a widgetClass)',
+						title:'Children object has the same child names as defined in declarative children w/ a widgetClass',
 						test:function() {
 							var m = this;
 							return _expectAll(_getDeclaredChildren(), function(_child, _childName) { return m.expect(true, _childName in _normalizedDeclarativeChildren) });
 						}
 					},
 					{
-						title:_title + ' (none of the children should be null)',
+						title:'None of the children are null',
 						test:function() {
 							var m = this;
 							return _expectAll(_getDeclaredChildren(), function(_child) { return m.expectNonNull(_child) });
 						}
 					},
 					{
-						title:_title + ' (each child should be an object)',
+						title:'Each child should be an object',
 						test:function() {
 							var m = this;
 							return _expectAll(_getDeclaredChildren(), function(_child) { return m.expectObject(_child) });
 						}
 					},
 					{
-						title:_title + ' (each child has the correct initial state)',
+						title:'Each child has the correct initial state',
 						test:function() {
 							var m = this;
 							return _expectAll(
@@ -116,7 +116,7 @@ Uize.module ({
 						}
 					},
 					{
-						title:_title + ' (each child has the correct widget class)',
+						title:'Each child has the correct widget class',
 						test:function() {
 							var m = this;
 							return _expectAll(
@@ -139,14 +139,14 @@ Uize.module ({
 					'Uize.Widget.mDeclarativeChildren'
 				]),
 				{
-					title:'Empty Tests',
+					title:'Empty',
 					test:[
 						_generateTest('When no declarative children are specified, no children are added to the widget'),
 						_generateTest('When an empty declarative children is specified, no children are added to the widget', {})
 					]
 				},
 				{
-					title:'Verbose Syntax Tests',
+					title:'Verbose Syntax',
 					test:[
 						_generateTest(
 							'When a single declarative children is specified, only one child is added to the widget with appopriate state properties',
@@ -227,7 +227,7 @@ Uize.module ({
 					]
 				},
 				{
-					title:'Shorthand Syntax Tests',
+					title:'Shorthand Syntax',
 					test:[
 						_generateTest(
 							'When a single declarative children is specified, only one child is added to the widget with appopriate state properties',

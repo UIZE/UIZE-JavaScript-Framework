@@ -42,24 +42,15 @@ Uize.module ({
 						_mClass = m.Class,
 						_addedChildren = m.addedChildren,
 						_children = m.children,
-						_wrapBindings = function(m, _bindings) {
-							var _wrappedBindings = {};
-													
-							_forEach(
-								_bindings,
-								function(_bindingValue, _eventName) {
-									_wrappedBindings[_eventName] = function(_event) {
-										var _bindingValueIsObject = _Uize.isObject(_bindingValue);
-										
-										// ensure that the required child widgets have been added before calling the handler
-										_addedChildren.isMet(_bindingValueIsObject ? _bindingValue.required : [])
-											&& (_bindingValueIsObject ? _bindingValue.handler : _bindingValue).call(m, _event, this)
-										;
-									};
-								}
-							);
-
-							return _wrappedBindings;
+						_wrapBinding = function(_context, _bindingValue, _source) {
+							return function(_event) {
+								var _bindingValueIsObject = _Uize.isObject(_bindingValue);
+								
+								// ensure that the required child widgets have been added before calling the handler
+								_addedChildren.isMet(_bindingValueIsObject ? _bindingValue.required : [])
+									&& (_bindingValueIsObject ? _bindingValue.handler : _bindingValue).call(_context, _event, _source)
+								;
+							};
 						}
 					;
 
@@ -70,7 +61,13 @@ Uize.module ({
 								_forEach(
 									_mClass.mEventBindings_dom,
 									function (_bindings, _nodeName) {
-										m.wireNode(_nodeName, _wrapBindings(m, _bindings));
+										var _node = m.getNode(_nodeName);
+										_forEach(
+											_bindings,
+											function(_binding, _eventName) {
+												m.wireNode(_node, _eventName, _wrapBinding(m, _binding, _node));
+											}
+										);
 									}
 								);
 							}
@@ -80,7 +77,14 @@ Uize.module ({
 						_forEach(
 							_mClass.mEventBindings_widget,
 							function(_bindings, _widgetName) {
-								function _wire(_widget) { _widget.wire( _wrapBindings(m, _bindings)) }
+								function _wire(_widget) {
+									_forEach(
+										_bindings,
+										function(_binding, _eventName) {
+											_widget.wire(_eventName, _wrapBinding(m, _binding, _widget));
+										}
+									);
+								}
 								_widgetName // '' is self
 									? _addedChildren.once(_widgetName, function() { _wire(_children[_widgetName]) })
 									: _wire(m)
