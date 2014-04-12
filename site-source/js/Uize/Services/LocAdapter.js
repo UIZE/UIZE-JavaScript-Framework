@@ -230,14 +230,14 @@ Uize.module ({
 									_primaryLanguageResources,
 									function (_resourceFileStrings,_resourceFileSubPath) {
 										var
-											_resourceFileFullPath =
-												_rootFolderPath + '/' +
+											_languageResourceFileSubPath =
 												m.getLanguageResourcePath (_resourceFileSubPath,_language),
+											_resourceFileFullPath = _rootFolderPath + '/' + _languageResourceFileSubPath,
 											_resources = _fileSystem.fileExists ({path:_resourceFileFullPath})
 												? m.parseResourceFile (_fileSystem.readFile ({path:_resourceFileFullPath}))
 												: {}
 										;
-										_languageResources [_resourceFileFullPath] = Uize.Data.Diff.diff (
+										_languageResources [_languageResourceFileSubPath] = Uize.Data.Diff.diff (
 											_resources,
 											_primaryLanguageResourcesDiff [_resourceFileSubPath],
 											function (_gatheredProperty,_propertyDiff) {
