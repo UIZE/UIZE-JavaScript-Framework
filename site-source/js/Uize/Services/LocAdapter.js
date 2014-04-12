@@ -7,6 +7,7 @@ Uize.module ({
 		'Uize.Data.NameValueRecords',
 		'Uize.Data.Csv',
 		'Uize.Data.Diff',
+		'Uize.Data.Matches',
 		'Uize.Loc.Pseudo',
 		'Uize.Build.Util',
 		'Uize.Str.Split',
@@ -25,24 +26,37 @@ Uize.module ({
 				// TODO: move this into the config and make sure there are no assumptions about "pseudo" being the name of the pseudo-locale in the code anywhere
 		;
 
-		/*** Private Instance Methods ***/
-			function _loadAndParseLanguageResourcesFile (_languageResourcesFilePath) {
-				return (
-					_fileSystem.fileExists ({path:_languageResourcesFilePath})
-						? Uize.Data.Flatten.unflatten (
-							Uize.Data.NameValueRecords.toHash (
-								Uize.Data.Csv.from (_fileSystem.readFile ({path:_languageResourcesFilePath})),
-								0,
-								1
-							),
-							Uize.Json.from
-						)
-						: undefined
-				);
-			}
-
 		return _superclass.subclass ({
 			instanceMethods:{
+				languageResourcesFilePath:function (_language) {
+					return this._projectStringsPath + _language + '.csv';
+				},
+
+				loadAndParseLanguageResourcesFile:function (_language) {
+					var _languageResourcesFilePath = this.languageResourcesFilePath (_language);
+					return (
+						_fileSystem.fileExists ({path:_languageResourcesFilePath})
+							? Uize.Data.Flatten.unflatten (
+								Uize.Data.NameValueRecords.toHash (
+									Uize.Data.Csv.from (_fileSystem.readFile ({path:_languageResourcesFilePath})),
+									0,
+									1
+								),
+								Uize.Json.from
+							)
+							: undefined
+					);
+				},
+
+				forEachTranslatableLanguage:function (_iterationHandler) {
+					Uize.forEach (
+						this.project.languages,
+						function (_language) {
+							_language != _primaryLanguage && _language != _pseudoLocale && _iterationHandler (_language);
+						}
+					);
+				},
+
 				distributeResources:function (_resources,_language) {
 					var
 						m = this,
@@ -180,16 +194,13 @@ Uize.module ({
 				'import':function (_params,_callback) {
 					var
 						m = this,
-						_project = m.project,
-						_projectName = _project.name
+						_project = m.project
 					;
 					Uize.forEach (
 						_project.languages,
 						function (_language) {
 							if (_language != _primaryLanguage) {
-								var _resources = _loadAndParseLanguageResourcesFile (
-									m._stringsFolder + '/' + _projectName + '/' + _language + '.csv'
-								);
+								var _resources = m.loadAndParseLanguageResourcesFile (_language);
 								_resources && m.distributeResources (_resources,_language,_project);
 							}
 						}
@@ -201,13 +212,9 @@ Uize.module ({
 					var
 						m = this,
 						_project = m.project,
-						_projectName = _project.name,
 						_rootFolderPath = _project.rootFolderPath,
 						_primaryLanguageResources = m.gatherResources (),
-						_primaryLanguageResourcesLast =
-							_loadAndParseLanguageResourcesFile (
-								m._stringsFolder + '/' + _projectName + '/' + _primaryLanguage + '.csv'
-							) || {},
+						_primaryLanguageResourcesLast = m.loadAndParseLanguageResourcesFile (_primaryLanguage) || {},
 						_primaryLanguageResourcesDiff = Uize.Data.Diff.diff (
 							_primaryLanguageResourcesLast,
 							_primaryLanguageResources
@@ -216,41 +223,38 @@ Uize.module ({
 					;
 
 					/*** gather resources for all other supported languages ***/
-						Uize.forEach (
-							_project.languages,
+						m.forEachTranslatableLanguage (
 							function (_language) {
-								if (_language != _primaryLanguage && _language != _pseudoLocale) {
-									var _languageResources = _resoucesByLanguage [_language] = {};
-									Uize.forEach (
-										_primaryLanguageResources,
-										function (_resourceFileStrings,_resourceFileSubPath) {
-											var
-												_resourceFileFullPath =
-													_rootFolderPath + '/' +
-													m.getLanguageResourcePath (_resourceFileSubPath,_language),
-												_resources = _fileSystem.fileExists ({path:_resourceFileFullPath})
-													? m.parseResourceFile (_fileSystem.readFile ({path:_resourceFileFullPath}))
-													: {}
-											;
-											_languageResources [_resourceFileFullPath] = Uize.Data.Diff.diff (
-												_resources,
-												_primaryLanguageResourcesDiff [_resourceFileSubPath],
-												function (_gatheredProperty,_propertyDiff) {
-													return (
-														!_propertyDiff || _propertyDiff.value == 'removed'
-															? undefined
-															: {
-																value:
-																	_propertyDiff.value == 'modified' || _propertyDiff.value == 'added'
-																		? ''
-																		: _gatheredProperty ? _gatheredProperty.value : ''
-															}
-													);
-												}
-											);
-										}
-									);
-								}
+								var _languageResources = _resoucesByLanguage [_language] = {};
+								Uize.forEach (
+									_primaryLanguageResources,
+									function (_resourceFileStrings,_resourceFileSubPath) {
+										var
+											_resourceFileFullPath =
+												_rootFolderPath + '/' +
+												m.getLanguageResourcePath (_resourceFileSubPath,_language),
+											_resources = _fileSystem.fileExists ({path:_resourceFileFullPath})
+												? m.parseResourceFile (_fileSystem.readFile ({path:_resourceFileFullPath}))
+												: {}
+										;
+										_languageResources [_resourceFileFullPath] = Uize.Data.Diff.diff (
+											_resources,
+											_primaryLanguageResourcesDiff [_resourceFileSubPath],
+											function (_gatheredProperty,_propertyDiff) {
+												return (
+													!_propertyDiff || _propertyDiff.value == 'removed'
+														? undefined
+														: {
+															value:
+																_propertyDiff.value == 'modified' || _propertyDiff.value == 'added'
+																	? ''
+																	: _gatheredProperty ? _gatheredProperty.value : ''
+														}
+												);
+											}
+										);
+									}
+								);
 							}
 						);
 
@@ -258,7 +262,7 @@ Uize.module ({
 						_resoucesByLanguage,
 						function (_languageResources,_language) {
 							_fileSystem.writeFile ({
-								path:m._stringsFolder + '/' + _projectName + '/' + _language + '.csv',
+								path:m.languageResourcesFilePath (_language),
 								contents:Uize.Data.Csv.to (
 									Uize.Data.NameValueRecords.fromHash (
 										Uize.Data.Flatten.flatten (
@@ -270,6 +274,66 @@ Uize.module ({
 									)
 								)
 							});
+						}
+					);
+					_callback ();
+				},
+
+				exportJob:function (_params,_callback) {
+					var m = this;
+					m.forEachTranslatableLanguage (
+						function (_language) {
+							var
+								_translationJobFilePath = m._projectStringsPath + 'jobs/' + _language + '.csv',
+								_translationJobStrings = Uize.Data.Matches.values (
+									Uize.Data.Csv.from (_fileSystem.readFile ({path:m.languageResourcesFilePath (_language)})),
+									'!value [1]'
+								)
+							;
+							_translationJobStrings.length
+								? _fileSystem.writeFile ({
+									path:_translationJobFilePath,
+									contents:Uize.Data.Csv.to (_translationJobStrings)
+								})
+								//: _fileSystem.deleteFile ({path:_translationJobFilePath})
+								: _fileSystem.writeFile ({path:_translationJobFilePath,contents:''})
+							;
+						}
+					);
+					_callback ();
+				},
+
+				importJob:function (_params,_callback) {
+					var m = this;
+					m.forEachTranslatableLanguage (
+						function (_language) {
+							var _translatedStrings = Uize.Data.Matches.values (
+								Uize.Data.Csv.from (
+									_fileSystem.readFile ({path:m._projectStringsPath + 'jobs/' + _language + '.csv'})
+								),
+								'value [1]'
+							);
+							if (_translatedStrings.length) {
+								_fileSystem.writeFile ({
+									path:m.languageResourcesFilePath (_language),
+									contents:Uize.Data.Csv.to (
+										Uize.Data.NameValueRecords.fromHash (
+											Uize.copyInto (
+												Uize.Data.NameValueRecords.toHash (
+													Uize.Data.Csv.from (
+														_fileSystem.readFile ({path:m.languageResourcesFilePath (_language)})
+													),
+													0,
+													1
+												),
+												Uize.Data.NameValueRecords.toHash (_translatedStrings,0,1)
+											),
+											0,
+											1
+										)
+									)
+								});
+							}
 						}
 					);
 					_callback ();
@@ -403,9 +467,8 @@ Uize.module ({
 
 				pseudoLocalize:function (_params,_callback) {
 					var
-						_pseudoLocalizeOptions = {wordSplitter:this.wordSplitter},
-						_projectName = this.project.name,
-						_stringsFolder = this._stringsFolder
+						m = this,
+						_pseudoLocalizeOptions = {wordSplitter:m.wordSplitter}
 					;
 
 					function _pseudoLocalizeString (_string) {
@@ -413,13 +476,11 @@ Uize.module ({
 					}
 
 					_fileSystem.writeFile ({
-						path:_stringsFolder + '/' + _projectName + '/' + _pseudoLocale + '.csv',
+						path:m.languageResourcesFilePath (_pseudoLocale),
 						contents:Uize.Data.Csv.to (
 							Uize.map (
 								Uize.Data.Csv.from (
-									_fileSystem.readFile ({
-										path:_stringsFolder + '/' + _projectName + '/' + _primaryLanguage + '.csv'
-									})
+									_fileSystem.readFile ({path:m.languageResourcesFilePath (_primaryLanguage)})
 								),
 								function (_keyValueArray) {
 									_keyValueArray [1] = _pseudoLocalizeString (_keyValueArray [1] || '');
@@ -434,7 +495,7 @@ Uize.module ({
 
 				init:function (_params,_callback) {
 					this.project = _params.project;
-					this._stringsFolder = _params.stringsFolder;
+					this._projectStringsPath = _params.stringsFolder + '/' + this.project.name + '/';
 					_callback ();
 				}
 			},

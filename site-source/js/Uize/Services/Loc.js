@@ -50,6 +50,19 @@ Uize.module ({
 					*/
 				},
 
+				importJob:{
+					async:_true
+					/*?
+						Instance Methods
+							importJob
+								Imports a completed `translation job` into the `centralized resources` of a project.
+
+								NOTES
+								- see the companion =exportJob= service method
+								- this service method is asynchronous
+					*/
+				},
+
 				'export':{
 					async:_true
 					/*?
@@ -59,6 +72,19 @@ Uize.module ({
 
 								NOTES
 								- see the companion =import= service method
+								- this service method is asynchronous
+					*/
+				},
+
+				exportJob:{
+					async:_true
+					/*?
+						Instance Methods
+							exportJob
+								Exports a `translation job` from the `centralized resources` of a project.
+
+								NOTES
+								- see the companion =importJob= service method
 								- this service method is asynchronous
 					*/
 				},
