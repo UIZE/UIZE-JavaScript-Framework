@@ -246,7 +246,7 @@ Uize.module ({
 					},
 					{
 						title:
-							'Test that when the second of three event handlers is unwired, the execution order of the remaining two handlers is preserved',
+							'When the second of three event handlers is unwired, the execution order of the remaining two handlers is preserved',
 						test:function () {
 							var
 								_coverageAndOrder = [],
@@ -920,7 +920,7 @@ Uize.module ({
 					},
 					{
 						title:
-							'Test that, when a private name for a state property is different from its publice name, the set method sets a value for a property using the private name of the state property and not its public name',
+							'When a private name for a state property is different from its publice name, the set method sets a value for a property using the private name of the state property and not its public name',
 						test:function () {
 							var _Subclass = Uize.Class.subclass ();
 							_Subclass.stateProperties ({_property1:'property1'});
@@ -934,7 +934,7 @@ Uize.module ({
 					},
 					{
 						title:
-							'Test that, when a private name for a state property is different from its publice name, a value can be set for the property by specifying its private name when calling the set method',
+							'When a private name for a state property is different from its publice name, a value can be set for the property by specifying its private name when calling the set method',
 						test:function () {
 							var _Subclass = Uize.Class.subclass ();
 							_Subclass.stateProperties ({_property1:'property1'});
@@ -1029,7 +1029,7 @@ Uize.module ({
 					},
 					{
 						title:
-							'Test that, when a private name for a state property is different from its publice name, the value can be obtained for the property by specifying its private name when calling the get method',
+							'When a private name for a state property is different from its publice name, the value can be obtained for the property by specifying its private name when calling the get method',
 						test:function () {
 							var
 								_Subclass = Uize.Class.subclass (),
@@ -1044,7 +1044,7 @@ Uize.module ({
 					},
 					{
 						title:
-							'Test that, when a private name for a state property is different from its publice name and its value is set using its private name, the value can be obtained for the property by specifying its public name when calling the get method',
+							'When a private name for a state property is different from its publice name and its value is set using its private name, the value can be obtained for the property by specifying its public name when calling the get method',
 						test:function () {
 							var _Subclass = Uize.Class.subclass ();
 							_Subclass.stateProperties ({_property1:'property1'});
@@ -1137,7 +1137,7 @@ Uize.module ({
 							}
 						},
 						{
-							title:'Test that, when no arguments are passed to the Uize.Class.doMy method, no arguments are passed to the instance method when it is called',
+							title:'When no arguments are passed to the Uize.Class.doMy method, no arguments are passed to the instance method when it is called',
 							test:function () {
 								var
 									_calledWithNoArguments,
@@ -1153,7 +1153,7 @@ Uize.module ({
 							}
 						},
 						{
-							title:'Test that, when arguments are passed to the Uize.Class.doMy method, those same arguments are passed to the instance method when it is called',
+							title:'When arguments are passed to the Uize.Class.doMy method, those same arguments are passed to the instance method when it is called',
 							test:function () {
 								var
 									_expectedArgumentsCalledWith = ['foo',3,false,'bar',[4,5,6]],
@@ -1331,7 +1331,7 @@ Uize.module ({
 											}
 										},
 										{
-											title:'Test that, when specifying an array of property names for the condition, prefixing some property names with a "!" to not their value is handled correctly',
+											title:'When specifying an array of property names for the condition, prefixing some property names with a "!" to not their value is handled correctly',
 											test:function () {
 												var _Class = Uize.Class.subclass ();
 												_Class.stateProperties ({
@@ -1352,7 +1352,7 @@ Uize.module ({
 											}
 										},
 										{
-											title:'Test that, when specifying an array of property names for the condition, property names may contain spaces and special characters',
+											title:'When specifying an array of property names for the condition, property names may contain spaces and special characters',
 											test:function () {
 												var _Class = Uize.Class.subclass ();
 												_Class.stateProperties ({
@@ -1396,7 +1396,7 @@ Uize.module ({
 											}
 										},
 										{
-											title:'Test that, when specifying a comma-separated list of property names for the condition, prefixing some property names with a "!" to not their value is handled correctly',
+											title:'When specifying a comma-separated list of property names for the condition, prefixing some property names with a "!" to not their value is handled correctly',
 											test:function () {
 												var _Class = Uize.Class.subclass ();
 												_Class.stateProperties ({
@@ -2008,7 +2008,7 @@ Uize.module ({
 							test:[
 								{
 									title:
-										'Test that when no initial value is specified for a state property, the property\'s initial value is undefined',
+										'When no initial value is specified for a state property, the property\'s initial value is undefined',
 									test:function () {
 										var _Subclass = Uize.Class.subclass ();
 										_Subclass.stateProperties ({
@@ -2448,7 +2448,7 @@ Uize.module ({
 								},
 								{
 									title:
-										'Test that when the same onChange handler is registered for multiple state properties, it is only executed once - even if the values of all those properties change during a set',
+										'When the same onChange handler is registered for multiple state properties, it is only executed once - even if the values of all those properties change during a set',
 									test:function () {
 										var
 											_Subclass = Uize.Class.subclass (),
@@ -3433,7 +3433,7 @@ Uize.module ({
 								},
 								{
 									title:
-										'Test that, when properties are created for an instance in an ad hoc fashion, by setting values for the undeclared properties using the set instance method, those instance ad hoc properties are not declared on the class',
+										'When properties are created for an instance in an ad hoc fashion, by setting values for the undeclared properties using the set instance method, those instance ad hoc properties are not declared on the class',
 									test:function () {
 										var
 											_Subclass = Uize.Class.subclass (),
@@ -3449,7 +3449,7 @@ Uize.module ({
 								},
 								{
 									title:
-										'Test that, when properties are created for an instance in an ad hoc fashion, by specifying values for undeclared properties when calling the constructor, those instance ad hoc properties are not declared on the class',
+										'When properties are created for an instance in an ad hoc fashion, by specifying values for undeclared properties when calling the constructor, those instance ad hoc properties are not declared on the class',
 									test:function () {
 										var
 											_Subclass = Uize.Class.subclass (),

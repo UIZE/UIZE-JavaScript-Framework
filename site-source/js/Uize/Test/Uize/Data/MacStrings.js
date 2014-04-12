@@ -142,7 +142,7 @@ Uize.module ({
 								'"hello" = "world";'
 							].join ('\n')
 						],
-						['Test that, when either the key or value for a string entry contains special characters, the special characters are escaped correctly',
+						['When either the key or value for a string entry contains special characters, the special characters are escaped correctly',
 							{
 								'f"o\no':'bar',
 								baz:'q"u\nx',

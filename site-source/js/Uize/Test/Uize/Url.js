@@ -1256,23 +1256,23 @@ Uize.module ({
 						{
 							title:'Test that an empty base URL is supported correctly',
 							test:[
-								['Test that, when the base URL is an empty string and the URL to relativize is an empty string, then an empty string is returned',
+								['When the base URL is an empty string and the URL to relativize is an empty string, then an empty string is returned',
 									['',''],
 									''
 								],
-								['Test that, when the base URL is an empty string and the URL to relativize is a root-relative URL, then the URL to relativize is returned as is',
+								['When the base URL is an empty string and the URL to relativize is a root-relative URL, then the URL to relativize is returned as is',
 									['','/foo/bar.html'],
 									'/foo/bar.html'
 								],
-								['Test that, when the base URL is an empty string and the URL to relativize is a forward-relative URL, then the URL to relativize is returned as is',
+								['When the base URL is an empty string and the URL to relativize is a forward-relative URL, then the URL to relativize is returned as is',
 									['','foo/bar.html'],
 									'foo/bar.html'
 								],
-								['Test that, when the base URL is an empty string and the URL to relativize is a back-relative URL, then the URL to relativize is returned as is',
+								['When the base URL is an empty string and the URL to relativize is a back-relative URL, then the URL to relativize is returned as is',
 									['','../../foo/bar.html'],
 									'../../foo/bar.html'
 								],
-								['Test that, when the base URL is an empty string and the URL to relativize is a absolute with a domain, then the URL to relativize is returned as is',
+								['When the base URL is an empty string and the URL to relativize is a absolute with a domain, then the URL to relativize is returned as is',
 									['','http://www.somedomain.com/foo/bar.html'],
 									'http://www.somedomain.com/foo/bar.html'
 								]
@@ -1375,19 +1375,19 @@ Uize.module ({
 
 								return [
 									_samePrefixTestBatch (
-										'Test that, when both URLs are forward-relative, a relative URL can always be produced',
+										'When both URLs are forward-relative, a relative URL can always be produced',
 										''
 									),
 									_samePrefixTestBatch (
-										'Test that, when both URLs are back-relative, a relative URL can always be produced',
+										'When both URLs are back-relative, a relative URL can always be produced',
 										'../../../'
 									),
 									_samePrefixTestBatch (
-										'Test that, when both URLs are root-relative, a relative URL can always be produced',
+										'When both URLs are root-relative, a relative URL can always be produced',
 										'/'
 									),
 									_samePrefixTestBatch (
-										'Test that, when both URLs have the same domain, a relative URL can always be produced',
+										'When both URLs have the same domain, a relative URL can always be produced',
 										'http://www.somedomain.com/'
 									)
 								];
@@ -1413,7 +1413,7 @@ Uize.module ({
 												;
 												_baseUrlPrefix != _urlToRelativizePrefix &&
 													_testCases.push (
-														['Test that, when the base URL is \'' + _baseUrl + '\' and the URL to relativize is \'' + _urlToRelativize + '\'. then a relative URL cannot be created and ' + (_urlToRelativizeIsAbsolute ? '\'' + _urlToRelativize + '\'' : 'null') + ' is returned',
+														['When the base URL is \'' + _baseUrl + '\' and the URL to relativize is \'' + _urlToRelativize + '\'. then a relative URL cannot be created and ' + (_urlToRelativizeIsAbsolute ? '\'' + _urlToRelativize + '\'' : 'null') + ' is returned',
 															[_baseUrl,_urlToRelativize],
 															_urlToRelativizeIsAbsolute ? _urlToRelativize : null
 														]

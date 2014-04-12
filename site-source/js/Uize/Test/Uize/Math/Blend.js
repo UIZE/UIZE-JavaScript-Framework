@@ -35,15 +35,15 @@ Uize.module ({
 				Uize.Test.staticMethodsTest ([
 					['Uize.Math.Blend.blend',[
 						/*** test simple blending of numbers ***/
-							['Test that, when blending two number values, a blend amount of 0 results in the first value being returned',
+							['When blending two number values, a blend amount of 0 results in the first value being returned',
 								[1,6,0],
 								1
 							],
-							['Test that, when blending two number values, a blend amount of 1 results in the second value being returned',
+							['When blending two number values, a blend amount of 1 results in the second value being returned',
 								[1,6,1],
 								6
 							],
-							['Test that, when blending two number values, a blend amount of .5 results in the average of the two numbers being returned',
+							['When blending two number values, a blend amount of .5 results in the average of the two numbers being returned',
 								[1,6,.5],
 								3.5
 							],
@@ -51,7 +51,7 @@ Uize.module ({
 						/*** test blending of structured values ***/
 							/*** test blending of array values ***/
 								{
-									title:'Test that, when the values being blended are arrays and the blend amount is 0, that a copy of the first array value is returned',
+									title:'When the values being blended are arrays and the blend amount is 0, then a copy of the first array value is returned',
 									test:function () {
 										var
 											_valueA = [0,5,10,15],
@@ -66,7 +66,7 @@ Uize.module ({
 									}
 								},
 								{
-									title:'Test that, when the values being blended are arrays and the blend amount is 1, that a copy of the second array value is returned',
+									title:'When the values being blended are arrays and the blend amount is 1, then a copy of the second array value is returned',
 									test:function () {
 										var
 											_valueA = [0,5,10,15],
@@ -81,7 +81,7 @@ Uize.module ({
 									}
 								},
 								{
-									title:'Test that, when the values being blended are arrays and the blend amount is .5, that the values of corresponding elements of the respective arrays are blended in equal proportions to form a new, averages array',
+									title:'When the values being blended are arrays and the blend amount is .5, then the values of corresponding elements of the respective arrays are blended in equal proportions to form a new, averages array',
 									test:function () {
 										var
 											_valueA = [0,5,10,15],
@@ -98,7 +98,7 @@ Uize.module ({
 
 							/*** test blending of object values ***/
 								{
-									title:'Test that, when the values being blended are objects and the blend amount is 0, that a copy of the first object value is returned',
+									title:'When the values being blended are objects and the blend amount is 0, then a copy of the first object value is returned',
 									test:function () {
 										var
 											_valueA = {propA:0,propB:5,propC:10,propD:15},
@@ -113,7 +113,7 @@ Uize.module ({
 									}
 								},
 								{
-									title:'Test that, when the values being blended are objects and the blend amount is 1, that a copy of the second object value is returned',
+									title:'When the values being blended are objects and the blend amount is 1, then a copy of the second object value is returned',
 									test:function () {
 										var
 											_valueA = {propA:0,propB:5,propC:10,propD:15},
@@ -128,7 +128,7 @@ Uize.module ({
 									}
 								},
 								{
-									title:'Test that, when the values being blended are objects and the blend amount is .5, that the values of corresponding properties of the respective objects are blended in equal proportions to form a new, averages object',
+									title:'When the values being blended are objects and the blend amount is .5, then the values of corresponding properties of the respective objects are blended in equal proportions to form a new, averages object',
 									test:function () {
 										var
 											_valueA = {propA:0,propB:5,propC:10,propD:15},
@@ -145,7 +145,7 @@ Uize.module ({
 
 							/*** test blending of a compound object ***/
 								{
-									title:'Test that, when the values being blended are compound (hierarchical) objects and the blend amount is 0, that a copy of the first object value is returned',
+									title:'When the values being blended are compound (hierarchical) objects and the blend amount is 0, then a copy of the first object value is returned',
 									test:function () {
 										var
 											_valueA = [[0,{foo:5}],{bar:10,baz:[15]}],
@@ -160,7 +160,7 @@ Uize.module ({
 									}
 								},
 								{
-									title:'Test that, when the values being blended are compound (hierarchical) objects and the blend amount is 1, that a copy of the second object value is returned',
+									title:'When the values being blended are compound (hierarchical) objects and the blend amount is 1, then a copy of the second object value is returned',
 									test:function () {
 										var
 											_valueA = [[0,{foo:5}],{bar:10,baz:[15]}],
@@ -175,7 +175,7 @@ Uize.module ({
 									}
 								},
 								{
-									title:'Test that, when the values being blended are compound (hierarchical) objects and the blend amount is .5, that the values of corresponding leaf nodes of the respective objects are blended in equal proportions to form a new, averages object whose structure matches the structure of the objects being blended',
+									title:'When the values being blended are compound (hierarchical) objects and the blend amount is .5, then the values of corresponding leaf nodes of the respective objects are blended in equal proportions to form a new, averages object whose structure matches the structure of the objects being blended',
 									test:function () {
 										var
 											_valueA = [[0,{foo:5}],{bar:10,baz:[15]}],
@@ -195,19 +195,19 @@ Uize.module ({
 								[0,10,.5,3],
 								6
 							],
-							['Test that, when the blend amount is 1, the second of the two values being blended is returned, even if the value doesn\'t fall exactly on a quantization interval',
+							['When the blend amount is 1, the second of the two values being blended is returned, even if the value doesn\'t fall exactly on a quantization interval',
 								[0,10,1,3],
 								10
 							],
-							['Test that, when the value 0 is specified for quantization, that there is effectively no quantization applied',
+							['When the value 0 is specified for quantization, then there is effectively no quantization applied',
 								[0,10,.03125,0],
 								.3125
 							],
-							['Test that, when the value null is specified for quantization, that there is effectively no quantization applied',
+							['When the value null is specified for quantization, then there is effectively no quantization applied',
 								[0,10,.03125,null],
 								.3125
 							],
-							['Test that, when the value undefined is specified for quantization, that there is effectively no quantization applied',
+							['When the value undefined is specified for quantization, then there is effectively no quantization applied',
 								[0,10,.03125,undefined],
 								.3125
 							],
@@ -215,7 +215,7 @@ Uize.module ({
 								- test that quantization always rounds "up" to the nearest quantization intercal away from the first value, regardless of the whether the second number is greater than or less than the first number
 							*/
 							{
-								title:'Test that, when the value Infinity is specified for quantization, then the first of the two values being blended will be returned for any blend amounts from 0 up to, but not including, 1',
+								title:'When the value Infinity is specified for quantization, then the first of the two values being blended will be returned for any blend amounts from 0 up to, but not including, 1',
 								test:function () {
 									var m = this;
 									function _case (_blendAmount,_expected) {
@@ -232,7 +232,7 @@ Uize.module ({
 								}
 							},
 							{
-								title:'Test that, when the quantization value is between .5 and 1 (non-inclusive) times the difference between the two values being blended, that quantization is applied correctly',
+								title:'When the quantization value is between .5 and 1 (non-inclusive) times the difference between the two values being blended, then quantization is applied correctly',
 								test:function () {
 									var m = this;
 									function _case (_blendAmount,_expected) {
@@ -250,7 +250,7 @@ Uize.module ({
 								}
 							},
 							{
-								title:'Test that, when the quantization value is between 1 and 2 times the difference between the two values being blended, that quantization is applied correctly',
+								title:'When the quantization value is between 1 and 2 times the difference between the two values being blended, then quantization is applied correctly',
 								test:function () {
 									var m = this;
 									function _case (_blendAmount,_expected) {
@@ -266,7 +266,7 @@ Uize.module ({
 								}
 							},
 							{
-								title:'Test that, when the quantization value is 2 or more times the difference between the two values being blended, that quantization is applied correctly',
+								title:'When the quantization value is 2 or more times the difference between the two values being blended, then quantization is applied correctly',
 								test:function () {
 									var m = this;
 									function _case (_blendAmount,_expected) {
@@ -330,7 +330,7 @@ Uize.module ({
 								}
 							},
 							{
-								title:'Test that, when a quantization number is specified at a node of a compound (hierarchical) quantization object, that the quantization number applies to all corresponding deeper nodes in the compound values being blended',
+								title:'When a quantization number is specified at a node of a compound (hierarchical) quantization object, then the quantization number applies to all corresponding deeper nodes in the compound values being blended',
 								test:function () {
 									var
 										_valueA = {foo:[0,5],bar:[{baz:10},15]},
@@ -380,7 +380,7 @@ Uize.module ({
 								[[12.5,{foo:9.375}],{bar:11.25,baz:[15.15625]}]
 							],
 							[
-								'Test that, when a curve function is specified at a node of a compound (hierarchical) curve function object, that the curve function applies to all corresponding deeper nodes in the compound values being blended',
+								'When a curve function is specified at a node of a compound (hierarchical) curve function object, then the curve function applies to all corresponding deeper nodes in the compound values being blended',
 								[
 									{foo:[0,5],bar:[{baz:10},15]},
 									{foo:[50,40],bar:[{baz:30},20]},
@@ -396,7 +396,7 @@ Uize.module ({
 
 						/*** test that the optional previousValue and valuesUnchanged arguments are supported correctly ***/
 							{
-								title:'Test that, when the optional previousValue argument is specified and the resulting blended value is identical to the specified previous value, that the value of the valuesUnchanged argument is returned',
+								title:'When the optional previousValue argument is specified and the resulting blended value is identical to the specified previous value, then the value of the valuesUnchanged argument is returned',
 								test:function () {
 									var _valuesUnchanged = {};
 									return this.expectSameAs (
@@ -414,7 +414,7 @@ Uize.module ({
 								}
 							},
 							{
-								title:'Test that, when the optional previousValue argument is specified and the resulting blended value is not identical to the specified previous value, that the new blended value is returned and not the value of the valuesUnchanged argument',
+								title:'When the optional previousValue argument is specified and the resulting blended value is not identical to the specified previous value, then the new blended value is returned and not the value of the valuesUnchanged argument',
 								test:function () {
 									var
 										_valuesUnchanged = {},
@@ -437,7 +437,7 @@ Uize.module ({
 
 						/*** miscellaneous tests ***/
 							{
-								title:'Test that, when both of the two values being blended are references to the same object, that a copy of that object is returned and not a reference to the object itself',
+								title:'When both of the two values being blended are references to the same object, then a copy of that object is returned and not a reference to the object itself',
 								test:function () {
 									var
 										_valueA = [[0,{foo:5}],{bar:10,baz:[15]}],

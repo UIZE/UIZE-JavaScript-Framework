@@ -193,15 +193,15 @@ Uize.module ({
 									[0,0,1,1,2,2,3,3,4,4,4,4,3,3,2,2,1,1,0,0]
 								],
 								/*** test defaulting of the depth paramter ***/
-									['Test that when the optional depth parameter is not specified, its value is defaulted to Infinity',
+									['When the optional depth parameter is not specified, its value is defaulted to Infinity',
 										[[0,0,[1,1,[2,2,[3,3,[4,4,4,4],3,3],2,2],1,1],0,0]],
 										[0,0,1,1,2,2,3,3,4,4,4,4,3,3,2,2,1,1,0,0]
 									],
-									['Test that when the value undefined is specified for the optional depth parameter, its value is defaulted to Infinity',
+									['When the value undefined is specified for the optional depth parameter, its value is defaulted to Infinity',
 										[[0,0,[1,1,[2,2,[3,3,[4,4,4,4],3,3],2,2],1,1],0,0],undefined],
 										[0,0,1,1,2,2,3,3,4,4,4,4,3,3,2,2,1,1,0,0]
 									],
-									['Test that when the value null is specified for the optional depth parameter, its value is defaulted to Infinity',
+									['When the value null is specified for the optional depth parameter, its value is defaulted to Infinity',
 										[[0,0,[1,1,[2,2,[3,3,[4,4,4,4],3,3],2,2],1,1],0,0],null],
 										[0,0,1,1,2,2,3,3,4,4,4,4,3,3,2,2,1,1,0,0]
 									],
@@ -228,7 +228,7 @@ Uize.module ({
 									}
 								},
 								{
-									title:'Test that when the value false is specified for the optional target parameter, the result replaces the source array\'s original contents',
+									title:'When the value false is specified for the optional target parameter, the result replaces the source array\'s original contents',
 									test:function () {
 										var
 											_sourceArray = [1,[2,[3,[4],5],6],7],
@@ -238,7 +238,7 @@ Uize.module ({
 									}
 								},
 								{
-									title:'Test that when the value true is specified for the optional target parameter, the result is returned in a new array and the source array is not modified',
+									title:'When the value true is specified for the optional target parameter, the result is returned in a new array and the source array is not modified',
 									test:function () {
 										var
 											_sourceArray = [1,[2,[3,[4],5],6],7],
@@ -252,7 +252,7 @@ Uize.module ({
 									}
 								},
 								{
-									title:'Test that when a different array is specified for the target parameter, the result replaces the contents of that array and the source array is not modified',
+									title:'When a different array is specified for the target parameter, the result replaces the contents of that array and the source array is not modified',
 									test:function () {
 										var
 											_sourceArray = [1,[2,[3,[4],5],6],7],
@@ -267,7 +267,7 @@ Uize.module ({
 									}
 								},
 								{
-									title:'Test that when the source array is specified as the target array, the result replaces the source array\'s original contents',
+									title:'When the source array is specified as the target array, the result replaces the source array\'s original contents',
 									test:function () {
 										var
 											_sourceArray = [1,[2,[3,[4],5],6],7],

@@ -559,7 +559,7 @@ Uize.module ({
 							}
 						},
 						{
-							title:'Test that, when an ongoing loop contains only synchronous statements, the entire loop is executed synchronously',
+							title:'When an ongoing loop contains only synchronous statements, the entire loop is executed synchronously',
 							test:function () {
 								var
 									_items = ['a','b','c','d','e','f','g'],
@@ -691,7 +691,7 @@ Uize.module ({
 					title:'Test breathing features',
 					test:[
 						{
-							title:'Test that, when breathing is enabled, asynchronous breaks are introduced between all statements in a block of synchronous statements',
+							title:'When breathing is enabled, asynchronous breaks are introduced between all statements in a block of synchronous statements',
 							test:function (_next) {
 								var
 									m = this,

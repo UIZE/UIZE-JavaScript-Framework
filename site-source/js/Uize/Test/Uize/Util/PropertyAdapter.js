@@ -324,7 +324,7 @@ Uize.module ({
 					title:'Test that changing either propertyA or propertyB mid-stream is handled correctly',
 					test:[
 						{
-							title:'Test that when changing propertyA, propertyB is immediately re-synchronized to the new property for propertyA',
+							title:'When changing propertyA, propertyB is immediately re-synchronized to the new property for propertyA',
 							test:function () {
 								var _rig = _getRig ();
 
@@ -336,7 +336,7 @@ Uize.module ({
 							}
 						},
 						{
-							title:'Test that when changing propertyB, propertyB is immediately synchronized to the property for propertyA',
+							title:'When changing propertyB, propertyB is immediately synchronized to the property for propertyA',
 							test:function () {
 								var
 									_rig = _getRig (),
@@ -348,7 +348,7 @@ Uize.module ({
 							}
 						},
 						{
-							title:'Test that when changing propertyA, the old property for propertyA is no longer synchronized when the property for propertyB is modified',
+							title:'When changing propertyA, the old property for propertyA is no longer synchronized when the property for propertyB is modified',
 							test:function () {
 								var _rig = _getRig ();
 
@@ -374,7 +374,7 @@ Uize.module ({
 							}
 						},
 						{
-							title:'Test that when changing propertyB, the old property for propertyB is no longer synchronized when the property for propertyA is modified',
+							title:'When changing propertyB, the old property for propertyB is no longer synchronized when the property for propertyA is modified',
 							test:function () {
 								var
 									_rig = _getRig (),

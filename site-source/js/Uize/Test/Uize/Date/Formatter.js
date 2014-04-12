@@ -1340,11 +1340,11 @@ Uize.module ({
 							],
 
 						/*** test fallback to use of Uize.Date.resolve method when no format is specified ***/
-							['Test that when no format is specified, an ISO 8601 formatted date is parsed correctly',
+							['When no format is specified, an ISO 8601 formatted date is parsed correctly',
 								['2001-09-11'],
 								_newDate (2001,9,11)
 							],
-							['Test that when no format is specified, a serialized Date object is parsed correctly',
+							['When no format is specified, a serialized Date object is parsed correctly',
 								[_newDate (2001,9,11,8,46,40) + ''],
 								_newDate (2001,9,11,8,46,40)
 							]

@@ -184,7 +184,7 @@ Uize.module ({
 							['attrib1="attrib1Value" Attrib2="Attrib2Value" ATTRIB3="ATTRIB3VALUE"',{nameCase:'upper'}],
 							{ATTRIB1:'attrib1Value',ATTRIB2:'Attrib2Value',ATTRIB3:'ATTRIB3VALUE'}
 						],
-						['Test that when attributes are repeated, later values win',
+						['When attributes are repeated, later values win',
 							'attribute="BIOFUEL" attribute="WIND" attribute="SOLAR"',
 							{attribute:'SOLAR'}
 						],

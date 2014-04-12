@@ -71,7 +71,7 @@ Uize.module ({
 								{foo:'BAR!!!',hello:'world',many:'reasons why'}
 							]
 						],
-						['Test that, when there is only one possible value for every key in the combinations specifier object, then an array with only one combination is returned',
+						['When there is only one possible value for every key in the combinations specifier object, then an array with only one combination is returned',
 							{foo:['bar'],hello:['there'],many:['moons ago']},
 							[{foo:'bar',hello:'there',many:'moons ago'}]
 						],
@@ -377,7 +377,7 @@ Uize.module ({
 							}
 						},
 						{
-							title:'Test that, when there is only one possible value for every key in the combinations specifier object, then there is only one iteration for a single combination',
+							title:'When there is only one possible value for every key in the combinations specifier object, then there is only one iteration for a single combination',
 							test:function () {
 								var _combinationsSeen = [];
 								Uize.Data.Combinations.forEach (
