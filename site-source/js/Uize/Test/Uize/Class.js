@@ -101,7 +101,7 @@ Uize.module ({
 					},
 					{
 						title:
-							'Test that firing an event for which two handlers are wired results in the handlers being exucuted in the order wired',
+							'Firing an event for which two handlers are wired results in the handlers being exucuted in the order wired',
 						test:function () {
 							var
 								_coverageAndOrder = [],
@@ -115,7 +115,7 @@ Uize.module ({
 					},
 					{
 						title:
-							'Test that firing an event for which more than two handlers are wired results in the handlers being exucuted in the order wired',
+							'Firing an event for which more than two handlers are wired results in the handlers being exucuted in the order wired',
 						test:function () {
 							var
 								_coverageAndOrder = [],
@@ -193,7 +193,7 @@ Uize.module ({
 						}
 					},
 					{
-						title:'Test that unwiring an event handler results in that handler no longer being executed',
+						title:'Unwiring an event handler results in that handler no longer being executed',
 						test:function () {
 							var
 								_success = false,
@@ -311,7 +311,7 @@ Uize.module ({
 					},
 					{
 						title:
-							'Test that not specifying a handler when unwiring an event results in all handlers for that event being unwired',
+							'Not specifying a handler when unwiring an event results in all handlers for that event being unwired',
 						test:function () {
 							var
 								_handler1Success = false,
@@ -331,7 +331,7 @@ Uize.module ({
 					},
 					{
 						title:
-							'Test that unwiring a handler for the special wildcard event results in just that handler being unwired, rather than all handlers for the wildcard event or all handlers for all events',
+							'Unwiring a handler for the special wildcard event results in just that handler being unwired, rather than all handlers for the wildcard event or all handlers for all events',
 						test:function () {
 							var
 								_coverageAndOrder = [],
@@ -354,7 +354,7 @@ Uize.module ({
 							test:[
 								{
 									title:
-										'Test that setting the bubble event property to true when firing an event on an instance with no parent is not fatal and results in a handler wired for that event being executed',
+										'Setting the bubble event property to true when firing an event on an instance with no parent is not fatal and results in a handler wired for that event being executed',
 									test:function () {
 										var
 											_eventSource = _getEventSource (),
@@ -540,7 +540,7 @@ Uize.module ({
 							test:[
 								{
 									title:
-										'Test that setting the bubble event property to true when firing an event on a class with no parent (as it should be) is not fatal and results in a handler wired for that event being executed',
+										'Setting the bubble event property to true when firing an event on a class with no parent (as it should be) is not fatal and results in a handler wired for that event being executed',
 									test:function () {
 										var
 											_eventSource = _getEventSource (),
@@ -553,7 +553,7 @@ Uize.module ({
 								},
 								{
 									title:
-										'Test that setting the bubble event property to true when firing an event on a class with a parent (which is not exactly valid) is not fatal and results in a handler wired for that event being executed',
+										'Setting the bubble event property to true when firing an event on a class with a parent (which is not exactly valid) is not fatal and results in a handler wired for that event being executed',
 									test:function () {
 										var
 											_coverageAndOrder = [],
@@ -1490,7 +1490,7 @@ Uize.module ({
 											}
 										},
 										{
-											title:'Test that unwiring the event wirings for a compound condition before it is met results in the handler for the condition not being executed',
+											title:'Unwiring the event wirings for a compound condition before it is met results in the handler for the condition not being executed',
 											test:function () {
 												var _Class = Uize.Class.subclass ();
 												_Class.stateProperties ({
@@ -3123,7 +3123,7 @@ Uize.module ({
 								},
 								{
 									title:
-										'Test that getting the values for all state properties results in the values of state properties with aliases being reported only through their canonical (non-alias) names',
+										'Getting the values for all state properties results in the values of state properties with aliases being reported only through their canonical (non-alias) names',
 									test:function () {
 										var _Subclass = Uize.Class.subclass ();
 										_Subclass.stateProperties ({

@@ -34,19 +34,19 @@ Uize.module ({
 				Uize.Test.requiredModulesTest ('Uize.Data.Combinations'),
 				Uize.Test.staticMethodsTest ([
 					['Uize.Data.Combinations.generate',[
-						['Test that specifying the value null for the combinations specifier results in an empty array being returned',
+						['Specifying the value null for the combinations specifier results in an empty array being returned',
 							null,
 							[]
 						],
-						['Test that specifying the value undefined for the combinations specifier results in an empty array being returned',
+						['Specifying the value undefined for the combinations specifier results in an empty array being returned',
 							undefined,
 							[]
 						],
-						['Test that specifying an empty object for the combinations specifier results in an empty array being returned',
+						['Specifying an empty object for the combinations specifier results in an empty array being returned',
 							{},
 							[]
 						],
-						['Test that specifying an empty array for the combinations specifier results in an empty array being returned',
+						['Specifying an empty array for the combinations specifier results in an empty array being returned',
 							[],
 							[]
 						],
@@ -79,7 +79,7 @@ Uize.module ({
 							{aString:'foo',aNumber:42,aBoolean:true,anObject:{foo:'bar'},aNull:null,anUndefined:undefined},
 							[{aString:'foo',aNumber:42,aBoolean:true,anObject:{foo:'bar'},aNull:null,anUndefined:undefined}]
 						],
-						['Test that specifying no possible values for a property in the combinations specifier results in that property being omitted from the generated combinations',
+						['Specifying no possible values for a property in the combinations specifier results in that property being omitted from the generated combinations',
 							{foo:['bar','BAR','BAR!!!'],hello:[],many:['moons ago','reasons why']},
 							[
 								{foo:'bar',many:'moons ago'},
@@ -90,7 +90,7 @@ Uize.module ({
 								{foo:'BAR!!!',many:'reasons why'}
 							]
 						],
-						['Test that specifying an empty array for every property of the combinations specifier results in an empty array (ie. no combinations) being returned',
+						['Specifying an empty array for every property of the combinations specifier results in an empty array (ie. no combinations) being returned',
 							{foo:[],hello:[],many:[]},
 							[]
 						],
@@ -304,7 +304,7 @@ Uize.module ({
 					]],
 					['Uize.Data.Combinations.forEach',[
 						{
-							title:'Test that specifying the value null for the combinations specifier results in no iterations being performed',
+							title:'Specifying the value null for the combinations specifier results in no iterations being performed',
 							test:function () {
 								var _totalIterations = 0;
 								Uize.Data.Combinations.forEach (null,function () {_totalIterations++});
@@ -312,7 +312,7 @@ Uize.module ({
 							}
 						},
 						{
-							title:'Test that specifying the value undefined for the combinations specifier results in no iterations being performed',
+							title:'Specifying the value undefined for the combinations specifier results in no iterations being performed',
 							test:function () {
 								var _totalIterations = 0;
 								Uize.Data.Combinations.forEach (undefined,function () {_totalIterations++});
@@ -320,7 +320,7 @@ Uize.module ({
 							}
 						},
 						{
-							title:'Test that specifying an empty object for the combinations specifier results in no iterations being performed',
+							title:'Specifying an empty object for the combinations specifier results in no iterations being performed',
 							test:function () {
 								var _totalIterations = 0;
 								Uize.Data.Combinations.forEach ({},function () {_totalIterations++});
@@ -328,7 +328,7 @@ Uize.module ({
 							}
 						},
 						{
-							title:'Test that specifying an empty array for the combinations specifier results in no iterations being performed',
+							title:'Specifying an empty array for the combinations specifier results in no iterations being performed',
 							test:function () {
 								var _totalIterations = 0;
 								Uize.Data.Combinations.forEach ([],function () {_totalIterations++});
@@ -418,7 +418,7 @@ Uize.module ({
 							}
 						},
 						{
-							title:'Test that specifying no possible values for a property in the combinations specifier results in that property being omitted from the generated combinations',
+							title:'Specifying no possible values for a property in the combinations specifier results in that property being omitted from the generated combinations',
 							test:function () {
 								var _combinationsSeen = [];
 								Uize.Data.Combinations.forEach (
@@ -439,7 +439,7 @@ Uize.module ({
 							}
 						},
 						{
-							title:'Test that specifying an empty array for every property of the combinations specifier results in no iterations being performed',
+							title:'Specifying an empty array for every property of the combinations specifier results in no iterations being performed',
 							test:function () {
 								var _combinationsSeen = [];
 								Uize.Data.Combinations.forEach (

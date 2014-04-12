@@ -79,15 +79,15 @@ Uize.module ({
 								[[1,2,3],[4,5,6]],
 								[4,5,6]
 							],
-							['Test that not specifying a second array results in the first array being emptied out',
+							['Not specifying a second array results in the first array being emptied out',
 								[[1,2,3]],
 								[]
 							],
-							['Test that specifying the value null for the second array results in the first array being emptied out',
+							['Specifying the value null for the second array results in the first array being emptied out',
 								[[1,2,3],null],
 								[]
 							],
-							['Test that specifying the value undefined for the second array results in the first array being emptied out',
+							['Specifying the value undefined for the second array results in the first array being emptied out',
 								[[1,2,3],undefined],
 								[]
 							]
@@ -166,7 +166,7 @@ Uize.module ({
 					],
 					['Uize.Array.Util.flatten',
 						[
-							['Test that flattening an empty array results in an empty array, as expected',
+							['Flattening an empty array results in an empty array',
 								[[]],
 								[]
 							],

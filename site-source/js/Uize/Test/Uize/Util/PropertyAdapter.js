@@ -100,17 +100,17 @@ Uize.module ({
 								{instance:_someDummyInstance,property:'foo'}
 							),
 							_conformerTestCase (
-								'Test the specifying the value null for the second element results in the property being defaulted to the "value" property',
+								'Specifying the value null for the second element results in the property being defaulted to the "value" property',
 								[_someDummyInstance,null],
 								{instance:_someDummyInstance,property:'value'}
 							),
 							_conformerTestCase (
-								'Test the specifying the value undefined for the second element results in the property being defaulted to the "value" property',
+								'Specifying the value undefined for the second element results in the property being defaulted to the "value" property',
 								[_someDummyInstance,undefined],
 								{instance:_someDummyInstance,property:'value'}
 							),
 							_conformerTestCase (
-								'Test that not specifying a second element results in the property being defaulted to the "value" property',
+								'Specifying a second element results in the property being defaulted to the "value" property',
 								[_someDummyInstance],
 								{instance:_someDummyInstance,property:'value'}
 							)
@@ -120,17 +120,17 @@ Uize.module ({
 						title:'Test that an object value is conformed correctly, where the property property is defaulted to "value" if it is null, undefined, or omitted',
 						test:[
 							_conformerTestCase (
-								'Test the specifying the value null for the property results in the property being defaulted to "value"',
+								'Specifying the value null for the property results in the property being defaulted to "value"',
 								{instance:_someDummyInstance,property:null},
 								{instance:_someDummyInstance,property:'value'}
 							),
 							_conformerTestCase (
-								'Test the specifying the value undefined for the property results in the property being defaulted to "value"',
+								'Specifying the value undefined for the property results in the property being defaulted to "value"',
 								{instance:_someDummyInstance,property:undefined},
 								{instance:_someDummyInstance,property:'value'}
 							),
 							_conformerTestCase (
-								'Test that not specifying the property results in it being defaulted to "value"',
+								'Not specifying the property results in it being defaulted to "value"',
 								{instance:_someDummyInstance},
 								{instance:_someDummyInstance,property:'value'}
 							)
@@ -140,12 +140,12 @@ Uize.module ({
 						title:'Test that null or undefined is conformed correctly (ie. left as is)',
 						test:[
 							_conformerTestCase (
-								'Test the specifying the value null for the value adapter results in it remaining null',
+								'Specifying the value null for the value adapter results in it remaining null',
 								null,
 								null
 							),
 							_conformerTestCase (
-								'Test the specifying the value undefined for the value adapter results in it remaining null',
+								'Specifying the value undefined for the value adapter results in it remaining null',
 								undefined,
 								undefined
 							)
@@ -218,7 +218,7 @@ Uize.module ({
 					title:'Test that changing the value adapter after properties have already been connected is handled correctly',
 					test:[
 						{
-							title:'Test that changing a value adapter mid-stream results in propertyB being immediately re-synchronized to propertyA using the new value adapter, with correct synchronization in both directions thereafter',
+							title:'Changing a value adapter mid-stream results in propertyB being immediately re-synchronized to propertyA using the new value adapter, with correct synchronization in both directions thereafter',
 							test:function () {
 								var _rig = _getRigWithValueAdapter ();
 								_rig._propertyAdapter.set ({
@@ -242,7 +242,7 @@ Uize.module ({
 							}
 						},
 						{
-							title:'Test that nulling out a value adapter mid-stream results in propertyB being immediately re-synchronized to propertyA without any value adapter translation, with correct synchronization in both directions thereafter',
+							title:'Nulling out a value adapter mid-stream results in propertyB being immediately re-synchronized to propertyA without any value adapter translation, with correct synchronization in both directions thereafter',
 							test:function () {
 								var _rig = _getRigWithValueAdapter ();
 								_rig._propertyAdapter.set ({valueAdapter:null});
@@ -266,14 +266,14 @@ Uize.module ({
 					title:'Test that the connected state property is observed correctly',
 					test:[
 						{
-							title:'Test that connecting a property adapter between two properties of different objects with the adapter not initially connected results in property B *not* being immediately synchronized to property A',
+							title:'Connecting a property adapter between two properties of different objects with the adapter not initially connected results in property B *not* being immediately synchronized to property A',
 							test:function () {
 								var _rig = _getRig ({connected:false});
 								return this.expect ('wind',_rig._instanceB.get ('energy'));
 							}
 						},
 						{
-							title:'Test that disconnecting a property adapter by setting its connected state property to false results in properties no longer being synchronized',
+							title:'Disconnecting a property adapter by setting its connected state property to false results in properties no longer being synchronized',
 							test:function () {
 								var _rig = _getRig ();
 
@@ -292,7 +292,7 @@ Uize.module ({
 							}
 						},
 						{
-							title:'Test that disconnecting and then reconnecting a property adapter results in properties once again being synchronized correctly',
+							title:'Disconnecting and then reconnecting a property adapter results in properties once again being synchronized correctly',
 							test:function () {
 								var _rig = _getRig ();
 

@@ -55,11 +55,11 @@ Uize.module ({
 								['FOOBARFOREVER','_'],
 								['FOOBARFOREVER']
 							],
-							['Test that splitting a non-empty string using a splitter string that matches just the first part of the string being split results in an array with two elements, where the first element is an empty string and the second element is the string after the splitter match',
+							['Splitting a non-empty string using a splitter string that matches just the first part of the string being split results in an array with two elements, where the first element is an empty string and the second element is the string after the splitter match',
 								['123456FOOBAR','123456'],
 								['','FOOBAR']
 							],
-							['Test that splitting a non-empty string using a splitter that matches just the last part of the string being split results in an array with two elements, where the first element is the string up to the splitter match and the second element is an empty string',
+							['Splitting a non-empty string using a splitter that matches just the last part of the string being split results in an array with two elements, where the first element is the string up to the splitter match and the second element is an empty string',
 								['FOOBAR123456','123456'],
 								['FOOBAR','']
 							],
@@ -106,11 +106,11 @@ Uize.module ({
 								['FOO_BAR_FOREVER',/./],
 								['','','','','','','','','','','','','','','','']
 							],
-							['Test that splitting a non-empty string using a regular expression that matches just the first part of the string being split results in an array with two elements, where the first element is an empty string and the second element is the string after the splitter match',
+							['Splitting a non-empty string using a regular expression that matches just the first part of the string being split results in an array with two elements, where the first element is an empty string and the second element is the string after the splitter match',
 								['123456FOOBAR',/\d+/],
 								['','FOOBAR']
 							],
-							['Test that splitting a non-empty string using a regular expression that matches just the last part of the string being split results in an array with two elements, where the first element is the string up to the splitter match and the second element is an empty string',
+							['Splitting a non-empty string using a regular expression that matches just the last part of the string being split results in an array with two elements, where the first element is the string up to the splitter match and the second element is an empty string',
 								['FOOBAR123456',/\d+/],
 								['FOOBAR','']
 							],

@@ -246,7 +246,7 @@ Uize.module ({
 								['selected',true],
 								'populated selected'
 							],
-							['Test that setting state for a class to true on a node that already has a different class results in the new class being appended, with a single space as separator',
+							['Setting state for a class to true on a node that already has a different class results in the new class being appended, with a single space as separator',
 								'populated',
 								['selected',true],
 								'populated selected'
@@ -256,7 +256,7 @@ Uize.module ({
 								['SELECTED',true],
 								'populated selected SELECTED'
 							],
-							['Test that setting state for a class to true where that class that is an empty string results in no change',
+							['Setting state for a class to true where that class that is an empty string results in no change',
 								'populated selected',
 								['',true],
 								'populated selected'
@@ -288,7 +288,7 @@ Uize.module ({
 								['BLAH',false],
 								'populated selected featured'
 							],
-							['Test that setting state for a class to false where that class is an empty string results in no change',
+							['Setting state for a class to false where that class is an empty string results in no change',
 								'populated selected featured',
 								['',false],
 								'populated selected featured'
@@ -596,7 +596,7 @@ Uize.module ({
 							'selected',
 							'populated selected'
 						],
-						['Test that adding a class to a node that already has a different class results in the new class being appended, with a single space as separator',
+						['Adding a class to a node that already has a different class results in the new class being appended, with a single space as separator',
 							'populated',
 							'selected',
 							'populated selected'
@@ -606,7 +606,7 @@ Uize.module ({
 							'SELECTED',
 							'populated selected SELECTED'
 						],
-						['Test that adding a class that is an empty string results in no change',
+						['Adding a class that is an empty string results in no change',
 							'populated selected',
 							'',
 							'populated selected'
@@ -638,7 +638,7 @@ Uize.module ({
 							'BLAH',
 							'populated selected featured'
 						],
-						['Test that removing a class that is an empty string results in no change',
+						['Removing a class that is an empty string results in no change',
 							'populated selected featured',
 							'',
 							'populated selected featured'
@@ -690,7 +690,7 @@ Uize.module ({
 								'FEATURED',
 								'populated selected featured FEATURED'
 							],
-							['Test that toggling a class that is an empty string results in no change',
+							['Toggling a class that is an empty string results in no change',
 								'populated selected featured',
 								'',
 								'populated selected featured'

@@ -185,15 +185,15 @@ Uize.module ({
 								);
 							}
 						},
-						['Test that specifying the value false for the optional inclueNonLeafNodes argument results in only leaf nodes being included in the flattened object',
+						['Specifying the value false for the optional inclueNonLeafNodes argument results in only leaf nodes being included in the flattened object',
 							[{foo:{bar:{baz:{qux:1}}}},'.',false],
 							{'foo.bar.baz.qux':1}
 						],
-						['Test that specifying the value null for the optional inclueNonLeafNodes argument results in only leaf nodes being included in the flattened object',
+						['Specifying the value null for the optional inclueNonLeafNodes argument results in only leaf nodes being included in the flattened object',
 							[{foo:{bar:{baz:{qux:1}}}},'.',null],
 							{'foo.bar.baz.qux':1}
 						],
-						['Test that specifying the value undefined for the optional inclueNonLeafNodes argument results in only leaf nodes being included in the flattened object',
+						['Specifying the value undefined for the optional inclueNonLeafNodes argument results in only leaf nodes being included in the flattened object',
 							[{foo:{bar:{baz:{qux:1}}}},'.',undefined],
 							{'foo.bar.baz.qux':1}
 						]
