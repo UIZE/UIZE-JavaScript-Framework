@@ -28,7 +28,7 @@ Uize.module ({
 	builder:function () {
 		'use strict';
 
-		function _getArrayWithUnassignedElements () {
+		function _geSparselyPopulatedArray () {
 			var _result = [];
 			_result [0] = undefined;
 			_result [3] = 5;
@@ -124,34 +124,34 @@ Uize.module ({
 				};
 			}
 			return {
-				title:'Test support for different types of sources',
+				title:'Different types of sources are supported',
 				test:[
 					_basicSourceTest (
-						'Test that an array source is supported correctly',
+						'The source can be an array',
 						['','hey','','there','foo','','','bar'],
 						['','hey','','there','foo','','','bar'],
 						[0,1,2,3,4,5,6,7]
 					),
 					_basicSourceTest (
-						'Test that an array source is supported correctly',
+						'The source can be an object',
 						{prop0:'',prop1:'hey',prop2:'',prop3:'there',prop4:'foo',prop5:'',prop6:'',prop7:'bar'},
 						['','hey','','there','foo','','','bar'],
 						['prop0','prop1','prop2','prop3','prop4','prop5','prop6','prop7']
 					),
 					_basicSourceTest (
-						'Test that the value null for the source results in no iterations being performed',
+						'Specifying the value null for the source results in no iterations being performed',
 						null,
 						[],
 						[]
 					),
 					_basicSourceTest (
-						'Test that the value undefined for the source results in no iterations being performed',
+						'Specifying the value undefined for the source results in no iterations being performed',
 						undefined,
 						[],
 						[]
 					),
 					_basicSourceTest (
-						'Test that a number source is supported correctly',
+						'The source can be a number',
 						5,
 						[0,1,2,3,4],
 						[0,1,2,3,4]
@@ -197,23 +197,23 @@ Uize.module ({
 				};
 			}
 			return {
-				title:'Test that the matcher parameter is supported correctly',
+				title:'A matcher parameter is supported',
 				test:[
 					/*** test call signature for matcher function ***/
 						_matcherCallSignatureTest (
-							'Test that the matcher function receives value and index for each element of an array source as parameters',
+							'The matcher function receives value and index for each element of an array source as parameters',
 							['','hey','','there','foo','','','bar'],
 							['','hey','','there','foo','','','bar'],
 							[0,1,2,3,4,5,6,7]
 						),
 						_matcherCallSignatureTest (
-							'Test that the matcher function receives value and key for each property of an object source as parameters',
+							'The matcher function receives value and key for each property of an object source as parameters',
 							{prop0:'',prop1:'hey',prop2:'',prop3:'there',prop4:'foo',prop5:'',prop6:'',prop7:'bar'},
 							['','hey','','there','foo','','','bar'],
 							['prop0','prop1','prop2','prop3','prop4','prop5','prop6','prop7']
 						),
 						_matcherCallSignatureTest (
-							'Test that the matcher function receives value and index for each value of a range source as parameters',
+							'The matcher function receives value and index for each value of a range source as parameters',
 							5,
 							[0,1,2,3,4],
 							[0,1,2,3,4]
@@ -221,21 +221,21 @@ Uize.module ({
 
 					/*** test support for string matcher expression ***/
 						_matcherCallSignatureTest (
-							'Test that a matcher expression string receives value and key values for each element of an array source',
+							'A matcher expression string receives value and key values for each element of an array source',
 							['','hey','','there','foo','','','bar'],
 							['','hey','','there','foo','','','bar'],
 							[0,1,2,3,4,5,6,7],
 							true
 						),
 						_matcherCallSignatureTest (
-							'Test that a matcher expression string receives value and key values for each property of an object source',
+							'A matcher expression string receives value and key values for each property of an object source',
 							{prop0:'',prop1:'hey',prop2:'',prop3:'there',prop4:'foo',prop5:'',prop6:'',prop7:'bar'},
 							['','hey','','there','foo','','','bar'],
 							['prop0','prop1','prop2','prop3','prop4','prop5','prop6','prop7'],
 							true
 						),
 						_matcherCallSignatureTest (
-							'Test that a matcher expression string receives value and key values for each value of a range source',
+							'A matcher expression string receives value and key values for each value of a range source',
 							5,
 							[0,1,2,3,4],
 							[0,1,2,3,4],
@@ -252,13 +252,13 @@ Uize.module ({
 				_matcherForNumberSource = _matcherPrefix + '(value % 2)'
 			;
 			return {
-				title:'Test support for the optional target parameter',
+				title:'An optional target parameter can be specified',
 				test:[
 					{
-						title:'Test support for the target parameter when the source is an object',
+						title:'When the source is an object, the optional target parameter has a specific behavior',
 						test:[
 							{
-								title:'Test that, when the source is an object and the value true is specified for the target parameter, the result is returned in a fresh object',
+								title:'When the source is an object and the value true is specified for the target parameter, the result is returned in a fresh object',
 								test:function () {
 									var
 										_source = {prop0:'',prop1:'hey',prop2:'',prop3:'there'},
@@ -271,7 +271,7 @@ Uize.module ({
 								}
 							},
 							{
-								title:'Test that, when the source is an object and the value false is specified for the target parameter, the source object is modified and returned',
+								title:'When the source is an object and the value false is specified for the target parameter, the source object is modified and returned',
 								test:function () {
 									var
 										_source = {prop0:'',prop1:'hey',prop2:'',prop3:'there'},
@@ -284,7 +284,7 @@ Uize.module ({
 								}
 							},
 							{
-								title:'Test that, when the source is an object and the source is specified for the target parameter, the source is modified and returned',
+								title:'When the source is an object and the source is specified for the target parameter, the source is modified and returned',
 								test:function () {
 									var
 										_source = {prop0:'',prop1:'hey',prop2:'',prop3:'there'},
@@ -297,7 +297,7 @@ Uize.module ({
 								}
 							},
 							{
-								title:'Test that, when the source is an object and an empty object is specified for the target parameter, the target object is modified and returned',
+								title:'When the source is an object and an empty object is specified for the target parameter, the target object is modified and returned',
 								test:function () {
 									var
 										_source = {prop0:'',prop1:'hey',prop2:'',prop3:'there'},
@@ -311,7 +311,7 @@ Uize.module ({
 								}
 							},
 							{
-								title:'Test that, when the source is an object and a non-empty object is specified for the target parameter, the target object\'s contents is replaced with the result and returned',
+								title:'When the source is an object and a non-empty object is specified for the target parameter, the target object\'s contents is replaced with the result and returned',
 								test:function () {
 									var
 										_source = {prop0:'',prop1:'hey',prop2:'',prop3:'there'},
@@ -325,7 +325,7 @@ Uize.module ({
 								}
 							},
 							{
-								title:'Test that, when the source is an object and an empty array is specified for the target parameter, the target array remains empty but is extended with custom properties from the source object',
+								title:'When the source is an object and an empty array is specified for the target parameter, the target array remains empty but is extended with custom properties from the source object',
 								test:function () {
 									var
 										_source = {prop0:'',prop1:'hey',prop2:'',prop3:'there'},
@@ -343,7 +343,7 @@ Uize.module ({
 								}
 							},
 							{
-								title:'Test that, when the source is an object and a non-empty array is specified for the target parameter, the target array is emptied and extended with custom properties from the source object',
+								title:'When the source is an object and a non-empty array is specified for the target parameter, the target array is emptied and extended with custom properties from the source object',
 								test:function () {
 									var
 										_source = {prop0:'',prop1:'hey',prop2:'',prop3:'there'},
@@ -363,10 +363,10 @@ Uize.module ({
 						]
 					},
 					{
-						title:'Test support for the target parameter when the source is an array',
+						title:'When the source is an array, the optional target parameter has a specific behavior',
 						test:[
 							{
-								title:'Test that, when the source is an array and the value true is specified for the target parameter, the result is returned in a fresh array',
+								title:'When the source is an array and the value true is specified for the target parameter, the result is returned in a fresh array',
 								test:function () {
 									var
 										_source = ['','hey','','there'],
@@ -379,7 +379,7 @@ Uize.module ({
 								}
 							},
 							{
-								title:'Test that, when the source is an array and the value false is specified for the target parameter, the source array is modified and returned',
+								title:'When the source is an array and the value false is specified for the target parameter, the source array is modified and returned',
 								test:function () {
 									var
 										_source = ['','hey','','there'],
@@ -392,7 +392,7 @@ Uize.module ({
 								}
 							},
 							{
-								title:'Test that, when the source is an array and the source is specified for the target parameter, the source is modified and returned',
+								title:'When the source is an array and the source is specified for the target parameter, the source is modified and returned',
 								test:function () {
 									var
 										_source = ['','hey','','there'],
@@ -405,7 +405,7 @@ Uize.module ({
 								}
 							},
 							{
-								title:'Test that, when the source is an array and an empty object is specified for the target parameter, the target object is modified to be a list and returned',
+								title:'When the source is an array and an empty object is specified for the target parameter, the target object is modified to be a list and returned',
 								test:function () {
 									var
 										_source = ['','hey','','there'],
@@ -419,7 +419,7 @@ Uize.module ({
 								}
 							},
 							{
-								title:'Test that, when the source is an array and a non-empty object is specified for the target parameter, the target object is emptied, modified to be a list, and returned',
+								title:'When the source is an array and a non-empty object is specified for the target parameter, the target object is emptied, modified to be a list, and returned',
 								test:function () {
 									var
 										_source = ['','hey','','there'],
@@ -433,7 +433,7 @@ Uize.module ({
 								}
 							},
 							{
-								title:'Test that, when the source is an array and an empty array is specified for the target parameter, the target array is modified and returned',
+								title:'When the source is an array and an empty array is specified for the target parameter, the target array is modified and returned',
 								test:function () {
 									var
 										_source = ['','hey','','there'],
@@ -447,7 +447,7 @@ Uize.module ({
 								}
 							},
 							{
-								title:'Test that, when the source is an array and a non-empty array is specified for the target parameter, the target array\'s contents is replaced with the result and returned',
+								title:'When the source is an array and a non-empty array is specified for the target parameter, the target array\'s contents is replaced with the result and returned',
 								test:function () {
 									var
 										_source = ['','hey','','there'],
@@ -463,10 +463,10 @@ Uize.module ({
 						]
 					},
 					{
-						title:'Test support for the target parameter when the source is a number',
+						title:'When the source is a number, the optional target parameter has a specific behavior',
 						test:[
 							{
-								title:'Test that, when the source is a number and the value true is specified for the target parameter, the result is returned in a fresh array',
+								title:'When the source is a number and the value true is specified for the target parameter, the result is returned in a fresh array',
 								test:function () {
 									return this.expect (
 										[0,2,4],
@@ -475,7 +475,7 @@ Uize.module ({
 								}
 							},
 							{
-								title:'Test that, when the source is a number and the value false is specified for the target parameter, the result is returned in a fresh array',
+								title:'When the source is a number and the value false is specified for the target parameter, the result is returned in a fresh array',
 								test:function () {
 									return this.expect (
 										[0,2,4],
@@ -484,7 +484,7 @@ Uize.module ({
 								}
 							},
 							{
-								title:'Test that, when the source is a number and a number is specified for the target parameter, the result is returned in a fresh array',
+								title:'When the source is a number and a number is specified for the target parameter, the result is returned in a fresh array',
 								test:function () {
 									return this.expect (
 										[0,2,4],
@@ -493,7 +493,7 @@ Uize.module ({
 								}
 							},
 							{
-								title:'Test that, when the source is a number and an empty array is specified for the target parameter, the target array is modified and returned',
+								title:'When the source is a number and an empty array is specified for the target parameter, the target array is modified and returned',
 								test:function () {
 									var
 										_target = [],
@@ -506,7 +506,7 @@ Uize.module ({
 								}
 							},
 							{
-								title:'Test that, when the source is a number and a non-empty array is specified for the target parameter, the target array\'s contents is replaced with the result and returned',
+								title:'When the source is a number and a non-empty array is specified for the target parameter, the target array\'s contents is replaced with the result and returned',
 								test:function () {
 									var
 										_target = ['foo','bar'],
@@ -519,7 +519,7 @@ Uize.module ({
 								}
 							},
 							{
-								title:'Test that, when the source is a number and an empty object is specified for the target parameter, the target object is modified to be a list and returned',
+								title:'When the source is a number and an empty object is specified for the target parameter, the target object is modified to be a list and returned',
 								test:function () {
 									var
 										_target = {},
@@ -532,7 +532,7 @@ Uize.module ({
 								}
 							},
 							{
-								title:'Test that, when the source is a number and a non-empty object is specified for the target parameter, the target object is emptied, modified to be a list, and returned',
+								title:'When the source is a number and a non-empty object is specified for the target parameter, the target object is emptied, modified to be a list, and returned',
 								test:function () {
 									var
 										_target = {foo:'bar'},
@@ -564,19 +564,19 @@ Uize.module ({
 
 							/*** test when true is specified for matcher ***/
 								_forEachMatcherTest (
-									'Test that, when the value true is specified for the matcher, all elements of an array source are iterated over',
+									'When the value true is specified for the matcher, all elements of an array source are iterated over',
 									['','hey','','there','foo','','','bar'],
 									true,
 									['','hey','','there','foo','','','bar']
 								),
 								_forEachMatcherTest (
-									'Test that, when the value true is specified for the matcher, all properties of an object source are iterated over',
+									'When the value true is specified for the matcher, all properties of an object source are iterated over',
 									{prop0:'',prop1:'hey',prop2:'',prop3:'there',prop4:'foo',prop5:'',prop6:'',prop7:'bar'},
 									true,
 									['','hey','','there','foo','','','bar']
 								),
 								_forEachMatcherTest (
-									'Test that, when the value true is specified for the matcher, all values of a range source are iterated over',
+									'When the value true is specified for the matcher, all values of a range source are iterated over',
 									5,
 									true,
 									[0,1,2,3,4]
@@ -584,19 +584,19 @@ Uize.module ({
 
 							/*** test when false is specified for matcher ***/
 								_forEachMatcherTest (
-									'Test that, when the value false is specified for the matcher, no elements of an array source are iterated over',
+									'When the value false is specified for the matcher, no elements of an array source are iterated over',
 									['','hey','','there','foo','','','bar'],
 									false,
 									[]
 								),
 								_forEachMatcherTest (
-									'Test that, when the value false is specified for the matcher, no properties of an object source are iterated over',
+									'When the value false is specified for the matcher, no properties of an object source are iterated over',
 									{prop0:'',prop1:'hey',prop2:'',prop3:'there',prop4:'foo',prop5:'',prop6:'',prop7:'bar'},
 									false,
 									[]
 								),
 								_forEachMatcherTest (
-									'Test that, when the value false is specified for the matcher, no values of a range source are iterated over',
+									'When the value false is specified for the matcher, no values of a range source are iterated over',
 									5,
 									false,
 									[]
@@ -604,19 +604,19 @@ Uize.module ({
 
 							/*** test when null is specified for matcher ***/
 								_forEachMatcherTest (
-									'Test that, when the value null is specified for the matcher, all elements of an array source are iterated over',
+									'When the value null is specified for the matcher, all elements of an array source are iterated over',
 									['','hey','','there','foo','','','bar'],
 									true,
 									['','hey','','there','foo','','','bar']
 								),
 								_forEachMatcherTest (
-									'Test that, when the value null is specified for the matcher, all properties of an object source are iterated over',
+									'When the value null is specified for the matcher, all properties of an object source are iterated over',
 									{prop0:'',prop1:'hey',prop2:'',prop3:'there',prop4:'foo',prop5:'',prop6:'',prop7:'bar'},
 									true,
 									['','hey','','there','foo','','','bar']
 								),
 								_forEachMatcherTest (
-									'Test that, when the value null is specified for the matcher, all values of a range source are iterated over',
+									'When the value null is specified for the matcher, all values of a range source are iterated over',
 									5,
 									true,
 									[0,1,2,3,4]
@@ -624,19 +624,19 @@ Uize.module ({
 
 							/*** test when undefined is specified for matcher ***/
 								_forEachMatcherTest (
-									'Test that, when the value undefined is specified for the matcher, all elements of an array source are iterated over',
+									'When the value undefined is specified for the matcher, all elements of an array source are iterated over',
 									['','hey','','there','foo','','','bar'],
 									true,
 									['','hey','','there','foo','','','bar']
 								),
 								_forEachMatcherTest (
-									'Test that, when the value undefined is specified for the matcher, all properties of an object source are iterated over',
+									'When the value undefined is specified for the matcher, all properties of an object source are iterated over',
 									{prop0:'',prop1:'hey',prop2:'',prop3:'there',prop4:'foo',prop5:'',prop6:'',prop7:'bar'},
 									true,
 									['','hey','','there','foo','','','bar']
 								),
 								_forEachMatcherTest (
-									'Test that, when the value undefined is specified for the matcher, all values of a range source are iterated over',
+									'When the value undefined is specified for the matcher, all values of a range source are iterated over',
 									5,
 									true,
 									[0,1,2,3,4]
@@ -644,19 +644,19 @@ Uize.module ({
 
 							/*** test when regular expression is specified for matcher ***/
 								_forEachMatcherTest (
-									'Test that, when a regular expression is specified for the matcher, only elements of an array source whose values match the regular expression are iterated over',
+									'When a regular expression is specified for the matcher, only elements of an array source whose values match the regular expression are iterated over',
 									['boo','1234','hey','hi42','6','number 6',''],
 									/^\d+$/,
 									['1234','6']
 								),
 								_forEachMatcherTest (
-									'Test that, when a regular expression is specified for the matcher, only properties of an object source whose values match the regular expression are iterated over',
+									'When a regular expression is specified for the matcher, only properties of an object source whose values match the regular expression are iterated over',
 									{prop0:'1234',prop1:'hey',prop2:'hi42',prop3:'6',prop4:'number 6',prop5:''},
 									/^\d+$/,
 									['1234','6']
 								),
 								_forEachMatcherTest (
-									'Test that, when a regular expression is specified for the matcher, only values of a range source that match the regular expression are iterated over',
+									'When a regular expression is specified for the matcher, only values of a range source that match the regular expression are iterated over',
 									100,
 									/^\d*1$/,
 									[1,11,21,31,41,51,61,71,81,91]
@@ -664,13 +664,13 @@ Uize.module ({
 
 						/*** test call signature for iterator function ***/
 							_forEachIteratorTest (
-								'Test that the iterator function receives value and index as parameters for each matched element of an array source as parameters',
+								'The iterator function receives value and index as parameters for each matched element of an array source as parameters',
 								['','hey','','there','foo','','','bar'],
 								['hey','there','foo','bar'],
 								[1,3,4,7]
 							),
 							_forEachIteratorTest (
-								'Test that the iterator function receives value and index as parameters for each matched element of an object source as parameters',
+								'The iterator function receives value and index as parameters for each matched element of an object source as parameters',
 								{prop0:'',prop1:'hey',prop2:'',prop3:'there',prop4:'foo',prop5:'',prop6:'',prop7:'bar'},
 								['hey','there','foo','bar'],
 								['prop1','prop3','prop4','prop7']
@@ -678,40 +678,40 @@ Uize.module ({
 
 						/*** test support for the maxMatches parameter ***/
 							_forEachMaxMatchesTest (
-								'Test that specifying the value 0 for the maxMatches parameter results in the iteration handler never being called, even if there are matches',
+								'Specifying the value 0 for the maxMatches parameter results in the iteration handler never being called, even if there are matches',
 								0
 							),
 							_forEachMaxMatchesTest (
-								'Test that specifying a negative value for the maxMatches parameter results in the iteration handler never being called, even if there are matches',
+								'Specifying a negative value for the maxMatches parameter results in the iteration handler never being called, even if there are matches',
 								-10
 							),
 							_forEachMaxMatchesTest (
-								'Test that specifying a number for the maxMatches parameter that is lower than the number of actual matches results in the iteration handler being called only for matches before the max has been reached',
+								'Specifying a number for the maxMatches parameter that is lower than the number of actual matches results in the iteration handler being called only for matches before the max has been reached',
 								2
 							),
 							_forEachMaxMatchesTest (
-								'Test that specifying a number for the maxMatches parameter that is higher than the number of actual matches results in the iteration handler being called for all the matches',
+								'Specifying a number for the maxMatches parameter that is higher than the number of actual matches results in the iteration handler being called for all the matches',
 								10
 							),
 							_forEachMaxMatchesTest (
-								'Test that specifying the value null for the maxMatches parameter results in it being defaulted to Infinity',
+								'Specifying the value null for the maxMatches parameter results in it being defaulted to Infinity',
 								null
 							),
 							_forEachMaxMatchesTest (
-								'Test that specifying the value undefined for the maxMatches parameter results in it being defaulted to Infinity',
+								'Specifying the value undefined for the maxMatches parameter results in it being defaulted to Infinity',
 								undefined
 							),
 
 						/*** miscellaneous tests ***/
 							{
-								title:'Test that unassigned elements of an array source are observed',
+								title:'Unassigned elements of a sparsely populated array source are iterated over',
 								test:function () {
 									var
 										_matchValues = [],
 										_matchKeys = []
 									;
 									Uize.Data.Matches.forEach (
-										_getArrayWithUnassignedElements (),
+										_geSparselyPopulatedArray (),
 										function (_value) {return _value === undefined},
 										function (_value,_key) {
 											_matchValues.push (_value);
@@ -733,21 +733,21 @@ Uize.module ({
 							/*** test support for different types of sources ***/
 								_sourceTest ('remove'),
 								/*** further tests for array source ***/
-									['Test that, when a matcher matches some elements of an array source, those matching elements are removed',
+									['When a matcher matches some elements of an array source, those matching elements are removed',
 										[
 											['','hey','','there','foo','','','bar'],
 											function (_value) {return !_value}
 										],
 										['hey','there','foo','bar']
 									],
-									['Test that, when a matcher matches no elements of an array source, no elements are removed',
+									['When a matcher matches no elements of an array source, no elements are removed',
 										[
 											['','hey','','there','foo','','','bar'],
 											Uize.returnFalse
 										],
 										['','hey','','there','foo','','','bar']
 									],
-									['Test that, when a matcher matches all elements of an array source, all elements are removed',
+									['When a matcher matches all elements of an array source, all elements are removed',
 										[
 											['','hey','','there','foo','','','bar'],
 											Uize.returnTrue
@@ -756,21 +756,21 @@ Uize.module ({
 									],
 
 								/*** further tests for object source ***/
-									['Test that, when a matcher matches some properties of an object source, those matching properties are removed',
+									['When a matcher matches some properties of an object source, those matching properties are removed',
 										[
 											{prop0:'',prop1:'hey',prop2:'',prop3:'there',prop4:'foo',prop5:'',prop6:'',prop7:'bar'},
 											function (_value) {return !_value}
 										],
 										{prop1:'hey',prop3:'there',prop4:'foo',prop7:'bar'}
 									],
-									['Test that, when a matcher matches no properties of an object source, no properties are removed',
+									['When a matcher matches no properties of an object source, no properties are removed',
 										[
 											{prop0:'',prop1:'hey',prop2:'',prop3:'there',prop4:'foo',prop5:'',prop6:'',prop7:'bar'},
 											Uize.returnFalse
 										],
 										{prop0:'',prop1:'hey',prop2:'',prop3:'there',prop4:'foo',prop5:'',prop6:'',prop7:'bar'}
 									],
-									['Test that, when a matcher matches all properties of an object source, all properties are removed',
+									['When a matcher matches all properties of an object source, all properties are removed',
 										[
 											{prop0:'',prop1:'hey',prop2:'',prop3:'there',prop4:'foo',prop5:'',prop6:'',prop7:'bar'},
 											Uize.returnTrue
@@ -779,15 +779,15 @@ Uize.module ({
 									],
 
 								/*** tests for a range sounrce ***/
-									['Test that, when a matcher matches some values of a range source, then an array of the range values with the matching values removed is returned',
+									['When a matcher matches some values of a range source, then an array of the range values with the matching values removed is returned',
 										[6,function (_value) {return _value % 2}],
 										[0,2,4]
 									],
-									['Test that, when a matcher matches all values of a range source, then an empty array is returned',
+									['When a matcher matches all values of a range source, then an empty array is returned',
 										[6,Uize.returnTrue],
 										[]
 									],
-									['Test that, when a matcher matches no values of a range source, then an array containing all values in the range is returned',
+									['When a matcher matches no values of a range source, then an array containing all values in the range is returned',
 										[6,Uize.returnFalse],
 										[0,1,2,3,4,5]
 									],
@@ -796,121 +796,121 @@ Uize.module ({
 								_matcherTest ('remove'),
 
 								/*** test when no matcher is specified ***/
-									['Test that, when no matcher is specified, all elements of an array source are removed',
+									['When no matcher is specified, all elements of an array source are removed',
 										[['','hey','','there','foo','','','bar']],
 										[]
 									],
-									['Test that, when no matcher is specified, all properties of an object source are removed',
+									['When no matcher is specified, all properties of an object source are removed',
 										{prop0:'',prop1:'hey',prop2:'',prop3:'there',prop4:'foo',prop5:'',prop6:'',prop7:'bar'},
 										{}
 									],
-									['Test that, when no matcher is specified, all values of a range source are removed',
+									['When no matcher is specified, all values of a range source are removed',
 										5,
 										[]
 									],
 
 								/*** test when true is specified for matcher ***/
-									['Test that, when the value true is specified for the matcher, all elements of an array source are removed',
+									['When the value true is specified for the matcher, all elements of an array source are removed',
 										[
 											['','hey','','there','foo','','','bar'],
 											true
 										],
 										[]
 									],
-									['Test that, when the value true is specified for the matcher, all properties of an object source are removed',
+									['When the value true is specified for the matcher, all properties of an object source are removed',
 										[
 											{prop0:'',prop1:'hey',prop2:'',prop3:'there',prop4:'foo',prop5:'',prop6:'',prop7:'bar'},
 											true
 										],
 										{}
 									],
-									['Test that, when the value true is specified for the matcher, all values of a range source are removed',
+									['When the value true is specified for the matcher, all values of a range source are removed',
 										[5,true],
 										[]
 									],
 
 								/*** test when false is specified for matcher ***/
-									['Test that, when the value false is specified for the matcher, no elements of an array source are removed',
+									['When the value false is specified for the matcher, no elements of an array source are removed',
 										[
 											['','hey','','there','foo','','','bar'],
 											false
 										],
 										['','hey','','there','foo','','','bar']
 									],
-									['Test that, when the value false is specified for the matcher, no properties of an object source are removed',
+									['When the value false is specified for the matcher, no properties of an object source are removed',
 										[
 											{prop0:'',prop1:'hey',prop2:'',prop3:'there',prop4:'foo',prop5:'',prop6:'',prop7:'bar'},
 											false
 										],
 										{prop0:'',prop1:'hey',prop2:'',prop3:'there',prop4:'foo',prop5:'',prop6:'',prop7:'bar'}
 									],
-									['Test that, when the value false is specified for the matcher, no values of a range source are iterated over',
+									['When the value false is specified for the matcher, no values of a range source are iterated over',
 										[5,false],
 										[0,1,2,3,4]
 									],
 
 								/*** test when null is specified for matcher ***/
-									['Test that, when the value null is specified for the matcher, all elements of an array source are removed',
+									['When the value null is specified for the matcher, all elements of an array source are removed',
 										[
 											['','hey','','there','foo','','','bar'],
 											true
 										],
 										[]
 									],
-									['Test that, when the value null is specified for the matcher, all properties of an object source are removed',
+									['When the value null is specified for the matcher, all properties of an object source are removed',
 										[
 											{prop0:'',prop1:'hey',prop2:'',prop3:'there',prop4:'foo',prop5:'',prop6:'',prop7:'bar'},
 											true
 										],
 										{}
 									],
-									['Test that, when the value null is specified for the matcher, all values of a range source are removed',
+									['When the value null is specified for the matcher, all values of a range source are removed',
 										[5,true],
 										[]
 									],
 
 								/*** test when undefined is specified for matcher ***/
-									['Test that, when the value undefined is specified for the matcher, all elements of an array source are removed',
+									['When the value undefined is specified for the matcher, all elements of an array source are removed',
 										[
 											['','hey','','there','foo','','','bar'],
 											true
 										],
 										[]
 									],
-									['Test that, when the value undefined is specified for the matcher, all properties of an object source are removed',
+									['When the value undefined is specified for the matcher, all properties of an object source are removed',
 										[
 											{prop0:'',prop1:'hey',prop2:'',prop3:'there',prop4:'foo',prop5:'',prop6:'',prop7:'bar'},
 											true
 										],
 										{}
 									],
-									['Test that, when the value undefined is specified for the matcher, all values of a range source are removed',
+									['When the value undefined is specified for the matcher, all values of a range source are removed',
 										[5,true],
 										[]
 									],
 
 								/*** test when regular expression is specified for matcher ***/
-									['Test that, when a regular expression is specified for the matcher, only elements of an array source whose values match the regular expression are removed',
+									['When a regular expression is specified for the matcher, only elements of an array source whose values match the regular expression are removed',
 										[
 											['boo','1234','hey','hi42','6','number 6',''],
 											/^\d+$/
 										],
 										['boo','hey','hi42','number 6','']
 									],
-									['Test that, when a regular expression is specified for the matcher, only properties of an object source whose values match the regular expression are removed',
+									['When a regular expression is specified for the matcher, only properties of an object source whose values match the regular expression are removed',
 										[
 											{prop0:'1234',prop1:'hey',prop2:'hi42',prop3:'6',prop4:'number 6',prop5:''},
 											/^\d+$/
 										],
 										{prop1:'hey',prop2:'hi42',prop4:'number 6',prop5:''}
 									],
-									['Test that, when a regular expression is specified for the matcher, only values of a range source that match the regular expression are removed',
+									['When a regular expression is specified for the matcher, only values of a range source that match the regular expression are removed',
 										[30,/1/],
 										[0,2,3,4,5,6,7,8,9,20,22,23,24,25,26,27,28,29]
 									],
 
 							/*** test support for the maxMatches parameter ***/
-								['Test that specifying the value 0 for the maxMatches parameter results in no elements of an array source being removed, even if there are matches',
+								['Specifying the value 0 for the maxMatches parameter results in no elements of an array source being removed, even if there are matches',
 									[
 										['','hey','','there','foo','','','bar'],
 										function (_value) {return !!_value},
@@ -918,7 +918,7 @@ Uize.module ({
 									],
 									['','hey','','there','foo','','','bar']
 								],
-								['Test that specifying a negative value for the maxMatches parameter results in no elements of an array source being removed, even if there are matches',
+								['Specifying a negative value for the maxMatches parameter results in no elements of an array source being removed, even if there are matches',
 									[
 										['','hey','','there','foo','','','bar'],
 										function (_value) {return !!_value},
@@ -926,7 +926,7 @@ Uize.module ({
 									],
 									['','hey','','there','foo','','','bar']
 								],
-								['Test that specifying a non-zero number for the maxMatches parameter that is lower than the number of actual matches results in only the specified maximum number of matches being removed from a source array',
+								['Specifying a non-zero number for the maxMatches parameter that is lower than the number of actual matches results in only the specified maximum number of matches being removed from a source array',
 									[
 										['','hey','','there','foo','','','bar'],
 										function (_value) {return !!_value},
@@ -934,7 +934,7 @@ Uize.module ({
 									],
 									['','','foo','','','bar']
 								],
-								['Test that specifying a number for the maxMatches parameter that is higher than the number of actual matches in a source array results in all matching elements being removed',
+								['Specifying a number for the maxMatches parameter that is higher than the number of actual matches in a source array results in all matching elements being removed',
 									[
 										['','hey','','there','foo','','','bar'],
 										function (_value) {return !!_value},
@@ -942,7 +942,7 @@ Uize.module ({
 									],
 									['','','','']
 								],
-								['Test that specifying the value null for the maxMatches parameter results in it being defaulted to Infinity',
+								['Specifying the value null for the maxMatches parameter results in it being defaulted to Infinity',
 									[
 										['','hey','','there','foo','','','bar'],
 										function (_value) {return !!_value},
@@ -950,7 +950,7 @@ Uize.module ({
 									],
 									['','','','']
 								],
-								['Test that specifying the value undefined for the maxMatches parameter results in it being defaulted to Infinity',
+								['Specifying the value undefined for the maxMatches parameter results in it being defaulted to Infinity',
 									[
 										['','hey','','there','foo','','','bar'],
 										function (_value) {return !!_value},
@@ -970,21 +970,21 @@ Uize.module ({
 							/*** test support for different types of sources ***/
 								_sourceTest ('retain'),
 								/*** further tests for array source ***/
-									['Test that, when a matcher matches some elements of an array source, only those matching elements are retained',
+									['When a matcher matches some elements of an array source, only those matching elements are retained',
 										[
 											['','hey','','there','foo','','','bar'],
 											Uize.returnX
 										],
 										['hey','there','foo','bar']
 									],
-									['Test that, when a matcher matches no elements of an array source, no elements are retained',
+									['When a matcher matches no elements of an array source, no elements are retained',
 										[
 											['','hey','','there','foo','','','bar'],
 											Uize.returnFalse
 										],
 										[]
 									],
-									['Test that, when a matcher matches all elements of an array source, all elements are retained',
+									['When a matcher matches all elements of an array source, all elements are retained',
 										[
 											['','hey','','there','foo','','','bar'],
 											Uize.returnTrue
@@ -993,21 +993,21 @@ Uize.module ({
 									],
 
 								/*** further tests for object source ***/
-									['Test that, when a matcher matches some properties of an object source, only those matching properties are retained',
+									['When a matcher matches some properties of an object source, only those matching properties are retained',
 										[
 											{prop0:'',prop1:'hey',prop2:'',prop3:'there',prop4:'foo',prop5:'',prop6:'',prop7:'bar'},
 											Uize.returnX
 										],
 										{prop1:'hey',prop3:'there',prop4:'foo',prop7:'bar'}
 									],
-									['Test that, when a matcher matches no properties of an object source, no properties are retained',
+									['When a matcher matches no properties of an object source, no properties are retained',
 										[
 											{prop0:'',prop1:'hey',prop2:'',prop3:'there',prop4:'foo',prop5:'',prop6:'',prop7:'bar'},
 											Uize.returnFalse
 										],
 										{}
 									],
-									['Test that, when a matcher matches all properties of an object source, all properties are retained',
+									['When a matcher matches all properties of an object source, all properties are retained',
 										[
 											{prop0:'',prop1:'hey',prop2:'',prop3:'there',prop4:'foo',prop5:'',prop6:'',prop7:'bar'},
 											Uize.returnTrue
@@ -1016,15 +1016,15 @@ Uize.module ({
 									],
 
 								/*** tests for a range sounrce ***/
-									['Test that, when a matcher matches some values of a range source, then an array of only those matching range values is returned',
+									['When a matcher matches some values of a range source, then an array of only those matching range values is returned',
 										[6,function (_value) {return _value % 2}],
 										[1,3,5]
 									],
-									['Test that, when a matcher matches all values of a range source, then an array containing all values in the range is returned',
+									['When a matcher matches all values of a range source, then an array containing all values in the range is returned',
 										[6,Uize.returnTrue],
 										[0,1,2,3,4,5]
 									],
-									['Test that, when a matcher matches no values of a range source, then an empty array is returned',
+									['When a matcher matches no values of a range source, then an empty array is returned',
 										[6,Uize.returnFalse],
 										[]
 									],
@@ -1033,121 +1033,121 @@ Uize.module ({
 								_matcherTest ('retain'),
 
 								/*** test when no matcher is specified ***/
-									['Test that, when no matcher is specified, all elements of an array source are retained',
+									['When no matcher is specified, all elements of an array source are retained',
 										[['','hey','','there','foo','','','bar']],
 										['','hey','','there','foo','','','bar']
 									],
-									['Test that, when no matcher is specified, all properties of an object source are retained',
+									['When no matcher is specified, all properties of an object source are retained',
 										{prop0:'',prop1:'hey',prop2:'',prop3:'there',prop4:'foo',prop5:'',prop6:'',prop7:'bar'},
 										{prop0:'',prop1:'hey',prop2:'',prop3:'there',prop4:'foo',prop5:'',prop6:'',prop7:'bar'}
 									],
-									['Test that, when no matcher is specified, all values of a range source are retained',
+									['When no matcher is specified, all values of a range source are retained',
 										5,
 										[0,1,2,3,4]
 									],
 
 								/*** test when true is specified for matcher ***/
-									['Test that, when the value true is specified for the matcher, all elements of an array source are retained',
+									['When the value true is specified for the matcher, all elements of an array source are retained',
 										[
 											['','hey','','there','foo','','','bar'],
 											true
 										],
 										['','hey','','there','foo','','','bar']
 									],
-									['Test that, when the value true is specified for the matcher, all properties of an object source are retained',
+									['When the value true is specified for the matcher, all properties of an object source are retained',
 										[
 											{prop0:'',prop1:'hey',prop2:'',prop3:'there',prop4:'foo',prop5:'',prop6:'',prop7:'bar'},
 											true
 										],
 										{prop0:'',prop1:'hey',prop2:'',prop3:'there',prop4:'foo',prop5:'',prop6:'',prop7:'bar'}
 									],
-									['Test that, when the value true is specified for the matcher, all values of a range source are retained',
+									['When the value true is specified for the matcher, all values of a range source are retained',
 										[5,true],
 										[0,1,2,3,4]
 									],
 
 								/*** test when false is specified for matcher ***/
-									['Test that, when the value false is specified for the matcher, no elements of an array source are retained',
+									['When the value false is specified for the matcher, no elements of an array source are retained',
 										[
 											['','hey','','there','foo','','','bar'],
 											false
 										],
 										[]
 									],
-									['Test that, when the value false is specified for the matcher, no properties of an object source are retained',
+									['When the value false is specified for the matcher, no properties of an object source are retained',
 										[
 											{prop0:'',prop1:'hey',prop2:'',prop3:'there',prop4:'foo',prop5:'',prop6:'',prop7:'bar'},
 											false
 										],
 										{}
 									],
-									['Test that, when the value false is specified for the matcher, no values of a range source are iterated over',
+									['When the value false is specified for the matcher, no values of a range source are iterated over',
 										[5,false],
 										[]
 									],
 
 								/*** test when null is specified for matcher ***/
-									['Test that, when the value null is specified for the matcher, all elements of an array source are retained',
+									['When the value null is specified for the matcher, all elements of an array source are retained',
 										[
 											['','hey','','there','foo','','','bar'],
 											true
 										],
 										['','hey','','there','foo','','','bar']
 									],
-									['Test that, when the value null is specified for the matcher, all properties of an object source are retained',
+									['When the value null is specified for the matcher, all properties of an object source are retained',
 										[
 											{prop0:'',prop1:'hey',prop2:'',prop3:'there',prop4:'foo',prop5:'',prop6:'',prop7:'bar'},
 											true
 										],
 										{prop0:'',prop1:'hey',prop2:'',prop3:'there',prop4:'foo',prop5:'',prop6:'',prop7:'bar'}
 									],
-									['Test that, when the value null is specified for the matcher, all values of a range source are retained',
+									['When the value null is specified for the matcher, all values of a range source are retained',
 										[5,true],
 										[0,1,2,3,4]
 									],
 
 								/*** test when undefined is specified for matcher ***/
-									['Test that, when the value undefined is specified for the matcher, all elements of an array source are retained',
+									['When the value undefined is specified for the matcher, all elements of an array source are retained',
 										[
 											['','hey','','there','foo','','','bar'],
 											true
 										],
 										['','hey','','there','foo','','','bar']
 									],
-									['Test that, when the value undefined is specified for the matcher, all properties of an object source are retained',
+									['When the value undefined is specified for the matcher, all properties of an object source are retained',
 										[
 											{prop0:'',prop1:'hey',prop2:'',prop3:'there',prop4:'foo',prop5:'',prop6:'',prop7:'bar'},
 											true
 										],
 										{prop0:'',prop1:'hey',prop2:'',prop3:'there',prop4:'foo',prop5:'',prop6:'',prop7:'bar'}
 									],
-									['Test that, when the value undefined is specified for the matcher, all values of a range source are retained',
+									['When the value undefined is specified for the matcher, all values of a range source are retained',
 										[5,true],
 										[0,1,2,3,4]
 									],
 
 								/*** test when regular expression is specified for matcher ***/
-									['Test that, when a regular expression is specified for the matcher, only elements of an array source whose values match the regular expression are retained',
+									['When a regular expression is specified for the matcher, only elements of an array source whose values match the regular expression are retained',
 										[
 											['boo','1234','hey','hi42','6','number 6',''],
 											/^\d+$/
 										],
 										['1234','6']
 									],
-									['Test that, when a regular expression is specified for the matcher, only properties of an object source whose values match the regular expression are retained',
+									['When a regular expression is specified for the matcher, only properties of an object source whose values match the regular expression are retained',
 										[
 											{prop0:'1234',prop1:'hey',prop2:'hi42',prop3:'6',prop4:'number 6',prop5:''},
 											/^\d+$/
 										],
 										{prop0:'1234',prop3:'6'}
 									],
-									['Test that, when a regular expression is specified for the matcher, only values of a range source that match the regular expression are retained',
+									['When a regular expression is specified for the matcher, only values of a range source that match the regular expression are retained',
 										[100,/^\d*1$/],
 										[1,11,21,31,41,51,61,71,81,91]
 									],
 
 							/*** test support for the maxMatches parameter ***/
-								['Test that specifying the value 0 for the maxMatches parameter results in no elements of an array source being retained, even if there are matches',
+								['Specifying the value 0 for the maxMatches parameter results in no elements of an array source being retained, even if there are matches',
 									[
 										['','hey','','there','foo','','','bar'],
 										function (_value) {return !!_value},
@@ -1155,7 +1155,7 @@ Uize.module ({
 									],
 									[]
 								],
-								['Test that specifying a negative value for the maxMatches parameter results in no elements of an array source being retained, even if there are matches',
+								['Specifying a negative value for the maxMatches parameter results in no elements of an array source being retained, even if there are matches',
 									[
 										['','hey','','there','foo','','','bar'],
 										function (_value) {return !!_value},
@@ -1163,7 +1163,7 @@ Uize.module ({
 									],
 									[]
 								],
-								['Test that specifying a non-zero number for the maxMatches parameter that is lower than the number of actual matches results in only the specified maximum number of matches being retained from a source array',
+								['Specifying a non-zero number for the maxMatches parameter that is lower than the number of actual matches results in only the specified maximum number of matches being retained from a source array',
 									[
 										['','hey','','there','foo','','','bar'],
 										function (_value) {return !!_value},
@@ -1171,7 +1171,7 @@ Uize.module ({
 									],
 									['hey','there']
 								],
-								['Test that specifying a number for the maxMatches parameter that is higher than the number of actual matches in a source array results in all matching elements being retained',
+								['Specifying a number for the maxMatches parameter that is higher than the number of actual matches in a source array results in all matching elements being retained',
 									[
 										['','hey','','there','foo','','','bar'],
 										function (_value) {return !!_value},
@@ -1179,7 +1179,7 @@ Uize.module ({
 									],
 									['hey','there','foo','bar']
 								],
-								['Test that specifying the value null for the maxMatches parameter results in it being defaulted to Infinity',
+								['Specifying the value null for the maxMatches parameter results in it being defaulted to Infinity',
 									[
 										['','hey','','there','foo','','','bar'],
 										function (_value) {return !!_value},
@@ -1187,7 +1187,7 @@ Uize.module ({
 									],
 									['hey','there','foo','bar']
 								],
-								['Test that specifying the value undefined for the maxMatches parameter results in it being defaulted to Infinity',
+								['Specifying the value undefined for the maxMatches parameter results in it being defaulted to Infinity',
 									[
 										['','hey','','there','foo','','','bar'],
 										function (_value) {return !!_value},
@@ -1205,21 +1205,21 @@ Uize.module ({
 					['Uize.Data.Matches.count',[
 						/*** test support for different types of sources ***/
 							_sourceTest ('count'),
-							['Test that, when the source is an array, the number of matching elements is returned',
+							['When the source is an array, the number of matching elements is returned',
 								[
 									['','hey','','there','foo','','','bar'],
 									function (_value) {return !!_value}
 								],
 								4
 							],
-							['Test that, when the source is an object, the number of matching properties is returned',
+							['When the source is an object, the number of matching properties is returned',
 								[
 									{prop0:'',prop1:'hey',prop2:'',prop3:'there',prop4:'foo',prop5:'',prop6:'',prop7:'bar'},
 									function (_value) {return !!_value}
 								],
 								4
 							],
-							['Test that, when the source is a range, the number of matching values in the range is returned',
+							['When the source is a range, the number of matching values in the range is returned',
 								[
 									5,
 									function (_value) {return _value % 2}
@@ -1231,128 +1231,128 @@ Uize.module ({
 							_matcherTest ('count'),
 
 							/*** test when no matcher is specified ***/
-								['Test that, when no matcher is specified, all elements of an array source are counted',
+								['When no matcher is specified, all elements of an array source are counted',
 									[['','hey','','there','foo','','','bar']],
 									8
 								],
-								['Test that, when no matcher is specified, all properties of an object source are counted',
+								['When no matcher is specified, all properties of an object source are counted',
 									{prop0:'',prop1:'hey',prop2:'',prop3:'there',prop4:'foo',prop5:'',prop6:'',prop7:'bar'},
 									8
 								],
-								['Test that, when no matcher is specified, all values of a range source are counted',
+								['When no matcher is specified, all values of a range source are counted',
 									5,
 									5
 								],
 
 							/*** test when true is specified for matcher ***/
-								['Test that, when the value true is specified for the matcher, all elements of an array source are counted',
+								['When the value true is specified for the matcher, all elements of an array source are counted',
 									[
 										['','hey','','there','foo','','','bar'],
 										true
 									],
 									8
 								],
-								['Test that, when the value true is specified for the matcher, all properties of an object source are counted',
+								['When the value true is specified for the matcher, all properties of an object source are counted',
 									[
 										{prop0:'',prop1:'hey',prop2:'',prop3:'there',prop4:'foo',prop5:'',prop6:'',prop7:'bar'},
 										true
 									],
 									8
 								],
-								['Test that, when the value true is specified for the matcher, all values of a range source are counted',
+								['When the value true is specified for the matcher, all values of a range source are counted',
 									[5,true],
 									5
 								],
 
 							/*** test when false is specified for matcher ***/
-								['Test that, when the value false is specified for the matcher, no elements of an array source are counted',
+								['When the value false is specified for the matcher, no elements of an array source are counted',
 									[
 										['','hey','','there','foo','','','bar'],
 										false
 									],
 									0
 								],
-								['Test that, when the value false is specified for the matcher, no properties of an object source are counted',
+								['When the value false is specified for the matcher, no properties of an object source are counted',
 									[
 										{prop0:'',prop1:'hey',prop2:'',prop3:'there',prop4:'foo',prop5:'',prop6:'',prop7:'bar'},
 										false
 									],
 									0
 								],
-								['Test that, when the value false is specified for the matcher, no values of a range source are iterated over',
+								['When the value false is specified for the matcher, no values of a range source are iterated over',
 									[5,false],
 									0
 								],
 
 							/*** test when null is specified for matcher ***/
-								['Test that, when the value null is specified for the matcher, all elements of an array source are counted',
+								['When the value null is specified for the matcher, all elements of an array source are counted',
 									[
 										['','hey','','there','foo','','','bar'],
 										true
 									],
 									8
 								],
-								['Test that, when the value null is specified for the matcher, all properties of an object source are counted',
+								['When the value null is specified for the matcher, all properties of an object source are counted',
 									[
 										{prop0:'',prop1:'hey',prop2:'',prop3:'there',prop4:'foo',prop5:'',prop6:'',prop7:'bar'},
 										true
 									],
 									8
 								],
-								['Test that, when the value null is specified for the matcher, all values of a range source are counted',
+								['When the value null is specified for the matcher, all values of a range source are counted',
 									[5,true],
 									5
 								],
 
 							/*** test when undefined is specified for matcher ***/
-								['Test that, when the value undefined is specified for the matcher, all elements of an array source are counted',
+								['When the value undefined is specified for the matcher, all elements of an array source are counted',
 									[
 										['','hey','','there','foo','','','bar'],
 										true
 									],
 									8
 								],
-								['Test that, when the value undefined is specified for the matcher, all properties of an object source are counted',
+								['When the value undefined is specified for the matcher, all properties of an object source are counted',
 									[
 										{prop0:'',prop1:'hey',prop2:'',prop3:'there',prop4:'foo',prop5:'',prop6:'',prop7:'bar'},
 										true
 									],
 									8
 								],
-								['Test that, when the value undefined is specified for the matcher, all values of a range source are counted',
+								['When the value undefined is specified for the matcher, all values of a range source are counted',
 									[5,true],
 									5
 								],
 
 							/*** test when regular expression is specified for matcher ***/
-								['Test that, when a regular expression is specified for the matcher, only elements of an array source whose values match the regular expression are counted',
+								['When a regular expression is specified for the matcher, only elements of an array source whose values match the regular expression are counted',
 									[
 										['boo','1234','hey','hi42','6','number 6',''],
 										/^\d+$/
 									],
 									2
 								],
-								['Test that, when a regular expression is specified for the matcher, only properties of an object source whose values match the regular expression are counted',
+								['When a regular expression is specified for the matcher, only properties of an object source whose values match the regular expression are counted',
 									[
 										{prop0:'1234',prop1:'hey',prop2:'hi42',prop3:'6',prop4:'number 6',prop5:''},
 										/^\d+$/
 									],
 									2
 								],
-								['Test that, when a regular expression is specified for the matcher, only values of a range source that match the regular expression are counted',
+								['When a regular expression is specified for the matcher, only values of a range source that match the regular expression are counted',
 									[100,/^\d*1$/],
 									10
 								],
 
 						/*** test that method returns numbers of matches ***/
-							['Test that, when there are matches, the number of matches is returned',
+							['When there are matches, the number of matches is returned',
 								[
 									['','hey','','there','foo','','','bar'],
 									function (_value) {return !!_value}
 								],
 								4
 							],
-							['Test that, when there are no matches, the value 0 is returned',
+							['When there are no matches, the value 0 is returned',
 								[
 									['','hey','','there','foo','','','bar'],
 									function (_value) {return _value == 'bat'}
@@ -1361,27 +1361,27 @@ Uize.module ({
 							],
 
 						/*** test support for matcher expression string ***/
-							['Test that a matcher expression string is supported',
+							['The matcher can be specified in the form of an expression string',
 								[['','hey','','there','foo','','','bar'],'!value'],
 								4
 							],
-							['Test that the index of each element for an array source is provided to a matcher expression',
+							['The index of each element for an array source is provided to a matcher expression',
 								[['','hey','','there','foo','','','bar'],'key > 2'],
 								5
 							],
-							['Test that the key of each property for an object source is provided to a matcher expression',
+							['The key of each property for an object source is provided to a matcher expression',
 								[{foo0:1,bar0:1,bar1:1,foo1:1,bar2:1},'key.slice (0,3) == "foo"'],
 								2
 							],
 
 						/*** miscellaneous tests ***/
 							{
-								title:'Test that unassigned elements of an array source are observed',
+								title:'Unassigned elements of an array source are iterated over',
 								test:function () {
 									return this.expect (
 										8,
 										Uize.Data.Matches.count (
-											_getArrayWithUnassignedElements (),
+											_geSparselyPopulatedArray (),
 											function (_value) {return _value === undefined}
 										)
 									)
@@ -1389,7 +1389,7 @@ Uize.module ({
 							},
 
 						/*** test support for the maxMatches parameter ***/
-							['Test that specifying the value 0 for the maxMatches parameter produces the result 0, even if there are matches',
+							['Specifying the value 0 for the maxMatches parameter produces the result 0, even if there are matches',
 								[
 									['','hey','','there','foo','','','bar'],
 									function (_value) {return !!_value},
@@ -1397,7 +1397,7 @@ Uize.module ({
 								],
 								0
 							],
-							['Test that specifying a negative value for the maxMatches parameter produces the result 0, even if there are matches',
+							['Specifying a negative value for the maxMatches parameter produces the result 0, even if there are matches',
 								[
 									['','hey','','there','foo','','','bar'],
 									function (_value) {return !!_value},
@@ -1405,7 +1405,7 @@ Uize.module ({
 								],
 								0
 							],
-							['Test that specifying a non-zero number for the maxMatches parameter that is lower than the number of actual matches results in the maxMatches value being returned',
+							['Specifying a non-zero number for the maxMatches parameter that is lower than the number of actual matches results in the maxMatches value being returned',
 								[
 									['','hey','','there','foo','','','bar'],
 									function (_value) {return !!_value},
@@ -1413,7 +1413,7 @@ Uize.module ({
 								],
 								2
 							],
-							['Test that specifying a number for the maxMatches parameter that is higher than the number of actual matches results in the number of matches being returned',
+							['Specifying a number for the maxMatches parameter that is higher than the number of actual matches results in the number of matches being returned',
 								[
 									['','hey','','there','foo','','','bar'],
 									function (_value) {return !!_value},
@@ -1421,7 +1421,7 @@ Uize.module ({
 								],
 								4
 							],
-							['Test that specifying the value null for the maxMatches parameter results in it being defaulted to Infinity',
+							['Specifying the value null for the maxMatches parameter results in it being defaulted to Infinity',
 								[
 									['','hey','','there','foo','','','bar'],
 									function (_value) {return !!_value},
@@ -1429,7 +1429,7 @@ Uize.module ({
 								],
 								4
 							],
-							['Test that specifying the value undefined for the maxMatches parameter results in it being defaulted to Infinity',
+							['Specifying the value undefined for the maxMatches parameter results in it being defaulted to Infinity',
 								[
 									['','hey','','there','foo','','','bar'],
 									function (_value) {return !!_value},
@@ -1441,21 +1441,21 @@ Uize.module ({
 					['Uize.Data.Matches.keys',[
 						/*** test support for different types of sources ***/
 							_sourceTest ('keys'),
-							['Test that, when the source is an array, the indexes of matching elements are returned',
+							['When the source is an array, the indexes of matching elements are returned',
 								[
 									['','hey','','there','foo','','','bar'],
 									function (_value) {return !!_value}
 								],
 								[1,3,4,7]
 							],
-							['Test that, when the source is an object, the keys of matching properties are returned',
+							['When the source is an object, the keys of matching properties are returned',
 								[
 									{prop0:'',prop1:'hey',prop2:'',prop3:'there',prop4:'foo',prop5:'',prop6:'',prop7:'bar'},
 									function (_value) {return !!_value}
 								],
 								['prop1','prop3','prop4','prop7']
 							],
-							['Test that, when the source is a range, the indexes of matching values in the range are returned',
+							['When the source is a range, the indexes of matching values in the range are returned',
 								[
 									5,
 									function (_value) {return _value % 2}
@@ -1467,121 +1467,121 @@ Uize.module ({
 							_matcherTest ('keys'),
 
 							/*** test when no matcher is specified ***/
-								['Test that, when no matcher is specified, all indexes of an array source are returned',
+								['When no matcher is specified, all indexes of an array source are returned',
 									[['','hey','','there','foo','','','bar']],
 									[0,1,2,3,4,5,6,7]
 								],
-								['Test that, when no matcher is specified, all keys of an object source are returned',
+								['When no matcher is specified, all keys of an object source are returned',
 									{prop0:'',prop1:'hey',prop2:'',prop3:'there',prop4:'foo',prop5:'',prop6:'',prop7:'bar'},
 									['prop0','prop1','prop2','prop3','prop4','prop5','prop6','prop7']
 								],
-								['Test that, when no matcher is specified, all keys of a range source are returned',
+								['When no matcher is specified, all keys of a range source are returned',
 									5,
 									[0,1,2,3,4]
 								],
 
 							/*** test when true is specified for matcher ***/
-								['Test that, when the value true is specified for the matcher, all indexes of an array source are returned',
+								['When the value true is specified for the matcher, all indexes of an array source are returned',
 									[
 										['','hey','','there','foo','','','bar'],
 										true
 									],
 									[0,1,2,3,4,5,6,7]
 								],
-								['Test that, when the value true is specified for the matcher, all keys of an object source are returned',
+								['When the value true is specified for the matcher, all keys of an object source are returned',
 									[
 										{prop0:'',prop1:'hey',prop2:'',prop3:'there',prop4:'foo',prop5:'',prop6:'',prop7:'bar'},
 										true
 									],
 									['prop0','prop1','prop2','prop3','prop4','prop5','prop6','prop7']
 								],
-								['Test that, when the value true is specified for the matcher, all keys of a range source are returned',
+								['When the value true is specified for the matcher, all keys of a range source are returned',
 									[5,true],
 									[0,1,2,3,4]
 								],
 
 							/*** test when false is specified for matcher ***/
-								['Test that, when the value false is specified for the matcher, no indexes of an array source are returned',
+								['When the value false is specified for the matcher, no indexes of an array source are returned',
 									[
 										['','hey','','there','foo','','','bar'],
 										false
 									],
 									[]
 								],
-								['Test that, when the value false is specified for the matcher, no keys of an object source are returned',
+								['When the value false is specified for the matcher, no keys of an object source are returned',
 									[
 										{prop0:'',prop1:'hey',prop2:'',prop3:'there',prop4:'foo',prop5:'',prop6:'',prop7:'bar'},
 										false
 									],
 									[]
 								],
-								['Test that, when the value false is specified for the matcher, no keys of a range source are iterated over',
+								['When the value false is specified for the matcher, no keys of a range source are iterated over',
 									[5,false],
 									[]
 								],
 
 							/*** test when null is specified for matcher ***/
-								['Test that, when the value null is specified for the matcher, all indexes of an array source are returned',
+								['When the value null is specified for the matcher, all indexes of an array source are returned',
 									[
 										['','hey','','there','foo','','','bar'],
 										true
 									],
 									[0,1,2,3,4,5,6,7]
 								],
-								['Test that, when the value null is specified for the matcher, all keys of an object source are returned',
+								['When the value null is specified for the matcher, all keys of an object source are returned',
 									[
 										{prop0:'',prop1:'hey',prop2:'',prop3:'there',prop4:'foo',prop5:'',prop6:'',prop7:'bar'},
 										true
 									],
 									['prop0','prop1','prop2','prop3','prop4','prop5','prop6','prop7']
 								],
-								['Test that, when the value null is specified for the matcher, all keys of a range source are returned',
+								['When the value null is specified for the matcher, all keys of a range source are returned',
 									[5,true],
 									[0,1,2,3,4]
 								],
 
 							/*** test when undefined is specified for matcher ***/
-								['Test that, when the value undefined is specified for the matcher, all indexes of an array source are returned',
+								['When the value undefined is specified for the matcher, all indexes of an array source are returned',
 									[
 										['','hey','','there','foo','','','bar'],
 										true
 									],
 									[0,1,2,3,4,5,6,7]
 								],
-								['Test that, when the value undefined is specified for the matcher, all keys of an object source are returned',
+								['When the value undefined is specified for the matcher, all keys of an object source are returned',
 									[
 										{prop0:'',prop1:'hey',prop2:'',prop3:'there',prop4:'foo',prop5:'',prop6:'',prop7:'bar'},
 										true
 									],
 									['prop0','prop1','prop2','prop3','prop4','prop5','prop6','prop7']
 								],
-								['Test that, when the value undefined is specified for the matcher, all keys of a range source are returned',
+								['When the value undefined is specified for the matcher, all keys of a range source are returned',
 									[5,true],
 									[0,1,2,3,4]
 								],
 
 							/*** test when regular expression is specified for matcher ***/
-								['Test that, when a regular expression is specified for the matcher, only indexes of an array source whose values match the regular expression are returned',
+								['When a regular expression is specified for the matcher, only indexes of an array source whose values match the regular expression are returned',
 									[
 										['boo','1234','hey','hi42','6','number 6',''],
 										/^\d+$/
 									],
 									[1,4]
 								],
-								['Test that, when a regular expression is specified for the matcher, only keys of an object source\'s properties whose values match the regular expression are returned',
+								['When a regular expression is specified for the matcher, only keys of an object source\'s properties whose values match the regular expression are returned',
 									[
 										{prop0:'1234',prop1:'hey',prop2:'hi42',prop3:'6',prop4:'number 6',prop5:''},
 										/^\d+$/
 									],
 									['prop0','prop3']
 								],
-								['Test that, when a regular expression is specified for the matcher, only keys for the values of a range source that match the regular expression are returned',
+								['When a regular expression is specified for the matcher, only keys for the values of a range source that match the regular expression are returned',
 									[100,/^\d*1$/],
 									[1,11,21,31,41,51,61,71,81,91]
 								],
 
 						/*** test support for maxMatches parameter ***/
-							['Test that, when the value for the maxMatches parameter is greater than the number of matches, the keys for all matches are returned',
+							['When the value for the maxMatches parameter is greater than the number of matches, the keys for all matches are returned',
 								[
 									{prop0:'',prop1:'hey',prop2:'',prop3:'there',prop4:'foo',prop5:'',prop6:'',prop7:'bar'},
 									function (_value) {return !!_value},
@@ -1589,7 +1589,7 @@ Uize.module ({
 								],
 								['prop1','prop3','prop4','prop7']
 							],
-							['Test that, when the value for the maxMatches parameter is less than the number of matches, the keys for the specified maximum number of matches are returned',
+							['When the value for the maxMatches parameter is less than the number of matches, the keys for the specified maximum number of matches are returned',
 								[
 									{prop0:'',prop1:'hey',prop2:'',prop3:'there',prop4:'foo',prop5:'',prop6:'',prop7:'bar'},
 									function (_value) {return !!_value},
@@ -1597,7 +1597,7 @@ Uize.module ({
 								],
 								['prop1','prop3','prop4']
 							],
-							['Test that, when the value Infinity is specified for the maxMatches parameter, the keys for all matches are returned',
+							['When the value Infinity is specified for the maxMatches parameter, the keys for all matches are returned',
 								[
 									{prop0:'',prop1:'hey',prop2:'',prop3:'there',prop4:'foo',prop5:'',prop6:'',prop7:'bar'},
 									function (_value) {return !!_value},
@@ -1605,7 +1605,7 @@ Uize.module ({
 								],
 								['prop1','prop3','prop4','prop7']
 							],
-							['Test that, when the value null is specified for the maxMatches parameter, the keys for all matches are returned',
+							['When the value null is specified for the maxMatches parameter, the keys for all matches are returned',
 								[
 									{prop0:'',prop1:'hey',prop2:'',prop3:'there',prop4:'foo',prop5:'',prop6:'',prop7:'bar'},
 									function (_value) {return !!_value},
@@ -1613,7 +1613,7 @@ Uize.module ({
 								],
 								['prop1','prop3','prop4','prop7']
 							],
-							['Test that, when the value undefined is specified for the maxMatches parameter, the keys for all matches are returned',
+							['When the value undefined is specified for the maxMatches parameter, the keys for all matches are returned',
 								[
 									{prop0:'',prop1:'hey',prop2:'',prop3:'there',prop4:'foo',prop5:'',prop6:'',prop7:'bar'},
 									function (_value) {return !!_value},
@@ -1621,7 +1621,7 @@ Uize.module ({
 								],
 								['prop1','prop3','prop4','prop7']
 							],
-							['Test that, when the value 0 is specified for the maxMatches parameter, an array of zero length is returned',
+							['When the value 0 is specified for the maxMatches parameter, an array of zero length is returned',
 								[
 									{prop0:'',prop1:'hey',prop2:'',prop3:'there',prop4:'foo',prop5:'',prop6:'',prop7:'bar'},
 									function (_value) {return !!_value},
@@ -1629,7 +1629,7 @@ Uize.module ({
 								],
 								[]
 							],
-							['Test that, when a negative value is specified for the maxMatches parameter, an array of zero length is returned',
+							['When a negative value is specified for the maxMatches parameter, an array of zero length is returned',
 								[
 									{prop0:'',prop1:'hey',prop2:'',prop3:'there',prop4:'foo',prop5:'',prop6:'',prop7:'bar'},
 									function (_value) {return !!_value},
@@ -1641,21 +1641,21 @@ Uize.module ({
 					['Uize.Data.Matches.values',[
 						/*** test support for different types of sources ***/
 							_sourceTest ('values'),
-							['Test that, when the source is an array, the values of matching elements are returned',
+							['When the source is an array, the values of matching elements are returned',
 								[
 									['','hey','','there','foo','','','bar'],
 									function (_value) {return !!_value}
 								],
 								['hey','there','foo','bar']
 							],
-							['Test that, when the source is an object, the values of matching properties are returned',
+							['When the source is an object, the values of matching properties are returned',
 								[
 									{prop0:'',prop1:'hey',prop2:'',prop3:'there',prop4:'foo',prop5:'',prop6:'',prop7:'bar'},
 									function (_value) {return !!_value}
 								],
 								['hey','there','foo','bar']
 							],
-							['Test that, when the source is a range, the matching values in the range are returned',
+							['When the source is a range, the matching values in the range are returned',
 								[
 									5,
 									function (_value) {return _value % 2}
@@ -1667,121 +1667,121 @@ Uize.module ({
 							_matcherTest ('values'),
 
 							/*** test when no matcher is specified ***/
-								['Test that, when no matcher is specified, all values of an array source are returned',
+								['When no matcher is specified, all values of an array source are returned',
 									[['','hey','','there','foo','','','bar']],
 									['','hey','','there','foo','','','bar']
 								],
-								['Test that, when no matcher is specified, all values of an object source are returned',
+								['When no matcher is specified, all values of an object source are returned',
 									{prop0:'',prop1:'hey',prop2:'',prop3:'there',prop4:'foo',prop5:'',prop6:'',prop7:'bar'},
 									['','hey','','there','foo','','','bar']
 								],
-								['Test that, when no matcher is specified, all values of a range source are returned',
+								['When no matcher is specified, all values of a range source are returned',
 									5,
 									[0,1,2,3,4]
 								],
 
 							/*** test when true is specified for matcher ***/
-								['Test that, when the value true is specified for the matcher, all values of an array source are returned',
+								['When the value true is specified for the matcher, all values of an array source are returned',
 									[
 										['','hey','','there','foo','','','bar'],
 										true
 									],
 									['','hey','','there','foo','','','bar']
 								],
-								['Test that, when the value true is specified for the matcher, all values of an object source are returned',
+								['When the value true is specified for the matcher, all values of an object source are returned',
 									[
 										{prop0:'',prop1:'hey',prop2:'',prop3:'there',prop4:'foo',prop5:'',prop6:'',prop7:'bar'},
 										true
 									],
 									['','hey','','there','foo','','','bar']
 								],
-								['Test that, when the value true is specified for the matcher, all values of a range source are returned',
+								['When the value true is specified for the matcher, all values of a range source are returned',
 									[5,true],
 									[0,1,2,3,4]
 								],
 
 							/*** test when false is specified for matcher ***/
-								['Test that, when the value false is specified for the matcher, no values of an array source are returned',
+								['When the value false is specified for the matcher, no values of an array source are returned',
 									[
 										['','hey','','there','foo','','','bar'],
 										false
 									],
 									[]
 								],
-								['Test that, when the value false is specified for the matcher, no values of an object source are returned',
+								['When the value false is specified for the matcher, no values of an object source are returned',
 									[
 										{prop0:'',prop1:'hey',prop2:'',prop3:'there',prop4:'foo',prop5:'',prop6:'',prop7:'bar'},
 										false
 									],
 									[]
 								],
-								['Test that, when the value false is specified for the matcher, no values of a range source are iterated over',
+								['When the value false is specified for the matcher, no values of a range source are iterated over',
 									[5,false],
 									[]
 								],
 
 							/*** test when null is specified for matcher ***/
-								['Test that, when the value null is specified for the matcher, all values of an array source are returned',
+								['When the value null is specified for the matcher, all values of an array source are returned',
 									[
 										['','hey','','there','foo','','','bar'],
 										true
 									],
 									['','hey','','there','foo','','','bar']
 								],
-								['Test that, when the value null is specified for the matcher, all values of an object source are returned',
+								['When the value null is specified for the matcher, all values of an object source are returned',
 									[
 										{prop0:'',prop1:'hey',prop2:'',prop3:'there',prop4:'foo',prop5:'',prop6:'',prop7:'bar'},
 										true
 									],
 									['','hey','','there','foo','','','bar']
 								],
-								['Test that, when the value null is specified for the matcher, all values of a range source are returned',
+								['When the value null is specified for the matcher, all values of a range source are returned',
 									[5,true],
 									[0,1,2,3,4]
 								],
 
 							/*** test when undefined is specified for matcher ***/
-								['Test that, when the value undefined is specified for the matcher, all values of an array source are returned',
+								['When the value undefined is specified for the matcher, all values of an array source are returned',
 									[
 										['','hey','','there','foo','','','bar'],
 										true
 									],
 									['','hey','','there','foo','','','bar']
 								],
-								['Test that, when the value undefined is specified for the matcher, all values of an object source are returned',
+								['When the value undefined is specified for the matcher, all values of an object source are returned',
 									[
 										{prop0:'',prop1:'hey',prop2:'',prop3:'there',prop4:'foo',prop5:'',prop6:'',prop7:'bar'},
 										true
 									],
 									['','hey','','there','foo','','','bar']
 								],
-								['Test that, when the value undefined is specified for the matcher, all values of a range source are returned',
+								['When the value undefined is specified for the matcher, all values of a range source are returned',
 									[5,true],
 									[0,1,2,3,4]
 								],
 
 							/*** test when regular expression is specified for matcher ***/
-								['Test that, when a regular expression is specified for the matcher, only values of an array that match the regular expression are returned',
+								['When a regular expression is specified for the matcher, only values of an array that match the regular expression are returned',
 									[
 										['boo','1234','hey','hi42','6','number 6',''],
 										/^\d+$/
 									],
 									['1234','6']
 								],
-								['Test that, when a regular expression is specified for the matcher, only values of an object source\'s properties that match the regular expression are returned',
+								['When a regular expression is specified for the matcher, only values of an object source\'s properties that match the regular expression are returned',
 									[
 										{prop0:'1234',prop1:'hey',prop2:'hi42',prop3:'6',prop4:'number 6',prop5:''},
 										/^\d+$/
 									],
 									['1234','6']
 								],
-								['Test that, when a regular expression is specified for the matcher, only values of a range source that match the regular expression are returned',
+								['When a regular expression is specified for the matcher, only values of a range source that match the regular expression are returned',
 									[100,/^\d*1$/],
 									[1,11,21,31,41,51,61,71,81,91]
 								],
 
 						/*** test support for maxMatches parameter ***/
-							['Test that, when the value for the maxMatches parameter is greater than the number of matches, the values for all matches are returned',
+							['When the value for the maxMatches parameter is greater than the number of matches, the values for all matches are returned',
 								[
 									{prop0:'',prop1:'hey',prop2:'',prop3:'there',prop4:'foo',prop5:'',prop6:'',prop7:'bar'},
 									function (_value) {return !!_value},
@@ -1789,7 +1789,7 @@ Uize.module ({
 								],
 								['hey','there','foo','bar']
 							],
-							['Test that, when the value for the maxMatches parameter is less than the number of matches, the values for the specified maximum number of matches are returned',
+							['When the value for the maxMatches parameter is less than the number of matches, the values for the specified maximum number of matches are returned',
 								[
 									{prop0:'',prop1:'hey',prop2:'',prop3:'there',prop4:'foo',prop5:'',prop6:'',prop7:'bar'},
 									function (_value) {return !!_value},
@@ -1797,7 +1797,7 @@ Uize.module ({
 								],
 								['hey','there','foo']
 							],
-							['Test that, when the value Infinity is specified for the maxMatches parameter, the values for all matches are returned',
+							['When the value Infinity is specified for the maxMatches parameter, the values for all matches are returned',
 								[
 									{prop0:'',prop1:'hey',prop2:'',prop3:'there',prop4:'foo',prop5:'',prop6:'',prop7:'bar'},
 									function (_value) {return !!_value},
@@ -1805,7 +1805,7 @@ Uize.module ({
 								],
 								['hey','there','foo','bar']
 							],
-							['Test that, when the value null is specified for the maxMatches parameter, the values for all matches are returned',
+							['When the value null is specified for the maxMatches parameter, the values for all matches are returned',
 								[
 									{prop0:'',prop1:'hey',prop2:'',prop3:'there',prop4:'foo',prop5:'',prop6:'',prop7:'bar'},
 									function (_value) {return !!_value},
@@ -1813,7 +1813,7 @@ Uize.module ({
 								],
 								['hey','there','foo','bar']
 							],
-							['Test that, when the value undefined is specified for the maxMatches parameter, the values for all matches are returned',
+							['When the value undefined is specified for the maxMatches parameter, the values for all matches are returned',
 								[
 									{prop0:'',prop1:'hey',prop2:'',prop3:'there',prop4:'foo',prop5:'',prop6:'',prop7:'bar'},
 									function (_value) {return !!_value},
@@ -1821,7 +1821,7 @@ Uize.module ({
 								],
 								['hey','there','foo','bar']
 							],
-							['Test that, when the value 0 is specified for the maxMatches parameter, an array of zero length is returned',
+							['When the value 0 is specified for the maxMatches parameter, an array of zero length is returned',
 								[
 									{prop0:'',prop1:'hey',prop2:'',prop3:'there',prop4:'foo',prop5:'',prop6:'',prop7:'bar'},
 									function (_value) {return !!_value},
@@ -1829,7 +1829,7 @@ Uize.module ({
 								],
 								[]
 							],
-							['Test that, when a negative value is specified for the maxMatches parameter, an array of zero length is returned',
+							['When a negative value is specified for the maxMatches parameter, an array of zero length is returned',
 								[
 									{prop0:'',prop1:'hey',prop2:'',prop3:'there',prop4:'foo',prop5:'',prop6:'',prop7:'bar'},
 									function (_value) {return !!_value},
@@ -1841,21 +1841,21 @@ Uize.module ({
 					['Uize.Data.Matches.firstKey',[
 						/*** test support for different types of sources ***/
 							_sourceTest ('firstKey'),
-							['Test that, when the source is an array, the index of the first matching element is returned',
+							['When the source is an array, the index of the first matching element is returned',
 								[
 									['','hey','','there','foo','','','bar'],
 									function (_value) {return !!_value}
 								],
 								1
 							],
-							['Test that, when the source is an object, the key of the first matching property is returned',
+							['When the source is an object, the key of the first matching property is returned',
 								[
 									{prop0:'',prop1:'hey',prop2:'',prop3:'there',prop4:'foo',prop5:'',prop6:'',prop7:'bar'},
 									function (_value) {return !!_value}
 								],
 								'prop1'
 							],
-							['Test that, when the source is a range, the index of the first matching value in the range is returned',
+							['When the source is a range, the index of the first matching value in the range is returned',
 								[
 									5,
 									function (_value) {return _value % 2}
@@ -1865,21 +1865,21 @@ Uize.module ({
 
 						/*** test support for matcher ***/
 							_matcherTest ('firstKey'),
-							['Test that, when a matcher matches a property of an object source, the key of the first matching property is returned',
+							['When a matcher matches a property of an object source, the key of the first matching property is returned',
 								[
 									{foo1:'hello',hello:'bar1',foo2:'bar2',foo3:'bar3'},
 									function (_value,_key) {return _key.slice (0,3) == 'foo' && _value.slice (0,3) == 'bar'}
 								],
 								'foo2'
 							],
-							['Test that, when a matcher doesn\'t match any properties of an object source, the value undefined is returned',
+							['When a matcher doesn\'t match any properties of an object source, the value undefined is returned',
 								[
 									{foo1:'hello',hello:'bar1',foo2:'bar2',foo3:'bar3'},
 									function () {return false}
 								],
 								undefined
 							],
-							['Test that a matcher expression string is supported',
+							['The matcher can be specified in the form of an expression string',
 								[
 									{foo1:'hello',hello:'bar1',foo2:'bar2',foo3:'bar3'},
 									'key.slice (0,3) == "foo" && value.slice (0,3) == "bar"'
@@ -1888,115 +1888,115 @@ Uize.module ({
 							],
 
 							/*** test when no matcher is specified ***/
-								['Test that, when no matcher is specified, the index of the first element of an array source is returned',
+								['When no matcher is specified, the index of the first element of an array source is returned',
 									[['','hey','','there','foo','','','bar']],
 									0
 								],
-								['Test that, when no matcher is specified, the key of the first property of an object source is returned',
+								['When no matcher is specified, the key of the first property of an object source is returned',
 									{prop0:'',prop1:'hey',prop2:'',prop3:'there',prop4:'foo',prop5:'',prop6:'',prop7:'bar'},
 									'prop0'
 								],
-								['Test that, when no matcher is specified, the index of the first value of a range source is returned',
+								['When no matcher is specified, the index of the first value of a range source is returned',
 									5,
 									0
 								],
 
 							/*** test when true is specified for matcher ***/
-								['Test that, when the value true is specified for the matcher, the index for the first element of an array source is returned',
+								['When the value true is specified for the matcher, the index for the first element of an array source is returned',
 									[
 										['','hey','','there','foo','','','bar'],
 										true
 									],
 									0
 								],
-								['Test that, when the value true is specified for the matcher, the key of the first property of an object source is returned',
+								['When the value true is specified for the matcher, the key of the first property of an object source is returned',
 									[
 										{prop0:'',prop1:'hey',prop2:'',prop3:'there',prop4:'foo',prop5:'',prop6:'',prop7:'bar'},
 										true
 									],
 									'prop0'
 								],
-								['Test that, when the value true is specified for the matcher, the index of the first value of a range source is returned',
+								['When the value true is specified for the matcher, the index of the first value of a range source is returned',
 									[5,true],
 									0
 								],
 
 							/*** test when false is specified for matcher ***/
-								['Test that, when the value false is specified for the matcher with an array source, the value undefined is returned',
+								['When the value false is specified for the matcher with an array source, the value undefined is returned',
 									[
 										['','hey','','there','foo','','','bar'],
 										false
 									],
 									undefined
 								],
-								['Test that, when the value false is specified for the matcher with an object source, the value undefined is returned',
+								['When the value false is specified for the matcher with an object source, the value undefined is returned',
 									[
 										{prop0:'',prop1:'hey',prop2:'',prop3:'there',prop4:'foo',prop5:'',prop6:'',prop7:'bar'},
 										false
 									],
 									undefined
 								],
-								['Test that, when the value false is specified for the matcher with a range source, the value undefined is returned',
+								['When the value false is specified for the matcher with a range source, the value undefined is returned',
 									[5,false],
 									undefined
 								],
 
 							/*** test when null is specified for matcher ***/
-								['Test that, when the value null is specified for the matcher, the index of the first element of an array source is returned',
+								['When the value null is specified for the matcher, the index of the first element of an array source is returned',
 									[
 										['','hey','','there','foo','','','bar'],
 										true
 									],
 									0
 								],
-								['Test that, when the value null is specified for the matcher, the key of the first property of an object source is returned',
+								['When the value null is specified for the matcher, the key of the first property of an object source is returned',
 									[
 										{prop0:'',prop1:'hey',prop2:'',prop3:'there',prop4:'foo',prop5:'',prop6:'',prop7:'bar'},
 										true
 									],
 									'prop0'
 								],
-								['Test that, when the value null is specified for the matcher, the index of the first value of a range source is returned',
+								['When the value null is specified for the matcher, the index of the first value of a range source is returned',
 									[5,true],
 									0
 								],
 
 							/*** test when undefined is specified for matcher ***/
-								['Test that, when the value undefined is specified for the matcher, the index of the first element of an array source is returned',
+								['When the value undefined is specified for the matcher, the index of the first element of an array source is returned',
 									[
 										['','hey','','there','foo','','','bar'],
 										true
 									],
 									0
 								],
-								['Test that, when the value undefined is specified for the matcher, the key of the first property of an object source is returned',
+								['When the value undefined is specified for the matcher, the key of the first property of an object source is returned',
 									[
 										{prop0:'',prop1:'hey',prop2:'',prop3:'there',prop4:'foo',prop5:'',prop6:'',prop7:'bar'},
 										true
 									],
 									'prop0'
 								],
-								['Test that, when the value undefined is specified for the matcher, the index of the first value of a range source is returned',
+								['When the value undefined is specified for the matcher, the index of the first value of a range source is returned',
 									[5,true],
 									0
 								],
 
 							/*** test when regular expression is specified for matcher ***/
-								['Test that, when a regular expression is specified for the matcher, the index for the first matching element of an array source is returned',
+								['When a regular expression is specified for the matcher, the index for the first matching element of an array source is returned',
 									[
 										['boo','1234','hey','hi42','6','number 6',''],
 										/^\d+$/
 									],
 									1
 								],
-								['Test that, when a regular expression is specified for the matcher, the key for the first maching property is returned',
+								['When a regular expression is specified for the matcher, the key for the first maching property is returned',
 									[
 										{prop0:'1234',prop1:'hey',prop2:'hi42',prop3:'6',prop4:'number 6',prop5:''},
 										/^\d+$/
 									],
 									'prop0'
 								],
-								['Test that, when a regular expression is specified for the matcher, the index for the first matching value of a range source is returned',
+								['When a regular expression is specified for the matcher, the index for the first matching value of a range source is returned',
 									[100,/^\d1$/],
 									11
 								]
@@ -2004,21 +2004,21 @@ Uize.module ({
 					['Uize.Data.Matches.firstValue',[
 						/*** test support for different types of sources ***/
 							_sourceTest ('firstValue'),
-							['Test that, when the source is an array, the value of the first matching element is returned',
+							['When the source is an array, the value of the first matching element is returned',
 								[
 									['','hey','','there','foo','','','bar'],
 									function (_value) {return !!_value}
 								],
 								'hey'
 							],
-							['Test that, when the source is an object, the value of the first matching property is returned',
+							['When the source is an object, the value of the first matching property is returned',
 								[
 									{prop0:'',prop1:'hey',prop2:'',prop3:'there',prop4:'foo',prop5:'',prop6:'',prop7:'bar'},
 									function (_value) {return !!_value}
 								],
 								'hey'
 							],
-							['Test that, when the source is a range, the first matching value in the range is returned',
+							['When the source is a range, the first matching value in the range is returned',
 								[
 									5,
 									function (_value) {return _value % 2}
@@ -2028,21 +2028,21 @@ Uize.module ({
 
 						/*** test support for matcher ***/
 							_matcherTest ('firstValue'),
-							['Test that, when a matcher matches a property of an object source, the value of the first matching property is returned',
+							['When a matcher matches a property of an object source, the value of the first matching property is returned',
 								[
 									{foo1:'hello',hello:'bar1',foo2:'bar2',foo3:'bar3'},
 									function (_value,_key) {return _key.slice (0,3) == 'foo' && _value.slice (0,3) == 'bar'}
 								],
 								'bar2'
 							],
-							['Test that, when a matcher doesn\'t match any properties of an object source, the value undefined is returned',
+							['When a matcher doesn\'t match any properties of an object source, the value undefined is returned',
 								[
 									{foo1:'hello',hello:'bar1',foo2:'bar2',foo3:'bar3'},
 									function () {return false}
 								],
 								undefined
 							],
-							['Test that a matcher expression string is supported',
+							['The matcher can be specified in the form of an expression string',
 								[
 									{foo1:'hello',hello:'bar1',foo2:'bar2',foo3:'bar3'},
 									'key.slice (0,3) == "foo" && value.slice (0,3) == "bar"'
@@ -2051,115 +2051,115 @@ Uize.module ({
 							],
 
 							/*** test when no matcher is specified ***/
-								['Test that, when no matcher is specified, the value of the first element of an array source is returned',
+								['When no matcher is specified, the value of the first element of an array source is returned',
 									[['','hey','','there','foo','','','bar']],
 									''
 								],
-								['Test that, when no matcher is specified, the value of the first property of an object source is returned',
+								['When no matcher is specified, the value of the first property of an object source is returned',
 									{prop0:'',prop1:'hey',prop2:'',prop3:'there',prop4:'foo',prop5:'',prop6:'',prop7:'bar'},
 									''
 								],
-								['Test that, when no matcher is specified, the first value of a range source is returned',
+								['When no matcher is specified, the first value of a range source is returned',
 									5,
 									0
 								],
 
 							/*** test when true is specified for matcher ***/
-								['Test that, when the value true is specified for the matcher, the value for the first element of an array source is returned',
+								['When the value true is specified for the matcher, the value for the first element of an array source is returned',
 									[
 										['','hey','','there','foo','','','bar'],
 										true
 									],
 									''
 								],
-								['Test that, when the value true is specified for the matcher, the value of the first property of an object source is returned',
+								['When the value true is specified for the matcher, the value of the first property of an object source is returned',
 									[
 										{prop0:'',prop1:'hey',prop2:'',prop3:'there',prop4:'foo',prop5:'',prop6:'',prop7:'bar'},
 										true
 									],
 									''
 								],
-								['Test that, when the value true is specified for the matcher, the first value of a range source is returned',
+								['When the value true is specified for the matcher, the first value of a range source is returned',
 									[5,true],
 									0
 								],
 
 							/*** test when false is specified for matcher ***/
-								['Test that, when the value false is specified for the matcher with an array source, the value undefined is returned',
+								['When the value false is specified for the matcher with an array source, the value undefined is returned',
 									[
 										['','hey','','there','foo','','','bar'],
 										false
 									],
 									undefined
 								],
-								['Test that, when the value false is specified for the matcher with an object source, the value undefined is returned',
+								['When the value false is specified for the matcher with an object source, the value undefined is returned',
 									[
 										{prop0:'',prop1:'hey',prop2:'',prop3:'there',prop4:'foo',prop5:'',prop6:'',prop7:'bar'},
 										false
 									],
 									undefined
 								],
-								['Test that, when the value false is specified for the matcher with a range source, the value undefined is returned',
+								['When the value false is specified for the matcher with a range source, the value undefined is returned',
 									[5,false],
 									undefined
 								],
 
 							/*** test when null is specified for matcher ***/
-								['Test that, when the value null is specified for the matcher, the value of the first element of an array source is returned',
+								['When the value null is specified for the matcher, the value of the first element of an array source is returned',
 									[
 										['','hey','','there','foo','','','bar'],
 										true
 									],
 									''
 								],
-								['Test that, when the value null is specified for the matcher, the value of the first property of an object source is returned',
+								['When the value null is specified for the matcher, the value of the first property of an object source is returned',
 									[
 										{prop0:'',prop1:'hey',prop2:'',prop3:'there',prop4:'foo',prop5:'',prop6:'',prop7:'bar'},
 										true
 									],
 									''
 								],
-								['Test that, when the value null is specified for the matcher, the first value of a range source is returned',
+								['When the value null is specified for the matcher, the first value of a range source is returned',
 									[5,true],
 									0
 								],
 
 							/*** test when undefined is specified for matcher ***/
-								['Test that, when the value undefined is specified for the matcher, the value of the first element of an array source is returned',
+								['When the value undefined is specified for the matcher, the value of the first element of an array source is returned',
 									[
 										['','hey','','there','foo','','','bar'],
 										true
 									],
 									''
 								],
-								['Test that, when the value undefined is specified for the matcher, the value of the first property of an object source is returned',
+								['When the value undefined is specified for the matcher, the value of the first property of an object source is returned',
 									[
 										{prop0:'',prop1:'hey',prop2:'',prop3:'there',prop4:'foo',prop5:'',prop6:'',prop7:'bar'},
 										true
 									],
 									''
 								],
-								['Test that, when the value undefined is specified for the matcher, the first value of a range source is returned',
+								['When the value undefined is specified for the matcher, the first value of a range source is returned',
 									[5,true],
 									0
 								],
 
 							/*** test when regular expression is specified for matcher ***/
-								['Test that, when a regular expression is specified for the matcher, the value for the first matching element of an array source is returned',
+								['When a regular expression is specified for the matcher, the value for the first matching element of an array source is returned',
 									[
 										['boo','1234','hey','hi42','6','number 6',''],
 										/^\d+$/
 									],
 									'1234'
 								],
-								['Test that, when a regular expression is specified for the matcher, the value for the first maching property is returned',
+								['When a regular expression is specified for the matcher, the value for the first maching property is returned',
 									[
 										{prop0:'1234',prop1:'hey',prop2:'hi42',prop3:'6',prop4:'number 6',prop5:''},
 										/^\d+$/
 									],
 									'1234'
 								],
-								['Test that, when a regular expression is specified for the matcher, the first matching value of a range source is returned',
+								['When a regular expression is specified for the matcher, the first matching value of a range source is returned',
 									[100,/^\d1$/],
 									11
 								]
