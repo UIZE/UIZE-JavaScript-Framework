@@ -44,10 +44,10 @@ Uize.module ({
 				Uize.Test.requiredModulesTest ('Uize.Array.Order'),
 				Uize.Test.staticMethodsTest ([
 					['Uize.Array.Order.jumble',[
-						['Test that jumbling an empty array produces an empty array',[[]],[]],
-						['Test that jumbling an array with only one element returns that same array',[[1]],[1]],
+						['Jumbling an empty array produces an empty array',[[]],[]],
+						['Jumbling an array with only one element returns that same array',[[1]],[1]],
 						{
-							title:'Test that jumbling an array with multiple unique values produces an array of the same length containing all those unique values',
+							title:'Jumbling an array with multiple unique values produces an array of the same length containing all those unique values',
 							test:function () {
 								var
 									_elements = [1,2,3,4,5,6,7,8,9],
@@ -65,9 +65,9 @@ Uize.module ({
 						_arrayMethodTargetTest ('jumble',[],[])
 					]],
 					['Uize.Array.Order.reverse',[
-						['Test that reversing an empty array produces an empty array',[[]],[]],
-						['Test that reversing an array with only one element returns that same array',[[1]],[1]],
-						['Test that reversing an array with an even number of elements is handled correctly',
+						['Reversing an empty array produces an empty array',[[]],[]],
+						['Reversing an array with only one element returns that same array',[[1]],[1]],
+						['Reversing an array with an even number of elements is handled correctly',
 							[[1,2,3,4]],
 							[4,3,2,1]
 						],
@@ -78,7 +78,7 @@ Uize.module ({
 						_arrayMethodTargetTest ('reverse',[1,2,3,4,5],[5,4,3,2,1])
 					]],
 					['Uize.Array.Order.insideOut',[
-						['Test that reordering an empty array from inside to out produces an empty array',
+						['Reordering an empty array from inside to out produces an empty array',
 							[[]],
 							[]
 						],
@@ -97,7 +97,7 @@ Uize.module ({
 						_arrayMethodTargetTest ('insideOut',[1,2,3,4,5,6,7],[4,3,5,2,6,1,7])
 					]],
 					['Uize.Array.Order.outsideIn',[
-						['Test that reordering an empty array from outside to in produces an empty array',
+						['Reordering an empty array from outside to in produces an empty array',
 							[[]],
 							[]
 						],

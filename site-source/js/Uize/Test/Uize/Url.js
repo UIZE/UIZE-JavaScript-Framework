@@ -51,8 +51,8 @@ Uize.module ({
 						}
 					]],
 					['Uize.Url.fromPiece',[
-						['Test that decoding the value null produces an empty string',null,''],
-						['Test that decoding the value undefined produces an empty string',undefined,''],
+						['Decoding the value null produces an empty string',null,''],
+						['Decoding the value undefined produces an empty string',undefined,''],
 						['Test that decoding a boolean type value coerces that value to a string',false,'false'],
 						['Test that decoding a number type value coerces that value to a string',42,'42'],
 						['Test that decoding the number type value NaN coerces that value to a string',NaN,'NaN'],
@@ -89,15 +89,15 @@ Uize.module ({
 						]
 					]],
 					['Uize.Url.fromParams',[
-						['Test that an empty URL params string produces an empty object',
+						['An empty URL params string produces an empty object',
 							'',
 							{}
 						],
-						['Test that a URL params string that is just a question mark produces an empty object',
+						['A URL params string that is just a question mark produces an empty object',
 							'?',
 							{}
 						],
-						['Test that a URL params string that has nothing after a question mark produces an empty object',
+						['A URL params string that has nothing after a question mark produces an empty object',
 							'http://www.uize.com?',
 							{}
 						],
@@ -167,19 +167,19 @@ Uize.module ({
 						]
 					]],
 					['Uize.Url.toParams',[
-						['Test that calling without any parameters produces an empty string',
+						['Calling without any parameters produces an empty string',
 							[],
 							''
 						],
-						['Test that calling with the value null produces an empty string',
+						['Calling with the value null produces an empty string',
 							null,
 							''
 						],
-						['Test that calling with the value undefined produces an empty string',
+						['Calling with the value undefined produces an empty string',
 							undefined,
 							''
 						],
-						['Test that an empty query params object produces an empty string',
+						['An empty query params object produces an empty string',
 							{},
 							''
 						],
@@ -245,7 +245,7 @@ Uize.module ({
 							[[{param1Name:'param1Value'},{param2Name:'param2Value'},{param3Name:'param3Value'}]],
 							'param1Name=param1Value&param2Name=param2Value&param3Name=param3Value'
 						],
-						['Test that an array containing no params object elements produces an empty string',
+						['An array containing no params object elements produces an empty string',
 							[[]],
 							''
 						],
@@ -255,7 +255,7 @@ Uize.module ({
 						]
 					]],
 					['Uize.Url.resolve',[
-						['Test that calling with just an empty string produces an empty string',
+						['Calling with just an empty string produces an empty string',
 							'',
 							''
 						],
@@ -1428,7 +1428,7 @@ Uize.module ({
 						}
 					]],
 					['Uize.Url.toAbsolute',[
-						['Test that absolutizing an empty URL against an empty base URL produces an empty string',
+						['Absolutizing an empty URL against an empty base URL produces an empty string',
 							['',''],
 							''
 						],
@@ -1436,11 +1436,11 @@ Uize.module ({
 							['http://www.tomkidding.com','http://www.uize.com'],
 							'http://www.uize.com'
 						],
-						['Test that absolutizing an empty URL produces the base URL without its filename',
+						['Absolutizing an empty URL produces the base URL without its filename',
 							['http://www.uize.com/reference/Uize.html',''],
 							'http://www.uize.com/reference/'
 						],
-						['Test that absolutizing an empty URL when the base URL has no folder and only a filename produces the base URL with only its host',
+						['Absolutizing an empty URL when the base URL has no folder and only a filename produces the base URL with only its host',
 							['http://www.uize.com/index.html',''],
 							'http://www.uize.com/'
 						],

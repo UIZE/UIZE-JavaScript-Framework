@@ -35,7 +35,7 @@ Uize.module ({
 				Uize.Test.requiredModulesTest ('Uize.Util.Html.Encode'),
 				Uize.Test.staticMethodsTest ([
 					['Uize.Util.Html.Encode.encode',[
-						['Test that calling with empty string produces empty string',
+						['Calling with empty string produces empty string',
 							'',
 							''
 						],
@@ -117,7 +117,7 @@ Uize.module ({
 						]
 					]],
 					['Uize.Util.Html.Encode.decode',[
-						['Test that calling with empty string produces empty string',
+						['Calling with empty string produces empty string',
 							'',
 							''
 						],

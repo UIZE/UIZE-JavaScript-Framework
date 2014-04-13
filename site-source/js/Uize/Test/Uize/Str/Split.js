@@ -35,15 +35,15 @@ Uize.module ({
 				Uize.Test.staticMethodsTest ([
 					['Uize.Str.Split.split',[
 						/*** test string type splitters ***/
-							['Test that splitting an empty string using an empty string for the splitter produces an empty array',
+							['Splitting an empty string using an empty string for the splitter produces an empty array',
 								['',''],
 								[]
 							],
-							['Test that splitting an empty string using a non-empty string for the splitter produces an array with a single element that is an empty string',
+							['Splitting an empty string using a non-empty string for the splitter produces an array with a single element that is an empty string',
 								['','-'],
 								['']
 							],
-							['Test that splitting a non-empty string using an empty string for the splitter produces an array containing all the characters of the string as its elements',
+							['Splitting a non-empty string using an empty string for the splitter produces an array containing all the characters of the string as its elements',
 								['FOOBAR',''],
 								['F','O','O','B','A','R']
 							],
@@ -63,34 +63,34 @@ Uize.module ({
 								['FOOBAR123456','123456'],
 								['FOOBAR','']
 							],
-							['Test that splitting a non-empty string using a non-empty string for the splitter that is the entire string being split produces an array with two elements that are empty strings',
+							['Splitting a non-empty string using a non-empty string for the splitter that is the entire string being split produces an array with two elements that are empty strings',
 								['FOOBARFOREVER','FOOBARFOREVER'],
 								['','']
 							],
 							/*** test support for optional limit ***/
-								['Test that specifying an optional limit of zero elements produces an empty array, even when there are more than zero elements possible in the result array',
+								['Specifying an optional limit of zero elements produces an empty array, even when there are more than zero elements possible in the result array',
 									['FOOBAR','',0],
 									[]
 								],
-								['Test that specifying an optional limit of three elements produces an array containing three elements, even when there are more than three elements possible in the result array',
+								['Specifying an optional limit of three elements produces an array containing three elements, even when there are more than three elements possible in the result array',
 									['FOOBAR','',3],
 									['F','O','O']
 								],
 
 						/*** test support for regular expression splitters ***/
-							['Test that splitting an empty string using a regular expression that matches an empty string produces an empty array',
+							['Splitting an empty string using a regular expression that matches an empty string produces an empty array',
 								['',/-?/],
 								[]
 							],
-							['Test that splitting an empty string using a regular expression that produces no matches produces an array with a single element that is an empty string',
+							['Splitting an empty string using a regular expression that produces no matches produces an array with a single element that is an empty string',
 								['',/-/],
 								['']
 							],
-							['Test that splitting a non-empty string using a regular expression that matches the entire string being split produces an array with two elements that are empty strings',
+							['Splitting a non-empty string using a regular expression that matches the entire string being split produces an array with two elements that are empty strings',
 								['FOO_BAR_FOREVER',/^.*$/],
 								['','']
 							],
-							['Test that splitting a non-empty string using a regular expression that produces a zero length match produces an array containing all the characters of the string as its elements',
+							['Splitting a non-empty string using a regular expression that produces a zero length match produces an array containing all the characters of the string as its elements',
 								['FOOBARFOREVER',/-?/],
 								['F','O','O','B','A','R','F','O','R','E','V','E','R']
 							],
@@ -98,11 +98,11 @@ Uize.module ({
 								['FOO__BAR_____FOREVER',/_+/],
 								['FOO','BAR','FOREVER']
 							],
-							['Test that splitting a non-empty string using a regular expression that is not matched in the string being split produces an array with a single element that is the string being split',
+							['Splitting a non-empty string using a regular expression that is not matched in the string being split produces an array with a single element that is the string being split',
 								['FOO_BAR_FOREVER',/-+/],
 								['FOO_BAR_FOREVER']
 							],
-							['Test that splitting a non-empty string using a regular expression that matches every character of the string being split produces an array whose length is one greater than the length of the string being split, and where every element is an empty string',
+							['Splitting a non-empty string using a regular expression that matches every character of the string being split produces an array whose length is one greater than the length of the string being split, and where every element is an empty string',
 								['FOO_BAR_FOREVER',/./],
 								['','','','','','','','','','','','','','','','']
 							],
@@ -129,11 +129,11 @@ Uize.module ({
 								],
 
 							/*** test support for optional limit ***/
-								['Test that specifying an optional limit of zero elements produces an empty array, even when there are more than zero elements possible in the result array',
+								['Specifying an optional limit of zero elements produces an empty array, even when there are more than zero elements possible in the result array',
 									['FOOBAR',/-?/,0],
 									[]
 								],
-								['Test that specifying an optional limit of three elements produces an array containing three elements, even when there are more than three elements possible in the result array',
+								['Specifying an optional limit of three elements produces an array containing three elements, even when there are more than three elements possible in the result array',
 									['FOOBAR',/-?/,3],
 									['F','O','O']
 								],

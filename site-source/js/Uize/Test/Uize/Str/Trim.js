@@ -64,7 +64,7 @@ Uize.module ({
 						]
 					]],
 					['Uize.Str.Trim.trim',[
-						['Test that trimming empty string produces empty string','',''],
+						['Trimming empty string produces empty string','',''],
 						['Test that trimming string with no padding returns the same string','hello','hello'],
 						['Test that trimming string with leading spaces works','   hello','hello'],
 						['Test that trimming string with trailing spaces works','hello   ','hello'],
@@ -85,7 +85,7 @@ Uize.module ({
 						]
 					]],
 					['Uize.Str.Trim.trimLeft',[
-						['Test that left-trimming empty string produces empty string','',''],
+						['Left-trimming empty string produces empty string','',''],
 						['Test that left-trimming string with no padding returns the same string','hello','hello'],
 						['Test that left-trimming string with leading spaces works','   hello','hello'],
 						['Test that left-trimming string with trailing spaces works','hello   ','hello   '],
@@ -94,7 +94,7 @@ Uize.module ({
 						['Test that left-trimming string with tab padding works','\t\thello\t\t','hello\t\t']
 					]],
 					['Uize.Str.Trim.trimRight',[
-						['Test that right-trimming empty string produces empty string','',''],
+						['Right-trimming empty string produces empty string','',''],
 						['Test that right-trimming string with no padding returns the same string','hello','hello'],
 						['Test that right-trimming string with leading spaces works','   hello','   hello'],
 						['Test that right-trimming string with trailing spaces works','hello   ','hello'],

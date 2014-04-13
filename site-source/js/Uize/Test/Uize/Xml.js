@@ -38,11 +38,11 @@ Uize.module ({
 				]),
 				Uize.Test.staticMethodsTest ([
 					['Uize.Xml.toAttributes',[
-						['Test that calling with no parameters produces an empty string',
+						['Calling with no parameters produces an empty string',
 							[],
 							''
 						],
-						['Test that calling with an empty object produces an empty string',
+						['Calling with an empty object produces an empty string',
 							{},
 							''
 						],
@@ -124,11 +124,11 @@ Uize.module ({
 						]
 					]],
 					['Uize.Xml.fromAttributes',[
-						['Test that calling with no parameters produces an empty object',
+						['Calling with no parameters produces an empty object',
 							[],
 							{}
 						],
-						['Test that calling with an empty string produces an empty object',
+						['Calling with an empty string produces an empty object',
 							'',
 							{}
 						],

@@ -685,11 +685,11 @@ Uize.module ({
 								[_testDate],
 								_testDate
 							],
-							['Test that specifying the value null for the date to parse produces the value undefined',
+							['Specifying the value null for the date to parse produces the value undefined',
 								null,
 								undefined
 							],
-							['Test that specifying an empty string for the date to parse produces the value undefined',
+							['Specifying an empty string for the date to parse produces the value undefined',
 								'',
 								undefined
 							],
@@ -1322,11 +1322,11 @@ Uize.module ({
 								[Uize.Class.Value ({value:_testDate})],
 								_testDate
 							],
-							['Test that specifying the value null for the date to parse produces the value undefined',
+							['Specifying the value null for the date to parse produces the value undefined',
 								[Uize.Class.Value ({value:null})],
 								undefined
 							],
-							['Test that specifying an empty string for the date to parse produces the value undefined',
+							['Specifying an empty string for the date to parse produces the value undefined',
 								[Uize.Class.Value ({value:''})],
 								undefined
 							],

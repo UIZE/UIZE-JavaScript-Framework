@@ -34,11 +34,11 @@ Uize.module ({
 				Uize.Test.requiredModulesTest ('Uize.Data.Flatten'),
 				Uize.Test.staticMethodsTest ([
 					['Uize.Data.Flatten.flatten',[
-						['Test that flattening an empty object produces an empty object',
+						['Flattening an empty object produces an empty object',
 							{},
 							{}
 						],
-						['Test that flattening an already flat object returns an object with the same contents',
+						['Flattening an already flat object returns an object with the same contents',
 							{
 								foo:'bar',
 								baz:'qux',
@@ -145,7 +145,7 @@ Uize.module ({
 							}
 						],
 						{
-							title:'Test that flattening an unflattened object produces a new object and does not modify the source object',
+							title:'Flattening an unflattened object produces a new object and does not modify the source object',
 							test:function () {
 								var
 									_unflattened = {foo:{bar:{baz:1,qux:2}}},
@@ -199,11 +199,11 @@ Uize.module ({
 						]
 					]],
 					['Uize.Data.Flatten.unflatten',[
-						['Test that unflattening an empty object produces an empty object',
+						['Unflattening an empty object produces an empty object',
 							{},
 							{}
 						],
-						['Test unflattening an already unflattened object produces an object containing the same contents as the already unflattened source object',
+						['Unflattening an already unflattened object produces an object containing the same contents as the already unflattened source object',
 							{
 								foo:'bar',
 								baz:{
@@ -274,7 +274,7 @@ Uize.module ({
 							{foo:{bar:{baz:1,qux:2}}}
 						],
 						{
-							title:'Test that unflattening a flattened object produces a new object and does not modify the source object',
+							title:'Unflattening a flattened object produces a new object and does not modify the source object',
 							test:function () {
 								var
 									_flattened = {'foo.bar.baz':1,'foo.bar.qux':2},

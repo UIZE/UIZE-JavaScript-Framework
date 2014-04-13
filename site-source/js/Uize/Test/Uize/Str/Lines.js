@@ -156,15 +156,15 @@ Uize.module ({
 							[],
 							{minValue:0,maxValue:0}
 						],
-						['Test that an empty string produces 0 for both minValue and maxValue',
+						['An empty string produces 0 for both minValue and maxValue',
 							'',
 							{minValue:0,maxValue:0}
 						],
-						['Test that an unindented single line string produces 0 for both minValue and maxValue',
+						['An unindented single line string produces 0 for both minValue and maxValue',
 							['hello','\t'],
 							{minValue:0,maxValue:0}
 						],
-						['Test that an indented single line string produces the same value for both minValue and maxValue',
+						['An indented single line string produces the same value for both minValue and maxValue',
 							['\t\thello','\t'],
 							{minValue:2,maxValue:2}
 						],
@@ -172,7 +172,7 @@ Uize.module ({
 							'\t\thello',
 							{minValue:2,maxValue:2}
 						],
-						['Test that an unintended multi-line string produces 0 for both minValue and maxValue',
+						['An unintended multi-line string produces 0 for both minValue and maxValue',
 							'hello\n' +
 							'there\n'
 							,
@@ -224,7 +224,7 @@ Uize.module ({
 							],
 							{minValue:1,maxValue:3}
 						],
-						['Test that specifying an empty string for indentChars produces 0 for both minValue and maxValue',
+						['Specifying an empty string for indentChars produces 0 for both minValue and maxValue',
 							['\t\thello',''],
 							{minValue:0,maxValue:0}
 						],
@@ -294,13 +294,13 @@ Uize.module ({
 							['line 1\nline 2',1,'---'],
 							'---line 1\n---line 2'
 						],
-						['Test that indenting an empty string produces an empty string',
+						['Indenting an empty string produces an empty string',
 							['',2],
 							''
 						]
 					]],
 					['Uize.Str.Lines.normalizeIndent',[
-						['Test that normalizing indent for an empty string produces an empty string',
+						['Normalizing indent for an empty string produces an empty string',
 							'',
 							''
 						],
@@ -518,15 +518,15 @@ Uize.module ({
 							'line 1\rline 2\nline 3\r\nline 4',
 							['line 1','line 2','line 3','line 4']
 						],
-						['Test that multiple consecutive line separators produces multiple blank line entries in array',
+						['Multiple consecutive line separators produces multiple blank line entries in array',
 							'line 1\n\n\r\n\rline 2',
 							['line 1','','','','line 2']
 						],
-						['Test that trailing linefeed produces blank line element at end of array',
+						['A trailing linefeed character produces a blank line element at the end of the array',
 							'line 1\rline 2\nline 3\r\nline 4\n',
 							['line 1','line 2','line 3','line 4','']
 						],
-						['Test that leading linefeed produces blank line element at beginning of array',
+						['A leading linefeed character produces a blank line element at the beginning of the array',
 							'\nline 1\rline 2\nline 3\r\nline 4',
 							['','line 1','line 2','line 3','line 4']
 						],
@@ -534,17 +534,17 @@ Uize.module ({
 							' line 1 \r\tline 2\t\nline 3 \t \r\n line 4 ',
 							[' line 1 ','\tline 2\t','line 3 \t ',' line 4 ']
 						],
-						['Test that splitting string with no line separators produces array with one element',
+						['Splitting a string with no line separators produces an array with one element',
 							'line 1',
 							['line 1']
 						],
-						['Test that splitting empty string produces an array with one empty string element',
+						['Splitting an empty string produces an array with one empty string element',
 							'',
 							['']
 						]
 					]],
 					['Uize.Str.Lines.switchLinebreakType',[
-						['Test that switching linebreaks for an empty string produces an empty string',
+						['Switching linebreaks for an empty string produces an empty string',
 							'',
 							''
 						],
@@ -804,7 +804,7 @@ Uize.module ({
 						]
 					]],
 					['Uize.Str.Lines.removeMatching',[
-						['Test that removing matching from an empty string produces an empty string',
+						['Removing matching lines from an empty string produces an empty string',
 							['',/^\d+:/],
 							''
 						],
@@ -846,7 +846,7 @@ Uize.module ({
 							'3: line 3\n' +
 							'line 4'
 						],
-						['Test that a matching function that always returns true produces an empty string',
+						['A matching function that always returns true produces an empty string',
 							[
 								'line 1\n' +
 								'2: line 2\n' +
@@ -871,7 +871,7 @@ Uize.module ({
 							'3: line 3\n' +
 							'line 4'
 						],
-						['Test that a matching regular expression that matches all lines produces an empty string',
+						['A matching regular expression that matches all lines produces an empty string',
 							[
 								'line 1\n' +
 								'2: line 2\n' +
@@ -922,7 +922,7 @@ Uize.module ({
 							'2: line 2\n' +
 							'3: line 3\n'
 						],
-						['Test that retaining matching from an empty string produces an empty string',
+						['Retaining matching lines from an empty string produces an empty string',
 							['',/^\d+:/],
 							''
 						],
@@ -950,7 +950,7 @@ Uize.module ({
 							'2: line 2\n' +
 							'3: line 3\n'
 						],
-						['Test that a matching function that always returns false produces an empty string',
+						['A matching function that always returns false produces an empty string',
 							[
 								'line 1\n' +
 								'2: line 2\n' +
@@ -975,7 +975,7 @@ Uize.module ({
 							'3: line 3\n' +
 							'line 4'
 						],
-						['Test that a matching regular expression that matches no lines produces an empty string',
+						['A matching regular expression that matches no lines produces an empty string',
 							[
 								'line 1\n' +
 								'2: line 2\n' +
