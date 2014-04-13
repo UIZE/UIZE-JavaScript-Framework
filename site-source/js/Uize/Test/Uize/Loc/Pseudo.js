@@ -48,17 +48,17 @@ Uize.module ({
 				Uize.Test.requiredModulesTest ('Uize.Loc.Pseudo'),
 				Uize.Test.staticMethodsTest ([
 					['Uize.Loc.Pseudo.accent',[
-						['Test that all alphabetical characters are converted correctly to extended character set versions',
+						['All alphabetical characters are converted to extended character set versions',
 							_alphabetCharacters,
 							'åƀçðéƒĝĥîĵķļɱñöþǫŕšţûṽŵẋýžÅƁÇÐÉƑĜĤÎĴĶĻṀÑÖÞǪŔŠŢÛṼŴẊÝŽ'
 						],
-						['Test that non-alphabetical characters in the ASCII character set are left unmodified',
+						['Non-alphabetical characters in the ASCII character set are left unmodified',
 							_nonAlphabetCharacters,
 							_nonAlphabetCharacters
 						]
 					]],
 					['Uize.Loc.Pseudo.pseudoLocalize',[
-						['Test the options are defaulted correctly when the optional options argument is not specified',
+						['The options are defaulted when the optional options argument is not specified',
 							'This pseudo-localization thing is pretty cool!',
 							'[Ţĥîš_ þšéûðö-ļöçåļîžåţîöñ______ ţĥîñĝ_ îš_ þŕéţţý__ çööļ_!]'
 						],
@@ -172,7 +172,7 @@ Uize.module ({
 								['123 123456 12345 12345678',{expansion:2}],
 								'[123___ 123456______ 12345_____ 12345678________]'
 							],
-							['Test that the number of expansion characters is based only on the lengths of the words and not whitespace, punctuation characters, or added wrapper characters',
+							['The number of expansion characters is based only on the lengths of the words and not whitespace, punctuation characters, or added wrapper characters',
 								['The cat,     which was big and fat,     shat on the mat!!!',{expansion:2,wrapper:'<<<>>>'}],
 								'<<<Ţĥé___ çåţ___,     ŵĥîçĥ_____ ŵåš___ ƀîĝ___ åñð___ ƒåţ___,     šĥåţ____ öñ__ ţĥé___ ɱåţ___!!!>>>'
 							],

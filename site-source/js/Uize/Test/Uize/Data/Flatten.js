@@ -94,7 +94,7 @@ Uize.module ({
 							}
 						],
 						{
-							title:'Test that object type property values that are not plain objects are treated as leaf nodes',
+							title:'Object type property values that are not plain objects are treated as leaf nodes',
 							test:function () {
 								function _MyConstructor () {}
 								var
@@ -120,7 +120,7 @@ Uize.module ({
 								);
 							}
 						},
-						['Test that properties of an unflattened object that are simple type values are handled correctly and treated as leaf nodes when flattening',
+						['Properties of an unflattened object that are simple type values are treated as leaf nodes when flattening',
 							{
 								foo:{
 									'null':null,

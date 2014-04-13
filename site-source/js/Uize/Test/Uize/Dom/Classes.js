@@ -103,125 +103,125 @@ Uize.module ({
 				Uize.Test.staticMethodsTest ([
 					['Uize.Dom.Classes.getState',[
 						/*** test handling of invalid node cases ***/
-							['Test that the integer -1 is returned when the node is null',
+							['The integer -1 is returned when the node is null',
 								[null,['disabled','enabled']],
 								-1
 							],
-							['Test that the integer -1 is returned when the node is undefined',
+							['The integer -1 is returned when the node is undefined',
 								[undefined,['disabled','enabled']],
 								-1
 							],
 
 						/*** test support for boolean state values ***/
-							['Test that the boolean false is returned when the node\'s className string contains the first of two state classes',
+							['The boolean false is returned when the node\'s className string contains the first of two state classes',
 								[_mockNodeWithClassName ('BEFORE disabled AFTER'),['disabled','enabled']],
 								false
 							],
-							['Test that the boolean true is returned when the node\'s className string contains the second of two state classes',
+							['The boolean true is returned when the node\'s className string contains the second of two state classes',
 								[_mockNodeWithClassName ('BEFORE enabled AFTER'),['disabled','enabled']],
 								true
 							],
 
 						/*** test support for integer state values (ie. more than two states) ***/
-							['Test that the integer 0 is returned when the node\'s className string contains the first of three state classes',
+							['The integer 0 is returned when the node\'s className string contains the first of three state classes',
 								[_mockNodeWithClassName ('BEFORE warning AFTER'),['warning','nonFatalError','fatalError']],
 								0
 							],
-							['Test that the integer 1 is returned when the node\'s className string contains the second of three state classes',
+							['The integer 1 is returned when the node\'s className string contains the second of three state classes',
 								[_mockNodeWithClassName ('BEFORE nonFatalError AFTER'),['warning','nonFatalError','fatalError']],
 								1
 							],
-							['Test that the integer 2 is returned when the node\'s className string contains the third of three state classes',
+							['The integer 2 is returned when the node\'s className string contains the third of three state classes',
 								[_mockNodeWithClassName ('BEFORE fatalError AFTER'),['warning','nonFatalError','fatalError']],
 								2
 							],
 
 						/*** test handling of no state class present ***/
-							['Test that the integer -1 is returned when the node\'s className string contains neither of two state classes',
+							['The integer -1 is returned when the node\'s className string contains neither of two state classes',
 								[_mockNodeWithClassName ('BEFORE AFTER'),['disabled','enabled']],
 								-1
 							],
-							['Test that the integer -1 is returned when the node\'s className string contains none of three state classes',
+							['The integer -1 is returned when the node\'s className string contains none of three state classes',
 								[_mockNodeWithClassName ('BEFORE AFTER'),['warning','nonFatalError','fatalError']],
 								-1
 							],
-							['Test that class matching is case sensitive when getting a state from a node\'s className',
+							['Class matching is case sensitive when getting a state from a node\'s className',
 								[_mockNodeWithClassName ('ENABLED'),['disabled','enabled']],
 								-1
 							],
 
 						/*** test handling when class for one of the states is an empty string ***/
-							['Test that the boolean false is returned when the first of the state classes is an empty string and the node\'s className string does not contain the second state class',
+							['The boolean false is returned when the first of the state classes is an empty string and the node\'s className string does not contain the second state class',
 								[_mockNodeWithClassName ('populated featured'),['','selected']],
 								false
 							],
-							['Test that the boolean true is returned when the second of the state classes is an empty string and the node\'s className string does not contain the first state class',
+							['The boolean true is returned when the second of the state classes is an empty string and the node\'s className string does not contain the first state class',
 								[_mockNodeWithClassName ('populated featured'),['selected','']],
 								true
 							],
 
 						/*** test support for state classes being specified using a string ***/
 							/*** test support for multiple state classes being specified using a comma-separated string ***/
-								['Test that the boolean false is returned when the node\'s className string contains the first of two state classes specified using a comma-separated string',
+								['The boolean false is returned when the node\'s className string contains the first of two state classes specified using a comma-separated string',
 									[_mockNodeWithClassName ('BEFORE disabled AFTER'),'disabled,enabled'],
 									false
 								],
-								['Test that the boolean true is returned when the node\'s className string contains the second of two state classes',
+								['The boolean true is returned when the node\'s className string contains the second of two state classes',
 									[_mockNodeWithClassName ('BEFORE enabled AFTER'),'disabled,enabled'],
 									true
 								],
 
 							/*** test handling of a single state class being specified using a string ***/
-								['Test that the boolean false is returned when a state class specified using a string isn\'t contained inside the node\'s className string',
+								['The boolean false is returned when a state class specified using a string isn\'t contained inside the node\'s className string',
 									[_mockNodeWithClassName ('populated featured'),'selected'],
 									false
 								],
-								['Test that the boolean true is returned when a state class specified using a string is contained inside the node\'s className string',
+								['The boolean true is returned when a state class specified using a string is contained inside the node\'s className string',
 									[_mockNodeWithClassName ('populated selected featured'),'selected'],
 									true
 								],
-								['Test that the integer -1 is returned when an empty string is specified for the state class',
+								['The integer -1 is returned when an empty string is specified for the state class',
 									[_mockNodeWithClassName ('enabled'),''],
 									-1
 								]
 					]],
 					['Uize.Dom.Classes.hasClass',[
 						/*** test handling of invalid node cases ***/
-							['Test that the boolean false is returned when the node is null',
+							['The boolean false is returned when the node is null',
 								[null,['selected']],
 								false
 							],
-							['Test that the boolean false is returned when the node is undefined',
+							['The boolean false is returned when the node is undefined',
 								[undefined,['selected']],
 								false
 							],
 
 						/*** test when specified class is present ***/
-							['Test that the boolean true is returned when the specified class is the first class of several classes in the node\'s className string',
+							['The boolean true is returned when the specified class is the first class of several classes in the node\'s className string',
 								[_mockNodeWithClassName ('populated selected featured'),['populated']],
 								true
 							],
-							['Test that the boolean true is returned when the specified class is the second class of several classes in the node\'s className string',
+							['The boolean true is returned when the specified class is the second class of several classes in the node\'s className string',
 								[_mockNodeWithClassName ('populated selected featured'),['selected']],
 								true
 							],
-							['Test that the boolean true is returned when the specified class is the last class of several classes in the node\'s className string',
+							['The boolean true is returned when the specified class is the last class of several classes in the node\'s className string',
 								[_mockNodeWithClassName ('populated selected featured'),['featured']],
 								true
 							],
 
 						/*** test when specified class is absent ***/
-							['Test that the value false is returned when the node\'s className string does not contain the specified class',
+							['The value false is returned when the node\'s className string does not contain the specified class',
 								[_mockNodeWithClassName ('populated featured'),['selected']],
 								false
 							],
-							['Test that class matching is case sensitive when testing if a class is present in a node\'s className string',
+							['Class matching is case sensitive when testing if a class is present in a node\'s className string',
 								[_mockNodeWithClassName ('populated selected featured'),['SELECTED']],
 								false
 							],
 
 						/*** miscellaneous ***/
-							['Test that the boolean false is returned when the class that is being tested for is an empty string',
+							['The boolean false is returned when the class that is being tested for is an empty string',
 								[_mockNodeWithClassName ('populated selected featured'),['']],
 								false
 							]
@@ -229,7 +229,7 @@ Uize.module ({
 				]),
 				_modifyClassesStaticMethodsTest ([
 					['Uize.Dom.Classes.setState',[
-						['Test that setting state for a class that is the empty string has no effect',
+						['Setting state for a class that is the empty string has no effect',
 							'populated selected featured',
 							['',true],
 							'populated selected featured'
@@ -241,7 +241,7 @@ Uize.module ({
 								['selected',true],
 								'selected'
 							],
-							['Test that setting state for a class to true on a node that already has that class doesn\'t result in a duplicate',
+							['Setting state for a class to true on a node that already has that class doesn\'t result in a duplicate',
 								'populated selected',
 								['selected',true],
 								'populated selected'
@@ -251,7 +251,7 @@ Uize.module ({
 								['selected',true],
 								'populated selected'
 							],
-							['Test that class matching is case sensitive when setting state for a class to true',
+							['Class matching is case sensitive when setting state for a class to true',
 								'populated selected',
 								['SELECTED',true],
 								'populated selected SELECTED'
@@ -283,7 +283,7 @@ Uize.module ({
 								['featured',false],
 								'populated selected'
 							],
-							['Test that setting state for a class to false where that class isn\'t in a node\'s className string results in no change',
+							['Setting state for a class to false where that class isn\'t in a node\'s className string results in no change',
 								'populated selected featured',
 								['BLAH',false],
 								'populated selected featured'
@@ -293,12 +293,12 @@ Uize.module ({
 								['',false],
 								'populated selected featured'
 							],
-							['Test that setting state for a class to false where that class is the only class in a node\'s className string results in an empty className string',
+							['Setting state for a class to false where that class is the only class in a node\'s className string results in an empty className string',
 								'populated',
 								['populated',false],
 								''
 							],
-							['Test that class matching is case sensitive when setting state for a class to false',
+							['Class matching is case sensitive when setting state for a class to false',
 								'populated selected featured',
 								['FEATURED',false],
 								'populated selected featured'
@@ -450,7 +450,7 @@ Uize.module ({
 					]],
 					['Uize.Dom.Classes.removeState',[
 						/*** test support for first state class being empty string ***/
-							['Test that removing a state when none of the state classes is present in the node\'s className string results in no change',
+							['Removing a state when none of the state classes is present in the node\'s className string results in no change',
 								'BEFORE AFTER',
 								'selected',
 								'BEFORE AFTER'
@@ -462,53 +462,53 @@ Uize.module ({
 							],
 
 						/*** test support for two state classes ***/
-							['Test that removing a state where there are two non-empty state classes and where none of those classes is in the node\'s className string results in no change',
+							['Removing a state where there are two non-empty state classes and where none of those classes is in the node\'s className string results in no change',
 								'BEFORE AFTER',
 								[['disabled','enabled']],
 								'BEFORE AFTER'
 							],
-							['Test that removing a state where there are two non-empty state classes and where the first of those classes is in the node\'s className string results in it being removed',
+							['Removing a state where there are two non-empty state classes and where the first of those classes is in the node\'s className string results in it being removed',
 								'BEFORE disabled AFTER',
 								[['disabled','enabled']],
 								'BEFORE AFTER'
 							],
-							['Test that removing a state where there are two non-empty state classes and where the second of those classes is in the node\'s className string results in it being removed',
+							['Removing a state where there are two non-empty state classes and where the second of those classes is in the node\'s className string results in it being removed',
 								'BEFORE enabled AFTER',
 								[['disabled','enabled']],
 								'BEFORE AFTER'
 							],
 
 						/*** test support for three state classes ***/
-							['Test that removing a state where there are three non-empty state classes and where none of those classes is in the node\'s className string results in no change',
+							['Removing a state where there are three non-empty state classes and where none of those classes is in the node\'s className string results in no change',
 								'BEFORE AFTER',
 								[['state0Class','state1Class','state2Class']],
 								'BEFORE AFTER'
 							],
-							['Test that removing a state where there are three non-empty state classes and where the first of those classes is in the node\'s className string results in it being removed',
+							['Removing a state where there are three non-empty state classes and where the first of those classes is in the node\'s className string results in it being removed',
 								'BEFORE state0Class AFTER',
 								[['state0Class','state1Class','state2Class']],
 								'BEFORE AFTER'
 							],
-							['Test that removing a state where there are three non-empty state classes and where the second of those classes is in the node\'s className string results in it being removed',
+							['Removing a state where there are three non-empty state classes and where the second of those classes is in the node\'s className string results in it being removed',
 								'BEFORE state1Class AFTER',
 								[['state0Class','state1Class','state2Class']],
 								'BEFORE AFTER'
 							],
-							['Test that removing a state where there are three non-empty state classes and where the third of those classes is in the node\'s className string results in it being removed',
+							['Removing a state where there are three non-empty state classes and where the third of those classes is in the node\'s className string results in it being removed',
 								'BEFORE state2Class AFTER',
 								[['state0Class','state1Class','state2Class']],
 								'BEFORE AFTER'
 							],
 
 						/*** miscellaneous ***/
-							['Test that class matching is case sensitive when removing a state',
+							['Class matching is case sensitive when removing a state',
 								'BEFORE selected AFTER',
 								['SELECTED'],
 								'BEFORE selected AFTER'
 							]
 					]],
 					['Uize.Dom.Classes.toggleState',[
-						['Test that toggling state for a class that is the empty string has no effect',
+						['Toggling state for a class that is the empty string has no effect',
 							'populated selected featured',
 							[''],
 							'populated selected featured'
@@ -525,7 +525,7 @@ Uize.module ({
 								['featured'],
 								''
 							],
-							['Test that toggling state where state classes is specified using a string, where the node\'s className string has classes but not the true state class, results in the true state class being appended',
+							['Toggling state where state classes is specified using a string, where the node\'s className string has classes but not the true state class, results in the true state class being appended',
 								'populated selected',
 								['featured'],
 								'populated selected featured'
@@ -547,39 +547,39 @@ Uize.module ({
 							],
 
 						/*** test support for two state classes ***/
-							['Test that toggling state where there are two states, and where none of the state classes is in a node\'s className string results in the first state class being appended, with a single space as separator',
+							['Toggling state where there are two states, and where none of the state classes is in a node\'s className string results in the first state class being appended, with a single space as separator',
 								'BEFORE AFTER',
 								[['disabled','enabled']],
 								'BEFORE AFTER disabled'
 							],
-							['Test that toggling state where there are two states, and where the first state class is in a node\'s className string results in it being replaced with the second state class',
+							['Toggling state where there are two states, and where the first state class is in a node\'s className string results in it being replaced with the second state class',
 								'BEFORE disabled AFTER',
 								[['disabled','enabled']],
 								'BEFORE enabled AFTER'
 							],
-							['Test that toggling state where there are two states, and where the second state class is in a node\'s className string results in it being replaced with the first state class',
+							['Toggling state where there are two states, and where the second state class is in a node\'s className string results in it being replaced with the first state class',
 								'BEFORE enabled AFTER',
 								[['disabled','enabled']],
 								'BEFORE disabled AFTER'
 							],
 
 						/*** test support for three state classes ***/
-							['Test that toggling state where there are three states, and where none of the state classes is in a node\'s className string results in the first state class being appended, with a single space as separator',
+							['Toggling state where there are three states, and where none of the state classes is in a node\'s className string results in the first state class being appended, with a single space as separator',
 								'BEFORE AFTER',
 								[['state0Class','state1Class','state2Class']],
 								'BEFORE AFTER state0Class'
 							],
-							['Test that toggling state where there are three states, and where the first state class is in a node\'s className string results in it being replaced with the second state class',
+							['Toggling state where there are three states, and where the first state class is in a node\'s className string results in it being replaced with the second state class',
 								'BEFORE state0Class AFTER',
 								[['state0Class','state1Class','state2Class']],
 								'BEFORE state1Class AFTER'
 							],
-							['Test that toggling state where there are three states, and where the second state class is in a node\'s className string results in it being replaced with the third state class',
+							['Toggling state where there are three states, and where the second state class is in a node\'s className string results in it being replaced with the third state class',
 								'BEFORE state1Class AFTER',
 								[['state0Class','state1Class','state2Class']],
 								'BEFORE state2Class AFTER'
 							],
-							['Test that toggling state where there are three states, and where the third state class is in a node\'s className string results in it being replaced with the first state class',
+							['That toggling state where there are three states, and where the third state class is in a node\'s className string results in it being replaced with the first state class',
 								'BEFORE state2Class AFTER',
 								[['state0Class','state1Class','state2Class']],
 								'BEFORE state0Class AFTER'
@@ -591,7 +591,7 @@ Uize.module ({
 							'selected',
 							'selected'
 						],
-						['Test that adding a class to a node that already has that class doesn\'t result in a duplicate',
+						['Adding a class to a node that already has that class doesn\'t result in a duplicate',
 							'populated selected',
 							'selected',
 							'populated selected'
@@ -601,7 +601,7 @@ Uize.module ({
 							'selected',
 							'populated selected'
 						],
-						['Test that class matching is case sensitive when adding a class',
+						['Class matching is case sensitive when adding a class',
 							'populated selected',
 							'SELECTED',
 							'populated selected SELECTED'
@@ -633,7 +633,7 @@ Uize.module ({
 							'featured',
 							'populated selected'
 						],
-						['Test that removing a class that isn\'t in a node\'s className string results in no change',
+						['Removing a class that isn\'t in a node\'s className string results in no change',
 							'populated selected featured',
 							'BLAH',
 							'populated selected featured'
@@ -643,12 +643,12 @@ Uize.module ({
 							'',
 							'populated selected featured'
 						],
-						['Test that removing the only class in a node\'s className string results in an empty className string',
+						['Removing the only class in a node\'s className string results in an empty className string',
 							'populated',
 							'populated',
 							''
 						],
-						['Test that class matching is case sensitive when removing a class',
+						['Class matching is case sensitive when removing a class',
 							'populated selected featured',
 							'FEATURED',
 							'populated selected featured'
@@ -678,14 +678,14 @@ Uize.module ({
 								'selected',
 								'selected'
 							],
-							['Test that toggling a class that isn\'t present for a node that has different classes in its className string results in the toggle class being appended, with a single space as separator',
+							['Toggling a class that isn\'t present for a node that has different classes in its className string results in the toggle class being appended, with a single space as separator',
 								'populated selected',
 								'featured',
 								'populated selected featured'
 							],
 
 						/*** miscellaneous ***/
-							['Test that class matching is case sensitive when toggling a class',
+							['Class matching is case sensitive when toggling a class',
 								'populated selected featured',
 								'FEATURED',
 								'populated selected featured FEATURED'

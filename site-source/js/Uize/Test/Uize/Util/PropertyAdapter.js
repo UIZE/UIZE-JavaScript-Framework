@@ -87,15 +87,15 @@ Uize.module ({
 				title:'Test that the conformer for ' + _propertyName + ' works correctly',
 				test:[
 					_conformerTestCase (
-						'Test that specifying simply an instance is resolved to an object where the instance property for the object is set to the specified instance, and the property property is set to "value"',
+						'Specifying simply an instance is resolved to an object where the instance property for the object is set to the specified instance, and the property property is set to "value"',
 						_someDummyInstance,
 						{instance:_someDummyInstance,property:'value'}
 					),
 					{
-						title:'Test that an array value is conformed correctly, where the first element specifies the instance and the second element specifies the property',
+						title:'An array value is conformed, such that the first element specifies the instance and the second element specifies the property',
 						test:[
 							_conformerTestCase (
-								'Test that specifying an array is resolved to an object where the instance is the first element from the array, and the property is the second element from the array',
+								'Specifying an array is resolved to an object where the instance is the first element from the array, and the property is the second element from the array',
 								[_someDummyInstance,'foo'],
 								{instance:_someDummyInstance,property:'foo'}
 							),
@@ -117,7 +117,7 @@ Uize.module ({
 						]
 					},
 					{
-						title:'Test that an object value is conformed correctly, where the property property is defaulted to "value" if it is null, undefined, or omitted',
+						title:'An object value is conformed, such that the property property is defaulted to "value" if it is null, undefined, or omitted',
 						test:[
 							_conformerTestCase (
 								'Specifying the value null for the property results in the property being defaulted to "value"',
@@ -137,7 +137,7 @@ Uize.module ({
 						]
 					},
 					{
-						title:'Test that null or undefined is conformed correctly (ie. left as is)',
+						title:'The values null or undefined for the value adapter are conformed to the value null',
 						test:[
 							_conformerTestCase (
 								'Specifying the value null for the value adapter results in it remaining null',
@@ -166,7 +166,7 @@ Uize.module ({
 					}
 				},
 				{
-					title:'Test that connecting a property adapter between two properties of different objects immediately synchronizes property B to property A',
+					title:'Connecting a property adapter between two properties of different objects immediately synchronizes property B to property A',
 					test:function () {
 						var _rig = _getRig ();
 						return this.expect ('solar',_rig._instanceB.get ('energy'));
@@ -197,7 +197,7 @@ Uize.module ({
 					title:'Test that synchronization with a value adapter works in both directions',
 					test:[
 						{
-							title:'Test that a value adapter is applied correctly when synchronizing from propertyA to propertyB',
+							title:'The value adapter is applied when synchronizing from propertyA to propertyB',
 							test:function () {
 								var _rig = _getRigWithValueAdapter ();
 								_rig._instanceA.set ({normal:2.5});
@@ -205,7 +205,7 @@ Uize.module ({
 							}
 						},
 						{
-							title:'Test that a value adapter is applied correctly when synchronizing from propertyB to propertyA',
+							title:'The value adapter is applied when synchronizing from propertyB to propertyA',
 							test:function () {
 								var _rig = _getRigWithValueAdapter ();
 								_rig._instanceB.set ({scaled:5});
@@ -361,7 +361,7 @@ Uize.module ({
 							}
 						},
 						{
-							title:'Test that after changing propertyA, modifying the value of the old property for propertyA no longer has an affect on the property for propertyB',
+							title:'After changing propertyA, modifying the value of the old property for propertyA no longer has an affect on the property for propertyB',
 							test:function () {
 								var _rig = _getRig ();
 
@@ -386,7 +386,7 @@ Uize.module ({
 							}
 						},
 						{
-							title:'Test that after changing propertyB, modifying the value of the old property for propertyB no longer has an affect on the property for propertyA',
+							title:'After changing propertyB, modifying the value of the old property for propertyB no longer has an affect on the property for propertyA',
 							test:function () {
 								var _rig = _getRig ();
 
@@ -476,7 +476,7 @@ Uize.module ({
 					title:'Test that the infinite loop prevention mechanism works correctly',
 					test:[
 						{
-							title:'Test that the infinite loop prevention mechanism does not prevent two properties of the same instance from being connected successfully by an adapter',
+							title:'The infinite loop prevention mechanism does not prevent two properties of the same instance from being connected successfully by an adapter',
 							test:function () {
 								var
 									_instance = new _DummyClass ({prop1:'foo',prop2:'bar'}),
@@ -501,7 +501,7 @@ Uize.module ({
 							}
 						},
 						{
-							title:'Test that the infinite loop prevention mechanism does not prevent three properties of the same instance from being connected successfully by two adapters',
+							title:'The infinite loop prevention mechanism does not prevent three properties of the same instance from being connected successfully by two adapters',
 							test:function () {
 								var
 									_instance = new _DummyClass ({prop1:'foo',prop2:'bar',prop3:'ha'}),
@@ -548,7 +548,7 @@ Uize.module ({
 							}
 						},
 						{
-							title:'Test that an infinite loop is prevented when two properties combined in a property adapter are guaranteed to never be able to ever settle their values, because of a divergent value adapter',
+							title:'An infinite loop is prevented when two properties combined in a property adapter are guaranteed to never be able to ever settle their values, because of a divergent value adapter',
 							test:function () {
 								var _DummyClass = Uize.Class.subclass ();
 								_DummyClass.stateProperties ({
@@ -573,7 +573,7 @@ Uize.module ({
 							}
 						},
 						{
-							title:'Test that an infinite loop is prevented when two properties combined in a property adapter are guaranteed to never be able to ever settle their values, based upon the definition of those properties',
+							title:'An infinite loop is prevented when two properties combined in a property adapter are guaranteed to never be able to ever settle their values, based upon the definition of those properties',
 							test:function () {
 								var _CrazyClass = Uize.Class.subclass ();
 								_CrazyClass.stateProperties ({

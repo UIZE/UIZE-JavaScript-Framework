@@ -54,27 +54,27 @@ Uize.module ({
 							{attrib1:'attrib1Value',attrib2:'attrib2Value',attrib3:'attrib3Value'},
 							'attrib1="attrib1Value" attrib2="attrib2Value" attrib3="attrib3Value"'
 						],
-						['Test that single quotes are supported for quoting attribute valus',
+						['Single quotes can be used for quoting attribute valus',
 							[{attrib1:'attrib1Value',attrib2:'attrib2Value',attrib3:'attrib3Value'},{quoteChar:'\''}],
 							'attrib1=\'attrib1Value\' attrib2=\'attrib2Value\' attrib3=\'attrib3Value\''
 						],
-						['Test that single quotes are supported for quoting attribute valus',
+						['Single quotes can be used for quoting attribute valus',
 							{'':'attribValue',foo:'bar'},
 							'foo="bar"'
 						],
-						['Test that attributes can have empty string values',
+						['Attributes can have empty string values',
 							{attrib1:'',attrib2:''},
 							'attrib1="" attrib2=""'
 						],
-						['Test that whitespace inside attribute values is respected',
+						['Whitespace inside attribute values is respected',
 							{a1:'  a1Value',a2:'a2Value  ',a3:'  a3Value  ',a4:'a4 Value',a5:'\t a5 \n Value \r'},
 							'a1="  a1Value" a2="a2Value  " a3="  a3Value  " a4="a4 Value" a5="\t a5 &#10; Value &#13;"'
 						],
-						['Test that attribute values can be only whitespace',
+						['Attribute values can be only whitespace',
 							{a1:'  ',a2:'\t\t',a3:'\n\n',a4:'\r\r'},
 							'a1="  " a2="\t\t" a3="&#10;&#10;" a4="&#13;&#13;"'
 						],
-						['Test that, by default, attribute names and values are case-sensitive, and that case is respected',
+						['By default, attribute names and values are case-sensitive, and case is respected',
 							{attribute:'attribute',Attribute:'Attribute',ATTRIBUTE:'ATTRIBUTE'},
 							'attribute="attribute" Attribute="Attribute" ATTRIBUTE="ATTRIBUTE"'
 						],
@@ -86,15 +86,15 @@ Uize.module ({
 							[{attrib1:'attrib1Value',Attrib2:'Attrib2Value',ATTRIB3:'ATTRIB3VALUE'},{nameCase:'upper'}],
 							'ATTRIB1="attrib1Value" ATTRIB2="Attrib2Value" ATTRIB3="ATTRIB3VALUE"'
 						],
-						['Test that unique attributes can become duplicates as a result of name case changing, in which case the value of the last one wins',
+						['If unique attributes become duplicates as a result of name case changing, then the value of the last one wins',
 							[{attribute:'BIOFUEL',Attribute:'WIND',ATTRIBUTE:'SOLAR'},{nameCase:'lower'}],
 							'attribute="SOLAR"'
 						],
-						['Test that characters in attribute values that need to be encoded as entities are encoded correctly',
+						['Characters in attribute values that need to be encoded as entities are encoded',
 							{quot:'"',amp:'&',apos:'\'',lt:'<',gt:'>',lf:'\n',cr:'\r'},
 							'quot="&quot;" amp="&amp;" apos="&apos;" lt="&lt;" gt="&gt;" lf="&#10;" cr="&#13;"'
 						],
-						['Test that non-string type attribute values are coerced to string before being encoded',
+						['Non-string type attribute values are coerced to string before being encoded',
 							{
 								number:42,
 								infinity:Infinity,
@@ -132,19 +132,19 @@ Uize.module ({
 							'',
 							{}
 						],
-						['Test that a string with a single attribute whose value contains no entities is decoded correctly',
+						['A string with a single attribute whose value contains no entities can be decoded',
 							'attrib1="attrib1Value"',
 							{attrib1:'attrib1Value'}
 						],
-						['Test that a string with multiple attributes is decoded correctly',
+						['A string with multiple attributes can be decoded',
 							'attrib1="attrib1Value" attrib2="attrib2Value" attrib3="attrib3Value"',
 							{attrib1:'attrib1Value',attrib2:'attrib2Value',attrib3:'attrib3Value'}
 						],
-						['Test that superfluous whitespace around a set of attributes is ignored',
+						['Superfluous whitespace around a set of attributes is ignored',
 							' \t\n\r attrib1="attrib1Value" attrib2="attrib2Value" attrib3="attrib3Value" \t\n\r ',
 							{attrib1:'attrib1Value',attrib2:'attrib2Value',attrib3:'attrib3Value'}
 						],
-						['Test that various different types of whitespace separating multiple attributes is supported',
+						['Various different types of whitespace separating multiple attributes is supported',
 							'a1="a1Value"   a2="a2Value"\t\ta3="a3Value"\na4="a4Value"\ra5="a5Value"',
 							{a1:'a1Value',a2:'a2Value',a3:'a3Value',a4:'a4Value',a5:'a5Value'}
 						],
@@ -152,27 +152,27 @@ Uize.module ({
 							'a1  =  "a1Value" a2\t\t=\t\t"a2Value" a3\n\n=\n\n"a3Value" a4\r\r=\r\r"a4Value"',
 							{a1:'a1Value',a2:'a2Value',a3:'a3Value',a4:'a4Value'}
 						],
-						['Test that attributes without values are supported and that their values are an empty string',
+						['An attribute can have no specified value, in which case the value is defaulted to an empty string',
 							'attrib1 attrib2 attrib3',
 							{attrib1:'',attrib2:'',attrib3:''}
 						],
-						['Test that single quotes are supported for quoting attribute valus',
+						['Single quotes can be used for quoting attribute valus',
 							'attrib1=\'attrib1Value\' attrib2=\'attrib2Value\' attrib3=\'attrib3Value\'',
 							{attrib1:'attrib1Value',attrib2:'attrib2Value',attrib3:'attrib3Value'}
 						],
-						['Test that attributes can have empty string values inside quotes',
+						['Attributes can have empty string values inside quotes',
 							'attrib1="" attrib2=\'\'',
 							{attrib1:'',attrib2:''}
 						],
-						['Test that whitespace inside attribute values is respected',
+						['Whitespace inside attribute values is respected',
 							'a1="  a1Value" a2="a2Value  " a3="  a3Value  " a4="a4 Value" a5="\t a5 \n Value \r"',
 							{a1:'  a1Value',a2:'a2Value  ',a3:'  a3Value  ',a4:'a4 Value',a5:'\t a5 \n Value \r'}
 						],
-						['Test that attribute values can be only whitespace',
+						['Attribute values can be only whitespace',
 							'a1="  " a2="\t\t" a3="\n\n" a4="\r\r"',
 							{a1:'  ',a2:'\t\t',a3:'\n\n',a4:'\r\r'}
 						],
-						['Test that, by default, attribute names and values are case-sensitive, and that case is respected',
+						['By default, attribute names and values are case-sensitive, and case is respected',
 							'attribute="attribute" Attribute="Attribute" ATTRIBUTE="ATTRIBUTE"',
 							{attribute:'attribute',Attribute:'Attribute',ATTRIBUTE:'ATTRIBUTE'}
 						],
@@ -188,11 +188,11 @@ Uize.module ({
 							'attribute="BIOFUEL" attribute="WIND" attribute="SOLAR"',
 							{attribute:'SOLAR'}
 						],
-						['Test that unique attributes can become duplicates as a result of name case changing',
+						['If unique attributes become duplicates as a result of name case changing, then the value of the last one wins',
 							['attribute="BIOFUEL" Attribute="WIND" ATTRIBUTE="SOLAR"',{nameCase:'lower'}],
 							{attribute:'SOLAR'}
 						],
-						['Test that entities in attribute values are decoded correctly',
+						['HTML entities in attribute values are decoded',
 							'quot="&quot;" amp="&amp;" apos="&apos;" lt="&lt;" gt="&gt;" lf="&#10;" cr="&#13;"',
 							{quot:'"',amp:'&',apos:'\'',lt:'<',gt:'>',lf:'\n',cr:'\r'}
 						]

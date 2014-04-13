@@ -36,7 +36,7 @@ Uize.module ({
 				Uize.Test.staticMethodsTest ([
 					['Uize.Str.Lines.forEach',[
 						{
-							title:'Test that there is one iteration for an empty string',
+							title:'There is one iteration for an empty string',
 							test:function () {
 								var _count = 0;
 								Uize.Str.Lines.forEach ('',function () {_count++});
@@ -44,7 +44,7 @@ Uize.module ({
 							}
 						},
 						{
-							title:'Test that there is only one iteration for a single line string',
+							title:'There is only one iteration for a single line string',
 							test:function () {
 								var _count = 0;
 								Uize.Str.Lines.forEach ('line 1',function () {_count++});
@@ -133,7 +133,7 @@ Uize.module ({
 							}
 						},
 						{
-							title:'Test that returning false in the line handler function can be used to terminate iteration',
+							title:'Returning false in the line handler function can be used to terminate iteration',
 							test:function () {
 								var _result = -1;
 								Uize.Str.Lines.forEach (
@@ -152,7 +152,7 @@ Uize.module ({
 						}
 					]],
 					['Uize.Str.Lines.getIndentRange',[
-						['Test that calling with no parameters returns 0 for both minValue and maxValue',
+						['Calling with no parameters returns 0 for both minValue and maxValue',
 							[],
 							{minValue:0,maxValue:0}
 						],
@@ -168,7 +168,7 @@ Uize.module ({
 							['\t\thello','\t'],
 							{minValue:2,maxValue:2}
 						],
-						['Test that default for indentChars parameter is a single tab',
+						['The default for indentChars parameter is a single tab',
 							'\t\thello',
 							{minValue:2,maxValue:2}
 						],
@@ -228,7 +228,7 @@ Uize.module ({
 							['\t\thello',''],
 							{minValue:0,maxValue:0}
 						],
-						['Test that blank lines are ignored when computing indent range - even blank lines with indents',
+						['Blank lines are ignored when computing indent range, even blank lines with indents',
 							[
 								'\tone indent\n' +
 								'\n' +          // blank line with no indents
@@ -242,23 +242,23 @@ Uize.module ({
 						]
 					]],
 					['Uize.Str.Lines.indent',[
-						['Test that true is the default for the indentFirstLine parameter',
+						['The value true is the default for the indentFirstLine parameter',
 							['line 1\nline 2',2,'\t'],
 							'\t\tline 1\n\t\tline 2'
 						],
-						['Test that a single tab is the default for the indentChars parameter',
+						['A single tab is the default for the indentChars parameter',
 							['line 1\nline 2',2],
 							'\t\tline 1\n\t\tline 2'
 						],
-						['Test that source string is not indented when indentAmount is not specified',
+						['The source string is not indented when indentAmount is not specified',
 							['line 1\nline 2'],
 							'line 1\nline 2'
 						],
-						['Test that source string is not indented when 0 is specified for indentAmount parameter',
+						['The source string is not indented when 0 is specified for indentAmount parameter',
 							['line 1\nline 2',0],
 							'line 1\nline 2'
 						],
-						['Test that source string is not indented when empty string is specified for indentChars parameter',
+						['The source string is not indented when empty string is specified for indentChars parameter',
 							['line 1\nline 2',10,''],
 							'line 1\nline 2'
 						],
@@ -266,7 +266,7 @@ Uize.module ({
 							['line 1\nline 2',2,'\t',false],
 							'line 1\n\t\tline 2'
 						],
-						['Test that indenting an already indented string works correctly',
+						['Indenting an already indented string results in additional indenting being applied to all lines',
 							['\tline 1\n\t\tline 2\n\tline 3',1],
 							'\t\tline 1\n\t\t\tline 2\n\t\tline 3'
 						],
@@ -278,15 +278,15 @@ Uize.module ({
 							['\tline 1\n\t\tline 2\n\tline 3',-2],
 							'line 1\nline 2\nline 3'
 						],
-						['Test that blank lines are not indented, while non-empty lines are',
+						['Blank lines are not indented, while non-empty lines are',
 							['line 1\n\nline 3',1],
 							'\tline 1\n\n\tline 3'
 						],
-						['Test that blank lines with indentation are unindented as intended',
+						['Blank lines with indentation are unindented',
 							['\tline 1\n\t\tline 2\n\tline 3\n\t\t',-2],
 							'line 1\nline 2\nline 3\n'
 						],
-						['Test that indenting supports all line separator types (LF, CR, and CRLF)',
+						['Indenting is applied to all lines, regardless of what line separators used (LF, CR, and CRLF)',
 							['line 1\rline 2\nline 3\r\nline 4\r\n\r\nline 6\r\rline 8\n\nline 10',1],
 							'\tline 1\r\tline 2\n\tline 3\r\n\tline 4\r\n\r\n\tline 6\r\r\tline 8\n\n\tline 10'
 						],
@@ -304,15 +304,15 @@ Uize.module ({
 							'',
 							''
 						],
-						['Test that a single line string with no indent has no effect',
+						['Normalizing a single line string with no indent has no effect',
 							'line with trailing spaces   ',
 							'line with trailing spaces   '
 						],
-						['Test that a single line string with an indent works correctly',
+						['Normalizing a single line string with an indent results in the indent being removed',
 							'\t\tline with indent and trailing spaces   ',
 							'line with indent and trailing spaces   '
 						],
-						['Test that a multi-line string that has indentation but that is already normalized has no effect',
+						['Normalizing a multi-line string that has indentation but that is already normalized has no effect',
 							'line 1\n' +
 							'\tline 2\n' +
 							'\t\tline 3\n' +
@@ -334,7 +334,7 @@ Uize.module ({
 							'\t\tline 3\n' +
 							'\tline 4'
 						],
-						['Test that indented blank lines are unindented by the same amount as non-empty lines',
+						['Indented blank lines are unindented by the same amount as non-empty lines',
 							'\t\t\tline 1\n' +
 							'\t\t\t\tline 2\n' +
 							'\t\t\t\t\tline 3\n' +
@@ -347,7 +347,7 @@ Uize.module ({
 							'\tline 4\n' +
 							'\t\t\t\t\n'
 						],
-						['Test that completely blank lines don\'t impact the amount of unindenting needed for normalizing',
+						['Completely blank lines don\'t impact the amount of unindenting needed for normalizing',
 							'\t\t\tline 1\n' +
 							'\t\t\t\tline 2\n' +
 							'\t\t\t\t\tline 3\n' +
@@ -406,7 +406,7 @@ Uize.module ({
 							'[3] line 3\r\n' +
 							'[4] line 4'
 						],
-						['Test that always returning false in the line modifier function removes all lines',
+						['Always returning false in the line modifier function removes all lines',
 							[
 								'line 1\n' +
 								'line 2\r' +
@@ -416,7 +416,7 @@ Uize.module ({
 							],
 							''
 						],
-						['Test that always returning true in the line modifier function retains all lines',
+						['Always returning true in the line modifier function retains all lines',
 							[
 								'line 1\n' +
 								'line 2\r' +
@@ -429,7 +429,7 @@ Uize.module ({
 							'line 3\r\n' +
 							'line 4'
 						],
-						['Test removing every other line, where the line modifier function returns a boolean',
+						['Removing every other line, where the line modifier function returns a boolean',
 							[
 								'line 1\n' +
 								'line 2\r' +
@@ -442,15 +442,15 @@ Uize.module ({
 						]
 					]],
 					['Uize.Str.Lines.removeBlanks',[
-						['Test that an empty string remains an empty string when removing blank lines',
+						['An empty string remains an empty string when removing blank lines',
 							'',
 							''
 						],
-						['Test that removing blank lines from a non-empty single line string has no effect',
+						['Removing blank lines from a non-empty single line string has no effect',
 							'line 1',
 							'line 1'
 						],
-						['Test that removing blank lines from a multi-line string without blank lines has no effect',
+						['Removing blank lines from a multi-line string without blank lines has no effect',
 							'line 1\n' +
 							'line 2\r' +
 							'line 3\r\n' +
@@ -478,7 +478,7 @@ Uize.module ({
 							'non-blank line 3\r\n' +
 							'non-blank line 4'
 						],
-						['Test that lines that are only whitespace are not removed when the value true is specified for the optional onlyCompletelyEmpty parameter',
+						['Lines that are only whitespace are not removed when the value true is specified for the optional onlyCompletelyEmpty parameter',
 							[
 								'\n' +
 								'\r' +
@@ -530,7 +530,7 @@ Uize.module ({
 							'\nline 1\rline 2\nline 3\r\nline 4',
 							['','line 1','line 2','line 3','line 4']
 						],
-						['Test that whitespace around line separators is preserved',
+						['Whitespace around line separators is preserved',
 							' line 1 \r\tline 2\t\nline 3 \t \r\n line 4 ',
 							[' line 1 ','\tline 2\t','line 3 \t ',' line 4 ']
 						],
@@ -548,7 +548,7 @@ Uize.module ({
 							'',
 							''
 						],
-						['Test that switching linebreaks for a single line string with no linebreak has no effect',
+						['Switching linebreaks for a single line string with no linebreak has no effect',
 							'line without linebreak',
 							'line without linebreak'
 						],
@@ -556,7 +556,7 @@ Uize.module ({
 							['line with linebreak\r','\n'],
 							'line with linebreak\n'
 						],
-						['Test that a single linefeed (LF) character is the default for the linebreakChars parameter',
+						['A single linefeed (LF) character is the default for the linebreakChars parameter',
 							'line with linebreak\r',
 							'line with linebreak\n'
 						],
@@ -585,11 +585,11 @@ Uize.module ({
 						]
 					]],
 					['Uize.Str.Lines.switchIndentType',[
-						['Test that switching indent type for an empty string has no effect',
+						['Switching indent type for an empty string has no effect',
 							['','\t','    '],
 							''
 						],
-						['Test that switching indent type for a non-empty string with no indenting has no effect',
+						['Switching indent type for a non-empty string with no indenting has no effect',
 							['line 1','\t','    '],
 							'line 1'
 						],
@@ -597,11 +597,11 @@ Uize.module ({
 							['\tline 1','\t','    '],
 							'    line 1'
 						],
-						['Test that a single tab character is the default for the newIndentChars parameter',
+						['A single tab character is the default for the newIndentChars parameter',
 							['    line 1','    '],
 							'\tline 1'
 						],
-						['Test that four spaces is the default for the oldIndentChars parameter',
+						['Four spaces is the default for the oldIndentChars parameter',
 							'    line 1',
 							'\tline 1'
 						],
@@ -628,7 +628,7 @@ Uize.module ({
 							'\tone level of indent\n' +
 							'no indent'
 						],
-						['Test that switching indent type doesn\'t affect linebreak type and supports mixed linebreaks',
+						['Switching indent type doesn\'t affect linebreak type and supports mixed linebreaks',
 							'no indent\r' +
 							'    one level of indent\n' +
 							'        two levels of indent\r\n' +
@@ -639,7 +639,7 @@ Uize.module ({
 							'\t\ttwo levels of indent\r\n' +
 							'\t\t\tfour levels of indent'
 						],
-						['Test that switching indent type doesn\'t affect trailing whitespace in lines',
+						['Switching indent type doesn\'t affect trailing whitespace in lines',
 							'no indent    \r' +
 							'    one level of indent\t\t\n' +
 							'        two levels of indent    \t    \r\n' +
@@ -650,7 +650,7 @@ Uize.module ({
 							'\t\ttwo levels of indent    \t    \r\n' +
 							'\t\t\tfour levels of indent '
 						],
-						['Test that indentation is removed by specifying an empty string for the newIndentChars parameter',
+						['Indentation can be removed by specifying an empty string for the newIndentChars parameter',
 							[
 								'line 1\r' +
 								'    line 2\n' +
@@ -667,19 +667,19 @@ Uize.module ({
 						]
 					]],
 					['Uize.Str.Lines.trim',[
-						['Test that a single blank line remains a blank string when trimmed',
+						['A single blank line remains a blank string when trimmed',
 							'',
 							''
 						],
-						['Test that a single non-blank line with no padding remains unchanged',
+						['A single non-blank line with no padding remains unchanged',
 							'line 1',
 							'line 1'
 						],
-						['Test that a single non-blank line with padding is trimmed appropriately',
+						['A single non-blank line with padding is trimmed and padding is removed',
 							' \tline 1 \t',
 							'line 1'
 						],
-						['Test that a multi-line string with some lines with padding is trimmed, respecting linebreaks',
+						['A multi-line string with some lines with padding is trimmed, respecting linebreaks',
 							'\n' +
 							'\r' +
 							'\r\n' +
@@ -702,19 +702,19 @@ Uize.module ({
 						]
 					]],
 					['Uize.Str.Lines.trimLeft',[
-						['Test that a single blank line remains a blank string when trimmed',
+						['A single blank line remains a blank string when trimmed',
 							'',
 							''
 						],
-						['Test that a single non-blank line with no padding remains unchanged',
+						['A single non-blank line with no padding remains unchanged',
 							'line 1',
 							'line 1'
 						],
-						['Test that a single non-blank line with padding is trimmed appropriately',
+						['A single non-blank line with padding is trimmed and padding is removed',
 							' \tline 1 \t',
 							'line 1 \t'
 						],
-						['Test that a multi-line string with some lines with padding is trimmed, respecting linebreaks',
+						['A multi-line string with some lines with padding is trimmed, respecting linebreaks',
 							'\n' +
 							'\r' +
 							'\r\n' +
@@ -737,19 +737,19 @@ Uize.module ({
 						]
 					]],
 					['Uize.Str.Lines.trimRight',[
-						['Test that a single blank line remains a blank string when trimmed',
+						['A single blank line remains a blank string when trimmed',
 							'',
 							''
 						],
-						['Test that a single non-blank line with no padding remains unchanged',
+						['A single non-blank line with no padding remains unchanged',
 							'line 1',
 							'line 1'
 						],
-						['Test that a single non-blank line with padding is trimmed appropriately',
+						['A single non-blank line with padding is trimmed and padding is removed',
 							' \tline 1 \t',
 							' \tline 1'
 						],
-						['Test that a multi-line string with some lines with padding is trimmed, respecting linebreaks',
+						['A multi-line string with some lines with padding is trimmed, respecting linebreaks',
 							'\n' +
 							'\r' +
 							'\r\n' +
@@ -772,27 +772,27 @@ Uize.module ({
 						]
 					]],
 					['Uize.Str.Lines.getLinebreakType',[
-						['Test that linebreak type for an empty string returns values of the defaultLinebreakChars parameter',
+						['Getting the linebreak type for an empty string returns the value of the defaultLinebreakChars parameter',
 							['','~!@#'],
 							'~!@#'
 						],
-						['Test that default for defaultLinebreakChars parameter is a linefeed (LF) character',
+						['The default for the defaultLinebreakChars parameter is a linefeed (LF) character',
 							'',
 							'\n'
 						],
-						['Test defaultLinebreakChars parameter value is not used when source string has a linebreak',
+						['The defaultLinebreakChars parameter value is not used when source string has a linebreak',
 							['line 1\n','~!@#'],
 							'\n'
 						],
-						['Test that a carriage return (CR) character is detected as a linebreak type',
+						['A carriage return (CR) character is detected as a linebreak type',
 							['line 1\r','~!@#'],
 							'\r'
 						],
-						['Test that a combination carriage return plus linefeed character (CRLF) is detected as a linebreak type',
+						['A combination carriage return plus linefeed character (CRLF) is detected as a linebreak type',
 							['line 1\r\n','~!@#'],
 							'\r\n'
 						],
-						['Test that the first linebreak detected determines the linebreak type',
+						['The first linebreak detected determines the linebreak type',
 							[
 								'line 1\r' +
 								'line 2\n' +
@@ -808,7 +808,7 @@ Uize.module ({
 							['',/^\d+:/],
 							''
 						],
-						['Test that lines matching a specified regular expression are removed as expected',
+						['All lines matching a specified regular expression are removed',
 							[
 								'line 1\n' +
 								'2: line 2\n' +
@@ -820,7 +820,7 @@ Uize.module ({
 							'line 1\n' +
 							'line 4'
 						],
-						['Test that lines matched by a specified matching function are removed as expected',
+						['All lines matched by a specified matching function are removed',
 							[
 								'line 1\n' +
 								'2: line 2\n' +
@@ -832,7 +832,7 @@ Uize.module ({
 							'line 1\n' +
 							'line 4'
 						],
-						['Test that a matching function that always returns false will have no effect on the source string',
+						['A matching function that always returns false will have no effect on the source string',
 							[
 								'line 1\n' +
 								'2: line 2\n' +
@@ -857,7 +857,7 @@ Uize.module ({
 							],
 							''
 						],
-						['Test that a matching regular expression that matches no lines will have no effect',
+						['A matching regular expression that matches no lines will have no effect',
 							[
 								'line 1\n' +
 								'2: line 2\n' +
@@ -882,7 +882,7 @@ Uize.module ({
 							],
 							''
 						],
-						['Test that equivalence to true in a value returned by a matching function is sufficient',
+						['It is sufficient for a matching function to return a truthy value, and any truthy value is equivalent to the boolean value true',
 							[
 								'undefined\n' +
 								'null\n' +
@@ -910,23 +910,11 @@ Uize.module ({
 						]
 					]],
 					['Uize.Str.Lines.retainMatching',[
-						['Test that lines matching a specified regular expression are retained as expected',
-							[
-								'line 1\n' +
-								'2: line 2\n' +
-								'3: line 3\n' +
-								'line 4'
-								,
-								/^\d+:/
-							],
-							'2: line 2\n' +
-							'3: line 3\n'
-						],
 						['Retaining matching lines from an empty string produces an empty string',
 							['',/^\d+:/],
 							''
 						],
-						['Test that lines matching a specified regular expression are retained as expected',
+						['All lines matching a specified regular expression are retained',
 							[
 								'line 1\n' +
 								'2: line 2\n' +
@@ -938,7 +926,7 @@ Uize.module ({
 							'2: line 2\n' +
 							'3: line 3\n'
 						],
-						['Test that lines matched by a specified matching function are retained as expected',
+						['All lines matched by a specified matching function are retained',
 							[
 								'line 1\n' +
 								'2: line 2\n' +
@@ -961,7 +949,7 @@ Uize.module ({
 							],
 							''
 						],
-						['Test that a matching function that always returns true will have no effect on the source string',
+						['A matching function that always returns true will have no effect on the source string',
 							[
 								'line 1\n' +
 								'2: line 2\n' +
@@ -986,7 +974,7 @@ Uize.module ({
 							],
 							''
 						],
-						['Test that a matching regular expression that matches all lines will have no effect',
+						['A matching regular expression that matches all lines will have no effect',
 							[
 								'line 1\n' +
 								'2: line 2\n' +
@@ -1000,7 +988,7 @@ Uize.module ({
 							'3: line 3\n' +
 							'line 4'
 						],
-						['Test that equivalence to true in a value returned by a matching function is sufficient',
+						['It is sufficient for a matching function to return a truthy value, and any truthy value is equivalent to the boolean value true',
 							[
 								'undefined\n' +
 								'null\n' +

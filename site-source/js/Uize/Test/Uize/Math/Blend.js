@@ -191,7 +191,7 @@ Uize.module ({
 								},
 
 						/*** test that quantization is supported correctly ***/
-							['Test that the quantization interval is relative to the first of the two values being blended',
+							['The quantization interval is relative to the first of the two values being blended',
 								[0,10,.5,3],
 								6
 							],
@@ -282,7 +282,7 @@ Uize.module ({
 								}
 							},
 							{
-								title:'Test that a negative value for quantization behaves in the same way as a positive value',
+								title:'A negative value for quantization behaves in the same way as a positive value',
 								test:function () {
 									var m = this;
 									function _case (_blendAmount,_expected) {
@@ -300,7 +300,7 @@ Uize.module ({
 								}
 							},
 							{
-								title:'Test that quantization is supported correctly when the values being blended are compound (hierarchical) objects, and that the quantization value is applied for blending values of all leaf nodes',
+								title:'When the values being blended are compound (hierarchical) objects, the quantization value is applied for blending values of all leaf nodes',
 								test:function () {
 									var
 										_valueA = [[0,{foo:5}],{bar:10,baz:[15]}],
@@ -315,7 +315,7 @@ Uize.module ({
 								}
 							},
 							{
-								title:'Test that a compound (hierarchical) quantization object can be specified to match the structure or the objects being blended and to specify different quantizations for different leaf nodes',
+								title:'A compound (hierarchical) quantization object can be specified to match the structure or the objects being blended and to specify different quantizations for different leaf nodes',
 								test:function () {
 									var
 										_valueA = [[0,{foo:5}],{bar:10,baz:[15]}],
@@ -346,11 +346,11 @@ Uize.module ({
 							},
 
 						/*** test that curve functions are supported correctly ***/
-							['Test that a curve function is supported correctly when the values being blended are numbers',
+							['A custom curve function is applied when the values being blended are numbers',
 								[0,10,.5,0,function (_value) {return _value * _value}],
 								2.5
 							],
-							['Test that a curve function is supported correctly when the values being blended are compound (hierarchical) objects, and that the quantization value is applied for blending values of all leaf nodes',
+							['A custom curve function is applied when the values being blended are compound (hierarchical) objects, and the quantization value is applied for blending values of all leaf nodes',
 								[
 									[[0,{foo:5}],{bar:10,baz:[15]}],
 									[[50,{foo:40}],{bar:30,baz:[20]}],
@@ -360,7 +360,7 @@ Uize.module ({
 								],
 								[[12.5,{foo:13.75}],{bar:15,baz:[16.25]}]
 							],
-							['Test that a compound (hierarchical) curve function object can be specified to match the structure or the objects being blended and to specify different curve functions for different leaf nodes',
+							['A compound (hierarchical) curve function object can be specified to match the structure or the objects being blended and to specify different curve functions for different leaf nodes',
 								[
 									[[0,{foo:5}],{bar:10,baz:[15]}],
 									[[50,{foo:40}],{bar:30,baz:[20]}],

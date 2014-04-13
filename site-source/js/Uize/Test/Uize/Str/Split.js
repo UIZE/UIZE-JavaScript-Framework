@@ -51,7 +51,7 @@ Uize.module ({
 								['FOO_+_BAR_+_FOREVER','_+_'],
 								['FOO','BAR','FOREVER']
 							],
-							['Test that splitting a non-empty string using a non-empty string for the splitter that isn\'t present in the string being split produces an array with a single element that is the string being split',
+							['Splitting a non-empty string using a non-empty string for the splitter that isn\'t present in the string being split produces an array with a single element that is the string being split',
 								['FOOBARFOREVER','_'],
 								['FOOBARFOREVER']
 							],
@@ -115,15 +115,15 @@ Uize.module ({
 								['FOOBAR','']
 							],
 							/*** test support for captures ***/
-								['Test that captures in a regular expression splitter are added to the result array',
+								['Captures in a regular expression splitter are added to the result array',
 									['FOO_-_BAR_-_FOREVER',/((_)(-)(_))/],
 									['FOO','_-_','_','-','_','BAR','_-_','_','-','_','FOREVER']
 								],
-								['Test that captures in a regular expression splitter are added to the result array (part two)',
+								['Captures in a regular expression splitter are added to the result array (part two)',
 									['foo',/(((((())))))/],
 									['f','','','','','','','o','','','','','','','o']
 								],
-								['Test that captures in a regular expression splitter are not added to the result array if the splitter match is past the end of the string',
+								['Captures in a regular expression splitter are not added to the result array if the splitter match is past the end of the string',
 									['f',/(((((())))))/],
 									['f']
 								],

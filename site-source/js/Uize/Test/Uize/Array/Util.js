@@ -36,7 +36,7 @@ Uize.module ({
 					['Uize.Array.Util.replaceContents',
 						[
 							{
-								title:'Test that this method returns a reference to the array whose elements are being replaced',
+								title:'A reference to the array whose elements are being replaced is returned',
 								test:function () {
 									var
 										_arrayA = [],
@@ -47,7 +47,7 @@ Uize.module ({
 								}
 							},
 							{
-								title:'Test that the array whose elements are being used as the replacement elements is not modified',
+								title:'The array whose elements are being used as the replacement elements is not modified',
 								test:function () {
 									var
 										_arrayA = [],
@@ -67,15 +67,15 @@ Uize.module ({
 									return this.expect ([1,2,3],_result) && this.expect ([1,2,3],_arrayA);
 								}
 							},
-							['Test that replacing the contents of an empty array A with the contents of an empty array B leaves array A empty',
+							['Replacing the contents of an empty array A with the contents of an empty array B leaves array A empty',
 								[[],[]],
 								[]
 							],
-							['Test that replacing the contents of an empty array A with the contents of a non-empty array B leaves array A with the elements of array B',
+							['Replacing the contents of an empty array A with the contents of a non-empty array B leaves array A with the elements of array B',
 								[[],[1,2,3]],
 								[1,2,3]
 							],
-							['Test that replacing the contents of a non-empty array A with the contents of a non-empty array B leaves array A with the elements of array B',
+							['Replacing the contents of a non-empty array A with the contents of a non-empty array B leaves array A with the elements of array B',
 								[[1,2,3],[4,5,6]],
 								[4,5,6]
 							],
@@ -98,7 +98,7 @@ Uize.module ({
 					['Uize.Array.Util.swapContents',
 						[
 							{
-								title:'Test that this method returns a reference to array A',
+								title:'A reference to array A is returned',
 								test:function () {
 									var
 										_arrayA = [1,2,3],
@@ -176,7 +176,7 @@ Uize.module ({
 							],
 
 							/*** test support for the optional depth parameter ***/
-								['Test that flattening a non-flat array to a depth of 0 leaves the array unflattened',
+								['Flattening a non-flat array to a depth of 0 leaves the array unflattened',
 									[[0,0,[1,1,[2,2,[3,3,[4,4,4,4],3,3],2,2],1,1],0,0],0],
 									[0,0,[1,1,[2,2,[3,3,[4,4,4,4],3,3],2,2],1,1],0,0]
 								],
@@ -208,17 +208,7 @@ Uize.module ({
 
 							/*** test support for the optional target paramter ***/
 								{
-									title:'Test that the optional target parameter is defaulted to false if no value is specified for it',
-									test:function () {
-										var
-											_sourceArray = [1,[2,[3,[4],5],6],7],
-											_result = Uize.Array.Util.flatten (_sourceArray)
-										;
-										return this.expect ([1,2,3,4,5,6,7],_result) && this.expectSameAs (_sourceArray,_result);
-									}
-								},
-								{
-									title:'Test that the optional target parameter is defaulted to false if no value is specified for it',
+									title:'The optional target parameter is defaulted to false if no value is specified for it',
 									test:function () {
 										var
 											_sourceArray = [1,[2,[3,[4],5],6],7],

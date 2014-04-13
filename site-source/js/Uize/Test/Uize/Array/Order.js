@@ -82,7 +82,7 @@ Uize.module ({
 							[[]],
 							[]
 						],
-						['Test that reordering an array with only one element from inside to out returns that same array',
+						['Reordering an array with only one element from inside to out returns that same array',
 							[[1]],
 							[1]
 						],
@@ -101,7 +101,7 @@ Uize.module ({
 							[[]],
 							[]
 						],
-						['Test that reordering an array with only one element from outside to in returns that same array',
+						['Reordering an array with only one element from outside to in returns that same array',
 							[[1]],
 							[1]
 						],
@@ -117,15 +117,15 @@ Uize.module ({
 					]],
 					['Uize.Array.Order.reorder',[
 						/*** test 'jumbled' reordering mode ***/
-							['Test that \'jumbled\' option with empty array returns empty array',[[],'jumbled'],[]],
-							['Test that \'jumbled\' option with one element array returns that same array',
+							['The \'jumbled\' option with an empty array produces an empty array',[[],'jumbled'],[]],
+							['The \'jumbled\' option with a one element array produces that same array',
 								[[1],'jumbled'],
 								[1]
 							],
 
 						/*** test 'reverse' reordering mode ***/
-							['Test that \'reverse\' option with empty array returns empty array',[[],'reverse'],[]],
-							['Test that \'reverse\' option with one element array returns that same array',
+							['The \'reverse\' option with an empty array produces an empty array',[[],'reverse'],[]],
+							['The \'reverse\' option with a one element array produces that same array',
 								[[1],'reverse'],
 								[1]
 							],
@@ -139,11 +139,11 @@ Uize.module ({
 							],
 
 						/*** test 'inside out' reordering mode ***/
-							['Test that \'inside out\' option with empty array returns empty array',
+							['The \'inside out\' option with an empty array produces an empty array',
 								[[],'inside out'],
 								[]
 							],
-							['Test that \'inside out\' option with one element array returns that same array',
+							['The \'inside out\' option with a one element array produces that same array',
 								[[1],'inside out'],
 								[1]
 							],
@@ -157,18 +157,18 @@ Uize.module ({
 							],
 
 						/*** test 'outside in' reordering mode ***/
-							['Test that \'outside in\' option with empty array returns empty array',
+							['The \'outside in\' option with an empty array produces an empty array',
 								[[],'outside in'],
 								[]
 							],
-							['Test that \'outside in\' option with one element array returns that same array',
+							['The \'outside in\' option with a one element array produces that same array',
 								[[1],'outside in'],
 								[1]
 							],
 
 						/*** test 'normal' reordering mode ***/
-							['Test that \'normal\' option with empty array returns empty array',[[],'normal'],[]],
-							['Test that \'normal\' option with one element array returns that same array',[[1],'normal'],[1]]
+							['The \'normal\' option with an empty array produces an empty array',[[],'normal'],[]],
+							['The \'normal\' option with a one element array produces that same array',[[1],'normal'],[1]]
 					]]
 				])
 			]

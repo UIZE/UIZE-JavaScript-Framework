@@ -92,7 +92,7 @@ Uize.module ({
 					}
 				},
 				{
-					title:'Test that getValue, valueOf, and toString instance methods all return the same result',
+					title:'The getValue, valueOf, and toString instance methods all return the same result',
 					test:function () {
 						var _stringBuilder = Uize.Str.Builder ('hello');
 						return (
@@ -103,7 +103,7 @@ Uize.module ({
 					}
 				},
 				{
-					title:'Test that coercion of instance to string works correctly',
+					title:'A string builder instance can be coerced to a string',
 					test:function () {
 						return this.expect ('hello',Uize.Str.Builder ('hello') + '');
 					}
@@ -145,7 +145,7 @@ Uize.module ({
 					}
 				},
 				{
-					title:'Test that appending a number value works correctly',
+					title:'A number type value can be appended',
 					test:function () {
 						var _stringBuilder = Uize.Str.Builder (123);
 						_stringBuilder.append (4567);
@@ -153,7 +153,7 @@ Uize.module ({
 					}
 				},
 				{
-					title:'Test that appending a boolean value works correctly',
+					title:'A boolean type value can be appended',
 					test:function () {
 						var _stringBuilder = Uize.Str.Builder (false);
 						_stringBuilder.append (true);
@@ -161,7 +161,7 @@ Uize.module ({
 					}
 				},
 				{
-					title:'Test that prepending a number value works correctly',
+					title:'A number type value can be prepended',
 					test:function () {
 						var _stringBuilder = Uize.Str.Builder (4567);
 						_stringBuilder.prepend (123);
@@ -169,7 +169,7 @@ Uize.module ({
 					}
 				},
 				{
-					title:'Test that prepending a boolean value works correctly',
+					title:'A boolean type value can be prepended',
 					test:function () {
 						var _stringBuilder = Uize.Str.Builder (true);
 						_stringBuilder.prepend (false);

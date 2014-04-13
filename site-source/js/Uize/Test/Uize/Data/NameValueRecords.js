@@ -177,11 +177,11 @@ Uize.module ({
 								[],
 								{}
 							],
-							['Test that, if multiple name/value records specify the same name, then the last record will take precedence',
+							['If multiple name/value records specify the same name, then the last record will take precedence',
 								[[{KEY:'foo',VALUE:'bar'},{KEY:'foo',VALUE:'Bar'},{KEY:'foo',VALUE:'BAR'}],'KEY','VALUE'],
 								{foo:'BAR'}
 							],
-							['Test that all name/value records that specify null or undefined for the name, or that do not specify a name, are ignored and are omitted from the returned hash',
+							['All name/value records that specify null or undefined for the name, or that do not specify a name, are ignored and are omitted from the returned hash',
 								[
 									[{KEY:'foo',VALUE:'bar'},{KEY:null,VALUE:'Bar'},{KEY:undefined,VALUE:'BAR'},{VALUE:'BAR'}],
 									'KEY',

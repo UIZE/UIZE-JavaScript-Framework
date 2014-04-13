@@ -34,89 +34,89 @@ Uize.module ({
 				Uize.Test.requiredModulesTest ('Uize.Str.Has'),
 				Uize.Test.staticMethodsTest ([
 					['Uize.Str.Has.has',[
-						['Test that an empty string contains an empty string',
+						['An empty string does contain an empty string',
 							['',''],
 							true
 						],
-						['Test that a non-empty string contains an empty string',
+						['A non-empty string does contain an empty string',
 							['prefixMiddleSuffix',''],
 							true
 						],
-						['Test that a string can\'t contain a string of which it is only a prefix',
+						['A string does not contain a string of which it is only a prefix',
 							['prefix','prefixMiddleSuffix'],
 							false
 						],
-						['Test that a string can\'t contain a string of which it is only a middle portion',
+						['A string does not contain a string of which it is only a middle portion',
 							['Middle','prefixMiddleSuffix'],
 							false
 						],
-						['Test that a string can\'t contain a string of which it is only a suffix',
+						['A string does not contain a string of which it is only a suffix',
 							['Suffix','prefixMiddleSuffix'],
 							false
 						],
-						['Test that a string does contain a string that is its prefix',
+						['A string does contain a string that is its prefix',
 							['prefixMiddleSuffix','prefix'],
 							true
 						],
-						['Test that a string does contain a string that is a middle portion of it',
+						['A string does contain a string that is a middle portion of it',
 							['prefixMiddleSuffix','Middle'],
 							true
 						],
-						['Test that a string does contain a string that is its suffix',
+						['A string does contain a string that is its suffix',
 							['prefixMiddleSuffix','Suffix'],
 							true
 						]
 					]],
 					['Uize.Str.Has.hasPrefix',[
-						['Test that an empty string starts with an empty string',
+						['An empty string starts with an empty string',
 							['',''],
 							true
 						],
-						['Test that a non-empty string starts with an empty string',
+						['A non-empty string starts with an empty string',
 							['prefixSuffix',''],
 							true
 						],
-						['Test that a suffix of source string doesn\'t test as a prefix',
+						['A suffix of the source string doesn\'t test as a prefix',
 							['prefixSuffix','Suffix'],
 							false
 						],
-						['Test that prefix of larger string doesn\'t start with that larger string',
+						['The prefix of a larger string does not start with that larger string',
 							['prefix','prefixSuffix'],
 							false
 						],
-						['Test that suffix of larger string doesn\'t start with that larger string',
+						['The suffix of a larger string does not start with that larger string',
 							['Suffix','prefixSuffix'],
 							false
 						],
-						['Test that source string starts with itself',
+						['A source string starts with itself',
 							['prefixSuffix','prefixSuffix'],
 							true
 						],
-						['Test that spaces in the middle of test string are significant',
+						['Spaces in the middle of test string are significant',
 							['prefixSuffix','prefix Suffix'],
 							false
 						],
-						['Test that spaces at the end of test string are significant',
+						['Spaces at the end of test string are significant',
 							['prefixSuffix','prefixSuffix   '],
 							false
 						],
-						['Test that spaces at beginning of test string are significant',
+						['Spaces at beginning of test string are significant',
 							['prefixSuffix','   prefixSuffix'],
 							false
 						],
-						['Test that string doesn\'t end with uppercase version of itself',
+						['A mixed case string does not end with an uppercased version of itself',
 							['prefixSuffix','PREFIXSUFFIX'],
 							false
 						],
-						['Test that string does start with a leading portion of itself',
+						['A string does start with a leading portion of itself',
 							['prefixSuffix','prefix'],
 							true
 						],
-						['Test that one character prefix works correctly',
+						['A string does start with a single character prefix, if that character is the first character of the string',
 							['prefixSuffix','p'],
 							true
 						],
-						['Test that one character non-prefix works correctly',
+						['A string does not start with a single character prefix, if that character is not the first character of the string',
 							['prefixSuffix','-'],
 							false
 						],
@@ -134,47 +134,47 @@ Uize.module ({
 						]
 					]],
 					['Uize.Str.Has.hasSuffix',[
-						['Test that an empty string ends with an empty string',
+						['An empty string ends with an empty string',
 							['',''],
 							true
 						],
-						['Test that a non-empty string ends with an empty string',
+						['A non-empty string ends with an empty string',
 							['prefixSuffix',''],
 							true
 						],
-						['Test that a prefix of source string doesn\'t test as a suffix',
+						['A prefix of a source string does not test as a suffix',
 							['prefixSuffix','prefix'],
 							false
 						],
-						['Test that prefix of larger string doesn\'t end with that larger string',
+						['The prefix of a larger string does not end with that larger string',
 							['prefix','prefixSuffix'],
 							false
 						],
-						['Test that suffix of larger string doesn\'t end with that larger string',
+						['The suffix of a larger string does not end with that larger string',
 							['Suffix','prefixSuffix'],
 							false
 						],
-						['Test that source string ends with itself',
+						['A source string ends with itself',
 							['prefixSuffix','prefixSuffix'],
 							true
 						],
-						['Test that spaces in the middle of test string are significant',
+						['Spaces in the middle of test string are significant',
 							['prefixSuffix','prefix Suffix'],
 							false
 						],
-						['Test that spaces at the end of test string are significant',
+						['Spaces at the end of test string are significant',
 							['prefixSuffix','prefixSuffix   '],
 							false
 						],
-						['Test that spaces at beginning of test string are significant',
+						['Spaces at beginning of test string are significant',
 							['prefixSuffix','   prefixSuffix'],
 							false
 						],
-						['Test that string doesn\'t end with uppercase version of itself',
+						['A mixed case string does not end with an uppercased version of itself',
 							['prefixSuffix','PREFIXSUFFIX'],
 							false
 						],
-						['Test that string does end with a tail portion of itself',
+						['A string does end with a tail portion of itself',
 							['prefixSuffix','Suffix'],
 							true
 						],
