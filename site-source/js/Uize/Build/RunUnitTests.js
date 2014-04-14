@@ -52,18 +52,18 @@ Uize.module ({
 				var
 					_libraryModuleSuffixRegExp = /\.library$/i,
 					_testIgnoreNamespaces = _params.testIgnoreNamespaces,
-					_modulesToIgnoreRegExp = _Uize.isArray(_testIgnoreNamespaces) && !_Uize.isEmpty(_testIgnoreNamespaces)
+					_modulesToIgnoreRegExp = _Uize.isArray (_testIgnoreNamespaces) && !_Uize.isEmpty (_testIgnoreNamespaces)
 						? new RegExp (
-							'^('
-								+ _Uize.map (_testIgnoreNamespaces, _Uize.escapeRegExpLiteral).join ('|')
-								+ ')(\\..+|$)'
+							'^(' +
+							_Uize.map (_testIgnoreNamespaces,_Uize.escapeRegExpLiteral).join ('|') +
+							')(\\..+|$)'
 						)
 						: null,
 					_modulesExcludingLibraryModules = _Uize.Data.Matches.values (
 						_Uize_Build.Util.getJsModules (_params),
 						function (_moduleName) {
 							return !_libraryModuleSuffixRegExp.test (_moduleName) // ignore .library modules
-								&& (!_modulesToIgnoreRegExp || !_modulesToIgnoreRegExp.test(_moduleName))
+								&& (!_modulesToIgnoreRegExp || !_modulesToIgnoreRegExp.test (_moduleName))
 							;
 						}
 					),
