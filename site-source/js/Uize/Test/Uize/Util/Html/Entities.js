@@ -34,7 +34,7 @@ Uize.module ({
 				Uize.Test.requiredModulesTest ('Uize.Util.Html.Entities'),
 				Uize.Test.staticPropertyTest ('Uize.Util.Html.Entities.entityNameToCharCodeLookup','object'),
 				{
-					title:'Test that the Uize.Util.Html.Entities.entityNameToCharCodeLookup static property has properties with entity names as keys and entity character codes as values',
+					title:'The Uize.Util.Html.Entities.entityNameToCharCodeLookup static property has properties with entity names as keys and entity character codes as values',
 					test:function () {
 						var _entityNameToCharCodeLookup = Uize.Util.Html.Entities.entityNameToCharCodeLookup;
 						return (
@@ -45,7 +45,7 @@ Uize.module ({
 				},
 				Uize.Test.staticPropertyTest ('Uize.Util.Html.Entities.charCodeToEntityNameLookup','object'),
 				{
-					title:'Test that the Uize.Util.Html.Entities.charCodeToEntityNameLookup static property has properties with entity character codes as keys and entity names as values',
+					title:'The Uize.Util.Html.Entities.charCodeToEntityNameLookup static property has properties with entity character codes as keys and entity names as values',
 					test:function () {
 						var _charCodeToEntityNameLookup = Uize.Util.Html.Entities.charCodeToEntityNameLookup;
 						return (

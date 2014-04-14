@@ -46,7 +46,7 @@ Uize.module ({
 				title:_title,
 				test:[
 					{
-						title:'Test that firing an event for which no handler is wired has no ill effect',
+						title:'Firing an event for which no handler is wired has no ill effect',
 						test:function () {
 							_getEventSource ().fire ('testEvent');
 							return true;
@@ -66,7 +66,7 @@ Uize.module ({
 					},
 					{
 						title:
-							'Test that an event handler function receives a single object parameter, and that this event object contains a name property whose value matches the name of the fired event',
+							'An event handler function receives a single object parameter, and this event object contains a name property whose value matches the name of the fired event',
 						test:function () {
 							var
 								_success = false,
@@ -88,7 +88,7 @@ Uize.module ({
 					},
 					{
 						title:
-							'Test that the event object provided to an event handler has a source property, whose value is a reference to the object on which the event was fired',
+							'The event object provided to an event handler has a source property, whose value is a reference to the object on which the event was fired',
 						test:function () {
 							var
 								_success = false,
@@ -101,7 +101,7 @@ Uize.module ({
 					},
 					{
 						title:
-							'Test that firing an event for which two handlers are wired results in the handlers being exucuted in the order wired',
+							'Firing an event for which two handlers are wired results in the handlers being exucuted in the order wired',
 						test:function () {
 							var
 								_coverageAndOrder = [],
@@ -115,7 +115,7 @@ Uize.module ({
 					},
 					{
 						title:
-							'Test that firing an event for which more than two handlers are wired results in the handlers being exucuted in the order wired',
+							'Firing an event for which more than two handlers are wired results in the handlers being exucuted in the order wired',
 						test:function () {
 							var
 								_coverageAndOrder = [],
@@ -143,7 +143,7 @@ Uize.module ({
 					},
 					{
 						title:
-							'Test that extra event object properties that are specified when firing an event are accessible on the event object in the handler',
+							'Extra event object properties that are specified when firing an event are accessible on the event object in the handler',
 						test:function () {
 							var
 								_success = false,
@@ -163,7 +163,7 @@ Uize.module ({
 					},
 					{
 						title:
-							'Test that the same event object is passed to all handlers for an event and is also returned as the result of the fire method',
+							'The same event object is passed to all handlers for an event and is also returned as the result of the fire method',
 						test:function () {
 							var
 								_eventSource = _getEventSource (),
@@ -193,7 +193,7 @@ Uize.module ({
 						}
 					},
 					{
-						title:'Test that unwiring an event handler results in that handler no longer being executed',
+						title:'Unwiring an event handler results in that handler no longer being executed',
 						test:function () {
 							var
 								_success = false,
@@ -246,7 +246,7 @@ Uize.module ({
 					},
 					{
 						title:
-							'Test that when the second of three event handlers is unwired, the execution order of the remaining two handlers is preserved',
+							'When the second of three event handlers is unwired, the execution order of the remaining two handlers is preserved',
 						test:function () {
 							var
 								_coverageAndOrder = [],
@@ -311,7 +311,7 @@ Uize.module ({
 					},
 					{
 						title:
-							'Test that not specifying a handler when unwiring an event results in all handlers for that event being unwired',
+							'Not specifying a handler when unwiring an event results in all handlers for that event being unwired',
 						test:function () {
 							var
 								_handler1Success = false,
@@ -331,7 +331,7 @@ Uize.module ({
 					},
 					{
 						title:
-							'Test that unwiring a handler for the special wildcard event results in just that handler being unwired, rather than all handlers for the wildcard event or all handlers for all events',
+							'Unwiring a handler for the special wildcard event results in just that handler being unwired, rather than all handlers for the wildcard event or all handlers for all events',
 						test:function () {
 							var
 								_coverageAndOrder = [],
@@ -350,11 +350,11 @@ Uize.module ({
 					},
 					_isInstance
 						? {
-							title:'Test that event bubbling works correctly for instances',
+							title:'Instance events can be bubbled up the parent chain',
 							test:[
 								{
 									title:
-										'Test that setting the bubble event property to true when firing an event on an instance with no parent is not fatal and results in a handler wired for that event being executed',
+										'Setting the bubble event property to true when firing an event on an instance with no parent is not fatal and results in a handler wired for that event being executed',
 									test:function () {
 										var
 											_eventSource = _getEventSource (),
@@ -367,7 +367,7 @@ Uize.module ({
 								},
 								{
 									title:
-										'Test that setting the bubble event property to true when firing an event on an instance with a parent causes that event to fire first on the instance and then on its parent',
+										'Setting the bubble event property to true when firing an event on an instance with a parent causes that event to fire first on the instance and then on its parent',
 									test:function () {
 										var
 											_coverageAndOrder = [],
@@ -388,8 +388,7 @@ Uize.module ({
 									}
 								},
 								{
-									title:
-										'Test that a bubbling event is fired on all instances up the parent chain',
+									title:'A bubbling event is fired on all instances up the parent chain',
 									test:function () {
 										var
 											_coverageAndOrder = [],
@@ -422,7 +421,7 @@ Uize.module ({
 								},
 								{
 									title:
-										'Test that the event object provided to all handlers of a bubbling event up the parent chain is the same event object',
+										'The event object provided to all handlers of a bubbling event up the parent chain is the same event object for all handlers',
 									test:function () {
 										var
 											_eventSource = _getEventSource (),
@@ -471,7 +470,7 @@ Uize.module ({
 								},
 								{
 									title:
-										'Test that a bubbling event can be canceled by a handler of the bubbled event, so that it will not be fired on a higher parent',
+										'A bubbling event can be canceled by a handler of the bubbled event, so that it will not be fired on a higher parent',
 									test:function () {
 										var
 											_coverageAndOrder = [],
@@ -502,7 +501,7 @@ Uize.module ({
 								},
 								{
 									title:
-										'Test that the event object for a bubbling event always has the instance on which the event was originally fired as the value for the source property',
+										'The event object for a bubbling event always has the instance on which the event was originally fired as the value for the source property',
 									test:function () {
 										var
 											_eventSource = _getEventSource (),
@@ -536,11 +535,11 @@ Uize.module ({
 								}
 							]
 						} : {
-							title:'Test that event bubbling is ignored for classes',
+							title:'Event bubbling is ignored for classes',
 							test:[
 								{
 									title:
-										'Test that setting the bubble event property to true when firing an event on a class with no parent (as it should be) is not fatal and results in a handler wired for that event being executed',
+										'Setting the bubble event property to true when firing an event on a class with no parent (as it should be) is not fatal and results in a handler wired for that event being executed',
 									test:function () {
 										var
 											_eventSource = _getEventSource (),
@@ -553,7 +552,7 @@ Uize.module ({
 								},
 								{
 									title:
-										'Test that setting the bubble event property to true when firing an event on a class with a parent (which is not exactly valid) is not fatal and results in a handler wired for that event being executed',
+										'Setting the bubble event property to true when firing an event on a class with a parent (which is not exactly valid) is not fatal and results in a handler wired for that event being executed',
 									test:function () {
 										var
 											_coverageAndOrder = [],
@@ -593,7 +592,7 @@ Uize.module ({
 				title:'Test that the once method works correctly when there is ' + (_notPrefix ? 'a' : 'no') + ' "!" prefix',
 				test:[
 					{
-						title:'Test that the handler is executed immediately if the property is already ' + _mustExecuteStateName,
+						title:'The handler is executed immediately if the property is already ' + _mustExecuteStateName,
 						test:function () {
 							var _Class = Uize.Class.subclass ();
 							_Class.stateProperties ({_myProperty:{name:'myProperty',value:_mustExecuteValue}});
@@ -606,7 +605,7 @@ Uize.module ({
 						}
 					},
 					{
-						title:'Test that the handler is not executed immediately if the property is not yet ' + _mustExecuteStateName,
+						title:'The handler is not executed immediately if the property is not yet ' + _mustExecuteStateName,
 						test:function () {
 							var _Class = Uize.Class.subclass ();
 							_Class.stateProperties ({_myProperty:{name:'myProperty',value:_mustNotExecuteValue}});
@@ -619,7 +618,7 @@ Uize.module ({
 						}
 					},
 					{
-						title:'Test that the handler is executed later once the property becomes ' + _mustExecuteStateName + ', if it wasn\'t already ' + _mustExecuteStateName,
+						title:'The handler is executed later once the property becomes ' + _mustExecuteStateName + ', if it wasn\'t already ' + _mustExecuteStateName,
 						test:function () {
 							var _Class = Uize.Class.subclass ();
 							_Class.stateProperties ({_myProperty:{name:'myProperty',value:_mustNotExecuteValue}});
@@ -633,7 +632,7 @@ Uize.module ({
 						}
 					},
 					{
-						title:'Test that the handler is executed only the first time that the property becomes ' + _mustExecuteStateName,
+						title:'The handler is executed only the first time that the property becomes ' + _mustExecuteStateName,
 						test:function () {
 							var _Class = Uize.Class.subclass ();
 							_Class.stateProperties ({_myProperty:{name:'myProperty',value:_mustNotExecuteValue}});
@@ -649,7 +648,7 @@ Uize.module ({
 						}
 					},
 					{
-						title:'Test that the method returns a wirings object that can be used to unwire the handler before the property becomes ' + _mustExecuteStateName,
+						title:'The method returns a wirings object that can be used to unwire the handler before the property becomes ' + _mustExecuteStateName,
 						test:function () {
 							var _Class = Uize.Class.subclass ();
 							_Class.stateProperties ({_myProperty:{name:'myProperty',value:_mustNotExecuteValue}});
@@ -664,7 +663,7 @@ Uize.module ({
 						}
 					},
 					{
-						title:'Test that the method returns an empty wirings object if the handler is executed immediately because the property is already ' + _mustExecuteStateName,
+						title:'The method returns an empty wirings object if the handler is executed immediately because the property is already ' + _mustExecuteStateName,
 						test:function () {
 							var _Class = Uize.Class.subclass ();
 							_Class.stateProperties ({_myProperty:{name:'myProperty',value:_mustExecuteValue}});
@@ -676,7 +675,7 @@ Uize.module ({
 						}
 					},
 					{
-						title:'Test that a once handler can safely be registered for a property that has not yet been registered',
+						title:'A once handler can safely be registered for a property that has not yet been registered',
 						test:function () {
 							var
 								_Class = Uize.Class.subclass (),
@@ -689,7 +688,7 @@ Uize.module ({
 						}
 					},
 					{
-						title:'Test that the handler is passed the value of the property as its single argument, both when executed immediately and when executed later',
+						title:'The handler is passed the value of the property as its single argument, both when executed immediately and when executed later',
 						test:function () {
 							var _Class = Uize.Class.subclass ();
 							_Class.stateProperties ({
@@ -713,7 +712,7 @@ Uize.module ({
 						}
 					},
 					{
-						title:'Test that the same once handler can be registered repeatedly for the same property',
+						title:'The same once handler can be registered repeatedly for the same property',
 						test:function () {
 							var _Class = Uize.Class.subclass ();
 							_Class.stateProperties ({_myProperty:{name:'myProperty',value:_mustExecuteValue}});
@@ -738,7 +737,7 @@ Uize.module ({
 						}
 					},
 					{
-						title:'Test that multiple once handlers can be registered for the same property',
+						title:'Multiple once handlers can be registered for the same property',
 						test:function () {
 							var _Class = Uize.Class.subclass ();
 							_Class.stateProperties ({_myProperty:{name:'myProperty',value:_mustNotExecuteValue}});
@@ -760,7 +759,7 @@ Uize.module ({
 						}
 					},
 					{
-						title:'Test that a once handler is executed for all types of ' + _mustExecuteStateName + ' values and for no ' + _mustNotExecuteStateName + ' values',
+						title:'A once handler is executed for all types of ' + _mustExecuteStateName + ' values and for no ' + _mustNotExecuteStateName + ' values',
 						test:function () {
 							var
 								_Class = Uize.Class.subclass (),
@@ -802,7 +801,7 @@ Uize.module ({
 				test:[
 					{
 						title:
-							'Test that the ' + _method + ' method always sets the value of the specified state property to ' + _isMetTest + ', regardless of the property\'s current value',
+							'The ' + _method + ' method always sets the value of the specified state property to ' + _isMetTest + ', regardless of the property\'s current value',
 						test:function () {
 							var _Class = Uize.Class.subclass ();
 							_Class.stateProperties ({_myProperty:'myProperty'});
@@ -844,7 +843,7 @@ Uize.module ({
 				test:[
 					{
 						title:
-							'Test that values can be set for multiple properties by calling the set method with a single argument, which is an object containing an arbitrary number of property name to property value mappings',
+							'Values can be set for multiple properties by calling the set method with a single argument, which is an object containing an arbitrary number of property name to property value mappings',
 						test:function () {
 							var _Subclass = Uize.Class.subclass ();
 							_Subclass.stateProperties ({
@@ -867,7 +866,7 @@ Uize.module ({
 					},
 					{
 						title:
-							'Test that a value can be set for a single property by calling the set method with two arguments, where the first argument is the property\'s name and the second is the property\'s value',
+							'A value can be set for a single property by calling the set method with two arguments, where the first argument is the property\'s name and the second is the property\'s value',
 						test:function () {
 							var _Subclass = Uize.Class.subclass ();
 							_Subclass.stateProperties ({property1:{}});
@@ -878,7 +877,7 @@ Uize.module ({
 					},
 					{
 						title:
-							'Test that values can be set for multiple properties by calling the set method with more than two arguments, where the arguments are property name-value pairs',
+							'Values can be set for multiple properties by calling the set method with more than two arguments, where the arguments are property name-value pairs',
 						test:function () {
 							var _Subclass = Uize.Class.subclass ();
 							_Subclass.stateProperties ({
@@ -901,7 +900,7 @@ Uize.module ({
 					},
 					{
 						title:
-							'Test that the same value can be set for multiple properties by specifying the names of the properties in an array for the first argument and the value that all the properties should be set to as the second argument',
+							'The same value can be set for multiple properties by specifying the names of the properties in an array for the first argument and the value that all the properties should be set to as the second argument',
 						test:function () {
 							var _Subclass = Uize.Class.subclass ();
 							_Subclass.stateProperties ({
@@ -920,7 +919,7 @@ Uize.module ({
 					},
 					{
 						title:
-							'Test that, when a private name for a state property is different from its publice name, the set method sets a value for a property using the private name of the state property and not its public name',
+							'When a private name for a state property is different from its publice name, the set method sets a value for a property using the private name of the state property and not its public name',
 						test:function () {
 							var _Subclass = Uize.Class.subclass ();
 							_Subclass.stateProperties ({_property1:'property1'});
@@ -934,7 +933,7 @@ Uize.module ({
 					},
 					{
 						title:
-							'Test that, when a private name for a state property is different from its publice name, a value can be set for the property by specifying its private name when calling the set method',
+							'When a private name for a state property is different from its publice name, a value can be set for the property by specifying its private name when calling the set method',
 						test:function () {
 							var _Subclass = Uize.Class.subclass ();
 							_Subclass.stateProperties ({_property1:'property1'});
@@ -953,7 +952,7 @@ Uize.module ({
 				test:[
 					{
 						title:
-							'Test that the value of a single state property can be obtained by calling the get method with a single string argument, specifying the name of the property',
+							'The value of a single state property can be obtained by calling the get method with a single string argument, specifying the name of the property',
 						test:function () {
 							var _Subclass = Uize.Class.subclass ();
 							_Subclass.stateProperties ({
@@ -966,7 +965,7 @@ Uize.module ({
 					},
 					{
 						title:
-							'Test that values can be obtained for multiple properties by calling the get method with a single argument, which is a list of property names',
+							'Values can be obtained for multiple properties by calling the get method with a single argument, which is a list of property names',
 						test:function () {
 							var _Subclass = Uize.Class.subclass ();
 							_Subclass.stateProperties ({
@@ -987,7 +986,7 @@ Uize.module ({
 					},
 					{
 						title:
-							'Test that values can be obtained for multiple properties by calling the get method with a single argument, which is an object whose properties are the properties of the instance whose values should be obtained',
+							'Values can be obtained for multiple properties by calling the get method with a single argument, which is an object whose properties are the properties of the instance whose values should be obtained',
 						test:function () {
 							var _Subclass = Uize.Class.subclass ();
 							_Subclass.stateProperties ({
@@ -1008,7 +1007,7 @@ Uize.module ({
 					},
 					{
 						title:
-							'Test that values can be obtained for all properties by calling the get method with no arguments',
+							'Values can be obtained for all properties by calling the get method with no arguments',
 						test:function () {
 							var _Subclass = Uize.Class.subclass ();
 							_Subclass.stateProperties ({
@@ -1029,7 +1028,7 @@ Uize.module ({
 					},
 					{
 						title:
-							'Test that, when a private name for a state property is different from its publice name, the value can be obtained for the property by specifying its private name when calling the get method',
+							'When a private name for a state property is different from its publice name, the value can be obtained for the property by specifying its private name when calling the get method',
 						test:function () {
 							var
 								_Subclass = Uize.Class.subclass (),
@@ -1044,7 +1043,7 @@ Uize.module ({
 					},
 					{
 						title:
-							'Test that, when a private name for a state property is different from its publice name and its value is set using its private name, the value can be obtained for the property by specifying its public name when calling the get method',
+							'When a private name for a state property is different from its publice name and its value is set using its private name, the value can be obtained for the property by specifying its public name when calling the get method',
 						test:function () {
 							var _Subclass = Uize.Class.subclass ();
 							_Subclass.stateProperties ({_property1:'property1'});
@@ -1085,7 +1084,7 @@ Uize.module ({
 					['Uize.Class.valueOf',[
 						{
 							title:
-								'Test that the valueOf method of a class returns the value of the special value state property for the class (ie. the initial value for the value state property)',
+								'The valueOf method of a class returns the value of the special value state property for the class (ie. the initial value for the value state property)',
 							test:function () {
 								var _Subclass = Uize.Class.subclass ();
 								_Subclass.stateProperties ({
@@ -1099,7 +1098,7 @@ Uize.module ({
 						},
 						{
 							title:
-								'Test that the valueOf method of an instance returns the value of the special value state property for the instance',
+								'The valueOf method of an instance returns the value of the special value state property for the instance',
 							test:function () {
 								var _Subclass = Uize.Class.subclass ();
 								_Subclass.stateProperties ({
@@ -1137,7 +1136,7 @@ Uize.module ({
 							}
 						},
 						{
-							title:'Test that, when no arguments are passed to the Uize.Class.doMy method, no arguments are passed to the instance method when it is called',
+							title:'When no arguments are passed to the Uize.Class.doMy method, no arguments are passed to the instance method when it is called',
 							test:function () {
 								var
 									_calledWithNoArguments,
@@ -1153,7 +1152,7 @@ Uize.module ({
 							}
 						},
 						{
-							title:'Test that, when arguments are passed to the Uize.Class.doMy method, those same arguments are passed to the instance method when it is called',
+							title:'When arguments are passed to the Uize.Class.doMy method, those same arguments are passed to the instance method when it is called',
 							test:function () {
 								var
 									_expectedArgumentsCalledWith = ['foo',3,false,'bar',[4,5,6]],
@@ -1170,7 +1169,7 @@ Uize.module ({
 							}
 						},
 						{
-							title:'Test that the result returned by the instance method is returned by the Uize.Class.doMy method',
+							title:'The result returned by the instance method is returned by the Uize.Class.doMy method',
 							test:function () {
 								var
 									_expectedReturnValue = 'foo',
@@ -1190,14 +1189,14 @@ Uize.module ({
 					]],
 					['Uize.Class.singleton',[
 						{
-							title:'Test that a singleton is an instance of the class on which the static method is called',
+							title:'A singleton is an instance of the class on which the static method is called',
 							test:function () {
 								var _Class = Uize.Class.subclass ();
 								return this.expectInstanceOf (_Class,_Class.singleton ());
 							}
 						},
 						{
-							title:'Test that all attempts to create a singleton in the default scope produce the same instance',
+							title:'All attempts to create a singleton in the default scope produce the same instance',
 							test:function () {
 								var
 									_Class = Uize.Class.subclass (),
@@ -1212,7 +1211,7 @@ Uize.module ({
 							}
 						},
 						{
-							title:'Test that a singleton created for a class is not inherited by a subclass of that class',
+							title:'A singleton created for a class is not inherited by a subclass of that class',
 							test:function () {
 								var
 									_Class = Uize.Class.subclass (),
@@ -1222,7 +1221,7 @@ Uize.module ({
 							}
 						},
 						{
-							title:'Test that a singleton can be created in a custom scope and that such a singleton will be a different one from that created in the default scope',
+							title:'A singleton can be created in a custom scope and that such a singleton will be a different one from that created in the default scope',
 							test:function () {
 								var
 									_Class = Uize.Class.subclass (),
@@ -1235,7 +1234,7 @@ Uize.module ({
 							}
 						},
 						{
-							title:'Test that all attempts to create a singleton in a custom scope produce the same instance',
+							title:'All attempts to create a singleton in a custom scope produce the same instance',
 							test:function () {
 								var
 									_Class = Uize.Class.subclass (),
@@ -1250,7 +1249,7 @@ Uize.module ({
 							}
 						},
 						{
-							title:'Test that singletons created for different scopes are different instances',
+							title:'Singletons created for different scopes are different instances',
 							test:function () {
 								var
 									_Class = Uize.Class.subclass (),
@@ -1266,21 +1265,21 @@ Uize.module ({
 							}
 						},
 						{
-							title:'Test that specifying the empty string scope is equivalent to specifying no scope',
+							title:'Specifying the empty string scope is equivalent to specifying no scope',
 							test:function () {
 								var _Class = Uize.Class.subclass ();
 								return this.expectSameAs (_Class.singleton (),_Class.singleton (''));
 							}
 						},
 						{
-							title:'Test that specifying the optional properties object will initialize a newly created singleton to the state defined by the properties object',
+							title:'Specifying the optional properties object will initialize a newly created singleton to the state defined by the properties object',
 							test:function () {
 								var _singleton = Uize.Class.Value.singleton ('',{value:'foo'});
 								return this.expect ('foo',_singleton.get ('value'));
 							}
 						},
 						{
-							title:'Test that specifying the optional properties object when getting a singleton instance that has already been created will update the singleton instance to the state defined by the properties object',
+							title:'Specifying the optional properties object when getting a singleton instance that has already been created will update the singleton instance to the state defined by the properties object',
 							test:function () {
 								var
 									_singleton = Uize.Class.Value.singleton (),
@@ -1295,10 +1294,10 @@ Uize.module ({
 					]]
 				]),
 				{
-					title:'Test the event system for instances and classes',
+					title:'Instances and classes support events',
 					test:[
-						_eventsSystemTest ('Test that the event system works for instances',true),
-						_eventsSystemTest ('Test that the event system works for classes',false),
+						_eventsSystemTest ('Instances support events',true),
+						_eventsSystemTest ('Classes support events',false),
 						{
 							title:'Test support for compound conditions',
 							test:[
@@ -1331,7 +1330,7 @@ Uize.module ({
 											}
 										},
 										{
-											title:'Test that, when specifying an array of property names for the condition, prefixing some property names with a "!" to not their value is handled correctly',
+											title:'When specifying an array of property names for the condition, prefixing some property names with a "!" to not their value is handled correctly',
 											test:function () {
 												var _Class = Uize.Class.subclass ();
 												_Class.stateProperties ({
@@ -1352,7 +1351,7 @@ Uize.module ({
 											}
 										},
 										{
-											title:'Test that, when specifying an array of property names for the condition, property names may contain spaces and special characters',
+											title:'When specifying an array of property names for the condition, property names may contain spaces and special characters',
 											test:function () {
 												var _Class = Uize.Class.subclass ();
 												_Class.stateProperties ({
@@ -1396,7 +1395,7 @@ Uize.module ({
 											}
 										},
 										{
-											title:'Test that, when specifying a comma-separated list of property names for the condition, prefixing some property names with a "!" to not their value is handled correctly',
+											title:'When specifying a comma-separated list of property names for the condition, prefixing some property names with a "!" to not their value is handled correctly',
 											test:function () {
 												var _Class = Uize.Class.subclass ();
 												_Class.stateProperties ({
@@ -1463,7 +1462,7 @@ Uize.module ({
 											}
 										},
 										{
-											title:'Test that the method retuns a wirings object that contains wirings for the Changed.[propertyName] event of every property',
+											title:'A wirings object is returned, that contains wirings for the Changed.[propertyName] event of every property',
 											test:function () {
 												var _Class = Uize.Class.subclass ();
 												_Class.stateProperties ({
@@ -1490,7 +1489,7 @@ Uize.module ({
 											}
 										},
 										{
-											title:'Test that unwiring the event wirings for a compound condition before it is met results in the handler for the condition not being executed',
+											title:'Unwiring the event wirings for a compound condition before it is met results in the handler for the condition not being executed',
 											test:function () {
 												var _Class = Uize.Class.subclass ();
 												_Class.stateProperties ({
@@ -1513,7 +1512,7 @@ Uize.module ({
 											}
 										},
 										{
-											title:'Test that the handler receives the values of all the determinants are arguments',
+											title:'The handler receives the values of all the determinants are arguments',
 											test:function () {
 												var
 													_Class = Uize.Class.subclass ({
@@ -1550,7 +1549,7 @@ Uize.module ({
 							title:'Test the onChange instance method',
 							test:[
 								{
-									title:'Test that the handler is executed once upon registering a change handler',
+									title:'The handler is executed once upon registering a change handler',
 									test:function () {
 										var
 											_Class = Uize.Class.subclass ({
@@ -1570,7 +1569,7 @@ Uize.module ({
 									}
 								},
 								{
-									title:'Test that handler is only executed when the computed value actually changes, not every time the determinants change',
+									title:'The handler is only executed when the computed value actually changes, not every time the determinants change',
 									test:function () {
 										var
 											_Class = Uize.Class.subclass ({
@@ -1595,7 +1594,7 @@ Uize.module ({
 									}
 								},
 								{
-									title:'Test that a wirings object is returned that allows the change handler to be fully unwired',
+									title:'A wirings object is returned that allows the change handler to be fully unwired',
 									test:function () {
 										var
 											_Class = Uize.Class.subclass ({
@@ -1620,7 +1619,7 @@ Uize.module ({
 									}
 								},
 								{
-									title:'Test that the handler receives two arguments, being the derived value and an array containing the values of the determinants',
+									title:'The handler receives two arguments, being the derived value and an array containing the values of the determinants',
 									test:function () {
 										var
 											_Class = Uize.Class.subclass ({
@@ -1717,7 +1716,7 @@ Uize.module ({
 							title:'Test the whenever instance method',
 							test:[
 								{
-									title:'Test that the handler is not executed upon registering a whenever handler if the derivation is not truthy at the time',
+									title:'The handler is not executed upon registering a whenever handler if the derivation is not truthy at the time',
 									test:function () {
 										var
 											_Class = Uize.Class.subclass ({
@@ -1737,7 +1736,7 @@ Uize.module ({
 									}
 								},
 								{
-									title:'Test that the handler is executed immediately upon registering a whenever handler if the derivation is truthy at the time',
+									title:'The handler is executed immediately upon registering a whenever handler if the derivation is truthy at the time',
 									test:function () {
 										var
 											_Class = Uize.Class.subclass ({
@@ -1757,7 +1756,7 @@ Uize.module ({
 									}
 								},
 								{
-									title:'Test that handler is only executed when the computed value actually becomes truthy, not every time the determinants change',
+									title:'The handler is only executed when the computed value actually becomes truthy, not every time the determinants change',
 									test:function () {
 										var
 											_Class = Uize.Class.subclass ({
@@ -1798,7 +1797,7 @@ Uize.module ({
 									}
 								},
 								{
-									title:'Test that a wirings object is returned that allows the whenever handler to be fully unwired',
+									title:'A wirings object is returned that allows the whenever handler to be fully unwired',
 									test:function () {
 										var
 											_Class = Uize.Class.subclass ({
@@ -1820,7 +1819,7 @@ Uize.module ({
 									}
 								},
 								{
-									title:'Test that the handler receives the values of all the determinants are arguments',
+									title:'The handler receives the values of all the determinants are arguments',
 									test:function () {
 										var
 											_Class = Uize.Class.subclass ({
@@ -1930,13 +1929,13 @@ Uize.module ({
 					]
 				},
 				{
-					title:'Test the state properties system',
+					title:'Classes have a state properties system',
 					test:[
 						{
-							title:'Test declaration of state properties',
+							title:'State properties can be declared for classes',
 							test:[
 								{
-									title:'Test that a state property can be declared using the minimal profile syntax',
+									title:'A state property can be declared using the minimal profile syntax',
 									test:function () {
 										var _Subclass = Uize.Class.subclass ();
 										_Subclass.stateProperties ({_myProperty:'myProperty'});
@@ -1945,7 +1944,7 @@ Uize.module ({
 									}
 								},
 								{
-									title:'Test that a state property can be declared using the complete profile syntax',
+									title:'A state property can be declared using the complete profile syntax',
 									test:function () {
 										var _Subclass = Uize.Class.subclass ();
 										_Subclass.stateProperties ({_myProperty:{name:'myProperty'}});
@@ -1955,7 +1954,7 @@ Uize.module ({
 								},
 								{
 									title:
-										'Test that multiple properties can be declared in a single call to the stateProperties method, and that minimal and complete profiles can be combined',
+										'Multiple properties can be declared in a single call to the stateProperties method, and minimal and complete profiles can be combined',
 									test:function () {
 										var _Subclass = Uize.Class.subclass ();
 										_Subclass.stateProperties ({
@@ -1968,7 +1967,7 @@ Uize.module ({
 								},
 								{
 									title:
-										'Test that the public name of a state property is defaulted when no value is specified for the name property in the property profile',
+										'The public name of a state property is defaulted when no value is specified for the name property in the property profile',
 									test:function () {
 										var _Subclass = Uize.Class.subclass ();
 										_Subclass.stateProperties ({myProperty:{}});
@@ -1978,7 +1977,7 @@ Uize.module ({
 								},
 								{
 									title:
-										'Test that multiple state properties can be declared cumulatively by repeatedly calling the stateProperties method',
+										'Multiple state properties can be declared cumulatively by repeatedly calling the stateProperties method',
 									test:function () {
 										var _Subclass = Uize.Class.subclass ();
 										_Subclass.stateProperties ({_myProperty1:'myProperty1'});
@@ -2004,11 +2003,11 @@ Uize.module ({
 							]
 						},
 						{
-							title:'Test the initial value facility',
+							title:'Initial values can be specified when declaring state properties',
 							test:[
 								{
 									title:
-										'Test that when no initial value is specified for a state property, the property\'s initial value is undefined',
+										'When no initial value is specified for a state property, the property\'s initial value is undefined',
 									test:function () {
 										var _Subclass = Uize.Class.subclass ();
 										_Subclass.stateProperties ({
@@ -2020,7 +2019,7 @@ Uize.module ({
 								},
 								{
 									title:
-										'Test that specifying a value property in a state property\'s profile when declaring it has the effect of setting the initial value for that property for new instances that are created',
+										'Specifying a value property in a state property\'s profile when declaring it has the effect of setting the initial value for that property for new instances that are created',
 									test:function () {
 										var _Subclass = Uize.Class.subclass ();
 										_Subclass.stateProperties ({
@@ -2032,7 +2031,7 @@ Uize.module ({
 								},
 								{
 									title:
-										'Test that null is supported as an initial value for a state property and that it is not treated the same as undefined',
+										'The value null is supported as an initial value for a state property and that it is not treated the same as undefined',
 									test:function () {
 										var _Subclass = Uize.Class.subclass ();
 										_Subclass.stateProperties ({
@@ -2044,7 +2043,7 @@ Uize.module ({
 								},
 								{
 									title:
-										'Test that the initial value defined for a property is returned as the result when querying the value of that state property on the class',
+										'The initial value defined for a property is returned as the result when querying the value of that state property on the class',
 									test:function () {
 										var _Subclass = Uize.Class.subclass ();
 										_Subclass.stateProperties ({
@@ -2055,7 +2054,7 @@ Uize.module ({
 								},
 								{
 									title:
-										'Test that setting the value for a state property on the class has the effect of setting the initial value for the property',
+										'Setting the value for a state property on the class has the effect of setting the initial value for the property for new instances of the class that are created',
 									test:function () {
 										var _Subclass = Uize.Class.subclass ();
 										_Subclass.stateProperties ({
@@ -2068,7 +2067,7 @@ Uize.module ({
 								},
 								{
 									title:
-										'Test that setting the value for a state property on the class does not affect the value of the property for instances that have already been created',
+										'Setting the value for a state property on the class does not affect the value of the property for instances that have already been created',
 									test:function () {
 										var _Subclass = Uize.Class.subclass ();
 										_Subclass.stateProperties ({
@@ -2086,7 +2085,7 @@ Uize.module ({
 							test:[
 								{
 									title:
-										'Test that an onChange handler for a state property is executed on the very first change of the value of that property that occurs during construction of the instance',
+										'An onChange handler for a state property is executed on the very first change of the value of that property that occurs during construction of the instance',
 									test:function () {
 										var
 											_Subclass = Uize.Class.subclass (),
@@ -2104,7 +2103,7 @@ Uize.module ({
 								},
 								{
 									title:
-										'Test that an onChange handler for a state property is only executed once upon construction when a value specified for the property in the constructor differs from the property\'s initial value',
+										'An onChange handler for a state property is only executed once upon construction when a value specified for the property in the constructor differs from the property\'s initial value',
 									test:function () {
 										var
 											_Subclass = Uize.Class.subclass (),
@@ -2122,7 +2121,7 @@ Uize.module ({
 								},
 								{
 									title:
-										'Test that an onChange handler is only executed when the value of a state property has actually changed as a result of a set - not on non-changing sets',
+										'An onChange handler is only executed when the value of a state property has actually changed as a result of a set - not on non-changing sets',
 									test:function () {
 										var
 											_Subclass = Uize.Class.subclass (),
@@ -2143,7 +2142,7 @@ Uize.module ({
 								},
 								{
 									title:
-										'Test that an onChange handler is called as a method on the instance that owns the state property',
+										'An onChange handler is called as a method on the instance that owns the state property',
 									test:function () {
 										var
 											_Subclass = Uize.Class.subclass (),
@@ -2161,7 +2160,7 @@ Uize.module ({
 								},
 								{
 									title:
-										'Test that the value of the state property has already changed by the time that an onChange handler is called',
+										'The value of the state property has already changed by the time that an onChange handler is called',
 									test:function () {
 										var
 											_Subclass = Uize.Class.subclass (),
@@ -2182,7 +2181,7 @@ Uize.module ({
 								},
 								{
 									title:
-										'Test that an onChange handler can be specified by a string, where that string specifies the name of a method that must be defined for the instance',
+										'An onChange handler can be specified by a string, where that string specifies the name of a method that must be defined for the instance',
 									test:function () {
 										var
 											_Subclass = Uize.Class.subclass (),
@@ -2202,7 +2201,7 @@ Uize.module ({
 								},
 								{
 									title:
-										'Test that an array of multiple onChange handlers can be specified for a state property, and that all of them are executed, in the order in which they appear in the array',
+										'An array of multiple onChange handlers can be specified for a state property, and all of them are executed, in the order in which they appear in the array',
 									test:function () {
 										var
 											_Subclass = Uize.Class.subclass (),
@@ -2227,7 +2226,7 @@ Uize.module ({
 								},
 								{
 									title:
-										'Test that an array of multiple onChange handlers may contain a mix of handlers specified by function reference, handlers specified by method name, and nested lists of handlers',
+										'An array of multiple onChange handlers may contain a mix of handlers specified by function reference, handlers specified by method name, and nested lists of handlers',
 									test:function () {
 										var
 											_Subclass = Uize.Class.subclass (),
@@ -2272,7 +2271,7 @@ Uize.module ({
 								},
 								{
 									title:
-										'Test that all onChange handlers receive a single argument when it is called, which is an object containing the conformed values for all properties being set (not just those that have changed value)',
+										'All onChange handlers receive a single argument when they are called, which is an object containing the conformed values for all properties being set (not just those that have changed value)',
 									test:function () {
 										var
 											_Subclass = Uize.Class.subclass (),
@@ -2321,7 +2320,7 @@ Uize.module ({
 								},
 								{
 									title:
-										'Test that onChange handlers are called for all state properties that have changed value in the course of the same set call',
+										'The onChange handlers are called for all state properties that have changed value in the course of the same set call',
 									test:function () {
 										var
 											_Subclass = Uize.Class.subclass (),
@@ -2364,7 +2363,7 @@ Uize.module ({
 								},
 								{
 									title:
-										'Test that an onChange handler is not called for any instances of a class when the value of the state property is set on the class',
+										'An onChange handler is not called for any instances of a class when the value of the state property is set on the class',
 									test:function () {
 										var
 											_Subclass = Uize.Class.subclass (),
@@ -2392,7 +2391,7 @@ Uize.module ({
 								},
 								{
 									title:
-										'Test that a state property\'s onChange handler is only called for an instance of the class whose value for the property has changed (ie. no contamination across instances)',
+										'A state property\'s onChange handler is only called for an instance of the class whose value for the property has changed (ie. no contamination across instances)',
 									test:function () {
 										var
 											_Subclass = Uize.Class.subclass (),
@@ -2417,7 +2416,7 @@ Uize.module ({
 								},
 								{
 									title:
-										'Test that an onChange handler is only executed if the value of a state property has changed after being conformed, and not just if the pre-conformed value is different from the current value',
+										'An onChange handler is only executed if the value of a state property has changed after being conformed, and not just if the pre-conformed value is different from the current value',
 									test:function () {
 										var
 											_Subclass = Uize.Class.subclass (),
@@ -2448,7 +2447,7 @@ Uize.module ({
 								},
 								{
 									title:
-										'Test that when the same onChange handler is registered for multiple state properties, it is only executed once - even if the values of all those properties change during a set',
+										'When the same onChange handler is registered for multiple state properties, it is only executed once - even if the values of all those properties change during a set',
 									test:function () {
 										var
 											_Subclass = Uize.Class.subclass (),
@@ -2494,7 +2493,7 @@ Uize.module ({
 								},
 								{
 									title:
-										'Test that the execute-once optimization for onChange handlers shared across properties does not prevent an onChange handler from executing on subsequent sets (ie. cleanup occurs correctly)',
+										'The execute-once optimization for onChange handlers shared across properties does not prevent an onChange handler from executing on subsequent sets (ie. cleanup occurs correctly)',
 									test:function () {
 										var
 											_Subclass = Uize.Class.subclass (),
@@ -2528,7 +2527,7 @@ Uize.module ({
 							test:[
 								{
 									title:
-										'Test that a state property\'s conformer function is called as an instance method on the instance for which the property values are being set',
+										'A state property\'s conformer function is called as an instance method on the instance for which the property values are being set',
 									test:function () {
 										var
 											_Subclass = Uize.Class.subclass (),
@@ -2547,7 +2546,7 @@ Uize.module ({
 								},
 								{
 									title:
-										'Test that a state property\'s conformer function is called with two arguments, where the first argument is the new value being set for the property, and the second argument is the current value of the property',
+										'A state property\'s conformer function is called with two arguments, where the first argument is the new value being set for the property, and the second argument is the current value of the property',
 									test:function () {
 										var
 											_Subclass = Uize.Class.subclass (),
@@ -2570,7 +2569,7 @@ Uize.module ({
 								},
 								{
 									title:
-										'Test that the value returned by a conformer function is treated as the new value to be set for the property',
+										'The value returned by a conformer function is treated as the new value to be set for the property',
 									test:function () {
 										var _Subclass = Uize.Class.subclass ();
 										_Subclass.stateProperties ({
@@ -2586,7 +2585,7 @@ Uize.module ({
 								},
 								{
 									title:
-										'Test that a state property\'s conformer function is executed before the value of the property has changed',
+										'A state property\'s conformer function is executed before the value of the property has changed',
 									test:function () {
 										var
 											_Subclass = Uize.Class.subclass (),
@@ -2611,7 +2610,7 @@ Uize.module ({
 								},
 								{
 									title:
-										'Test that a state property\'s conformer function is called before its onChange handlers are called',
+										'A state property\'s conformer function is called before its onChange handlers are called',
 									test:function () {
 										var
 											_Subclass = Uize.Class.subclass (),
@@ -2634,7 +2633,7 @@ Uize.module ({
 								},
 								{
 									title:
-										'Test that, if a state property\'s value does not change as a result of the action of a conformer, then the property\'s onChange handlers are not executed',
+										'If a state property\'s value does not change as a result of the action of a conformer, then the property\'s onChange handlers are not executed',
 									test:function () {
 										var
 											_Subclass = Uize.Class.subclass (),
@@ -2662,7 +2661,7 @@ Uize.module ({
 							test:[
 								{
 									title:
-										'Test that the Changed.[propertyName] event for a property is not fired when the property\'s value is set but doesn\'t change value',
+										'The Changed.[propertyName] event for a property is not fired when the property\'s value is set but doesn\'t change value',
 									test:function () {
 										var
 											_Subclass = Uize.Class.subclass (),
@@ -2679,7 +2678,7 @@ Uize.module ({
 								},
 								{
 									title:
-										'Test that the Changed.[propertyName] event for a property is fired when the property\'s value changes during a set',
+										'The Changed.[propertyName] event for a property is fired when the property\'s value changes during a set',
 									test:function () {
 										var
 											_Subclass = Uize.Class.subclass (),
@@ -2696,7 +2695,7 @@ Uize.module ({
 								},
 								{
 									title:
-										'Test that the event object for a Changed.[propertyName] event contains a newValue property that contains the new value for the property whose value has changed',
+										'The event object for a Changed.[propertyName] event contains a newValue property that contains the new value for the property whose value has changed',
 									test:function () {
 										var
 											_Subclass = Uize.Class.subclass ({
@@ -2715,7 +2714,7 @@ Uize.module ({
 								},
 								{
 									title:
-										'Test that the Changed.[propertyName] events for state properties that have changed value are fired after all the onChange handlers for the properties have been executed',
+										'The Changed.[propertyName] events for state properties that have changed value are fired after all the onChange handlers for the properties have been executed',
 									test:function () {
 										var
 											_Subclass = Uize.Class.subclass (),
@@ -2766,7 +2765,7 @@ Uize.module ({
 								},
 								{
 									title:
-										'Test that the Changed.[propertyName] events for state properties that have changed value are fired in the order in which the properties are set - not the order in which they were declared',
+										'The Changed.[propertyName] events for state properties that have changed value are fired in the order in which the properties are set - not the order in which they were declared',
 									test:function () {
 										var
 											_Subclass = Uize.Class.subclass (),
@@ -2800,7 +2799,7 @@ Uize.module ({
 								},
 								{
 									title:
-										'Test that handlers for the special Changed.[propertyName] event can be wired, unwired, and rewired just like any regular event',
+										'Handlers for the special Changed.[propertyName] event can be wired, unwired, and rewired just like any regular event',
 									test:function () {
 										var
 											_Subclass = Uize.Class.subclass (),
@@ -2848,7 +2847,7 @@ Uize.module ({
 									test:[
 										{
 											title:
-												'Test that wiring a handler for a Changed.[propertyName] event for a property that has not been declared does not produce a JavaScript error',
+												'Wiring a handler for a Changed.[propertyName] event for a property that has not been declared does not produce a JavaScript error',
 											test:function () {
 												var
 													_Subclass = Uize.Class.subclass (),
@@ -2860,7 +2859,7 @@ Uize.module ({
 										},
 										{
 											title:
-												'Test that a handler can be wired for a Changed.[propertyName] event for a property that is not yet declared, and that it will get executed when the property is later declared and its value changes',
+												'A handler can be wired for a Changed.[propertyName] event for a property that is not yet declared, and it will get executed when the property is later declared and its value changes',
 											test:function () {
 												var
 													_Subclass = Uize.Class.subclass (),
@@ -2878,7 +2877,7 @@ Uize.module ({
 										},
 										{
 											title:
-												'Test that a handler can be wired for a Changed.[propertyName] event for a property that is not yet declared, and that it will get executed if the property is created in an ad hoc fashion by setting its value',
+												'A handler can be wired for a Changed.[propertyName] event for a property that is not yet declared, and it will get executed if the property is created in an ad hoc fashion by setting its value',
 											test:function () {
 												var
 													_Subclass = Uize.Class.subclass (),
@@ -2902,7 +2901,7 @@ Uize.module ({
 							test:[
 								{
 									title:
-										'Test that the Changed.* event is not fired if no state properties have changed value during a set',
+										'The Changed.* event is not fired if no state properties have changed value during a set',
 									test:function () {
 										var
 											_Subclass = Uize.Class.subclass (),
@@ -2924,8 +2923,7 @@ Uize.module ({
 									}
 								},
 								{
-									title:
-										'Test that the Changed.* event is fired if any state property has changed value during a set',
+									title:'The Changed.* event is fired if any state property has changed value during a set',
 									test:function () {
 										var
 											_Subclass = Uize.Class.subclass (),
@@ -2946,7 +2944,7 @@ Uize.module ({
 								},
 								{
 									title:
-										'Test that the Changed.* event is fired only once when multiple state properties have changed value',
+										'The Changed.* event is fired only once when multiple state properties have changed value',
 									test:function () {
 										var
 											_Subclass = Uize.Class.subclass (),
@@ -2969,7 +2967,7 @@ Uize.module ({
 								},
 								{
 									title:
-										'Test that the event object for the Changed.* event contains a properties property, which is an object containing values for only those properties that have changed value',
+										'The event object for the Changed.* event contains a properties property, which is an object containing values for only those properties that have changed value',
 									test:function () {
 										var
 											_Subclass = Uize.Class.subclass (),
@@ -2994,7 +2992,7 @@ Uize.module ({
 								},
 								{
 									title:
-										'Test that the Changed.* event is fired after all the onChange handlers for state properties that have changed value have been executed, but before handlers for the Changed.[propertyName] events for individual properties are executed',
+										'The Changed.* event is fired after all the onChange handlers for state properties that have changed value have been executed, but before handlers for the Changed.[propertyName] events for individual properties are executed',
 									test:function () {
 										var
 											_Subclass = Uize.Class.subclass (),
@@ -3046,7 +3044,7 @@ Uize.module ({
 								},
 								{
 									title:
-										'Test that handlers for the special Changed.* event can be wired, unwired, and rewired just like any regular event',
+										'Handlers for the special Changed.* event can be wired, unwired, and rewired just like any regular event',
 									test:function () {
 										var
 											_Subclass = Uize.Class.subclass (),
@@ -3096,7 +3094,7 @@ Uize.module ({
 							test:[
 								{
 									title:
-										'Test that a state property can have multiple aliases, and that its value can be set through any of those aliases',
+										'A state property can have multiple aliases, and its value can be set through any of those aliases',
 									test:function () {
 										var
 											_Subclass = Uize.Class.subclass (),
@@ -3123,7 +3121,7 @@ Uize.module ({
 								},
 								{
 									title:
-										'Test that getting the values for all state properties results in the values of state properties with aliases being reported only through their canonical (non-alias) names',
+										'Getting the values for all state properties results in the values of state properties with aliases being reported only through their canonical (non-alias) names',
 									test:function () {
 										var _Subclass = Uize.Class.subclass ();
 										_Subclass.stateProperties ({
@@ -3144,7 +3142,7 @@ Uize.module ({
 								},
 								{
 									title:
-										'Test that aliases can be specified using the minimal profile syntax as well as the complete profile syntax',
+										'Aliases can be specified using the minimal profile syntax as well as the complete profile syntax',
 									test:function () {
 										var _Subclass = Uize.Class.subclass ();
 										_Subclass.stateProperties ({
@@ -3164,7 +3162,7 @@ Uize.module ({
 								},
 								{
 									title:
-										'Test that a value can be set for a state property using any of its aliases in the constructor when creating an instance',
+										'A value can be set for a state property using any of its aliases in the constructor when creating an instance',
 									test:function () {
 										var _Subclass = Uize.Class.subclass ();
 										_Subclass.stateProperties ({
@@ -3188,8 +3186,7 @@ Uize.module ({
 									}
 								},
 								{
-									title:
-										'Test that a state property\'s value can be accessed using any of its declared aliases',
+									title:'A state property\'s value can be accessed using any of its declared aliases',
 									test:function () {
 										var _Subclass = Uize.Class.subclass ();
 										_Subclass.stateProperties ({
@@ -3208,7 +3205,7 @@ Uize.module ({
 								},
 								{
 									title:
-										'Test that handlers can be wired for the Changed.[propertyName] event of a state property, using any one of its alias names or its canonical name',
+										'Handlers can be wired for the Changed.[propertyName] event of a state property, using any one of its alias names or its canonical name',
 									test:function () {
 										var
 											_Subclass = Uize.Class.subclass (),
@@ -3243,7 +3240,7 @@ Uize.module ({
 								},
 								{
 									title:
-										'Test that handlers can be unwired for the Changed.[propertyName] event of a state property, using any one of its alias names or its canonical name',
+										'Handlers can be unwired for the Changed.[propertyName] event of a state property, using any one of its alias names or its canonical name',
 									test:function () {
 										var
 											_Subclass = Uize.Class.subclass (),
@@ -3286,7 +3283,7 @@ Uize.module ({
 								},
 								{
 									title:
-										'Test that the canonical name of a state property is used for the name of the Changed.[propertyName] event that is fired when the property\'s value is changed, regardless of which alias is used when setting the property\'s value',
+										'The canonical name of a state property is used for the name of the Changed.[propertyName] event that is fired when the property\'s value is changed, regardless of which alias is used when setting the property\'s value',
 									test:function () {
 										var
 											_Subclass = Uize.Class.subclass (),
@@ -3322,7 +3319,7 @@ Uize.module ({
 								},
 								{
 									title:
-										'Test that the canonical name of a state property is used for the properties-being-set object that is passed as a parameter to an onChange handler for the state property',
+										'The canonical name of a state property is used for the properties-being-set object that is passed as a parameter to an onChange handler for the state property',
 									test:function () {
 										var
 											_Subclass = Uize.Class.subclass (),
@@ -3355,7 +3352,7 @@ Uize.module ({
 								},
 								{
 									title:
-										'Test that the canonical names of state properties are used for the properties object that is provided in the event object for Changed.* events',
+										'The canonical names of state properties are used for the properties object that is provided in the event object for Changed.* events',
 									test:function () {
 										var
 											_Subclass = Uize.Class.subclass (),
@@ -3389,8 +3386,7 @@ Uize.module ({
 							]
 						},
 						{
-							title:
-								'Test that values specified for state properties when calling a class\' constructor are respected',
+							title:'The values specified for state properties when calling a class\' constructor are respected',
 							test:function () {
 								var _Subclass = Uize.Class.subclass ();
 								_Subclass.stateProperties ({
@@ -3419,11 +3415,11 @@ Uize.module ({
 							}
 						},
 						{
-							title:'Test ad hoc creation of state properties',
+							title:'State properties can be created in an ad hoc fashion',
 							test:[
 								{
 									title:
-										'Test that state properties can be created in an ad hoc fashion, by setting values for undeclared properties using the set static method',
+										'State properties can be created in an ad hoc fashion, by setting values for undeclared properties using the set static method',
 									test:function () {
 										var _Subclass = Uize.Class.subclass ();
 										_Subclass.set ({foo:'bar'});
@@ -3433,7 +3429,7 @@ Uize.module ({
 								},
 								{
 									title:
-										'Test that, when properties are created for an instance in an ad hoc fashion, by setting values for the undeclared properties using the set instance method, those instance ad hoc properties are not declared on the class',
+										'When properties are created for an instance in an ad hoc fashion, by setting values for the undeclared properties using the set instance method, those instance ad hoc properties are not declared on the class',
 									test:function () {
 										var
 											_Subclass = Uize.Class.subclass (),
@@ -3449,7 +3445,7 @@ Uize.module ({
 								},
 								{
 									title:
-										'Test that, when properties are created for an instance in an ad hoc fashion, by specifying values for undeclared properties when calling the constructor, those instance ad hoc properties are not declared on the class',
+										'When properties are created for an instance in an ad hoc fashion, by specifying values for undeclared properties when calling the constructor, those instance ad hoc properties are not declared on the class',
 									test:function () {
 										var
 											_Subclass = Uize.Class.subclass (),
@@ -3464,7 +3460,7 @@ Uize.module ({
 								},
 								{
 									title:
-										'Test that, for properties that are created for an instance in an ad hoc fashion, the values are contained in the object that is returned by the form of the get instance method that takes no parameters',
+										'For properties that are created for an instance in an ad hoc fashion, the values are contained in the object that is returned by the form of the get instance method that takes no parameters',
 									test:function () {
 										var
 											_Subclass = Uize.Class.subclass (),
@@ -3476,7 +3472,7 @@ Uize.module ({
 								},
 								{
 									title:
-										'Test that the special Changed.* event is fired for instance properties that are created in an ad hoc fashion, by setting values for undeclared properties using the set instance method',
+										'The special Changed.* event is fired for instance properties that are created in an ad hoc fashion, by setting values for undeclared properties using the set instance method',
 									test:function () {
 										var
 											_Subclass = Uize.Class.subclass (),
@@ -3505,13 +3501,13 @@ Uize.module ({
 							]
 						},
 						{
-							title:'Test the condition related instance methods',
+							title:'Instances provide methods for a conditions mechanism',
 							test:[
 								{
 									title:'Test that the is instance method works correctly',
 									test:[
 										{
-											title:'Test that the value false is returned when the specified condition property is not declared',
+											title:'The value false is returned when the specified condition property is not declared',
 											test:function () {
 												var
 													_Subclass = Uize.Class.subclass (),
@@ -3521,7 +3517,7 @@ Uize.module ({
 											}
 										},
 										{
-											title:'Test that the value true is returned for all truthy values of the specified condition property, and that the value false is returned for all falsy values of the property',
+											title:'The value true is returned for all truthy values of the specified condition property, while the value false is returned for all falsy values of the property',
 											test:function () {
 												var _Class = Uize.Class.subclass ();
 												_Class.stateProperties ({myProperty:{}});

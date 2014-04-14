@@ -64,31 +64,31 @@ Uize.module ({
 						]
 					]],
 					['Uize.Str.Limit.limitLength',[
-						['Test that max length of zero produces empty string',
+						['A max length of zero produces empty string',
 							['0123456789',0],
 							''
 						],
-						['Test that negative max length produces empty string',
+						['A negative max length produces empty string',
 							['0123456789',-1],
 							''
 						],
-						['Test that max length greater than source string length produces source string',
+						['A max length greater than the source string length produces the source string',
 							['0123456789',15],
 							'0123456789'
 						],
-						['Test that max length equal to source string length produces source string',
+						['A max length equal to the source string length produces the source string',
 							['0123456789',10],
 							'0123456789'
 						],
-						['Test that max length less than source string length produces correct result',
+						['A max length less than the source string length produces a truncated version of the source string',
 							['0123456789',9],
 							'012345...'
 						],
-						['Test that max length equal to continuation string length produces just truncated source string',
+						['A max length equal to the continuation string length produces just a truncated source string with no continuation characters',
 							['0123456789',3],
 							'012'
 						],
-						['Test that max length less than continuation string length produces just truncated source string',
+						['A max length less than the continuation string length produces just a truncated source string with no continuation characters',
 							['0123456789',1],
 							'0'
 						]

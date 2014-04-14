@@ -33,7 +33,7 @@ Uize.module ({
 			test:[
 				Uize.Test.requiredModulesTest ('Uize.Templates.SevenSegmentDisplay'),
 				{
-					title:'Test that calling the process static method produces a non-empty string',
+					title:'Calling the process static method produces a non-empty string',
 					test:function () {
 						return this.expectNonEmptyString (Uize.Templates.SevenSegmentDisplay.process ({idPrefix:'page_widget'}));
 					}

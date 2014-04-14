@@ -41,13 +41,31 @@
 
 Uize.module ({
 	name:'Uize.Build.RunUnitTest',
-	required:'Uize.Build.Util',
+	required:[
+		'Uize.Build.Util',
+		'Uize.Services.FileSystem',
+		'Uize.Test',
+		'Uize.Util.ModuleNaming'
+	],
 	builder:function () {
 		'use strict';
 
 		return Uize.package ({
 			perform:function (_params) {
-				Uize.Build.Util.runUnitTests (_params.testModule,_params.console,_params.logFilePath);
+				var
+					_testModule = Uize.Util.ModuleNaming.getTestModuleName (_params.testModule),
+					_fileSystem = Uize.Services.FileSystem.singleton ()
+				;
+				if (
+					!_fileSystem.fileExists ({
+						path:_params.sourcePath + '/' + _params.modulesFolder + '/' + Uize.modulePathResolver (_testModule) + '.js'
+					})
+				)
+					_testModule = Uize.Test.requiredModulesTest (
+						Uize.Util.ModuleNaming.getModuleNameFromTestModuleName (_testModule)
+					)
+				;
+				Uize.Build.Util.runUnitTests (_testModule,_params.console,_params.logFilePath);
 			}
 		});
 	}

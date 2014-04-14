@@ -34,17 +34,17 @@ Uize.module ({
 				Uize.Test.requiredModulesTest ('Uize.Data.MacStrings'),
 				Uize.Test.staticMethodsTest ([
 					['Uize.Data.MacStrings.from',[
-						['Test that parsing an empty string produces an empty strings object',
+						['Parsing an empty string produces an empty strings object',
 							'',
 							{}
 						],
-						['Test that parsing a single line strings text block produces a strings object with a single string entry',
+						['Parsing a single line strings text block produces a strings object with a single string entry',
 							'"foo" = "bar";',
 							{
 								foo:'bar'
 							}
 						],
-						['Test that parsing a multi-line strings text block produces a strings object with multiple string entries',
+						['Parsing a multi-line strings text block produces a strings object with multiple string entries',
 							[
 								'"foo" = "bar";',
 								'"baz" = "qux";',
@@ -120,17 +120,17 @@ Uize.module ({
 						]
 					]],
 					['Uize.Data.MacStrings.to',[
-						['Test that serializing an empty strings object produces an empty string as a result',
+						['Serializing an empty strings object produces an empty string as a result',
 							{},
 							''
 						],
-						['Test that serializing a strings object with a single string entry produces a single line string as a result',
+						['Serializing a strings object with a single string entry produces a single line string as a result',
 							{
 								foo:'bar'
 							},
 							'"foo" = "bar";'
 						],
-						['Test that serializing a strings object with multiple string entries produces a multi-line string as a result',
+						['Serializing a strings object with multiple string entries produces a multi-line string as a result',
 							{
 								foo:'bar',
 								baz:'qux',
@@ -142,7 +142,7 @@ Uize.module ({
 								'"hello" = "world";'
 							].join ('\n')
 						],
-						['Test that, when either the key or value for a string entry contains special characters, the special characters are escaped correctly',
+						['When either the key or value for a string entry contains special characters, the special characters are escaped correctly',
 							{
 								'f"o\no':'bar',
 								baz:'q"u\nx',

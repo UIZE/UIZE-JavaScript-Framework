@@ -51,12 +51,12 @@ Uize.module ({
 						}
 					]],
 					['Uize.Url.fromPiece',[
-						['Test that decoding the value null produces an empty string',null,''],
-						['Test that decoding the value undefined produces an empty string',undefined,''],
-						['Test that decoding a boolean type value coerces that value to a string',false,'false'],
-						['Test that decoding a number type value coerces that value to a string',42,'42'],
-						['Test that decoding the number type value NaN coerces that value to a string',NaN,'NaN'],
-						['Test that decoding the number type value Infinity coerces that value to a string',
+						['Decoding the value null produces an empty string',null,''],
+						['Decoding the value undefined produces an empty string',undefined,''],
+						['Decoding a boolean type value coerces that value to a string',false,'false'],
+						['Decoding a number type value coerces that value to a string',42,'42'],
+						['Decoding the number type value NaN coerces that value to a string',NaN,'NaN'],
+						['Decoding the number type value Infinity coerces that value to a string',
 							Infinity,
 							'Infinity'
 						],
@@ -70,12 +70,12 @@ Uize.module ({
 						]
 					]],
 					['Uize.Url.toPiece',[
-						['Test that encoding the value null coerces that value to a string',null,'null'],
-						['Test that encoding the value undefined coerces that value to a string',undefined,'undefined'],
-						['Test that encoding a boolean type value coerces that value to a string',false,'false'],
-						['Test that encoding a number type value coerces that value to a string',42,'42'],
-						['Test that encoding the number type value NaN coerces that value to a string',NaN,'NaN'],
-						['Test that encoding the number type value Infinity coerces that value to a string',
+						['Encoding the value null coerces that value to a string',null,'null'],
+						['Encoding the value undefined coerces that value to a string',undefined,'undefined'],
+						['Encoding a boolean type value coerces that value to a string',false,'false'],
+						['Encoding a number type value coerces that value to a string',42,'42'],
+						['Encoding the number type value NaN coerces that value to a string',NaN,'NaN'],
+						['Encoding the number type value Infinity coerces that value to a string',
 							Infinity,
 							'Infinity'
 						],
@@ -89,19 +89,19 @@ Uize.module ({
 						]
 					]],
 					['Uize.Url.fromParams',[
-						['Test that an empty URL params string produces an empty object',
+						['An empty URL params string produces an empty object',
 							'',
 							{}
 						],
-						['Test that a URL params string that is just a question mark produces an empty object',
+						['A URL params string that is just a question mark produces an empty object',
 							'?',
 							{}
 						],
-						['Test that a URL params string that has nothing after a question mark produces an empty object',
+						['A URL params string that has nothing after a question mark produces an empty object',
 							'http://www.uize.com?',
 							{}
 						],
-						['Test that a URL params string that has no question mark is assumed to be query params',
+						['A URL params string that has no question mark is assumed to be query params',
 							'paramName=paramValue',
 							{paramName:'paramValue'}
 						],
@@ -109,23 +109,23 @@ Uize.module ({
 							'param1Name=param1Value&param2Name=param2Value&param3Name=param3Value',
 							{param1Name:'param1Value',param2Name:'param2Value',param3Name:'param3Value'}
 						],
-						['Test that the part of a URL params string up to and including a question mark is ignored',
+						['The part of a URL params string up to and including a question mark is ignored',
 							'http://www.uize.com?param1Name=param1Value&param2Name=param2Value&param3Name=param3Value',
 							{param1Name:'param1Value',param2Name:'param2Value',param3Name:'param3Value'}
 						],
-						['Test that the default value for a param for which no value is specified is an empty string',
+						['The default value for a param for which no value is specified is an empty string',
 							'param1=&param2=',
 							{param1:'',param2:''}
 						],
-						['Test that the equals sign is optional for any param for which no value is specified',
+						['The equals sign is optional for any param for which no value is specified',
 							'param1&param2',
 							{param1:'',param2:''}
 						],
-						['Test that some params may use an equals sign while others may not, in the same URL params string',
+						['Some params may use an equals sign while others may not, in the same URL params string',
 							'param1&param2=&param3',
 							{param1:'',param2:'',param3:''}
 						],
-						['Test that all values are always represented using the string type in the params object',
+						['All values are always represented using the string type in the params object',
 							'param1=true&param2=42&param3=NaN&param4=Infinity&param5={}&param6=[]&param7=null&param8=undefined',
 							{
 								param1:'true',
@@ -138,48 +138,48 @@ Uize.module ({
 								param8:'undefined'
 							}
 						],
-						['Test that param values that contain encoded characters are decoded correctly',
+						['Param values that contain URI-encoded characters are decoded',
 							'param1=%60%40%23%24%25%5E%26%2B%3D%5B%5D%7B%7D%7C%5C%3A%3B%22%3C%3E%2C%3F%2F%20&param2=hello',
 							{
 								param1:'`@#$%^&+=[]{}|\\:;"<>,?/ ',
 								param2:'hello'
 							}
 						],
-						['Test that param names that contain encoded characters are decoded correctly',
+						['Param names that contain URI-encoded characters are decoded',
 							'%60%40%23%24%25%5E%26%2B%3D%5B%5D%7B%7D%7C%5C%3A%3B%22%3C%3E%2C%3F%2F%20=hello',
 							{'`@#$%^&+=[]{}|\\:;"<>,?/ ':'hello'}
 						],
-						['Test that a param without a name specified is ignored and is not represented in the params object',
+						['A param without a name specified is ignored and is not represented in the params object',
 							'http://www.uize.com?=blah&param=foo',
 							{param:'foo'}
 						],
-						['Test that a space is supported as a param name',
+						['A space is supported as a param name',
 							'%20=space%2C%20the%20final%20frontier',
 							{' ':'space, the final frontier'}
 						],
-						['Test that param names and param values are case sensitive',
+						['Param names and param values are case sensitive',
 							'param=value&PARAM=VALUE',
 							{param:'value',PARAM:'VALUE'}
 						],
-						['Test that last value wins when the same named parameter occurs multiple times',
+						['The last value wins when the same named parameter occurs multiple times',
 							'foo=bar&foo=pub&foo=spacebar',
 							{foo:'spacebar'}
 						]
 					]],
 					['Uize.Url.toParams',[
-						['Test that calling without any parameters produces an empty string',
+						['Calling without any parameters produces an empty string',
 							[],
 							''
 						],
-						['Test that calling with the value null produces an empty string',
+						['Calling with the value null produces an empty string',
 							null,
 							''
 						],
-						['Test that calling with the value undefined produces an empty string',
+						['Calling with the value undefined produces an empty string',
 							undefined,
 							''
 						],
-						['Test that an empty query params object produces an empty string',
+						['An empty query params object produces an empty string',
 							{},
 							''
 						],
@@ -187,15 +187,15 @@ Uize.module ({
 							{paramName:'paramValue'},
 							'paramName=paramValue'
 						],
-						['Test that a params object property that is an empty string is ignored',
+						['A params object property that is an empty string is ignored',
 							{'':'peekaboo',foo:'bar'},
 							'foo=bar'
 						],
-						['Test that params object properties whose values are null or undefined are ignored',
+						['Params object properties whose values are null or undefined are ignored',
 							{param1:undefined,param2:null,param3:'hello'},
 							'param3=hello'
 						],
-						['Test that the params whose values are empty strings are not ignored',
+						['Params object properties whose values are empty strings are not ignored',
 							{param1:'',param2:''},
 							'param1=&param2='
 						],
@@ -203,26 +203,26 @@ Uize.module ({
 							{param1Name:'param1Value',param2Name:'param2Value',param3Name:'param3Value'},
 							'param1Name=param1Value&param2Name=param2Value&param3Name=param3Value'
 						],
-						['Test that param values containing characters that need to be encoded are URI encoded correctly',
+						['Param values containing characters that need to be URI-encoded are encoded',
 							{
 								param1:'`@#$%^&+=[]{}|\\:;"<>,?/ ',
 								param2:'hello'
 							},
 							'param1=%60%40%23%24%25%5E%26%2B%3D%5B%5D%7B%7D%7C%5C%3A%3B%22%3C%3E%2C%3F%2F%20&param2=hello'
 						],
-						['Test that param names containing characters that need to be encoded are URI encoded correctly',
+						['Param names containing characters that need to be URI-encoded are encoded',
 							{'`@#$%^&+=[]{}|\\:;"<>,?/ ':'hello'},
 							'%60%40%23%24%25%5E%26%2B%3D%5B%5D%7B%7D%7C%5C%3A%3B%22%3C%3E%2C%3F%2F%20=hello'
 						],
-						['Test that a space is supported as a param name',
+						['A space is supported as a param name',
 							{' ':'space, the final frontier'},
 							'%20=space%2C%20the%20final%20frontier'
 						],
-						['Test that param names and param values are case sensitive',
+						['Param names and param values are case sensitive',
 							{param:'value',PARAM:'VALUE'},
 							'param=value&PARAM=VALUE'
 						],
-						['Test that params values that are not string type are supported by coercing them to string',
+						['Params values that are not string type are coerced to string',
 							{
 								p1:true,
 								p2:new Boolean (false),
@@ -245,29 +245,29 @@ Uize.module ({
 							[[{param1Name:'param1Value'},{param2Name:'param2Value'},{param3Name:'param3Value'}]],
 							'param1Name=param1Value&param2Name=param2Value&param3Name=param3Value'
 						],
-						['Test that an array containing no params object elements produces an empty string',
+						['An array containing no params object elements produces an empty string',
 							[[]],
 							''
 						],
-						['Test that in the case of an array of multiple params objects, later objects win / override',
+						['In the case of an array of multiple params objects, later objects win / override',
 							[[{p1:'obj1',p2:'obj1',p3:'obj1'},{p2:'obj2',p3:'obj2'},{p3:'obj3'}]],
 							'p1=obj1&p2=obj2&p3=obj3'
 						]
 					]],
 					['Uize.Url.resolve',[
-						['Test that calling with just an empty string produces an empty string',
+						['Calling with just an empty string produces an empty string',
 							'',
 							''
 						],
-						['Test that calling with just a URL that has no query params returns that URL string',
+						['Calling with just a URL that has no query params returns that URL string',
 							'http://www.uize.com',
 							'http://www.uize.com'
 						],
-						['Test that calling with just a URL that has a query character but no query params returns that URL with the query character stripped',
+						['Calling with just a URL that has a query character but no query params returns that URL with the query character stripped',
 							'http://www.uize.com?',
 							'http://www.uize.com'
 						],
-						['Test that calling with just a URL that has query params, but no query params object, returns that URL with its query params intact',
+						['Calling with just a URL that has query params, but no query params object, returns that URL with its query params intact',
 							'http://www.uize.com?param1Name=param1Value&param2Name=param2Value',
 							'http://www.uize.com?param1Name=param1Value&param2Name=param2Value'
 						],
@@ -304,7 +304,7 @@ Uize.module ({
 							[['http://www.uize.com']],
 							'http://www.uize.com'
 						],
-						['Test that in the case of an array of multiple params objects, later objects win / override',
+						['In the case of an array of multiple params objects, later objects win / override',
 							['http://www.uize.com',[{p1:'obj1',p2:'obj1',p3:'obj1'},{p2:'obj2',p3:'obj2'},{p3:'obj3'}]],
 							'http://www.uize.com?p1=obj1&p2=obj2&p3=obj3'
 						],
@@ -327,7 +327,7 @@ Uize.module ({
 							'http://www.uize.com?' +
 								'p1=true&p2=false&p3=42&p4=42&p5=NaN&p6=Infinity&p7=hello&p8=hello&p9=hello&p10=1%2C2%2C3%2C4'
 						],
-						['Test that param names and values that contain characters that need to be encoded are encoded correctly',
+						['Param names and values that contain characters that need to be URI-encoded are encoded',
 							[
 								'http://www.uize.com',
 								{
@@ -339,7 +339,7 @@ Uize.module ({
 								'param1=%60%40%23%24%25%5E%26%2B%3D%5B%5D%7B%7D%7C%5C%3A%3B%22%3C%3E%2C%3F%2F%20&' +
 								'%60%40%23%24%25%5E%26%2B%3D%5B%5D%7B%7D%7C%5C%3A%3B%22%3C%3E%2C%3F%2F%20=hello'
 						],
-						['Test that query params in params objects are stitched into params in URL string',
+						['Query params in params objects are stitched into params in the URL string',
 							[
 								'http://www.uize.com?p1=wind&p2=oil&p3=solar&p4=coal',
 								{p2:'biofuel',p4:'geothermal',p5:'tidal'}
@@ -1256,23 +1256,23 @@ Uize.module ({
 						{
 							title:'Test that an empty base URL is supported correctly',
 							test:[
-								['Test that, when the base URL is an empty string and the URL to relativize is an empty string, then an empty string is returned',
+								['When the base URL is an empty string and the URL to relativize is an empty string, then an empty string is returned',
 									['',''],
 									''
 								],
-								['Test that, when the base URL is an empty string and the URL to relativize is a root-relative URL, then the URL to relativize is returned as is',
+								['When the base URL is an empty string and the URL to relativize is a root-relative URL, then the URL to relativize is returned as is',
 									['','/foo/bar.html'],
 									'/foo/bar.html'
 								],
-								['Test that, when the base URL is an empty string and the URL to relativize is a forward-relative URL, then the URL to relativize is returned as is',
+								['When the base URL is an empty string and the URL to relativize is a forward-relative URL, then the URL to relativize is returned as is',
 									['','foo/bar.html'],
 									'foo/bar.html'
 								],
-								['Test that, when the base URL is an empty string and the URL to relativize is a back-relative URL, then the URL to relativize is returned as is',
+								['When the base URL is an empty string and the URL to relativize is a back-relative URL, then the URL to relativize is returned as is',
 									['','../../foo/bar.html'],
 									'../../foo/bar.html'
 								],
-								['Test that, when the base URL is an empty string and the URL to relativize is a absolute with a domain, then the URL to relativize is returned as is',
+								['When the base URL is an empty string and the URL to relativize is a absolute with a domain, then the URL to relativize is returned as is',
 									['','http://www.somedomain.com/foo/bar.html'],
 									'http://www.somedomain.com/foo/bar.html'
 								]
@@ -1375,19 +1375,19 @@ Uize.module ({
 
 								return [
 									_samePrefixTestBatch (
-										'Test that, when both URLs are forward-relative, a relative URL can always be produced',
+										'When both URLs are forward-relative, a relative URL can always be produced',
 										''
 									),
 									_samePrefixTestBatch (
-										'Test that, when both URLs are back-relative, a relative URL can always be produced',
+										'When both URLs are back-relative, a relative URL can always be produced',
 										'../../../'
 									),
 									_samePrefixTestBatch (
-										'Test that, when both URLs are root-relative, a relative URL can always be produced',
+										'When both URLs are root-relative, a relative URL can always be produced',
 										'/'
 									),
 									_samePrefixTestBatch (
-										'Test that, when both URLs have the same domain, a relative URL can always be produced',
+										'When both URLs have the same domain, a relative URL can always be produced',
 										'http://www.somedomain.com/'
 									)
 								];
@@ -1413,7 +1413,7 @@ Uize.module ({
 												;
 												_baseUrlPrefix != _urlToRelativizePrefix &&
 													_testCases.push (
-														['Test that, when the base URL is \'' + _baseUrl + '\' and the URL to relativize is \'' + _urlToRelativize + '\'. then a relative URL cannot be created and ' + (_urlToRelativizeIsAbsolute ? '\'' + _urlToRelativize + '\'' : 'null') + ' is returned',
+														['When the base URL is \'' + _baseUrl + '\' and the URL to relativize is \'' + _urlToRelativize + '\'. then a relative URL cannot be created and ' + (_urlToRelativizeIsAbsolute ? '\'' + _urlToRelativize + '\'' : 'null') + ' is returned',
 															[_baseUrl,_urlToRelativize],
 															_urlToRelativizeIsAbsolute ? _urlToRelativize : null
 														]
@@ -1428,27 +1428,27 @@ Uize.module ({
 						}
 					]],
 					['Uize.Url.toAbsolute',[
-						['Test that absolutizing an empty URL against an empty base URL produces an empty string',
+						['Absolutizing an empty URL against an empty base URL produces an empty string',
 							['',''],
 							''
 						],
-						['Test that absolutizing a URL that already is an absolute URL simply returns that URL',
+						['Absolutizing a URL that already is an absolute URL simply returns that URL',
 							['http://www.tomkidding.com','http://www.uize.com'],
 							'http://www.uize.com'
 						],
-						['Test that absolutizing an empty URL produces the base URL without its filename',
+						['Absolutizing an empty URL produces the base URL without its filename',
 							['http://www.uize.com/reference/Uize.html',''],
 							'http://www.uize.com/reference/'
 						],
-						['Test that absolutizing an empty URL when the base URL has no folder and only a filename produces the base URL with only its host',
+						['Absolutizing an empty URL when the base URL has no folder and only a filename produces the base URL with only its host',
 							['http://www.uize.com/index.html',''],
 							'http://www.uize.com/'
 						],
-						['Test that absolutizing an empty URL when the base URL has only a host and trailing slash simply returns the base URL',
+						['Absolutizing an empty URL when the base URL has only a host and trailing slash simply returns the base URL',
 							['http://www.uize.com/',''],
 							'http://www.uize.com/'
 						],
-						['Test that absolutizing an empty URL when the base URL has only a host and no trailing slash simply returns the base URL',
+						['Absolutizing an empty URL when the base URL has only a host and no trailing slash simply returns the base URL',
 							['http://www.uize.com',''],
 							'http://www.uize.com'
 						],

@@ -64,7 +64,7 @@ Uize.module ({
 				Uize.Test.staticMethodsTest ([
 					['Uize.Flo.block',[
 						{
-							title:'Test that the statements of a block are executed in the correct order when all statements execute asynchronously',
+							title:'Statements of a block are executed in the order in which they are declared, when all statements execute asynchronously',
 							test:function (_next) {
 								var
 									m = this,
@@ -83,7 +83,7 @@ Uize.module ({
 							}
 						},
 						{
-							title:'Test that the statements of a block are executed in the correct order when all statements execute synchronously',
+							title:'Statements of a block are executed in the order in which they are declared, when all statements execute synchronously',
 							test:function (_next) {
 								var
 									m = this,
@@ -130,7 +130,7 @@ Uize.module ({
 							}
 						},
 						{
-							title:'Test that, in a block of only synchronous statements, all statements are executed synchronously and no asynchronous breaks are introduced',
+							title:'In a block of only synchronous statements, all statements are executed synchronously and no asynchronous breaks are introduced',
 							test:function () {
 								var
 									_expected = ['a','b','c'],
@@ -559,7 +559,7 @@ Uize.module ({
 							}
 						},
 						{
-							title:'Test that, when an ongoing loop contains only synchronous statements, the entire loop is executed synchronously',
+							title:'When an ongoing loop contains only synchronous statements, the entire loop is executed synchronously',
 							test:function () {
 								var
 									_items = ['a','b','c','d','e','f','g'],
@@ -691,7 +691,7 @@ Uize.module ({
 					title:'Test breathing features',
 					test:[
 						{
-							title:'Test that, when breathing is enabled, asynchronous breaks are introduced between all statements in a block of synchronous statements',
+							title:'When breathing is enabled, asynchronous breaks are introduced between all statements in a block of synchronous statements',
 							test:function (_next) {
 								var
 									m = this,

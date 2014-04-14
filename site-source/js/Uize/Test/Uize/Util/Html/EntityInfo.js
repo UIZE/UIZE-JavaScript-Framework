@@ -37,7 +37,7 @@ Uize.module ({
 				Uize.Test.requiredModulesTest ('Uize.Util.Html.EntityInfo'),
 				Uize.Test.staticPropertyTest ('Uize.Util.Html.EntityInfo.charCodeToEntityInfoLookup','object'),
 				{
-					title:'Test that the Uize.Util.Html.EntityInfo.charCodeToEntityInfoLookup static property has properties with entity character codes as keys and entity info arrays as values',
+					title:'The Uize.Util.Html.EntityInfo.charCodeToEntityInfoLookup static property has properties with entity character codes as keys and entity info arrays as values',
 					test:function () {
 						var _charCodeToEntityInfoLookup = Uize.Util.Html.EntityInfo.charCodeToEntityInfoLookup;
 						return this.expect (
@@ -47,13 +47,13 @@ Uize.module ({
 					}
 				},
 				{
-					title:'Test that the Uize.Util.Html.EntityInfo.charCodeToEntityInfoLookup static property has entries for all the HTML entities that are defined in the Uize.Util.Html.Entities module',
+					title:'The Uize.Util.Html.EntityInfo.charCodeToEntityInfoLookup static property has entries for all the HTML entities that are defined in the Uize.Util.Html.Entities module',
 					test:Uize.map (
 						Uize.keys (_entityNameToCharCodeLookup),
 						function (_entityName) {
 							var _entityCode = _entityNameToCharCodeLookup [_entityName];
 							return {
-								title:'Test that entity info exists for the HTML entity &' + _entityName + '; (code ' + _entityCode + ')',
+								title:'Entity info exists for the HTML entity &' + _entityName + '; (code ' + _entityCode + ')',
 								test:function () {
 									return this.expectArray (Uize.Util.Html.EntityInfo.charCodeToEntityInfoLookup [_entityCode]);
 								}

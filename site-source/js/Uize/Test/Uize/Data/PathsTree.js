@@ -34,11 +34,11 @@ Uize.module ({
 				Uize.Test.requiredModulesTest ('Uize.Data.PathsTree'),
 				Uize.Test.staticMethodsTest ([
 					['Uize.Data.PathsTree.toList',[
-						['Test that an empty object is encoded to an empty array',
+						['An empty object is encoded to an empty array',
 							{},
 							[]
 						],
-						['Test that an object with a single node is encoded to an array with a single element whose value is the name of that node',
+						['An object with a single node is encoded to an array with a single element whose value is the name of that node',
 							{Uize:0},
 							['Uize']
 						],
@@ -50,11 +50,11 @@ Uize.module ({
 							{Uize:{Widget:0}},
 							['Uize','Uize.Widget']
 						],
-						['Test that a child node supports everything that the root node supports',
+						['A child node supports everything that the root node supports',
 							{Uize:{Dom:0,Widget:{Bar:0,Form:0}}},
 							['Uize','Uize.Dom','Uize.Widget','Uize.Widget.Bar','Uize.Widget.Form']
 						],
-						['Test that a complex tree is encoded correctly',
+						['A complex tree can be encoded',
 							{Uize:{Fade:0,Color:0,Dom:0,Widget:{Bar:{Slider:0},Form:0}},MyCompanySite:{Dialog:0,Page:0}},
 							[
 								'Uize',
@@ -70,44 +70,44 @@ Uize.module ({
 								'MyCompanySite.Page'
 							]
 						],
-						['Test that a custom delimiter is handled correctly',
+						['A custom delimiter can be specified',
 							[{Uize:{Dom:0,Widget:{Bar:0,Form:0}}},'_'],
 							['Uize','Uize_Dom','Uize_Widget','Uize_Widget_Bar','Uize_Widget_Form']
 						],
-						['Test that the custom delimiter can be an empty string',
+						['The custom delimiter can be an empty string',
 							[{Uize:{Dom:0,Widget:{Bar:0,Form:0}}},''],							['Uize','UizeDom','UizeWidget','UizeWidgetBar','UizeWidgetForm']
 						],
-						['Test that the value null for the custom delimiter is defaulted correctly',
+						['When the value null is specified for the custom delimiter, the default delimiter is used',
 							[{Uize:{Dom:0,Widget:{Bar:0,Form:0}}},null],
 							['Uize','Uize.Dom','Uize.Widget','Uize.Widget.Bar','Uize.Widget.Form']
 						],
-						['Test that the value undefined for the custom delimiter is defaulted correctly',
+						['When the value undefined is specified for the custom delimiter, the default delimiter is used',
 							[{Uize:{Dom:0,Widget:{Bar:0,Form:0}}},undefined],
 							['Uize','Uize.Dom','Uize.Widget','Uize.Widget.Bar','Uize.Widget.Form']
 						]
 					]],
 					['Uize.Data.PathsTree.fromList',[
-						['Test that an empty array is decoded to an empty object',
+						['An empty array is decoded to an empty object',
 							[[]],
 							{}
 						],
-						['Test that an array with a single element whose value does not have a delimiter is decoded correctly to an object with a single node whose key is the array element value',
+						['An array with a single element whose value does not have a delimiter is decoded to an object with a single node whose key is the array element value',
 							[['Uize']],
 							{Uize:0}
 						],
-						['Test that an array with multiple elements whose values do not have a delimiter is decoded correctly to an object with multiple nodes at the same level',
+						['An array with multiple elements whose values do not have a delimiter is decoded to an object with multiple nodes at the same level',
 							[['Uize','MyCompanySite']],
 							{Uize:0,MyCompanySite:0}
 						],
-						['Test that an array that has two values, representing a root path and a subpath, is decoded correctly to a node with a single child node',
+						['An array that has two values, representing a root path and a subpath, is decoded to a node with a single child node',
 							[['Uize','Uize.Widget']],
 							{Uize:{Widget:0}}
 						],
-						['Test that a subpath supports everything that a root path supports',
+						['A subpath supports everything that a root path supports',
 							[['Uize','Uize.Dom','Uize.Widget','Uize.Widget.Bar','Uize.Widget.Form']],
 							{Uize:{Dom:0,Widget:{Bar:0,Form:0}}}
 						],
-						['Test that a complex paths list is decoded correctly to a paths tree',
+						['A complex paths list can be decoded to a paths tree',
 							[
 								[
 									'Uize',
@@ -125,15 +125,15 @@ Uize.module ({
 							],
 							{Uize:{Fade:0,Color:0,Dom:0,Widget:{Bar:{Slider:0},Form:0}},MyCompanySite:{Dialog:0,Page:0}}
 						],
-						['Test that a custom delimiter is handled correctly',
+						['A custom delimiter can be specified',
 							[['Uize','Uize_Dom','Uize_Widget','Uize_Widget_Bar','Uize_Widget_Form'],'_'],
 							{Uize:{Dom:0,Widget:{Bar:0,Form:0}}}
 						],
-						['Test that the value null for the custom delimiter is defaulted correctly',
+						['When the value null is specified for the custom delimiter, the default delimiter is used',
 							[['Uize','Uize.Dom','Uize.Widget','Uize.Widget.Bar','Uize.Widget.Form'],null],
 							{Uize:{Dom:0,Widget:{Bar:0,Form:0}}}
 						],
-						['Test that the value undefined for the custom delimiter is defaulted correctly',
+						['When the value undefined is specified for the custom delimiter, the default delimiter is used',
 							[['Uize','Uize.Dom','Uize.Widget','Uize.Widget.Bar','Uize.Widget.Form'],undefined],
 							{Uize:{Dom:0,Widget:{Bar:0,Form:0}}}
 						]

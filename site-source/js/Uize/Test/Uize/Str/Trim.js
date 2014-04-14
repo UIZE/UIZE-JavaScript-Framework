@@ -34,72 +34,72 @@ Uize.module ({
 				Uize.Test.requiredModulesTest ('Uize.Str.Trim'),
 				Uize.Test.staticMethodsTest ([
 					['Uize.Str.Trim.hasPadding',[
-						['Test that leading whitespace is detected as padding',
+						['Leading whitespace is detected as padding',
 							'   leading whitespace',
 							true
 						],
-						['Test that trailing whitespace is detected as padding',
+						['Trailing whitespace is detected as padding',
 							'trailing whitespace     ',
 							true
 						],
-						['Test that leading and trailing whitespace is detected as padding',
+						['Leading and trailing whitespace is detected as padding',
 							'   leading and trailing whitespace   ',
 							true
 						],
-						['Test that padding is not detected in a string that has no padding',
+						['Padding is not detected in a string that has no padding',
 							'noPadding',
 							false
 						],
-						['Test that whitespace only in the middle is not detected as padding',
+						['Whitespace only in the middle is not detected as padding',
 							'no         padding',
 							false
 						],
-						['Test that a string that is only whitespace is treated as having padding',
+						['A string that is only whitespace is considered to have padding',
 							'                ',
 							true
 						],
-						['Test that an empty string is not considered to have padding',
+						['An empty string is not considered to have padding',
 							'',
 							false
 						]
 					]],
 					['Uize.Str.Trim.trim',[
-						['Test that trimming empty string produces empty string','',''],
-						['Test that trimming string with no padding returns the same string','hello','hello'],
+						['Trimming empty string produces empty string','',''],
+						['Trimming a string with no padding returns the same string','hello','hello'],
 						['Test that trimming string with leading spaces works','   hello','hello'],
 						['Test that trimming string with trailing spaces works','hello   ','hello'],
 						['Test that trimming string with leading and trailing spaces works','   hello   ','hello'],
-						['Test that trimming does not affect inner whitesapce',' hello \t there ','hello \t there'],
+						['Trimming does not affect inner whitesapce',' hello \t there ','hello \t there'],
 						['Test that trimming string with tab padding works','\t\thello\t\t','hello'],
-						['Test that left-trimming can be performed by specifying -1 for the optional side parameter',
+						['Left-trimming can be performed by specifying -1 for the optional side parameter',
 							['   hello   ',-1],
 							'hello   '
 						],
-						['Test that right-trimming can be performed by specifying 1 for the optional side parameter',
+						['Right-trimming can be performed by specifying 1 for the optional side parameter',
 							['   hello   ',1],
 							'   hello'
 						],
-						['Test that trimming on both sides can be performed by specifying 0 for the optional side parameter',
+						['Trimming on both sides can be performed by specifying 0 for the optional side parameter',
 							['   hello   ',0],
 							'hello'
 						]
 					]],
 					['Uize.Str.Trim.trimLeft',[
-						['Test that left-trimming empty string produces empty string','',''],
-						['Test that left-trimming string with no padding returns the same string','hello','hello'],
+						['Left-trimming empty string produces empty string','',''],
+						['Left-trimming a string with no padding returns the same string','hello','hello'],
 						['Test that left-trimming string with leading spaces works','   hello','hello'],
 						['Test that left-trimming string with trailing spaces works','hello   ','hello   '],
 						['Test that left-trimming string with leading and trailing spaces works','   hello   ','hello   '],
-						['Test that left-trimming does not affect inner whitesapce',' hello \t there ','hello \t there '],
+						['Left-trimming does not affect inner whitesapce',' hello \t there ','hello \t there '],
 						['Test that left-trimming string with tab padding works','\t\thello\t\t','hello\t\t']
 					]],
 					['Uize.Str.Trim.trimRight',[
-						['Test that right-trimming empty string produces empty string','',''],
-						['Test that right-trimming string with no padding returns the same string','hello','hello'],
+						['Right-trimming empty string produces empty string','',''],
+						['Right-trimming a string with no padding returns the same string','hello','hello'],
 						['Test that right-trimming string with leading spaces works','   hello','   hello'],
 						['Test that right-trimming string with trailing spaces works','hello   ','hello'],
 						['Test that right-trimming string with leading and trailing spaces works','   hello   ','   hello'],
-						['Test that right-trimming does not affect inner whitesapce',' hello \t there ',' hello \t there'],
+						['Right-trimming does not affect inner whitesapce',' hello \t there ',' hello \t there'],
 						['Test that right-trimming string with tab padding works','\t\thello\t\t','\t\thello']
 					]]
 				])

@@ -35,141 +35,141 @@ Uize.module ({
 				Uize.Test.requiredModulesTest ('Uize.Util.Html.Encode'),
 				Uize.Test.staticMethodsTest ([
 					['Uize.Util.Html.Encode.encode',[
-						['Test that calling with empty string produces empty string',
+						['Calling with empty string produces empty string',
 							'',
 							''
 						],
-						['Test that a string that doesn\'t contain any characters that need encoding is returned as is',
+						['A string that doesn\'t contain any characters that need encoding is returned as is',
 							'SOLAR POWER',
 							'SOLAR POWER'
 						],
-						['Test that a string containing "&" (ampersand) characters is encoded correctly',
+						['When the source string contains "&" (ampersand) characters, all those characters will be encoded',
 							'SOLAR & WIND & BIOFUEL & GEOTHERMAL',
 							'SOLAR &amp; WIND &amp; BIOFUEL &amp; GEOTHERMAL'
 						],
-						['Test that a string containing "\\n" (linefeed) characters is encoded correctly',
+						['When the source string contains "\\n" (linefeed) characters, all those characters will be encoded',
 							'SOLAR\nWIND\nBIOFUEL\nGEOTHERMAL',
 							'SOLAR&#10;WIND&#10;BIOFUEL&#10;GEOTHERMAL'
 						],
-						['Test that a string containing "\\r" (carriage return) characters is encoded correctly',
+						['When the source string contains "\\r" (carriage return) characters, all those characters will be encoded',
 							'SOLAR\rWIND\rBIOFUEL\rGEOTHERMAL',
 							'SOLAR&#13;WIND&#13;BIOFUEL&#13;GEOTHERMAL'
 						],
-						['Test that a string containing double quotes is encoded correctly',
+						['When the source string contains double quotes, all those double quotes will be encoded',
 							'"SOLAR" "WIND" "BIOFUEL" "GEOTHERMAL"',
 							'&quot;SOLAR&quot; &quot;WIND&quot; &quot;BIOFUEL&quot; &quot;GEOTHERMAL&quot;'
 						],
-						['Test that a string containing single quotes is encoded correctly',
+						['When the source string contains single quotes, all those single quotes will be encoded',
 							'\'SOLAR\' \'WIND\' \'BIOFUEL\' \'GEOTHERMAL\'',
 							'&apos;SOLAR&apos; &apos;WIND&apos; &apos;BIOFUEL&apos; &apos;GEOTHERMAL&apos;'
 						],
-						['Test that a string containing "<" (less than sign) characters is encoded correctly',
+						['When the source string contains "<" (less than sign) characters, all those characters will be encoded',
 							'1 < 2 < 3 < 4',
 							'1 &lt; 2 &lt; 3 &lt; 4'
 						],
-						['Test that a string containing ">" (greater than sign) characters is encoded correctly',
+						['When the source string contains ">" (greater than sign) characters, all those characters will be encoded',
 							'4 > 3 > 2 > 1',
 							'4 &gt; 3 &gt; 2 &gt; 1'
 						],
-						['Test that a string containing multiple characters that need to be encoded is encoded correctly',
+						['When the source string contains multiple different characters that need to be encoded, all those characters will be encoded',
 							'SOLAR & WIND\n"BIOFUEL"\r<GEOTHERMAL>',
 							'SOLAR &amp; WIND&#10;&quot;BIOFUEL&quot;&#13;&lt;GEOTHERMAL&gt;'
 						],
-						['Test that the value undefined is coerced to a string before being encoded',
+						['The value undefined is coerced to a string before being encoded',
 							undefined,
 							'undefined'
 						],
-						['Test that the value null is coerced to a string before being encoded',
+						['The value null is coerced to a string before being encoded',
 							null,
 							'null'
 						],
-						['Test that a number type value is coerced to a string before being encoded',
+						['A number type value is coerced to a string before being encoded',
 							42,
 							'42'
 						],
-						['Test that the number type value NaN is coerced to a string before being encoded',
+						['The number type value NaN is coerced to a string before being encoded',
 							NaN,
 							'NaN'
 						],
-						['Test that the number type value Infinity is coerced to a string before being encoded',
+						['The number type value Infinity is coerced to a string before being encoded',
 							Infinity,
 							'Infinity'
 						],
-						['Test that the boolean type value false is coerced to a string before being encoded',
+						['The boolean type value false is coerced to a string before being encoded',
 							false,
 							'false'
 						],
-						['Test that a Boolean object instance is coerced to a string before being encoded',
+						['A Boolean object instance is coerced to a string before being encoded',
 							[new Boolean (true)],
 							'true'
 						],
-						['Test that a Number object instance is coerced to a string before being encoded',
+						['A Number object instance is coerced to a string before being encoded',
 							[new Number (42)],
 							'42'
 						],
-						['Test that a String object instance is coerced to a string before being encoded',
+						['A String object instance is coerced to a string before being encoded',
 							[new String ('SOLAR POWER')],
 							'SOLAR POWER'
 						],
-						['Test that a Uize class instance is coerced to a string before being encoded',
+						['A Uize class instance is coerced to a string before being encoded',
 							[Uize.Class.Value ({value:'SOLAR POWER'})],
 							'SOLAR POWER'
 						]
 					]],
 					['Uize.Util.Html.Encode.decode',[
-						['Test that calling with empty string produces empty string',
+						['Calling with empty string produces empty string',
 							'',
 							''
 						],
-						['Test that a string that doesn\'t contain any entities is returned as is',
+						['A string that doesn\'t contain any entities is returned as is',
 							'SOLAR POWER',
 							'SOLAR POWER'
 						],
-						['Test that entities are decoded correctly',
+						['When the source string contains HTML entities, all those entities are decoded',
 							'&quot; &amp; &apos; &lt; &gt; &#10; &#13;',
 							'" & \' < > \n \r'
 						],
-						['Test that some arbitrary character code entity is decoded correctly',
+						['When the source string contains arbitrary character code entity, all those entities are decoded',
 							'&#1234;',
 							String.fromCharCode (1234)
 						],
-						['Test that the value undefined is coerced to a string before being decoded',
+						['The value undefined is coerced to a string before being decoded',
 							undefined,
 							'undefined'
 						],
-						['Test that the value null is coerced to a string before being decoded',
+						['The value null is coerced to a string before being decoded',
 							null,
 							'null'
 						],
-						['Test that a number type value is coerced to a string before being decoded',
+						['A number type value is coerced to a string before being decoded',
 							42,
 							'42'
 						],
-						['Test that the number type value NaN is coerced to a string before being decoded',
+						['The number type value NaN is coerced to a string before being decoded',
 							NaN,
 							'NaN'
 						],
-						['Test that the number type value Infinity is coerced to a string before being decoded',
+						['The number type value Infinity is coerced to a string before being decoded',
 							Infinity,
 							'Infinity'
 						],
-						['Test that the boolean type value false is coerced to a string before being decoded',
+						['The boolean type value false is coerced to a string before being decoded',
 							false,
 							'false'
 						],
-						['Test that a Boolean object instance is coerced to a string before being decoded',
+						['A Boolean object instance is coerced to a string before being decoded',
 							[new Boolean (true)],
 							'true'
 						],
-						['Test that a Number object instance is coerced to a string before being decoded',
+						['A Number object instance is coerced to a string before being decoded',
 							[new Number (42)],
 							'42'
 						],
-						['Test that a String object instance is coerced to a string before being decoded',
+						['A String object instance is coerced to a string before being decoded',
 							[new String ('SOLAR POWER')],
 							'SOLAR POWER'
 						],
-						['Test that a Uize class instance is coerced to a string before being decoded',
+						['A Uize class instance is coerced to a string before being decoded',
 							[Uize.Class.Value ({value:'SOLAR POWER'})],
 							'SOLAR POWER'
 						]

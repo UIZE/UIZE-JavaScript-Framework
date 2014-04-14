@@ -63,7 +63,7 @@ Uize.module ({
 							[['A','B','C','D','E'],'<','>'],
 							'<A><B><C><D><E>'
 						],
-						['Test that specifying an empty array produces an empty string result',
+						['Specifying an empty array produces an empty string result',
 							[[],'<','>','-'],
 							''
 						],

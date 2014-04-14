@@ -63,29 +63,29 @@ Uize.module ({
 				Uize.Test.requiredModulesTest ('Uize.Str.Whitespace'),
 				Uize.Test.staticMethodsTest ([
 					['Uize.Str.Whitespace.isWhitespace',[
-						['Test that a string containing only whitespace characters is regarded as being whitespace',
+						['A string containing only whitespace characters is considered whitespace',
 							_whitespaceStr,
 							true
 						],
-						['Test that a string that is all whitespace characters except for a single non-whitespace character is not regarded as being whitespace',
+						['A string that is all whitespace characters except for a single non-whitespace character is not considered whitespace',
 							'#' + _whitespaceStr,
 							false
 						],
-						['Test that an empty string is not regarded as being whitespace, since it contains no whitespace characters',
+						['An empty string is not considered whitespace, since it contains no whitespace characters',
 							'',
 							false
 						]
 					]],
 					['Uize.Str.Whitespace.isNonWhitespace',[
-						['Test that a string containing only non-whitespace characters is regarded as being non-whitespace',
+						['A string containing only non-whitespace characters is considered non-whitespace',
 							'foobar',
 							true
 						],
-						['Test that a string that is all non-whitespace characters except for a single whitespace character is not regarded as being non-whitespace',
+						['A string that is all non-whitespace characters except for a single whitespace character is not considered non-whitespace',
 							'foo bar',
 							false
 						],
-						['Test that an empty string is not regarded as being non-whitespace, since it contains no non-whitespace characters',
+						['An empty string is not considered non-whitespace, since it contains no non-whitespace characters',
 							'',
 							false
 						]

@@ -34,19 +34,19 @@ Uize.module ({
 				Uize.Test.requiredModulesTest ('Uize.Data.Combinations'),
 				Uize.Test.staticMethodsTest ([
 					['Uize.Data.Combinations.generate',[
-						['Test that specifying the value null for the combinations specifier results in an empty array being returned',
+						['Specifying the value null for the combinations specifier results in an empty array being returned',
 							null,
 							[]
 						],
-						['Test that specifying the value undefined for the combinations specifier results in an empty array being returned',
+						['Specifying the value undefined for the combinations specifier results in an empty array being returned',
 							undefined,
 							[]
 						],
-						['Test that specifying an empty object for the combinations specifier results in an empty array being returned',
+						['Specifying an empty object for the combinations specifier results in an empty array being returned',
 							{},
 							[]
 						],
-						['Test that specifying an empty array for the combinations specifier results in an empty array being returned',
+						['Specifying an empty array for the combinations specifier results in an empty array being returned',
 							[],
 							[]
 						],
@@ -71,15 +71,15 @@ Uize.module ({
 								{foo:'BAR!!!',hello:'world',many:'reasons why'}
 							]
 						],
-						['Test that, when there is only one possible value for every key in the combinations specifier object, then an array with only one combination is returned',
+						['When there is only one possible value for every key in the combinations specifier object, then an array with only one combination is returned',
 							{foo:['bar'],hello:['there'],many:['moons ago']},
 							[{foo:'bar',hello:'there',many:'moons ago'}]
 						],
-						['Test that a value for a property of the combinations specifier that is not a list is treated as the only possible value for that property',
+						['A value for a property of the combinations specifier that is not a list is treated as the only possible value for that property',
 							{aString:'foo',aNumber:42,aBoolean:true,anObject:{foo:'bar'},aNull:null,anUndefined:undefined},
 							[{aString:'foo',aNumber:42,aBoolean:true,anObject:{foo:'bar'},aNull:null,anUndefined:undefined}]
 						],
-						['Test that specifying no possible values for a property in the combinations specifier results in that property being omitted from the generated combinations',
+						['Specifying no possible values for a property in the combinations specifier results in that property being omitted from the generated combinations',
 							{foo:['bar','BAR','BAR!!!'],hello:[],many:['moons ago','reasons why']},
 							[
 								{foo:'bar',many:'moons ago'},
@@ -90,11 +90,11 @@ Uize.module ({
 								{foo:'BAR!!!',many:'reasons why'}
 							]
 						],
-						['Test that specifying an empty array for every property of the combinations specifier results in an empty array (ie. no combinations) being returned',
+						['Specifying an empty array for every property of the combinations specifier results in an empty array (ie. no combinations) being returned',
 							{foo:[],hello:[],many:[]},
 							[]
 						],
-						['Test that an array can be specified as the single possible value for a property in the combinations specifier, as long as the array value is wrapped in a possible values array',
+						['An array can be specified as the single possible value for a property in the combinations specifier, as long as the array value is wrapped in a possible values array',
 							{hello:[['there','world']]},
 							[{hello:['there','world']}]
 						],
@@ -116,7 +116,7 @@ Uize.module ({
 								]
 							],
 							{
-								title:'Test that a combination transformer function receives as its first argument the combination to transform',
+								title:'A combination transformer function receives as its first argument the combination to transform',
 								test:function () {
 									var _combinationsSeen = [];
 									Uize.Data.Combinations.generate (
@@ -135,7 +135,7 @@ Uize.module ({
 								}
 							},
 							{
-								title:'Test that a combination transformer function receives as its second argument the index of the combination to transform',
+								title:'A combination transformer function receives as its second argument the index of the combination to transform',
 								test:function () {
 									var _combinationIndexesSeen = [];
 									Uize.Data.Combinations.generate (
@@ -147,7 +147,7 @@ Uize.module ({
 									return this.expect ([0,1,2,3],_combinationIndexesSeen);
 								}
 							},
-							['Test that, if a combination transformer function modifies the combination object it receives, then that modified combination object makes it into the resulting combinations array',
+							['If a combination transformer function modifies the combination object it receives, then that modified combination object makes it into the resulting combinations array',
 								[
 									{prop1:['hello','hi'],prop2:['there','world']},
 									function (_combination) {
@@ -161,14 +161,14 @@ Uize.module ({
 									{prop1:'hi',prop2:'world',prop1PlusProp2:'hi world'}
 								]
 							],
-							['Test that, if a combination transformer returns a result that is not undefined, then that result replaces the combination passed to it',
+							['If a combination transformer returns a result that is not undefined, then that result replaces the combination passed to it',
 								[
 									{prop1:['hello','hi'],prop2:['there','world']},
 									function (_combination) {return _combination.prop1 + ' ' + _combination.prop2}
 								],
 								['hello there','hello world','hi there','hi world']
 							],
-							['Test that, if a combination transformer returns the value undefined, then the generated combinations are returned unaltered',
+							['If a combination transformer returns the value undefined, then the generated combinations are returned unaltered',
 								[{foo:['bar','BAR'],hello:['there','world']},Uize.nop],
 								[
 									{foo:'bar',hello:'there'},
@@ -184,11 +184,11 @@ Uize.module ({
 								],
 								['hello there','hello world','hi there','hi world']
 							],
-							['Test that, for a combination transformer expression string, the variable name "key" is defined and is set to the index of the combination',
+							['For a combination transformer expression string, the variable name "key" is defined and is set to the index of the combination',
 								[{prop1:['hello','hi'],prop2:['there','world']},'key'],
 								[0,1,2,3]
 							],
-							['Test that specifying the value null for the combination transformer is treated as no combination transformer being specified',
+							['Specifying the value null for the combination transformer is treated as no combination transformer being specified',
 								[{foo:['bar','BAR'],hello:['there','world']},null],
 								[
 									{foo:'bar',hello:'there'},
@@ -197,7 +197,7 @@ Uize.module ({
 									{foo:'BAR',hello:'world'}
 								]
 							],
-							['Test that specifying the value undefined for the combination transformer is treated as no combination transformer being specified',
+							['Specifying the value undefined for the combination transformer is treated as no combination transformer being specified',
 								[{foo:['bar','BAR'],hello:['there','world']},undefined],
 								[
 									{foo:'bar',hello:'there'},
@@ -209,7 +209,7 @@ Uize.module ({
 
 						/*** test support for optional combination matcher ***/
 							{
-								title:'Test that a combination matcher function receives as its first argument the combination to match',
+								title:'A combination matcher function receives as its first argument the combination to match',
 								test:function () {
 									var _combinationsSeen = [];
 									Uize.Data.Combinations.generate (
@@ -229,7 +229,7 @@ Uize.module ({
 								}
 							},
 							{
-								title:'Test that a combination matcher function receives as its second argument the index of the combination to match',
+								title:'A combination matcher function receives as its second argument the index of the combination to match',
 								test:function () {
 									var _combinationIndexesSeen = [];
 									Uize.Data.Combinations.generate (
@@ -260,14 +260,14 @@ Uize.module ({
 									{prop1:'hi',prop2:'world'}
 								]
 							],
-							['Test that, for a combination matcher expression string, the variable name "key" is defined and is set to the index of the combination',
+							['For a combination matcher expression string, the variable name "key" is defined and is set to the index of the combination',
 								[{prop1:['hello','hi'],prop2:['there','world']},null,'key % 2'],
 								[
 									{prop1:'hello',prop2:'world'},
 									{prop1:'hi',prop2:'world'}
 								]
 							],
-							['Test that specifying the value null for the combination matcher is treated as no combination matcher being specified',
+							['Specifying the value null for the combination matcher is treated as no combination matcher being specified',
 								[{prop1:['hello','hi'],prop2:['there','world']},null,null],
 								[
 									{prop1:'hello',prop2:'there'},
@@ -276,7 +276,7 @@ Uize.module ({
 									{prop1:'hi',prop2:'world'}
 								]
 							],
-							['Test that specifying the value undefined for the combination matcher is treated as no combination matcher being specified',
+							['Specifying the value undefined for the combination matcher is treated as no combination matcher being specified',
 								[{prop1:['hello','hi'],prop2:['there','world']},null,null],
 								[
 									{prop1:'hello',prop2:'there'},
@@ -287,7 +287,7 @@ Uize.module ({
 							],
 
 						/*** test support for combination specifier being an array ***/
-							['Test that an array can be specified for the combination specifier, and that the resulting combinations produced are arrays',
+							['An array can be specified for the combination specifier, and the resulting combinations produced are arrays',
 								[[['a','b','c'],[0,1,2]]],
 								[
 									['a',0],
@@ -304,7 +304,7 @@ Uize.module ({
 					]],
 					['Uize.Data.Combinations.forEach',[
 						{
-							title:'Test that specifying the value null for the combinations specifier results in no iterations being performed',
+							title:'Specifying the value null for the combinations specifier results in no iterations being performed',
 							test:function () {
 								var _totalIterations = 0;
 								Uize.Data.Combinations.forEach (null,function () {_totalIterations++});
@@ -312,7 +312,7 @@ Uize.module ({
 							}
 						},
 						{
-							title:'Test that specifying the value undefined for the combinations specifier results in no iterations being performed',
+							title:'Specifying the value undefined for the combinations specifier results in no iterations being performed',
 							test:function () {
 								var _totalIterations = 0;
 								Uize.Data.Combinations.forEach (undefined,function () {_totalIterations++});
@@ -320,7 +320,7 @@ Uize.module ({
 							}
 						},
 						{
-							title:'Test that specifying an empty object for the combinations specifier results in no iterations being performed',
+							title:'Specifying an empty object for the combinations specifier results in no iterations being performed',
 							test:function () {
 								var _totalIterations = 0;
 								Uize.Data.Combinations.forEach ({},function () {_totalIterations++});
@@ -328,7 +328,7 @@ Uize.module ({
 							}
 						},
 						{
-							title:'Test that specifying an empty array for the combinations specifier results in no iterations being performed',
+							title:'Specifying an empty array for the combinations specifier results in no iterations being performed',
 							test:function () {
 								var _totalIterations = 0;
 								Uize.Data.Combinations.forEach ([],function () {_totalIterations++});
@@ -377,7 +377,7 @@ Uize.module ({
 							}
 						},
 						{
-							title:'Test that, when there is only one possible value for every key in the combinations specifier object, then there is only one iteration for a single combination',
+							title:'When there is only one possible value for every key in the combinations specifier object, then there is only one iteration for a single combination',
 							test:function () {
 								var _combinationsSeen = [];
 								Uize.Data.Combinations.forEach (
@@ -388,7 +388,7 @@ Uize.module ({
 							}
 						},
 						{
-							title:'Test that a value for a property of the combinations specifier that is not a list is treated as the only possible value for that property',
+							title:'A value for a property of the combinations specifier that is not a list is treated as the only possible value for that property',
 							test:function () {
 								var _combinationsSeen = [];
 								Uize.Data.Combinations.forEach (
@@ -418,7 +418,7 @@ Uize.module ({
 							}
 						},
 						{
-							title:'Test that specifying no possible values for a property in the combinations specifier results in that property being omitted from the generated combinations',
+							title:'Specifying no possible values for a property in the combinations specifier results in that property being omitted from the generated combinations',
 							test:function () {
 								var _combinationsSeen = [];
 								Uize.Data.Combinations.forEach (
@@ -439,7 +439,7 @@ Uize.module ({
 							}
 						},
 						{
-							title:'Test that specifying an empty array for every property of the combinations specifier results in no iterations being performed',
+							title:'Specifying an empty array for every property of the combinations specifier results in no iterations being performed',
 							test:function () {
 								var _combinationsSeen = [];
 								Uize.Data.Combinations.forEach (
@@ -450,7 +450,7 @@ Uize.module ({
 							}
 						},
 						{
-							title:'Test that an array can be specified as the single possible value for a property in the combinations specifier, as long as the array value is wrapped in a possible values array',
+							title:'An array can be specified as the single possible value for a property in the combinations specifier, as long as the array value is wrapped in a possible values array',
 							test:function () {
 								var _combinationsSeen = [];
 								Uize.Data.Combinations.forEach (
@@ -486,7 +486,7 @@ Uize.module ({
 								}
 							},
 							{
-								title:'Test that a combination transformer function receives as its first argument the combination to transform',
+								title:'A combination transformer function receives as its first argument the combination to transform',
 								test:function () {
 									var _combinationsSeen = [];
 									Uize.Data.Combinations.forEach (
@@ -506,7 +506,7 @@ Uize.module ({
 								}
 							},
 							{
-								title:'Test that a combination transformer function receives as its second argument the index of the combination to transform',
+								title:'A combination transformer function receives as its second argument the index of the combination to transform',
 								test:function () {
 									var _combinationIndexesSeen = [];
 									Uize.Data.Combinations.forEach (
@@ -520,7 +520,7 @@ Uize.module ({
 								}
 							},
 							{
-								title:'Test that, if a combination transformer function modifies the combination object it receives, then that modified combination object is seen by the iteration handler',
+								title:'If a combination transformer function modifies the combination object it receives, then that modified combination object is seen by the iteration handler',
 								test:function () {
 									var _combinationsSeen = [];
 									Uize.Data.Combinations.forEach (
@@ -542,7 +542,7 @@ Uize.module ({
 								}
 							},
 							{
-								title:'Test that, if a combination transformer returns a result that is not undefined, then that result is seen by the iteration handler',
+								title:'If a combination transformer returns a result that is not undefined, then that result is seen by the iteration handler',
 								test:function () {
 									var _combinationsSeen = [];
 									Uize.Data.Combinations.forEach (
@@ -557,7 +557,7 @@ Uize.module ({
 								}
 							},
 							{
-								title:'Test that, if a combination transformer returns the value undefined, then the generated combinations are passed unaltered to the iteration handler',
+								title:'If a combination transformer returns the value undefined, then the generated combinations are passed unaltered to the iteration handler',
 								test:function () {
 									var _combinationsSeen = [];
 									Uize.Data.Combinations.forEach (
@@ -592,7 +592,7 @@ Uize.module ({
 								}
 							},
 							{
-								title:'Test that, for a combination transformer expression string, the variable name "key" is defined and is set to the index of the combination',
+								title:'For a combination transformer expression string, the variable name "key" is defined and is set to the index of the combination',
 								test:function () {
 									var _combinationsSeen = [];
 									Uize.Data.Combinations.forEach (
@@ -604,7 +604,7 @@ Uize.module ({
 								}
 							},
 							{
-								title:'Test that specifying the value null for the combination transformer is treated as no combination transformer being specified',
+								title:'Specifying the value null for the combination transformer is treated as no combination transformer being specified',
 								test:function () {
 									var _combinationsSeen = [];
 									Uize.Data.Combinations.forEach (
@@ -624,7 +624,7 @@ Uize.module ({
 								}
 							},
 							{
-								title:'Test that specifying the value undefined for the combination transformer is treated as no combination transformer being specified',
+								title:'Specifying the value undefined for the combination transformer is treated as no combination transformer being specified',
 								test:function () {
 									var _combinationsSeen = [];
 									Uize.Data.Combinations.forEach (
@@ -646,7 +646,7 @@ Uize.module ({
 
 						/*** test support for optional combination matcher ***/
 							{
-								title:'Test that a combination matcher function receives as its first argument the combination to match',
+								title:'A combination matcher function receives as its first argument the combination to match',
 								test:function () {
 									var _combinationsSeen = [];
 									Uize.Data.Combinations.forEach (
@@ -667,7 +667,7 @@ Uize.module ({
 								}
 							},
 							{
-								title:'Test that a combination matcher function receives as its second argument the index of the combination to match',
+								title:'A combination matcher function receives as its second argument the index of the combination to match',
 								test:function () {
 									var _combinationIndexesSeen = [];
 									Uize.Data.Combinations.forEach (
@@ -720,7 +720,7 @@ Uize.module ({
 								}
 							},
 							{
-								title:'Test that, for a combination matcher expression string, the variable name "key" is defined and is set to the index of the combination',
+								title:'For a combination matcher expression string, the variable name "key" is defined and is set to the index of the combination',
 								test:function () {
 									var _combinationsSeen = [];
 									Uize.Data.Combinations.forEach (
@@ -739,7 +739,7 @@ Uize.module ({
 								}
 							},
 							{
-								title:'Test that specifying the value null for the combination matcher is treated as no combination matcher being specified',
+								title:'Specifying the value null for the combination matcher is treated as no combination matcher being specified',
 								test:function () {
 									var _combinationsSeen = [];
 									Uize.Data.Combinations.forEach (
@@ -760,7 +760,7 @@ Uize.module ({
 								}
 							},
 							{
-								title:'Test that specifying the value undefined for the combination matcher is treated as no combination matcher being specified',
+								title:'Specifying the value undefined for the combination matcher is treated as no combination matcher being specified',
 								test:function () {
 									var _combinationsSeen = [];
 									Uize.Data.Combinations.forEach (
@@ -783,7 +783,7 @@ Uize.module ({
 
 						/*** test support for combination specifier being an array ***/
 							{
-								title:'Test that an array can be specified for the combination specifier, and that the resulting combinations produced are arrays',
+								title:'An array can be specified for the combination specifier, and the resulting combinations produced are arrays',
 								test:function () {
 									var _combinationsSeen = [];
 									Uize.Data.Combinations.forEach (
