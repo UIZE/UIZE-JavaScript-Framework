@@ -40,31 +40,7 @@ Uize.module ({
 		
 		_global.window = _global;  // For Uize.Dom.Basics
 		
-		function _generateTest(_title, _eventBindings, _wiredEvents) {
-			function _getMockWidgetClass(_children) {
-				return Uize.Widget.subclass ({
-					mixins:Uize.Widget.mEventBindings,
-					omegastructor:function() {
-						this.addChildren(Uize.lookup(_children, {widgetClass:Uize.Widget}));
-					},
-					eventBindings:_eventBindings
-				});
-			}
-			
-			function _getMockWidgetInstance(_children, _nodes) {
-				var _nodeMap = {};
-				
-				if (Uize.isArray(_nodes)) {
-					for (var _nodeNo = -1; ++_nodeNo < _nodes.length;)
-						_nodeMap[_nodes[_nodeNo]] = _getMockDomNode()
-					;
-				}
-				
-				return _getMockWidgetClass(_children)({
-					nodeMap:_nodeMap
-				});
-			}
-			
+		function _generateTest(_title, _eventBindingsShorthand, _eventBindingsVerbose, _wiredEvents, _deferredChildren) {
 			function _getMockDomNode() {
 				return Uize.Class.subclass({
 					alphastructor:function() {
@@ -79,12 +55,13 @@ Uize.module ({
 							(this._events[_eventName] || (this._events[_eventName] = [])).push(_handler);
 						},
 						triggerEvent:function(_event) {
-							Uize.applyAll(this, this._events[_event.name], [_event]);
+							this._events[_event.name]
+								&& Uize.applyAll(this, this._events[_event.name], [_event]);
 						}
 					}
 				}) ();
 			}
-		
+			
 			function _expectAll(_obj, _expectFunc) {
 				for (var _key in _obj) {
 					if (!_expectFunc(_obj[_key], _key))
@@ -93,450 +70,313 @@ Uize.module ({
 				
 				return true;
 			}
+				
+			function _generateSyntaxTests(_isVerbose) {
+				var _eventBindings = _isVerbose ? _eventBindingsVerbose : _eventBindingsShorthand;
+
+				function _getMockWidgetClass(_children) {
+					return Uize.Widget.subclass ({
+						mixins:Uize.Widget.mEventBindings,
+						omegastructor:function() {
+							this.addChildren(Uize.lookup(_children, {widgetClass:Uize.Widget}));
+						},
+						eventBindings:_eventBindings
+					});
+				}
+				
+				function _getMockWidgetInstance(_children, _nodes) {
+					var _nodeMap = {};
+					
+					if (Uize.isArray(_nodes)) {
+						for (var _nodeNo = -1; ++_nodeNo < _nodes.length;)
+							_nodeMap[_nodes[_nodeNo]] = _getMockDomNode()
+						;
+					}
+					
+					return _getMockWidgetClass(_children)({
+						nodeMap:_nodeMap
+					});
+				}
+				
+				function _generateFireTests(_type) {
+					var _fireEventMethodName = _type == 'node' ? 'triggerEvent' : 'fire';
+					
+					function _generateFireTest(_expectFunc) {
+						return function(_continue) {
+							if (!_wiredEvents || Uize.isEmpty(_wiredEvents[_type]))
+								return true;
+							
+							var
+								_typeEvents = _wiredEvents[_type],
+								_names = _type == 'self' ? ['self'] : Uize.keys(_typeEvents),
+								_mockInstance = _getMockWidgetInstance(
+									_type == 'child' ? _names : undefined,
+									_type == 'node' ? _names : undefined
+								),
+								_fail = function() { _continue(true) }
+							;
+							_processArrayAsync(
+								_names,
+								function(_objectName, _nextObjectFunc) {
+									_processArrayAsync(
+										(_type == 'self' ? _wiredEvents : _typeEvents)[_objectName],
+										function(_eventName, _nextEventFunc) {
+											var
+												_objectToFireOn = _type == 'self'
+													? _mockInstance
+													: (_type == 'child'
+														? _mockInstance.children[_objectName]
+														: _mockInstance.getNode(_objectName)
+													),
+												_fireEvent = function(_fireHandler) {
+													_objectToFireOn[_fireEventMethodName]({
+														name:_eventName,
+														handler:_fireHandler
+													});
+												},
+												_verifyEventFired = function(_nextFunc) {
+													var _handlerNotCalledTimeout = setTimeout(function() { _continue(false) }, 10); // timeout for if handler isn't called
+													_fireEvent(
+														function(_event, _source) {
+															clearTimeout(_handlerNotCalledTimeout);
+															_expectFunc.call(
+																this,
+																{
+																	_nextFunc:_nextFunc,
+																	_mockInstance:_mockInstance,
+																	_eventName:_eventName,
+																	_event:_event,
+																	_source:_source,
+																	_fail:_fail,
+																	_firedObject:_objectToFireOn
+																}
+															);
+														}
+													);
+												},
+												_verifyEventNotFired = function(_nextFunc) {
+													var
+														_handlerNotCalledTimeout = setTimeout(_nextFunc, 1)// timeout for when handler isn't called
+													;
+													
+													// Verify event is not fired
+													_fireEvent(
+														function() { // handler shouldn't get called
+															clearTimeout(_handlerNotCalledTimeout);
+															_continue(false);
+														}
+													);
+												},
+												_deferredChildrenForEventObject = !Uize.isEmpty(_deferredChildren)
+													&& (_type == 'self'
+														? _deferredChildren.self
+														: (_deferredChildren[_type] && _deferredChildren[_type][_objectName]) 
+													),
+												_deferredChildrenForEvent = _deferredChildrenForEventObject && _deferredChildrenForEventObject[_eventName]
+											;
+											
+											_type == 'node' && _mockInstance.set('wired', true);
+											
+											if (Uize.isEmpty(_deferredChildrenForEvent)) {
+												_verifyEventFired(_nextEventFunc);
+											}
+											else {
+												_processArrayAsync(
+													_deferredChildrenForEvent,
+													function(_deferredChildName, _nextDeferredChildFunc, _deferredChildNo) {
+														_verifyEventNotFired(
+															function() {
+																// Add deferred child
+																_mockInstance.addChild(_deferredChildName, Uize.Widget);
+																
+																_nextDeferredChildFunc();
+															}
+														);
+													},
+													function() {
+														// Verify event is fired
+														_verifyEventFired(
+															function() {
+																// Remove a random child
+																_mockInstance.removeChild(
+																	_deferredChildrenForEvent[
+																		Math.floor(Math.random() * _deferredChildrenForEvent.length)	
+																	]
+																);
+																
+																// Verify event is not fired & then move onto next event
+																_verifyEventNotFired(_nextEventFunc);
+															}
+														);
+													}
+												);
+											}
+										},
+										_nextObjectFunc
+									);
+								},
+								function() { _continue(true) }
+							);
+						};
+					}
+					
+					return {
+						title:Uize.capFirstChar(_type) + ' events are successfully fired',
+						test:[
+							{
+								title:'Handler is called',
+								test:_generateFireTest(
+									function(_data) { _data._nextFunc() }
+								)
+							},
+							{
+								title:'"this" context is widget',
+								test:_generateFireTest(
+									function(_data) {
+										this == _data._mockInstance
+											? _data._nextFunc()
+											: _data._fail()
+										;
+									}
+								)
+							},
+							{
+								title:'First argument is event object',
+								test:_generateFireTest(
+									function(_data) {
+										_data._event.name == _data._eventName
+											? _data._nextFunc()
+											: _data._fail()
+										;
+									}
+								)
+							},
+							{
+								title:'Second argument is source object',
+								test:_generateFireTest(
+									function(_data) {
+										_data._source == _data._firedObject
+											? _data._nextFunc()
+											: _data._fail()
+										;
+									}
+								)
+							}
+						]
+					};
+				}
+			
+				return {
+					title:(_isVerbose ? 'Verbose' : 'Shorthand') + ' Syntax',
+					test:[
+						{
+							title:'Widget class is a function (not null)',
+							test:function() { return this.expectFunction(_getMockWidgetClass()) }
+						},
+						{
+							title:'Widget instance is an object (not null)',
+							test:function() { return this.expectObject(_getMockWidgetInstance()) }
+						},
+						{
+							title:'Self events are properly bucketed',
+							test:function() {
+								return !_wiredEvents
+									|| Uize.isEmpty(_wiredEvents.self)
+									|| this.expect(
+										Uize.lookup(_wiredEvents.self),
+										Uize.lookup(
+											Uize.keys(_getMockWidgetClass().mEventBindings_widget[''])
+										)
+									)
+								;
+							}
+						},
+						_generateFireTests('self'),
+						{
+							title:'Child events are properly bucketed',
+							test:function() {
+								var m = this;
+								return !_wiredEvents
+									|| Uize.isEmpty(_wiredEvents.child)
+									|| _expectAll(
+										_getMockWidgetClass().mEventBindings_widget,
+										function (_bindings, _widgetName) {
+											return _widgetName == ''
+												|| m.expect(
+													Uize.lookup(_wiredEvents.child[_widgetName]),
+													Uize.lookup(Uize.keys(_bindings))
+												)
+											;
+										}
+									)
+								;
+							}
+						},
+						_generateFireTests('child'),
+						{
+							title:'Node events are properly bucketed',
+							test:function() {
+								var m = this;
+								return !_wiredEvents
+									|| Uize.isEmpty(_wiredEvents.node)
+									|| _expectAll(
+										_getMockWidgetClass().mEventBindings_dom,
+										function (_bindings, _nodeName) {
+											return m.expect(
+												Uize.lookup(_wiredEvents.node[_nodeName]),
+												Uize.lookup(Uize.keys(_bindings))
+											);
+										}
+									)
+								;
+							}
+						},
+						{
+							title:'Node events do not fire before widget is wired',
+							test:function(_continue) {
+								if (!_wiredEvents || Uize.isEmpty(_wiredEvents.node))
+									return true;
+								
+								var
+									_nodeNames = Uize.keys(_wiredEvents.node),
+									_mockInstance = _getMockWidgetInstance(null, _nodeNames)
+								;
+								_processArrayAsync(
+									_nodeNames,
+									function(_nodeName, _nextNodeFunc) {
+										_processArrayAsync(
+											_wiredEvents.node[_nodeName],
+											function(_eventName, _nextEventFunc) {
+												// The handler shouldn't be called which means we won't continue to the next node,
+												// so, set up a timeout to continue on if the handler is not called.
+												var _notFiredTimeout = setTimeout(_nextEventFunc, 1);
+												_mockInstance.getNode(_nodeName).triggerEvent({
+													name:_eventName,
+													handler:function() {
+														clearTimeout(_notFiredTimeout);
+														_continue(false); // we should never get here
+													}
+												});
+											},
+											_nextNodeFunc
+										);
+									},
+									function() { _continue(true) }
+								);
+							}
+						},
+						_generateFireTests('node')
+					]
+				};
+			}
 			
 			return {
 				title:_title,
 				test:[
-					{
-						title:'Widget class is a function (not null)',
-						test:function() { return this.expectFunction(_getMockWidgetClass()) }
-					},
-					{
-						title:'Widget instance is an object (not null)',
-						test:function() { return this.expectObject(_getMockWidgetInstance()) }
-					},
-					{
-						title:'Self events are properly bucketed',
-						test:function() {
-							return !_wiredEvents
-								|| Uize.isEmpty(_wiredEvents.self)
-								|| this.expect(
-									Uize.lookup(_wiredEvents.self),
-									Uize.lookup(
-										Uize.keys(_getMockWidgetClass().mEventBindings_widget[''])
-									)
-								)
-							;
-						}
-					},
-					{
-						title:'Self events are successfully fired',
-						test:[
-							{
-								title:'Handler is called',
-								test:function(_continue) {
-									if (!_wiredEvents || Uize.isEmpty(_wiredEvents.self))
-										return true;
-									
-									var _mockInstance = _getMockWidgetInstance();
-									_processArrayAsync(
-										_wiredEvents.self,
-										function(_eventName, _nextEventFunc) {
-											_mockInstance.fire({
-												name:_eventName,
-												handler:_nextEventFunc
-											});
-										},
-										function() { _continue(true) }
-									);
-								}
-							},
-							{
-								title:'"this" context is widget',
-								test:function(_continue) {
-									if (!_wiredEvents || Uize.isEmpty(_wiredEvents.self))
-										return true;
-									
-									var _mockInstance = _getMockWidgetInstance();
-									_processArrayAsync(
-										_wiredEvents.self,
-										function(_eventName, _nextEventFunc) {
-											_mockInstance.fire({
-												name:_eventName,
-												handler:function() {
-													this == _mockInstance
-														? _nextEventFunc()
-														: _continue(false)
-													;
-												}
-											});
-										},
-										function() { _continue(true) }
-									);
-								}
-							},
-							{
-								title:'First argument is event object',
-								test:function(_continue) {
-									if (!_wiredEvents || Uize.isEmpty(_wiredEvents.self))
-										return true;
-									
-									var _mockInstance = _getMockWidgetInstance();
-									_processArrayAsync(
-										_wiredEvents.self,
-										function(_eventName, _nextEventFunc) {
-											_mockInstance.fire({
-												name:_eventName,
-												handler:function(_event) {
-													_event.name == _eventName
-														? _nextEventFunc()
-														: _continue(false)
-													;
-												}
-											});
-										},
-										function() { _continue(true) }
-									);
-								}
-							},
-							{
-								title:'Second argument is source object',
-								test:function(_continue) {
-									if (!_wiredEvents || Uize.isEmpty(_wiredEvents.self))
-										return true;
-									
-									var _mockInstance = _getMockWidgetInstance();
-									_processArrayAsync(
-										_wiredEvents.self,
-										function(_eventName, _nextEventFunc) {
-											_mockInstance.fire({
-												name:_eventName,
-												handler:function(_event, _source) {
-													_source == _mockInstance
-														? _nextEventFunc()
-														: _continue(false)
-													;
-												}
-											});
-										},
-										function() { _continue(true) }
-									);
-								}
-							}
-						]
-					},
-					{
-						title:'Child events are properly bucketed',
-						test:function() {
-							var m = this;
-							return !_wiredEvents
-								|| Uize.isEmpty(_wiredEvents.child)
-								|| _expectAll(
-									_getMockWidgetClass().mEventBindings_widget,
-									function (_bindings, _widgetName) {
-										return _widgetName == ''
-											|| m.expect(
-												Uize.lookup(_wiredEvents.child[_widgetName]),
-												Uize.lookup(Uize.keys(_bindings))
-											)
-										;
-									}
-								)
-							;
-						}
-					},
-					{
-						title:'Child events are successfully fired',
-						test:[
-							{
-								title:'Handler is called',
-								test:function(_continue) {
-									if (!_wiredEvents || Uize.isEmpty(_wiredEvents.child))
-										return true;
-									
-									var
-										_childNames = Uize.keys(_wiredEvents.child),
-										_mockInstance = _getMockWidgetInstance(_childNames)
-									;
-									_processArrayAsync(
-										_childNames,
-										function(_childName, _nextChildFunc) {
-											_processArrayAsync(
-												_wiredEvents.child[_childName],
-												function(_eventName, _nextEventFunc) {
-													_mockInstance.children[_childName].fire({
-														name:_eventName,
-														handler:_nextEventFunc
-													});
-												},
-												_nextChildFunc
-											);
-										},
-										function() { _continue(true) }
-									);
-								}
-							},
-							{
-								title:'"this" context is widget',
-								test:function(_continue) {
-									if (!_wiredEvents || Uize.isEmpty(_wiredEvents.child))
-										return true;
-									
-									var
-										_childNames = Uize.keys(_wiredEvents.child),
-										_mockInstance = _getMockWidgetInstance(_childNames)
-									;
-									_processArrayAsync(
-										_childNames,
-										function(_childName, _nextChildFunc) {
-											_processArrayAsync(
-												_wiredEvents.child[_childName],
-												function(_eventName, _nextEventFunc) {
-													_mockInstance.children[_childName].fire({
-														name:_eventName,
-														handler:function() {
-															this == _mockInstance
-																? _nextEventFunc()
-																: _continue(false)
-															;
-														}
-													});
-												},
-												_nextChildFunc
-											);
-										},
-										function() { _continue(true) }
-									);
-								}
-							},
-							{
-								title:'First argument is event object',
-								test:function(_continue) {
-									if (!_wiredEvents || Uize.isEmpty(_wiredEvents.child))
-										return true;
-									
-									var
-										_childNames = Uize.keys(_wiredEvents.child),
-										_mockInstance = _getMockWidgetInstance(_childNames)
-									;
-									_processArrayAsync(
-										_childNames,
-										function(_childName, _nextChildFunc) {
-											_processArrayAsync(
-												_wiredEvents.child[_childName],
-												function(_eventName, _nextEventFunc) {
-													_mockInstance.children[_childName].fire({
-														name:_eventName,
-														handler:function(_event) {
-															_event.name == _eventName
-																? _nextEventFunc()
-																: _continue(false)
-															;
-														}
-													});
-												},
-												_nextChildFunc
-											);
-										},
-										function() { _continue(true) }
-									);
-								}
-							},
-							{
-								title:'Second argument is source object',
-								test:function(_continue) {
-									if (!_wiredEvents || Uize.isEmpty(_wiredEvents.child))
-										return true;
-									
-									var
-										_childNames = Uize.keys(_wiredEvents.child),
-										_mockInstance = _getMockWidgetInstance(_childNames)
-									;
-									_processArrayAsync(
-										_childNames,
-										function(_childName, _nextChildFunc) {
-											_processArrayAsync(
-												_wiredEvents.child[_childName],
-												function(_eventName, _nextEventFunc) {
-													_mockInstance.children[_childName].fire({
-														name:_eventName,
-														handler:function(_event, _source) {
-															_source == _mockInstance.children[_childName]
-																? _nextEventFunc()
-																: _continue(false)
-															;
-														}
-													});
-												},
-												_nextChildFunc
-											);
-										},
-										function() { _continue(true) }
-									);
-								}
-							}
-						]
-					},
-					{
-						title:'Node events are properly bucketed',
-						test:function() {
-							var m = this;
-							return !_wiredEvents
-								|| Uize.isEmpty(_wiredEvents.node)
-								|| _expectAll(
-									_getMockWidgetClass().mEventBindings_dom,
-									function (_bindings, _nodeName) {
-										return m.expect(
-											Uize.lookup(_wiredEvents.node[_nodeName]),
-											Uize.lookup(Uize.keys(_bindings))
-										);
-									}
-								)
-							;
-						}
-					},
-					{
-						title:'Node events do not fire before wire',
-						test:[
-							
-						]
-					},
-					{
-						title:'Node events are successfully fired',
-						test:[
-							{
-								title:'Handler is called',
-								test:function(_continue) {
-									if (!_wiredEvents || Uize.isEmpty(_wiredEvents.node))
-										return true;
-									
-									var
-										_nodeNames = Uize.keys(_wiredEvents.node),
-										_mockInstance = _getMockWidgetInstance(null, _nodeNames)
-									;
-									
-									_mockInstance.set({wired:true});
-									
-									_processArrayAsync(
-										_nodeNames,
-										function(_nodeName, _nextNodeFunc) {
-											_processArrayAsync(
-												_wiredEvents.node[_nodeName],
-												function(_eventName, _nextEventFunc) {
-													_mockInstance.getNode(_nodeName).triggerEvent({
-														name:_eventName,
-														handler:_nextEventFunc
-													});
-												},
-												_nextNodeFunc
-											);
-										},
-										function() { _continue(true) }
-									);
-								}
-							},
-							{
-								title:'"this" context is widget',
-								test:function(_continue) {
-									if (!_wiredEvents || Uize.isEmpty(_wiredEvents.node))
-										return true;
-									
-									var
-										_nodeNames = Uize.keys(_wiredEvents.node),
-										_mockInstance = _getMockWidgetInstance(null, _nodeNames)
-									;
-									
-									_mockInstance.set({wired:true});
-									
-									_processArrayAsync(
-										_nodeNames,
-										function(_nodeName, _nextNodeFunc) {
-											_processArrayAsync(
-												_wiredEvents.node[_nodeName],
-												function(_eventName, _nextEventFunc) {
-													_mockInstance.getNode(_nodeName).triggerEvent({
-														name:_eventName,
-														handler:function() {
-															this == _mockInstance
-																? _nextEventFunc()
-																: _continue(false)
-															;
-														}
-													});
-												},
-												_nextNodeFunc
-											);
-										},
-										function() { _continue(true) }
-									);
-								}
-							},
-							{
-								title:'First argument is event object',
-								test:function(_continue) {
-									if (!_wiredEvents || Uize.isEmpty(_wiredEvents.node))
-										return true;
-									
-									var
-										_nodeNames = Uize.keys(_wiredEvents.node),
-										_mockInstance = _getMockWidgetInstance(null, _nodeNames)
-									;
-									
-									_mockInstance.set({wired:true});
-									
-									_processArrayAsync(
-										_nodeNames,
-										function(_nodeName, _nextNodeFunc) {
-											_processArrayAsync(
-												_wiredEvents.node[_nodeName],
-												function(_eventName, _nextEventFunc) {
-													_mockInstance.getNode(_nodeName).triggerEvent({
-														name:_eventName,
-														handler:function(_event) {
-															_event.name == _eventName
-																? _nextEventFunc()
-																: _continue(false)
-															;
-														}
-													});
-												},
-												_nextNodeFunc
-											);
-										},
-										function() { _continue(true) }
-									);
-								}
-							},
-							{
-								title:'Second argument is source object',
-								test:function(_continue) {
-									if (!_wiredEvents || Uize.isEmpty(_wiredEvents.node))
-										return true;
-									
-									var
-										_nodeNames = Uize.keys(_wiredEvents.node),
-										_mockInstance = _getMockWidgetInstance(null, _nodeNames)
-									;
-									
-									_mockInstance.set({wired:true});
-									
-									_processArrayAsync(
-										_nodeNames,
-										function(_nodeName, _nextNodeFunc) {
-											_processArrayAsync(
-												_wiredEvents.node[_nodeName],
-												function(_eventName, _nextEventFunc) {
-													_mockInstance.getNode(_nodeName).triggerEvent({
-														name:_eventName,
-														handler:function(_event, _source) {
-															_source == _mockInstance.getNode(_nodeName)
-																? _nextEventFunc()
-																: _continue(false)
-															;
-														}
-													});
-												},
-												_nextNodeFunc
-											);
-										},
-										function() { _continue(true) }
-									);
-								}
-							}
-						]
-					}
+					_generateSyntaxTests(),
+					_generateSyntaxTests(true)
 				]
-			};
+			}
 		}
 
 		return Uize.Test.resolve ({
@@ -554,265 +394,653 @@ Uize.module ({
 					]
 				},
 				{
-					title:'Verbose Syntax',
+					title:'Child Events',
 					test:[
-						{
-							title:'Child Events',
-							test:[
-								_generateTest(
-									'When a single child with a single event binding is declared, only that child event is bound',
-									{
-										foo:{
-											Click:_defaultHandler
-										}
-									},
-									{
-										child:{
-											foo:['Click']
-										}
+						_generateTest(
+							'When a single child with a single event binding is declared, only that child event is bound',
+							{
+								'foo:Click':_defaultHandler
+							},
+							{
+								foo:{
+									Click:_defaultHandler
+								}
+							},
+							{
+								child:{
+									foo:['Click']
+								}
+							}
+						),
+						_generateTest(
+							'When a single child with multiple event bindings are declared, only the events for that child are bound',
+							Uize.lookup(
+								[
+									'foo:Click',
+									'foo:Changed.value',
+									'foo:Changed.bar'
+								],
+								_defaultHandler
+							),
+							{
+								foo:{
+									Click:_defaultHandler,
+									'Changed.value':_defaultHandler,
+									'Changed.bar':_defaultHandler
+								}
+							},
+							{
+								child:{
+									foo:['Click', 'Changed.value', 'Changed.bar']
+								}
+							}
+						),
+						_generateTest(
+							'When a multiple children each with a single event binding are declared, only the one event for each child is bound',
+							Uize.lookup(
+								[
+									'foo:Changed.bar',
+									'lorem:Changed.ipsum'
+								],
+								_defaultHandler
+							),
+							{
+								foo:{
+									'Changed.bar':_defaultHandler
+								},
+								lorem:{
+									'Changed.ipsum':_defaultHandler
+								}
+							},
+							{
+								child:{
+									foo:['Changed.bar'],
+									lorem:['Changed.ipsum']
+								}
+							}
+						),
+						_generateTest(
+							'When a multiple children each with multiple event bindings are declared, only the events for those children are bound',
+							Uize.lookup(
+								[
+									'foo:Click',
+									'lorem:Changed.ipsum',
+									'foo:Changed.value',
+									'lorem:Changed.dolor',
+									'foo:Changed.bar',
+									'a:Changed.b',
+									'a:c',
+									'a:d',
+									'a:Changed.e'
+								],
+								_defaultHandler
+							),
+							{
+								foo:{
+									Click:_defaultHandler,
+									'Changed.value':_defaultHandler,
+									'Changed.bar':_defaultHandler
+								},
+								lorem:{
+									'Changed.ipsum':_defaultHandler,
+									'Changed.dolor':_defaultHandler
+								},
+								a:{
+									'Changed.b':_defaultHandler,
+									'c':_defaultHandler,
+									'd':_defaultHandler,
+									'Changed.e':_defaultHandler
+								}
+							},
+							{
+								child:{
+									foo:['Click', 'Changed.value', 'Changed.bar'],
+									lorem:['Changed.ipsum', 'Changed.dolor'],
+									a:['Changed.b', 'c', 'd', 'Changed.e']
+								}
+							}
+						),
+						_generateTest(
+							'When a single required child for a child event binding is declared, the event is not fired until the child is added',
+							{
+								'foo:Click':{
+										handler:_defaultHandler,
+										required:['baz']
 									}
-								),
-								_generateTest(
-									'When a single child with multiple event bindings are declared, only the events for that child are bound',
-									{
-										foo:{
-											Click:_defaultHandler,
-											'Changed.value':_defaultHandler,
-											'Changed.bar':_defaultHandler
-										}
-									},
-									{
-										child:{
-											foo:['Click', 'Changed.value', 'Changed.bar']
-										}
+							},
+							{
+								foo:{
+									Click:{
+										handler:_defaultHandler,
+										required:['baz']
 									}
-								),
-								_generateTest(
-									'When a multiple children each with a single event binding are declared, only the one event for each child is bound',
-									{
-										foo:{
-											'Changed.bar':_defaultHandler
-										},
-										lorem:{
-											'Changed.ipsum':_defaultHandler
-										}
-									},
-									{
-										child:{
-											foo:['Changed.bar'],
-											lorem:['Changed.ipsum']
-										}
+								}
+							},
+							{
+								child:{
+									foo:['Click']
+								}
+							},
+							{
+								child:{
+									foo:{
+										Click:['baz']
 									}
-								),
-								_generateTest(
-									'When a multiple children each with multiple event bindings are declared, only the events for those children are bound',
-									{
-										foo:{
-											Click:_defaultHandler,
-											'Changed.value':_defaultHandler,
-											'Changed.bar':_defaultHandler
-										},
-										lorem:{
-											'Changed.ipsum':_defaultHandler,
-											'Changed.dolor':_defaultHandler
-										},
-										a:{
-											'Changed.b':_defaultHandler,
-											'c':_defaultHandler,
-											'd':_defaultHandler,
-											'Changed.e':_defaultHandler
-										}
-									},
-									{
-										child:{
-											foo:['Click', 'Changed.value', 'Changed.bar'],
-											lorem:['Changed.ipsum', 'Changed.dolor'],
-											a:['Changed.b', 'c', 'd', 'Changed.e']
-										}
+								}
+							}
+						),
+						_generateTest(
+							'When multiple required children for a child event binding are declared, the event is not fired until all the children are added (and order doesn\'t matter)',
+							{
+								'foo:Click':{
+									handler:_defaultHandler,
+									required:['baz', 'bat', 'baf']
+								}
+							},
+							{
+								foo:{
+									Click:{
+										handler:_defaultHandler,
+										required:['baz', 'bat', 'baf']
 									}
-								)
-							]
-						},
-						{
-							title:'Self Events',
-							test:[
-								_generateTest(
-									'When a single event binding is declared, only that event is bound',
-									{
-										'':{
-											Click:_defaultHandler
-										}
-									},
-									{
-										self:['Click']	
+								}
+							},
+							{
+								child:{
+									foo:['Click']
+								}
+							},
+							{
+								child:{
+									foo:{
+										Click:['bat', 'baf', 'baz']
 									}
-								),
-								_generateTest(
-									'When multiple events binding are declared, only those events are bound',
-									{
-										'':{
-											Click:_defaultHandler,
-											'Changed.value':_defaultHandler
-										}
-									},
-									{
-										self:['Click', 'Changed.value']	
-									}
-								)
-							]
-						},
-						{
-							title:'Node Events',
-							test:[
-								_generateTest(
-									'When a single node with a single event binding is declared, only that node event is bound',
-									{
-										'#foo':{
-											click:_defaultHandler
-										}
-									},
-									{
-										node:{
-											foo:['click']
-										}
-									}
-								),
-								_generateTest(
-									'When a single node with multiple event bindings are declared, only the events for that node are bound',
-									{
-										'#foo':{
-											click:_defaultHandler,
-											mousemove:_defaultHandler,
-											change:_defaultHandler
-										}
-									},
-									{
-										node:{
-											foo:['click', 'mousemove', 'change']
-										}
-									}
-								),
-								_generateTest(
-									'When a single node with multiple event bindings are separately declared, all of those events for that node are bound',
-									{
-										'#foo':{
-											mousemove:_defaultHandler
-										},
-										'#lorem':{
-											mouseout:_defaultHandler
-										}
-									},
-									{
-										node:{
-											foo:['mousemove'],
-											lorem:['mouseout']
-										}
-									}
-								),
-								_generateTest(
-									'When a multiple nodes each with a single event binding are declared, only the one event for each node is bound',
-									{
-										'#foo':{
-											load:_defaultHandler
-										},
-										'#lorem':{
-											unload:_defaultHandler
-										}
-									},
-									{
-										node:{
-											foo:['load'],
-											lorem:['unload']
-										}
-									}
-								),
-								_generateTest(
-									'When a multiple nodes each with multiple event bindings are declared, only the events for those nodes are bound',
-									{
-										'#foo':{
-											click:_defaultHandler,
-											mouseover:_defaultHandler,
-											keydown:_defaultHandler
-										},
-										'#lorem':{
-											keypress:_defaultHandler,
-											keyup:_defaultHandler
-										},
-										'#a':{
-											load:_defaultHandler,
-											blur:_defaultHandler,
-											focus:_defaultHandler,
-											change:_defaultHandler
-										}
-									},
-									{
-										node:{
-											foo:['click', 'mouseover', 'keydown'],
-											lorem:['keypress', 'keyup'],
-											a:['load', 'blur', 'focus', 'change']
-										}
-									}
-								),
-								_generateTest(
-									'When root node with a single event binding is declared, only that node event is bound',
-									{
-										'#':{
-											click:_defaultHandler
-										}
-									},
-									{
-										node:{
-											'':['click']
-										}
-									}
-								),
-								_generateTest(
-									'When root node with multiple event bindings are declared, only the events for the node are bound',
-									{
-										'#':{
-											click:_defaultHandler,
-											mousemove:_defaultHandler
-										}
-									},
-									{
-										node:{
-											'':['click', 'mousemove']
-										}
-									}
-								)
-							]
-						},
-						{
-							title:'Potential Collision Events',
-							test:[
-								_generateTest(
-									'When events for a child and node with the same name are declared, the proper events are bound'
-								),
-								_generateTest(
-									'When events for a self and root node with the same name are declared, the proper events are bound'
-								)
-							]
-						},
-						{
-							title:'All Event Types',
-							test:[
-								_generateTest(
-									'When all 3 types of events are declared, the proper events are bound'
-								)
-							]
-						},
-						{
-							title:'Required Children',
-							test:[
-								
-							]
-						}
+								}
+							}
+						)
 					]
 				},
 				{
-					title:'Shorthand Syntax',
+					title:'Self Events',
 					test:[
-						
+						_generateTest(
+							'When a single event binding is declared, only that event is bound',
+							Uize.lookup(
+								[
+									':Click'
+								],
+								_defaultHandler
+							),
+							{
+								'':{
+									Click:_defaultHandler
+								}
+							},
+							{
+								self:['Click']	
+							}
+						),
+						_generateTest(
+							'When multiple events binding are declared, only those events are bound',
+							Uize.lookup(
+								[
+									':Click',
+									':Changed.value'
+								],
+								_defaultHandler
+							),
+							{
+								'':{
+									Click:_defaultHandler,
+									'Changed.value':_defaultHandler
+								}
+							},
+							{
+								self:['Click', 'Changed.value']	
+							}
+						),
+						_generateTest(
+							'When a single required child for a self event binding is declared, the event is not fired until the child is added',
+							{
+								':Click':{
+									handler:_defaultHandler,
+									required:['baz']
+								}
+							},
+							{
+								'':{
+									Click:{
+										handler:_defaultHandler,
+										required:['baz']
+									}
+								}
+							},
+							{
+								self:['Click']
+							},
+							{
+								self:{
+									Click:['baz']	
+								}
+							}
+						),
+						_generateTest(
+							'When multiple required children for a self event binding are declared, the event is not fired until all the children are added (and order doesn\'t matter)',
+							{
+								':Click':{
+									handler:_defaultHandler,
+									required:['baz', 'bat', 'baf']
+								}
+							},
+							{
+								'':{
+									Click:{
+										handler:_defaultHandler,
+										required:['baz', 'bat', 'baf']
+									}
+								}
+							},
+							{
+								self:['Click']
+							},
+							{
+								self:{
+									Click:['bat', 'baf', 'baz']
+								}
+							}
+						)
+					]
+				},
+				{
+					title:'Node Events',
+					test:[
+						_generateTest(
+							'When a single node with a single event binding is declared, only that node event is bound',
+							Uize.lookup(
+								[
+									'#foo:click'
+								],
+								_defaultHandler
+							),
+							{
+								'#foo':{
+									click:_defaultHandler
+								}
+							},
+							{
+								node:{
+									foo:['click']
+								}
+							}
+						),
+						_generateTest(
+							'When a single node with multiple event bindings are declared, only the events for that node are bound',
+							Uize.lookup(
+								[
+									'#foo:click',
+									'#foo:mousemove',
+									'#foo:change'
+								],
+								_defaultHandler
+							),
+							{
+								'#foo':{
+									click:_defaultHandler,
+									mousemove:_defaultHandler,
+									change:_defaultHandler
+								}
+							},
+							{
+								node:{
+									foo:['click', 'mousemove', 'change']
+								}
+							}
+						),
+						_generateTest(
+							'When a multiple nodes each with a single event binding are declared, only the one event for each node is bound',
+							Uize.lookup(
+								[
+									'#foo:load',
+									'#lorem:unload'
+								],
+								_defaultHandler
+							),
+							{
+								'#foo':{
+									load:_defaultHandler
+								},
+								'#lorem':{
+									unload:_defaultHandler
+								}
+							},
+							{
+								node:{
+									foo:['load'],
+									lorem:['unload']
+								}
+							}
+						),
+						_generateTest(
+							'When a multiple nodes each with multiple event bindings are declared, only the events for those nodes are bound',
+							Uize.lookup(
+								[
+									'#a:focus',
+									'#foo:click',
+									'#lorem:keypress',
+									'#a:change',
+									'#foo:mouseover',
+									'#a:blur',
+									'#foo:keydown',
+									'#lorem:keyup',
+									'#a:load'
+								],
+								_defaultHandler
+							),
+							{
+								'#foo':{
+									click:_defaultHandler,
+									mouseover:_defaultHandler,
+									keydown:_defaultHandler
+								},
+								'#lorem':{
+									keypress:_defaultHandler,
+									keyup:_defaultHandler
+								},
+								'#a':{
+									load:_defaultHandler,
+									blur:_defaultHandler,
+									focus:_defaultHandler,
+									change:_defaultHandler
+								}
+							},
+							{
+								node:{
+									foo:['click', 'mouseover', 'keydown'],
+									lorem:['keypress', 'keyup'],
+									a:['load', 'blur', 'focus', 'change']
+								}
+							}
+						),
+						_generateTest(
+							'When root node with a single event binding is declared, only that node event is bound',
+							Uize.lookup(
+								[
+									'#:click'
+								],
+								_defaultHandler
+							),
+							{
+								'#':{
+									click:_defaultHandler
+								}
+							},
+							{
+								node:{
+									'':['click']
+								}
+							}
+						),
+						_generateTest(
+							'When root node with multiple event bindings are declared, only the events for the node are bound',
+							Uize.lookup(
+								[
+									'#:click',
+									'#:mousemove'
+								],
+								_defaultHandler
+							),
+							{
+								'#':{
+									click:_defaultHandler,
+									mousemove:_defaultHandler
+								}
+							},
+							{
+								node:{
+									'':['click', 'mousemove']
+								}
+							}
+						),
+						_generateTest(
+							'When a single required child for a node event binding is declared, the event is not fired until the child is added',
+							{
+								'#foo:click':{
+									handler:_defaultHandler,
+									required:['baz']
+								}
+							},
+							{
+								'#foo':{
+									click:{
+										handler:_defaultHandler,
+										required:['baz']
+									}
+								}
+							},
+							{
+								node:{
+									foo:['click']
+								}
+							},
+							{
+								node:{
+									foo:{
+										click:['baz']
+									}
+								}
+							}
+						),
+						_generateTest(
+							'When multiple required children for a node event binding are declared, the event is not fired until all the children are added (and order doesn\'t matter)',
+							{
+								'#foo:click':{
+									handler:_defaultHandler,
+									required:['baz', 'bat', 'baf']
+								}
+							},
+							{
+								'#foo':{
+									click:{
+										handler:_defaultHandler,
+										required:['baz', 'bat', 'baf']
+									}
+								}
+							},
+							{
+								node:{
+									foo:['click']
+								}
+							},
+							{
+								node:{
+									foo:{
+										click:['bat', 'baf', 'baz']
+									}
+								}
+							}
+						)
+					]
+				},
+				{
+					title:'Potential Collision Events',
+					test:[
+						_generateTest(
+							'When events for a child and node with the same name are declared, the proper events are bound',
+							Uize.lookup(
+								[
+									'foo:Click',
+									'foo:Changed.bar',
+									'#foo:click',
+									'#foo:unload',
+									'#lorem:change',
+									'lorem:Changed.ipsum'
+								],
+								_defaultHandler
+							),
+							{
+								'foo':{
+									Click:_defaultHandler,
+									'Changed.bar':_defaultHandler
+								},
+								'#foo':{
+									click:_defaultHandler,
+									unload:_defaultHandler
+								},
+								'#lorem':{
+									change:_defaultHandler	
+								},
+								'lorem':{
+									'Changed.ipsum':_defaultHandler	
+								}
+							},
+							{
+								child:{
+									'foo':['Click', 'Changed.bar'],
+									'lorem':['Changed.ipsum']
+								},
+								node:{
+									'foo':['click', 'unload'],
+									'lorem':['change']
+								}
+							}
+						),
+						_generateTest(
+							'When events for a self and root node with the same name are declared, the proper events are bound',
+							Uize.lookup(
+								[
+									':Click',
+									':Changed.bar',
+									'#:click',
+									'#:unload'
+								],
+								_defaultHandler
+							),
+							{
+								'':{
+									Click:_defaultHandler,
+									'Changed.bar':_defaultHandler
+								},
+								'#':{
+									click:_defaultHandler,
+									unload:_defaultHandler
+								}
+							},
+							{
+								self:['Click', 'Changed.bar'],
+								node:{
+									'':['click', 'unload']
+								}
+							}
+						)
+					]
+				},
+				{
+					title:'All Event Types',
+					test:[
+						_generateTest(
+							'When all 3 types of events are declared, some with required blocks, the proper events are bound and fire at the right time',
+							{
+								':Click':{
+									handler:_defaultHandler,
+									required:['green']
+								},
+								':Changed.bar':_defaultHandler,
+								'#:click':_defaultHandler,
+								'#:unload':_defaultHandler,
+								'#lorem:change':{
+									handler:_defaultHandler,
+									required:['blah']
+								},
+								'lorem:Changed.ipsum':_defaultHandler,
+								'foo:Click':_defaultHandler,
+								'foo:Changed.bar':{
+									handler:_defaultHandler,
+									required:['hiya']
+								},
+								'#foo:click':_defaultHandler,
+								'#foo:unload':_defaultHandler,
+								'#a:load':_defaultHandler,
+								'#a:blur':{
+									handler:_defaultHandler,
+									required:['red','blue']
+								},
+								'#a:focus':_defaultHandler,
+								'#a:change':_defaultHandler
+							},
+							{
+								'':{
+									Click:{
+										handler:_defaultHandler,
+										required:['green']
+									},
+									'Changed.bar':_defaultHandler
+								},
+								'#':{
+									click:_defaultHandler,
+									unload:_defaultHandler
+								},
+								'#lorem':{
+									change:{
+										handler:_defaultHandler,
+										required:['blah']
+									}
+								},
+								'lorem':{
+									'Changed.ipsum':_defaultHandler	
+								},
+								'foo':{
+									Click:_defaultHandler,
+									'Changed.bar':{
+										handler:_defaultHandler,
+										required:['hiya']
+									}
+								},
+								'#foo':{
+									click:_defaultHandler,
+									unload:_defaultHandler
+								},
+								'#a':{
+									load:_defaultHandler,
+									blur:{
+										handler:_defaultHandler,
+										required:['red','blue']
+									},
+									focus:_defaultHandler,
+									change:_defaultHandler
+								}
+							},
+							{
+								self:['Click', 'Changed.bar'],
+								child:{
+									'foo':['Click', 'Changed.bar'],
+									'lorem':['Changed.ipsum']
+								},
+								node:{
+									'':['click', 'unload'],
+									'foo':['click', 'unload'],
+									'lorem':['change'],
+									a:['load', 'blur', 'focus', 'change']
+								}
+							},
+							{
+								node:{
+									lorem:{
+										change:['blah']	
+									},
+									a:{
+										blur:['red','blue']	
+									}
+								},
+								child:{
+									foo:{
+										'Changed.bar':['hiya']	
+									}
+								},
+								self:{
+									Click:['green']	
+								}
+							}
+						)
 					]
 				}
 			]
