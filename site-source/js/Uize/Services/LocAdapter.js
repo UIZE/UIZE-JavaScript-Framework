@@ -19,11 +19,7 @@ Uize.module ({
 
 		var
 			_fileSystem = Uize.Services.FileSystem.singleton (),
-			_split = Uize.Str.Split.split,
-			_primaryLanguage = 'en-US',
-				// TODO: move this into the config and make sure there are no assumptions about US English being the primary language baked into the code anywhere
-			_pseudoLocale = 'pseudo'
-				// TODO: move this into the config and make sure there are no assumptions about "pseudo" being the name of the pseudo-locale in the code anywhere
+			_split = Uize.Str.Split.split
 		;
 
 		return _superclass.subclass ({
@@ -49,6 +45,11 @@ Uize.module ({
 				},
 
 				forEachTranslatableLanguage:function (_iterationHandler) {
+					var
+						_project = this.project,
+						_primaryLanguage = _project.primaryLanguage,
+						_pseudoLocale = _project.pseudoLocale
+					;
 					Uize.forEach (
 						this.project.languages,
 						function (_language) {
@@ -194,7 +195,8 @@ Uize.module ({
 				'import':function (_params,_callback) {
 					var
 						m = this,
-						_project = m.project
+						_project = m.project,
+						_primaryLanguage = _project.primaryLanguage
 					;
 					Uize.forEach (
 						_project.languages,
@@ -214,6 +216,7 @@ Uize.module ({
 						_project = m.project,
 						_rootFolderPath = _project.rootFolderPath,
 						_primaryLanguageResources = m.gatherResources (),
+						_primaryLanguage = _project.primaryLanguage,
 						_primaryLanguageResourcesLast = m.loadAndParseLanguageResourcesFile (_primaryLanguage) || {},
 						_primaryLanguageResourcesDiff = Uize.Data.Diff.diff (
 							_primaryLanguageResourcesLast,
@@ -468,6 +471,7 @@ Uize.module ({
 				pseudoLocalize:function (_params,_callback) {
 					var
 						m = this,
+						_project = m.project,
 						_pseudoLocalizeOptions = {wordSplitter:m.wordSplitter}
 					;
 
@@ -476,11 +480,11 @@ Uize.module ({
 					}
 
 					_fileSystem.writeFile ({
-						path:m.languageResourcesFilePath (_pseudoLocale),
+						path:m.languageResourcesFilePath (_project.pseudoLocale),
 						contents:Uize.Data.Csv.to (
 							Uize.map (
 								Uize.Data.Csv.from (
-									_fileSystem.readFile ({path:m.languageResourcesFilePath (_primaryLanguage)})
+									_fileSystem.readFile ({path:m.languageResourcesFilePath (_project.primaryLanguage)})
 								),
 								function (_keyValueArray) {
 									_keyValueArray [1] = _pseudoLocalizeString (_keyValueArray [1] || '');
