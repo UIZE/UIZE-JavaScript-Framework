@@ -7,7 +7,6 @@ Uize.module ({
 		'Uize.Data.NameValueRecords',
 		'Uize.Data.Csv',
 		'Uize.Data.Diff',
-		'Uize.Data.Matches',
 		'Uize.Loc.Pseudo',
 		'Uize.Build.Util',
 		'Uize.Str.Split',
@@ -25,23 +24,23 @@ Uize.module ({
 		return _superclass.subclass ({
 			instanceMethods:{
 				languageResourcesFilePath:function (_language) {
-					return this._projectStringsPath + _language + '.csv';
+					return this._projectStringsPath + _language + '.json';
 				},
 
-				loadAndParseLanguageResourcesFile:function (_language) {
+				readLanguageResourcesFile:function (_language) {
 					var _languageResourcesFilePath = this.languageResourcesFilePath (_language);
 					return (
 						_fileSystem.fileExists ({path:_languageResourcesFilePath})
-							? Uize.Data.Flatten.unflatten (
-								Uize.Data.NameValueRecords.toHash (
-									Uize.Data.Csv.from (_fileSystem.readFile ({path:_languageResourcesFilePath})),
-									0,
-									1
-								),
-								Uize.Json.from
-							)
+							? Uize.Json.from (_fileSystem.readFile ({path:_languageResourcesFilePath}))
 							: undefined
 					);
+				},
+
+				writeLanguageResourcesFile:function (_language,_languageResources) {
+					_fileSystem.writeFile ({
+						path:this.languageResourcesFilePath (_language),
+						contents:Uize.Json.to (_languageResources)
+					});
 				},
 
 				forEachTranslatableLanguage:function (_iterationHandler) {
@@ -202,7 +201,7 @@ Uize.module ({
 						_project.languages,
 						function (_language) {
 							if (_language != _primaryLanguage) {
-								var _resources = m.loadAndParseLanguageResourcesFile (_language);
+								var _resources = m.readLanguageResourcesFile (_language);
 								_resources && m.distributeResources (_resources,_language,_project);
 							}
 						}
@@ -217,7 +216,7 @@ Uize.module ({
 						_rootFolderPath = _project.rootFolderPath,
 						_primaryLanguageResources = m.gatherResources (),
 						_primaryLanguage = _project.primaryLanguage,
-						_primaryLanguageResourcesLast = m.loadAndParseLanguageResourcesFile (_primaryLanguage) || {},
+						_primaryLanguageResourcesLast = m.readLanguageResourcesFile (_primaryLanguage) || {},
 						_primaryLanguageResourcesDiff = Uize.Data.Diff.diff (
 							_primaryLanguageResourcesLast,
 							_primaryLanguageResources
@@ -264,19 +263,7 @@ Uize.module ({
 					Uize.forEach (
 						_resoucesByLanguage,
 						function (_languageResources,_language) {
-							_fileSystem.writeFile ({
-								path:m.languageResourcesFilePath (_language),
-								contents:Uize.Data.Csv.to (
-									Uize.Data.NameValueRecords.fromHash (
-										Uize.Data.Flatten.flatten (
-											_languageResources,
-											function (_path) {return Uize.Json.to (_path,'mini')}
-										),
-										0,
-										1
-									)
-								)
-							});
+							m.writeLanguageResourcesFile (_language,_languageResources);
 						}
 					);
 					_callback ();
@@ -288,18 +275,28 @@ Uize.module ({
 						function (_language) {
 							var
 								_translationJobFilePath = m._projectStringsPath + 'jobs/' + _language + '.csv',
-								_translationJobStrings = Uize.Data.Matches.values (
-									Uize.Data.Csv.from (_fileSystem.readFile ({path:m.languageResourcesFilePath (_language)})),
-									'!value [1]'
+								_translationJobStrings = Uize.Data.Diff.diff (
+									m.readLanguageResourcesFile (_language) || {},
+									{},
+									function (_string) {return _string.value ? undefined : _string}
 								)
 							;
-							_translationJobStrings.length
-								? _fileSystem.writeFile ({
+							Uize.isEmpty (_translationJobStrings)
+								? _fileSystem.writeFile ({path:_translationJobFilePath,contents:''})
+								//? _fileSystem.deleteFile ({path:_translationJobFilePath})
+								: _fileSystem.writeFile ({
 									path:_translationJobFilePath,
-									contents:Uize.Data.Csv.to (_translationJobStrings)
+									contents:Uize.Data.Csv.to (
+										Uize.Data.NameValueRecords.fromHash (
+											Uize.Data.Flatten.flatten (
+												_translationJobStrings,
+												function (_path) {return Uize.Json.to (_path,'mini')}
+											),
+											0,
+											1
+										)
+									)
 								})
-								//: _fileSystem.deleteFile ({path:_translationJobFilePath})
-								: _fileSystem.writeFile ({path:_translationJobFilePath,contents:''})
 							;
 						}
 					);
@@ -310,33 +307,26 @@ Uize.module ({
 					var m = this;
 					m.forEachTranslatableLanguage (
 						function (_language) {
-							var _translatedStrings = Uize.Data.Matches.values (
-								Uize.Data.Csv.from (
-									_fileSystem.readFile ({path:m._projectStringsPath + 'jobs/' + _language + '.csv'})
+							var _translatedStrings = Uize.Data.Diff.diff (
+								Uize.Data.Flatten.unflatten (
+									Uize.Data.NameValueRecords.toHash (
+										Uize.Data.Csv.from (
+											_fileSystem.readFile ({path:m._projectStringsPath + 'jobs/' + _language + '.csv'})
+										),
+										0,
+										1
+									),
+									Uize.Json.from
 								),
-								'value [1]'
+								{},
+								function (_string) {return _string.value ? undefined : _string}
 							);
-							if (_translatedStrings.length) {
-								_fileSystem.writeFile ({
-									path:m.languageResourcesFilePath (_language),
-									contents:Uize.Data.Csv.to (
-										Uize.Data.NameValueRecords.fromHash (
-											Uize.copyInto (
-												Uize.Data.NameValueRecords.toHash (
-													Uize.Data.Csv.from (
-														_fileSystem.readFile ({path:m.languageResourcesFilePath (_language)})
-													),
-													0,
-													1
-												),
-												Uize.Data.NameValueRecords.toHash (_translatedStrings,0,1)
-											),
-											0,
-											1
-										)
-									)
-								});
-							}
+							if (!Uize.isEmpty (_translatedStrings))
+								m.writeLanguageResourcesFile (
+									_language,
+									Uize.mergeInto (m.readLanguageResourcesFile (_language),_translatedStrings)
+								)
+							;
 						}
 					);
 					_callback ();
@@ -472,28 +462,25 @@ Uize.module ({
 					var
 						m = this,
 						_project = m.project,
-						_pseudoLocalizeOptions = {wordSplitter:m.wordSplitter}
+						_pseudoLocalizeOptions = {wordSplitter:m.wordSplitter},
+						_pseudoLocalizedResources = {},
+						_pseudoLocale = _project.pseudoLocale
 					;
-
-					function _pseudoLocalizeString (_string) {
-						return Uize.Loc.Pseudo.pseudoLocalize (_string,_pseudoLocalizeOptions);
-					}
-
-					_fileSystem.writeFile ({
-						path:m.languageResourcesFilePath (_project.pseudoLocale),
-						contents:Uize.Data.Csv.to (
-							Uize.map (
-								Uize.Data.Csv.from (
-									_fileSystem.readFile ({path:m.languageResourcesFilePath (_project.primaryLanguage)})
-								),
-								function (_keyValueArray) {
-									_keyValueArray [1] = _pseudoLocalizeString (_keyValueArray [1] || '');
-									return _keyValueArray;
-								},
-								false
-							)
-						)
-					});
+					Uize.forEach (
+						m.readLanguageResourcesFile (_project.primaryLanguage),
+						function (_resourceFileStrings,_resourceFileSubPath) {
+							_pseudoLocalizedResources [m.getLanguageResourcePath (_resourceFileSubPath,_pseudoLocale)] =
+								Uize.Data.Diff.diff (
+									_resourceFileStrings,
+									{},
+									function (_string) {
+										return {value:Uize.Loc.Pseudo.pseudoLocalize (_string.value,_pseudoLocalizeOptions)};
+									}
+								)
+							;
+						}
+					);
+					m.writeLanguageResourcesFile (_pseudoLocale,_pseudoLocalizedResources);
 					_callback ();
 				},
 
