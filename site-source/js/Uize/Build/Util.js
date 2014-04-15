@@ -422,14 +422,19 @@ Uize.module ({
 							_logChunks = []
 						;
 						function _log (_logChunk) {
-							_console == 'verbose' && console.log (_logChunk);
+							_console == 'verbose' &&
+								console.log (
+									//(_isSummary ? '' : '############## ' + '') +
+									_logChunk
+								)
+							;
 							_logChunks.push (_logChunk);
 						}
 						_unitTests.wire ({
 							Start:
 								function (_event) {
 									_log (
-										Uize.Str.Repeat.repeat ('\t',_event.source.getDepth ()) + _event.source.get ('title')
+										Uize.Str.Repeat.repeat ('   ',_event.source.getDepth ()) + _event.source.get ('title')
 									);
 								},
 							Done:
@@ -440,14 +445,13 @@ Uize.module ({
 									;
 									/*** add to log ***/
 										_log (
-											Uize.Str.Repeat.repeat ('\t',_test.getDepth () + 1) +
+											Uize.Str.Repeat.repeat ('   ',_test.getDepth () + 1) +
 											(
 												_test.get ('result')
 													? ('PASSED!!! (duration: ' + _test.get ('duration') + 'ms)')
 													: ('*** FAILED *** ' + (_reasonForFailure || ''))
-											)
+											) + (_reasonForFailure ? '\n\n' + _test.getSynopsis () : '')
 										);
-										_reasonForFailure && _log ('','',_test.getSynopsis ());
 
 									/*** finish up if the test fails or if unit tests complete ***/
 										if (_test == _unitTests || !_test.get ('result')) {
