@@ -18,7 +18,8 @@ Uize.module ({
 
 		var
 			_fileSystem = Uize.Services.FileSystem.singleton (),
-			_split = Uize.Str.Split.split
+			_split = Uize.Str.Split.split,
+			_undefined
 		;
 
 		return _superclass.subclass ({
@@ -32,7 +33,7 @@ Uize.module ({
 					return (
 						_fileSystem.fileExists ({path:_languageResourcesFilePath})
 							? Uize.Json.from (_fileSystem.readFile ({path:_languageResourcesFilePath}))
-							: undefined
+							: _undefined
 					);
 				},
 
@@ -245,12 +246,11 @@ Uize.module ({
 											function (_gatheredProperty,_propertyDiff) {
 												return (
 													!_propertyDiff || _propertyDiff.value == 'removed'
-														? undefined
+														? _undefined
 														: {
-															value:
-																_propertyDiff.value == 'modified' || _propertyDiff.value == 'added'
-																	? ''
-																	: _gatheredProperty ? _gatheredProperty.value : ''
+															value:_propertyDiff.value == 'modified'
+																? ''
+																: _gatheredProperty ? _gatheredProperty.value : ''
 														}
 												);
 											}
@@ -278,7 +278,7 @@ Uize.module ({
 								_translationJobStrings = Uize.Data.Diff.diff (
 									m.readLanguageResourcesFile (_language) || {},
 									{},
-									function (_string) {return _string.value ? undefined : _string}
+									function (_string) {return _string.value ? _undefined : _string}
 								)
 							;
 							Uize.isEmpty (_translationJobStrings)
@@ -319,7 +319,7 @@ Uize.module ({
 									Uize.Json.from
 								),
 								{},
-								function (_string) {return _string.value ? undefined : _string}
+								function (_string) {return _string.value ? _string : _undefined}
 							);
 							if (!Uize.isEmpty (_translatedStrings))
 								m.writeLanguageResourcesFile (
