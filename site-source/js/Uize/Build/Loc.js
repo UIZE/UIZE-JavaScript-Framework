@@ -28,18 +28,20 @@
 		.........................................................................
 
 		Parameters
+			method
+				The name of a service method of the =Uize.Services.Loc= service (=export=, =import=, =metrics=, or =pseudoLocalize=).
+
 			project
 				The name of a project, as configured in the =moduleConfigs ['Uize.Build.Loc'].projects= object of the =uize-config.json= file.
 
-				If the special value "*" is specified for the =project= parameter, then the specified localization method will be executed for all of the localization projects specified in the config.
+				Executing a Method For All Projects
+					To execute a specific localization method for all projects listed in the config, one can either omit the =project= parameter or one can specify the special "*" wildcard value.
 
-				EXAMPLE
-				....................................................
-				node build.js Uize.Build.Loc project=* method=export
-				....................................................
-
-			method
-				The name of a service method of the =Uize.Services.Loc= service (=export=, =import=, =metrics=, or =pseudoLocalize=).
+					EXAMPLES
+					....................................................
+					node build.js Uize.Build.Loc method=export
+					node build.js Uize.Build.Loc project=* method=export
+					....................................................
 */
 
 Uize.module ({
@@ -51,7 +53,7 @@ Uize.module ({
 		return Uize.package ({
 			perform:function (_params) {
 				function _performLocMethodForProject (_project,_projectName) {
-					_project.name = _projectName;
+					Uize.mergeInto (_project,_scriptConfig.common,{name:_projectName});
 					Uize.require (
 						_project.serviceAdapter,
 						function (_locServiceAdapter) {

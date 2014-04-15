@@ -52,7 +52,9 @@
 						'nl-NL',
 						'ru-RU',
 						'zh-CN'
-					]
+					],
+					primaryLanguage:'en-US',
+					pseudoLocale:'pseudo'
 				}
 			}
 		}

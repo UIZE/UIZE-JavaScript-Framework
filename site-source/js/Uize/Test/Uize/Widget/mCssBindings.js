@@ -28,6 +28,22 @@ Uize.module ({
 	builder:function () {
 		'use strict';
 
+		/*** Utility Functions ***/
+			function _getDummyWidgetClassWithCssBindingsFeature (_features) {
+				return Uize.copyInto (
+					Uize.Widget.subclass ({
+						mixins:Uize.Widget.mCssBindings,
+						staticProperties:{
+							cssModule:Uize.package ({
+								add:Uize.nop,
+								moduleName:'CssModule'
+							})
+						}
+					}).declare (_features),
+					{moduleName:'WidgetClass'}
+				);
+			}
+
 		return Uize.Test.resolve ({
 			title:'Uize.Widget.mCssBindings Module Test',
 			test:[
@@ -39,23 +55,12 @@ Uize.module ({
 					title:'Miscellaneous tests',
 					test:[
 						{
-							title:'When a class name generator array in a CSS binding produces an empty string value, no class for the binding is added to the root node CSS classes for that binding',
+							title:'When a class name generator array produces an empty string value, no class is added for that CSS binding',
 							test:function () {
-								var
-									_WidgetClass = Uize.Widget.subclass ({
-										mixins:Uize.Widget.mCssBindings,
-										stateProperties:{isSelected:{value:false}},
-										cssBindings:{isSelected:['','selected']},
-										staticProperties:{
-											cssModule:Uize.package ({
-												add:Uize.nop,
-												moduleName:'CssModule'
-											})
-										}
-									})
-								;
-								_WidgetClass.moduleName = 'WidgetClass';
-
+								var _WidgetClass = _getDummyWidgetClassWithCssBindingsFeature ({
+									stateProperties:{isSelected:{value:false}},
+									cssBindings:{isSelected:['','selected']}
+								});
 								return (
 									this.expect (
 										'CssModule',
@@ -63,6 +68,25 @@ Uize.module ({
 									) &&
 									this.expect (
 										'CssModule CssModule-selected',
+										_WidgetClass ({isSelected:true}).get ('mCssBindings_rootNodeClasses')
+									)
+								);
+							}
+						},
+						{
+							title:'When an inverted state class name generator array is used, it results in a class being added when the state property is false and no class being added when the state property is true',
+							test:function () {
+								var _WidgetClass = _getDummyWidgetClassWithCssBindingsFeature ({
+									stateProperties:{isSelected:{value:false}},
+									cssBindings:{isSelected:['unselected','']}
+								});
+								return (
+									this.expect (
+										'CssModule CssModule-unselected',
+										_WidgetClass ().get ('mCssBindings_rootNodeClasses')
+									) &&
+									this.expect (
+										'CssModule',
 										_WidgetClass ({isSelected:true}).get ('mCssBindings_rootNodeClasses')
 									)
 								);
