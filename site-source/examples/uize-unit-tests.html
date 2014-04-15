@@ -213,7 +213,7 @@ Uize.require (
 					_testSuite.wire ({
 						Start:
 							function (e) {
-								_log.log (Uize.Str.Repeat.repeat ('...',e.source.getDepth ()) + e.source.get ('title'));
+								_log.log (Uize.Str.Repeat.repeat ('\t',e.source.getDepth ()) + e.source.get ('title'));
 							},
 						Done:
 							function (e) {
@@ -223,7 +223,7 @@ Uize.require (
 								;
 								_progressBar.set ({value:++_currentTestNo});
 								_log.log (
-									Uize.Str.Repeat.repeat ('...',_test.getDepth () + 1) +
+									Uize.Str.Repeat.repeat ('\t',_test.getDepth () + 1) +
 									(
 										_test.get ('result')
 											? ('PASSED!!! (duration: ' + _test.get ('duration') + 'ms)')
