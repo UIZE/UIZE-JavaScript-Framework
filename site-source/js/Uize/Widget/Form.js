@@ -159,7 +159,7 @@ Uize.module ({
 						}
 					),
 					_formWarnings = m.addChild('formWarnings', _Uize_Widget.FormWarnings, {watchedElements:[]}),
-					_elements = m.addChild('elements', _Uize_Widget.FormElements)
+					_elements = m.addChild('elements', m._formElementsWidgetClass || _Uize_Widget.FormElements)
 				;
 
 				// Save private instance references
@@ -446,6 +446,7 @@ Uize.module ({
 					name:'enctype',
 					onChange:_updateFormAttributes
 				},
+				_formElementsWidgetClass:'formElementsWidgetClass',
 				_isEmpty:{
 					name:'isEmpty',
 					value:_true

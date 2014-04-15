@@ -35,7 +35,7 @@ Uize.module ({
 
 		return function (_class) {
 			_class.declare ({
-				alphastructor:function (_properties) {
+				alphastructor:function () {
 					var
 						m = this,
 						_declarativeChildren = m.Class.mDeclarativeChildren_children,
