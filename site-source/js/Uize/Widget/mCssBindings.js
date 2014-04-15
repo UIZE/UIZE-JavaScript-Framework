@@ -64,7 +64,7 @@ Uize.module ({
 										Uize.map (
 											_bindingProperties,
 											function (_property,_propertyNo) {
-												return ',p' + _propertyNo + '=m.get(\'' + _property + '\'),c' + _propertyNo + '=p' + _propertyNo + '&&m.cssClass(b[\'' + _property + '\'](p' + _propertyNo + '))';
+												return ',p' + _propertyNo + '=b[\'' + _property + '\'](m.get(\'' + _property + '\')),c' + _propertyNo + '=p' + _propertyNo + '&&m.cssClass(p' + _propertyNo + ')';
 											}
 										).join ('') +
 										',e=m.extraClasses' +
