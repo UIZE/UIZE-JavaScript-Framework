@@ -1,8 +1,1 @@
 This is a TO DO document for the =Uize.Widget.mBindings= mix-in module.
-
-Implement New Binding Features
-	State Bindings to Children
-		Implement feature for declaring state bindings to child widgets.
-
-		Consider whether or not bi-directional bindings should be supported and, if so, how. What would the syntax be? What about cases of parent-to-many-children and many-children-to-parent bindings, such as an RgbSliders widget that breaks up an RGB color value and distributes it to three slider child widgets. Keep these kinds of use cases in mind when working out a declarative binding syntax.
-

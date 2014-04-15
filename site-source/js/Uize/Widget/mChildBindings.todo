@@ -1,0 +1,99 @@
+This is a proposal document for a =Uize.Widget.mChildBindings= mix-in module.
+
+Add Feature for Binding State with Children
+	Implement feature for declaring state bindings to child widgets.
+
+	Consider whether or not bi-directional bindings should be supported and, if so, how. What would the syntax be? What about cases of parent-to-many-children and many-children-to-parent bindings, such as an RgbSliders widget that breaks up an RGB color value and distributes it to three slider child widgets. Keep these kinds of use cases in mind when working out a declarative binding syntax.
+	
+	Verbose/Canonical Syntax
+		EXAMPLE
+		....
+		childBindings:{
+			size:{
+				child:'sizeWidget',
+				property:'value',
+				valueAdapter:{
+					aToB:function(value) { return value * value },
+					bToA:function(value) { return Math.sqrt(value) }
+				},
+				direction:'<->' // bi-directional changes (default)
+			},
+			value:[ // parent-to-many-children
+				{
+					child:'valueWidget',
+					valueAdapter:{
+						aToB:'value * value' // via Uize.resolveValueTransformer
+					},
+					direction:'->'
+				},
+				{
+					child:'valueWidget2',
+					valueAdapter:{
+						bToA:'Math.sqrt(value)' // via Uize.resolveValueTransformer
+					},
+					direction:'<-'
+				}
+			]
+		}
+		....
+		
+		NOTES
+		- The object notation is the same for single vs. many
+		- The many notation does allow for the child/property combo to be repeated. What should happen? Same as when a subclass defines the same one?
+		
+	Shorthand Syntax
+		EXAMPLE
+		....
+		childBindings:{
+			size:'<->sizeWidget.value',  // bi-directional changes with "value" state proprety in "sizeWidget" child
+			value:[ // parent-to-many-children
+				'->valueWidget', // changes to child only
+				'<-valueWidget2' // changes from child only
+			],
+			values:'valuesWidget' // bi-directional changes with same-named state proprety in "valuesWidget" child
+		}
+		...
+		
+		NOTES
+		- The string notation is the same for single vs. many and matches the above object notation, encompassing the child widget name in the string
+		- FORMAT: "[direction]childName[.childStateProperty]" (direction & childStateProperty are optional). Value adapters not supported.
+		- The many notation does allow for the child/property combo to be repeated. What should happen? Same as when a subclass defines the same one?
+		
+	Alternate Syntax
+		EXAMPLE
+		....
+		childBindings:{
+			size:{
+				sizeWidget:{
+					property:'value',
+					valueAdapter:{
+						aToB:function(value) { return value * value },
+						bToA:function(value) { return Math.sqrt(value) }
+					},
+					direction:'<->' // bi-directional changes (default)
+				}
+			},
+			value:{ // parent-to-many-children
+				valueWidget:{
+					valueAdapter:{
+						aToB:'value * value' // resolved via Uize.resolveValueTransformer
+					},
+					direction:'->'
+				},
+				valueWidget2:{
+					valueAdapter:{
+						bToA:'Math.sqrt(value)' // resolved via Uize.resolveValueTransformer
+					},
+					direction:'<-'
+				}
+			}
+		}
+		....
+		
+		NOTES
+		- This object syntax prevents duplicate definitions for the same child widget, since the child widget names are keys
+		- It feels more nested for the 1-to-1 binding case (by far the most common)
+		- Without an alternate string interface, implementation could get more complex because string has child in it, while object in alternate syntax does not
+		
+	NOTES
+	- What happens when a subclass specifies a binding for the same state property and same child widget state proprety? Overrides binding? Merges into binding?
