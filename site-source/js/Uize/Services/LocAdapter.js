@@ -9,8 +9,7 @@ Uize.module ({
 		'Uize.Data.Diff',
 		'Uize.Loc.Pseudo',
 		'Uize.Build.Util',
-		'Uize.Str.Split',
-		'Uize.Util.RegExpComposition'
+		'Uize.Str.Split'
 	],
 	superclass:'Uize.Service.Adapter',
 	builder:function (_superclass) {
@@ -51,7 +50,7 @@ Uize.module ({
 						_pseudoLocale = _project.pseudoLocale
 					;
 					Uize.forEach (
-						this.project.languages,
+						_project.languages,
 						function (_language) {
 							_language != _primaryLanguage && _language != _pseudoLocale && _iterationHandler (_language);
 						}
@@ -225,7 +224,7 @@ Uize.module ({
 						_resoucesByLanguage = Uize.pairUp (_primaryLanguage,_primaryLanguageResources)
 					;
 
-					/*** gather resources for all other supported languages ***/
+					/*** gather resources for all translatable languages ***/
 						m.forEachTranslatableLanguage (
 							function (_language) {
 								var _languageResources = _resoucesByLanguage [_language] = {};
@@ -235,13 +234,13 @@ Uize.module ({
 										var
 											_languageResourceFileSubPath =
 												m.getLanguageResourcePath (_resourceFileSubPath,_language),
-											_resourceFileFullPath = _rootFolderPath + '/' + _languageResourceFileSubPath,
-											_resources = _fileSystem.fileExists ({path:_resourceFileFullPath})
-												? m.parseResourceFile (_fileSystem.readFile ({path:_resourceFileFullPath}))
-												: {}
+											_resourceFileFullPath = _rootFolderPath + '/' + _languageResourceFileSubPath
 										;
 										_languageResources [_languageResourceFileSubPath] = Uize.Data.Diff.diff (
-											_resources,
+											_fileSystem.fileExists ({path:_resourceFileFullPath})
+												? m.parseResourceFile (_fileSystem.readFile ({path:_resourceFileFullPath}))
+												: {}
+											,
 											_primaryLanguageResourcesDiff [_resourceFileSubPath],
 											function (_gatheredProperty,_propertyDiff) {
 												return (
@@ -257,6 +256,27 @@ Uize.module ({
 										);
 									}
 								);
+							}
+						);
+
+					/*** generate resources for pseudo-locale ***/
+						var
+							_pseudoLocale = _project.pseudoLocale,
+							_pseudoLocalizedResources = _resoucesByLanguage [_pseudoLocale] = {},
+							_pseudoLocalizeOptions = {wordSplitter:m.wordSplitter}
+						;
+						Uize.forEach (
+							_primaryLanguageResources,
+							function (_resourceFileStrings,_resourceFileSubPath) {
+								_pseudoLocalizedResources [m.getLanguageResourcePath (_resourceFileSubPath,_pseudoLocale)] =
+									Uize.Data.Diff.diff (
+										_primaryLanguageResources [_resourceFileSubPath],
+										{},
+										function (_string) {
+											return {value:Uize.Loc.Pseudo.pseudoLocalize (_string.value,_pseudoLocalizeOptions)};
+										}
+									)
+								;
 							}
 						);
 
@@ -455,32 +475,6 @@ Uize.module ({
 							tokenUsage:_tokenUsage
 						})
 					});
-					_callback ();
-				},
-
-				pseudoLocalize:function (_params,_callback) {
-					var
-						m = this,
-						_project = m.project,
-						_pseudoLocalizeOptions = {wordSplitter:m.wordSplitter},
-						_pseudoLocalizedResources = {},
-						_pseudoLocale = _project.pseudoLocale
-					;
-					Uize.forEach (
-						m.readLanguageResourcesFile (_project.primaryLanguage),
-						function (_resourceFileStrings,_resourceFileSubPath) {
-							_pseudoLocalizedResources [m.getLanguageResourcePath (_resourceFileSubPath,_pseudoLocale)] =
-								Uize.Data.Diff.diff (
-									_resourceFileStrings,
-									{},
-									function (_string) {
-										return {value:Uize.Loc.Pseudo.pseudoLocalize (_string.value,_pseudoLocalizeOptions)};
-									}
-								)
-							;
-						}
-					);
-					m.writeLanguageResourcesFile (_pseudoLocale,_pseudoLocalizedResources);
 					_callback ();
 				},
 

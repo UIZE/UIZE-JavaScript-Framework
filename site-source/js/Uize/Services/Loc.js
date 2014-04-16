@@ -70,6 +70,8 @@ Uize.module ({
 							export
 								Exports resource strings from the project, gathering resource strings from resource files located through the project's codebase.
 
+								This method also performs pseudo-localization for all of a project's resource strings, generating strings for a pseudo-locale that can then be imported into the project using the =import= method.
+
 								NOTES
 								- see the companion =import= service method
 								- this service method is asynchronous
@@ -109,18 +111,6 @@ Uize.module ({
 						Instance Methods
 							metrics
 								Produces a report containing key metrics about a project's resource strings, such as number of individual resource files, estimated word count, estimated character count.
-
-								NOTES
-								- this service method is asynchronous
-					*/
-				},
-
-				pseudoLocalize:{
-					async:_true
-					/*?
-						Instance Methods
-							pseudoLocalize
-								Performs pseudo-localization for all of a project's resource strings, generating strings for a pseudo-locale that can then be imported into the project using the =import= method.
 
 								NOTES
 								- this service method is asynchronous
