@@ -24,7 +24,7 @@ Uize.module ({
 		return _superclass.subclass ({
 			instanceMethods:{
 				languageResourcesFilePath:function (_language) {
-					return this._projectStringsPath + _language + '.json';
+					return this._workingFolderPath + _language + '.json';
 				},
 
 				readLanguageResourcesFile:function (_language) {
@@ -294,7 +294,7 @@ Uize.module ({
 					m.forEachTranslatableLanguage (
 						function (_language) {
 							var
-								_translationJobFilePath = m._projectStringsPath + 'jobs/' + _language + '.csv',
+								_translationJobFilePath = m._workingFolderPath + 'jobs/' + _language + '.csv',
 								_translationJobStrings = Uize.Data.Diff.diff (
 									m.readLanguageResourcesFile (_language) || {},
 									{},
@@ -331,7 +331,7 @@ Uize.module ({
 								Uize.Data.Flatten.unflatten (
 									Uize.Data.NameValueRecords.toHash (
 										Uize.Data.Csv.from (
-											_fileSystem.readFile ({path:m._projectStringsPath + 'jobs/' + _language + '.csv'})
+											_fileSystem.readFile ({path:m._workingFolderPath + 'jobs/' + _language + '.csv'})
 										),
 										0,
 										1
@@ -480,7 +480,7 @@ Uize.module ({
 
 				init:function (_params,_callback) {
 					this.project = _params.project;
-					this._projectStringsPath = _params.stringsFolder + '/' + this.project.name + '/';
+					this._workingFolderPath = _params.workingFolder + '/' + this.project.name + '/';
 					_callback ();
 				}
 			},

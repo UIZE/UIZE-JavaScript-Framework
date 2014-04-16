@@ -38,7 +38,7 @@
 	],
 	moduleConfigs:{
 		'Uize.Build.Loc':{
-			stringsFolder:'strings',
+			workingFolder:'loc',
 			projects:{
 				Uize:{
 					serviceAdapter:'Uize.Services.LocAdapter.Uize',
