@@ -289,7 +289,7 @@ Uize.module ({
 					_callback ();
 				},
 
-				exportJob:function (_params,_callback) {
+				exportJobs:function (_params,_callback) {
 					var m = this;
 					m.forEachTranslatableLanguage (
 						function (_language) {
@@ -323,7 +323,7 @@ Uize.module ({
 					_callback ();
 				},
 
-				importJob:function (_params,_callback) {
+				importJobs:function (_params,_callback) {
 					var m = this;
 					m.forEachTranslatableLanguage (
 						function (_language) {
