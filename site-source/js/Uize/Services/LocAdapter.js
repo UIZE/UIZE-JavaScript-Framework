@@ -24,6 +24,9 @@ Uize.module ({
 		return _superclass.subclass ({
 			instanceMethods:{
 				_calculateMetricsForLanguage:function (_language,_languageResources,_metricsFilePath) {
+					function _percent (_numerator,_denominator) {
+						return ((_numerator / _denominator) || 0) * 100;
+					}
 					var
 						m = this,
 						_project = m.project,
@@ -123,21 +126,22 @@ Uize.module ({
 						contents:Uize.Json.to ({
 							resourceFiles:_totalResourceFiles,
 							brandSpecificResourceFiles:_totalBrandSpecificResourceFiles,
-							brandSpecificResourceFilesPercent:_totalBrandSpecificResourceFiles / _totalResourceFiles * 100,
+							brandSpecificResourceFilesPercent:_percent (_totalBrandSpecificResourceFiles,_totalResourceFiles),
 							resourceStrings:_totalResourceStrings,
 							brandSpecificResourceStrings:_totalBrandSpecificResourceStrings,
-							brandSpecificResourceStringsPercent:_totalBrandSpecificResourceStrings / _totalResourceStrings * 100,
+							brandSpecificResourceStringsPercent:
+								_percent (_totalBrandSpecificResourceStrings,_totalResourceStrings),
 							wordCount:_totalWordCount,
 							brandSpecificWordCount:_totalBrandSpecificWordCount,
-							brandSpecificWordCountPercent:_totalBrandSpecificWordCount / _totalWordCount * 100,
+							brandSpecificWordCountPercent:_percent (_totalBrandSpecificWordCount,_totalWordCount),
 							charCount:_totalCharCount,
 							brandSpecificCharCount:_totalBrandSpecificCharCount,
-							brandSpecificCharCountPercent:_totalBrandSpecificCharCount / _totalCharCount * 100,
+							brandSpecificCharCountPercent:_percent (_totalBrandSpecificCharCount,_totalCharCount),
 							tokens:_totalTokens,
 							tokenizedResourceStrings:_totalTokenizedResourceStrings,
-							tokenizedResourceStringsPercent:_totalTokenizedResourceStrings / _totalResourceStrings * 100,
+							tokenizedResourceStringsPercent:_percent (_totalTokenizedResourceStrings,_totalResourceStrings),
 							dupedResourceStrings:_totalDupedResourceStrings,
-							dupedResourceStringsPercent:_totalDupedResourceStrings / _totalResourceStrings * 100,
+							dupedResourceStringsPercent:_percent (_totalDupedResourceStrings,_totalResourceStrings),
 							dupedResourceStringsDetails:_dupedResourceStringsDetails,
 							tokenUsage:_tokenUsage
 						})
