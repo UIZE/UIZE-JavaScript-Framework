@@ -62,7 +62,7 @@ Uize.module ({
 							_locService.init (
 								{
 									project:_project,
-									stringsFolder:_scriptConfig.stringsFolder
+									workingFolder:_scriptConfig.workingFolder
 								},
 								function () {_locService [_params.method] ()}
 							);

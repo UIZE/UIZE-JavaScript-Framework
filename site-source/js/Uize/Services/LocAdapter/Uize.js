@@ -2,7 +2,8 @@ Uize.module ({
 	name:'Uize.Services.LocAdapter.Uize',
 	required:[
 		'Uize.Data.Simple',
-		'Uize.Data.NameValueRecords'
+		'Uize.Data.NameValueRecords',
+		'Uize.Util.RegExpComposition'
 	],
 	superclass:'Uize.Services.LocAdapter',
 	builder:function (_superclass) {

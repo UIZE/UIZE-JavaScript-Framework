@@ -9,8 +9,7 @@ Uize.module ({
 		'Uize.Data.Diff',
 		'Uize.Loc.Pseudo',
 		'Uize.Build.Util',
-		'Uize.Str.Split',
-		'Uize.Util.RegExpComposition'
+		'Uize.Str.Split'
 	],
 	superclass:'Uize.Service.Adapter',
 	builder:function (_superclass) {
@@ -24,8 +23,133 @@ Uize.module ({
 
 		return _superclass.subclass ({
 			instanceMethods:{
+				_calculateMetricsForLanguage:function (_language,_languageResources,_metricsFilePath) {
+					function _percent (_numerator,_denominator) {
+						return ((_numerator / _denominator) || 0) * 100;
+					}
+					var
+						m = this,
+						_project = m.project,
+						_totalResourceFiles = 0,
+						_totalBrandSpecificResourceFiles = 0,
+						_totalResourceStrings = 0,
+						_totalBrandSpecificResourceStrings = 0,
+						_totalWordCount = 0,
+						_totalBrandSpecificWordCount = 0,
+						_totalCharCount = 0,
+						_totalBrandSpecificCharCount = 0,
+						_totalTokens = 0,
+						_totalTokenizedResourceStrings = 0,
+						_totalDupedResourceStrings = 0,
+						_currentResourceFileIsBrandSpecific,
+						_valuesLookup = {},
+						_dupedResourceStringsDetails = {},
+						_tokenUsage = {}
+					;
+					Uize.forEach (
+						_languageResources,
+						function (_resourceFileStrings,_resourceFileSubPath) {
+							var
+								_wordCount = 0,
+								_brandSpecificWordCount = 0,
+								_charCount = 0,
+								_brandSpecificCharCount = 0
+							;
+							_totalResourceFiles++;
+							_totalBrandSpecificResourceFiles += (
+								_currentResourceFileIsBrandSpecific = m.isBrandResourceFile (_resourceFileSubPath)
+							);
+							m.processStrings (
+								_resourceFileStrings,
+								function (_value,_path) {
+									/*** update information on duplicates ***/
+										var _stringFullPath = Uize.Json.to (
+											[_resourceFileSubPath].concat (_path),
+											{
+												quoteChar:'"',
+												indentChars:'',
+												linebreakChars:''
+											}
+										);
+										if (_valuesLookup [_value]) {
+											_totalDupedResourceStrings++;
+											(
+												_dupedResourceStringsDetails [_value] ||
+												(_dupedResourceStringsDetails [_value] = [_valuesLookup [_value]])
+											).push (_stringFullPath);
+										} else {
+											_valuesLookup [_value] = _stringFullPath;
+										}
+
+									/*** get metrics for string ***/
+										var
+											_stringMetrics = m.getStringMetrics (_value),
+											_stringTokens = _stringMetrics.tokens,
+											_stringTokensLength = _stringTokens.length
+										;
+
+										/*** update general metrics ***/
+											_totalResourceStrings++;
+											_wordCount += _stringMetrics.words;
+											_charCount += _stringMetrics.chars;
+											if (_currentResourceFileIsBrandSpecific || m.isBrandResourceString (_path,_value)) {
+												_totalBrandSpecificResourceStrings++;
+												_brandSpecificWordCount += _stringMetrics.words;
+												_brandSpecificCharCount += _stringMetrics.chars;
+											}
+
+										/*** update metrics on tokenized strings and token usage ***/
+											if (_stringTokensLength) {
+												Uize.forEach (
+													_stringTokens,
+													function (_tokenName) {
+														(_tokenUsage [_tokenName] || (_tokenUsage [_tokenName] = [])).push (
+															_stringFullPath
+														);
+													}
+												);
+												_totalTokens += _stringTokensLength;
+												_totalTokenizedResourceStrings++;
+											}
+
+									return _value;
+								}
+							);
+							_totalWordCount += _wordCount;
+							_totalCharCount += _charCount;
+							_totalBrandSpecificWordCount += _brandSpecificWordCount;
+							_totalBrandSpecificCharCount += _brandSpecificCharCount;
+						}
+					);
+					_fileSystem.writeFile ({
+						path:_metricsFilePath,
+						contents:Uize.Json.to ({
+							resourceFiles:_totalResourceFiles,
+							brandSpecificResourceFiles:_totalBrandSpecificResourceFiles,
+							brandSpecificResourceFilesPercent:_percent (_totalBrandSpecificResourceFiles,_totalResourceFiles),
+							resourceStrings:_totalResourceStrings,
+							brandSpecificResourceStrings:_totalBrandSpecificResourceStrings,
+							brandSpecificResourceStringsPercent:
+								_percent (_totalBrandSpecificResourceStrings,_totalResourceStrings),
+							wordCount:_totalWordCount,
+							brandSpecificWordCount:_totalBrandSpecificWordCount,
+							brandSpecificWordCountPercent:_percent (_totalBrandSpecificWordCount,_totalWordCount),
+							charCount:_totalCharCount,
+							brandSpecificCharCount:_totalBrandSpecificCharCount,
+							brandSpecificCharCountPercent:_percent (_totalBrandSpecificCharCount,_totalCharCount),
+							tokens:_totalTokens,
+							tokenizedResourceStrings:_totalTokenizedResourceStrings,
+							tokenizedResourceStringsPercent:_percent (_totalTokenizedResourceStrings,_totalResourceStrings),
+							dupedResourceStrings:_totalDupedResourceStrings,
+							dupedResourceStringsPercent:_percent (_totalDupedResourceStrings,_totalResourceStrings),
+							dupedResourceStringsDetails:_dupedResourceStringsDetails,
+							tokenUsage:_tokenUsage
+						})
+					});
+				},
+
 				languageResourcesFilePath:function (_language) {
-					return this._projectStringsPath + _language + '.json';
+					return this._workingFolderPath + _language + '.json';
 				},
 
 				readLanguageResourcesFile:function (_language) {
@@ -51,7 +175,7 @@ Uize.module ({
 						_pseudoLocale = _project.pseudoLocale
 					;
 					Uize.forEach (
-						this.project.languages,
+						_project.languages,
 						function (_language) {
 							_language != _primaryLanguage && _language != _pseudoLocale && _iterationHandler (_language);
 						}
@@ -225,23 +349,21 @@ Uize.module ({
 						_resoucesByLanguage = Uize.pairUp (_primaryLanguage,_primaryLanguageResources)
 					;
 
-					/*** gather resources for all other supported languages ***/
+					/*** gather resources for all translatable languages ***/
 						m.forEachTranslatableLanguage (
 							function (_language) {
 								var _languageResources = _resoucesByLanguage [_language] = {};
 								Uize.forEach (
 									_primaryLanguageResources,
 									function (_resourceFileStrings,_resourceFileSubPath) {
-										var
-											_languageResourceFileSubPath =
-												m.getLanguageResourcePath (_resourceFileSubPath,_language),
-											_resourceFileFullPath = _rootFolderPath + '/' + _languageResourceFileSubPath,
-											_resources = _fileSystem.fileExists ({path:_resourceFileFullPath})
+										var _resourceFileFullPath =
+											_rootFolderPath + '/' + m.getLanguageResourcePath (_resourceFileSubPath,_language)
+										;
+										_languageResources [_resourceFileSubPath] = Uize.Data.Diff.diff (
+											_fileSystem.fileExists ({path:_resourceFileFullPath})
 												? m.parseResourceFile (_fileSystem.readFile ({path:_resourceFileFullPath}))
 												: {}
-										;
-										_languageResources [_languageResourceFileSubPath] = Uize.Data.Diff.diff (
-											_resources,
+											,
 											_primaryLanguageResourcesDiff [_resourceFileSubPath],
 											function (_gatheredProperty,_propertyDiff) {
 												return (
@@ -260,6 +382,27 @@ Uize.module ({
 							}
 						);
 
+					/*** generate resources for pseudo-locale ***/
+						var
+							_pseudoLocale = _project.pseudoLocale,
+							_pseudoLocalizedResources = _resoucesByLanguage [_pseudoLocale] = {},
+							_pseudoLocalizeOptions = {wordSplitter:m.wordSplitter}
+						;
+						Uize.forEach (
+							_primaryLanguageResources,
+							function (_resourceFileStrings,_resourceFileSubPath) {
+								_pseudoLocalizedResources [m.getLanguageResourcePath (_resourceFileSubPath,_pseudoLocale)] =
+									Uize.Data.Diff.diff (
+										_primaryLanguageResources [_resourceFileSubPath],
+										{},
+										function (_string) {
+											return {value:Uize.Loc.Pseudo.pseudoLocalize (_string.value,_pseudoLocalizeOptions)};
+										}
+									)
+								;
+							}
+						);
+
 					Uize.forEach (
 						_resoucesByLanguage,
 						function (_languageResources,_language) {
@@ -269,41 +412,60 @@ Uize.module ({
 					_callback ();
 				},
 
-				exportJob:function (_params,_callback) {
-					var m = this;
+				exportJobs:function (_params,_callback) {
+					var
+						m = this,
+						_primaryLanguageResources = m.readLanguageResourcesFile (m.project.primaryLanguage)
+					;
 					m.forEachTranslatableLanguage (
 						function (_language) {
 							var
-								_translationJobFilePath = m._projectStringsPath + 'jobs/' + _language + '.csv',
 								_translationJobStrings = Uize.Data.Diff.diff (
-									m.readLanguageResourcesFile (_language) || {},
-									{},
-									function (_string) {return _string.value ? _undefined : _string}
-								)
+									Uize.Data.Diff.diff (
+										m.readLanguageResourcesFile (_language) || {},
+										{},
+										function (_string) {return _string.value ? _undefined : _string}
+									),
+									_primaryLanguageResources,
+									function (_stringToTranslate,_primaryLanguageString) {
+										return _stringToTranslate && _primaryLanguageString;
+									}
+								),
+								_jobsPath = m._workingFolderPath + 'jobs/'
 							;
-							Uize.isEmpty (_translationJobStrings)
-								? _fileSystem.writeFile ({path:_translationJobFilePath,contents:''})
-								//? _fileSystem.deleteFile ({path:_translationJobFilePath})
-								: _fileSystem.writeFile ({
-									path:_translationJobFilePath,
-									contents:Uize.Data.Csv.to (
-										Uize.Data.NameValueRecords.fromHash (
-											Uize.Data.Flatten.flatten (
-												_translationJobStrings,
-												function (_path) {return Uize.Json.to (_path,'mini')}
-											),
-											0,
-											1
+
+							/*** calculate metrics for translation job ***/
+								m._calculateMetricsForLanguage (
+									_language,
+									_translationJobStrings,
+									_jobsPath + _language + '-metrics.json'
+								);
+
+							/*** write translation job strings CSV file ***/
+								var _translationJobFilePath = _jobsPath + _language + '.csv';
+								Uize.isEmpty (_translationJobStrings)
+									? _fileSystem.writeFile ({path:_translationJobFilePath,contents:''})
+									//? _fileSystem.deleteFile ({path:_translationJobFilePath})
+									: _fileSystem.writeFile ({
+										path:_translationJobFilePath,
+										contents:Uize.Data.Csv.to (
+											Uize.Data.NameValueRecords.fromHash (
+												Uize.Data.Flatten.flatten (
+													_translationJobStrings,
+													function (_path) {return Uize.Json.to (_path,'mini')}
+												),
+												0,
+												1
+											)
 										)
-									)
-								})
-							;
+									})
+								;
 						}
 					);
 					_callback ();
 				},
 
-				importJob:function (_params,_callback) {
+				importJobs:function (_params,_callback) {
 					var m = this;
 					m.forEachTranslatableLanguage (
 						function (_language) {
@@ -311,7 +473,7 @@ Uize.module ({
 								Uize.Data.Flatten.unflatten (
 									Uize.Data.NameValueRecords.toHash (
 										Uize.Data.Csv.from (
-											_fileSystem.readFile ({path:m._projectStringsPath + 'jobs/' + _language + '.csv'})
+											_fileSystem.readFile ({path:m._workingFolderPath + 'jobs/' + _language + '.csv'})
 										),
 										0,
 										1
@@ -339,154 +501,19 @@ Uize.module ({
 				metrics:function (_params,_callback) {
 					var
 						m = this,
-						_totalResourceFiles = 0,
-						_totalBrandSpecificResourceFiles = 0,
-						_totalResourceStrings = 0,
-						_totalBrandSpecificResourceStrings = 0,
-						_totalWordCount = 0,
-						_totalBrandSpecificWordCount = 0,
-						_totalCharCount = 0,
-						_totalBrandSpecificCharCount = 0,
-						_totalTokens = 0,
-						_totalTokenizedResourceStrings = 0,
-						_totalDupedResourceStrings = 0,
-						_currentResourceFileIsBrandSpecific,
-						_project = m.project,
-						_valuesLookup = {},
-						_dupedResourceStringsDetails = {},
-						_tokenUsage = {}
+						_primaryLanguage = m.project.primaryLanguage
 					;
-					Uize.forEach (
+					m._calculateMetricsForLanguage (
+						_primaryLanguage,
 						m.gatherResources (),
-						function (_resourceFileStrings,_resourceFileSubPath) {
-							var
-								_wordCount = 0,
-								_brandSpecificWordCount = 0,
-								_charCount = 0,
-								_brandSpecificCharCount = 0
-							;
-							_totalResourceFiles++;
-							_totalBrandSpecificResourceFiles += (
-								_currentResourceFileIsBrandSpecific = m.isBrandResourceFile (_resourceFileSubPath)
-							);
-							m.processStrings (
-								_resourceFileStrings,
-								function (_value,_path) {
-									/*** update information on duplicates ***/
-										var _stringFullPath = Uize.Json.to (
-											[_resourceFileSubPath].concat (_path),
-											{
-												quoteChar:'"',
-												indentChars:'',
-												linebreakChars:''
-											}
-										);
-										if (_valuesLookup [_value]) {
-											_totalDupedResourceStrings++;
-											(
-												_dupedResourceStringsDetails [_value] ||
-												(_dupedResourceStringsDetails [_value] = [_valuesLookup [_value]])
-											).push (_stringFullPath);
-										} else {
-											_valuesLookup [_value] = _stringFullPath;
-										}
-
-									/*** get metrics for string ***/
-										var
-											_stringMetrics = m.getStringMetrics (_value),
-											_stringTokens = _stringMetrics.tokens,
-											_stringTokensLength = _stringTokens.length
-										;
-
-										/*** update general metrics ***/
-											_totalResourceStrings++;
-											_wordCount += _stringMetrics.words;
-											_charCount += _stringMetrics.chars;
-											if (_currentResourceFileIsBrandSpecific || m.isBrandResourceString (_path,_value)) {
-												_totalBrandSpecificResourceStrings++;
-												_brandSpecificWordCount += _stringMetrics.words;
-												_brandSpecificCharCount += _stringMetrics.chars;
-											}
-
-										/*** update metrics on tokenized strings and token usage ***/
-											if (_stringTokensLength) {
-												Uize.forEach (
-													_stringTokens,
-													function (_tokenName) {
-														(_tokenUsage [_tokenName] || (_tokenUsage [_tokenName] = [])).push (
-															_stringFullPath
-														);
-													}
-												);
-												_totalTokens += _stringTokensLength;
-												_totalTokenizedResourceStrings++;
-											}
-
-									return _value;
-								}
-							);
-							_totalWordCount += _wordCount;
-							_totalCharCount += _charCount;
-							_totalBrandSpecificWordCount += _brandSpecificWordCount;
-							_totalBrandSpecificCharCount += _brandSpecificCharCount;
-						}
+						m._workingFolderPath + 'metrics/' + _primaryLanguage + '.json'
 					);
-					_fileSystem.writeFile ({
-						path:'logs/loc-metrics-' + _project.name + '.json',
-						contents:Uize.Json.to ({
-							resourceFiles:_totalResourceFiles,
-							brandSpecificResourceFiles:_totalBrandSpecificResourceFiles,
-							brandSpecificResourceFilesPercent:_totalBrandSpecificResourceFiles / _totalResourceFiles * 100,
-							resourceStrings:_totalResourceStrings,
-							brandSpecificResourceStrings:_totalBrandSpecificResourceStrings,
-							brandSpecificResourceStringsPercent:_totalBrandSpecificResourceStrings / _totalResourceStrings * 100,
-							wordCount:_totalWordCount,
-							brandSpecificWordCount:_totalBrandSpecificWordCount,
-							brandSpecificWordCountPercent:_totalBrandSpecificWordCount / _totalWordCount * 100,
-							charCount:_totalCharCount,
-							brandSpecificCharCount:_totalBrandSpecificCharCount,
-							brandSpecificCharCountPercent:_totalBrandSpecificCharCount / _totalCharCount * 100,
-							tokens:_totalTokens,
-							tokenizedResourceStrings:_totalTokenizedResourceStrings,
-							tokenizedResourceStringsPercent:_totalTokenizedResourceStrings / _totalResourceStrings * 100,
-							dupedResourceStrings:_totalDupedResourceStrings,
-							dupedResourceStringsPercent:_totalDupedResourceStrings / _totalResourceStrings * 100,
-							dupedResourceStringsDetails:_dupedResourceStringsDetails,
-							tokenUsage:_tokenUsage
-						})
-					});
-					_callback ();
-				},
-
-				pseudoLocalize:function (_params,_callback) {
-					var
-						m = this,
-						_project = m.project,
-						_pseudoLocalizeOptions = {wordSplitter:m.wordSplitter},
-						_pseudoLocalizedResources = {},
-						_pseudoLocale = _project.pseudoLocale
-					;
-					Uize.forEach (
-						m.readLanguageResourcesFile (_project.primaryLanguage),
-						function (_resourceFileStrings,_resourceFileSubPath) {
-							_pseudoLocalizedResources [m.getLanguageResourcePath (_resourceFileSubPath,_pseudoLocale)] =
-								Uize.Data.Diff.diff (
-									_resourceFileStrings,
-									{},
-									function (_string) {
-										return {value:Uize.Loc.Pseudo.pseudoLocalize (_string.value,_pseudoLocalizeOptions)};
-									}
-								)
-							;
-						}
-					);
-					m.writeLanguageResourcesFile (_pseudoLocale,_pseudoLocalizedResources);
 					_callback ();
 				},
 
 				init:function (_params,_callback) {
 					this.project = _params.project;
-					this._projectStringsPath = _params.stringsFolder + '/' + this.project.name + '/';
+					this._workingFolderPath = _params.workingFolder + '/' + this.project.name + '/';
 					_callback ();
 				}
 			},

@@ -1,0 +1,96 @@
+Introduction
+	UIZE provides a system for automating various processes relating to the localization of a codebase.
+
+	Key Features
+		.
+
+		Supports Multiple Projects
+			.
+
+		Adaptable to Different Project Types
+			.
+
+		Performs Diffing to Reduce Translation Load
+			.
+
+		Performs Automatic Pseudo-localization
+			.
+
+	Accessed Through a Build Script
+		.
+
+		Running the Build Script
+			.
+
+		Service Methods
+			.
+
+			Metrics
+				.
+
+				.............................................................
+				node build.js Uize.Build.Loc project=myProject method=metrics
+				.............................................................
+
+			Export
+				.
+
+				............................................................
+				node build.js Uize.Build.Loc project=myProject method=export
+				............................................................
+
+			Import
+				.
+
+				............................................................
+				node build.js Uize.Build.Loc project=myProject method=import
+				............................................................
+
+			Export Jobs
+				.
+
+				................................................................
+				node build.js Uize.Build.Loc project=myProject method=exportJobs
+				................................................................
+
+			Import Jobs
+				.
+
+				................................................................
+				node build.js Uize.Build.Loc project=myProject method=importJobs
+				................................................................
+
+			Extract Jobs
+				.
+
+				.............................................................
+				node build.js Uize.Build.Loc project=myProject method=extract
+				.............................................................
+
+		Configuring Projects
+			.
+
+			Per Project Configuration Options
+				.
+
+				Service Adapter
+					.
+
+				Languages
+					.
+
+				Primary Language
+					.
+
+				Pseudo-locale
+					.
+
+			Common Project Configuration Options
+				.
+
+		Pseudo-localization
+			.
+
+	Use With Other Projects
+		.
+
