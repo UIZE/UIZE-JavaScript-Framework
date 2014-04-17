@@ -84,6 +84,14 @@ Uize.module ({
 						}
 					}
 				},
+				editItem: function (_itemWidget, _newProperties) {
+					var
+						m = this,
+						_itemProperties = (_itemWidget && _itemWidget.get('properties')) || {}
+					;
+					_itemWidget && _itemWidget.set({ properties: m.mergeItemProperties(_itemProperties, _newProperties) });
+					m.fire({ name: 'Item.edited', bubble: _true });
+				},
 
 				adaptFormValuesToItemProperties:function (_formValues) { return _formValues },
 				adaptItemPropertiesToFormValues:function (_itemProperties) { return _itemProperties },
@@ -120,7 +128,18 @@ Uize.module ({
 					}
 					return _serializedProperties;
 				},
-
+				formSubmitHandler: function (_itemWidget, _formValues) {
+					var 
+						m = this,
+						_newProperties = m.adaptFormValuesToItemProperties(_formValues)
+					;
+					if (_itemWidget) {
+						m.editItem(_itemWidget, _newProperties);
+					}
+					else {
+						m.addNewItem(_newProperties);
+					}
+				},
 				launchFormDialog:function (_dialogParams, _itemWidget) {
 					var m = this;
 					if (m.isWired) {
@@ -137,14 +156,8 @@ Uize.module ({
 									params: _Uize.copy(_dialogParams, m.adaptItemPropertiesToFormValues(_itemProperties), m._formDialogParams)
 								},
 								widgetProperties: { name: 'itemFormDialog' },
-								submitHandler: function (_newProperties) {
-									if (_itemWidget) {
-										_itemWidget.set({properties:m.mergeItemProperties(_itemProperties, m.adaptFormValuesToItemProperties(_newProperties))});
-										m.fire({name:'Item.edited', bubble:_true});
-									}
-									else {
-										m.addNewItem(m.adaptFormValuesToItemProperties(_newProperties));
-									}
+								submitHandler: function (_formValues) {
+									m.formSubmitHandler(_itemWidget, _formValues);
 								}
 							})
 						;

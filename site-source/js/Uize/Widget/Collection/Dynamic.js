@@ -416,7 +416,7 @@ Uize.module ({
 					// easy way to get the template into the markup so that it can do what it does.
 					var _nodeInnerHtml = _templateNode.innerHTML;
 					return	Uize.Template &&_templateNode.tagName == 'SCRIPT' && _templateNode.type == 'text/jst'
-						? Uize.Template.compile (_nodeInnerHtml, {openerToken:'[%',closerToken:'%]'})
+						? Uize.Template.compile(_nodeInnerHtml, this._templateTokens || { openerToken: '[%', closerToken: '%]' })
 						: function (_input) {return _nodeInnerHtml.replace (/ITEMWIDGETNAME/g, _input.name)}
 					;
 				},
@@ -508,7 +508,8 @@ Uize.module ({
 				_itemVestigeOpacity:{
 					name:'itemVestigeOpacity',
 					value:.2
-				}
+				},
+				_templateTokens: 'templateTokens'
 			}
 		});
 	}
