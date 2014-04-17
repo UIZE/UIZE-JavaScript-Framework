@@ -152,6 +152,10 @@ Uize.module ({
 							NOTES
 							- see also the related =Uize.Util.ModuleNaming.getTestModuleName= and =Uize.Util.ModuleNaming.getModuleNameFromTestModuleName= static methods
 				*/
+			},
+
+			isModuleName:function (_moduleName) {
+				return /^([a-zA-Z_$][a-zA-Z_$0-9]*)(\.[a-zA-Z_$][a-zA-Z_$0-9]*)*$/.test (_moduleName);
 			}
 		});
 	}

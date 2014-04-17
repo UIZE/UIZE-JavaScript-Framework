@@ -38,7 +38,7 @@ Uize.module ({
 		'Uize.Util.ModuleNaming',
 		'Uize.Test',
 		'Uize.Data.Matches',
-		'Uize.Build.ModuleInfo'
+		'Uize.Str.Split'
 	],
 	builder:function () {
 		'use strict';
@@ -416,123 +416,201 @@ Uize.module ({
 						_console = (_params.silent == 'true' ? 'silent' : _params.console) || 'summary',
 						_logFilePath = _params.logFilePath
 					;
-					function _runUnitTests (_tests) {
-						var
-							_unitTests = new _tests,
-							_logChunks = []
-						;
-						function _log (_logChunk) {
-							_console == 'verbose' &&
-								console.log (
-									//(_isSummary ? '' : '############## ' + '') +
-									_logChunk
-								)
-							;
-							_logChunks.push (_logChunk);
-						}
-						_unitTests.wire ({
-							Start:
-								function (_event) {
-									_log (
-										Uize.Str.Repeat.repeat ('   ',_event.source.getDepth ()) + _event.source.get ('title')
-									);
-								},
-							Done:
-								function (_event) {
-									var
-										_test = _event.source,
-										_reasonForFailure = _test.get ('reasonForFailure')
-									;
-									/*** add to log ***/
-										_log (
-											Uize.Str.Repeat.repeat ('   ',_test.getDepth () + 1) +
-											(
-												_test.get ('result')
-													? ('PASSED!!! (duration: ' + _test.get ('duration') + 'ms)')
-													: ('*** FAILED *** ' + (_reasonForFailure || ''))
-											) + (_reasonForFailure ? '\n\n' + _test.getSynopsis () : '')
-										);
-
-									/*** finish up if the test fails or if unit tests complete ***/
-										if (_test == _unitTests || !_test.get ('result')) {
-											var _synopsis = _test.getSynopsis ();
-											_console != 'silent' && console.log (_synopsis);
-											_logChunks.push (_synopsis);
-											_logFilePath &&
-												_fileSystem.writeFile ({path:_logFilePath,contents:_logChunks.join ('\n')})
-											;
-											_test.get ('result') || WScript.Quit (1);
-										}
-								}
-						});
-						_unitTests.run ();
-					}
 					if (typeof _tests == 'string') {
-						if (_tests == '*') {
-							var
-								_libraryModuleSuffixRegExp = /\.library$/i,
-								_testIgnoreNamespaces = (_params.testIgnoreNamespaces || '') + '',
-								_modulesToIgnoreRegExp =
-									_testIgnoreNamespaces
+						var _modulesToTest;
+
+						if (_Uize_Util_ModuleNaming.isModuleName (_tests)) {
+							_modulesToTest = [_Uize_Util_ModuleNaming.getModuleNameFromTestModuleName (_tests)];
+						} else {
+							/*** compile module name matcher expression to an efficient function ***/
+								var
+									_expressionChunks = [],
+									_expressionChunkMatchers = [],
+									_expressionChunkSign = '+'
+								;
+								for (
+									var
+										_partNo = -1,
+										_signAndMatcherList = Uize.Data.Matches.retain (
+											Uize.Str.Split.split (_tests,/(^|[\+\-])([^\+\-]+)/),
+											function (_value,_key) {return _key % 3}
+										),
+										_totalParts = _signAndMatcherList.length / 2
+									;
+									++_partNo <= _totalParts;
+								) {
+									var
+										_sign = _signAndMatcherList [_partNo * 2] || '+',
+										_matcher = _signAndMatcherList [_partNo * 2 + 1]
+									;
+									if (_sign != _expressionChunkSign || _partNo == _totalParts) {
+										_expressionChunks.push (
+											(_expressionChunkSign == '-' ? '!' : '') +
+											'/^(' +
+											Uize.map (
+												_expressionChunkMatchers,
+												function (_moduleNameMatcher) {
+													return (
+														Uize.Str.Has.hasSuffix (
+															_moduleNameMatcher = Uize.escapeRegExpLiteral (_moduleNameMatcher)
+																.replace (/\\\*/g,'.+'),
+															'\\..+'
+														)
+															? _moduleNameMatcher.slice (0,-4) + '(\\..+)?'
+															: _moduleNameMatcher
+													);
+												}
+											).join ('|') +
+											')$/.test (v)'
+										);
+										_expressionChunkSign = _sign;
+										_expressionChunkMatchers = [];
+
+									}
+									_expressionChunkMatchers.push (_matcher);
+								}
+								var _matcherExpression = '';
+								Uize.forEach (
+									_expressionChunks,
+									function (_expressionChunk) {
+										_matcherExpression =
+											(
+												_matcherExpression &&
+												(
+													'(' + _matcherExpression + ')' +
+													(_expressionChunk.charAt (0) == '!' ? '&&' : '||')
+												)
+											) +
+											_expressionChunk
+										;
+									}
+								);
+								var _moduleNameMatcher = Function ('v','return ' + _matcherExpression);
+
+							/*** use module name matcher function to filter modules list ***/
+								var
+									_libraryModuleSuffixRegExp = /\.library$/i,
+									_testIgnoreNamespaces = (_params.testIgnoreNamespaces || '') + '',
+									_testIgnoreNamespacesRegExp = _testIgnoreNamespaces
 										? new RegExp (
 											'^(' +
 											_Uize.map (_testIgnoreNamespaces.split (','),_Uize.escapeRegExpLiteral).join ('|') +
 											')(\\..+|$)'
 										)
 										: null
-								,
-								_modulesExcludingLibraryModules = _Uize.Data.Matches.values (
-									_package.getJsModules (_params),
-									function (_moduleName) {
-										return !_libraryModuleSuffixRegExp.test (_moduleName) // ignore .library modules
-											&& (!_modulesToIgnoreRegExp || !_modulesToIgnoreRegExp.test (_moduleName))
-										;
-									}
-								),
-								_modulesLookup = _Uize.lookup (_modulesExcludingLibraryModules),
-								_testModuleName,
-								_testModuleRegExp = /^[a-zA-Z_\$][a-zA-Z0-9_\$]*\.Test($|\.)/,
-								_modulesInDependencyOrder = _Uize_Build.ModuleInfo.traceDependencies (
-									_Uize.Data.Matches.values (
-										_modulesExcludingLibraryModules,
+									,
+									_modulesExcludingLibraryModulesAndTestIgnoreNamespaces = _Uize.Data.Matches.values (
+										_package.getJsModules (_params).sort (),
 										function (_moduleName) {
-											return !_testModuleRegExp.test (_moduleName); // ignore test modules
+											return (
+												!_libraryModuleSuffixRegExp.test (_moduleName) && // ignore .library modules
+												(!_testIgnoreNamespacesRegExp || !_testIgnoreNamespacesRegExp.test (_moduleName))
+											);
 										}
-									)
-								)
-							;
-							_tests = _Uize_Test.resolve ({
-								title:'Unit Tests Suite',
-								test:_Uize.map (
-									_modulesInDependencyOrder,
+									),
+									_modulesLookup = _Uize.lookup (_modulesExcludingLibraryModulesAndTestIgnoreNamespaces),
+									_testModuleName
+								;
+								_modulesToTest = _Uize.Data.Matches.values (
+									_modulesExcludingLibraryModulesAndTestIgnoreNamespaces,
 									function (_moduleName) {
 										return (
-											_modulesLookup [
-												_testModuleName = _Uize_Util_ModuleNaming.getTestModuleName (_moduleName)
-											]
-												? _Uize_Test.testModuleTest (_testModuleName)
-												: _Uize_Test.requiredModulesTest (_moduleName)
+											!/^[a-zA-Z_\$][a-zA-Z0-9_\$]*\.Test($|\.)/.test (_moduleName) && // ignore test modules
+											_moduleNameMatcher (_moduleName) // only include modules from module name matcher
 										);
 									}
-								)
-							});
-						} else {
-							var _testModule = _Uize_Util_ModuleNaming.getTestModuleName (_tests);
-							if (
-								!_fileSystem.fileExists ({
-									path:_params.sourcePath + '/' + _params.modulesFolder + '/' + Uize.modulePathResolver (_testModule) + '.js'
-								})
-							)
-								_tests = Uize.Test.requiredModulesTest (
-									_Uize_Util_ModuleNaming.getModuleNameFromTestModuleName (_testModule)
-								)
-							;
+								);
 						}
+
+						/*** resolve modules to test to test class ***/
+							if (_modulesToTest.length == 1) {
+								var
+									_moduleToTest = _modulesToTest [0],
+									_testModuleName = _Uize_Util_ModuleNaming.getTestModuleName (_moduleToTest)
+								;
+								if (
+									_fileSystem.fileExists ({
+										path:_params.sourcePath + '/' + _params.modulesFolder + '/' + Uize.modulePathResolver (_testModuleName) + '.js'
+									})
+								) {
+									Uize.require (_testModuleName,function (_testModule) {_tests = _testModule});
+								} else {
+									_tests = Uize.Test.requiredModulesTest (
+										_Uize_Util_ModuleNaming.getModuleNameFromTestModuleName (_moduleToTest)
+									);
+								}
+							} else {
+								_tests = _Uize_Test.resolve ({
+									title:'Unit Tests Suite',
+									test:_Uize.map (
+										_modulesToTest,
+										function (_moduleName) {
+											return (
+												_modulesLookup [
+													_testModuleName = _Uize_Util_ModuleNaming.getTestModuleName (_moduleName)
+												]
+													? _Uize_Test.testModuleTest (_testModuleName)
+													: _Uize_Test.requiredModulesTest (_moduleName)
+											);
+										}
+									)
+								});
+							}
 					}
-					typeof _tests == 'string'
-						? Uize.require (_Uize_Util_ModuleNaming.getTestModuleName (_tests),_runUnitTests)
-						: _runUnitTests (_tests)
-					;
+
+					/*** run the tests ***/
+						function _runUnitTests (_tests) {
+							var
+								_unitTests = new _tests,
+								_logChunks = []
+							;
+							function _log (_logChunk) {
+								_console == 'verbose' &&
+									console.log (
+										//(_isSummary ? '' : '############## ' + '') +
+										_logChunk
+									)
+								;
+								_logChunks.push (_logChunk);
+							}
+							_unitTests.wire ({
+								Start:
+									function (_event) {
+										_log (
+											Uize.Str.Repeat.repeat ('   ',_event.source.getDepth ()) + _event.source.get ('title')
+										);
+									},
+								Done:
+									function (_event) {
+										var
+											_test = _event.source,
+											_reasonForFailure = _test.get ('reasonForFailure')
+										;
+										/*** add to log ***/
+											_log (
+												Uize.Str.Repeat.repeat ('   ',_test.getDepth () + 1) +
+												(
+													_test.get ('result')
+														? ('PASSED!!! (duration: ' + _test.get ('duration') + 'ms)')
+														: ('*** FAILED *** ' + (_reasonForFailure || ''))
+												) + (_reasonForFailure ? '\n\n' + _test.getSynopsis () : '')
+											);
+
+										/*** finish up if the test fails or if unit tests complete ***/
+											if (_test == _unitTests || !_test.get ('result')) {
+												var _synopsis = _test.getSynopsis ();
+												_console != 'silent' && console.log (_synopsis);
+												_logChunks.push (_synopsis);
+												_logFilePath &&
+													_fileSystem.writeFile ({path:_logFilePath,contents:_logChunks.join ('\n')})
+												;
+												_test.get ('result') || WScript.Quit (1);
+											}
+									}
+							});
+							_unitTests.run ();
+						}
+						_runUnitTests (_tests);
 					/*?
 						Static Methods
 							Uize.Build.Util.runUnitTests
