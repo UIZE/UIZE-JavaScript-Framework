@@ -98,3 +98,4 @@ Add Feature for Binding State with Children
 	NOTES
 	- What happens when a subclass specifies a binding for the same state property and same child widget state proprety? Overrides binding? Merges into binding?
 	- How to handle when a child is removed and possibly re-added?
+	- What does it mean to have multiple one-way child-to-parent bindings for a single property? Is that a supported case?
