@@ -2293,6 +2293,7 @@ Uize.module ({
 							&& this.expect(2, Uize.keys(_WidgetSubclass.mChildBindings_bindings.propertyA).length)
 							&& this.expect(1, Uize.keys(_WidgetSubclass.mChildBindings_bindings.propertyA.childA).length)
 							&& this.expect(1, Uize.keys(_WidgetSubclass.mChildBindings_bindings.propertyA.childB).length)
+						;
 					}
 				}
 			]
