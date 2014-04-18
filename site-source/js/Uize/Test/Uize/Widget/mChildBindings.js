@@ -2168,7 +2168,7 @@ Uize.module ({
 					}
 				),*/
 				{
-					title:'When a bound child is removed, a state property change in parent after removal is properly handled (no errors)',
+					title:'When a bound child is removed, a state property change in parent after removal is properly handled (no errors and not fired on child)',
 					test:function() {
 						var
 							_widget = _getMockWidgetInstance(
@@ -2188,7 +2188,7 @@ Uize.module ({
 					}
 				},
 				{
-					title:'When a bound child is removed, a state property change in child after removal is properly handled (no errors)',
+					title:'When a bound child is removed, a state property change in child after removal is properly handled (no errors and not fired on parent)',
 					test:function() {
 						var
 							_widget = _getMockWidgetInstance(
@@ -2229,7 +2229,7 @@ Uize.module ({
 					}
 				},
 				{
-					title:'When a bound child is removed, and a new same-named child is re-added, a chnage in widget state should be reflected in child\'s',
+					title:'When a bound child is removed, and a new same-named child is re-added, a change in widget state should be reflected in child\'s',
 					test:function() {
 						var
 							_widget = _getMockWidgetInstance(

@@ -51,7 +51,8 @@ Uize.module ({
 									&& (_bindingValueIsObject ? _bindingValue.handler : _bindingValue).call(_context, _event, _source)
 								;
 							};
-						}
+						},
+						_wiredWidgetEvents = {} // keep track of wired widget events so we can remove them if the children get removed
 					;
 
 					/*** wire up event handlers for DOM nodes ***/
@@ -59,13 +60,18 @@ Uize.module ({
 							'wired',
 							function () {
 								_forEach(
-									_mClass.mEventBindings_dom,
+									_mClass.mEventBindings_dom, // a lookup of nodeNames -> bindings
 									function (_bindings, _nodeName) {
 										var _node = m.getNode(_nodeName);
 										_forEach(
-											_bindings,
-											function(_binding, _eventName) {
-												m.wireNode(_node, _eventName, _wrapBinding(m, _binding, _node));
+											_bindings, // an array of objects
+											function(_events) {
+												_forEach(
+													_events, // an object of 0 or more event bindings
+													function(_binding, _eventName) {
+														m.wireNode(_node, _eventName, _wrapBinding(m, _binding, _node));
+													}
+												);
 											}
 										);
 									}
@@ -75,20 +81,50 @@ Uize.module ({
 
 					/*** wire self & child widget events ***/
 						_forEach(
-							_mClass.mEventBindings_widget,
+							_mClass.mEventBindings_widget, // a lookup of widgetNames -> bindings
 							function(_bindings, _widgetName) {
 								function _wire(_widget) {
 									_forEach(
-										_bindings,
-										function(_binding, _eventName) {
-											_widget.wire(_eventName, _wrapBinding(m, _binding, _widget));
+										_bindings, // an array of objects
+										function(_events) {
+											_forEach(
+												_events, // an object of 0 or more event bindings
+												function(_binding, _eventName) {
+													var _eventToWire = _Uize.pairUp(_eventName, _wrapBinding(m, _binding, _widget));
+
+													_widget.wire(_eventToWire);
+		
+													// store a reference to the wired event for later
+													(_wiredWidgetEvents[_widgetName] || (_wiredWidgetEvents[_widgetName] = [])).push(_eventToWire);
+												}
+											);
 										}
 									);
 								}
-								_widgetName // '' is self
-									? _addedChildren.once(_widgetName, function() { _wire(_children[_widgetName]) })
-									: _wire(m)
-								;
+								if (_widgetName) { 
+									var _childWidget;
+									_addedChildren.wire( // adding or removing child widgets
+										'Changed.' + _widgetName,
+										function() {
+											if (_addedChildren.get(_widgetName))
+												_wire(_childWidget = _children[_widgetName]);
+											else {
+												// unwire all the events this widget wired so that we don't have a removed child widget still potentially
+												// firing events
+												for (var _wiredEventForWidget = _wiredWidgetEvents[_widgetName], _eventNo = -1; ++_eventNo < _wiredEventForWidget.length;)
+													_childWidget.unwire(_wiredEventForWidget[_eventNo]);
+												
+												// delete our cache of the wired event so things don't get mixed up when if we
+												// add back a child w/ the same name
+												delete _wiredWidgetEvents[_widgetName];
+												
+												// clear out our reference to the removed child widget to not potentially hang on memory that can be disposed
+												_childWidget = undefined;
+											}
+										}
+									);
+								}
+								else _wire(m) // '' is self
 							}
 						);
 				},
@@ -112,9 +148,10 @@ Uize.module ({
 										? _domEventBindings
 										: _widgetEventBindings
 								;
-
-								_Uize.copyInto(
-									_eventBindings[_nodeOrWidgetName] || (_eventBindings[_nodeOrWidgetName] = {}),
+								
+								// add binding(s) to an array instead of an object (with event name as key) so that subclasses can also wire
+								// up the same event for the same child
+								(_eventBindings[_nodeOrWidgetName] || (_eventBindings[_nodeOrWidgetName] = [])).push(
 									_eventBindingKeyTokens.length > 1 // short-hand syntax where the 2nd token is the event
 										? _Uize.pairUp(_eventBindingKeyTokens[1], _eventBindingValue)
 										: _eventBindingValue

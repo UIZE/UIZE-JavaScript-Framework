@@ -135,9 +135,9 @@ Uize.module ({
 															_syncToChildEvent && m.unwire(_syncToChildEvent);
 															
 															// unwire child -> parent (even though child is removed, it is not necessarilly destroyed)
-															_syncFromChildEvent && _childWidget && _childWidget.unwire(_syncFromChildEvent)
+															_syncFromChildEvent && _childWidget && _childWidget.unwire(_syncFromChildEvent);
 															
-															// let's not orphan memory by keeping around this reference in scope
+															// clear out our reference to the removed child widget to not potentially hang on memory that can be disposed
 															_childWidget = undefined;
 														}
 													}

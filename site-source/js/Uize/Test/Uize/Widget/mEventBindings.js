@@ -39,63 +39,62 @@ Uize.module ({
 		;
 		
 		_global.window = _global;  // For Uize.Dom.Basics
-		
-		function _generateTest(_title, _eventBindingsShorthand, _eventBindingsVerbose, _wiredEvents, _deferredChildren) {
-			function _getMockDomNode() {
-				return Uize.Class.subclass({
-					alphastructor:function() {
-						this._events = {};
+
+		function _getMockDomNode() {
+			return Uize.Class.subclass({
+				alphastructor:function() {
+					this._events = {};
+				},
+				instanceProperties:{
+					tagName:'DIV',
+					nodeType:1
+				},
+				instanceMethods:{
+					addEventListener:function(_eventName, _handler) {
+						(this._events[_eventName] || (this._events[_eventName] = [])).push(_handler);
 					},
-					instanceProperties:{
-						tagName:'DIV',
-						nodeType:1
-					},
-					instanceMethods:{
-						addEventListener:function(_eventName, _handler) {
-							(this._events[_eventName] || (this._events[_eventName] = [])).push(_handler);
-						},
-						triggerEvent:function(_event) {
-							this._events[_event.name]
-								&& Uize.applyAll(this, this._events[_event.name], [_event]);
-						}
+					triggerEvent:function(_event) {
+						this._events[_event.name]
+							&& Uize.applyAll(this, this._events[_event.name], [_event]);
 					}
-				}) ();
+				}
+			}) ();
+		}
+
+		function _getMockWidgetClass(_eventBindings, _children) {
+			return Uize.Widget.subclass ({
+				mixins:Uize.Widget.mEventBindings,
+				omegastructor:function() {
+					this.addChildren(Uize.lookup(_children, {widgetClass:Uize.Widget}));
+				},
+				eventBindings:_eventBindings
+			});
+		}
+		
+		function _getMockWidgetInstance(_eventBindings, _children, _nodes) {
+			var _nodeMap = {};
+			
+			if (Uize.isArray(_nodes)) {
+				for (var _nodeNo = -1; ++_nodeNo < _nodes.length;)
+					_nodeMap[_nodes[_nodeNo]] = _getMockDomNode()
+				;
 			}
 			
-			function _expectAll(_obj, _expectFunc) {
-				for (var _key in _obj) {
-					if (!_expectFunc(_obj[_key], _key))
-						return false;
-				}
-				
-				return true;
-			}
-				
+			return _getMockWidgetClass(_eventBindings, _children)({
+				nodeMap:_nodeMap
+			});
+		}
+		
+		function _generateTest(_title, _eventBindingsShorthand, _eventBindingsVerbose, _wiredEvents, _deferredChildren) {
 			function _generateSyntaxTests(_isVerbose) {
 				var _eventBindings = _isVerbose ? _eventBindingsVerbose : _eventBindingsShorthand;
 
-				function _getMockWidgetClass(_children) {
-					return Uize.Widget.subclass ({
-						mixins:Uize.Widget.mEventBindings,
-						omegastructor:function() {
-							this.addChildren(Uize.lookup(_children, {widgetClass:Uize.Widget}));
-						},
-						eventBindings:_eventBindings
-					});
+				function _getSyntaxMockWidgetClass(_children) {
+					return _getMockWidgetClass(_eventBindings, _children);
 				}
 				
-				function _getMockWidgetInstance(_children, _nodes) {
-					var _nodeMap = {};
-					
-					if (Uize.isArray(_nodes)) {
-						for (var _nodeNo = -1; ++_nodeNo < _nodes.length;)
-							_nodeMap[_nodes[_nodeNo]] = _getMockDomNode()
-						;
-					}
-					
-					return _getMockWidgetClass(_children)({
-						nodeMap:_nodeMap
-					});
+				function _geSyntaxMockWidgetInstance(_children, _nodes) {
+					return _getMockWidgetInstance(_eventBindings, _children, _nodes);
 				}
 				
 				function _generateFireTests(_type) {
@@ -109,7 +108,7 @@ Uize.module ({
 							var
 								_typeEvents = _wiredEvents[_type],
 								_names = _type == 'self' ? ['self'] : Uize.keys(_typeEvents),
-								_mockInstance = _getMockWidgetInstance(
+								_mockInstance = _geSyntaxMockWidgetInstance(
 									_type == 'child' ? _names : undefined,
 									_type == 'node' ? _names : undefined
 								),
@@ -183,7 +182,7 @@ Uize.module ({
 											else {
 												_processArrayAsync(
 													_deferredChildrenForEvent,
-													function(_deferredChildName, _nextDeferredChildFunc, _deferredChildNo) {
+													function(_deferredChildName, _nextDeferredChildFunc) {
 														_verifyEventNotFired(
 															function() {
 																// Add deferred child
@@ -271,66 +270,14 @@ Uize.module ({
 					test:[
 						{
 							title:'Widget class is a function (not null)',
-							test:function() { return this.expectFunction(_getMockWidgetClass()) }
+							test:function() { return this.expectFunction(_getSyntaxMockWidgetClass()) }
 						},
 						{
 							title:'Widget instance is an object (not null)',
-							test:function() { return this.expectObject(_getMockWidgetInstance()) }
-						},
-						{
-							title:'Self events are properly bucketed',
-							test:function() {
-								return !_wiredEvents
-									|| Uize.isEmpty(_wiredEvents.self)
-									|| this.expect(
-										Uize.lookup(_wiredEvents.self),
-										Uize.lookup(
-											Uize.keys(_getMockWidgetClass().mEventBindings_widget[''])
-										)
-									)
-								;
-							}
+							test:function() { return this.expectObject(_geSyntaxMockWidgetInstance()) }
 						},
 						_generateFireTests('self'),
-						{
-							title:'Child events are properly bucketed',
-							test:function() {
-								var m = this;
-								return !_wiredEvents
-									|| Uize.isEmpty(_wiredEvents.child)
-									|| _expectAll(
-										_getMockWidgetClass().mEventBindings_widget,
-										function (_bindings, _widgetName) {
-											return _widgetName == ''
-												|| m.expect(
-													Uize.lookup(_wiredEvents.child[_widgetName]),
-													Uize.lookup(Uize.keys(_bindings))
-												)
-											;
-										}
-									)
-								;
-							}
-						},
 						_generateFireTests('child'),
-						{
-							title:'Node events are properly bucketed',
-							test:function() {
-								var m = this;
-								return !_wiredEvents
-									|| Uize.isEmpty(_wiredEvents.node)
-									|| _expectAll(
-										_getMockWidgetClass().mEventBindings_dom,
-										function (_bindings, _nodeName) {
-											return m.expect(
-												Uize.lookup(_wiredEvents.node[_nodeName]),
-												Uize.lookup(Uize.keys(_bindings))
-											);
-										}
-									)
-								;
-							}
-						},
 						{
 							title:'Node events do not fire before widget is wired',
 							test:function(_continue) {
@@ -339,7 +286,7 @@ Uize.module ({
 								
 								var
 									_nodeNames = Uize.keys(_wiredEvents.node),
-									_mockInstance = _getMockWidgetInstance(null, _nodeNames)
+									_mockInstance = _geSyntaxMockWidgetInstance(null, _nodeNames)
 								;
 								_processArrayAsync(
 									_nodeNames,
@@ -376,7 +323,7 @@ Uize.module ({
 					_generateSyntaxTests(),
 					_generateSyntaxTests(true)
 				]
-			}
+			};
 		}
 
 		return Uize.Test.resolve ({
@@ -1042,6 +989,95 @@ Uize.module ({
 							}
 						)
 					]
+				},
+				{
+					title:'When a bound child is removed, a fired event on the child is properly handled (no errors & not fired on parent)',
+					test:function(_continue) {
+						var
+							_widget = _getMockWidgetInstance(
+								{
+									'childA:Click':function() { _continue(false) }
+								},
+								['childA']
+							),
+							_childToRemove = _widget.children.childA // keep reference so we'll have it after removal
+						;
+						
+						_widget.removeChild(_childToRemove);
+						
+						// fire child event (shouldn't actually be handled by the parent)
+						_childToRemove.fire('Click');
+						
+						setTimeout(
+							function() { _continue(true) },
+							10
+						);
+					}
+				},
+				{
+					title:'When a bound child is removed, and a new same-named child is re-added, a child event is handled by the parent',
+					test:function(_continue) {
+						var
+							_widget = _getMockWidgetInstance(
+								{
+									'childA:Click':function() {
+										clearTimeout(_failTimeout);
+										_continue(true);
+									}
+								},
+								['childA']
+							),
+							_failTimeout
+						;
+						
+						// remove child
+						_widget.removeChild('childA');
+						
+						// add new same-named child
+						var _newChild = _widget.addChild('childA', Uize.Widget);
+						
+						// this shouldn't happen because the handler should be rebound when new child was added
+						_failTimeout = setTimeout(
+							function() { _continue(false) }, 
+							1000
+						);
+						
+						_newChild.fire('Click'); // fire child event (should be handled by parent)
+					}
+				},
+				{
+					title:'When a subclass declares the same child/event combination, the base class\' handler is called',
+					test:function(_continue) {
+						var
+							_WidgetClass = _getMockWidgetClass(
+								{
+									'childA:Click':function() {
+										clearTimeout(_failTimeout);
+										_continue(true);
+									}
+								},
+								['childA']
+							),
+							_WidgetSubclass = _WidgetClass.subclass({
+								eventBindings:{
+									'childA:Click':function() { }
+								}
+							}),
+							_failTimeout
+						;
+						
+						// this shouldn't happen because the handler should be rebound when new child was added
+						_failTimeout = setTimeout(
+							function() { _continue(false) }, 
+							1000
+						);
+						
+						_WidgetSubclass().children.childA.fire('Click');
+					}
+				},
+				{
+					title:'When a subclass declares the same child/event combination, the subclass class\' handler is called',
+					test:[]
 				}
 			]
 		});
