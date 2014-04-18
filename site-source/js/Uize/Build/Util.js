@@ -38,7 +38,7 @@ Uize.module ({
 		'Uize.Util.ModuleNaming',
 		'Uize.Test',
 		'Uize.Data.Matches',
-		'Uize.Str.Split'
+		'Uize.Util.ModuleNameMatcher'
 	],
 	builder:function () {
 		'use strict';
@@ -422,104 +422,39 @@ Uize.module ({
 						if (_Uize_Util_ModuleNaming.isModuleName (_tests)) {
 							_modulesToTest = [_Uize_Util_ModuleNaming.getModuleNameFromTestModuleName (_tests)];
 						} else {
-							/*** compile module name matcher expression to an efficient function ***/
-								var
-									_expressionChunks = [],
-									_expressionChunkMatchers = [],
-									_expressionChunkSign = '+'
-								;
-								for (
-									var
-										_partNo = -1,
-										_signAndMatcherList = Uize.Data.Matches.retain (
-											Uize.Str.Split.split (_tests,/(^|[\+\-])([^\+\-]+)/),
-											function (_value,_key) {return _key % 3}
-										),
-										_totalParts = _signAndMatcherList.length / 2
-									;
-									++_partNo <= _totalParts;
-								) {
-									var
-										_sign = _signAndMatcherList [_partNo * 2] || '+',
-										_matcher = _signAndMatcherList [_partNo * 2 + 1]
-									;
-									if (_sign != _expressionChunkSign || _partNo == _totalParts) {
-										_expressionChunks.push (
-											(_expressionChunkSign == '-' ? '!' : '') +
-											'/^(' +
-											Uize.map (
-												_expressionChunkMatchers,
-												function (_moduleNameMatcher) {
-													return (
-														Uize.Str.Has.hasSuffix (
-															_moduleNameMatcher = Uize.escapeRegExpLiteral (_moduleNameMatcher)
-																.replace (/\\\*/g,'.+'),
-															'\\..+'
-														)
-															? _moduleNameMatcher.slice (0,-4) + '(\\..+)?'
-															: _moduleNameMatcher
-													);
-												}
-											).join ('|') +
-											')$/.test (v)'
-										);
-										_expressionChunkSign = _sign;
-										_expressionChunkMatchers = [];
-
-									}
-									_expressionChunkMatchers.push (_matcher);
-								}
-								var _matcherExpression = '';
-								Uize.forEach (
-									_expressionChunks,
-									function (_expressionChunk) {
-										_matcherExpression =
-											(
-												_matcherExpression &&
-												(
-													'(' + _matcherExpression + ')' +
-													(_expressionChunk.charAt (0) == '!' ? '&&' : '||')
-												)
-											) +
-											_expressionChunk
-										;
-									}
-								);
-								var _moduleNameMatcher = Function ('v','return ' + _matcherExpression);
-
-							/*** use module name matcher function to filter modules list ***/
-								var
-									_libraryModuleSuffixRegExp = /\.library$/i,
-									_testIgnoreNamespaces = (_params.testIgnoreNamespaces || '') + '',
-									_testIgnoreNamespacesRegExp = _testIgnoreNamespaces
-										? new RegExp (
-											'^(' +
-											_Uize.map (_testIgnoreNamespaces.split (','),_Uize.escapeRegExpLiteral).join ('|') +
-											')(\\..+|$)'
-										)
-										: null
-									,
-									_modulesExcludingLibraryModulesAndTestIgnoreNamespaces = _Uize.Data.Matches.values (
-										_package.getJsModules (_params).sort (),
-										function (_moduleName) {
-											return (
-												!_libraryModuleSuffixRegExp.test (_moduleName) && // ignore .library modules
-												(!_testIgnoreNamespacesRegExp || !_testIgnoreNamespacesRegExp.test (_moduleName))
-											);
-										}
-									),
-									_modulesLookup = _Uize.lookup (_modulesExcludingLibraryModulesAndTestIgnoreNamespaces),
-									_testModuleName
-								;
-								_modulesToTest = _Uize.Data.Matches.values (
-									_modulesExcludingLibraryModulesAndTestIgnoreNamespaces,
+							var
+								_moduleNameMatcher = Uize.Util.ModuleNameMatcher.resolve (_tests),
+								_libraryModuleSuffixRegExp = /\.library$/i,
+								_testIgnoreNamespaces = (_params.testIgnoreNamespaces || '') + '',
+								_testIgnoreNamespacesRegExp = _testIgnoreNamespaces
+									? new RegExp (
+										'^(' +
+										_Uize.map (_testIgnoreNamespaces.split (','),_Uize.escapeRegExpLiteral).join ('|') +
+										')(\\..+|$)'
+									)
+									: null
+								,
+								_modulesExcludingLibraryModulesAndTestIgnoreNamespaces = _Uize.Data.Matches.values (
+									_package.getJsModules (_params).sort (),
 									function (_moduleName) {
 										return (
-											!/^[a-zA-Z_\$][a-zA-Z0-9_\$]*\.Test($|\.)/.test (_moduleName) && // ignore test modules
-											_moduleNameMatcher (_moduleName) // only include modules from module name matcher
+											!_libraryModuleSuffixRegExp.test (_moduleName) && // ignore .library modules
+											(!_testIgnoreNamespacesRegExp || !_testIgnoreNamespacesRegExp.test (_moduleName))
 										);
 									}
-								);
+								),
+								_modulesLookup = _Uize.lookup (_modulesExcludingLibraryModulesAndTestIgnoreNamespaces),
+								_testModuleName
+							;
+							_modulesToTest = _Uize.Data.Matches.values (
+								_modulesExcludingLibraryModulesAndTestIgnoreNamespaces,
+								function (_moduleName) {
+									return (
+										!/^[a-zA-Z_\$][a-zA-Z0-9_\$]*\.Test($|\.)/.test (_moduleName) && // ignore test modules
+										_moduleNameMatcher (_moduleName) // only include modules from module name matcher
+									);
+								}
+							);
 						}
 
 						/*** resolve modules to test to test class ***/
