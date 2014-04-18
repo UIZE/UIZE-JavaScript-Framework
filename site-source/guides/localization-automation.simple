@@ -1,7 +1,42 @@
 Introduction
 	UIZE provides a system for automating various processes relating to the localization of a codebase.
 
-	Key Features
+	Metrics Reports
+		A metrics report can be produced for a project by using the =metrics= localization method.
+
+		EXAMPLE
+		.............................................................................
+		node [pathToUize]build.js Uize.Build.Loc project=[projectName] method=metrics
+		.............................................................................
+
+		The =metrics= method analyzes the primary language resource strings for a porject and generates a =.json= file to the following path...
+
+		............................................................
+		[workingFolder]/[projectName]/metrics/[primaryLanguage].json
+		............................................................
+
+		The metrics report is a JSON file, so the data contained in it could be loaded by other scripts or an application and used to present a visualization of the metrics or to estimate cost for translation.
+
+		Metrics Report Contents
+			Total Word Count
+				.
+
+			Total Character Count
+				.
+
+			Total Resource Files
+				The total number of resource files for the language is represented by the =resourceFiles= property.
+
+				The value of the =resourceFiles= property reflects the total number of distributed resource files for the language and not the total for all languages, so this value doesn't increase as you add support for new languages.
+
+			Brand-specific Resource Files
+				The total number of brand-specific resource files for the language is represented by the =brandSpecificResourceFiles= property.
+
+				What constitutes a brand-specific resource file will vary by project and depend on the project definition. Typically, brand-specific resource files provide overrides for certain resource strings that need to be different for specific brands, so the number of brand-specific resource files is usually smaller than the total number of resource files. Moreover, different brands may have a differing number of brand-specific resource files.
+
+				The number of brand-specific resource files, expressed as a percentage of total resource files, is represented for convenience in the =brandSpecificResourceFilesPercent= property.
+
+	### Key Features
 		.
 
 		Supports Multiple Projects
@@ -16,7 +51,7 @@ Introduction
 		Performs Automatic Pseudo-localization
 			.
 
-	Accessed Through a Build Script
+	### Accessed Through a Build Script
 		.
 
 		Running the Build Script
@@ -91,6 +126,6 @@ Introduction
 		Pseudo-localization
 			.
 
-	Use With Other Projects
+	### Use With Other Projects
 		.
 
