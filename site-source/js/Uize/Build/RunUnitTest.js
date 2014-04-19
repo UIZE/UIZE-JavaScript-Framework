@@ -13,7 +13,7 @@
 	type: Package
 	importance: 1
 	codeCompleteness: 100
-	docCompleteness: 2
+	docCompleteness: 100
 */
 
 /*?
@@ -41,7 +41,17 @@
 
 Uize.module ({
 	name:'Uize.Build.RunUnitTest',
-	required:'Uize.Build.RunUnitTests',
-	builder:function () {return Uize.Build.RunUnitTests}
+	required:'Uize.Build.Util',
+	builder:function () {
+		'use strict';
+
+		return Uize.package ({
+			perform:function (_params) {
+				_params.module = _params.testModule;
+				delete _params.testModules;
+				Uize.Build.Util.runUnitTests (_params);
+			}
+		});
+	}
 });
 

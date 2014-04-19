@@ -412,7 +412,7 @@ Uize.module ({
 
 				runUnitTests:function (_params) {
 					var
-						_tests = _params.testModule || '*',
+						_tests = _params.module || '*',
 						_console = (_params.silent == 'true' ? 'silent' : _params.console) || 'summary',
 						_logFilePath = _params.logFilePath
 					;
@@ -443,8 +443,7 @@ Uize.module ({
 										);
 									}
 								),
-								_modulesLookup = _Uize.lookup (_modulesExcludingLibraryModulesAndTestIgnoreNamespaces),
-								_testModuleName
+								_modulesLookup = _Uize.lookup (_modulesExcludingLibraryModulesAndTestIgnoreNamespaces)
 							;
 							_modulesToTest = _Uize.Data.Matches.values (
 								_modulesExcludingLibraryModulesAndTestIgnoreNamespaces,
@@ -458,11 +457,10 @@ Uize.module ({
 						}
 
 						/*** resolve modules to test to test class ***/
+							var _testModuleName;
 							if (_modulesToTest.length == 1) {
-								var
-									_moduleToTest = _modulesToTest [0],
-									_testModuleName = _Uize_Util_ModuleNaming.getTestModuleName (_moduleToTest)
-								;
+								var _moduleToTest = _modulesToTest [0];
+								_testModuleName = _Uize_Util_ModuleNaming.getTestModuleName (_moduleToTest);
 								if (
 									_fileSystem.fileExists ({
 										path:_params.sourcePath + '/' + _params.modulesFolder + '/' + Uize.modulePathResolver (_testModuleName) + '.js'
@@ -500,12 +498,7 @@ Uize.module ({
 								_logChunks = []
 							;
 							function _log (_logChunk) {
-								_console == 'verbose' &&
-									console.log (
-										//(_isSummary ? '' : '############## ' + '') +
-										_logChunk
-									)
-								;
+								_console == 'verbose' && console.log (_logChunk);
 								_logChunks.push (_logChunk);
 							}
 							_unitTests.wire ({
