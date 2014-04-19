@@ -172,7 +172,7 @@ Uize.module ({
 									_itemsCoords1 = _itemsCoords [_itemDisplayOrderNo ? _totalItemsMinus1 - 1 : 1]
 								;
 								_orientationNo =
-									_totalItemsMinus1 && _itemsCoords1.top > _itemsCoords0.bottom
+									_totalItemsMinus1 && _itemsCoords1.top >= _itemsCoords0.bottom
 										? 1 /* 1 = items layed out vertically */
 										: 0 /* 0 = items layed out horizontally */
 								;

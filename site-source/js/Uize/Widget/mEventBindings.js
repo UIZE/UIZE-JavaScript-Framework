@@ -36,7 +36,7 @@ Uize.module ({
 
 		return function (_class) {
 			_class.declare ({
-				omegastructor:function () {
+				alphastructor:function () {
 					var
 						m = this,
 						_mClass = m.Class,
@@ -56,7 +56,7 @@ Uize.module ({
 					;
 
 					/*** wire up event handlers for DOM nodes ***/
-						m.once (
+						m.whenever (
 							'wired',
 							function () {
 								_forEach(

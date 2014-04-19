@@ -33,7 +33,9 @@ Uize.module ({
 		'Uize.Widget.Button',
 		'Uize.Node',
 		'Uize.Dom.Event',
-		'Uize.Data.Compare'
+		'Uize.Data.Compare',
+		'Uize.Widget.mDeclarativeChildren',
+		'Uize.Widget.mEventBindings'
 	],
 	builder:function (_superclass) {
 		'use strict';
@@ -136,120 +138,137 @@ Uize.module ({
 						}
 					}
 				},
+				_updateValue = function () {
+					var
+						m = this,
+						_committer = m._committer
+					;
+
+					// NOTE: until there's a way to cause changing the contents of an object to fire
+					// onChange, we'll just have to create a new object
+					m.set({
+						_value:_Uize.copy(
+							m._value,
+							_committer.get('committedValues'),
+							_committer.get('uncommittedValues')
+						)
+					});
+				},
 				_validate = function () { this.set({_isValid:this._committer.get('allValid')}) }
 		;
 
 		return _superclass.subclass({
+			mixins:[_Uize_Widget.mDeclarativeChildren, _Uize_Widget.mEventBindings],
+				
 			alphastructor:function () {
 				// this is just a dummy private variable so that when we are examining
 				// child widgets, we'll know we're dealing with a form widget (or subclass)
 				// and not a form element widget
 				this.isForm = this._isForm = _true;
 			},
+			
+			children:{
+				committer:{
+					widgetClass:_Uize_Widget.Committer,
+					ignoreDisabled:_true
+				},
+				elements:_Uize_Widget.FormElements,
+				formWarnings:_Uize_Widget.FormWarnings,
+				submit:_Uize_Widget.Button
+			},
 
 			omegastructor:function () {
 				var
 					m = this,
-					_committer = m.addChild(
-						'committer',
-						_Uize_Widget.Committer,
-						{
-							watchedProperties:{},
-							ignoreDisabled:_true
+					_children = m.children,
+					_elements = m._elements = _children.elements,
+					_elementsChildren = _elements.children,
+					_elementsAddedChildren = _elements.addedChildren,
+					
+					_wireAddedElement = function (_elementName) {
+						var _childElement = _elementsChildren[_elementName];
+
+						_childElement.wire({
+							'Changed.isDirtyInherited':function (_event) {
+								_event.newValue && m.set({_isDirty:_true});
+							},
+							Ok:function () { m._submit() },
+							'Changed.focused':function (_event) {
+								// NOTE: so unfortunately the browsers support an autofill feature that
+								// will prepopulate fields, but it doesn't fire onChange events for
+								// each field.  So when we blur a text field, we ensure that all of the
+								// programmatic values for fields match the DOM values
+								if (!_event.newValue)
+									m._forEachElement(
+										function (_element, _elementName, _elementIsForm) {
+											if (!_elementIsForm) {
+												var _nodeValue = _element.getNodeValue('input');
+	
+												_nodeValue !== _undefined
+													&& _element.valueOf() != _nodeValue
+													&& _element.get('placeholder') != _nodeValue
+													&& _element.set({value:_nodeValue})
+												;
+											}
+										}
+									);
+								else // see note below for Changed.tentativeValue
+									m.set({_isSubmitting:_false});
+							},
+							'Changed.tentativeValue':function() {
+								m.set({
+									_isSubmitting:_false,
+	
+									// NOTE: in order to support async validation, we could no longer set isSubmitting to false
+									// if isValid was false, which means that there was nothing setting isSubmitting to false after
+									// clicking the submit. This means that you could run into a case where you submit and invalid form,
+									// get the warnings, fix the values and the form auto-submits.
+									_tentativeValue:_Uize.copy(
+										m._tentativeValue,
+										_Uize.pairUp(_childElement.get('name'), _childElement.get('tentativeValue'))
+									)
+								});
+							}
+						});
+	
+						if (_childElement.isForm) {
+							// if form widget is added as child of another form, then it can't be using normal
+							// submit since it's part of a bigger form
+							_childElement.set({_useNormalSubmit:_false});
+	
+							_childElement.wire(
+								'Changed.isSubmitting',
+								function (_event) { _event.newValue && m._submit() }
+							);
 						}
-					),
-					_formWarnings = m.addChild('formWarnings', _Uize_Widget.FormWarnings, {watchedElements:[]}),
-					_elements = m.addChild('elements', m._formElementsWidgetClass || _Uize_Widget.FormElements)
+	
+						m._formWarnings.addWatchedElements(_childElement);
+	
+						m._committer.addWatchedProperties([{
+							alias:_childElement.get('name'),
+							instance:_childElement,
+							name:'value'
+						}]);
+					},
+					_wireAddedElements = function(_elementsLookup) {
+						_Uize.forEach(
+							_elementsLookup,
+							function(_added, _elementName) {
+								_added && _wireAddedElement(_elementName);
+							}
+						);
+					}
 				;
 
 				// Save private instance references
-				m._elements = _elements;
-				m._committer = _committer;
-				m._formWarnings = _formWarnings;
-
-				// Wire form elements container
-					_elements.wire(
-						'Element Added',
-						function (_event) {
-							var _childElement = _event.element;
-
-							_childElement.wire({
-								'Changed.isDirtyInherited':function (_event) {
-									_event.newValue && m.set({_isDirty:_true});
-								},
-								Ok:function () { m._submit() },
-								'Changed.focused':function (_event) {
-									// NOTE: so unfortunately the browsers support an autofill feature that
-									// will prepopulate fields, but it doesn't fire onChange events for
-									// each field.  So when we blur a text field, we ensure that all of the
-									// programmatic values for fields match the DOM values
-									if (!_event.newValue)
-										m._forEachElement(
-											function (_element, _elementName, _elementIsForm) {
-												if (!_elementIsForm) {
-													var _nodeValue = _element.getNodeValue('input');
-
-													_nodeValue !== _undefined
-														&& _element.valueOf() != _nodeValue
-														&& _element.get('placeholder') != _nodeValue
-														&& _element.set({value:_nodeValue})
-													;
-												}
-											}
-										);
-									else // see note below for Changed.tentativeValue
-										m.set({_isSubmitting:_false});
-								},
-								'Changed.tentativeValue':function() {
-									m.set({
-										_isSubmitting:_false,
-
-										// NOTE: in order to support async validation, we could no longer set isSubmitting to false
-										// if isValid was false, which means that there was nothing setting isSubmitting to false after
-										// clicking the submit. This means that you could run into a case where you submit and invalid form,
-										// get the warnings, fix the values and the form auto-submits.
-										_tentativeValue:_Uize.copy(
-											m._tentativeValue,
-											_Uize.pairUp(_childElement.get('name'), _childElement.get('tentativeValue'))
-										)
-									});
-								}
-							});
-
-							if (_childElement.isForm) {
-								// if form widget is added as child of another form, then it can't be using normal
-								// submit since it's part of a bigger form
-								_childElement.set({_useNormalSubmit:_false});
-
-								_childElement.wire(
-									'Changed.isSubmitting',
-									function (_event) { _event.newValue && m._submit() }
-								);
-							}
-
-							_formWarnings.addWatchedElements(_childElement);
-
-							_committer.addWatchedProperties([{
-								alias:_childElement.get('name'),
-								instance:_childElement,
-								name:'value'
-							}]);
-						}
-					);
-
-				// Wire committer
-					function _updateValue () { m._updateValue() }
-
-					_committer.wire({
-						'Changed.committedValues':_updateValue,
-						'Changed.uncommittedValues':_updateValue,
-						'Changed.allValid':function () { m._validate() }
-					});
-
-				Uize.Widget.Button.addChildButton.call(
-					m,
-					'submit',
-					function () { m._submit() }
+				m._committer = _children.committer;
+				m._formWarnings = _children.formWarnings;
+				
+				_wireAddedElements(_elementsAddedChildren.get());
+				
+				_elements.addedChildren.wire(
+					'Changed.*',
+					function(_event) { _wireAddedElements(_event.properties) }
 				);
 
 				m._isInitialized = _true;
@@ -301,22 +320,7 @@ Uize.module ({
 					},
 					_submit:_submit,
 					_updateFormAttributes:_updateFormAttributes,
-					_updateValue:function () {
-						var
-							m = this,
-							_committer = m._committer
-						;
-
-						// NOTE: until there's a way to cause changing the contents of an object to fire
-						// onChange, we'll just have to create a new object
-						m.set({
-							_value:Uize.copy(
-								m._value,
-								_committer.get('committedValues'),
-								_committer.get('uncommittedValues')
-							)
-						});
-					},
+					_updateValue:_updateValue,
 					_updateUiWarning:_updateUiWarning,
 					_validate:_validate,
 
@@ -421,7 +425,7 @@ Uize.module ({
 										_formNode,
 										'submit',
 										function (_event) {
-											Uize.Dom.Event.abort(_event);
+											_Uize.Dom.Event.abort(_event);
 											// NOTE: this will fire before any events on the form elements
 											// to sync their values
 											m._submit();
@@ -446,7 +450,6 @@ Uize.module ({
 					name:'enctype',
 					onChange:_updateFormAttributes
 				},
-				_formElementsWidgetClass:'formElementsWidgetClass',
 				_isEmpty:{
 					name:'isEmpty',
 					value:_true
@@ -639,6 +642,15 @@ Uize.module ({
 						onChange:_checkWarningShown,
 						value:_false
 					}
+			},
+			
+			eventBindings:{
+				committer:{
+					'Changed.committedValues':_updateValue,
+					'Changed.uncommittedValues':_updateValue,
+					'Changed.allValid':_validate
+				},
+				'submit:Click':function () { this._submit() }
 			}
 		});
 	}

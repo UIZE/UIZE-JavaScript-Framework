@@ -29,77 +29,48 @@ Uize.module ({
 	name:'Uize.Test.Uize.Widget.Form.mDeclarativeElements',
 	builder:function () {
 		'use strict';
+				
+		function _getDeclaredElements(_declarativeElements) {
+			return Uize.Widget.Form.subclass ({
+				mixins:Uize.Widget.Form.mDeclarativeElements,
+				elements:_declarativeElements
+					? Uize.map(
+						_declarativeElements,
+						function(_childProperties) {
+							if (Uize.isPlainObject(_childProperties) && _childProperties.widgetClass)
+								_childProperties.widgetClass = Uize.eval(_childProperties.widgetClass);
+							else if (Uize.isString(_childProperties))
+								_childProperties = Uize.eval(_childProperties);
+							
+							return _childProperties;
+						}
+					)
+					: _declarativeElements
+			}) ().children.elements.children;
+		}
 		
-		function _generateTest(_title, _declarativeElementsShorthand, _declarativeElementsVerbose) {
-			
+		function _generateTest(_title, _declarativeElementsShorthand, _declarativeElementsVerbose, _expectedChildren) {
 			function _generateSyntaxTests(_isVerbose) {
 				var
 					_declarativeElements = _isVerbose ? _declarativeElementsVerbose : _declarativeElementsShorthand,
 					_syntaxTests = []
 				;
 				
-				function _getEvaluatedDeclarativeElements() {
-					return _declarativeElements
-						? Uize.map(
-							_declarativeElements,
-							function(_value) {
-								var _childProperties = Uize.copy(_value);
-								
-								if (!Uize.isPlainObject(_childProperties))
-									_childProperties = Uize.eval(_childProperties);
-								else if (_childProperties.widgetClass)
-									_childProperties.widgetClass = Uize.eval(_childProperties.widgetClass);
-								
-								return _childProperties;
-							}
-						)
-						: _declarativeElements
-					;
-				}
-				
-				function _getFormElementsWidgetClass() {
-					return Uize.Widget.Form.subclass ({
-						mixins:Uize.Widget.Form.mDeclarativeElements,
-						elements:_getEvaluatedDeclarativeElements()
-					}).get('formElementsWidgetClass');
-				}
-				
-				if (Uize.isEmpty(_declarativeElements)) {
-					_syntaxTests.push(
-						{
-							title:'formElementsWidgetClass class state proprety is undefined',
-							test:function() {
-								return this.expectNull(_getFormElementsWidgetClass());
-							}
-						}
-					);
-				}
-				else {
-					_syntaxTests.push(
-						{
-							title:'formElementsWidgetClass class state proprety is defined',
-							test:function() {
-								return this.expectNonNull(_getFormElementsWidgetClass());
-							}
-						},
-						{
-							title:'formElementsWidgetClass class state proprety\'s "mDeclarativeChildren_children" static property is defined',
-							test:function() {
-								return this.expectNonNull(_getFormElementsWidgetClass().mDeclarativeChildren_children);
-							}
-						},
-						{
-							title:'formElementsWidgetClass class state proprety\'s "mDeclarativeChildren_children" static property matches declarative elements',
-							test:function() {
-								return this.expect(_getEvaluatedDeclarativeElements(), _getFormElementsWidgetClass().mDeclarativeChildren_children);
-							}
-						}
-					);
-				}
+				function _getDeclaredElementsForTest() { return _getDeclaredElements(_declarativeElements) }
 				
 				return {
 					title:(_isVerbose ? 'Verbose' : 'Shorthand') + ' Syntax',
-					test:_syntaxTests
+					test:[
+						{
+							title:'Elements are children of elements chld widget',
+							test:function() {
+								return this.expect(
+									Uize.lookup(_expectedChildren),
+									Uize.lookup(Uize.keys(_getDeclaredElementsForTest()))
+								);
+							}
+						}
+					]
 				};
 			}
 			
@@ -130,20 +101,21 @@ Uize.module ({
 					'When declarative elements are specified, those form elements are added as declarative children to form elements child widget',
 					{
 						foo:'Uize.Widget.FormElement',
-						bar:'Uize.Widget.FormElement.Text',
-						baz:'Uize.Widget.Picker'
+						bar:'Uize.Widget.FormElement',
+						baz:'Uize.Widget.FormElement'
 					},
 					{
 						foo:{
 							widgetClass:'Uize.Widget.FormElement'	
 						},
 						bar:{
-							widgetClass:'Uize.Widget.FormElement.Text'	
+							widgetClass:'Uize.Widget.FormElement'	
 						},
 						baz:{
-							widgetClass:'Uize.Widget.Picker'	
+							widgetClass:'Uize.Widget.FormElement'	
 						}
-					}
+					},
+					['foo', 'bar', 'baz']
 				)
 			]
 		});

@@ -35,22 +35,31 @@ Uize.module ({
 
 		return function (_class) {
 			_class.declare ({
-				alphastructor:function () {
+				omegastructor:function () {
 					var
 						m = this,
 						_declarativeChildren = m.Class.mDeclarativeChildren_children,
 						_children = {}
 					;
-					
+
 					// NOTE: Filter out children w/o widgetClass. They will be deferred loaded by some other mechanism. They were there for feature detection.
+					// NOTE: When value is a function call the function in the context of this widget
 					for (var _childName in _declarativeChildren) {
-						var _childProperties = _declarativeChildren[_childName];
+						var
+							_declarativeChild = _declarativeChildren[_childName],
+							_childProperties = _Uize.copy(
+								_Uize.isFunction(_declarativeChild)
+									? _declarativeChild.call(m, _childName)
+									: _declarativeChild
+							),
+							_childWidgetClass = _childProperties.widgetClass
+						;
 					
-						if (_childProperties.widgetClass)
-							_children[_childName] = _childProperties;
+						if (_childWidgetClass) {
+							delete _childProperties.widgetClass;
+							m.mDeclarativeChildren_getContainer(_childName).addChild(_childName, _childWidgetClass, _childProperties);
+						}
 					}
-					
-					m.addChildren(_children);
 				},
 				
 				staticMethods:{
@@ -61,11 +70,14 @@ Uize.module ({
 							var _childProperties = _children[_childName];
 							
 							// NOTE: support multiple calls to children that could potentially include the same child again w/ additional properties (for whatever reason)
-							// As such we can't omit the children that don't have widgetClass set, yet, because the widgetClass *could* be added in a subsequent call to children. Will handle in alphastructor.
-							_declarativeChildren[_childName] = _Uize.copyInto(
-								_declarativeChildren[_childName] || {},
-								!_Uize.isPlainObject(_childProperties) ? {widgetClass:_childProperties} : _childProperties
-							);
+							// As such we can't omit the children that don't have widgetClass set, yet, because the widgetClass *could* be added in a subsequent call to children. Will handle in constructor.
+							_declarativeChildren[_childName] = _Uize.isFunction(_childProperties) && !_childProperties.declare // is a function, but not a class (since classes are functions)
+								? _childProperties
+								: _Uize.copyInto(
+									_declarativeChildren[_childName] || {},
+									!_Uize.isPlainObject(_childProperties) ? {widgetClass:_childProperties} : _childProperties
+								)
+							;
 						}
 						/*?
 							Static Methods
@@ -103,8 +115,8 @@ Uize.module ({
 											}
 										}
 									});
+									
 									......................................................
-
 									SHORT-HAND EXAMPLE
 									......................................................
 									MyNamespace.MyWidgetClass = Uize.Widget.mDeclarativeChildren.subclass ({
@@ -114,12 +126,32 @@ Uize.module ({
 										}
 									});
 									......................................................
+									
+									......................................................
+									FUNCTION EXAMPLE
+									......................................................
+									MyNamespace.MyWidgetClass = Uize.Widget.mDeclarativeChildren.subclass ({
+										children:{
+											menu:function() {
+												// "this" is the widget
+												return {
+													widgetClass:this._menuWidgetClass,
+													value'foo'
+												};
+											}
+										}
+									});
+									......................................................
 						*/
 					}
 				},
 
 				staticProperties:{
 					mDeclarativeChildren_children:{}
+				},
+				
+				instanceMethods:{
+					mDeclarativeChildren_getContainer:function() { return this }
 				}
 			});
 		};

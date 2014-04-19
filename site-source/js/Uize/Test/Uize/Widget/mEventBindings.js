@@ -35,7 +35,8 @@ Uize.module ({
 		var
 			_global = Uize.global(),
 			_processArrayAsync = Uize.Comm.processArrayAsync,
-			_defaultHandler = function(_event, _source) { _event.handler.call(this, _event, _source) }
+			_defaultHandler = function(_event, _source) { _event.handler.call(this, _event, _source) },
+			_originalWindow = _global.window
 		;
 		
 		_global.window = _global;  // For Uize.Dom.Basics
@@ -1078,6 +1079,13 @@ Uize.module ({
 				{
 					title:'When a subclass declares the same child/event combination, the subclass class\' handler is called',
 					test:[]
+				},
+				{
+					title:'Fake Test to reset global window object',
+					test:function() {
+						_global.window = _originalWindow;
+						return true;	
+					}
 				}
 			]
 		});

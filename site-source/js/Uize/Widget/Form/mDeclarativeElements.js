@@ -33,18 +33,11 @@ Uize.module ({
 		'use strict';
 
 		return function (_class) {
+			var _elementsAdded;
+
 			_class.declare ({
 				staticMethods:{
-					elements:function(_elements) {
-						!Uize.isEmpty(_elements)
-							&& this.set(
-								'formElementsWidgetClass',
-								Uize.Widget.FormElements.subclass({
-									mixins:Uize.Widget.mDeclarativeChildren,
-									children:_elements
-								})
-							)
-						;
+					elements:function(_elements) { this.children(_elementsAdded = _elements) }
 						/*?
 							Static Methods
 								Uize.Widget.Form.mDeclarativeElements.elements
@@ -93,6 +86,14 @@ Uize.module ({
 									});
 									......................................................
 						*/
+				},
+
+				instanceMethods:{
+					mDeclarativeChildren_getContainer:function(_childName) {
+						return _elementsAdded && _childName in _elementsAdded
+							? this.children.elements
+							: this
+						;
 					}
 				}
 			});

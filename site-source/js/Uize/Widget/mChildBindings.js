@@ -48,7 +48,7 @@ Uize.module ({
 
 		return function (_class) {
 			_class.declare ({
-				omegastructor:function () {
+				alphastructor:function () {
 					var
 						m = this,
 						_addedChildren = m.addedChildren
