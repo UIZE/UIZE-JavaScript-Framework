@@ -528,13 +528,13 @@ Uize.module ({
 													_test.get ('result')
 														? ('PASSED!!! (duration: ' + _test.get ('duration') + 'ms)')
 														: ('*** FAILED *** ' + (_reasonForFailure || ''))
-												) + (_reasonForFailure ? '\n\n' + _test.getSynopsis () : '')
+												)
 											);
 
 										/*** finish up if the test fails or if unit tests complete ***/
 											if (_test == _unitTests || !_test.get ('result')) {
 												var _synopsis = _test.getSynopsis ();
-												_console != 'silent' && console.log (_synopsis);
+												(_console != 'silent' || _reasonForFailure) && console.log (_synopsis);
 												_logChunks.push (_synopsis);
 												_logFilePath &&
 													_fileSystem.writeFile ({path:_logFilePath,contents:_logChunks.join ('\n')})
