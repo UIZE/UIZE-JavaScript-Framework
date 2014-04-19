@@ -117,6 +117,18 @@ Uize.module ({
 					*/
 				},
 
+				pseudoLocalize:{
+					async:_true
+					/*?
+						Instance Methods
+							pseudoLocalize
+								Performs pseudo-localization on the primary language resource files of the project, modifying the resource files for the primary language.
+
+								NOTES
+								- this service method is asynchronous
+					*/
+				},
+
 				init:{
 					async:_true
 					/*?

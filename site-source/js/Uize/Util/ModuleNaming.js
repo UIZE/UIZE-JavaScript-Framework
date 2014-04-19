@@ -156,6 +156,34 @@ Uize.module ({
 
 			isModuleName:function (_moduleName) {
 				return /^([a-zA-Z_$][a-zA-Z_$0-9]*)(\.[a-zA-Z_$][a-zA-Z_$0-9]*)*$/.test (_moduleName);
+				/*?
+					Static Methods
+						Uize.Util.ModuleNaming.isModuleName
+							Returns a boolean, indicating whether or not the specified string is a valid module name.
+
+							SYNTAX
+							.......................................................................
+							isModuleNameBOOL = Uize.Util.ModuleNaming.isModuleName (moduleNameSTR);
+							.......................................................................
+
+							EXAMPLES
+							...................................................................................
+							Uize.Util.ModuleNaming.isModuleName ('Uize');                      // returns true
+							Uize.Util.ModuleNaming.isModuleName ('Uize.Widgets.Button');       // returns true
+							Uize.Util.ModuleNaming.isModuleName ('A.B.C');                     // returns true
+							Uize.Util.ModuleNaming.isModuleName ('A123456789.B123456789');     // returns true
+							Uize.Util.ModuleNaming.isModuleName ('$Name$Space$.$My$Module$');  // returns true
+							Uize.Util.ModuleNaming.isModuleName ('_Name_Space_._My_Module_');  // returns true
+
+							Uize.Util.ModuleNaming.isModuleName ('Namespace.');                // returns false
+							Uize.Util.ModuleNaming.isModuleName ('.MyModule');                 // returns false
+							Uize.Util.ModuleNaming.isModuleName ('Namespace..MyModule')        // returns false
+							Uize.Util.ModuleNaming.isModuleName ('Name-Space.MyModule');       // returns false
+							Uize.Util.ModuleNaming.isModuleName ('Namespace.My-Module');       // returns false
+							Uize.Util.ModuleNaming.isModuleName ('1Namespace.MyModule');       // returns false
+							Uize.Util.ModuleNaming.isModuleName ('Namespace.1MyModule');       // returns false
+							...................................................................................
+				*/
 			}
 		});
 	}

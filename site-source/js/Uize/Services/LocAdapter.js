@@ -148,6 +148,28 @@ Uize.module ({
 					});
 				},
 
+				_pseudoLocalizeResources:function (_primaryLanguageResources) {
+					var
+						_pseudoLocalizedResources = {},
+						_pseudoLocalizeOptions = {wordSplitter:this.wordSplitter}
+					;
+					Uize.forEach (
+						_primaryLanguageResources,
+						function (_resourceFileStrings,_resourceFileSubPath) {
+							_pseudoLocalizedResources [_resourceFileSubPath] =
+								Uize.Data.Diff.diff (
+									_primaryLanguageResources [_resourceFileSubPath],
+									{},
+									function (_string) {
+										return {value:Uize.Loc.Pseudo.pseudoLocalize (_string.value,_pseudoLocalizeOptions)};
+									}
+								)
+							;
+						}
+					);
+					return _pseudoLocalizedResources;
+				},
+
 				languageResourcesFilePath:function (_language) {
 					return this._workingFolderPath + _language + '.json';
 				},
@@ -325,7 +347,7 @@ Uize.module ({
 					Uize.forEach (
 						_project.languages,
 						function (_language) {
-							if (_language != _primaryLanguage) {
+							if (_language != _primaryLanguage || _project.importPrimary) {
 								var _resources = m.readLanguageResourcesFile (_language);
 								_resources && m.distributeResources (_resources,_language,_project);
 							}
@@ -383,25 +405,7 @@ Uize.module ({
 						);
 
 					/*** generate resources for pseudo-locale ***/
-						var
-							_pseudoLocale = _project.pseudoLocale,
-							_pseudoLocalizedResources = _resoucesByLanguage [_pseudoLocale] = {},
-							_pseudoLocalizeOptions = {wordSplitter:m.wordSplitter}
-						;
-						Uize.forEach (
-							_primaryLanguageResources,
-							function (_resourceFileStrings,_resourceFileSubPath) {
-								_pseudoLocalizedResources [m.getLanguageResourcePath (_resourceFileSubPath,_pseudoLocale)] =
-									Uize.Data.Diff.diff (
-										_primaryLanguageResources [_resourceFileSubPath],
-										{},
-										function (_string) {
-											return {value:Uize.Loc.Pseudo.pseudoLocalize (_string.value,_pseudoLocalizeOptions)};
-										}
-									)
-								;
-							}
-						);
+						_resoucesByLanguage [_project.pseudoLocale] = m._pseudoLocalizeResources (_primaryLanguageResources);
 
 					Uize.forEach (
 						_resoucesByLanguage,
@@ -508,6 +512,12 @@ Uize.module ({
 						m.gatherResources (),
 						m._workingFolderPath + 'metrics/' + _primaryLanguage + '.json'
 					);
+					_callback ();
+				},
+
+				pseudoLocalize:function (_params,_callback) {
+					var m = this;
+					m.distributeResources (m._pseudoLocalizeResources (m.gatherResources ()),m.project.primaryLanguage);
 					_callback ();
 				},
 
