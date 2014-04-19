@@ -19,10 +19,16 @@ Introduction
 
 		Metrics Report Contents
 			Total Word Count
-				.
+				The total number of translatable words in all primary language resource files for the project is represented by the =resourceFiles= property.
+
+				The value of the =wordCount= property is only an estimate and the accuracy of the value depends on how well the project is defined to understand the difference between `translatable words` and `non-translatable text`.
+
+				The value of this property is useful when estimating the full translation cost for a project, since translators often charge for their services based upon word count and a cost per word.
 
 			Total Character Count
-				.
+				The total number of translatable words in all primary language resource files for the project is represented by the =resourceFiles= property.
+
+				The accuracy of the value of this property depends on the accuracy of the =wordCount= property, since this property is the sum of the character count for all `translatable words`. This value can be useful when estimating the full translation cost for a project, since translators may base cost estimates for their services partially upon total character count for all `translatable words`.
 
 			Total Resource Files
 				The total number of resource files for the language is represented by the =resourceFiles= property.
@@ -51,56 +57,60 @@ Introduction
 		Performs Automatic Pseudo-localization
 			.
 
-	### Accessed Through a Build Script
-		.
+	Accessed Through a Build Script
+		The various localization methods can be accessed using the =Uize.Build.Loc= build script.
 
 		Running the Build Script
-			.
+			The localization build
+
+			..................................................................................
+			node [pathToUize]build.js Uize.Build.Loc project=[projectName] method=[methodName]
+			..................................................................................
 
 		Service Methods
 			.
 
 			Metrics
-				.
+				Metrics can be generated for a project using the =metrics= method of the localization service.
 
-				.............................................................
-				node build.js Uize.Build.Loc project=myProject method=metrics
-				.............................................................
+				.............................................................................
+				node [pathToUize]build.js Uize.Build.Loc project=[projectName] method=metrics
+				.............................................................................
 
 			Export
 				.
 
-				............................................................
-				node build.js Uize.Build.Loc project=myProject method=export
-				............................................................
+				............................................................................
+				node [pathToUize]build.js Uize.Build.Loc project=[projectName] method=export
+				............................................................................
 
 			Import
 				.
 
-				............................................................
-				node build.js Uize.Build.Loc project=myProject method=import
-				............................................................
+				............................................................................
+				node [pathToUize]build.js Uize.Build.Loc project=[projectName] method=import
+				............................................................................
 
 			Export Jobs
 				.
 
-				................................................................
-				node build.js Uize.Build.Loc project=myProject method=exportJobs
-				................................................................
+				................................................................................
+				node [pathToUize]build.js Uize.Build.Loc project=[projectName] method=exportJobs
+				................................................................................
 
 			Import Jobs
 				.
 
-				................................................................
-				node build.js Uize.Build.Loc project=myProject method=importJobs
-				................................................................
+				................................................................................
+				node [pathToUize]build.js Uize.Build.Loc project=[projectName] method=importJobs
+				................................................................................
 
-			Extract Jobs
+			Extract
 				.
 
-				.............................................................
-				node build.js Uize.Build.Loc project=myProject method=extract
-				.............................................................
+				.............................................................................
+				node [pathToUize]build.js Uize.Build.Loc project=[projectName] method=extract
+				.............................................................................
 
 		Configuring Projects
 			.
@@ -126,6 +136,23 @@ Introduction
 		Pseudo-localization
 			.
 
+	###
+		Distributed Resource Files
+			.
+
+		Consolidated Resource Files
+			.
+
+		Translation Job Files
+			.
+
 	### Use With Other Projects
 		.
+
+	### Key Concepts
+		Translatable Words
+			.
+
+		Non-translatable Text
+			.
 
