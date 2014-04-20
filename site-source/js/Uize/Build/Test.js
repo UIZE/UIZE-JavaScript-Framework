@@ -37,16 +37,80 @@
 			...............................................
 			node build.js Uize.Build.Test module=Uize.Class
 			...............................................
+
+		Parameters
+			This method supports the following parameters...
+
+			- =module= - a string, specifying the name of a unit tests module or a module name matcher expression
+			- =consoleSTR= - a string, specifying the amount of information that should be logged to the console while the tests are being run. The value =silent= indicates that nothing should be logged to the console. The value =summary= (the default) indicates that only the summary information from running the tests should be logged. And the value =verbose= indicates that information from running all tests (including deeply nested tests) should be logged.
+			- =logFilePath= - a string, optionally specifying the path for where a log file should be written (if not specified, no log file will be written)
 */
 
 Uize.module ({
 	name:'Uize.Build.Test',
-	required:'Uize.Build.Util',
+	required:[
+		'Uize.Services.FileSystem',
+		'Uize.Str.Repeat',
+		'Uize.Test.Runner',
+		'Uize.Build.Util'
+	],
 	builder:function () {
 		'use strict';
 
 		return Uize.package ({
-			perform:function (_params) {Uize.Build.Util.runUnitTests (_params)}
+			perform:function (_params) {
+				var
+					_fileSystem = Uize.Services.FileSystem.singleton (),
+					_test,
+					_totalTests,
+					_progressBar = _params.progressBar + '' != 'false',
+					_currentTestNo = 0,
+					_progressBarTrackLength = 20,
+					_progressBarFullChar = '\u2593',
+					_progressBarFullTrack = Uize.Str.Repeat.repeat (_progressBarFullChar,_progressBarTrackLength),
+					_progressBarEmptyChar = '\u2591',
+					_progressBarEmptyTrack = Uize.Str.Repeat.repeat (_progressBarEmptyChar,_progressBarTrackLength),
+					_progressBarFullHeadChar = '\u2588',
+					_progressBarEndsChar = '|'
+				;
+				Uize.Test.Runner.resolve (
+					_params,
+					function () {return Uize.Build.Util.getJsModules (_params)},
+					function (_moduleName) {
+						return _fileSystem.fileExists ({
+							path:_params.sourcePath + '/' + _params.modulesFolder + '/' + Uize.modulePathResolver (_moduleName) + '.js'
+						});
+					},
+					function (_message) {
+						var _fullChars = (_currentTestNo + 1) / _totalTests * _progressBarTrackLength;
+						console.log (
+							_progressBar
+								? (
+									_progressBarEndsChar +
+									_progressBarFullTrack.slice (0,_fullChars) +
+									_progressBarFullHeadChar +
+									_progressBarEmptyTrack.slice (_fullChars) +
+									_progressBarEndsChar
+								)
+								: '',
+							_message
+						);
+					},
+					function (_reasonForFailure,_logChunks) {
+						var _logFilePath = _params.logFilePath;
+						_logFilePath &&
+							_fileSystem.writeFile ({path:_logFilePath,contents:_logChunks.join ('\n')})
+						;
+						_reasonForFailure && typeof WScript != 'undefined' && WScript.Quit (1);
+					},
+					function (_testInstance) {
+						_test = _testInstance;
+						_totalTests = _test.getTotalTests ();
+						_test.wire ({Done:function (e) {++_currentTestNo}});
+						_test.run ();
+					}
+				);
+			}
 		});
 	}
 });

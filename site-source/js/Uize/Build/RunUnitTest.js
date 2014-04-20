@@ -41,15 +41,15 @@
 
 Uize.module ({
 	name:'Uize.Build.RunUnitTest',
-	required:'Uize.Build.Util',
+	required:'Uize.Build.Test',
 	builder:function () {
 		'use strict';
 
 		return Uize.package ({
 			perform:function (_params) {
 				_params.module = _params.testModule;
-				delete _params.testModules;
-				Uize.Build.Util.runUnitTests (_params);
+				delete _params.testModule;
+				Uize.Build.Test.perform (_params);
 			}
 		});
 	}
