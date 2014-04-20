@@ -36,9 +36,7 @@ Uize.module ({
 		'Uize.Array.Sort',
 		'Uize.Services.FileSystem',
 		'Uize.Util.ModuleNaming',
-		'Uize.Test',
-		'Uize.Data.Matches',
-		'Uize.Util.ModuleNameMatcher'
+		'Uize.Test.Runner'
 	],
 	builder:function () {
 		'use strict';
@@ -46,10 +44,7 @@ Uize.module ({
 		var
 			/*** Variables for Scruncher Optimization ***/
 				_undefined,
-				_Uize = Uize,
-				_Uize_Build = _Uize.Build,
-				_Uize_Util_ModuleNaming = _Uize.Util.ModuleNaming,
-				_Uize_Test = _Uize.Test,
+				_Uize_Util_ModuleNaming = Uize.Util.ModuleNaming,
 
 			/*** General Variables ***/
 				_fileSystem = Uize.Services.FileSystem.singleton (),
@@ -411,134 +406,24 @@ Uize.module ({
 				},
 
 				runUnitTests:function (_params) {
-					var
-						_tests = _params.module || '*',
-						_console = (_params.silent == 'true' ? 'silent' : _params.console) || 'summary',
-						_logFilePath = _params.logFilePath
-					;
-					if (typeof _tests == 'string') {
-						var _modulesToTest;
-
-						if (_Uize_Util_ModuleNaming.isModuleName (_tests)) {
-							_modulesToTest = [_Uize_Util_ModuleNaming.getModuleNameFromTestModuleName (_tests)];
-						} else {
-							var
-								_moduleNameMatcher = Uize.Util.ModuleNameMatcher.resolve (_tests),
-								_libraryModuleSuffixRegExp = /\.library$/i,
-								_testIgnoreNamespaces = (_params.testIgnoreNamespaces || '') + '',
-								_testIgnoreNamespacesRegExp = _testIgnoreNamespaces
-									? new RegExp (
-										'^(' +
-										_Uize.map (_testIgnoreNamespaces.split (','),_Uize.escapeRegExpLiteral).join ('|') +
-										')(\\..+|$)'
-									)
-									: null
-								,
-								_modulesExcludingLibraryModulesAndTestIgnoreNamespaces = _Uize.Data.Matches.values (
-									_package.getJsModules (_params).sort (),
-									function (_moduleName) {
-										return (
-											!_libraryModuleSuffixRegExp.test (_moduleName) && // ignore .library modules
-											(!_testIgnoreNamespacesRegExp || !_testIgnoreNamespacesRegExp.test (_moduleName))
-										);
-									}
-								),
-								_modulesLookup = _Uize.lookup (_modulesExcludingLibraryModulesAndTestIgnoreNamespaces)
-							;
-							_modulesToTest = _Uize.Data.Matches.values (
-								_modulesExcludingLibraryModulesAndTestIgnoreNamespaces,
-								function (_moduleName) {
-									return (
-										!/^[a-zA-Z_\$][a-zA-Z0-9_\$]*\.Test($|\.)/.test (_moduleName) && // ignore test modules
-										_moduleNameMatcher (_moduleName) // only include modules from module name matcher
-									);
-								}
-							);
-						}
-
-						/*** resolve modules to test to test class ***/
-							var _testModuleName;
-							if (_modulesToTest.length == 1) {
-								var _moduleToTest = _modulesToTest [0];
-								_testModuleName = _Uize_Util_ModuleNaming.getTestModuleName (_moduleToTest);
-								if (
-									_fileSystem.fileExists ({
-										path:_params.sourcePath + '/' + _params.modulesFolder + '/' + Uize.modulePathResolver (_testModuleName) + '.js'
-									})
-								) {
-									Uize.require (_testModuleName,function (_testModule) {_tests = _testModule});
-								} else {
-									_tests = Uize.Test.requiredModulesTest (
-										_Uize_Util_ModuleNaming.getModuleNameFromTestModuleName (_moduleToTest)
-									);
-								}
-							} else {
-								_tests = _Uize_Test.resolve ({
-									title:'Unit Tests Suite',
-									test:_Uize.map (
-										_modulesToTest,
-										function (_moduleName) {
-											return (
-												_modulesLookup [
-													_testModuleName = _Uize_Util_ModuleNaming.getTestModuleName (_moduleName)
-												]
-													? _Uize_Test.testModuleTest (_testModuleName)
-													: _Uize_Test.requiredModulesTest (_moduleName)
-											);
-										}
-									)
-								});
-							}
-					}
-
-					/*** run the tests ***/
-						function _runUnitTests (_tests) {
-							var
-								_unitTests = new _tests,
-								_logChunks = []
-							;
-							function _log (_logChunk) {
-								_console == 'verbose' && console.log (_logChunk);
-								_logChunks.push (_logChunk);
-							}
-							_unitTests.wire ({
-								Start:
-									function (_event) {
-										_log (
-											Uize.Str.Repeat.repeat ('   ',_event.source.getDepth ()) + _event.source.get ('title')
-										);
-									},
-								Done:
-									function (_event) {
-										var
-											_test = _event.source,
-											_reasonForFailure = _test.get ('reasonForFailure')
-										;
-										/*** add to log ***/
-											_log (
-												Uize.Str.Repeat.repeat ('   ',_test.getDepth () + 1) +
-												(
-													_test.get ('result')
-														? ('PASSED!!! (duration: ' + _test.get ('duration') + 'ms)')
-														: ('*** FAILED *** ' + (_reasonForFailure || ''))
-												)
-											);
-
-										/*** finish up if the test fails or if unit tests complete ***/
-											if (_test == _unitTests || !_test.get ('result')) {
-												var _synopsis = _test.getSynopsis ();
-												(_console != 'silent' || _reasonForFailure) && console.log (_synopsis);
-												_logChunks.push (_synopsis);
-												_logFilePath &&
-													_fileSystem.writeFile ({path:_logFilePath,contents:_logChunks.join ('\n')})
-												;
-												_test.get ('result') || WScript.Quit (1);
-											}
-									}
+					Uize.Test.Runner.resolve (
+						_params,
+						function () {return _package.getJsModules (_params)},
+						function (_moduleName) {
+							return _fileSystem.fileExists ({
+								path:_params.sourcePath + '/' + _params.modulesFolder + '/' + Uize.modulePathResolver (_moduleName) + '.js'
 							});
-							_unitTests.run ();
-						}
-						_runUnitTests (_tests);
+						},
+						function (_message) {console.log (_message)},
+						function (_reasonForFailure,_logChunks) {
+							var _logFilePath = _params.logFilePath;
+							_logFilePath &&
+								_fileSystem.writeFile ({path:_logFilePath,contents:_logChunks.join ('\n')})
+							;
+							_reasonForFailure && typeof WScript != 'undefined' && WScript.Quit (1);
+						},
+						function (_test) {_test.run ()}
+					);
 					/*?
 						Static Methods
 							Uize.Build.Util.runUnitTests
