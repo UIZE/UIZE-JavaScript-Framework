@@ -91,19 +91,17 @@ Uize.require (
 		'Uize.Widgets.Button.Widget',
 		'Uize.Widgets.ProgressBar.Widget',
 		'Uize.Widgets.Log.Widget',
-		'Uize.Str.Repeat',
 		'UizeSite.ModulesTree',
+		'Uize.Data.Matches',
 		'Uize.Data.PathsTree',
 		'Uize.Url',
-		'Uize.Test'
+		'Uize.Test.Runner'
 	],
 	function () {
 		'use strict';
 
 		var
 			_runAllModuleTests = 'RUN ALL MODULE TESTS',
-			_RunAllTests,
-			_testSuiteClass,
 			_testSuite,
 			_totalTests,
 			_currentTestNo = 0
@@ -111,34 +109,10 @@ Uize.require (
 
 		/*** prepare list of all modules to test ***/
 			var
-				_nonTestModulesTree = UizeSite.ModulesTree (),
-				_testsSubTree = _nonTestModulesTree.Uize.Test,
-				_testNames = [],
-				_testNamesExcludingLibraries = []
+				_modulesTree = UizeSite.ModulesTree (),
+				_modules = Uize.Data.PathsTree.toList (_modulesTree).sort (),
+				_modulesLookup = Uize.lookup (_modules)
 			;
-			delete _nonTestModulesTree.Uize.Test;
-			var _testsSubTreeLookup = Uize.lookup (Uize.Data.PathsTree.toList (_testsSubTree));
-			for (
-				var
-					_testNo = -1,
-					_testNames =
-						Uize.keys (
-							Uize.copyInto (
-								Uize.lookup (Uize.Data.PathsTree.toList (_nonTestModulesTree)),
-								_testsSubTreeLookup
-							)
-						).sort (),
-					_testNamesLength = _testNames.length,
-					_testName
-				;
-				++_testNo < _testNamesLength;
-			)
-				(_testName = _testNames [_testNo]) != 'Performance' && // ignore the Uize.Test.Performance namespace module
-				!/\.library$/.test (_testName) && // ignore .library modules
-				!/^TestData\.?/.test (_testName) && // ignore TestData namespace and sub-modules
-					_testNamesExcludingLibraries.push (_testName)
-			;
-			_testNames = _testNamesExcludingLibraries;
 
 		/*** create the example page widget ***/
 			var _page = window.page = UizeSite.Page.Example ();
@@ -157,33 +131,28 @@ Uize.require (
 			);
 
 		/*** add the start and stop buttons ***/
-			_page.addChild (
-				'startTests',
-				Uize.Widgets.Button.Widget,
+			_page.addChildren (
 				{
-					enabled:false,
-					built:false,
-					text:'START',
-					size:'small',
-					flavor:'positive',
-					extraClasses:'testControlButton',
-					action:function () {
-						_prepareToRunTests ();
-						_testSuite.run ();
+					startTests:{
+						text:'START',
+						flavor:'positive',
+						action:function () {
+							_prepareToRunTests ();
+							_testSuite.run ();
+						}
+					},
+					stopTests:{
+						text:'STOP',
+						flavor:'negative',
+						action:function () {_testSuite.stop ()}
 					}
-				}
-			);
-			_page.addChild (
-				'stopTests',
-				Uize.Widgets.Button.Widget,
+				},
 				{
+					widgetClass:Uize.Widgets.Button.Widget,
 					enabled:false,
 					built:false,
-					text:'STOP',
 					size:'small',
-					flavor:'negative',
-					extraClasses:'testControlButton',
-					action:function () {_testSuite.stop ()}
+					extraClasses:'testControlButton'
 				}
 			);
 
@@ -205,93 +174,59 @@ Uize.require (
 				_page.children.startTests.set ({enabled:_enabled});
 				_page.children.stopTests.set ({enabled:_enabled});
 			}
-			function _selectTest (_callback) {
-				function _instantiateTestSuite (_testSuiteClass) {
-					_setWidgetsEnabled (true);
-					_progressBar.set ({maxValue:(_testSuite = new _testSuiteClass).getTotalTests ()});
-					_prepareToRunTests ();
-					_testSuite.wire ({
-						Start:
-							function (e) {
-								_log.log (Uize.Str.Repeat.repeat ('\t',e.source.getDepth ()) + e.source.get ('title'));
-							},
-						Done:
-							function (e) {
-								var
-									_test = e.source,
-									_reasonForFailure = _test.get ('reasonForFailure')
-								;
-								_progressBar.set ({value:++_currentTestNo});
-								_log.log (
-									Uize.Str.Repeat.repeat ('\t',_test.getDepth () + 1) +
-									(
-										_test.get ('result')
-											? ('PASSED!!! (duration: ' + _test.get ('duration') + 'ms)')
-											: ('*** FAILED *** ' + (_reasonForFailure || ''))
-									)
-								);
-								_reasonForFailure && alert (_test.getSynopsis ());
-							}
-					});
-					_callback && _callback ();
-				}
-				function _instantiateRequiredModuleTest (_testName) {
-					_instantiateTestSuite (Uize.Test.requiredModulesTest (_testName));
-				}
 
+			function _selectTest (_callback) {
 				_testSuite && _testSuite.stop ();
 				_setWidgetsEnabled (false);
 				_prepareToRunTests ();
-				var _testName = _page.getNodeValue ('testSelector');
-				if (_testName == _runAllModuleTests) {
-					if (!_RunAllTests) {
-						var _test = [];
-						for (var _testNo = -1, _testNamesLength = _testNames.length, _testName; ++_testNo < _testNamesLength;)
-							/^(Performance|TestData)(\..*)?$/.test (_testName = _testNames [_testNo]) ||
-								_test.push (
-									_testsSubTreeLookup [_testName]
-										? Uize.Test.testModuleTest ('Uize.Test.' + _testName)
-										: Uize.Test.requiredModulesTest (_testName)
-								)
-						;
-						_RunAllTests = Uize.Test.resolve ({title:'UIZE Unit Tests',test:_test});
-					}
-					_instantiateTestSuite (_RunAllTests);
-				} else if (_testsSubTreeLookup [_testName]) {
-					Uize.require (
-						'Uize.Test.' + _testName,
-						function (_testClass) {
-							/* NOTE:
-								It may be that the test module that is loaded is just a generated namespace module (such as the Uize.Test.Uize.Array generated namespace module that is not really a test module for the Uize.Array generated namespace module, but actually a namespace module for real test modules like Uize.Test.Uize.Array.Dupes.
 
-								Hopefully, a more correct and robust way of dealing with this situation can be developed in future. One possible solution would be to move to an organization where test modules are always peers alongside the modules they test, possibly using a naming scheme (like Uize.Array.Dupes_TEST as the test module for Uize.Array.Dupes).
-							*/
-							if (_testClass.prototype.getTotalTests) {
-								_instantiateTestSuite (_testClass);
-							} else {
-								_instantiateRequiredModuleTest (_testName);
-							}
-						}
-					);
-				} else {
-					_instantiateRequiredModuleTest (_testName);
-				}
+				var _testName = _page.getNodeValue ('testSelector');
+				Uize.Test.Runner.resolve (
+					{
+						module:_testName == _runAllModuleTests ? '*' : _testName,
+						console:'verbose'
+					},
+					function () {return _modules},
+					function (_moduleName) {return _modulesLookup [_moduleName]},
+					function (_message) {_log.log (_message)},
+					function (_reasonForFailure) {_reasonForFailure && alert (_reasonForFailure)},
+					function (_test) {
+						_testSuite = _test;
+						_setWidgetsEnabled (true);
+						_progressBar.set ({maxValue:_testSuite.getTotalTests ()});
+						_prepareToRunTests ();
+						_testSuite.wire ({Done:function (e) {_progressBar.set ({value:++_currentTestNo})}});
+						_callback && _callback ();
+					}
+				);
 			}
+
 			_page.wireNode ('testSelector','change',function () {_selectTest ()});
 
 		/*** initialize ***/
 			/*** populate test selector ***/
 				var
-					_selector = _page.getNode ('testSelector'),
-					_selectorOptions = _selector.options
-				;
-				_selectorOptions [0] = new Option (_runAllModuleTests,_runAllModuleTests);
-				for (var _testNo = -1, _testNamesLength = _testNames.length, _testName; ++_testNo < _testNamesLength;)
-					_selectorOptions [_selectorOptions.length] = new Option (
-						(_testName = _testNames [_testNo]) + (_testsSubTreeLookup [_testName] ? '' : ' *'),
-						_testName
+					_selectorOptions = _page.getNode ('testSelector').options,
+					_testModulesLookup = Uize.lookup (
+						Uize.Data.Matches.retain (_modules,Uize.Util.ModuleNaming.isTestModule)
 					)
 				;
+				_selectorOptions [0] = new Option (_runAllModuleTests,_runAllModuleTests);
+				Uize.forEach (
+					_modules,
+					function (_moduleName) {
+						if (
+							!Uize.Util.ModuleNaming.isTestModule (_moduleName) &&
+							!/\.library$/.test (_moduleName) // ignore .library modules
+						)
+							_selectorOptions [_selectorOptions.length] = new Option (
+								_moduleName +
+									(_testModulesLookup [Uize.Util.ModuleNaming.getTestModuleName (_moduleName)] ? '' : ' *'),
+								_moduleName
+							)
+						;
+					}
+				);
 
 			/*** initialize test selector, using runtest query param ***/
 				var _runTest = Uize.Url.fromParams (location.href).runtest;
