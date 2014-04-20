@@ -42,24 +42,29 @@
 					- the value of this property is defaulted to the "|" (pipe) character
 
 				trackLength
+					An optional number, specifying the desired length (in characters) of the track for the text progress bar.
 
 					NOTES
 					- the value of this property is defaulted to =50=
 
 				fullChar
+					An optional string, specifying the character that should be used for the full portion of the track of the text progress bar.
 
 					NOTES
 					- the value for this property should be exactly one character in length
 					- the value of this property is defaulted to a dark shaded block character
 
 				fullHeadChar
+					An optional string, specifying the characters(s) that should be used for the head of the full portion of the track of the text progress bar.
+
+					The head of the full portion of the progress bar essentially demarkates the progress position.
 
 					NOTES
 					- the value for this property may be more than one character in length
 					- the value of this property is defaulted to the solid block character
 
 				emptyChar
-					An optional string, specifying the character that should
+					An optional string, specifying the character that should be used for the empty portion of the track of the text progress bar.
 
 					NOTES
 					- the value for this property should be exactly one character in length
