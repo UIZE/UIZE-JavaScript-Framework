@@ -406,6 +406,19 @@ Uize.module ({
 				},
 
 				runUnitTests:function (_params) {
+					var
+						_test,
+						_totalTests,
+						_progressBar = _params.progressBar + '' != 'false',
+						_currentTestNo = 0,
+						_progressBarTrackLength = 20,
+						_progressBarFullChar = '\u2593',
+						_progressBarFullTrack = Uize.Str.Repeat.repeat (_progressBarFullChar,_progressBarTrackLength),
+						_progressBarEmptyChar = '\u2591',
+						_progressBarEmptyTrack = Uize.Str.Repeat.repeat (_progressBarEmptyChar,_progressBarTrackLength),
+						_progressBarFullHeadChar = '\u2588',
+						_progressBarEndsChar = '|'
+					;
 					Uize.Test.Runner.resolve (
 						_params,
 						function () {return _package.getJsModules (_params)},
@@ -414,7 +427,21 @@ Uize.module ({
 								path:_params.sourcePath + '/' + _params.modulesFolder + '/' + Uize.modulePathResolver (_moduleName) + '.js'
 							});
 						},
-						function (_message) {console.log (_message)},
+						function (_message) {
+							var _fullChars = (_currentTestNo + 1) / _totalTests * _progressBarTrackLength;
+							console.log (
+								_progressBar
+									? (
+										_progressBarEndsChar +
+										_progressBarFullTrack.slice (0,_fullChars) +
+										_progressBarFullHeadChar +
+										_progressBarEmptyTrack.slice (_fullChars) +
+										_progressBarEndsChar
+									)
+									: '',
+								_message
+							);
+						},
 						function (_reasonForFailure,_logChunks) {
 							var _logFilePath = _params.logFilePath;
 							_logFilePath &&
@@ -422,7 +449,12 @@ Uize.module ({
 							;
 							_reasonForFailure && typeof WScript != 'undefined' && WScript.Quit (1);
 						},
-						function (_test) {_test.run ()}
+						function (_testInstance) {
+							_test = _testInstance;
+							_totalTests = _test.getTotalTests ();
+							_test.wire ({Done:function (e) {++_currentTestNo}});
+							_test.run ();
+						}
 					);
 					/*?
 						Static Methods
