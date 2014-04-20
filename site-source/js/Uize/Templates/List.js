@@ -36,7 +36,7 @@
 			.............................................................................................
 			{
 				indentChars : indentCharsSTR,  // optional, the character(s) used for indenting list items
-				items       : itemsARRAY       // require, the items in the root level list
+				items       : itemsARRAY       // required, the items in the root level list
 			}
 			.............................................................................................
 

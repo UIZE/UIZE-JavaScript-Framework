@@ -50,9 +50,9 @@ Uize.module ({
 	name:'Uize.Build.Test',
 	required:[
 		'Uize.Services.FileSystem',
-		'Uize.Str.Repeat',
 		'Uize.Test.Runner',
-		'Uize.Build.Util'
+		'Uize.Build.Util',
+		'Uize.Templates.TextProgressBar'
 	],
 	builder:function () {
 		'use strict';
@@ -64,14 +64,7 @@ Uize.module ({
 					_test,
 					_totalTests,
 					_progressBar = _params.progressBar + '' != 'false',
-					_currentTestNo = 0,
-					_progressBarTrackLength = 20,
-					_progressBarFullChar = '\u2593',
-					_progressBarFullTrack = Uize.Str.Repeat.repeat (_progressBarFullChar,_progressBarTrackLength),
-					_progressBarEmptyChar = '\u2591',
-					_progressBarEmptyTrack = Uize.Str.Repeat.repeat (_progressBarEmptyChar,_progressBarTrackLength),
-					_progressBarFullHeadChar = '\u2588',
-					_progressBarEndsChar = '|'
+					_currentTestNo = 0
 				;
 				Uize.Test.Runner.resolve (
 					_params,
@@ -82,16 +75,12 @@ Uize.module ({
 						});
 					},
 					function (_message) {
-						var _fullChars = (_currentTestNo + 1) / _totalTests * _progressBarTrackLength;
 						console.log (
 							_progressBar
-								? (
-									_progressBarEndsChar +
-									_progressBarFullTrack.slice (0,_fullChars) +
-									_progressBarFullHeadChar +
-									_progressBarEmptyTrack.slice (_fullChars) +
-									_progressBarEndsChar
-								)
+								? Uize.Templates.TextProgressBar.process ({
+									trackLength:20,
+									progress:(_currentTestNo + 1) / _totalTests
+								})
 								: '',
 							_message
 						);
