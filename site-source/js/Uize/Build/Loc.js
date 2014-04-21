@@ -57,7 +57,7 @@ Uize.module ({
 		return Uize.package ({
 			perform:function (_params) {
 				function _performLocMethodForProject (_project,_projectName) {
-					Uize.mergeInto (_project,_scriptConfig.common,{name:_projectName});
+					Uize.mergeInto (_scriptConfig.common,_project,{name:_projectName});
 					Uize.require (
 						_project.serviceAdapter,
 						function (_locServiceAdapter) {
