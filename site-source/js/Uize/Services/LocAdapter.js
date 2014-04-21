@@ -170,6 +170,15 @@ Uize.module ({
 					return _pseudoLocalizedResources;
 				},
 
+				_prepareToExecuteMethod:function (_totalSteps) {
+					this._methodTotalSteps = _totalSteps;
+					this._methodCompletedSteps = 0;
+				},
+
+				_stepCompleted:function (_message) {
+					this._log (_message,++this._methodCompletedSteps / this._methodTotalSteps);
+				},
+
 				languageResourcesFilePath:function (_language) {
 					return this._workingFolderPath + _language + '.json';
 				},
@@ -342,14 +351,18 @@ Uize.module ({
 					var
 						m = this,
 						_project = m.project,
-						_primaryLanguage = _project.primaryLanguage
+						_primaryLanguage = _project.primaryLanguage,
+						_languages = _project.languages
 					;
+					m._prepareToExecuteMethod ((_languages.length - !_project.importPrimary) * 2);
 					Uize.forEach (
-						_project.languages,
+						_languages,
 						function (_language) {
 							if (_language != _primaryLanguage || _project.importPrimary) {
 								var _resources = m.readLanguageResourcesFile (_language);
+								m._stepCompleted (_language + ': read language resources file');
 								_resources && m.distributeResources (_resources,_language,_project);
+								m._stepCompleted (_language + ': distributed strings to individual resource files');
 							}
 						}
 					);
@@ -368,8 +381,17 @@ Uize.module ({
 							_primaryLanguageResourcesLast,
 							_primaryLanguageResources
 						),
-						_resoucesByLanguage = Uize.pairUp (_primaryLanguage,_primaryLanguageResources)
+						_resoucesByLanguage = Uize.pairUp (_primaryLanguage,_primaryLanguageResources),
+						_totalLanguages = _project.languages.length,
+						_totalTranslatableLanguages = _totalLanguages - 2
 					;
+
+					m._prepareToExecuteMethod (
+						_totalTranslatableLanguages * Uize.totalKeys (_primaryLanguageResources) +
+							// total number of resource files to gather, across all translatable languages
+						_totalLanguages
+							// number of language resources files to write
+					);
 
 					/*** gather resources for all translatable languages ***/
 						m.forEachTranslatableLanguage (
@@ -378,8 +400,9 @@ Uize.module ({
 								Uize.forEach (
 									_primaryLanguageResources,
 									function (_resourceFileStrings,_resourceFileSubPath) {
-										var _resourceFileFullPath =
-											_rootFolderPath + '/' + m.getLanguageResourcePath (_resourceFileSubPath,_language)
+										var
+											_resourceFilePath = m.getLanguageResourcePath (_resourceFileSubPath,_language),
+											_resourceFileFullPath = _rootFolderPath + '/' + _resourceFilePath
 										;
 										_languageResources [_resourceFileSubPath] = Uize.Data.Diff.diff (
 											_fileSystem.fileExists ({path:_resourceFileFullPath})
@@ -399,6 +422,7 @@ Uize.module ({
 												);
 											}
 										);
+										m._stepCompleted ('Gathered resources from file: ' + _resourceFilePath);
 									}
 								);
 							}
@@ -411,6 +435,7 @@ Uize.module ({
 						_resoucesByLanguage,
 						function (_languageResources,_language) {
 							m.writeLanguageResourcesFile (_language,_languageResources);
+							m._stepCompleted ('Created resources file for language: ' + _language);
 						}
 					);
 					_callback ();
@@ -419,24 +444,30 @@ Uize.module ({
 				exportJobs:function (_params,_callback) {
 					var
 						m = this,
-						_primaryLanguageResources = m.readLanguageResourcesFile (m.project.primaryLanguage)
+						_project = m.project,
+						_primaryLanguageResources = m.readLanguageResourcesFile (_project.primaryLanguage),
+						_totalTranslatableLanguages = _project.languages.length - 2
 					;
+					m._prepareToExecuteMethod (_totalTranslatableLanguages * 3);
+
 					m.forEachTranslatableLanguage (
 						function (_language) {
-							var
-								_translationJobStrings = Uize.Data.Diff.diff (
-									Uize.Data.Diff.diff (
-										m.readLanguageResourcesFile (_language) || {},
-										{},
-										function (_string) {return _string.value ? _undefined : _string}
+							/*** determine strings that need translation ***/
+								var
+									_translationJobStrings = Uize.Data.Diff.diff (
+										Uize.Data.Diff.diff (
+											m.readLanguageResourcesFile (_language) || {},
+											{},
+											function (_string) {return _string.value ? _undefined : _string}
+										),
+										_primaryLanguageResources,
+										function (_stringToTranslate,_primaryLanguageString) {
+											return _stringToTranslate && _primaryLanguageString;
+										}
 									),
-									_primaryLanguageResources,
-									function (_stringToTranslate,_primaryLanguageString) {
-										return _stringToTranslate && _primaryLanguageString;
-									}
-								),
-								_jobsPath = m._workingFolderPath + 'jobs/'
-							;
+									_jobsPath = m._workingFolderPath + 'jobs/'
+								;
+								m._stepCompleted (_language + ': determined strings that need translation');
 
 							/*** calculate metrics for translation job ***/
 								m._calculateMetricsForLanguage (
@@ -444,6 +475,7 @@ Uize.module ({
 									_translationJobStrings,
 									_jobsPath + _language + '-metrics.json'
 								);
+								m._stepCompleted (_language + ': calculated translation job metrics');
 
 							/*** write translation job strings CSV file ***/
 								var _translationJobFilePath = _jobsPath + _language + '.csv';
@@ -464,35 +496,47 @@ Uize.module ({
 										)
 									})
 								;
+								m._stepCompleted (_language + ': created translation job file');
 						}
 					);
 					_callback ();
 				},
 
 				importJobs:function (_params,_callback) {
-					var m = this;
+					var
+						m = this,
+						_project = m.project,
+						_totalTranslatableLanguages = _project.languages.length - 2
+					;
+					m._prepareToExecuteMethod (_totalTranslatableLanguages * 2);
+
 					m.forEachTranslatableLanguage (
 						function (_language) {
-							var _translatedStrings = Uize.Data.Diff.diff (
-								Uize.Data.Flatten.unflatten (
-									Uize.Data.NameValueRecords.toHash (
-										Uize.Data.Csv.from (
-											_fileSystem.readFile ({path:m._workingFolderPath + 'jobs/' + _language + '.csv'})
+							/*** determine strings that have been translated ***/
+								var _translatedStrings = Uize.Data.Diff.diff (
+									Uize.Data.Flatten.unflatten (
+										Uize.Data.NameValueRecords.toHash (
+											Uize.Data.Csv.from (
+												_fileSystem.readFile ({path:m._workingFolderPath + 'jobs/' + _language + '.csv'})
+											),
+											0,
+											1
 										),
-										0,
-										1
+										Uize.Json.from
 									),
-									Uize.Json.from
-								),
-								{},
-								function (_string) {return _string.value ? _string : _undefined}
-							);
-							if (!Uize.isEmpty (_translatedStrings))
-								m.writeLanguageResourcesFile (
-									_language,
-									Uize.mergeInto (m.readLanguageResourcesFile (_language),_translatedStrings)
-								)
-							;
+									{},
+									function (_string) {return _string.value ? _string : _undefined}
+								);
+								m._stepCompleted (_language + ': determined strings that have been translated');
+
+							/*** update language resources file ***/
+								if (!Uize.isEmpty (_translatedStrings))
+									m.writeLanguageResourcesFile (
+										_language,
+										Uize.mergeInto (m.readLanguageResourcesFile (_language),_translatedStrings)
+									)
+								;
+								m._stepCompleted (_language + ': updated language resources file');
 						}
 					);
 					_callback ();
@@ -507,23 +551,46 @@ Uize.module ({
 						m = this,
 						_primaryLanguage = m.project.primaryLanguage
 					;
-					m._calculateMetricsForLanguage (
-						_primaryLanguage,
-						m.gatherResources (),
-						m._workingFolderPath + 'metrics/' + _primaryLanguage + '.json'
-					);
+					m._prepareToExecuteMethod (2);
+
+					/*** gather resources for primary language ***/
+						var _primaryLanguageResources = m.gatherResources ();
+						m._stepCompleted ('gathered resources for primary language');
+
+					/*** calculate metrics for primary language ***/
+						m._calculateMetricsForLanguage (
+							_primaryLanguage,
+							_primaryLanguageResources,
+							m._workingFolderPath + 'metrics/' + _primaryLanguage + '.json'
+						);
+						m._stepCompleted ('calculated metrics for primary language');
+
 					_callback ();
 				},
 
 				pseudoLocalize:function (_params,_callback) {
 					var m = this;
-					m.distributeResources (m._pseudoLocalizeResources (m.gatherResources ()),m.project.primaryLanguage);
+					m._prepareToExecuteMethod (3);
+
+					/*** gather resources for primary language ***/
+						var _primaryLanguageResources = m.gatherResources ();
+						m._stepCompleted ('gathered resources for primary language');
+
+					/**( pseudo-localize resources for primary language ***/
+						var _pseudoLocalizedResources = m._pseudoLocalizeResources (_primaryLanguageResources);
+						m._stepCompleted ('pseudo-localized resources for primary language');
+
+					/*** distributed pseudo-localized resources to individual resource files ***/
+						m.distributeResources (_pseudoLocalizedResources,m.project.primaryLanguage);
+						m._stepCompleted ('distributed pseudo-localized resources to individual resource files');
+
 					_callback ();
 				},
 
 				init:function (_params,_callback) {
 					this.project = _params.project;
 					this._workingFolderPath = _params.workingFolder + '/' + this.project.name + '/';
+					this._log = _params.log || Uize.nop;
 					_callback ();
 				}
 			},
