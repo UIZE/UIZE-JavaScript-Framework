@@ -513,20 +513,23 @@ Uize.module ({
 					m.forEachTranslatableLanguage (
 						function (_language) {
 							/*** determine strings that have been translated ***/
-								var _translatedStrings = Uize.Data.Diff.diff (
-									Uize.Data.Flatten.unflatten (
-										Uize.Data.NameValueRecords.toHash (
-											Uize.Data.Csv.from (
-												_fileSystem.readFile ({path:m._workingFolderPath + 'jobs/' + _language + '.csv'})
+								var
+									_jobFilePath = m._workingFolderPath + 'jobs/' + _language + '.csv',
+									_translatedStrings = _fileSystem.fileExists ({path:_jobFilePath})
+										? Uize.Data.Diff.diff (
+											Uize.Data.Flatten.unflatten (
+												Uize.Data.NameValueRecords.toHash (
+													Uize.Data.Csv.from (_fileSystem.readFile ({path:_jobFilePath})),
+													0,
+													1
+												),
+												Uize.Json.from
 											),
-											0,
-											1
-										),
-										Uize.Json.from
-									),
-									{},
-									function (_string) {return _string.value ? _string : _undefined}
-								);
+											{},
+											function (_string) {return _string.value ? _string : _undefined}
+										) :
+										{}
+								;
 								m._stepCompleted (_language + ': determined strings that have been translated');
 
 							/*** update language resources file ***/
