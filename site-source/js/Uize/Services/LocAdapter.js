@@ -331,6 +331,11 @@ Uize.module ({
 					return false;
 				},
 
+				isTranslatableString:function (_resourceStringPath,_resourceStringText) {
+					// this method should be implemented by subclasses
+					return true;
+				},
+
 				isResourceFile:function (_filePath) {
 					// this method should be implemented by subclasses
 				},
