@@ -16,9 +16,13 @@ Uize.module ({
 		'use strict';
 
 		var
-			_fileSystem = Uize.Services.FileSystem.singleton (),
-			_split = Uize.Str.Split.split,
-			_undefined
+			/*** Variables for Scruncher Optimization ***/
+				_undefined,
+				_split = Uize.Str.Split.split,
+
+			/*** General Variables ***/
+				_fileSystem = Uize.Services.FileSystem.singleton (),
+				_sacredEmptyArray = []
 		;
 
 		/*** Private Instance Methods ***/
@@ -159,7 +163,10 @@ Uize.module ({
 								_primaryLanguageResources [_resourceFileSubPath],
 								{},
 								function (_string) {
-									return {value:Uize.Loc.Pseudo.pseudoLocalize (_string.value,_pseudoLocalizeOptions)};
+									if (m.isTranslatableString (_string))
+										_string.value = Uize.Loc.Pseudo.pseudoLocalize (_string.value,_pseudoLocalizeOptions)
+									;
+									return _string;
 								}
 							)
 						;
@@ -331,8 +338,18 @@ Uize.module ({
 					return false;
 				},
 
-				isTranslatableString:function (_resourceStringPath,_resourceStringText) {
+				isTranslatableString:function (_stringInfo) {
 					// this method should be implemented by subclasses
+					/* NOTE:
+						the _stringInfo argument is an object of the form...
+
+						.................
+						{
+							key:keySTR,
+							value:valueSTR
+						}
+						.................
+					*/
 					return true;
 				},
 
