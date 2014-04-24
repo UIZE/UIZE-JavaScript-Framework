@@ -321,6 +321,38 @@ Uize.module ({
 									_unmodifiedPropertyComparer
 								],
 								{foo:'unchanged'}
+							],
+
+						/*** miscellaneous tests ***/
+							['The property info arguments that are provided to the property comparer function each contain a key property which indicates the name of the current property being compared',
+								[
+									{
+										foo:'FOO',
+										bar:{baz:'BAZ'}
+									},
+									{
+										qux:'QUX',
+										hello:{world:'WORLD'}
+									},
+									function (_object1PropertyInfo,_object2PropertyInfo) {
+										return {
+											value:[
+												_object1PropertyInfo && _object1PropertyInfo.key,
+												_object2PropertyInfo && _object2PropertyInfo.key
+											]
+										};
+									}
+								],
+								{
+									foo:['foo',undefined],
+									bar:{
+										baz:['baz',undefined]
+									},
+									qux:[undefined,'qux'],
+									hello:{
+										world:[undefined,'world']
+									}
+								}
 							]
 					]]
 				])
