@@ -61,51 +61,72 @@ Introduction
 		The various localization methods can be accessed using the =Uize.Build.Loc= build script.
 
 		Running the Build Script
-			The localization build
+			The localization build script can be run in NodeJS using the following command...
 
+			SYNTAX
 			..................................................................................
 			node [pathToUize]build.js Uize.Build.Loc project=[projectName] method=[methodName]
 			..................................................................................
 
-		Service Methods
+			Parameters
+				project
+					The =project= parameter is used to specify the project for which the specified localization method should be executed.
+
+					The value specified for the =project= parameter should match one of the keys in the =moduleConfigs ['Uize.Build.Loc'].projects= object of the =uize-config.json= file.
+
+					Executing a Method For All Projects
+						To execute a localization method for all projects listed in the config, one can either omit the =project= parameter or one can specify the special "*" wildcard value.
+
+						EXAMPLES
+						......................................................................
+						node [pathToUize]build.js Uize.Build.Loc method=[methodName]
+						node [pathToUize]build.js Uize.Build.Loc project=* method=[methodName]
+						......................................................................
+
+				method
+					The =method= parameter is used to specify the localization method that should be executed for the specified project.
+
+					The value of the =method= parameter should be the name of any of the `service methods` supported by the localization service.
+
+		### Service Methods
 			.
 
-			Metrics
+			metrics
 				Metrics can be generated for a project using the =metrics= method of the localization service.
 
 				.............................................................................
 				node [pathToUize]build.js Uize.Build.Loc project=[projectName] method=metrics
 				.............................................................................
 
-			Export
+			export
 				.
 
 				............................................................................
 				node [pathToUize]build.js Uize.Build.Loc project=[projectName] method=export
 				............................................................................
 
-			Import
+			import
 				.
 
 				............................................................................
 				node [pathToUize]build.js Uize.Build.Loc project=[projectName] method=import
 				............................................................................
 
-			Export Jobs
+			exportJobs
 				.
 
 				................................................................................
 				node [pathToUize]build.js Uize.Build.Loc project=[projectName] method=exportJobs
 				................................................................................
 
-			Import Jobs
+			importJobs
 				.
 
 				................................................................................
 				node [pathToUize]build.js Uize.Build.Loc project=[projectName] method=importJobs
 				................................................................................
 
-			Extract
+			extract
 				.
 
 				.............................................................................
