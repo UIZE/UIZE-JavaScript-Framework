@@ -1,0 +1,18 @@
+This is a TO DO document for the =Uize.Widget.mEventBindings= mix-in module.
+
+Optimize Self State Property Changes
+	When wiring a handler for state property changes a developer has the option to use the =onChange= property passed as part of the definition of the state proprety or an event binding. Using the =onChange= proprety is optimized and better performing, but it will be less confusing if we can steer all use cases to event bindings.
+	
+	So the solution instead of having developers have to make a choice, is to have mEventBindings add self state property change handlers to the =onChange= property itself.  That way the developer interface is straightforward without having to sacrifice performance. In addition, this will now give subclass widgets the opportunity to easily leverage the same =onChange= optimization, which hadn't been possible before.
+	
+	Sample Implementation
+		Assigning a new handler to the =onChange= will actually append the new handler so after detecting a self state property change, =Uize.Widget.mEventBindings= can do something like the following...
+		
+		...
+		class.stateProperties(
+			Uize.pairUp(
+				propertyName,
+				{onChange:changeHandler}
+			)
+		);
+		...
