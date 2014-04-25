@@ -1,12 +1,26 @@
 This document lists official news announcements that need to be created for developments that have already taken place.
 
-NEW MODULE: Uize.Str.Whitespace
+NEW MODULE: Uize.Data.Diff
 	Still to do...
 
 	- write documentation
 	- write news announcement
 
-NEW MODULE: Uize.Data.Diff
+NEW MODULE: Uize.Event.Bus
+	Still to do...
+
+	- write unit tests
+	- write documentation
+	- write news announcement
+
+NEW MODULE: Uize.Util.RegExpComposition
+	Still to do...
+
+	- write unit tests
+	- write documentation
+	- write news announcement
+
+NEW MODULE: Uize.Str.Whitespace
 	Still to do...
 
 	- write documentation
@@ -25,14 +39,20 @@ NEW MODULE: Uize.Loc.Plurals.RuleParser
 	- write documentation
 	- write news announcement
 
-NEW MODULE: Uize.Loc.Plurals.Util
+NEW MODULE: Uize.Util.ModuleNaming
+	Still to do...
+
+	- write documentation
+	- write news announcement
+
+NEW MODULE: Uize.Util.ModuleNameMatcher
 	Still to do...
 
 	- write unit tests
 	- write documentation
 	- write news announcement
 
-NEW MODULE: Uize.Util.RegExpComposition
+NEW MODULE: Uize.Loc.Plurals.Util
 	Still to do...
 
 	- write unit tests
@@ -43,13 +63,6 @@ New Localization Plurals Modules
 	Still to do...
 
 	- polish documentation created by build script
-	- write news announcement
-
-NEW MODULE: Uize.Event.Bus
-	Still to do...
-
-	- write unit tests
-	- write documentation
 	- write news announcement
 
 NEW MODULE: Uize.Math.Blend
