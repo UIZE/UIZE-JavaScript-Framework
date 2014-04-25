@@ -476,14 +476,14 @@ Uize.module ({
 							/*** determine strings that need translation ***/
 								var
 									_translationJobStrings = Uize.Data.Diff.diff (
-										Uize.Data.Diff.diff (
-											_readLanguageResourcesFile (m,_language) || {},
-											{},
-											function (_string) {return _string.value ? _undefined : _string}
-										),
+										_readLanguageResourcesFile (m,_language) || {},
 										_primaryLanguageResources,
-										function (_stringToTranslate,_primaryLanguageString) {
-											return _stringToTranslate && _primaryLanguageString;
+										function (_languageString,_primaryLanguageString) {
+											return (
+												!_languageString.value && m.isTranslatableString (_primaryLanguageString)
+													? _primaryLanguageString
+													: _undefined
+											);
 										}
 									),
 									_jobsPath = m._workingFolderPath + 'jobs/'

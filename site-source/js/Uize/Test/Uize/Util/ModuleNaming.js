@@ -12,7 +12,7 @@
 /* Module Meta Data
 	type: Test
 	importance: 1
-	codeCompleteness: 8
+	codeCompleteness: 100
 	docCompleteness: 100
 */
 
@@ -34,6 +34,54 @@ Uize.module ({
 			test:[
 				Uize.Test.requiredModulesTest ('Uize.Util.ModuleNaming'),
 				Uize.Test.staticMethodsTest ([
+					['Uize.Util.ModuleNaming.getModuleNameFromTestModuleName',[
+						['When a module name is not a test module name, it is returned as is',
+							'Namespace.MyModule',
+							'Namespace.MyModule'
+						],
+						['When a module name is a test module name, the name of the module that the test module tests is returned',
+							'Namespace.Test.Namespace.MyModule',
+							'Namespace.MyModule'
+						]
+					]],
+					['Uize.Util.ModuleNaming.getTestModuleName',[
+						['When a module name is already a test module name, it is returned as is',
+							'Namespace.Test.Namespace.MyModule',
+							'Namespace.Test.Namespace.MyModule'
+						],
+						['When a module name is not a test module name, the name of the test module for the specified module is returned',
+							'Namespace.MyModule',
+							'Namespace.Test.Namespace.MyModule'
+						]
+					]],
+					['Uize.Util.ModuleNaming.getNamespace',[
+						['When a module name is just a namespace, it is returned as is',
+							'Namespace',
+							'Namespace'
+						],
+						['When a module name is for a module that is under a namespace, just the namespace segment is returned',
+							'Namespace.MyModule.MySubModule',
+							'Namespace'
+						]
+					]],
+					['Uize.Util.ModuleNaming.isTestModule',[
+						['When a module name is not a test module name, the value false is returned',
+							'Namespace.MyModule',
+							false
+						],
+						['When a module name is a test module name, the value true is returned',
+							'Namespace.Test.Namespace.MyModule',
+							true
+						],
+						['The test namespace for a given root namespace is not considered a test module',
+							'Namespace.Test',
+							false
+						],
+						['A module under the test namespace (eg. Namespace.Test) for a given root namespace (eg. Namespace) is not considered a test module if the first module name segment (eg. Foo) under the test namespace is not the root namespace',
+							'Namespace.Test.Foo',
+							false
+						]
+					]],
 					['Uize.Util.ModuleNaming.isModuleName',[
 						['A module name may contain only a valid format namespace segment',
 							'Uize',
