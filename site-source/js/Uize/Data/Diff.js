@@ -170,6 +170,10 @@ Uize.module ({
 		return Uize.package ({
 			diff:function (_object1,_object2,_propertyComparer) {
 				_propertyComparer || (_propertyComparer = _defaultPropertyComparer);
+				var
+					_object1PropertyInfo = {},
+					_object2PropertyInfo = {}
+				;
 				function _compareNode (_object1,_object2) {
 					var _result = {};
 					for (var _property in Uize.copy (_object1,_object2)) {
@@ -188,9 +192,21 @@ Uize.module ({
 								: {value:_subNodeComparison}
 							;
 						} else {
+							var
+								_propertyInObject1 = _property in _object1,
+								_propertyInObject2 = _property in _object2
+							;
+							if (_propertyInObject1) {
+								_object1PropertyInfo.key = _property;
+								_object1PropertyInfo.value = _object1PropertyValue;
+							}
+							if (_propertyInObject2) {
+								_object2PropertyInfo.key = _property;
+								_object2PropertyInfo.value = _object2PropertyValue;
+							}
 							_propertyComparisonResult = _propertyComparer (
-								_property in _object1 ? {value:_object1PropertyValue} : _undefined,
-								_property in _object2 ? {value:_object2PropertyValue} : _undefined
+								_propertyInObject1 ? _object1PropertyInfo : _undefined,
+								_propertyInObject2 ? _object2PropertyInfo : _undefined
 							);
 						}
 						if (_propertyComparisonResult)

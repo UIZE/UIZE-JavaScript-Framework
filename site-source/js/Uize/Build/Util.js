@@ -35,10 +35,7 @@ Uize.module ({
 		'Uize.Json',
 		'Uize.Array.Sort',
 		'Uize.Services.FileSystem',
-		'Uize.Util.ModuleNaming',
-		'Uize.Test',
-		'Uize.Data.Matches',
-		'Uize.Util.ModuleNameMatcher'
+		'Uize.Util.ModuleNaming'
 	],
 	builder:function () {
 		'use strict';
@@ -46,10 +43,7 @@ Uize.module ({
 		var
 			/*** Variables for Scruncher Optimization ***/
 				_undefined,
-				_Uize = Uize,
-				_Uize_Build = _Uize.Build,
-				_Uize_Util_ModuleNaming = _Uize.Util.ModuleNaming,
-				_Uize_Test = _Uize.Test,
+				_Uize_Util_ModuleNaming = Uize.Util.ModuleNaming,
 
 			/*** General Variables ***/
 				_fileSystem = Uize.Services.FileSystem.singleton (),
@@ -407,161 +401,6 @@ Uize.module ({
 
 								NOTES
 								- see also the related =Uize.Build.Util.compileJstFile= static method
-					*/
-				},
-
-				runUnitTests:function (_params) {
-					var
-						_tests = _params.testModule || '*',
-						_console = (_params.silent == 'true' ? 'silent' : _params.console) || 'summary',
-						_logFilePath = _params.logFilePath
-					;
-					if (typeof _tests == 'string') {
-						var _modulesToTest;
-
-						if (_Uize_Util_ModuleNaming.isModuleName (_tests)) {
-							_modulesToTest = [_Uize_Util_ModuleNaming.getModuleNameFromTestModuleName (_tests)];
-						} else {
-							var
-								_moduleNameMatcher = Uize.Util.ModuleNameMatcher.resolve (_tests),
-								_libraryModuleSuffixRegExp = /\.library$/i,
-								_testIgnoreNamespaces = (_params.testIgnoreNamespaces || '') + '',
-								_testIgnoreNamespacesRegExp = _testIgnoreNamespaces
-									? new RegExp (
-										'^(' +
-										_Uize.map (_testIgnoreNamespaces.split (','),_Uize.escapeRegExpLiteral).join ('|') +
-										')(\\..+|$)'
-									)
-									: null
-								,
-								_modulesExcludingLibraryModulesAndTestIgnoreNamespaces = _Uize.Data.Matches.values (
-									_package.getJsModules (_params).sort (),
-									function (_moduleName) {
-										return (
-											!_libraryModuleSuffixRegExp.test (_moduleName) && // ignore .library modules
-											(!_testIgnoreNamespacesRegExp || !_testIgnoreNamespacesRegExp.test (_moduleName))
-										);
-									}
-								),
-								_modulesLookup = _Uize.lookup (_modulesExcludingLibraryModulesAndTestIgnoreNamespaces),
-								_testModuleName
-							;
-							_modulesToTest = _Uize.Data.Matches.values (
-								_modulesExcludingLibraryModulesAndTestIgnoreNamespaces,
-								function (_moduleName) {
-									return (
-										!/^[a-zA-Z_\$][a-zA-Z0-9_\$]*\.Test($|\.)/.test (_moduleName) && // ignore test modules
-										_moduleNameMatcher (_moduleName) // only include modules from module name matcher
-									);
-								}
-							);
-						}
-
-						/*** resolve modules to test to test class ***/
-							if (_modulesToTest.length == 1) {
-								var
-									_moduleToTest = _modulesToTest [0],
-									_testModuleName = _Uize_Util_ModuleNaming.getTestModuleName (_moduleToTest)
-								;
-								if (
-									_fileSystem.fileExists ({
-										path:_params.sourcePath + '/' + _params.modulesFolder + '/' + Uize.modulePathResolver (_testModuleName) + '.js'
-									})
-								) {
-									Uize.require (_testModuleName,function (_testModule) {_tests = _testModule});
-								} else {
-									_tests = Uize.Test.requiredModulesTest (
-										_Uize_Util_ModuleNaming.getModuleNameFromTestModuleName (_moduleToTest)
-									);
-								}
-							} else {
-								_tests = _Uize_Test.resolve ({
-									title:'Unit Tests Suite',
-									test:_Uize.map (
-										_modulesToTest,
-										function (_moduleName) {
-											return (
-												_modulesLookup [
-													_testModuleName = _Uize_Util_ModuleNaming.getTestModuleName (_moduleName)
-												]
-													? _Uize_Test.testModuleTest (_testModuleName)
-													: _Uize_Test.requiredModulesTest (_moduleName)
-											);
-										}
-									)
-								});
-							}
-					}
-
-					/*** run the tests ***/
-						function _runUnitTests (_tests) {
-							var
-								_unitTests = new _tests,
-								_logChunks = []
-							;
-							function _log (_logChunk) {
-								_console == 'verbose' &&
-									console.log (
-										//(_isSummary ? '' : '############## ' + '') +
-										_logChunk
-									)
-								;
-								_logChunks.push (_logChunk);
-							}
-							_unitTests.wire ({
-								Start:
-									function (_event) {
-										_log (
-											Uize.Str.Repeat.repeat ('   ',_event.source.getDepth ()) + _event.source.get ('title')
-										);
-									},
-								Done:
-									function (_event) {
-										var
-											_test = _event.source,
-											_reasonForFailure = _test.get ('reasonForFailure')
-										;
-										/*** add to log ***/
-											_log (
-												Uize.Str.Repeat.repeat ('   ',_test.getDepth () + 1) +
-												(
-													_test.get ('result')
-														? ('PASSED!!! (duration: ' + _test.get ('duration') + 'ms)')
-														: ('*** FAILED *** ' + (_reasonForFailure || ''))
-												) + (_reasonForFailure ? '\n\n' + _test.getSynopsis () : '')
-											);
-
-										/*** finish up if the test fails or if unit tests complete ***/
-											if (_test == _unitTests || !_test.get ('result')) {
-												var _synopsis = _test.getSynopsis ();
-												_console != 'silent' && console.log (_synopsis);
-												_logChunks.push (_synopsis);
-												_logFilePath &&
-													_fileSystem.writeFile ({path:_logFilePath,contents:_logChunks.join ('\n')})
-												;
-												_test.get ('result') || WScript.Quit (1);
-											}
-									}
-							});
-							_unitTests.run ();
-						}
-						_runUnitTests (_tests);
-					/*?
-						Static Methods
-							Uize.Build.Util.runUnitTests
-								Runs the specified unit tests class, optionally outputting the results to a specified log file.
-
-								SYNTAX
-								.........................................................................
-								Uize.Build.Util.runUnitTests (testsSTRorCLASS,consoleSTR,logFilePathSTR);
-								.........................................................................
-
-								Parameters
-									This method supports the following parameters...
-
-									- =testsSTRorCLASS= - either a string, specifying the name of a unit tests module, or a reference to a unit tests module
-									- =consoleSTR= - a string, specifying the amount of information that should be logged to the console while the tests are being run. The value =silent= indicates that nothing should be logged to the console. The value =summary= (the default) indicates that only the summary information from running the tests should be logged. And the value =verbose= indicates that information from running all tests (including deeply nested tests) should be logged.
-									- =logFilePathSTR= - a string, optionally specifying the path for where a log file should be written (if not specified, no log file will be written)
 					*/
 				},
 
