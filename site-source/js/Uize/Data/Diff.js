@@ -30,7 +30,7 @@
 			Diff Result
 				When the =Uize.Data.Diff.diff= method is used to compare two objects, it produces a diff result.
 
-				The diff result is an object whose structure is based on a union of the structures of the two objects being compared. Depending on the `property comparer` function that is used when performing the diff, the diff result can be a complete or sparse union of the structurs of the objects being compared.
+				The diff result is an object whose structure is based on a union of the structures of the two objects being compared. Depending on the `property comparer` function that is used when performing the diff, the diff result can be a complete or sparse union of the structurs of the objects being compared. The diff result can also be purely descriptive of the differences in properties between the objects being compared (eg. ='modified'=, ='added'=, ='removed'=, ='unchanged'=), or the diff result can be reflect actual values from the properties (values for only the properties that are the same, values for only the properties that are different, etc.).
 
 				The diff result object is best explained with an example...
 
@@ -115,28 +115,62 @@
 
 				Property Comparer Function
 
-					A property comparer function must...
+					A property comparer function should...
 
-					- accept two `value descriptor` arguments
-					- return a `value comparison result`
+					- accept up to two `property profile` arguments
+					- return a `property profile` as its return value
 
-					Value Descriptor
-						In the context of a `property comparer function`, a value descriptor is either...
+					Property Profile
+						In the context of a `property comparer function`, a property profile is either...
 
-						- an object, containing a =value= property that provides the value of the property for the object
-						- the value =undefined=, indicating that the property is missing for the object
+						- an object, providing information on the name and value of the property
+						- the value =undefined=, indicating that the property doesn't exist for the object
+
+						When the property profile is an object value, it will be of the form...
+
+						...............................................
+						{
+							key:keySTR,     // the name of the property
+							value:valueSTR  // the value of the property
+						}
+						...............................................
+
+					Returning a Property Profile
+						.
 
 					Value Comparison Result
 						In the context of a `property comparer function`, a value comparison result is either...
 
-						- an object, containing a =value= property that provides the value that should be placed into the diff result object for the current property being compared
 						- the value =undefined=, indicating that no value should be placed into the diff result object for the current property being compared
+						- an object, containing a =value= property that provides the value that should be placed into the diff result object for the current property being compared
 
 				Default Property Comparer
 					.
 
-				Finding Added or Modified Values
-					.
+				Use Cases
+					Finding Added or Modified Values
+						.
+
+					Getting the Difference Between Two Objects
+						.
+
+					Getting the Intersection Between Two Objects
+						.
+
+					Performing a Conditional Merge of Two Objects
+						.
+
+					Mapping Values for Leaf Nodes of an Object
+						.
+
+					Renaming Keys for Leaf Nodes of an Object
+						.
+
+					Conditional Merging of Two Objects
+						.
+
+					Blank or Initialized Clones
+						.
 */
 
 Uize.module ({
@@ -171,8 +205,8 @@ Uize.module ({
 			diff:function (_object1,_object2,_propertyComparer) {
 				_propertyComparer || (_propertyComparer = _defaultPropertyComparer);
 				var
-					_object1PropertyInfo = {},
-					_object2PropertyInfo = {}
+					_object1PropertyProfile = {},
+					_object2PropertyProfile = {}
 				;
 				function _compareNode (_object1,_object2) {
 					var _result = {};
@@ -197,20 +231,21 @@ Uize.module ({
 								_propertyInObject2 = _property in _object2
 							;
 							if (_propertyInObject1) {
-								_object1PropertyInfo.key = _property;
-								_object1PropertyInfo.value = _object1PropertyValue;
+								_object1PropertyProfile.key = _property;
+								_object1PropertyProfile.value = _object1PropertyValue;
 							}
 							if (_propertyInObject2) {
-								_object2PropertyInfo.key = _property;
-								_object2PropertyInfo.value = _object2PropertyValue;
+								_object2PropertyProfile.key = _property;
+								_object2PropertyProfile.value = _object2PropertyValue;
 							}
 							_propertyComparisonResult = _propertyComparer (
-								_propertyInObject1 ? _object1PropertyInfo : _undefined,
-								_propertyInObject2 ? _object2PropertyInfo : _undefined
+								_propertyInObject1 ? _object1PropertyProfile : _undefined,
+								_propertyInObject2 ? _object2PropertyProfile : _undefined
 							);
 						}
 						if (_propertyComparisonResult)
-							_result [_property] = _propertyComparisonResult.value
+							_result ['key' in _propertyComparisonResult ? _propertyComparisonResult.key : _property] =
+								_propertyComparisonResult.value
 						;
 					}
 					return _result;
@@ -234,16 +269,82 @@ Uize.module ({
 							.................................................................................
 
 							Diff Two Objects, Using the Default Property Comparer
+								In its most basic usage, two objects can be compared using the `default property comparer` by specifying just the two objects to be compared as arguments.
+
 								SYNTAX
 								............................................................
 								diffResultOBJ = Uize.Data.Diff.diff (object1OBJ,object2OBJ);
 								............................................................
 
+								When the `default property comparer` is used, the result returned by this method is an object that represents the union between the two objects being compared, and where the value of each leaf node describes the difference, for the corresponding property, between the two objects.
+
+								EXAMPLE
+								.....................
+								Uize.Data.Diff.diff (
+									{
+										foo:'foo',
+										bar:'bar',
+										baz:'baz'
+									},
+									{
+										foo:'foo',
+										bar:'BAR',
+										qux:'qux'
+									}
+								);
+								.....................
+
+								RESULT
+								...................
+								{
+									foo:'unchanged',
+									bar:'modified',
+									baz:'removed',
+									qux:'added'
+								}
+								...................
+
+								For a more in-depth discussion, see the section on the `default property comparer`.
+
 							Diff Two Objects, Using a Custom Property Comparer
+								In cases where the behavior of the `default property comparer` is not suitable, a custom `property comparer` function can be specified for the optional third argument.
+
 								SYNTAX
 								.................................................................................
 								diffResultOBJ = Uize.Data.Diff.diff (object1OBJ,object2OBJ,propertyComparerFUNC);
 								.................................................................................
+
+								EXAMPLE
+								.............................................
+								Uize.Data.Diff.diff (
+									{
+										foo:{
+											bar:'bar'
+										}
+									},
+									{
+										foo:{
+											bar:'bar',
+											baz:'baz'
+										},
+										qux:'qux'
+									},
+									function (obj1Prop,obj2Prop) {
+										return obj1Prop ? undefined : obj2Prop;
+									}
+								);
+								.............................................
+
+								RESULT
+								...............
+								{
+									foo:{
+										baz:'baz'
+									},
+									qux:'qux'
+								}
+								...............
+
 				*/
 			}
 		});
