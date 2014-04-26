@@ -138,8 +138,8 @@
 					Returning a Property Profile
 						.
 
-					Value Comparison Result
-						In the context of a `property comparer function`, a value comparison result is either...
+					Value Diff Result
+						In the context of a `property comparer function`, a value diff result is either...
 
 						- the value =undefined=, indicating that no value should be placed into the diff result object for the current property being compared
 						- an object, containing a =value= property that provides the value that should be placed into the diff result object for the current property being compared
@@ -147,29 +147,122 @@
 				Default Property Comparer
 					.
 
-				Use Cases
+				Useful Property Comparer Functions
 					Finding Added or Modified Values
-						.
+						In order to obtain the values for all properties that have been added or modified in the second object, the following `property comparer function` can be used...
 
-					Getting the Difference Between Two Objects
-						.
+						..............................................................................................
+						function (obj1PropProfile,obj2PropProfile) {
+							return (
+								obj2PropProfile && (!obj1PropProfile || obj2PropProfile.value !== obj1PropProfile.value)
+									? obj2PropProfile
+									: undefined
+							);
+						}
+						..............................................................................................
+
+					Getting a Summary of Just the Differences
+						In order to obtain a summary of just the differences between two objects, the following `property comparer function` can be used...
+
+						.............................................................
+						function (obj1PropProfile,obj2PropProfile) {
+							return {
+								value:obj1PropProfile && !obj2PropProfile
+									? 'removed'
+									: !obj1PropProfile && obj2PropProfile
+										? 'added'
+										: obj1PropProfile.value !== obj2PropProfile.value
+											? 'modified'
+											: undefined
+							};
+						}
+						.............................................................
+
+						If the above `property compater function` is used when comparing two objects and the object returned by the =Uize.Data.Diff.diff= method is empty, then the objects being compared can be considered identical.
+
+					Getting a Summary of Structural Differences
+						In order to obtain a summary of just the structural differences between two objects, the following `property comparer function` can be used...
+
+						...............................................
+						function (obj1PropProfile,obj2PropProfile) {
+							return {
+								value:obj1PropProfile && !obj2PropProfile
+									? 'removed'
+									: !obj1PropProfile && obj2PropProfile
+										? 'added'
+										: undefined
+							};
+						}
+						...............................................
+
+						If the above `property compater function` is used when comparing two objects and the object returned by the =Uize.Data.Diff.diff= method is empty, then the objects being compared can be considered to have identical structure - even if the values of the properties may differ between the two objects.
+
+					Getting a Summary of Structural and Type Differences
+						In order to obtain a summary of just the structural and type differences between two objects, the following `property comparer function` can be used...
+
+						...........................................................................
+						function (obj1PropProfile,obj2PropProfile) {
+							return {
+								value:obj1PropProfile && !obj2PropProfile
+									? 'removed'
+									: !obj1PropProfile && obj2PropProfile
+										? 'added'
+										: typeof obj1PropProfile.value !== typeof obj2PropProfile.value
+											? 'type mismatch'
+											: undefined
+							};
+						}
+						...........................................................................
+
+						If the above `property compater function` is used when comparing two objects and the object returned by the =Uize.Data.Diff.diff= method is empty, then the objects being compared can be considered to have identical structure and type. This can be a useful way of testing if an object conforms to the structure and type requirements of a reference object.
 
 					Getting the Intersection Between Two Objects
+						In order to obtain the values for all properties that are identical in the objects being compared, the following `property comparer function` can be used...
+
+						.................................................................................................
+						function (obj1PropProfile,obj2PropProfile) {
+							return {
+								value:obj1PropProfile && obj2PropProfile && obj1PropProfile.value === obj2PropProfile.value
+									? obj1PropProfile
+									: undefined
+							};
+						}
+						.................................................................................................
+
+					### Getting a Summary of Common Structure
 						.
 
-					Performing a Conditional Merge of Two Objects
+					Performing a Conditional Merge
+						In order to conditionally merge in properties from a second object into a first object, so that a property from the second object is only merged in if it doesn't exist in the first object, the following `property comparer function` can be used...
+
+						.............................................
+						function (obj1PropProfile,obj2PropProfile) {
+							return obj1PropProfile || obj2PropProfile;
+						}
+						.............................................
+
+					Creating an Initialized Clone of an Object
+						The =Uize.Data.Diff.diff= method can be used in a less conventional way to create an initialized clone of a source object using the following approach...
+
+						EXAMPLE
+						............................................
+						var initializedClone = Uize.Data.Diff.diff (
+							sourceObj,
+							{},
+							function (sourceObjPropProfile) {
+								sourceObjPropProfile.value = '';
+								return sourceObjPropProfile;
+							}
+						);
+						............................................
+
+					### Iterating Recursively Through an Objects Leaf Nodes
 						.
 
-					Mapping Values for Leaf Nodes of an Object
+					### Mapping Values for Leaf Nodes of an Object
 						.
 
-					Renaming Keys for Leaf Nodes of an Object
-						.
-
-					Conditional Merging of Two Objects
-						.
-
-					Blank or Initialized Clones
+					### Renaming Keys for Leaf Nodes of an Object
 						.
 */
 
@@ -307,7 +400,7 @@ Uize.module ({
 								For a more in-depth discussion, see the section on the `default property comparer`.
 
 							Diff Two Objects, Using a Custom Property Comparer
-								In cases where the behavior of the `default property comparer` is not suitable, a custom `property comparer` function can be specified for the optional third argument.
+								In cases where the behavior of the `default property comparer` is not suitable, a custom `property comparer function` can be specified for the optional third argument.
 
 								SYNTAX
 								.................................................................................
@@ -315,7 +408,7 @@ Uize.module ({
 								.................................................................................
 
 								EXAMPLE
-								.............................................
+								...........................................................
 								Uize.Data.Diff.diff (
 									{
 										foo:{
@@ -329,11 +422,17 @@ Uize.module ({
 										},
 										qux:'qux'
 									},
-									function (obj1Prop,obj2Prop) {
-										return obj1Prop ? undefined : obj2Prop;
+									function (obj1PropProfile,obj2PropProfile) {
+										return obj1PropProfile ? undefined : obj2PropProfile;
 									}
 								);
-								.............................................
+								...........................................................
+
+								In the above example, the =Uize.Data.Diff.diff= method is being used with a custom `property comparer function` to return an object that contains the values of only the properties that are "added" in the second object - in other words, properties that exist in the second object that don't exist in the first object.
+
+								The implementation of this custom property comparer function is quite straightforward: the function returns =undefined= if a property exists in the first object - otherwise, it returns the profile for the property from the second object. When the function returns =undefined=, no property is added to the resulting diff result object. But, when the function returns the profile for the property from the second object, then the value of the property in the second object is added to the diff result object.
+
+								This means that the diff result object will only contain leaf node properties for properties that exist in the second object and that do not exist in the first, and the value for the properties in the diff result object will be the values of the "added" properties in the second object. From our above example we would, therefore, obtain the following result...
 
 								RESULT
 								...............
@@ -344,7 +443,6 @@ Uize.module ({
 									qux:'qux'
 								}
 								...............
-
 				*/
 			}
 		});
