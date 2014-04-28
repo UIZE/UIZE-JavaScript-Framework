@@ -6,6 +6,18 @@ NEW MODULE: Uize.Data.Diff
 	- write documentation
 	- write news announcement
 
+NEW MODULE: Uize.Str.Whitespace
+	Still to do...
+
+	- write documentation
+	- write news announcement
+
+NEW MODULE: Uize.Loc.Pseudo
+	Still to do...
+
+	- write documentation
+	- write news announcement
+
 NEW MODULE: Uize.Event.Bus
 	Still to do...
 
@@ -17,18 +29,6 @@ NEW MODULE: Uize.Util.RegExpComposition
 	Still to do...
 
 	- write unit tests
-	- write documentation
-	- write news announcement
-
-NEW MODULE: Uize.Str.Whitespace
-	Still to do...
-
-	- write documentation
-	- write news announcement
-
-NEW MODULE: Uize.Loc.Pseudo
-	Still to do...
-
 	- write documentation
 	- write news announcement
 
