@@ -1,3 +1,28 @@
+/*______________
+|       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
+|     /      /  |   ---------------------------------------------------
+|    /    O /   |    MODULE : Uize.Services.LocAdapter.Uize Class
+|   /    / /    |
+|  /    / /  /| |    ONLINE : http://www.uize.com
+| /____/ /__/_| | COPYRIGHT : (c)2013-2014 UIZE
+|          /___ |   LICENSE : Available under MIT License or GNU General Public License
+|_______________|             http://www.uize.com/license.html
+*/
+
+/* Module Meta Data
+	type: Class
+	importance: 2
+	codeCompleteness: 100
+	docCompleteness: 100
+*/
+
+/*?
+	Introduction
+		The =Uize.Services.LocAdapter.Uize= module defines an adapter for the =Uize.Services.Loc= service, specifically to be used with the UIZE JavaScript Framework.
+
+		*DEVELOPERS:* `Chris van Rensburg`
+*/
+
 Uize.module ({
 	name:'Uize.Services.LocAdapter.Uize',
 	required:[
