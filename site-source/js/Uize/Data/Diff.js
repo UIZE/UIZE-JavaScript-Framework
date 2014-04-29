@@ -13,24 +13,24 @@
 	type: Package
 	importance: 1
 	codeCompleteness: 100
-	docCompleteness: 5
+	docCompleteness: 100
 */
 
 /*?
 	Introduction
-		The =Uize.Data.Diff= module provides methods for comparing the contents of two data objects and reporting the differences.
+		The =Uize.Data.Diff= module provides a way to compare all the leaf node properties of two data objects and report the property differences in the form of a `diff result` object.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 
 		In a Nutshell
 			The =Uize.Data.Diff= module makes it easy to compare two objects to determine how they differ.
 
-			The =Uize.Data.Diff.diff= method accepts two objects are arguments, along with an optional `property comparer` function, and then compares those two objects and returns a `diff result`.
+			The =Uize.Data.Diff.diff= method accepts two objects are arguments, along with an optional `property comparer` function, and then compares all the leaf node properties of those two objects and returns a `diff result`.
 
 			Diff Result
 				When the =Uize.Data.Diff.diff= method is used to compare two objects, it produces a diff result.
 
-				The diff result is an object whose structure is based on a union of the structures of the two objects being compared. Depending on the `property comparer` function that is used when performing the diff, the diff result can be a complete or sparse union of the structures of the objects being compared.
+				The diff result is an object whose structure is based on a union of the structures of the two objects being compared. Depending on the `property comparer` function that is used when performing the diff, the diff result can be a complete or sparse union of the structures of the objects being compared - it is not required that the diff result contain a property for every property that is compared.
 
 				The diff result can also be purely descriptive of the differences in properties between the objects being compared (eg. ='modified'=, ='added'=, ='removed'=, ='unchanged'=), or the diff result can reflect actual values from the properties (values for only the properties that are the same, values for only the properties that are different, etc.).
 
@@ -65,7 +65,7 @@
 				}
 				..................
 
-				In the diff result object, you will notice that there are properties for all of the combined properties of both of the objects being compared. This is due to the behavior of the `default property comparer`, which sets the values of the properties in the diff result object as descriptions of how the properties differ between the objects being compared.
+				In the diff result object, you will notice that there are properties for all of the combined properties of both of the objects being compared. This is due to the behavior of the `default property comparer`, which sets the values of the properties in the diff result object as descriptions of how the properties differ between the objects being compared - there are values in the diff result for properties that have been added or removed (ie. they don't exist in both objects).
 
 			Diffing is Recursive
 				When two objects are compared using the =Uize.Data.Diff.diff= method, the objects are compared recursively so that all leaf nodes are compared.
@@ -112,7 +112,7 @@
 				........................
 
 			Diffing Asymmetrical Objects
-				When two objects are compared using the =Uize.Data.Diff.diff= method, it is the union of the two objects that is compared recursively, so that all nodes of both objects are compared.
+				When two objects are compared using the =Uize.Data.Diff.diff= method, it is the union of the two objects that is compared recursively, so that all leaf nodes of both objects are compared.
 
 				EXAMPLE
 				........................
@@ -155,27 +155,37 @@
 			How Diffing is Performed
 				Comparing two objects using the =Uize.Data.Diff.diff= method involves the following process...
 
-				The method itereates recursively over the union of the two objects being compared. For each leaf node property, the method calls a `property comparer` function in order to compare the values of the property between the two objects. The `property comparer` function is passed two `property profile` objects as arguments. These property profile objects describe the values of the property for each of the two objects being compared. The property comparer function is expected to return a property profile object that describes the property that should be placed into the corresponding place in the diff result object.
+				- The method itereates recursively over the union of the two objects being compared.
+				- For each leaf node property, the method calls a `property comparer` function in order to compare the values of the property between the two objects.
+				- The `property comparer` function is passed two `property profile` objects as arguments. These property profile objects describe the values of the property for each of the two objects being compared.
+				- The property comparer function is expected to return a property profile object that describes the property that should be placed into the corresponding spot in the diff result object.
 
 			Property Comparer
-				.
+				The =Uize.Data.Diff.diff= method uses a `property comparer function` to compare the values of the leaf node property between the two objects being compared.
 
 				Property Comparer Function
+					A property comparer function should accept up to two `property profile` arguments, and should return a `property profile` as its result.
 
-					A property comparer function should...
-
-					- accept up to two `property profile` arguments
-					- return a `property profile` as its return value
+					Consider the following example of a property comparer function...
 
 					EXAMPLE
-					...
-					...
+					..............................................................................
+					function (obj1PropProfile,obj2PropProfile) {
+						return obj1PropProfile && !obj2PropProfile ? {value:'removed'} : undefined;
+					}
+					..............................................................................
+
+					The property comparer function in the above example can be used with the =Uize.Data.Diff.diff= method to find only the properties that exist in the first object (=obj1PropProfile=) but that don't exist in the second object (=obj2PropProfile=).
+
+					The function checks to see if the `property profile` for the property in the first object is truthy and falsy in the second object. If so, it returns a property profile with ='removed'= for the =value= property, which would result in the value ='removed'= being set for the corresponding property in the `diff result` object. Otherwise, it returns the value =undefined=, which would result in no property being added to the diff result object.
+
+					So, this property comparer function can be used to find just the properties that have been "removed" between the first object and the second object. If the returned `diff result` object is empty, then no properties have neen removed. If the `diff result` object is *not* empty, then its contents will indicate which properties have been removed.
 
 					Property Profile
 						In the context of a `property comparer function`, a property profile is either...
 
 						- an object, providing information on the name and value of the property
-						- the value =undefined=, indicating that the property doesn't exist for the object
+						- the value =undefined=, indicating that the property doesn't exist for one of the objects being compared, or shouldn't exist in the `diff result` object
 
 						When the property profile is an object value, it will be of the form...
 
@@ -187,16 +197,15 @@
 						...............................................
 
 					Returning a Property Profile
-						.
+						There are a few things to note about the `property profile` that is returned by the `property comparer function`...
 
-					### Value Diff Result
-						In the context of a `property comparer function`, a value diff result is either...
-
-						- the value =undefined=, indicating that no value should be placed into the diff result object for the current property being compared
-						- an object, containing a =value= property that provides the value that should be placed into the diff result object for the current property being compared
+						- If the value =undefined= is returned in place of a property profile object, then no property will be added to the `diff result` object for the property being compared.
+						- You may return one of the property profile arguments, so a check can be used to determine if the value for property from the first object should be used or if the value for the property from the second object should be used for the value of the property in the `diff result`.
+						- If a =key= property is present in the returned property profile object, its value will determine the name of the property in the diff result object - this makes it possible to perform key re-mapping / renaming when comparing two objects (see the example `Rename Keys for Leaf Nodes of an Object`).
+						- When returning a new object, the =key= property may be omitted, in which case the property name will be the name of the property being compared and will not be re-mapped.
 
 				Default Property Comparer
-					When no value is specified for the optional =propertyComparerFUNC= third argument, the default `property comparer` function is used.
+					When no value is specified for the optional =propertyComparerFUNC= third argument of the =Uize.Data.Diff.diff= method, the default `property comparer` function will be used.
 
 					The default property comparer function produces a comparison result value for every property being compared. Each property in the `diff result` object can have one of the following possible values...
 
@@ -222,7 +231,7 @@
 					.............................................................
 
 				Examples of Property Comparer Functions
-					The =Uize.Data.Diff.diff= method is extremely versatile and can be used with different types of `property comparer` function to achieve a wide variety of different effects.
+					The =Uize.Data.Diff.diff= method is extremely versatile and can be used with different types of `property comparer` functions to achieve a wide variety of different effects.
 
 					Find Added or Modified Values
 						In order to obtain the values for all properties that have been added or modified in the second object, the following `property comparer function` can be used...
@@ -243,13 +252,13 @@
 						.............................................................
 						function (obj1PropProfile,obj2PropProfile) {
 							return {
-								value:obj1PropProfile && !obj2PropProfile
-									? 'removed'
+								obj1PropProfile && !obj2PropProfile
+									? {value:'removed'}
 									: !obj1PropProfile && obj2PropProfile
-										? 'added'
+										? {value:'added'}
 										: obj1PropProfile.value === obj2PropProfile.value
 											? undefined
-											: 'modified'
+											: {value:'modified'}
 							};
 						}
 						.............................................................
@@ -259,17 +268,17 @@
 					Get a Summary of Structural Differences
 						In order to obtain a summary of just the structural differences between two objects, the following `property comparer function` can be used...
 
-						...............................................
+						..............................................
 						function (obj1PropProfile,obj2PropProfile) {
 							return {
-								value:obj1PropProfile && !obj2PropProfile
-									? 'removed'
+								obj1PropProfile && !obj2PropProfile
+									? {value:'removed'}
 									: !obj1PropProfile && obj2PropProfile
-										? 'added'
+										? {value:'added'}
 										: undefined
 							};
 						}
-						...............................................
+						..............................................
 
 						If the above `property compater function` is used when comparing two objects and the object returned by the =Uize.Data.Diff.diff= method is empty, then the objects being compared can be considered to have identical structure - even if the values of the properties may differ between the two objects.
 
@@ -279,18 +288,18 @@
 						...........................................................................
 						function (obj1PropProfile,obj2PropProfile) {
 							return {
-								value:obj1PropProfile && !obj2PropProfile
-									? 'removed'
+								obj1PropProfile && !obj2PropProfile
+									? {value:'removed'}
 									: !obj1PropProfile && obj2PropProfile
-										? 'added'
+										? {value:'added'}
 										: typeof obj1PropProfile.value !== typeof obj2PropProfile.value
-											? 'type mismatch'
+											? {value:'type mismatch'}
 											: undefined
 							};
 						}
 						...........................................................................
 
-						If the above `property compater function` is used when comparing two objects and the object returned by the =Uize.Data.Diff.diff= method is empty, then the objects being compared can be considered to have identical structure and type. This can be a useful way of testing if an object conforms to the structure and type requirements of a reference object.
+						If the above `property compater function` is used when comparing two objects and the object returned by the =Uize.Data.Diff.diff= method is empty, then the objects being compared can be considered to have identical structure and type. This can be a useful way of testing if an object conforms to the structure and type requirements of some reference object.
 
 					Get the Intersection Between Two Objects
 						In order to obtain the values for all properties that are identical in the objects being compared, the following `property comparer function` can be used...
@@ -371,7 +380,7 @@
 						.....................
 
 					Iterate Recursively Over the Leaf Nodes of an Object
-						The =Uize.Data.Diff.diff= method can be used to iteratively recurse over all the leaf nodes of an object.
+						The =Uize.Data.Diff.diff= method can be used to recursively iterate over all the leaf nodes of an object.
 
 						EXAMPLE
 						...............................................................
@@ -473,6 +482,16 @@
 						........................
 
 						Notice from the above example that not all keys have been renamed - only the keys for the leaf node properties. This is because the `property comparer function` is only called for leaf node properties.
+
+				### Basing Comparison Type on Key Name
+					.
+
+				### Recursive Arithmetic Processes
+					Sum the Leaf Node Properties of Two Objects
+						.
+
+					Obtain the Max Values of the Leaf Node Properties of Two Objects
+						.
 */
 
 Uize.module ({
@@ -556,7 +575,7 @@ Uize.module ({
 				/*?
 					Static Methods
 						Uize.Data.Diff.diff
-							Performs a diff between two objects, comparing all the corresponding leaf node properties, and reports the diff result as an object.
+							Performs a diff between two objects, comparing all the corresponding leaf node properties, and reports the difference in the form of a `diff result` object.
 
 							DIFFERENT USAGES
 
