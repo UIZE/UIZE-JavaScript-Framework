@@ -1,7 +1,122 @@
 Introduction
 	UIZE provides a system for automating various processes relating to the localization of a codebase.
 
-	Metrics Reports
+	Localization as a Service
+		UIZE exposes localization automation processes through a service, whose interface is defined in the =Uize.Services.Loc= abstract class.
+
+		The =Uize.Services.Loc= service module defines the following service methods...
+
+		- =metrics= - generates a `metrics report` for the `primary language` resource strings of a project
+		- =export= - gathers strings from `distributed resource files` and exports them to `consolidated language resources files`, for each of the project's `supported languages`
+		- =import= - distributes strings from the `consolidated language resources files` to `distributed resource files`, for each of the project's `supported languages`
+		- =exportJobs= - exports `translation job files` from the `consolidated language resources files`, for each of the project's `translatable languages`
+		- =importJobs= - imports translated strings from `translation job files` and merges them into the `consolidated language resources files`, for each of the project's `translatable languages`
+		- =extract= - extracts strings from the project's codebase and generates `distributed resource files` for the project's `primary language` (may not be supported for a project)
+
+		Localization Service Adapter
+			As a convenience, UIZE provides an adapter base class for the =Uize.Services.Loc= service that can be applied, with some protected method overrides and configuration, to a variety of different types of projects.
+
+			While it is possible to implement any adapter for the localization service, in reality there are sufficient commonalities between many different types of projects, such that it is beneficial to share implementation for the service adapter across as many different types of projects as possible. This is where the =Uize.Services.LocAdapter= module comes in. This module can be subclassed to create adapters for the localization service for different types of projects with minimal additional project type specific code needed.
+
+	Accessed Through a Build Script
+		The various localization methods can be accessed using the =Uize.Build.Loc= build script.
+
+		Running the Build Script
+			The localization build script can be run in NodeJS using the following command...
+
+			SYNTAX
+			..................................................................................
+			node [pathToUize]build.js Uize.Build.Loc project=[projectName] method=[methodName]
+			..................................................................................
+
+			Parameters
+				project
+					The =project= parameter is used to specify the project for which the specified localization method should be executed.
+
+					The value specified for the =project= parameter should match one of the keys in the =moduleConfigs ['Uize.Build.Loc'].projects= object of the =uize-config.json= file.
+
+					Executing a Method For All Projects
+						To execute a localization method for all projects listed in the config, one can either omit the =project= parameter or one can specify the special "*" wildcard value.
+
+						EXAMPLES
+						......................................................................
+						node [pathToUize]build.js Uize.Build.Loc method=[methodName]
+						node [pathToUize]build.js Uize.Build.Loc project=* method=[methodName]
+						......................................................................
+
+				method
+					The =method= parameter is used to specify the localization method that should be executed for the specified project.
+
+					The value of the =method= parameter should be the name of any of the `service methods` supported by the localization service.
+
+### Project ~~ Projects
+	.
+
+### Languages
+	Primary Language
+		.
+
+	Supported Languages
+		.
+
+	Translatable Languages
+		.
+
+Advanced Topics
+	Non-translatable Strings
+		Non-translatable strings are strings that should never be pseudo-localized and should never be sent to translators for translation.
+
+		Examples of non-translatable resource strings would be...
+
+		- URLs that should be different per language
+		- media asset IDs
+		- dimension values
+		- color values
+		- support e-mail addresses
+
+		It is a potential waste of money to send non-translatable strings to translators, since they likely won't know what to do with them and determining how to handle them may involve some costly back-and-forth communication between the project managers on both sides of the process. Worse still, accidental pseudo-localization of some non-translatable strings (such as IDs or URLs) may actually break the pseudo-localized application and hinder localization QA testing of the pseudo-localized version.
+
+		Non-translatable Strings Vary by Project
+			Different types of projects will likely have different varieties of non-translatable strings that it is convenient for the project to store in `distributed resource files`.
+
+			Therefore, it is up to each project to determine which strings are translatable and which strings are not. This is accomplished by implementing an override to the new =isTranslatableString= method in the `localization service adapter`. The implementation in the adapter base class just returns =true=, so all resource strings are considered translatable by default.
+
+			An implementation for the =isTranslatableString= method should expect to receive a single argument, being a string info object that describes any given resource string. The string info object will contain a =key= property that specifies the resource string's key name, along with a =value= property that specifies the value of the resource string for the `primary language`.
+
+			The method implementation should use the information in the string info object to determine a boolean return value, indicating whether or not the string is translatable. The implementation can use either or both of the =key= and =value= properties to reach its determination- whichever is best suited to the nature of the resource strings in the project.
+
+			EXAMPLE
+			..................................................................................
+			function (stringInfo) {
+				return (
+					!/_(ID|EMAIL)$/.test (stringInfo.key) &&  // it's an ID or an e-mail address
+					!/^https?:\/\//.test (stringInfo.value)   // it's a URL
+				);
+			}
+			..................................................................................
+
+			In the above example implementation for the =isTranslatableString= method, the method is first performing a test on the key of the resource string, checking to see if it ends with "_ID" or "_EMAIL". If this test fails, the method is then testing if the value of the resource string starts with "http://" or "https://".
+
+			Establish a Convention for Non-translatable Strings
+				While it is possible to write complex matching logic to test whether or not resource strings should be translatable, it is recommended that projects establish a simple and robust convention.
+
+				For example, a project could follow the convention that all non-translatable resource strings are indicated with a specific suffix or prefix in their key names. For instance, all non-translatable resource strings could have a "$" character appended to their key names.
+
+				EXAMPLE
+				............................................................
+				function (stringInfo) {
+					// string is translatable if its key doesn't end with "$"
+					return stringInfo.key.slice (-1) != '$';
+				}
+				............................................................
+
+				Following such a convention would provide the following benefits...
+
+				- it becomes clear from the `distributed resource files` exactly which strings are not to be translated
+				- the =isTranslatableString= test is simple, robust, and highly performant
+				- it is easy to add new non-translatable strings of different types later to a project later, without needing to update the implementation of the =isTranslatableString= method
+
+	Metrics Reports ~~ Metrics Report
 		A metrics report can be produced for a project by using the =metrics= localization method.
 
 		EXAMPLE
@@ -42,138 +157,107 @@ Introduction
 
 				The number of brand-specific resource files, expressed as a percentage of total resource files, is represented for convenience in the =brandSpecificResourceFilesPercent= property.
 
-	### Key Features
+### Key Features
+	.
+
+	Supports Multiple Projects
 		.
 
-		Supports Multiple Projects
-			.
-
-		Adaptable to Different Project Types
-			.
-
-		Performs Diffing to Reduce Translation Load
-			.
-
-		Performs Automatic Pseudo-localization
-			.
-
-	Accessed Through a Build Script
-		The various localization methods can be accessed using the =Uize.Build.Loc= build script.
-
-		Running the Build Script
-			The localization build script can be run in NodeJS using the following command...
-
-			SYNTAX
-			..................................................................................
-			node [pathToUize]build.js Uize.Build.Loc project=[projectName] method=[methodName]
-			..................................................................................
-
-			Parameters
-				project
-					The =project= parameter is used to specify the project for which the specified localization method should be executed.
-
-					The value specified for the =project= parameter should match one of the keys in the =moduleConfigs ['Uize.Build.Loc'].projects= object of the =uize-config.json= file.
-
-					Executing a Method For All Projects
-						To execute a localization method for all projects listed in the config, one can either omit the =project= parameter or one can specify the special "*" wildcard value.
-
-						EXAMPLES
-						......................................................................
-						node [pathToUize]build.js Uize.Build.Loc method=[methodName]
-						node [pathToUize]build.js Uize.Build.Loc project=* method=[methodName]
-						......................................................................
-
-				method
-					The =method= parameter is used to specify the localization method that should be executed for the specified project.
-
-					The value of the =method= parameter should be the name of any of the `service methods` supported by the localization service.
-
-		### Service Methods
-			.
-
-			metrics
-				Metrics can be generated for a project using the =metrics= method of the localization service.
-
-				.............................................................................
-				node [pathToUize]build.js Uize.Build.Loc project=[projectName] method=metrics
-				.............................................................................
-
-			export
-				.
-
-				............................................................................
-				node [pathToUize]build.js Uize.Build.Loc project=[projectName] method=export
-				............................................................................
-
-			import
-				.
-
-				............................................................................
-				node [pathToUize]build.js Uize.Build.Loc project=[projectName] method=import
-				............................................................................
-
-			exportJobs
-				.
-
-				................................................................................
-				node [pathToUize]build.js Uize.Build.Loc project=[projectName] method=exportJobs
-				................................................................................
-
-			importJobs
-				.
-
-				................................................................................
-				node [pathToUize]build.js Uize.Build.Loc project=[projectName] method=importJobs
-				................................................................................
-
-			extract
-				.
-
-				.............................................................................
-				node [pathToUize]build.js Uize.Build.Loc project=[projectName] method=extract
-				.............................................................................
-
-		Configuring Projects
-			.
-
-			Per Project Configuration Options
-				.
-
-				Service Adapter
-					.
-
-				Languages
-					.
-
-				Primary Language
-					.
-
-				Pseudo-locale
-					.
-
-			Common Project Configuration Options
-				.
-
-		Pseudo-localization
-			.
-
-	###
-		Distributed Resource Files
-			.
-
-		Consolidated Resource Files
-			.
-
-		Translation Job Files
-			.
-
-	### Use With Other Projects
+	Adaptable to Different Project Types
 		.
 
-	### Key Concepts
-		Translatable Words
+	Performs Diffing to Reduce Translation Load
+		.
+
+	Performs Automatic Pseudo-localization
+		.
+
+### Service Methods
+	.
+
+	metrics
+		Metrics can be generated for a project using the =metrics= method of the localization service.
+
+		.............................................................................
+		node [pathToUize]build.js Uize.Build.Loc project=[projectName] method=metrics
+		.............................................................................
+
+	export
+		.
+
+		............................................................................
+		node [pathToUize]build.js Uize.Build.Loc project=[projectName] method=export
+		............................................................................
+
+	import
+		.
+
+		............................................................................
+		node [pathToUize]build.js Uize.Build.Loc project=[projectName] method=import
+		............................................................................
+
+	exportJobs
+		.
+
+		................................................................................
+		node [pathToUize]build.js Uize.Build.Loc project=[projectName] method=exportJobs
+		................................................................................
+
+	importJobs
+		.
+
+		................................................................................
+		node [pathToUize]build.js Uize.Build.Loc project=[projectName] method=importJobs
+		................................................................................
+
+	extract
+		.
+
+		.............................................................................
+		node [pathToUize]build.js Uize.Build.Loc project=[projectName] method=extract
+		.............................................................................
+
+### Configuring Projects
+	.
+
+	Per Project Configuration Options
+		.
+
+		Service Adapter
 			.
 
-		Non-translatable Text
+		Languages
 			.
+
+		Primary Language
+			.
+
+		Pseudo-locale
+			.
+
+	Common Project Configuration Options
+		.
+
+	Pseudo-localization
+		.
+
+###
+	Distributed Resource Files
+		.
+
+	Consolidated Resource Files
+		.
+
+	Translation Job Files
+		.
+
+### Use With Other Projects
+	.
+
+### Key Concepts
+	Translatable Words
+		.
+
+	Non-translatable Text
+		.
 
