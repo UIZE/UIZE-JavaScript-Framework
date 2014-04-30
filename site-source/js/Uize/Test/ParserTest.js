@@ -36,13 +36,12 @@ Uize.module ({
 					return {
 						title:_title,
 						test:function () {
-							console.log ('>>>>>>> ' + this.Class.moduleName);
-							var _parser = new Uize.getModuleByName (this.Class.parserClass);
+							var _parser = new (Uize.getModuleByName (this.Class.parserClass));
 							_parser.parse (_sourceStr,_index);
 							return (
-								this.expect (_expectedParsedSegment,_parser.name) &&
+								//this.expect (_expectedParsedSegment,_parser.name) &&
 								this.expect (_expectedParsedSegment.length,_parser.length) &&
-								this.expect (!!_expectedIsValid,_parser.isValid)
+								this.expect (_expectedIsValid,_parser.isValid)
 							);
 						}
 					};
