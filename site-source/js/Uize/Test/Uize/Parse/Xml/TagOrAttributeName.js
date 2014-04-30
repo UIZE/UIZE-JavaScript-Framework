@@ -40,42 +40,58 @@ Uize.module ({
 						title:'A tag or attribute name can be parsed',
 						test:[
 							Uize.Test.ParserTest.parserTest (
-								'An empty strings fails parsing as a tag/attribute name',
-								'',
-								'',
-								false
+								'An empty string fails parsing as a tag/attribute name',
+								[''],
+								{
+									name:'',
+									length:0,
+									isValid:false
+								}
 							),
 							Uize.Test.ParserTest.parserTest (
 								'A string fails parsing as a tag/attribute name if the first character is not a valid tag/attribute name start character',
-								'0img',
-								'',
-								false
+								['0img'],
+								{
+									name:'',
+									length:0,
+									isValid:false
+								}
 							),
 							Uize.Test.ParserTest.parserTest (
 								'A string is successfully parsed as a tag/attribute name if its first character is a valid tag/attribute name start character',
-								'_###',
-								'_',
-								true
+								['_###'],
+								{
+									name:'_',
+									length:1,
+									isValid:true
+								}
 							),
 							Uize.Test.ParserTest.parserTest (
 								'All characters, following the initial start character, that are valid tag/attribute name continuation characters are included in the parse tag/attribute name',
-								'__abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-0123456789###',
-								'__abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-0123456789',
-								true
+								['__abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-0123456789###'],
+								{
+									name:'__abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-0123456789',
+									length:65,
+									isValid:true
+								}
 							),
 							Uize.Test.ParserTest.parserTest (
 								'When the value specified for the optional starting index starts the parser at a valid tag start character, then parsing succeeds',
-								'%%% img',
-								'img',
-								true,
-								4
+								['%%% img',4],
+								{
+									name:'img',
+									length:3,
+									isValid:true
+								}
 							),
 							Uize.Test.ParserTest.parserTest (
 								'When the value specified for the optional starting index starts the parser at a non-valid tag start character, then parsing fails',
-								'img %%%',
-								'',
-								false,
-								3
+								['img %%%',3],
+								{
+									name:'',
+									length:0,
+									isValid:false
+								}
 							)
 						]
 					},

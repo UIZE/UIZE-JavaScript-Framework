@@ -31,18 +31,23 @@ Uize.module ({
 
 		return _superclass.subclass ({
 			staticMethods:{
-				parserTest:function (_title,_sourceStr,_expectedParsedSegment,_expectedIsValid,_index) {
-					_index = _index || 0;
+				parserTest:function (_title,_arguments,_expectedInstanceState) {
 					return {
 						title:_title,
 						test:function () {
-							var _parser = new (Uize.getModuleByName (this.Class.parserClass));
-							_parser.parse (_sourceStr,_index);
-							return (
-								//this.expect (_expectedParsedSegment,_parser.name) &&
-								this.expect (_expectedParsedSegment.length,_parser.length) &&
-								this.expect (_expectedIsValid,_parser.isValid)
-							);
+							var
+								_parser = new (Uize.getModuleByName (this.Class.parserClass)),
+								_result = true
+							;
+							_parser.parse.apply (_parser,_arguments);
+							for (var _property in _expectedInstanceState) {
+								if (
+									!(_result = _result && this.expect (_expectedInstanceState [_property],_parser [_property]))
+								)
+									break;
+								;
+							}
+							return _result;
 						}
 					};
 				}

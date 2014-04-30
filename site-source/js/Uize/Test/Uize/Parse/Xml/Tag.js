@@ -52,25 +52,30 @@ Uize.module ({
 									//console.log (_tagParser.serialize ());
 									return true;
 								}
-							}
-							,
+							},
 							Uize.Test.ParserTest.parserTest (
 								'',
-								'<',
-								'',
-								false
+								['<'],
+								{
+									length:0,
+									isValid:false
+								}
 							),
 							Uize.Test.ParserTest.parserTest (
 								'',
-								'<img',
-								'<img',
-								true
+								['<img'],
+								{
+									length:4,
+									isValid:true
+								}
 							),
 							Uize.Test.ParserTest.parserTest (
 								'',
-								'<img>',
-								'<img>',
-								true
+								['<img>'],
+								{
+									length:5,
+									isValid:true
+								}
 							)
 						]
 					}
