@@ -115,8 +115,8 @@ Uize.module ({
 											}
 										}
 									});
-									
 									......................................................
+									
 									SHORT-HAND EXAMPLE
 									......................................................
 									MyNamespace.MyWidgetClass = Uize.Widget.mDeclarativeChildren.subclass ({
@@ -127,7 +127,6 @@ Uize.module ({
 									});
 									......................................................
 									
-									......................................................
 									FUNCTION EXAMPLE
 									......................................................
 									MyNamespace.MyWidgetClass = Uize.Widget.mDeclarativeChildren.subclass ({
