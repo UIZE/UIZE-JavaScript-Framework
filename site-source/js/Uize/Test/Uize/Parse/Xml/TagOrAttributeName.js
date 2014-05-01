@@ -25,91 +25,96 @@
 
 Uize.module ({
 	name:'Uize.Test.Uize.Parse.Xml.TagOrAttributeName',
-	builder:function () {
+	superclass:'Uize.Test.ParserTest',
+	builder:function (_superclass) {
 		'use strict';
 
-		function _parserTest (_title,_sourceStr,_expectedParsedSegment,_expectedIsValid,_index) {
-			_index = _index || 0;
-			return {
-				title:_title,
-				test:function () {
-					var _parser = new Uize.Parse.Xml.TagOrAttributeName;
-					_parser.parse (_sourceStr,_index);
-					return (
-						this.expect (_expectedParsedSegment,_parser.name) &&
-						this.expect (_expectedParsedSegment.length,_parser.length) &&
-						this.expect (_expectedIsValid,_parser.isValid)
-					);
-				}
-			};
-		}
+		return _superclass.subclass ({
+			staticProperties:{parserClass:'Uize.Parse.Xml.TagOrAttributeName'},
 
-		return Uize.Test.resolve ({
-			title:'Test for Uize.Parse.Xml.TagOrAttributeName Module',
-			test:[
-				Uize.Test.requiredModulesTest ('Uize.Parse.Xml.TagOrAttributeName'),
-				{
-					title:'A tag or attribute name can be parsed',
-					test:[
-						_parserTest (
-							'An empty strings fails parsing as a tag/attribute name',
-							'',
-							'',
-							false
-						),
-						_parserTest (
-							'A string fails parsing as a tag/attribute name if the first character is not a valid tag/attribute name start character',
-							'0img',
-							'',
-							false
-						),
-						_parserTest (
-							'A string is successfully parsed as a tag/attribute name if its first character is a valid tag/attribute name start character',
-							'_###',
-							'_',
-							true
-						),
-						_parserTest (
-							'All characters, following the initial start character, that are valid tag/attribute name continuation characters are included in the parse tag/attribute name',
-							'__abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-0123456789###',
-							'__abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-0123456789',
-							true
-						),
-						_parserTest (
-							'When the value specified for the optional starting index starts the parser at a valid tag start character, then parsing succeeds',
-							'%%% img',
-							'img',
-							true,
-							4
-						),
-						_parserTest (
-							'When the value specified for the optional starting index starts the parser at a non-valid tag start character, then parsing fails',
-							'img %%%',
-							'',
-							false,
-							3
-						)
-					]
-				},
-				{
-					title:'Arguments passed to the parser object\'s constructor are used for initial parsing during construction',
-					test:function () {
-						var
-							_classPrototype = Uize.Parse.Xml.TagOrAttributeName.prototype,
-							_parse = _classPrototype.parse,
-							_actualParseSource,
-							_actualParseIndex
-						;
-						_classPrototype.parse = function (_source,_index) {
-							_actualParseSource = _source;
-							_actualParseIndex = _index;
-						};
-						var _parser = new Uize.Parse.Xml.TagOrAttributeName ('foo',10);
-						_classPrototype.parse = _parse;
-						return this.expect ('foo',_actualParseSource) && this.expect (10,_actualParseIndex);
+			set:{
+				title:'Test for Uize.Parse.Xml.TagOrAttributeName Module',
+				test:[
+					Uize.Test.requiredModulesTest ('Uize.Parse.Xml.TagOrAttributeName'),
+					{
+						title:'A tag or attribute name can be parsed',
+						test:[
+							Uize.Test.ParserTest.parserTest (
+								'An empty string fails parsing as a tag/attribute name',
+								[''],
+								{
+									name:'',
+									length:0,
+									isValid:false
+								}
+							),
+							Uize.Test.ParserTest.parserTest (
+								'A string fails parsing as a tag/attribute name if the first character is not a valid tag/attribute name start character',
+								['0img'],
+								{
+									name:'',
+									length:0,
+									isValid:false
+								}
+							),
+							Uize.Test.ParserTest.parserTest (
+								'A string is successfully parsed as a tag/attribute name if its first character is a valid tag/attribute name start character',
+								['_###'],
+								{
+									name:'_',
+									length:1,
+									isValid:true
+								}
+							),
+							Uize.Test.ParserTest.parserTest (
+								'All characters, following the initial start character, that are valid tag/attribute name continuation characters are included in the parse tag/attribute name',
+								['__abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-0123456789###'],
+								{
+									name:'__abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-0123456789',
+									length:65,
+									isValid:true
+								}
+							),
+							Uize.Test.ParserTest.parserTest (
+								'When the value specified for the optional starting index starts the parser at a valid tag start character, then parsing succeeds',
+								['%%% img',4],
+								{
+									name:'img',
+									length:3,
+									isValid:true
+								}
+							),
+							Uize.Test.ParserTest.parserTest (
+								'When the value specified for the optional starting index starts the parser at a non-valid tag start character, then parsing fails',
+								['img %%%',3],
+								{
+									name:'',
+									length:0,
+									isValid:false
+								}
+							)
+						]
+					},
+					{
+						title:'Arguments passed to the parser object\'s constructor are used for initial parsing during construction',
+						test:function () {
+							var
+								_classPrototype = Uize.Parse.Xml.TagOrAttributeName.prototype,
+								_parse = _classPrototype.parse,
+								_actualParseSource,
+								_actualParseIndex
+							;
+							_classPrototype.parse = function (_source,_index) {
+								_actualParseSource = _source;
+								_actualParseIndex = _index;
+							};
+							var _parser = new Uize.Parse.Xml.TagOrAttributeName ('foo',10);
+							_classPrototype.parse = _parse;
+							return this.expect ('foo',_actualParseSource) && this.expect (10,_actualParseIndex);
+						}
 					}
-				}
-			]
+				]
+			}
 		});
 	}
 });

@@ -1,0 +1,74 @@
+The new The =Uize.Data.Diff= module provides a way to compare all the leaf node properties of two data objects and report the property differences in the form of a diff result object.
+
+The =Uize.Data.Diff= module makes it easy to compare two objects to determine how they differ. The =Uize.Data.Diff.diff= method, provided in this module, accepts two objects are arguments, along with an optional property comparer function, and then compares all the leaf node properties of those two objects and returns a diff result.
+
+EXAMPLE
+........................
+Uize.Data.Diff.diff (
+	// object 1
+	{
+		foo:{
+			bar:'barValue',
+			baz:'bazValue'
+		},
+		qux:'quxValue'
+	},
+
+	// object 2
+	{
+		bar:{
+			foo:'fooValue',
+			baz:'bazValue'
+		},
+		qux:'quxValue'
+	}
+);
+........................
+
+RESULT
+....................
+{
+	foo:{
+		bar:'removed',
+		baz:'removed'
+	},
+	qux:'unchanged',
+	bar:{
+		foo:'added',
+		baz:'added'
+	}
+}
+....................
+
+How Diffing is Performed
+	Comparing two objects using the =Uize.Data.Diff.diff= method involves the following process...
+
+	- The method itereates recursively over the union of the two objects being compared.
+	- For each leaf node property, the method calls a property comparer function in order to compare the values of the property between the two objects.
+	- The property comparer function is passed two property profile objects as arguments. These property profile objects describe the values of the property for each of the two objects being compared.
+	- The property comparer function is expected to return a property profile object that describes the property that should be placed into the corresponding spot in the diff result object.
+
+A Versatile Module
+	The =Uize.Data.Diff.diff= method, provided in this module, is extremely versatile and can be used to achieve a wide variety of different effects, including...
+
+	- find added or modified values
+	- get a summary of just the differences
+	- get a summary of structural differences
+	- get a summary of structural and type differences
+	- get the intersection between two objects
+	- perform a conditional merge
+	- create an initialized clone of an object
+	- iterate recursively over the leaf nodes of an object
+	- map values for leaf nodes of an object
+	- rename keys for leaf nodes of an object
+	- sum the leaf node properties of two objects
+	- obtain the max values of the leaf node properties of two objects
+
+Comprehensively Documented and Tested
+	The =Uize.Data.Diff= module is comprehensively [[Uize.Data.Diff][documented]] and has exhaustive unit tests in the =Uize.Test.Uize.Data.Diff= test module.
+
+....................................................................................
+<< metadata >>
+
+title: 2014-04-30 - NEW MODULE: Uize.Data.Diff
+....................................................................................

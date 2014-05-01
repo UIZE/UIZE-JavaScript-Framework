@@ -4,14 +4,14 @@
 |    /    O /   |    MODULE : Uize.Services.Loc Class
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
-| /____/ /__/_| | COPYRIGHT : (c)2014 UIZE
+| /____/ /__/_| | COPYRIGHT : (c)2013-2014 UIZE
 |          /___ |   LICENSE : Available under MIT License or GNU General Public License
 |_______________|             http://www.uize.com/license.html
 */
 
 /* Module Meta Data
 	type: Class
-	importance: 4
+	importance: 2
 	codeCompleteness: 100
 	docCompleteness: 2
 */

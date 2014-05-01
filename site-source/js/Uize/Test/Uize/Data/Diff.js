@@ -353,6 +353,47 @@ Uize.module ({
 										world:[undefined,'world']
 									}
 								}
+							],
+							['The key property in the property profile object returned by a property comparer function is used to determine the name of the property added to the diff result',
+								[
+									{
+										leafNode1:'foo',
+										leafNode2:'bar',
+										nonLeadNode1:{
+											leafNode1:'foo',
+											leadNode2:'bar'
+										},
+										nonLeafNode2:{
+											leafNode1:'foo',
+											leafNode2:'bar',
+											nonLeafNode1:{
+												leafNode1:'foo',
+												leadNode2:'bar'
+											}
+										}
+									},
+									{},
+									function (_propertyProfile) {
+										_propertyProfile.key = _propertyProfile.key.toUpperCase ();
+										return _propertyProfile;
+									}
+								],
+								{
+									LEAFNODE1:'foo',
+									LEAFNODE2:'bar',
+									nonLeadNode1:{
+										LEAFNODE1:'foo',
+										LEADNODE2:'bar'
+									},
+									nonLeafNode2:{
+										LEAFNODE1:'foo',
+										LEAFNODE2:'bar',
+										nonLeafNode1:{
+											LEAFNODE1:'foo',
+											LEADNODE2:'bar'
+										}
+									}
+								}
 							]
 					]]
 				])

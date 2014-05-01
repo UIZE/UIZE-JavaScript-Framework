@@ -1,6 +1,10 @@
-This document lists official news announcements that need to be created for developments that have already taken place.
+NEW MODULE: Uize.Str.Whitespace
+	Still to do...
 
-NEW MODULE: Uize.Data.Diff
+	- write documentation
+	- write news announcement
+
+NEW MODULE: Uize.Loc.Pseudo
 	Still to do...
 
 	- write documentation
@@ -17,18 +21,6 @@ NEW MODULE: Uize.Util.RegExpComposition
 	Still to do...
 
 	- write unit tests
-	- write documentation
-	- write news announcement
-
-NEW MODULE: Uize.Str.Whitespace
-	Still to do...
-
-	- write documentation
-	- write news announcement
-
-NEW MODULE: Uize.Loc.Pseudo
-	Still to do...
-
 	- write documentation
 	- write news announcement
 

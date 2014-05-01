@@ -1,7 +1,7 @@
 /*______________
 |       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
 |     /      /  |   ---------------------------------------------------
-|    /    O /   |    MODULE : Uize.Parse.Xml.TagOrAttributeName Object
+|    /    O /   |    MODULE : Uize.Parse.JavaProperties.PropertyName Object
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
 | /____/ /__/_| | COPYRIGHT : (c)2014 UIZE
@@ -11,28 +11,40 @@
 
 /* Module Meta Data
 	type: Object
-	importance: 4
-	codeCompleteness: 100
+	importance: 1
+	codeCompleteness: 1
 	docCompleteness: 2
 */
 
 /*?
 	Introduction
-		The =Uize.Parse.Xml.TagOrAttributeName= module provides methods for parsing and serializing tag names or attribute names of XML tags.
+		The =Uize.Parse.JavaProperties.PropertyName= module provides methods for parsing and serializing property names in [[http://en.wikipedia.org/wiki/.properties][Java properties]] files.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 */
 
 Uize.module ({
-	name:'Uize.Parse.Xml.TagOrAttributeName',
+	name:'Uize.Parse.JavaProperties.PropertyName',
+	required:[
+		'Uize.Str.Whitespace',
+		'Uize.Str.Replace',
+		'Uize.Parse.JavaProperties.UnicodeEscaped'
+	],
 	builder:function () {
 		'use strict';
 
 		var
+			/*** Variables for Performance Optimization ***/
+				_isNonWhitespace = Uize.Str.Whitespace.isNonWhitespace,
+
 			/*** General Variables ***/
-				_tagNameStartChars = '_abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ',
-				_tagNameStartCharsLookup = _charsLookup (_tagNameStartChars),
-				_tagNameContinueCharsLookup = _charsLookup (_tagNameStartChars + '-0123456789')
+				_terminatingCharsLookup = _charsLookup (' :='),
+				_serializerEscaper = Uize.Str.Replace.replacerByLookup ({
+					'\\':'\\\\',
+					':':'\\:',
+					'=':'\\=',
+					' ':'\\ '
+				})
 		;
 
 		/*** Utility Functions ***/
@@ -50,7 +62,6 @@ Uize.module ({
 					index:0,
 					length:0,
 					isValid:false,
-					namespace:'',
 					name:'',
 
 					parse:function (_source,_index) {
@@ -59,34 +70,32 @@ Uize.module ({
 							_sourceLength = (m.source = _source = _source || '').length
 						;
 						m.index = _index || (_index = 0);
-						m.namespace = m.name = '';
 						m.isValid = false;
-						if (_tagNameStartCharsLookup [_source.charAt (_index)]) {
+						if (_isNonWhitespace (_source.charAt (_index))) {
 							m.isValid = true;
 							_index++;
-							while (_index < _sourceLength && _tagNameContinueCharsLookup [_source.charAt (_index)])
-								_index++
+							var
+								_inEscape = false,
+								_char
 							;
-							if (_source.charAt (_index) == ':') {
-								m.namespace = _source.slice (m.index,_index);
-								var _namePos = ++_index;
-								if (_tagNameStartCharsLookup [_source.charAt (_index)]) {
-									_index++;
-									while (_index < _sourceLength && _tagNameContinueCharsLookup [_source.charAt (_index)])
-										_index++
-									;
-									m.name = _source.slice (_namePos,_index);
-								}
-							} else {
-								m.name = _source.slice (m.index,_index);
+							while (
+								_index < _sourceLength &&
+								(_inEscape || !_terminatingCharsLookup [_char = _source.charAt (_index)])
+							) {
+								_inEscape = !_inEscape && _char == '\\';
+								_index++;
 							}
+							m.name = _source.slice (m.index,_index).replace (/\\(.)/g,'$1');
 							m.length = _index - m.index;
 						}
 					},
 
 					serialize:function () {
-						var m = this;
-						return m.isValid ? (m.namespace + (m.namespace && ':') + m.name) : '';
+						return (
+							this.isValid
+								? Uize.Parse.JavaProperties.UnicodeEscaped.to (_serializerEscaper (this.name))
+								: ''
+						);
 					}
 				}
 			}

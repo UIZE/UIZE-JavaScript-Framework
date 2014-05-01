@@ -268,10 +268,15 @@ Uize.module ({
 												}
 											} else if (_bindingType == 'html' || _bindingType == 'innerHTML') {
 												_addInnerHtmlReplacement (_node,_bindingPropertyReference);
-											} else if (_bindingType == '?') {
+											} else if (_bindingType == '?' || _bindingType == 'show') {
 												_addStylePropertyReplacement (
 													'display',
 													'(' + _bindingPropertyReference + ' ? \'\' : \'none\')'
+												);
+											} else if (_bindingType == 'hide') {
+												_addStylePropertyReplacement (
+													'display',
+													'(' + _bindingPropertyReference + ' ? \'none\' : \'\')'
 												);
 											} else if (_bindingType.charCodeAt (0) == 64) {
 												var _attributeName = _bindingType.slice (1);

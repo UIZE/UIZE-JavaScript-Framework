@@ -1691,26 +1691,27 @@ Uize.module ({
 					*/
 				},
 
+				set:function (_properties) {
+					var m = this;
+					if (_properties && !Uize.isInstance (m)) {
+						/*** resolve test property ***/
+							var _test = _properties.test;
+							if (Uize.isArray (_test)) {
+								for (
+									var _subtestNo = -1, _subtestsLength = _test.length, _subtest;
+									++_subtestNo < _subtestsLength;
+								)
+									if ((_subtest = _test [_subtestNo]).constructor == Object)
+										_test [_subtestNo] = m.resolve (_subtest)
+								;
+							}
+					}
+					_superclass.set.apply (m,arguments);
+				},
+
 				/*** factory methods for creating test classes using declarative syntax ***/
 					resolve:function (_test) {
-						if (!Uize.Util.Oop.inheritsFrom (_test,Uize.Test)) {
-							var _testProperties = _test;
-
-							/*** if test property is an array, then resolve all the subtests ***/
-								var _subtests = _testProperties.test;
-								if (Uize.isArray (_subtests)) {
-									for (
-										var _subtestNo = -1, _subtestsLength = _subtests.length, _subtest;
-										++_subtestNo < _subtestsLength;
-									)
-										if ((_subtest = _subtests [_subtestNo]).constructor == Object)
-											_subtests [_subtestNo] = this.resolve (_subtest)
-									;
-								}
-
-							(_test = this.subclass ()).set (_testProperties);
-						}
-						return _test;
+						return Uize.Util.Oop.inheritsFrom (_test,Uize.Test) ? _test : this.subclass ({set:_test});
 						/*?
 							Static Methods
 								Uize.Test.resolve
