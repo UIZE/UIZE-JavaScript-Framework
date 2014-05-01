@@ -12,13 +12,13 @@
 /* Module Meta Data
 	type: Object
 	importance: 4
-	codeCompleteness: 1
+	codeCompleteness: 100
 	docCompleteness: 2
 */
 
 /*?
 	Introduction
-		The =Uize.Parse.Xml.TagOrAttributeName= module provides methods for parsing and serializing tag names of XML tags.
+		The =Uize.Parse.Xml.TagOrAttributeName= module provides methods for parsing and serializing tag names or attribute names of XML tags.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 */
