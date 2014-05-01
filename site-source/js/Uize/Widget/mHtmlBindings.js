@@ -84,6 +84,13 @@ Uize.module ({
 											};
 										} else if (_bindingType == '?') {
 											_updater = function (_propertyValue) {this.displayNode (_nodeName,!!_propertyValue)};
+										} else if (_bindingType == 'show' || _bindingType == 'hide') {
+											_updater = function (_propertyValue) {
+												this.setNodeStyle (
+													_nodeName,
+													{display:!!_propertyValue == (_bindingType == 'show') ? '' : 'none'}
+												);
+											};
 										} else if (_bindingType.charCodeAt (0) == 64) {
 											var _attributeName = _bindingType.slice (1);
 											_updater = function (_propertyValue) {
