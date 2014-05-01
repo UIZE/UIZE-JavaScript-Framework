@@ -50,6 +50,17 @@ Uize.module ({
 							return _result;
 						}
 					};
+				},
+
+				serializerTest:function (_title,_instanceState,_expected) {
+					return {
+						title:_title,
+						test:function () {
+							var _parser = new (Uize.getModuleByName (this.Class.parserClass));
+							Uize.copyInto (_parser,_instanceState);
+							return this.expect (_expected,_parser.serialize ());
+						}
+					};
 				}
 			},
 
