@@ -36,17 +36,26 @@ Uize.module ({
 						title:_title,
 						test:function () {
 							var
-								_parser = new (Uize.getModuleByName (this.Class.parserClass)),
+								m = this,
+								_parser = new (Uize.getModuleByName (m.Class.parserClass)),
 								_result = true
 							;
-							_parser.parse.apply (_parser,_arguments);
-							for (var _property in _expectedInstanceState) {
-								if (
-									!(_result = _result && this.expect (_expectedInstanceState [_property],_parser [_property]))
-								)
-									break;
-								;
+							function _expectObjectProperties (_expectedProperties,_actualProperties) {
+								for (var _property in _expectedProperties) {
+									var
+										_expectedProperty = _expectedProperties [_property],
+										_actualProperty = _actualProperties [_property]
+									;
+									if (Uize.isPlainObject (_expectedProperty)) {
+										_expectObjectProperties (_expectedProperty,_actualProperty);
+									} else {
+										_result = m.expect (_expectedProperty,_actualProperty);
+									}
+									if (!_result) break;
+								}
 							}
+							_parser.parse.apply (_parser,_arguments);
+							_expectObjectProperties (_expectedInstanceState,_parser);
 							return _result;
 						}
 					};
@@ -57,7 +66,7 @@ Uize.module ({
 						title:_title,
 						test:function () {
 							var _parser = new (Uize.getModuleByName (this.Class.parserClass));
-							Uize.copyInto (_parser,_instanceState);
+							Uize.mergeInto (_parser,_instanceState);
 							return this.expect (_expected,_parser.serialize ());
 						}
 					};
