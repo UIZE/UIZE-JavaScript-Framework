@@ -19,3 +19,7 @@ Fix Issue with Double Unescaping
 	- unescaping of backslash escaped characters could be added to the Uize.Parse.JavaProperties.UnicodeEscaped module
 	- dealing with unescaping could be handled during the character-by-character parsing in the property value parser
 
+Reference Info
+	- http://en.wikipedia.org/wiki/.properties
+	- http://docs.oracle.com/javase/6/docs/api/java/util/Properties.html#load%28java.io.Reader%29
+
