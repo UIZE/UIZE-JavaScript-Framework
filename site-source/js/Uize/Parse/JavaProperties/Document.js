@@ -81,9 +81,10 @@ Uize.module ({
 						while (
 							_index < _sourceLength &&
 							(
-								_tryParseItem ('Property') ||
 								_tryParseItem ('Comment') ||
-								_eatWhitespace ()
+								_tryParseItem ('Property') ||
+								_eatWhitespace () ||
+								true
 							)
 						);
 						m.length = _index - m.index;
