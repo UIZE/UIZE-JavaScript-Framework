@@ -1,7 +1,7 @@
 /*______________
 |       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
 |     /      /  |   ---------------------------------------------------
-|    /    O /   |    MODULE : Uize.Parse.JavaProperties.PropertyName Object
+|    /    O /   |    MODULE : Uize.Parse.JavaProperties.Comment Object
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
 | /____/ /__/_| | COPYRIGHT : (c)2014 UIZE
@@ -18,18 +18,13 @@
 
 /*?
 	Introduction
-		The =Uize.Parse.JavaProperties.PropertyName= module provides methods for parsing and serializing property names in [[http://en.wikipedia.org/wiki/.properties][Java properties]] files.
+		The =Uize.Parse.JavaProperties.Comment= module provides methods for parsing and serializing property names in [[http://en.wikipedia.org/wiki/.properties][Java properties]] files.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 */
 
 Uize.module ({
-	name:'Uize.Parse.JavaProperties.PropertyName',
-	required:[
-		'Uize.Str.Whitespace',
-		'Uize.Str.Replace',
-		'Uize.Parse.JavaProperties.UnicodeEscaped'
-	],
+	name:'Uize.Parse.JavaProperties.Comment',
 	builder:function () {
 		'use strict';
 
@@ -38,13 +33,7 @@ Uize.module ({
 				_isNonWhitespace = Uize.Str.Whitespace.isNonWhitespace,
 
 			/*** General Variables ***/
-				_terminatingCharsLookup = _charsLookup (' :='),
-				_serializerEscaper = Uize.Str.Replace.replacerByLookup ({
-					'\\':'\\\\',
-					':':'\\:',
-					'=':'\\=',
-					' ':'\\ '
-				})
+				_commentStartCharacterLookup = _charsLookup ('!#')
 		;
 
 		/*** Utility Functions ***/
@@ -62,7 +51,7 @@ Uize.module ({
 					index:0,
 					length:0,
 					isValid:false,
-					name:'',
+					comment:'',
 
 					parse:function (_source,_index) {
 						var
@@ -70,32 +59,22 @@ Uize.module ({
 							_sourceLength = (m.source = _source = _source || '').length
 						;
 						m.index = _index || (_index = 0);
-						m.isValid = false;
-						if (_isNonWhitespace (_source.charAt (_index))) {
-							m.isValid = true;
-							_index++;
-							var
-								_inEscape = false,
-								_char
-							;
-							while (
-								_index < _sourceLength &&
-								(_inEscape || !_terminatingCharsLookup [_char = _source.charAt (_index)])
-							) {
-								_inEscape = !_inEscape && _char == '\\';
-								_index++;
-							}
-							m.name = _source.slice (m.index,_index).replace (/\\(.)/g,'$1');
+						if (m.isValid = !!_commentStartCharacterLookup [_source.charAt (_index)]) {
+							var _commentBodyStartPos = _index + 1;
+							_index = Math.min (
+								(_source.indexOf ('\r',_commentBodyStartPos) + 1 || _sourceLength + 1) - 1,
+								(_source.indexOf ('\n',_commentBodyStartPos) + 1 || _sourceLength + 1) - 1
+							);
+							m.comment = _source.slice (_commentBodyStartPos,_index);
 							m.length = _index - m.index;
+						} else {
+							m.comment = '';
+							m.length = 0;
 						}
 					},
 
 					serialize:function () {
-						return (
-							this.isValid
-								? Uize.Parse.JavaProperties.UnicodeEscaped.to (_serializerEscaper (this.name))
-								: ''
-						);
+						return this.isValid ? '#' + this.comment : '';
 					}
 				}
 			}

@@ -23,11 +23,55 @@
 		*DEVELOPERS:* `Chris van Rensburg`
 
 		In a Nutshell
-			Whitespace Characters
+			Whitespace Characters ~~ Whitespace Character
 				.
 
-			Non-whitespace Characters
-				.
+				...
+				<< table >>
+
+				title: Fooo
+				data
+				:| Code | Escape | Description |
+				:| 9 | \t | Horizontal Tab (HT) |
+				:| 10 | \n | Line Feed (LF) |
+				:| 11 | \x0b | Vertical Tab (VT) |
+				:| 12 | \f | Form Feed (FF) |
+				:| 13 | \r | Carriage Return (CR) |
+				:| 32 | \x20 | Space |
+				:| 160 | \xa0 | Non-breaking space |
+				:| 8192 | \u2000 | -- |
+				:| 8193 | \u2001 | -- |
+				:| 8194 | \u2002 | En Space |
+				:| 8195 | \u2003 | Em Space |
+				:| 8196 | \u2004 | -- |
+				:| 8197 | \u2005 | Four-per-em Space |
+				:| 8198 | \u2006 | -- |
+				:| 8199 | \u2007 | Figure Space |
+				:| 8200 | \u2008 | Punctuation Space |
+				:| 8201 | \u2009 | Thin Space |
+				:| 8202 | \u200a | Hair Space |
+				:| 8203 | \u200b | Zero-width Space |
+				:| 8232 | \u2028 | Line Separator |
+				:| 8233 | \u2029 | Paragraph Separator |
+				:| 12288 | \u3000 | Ideographic Space |
+				...
+
+				The =Uize.Str.Whitespace= module provides the following methods for dealing with whitespace characters...
+
+				- =Uize.Str.Whitespace.isWhitespace=
+				- =Uize.Str.Whitespace.hasWhitespace=
+				- =Uize.Str.Whitespace.indexOfWhitespace=
+				- =Uize.Str.Whitespace.lastIndexOfWhitespace=
+
+			Non-whitespace Characters ~~ Non-whitespace Character
+				Non-whitespace characters are defined simply as any characters that don't fit the definition for `whitespace characters`
+
+				The =Uize.Str.Whitespace= module provides the following methods for dealing with non-whitespace characters...
+
+				- =Uize.Str.Whitespace.isNonWhitespace=
+				- =Uize.Str.Whitespace.hasNonWhitespace=
+				- =Uize.Str.Whitespace.indexOfNonWhitespace=
+				- =Uize.Str.Whitespace.lastIndexOfNonWhitespace=
 */
 
 Uize.module ({
@@ -86,7 +130,7 @@ Uize.module ({
 
 			function _lastIndexOfWhitespaceOrNon (_sourceStr,_isWhitespace,_startPos) {
 				for (
-					var _charNo = Math.min (_startPos != _undefined ? _startPos : Infinity,_sourceStr.length);
+					var _charNo = Math.min (_startPos != _undefined ? _startPos + 1 : Infinity,_sourceStr.length);
 					--_charNo >= 0;
 				)
 					if ((_whiteSpaceCharCodes [_sourceStr.charCodeAt (_charNo)] == _trueFlag) == _isWhitespace)
@@ -129,13 +173,13 @@ Uize.module ({
 				return !!_sourceStr && _lastIndexOfWhitespaceOrNon (_sourceStr,_true) == -1;
 				/*?
 					Static Methods
-						Uize.Str.Whitespace.isWhitespace
+						Uize.Str.Whitespace.isNonWhitespace
 							Returns a boolean, indicating whether or not the specified source string contains only `non-whitespace characters`.
 
 							SYNTAX
-							................................................................
-							isWhitespaceBOOL = Uize.Str.Whitespace.isWhitespace (sourceSTR);
-							................................................................
+							......................................................................
+							isNonWhitespaceBOOL = Uize.Str.Whitespace.isNonWhitespace (sourceSTR);
+							......................................................................
 
 							EXAMPLES
 							.....................................................................
@@ -156,26 +200,319 @@ Uize.module ({
 
 			hasWhitespace:function (_sourceStr) {
 				return !!_sourceStr && _lastIndexOfWhitespaceOrNon (_sourceStr,_true) > -1;
+				/*?
+					Static Methods
+						Uize.Str.Whitespace.hasWhitespace
+							Returns a boolean, indicating whether or not the specified source string contains any `whitespace characters`.
+
+							SYNTAX
+							..................................................................
+							hasWhitespaceBOOL = Uize.Str.Whitespace.hasWhitespace (sourceSTR);
+							..................................................................
+
+							EXAMPLES
+							.................................................................
+							Uize.Str.Whitespace.hasWhitespace ('  foobar');  // returns true
+							Uize.Str.Whitespace.hasWhitespace ('foobar  ');  // returns true
+							Uize.Str.Whitespace.hasWhitespace ('foo  bar');  // returns true
+							Uize.Str.Whitespace.hasWhitespace ('  \t\r\n');  // returns true
+
+							Uize.Str.Whitespace.hasWhitespace ('foobar');    // returns false
+							Uize.Str.Whitespace.hasWhitespace ('');          // returns false
+							.................................................................
+
+							NOTES
+							- see the companion =Uize.Str.Whitespace.hasNonWhitespace= static method
+				*/
 			},
 
 			hasNonWhitespace:function (_sourceStr) {
 				return !!_sourceStr && _lastIndexOfWhitespaceOrNon (_sourceStr,_false) > -1;
+				/*?
+					Static Methods
+						Uize.Str.Whitespace.hasNonWhitespace
+							Returns a boolean, indicating whether or not the specified source string contains any `non-whitespace characters`.
+
+							SYNTAX
+							........................................................................
+							hasNonWhitespaceBOOL = Uize.Str.Whitespace.hasNonWhitespace (sourceSTR);
+							........................................................................
+
+							EXAMPLES
+							....................................................................
+							Uize.Str.Whitespace.hasNonWhitespace ('  foobar');  // returns true
+							Uize.Str.Whitespace.hasNonWhitespace ('foobar  ');  // returns true
+							Uize.Str.Whitespace.hasNonWhitespace ('foo  bar');  // returns true
+							Uize.Str.Whitespace.hasNonWhitespace ('foobar');    // returns true
+
+							Uize.Str.Whitespace.hasNonWhitespace ('  \t\r\n');  // returns false
+							Uize.Str.Whitespace.hasNonWhitespace ('');          // returns false
+							....................................................................
+
+							NOTES
+							- see the companion =Uize.Str.Whitespace.hasWhitespace= static method
+				*/
 			},
 
 			indexOfWhitespace:function (_sourceStr,_startPos) {
 				return _indexOfWhitespaceOrNon (_sourceStr,_true,_startPos);
+				/*?
+					Static Methods
+						Uize.Str.Whitespace.indexOfWhitespace
+							Returns an integer, indicating the index of the first `whitespace character` in the specified source string.
+
+							DIFFERENT USAGES
+
+							`Get the Index of the First Whitespace Character in a String`
+							.............................................................
+							indexINT = Uize.Str.Whitespace.indexOfWhitespace (sourceSTR);
+							.............................................................
+
+							`Get the Index of the First Whitespace Character After a Specified Start Position`
+							.........................................................................
+							indexINT = Uize.Str.Whitespace.indexOfWhitespace (sourceSTR,startPosINT);
+							.........................................................................
+
+							Get the Index of the First Whitespace Character in a String
+								In the typical use case, the index of the first `whitespace character` in a source string can be obtained by specifying just the source string as the single argument.
+
+								SYNTAX
+								.............................................................
+								indexINT = Uize.Str.Whitespace.indexOfWhitespace (sourceSTR);
+								.............................................................
+
+								If the source string does not contain any whitespace characters, then the value =-1= will be returned.
+
+								EXAMPLES
+								......................................................................
+								Uize.Str.Whitespace.indexOfWhitespace ('   foobar');     // returns 0
+								Uize.Str.Whitespace.indexOfWhitespace ('foobar   ');     // returns 6
+								Uize.Str.Whitespace.indexOfWhitespace ('foo bar baz ');  // returns 3
+
+								Uize.Str.Whitespace.indexOfWhitespace ('');              // returns -1
+								Uize.Str.Whitespace.indexOfWhitespace ('foobar');        // returns -1
+								......................................................................
+
+							Get the Index of the First Whitespace Character After a Specified Start Position
+								To obtain the index of the first `whitespace character` after a start position, the start position can be specified for the optional second argument.
+
+								SYNTAX
+								.........................................................................
+								indexINT = Uize.Str.Whitespace.indexOfWhitespace (sourceSTR,startPosINT);
+								.........................................................................
+
+								If the source string does not contain any whitespace characters after the specified start position, then the value =-1= will be returned.
+
+								EXAMPLES
+								..............................................................................
+								Uize.Str.Whitespace.indexOfWhitespace ('foo bar baz qux ',4);    // returns 7
+								Uize.Str.Whitespace.indexOfWhitespace ('foo \r\n\t\n \rbar',5);  // returns 5
+								Uize.Str.Whitespace.indexOfWhitespace ('foo bar',-10);           // returns 3
+
+								Uize.Str.Whitespace.indexOfWhitespace ('foo barbazqux',4);       // returns -1
+								Uize.Str.Whitespace.indexOfWhitespace ('foo barbazqux ',100);    // returns -1
+								..............................................................................
+
+							NOTES
+							- see the companion =Uize.Str.Whitespace.indexOfNonWhitespace= static method
+							- see the related =Uize.Str.Whitespace.lastIndexOfWhitespace= and =Uize.Str.Whitespace.lastIndexOfNonWhitespace= static methods
+				*/
 			},
 
 			lastIndexOfWhitespace:function (_sourceStr,_startPos) {
 				return _lastIndexOfWhitespaceOrNon (_sourceStr,_true,_startPos);
+				/*?
+					Static Methods
+						Uize.Str.Whitespace.lastIndexOfWhitespace
+							Returns an integer, indicating the index of the last `whitespace character` in the specified source string.
+
+							DIFFERENT USAGES
+
+							`Get the Index of the Last Whitespace Character in a String`
+							.................................................................
+							indexINT = Uize.Str.Whitespace.lastIndexOfWhitespace (sourceSTR);
+							.................................................................
+
+							`Get the Index of the Last Whitespace Character Before a Specified Start Position`
+							.............................................................................
+							indexINT = Uize.Str.Whitespace.lastIndexOfWhitespace (sourceSTR,startPosINT);
+							.............................................................................
+
+							Get the Index of the Last Whitespace Character in a String
+								In the typical use case, the index of the last `whitespace character` in a source string can be obtained by specifying just the source string as the single argument.
+
+								SYNTAX
+								.................................................................
+								indexINT = Uize.Str.Whitespace.lastIndexOfWhitespace (sourceSTR);
+								.................................................................
+
+								If the source string does not contain any whitespace characters, then the value =-1= will be returned.
+
+								EXAMPLES
+								...........................................................................
+								Uize.Str.Whitespace.lastIndexOfWhitespace ('foobar   ');      // returns 8
+								Uize.Str.Whitespace.lastIndexOfWhitespace ('foo  bar  baz');  // returns 9
+								Uize.Str.Whitespace.lastIndexOfWhitespace (' foobar');        // returns 0
+
+								Uize.Str.Whitespace.lastIndexOfWhitespace ('');               // returns -1
+								Uize.Str.Whitespace.lastIndexOfWhitespace ('foobar');         // returns -1
+								...........................................................................
+
+							Get the Index of the Last Whitespace Character Before a Specified Start Position
+								To obtain the index of the last `whitespace character` before a start position, the start position can be specified for the optional second argument.
+
+								SYNTAX
+								.............................................................................
+								indexINT = Uize.Str.Whitespace.lastIndexOfWhitespace (sourceSTR,startPosINT);
+								.............................................................................
+
+								If the source string does not contain any whitespace characters before the specified start position, then the value =-1= will be returned.
+
+								EXAMPLES
+								..................................................................................
+								Uize.Str.Whitespace.lastIndexOfWhitespace ('foo bar baz qux ',14);   // returns 11
+								Uize.Str.Whitespace.lastIndexOfWhitespace ('foo bar baz qux ',50);   // returns 15
+								Uize.Str.Whitespace.lastIndexOfWhitespace ('foo \r\n\t\n \rbar',5);  // returns 5
+
+								Uize.Str.Whitespace.lastIndexOfWhitespace ('foobar baz qux',3);      // returns -1
+								Uize.Str.Whitespace.lastIndexOfWhitespace ('foobarbazqux ',-10);     // returns -1
+								Uize.Str.Whitespace.lastIndexOfWhitespace ('foobar',10);             // returns -1
+								..................................................................................
+
+							NOTES
+							- see the companion =Uize.Str.Whitespace.lastIndexOfNonWhitespace= static method
+							- see the related =Uize.Str.Whitespace.indexOfWhitespace= and =Uize.Str.Whitespace.indexOfNonWhitespace= static methods
+				*/
 			},
 
 			indexOfNonWhitespace:function (_sourceStr,_startPos) {
 				return _indexOfWhitespaceOrNon (_sourceStr,_false,_startPos);
+				/*?
+					Static Methods
+						Uize.Str.Whitespace.indexOfNonWhitespace
+							Returns an integer, indicating the index of the first `non-whitespace character` in the specified source string.
+
+							DIFFERENT USAGES
+
+							`Get the Index of the First Non-whitespace Character in a String`
+							................................................................
+							indexINT = Uize.Str.Whitespace.indexOfNonWhitespace (sourceSTR);
+							................................................................
+
+							`Get the Index of the First Non-whitespace Character After a Specified Start Position`
+							............................................................................
+							indexINT = Uize.Str.Whitespace.indexOfNonWhitespace (sourceSTR,startPosINT);
+							............................................................................
+
+							Get the Index of the First Non-whitespace Character in a String
+								In the typical use case, the index of the first `non-whitespace character` in a source string can be obtained by specifying just the source string as the single argument.
+
+								SYNTAX
+								................................................................
+								indexINT = Uize.Str.Whitespace.indexOfNonWhitespace (sourceSTR);
+								................................................................
+
+								If the source string does not contain any non-whitespace characters, then the value =-1= will be returned.
+
+								EXAMPLES
+								...........................................................................
+								Uize.Str.Whitespace.indexOfNonWhitespace ('foo bar');         // returns 0
+								Uize.Str.Whitespace.indexOfNonWhitespace ('        foobar');  // returns 8
+								Uize.Str.Whitespace.indexOfNonWhitespace ('   foo bar   ');   // returns 3
+
+								Uize.Str.Whitespace.indexOfNonWhitespace ('');                // returns -1
+								Uize.Str.Whitespace.indexOfNonWhitespace ('  \r\t\n  ');      // returns -1
+								...........................................................................
+
+							Get the Index of the First Non-whitespace Character After a Specified Start Position
+								To obtain the index of the first `non-whitespace character` after a start position, the start position can be specified for the optional second argument.
+
+								SYNTAX
+								............................................................................
+								indexINT = Uize.Str.Whitespace.indexOfNonWhitespace (sourceSTR,startPosINT);
+								............................................................................
+
+								If the source string does not contain any non-whitespace characters after the specified start position, then the value =-1= will be returned.
+
+								EXAMPLES
+								..............................................................................
+								Uize.Str.Whitespace.indexOfNonWhitespace ('foo  bar  baz',3);    // returns 5
+								Uize.Str.Whitespace.indexOfNonWhitespace ('   foobarbaz   ',8);  // returns 8
+
+								Uize.Str.Whitespace.indexOfNonWhitespace ('foo  \r\n\t ',3);     // returns -1
+								Uize.Str.Whitespace.indexOfNonWhitespace ('foobarbazqux',100);   // returns -1
+								..............................................................................
+
+							NOTES
+							- see the companion =Uize.Str.Whitespace.indexOfWhitespace= static method
+							- see the related =Uize.Str.Whitespace.lastIndexOfWhitespace= and =Uize.Str.Whitespace.lastIndexOfNonWhitespace= static methods
+				*/
 			},
 
 			lastIndexOfNonWhitespace:function (_sourceStr,_startPos) {
 				return _lastIndexOfWhitespaceOrNon (_sourceStr,_false,_startPos);
+				/*?
+					Static Methods
+						Uize.Str.Whitespace.lastIndexOfNonWhitespace
+							Returns an integer, indicating the index of the last `non-whitespace character` in the specified source string.
+
+							DIFFERENT USAGES
+
+							`Get the Index of the Last Non-whitespace Character in a String`
+							....................................................................
+							indexINT = Uize.Str.Whitespace.lastIndexOfNonWhitespace (sourceSTR);
+							....................................................................
+
+							`Get the Index of the Last Non-Whitespace Character Before a Specified Start Position`
+							................................................................................
+							indexINT = Uize.Str.Whitespace.lastIndexOfNonWhitespace (sourceSTR,startPosINT);
+							................................................................................
+
+							Get the Index of the Last Non-whitespace Character in a String
+								In the typical use case, the index of the last `non-whitespace character` in a source string can be obtained by specifying just the source string as the single argument.
+
+								SYNTAX
+								....................................................................
+								indexINT = Uize.Str.Whitespace.lastIndexOfNonWhitespace (sourceSTR);
+								....................................................................
+
+								If the source string does not contain any non-whitespace characters, then the value =-1= will be returned.
+
+								EXAMPLES
+								.............................................................................
+								Uize.Str.Whitespace.lastIndexOfNonWhitespace ('   foobar');     // returns 8
+								Uize.Str.Whitespace.lastIndexOfNonWhitespace ('  foo  bar  ');  // returns 9
+								Uize.Str.Whitespace.lastIndexOfNonWhitespace ('f  \r\n\t\n ');  // returns 0
+
+								Uize.Str.Whitespace.lastIndexOfNonWhitespace ('');              // returns -1
+								Uize.Str.Whitespace.lastIndexOfNonWhitespace (' \r\n\t\n ');    // returns -1
+								.............................................................................
+
+							Get the Index of the Last Non-whitespace Character Before a Specified Start Position
+								To obtain the index of the last `non-whitespace character` before a start position, the start position can be specified for the optional second argument.
+
+								SYNTAX
+								................................................................................
+								indexINT = Uize.Str.Whitespace.lastIndexOfNonWhitespace (sourceSTR,startPosINT);
+								................................................................................
+
+								If the source string does not contain any non-whitespace characters before the specified start position, then the value =-1= will be returned.
+
+								EXAMPLES
+								....................................................................................
+								Uize.Str.Whitespace.lastIndexOfNonWhitespace ('  foo   bar  ',7);      // returns 4
+								Uize.Str.Whitespace.lastIndexOfNonWhitespace ('   foobar   ',6);       // returns 6
+								Uize.Str.Whitespace.lastIndexOfNonWhitespace ('  foo  bar  ',100);     // returns 9
+
+								Uize.Str.Whitespace.lastIndexOfNonWhitespace ('  \r\n\t  foobar ',5);  // returns -1
+								Uize.Str.Whitespace.lastIndexOfNonWhitespace ('foo barbazqux ',-100);  // returns -1
+								Uize.Str.Whitespace.lastIndexOfNonWhitespace ('  \r\n\t  ',50);        // returns -1
+								....................................................................................
+
+							NOTES
+							- see the companion =Uize.Str.Whitespace.lastIndexOfWhitespace= static method
+							- see the related =Uize.Str.Whitespace.indexOfWhitespace= and =Uize.Str.Whitespace.indexOfNonWhitespace= static methods
+				*/
 			}
 		});
 	}

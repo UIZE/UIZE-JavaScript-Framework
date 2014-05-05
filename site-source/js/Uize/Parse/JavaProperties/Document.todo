@@ -1,0 +1,11 @@
+This is a TO DO document for the =Uize.Parse.JavaProperties.Document= module.
+
+Factor Out Common Items Parser Code
+	This parser class shares lots of similarities with the =Uize.Parse.Xml.NodeList= parser class.
+
+	Therefore, the appropriate code should be factored out into a common base class that can be used for various items type parsers, with the following configurable / overridable features...
+
+	- possible item parser classes
+	- eat or don't eat whitespace between items
+	- name of items property
+

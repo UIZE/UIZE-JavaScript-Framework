@@ -1,0 +1,25 @@
+This is a TO DO document for the =Uize.Parse.JavaProperties.PropertyValue= module.
+
+Multi-line Property Values
+	Add support for property values that span multiple lines.
+
+	A multi-line value is achieved with a backslash at the end of a line. When a value spans multiple lines, leading whitespace on subsequent lines must be ignored (per specification).
+
+Leading Whitespace
+	Add support for leading whitespace in property values.
+
+	There may not be anything in the specification to address this, but it may be accomplished with backslash escaping of the first whitespace character to indicate the start of the property value, in a similar way to backslash escaping whitespace in property names.
+
+Fix Issue with Double Unescaping
+	Fix the issue with double-unescaping during parsing ("\\uffff", where "\\" would get unescaped to "\", and then "\uffff" would get unescaped as a Unicode-escape character).
+
+	There are a few approaches to tackling this...
+
+	- the unescaping of Unicode-escaped characters could somehow be combined with the unescaping of backslash escaped characters
+	- unescaping of backslash escaped characters could be added to the Uize.Parse.JavaProperties.UnicodeEscaped module
+	- dealing with unescaping could be handled during the character-by-character parsing in the property value parser
+
+Reference Info
+	- http://en.wikipedia.org/wiki/.properties
+	- http://docs.oracle.com/javase/6/docs/api/java/util/Properties.html#load%28java.io.Reader%29
+

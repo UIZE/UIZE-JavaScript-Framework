@@ -1,0 +1,12 @@
+This is a TO DO document for the =Uize.Parse.JavaProperties.Property= module.
+
+Factor Out Common Name-value Parser Code
+	This parser class shares lots of similarities with the =Uize.Parse.Xml.TagAttribute= parser class.
+
+	Therefore, the appropriate code should be factored out into a common base class that can be used for various name-value pair type parsers, with the following configurable / overridable features...
+
+	- name parser class
+	- value parser class
+	- name-value separator specification (possibly also a parser class)
+	- default separator to be used when serializing
+

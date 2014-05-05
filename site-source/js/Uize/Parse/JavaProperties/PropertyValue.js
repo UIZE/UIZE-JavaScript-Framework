@@ -1,7 +1,7 @@
 /*______________
 |       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
 |     /      /  |   ---------------------------------------------------
-|    /    O /   |    MODULE : Uize.Parse.JavaProperties.PropertyName Object
+|    /    O /   |    MODULE : Uize.Parse.JavaProperties.PropertyValue Object
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
 | /____/ /__/_| | COPYRIGHT : (c)2014 UIZE
@@ -12,19 +12,19 @@
 /* Module Meta Data
 	type: Object
 	importance: 1
-	codeCompleteness: 100
+	codeCompleteness: 80
 	docCompleteness: 2
 */
 
 /*?
 	Introduction
-		The =Uize.Parse.JavaProperties.PropertyName= module provides methods for parsing and serializing property names in [[http://en.wikipedia.org/wiki/.properties][Java properties]] files.
+		The =Uize.Parse.JavaProperties.PropertyValue= module provides methods for parsing and serializing property values in [[http://en.wikipedia.org/wiki/.properties][Java properties]] files.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 */
 
 Uize.module ({
-	name:'Uize.Parse.JavaProperties.PropertyName',
+	name:'Uize.Parse.JavaProperties.PropertyValue',
 	required:[
 		'Uize.Str.Whitespace',
 		'Uize.Str.Replace',
@@ -35,15 +35,29 @@ Uize.module ({
 
 		var
 			/*** Variables for Performance Optimization ***/
-				_isNonWhitespace = Uize.Str.Whitespace.isNonWhitespace,
+				_isWhitespace = Uize.Str.Whitespace.isWhitespace,
+				_unicodeUnescape = Uize.Parse.JavaProperties.UnicodeEscaped.from,
+				_unicodeEscape = Uize.Parse.JavaProperties.UnicodeEscaped.to,
 
 			/*** General Variables ***/
-				_terminatingCharsLookup = _charsLookup (' :='),
+				_terminatingCharsLookup = _charsLookup ('\n\r'),
+				_parserUnescaper = Uize.Str.Replace.replacerByLookup ({
+					'\\b':'\b',
+					'\\t':'\t',
+					'\\n':'\n',
+					'\\f':'\f',
+					'\\r':'\r',
+					'\\"':'"',
+					'\\\'':'\'',
+					'\\\\':'\\'
+				}),
 				_serializerEscaper = Uize.Str.Replace.replacerByLookup ({
-					'\\':'\\\\',
-					':':'\\:',
-					'=':'\\=',
-					' ':'\\ '
+					'\b':'\\b',
+					'\t':'\\t',
+					'\n':'\\n',
+					'\f':'\\f',
+					'\r':'\\r',
+					'\\':'\\\\'
 				})
 		;
 
@@ -62,7 +76,7 @@ Uize.module ({
 					index:0,
 					length:0,
 					isValid:false,
-					name:'',
+					value:'',
 
 					parse:function (_source,_index) {
 						var
@@ -70,32 +84,24 @@ Uize.module ({
 							_sourceLength = (m.source = _source = _source || '').length
 						;
 						m.index = _index || (_index = 0);
-						m.isValid = false;
-						if (_isNonWhitespace (_source.charAt (_index))) {
-							m.isValid = true;
+						m.isValid = true;
+						var
+							_inEscape = false,
+							_char
+						;
+						while (
+							_index < _sourceLength &&
+							(_inEscape || !_terminatingCharsLookup [_char = _source.charAt (_index)])
+						) {
+							_inEscape = !_inEscape && _char == '\\';
 							_index++;
-							var
-								_inEscape = false,
-								_char
-							;
-							while (
-								_index < _sourceLength &&
-								(_inEscape || !_terminatingCharsLookup [_char = _source.charAt (_index)])
-							) {
-								_inEscape = !_inEscape && _char == '\\';
-								_index++;
-							}
-							m.name = _source.slice (m.index,_index).replace (/\\(.)/g,'$1');
-							m.length = _index - m.index;
 						}
+						m.value = _unicodeUnescape (_parserUnescaper (_source.slice (m.index,_index)));
+						m.length = _index - m.index;
 					},
 
 					serialize:function () {
-						return (
-							this.isValid
-								? Uize.Parse.JavaProperties.UnicodeEscaped.to (_serializerEscaper (this.name))
-								: ''
-						);
+						return this.isValid ? _unicodeEscape (_serializerEscaper (this.value)) : '';
 					}
 				}
 			}

@@ -40,7 +40,7 @@ Uize.module ({
 
 		var
 			/*** Variables for Scruncher Optimization ***/
-				_Uize_Util_Xml = Uize.Parse.Xml
+				_Uize_Parse_Xml = Uize.Parse.Xml
 		;
 
 		return Uize.mergeInto (
@@ -62,7 +62,7 @@ Uize.module ({
 						function _tryParseNode (_nodeType) {
 							var _node =
 								m._currentNodes [_nodeType] ||
-								(m._currentNodes [_nodeType] = new _Uize_Util_Xml [_nodeType])
+								(m._currentNodes [_nodeType] = new _Uize_Parse_Xml [_nodeType])
 							;
 							_node.parse (_source,_index);
 							if (_node.isValid) {
