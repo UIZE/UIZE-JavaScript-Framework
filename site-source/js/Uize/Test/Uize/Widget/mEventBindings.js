@@ -62,7 +62,7 @@ Uize.module ({
 			}) ();
 		}
 
-		function _getMockWidgetClass(_eventBindings, _children) {
+		function _getTestWidgetClass(_eventBindings, _children) {
 			return Uize.Widget.subclass ({
 				mixins:Uize.Widget.mEventBindings,
 				omegastructor:function() {
@@ -72,7 +72,7 @@ Uize.module ({
 			});
 		}
 		
-		function _getMockWidgetInstance(_eventBindings, _children, _nodes) {
+		function _getTestWidgetClassInstance(_eventBindings, _children, _nodes) {
 			var _nodeMap = {};
 			
 			if (Uize.isArray(_nodes)) {
@@ -81,7 +81,7 @@ Uize.module ({
 				;
 			}
 			
-			return _getMockWidgetClass(_eventBindings, _children)({
+			return _getTestWidgetClass(_eventBindings, _children)({
 				nodeMap:_nodeMap
 			});
 		}
@@ -90,12 +90,12 @@ Uize.module ({
 			function _generateSyntaxTests(_isVerbose) {
 				var _eventBindings = _isVerbose ? _eventBindingsVerbose : _eventBindingsShorthand;
 
-				function _getSyntaxMockWidgetClass(_children) {
-					return _getMockWidgetClass(_eventBindings, _children);
+				function _getSyntaxTestWidgetClass(_children) {
+					return _getTestWidgetClass(_eventBindings, _children);
 				}
 				
-				function _geSyntaxMockWidgetInstance(_children, _nodes) {
-					return _getMockWidgetInstance(_eventBindings, _children, _nodes);
+				function _getSyntaxTestWidgetClassInstance(_children, _nodes) {
+					return _getTestWidgetClassInstance(_eventBindings, _children, _nodes);
 				}
 				
 				function _generateFireTests(_type) {
@@ -109,7 +109,7 @@ Uize.module ({
 							var
 								_typeEvents = _wiredEvents[_type],
 								_names = _type == 'self' ? ['self'] : Uize.keys(_typeEvents),
-								_mockInstance = _geSyntaxMockWidgetInstance(
+								_mockInstance = _getSyntaxTestWidgetClassInstance(
 									_type == 'child' ? _names : undefined,
 									_type == 'node' ? _names : undefined
 								),
@@ -271,11 +271,11 @@ Uize.module ({
 					test:[
 						{
 							title:'Widget class is a function (not null)',
-							test:function() { return this.expectFunction(_getSyntaxMockWidgetClass()) }
+							test:function() { return this.expectFunction(_getSyntaxTestWidgetClass()) }
 						},
 						{
 							title:'Widget instance is an object (not null)',
-							test:function() { return this.expectObject(_geSyntaxMockWidgetInstance()) }
+							test:function() { return this.expectObject(_getSyntaxTestWidgetClassInstance()) }
 						},
 						_generateFireTests('self'),
 						_generateFireTests('child'),
@@ -287,7 +287,7 @@ Uize.module ({
 								
 								var
 									_nodeNames = Uize.keys(_wiredEvents.node),
-									_mockInstance = _geSyntaxMockWidgetInstance(null, _nodeNames)
+									_mockInstance = _getSyntaxTestWidgetClassInstance(null, _nodeNames)
 								;
 								_processArrayAsync(
 									_nodeNames,
@@ -995,7 +995,7 @@ Uize.module ({
 					title:'When a bound child is removed, a fired event on the child is properly handled (no errors & not fired on parent)',
 					test:function(_continue) {
 						var
-							_widget = _getMockWidgetInstance(
+							_widget = _getTestWidgetClassInstance(
 								{
 									'childA:Click':function() { _continue(false) }
 								},
@@ -1019,7 +1019,7 @@ Uize.module ({
 					title:'When a bound child is removed, and a new same-named child is re-added, a child event is handled by the parent',
 					test:function(_continue) {
 						var
-							_widget = _getMockWidgetInstance(
+							_widget = _getTestWidgetClassInstance(
 								{
 									'childA:Click':function() {
 										clearTimeout(_failTimeout);
@@ -1050,7 +1050,7 @@ Uize.module ({
 					title:'When a subclass declares the same child/event combination, the base class\' handler is called',
 					test:function(_continue) {
 						var
-							_WidgetClass = _getMockWidgetClass(
+							_WidgetClass = _getTestWidgetClass(
 								{
 									'childA:Click':function() {
 										clearTimeout(_failTimeout);

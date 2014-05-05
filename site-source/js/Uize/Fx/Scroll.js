@@ -178,7 +178,7 @@ Uize.module ({
 				var _scrollNodeCoords = _scrollableContainerNodeIsBodyNode ? _targetNodeCoords : _scrollableContainerNodeCoords;
 				_wireAndStartFade(
 					_scrollableBodyNode,
-					_scrollNodeCoords.y + (Uize.isNumber(_scrollParams.offset) ? _scrollParams.offset : 0),
+					_scrollNodeCoords.y + Uize.toNumber(_scrollParams.offset, 0),
 					function () { _bodyNodeDone = true },
 					_scrollParams.scrollToTop || !_isNodeVisible(_scrollNodeCoords, true)
 				);

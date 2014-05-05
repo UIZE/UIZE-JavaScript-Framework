@@ -62,7 +62,7 @@ Uize.module ({
 					title:(_isVerbose ? 'Verbose' : 'Shorthand') + ' Syntax',
 					test:[
 						{
-							title:'Elements are children of elements chld widget',
+							title:'Elements are children of elements child widget',
 							test:function() {
 								return this.expect(
 									Uize.lookup(_expectedChildren),

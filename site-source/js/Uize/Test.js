@@ -219,7 +219,7 @@ Uize.module ({
 					*/
 				},
 
-				expectNull:function (_value) {
+				expectNully:function (_value) {
 					return _expectSuccess (
 						this,
 						_value == null,
@@ -228,12 +228,12 @@ Uize.module ({
 					);
 					/*?
 						Instance Methods
-							expectNull
+							expectNully
 								Returns a boolean, indicating whether or not the specified value is null (ie. =null= or =undefined=).
 
 								SYNTAX
 								.................................................
-								resultBOOL = myTest.expectNull (valueANYTYPE);
+								resultBOOL = myTest.expectNully (valueANYTYPE);
 								.................................................
 
 								This method tests whether or not a value is null. Both =null= and =undefined= are considered null.
@@ -242,21 +242,21 @@ Uize.module ({
 								.......................................................
 								// when called with null values...
 
-								myTest.expectNull (null);           // returns true
-								myTest.expectNull (undefined);      // returns true
+								myTest.expectNully (null);           // returns true
+								myTest.expectNully (undefined);      // returns true
 								
 								// when called with non-null values...
 
-								myTest.expectNull (1);              // returns false
-								myTest.expectNull (0);              // returns false
-								myTest.expectNull ('blah');         // returns false
-								myTest.expectNull ('');             // returns false
-								myTest.expectNull (true);           // returns false
-								myTest.expectNull (false);          // returns false
-								myTest.expectNull ({foo:'bar'});    // returns false
-								myTest.expectNull ({});             // returns false
-								myTest.expectNull (['foo','bar']);  // returns false
-								myTest.expectNull ([]);             // returns false
+								myTest.expectNully (1);              // returns false
+								myTest.expectNully (0);              // returns false
+								myTest.expectNully ('blah');         // returns false
+								myTest.expectNully ('');             // returns false
+								myTest.expectNully (true);           // returns false
+								myTest.expectNully (false);          // returns false
+								myTest.expectNully ({foo:'bar'});    // returns false
+								myTest.expectNully ({});             // returns false
+								myTest.expectNully (['foo','bar']);  // returns false
+								myTest.expectNully ([]);             // returns false
 								.......................................................
 
 								NOTES

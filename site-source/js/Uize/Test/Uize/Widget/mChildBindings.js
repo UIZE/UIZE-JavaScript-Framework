@@ -31,22 +31,15 @@ Uize.module ({
 		function _getRandomPropertyValue() { return Math.floor(Math.random() * 10000) }
 				
 		function _getChildrenToAdd(_children) {
-			var _childrenToAdd;
-			
-			if (_children) {
-				_childrenToAdd = {};
-				for (var _childName in _children)
-					_childrenToAdd[_childName] = Uize.copyInto(
-						{widgetClass:Uize.Widget},
-						_children[_childName]
-					)
-				;
-			}
-
-			return _childrenToAdd;
+			return Uize.map (
+				_children,
+				function (_childProperties) {
+					return Uize.copyInto ({widgetClass:Uize.Widget},_childProperties);
+				}
+			);
 		}
 				
-		function _getMockWidgetClass(_bindings, _stateProperties, _children) {
+		function _getTestWidgetClass(_bindings, _stateProperties, _children) {
 			return Uize.Widget.subclass ({
 				mixins:Uize.Widget.mChildBindings,
 				omegastructor:function() { this.addChildren(_getChildrenToAdd(_children)) },
@@ -55,8 +48,8 @@ Uize.module ({
 			});
 		}
 		
-		function _getMockWidgetInstance(_bindings, _stateProperties, _children) {
-			return _getMockWidgetClass(_bindings, _stateProperties, _children)({name:'parent'});
+		function _getTestWidgetClassInstance(_bindings, _stateProperties, _children) {
+			return _getTestWidgetClass(_bindings, _stateProperties, _children)({name:'parent'});
 		}
 		
 		function _generateTest(_title, _bindingsVerbose, _bindingsShorthand, _expectedBindings) {
@@ -69,12 +62,12 @@ Uize.module ({
 			function _generateSyntaxTests(_isVerbose) {
 				var _bindings = _isVerbose ? _bindingsVerbose : _bindingsShorthand;
 				
-				function _getMockSyntaxWidgetClass(_omitChildren) {
-					return _getMockWidgetClass(_bindings, _stateProperties, !_omitChildren && _children);
+				function _getSyntaxTestWidgetClass(_omitChildren) {
+					return _getTestWidgetClass(_bindings, _stateProperties, !_omitChildren && _children);
 				}
 				
-				function _getMockSyntaxWidgetInstance(_omitChildren) {
-					return _getMockSyntaxWidgetClass(_omitChildren)({name:'parent'});
+				function _getSyntaxTestWidgetClassInstance(_omitChildren) {
+					return _getSyntaxTestWidgetClass(_omitChildren)({name:'parent'});
 				}
 				
 				function _generateTestsForAll(_expectFunc, _omitChildren) {
@@ -97,7 +90,7 @@ Uize.module ({
 															this,
 															Uize.copyInto(
 																{
-																	widget:_getMockSyntaxWidgetInstance(_omitChildren),
+																	widget:_getSyntaxTestWidgetClassInstance(_omitChildren),
 																	widgetProperty:_propertyName,
 																	child:_childName
 																},
@@ -123,15 +116,15 @@ Uize.module ({
 					test:[
 						{
 							title:'Widget class is not null',
-							test:function() { return this.expectNonNull(_getMockSyntaxWidgetClass()) }
+							test:function() { return this.expectNonNull(_getSyntaxTestWidgetClass()) }
 						},
 						{
 							title:'Widget instance without any children is not null (widget works without any children)',
-							test:function() { return this.expectNonNull(_getMockSyntaxWidgetInstance(true)) }
+							test:function() { return this.expectNonNull(_getSyntaxTestWidgetClassInstance(true)) }
 						},
 						{
 							title:'Widget instance with children is not null (children aren\'t wired before they are added)',
-							test:function() { return this.expectNonNull(_getMockSyntaxWidgetInstance()) }
+							test:function() { return this.expectNonNull(_getSyntaxTestWidgetClassInstance()) }
 						},
 						{
 							title:'State property is synched with child\'s state property in the correct direction when child is added',
@@ -214,7 +207,7 @@ Uize.module ({
 			}
 				
 			if (_expectedBindings) {
-				_children = [];
+				_children = {};
 				_stateProperties = {};
 				
 				for (var _property in _expectedBindings) {
@@ -2171,7 +2164,7 @@ Uize.module ({
 					title:'When a bound child is removed, a state property change in parent after removal is properly handled (no errors and not fired on child)',
 					test:function() {
 						var
-							_widget = _getMockWidgetInstance(
+							_widget = _getTestWidgetClassInstance(
 								{propertyA:'childA'},
 								{propertyA:{name:'propertyA',value:_getRandomPropertyValue()}},
 								{childA:{propertyA:_getRandomPropertyValue()}}
@@ -2191,7 +2184,7 @@ Uize.module ({
 					title:'When a bound child is removed, a state property change in child after removal is properly handled (no errors and not fired on parent)',
 					test:function() {
 						var
-							_widget = _getMockWidgetInstance(
+							_widget = _getTestWidgetClassInstance(
 								{propertyA:'childA'},
 								{propertyA:{name:'propertyA',value:_getRandomPropertyValue()}},
 								{childA:{propertyA:_getRandomPropertyValue()}}
@@ -2211,7 +2204,7 @@ Uize.module ({
 					title:'When a bound child is removed, and a new same-named child is re-added, the new child\'s state is synched',
 					test:function() {
 						var
-							_widget = _getMockWidgetInstance(
+							_widget = _getTestWidgetClassInstance(
 								{propertyA:'childA'},
 								{propertyA:{name:'propertyA',value:_getRandomPropertyValue()}},
 								{childA:{propertyA:_getRandomPropertyValue()}}
@@ -2232,7 +2225,7 @@ Uize.module ({
 					title:'When a bound child is removed, and a new same-named child is re-added, a change in widget state should be reflected in child\'s',
 					test:function() {
 						var
-							_widget = _getMockWidgetInstance(
+							_widget = _getTestWidgetClassInstance(
 								{propertyA:'childA'},
 								{propertyA:{name:'propertyA',value:_getRandomPropertyValue()}},
 								{childA:{propertyA:_getRandomPropertyValue()}}
@@ -2255,7 +2248,7 @@ Uize.module ({
 					title:'When a subclass declares the same state property/child/child state property combination, the base class\' declaration is overridden',
 					test:function() {
 						var
-							_WidgetClass = _getMockWidgetClass(
+							_WidgetClass = _getTestWidgetClass(
 								{
 									propertyA:[
 										{
