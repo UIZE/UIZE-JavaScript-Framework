@@ -72,7 +72,7 @@ Uize.module ({
 								}
 							),
 							Uize.Test.ParserTest.parserTest (
-								'A property value may contain linebreaks, as long as they are escaped with a backslash',
+								'A property value may contain linebreaks and other special whitespace characters, as long as they are expressed using the appropriate escape sequences ("\\b", "\\t", "\\n", "\\f", "\\r")',
 								['property\\b\\t\\n\\f\\rvalue'],
 								{
 									value:'property\b\t\n\f\rvalue',
@@ -116,6 +116,22 @@ Uize.module ({
 								['This is a property value   \t\t  \n  not a part of the property value'],
 								{
 									value:'This is a property value   \t\t  ',
+									isValid:true
+								}
+							),
+							Uize.Test.ParserTest.parserTest (
+								'A property value can span multiple lines if linebreaks are escaped with a backslash, and leading whitespace on subsequent lines is ignored',
+								['foo, \\\n          bar, \\\r    baz, \\\r\n     qux'],
+								{
+									value:'foo, bar, baz, qux',
+									isValid:true
+								}
+							),
+							Uize.Test.ParserTest.parserTest (
+								'When a property value spans multiple lines, leading whitespace on subsequent lines that spans multiple lines is ignored',
+								['foo, \\\n  \r   \r\n  \n  \n        bar'],
+								{
+									value:'foo, bar',
 									isValid:true
 								}
 							)
