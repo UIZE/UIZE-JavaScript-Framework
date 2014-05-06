@@ -23,6 +23,8 @@
 		*DEVELOPERS:* `Chris van Rensburg`
 
 		In a Nutshell
+			The =Uize.Str.Whitespace= module provides methods for working with strings that may contain whitespace characters.
+
 			Whitespace Characters ~~ Whitespace Character
 				.
 
@@ -118,24 +120,34 @@ Uize.module ({
 
 		/*** Utility Functions ***/
 			function _indexOfWhitespaceOrNon (_sourceStr,_isWhitespace,_startPos) {
-				for (
-					var _charNo = Math.max (_startPos || 0,0) - 1, _sourceStrLength = _sourceStr.length;
-					++_charNo < _sourceStrLength;
-				)
-					if ((_whiteSpaceCharCodes [_sourceStr.charCodeAt (_charNo)] == _trueFlag) == _isWhitespace)
-						return _charNo
-				;
+				var _sourceStrLength = _sourceStr.length;
+				if (_sourceStrLength) {
+					_startPos = Math.max (_startPos || 0,0);
+					if (_sourceStrLength == 1 && _startPos <= 0) {
+						return (_whiteSpaceCharCodes [_sourceStr] == _trueFlag) == _isWhitespace ? 0 : -1;
+					} else {
+						for (var _charNo = _startPos - 1; ++_charNo < _sourceStrLength;)
+							if ((_whiteSpaceCharCodes [_sourceStr.charCodeAt (_charNo)] == _trueFlag) == _isWhitespace)
+								return _charNo
+						;
+					}
+				}
 				return -1;
 			}
 
 			function _lastIndexOfWhitespaceOrNon (_sourceStr,_isWhitespace,_startPos) {
-				for (
-					var _charNo = Math.min (_startPos != _undefined ? _startPos + 1 : Infinity,_sourceStr.length);
-					--_charNo >= 0;
-				)
-					if ((_whiteSpaceCharCodes [_sourceStr.charCodeAt (_charNo)] == _trueFlag) == _isWhitespace)
-						return _charNo
-				;
+				var _sourceStrLength = _sourceStr.length;
+				if (_sourceStrLength) {
+					_startPos = Math.min (_startPos != _undefined ? _startPos : Infinity,_sourceStrLength - 1);
+					if (_sourceStrLength == 1 && _startPos >= 0) {
+						return (_whiteSpaceCharCodes [_sourceStr] == _trueFlag) == _isWhitespace ? 0 : -1;
+					} else {
+						for (var _charNo = _startPos + 1; --_charNo >= 0;)
+							if ((_whiteSpaceCharCodes [_sourceStr.charCodeAt (_charNo)] == _trueFlag) == _isWhitespace)
+								return _charNo
+						;
+					}
+				}
 				return -1;
 			}
 
