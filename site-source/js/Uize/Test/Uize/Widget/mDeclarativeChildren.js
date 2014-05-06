@@ -47,9 +47,9 @@ Uize.module ({
 								_declarativeChildren,
 								function(_childProperties) {
 									if (Uize.isPlainObject(_childProperties) && _childProperties.widgetClass)
-										_childProperties.widgetClass = Uize.eval(_childProperties.widgetClass);
+										_childProperties.widgetClass = Uize.getModuleByName(_childProperties.widgetClass);
 									else if (Uize.isString(_childProperties))
-										_childProperties = Uize.eval(_childProperties);
+										_childProperties = Uize.getModuleByName(_childProperties);
 		
 									return _childProperties;
 								}
@@ -75,6 +75,8 @@ Uize.module ({
 		
 		function _generateTest(_title, _declarativeChildren, _expectedChildren) {
 			function _getDeclaredChildrenForTest() { return _getDeclaredChildren(_declarativeChildren) }
+			function _expectAllDeclaredChildren(_expectFunc) { _expectAll(_getDeclaredChildrenForTest(), _expectFunc) }
+
 			return {
 				title:_title,
 				test:[
@@ -86,21 +88,21 @@ Uize.module ({
 						title:'Children object has the same child names as defined in declarative children w/ a widgetClass',
 						test:function() {
 							var m = this;
-							return _expectAll(_getDeclaredChildrenForTest(), function(_child, _childName) { return m.expect(true, _childName in _expectedChildren) });
+							return _expectAllDeclaredChildren(function(_child, _childName) { return m.expect(true, _childName in _expectedChildren) });
 						}
 					},
 					{
 						title:'None of the children are null',
 						test:function() {
 							var m = this;
-							return _expectAll(_getDeclaredChildrenForTest(), function(_child) { return m.expectNonNull(_child) });
+							return _expectAllDeclaredChildren(function(_child) { return m.expectNonNull(_child) });
 						}
 					},
 					{
 						title:'Each child should be an object',
 						test:function() {
 							var m = this;
-							return _expectAll(_getDeclaredChildrenForTest(), function(_child) { return m.expectObject(_child) });
+							return _expectAllDeclaredChildren(function(_child) { return m.expectObject(_child) });
 						}
 					},
 					{
