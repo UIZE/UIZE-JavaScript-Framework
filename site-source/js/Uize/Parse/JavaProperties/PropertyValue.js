@@ -35,12 +35,13 @@ Uize.module ({
 
 		var
 			/*** Variables for Performance Optimization ***/
-				_isWhitespace = Uize.Str.Whitespace.isWhitespace,
 				_unicodeUnescape = Uize.Parse.JavaProperties.UnicodeEscaped.from,
 				_unicodeEscape = Uize.Parse.JavaProperties.UnicodeEscaped.to,
+				_indexOfNonWhitespace = Uize.Str.Whitespace.indexOfNonWhitespace,
 
 			/*** General Variables ***/
 				_terminatingCharsLookup = _charsLookup ('\n\r'),
+				_linebreakLookup = _charsLookup ('\n\r\f'),
 				_parserUnescaper = Uize.Str.Replace.replacerByLookup ({
 					'\\b':'\b',
 					'\\t':'\t',
@@ -79,6 +80,9 @@ Uize.module ({
 					value:'',
 
 					parse:function (_source,_index) {
+						function _eatWhitespace () {
+							_index = (_indexOfNonWhitespace (_source,_index) + 1 || _sourceLength + 1) - 1;
+						}
 						var
 							m = this,
 							_sourceLength = (m.source = _source = _source || '').length
@@ -87,16 +91,34 @@ Uize.module ({
 						m.isValid = true;
 						var
 							_inEscape = false,
-							_char
+							_char,
+							_chunks = [],
+							_chunksLength = 0,
+							_chunkStartPos = _index
 						;
-						while (
-							_index < _sourceLength &&
-							(_inEscape || !_terminatingCharsLookup [_char = _source.charAt (_index)])
-						) {
-							_inEscape = !_inEscape && _char == '\\';
-							_index++;
+						while (_index < _sourceLength) {
+							_char = _source.charAt (_index);
+							if (_inEscape) {
+								if (_linebreakLookup [_char]) {
+									_chunks [_chunksLength++] = _source.slice (_chunkStartPos,_index - 1);
+									_eatWhitespace ();
+									_chunkStartPos = _index;
+								} else {
+									_index++;
+								}
+								_inEscape = false;
+							} else {
+								if (_terminatingCharsLookup [_char]) {
+									break;
+								} else {
+									_inEscape = _char == '\\';
+									_index++;
+								}
+							}
 						}
-						m.value = _unicodeUnescape (_parserUnescaper (_source.slice (m.index,_index)));
+						m.value =
+							_unicodeUnescape (_parserUnescaper (_chunks.join ('') + _source.slice (_chunkStartPos,_index)))
+						;
 						m.length = _index - m.index;
 					},
 
