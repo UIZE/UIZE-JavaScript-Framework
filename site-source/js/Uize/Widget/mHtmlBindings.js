@@ -43,7 +43,7 @@ Uize.module ({
 				alphastructor:function () {
 					var m = this;
 
-					m.once (
+					m.whenever (
 						'wired',
 						function () {
 							var _htmlBindings = m.Class.mHtmlBindings_bindings;
