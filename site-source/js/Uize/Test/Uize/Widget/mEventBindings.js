@@ -135,7 +135,7 @@ Uize.module ({
 													});
 												},
 												_verifyEventFired = function(_nextFunc) {
-													var _handlerNotCalledTimeout = setTimeout(function() { _continue(false) }, 10); // timeout for if handler isn't called
+													var _handlerNotCalledTimeout = setTimeout(function() { _continue(false) }, 0); // timeout for if handler isn't called
 													_fireEvent(
 														function(_event, _source) {
 															clearTimeout(_handlerNotCalledTimeout);
@@ -156,7 +156,7 @@ Uize.module ({
 												},
 												_verifyEventNotFired = function(_nextFunc) {
 													var
-														_handlerNotCalledTimeout = setTimeout(_nextFunc, 1)// timeout for when handler isn't called
+														_handlerNotCalledTimeout = setTimeout(_nextFunc, 0)// timeout for when handler isn't called
 													;
 													
 													// Verify event is not fired
@@ -297,7 +297,7 @@ Uize.module ({
 											function(_eventName, _nextEventFunc) {
 												// The handler shouldn't be called which means we won't continue to the next node,
 												// so, set up a timeout to continue on if the handler is not called.
-												var _notFiredTimeout = setTimeout(_nextEventFunc, 1);
+												var _notFiredTimeout = setTimeout(_nextEventFunc, 0);
 												_mockInstance.getNode(_nodeName).triggerEvent({
 													name:_eventName,
 													handler:function() {
@@ -1011,7 +1011,7 @@ Uize.module ({
 						
 						setTimeout(
 							function() { _continue(true) },
-							10
+							0
 						);
 					}
 				},
@@ -1040,7 +1040,7 @@ Uize.module ({
 						// this shouldn't happen because the handler should be rebound when new child was added
 						_failTimeout = setTimeout(
 							function() { _continue(false) }, 
-							1000
+							0
 						);
 						
 						_newChild.fire('Click'); // fire child event (should be handled by parent)
@@ -1070,7 +1070,7 @@ Uize.module ({
 						// this shouldn't happen because the handler should be rebound when new child was added
 						_failTimeout = setTimeout(
 							function() { _continue(false) }, 
-							1000
+							0
 						);
 						
 						_WidgetSubclass().children.childA.fire('Click');

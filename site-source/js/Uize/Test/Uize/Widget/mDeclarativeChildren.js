@@ -519,7 +519,7 @@ Uize.module ({
 					]
 				},
 				{
-					title:'Subclass can override getContainer method',
+					title:'A Subclass can override the getContainer method',
 					test:function() {
 						var _returnValue = false;
 						
