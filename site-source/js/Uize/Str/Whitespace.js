@@ -120,33 +120,26 @@ Uize.module ({
 		;
 
 		/*** Utility Functions ***/
-			function _indexOfWhitespaceOrNon (_sourceStr,_isWhitespace,_startPos) {
+			function _indexOfWhitespaceOrNon (_sourceStr,_isWhitespace,_direction,_startPos) {
 				var _sourceStrLength = _sourceStr.length;
 				if (_sourceStrLength) {
-					_startPos = Math.max (_startPos || 0,0);
-					if (_sourceStrLength == 1 && _startPos == 0) {
-						return (_whiteSpaceCharsLookup [_sourceStr] == _trueFlag) == _isWhitespace ? 0 : -1;
-					} else {
-						for (var _charNo = _startPos - 1; ++_charNo < _sourceStrLength;)
-							if ((_whiteSpaceCharsLookup [_sourceStr.charAt (_charNo)] == _trueFlag) == _isWhitespace)
-								return _charNo
-						;
-					}
-				}
-				return -1;
-			}
-
-			function _lastIndexOfWhitespaceOrNon (_sourceStr,_isWhitespace,_startPos) {
-				var _sourceStrLength = _sourceStr.length;
-				if (_sourceStrLength) {
-					_startPos = Math.min (_startPos != _undefined ? _startPos : Infinity,_sourceStrLength - 1);
-					if (_sourceStrLength == 1 && _startPos == 0) {
-						return (_whiteSpaceCharsLookup [_sourceStr] == _trueFlag) == _isWhitespace ? 0 : -1;
-					} else {
-						for (var _charNo = _startPos + 1; --_charNo >= 0;)
-							if ((_whiteSpaceCharsLookup [_sourceStr.charAt (_charNo)] == _trueFlag) == _isWhitespace)
-								return _charNo
-						;
+					_startPos = _startPos != _undefined ? _startPos : -_direction * Infinity;
+					var _endPos = _direction == 1 ? _sourceStrLength : -1;
+					if ((_startPos - _endPos) * _direction < 0) {
+						if (_sourceStrLength == 1) {
+							return (_whiteSpaceCharsLookup [_sourceStr] == _trueFlag) == _isWhitespace ? 0 : -1;
+						} else {
+							for (
+								var _charNo = _direction == 1
+									? Math.max (_startPos,0) - 1
+									: Math.min (_startPos,_sourceStrLength - 1) + 1
+								;
+								(_charNo += _direction) != _endPos;
+							)
+								if ((_whiteSpaceCharsLookup [_sourceStr.charAt (_charNo)] == _trueFlag) == _isWhitespace)
+									return _charNo
+							;
+						}
 					}
 				}
 				return -1;
@@ -154,7 +147,7 @@ Uize.module ({
 
 		return Uize.package ({
 			isWhitespace:function (_sourceStr) {
-				return !!_sourceStr && _lastIndexOfWhitespaceOrNon (_sourceStr,_false) == -1;
+				return !!_sourceStr && _indexOfWhitespaceOrNon (_sourceStr,_false,-1) == -1;
 				/*?
 					Static Methods
 						Uize.Str.Whitespace.isWhitespace
@@ -183,7 +176,7 @@ Uize.module ({
 			},
 
 			isNonWhitespace:function (_sourceStr) {
-				return !!_sourceStr && _lastIndexOfWhitespaceOrNon (_sourceStr,_true) == -1;
+				return !!_sourceStr && _indexOfWhitespaceOrNon (_sourceStr,_true,-1) == -1;
 				/*?
 					Static Methods
 						Uize.Str.Whitespace.isNonWhitespace
@@ -212,7 +205,7 @@ Uize.module ({
 			},
 
 			hasWhitespace:function (_sourceStr) {
-				return !!_sourceStr && _lastIndexOfWhitespaceOrNon (_sourceStr,_true) > -1;
+				return !!_sourceStr && _indexOfWhitespaceOrNon (_sourceStr,_true,-1) > -1;
 				/*?
 					Static Methods
 						Uize.Str.Whitespace.hasWhitespace
@@ -240,7 +233,7 @@ Uize.module ({
 			},
 
 			hasNonWhitespace:function (_sourceStr) {
-				return !!_sourceStr && _lastIndexOfWhitespaceOrNon (_sourceStr,_false) > -1;
+				return !!_sourceStr && _indexOfWhitespaceOrNon (_sourceStr,_false,-1) > -1;
 				/*?
 					Static Methods
 						Uize.Str.Whitespace.hasNonWhitespace
@@ -268,7 +261,7 @@ Uize.module ({
 			},
 
 			indexOfWhitespace:function (_sourceStr,_startPos) {
-				return _indexOfWhitespaceOrNon (_sourceStr,_true,_startPos);
+				return _indexOfWhitespaceOrNon (_sourceStr,_true,1,_startPos);
 				/*?
 					Static Methods
 						Uize.Str.Whitespace.indexOfWhitespace
@@ -333,7 +326,7 @@ Uize.module ({
 			},
 
 			lastIndexOfWhitespace:function (_sourceStr,_startPos) {
-				return _lastIndexOfWhitespaceOrNon (_sourceStr,_true,_startPos);
+				return _indexOfWhitespaceOrNon (_sourceStr,_true,-1,_startPos);
 				/*?
 					Static Methods
 						Uize.Str.Whitespace.lastIndexOfWhitespace
@@ -399,7 +392,7 @@ Uize.module ({
 			},
 
 			indexOfNonWhitespace:function (_sourceStr,_startPos) {
-				return _indexOfWhitespaceOrNon (_sourceStr,_false,_startPos);
+				return _indexOfWhitespaceOrNon (_sourceStr,_false,1,_startPos);
 				/*?
 					Static Methods
 						Uize.Str.Whitespace.indexOfNonWhitespace
@@ -463,7 +456,7 @@ Uize.module ({
 			},
 
 			lastIndexOfNonWhitespace:function (_sourceStr,_startPos) {
-				return _lastIndexOfWhitespaceOrNon (_sourceStr,_false,_startPos);
+				return _indexOfWhitespaceOrNon (_sourceStr,_false,-1,_startPos);
 				/*?
 					Static Methods
 						Uize.Str.Whitespace.lastIndexOfNonWhitespace
