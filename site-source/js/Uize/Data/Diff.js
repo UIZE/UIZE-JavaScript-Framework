@@ -502,11 +502,13 @@ Uize.module ({
 		var
 			/*** Variables for Scruncher Optimization ***/
 				_isPlainObject = Uize.isPlainObject,
+				_isArray = Uize.isArray,
 				_isEmpty = Uize.isEmpty,
 				_undefined,
 
 			/*** General Variables ***/
-				_sacredEmpyObject = {}
+				_sacredEmpyObject = {},
+				_sacredEmpyArray = []
 		;
 
 		/*** Utility Functions ***/
@@ -530,8 +532,7 @@ Uize.module ({
 					_object2PropertyProfile = {}
 				;
 				function _compareNode (_object1,_object2) {
-					var _result = {};
-					for (var _property in Uize.copy (_object1,_object2)) {
+					function _compareProperty (_property) {
 						var
 							_propertyComparisonResult,
 							_object1PropertyValue = _object1 [_property],
@@ -549,25 +550,55 @@ Uize.module ({
 						} else {
 							var
 								_propertyInObject1 = _property in _object1,
-								_propertyInObject2 = _property in _object2
+								_propertyInObject2 = _property in _object2,
+								_object1PropertyValueIsArray = _propertyInObject1 && _isArray (_object1PropertyValue),
+								_object2PropertyValueIsArray = _propertyInObject2 && _isArray (_object2PropertyValue)
 							;
-							if (_propertyInObject1) {
-								_object1PropertyProfile.key = _property;
-								_object1PropertyProfile.value = _object1PropertyValue;
+							if (
+								(_object1PropertyValueIsArray || !_propertyInObject1) &&
+								(_object2PropertyValueIsArray || !_propertyInObject2)
+							) {
+								var _subNodeComparison = _compareNode (
+									_object1PropertyValue || _sacredEmpyArray,
+									_object2PropertyValue || _sacredEmpyArray
+								);
+								_propertyComparisonResult = _isEmpty (_subNodeComparison)
+									? _undefined
+									: {value:_subNodeComparison}
+								;
+							} else {
+								if (_propertyInObject1) {
+									_object1PropertyProfile.key = _property;
+									_object1PropertyProfile.value = _object1PropertyValue;
+								}
+								if (_propertyInObject2) {
+									_object2PropertyProfile.key = _property;
+									_object2PropertyProfile.value = _object2PropertyValue;
+								}
+								_propertyComparisonResult = _propertyComparer (
+									_propertyInObject1 ? _object1PropertyProfile : _undefined,
+									_propertyInObject2 ? _object2PropertyProfile : _undefined
+								);
 							}
-							if (_propertyInObject2) {
-								_object2PropertyProfile.key = _property;
-								_object2PropertyProfile.value = _object2PropertyValue;
-							}
-							_propertyComparisonResult = _propertyComparer (
-								_propertyInObject1 ? _object1PropertyProfile : _undefined,
-								_propertyInObject2 ? _object2PropertyProfile : _undefined
-							);
 						}
 						if (_propertyComparisonResult)
 							_result ['key' in _propertyComparisonResult ? _propertyComparisonResult.key : _property] =
 								_propertyComparisonResult.value
 						;
+					}
+					if (_isPlainObject (_object1) || _isPlainObject (_object2)) {
+						var _result = {};
+						for (var _property in Uize.copy (_object1,_object2))
+							_compareProperty (_property)
+						;
+					} else {
+						var _result = [];
+						for (
+							var _elementNo = -1, _totalElements = Math.max (_object1.length,_object2.length);
+							++_elementNo < _totalElements;
+						) {
+							_compareProperty (_elementNo);
+						}
 					}
 					return _result;
 				}

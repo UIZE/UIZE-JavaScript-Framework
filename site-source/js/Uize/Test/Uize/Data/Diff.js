@@ -145,13 +145,29 @@ Uize.module ({
 									}
 								}
 							],
-							['When the objects being compared contain the same top-level property and identical structure, the result is not an empty object (this was a bug that was discovered)',
-								[
-									{foo:{bar:{baz:{qux:'QUX'}}}},
-									{foo:{bar:{baz:{qux:'QUX'}}}}
+
+							/*** test array diffing ***/
+								['When the value of a property in both objects being compared is an array, then all the elements of the two array values will be compared',
+									[
+										{array:['foo','bar']},
+										{array:['foo','baz','qux']}
+									],
+									{array:['unchanged','modified','added']}
 								],
-								{foo:{bar:{baz:{qux:'unchanged'}}}}
-							],
+								['When the value of a property is an array in the first object and missing in the second object, all the values from the array in the first object will appear to have been removed',
+									[
+										{array:['foo','bar','baz','qux']},
+										{}
+									],
+									{array:['removed','removed','removed','removed']}
+								],
+								['When the value of a property is an array in the second object and missing in the first object, all the values from the array in the second object will appear to have been added',
+									[
+										{},
+										{array:['foo','bar','baz','qux']}
+									],
+									{array:['added','added','added','added']}
+								],
 
 						/*** test a custom added-or-modified property comparer ***/
 							['With a custom added-or-modified property comparer, modified properties are marked by their new value',
