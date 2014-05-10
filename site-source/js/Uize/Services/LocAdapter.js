@@ -178,7 +178,7 @@ Uize.module ({
 			function _pseudoLocalizeResources (m,_primaryLanguageResources) {
 				var
 					_pseudoLocalizedResources = {},
-					_pseudoLocalizeOptions = {wordSplitter:m.wordSplitter}
+					_pseudoLocalizeOptions = Uize.copy (m.project.pseudoLocalization,{wordSplitter:m.wordSplitter})
 				;
 				Uize.forEach (
 					_primaryLanguageResources,
