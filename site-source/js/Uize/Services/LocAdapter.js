@@ -33,7 +33,6 @@ Uize.module ({
 		'Uize.Data.Csv',
 		'Uize.Data.Diff',
 		'Uize.Loc.Pseudo',
-		'Uize.Build.Util',
 		'Uize.Str.Split'
 	],
 	superclass:'Uize.Service.Adapter',
@@ -261,43 +260,29 @@ Uize.module ({
 
 			function _gatherResources (m) {
 				var
-					_project = m.project,
-					_currentFolderRelativePath,
-					_currentFileRelativePath,
 					_resources = {},
-					_rootFolderPath = _project.rootFolderPath,
-					_rootFolderPathLength = _rootFolderPath.length
+					_rootFolderPath = m.project.rootFolderPath,
+					_resourceFiles = _fileSystem.getFiles ({
+						path:_rootFolderPath,
+						pathMatcher:function (_filePath) {return m.isResourceFile (_filePath)},
+						recursive:true
+					})
 				;
-				Uize.Build.Util.buildFiles ({
-					targetFolderPathCreator:function (_folderPath) {
-						_currentFolderRelativePath = _folderPath.slice (_rootFolderPathLength + 1);
-						return _folderPath;
-					},
-					targetFilenameCreator:function (_sourceFileName) {
-						return (
-							m.isResourceFile (_currentFileRelativePath = _currentFolderRelativePath + '/' + _sourceFileName)
-								? _sourceFileName
-								: null
-						);
-					},
-					fileBuilder:function (_sourceFileName,_sourceFileText) {
-						var
-							_strings,
-							_errorWithFile
-						;
+				Uize.forEach (
+					_resourceFiles,
+					function (_filePath) {
 						try {
-							_strings = m.parseResourceFile (_sourceFileText);
+							_resources [_filePath] = m.parseResourceFile (
+								_fileSystem.readFile ({path:_rootFolderPath + '/' + _filePath})
+							);
 						} catch (_error) {
-							_errorWithFile = _error + '';
+							console.log (
+								'ERROR: problem parsing file ' + _filePath + '\n' +
+								_error
+							);
 						}
-						_resources [_currentFileRelativePath] = _strings;
-						return {logDetails:_errorWithFile ? '\tERROR: ' + _errorWithFile : ''};
-					},
-					alwaysBuild:true,
-					dryRun:true,
-					rootFolderPath:_rootFolderPath,
-					logFilePath:''
-				});
+					}
+				);
 				return _resources;
 			}
 
@@ -379,6 +364,10 @@ Uize.module ({
 				},
 
 				isResourceFile:function (_filePath) {
+					// this method should be implemented by subclasses
+				},
+
+				isReferencingFile:function (_filePath) {
 					// this method should be implemented by subclasses
 				},
 
