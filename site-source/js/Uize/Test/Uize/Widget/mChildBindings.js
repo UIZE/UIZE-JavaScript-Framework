@@ -2135,159 +2135,199 @@ Uize.module ({
 						}
 					]
 				},
-				/*_generateTest(
-					'Thrashing doesn\'t occurr with bi-directional bindings (best demonstrated with mis-match value adapters)',
-					{
-						propertyA:{
-							child:'childA',
-							valueAdapter:{
-								aToB:'value * 3',
-								bToA:'value / 2'
+				{
+					title:'Edge Cases',
+					test:[
+						{
+							title:'When a child is bound bi-directionally and the parent widget has data and the child widget doesn\'t, the parent should be the driver widget',
+							test:function() {
+								var
+									_widgetInitialPropertyValue = _getRandomPropertyValue(),
+									_widget = _getTestWidgetClassInstance(
+										{propertyA:'childA'},
+										{propertyA:{name:'propertyA',value:_widgetInitialPropertyValue}},
+										{childA:{}}
+									)
+								;
+								
+								return this.expect(_widgetInitialPropertyValue, _widget.get('propertyA'))
+									&& this.expect(_widget.get('propertyA'), _widget.children.childA.get('propertyA'))
+								;
 							}
-						}
-					},
-					null,
-					{
-						propertyA:{
-							childA:[
-								{
-									property:'propertyA',
-									direction:'<->',
-									aToB:function(_value) { return _value * 3},
-									bToA:function(_value) { return _value / 2 }
-								}
-							]	
-						}
-					}
-				),*/
-				{
-					title:'When a bound child is removed, a state property change in parent after removal is properly handled (no errors and not fired on child)',
-					test:function() {
-						var
-							_widget = _getTestWidgetClassInstance(
-								{propertyA:'childA'},
-								{propertyA:{name:'propertyA',value:_getRandomPropertyValue()}},
-								{childA:{propertyA:_getRandomPropertyValue()}}
-							),
-							_childToRemove = _widget.children.childA // keep reference so we'll have it after removal
-						;
-						
-						_widget.removeChild(_childToRemove);
-						
-						// set widget to new value to see if child widget will also update (which it shouldn't)
-						_widget.set('propertyA', _getRandomPropertyValue());
-						
-						return this.expect(true, _widget.get('propertyA') != _childToRemove.get('propertyA'));
-					}
-				},
-				{
-					title:'When a bound child is removed, a state property change in child after removal is properly handled (no errors and not fired on parent)',
-					test:function() {
-						var
-							_widget = _getTestWidgetClassInstance(
-								{propertyA:'childA'},
-								{propertyA:{name:'propertyA',value:_getRandomPropertyValue()}},
-								{childA:{propertyA:_getRandomPropertyValue()}}
-							),
-							_childToRemove = _widget.children.childA // keep reference so we'll have it after removal
-						;
-						
-						_widget.removeChild(_childToRemove);
-						
-						// set widget to new value to see if child widget will also update (which it shouldn't)
-						_childToRemove.set('propertyA', _getRandomPropertyValue());
-						
-						return this.expect(true, _widget.get('propertyA') != _childToRemove.get('propertyA'));
-					}
-				},
-				{
-					title:'When a bound child is removed, and a new same-named child is re-added, the new child\'s state is synched',
-					test:function() {
-						var
-							_widget = _getTestWidgetClassInstance(
-								{propertyA:'childA'},
-								{propertyA:{name:'propertyA',value:_getRandomPropertyValue()}},
-								{childA:{propertyA:_getRandomPropertyValue()}}
-							)
-						;
-						
-						// first remove the child
-						_widget.removeChild('childA');
-						
-						// then add back a new child with the same name (which should get bound again)
-						_widget.addChild('childA', Uize.Widget, {propertyA:_getRandomPropertyValue()});
-						
-						// state should match when the child's state is synched
-						return this.expect(_widget.get('propertyA'), _widget.children.childA.get('propertyA'));
-					}
-				},
-				{
-					title:'When a bound child is removed, and a new same-named child is re-added, a change in widget state should be reflected in child\'s',
-					test:function() {
-						var
-							_widget = _getTestWidgetClassInstance(
-								{propertyA:'childA'},
-								{propertyA:{name:'propertyA',value:_getRandomPropertyValue()}},
-								{childA:{propertyA:_getRandomPropertyValue()}}
-							)
-						;
-						
-						// first remove the child
-						_widget.removeChild('childA');
-						
-						// then add back a new child with the same name (which should get bound again)
-						_widget.addChild('childA', Uize.Widget, {propertyA:_getRandomPropertyValue()});
-						
-						// set widget to new value (which should get bound to child)
-						_widget.set('propertyA', _getRandomPropertyValue());
-						
-						return this.expect(_widget.get('propertyA'), _widget.children.childA.get('propertyA'));
-					}
-				},
-				{
-					title:'When a subclass declares the same state property/child/child state property combination, the base class\' declaration is overridden',
-					test:function() {
-						var
-							_WidgetClass = _getTestWidgetClass(
-								{
-									propertyA:[
-										{
-											child:'childA',
-											property:'childPropertyA',
-											direction:'<->',
-											valueAdapter:{
-												aToB:'value * 2',
-												bToA:'value / 2'
-											}
-										},
-										'childB'
-									]
-								},
-								{
-									propertyA:{name:'propertyA',value:_getRandomPropertyValue()},
-									propertyB:{name:'propertyB',value:_getRandomPropertyValue()}
-								},
-								{
-									childA:{
-										propertyA:_getRandomPropertyValue(),
-										propertyB:_getRandomPropertyValue()
+						},
+						{
+							title:'When a child is bound bi-directionally and it has data and the parent widget doesn\'t, the child should be the driver widget',
+							test:function() {
+								var
+									_childWidgetInitialPropertyValue = _getRandomPropertyValue(),
+									_widget = _getTestWidgetClassInstance(
+										{propertyA:'childA'},
+										{propertyA:{name:'propertyA'}},
+										{childA:{propertyA:_childWidgetInitialPropertyValue}}
+									),
+									_childAWidget = _widget.children.childA
+								;
+								
+								return this.expect(_childWidgetInitialPropertyValue, _childAWidget.get('propertyA'))
+									&& this.expect(_childAWidget.get('propertyA'), _widget.get('propertyA'))
+								;
+							}
+						},
+						/*_generateTest(
+							'Thrashing doesn\'t occurr with bi-directional bindings (best demonstrated with mis-match value adapters)',
+							{
+								propertyA:{
+									child:'childA',
+									valueAdapter:{
+										aToB:'value * 3',
+										bToA:'value / 2'
 									}
 								}
-							),
-							_WidgetSubclass = _WidgetClass.subclass({
-								childBindings:{
-									propertyA:'->childA.childPropertyA'	
+							},
+							null,
+							{
+								propertyA:{
+									childA:[
+										{
+											property:'propertyA',
+											direction:'<->',
+											aToB:function(_value) { return _value * 3},
+											bToA:function(_value) { return _value / 2 }
+										}
+									]	
 								}
-							})
-						;
-						
-						return this.expectSameAs(_WidgetSubclass.mChildBindings_bindings.propertyA.childB.propertyA, _WidgetClass.mChildBindings_bindings.propertyA.childB.propertyA)
-							&& this.expectNotSameAs(_WidgetSubclass.mChildBindings_bindings.propertyA.childA.childPropertyA, _WidgetClass.mChildBindings_bindings.propertyA.childA.childPropertyA)
-							&& this.expect(2, Uize.keys(_WidgetSubclass.mChildBindings_bindings.propertyA).length)
-							&& this.expect(1, Uize.keys(_WidgetSubclass.mChildBindings_bindings.propertyA.childA).length)
-							&& this.expect(1, Uize.keys(_WidgetSubclass.mChildBindings_bindings.propertyA.childB).length)
-						;
-					}
+							}
+						),*/
+						{
+							title:'When a bound child is removed, a state property change in parent after removal is properly handled (no errors and not fired on child)',
+							test:function() {
+								var
+									_widget = _getTestWidgetClassInstance(
+										{propertyA:'childA'},
+										{propertyA:{name:'propertyA',value:_getRandomPropertyValue()}},
+										{childA:{propertyA:_getRandomPropertyValue()}}
+									),
+									_childToRemove = _widget.children.childA // keep reference so we'll have it after removal
+								;
+								
+								_widget.removeChild(_childToRemove);
+								
+								// set widget to new value to see if child widget will also update (which it shouldn't)
+								_widget.set('propertyA', _getRandomPropertyValue());
+								
+								return this.expect(true, _widget.get('propertyA') != _childToRemove.get('propertyA'));
+							}
+						},
+						{
+							title:'When a bound child is removed, a state property change in child after removal is properly handled (no errors and not fired on parent)',
+							test:function() {
+								var
+									_widget = _getTestWidgetClassInstance(
+										{propertyA:'childA'},
+										{propertyA:{name:'propertyA',value:_getRandomPropertyValue()}},
+										{childA:{propertyA:_getRandomPropertyValue()}}
+									),
+									_childToRemove = _widget.children.childA // keep reference so we'll have it after removal
+								;
+								
+								_widget.removeChild(_childToRemove);
+								
+								// set widget to new value to see if child widget will also update (which it shouldn't)
+								_childToRemove.set('propertyA', _getRandomPropertyValue());
+								
+								return this.expect(true, _widget.get('propertyA') != _childToRemove.get('propertyA'));
+							}
+						},
+						{
+							title:'When a bound child is removed, and a new same-named child is re-added, the new child\'s state is synched',
+							test:function() {
+								var
+									_widget = _getTestWidgetClassInstance(
+										{propertyA:'childA'},
+										{propertyA:{name:'propertyA',value:_getRandomPropertyValue()}},
+										{childA:{propertyA:_getRandomPropertyValue()}}
+									)
+								;
+								
+								// first remove the child
+								_widget.removeChild('childA');
+								
+								// then add back a new child with the same name (which should get bound again)
+								_widget.addChild('childA', Uize.Widget, {propertyA:_getRandomPropertyValue()});
+								
+								// state should match when the child's state is synched
+								return this.expect(_widget.get('propertyA'), _widget.children.childA.get('propertyA'));
+							}
+						},
+						{
+							title:'When a bound child is removed, and a new same-named child is re-added, a change in widget state should be reflected in child\'s',
+							test:function() {
+								var
+									_widget = _getTestWidgetClassInstance(
+										{propertyA:'childA'},
+										{propertyA:{name:'propertyA',value:_getRandomPropertyValue()}},
+										{childA:{propertyA:_getRandomPropertyValue()}}
+									)
+								;
+								
+								// first remove the child
+								_widget.removeChild('childA');
+								
+								// then add back a new child with the same name (which should get bound again)
+								_widget.addChild('childA', Uize.Widget, {propertyA:_getRandomPropertyValue()});
+								
+								// set widget to new value (which should get bound to child)
+								_widget.set('propertyA', _getRandomPropertyValue());
+								
+								return this.expect(_widget.get('propertyA'), _widget.children.childA.get('propertyA'));
+							}
+						},
+						{
+							title:'When a subclass declares the same state property/child/child state property combination, the base class\' declaration is overridden',
+							test:function() {
+								var
+									_WidgetClass = _getTestWidgetClass(
+										{
+											propertyA:[
+												{
+													child:'childA',
+													property:'childPropertyA',
+													direction:'<->',
+													valueAdapter:{
+														aToB:'value * 2',
+														bToA:'value / 2'
+													}
+												},
+												'childB'
+											]
+										},
+										{
+											propertyA:{name:'propertyA',value:_getRandomPropertyValue()},
+											propertyB:{name:'propertyB',value:_getRandomPropertyValue()}
+										},
+										{
+											childA:{
+												propertyA:_getRandomPropertyValue(),
+												propertyB:_getRandomPropertyValue()
+											}
+										}
+									),
+									_WidgetSubclass = _WidgetClass.subclass({
+										childBindings:{
+											propertyA:'->childA.childPropertyA'	
+										}
+									})
+								;
+								
+								return this.expectSameAs(_WidgetSubclass.mChildBindings_bindings.propertyA.childB.propertyA, _WidgetClass.mChildBindings_bindings.propertyA.childB.propertyA)
+									&& this.expectNotSameAs(_WidgetSubclass.mChildBindings_bindings.propertyA.childA.childPropertyA, _WidgetClass.mChildBindings_bindings.propertyA.childA.childPropertyA)
+									&& this.expect(2, Uize.keys(_WidgetSubclass.mChildBindings_bindings.propertyA).length)
+									&& this.expect(1, Uize.keys(_WidgetSubclass.mChildBindings_bindings.propertyA.childA).length)
+									&& this.expect(1, Uize.keys(_WidgetSubclass.mChildBindings_bindings.propertyA.childB).length)
+								;
+							}
+						}
+					]
 				}
 			]
 		});

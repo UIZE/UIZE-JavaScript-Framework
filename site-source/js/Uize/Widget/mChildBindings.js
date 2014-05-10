@@ -18,7 +18,7 @@
 
 /*?
 	Introduction
-		The =Uize.Widget.mChildBindings= mixin implements features to provide a declarative approach to bind the state properties of a widget to those of its children.
+		The =Uize.Widget.mChildBindings= mixin implements features to provide a declarative approach to binding the state properties of a widget to those of its children.
 
 		*DEVELOPERS:* `Ben Ilegbodu`, original code donated by `Zazzle Inc.`
 */
@@ -30,6 +30,7 @@ Uize.module ({
 
 		var
 			/*** Variables for Scruncher Optimization ***/
+				_undefined,
 				_Uize = Uize,
 				_forEach = _Uize.forEach,
 				
@@ -113,7 +114,11 @@ Uize.module ({
 												
 												if (_direction.indexOf('->') == (_directionLength - 2)) { // parent -> child
 													// First set child widget to have same value as widget
-													_syncToChild();
+													// We don't want to do this if the binding is bi-drectional and the widget is undefined.
+													// In that case we'd rather the child widget be the driver
+													(_direction.indexOf('<->') || m.get(_propertyName) !== _undefined)
+														&& _syncToChild()
+													;
 													
 													// Then wire Changed.* handler on widget to update child widget
 													m.wire(_syncToChildEvent = _Uize.pairUp('Changed.' + _propertyName, _syncToChild));

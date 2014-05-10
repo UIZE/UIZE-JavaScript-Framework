@@ -36,12 +36,13 @@ Uize.module ({
 			_global = Uize.global(),
 			_processArrayAsync = Uize.Comm.processArrayAsync,
 			_defaultHandler = function(_event, _source) { _event.handler.call(this, _event, _source) },
+			_defaultChangedHandler = function(_event, _source) { this.get(_event.name.slice(8)).call(this, _event, _source) },
 			_originalWindow = _global.window
 		;
 		
 		_global.window = _global;  // For Uize.Dom.Basics
 
-		function _getMockDomNode() {
+		function _getMockDomNode(_name) {
 			return Uize.Class.subclass({
 				alphastructor:function() {
 					this._events = {};
@@ -58,8 +59,11 @@ Uize.module ({
 						this._events[_event.name]
 							&& Uize.applyAll(this, this._events[_event.name], [_event]);
 					}
+				},
+				stateProperties:{
+					_name:'name'	
 				}
-			}) ();
+			}) ({name:_name});
 		}
 
 		function _getTestWidgetClass(_eventBindings, _children) {
@@ -77,7 +81,7 @@ Uize.module ({
 			
 			if (Uize.isArray(_nodes)) {
 				for (var _nodeNo = -1; ++_nodeNo < _nodes.length;)
-					_nodeMap[_nodes[_nodeNo]] = _getMockDomNode()
+					_nodeMap[_nodes[_nodeNo]] = _getMockDomNode(_nodes[_nodeNo])
 				;
 			}
 			
@@ -109,7 +113,7 @@ Uize.module ({
 							var
 								_typeEvents = _wiredEvents[_type],
 								_names = _type == 'self' ? ['self'] : Uize.keys(_typeEvents),
-								_mockInstance = _getSyntaxTestWidgetClassInstance(
+								_testWidgetClassInstance = _getSyntaxTestWidgetClassInstance(
 									_type == 'child' ? _names : undefined,
 									_type == 'node' ? _names : undefined
 								),
@@ -123,16 +127,22 @@ Uize.module ({
 										function(_eventName, _nextEventFunc) {
 											var
 												_objectToFireOn = _type == 'self'
-													? _mockInstance
+													? _testWidgetClassInstance
 													: (_type == 'child'
-														? _mockInstance.children[_objectName]
-														: _mockInstance.getNode(_objectName)
+														? _testWidgetClassInstance.children[_objectName]
+														: _testWidgetClassInstance.getNode(_objectName)
 													),
 												_fireEvent = function(_fireHandler) {
-													_objectToFireOn[_fireEventMethodName]({
-														name:_eventName,
-														handler:_fireHandler
-													});
+													_type == 'self' && !_eventName.indexOf('Changed.')
+														? _objectToFireOn.set(
+															_eventName.slice(8),
+															_fireHandler
+														)
+														: _objectToFireOn[_fireEventMethodName]({
+															name:_eventName,
+															handler:_fireHandler
+														})
+													;
 												},
 												_verifyEventFired = function(_nextFunc) {
 													var _handlerNotCalledTimeout = setTimeout(function() { _continue(false) }, 0); // timeout for if handler isn't called
@@ -143,7 +153,7 @@ Uize.module ({
 																this,
 																{
 																	_nextFunc:_nextFunc,
-																	_mockInstance:_mockInstance,
+																	_testWidgetClassInstance:_testWidgetClassInstance,
 																	_eventName:_eventName,
 																	_event:_event,
 																	_source:_source,
@@ -175,7 +185,7 @@ Uize.module ({
 												_deferredChildrenForEvent = _deferredChildrenForEventObject && _deferredChildrenForEventObject[_eventName]
 											;
 											
-											_type == 'node' && _mockInstance.set('wired', true);
+											_type == 'node' && _testWidgetClassInstance.met('wired');
 											
 											if (Uize.isEmpty(_deferredChildrenForEvent)) {
 												_verifyEventFired(_nextEventFunc);
@@ -187,7 +197,7 @@ Uize.module ({
 														_verifyEventNotFired(
 															function() {
 																// Add deferred child
-																_mockInstance.addChild(_deferredChildName, Uize.Widget);
+																_testWidgetClassInstance.addChild(_deferredChildName, Uize.Widget);
 																
 																_nextDeferredChildFunc();
 															}
@@ -198,7 +208,7 @@ Uize.module ({
 														_verifyEventFired(
 															function() {
 																// Remove a random child
-																_mockInstance.removeChild(
+																_testWidgetClassInstance.removeChild(
 																	_deferredChildrenForEvent[
 																		Math.floor(Math.random() * _deferredChildrenForEvent.length)	
 																	]
@@ -233,7 +243,7 @@ Uize.module ({
 								title:'"this" context is widget',
 								test:_generateFireTest(
 									function(_data) {
-										this == _data._mockInstance
+										this == _data._testWidgetClassInstance
 											? _data._nextFunc()
 											: _data._fail()
 										;
@@ -287,7 +297,7 @@ Uize.module ({
 								
 								var
 									_nodeNames = Uize.keys(_wiredEvents.node),
-									_mockInstance = _getSyntaxTestWidgetClassInstance(null, _nodeNames)
+									_testWidgetClassInstance = _getSyntaxTestWidgetClassInstance(null, _nodeNames)
 								;
 								_processArrayAsync(
 									_nodeNames,
@@ -298,7 +308,7 @@ Uize.module ({
 												// The handler shouldn't be called which means we won't continue to the next node,
 												// so, set up a timeout to continue on if the handler is not called.
 												var _notFiredTimeout = setTimeout(_nextEventFunc, 0);
-												_mockInstance.getNode(_nodeName).triggerEvent({
+												_testWidgetClassInstance.getNode(_nodeName).triggerEvent({
 													name:_eventName,
 													handler:function() {
 														clearTimeout(_notFiredTimeout);
@@ -448,64 +458,89 @@ Uize.module ({
 								}
 							}
 						),
-						_generateTest(
-							'When a single required child for a child event binding is declared, the event is not fired until the child is added',
-							{
-								'foo:Click':{
-										handler:_defaultHandler,
-										required:['baz']
+						{
+							title:'Required Children',
+							test:[
+								_generateTest(
+									'When required is left unspecified for a child event binding, the event is fired normally (w/ no errors)',
+									{
+										'foo:Click':{
+												handler:_defaultHandler
+											}
+									},
+									{
+										foo:{
+											Click:{
+												handler:_defaultHandler
+											}
+										}
+									},
+									{
+										child:{
+											foo:['Click']
+										}
 									}
-							},
-							{
-								foo:{
-									Click:{
-										handler:_defaultHandler,
-										required:['baz']
+								),
+								_generateTest(
+									'When a single required child for a child event binding is declared, the event is not fired until the child is added',
+									{
+										'foo:Click':{
+												handler:_defaultHandler,
+												required:['baz']
+											}
+									},
+									{
+										foo:{
+											Click:{
+												handler:_defaultHandler,
+												required:['baz']
+											}
+										}
+									},
+									{
+										child:{
+											foo:['Click']
+										}
+									},
+									{
+										child:{
+											foo:{
+												Click:['baz']
+											}
+										}
 									}
-								}
-							},
-							{
-								child:{
-									foo:['Click']
-								}
-							},
-							{
-								child:{
-									foo:{
-										Click:['baz']
+								),
+								_generateTest(
+									'When multiple required children for a child event binding are declared, the event is not fired until all the children are added (and order doesn\'t matter)',
+									{
+										'foo:Click':{
+											handler:_defaultHandler,
+											required:['baz', 'bat', 'baf']
+										}
+									},
+									{
+										foo:{
+											Click:{
+												handler:_defaultHandler,
+												required:['baz', 'bat', 'baf']
+											}
+										}
+									},
+									{
+										child:{
+											foo:['Click']
+										}
+									},
+									{
+										child:{
+											foo:{
+												Click:['bat', 'baf', 'baz']
+											}
+										}
 									}
-								}
-							}
-						),
-						_generateTest(
-							'When multiple required children for a child event binding are declared, the event is not fired until all the children are added (and order doesn\'t matter)',
-							{
-								'foo:Click':{
-									handler:_defaultHandler,
-									required:['baz', 'bat', 'baf']
-								}
-							},
-							{
-								foo:{
-									Click:{
-										handler:_defaultHandler,
-										required:['baz', 'bat', 'baf']
-									}
-								}
-							},
-							{
-								child:{
-									foo:['Click']
-								}
-							},
-							{
-								child:{
-									foo:{
-										Click:['bat', 'baf', 'baz']
-									}
-								}
-							}
-						)
+								)
+							]
+						}
 					]
 				},
 				{
@@ -530,17 +565,14 @@ Uize.module ({
 						),
 						_generateTest(
 							'When multiple events binding are declared, only those events are bound',
-							Uize.lookup(
-								[
-									':Click',
-									':Changed.value'
-								],
-								_defaultHandler
-							),
+							{
+								':Click':_defaultHandler,
+								':Changed.value':_defaultChangedHandler
+							},
 							{
 								'':{
 									Click:_defaultHandler,
-									'Changed.value':_defaultHandler
+									'Changed.value':_defaultChangedHandler
 								}
 							},
 							{
@@ -749,64 +781,226 @@ Uize.module ({
 								}
 							}
 						),
-						_generateTest(
-							'When a single required child for a node event binding is declared, the event is not fired until the child is added',
-							{
-								'#foo:click':{
-									handler:_defaultHandler,
-									required:['baz']
-								}
-							},
-							{
-								'#foo':{
-									click:{
-										handler:_defaultHandler,
-										required:['baz']
+						{
+							title:'Required children',
+							test:[
+								_generateTest(
+									'When required is left unspecified for a node event binding, the event is fired normally (w/ no errors)',
+									{
+										'#foo:click':{
+											handler:_defaultHandler
+										}
+									},
+									{
+										'#foo':{
+											click:{
+												handler:_defaultHandler
+											}
+										}
+									},
+									{
+										node:{
+											foo:['click']
+										}
 									}
-								}
-							},
-							{
-								node:{
-									foo:['click']
-								}
-							},
-							{
-								node:{
-									foo:{
-										click:['baz']
+								),
+								_generateTest(
+									'When a single required child for a node event binding is declared, the event is not fired until the child is added',
+									{
+										'#foo:click':{
+											handler:_defaultHandler,
+											required:['baz']
+										}
+									},
+									{
+										'#foo':{
+											click:{
+												handler:_defaultHandler,
+												required:['baz']
+											}
+										}
+									},
+									{
+										node:{
+											foo:['click']
+										}
+									},
+									{
+										node:{
+											foo:{
+												click:['baz']
+											}
+										}
 									}
-								}
-							}
-						),
-						_generateTest(
-							'When multiple required children for a node event binding are declared, the event is not fired until all the children are added (and order doesn\'t matter)',
-							{
-								'#foo:click':{
-									handler:_defaultHandler,
-									required:['baz', 'bat', 'baf']
-								}
-							},
-							{
-								'#foo':{
-									click:{
-										handler:_defaultHandler,
-										required:['baz', 'bat', 'baf']
+								),
+								_generateTest(
+									'When multiple required children for a node event binding are declared, the event is not fired until all the children are added (and order doesn\'t matter)',
+									{
+										'#foo:click':{
+											handler:_defaultHandler,
+											required:['baz', 'bat', 'baf']
+										}
+									},
+									{
+										'#foo':{
+											click:{
+												handler:_defaultHandler,
+												required:['baz', 'bat', 'baf']
+											}
+										}
+									},
+									{
+										node:{
+											foo:['click']
+										}
+									},
+									{
+										node:{
+											foo:{
+												click:['bat', 'baf', 'baz']
+											}
+										}
 									}
-								}
-							},
-							{
-								node:{
-									foo:['click']
-								}
-							},
-							{
-								node:{
-									foo:{
-										click:['bat', 'baf', 'baz']
+								)
+							]
+						},
+						{
+							title:'Conditional Firing (fireIf)',
+							test:Uize.push(
+								Uize.map(
+									[
+										{
+											title:'When fireIf is unspecified, the wired DOM event doesn\'t fire if busy or disabled'
+										},
+										{
+											title:'When fireIf is null, the wired DOM event doesn\'t fire if busy or disabled',
+											fireIf:null
+										},
+										{
+											title:'When fireIf is undefined, the wired DOM event doesn\'t fire if busy or disabled',
+											fireIf:undefined
+										},
+										{
+											title:'When fireIf is empty string, the wired DOM event doesn\'t fire if busy or disabled',
+											fireIf:''
+										}
+									],
+									function (_eventBindingsInfo) {
+										return {
+											title:_eventBindingsInfo.title,
+											test:function(_continue) {
+												var
+													_testWidgetClassInstance = _getTestWidgetClassInstance(
+														{
+															'#myNode:click':Uize.copyInto(
+																{
+																	handler:function() {
+																		clearTimeout(_notFiredTimeout);
+																		_continue(false);
+																	}
+																},
+																_eventBindingsInfo.fireIf ? {fireIf:_eventBindingsInfo.fireIf} : null
+															)
+														},
+														null,
+														['myNode']
+													),
+													_notFiredTimeout
+												;
+												
+												_testWidgetClassInstance.met('wired');
+												
+												// set widget to busy or disabled
+												_testWidgetClassInstance.set(
+													Math.floor(Math.random() * 2)
+														? {enabled:false}
+														: {busy:true}
+												);
+	
+												// fire DOM node event (shouldn't actually be handled by widget)
+												_testWidgetClassInstance.getNode('myNode').triggerEvent({
+													name:'click'
+												});
+												
+												_notFiredTimeout = setTimeout(
+													function() { _continue(true) },
+													0
+												);
+											}
+										};
 									}
-								}
-							}
-						)
+								),
+								[
+									{
+										title:'When fireIf is specified, the wired DOM event doesn\'t fire if the condition hasn\'t been met',
+										test:function(_continue) {
+											var
+												_testWidgetClassInstance = _getTestWidgetClassInstance(
+													{
+														'#myNode:click':{
+															handler:function() {
+																clearTimeout(_notFiredTimeout);
+																_continue(false);
+															},
+															fireIf:'foo'
+														}
+													},
+													null,
+													['myNode']
+												),
+												_notFiredTimeout
+											;
+											
+											_testWidgetClassInstance.met('wired');
+
+											// fire DOM node event (shouldn't actually be handled by widget)
+											_testWidgetClassInstance.getNode('myNode').triggerEvent({
+												name:'click'
+											});
+											
+											_notFiredTimeout = setTimeout(
+												function() { _continue(true) },
+												0
+											);
+										}
+									},
+									{
+										title:'When fireIf is specified, the wired DOM event fires when the condition has been met',
+										test:function(_continue) {
+											var
+												_testWidgetClassInstance = _getTestWidgetClassInstance(
+													{
+														'#myNode:click':{
+															handler:function() {
+																clearTimeout(_notFiredTimeout);
+																_continue(true);
+															},
+															fireIf:'foo'
+														}
+													},
+													null,
+													['myNode']
+												),
+												_notFiredTimeout
+											;
+											
+											_testWidgetClassInstance.met('wired');
+											_testWidgetClassInstance.met('foo');
+											
+											_notFiredTimeout = setTimeout(
+												function() { _continue(false) },
+												0
+											);
+
+											// fire DOM node event (shouldn't actually be handled by widget)
+											_testWidgetClassInstance.getNode('myNode').triggerEvent({
+												name:'click'
+											});
+										}
+									}
+								]
+							)
+						}
 					]
 				},
 				{
@@ -854,19 +1048,23 @@ Uize.module ({
 						),
 						_generateTest(
 							'When events for a self and root node with the same name are declared, the proper events are bound',
-							Uize.lookup(
-								[
-									':Click',
-									':Changed.bar',
-									'#:click',
-									'#:unload'
-								],
-								_defaultHandler
+							Uize.copyInto(
+								Uize.lookup(
+									[
+										':Click',
+										'#:click',
+										'#:unload'
+									],
+									_defaultHandler
+								),
+								{
+									':Changed.bar':_defaultChangedHandler	
+								}
 							),
 							{
 								'':{
 									Click:_defaultHandler,
-									'Changed.bar':_defaultHandler
+									'Changed.bar':_defaultChangedHandler
 								},
 								'#':{
 									click:_defaultHandler,
@@ -892,7 +1090,7 @@ Uize.module ({
 									handler:_defaultHandler,
 									required:['green']
 								},
-								':Changed.bar':_defaultHandler,
+								':Changed.bar':_defaultChangedHandler,
 								'#:click':_defaultHandler,
 								'#:unload':_defaultHandler,
 								'#lorem:change':{
@@ -921,7 +1119,7 @@ Uize.module ({
 										handler:_defaultHandler,
 										required:['green']
 									},
-									'Changed.bar':_defaultHandler
+									'Changed.bar':_defaultChangedHandler
 								},
 								'#':{
 									click:_defaultHandler,
@@ -992,93 +1190,94 @@ Uize.module ({
 					]
 				},
 				{
-					title:'When a bound child is removed, a fired event on the child is properly handled (no errors & not fired on parent)',
-					test:function(_continue) {
-						var
-							_widget = _getTestWidgetClassInstance(
-								{
-									'childA:Click':function() { _continue(false) }
-								},
-								['childA']
-							),
-							_childToRemove = _widget.children.childA // keep reference so we'll have it after removal
-						;
-						
-						_widget.removeChild(_childToRemove);
-						
-						// fire child event (shouldn't actually be handled by the parent)
-						_childToRemove.fire('Click');
-						
-						setTimeout(
-							function() { _continue(true) },
-							0
-						);
-					}
-				},
-				{
-					title:'When a bound child is removed, and a new same-named child is re-added, a child event is handled by the parent',
-					test:function(_continue) {
-						var
-							_widget = _getTestWidgetClassInstance(
-								{
-									'childA:Click':function() {
-										clearTimeout(_failTimeout);
-										_continue(true);
-									}
-								},
-								['childA']
-							),
-							_failTimeout
-						;
-						
-						// remove child
-						_widget.removeChild('childA');
-						
-						// add new same-named child
-						var _newChild = _widget.addChild('childA', Uize.Widget);
-						
-						// this shouldn't happen because the handler should be rebound when new child was added
-						_failTimeout = setTimeout(
-							function() { _continue(false) }, 
-							0
-						);
-						
-						_newChild.fire('Click'); // fire child event (should be handled by parent)
-					}
-				},
-				{
-					title:'When a subclass declares the same child/event combination, the base class\' handler is called',
-					test:function(_continue) {
-						var
-							_WidgetClass = _getTestWidgetClass(
-								{
-									'childA:Click':function() {
-										clearTimeout(_failTimeout);
-										_continue(true);
-									}
-								},
-								['childA']
-							),
-							_WidgetSubclass = _WidgetClass.subclass({
-								eventBindings:{
-									'childA:Click':function() { }
-								}
-							}),
-							_failTimeout
-						;
-						
-						// this shouldn't happen because the handler should be rebound when new child was added
-						_failTimeout = setTimeout(
-							function() { _continue(false) }, 
-							0
-						);
-						
-						_WidgetSubclass().children.childA.fire('Click');
-					}
-				},
-				{
-					title:'When a subclass declares the same child/event combination, the subclass class\' handler is called',
-					test:[]
+					title:'Edge cases',
+					test:[
+						{
+							title:'When a bound child is removed, a fired event on the child is properly handled (no errors & not fired on parent)',
+							test:function(_continue) {
+								var
+									_widget = _getTestWidgetClassInstance(
+										{
+											'childA:Click':function() { _continue(false) }
+										},
+										['childA']
+									),
+									_childToRemove = _widget.children.childA // keep reference so we'll have it after removal
+								;
+								
+								_widget.removeChild(_childToRemove);
+								
+								// fire child event (shouldn't actually be handled by the parent)
+								_childToRemove.fire('Click');
+								
+								setTimeout(
+									function() { _continue(true) },
+									0
+								);
+							}
+						},
+						{
+							title:'When a bound child is removed, and a new same-named child is re-added, a child event is handled by the parent',
+							test:function(_continue) {
+								var
+									_widget = _getTestWidgetClassInstance(
+										{
+											'childA:Click':function() {
+												clearTimeout(_failTimeout);
+												_continue(true);
+											}
+										},
+										['childA']
+									),
+									_failTimeout
+								;
+								
+								// remove child
+								_widget.removeChild('childA');
+								
+								// add new same-named child
+								var _newChild = _widget.addChild('childA', Uize.Widget);
+								
+								// this shouldn't happen because the handler should be rebound when new child was added
+								_failTimeout = setTimeout(
+									function() { _continue(false) }, 
+									0
+								);
+								
+								_newChild.fire('Click'); // fire child event (should be handled by parent)
+							}
+						},
+						{
+							title:'When a subclass declares the same child/event combination, the base class\' handler is called',
+							test:function(_continue) {
+								var
+									_WidgetClass = _getTestWidgetClass(
+										{
+											'childA:Click':function() {
+												clearTimeout(_failTimeout);
+												_continue(true);
+											}
+										},
+										['childA']
+									),
+									_WidgetSubclass = _WidgetClass.subclass({
+										eventBindings:{
+											'childA:Click':function() { }
+										}
+									}),
+									_failTimeout
+								;
+								
+								// this shouldn't happen because the handler should be rebound when new child was added
+								_failTimeout = setTimeout(
+									function() { _continue(false) }, 
+									0
+								);
+								
+								_WidgetSubclass().children.childA.fire('Click');
+							}
+						}
+					]
 				},
 				{
 					title:'Fake Test to reset global window object',

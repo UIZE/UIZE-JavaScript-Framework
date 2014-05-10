@@ -38,9 +38,9 @@ Uize.module ({
 						_declarativeElements,
 						function(_childProperties) {
 							if (Uize.isPlainObject(_childProperties) && _childProperties.widgetClass)
-								_childProperties.widgetClass = Uize.eval(_childProperties.widgetClass);
+								_childProperties.widgetClass = Uize.getModuleByName(_childProperties.widgetClass);
 							else if (Uize.isString(_childProperties))
-								_childProperties = Uize.eval(_childProperties);
+								_childProperties = Uize.getModuleByName(_childProperties);
 							
 							return _childProperties;
 						}

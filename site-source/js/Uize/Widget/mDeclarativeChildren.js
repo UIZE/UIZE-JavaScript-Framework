@@ -122,7 +122,7 @@ Uize.module ({
 									MyNamespace.MyWidgetClass = Uize.Widget.mDeclarativeChildren.subclass ({
 										children:{
 											menu:Uize.Widget,
-											cancel:Uize.Button
+											cancel:Uize.Widget.Button
 										}
 									});
 									......................................................

@@ -47,7 +47,8 @@ Uize.module ({
 								var _bindingValueIsObject = _Uize.isObject(_bindingValue);
 								
 								// ensure that the required child widgets have been added before calling the handler
-								_addedChildren.isMet(_bindingValueIsObject ? _bindingValue.required : [])
+								_addedChildren.isMet(_bindingValueIsObject && _bindingValue.required ? _bindingValue.required : [])
+									&& m.isMet(_bindingValueIsObject && _bindingValue.fireIf ? _bindingValue.fireIf : 'enabledInherited,!busyInherited')
 									&& (_bindingValueIsObject ? _bindingValue.handler : _bindingValue).call(_context, _event, _source)
 								;
 							};
@@ -65,20 +66,13 @@ Uize.module ({
 										var _node = m.getNode(_nodeName);
 										_forEach(
 											_bindings, // an array of objects
-											function(_events) {
-												_forEach(
-													_events, // an object of 0 or more event bindings
-													function(_binding, _eventName) {
-														m.wireNode(_node, _eventName, _wrapBinding(m, _binding, _node));
-													}
-												);
-											}
+											function(_event) { m.wireNode(_node, _event[0], _wrapBinding(m, _event[1], _node)) }
 										);
 									}
 								);
 							}
-						);    
-
+						);
+						
 					/*** wire self & child widget events ***/
 						_forEach(
 							_mClass.mEventBindings_widget, // a lookup of widgetNames -> bindings
@@ -86,18 +80,13 @@ Uize.module ({
 								function _wire(_widget) {
 									_forEach(
 										_bindings, // an array of objects
-										function(_events) {
-											_forEach(
-												_events, // an object of 0 or more event bindings
-												function(_binding, _eventName) {
-													var _eventToWire = _Uize.pairUp(_eventName, _wrapBinding(m, _binding, _widget));
+										function(_event) {
+											var _eventToWire = _Uize.pairUp(_event[0], _wrapBinding(m, _event[1], _widget));
+											
+											_widget.wire(_eventToWire);
 
-													_widget.wire(_eventToWire);
-		
-													// store a reference to the wired event for later
-													(_wiredWidgetEvents[_widgetName] || (_wiredWidgetEvents[_widgetName] = [])).push(_eventToWire);
-												}
-											);
+											// store a reference to the wired event for later
+											(_wiredWidgetEvents[_widgetName] || (_wiredWidgetEvents[_widgetName] = [])).push(_eventToWire);
 										}
 									);
 								}
@@ -132,8 +121,9 @@ Uize.module ({
 				staticMethods:{
 					eventBindings:function(_bindings) {
 						var
-							_domEventBindings = this.mEventBindings_dom,
-							_widgetEventBindings = this.mEventBindings_widget,
+							_Class = this,
+							_domEventBindings = _Class.mEventBindings_dom,
+							_widgetEventBindings = _Class.mEventBindings_widget,
 							_undefined
 						;
 						
@@ -142,20 +132,49 @@ Uize.module ({
 							function(_eventBindingValue, _eventBindingKey) {
 								var
 									_eventBindingKeyTokens = _eventBindingKey.split(':'), // NOTE: widget events with colons won't work as a result
-									_nodeOrWidgetName = _eventBindingKeyTokens[0],
+									_sourceName = _eventBindingKeyTokens[0],
 									_dotIndex = -1,
-									_eventBindings = (!_nodeOrWidgetName.indexOf('#') ? (_nodeOrWidgetName = _nodeOrWidgetName.substr(1)) : _undefined) != _undefined // DOM references start with #
+									_eventBindings = (!_sourceName.indexOf('#') ? (_sourceName = _sourceName.substr(1)) : _undefined) != _undefined // DOM references start with #
 										? _domEventBindings
-										: _widgetEventBindings
+										: _widgetEventBindings,
+									_eventBindingsForSource = (_eventBindings[_sourceName] || (_eventBindings[_sourceName] = [])),
+									_addBinding = function(_binding, _eventName) {
+										if (!_sourceName && _eventBindings == _widgetEventBindings && _Uize.isFunction(_binding) && !_eventName.indexOf('Changed.')) {
+											var _propertyName = _eventName.slice(8);
+											// For optimization purposes, we want to add a self widget Changed.* handler for the onChange property
+											// of the property name
+											_Class.stateProperties(
+												_Uize.pairUp(
+													_propertyName,
+													{
+														onChange:function() {
+															var m = this;
+															_binding.call(
+																m,
+																{
+																	name:_eventName,
+																	source:m,
+																	newValue:m.get(_propertyName)
+																},
+																m
+															)
+														}
+													}
+												)
+											);
+										}
+										else
+											// push binding info to an array instead of adding to an object (with event name as key) so that subclasses can also wire
+											// up the same event for the same child without overriding
+											_eventBindingsForSource.push([_eventName, _binding])
+										;
+									}
 								;
 								
-								// add binding(s) to an array instead of an object (with event name as key) so that subclasses can also wire
-								// up the same event for the same child
-								(_eventBindings[_nodeOrWidgetName] || (_eventBindings[_nodeOrWidgetName] = [])).push(
-									_eventBindingKeyTokens.length > 1 // short-hand syntax where the 2nd token is the event
-										? _Uize.pairUp(_eventBindingKeyTokens[1], _eventBindingValue)
-										: _eventBindingValue
-								);
+								_eventBindingKeyTokens.length > 1 // short-hand syntax where the 2nd token is the event
+									? _addBinding(_eventBindingValue, _eventBindingKeyTokens[1])
+									: _forEach(_eventBindingValue, _addBinding)
+								;
 							}
 						);
 						/*?
@@ -174,11 +193,14 @@ Uize.module ({
 										eventBindings:{
 											'#menu':{ // DOM node
 												click:function (event, sourceNode) { },
-												mouseover:function(_event, sourceNode) { }
+												mouseover:{
+													handler:function(_event, sourceNode) { },
+													fireIf:'busyInherited'
+												}
 											},
 											'sliderG':{ // child widget
-												'Changed.value':function (event) { },
-												Update:function(_event) { }
+												'Changed.value':function (event, sourceWidget) { },
+												Update:function(_event, sourceWidget) { }
 											},
 											'':{ // self
 												'Changed.value':function (event) { },
@@ -196,9 +218,12 @@ Uize.module ({
 									MyNamespace.MyWidgetClass = Uize.Widget.mEventBindings.subclass ({
 										eventBindings:{
 											'#menu:click':function(event, sourceNode) { },
-											'#menu:mouseover':function(event, sourceNode) { }
-											'sliderG:Changed.value':function (_event) { },
-											'sliderG:Update':function(event) { },
+											'#menu:mouseover':{
+												handler:function(event, sourceNode) { },
+												fireIf:'busyInherited'
+											},
+											'sliderG:Changed.value':function (_event, sourceWidget) { },
+											'sliderG:Update':function(event, sourceWidget) { },
 											':Changed.value':function (event) { },
 											':Update':{
 												handler:function(event) { },

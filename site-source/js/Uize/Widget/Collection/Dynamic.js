@@ -268,7 +268,7 @@ Uize.module ({
 									_lastInsertPointItem = _insertPointItem;
 									_lastInsertPointModeNo = _insertPointModeNo;
 								}
-								_drag.set ({cursor:_insertPointItem || _itemWidgetOver ? 'move' : 'not-allowed'});
+								_drag.set ({cursor:_insertPointItem || _itemWidgetOver ? m._dragCursor : 'not-allowed'});
 							},
 						'Drag Done':
 							function () {
@@ -477,6 +477,10 @@ Uize.module ({
 				_confirmToDrag:{
 					name:'confirmToDrag',
 					value:_false
+				},
+				_dragCursor:{
+					name: 'dragCursor',
+					value: 'move'
 				},
 				_dragIgnoresLocked:{
 					name:'dragIgnoresLocked',
