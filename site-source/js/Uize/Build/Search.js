@@ -34,6 +34,7 @@ Uize.module ({
 		'Uize.Build.Util',
 		'Uize.Str.Lines',
 		'Uize.Str.Repeat',
+		'Uize.Str.Search',
 		'Uize.Services.FileSystem'
 	],
 	builder:function () {
@@ -42,18 +43,6 @@ Uize.module ({
 		var _repeat = Uize.Str.Repeat.repeat;
 
 		/*** Utility Functions ***/
-			function _getLineAndChar (_text,_charPos) {
-				var
-					_linesUpToChar = Uize.Str.Lines.split (_text.slice (0,_charPos + 1)),
-					_line = _linesUpToChar.length - 1,
-					_char = _linesUpToChar [_line].length - 1
-				;
-				if (_char < 0)
-					_char = _linesUpToChar [--_line].length - 1
-				;
-				return [_line,_char];
-			}
-
 			function _resolveMatcher (_matcher) {
 				if (Uize.isArray (_matcher)) {
 					var
@@ -88,10 +77,6 @@ Uize.module ({
 					_totalFilesWithMatches = 0,
 					_totalMatches = 0
 				;
-				_matcher = new RegExp (
-					_matcher.source,
-					'g' + (_matcher.ignoreCase ? 'i' : '') + (_matcher.multiline ? 'm' : '')
-				);
 				Uize.Build.Util.buildFiles ({
 					targetFolderPathCreator:function (_folderPath) {
 						return _currentFolderPath = _folderPath;
@@ -101,21 +86,13 @@ Uize.module ({
 						return _pathMatcher (_sourceFilePath) && !_pathFilter (_sourceFilePath) ? _sourceFileName : null;
 					},
 					fileBuilder:function (_sourceFileName,_sourceFileText) {
-						_matcher.lastIndex = 0;
 						var
-							_matches,
-							_match
+							_matches = Uize.Str.Search.search (_sourceFileText,_matcher),
+							_matchesLength = _matches.length
 						;
-						while (_match = _matcher.exec (_sourceFileText)) {
-							var _startChar = _match.index;
-							(_matches || (_matches = [])).push ({
-								startChar:_startChar,
-								endChar:_startChar + _match [0].length - 1
-							});
-						}
-						if (_matches) {
+						if (_matchesLength) {
 							_totalFilesWithMatches++;
-							_totalMatches += _matches.length;
+							_totalMatches += _matchesLength;
 							var
 								_sourceFileLines = Uize.Str.Lines.split (_sourceFileText),
 								_sourceFileLinesDeTabbed = []
@@ -129,14 +106,14 @@ Uize.module ({
 										_matches,
 										function (_match) {
 											var
-												_startLineAndChar = _getLineAndChar (_sourceFileText,_match.startChar),
-												_endLineAndChar = _getLineAndChar (_sourceFileText,_match.endChar),
-												_matchStartLine = _startLineAndChar [0],
-												_matchEndLine = _endLineAndChar [0],
+												_matchStart = _match.start,
+												_matchEnd = _match.end,
+												_matchStartLine = _matchStart.line,
+												_matchEndLine = _matchEnd.line,
 												_startLine = Math.max (_matchStartLine - _contextLines,0),
 												_endLine = Math.min (_matchEndLine + _contextLines,_sourceFileLines.length - 1),
-												_matchStartChar = Math.max (_startLineAndChar [1],0),
-												_matchEndChar = Math.max (_endLineAndChar [1],0)
+												_matchStartChar = Math.max (_matchStart.char,0),
+												_matchEndChar = Math.max (_matchEnd.char,0)
 											;
 											for (var _lineNo = _startLine - 1; ++_lineNo < _endLine + 1;) {
 												if (!_sourceFileLinesDeTabbed [_lineNo]) {
@@ -162,7 +139,7 @@ Uize.module ({
 													'\n'
 											;
 											return (
-												'LINE ' + _matchStartLine + ' (CHAR ' + _startLineAndChar [1] + ') -> LINE ' + _matchEndLine + ' (CHAR ' + _endLineAndChar [1] + ')\n' +
+												'LINE ' + _matchStartLine + ' (CHAR ' + _matchStart.char + ') -> LINE ' + _matchEndLine + ' (CHAR ' + _matchEnd.char + ')\n' +
 												'\n' +
 												_separator +
 												Uize.map (
