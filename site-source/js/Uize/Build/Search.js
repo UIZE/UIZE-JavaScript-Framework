@@ -31,7 +31,6 @@
 Uize.module ({
 	name:'Uize.Build.Search',
 	required:[
-		'Uize.Build.Util',
 		'Uize.Str.Lines',
 		'Uize.Str.Repeat',
 		'Uize.Str.Search',
@@ -40,53 +39,52 @@ Uize.module ({
 	builder:function () {
 		'use strict';
 
-		var _repeat = Uize.Str.Repeat.repeat;
-
-		/*** Utility Functions ***/
-			function _resolveMatcher (_matcher) {
-				if (Uize.isArray (_matcher)) {
-					var
-						_subMatchers = Uize.map (_matcher,_resolveMatcher),
-						_subMatchersLength = _subMatchers.length
-					;
-					return function (_value) {
-						for (var _subMatcherNo = -1; ++_subMatcherNo < _subMatchersLength;) {
-							if (!_subMatchers [_subMatcherNo] (_value))
-								return false
-							;
-						}
-						return true;
-					}
-				} else {
-					return Uize.resolveMatcher (_matcher);
-				}
-			}
-
 		return Uize.package ({
 			perform:function (_params) {
+				function _resolveMatcher (_matcher) {
+					if (Uize.isArray (_matcher)) {
+						var
+							_subMatchers = Uize.map (_matcher,_resolveMatcher),
+							_subMatchersLength = _subMatchers.length
+						;
+						return function (_value) {
+							for (var _subMatcherNo = -1; ++_subMatcherNo < _subMatchersLength;) {
+								if (!_subMatchers [_subMatcherNo] (_value))
+									return false
+								;
+							}
+							return true;
+						}
+					} else {
+						return Uize.resolveMatcher (_matcher);
+					}
+				}
 				var
+					_repeat = Uize.Str.Repeat.repeat,
 					_preset = _params.preset,
 					_searchParams = ((_params.moduleConfigs || {}) ['Uize.Build.Search']).presets [_preset],
 					_matcher = _searchParams.matcher,
 					_pathMatcher = _resolveMatcher (_searchParams.pathMatcher),
 					_pathFilter = _resolveMatcher (_searchParams.pathFilter || Uize.returnFalse),
 					_contextLines = Uize.toNumber (_params.contextLines,5),
-					_outputChunks = [],
+					_logChunks = [],
 					_currentFolderPath,
 					_fileSystem = Uize.Services.FileSystem.singleton (),
 					_totalFilesWithMatches = 0,
-					_totalMatches = 0
+					_totalMatches = 0,
+					_sourcePath = _params.rootFolderPath || _params.sourcePath
 				;
-				Uize.Build.Util.buildFiles ({
-					targetFolderPathCreator:function (_folderPath) {
-						return _currentFolderPath = _folderPath;
-					},
-					targetFilenameCreator:function (_sourceFileName) {
-						var _sourceFilePath = _currentFolderPath + '/' + _sourceFileName;
-						return _pathMatcher (_sourceFilePath) && !_pathFilter (_sourceFilePath) ? _sourceFileName : null;
-					},
-					fileBuilder:function (_sourceFileName,_sourceFileText) {
+				function _log (_logChunk) {
+					_logChunks.push (_logChunk);
+					console.log (_logChunk);
+				}
+				_fileSystem.getFiles ({
+					path:_sourcePath,
+					pathMatcher:function (_filePath) {return _pathMatcher (_filePath) && !_pathFilter (_filePath)},
+					pathTransformer:function (_filePath) {
 						var
+							_sourceFilePath = _sourcePath + '/' + _filePath,
+							_sourceFileText = _fileSystem.readFile ({path:_sourceFilePath}),
 							_matches = Uize.Str.Search.search (_sourceFileText,_matcher),
 							_matchesLength = _matches.length
 						;
@@ -97,8 +95,8 @@ Uize.module ({
 								_sourceFileLines = Uize.Str.Lines.split (_sourceFileText),
 								_sourceFileLinesDeTabbed = []
 							;
-							_outputChunks.push (
-								_currentFolderPath + '/' + _sourceFileName + '\n' +
+							_log (
+								_sourceFilePath + '\n' +
 								Uize.Str.Lines.indent (
 									'MATCHES IN THIS FILE: ' + _matches.length + '\n' +
 									'\n' +
@@ -170,20 +168,11 @@ Uize.module ({
 								)
 							);
 						}
-						return {};
 					},
-					dryRun:true,
-					alwaysBuild:true,
-					rootFolderPath:_params.rootFolderPath || _params.sourcePath,
-					logFilePath:null
+					recursive:true
 				});
-				_outputChunks.unshift (
-					'SUMMARY: ' + _totalMatches + ' matches in ' + _totalFilesWithMatches + ' files',
-					''
-				);
-				var _output = _outputChunks.join ('\n');
-				_fileSystem.writeFile ({path:'logs/search-' + _preset + '.log',contents:_output});
-				console.log (_output);
+				_log ('SUMMARY: ' + _totalMatches + ' matches in ' + _totalFilesWithMatches + ' files');
+				_fileSystem.writeFile ({path:'logs/search-' + _preset + '.log',contents:_logChunks.join ('\n')});
 			}
 		});
 	}
