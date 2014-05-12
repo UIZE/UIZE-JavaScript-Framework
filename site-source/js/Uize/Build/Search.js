@@ -110,8 +110,8 @@ Uize.module ({
 												_matchEndLine = _matchEnd.line,
 												_startLine = Math.max (_matchStartLine - _contextLines,0),
 												_endLine = Math.min (_matchEndLine + _contextLines,_sourceFileLines.length - 1),
-												_matchStartChar = Math.max (_matchStart.char,0),
-												_matchEndChar = Math.max (_matchEnd.char,0)
+												_matchStartChar = Math.max (_matchStart.lineChar,0),
+												_matchEndChar = Math.max (_matchEnd.lineChar,0)
 											;
 											for (var _lineNo = _startLine - 1; ++_lineNo < _endLine + 1;) {
 												if (!_sourceFileLinesDeTabbed [_lineNo]) {
@@ -137,7 +137,7 @@ Uize.module ({
 													'\n'
 											;
 											return (
-												'LINE ' + _matchStartLine + ' (CHAR ' + _matchStart.char + ') -> LINE ' + _matchEndLine + ' (CHAR ' + _matchEnd.char + ')\n' +
+												'LINE ' + _matchStartLine + ' (CHAR ' + _matchStart.lineChar + ') -> LINE ' + _matchEndLine + ' (CHAR ' + _matchEnd.lineChar + ')\n' +
 												'\n' +
 												_separator +
 												Uize.map (
