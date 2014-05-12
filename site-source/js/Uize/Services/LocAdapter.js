@@ -199,15 +199,6 @@ Uize.module ({
 				return _pseudoLocalizedResources;
 			}
 
-			function _prepareToExecuteMethod (m,_totalSteps) {
-				m._methodTotalSteps = _totalSteps;
-				m._methodCompletedSteps = 0;
-			}
-
-			function _stepCompleted (m,_message) {
-				m._log (_message,++m._methodCompletedSteps / m._methodTotalSteps);
-			}
-
 			function _languageResourcesFilePath (m,_language) {
 				return m._workingFolderPath + _language + '.json';
 			}
@@ -258,34 +249,6 @@ Uize.module ({
 				);
 			}
 
-			function _gatherResources (m) {
-				var
-					_resources = {},
-					_rootFolderPath = m.project.rootFolderPath,
-					_resourceFiles = _fileSystem.getFiles ({
-						path:_rootFolderPath,
-						pathMatcher:function (_filePath) {return m.isResourceFile (_filePath)},
-						recursive:true
-					})
-				;
-				Uize.forEach (
-					_resourceFiles,
-					function (_filePath) {
-						try {
-							_resources [_filePath] = m.parseResourceFile (
-								_fileSystem.readFile ({path:_rootFolderPath + '/' + _filePath})
-							);
-						} catch (_error) {
-							console.log (
-								'ERROR: problem parsing file ' + _filePath + '\n' +
-								_error
-							);
-						}
-					}
-				);
-				return _resources;
-			}
-
 			function _getStringMetrics (m,_sourceStr) {
 				var
 					_stringSegments = _split (_sourceStr,m.wordSplitter),
@@ -334,6 +297,44 @@ Uize.module ({
 
 		return _superclass.subclass ({
 			instanceMethods:{
+				prepareToExecuteMethod:function (_totalSteps) {
+					this._methodTotalSteps = _totalSteps;
+					this._methodCompletedSteps = 0;
+				},
+
+				stepCompleted:function (_message) {
+					this._log (_message,++this._methodCompletedSteps / this._methodTotalSteps);
+				},
+
+				gatherResources:function () {
+					var
+						m = this,
+						_resources = {},
+						_rootFolderPath = m.project.rootFolderPath,
+						_resourceFiles = _fileSystem.getFiles ({
+							path:_rootFolderPath,
+							pathMatcher:function (_filePath) {return m.isResourceFile (_filePath)},
+							recursive:true
+						})
+					;
+					Uize.forEach (
+						_resourceFiles,
+						function (_filePath) {
+							try {
+								_resources [_filePath] = m.parseResourceFile (
+									_fileSystem.readFile ({path:_rootFolderPath + '/' + _filePath})
+								);
+							} catch (_error) {
+								console.log (
+									'ERROR: problem parsing file ' + _filePath + '\n' +
+									_error
+								);
+							}
+						}
+					);
+					return _resources;
+				},
+
 				getLanguageResourcePath:function (_enResourcePath,_language) {
 					// this method should be implemented by subclasses
 				},
@@ -367,10 +368,6 @@ Uize.module ({
 					// this method should be implemented by subclasses
 				},
 
-				isReferencingFile:function (_filePath) {
-					// this method should be implemented by subclasses
-				},
-
 				parseResourceFile:function (_resourceFileText) {
 					// this method should be implemented by subclasses
 				},
@@ -386,15 +383,15 @@ Uize.module ({
 						_primaryLanguage = _project.primaryLanguage,
 						_languages = _project.languages
 					;
-					_prepareToExecuteMethod (m,(_languages.length - !_project.importPrimary) * 2);
+					m.prepareToExecuteMethod ((_languages.length - !_project.importPrimary) * 2);
 					Uize.forEach (
 						_languages,
 						function (_language) {
 							if (_language != _primaryLanguage || _project.importPrimary) {
 								var _resources = _readLanguageResourcesFile (m,_language);
-								_stepCompleted (m,_language + ': read language resources file');
+								m.stepCompleted (_language + ': read language resources file');
 								_resources && _distributeResources (m,_resources,_language,_project);
-								_stepCompleted (m,_language + ': distributed strings to individual resource files');
+								m.stepCompleted (_language + ': distributed strings to individual resource files');
 							}
 						}
 					);
@@ -406,7 +403,7 @@ Uize.module ({
 						m = this,
 						_project = m.project,
 						_rootFolderPath = _project.rootFolderPath,
-						_primaryLanguageResources = _gatherResources (m),
+						_primaryLanguageResources = m.gatherResources (),
 						_primaryLanguage = _project.primaryLanguage,
 						_primaryLanguageResourcesLast = _readLanguageResourcesFile (m,_primaryLanguage) || {},
 						_primaryLanguageResourcesDiff = Uize.Data.Diff.diff (
@@ -418,8 +415,7 @@ Uize.module ({
 						_totalTranslatableLanguages = _totalLanguages - 2
 					;
 
-					_prepareToExecuteMethod (
-						m,
+					m.prepareToExecuteMethod (
 						_totalTranslatableLanguages * Uize.totalKeys (_primaryLanguageResources) +
 							// total number of resource files to gather, across all translatable languages
 						_totalLanguages
@@ -456,7 +452,7 @@ Uize.module ({
 												);
 											}
 										);
-										_stepCompleted (m,'Gathered resources from file: ' + _resourceFilePath);
+										m.stepCompleted ('Gathered resources from file: ' + _resourceFilePath);
 									}
 								);
 							}
@@ -469,7 +465,7 @@ Uize.module ({
 						_resoucesByLanguage,
 						function (_languageResources,_language) {
 							_writeLanguageResourcesFile (m,_language,_languageResources);
-							_stepCompleted (m,'Created resources file for language: ' + _language);
+							m.stepCompleted ('Created resources file for language: ' + _language);
 						}
 					);
 					_callback ();
@@ -482,7 +478,7 @@ Uize.module ({
 						_primaryLanguageResources = _readLanguageResourcesFile (m,_project.primaryLanguage),
 						_totalTranslatableLanguages = _project.languages.length - 2
 					;
-					_prepareToExecuteMethod (m,_totalTranslatableLanguages * 3);
+					m.prepareToExecuteMethod (_totalTranslatableLanguages * 3);
 
 					_forEachTranslatableLanguage (
 						m,
@@ -502,7 +498,7 @@ Uize.module ({
 									),
 									_jobsPath = m._workingFolderPath + 'jobs/'
 								;
-								_stepCompleted (m,_language + ': determined strings that need translation');
+								m.stepCompleted (_language + ': determined strings that need translation');
 
 							/*** calculate metrics for translation job ***/
 								_calculateMetricsForLanguage (
@@ -511,7 +507,7 @@ Uize.module ({
 									_translationJobStrings,
 									_jobsPath + _language + '-metrics.json'
 								);
-								_stepCompleted (m,_language + ': calculated translation job metrics');
+								m.stepCompleted (_language + ': calculated translation job metrics');
 
 							/*** write translation job strings CSV file ***/
 								var _translationJobFilePath = _jobsPath + _language + '.csv';
@@ -532,7 +528,7 @@ Uize.module ({
 										)
 									})
 								;
-								_stepCompleted (m,_language + ': created translation job file');
+								m.stepCompleted (_language + ': created translation job file');
 						}
 					);
 					_callback ();
@@ -544,7 +540,7 @@ Uize.module ({
 						_project = m.project,
 						_totalTranslatableLanguages = _project.languages.length - 2
 					;
-					_prepareToExecuteMethod (m,_totalTranslatableLanguages * 2);
+					m.prepareToExecuteMethod (_totalTranslatableLanguages * 2);
 
 					_forEachTranslatableLanguage (
 						m,
@@ -567,7 +563,7 @@ Uize.module ({
 										) :
 										{}
 								;
-								_stepCompleted (m,_language + ': determined strings that have been translated');
+								m.stepCompleted (_language + ': determined strings that have been translated');
 
 							/*** update language resources file ***/
 								if (!Uize.isEmpty (_translatedStrings))
@@ -576,7 +572,7 @@ Uize.module ({
 										Uize.mergeInto (_readLanguageResourcesFile (m,_language),_translatedStrings)
 									)
 								;
-								_stepCompleted (m,_language + ': updated language resources file');
+								m.stepCompleted (_language + ': updated language resources file');
 						}
 					);
 					_callback ();
@@ -591,11 +587,11 @@ Uize.module ({
 						m = this,
 						_primaryLanguage = m.project.primaryLanguage
 					;
-					_prepareToExecuteMethod (m,2);
+					m.prepareToExecuteMethod (2);
 
 					/*** gather resources for primary language ***/
-						var _primaryLanguageResources = _gatherResources (m);
-						_stepCompleted (m,'gathered resources for primary language');
+						var _primaryLanguageResources = m.gatherResources ();
+						m.stepCompleted ('gathered resources for primary language');
 
 					/*** calculate metrics for primary language ***/
 						_calculateMetricsForLanguage (
@@ -604,34 +600,40 @@ Uize.module ({
 							_primaryLanguageResources,
 							m._workingFolderPath + 'metrics/' + _primaryLanguage + '.json'
 						);
-						_stepCompleted (m,'calculated metrics for primary language');
+						m.stepCompleted ('calculated metrics for primary language');
 
 					_callback ();
 				},
 
 				pseudoLocalize:function (_params,_callback) {
 					var m = this;
-					_prepareToExecuteMethod (m,3);
+					m.prepareToExecuteMethod (3);
 
 					/*** gather resources for primary language ***/
-						var _primaryLanguageResources = _gatherResources (m);
-						_stepCompleted (m,'gathered resources for primary language');
+						var _primaryLanguageResources = m.gatherResources ();
+						m.stepCompleted ('gathered resources for primary language');
 
 					/**( pseudo-localize resources for primary language ***/
 						var _pseudoLocalizedResources = _pseudoLocalizeResources (m,_primaryLanguageResources);
-						_stepCompleted (m,'pseudo-localized resources for primary language');
+						m.stepCompleted ('pseudo-localized resources for primary language');
 
 					/*** distributed pseudo-localized resources to individual resource files ***/
 						_distributeResources (m,_pseudoLocalizedResources,m.project.primaryLanguage);
-						_stepCompleted (m,'distributed pseudo-localized resources to individual resource files');
+						m.stepCompleted ('distributed pseudo-localized resources to individual resource files');
 
 					_callback ();
 				},
 
+				usage:function (_params,_callback) {
+					// this method should be implemented by subclasses
+					_callback ();
+				},
+
 				init:function (_params,_callback) {
-					this.project = _params.project;
-					this._workingFolderPath = _params.workingFolder + '/' + this.project.name + '/';
-					this._log = _params.log || Uize.nop;
+					var m = this;
+					m.project = _params.project;
+					m._workingFolderPath = m.workingFolderPath = _params.workingFolder + '/' + m.project.name + '/';
+					m._log = _params.log || Uize.nop;
 					_callback ();
 				}
 			},
