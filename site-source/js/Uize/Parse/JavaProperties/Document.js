@@ -34,15 +34,12 @@ Uize.module ({
 		'use strict';
 
 		var
-			_class,
-
 			/*** Variables for Performance Optimization ***/
 				_Uize_Parse_JavaProperties = Uize.Parse.JavaProperties,
-				_Uize_Parse_JavaProperties_Property = _Uize_Parse_JavaProperties.Property,
 				_indexOfNonWhitespace = Uize.Str.Whitespace.indexOfNonWhitespace
 		;
 
-		return _class = Uize.mergeInto (
+		return Uize.mergeInto (
 			function (_source,_index) {
 				var m = this;
 				m._items = m.items = [];
@@ -96,37 +93,7 @@ Uize.module ({
 					serialize:function () {
 						return this.isValid ? Uize.map (this._items,'value.serialize ()').join ('\n') : '';
 					}
-				},
-
-				fromHash:function (_hash) {
-					var
-						_document = new _class (),
-						_items = _document._items
-					;
-					Uize.forEach (
-						_hash,
-						function (_propertyValue,_propertyName) {
-							var _property = new _Uize_Parse_JavaProperties_Property ('key=value');
-							_property.name.name = _propertyName;
-							_property.value.value = _propertyValue;
-							_items.push (_property);
-						}
-					);
-					return _document.serialize ();
-				},
-
-				toHash:function (_documentText) {
-					var _hash = {};
-					Uize.forEach (
-						(new _class (_documentText)).items,
-						function (_property) {
-							if (_property.name && _property.value)
-								_hash [_property.name.name] = _property.value.value
-							;
-						}
-					);
-					return _hash;
-				},
+				}
 			}
 		);
 	}
