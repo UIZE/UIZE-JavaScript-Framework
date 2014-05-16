@@ -406,6 +406,7 @@ Uize.module ({
 						_dialogWidgetName = _dialogWidgetProperties.name,
 						_dialogWidget = _dialogWidgetParent.children [_dialogWidgetName],
 						_component = _params.component,
+						_loadingDialogs = m._loadingDialogs = m._loadingDialogs || {}, // keep track of dialogs that are loading in case another request for one comes in while loading
 						_componentProfile
 					;
 					if (_component) {
@@ -484,13 +485,9 @@ Uize.module ({
 						);
 					}
 					function _loadDialog() {
-						var _refetch = _componentProfile && !!_dialogWidget;
-						if (_refetch) {
-							_dialogWidget.removeUi ();
-							_dialogWidgetParent.removeChild (_dialogWidgetName);
-						}
-						var _createDialogWidget = function () {
+						function _createDialogWidget() {
 							var _dialogWidgetClassName = _params.widgetClassName;
+							_loadingDialogs[_dialogWidgetName] = _false;
 							_Uize.require (
 								_dialogWidgetClassName,
 								function (_dialogWidgetClass) {
@@ -502,37 +499,45 @@ Uize.module ({
 											)
 										)
 									;
-									_dialogWidget._componentProfile = _componentProfile;
+									_dialogWidget.Page_componentProfile = _componentProfile;
 									_dialogWidget.insertOrWireUi ();
 									_showDialog (_refetch ? 'refetched' : 'initial');
 								}
 							);
-						};
-						_componentProfile
-							? m.loadHtmlIntoNode (
-								{
-									node:_componentProfile.node,
-									rootNodeId:_componentProfile.rootNodeId,
-									injectMode:'inner bottom',
-									alwaysReplace:_false
-								},
-								_Uize.copyInto ({cp:_componentProfile.name},_componentProfile.params),
-								{
-									cache:'memory',
-									callback:_createDialogWidget
-								}
-							)
-							: _createDialogWidget ()
-						;
+						}
+						if (!_loadingDialogs[_dialogWidgetName]) { // if we're already loading a dialog of that name just ignore
+							var _refetch = _componentProfile && !!_dialogWidget;
+							if (_refetch) {
+								_dialogWidget.removeUi ();
+								_dialogWidgetParent.removeChild (_dialogWidgetName);
+							}
+							_loadingDialogs[_dialogWidgetName] = _true;
+							_componentProfile
+								? m.loadHtmlIntoNode (
+									{
+										node:_componentProfile.node,
+										rootNodeId:_componentProfile.rootNodeId,
+										injectMode:'inner bottom',
+										alwaysReplace:_false
+									},
+									_Uize.copyInto ({cp:_componentProfile.name},_componentProfile.params),
+									{
+										cache:'memory',
+										callback:_createDialogWidget
+									}
+								)
+								: _createDialogWidget ()
+							;
+						}
 					}
 					if (_dialogWidget) {
-						if (_dialogWidget._componentProfile == _componentProfile)
+						if (_dialogWidget.Page_componentProfile == _componentProfile)
 							_showDialog ('subsequent');
 						else {
 							_Uize.require(
 								'Uize.Data.Compare',
 								function(_Uize_Data_Compare) {
-									_Uize_Data_Compare.identical (_dialogWidget._componentProfile,_componentProfile)
+									_Uize_Data_Compare.identical (_dialogWidget.Page_componentProfile,_componentProfile)
 										? _showDialog ('subsequent')
 										: _loadDialog()
 								}
