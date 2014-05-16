@@ -117,6 +117,18 @@ Uize.module ({
 					*/
 				},
 
+				usage:{
+					async:_true
+					/*?
+						Instance Methods
+							usage
+								Produces a usage report for a project's resource strings, containing detailed information on where each resource string is referenced in the project's code, along with a summary of the unreferenced resource strings.
+
+								NOTES
+								- this service method is asynchronous
+					*/
+				},
+
 				pseudoLocalize:{
 					async:_true
 					/*?

@@ -12,13 +12,13 @@
 /* Module Meta Data
 	type: Package
 	importance: 1
-	codeCompleteness: 5
-	docCompleteness: 5
+	codeCompleteness: 100
+	docCompleteness: 50
 */
 
 /*?
 	Introduction
-		The =Uize.Data.MacStrings= module provides support for serializing to and parsing from [[][Mac OS / iOS Strings Files]], with configurable options.
+		The =Uize.Data.MacStrings= module provides support for serializing to and parsing from [[https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/LoadingResources/Strings/Strings.html][Mac OS / iOS Strings Files]].
 
 		*DEVELOPERS:* `Chris van Rensburg`
 */
