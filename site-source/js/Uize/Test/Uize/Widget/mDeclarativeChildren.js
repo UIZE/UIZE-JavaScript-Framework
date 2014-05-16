@@ -75,7 +75,7 @@ Uize.module ({
 		
 		function _generateTest(_title, _declarativeChildren, _expectedChildren) {
 			function _getDeclaredChildrenForTest() { return _getDeclaredChildren(_declarativeChildren) }
-			function _expectAllDeclaredChildren(_expectFunc) { _expectAll(_getDeclaredChildrenForTest(), _expectFunc) }
+			function _expectAllDeclaredChildren(_expectFunc) { return _expectAll(_getDeclaredChildrenForTest(), _expectFunc) }
 
 			return {
 				title:_title,

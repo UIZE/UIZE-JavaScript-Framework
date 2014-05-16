@@ -76,18 +76,18 @@ Uize.module ({
 			});
 		}
 		
-		function _getTestWidgetClassInstance(_eventBindings, _children, _nodes) {
-			var _nodeMap = {};
-			
-			if (Uize.isArray(_nodes)) {
-				for (var _nodeNo = -1; ++_nodeNo < _nodes.length;)
-					_nodeMap[_nodes[_nodeNo]] = _getMockDomNode(_nodes[_nodeNo])
-				;
-			}
-			
-			return _getTestWidgetClass(_eventBindings, _children)({
-				nodeMap:_nodeMap
-			});
+		function _getTestWidgetClassInstance(_eventBindings, _children, _nodes, _instanceProperties) {
+			return _getTestWidgetClass(_eventBindings, _children)(
+				Uize.copyInto(
+					{
+						nodeMap:Uize.map(
+							Uize.lookup(_nodes),
+							function(_value, _node) { return _getMockDomNode(_node) }
+						)
+					},
+					_instanceProperties
+				)
+			);
 		}
 		
 		function _generateTest(_title, _eventBindingsShorthand, _eventBindingsVerbose, _wiredEvents, _deferredChildren) {
@@ -98,14 +98,14 @@ Uize.module ({
 					return _getTestWidgetClass(_eventBindings, _children);
 				}
 				
-				function _getSyntaxTestWidgetClassInstance(_children, _nodes) {
-					return _getTestWidgetClassInstance(_eventBindings, _children, _nodes);
+				function _getSyntaxTestWidgetClassInstance(_children, _nodes, _instanceProperties) {
+					return _getTestWidgetClassInstance(_eventBindings, _children, _nodes, _instanceProperties);
 				}
 				
 				function _generateFireTests(_type) {
 					var _fireEventMethodName = _type == 'node' ? 'triggerEvent' : 'fire';
 					
-					function _generateFireTest(_expectFunc) {
+					function _generateFireTest(_expectFunc, _instanceProperties) {
 						return function(_continue) {
 							if (!_wiredEvents || Uize.isEmpty(_wiredEvents[_type]))
 								return true;
@@ -115,7 +115,8 @@ Uize.module ({
 								_names = _type == 'self' ? ['self'] : Uize.keys(_typeEvents),
 								_testWidgetClassInstance = _getSyntaxTestWidgetClassInstance(
 									_type == 'child' ? _names : undefined,
-									_type == 'node' ? _names : undefined
+									_type == 'node' ? _names : undefined,
+									_instanceProperties
 								),
 								_fail = function() { _continue(true) }
 							;
@@ -540,6 +541,90 @@ Uize.module ({
 									}
 								)
 							]
+						},
+						{
+							title:'Conditional firing (fireIf)',
+							test:Uize.push(
+								Uize.map(
+									[
+										{
+											title:'When fireIf is undefined and widget is disabled, child event is fired',
+											state:{enabled:false}
+										},
+										{
+											title:'When fireIf is undefined and widget is busy, child event is fired',
+											state:{busy:true}
+										},
+										{
+											title:'When fireIf evaluates to true, child event is fired',
+											fireIf:'foo',
+											state:{foo:true}
+										}
+									],
+									function(_testInfo) {
+										return {
+											title:_testInfo.title,
+											test:function(_continue) {
+												var
+													_testWidgetClassInstance = _getTestWidgetClassInstance(
+														{
+															'foo:Click':{
+																handler:function() {
+																	clearTimeout(_notFiredTimeout);
+																	_continue(true);
+																},
+																fireIf:_testInfo.fireIf
+															}
+														},
+														['foo'],
+														null,
+														_testInfo.state
+													),
+													_notFiredTimeout
+												;
+												
+												_notFiredTimeout = setTimeout(
+													function() { _continue(false) },
+													0
+												);
+												
+												_testWidgetClassInstance.children.foo.fire('Click');
+											}
+										};
+									}
+								),
+								[
+									{
+										title:'When fireIf evaluates to false, child event isn\'t fired',
+										test:function(_continue) {
+											var
+												_testWidgetClassInstance = _getTestWidgetClassInstance(
+													{
+														'foo:Click':{
+															handler:function() {
+																clearTimeout(_notFiredTimeout);
+																_continue(false);
+															},
+															fireIf:'foo'
+														}
+													},
+													['foo'],
+													null
+												),
+												_notFiredTimeout
+											;
+											
+											// fire child widget event (shouldn't actually be handled by widget)
+											_testWidgetClassInstance.children.foo.fire('Click');
+											
+											_notFiredTimeout = setTimeout(
+												function() { _continue(true) },
+												0
+											);
+										}
+									}	
+								]
+							)
 						}
 					]
 				},
@@ -628,7 +713,91 @@ Uize.module ({
 									Click:['bat', 'baf', 'baz']
 								}
 							}
-						)
+						),
+						{
+							title:'Conditional firing (fireIf)',
+							test:Uize.push(
+								Uize.map(
+									[
+										{
+											title:'When fireIf is undefined and widget is disabled, self event is fired',
+											state:{enabled:false}
+										},
+										{
+											title:'When fireIf is undefined and widget is busy, self event is fired',
+											state:{busy:true}
+										},
+										{
+											title:'When fireIf evaluates to true, self event is fired',
+											fireIf:'foo',
+											state:{foo:true}
+										}
+									],
+									function(_testInfo) {
+										return {
+											title:_testInfo.title,
+											test:function(_continue) {
+												var
+													_testWidgetClassInstance = _getTestWidgetClassInstance(
+														{
+															':Click':{
+																handler:function() {
+																	clearTimeout(_notFiredTimeout);
+																	_continue(true);
+																},
+																fireIf:_testInfo.fireIf
+															}
+														},
+														null,
+														null,
+														_testInfo.state
+													),
+													_notFiredTimeout
+												;
+												
+												_notFiredTimeout = setTimeout(
+													function() { _continue(false) },
+													0
+												);
+												
+												_testWidgetClassInstance.fire('Click');
+											}
+										};
+									}
+								),
+								[
+									{
+										title:'When fireIf evaluates to false, self event isn\'t fired',
+										test:function(_continue) {
+											var
+												_testWidgetClassInstance = _getTestWidgetClassInstance(
+													{
+														':Click':{
+															handler:function() {
+																clearTimeout(_notFiredTimeout);
+																_continue(false);
+															},
+															fireIf:'foo'
+														}
+													},
+													null,
+													null
+												),
+												_notFiredTimeout
+											;
+											
+											// fire child widget event (shouldn't actually be handled by widget)
+											_testWidgetClassInstance.fire('Click');
+											
+											_notFiredTimeout = setTimeout(
+												function() { _continue(true) },
+												0
+											);
+										}
+									}	
+								]
+							)
+						}
 					]
 				},
 				{

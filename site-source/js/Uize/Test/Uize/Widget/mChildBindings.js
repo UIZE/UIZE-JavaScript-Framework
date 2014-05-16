@@ -2309,6 +2309,9 @@ Uize.module ({
 											childA:{
 												propertyA:_getRandomPropertyValue(),
 												propertyB:_getRandomPropertyValue()
+											},
+											childB:{
+												propertyA:_getRandomPropertyValue()
 											}
 										}
 									),
@@ -2319,11 +2322,12 @@ Uize.module ({
 									})
 								;
 								
-								return this.expectSameAs(_WidgetSubclass.mChildBindings_bindings.propertyA.childB.propertyA, _WidgetClass.mChildBindings_bindings.propertyA.childB.propertyA)
-									&& this.expectNotSameAs(_WidgetSubclass.mChildBindings_bindings.propertyA.childA.childPropertyA, _WidgetClass.mChildBindings_bindings.propertyA.childA.childPropertyA)
-									&& this.expect(2, Uize.keys(_WidgetSubclass.mChildBindings_bindings.propertyA).length)
-									&& this.expect(1, Uize.keys(_WidgetSubclass.mChildBindings_bindings.propertyA.childA).length)
-									&& this.expect(1, Uize.keys(_WidgetSubclass.mChildBindings_bindings.propertyA.childB).length)
+								return this.expectSameAs(_WidgetSubclass.mChildBindings_bindings.childB['propertyA/propertyA'], _WidgetClass.mChildBindings_bindings.childB['propertyA/propertyA'])
+									&& this.expectNotSameAs(_WidgetSubclass.mChildBindings_bindings.childA['propertyA/childPropertyA'], _WidgetClass.mChildBindings_bindings.childA['propertyA/childPropertyA'])
+									&& this.expect(1, Uize.keys(_WidgetSubclass.mChildBindings_bindings.childA).length)
+									&& this.expectNonNull(1, _WidgetSubclass.mChildBindings_bindings.childA['propertyA/childPropertyA'])
+									&& this.expect(1, Uize.keys(_WidgetSubclass.mChildBindings_bindings.childB).length)
+									&& this.expectNonNull(1, _WidgetSubclass.mChildBindings_bindings.childB['propertyA/propertyA'])
 								;
 							}
 						}

@@ -33,19 +33,25 @@ Uize.module ({
 				_undefined,
 				_Uize = Uize,
 				_forEach = _Uize.forEach,
+				_isString = _Uize.isString,
+				_isArray = _Uize.isArray,
+				_isPlainObject = _Uize.isPlainObject,
+				_resolveTransformer = _Uize.resolveTransformer,
+				_pairUp = _Uize.pairUp,
 				
 			/*** Variables for Performance Optimzation ***/
-				_bindingFormatRegExp = /^([<\->]+)?(\w+)(\.(.+))?$/,
-				_syncWidgets = function(_sourceWidget, _sourceProperty, _destinationWidget, _destinationProperty, _valueTransformer) {
-					var _sourceValue = _sourceWidget.get(_sourceProperty);
-					_destinationWidget.set(
-						_destinationProperty,
-						_valueTransformer
-							? _valueTransformer(_sourceValue)
-							: _sourceValue
-					);	
-				}
+				_bindingFormatRegExp = /^([<\->]+)?(\w+)(\.(.+))?$/
 		;
+		
+		function _syncWidgets(_sourceWidget, _sourceProperty, _destinationWidget, _destinationProperty, _valueTransformer) {
+			var _sourceValue = _sourceWidget.get(_sourceProperty);
+			_destinationWidget.set(
+				_destinationProperty,
+				_valueTransformer
+					? _valueTransformer(_sourceValue)
+					: _sourceValue
+			);	
+		}
 
 		return function (_class) {
 			_class.declare ({
@@ -55,16 +61,25 @@ Uize.module ({
 						_addedChildren = m.addedChildren
 					;
 
+					/* NOTE: Format of mChildBindings_bindings:
+						{
+							childA:{
+								'propertyA/childPropertyA':function() {
+									// set up bindings
+								}
+							}
+						}
+					*/
+					
 					_forEach(
 						m.Class.mChildBindings_bindings,
-						function(_childBindingsForProperty) {
-							_forEach(
-								_childBindingsForProperty,
-								function(_bindingsForChild, _childName) {
-									_addedChildren.whenever(
-										_childName,
-										function() { _Uize.applyAll(m, _Uize.values(_bindingsForChild)) }
-									);
+						function(_bindingsForChild, _childName) {
+							_addedChildren.whenever(
+								_childName,
+								function() {
+									for (var _key in _bindingsForChild)
+										_bindingsForChild[_key](m)
+									;
 								}
 							);
 						}
@@ -78,80 +93,84 @@ Uize.module ({
 						_forEach(
 							_bindings,
 							function(_bindingForProperty, _propertyName) {
-								var
-									_childBindingsForProperty = _childBindings[_propertyName] = _childBindings[_propertyName] || {},
-									_processBinding = function (_binding) {
-										var _formatMatch = _Uize.isString(_binding) && _binding.match(_bindingFormatRegExp);
-										if (_formatMatch) //canonicalize string
-											_binding = {
-												child:_formatMatch[2],
-												property:_formatMatch[4],
-												direction:_formatMatch[1]
-											}
+								function _processBinding(_binding) {
+									var _formatMatch = _isString(_binding) && _binding.match(_bindingFormatRegExp);
+									if (_formatMatch) //canonicalize string
+										_binding = {
+											child:_formatMatch[2],
+											property:_formatMatch[4],
+											direction:_formatMatch[1]
+										}
+									;
+									
+									if (_isPlainObject(_binding) && _binding.child) {
+										var
+											_childName = _binding.child,
+											_childPropertyName = _binding.property || _propertyName,
+											_direction = _binding.direction || '<->', // bi-directional is the default
+											_directionLength = _direction.length,
+											_valueAdapter = _binding.valueAdapter,
+											_valueTransformerAtoB = _valueAdapter && _valueAdapter.aToB && _resolveTransformer(_valueAdapter.aToB),
+											_valueTransformerBtoA = _valueAdapter && _valueAdapter.bToA && _resolveTransformer(_valueAdapter.bToA),
+											
+											_directionIsToChild = _direction.indexOf('->') == (_directionLength - 2),  // parent -> child
+											_directionIsFromChild = !_direction.indexOf('<-'),  // child -> parent
+											_directionIsTwoWay = _direction.indexOf('<->'),
+											_widgetChangedPropertyEventName = 'Changed.' + _propertyName,
+											_childWidgetChangedPropertyEventName = 'Changed.' + _childPropertyName
 										;
-										
-										if (_Uize.isPlainObject(_binding) && _binding.child) {
-											var
-												_childName = _binding.child,
-												_childPropertyName = _binding.property || _propertyName,
-												_direction = _binding.direction || '<->', // bi-directional is the default
-												_directionLength = _direction.length,
-												_valueAdapter = _binding.valueAdapter,
-												_valueTransformerAtoB = _valueAdapter && _valueAdapter.aToB && _Uize.resolveTransformer(_valueAdapter.aToB),
-												_valueTransformerBtoA = _valueAdapter && _valueAdapter.bToA && _Uize.resolveTransformer(_valueAdapter.bToA)
-											;
 
-											// Construct function to be called once the child is added. It will actually create the bindings
-											(_childBindingsForProperty[_childName] = _childBindingsForProperty[_childName] || {})[_childPropertyName] = function() {
-												var
-													m = this,
-													_childWidget = m.children[_childName],
-													_syncToChild = function() { _syncWidgets(m, _propertyName, _childWidget, _childPropertyName, _valueTransformerAtoB) },
-													_syncFromChild = function() { _syncWidgets(_childWidget, _childPropertyName, m, _propertyName, _valueTransformerBtoA) },
-													_syncToChildEvent,
-													_syncFromChildEvent
+										// Construct function to be called once the child is added. It will actually create the bindings
+										(_childBindings[_childName] = _childBindings[_childName] || {})[_propertyName + '/' + _childPropertyName] = function(m) {
+											var
+												_childWidget = m.children[_childName],
+												_syncToChildEvent,
+												_syncFromChildEvent
+											;
+											
+											function _syncToChild() { _syncWidgets(m, _propertyName, _childWidget, _childPropertyName, _valueTransformerAtoB) }
+											function _syncFromChild() { _syncWidgets(_childWidget, _childPropertyName, m, _propertyName, _valueTransformerBtoA) }
+											
+											if (_directionIsToChild) {
+												// First set child widget to have same value as widget
+												// We don't want to do this if the binding is bi-drectional and the widget is undefined.
+												// In that case we'd rather the child widget be the driver
+												(_directionIsTwoWay || m.get(_propertyName) !== _undefined)
+													&& _syncToChild()
 												;
 												
-												if (_direction.indexOf('->') == (_directionLength - 2)) { // parent -> child
-													// First set child widget to have same value as widget
-													// We don't want to do this if the binding is bi-drectional and the widget is undefined.
-													// In that case we'd rather the child widget be the driver
-													(_direction.indexOf('<->') || m.get(_propertyName) !== _undefined)
-														&& _syncToChild()
-													;
-													
-													// Then wire Changed.* handler on widget to update child widget
-													m.wire(_syncToChildEvent = _Uize.pairUp('Changed.' + _propertyName, _syncToChild));
-												}
-												if (!_direction.indexOf('<-')) { // child -> parent
-													// First set widget to have same value as child
-													_syncFromChild();
-													
-													// Then wire Changed.* handler on child to update widget
-													_childWidget.wire(_syncFromChildEvent = _Uize.pairUp('Changed.' + _childPropertyName, _syncFromChild));
-												}
-													
-												// Finally wire up unwire if/when the child is removed
-												m.addedChildren.whenever(
-													'!' + _childName,
-													function() {
-														if (_childWidget) {
-															// unwire parent -> child
-															_syncToChildEvent && m.unwire(_syncToChildEvent);
-															
-															// unwire child -> parent (even though child is removed, it is not necessarilly destroyed)
-															_syncFromChildEvent && _childWidget && _childWidget.unwire(_syncFromChildEvent);
-															
-															// clear out our reference to the removed child widget to not potentially hang on memory that can be disposed
-															_childWidget = undefined;
-														}
+												// Then wire Changed.* handler on widget to update child widget
+												m.wire(_syncToChildEvent = _pairUp(_widgetChangedPropertyEventName, _syncToChild));
+											}
+											if (_directionIsFromChild) {
+												// First set widget to have same value as child
+												_syncFromChild();
+												
+												// Then wire Changed.* handler on child to update widget
+												_childWidget.wire(_syncFromChildEvent = _pairUp(_childWidgetChangedPropertyEventName, _syncFromChild));
+											}
+												
+											// Finally wire up unwire if/when the child is removed
+											m.addedChildren.whenever(
+												'!' + _childName,
+												function() {
+													if (_childWidget) {
+														// unwire parent -> child
+														_syncToChildEvent && m.unwire(_syncToChildEvent);
+														
+														// unwire child -> parent (even though child is removed, it is not necessarilly destroyed)
+														_syncFromChildEvent && _childWidget && _childWidget.unwire(_syncFromChildEvent);
+														
+														// clear out our reference to the removed child widget to not potentially hang on memory that can be disposed
+														_childWidget = undefined;
 													}
-												);
-											};
-										}
+												}
+											);
+										};
 									}
-								;
-								_Uize.isArray(_bindingForProperty)
+								}
+
+								_isArray(_bindingForProperty)
 									? _forEach(_bindingForProperty, _processBinding)
 									: _processBinding(_bindingForProperty)
 								;

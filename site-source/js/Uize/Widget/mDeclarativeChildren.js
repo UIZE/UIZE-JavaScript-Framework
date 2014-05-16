@@ -38,27 +38,28 @@ Uize.module ({
 				omegastructor:function () {
 					var
 						m = this,
-						_declarativeChildren = m.Class.mDeclarativeChildren_children,
-						_children = {}
+						_declarativeChildren = m.Class.mDeclarativeChildren_children
 					;
-
-					// NOTE: Filter out children w/o widgetClass. They will be deferred loaded by some other mechanism. They were there for feature detection.
-					// NOTE: When value is a function call the function in the context of this widget
+					
 					for (var _childName in _declarativeChildren) {
 						var
 							_declarativeChild = _declarativeChildren[_childName],
-							_childProperties = _Uize.copy(
-								_Uize.isFunction(_declarativeChild)
-									? _declarativeChild.call(m, _childName)
-									: _declarativeChild
-							),
-							_childWidgetClass = _childProperties.widgetClass
+							_childWidgetClass = _declarativeChild._widgetClass,
+							_childProperties = _declarativeChild._properties
+							
 						;
-					
-						if (_childWidgetClass) {
+						
+						// When value is a function call the function in the context of this widget
+						if (_declarativeChild._isFunction) {
+							_childProperties = _Uize.copy(_childProperties.call(m, _childName));
+							_childWidgetClass = _childProperties.widgetClass;
 							delete _childProperties.widgetClass;
-							m.mDeclarativeChildren_getContainer(_childName).addChild(_childName, _childWidgetClass, _childProperties);
 						}
+					
+						// NOTE: Filter out children w/o widgetClass. They will be deferred loaded by some other mechanism. They were there for feature detection.
+						_childWidgetClass
+							&& m.mDeclarativeChildren_getContainer(_childName).addChild(_childName, _childWidgetClass, _childProperties)
+						;
 					}
 				},
 				
@@ -67,17 +68,31 @@ Uize.module ({
 						var _declarativeChildren = this.mDeclarativeChildren_children;
 						
 						for (var _childName in _children) {
-							var _childProperties = _children[_childName];
+							var
+								_childDeclaration = _children[_childName],
+								_childDeclarationIsFunction = _Uize.isFunction(_childDeclaration) && !_childDeclaration.declare, // is a function, but not a class (since classes are functions)
+								_childDeclarationIsPlainObject = _Uize.isPlainObject(_childDeclaration),
+								_childProperties = !_childDeclarationIsFunction && !_childDeclarationIsPlainObject ? {widgetClass:_childDeclaration} : _childDeclaration,
+								_childWidgetClass = !_childDeclarationIsFunction && _childProperties.widgetClass
+							;
+							
+							// Need to strip out the widgetClass from the childProperties, which means we need to copy it just in case
+							// it's a shared object
+							if (!_childDeclarationIsFunction && _childDeclarationIsPlainObject && _childWidgetClass) {
+								_childProperties = _Uize.copy(_childProperties);
+								delete _childProperties.widgetClass;
+							}
 							
 							// NOTE: support multiple calls to children that could potentially include the same child again w/ additional properties (for whatever reason)
 							// As such we can't omit the children that don't have widgetClass set, yet, because the widgetClass *could* be added in a subsequent call to children. Will handle in constructor.
-							_declarativeChildren[_childName] = _Uize.isFunction(_childProperties) && !_childProperties.declare // is a function, but not a class (since classes are functions)
-								? _childProperties
-								: _Uize.copyInto(
-									_declarativeChildren[_childName] || {},
-									!_Uize.isPlainObject(_childProperties) ? {widgetClass:_childProperties} : _childProperties
-								)
-							;
+							_declarativeChildren[_childName] = _Uize.copyInto(
+								_declarativeChildren[_childName] || {},
+								{
+									_widgetClass:_childWidgetClass,
+									_properties:_childProperties,
+									_isFunction:_childDeclarationIsFunction
+								}
+							);
 						}
 						/*?
 							Static Methods

@@ -410,11 +410,13 @@ Uize.module ({
 							_itemWidgets.splice (_spliceInPos,0,_itemWidgetToMove);
 							_items.splice (_spliceInPos,0,_item);
 				},
-
+				getTemplateHtml: function (_templateNode) { /* virtual hook method */
+					return _templateNode.innerHTML;
+				},
 				processItemTemplate:function (_templateNode) {
 					// NOTE: This code is pretty much identical to the code in buildHtml (of Uize.Widget), but there's no
 					// easy way to get the template into the markup so that it can do what it does.
-					var _nodeInnerHtml = _templateNode.innerHTML;
+					var _nodeInnerHtml = this.getTemplateHtml(_templateNode);
 					return	Uize.Template &&_templateNode.tagName == 'SCRIPT' && _templateNode.type == 'text/jst'
 						? Uize.Template.compile(_nodeInnerHtml, this._templateTokens || { openerToken: '[%', closerToken: '%]' })
 						: function (_input) {return _nodeInnerHtml.replace (/ITEMWIDGETNAME/g, _input.name)}

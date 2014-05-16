@@ -1566,7 +1566,8 @@ Uize.module ({
 									'ERROR NAME: ' + _error.name + '\n' +
 									'ERROR MESSAGE: ' + _error.message + '\n' +
 									'ERROR DESCRIPTION: ' + _error.description + '\n' +
-									'LINE NUMBER: ' + _error.number + '\n'
+									'LINE NUMBER: ' + _error.number + '\n' +
+									'STACK TRACE: ' + _error.stack + '\n'
 							});
 							_testResult = _false;
 						}
