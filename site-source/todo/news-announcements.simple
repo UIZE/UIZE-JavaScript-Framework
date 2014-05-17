@@ -4,6 +4,20 @@ NEW MODULE: Uize.Str.Whitespace
 	- write documentation
 	- write news announcement
 
+NEW MODULE: Uize.Str.CharClass
+	Still to do...
+
+	- write unit tests
+	- write documentation
+	- write news announcement
+
+NEW MODULE: Uize.Data.JavaProperties
+	Still to do...
+
+	- write unit tests
+	- write documentation
+	- write news announcement
+
 NEW MODULE: Uize.Loc.Pseudo
 	Still to do...
 
