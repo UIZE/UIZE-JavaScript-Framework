@@ -1,3 +1,10 @@
+NEW MODULE: Uize.Loc.Pseudo
+	Still to do...
+
+	- create example
+	- write documentation
+	- write news announcement
+
 NEW MODULE: Uize.Str.Whitespace
 	Still to do...
 
@@ -15,12 +22,6 @@ NEW MODULE: Uize.Data.JavaProperties
 	Still to do...
 
 	- write unit tests
-	- write documentation
-	- write news announcement
-
-NEW MODULE: Uize.Loc.Pseudo
-	Still to do...
-
 	- write documentation
 	- write news announcement
 
