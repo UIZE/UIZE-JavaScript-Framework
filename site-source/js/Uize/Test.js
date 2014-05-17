@@ -184,7 +184,7 @@ Uize.module ({
 					/*?
 						Instance Methods
 							expectNonNull
-								Returns a boolean, indicating whether or not the specified value is non-null (ie. not =null= or =undefined=.
+								Returns a boolean, indicating whether or not the specified value is non-null (ie. not =null= or =undefined=).
 
 								SYNTAX
 								.................................................
@@ -212,6 +212,51 @@ Uize.module ({
 
 								myTest.expectNonNull (null);           // returns false
 								myTest.expectNonNull (undefined);      // returns false
+								.......................................................
+
+								NOTES
+								- this method is one of the many available `expectation methods`
+					*/
+				},
+
+				expectNully:function (_value) {
+					return _expectSuccess (
+						this,
+						_value == null,
+						'value that is null or undefined',
+						_valueToJsonSerializer (_value)
+					);
+					/*?
+						Instance Methods
+							expectNully
+								Returns a boolean, indicating whether or not the specified value is null (ie. =null= or =undefined=).
+
+								SYNTAX
+								.................................................
+								resultBOOL = myTest.expectNully (valueANYTYPE);
+								.................................................
+
+								This method tests whether or not a value is null. Both =null= and =undefined= are considered null.
+
+								EXAMPLES
+								.......................................................
+								// when called with null values...
+
+								myTest.expectNully (null);           // returns true
+								myTest.expectNully (undefined);      // returns true
+								
+								// when called with non-null values...
+
+								myTest.expectNully (1);              // returns false
+								myTest.expectNully (0);              // returns false
+								myTest.expectNully ('blah');         // returns false
+								myTest.expectNully ('');             // returns false
+								myTest.expectNully (true);           // returns false
+								myTest.expectNully (false);          // returns false
+								myTest.expectNully ({foo:'bar'});    // returns false
+								myTest.expectNully ({});             // returns false
+								myTest.expectNully (['foo','bar']);  // returns false
+								myTest.expectNully ([]);             // returns false
 								.......................................................
 
 								NOTES
@@ -826,6 +871,35 @@ Uize.module ({
 						*/
 					},
 
+					expectEmpty:function (_value) {
+						return _expectSuccess (this,Uize.isEmpty (_value),'empty',_valueToJsonSerializer (_value));
+						/*?
+							Instance Methods
+								expectEmpty
+									Returns a boolean, indicating whether or not the specified value is regarded as being empty.
+
+									SYNTAX
+									..................................................
+									resultBOOL = myTest.expectEmpty (valueANYTYPE);
+									..................................................
+
+									A value specified for the =valueANYTYPE= parameter will be considered empty if it is any of the following...
+
+									- =null=
+									- =undefined=
+									- =NaN= (the special not-a-number value)
+									- =false=
+									- =0=
+									- =''= (empty string)
+									- =[]= (empty array)
+									- ={}= (empty object)
+
+									NOTES
+									- see also the more specific =expectEmptyArray=, =expectEmptyObject=, and =expectEmptyString= instance methods
+									- this method is one of the many available `expectation methods`
+						*/
+					},
+
 					expectNonEmpty:function (_value) {
 						return _expectSuccess (this,!Uize.isEmpty (_value),'non-empty',_valueToJsonSerializer (_value));
 						/*?
@@ -1049,6 +1123,40 @@ Uize.module ({
 						*/
 					},
 
+					expectEmptyArray:function (_value) {
+						return this.expectArray (_value) && this.expectEmpty (_value);
+						/*?
+							Instance Methods
+								expectEmptyArray
+									Returns a boolean, indicating whether or not the specified value is an instance of JavaScript's built-in =Array= object and has zero length.
+
+									SYNTAX
+									.......................................................
+									resultBOOL = myTest.expectEmptyArray (valueANYTYPE);
+									.......................................................
+
+									This method uses the =expectArray= and =expectEmpty= methods in its implementation. The statement =myTest.expectEmptyArray (value)= is equivalent to the statement =this.expectArray (value) && this.expectEmpty (value)=.
+
+									EXAMPLES
+									............................................................................
+									myTest.expectEmptyArray ([]);                            // returns true
+									myTest.expectEmptyArray (new Array);                     // returns true
+									
+									myTest.expectEmptyArray (['foo','bar']);                 // returns false
+									myTest.expectEmptyArray (new Array ('foo','bar'));       // returns false
+									myTest.expectEmptyArray (new Array (5));                 // returns false
+									myTest.expectEmptyArray (Uize.Class ({value:['foo']}));  // returns false
+									myTest.expectEmptyArray ({foo:'bar'});                   // returns false
+									myTest.expectEmptyArray (1.2345);                        // returns false
+									myTest.expectEmptyArray (true);                          // returns false
+									............................................................................
+
+									NOTES
+									- compare to the =expectEmpty=, =expectEmptyObject=, and =expectEmptyString= instance methods
+									- this method is one of the many available `expectation methods`
+						*/
+					},
+
 					expectNonEmptyArray:function (_value) {
 						return this.expectArray (_value) && this.expectNonEmpty (_value);
 						/*?
@@ -1079,6 +1187,47 @@ Uize.module ({
 
 									NOTES
 									- compare to the =expectNonEmpty=, =expectNonEmptyObject=, and =expectNonEmptyString= instance methods
+									- this method is one of the many available `expectation methods`
+						*/
+					},
+
+					expectEmptyObject:function (_value) {
+						return this.expectObject (_value) && this.expectEmpty (_value);
+						/*?
+							Instance Methods
+								expectEmptyObject
+									Returns a boolean, indicating whether or not the specified value is of type ='object'= and has 0 enumerable properties.
+
+									SYNTAX
+									........................................................
+									resultBOOL = myTest.expectEmptyObject (valueANYTYPE);
+									........................................................
+
+									This method uses the =expectObject= and =expectEmpty= methods in its implementation. The statement =myTest.expectEmptyObject (value)= is equivalent to the statement =this.expectObject (value) && this.expectEmpty (value)=.
+
+									EXAMPLES
+									...........................................................................
+									myTest.expectEmptyObject ({});                          // returns true
+									myTest.expectEmptyObject (new Object);                  // returns true
+									myTest.expectEmptyObject ([]);                          // returns true
+									myTest.expectEmptyObject (new Array);                   // returns true
+
+									myTest.expectEmptyObject ({foo:'bar'});                 // returns false
+									myTest.expectEmptyObject (new Object ({foo:'bar'}));    // returns false
+									myTest.expectEmptyObject (['foo','bar']);               // returns false
+									myTest.expectEmptyObject (new Array (5));               // returns false
+									myTest.expectEmptyObject (Uize.Class ({value:'foo'}));  // returns false
+									myTest.expectEmptyObject (1.2345);                      // returns false
+									myTest.expectEmptyObject (true);                        // returns false
+									...........................................................................
+
+									Not Only Object Instances Are Object Type
+										The =expectEmptyObject= method relies on JavaScript's built-in =typeof= operator to determine the type of the specified actual value.
+
+										Using the =typeof= operator, instances of many of JavaScript's built-in objects (such as the =Date=, =RegExp=, =Number=, =Boolean=, and =String= objects) are considered of type ='object'= - not just instances of the built-in =Object= object. Therefore, instances of any object or class will be considered empty objects if they contain 0 enumerable properties.
+
+									NOTES
+									- compare to the =expectEmpty=, =expectEmptyArray=, and =expectEmptyString= instance methods
 									- this method is one of the many available `expectation methods`
 						*/
 					},
@@ -1119,6 +1268,38 @@ Uize.module ({
 
 									NOTES
 									- compare to the =expectNonEmpty=, =expectNonEmptyArray=, and =expectNonEmptyString= instance methods
+									- this method is one of the many available `expectation methods`
+						*/
+					},
+
+					expectEmptyString:function (_value) {
+						return this.expectString (_value) && this.expectEmpty (_value);
+						/*?
+							Instance Methods
+								expectEmptyString
+									Returns a boolean, indicating whether or not the specified value is of type ='string'= and contains 0 characters.
+
+									SYNTAX
+									........................................................
+									resultBOOL = myTest.expectEmptyString (valueANYTYPE);
+									........................................................
+
+									This method uses the =expectString= and =expectEmpty= methods in its implementation. The statement =myTest.expectEmptyString (value)= is equivalent to the statement =this.expectString (value) && this.expectEmpty (value)=.
+
+									EXAMPLES
+									...........................................................................
+									myTest.expectEmptyString ('');                          // returns true
+									
+									myTest.expectEmptyString ('foo');                       // returns false
+									myTest.expectEmptyString (new String (''));             // returns false
+									myTest.expectEmptyString (new String ('foo'));          // returns false
+									myTest.expectEmptyString (Uize.Class ({value:'foo'}));  // returns false
+									myTest.expectEmptyString (1.2345);                      // returns false
+									myTest.expectEmptyString (true);                        // returns false
+									...........................................................................
+
+									NOTES
+									- compare to the =expectEmpty=, =expectEmptyArray=, and =expectEmptyObject= instance methods
 									- this method is one of the many available `expectation methods`
 						*/
 					},
@@ -1385,7 +1566,8 @@ Uize.module ({
 									'ERROR NAME: ' + _error.name + '\n' +
 									'ERROR MESSAGE: ' + _error.message + '\n' +
 									'ERROR DESCRIPTION: ' + _error.description + '\n' +
-									'LINE NUMBER: ' + _error.number + '\n'
+									'LINE NUMBER: ' + _error.number + '\n' +
+									'STACK TRACE: ' + _error.stack + '\n'
 							});
 							_testResult = _false;
 						}

@@ -1,0 +1,37 @@
+This is a TO DO document for the proposed =Uize.Widget.List= widget module.
+
+Problem
+	=Uize.Widget.Collection= and =Uize.Widget.Options= are the 2 primary widgets that operate on a dynamic list of child widget items/options. Both are a bit too heavy-weight when you really just want to bind an array state property to a dynamic set of DOM nodes.
+	
+	While =Uize.Widget.Options= is probably the lighter of the two, both impose a concept of a selected item/option. In addition the child widgets (=Uize.Widget.CollectionItem= and =Uize.Widget.Button=) are pretty heavy themselves.
+	
+Proposal
+	The proposal is to create a new lightweight widget called =Uize.Widget.List= that will iterate over its list of items and build and wire markup for each item. =Uize.Widget.Collection= and =Uize.Widget.Options= could end up be subclasses of this lighter weight widget.
+	
+	With =Uize.Widget.List= in place, a widget could use child bindings (via =Uize.Widget.mChildBindings= mixin), to bind its items state property to the items state property of its child list widget and the UI would update accordingly.
+	
+	Differences between List vs. Collection
+		It's important to create a clean separation between what makes a list a list and what makes a collection a collection.  The primary differences are...
+		
+		- Concept of selected item(s) including select all, select none options
+	
+Ideas
+	Item Widget
+		Each item itself will be a widget (=Uize.Widget.ListItem=). The list item widget will fire events like 'Click', 'Over', 'Out', etc. The parent list widget will then wire a '*' event on each item, firing a 'Item Event' and passing the child event along (like =Uize.Widget.Options=)
+		
+	Mixed Items
+		The list should support mixed list items.  The items don't have to be of the same widget class, just all descendents of =Uize.Widget.ListItem=.
+		
+	Deferred Markup/Wiring
+		We don't want the UI to grind to a halt when there are a lot of items (hundreds or thousands), so the list widget should support deferred markup creationg and wiring.
+		
+	Tabular Data
+		The list widget should work for items that are &lt;div&gt;s (or some other generic block-level element) as well as table rows. Potentially =Uize.Widget.TableSort= could also be a subclass of =Uize.Widget.List=.
+		
+	Mix-ins
+		In order to keep the base widget lightweight, additional functionality should be factored out into separate mix-ins.
+		
+		Some ideas...
+		- Sorting
+		- Filtering
+		- Reordering (like in =Uize.Widget.Collection.Dynamic=)

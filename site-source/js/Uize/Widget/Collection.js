@@ -147,12 +147,7 @@ Uize.module ({
 		return _superclass.subclass ({
 			alphastructor:function () {
 				var m = this;
-
-				/* NOTE:
-					Initialize the items array here (as opposed to the default value when registering the set-get property), since that default is static and gets shared between all instances which casues problems
-				*/
-				m._items = [];
-
+				
 				/*** Private Instance Properties ***/
 					m._itemWidgetNameUniquifier = 0;
 
@@ -179,6 +174,11 @@ Uize.module ({
 							_updateTotalSelected (m);
 						}
 					);
+				/* NOTE:
+					Initialize the items array here (as opposed to the default value when registering the set-get property), since that default is static and gets shared between all instances which casues problems
+				*/
+					m.set('items', []);
+
 			},
 
 			omegastructor:function () {
@@ -1085,7 +1085,6 @@ Uize.module ({
 				},
 				_items:{
 					name:'items',
-					value:[],
 					onChange:function () {
 						var m = this;
 

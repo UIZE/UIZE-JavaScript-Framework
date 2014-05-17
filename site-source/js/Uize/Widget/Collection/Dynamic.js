@@ -172,7 +172,7 @@ Uize.module ({
 									_itemsCoords1 = _itemsCoords [_itemDisplayOrderNo ? _totalItemsMinus1 - 1 : 1]
 								;
 								_orientationNo =
-									_totalItemsMinus1 && _itemsCoords1.top > _itemsCoords0.bottom
+									_totalItemsMinus1 && _itemsCoords1.top >= _itemsCoords0.bottom
 										? 1 /* 1 = items layed out vertically */
 										: 0 /* 0 = items layed out horizontally */
 								;
@@ -268,7 +268,7 @@ Uize.module ({
 									_lastInsertPointItem = _insertPointItem;
 									_lastInsertPointModeNo = _insertPointModeNo;
 								}
-								_drag.set ({cursor:_insertPointItem || _itemWidgetOver ? 'move' : 'not-allowed'});
+								_drag.set ({cursor:_insertPointItem || _itemWidgetOver ? m._dragCursor : 'not-allowed'});
 							},
 						'Drag Done':
 							function () {
@@ -410,13 +410,15 @@ Uize.module ({
 							_itemWidgets.splice (_spliceInPos,0,_itemWidgetToMove);
 							_items.splice (_spliceInPos,0,_item);
 				},
-
+				getTemplateHtml: function (_templateNode) { /* virtual hook method */
+					return _templateNode.innerHTML;
+				},
 				processItemTemplate:function (_templateNode) {
 					// NOTE: This code is pretty much identical to the code in buildHtml (of Uize.Widget), but there's no
 					// easy way to get the template into the markup so that it can do what it does.
-					var _nodeInnerHtml = _templateNode.innerHTML;
+					var _nodeInnerHtml = this.getTemplateHtml(_templateNode);
 					return	Uize.Template &&_templateNode.tagName == 'SCRIPT' && _templateNode.type == 'text/jst'
-						? Uize.Template.compile (_nodeInnerHtml, {openerToken:'[%',closerToken:'%]'})
+						? Uize.Template.compile(_nodeInnerHtml, this._templateTokens || { openerToken: '[%', closerToken: '%]' })
 						: function (_input) {return _nodeInnerHtml.replace (/ITEMWIDGETNAME/g, _input.name)}
 					;
 				},
@@ -478,6 +480,10 @@ Uize.module ({
 					name:'confirmToDrag',
 					value:_false
 				},
+				_dragCursor:{
+					name: 'dragCursor',
+					value: 'move'
+				},
 				_dragIgnoresLocked:{
 					name:'dragIgnoresLocked',
 					value:_true
@@ -508,7 +514,8 @@ Uize.module ({
 				_itemVestigeOpacity:{
 					name:'itemVestigeOpacity',
 					value:.2
-				}
+				},
+				_templateTokens: 'templateTokens'
 			}
 		});
 	}

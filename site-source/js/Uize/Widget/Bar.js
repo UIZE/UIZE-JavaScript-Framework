@@ -120,7 +120,6 @@ Uize.module ({
 				wireUi:function () {
 					var m = this;
 					if (!m.isWired) {
-						m._orientationNo = m._orientation == 'vertical' ? 1 : 0;
 						m._trackNode = m.getNode ('track');
 							/*?
 								Implied Nodes
@@ -252,6 +251,10 @@ Uize.module ({
 							orientation
 								[DOCUMENT]
 					*/
+				},
+				_orientationNo:{
+					derived:function(orientation) { return orientation == 'vertical' ? 1 : 0 },
+					onChange:_updateUi
 				},
 				// this function can show the value in differe scale: eg, log(x+1), 1-1/x, x^2, etc.
 				_scaleFunc:{

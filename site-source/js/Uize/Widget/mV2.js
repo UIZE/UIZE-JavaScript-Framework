@@ -28,6 +28,8 @@ Uize.module ({
 	required:[
 		'Uize.Widget.mHtmlBindings',
 		'Uize.Widget.mCssBindings',
+		'Uize.Widget.mEventBindings',
+		'Uize.Widget.mDeclarativeChildren',
 		'Uize.Widget.mLoc'
 	],
 	builder:function () {
@@ -36,15 +38,18 @@ Uize.module ({
 		var
 			/*** Variables for Scruncher Optimization ***/
 				_undefined,
-				_Uize = Uize
+				_Uize = Uize,
+				_Uize_Widget = _Uize.Widget
 		;
 
 		return function (_class) {
 			_class.declare ({
 				mixins:[
-					Uize.Widget.mHtmlBindings,
-					Uize.Widget.mCssBindings,
-					Uize.Widget.mLoc
+					_Uize_Widget.mHtmlBindings,
+					_Uize_Widget.mCssBindings,
+					_Uize_Widget.mEventBindings,
+					_Uize_Widget.mDeclarativeChildren,
+					_Uize_Widget.mLoc
 				],
 
 				instanceMethods:{

@@ -1,0 +1,91 @@
+This is a proposal document for a =Uize.Test.ClassTest= module.
+
+Uize.Test.ClassTest.derivedPropertyTest
+	SYNTAX
+	..................................................................
+	testCLASS = Uize.Test.ClassTest.derivedPropertyTest (
+		widgetClassOBJorSTR,
+		propretyNameSTR,
+		casesARRAY,
+		supplementalInstancePropertiesOBJ, // optional
+		supplementalTestPropertiesOBJ,     // optional
+		supplementalCaseTestPropertiesOBJ  // optional
+	);
+	..................................................................
+	
+	casesArray
+		STRUCTURE
+		...
+		[
+			titleSTR,              // the title of the test case
+			propertiesOBJ,         // properties to set on instance to cause derivation
+			expectedResultANYTYPE  // the expected derived value for the test case
+		]
+		...
+	
+	EXAMPLE
+	.......
+	Uize.Test.ClassTest.derivedPropertyTest (
+		'Uize.Widget.Collection',
+		'isEmpty',
+		[
+			['No total items', {totalItems:0}, true],
+			['1 total items', {totalItems:1}, false],
+			['Many total items, {totalItems:2}, false]
+		]
+	);
+	......
+	
+Uize.Test.ClassTest.derivedPropertiesTest
+	SYNTAX
+	..................................................................
+	testCLASS = Uize.Test.ClassTest.derivedPropertiesTest (
+		widgetClassOBJorSTR,
+		derivedPropretyTestARRAYorOBJ
+	);
+	..................................................................
+	
+	derivedPropretyTestARRAYorOBJ
+		STRUCTURE
+		...
+		[
+			propertyNameSTR,                   // name of the derived state property
+			casesARRAY,                        // array of test cases
+			supplementalInstancePropertiesOBJ  // optional
+		]
+		...
+		
+	EXAMPLE
+	.......
+	Uize.Test.ClassTest.derivedPropertiesTest (
+		'Uize.Widget.Collection',
+		[
+			[
+				'isEmpty',
+				[
+					['No total items', {totalItems:0}, true],
+					['1 total items', {totalItems:1}, false],
+					['Many total items, {totalItems:2}, false]
+				]
+			],
+			[
+				'oneSelected',
+				[
+					['No total selected', {totalSelected:0}, false],
+					['1 total selected', {totalSelected:1}, true],
+					['Many total items, {totalSelected:2}, false]
+				]
+			],
+			[
+				'someSelected',
+				[
+					['No total selected', {totalSelected:0}, false],
+					['1 total selected', {totalSelected:1}, true],
+					['Many total items, {totalSelected:2}, true]
+				]
+			]
+		]
+	);
+	......
+	
+

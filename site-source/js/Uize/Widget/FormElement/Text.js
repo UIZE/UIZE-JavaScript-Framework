@@ -136,7 +136,8 @@ Uize.module ({
 								_endPosition = _endPosition == _undefined ? _value.length : _endPosition;
 
 								if (_input.setSelectionRange)
-									_input.setSelectionRange (_startPosition, _endPosition);
+									try { _input.setSelectionRange (_startPosition, _endPosition); }
+									catch (_err) { }
 								else if (_input.createTextRange) {
 									var _range = _input.createTextRange ();
 									_range.collapse (true);

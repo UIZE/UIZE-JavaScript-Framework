@@ -18,7 +18,7 @@
 
 /*?
 	Introduction
-		The =Uize.Widget.mBindings= mixin is an aggregator mixin that mixes in the =Uize.Widget.mHtmlBindings= and =Uize.Widget.mCssBindings= mixins.
+		The =Uize.Widget.mBindings= mixin is an aggregator mixin that mixes in the =Uize.Widget.mHtmlBindings=, =Uize.Widget.mCssBindings= and =Uize.Widget.mEventBindings= mixins.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 */
@@ -27,14 +27,18 @@ Uize.module ({
 	name:'Uize.Widget.mBindings',
 	required:[
 		'Uize.Widget.mHtmlBindings',
-		'Uize.Widget.mCssBindings'
+		'Uize.Widget.mCssBindings',
+		'Uize.Widget.mEventBindings',
+		'Uize.Widget.mDeclarativeChildren'
 	],
 	builder:function () {
 		'use strict';
 
 		return [
 			Uize.Widget.mHtmlBindings,
-			Uize.Widget.mCssBindings
+			Uize.Widget.mCssBindings,
+			Uize.Widget.mEventBindings,
+			Uize.Widget.mDeclarativeChildren
 		];
 	}
 });

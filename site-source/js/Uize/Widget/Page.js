@@ -48,7 +48,8 @@ Uize.module ({
 				_false = false,
 				_null = null,
 				_undefined,
-				_Uize_Dom_Basics = Uize.Dom.Basics,
+				_Uize = Uize,
+				_Uize_Dom_Basics = _Uize.Dom.Basics,
 
 			/*** General Variables ***/
 				_equivalentToTrue = {yes:1,on:1,1:1,'true':1}
@@ -56,7 +57,7 @@ Uize.module ({
 
 		/*** Utility Functions ***/
 			function _getCallbackFromDirectives (_directives) {
-				return (Uize.isFunction (_directives) && _directives) || (_directives && _directives.callback) || Object;
+				return (_Uize.isFunction (_directives) && _directives) || (_directives && _directives.callback) || Object;
 			}
 
 		/*** Private Instance Methods ***/
@@ -124,7 +125,7 @@ Uize.module ({
 									;
 								} else {
 									_levelWidget
-										? Uize.mergeInto (_levelWidget,_widgetProperties)
+										? _Uize.mergeInto (_levelWidget,_widgetProperties)
 										: (_levelChildren [_widgetLevelName] = _widgetProperties)
 									;
 									_window [_propertyName] = _undefined;
@@ -167,7 +168,7 @@ Uize.module ({
 								}
 							);
 
-						Uize.require (
+						_Uize.require (
 							_requiredModules,
 							function () {
 								m.set ({children:_childrenToAdoptTree});
@@ -178,7 +179,7 @@ Uize.module ({
 											var _child = _parent.children [_childName];
 											if (!_child) {
 												var _widgetClass =
-													Uize.getModuleByName (_childProperties.widgetClass) || Uize.Widget
+													_Uize.getModuleByName (_childProperties.widgetClass) || _Uize.Widget
 												;
 												_child = _childName.charCodeAt (0) == 36 && _childName.charCodeAt (1) == 36
 													? _widgetClass.spawn (_childProperties,_parent)
@@ -187,7 +188,7 @@ Uize.module ({
 											}
 											return _child;
 										},
-										m.isWired && function (_child) {Uize.callOn (_child,'insertOrWireUi')}
+										m.isWired && function (_child) {_Uize.callOn (_child,'insertOrWireUi')}
 											/* NOTE:
 												Don't wire adopted child widgets if page widget isn't wired yet (this code could be executed before the page widget is wired if all modules required by adopted children are already loaded, and the builder for this anonymous module is executed immediately).
 											*/
@@ -245,7 +246,7 @@ Uize.module ({
 						: m.loadHtml (
 							_htmlParams,
 							_loaderDirectivesIsValidObject
-								? Uize.copy (_loaderDirectives,_loadHtmlCallbackObject)
+								? _Uize.copy (_loaderDirectives,_loadHtmlCallbackObject)
 								: _loadHtmlCallbackObject
 						)
 					;
@@ -400,11 +401,12 @@ Uize.module ({
 				useDialog:function (_params) {
 					var
 						m = this,
-						_dialogWidgetProperties = Uize.copy (m._dialogProperties,_params.widgetProperties),
+						_dialogWidgetProperties = _Uize.copy (m._dialogProperties,_params.widgetProperties),
 						_dialogWidgetParent = _dialogWidgetProperties.parent || m,
 						_dialogWidgetName = _dialogWidgetProperties.name,
 						_dialogWidget = _dialogWidgetParent.children [_dialogWidgetName],
 						_component = _params.component,
+						_loadingDialogs = m._loadingDialogs = m._loadingDialogs || {}, // keep track of dialogs that are loading in case another request for one comes in while loading
 						_componentProfile
 					;
 					if (_component) {
@@ -415,7 +417,7 @@ Uize.module ({
 							name:_component.name,
 							node:_component.rootNode,	// the node to inject into
 							rootNodeId:_rootNodeId,
-							params:Uize.copyInto ({idPrefix:_rootNodeId},_component.params)
+							params:_Uize.copyInto ({idPrefix:_rootNodeId},_component.params)
 						};
 					}
 					function _showDialog () {
@@ -461,7 +463,7 @@ Uize.module ({
 											...store reference to previous handlers on widget instance
 									*/
 									_dialogWidget.unwire (_dialogWidget.eventHandlersForUseDialog || {});
-									_dialogWidget.eventHandlersForUseDialog = Uize.copyInto (
+									_dialogWidget.eventHandlersForUseDialog = _Uize.copyInto (
 										{
 											'Submission Complete':
 												function (_event) {_callHandler ('submitHandler',[_event.result,_event])},
@@ -482,25 +484,11 @@ Uize.module ({
 							0
 						);
 					}
-					if (
-						_dialogWidget &&
-						(
-							_dialogWidget._componentProfile == _componentProfile ||
-								// HACK: avoid requiring Uize.Data.Compare for most cases (it's a component specific thing)
-								// ISSUE: why is code using Uize.Data.Compare when this module is not in the required list?
-							Uize.Data.Compare.identical (_dialogWidget._componentProfile,_componentProfile)
-						)
-					) {
-						_showDialog ('subsequent');
-					} else {
-						var _refetch = _componentProfile && !!_dialogWidget;
-						if (_refetch) {
-							_dialogWidget.removeUi ();
-							_dialogWidgetParent.removeChild (_dialogWidgetName);
-						}
-						var _createDialogWidget = function () {
+					function _loadDialog() {
+						function _createDialogWidget() {
 							var _dialogWidgetClassName = _params.widgetClassName;
-							Uize.require (
+							_loadingDialogs[_dialogWidgetName] = _false;
+							_Uize.require (
 								_dialogWidgetClassName,
 								function (_dialogWidgetClass) {
 									(_dialogWidget = _dialogWidgetParent.children [_dialogWidgetName])
@@ -511,29 +499,52 @@ Uize.module ({
 											)
 										)
 									;
-									_dialogWidget._componentProfile = _componentProfile;
+									_dialogWidget.Page_componentProfile = _componentProfile;
 									_dialogWidget.insertOrWireUi ();
 									_showDialog (_refetch ? 'refetched' : 'initial');
 								}
 							);
-						};
-						_componentProfile
-							? m.loadHtmlIntoNode (
-								{
-									node:_componentProfile.node,
-									rootNodeId:_componentProfile.rootNodeId,
-									injectMode:'inner bottom',
-									alwaysReplace:_false
-								},
-								Uize.copyInto ({cp:_componentProfile.name},_componentProfile.params),
-								{
-									cache:'memory',
-									callback:_createDialogWidget
-								}
-							)
-							: _createDialogWidget ()
-						;
+						}
+						if (!_loadingDialogs[_dialogWidgetName]) { // if we're already loading a dialog of that name just ignore
+							var _refetch = _componentProfile && !!_dialogWidget;
+							if (_refetch) {
+								_dialogWidget.removeUi ();
+								_dialogWidgetParent.removeChild (_dialogWidgetName);
+							}
+							_loadingDialogs[_dialogWidgetName] = _true;
+							_componentProfile
+								? m.loadHtmlIntoNode (
+									{
+										node:_componentProfile.node,
+										rootNodeId:_componentProfile.rootNodeId,
+										injectMode:'inner bottom',
+										alwaysReplace:_false
+									},
+									_Uize.copyInto ({cp:_componentProfile.name},_componentProfile.params),
+									{
+										cache:'memory',
+										callback:_createDialogWidget
+									}
+								)
+								: _createDialogWidget ()
+							;
+						}
 					}
+					if (_dialogWidget) {
+						if (_dialogWidget.Page_componentProfile == _componentProfile)
+							_showDialog ('subsequent');
+						else {
+							_Uize.require(
+								'Uize.Data.Compare',
+								function(_Uize_Data_Compare) {
+									_Uize_Data_Compare.identical (_dialogWidget.Page_componentProfile,_componentProfile)
+										? _showDialog ('subsequent')
+										: _loadDialog()
+								}
+							);
+						}
+					}
+					else { _loadDialog() }
 					/*?
 						Instance Methods
 							useDialog
