@@ -376,6 +376,16 @@ Uize.module ({
 					// this method should be implemented by subclasses
 				},
 
+				getReferencingCodeFiles:function () {
+					return [];
+					// this method should be implemented by subclasses
+				},
+
+				getReferencesFromCodeFile:function (_filePath) {
+					return {};
+					// this method should be implemented by subclasses
+				},
+
 				'import':function (_params,_callback) {
 					var
 						m = this,
@@ -625,7 +635,92 @@ Uize.module ({
 				},
 
 				usage:function (_params,_callback) {
-					// this method should be implemented by subclasses
+					var
+						m = this,
+						_allReferencesLookup = {},
+						_referencingFiles = m.getReferencingCodeFiles ()
+					;
+
+					m.prepareToExecuteMethod (_referencingFiles.length + 4);
+
+					/*** build lookup of string references ***/
+						Uize.forEach (
+							_referencingFiles,
+							function (_filePath) {
+								Uize.forEach (
+									m.getReferencesFromCodeFile (_filePath),
+									function (_stringReferences,_stringId) {
+										Uize.push (
+											_allReferencesLookup [_stringId] || (_allReferencesLookup [_stringId] = []),
+											_stringReferences
+										);
+									}
+								);
+								m.stepCompleted ('scanned for resource string references in file: ' + _filePath);
+							}
+						);
+
+					/*** create index of resource string references by code file ***/
+						var _stringsReferencesByCodeFile = {};
+						Uize.forEach (
+							_allReferencesLookup,
+							function (_stringReferences,_stringId) {
+								Uize.forEach (
+									_stringReferences,
+									function (_stringReference) {
+										var _filePath = _stringReference.filePath;
+										(
+											_stringsReferencesByCodeFile [_filePath] ||
+											(_stringsReferencesByCodeFile [_filePath] = [])
+										).push (_stringId);
+									}
+								);
+							}
+						);
+						m.stepCompleted ('created index of resource string references by code file');
+
+					/*** gather resources for primary language ***/
+						var _primaryLanguageResources = m.gatherResources ();
+						m.stepCompleted ('gathered resources for primary language');
+
+					/*** analyze resource string usage ***/
+						var
+							_unreferenced = [],
+							_references = {},
+							_multiReferenced = {}
+						;
+						Uize.Data.Flatten.flatten (
+							_primaryLanguageResources,
+							function (_path) {
+								var
+									_stringId = _path.slice (1).join ('.'),
+									_stringReferences = _allReferencesLookup [_stringId]
+								;
+								if (_stringReferences) {
+									_references [_stringId] = _stringReferences;
+									if (_stringReferences.length > 1)
+										_multiReferenced [_stringId] = _stringReferences.length
+									;
+								} else {
+									_unreferenced.push (_stringId);
+								}
+							}
+						)
+						m.stepCompleted ('analyzed resource usage');
+
+					/*** write report file ***/
+						var _usageReportFilePath = m.workingFolderPath + 'metrics/usage-report.json'
+						_fileSystem.writeFile ({
+							path:_usageReportFilePath,
+							contents:Uize.Json.to ({
+								unreferenced:_unreferenced,
+								multiReferenced:_multiReferenced,
+								references:_references,
+								referencesByCodeFile:_stringsReferencesByCodeFile
+							})
+						});
+						m.stepCompleted ('created usage report file: ' + _usageReportFilePath);
+
 					_callback ();
 				},
 
