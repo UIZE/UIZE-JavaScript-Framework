@@ -18,30 +18,63 @@
 
 /*?
 	Introduction
-		The =Uize.Loc.Pseudo= module provides methods to facilitate the pseudo-localization of a JavaScript application.
+		The =Uize.Loc.Pseudo= module provides methods to facilitate the [[http://en.wikipedia.org/wiki/Pseudolocalization][pseudo-localization]] of a JavaScript application.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 
-		The =Uize.Loc.Pseudo= module is inspired by the work done by engineers at Microsoft and Google in the area of psueo-localization.
+		In a Nutshell
+			What is Pseudo-localization?
+				Pseudo-localization is a process of programmatically "translating" application text (typically English) to a pseudo-locale to aid in rapidly identifying i18n (internationalization) and L10n (localization) issues with the application.
 
-		###
-			Accenting
-				.
+				SOURCE TEXT
+				...
+				...
 
-			Expansion
-				.
+				PSEUDO-LOCALIZED TEXT
+				...
+				...
 
-				Expansion Character
+				Basic Techniques
 					.
 
-			Wrapping
-				.
+				Advantages of Pseudo-localization
+					As a technique, pseudo-localization has the following advantages...
 
-				Wrapper
+					It's Free
+						.
+
+					It's Immediate
+						.
+
+					It Makes Testing Easier
+						.
+
+				Disadvantages of Pseudo-localization
+					While geneerally a beneficial technique, pseudo-localization does have some disadvantages...
+
+					You May Get False Positives
+						.
+
+			Pseudo-localization Features
+				The =Uize.Loc.Pseudo= module supports several pseudo-localization features, including `accenting`, `expansion`, and `wrapping`.
+
+				Accenting
 					.
 
-				Bracketing
+				Expansion
 					.
+
+					Expansion Character
+						.
+
+				Wrapping
+					.
+
+					Wrapper
+						.
+
+					Bracketing
+						.
 */
 
 Uize.module ({
