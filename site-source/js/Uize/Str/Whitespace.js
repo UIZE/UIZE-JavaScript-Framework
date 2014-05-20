@@ -409,6 +409,68 @@ Uize.module ({
 						*/
 
 					lastIndexOfNonWhitespace:'lastIndexOfNonClassChar'
+						/*?
+							Static Methods
+								Uize.Str.Whitespace.lastIndexOfNonWhitespace
+									Returns an integer, indicating the index of the last `non-whitespace character` in the specified source string.
+
+									DIFFERENT USAGES
+
+									`Get the Index of the Last Non-whitespace Character in a String`
+									....................................................................
+									indexINT = Uize.Str.Whitespace.lastIndexOfNonWhitespace (sourceSTR);
+									....................................................................
+
+									`Get the Index of the Last Non-Whitespace Character Before a Specified Start Position`
+									................................................................................
+									indexINT = Uize.Str.Whitespace.lastIndexOfNonWhitespace (sourceSTR,startPosINT);
+									................................................................................
+
+									Get the Index of the Last Non-whitespace Character in a String
+										In the typical use case, the index of the last `non-whitespace character` in a source string can be obtained by specifying just the source string as the single argument.
+
+										SYNTAX
+										....................................................................
+										indexINT = Uize.Str.Whitespace.lastIndexOfNonWhitespace (sourceSTR);
+										....................................................................
+
+										If the source string does not contain any non-whitespace characters, then the value =-1= will be returned.
+
+										EXAMPLES
+										.............................................................................
+										Uize.Str.Whitespace.lastIndexOfNonWhitespace ('   foobar');     // returns 8
+										Uize.Str.Whitespace.lastIndexOfNonWhitespace ('  foo  bar  ');  // returns 9
+										Uize.Str.Whitespace.lastIndexOfNonWhitespace ('f  \r\n\t\n ');  // returns 0
+
+										Uize.Str.Whitespace.lastIndexOfNonWhitespace ('');              // returns -1
+										Uize.Str.Whitespace.lastIndexOfNonWhitespace (' \r\n\t\n ');    // returns -1
+										.............................................................................
+
+									Get the Index of the Last Non-whitespace Character Before a Specified Start Position
+										To obtain the index of the last `non-whitespace character` before a start position, the start position can be specified for the optional second argument.
+
+										SYNTAX
+										................................................................................
+										indexINT = Uize.Str.Whitespace.lastIndexOfNonWhitespace (sourceSTR,startPosINT);
+										................................................................................
+
+										If the source string does not contain any non-whitespace characters before the specified start position, then the value =-1= will be returned.
+
+										EXAMPLES
+										....................................................................................
+										Uize.Str.Whitespace.lastIndexOfNonWhitespace ('  foo   bar  ',7);      // returns 4
+										Uize.Str.Whitespace.lastIndexOfNonWhitespace ('   foobar   ',6);       // returns 6
+										Uize.Str.Whitespace.lastIndexOfNonWhitespace ('  foo  bar  ',100);     // returns 9
+
+										Uize.Str.Whitespace.lastIndexOfNonWhitespace ('  \r\n\t  foobar ',5);  // returns -1
+										Uize.Str.Whitespace.lastIndexOfNonWhitespace ('foo barbazqux ',-100);  // returns -1
+										Uize.Str.Whitespace.lastIndexOfNonWhitespace ('  \r\n\t  ',50);        // returns -1
+										....................................................................................
+
+									NOTES
+									- see the companion =Uize.Str.Whitespace.lastIndexOfWhitespace= static method
+									- see the related =Uize.Str.Whitespace.indexOfWhitespace= and =Uize.Str.Whitespace.indexOfNonWhitespace= static methods
+						*/
 				},
 				function (_functionName) {
 					var _function = _whitespaceCharClass [_functionName];
