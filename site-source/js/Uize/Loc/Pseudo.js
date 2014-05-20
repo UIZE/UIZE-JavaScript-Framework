@@ -24,57 +24,198 @@
 
 		In a Nutshell
 			What is Pseudo-localization?
-				Pseudo-localization is a process of programmatically "translating" application text (typically English) to a pseudo-locale to aid in rapidly identifying i18n (internationalization) and L10n (localization) issues with the application.
+				Pseudo-localization is a process of programmatically "translating" application text (typically English) to a pseudo-locale to aid in identifying i18n (internationalization) and L10n (localization) issues in the application.
+
+				Consider the following example of text before and after pseudo-localization...
 
 				SOURCE TEXT
-				...
-				...
+				......................................
+				Your account settings have been saved.
+				......................................
 
 				PSEUDO-LOCALIZED TEXT
-				...
-				...
+				..................................................
+				[Ýöûŕ_ åççöûñţ__ šéţţîñĝš___ ĥåṽé_ ƀééñ_ šåṽéð__.]
+				..................................................
 
-				Basic Techniques
-					.
+				By looking at the pseudo-localized text, you can tell that it has been derived from the source English text, which means that pseudo-localized text is still sufficiently readable that various people involved in design, development, and testing can navigate through the user interface of an application in the pseudo-localized state.
+
+				Basic Processes
+					The technique of pseudo-localization involves applying the following three processes to the original source text...
+
+					- *accenting* - this is the process of converting ASCII alphabetical characters to accented Unicode versions
+					- *expansion* - this is the process of adding extra expansion characters to simulate the expansion that typically occurs when English text is translated to languages like German, French, Spanish, Portuguese, etc.
+					- *wrapping* - this is the process of wrapping translated text with characters (typically square brackets) to indicate the boundaries and help to identify issues with truncation and concatenation
+
+					These processes are discussed in further detail in the section `Pseudo-localization Features`.
 
 				Advantages of Pseudo-localization
 					As a technique, pseudo-localization has the following advantages...
 
 					It's Free
-						.
+						Because pseudo-localization can be performed programmatically, it is essentially a free form of pseudo-translation.
+
+						Translation using human translators can be a costly process. Pseudo-localization is a cost effective alternative to traditional translation when one is only trying to expose issues with internationalization (e.g. hard-coded text) or localization (e.g. layout issues).
 
 					It's Immediate
-						.
+						Because pseudo-localization can be performed programmatically, results can be available immediately for review.
+
+						Translation using human translators can be slow and is certainly not instantaneous. Pseudo-localization can be a virtually instantaneous process, allowing designers, developers, testers, and others to discover and address problems earlier in the development cycle, without having to be slowed down by a translation process that could take days or even weeks.
 
 					It Makes Testing Easier
-						.
+						Because pseudo-localized text is still readable as English, pseudo-localization makes it easier to test an application to discover i18n and L10n issues than if the text were truly translated to another language.
+
+						Pseudo-localized text is intended to resemble the source English text from which it is derived, specifically so that designers, developers, testers, and others can still navigate the application in the pseudo-localized state.
 
 				Disadvantages of Pseudo-localization
 					While geneerally a beneficial technique, pseudo-localization does have some disadvantages...
 
-					You May Get False Positives
-						.
+					It May Produce False Positives
+						Because pseudo-localized text is derived purely from the source English text, any expansion process that is applied to simulate the effects of translation to other languages is approximate and not too reliable.
+
+						Expansion is determined as a percentage of the length of the source English text, but the actual expansion that will occur when translating to a specific language can vary substantially depending on the actual text being translated. Even with languages where translated text is typically longer, there can be individual cases where an English word or even sentence could be no longer when translated, or even shorter in some cases.
+
+						Therefore, the expansion process in pseudo-localization could produce false positives of issues that aren't real issues in practice. This may lead one to "fix" layout issues that don't exist in practice. In general, the more languages that an application will be translated to, the more useful the findings from pseudo-localization will be, since the variety of languages will have an aggregating effect and result in the expansion being more likely to be indicative of results for some language out of the set.
+
+					Primary Language Should be English
+						As a technique, pseudo-localization is built around the assumption that there is English text that can be used as the source for generating pseudo-localized text.
+
+						In particular, the two processes of `accenting` and `expansion` are largely predicated on the source text being English. At the very least, accenting anticipates that the source language use the Latin alphabet rather than a non-alphabetic script, so that alternate versions of the characters with different accents can be substituted. Expansion, on the other hand, is most valuable when the language to be used as the source for pseudo-localization is the most brief, since this will increase the number of languages that can be simulated by the expanion process.
+
+						Put together, this leads to English being the most suitable language to use as the primary language from which pseudo-localized text is generated.
+
+					It Can't Simulate Contraction
+						While pseudo-localization can simulate the expansion of text from translation by adding extra, easily ignorable characters without interfering with readability, there is no way to remove characters to simulate contraction without harming readability.
+
+						In contrast to languages like German, French, Spanish, Portuguese, etc., where translating from English produces text that is larger, some Asian languages that use logographic writing systems can be somewhat more compact than the equivalent English. If you want to get some sense of how much vacant space there might be in the UI when an application is translated from English to one of these more compact languages, pseudo-localization won't be coming to your rescue.
 
 			Pseudo-localization Features
 				The =Uize.Loc.Pseudo= module supports several pseudo-localization features, including `accenting`, `expansion`, and `wrapping`.
 
 				Accenting
-					.
+					Accenting is the process of converting ASCII alphabetical characters to accented Unicode versions.
+
+					Accenting Enabled By Default
+						Accenting is enabled, by default, in the =Uize.Loc.Pseudo.pseudoLocalize= method.
+
+						EXAMPLE
+						..........................................................................
+						Uize.Loc.Pseudo.pseudoLocalize ('Your account settings have been saved.');
+						..........................................................................
+
+						OUTPUT
+						..................................................
+						[Ýöûŕ_ åççöûñţ__ šéţţîñĝš___ ĥåṽé_ ƀééñ_ šåṽéð__.]
+						..................................................
+
+						What you will notice from the output in the above example is that the pseudo-localized text is still readable - all the ASCII alphabetical characters have been replaced with accented Unicode variants.
+
+					Disabling Accenting
+						Accenting can be disabled by specifying the value =false= for the =accent= property in the options object, as shown in the example below...
+
+						EXAMPLE
+						.........................................................................................
+						Uize.Loc.Pseudo.pseudoLocalize ('Your account settings have been saved.',{accent:false});
+						.........................................................................................
+
+						OUTPUT
+						..................................................
+						[Your_ account__ settings___ have_ been_ saved__.]
+						..................................................
 
 				Expansion
-					.
+					Expansion is the process of adding extra expansion characters to simulate the expansion that typically occurs when English text is translated to languages like German, French, Spanish, Portuguese, etc.
+
+					The =Uize.Loc.Pseudo.pseudoLocalize= method implements expansion by adding extra characters at the end of words. Consider the following example...
+
+					EXAMPLE
+					..........................................................................
+					Uize.Loc.Pseudo.pseudoLocalize ('Your account settings have been saved.');
+					..........................................................................
+
+					OUTPUT
+					..................................................
+					[Ýöûŕ_ åççöûñţ__ šéţţîñĝš___ ĥåṽé_ ƀééñ_ šåṽéð__.]
+					..................................................
+
+					What you will notice from the above example is that each word is expanded by the addition of a suffix of "_" (underscore) characters - this is the `default expansion` behavior, but it can be overridden by specifying a `custom expansion factor` and 'custom expansion character`.
+
+					How Expansion is Performed
+						Expansion is performed according to the following steps...
+
+						- the source string is split into separate words using a `word splitter` regular expression
+						- the total character count for all the words is computed
+						- the amount of expansion characters to add is computed, by applying the `expansion factor` to the total character count of all the words
+						- the computed amount of expansion characters is distrubted proportionately across all the words (a word that is twice as long as some other word will get twice the number of expansion characters added as that other word)
+						- the pseudo-localized string is constructed by concatenating the expanded words with the non-word segments
+
+					Expansion Factor
+						.
 
 					Expansion Character
 						.
 
+					Default Expansion
+						.
+
+						Default Expansion Factor
+							.
+
+						Default Expansion Character
+							.
+
+					Custom Expansion
+						.
+
+						Custom Expansion Factor
+							.
+
+						Custom Expansion Character
+							.
+
 				Wrapping
-					.
+					Wrapping is the process of wrapping translated text with characters (typically square brackets) to indicate the boundaries and help to identify issues with truncation and concatenation.
 
-					Wrapper
-						.
+					Default Wrapper
+						By default, the =Uize.Loc.Pseudo.pseudoLocalize= method wraps all pseudo-localized text in square brackets.
 
-					Bracketing
-						.
+						EXAMPLE
+						..........................................................................
+						Uize.Loc.Pseudo.pseudoLocalize ('Your account settings have been saved.');
+						..........................................................................
+
+						OUTPUT
+						..................................................
+						[Ýöûŕ_ åççöûñţ__ šéţţîñĝš___ ĥåṽé_ ƀééñ_ šåṽéð__.]
+						..................................................
+
+					Custom Wrapper
+						When the square brackets used as the `default wrapper` is not suitable, the =Uize.Loc.Pseudo.pseudoLocalize= method allows a custom wrapper to be specified using the =wrapper= property in the options object.
+
+						EXAMPLE
+						.............................................................................................
+						Uize.Loc.Pseudo.pseudoLocalize ('Your account settings have been saved.',{wrapper:'[-  -]'});
+						.............................................................................................
+
+						RESULT
+						......................................................
+						[- Ýöûŕ_ åççöûñţ__ šéţţîñĝš___ ĥåṽé_ ƀééñ_ šåṽéð__. -]
+						......................................................
+
+						When applying a custom wrapper, the wrapper string is split into two parts, the first of which is used as a prefix, and the second of which is used as a suffix.
+
+					No Wrapper
+						The `wrapping` process can be effectively disabled by specifying the value =''= (empty string) for the =wrapper= property in the options object, as shown in the example below...
+
+						EXAMPLE
+						.......................................................................................
+						Uize.Loc.Pseudo.pseudoLocalize ('Your account settings have been saved.',{wrapper:''});
+						.......................................................................................
+
+						OUTPUT
+						................................................
+						Ýöûŕ_ åççöûñţ__ šéţţîñĝš___ ĥåṽé_ ƀééñ_ šåṽéð__.
+						................................................
 */
 
 Uize.module ({
@@ -360,10 +501,13 @@ Uize.module ({
 										- the character specified for this option will be repeated as necessary to expand words from the source string to produce words in the pseudo-localized string
 										- to see an example of this option in use, see the use case `Pseudo-localize a String, Specifying a Custom Expansion Character`
 
-									wordSplitter
+									wordSplitter ~~ Word Splitter
 										A regular expression, specifying a match expression that should be used to split a source string into words and non-words.
 
 										### Example
+											.
+
+										### Default Word Splitter
 											.
 
 										A Single Capture
@@ -550,6 +694,7 @@ Uize.module ({
 								............................................................
 
 							Pseudo-localize a String, But Without Adding a Wrapper
+								In cases where a `wrapper` is not desired, this feature can be disabled by soecifying the value =''= (empty string) for the =wrapper= property in the options object (as specified by the =optionsOBJ= parameter).
 
 								SYNTAX
 								.............................................................................
@@ -570,6 +715,7 @@ Uize.module ({
 								..........................................................
 
 							Pseudo-localize a String, Specifying a Custom Wrapper
+								In cases where the default square brackets `wrapper` is not suitable, a custom wrapper can be specified using the =wrapper= property in the options object (as specified by the =optionsOBJ= parameter).
 
 								SYNTAX
 								.....................................................................................
@@ -590,6 +736,7 @@ Uize.module ({
 								................................................................
 
 							Pseudo-localize a String, Specifying a Custom Word Splitter
+								In cases where the default `word splitter` is not suitable, a custom word splitter can be specified using the =wordSplitter= property in the options object (as specified by the =optionsOBJ= parameter).
 
 								SYNTAX
 								.....................................................
