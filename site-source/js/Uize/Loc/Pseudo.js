@@ -18,7 +18,7 @@
 
 /*?
 	Introduction
-		The =Uize.Loc.Pseudo= module provides methods to facilitate the [[http://en.wikipedia.org/wiki/Pseudolocalization][pseudo-localization]] of a JavaScript application.
+		The =Uize.Loc.Pseudo= module provides methods to facilitate the [[http://en.wikipedia.org/wiki/Pseudolocalization][pseudo-localization]] of the resource strings of an application.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 
@@ -45,12 +45,12 @@
 
 					- *accenting* - this is the process of converting ASCII alphabetical characters to accented Unicode versions
 					- *expansion* - this is the process of adding extra expansion characters to simulate the expansion that typically occurs when English text is translated to languages like German, French, Spanish, Portuguese, etc.
-					- *wrapping* - this is the process of wrapping translated text with characters (typically square brackets) to indicate the boundaries and help to identify issues with truncation and concatenation
+					- *wrapping* - this is the process of wrapping translated text with characters (typically square brackets) to indicate the boundaries of individual resource strings and help to identify issues with truncation and concatenation
 
 					These processes are discussed in further detail in the section `Pseudo-localization Features`.
 
 				Advantages of Pseudo-localization
-					As a technique, pseudo-localization has the following advantages...
+					As an i18n technique, pseudo-localization offers the following advantages...
 
 					It's Free
 						Because pseudo-localization can be performed programmatically, it is essentially a free form of pseudo-translation.
@@ -80,11 +80,11 @@
 					Primary Language Should be English
 						As a technique, pseudo-localization is built around the assumption that there is English text that can be used as the source for generating pseudo-localized text.
 
-						In particular, the two processes of `accenting` and `expansion` are largely predicated on the source text being English. At the very least, accenting anticipates that the source language use the Latin alphabet rather than a non-alphabetic script, so that alternate versions of the characters with different accents can be substituted. Expansion, on the other hand, is most valuable when the language to be used as the source for pseudo-localization is the most brief, since this will increase the number of languages that can be simulated by the expanion process.
+						In particular, the two processes of `accenting` and `expansion` are largely predicated on the source text being English. At the very least, accenting anticipates that the source language use the Latin alphabet rather than a non-Latin script, so that alternate versions of the characters with different accents can be substituted. Expansion, on the other hand, is most valuable when the language to be used as the source for pseudo-localization is the most brief, since this will increase the number of languages that can be simulated by the expanion process (pseudo-localization `can't simulate contraction`, after all).
 
 						Put together, this leads to English being the most suitable language to use as the primary language from which pseudo-localized text is generated.
 
-					It Can't Simulate Contraction
+					Can't Simulate Contraction
 						While pseudo-localization can simulate the expansion of text from translation by adding extra, easily ignorable characters without interfering with readability, there is no way to remove characters to simulate contraction without harming readability.
 
 						In contrast to languages like German, French, Spanish, Portuguese, etc., where translating from English produces text that is larger, some Asian languages that use logographic writing systems can be somewhat more compact than the equivalent English. If you want to get some sense of how much vacant space there might be in the UI when an application is translated from English to one of these more compact languages, pseudo-localization won't be coming to your rescue.
@@ -93,10 +93,10 @@
 				The =Uize.Loc.Pseudo= module supports several pseudo-localization features, including `accenting`, `expansion`, and `wrapping`.
 
 				Accenting
-					Accenting is the process of converting ASCII alphabetical characters to accented Unicode versions.
+					Accenting is the process of converting Latin alphabetical characters from the ASCII character set to accented Unicode versions.
 
 					Accenting Enabled By Default
-						Accenting is enabled, by default, in the =Uize.Loc.Pseudo.pseudoLocalize= method.
+						Accenting is enabled by default in the =Uize.Loc.Pseudo.pseudoLocalize= method.
 
 						EXAMPLE
 						..........................................................................
@@ -108,7 +108,7 @@
 						[Ýöûŕ_ åççöûñţ__ šéţţîñĝš___ ĥåṽé_ ƀééñ_ šåṽéð__.]
 						..................................................
 
-						What you will notice from the output in the above example is that the pseudo-localized text is still readable - all the ASCII alphabetical characters have been replaced with accented Unicode variants.
+						What you will notice from the output in the above example is that the pseudo-localized text is still readable - all the ASCII alphabetical characters have been replaced with accented Unicode variants that are analagous to the originals.
 
 					Disabling Accenting
 						Accenting can be disabled by specifying the value =false= for the =accent= property in the options object, as shown in the example below...
@@ -138,7 +138,7 @@
 					[Ýöûŕ_ åççöûñţ__ šéţţîñĝš___ ĥåṽé_ ƀééñ_ šåṽéð__.]
 					..................................................
 
-					What you will notice from the above example is that each word is expanded by the addition of a suffix of "_" (underscore) characters - this is the `default expansion` behavior, but it can be overridden by specifying a `custom expansion factor` and 'custom expansion character`.
+					What you will notice from the above example is that each word is expanded by the addition of a suffix of "_" (underscore) characters. This is the `default expansion` behavior, but it can be overridden by specifying a `custom expansion factor` and `custom expansion character`.
 
 					How Expansion is Performed
 						Expansion is performed according to the following steps...
@@ -146,7 +146,7 @@
 						- the source string is split into separate words using a `word splitter` regular expression
 						- the total character count for all the words is computed
 						- the amount of expansion characters to add is computed, by applying the `expansion factor` to the total character count of all the words
-						- the computed amount of expansion characters is distrubted proportionately across all the words (a word that is twice as long as some other word will get twice the number of expansion characters added as that other word)
+						- the computed amount of expansion characters is distrubted proportionately across all the words (a word that is twice as long as some other word will get roughly twice the number of expansion characters added as that other word)
 						- the pseudo-localized string is constructed by concatenating the expanded words with the non-word segments
 
 					Expansion Factor
@@ -181,7 +181,7 @@
 							When a `custom expansion character` is not explicitly specified, the default value ='_'= (an underscore) is used for the `expansion character`.
 
 					Custom Expansion
-						Explicit `custom expansion factor` and `custom expansion character` values can be specified to achieve custom expansion.
+						`Custom expansion factor` and `custom expansion character` values can be specified explicitly to achieve custom expansion.
 
 						Custom Expansion Factor
 							When the `default expansion factor` is not suitable, a custom expansion factor can be specified for the =expansion= property of the options object.
@@ -210,7 +210,7 @@
 							..................................................
 
 				Wrapping
-					Wrapping is the process of wrapping translated text with characters (typically square brackets) to indicate the boundaries and help to identify issues with truncation and concatenation.
+					Wrapping is the process of wrapping pseudo-localized text with characters (typically square brackets) to indicate the boundaries and help to identify issues with truncation and concatenation.
 
 					Default Wrapper
 						By default, the =Uize.Loc.Pseudo.pseudoLocalize= method wraps all pseudo-localized text in square brackets.
@@ -238,7 +238,7 @@
 						[- Ýöûŕ_ åççöûñţ__ šéţţîñĝš___ ĥåṽé_ ƀééñ_ šåṽéð__. -]
 						......................................................
 
-						When applying a custom wrapper, the wrapper string is split into two parts, the first of which is used as a prefix, and the second of which is used as a suffix.
+						When applying a custom wrapper, the wrapper string is split into two halves, the first of which is used as a prefix, and the second of which is used as a suffix.
 
 					No Wrapper
 						The `wrapping` process can be effectively disabled by specifying the value =''= (empty string) for the =wrapper= property in the options object, as shown in the example below...
@@ -349,16 +349,14 @@ Uize.module ({
 				/*?
 					Static Methods
 						Uize.Loc.Pseudo.accent
-							Returns an accented version of the specified source string, where all alphabetical characters are replaced with correponding accented versions of those characters from the extended Unicode character set.
+							Returns an accented version of the specified source string, where all Latin alphabet characters are replaced with correponding accented Unicode versions of those characters.
 
 							SYNTAX
 							.................................................
 							accentedSTR = Uize.Loc.Pseudo.accent (sourceSTR);
 							.................................................
 
-							The =Uize.Loc.Pseudo.accent= method is useful in the process of pseudo-localization, as it provides a way to create readable versions of English source strings that are very visibly different and that can be used to test a system's support for characters outside of the standard ASCII character set.
-
-							When used as a part of pseudo-localization, accenting of strings can be a valuable aid during the internationalization process of an application and can help to expose those strings that are still hard-coded in the code and have not been externalized to resource files.
+							The =Uize.Loc.Pseudo.accent= method is useful in the process of pseudo-localization, as it provides a way to create readable versions of English source strings that are very visibly different. This can be a valuable aid during the internationalization process of an application and can help to expose those strings that are still hard-coded in the code and have not been externalized to resource files. Furthermore, accented versions of strings can also be used to test a system's support for characters outside of the standard ASCII character set.
 
 							EXAMPLE
 							..........................................................................
@@ -434,6 +432,8 @@ Uize.module ({
 						Uize.Loc.Pseudo.pseudoLocalize
 							Returns a pseudo-localized version of the specified source string.
 
+							For a refresher on pseudo-localization, refer to the section `What is Pseudo-localization?`.
+
 							`Pseudo-localize a String Using the Option Defaults`
 							................................................................
 							pseudoLocalizedSTR = Uize.Loc.Pseudo.pseudoLocalize (sourceSTR);
@@ -504,7 +504,7 @@ Uize.module ({
 								............................................................
 
 							Pseudo-localize a String, Specifying Custom Options
-								In cases where the option defaults do not satisfy the needs, a string can be pseudo-localized with custom options by speciying an options object for the optional =optionsOBJ= parameter.
+								In cases where the option defaults do not satisfy the needs, a string can be pseudo-localized with custom options by speciying an options object for the optional =optionsOBJ= second argument.
 
 								SYNTAX
 								...........................................................................
@@ -522,7 +522,7 @@ Uize.module ({
 										- to see an example of this option in use, see the use case `Pseudo-localize a String, But Without Accenting`
 
 									expansion
-										A number, specifying an expansion factor to be used when producing a pseudo-localized string from the source string.
+										A number, specifying an `expansion factor` to be used when producing a pseudo-localized string from the source string.
 
 										- when a number value less than or equal to =1= is specified for this property, then no expansion will take place
 										- when a number value greater than =1= is specified for this property, then the words of the source string will be expanded by the factor specified by the =expansioin= property, using the expansion character specified by the companion =expansionChar= property (eg. if the value =2= is specified, then the word length in the pseudo-localized string will be double that of the source string)
@@ -530,11 +530,13 @@ Uize.module ({
 										- when a non-number value is specified for this property, it will be coerced to a number, so specifying the string ='1.5'= would be equivalent to specifying the number =1.5=
 										- to see examples of this option in use, see the use cases `Pseudo-localize a String, But Without Expansion` and `Pseudo-localize a String, Specifying a Custom Expansion Factor`
 
+										For more details on the process of expansion, consult the section `How Expansion is Performed`.
+
 									expansionChar
 										A string, specifying a character that should be used for the expansion of words in the source string.
 
 										- when the value =null= or =undefined= is specified for this property, then its value will be defaulted to the "_" (underscore) character
-										- the character specified for this option will be repeated as necessary to expand words from the source string to produce words in the pseudo-localized string
+										- the character specified for this option will be repeated as necessary to expand words from the source string to produce words in the pseudo-localized string (see the section `How Expansion is Performed`)
 										- to see an example of this option in use, see the use case `Pseudo-localize a String, Specifying a Custom Expansion Character`
 
 									wordSplitter ~~ Word Splitter
@@ -588,14 +590,14 @@ Uize.module ({
 											</div>
 											.............................................................................
 
-											What you'll notice from the result is that none of the words that are part of the HTML tags have been pseudo-localized.
+											What you'll notice from the result is that none of the words that are part of the HTML tags have been pseudo-localized. Also, the non-word text that is matched by the word splitter regular expression has been ignored when computing the number of expansion characters that need to be added to the string.
 
 										A Single Capture
 											The regular expression specified for the =wordSplitter= option should contain a single capturing group that encloses the entire pattern.
 
 											This is important, as it allows the =Uize.Loc.Pseudo.pseudoLocalize= method to split the source string exactly into alternating words and non-words, allowing the method to apply the pseudo-localization transformations like `accenting` and `expansion` for only the word parts of the source string, leaving the non-word parts unaffected.
 
-											In such an event that a word splitter regular expression needs to use grouping, the group sub-patterns should use the "?:" no-capture qualifier, as follows...
+											In cases where a word splitter regular expression needs to use grouping, the group sub-patterns should use the "?:" no-capture qualifier, as follows...
 
 											EXAMPLE
 											................................................................
@@ -607,7 +609,7 @@ Uize.module ({
 									wrapper
 										A string, specifying the characters that should be used to wrap the source string when performing pseudo-localization on it.
 
-										The wrapper string is split down the middle to form two parts: the opener characters and the closer characters. The opener characters are used as the prefix while the closer characters are used as the suffix.
+										The wrapper string is split down the middle to form two parts: the opener characters (used as the prefix) and the closer characters (used as the suffix).
 
 										A Two Character Wrapper
 											In the simplest case, specifying a two character wrapper will result in the first character being used as the opener / prefix and the second character as the closer.
@@ -774,7 +776,7 @@ Uize.module ({
 								............................................................
 
 							Pseudo-localize a String, But Without Adding a Wrapper
-								In cases where a `wrapper` is not desired, this feature can be disabled by soecifying the value =''= (empty string) for the =wrapper= property in the options object (as specified by the =optionsOBJ= parameter).
+								In cases where a `wrapper` is not desired, this feature can be disabled by specifying the value =''= (empty string) for the =wrapper= property in the options object (as specified by the =optionsOBJ= parameter).
 
 								SYNTAX
 								.............................................................................
@@ -816,7 +818,7 @@ Uize.module ({
 								................................................................
 
 							Pseudo-localize a String, Specifying a Custom Word Splitter
-								In cases where the default `word splitter` is not suitable, a custom word splitter can be specified using the =wordSplitter= property in the options object (as specified by the =optionsOBJ= parameter).
+								In cases where the default `word splitter` is not suitable, a `custom word splitter` can be specified using the =wordSplitter= property in the options object (as specified by the =optionsOBJ= parameter).
 
 								SYNTAX
 								.....................................................
