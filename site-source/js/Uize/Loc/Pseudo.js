@@ -150,28 +150,64 @@
 						- the pseudo-localized string is constructed by concatenating the expanded words with the non-word segments
 
 					Expansion Factor
-						.
+						In order to determine how many `expansion characters` should be added to the source string, an expansion factor is applied to the total number of word characters in the source string.
 
-					Expansion Character
-						.
+						The expansion factor is specified as a floating point number, representing the ratio of word characters in the pseudo-localized string to word characters in the source string. So, for example, an expansion factor of 2 means that the pseudo-localized string will have twice as many word characters as the source string, meaning that the length of every word will be doubled, meaning that the total length of all the words will be increased by 100% (different ways of saying the same thing, really).
+
+						EXPANSION OF 2
+						........................................................................
+						[Ýöûŕ____ åççöûñţ_______ šéţţîñĝš________ ĥåṽé____ ƀééñ____ šåṽéð_____.]
+						........................................................................
+
+						Similarly, an expansion factor of 1.3 means that there will be 30% more word characters in the pseudo-localized string than the source string.
+
+						EXPANSION OF 1.3
+						..................................................
+						[Ýöûŕ_ åççöûñţ__ šéţţîñĝš___ ĥåṽé_ ƀééñ_ šåṽéð__.]
+						..................................................
+
+					Expansion Character ~~ Expansion Characters
+						When pseudo-localizing a source string, words from the source string are expanded by appending zero or more of a specific expansion character.
+
+						While the =Uize.Loc.Pseudo.pseudoLocalize= method uses a `default expansion character`, a `custom expansion character` can also be specified explicitly.
 
 					Default Expansion
-						.
+						Without specifying explicit values for `expansion factor` and `expansion character`. the =Uize.Loc.Pseudo.pseudoLocalize= method uses `default expansion factor` and `default expansion character` values.
 
 						Default Expansion Factor
-							.
+							When a `custom expansion factor` is not explicitly specified, the default value =1.3= is used for the `expansion factor`.
 
 						Default Expansion Character
-							.
+							When a `custom expansion character` is not explicitly specified, the default value ='_'= (an underscore) is used for the `expansion character`.
 
 					Custom Expansion
-						.
+						Explicit `custom expansion factor` and `custom expansion character` values can be specified to achieve custom expansion.
 
 						Custom Expansion Factor
-							.
+							When the `default expansion factor` is not suitable, a custom expansion factor can be specified for the =expansion= property of the options object.
+
+							EXAMPLE
+							........................................................................................
+							Uize.Loc.Pseudo.pseudoLocalize ('Your account settings have been saved.',{expansion:2});
+							........................................................................................
+
+							RESULT
+							........................................................................
+							[Ýöûŕ____ åççöûñţ_______ šéţţîñĝš________ ĥåṽé____ ƀééñ____ šåṽéð_____.]
+							........................................................................
 
 						Custom Expansion Character
-							.
+							When the `default expansion character` is not suitable, a custom expansion character can be specified for the =expansionChar= property of the options object.
+
+							EXAMPLE
+							..............................................................................................
+							Uize.Loc.Pseudo.pseudoLocalize ('Your account settings have been saved.',{expansionChar:'~'});
+							..............................................................................................
+
+							RESULT
+							..................................................
+							[Ýöûŕ~ åççöûñţ~~ šéţţîñĝš~~~ ĥåṽé~ ƀééñ~ šåṽéð~~.]
+							..................................................
 
 				Wrapping
 					Wrapping is the process of wrapping translated text with characters (typically square brackets) to indicate the boundaries and help to identify issues with truncation and concatenation.
@@ -504,11 +540,55 @@ Uize.module ({
 									wordSplitter ~~ Word Splitter
 										A regular expression, specifying a match expression that should be used to split a source string into words and non-words.
 
-										### Example
-											.
+										Default Word Splitter
+											When no `custom word splitter` is explicitly specified, the =Uize.Loc.Pseudo.pseudoLocalize= method uses a default word splitter that provides a basic level of support for splitting a source string into word and non-word segments.
 
-										### Default Word Splitter
-											.
+										Custom Word Splitter
+											When the `default word splitter` is not suitable, a custom word splitter can be specified for the =wordSplitter= property of the options object.
+
+											EXAMPLE
+											....................................................................................
+											var
+												_wordSplitterRegExpComposition = Uize.Util.RegExpComposition ({
+													punctuation:/[\?!\.;,&=\-\(\)\[\]"]+/,
+													number:/\d+(?:\.\d+)?/,
+													whitespace:/\s+/,
+													htmlTag:/<(?:.|[\r\n\f])+?>/,
+													wordSplitter:/({htmlTag}|{whitespace}|{punctuation}|{number})/
+												}),
+												_wordSplitterRegExp = _wordSplitterRegExpComposition.get ('wordSplitter'),
+												_pseudoLocalized = Uize.Loc.Pseudo.pseudoLocalize (
+													'<div class="title">Account Settings</div>\n' +
+													'<div class="settingsLinks">\n' +
+													'	<div id="changePassword" class="settingsLink">Change Password</div>\n' +
+													'	<div id="changeEmail" class="settingsLink">Change Email Address</div>\n' +
+													'	<div id="billingInfo" class="settingsLink">Update Billing Info</div>\n' +
+													'	<div id="shippingAddress" class="settingsLink">Shipping Address</div>\n' +
+													'</div>\n',
+													{
+														wordSplitter:_wordSplitterRegExp,
+														wrapper:''
+													}
+												)
+											;
+											....................................................................................
+
+											In the above example, the =Uize.Util.RegExpComposition= module is being used to construct a complex word splitter regular expression with support for non-word segments comprising punctuation, numbers, whitespace, and HTML tags. We don't have to use the =Uize.Util.RegExpComposition= module for constructing our word splitter regular expression, but this module makes it easier to define sub-expressions and use those in other expressions.
+
+											Once the above code has been executed, the value of the =_pseudoLocalized= variable will be a string with the following contents...
+
+											PSEUDO-LOCALIZED STRING
+											.............................................................................
+											<div class="title">Åççöûñţ__ Šéţţîñĝš___</div>
+											<div class="settingsLinks">
+												<div id="changePassword" class="settingsLink">Çĥåñĝé_ Þåššŵöŕð___</div>
+												<div id="changeEmail" class="settingsLink">Çĥåñĝé__ Éɱåîļ_ Åððŕéšš__</div>
+												<div id="billingInfo" class="settingsLink">Ûþðåţé__ Ɓîļļîñĝ__ Îñƒö_</div>
+												<div id="shippingAddress" class="settingsLink">Šĥîþþîñĝ___ Åððŕéšš__</div>
+											</div>
+											.............................................................................
+
+											What you'll notice from the result is that none of the words that are part of the HTML tags have been pseudo-localized.
 
 										A Single Capture
 											The regular expression specified for the =wordSplitter= option should contain a single capturing group that encloses the entire pattern.
