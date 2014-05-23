@@ -31,16 +31,14 @@ Uize.module ({
 	],
 	builder:function () {
 		'use strict';
-		
+
 		var
 			_global = Uize.global(),
 			_processArrayAsync = Uize.Comm.processArrayAsync,
 			_defaultHandler = function(_event, _source) { _event.handler.call(this, _event, _source) },
 			_defaultChangedHandler = function(_event, _source) { this.get(_event.name.slice(8)).call(this, _event, _source) },
-			_originalWindow = _global.window
+			_originalWindow
 		;
-		
-		_global.window = _global;  // For Uize.Dom.Basics
 
 		function _getMockDomNode(_name) {
 			return Uize.Class.subclass({
@@ -61,7 +59,7 @@ Uize.module ({
 					}
 				},
 				stateProperties:{
-					_name:'name'	
+					_name:'name'
 				}
 			}) ({name:_name});
 		}
@@ -75,7 +73,7 @@ Uize.module ({
 				eventBindings:_eventBindings
 			});
 		}
-		
+
 		function _getTestWidgetClassInstance(_eventBindings, _children, _nodes, _instanceProperties) {
 			return _getTestWidgetClass(_eventBindings, _children)(
 				Uize.copyInto(
@@ -89,7 +87,7 @@ Uize.module ({
 				)
 			);
 		}
-		
+
 		function _generateTest(_title, _eventBindingsShorthand, _eventBindingsVerbose, _wiredEvents, _deferredChildren) {
 			function _generateSyntaxTests(_isVerbose) {
 				var _eventBindings = _isVerbose ? _eventBindingsVerbose : _eventBindingsShorthand;
@@ -97,19 +95,19 @@ Uize.module ({
 				function _getSyntaxTestWidgetClass(_children) {
 					return _getTestWidgetClass(_eventBindings, _children);
 				}
-				
+
 				function _getSyntaxTestWidgetClassInstance(_children, _nodes, _instanceProperties) {
 					return _getTestWidgetClassInstance(_eventBindings, _children, _nodes, _instanceProperties);
 				}
-				
+
 				function _generateFireTests(_type) {
 					var _fireEventMethodName = _type == 'node' ? 'triggerEvent' : 'fire';
-					
+
 					function _generateFireTest(_expectFunc, _instanceProperties) {
 						return function(_continue) {
 							if (!_wiredEvents || Uize.isEmpty(_wiredEvents[_type]))
 								return true;
-							
+
 							var
 								_typeEvents = _wiredEvents[_type],
 								_names = _type == 'self' ? ['self'] : Uize.keys(_typeEvents),
@@ -169,7 +167,7 @@ Uize.module ({
 													var
 														_handlerNotCalledTimeout = setTimeout(_nextFunc, 0)// timeout for when handler isn't called
 													;
-													
+
 													// Verify event is not fired
 													_fireEvent(
 														function() { // handler shouldn't get called
@@ -181,13 +179,13 @@ Uize.module ({
 												_deferredChildrenForEventObject = !Uize.isEmpty(_deferredChildren)
 													&& (_type == 'self'
 														? _deferredChildren.self
-														: (_deferredChildren[_type] && _deferredChildren[_type][_objectName]) 
+														: (_deferredChildren[_type] && _deferredChildren[_type][_objectName])
 													),
 												_deferredChildrenForEvent = _deferredChildrenForEventObject && _deferredChildrenForEventObject[_eventName]
 											;
-											
+
 											_type == 'node' && _testWidgetClassInstance.met('wired');
-											
+
 											if (Uize.isEmpty(_deferredChildrenForEvent)) {
 												_verifyEventFired(_nextEventFunc);
 											}
@@ -199,7 +197,7 @@ Uize.module ({
 															function() {
 																// Add deferred child
 																_testWidgetClassInstance.addChild(_deferredChildName, Uize.Widget);
-																
+
 																_nextDeferredChildFunc();
 															}
 														);
@@ -211,10 +209,10 @@ Uize.module ({
 																// Remove a random child
 																_testWidgetClassInstance.removeChild(
 																	_deferredChildrenForEvent[
-																		Math.floor(Math.random() * _deferredChildrenForEvent.length)	
+																		Math.floor(Math.random() * _deferredChildrenForEvent.length)
 																	]
 																);
-																
+
 																// Verify event is not fired & then move onto next event
 																_verifyEventNotFired(_nextEventFunc);
 															}
@@ -230,7 +228,7 @@ Uize.module ({
 							);
 						};
 					}
-					
+
 					return {
 						title:Uize.capFirstChar(_type) + ' events are successfully fired',
 						test:[
@@ -276,7 +274,7 @@ Uize.module ({
 						]
 					};
 				}
-			
+
 				return {
 					title:(_isVerbose ? 'Verbose' : 'Shorthand') + ' Syntax',
 					test:[
@@ -295,7 +293,7 @@ Uize.module ({
 							test:function(_continue) {
 								if (!_wiredEvents || Uize.isEmpty(_wiredEvents.node))
 									return true;
-								
+
 								var
 									_nodeNames = Uize.keys(_wiredEvents.node),
 									_testWidgetClassInstance = _getSyntaxTestWidgetClassInstance(null, _nodeNames)
@@ -328,7 +326,7 @@ Uize.module ({
 					]
 				};
 			}
-			
+
 			return {
 				title:_title,
 				test:[
@@ -341,6 +339,14 @@ Uize.module ({
 		return Uize.Test.resolve ({
 			title:'Uize.Widget.mEventBindings Module Test',
 			test:[
+				{
+					title:'Set the global window object',
+					test:function() {
+						_originalWindow = _global.window;
+						_global.window = _global;  // For Uize.Dom.Basics
+						return true;
+					}
+				},
 				Uize.Test.requiredModulesTest ([
 					'Uize.Widget',
 					'Uize.Widget.mEventBindings'
@@ -582,12 +588,12 @@ Uize.module ({
 													),
 													_notFiredTimeout
 												;
-												
+
 												_notFiredTimeout = setTimeout(
 													function() { _continue(false) },
 													0
 												);
-												
+
 												_testWidgetClassInstance.children.foo.fire('Click');
 											}
 										};
@@ -613,16 +619,16 @@ Uize.module ({
 												),
 												_notFiredTimeout
 											;
-											
+
 											// fire child widget event (shouldn't actually be handled by widget)
 											_testWidgetClassInstance.children.foo.fire('Click');
-											
+
 											_notFiredTimeout = setTimeout(
 												function() { _continue(true) },
 												0
 											);
 										}
-									}	
+									}
 								]
 							)
 						}
@@ -645,7 +651,7 @@ Uize.module ({
 								}
 							},
 							{
-								self:['Click']	
+								self:['Click']
 							}
 						),
 						_generateTest(
@@ -661,7 +667,7 @@ Uize.module ({
 								}
 							},
 							{
-								self:['Click', 'Changed.value']	
+								self:['Click', 'Changed.value']
 							}
 						),
 						_generateTest(
@@ -685,7 +691,7 @@ Uize.module ({
 							},
 							{
 								self:{
-									Click:['baz']	
+									Click:['baz']
 								}
 							}
 						),
@@ -754,12 +760,12 @@ Uize.module ({
 													),
 													_notFiredTimeout
 												;
-												
+
 												_notFiredTimeout = setTimeout(
 													function() { _continue(false) },
 													0
 												);
-												
+
 												_testWidgetClassInstance.fire('Click');
 											}
 										};
@@ -785,16 +791,16 @@ Uize.module ({
 												),
 												_notFiredTimeout
 											;
-											
+
 											// fire child widget event (shouldn't actually be handled by widget)
 											_testWidgetClassInstance.fire('Click');
-											
+
 											_notFiredTimeout = setTimeout(
 												function() { _continue(true) },
 												0
 											);
 										}
-									}	
+									}
 								]
 							)
 						}
@@ -1076,21 +1082,21 @@ Uize.module ({
 													),
 													_notFiredTimeout
 												;
-												
+
 												_testWidgetClassInstance.met('wired');
-												
+
 												// set widget to busy or disabled
 												_testWidgetClassInstance.set(
 													Math.floor(Math.random() * 2)
 														? {enabled:false}
 														: {busy:true}
 												);
-	
+
 												// fire DOM node event (shouldn't actually be handled by widget)
 												_testWidgetClassInstance.getNode('myNode').triggerEvent({
 													name:'click'
 												});
-												
+
 												_notFiredTimeout = setTimeout(
 													function() { _continue(true) },
 													0
@@ -1119,14 +1125,14 @@ Uize.module ({
 												),
 												_notFiredTimeout
 											;
-											
+
 											_testWidgetClassInstance.met('wired');
 
 											// fire DOM node event (shouldn't actually be handled by widget)
 											_testWidgetClassInstance.getNode('myNode').triggerEvent({
 												name:'click'
 											});
-											
+
 											_notFiredTimeout = setTimeout(
 												function() { _continue(true) },
 												0
@@ -1152,10 +1158,10 @@ Uize.module ({
 												),
 												_notFiredTimeout
 											;
-											
+
 											_testWidgetClassInstance.met('wired');
 											_testWidgetClassInstance.met('foo');
-											
+
 											_notFiredTimeout = setTimeout(
 												function() { _continue(false) },
 												0
@@ -1198,10 +1204,10 @@ Uize.module ({
 									unload:_defaultHandler
 								},
 								'#lorem':{
-									change:_defaultHandler	
+									change:_defaultHandler
 								},
 								'lorem':{
-									'Changed.ipsum':_defaultHandler	
+									'Changed.ipsum':_defaultHandler
 								}
 							},
 							{
@@ -1227,7 +1233,7 @@ Uize.module ({
 									_defaultHandler
 								),
 								{
-									':Changed.bar':_defaultChangedHandler	
+									':Changed.bar':_defaultChangedHandler
 								}
 							),
 							{
@@ -1301,7 +1307,7 @@ Uize.module ({
 									}
 								},
 								'lorem':{
-									'Changed.ipsum':_defaultHandler	
+									'Changed.ipsum':_defaultHandler
 								},
 								'foo':{
 									Click:_defaultHandler,
@@ -1340,19 +1346,19 @@ Uize.module ({
 							{
 								node:{
 									lorem:{
-										change:['blah']	
+										change:['blah']
 									},
 									a:{
-										blur:['red','blue']	
+										blur:['red','blue']
 									}
 								},
 								child:{
 									foo:{
-										'Changed.bar':['hiya']	
+										'Changed.bar':['hiya']
 									}
 								},
 								self:{
-									Click:['green']	
+									Click:['green']
 								}
 							}
 						)
@@ -1373,12 +1379,12 @@ Uize.module ({
 									),
 									_childToRemove = _widget.children.childA // keep reference so we'll have it after removal
 								;
-								
+
 								_widget.removeChild(_childToRemove);
-								
+
 								// fire child event (shouldn't actually be handled by the parent)
 								_childToRemove.fire('Click');
-								
+
 								setTimeout(
 									function() { _continue(true) },
 									0
@@ -1400,19 +1406,19 @@ Uize.module ({
 									),
 									_failTimeout
 								;
-								
+
 								// remove child
 								_widget.removeChild('childA');
-								
+
 								// add new same-named child
 								var _newChild = _widget.addChild('childA', Uize.Widget);
-								
+
 								// this shouldn't happen because the handler should be rebound when new child was added
 								_failTimeout = setTimeout(
-									function() { _continue(false) }, 
+									function() { _continue(false) },
 									0
 								);
-								
+
 								_newChild.fire('Click'); // fire child event (should be handled by parent)
 							}
 						},
@@ -1436,23 +1442,23 @@ Uize.module ({
 									}),
 									_failTimeout
 								;
-								
+
 								// this shouldn't happen because the handler should be rebound when new child was added
 								_failTimeout = setTimeout(
-									function() { _continue(false) }, 
+									function() { _continue(false) },
 									0
 								);
-								
+
 								_WidgetSubclass().children.childA.fire('Click');
 							}
 						}
 					]
 				},
 				{
-					title:'Fake Test to reset global window object',
+					title:'Restore the global window object',
 					test:function() {
 						_global.window = _originalWindow;
-						return true;	
+						return true;
 					}
 				}
 			]
