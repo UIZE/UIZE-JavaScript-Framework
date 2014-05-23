@@ -41,7 +41,8 @@ Uize.module ({
 
 		return Uize.package ({
 			perform:function (_params) {
-				function _resolveMatcher (_matcher) {
+				function _resolveMatcher (_matcher,_resolveArrayToAnd) {
+					_resolveArrayToAnd = _resolveArrayToAnd == undefined || !!_resolveArrayToAnd;
 					if (Uize.isArray (_matcher)) {
 						var
 							_subMatchers = Uize.map (_matcher,_resolveMatcher),
@@ -49,11 +50,11 @@ Uize.module ({
 						;
 						return function (_value) {
 							for (var _subMatcherNo = -1; ++_subMatcherNo < _subMatchersLength;) {
-								if (!_subMatchers [_subMatcherNo] (_value))
-									return false
+								if (_subMatchers [_subMatcherNo] (_value) != _resolveArrayToAnd)
+									return !_resolveArrayToAnd
 								;
 							}
-							return true;
+							return _resolveArrayToAnd;
 						}
 					} else {
 						return Uize.resolveMatcher (_matcher);
@@ -64,8 +65,8 @@ Uize.module ({
 					_preset = _params.preset,
 					_searchParams = ((_params.moduleConfigs || {}) ['Uize.Build.Search']).presets [_preset],
 					_matcher = _searchParams.matcher,
-					_pathMatcher = _resolveMatcher (_searchParams.pathMatcher),
-					_pathFilter = _resolveMatcher (_searchParams.pathFilter || Uize.returnFalse),
+					_pathMatcher = _resolveMatcher (_searchParams.pathMatcher,true),
+					_pathFilter = _resolveMatcher (_searchParams.pathFilter || Uize.returnFalse,false),
 					_contextLines = Uize.toNumber (_params.contextLines,5),
 					_logChunks = [],
 					_currentFolderPath,
