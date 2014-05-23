@@ -31,9 +31,8 @@
 Uize.module ({
 	name:'Uize.Build.Search',
 	required:[
-		'Uize.Str.Lines',
-		'Uize.Str.Repeat',
 		'Uize.Str.Search',
+		'Uize.Str.SegmentHighlighter',
 		'Uize.Services.FileSystem'
 	],
 	builder:function () {
@@ -61,19 +60,20 @@ Uize.module ({
 					}
 				}
 				var
-					_repeat = Uize.Str.Repeat.repeat,
 					_preset = _params.preset,
 					_searchParams = ((_params.moduleConfigs || {}) ['Uize.Build.Search']).presets [_preset],
 					_matcher = _searchParams.matcher,
 					_pathMatcher = _resolveMatcher (_searchParams.pathMatcher,true),
 					_pathFilter = _resolveMatcher (_searchParams.pathFilter || Uize.returnFalse,false),
-					_contextLines = Uize.toNumber (_params.contextLines,5),
 					_logChunks = [],
 					_currentFolderPath,
 					_fileSystem = Uize.Services.FileSystem.singleton (),
 					_totalFilesWithMatches = 0,
 					_totalMatches = 0,
-					_sourcePath = _params.rootFolderPath || _params.sourcePath
+					_sourcePath = _params.rootFolderPath || _params.sourcePath,
+					_segmentHighlighter = Uize.Str.SegmentHighlighter ({
+						contextLines:Uize.toNumber (_params.contextLines,5)
+					});
 				;
 				function _log (_logChunk) {
 					_logChunks.push (_logChunk);
@@ -92,10 +92,7 @@ Uize.module ({
 						if (_matchesLength) {
 							_totalFilesWithMatches++;
 							_totalMatches += _matchesLength;
-							var
-								_sourceFileLines = Uize.Str.Lines.split (_sourceFileText),
-								_sourceFileLinesDeTabbed = []
-							;
+							_segmentHighlighter.set ({string:_sourceFileText});
 							_log (
 								_sourceFilePath + '\n' +
 								Uize.Str.Lines.indent (
@@ -103,67 +100,7 @@ Uize.module ({
 									'\n' +
 									Uize.map (
 										_matches,
-										function (_match) {
-											var
-												_matchStart = _match.start,
-												_matchEnd = _match.end,
-												_matchStartLine = _matchStart.line,
-												_matchEndLine = _matchEnd.line,
-												_startLine = Math.max (_matchStartLine - _contextLines,0),
-												_endLine = Math.min (_matchEndLine + _contextLines,_sourceFileLines.length - 1),
-												_matchStartChar = Math.max (_matchStart.lineChar,0),
-												_matchEndChar = Math.max (_matchEnd.lineChar,0)
-											;
-											for (var _lineNo = _startLine - 1; ++_lineNo < _endLine + 1;) {
-												if (!_sourceFileLinesDeTabbed [_lineNo]) {
-													_sourceFileLinesDeTabbed [_lineNo] = 1;
-													_sourceFileLines [_lineNo] = _sourceFileLines [_lineNo].replace (/\t/g,'    ');
-												}
-											}
-											var
-												_lines = _sourceFileLines.slice (_startLine,_endLine + 1),
-												_maxMatchedLineLength = Uize.max (
-													Uize.map (
-														_sourceFileLines.slice (_matchStartLine,_matchEndLine + 1),
-														'value.length'
-													)
-												),
-												_maxShownLineLength = Uize.max (Uize.map (_lines,'value.length')),
-												_endLineDisplayLength = (_endLine + '').length,
-												_separator =
-													_repeat (' ',_endLineDisplayLength + 2) + '+' +
-													_repeat ('-',_matchStartChar) +
-													_repeat ('#',_matchEndChar - _matchStartChar + 1) +
-													_repeat ('-',_maxShownLineLength - (_matchStartChar + _matchEndChar - _matchStartChar + 1)) +
-													'\n'
-											;
-											return (
-												'LINE ' + _matchStartLine + ' (CHAR ' + _matchStart.lineChar + ') -> LINE ' + _matchEndLine + ' (CHAR ' + _matchEnd.lineChar + ')\n' +
-												'\n' +
-												_separator +
-												Uize.map (
-													_lines,
-													function (_line,_lineNo) {
-														var _displayLineNo = _lineNo + _startLine + '';
-														return (
-															_repeat (' ',_endLineDisplayLength - _displayLineNo.length) +
-															_displayLineNo + ' ' +
-															(
-																Uize.inRange (
-																	_lineNo,
-																	_matchStartLine - _startLine,
-																	_matchEndLine - _startLine
-																)
-																	? '>'
-																	: ' '
-															) + '|' +
-															_line
-														);
-													}
-												).join ('\n') + '\n' +
-												_separator
-											);
-										}
+										function (_match) {return _segmentHighlighter.getSegmentHighlight (_match)}
 									).join ('\n'),
 									1
 								)
