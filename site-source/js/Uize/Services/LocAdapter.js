@@ -577,7 +577,8 @@ Uize.module ({
 
 							/*** update language resources file ***/
 								if (!Uize.isEmpty (_translatedStrings))
-									_writeLanguageResourcesFile (m,
+									_writeLanguageResourcesFile (
+										m,
 										_language,
 										Uize.mergeInto (_readLanguageResourcesFile (m,_language),_translatedStrings)
 									)
@@ -705,11 +706,11 @@ Uize.module ({
 									_unreferenced.push (_stringId);
 								}
 							}
-						)
+						);
 						m.stepCompleted ('analyzed resource usage');
 
 					/*** write report file ***/
-						var _usageReportFilePath = m.workingFolderPath + 'metrics/usage-report.json'
+						var _usageReportFilePath = m.workingFolderPath + 'metrics/usage-report.json';
 						_fileSystem.writeFile ({
 							path:_usageReportFilePath,
 							contents:Uize.Json.to ({
