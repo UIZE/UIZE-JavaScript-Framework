@@ -1,4 +1,4 @@
-The new The =Uize.Loc.Pseudo= module provides methods to facilitate the [[http://en.wikipedia.org/wiki/Pseudolocalization][pseudo-localization]] of the resource strings of an application..
+The new =Uize.Loc.Pseudo= module provides methods to facilitate the [[http://en.wikipedia.org/wiki/Pseudolocalization][pseudo-localization]] of the resource strings of an application..
 
 Overview
 	Pseudo-localization is a process of programmatically "translating" application text (typically English) to a pseudo-locale to aid in identifying i18n (internationalization) and L10n (localization) issues in the application.
