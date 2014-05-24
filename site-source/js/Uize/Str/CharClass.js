@@ -67,9 +67,7 @@ Uize.module ({
 			}
 
 		return Uize.copyInto (
-			function (_chars) {
-				this.setChars (_chars);
-			},
+			Uize.noNew (function (_chars) {this.setChars (_chars)}),
 
 			{
 				prototype:{

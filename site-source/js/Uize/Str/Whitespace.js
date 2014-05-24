@@ -84,7 +84,7 @@ Uize.module ({
 
 		var
 			/*** General Variables ***/
-				_whitespaceCharClass = new Uize.Str.CharClass ([
+				_whitespaceCharClass = Uize.Str.CharClass ([
 					9,    // \t     - Horizontal Tab (HT)
 					10,   // \n     - Line Feed (LF)
 					11,   // \x0b   - Vertical Tab (VT)
