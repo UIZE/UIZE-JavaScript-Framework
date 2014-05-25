@@ -1,0 +1,149 @@
+The new =Uize.Str.Whitespace= module provides methods for testing if strings contain whitespace characters, if they contain non-whitespace characters, if they are only whitespace or non-whitespace characters, and for finding the first index or last index of whitespace or non-whitespace characters.
+
+Whitespace Characters ~~ Whitespace Character
+	The =Uize.Str.Whitespace= module defines whitespace characters as any character from the set of characters listed in the following table...
+
+	........................................
+	<< table >>
+
+	title: Whitespace Characters
+	data
+	:| Code | Escape | Description |
+	:| 9 | \t | Horizontal Tab (HT) |
+	:| 10 | \n | Line Feed (LF) |
+	:| 11 | \x0b | Vertical Tab (VT) |
+	:| 12 | \f | Form Feed (FF) |
+	:| 13 | \r | Carriage Return (CR) |
+	:| 32 | \x20 | Space |
+	:| 160 | \xa0 | Non-breaking space |
+	:| 8192 | \u2000 | -- |
+	:| 8193 | \u2001 | -- |
+	:| 8194 | \u2002 | En Space |
+	:| 8195 | \u2003 | Em Space |
+	:| 8196 | \u2004 | -- |
+	:| 8197 | \u2005 | Four-per-em Space |
+	:| 8198 | \u2006 | -- |
+	:| 8199 | \u2007 | Figure Space |
+	:| 8200 | \u2008 | Punctuation Space |
+	:| 8201 | \u2009 | Thin Space |
+	:| 8202 | \u200a | Hair Space |
+	:| 8203 | \u200b | Zero-width Space |
+	:| 8232 | \u2028 | Line Separator |
+	:| 8233 | \u2029 | Paragraph Separator |
+	:| 12288 | \u3000 | Ideographic Space |
+	........................................
+
+	The =Uize.Str.Whitespace= module provides the following methods for dealing with whitespace characters...
+
+	- =Uize.Str.Whitespace.isWhitespace= - tests if the source string is only whitespace characters
+	- =Uize.Str.Whitespace.hasWhitespace= - tests if the source string contains any whitespace characters
+	- =Uize.Str.Whitespace.indexOfWhitespace= - finds the first whitespace character and returns its index
+	- =Uize.Str.Whitespace.lastIndexOfWhitespace= - finds the last whitespace character and returns its index
+
+Non-whitespace Characters ~~ Non-whitespace Character
+	Non-whitespace characters are defined simply as any characters that don't fit the definition for `whitespace characters`
+
+	The =Uize.Str.Whitespace= module provides the following methods for dealing with non-whitespace characters...
+
+	- =Uize.Str.Whitespace.isNonWhitespace= - tests if the source string is only non-whitespace characters
+	- =Uize.Str.Whitespace.hasNonWhitespace= - tests if the source string contains any non-whitespace characters
+	- =Uize.Str.Whitespace.indexOfNonWhitespace= - finds the first non-whitespace character and returns its index
+	- =Uize.Str.Whitespace.lastIndexOfNonWhitespace= - finds the last non-whitespace character and returns its index
+
+Benefits Over Using Regular Expressions
+	While it is possible to use regular expressions to detect whitespace and non-whitespace characters in strings, the =Uize.Str.Whitespace= module offers some key benefits.
+
+	Improved Performance
+		By avoiding the use of regular expressions, the =Uize.Str.Whitespace= module can achieve improved performance in performance critital applications such as parser implementations.
+
+		In addition to avoiding regular expressions, the methods of the =Uize.Str.Whitespace= module also achieve improved performnce by implementing an optimized handling for the special case of single character source strings that avoids looping.
+
+	Convenient Index Methods
+		The various index type methods of the =Uize.Str.Whitespace= module provide a more convenient and semantically elegant way of finding the index of whitespace or non-whitespace characters in a string.
+
+		To illustrate this, consider the following example of how an index could be obtained using a whitespace matcher regular expression versus using the =Uize.Str.Whitespace= module...
+
+		BEFORE
+		.........................................
+		var regExp = /\s/g;
+		regExp.exec (sourceStr);
+		var whitespacePos = regExp.lastIndex - 1;
+		.........................................
+
+		Using a regular expression, we have to create the regular expression and assign it to a local variable. Then, we call the =exec= method on the regular expression instance. Finally, we compute the index of the matched whitespace character by using the regular expression instance's =lastIndex= property. In order for this property to have a meaningful value, the regular expression instance must be created with the "g" flag.
+
+		All of this is not so intuitive. In contrast, using the =Uize.Str.Whitespace.indexOfWhitespace= static method produces a statement that is easy to read and make sense of...
+
+		AFTER
+		......................................................................
+		var whitespacePos = Uize.Str.Whitespace.indexOfWhitespace (sourceStr);
+		......................................................................
+
+	Start Position
+		The index type methods of the =Uize.Str.Whitespace= module provide any easy and understandable way to specify a start position for a search for whitespace or non-whitespace characters.
+
+		Consider the following example of how a start position for a search can be achieved using regular expression versus using the =Uize.Str.Whitespace= module...
+
+		BEFORE
+		.........................................
+		var regExp = /\s/g;
+		regExp.lastIndex = startPos;
+		regExp.exec (sourceStr);
+		var whitespacePos = regExp.lastIndex - 1;
+		.........................................
+
+		Using a regular expression, we have to set the start position as the value for its =lastIndex= property before we call its =exec= method. Combining this with the other steps we need to perform, we end up with something that is far less elegant than just using the =Uize.Str.Whitespace.indexOfWhitespace= static and specifying the start position using the optional second argument...
+
+		AFTER
+		...............................................................................
+		var whitespacePos = Uize.Str.Whitespace.indexOfWhitespace (sourceStr,startPos);
+		...............................................................................
+
+	Backwards Scanning
+		The =Uize.Str.Whitespace.lastIndexOfWhitespace= and =Uize.Str.Whitespace.lastIndexOfNonWhitespace= methods support backwards scanning to find the last whitespace or non-whitespace character in a source string.
+
+		This can be achieved with regular expressions by applying a bit of trickery, but there can be a performance cost. Consider the following example of how a last index of whitespace could be obtained using a regular expression versus using the =Uize.Str.Whitespace= module...
+
+		BEFORE
+		.....................................................................
+		var regExp = /\s\S*$/g;
+		var match = regExp.exec (sourceStr);
+		var whitespacePos = match ? regExp.lastIndex - match [0].length : -1;
+		.....................................................................
+
+		In order to achieve a backwards scan for the last whitespace character using a regular expression, we have to create a regular expression than matches a whitespace character, followed by any number of non-whitespace characters, and that is anchored to the end of the source string. Now, because our match could contain more than one character, we need to use the length of the first element in the match array to adjust the value of the =lastIndex= property.
+
+		We don't need to deal with this kind of trickery if we just use the dedicated =Uize.Str.Whitespace.lastIndexOfWhitespace= static method...
+
+		AFTER
+		..........................................................................
+		var whitespacePos = Uize.Str.Whitespace.lastIndexOfWhitespace (sourceStr);
+		..........................................................................
+
+		Backwards Scanning and Start Position
+			While backwards scanning for whitespace or non-whitespace characters using regular expressions is awkward enough, backwards scanning from a start position is even clumsier.
+
+			One way to accomplish this would be to create a slice of the source string that terminates at the desired start position for the scan. Then, the previously mentioned approach to `backwards scanning` using regular expressions could be applied.
+
+			BEFORE
+			.....................................................................
+			var regExp = /\s\S*$/g;
+			var match = regExp.exec (sourceStr.slice (0,startPos + 1));
+			var whitespacePos = match ? regExp.lastIndex - match [0].length : -1;
+			.....................................................................
+
+			Having to create a temporary slice of the source string and then use a tricky regular expression match on that slice is quite unfortunate from a performance perspective. The approach to supporting start position that is implemented in the =Uize.Str.Whitespace.lastIndexOfWhitespace= and =Uize.Str.Whitespace.lastIndexOfNonWhitespace= methods is better suited to performance critical situations.
+
+			AFTER
+			...................................................................................
+			var whitespacePos = Uize.Str.Whitespace.lastIndexOfWhitespace (sourceStr,startPos);
+			...................................................................................
+
+Comprehensively Documented and Tested
+	The =Uize.Str.Whitespace= module is comprehensively [[Uize.Str.Whitespace][documented]] and has exhaustive unit tests in the =Uize.Test.Uize.Str.Whitespace= test module.
+
+....................................................................................
+<< metadata >>
+
+title: 2014-05-25 - NEW MODULE: Uize.Str.Whitespace
+....................................................................................
