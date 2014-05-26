@@ -122,9 +122,6 @@ Uize.require (
 
 		var _selectorPlaceholderText = '-- NO MODULE SELECTED --';
 
-		/*** prepare list of all modules ***/
-			var _modulesList = Uize.Data.PathsTree.toList (UizeSite.ModulesTree ());
-
 		/*** create the example page widget ***/
 			var
 				_page = window.page = UizeSite.Page.Example (),
@@ -476,7 +473,7 @@ Uize.require (
 			/*** populate selector ***/
 				var _selectorOptions = _page.getNode ('selector').options;
 				Uize.forEach (
-					[_selectorPlaceholderText].concat (_modulesList),
+					[_selectorPlaceholderText].concat (Uize.Data.PathsTree.toList (UizeSite.ModulesTree ())),
 					function (_moduleName,_moduleNo) {
 						_selectorOptions [_moduleNo] = new Option (_moduleName,_moduleName);
 					}
