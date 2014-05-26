@@ -893,7 +893,7 @@ Uize.module ({
 										: _substituteInto (_html,_templateInput)
 								;
 							}
-							return _html || '';
+							return _html;
 						},
 
 						buildHtml:function (_alternateTemplateInput) {

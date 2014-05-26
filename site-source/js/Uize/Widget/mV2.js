@@ -116,6 +116,10 @@ Uize.module ({
 
 				cssBindings:{
 					sizeInherited:'value'
+				},
+
+				set:{
+					html:''
 				}
 			});
 		};
