@@ -107,9 +107,9 @@ Uize.require (
 	[
 		'UizeSite.Page.Example',
 		'UizeSite.ModulesTree',
-		'Uize.Url',
 		'Uize.Data.PathsTree',
-		'Uize.Util.Dependencies.Async',
+		'Uize.Url',
+		'Uize.Util.Dependencies.Analyzer',
 		'Uize.Widgets.SimpleStatsTable.Widget',
 		'Uize.Widgets.SimpleStatsTable.Sortable.Widget',
 		'Uize.Dom.Basics',
@@ -131,23 +131,6 @@ Uize.require (
 		/*** wire up the page widget ***/
 			_page.wireUi ();
 
-		/*** dependency tracing logic (asynchronous) ***/
-			var
-				_moduleInfoLookup = {},
-				_trueFlagValue = {}
-			;
-
-			function _getModuleInfo (_moduleName,_callback) {
-				var _moduleInfo = _moduleInfoLookup [_moduleName];
-				_moduleInfo
-					? _callback (_moduleInfo)
-					: Uize.require (
-						'UizeSite.ModuleInfo.' + _moduleName,
-						function (_moduleInfo) {_callback (_moduleInfoLookup [_moduleName] = _moduleInfo ())}
-					)
-				;
-			}
-
 		/*** handle selection of test ***/
 			function _handleSelection () {
 				var
@@ -162,113 +145,78 @@ Uize.require (
 				_dependenciesListTable && _dependenciesListTable.removeUi ();
 
 				if (_moduleName != _selectorPlaceholderText) {
-					Uize.Util.Dependencies.Async.traceDependencies (
+					Uize.Util.Dependencies.Analyzer.analyze (
 						_moduleName,
 						function (_moduleName,_callback) {
-							_getModuleInfo (
-								_moduleName,
-								function (_moduleInfo) {_callback (_moduleInfo.directDependencies)}
+							Uize.require (
+								'UizeSite.ModuleInfo.' + _moduleName,
+								function (_moduleInfoModule) {_callback (_moduleInfoModule ())}
 							);
 						},
-						[],
-						function (_dependencies) {
-							var
-								_moduleInfo = _moduleInfoLookup [_moduleName],
-								_directDependenciesLookup = Uize.lookup (_moduleInfo.directDependencies),
-								_totalSize = 0
-							;
-							Uize.forEach (
-								_dependencies,
-								function (_moduleName) {_totalSize += _moduleInfoLookup [_moduleName].builtSize}
-							);
-
+						function (_analysis) {
 							/*** update the dependencies overview table ***/
-								var _rows = [];
-								function _addDependenciesSegment (_segmentName,_segmentMatcher) {
-									var
-										_count = 0,
-										_size = 0
-									;
-									Uize.forEach (
-										_dependencies,
-										function (_moduleName) {
-											if (_segmentMatcher (_moduleName)) {
-												_count++;
-												_size += _moduleInfoLookup [_moduleName].builtSize;
-											}
-										}
-									);
-									_rows.push ([_segmentName,_count,_size,_size / 1024,_size / _totalSize * 100]);
-								}
-								_addDependenciesSegment ('Module',function (_dependency) {return _dependency == _moduleName});
-								_addDependenciesSegment (
-									'Direct Dependencies',
-									function (_dependency) {return _dependency != _moduleName && _directDependenciesLookup [_dependency]}
-								);
-								_addDependenciesSegment (
-									'Indirect Dependencies',
-									function (_dependency) {return _dependency != _moduleName && !_directDependenciesLookup [_dependency]}
-								);
-								_addDependenciesSegment ('Total',Uize.returnTrue);
-
 								_dependenciesOverviewTable || (
 									_dependenciesOverviewTable = page.addChild (
 										'dependenciesOverviewTable',
-										Uize.Widgets.SimpleStatsTable.Widget
+										Uize.Widgets.SimpleStatsTable.Widget,
+										{
+											title:'Overview of Dependencies',
+											columns:[
+												{title:'Segment'},
+												{
+													title:'MOdules',
+													minColor:'hsl(120,100,50)',
+													maxColor:'hsl(0,100,50)'
+												},
+												{
+													title:'Size (B)',
+													minColor:'hsl(120,100,50)',
+													maxColor:'hsl(0,100,50)',
+													formatter:'value + " B"'
+												},
+												{
+													title:'Size (KB)',
+													minColor:'hsl(120,100,50)',
+													maxColor:'hsl(0,100,50)',
+													formatter:'value.toFixed (1) + " KB"'
+												},
+												{
+													title:'Size (%)',
+													minColor:'hsl(120,100,50)',
+													maxColor:'hsl(0,100,50)',
+													formatter:'value.toFixed (1) + "%"'
+												}
+											]
+										}
 									)
 								);
 								_dependenciesOverviewTable.set ({
-									title:'Overview of Dependencies',
-									columns:[
-										{title:'Segment'},
-										{
-											title:'MOdules',
-											minColor:'hsl(120,100,50)',
-											maxColor:'hsl(0,100,50)'
-										},
-										{
-											title:'Size (B)',
-											minColor:'hsl(120,100,50)',
-											maxColor:'hsl(0,100,50)',
-											formatter:'value + " B"'
-										},
-										{
-											title:'Size (KB)',
-											minColor:'hsl(120,100,50)',
-											maxColor:'hsl(0,100,50)',
-											formatter:'value.toFixed (1) + " KB"'
-										},
-										{
-											title:'Size (%)',
-											minColor:'hsl(120,100,50)',
-											maxColor:'hsl(0,100,50)',
-											formatter:'value.toFixed (1) + "%"'
-										}
-									],
-									rows:_rows
+									rows:Uize.map (Uize.values (_analysis.overview),'Uize.values (value)')
 								});
 								_dependenciesOverviewTable.insertUi ();
 
 							/*** update the metadata table ***/
-								var _metadata = _moduleInfo.metaData;
 								_metadataTable || (
 									_metadataTable = page.addChild (
 										'metadataTable',
-										Uize.Widgets.SimpleStatsTable.Widget
+										Uize.Widgets.SimpleStatsTable.Widget,
+										{
+											title:'Module Metadata',
+											columns:[
+												{title:'Key'},
+												{
+													title:'Estimate',
+													minColor:'hsl(0,100,50)',
+													maxColor:'hsl(120,100,50)',
+													minValue:0,
+													maxValue:100
+												}
+											]
+										}
 									)
 								);
+								var _metadata = _analysis.metaData;
 								_metadataTable.set ({
-									title:'Module Metadata',
-									columns:[
-										{title:'Key'},
-										{
-											title:'Estimate',
-											minColor:'hsl(0,100,50)',
-											maxColor:'hsl(120,100,50)',
-											minValue:0,
-											maxValue:100
-										}
-									],
 									rows:[
 										['Importance',_metadata.importance * 10],
 										['Code Completeness',+_metadata.codeCompleteness],
@@ -279,51 +227,12 @@ Uize.require (
 								_metadataTable.insertUi ();
 
 							/*** update the dependencies list table ***/
-								/*** calculate local sharedness of modules ***/
-									/* NOTE:
-										This builds a lookup table that maps each dependency to the other dependencies within the local dependency tree that directly depend on it. For any dependency in the dependency tree, this provides an indication of the local sharedness of the dependency. This can be useful when contemplating whether the dependencies list could be reduced in size by eliminating the dependency on any given module. If a module is shared as a direct dependency by more than one module, then it will be harder to eliminate the dependency on it.
-									*/
-									var _localUsedByLookup = {};
-									_localUsedByLookup [_moduleName] = [];
-									Uize.forEach (
-										_dependencies,
-										function (_dependency) {
-											Uize.forEach (
-												_moduleInfoLookup [_dependency].directDependencies,
-												function (_directDependency) {
-													(
-														_localUsedByLookup [_directDependency] ||
-														(_localUsedByLookup [_directDependency] = [])
-													).push (_dependency)
-												}
-											);
-										}
-									);
-									_localUsedByLookup.Uize = _dependencies.slice (0,-1);
-
-								/*** calculate size contribution uniquely attributable to module ***/
-									var _uniqueSizeLookup = {};
-									function _calculateUniqueSize (_moduleName) {
-										if (!(_moduleName in _uniqueSizeLookup)) {
-											_uniqueSizeLookup [_moduleName] = _moduleInfoLookup [_moduleName].builtSize;
-											Uize.forEach (
-												_moduleInfoLookup [_moduleName].directDependencies,
-												function (_dependency) {
-													_calculateUniqueSize (_dependency);
-													if (_localUsedByLookup [_dependency].length == 1)
-														_uniqueSizeLookup [_moduleName] += _uniqueSizeLookup [_dependency]
-													;
-												}
-											);
-										}
-									}
-									_calculateUniqueSize (_moduleName);
-
 								_dependenciesListTable || (
 									_dependenciesListTable = page.addChild (
 										'dependenciesListTable',
 										Uize.Widgets.SimpleStatsTable.Sortable.Widget,
 										{
+											title:'Complete List of Dependencies',
 											children:{
 												tableSorter:{
 													cellTooltips:false,
@@ -334,135 +243,115 @@ Uize.require (
 														3:'ascending'
 													}
 												}
-											}
+											},
+											columns:[
+												{
+													title:'Module Name',
+													formatter:function (_moduleName) {
+														return '<a href="?module=' + _moduleName + '">' + _moduleName + '</a>';
+													}
+												},
+												{title:'Type'},
+												{
+													title:'Order',
+													minColor:'hsl(200,100,0)',
+													maxColor:'hsl(200,100,75)'
+												},
+												{
+													title:'Depth',
+													minColor:'hsl(120,100,50)',
+													maxColor:'hsl(0,100,50)',
+													minValue:0,
+													maxValue:2
+												},
+												{
+													title:'Import.',
+													minColor:'hsl(200,100,0)',
+													maxColor:'hsl(200,100,75)',
+													minValue:0,
+													maxValue:10
+												},
+												{
+													title:'Code',
+													minColor:'hsl(0,100,50)',
+													maxColor:'hsl(120,100,50)',
+													minValue:0,
+													maxValue:100,
+													formatter:'value + "%"'
+												},
+												{
+													title:'Dir. Deps',
+													minColor:'hsl(120,100,50)',
+													maxColor:'hsl(0,100,50)'
+												},
+												{
+													title:'Shared',
+													minColor:'hsl(200,100,75)',
+													maxColor:'hsl(200,100,75)',
+													minValue:0
+												},
+												{
+													title:'Size (%)',
+													minColor:'hsl(120,100,50)',
+													maxColor:'hsl(0,100,50)',
+													minValue:0,
+													maxValue:100,
+													formatter:'value.toFixed (1) + "%"'
+												},
+												{
+													title:'Size (B)',
+													minColor:'hsl(120,100,50)',
+													maxColor:'hsl(0,100,50)',
+													formatter:'value + " B"'
+												},
+												{
+													title:'Unique',
+													minColor:'hsl(120,100,50)',
+													maxColor:'hsl(0,100,50)',
+													formatter:'value + " B"'
+												}
+											]
 										}
 									)
 								);
-								_dependenciesListTable.set ({
-									title:'Complete List of Dependencies',
-									columns:[
-										{
-											title:'Module Name',
-											formatter:function (_moduleName) {
-												return '<a href="?module=' + _moduleName + '">' + _moduleName + '</a>';
-											}
-										},
-										{title:'Type'},
-										{
-											title:'Order',
-											minColor:'hsl(200,100,0)',
-											maxColor:'hsl(200,100,75)'
-										},
-										{
-											title:'Depth',
-											minColor:'hsl(120,100,50)',
-											maxColor:'hsl(0,100,50)',
-											minValue:0,
-											maxValue:2
-										},
-										{
-											title:'Import.',
-											minColor:'hsl(200,100,0)',
-											maxColor:'hsl(200,100,75)',
-											minValue:0,
-											maxValue:10
-										},
-										{
-											title:'Code',
-											minColor:'hsl(0,100,50)',
-											maxColor:'hsl(120,100,50)',
-											minValue:0,
-											maxValue:100,
-											formatter:'value + "%"'
-										},
-										{
-											title:'Dir. Deps',
-											minColor:'hsl(120,100,50)',
-											maxColor:'hsl(0,100,50)'
-										},
-										{
-											title:'Shared',
-											minColor:'hsl(200,100,75)',
-											maxColor:'hsl(200,100,75)',
-											minValue:0
-										},
-										{
-											title:'Size (%)',
-											minColor:'hsl(120,100,50)',
-											maxColor:'hsl(0,100,50)',
-											minValue:0,
-											maxValue:100,
-											formatter:'value.toFixed (1) + "%"'
-										},
-										{
-											title:'Size (B)',
-											minColor:'hsl(120,100,50)',
-											maxColor:'hsl(0,100,50)',
-											formatter:'value + " B"'
-										},
-										{
-											title:'Unique',
-											minColor:'hsl(120,100,50)',
-											maxColor:'hsl(0,100,50)',
-											formatter:'value + " B"'
-										}
-									],
-									rows:Uize.map (
-										_dependencies,
-										function (_dependency,_dependencyIndex) {
-											var
-												_moduleInfo = _moduleInfoLookup [_dependency],
-												_metadata = _moduleInfo.metaData,
-												_size = _moduleInfo.builtSize
-											;
-											return [
-												_dependency,
-												_metadata.type,
-												_dependencyIndex,
-												_dependency == _moduleName
-													? 0
-													: _directDependenciesLookup [_dependency]
-														? 1
-														: 2,
-												+_metadata.importance || 0,
-												+_metadata.codeCompleteness || 0,
-												_moduleInfo.directDependencies.length,
-												_localUsedByLookup [_dependency].length,
-												_size / _totalSize * 100,
-												_size,
-												_uniqueSizeLookup [_dependency]
-											];
-										}
-									).reverse ()
-								});
+								_dependenciesListTable.set ({rows:Uize.map (_analysis.dependencies,'Uize.values (value)')});
 								_dependenciesListTable.insertUi ();
 
-								/*** wire up module name tooltip ***/
-									var _tooltipNode = _tooltip.getNode ();
+							/*** wire up module name tooltip ***/
+								var
+									_tooltipNode = _tooltip.getNode (),
+									_moduleInfoLookup = {}
+								;
+								Uize.forEach (
+									_analysis.dependencies,
+									function (_dependencyInfo) {
+										_moduleInfoLookup [_dependencyInfo.name] = _dependencyInfo.moduleInfo;
+									}
+								);
 
-									_page.wireNode (
-										Uize.Dom.Basics.find ({
-											root:_dependenciesListTable.getNode (),
-											tagName:'A',
-											href:/\?module=/
-										}),
-										{
-											mouseover:function () {
-												var
-													_link = this,
-													_moduleName = Uize.Dom.Text.getText (_link)
-												;
-												_tooltip.set ({
-													heading:_moduleName,
-													body:_moduleInfoLookup [_moduleName].description
-												});
-												Uize.Tooltip.showTooltip (_tooltipNode);
-											},
-											mouseout:function () {
-												Uize.Tooltip.showTooltip (_tooltipNode,false);
-											}
+								_page.wireNode (
+									Uize.Dom.Basics.find ({
+										root:_dependenciesListTable.getNode (),
+										tagName:'A',
+										href:/\?module=/
+									}),
+									{
+										mouseover:function () {
+											var
+												_link = this,
+												_moduleName = Uize.Dom.Text.getText (_link)
+											;
+											_tooltip.set ({
+												heading:_moduleName,
+												body:_moduleInfoLookup [_moduleName].description
+											});
+											Uize.Tooltip.showTooltip (_tooltipNode);
+										},
+										mouseout:function () {
+											Uize.Tooltip.showTooltip (_tooltipNode,false);
 										}
-									);
+									}
+								);
 						}
 					);
 				}

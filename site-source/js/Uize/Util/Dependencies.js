@@ -129,7 +129,7 @@ Uize.module ({
 
 							NOTES
 							- compare to the related =Uize.Util.Dependencies.getDirectDependencies= static method
-					*/
+				*/
 			}
 		});
 	}
