@@ -22,7 +22,34 @@
 
 		*DEVELOPERS:* `Chris van Rensburg`
 
-		Test Module Naming Convention
+		Module Naming
+			.
+
+			..................................................................................................
+			<< table >>
+
+			title: Examples of Module Names
+			data:
+			:| Module Name | Module Type | Notes |
+			:| MyNamespace | Namespace Module | top level namespace |
+			:| MyNamespace.MySubNamespace | Namespace Module | deeper level namespace |
+			:| MyNamespace.MyPackage | Package Module | capital first letter is recommended but not required |
+			:| MyNamespace.MyClass | Class Module | capital first letter is recommended but not required |
+			:| MyNamespace.xMyExtension | Extension Module | prefixed with lowercase "x" by convention |
+			:| MyNamespace.mMyMixin | Mixin Module | prefixed with lowercase "m" by convention |
+			:| MyNamespace.Test.MyNamespace.MyClass | Test Module | path under MyNamespace.Test is path of module that is tested by the test module |
+			..................................................................................................
+
+			###
+				- =Uize.Util.ModuleNaming.isModuleName= -
+
+		### Top Level Namespaces
+			.
+
+			###
+				- =Uize.Util.ModuleNaming.getNamespace= -
+
+		Test Module Naming
 			The methods of the =Uize.Util.ModuleNaming= module follow the convention that the name for a test module is derived from the name of the module it is intended to test, by using the top level namespace for that module as a prefix, appending the path segment ".Test.", and then finally appending the name of the module.
 
 			This naming convention is best illustrated by the following table of examples...
@@ -37,6 +64,11 @@
 			:| Uize.Widget | Uize.Test.Uize.Widget |
 			:| MyNamespace.MyClass.MySubclass | MyNamespace.Test.MyNamespace.MyClass.MySubclass |
 			.....................................................................................
+
+			###
+				- =Uize.Util.ModuleNaming.getModuleNameFromTestModuleName= -
+				- =Uize.Util.ModuleNaming.getTestModuleName= -
+				- =Uize.Util.ModuleNaming.isTestModule= -
 */
 
 Uize.module ({
@@ -67,7 +99,7 @@ Uize.module ({
 							moduleNameSTR = Uize.Util.ModuleNaming.getModuleNameFromTestModuleName (testModuleNameSTR);
 							...........................................................................................
 
-							This method follows the `test module naming convention`. If, according to this convention, the specified module is a test module, then the name for the module that would be tested by the test module is derived from the name of the test module. If, on the other hand, the specified module is not a test module, then the specified module name is returned as is.
+							This method follows the convention for `test module naming`. If, according to this convention, the specified module is a test module, then the name for the module that would be tested by the test module is derived from the name of the test module. If, on the other hand, the specified module is not a test module, then the specified module name is returned as is.
 
 							EXAMPLES
 							.............................................................................................
@@ -93,7 +125,7 @@ Uize.module ({
 							testModuleNameSTR = Uize.Util.ModuleNaming.getTestModuleName (moduleNameSTR);
 							.............................................................................
 
-							This method follows the `test module naming convention`. If, according to this convention, the specified module is a non-test module, then the name of that module's corresponding test module is derived from the module's name according to the naming convention. If, on the other hand, the specified module is actually a test module, then the specified test module name is returned as is.
+							This method follows the convention for `test module naming`. If, according to this convention, the specified module is a non-test module, then the name of that module's corresponding test module is derived from the module's name according to the naming convention. If, on the other hand, the specified module is actually a test module, then the specified test module name is returned as is.
 
 							EXAMPLES
 							.........................................................................................
@@ -133,7 +165,7 @@ Uize.module ({
 				/*?
 					Static Methods
 						Uize.Util.ModuleNaming.isTestModule
-							Returns a boolean, indicating whether or not the specified module is a test module, according to the `test module naming convention`.
+							Returns a boolean, indicating whether or not the specified module is a test module, according to the convention for `test module naming`.
 
 							SYNTAX
 							.......................................................................
