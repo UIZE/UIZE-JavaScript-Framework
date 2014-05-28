@@ -38,7 +38,7 @@ Uize.module ({
 		return _superclass.subclass ({
 			staticMethods:{
 				determineFilesToBuild:function (_params) {
-					throw "You must override this method";
+					this.addFiles (_params.files.split (','));
 				},
 
 				addFiles:function (_files) {
