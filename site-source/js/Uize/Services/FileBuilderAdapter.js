@@ -286,6 +286,7 @@ Uize.module ({
 						m._filesConsideredCurrentLookup = {}
 					;
 					var
+						_console = _params.console,
 						_filesConsideredCurrentLookup = m._filesConsideredCurrentLookup,
 						_staleBefore = _params.staleBefore = Uize.toNumber (_params.staleBefore,-Infinity)
 					;
@@ -426,7 +427,9 @@ Uize.module ({
 						: _log.push (_ensureFileCurrent (_pathPrefix + _url))
 					;
 					var _logAsJson = Uize.Json.to (_log,{keyDelimiter:': ',indentChars:'  '});
-					console.log (_logAsJson);
+					if (_console == 'verbose')
+						console.log (_logAsJson)
+					;
 					_callback && _callback (_logAsJson);
 				}
 			}
