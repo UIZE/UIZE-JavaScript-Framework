@@ -32,16 +32,30 @@ Uize.module ({
 		'Uize.Services.FileSystem',
 		'Uize.Json',
 		'Uize.Data.Util',
-		'Uize.Str.Repeat'
+		'Uize.Str.Repeat',
+		'Uize.Templates.TextProgressBar'
 	],
 	builder:function () {
 		'use strict';
 
+		var _repeat = Uize.Str.Repeat.repeat;
+
 		/*** Utility Functions ***/
-			function _renderTextTable (_params) {
+			function _renderTextTable (_input) {
+				function _pad (_sourceStr,_length,_align) {
+					var
+						_totalPadding = _length - _sourceStr.length,
+						_leftPadding = Math.floor (
+							_totalPadding * (typeof _align == 'string' ? {left:0,center:.5,right:1} [_align] : _align)
+						)
+					;
+					return _repeat (' ',_leftPadding) + _sourceStr + _repeat (' ',_totalPadding - _leftPadding);
+				}
+
 				var
-					_columns = _params.columns,
-					_rows = _params.rows
+					_title = _input.title,
+					_columns = _input.columns,
+					_rows = _input.rows
 				;
 
 				/*** resolve column information ***/
@@ -57,7 +71,7 @@ Uize.module ({
 
 				/*** format column data and get max width for each column ***/
 					var
-						_columnMaxWidths = [],
+						_columnMaxWidths = Uize.map (_columns,'value.title.length'),
 						_formattedRows = Uize.map (
 							_rows,
 							function (_row) {
@@ -66,7 +80,7 @@ Uize.module ({
 									function (_column,_columnNo) {
 										var _formattedValue = _column.formatter (_row [_columnNo]) + '';
 										_columnMaxWidths [_columnNo] = Math.max (
-											_columnMaxWidths [_columnNo] || 0,
+											_columnMaxWidths [_columnNo],
 											_formattedValue.length
 										);
 										return _formattedValue;
@@ -76,22 +90,48 @@ Uize.module ({
 						)
 					;
 
-				return Uize.map (
-					_formattedRows,
-					function (_row) {
-						return (
-							'| ' +
-							Uize.map (
-								_row,
-								function (_column,_columnNo) {
-									var _padding = Uize.Str.Repeat.repeat (' ',_columnMaxWidths [_columnNo] - _column.length);
-									return _columns [_columnNo].align == 'right' ? _padding + _column : _column + _padding;
-								}
-							).join (' | ') +
-							' |'
-						);
-					}
-				).join ('\n');
+				/*** produce row dividers ***/
+					var
+						_columnLines = Uize.map (
+							_columnMaxWidths,
+							function (_columnMaxWidth) {return Uize.Str.Repeat.repeat ('-',_columnMaxWidth)}
+						),
+						_rowSeparatorLine = '|-' + _columnLines.join ('-+-') + '-|',
+						_topAndBottomLine = '+-' + _columnLines.join ('---') + '-+'
+					;
+
+				return (
+					(
+						_title
+							? (_topAndBottomLine + '\n| ' + _pad (_title,_topAndBottomLine.length - 4,'center') + ' |\n')
+							: ''
+					) +
+					_topAndBottomLine + '\n' +
+					(
+						'| ' +
+						Uize.map (
+							_columns,
+							function (_column,_columnNo) {return _pad (_column.title,_columnMaxWidths [_columnNo],'center')}
+						).join (' | ') + ' |'
+					) + '\n' +
+					_rowSeparatorLine + '\n' +
+					Uize.map (
+						_formattedRows,
+						function (_row) {
+							return (
+								'| ' +
+								Uize.map (
+									_row,
+									function (_column,_columnNo) {
+										return _pad (_column,_columnMaxWidths [_columnNo],_columns [_columnNo].align);
+									}
+								).join (' | ') +
+								' |'
+							);
+						}
+					).join ('\n' + _rowSeparatorLine + '\n') +
+					'\n' + _topAndBottomLine + '\n'
+				);
 			}
 
 		return Uize.package ({
@@ -124,9 +164,25 @@ Uize.module ({
 							contents:_analysisAsJson
 						});
 
+						function _augmentFormatterWithProgressBar (_formatter) {
+							_formatter = Uize.resolveTransformer (_formatter);
+							return function (_value) {
+								var m = this;
+								return (
+									_formatter.call (m,_value) + ' ' +
+									Uize.Templates.TextProgressBar.process ({
+										trackLength:5,
+										endsChar:'',
+										fullHeadChar:'',
+										progress:(_value - m.minValue) / (m.maxValue - m.minValue)
+									})
+								);
+							};
+						};
+
 						console.log (
 							_renderTextTable ({
-								title:'Complete List of Dependencies',
+								title:'COMPLETE LIST OF DEPENDENCIES',
 								columns:[
 									{
 										title:'Module Name',
@@ -150,40 +206,43 @@ Uize.module ({
 										title:'Import.',
 										align:'right',
 										minValue:0,
-										maxValue:10
+										maxValue:10,
+										formatter:_augmentFormatterWithProgressBar ()
 									},
 									{
 										title:'Code',
 										align:'right',
 										minValue:0,
 										maxValue:100,
-										formatter:'value + "%"'
+										formatter:_augmentFormatterWithProgressBar ('value + "%"')
 									},
 									{
 										title:'Dir. Deps',
 										align:'right',
+										formatter:_augmentFormatterWithProgressBar ()
 									},
 									{
 										title:'Shared',
 										align:'right',
-										minValue:0
+										minValue:0,
+										formatter:_augmentFormatterWithProgressBar ()
 									},
 									{
 										title:'Size (%)',
 										align:'right',
 										minValue:0,
 										maxValue:100,
-										formatter:'value.toFixed (1) + "%"'
+										formatter:_augmentFormatterWithProgressBar ('value.toFixed (1) + "%"')
 									},
 									{
 										title:'Size (B)',
 										align:'right',
-										formatter:'value + " B"'
+										formatter:_augmentFormatterWithProgressBar ('value + " B"')
 									},
 									{
 										title:'Unique',
 										align:'right',
-										formatter:'value + " B"'
+										formatter:_augmentFormatterWithProgressBar ('value + " B"')
 									}
 								],
 								rows:Uize.map (_analysis.dependencies,'Uize.values (value)')
