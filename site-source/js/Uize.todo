@@ -209,7 +209,14 @@ Uize.forEach
 	Update this method to support objects that have defined iterators.
 
 Uize.map
-	Add support for _source being a string?
+	- Use native map function if available and _source is an array & _target is a new array
+	- Add support for _source being a string?
+	
+Uize.filter
+	Works much in the same way as Uize.map instead returns the matched set. Should use native filter function when appropriate.
+	
+Uize.keys
+	- Use native Object.keys function if available
 
 Uize.TreeWalker
 	An object built into the =Uize= base module that allows you to control walking through an object tree in a safe and performant way.
