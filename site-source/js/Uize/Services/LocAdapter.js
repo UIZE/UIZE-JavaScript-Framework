@@ -33,8 +33,9 @@ Uize.module ({
 		'Uize.Data.Csv',
 		'Uize.Data.Diff',
 		'Uize.Loc.Pseudo',
-		'Uize.Str.Split'
-		//'Uize.Templates.TextTable'
+		'Uize.Str.Split',
+		'Uize.Templates.TextProgressBar',
+		'Uize.Templates.TextTable'
 	],
 	superclass:'Uize.Service.Adapter',
 	builder:function (_superclass) {
@@ -148,31 +149,32 @@ Uize.module ({
 						_totalBrandSpecificCharCount += _brandSpecificCharCount;
 					}
 				);
-				_fileSystem.writeFile ({
-					path:_metricsFilePath,
-					contents:Uize.Json.to ({
-						resourceFiles:_totalResourceFiles,
-						brandSpecificResourceFiles:_totalBrandSpecificResourceFiles,
-						brandSpecificResourceFilesPercent:_percent (_totalBrandSpecificResourceFiles,_totalResourceFiles),
-						resourceStrings:_totalResourceStrings,
-						brandSpecificResourceStrings:_totalBrandSpecificResourceStrings,
-						brandSpecificResourceStringsPercent:
-							_percent (_totalBrandSpecificResourceStrings,_totalResourceStrings),
-						wordCount:_totalWordCount,
-						brandSpecificWordCount:_totalBrandSpecificWordCount,
-						brandSpecificWordCountPercent:_percent (_totalBrandSpecificWordCount,_totalWordCount),
-						charCount:_totalCharCount,
-						brandSpecificCharCount:_totalBrandSpecificCharCount,
-						brandSpecificCharCountPercent:_percent (_totalBrandSpecificCharCount,_totalCharCount),
-						tokens:_totalTokens,
-						tokenizedResourceStrings:_totalTokenizedResourceStrings,
-						tokenizedResourceStringsPercent:_percent (_totalTokenizedResourceStrings,_totalResourceStrings),
-						dupedResourceStrings:_totalDupedResourceStrings,
-						dupedResourceStringsPercent:_percent (_totalDupedResourceStrings,_totalResourceStrings),
-						dupedResourceStringsDetails:_dupedResourceStringsDetails,
-						tokenUsage:_tokenUsage
-					})
-				});
+
+				var _metrics = {
+					resourceFiles:_totalResourceFiles,
+					brandSpecificResourceFiles:_totalBrandSpecificResourceFiles,
+					brandSpecificResourceFilesPercent:_percent (_totalBrandSpecificResourceFiles,_totalResourceFiles),
+					resourceStrings:_totalResourceStrings,
+					brandSpecificResourceStrings:_totalBrandSpecificResourceStrings,
+					brandSpecificResourceStringsPercent:
+						_percent (_totalBrandSpecificResourceStrings,_totalResourceStrings),
+					wordCount:_totalWordCount,
+					brandSpecificWordCount:_totalBrandSpecificWordCount,
+					brandSpecificWordCountPercent:_percent (_totalBrandSpecificWordCount,_totalWordCount),
+					charCount:_totalCharCount,
+					brandSpecificCharCount:_totalBrandSpecificCharCount,
+					brandSpecificCharCountPercent:_percent (_totalBrandSpecificCharCount,_totalCharCount),
+					tokens:_totalTokens,
+					tokenizedResourceStrings:_totalTokenizedResourceStrings,
+					tokenizedResourceStringsPercent:_percent (_totalTokenizedResourceStrings,_totalResourceStrings),
+					dupedResourceStrings:_totalDupedResourceStrings,
+					dupedResourceStringsPercent:_percent (_totalDupedResourceStrings,_totalResourceStrings),
+					dupedResourceStringsDetails:_dupedResourceStringsDetails,
+					tokenUsage:_tokenUsage
+				};
+				_fileSystem.writeFile ({path:_metricsFilePath,contents:Uize.Json.to (_metrics)});
+
+				return _metrics;
 			}
 
 			function _pseudoLocalizeResources (m,_primaryLanguageResources) {
@@ -610,7 +612,7 @@ Uize.module ({
 						m.stepCompleted ('gathered resources for primary language');
 
 					/*** calculate metrics for primary language ***/
-						_calculateMetricsForLanguage (
+						var _metrics = _calculateMetricsForLanguage (
 							m,
 							_primaryLanguage,
 							_primaryLanguageResources,
@@ -618,21 +620,85 @@ Uize.module ({
 						);
 						m.stepCompleted ('calculated metrics for primary language');
 
+					/*** produce summary ***/
+						function _breakdownTable (_type,_countByCategory) {
+							var _allCount = _countByCategory.All;
+							return Uize.Templates.TextTable.process ({
+								title:_type,
+								columns:[
+									{title:'Category'},
+									{
+										title:'Count',
+										align:'right'
+									},
+									{
+										title:'Percent of Total',
+										align:'right',
+										formatter:function (_value) {
+											return (
+												(_value * 100).toFixed (1) + '% ' +
+												Uize.Templates.TextProgressBar.process ({
+													trackLength:20,
+													endsChar:'',
+													fullHeadChar:'',
+													progress:_value
+												})
+											);
+										}
+									}
+								],
+								rows:Uize.map (
+									Uize.keys (_countByCategory),
+									function (_category) {
+										var _count = _countByCategory [_category];
+										return [_category,_count,_count / _allCount];
+									}
+								)
+							});
+						}
+
 					m.methodExecutionComplete (
-						''
+						_breakdownTable (
+							'Resource Files',
+							{
+								'All':_metrics.resourceFiles,
+								'Non Brand-specific':_metrics.resourceFiles - _metrics.brandSpecificResourceFiles,
+								'Brand-specific':_metrics.brandSpecificResourceFiles
+							}
+						) + '\n' +
+						_breakdownTable (
+							'Resource Strings',
+							{
+								'All':_metrics.resourceStrings,
+								'Non Brand-specific':_metrics.resourceStrings - _metrics.brandSpecificResourceStrings,
+								'Brand-specific':_metrics.brandSpecificResourceStrings
+							}
+						) + '\n' +
+						_breakdownTable (
+							'Word Count',
+							{
+								'All':_metrics.wordCount,
+								'Non Brand-specific':_metrics.wordCount - _metrics.brandSpecificWordCount,
+								'Brand-specific':_metrics.brandSpecificWordCount
+							}
+						) + '\n' +
+						_breakdownTable (
+							'Character Count',
+							{
+								'All':_metrics.charCount,
+								'Non Brand-specific':_metrics.charCount - _metrics.brandSpecificCharCount,
+								'Brand-specific':_metrics.brandSpecificCharCount
+							}
+						) + '\n' +
+						_breakdownTable (
+							'Resource Strings (tokenized vs. non-tokenized)',
+							{
+								'All':_metrics.resourceStrings,
+								'Non-tokenized':_metrics.resourceStrings - _metrics.tokenizedResourceStrings,
+								'Tokenized':_metrics.tokenizedResourceStrings
+							}
+						) + '\n'
 						/*
-							- produce the following tables...
-								- resource files
-								- resource strings
-								- word count
-								- char count
-								- tokenized resource strings
-
-							- for each table, have the following...
-								- title: [projectName]: Resource Files | Resource Strings | Word Count | Character Count
-								- columns: Category, Count, Percent of Total
-								- rows per category: All, Non-brand, Brand, row per each brand
-
 							- duped resource strings histogram table
 								- title
 								- rows per dupe count
