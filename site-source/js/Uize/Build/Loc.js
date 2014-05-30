@@ -72,7 +72,9 @@ Uize.module ({
 									workingFolder:_scriptConfig.workingFolder,
 									log:function (_message,_progress) {
 										_logChunks.push (_message);
-										_console == 'verbose' &&
+										if (_progress == 'summary') {
+											_console != 'silent' && console.log (_message);
+										} else if (_console == 'verbose') {
 											console.log (
 												_progressBar && _progress != undefined
 													? Uize.Templates.TextProgressBar.process ({
@@ -81,8 +83,8 @@ Uize.module ({
 													})
 													: '',
 												_message
-											)
-										;
+											);
+										}
 									}
 								},
 								function () {

@@ -34,6 +34,7 @@ Uize.module ({
 		'Uize.Data.Diff',
 		'Uize.Loc.Pseudo',
 		'Uize.Str.Split'
+		//'Uize.Templates.TextTable'
 	],
 	superclass:'Uize.Service.Adapter',
 	builder:function (_superclass) {
@@ -304,6 +305,10 @@ Uize.module ({
 
 				stepCompleted:function (_message) {
 					this._log (_message,++this._methodCompletedSteps / this._methodTotalSteps);
+				},
+
+				methodExecutionComplete:function (_summary) {
+					this._log (_summary,'summary');
 				},
 
 				gatherResources:function () {
@@ -612,6 +617,32 @@ Uize.module ({
 							m._workingFolderPath + 'metrics/' + _primaryLanguage + '.json'
 						);
 						m.stepCompleted ('calculated metrics for primary language');
+
+					m.methodExecutionComplete (
+						''
+						/*
+							- produce the following tables...
+								- resource files
+								- resource strings
+								- word count
+								- char count
+								- tokenized resource strings
+
+							- for each table, have the following...
+								- title: [projectName]: Resource Files | Resource Strings | Word Count | Character Count
+								- columns: Category, Count, Percent of Total
+								- rows per category: All, Non-brand, Brand, row per each brand
+
+							- duped resource strings histogram table
+								- title
+								- rows per dupe count
+								- columns:
+									- dupe count description
+									- number of strings with this count
+									- progress bar representation
+									- total dupes
+						*/
+					);
 
 					_callback ();
 				},
