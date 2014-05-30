@@ -657,58 +657,125 @@ Uize.module ({
 							});
 						}
 
-					m.methodExecutionComplete (
-						_breakdownTable (
-							'Resource Files',
-							{
-								'All':_metrics.resourceFiles,
-								'Non Brand-specific':_metrics.resourceFiles - _metrics.brandSpecificResourceFiles,
-								'Brand-specific':_metrics.brandSpecificResourceFiles
+						function _sum (_array) {
+							var _result = 0;
+							Uize.forEach (_array,function (_value) {_result += _value});
+							return _result;
+						}
+
+						function _histogramTable (_title,_columnTitles,_occurrencesByValueLookup) {
+							var
+								_values = Uize.keys (_occurrencesByValueLookup),
+								_occurrences = Uize.values (_occurrencesByValueLookup),
+								_minValue = Uize.min (_values),
+								_maxValue = Uize.max (_values),
+								_maxOccurrences = Uize.max (_occurrences),
+								_rows = Uize.map (
+									_values.sort (function (_valueA,_valueB) {return _valueA - _valueB}).reverse (),
+									function (_value) {
+										var _occurrencesForValue = _occurrencesByValueLookup [_value];
+										return [_value,_occurrencesForValue,_value * _occurrencesForValue];
+									}
+								)
+							;
+							return Uize.Templates.TextTable.process ({
+								title:_title,
+								columns:[
+									{title:_columnTitles.count},
+									{
+										title:_columnTitles.occurrences,
+										align:'right',
+										formatter:function (_value) {
+											return (
+												_value != undefined
+													? (
+														_value + ' ' +
+														Uize.Templates.TextProgressBar.process ({
+															trackLength:Math.min (_maxOccurrences,50),
+															endsChar:'',
+															fullHeadChar:'',
+															progress:_value / _maxOccurrences
+														})
+													)
+													: ''
+											);
+										}
+									},
+									{
+										title:_columnTitles.total,
+										align:'right',
+									}
+								],
+								rows:_rows.concat ([
+									[
+										'All (' + _minValue + '-' + _maxValue + ')',
+										undefined,
+										_sum (Uize.Data.Util.getColumn (_rows,2))
+									]
+								])
+							});
+						}
+
+						var _occurrencesByValueLookup = {};
+						Uize.forEach (
+							_metrics.dupedResourceStringsDetails,
+							function (_resourceStringDupes) {
+								var _dupeCount = _resourceStringDupes.length - 1;
+								_occurrencesByValueLookup [_dupeCount] = (_occurrencesByValueLookup [_dupeCount] || 0) + 1;
 							}
-						) + '\n' +
-						_breakdownTable (
-							'Resource Strings',
-							{
-								'All':_metrics.resourceStrings,
-								'Non Brand-specific':_metrics.resourceStrings - _metrics.brandSpecificResourceStrings,
-								'Brand-specific':_metrics.brandSpecificResourceStrings
-							}
-						) + '\n' +
-						_breakdownTable (
-							'Word Count',
-							{
-								'All':_metrics.wordCount,
-								'Non Brand-specific':_metrics.wordCount - _metrics.brandSpecificWordCount,
-								'Brand-specific':_metrics.brandSpecificWordCount
-							}
-						) + '\n' +
-						_breakdownTable (
-							'Character Count',
-							{
-								'All':_metrics.charCount,
-								'Non Brand-specific':_metrics.charCount - _metrics.brandSpecificCharCount,
-								'Brand-specific':_metrics.brandSpecificCharCount
-							}
-						) + '\n' +
-						_breakdownTable (
-							'Resource Strings (tokenized vs. non-tokenized)',
-							{
-								'All':_metrics.resourceStrings,
-								'Non-tokenized':_metrics.resourceStrings - _metrics.tokenizedResourceStrings,
-								'Tokenized':_metrics.tokenizedResourceStrings
-							}
-						) + '\n'
-						/*
-							- duped resource strings histogram table
-								- title
-								- rows per dupe count
-								- columns:
-									- dupe count description
-									- number of strings with this count
-									- progress bar representation
-									- total dupes
-						*/
-					);
+						);
+
+						m.methodExecutionComplete (
+							_breakdownTable (
+								'Resource Files',
+								{
+									'All':_metrics.resourceFiles,
+									'Non Brand-specific':_metrics.resourceFiles - _metrics.brandSpecificResourceFiles,
+									'Brand-specific':_metrics.brandSpecificResourceFiles
+								}
+							) + '\n' +
+							_breakdownTable (
+								'Resource Strings',
+								{
+									'All':_metrics.resourceStrings,
+									'Non Brand-specific':_metrics.resourceStrings - _metrics.brandSpecificResourceStrings,
+									'Brand-specific':_metrics.brandSpecificResourceStrings
+								}
+							) + '\n' +
+							_breakdownTable (
+								'Word Count',
+								{
+									'All':_metrics.wordCount,
+									'Non Brand-specific':_metrics.wordCount - _metrics.brandSpecificWordCount,
+									'Brand-specific':_metrics.brandSpecificWordCount
+								}
+							) + '\n' +
+							_breakdownTable (
+								'Character Count',
+								{
+									'All':_metrics.charCount,
+									'Non Brand-specific':_metrics.charCount - _metrics.brandSpecificCharCount,
+									'Brand-specific':_metrics.brandSpecificCharCount
+								}
+							) + '\n' +
+							_breakdownTable (
+								'Resource Strings (tokenized vs. non-tokenized)',
+								{
+									'All':_metrics.resourceStrings,
+									'Non-tokenized':_metrics.resourceStrings - _metrics.tokenizedResourceStrings,
+									'Tokenized':_metrics.tokenizedResourceStrings
+								}
+							) + '\n' +
+							_histogramTable (
+								'Histogram of Resource String Duplicates',
+								{
+									count:'Duplication Count',
+									occurrences:'Occurrences',
+									total:'Total Duplicates'
+								},
+								_occurrencesByValueLookup
+							)
+						);
 
 					_callback ();
 				},
