@@ -43,7 +43,7 @@ Uize.module ({
 					var
 						_totalPadding = _length - _sourceStr.length,
 						_leftPadding = Math.floor (
-							_totalPadding * (typeof _align == 'string' ? {left:0,center:.5,right:1} [_align] : _align)
+							_totalPadding * (typeof _align == 'string' ? {left:0,center:.5,right:1} [_align] : +_align || 0)
 						)
 					;
 					return _repeat (' ',_leftPadding) + _sourceStr + _repeat (' ',_totalPadding - _leftPadding);
