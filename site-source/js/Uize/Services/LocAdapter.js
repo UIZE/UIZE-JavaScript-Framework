@@ -34,8 +34,8 @@ Uize.module ({
 		'Uize.Data.Diff',
 		'Uize.Loc.Pseudo',
 		'Uize.Str.Split',
-		'Uize.Templates.Text.ProgressBar',
-		'Uize.Templates.Text.Table'
+		'Uize.Templates.Text.Tables.Breakdown',
+		'Uize.Templates.Text.Tables.Histogram'
 	],
 	superclass:'Uize.Service.Adapter',
 	builder:function (_superclass) {
@@ -45,6 +45,7 @@ Uize.module ({
 			/*** Variables for Scruncher Optimization ***/
 				_undefined,
 				_split = Uize.Str.Split.split,
+				_breakdownTable = Uize.Templates.Text.Tables.Breakdown.process,
 
 			/*** General Variables ***/
 				_fileSystem = Uize.Services.FileSystem.singleton (),
@@ -621,101 +622,6 @@ Uize.module ({
 						m.stepCompleted ('calculated metrics for primary language');
 
 					/*** produce summary ***/
-						function _breakdownTable (_type,_countByCategory) {
-							var _allCount = _countByCategory.All;
-							return Uize.Templates.Text.Table.process ({
-								title:_type,
-								columns:[
-									{title:'Category'},
-									{
-										title:'Count',
-										align:'right'
-									},
-									{
-										title:'Percent of Total',
-										align:'right',
-										formatter:function (_value) {
-											return (
-												(_value * 100).toFixed (1) + '% ' +
-												Uize.Templates.Text.ProgressBar.process ({
-													trackLength:20,
-													endsChar:'',
-													fullHeadChar:'',
-													progress:_value
-												})
-											);
-										}
-									}
-								],
-								rows:Uize.map (
-									Uize.keys (_countByCategory),
-									function (_category) {
-										var _count = _countByCategory [_category];
-										return [_category,_count,_count / _allCount];
-									}
-								)
-							});
-						}
-
-						function _sum (_array) {
-							var _result = 0;
-							Uize.forEach (_array,function (_value) {_result += _value});
-							return _result;
-						}
-
-						function _histogramTable (_title,_columnTitles,_occurrencesByValueLookup) {
-							var
-								_values = Uize.keys (_occurrencesByValueLookup),
-								_occurrences = Uize.values (_occurrencesByValueLookup),
-								_minValue = Uize.min (_values),
-								_maxValue = Uize.max (_values),
-								_maxOccurrences = Uize.max (_occurrences),
-								_rows = Uize.map (
-									_values.sort (function (_valueA,_valueB) {return _valueA - _valueB}).reverse (),
-									function (_value) {
-										var _occurrencesForValue = _occurrencesByValueLookup [_value];
-										return [_value,_occurrencesForValue,_value * _occurrencesForValue];
-									}
-								)
-							;
-							return Uize.Templates.Text.Table.process ({
-								title:_title,
-								columns:[
-									{title:_columnTitles.count},
-									{
-										title:_columnTitles.occurrences,
-										align:'right',
-										formatter:function (_value) {
-											return (
-												_value != undefined
-													? (
-														_value + ' ' +
-														Uize.Templates.Text.ProgressBar.process ({
-															trackLength:Math.min (_maxOccurrences,50),
-															endsChar:'',
-															fullHeadChar:'',
-															progress:_value / _maxOccurrences
-														})
-													)
-													: ''
-											);
-										}
-									},
-									{
-										title:_columnTitles.total,
-										align:'right',
-									}
-								],
-								rows:_rows.concat ([
-									[
-										'All (' + _minValue + '-' + _maxValue + ')',
-										undefined,
-										_sum (Uize.Data.Util.getColumn (_rows,2))
-									]
-								])
-							});
-						}
-
 						var _occurrencesByValueLookup = {};
 						Uize.forEach (
 							_metrics.dupedResourceStringsDetails,
@@ -726,55 +632,55 @@ Uize.module ({
 						);
 
 						m.methodExecutionComplete (
-							_breakdownTable (
-								'Resource Files',
-								{
+							_breakdownTable ({
+								title:'Resource Files',
+								countByCategory:{
 									'All':_metrics.resourceFiles,
 									'Non Brand-specific':_metrics.resourceFiles - _metrics.brandSpecificResourceFiles,
 									'Brand-specific':_metrics.brandSpecificResourceFiles
 								}
-							) + '\n' +
-							_breakdownTable (
-								'Resource Strings',
-								{
+							}) + '\n' +
+							_breakdownTable ({
+								title:'Resource Strings',
+								countByCategory:{
 									'All':_metrics.resourceStrings,
 									'Non Brand-specific':_metrics.resourceStrings - _metrics.brandSpecificResourceStrings,
 									'Brand-specific':_metrics.brandSpecificResourceStrings
 								}
-							) + '\n' +
-							_breakdownTable (
-								'Word Count',
-								{
+							}) + '\n' +
+							_breakdownTable ({
+								title:'Word Count',
+								countByCategory:{
 									'All':_metrics.wordCount,
 									'Non Brand-specific':_metrics.wordCount - _metrics.brandSpecificWordCount,
 									'Brand-specific':_metrics.brandSpecificWordCount
 								}
-							) + '\n' +
-							_breakdownTable (
-								'Character Count',
-								{
+							}) + '\n' +
+							_breakdownTable ({
+								title:'Character Count',
+								countByCategory:{
 									'All':_metrics.charCount,
 									'Non Brand-specific':_metrics.charCount - _metrics.brandSpecificCharCount,
 									'Brand-specific':_metrics.brandSpecificCharCount
 								}
-							) + '\n' +
-							_breakdownTable (
-								'Resource Strings (tokenized vs. non-tokenized)',
-								{
+							}) + '\n' +
+							_breakdownTable ({
+								title:'Resource Strings (tokenized vs. non-tokenized)',
+								countByCategory:{
 									'All':_metrics.resourceStrings,
 									'Non-tokenized':_metrics.resourceStrings - _metrics.tokenizedResourceStrings,
 									'Tokenized':_metrics.tokenizedResourceStrings
 								}
-							) + '\n' +
-							_histogramTable (
-								'Histogram of Resource String Duplicates',
-								{
+							}) + '\n' +
+							Uize.Templates.Text.Tables.Histogram.process ({
+								title:'Histogram of Resource String Duplicates',
+								columnTitles:{
 									count:'Duplication Count',
 									occurrences:'Occurrences',
 									total:'Total Duplicates'
 								},
-								_occurrencesByValueLookup
-							)
+								occurrencesByValue:_occurrencesByValueLookup
+							})
 						);
 
 					_callback ();
