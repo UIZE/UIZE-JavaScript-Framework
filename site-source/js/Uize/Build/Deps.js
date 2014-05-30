@@ -31,108 +31,11 @@ Uize.module ({
 		'Uize.Build.ModuleInfo',
 		'Uize.Services.FileSystem',
 		'Uize.Json',
-		'Uize.Data.Util',
-		'Uize.Str.Repeat',
-		'Uize.Templates.TextProgressBar'
+		'Uize.Templates.Text.Table',
+		'Uize.Templates.Text.ProgressBar'
 	],
 	builder:function () {
 		'use strict';
-
-		var _repeat = Uize.Str.Repeat.repeat;
-
-		/*** Utility Functions ***/
-			function _renderTextTable (_input) {
-				function _pad (_sourceStr,_length,_align) {
-					var
-						_totalPadding = _length - _sourceStr.length,
-						_leftPadding = Math.floor (
-							_totalPadding * (typeof _align == 'string' ? {left:0,center:.5,right:1} [_align] : _align)
-						)
-					;
-					return _repeat (' ',_leftPadding) + _sourceStr + _repeat (' ',_totalPadding - _leftPadding);
-				}
-
-				var
-					_title = _input.title,
-					_columns = _input.columns,
-					_rows = _input.rows
-				;
-
-				/*** resolve column information ***/
-					Uize.forEach (
-						_columns,
-						function (_column,_columnNo) {
-							var _columnValues = Uize.Data.Util.getColumn (_rows,_columnNo);
-							if (!('minValue' in _column)) _column.minValue = Uize.min (_columnValues);
-							if (!('maxValue' in _column)) _column.maxValue = Uize.max (_columnValues);
-							_column.formatter = Uize.resolveTransformer (_column.formatter);
-						}
-					);
-
-				/*** format column data and get max width for each column ***/
-					var
-						_columnMaxWidths = Uize.map (_columns,'value.title.length'),
-						_formattedRows = Uize.map (
-							_rows,
-							function (_row) {
-								return Uize.map (
-									_columns,
-									function (_column,_columnNo) {
-										var _formattedValue = _column.formatter (_row [_columnNo]) + '';
-										_columnMaxWidths [_columnNo] = Math.max (
-											_columnMaxWidths [_columnNo],
-											_formattedValue.length
-										);
-										return _formattedValue;
-									}
-								);
-							}
-						)
-					;
-
-				/*** produce row dividers ***/
-					var
-						_columnLines = Uize.map (
-							_columnMaxWidths,
-							function (_columnMaxWidth) {return Uize.Str.Repeat.repeat ('-',_columnMaxWidth)}
-						),
-						_rowSeparatorLine = '|-' + _columnLines.join ('-+-') + '-|',
-						_topAndBottomLine = '+-' + _columnLines.join ('---') + '-+'
-					;
-
-				return (
-					(
-						_title
-							? (_topAndBottomLine + '\n| ' + _pad (_title,_topAndBottomLine.length - 4,'center') + ' |\n')
-							: ''
-					) +
-					_topAndBottomLine + '\n' +
-					(
-						'| ' +
-						Uize.map (
-							_columns,
-							function (_column,_columnNo) {return _pad (_column.title,_columnMaxWidths [_columnNo],'center')}
-						).join (' | ') + ' |'
-					) + '\n' +
-					_rowSeparatorLine + '\n' +
-					Uize.map (
-						_formattedRows,
-						function (_row) {
-							return (
-								'| ' +
-								Uize.map (
-									_row,
-									function (_column,_columnNo) {
-										return _pad (_column,_columnMaxWidths [_columnNo],_columns [_columnNo].align);
-									}
-								).join (' | ') +
-								' |'
-							);
-						}
-					).join ('\n' + _rowSeparatorLine + '\n') +
-					'\n' + _topAndBottomLine + '\n'
-				);
-			}
 
 		return Uize.package ({
 			perform:function (_params) {
@@ -170,7 +73,7 @@ Uize.module ({
 								var m = this;
 								return (
 									_formatter.call (m,_value) + ' ' +
-									Uize.Templates.TextProgressBar.process ({
+									Uize.Templates.Text.ProgressBar.process ({
 										trackLength:5,
 										endsChar:'',
 										fullHeadChar:'',
@@ -181,7 +84,7 @@ Uize.module ({
 						};
 
 						console.log (
-							_renderTextTable ({
+							Uize.Templates.Text.Table.process ({
 								title:'COMPLETE LIST OF DEPENDENCIES',
 								columns:[
 									{

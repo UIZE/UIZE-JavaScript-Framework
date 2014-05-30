@@ -52,7 +52,7 @@ Uize.module ({
 		'Uize.Services.FileSystem',
 		'Uize.Test.Runner',
 		'Uize.Build.Util',
-		'Uize.Templates.TextProgressBar'
+		'Uize.Templates.Text.ProgressBar'
 	],
 	builder:function () {
 		'use strict';
@@ -77,7 +77,7 @@ Uize.module ({
 					function (_message) {
 						console.log (
 							_progressBar
-								? Uize.Templates.TextProgressBar.process ({
+								? Uize.Templates.Text.ProgressBar.process ({
 									trackLength:20,
 									progress:(_currentTestNo + 1) / _totalTests
 								})

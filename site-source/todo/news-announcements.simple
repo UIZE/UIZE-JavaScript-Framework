@@ -10,6 +10,27 @@ NEW MODULE: Uize.Math.Blend
 	- finish documentation
 	- write news announcement
 
+NEW MODULE: Uize.Json.MultiLineStringLiteral
+	Still to do...
+
+	- write unit tests
+	- write documentation
+	- write news announcement
+
+NEW MODULE: Uize.Templates.Text.ProgressBar
+	Still to do...
+
+	- finish unit tests (add tests for no full head character and no ends characters)
+	- write documentation
+	- write news announcement
+
+NEW MODULE: Uize.Templates.Text.Table
+	Still to do...
+
+	- write unit tests
+	- write documentation
+	- write news announcement
+
 NEW MODULE: Uize.Str.Search
 	Still to do...
 

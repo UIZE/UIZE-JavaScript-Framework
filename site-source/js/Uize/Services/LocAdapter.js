@@ -33,7 +33,9 @@ Uize.module ({
 		'Uize.Data.Csv',
 		'Uize.Data.Diff',
 		'Uize.Loc.Pseudo',
-		'Uize.Str.Split'
+		'Uize.Str.Split',
+		'Uize.Templates.Text.Tables.Breakdown',
+		'Uize.Templates.Text.Tables.Histogram'
 	],
 	superclass:'Uize.Service.Adapter',
 	builder:function (_superclass) {
@@ -43,6 +45,7 @@ Uize.module ({
 			/*** Variables for Scruncher Optimization ***/
 				_undefined,
 				_split = Uize.Str.Split.split,
+				_breakdownTable = Uize.Templates.Text.Tables.Breakdown.process,
 
 			/*** General Variables ***/
 				_fileSystem = Uize.Services.FileSystem.singleton (),
@@ -147,31 +150,32 @@ Uize.module ({
 						_totalBrandSpecificCharCount += _brandSpecificCharCount;
 					}
 				);
-				_fileSystem.writeFile ({
-					path:_metricsFilePath,
-					contents:Uize.Json.to ({
-						resourceFiles:_totalResourceFiles,
-						brandSpecificResourceFiles:_totalBrandSpecificResourceFiles,
-						brandSpecificResourceFilesPercent:_percent (_totalBrandSpecificResourceFiles,_totalResourceFiles),
-						resourceStrings:_totalResourceStrings,
-						brandSpecificResourceStrings:_totalBrandSpecificResourceStrings,
-						brandSpecificResourceStringsPercent:
-							_percent (_totalBrandSpecificResourceStrings,_totalResourceStrings),
-						wordCount:_totalWordCount,
-						brandSpecificWordCount:_totalBrandSpecificWordCount,
-						brandSpecificWordCountPercent:_percent (_totalBrandSpecificWordCount,_totalWordCount),
-						charCount:_totalCharCount,
-						brandSpecificCharCount:_totalBrandSpecificCharCount,
-						brandSpecificCharCountPercent:_percent (_totalBrandSpecificCharCount,_totalCharCount),
-						tokens:_totalTokens,
-						tokenizedResourceStrings:_totalTokenizedResourceStrings,
-						tokenizedResourceStringsPercent:_percent (_totalTokenizedResourceStrings,_totalResourceStrings),
-						dupedResourceStrings:_totalDupedResourceStrings,
-						dupedResourceStringsPercent:_percent (_totalDupedResourceStrings,_totalResourceStrings),
-						dupedResourceStringsDetails:_dupedResourceStringsDetails,
-						tokenUsage:_tokenUsage
-					})
-				});
+
+				var _metrics = {
+					resourceFiles:_totalResourceFiles,
+					brandSpecificResourceFiles:_totalBrandSpecificResourceFiles,
+					brandSpecificResourceFilesPercent:_percent (_totalBrandSpecificResourceFiles,_totalResourceFiles),
+					resourceStrings:_totalResourceStrings,
+					brandSpecificResourceStrings:_totalBrandSpecificResourceStrings,
+					brandSpecificResourceStringsPercent:
+						_percent (_totalBrandSpecificResourceStrings,_totalResourceStrings),
+					wordCount:_totalWordCount,
+					brandSpecificWordCount:_totalBrandSpecificWordCount,
+					brandSpecificWordCountPercent:_percent (_totalBrandSpecificWordCount,_totalWordCount),
+					charCount:_totalCharCount,
+					brandSpecificCharCount:_totalBrandSpecificCharCount,
+					brandSpecificCharCountPercent:_percent (_totalBrandSpecificCharCount,_totalCharCount),
+					tokens:_totalTokens,
+					tokenizedResourceStrings:_totalTokenizedResourceStrings,
+					tokenizedResourceStringsPercent:_percent (_totalTokenizedResourceStrings,_totalResourceStrings),
+					dupedResourceStrings:_totalDupedResourceStrings,
+					dupedResourceStringsPercent:_percent (_totalDupedResourceStrings,_totalResourceStrings),
+					dupedResourceStringsDetails:_dupedResourceStringsDetails,
+					tokenUsage:_tokenUsage
+				};
+				_fileSystem.writeFile ({path:_metricsFilePath,contents:Uize.Json.to (_metrics)});
+
+				return _metrics;
 			}
 
 			function _pseudoLocalizeResources (m,_primaryLanguageResources) {
@@ -304,6 +308,10 @@ Uize.module ({
 
 				stepCompleted:function (_message) {
 					this._log (_message,++this._methodCompletedSteps / this._methodTotalSteps);
+				},
+
+				methodExecutionComplete:function (_summary) {
+					this._log (_summary,'summary');
 				},
 
 				gatherResources:function () {
@@ -605,13 +613,75 @@ Uize.module ({
 						m.stepCompleted ('gathered resources for primary language');
 
 					/*** calculate metrics for primary language ***/
-						_calculateMetricsForLanguage (
+						var _metrics = _calculateMetricsForLanguage (
 							m,
 							_primaryLanguage,
 							_primaryLanguageResources,
 							m._workingFolderPath + 'metrics/' + _primaryLanguage + '.json'
 						);
 						m.stepCompleted ('calculated metrics for primary language');
+
+					/*** produce summary ***/
+						var _occurrencesByValueLookup = {};
+						Uize.forEach (
+							_metrics.dupedResourceStringsDetails,
+							function (_resourceStringDupes) {
+								var _dupeCount = _resourceStringDupes.length - 1;
+								_occurrencesByValueLookup [_dupeCount] = (_occurrencesByValueLookup [_dupeCount] || 0) + 1;
+							}
+						);
+
+						m.methodExecutionComplete (
+							_breakdownTable ({
+								title:'Resource Files',
+								countByCategory:{
+									'All':_metrics.resourceFiles,
+									'Non Brand-specific':_metrics.resourceFiles - _metrics.brandSpecificResourceFiles,
+									'Brand-specific':_metrics.brandSpecificResourceFiles
+								}
+							}) + '\n' +
+							_breakdownTable ({
+								title:'Resource Strings',
+								countByCategory:{
+									'All':_metrics.resourceStrings,
+									'Non Brand-specific':_metrics.resourceStrings - _metrics.brandSpecificResourceStrings,
+									'Brand-specific':_metrics.brandSpecificResourceStrings
+								}
+							}) + '\n' +
+							_breakdownTable ({
+								title:'Word Count',
+								countByCategory:{
+									'All':_metrics.wordCount,
+									'Non Brand-specific':_metrics.wordCount - _metrics.brandSpecificWordCount,
+									'Brand-specific':_metrics.brandSpecificWordCount
+								}
+							}) + '\n' +
+							_breakdownTable ({
+								title:'Character Count',
+								countByCategory:{
+									'All':_metrics.charCount,
+									'Non Brand-specific':_metrics.charCount - _metrics.brandSpecificCharCount,
+									'Brand-specific':_metrics.brandSpecificCharCount
+								}
+							}) + '\n' +
+							_breakdownTable ({
+								title:'Resource Strings (tokenized vs. non-tokenized)',
+								countByCategory:{
+									'All':_metrics.resourceStrings,
+									'Non-tokenized':_metrics.resourceStrings - _metrics.tokenizedResourceStrings,
+									'Tokenized':_metrics.tokenizedResourceStrings
+								}
+							}) + '\n' +
+							Uize.Templates.Text.Tables.Histogram.process ({
+								title:'Histogram of Resource String Duplicates',
+								columnTitles:{
+									count:'Duplication Count',
+									occurrences:'Occurrences',
+									total:'Total Duplicates'
+								},
+								occurrencesByValue:_occurrencesByValueLookup
+							})
+						);
 
 					_callback ();
 				},

@@ -3,7 +3,7 @@
 <head>
 	<title>Multi-line String Serializer | JavaScript Tools | UIZE JavaScript Framework</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-	<meta name="keywords" content="tool Uize.Str.Lines Uize.Json"/>
+	<meta name="keywords" content="tool Uize.Json.MultiLineStringLiteral"/>
 	<meta name="description" content="Take multi-line strings and serialize them to multi-line JavaScript string literal expressions using string concatenation."/>
 	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
 	<link rel="stylesheet" href="../css/page.css"/>
@@ -33,7 +33,7 @@
 	<!-- explanation copy -->
 
 	<div class="explanation">
-		<p>The <b>Multi-line String Serializer</b> tool (which makes use of the <a href="../reference/Uize.Str.Lines.html"><code>Uize.Str.Lines</code></a> and <a href="../reference/Uize.Json.html"><code>Uize.Json</code></a> modules) lets you serialize multi-line text strings to multi-line JavaScript string literal expressions using string concatenation.</p>
+		<p>The <b>Multi-line String Serializer</b> tool (which makes use of the <a href="../reference/Uize.Json.MultiLineStringLiteral.html"><code>Uize.Json.MultiLineStringLiteral</code></a> module) lets you serialize multi-line text strings to multi-line JavaScript string literal expressions using string concatenation.</p>
 
 		<p>Paste some multi-line text into the <b>"MULTI-LINE TEXT"</b> tab and then switch to the <b>"MULTI-LINE JAVASCRIPT EXPRESSION"</b> tab to see the text serialized to a multi-line JavaScript string literal expression.</p>
 
@@ -65,8 +65,7 @@ Uize.require (
 	[
 		'UizeSite.Page.Example',
 		'Uize.Widget.Options.Tabbed',
-		'Uize.Str.Lines',
-		'Uize.Json'
+		'Uize.Json.MultiLineStringLiteral'
 	],
 	function () {
 		'use strict';
@@ -88,27 +87,16 @@ Uize.require (
 			tabs.wire (
 				'Changed.value',
 				function () {
-					var tabsValue = tabs + '';
-					if (tabsValue == 'multilineJavaScriptExpression') {
-						var
-							_lines = Uize.Str.Lines.split (page.getNodeValue ('multilineText')),
-							_lastLineNo = _lines.length - 1
-						;
-						page.setNodeValue (
+					tabs + '' == 'multilineJavaScriptExpression'
+						? page.setNodeValue (
 							'multilineJavaScriptExpression',
-							Uize.map (
-								_lines,
-								function (_line,_lineNo) {
-									return Uize.Json.to (_line + '\n') + (_lineNo < _lastLineNo ? ' +' : '');
-								}
-							).join ('\n')
-						);
-					} else {
-						page.setNodeValue (
+							Uize.Json.MultiLineStringLiteral.serialize (page.getNodeValue ('multilineText'))
+						)
+						: page.setNodeValue (
 							'multilineText',
 							Uize.Json.from (page.getNodeValue ('multilineJavaScriptExpression'))
-						);
-					}
+						)
+					;
 				}
 			);
 
