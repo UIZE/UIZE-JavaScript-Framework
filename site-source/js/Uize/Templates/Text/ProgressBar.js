@@ -1,7 +1,7 @@
 /*______________
 |       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
 |     /      /  |   ---------------------------------------------------
-|    /    O /   |    MODULE : Uize.Templates.TextProgressBar Package
+|    /    O /   |    MODULE : Uize.Templates.Text.ProgressBar Package
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
 | /____/ /__/_| | COPYRIGHT : (c)2014 UIZE
@@ -18,13 +18,13 @@
 
 /*?
 	Introduction
-		The =Uize.Templates.TextProgressBar= module is a JavaScript Template module, used for generating a text progress bar string that can be used when outputting to logs, consoles, terminals, etc.
+		The =Uize.Templates.Text.ProgressBar= module is a JavaScript Template module, used for generating a text progress bar string that can be used when outputting to logs, consoles, terminals, etc.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 */
 
 Uize.module ({
-	name:'Uize.Templates.TextProgressBar',
+	name:'Uize.Templates.Text.ProgressBar',
 	required:'Uize.Str.Repeat',
 	builder:function () {
 		'use strict';
@@ -47,12 +47,12 @@ Uize.module ({
 				);
 				/*?
 					Static Methods
-						Uize.Templates.TextProgressBar.process
+						Uize.Templates.Text.ProgressBar.process
 							Returns a string, being the generated text progress bar.
 
 							SYNTAX
 							.......................................................................
-							textProgressBarSTR = Uize.Templates.TextProgressBar.process (inputOBJ);
+							textProgressBarSTR = Uize.Templates.Text.ProgressBar.process (inputOBJ);
 							.......................................................................
 
 							inputOBJ
@@ -110,8 +110,8 @@ Uize.module ({
 				progress:'number'
 				/*?
 					Static Properties
-						Uize.Templates.TextProgressBar.input
-							An object, describing the allowed properties of the =inputOBJ= parameter of the =Uize.Templates.TextProgressBar.process= static method.
+						Uize.Templates.Text.ProgressBar.input
+							An object, describing the allowed properties of the =inputOBJ= parameter of the =Uize.Templates.Text.ProgressBar.process= static method.
 				*/
 			}
 		});

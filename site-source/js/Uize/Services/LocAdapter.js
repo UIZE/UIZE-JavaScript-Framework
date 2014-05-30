@@ -34,8 +34,8 @@ Uize.module ({
 		'Uize.Data.Diff',
 		'Uize.Loc.Pseudo',
 		'Uize.Str.Split',
-		'Uize.Templates.TextProgressBar',
-		'Uize.Templates.TextTable'
+		'Uize.Templates.Text.ProgressBar',
+		'Uize.Templates.Text.Table'
 	],
 	superclass:'Uize.Service.Adapter',
 	builder:function (_superclass) {
@@ -623,7 +623,7 @@ Uize.module ({
 					/*** produce summary ***/
 						function _breakdownTable (_type,_countByCategory) {
 							var _allCount = _countByCategory.All;
-							return Uize.Templates.TextTable.process ({
+							return Uize.Templates.Text.Table.process ({
 								title:_type,
 								columns:[
 									{title:'Category'},
@@ -637,7 +637,7 @@ Uize.module ({
 										formatter:function (_value) {
 											return (
 												(_value * 100).toFixed (1) + '% ' +
-												Uize.Templates.TextProgressBar.process ({
+												Uize.Templates.Text.ProgressBar.process ({
 													trackLength:20,
 													endsChar:'',
 													fullHeadChar:'',
@@ -678,7 +678,7 @@ Uize.module ({
 									}
 								)
 							;
-							return Uize.Templates.TextTable.process ({
+							return Uize.Templates.Text.Table.process ({
 								title:_title,
 								columns:[
 									{title:_columnTitles.count},
@@ -690,7 +690,7 @@ Uize.module ({
 												_value != undefined
 													? (
 														_value + ' ' +
-														Uize.Templates.TextProgressBar.process ({
+														Uize.Templates.Text.ProgressBar.process ({
 															trackLength:Math.min (_maxOccurrences,50),
 															endsChar:'',
 															fullHeadChar:'',

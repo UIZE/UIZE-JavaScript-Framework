@@ -31,8 +31,8 @@ Uize.module ({
 		'Uize.Build.ModuleInfo',
 		'Uize.Services.FileSystem',
 		'Uize.Json',
-		'Uize.Templates.TextTable',
-		'Uize.Templates.TextProgressBar'
+		'Uize.Templates.Text.Table',
+		'Uize.Templates.Text.ProgressBar'
 	],
 	builder:function () {
 		'use strict';
@@ -73,7 +73,7 @@ Uize.module ({
 								var m = this;
 								return (
 									_formatter.call (m,_value) + ' ' +
-									Uize.Templates.TextProgressBar.process ({
+									Uize.Templates.Text.ProgressBar.process ({
 										trackLength:5,
 										endsChar:'',
 										fullHeadChar:'',
@@ -84,7 +84,7 @@ Uize.module ({
 						};
 
 						console.log (
-							Uize.Templates.TextTable.process ({
+							Uize.Templates.Text.Table.process ({
 								title:'COMPLETE LIST OF DEPENDENCIES',
 								columns:[
 									{

@@ -48,7 +48,7 @@ Uize.module ({
 	name:'Uize.Build.Loc',
 	required:[
 		'Uize.Services.Loc',
-		'Uize.Templates.TextProgressBar',
+		'Uize.Templates.Text.ProgressBar',
 		'Uize.Services.FileSystem'
 	],
 	builder:function () {
@@ -77,7 +77,7 @@ Uize.module ({
 										} else if (_console == 'verbose') {
 											console.log (
 												_progressBar && _progress != undefined
-													? Uize.Templates.TextProgressBar.process ({
+													? Uize.Templates.Text.ProgressBar.process ({
 														trackLength:20,
 														progress:_progress
 													})

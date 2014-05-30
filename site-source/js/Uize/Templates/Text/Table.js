@@ -1,7 +1,7 @@
 /*______________
 |       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
 |     /      /  |   ---------------------------------------------------
-|    /    O /   |    MODULE : Uize.Templates.TextTable Package
+|    /    O /   |    MODULE : Uize.Templates.Text.Table Package
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
 | /____/ /__/_| | COPYRIGHT : (c)2014 UIZE
@@ -18,13 +18,13 @@
 
 /*?
 	Introduction
-		The =Uize.Templates.TextTable= module is a JavaScript Template module, used for generating a text-based table layout of data that can be used when outputting to logs, consoles, terminals, etc.
+		The =Uize.Templates.Text.Table= module is a JavaScript Template module, used for generating a text-based table layout of data that can be used when outputting to logs, consoles, terminals, etc.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 */
 
 Uize.module ({
-	name:'Uize.Templates.TextTable',
+	name:'Uize.Templates.Text.Table',
 	required:[
 		'Uize.Data.Util',
 		'Uize.Str.Repeat'

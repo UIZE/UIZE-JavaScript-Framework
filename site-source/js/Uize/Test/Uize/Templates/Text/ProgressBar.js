@@ -1,7 +1,7 @@
 /*______________
 |       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
 |     /      /  |   ---------------------------------------------------
-|    /    O /   |    MODULE : Uize.Test.Uize.Templates.TextProgressBar Class
+|    /    O /   |    MODULE : Uize.Test.Uize.Templates.Text.ProgressBar Class
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
 | /____/ /__/_| | COPYRIGHT : (c)2014 UIZE
@@ -18,22 +18,22 @@
 
 /*?
 	Introduction
-		The =Uize.Test.Uize.Templates.TextProgressBar= module defines basic unit tests for the =Uize.Templates.TextProgressBar= JavaScript template module.
+		The =Uize.Test.Uize.Templates.Text.ProgressBar= module defines basic unit tests for the =Uize.Templates.Text.ProgressBar= JavaScript template module.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 */
 
 Uize.module ({
-	name:'Uize.Test.Uize.Templates.TextProgressBar',
+	name:'Uize.Test.Uize.Templates.Text.ProgressBar',
 	builder:function () {
 		'use strict';
 
 		return Uize.Test.resolve ({
-			title:'Test for Uize.Templates.TextProgressBar JavaScript Template',
+			title:'Test for Uize.Templates.Text.ProgressBar JavaScript Template',
 			test:[
-				Uize.Test.requiredModulesTest ('Uize.Templates.TextProgressBar'),
+				Uize.Test.requiredModulesTest ('Uize.Templates.Text.ProgressBar'),
 				Uize.Test.staticMethodsTest ([
-					['Uize.Templates.TextProgressBar.process',[
+					['Uize.Templates.Text.ProgressBar.process',[
 						/*** test progress values ***/
 							['A text progress bar can be generated to depict no progress',
 								{
