@@ -1,0 +1,4 @@
+This is a TO DO document for the =Uize.Dom.Classes= module.
+
+classList
+	Modern browsers now expose the =classList= property on DOM nodes, so =Uize.Dom.Classes= can use this property's methods instead of splitting the =className= property into an array.

@@ -1,0 +1,6 @@
+This is a TO DO document for the =Uize.Dom.Basics= module.
+
+- Uize.Dom.Basics.isOnNodeTree can use the contains() method on DOM nodes (if available)
+- Uize.Dom.Basics.injectHtml can use the insertAdjacentHTML() method on DOM nodes (if available)
+- Uize.Dom.Basics.getDimensions can use the getBoundingClientRect() method on DOM nodes (if available)
+- Uize.Dom.Basics.getCoords can use the getBoundingClientRect() method on DOM nodes (if avaialble)
