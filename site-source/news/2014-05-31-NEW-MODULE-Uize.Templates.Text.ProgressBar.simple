@@ -1,0 +1,103 @@
+The new =Uize.Templates.Text.ProgressBar= JavaScript Template module lets you generate a text progress bar string that can be used when outputting to logs, consoles, terminals, etc.
+
+The =Uize.Templates.Text.ProgressBar= module is a simple template module that can be useful in situations where you need to display a visual progress or level indicator using purely text characters. For instance, you may wish to display progress updates in a console or terminal window for an automation script that may be long-running, such as a build script. In a console you have only plain text at your disposal. The following example illustrates the possible console output from a hypothetical build script that processes a set of files and builds a package archive file...
+
+LOG OUTPUT EXAMPLE
+....................................................................
+|█░░░░░░░░░| Prepared job, 8 files to process under ~/files
+|▓█░░░░░░░░| Processed file: ~/files/foo.txt
+|▓▓█░░░░░░░| Processed file: ~/files/bar.txt
+|▓▓▓█░░░░░░| Processed file: ~/files/baz.txt
+|▓▓▓▓█░░░░░| Processed file: ~/files/qux.txt
+|▓▓▓▓▓█░░░░| Processed file: ~/files/more/foo.txt
+|▓▓▓▓▓▓█░░░| Processed file: ~/files/more/bar.txt
+|▓▓▓▓▓▓▓█░░| Processed file: ~/files/more/baz.txt
+|▓▓▓▓▓▓▓▓█░| Processed file: ~/files/more/qux.txt
+|▓▓▓▓▓▓▓▓▓█| Processed 8 files and built package ~/files.zip
+....................................................................
+
+As the build script progresses through its steps, it uses the =Uize.Templates.Text.ProgressBar= module when constructing the progress update messages it outputs to the console.
+
+Examples
+	The following examples demonstrate the various ways that output from the =Uize.Templates.Text.ProgressBar.process= method can be customized by using the different properties supported by its =inputOBJ= argument.
+
+	Indicating a Progress of 0%
+		A progress of 0% can be indicated by specifying the value =0= for the =progress= property of the =inputOBJ= argument.
+
+		EXAMPLE
+		.......................................................
+		Uize.Templates.Text.ProgressBar.process ({progress:0});
+		.......................................................
+
+		OUTPUT
+		........................................................................................
+		|█░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░|
+		........................................................................................
+
+	Indicating a Progress of 50%
+		A progress of 50% can be indicated by specifying the value =.5= for the =progress= property of the =inputOBJ= argument.
+
+		EXAMPLE
+		........................................................
+		Uize.Templates.Text.ProgressBar.process ({progress:.5});
+		........................................................
+
+		OUTPUT
+		........................................................................................
+		|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓█░░░░░░░░░░░░░░░░░░░░░░░░|
+		........................................................................................
+
+	Indicating a Progress of 100%
+		A progress of 100% can be indicated by specifying the value =1= for the =progress= property of the =inputOBJ= argument.
+
+		EXAMPLE
+		........................................................
+		Uize.Templates.Text.ProgressBar.process ({progress:.5});
+		........................................................
+
+		OUTPUT
+		........................................................................................
+		|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓█|
+		........................................................................................
+
+	Specifying a Custom Track Length
+		A custom track length can be achieved by specifying the desired track length (measured in characters) for the =trackLength= property of the =inputOBJ= argument.
+
+		EXAMPLE
+		.......................................................................
+		Uize.Templates.Text.ProgressBar.process ({trackLength:10,progress:.5});
+		.......................................................................
+
+		OUTPUT
+		...................
+		|▓▓▓▓▓█░░░░|
+		...................
+
+	Specifying Custom Characters
+		The appearance of the progress bar can be controlled by specifying values for the =endsChar=, =fullHeadChar=, and =emptyChar= properties of the =inputOBJ= argument.
+
+		EXAMPLE
+		.......................................................................
+		Uize.Templates.Text.ProgressBar.process ({
+			endsChar:'|',
+			fullHeadChar:'#',
+			fullChar:'=',
+			emptyChar:'-',
+			trackLength:20,
+			progress:.75
+		});
+		.......................................................................
+
+		OUTPUT
+		......................
+		|==============#-----|
+		......................
+
+Comprehensively Documented and Tested
+	The =Uize.Templates.Text.ProgressBar= module is comprehensively [[Uize.Templates.Text.ProgressBar][documented]] and has exhaustive unit tests in the =Uize.Test.Uize.Templates.Text.ProgressBar= test module.
+
+....................................................................................
+<< metadata >>
+
+title: 2014-05-31 - NEW MODULE: Uize.Templates.Text.ProgressBar
+....................................................................................
