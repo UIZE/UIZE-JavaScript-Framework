@@ -85,6 +85,10 @@ Uize.module ({
 							'MyNamespace.MyClass.xFoo.Bar',
 							false
 						],
+						['A top level namespace that starts with a lowercase "x" and is followed by a capital letter is not considered to be an extension module name',
+							'xFoo',
+							false
+						],
 						['A module name where the last segment starts with a lowercase "x" but where the next character is a lowercase letter is not considered to be an extension module name',
 							'MyNamespace.MyClass.xfoo',
 							false
@@ -121,6 +125,10 @@ Uize.module ({
 						],
 						['A module name that contains a segment that starts with a lowercase "m" and is followed by a capital letter is not considered to be a mixin module name if the segment is not the last segment of the name',
 							'MyNamespace.MyClass.mFoo.Bar',
+							false
+						],
+						['A top level namespace that starts with a lowercase "m" and is followed by a capital letter is not considered to be a mixin module name',
+							'mFoo',
 							false
 						],
 						['A module name where the last segment starts with a lowercase "m" but where the next character is a lowercase letter is not considered to be a mixin module name',
