@@ -1,0 +1,118 @@
+The new =Uize.Util.ModuleNaming= module provides utility methods to help with following the various UIZE conventions for module naming.
+
+The UIZE JavaScript Framework follows certain conventions when it comes to the naming of modules, and these conventions are observed by various build scripts provided as part of the framework. The =Uize.Util.ModuleNaming= module provides a set of utility methods to make it easier for various build scripts and development tools to follow these conventions.
+
+Module Naming
+	A string value is considered to be a valid module name if it contains a period-delimited list of one or more JavaScript identifier names.
+
+	This means that, in order for a string to be considered a valid module name, it must be matched by the following regular expression...
+
+	REGULAR EXPRESSION
+	...........................................................
+	/^([a-zA-Z_$][a-zA-Z_$0-9]*)(\.[a-zA-Z_$][a-zA-Z_$0-9]*)*$/
+	...........................................................
+
+	The table below lists some examples of module names to illustrate how the basic convention for module naming covers a variety of different types of modules...
+
+	..................................................................................................
+	<< table >>
+
+	title: Examples of Module Names
+	data:
+	:| Module Name | Module Type | Notes |
+	:| MyNamespace | Namespace Module | top level namespace |
+	:| MyNamespace.MySubNamespace | Namespace Module | deeper level namespace |
+	:| MyNamespace.MyPackage | Package Module | capital first letter is recommended but not required |
+	:| MyNamespace.MyClass | Class Module | capital first letter is recommended but not required |
+	:| MyNamespace.xMyExtension | Extension Module | prefixed with lowercase "x" by convention |
+	:| MyNamespace.mMyMixin | Mixin Module | prefixed with lowercase "m" by convention |
+	:| MyNamespace.Test.MyNamespace.MyClass | Test Module | path under MyNamespace.Test is path of module that is tested by the test module |
+	..................................................................................................
+
+	As you will notice, additional conventions exist for denoting certain specific types of modules, such as extension modules (see `Extension Module Naming`), mixin modules (see `Mixin Module Naming`), and test modules (see `Test Module Naming`).
+
+	The =Uize.Util.ModuleNaming.isModuleName= static method can be used to test if a specified string is a module name, according to the aforementioned convention.
+
+Top Level Namespaces
+	A string is considered to be a top level namespace if it is a valid module name that contains only one segment.
+
+	EXAMPLES
+	...........
+	Uize
+	UizeSite
+	MyNamespace
+	...........
+
+	The =Uize.Util.ModuleNaming.getNamespace= static method can be used to obtain the top level namespace from a specified module name.
+
+	EXAMPLES
+	.................................................
+	<< table >>
+
+	data:
+	:| Module Name | Top Level Namespace |
+	:| Uize | Uize |
+	:| Uize.Color | Uize |
+	:| Uize.Widgets.Slider.Widget | Uize |
+	:| MyNamespace.MyClass.MySubClass | MyNamespace |
+	.................................................
+
+Extension Module Naming
+	A string is considered to be an extension module name if it is a valid module name that has more than one segment, and where the last segment starts with a lowercase "x" and is followed by a capital letter.
+
+	..................................................
+	<< table >>
+
+	title: Examples of Extension Module Names
+	data:
+	:| Module Being Extended | Extension Module Name |
+	:| Uize.Color | Uize.Color.xSvgColors |
+	:| Uize.Fade | Uize.Fade.xFactory |
+	:| Uize.Fx | Uize.Fx.xShadows |
+	..................................................
+
+	The =Uize.Util.ModuleNaming.isExtensionModule= static method can be used to test if a specified string is an extension module name.
+
+Mixin Module Naming
+	A string is considered to be a mixin module name if it is a valid module name that has more than one segment, and where the last segment starts with a lowercase "m" and is followed by a capital letter.
+
+	EXAMPLE
+	............................
+	MyNamespace.MyClass.mMyMixin
+	............................
+
+	The =Uize.Util.ModuleNaming.isMixinModule= static method can be used to test if a specified string is a mixin module name.
+
+Test Module Naming
+	A string is considered to be a test module name if it starts with a top level namespace, followed by the segment "Test", followed by a segment name that is identical to the top level namespace, followed by zero or more additional segments.
+
+	The methods of the =Uize.Util.ModuleNaming= module follow the convention that the name for a test module is derived from the name of the module it is intended to test, by using the top level namespace for that module as a prefix, appending the path segment ".Test.", and then finally appending the name of the module being tested.
+
+	This naming convention is best illustrated by the following table of examples...
+
+	.....................................................................................
+	<< table >>
+
+	title: Examples of Test Module Names
+	data:
+	:| Name of Module to Test | Name of Test Module |
+	:| Uize | Uize.Test.Uize |
+	:| Uize.Widget | Uize.Test.Uize.Widget |
+	:| MyNamespace.MyClass.MySubclass | MyNamespace.Test.MyNamespace.MyClass.MySubclass |
+	.....................................................................................
+
+	The following static methods are useful with respect to test module names...
+
+	- =Uize.Util.ModuleNaming.getModuleNameFromTestModuleName= - determines the name of the module being tested by a specified test module
+	- =Uize.Util.ModuleNaming.getTestModuleName= - determines the name that should be used for the test module for a specified module
+	- =Uize.Util.ModuleNaming.isTestModule= - determines if the specified module name is a test module name
+
+
+Comprehensively Documented and Tested
+	The =Uize.Util.ModuleNaming= module is comprehensively [[Uize.Util.ModuleNaming][documented]] and has exhaustive unit tests in the =Uize.Test.Uize.Util.ModuleNaming= test module.
+
+....................................................................................
+<< metadata >>
+
+title: 2014-06-03 - NEW MODULE: Uize.Util.ModuleNaming
+....................................................................................
