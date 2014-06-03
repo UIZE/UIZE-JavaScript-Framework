@@ -247,7 +247,7 @@ Uize.module ({
 						;
 						_fileSystem.writeFile ({
 							path:_resourceFileFullPath,
-							contents:m.serializeResourceFile (_resourceFileStrings)
+							contents:m.serializeResourceFile (_resourceFileStrings,_language)
 						});
 					}
 				);
