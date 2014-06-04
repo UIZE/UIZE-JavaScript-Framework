@@ -155,8 +155,6 @@ Advanced Topics
 
 				What constitutes a brand-specific resource file will vary by project and depend on the project definition. Typically, brand-specific resource files provide overrides for certain resource strings that need to be different for specific brands, so the number of brand-specific resource files is usually smaller than the total number of resource files. Moreover, different brands may have a differing number of brand-specific resource files.
 
-				The number of brand-specific resource files, expressed as a percentage of total resource files, is represented for convenience in the =brandSpecificResourceFilesPercent= property.
-
 ### Key Features
 	.
 
