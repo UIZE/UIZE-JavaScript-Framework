@@ -53,11 +53,41 @@ Uize.module ({
 		;
 
 		/*** Private Instance Methods ***/
-			function _calculateMetricsForLanguage (m,_language,_languageResources,_metricsFilePath) {
-				function _percent (_numerator,_denominator) {
-					return ((_numerator / _denominator) || 0) * 100;
-				}
+			function _calculateStringsInfoForLanguage (m,_language,_languageResources,_infoFilePath) {
 				var
+					_project = m.project,
+					_stringsInfo = []
+				;
+				Uize.forEach (
+					_languageResources,
+					function (_resourceFileStrings,_resourceFileSubPath) {
+						var _resourceFileIsBrandSpecific = m.isBrandResourceFile (_resourceFileSubPath);
+						_processStrings (
+							_resourceFileStrings,
+							function (_value,_path) {
+								_stringsInfo.push ({
+									path:[_resourceFileSubPath].concat (_path),
+									value:_value,
+									metrics:_getStringMetrics (m,_value),
+									isBrandSpecific:_resourceFileIsBrandSpecific || m.isBrandResourceString (_path,_value)
+								});
+								return _value;
+							}
+						);
+					}
+				);
+				_infoFilePath && _fileSystem.writeFile ({path:_infoFilePath,contents:Uize.Json.to (_stringsInfo)});
+
+				return _stringsInfo;
+			}
+
+			function _calculateMetricsForLanguage (m,_language,_languageResources,_metricsFilePath) {
+				var
+					_pathJsonSerializationOptions = {
+						quoteChar:'"',
+						indentChars:'',
+						linebreakChars:''
+					},
 					_project = m.project,
 					_totalResourceFiles = 0,
 					_totalBrandSpecificResourceFiles = 0,
@@ -70,110 +100,94 @@ Uize.module ({
 					_totalTokens = 0,
 					_totalTokenizedResourceStrings = 0,
 					_totalDupedResourceStrings = 0,
-					_currentResourceFileIsBrandSpecific,
 					_valuesLookup = {},
 					_dupedResourceStringsDetails = {},
-					_tokenUsage = {}
+					_tokenUsage = {},
+					_stringsInfo = _calculateStringsInfoForLanguage (
+						m,
+						_language,
+						_languageResources,
+						m._workingFolderPath + 'strings-info/' + _language + '.json'
+					)
 				;
 				Uize.forEach (
 					_languageResources,
 					function (_resourceFileStrings,_resourceFileSubPath) {
-						var
-							_wordCount = 0,
-							_brandSpecificWordCount = 0,
-							_charCount = 0,
-							_brandSpecificCharCount = 0
-						;
 						_totalResourceFiles++;
-						_totalBrandSpecificResourceFiles += (
-							_currentResourceFileIsBrandSpecific = m.isBrandResourceFile (_resourceFileSubPath)
-						);
-						_processStrings (
-							_resourceFileStrings,
-							function (_value,_path) {
-								/*** update information on duplicates ***/
-									var _stringFullPath = Uize.Json.to (
-										[_resourceFileSubPath].concat (_path),
-										{
-											quoteChar:'"',
-											indentChars:'',
-											linebreakChars:''
+						_totalBrandSpecificResourceFiles += m.isBrandResourceFile (_resourceFileSubPath);
+					}
+				);
+				Uize.forEach (
+					_stringsInfo,
+					function (_stringInfo) {
+						var
+							_path = _stringInfo.path,
+							_value = _stringInfo.value,
+							_stringFullPath = Uize.Json.to (_path,_pathJsonSerializationOptions)
+						;
+
+						/*** update information on duplicates ***/
+							if (_valuesLookup [_value]) {
+								_totalDupedResourceStrings++;
+								(
+									_dupedResourceStringsDetails [_value] ||
+									(_dupedResourceStringsDetails [_value] = [_valuesLookup [_value]])
+								).push (_stringFullPath);
+							} else {
+								_valuesLookup [_value] = _stringFullPath;
+							}
+
+						/*** get metrics for string ***/
+							var
+								_stringMetrics = _stringInfo.metrics,
+								_words = _stringMetrics.words,
+								_chars = _stringMetrics.chars,
+								_stringTokens = _stringMetrics.tokens,
+								_stringTokensLength = _stringTokens.length
+							;
+
+							/*** update general metrics ***/
+								_totalResourceStrings++;
+								_totalWordCount += _words;
+								_totalCharCount += _chars;
+								if (_stringInfo.isBrandSpecific) {
+									_totalBrandSpecificResourceStrings++;
+									_totalBrandSpecificWordCount += _words;
+									_totalBrandSpecificCharCount += _chars;
+								}
+
+							/*** update metrics on tokenized strings and token usage ***/
+								if (_stringTokensLength) {
+									Uize.forEach (
+										_stringTokens,
+										function (_tokenName) {
+											(_tokenUsage [_tokenName] || (_tokenUsage [_tokenName] = [])).push (
+												_stringFullPath
+											);
 										}
 									);
-									if (_valuesLookup [_value]) {
-										_totalDupedResourceStrings++;
-										(
-											_dupedResourceStringsDetails [_value] ||
-											(_dupedResourceStringsDetails [_value] = [_valuesLookup [_value]])
-										).push (_stringFullPath);
-									} else {
-										_valuesLookup [_value] = _stringFullPath;
-									}
-
-								/*** get metrics for string ***/
-									var
-										_stringMetrics = _getStringMetrics (m,_value),
-										_stringTokens = _stringMetrics.tokens,
-										_stringTokensLength = _stringTokens.length
-									;
-
-									/*** update general metrics ***/
-										_totalResourceStrings++;
-										_wordCount += _stringMetrics.words;
-										_charCount += _stringMetrics.chars;
-										if (_currentResourceFileIsBrandSpecific || m.isBrandResourceString (_path,_value)) {
-											_totalBrandSpecificResourceStrings++;
-											_brandSpecificWordCount += _stringMetrics.words;
-											_brandSpecificCharCount += _stringMetrics.chars;
-										}
-
-									/*** update metrics on tokenized strings and token usage ***/
-										if (_stringTokensLength) {
-											Uize.forEach (
-												_stringTokens,
-												function (_tokenName) {
-													(_tokenUsage [_tokenName] || (_tokenUsage [_tokenName] = [])).push (
-														_stringFullPath
-													);
-												}
-											);
-											_totalTokens += _stringTokensLength;
-											_totalTokenizedResourceStrings++;
-										}
-
-								return _value;
-							}
-						);
-						_totalWordCount += _wordCount;
-						_totalCharCount += _charCount;
-						_totalBrandSpecificWordCount += _brandSpecificWordCount;
-						_totalBrandSpecificCharCount += _brandSpecificCharCount;
+									_totalTokens += _stringTokensLength;
+									_totalTokenizedResourceStrings++;
+								}
 					}
 				);
 
 				var _metrics = {
 					resourceFiles:_totalResourceFiles,
 					brandSpecificResourceFiles:_totalBrandSpecificResourceFiles,
-					brandSpecificResourceFilesPercent:_percent (_totalBrandSpecificResourceFiles,_totalResourceFiles),
 					resourceStrings:_totalResourceStrings,
 					brandSpecificResourceStrings:_totalBrandSpecificResourceStrings,
-					brandSpecificResourceStringsPercent:
-						_percent (_totalBrandSpecificResourceStrings,_totalResourceStrings),
 					wordCount:_totalWordCount,
 					brandSpecificWordCount:_totalBrandSpecificWordCount,
-					brandSpecificWordCountPercent:_percent (_totalBrandSpecificWordCount,_totalWordCount),
 					charCount:_totalCharCount,
 					brandSpecificCharCount:_totalBrandSpecificCharCount,
-					brandSpecificCharCountPercent:_percent (_totalBrandSpecificCharCount,_totalCharCount),
 					tokens:_totalTokens,
 					tokenizedResourceStrings:_totalTokenizedResourceStrings,
-					tokenizedResourceStringsPercent:_percent (_totalTokenizedResourceStrings,_totalResourceStrings),
 					dupedResourceStrings:_totalDupedResourceStrings,
-					dupedResourceStringsPercent:_percent (_totalDupedResourceStrings,_totalResourceStrings),
 					dupedResourceStringsDetails:_dupedResourceStringsDetails,
 					tokenUsage:_tokenUsage
 				};
-				_fileSystem.writeFile ({path:_metricsFilePath,contents:Uize.Json.to (_metrics)});
+				_metricsFilePath && _fileSystem.writeFile ({path:_metricsFilePath,contents:Uize.Json.to (_metrics)});
 
 				return _metrics;
 			}
