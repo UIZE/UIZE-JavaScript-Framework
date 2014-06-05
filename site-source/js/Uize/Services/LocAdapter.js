@@ -70,7 +70,11 @@ Uize.module ({
 									value:_value,
 									metrics:_getStringMetrics (m,_value),
 									isBrandSpecific:_resourceFileIsBrandSpecific || m.isBrandResourceString (_path,_value),
-									hasHtml:m.stringHasHtml (_path,_value)
+									hasHtml:m.stringHasHtml (_path,_value),
+									isTranslatable:m.isTranslatableString ({
+										key:_path [_path.length - 1],
+										value:_value
+									})
 								});
 								return _value;
 							}
@@ -101,6 +105,7 @@ Uize.module ({
 					_totalTokens = 0,
 					_totalTokenizedResourceStrings = 0,
 					_totalHtmlResourceStrings = 0,
+					_totalNonTranslatableResourceStrings = 0,
 					_totalDupedResourceStrings = 0,
 					_valuesLookup = {},
 					_dupedResourceStringsDetails = {},
@@ -150,6 +155,7 @@ Uize.module ({
 							;
 
 							_stringInfo.hasHtml && _totalHtmlResourceStrings++;
+							_stringInfo.isTranslatable || _totalNonTranslatableResourceStrings++;
 
 							/*** update general metrics ***/
 								_totalResourceStrings++;
@@ -190,6 +196,7 @@ Uize.module ({
 					tokens:_totalTokens,
 					tokenizedResourceStrings:_totalTokenizedResourceStrings,
 					htmlResourceStrings:_totalHtmlResourceStrings,
+					nonTranslatableResourceStrings:_totalNonTranslatableResourceStrings,
 					dupedResourceStrings:_totalDupedResourceStrings,
 					dupedResourceStringsDetails:_dupedResourceStringsDetails,
 					tokenUsage:_tokenUsage,
@@ -706,6 +713,14 @@ Uize.module ({
 									'All':_metrics.resourceStrings,
 									'Non-HTML':_metrics.resourceStrings - _metrics.htmlResourceStrings,
 									'HTML':_metrics.htmlResourceStrings
+								}
+							}) + '\n' +
+							_breakdownTable ({
+								title:'Resource Strings (non-translatable)',
+								countByCategory:{
+									'All':_metrics.resourceStrings,
+									'Translatable':_metrics.resourceStrings - _metrics.nonTranslatableResourceStrings,
+									'Non-translatable':_metrics.nonTranslatableResourceStrings
 								}
 							}) + '\n' +
 							Uize.Templates.Text.Tables.Histogram.process ({
