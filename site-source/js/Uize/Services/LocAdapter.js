@@ -69,7 +69,8 @@ Uize.module ({
 									path:[_resourceFileSubPath].concat (_path),
 									value:_value,
 									metrics:_getStringMetrics (m,_value),
-									isBrandSpecific:_resourceFileIsBrandSpecific || m.isBrandResourceString (_path,_value)
+									isBrandSpecific:_resourceFileIsBrandSpecific || m.isBrandResourceString (_path,_value),
+									hasHtml:m.stringHasHtml (_path,_value)
 								});
 								return _value;
 							}
@@ -99,10 +100,12 @@ Uize.module ({
 					_totalBrandSpecificCharCount = 0,
 					_totalTokens = 0,
 					_totalTokenizedResourceStrings = 0,
+					_totalHtmlResourceStrings = 0,
 					_totalDupedResourceStrings = 0,
 					_valuesLookup = {},
 					_dupedResourceStringsDetails = {},
 					_tokenUsage = {},
+					_tokenHistogram = {},
 					_stringsInfo = _calculateStringsInfoForLanguage (
 						m,
 						_language,
@@ -146,6 +149,8 @@ Uize.module ({
 								_stringTokensLength = _stringTokens.length
 							;
 
+							_stringInfo.hasHtml && _totalHtmlResourceStrings++;
+
 							/*** update general metrics ***/
 								_totalResourceStrings++;
 								_totalWordCount += _words;
@@ -157,6 +162,7 @@ Uize.module ({
 								}
 
 							/*** update metrics on tokenized strings and token usage ***/
+								_tokenHistogram [_stringTokensLength] = (_tokenHistogram [_stringTokensLength] || 0) + 1;
 								if (_stringTokensLength) {
 									Uize.forEach (
 										_stringTokens,
@@ -183,9 +189,11 @@ Uize.module ({
 					brandSpecificCharCount:_totalBrandSpecificCharCount,
 					tokens:_totalTokens,
 					tokenizedResourceStrings:_totalTokenizedResourceStrings,
+					htmlResourceStrings:_totalHtmlResourceStrings,
 					dupedResourceStrings:_totalDupedResourceStrings,
 					dupedResourceStringsDetails:_dupedResourceStringsDetails,
-					tokenUsage:_tokenUsage
+					tokenUsage:_tokenUsage,
+					tokenHistogram:_tokenHistogram
 				};
 				_metricsFilePath && _fileSystem.writeFile ({path:_metricsFilePath,contents:Uize.Json.to (_metrics)});
 
@@ -369,6 +377,11 @@ Uize.module ({
 				isBrandResourceString:function (_resourceStringPath,_resourceStringText) {
 					// this method should be implemented by subclasses
 					return false;
+				},
+
+				stringHasHtml:function (_path,_value) {
+					// this method can be overridden by subclasses
+					return /<[^<]+>/.test (_value); // NOTE: this is not the most robust test, so probably RegExpComposition should be used
 				},
 
 				isTranslatableString:function (_stringInfo) {
@@ -636,14 +649,15 @@ Uize.module ({
 						m.stepCompleted ('calculated metrics for primary language');
 
 					/*** produce summary ***/
-						var _occurrencesByValueLookup = {};
-						Uize.forEach (
-							_metrics.dupedResourceStringsDetails,
-							function (_resourceStringDupes) {
-								var _dupeCount = _resourceStringDupes.length - 1;
-								_occurrencesByValueLookup [_dupeCount] = (_occurrencesByValueLookup [_dupeCount] || 0) + 1;
-							}
-						);
+						/*** compile data for duplicates histogram ***/
+							var _dupesHistogram = {};
+							Uize.forEach (
+								_metrics.dupedResourceStringsDetails,
+								function (_resourceStringDupes) {
+									var _dupeCount = _resourceStringDupes.length - 1;
+									_dupesHistogram [_dupeCount] = (_dupesHistogram [_dupeCount] || 0) + 1;
+								}
+							);
 
 						m.methodExecutionComplete (
 							_breakdownTable ({
@@ -679,11 +693,19 @@ Uize.module ({
 								}
 							}) + '\n' +
 							_breakdownTable ({
-								title:'Resource Strings (tokenized vs. non-tokenized)',
+								title:'Resource Strings (tokenized)',
 								countByCategory:{
 									'All':_metrics.resourceStrings,
 									'Non-tokenized':_metrics.resourceStrings - _metrics.tokenizedResourceStrings,
 									'Tokenized':_metrics.tokenizedResourceStrings
+								}
+							}) + '\n' +
+							_breakdownTable ({
+								title:'Resource Strings (HTML)',
+								countByCategory:{
+									'All':_metrics.resourceStrings,
+									'Non-HTML':_metrics.resourceStrings - _metrics.htmlResourceStrings,
+									'HTML':_metrics.htmlResourceStrings
 								}
 							}) + '\n' +
 							Uize.Templates.Text.Tables.Histogram.process ({
@@ -693,7 +715,16 @@ Uize.module ({
 									occurrences:'Occurrences',
 									total:'Total Duplicates'
 								},
-								occurrencesByValue:_occurrencesByValueLookup
+								occurrencesByValue:_dupesHistogram
+							}) + '\n' +
+							Uize.Templates.Text.Tables.Histogram.process ({
+								title:'Histogram of Resource String Tokenization',
+								columnTitles:{
+									count:'Tokens in String',
+									occurrences:'Strings',
+									total:'Total Tokens'
+								},
+								occurrencesByValue:_metrics.tokenHistogram
 							})
 						);
 
