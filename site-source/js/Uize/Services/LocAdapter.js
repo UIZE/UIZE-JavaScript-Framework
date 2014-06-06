@@ -746,26 +746,6 @@ Uize.module ({
 									total:'Total Tokens'
 								},
 								occurrencesByValue:_metrics.tokenHistogram
-							}) + '\n' +
-							Uize.Templates.Text.Tables.Histogram.process ({
-								title:'Histogram of Word Count',
-								columnTitles:{
-									count:'Word Count Range',
-									occurrences:'Strings',
-									total:'Total Word Count'
-								},
-								occurrencesByValue:_metrics.wordCountHistogram,
-								maxBuckets:10
-							}) + '\n' +
-							Uize.Templates.Text.Tables.Histogram.process ({
-								title:'Histogram of Char Count',
-								columnTitles:{
-									count:'Char Count Range',
-									occurrences:'Strings',
-									total:'Total Char Count'
-								},
-								occurrencesByValue:_metrics.charCountHistogram,
-								maxBuckets:10
 							})
 						);
 
