@@ -111,6 +111,8 @@ Uize.module ({
 					_dupedResourceStringsDetails = {},
 					_tokenUsage = {},
 					_tokenHistogram = {},
+					_wordCountHistogram = {},
+					_charCountHistogram = {},
 					_stringsInfo = _calculateStringsInfoForLanguage (
 						m,
 						_language,
@@ -166,6 +168,8 @@ Uize.module ({
 									_totalBrandSpecificWordCount += _words;
 									_totalBrandSpecificCharCount += _chars;
 								}
+								_wordCountHistogram [_words] = (_wordCountHistogram [_words] || 0) + 1;
+								_charCountHistogram [_chars] = (_charCountHistogram [_chars] || 0) + 1;
 
 							/*** update metrics on tokenized strings and token usage ***/
 								_tokenHistogram [_stringTokensLength] = (_tokenHistogram [_stringTokensLength] || 0) + 1;
@@ -200,7 +204,9 @@ Uize.module ({
 					dupedResourceStrings:_totalDupedResourceStrings,
 					dupedResourceStringsDetails:_dupedResourceStringsDetails,
 					tokenUsage:_tokenUsage,
-					tokenHistogram:_tokenHistogram
+					tokenHistogram:_tokenHistogram,
+					wordCountHistogram:_wordCountHistogram,
+					charCountHistogram:_charCountHistogram
 				};
 				_metricsFilePath && _fileSystem.writeFile ({path:_metricsFilePath,contents:Uize.Json.to (_metrics)});
 
@@ -740,6 +746,26 @@ Uize.module ({
 									total:'Total Tokens'
 								},
 								occurrencesByValue:_metrics.tokenHistogram
+							}) + '\n' +
+							Uize.Templates.Text.Tables.Histogram.process ({
+								title:'Histogram of Word Count',
+								columnTitles:{
+									count:'Word Count Range',
+									occurrences:'Strings',
+									total:'Total Word Count'
+								},
+								occurrencesByValue:_metrics.wordCountHistogram/*,
+								maxBuckets:10*/
+							}) + '\n' +
+							Uize.Templates.Text.Tables.Histogram.process ({
+								title:'Histogram of Char Count',
+								columnTitles:{
+									count:'Char Count Range',
+									occurrences:'Strings',
+									total:'Total Char Count'
+								},
+								occurrencesByValue:_metrics.charCountHistogram/*,
+								maxBuckets:10*/
 							})
 						);
 
