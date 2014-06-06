@@ -28,7 +28,7 @@ Uize.module ({
 	required:[
 		'Uize.Templates.Text.Table',
 		'Uize.Templates.Text.ProgressBar',
-		'Uize.Fade.xSeries'
+		'Uize.Data.Util'
 	],
 	builder:function () {
 		'use strict';
@@ -46,41 +46,43 @@ Uize.module ({
 					_occurrencesByValue = _input.occurrencesByValue,
 					_columnTitles = _input.columnTitles,
 					_values = Uize.keys (_occurrencesByValue),
-					_occurrences = Uize.values (_occurrencesByValue),
 					_minValue = Uize.min (_values),
 					_maxValue = Uize.max (_values),
-					_maxOccurrences = Uize.max (_occurrences),
 					_maxBuckets = Uize.toNumber (_input.maxBuckets,Infinity),
 					_rows
 				;
 				if (_maxBuckets > _values.length) {
 					_rows = Uize.map (
-						_values.sort (function (_valueA,_valueB) {return _valueA - _valueB}).reverse (),
+						_values.sort (function (_valueA,_valueB) {return _valueA - _valueB}),
 						function (_value) {
 							var _occurrencesForValue = _occurrencesByValue [_value];
 							return [_value,_occurrencesForValue,_value * _occurrencesForValue];
 						}
 					);
 				} else {
+					var _bucketSize = (_maxValue - _minValue + 1) / _maxBuckets;
 					_rows = Uize.map (
-						Uize.Fade.getSeries (_minValue,_maxValue + 1,_maxBuckets + 1,{quantization:1}),
-						function (_value,_key,_array) {
-							return [_value + '-' + (this [_key + 1] - 1),0,0];
+						_maxBuckets,
+						function (_value,_bucketNo) {
+							return [
+								Math.floor (_minValue + _bucketNo * _bucketSize) +
+								'-' +
+								(Math.floor (_minValue + (_bucketNo + 1) * _bucketSize) - 1),
+								0,
+								0
+							];
 						}
 					);
-					_rows.pop ();
-					var _bucketSize = (_maxValue - _minValue) / _maxBuckets;
 					Uize.forEach (
 						_occurrencesByValue,
 						function (_occurrencesForValue,_value) {
-							console.log ('>>>>>>>>>> ' + Math.round ((_value - _minValue) / _bucketSize));
-							var _row = _rows [Math.round ((_value - _minValue) / _bucketSize)];
+							var _row = _rows [Math.floor ((_value - _minValue) / _bucketSize)];
 							_row [1] += _occurrencesForValue;
 							_row [2] += _occurrencesForValue * _value;
 						}
 					);
-					console.log (_rows);
 				}
+				var _maxOccurrences = Uize.max (Uize.Data.Util.getColumn (_rows,1));
 				return Uize.Templates.Text.Table.process ({
 					title:_input.title,
 					columns:[
@@ -94,7 +96,7 @@ Uize.module ({
 										? (
 											_value + ' ' +
 											Uize.Templates.Text.ProgressBar.process ({
-												trackLength:Math.min (_maxOccurrences,50),
+												trackLength:Uize.constrain (_maxOccurrences,20,50),
 												endsChar:'',
 												fullHeadChar:'',
 												progress:_value / _maxOccurrences
@@ -106,7 +108,7 @@ Uize.module ({
 						},
 						{
 							title:_columnTitles.total,
-							align:'right',
+							align:'right'
 						}
 					],
 					rows:_rows.concat ([

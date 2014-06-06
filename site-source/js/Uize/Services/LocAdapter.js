@@ -754,8 +754,8 @@ Uize.module ({
 									occurrences:'Strings',
 									total:'Total Word Count'
 								},
-								occurrencesByValue:_metrics.wordCountHistogram/*,
-								maxBuckets:10*/
+								occurrencesByValue:_metrics.wordCountHistogram,
+								maxBuckets:10
 							}) + '\n' +
 							Uize.Templates.Text.Tables.Histogram.process ({
 								title:'Histogram of Char Count',
@@ -764,8 +764,8 @@ Uize.module ({
 									occurrences:'Strings',
 									total:'Total Char Count'
 								},
-								occurrencesByValue:_metrics.charCountHistogram/*,
-								maxBuckets:10*/
+								occurrencesByValue:_metrics.charCountHistogram,
+								maxBuckets:10
 							})
 						);
 
