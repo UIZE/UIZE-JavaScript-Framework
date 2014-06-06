@@ -27,7 +27,8 @@ Uize.module ({
 	name:'Uize.Templates.Text.Tables.Histogram',
 	required:[
 		'Uize.Templates.Text.Table',
-		'Uize.Templates.Text.ProgressBar'
+		'Uize.Templates.Text.ProgressBar',
+		'Uize.Fade.xSeries'
 	],
 	builder:function () {
 		'use strict';
@@ -49,14 +50,37 @@ Uize.module ({
 					_minValue = Uize.min (_values),
 					_maxValue = Uize.max (_values),
 					_maxOccurrences = Uize.max (_occurrences),
+					_maxBuckets = Uize.toNumber (_input.maxBuckets,Infinity),
+					_rows
+				;
+				if (_maxBuckets > _values.length) {
 					_rows = Uize.map (
 						_values.sort (function (_valueA,_valueB) {return _valueA - _valueB}).reverse (),
 						function (_value) {
 							var _occurrencesForValue = _occurrencesByValue [_value];
 							return [_value,_occurrencesForValue,_value * _occurrencesForValue];
 						}
-					)
-				;
+					);
+				} else {
+					_rows = Uize.map (
+						Uize.Fade.getSeries (_minValue,_maxValue + 1,_maxBuckets + 1,{quantization:1}),
+						function (_value,_key,_array) {
+							return [_value + '-' + (this [_key + 1] - 1),0,0];
+						}
+					);
+					_rows.pop ();
+					var _bucketSize = (_maxValue - _minValue) / _maxBuckets;
+					Uize.forEach (
+						_occurrencesByValue,
+						function (_occurrencesForValue,_value) {
+							console.log ('>>>>>>>>>> ' + Math.round ((_value - _minValue) / _bucketSize));
+							var _row = _rows [Math.round ((_value - _minValue) / _bucketSize)];
+							_row [1] += _occurrencesForValue;
+							_row [2] += _occurrencesForValue * _value;
+						}
+					);
+					console.log (_rows);
+				}
 				return Uize.Templates.Text.Table.process ({
 					title:_input.title,
 					columns:[
