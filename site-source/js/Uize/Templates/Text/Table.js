@@ -123,11 +123,11 @@ Uize.module ({
 										return _pad (_column,_columnMaxWidths [_columnNo],_columns [_columnNo].align);
 									}
 								).join (' | ') +
-								' |'
+								' |\n'
 							);
 						}
-					).join ('\n' + _rowSeparatorLine + '\n') +
-					'\n' + _topAndBottomLine + '\n'
+					).join (_rowSeparatorLine + '\n') +
+					_topAndBottomLine + '\n'
 				);
 			}
 		});
