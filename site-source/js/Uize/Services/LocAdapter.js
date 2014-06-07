@@ -822,10 +822,12 @@ Uize.module ({
 
 					/*** analyze resource string usage ***/
 						var
+							_stringIdLookup = {},
 							_unreferenced = [],
 							_references = {},
 							_multiReferenced = {},
-							_referencesHistogram = {}
+							_referencesHistogram = {},
+							_trueValue = {}
 						;
 						Uize.Data.Flatten.flatten (
 							_primaryLanguageResources,
@@ -835,6 +837,7 @@ Uize.module ({
 									_stringReferences = _allReferencesLookup [_stringId],
 									_stringReferenceCount = _stringReferences ? _stringReferences.length : 0
 								;
+								_stringIdLookup [_stringId] = _trueValue;
 								if (_stringReferenceCount) {
 									_references [_stringId] = _stringReferences;
 									if (_stringReferenceCount > 1)
@@ -851,14 +854,15 @@ Uize.module ({
 						m.stepCompleted ('analyzed resource usage');
 
 					/*** references to missing resource strings ***/
-						/*
+						var _missingStrings = {};
 						Uize.forEach (
 							_allReferencesLookup,
 							function (_stringReferences,_stringId) {
-								if (!)
+								if (_stringIdLookup [_stringId] != _trueValue)
+									_missingStrings [_stringId] = _stringReferences
+								;
 							}
 						);
-						*/
 
 					/*** write report file ***/
 						var _usageReportFilePath = m.workingFolderPath + 'metrics/usage-report.json';
@@ -869,7 +873,8 @@ Uize.module ({
 								multiReferenced:_multiReferenced,
 								references:_references,
 								referencesByCodeFile:_stringsReferencesByCodeFile,
-								referencesHistogram:_referencesHistogram
+								referencesHistogram:_referencesHistogram,
+								missingStrings:_missingStrings
 							})
 						});
 						m.stepCompleted ('created usage report file: ' + _usageReportFilePath);
