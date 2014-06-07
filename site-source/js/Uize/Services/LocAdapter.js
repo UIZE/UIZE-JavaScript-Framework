@@ -824,23 +824,28 @@ Uize.module ({
 						var
 							_unreferenced = [],
 							_references = {},
-							_multiReferenced = {}
+							_multiReferenced = {},
+							_referencesHistogram = {}
 						;
 						Uize.Data.Flatten.flatten (
 							_primaryLanguageResources,
 							function (_path) {
 								var
 									_stringId = _path.slice (1).join ('.'),
-									_stringReferences = _allReferencesLookup [_stringId]
+									_stringReferences = _allReferencesLookup [_stringId],
+									_stringReferenceCount = _stringReferences ? _stringReferences.length : 0
 								;
-								if (_stringReferences) {
+								if (_stringReferenceCount) {
 									_references [_stringId] = _stringReferences;
-									if (_stringReferences.length > 1)
-										_multiReferenced [_stringId] = _stringReferences.length
+									if (_stringReferenceCount > 1)
+										_multiReferenced [_stringId] = _stringReferenceCount
 									;
 								} else {
 									_unreferenced.push (_stringId);
 								}
+								_referencesHistogram [_stringReferenceCount] =
+									(_referencesHistogram [_stringReferenceCount] || 0) + 1
+								;
 							}
 						);
 						m.stepCompleted ('analyzed resource usage');
@@ -853,10 +858,37 @@ Uize.module ({
 								unreferenced:_unreferenced,
 								multiReferenced:_multiReferenced,
 								references:_references,
-								referencesByCodeFile:_stringsReferencesByCodeFile
+								referencesByCodeFile:_stringsReferencesByCodeFile,
+								referencesHistogram:_referencesHistogram
 							})
 						});
 						m.stepCompleted ('created usage report file: ' + _usageReportFilePath);
+
+					/*** produce summary ***/
+						var
+							_referencesValues = Uize.values (_references),
+							_referencesValuesLength = _referencesValues.length,
+							_unreferencedLength = _unreferenced.length
+						;
+						m.methodExecutionComplete (
+							_breakdownTable ({
+								title:'Resource Strings',
+								countByCategory:{
+									'All':_unreferencedLength + _referencesValuesLength,
+									'Referenced':_referencesValuesLength,
+									'Unreferenced':_unreferencedLength
+								}
+							}) + '\n' +
+							Uize.Templates.Text.Tables.Histogram.process ({
+								title:'Histogram of String References',
+								columnTitles:{
+									count:'References',
+									occurrences:'Strings',
+									total:'Total References'
+								},
+								occurrencesByValue:_referencesHistogram
+							})
+						);
 
 					_callback ();
 				},
