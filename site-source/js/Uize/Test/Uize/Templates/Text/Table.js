@@ -555,7 +555,7 @@ Uize.module ({
 								],
 								['A column formatter can be specified in the form of a value transformer expression string',
 									{
-										title:'Table',
+										title:'Price Comparisons',
 										columns:[
 											{title:'Description'},
 											{
@@ -576,7 +576,7 @@ Uize.module ({
 										]
 									},
 									'+-----------------------------------------------------+\n' +
-									'|                        Table                        |\n' +
+									'|                  Price Comparisons                  |\n' +
 									'+-----------------------------------------------------+\n' +
 									'|  Description   | Price (US Dollars) | Inflation (%) |\n' +
 									'|----------------+--------------------+---------------|\n' +
