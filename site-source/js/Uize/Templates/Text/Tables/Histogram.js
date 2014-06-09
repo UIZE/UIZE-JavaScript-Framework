@@ -28,17 +28,11 @@ Uize.module ({
 	required:[
 		'Uize.Templates.Text.Table',
 		'Uize.Templates.Text.ProgressBar',
-		'Uize.Data.Util'
+		'Uize.Data.Util',
+		'Uize.Array.Util'
 	],
 	builder:function () {
 		'use strict';
-
-		/*** Utiilty Functions ***/
-			function _sum (_array) {
-				var _result = 0;
-				Uize.forEach (_array,function (_value) {_result += _value});
-				return _result;
-			}
 
 		return Uize.package ({
 			process:function (_input) {
@@ -115,7 +109,7 @@ Uize.module ({
 						[
 							'All (' + _minValue + '-' + _maxValue + ')',
 							undefined,
-							_sum (Uize.Data.Util.getColumn (_rows,2))
+							Uize.Array.Util.sum (Uize.Data.Util.getColumn (_rows,2))
 						]
 					])
 				});

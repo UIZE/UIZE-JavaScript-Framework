@@ -269,7 +269,21 @@ Uize.module ({
 						],
 						null,
 						{cloneArguments:true}
-					]
+					],
+					['Uize.Array.Util.sum',[
+						['The sum of an array with no elements is 0',
+							[[]],
+							0
+						],
+						['The sum of an array with multiple elements is computed correctly',
+							[[1,2,3,4,5,6,7,8,9,10]],
+							55
+						],
+						['The elements of the array being summed are coerced to numbers when calculating the sum',
+							[['1','2','3','4','5','6','7','8','9','10']],
+							55
+						]
+					]]
 				])
 			]
 		});
