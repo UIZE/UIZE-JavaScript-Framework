@@ -117,6 +117,9 @@ NEW MODULE: Uize.Oop.mTreeInheritance
 	- update documentation in Uize.Widget class to refer to reference for =Uize.Oop.mTreeInheritance= module
 	- write news announcement
 
+NEW METHOD: Uize.Array.Util.sum
+	.
+
 Uize.Node Modules Deprecated
 
 	DEPRECATED
