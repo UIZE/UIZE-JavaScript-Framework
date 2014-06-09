@@ -235,6 +235,7 @@ Uize.module ({
 	name:'Uize.Templates.Text.Table',
 	required:[
 		'Uize.Data.Util',
+		'Uize.Array.Util',
 		'Uize.Str.Repeat'
 	],
 	builder:function () {
@@ -294,6 +295,27 @@ Uize.module ({
 							}
 						)
 					;
+
+					/*** distribute extra padding to columns, if title width expands table width ***/
+						var
+							_columnsLength = _columns.length,
+							_tableWidthPerTitle = _title ? 4 + _title.length : 0,
+							_tableWidthPerColumns = 4 + Uize.Array.Util.sum (_columnMaxWidths) + (_columnsLength - 1) * 3,
+							_paddingToDistribute = _tableWidthPerTitle - _tableWidthPerColumns,
+							_paddingDistributed = 0
+						;
+						if (_paddingToDistribute > 0) {
+							Uize.forEach (
+								_columnMaxWidths,
+								function (_maxWidth,_columnNo) {
+									var _newPaddingDistributed = Math.round (
+										_paddingToDistribute * (_columnNo + 1) / _columnsLength
+									);
+									_columnMaxWidths [_columnNo] = _maxWidth + _newPaddingDistributed - _paddingDistributed;
+									_paddingDistributed = _newPaddingDistributed;
+								}
+							);
+						}
 
 				/*** produce row dividers ***/
 					var

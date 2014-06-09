@@ -286,6 +286,31 @@ Uize.module ({
 									'| qux qux qux qux |\n' +
 									'+-----------------+\n'
 								],
+								['When a table\'s title is wider than the maximum width of all the columns, then the table is expanded to fit the title and the difference is distributed evenly across the columns',
+									{
+										title:'This is an extremely long title for this table',
+										columns:[{title:'Col 1'},{title:'Col 2'},{title:'Col 3'}],
+										rows:[
+											['Foo 1','Foo 2','Foo 3'],
+											['Bar 1','Bar 2','Bar 3'],
+											['Baz 1','Baz 2','Baz 3'],
+											['Qux 1','Qux 2','Qux 3']
+										]
+									},
+									'+------------------------------------------------+\n' +
+									'| This is an extremely long title for this table |\n' +
+									'+------------------------------------------------+\n' +
+									'|     Col 1     |     Col 2      |     Col 3     |\n' +
+									'|---------------+----------------+---------------|\n' +
+									'| Foo 1         | Foo 2          | Foo 3         |\n' +
+									'|---------------+----------------+---------------|\n' +
+									'| Bar 1         | Bar 2          | Bar 3         |\n' +
+									'|---------------+----------------+---------------|\n' +
+									'| Baz 1         | Baz 2          | Baz 3         |\n' +
+									'|---------------+----------------+---------------|\n' +
+									'| Qux 1         | Qux 2          | Qux 3         |\n' +
+									'+------------------------------------------------+\n'
+								],
 
 							/*** tests for column alignment ***/
 								['Column data is left-aligned, by default, when alignment is not explicitly specified',
