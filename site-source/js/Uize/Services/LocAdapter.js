@@ -52,6 +52,18 @@ Uize.module ({
 				_sacredEmptyArray = []
 		;
 
+		/*** Utility Functions ***/
+			function _twoGroupBreakdownTable (_title,_groupATitle,_groupACount,_groupBTitle,_groupBCount) {
+				return _breakdownTable ({
+					title:_title,
+					countByCategory:Uize.pairUp (
+						'All',_groupACount + _groupBCount,
+						_groupATitle,_groupACount,
+						_groupBTitle,_groupBCount
+					)
+				});
+			}
+
 		/*** Private Instance Methods ***/
 			function _calculateStringsInfoForLanguage (m,_language,_languageResources,_infoFilePath) {
 				var
@@ -65,16 +77,21 @@ Uize.module ({
 						_processStrings (
 							_resourceFileStrings,
 							function (_value,_path) {
+								var
+									_isTranslatable = m.isTranslatableString ({
+										key:_path [_path.length - 1],
+										value:_value
+									}),
+									_stringMetrics = _getStringMetrics (m,_value)
+								;
 								_stringsInfo.push ({
 									path:[_resourceFileSubPath].concat (_path),
 									value:_value,
-									metrics:_getStringMetrics (m,_value),
+									metrics:_stringMetrics,
 									isBrandSpecific:_resourceFileIsBrandSpecific || m.isBrandResourceString (_path,_value),
 									hasHtml:m.stringHasHtml (_path,_value),
-									isTranslatable:m.isTranslatableString ({
-										key:_path [_path.length - 1],
-										value:_value
-									})
+									isLong:_isTranslatable && m.isStringLong (_stringMetrics),
+									isTranslatable:_isTranslatable
 								});
 								return _value;
 							}
@@ -105,6 +122,7 @@ Uize.module ({
 					_totalTokens = 0,
 					_totalTokenizedResourceStrings = 0,
 					_totalHtmlResourceStrings = 0,
+					_totalLongResourceStrings = 0,
 					_totalNonTranslatableResourceStrings = 0,
 					_totalDupedResourceStrings = 0,
 					_valuesLookup = {},
@@ -157,6 +175,7 @@ Uize.module ({
 							;
 
 							_stringInfo.hasHtml && _totalHtmlResourceStrings++;
+							_stringInfo.isLong && _totalLongResourceStrings++;
 							_stringInfo.isTranslatable || _totalNonTranslatableResourceStrings++;
 
 							/*** update general metrics ***/
@@ -200,6 +219,7 @@ Uize.module ({
 					tokens:_totalTokens,
 					tokenizedResourceStrings:_totalTokenizedResourceStrings,
 					htmlResourceStrings:_totalHtmlResourceStrings,
+					longResourceStrings:_totalLongResourceStrings,
 					nonTranslatableResourceStrings:_totalNonTranslatableResourceStrings,
 					dupedResourceStrings:_totalDupedResourceStrings,
 					dupedResourceStringsDetails:_dupedResourceStringsDetails,
@@ -395,6 +415,16 @@ Uize.module ({
 				stringHasHtml:function (_path,_value) {
 					// this method can be overridden by subclasses
 					return /<[^<]+>/.test (_value); // NOTE: this is not the most robust test, so probably RegExpComposition should be used
+				},
+
+				isStringLong:function (_stringMetrics) {
+					// this method can be overridden by subclasses
+					return _stringMetrics.words > 50 || _stringMetrics.chars > 500;
+				},
+
+				isStringKeyValid:function (_path) {
+					// this method can be overridden by subclasses
+					return true;
 				},
 
 				isTranslatableString:function (_stringInfo) {
@@ -673,62 +703,51 @@ Uize.module ({
 							);
 
 						m.methodExecutionComplete (
-							_breakdownTable ({
-								title:'Resource Files',
-								countByCategory:{
-									'All':_metrics.resourceFiles,
-									'Non Brand-specific':_metrics.resourceFiles - _metrics.brandSpecificResourceFiles,
-									'Brand-specific':_metrics.brandSpecificResourceFiles
-								}
-							}) + '\n' +
-							_breakdownTable ({
-								title:'Resource Strings',
-								countByCategory:{
-									'All':_metrics.resourceStrings,
-									'Non Brand-specific':_metrics.resourceStrings - _metrics.brandSpecificResourceStrings,
-									'Brand-specific':_metrics.brandSpecificResourceStrings
-								}
-							}) + '\n' +
-							_breakdownTable ({
-								title:'Word Count',
-								countByCategory:{
-									'All':_metrics.wordCount,
-									'Non Brand-specific':_metrics.wordCount - _metrics.brandSpecificWordCount,
-									'Brand-specific':_metrics.brandSpecificWordCount
-								}
-							}) + '\n' +
-							_breakdownTable ({
-								title:'Character Count',
-								countByCategory:{
-									'All':_metrics.charCount,
-									'Non Brand-specific':_metrics.charCount - _metrics.brandSpecificCharCount,
-									'Brand-specific':_metrics.brandSpecificCharCount
-								}
-							}) + '\n' +
-							_breakdownTable ({
-								title:'Resource Strings (tokenized)',
-								countByCategory:{
-									'All':_metrics.resourceStrings,
-									'Non-tokenized':_metrics.resourceStrings - _metrics.tokenizedResourceStrings,
-									'Tokenized':_metrics.tokenizedResourceStrings
-								}
-							}) + '\n' +
-							_breakdownTable ({
-								title:'Resource Strings (HTML)',
-								countByCategory:{
-									'All':_metrics.resourceStrings,
-									'Non-HTML':_metrics.resourceStrings - _metrics.htmlResourceStrings,
-									'HTML':_metrics.htmlResourceStrings
-								}
-							}) + '\n' +
-							_breakdownTable ({
-								title:'Resource Strings (non-translatable)',
-								countByCategory:{
-									'All':_metrics.resourceStrings,
-									'Translatable':_metrics.resourceStrings - _metrics.nonTranslatableResourceStrings,
-									'Non-translatable':_metrics.nonTranslatableResourceStrings
-								}
-							}) + '\n' +
+							_twoGroupBreakdownTable (
+								'Resource Files',
+								'Non Brand-specific',_metrics.resourceFiles - _metrics.brandSpecificResourceFiles,
+								'Brand-specific',_metrics.brandSpecificResourceFiles
+							) + '\n' +
+							_twoGroupBreakdownTable (
+								'Resource Files',
+								'Non Brand-specific',_metrics.resourceFiles - _metrics.brandSpecificResourceFiles,
+								'Brand-specific',_metrics.brandSpecificResourceFiles
+							) + '\n' +
+							_twoGroupBreakdownTable (
+								'Resource Strings',
+								'Non Brand-specific',_metrics.resourceStrings - _metrics.brandSpecificResourceStrings,
+								'Brand-specific',_metrics.brandSpecificResourceStrings
+							) + '\n' +
+							_twoGroupBreakdownTable (
+								'Word Count',
+								'Non Brand-specific',_metrics.wordCount - _metrics.brandSpecificWordCount,
+								'Brand-specific',_metrics.brandSpecificWordCount
+							) + '\n' +
+							_twoGroupBreakdownTable (
+								'Character Count',
+								'Non Brand-specific',_metrics.charCount - _metrics.brandSpecificCharCount,
+								'Brand-specific',_metrics.brandSpecificCharCount
+							) + '\n' +
+							_twoGroupBreakdownTable (
+								'Resource Strings (tokenized)',
+								'Non-tokenized',_metrics.resourceStrings - _metrics.tokenizedResourceStrings,
+								'Tokenized',_metrics.tokenizedResourceStrings
+							) + '\n' +
+							_twoGroupBreakdownTable (
+								'Resource Strings (HTML)',
+								'Non-HTML',_metrics.resourceStrings - _metrics.htmlResourceStrings,
+								'HTML',_metrics.htmlResourceStrings
+							) + '\n' +
+							_twoGroupBreakdownTable (
+								'Resource Strings (long)',
+								'Normal',_metrics.resourceStrings - _metrics.longResourceStrings,
+								'Long',_metrics.longResourceStrings
+							) + '\n' +
+							_twoGroupBreakdownTable (
+								'Resource Strings (non-translatable)',
+								'Translatable',_metrics.resourceStrings - _metrics.nonTranslatableResourceStrings,
+								'Non-translatable',_metrics.nonTranslatableResourceStrings
+							) + '\n' +
 							Uize.Templates.Text.Tables.Histogram.process ({
 								title:'Histogram of Resource String Duplicates',
 								columnTitles:{
@@ -886,14 +905,11 @@ Uize.module ({
 							_unreferencedLength = _unreferenced.length
 						;
 						m.methodExecutionComplete (
-							_breakdownTable ({
-								title:'Resource Strings',
-								countByCategory:{
-									'All':_unreferencedLength + _referencesValuesLength,
-									'Referenced':_referencesValuesLength,
-									'Unreferenced':_unreferencedLength
-								}
-							}) + '\n' +
+							_twoGroupBreakdownTable (
+								'Resource Strings',
+								'Referenced',_referencesValuesLength,
+								'Unreferenced',_unreferencedLength
+							) + '\n' +
 							Uize.Templates.Text.Tables.Histogram.process ({
 								title:'Histogram of String References',
 								columnTitles:{
