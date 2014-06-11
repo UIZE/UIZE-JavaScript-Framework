@@ -94,9 +94,6 @@ Uize.module ({
 
 					if (_xmlHttpRequest.upload) { // test if XHR2
 					  _xmlHttpRequest.onprogress = function (_event) {
-					    if (_event.lengthComputable) {
-					      console.log(Math.round(100 * _event.loaded / _event.total));
-					    }
 					    // Pass on the event obj with our event name
 					    _event.name = 'XHR Progress';
 					    m.fire(_event);
