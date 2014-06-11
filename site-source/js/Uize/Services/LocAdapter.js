@@ -84,6 +84,21 @@ Uize.module ({
 									}),
 									_stringMetrics = _getStringMetrics (m,_value)
 								;
+
+								/*** check for weak tokens ***/
+									for (
+										var
+											_tokens = _stringMetrics.tokens,
+											_tokenNo = _tokens.length,
+											_hasWeakTokens = false
+										;
+										!_hasWeakTokens && --_tokenNo >= 0;
+									) {
+										if (m.isTokenWeak (_tokens [_tokenNo]))
+											_hasWeakTokens = true
+										;
+									}
+
 								_stringsInfo.push ({
 									path:[_resourceFileSubPath].concat (_path),
 									value:_value,
@@ -92,6 +107,7 @@ Uize.module ({
 									hasHtml:m.stringHasHtml (_path,_value),
 									isLong:_isTranslatable && m.isStringLong (_stringMetrics),
 									isKeyValid:m.isStringKeyValid (_path),
+									hasWeakTokens:_hasWeakTokens,
 									isTranslatable:_isTranslatable
 								});
 								return _value;
@@ -125,6 +141,7 @@ Uize.module ({
 					_totalHtmlResourceStrings = 0,
 					_totalLongResourceStrings = 0,
 					_totalInvalidKeyResourceStrings = 0,
+					_totalWeakTokenResourceStrings = 0,
 					_totalNonTranslatableResourceStrings = 0,
 					_totalDupedResourceStrings = 0,
 					_valuesLookup = {},
@@ -179,6 +196,7 @@ Uize.module ({
 							_stringInfo.hasHtml && _totalHtmlResourceStrings++;
 							_stringInfo.isLong && _totalLongResourceStrings++;
 							_stringInfo.isKeyValid || _totalInvalidKeyResourceStrings++;
+							_stringInfo.hasWeakTokens && _totalWeakTokenResourceStrings++;
 							_stringInfo.isTranslatable || _totalNonTranslatableResourceStrings++;
 
 							/*** update general metrics ***/
@@ -224,6 +242,7 @@ Uize.module ({
 					htmlResourceStrings:_totalHtmlResourceStrings,
 					longResourceStrings:_totalLongResourceStrings,
 					invalidKeyResourceStrings:_totalInvalidKeyResourceStrings,
+					weakTokenResourceStrings:_totalWeakTokenResourceStrings,
 					nonTranslatableResourceStrings:_totalNonTranslatableResourceStrings,
 					dupedResourceStrings:_totalDupedResourceStrings,
 					dupedResourceStringsDetails:_dupedResourceStringsDetails,
@@ -429,6 +448,11 @@ Uize.module ({
 				isStringKeyValid:function (_path) {
 					// this method can be overridden by subclasses
 					return true;
+				},
+
+				isTokenWeak:function (_tokenName) {
+					// this method can be overridden by subclasses
+					return _tokenName.length < 3 || /^\d+$/.test (_tokenName);
 				},
 
 				isTranslatableString:function (_stringInfo) {
@@ -751,6 +775,11 @@ Uize.module ({
 								'Resource Strings (invalid keys)',
 								'Valid Keys',_metrics.resourceStrings - _metrics.invalidKeyResourceStrings,
 								'Invalid Keys',_metrics.invalidKeyResourceStrings
+							) + '\n' +
+							_twoGroupBreakdownTable (
+								'Resource Strings (weak tokens)',
+								'Only Strong Tokens',_metrics.tokenizedResourceStrings - _metrics.weakTokenResourceStrings,
+								'Have Weak Tokens',_metrics.weakTokenResourceStrings
 							) + '\n' +
 							_twoGroupBreakdownTable (
 								'Resource Strings (non-translatable)',
