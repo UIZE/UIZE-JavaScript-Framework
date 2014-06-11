@@ -91,6 +91,7 @@ Uize.module ({
 									isBrandSpecific:_resourceFileIsBrandSpecific || m.isBrandResourceString (_path,_value),
 									hasHtml:m.stringHasHtml (_path,_value),
 									isLong:_isTranslatable && m.isStringLong (_stringMetrics),
+									isKeyValid:m.isStringKeyValid (_path),
 									isTranslatable:_isTranslatable
 								});
 								return _value;
@@ -123,6 +124,7 @@ Uize.module ({
 					_totalTokenizedResourceStrings = 0,
 					_totalHtmlResourceStrings = 0,
 					_totalLongResourceStrings = 0,
+					_totalInvalidKeyResourceStrings = 0,
 					_totalNonTranslatableResourceStrings = 0,
 					_totalDupedResourceStrings = 0,
 					_valuesLookup = {},
@@ -176,6 +178,7 @@ Uize.module ({
 
 							_stringInfo.hasHtml && _totalHtmlResourceStrings++;
 							_stringInfo.isLong && _totalLongResourceStrings++;
+							_stringInfo.isKeyValid || _totalInvalidKeyResourceStrings++;
 							_stringInfo.isTranslatable || _totalNonTranslatableResourceStrings++;
 
 							/*** update general metrics ***/
@@ -220,6 +223,7 @@ Uize.module ({
 					tokenizedResourceStrings:_totalTokenizedResourceStrings,
 					htmlResourceStrings:_totalHtmlResourceStrings,
 					longResourceStrings:_totalLongResourceStrings,
+					invalidKeyResourceStrings:_totalInvalidKeyResourceStrings,
 					nonTranslatableResourceStrings:_totalNonTranslatableResourceStrings,
 					dupedResourceStrings:_totalDupedResourceStrings,
 					dupedResourceStringsDetails:_dupedResourceStringsDetails,
@@ -742,6 +746,11 @@ Uize.module ({
 								'Resource Strings (long)',
 								'Normal',_metrics.resourceStrings - _metrics.longResourceStrings,
 								'Long',_metrics.longResourceStrings
+							) + '\n' +
+							_twoGroupBreakdownTable (
+								'Resource Strings (invalid keys)',
+								'Valid Keys',_metrics.resourceStrings - _metrics.invalidKeyResourceStrings,
+								'Invalid Keys',_metrics.invalidKeyResourceStrings
 							) + '\n' +
 							_twoGroupBreakdownTable (
 								'Resource Strings (non-translatable)',
