@@ -206,12 +206,35 @@
 					.......................
 
 			Column Descriptions
-				.
+				Columns are described for a table using the =columns= property of the input object passed to the =Uize.Templates.Text.ProgressBar.process= method.
+
+				Column Description Object
+					The value specified for the =columns= property should be an array, where each element is a column description object of the form...
+
+					................................................................................................
+					{
+						title:titleSTR,                // the display title for the column (required)
+						align:alignSTRorFLOAT,         // the alignment of values in the column (optional)
+						formatter:formatterFUNCorSTR,  // a value transformer for formatting column values (optional)
+						minValue:minValueNUM,          // the lower end of the column's value range (optional)
+						maxValue:maxValueNUM           // the upper end of the column's value range (optional)
+					}
+					................................................................................................
+
+				The various properties of the column description object are discussed in more detail in the following sections.
 
 				Column Titles
-					- column titles are specified using the =title= property of the column description object
-					- column titles are required
-					- column titles are center-aligned
+					Titles are specified for columns using the =title= property of the `column description object`.
+
+					Column titles are required, unlike other properties of the column description object. Column titles are always displayed center-aligned when the calculated `column width` is greater than the column title width.
+
+					EXAMPLE
+					...
+					...
+
+					OUTPUT
+					...
+					...
 
 				Column Alignment
 					- by default, column values are left-aligned
@@ -229,6 +252,7 @@
 
 			Column Width
 				- column width for a column is calculated as the maximum of the column title width and the width of all the column values
+				- if the table title is wider than the sum of all the calculated column widths and column separators, then the difference will be distributed as padding evenly across the columns
 */
 
 Uize.module ({
