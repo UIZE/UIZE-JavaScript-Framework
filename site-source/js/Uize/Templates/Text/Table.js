@@ -229,30 +229,198 @@
 					Column titles are required, unlike other properties of the column description object. Column titles are always displayed center-aligned when the calculated `column width` is greater than the column title width.
 
 					EXAMPLE
-					...
-					...
+					.......................................................
+					Uize.Templates.Text.Table.process ({
+						title:'Foo Table',
+						columns:[
+							{title:'Column 1'},
+							{title:'Column 2'}
+						],
+						rows:[
+							['this is a wide value','another wide value'],
+							['yet another wide value','the final wide value']
+						]
+					});
+					.......................................................
 
 					OUTPUT
-					...
-					...
+					.................................................
+					+-----------------------------------------------+
+					|                   Foo Table                   |
+					+-----------------------------------------------+
+					|        Column 1        |       Column 2       |
+					|------------------------+----------------------|
+					| this is a wide value   | another wide value   |
+					|------------------------+----------------------|
+					| yet another wide value | the final wide value |
+					+-----------------------------------------------+
+					.................................................
 
 				Column Alignment
-					- by default, column values are left-aligned
-					- column alignment can be specified optionally per column
-					- column alignment for a column is specified using the =align= property in the column description
-					- column values can be left-aligned, center-aligned, right-aligned, or fractionally aligned
+					Alignment of values can be specified for columns using the =align= property of the `column description object`.
 
-				Column Formatters
+					Column values can be left aligned by specifying the value ='left'= or =0=, center-aligned by specifying the value ='center'= or =.5=, or right-aligned by specifying the value ='right'= or =1=.
+
+					EXAMPLE
+					.........................................................................
+					Uize.Templates.Text.Table.process ({
+						title:'Foo Table',
+						columns:[
+							{title:'Column 1',align:'left'},
+							{title:'Column 2',align:'center'},
+							{title:'Column 3',align:'right'}
+						],
+						rows:[
+							['ABC','ABC','ABC'],
+							['ABCDEFG','ABCDEFG','ABCDEFG'],
+							['ABCDEFGHIJK','ABCDEFGHIJK','ABCDEFGHIJK'],
+							['ABCDEFGHIJKLMNO','ABCDEFGHIJKLMNO','ABCDEFGHIJKLMNO'],
+							['ABCDEFGHIJKLMNOPQRS','ABCDEFGHIJKLMNOPQRS','ABCDEFGHIJKLMNOPQRS']
+						]
+					});
+					.........................................................................
+
+					OUTPUT
+					...................................................................
+					+-----------------------------------------------------------------+
+					|                            Foo Table                            |
+					+-----------------------------------------------------------------+
+					|      Column 1       |      Column 2       |      Column 3       |
+					|---------------------+---------------------+---------------------|
+					| ABC                 |         ABC         |                 ABC |
+					|---------------------+---------------------+---------------------|
+					| ABCDEFG             |       ABCDEFG       |             ABCDEFG |
+					|---------------------+---------------------+---------------------|
+					| ABCDEFGHIJK         |     ABCDEFGHIJK     |         ABCDEFGHIJK |
+					|---------------------+---------------------+---------------------|
+					| ABCDEFGHIJKLMNO     |   ABCDEFGHIJKLMNO   |     ABCDEFGHIJKLMNO |
+					|---------------------+---------------------+---------------------|
+					| ABCDEFGHIJKLMNOPQRS | ABCDEFGHIJKLMNOPQRS | ABCDEFGHIJKLMNOPQRS |
+					+-----------------------------------------------------------------+
+					...................................................................
+
+					Left-aligned, by Default
+						Column values are left-aligned, by default, if no value is specified explicitly for the =align= property of the `column description object`.
+
+						EXAMPLE
+						......................................
+						Uize.Templates.Text.Table.process ({
+							title:'Foo Table',
+							columns:[
+								{title:'Column 1'},
+								{title:'Column 2',align:'right'}
+							],
+							rows:[
+								['ABC','ABC'],
+								['ABCDEFG','ABCDEFG'],
+								['ABCDEFGHIJK','ABCDEFGHIJK']
+							]
+						});
+						......................................
+
+						In the above example, no value is specified for the =align= property in the description for the first column. As a result, the alignment for this column is defaulted to left-alignment.
+
+						OUTPUT
+						.............................
+						+---------------------------+
+						|         Foo Table         |
+						+---------------------------+
+						|  Column 1   |  Column 2   |
+						|-------------+-------------|
+						| ABC         |         ABC |
+						|-------------+-------------|
+						| ABCDEFG     |     ABCDEFG |
+						|-------------+-------------|
+						| ABCDEFGHIJK | ABCDEFGHIJK |
+						+---------------------------+
+						.............................
+
+					### Fractional Alignment
+						.
+
+				### Column Formatters
 					- column formatter is called as an instance method on the column description object
 					- column formatter is resolved as a value transformer, so a value transformer string expression can be specified
 
-			Column minValue and maxValue
+			### Column minValue and maxValue
 				- minValue and maxValue can optionally be specified explicitly
 				- if minValue or maxValue are not explicitly specified, they are calculated
 
 			Column Width
-				- column width for a column is calculated as the maximum of the column title width and the width of all the column values
-				- if the table title is wider than the sum of all the calculated column widths and column separators, then the difference will be distributed as padding evenly across the columns
+				Column width for a column is calculated as the maximum of the column title width and the width of all the column values.
+
+				EXAMPLE
+				............................................
+				Uize.Templates.Text.Table.process ({
+					title:'Foo Table',
+					columns:[
+						{title:'Column 1'},
+						{title:'Column 2 (Wide Column Title)'}
+					],
+					rows:[
+						['column value','foo'],
+						['wide column value','bar'],
+						['even wider column value','baz']
+					]
+				});
+				............................................
+
+				In the above example, the widest value in the first column is wider than the column's title, so the width of the widest value is used as the column width. In the second column, the column title is wider than the widest column value, so the column title width is used as the column width.
+
+				OUTPUT
+				..........................................................
+				+--------------------------------------------------------+
+				|                       Foo Table                        |
+				+--------------------------------------------------------+
+				|        Column 1         | Column 2 (Wide Column Title) |
+				|-------------------------+------------------------------|
+				| column value            | foo                          |
+				|-------------------------+------------------------------|
+				| wide column value       | bar                          |
+				|-------------------------+------------------------------|
+				| even wider column value | baz                          |
+				+--------------------------------------------------------+
+				..........................................................
+
+				Table Title Can Expand Column Widths
+					If the table title is wider than the sum of all the calculated column widths and column separators, then the difference will be distributed as padding evenly across the columns.
+
+					EXAMPLE
+					..........................................................
+					Uize.Templates.Text.Table.process ({
+						title:'This is an extremely long title for this table',
+						columns:[
+							{title:'Col 1'},
+							{title:'Col 2'},
+							{title:'Col 3'}
+						],
+						rows:[
+							['Foo 1','Foo 2','Foo 3'],
+							['Bar 1','Bar 2','Bar 3'],
+							['Baz 1','Baz 2','Baz 3'],
+							['Qux 1','Qux 2','Qux 3']
+						]
+					});
+					..........................................................
+
+					In the above example, the table's title is wider than the sum of the column widths (as calculated from the column values and column titles) and column separators. The number of characters by which the title is wider is distributed as padding spaces evenly across the three columns.
+
+					OUTPUT
+					..................................................
+					+------------------------------------------------+
+					| This is an extremely long title for this table |
+					+------------------------------------------------+
+					|     Col 1     |     Col 2      |     Col 3     |
+					|---------------+----------------+---------------|
+					| Foo 1         | Foo 2          | Foo 3         |
+					|---------------+----------------+---------------|
+					| Bar 1         | Bar 2          | Bar 3         |
+					|---------------+----------------+---------------|
+					| Baz 1         | Baz 2          | Baz 3         |
+					|---------------+----------------+---------------|
+					| Qux 1         | Qux 2          | Qux 3         |
+					+------------------------------------------------+
+					..................................................
 */
 
 Uize.module ({
