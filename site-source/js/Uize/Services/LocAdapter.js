@@ -229,22 +229,30 @@ Uize.module ({
 				);
 
 				var _metrics = {
-					resourceFiles:_totalResourceFiles,
-					brandSpecificResourceFiles:_totalBrandSpecificResourceFiles,
-					resourceStrings:_totalResourceStrings,
-					brandSpecificResourceStrings:_totalBrandSpecificResourceStrings,
-					wordCount:_totalWordCount,
-					brandSpecificWordCount:_totalBrandSpecificWordCount,
-					charCount:_totalCharCount,
-					brandSpecificCharCount:_totalBrandSpecificCharCount,
+					resourceFiles:{
+						all:_totalResourceFiles,
+						brandSpecific:_totalBrandSpecificResourceFiles
+					},
+					resourceStrings:{
+						all:_totalResourceStrings,
+						brandSpecific:_totalBrandSpecificResourceStrings,
+						tokenized:_totalTokenizedResourceStrings,
+						html:_totalHtmlResourceStrings,
+						long:_totalLongResourceStrings,
+						invalidKey:_totalInvalidKeyResourceStrings,
+						weakTokens:_totalWeakTokenResourceStrings,
+						nonTranslatable:_totalNonTranslatableResourceStrings,
+						duped:_totalDupedResourceStrings
+					},
+					wordCount:{
+						all:_totalWordCount,
+						brandSpecific:_totalBrandSpecificWordCount
+					},
+					charCount:{
+						all:_totalCharCount,
+						brandSpecific:_totalBrandSpecificCharCount
+					},
 					tokens:_totalTokens,
-					tokenizedResourceStrings:_totalTokenizedResourceStrings,
-					htmlResourceStrings:_totalHtmlResourceStrings,
-					longResourceStrings:_totalLongResourceStrings,
-					invalidKeyResourceStrings:_totalInvalidKeyResourceStrings,
-					weakTokenResourceStrings:_totalWeakTokenResourceStrings,
-					nonTranslatableResourceStrings:_totalNonTranslatableResourceStrings,
-					dupedResourceStrings:_totalDupedResourceStrings,
 					dupedResourceStringsDetails:_dupedResourceStringsDetails,
 					tokenUsage:_tokenUsage,
 					tokenHistogram:_tokenHistogram,
@@ -733,58 +741,53 @@ Uize.module ({
 						m.methodExecutionComplete (
 							_twoGroupBreakdownTable (
 								'Resource Files',
-								'Non Brand-specific',_metrics.resourceFiles - _metrics.brandSpecificResourceFiles,
-								'Brand-specific',_metrics.brandSpecificResourceFiles
-							) + '\n' +
-							_twoGroupBreakdownTable (
-								'Resource Files',
-								'Non Brand-specific',_metrics.resourceFiles - _metrics.brandSpecificResourceFiles,
-								'Brand-specific',_metrics.brandSpecificResourceFiles
+								'Non Brand-specific',_metrics.resourceFiles.all - _metrics.resourceFiles.brandSpecific,
+								'Brand-specific',_metrics.resourceFiles.brandSpecific
 							) + '\n' +
 							_twoGroupBreakdownTable (
 								'Resource Strings',
-								'Non Brand-specific',_metrics.resourceStrings - _metrics.brandSpecificResourceStrings,
-								'Brand-specific',_metrics.brandSpecificResourceStrings
+								'Non Brand-specific',_metrics.resourceStrings.all - _metrics.resourceStrings.brandSpecific,
+								'Brand-specific',_metrics.resourceStrings.brandSpecific
 							) + '\n' +
 							_twoGroupBreakdownTable (
 								'Word Count',
-								'Non Brand-specific',_metrics.wordCount - _metrics.brandSpecificWordCount,
-								'Brand-specific',_metrics.brandSpecificWordCount
+								'Non Brand-specific',_metrics.wordCount.all - _metrics.wordCount.brandSpecific,
+								'Brand-specific',_metrics.wordCount.brandSpecific
 							) + '\n' +
 							_twoGroupBreakdownTable (
 								'Character Count',
-								'Non Brand-specific',_metrics.charCount - _metrics.brandSpecificCharCount,
-								'Brand-specific',_metrics.brandSpecificCharCount
+								'Non Brand-specific',_metrics.charCount.all - _metrics.charCount.brandSpecific,
+								'Brand-specific',_metrics.charCount.brandSpecific
 							) + '\n' +
 							_twoGroupBreakdownTable (
 								'Resource Strings (tokenized)',
-								'Non-tokenized',_metrics.resourceStrings - _metrics.tokenizedResourceStrings,
-								'Tokenized',_metrics.tokenizedResourceStrings
+								'Non-tokenized',_metrics.resourceStrings.all - _metrics.resourceStrings.tokenized,
+								'Tokenized',_metrics.resourceStrings.tokenized
 							) + '\n' +
 							_twoGroupBreakdownTable (
 								'Resource Strings (HTML)',
-								'Non-HTML',_metrics.resourceStrings - _metrics.htmlResourceStrings,
-								'HTML',_metrics.htmlResourceStrings
+								'Non-HTML',_metrics.resourceStrings.all - _metrics.resourceStrings.html,
+								'HTML',_metrics.resourceStrings.html
 							) + '\n' +
 							_twoGroupBreakdownTable (
 								'Resource Strings (long)',
-								'Normal',_metrics.resourceStrings - _metrics.longResourceStrings,
-								'Long',_metrics.longResourceStrings
+								'Normal',_metrics.resourceStrings.all - _metrics.resourceStrings.long,
+								'Long',_metrics.resourceStrings.long
 							) + '\n' +
 							_twoGroupBreakdownTable (
 								'Resource Strings (invalid keys)',
-								'Valid Keys',_metrics.resourceStrings - _metrics.invalidKeyResourceStrings,
-								'Invalid Keys',_metrics.invalidKeyResourceStrings
+								'Valid Keys',_metrics.resourceStrings.all - _metrics.resourceStrings.invalidKey,
+								'Invalid Keys',_metrics.resourceStrings.invalidKey
 							) + '\n' +
 							_twoGroupBreakdownTable (
 								'Resource Strings (weak tokens)',
-								'Only Strong Tokens',_metrics.tokenizedResourceStrings - _metrics.weakTokenResourceStrings,
-								'Have Weak Tokens',_metrics.weakTokenResourceStrings
+								'Only Strong Tokens',_metrics.resourceStrings.tokenized - _metrics.resourceStrings.weakTokens,
+								'Have Weak Tokens',_metrics.resourceStrings.weakTokens
 							) + '\n' +
 							_twoGroupBreakdownTable (
 								'Resource Strings (non-translatable)',
-								'Translatable',_metrics.resourceStrings - _metrics.nonTranslatableResourceStrings,
-								'Non-translatable',_metrics.nonTranslatableResourceStrings
+								'Translatable',_metrics.resourceStrings.all - _metrics.resourceStrings.nonTranslatable,
+								'Non-translatable',_metrics.resourceStrings.nonTranslatable
 							) + '\n' +
 							Uize.Templates.Text.Tables.Histogram.process ({
 								title:'Histogram of Resource String Duplicates',
