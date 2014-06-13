@@ -73,7 +73,12 @@ Uize.module ({
 				Uize.forEach (
 					_languageResources,
 					function (_resourceFileStrings,_resourceFileSubPath) {
-						var _resourceFileIsBrandSpecific = m.isBrandResourceFile (_resourceFileSubPath);
+						var
+							_resourceFileIsBrandSpecific = m.isBrandResourceFile (_resourceFileSubPath),
+							_resourceFileBrand = _resourceFileIsBrandSpecific
+								? m.getResourceFileBrand (_resourceFileSubPath)
+								: ''
+						;
 						_processStrings (
 							_resourceFileStrings,
 							function (_value,_path) {
@@ -82,7 +87,8 @@ Uize.module ({
 										key:_path [_path.length - 1],
 										value:_value
 									}),
-									_stringMetrics = _getStringMetrics (m,_value)
+									_stringMetrics = _getStringMetrics (m,_value),
+									_isBrandSpecific = _resourceFileIsBrandSpecific || m.isBrandResourceString (_path,_value)
 								;
 
 								/*** check for weak tokens ***/
@@ -103,7 +109,10 @@ Uize.module ({
 									path:[_resourceFileSubPath].concat (_path),
 									value:_value,
 									metrics:_stringMetrics,
-									isBrandSpecific:_resourceFileIsBrandSpecific || m.isBrandResourceString (_path,_value),
+									isBrandSpecific:_isBrandSpecific,
+									brand:_isBrandSpecific
+										? _resourceFileBrand || m.getStringBrand (_path,_value)
+										: '',
 									hasHtml:m.stringHasHtml (_path,_value),
 									isLong:_isTranslatable && m.isStringLong (_stringMetrics),
 									isKeyValid:m.isStringKeyValid (_path),
@@ -130,12 +139,16 @@ Uize.module ({
 					_project = m.project,
 					_totalResourceFiles = 0,
 					_totalBrandSpecificResourceFiles = 0,
+					_totalResourceFilesPerBrand = {},
 					_totalResourceStrings = 0,
 					_totalBrandSpecificResourceStrings = 0,
+					_totalResourceStringPerBrand = {},
 					_totalWordCount = 0,
 					_totalBrandSpecificWordCount = 0,
+					_totalWordCountPerBrand = {},
 					_totalCharCount = 0,
 					_totalBrandSpecificCharCount = 0,
+					_totalCharCountPerBrand = {},
 					_totalTokens = 0,
 					_totalTokenizedResourceStrings = 0,
 					_totalHtmlResourceStrings = 0,
@@ -161,7 +174,14 @@ Uize.module ({
 					_languageResources,
 					function (_resourceFileStrings,_resourceFileSubPath) {
 						_totalResourceFiles++;
-						_totalBrandSpecificResourceFiles += m.isBrandResourceFile (_resourceFileSubPath);
+						if (m.isBrandResourceFile (_resourceFileSubPath)) {
+							_totalBrandSpecificResourceFiles++;
+							var _resourceFileBrand = m.getResourceFileBrand (_resourceFileSubPath);
+							if (_resourceFileBrand)
+								_totalResourceFilesPerBrand [_resourceFileBrand] =
+									(_totalResourceFilesPerBrand [_resourceFileBrand] || 0) + 1
+							;
+						}
 					}
 				);
 				Uize.forEach (
@@ -207,6 +227,19 @@ Uize.module ({
 									_totalBrandSpecificResourceStrings++;
 									_totalBrandSpecificWordCount += _words;
 									_totalBrandSpecificCharCount += _chars;
+
+									var _stringBrand = _stringInfo.brand;
+									if (_stringBrand) {
+										_totalResourceStringPerBrand [_stringBrand] =
+											(_totalResourceStringPerBrand [_stringBrand] || 0) + 1
+										;
+										_totalWordCountPerBrand [_stringBrand] =
+											(_totalWordCountPerBrand [_stringBrand] || 0) + _words
+										;
+										_totalCharCountPerBrand [_stringBrand] =
+											(_totalCharCountPerBrand [_stringBrand] || 0) + _chars
+										;
+									}
 								}
 								_wordCountHistogram [_words] = (_wordCountHistogram [_words] || 0) + 1;
 								_charCountHistogram [_chars] = (_charCountHistogram [_chars] || 0) + 1;
@@ -231,7 +264,8 @@ Uize.module ({
 				var _metrics = {
 					resourceFiles:{
 						all:_totalResourceFiles,
-						brandSpecific:_totalBrandSpecificResourceFiles
+						brandSpecific:_totalBrandSpecificResourceFiles,
+						perBrand:_totalResourceFilesPerBrand
 					},
 					resourceStrings:{
 						all:_totalResourceStrings,
@@ -242,15 +276,18 @@ Uize.module ({
 						invalidKey:_totalInvalidKeyResourceStrings,
 						weakTokens:_totalWeakTokenResourceStrings,
 						nonTranslatable:_totalNonTranslatableResourceStrings,
-						duped:_totalDupedResourceStrings
+						duped:_totalDupedResourceStrings,
+						perBrand:_totalResourceStringPerBrand
 					},
 					wordCount:{
 						all:_totalWordCount,
-						brandSpecific:_totalBrandSpecificWordCount
+						brandSpecific:_totalBrandSpecificWordCount,
+						perBrand:_totalWordCountPerBrand
 					},
 					charCount:{
 						all:_totalCharCount,
-						brandSpecific:_totalBrandSpecificCharCount
+						brandSpecific:_totalBrandSpecificCharCount,
+						perBrand:_totalCharCountPerBrand
 					},
 					tokens:_totalTokens,
 					dupedResourceStringsDetails:_dupedResourceStringsDetails,
@@ -441,6 +478,16 @@ Uize.module ({
 				isBrandResourceString:function (_resourceStringPath,_resourceStringText) {
 					// this method should be implemented by subclasses
 					return false;
+				},
+
+				getResourceFileBrand:function (_filePath) {
+					// this method should be implemented by subclasses
+					return '';
+				},
+
+				getStringBrand:function (_resourceStringPath,_resourceStringText) {
+					// this method should be implemented by subclasses
+					return '';
 				},
 
 				stringHasHtml:function (_path,_value) {
@@ -738,27 +785,29 @@ Uize.module ({
 								}
 							);
 
+						function _brandSpecificBreakdownTable (_title,_qualityMetrics) {
+							var _countByCategory = Uize.pairUp (
+								'All',_qualityMetrics.all,
+								'Non Brand-specific',_qualityMetrics.all - _qualityMetrics.brandSpecific,
+								'Brand-specific',_qualityMetrics.brandSpecific
+							);
+							Uize.forEach (
+								_qualityMetrics.perBrand,
+								function (_count,_brandId) {
+									_countByCategory ['Brand: ' + _brandId] = _count;
+								}
+							);
+							return _breakdownTable ({
+								title:_title,
+								countByCategory:_countByCategory
+							});
+						}
+
 						m.methodExecutionComplete (
-							_twoGroupBreakdownTable (
-								'Resource Files',
-								'Non Brand-specific',_metrics.resourceFiles.all - _metrics.resourceFiles.brandSpecific,
-								'Brand-specific',_metrics.resourceFiles.brandSpecific
-							) + '\n' +
-							_twoGroupBreakdownTable (
-								'Resource Strings',
-								'Non Brand-specific',_metrics.resourceStrings.all - _metrics.resourceStrings.brandSpecific,
-								'Brand-specific',_metrics.resourceStrings.brandSpecific
-							) + '\n' +
-							_twoGroupBreakdownTable (
-								'Word Count',
-								'Non Brand-specific',_metrics.wordCount.all - _metrics.wordCount.brandSpecific,
-								'Brand-specific',_metrics.wordCount.brandSpecific
-							) + '\n' +
-							_twoGroupBreakdownTable (
-								'Character Count',
-								'Non Brand-specific',_metrics.charCount.all - _metrics.charCount.brandSpecific,
-								'Brand-specific',_metrics.charCount.brandSpecific
-							) + '\n' +
+							_brandSpecificBreakdownTable ('Resource Files',_metrics.resourceFiles) + '\n' +
+							_brandSpecificBreakdownTable ('Resource Strings',_metrics.resourceStrings) + '\n' +
+							_brandSpecificBreakdownTable ('Word Count',_metrics.wordCount) + '\n' +
+							_brandSpecificBreakdownTable ('Character Count',_metrics.charCount) + '\n' +
 							_twoGroupBreakdownTable (
 								'Resource Strings (tokenized)',
 								'Non-tokenized',_metrics.resourceStrings.all - _metrics.resourceStrings.tokenized,
