@@ -49,7 +49,12 @@ Uize.module ({
 
 			/*** General Variables ***/
 				_fileSystem = Uize.Services.FileSystem.singleton (),
-				_sacredEmptyArray = []
+				_sacredEmptyArray = [],
+				_pathJsonSerializationOptions = {
+					quoteChar:'"',
+					indentChars:'',
+					linebreakChars:''
+				}
 		;
 
 		/*** Utility Functions ***/
@@ -62,6 +67,10 @@ Uize.module ({
 						_groupBTitle,_groupBCount
 					)
 				});
+			}
+
+			function _serializeStringPath (_path) {
+				return Uize.Json.to (_path,_pathJsonSerializationOptions);
 			}
 
 		/*** Private Instance Methods ***/
@@ -124,18 +133,70 @@ Uize.module ({
 						);
 					}
 				);
-				_infoFilePath && _fileSystem.writeFile ({path:_infoFilePath,contents:Uize.Json.to (_stringsInfo)});
+				if (_infoFilePath) {
+					/*** write the JSON file ***/
+						_fileSystem.writeFile ({
+							path:_infoFilePath + '.json',
+							contents:Uize.Json.to (_stringsInfo)
+						});
+
+					/*** generate and write a flat CSV file version ***/
+						_fileSystem.writeFile ({
+							path:_infoFilePath + '.csv',
+							contents:Uize.Data.Csv.to (
+								Uize.map (
+									_stringsInfo,
+									function (_stringInfo) {
+										var
+											_path = _stringInfo.path,
+											_stringMetrics = _stringInfo.metrics
+										;
+										return [
+											_path [_path.length - 1],
+											_stringInfo.value,
+											_path [0],
+											_serializeStringPath (_path),
+											_stringInfo.isBrandSpecific,
+											_stringInfo.brand,
+											_stringInfo.hasHtml,
+											_stringInfo.isLong,
+											_stringInfo.isKeyValid,
+											_stringInfo.hasWeakTokens,
+											_stringInfo.isTranslatable,
+											_stringMetrics.words,
+											_stringMetrics.chars,
+											_stringMetrics.tokens.join (',')
+										];
+									}
+								),
+								{
+									hasHeader:true,
+									columns:[
+										'Key',
+										'Value',
+										'File',
+										'Path',
+										'Brand-specific',
+										'Brand',
+										'HTML',
+										'Long',
+										'Valid Key',
+										'Waak Tokens',
+										'Translatable',
+										'Word Count',
+										'Char Count',
+										'Tokens'
+									]
+								}
+							)
+						});
+				}
 
 				return _stringsInfo;
 			}
 
 			function _calculateMetricsForLanguage (m,_language,_languageResources,_metricsFilePath) {
 				var
-					_pathJsonSerializationOptions = {
-						quoteChar:'"',
-						indentChars:'',
-						linebreakChars:''
-					},
 					_project = m.project,
 					_totalResourceFiles = 0,
 					_totalBrandSpecificResourceFiles = 0,
@@ -167,7 +228,7 @@ Uize.module ({
 						m,
 						_language,
 						_languageResources,
-						m._workingFolderPath + 'strings-info/' + _language + '.json'
+						m._workingFolderPath + 'strings-info/' + _language
 					)
 				;
 				Uize.forEach (
@@ -190,7 +251,7 @@ Uize.module ({
 						var
 							_path = _stringInfo.path,
 							_value = _stringInfo.value,
-							_stringFullPath = Uize.Json.to (_path,_pathJsonSerializationOptions)
+							_stringFullPath = _serializeStringPath (_path)
 						;
 
 						/*** update information on duplicates ***/
