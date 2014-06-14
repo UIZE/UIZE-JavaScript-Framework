@@ -11,13 +11,6 @@ NEW MODULE: Uize.Json.MultiLineStringLiteral
 	- write documentation
 	- write news announcement
 
-NEW MODULE: Uize.Templates.Text.Table
-	Still to do...
-
-	- write unit tests
-	- write documentation
-	- write news announcement
-
 NEW MODULE: Uize.Templates.Text.Tables.Breakdown
 	Still to do...
 
