@@ -74,10 +74,11 @@ Uize.module ({
 			}
 
 		/*** Private Instance Methods ***/
-			function _calculateStringsInfoForLanguage (m,_language,_languageResources,_infoFilePath) {
+			function _calculateStringsInfoForLanguage (m,_language,_languageResources,_subFolder) {
 				var
 					_project = m.project,
-					_stringsInfo = []
+					_stringsInfo = [],
+					_infoFilePath = m._workingFolderPath + _subFolder + 'strings-info/' + _language
 				;
 				Uize.forEach (
 					_languageResources,
@@ -133,69 +134,68 @@ Uize.module ({
 						);
 					}
 				);
-				if (_infoFilePath) {
-					/*** write the JSON file ***/
-						_fileSystem.writeFile ({
-							path:_infoFilePath + '.json',
-							contents:Uize.Json.to (_stringsInfo)
-						});
 
-					/*** generate and write a flat CSV file version ***/
-						_fileSystem.writeFile ({
-							path:_infoFilePath + '.csv',
-							contents:Uize.Data.Csv.to (
-								Uize.map (
-									_stringsInfo,
-									function (_stringInfo) {
-										var
-											_path = _stringInfo.path,
-											_stringMetrics = _stringInfo.metrics
-										;
-										return [
-											_path [_path.length - 1],
-											_stringInfo.value,
-											_path [0],
-											_serializeStringPath (_path),
-											_stringInfo.isBrandSpecific,
-											_stringInfo.brand,
-											_stringInfo.hasHtml,
-											_stringInfo.isLong,
-											_stringInfo.isKeyValid,
-											_stringInfo.hasWeakTokens,
-											_stringInfo.isTranslatable,
-											_stringMetrics.words,
-											_stringMetrics.chars,
-											_stringMetrics.tokens.join (',')
-										];
-									}
-								),
-								{
-									hasHeader:true,
-									columns:[
-										'Key',
-										'Value',
-										'File',
-										'Path',
-										'Brand-specific',
-										'Brand',
-										'HTML',
-										'Long',
-										'Valid Key',
-										'Waak Tokens',
-										'Translatable',
-										'Word Count',
-										'Char Count',
-										'Tokens'
-									]
+				/*** write the JSON file ***/
+					_fileSystem.writeFile ({
+						path:_infoFilePath + '.json',
+						contents:Uize.Json.to (_stringsInfo)
+					});
+
+				/*** generate and write a flat CSV file version ***/
+					_fileSystem.writeFile ({
+						path:_infoFilePath + '.csv',
+						contents:Uize.Data.Csv.to (
+							Uize.map (
+								_stringsInfo,
+								function (_stringInfo) {
+									var
+										_path = _stringInfo.path,
+										_stringMetrics = _stringInfo.metrics
+									;
+									return [
+										_path [_path.length - 1],
+										_stringInfo.value,
+										_path [0],
+										_serializeStringPath (_path),
+										_stringInfo.isBrandSpecific,
+										_stringInfo.brand,
+										_stringInfo.hasHtml,
+										_stringInfo.isLong,
+										_stringInfo.isKeyValid,
+										_stringInfo.hasWeakTokens,
+										_stringInfo.isTranslatable,
+										_stringMetrics.words,
+										_stringMetrics.chars,
+										_stringMetrics.tokens.join (',')
+									];
 								}
-							)
-						});
-				}
+							),
+							{
+								hasHeader:true,
+								columns:[
+									'Key',
+									'Value',
+									'File',
+									'Path',
+									'Brand-specific',
+									'Brand',
+									'HTML',
+									'Long',
+									'Valid Key',
+									'Waak Tokens',
+									'Translatable',
+									'Word Count',
+									'Char Count',
+									'Tokens'
+								]
+							}
+						)
+					});
 
 				return _stringsInfo;
 			}
 
-			function _calculateMetricsForLanguage (m,_language,_languageResources,_metricsFilePath) {
+			function _calculateMetricsForLanguage (m,_language,_languageResources,_subFolder) {
 				var
 					_project = m.project,
 					_totalResourceFiles = 0,
@@ -224,12 +224,7 @@ Uize.module ({
 					_tokenHistogram = {},
 					_wordCountHistogram = {},
 					_charCountHistogram = {},
-					_stringsInfo = _calculateStringsInfoForLanguage (
-						m,
-						_language,
-						_languageResources,
-						m._workingFolderPath + 'strings-info/' + _language
-					)
+					_stringsInfo = _calculateStringsInfoForLanguage (m,_language,_languageResources,_subFolder)
 				;
 				Uize.forEach (
 					_languageResources,
@@ -357,7 +352,10 @@ Uize.module ({
 					wordCountHistogram:_wordCountHistogram,
 					charCountHistogram:_charCountHistogram
 				};
-				_metricsFilePath && _fileSystem.writeFile ({path:_metricsFilePath,contents:Uize.Json.to (_metrics)});
+				_fileSystem.writeFile ({
+					path:m._workingFolderPath + _subFolder + 'metrics/' + _language + '.json',
+					contents:Uize.Json.to (_metrics)
+				});
 
 				return _metrics;
 			}
@@ -733,12 +731,7 @@ Uize.module ({
 								m.stepCompleted (_language + ': determined strings that need translation');
 
 							/*** calculate metrics for translation job ***/
-								_calculateMetricsForLanguage (
-									m,
-									_language,
-									_translationJobStrings,
-									_jobsPath + _language + '-metrics.json'
-								);
+								_calculateMetricsForLanguage (m,_language,_translationJobStrings,'jobs/');
 								m.stepCompleted (_language + ': calculated translation job metrics');
 
 							/*** write translation job strings CSV file ***/
@@ -827,12 +820,7 @@ Uize.module ({
 						m.stepCompleted ('gathered resources for primary language');
 
 					/*** calculate metrics for primary language ***/
-						var _metrics = _calculateMetricsForLanguage (
-							m,
-							_primaryLanguage,
-							_primaryLanguageResources,
-							m._workingFolderPath + 'metrics/' + _primaryLanguage + '.json'
-						);
+						var _metrics = _calculateMetricsForLanguage (m,_primaryLanguage,_primaryLanguageResources,'');
 						m.stepCompleted ('calculated metrics for primary language');
 
 					/*** produce summary ***/
