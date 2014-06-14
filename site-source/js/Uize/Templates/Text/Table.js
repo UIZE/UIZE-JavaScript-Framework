@@ -335,16 +335,222 @@
 						+---------------------------+
 						.............................
 
-					### Fractional Alignment
-						.
+					Fractional Alignment
+						In addition to being able to specify column alignment using the string values ='left'=, ='center'=, and ='right'=, any arbitrary fractional alignment from left to right can be specified using floating point numbers from =0= to =1=.
 
-				### Column Formatters
-					- column formatter is called as an instance method on the column description object
-					- column formatter is resolved as a value transformer, so a value transformer string expression can be specified
+						EXAMPLE
+						.................................................................................................
+						Uize.Templates.Text.Table.process ({
+							title:'Foo Table',
+							columns:[
+								{title:'Column 1',align:0},
+								{title:'Column 2',align:.25},
+								{title:'Column 3',align:.5},
+								{title:'Column 4',align:.75},
+								{title:'Column 5',align:1}
+							],
+							rows:[
+								['ABC','ABC','ABC','ABC','ABC'],
+								['ABCDEFG','ABCDEFG','ABCDEFG','ABCDEFG','ABCDEFG'],
+								['ABCDEFGHIJK','ABCDEFGHIJK','ABCDEFGHIJK','ABCDEFGHIJK','ABCDEFGHIJK'],
+								['ABCDEFGHIJKLMNO','ABCDEFGHIJKLMNO','ABCDEFGHIJKLMNO','ABCDEFGHIJKLMNO','ABCDEFGHIJKLMNO']
+							]
+						});
+						.................................................................................................
 
-			### Column minValue and maxValue
-				- minValue and maxValue can optionally be specified explicitly
-				- if minValue or maxValue are not explicitly specified, they are calculated
+						OUTPUT
+						...........................................................................................
+						+-----------------------------------------------------------------------------------------+
+						|                                        Foo Table                                        |
+						+-----------------------------------------------------------------------------------------+
+						|    Column 1     |    Column 2     |    Column 3     |    Column 4     |    Column 5     |
+						|-----------------+-----------------+-----------------+-----------------+-----------------|
+						| ABC             |    ABC          |       ABC       |          ABC    |             ABC |
+						|-----------------+-----------------+-----------------+-----------------+-----------------|
+						| ABCDEFG         |   ABCDEFG       |     ABCDEFG     |       ABCDEFG   |         ABCDEFG |
+						|-----------------+-----------------+-----------------+-----------------+-----------------|
+						| ABCDEFGHIJK     |  ABCDEFGHIJK    |   ABCDEFGHIJK   |    ABCDEFGHIJK  |     ABCDEFGHIJK |
+						|-----------------+-----------------+-----------------+-----------------+-----------------|
+						| ABCDEFGHIJKLMNO | ABCDEFGHIJKLMNO | ABCDEFGHIJKLMNO | ABCDEFGHIJKLMNO | ABCDEFGHIJKLMNO |
+						+-----------------------------------------------------------------------------------------+
+						...........................................................................................
+
+				Column Formatters
+					Values for a column can optionally be formatted by specifying a formatter function or expression for the =formatter= property of the `column description object`.
+
+					EXAMPLE
+					.........................................................................................
+					Uize.Templates.Text.Table.process ({
+						title:'2013 Food Prices in the UK',
+						columns:[
+							{title:'Description'},
+							{
+								title:'Price',
+								align:'right',
+								formatter:function (value) {
+									return value < 1 ? (value * 100).toFixed (0) + "p" : "£" + value.toFixed (2);
+								}
+							}
+						],
+						rows:[
+							['Loaf of bread',1.30],
+							['Apples, per kg',2.02],
+							['Pint of milk',.46],
+							['Sausages, per kg',4.84],
+							['Carrots, per kg',.91],
+							['Sugar, per kg',.93],
+							['Dozen eggs',2.78]
+						]
+					});
+					.........................................................................................
+
+					In the above example, a column formatter function is being specified for the price column. The formatter function is passed a price in pounds and returns a formatted value that is expressed in pence if the value is below 1 pound, and pounds if the value is 1 pound or greater.
+
+					OUTPUT
+					..............................
+					+----------------------------+
+					| 2013 Food Prices in the UK |
+					+----------------------------+
+					|    Description    | Price  |
+					|-------------------+--------|
+					| Loaf of bread     |  £1.30 |
+					|-------------------+--------|
+					| Apples, per kg    |  £2.02 |
+					|-------------------+--------|
+					| Pint of milk      |    46p |
+					|-------------------+--------|
+					| Sausages, per kg  |  £4.84 |
+					|-------------------+--------|
+					| Carrots, per kg   |    91p |
+					|-------------------+--------|
+					| Sugar, per kg     |    93p |
+					|-------------------+--------|
+					| Dozen eggs        |  £2.78 |
+					+----------------------------+
+					..............................
+
+					Column Formatter String Expression
+						The =Uize.Templates.Text.Table= module resolves a value specified for the =formatter= option of the `column description object` to a value transformer function using the =Uize.resolveTransformer= method.
+
+						This means that the column formatter can also be specifeid in the form of a string expression, as shown in the example below...
+
+						EXAMPLE
+						..........................................................................................
+						Uize.Templates.Text.Table.process ({
+							title:'2013 Food Prices in the UK',
+							columns:[
+								{title:'Description'},
+								{
+									title:'Price',
+									align:'right',
+									formatter:'value < 1 ? (value * 100).toFixed (0) + "p" : "£" + value.toFixed (2)'
+								}
+							],
+							rows:[
+								['Loaf of bread',1.30],
+								['Apples, per kg',2.02],
+								['Pint of milk',.46],
+								['Sausages, per kg',4.84],
+								['Carrots, per kg',.91],
+								['Sugar, per kg',.93],
+								['Dozen eggs',2.78]
+							]
+						});
+						..........................................................................................
+
+						OUTPUT
+						..............................
+						+----------------------------+
+						| 2013 Food Prices in the UK |
+						+----------------------------+
+						|    Description    | Price  |
+						|-------------------+--------|
+						| Loaf of bread     |  £1.30 |
+						|-------------------+--------|
+						| Apples, per kg    |  £2.02 |
+						|-------------------+--------|
+						| Pint of milk      |    46p |
+						|-------------------+--------|
+						| Sausages, per kg  |  £4.84 |
+						|-------------------+--------|
+						| Carrots, per kg   |    91p |
+						|-------------------+--------|
+						| Sugar, per kg     |    93p |
+						|-------------------+--------|
+						| Dozen eggs        |  £2.78 |
+						+----------------------------+
+						..............................
+
+				Column minValue and maxValue
+					The =Uize.Templates.Text.Table= module will compute min and max values for each column, unless values are specified explicitly for the =minValue= and =maxValue= properties in the `column description object`.
+
+					Specifically, if no =minValue= property is present in the `column description object` for a column, then a min value will be computed from all the values of the column, and this value will be set on the =minValue= property. Similarly, if no =maxValue= property is present in the `column description object`, then a max value will be computed from the column's values, and this value will be set on the =maxValue= property.
+
+					Because a `column formatter` is called as an instance method on the `column description object` when formatting a value for a column, the formatter can access the values of the =minValue= and =maxValue= properties and use these values to affect the formatted value. One way that this feature can be used is to add level indicator bars in columns to indicate where the current value falls in the range of values for the column across all rows of the table.
+
+					Consider the following example...
+
+					EXAMPLE
+					..............................................................................................
+					Uize.Templates.Text.Table.process ({
+						title:'2013 Food Prices in the UK',
+						columns:[
+							{title:'Description'},
+							{
+								title:'Price',
+								align:'right',
+								formatter:function (value) {
+									return (
+										(value < 1 ? (value * 100).toFixed (0) + "p" : "£" + value.toFixed (2)) + ' ' +
+										Uize.Templates.Text.ProgressBar.process ({
+											progress:(value - this.minValue) / (this.maxValue - this.minValue),
+											trackLength:20,
+											endsChar:''
+										})
+									);
+								}
+							}
+						],
+						rows:[
+							['Loaf of bread',1.30],
+							['Apples, per kg',2.02],
+							['Pint of milk',.46],
+							['Sausages, per kg',4.84],
+							['Carrots, per kg',.91],
+							['Sugar, per kg',.93],
+							['Dozen eggs',2.78]
+						]
+					});
+					..........................................................................................
+
+					In the above example, the =Uize.Templates.Text.ProgressBar= template module is being used to add a level indicator alongside the formatted price for the values in the price column. This level indicator provides a quick visual cue as to where a price falls in the range of prices for the foods listed in the table.
+
+					Now, the `column description object` for the price column does not specify values for the =minValue= and =maxValue= properties, so valuaes for these properties are computed from the values in the column. The formatter function for the column can then access the computed values using the =this= keyword, since the formatter is called as an instance method on the `column description object`.
+
+					From the above example, we get the following output...
+
+					OUTPUT
+					.................................................
+					+-----------------------------------------------+
+					|          2013 Food Prices in the UK           |
+					+-----------------------------------------------+
+					|   Description    |           Price            |
+					|------------------+----------------------------|
+					| Loaf of bread    | £1.30 ▓▓▓▓█░░░░░░░░░░░░░░░ |
+					|------------------+----------------------------|
+					| Apples, per kg   | £2.02 ▓▓▓▓▓▓▓█░░░░░░░░░░░░ |
+					|------------------+----------------------------|
+					| Pint of milk     |   46p █░░░░░░░░░░░░░░░░░░░ |
+					|------------------+----------------------------|
+					| Sausages, per kg | £4.84 ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓█ |
+					|------------------+----------------------------|
+					| Carrots, per kg  |   91p ▓▓█░░░░░░░░░░░░░░░░░ |
+					|------------------+----------------------------|
+					| Sugar, per kg    |   93p ▓▓█░░░░░░░░░░░░░░░░░ |
+					|------------------+----------------------------|
+					| Dozen eggs       | £2.78 ▓▓▓▓▓▓▓▓▓▓█░░░░░░░░░ |
+					+-----------------------------------------------+
+					.................................................
 
 			Column Width
 				Column width for a column is calculated as the maximum of the column title width and the width of all the column values.
@@ -496,7 +702,7 @@ Uize.module ({
 							_paddingToDistribute = _tableWidthPerTitle - _tableWidthPerColumns,
 							_paddingDistributed = 0
 						;
-						if (_paddingToDistribute > 0) {
+						if (_paddingToDistribute > 0)
 							Uize.forEach (
 								_columnMaxWidths,
 								function (_maxWidth,_columnNo) {
@@ -506,8 +712,8 @@ Uize.module ({
 									_columnMaxWidths [_columnNo] = _maxWidth + _newPaddingDistributed - _paddingDistributed;
 									_paddingDistributed = _newPaddingDistributed;
 								}
-							);
-						}
+							)
+						;
 
 				/*** produce row dividers ***/
 					var
