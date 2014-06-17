@@ -20,7 +20,7 @@
 	Introduction
 		The =Uize.Comm.Ajax= class implements support for [[http://en.wikipedia.org/wiki/Ajax_(programming)][Ajax]] (Asynchronous JavaScript And XML) communication through the XMLHttpRequest (XHR) object.
 
-		*DEVELOPERS:* `Jan Borgersen`, `Chris van Rensburg`, `Ben Ilegbodu`, `Tim Carter`, original code donated by `Zazzle Inc.`
+		*DEVELOPERS:* `Jan Borgersen`, `Chris van Rensburg`, `Ben Ilegbodu`, `Tim Carter`, `Arthur Lee`, original code donated by `Zazzle Inc.`
 
 		In order to implement support for communication through the XMLHttpRequest object, this class overrides the implementation of the =performRequest= instance method inherited from the =Uize.Comm= base class. There are no additional methods or properties provided by this class - all the interface is provided in the =Uize.Comm= superclass.
 */
@@ -80,15 +80,26 @@ Uize.module ({
 										? Function ('var a=[' + _responseText + '];return a.pop()') ()
 										: null
 								;
-								_xmlHttpRequest.abort ();
+								_xmlHttpRequest.abort();
+								m.fire({ name: 'XHR Load', responseText: _responseText });
 								_callback ();
 							}
 							else {
 								//alert ('There was a problem retrieving the data:\n' + m._xmlHttpRequest.statusText);
-								_xmlHttpRequest.abort ();
+							  _xmlHttpRequest.abort();
+							  m.fire({ name: 'XHR Error', statusText: m._xmlHttpRequest.statusText });
 							}
 						}
 					};
+
+					if (_xmlHttpRequest.upload) { // test if XHR2
+					  _xmlHttpRequest.onprogress = function (_event) {
+					    // Pass on the event obj with our event name
+					    _event.name = 'XHR Progress';
+					    m.fire(_event);
+					  }
+					}
+
 					if (_requestMethodIsPost && !_requestData) {
 						var _queryPos = _requestUrl.indexOf ('?');
 						_requestData = _requestUrl.substr (_queryPos + 1);
