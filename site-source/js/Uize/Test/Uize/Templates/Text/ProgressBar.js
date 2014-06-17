@@ -126,6 +126,17 @@ Uize.module ({
 								},
 								'|#---------|'
 							],
+							['When an empty string is specified for the endsChar property, then there are no ends characters - the property is not defaulted',
+								{
+									progress:0,
+									fullChar:'=',
+									emptyChar:'-',
+									endsChar:'',
+									fullHeadChar:'#',
+									trackLength:10
+								},
+								'#---------'
+							],
 							['When the progress property is not specified, it is defaulted to 0',
 								{
 									fullChar:'=',
@@ -165,6 +176,15 @@ Uize.module ({
 									trackLength:1
 								},
 								'|\u2588|'
+							],
+							['When an empty string is specified for the fullHeadChar property, then there is no full head character - the property is not defaulted',
+								{
+									progress:1,
+									trackLength:1,
+									fullChar:'=',
+									fullHeadChar:''
+								},
+								'|=|'
 							]
 					]]
 				])

@@ -64,6 +64,90 @@ Uize.module ({
 							'Namespace'
 						]
 					]],
+					['Uize.Util.ModuleNaming.isExtensionModule',[
+						['A module name is considered to be an extension module name if the last segment of the name starts with a lowercase "x" and is followed by a capital letter',
+							'MyNamespace.MyClass.xMyExtension',
+							true
+						],
+						['A top level namespace module is not considered to be an extension module',
+							'MyNamespace',
+							false
+						],
+						['A class module is not considered to be an extension module',
+							'MyNamespace.MyClass',
+							false
+						],
+						['A mixin module is not considered to be an extension module',
+							'MyNamespace.MyClass.mMyMixin',
+							false
+						],
+						['A module name that contains a segment that starts with a lowercase "x" and is followed by a capital letter is not considered to be an extension module name if the segment is not the last segment of the name',
+							'MyNamespace.MyClass.xFoo.Bar',
+							false
+						],
+						['A top level namespace that starts with a lowercase "x" and is followed by a capital letter is not considered to be an extension module name',
+							'xFoo',
+							false
+						],
+						['A module name where the last segment starts with a lowercase "x" but where the next character is a lowercase letter is not considered to be an extension module name',
+							'MyNamespace.MyClass.xfoo',
+							false
+						],
+						['A module name where the last segment starts with a lowercase "x" but where the next character is an underscore is not considered to be an extension module name',
+							'MyNamespace.MyClass.x_Foo',
+							false
+						],
+						['A module name where the last segment starts with a lowercase "x" but where the next character is a dollar is not considered to be an extension module name',
+							'MyNamespace.MyClass.x$Foo',
+							false
+						],
+						['A module name where the last segment starts with a lowercase "x" but where the next character is a digit is not considered to be an extension module name',
+							'MyNamespace.MyClass.x4Foo',
+							false
+						]
+					]],
+					['Uize.Util.ModuleNaming.isMixinModule',[
+						['A module name is considered to be a mixin module name if the last segment of the name starts with a lowercase "m" and is followed by a capital letter',
+							'MyNamespace.MyClass.mMyMixin',
+							true
+						],
+						['A top level namespace module is not considered to be a mixin module',
+							'MyNamespace',
+							false
+						],
+						['A class module is not considered to be a mixin module',
+							'MyNamespace.MyClass',
+							false
+						],
+						['An extension module is not considered to be a mixin module',
+							'MyNamespace.MyClass.xMyExtension',
+							false
+						],
+						['A module name that contains a segment that starts with a lowercase "m" and is followed by a capital letter is not considered to be a mixin module name if the segment is not the last segment of the name',
+							'MyNamespace.MyClass.mFoo.Bar',
+							false
+						],
+						['A top level namespace that starts with a lowercase "m" and is followed by a capital letter is not considered to be a mixin module name',
+							'mFoo',
+							false
+						],
+						['A module name where the last segment starts with a lowercase "m" but where the next character is a lowercase letter is not considered to be a mixin module name',
+							'MyNamespace.MyClass.mfoo',
+							false
+						],
+						['A module name where the last segment starts with a lowercase "m" but where the next character is an underscore is not considered to be a mixin module name',
+							'MyNamespace.MyClass.m_Foo',
+							false
+						],
+						['A module name where the last segment starts with a lowercase "m" but where the next character is a dollar is not considered to be a mixin module name',
+							'MyNamespace.MyClass.m$Foo',
+							false
+						],
+						['A module name where the last segment starts with a lowercase "m" but where the next character is a digit is not considered to be a mixin module name',
+							'MyNamespace.MyClass.m4Foo',
+							false
+						]
+					]],
 					['Uize.Util.ModuleNaming.isTestModule',[
 						['When a module name is not a test module name, the value false is returned',
 							'Namespace.MyModule',

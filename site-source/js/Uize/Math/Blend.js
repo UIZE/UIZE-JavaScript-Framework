@@ -370,9 +370,9 @@ Uize.module ({
 
 							Parameters
 								blendFRACTION
-									.
+									A floating point number in the range of =0= to =1=, specifying where the blended value should lie between the two values being blended.
 
-									The value specified for the =blendFRACTION= parameter should be a floating point number in the range of =0= to =1=,, where the =blendFRACTION= parameter should be a floating point number in the range of =0= to =1=, where  a value of =0= will result in returning the value of the =value1INTorOBJorARRAY= parameter, the value of =1= will result in returning the value of the =value2INTorOBJorARRAY= parameter, and the value =.5= will result in returning the average of =value1INTorOBJorARRAY= and =value2INTorOBJorARRAY=.
+									When the value =0= is specified for this parameter, the value of the =value1INTorOBJorARRAY= parameter will be returned as the blend result. When the value =1= is specified, the value of the =value2INTorOBJorARRAY= parameter will be returned as the blend result. And when the value =.5= is specified, the blend result will fall halfway between the values of the =value1INTorOBJorARRAY= and =value2INTorOBJorARRAY= parameters, which will result in an equal mix when the curve function is linear. Similarly, when the value =.25= is specified, the blend result value will fall a quarter of the way between the values of the =value1INTorOBJorARRAY= and =value2INTorOBJorARRAY= parameters.
 
 								quantizationNUMorARRAYorOBJ
 									A number or array or object, allowing one to control the quantization for the blend result.
@@ -505,38 +505,142 @@ Uize.module ({
 										In the above example, a fade instance is created for fading an opacity value between =0= and =1=. Opacity is a floating point value, where =0= represents completely transparent and =1= represents completely opaque. Setting a quantization of =.02= for the fade ensures that there will be a maximum of 50 value updates (1 / .02) over the duration of the fade (there may be fewer, depending on CPU load).
 
 								curveFUNCorARRAYorOBJ
-									.
+									A function, array, or object, allowing one to control the curve(s) that should be applied when blending the values specified by the =value1INTorOBJorARRAY= and =value2INTorOBJorARRAY= parameters.
 
 									Simple Curve
-										.
+										In the simplest usage, a curve function can be specified when blending two number values.
+
+										EXAMPLE
+										.............................................................
+										function quadratic (value) {return value * value}
+
+										Uize.Math.Blend.blend (0,100,0,0,quadratic);   // returns 0
+										Uize.Math.Blend.blend (0,100,.1,0,quadratic);  // returns 1
+										Uize.Math.Blend.blend (0,100,.2,0,quadratic);  // returns 4
+										Uize.Math.Blend.blend (0,100,.3,0,quadratic);  // returns 9
+										Uize.Math.Blend.blend (0,100,.4,0,quadratic);  // returns 16
+										Uize.Math.Blend.blend (0,100,.5,0,quadratic);  // returns 25
+										Uize.Math.Blend.blend (0,100,.6,0,quadratic);  // returns 36
+										Uize.Math.Blend.blend (0,100,.7,0,quadratic);  // returns 49
+										Uize.Math.Blend.blend (0,100,.8,0,quadratic);  // returns 64
+										Uize.Math.Blend.blend (0,100,.9,0,quadratic);  // returns 81
+										Uize.Math.Blend.blend (0,100,1,0,quadratic);   // returns 100
+										.............................................................
+
+										In the above example, various blends are being created between the numbers =0= and =100=, using a quadratic curve function. As you can tell from the results returned for the various blends, the blend result is not linear between =0= and =100= - instead, it follows a quadratic curve. For instance, the blend between =0= and =100= at the halfway point is not =50= (as it would be with a linear blend), but is instead =25=.
 
 									Simple Curve Applying to Compound Blend Values
-										.
+										When blending two compound (hierarchical) objects, a simple curve function can be specified for the =curveFUNCorARRAYorOBJ= parameter and this curve function will be applied when blending values for all nodes of the two hierarchical objects.
+
+										EXAMPLE
+										..............................................................
+										Uize.Math.Blend.blend (
+											{red:210,green:105,blue:30},             // chocolate brown
+											{red:139,green:69,blue:19},              // saddle brown
+											.5,
+											0,
+											function (value) {return value * value}  // quadratic curve
+										);
+										..............................................................
+
+										RESULT
+										..............................
+										{red:174.5,green:87,blue:24.5}
+										..............................
+
+										In the above example, you will notice that the quadratic curve function has been applied when producing blended values for the =red=, =green=, and =blue= properties of the two color tuple objects being blended.
+
+									Compound Curve Value
+										In the same way that one can specify a `compound quantization value` when blending two compound (hierarchical) objects, one can also specify a compound curve value in order to apply different curves to different parts of the structure of two hierarchical objects being blended.
+
+										EXAMPLE
+										.............................................................................
+										Uize.Math.Blend.blend (
+											{red:210,green:105,blue:30},                            // chocolate brown
+											{red:139,green:69,blue:19},                             // saddle brown
+											.5,
+											0,
+											{
+												red:function (value) {return Math.pow (value,2)},    // quadratic curve
+												green:function (value) {return Math.pow (value,3)},  // cubic curve
+												blue:function (value) {return Math.pow (value,4)}    // quartic curve
+											}
+										);
+										.............................................................................
+
+										In the above example, two color tuple objects are being blended. To achieve different blend curves for the red, green, and blue components of the color, a compound curve value is specified.
+
+										By specifying a curve value that is an object with the same structure as the object values being blended, the curve functions specified for the properties of the compound curve value object are applied when creating blend values for each of the corresponding properties of the two object values being blended. So, the curve function specified for the =red= property of the curve value object is used when producing a blend value for the =red= property of the color tuples being blended.
+
+										RESULT
+										.....................................
+										{red:192.25,green:100.5,blue:29.3125}
+										.....................................
+
+									Compound Curve Value With Omissions
+										When a compound curve value is specified, its structure can be a subset of the structure of the two hierarchical objects being blended.
+
+										EXAMPLE
+										............................................................................
+										Uize.Math.Blend.blend (
+											{red:210,green:105,blue:30},                           // chocolate brown
+											{red:139,green:69,blue:19},                            // saddle brown
+											.5,
+											0,
+											{
+												red:function (value) {return Math.pow (value,2)},   // quadratic curve
+												green:function (value) {return Math.pow (value,3)}  // cubic curve
+											}
+										);
+										............................................................................
+
+										In the above example, two color tuple objects are being blended. Each tuple object contains =red=, =green=, and =blue= properties for the three channels of an RGB color value.
+
+										Now, in order to achieve non-linear blending for the =red= and =green= properties, we are specifying a `compound curve value` with curve functions specified for the =red= and =green= properties of the object. Because we are ok with the blend of the =blue= channel's value being linear, we can omit specifying a curve function for the =blue= property in the compound curve value - the blend will be defaulted to linear for this property.
+
+										RESULT
+										..................................
+										{red:192.25,green:100.5,blue:24.5}
+										..................................
+
+									Compound Curve Value With Defaulting at Nodes
+										When a `compound curve value` has no curve function explicitly specified for a property of the two hierarchical objects being blended, the curve function will be defaulted to the curve function of the parent node in the compound curve value.
 
 										EXAMPLE
 										...
-										var
-											chocolateRgbTuple = {red:210,green:105,blue:30},
-											saddleBrownRgbTuple = {red:139,green:69,blue:19},
-											brownBlendRgbTuple = Uize.Math.Blend.blend (
-												chocolateRgbTuple,
-												saddleBrownRgbTuple,
-												.5,
-												0,
-												function (value) {return value * value}
-											)
-										;
-										alert (JSON.stringify (brownBlendRgbTuple));  // alerts: {"red":174.5,"green":87,"blue":24.5}
+										Uize.Math.Blend.blend (
+											{
+												textColor:{red:255,green:222,blue:173},          // navajo white
+												bgColor:{red:210,green:105,blue:30}             // chocolate brown
+											},
+											{
+												textColor:{red:255,green:240,blue:230},          // linen white
+												bgColor:{red:139,green:69,blue:19}              // saddle brown
+											},
+											.5,
+											0,
+											{
+												textColor:function (value) {return Math.pow (value,2)},   // quadratic curve
+												bgColor:function (value) {return Math.pow (value,3)}      // cubic curve
+											}
+										);
 										...
 
-									Compound Curve Value
-										.
-
-									Compound Curve Value With Omissions
-										.
-
-									Compound Curve Value With Defaulting at Nodes
-										.
+										RESULT
+										...
+										{
+											textColor:{
+												red:255,
+												green:226.5,
+												blue:187.25
+											},
+											bgColor:{
+												red:201.125,
+												green:100.5,
+												blue:28.625
+											}
+										}
+										...
 				*/
 			}
 		});

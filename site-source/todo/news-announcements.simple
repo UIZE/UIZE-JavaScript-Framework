@@ -1,9 +1,3 @@
-NEW MODULE: Uize.Util.ModuleNaming
-	Still to do...
-
-	- write documentation
-	- write news announcement
-
 NEW MODULE: Uize.Math.Blend
 	Still to do...
 
@@ -17,14 +11,14 @@ NEW MODULE: Uize.Json.MultiLineStringLiteral
 	- write documentation
 	- write news announcement
 
-NEW MODULE: Uize.Templates.Text.ProgressBar
+NEW MODULE: Uize.Templates.Text.Tables.Breakdown
 	Still to do...
 
-	- finish unit tests (add tests for no full head character and no ends characters)
+	- write unit tests
 	- write documentation
 	- write news announcement
 
-NEW MODULE: Uize.Templates.Text.Table
+NEW MODULE: Uize.Templates.Text.Tables.Histogram
 	Still to do...
 
 	- write unit tests
@@ -115,6 +109,9 @@ NEW MODULE: Uize.Oop.mTreeInheritance
 	- write documentation
 	- update documentation in Uize.Widget class to refer to reference for =Uize.Oop.mTreeInheritance= module
 	- write news announcement
+
+NEW METHOD: Uize.Array.Util.sum
+	.
 
 Uize.Node Modules Deprecated
 

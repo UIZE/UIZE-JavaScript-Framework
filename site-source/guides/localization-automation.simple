@@ -11,6 +11,7 @@ Introduction
 		- =import= - distributes strings from the `consolidated language resources files` to `distributed resource files`, for each of the project's `supported languages`
 		- =exportJobs= - exports `translation job files` from the `consolidated language resources files`, for each of the project's `translatable languages`
 		- =importJobs= - imports translated strings from `translation job files` and merges them into the `consolidated language resources files`, for each of the project's `translatable languages`
+		- =usage= - generates a `usage report` that contains details about usage of resource strings throughout a project, including information about unreferenced resource strings
 		- =extract= - extracts strings from the project's codebase and generates `distributed resource files` for the project's `primary language` (may not be supported for a project)
 
 		Localization Service Adapter
@@ -155,8 +156,6 @@ Advanced Topics
 
 				What constitutes a brand-specific resource file will vary by project and depend on the project definition. Typically, brand-specific resource files provide overrides for certain resource strings that need to be different for specific brands, so the number of brand-specific resource files is usually smaller than the total number of resource files. Moreover, different brands may have a differing number of brand-specific resource files.
 
-				The number of brand-specific resource files, expressed as a percentage of total resource files, is represented for convenience in the =brandSpecificResourceFilesPercent= property.
-
 ### Key Features
 	.
 
@@ -209,6 +208,13 @@ Advanced Topics
 		................................................................................
 		node [pathToUize]build.js Uize.Build.Loc project=[projectName] method=importJobs
 		................................................................................
+
+	usage
+		.
+
+		...........................................................................
+		node [pathToUize]build.js Uize.Build.Loc project=[projectName] method=usage
+		...........................................................................
 
 	extract
 		.
