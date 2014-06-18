@@ -13,8 +13,8 @@ Fixed Flickering Issue in IE9 in 3D Rotation Viewer Examples
 Broken Images in Various Examples Fixed
 	A number of JavaScript examples that were displaying broken images have been fixed, including numerous slideshow examples and examples using image thumbnails.
 
-	The cause of the problem was a change in an image API that was made by Zazzle as part of their poster prints product refresh (yes, many of the images used in the examples are hosted on *zazzle.com*). URLs for the broken images have been updated to use the new query parameters and the images now display correctly in the examples. There still remains a couple of examples with images that are broken because of a different issue, and these examples will be fixed in a future release. 
- 
+	The cause of the problem was a change in an image API that was being used by the UIZE site. URLs for the broken images have been updated to use the image API's new query parameters and the images now display correctly in the examples. There still remains a couple of examples with images that are broken because of a different issue, and these examples will be fixed in a future release.
+
 ....................................................................................
 << metadata >>
 
