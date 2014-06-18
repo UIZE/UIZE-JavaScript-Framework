@@ -20,7 +20,7 @@
 	Introduction
 		The =Uize.Comm.Iframe= class implements support for communication to a server by submitting form data to it and targeting its response to an IFRAME.
 
-		*DEVELOPERS:* `Chris van Rensburg`, `Jan Borgersen`, original code donated by `Zazzle Inc.`
+		*DEVELOPERS:* `Chris van Rensburg`, `Jan Borgersen`, original code contributed by `Zazzle Inc.`
 
 		In order to implement support for communication through an IFRAME, this class overrides the implementation of the =performRequest= instance method inherited from the =Uize.Comm= base class. There are no additional methods or properties provided by this class - all the interface is provided in the =Uize.Comm= superclass.
 */

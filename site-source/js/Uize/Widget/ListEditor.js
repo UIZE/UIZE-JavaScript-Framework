@@ -20,7 +20,7 @@
 	Introduction
 		The =Uize.Widget.ListEditor= class manages a list of text values in a multi-select box, with support for adding values and removing selected values.
 
-		*DEVELOPERS:* `Ben Ilegbodu`, `Chris van Rensburg`, original code donated by `Zazzle Inc.`
+		*DEVELOPERS:* `Ben Ilegbodu`, `Chris van Rensburg`, original code contributed by `Zazzle Inc.`
 
 	In a Nutshell
 		The =Uize.Widget.ListEditor= class implements a widget that lets the user build and edit a simple list of string values.

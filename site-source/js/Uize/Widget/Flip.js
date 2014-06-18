@@ -20,7 +20,7 @@
 	Introduction
 		The =Uize.Widget.Flip= class implements a widget for producing a flip up or flip down JavaScript animation effect when its HTML contents are changed.
 
-		*DEVELOPERS:* `Jan Borgersen`, `Chris van Rensburg`, original code donated by `Zazzle Inc.`
+		*DEVELOPERS:* `Jan Borgersen`, `Chris van Rensburg`, original code contributed by `Zazzle Inc.`
 */
 
 Uize.module ({

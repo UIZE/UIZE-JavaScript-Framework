@@ -20,7 +20,7 @@
 	Introduction
 		The =Uize.Widget.FormElement= class serves as a wrapper class in order to provide an interface for any form element (input, select, textarea, etc).
 
-		*DEVELOPERS:* `Tim Carter`, `Chris van Rensburg`, `Ben Ilegbodu`, `Vinson Chuong`, original code donated by `Zazzle Inc.`
+		*DEVELOPERS:* `Tim Carter`, `Chris van Rensburg`, `Ben Ilegbodu`, `Vinson Chuong`, original code contributed by `Zazzle Inc.`
 */
 
 Uize.module ({

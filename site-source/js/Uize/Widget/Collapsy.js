@@ -20,7 +20,7 @@
 	Introduction
 		The =Uize.Widget.Collapsy= widget provides functionality surrounding showing status messages (like a form warning) in both a collapsed and expanded state.
 
-		*DEVELOPERS:* `Ben Ilegbodu`, `Tim Carter`, original code donated by `Zazzle Inc.`
+		*DEVELOPERS:* `Ben Ilegbodu`, `Tim Carter`, original code contributed by `Zazzle Inc.`
 */
 
 Uize.module ({

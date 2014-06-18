@@ -20,20 +20,20 @@
 	Introduction
 		The =Uize.Test.Uize.Widget.mDeclarativeChildren= module defines a suite of unit tests for the =Uize.Widget.mDeclarativeChildren= mixin module.
 
-		*DEVELOPERS:* `Ben Ilegbodu`, original code donated by `Zazzle Inc.`
+		*DEVELOPERS:* `Ben Ilegbodu`, original code contributed by `Zazzle Inc.`
 */
 
 Uize.module ({
 	name:'Uize.Test.Uize.Widget.mDeclarativeChildren',
 	builder:function () {
 		'use strict';
-		
+
 		function _expectAll(_children, _expectFunc) {
 			for (var _childName in _children) {
 				if (!_expectFunc(_children[_childName], _childName))
 					return false;
 			}
-			
+
 			return true;
 		}
 
@@ -50,7 +50,7 @@ Uize.module ({
 										_childProperties.widgetClass = Uize.getModuleByName(_childProperties.widgetClass);
 									else if (Uize.isString(_childProperties))
 										_childProperties = Uize.getModuleByName(_childProperties);
-		
+
 									return _childProperties;
 								}
 							)
@@ -72,7 +72,7 @@ Uize.module ({
 				)
 			) ({name:'parent'})).children;
 		}
-		
+
 		function _generateTest(_title, _declarativeChildren, _expectedChildren) {
 			function _getDeclaredChildrenForTest() { return _getDeclaredChildren(_declarativeChildren) }
 			function _expectAllDeclaredChildren(_expectFunc) { return _expectAll(_getDeclaredChildrenForTest(), _expectFunc) }
@@ -270,7 +270,7 @@ Uize.module ({
 								}
 							},
 							{
-								
+
 							}
 						)
 					]
@@ -335,7 +335,7 @@ Uize.module ({
 								ipsum:NaN
 							},
 							{
-								
+
 							}
 						)
 					]
@@ -350,14 +350,14 @@ Uize.module ({
 									m = this,
 									_returnValue = false
 								;
-								
+
 								_getDeclaredChildren({
 									childA:function() {
 										_returnValue = m.expect('parent', this.get('name'));
 										return {};
 									}
 								});
-										
+
 								return _returnValue;
 							}
 						},
@@ -368,14 +368,14 @@ Uize.module ({
 									m = this,
 									_returnValue = false
 								;
-								
+
 								_getDeclaredChildren({
 									childA:function(_childName) {
 										_returnValue = m.expect('childA', _childName);
 										return {};
 									}
 								});
-										
+
 								return _returnValue;
 							}
 						},
@@ -522,7 +522,7 @@ Uize.module ({
 					title:'A Subclass can override the getContainer method',
 					test:function() {
 						var _returnValue = false;
-						
+
 						_getDeclaredChildren(
 							{childA:'Uize.Widget'},
 							function() {
@@ -530,7 +530,7 @@ Uize.module ({
 								return this;
 							}
 						);
-						
+
 						return _returnValue
 					}
 				}

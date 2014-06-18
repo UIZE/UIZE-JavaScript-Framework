@@ -20,7 +20,7 @@
 	Introduction
 		The =Uize.Widget.Population= class implements population of contents into a DOM node, by cloning an HTML template using data from a records array.
 
-		*DEVELOPERS:* `Chris van Rensburg`, original code donated by `Zazzle Inc.`
+		*DEVELOPERS:* `Chris van Rensburg`, original code contributed by `Zazzle Inc.`
 */
 
 Uize.module ({

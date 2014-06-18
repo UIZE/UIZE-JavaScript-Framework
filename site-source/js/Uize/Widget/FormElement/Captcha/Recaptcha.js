@@ -20,7 +20,7 @@
 	Introduction
 		The =Uize.Widget.FormElement.Captcha.Recaptcha= class encapsulates the logic required to display and use reCAPTCHA, a captcha implementation developed by a group of researchers at CMU (http://recaptcha.net).
 
-		*DEVELOPERS:* `Tim Carter`, original code donated by `Zazzle Inc.`
+		*DEVELOPERS:* `Tim Carter`, original code contributed by `Zazzle Inc.`
 
 		The =Uize.Widget.FormElement.Captcha.Recaptcha= class is a thin wrapper around the Recaptcha object, a js object that is sourced in by reCAPTCHA.
 

@@ -20,16 +20,16 @@
 	Introduction
 		The =Uize.Test.Uize.Widget.mChildBindings= module defines a suite of unit tests for the =Uize.Widget.mChildBindings= mixin module.
 
-		*DEVELOPERS:* `Ben Ilegbodu`, original code donated by `Zazzle Inc.`
+		*DEVELOPERS:* `Ben Ilegbodu`, original code contributed by `Zazzle Inc.`
 */
 
 Uize.module ({
 	name:'Uize.Test.Uize.Widget.mChildBindings',
 	builder:function () {
 		'use strict';
-		
+
 		function _getRandomPropertyValue() { return Math.floor(Math.random() * 10000) }
-				
+
 		function _getChildrenToAdd(_children) {
 			return Uize.map (
 				_children,
@@ -38,7 +38,7 @@ Uize.module ({
 				}
 			);
 		}
-				
+
 		function _getTestWidgetClass(_bindings, _stateProperties, _children) {
 			return Uize.Widget.subclass ({
 				mixins:Uize.Widget.mChildBindings,
@@ -47,32 +47,32 @@ Uize.module ({
 				childBindings:_bindings
 			});
 		}
-		
+
 		function _getTestWidgetClassInstance(_bindings, _stateProperties, _children) {
 			return _getTestWidgetClass(_bindings, _stateProperties, _children)({name:'parent'});
 		}
-		
+
 		function _generateTest(_title, _bindingsVerbose, _bindingsShorthand, _expectedBindings) {
 			var
 				_generatedTests = [],
 				_stateProperties,
 				_children
 			;
-			
+
 			function _generateSyntaxTests(_isVerbose) {
 				var _bindings = _isVerbose ? _bindingsVerbose : _bindingsShorthand;
-				
+
 				function _getSyntaxTestWidgetClass(_omitChildren) {
 					return _getTestWidgetClass(_bindings, _stateProperties, !_omitChildren && _children);
 				}
-				
+
 				function _getSyntaxTestWidgetClassInstance(_omitChildren) {
 					return _getSyntaxTestWidgetClass(_omitChildren)({name:'parent'});
 				}
-				
+
 				function _generateTestsForAll(_expectFunc, _omitChildren) {
 					var _tests = [];
-					
+
 					if (!Uize.isEmpty(_expectFunc)) {
 						Uize.forEach(
 							_expectedBindings,
@@ -82,7 +82,7 @@ Uize.module ({
 									function(_bindingsForChild, _childName) {
 										Uize.forEach(
 											_bindingsForChild,
-											function(_binding) { 
+											function(_binding) {
 												_tests.push({
 													title:'Test for: ' + _propertyName + ' ' + _binding.direction + ' ' + _childName + '.' + _binding.property,
 													test:function(_continue) {
@@ -107,10 +107,10 @@ Uize.module ({
 							}
 						);
 					}
-					
+
 					return _tests;
 				}
-				
+
 				return {
 					title:(_isVerbose ? 'Verbose' : 'Shorthand') + ' Syntax',
 					test:[
@@ -136,7 +136,7 @@ Uize.module ({
 										_aToB = _binding.aToB || Uize.returnX,
 										_bToA = Uize.returnX
 									;
-									
+
 									// Only when the direction is from child to widget does the child's initial value get synched to the widget
 									if (_binding.direction == '<-') {
 										_initialValue = _children[_binding.child][_binding.property];
@@ -145,7 +145,7 @@ Uize.module ({
 									}
 
 									_widget.addChildren(_getChildrenToAdd(_children));
-									
+
 									_continue(
 										this.expect(_bToA(_initialValue), _widget.get(_binding.widgetProperty))
 											&& this.expect(_aToB(_initialValue), _widget.children[_binding.child].get(_binding.property))
@@ -163,17 +163,17 @@ Uize.module ({
 										_continue(true);
 										return;
 									}
-									
+
 									var
 										m = this,
 										_widget = _binding.widget,
 										_newValue = _getRandomPropertyValue(),
 										_aToB = _binding.aToB || Uize.returnX
 									;
-									
+
 									// set widget to new value
 									_widget.set(_binding.widgetProperty, _newValue);
-									
+
 									_continue(m.expect(_aToB(_newValue), _widget.children[_binding.child].get(_binding.property)));
 								}
 							)
@@ -197,7 +197,7 @@ Uize.module ({
 
 									// set widget to new value
 									_widget.children[_binding.child].set(_binding.property, _newValue);
-									
+
 									_continue(m.expect(_bToA(_newValue), _widget.get(_binding.widgetProperty)));
 								}
 							)
@@ -205,19 +205,19 @@ Uize.module ({
 					]
 				};
 			}
-				
+
 			if (_expectedBindings) {
 				_children = {};
 				_stateProperties = {};
-				
+
 				for (var _property in _expectedBindings) {
 					var _bindingsForProperty = _expectedBindings[_property];
-					
+
 					_stateProperties[_property] = {
 						name:_property,
 						value:_getRandomPropertyValue()
 					};
-					
+
 					for (var _childName in _bindingsForProperty) {
 						var _bindingsForChild = _bindingsForProperty[_childName];
 						for (var _bindingNo = -1; ++_bindingNo < _bindingsForChild.length;)
@@ -228,12 +228,12 @@ Uize.module ({
 					}
 				}
 			}
-			
+
 			(!_expectedBindings || _bindingsShorthand)
 				&& _generatedTests.push(_generateSyntaxTests());
 			(!_expectedBindings || _bindingsVerbose)
 				&& _generatedTests.push(_generateSyntaxTests(true));
-			
+
 			return {
 				title:_title,
 				test:_generatedTests
@@ -260,7 +260,7 @@ Uize.module ({
 						_generateTest(
 							'When no child is specified, nothing is bound (and no errors are thrown)',
 							{
-								propertyA:{}	
+								propertyA:{}
 							},
 							{
 								propertyA:''
@@ -286,7 +286,7 @@ Uize.module ({
 									'When only the child property is specified, the child is bound to same-named state property bi-directionally',
 									{
 										propertyA:{
-											child:'childA'	
+											child:'childA'
 										}
 									},
 									{
@@ -299,7 +299,7 @@ Uize.module ({
 													property:'propertyA',
 													direction:'<->'
 												}
-											]	
+											]
 										}
 									}
 								),
@@ -321,7 +321,7 @@ Uize.module ({
 													property:'childPropertyA',
 													direction:'<->'
 												}
-											]	
+											]
 										}
 									}
 								),
@@ -346,7 +346,7 @@ Uize.module ({
 															property:'propertyA',
 															direction:'<->'
 														}
-													]	
+													]
 												}
 											}
 										),
@@ -368,7 +368,7 @@ Uize.module ({
 															property:'propertyA',
 															direction:'->'
 														}
-													]	
+													]
 												}
 											}
 										),
@@ -390,7 +390,7 @@ Uize.module ({
 															property:'propertyA',
 															direction:'<-'
 														}
-													]	
+													]
 												}
 											}
 										)
@@ -417,7 +417,7 @@ Uize.module ({
 															property:'propertyA',
 															direction:'<->'
 														}
-													]	
+													]
 												}
 											}
 										),
@@ -442,7 +442,7 @@ Uize.module ({
 															aToB:function(_value) { return _value * 2 },
 															bToA:function(_value) { return _value / 2 }
 														}
-													]	
+													]
 												}
 											}
 										),
@@ -467,7 +467,7 @@ Uize.module ({
 															aToB:function(_value) { return _value / 2 },
 															bToA:function(_value) { return _value * 2 }
 														}
-													]	
+													]
 												}
 											}
 										),
@@ -491,9 +491,9 @@ Uize.module ({
 															direction:'->',
 															aToB:function(_value) { return _value - 15 }
 														}
-													]	
+													]
 												}
-											}	
+											}
 										),
 										_generateTest(
 											'<-',
@@ -515,9 +515,9 @@ Uize.module ({
 															direction:'<-',
 															bToA:function(_value) { return _value + 7 }
 														}
-													]	
+													]
 												}
-											}	
+											}
 										)
 									]
 								}
@@ -531,10 +531,10 @@ Uize.module ({
 									{
 										propertyA:[
 											{
-												child:'childA'	
+												child:'childA'
 											},
 											{
-												child:'childB'	
+												child:'childB'
 											}
 										]
 									},
@@ -571,7 +571,7 @@ Uize.module ({
 											},
 											{
 												child:'childB',
-												property:'childPropertyA'	
+												property:'childPropertyA'
 											}
 										]
 									},
@@ -611,7 +611,7 @@ Uize.module ({
 													},
 													{
 														child:'childB',
-														direction:'<->'	
+														direction:'<->'
 													}
 												]
 											},
@@ -648,7 +648,7 @@ Uize.module ({
 													},
 													{
 														child:'childB',
-														direction:'->'	
+														direction:'->'
 													}
 												]
 											},
@@ -685,7 +685,7 @@ Uize.module ({
 													},
 													{
 														child:'childB',
-														direction:'<-'	
+														direction:'<-'
 													}
 												]
 											},
@@ -885,9 +885,9 @@ Uize.module ({
 															direction:'->',
 															aToB:function(_value) { return _value / 15 }
 														}
-													]	
+													]
 												}
-											}	
+											}
 										)/*,
 										_generateTest(
 											'<-',
@@ -927,7 +927,7 @@ Uize.module ({
 														}
 													]
 												}
-											}	
+											}
 										)*/
 									]
 								}
@@ -945,10 +945,10 @@ Uize.module ({
 									'When only the child property is specified, the child is bound to same-named state property bi-directionally',
 									{
 										propertyA:{
-											child:'childA'	
+											child:'childA'
 										},
 										propertyB:{
-											child:'childA'	
+											child:'childA'
 										}
 									},
 									{
@@ -962,7 +962,7 @@ Uize.module ({
 													property:'propertyA',
 													direction:'<->'
 												}
-											]	
+											]
 										},
 										propertyB:{
 											childA:[
@@ -970,7 +970,7 @@ Uize.module ({
 													property:'propertyB',
 													direction:'<->'
 												}
-											]	
+											]
 										}
 									}
 								),
@@ -997,7 +997,7 @@ Uize.module ({
 													property:'childPropertyA',
 													direction:'<->'
 												}
-											]	
+											]
 										},
 										propertyB:{
 											childA:[
@@ -1005,7 +1005,7 @@ Uize.module ({
 													property:'childPropertyB',
 													direction:'<->'
 												}
-											]	
+											]
 										}
 									}
 								),
@@ -1021,7 +1021,7 @@ Uize.module ({
 												},
 												propertyB:{
 													child:'childA',
-													direction:'<->'	
+													direction:'<->'
 												}
 											},
 											{
@@ -1035,7 +1035,7 @@ Uize.module ({
 															property:'propertyA',
 															direction:'<->'
 														}
-													]	
+													]
 												},
 												propertyB:{
 													childA:[
@@ -1043,7 +1043,7 @@ Uize.module ({
 															property:'propertyB',
 															direction:'<->'
 														}
-													]	
+													]
 												}
 											}
 										),
@@ -1056,7 +1056,7 @@ Uize.module ({
 												},
 												propertyB:{
 													child:'childA',
-													direction:'->'	
+													direction:'->'
 												}
 											},
 											{
@@ -1070,7 +1070,7 @@ Uize.module ({
 															property:'propertyA',
 															direction:'->'
 														}
-													]	
+													]
 												},
 												propertyB:{
 													childA:[
@@ -1078,7 +1078,7 @@ Uize.module ({
 															property:'propertyB',
 															direction:'->'
 														}
-													]	
+													]
 												}
 											}
 										),
@@ -1091,7 +1091,7 @@ Uize.module ({
 												},
 												propertyB:{
 													child:'childA',
-													direction:'<-'	
+													direction:'<-'
 												}
 											},
 											{
@@ -1105,7 +1105,7 @@ Uize.module ({
 															property:'propertyA',
 															direction:'<-'
 														}
-													]	
+													]
 												},
 												propertyB:{
 													childA:[
@@ -1113,7 +1113,7 @@ Uize.module ({
 															property:'propertyB',
 															direction:'<-'
 														}
-													]	
+													]
 												}
 											}
 										)
@@ -1145,7 +1145,7 @@ Uize.module ({
 															property:'propertyA',
 															direction:'<->'
 														}
-													]	
+													]
 												},
 												propertyB:{
 													childA:[
@@ -1153,7 +1153,7 @@ Uize.module ({
 															property:'propertyB',
 															direction:'<->'
 														}
-													]	
+													]
 												}
 											}
 										),
@@ -1185,7 +1185,7 @@ Uize.module ({
 															aToB:function(_value) { return _value * 2 },
 															bToA:function(_value) { return _value / 2 }
 														}
-													]	
+													]
 												},
 												propertyB:{
 													childA:[
@@ -1195,7 +1195,7 @@ Uize.module ({
 															aToB:function(_value) { return _value + 2 },
 															bToA:function(_value) { return _value - 2 }
 														}
-													]	
+													]
 												}
 											}
 										),
@@ -1227,7 +1227,7 @@ Uize.module ({
 															aToB:function(_value) { return _value / 2 },
 															bToA:function(_value) { return _value * 2 }
 														}
-													]	
+													]
 												},
 												propertyB:{
 													childA:[
@@ -1237,7 +1237,7 @@ Uize.module ({
 															aToB:function(_value) { return _value - 2 },
 															bToA:function(_value) { return _value + 2 }
 														}
-													]	
+													]
 												}
 											}
 										),
@@ -1275,7 +1275,7 @@ Uize.module ({
 															direction:'->',
 															aToB:function(_value) { return _value - 15 }
 														}
-													]	
+													]
 												},
 												propertyB:{
 													childA:[
@@ -1284,7 +1284,7 @@ Uize.module ({
 															direction:'->',
 															aToB:function(_value) { return _value * 15 }
 														}
-													]	
+													]
 												},
 												propertyC:{
 													childA:[
@@ -1293,9 +1293,9 @@ Uize.module ({
 															direction:'->',
 															aToB:function(_value) { return _value / 15 }
 														}
-													]	
+													]
 												}
-											}	
+											}
 										),
 										_generateTest(
 											'<-',
@@ -1324,7 +1324,7 @@ Uize.module ({
 															direction:'<-',
 															bToA:function(_value) { return _value + 7 }
 														}
-													]	
+													]
 												},
 												propertyB:{
 													childA:[
@@ -1333,9 +1333,9 @@ Uize.module ({
 															direction:'<-',
 															bToA:function(_value) { return _value + 17 }
 														}
-													]	
+													]
 												}
-											}	
+											}
 										)
 									]
 								}
@@ -1349,18 +1349,18 @@ Uize.module ({
 									{
 										propertyA:[
 											{
-												child:'childA'	
+												child:'childA'
 											},
 											{
-												child:'childB'	
+												child:'childB'
 											}
 										],
 										propertyB:[
 											{
-												child:'childA'	
+												child:'childA'
 											},
 											{
-												child:'childB'	
+												child:'childB'
 											}
 										]
 									},
@@ -1415,7 +1415,7 @@ Uize.module ({
 											},
 											{
 												child:'childB',
-												property:'childPropertyA'	
+												property:'childPropertyA'
 											}
 										],
 										propertyB:[
@@ -1425,11 +1425,11 @@ Uize.module ({
 											},
 											{
 												child:'childB',
-												property:'childPropertyB'	
+												property:'childPropertyB'
 											},
 											{
 												child:'childC',
-												property:'childPropertyB'	
+												property:'childPropertyB'
 											}
 										]
 									},
@@ -1494,25 +1494,25 @@ Uize.module ({
 													},
 													{
 														child:'childB',
-														direction:'<->'	
+														direction:'<->'
 													},
 													{
 														child:'childC',
-														direction:'<->'	
+														direction:'<->'
 													},
 													{
 														child:'childD',
-														direction:'<->'	
+														direction:'<->'
 													}
 												],
 												propertyB:[
 													{
 														child:'childA',
-														direction:'<->'	
+														direction:'<->'
 													},
 													{
 														child:'childB',
-														direction:'<->'	
+														direction:'<->'
 													}
 												]
 											},
@@ -1581,35 +1581,35 @@ Uize.module ({
 													},
 													{
 														child:'childB',
-														direction:'->'	
+														direction:'->'
 													},
 													{
 														child:'childC',
-														direction:'->'	
+														direction:'->'
 													}
 												],
 												propertyB:[
 													{
 														child:'childA',
-														direction:'->'	
+														direction:'->'
 													},
 													{
 														child:'childB',
-														direction:'->'	
+														direction:'->'
 													},
 													{
 														child:'childC',
-														direction:'->'	
+														direction:'->'
 													}
 												],
 												propertyC:[
 													{
 														child:'childA',
-														direction:'->'	
+														direction:'->'
 													},
 													{
 														child:'childB',
-														direction:'->'	
+														direction:'->'
 													}
 												]
 											},
@@ -1696,25 +1696,25 @@ Uize.module ({
 													},
 													{
 														child:'childB',
-														direction:'<-'	
+														direction:'<-'
 													},
 													{
 														child:'childC',
-														direction:'<-'	
+														direction:'<-'
 													},
 													{
 														child:'childD',
-														direction:'<-'	
+														direction:'<-'
 													}
 												],
 												propertyB:[
 													{
 														child:'childA',
-														direction:'<-'	
+														direction:'<-'
 													},
 													{
 														child:'childB',
-														direction:'<-'	
+														direction:'<-'
 													}
 												]
 											},
@@ -2062,7 +2062,7 @@ Uize.module ({
 															direction:'->',
 															aToB:function(_value) { return _value / 15 }
 														}
-													]	
+													]
 												},
 												propertyB:{
 													childA:[
@@ -2085,9 +2085,9 @@ Uize.module ({
 															direction:'->',
 															aToB:function(_value) { return _value / 15 }
 														}
-													]	
+													]
 												}
-											}	
+											}
 										)/*,
 										_generateTest(
 											'<-',
@@ -2127,7 +2127,7 @@ Uize.module ({
 														}
 													]
 												}
-											}	
+											}
 										)*/
 									]
 								}
@@ -2149,7 +2149,7 @@ Uize.module ({
 										{childA:{}}
 									)
 								;
-								
+
 								return this.expect(_widgetInitialPropertyValue, _widget.get('propertyA'))
 									&& this.expect(_widget.get('propertyA'), _widget.children.childA.get('propertyA'))
 								;
@@ -2167,7 +2167,7 @@ Uize.module ({
 									),
 									_childAWidget = _widget.children.childA
 								;
-								
+
 								return this.expect(_childWidgetInitialPropertyValue, _childAWidget.get('propertyA'))
 									&& this.expect(_childAWidget.get('propertyA'), _widget.get('propertyA'))
 								;
@@ -2194,7 +2194,7 @@ Uize.module ({
 											aToB:function(_value) { return _value * 3},
 											bToA:function(_value) { return _value / 2 }
 										}
-									]	
+									]
 								}
 							}
 						),*/
@@ -2209,12 +2209,12 @@ Uize.module ({
 									),
 									_childToRemove = _widget.children.childA // keep reference so we'll have it after removal
 								;
-								
+
 								_widget.removeChild(_childToRemove);
-								
+
 								// set widget to new value to see if child widget will also update (which it shouldn't)
 								_widget.set('propertyA', _getRandomPropertyValue());
-								
+
 								return this.expect(true, _widget.get('propertyA') != _childToRemove.get('propertyA'));
 							}
 						},
@@ -2229,12 +2229,12 @@ Uize.module ({
 									),
 									_childToRemove = _widget.children.childA // keep reference so we'll have it after removal
 								;
-								
+
 								_widget.removeChild(_childToRemove);
-								
+
 								// set widget to new value to see if child widget will also update (which it shouldn't)
 								_childToRemove.set('propertyA', _getRandomPropertyValue());
-								
+
 								return this.expect(true, _widget.get('propertyA') != _childToRemove.get('propertyA'));
 							}
 						},
@@ -2248,13 +2248,13 @@ Uize.module ({
 										{childA:{propertyA:_getRandomPropertyValue()}}
 									)
 								;
-								
+
 								// first remove the child
 								_widget.removeChild('childA');
-								
+
 								// then add back a new child with the same name (which should get bound again)
 								_widget.addChild('childA', Uize.Widget, {propertyA:_getRandomPropertyValue()});
-								
+
 								// state should match when the child's state is synched
 								return this.expect(_widget.get('propertyA'), _widget.children.childA.get('propertyA'));
 							}
@@ -2269,16 +2269,16 @@ Uize.module ({
 										{childA:{propertyA:_getRandomPropertyValue()}}
 									)
 								;
-								
+
 								// first remove the child
 								_widget.removeChild('childA');
-								
+
 								// then add back a new child with the same name (which should get bound again)
 								_widget.addChild('childA', Uize.Widget, {propertyA:_getRandomPropertyValue()});
-								
+
 								// set widget to new value (which should get bound to child)
 								_widget.set('propertyA', _getRandomPropertyValue());
-								
+
 								return this.expect(_widget.get('propertyA'), _widget.children.childA.get('propertyA'));
 							}
 						},
@@ -2317,11 +2317,11 @@ Uize.module ({
 									),
 									_WidgetSubclass = _WidgetClass.subclass({
 										childBindings:{
-											propertyA:'->childA.childPropertyA'	
+											propertyA:'->childA.childPropertyA'
 										}
 									})
 								;
-								
+
 								return this.expectSameAs(_WidgetSubclass.mChildBindings_bindings.childB['propertyA/propertyA'], _WidgetClass.mChildBindings_bindings.childB['propertyA/propertyA'])
 									&& this.expectNotSameAs(_WidgetSubclass.mChildBindings_bindings.childA['propertyA/childPropertyA'], _WidgetClass.mChildBindings_bindings.childA['propertyA/childPropertyA'])
 									&& this.expect(1, Uize.keys(_WidgetSubclass.mChildBindings_bindings.childA).length)

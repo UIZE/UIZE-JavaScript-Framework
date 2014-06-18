@@ -20,7 +20,7 @@
 	Introduction
 		The =Uize.Web.xDom= module extends the =Uize.Web= object by adding functionality for manipulating the DOM.
 
-		*DEVELOPERS:* `Ben Ilegbodu`, original code donated by `Zazzle Inc.`
+		*DEVELOPERS:* `Ben Ilegbodu`, original code contributed by `Zazzle Inc.`
 
 		The =Uize.Web.xDom= module is an extension module that extends the =Uize.Web= class. Pages that want to leverage the syntax-friendly nature of =Uize.Web= may not need to leverage any DOM manipulation. Therefore, the DOM manipulation functionality is not implemented in the =Uize.Web= class in order to reduce the need for loading the extra code.  Instead, in order to include the DOM manipulation functionality, one needs to require the =Uize.Web.xDom= extension module.
 

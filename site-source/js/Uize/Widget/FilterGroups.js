@@ -20,7 +20,7 @@
 	Introduction
 		The =Uize.Widget.FilteredInput= widget provides functionality for...
 
-		*DEVELOPERS:* `Ben Ilegbodu`, original code donated by `Zazzle Inc.`
+		*DEVELOPERS:* `Ben Ilegbodu`, original code contributed by `Zazzle Inc.`
 */
 
 Uize.module ({

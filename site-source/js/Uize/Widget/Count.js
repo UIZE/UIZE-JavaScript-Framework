@@ -20,7 +20,7 @@
 	Introduction
 		The =Uize.Widget.Count= class implements a fancy number display, using images to represent digits, and using an animation effect when changing values.
 
-		*DEVELOPERS:* `Jan Borgersen`, `Chris van Rensburg`, original code donated by `Zazzle Inc.`
+		*DEVELOPERS:* `Jan Borgersen`, `Chris van Rensburg`, original code contributed by `Zazzle Inc.`
 */
 
 Uize.module ({

@@ -20,7 +20,7 @@
 	Introduction
 		The =Uize.Widget.Options.Accordion= class extends its superclass by adding an accordion style behavior for revealing the contents of the selected tab.
 
-		*DEVELOPERS:* `Ben Ilegbodu`, original code donated by `Zazzle Inc.`
+		*DEVELOPERS:* `Ben Ilegbodu`, original code contributed by `Zazzle Inc.`
 */
 
 Uize.module ({

@@ -20,7 +20,7 @@
 	Introduction
 		The =Uize.Math.Matrix2D= module provides support for building and applying 2-D affine transformations in a 2-dimensional plane.
 
-		*DEVELOPERS:* `Petar Ivanov` & `Ben Ilegbodu`, original code donated by `Zazzle Inc.`
+		*DEVELOPERS:* `Petar Ivanov` & `Ben Ilegbodu`, original code contributed by `Zazzle Inc.`
 
 		Not a Uize Subclass
 			First off, it's worth emphasizing that the =Uize.Math.Matrix2D= object is not a =Uize.Class= subclass, but a very lightweight object.

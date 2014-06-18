@@ -20,7 +20,7 @@
 	Introduction
 		The =Uize.Web.xEffects= module extends the =Uize.Web= object by adding functionality for animation effects.
 
-		*DEVELOPERS:* `Ben Ilegbodu`, original code donated by `Zazzle Inc.`
+		*DEVELOPERS:* `Ben Ilegbodu`, original code contributed by `Zazzle Inc.`
 
 		The =Uize.Web.xEffects= module is an extension module that extends the =Uize.Web= class. Pages that want to leverage the syntax-friendly nature of =Uize.Web= may not need to leverage any animation effects. Therefore, the animation effects functionality is not implemented in the =Uize.Web= class in order to reduce the need for loading the extra code.  Instead, in order to include the animation effects, one needs to require the =Uize.Web.xEffects= extension module.
 

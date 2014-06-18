@@ -20,7 +20,7 @@
 	Introduction
 		The =Uize.Comm= class provides functionality and interface that is shared by subclasses that implement support for specific communication protocols.
 
-		*DEVELOPERS:* `Chris van Rensburg`, `Jan Borgersen`, original code donated by `Zazzle Inc.`
+		*DEVELOPERS:* `Chris van Rensburg`, `Jan Borgersen`, original code contributed by `Zazzle Inc.`
 
 		The =Uize.Comm= class serves as the base class for subclasses that implement support for specific communication protocols (such as =Uize.Comm.Ajax=, =Uize.Comm.Iframe=, and =Uize.Comm.Script=). The =Uize.Comm= base class provides support for queuing subsequent calls to allow sequenced server requests.
 */

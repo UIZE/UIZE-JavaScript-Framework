@@ -20,7 +20,7 @@
 	Introduction
 		The =Uize.Test.Uize.Widget.mEventBindings= module defines a suite of unit tests for the =Uize.Widget.mEventBindings= mixin module.
 
-		*DEVELOPERS:* `Ben Ilegbodu`, original code donated by `Zazzle Inc.`
+		*DEVELOPERS:* `Ben Ilegbodu`, original code contributed by `Zazzle Inc.`
 */
 
 Uize.module ({

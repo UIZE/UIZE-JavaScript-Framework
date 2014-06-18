@@ -20,7 +20,7 @@
 	Introduction
 		The =Uize.Widget.Form.mDeclarativeElements= mixin implements features to provide a declarative approach to adding form elements to a form.
 
-		*DEVELOPERS:* `Ben Ilegbodu`, original code donated by `Zazzle Inc.`
+		*DEVELOPERS:* `Ben Ilegbodu`, original code contributed by `Zazzle Inc.`
 */
 
 Uize.module ({

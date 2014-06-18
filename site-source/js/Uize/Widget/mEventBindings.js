@@ -20,7 +20,7 @@
 	Introduction
 		The =Uize.Widget.mEventBindings= mixin implements features to provide a declarative approach to wiring Uize events on widgets and their children, as well as DOM events on implied nodes.
 
-		*DEVELOPERS:* `Ben Ilegbodu`, original code donated by `Zazzle Inc.`
+		*DEVELOPERS:* `Ben Ilegbodu`, original code contributed by `Zazzle Inc.`
 */
 
 Uize.module ({
@@ -49,7 +49,7 @@ Uize.module ({
 						_children = m.children,
 						_wiredWidgetEvents = {} // keep track of wired widget events so we can remove them if the children get removed
 					;
-					
+
 					function _wrapBinding(_context, _binding, _source, _defaultFireIf) {
 						return function(_event) {
 							// ensure that the required child widgets have been added before calling the handler
@@ -60,7 +60,7 @@ Uize.module ({
 							;
 						};
 					}
-					
+
 					/* NOTE: format of bindings
 						{
 							sourceName:[
@@ -96,7 +96,7 @@ Uize.module ({
 								}
 							}
 						);
-						
+
 					/*** wire self & child widget events ***/
 						_forEach(
 							_mClass.mEventBindings_widget,
@@ -113,14 +113,14 @@ Uize.module ({
 											_bindingInfo = _bindings[_bindingNo],
 											_eventToWire = _pairUp(_bindingInfo[0], _wrapBinding(m, _bindingInfo[1], _widget, _returnTrue))
 										;
-										
+
 										_widget.wire(_eventToWire);
-										
+
 										// store a reference to the wired event for later
 										(_wiredWidgetEvents[_widgetName] || (_wiredWidgetEvents[_widgetName] = [])).push(_eventToWire);
 									}
 								}
-								if (_widgetName) { 
+								if (_widgetName) {
 									var _childWidget;
 									_addedChildren.wire( // adding or removing child widgets
 										'Changed.' + _widgetName,
@@ -132,11 +132,11 @@ Uize.module ({
 												// firing events
 												for (var _wiredEventForWidget = _wiredWidgetEvents[_widgetName], _eventNo = -1; ++_eventNo < _wiredEventForWidget.length;)
 													_childWidget.unwire(_wiredEventForWidget[_eventNo]);
-												
+
 												// delete our cache of the wired event so things don't get mixed up when if we
 												// add back a child w/ the same name
 												delete _wiredWidgetEvents[_widgetName];
-												
+
 												// clear out our reference to the removed child widget to not potentially hang on memory that can be disposed
 												_childWidget = undefined;
 											}
@@ -156,7 +156,7 @@ Uize.module ({
 							_widgetEventBindings = _Class.mEventBindings_widget,
 							_undefined
 						;
-						
+
 						_forEach(
 							_bindings,
 							function(_eventBindingValue, _eventBindingKey) {
@@ -167,7 +167,7 @@ Uize.module ({
 										? _domEventBindings
 										: _widgetEventBindings
 								;
-								
+
 								function _addBinding(_binding, _eventName) {
 									if (!_sourceName && _eventBindings == _widgetEventBindings && _isFunction(_binding) && !_eventName.indexOf('Changed.')) {
 										var _propertyName = _eventName.slice(8);
@@ -199,7 +199,7 @@ Uize.module ({
 										(_eventBindings[_sourceName] || (_eventBindings[_sourceName] = [])).push([_eventName, _isPlainObject(_binding) ? _binding : {handler:_binding}])
 									;
 								}
-								
+
 								_eventBindingKeyTokens.length > 1 // short-hand syntax where the 2nd token is the event
 									? _addBinding(_eventBindingValue, _eventBindingKeyTokens[1])
 									: _forEach(_eventBindingValue, _addBinding)
