@@ -20,7 +20,7 @@
 	Introduction
 		The =Uize.Web.xFilters= module extends the =Uize.Web= object by adding functionality for filtering & traversing the matched set of DOM elements.
 
-		*DEVELOPERS:* `Ben Ilegbodu`, original code donated by `Zazzle Inc.`
+		*DEVELOPERS:* `Ben Ilegbodu`, original code contributed by `Zazzle Inc.`
 
 		The =Uize.Web.xFilters= module is an extension module that extends the =Uize.Web= class. Pages that want to leverage the syntax-friendly nature of =Uize.Web= may not need to leverage any filtering or traversing functionality. Therefore, the filtering & traversing functionality is not implemented in the =Uize.Web= class in order to reduce the need for loading the extra code.  Instead, in order to include the filtering & traversing functionality, one needs to require the =Uize.Web.xFilters= extension module.
 

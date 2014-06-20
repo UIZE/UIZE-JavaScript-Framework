@@ -20,7 +20,7 @@
 	Introduction
 		The =Uize.Web= module provides support for ease of selecting, traversing, styling, and wiring events of DOM nodes, among other useful operations needed for creating an interactive UI.
 
-		*DEVELOPERS:* `Ben Ilegbodu`, original code donated by `Zazzle Inc.`
+		*DEVELOPERS:* `Ben Ilegbodu`, original code contributed by `Zazzle Inc.`
 
 		Not a Uize Subclass
 			First off, it's worth emphasizing that the =Uize.Web= object is not a =Uize.Class= subclass, but a very lightweight object.
@@ -2221,7 +2221,7 @@ Uize.module ({
 								function(_eventType, _eventName) {
 									_objectPrototype[_eventName] = function(_handler, _duration) {
 										var m = this;
-			
+
 										_Uize.require(
 											'Uize.Dom.VirtualEvents.' + _eventType,
 											function(_virtualEventClass) {
@@ -2232,27 +2232,27 @@ Uize.module ({
 												);
 											}
 										);
-			
+
 										return m;
 									};
-									
+
 								}
 							);
 						}
 					;
-					
+
 					_makeVirtualEventMethods({
 						altClick:_modClick,
 							/*?
 								Instance Methods
 									altClick
 										Wires the specified event handler to the "altClick" virtual event (the user clicks with only the alt modifier key pressed) to the set of matched DOM nodes.
-	
+
 										SYNTAX
 										........................................................
 										myWeb = myWeb.altClick(eventHandlerFUNC);
 										........................................................
-	
+
 										NOTES
 										- Returns a reference to the same =Uize.Web= object
 										- See the companion =ctrlClick=, =ctrlAltClick=, =shiftClick=, =shiftAltClick=, =shiftCtrlClick= and =shiftCtrlAltClick= methods
@@ -2264,12 +2264,12 @@ Uize.module ({
 								Instance Methods
 									ctrlAltClick
 										Wires the specified event handler to the "ctrlAltClick" virtual event (the user clicks with only the ctrl and alt modifier keys pressed) to the set of matched DOM nodes.
-	
+
 										SYNTAX
 										........................................................
 										myWeb = myWeb.ctrlAltClick(eventHandlerFUNC);
 										........................................................
-	
+
 										NOTES
 										- Returns a reference to the same =Uize.Web= object
 										- See the companion =altClick=, =ctrlClick=, =shiftClick=, =shiftAltClick=, =shiftCtrlClick= and =shiftCtrlAltClick= methods
@@ -2281,12 +2281,12 @@ Uize.module ({
 								Instance Methods
 									ctrlClick
 										Wires the specified event handler to the "ctrlClick" virtual event (the user clicks with only the ctrl modifier key pressed) to the set of matched DOM nodes.
-	
+
 										SYNTAX
 										........................................................
 										myWeb = myWeb.ctrlClick(eventHandlerFUNC);
 										........................................................
-	
+
 										NOTES
 										- Returns a reference to the same =Uize.Web= object
 										- See the companion =altClick=, =ctrlAltClick=, =shiftClick=, =shiftAltClick=, =shiftCtrlClick= and =shiftCtrlAltClick= methods
@@ -2298,17 +2298,17 @@ Uize.module ({
 								Instance Methods
 									keyRemainDown
 										Wires the specified event handler to the "keyRemainDown" virtual event (the user presses down on a key, and then holds down for a specified duration) to the set of matched DOM nodes.
-	
+
 										SYNTAX
 										........................................................
 										myWeb = myWeb.keyRemainDown(eventHandlerFUNC, durationMsINT);
 										........................................................
-	
+
 										VARIATION
 										........................................................
 										myWeb = myWeb.keyRemainDown(eventHandlerFUNC);
 										........................................................
-	
+
 										NOTES
 										- Returns a reference to the same =Uize.Web= object
 										- See the companion =keyRemainUp= method
@@ -2320,17 +2320,17 @@ Uize.module ({
 								Instance Methods
 									keyRemainUp
 										Wires the specified event handler to the "keyRemainUp" virtual event (the user releases a key, and then doesn't press down again for a specified duration) to the set of matched DOM nodes.
-	
+
 										SYNTAX
 										........................................................
 										myWeb = myWeb.keyRemainUp(eventHandlerFUNC, durationMsINT);
 										........................................................
-	
+
 										VARIATION
 										........................................................
 										myWeb = myWeb.keyRemainUp(eventHandlerFUNC);
 										........................................................
-	
+
 										NOTES
 										- Returns a reference to the same =Uize.Web= object
 										- See the companion =keyRemainDown= method
@@ -2342,17 +2342,17 @@ Uize.module ({
 								Instance Methods
 									mouseRemainDown
 										Wires the specified event handler to the "mouseRemainDown" virtual event (the user moused down, and then doesn't mouse up or out for a specified duration) to the set of matched DOM nodes.
-	
+
 										SYNTAX
 										........................................................
 										myWeb = myWeb.mouseRemainDown(eventHandlerFUNC, durationMsINT);
 										........................................................
-	
+
 										VARIATION
 										........................................................
 										myWeb = myWeb.mouseRemainDown(eventHandlerFUNC);
 										........................................................
-	
+
 										NOTES
 										- Returns a reference to the same =Uize.Web= object
 										- See the companion =mouseRemainOut=, =mouseRemainOver=, =mouseRemainUp= method
@@ -2364,17 +2364,17 @@ Uize.module ({
 								Instance Methods
 									mouseRemainOut
 										Wires the specified event handler to the "mouseRemainOut" virtual event (the user moused out, and then doesn't mouse over for a specified duration) to the set of matched DOM nodes.
-	
+
 										SYNTAX
 										........................................................
 										myWeb = myWeb.mouseRemainOut(eventHandlerFUNC, durationMsINT);
 										........................................................
-	
+
 										VARIATION
 										........................................................
 										myWeb = myWeb.mouseRemainOut(eventHandlerFUNC);
 										........................................................
-	
+
 										NOTES
 										- Returns a reference to the same =Uize.Web= object
 										- See the companion =mouseRemainDown=, =mouseRemainOver=, =mouseRemainUp= method
@@ -2386,17 +2386,17 @@ Uize.module ({
 								Instance Methods
 									mouseRemainOver
 										Wires the specified event handler to the "mouseRemainOver" virtual event (the user moused over, and then doesn't mouse out or down for a specified duration) to the set of matched DOM nodes.
-	
+
 										SYNTAX
 										........................................................
 										myWeb = myWeb.mouseRemainOver(eventHandlerFUNC, durationMsINT);
 										........................................................
-	
+
 										VARIATION
 										........................................................
 										myWeb = myWeb.mouseRemainOver(eventHandlerFUNC);
 										........................................................
-	
+
 										NOTES
 										- Returns a reference to the same =Uize.Web= object
 										- See the companion =mouseRemainDown=, =mouseRemainOut=, =mouseRemainUp= method
@@ -2408,17 +2408,17 @@ Uize.module ({
 								Instance Methods
 									mouseRemainUp
 										Wires the specified event handler to the "mouseRemainUp" virtual event (the user moused up, and then doesn't mouse down for a specified duration) to the set of matched DOM nodes.
-	
+
 										SYNTAX
 										........................................................
 										myWeb = myWeb.mouseRemainUp(eventHandlerFUNC, durationMsINT);
 										........................................................
-	
+
 										VARIATION
 										........................................................
 										myWeb = myWeb.mouseRemainUp(eventHandlerFUNC);
 										........................................................
-	
+
 										NOTES
 										- Returns a reference to the same =Uize.Web= object
 										- See the companion =mouseRemainDown=, =mouseRemainOut=, =mouseRemainOver= method
@@ -2430,17 +2430,17 @@ Uize.module ({
 								Instance Methods
 									mouseRest
 										Wires the specified event handler to the "mouseRest" virtual event (the user moused over, and then doesn't mouse out or down for a specified duration) to the set of matched DOM nodes.
-	
+
 										SYNTAX
 										........................................................
 										myWeb = myWeb.mouseRest(eventHandlerFUNC, durationMsINT);
 										........................................................
-	
+
 										VARIATION
 										........................................................
 										myWeb = myWeb.mouseRest(eventHandlerFUNC);
 										........................................................
-	
+
 										NOTES
 										- Returns a reference to the same =Uize.Web= object
 										- See the related =mouseRemainOver= method
@@ -2451,17 +2451,17 @@ Uize.module ({
 								Instance Methods
 									remainBlurred
 										Wires the specified event handler to the "remainBlurred" virtual event (node loses focus and remains blurred / unfocused for a specified duration) to the set of matched DOM nodes.
-	
+
 										SYNTAX
 										........................................................
 										myWeb = myWeb.remainBlurred(eventHandlerFUNC, durationMsINT);
 										........................................................
-	
+
 										VARIATION
 										........................................................
 										myWeb = myWeb.remainBlurred(eventHandlerFUNC);
 										........................................................
-	
+
 										NOTES
 										- Returns a reference to the same =Uize.Web= object
 										- See the companion =remainFocused= method
@@ -2473,17 +2473,17 @@ Uize.module ({
 								Instance Methods
 									remainFocused
 										Wires the specified event handler to the "remainFocused" virtual event (node stays focused for a specified duration) to the set of matched DOM nodes.
-	
+
 										SYNTAX
 										........................................................
 										myWeb = myWeb.remainFocused(eventHandlerFUNC, durationMsINT);
 										........................................................
-	
+
 										VARIATION
 										........................................................
 										myWeb = myWeb.remainFocused(eventHandlerFUNC);
 										........................................................
-	
+
 										NOTES
 										- Returns a reference to the same =Uize.Web= object
 										- See the companion =remainBlurred= method
@@ -2495,12 +2495,12 @@ Uize.module ({
 								Instance Methods
 									shiftAltClick
 										Wires the specified event handler to the "shiftAltClick" virtual event (the user clicks with only the shift and alt modifier keys pressed) to the set of matched DOM nodes.
-	
+
 										SYNTAX
 										........................................................
 										myWeb = myWeb.shiftAltClick(eventHandlerFUNC);
 										........................................................
-	
+
 										NOTES
 										- Returns a reference to the same =Uize.Web= object
 										- See the companion =altClick=, =ctrlClick=, =shiftClick=, =ctrlAltClick=, =shiftCtrlClick= and =shiftCtrlAltClick= methods
@@ -2512,12 +2512,12 @@ Uize.module ({
 								Instance Methods
 									shiftClick
 										Wires the specified event handler to the "shiftClick" virtual event (the user clicks with only the shift modifier key pressed) to the set of matched DOM nodes.
-	
+
 										SYNTAX
 										........................................................
 										myWeb = myWeb.shiftClick(eventHandlerFUNC);
 										........................................................
-	
+
 										NOTES
 										- Returns a reference to the same =Uize.Web= object
 										- See the companion =altClick=, =ctrlAltClick=, =ctrlClick=, =shiftAltClick=, =shiftCtrlClick= and =shiftCtrlAltClick= methods
@@ -2529,12 +2529,12 @@ Uize.module ({
 								Instance Methods
 									shiftCtrlAltClick
 										Wires the specified event handler to the "shiftCtrlAltClick" virtual event (the user clicks with only the shift and ctrl modifier keys pressed) to the set of matched DOM nodes.
-	
+
 										SYNTAX
 										........................................................
 										myWeb = myWeb.shiftCtrlAltClick(eventHandlerFUNC);
 										........................................................
-	
+
 										NOTES
 										- Returns a reference to the same =Uize.Web= object
 										- See the companion =altClick=, =ctrlClick=, =shiftClick=, =ctrlAltClick=, =shiftAltClick= and =shiftCtrlClick= methods
@@ -2546,12 +2546,12 @@ Uize.module ({
 								Instance Methods
 									shiftCtrlClick
 										Wires the specified event handler to the "shiftCtrlClick" virtual event (the user clicks with only the shift and ctrl modifier keys pressed) to the set of matched DOM nodes.
-	
+
 										SYNTAX
 										........................................................
 										myWeb = myWeb.shiftCtrlClick(eventHandlerFUNC);
 										........................................................
-	
+
 										NOTES
 										- Returns a reference to the same =Uize.Web= object
 										- See the companion =altClick=, =ctrlClick=, =shiftClick=, =ctrlAltClick=, =shiftAltClick= and =shiftCtrlAltClick= methods

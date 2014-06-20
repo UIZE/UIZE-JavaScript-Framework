@@ -20,8 +20,8 @@
 	Introduction
 		The =Uize.Test.Uize.Widget.Form.mDeclarativeElements= module defines a suite of unit tests for the =Uize.Widget.Form.mDeclarativeElements= mixin module.
 
-		*DEVELOPERS:* `Ben Ilegbodu`, original code donated by `Zazzle Inc.`
-		
+		*DEVELOPERS:* `Ben Ilegbodu`, original code contributed by `Zazzle Inc.`
+
 		=Uize.Test.Uize.Widget.Form.mDeclarativeElements= employs a very implementation-aware approach to testing =Uize.Widget.Form.mDeclarativeElements= because of the nature of how =Uize.Widget.Form.mDeclarativeElements= is implemented. In the event that the implementation for he widget mix-in changes, this test will most likely need to be updated as well.
 */
 
@@ -29,7 +29,7 @@ Uize.module ({
 	name:'Uize.Test.Uize.Widget.Form.mDeclarativeElements',
 	builder:function () {
 		'use strict';
-				
+
 		function _getDeclaredElements(_declarativeElements) {
 			return Uize.Widget.Form.subclass ({
 				mixins:Uize.Widget.Form.mDeclarativeElements,
@@ -41,23 +41,23 @@ Uize.module ({
 								_childProperties.widgetClass = Uize.getModuleByName(_childProperties.widgetClass);
 							else if (Uize.isString(_childProperties))
 								_childProperties = Uize.getModuleByName(_childProperties);
-							
+
 							return _childProperties;
 						}
 					)
 					: _declarativeElements
 			}) ().children.elements.children;
 		}
-		
+
 		function _generateTest(_title, _declarativeElementsShorthand, _declarativeElementsVerbose, _expectedChildren) {
 			function _generateSyntaxTests(_isVerbose) {
 				var
 					_declarativeElements = _isVerbose ? _declarativeElementsVerbose : _declarativeElementsShorthand,
 					_syntaxTests = []
 				;
-				
+
 				function _getDeclaredElementsForTest() { return _getDeclaredElements(_declarativeElements) }
-				
+
 				return {
 					title:(_isVerbose ? 'Verbose' : 'Shorthand') + ' Syntax',
 					test:[
@@ -73,7 +73,7 @@ Uize.module ({
 					]
 				};
 			}
-			
+
 			return {
 				title:_title,
 				test:[
@@ -106,13 +106,13 @@ Uize.module ({
 					},
 					{
 						foo:{
-							widgetClass:'Uize.Widget.FormElement'	
+							widgetClass:'Uize.Widget.FormElement'
 						},
 						bar:{
-							widgetClass:'Uize.Widget.FormElement'	
+							widgetClass:'Uize.Widget.FormElement'
 						},
 						baz:{
-							widgetClass:'Uize.Widget.FormElement'	
+							widgetClass:'Uize.Widget.FormElement'
 						}
 					},
 					['foo', 'bar', 'baz']

@@ -26,7 +26,7 @@ Introduction
 
 		The Scruncher was originally developed by Chris van Rensburg while working for Beatnik and was used primarily to reduce the size of the various JavaScript libraries that made up the Music Object API. Back then, very few people had the luxury of broadband Internet connections, and the ~60Kb unscrunched size of just the base library added too much to a page's load time. Thus, the Scruncher was born and was used to scrunch the close to 40 JavaScript libraries in the Music Object API for the remaining three years of this API's life. After Beatnik, the Scruncher was once again put to good use for scrunching the libraries in the JavaScript abstraction API of Pulse Entertainment's Player product.
 
-		These days, the Scruncher is being used to scrunch all the modules in the UIZE JavaScript Framework, as well as all the JavaScript modules used throughout the `Zazzle Inc.` Web site.
+		These days, the Scruncher is being used to scrunch the modules of the UIZE JavaScript Framework.
 
 	How Is File Size Reduced?
 		The Scruncher is able to reduce the size of JavaScript files by performing the following key operations...

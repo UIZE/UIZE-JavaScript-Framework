@@ -22,7 +22,7 @@
 
 		It is assumed that each collection item is represented in markup by a table row (tr).
 
-		*DEVELOPERS:* `Vinson Chuong`, original code donated by `Zazzle Inc.`
+		*DEVELOPERS:* `Vinson Chuong`, original code contributed by `Zazzle Inc.`
 */
 
 Uize.module ({

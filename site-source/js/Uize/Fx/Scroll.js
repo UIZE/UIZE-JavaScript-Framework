@@ -20,7 +20,7 @@
 	Introduction
 		The =Uize.Fx.Scroll= module provides easy functionality to animate the scrolling of the document.
 
-		*DEVELOPERS:* `Ben Ilegbodu`, original code donated by `Zazzle Inc.`
+		*DEVELOPERS:* `Ben Ilegbodu`, original code contributed by `Zazzle Inc.`
 */
 
 Uize.module ({
@@ -228,7 +228,7 @@ Uize.module ({
 
 								callbackFUNC
 									A callback function to be called once scrolling complete.
-									
+
 								offsetINT
 									Specifies an optional vertical pixel offset from the top of the =targetNodeSTRorOBJ=.
 

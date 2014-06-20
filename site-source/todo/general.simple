@@ -765,7 +765,7 @@ Client Services
 
 		Benefit of being able to dynamically load code supporting client side execution of portions of the service.
 
-	Zazzle Specific Registration of Services
+	Site Specific Registration of Services
 
 		SYNTAX
 		...
@@ -780,7 +780,7 @@ Client Services
 		...
 		{
 			service:'isValidHandle',
-			module:'Zazzle.Validator',
+			module:'MySite.Validator',
 			methodName:'handle'
 		}
 		...
@@ -792,9 +792,9 @@ Client Services
 			performService:function (_params,_directives) {
 				var m = this;
 				Uize.require (
-					'Zazzle.Services.MemberProfile',
+					'MySite.Services.MemberProfile',
 					function () {
-						Zazzle.Services.MemberProfile.enable (_params,m);
+						MySite.Services.MemberProfile.enable (_params,m);
 					}
 				);
 			}

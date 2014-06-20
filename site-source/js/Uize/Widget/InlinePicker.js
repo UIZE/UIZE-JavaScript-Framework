@@ -20,7 +20,7 @@
 	Introduction
 		The =Uize.Widget.InlinePicker= class acts as a base class for inline value picker widget classes, such as the =Uize.Widget.InlinePicker.Selector= class.
 
-		*DEVELOPERS:* `Ben Ilegbodu`, original code donated by `Zazzle Inc.`
+		*DEVELOPERS:* `Ben Ilegbodu`, original code contributed by `Zazzle Inc.`
 */
 
 Uize.module ({

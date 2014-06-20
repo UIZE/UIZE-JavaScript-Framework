@@ -657,9 +657,6 @@ Site & Documentation (in order of priority)
 	- go through all documentation pages and see what tooltips show up for the contents tree links. Make sure all sections have a concise introductory first paragraph.
 		- possibly write a build script to find documents with first paragraphs for sections that are long or contain multiple sentences (non-period, following by period, followed by space)
 
-	How UIZE is used on Zazzle
-		Describe the many ways in which UIZE is utilized on the zazzle.com Web site.
-
 	UIZE Comparison With Other Frameworks
 		In discussion of UIZE, WRT how UIZE compares to other frameworks.
 

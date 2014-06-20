@@ -20,7 +20,7 @@
 	Introduction
 		The =Uize.Widget.InlinePicker.Selector= class provides functionality for inline picker widgets that require selection from a set of values (like a radio button list)
 
-		*DEVELOPERS:* `Ben Ilegbodu`, original code donated by `Zazzle Inc.`
+		*DEVELOPERS:* `Ben Ilegbodu`, original code contributed by `Zazzle Inc.`
 */
 
 Uize.module ({

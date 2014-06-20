@@ -18,7 +18,7 @@ General Requirements for a Localization System
 			- variant identifier
 
 		String Substitution
-			The localization should support substitution of values into an arbitrary number of tokens inside resource strings.
+			The localization system should support substitution of values into an arbitrary number of tokens inside resource strings.
 
 			Furthermore, the substitution system should support values being of specific types which can inform formatting of their values and provide cues to a `string variant sub-selection` mechanism that can select available variants that best match the qualities of the substitution values.
 
@@ -100,9 +100,9 @@ General Requirements for a Localization System
 		Additional Types to Format
 			Additionally, the localization system should support the following type formatting...
 
-			- Time Formatting
-			- Phone Number Formatting
-			- Mailing Address Formatting
+			- `Time Formatting`
+			- `Phone Number Formatting`
+			- `Mailing Address Formatting`
 
 		Measurement Units
 			The localization system should provide support for localizing measurement values for a locale, which may involve converting the measurement values from values expressed in a canonical system of units, such as the SI / metric system, to measurement values expressed in a system like the Imperial System.
@@ -219,6 +219,14 @@ Special Requirements for Web Localization
 		Parameterized Dependency
 			Because it is not possible for a UI component's code to know what locale the code will be run in, expressing a dependency on a set of resource strings can only go as far as providing a base guide, where the runtime environment will determine what exact module is required based upon the locale set for the environment at the time of loading the UI component.
 
+	Determining String Origins
+		Determining the origins for externalized resources is a nice-to-have that can help developers get to the source of resource string related issues that surface in UI...
+
+		- requires some form of tagging identifier for every resource
+		- for a system that uses a RESTful approach to resource strings, each resource string could have a URI, which could be used either to identify a place in a DB or CMS where the string can be changed, or it could be mapped to a resource file in the source codebase
+		- for resource strings bound to HTML data, string could be replaced with span with title attribute, or HTML comment could be inserted that could be found in a DOM inspector
+		- for resource strings that make there way into element titles or select tag option values, a different approach would be needed
+
 Serialization of Types
 	Various value types that can be displayed to the user, either alone or as substitutions in resource strings, may have locale specific serializations.
 
@@ -276,7 +284,7 @@ Types in the Context of Localization
 			Specifying Types Should be Required
 				It should be a requirement that the type be specified for every substitution value expected by a resource string.
 
-				This is to ensure that translators always have sufficient information that can be obtained purely from the resource string files to inform their translation process, without having to rely on the resource files being used in the running application with type information supplied only at runtime.
+				This is to ensure that translators always have sufficient information that can be obtained purely from the resource string files to inform their translation process, without having to rely on the `resource files` being used in the running application with type information supplied only at runtime.
 
 				With type information contained inside the resource string files, tools with awareness of types can supply `type example values` to aid in the translation process and allow string translations to be previewed before being re-integrated into the codebase and then deployed to a staging area. `Policing and auditing` tools can be employed to enforce this requirement when sanity checking the resource string files.
 
@@ -402,7 +410,7 @@ Localization Guidelines
 		To avoid these kinds of problems, the canonical string should be regarded as the only authority, and all translations of a string should be regarded as derived / generated. A better solution in such situations would be for the developer or translators to add metadata for the canonical string that notes any language-specific considerations for translating the string.
 
 Pseudo-localization
-	In a nutshell, a mode of running an application that replaces externalized string resources with pseudo-localized strings that are derived from the source strings.
+	In a nutshell, a mode of running an application that replaces externalized resource strings with pseudo-localized strings that are derived from the source strings.
 
 	EXAMPLE - SOURCE
 	.................................
@@ -438,41 +446,232 @@ Pseudo-localization
 
 		Naturally, both approaches could be used in conjunction.
 
+	Pseudo-locale
+		To allow pseudo-localized resource strings to co-exist with resource strings translated for various real locales, it is recommended that the pseudo-localized strings be associated with a pseudo-locale that can be selected in the way as real locales.
+
+		To facilitate this, it is recommended that the pseudo-locale be identified by a special pseudo-locale code that adheres to the same rules as the locale codes for real locales. It is, therefore, recommended that a BCP 47 compliant code be chosen to represent the pseudo-locale.
+
+		Pseudo-locale Code
+			The recommended BCP 47 format locale code to use for pseudo-localized resource strings is "en-ZZ".
+
+			BCP-47 does not address pseudo localization and, as such, does not provide any specific guidance on how to deal with locale codes for pseudo localized resource strings.
+
+			It does, however, leverage the ISO 3166-1 standard for region codes, and this standard allows for a limited set of user assigned region codes that are reserved for non-standard use. These ranges of codes can be used for any internal / proprietary use.
+
+			[[http://en.wikipedia.org/wiki/ISO_3166-1#Reserved_and_user-assigned_code_elements]]
+
+			Based on this provision, it is recommended that the locale code that is used to represent the pseudo-locale be a BCP 47 format locale code, so that the pseudo-locale code is fully compliant and doesn't risk any collision - now or in future - with language codes and region codes for real languages or regions. Although three letter region codes are acceptable, it is recommended that a code that lies within the two letter range for user-assigned region codes be used. This is for the sake of simplicity and consistency with the prevalent use of two letter region codes for other locales.
+
+			Based on the ISO 3166-1 standard, there are a few candidates for pseudo locale region codes that should appear to developers to be be obviously intended for a special purpose (pseudo-localization, in this case)...
+
+			- *en-AA*
+			- *en-QQ*
+			- *en-XX*
+			- *en-ZZ* – top choice
+
+			Out of this short list, the "en-ZZ" is the most appealing, since it stands out as probably having a special meaning (in case you see it for the first time), and it sorts to the end of the list of regional variants of English.
+
 	References
 
 		- [[http://en.wikipedia.org/wiki/Pseudolocalization]]
 		- [[http://google-opensource.blogspot.com/2011/06/pseudolocalization-to-catch-i18n-errors.html]]
 
-	Determining String Origins
-		Determining the origins for externalized resources is a nice-to-have that can help developers get to the source of resource string related issues that surface in UI...
+Resource Files
+	The localization system should support the organization of resource strings into resource files, such that the resource strings are externalized from the application code that uses them.
 
-		- requires some form of tagging identifier for every resource
-		- for a system that uses a RESTful approach to string resources, each resource string could have a URI, which could be used either to identify a place in a DB or CMS where the string can be changed, or it could be mapped to a resource file in the source codebase
-		- for resource strings bound to HTML data, string could be replaced with span with title attribute, or HTML comment could be inserted that could be found in a DOM inspector
-		- for resource strings that make there way into element titles or select tag option values, a different approach would be needed
+	### Externalization of Resource Strings
+		.
+
+	Resource File Format
+		The format that is used for storing resource strings should satisfy a number of key requirements.
+
+		Pure Data Format
+			It is recommended that the resource file format should be a pure data format, completely devoid of the capabilities of the programming language used by the application that will use the resource strings.
+
+			Prevents Undesired Dependencies
+				This has the benefit of encouraging clear separation between the application logic and the resource strings.
+
+				Without such forced restrictions on what developers can do in the resource files, there will always be the temptation to access features of the environment into which the resource files will be loaded. If the resource files are implemented using the application framework's language (such as JavaScript, PHP, ActionScript, etc.), then a developer may be tempted to access a global environment variable or to call a function they expect to be defined in the runtime context, thus creating unwanted dependency relationships between the resource files and the state of the runtime environment into which they will be loaded.
+
+			Avoids Parsing Difficulties
+				Resource files that are implemented using the application framework's programming language pose challenges to parsing the files for the sake of automation of the localization process.
+
+				A pure data file format has constrained variability and strict rules for structure and serialization. In contrast, the syntax of a programming language supports an immense degree of variability, by design. To parse resource strings from a resource file that is implemented using a programming language, and where developers may get up to all sorts of tricks to satisfy pressing development requirements, can present ongoing problems.
+
+				A developer may, for example, choose to construct a resource string's value using a programmatic expression. Now, unless your resource file parser evaluates the resource file using the language in which it is written, it will not be able to obtain a resolved value for such an expression in order to send the resource string off for translation.
+
+			Candidate Formats
+				To satisfy a requirement to use a pure data format, any of the following standard file formats could be used...
+
+				- *JSON* (JavaScript Object Notation)
+				- *XLIFF* (XML Localization Interchange File Format)
+				- *YAML* (YAML Ain't Markup Language)
+				- Java .properties
+				- Mac Strings
+				- *ARB* (Application Resource Bundle) - essentially a JSON-based format
+
+		Additional Recommendations
+			In addition to the recommendation that a pure data format be used for resource files, the following additional recommendations are made...
+
+			A Clean Format
+				It is recommended that the format used for resource files be as clean and uncluttered as possible.
+
+				That is to say, there should be as little need as possible to quote and escape characters in resource strings. Some formats, such as XLIFF (XML-based) or JSON, require strings to be enclosed somehow. In the case of an XML-based format, the strings will either have to be enclosed in quotes as attribute values or enclosed in container XML tags. In either case, escaping to XML entitities will be required for characters in the resource strings that collide with the format's delimiter characters.
+
+				The same principle applies with a JSON-based format, where resource strings would be expressed as string literals enclosed in quotes, and escaping will be required for quote and linebreak characters inside the strings.
+
+			###
+				Easy Declaring of Multi-line Strings
+					.
+
+				Easy Declaring of HTML Chunks
+					.
+
+				By Way of Comparison
+					.
+
+					JSON
+					...
+					{
+						MY_STRING:
+					}
+					...
+
+					YAML
+					...
+					MY_STRING:
+					...
+
+			Narrowed List of Candidate Formats
+				To satisfy the additional requirements listed above, any of the following file formats could be used...
+
+				- *YAML* (YAML Ain't Markup Language)
+				- Java .properties
+				- Mac Strings
+
+		### Substitution Tokens
+			.
+
+			Unlimited Tokens
+				.
+
+				an arbitrary number of substitution tokens should be supported per string
+
+			Token Delimiters
+				.
+
+				Low Chance of Collision
+					.
+
+				Escaping Token Delimiters
+					.
+
+			Named Tokens
+				.
+
+				the token syntax should support named tokens (named tokens are recommended over numbered tokens, since token names provide additional useful context / meaning that can aid in translation)
+
+			Explicit Versus Implicit Inputs
+				.
+
+				Explicit Inputs
+					.
+
+				Implicit Inputs
+					.
+
+			Token Type
+				.
+
+				the token syntax should support specifying of type and formatting options per type (eg. a substitution value that is a date value)
+
+				Formatting Options
+					.
+
+				Type Module Dependencies
+					.
+
+			Token Value Properties
+				.
+
+				- gender
+
+		### Resource String Metadata
+			.
+
+			the resource file format should allow optional metadata to be supplied for every resource string
+
+			- metadata might...
+				- define constraints on the length for translations
+				- provide context information about the string's usage that can be used to guide the translators
+				- provide additional instructions to translators
+				- indicate if the string is a non-translatable string (such as a URL, e-mail address, color value, etc.)
+
+		### Resource String Grouping
+			.
+
+			- the resource file format should support the ability to organize related strings into logical groups
+			- it should be possible to provide metadata for a group, which will then apply to all strings within the group
+			- in a certain sense, the resource file can be considered a grouping of resource strings, so it should be possible to provide metadata at the file level as well
+
+		### Non-translatable Strings
+			.
+
+			- color values
+			- CSS style properties
+			- URLs
+			- e-mail addresses
+			- phone numbers
+
+		### Declension Variants
+			### Plural Forms
+				.
+
+				- the resource file format should support strings that have plural forms, where an input would be used to select the correct plural form, whether or not that input is substituted into the string
+				- multiple plural forms of a resource string should be compiled into a single logical string, so that application code is not responsible for selecting the correct form by specifying a string key for the specific form to be used
+
+			### Gendered Forms
+				.
+
+				- the resource file format should support strings that have gendered forms, where an input would be used to select the correct gendered form, whether or not that input is substituted into the string
+				- multiple gendered forms of a resource string should be compiled into a single logical string, so that application code is not responsible for selecting the correct form by specifying a string key for the specific form to be used
+
+		### Unicode Characters
+			.
+
+			- the encoding of the resource files should support Unicode characters
+			- UTF-8 is the recommended encoding
+
+	### Resource File Organization
+		.
+
+		- resource files should be organized alongside the components for which they're needed
+
+	### Resource File Compilation
+		.
+
+		- resource files should be compiled into JavaScript modules for consumption by JavaScript code
+
+		Benefits of Resource File Compilation
+			- compiled resource modules can be loaded through simple script tag insertion
+			- compiled resource modules can be packaged along with other JavaScript modules
+			- resource strings that have substitutions can be compiled to functions utilizing string concatenation, delivering improved runtime performance
+
+		Performance Benefits
+			.
+
+	### Comment Invisibility
+		.
 
 ### Requirements of a Localization System
-	- formatting
+	Formatting
 		- basic
 			- calendars
 
 	- string truncation / abbreviation
 	- string segmentation / hyphenation
 
-	- resource selection
-		- multi-dimensional overrides system
-			- dimensions
-				- locale
-				- more specific locale
-				- brand / partner
-				- user demographic (possibly)
-			- dimension prioritization
-				- effectively a fallbacks mechanism
-			- could apply to any resources
-		- ideally, doesn't need to be duplicated for different technologies
-		- language selection should ideally be based upon the likelihood of the user understanding the language as well as the language(s) to which a resource has been localized
-
-	- specifying resource strings
+	Specifying Resource Strings
 		- all resource strings are defined in a neutral base / master file that...
 			- contains no translations
 			- contains definitions of types for substitutions
@@ -482,7 +681,7 @@ Pseudo-localization
 
 		- for substitutions, support the ability to define custom types that can have their own per-language example values
 
-	- tracking resource usage
+	Tracking Resource Usage
 		- can be used to determine priority for localization of resource to a given language
 		- can be used to determine if resource is defunct / no longer in use
 		- can be used to determine quality / rigor for translating a given resource
@@ -496,31 +695,41 @@ Pseudo-localization
 	Examples
 		Sample File
 
-		....................
+		............................................................................................................
 		start: Start
 		stop: Stop
 		greeting: Hello, <%. user.name %>
-		removeSelectedItemsConfirmation: Are you sure you would like to remove the <% totalItems %> selected items?
-		....................
+		removeSelectedItemsConfirmation: Are you sure you would like to remove the <%. totalItems %> selected items?
+		............................................................................................................
 
-		....................
+		......................................................................
 		greeting : Hello, <%. user.name %>.
 		greeting { user.gender == 'male' } : Hello, mister <%. user.name %>.
 		greeting { user.gender == 'female' } : Hello, missis <%. user.name %>.
-		....................
+		......................................................................
 
-		....................
+		................................
 		{person} gave you {count} {gift}
-		....................
+		................................
 
-		person can be male/female
-		count can be 0, 1, 2, more
-		gift can be male, female, neuter
+		- person can be male/female
+		- count can be 0, 1, 2, more
+		- gift can be male, female, neuter
 
 	multi-dimensional resource selection mechanism, with fallback heuristics
+		- language selection should ideally be based upon the likelihood of the user understanding the language as well as the language(s) to which a resource has been localized
+
+		- could apply to any resources
 
 		- support an arbitrary number of dimensions
+			- locale
+			- more specific locale / region
+			- brand / partner
+			- user demographic (possibly)
+			- user gender (possibly)
+
 		- support fallback heuristic
+			- dimension prioritization
 
 		- scenario
 			- user is very fluent in French, moderately fluent in German, but has very limited English
@@ -542,9 +751,11 @@ Pseudo-localization
 
 		- considering that resource strings may need to be pulled from multiple files in some situations, should multiple files be sent to the client? Perhaps a better approach would be to produce a new file for the given situation, that integrates just the needed resource strings necessary, which may original from multiple files. What are the inputs into producing a specific file?
 
+		...................................................................
 		componentID,locale,userLanguagesList,brand
 		componentID,locale,userLanguagesList,brand,subBrand
 		componentID,locale,userLanguagesList,brand,subBrand,userDemographic
+		...................................................................
 
 		- should be usable during build process
 			- two aspects to this...

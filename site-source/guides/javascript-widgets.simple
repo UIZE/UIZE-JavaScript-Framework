@@ -25,7 +25,7 @@ Introduction
 			..........................
 
 		Custom Namespaces
-			It is not required to place widget classes under the =Uize.Widget= namespace. The `Zazzle Inc.` Web site, for example, implements a large number of custom widgets that are placed under their own =Zazzle= namespace, such as =Zazzle.ControlMove=, =Zazzle.ControlNumber=, =Zazzle.GridCell=, etc.
+			It is not required to place widget classes under the =Uize.Widget= namespace. The Web site for the UIZE JavaScript Framework, for example, implements a large number of custom widgets that are placed under their own =UizeSite= namespace, such as =UizeSite.Widgets.SiteNav.Widget=.
 
 	Meet the Widgets
 		The UIZE JavaScript Framework comes packed with scores of built in widgets.
@@ -86,7 +86,7 @@ Introduction
 		Your Own Page Widgets
 			Any Web site is likely to have several subclasses of the =Uize.Widget.Page= class - likely even a small class hierarchy.
 
-			For example, the `Zazzle Inc.` Web site implements its own =Zazzle.Page= page widget class, that is a subclass of =Uize.Widget.Page=. To get an idea of how the page widget paradigm is applied to a real world project, take a look at the module reference for the =UizeSite.Page= class and all its subclasses.
+			For example, the Web site for the UIZE JavaScript Framework implements its own =UizeSite.Page= page widget class, that is a subclass of =Uize.Widget.Page=. To get an idea of how the page widget paradigm is applied to a real world project, take a look at the module reference for the =UizeSite.Page= class and all its subclasses.
 
 			The =Uize.Widget.Page= base class provides some base functionality. You will likely want to create a subclass of =Uize.Widget.Page=, in a namespace appropriate for your site, and then use that in all your pages. That's a good starting point, even if your subclass adds no additional functionality initially. In time, you will find that your page widget class is a useful place to put functionality that needs to be available to many widgets that may exist at different places in the `widget tree`.
 

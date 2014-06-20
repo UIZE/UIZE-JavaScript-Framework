@@ -419,22 +419,6 @@ Uize.module ({
 				);
 			}
 
-			function _distributeResources (m,_resources,_language) {
-				var _rootFolderPath = m.project.rootFolderPath;
-				Uize.forEach (
-					_resources,
-					function (_resourceFileStrings,_resourceFileSubPath) {
-						var _resourceFileFullPath =
-							_rootFolderPath + '/' + m.getLanguageResourcePath (_resourceFileSubPath,_language)
-						;
-						_fileSystem.writeFile ({
-							path:_resourceFileFullPath,
-							contents:m.serializeResourceFile (_resourceFileStrings,_language)
-						});
-					}
-				);
-			}
-
 			function _getStringMetrics (m,_sourceStr) {
 				var
 					_stringSegments = _split (_sourceStr,m.wordSplitter),
@@ -483,6 +467,26 @@ Uize.module ({
 
 		return _superclass.subclass ({
 			instanceMethods:{
+				distributeResources:function (_resources,_language) {
+					// NOTE: this method can be useful for implementation of the extract method
+					var
+						m = this,
+						_rootFolderPath = m.project.rootFolderPath
+					;
+					Uize.forEach (
+						_resources,
+						function (_resourceFileStrings,_resourceFileSubPath) {
+							var _resourceFileFullPath =
+								_rootFolderPath + '/' + m.getLanguageResourcePath (_resourceFileSubPath,_language)
+							;
+							_fileSystem.writeFile ({
+								path:_resourceFileFullPath,
+								contents:m.serializeResourceFile (_resourceFileStrings,_language)
+							});
+						}
+					);
+				},
+
 				prepareToExecuteMethod:function (_totalSteps) {
 					this._methodTotalSteps = _totalSteps;
 					this._methodCompletedSteps = 0;
@@ -620,7 +624,7 @@ Uize.module ({
 							if (_language != _primaryLanguage || _project.importPrimary) {
 								var _resources = _readLanguageResourcesFile (m,_language);
 								m.stepCompleted (_language + ': read language resources file');
-								_resources && _distributeResources (m,_resources,_language,_project);
+								_resources && m.distributeResources (_resources,_language);
 								m.stepCompleted (_language + ': distributed strings to individual resource files');
 							}
 						}
@@ -923,7 +927,7 @@ Uize.module ({
 						m.stepCompleted ('pseudo-localized resources for primary language');
 
 					/*** distributed pseudo-localized resources to individual resource files ***/
-						_distributeResources (m,_pseudoLocalizedResources,m.project.primaryLanguage);
+						m.distributeResources (_pseudoLocalizedResources,m.project.primaryLanguage);
 						m.stepCompleted ('distributed pseudo-localized resources to individual resource files');
 
 					_callback ();

@@ -20,7 +20,7 @@
 	Introduction
 		The =Uize.Widget.Options= class manages state for a group of option buttons, with support for dynamically rebuilding the UI when the values set changes.
 
-		*DEVELOPERS:* `Chris van Rensburg`, `Jan Borgersen`, `Ben Ilegbodu`, original code donated by `Zazzle Inc.`
+		*DEVELOPERS:* `Chris van Rensburg`, `Jan Borgersen`, `Ben Ilegbodu`, original code contributed by `Zazzle Inc.`
 
 		###
 			- for value and values, discuss specific requirements for when the values are objects

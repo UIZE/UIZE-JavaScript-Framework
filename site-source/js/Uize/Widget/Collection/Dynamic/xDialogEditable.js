@@ -21,7 +21,7 @@
 	Introduction
 		The =Uize.Widget.Collection.Dynamic.xDialogEditable= module extends the =Uize.Widget.Collection.Dynamic= base class by adding editing capability for dynamic collections.
 
-		*DEVELOPERS:* `Lisa Nakano`, original code donated by `Zazzle Inc.`
+		*DEVELOPERS:* `Lisa Nakano`, original code contributed by `Zazzle Inc.`
 */
 
 Uize.module ({
@@ -129,7 +129,7 @@ Uize.module ({
 					return _serializedProperties;
 				},
 				formSubmitHandler: function (_itemWidget, _formValues) {
-					var 
+					var
 						m = this,
 						_newProperties = m.adaptFormValuesToItemProperties(_formValues)
 					;

@@ -28,7 +28,7 @@
 
 		For more advanced customization, the =optionDataAdapter=, =optionsWidgetClass=, and =optionsWidgetProperties= state properties allow for fine-grained control over the widgets managing the suggestions.
 
-		*DEVELOPERS:* `Vinson Chuong`, original code donated by `Zazzle Inc.`
+		*DEVELOPERS:* `Vinson Chuong`, original code contributed by `Zazzle Inc.`
 
 		Issues and Notes
 		- Ignoring typeRequestDelay when pasting relies on the onpaste event, which is not supported in Opera.

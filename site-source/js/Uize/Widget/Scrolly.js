@@ -20,7 +20,7 @@
 	Introduction
 		The =Uize.Widget.Scrolly= class provides animated scrolling for the contents of a view port, with support for both horizontal and vertical scrolling.
 
-		*DEVELOPERS:* `Chris van Rensburg`, `Jan Borgersen`, original code donated by `Zazzle Inc.`
+		*DEVELOPERS:* `Chris van Rensburg`, `Jan Borgersen`, original code contributed by `Zazzle Inc.`
 
 		In a Nutshell
 			The =Uize.Widget.Scrolly= class is essentially just a scroller for a node.

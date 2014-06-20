@@ -1,0 +1,82 @@
+The new =Uize.Math.Blend= module provides a way to blend two values to produce a new, interpolated value, with support for blending arbitrarily complex data structures, quantization, and interpolation curve functions (and structures)..
+
+The Uize.Math.Blend.blend Method
+	The =Uize.Math.Blend= module contains the powerful and highly versatile =Uize.Math.Blend.blend= static method.
+
+	This method returns a value that is the blend between the two specified values and provides support for optional quantization, curve, and other advanced features. The method supports the following different usages...
+
+	`Blend Two Number Values`
+	.............................................................
+	blendedNUM = Uize.Math.Blend.blend (aNUM,bNUM,blendFRACTION);
+	.............................................................
+
+	`Blend Two Array Values`
+	...................................................................
+	blendedARRAY = Uize.Math.Blend.blend (aARRAY,bARRAY,blendFRACTION);
+	...................................................................
+
+	`Blend Two Object Values`
+	.............................................................
+	blendedOBJ = Uize.Math.Blend.blend (aOBJ,bOBJ,blendFRACTION);
+	.............................................................
+
+	`Blend Two Compound (Hierarchical) Objects`
+	.....................................................................................
+	blendedCompoundOBJ = Uize.Math.Blend.blend (aCompoundOBJ,bCompoundOBJ,blendFRACTION);
+	.....................................................................................
+
+	`Blend Two Values, with Quantization`
+	................................................
+	blendedNUMorARRAYorOBJ = Uize.Math.Blend.blend (
+		aNUMorARRAYorOBJ,
+		bNUMorARRAYorOBJ,
+		blendFRACTION,
+		quantizationNUMorARRAYorOBJ
+	);
+	................................................
+
+	`Blend Two Values, with Curve`
+	................................................
+	blendedNUMorARRAYorOBJ = Uize.Math.Blend.blend (
+		aNUMorARRAYorOBJ,
+		bNUMorARRAYorOBJ,
+		blendFRACTION,
+		0,
+		curveFUNCorARRAYorOBJ
+	);
+	................................................
+
+	`Blend Two Values, with Quantization and Curve`
+	................................................
+	blendedNUMorARRAYorOBJ = Uize.Math.Blend.blend (
+		aNUMorARRAYorOBJ,
+		bNUMorARRAYorOBJ,
+		blendFRACTION,
+		quantizationNUMorARRAYorOBJ,
+		curveFUNCorARRAYorOBJ
+	);
+	................................................
+
+	`Blend Two Values, Specifying Previous Value and Values Unchanged Indicator`
+	................................................
+	blendedNUMorARRAYorOBJ = Uize.Math.Blend.blend (
+		aNUMorARRAYorOBJ,
+		bNUMorARRAYorOBJ,
+		blendFRACTION,
+		quantizationNUMorARRAYorOBJ,
+		curveFUNCorARRAYorOBJ,
+		previousValueNUMorARRAYorOBJ,
+		valuesUnchangedOBJ
+	);
+	................................................
+
+	For a full explanation of this method and all its usages, and to see detailed examples, consult the reference documentation for the =Uize.Math.Bland= module.
+
+Comprehensively Documented and Tested
+	The =Uize.Math.Blend= module is comprehensively [[Uize.Math.Blend][documented]] and has exhaustive unit tests in the =Uize.Test.Uize.Math.Blend= test module.
+
+....................................................................................
+<< metadata >>
+
+title: 2014-06-17 - NEW MODULE: Uize.Math.Blend
+....................................................................................

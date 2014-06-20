@@ -20,7 +20,7 @@
 	Introduction
 		The =Uize.Widget.EggTimer= class implements a countdown timer widget (or egg timer), where digits flip at intervals using a JavaScript animation effect.
 
-		*DEVELOPERS:* `Jan Borgersen`, original code donated by `Zazzle Inc.`
+		*DEVELOPERS:* `Jan Borgersen`, original code contributed by `Zazzle Inc.`
 */
 
 Uize.module ({

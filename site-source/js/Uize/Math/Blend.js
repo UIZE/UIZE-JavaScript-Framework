@@ -607,27 +607,33 @@ Uize.module ({
 										When a `compound curve value` has no curve function explicitly specified for a property of the two hierarchical objects being blended, the curve function will be defaulted to the curve function of the parent node in the compound curve value.
 
 										EXAMPLE
-										...
+										.................................................................................
 										Uize.Math.Blend.blend (
 											{
-												textColor:{red:255,green:222,blue:173},          // navajo white
-												bgColor:{red:210,green:105,blue:30}             // chocolate brown
+												textColor:{red:255,green:222,blue:173},                  // navajo white
+												bgColor:{red:210,green:105,blue:30}                      // chocolate brown
 											},
 											{
-												textColor:{red:255,green:240,blue:230},          // linen white
-												bgColor:{red:139,green:69,blue:19}              // saddle brown
+												textColor:{red:255,green:240,blue:230},                  // linen white
+												bgColor:{red:139,green:69,blue:19}                       // saddle brown
 											},
 											.5,
 											0,
 											{
-												textColor:function (value) {return Math.pow (value,2)},   // quadratic curve
-												bgColor:function (value) {return Math.pow (value,3)}      // cubic curve
+												textColor:function (value) {return Math.pow (value,2)},  // quadratic curve
+												bgColor:function (value) {return Math.pow (value,3)}     // cubic curve
 											}
 										);
-										...
+										.................................................................................
+
+										In the above example, two sets of color values are being blended, each set containing two RGB color tuple objects.
+
+										Now, because we wish to blend the =textColor= and =bgColor= color values with different curves, we specify a `compound curve value` object containing =textColor= and =bgColor= properties. Because we want the curve for each of the colors to be applied to all three RGB color channels, we specify just a curve function for each of the =textColor= and =bgColor= properties.
+
+										Because no curve functions are specified explicitly for the =red=, =green=, and =blue= properties in the =textColor= and =bgColor= properties of the compound curve value, the curve functions are "inherited" for all the deeper nodes that exist in the corresponding spots in the structures of the hierarchical values being blended - in this case, the color channel properties.
 
 										RESULT
-										...
+										..................
 										{
 											textColor:{
 												red:255,
@@ -640,7 +646,7 @@ Uize.module ({
 												blue:28.625
 											}
 										}
-										...
+										..................
 				*/
 			}
 		});

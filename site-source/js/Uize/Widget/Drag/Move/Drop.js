@@ -20,7 +20,7 @@
 	Introduction
 		The =Uize.Widget.Drag.Move.Drop= class implements support for adding/removing/wiring widgets as drop targets.
 
-		*DEVELOPERS:* `Tim Carter`, original code donated by `Zazzle Inc.`
+		*DEVELOPERS:* `Tim Carter`, original code contributed by `Zazzle Inc.`
 */
 
 Uize.module ({

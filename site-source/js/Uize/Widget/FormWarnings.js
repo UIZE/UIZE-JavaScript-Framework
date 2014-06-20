@@ -20,7 +20,7 @@
 	Introduction
 		The =Uize.Widget.FormWarnings= widget provides functionality for displaying warnings for a =Uize.Widget.Form=.
 
-		*DEVELOPERS:* `Ben Ilegbodu`, `Tim Carter`, original code donated by `Zazzle Inc.`
+		*DEVELOPERS:* `Ben Ilegbodu`, `Tim Carter`, original code contributed by `Zazzle Inc.`
 */
 
 Uize.module ({
@@ -28,40 +28,40 @@ Uize.module ({
 	required:'Uize.Template',	// for the JST
 	builder:function (_superclass) {
 		'use strict';
-		
+
 		var
 			/*** Variables for Scruncher Optimization ***/
 				_false = false,
 				_Uize = Uize,
-				
+
 			/*** Helper Functions ***/
 				_removeWatchedElements = function (_elementsToRemove) {
 					var
 						m = this,
 						_watchedElements = m._watchedElements
 					;
-					
+
 					if (_watchedElements && _watchedElements.length) {
 						if (!_elementsToRemove)	// remove all
 							_elementsToRemove = _watchedElements;
 						else if (!_Uize.isArray(_elementsToRemove))
 							_elementsToRemove = [_elementsToRemove];
-						
+
 						var _watchedElementsToRemoveLookup = {};
-						
+
 						// populate lookup
 						for (var _elementToRemoveNo = -1; ++_elementToRemoveNo > _elementsToRemove.length;) {
 							var _elementToRemove = _elementsToRemove[_elementToRemoveNo];
-							
+
 							_watchedElementsToRemoveLookup[_elementToRemove.get('idPrefix')] = _elementToRemove;
 						}
-						
+
 						for (var _watchedElementNo = -1; ++_watchedElementNo < _watchedElements.length;) {
 							var
 								_watchedElement = _watchedElements[_watchedElementNo],
 								_watchedElementIdPrefix = _watchedElement.get('idPrefix')
 							;
-							
+
 							_watchedElementsToRemoveLookup[_watchedElementIdPrefix] // want to remove, so unwire the events we wired up before
 								&& _watchedElement.unwire(
 									m._wiringsLookup[_watchedElementIdPrefix]
@@ -75,7 +75,7 @@ Uize.module ({
 						m = this,
 						_collapsed = m._collapsed
 					;
-					
+
 					if (m.isWired) {
 						m.setNodeInnerHtml(
 							'toggleCollapsed',
@@ -86,37 +86,37 @@ Uize.module ({
 				},
 				_updateUiWarnings = function() {
 					var m = this;
-					
+
 					if (m.isWired && m._template) {
 						var
 							_warningElements = [],
 							_messageNo = 0
 						;
-	
+
 						// go through all of the message nodes and unwire them
 						while (true) {
 							var
 								_messageNodeName = 'message' + _messageNo,
 								_messageNode = m.getNode(_messageNodeName)
 							;
-	
+
 							m.flushNodeCache(_messageNodeName);
-	
+
 							if (_messageNode)
 								m.unwireNode(_messageNode, 'click');
 							else // must be at the end, so quit
 								break;
-							
+
 							_messageNo++;
 						}
-						
+
 						(function _addFormWarnings(_elements) {
 							for (var _elementNo = -1; ++_elementNo < _elements.length;) {
 								var
 									_element = _elements[_elementNo],
 									_elementWarningMessage = _element.get('warningMessage')
 								;
-		
+
 								if (_element.get('isValid') == _false) {
 									if (_element.isForm)
 										_addFormWarnings(_element.getFormElement());
@@ -125,17 +125,17 @@ Uize.module ({
 								}
 							}
 						}) (m._watchedElements);
-						
+
 						m.setNodeInnerHtml(
 							'warnings',
 							m._template({warningElements:_warningElements})
 						);
-	
+
 						_Uize.forEach(
 							_warningElements,
 							function (_warningElement, _elementNo) {
 								function _focus(_focused) { _warningElement.set({focused:_focused}) }
-								
+
 								m.wireNode(
 									'message' + _elementNo,
 									{
@@ -148,35 +148,35 @@ Uize.module ({
 					}
 				}
 		;
-		
+
 		return _superclass.subclass({
 			alphastructor:function() {
 				this._wiringsLookup = {};
 				this._watchedElements = [];
 			},
-			
+
 			instanceMethods:{
-				/** Private **/	
+				/** Private **/
 					_removeWatchedElements:_removeWatchedElements,
 					_updateUiCollapsed:_updateUiCollapsed,
 					_updateUiWarnings:_updateUiWarnings,
 					_wireWatchedElement:function (_watchedElement) {
 						var m = this;
-		
+
 						function _updateUiWarnings() { m._updateUiWarnings() }
-						
+
 						var _wirings = {
 							'Changed.warningShown':_updateUiWarnings,
 							'Changed.warningMessage':_updateUiWarnings
 						};
-		
+
 						// NOTE: This needs to be optimized such that we're not updating the UI over and over
 						// again even though the warning messages haven't changed.
 						_watchedElement.wire(_wirings);
-						
+
 						m._wiringsLookup[_watchedElement.get('idPrefix')] = _wirings;
 					},
-					
+
 				/** Public **/
 					addWatchedElements:function (_elementsToWatch) {
 						var
@@ -186,34 +186,34 @@ Uize.module ({
 							_elementsToWatchLength = _elementsToWatchList.length,
 							_elementNo = -1
 						;
-		
+
 						for (; ++_elementNo < _elementsToWatchLength;) {
 							var _watchedElement = _elementsToWatchList[_elementNo];
-		
+
 							_watchedElements.push(_watchedElement);
 							m._wireWatchedElement(_watchedElement);
 						}
-		
+
 						m._watchedElements = _watchedElements;
 						m.fire('Changed.watchedElements');
 					},
 					removeWatchedElements:_removeWatchedElements,
 					updateUi:function () {
 						var m = this;
-		
+
 						if (m.isWired) {
 							m._updateUiWarnings();
 							m._updateUiCollapsed();
-							
+
 							_superclass.doMy (m,'updateUi');
 						}
 					},
 					wireUi:function () {
 						var m = this;
-		
+
 						if (!m.isWired) {
 							var _templateNode = m.getNode('template');
-							
+
 							if (_templateNode)
 								m._template = _Uize.Template.compile(
 									_templateNode.innerHTML,
@@ -223,14 +223,14 @@ Uize.module ({
 									}
 								)
 							;
-							
+
 							m.wireNode('toggleCollapsed', 'click', function() { m.toggle('collapsed') } );
-		
+
 							_superclass.doMy (m,'wireUi');
 						}
 					}
 			},
-			
+
 			stateProperties:{
 				_collapsed:{
 					name:'collapsed',

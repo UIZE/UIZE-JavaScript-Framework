@@ -20,7 +20,7 @@
 	Introduction
 		The =Uize.Widget.Options.FilterGroup= widget provides the functionality for a filter group widget...
 
-		*DEVELOPERS:* `Ben Ilegbodu`, original code donated by `Zazzle Inc.`
+		*DEVELOPERS:* `Ben Ilegbodu`, original code contributed by `Zazzle Inc.`
 */
 
 Uize.module ({

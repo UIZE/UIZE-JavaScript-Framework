@@ -20,7 +20,7 @@
 	Introduction
 		The =Uize.Widget.Form= widget provides functionality for managing form elements and handling validation
 
-		*DEVELOPERS:* `Ben Ilegbodu`, original code donated by `Zazzle Inc.`
+		*DEVELOPERS:* `Ben Ilegbodu`, original code contributed by `Zazzle Inc.`
 */
 
 Uize.module ({
@@ -159,14 +159,14 @@ Uize.module ({
 
 		return _superclass.subclass({
 			mixins:[_Uize_Widget.mDeclarativeChildren, _Uize_Widget.mEventBindings],
-				
+
 			alphastructor:function () {
 				// this is just a dummy private variable so that when we are examining
 				// child widgets, we'll know we're dealing with a form widget (or subclass)
 				// and not a form element widget
 				this.isForm = this._isForm = _true;
 			},
-			
+
 			children:{
 				committer:{
 					widgetClass:_Uize_Widget.Committer,
@@ -184,7 +184,7 @@ Uize.module ({
 					_elements = m._elements = _children.elements,
 					_elementsChildren = _elements.children,
 					_elementsAddedChildren = _elements.addedChildren,
-					
+
 					_wireAddedElement = function (_elementName) {
 						var _childElement = _elementsChildren[_elementName];
 
@@ -203,7 +203,7 @@ Uize.module ({
 										function (_element, _elementName, _elementIsForm) {
 											if (!_elementIsForm) {
 												var _nodeValue = _element.getNodeValue('input');
-	
+
 												_nodeValue !== _undefined
 													&& _element.valueOf() != _nodeValue
 													&& _element.get('placeholder') != _nodeValue
@@ -218,7 +218,7 @@ Uize.module ({
 							'Changed.tentativeValue':function() {
 								m.set({
 									_isSubmitting:_false,
-	
+
 									// NOTE: in order to support async validation, we could no longer set isSubmitting to false
 									// if isValid was false, which means that there was nothing setting isSubmitting to false after
 									// clicking the submit. This means that you could run into a case where you submit and invalid form,
@@ -230,20 +230,20 @@ Uize.module ({
 								});
 							}
 						});
-	
+
 						if (_childElement.isForm) {
 							// if form widget is added as child of another form, then it can't be using normal
 							// submit since it's part of a bigger form
 							_childElement.set({_useNormalSubmit:_false});
-	
+
 							_childElement.wire(
 								'Changed.isSubmitting',
 								function (_event) { _event.newValue && m._submit() }
 							);
 						}
-	
+
 						m._formWarnings.addWatchedElements(_childElement);
-	
+
 						m._committer.addWatchedProperties([{
 							alias:_childElement.get('name'),
 							instance:_childElement,
@@ -263,9 +263,9 @@ Uize.module ({
 				// Save private instance references
 				m._committer = _children.committer;
 				m._formWarnings = _children.formWarnings;
-				
+
 				_wireAddedElements(_elementsAddedChildren.get());
-				
+
 				_elements.addedChildren.wire(
 					'Changed.*',
 					function(_event) { _wireAddedElements(_event.properties) }
@@ -643,7 +643,7 @@ Uize.module ({
 						value:_false
 					}
 			},
-			
+
 			eventBindings:{
 				committer:{
 					'Changed.committedValues':_updateValue,

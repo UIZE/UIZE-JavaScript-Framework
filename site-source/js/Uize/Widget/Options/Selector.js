@@ -20,7 +20,7 @@
 	Introduction
 		The =Uize.Widget.Options.Selector= widget provides the functionality for specific type of input UI widget that allows for single selection of an option among a discrete set of options, with additional optional sort and search capabilities.
 
-		*DEVELOPERS:* `Ben Ilegbodu`, original code donated by `Zazzle Inc.`
+		*DEVELOPERS:* `Ben Ilegbodu`, original code contributed by `Zazzle Inc.`
 */
 
 Uize.module ({

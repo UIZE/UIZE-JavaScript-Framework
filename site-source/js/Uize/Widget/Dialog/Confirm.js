@@ -20,7 +20,7 @@
 	Introduction
 		The =Uize.Widget.Dialog.Confirm= class implements a confirmation dialog that can be used by the =confirm= and =inform= methods of the =Uize.Widget= class.
 
-		*DEVELOPERS:* `Chris van Rensburg`, original code donated by `Zazzle Inc.`
+		*DEVELOPERS:* `Chris van Rensburg`, original code contributed by `Zazzle Inc.`
 */
 
 Uize.module ({

@@ -20,7 +20,7 @@
 	Introduction
 		The =Uize.Widget.mChildBindings= mixin implements features to provide a declarative approach to binding the state properties of a widget to those of its children.
 
-		*DEVELOPERS:* `Ben Ilegbodu`, original code donated by `Zazzle Inc.`
+		*DEVELOPERS:* `Ben Ilegbodu`, original code contributed by `Zazzle Inc.`
 */
 
 Uize.module ({
@@ -38,11 +38,11 @@ Uize.module ({
 				_isPlainObject = _Uize.isPlainObject,
 				_resolveTransformer = _Uize.resolveTransformer,
 				_pairUp = _Uize.pairUp,
-				
+
 			/*** Variables for Performance Optimzation ***/
 				_bindingFormatRegExp = /^([<\->]+)?(\w+)(\.(.+))?$/
 		;
-		
+
 		function _syncWidgets(_sourceWidget, _sourceProperty, _destinationWidget, _destinationProperty, _valueTransformer) {
 			var _sourceValue = _sourceWidget.get(_sourceProperty);
 			_destinationWidget.set(
@@ -50,7 +50,7 @@ Uize.module ({
 				_valueTransformer
 					? _valueTransformer(_sourceValue)
 					: _sourceValue
-			);	
+			);
 		}
 
 		return function (_class) {
@@ -70,7 +70,7 @@ Uize.module ({
 							}
 						}
 					*/
-					
+
 					_forEach(
 						m.Class.mChildBindings_bindings,
 						function(_bindingsForChild, _childName) {
@@ -85,7 +85,7 @@ Uize.module ({
 						}
 					);
 				},
-				
+
 				staticMethods:{
 					childBindings:function(_bindings) {
 						var _childBindings = this.mChildBindings_bindings;
@@ -102,7 +102,7 @@ Uize.module ({
 											direction:_formatMatch[1]
 										}
 									;
-									
+
 									if (_isPlainObject(_binding) && _binding.child) {
 										var
 											_childName = _binding.child,
@@ -112,7 +112,7 @@ Uize.module ({
 											_valueAdapter = _binding.valueAdapter,
 											_valueTransformerAtoB = _valueAdapter && _valueAdapter.aToB && _resolveTransformer(_valueAdapter.aToB),
 											_valueTransformerBtoA = _valueAdapter && _valueAdapter.bToA && _resolveTransformer(_valueAdapter.bToA),
-											
+
 											_directionIsToChild = _direction.indexOf('->') == (_directionLength - 2),  // parent -> child
 											_directionIsFromChild = !_direction.indexOf('<-'),  // child -> parent
 											_directionIsTwoWay = _direction.indexOf('<->'),
@@ -127,10 +127,10 @@ Uize.module ({
 												_syncToChildEvent,
 												_syncFromChildEvent
 											;
-											
+
 											function _syncToChild() { _syncWidgets(m, _propertyName, _childWidget, _childPropertyName, _valueTransformerAtoB) }
 											function _syncFromChild() { _syncWidgets(_childWidget, _childPropertyName, m, _propertyName, _valueTransformerBtoA) }
-											
+
 											if (_directionIsToChild) {
 												// First set child widget to have same value as widget
 												// We don't want to do this if the binding is bi-drectional and the widget is undefined.
@@ -138,18 +138,18 @@ Uize.module ({
 												(_directionIsTwoWay || m.get(_propertyName) !== _undefined)
 													&& _syncToChild()
 												;
-												
+
 												// Then wire Changed.* handler on widget to update child widget
 												m.wire(_syncToChildEvent = _pairUp(_widgetChangedPropertyEventName, _syncToChild));
 											}
 											if (_directionIsFromChild) {
 												// First set widget to have same value as child
 												_syncFromChild();
-												
+
 												// Then wire Changed.* handler on child to update widget
 												_childWidget.wire(_syncFromChildEvent = _pairUp(_childWidgetChangedPropertyEventName, _syncFromChild));
 											}
-												
+
 											// Finally wire up unwire if/when the child is removed
 											m.addedChildren.whenever(
 												'!' + _childName,
@@ -157,10 +157,10 @@ Uize.module ({
 													if (_childWidget) {
 														// unwire parent -> child
 														_syncToChildEvent && m.unwire(_syncToChildEvent);
-														
+
 														// unwire child -> parent (even though child is removed, it is not necessarilly destroyed)
 														_syncFromChildEvent && _childWidget && _childWidget.unwire(_syncFromChildEvent);
-														
+
 														// clear out our reference to the removed child widget to not potentially hang on memory that can be disposed
 														_childWidget = undefined;
 													}

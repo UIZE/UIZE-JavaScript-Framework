@@ -1,0 +1,12 @@
+Message received on {messageDate:Date} from {sender:Person}.
+
+
+You have {newMessages:Number} new message.
+You have {newMessages:Number} new messages.
+
+
+Uize.Loc.Format.Date.en_US
+Uize.Loc.Format.Number.en_US
+Uize.Loc.Format.Currency.en_US
+
+

@@ -20,7 +20,7 @@
 	Introduction
 		The =Uize.Widget.PopupPalette= class manages state for a generic popup palette widget, that can be used as a child widget for droplist style widgets.
 
-		*DEVELOPERS:* `Chris van Rensburg`, original code donated by `Zazzle Inc.`
+		*DEVELOPERS:* `Chris van Rensburg`, original code contributed by `Zazzle Inc.`
 */
 
 Uize.module ({

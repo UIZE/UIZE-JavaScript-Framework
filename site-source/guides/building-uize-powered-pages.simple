@@ -170,8 +170,7 @@ Anatomy of a Typical Page
 					- many of the examples in the UIZE Web site use this approach, because it helps to illustrate the HTML markup needed by a widget (it would be less clear if the widget markup were in a separate file)
 				- could come from a JavaScript template
 					- some of the example in the UIZE Web site use this approach, especially for widgets that are used in multiple examples and that have more complex markup (such as the slideshow or dialog widgets)
-				- could be generated on the server side by a control or some other device of the server platform's component architecture
-					- `Zazzle Inc.` uses .NET's control framework for generating the markup for widgets
+				- could be generated on the server side by a control or some other device of the server platform's component architecture (eg. .NET's control framework)
 
 ### What Next?
 

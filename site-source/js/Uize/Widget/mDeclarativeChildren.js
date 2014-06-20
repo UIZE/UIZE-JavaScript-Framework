@@ -20,7 +20,7 @@
 	Introduction
 		The =Uize.Widget.mDeclarativeChildren= mixin implements features to provide a declarative approach to adding child widgets to a widget.
 
-		*DEVELOPERS:* `Ben Ilegbodu`, original code donated by `Zazzle Inc.`
+		*DEVELOPERS:* `Ben Ilegbodu`, original code contributed by `Zazzle Inc.`
 */
 
 Uize.module ({
@@ -40,33 +40,33 @@ Uize.module ({
 						m = this,
 						_declarativeChildren = m.Class.mDeclarativeChildren_children
 					;
-					
+
 					for (var _childName in _declarativeChildren) {
 						var
 							_declarativeChild = _declarativeChildren[_childName],
 							_childWidgetClass = _declarativeChild._widgetClass,
 							_childProperties = _declarativeChild._properties
-							
+
 						;
-						
+
 						// When value is a function call the function in the context of this widget
 						if (_declarativeChild._isFunction) {
 							_childProperties = _Uize.copy(_childProperties.call(m, _childName));
 							_childWidgetClass = _childProperties.widgetClass;
 							delete _childProperties.widgetClass;
 						}
-					
+
 						// NOTE: Filter out children w/o widgetClass. They will be deferred loaded by some other mechanism. They were there for feature detection.
 						_childWidgetClass
 							&& m.mDeclarativeChildren_getContainer(_childName).addChild(_childName, _childWidgetClass, _childProperties)
 						;
 					}
 				},
-				
+
 				staticMethods:{
 					children:function(_children) {
 						var _declarativeChildren = this.mDeclarativeChildren_children;
-						
+
 						for (var _childName in _children) {
 							var
 								_childDeclaration = _children[_childName],
@@ -75,14 +75,14 @@ Uize.module ({
 								_childProperties = !_childDeclarationIsFunction && !_childDeclarationIsPlainObject ? {widgetClass:_childDeclaration} : _childDeclaration,
 								_childWidgetClass = !_childDeclarationIsFunction && _childProperties.widgetClass
 							;
-							
+
 							// Need to strip out the widgetClass from the childProperties, which means we need to copy it just in case
 							// it's a shared object
 							if (!_childDeclarationIsFunction && _childDeclarationIsPlainObject && _childWidgetClass) {
 								_childProperties = _Uize.copy(_childProperties);
 								delete _childProperties.widgetClass;
 							}
-							
+
 							// NOTE: support multiple calls to children that could potentially include the same child again w/ additional properties (for whatever reason)
 							// As such we can't omit the children that don't have widgetClass set, yet, because the widgetClass *could* be added in a subsequent call to children. Will handle in constructor.
 							_declarativeChildren[_childName] = _Uize.copyInto(
@@ -131,7 +131,7 @@ Uize.module ({
 										}
 									});
 									......................................................
-									
+
 									SHORT-HAND EXAMPLE
 									......................................................
 									MyNamespace.MyWidgetClass = Uize.Widget.mDeclarativeChildren.subclass ({
@@ -141,7 +141,7 @@ Uize.module ({
 										}
 									});
 									......................................................
-									
+
 									FUNCTION EXAMPLE
 									......................................................
 									MyNamespace.MyWidgetClass = Uize.Widget.mDeclarativeChildren.subclass ({
@@ -163,7 +163,7 @@ Uize.module ({
 				staticProperties:{
 					mDeclarativeChildren_children:{}
 				},
-				
+
 				instanceMethods:{
 					mDeclarativeChildren_getContainer:function() { return this }
 				}
