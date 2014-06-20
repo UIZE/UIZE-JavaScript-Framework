@@ -72,7 +72,8 @@ Uize.module ({
 								{value:_valueWidget.valueOf ()},
 								_valueDetails !== _undefined
 									? {valueDetails:_valueDetails}
-									: _undefined
+									: _undefined,
+								m._pipedProperties && _valueWidget.get(m._pipedProperties)
 							)
 						);
 					}

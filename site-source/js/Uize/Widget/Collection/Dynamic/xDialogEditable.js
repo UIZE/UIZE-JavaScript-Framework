@@ -48,7 +48,7 @@ Uize.module ({
 						_properties = _properties || {};
 						var
 							_itemWidgetProperties = m.get('itemWidgetProperties'),
-							_itemWidgetName = m.get('itemWidgetNamePrefix') + m._uniqueIdentifierId++,
+							_itemWidgetName = m.get('itemWidgetNamePrefix') + m.uniqueIdentifierId++,
 							_collectionItemControlName = m.getCollectionItemControlName(_properties)
 						;
 
@@ -153,7 +153,7 @@ Uize.module ({
 							m.callInherited('useDialog')({
 								component: {
 									name: _formDialogJsClass,
-									params: _Uize.copy(_dialogParams, m.adaptItemPropertiesToFormValues(_itemProperties), m._formDialogParams)
+									params: _Uize.copy(_dialogParams, m.adaptItemPropertiesToFormValues(_itemProperties), m.formDialogParams)
 								},
 								widgetProperties: { name: 'itemFormDialog' },
 								submitHandler: function (_formValues) {
@@ -189,7 +189,7 @@ Uize.module ({
 				/*** Hook Method Implementations ***/
 					afterWireUi:function () {
 						var m = this;
-						if (m._isEditable) {
+						if (m.isEditable) {
 							// wire add item
 							m.wire('Item.add', function (_event) {
 								_event.bubble = _false;
@@ -208,7 +208,7 @@ Uize.module ({
 								m.editItemHandler(_event.source, _event.properties);
 							});
 
-							m._uniqueIdentifierId = m.get('totalItems');
+							m.uniqueIdentifierId = m.get('totalItems');
 
 							// By default, the items container for collections is this.getNode('items'). Override it.
 							m.set({ itemWidgetProperties: _Uize.copyInto(m.get('itemWidgetProperties'), { container: m.getContainerNode() }) });
@@ -223,19 +223,19 @@ Uize.module ({
 					/* default is to override the default items container, may be 'undone' in subclasses */
 					getContainerNode: function () {
 						var m = this;
-						return m.getNode(m._itemsContainerNode);
+						return m.getNode(m.itemsContainerNode);
 					}
 			},
 
 			stateProperties:{
-				_collectionItemControlName:'collectionItemControlName',
-				_formDialogJsClass:'formDialogJsClass',
-				_formDialogParams:'formDialogParams',
-				_isEditable:{
+				collectionItemControlName:'collectionItemControlName',
+				formDialogJsClass:'formDialogJsClass',
+				formDialogParams:'formDialogParams',
+				isEditable:{
 					name:'isEditable',
 					value:_false
 				},
-				_itemsContainerNode:{
+				itemsContainerNode:{
 					name:'itemsContainerNode',
 					value:'items'
 				}

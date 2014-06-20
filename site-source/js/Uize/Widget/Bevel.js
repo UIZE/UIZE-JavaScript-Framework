@@ -51,7 +51,7 @@ Uize.module ({
 						_borderCommon = 'solid ' + m._thickness + 'px ',
 						_html =
 							'<div style="width:' + (m._imageDims [0] - _boxModelDimOffset) + 'px; height:' + (m._imageDims [1] - _boxModelDimOffset) + 'px; border-left:' + _borderCommon + '#ccc; border-top:' + _borderCommon + '#fff; border-right:' + _borderCommon + '#444; border-bottom:' + _borderCommon + '#000;' + Uize.Dom.Util.getOpacityStr (m._opacity) + '">' +
-							'&nbsp' +
+							'&nbsp;' +
 							'</div>'
 					;
 					_node.innerHTML = _html;

@@ -64,12 +64,18 @@ Uize.module ({
 								_pathToCreate = _getParentFolderPath (_pathToCreate);
 							}
 							for (var _pathToCreateNo = _pathsToCreate.length; --_pathToCreateNo >= 0;)
-								_fileSystem.mkdirSync (
-									_pathsToCreate [_pathToCreateNo],
-									0x1ff // 0x1ff Hex equivalent to 0777 octal
-								)
+								!m._pathExists (_pathsToCreate [_pathToCreateNo])
+									&& _fileSystem.mkdirSync (
+										_pathsToCreate [_pathToCreateNo],
+										0x1ff // 0x1ff Hex equivalent to 0777 octal
+									)
 							;
 						}
+					},
+					
+					_unlink:function(_path) {
+						var m = this;
+						m._pathExists(_path) && m._fileSystem.unlinkSync(_path);
 					},
 
 				/*** Overridden Extensibility Methods ***/
@@ -112,8 +118,13 @@ Uize.module ({
 					},
 
 					deleteFile:function (_params,_callback) {
-						/* TODO: implement this method */
-						_callback ();
+						this._unlink(_params.path);
+						_callback();
+					},
+
+					deleteFolder:function (_params,_callback) {
+						this._unlink(_params.path);
+						_callback();
 					},
 
 					fileExists:function (_params,_callback) {

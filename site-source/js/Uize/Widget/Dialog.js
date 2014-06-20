@@ -94,7 +94,7 @@ Uize.module ({
 				_updateTextForButton (_children.cancel,m._cancelText || m._defaultCancelText);
 			}
 
-		return _superclass.subclass ({
+		var _class = _superclass.subclass ({
 			alphastructor:function () {
 				var m = this;
 
@@ -748,6 +748,7 @@ Uize.module ({
 						if (m.isWired) {
 							if (m._shown) {
 								_totalShown++;
+								_class.openDialogs[m.get('name')] = m;
 								m._draggedSinceShown = _false;
 								typeof m._okEnabledOnShow == 'boolean' &&
 									m.children.ok.set ({enabled:m._okEnabledOnShow ? 'inherit' : _false})
@@ -783,6 +784,7 @@ Uize.module ({
 									_hideWithVisibilityForDimensionGetting (_false);
 							} else {
 								_totalShown--;
+								delete _class.openDialogs[m.get('name')];
 								delete _zIndexSlots [m._zIndexSlotNo];
 								m.fire ('Before Hide');
 									/*?
@@ -864,9 +866,12 @@ Uize.module ({
 			},
 
 			staticProperties:{
-				buttonWidgetClass:Uize.Widget.Button
+				buttonWidgetClass:Uize.Widget.Button,
+				openDialogs:{}
 			}
 		});
+
+		return _class;
 	}
 });
 

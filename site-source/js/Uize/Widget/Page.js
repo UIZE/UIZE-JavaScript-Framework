@@ -487,7 +487,6 @@ Uize.module ({
 					function _loadDialog() {
 						function _createDialogWidget() {
 							var _dialogWidgetClassName = _params.widgetClassName;
-							_loadingDialogs[_dialogWidgetName] = _false;
 							_Uize.require (
 								_dialogWidgetClassName,
 								function (_dialogWidgetClass) {
@@ -502,16 +501,17 @@ Uize.module ({
 									_dialogWidget.Page_componentProfile = _componentProfile;
 									_dialogWidget.insertOrWireUi ();
 									_showDialog (_refetch ? 'refetched' : 'initial');
+									_loadingDialogs[_dialogWidgetName] = _false;
 								}
 							);
 						}
 						if (!_loadingDialogs[_dialogWidgetName]) { // if we're already loading a dialog of that name just ignore
+							_loadingDialogs[_dialogWidgetName] = _true;
 							var _refetch = _componentProfile && !!_dialogWidget;
 							if (_refetch) {
 								_dialogWidget.removeUi ();
 								_dialogWidgetParent.removeChild (_dialogWidgetName);
 							}
-							_loadingDialogs[_dialogWidgetName] = _true;
 							_componentProfile
 								? m.loadHtmlIntoNode (
 									{

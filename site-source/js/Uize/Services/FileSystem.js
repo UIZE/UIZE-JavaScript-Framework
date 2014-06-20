@@ -76,6 +76,24 @@ Uize.module ({
 					*/
 				},
 
+				deleteFolder:{
+					async:_false
+					/*?
+						Instance Methods
+							deleteFolder
+								.
+
+								SYNTAX
+								..........................................
+								fileSystemInstance.deleteFolder (paramsOBJ);
+								..........................................
+
+								Params
+									path
+										.
+					*/
+				},
+
 				fileExists:{
 					async:_false
 					/*?

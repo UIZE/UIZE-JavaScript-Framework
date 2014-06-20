@@ -71,7 +71,8 @@ Uize.module ({
 								_pathToCreate = _getParentFolderPath (_pathToCreate);
 							}
 							for (var _pathToCreateNo = _pathsToCreate.length; --_pathToCreateNo >= 0;)
-								 _fileSystemObject.CreateFolder (_pathsToCreate [_pathToCreateNo])
+								!_fileSystemObject.FolderExists (_pathsToCreate [_pathToCreateNo])
+									&& _fileSystemObject.CreateFolder (_pathsToCreate [_pathToCreateNo])
 							;
 						}
 					},
@@ -90,6 +91,15 @@ Uize.module ({
 					deleteFile:function (_params,_callback) {
 						try {
 							this._fileSystemObject.DeleteFile (_params.path);
+						} catch (_error) {
+							// do nothing for now
+						}
+						_callback ();
+					},
+
+					deleteFolder:function (_params,_callback) {
+						try {
+							this._fileSystemObject.DeleteFolder (_params.path);
 						} catch (_error) {
 							// do nothing for now
 						}
