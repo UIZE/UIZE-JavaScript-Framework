@@ -1,4 +1,4 @@
-The new =Uize.Math.Blend= module provides a way to blend two values to produce a new, interpolated value, with support for blending arbitrarily complex data structures, quantization, and interpolation curve functions (and structures)..
+The new =Uize.Math.Blend= module provides a way to blend two values to produce a new, interpolated value, with support for blending arbitrarily complex data structures, quantization, and interpolation curve functions (and structures).
 
 The Uize.Math.Blend.blend Method
 	The =Uize.Math.Blend= module contains the powerful and highly versatile =Uize.Math.Blend.blend= static method.

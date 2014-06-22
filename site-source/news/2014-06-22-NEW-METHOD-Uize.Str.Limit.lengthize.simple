@@ -1,0 +1,99 @@
+The new =Uize.Str.Limit.lengthize= static method, implemented in the =Uize.Str.Limit= module, lets you adjust the length of a source string to a new desired length, adding padding or performing truncation as necessary, and with the option of specifying the alignment for the source text in the new string.
+
+Adjust the Length of a Source String
+	In the simplest usage, the length of a source string can be adjusted to a new length by specifying the source string as the first argument and the desired length as the second argument.
+
+	SYNTAX
+	..............................................................
+	resultSTR = Uize.Str.Limit.lengthize (sourceStr,newLengthINT);
+	..............................................................
+
+	If the value specified for the =newLengthINT= parameter is different to the length of the source string and padding needs to be added or truncation needs to be performed, the operation will be performed in a left-aligned manner. This is the same as if the value ='left'= or =0= was specified for the optional =alignSTRorFLOAT= third argument (see the usage `Adjust the Length of a Source String, Specifying Alignment`).
+
+	EXAMPLES
+	......................................................................
+	Uize.Str.Limit.lengthize ('foobarbaz',12);   // returns 'foobarbaz   '
+	Uize.Str.Limit.lengthize ('foobarbaz',9);    // returns 'foobarbaz'
+	Uize.Str.Limit.lengthize ('foobarbaz',3);    // returns 'foo'
+	Uize.Str.Limit.lengthize ('foobarbaz',0);    // returns ''
+	Uize.Str.Limit.lengthize ('foobarbaz',-10);  // returns ''
+
+	// when the source string is an empty string
+	Uize.Str.Limit.lengthize ('',12);            // returns '            '
+	Uize.Str.Limit.lengthize ('',9);             // returns '         '
+	Uize.Str.Limit.lengthize ('',3);             // returns '   '
+	Uize.Str.Limit.lengthize ('',0);             // returns ''
+	Uize.Str.Limit.lengthize ('',-10);           // returns ''
+	......................................................................
+
+Adjust the Length of a Source String, Specifying Alignment
+	In cases where padding needs to be added or truncation needs to be performed and you wish to control how content from the source string is aligned in the result string, alignment can be specified using the optional =alignSTRorFLOAT= third argument.
+
+	SYNTAX
+	..............................................................................
+	resultSTR = Uize.Str.Limit.lengthize (sourceStr,newLengthINT,alignSTRorFLOAT);
+	..............................................................................
+
+	Named Alignment
+		Alignment can be specified by name by specifying a string value for the =alignSTRorFLOAT= parameter.
+
+		The following string value can be specified...
+
+		- ='left'= - The source text will be left-aligned in the returned string, and any padding or truncation necessary will be applied on the right side of the string.
+		- ='center'= - The source text will be center-aligned in the returned string, and any padding or truncation necessary will be applied evenly (half on each side) on the left and right sides of the string.
+		- ='right'= The source text will be right-aligned in the returned string, and any padding or truncation necessary will be applied on the left side of the string.
+
+		EXAMPLES
+		.................................................................................
+		// when the new length is greater than the current length
+
+		Uize.Str.Limit.lengthize ('foobar',10,'left');            // returns 'foobar    '
+		Uize.Str.Limit.lengthize ('foobar',10,'center');          // returns '  foobar  '
+		Uize.Str.Limit.lengthize ('foobar',10,'right');           // returns '    foobar'
+
+
+		// when the new length is less than the current length
+
+		Uize.Str.Limit.lengthize ('aaabbbcccdddeee',3,'left');    // returns 'aaa'
+		Uize.Str.Limit.lengthize ('aaabbbcccdddeee',3,'center');  // returns 'ccc'
+		Uize.Str.Limit.lengthize ('aaabbbcccdddeee',3,'right');   // returns 'eee'
+		.................................................................................
+
+	Fractional Alignment
+		Beyond the conventional left, center, and right `named alignment`, any arbitrary fractional alignment can be achieved by specifying a floating point number in the range of =0= to =1= for the =alignSTRorFLOAT= parameter.
+
+		When a floating point number is specified for the =alignSTRorFLOAT= parameter, that number is used to determine what fraction of the padding or truncation necessary will be applied to the left side of the string. Then, the remainder of the padding or truncation necessary will be applied to the right side of the string.
+
+		So, for example, if the value =.25= is specified for the =alignSTRorFLOAT= parameter, then a quarter of the padding or truncation necessary will be applied to the left side of the string while the remaining three quarters will be applied to the right side of the string.
+
+		According to this behavior, fractional alignment values are equivalent to `named alignment` values as follows...
+
+		- =0= - equivalent to ='left'= alignment
+		- =.5= - equivalent to ='center'= alignment
+		- =1= - equivalent to ='right'= alignment
+
+		EXAMPLES
+		.................................................................................
+		// when the new length is greater than the current length
+
+		Uize.Str.Limit.lengthize ('foobar',10,0);                 // returns 'foobar    '
+		Uize.Str.Limit.lengthize ('foobar',10,.25);               // returns ' foobar   '
+		Uize.Str.Limit.lengthize ('foobar',10,.5);                // returns '  foobar  '
+		Uize.Str.Limit.lengthize ('foobar',10,.75);               // returns '   foobar '
+		Uize.Str.Limit.lengthize ('foobar',10,1);                 // returns '    foobar'
+
+
+		// when the new length is less than the current length
+
+		Uize.Str.Limit.lengthize ('aaabbbcccdddeee',3,0);         // returns 'aaa'
+		Uize.Str.Limit.lengthize ('aaabbbcccdddeee',3,.25);       // returns 'bbb'
+		Uize.Str.Limit.lengthize ('aaabbbcccdddeee',3,.5);        // returns 'ccc'
+		Uize.Str.Limit.lengthize ('aaabbbcccdddeee',3,.75);       // returns 'ddd'
+		Uize.Str.Limit.lengthize ('aaabbbcccdddeee',3,1);         // returns 'eee'
+		.................................................................................
+
+....................................................................................
+<< metadata >>
+
+title: 2014-06-22 - NEW METHOD: Uize.Str.Limit.lengthize
+....................................................................................
