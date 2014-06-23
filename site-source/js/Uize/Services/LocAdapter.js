@@ -421,25 +421,35 @@ Uize.module ({
 
 			function _getStringMetrics (m,_sourceStr) {
 				var
-					_stringSegments = _split (_sourceStr,m.wordSplitter),
-					_words = 0,
 					_chars = 0,
-					_tokenAdded = {},
-					_tokens = []
+					_tokens = [],
+					_tokenRegExp = m.tokenRegExp
 				;
-				if (m.tokenRegExp)
-					_sourceStr.replace (
-						m.tokenRegExp,
-						function (_match,_tokenName) {
-							if (!_tokenAdded [_tokenName]) {
-								_tokens.push (_tokenName);
-								_tokenAdded [_tokenName] = 1;
-							}
+				if (_tokenRegExp) {
+					var
+						_match,
+						_tokenName,
+						_tokenAdded = {}
+					;
+					_tokenRegExp.index = 0;
+					while (_match = _tokenRegExp.exec (_sourceStr)) {
+						if (!(_tokenName = _match [1])) {
+							for (var _matchSegmentNo = _match.length; !_tokenName && --_matchSegmentNo >= 0;)
+								_tokenName = _match [_matchSegmentNo]
+							;
 						}
-					)
-				;
+						if (!_tokenAdded [_tokenName]) {
+							_tokens.push (_tokenName);
+							_tokenAdded [_tokenName] = 1;
+						}
+					}
+				}
 				for (
-					var _stringSegmentNo = -2, _stringSegmentsLength = _stringSegments.length;
+					var
+						_stringSegmentNo = -2,
+						_stringSegments = _split (_sourceStr,m.wordSplitter),
+						_stringSegmentsLength = _stringSegments.length
+					;
 					(_stringSegmentNo += 2) < _stringSegmentsLength;
 				)
 					_chars += _stringSegments [_stringSegmentNo].length
