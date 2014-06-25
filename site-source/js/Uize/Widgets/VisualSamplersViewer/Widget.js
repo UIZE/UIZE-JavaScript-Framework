@@ -127,10 +127,8 @@ Uize.module ({
 			},
 
 			eventBindings:{
-				'#selector':{
-					change:function () {
-						this.set ({_selectedNamespace:this.getNodeValue ('selector')});
-					}
+				'#selector:change':function () {
+					this.set ({_selectedNamespace:this.getNodeValue ('selector')});
 				}
 			},
 
