@@ -127,7 +127,7 @@ Uize.module ({
 										_selector = m.getNode ('selector'),
 										_selectorOptions = _selector.options
 									;
-									_selectorOptions [0] = new Option (_selectorPlaceholderText,_selectorPlaceholderText);
+									_selectorOptions [0] = new Option (_selectorPlaceholderText,'-');
 									for (
 										var
 											_visualSamplerNamespaceNo = -1,
@@ -165,7 +165,7 @@ Uize.module ({
 									m.setNodeInnerHtml ('visualSamplersShell','');
 									_visualSamplers = null;
 								}
-								if (_selectedNamespace != _selectorPlaceholderText) {
+								if (_selectedNamespace != '-') {
 									(
 										_visualSamplers = m.addChild (
 											'visualSamplers',
