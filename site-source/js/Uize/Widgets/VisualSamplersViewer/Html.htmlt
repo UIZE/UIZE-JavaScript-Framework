@@ -1,0 +1,9 @@
+<div>
+	<div class="selectorControl">
+		<div id="selectorLabel" class="selectorLabel"></div>
+		<select id="selector" class="selector"></select>
+		<br/>
+	</div>
+	<div id="visualSamplersShell" class="visualSamplersShell"></div>
+</div>
+
