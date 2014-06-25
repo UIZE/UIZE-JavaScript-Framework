@@ -37,11 +37,6 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		var
-			/*** General Variables ***/
-				_selectorPlaceholderText = '-- NO NAMESPACE SELECTED --'
-		;
-
 		return _superclass.subclass ({
 			hasLoc:true,
 
@@ -122,59 +117,7 @@ Uize.module ({
 						return _visualSamplerNamespaces;
 					}
 				},
-				_selectedNamespace:{
-					name:'selectedNamespace',
-					onChange:function () {
-						var m = this;
-						m.once (
-							'wired',
-							function () {
-								var
-									_selectedNamespace = m._selectedNamespace,
-									_visualSamplers = m.children.visualSamplers
-								;
-								if (_visualSamplers) {
-									m.removeChild ('visualSamplers');
-									m.setNodeInnerHtml ('visualSamplersShell','');
-									_visualSamplers = null;
-								}
-								if (_selectedNamespace != '-') {
-									(
-										_visualSamplers = m.addChild (
-											'visualSamplers',
-											Uize.Widgets.Container.Widget,
-											{
-												built:false,
-												container:m.getNode ('visualSamplersShell')
-											}
-										)
-									).insertUi ();
-									var _visualSamplerProperties = {
-										built:false,
-										container:_visualSamplers.getNode (),
-										insertionMode:'inner bottom'
-									};
-									Uize.Flo.forEach (
-										function (_next) {_next (m._visualSamplerModulesByNamespace [_selectedNamespace])},
-										function (_next) {
-											Uize.require (
-												_next.flo.value,
-												function (_visualSamplerModule) {
-													_visualSamplers.addChild (
-														'visualSampler' + _next.flo.key,
-														_visualSamplerModule,
-														_visualSamplerProperties
-													).insertUi ();
-													_next ();
-												}
-											);
-										}
-									) ({breatheAfter:500});
-								}
-							}
-						);
-					}
-				},
+				_selectedNamespace:'selectedNamespace',
 				_displayedSelectorOptions:{
 					name:'displayedSelectorOptions',
 					derived:function (visualSamplerNamespaces,loc_allNamespaces,loc_noSelectionText) {
@@ -193,10 +136,9 @@ Uize.module ({
 
 			htmlBindings:{
 				loc_selectorLabel:'selectorLabel:value',
-				displayedSelectorOptions:function () {
+				displayedSelectorOptions:function (_displayedSelectorOptions) {
 					var
 						m = this,
-						_displayedSelectorOptions = m._displayedSelectorOptions,
 						_selectorOptions = m.getNode ('selector').options
 					;
 					_selectorOptions.length = 0;
@@ -215,6 +157,50 @@ Uize.module ({
 							_namespace + ' (' + m._visualSamplerModulesByNamespace [_namespace].length + ')',
 							_namespace
 						);
+					}
+				},
+				selectedNamespace:function (_selectedNamespace) {
+					var
+						m = this,
+						_visualSamplers = m.children.visualSamplers
+					;
+					if (_visualSamplers) {
+						m.removeChild ('visualSamplers');
+						m.setNodeInnerHtml ('visualSamplersShell','');
+						_visualSamplers = null;
+					}
+					if (_selectedNamespace != '-') {
+						(
+							_visualSamplers = m.addChild (
+								'visualSamplers',
+								Uize.Widgets.Container.Widget,
+								{
+									built:false,
+									container:m.getNode ('visualSamplersShell')
+								}
+							)
+						).insertUi ();
+						var _visualSamplerProperties = {
+							built:false,
+							container:_visualSamplers.getNode (),
+							insertionMode:'inner bottom'
+						};
+						Uize.Flo.forEach (
+							function (_next) {_next (m._visualSamplerModulesByNamespace [_selectedNamespace])},
+							function (_next) {
+								Uize.require (
+									_next.flo.value,
+									function (_visualSamplerModule) {
+										_visualSamplers.addChild (
+											'visualSampler' + _next.flo.key,
+											_visualSamplerModule,
+											_visualSamplerProperties
+										).insertUi ();
+										_next ();
+									}
+								);
+							}
+						) ({breatheAfter:500});
 					}
 				}
 			}
