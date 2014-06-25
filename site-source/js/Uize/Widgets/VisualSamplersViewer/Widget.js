@@ -127,7 +127,7 @@ Uize.module ({
 										_selector = m.getNode ('selector'),
 										_selectorOptions = _selector.options
 									;
-									_selectorOptions [0] = new Option (_selectorPlaceholderText,'');
+									_selectorOptions [0] = new Option (_selectorPlaceholderText,_selectorPlaceholderText);
 									for (
 										var
 											_visualSamplerNamespaceNo = -1,
@@ -137,7 +137,10 @@ Uize.module ({
 										++_visualSamplerNamespaceNo < _visualSamplerNamespacesLength;
 									)
 										_selectorOptions [_selectorOptions.length] = new Option (
-											((_namespace = _visualSamplerNamespaces [_visualSamplerNamespaceNo]) || 'ALL NAMESPACES') +
+											(
+												(_namespace = _visualSamplerNamespaces [_visualSamplerNamespaceNo]) ||
+												'ALL NAMESPACES'
+											) +
 											' (' + _visualSamplerModulesByNamespace [_namespace].length + ')',
 											_namespace
 										)
@@ -159,7 +162,7 @@ Uize.module ({
 								;
 								if (_visualSamplers) {
 									m.removeChild ('visualSamplers');
-									_visualSamplers.setNodeInnerHtml ('shell','');
+									m.setNodeInnerHtml ('visualSamplersShell','');
 									_visualSamplers = null;
 								}
 								if (_selectedNamespace != _selectorPlaceholderText) {
