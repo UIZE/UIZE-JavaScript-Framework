@@ -141,7 +141,6 @@ Uize.module ({
 					;
 					_selectorOptions.length = 0;
 					_selectorOptions [0] = new Option (_displayedSelectorOptions [0] || '','-');
-					_selectorOptions [1] = new Option (_displayedSelectorOptions [1] || '','');
 					for (
 						var
 							_displayedSelectorOptionNo = 1,
@@ -151,8 +150,9 @@ Uize.module ({
 						++_displayedSelectorOptionNo < _displayedSelectorOptionsLength;
 					) {
 						var _namespace = _displayedSelectorOptions [_displayedSelectorOptionNo];
-						_selectorOptions [_displayedSelectorOptionNo] = new Option (
-							_namespace + ' (' + m._visualSamplerModulesByNamespace [_namespace].length + ')',
+						_selectorOptions [_selectorOptions.length] = new Option (
+							(_namespace || _displayedSelectorOptions [1] || '')  +
+							' (' + m._visualSamplerModulesByNamespace [_namespace].length + ')',
 							_namespace
 						);
 					}
