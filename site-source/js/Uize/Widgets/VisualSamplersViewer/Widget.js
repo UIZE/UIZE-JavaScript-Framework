@@ -54,16 +54,17 @@ Uize.module ({
 			},
 
 			stateProperties:{
-				_modules:{
-					name:'modules',
-					onChange:function () {
+				_modules:'modules',
+				_visualSamplerNamespaces:{
+					name:'visualSamplerNamespaces',
+					derived:function (modules) {
 						var m = this;
 
 						/*** build visual sampler namespaces ***/
 							var
-								_modulesLookup = Uize.lookup (m._modules),
+								_modulesLookup = Uize.lookup (modules),
 								_visualSamplerDirectNamespaces = Uize.Data.Matches.values (
-									m._modules,
+									modules,
 									function (_moduleName) {
 										return _modulesLookup [_moduleName + '.Widget'] && _modulesLookup [_moduleName + '.VisualSampler'];
 									}
@@ -85,7 +86,6 @@ Uize.module ({
 
 								Note that the MyNamespace namespace would not be added, because it is redundant. In other words, selecting the MyNamespace namespace would show no more visual samplers than selecting the MyNamespace.Widgets namespace. The same applies to the MyNamespace.Widgets.CoolWidgets.More namespace.
 							*/
-							var _visualSamplerNamespacesTree = Uize.Data.PathsTree.fromList (_visualSamplerNamespaces);
 							function _processNode (_path,_node) {
 								var _totalKeys = Uize.totalKeys (_node);
 								if (_totalKeys) {
@@ -95,7 +95,7 @@ Uize.module ({
 									;
 								}
 							}
-							_processNode ('',_visualSamplerNamespacesTree);
+							_processNode ('',Uize.Data.PathsTree.fromList (_visualSamplerNamespaces));
 							_visualSamplerNamespaces.sort ();
 
 						/*** build lookup for visual sampler modules per namespace ***/
@@ -119,34 +119,7 @@ Uize.module ({
 								}
 							);
 
-						/*** populate selector ***/
-							m.whenever (
-								'wired',
-								function () {
-									var
-										_selector = m.getNode ('selector'),
-										_selectorOptions = _selector.options
-									;
-									_selectorOptions [0] = new Option (_selectorPlaceholderText,'-');
-									for (
-										var
-											_visualSamplerNamespaceNo = -1,
-											_visualSamplerNamespacesLength = _visualSamplerNamespaces.length,
-											_namespace
-										;
-										++_visualSamplerNamespaceNo < _visualSamplerNamespacesLength;
-									)
-										_selectorOptions [_selectorOptions.length] = new Option (
-											(
-												(_namespace = _visualSamplerNamespaces [_visualSamplerNamespaceNo]) ||
-												'ALL NAMESPACES'
-											) +
-											' (' + _visualSamplerModulesByNamespace [_namespace].length + ')',
-											_namespace
-										)
-									;
-								}
-							);
+						return _visualSamplerNamespaces;
 					}
 				},
 				_selectedNamespace:{
@@ -201,6 +174,12 @@ Uize.module ({
 							}
 						);
 					}
+				},
+				_displayedSelectorOptions:{
+					name:'displayedSelectorOptions',
+					derived:function (visualSamplerNamespaces,loc_allNamespaces,loc_noSelectionText) {
+						return [loc_noSelectionText,loc_allNamespaces].concat (visualSamplerNamespaces);
+					}
 				}
 			},
 
@@ -213,7 +192,31 @@ Uize.module ({
 			},
 
 			htmlBindings:{
-				loc_selectorLabel:'selectorLabel:value'
+				loc_selectorLabel:'selectorLabel:value',
+				displayedSelectorOptions:function () {
+					var
+						m = this,
+						_displayedSelectorOptions = m._displayedSelectorOptions,
+						_selectorOptions = m.getNode ('selector').options
+					;
+					_selectorOptions.length = 0;
+					_selectorOptions [0] = new Option (_displayedSelectorOptions [0] || '','-');
+					_selectorOptions [1] = new Option (_displayedSelectorOptions [1] || '','');
+					for (
+						var
+							_displayedSelectorOptionNo = 1,
+							_displayedSelectorOptionsLength = _displayedSelectorOptions.length,
+							_namespace
+						;
+						++_displayedSelectorOptionNo < _displayedSelectorOptionsLength;
+					) {
+						var _namespace = _displayedSelectorOptions [_displayedSelectorOptionNo];
+						_selectorOptions [_displayedSelectorOptionNo] = new Option (
+							_namespace + ' (' + m._visualSamplerModulesByNamespace [_namespace].length + ')',
+							_namespace
+						);
+					}
+				}
 			}
 		});
 	}

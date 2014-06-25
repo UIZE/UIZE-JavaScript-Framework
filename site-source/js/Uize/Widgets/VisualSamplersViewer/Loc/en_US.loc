@@ -1,1 +1,3 @@
 selectorLabel: SELECT A NAMESPACE:
+allNamespaces: ALL NAMESPACES
+noSelectionText: -- NO NAMESPACE SELECTED --
