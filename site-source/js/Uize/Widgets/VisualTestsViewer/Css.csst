@@ -1,0 +1,29 @@
+.`selectorControl` {
+	width: 740px;
+	margin: auto;
+	padding: 10px;
+	background: #becacd url(selector-bg.gif) repeat-x left top;
+	border: 1px solid #899;
+	border-radius: 3px;
+}
+
+.`selectorControl` br {
+	clear: left;
+}
+
+.`selectorLabel` {
+	float: left;
+	line-height: 22px;
+	margin-right: 5px;
+}
+
+.`selector` {
+	float: left;
+	margin-right: 15px;
+}
+
+.`viewer` {
+	margin: 20px auto;
+	margin-top: 24px;
+}
+

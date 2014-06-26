@@ -8,20 +8,6 @@
 	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
 	<link rel="stylesheet" href="../css/page.css"/>
 	<link rel="stylesheet" href="../css/page.example.css"/>
-	<style type="text/css">
-		.selectorControl {
-			width:740px;
-			margin:auto;
-			padding:10px;
-			background:#becacd url(../images/page-contents-bg.gif) repeat-x left top;
-			border:1px solid #899;
-			border-radius: 3px;
-		}
-
-		.visualTestsShell {
-			margin: 20px auto;
-		}
-	</style>
 </head>
 
 <body>
@@ -48,15 +34,7 @@
 		<p>This example lets you select and run any of the visual tests for UIZE widgets that implement visual tests. Simply select a widget from the dropdown menu (only widgets that implement visual tests will be listed in this menu).</p>
 	</div>
 
-	<div class="selectorControl">
-		<div style="float:left; line-height:22px; margin-right:5px;">SELECT A WIDGET:</div>
-		<select id="page-selector" style="float:left; margin-right:15px;"></select>
-		<br style="clear:left;"/>
-	</div>
-
-	<div style="height:4px;"></div>
-
-	<div id="page_visualTests-shell" class="visualTestsShell"></div>
+	<div id="page_visualTestsViewer-shell"></div>
 </div>
 
 <script type="text/javascript">
@@ -65,79 +43,32 @@ Uize.require (
 	[
 		'UizeSite.Page.Example',
 		'UizeSite.ModulesTree',
-		'UizeSite.Build.Util',
-		'Uize.Url',
 		'Uize.Data.PathsTree',
-		'Uize.Data.Matches',
-		'Uize.Str.Has'
+		'Uize.Url',
+		'Uize.Widgets.VisualTestsViewer.Widget'
 	],
 	function () {
 		'use strict';
 
-		var
-			_selectorPlaceholderText = '-- NO WIDGET SELECTED --',
-			_visualTestsModuleNameFromWidgetClass = UizeSite.Build.Util.visualTestsModuleNameFromWidgetClass
-		;
-
-		/*** prepare list of all widget modules with visual tests ***/
-			var
-				_modulesList = Uize.Data.PathsTree.toList (UizeSite.ModulesTree ()),
-				_modulesLookup = Uize.lookup (_modulesList),
-				_testNames = Uize.Data.Matches.values (
-					_modulesList,
-					function (_moduleName) {
-						return (
-							!Uize.Str.Has.hasPrefix (_moduleName,'Uize.Build.') &&
-							_modulesLookup [_visualTestsModuleNameFromWidgetClass (_moduleName)]
-						);
-					}
-				)
-			;
-
 		/*** create the example page widget ***/
 			var _page = window.page = UizeSite.Page.Example ();
 
+		/*** add the visual tests viewer ***/
+			var _modulesTree = Uize.copy (UizeSite.ModulesTree ());
+			delete _modulesTree.Uize.Build;
+
+			_page.addChild (
+				'visualTestsViewer',
+				Uize.Widgets.VisualTestsViewer.Widget,
+				{
+					modules:Uize.Data.PathsTree.toList (_modulesTree),
+					selectedWidget:Uize.Url.fromParams (location.href).widgetClass,
+					built:false
+				}
+			);
+
 		/*** wire up the page widget ***/
 			_page.wireUi ();
-
-		/*** handle selection of test ***/
-			function _handleSelection () {
-				var
-					_widgetClass = _page.getNodeValue ('selector'),
-					_visualTests = _page.children.visualTests
-				;
-				if (_visualTests) {
-					_page.removeChild ('visualTests');
-					_visualTests.setNodeInnerHtml ('shell','');
-				}
-				_widgetClass == _selectorPlaceholderText ||
-					Uize.require (
-						_visualTestsModuleNameFromWidgetClass (_widgetClass),
-						function (_visualTestsModule) {
-							_page.addChild ('visualTests',_visualTestsModule).insertUi ();
-						}
-					)
-				;
-			}
-			_page.wireNode ('selector','change',_handleSelection);
-
-		/*** initialize ***/
-			/*** populate test selector ***/
-				var
-					_selector = _page.getNode ('selector'),
-					_selectorOptions = _selector.options
-				;
-				_selectorOptions [0] = new Option (_selectorPlaceholderText,_selectorPlaceholderText);
-				for (var _testNo = -1, _testNamesLength = _testNames.length, _testName; ++_testNo < _testNamesLength;)
-					_selectorOptions [_selectorOptions.length] = new Option (
-						_testName = _testNames [_testNo],
-						_testName
-					)
-				;
-
-			/*** initialize selector, using query param ***/
-				_page.setNodeValue ('selector',Uize.Url.fromParams (location.href).widgetClass);
-				_handleSelection ();
 	}
 );
 
