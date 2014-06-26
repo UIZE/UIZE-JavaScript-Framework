@@ -31,12 +31,12 @@ Uize.module ({
 		'Uize.Data.Flatten',
 		'Uize.Data.NameValueRecords',
 		'Uize.Data.Csv',
+		'Uize.Loc.Xliff',
 		'Uize.Data.Diff',
 		'Uize.Loc.Pseudo',
 		'Uize.Str.Split',
 		'Uize.Templates.Text.Tables.Breakdown',
-		'Uize.Templates.Text.Tables.Histogram',
-		'Uize.Util.Html.Encode'
+		'Uize.Templates.Text.Tables.Histogram'
 	],
 	superclass:'Uize.Service.Adapter',
 	builder:function (_superclass) {
@@ -768,43 +768,13 @@ Uize.module ({
 
 								/*** write the job file in XLIFF form ***/
 									// eventually, make CSV vs XLIFF a config option
-									var
-										_xliffLines = ['<?xml version="1.0" ?><xliff version="1.0">'],
-										_htmlEncode = Uize.Util.Html.Encode.encode
-									;
-									Uize.forEach (
-										_translationJobStrings,
-										function (_resourceFileStrings,_resourceFileSubPath) {
-											_xliffLines.push (
-												'\t<file ' +
-													'original="' + _htmlEncode (_resourceFileSubPath) + '" ' +
-													'source-language="' + _primaryLanguage + '" ' +
-													'datatype="plaintext"' +
-												'>'
-											);
-											Uize.forEach (
-												Uize.Data.Flatten.flatten (
-													_resourceFileStrings,
-													function (_path) {return Uize.Json.to (_path,'mini')}
-												),
-												function (_resourceStringText,_id) {
-													_xliffLines.push (
-														'\t\t<trans-unit id="' + _htmlEncode (_id) + '">',
-														'\t\t\t<source>' + _htmlEncode (_resourceStringText) + '</source>',
-														'\t\t\t<target></target>',
-														'\t\t</trans-unit>'
-													);
-												}
-											);
-											_xliffLines.push (
-												'\t</file>'
-											);
-										}
-									);
-									_xliffLines.push ('</xliff>');
 									_fileSystem.writeFile ({
 										path:_translationJobFilePath + '.xliff',
-										contents:_xliffLines.join ('\n')
+										contents:Uize.Loc.Xliff.to ({
+											sourceLanguage:_primaryLanguage,
+											targetLanguage:_language,
+											strings:_translationJobStrings
+										})
 									});
 
 								m.stepCompleted (_language + ': created translation job file');
