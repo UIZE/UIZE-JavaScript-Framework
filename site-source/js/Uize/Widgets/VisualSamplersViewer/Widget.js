@@ -144,14 +144,13 @@ Uize.module ({
 					for (
 						var
 							_displayedSelectorOptionNo = 1,
-							_displayedSelectorOptionsLength = _displayedSelectorOptions.length,
-							_namespace
+							_displayedSelectorOptionsLength = _displayedSelectorOptions.length
 						;
 						++_displayedSelectorOptionNo < _displayedSelectorOptionsLength;
 					) {
 						var _namespace = _displayedSelectorOptions [_displayedSelectorOptionNo];
 						_selectorOptions [_selectorOptions.length] = new Option (
-							(_namespace || _displayedSelectorOptions [1] || '')  +
+							(_namespace || _displayedSelectorOptions [1] || '') +
 							' (' + m._visualSamplerModulesByNamespace [_namespace].length + ')',
 							_namespace
 						);
