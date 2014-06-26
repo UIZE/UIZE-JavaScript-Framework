@@ -137,7 +137,8 @@ Uize.module ({
 				displayedSelectorOptions:function (_displayedSelectorOptions) {
 					var
 						m = this,
-						_selectorOptions = m.getNode ('selector').options
+						_selector = m.getNode ('selector'),
+						_selectorOptions = _selector.options
 					;
 					_selectorOptions.length = 0;
 					_selectorOptions [0] = new Option (_displayedSelectorOptions [0] || '','-');
@@ -155,51 +156,55 @@ Uize.module ({
 							_namespace
 						);
 					}
+					m.setNodeValue (_selector,m._selectedNamespace);
 				},
-				selectedNamespace:function (_selectedNamespace) {
-					var
-						m = this,
-						_visualSamplers = m.children.visualSamplers
-					;
-					if (_visualSamplers) {
-						m.removeChild ('visualSamplers');
-						m.setNodeInnerHtml ('visualSamplersShell','');
-						_visualSamplers = null;
-					}
-					if (_selectedNamespace != '-') {
-						(
-							_visualSamplers = m.addChild (
-								'visualSamplers',
-								Uize.Widgets.Container.Widget,
-								{
-									built:false,
-									container:m.getNode ('visualSamplersShell')
-								}
-							)
-						).insertUi ();
-						var _visualSamplerProperties = {
-							built:false,
-							container:_visualSamplers.getNode (),
-							insertionMode:'inner bottom'
-						};
-						Uize.Flo.forEach (
-							function (_next) {_next (m._visualSamplerModulesByNamespace [_selectedNamespace])},
-							function (_next) {
-								Uize.require (
-									_next.flo.value,
-									function (_visualSamplerModule) {
-										_visualSamplers.addChild (
-											'visualSampler' + _next.flo.key,
-											_visualSamplerModule,
-											_visualSamplerProperties
-										).insertUi ();
-										_next ();
+				selectedNamespace:[
+					'selector:value',
+					function (_selectedNamespace) {
+						var
+							m = this,
+							_visualSamplers = m.children.visualSamplers
+						;
+						if (_visualSamplers) {
+							m.removeChild ('visualSamplers');
+							m.setNodeInnerHtml ('visualSamplersShell','');
+							_visualSamplers = null;
+						}
+						if (_selectedNamespace != '-') {
+							(
+								_visualSamplers = m.addChild (
+									'visualSamplers',
+									Uize.Widgets.Container.Widget,
+									{
+										built:false,
+										container:m.getNode ('visualSamplersShell')
 									}
-								);
-							}
-						) ({breatheAfter:500});
+								)
+							).insertUi ();
+							var _visualSamplerProperties = {
+								built:false,
+								container:_visualSamplers.getNode (),
+								insertionMode:'inner bottom'
+							};
+							Uize.Flo.forEach (
+								function (_next) {_next (m._visualSamplerModulesByNamespace [_selectedNamespace])},
+								function (_next) {
+									Uize.require (
+										_next.flo.value,
+										function (_visualSamplerModule) {
+											_visualSamplers.addChild (
+												'visualSampler' + _next.flo.key,
+												_visualSamplerModule,
+												_visualSamplerProperties
+											).insertUi ();
+											_next ();
+										}
+									);
+								}
+							) ({breatheAfter:500});
+						}
 					}
-				}
+				]
 			}
 		});
 	}

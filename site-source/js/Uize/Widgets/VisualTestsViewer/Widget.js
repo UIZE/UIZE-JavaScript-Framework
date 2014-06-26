@@ -88,7 +88,8 @@ Uize.module ({
 				displayedSelectorOptions:function (_displayedSelectorOptions) {
 					var
 						m = this,
-						_selectorOptions = m.getNode ('selector').options
+						_selector = m.getNode ('selector'),
+						_selectorOptions = _selector.options
 					;
 					_selectorOptions.length = 0;
 					_selectorOptions [0] = new Option (_displayedSelectorOptions [0] || '','');
@@ -102,29 +103,33 @@ Uize.module ({
 						var _widgetClass = _displayedSelectorOptions [_displayedSelectorOptionNo];
 						_selectorOptions [_selectorOptions.length] = new Option (_widgetClass,_widgetClass);
 					}
+					m.setNodeValue (_selector,m._selectedWidget);
 				},
-				selectedWidget:function (_selectedWidget) {
-					var m = this;
-					if (m.children.visualTests) {
-						m.removeChild ('visualTests');
-						m.setNodeInnerHtml ('viewer','');
+				selectedWidget:[
+					'selector:value',
+					function (_selectedWidget) {
+						var m = this;
+						if (m.children.visualTests) {
+							m.removeChild ('visualTests');
+							m.setNodeInnerHtml ('viewer','');
+						}
+						if (_selectedWidget) {
+							Uize.require (
+								_visualTestsModuleNameFromWidgetClass (_selectedWidget),
+								function (_visualTestsModule) {
+									m.addChild (
+										'visualTests',
+										_visualTestsModule,
+										{
+											built:false,
+											container:m.getNode ('viewer')
+										}
+									).insertUi ();
+								}
+							);
+						}
 					}
-					if (_selectedWidget) {
-						Uize.require (
-							_visualTestsModuleNameFromWidgetClass (_selectedWidget),
-							function (_visualTestsModule) {
-								m.addChild (
-									'visualTests',
-									_visualTestsModule,
-									{
-										built:false,
-										container:m.getNode ('viewer')
-									}
-								).insertUi ();
-							}
-						);
-					}
-				}
+				]
 			}
 		});
 	}
