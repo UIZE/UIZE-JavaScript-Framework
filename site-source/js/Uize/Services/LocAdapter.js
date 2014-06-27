@@ -751,31 +751,29 @@ Uize.module ({
 								m.stepCompleted (_language + ': calculated translation job metrics');
 
 							/*** write translation job file ***/
-								var _translationJobFilePath = _jobsPath + _language;
+								var
+									_translationJobFileFormat = _project.translationJobFileFormat || 'csv',
+									_translationJobFilePath = _jobsPath + _language + '.' + _translationJobFileFormat
+								;
 								_fileSystem.writeFile ({
-									path:_translationJobFilePath + '.csv',
-									contents:Uize.Data.Csv.to (
-										Uize.Data.NameValueRecords.fromHash (
-											Uize.Data.Flatten.flatten (
-												_translationJobStrings,
-												function (_path) {return Uize.Json.to (_path,'mini')}
-											),
-											0,
-											1
-										)
-									)
-								});
-
-								/*** write the job file in XLIFF form ***/
-									// eventually, make CSV vs XLIFF a config option
-									_fileSystem.writeFile ({
-										path:_translationJobFilePath + '.xliff',
-										contents:Uize.Loc.Xliff.to ({
+									path:_translationJobFilePath,
+									contents:_translationJobFileFormat == 'xliff'
+										? Uize.Loc.Xliff.to ({
 											sourceLanguage:_primaryLanguage,
 											targetLanguage:_language,
 											strings:_translationJobStrings
 										})
-									});
+										: Uize.Data.Csv.to (
+											Uize.Data.NameValueRecords.fromHash (
+												Uize.Data.Flatten.flatten (
+													_translationJobStrings,
+													function (_path) {return Uize.Json.to (_path,'mini')}
+												),
+												0,
+												1
+											)
+										)
+								});
 
 								m.stepCompleted (_language + ': created translation job file');
 						}
@@ -787,7 +785,8 @@ Uize.module ({
 					var
 						m = this,
 						_project = m.project,
-						_totalTranslatableLanguages = _project.languages.length - 2
+						_totalTranslatableLanguages = _project.languages.length - 2,
+						_jobsPath = m._workingFolderPath + 'jobs/'
 					;
 					m.prepareToExecuteMethod (_totalTranslatableLanguages * 2);
 
@@ -796,21 +795,24 @@ Uize.module ({
 						function (_language) {
 							/*** determine strings that have been translated ***/
 								var
-									_jobFilePath = m._workingFolderPath + 'jobs/' + _language + '.csv',
-									_translatedStrings = _fileSystem.fileExists ({path:_jobFilePath})
+									_translationJobFileFormat = _project.translationJobFileFormat || 'csv',
+									_translationJobFilePath = _jobsPath + _language + '.' + _translationJobFileFormat,
+									_translationJobFile = _fileSystem.fileExists ({path:_translationJobFilePath})
+										? _fileSystem.readFile ({path:_translationJobFilePath})
+										: '',
+									_translatedStrings = _translationJobFile
 										? Uize.Data.Diff.diff (
-											Uize.Data.Flatten.unflatten (
-												Uize.Data.NameValueRecords.toHash (
-													Uize.Data.Csv.from (_fileSystem.readFile ({path:_jobFilePath})),
-													0,
-													1
-												),
-												Uize.Json.from
-											),
+											_translationJobFileFormat == 'xliff'
+												? Uize.Loc.Xliff.from (_translationJobFile)
+												: Uize.Data.Flatten.unflatten (
+													Uize.Data.NameValueRecords.toHash (Uize.Data.Csv.from (_translationJobFile),0,1),
+													Uize.Json.from
+												)
+											,
 											{},
 											function (_string) {return _string.value ? _string : _undefined}
-										) :
-										{}
+										)
+										: {}
 								;
 								m.stepCompleted (_language + ': determined strings that have been translated');
 
