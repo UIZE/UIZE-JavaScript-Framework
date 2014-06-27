@@ -28,7 +28,9 @@ Uize.module ({
 	required:[
 		'Uize.Util.Html.Encode',
 		'Uize.Data.Flatten',
-		'Uize.Json'
+		'Uize.Json',
+		'Uize.Parse.Xml.NodeList',
+		'Uize.Data.Matches'
 	],
 	builder:function () {
 		'use strict';
@@ -79,6 +81,48 @@ Uize.module ({
 			},
 
 			from:function (_toDecode) {
+				function _isTag (_node,_tagName) {
+					return _node.tagName && _node.tagName.serialize () == _tagName;
+				}
+
+				function _getTags (_nodeList,_tagName) {
+					return Uize.Data.Matches.values (
+						_nodeList.nodes,
+						function (_node) {return _isTag (_node,_tagName)}
+					);
+				}
+
+				function _getAttributeValue (_node,_attributeName) {
+					var _attribute = Uize.findRecord (
+						_node.tagAttributes.attributes,
+						function (_attribute) {return _attribute.name.name == _attributeName}
+					);
+					return _attribute ? _attribute.value.value : '';
+				}
+
+				var _strings = {};
+				Uize.forEach (
+					_getTags (
+						_getTags (new Uize.Parse.Xml.NodeList (_toDecode.replace (/<\?.*?\?>/,'')),'xliff') [0].childNodes,
+						'file'
+					),
+					function (_fileTag) {
+						var _fileStrings = {};
+						Uize.forEach (
+							_getTags (_fileTag.childNodes,'trans-unit'),
+							function (_transUnitTag) {
+								_fileStrings [_getAttributeValue (_transUnitTag,'id')] =
+									_getTags (_transUnitTag.childNodes,'target') [0].childNodes.nodes [0].text
+								;
+							}
+						);
+						_strings [_getAttributeValue (_fileTag,'original')] = Uize.Data.Flatten.unflatten (
+							_fileStrings,
+							Uize.Json.from
+						);
+					}
+				);
+				return _strings;
 			}
 		});
 	}
