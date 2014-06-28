@@ -25,10 +25,8 @@
 
 Uize.module ({
 	name:'Uize.Widgets.VisualSamplersViewer.Widget',
-	superclass:'Uize.Widget.V2',
+	superclass:'Uize.Widgets.WidgetViewer.Widget',
 	required:[
-		'Uize.Widgets.VisualSamplersViewer.Html',
-		'Uize.Widgets.VisualSamplersViewer.Css',
 		'Uize.Data.Matches',
 		'Uize.Str.Has',
 		'Uize.Widgets.Container.Widget',
@@ -40,16 +38,7 @@ Uize.module ({
 		return _superclass.subclass ({
 			hasLoc:true,
 
-			staticProperties:{
-				cssModule:Uize.Widgets.VisualSamplersViewer.Css
-			},
-
-			set:{
-				html:Uize.Widgets.VisualSamplersViewer.Html
-			},
-
 			stateProperties:{
-				_modules:'modules',
 				_visualSamplerNamespaces:{
 					name:'visualSamplerNamespaces',
 					derived:function (modules) {
@@ -133,7 +122,6 @@ Uize.module ({
 			},
 
 			htmlBindings:{
-				loc_selectorLabel:'selectorLabel:value',
 				displayedSelectorOptions:function (_displayedSelectorOptions) {
 					var
 						m = this,
@@ -167,7 +155,7 @@ Uize.module ({
 						;
 						if (_visualSamplers) {
 							m.removeChild ('visualSamplers');
-							m.setNodeInnerHtml ('visualSamplersShell','');
+							m.setNodeInnerHtml ('viewer','');
 							_visualSamplers = null;
 						}
 						if (_selectedNamespace != '-') {
@@ -177,7 +165,7 @@ Uize.module ({
 									Uize.Widgets.Container.Widget,
 									{
 										built:false,
-										container:m.getNode ('visualSamplersShell')
+										container:m.getNode ('viewer')
 									}
 								)
 							).insertUi ();

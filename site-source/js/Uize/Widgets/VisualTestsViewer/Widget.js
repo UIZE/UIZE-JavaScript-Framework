@@ -25,10 +25,8 @@
 
 Uize.module ({
 	name:'Uize.Widgets.VisualTestsViewer.Widget',
-	superclass:'Uize.Widget.V2',
+	superclass:'Uize.Widgets.WidgetViewer.Widget',
 	required:[
-		'Uize.Widgets.VisualTestsViewer.Html',
-		'Uize.Widgets.VisualTestsViewer.Css',
 		'Uize.Data.Matches',
 		'UizeSite.Build.Util'
 	],
@@ -43,16 +41,7 @@ Uize.module ({
 		return _superclass.subclass ({
 			hasLoc:true,
 
-			staticProperties:{
-				cssModule:Uize.Widgets.VisualTestsViewer.Css
-			},
-
-			set:{
-				html:Uize.Widgets.VisualTestsViewer.Html
-			},
-
 			stateProperties:{
-				_modules:'modules',
 				_widgetsWithVisualTests:{
 					name:'widgetsWithVisualTests',
 					derived:function (modules) {
@@ -84,7 +73,6 @@ Uize.module ({
 			},
 
 			htmlBindings:{
-				loc_selectorLabel:'selectorLabel:value',
 				displayedSelectorOptions:function (_displayedSelectorOptions) {
 					var
 						m = this,
