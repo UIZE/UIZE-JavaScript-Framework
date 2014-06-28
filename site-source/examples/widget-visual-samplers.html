@@ -62,7 +62,7 @@ Uize.require (
 				Uize.Widgets.VisualSamplersViewer.Widget,
 				{
 					modules:Uize.Data.PathsTree.toList (_modulesTree),
-					selectedNamespace:Uize.Url.fromParams (location.href).namespace || 'Uize.Widgets',
+					value:Uize.Url.fromParams (location.href).namespace || 'Uize.Widgets',
 					built:false
 				}
 			);

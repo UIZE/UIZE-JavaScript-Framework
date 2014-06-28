@@ -57,18 +57,12 @@ Uize.module ({
 						);
 					}
 				},
-				_selectedWidget:'selectedWidget',
+				_value:'value',
 				_displayedSelectorOptions:{
 					name:'displayedSelectorOptions',
 					derived:function (widgetsWithVisualTests,loc_noSelectionText) {
 						return [loc_noSelectionText].concat (widgetsWithVisualTests);
 					}
-				}
-			},
-
-			eventBindings:{
-				'#selector:change':function () {
-					this.set ({_selectedWidget:this.getNodeValue ('selector')});
 				}
 			},
 
@@ -91,19 +85,19 @@ Uize.module ({
 						var _widgetClass = _displayedSelectorOptions [_displayedSelectorOptionNo];
 						_selectorOptions [_selectorOptions.length] = new Option (_widgetClass,_widgetClass);
 					}
-					m.setNodeValue (_selector,m._selectedWidget);
+					m.setNodeValue (_selector,m._value);
 				},
-				selectedWidget:[
+				value:[
 					'selector:value',
-					function (_selectedWidget) {
+					function (_value) {
 						var m = this;
 						if (m.children.visualTests) {
 							m.removeChild ('visualTests');
 							m.setNodeInnerHtml ('viewer','');
 						}
-						if (_selectedWidget) {
+						if (_value) {
 							Uize.require (
-								_visualTestsModuleNameFromWidgetClass (_selectedWidget),
+								_visualTestsModuleNameFromWidgetClass (_value),
 								function (_visualTestsModule) {
 									m.addChild (
 										'visualTests',

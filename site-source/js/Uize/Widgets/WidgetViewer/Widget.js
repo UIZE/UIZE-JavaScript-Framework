@@ -46,6 +46,12 @@ Uize.module ({
 				_modules:'modules'
 			},
 
+			eventBindings:{
+				'#selector:change':function () {
+					this.set ({value:this.getNodeValue ('selector')});
+				}
+			},
+
 			htmlBindings:{
 				loc_selectorLabel:'selectorLabel:value'
 			}
