@@ -1201,18 +1201,17 @@ Uize.module ({
 									_node.value = _value
 								}
 							} else if (_nodeTagName == 'SELECT') {
-								if (!_value) {
-									_node.selectedIndex = -1;
+								var _options = _node.options;
+								if (_node.multiple && (_value == '*' || _value.indexOf (',') > -1)) {
+									var _valuesMap = _value != '*' ? _Uize.lookup (_value.split (',')) : _undefined;
+									for (var _optionNo = _options.length, _option; --_optionNo >= 0;)
+										(_option = _options [_optionNo]).selected = !_valuesMap || _valuesMap [_option.value]
+									;
 								} else {
-									var _options = _node.options;
-									if (_node.multiple && (_value == '*' || _value.indexOf (',') > -1)) {
-										var _valuesMap = _value != '*' ? _Uize.lookup (_value.split (',')) : _undefined;
-										for (var _optionNo = _options.length, _option; --_optionNo >= 0;)
-											(_option = _options [_optionNo]).selected = !_valuesMap || _valuesMap [_option.value]
-										;
-									} else {
-										_node.selectedIndex = _Uize.findRecordNo (_options,{value:_value},_node.selectedIndex);
-									}
+									_node.selectedIndex = _Uize.findRecordNo (
+										_options,{value:_value},
+										_value ? _node.selectedIndex : -1
+									);
 								}
 							} else if (_nodeTagName == 'IMG') {
 								if (_value) _node.src = _value;
