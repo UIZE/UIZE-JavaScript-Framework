@@ -50,7 +50,8 @@ Uize.module ({
 			eventBindings:{
 				'#selector:change':function () {
 					this.set ({value:this.getNodeValue ('selector')});
-				}
+				},
+				value:'selector:value'
 			},
 
 			htmlBindings:{

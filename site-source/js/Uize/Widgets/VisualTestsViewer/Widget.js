@@ -86,31 +86,28 @@ Uize.module ({
 					}
 					m.setNodeValue (_selector,m.get ('value'));
 				},
-				value:[
-					'selector:value',
-					function (_value) {
-						var m = this;
-						if (m.children.visualTests) {
-							m.removeChild ('visualTests');
-							m.setNodeInnerHtml ('viewer','');
-						}
-						if (_value) {
-							Uize.require (
-								_visualTestsModuleNameFromWidgetClass (_value),
-								function (_visualTestsModule) {
-									m.addChild (
-										'visualTests',
-										_visualTestsModule,
-										{
-											built:false,
-											container:m.getNode ('viewer')
-										}
-									).insertUi ();
-								}
-							);
-						}
+				value:function (_value) {
+					var m = this;
+					if (m.children.visualTests) {
+						m.removeChild ('visualTests');
+						m.setNodeInnerHtml ('viewer','');
 					}
-				]
+					if (_value) {
+						Uize.require (
+							_visualTestsModuleNameFromWidgetClass (_value),
+							function (_visualTestsModule) {
+								m.addChild (
+									'visualTests',
+									_visualTestsModule,
+									{
+										built:false,
+										container:m.getNode ('viewer')
+									}
+								).insertUi ();
+							}
+						);
+					}
+				}
 			}
 		});
 	}
