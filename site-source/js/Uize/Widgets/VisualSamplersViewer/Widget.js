@@ -106,7 +106,6 @@ Uize.module ({
 						return _visualSamplerNamespaces;
 					}
 				},
-				_value:'value',
 				_displayedSelectorOptions:{
 					name:'displayedSelectorOptions',
 					derived:function (visualSamplerNamespaces,loc_allNamespaces,loc_noSelectionText) {
@@ -138,7 +137,7 @@ Uize.module ({
 							_namespace
 						);
 					}
-					m.setNodeValue (_selector,m._value);
+					m.setNodeValue (_selector,m.get ('value'));
 				},
 				value:[
 					'selector:value',

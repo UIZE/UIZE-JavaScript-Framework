@@ -43,7 +43,8 @@ Uize.module ({
 			},
 
 			stateProperties:{
-				_modules:'modules'
+				_modules:'modules',
+				_value:'value'
 			},
 
 			eventBindings:{

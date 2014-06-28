@@ -57,7 +57,6 @@ Uize.module ({
 						);
 					}
 				},
-				_value:'value',
 				_displayedSelectorOptions:{
 					name:'displayedSelectorOptions',
 					derived:function (widgetsWithVisualTests,loc_noSelectionText) {
@@ -85,7 +84,7 @@ Uize.module ({
 						var _widgetClass = _displayedSelectorOptions [_displayedSelectorOptionNo];
 						_selectorOptions [_selectorOptions.length] = new Option (_widgetClass,_widgetClass);
 					}
-					m.setNodeValue (_selector,m._value);
+					m.setNodeValue (_selector,m.get ('value'));
 				},
 				value:[
 					'selector:value',
