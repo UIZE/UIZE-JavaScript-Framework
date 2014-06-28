@@ -36,6 +36,7 @@ Uize.module ({
 		'Uize.Loc.Pseudo',
 		'Uize.Str.Split',
 		'Uize.Templates.Text.Tables.Breakdown',
+		'Uize.Templates.Text.Tables.YinYangBreakdown',
 		'Uize.Templates.Text.Tables.Histogram'
 	],
 	superclass:'Uize.Service.Adapter',
@@ -883,36 +884,19 @@ Uize.module ({
 							_brandSpecificBreakdownTable ('Resource Strings',_metrics.resourceStrings) + '\n' +
 							_brandSpecificBreakdownTable ('Word Count',_metrics.wordCount) + '\n' +
 							_brandSpecificBreakdownTable ('Character Count',_metrics.charCount) + '\n' +
-							_twoGroupBreakdownTable (
-								'Resource Strings (tokenized)',
-								'Non-tokenized',_metrics.resourceStrings.all - _metrics.resourceStrings.tokenized,
-								'Tokenized',_metrics.resourceStrings.tokenized
-							) + '\n' +
-							_twoGroupBreakdownTable (
-								'Resource Strings (HTML)',
-								'Non-HTML',_metrics.resourceStrings.all - _metrics.resourceStrings.html,
-								'HTML',_metrics.resourceStrings.html
-							) + '\n' +
-							_twoGroupBreakdownTable (
-								'Resource Strings (long)',
-								'Normal',_metrics.resourceStrings.all - _metrics.resourceStrings.long,
-								'Long',_metrics.resourceStrings.long
-							) + '\n' +
-							_twoGroupBreakdownTable (
-								'Resource Strings (invalid keys)',
-								'Valid Keys',_metrics.resourceStrings.all - _metrics.resourceStrings.invalidKey,
-								'Invalid Keys',_metrics.resourceStrings.invalidKey
-							) + '\n' +
-							_twoGroupBreakdownTable (
-								'Resource Strings (weak tokens)',
-								'Only Strong Tokens',_metrics.resourceStrings.tokenized - _metrics.resourceStrings.weakTokens,
-								'Have Weak Tokens',_metrics.resourceStrings.weakTokens
-							) + '\n' +
-							_twoGroupBreakdownTable (
-								'Resource Strings (non-translatable)',
-								'Translatable',_metrics.resourceStrings.all - _metrics.resourceStrings.nonTranslatable,
-								'Non-translatable',_metrics.resourceStrings.nonTranslatable
-							) + '\n' +
+							Uize.Templates.Text.Tables.YinYangBreakdown.process ({
+								title:'Resource Strings',
+								countByCategory:{
+									'All,None':_metrics.resourceStrings.all,
+									'Brand-specific,Brand-neutral':_metrics.resourceStrings.brandSpecific,
+									'Tokenized,Non-tokenized':_metrics.resourceStrings.tokenized,
+									'HTML,Non-HTML':_metrics.resourceStrings.html,
+									'Long,Normal':_metrics.resourceStrings.long,
+									'Invalid Keys,Valid Keys':_metrics.resourceStrings.invalidKey,
+									'Some Weak Tokens,Only Strong Tokens':_metrics.resourceStrings.weakTokens,
+									'Non-translatable,Translatable':_metrics.resourceStrings.nonTranslatable
+								}
+							}) + '\n' +
 							Uize.Templates.Text.Tables.Histogram.process ({
 								title:'Histogram of Resource String Duplicates',
 								columnTitles:{
