@@ -41,6 +41,25 @@ Uize.module ({
 		return _superclass.subclass ({
 			hasLoc:true,
 
+			instanceMethods:{
+				insertViewer:function (_value) {
+					var m = this;
+					Uize.require (
+						_visualTestsModuleNameFromWidgetClass (_value),
+						function (_visualTestsModule) {
+							m.addChild (
+								'viewer',
+								_visualTestsModule,
+								{
+									built:false,
+									container:m.getNode ('viewer')
+								}
+							).insertUi ();
+						}
+					);
+				}
+			},
+
 			stateProperties:{
 				_widgetsWithVisualTests:{
 					name:'widgetsWithVisualTests',
@@ -59,32 +78,7 @@ Uize.module ({
 				},
 				displayedSelectorOptions:{
 					derived:function (widgetsWithVisualTests,loc_noSelectionText) {
-						return [[loc_noSelectionText || '','']].concat (Uize.map (widgetsWithVisualTests,'[value,value]'));
-					}
-				}
-			},
-
-			htmlBindings:{
-				value:function (_value) {
-					var m = this;
-					if (m.children.visualTests) {
-						m.removeChild ('visualTests');
-						m.setNodeInnerHtml ('viewer','');
-					}
-					if (_value) {
-						Uize.require (
-							_visualTestsModuleNameFromWidgetClass (_value),
-							function (_visualTestsModule) {
-								m.addChild (
-									'visualTests',
-									_visualTestsModule,
-									{
-										built:false,
-										container:m.getNode ('viewer')
-									}
-								).insertUi ();
-							}
-						);
+						return [[loc_noSelectionText || '','-']].concat (Uize.map (widgetsWithVisualTests,'[value,value]'));
 					}
 				}
 			}

@@ -34,6 +34,10 @@ Uize.module ({
 		'use strict';
 
 		return _superclass.subclass ({
+			instanceMethods:{
+				insertViewer:Uize.nop
+			},
+
 			staticProperties:{
 				cssModule:Uize.Widgets.WidgetViewer.Css
 			},
@@ -51,8 +55,7 @@ Uize.module ({
 			eventBindings:{
 				'#selector:change':function () {
 					this.set ({value:this.getNodeValue ('selector')});
-				},
-				value:'selector:value'
+				}
 			},
 
 			htmlBindings:{
@@ -78,7 +81,18 @@ Uize.module ({
 						);
 					}
 					m.setNodeValue (_selector,m.get ('value'));
-				}
+				},
+				value:[
+					'selector:value',
+					function (_value) {
+						var m = this;
+						if (m.children.viewer) {
+							m.removeChild ('viewer');
+							m.setNodeInnerHtml ('viewer','');
+						}
+						_value != undefined && _value != '-' && m.insertViewer (_value);
+					}
+				]
 			}
 		});
 	}

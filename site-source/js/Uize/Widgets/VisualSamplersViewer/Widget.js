@@ -38,6 +38,44 @@ Uize.module ({
 		return _superclass.subclass ({
 			hasLoc:true,
 
+			instanceMethods:{
+				insertViewer:function (_value) {
+					var
+						m = this,
+						_viewer = m.addChild (
+							'viewer',
+							Uize.Widgets.Container.Widget,
+							{
+								built:false,
+								container:m.getNode ('viewer')
+							}
+						)
+					;
+					_viewer.insertUi ();
+					var _visualSamplerProperties = {
+						built:false,
+						container:_viewer.getNode (),
+						insertionMode:'inner bottom'
+					};
+					Uize.Flo.forEach (
+						function (_next) {_next (m._visualSamplerModulesByNamespace [_value])},
+						function (_next) {
+							Uize.require (
+								_next.flo.value,
+								function (_visualSamplerModule) {
+									_viewer.addChild (
+										'visualSampler' + _next.flo.key,
+										_visualSamplerModule,
+										_visualSamplerProperties
+									).insertUi ();
+									_next ();
+								}
+							);
+						}
+					) ({breatheAfter:500});
+				}
+			},
+
 			stateProperties:{
 				_visualSamplerNamespaces:{
 					name:'visualSamplerNamespaces',
@@ -121,53 +159,6 @@ Uize.module ({
 								}
 							)
 						);
-					}
-				}
-			},
-
-			htmlBindings:{
-				value:function (_value) {
-					var
-						m = this,
-						_visualSamplers = m.children.visualSamplers
-					;
-					if (_visualSamplers) {
-						m.removeChild ('visualSamplers');
-						m.setNodeInnerHtml ('viewer','');
-						_visualSamplers = null;
-					}
-					if (_value != '-') {
-						(
-							_visualSamplers = m.addChild (
-								'visualSamplers',
-								Uize.Widgets.Container.Widget,
-								{
-									built:false,
-									container:m.getNode ('viewer')
-								}
-							)
-						).insertUi ();
-						var _visualSamplerProperties = {
-							built:false,
-							container:_visualSamplers.getNode (),
-							insertionMode:'inner bottom'
-						};
-						Uize.Flo.forEach (
-							function (_next) {_next (m._visualSamplerModulesByNamespace [_value])},
-							function (_next) {
-								Uize.require (
-									_next.flo.value,
-									function (_visualSamplerModule) {
-										_visualSamplers.addChild (
-											'visualSampler' + _next.flo.key,
-											_visualSamplerModule,
-											_visualSamplerProperties
-										).insertUi ();
-										_next ();
-									}
-								);
-							}
-						) ({breatheAfter:500});
 					}
 				}
 			}
