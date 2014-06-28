@@ -57,35 +57,14 @@ Uize.module ({
 						);
 					}
 				},
-				_displayedSelectorOptions:{
-					name:'displayedSelectorOptions',
+				displayedSelectorOptions:{
 					derived:function (widgetsWithVisualTests,loc_noSelectionText) {
-						return [loc_noSelectionText].concat (widgetsWithVisualTests);
+						return [[loc_noSelectionText || '','']].concat (Uize.map (widgetsWithVisualTests,'[value,value]'));
 					}
 				}
 			},
 
 			htmlBindings:{
-				displayedSelectorOptions:function (_displayedSelectorOptions) {
-					var
-						m = this,
-						_selector = m.getNode ('selector'),
-						_selectorOptions = _selector.options
-					;
-					_selectorOptions.length = 0;
-					_selectorOptions [0] = new Option (_displayedSelectorOptions [0] || '','');
-					for (
-						var
-							_displayedSelectorOptionNo = 0,
-							_displayedSelectorOptionsLength = _displayedSelectorOptions.length
-						;
-						++_displayedSelectorOptionNo < _displayedSelectorOptionsLength;
-					) {
-						var _widgetClass = _displayedSelectorOptions [_displayedSelectorOptionNo];
-						_selectorOptions [_selectorOptions.length] = new Option (_widgetClass,_widgetClass);
-					}
-					m.setNodeValue (_selector,m.get ('value'));
-				},
 				value:function (_value) {
 					var m = this;
 					if (m.children.visualTests) {

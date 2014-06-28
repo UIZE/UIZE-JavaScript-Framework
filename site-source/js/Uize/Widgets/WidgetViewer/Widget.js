@@ -44,7 +44,8 @@ Uize.module ({
 
 			stateProperties:{
 				_modules:'modules',
-				_value:'value'
+				_value:'value',
+				_displayedSelectorOptions:'displayedSelectorOptions'
 			},
 
 			eventBindings:{
@@ -55,7 +56,29 @@ Uize.module ({
 			},
 
 			htmlBindings:{
-				loc_selectorLabel:'selectorLabel:value'
+				loc_selectorLabel:'selectorLabel:value',
+				displayedSelectorOptions:function (_displayedSelectorOptions) {
+					var
+						m = this,
+						_selector = m.getNode ('selector'),
+						_selectorOptions = _selector.options
+					;
+					_selectorOptions.length = 0;
+					for (
+						var
+							_displayedSelectorOptionNo = -1,
+							_displayedSelectorOptionsLength = _displayedSelectorOptions.length
+						;
+						++_displayedSelectorOptionNo < _displayedSelectorOptionsLength;
+					) {
+						var _displayedSelectorOption = _displayedSelectorOptions [_displayedSelectorOptionNo];
+						_selectorOptions [_selectorOptions.length] = new Option (
+							_displayedSelectorOption [0],
+							_displayedSelectorOption [1]
+						);
+					}
+					m.setNodeValue (_selector,m.get ('value'));
+				}
 			}
 		});
 	}

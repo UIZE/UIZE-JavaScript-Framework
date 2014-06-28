@@ -106,39 +106,26 @@ Uize.module ({
 						return _visualSamplerNamespaces;
 					}
 				},
-				_displayedSelectorOptions:{
-					name:'displayedSelectorOptions',
+				displayedSelectorOptions:{
 					derived:function (visualSamplerNamespaces,loc_allNamespaces,loc_noSelectionText) {
-						return [loc_noSelectionText,loc_allNamespaces].concat (visualSamplerNamespaces);
+						var _visualSamplerModulesByNamespace = this._visualSamplerModulesByNamespace;
+						return [[loc_noSelectionText || '','-']].concat (
+							Uize.map (
+								visualSamplerNamespaces,
+								function (_namespace) {
+									return [
+										(_namespace || loc_allNamespaces || '') +
+										' (' + _visualSamplerModulesByNamespace [_namespace].length + ')',
+										_namespace
+									];
+								}
+							)
+						);
 					}
 				}
 			},
 
 			htmlBindings:{
-				displayedSelectorOptions:function (_displayedSelectorOptions) {
-					var
-						m = this,
-						_selector = m.getNode ('selector'),
-						_selectorOptions = _selector.options
-					;
-					_selectorOptions.length = 0;
-					_selectorOptions [0] = new Option (_displayedSelectorOptions [0] || '','-');
-					for (
-						var
-							_displayedSelectorOptionNo = 1,
-							_displayedSelectorOptionsLength = _displayedSelectorOptions.length
-						;
-						++_displayedSelectorOptionNo < _displayedSelectorOptionsLength;
-					) {
-						var _namespace = _displayedSelectorOptions [_displayedSelectorOptionNo];
-						_selectorOptions [_selectorOptions.length] = new Option (
-							(_namespace || _displayedSelectorOptions [1] || '') +
-							' (' + m._visualSamplerModulesByNamespace [_namespace].length + ')',
-							_namespace
-						);
-					}
-					m.setNodeValue (_selector,m.get ('value'));
-				},
 				value:function (_value) {
 					var
 						m = this,
