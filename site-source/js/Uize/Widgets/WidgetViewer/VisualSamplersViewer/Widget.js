@@ -1,7 +1,7 @@
 /*______________
 |       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
 |     /      /  |   ---------------------------------------------------
-|    /    O /   |    MODULE : Uize.Widgets.VisualSamplersViewer.Widget Class
+|    /    O /   |    MODULE : Uize.Widgets.WidgetViewer.VisualSamplersViewer.Widget Class
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
 | /____/ /__/_| | COPYRIGHT : (c)2013-2014 UIZE
@@ -18,13 +18,13 @@
 
 /*?
 	Introduction
-		The =Uize.Widgets.VisualSamplersViewer.Widget= class implements a widget for selecting and viewing visual samplers from a list of namespaces that contain visual samplers.
+		The =Uize.Widgets.WidgetViewer.VisualSamplersViewer.Widget= class implements a widget for selecting and viewing visual samplers from a list of namespaces that contain visual samplers.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 */
 
 Uize.module ({
-	name:'Uize.Widgets.VisualSamplersViewer.Widget',
+	name:'Uize.Widgets.WidgetViewer.VisualSamplersViewer.Widget',
 	superclass:'Uize.Widgets.WidgetViewer.Widget',
 	required:[
 		'Uize.Data.Matches',

@@ -34,7 +34,7 @@
 		<p>This example lets you select and run any of the visual tests for UIZE widgets that implement visual tests. Simply select a widget from the dropdown menu (only widgets that implement visual tests will be listed in this menu).</p>
 	</div>
 
-	<div id="page_visualTestsViewer-shell"></div>
+	<div id="page_widgetViewer-shell"></div>
 </div>
 
 <script type="text/javascript">
@@ -45,7 +45,7 @@ Uize.require (
 		'UizeSite.ModulesTree',
 		'Uize.Data.PathsTree',
 		'Uize.Url',
-		'Uize.Widgets.VisualTestsViewer.Widget'
+		'Uize.Widgets.WidgetViewer.VisualTestsViewer.Widget'
 	],
 	function () {
 		'use strict';
@@ -58,8 +58,8 @@ Uize.require (
 			delete _modulesTree.Uize.Build;
 
 			_page.addChild (
-				'visualTestsViewer',
-				Uize.Widgets.VisualTestsViewer.Widget,
+				'widgetViewer',
+				Uize.Widgets.WidgetViewer.VisualTestsViewer.Widget,
 				{
 					modules:Uize.Data.PathsTree.toList (_modulesTree),
 					value:Uize.Url.fromParams (location.href).widgetClass,

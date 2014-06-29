@@ -1,7 +1,7 @@
 /*______________
 |       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
 |     /      /  |   ---------------------------------------------------
-|    /    O /   |    MODULE : Uize.Widgets.VisualTestsViewer.Widget Class
+|    /    O /   |    MODULE : Uize.Widgets.WidgetViewer.VisualTestsViewer.Widget Class
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
 | /____/ /__/_| | COPYRIGHT : (c)2013-2014 UIZE
@@ -18,13 +18,13 @@
 
 /*?
 	Introduction
-		The =Uize.Widgets.VisualTestsViewer.Widget= class implements a widget for selecting and viewing visual tests for widget modules that have companion visual tests modules.
+		The =Uize.Widgets.WidgetViewer.VisualTestsViewer.Widget= class implements a widget for selecting and viewing visual tests for widget modules that have companion visual tests modules.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 */
 
 Uize.module ({
-	name:'Uize.Widgets.VisualTestsViewer.Widget',
+	name:'Uize.Widgets.WidgetViewer.VisualTestsViewer.Widget',
 	superclass:'Uize.Widgets.WidgetViewer.Widget',
 	required:[
 		'Uize.Data.Matches',

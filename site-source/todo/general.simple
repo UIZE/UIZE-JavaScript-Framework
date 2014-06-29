@@ -1356,9 +1356,6 @@ BUGS
 		...ImagePort.Draggable
 			no way to initiate Ctrl modifier key behaviors
 
-		Color Pickers With Gradient example
-			extremely slow
-
 		ThumbZoom
 			- zoom out effect is very choppy
 			- fade-to-black effect is very choppy
