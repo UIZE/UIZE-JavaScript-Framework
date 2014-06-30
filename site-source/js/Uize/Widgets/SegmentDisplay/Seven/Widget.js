@@ -55,15 +55,15 @@ Uize.module ({
 			stateProperties:{
 				_width:{
 					name:'width',
-					value:100
+					value:83
 				},
 				_height:{
 					name:'height',
-					value:170
+					value:160
 				},
 				_segmentThickness:{
 					name:'segmentThickness',
-					value:20
+					value:16
 				},
 				_segmentColor:{
 					name:'segmentColor',
