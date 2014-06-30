@@ -1,0 +1,62 @@
+.`` {
+	position: relative;
+	display: inline-block;
+}
+.`segment`, .`segment` div {
+	position: absolute;
+}
+
+/*** segment states ***/
+	.`segmentOff` .`segmentBar`,
+	.`segmentOff` .`segmentEnd` {
+		/* NOTE:
+			For some weird reason, simply having the opacity styling on the segmentOff element doesn't work in IE8 in standards mode, only IE8 in IE7 compatibility mode (what a mess). We have to select on the child elements. Doesn't seem like IE can ever get opacity quite right.
+		*/
+		opacity: .12;
+		filter: alpha(opacity=12);
+	}
+
+/*** horizontal segments ***/
+	.`horzSegment` {
+		width: 100%;
+	}
+	.`horzSegment` .`segmentBar` {
+		top: 0;
+		height: 100%;
+	}
+	.`horzSegmentTop` {
+		top: 0;
+	}
+	.`horzSegmentBottom` {
+		bottom: 0;
+	}
+
+/*** vertical segments ***/
+	.`vertSegment` {
+		height: 50%;
+	}
+	.`vertSegment` .`segmentBar` {
+		left: 0;
+		width: 100%;
+	}
+	.`vertSegmentTop` {
+		top: 0;
+	}
+	.`vertSegmentBottom` {
+		bottom: 0;
+	}
+	.`vertSegmentLeft` {
+		left: 0;
+	}
+	.`vertSegmentRight` {
+		right: 0;
+	}
+
+.`segmentEnd` {
+	width: 0;
+	height: 0;
+	border-style: solid;
+	border-color: transparent;
+	background: none;
+}
+
