@@ -3,12 +3,11 @@
 <head>
 	<title>Seven Segment Display | JavaScript Examples | UIZE JavaScript Framework</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-	<meta name="keywords" content="widget Uize.Widget.SegmentDisplay.Seven"/>
+	<meta name="keywords" content="widget Uize.Widgets.SegmentDisplay.Seven.Widget"/>
 	<meta name="description" content="See an interactive demonstration of a seven segment display widget, much like the classic LED / LCD digit displays on calculators and digital watches."/>
 	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
 	<link rel="stylesheet" href="../css/page.css"/>
 	<link rel="stylesheet" href="../css/page.example.css"/>
-	<link rel="stylesheet" href="../css/widget.segmentdisplay.seven.css"/>
 	<style type="text/css">
 		.main a.buttonLink,
 		.main a.buttonLink:link,
@@ -89,72 +88,6 @@
 
 <script type="text/javascript" src="../js/Uize.js"></script>
 
-<script type="text/javascript">
-
-var
-	segmentThickness = 26,
-	displayWidth = 164,
-	displayHeight = 246,
-	segmentGap = 1,
-	segmentThicknessDiv2 = segmentThickness / 2,
-	segmentThicknessPlusSegmentGap = segmentThickness + segmentGap,
-	styleTag =
-		'<style type="text/css">\n' +
-		'	.sevenSeg {\n' +
-		'		width:' + displayWidth + 'px;\n' +
-		'		height:' + displayHeight + 'px;\n' +
-		'	}\n' +
-		'	.sevenSegSegmentEnd {\n' +
-		'		border-width:' + segmentThicknessDiv2 + 'px;\n' +
-		'	}\n' +
-		'	.sevenSegHorzSegment {\n' +
-		'		height:' + segmentThickness + 'px;\n' +
-		'	}\n' +
-		'	.sevenSegHorzSegmentMiddle {\n' +
-		'		top:' + (displayHeight / 2 - segmentThicknessDiv2) + 'px;\n' +
-		'	}\n' +
-		'	.sevenSegSegmentLeftEnd {\n' +
-		'		left:' + segmentGap + 'px;\n' +
-		'	}\n' +
-		'	.sevenSegHorzSegment .sevenSegSegmentBar {\n' +
-		'		left:' + segmentThicknessPlusSegmentGap + 'px;\n' +
-		'		right:' + segmentThicknessPlusSegmentGap + 'px;\n' +
-		'	}\n' +
-		'	.sevenSegSegmentRightEnd {\n' +
-		'		right:' + segmentGap + 'px;\n' +
-		'	}\n' +
-		'	.sevenSegVertSegment {\n' +
-		'		width:' + segmentThickness + 'px;\n' +
-		'	}\n' +
-		'	.sevenSegSegmentTopEnd {\n' +
-		'		top:' + segmentGap + 'px;\n' +
-		'	}\n' +
-		'	.sevenSegVertSegment .sevenSegSegmentBar {\n' +
-		'		top:' + segmentThicknessPlusSegmentGap + 'px;\n' +
-		'		bottom:' + segmentThicknessPlusSegmentGap + 'px;\n' +
-		'	}\n' +
-		'	.sevenSegSegmentBottomEnd {\n' +
-		'		bottom:' + segmentGap + 'px;\n' +
-		'	}\n' +
-		'	.sevenSegVertSegmentTop .sevenSegSegmentBottomEnd {\n' +
-		'		bottom:' + (segmentGap - segmentThicknessDiv2) + 'px;\n' +
-		'	}\n' +
-		'	.sevenSegVertSegmentTop  .sevenSegSegmentBar {\n' +
-		'		bottom:' + (segmentGap + segmentThicknessDiv2) + 'px;\n' +
-		'	}\n' +
-		'	.sevenSegVertSegmentBottom .sevenSegSegmentTopEnd {\n' +
-		'		top:' + (segmentGap - segmentThicknessDiv2) + 'px;\n' +
-		'	}\n' +
-		'	.sevenSegVertSegmentBottom  .sevenSegSegmentBar {\n' +
-		'		top:' + (segmentGap + segmentThicknessDiv2) + 'px;\n' +
-		'	}\n' +
-		'</style>\n'
-;
-
-document.writeln (styleTag);
-
-</script>
-
 <h1 class="header">
 	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
 	<a href="../index.html" class="homeLinkText" title="UIZE JavaScript Framework home">UIZE JavaScript Framework</a>
@@ -172,7 +105,7 @@ document.writeln (styleTag);
 	<!-- explanation copy -->
 
 	<div class="explanation">
-		<p>In this example, an instance of the <a href="../reference/Uize.Widget.SegmentDisplay.Seven.html"><code>Uize.Widget.SegmentDisplay.Seven</code></a> widget class is being used to wire up a <a href="http://en.wikipedia.org/wiki/Seven-segment_display" class="externalSiteLink" target="_top">seven segment display</a> UI. The seven segment display is an old style of display device for displaying decimal numerals and a limited number of alphabetical characters (often utilizing LED or LCD electonics), which is often found in displays in pocket calculators, VHS and DVD players, digital watches, audio recording hardware, etc. The seven segment display shown in this example is interactive. You can choose a value to display by using the <b>"VALUE SELECTOR"</b> droplist. You can toggle the lit state of individual segments of the display by clicking directly on the segments of the display, or you can click on the binary digits in the ABCDEFG and GFEDCBA segments state tables. Various buttons are also provided in the <b>"SEGMENTS STATE"</b> pane to let you easily change the lit state of all segments at once. To see animations of the display state, use the buttons in the <b>"ANIMATE VALUE"</b> pane to the right.</p>
+		<p>In this example, an instance of the <a href="../reference/Uize.Widgets.SegmentDisplay.Seven.Widget.html"><code>Uize.Widgets.SegmentDisplay.Seven.Widget</code></a> widget class is being used to wire up a <a href="http://en.wikipedia.org/wiki/Seven-segment_display" class="externalSiteLink" target="_top">seven segment display</a> UI. The seven segment display is an old style of display device for displaying decimal numerals and a limited number of alphabetical characters (often utilizing LED or LCD electonics), which is often found in displays in pocket calculators, VHS and DVD players, digital watches, audio recording hardware, etc. The seven segment display shown in this example is interactive. You can choose a value to display by using the <b>"VALUE SELECTOR"</b> droplist. You can toggle the lit state of individual segments of the display by clicking directly on the segments of the display, or you can click on the binary digits in the ABCDEFG and GFEDCBA segments state tables. Various buttons are also provided in the <b>"SEGMENTS STATE"</b> pane to let you easily change the lit state of all segments at once. To see animations of the display state, use the buttons in the <b>"ANIMATE VALUE"</b> pane to the right.</p>
 	</div>
 
 	<!-- UI for seven segment display and interactive tests -->
@@ -273,8 +206,7 @@ Uize.require (
 	[
 		'UizeSite.Page.Example.library',
 		'UizeSite.Page.Example',
-		'Uize.Widget.SegmentDisplay.Seven',
-		'Uize.Templates.SevenSegmentDisplay',
+		'Uize.Widgets.SegmentDisplay.Seven.Widget',
 		'Uize.Fade',
 		'Uize.Fade.xFactory',
 		'Uize.Curve'
@@ -292,17 +224,22 @@ Uize.require (
 				hexValues = []
 			;
 			for (var segmentsState = -1; ++segmentsState < 128;) {
-				var value = Uize.Widget.SegmentDisplay.Seven.getValueFromSegmentsState (segmentsState);
+				var value = Uize.Widgets.SegmentDisplay.Seven.Widget.getValueFromSegmentsState (segmentsState);
 				(value.length > 1 ? hexValues : /^[0-9a-zA-Z]$/.test (value) ? alphaValues : miscCharValues).push (value);
 			}
 			alphaValues.sort ();
 			var values = alphaValues.concat (miscCharValues,hexValues);
 
-		/*** add the Uize.Widget.SegmentDisplay.Seven child widget ***/
+		/*** add the Uize.Widgets.SegmentDisplay.Seven.Widget child widget ***/
 			var sevenSegmentDisplay = page.addChild (
 				'sevenSegmentDisplay',
-				Uize.Widget.SegmentDisplay.Seven,
-				{html:Uize.Templates.SevenSegmentDisplay,built:false}
+				Uize.Widgets.SegmentDisplay.Seven.Widget,
+				{
+					segmentThickness:26,
+					width:164,
+					height:246,
+					built:false
+				}
 			);
 
 		/*** wire up the page widget ***/
