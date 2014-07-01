@@ -1,0 +1,23 @@
+<div>
+	<div class="digit"><child name="hoursTens"/></div>
+	<div class="digit"><child name="hoursOnes"/></div>
+
+	<div class="hmsSeparator">
+		<div class="hmsSeparatorColon hmsSeparatorColonTop"></div>
+		<div class="hmsSeparatorColon hmsSeparatorColonBottom"></div>
+	</div>
+
+	<div class="digit"><child name="minutesTens"/></div>
+	<div class="digit"><child name="minutesOnes"/></div>
+
+	<div class="hmsSeparator">
+		<div class="hmsSeparatorColon hmsSeparatorColonTop"></div>
+		<div class="hmsSeparatorColon hmsSeparatorColonBottom"></div>
+	</div>
+
+	<div class="digit"><child name="secondsTens"/></div>
+	<div class="digit"><child name="secondsOnes"/></div>
+
+	<br style="clear:left;"/>
+</div>
+

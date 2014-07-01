@@ -21,6 +21,15 @@
 		The =Uize.Widgets.SegmentDisplay.Seven.Widget= class implements a seven segment display widget, complete with HTML and CSS, and with configurable segment width, segment color, and dim segment opacity.
 
 		*DEVELOPERS:* `Chris van Rensburg`
+
+		Visual Sampler
+			Below is a visual sampler of the =Uize.Widgets.SegmentDisplay.Seven.Widget= class...
+
+			............................................................
+			<< widget >>
+
+			widgetClass: Uize.Widgets.SegmentDisplay.Seven.VisualSampler
+			............................................................
 */
 
 Uize.module ({
