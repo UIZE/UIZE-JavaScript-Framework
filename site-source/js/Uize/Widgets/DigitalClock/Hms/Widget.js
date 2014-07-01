@@ -36,7 +36,7 @@ Uize.module ({
 	name:'Uize.Widgets.DigitalClock.Hms.Widget',
 	superclass:'Uize.Widget.V2',
 	required:[
-		'Uize.Widget.mV2',
+		'Uize.Widget.mChildBindings',
 		'Uize.Widgets.DigitalClock.Hms.Html',
 		'Uize.Widgets.DigitalClock.Hms.Css',
 		'Uize.Widgets.SegmentDisplay.Seven.Widget',
@@ -45,39 +45,19 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		var _digits = {hoursTens:0,hoursOnes:1,minutesTens:2,minutesOnes:3,secondsTens:4,secondsOnes:5};
+		var
+			/*** General Variables for Scruncher Optimization ***/
+				_digitWidgetProperties = {widgetClass:Uize.Widgets.SegmentDisplay.Seven.Widget}
+		;
 
 		return _superclass.subclass ({
+			mixins:Uize.Widget.mChildBindings,
+
 			omegastructor:function () {
 				var m = this;
 				function _updateTime () {m.set ({_value:Uize.now ()})}
 				_updateTime ();
 				m._updateInterval = setInterval (_updateTime,1000);
-			},
-
-			stateProperties:{
-				_value:'value',
-				hhMmSs:{
-					derived:function (value) {return Uize.Date.Formatter.format (value,'{hh}{mm}{ss}')},
-					onChange:function () {
-						var m = this;
-						m.once (
-							'wired',
-							function () {
-								var
-									_hhMsSs = m.hhMmSs,
-									_children = m.children
-								;
-								for (var _digit in _digits) {
-									var _digitValue = _hhMsSs.charAt (_digits [_digit]);
-									_children [_digit].set ({
-										value:_digit == 'hoursTens' && _digitValue == '0' ? '' : _digitValue
-									});
-								}
-							}
-						);
-					}
-				}
 			},
 
 			staticProperties:{
@@ -88,7 +68,34 @@ Uize.module ({
 				html:Uize.Widgets.DigitalClock.Hms.Html
 			},
 
-			children:Uize.map (_digits,function () {return {widgetClass:Uize.Widgets.SegmentDisplay.Seven.Widget}})
+			stateProperties:{
+				_value:'value',
+				hhMmSs:{derived:function (value) {return Uize.Date.Formatter.format (value,'{hh}{mm}{ss}')}},
+				hoursTensValue:{derived:'hhMmSs: hhMmSs.charAt (0) == "0" ? "" : hhMmSs.charAt (0)'},
+				hoursOnesValue:{derived:'hhMmSs: hhMmSs.charAt (1)'},
+				minutesTensValue:{derived:'hhMmSs: hhMmSs.charAt (2)'},
+				minutesOnesValue:{derived:'hhMmSs: hhMmSs.charAt (3)'},
+				secondsTensValue:{derived:'hhMmSs: hhMmSs.charAt (4)'},
+				secondsOnesValue:{derived:'hhMmSs: hhMmSs.charAt (5)'}
+			},
+
+			children:{
+				hoursTens:_digitWidgetProperties,
+				hoursOnes:_digitWidgetProperties,
+				minutesTens:_digitWidgetProperties,
+				minutesOnes:_digitWidgetProperties,
+				secondsTens:_digitWidgetProperties,
+				secondsOnes:_digitWidgetProperties
+			},
+
+			childBindings:{
+				hoursTensValue:'->hoursTens.value',
+				hoursOnesValue:'->hoursOnes.value',
+				minutesTensValue:'->minutesTens.value',
+				minutesOnesValue:'->minutesOnes.value',
+				secondsTensValue:'->secondsTens.value',
+				secondsOnesValue:'->secondsOnes.value'
+			}
 		});
 	}
 });
