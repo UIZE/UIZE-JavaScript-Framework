@@ -4,7 +4,7 @@
 	width: 83px;
 }
 
-.`hmsSeparator` {
+.`separator` {
 	position:relative;
 	float:left;
 	width:20px;
@@ -12,18 +12,18 @@
 	padding:10px 20px;
 }
 
-.`hmsSeparator` .`hmsSeparatorColon` {
+.`separator` .`separatorColon` {
 	position:absolute;
 	width:20px;
 	height:20px;
 	background:#3f6;
 }
 
-.`hmsSeparator` .`hmsSeparatorColonTop` {
+.`separator` .`separatorColonTop` {
 	top:30%;
 }
 
-.`hmsSeparator` .`hmsSeparatorColonBottom` {
+.`separator` .`separatorColonBottom` {
 	bottom:30%;
 }
 

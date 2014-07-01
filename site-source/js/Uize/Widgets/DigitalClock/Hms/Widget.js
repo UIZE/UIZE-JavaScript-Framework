@@ -34,13 +34,10 @@
 
 Uize.module ({
 	name:'Uize.Widgets.DigitalClock.Hms.Widget',
-	superclass:'Uize.Widget.V2',
+	superclass:'Uize.Widgets.DigitalClock.Hm.Widget',
 	required:[
-		'Uize.Widget.mChildBindings',
 		'Uize.Widgets.DigitalClock.Hms.Html',
-		'Uize.Widgets.DigitalClock.Hms.Css',
-		'Uize.Widgets.SegmentDisplay.Seven.Widget',
-		'Uize.Date.Formatter'
+		'Uize.Widgets.SegmentDisplay.Seven.Widget'
 	],
 	builder:function (_superclass) {
 		'use strict';
@@ -51,48 +48,21 @@ Uize.module ({
 		;
 
 		return _superclass.subclass ({
-			mixins:Uize.Widget.mChildBindings,
-
-			omegastructor:function () {
-				var m = this;
-				function _updateTime () {m.set ({_value:Uize.now ()})}
-				_updateTime ();
-				m._updateInterval = setInterval (_updateTime,1000);
-			},
-
-			staticProperties:{
-				cssModule:Uize.Widgets.DigitalClock.Hms.Css
-			},
-
 			set:{
 				html:Uize.Widgets.DigitalClock.Hms.Html
 			},
 
 			stateProperties:{
-				_value:'value',
-				hhMmSs:{derived:function (value) {return Uize.Date.Formatter.format (value,'{hh}{mm}{ss}')}},
-				hoursTensValue:{derived:'hhMmSs: hhMmSs.charAt (0) == "0" ? "" : hhMmSs.charAt (0)'},
-				hoursOnesValue:{derived:'hhMmSs: hhMmSs.charAt (1)'},
-				minutesTensValue:{derived:'hhMmSs: hhMmSs.charAt (2)'},
-				minutesOnesValue:{derived:'hhMmSs: hhMmSs.charAt (3)'},
 				secondsTensValue:{derived:'hhMmSs: hhMmSs.charAt (4)'},
 				secondsOnesValue:{derived:'hhMmSs: hhMmSs.charAt (5)'}
 			},
 
 			children:{
-				hoursTens:_digitWidgetProperties,
-				hoursOnes:_digitWidgetProperties,
-				minutesTens:_digitWidgetProperties,
-				minutesOnes:_digitWidgetProperties,
 				secondsTens:_digitWidgetProperties,
 				secondsOnes:_digitWidgetProperties
 			},
 
 			childBindings:{
-				hoursTensValue:'->hoursTens.value',
-				hoursOnesValue:'->hoursOnes.value',
-				minutesTensValue:'->minutesTens.value',
-				minutesOnesValue:'->minutesOnes.value',
 				secondsTensValue:'->secondsTens.value',
 				secondsOnesValue:'->secondsOnes.value'
 			}
