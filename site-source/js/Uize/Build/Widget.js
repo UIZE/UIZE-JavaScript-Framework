@@ -61,12 +61,12 @@ Uize.module ({
 				function _getModulePath (_moduleName,_sourceType) {
 					return _modulesPath + Uize.modulePathResolver (_moduleName) + (_sourceType ? ('.' + _sourceType) : '');
 				}
-				/*** create the HTML module's source .js.jst file, if necessary ***/
+				/*** create the HTML module's source file, if necessary ***/
 					_hasHtml && _fileSystem.writeFile ({
-						path:_getModulePath (_namespace + '.Html','js.jst'),
+						path:_getModulePath (_namespace + '.Html','htmlt'),
 						contents:[
-							'<div id="<%. idPrefix %>" class="<%= this.rootNodeCssClasses () %>">',
-							'	<div class="<%= this.cssClass (\'foo\') %>">foo</div>',
+							'<div>',
+							'	<div class="title">BLACK WIDGET</div>',
 							'</div>'
 						].join ('\n')
 					});
@@ -80,7 +80,7 @@ Uize.module ({
 							'	padding: 5px;',
 							'}',
 							'',
-							'.`foo` {',
+							'.`title` {',
 							'	color: #000;',
 							'	background: #eee;',
 							'}'
