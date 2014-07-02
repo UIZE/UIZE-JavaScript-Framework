@@ -70,7 +70,15 @@ Uize.module ({
 
 			stateProperties:{
 				_value:'value',
-				hhMmSs:{derived:function (value) {return Uize.Date.Formatter.format (value,'{hh}{mm}{ss}')}},
+				_hoursMode:{
+					name:'hoursMode',
+					value:'12'
+				},
+				hhMmSs:{
+					derived:function (value,hoursMode) {
+						return Uize.Date.Formatter.format (value,hoursMode == '12' ? '{hh12}{mm}{ss}' : '{hh}{mm}{ss}');
+					}
+				},
 				hoursTensValue:{derived:'hhMmSs: hhMmSs.charAt (0) == "0" ? "" : hhMmSs.charAt (0)'},
 				hoursOnesValue:{derived:'hhMmSs: hhMmSs.charAt (1)'},
 				minutesTensValue:{derived:'hhMmSs: hhMmSs.charAt (2)'},
