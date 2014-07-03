@@ -40,6 +40,7 @@ Uize.module ({
 		'Uize.Widgets.DigitalClock.Hm.Html',
 		'Uize.Widgets.DigitalClock.Hm.Css',
 		'Uize.Widgets.SegmentDisplay.Seven.Widget',
+		'Uize.Widgets.DigitalClock.Separator.Widget',
 		'Uize.Date.Formatter'
 	],
 	builder:function (_superclass) {
@@ -89,7 +90,8 @@ Uize.module ({
 				hoursTens:_digitWidgetProperties,
 				hoursOnes:_digitWidgetProperties,
 				minutesTens:_digitWidgetProperties,
-				minutesOnes:_digitWidgetProperties
+				minutesOnes:_digitWidgetProperties,
+				hmSeparator:{widgetClass:Uize.Widgets.DigitalClock.Separator.Widget}
 			},
 
 			childBindings:{

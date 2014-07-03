@@ -3,10 +3,7 @@
 		<td class="digit"><child name="hoursTens"/></td>
 		<td class="digit"><child name="hoursOnes"/></td>
 
-		<td class="separator">
-			<div class="separatorColon separatorColonTop"></div>
-			<div class="separatorColon separatorColonBottom"></div>
-		</td>
+		<td class="digit"><child name="hmSeparator"/></td>
 
 		<td class="digit"><child name="minutesTens"/></td>
 		<td class="digit"><child name="minutesOnes"/></td>
