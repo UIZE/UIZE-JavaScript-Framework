@@ -1,15 +1,15 @@
-<div>
-	<div class="digit"><child name="hoursTens"/></div>
-	<div class="digit"><child name="hoursOnes"/></div>
+<table>
+	<tr>
+		<td class="digit"><child name="hoursTens"/></td>
+		<td class="digit"><child name="hoursOnes"/></td>
 
-	<div class="separator">
-		<div class="separatorColon separatorColonTop"></div>
-		<div class="separatorColon separatorColonBottom"></div>
-	</div>
+		<td class="separator">
+			<div class="separatorColon separatorColonTop"></div>
+			<div class="separatorColon separatorColonBottom"></div>
+		</td>
 
-	<div class="digit"><child name="minutesTens"/></div>
-	<div class="digit"><child name="minutesOnes"/></div>
-
-	<br style="clear:left;"/>
-</div>
+		<td class="digit"><child name="minutesTens"/></td>
+		<td class="digit"><child name="minutesOnes"/></td>
+	</tr>
+</table>
 

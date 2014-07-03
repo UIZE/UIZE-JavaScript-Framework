@@ -1,29 +1,26 @@
 .`digit` {
-	float: left;
 	padding: 10px;
-	width: 83px;
 }
 
 .`separator` {
-	position:relative;
-	float:left;
-	width:20px;
-	height:160px;
-	padding:10px 20px;
+	position: relative;
+	width: 20px;
+	height: 160px;
+	padding: 10px 20px;
 }
 
 .`separator` .`separatorColon` {
-	position:absolute;
-	width:20px;
-	height:20px;
-	background:#3f6;
+	position: absolute;
+	width: 20px;
+	height: 20px;
+	background: #3f6;
 }
 
 .`separator` .`separatorColonTop` {
-	top:30%;
+	top: 30%;
 }
 
 .`separator` .`separatorColonBottom` {
-	bottom:30%;
+	bottom: 30%;
 }
 
