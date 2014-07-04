@@ -84,29 +84,29 @@ Uize.module ({
 				},
 
 				/*** derived properties for HTML bindings ***/
-					segmentThicknessDiv2:{
-						derived:'segmentThickness: segmentThickness / 2'
-					},
-					segmentThicknessDiv2Px:{
-						derived:'segmentThicknessDiv2: segmentThicknessDiv2 + "px"'
-					},
 					widthPx:{
 						derived:'width: width + "px"'
 					},
 					heightPx:{
 						derived:'height: height + "px"'
 					},
+					segmentColorAsRgbHex:{
+						derived:'segmentColor: "#" + segmentColor'
+					},
 					segmentThicknessPx:{
 						derived:'segmentThickness: segmentThickness + "px"'
 					},
-					segmentColorAsRgbHex:{
-						derived:'segmentColor: "#" + segmentColor'
+					segmentGapPx:{
+						derived:'segmentGap: segmentGap + "px"'
 					},
 					segmentGTopPx:{
 						derived:'height,segmentThickness: height / 2 - segmentThickness / 2 + "px"'
 					},
-					segmentGapPx:{
-						derived:'segmentGap: segmentGap + "px"'
+					segmentThicknessDiv2:{
+						derived:'segmentThickness: segmentThickness / 2'
+					},
+					segmentThicknessDiv2Px:{
+						derived:'segmentThicknessDiv2: segmentThicknessDiv2 + "px"'
 					},
 					segmentThicknessPlusSegmentGapPx:{
 						derived:'segmentThickness,segmentGap: segmentThickness + segmentGap + "px"'
