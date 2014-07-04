@@ -52,21 +52,55 @@ Uize.module ({
 			},
 
 			stateProperties:{
+				_width:{
+					name:'width',
+					value:16
+				},
+				_height:{
+					name:'height',
+					value:160
+				},
+				_segmentThickness:{
+					name:'segmentThickness',
+					value:16
+				},
 				_segmentColor:{
 					name:'segmentColor',
 					value:'3f6'
 				},
 
 				/*** derived properties for HTML bindings ***/
+					widthPx:{
+						derived:'width: width + "px"'
+					},
+					heightPx:{
+						derived:'height: height + "px"'
+					},
+					segmentThicknessPx:{
+						derived:'segmentThickness: segmentThickness + "px"'
+					},
 					segmentColorAsRgbHex:{
 						derived:'segmentColor: "#" + segmentColor'
+					},
+					colonPosPx:{
+						derived:'height,segmentThickness: Math.round (segmentThickness + (height - segmentThickness * 3) / 4 - segmentThickness / 2) + "px"'
 					}
 			},
 
 			htmlBindings:{
+				widthPx:':style.width',
+				heightPx:':style.height',
 				segmentColorAsRgbHex:[
 					'colonTop:style.background',
 					'colonBottom:style.background'
+				],
+				segmentThicknessPx:[
+					'colonTop:style.height',
+					'colonBottom:style.height'
+				],
+				colonPosPx:[
+					'colonTop:style.top',
+					'colonBottom:style.bottom'
 				]
 			}
 		});

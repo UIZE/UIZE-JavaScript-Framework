@@ -33,6 +33,16 @@ Uize.module ({
 		return _superclass.subclass ({
 			omegastructor:function () {
 				this.addStateCombinationTestCases ({
+					width:40,
+					segmentThickness:40
+				});
+				this.addStateCombinationTestCases ({
+					height:[80,120,160]
+				});
+				this.addStateCombinationTestCases ({
+					width:[1,10,20,40]
+				});
+				this.addStateCombinationTestCases ({
 					segmentColor:['f00','0f0','00f','f0f','0ff','ff0']
 				});
 			},

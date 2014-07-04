@@ -1,20 +1,18 @@
 .`` {
 	display: inline-block;
 	position: relative;
-	width: 20px;
-	height: 160px;
 }
 
 .`colon` {
 	position: absolute;
-	width: 20px;
-	height: 20px;
+	width: 100%;
 }
 
 .`colonTop` {
-	top: 20%;
+	top: 33%;
 }
 
 .`colonBottom` {
-	bottom: 25%;
+	bottom: 33%;
 }
+
