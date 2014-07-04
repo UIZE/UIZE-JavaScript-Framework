@@ -9,7 +9,6 @@
 	position: absolute;
 	width: 20px;
 	height: 20px;
-	background: #3f6;
 }
 
 .`colonTop` {
