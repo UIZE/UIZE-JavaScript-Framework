@@ -12,8 +12,8 @@
 		/* NOTE:
 			For some weird reason, simply having the opacity styling on the segmentOff element doesn't work in IE8 in standards mode, only IE8 in IE7 compatibility mode (what a mess). We have to select on the child elements. Doesn't seem like IE can ever get opacity quite right.
 		*/
-		opacity: .12;
-		filter: alpha(opacity=12);
+		opacity: .04;
+		filter: alpha(opacity=4);
 	}
 
 /*** horizontal segments ***/
