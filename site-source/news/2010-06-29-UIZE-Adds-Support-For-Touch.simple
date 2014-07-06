@@ -8,7 +8,7 @@ Touch is the New Black
 The Main Drag
 	To kick off this effort, the =Uize.Widget.Drag= module has been enhanced to now support touch interface events.
 
-	Because many other widgets are already written to use the =Uize.Widget.Drag= widget class, the improvements in this class automatically confer touch support to the widgets that use this class in their implementation. Examples of this are the =Uize.Widget.Resizer=,  =Uize.Widget.Resizer.Marquee=, =Uize.Widget.Bar.Slider=, =Uize.Widget.ColorCube.Draggable=, =Uize.Widget.Dialog=, =Uize.Widget.Drag.Move=, and =Uize.Widget.ImagePort.Draggable= classes.
+	Because many other widgets are already written to use the =Uize.Widget.Drag= widget class, the improvements in this class automatically confer touch support to the widgets that use this class in their implementation. Examples of this are the =Uize.Widget.Resizer=,  =Uize.Widget.Resizer.Marquee=, =Uize.Widget.Bar.Slider=, =Uize.Widget.ColorGrid.Draggable=, =Uize.Widget.Dialog=, =Uize.Widget.Drag.Move=, and =Uize.Widget.ImagePort.Draggable= classes.
 
 Take it For a Test Drive
 	What this all means is that, with the new and improved =Uize.Widget.Drag= class, selection marquees, sliders, dialogs, image ports, etc. are all now draggable on the Apple iPad - and they still behave as before with mouse / trackpad control.

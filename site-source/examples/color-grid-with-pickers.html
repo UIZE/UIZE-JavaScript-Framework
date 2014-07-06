@@ -1,9 +1,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<title>Color Cube With Color Pickers | JavaScript Examples | UIZE JavaScript Framework</title>
+	<title>Color Grid With Color Pickers | JavaScript Examples | UIZE JavaScript Framework</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-	<meta name="keywords" content="color drag-and-drop touch ipad Uize.Widget.ColorCube.Draggable"/>
+	<meta name="keywords" content="color drag-and-drop touch ipad Uize.Widget.ColorGrid.Draggable"/>
 	<meta name="description" content="See an example of a color grid, with RGB color pickers for editing corner colors, and the ability to click-and-drag in the grid to &quot;smear&quot; its colors."/>
 	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
 	<link rel="stylesheet" href="../css/page.css"/>
@@ -30,16 +30,16 @@
 <div class="main">
 	<h1 class="document-title">
 		<a href="../javascript-examples.html" class="breadcrumb breadcrumbWithArrow">JAVASCRIPT EXAMPLES</a>
-		Color Cube With Color Pickers
+		Color Grid With Color Pickers
 		<div class="pageActionsShell">
-			<div id="page-actions" class="pageActions"><a href="source-code/color-cube-with-pickers.html" class="buttonLink">SOURCE</a></div>
+			<div id="page-actions" class="pageActions"><a href="source-code/color-grid-with-pickers.html" class="buttonLink">SOURCE</a></div>
 		</div>
 	</h1>
 
 	<!-- explanation copy -->
 
 	<div class="explanation">
-		<p>In this example, an instance of <a href="../reference/Uize.Widget.ColorCube.Draggable.html"><code>Uize.Widget.ColorCube.Draggable</code></a> provides a draggable color cube widget that shows the interpolated colors between four corner colors. Click-and-drag inside the cube to "smudge" the color space in different directions. Instances of <a href="../reference/Uize.Widgets.RgbSliders.Widget.html"><code>Uize.Widgets.RgbSliders.Widget</code></a> are wired up at each corner for changing the colors using sliders. The sliders control the cube, but dragging inside the cube also controls the sliders. Event handlers wire the widgets bidirectionally so their values stay in sync. Click the "AGITATE" button to randomize the corner colors.</p>
+		<p>In this example, an instance of <a href="../reference/Uize.Widget.ColorGrid.Draggable.html"><code>Uize.Widget.ColorGrid.Draggable</code></a> provides a draggable color grid widget that shows the interpolated colors between four corner colors. Click-and-drag inside the grid to "smudge" the color space in different directions. Instances of <a href="../reference/Uize.Widgets.RgbSliders.Widget.html"><code>Uize.Widgets.RgbSliders.Widget</code></a> are wired up at each corner for changing the colors using sliders. The sliders control the grid, but dragging inside the grid also controls the sliders. Event handlers wire the widgets bidirectionally so their values stay in sync. Click the "AGITATE" button to randomize the corner colors.</p>
 	</div>
 
 	<!-- "wireframe" for the UI -->
@@ -47,7 +47,7 @@
 	<table border="0" cellspacing="0" cellpadding="3" style="margin:auto;">
 		<tr>
 			<td id="page_colorTopLeft-shell" valign="top"></td>
-			<td id="page_colorCube" rowspan="2"></td>
+			<td id="page_colorGrid" rowspan="2"></td>
 			<td id="page_colorTopRight-shell" valign="top"></td>
 		</tr>
 		<tr>
@@ -73,8 +73,8 @@ Uize.require (
 		'Uize.Color',
 		'Uize.Color.xUtil',
 		'Uize.Widgets.RgbSliders.Widget',
-		'Uize.Widget.ColorCube.Draggable',
-		'Uize.Templates.ColorCube',
+		'Uize.Widget.ColorGrid.Draggable',
+		'Uize.Templates.ColorGrid',
 		'Uize.Widgets.Button.Widget'
 	],
 	function () {
@@ -83,12 +83,12 @@ Uize.require (
 		/*** create the example page widget ***/
 			var page = window.page = UizeSite.Page.Example ();
 
-		/*** create the Uize.Widget.ColorCube object ***/
-			page.addChild ('colorCube',Uize.Widget.ColorCube.Draggable,{built:false,html:Uize.Templates.ColorCube});
+		/*** create the Uize.Widget.ColorGrid object ***/
+			page.addChild ('colorGrid',Uize.Widget.ColorGrid.Draggable,{built:false,html:Uize.Templates.ColorGrid});
 
 			/*** agitation ***/
 				function agitate () {
-					page.children.colorCube.set ({
+					page.children.colorGrid.set ({
 						colorTopLeft:Uize.Color.random (),
 						colorTopRight:Uize.Color.random (),
 						colorBottomLeft:Uize.Color.random (),
@@ -101,7 +101,7 @@ Uize.require (
 		/*** wire up handling for the corner colors ***/
 			function setupColorCorner (colorName) {
 				var
-					colorCube = page.children.colorCube,
+					colorGrid = page.children.colorGrid,
 					colorPicker = page.addChild (
 						colorName,
 						Uize.Widgets.RgbSliders.Widget,
@@ -112,13 +112,13 @@ Uize.require (
 						}
 					)
 				;
-				/*** sync color picker to cube ***/
-					function syncColorPickerToCube () {colorPicker.set ({value:colorCube.get (colorName)})}
-					colorCube.wire ('Changed.' + colorName,syncColorPickerToCube);
-					syncColorPickerToCube ();
+				/*** sync color picker to grid ***/
+					function syncColorPickerToGrid () {colorPicker.set ({value:colorGrid.get (colorName)})}
+					colorGrid.wire ('Changed.' + colorName,syncColorPickerToGrid);
+					syncColorPickerToGrid ();
 
-				/*** sync cube to color picker ***/
-					colorPicker.wire ('Changed.value',function () {colorCube.set (colorName,colorPicker + '')});
+				/*** sync grid to color picker ***/
+					colorPicker.wire ('Changed.value',function () {colorGrid.set (colorName,colorPicker + '')});
 			}
 			setupColorCorner ('colorTopLeft');
 			setupColorCorner ('colorTopRight');

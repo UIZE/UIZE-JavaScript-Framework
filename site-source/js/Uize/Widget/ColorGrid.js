@@ -1,7 +1,7 @@
 /*______________
 |       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
 |     /      /  |   ---------------------------------------------------
-|    /    O /   |    MODULE : Uize.Widget.ColorCube Class
+|    /    O /   |    MODULE : Uize.Widget.ColorGrid Class
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
 | /____/ /__/_| | COPYRIGHT : (c)2005-2014 UIZE
@@ -18,13 +18,13 @@
 
 /*?
 	Introduction
-		The =Uize.Widget.ColorCube= class implements a color grid, where total rows and columns is configurable, and colors are interpolated from corner colors.
+		The =Uize.Widget.ColorGrid= class implements a color grid, where total rows and columns is configurable, and colors are interpolated from corner colors.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 */
 
 Uize.module ({
-	name:'Uize.Widget.ColorCube',
+	name:'Uize.Widget.ColorGrid',
 	required:[
 		'Uize.Color',
 		'Uize.Color.xUtil'

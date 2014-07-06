@@ -1,7 +1,7 @@
 /*______________
 |       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
 |     /      /  |   ---------------------------------------------------
-|    /    O /   |    MODULE : Uize.Widget.ColorCube.Draggable Class
+|    /    O /   |    MODULE : Uize.Widget.ColorGrid.Draggable Class
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
 | /____/ /__/_| | COPYRIGHT : (c)2006-2014 UIZE
@@ -18,13 +18,13 @@
 
 /*?
 	Introduction
-		The =Uize.Widget.ColorCube.Draggable= class extends its superclass by adding the ability to stretch the grid's color gradient by clicking and dragging.
+		The =Uize.Widget.ColorGrid.Draggable= class extends its superclass by adding the ability to stretch the grid's color gradient by clicking and dragging.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 */
 
 Uize.module ({
-	name:'Uize.Widget.ColorCube.Draggable',
+	name:'Uize.Widget.ColorGrid.Draggable',
 	required:[
 		'Uize.Dom.Util',
 		'Uize.Dom.Pos',
