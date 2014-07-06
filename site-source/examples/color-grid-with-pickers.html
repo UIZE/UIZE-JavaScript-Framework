@@ -70,8 +70,6 @@ Uize.require (
 	[
 		'UizeSite.Page.Example.library',
 		'UizeSite.Page.Example',
-		'Uize.Color',
-		'Uize.Color.xUtil',
 		'Uize.Widgets.RgbSliders.Widget',
 		'Uize.Widget.ColorGrid.Draggable',
 		'Uize.Templates.ColorGrid',
@@ -84,34 +82,24 @@ Uize.require (
 			var page = window.page = UizeSite.Page.Example ();
 
 		/*** create the Uize.Widget.ColorGrid object ***/
-			page.addChild ('colorGrid',Uize.Widget.ColorGrid.Draggable,{built:false,html:Uize.Templates.ColorGrid});
-
-			/*** agitation ***/
-				function agitate () {
-					page.children.colorGrid.set ({
-						colorTopLeft:Uize.Color.random (),
-						colorTopRight:Uize.Color.random (),
-						colorBottomLeft:Uize.Color.random (),
-						colorBottomRight:Uize.Color.random ()
-					});
-				}
-
-			agitate ();
+			var colorGrid = page.addChild (
+				'colorGrid',
+				Uize.Widget.ColorGrid.Draggable,
+				{built:false,html:Uize.Templates.ColorGrid}
+			);
 
 		/*** wire up handling for the corner colors ***/
 			function setupColorCorner (colorName) {
-				var
-					colorGrid = page.children.colorGrid,
-					colorPicker = page.addChild (
-						colorName,
-						Uize.Widgets.RgbSliders.Widget,
-						{
-							size:'tiny',
-							sliderHeight:120,
-							built:false
-						}
-					)
-				;
+				var colorPicker = page.addChild (
+					colorName,
+					Uize.Widgets.RgbSliders.Widget,
+					{
+						size:'tiny',
+						sliderHeight:120,
+						built:false
+					}
+				);
+
 				/*** sync color picker to grid ***/
 					function syncColorPickerToGrid () {colorPicker.set ({value:colorGrid.get (colorName)})}
 					colorGrid.wire ('Changed.' + colorName,syncColorPickerToGrid);
@@ -126,6 +114,9 @@ Uize.require (
 			setupColorCorner ('colorBottomRight');
 
 		/*** add agitate button ***/
+			function agitate () {colorGrid.randomize ()}
+			agitate ();
+
 			page.addChild (
 				'agitateButton',
 				Uize.Widgets.Button.Widget,

@@ -53,6 +53,15 @@ Uize.module ({
 			},
 
 			instanceMethods:{
+				randomize:function () {
+					this.set ({
+						_colorTopLeft:_Uize_Color.random (),
+						_colorTopRight:_Uize_Color.random (),
+						_colorBottomLeft:_Uize_Color.random (),
+						_colorBottomRight:_Uize_Color.random ()
+					});
+				},
+
 				updateUi:function () {
 					var m = this;
 					if (m.isWired) {
