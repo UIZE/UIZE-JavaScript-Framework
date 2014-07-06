@@ -72,6 +72,7 @@ Uize.require (
 		'UizeSite.Page.Example.library',
 		'UizeSite.Page.Example',
 		'Uize.Widget.ColorCube',
+		'Uize.Templates.ColorCube',
 		'Uize.Widgets.Button.Widget'
 	],
 	function () {
@@ -81,7 +82,7 @@ Uize.require (
 			var page = window.page = UizeSite.Page.Example ();
 
 		/*** create the Uize.Widget.ColorCube object ***/
-			var colorCube = page.addChild ('colorCube',Uize.Widget.ColorCube,{built:false});
+			var colorCube = page.addChild ('colorCube',Uize.Widget.ColorCube,{built:false,html:Uize.Templates.ColorCube});
 
 			function updateColorCubeFromInputs () {
 				colorCube.set ({colorTopLeft:page.getNodeValue ('colorTopLeft')});

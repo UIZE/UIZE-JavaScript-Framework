@@ -119,28 +119,6 @@ Uize.module ({
 					onChange:function () {this._divisionSizeY = 1 / ((this._divisionsY - 1) || 1)},
 					value:10
 				}
-			},
-
-			set:{
-				html:{
-					process:function (input) {
-						/* compiled from...
-							<% for (var _divisionY = -1, _divisionsY = input.divisionsY; ++_divisionY < _divisionsY;) { %>
-							<% 	for (var _divisionX = -1, _divisionsX = input.divisionsX; ++_divisionX < _divisionsX;) { %><img id="<% .idPrefix %>-x<%= _divisionX %>y<%= _divisionY %>" src="<% .blankGif %>" class="swatch"/><% 	} %><br/>
-							<% } %>
-						*/
-						var output = [];
-						for (var _divisionY = -1, _divisionsY = input.divisionsY; ++_divisionY < _divisionsY;) {
-							output.push("\n");
-							for (var _divisionX = -1, _divisionsX = input.divisionsX; ++_divisionX < _divisionsX;) {
-								output.push("<img id=\"", input.idPrefix, "-x", _divisionX, "y", _divisionY, "\" src=\"", input.blankGif, "\" class=\"swatch\"/>");
-							}
-							output.push("<br/>");
-						}
-						output.push("\n");
-						return output.join("");
-					}
-				}
 			}
 		});
 	}

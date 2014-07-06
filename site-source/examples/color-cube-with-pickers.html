@@ -74,6 +74,7 @@ Uize.require (
 		'Uize.Color.xUtil',
 		'Uize.Widgets.RgbSliders.Widget',
 		'Uize.Widget.ColorCube.Draggable',
+		'Uize.Templates.ColorCube',
 		'Uize.Widgets.Button.Widget'
 	],
 	function () {
@@ -83,7 +84,7 @@ Uize.require (
 			var page = window.page = UizeSite.Page.Example ();
 
 		/*** create the Uize.Widget.ColorCube object ***/
-			page.addChild ('colorCube',Uize.Widget.ColorCube.Draggable,{built:false});
+			page.addChild ('colorCube',Uize.Widget.ColorCube.Draggable,{built:false,html:Uize.Templates.ColorCube});
 
 			/*** agitation ***/
 				function agitate () {
