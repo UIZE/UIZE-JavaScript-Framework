@@ -91,7 +91,6 @@ New Localization Plurals Modules
 NEW MODULE: Uize.Math.LogicalPos
 	Still to do...
 
-	- implement fit and fill convenience methods
 	- write unit tests
 	- write documentation
 	- write news announcement
