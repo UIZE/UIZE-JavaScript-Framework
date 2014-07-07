@@ -1,7 +1,7 @@
 /*______________
 |       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
 |     /      /  |   ---------------------------------------------------
-|    /    O /   |    MODULE : Uize.Widget.mV2 Class
+|    /    O /   |    MODULE : Uize.Widget.mV2 Mixin
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
 | /____/ /__/_| | COPYRIGHT : (c)2013-2014 UIZE
@@ -10,7 +10,7 @@
 */
 
 /* Module Meta Data
-	type: Class
+	type: Mixin
 	importance: 8
 	codeCompleteness: 5
 	docCompleteness: 100
