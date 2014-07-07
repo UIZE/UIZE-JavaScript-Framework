@@ -37,6 +37,7 @@ Uize.module ({
 	superclass:'Uize.Widget.SegmentDisplay.Seven',
 	required:[
 		'Uize.Widget.mV2',
+		'Uize.Widget.mWidthHeight',
 		'Uize.Widgets.SegmentDisplay.Seven.Html',
 		'Uize.Widgets.SegmentDisplay.Seven.Css'
 	],
@@ -44,7 +45,10 @@ Uize.module ({
 		'use strict';
 
 		return _superclass.subclass ({
-			mixins:Uize.Widget.mV2,
+			mixins:[
+				Uize.Widget.mV2,
+				Uize.Widget.mWidthHeight
+			],
 
 			omegastructor:function () {
 				this.set ({
@@ -58,18 +62,12 @@ Uize.module ({
 			},
 
 			set:{
+				width:83,
+				height:160,
 				html:Uize.Widgets.SegmentDisplay.Seven.Html
 			},
 
 			stateProperties:{
-				_width:{
-					name:'width',
-					value:83
-				},
-				_height:{
-					name:'height',
-					value:160
-				},
 				_segmentThickness:{
 					name:'segmentThickness',
 					value:16
@@ -84,12 +82,6 @@ Uize.module ({
 				},
 
 				/*** derived properties for HTML bindings ***/
-					widthPx:{
-						derived:'width: width + "px"'
-					},
-					heightPx:{
-						derived:'height: height + "px"'
-					},
 					segmentColorAsRgbHex:{
 						derived:'segmentColor: "#" + segmentColor'
 					},
@@ -165,8 +157,6 @@ Uize.module ({
 					'segmentF:style.width',
 					'segmentG:style.height'
 				],
-				widthPx:':style.width',
-				heightPx:':style.height',
 				segmentGTopPx:'segmentG:style.top',
 				segmentGapPx:[
 					'segmentALeftEnd:style.left',

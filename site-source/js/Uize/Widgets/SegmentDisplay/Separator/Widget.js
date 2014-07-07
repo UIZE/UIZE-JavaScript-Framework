@@ -36,6 +36,7 @@ Uize.module ({
 	name:'Uize.Widgets.SegmentDisplay.Separator.Widget',
 	superclass:'Uize.Widget.V2',
 	required:[
+		'Uize.Widget.mWidthHeight',
 		'Uize.Widgets.SegmentDisplay.Separator.Html',
 		'Uize.Widgets.SegmentDisplay.Separator.Css'
 	],
@@ -43,7 +44,11 @@ Uize.module ({
 		'use strict';
 
 		return _superclass.subclass ({
+			mixins:Uize.Widget.mWidthHeight,
+
 			set:{
+				width:16,
+				height:160,
 				html:Uize.Widgets.SegmentDisplay.Separator.Html
 			},
 
@@ -52,14 +57,6 @@ Uize.module ({
 			},
 
 			stateProperties:{
-				_width:{
-					name:'width',
-					value:16
-				},
-				_height:{
-					name:'height',
-					value:160
-				},
 				_segmentThickness:{
 					name:'segmentThickness',
 					value:16
@@ -70,12 +67,6 @@ Uize.module ({
 				},
 
 				/*** derived properties for HTML bindings ***/
-					widthPx:{
-						derived:'width: width + "px"'
-					},
-					heightPx:{
-						derived:'height: height + "px"'
-					},
 					segmentThicknessPx:{
 						derived:'segmentThickness: segmentThickness + "px"'
 					},
@@ -88,8 +79,6 @@ Uize.module ({
 			},
 
 			htmlBindings:{
-				widthPx:':style.width',
-				heightPx:':style.height',
 				segmentColorAsRgbHex:[
 					'colonTop:style.background',
 					'colonBottom:style.background'
