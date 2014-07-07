@@ -51,6 +51,11 @@ Uize.module ({
 				_digitWidgetProperties = {widgetClass:Uize.Widgets.SegmentDisplay.Seven.Widget}
 		;
 
+		/*** Utility Functions ***/
+			function _ellForOne (_value) {
+				return _value == '1' ? 'l' : _value;
+			}
+
 		return _superclass.subclass ({
 			mixins:Uize.Widget.mChildBindings,
 
@@ -80,10 +85,10 @@ Uize.module ({
 						return Uize.Date.Formatter.format (value,hoursMode == '12' ? '{hh12}{mm}{ss}' : '{hh}{mm}{ss}');
 					}
 				},
-				hoursTensValue:{derived:'hhMmSs: hhMmSs.charAt (0) == "0" ? "" : hhMmSs.charAt (0)'},
+				hoursTensValue:{derived:'hhMmSs: hhMmSs.charAt (0)'},
 				hoursOnesValue:{derived:'hhMmSs: hhMmSs.charAt (1)'},
-				minutesTensValue:{derived:'hhMmSs: hhMmSs.charAt (2)'},
-				minutesOnesValue:{derived:'hhMmSs: hhMmSs.charAt (3)'}
+				minutesTensValue:{derived:function (hhMmSs) {return _ellForOne (hhMmSs.charAt (2))}},
+				minutesOnesValue:{derived:function (hhMmSs) {return _ellForOne (hhMmSs.charAt (3))}}
 			},
 
 			children:{
