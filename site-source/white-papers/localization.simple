@@ -596,16 +596,49 @@ Resource Files
 
 				- gender
 
-		### Resource String Metadata
-			.
+		Resource String Metadata
+			The resource file format should allow optional metadata to be supplied for every resource string.
 
-			the resource file format should allow optional metadata to be supplied for every resource string
+			A generic system for specifying resource string metadata can serve a number of different purposes and may be used to capture the following types of information...
 
-			- metadata might...
+			- `resource string translatability`
+			- `resource string type`
+			- `resource string context`
+			- `resource string constraints`
+			- `resource string translation instructions`
+
+			Resource String Translatability
+				Resource files can be used to contain resource strings that are not to be translated, such as URLs, e-mail addresses, phone numbers, color values, etc.
+
+				In cases where a resource string is not translatable, it is helpful to the translation process to be able to know this for certain. The metadata facility can be leveraged to flag certain strings as being `non-translatable strings` by defining a metadata property for translatability.
+
+			Resource String Type
+				.
+
+			Resource String Context
+				.
+
+			Resource String Constraints
+				.
+
+			Resource String Translation Instructions
+				.
+
+			### - metadata might...
 				- define constraints on the length for translations
 				- provide context information about the string's usage that can be used to guide the translators
 				- provide additional instructions to translators
 				- indicate if the string is a non-translatable string (such as a URL, e-mail address, color value, etc.)
+
+			Approaches to Storing Resource String Metadata
+				.
+
+				Several possible approaches...
+
+				- use a resource file format that supports metadata / notes for individual resource strings
+				- store the metadata for resource strings in separate, peer / companion files
+				- store the metadata for resource strings in separate, peer resource strings, using a key naming convention to establish the association between the metadata string and the true resource string.
+				- store the metadata as embedded information inside the resource string values, using some form of markup format that can allow the metadata to be opaque to translators and ignored by their tools, or extracted and removed from the values during the process for exporting translation job files.
 
 		### Resource String Grouping
 			.
@@ -614,14 +647,25 @@ Resource Files
 			- it should be possible to provide metadata for a group, which will then apply to all strings within the group
 			- in a certain sense, the resource file can be considered a grouping of resource strings, so it should be possible to provide metadata at the file level as well
 
-		### Non-translatable Strings
-			.
+		Non-translatable Strings
+			Non-translatable strings are resource strings that should not be translated.
 
-			- color values
-			- CSS style properties
+			Examples of non-translatable strings include...
+
 			- URLs
 			- e-mail addresses
 			- phone numbers
+			- color values
+			- CSS style properties
+			- dimensions
+			- etc.
+
+			Even though these strings may not be translatable, it is nevertheless practically useful to store them in resource files along with translatable
+
+
+			If automation scripts that prepare jobs for translation can detect resource strings that are non-translatable, then these strings can be excluded from the translation jobs that are sent to translators. In this way, one can eliminate the cost associated with the translators evaluating these strings for translation, since there may be a baseline processing fee even if a determination is made to leave the strings untranslated.
+
+			An additional and even more compelling benefit to knowing which resource strings are not to be translated is that these strings can be left as is by an automated `pseudo-localization` process, since inappropriately pseudo-localizing some non-translatable strings such as URLs may actually break parts of the functionality in a pseudo-localized version of an application, thereby hampering the efforts of QA testers.
 
 		### Declension Variants
 			### Plural Forms
