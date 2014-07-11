@@ -162,7 +162,7 @@ General Requirements for a Localization System
 		Concurrency on the Server
 			It should be possible to server an application to users in multiple different locales from the same server.
 
-			To this end, it would not be a viable solution to build the the set of localized assets for each of the supported locales while keeping the URIs the same - the URI for each localized asset would have to be different per locale, which also means that the client would have to request the appropriate localized version of an asset for the client's locale. Not encoding the locale into the path of the URI for a localized asset would leave only the option of serving the localized assets for different locales from different domains and, while there may in many cases be domains dedicated to certain of the major locales, it cannot be assumed to always be the case, Furthermore, it may be desirable to serve all the static assets from a central CDN with a common domain, even while the application may be served from locale specific domains.
+			To this end, it would not be a viable solution to build the set of localized assets for each of the supported locales while keeping the URIs the same - the URI for each localized asset would have to be different per locale, which also means that the client would have to request the appropriate localized version of an asset for the client's locale. Not encoding the locale into the path of the URI for a localized asset would leave only the option of serving the localized assets for different locales from different domains and, while there may in many cases be domains dedicated to certain of the major locales, it cannot be assumed to always be the case, Furthermore, it may be desirable to serve all the static assets from a central CDN with a common domain, even while the application may be served from locale specific domains.
 
 	Desired Characteristics of Localization System
 		Live Locale Switching
@@ -610,13 +610,17 @@ Resource Files
 			Resource String Translatability
 				Resource files can be used to contain resource strings that are not to be translated, such as URLs, e-mail addresses, phone numbers, color values, etc.
 
-				In cases where a resource string is not translatable, it is helpful to the translation process to be able to know this for certain. The metadata facility can be leveraged to flag certain strings as being `non-translatable strings` by defining a metadata property for translatability.
+				In cases where a resource string is not translatable, it is helpful to the translation process to be able to know this with certainty. The metadata facility can be leveraged to flag certain strings as being `non-translatable strings` by defining a metadata property for specifying translatability.
 
 			Resource String Type
-				.
+				Beyond merely indicating `resource string translatability`. the metadata facility can be used for supplying additional type information for resource strings that are serializations of complex object types.
+
+				With a mechanism for specifying resource string types, resource strings can be serializations of complex object types, such as color values. Type information that is stored as part of the metadata for strings can then be used by the resource strings runtime loader to instantiate the appropriate parser / de-serializer classes to turn the string serializations of the objects back into the objects.
 
 			Resource String Context
-				.
+				The metadata facility can be used to provide information on the context in which resource strings are used, which can then be used to assist the translators in choosing the best suited translation for the context.
+
+				Context information might describe that the resource string is to be used in a specific type of UI component, such as a calendar widget, or a specific screen in a mobile application, or a specific page or section in a Web application. Context information may also provide a URL for previewing the context in which the resource string would be used.
 
 			Resource String Constraints
 				.
