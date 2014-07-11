@@ -379,7 +379,8 @@ Uize.module ({
 										_string.value = Uize.Loc.Pseudo.pseudoLocalize (_string.value,_pseudoLocalizeOptions)
 									;
 									return _string;
-								}
+								},
+								{skeleton:true}
 							)
 						;
 					}
@@ -654,7 +655,9 @@ Uize.module ({
 						_primaryLanguageResourcesLast = _readLanguageResourcesFile (m,_primaryLanguage) || {},
 						_primaryLanguageResourcesDiff = Uize.Data.Diff.diff (
 							_primaryLanguageResourcesLast,
-							_primaryLanguageResources
+							_primaryLanguageResources,
+							null,
+							{skeleton:true}
 						),
 						_resoucesByLanguage = Uize.pairUp (_primaryLanguage,_primaryLanguageResources),
 						_totalLanguages = _project.languages.length,
@@ -696,7 +699,8 @@ Uize.module ({
 																: _gatheredProperty ? _gatheredProperty.value : ''
 														}
 												);
-											}
+											},
+											{skeleton:true}
 										);
 										m.stepCompleted ('Gathered resources from file: ' + _resourceFilePath);
 									}

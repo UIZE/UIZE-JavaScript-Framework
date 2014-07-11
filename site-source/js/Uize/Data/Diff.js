@@ -492,6 +492,16 @@
 
 					Obtain the Max Values of the Leaf Node Properties of Two Objects
 						.
+
+				### Removing one Object from Another
+					.
+
+			### Diffing Options
+				### Getting Just the Skeleton of an Object
+					.
+
+				### Getting the Skeleton of the Union of Two Objects
+					.
 */
 
 Uize.module ({
@@ -525,11 +535,13 @@ Uize.module ({
 			}
 
 		return Uize.package ({
-			diff:function (_object1,_object2,_propertyComparer) {
+			diff:function (_object1,_object2,_propertyComparer,_options) {
 				_propertyComparer || (_propertyComparer = _defaultPropertyComparer);
+				_options || (_options = _sacredEmpyObject);
 				var
 					_object1PropertyProfile = {},
-					_object2PropertyProfile = {}
+					_object2PropertyProfile = {},
+					_skeleton = _options.skeleton
 				;
 				function _compareNode (_object1,_object2) {
 					function _compareProperty (_property) {
@@ -543,9 +555,9 @@ Uize.module ({
 								_object1PropertyValue || _sacredEmpyObject,
 								_object2PropertyValue || _sacredEmpyObject
 							);
-							_propertyComparisonResult = _isEmpty (_subNodeComparison)
-								? _undefined
-								: {value:_subNodeComparison}
+							_propertyComparisonResult = !_isEmpty (_subNodeComparison)
+								? {value:_subNodeComparison}
+								: _skeleton ? {value:{}} : _undefined
 							;
 						} else {
 							var
@@ -562,9 +574,9 @@ Uize.module ({
 									_object1PropertyValue || _sacredEmpyArray,
 									_object2PropertyValue || _sacredEmpyArray
 								);
-								_propertyComparisonResult = _isEmpty (_subNodeComparison)
-									? _undefined
-									: {value:_subNodeComparison}
+								_propertyComparisonResult = !_isEmpty (_subNodeComparison)
+									? {value:_subNodeComparison}
+									: _skeleton ? {value:[]} : _undefined
 								;
 							} else {
 								if (_propertyInObject1) {
@@ -702,6 +714,92 @@ Uize.module ({
 									qux:'qux'
 								}
 								...............
+
+							Diff Two Objects, Specifying Additional Diffing Options
+								In cases where the standard behavior of this method is not suitable, its behavior can be customized by specifying values for options through the optional =optionsOBJ= fourth argument.
+
+								SYNTAX
+								............................................................................................
+								diffResultOBJ = Uize.Data.Diff.diff (object1OBJ,object2OBJ,propertyComparerFUNC,optionsOBJ);
+								............................................................................................
+
+								Because the options are specified through the fourth argument, this means that the =propertyComparerFUNC= third argument must necessarily be specified in this usage. Therefore, if you wish to use the `default property comparer` with this usage you should specify the value =null= or =undefined= for the =propertyComparerFUNC= argument.
+
+								optionsOBJ
+									The value specified for the =optionsOBJ= argument should be an object of the form...
+
+									OPTIONS
+									......................................................................................
+									{
+										skeleton:skeletonBOOL  // whether or not a skeleton should be returned at a minimum
+									}
+									......................................................................................
+
+									skeleton
+										A boolean, specifying whether or not a structural skeleton will be returned at a minimum when two objects are compared that either have empty nodes or where the `property comparer` function returns =undefined= for all compared properties.
+
+										- When the value =true= is specified for the =skeleton= option, then the returned comparison result will at a minimum be a skeleton object that is the union of the structures of the two objects being compared.
+										- When the value =false= is specified for the =skeleton= option, then the returned comparison result will not contain empty nodes in which there are no property comparison values.
+										- When no value is specified for the =skeleton= option, or if the =optionsOBJ= argument is omitted, then the value for the =skeleton= option is defaulted to =false=.
+
+										EXAMPLE
+										..............................................
+										Uize.Data.Diff.diff (
+											{
+												address:{
+													mailing:{
+														line1:'123 Strange Blvd',
+														line2:'Apt 6',
+														city:'Strangeville',
+														state:'CA',
+														zip:'12345'
+													}
+												},
+												contact:{
+													phoneNumbers:{
+														home:'(555) 123-4567',
+														cell:'(555) 555-5555',
+														work:'(555) 999-9999'
+													}
+												}
+											},
+											{
+												address:{
+													shipping:{
+														line1:'456 Work Plaze',
+														line2:'Suite 400',
+														city:'Workville',
+														state:'CA',
+														zip:'67890'
+													}
+												},
+												contact:{
+													other:{
+														email:'misterstrange@strange.net',
+														IRC:'mstrange'
+													}
+												}
+											},
+											function () {return undefined},
+											{skeleton:true}
+										);
+										..............................................
+
+										In the above example, two objects are being compared that have similar but slightly differing structures. The custom `property comparer` function that is being specified always returns the value =undefined=. Normally, this would mean that the comparison result object would be empty. But, because the value =true= is being specified for the =skeleton= option, the method returns a skeleton object that is the union of the structures of the two objects being compared, as shown below...
+
+										RESULT
+										......................
+										{
+											address:{
+												mailing:{},
+												shipping:{}
+											},
+											contact:{
+												phoneNumbers:{},
+												other:{}
+											}
+										}
+										......................
 				*/
 			}
 		});

@@ -96,7 +96,7 @@ Uize.module ({
 								],
 								{foo:'unchanged'}
 							],
-							['An arbitrarily complex data structure is diff\'ed correctly',
+							['An arbitrarily complex data structure can be diff\'ed',
 								[
 									{
 										prop1:'foo',
@@ -167,6 +167,85 @@ Uize.module ({
 										{array:['foo','bar','baz','qux']}
 									],
 									{array:['added','added','added','added']}
+								],
+
+							/*** test the skeleton option ***/
+								['When the value false is specified for the optional skeleton option, then the returned comparison result will not contain empty nodes in which there are no property comparison values',
+									[
+										{
+											foo:{
+												bar:{},
+												baz:{
+													qux:[]
+												}
+											}
+										},
+										{
+											foo:{
+												BAR:{
+													BAZ:[]
+												}
+											},
+											QUX:{}
+										},
+										{skeleton:false}
+									],
+									{}
+								],
+								['When the value true is specified for the optional skeleton option, then the returned comparison result will at a minimum be a skeleton object that is the union of the structures of the two objects being compared',
+									[
+										{
+											foo:{
+												bar:{},
+												baz:{
+													qux:[]
+												}
+											}
+										},
+										{
+											foo:{
+												BAR:{
+													BAZ:[]
+												}
+											},
+											QUX:{}
+										},
+										null,
+										{skeleton:true}
+									],
+									{
+										foo:{
+											bar:{},
+											baz:{
+												qux:[]
+											},
+											BAR:{
+												BAZ:[]
+											}
+										},
+										QUX:{}
+									}
+								],
+								['When no value is specified for the optional skeleton option, it is defaulted to false and the skeleton behavior is disabled',
+									[
+										{
+											foo:{
+												bar:{},
+												baz:{
+													qux:[]
+												}
+											}
+										},
+										{
+											foo:{
+												BAR:{
+													BAZ:[]
+												}
+											},
+											QUX:{}
+										}
+									],
+									{}
 								],
 
 						/*** test a custom added-or-modified property comparer ***/
