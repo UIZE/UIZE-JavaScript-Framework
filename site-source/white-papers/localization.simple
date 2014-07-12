@@ -620,29 +620,38 @@ Resource Files
 			Resource String Context
 				The metadata facility can be used to provide information on the context in which resource strings are used, which can then be used to assist the translators in choosing the best suited translation for the context.
 
-				Context information might describe that the resource string is to be used in a specific type of UI component, such as a calendar widget, or a specific screen in a mobile application, or a specific page or section in a Web application. Context information may also provide a URL for previewing the context in which the resource string would be used.
+				Context information might describe that a resource string is to be used in a specific type of UI component, such as a calendar widget, or in a specific screen in a mobile application, or in a specific page or section in a Web application. Context information may also provide a URL for previewing the context in which the resource string would be used.
 
 			Resource String Constraints
-				.
+				The metadata facility can be used to provide information on any constraints that should be considered when translating a resource string to another language.
+
+				A common type of constraint that can be noted in metadata is a limit on the character length for a translation. This can be expressed in a number of possible ways...
+
+				- the translation is not to exceed a specified maximum number of characters in length
+				- the translation is not to exceed the length of the English source string (in case the UI layout can fit only as many characters as are in the existing English source string)
+				- the translation should be no more than a specified percentage longer than the English source string (eg. maximum 20% longer than original)
 
 			Resource String Translation Instructions
-				.
+				The metadata facility can be used to provide general instructions to inform how a resource string should be translated.
 
-			### - metadata might...
-				- define constraints on the length for translations
-				- provide context information about the string's usage that can be used to guide the translators
-				- provide additional instructions to translators
-				- indicate if the string is a non-translatable string (such as a URL, e-mail address, color value, etc.)
+				As an example, it might be desirable in the UI layout for an English source string that is a single word to be translated as a single word. This hint can be included in translation instructions inside the meta data for the resource string. With this information, a translator can then choose a single word translation in a situation where there is an acceptable single word translation for the resource string, even if a multi-word translation would be slightly more natural for the user.
 
-			Approaches to Storing Resource String Metadata
+			### Approaches to Storing Resource String Metadata
 				.
 
 				Several possible approaches...
 
-				- use a resource file format that supports metadata / notes for individual resource strings
-				- store the metadata for resource strings in separate, peer / companion files
-				- store the metadata for resource strings in separate, peer resource strings, using a key naming convention to establish the association between the metadata string and the true resource string.
-				- store the metadata as embedded information inside the resource string values, using some form of markup format that can allow the metadata to be opaque to translators and ignored by their tools, or extracted and removed from the values during the process for exporting translation job files.
+				Use a Resource File Format That Supports Metadata
+					- use a resource file format that supports metadata / notes for individual resource strings
+
+				Use Separate Metadata Files
+					- store the metadata for resource strings in separate, peer / companion files
+
+				Use Special Metadata Resource Strings
+					- store the metadata for resource strings in separate, peer resource strings, using a key naming convention to establish the association between the metadata string and the true resource string.
+
+				Embed Metadata in Resource String Values
+					- store the metadata as embedded information inside the resource string values, using some form of markup format that can allow the metadata to be opaque to translators and ignored by their tools, or extracted and removed from the values during the process for exporting translation job files.
 
 		### Resource String Grouping
 			.
