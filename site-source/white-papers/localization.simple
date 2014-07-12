@@ -637,21 +637,49 @@ Resource Files
 				As an example, it might be desirable in the UI layout for an English source string that is a single word to be translated as a single word. This hint can be included in translation instructions inside the meta data for the resource string. With this information, a translator can then choose a single word translation in a situation where there is an acceptable single word translation for the resource string, even if a multi-word translation would be slightly more natural for the user.
 
 			### Approaches to Storing Resource String Metadata
-				.
+				There are several possible approaches that could be adopted to allow metadata to be stored for resource strings.
 
-				Several possible approaches...
+				Which approach is best in a given situation will depend on the constraints of the project - specifically, any existing practices relating to storing resource strings and processes (such as automation) that may already be established around certain technology choices like resource file formats.
 
 				Use a Resource File Format That Supports Metadata
-					- use a resource file format that supports metadata / notes for individual resource strings
+					- use a resource file format that supports metadata / notes for individual resource strings, such as XLIFF
+					- if one didn't wish to disrupt the rest of the project's codebase, it may still be possible to migrate to using XLIFF while maintaining a build process to generate resource files in the pre-existing format using the XLIFF files as source, in order to not have to modify other code that is expecting the old resource file format
+					- metadata strings would not be included in the resource files generated from the XLIFF source files
 
 				Use Separate Metadata Files
 					- store the metadata for resource strings in separate, peer / companion files
+					- downsides to this approach...
+						- complicates refactoring - changes must be made in two places for strings that contain metadata if the string is impacted by refactoring
+						- problems can arise if there is divergence between the resource file and the metadata file
+						- cruft can remain (like defunct metadata for removed strings), unless there are checks
+					- upsides to this approach...
+						- completely different file format can be used
+						- has no impact on pre-existing code
+						- no need to filter out metadata for build of code for runtime
+						- metadata can be structured objects
 
 				Use Special Metadata Resource Strings
 					- store the metadata for resource strings in separate, peer resource strings, using a key naming convention to establish the association between the metadata string and the true resource string.
+					- downsides to this approach...
+					- upsides to this approach...
+						- can be integrated quite easily into many different resource file formats, including those that only support flat lists of key-value pairs
+						- keeps the metadata close to the resource strings
+						- resource string metadata that is not needed
+						- metadata can be structured objects if the resource file format supports a hierarchical structure (such as JSON, YAML)
+					- downsides to this approach...
+						- requires additional processing to remove resource string metadata that is not needed at runtime when building app for production
+						- structured metadata would need to be expressed through serialized JSON (or some other form) if the resource file format doesn't support a hierarchical structure (eg. *.strings* or *.properties* files)
 
 				Embed Metadata in Resource String Values
 					- store the metadata as embedded information inside the resource string values, using some form of markup format that can allow the metadata to be opaque to translators and ignored by their tools, or extracted and removed from the values during the process for exporting translation job files.
+					- upsides to this approach
+						- no new convention is needed for resource string key naming
+						- metadata is truly encapsulated in the strings and goes wherever the strings go
+						- readability of metadata is diminished, as it may appear at the end of the string values and would need to be serialized in such a way that it can be safely embedded in the value
+					- downsides to this approach
+						- all resource strings would need to be either pre-compiled or processed through a method at runtime in case they contain metadata, so that the metadata does not appear in the UI
+						- requires additional processing to remove resource string metadata that is not needed at runtime when building app for production
+						- structured metadata would need to be expressed through serialized JSON, or some other serialization format for structured data
 
 		### Resource String Grouping
 			.
