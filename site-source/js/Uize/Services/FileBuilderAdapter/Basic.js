@@ -40,6 +40,7 @@ Uize.module ({
 		'Uize.Build.FileBuilders.CompiledCssModules',
 		'Uize.Build.FileBuilders.CompiledLocModules',
 		'Uize.Build.FileBuilders.CompiledJstModules',
+		'Uize.Build.FileBuilders.CompiledSimpleDataModules',
 		'Uize.Build.FileBuilders.CompiledWidgetHtmltModules',
 		'Uize.Build.FileBuilders.TempGeneratedNamespaceModules'
 	],
@@ -64,6 +65,7 @@ Uize.module ({
 						Uize.Build.FileBuilders.CompiledCssModules,
 						Uize.Build.FileBuilders.CompiledLocModules,
 						Uize.Build.FileBuilders.CompiledJstModules,
+						Uize.Build.FileBuilders.CompiledSimpleDataModules,
 						Uize.Build.FileBuilders.CompiledWidgetHtmltModules,
 						Uize.Build.FileBuilders.TempGeneratedNamespaceModules
 					);
