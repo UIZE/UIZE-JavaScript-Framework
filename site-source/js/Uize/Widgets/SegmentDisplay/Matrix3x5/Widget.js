@@ -44,6 +44,69 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
+		var
+			/*** General Variables ***/
+				_rows = 5,
+				_cols = 3,
+				_segmentLetters = Uize.map (_rows * _cols,'String.fromCharCode (65 + key)'),
+				_segmentStateProperties = {},
+				_segmentHtmlBindings = {}
+		;
+
+		/*** define state properties and HTML bindings for segment row positions and dimensions ***/
+			Uize.forEach (
+				_rows,
+				function (_value,_rowNo) {
+					var _rowCol0LetterNo = _rowNo * 3;
+
+					_segmentStateProperties ['row' + _rowNo + 'Top'] = {
+						derived:'rowPositions: rowPositions [' + _rowNo + '].pos + "px"'
+					};
+					_segmentStateProperties ['row' + _rowNo + 'Height'] = {
+						derived:'rowPositions: rowPositions [' + _rowNo + '].dim + "px"'
+					};
+
+					_segmentHtmlBindings ['row' + _rowNo + 'Top'] = Uize.map (
+						_cols,
+						function (_value,_colNo) {
+							return 'segment' + _segmentLetters [_rowCol0LetterNo + _colNo] + ':style.top';
+						}
+					);
+					_segmentHtmlBindings ['row' + _rowNo + 'Height'] = Uize.map (
+						_cols,
+						function (_value,_colNo) {
+							return 'segment' + _segmentLetters [_rowCol0LetterNo + _colNo] + ':style.height';
+						}
+					);
+				}
+			);
+
+		/*** define derived state properties and HTML bindings for segment column positions and dimensions ***/
+			Uize.forEach (
+				_cols,
+				function (_value,_colNo) {
+					_segmentStateProperties ['col' + _colNo + 'Left'] = {
+						derived:'colPositions: colPositions [' + _colNo + '].pos + "px"'
+					};
+					_segmentStateProperties ['col' + _colNo + 'Width'] = {
+						derived:'colPositions: colPositions [' + _colNo + '].dim + "px"'
+					};
+
+					_segmentHtmlBindings ['col' + _colNo + 'Left'] = Uize.map (
+						_rows,
+						function (_value,_rowNo) {
+							return 'segment' + _segmentLetters [_colNo + _rowNo * _cols] + ':style.left';
+						}
+					);
+					_segmentHtmlBindings ['col' + _colNo + 'Width'] = Uize.map (
+						_rows,
+						function (_value,_rowNo) {
+							return 'segment' + _segmentLetters [_colNo + _rowNo * _cols] + ':style.width';
+						}
+					);
+				}
+			);
+
 		/*** Utility Functions ***/
 			function _calculateSegmentsPosAndDim (_dim,_segmentGap,_totalSegments) {
 				var
@@ -104,135 +167,20 @@ Uize.module ({
 					segmentColorAsRgbHex:{
 						derived:'segmentColor: "#" + segmentColor'
 					},
-
 					colPositions:{
-						derived:function (width,segmentGap) {return _calculateSegmentsPosAndDim (width,segmentGap,3)}
+						derived:function (width,segmentGap) {return _calculateSegmentsPosAndDim (width,segmentGap,_cols)}
 					},
-					col0Left:{derived:'colPositions: colPositions [0].pos + "px"'},
-					col0Width:{derived:'colPositions: colPositions [0].dim + "px"'},
-					col1Left:{derived:'colPositions: colPositions [1].pos + "px"'},
-					col1Width:{derived:'colPositions: colPositions [1].dim + "px"'},
-					col2Left:{derived:'colPositions: colPositions [2].pos + "px"'},
-					col2Width:{derived:'colPositions: colPositions [2].dim + "px"'},
-
 					rowPositions:{
-						derived:function (height,segmentGap) {return _calculateSegmentsPosAndDim (height,segmentGap,5)}
-					},
-					row0Top:{derived:'rowPositions: rowPositions [0].pos + "px"'},
-					row0Height:{derived:'rowPositions: rowPositions [0].dim + "px"'},
-					row1Top:{derived:'rowPositions: rowPositions [1].pos + "px"'},
-					row1Height:{derived:'rowPositions: rowPositions [1].dim + "px"'},
-					row2Top:{derived:'rowPositions: rowPositions [2].pos + "px"'},
-					row2Height:{derived:'rowPositions: rowPositions [2].dim + "px"'},
-					row3Top:{derived:'rowPositions: rowPositions [3].pos + "px"'},
-					row3Height:{derived:'rowPositions: rowPositions [3].dim + "px"'},
-					row4Top:{derived:'rowPositions: rowPositions [4].pos + "px"'},
-					row4Height:{derived:'rowPositions: rowPositions [4].dim + "px"'}
+						derived:function (height,segmentGap) {return _calculateSegmentsPosAndDim (height,segmentGap,_rows)}
+					}
 			},
 
 			htmlBindings:{
-				segmentColorAsRgbHex:Uize.map ('ABCDEFGHIJKLMNO'.split (''),'"segment" + value + ":style.background"'),
-
-				row0Top:[
-					'segmentA:style.top',
-					'segmentB:style.top',
-					'segmentC:style.top'
-				],
-				row0Height:[
-					'segmentA:style.height',
-					'segmentB:style.height',
-					'segmentC:style.height'
-				],
-
-				row1Top:[
-					'segmentD:style.top',
-					'segmentE:style.top',
-					'segmentF:style.top'
-				],
-				row1Height:[
-					'segmentD:style.height',
-					'segmentE:style.height',
-					'segmentF:style.height'
-				],
-
-				row2Top:[
-					'segmentG:style.top',
-					'segmentH:style.top',
-					'segmentI:style.top'
-				],
-				row2Height:[
-					'segmentG:style.height',
-					'segmentH:style.height',
-					'segmentI:style.height'
-				],
-
-				row3Top:[
-					'segmentJ:style.top',
-					'segmentK:style.top',
-					'segmentL:style.top'
-				],
-				row3Height:[
-					'segmentJ:style.height',
-					'segmentK:style.height',
-					'segmentL:style.height'
-				],
-
-				row4Top:[
-					'segmentM:style.top',
-					'segmentN:style.top',
-					'segmentO:style.top'
-				],
-				row4Height:[
-					'segmentM:style.height',
-					'segmentN:style.height',
-					'segmentO:style.height'
-				],
-
-				col0Left:[
-					'segmentA:style.left',
-					'segmentD:style.left',
-					'segmentG:style.left',
-					'segmentJ:style.left',
-					'segmentM:style.left'
-				],
-				col0Width:[
-					'segmentA:style.width',
-					'segmentD:style.width',
-					'segmentG:style.width',
-					'segmentJ:style.width',
-					'segmentM:style.width'
-				],
-
-				col1Left:[
-					'segmentB:style.left',
-					'segmentE:style.left',
-					'segmentH:style.left',
-					'segmentK:style.left',
-					'segmentN:style.left'
-				],
-				col1Width:[
-					'segmentB:style.width',
-					'segmentE:style.width',
-					'segmentH:style.width',
-					'segmentK:style.width',
-					'segmentN:style.width'
-				],
-
-				col2Left:[
-					'segmentC:style.left',
-					'segmentF:style.left',
-					'segmentI:style.left',
-					'segmentL:style.left',
-					'segmentO:style.left'
-				],
-				col2Width:[
-					'segmentC:style.width',
-					'segmentF:style.width',
-					'segmentI:style.width',
-					'segmentL:style.width',
-					'segmentO:style.width'
-				]
+				segmentColorAsRgbHex:Uize.map (_segmentLetters,'"segment" + value + ":style.background"'),
 			}
+		}).declare ({
+			stateProperties:_segmentStateProperties,
+			htmlBindings:_segmentHtmlBindings
 		});
 	}
 });
