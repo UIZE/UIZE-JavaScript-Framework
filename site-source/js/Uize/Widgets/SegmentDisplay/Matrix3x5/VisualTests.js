@@ -41,7 +41,7 @@ Uize.module ({
 				});
 				this.addStateCombinationTestCases ({
 					value:'3',
-					segmentGap:[0,1,3,8]
+					segmentGap:[0,1,3,6]
 				});
 				this.addStateCombinationTestCases ({
 					value:'3',
