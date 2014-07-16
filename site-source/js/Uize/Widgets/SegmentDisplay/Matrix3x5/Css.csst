@@ -1,0 +1,15 @@
+.`` {
+	position: relative;
+	display: inline-block;
+}
+
+.`segment` {
+	position: absolute;
+}
+
+/*** segment states ***/
+	.`segmentOff` {
+		opacity: .04;
+		filter: alpha(opacity=4);
+	}
+

@@ -27,19 +27,19 @@
 			(for sixteen segment display: http://www.optotek.com/ledimage/azonix.gif)
 
 		Segments Map
-			The segments of the seven segment displayed are arranged as shown in the diagram below...
+			The segments of the seven segment display are arranged as shown in the diagram below...
 
 			..............................
 			  ____A/6____
 			 |           |
-			 |           |      CODE / bit
-			F/1         B/5       A  /  6
-			 |           |        B  /  5
-			 |____G/0____|        C  /  4
-			 |           |        D  /  3
-			 |           |        E  /  2
-			E/2         C/4       F  /  1
-			 |           |        G  /  0
+			 |           |      CODE | bit
+			F/1         B/5       A  |  6
+			 |           |        B  |  5
+			 |____G/0____|        C  |  4
+			 |           |        D  |  3
+			 |           |        E  |  2
+			E/2         C/4       F  |  1
+			 |           |        G  |  0
 			 |____D/3____|
 			..............................
 */
