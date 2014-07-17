@@ -34,14 +34,12 @@
 
 Uize.module ({
 	name:'Uize.Widgets.DigitalClock.Hm.Widget',
-	superclass:'Uize.Widget.V2',
+	superclass:'Uize.Widgets.DigitalClock.Base.Widget',
 	required:[
-		'Uize.Widget.mChildBindings',
 		'Uize.Widgets.DigitalClock.Hm.Html',
 		'Uize.Widgets.DigitalClock.Hm.Css',
 		'Uize.Widgets.SegmentDisplay.Seven.Widget',
-		'Uize.Widgets.SegmentDisplay.Separator.Widget',
-		'Uize.Date.Formatter'
+		'Uize.Widgets.SegmentDisplay.Separator.Widget'
 	],
 	builder:function (_superclass) {
 		'use strict';
@@ -51,19 +49,11 @@ Uize.module ({
 				_digitWidgetProperties = {widgetClass:Uize.Widgets.SegmentDisplay.Seven.Widget}
 		;
 
-		/*** Utility Functions ***/
-			function _ellForOne (_value) {
-				return _value == '1' ? 'l' : _value;
-			}
-
 		return _superclass.subclass ({
-			mixins:Uize.Widget.mChildBindings,
-
-			omegastructor:function () {
-				var m = this;
-				function _updateTime () {m.set ({_value:Uize.now ()})}
-				_updateTime ();
-				m._updateInterval = setInterval (_updateTime,1000);
+			instanceMethods:{
+				remapDigitValue:function (_digit,_value) {
+					return _digit > 1 && _value == '1' ? '1' : _value;
+				}
 			},
 
 			staticProperties:{
@@ -74,36 +64,12 @@ Uize.module ({
 				html:Uize.Widgets.DigitalClock.Hm.Html
 			},
 
-			stateProperties:{
-				_value:'value',
-				_hoursMode:{
-					name:'hoursMode',
-					value:'12'
-				},
-				hhMmSs:{
-					derived:function (value,hoursMode) {
-						return Uize.Date.Formatter.format (value,hoursMode == '12' ? '{hh12}{mm}{ss}' : '{hh}{mm}{ss}');
-					}
-				},
-				hoursTensValue:{derived:'hhMmSs: hhMmSs.charAt (0)'},
-				hoursOnesValue:{derived:'hhMmSs: hhMmSs.charAt (1)'},
-				minutesTensValue:{derived:function (hhMmSs) {return _ellForOne (hhMmSs.charAt (2))}},
-				minutesOnesValue:{derived:function (hhMmSs) {return _ellForOne (hhMmSs.charAt (3))}}
-			},
-
 			children:{
 				hoursTens:_digitWidgetProperties,
 				hoursOnes:_digitWidgetProperties,
 				minutesTens:_digitWidgetProperties,
 				minutesOnes:_digitWidgetProperties,
 				hmSeparator:{widgetClass:Uize.Widgets.SegmentDisplay.Separator.Widget}
-			},
-
-			childBindings:{
-				hoursTensValue:'->hoursTens.value',
-				hoursOnesValue:'->hoursOnes.value',
-				minutesTensValue:'->minutesTens.value',
-				minutesOnesValue:'->minutesOnes.value'
 			}
 		});
 	}
