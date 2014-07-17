@@ -763,11 +763,14 @@ Uize.module ({
 								_fileSystem.writeFile ({
 									path:_translationJobFilePath,
 									contents:_translationJobFileFormat == 'xliff'
-										? Uize.Loc.Xliff.to ({
-											sourceLanguage:_primaryLanguage,
-											targetLanguage:_language,
-											strings:_translationJobStrings
-										})
+										? Uize.Loc.Xliff.to (
+											{
+												sourceLanguage:_primaryLanguage,
+												targetLanguage:_language,
+												strings:_translationJobStrings
+											},
+											{seedTarget:true}
+										)
 										: Uize.Data.Csv.to (
 											Uize.Data.NameValueRecords.fromHash (
 												Uize.Data.Flatten.flatten (

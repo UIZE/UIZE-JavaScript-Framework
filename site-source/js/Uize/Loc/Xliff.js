@@ -41,19 +41,25 @@ Uize.module ({
 		;
 
 		return Uize.package ({
-			to:function (_toEncode) {
-				var _xliffLines = [
-					'<?xml version="1.0" ?>',
-					'<xliff version="1.0">'
-				];
+			to:function (_toEncode,_options) {
+				_options || (_options = {});
+				var
+					_sourceLanguage = _toEncode.sourceLanguage,
+					_targetLanguage = _toEncode.targetLanguage,
+					_seedTarget = _options.seedTarget,
+					_xliffLines = [
+						'<?xml version="1.0" ?>',
+						'<xliff version="1.0">'
+					]
+				;
 				Uize.forEach (
 					_toEncode.strings,
 					function (_resourceFileStrings,_resourceFileSubPath) {
 						_xliffLines.push (
 							'\t<file ' +
 								'original="' + _htmlEncode (_resourceFileSubPath) + '" ' +
-								'source-language="' + _toEncode.sourceLanguage + '" ' +
-								'target-language="' + _toEncode.targetLanguage + '" ' +
+								'source-language="' + _sourceLanguage + '" ' +
+								'target-language="' + _targetLanguage + '" ' +
 								'datatype="plaintext"' +
 							'>'
 						);
@@ -63,10 +69,11 @@ Uize.module ({
 								function (_path) {return Uize.Json.to (_path,'mini')}
 							),
 							function (_resourceStringText,_id) {
+								var _source = _htmlEncode (_resourceStringText);
 								_xliffLines.push (
 									'\t\t<trans-unit id="' + _htmlEncode (_id) + '">',
-									'\t\t\t<source>' + _htmlEncode (_resourceStringText) + '</source>',
-									'\t\t\t<target></target>',
+									'\t\t\t<source>' + _source + '</source>',
+									'\t\t\t<target>' + (_seedTarget ? _source : '') + '</target>',
 									'\t\t</trans-unit>'
 								);
 							}
