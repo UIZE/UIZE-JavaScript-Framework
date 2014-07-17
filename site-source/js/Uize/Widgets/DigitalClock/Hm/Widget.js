@@ -52,7 +52,7 @@ Uize.module ({
 		return _superclass.subclass ({
 			instanceMethods:{
 				remapDigitValue:function (_digit,_value) {
-					return _digit > 1 && _value == '1' ? '1' : _value;
+					return _digit > 1 && _value == '1' ? 'l' : _value;
 				}
 			},
 
