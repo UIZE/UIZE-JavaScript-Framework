@@ -1,7 +1,7 @@
 /*______________
 |       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
 |     /      /  |   ---------------------------------------------------
-|    /    O /   |    MODULE : Uize.Widgets.SegmentDisplay.Separator.VisualSampler Class
+|    /    O /   |    MODULE : Uize.Widgets.SegmentDisplay.Separator.Seven.VisualSampler Class
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
 | /____/ /__/_| | COPYRIGHT : (c)2014 UIZE
@@ -12,21 +12,21 @@
 /* Module Meta Data
 	type: Class
 	importance: 1
-	codeCompleteness: 100
+	codeCompleteness: 5
 	docCompleteness: 100
 */
 
 /*?
 	Introduction
-		The =Uize.Widgets.SegmentDisplay.Separator.VisualSampler= class implements a visual sampler widget for the =Uize.Widgets.SegmentDisplay.Separator.Widget= class.
+		The =Uize.Widgets.SegmentDisplay.Separator.Seven.VisualSampler= class implements a visual sampler widget for the =Uize.Widgets.SegmentDisplay.Separator.Seven.Widget= class.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 */
 
 Uize.module ({
-	name:'Uize.Widgets.SegmentDisplay.Separator.VisualSampler',
+	name:'Uize.Widgets.SegmentDisplay.Separator.Seven.VisualSampler',
 	superclass:'Uize.Widgets.VisualSampler.Widget',
-	required:'Uize.Widgets.SegmentDisplay.Separator.Widget',
+	required:'Uize.Widgets.SegmentDisplay.Separator.Seven.Widget',
 	builder:function (_superclass) {
 		'use strict';
 
@@ -38,7 +38,7 @@ Uize.module ({
 			},
 
 			set:{
-				samplerWidgetClass:Uize.Widgets.SegmentDisplay.Separator.Widget
+				samplerWidgetClass:Uize.Widgets.SegmentDisplay.Separator.Seven.Widget
 			}
 		});
 	}

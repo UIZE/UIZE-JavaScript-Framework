@@ -37,7 +37,7 @@ Uize.module ({
 	superclass:'Uize.Widgets.DigitalClock.Hm.Widget',
 	required:[
 		'Uize.Widgets.DigitalClock.Hms.Html',
-		'Uize.Widgets.SegmentDisplay.Separator.Widget',
+		'Uize.Widgets.SegmentDisplay.Separator.Seven.Widget',
 		'Uize.Widgets.SegmentDisplay.Seven.Widget'
 	],
 	builder:function (_superclass) {
@@ -59,7 +59,7 @@ Uize.module ({
 			},
 
 			children:{
-				msSeparator:{widgetClass:Uize.Widgets.SegmentDisplay.Separator.Widget},
+				msSeparator:{widgetClass:Uize.Widgets.SegmentDisplay.Separator.Seven.Widget},
 				secondsTens:_digitWidgetProperties,
 				secondsOnes:_digitWidgetProperties
 			},

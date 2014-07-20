@@ -18,18 +18,9 @@
 
 /*?
 	Introduction
-		The =Uize.Widgets.SegmentDisplay.Separator.Widget= module implements a widget class for a separator for the hours, minutes, and seconds components of a digital clock display.
+		The =Uize.Widgets.SegmentDisplay.Separator.Widget= module implements an abstract base class for a colon style separator widget to be used with segment display widgets to form displays such as time displays.
 
 		*DEVELOPERS:* `Chris van Rensburg`
-
-		Visual Sampler
-			Below is a visual sampler of the =Uize.Widgets.SegmentDisplay.Separator.Widget= class...
-
-			..............................................................
-			<< widget >>
-
-			widgetClass: Uize.Widgets.SegmentDisplay.Separator.VisualSampler
-			..............................................................
 */
 
 Uize.module ({
@@ -47,8 +38,6 @@ Uize.module ({
 			mixins:Uize.Widget.mWidthHeight,
 
 			set:{
-				width:16,
-				height:160,
 				html:Uize.Widgets.SegmentDisplay.Separator.Html
 			},
 
@@ -57,25 +46,17 @@ Uize.module ({
 			},
 
 			stateProperties:{
-				_segmentThickness:{
-					name:'segmentThickness',
-					value:16
-				},
 				_segmentColor:{
 					name:'segmentColor',
 					value:'3f6'
 				},
 
 				/*** derived properties for HTML bindings ***/
-					segmentThicknessPx:{
-						derived:'segmentThickness: segmentThickness + "px"'
-					},
-					segmentColorAsRgbHex:{
-						derived:'segmentColor: "#" + segmentColor'
-					},
-					colonPosPx:{
-						derived:'height,segmentThickness: Math.round (segmentThickness + (height - segmentThickness * 3) / 4 - segmentThickness / 2) + "px"'
-					}
+					segmentColorAsRgbHex:{derived:'segmentColor: "#" + segmentColor'},
+					colonHeight:{},
+					colonPos:{},
+					colonHeightPx:{derived:'colonHeight: colonHeight + "px"'},
+					colonPosPx:{derived:'colonPos: colonPos + "px"'}
 			},
 
 			htmlBindings:{
@@ -83,7 +64,7 @@ Uize.module ({
 					'colonTop:style.background',
 					'colonBottom:style.background'
 				],
-				segmentThicknessPx:[
+				colonHeightPx:[
 					'colonTop:style.height',
 					'colonBottom:style.height'
 				],

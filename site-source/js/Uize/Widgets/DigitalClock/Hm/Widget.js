@@ -39,7 +39,7 @@ Uize.module ({
 		'Uize.Widgets.DigitalClock.Hm.Html',
 		'Uize.Widgets.DigitalClock.Hm.Css',
 		'Uize.Widgets.SegmentDisplay.Seven.Widget',
-		'Uize.Widgets.SegmentDisplay.Separator.Widget'
+		'Uize.Widgets.SegmentDisplay.Separator.Seven.Widget'
 	],
 	builder:function (_superclass) {
 		'use strict';
@@ -69,7 +69,7 @@ Uize.module ({
 				hoursOnes:_digitWidgetProperties,
 				minutesTens:_digitWidgetProperties,
 				minutesOnes:_digitWidgetProperties,
-				hmSeparator:{widgetClass:Uize.Widgets.SegmentDisplay.Separator.Widget}
+				hmSeparator:{widgetClass:Uize.Widgets.SegmentDisplay.Separator.Seven.Widget}
 			}
 		});
 	}
