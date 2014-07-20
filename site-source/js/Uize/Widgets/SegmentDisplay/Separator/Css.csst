@@ -8,11 +8,3 @@
 	width: 100%;
 }
 
-.`colonTop` {
-	top: 33%;
-}
-
-.`colonBottom` {
-	bottom: 33%;
-}
-
