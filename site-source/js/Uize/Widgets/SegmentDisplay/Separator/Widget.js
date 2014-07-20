@@ -12,7 +12,7 @@
 /* Module Meta Data
 	type: Class
 	importance: 1
-	codeCompleteness: 5
+	codeCompleteness: 100
 	docCompleteness: 5
 */
 
@@ -20,7 +20,7 @@
 	Introduction
 		The =Uize.Widgets.SegmentDisplay.Separator.Widget= module implements a widget class for a separator for the hours, minutes, and seconds components of a digital clock display.
 
-		*DEVELOPERS:*
+		*DEVELOPERS:* `Chris van Rensburg`
 
 		Visual Sampler
 			Below is a visual sampler of the =Uize.Widgets.SegmentDisplay.Separator.Widget= class...

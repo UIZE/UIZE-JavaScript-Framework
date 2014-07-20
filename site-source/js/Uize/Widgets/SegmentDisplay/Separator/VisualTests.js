@@ -12,7 +12,7 @@
 /* Module Meta Data
 	type: Class
 	importance: 1
-	codeCompleteness: 5
+	codeCompleteness: 100
 	docCompleteness: 100
 */
 
@@ -20,7 +20,7 @@
 	Introduction
 		The =Uize.Widgets.SegmentDisplay.Separator.VisualTests= class implements a set of visual tests for the =Uize.Widgets.SegmentDisplay.Separator.Widget= class.
 
-		*DEVELOPERS:*
+		*DEVELOPERS:* `Chris van Rensburg`
 */
 
 Uize.module ({
