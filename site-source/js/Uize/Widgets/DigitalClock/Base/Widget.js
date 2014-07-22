@@ -44,7 +44,7 @@ Uize.module ({
 			},
 
 			instanceMethods:{
-				remapDigitValue:Uize.returnX
+				remapDigitValue:function (_digit,_value) {return _value}
 			},
 
 			stateProperties:{
