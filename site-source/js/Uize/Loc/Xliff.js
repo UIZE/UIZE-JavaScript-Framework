@@ -47,6 +47,8 @@ Uize.module ({
 					_sourceLanguage = _toEncode.sourceLanguage,
 					_targetLanguage = _toEncode.targetLanguage,
 					_seedTarget = _options.seedTarget,
+					_tokenSplitter = _options.tokenSplitter,
+					_phId = 0,
 					_xliffLines = [
 						'<?xml version="1.0" ?>',
 						'<xliff version="1.0">'
@@ -69,7 +71,19 @@ Uize.module ({
 								function (_path) {return Uize.Json.to (_path,'mini')}
 							),
 							function (_resourceStringText,_id) {
-								var _source = _htmlEncode (_resourceStringText);
+								var _source = _tokenSplitter
+									? Uize.map (
+										_tokenSplitter (_resourceStringText),
+										function (_segment,_segmentNo) {
+											return (
+												_segmentNo % 2
+													? '<ph id="' + ++_phId + '" ctype="x-param">' + _htmlEncode (_segment) + '</ph>'
+													: _htmlEncode (_segment)
+											);
+										}
+									).join ('')
+									: _htmlEncode (_resourceStringText)
+								;
 								_xliffLines.push (
 									'\t\t<trans-unit id="' + _htmlEncode (_id) + '">',
 									'\t\t\t<source>' + _source + '</source>',

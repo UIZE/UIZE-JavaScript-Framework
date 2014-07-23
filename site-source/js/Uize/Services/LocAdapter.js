@@ -434,7 +434,7 @@ Uize.module ({
 						_tokenName,
 						_tokenAdded = {}
 					;
-					_tokenRegExp.index = 0;
+					_tokenRegExp.lastIndex = 0;
 					while (_match = _tokenRegExp.exec (_sourceStr)) {
 						if (!(_tokenName = _match [1])) {
 							for (var _matchSegmentNo = _match.length; !_tokenName && --_matchSegmentNo >= 0;)
@@ -758,7 +758,8 @@ Uize.module ({
 							/*** write translation job file ***/
 								var
 									_translationJobFileFormat = _project.translationJobFileFormat || 'csv',
-									_translationJobFilePath = _jobsPath + _language + '.' + _translationJobFileFormat
+									_translationJobFilePath = _jobsPath + _language + '.' + _translationJobFileFormat,
+									_tokenRegExp = m.tokenRegExp
 								;
 								_fileSystem.writeFile ({
 									path:_translationJobFilePath,
@@ -769,7 +770,25 @@ Uize.module ({
 												targetLanguage:_language,
 												strings:_translationJobStrings
 											},
-											{seedTarget:true}
+											{
+												seedTarget:true,
+												tokenSplitter:function (_string) {
+													var
+														_match,
+														_segments = [],
+														_lastIndex = 0
+													;
+													_tokenRegExp.lastIndex = 0;
+													while (_match = _tokenRegExp.exec (_string)) {
+														_segments.push (_string.slice (_lastIndex,_match.index),_match [0]);
+														_lastIndex = _tokenRegExp.lastIndex;
+													}
+													if (_lastIndex < _string.length)
+														_segments.push (_string.slice (_lastIndex))
+													;
+													return _segments;
+												}
+											}
 										)
 										: Uize.Data.Csv.to (
 											Uize.Data.NameValueRecords.fromHash (
