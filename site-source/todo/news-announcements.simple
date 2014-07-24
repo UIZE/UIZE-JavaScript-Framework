@@ -47,6 +47,19 @@ NEW MODULE: Uize.Data.JavaProperties
 	- write documentation
 	- write news announcement
 
+NEW MODULE: Uize.Data.MacStrings
+	Still to do...
+
+	- write documentation
+	- write news announcement
+
+NEW MODULE: Uize.Loc.FileFormats.AndroidStrings
+	Still to do...
+
+	- write unit tests
+	- write documentation
+	- write news announcement
+
 NEW MODULE: Uize.Event.Bus
 	Still to do...
 
