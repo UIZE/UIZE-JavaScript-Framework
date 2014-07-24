@@ -773,20 +773,7 @@ Uize.module ({
 											{
 												seedTarget:true,
 												tokenSplitter:function (_string) {
-													var
-														_match,
-														_segments = [],
-														_lastIndex = 0
-													;
-													_tokenRegExp.lastIndex = 0;
-													while (_match = _tokenRegExp.exec (_string)) {
-														_segments.push (_string.slice (_lastIndex,_match.index),_match [0]);
-														_lastIndex = _tokenRegExp.lastIndex;
-													}
-													if (_lastIndex < _string.length)
-														_segments.push (_string.slice (_lastIndex))
-													;
-													return _segments;
+													return _split (_string,_tokenRegExp,null,'match');
 												}
 											}
 										)

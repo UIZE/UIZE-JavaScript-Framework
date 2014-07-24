@@ -158,7 +158,49 @@ Uize.module ({
 							['Test that a splitter that is an array is handled correctly',
 								['FOO1,2,3BAR1,2,3FOREVER',[1,2,3]],
 								['FOO','BAR','FOREVER']
-							]
+							],
+
+						/*** test support for different include match modes ***/
+							['When "captures" is specified as the include match mode, then all captures from the splitter regular expression will be added to the result array',
+								['FOO_-_BAR_-_FOREVER',/((_)(-)(_))/,null,'captures'],
+								['FOO','_-_','_','-','_','BAR','_-_','_','-','_','FOREVER']
+							],
+							['When "match" is specified as the include match mode, then the strings matched by the splitter regular expression will be added to the result array',
+								['FOO_-_BAR_-_FOREVER',/((_)(-)(_))/,null,'match'],
+								['FOO','_-_','BAR','_-_','FOREVER']
+							],
+							['When "match and captures" is specified as the include match mode, then the strings matched by the splitter regular expression, along with all captures from the regular expression, will be added to the result array',
+								['FOO_-_BAR_-_FOREVER',/((_)(-)(_))/,null,'match and captures'],
+								['FOO','_-_','_-_','_','-','_','BAR','_-_','_-_','_','-','_','FOREVER']
+							],
+							['When "none" is specified as the include match mode, then only the segments between the segments matched by the splitter regular expression will be added to the result array',
+								['FOO_-_BAR_-_FOREVER',/((_)(-)(_))/,null,'none'],
+								['FOO','BAR','FOREVER']
+							],
+							{
+								title:'When "match array" is specified as the include match mode, then the match array from each match of the splitter regular expression will be added to the result array',
+								test:function () {
+									var
+										m = this,
+										_splitResult =
+											Uize.Str.Split.split ('FOO_-_BAR_-_FOREVER',/((_)(-)(_))/,null,'match array')
+									;
+									function _expectMatchArray (_element) {
+										return (
+											m.expectArray (_element) &&
+											m.expect (['_-_','_-_','_','-','_'],Uize.push ([],_element)) &&
+											m.expectNumber (_element.index)
+										);
+									}
+									return (
+										m.expect ('FOO',_splitResult [0]) &&
+										_expectMatchArray (_splitResult [1]) &&
+										m.expect ('BAR',_splitResult [2]) &&
+										_expectMatchArray (_splitResult [3]) &&
+										m.expect ('FOREVER',_splitResult [4])
+									);
+								}
+							}
 					]],
 					['Uize.Str.Split.splitInTwo',[
 						['Test using a string splitter',

@@ -13,7 +13,7 @@
 	type: Package
 	importance: 2
 	codeCompleteness: 100
-	docCompleteness: 100
+	docCompleteness: 80
 */
 
 /*?
@@ -40,8 +40,8 @@ Uize.module ({
 		;
 
 		return Uize.package ({
-			split:function (_sourceStr,_splitter,_limit) {
-				if (_hasSplitUsingRegExpIssue && _splitter instanceof RegExp) {
+			split:function (_sourceStr,_splitter,_limit,_includeMatchMode) {
+				if (_includeMatchMode || (_hasSplitUsingRegExpIssue && _splitter instanceof RegExp)) {
 					/*** prep parameters ***/
 						if (_limit == _undefined) _limit = Infinity;
 						if (!_limit) return [];
@@ -67,9 +67,38 @@ Uize.module ({
 							;
 							_result.push (_sourceStr.slice (_lastIndex,_match ? _match.index : _sourceStrLength));
 							if (_match) {
-								_match.length > 1 && _match.index < _sourceStrLength &&
-									Uize.push (_result,_match.slice (1))
-								;
+								if (_match.index < _sourceStrLength) {
+									if (!_includeMatchMode || _includeMatchMode == 'captures') {
+										_match.length > 1 && Uize.push (_result,_match.slice (1));
+										/*
+											segments and captures are returned
+											eg. ['segmentA','capture0','capture1','segmentB']
+										*/
+									} else if (_includeMatchMode == 'match') {
+										_result.push (_matchStr);
+										/*
+											segments and matches are returned
+											eg. ['segmentA','match','segmentB']
+										*/
+									} else if (_includeMatchMode == 'match array') {
+										_result.push (_match);
+										/*
+											segments and match arrays are returned
+											eg. ['segmentA',['match','capture0','capture1'],'segmentB']
+										*/
+									} else if (_includeMatchMode == 'none') {
+										/*
+											only the segments between matches are returned in the result array
+											eg. ['segmentA','segmentB']
+										*/
+									} else if (_includeMatchMode == 'match and captures') {
+										Uize.push (_result,_match);
+										/*
+											segments and match and captures are returned
+											eg. ['segmentA','match','capture0','capture1','segmentB']
+										*/
+									}
+								}
 								_lastIndex = _splitter.lastIndex = _match.index + _matchStr.length;
 								_matchStr && _lastIndex == _sourceStrLength &&
 									// if match is non-empty and _lastIndex is at end of string, then add an empty string
