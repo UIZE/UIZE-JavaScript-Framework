@@ -1,7 +1,7 @@
 /*______________
 |       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
 |     /      /  |   ---------------------------------------------------
-|    /    O /   |    MODULE : Uize.Test.Uize.Data.MacStrings Class
+|    /    O /   |    MODULE : Uize.Test.Uize.Loc.FileFormats.MacStrings Class
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
 | /____/ /__/_| | COPYRIGHT : (c)2014 UIZE
@@ -18,22 +18,22 @@
 
 /*?
 	Introduction
-		The =Uize.Test.Uize.Data.MacStrings= module defines a suite of unit tests for the =Uize.Data.MacStrings= module.
+		The =Uize.Test.Uize.Loc.FileFormats.MacStrings= module defines a suite of unit tests for the =Uize.Loc.FileFormats.MacStrings= module.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 */
 
 Uize.module ({
-	name:'Uize.Test.Uize.Data.MacStrings',
+	name:'Uize.Test.Uize.Loc.FileFormats.MacStrings',
 	builder:function () {
 		'use strict';
 
 		return Uize.Test.resolve ({
-			title:'Uize.Data.MacStrings Module Test',
+			title:'Uize.Loc.FileFormats.MacStrings Module Test',
 			test:[
-				Uize.Test.requiredModulesTest ('Uize.Data.MacStrings'),
+				Uize.Test.requiredModulesTest ('Uize.Loc.FileFormats.MacStrings'),
 				Uize.Test.staticMethodsTest ([
-					['Uize.Data.MacStrings.from',[
+					['Uize.Loc.FileFormats.MacStrings.from',[
 						['Parsing an empty string produces an empty strings object',
 							'',
 							{}
@@ -119,7 +119,7 @@ Uize.module ({
 							}
 						]
 					]],
-					['Uize.Data.MacStrings.to',[
+					['Uize.Loc.FileFormats.MacStrings.to',[
 						['Serializing an empty strings object produces an empty string as a result',
 							{},
 							''
