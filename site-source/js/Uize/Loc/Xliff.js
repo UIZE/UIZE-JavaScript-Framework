@@ -30,14 +30,16 @@ Uize.module ({
 		'Uize.Data.Flatten',
 		'Uize.Json',
 		'Uize.Parse.Xml.NodeList',
-		'Uize.Data.Matches'
+		'Uize.Data.Matches',
+		'Uize.Str.Split'
 	],
 	builder:function () {
 		'use strict';
 
 		var
 			/*** Variable for Performance Optimization ***/
-				_htmlEncode = Uize.Util.Html.Encode.encode
+				_htmlEncode = Uize.Util.Html.Encode.encode,
+				_split = Uize.Str.Split.split
 		;
 
 		return Uize.package ({
@@ -54,6 +56,12 @@ Uize.module ({
 						'<xliff version="1.0">'
 					]
 				;
+				if (Uize.isRegExp (_tokenSplitter)) {
+					var _tokenRegExp = _tokenSplitter;
+					_tokenSplitter = function (_string) {
+						return _split (_string,_tokenRegExp,null,'match');
+					};
+				}
 				Uize.forEach (
 					_toEncode.strings,
 					function (_resourceFileStrings,_resourceFileSubPath) {
@@ -133,7 +141,17 @@ Uize.module ({
 							_getTags (_fileTag.childNodes,'trans-unit'),
 							function (_transUnitTag) {
 								_fileStrings [_getAttributeValue (_transUnitTag,'id')] =
-									_getTags (_transUnitTag.childNodes,'target') [0].childNodes.nodes [0].text
+									Uize.map (
+										_getTags (_transUnitTag.childNodes,'target') [0].childNodes.nodes,
+										function (_node) {
+											if ('text' in _node) {
+												return _node.text;
+											} else if (_isTag (_node,'ph')) {
+												var _textChildNode = _node.childNodes.nodes [0];
+												return _textChildNode ? _textChildNode.text : '';
+											}
+										}
+									).join ('')
 								;
 							}
 						);

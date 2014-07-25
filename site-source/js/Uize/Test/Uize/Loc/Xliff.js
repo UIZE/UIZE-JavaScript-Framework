@@ -72,6 +72,50 @@ Uize.module ({
 							'		</trans-unit>\n' +
 							'	</file>\n' +
 							'</xliff>'
+						],
+						['When the resource strings contain substitution tokens and a value is specified for the tokenSplitter option, then the substitution tokens are wrapped in <ph> tags when serialized to XLIFF format',
+							[
+								{
+									sourceLanguage:'en_US',
+									targetLanguage:'fr_FR',
+									strings:{
+										'foo/bar.properties':{
+											STR1:'foo {param} bar',
+											STR2:'foo {param}',
+											STR3:'{param} bar',
+											STR4:'{param}',
+											STR5:'{param1}{param2}'
+										}
+									},
+
+								},
+								{tokenSplitter:/\{[\w\d]+\}/}
+							],
+							'<?xml version="1.0" ?>\n' +
+							'<xliff version="1.0">\n' +
+							'	<file original="foo/bar.properties" source-language="en_US" target-language="fr_FR" datatype="plaintext">\n' +
+							'		<trans-unit id="[&apos;STR1&apos;]">\n' +
+							'			<source>foo <ph id="1" ctype="x-param">{param}</ph> bar</source>\n' +
+							'			<target></target>\n' +
+							'		</trans-unit>\n' +
+							'		<trans-unit id="[&apos;STR2&apos;]">\n' +
+							'			<source>foo <ph id="2" ctype="x-param">{param}</ph></source>\n' +
+							'			<target></target>\n' +
+							'		</trans-unit>\n' +
+							'		<trans-unit id="[&apos;STR3&apos;]">\n' +
+							'			<source><ph id="3" ctype="x-param">{param}</ph> bar</source>\n' +
+							'			<target></target>\n' +
+							'		</trans-unit>\n' +
+							'		<trans-unit id="[&apos;STR4&apos;]">\n' +
+							'			<source><ph id="4" ctype="x-param">{param}</ph></source>\n' +
+							'			<target></target>\n' +
+							'		</trans-unit>\n' +
+							'		<trans-unit id="[&apos;STR5&apos;]">\n' +
+							'			<source><ph id="5" ctype="x-param">{param1}</ph><ph id="6" ctype="x-param">{param2}</ph></source>\n' +
+							'			<target></target>\n' +
+							'		</trans-unit>\n' +
+							'	</file>\n' +
+							'</xliff>'
 						]
 					]],
 					['Uize.Loc.Xliff.from',[
@@ -109,8 +153,44 @@ Uize.module ({
 									}
 								}
 							}
+						],
+						['An XLIFF format document may contain trans-unit tags with substitution tokens wrapped in <ph> tags',
+							'<?xml version="1.0" ?>\n' +
+							'<xliff version="1.0">\n' +
+							'	<file original="foo/bar.properties" source-language="en_US" target-language="fr_FR" datatype="plaintext">\n' +
+							'		<trans-unit id="[&apos;STR1&apos;]">\n' +
+							'			<source>foo <ph id="1" ctype="x-param">{param}</ph> bar</source>\n' +
+							'			<target>foo <ph id="1" ctype="x-param">{param}</ph> bar</target>\n' +
+							'		</trans-unit>\n' +
+							'		<trans-unit id="[&apos;STR2&apos;]">\n' +
+							'			<source>foo <ph id="2" ctype="x-param">{param}</ph></source>\n' +
+							'			<target>foo <ph id="2" ctype="x-param">{param}</ph></target>\n' +
+							'		</trans-unit>\n' +
+							'		<trans-unit id="[&apos;STR3&apos;]">\n' +
+							'			<source><ph id="3" ctype="x-param">{param}</ph> bar</source>\n' +
+							'			<target><ph id="3" ctype="x-param">{param}</ph> bar</target>\n' +
+							'		</trans-unit>\n' +
+							'		<trans-unit id="[&apos;STR4&apos;]">\n' +
+							'			<source><ph id="4" ctype="x-param">{param}</ph></source>\n' +
+							'			<target><ph id="4" ctype="x-param">{param}</ph></target>\n' +
+							'		</trans-unit>\n' +
+							'		<trans-unit id="[&apos;STR5&apos;]">\n' +
+							'			<source><ph id="5" ctype="x-param">{param1}</ph><ph id="6" ctype="x-param">{param2}</ph></source>\n' +
+							'			<target><ph id="5" ctype="x-param">{param1}</ph><ph id="6" ctype="x-param">{param2}</ph></target>\n' +
+							'		</trans-unit>\n' +
+							'	</file>\n' +
+							'</xliff>',
+							{
+								'foo/bar.properties':{
+									STR1:'foo {param} bar',
+									STR2:'foo {param}',
+									STR3:'{param} bar',
+									STR4:'{param}',
+									STR5:'{param1}{param2}'
+								}
+							}
 						]
-					]]
+					]],
 				])
 			]
 		});

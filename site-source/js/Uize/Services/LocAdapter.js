@@ -772,9 +772,7 @@ Uize.module ({
 											},
 											{
 												seedTarget:true,
-												tokenSplitter:function (_string) {
-													return _split (_string,_tokenRegExp,null,'match');
-												}
+												tokenSplitter:_tokenRegExp
 											}
 										)
 										: Uize.Data.Csv.to (
