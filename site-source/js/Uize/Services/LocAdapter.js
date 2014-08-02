@@ -408,18 +408,29 @@ Uize.module ({
 				});
 			}
 
+			function _getTranslatableLanguages (m) {
+				for (
+					var
+						_languageNo = -1,
+						_translatableLanguages = [],
+						_project = m.project,
+						_languages = _project.languages,
+						_languagesLength = _languages.length,
+						_primaryLanguage = _project.primaryLanguage,
+						_pseudoLocale = _project.pseudoLocale,
+						_language
+					;
+					++_languageNo < _languagesLength;
+				) {
+					if ((_language = _languages [_languageNo]) != _primaryLanguage && _language != _pseudoLocale)
+						_translatableLanguages.push (_language)
+					;
+				}
+				return _translatableLanguages;
+			}
+
 			function _forEachTranslatableLanguage (m,_iterationHandler) {
-				var
-					_project = m.project,
-					_primaryLanguage = _project.primaryLanguage,
-					_pseudoLocale = _project.pseudoLocale
-				;
-				Uize.forEach (
-					_project.languages,
-					function (_language) {
-						_language != _primaryLanguage && _language != _pseudoLocale && _iterationHandler (_language);
-					}
-				);
+				Uize.forEach (_getTranslatableLanguages (m),function (_language) {_iterationHandler (_language)});
 			}
 
 			function _getStringMetrics (m,_sourceStr) {
@@ -745,7 +756,7 @@ Uize.module ({
 						_project = m.project,
 						_primaryLanguage = _project.primaryLanguage,
 						_primaryLanguageResources = _readLanguageResourcesFile (m,_primaryLanguage),
-						_totalTranslatableLanguages = _project.languages.length - 2
+						_totalTranslatableLanguages = _getTranslatableLanguages (m).length
 					;
 					m.prepareToExecuteMethod (_totalTranslatableLanguages * 3);
 
@@ -817,7 +828,7 @@ Uize.module ({
 					var
 						m = this,
 						_project = m.project,
-						_totalTranslatableLanguages = _project.languages.length - 2,
+						_totalTranslatableLanguages = _getTranslatableLanguages (m).length,
 						_jobsPath = m._workingFolderPath + 'jobs/'
 					;
 					m.prepareToExecuteMethod (_totalTranslatableLanguages * 2);
