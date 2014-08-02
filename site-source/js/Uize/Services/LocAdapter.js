@@ -623,6 +623,19 @@ Uize.module ({
 					// this method should be implemented by subclasses
 				},
 
+				doesBrandSupportLanguage:function (_brand,_language) {
+					var _project = this.project;
+					if (_language == _project.pseudoLocale) {
+						return true;
+					} else {
+						var
+							_brandLanguages = _project.brandLanguages,
+							_languagesForBrand = _brand && _brandLanguages && _brandLanguages [_brand]
+						;
+						return _languagesForBrand ? Uize.isIn (_languagesForBrand,_language) : true;
+					}
+				},
+
 				'import':function (_params,_callback) {
 					var
 						m = this,
@@ -681,28 +694,33 @@ Uize.module ({
 									function (_resourceFileStrings,_resourceFileSubPath) {
 										var
 											_resourceFilePath = m.getLanguageResourcePath (_resourceFileSubPath,_language),
-											_resourceFileFullPath = _rootFolderPath + '/' + _resourceFilePath
+											_resourceFileBrand = m.getResourceFileBrand (_resourceFileSubPath)
 										;
-										_languageResources [_resourceFileSubPath] = Uize.Data.Diff.diff (
-											_fileSystem.fileExists ({path:_resourceFileFullPath})
-												? m.parseResourceFile (_fileSystem.readFile ({path:_resourceFileFullPath}))
-												: {}
-											,
-											_primaryLanguageResourcesDiff [_resourceFileSubPath],
-											function (_gatheredProperty,_propertyDiff) {
-												return (
-													!_propertyDiff || _propertyDiff.value == 'removed'
-														? _undefined
-														: {
-															value:_propertyDiff.value == 'modified'
-																? ''
-																: _gatheredProperty ? _gatheredProperty.value : ''
-														}
-												);
-											},
-											{skeleton:true}
-										);
-										m.stepCompleted ('Gathered resources from file: ' + _resourceFilePath);
+										if (m.doesBrandSupportLanguage (_resourceFileBrand,_language)) {
+											var _resourceFileFullPath = _rootFolderPath + '/' + _resourceFilePath;
+											_languageResources [_resourceFileSubPath] = Uize.Data.Diff.diff (
+												_fileSystem.fileExists ({path:_resourceFileFullPath})
+													? m.parseResourceFile (_fileSystem.readFile ({path:_resourceFileFullPath}))
+													: {}
+												,
+												_primaryLanguageResourcesDiff [_resourceFileSubPath],
+												function (_gatheredProperty,_propertyDiff) {
+													return (
+														!_propertyDiff || _propertyDiff.value == 'removed'
+															? _undefined
+															: {
+																value:_propertyDiff.value == 'modified'
+																	? ''
+																	: _gatheredProperty ? _gatheredProperty.value : ''
+															}
+													);
+												},
+												{skeleton:true}
+											);
+											m.stepCompleted ('Gathered resources from file: ' + _resourceFilePath);
+										} else {
+											m.stepCompleted ('Skipped resource file (' + _language + ' not supported by brand ' + _resourceFileBrand + '): ' + _resourceFilePath);
+										}
 									}
 								);
 							}
@@ -741,7 +759,9 @@ Uize.module ({
 										_primaryLanguageResources,
 										function (_languageString,_primaryLanguageString) {
 											return (
-												!_languageString.value && m.isTranslatableString (_primaryLanguageString)
+												_languageString &&
+												!_languageString.value &&
+												m.isTranslatableString (_primaryLanguageString)
 													? _primaryLanguageString
 													: _undefined
 											);
