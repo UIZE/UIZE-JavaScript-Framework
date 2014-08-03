@@ -1113,10 +1113,37 @@ Uize.module ({
 				},
 
 				init:function (_params,_callback) {
-					var m = this;
-					m.project = _params.project;
-					m._workingFolderPath = m.workingFolderPath = _params.workingFolder + '/' + m.project.name + '/';
+					var
+						m = this,
+						_project = m.project = _params.project
+					;
+
+					/*** ensure that the languages property exists and is a superset of all the brand languages ***/
+						var
+							_languages = _project.languages || (_project.languages = []),
+							_brandLanguages = _project.brandLanguages
+						;
+						if (_brandLanguages) {
+							var _languagesLookup = Uize.lookup (_languages);
+							Uize.forEach (
+								_brandLanguages,
+								function (_languagesForBrand) {
+									Uize.forEach (
+										_languagesForBrand,
+										function (_language) {
+											if (!_languagesLookup [_language]) {
+												_languages.push (_language);
+												_languagesLookup [_language] = true;
+											}
+										}
+									);
+								}
+							);
+						}
+
+					m._workingFolderPath = m.workingFolderPath = _params.workingFolder + '/' + _project.name + '/';
 					m._log = _params.log || Uize.nop;
+
 					_callback ();
 				}
 			},
