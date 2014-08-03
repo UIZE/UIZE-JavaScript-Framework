@@ -651,21 +651,18 @@ Uize.module ({
 					var
 						m = this,
 						_project = m.project,
-						_primaryLanguage = _project.primaryLanguage,
-						_languages = _project.languages
+						_importPrimary = _project.importPrimary
 					;
-					m.prepareToExecuteMethod ((_languages.length - !_project.importPrimary) * 2);
-					Uize.forEach (
-						_languages,
-						function (_language) {
-							if (_language != _primaryLanguage || _project.importPrimary) {
-								var _resources = _readLanguageResourcesFile (m,_language);
-								m.stepCompleted (_language + ': read language resources file');
-								_resources && m.distributeResources (_resources,_language);
-								m.stepCompleted (_language + ': distributed strings to individual resource files');
-							}
-						}
-					);
+					function _importLanguage (_language) {
+						var _resources = _readLanguageResourcesFile (m,_language);
+						m.stepCompleted (_language + ': read language resources file');
+						_resources && m.distributeResources (_resources,_language);
+						m.stepCompleted (_language + ': distributed strings to individual resource files');
+					}
+					m.prepareToExecuteMethod ((_getTranslatableLanguages (m).length + 1 + !!_importPrimary) * 2);
+					_importPrimary && _importLanguage (_project.primaryLanguage);
+					_forEachTranslatableLanguage (m,_importLanguage);
+					_importLanguage (_project.pseudoLocale);
 					_callback ();
 				},
 
