@@ -681,15 +681,14 @@ Uize.module ({
 							{skeleton:true}
 						),
 						_resoucesByLanguage = Uize.pairUp (_primaryLanguage,_primaryLanguageResources),
-						_totalLanguages = _project.languages.length,
-						_totalTranslatableLanguages = _totalLanguages - 2
+						_totalTranslatableLanguages = _getTranslatableLanguages (m).length
 					;
 
 					m.prepareToExecuteMethod (
 						_totalTranslatableLanguages * Uize.totalKeys (_primaryLanguageResources) +
 							// total number of resource files to gather, across all translatable languages
-						_totalLanguages
-							// number of language resources files to write
+						_totalTranslatableLanguages + 2
+							// number of language resource files to write (includes primary language and pseudo-locale)
 					);
 
 					/*** gather resources for all translatable languages ***/
