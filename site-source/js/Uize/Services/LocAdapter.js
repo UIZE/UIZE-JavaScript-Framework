@@ -100,7 +100,7 @@ Uize.module ({
 										value:_value
 									}),
 									_stringMetrics = _getStringMetrics (m,_value),
-									_isBrandSpecific = _resourceFileIsBrandSpecific || m.isBrandResourceString (_path,_value)
+									_isBrandSpecific = _resourceFileIsBrandSpecific || m.isBrandResourceString (_path)
 								;
 
 								/*** check for weak tokens ***/
@@ -122,9 +122,7 @@ Uize.module ({
 									value:_value,
 									metrics:_stringMetrics,
 									isBrandSpecific:_isBrandSpecific,
-									brand:_isBrandSpecific
-										? _resourceFileBrand || m.getStringBrand (_path,_value)
-										: '',
+									brand:_isBrandSpecific ? _resourceFileBrand || m.getStringBrand (_path) : '',
 									hasHtml:m.stringHasHtml (_path,_value),
 									isLong:_isTranslatable && m.isStringLong (_stringMetrics),
 									isKeyValid:m.isStringKeyValid (_path),
@@ -562,7 +560,7 @@ Uize.module ({
 					return false;
 				},
 
-				isBrandResourceString:function (_resourceStringPath,_resourceStringText) {
+				isBrandResourceString:function (_resourceStringPath) {
 					// this method should be implemented by subclasses
 					return false;
 				},
@@ -572,7 +570,7 @@ Uize.module ({
 					return '';
 				},
 
-				getStringBrand:function (_resourceStringPath,_resourceStringText) {
+				getStringBrand:function (_resourceStringPath) {
 					// this method should be implemented by subclasses
 					return '';
 				},
@@ -711,9 +709,10 @@ Uize.module ({
 													: {}
 												,
 												_primaryLanguageResourcesDiff [_resourceFileSubPath],
-												function (_gatheredProperty,_propertyDiff) {
+												function (_gatheredProperty,_propertyDiff,_path) {
 													return (
-														!_propertyDiff || _propertyDiff.value == 'removed'
+														!_propertyDiff || _propertyDiff.value == 'removed' ||
+														!m.doesBrandSupportLanguage (m.getStringBrand (_path),_language)
 															? _undefined
 															: {
 																value:_propertyDiff.value == 'modified'
