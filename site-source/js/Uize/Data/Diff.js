@@ -539,12 +539,15 @@ Uize.module ({
 				_propertyComparer || (_propertyComparer = _defaultPropertyComparer);
 				_options || (_options = _sacredEmpyObject);
 				var
+					_path = [],
 					_object1PropertyProfile = {},
 					_object2PropertyProfile = {},
 					_skeleton = _options.skeleton
 				;
 				function _compareNode (_object1,_object2) {
+					var _level = _path.length;
 					function _compareProperty (_property) {
+						_path [_level] = _property;
 						var
 							_propertyComparisonResult,
 							_object1PropertyValue = _object1 [_property],
@@ -589,7 +592,8 @@ Uize.module ({
 								}
 								_propertyComparisonResult = _propertyComparer (
 									_propertyInObject1 ? _object1PropertyProfile : _undefined,
-									_propertyInObject2 ? _object2PropertyProfile : _undefined
+									_propertyInObject2 ? _object2PropertyProfile : _undefined,
+									_path
 								);
 							}
 						}
@@ -612,6 +616,7 @@ Uize.module ({
 							_compareProperty (_elementNo);
 						}
 					}
+					_path.length = _level;
 					return _result;
 				}
 				return _compareNode (_object1,_object2);
