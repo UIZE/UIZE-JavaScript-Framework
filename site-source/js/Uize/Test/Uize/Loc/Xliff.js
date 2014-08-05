@@ -241,8 +241,39 @@ Uize.module ({
 									STR5:'{param1}{param2}'
 								}
 							}
-						]
-					]],
+						],
+						{
+							title:
+								'When an XLIFF document is serialized from a strings object using the Uize.Loc.Xliff.to method and the seedTarget option, and that document is then parsed to produce a strings object using the Uize.Loc.Xliff.from method, the returned strings object is identical to the original strings object',
+							test:function () {
+								var
+									_sourceStrings = {
+										'foo/bar.properties':{
+											widget1:{
+												TITLE:'widget 1 title',
+												DESCRIPTION:'the first widget'
+											},
+											widget2:{
+												TITLE:'widget 2 title',
+												DESCRIPTION:'the second widget'
+											}
+										}
+									},
+									_parsedStrings = Uize.Loc.Xliff.from (
+										Uize.Loc.Xliff.to (
+											{
+												sourceLanguage:'en_US',
+												targetLanguage:'fr_FR',
+												strings:_sourceStrings
+											},
+											{seedTarget:true}
+										)
+									)
+								;
+								return this.expect (_sourceStrings,_parsedStrings);
+							}
+						}
+					]]
 				])
 			]
 		});
