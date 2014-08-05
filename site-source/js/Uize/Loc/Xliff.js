@@ -53,7 +53,7 @@ Uize.module ({
 					_phId = 0,
 					_xliffLines = [
 						'<?xml version="1.0" ?>',
-						'<xliff version="1.0">'
+						'<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">'
 					]
 				;
 				if (Uize.isRegExp (_tokenSplitter)) {
@@ -71,7 +71,8 @@ Uize.module ({
 								'source-language="' + _sourceLanguage + '" ' +
 								'target-language="' + _targetLanguage + '" ' +
 								'datatype="plaintext"' +
-							'>'
+							'>',
+							'\t\t<body>'
 						);
 						Uize.forEach (
 							Uize.Data.Flatten.flatten (
@@ -93,14 +94,15 @@ Uize.module ({
 									: _htmlEncode (_resourceStringText)
 								;
 								_xliffLines.push (
-									'\t\t<trans-unit id="' + _htmlEncode (_id) + '">',
-									'\t\t\t<source>' + _source + '</source>',
-									'\t\t\t<target>' + (_seedTarget ? _source : '') + '</target>',
-									'\t\t</trans-unit>'
+									'\t\t\t<trans-unit id="' + _htmlEncode (_id) + '">',
+									'\t\t\t\t<source>' + _source + '</source>',
+									'\t\t\t\t<target>' + (_seedTarget ? _source : '') + '</target>',
+									'\t\t\t</trans-unit>'
 								);
 							}
 						);
 						_xliffLines.push (
+							'\t\t</body>',
 							'\t</file>'
 						);
 					}
@@ -138,7 +140,7 @@ Uize.module ({
 					function (_fileTag) {
 						var _fileStrings = {};
 						Uize.forEach (
-							_getTags (_fileTag.childNodes,'trans-unit'),
+							_getTags (_getTags (_fileTag.childNodes,'body') [0].childNodes,'trans-unit'),
 							function (_transUnitTag) {
 								_fileStrings [_getAttributeValue (_transUnitTag,'id')] =
 									Uize.map (
