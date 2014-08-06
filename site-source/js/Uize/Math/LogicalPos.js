@@ -35,6 +35,9 @@ Uize.module ({
 				_undefined,
 				_Math = Math,
 
+			/*** references to statics used internally ***/
+				_getScaledRect,
+
 			/*** General Variables ***/
 				_paramDefaults = {
 					coordConverter:Uize.returnX,
@@ -56,8 +59,26 @@ Uize.module ({
 				);
 			}
 
+			function _fitOrFill (_rect,_port,_align,_isFill) {
+				if (typeof _rect == 'number')
+					_rect = {width:_rect,height:1}
+				;
+				return _getScaledRect (
+					Uize.copyInto (
+						{
+							rectWidth:_rect.width,
+							rectHeight:_rect.height,
+							portWidth:_port.width,
+							portHeight:_port.height,
+							sizingValue:+_isFill
+						},
+						_align
+					)
+				);
+			}
+
 		return Uize.package ({
-			getScaledRect:function (_params,_defaults) {
+			getScaledRect:_getScaledRect = function (_params,_defaults) {
 				/* PARAMS:
 					- rectWidth
 					- rectHeight
@@ -145,6 +166,14 @@ Uize.module ({
 					alignX:_getAlignForAxis (_params.rectX,_rectWidth,_portWidth),
 					alignY:_getAlignForAxis (_params.rectY,_rectHeight,_portHeight)
 				};
+			},
+
+			fit:function (_rect,_port,_align) {
+				return _fitOrFill (_rect,_port,_align,0);
+			},
+
+			fill:function (_rect,_port,_align) {
+				return _fitOrFill (_rect,_port,_align,1);
 			}
 		});
 	}

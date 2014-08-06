@@ -1,0 +1,17 @@
+<table>
+	<tr>
+		<td class="digit"><child name="hoursTens"/></td>
+		<td class="digit"><child name="hoursOnes"/></td>
+
+		<td class="digit"><child name="hmSeparator"/></td>
+
+		<td class="digit"><child name="minutesTens"/></td>
+		<td class="digit"><child name="minutesOnes"/></td>
+
+		<td class="digit"><child name="msSeparator"/></td>
+
+		<td class="digit"><child name="secondsTens"/></td>
+		<td class="digit"><child name="secondsOnes"/></td>
+	</tr>
+</table>
+

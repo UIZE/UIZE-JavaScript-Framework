@@ -1,0 +1,10 @@
+This is a TO DO document for the =Uize.Widget.ColorGrid= module.
+
+IMPROVEMENTS
+- allow setting class name for swatch nodes
+- pair with other class to wire up swatches to fire event (for actual selection)
+
+IDEAS
+- double-clicking or ctrl-clicking a swatch could set all four corner colors to that color (only useful for color cubes where UI, such as sliders or input boxes, provides control over the corner colors)
+- ability, with a draggable target overlay icon, to select colors continuously based on pixel coordinates within the grid
+

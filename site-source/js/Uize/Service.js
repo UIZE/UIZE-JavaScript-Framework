@@ -39,15 +39,9 @@ Uize.module ({
 				_SERVICE_TAKING_TOO_LONG = 5000
 		;
 
-		/*** Utility Functions ***/
-			function _log (_message) {
-				typeof console != 'undefined' && typeof console.log == 'function' &&
-					console.log (_message)
-				;
-			}
-
-			function _warn (_message) {
-				_log ('SERVICE WARNING: ' + _message);
+		/*** Private Instance Methods ***/
+			function _warn (m,_message) {
+				m.fire ({name:'warning',warning:_message});
 			}
 
 			function _methodCaller (m,_methodName) {
@@ -159,6 +153,7 @@ Uize.module ({
 										var _adapterMethodDuration = _timeReturned - _timeCalled;
 										_adapterMethodDuration > _SERVICE_TAKING_TOO_LONG &&
 											_warn (
+												m,
 												_methodError(
 													'Service adapter method took too long to return (' + _adapterMethodDuration + 'ms)'
 												)
@@ -210,6 +205,7 @@ Uize.module ({
 									function () {
 										var _initialized = m.get ('initialized');
 										_warn (
+											m,
 											_methodError (
 												_adapter && _initialized
 													? 'Service adapter method taking too long to return'
@@ -236,9 +232,10 @@ Uize.module ({
 								m.once ('adapter',_callAdapterMethod);
 							} else {
 								if (!_adapter) {
-									_warn (_methodError ('Adapter is not yet set when service method is called'));
+									_warn (m,_methodError ('Adapter is not yet set when service method is called'));
 								} else if (!m.get ('initialized')) {
 									_warn (
+										m,
 										_methodError (
 											'Service adapter is set but not yet initialized when service method is called'
 										)

@@ -96,7 +96,7 @@ Uize.module ({
 								],
 								{foo:'unchanged'}
 							],
-							['An arbitrarily complex data structure is diff\'ed correctly',
+							['An arbitrarily complex data structure can be diff\'ed',
 								[
 									{
 										prop1:'foo',
@@ -167,6 +167,85 @@ Uize.module ({
 										{array:['foo','bar','baz','qux']}
 									],
 									{array:['added','added','added','added']}
+								],
+
+							/*** test the skeleton option ***/
+								['When the value false is specified for the optional skeleton option, then the returned comparison result will not contain empty nodes in which there are no property comparison values',
+									[
+										{
+											foo:{
+												bar:{},
+												baz:{
+													qux:[]
+												}
+											}
+										},
+										{
+											foo:{
+												BAR:{
+													BAZ:[]
+												}
+											},
+											QUX:{}
+										},
+										{skeleton:false}
+									],
+									{}
+								],
+								['When the value true is specified for the optional skeleton option, then the returned comparison result will at a minimum be a skeleton object that is the union of the structures of the two objects being compared',
+									[
+										{
+											foo:{
+												bar:{},
+												baz:{
+													qux:[]
+												}
+											}
+										},
+										{
+											foo:{
+												BAR:{
+													BAZ:[]
+												}
+											},
+											QUX:{}
+										},
+										null,
+										{skeleton:true}
+									],
+									{
+										foo:{
+											bar:{},
+											baz:{
+												qux:[]
+											},
+											BAR:{
+												BAZ:[]
+											}
+										},
+										QUX:{}
+									}
+								],
+								['When no value is specified for the optional skeleton option, it is defaulted to false and the skeleton behavior is disabled',
+									[
+										{
+											foo:{
+												bar:{},
+												baz:{
+													qux:[]
+												}
+											}
+										},
+										{
+											foo:{
+												BAR:{
+													BAZ:[]
+												}
+											},
+											QUX:{}
+										}
+									],
+									{}
 								],
 
 						/*** test a custom added-or-modified property comparer ***/
@@ -370,6 +449,67 @@ Uize.module ({
 									}
 								}
 							],
+							{
+								title:'The property comparer function is passed a third argument, whose value is an array representing the path to the current property being compared',
+								test:function () {
+									var _comparedPropertiesPaths = [];
+									Uize.Data.Diff.diff (
+										{
+											prop1:'foo',
+											prop2:'bar',
+											prop4:{
+												prop1:'foo',
+												prop2:'bar'
+											},
+											prop6:{
+												prop1:'foo',
+												prop2:'bar',
+												prop3:'baz',
+												prop5:['foo','bar','baz']
+											}
+										},
+										{
+											prop1:'FOO',
+											prop3:'bar',
+											prop5:{
+												prop1:'foo',
+												prop2:'bar'
+											},
+											prop6:{
+												prop1:'foo',
+												prop2:'BAR',
+												prop4:'qux',
+												prop5:['foo'],
+											},
+											prop7:['foo','bar']
+										},
+										function (_object1PropertyInfo,_object2PropertyInfo,_path) {
+											_comparedPropertiesPaths.push (_path.concat ());
+										}
+									);
+									return this.expect (
+										[
+											['prop1'],
+											['prop2'],
+											['prop4','prop1'],
+											['prop4','prop2'],
+											['prop6','prop1'],
+											['prop6','prop2'],
+											['prop6','prop3'],
+											['prop6','prop5',0],
+											['prop6','prop5',1],
+											['prop6','prop5',2],
+											['prop6','prop4'],
+											['prop3'],
+											['prop5','prop1'],
+											['prop5','prop2'],
+											['prop7',0],
+											['prop7',1]
+										],
+										_comparedPropertiesPaths
+									);
+								}
+							},
 							['The key property in the property profile object returned by a property comparer function is used to determine the name of the property added to the diff result',
 								[
 									{

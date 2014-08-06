@@ -1,7 +1,7 @@
 /*______________
 |       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
 |     /      /  |   ---------------------------------------------------
-|    /    O /   |    MODULE : Uize.Widget.mChildBindings Class
+|    /    O /   |    MODULE : Uize.Widget.mChildBindings Mixin
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
 | /____/ /__/_| | COPYRIGHT : (c)2014 UIZE
@@ -10,7 +10,7 @@
 */
 
 /* Module Meta Data
-	type: Class
+	type: Mixin
 	importance: 5
 	codeCompleteness: 95
 	docCompleteness: 10

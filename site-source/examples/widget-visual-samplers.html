@@ -8,20 +8,6 @@
 	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
 	<link rel="stylesheet" href="../css/page.css"/>
 	<link rel="stylesheet" href="../css/page.example.css"/>
-	<style type="text/css">
-		.selectorControl {
-			width:740px;
-			margin:auto;
-			padding:10px;
-			background:#becacd url(../images/page-contents-bg.gif) repeat-x left top;
-			border:1px solid #899;
-			border-radius: 3px;
-		}
-
-		.visualSamplersShell {
-			margin: 20px auto;
-		}
-	</style>
 </head>
 
 <body>
@@ -48,15 +34,7 @@
 		<p>This example lets you view all the available widget visual samplers under a specific namespace. Simply select a namespace from the dropdown menu (only namespaces under which there are widget visual samplers will be listed in this menu). Upon selecting a namespace, all the widget visual samplers under that namespace will be generated in the page. From any of the widget visual samplers, you will be able to navigate to the corresponding widget class' reference documentation.</p>
 	</div>
 
-	<div class="selectorControl">
-		<div style="float:left; line-height:22px; margin-right:5px;">SELECT A NAMESPACE:</div>
-		<select id="page-selector" style="float:left; margin-right:15px;"></select>
-		<br style="clear:left;"/>
-	</div>
-
-	<div style="height:4px;"></div>
-
-	<div id="page_visualSamplers-shell" class="visualSamplersShell"></div>
+	<div id="page_widgetViewer-shell"></div>
 </div>
 
 <script type="text/javascript">
@@ -65,162 +43,32 @@ Uize.require (
 	[
 		'UizeSite.Page.Example',
 		'UizeSite.ModulesTree',
-		'UizeSite.Build.Util',
 		'Uize.Url',
 		'Uize.Data.PathsTree',
-		'Uize.Data.Matches',
-		'Uize.Str.Has',
-		'Uize.Widgets.Container.Widget',
-		'Uize.Flo'
+		'Uize.Widgets.WidgetViewer.VisualSamplersViewer.Widget'
 	],
 	function () {
 		'use strict';
 
-		var
-			_selectorPlaceholderText = '-- NO NAMESPACE SELECTED --',
-			_visualSamplerModuleNameFromWidgetClass = UizeSite.Build.Util.visualSamplerModuleNameFromWidgetClass
-		;
-
-		/*** add namespaces for widgets that have visual samplers ***/
-			var
-				_modulesList = Uize.Data.PathsTree.toList (UizeSite.ModulesTree ()),
-				_modulesLookup = Uize.lookup (_modulesList),
-				_visualSamplerDirectNamespaces = Uize.Data.Matches.values (
-					_modulesList,
-					function (_moduleName) {
-						return (
-							!Uize.Str.Has.hasPrefix (_moduleName,'Uize.Build.') &&
-							_modulesLookup [_moduleName + '.Widget'] &&
-							_modulesLookup [_moduleName + '.VisualSampler']
-						);
-					}
-				),
-				_visualSamplerNamespaces = _visualSamplerDirectNamespaces.concat ()
-			;
-
-		/*** add namespaces that aggregate more than one visual sampler namespace ***/
-			/* EXAMPLE
-				Uize.Widgets.Button
-				Uize.Widgets.ProgressBar
-				Uize.Widgets.CoolWidgets.Foo
-				Uize.Widgets.CoolWidgets.More.Bar
-
-				With the above example of widget namespaces for widgets that have visual samplers, the following namespaces would also be added, because they clump / aggregate more than one namespace underneath them that contain visual samplers...
-
-				Uize.Widgets
-				Uize.Widgets.CoolWidgets
-
-				Note that the Uize namespace would not be added, because it is redundant. In other words, selecting the Uize namespace would show no more visual samplers than selecting the Uize.Widgets namespace. The same applies to the Uize.Widgets.CoolWidgets.More namespace.
-			*/
-			var _visualSamplerNamespacesTree = Uize.Data.PathsTree.fromList (_visualSamplerNamespaces);
-			function _processNode (_path,_node) {
-				var _totalKeys = Uize.totalKeys (_node);
-				if (_totalKeys) {
-					_totalKeys > 1 && _visualSamplerNamespaces.push (_path);
-					for (var _subNode in _node)
-						_processNode (_path + (_path && '.') + _subNode,_node [_subNode])
-					;
-				}
-			}
-			_processNode ('',_visualSamplerNamespacesTree);
-			_visualSamplerNamespaces.sort ();
-
-		/*** build lookup for visual sampler modules per namespace ***/
-			var _visualSamplerModulesByNamespace = {};
-			Uize.forEach (
-				_visualSamplerNamespaces,
-				function (_namespace) {
-					_visualSamplerModulesByNamespace [_namespace] = Uize.map (
-						Uize.Data.Matches.values (
-							_visualSamplerDirectNamespaces,
-							function (_visualSamplerNamespace) {
-								return (
-									!_namespace ||
-									_visualSamplerNamespace == _namespace ||
-									Uize.Str.Has.hasPrefix (_visualSamplerNamespace,_namespace + '.')
-								);
-							}
-						),
-						'value + ".VisualSampler"'
-					);
-				}
-			);
-
 		/*** create the example page widget ***/
 			var _page = window.page = UizeSite.Page.Example ();
 
+		/*** add the visual samplers viewer ***/
+			var _modulesTree = Uize.copy (UizeSite.ModulesTree ());
+			delete _modulesTree.Uize.Build;
+
+			_page.addChild (
+				'widgetViewer',
+				Uize.Widgets.WidgetViewer.VisualSamplersViewer.Widget,
+				{
+					modules:Uize.Data.PathsTree.toList (_modulesTree),
+					value:Uize.Url.fromParams (location.href).namespace || 'Uize.Widgets',
+					built:false
+				}
+			);
+
 		/*** wire up the page widget ***/
 			_page.wireUi ();
-
-		/*** handle selection of namespace ***/
-			function _handleSelection () {
-				var
-					_selectedNamespace = _page.getNodeValue ('selector'),
-					_visualSamplers = _page.children.visualSamplers
-				;
-				if (_visualSamplers) {
-					_page.removeChild ('visualSamplers');
-					_visualSamplers.setNodeInnerHtml ('shell','');
-					_visualSamplers = null;
-				}
-				if (_selectedNamespace != _selectorPlaceholderText) {
-					(
-						_visualSamplers = _page.addChild (
-							'visualSamplers',
-							Uize.Widgets.Container.Widget,
-							{built:false}
-						)
-					).insertUi ();
-					var _visualSamplerProperties = {
-						built:false,
-						container:_visualSamplers.getNode (),
-						insertionMode:'inner bottom'
-					};
-					Uize.Flo.forEach (
-						function (_next) {_next (_visualSamplerModulesByNamespace [_selectedNamespace])},
-						function (_next) {
-							Uize.require (
-								_next.flo.value,
-								function (_visualSamplerModule) {
-									_visualSamplers.addChild (
-										'visualSampler' + _next.flo.key,
-										_visualSamplerModule,
-										_visualSamplerProperties
-									).insertUi ();
-									_next ();
-								}
-							);
-						}
-					) ({breatheAfter:500});
-				}
-			}
-			_page.wireNode ('selector','change',_handleSelection);
-
-		/*** initialize ***/
-			/*** populate selector ***/
-				var
-					_selector = _page.getNode ('selector'),
-					_selectorOptions = _selector.options
-				;
-				_selectorOptions [0] = new Option (_selectorPlaceholderText,'');
-				for (
-					var
-						_visualSamplerNamespaceNo = -1,
-						_visualSamplerNamespacesLength = _visualSamplerNamespaces.length,
-						_namespace
-					;
-					++_visualSamplerNamespaceNo < _visualSamplerNamespacesLength;
-				)
-					_selectorOptions [_selectorOptions.length] = new Option (
-						((_namespace = _visualSamplerNamespaces [_visualSamplerNamespaceNo]) || 'ALL NAMESPACES') +
-						' (' + _visualSamplerModulesByNamespace [_namespace].length + ')',
-						_namespace
-					)
-				;
-
-			/*** initialize selector, using query param ***/
-				_page.setNodeValue ('selector',Uize.Url.fromParams (location.href).namespace || 'Uize.Widgets');
-				_handleSelection ();
 	}
 );
 

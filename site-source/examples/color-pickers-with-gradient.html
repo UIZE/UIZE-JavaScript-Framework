@@ -37,7 +37,7 @@
 	<!-- explanation copy -->
 
 	<div class="explanation">
-		<p>This example combines use of two <a href="../reference/Uize.Widgets.RgbSliders.Widget.html"><code>Uize.Widgets.RgbSliders.Widget</code></a> instances with a single <a href="../reference/Uize.Widget.ColorCube.html"><code>Uize.Widget.ColorCube</code></a> instance to display a gradient between two colors you select. The color cube is turned into a simple gradient display by setting the value of its <code>divisionsY</code> state property to <code>1</code>, and then using only the <code>colorTopLeft</code> and <code>colorTopRight</code> state properties to change the gradient's color poles.</p>
+		<p>This example combines use of two <a href="../reference/Uize.Widgets.RgbSliders.Widget.html"><code>Uize.Widgets.RgbSliders.Widget</code></a> instances with a single <a href="../reference/Uize.Widget.ColorGrid.html"><code>Uize.Widget.ColorGrid</code></a> instance to display a gradient between two colors you select. The color grid is turned into a simple gradient display by setting the value of its <code>divisionsY</code> state property to <code>1</code>, and then using only the <code>colorTopLeft</code> and <code>colorTopRight</code> state properties to change the gradient's color poles.</p>
 	</div>
 
 	<!-- "wireframe" for the UI -->
@@ -65,7 +65,8 @@ Uize.require (
 		'UizeSite.Page.Example.library',
 		'UizeSite.Page.Example',
 		'Uize.Widgets.RgbSliders.Widget',
-		'Uize.Widget.ColorCube'
+		'Uize.Widget.ColorCube',
+		'Uize.Templates.ColorCube'
 	],
 	function () {
 		'use strict';
@@ -73,7 +74,7 @@ Uize.require (
 		/*** create the example page widget ***/
 			var page = window.page = UizeSite.Page.Example ();
 
-		/*** add the color cube child widget used for the gradient effect ***/
+		/*** add the color grid child widget used for the gradient effect ***/
 			var colorCube = page.addChild (
 				'colorCube',
 				Uize.Widget.ColorCube,
@@ -82,7 +83,8 @@ Uize.require (
 					divisionsY:1,
 					colorTopLeft:'ffff00',
 					colorTopRight:'ff0000',
-					built:false
+					built:false,
+					html:Uize.Templates.ColorCube
 				}
 			);
 

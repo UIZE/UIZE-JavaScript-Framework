@@ -1,0 +1,22 @@
+<div>
+	<div id="segmentA" class="segment segmentOff"></div>
+	<div id="segmentB" class="segment segmentOff"></div>
+	<div id="segmentC" class="segment segmentOff"></div>
+
+	<div id="segmentD" class="segment segmentOff"></div>
+	<div id="segmentE" class="segment segmentOff"></div>
+	<div id="segmentF" class="segment segmentOff"></div>
+
+	<div id="segmentG" class="segment segmentOff"></div>
+	<div id="segmentH" class="segment segmentOff"></div>
+	<div id="segmentI" class="segment segmentOff"></div>
+
+	<div id="segmentJ" class="segment segmentOff"></div>
+	<div id="segmentK" class="segment segmentOff"></div>
+	<div id="segmentL" class="segment segmentOff"></div>
+
+	<div id="segmentM" class="segment segmentOff"></div>
+	<div id="segmentN" class="segment segmentOff"></div>
+	<div id="segmentO" class="segment segmentOff"></div>
+</div>
+

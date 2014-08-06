@@ -47,6 +47,19 @@ NEW MODULE: Uize.Data.JavaProperties
 	- write documentation
 	- write news announcement
 
+NEW MODULE: Uize.Data.MacStrings
+	Still to do...
+
+	- write documentation
+	- write news announcement
+
+NEW MODULE: Uize.Loc.FileFormats.AndroidStrings
+	Still to do...
+
+	- write unit tests
+	- write documentation
+	- write news announcement
+
 NEW MODULE: Uize.Event.Bus
 	Still to do...
 
@@ -91,7 +104,6 @@ New Localization Plurals Modules
 NEW MODULE: Uize.Math.LogicalPos
 	Still to do...
 
-	- implement fit and fill convenience methods
 	- write unit tests
 	- write documentation
 	- write news announcement

@@ -280,7 +280,8 @@ function _eval (_toEval) {
 							'});';
 					} else if (
 						_fileExists (_modulePath + '.loc') ||
-						_fileExists (_modulePath + '.htmlt')
+						_fileExists (_modulePath + '.htmlt') ||
+						_fileExists (_modulePath + '.simpledata') // TODO: should really read and parse .simpledata file
 					) {
 						_moduleText =
 							'Uize.module ({\n' +

@@ -1,0 +1,5 @@
+This is a TO DO document for the =Uize.Data.Diff= module.
+
+TODO
+- document the =Uize.Data.Diff.diff= method's support for passing the path of the current property being compared as a third argument to the property comparer function
+

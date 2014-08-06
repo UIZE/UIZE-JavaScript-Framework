@@ -40,4 +40,7 @@ table.paramsTable .textInput {
 	width: 70px;
 	margin: 3px 0;
 }
+table.paramsTable textarea {
+	tab-size: 3;
+}
 

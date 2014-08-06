@@ -873,3 +873,348 @@ Things to Add to Documentation
 			- DevToolBar for IE
 		- Windows Script Host
 
+Comparison of UIZE Widgets Versus Other Frameworks
+	Example 1
+		Taken from [[http://ruoyusun.com/2013/08/24/a-glimpse-of-angularjs-scope-via-example.html]]...
+
+		The Angular Approach
+
+			HTML TEMPLATE
+			.........................................................
+			<div ng-controller="MenuCtrl" ng-app="App">
+				 <button ng-click="showMenu = true">Show Menu</button>
+				 <div ng-show="showMenu">
+					  <input type="text" focus-if="showMenu">
+				 </div>
+			</div>
+			.........................................................
+
+			JAVASCRIPT
+			......................................................
+			app = angular.module('App', []);
+			app.controller('MenuCtrl', function () {});
+			app.directive('focusIf', [function () {
+				 return function focusIf(scope, element, attr) {
+					  scope.$watch(attr.focusIf, function (newVal) {
+							if (newVal) {
+								 scope.$evalAsync(function() {
+									  element[0].focus();
+								 });
+							}
+					  });
+				 }
+			}]);
+			......................................................
+
+		The jQuery Approach
+
+			HTML TEMPLATE
+			.............................................
+			<div>
+				 <button id="show-menu">Show Menu</button>
+				 <div id="menu">
+					  <input type="text" class="to-focus">
+				 </div>
+			</div>
+			.............................................
+
+			JAVASCRIPT
+			.............................................
+			$(function(){
+				 $('#show-menu').click(function() {
+					  $menu = $('#menu');
+					  $menu.show();
+					  $menu.find('input.to-focus').focus();
+				 });
+			});
+			.............................................
+
+			Issues with this jQuery implementation...
+
+			- not expressed as a plug-in, so not designed for re-use (therefore, shorter than it would be)
+			- not designed for multi-instantiation, because of use of non-namespaced IDs
+
+		..................................................
+
+		The Uize Approach (ideal version)
+
+			HTML TEMPLATE
+			............................................
+			<div>
+				 <button id="showMenu">Show Menu</button>
+				 <div id="menu">
+					  <input id="menuText" type="text">
+				 </div>
+			</div>
+			............................................
+
+			JAVASCRIPT
+			................................................................
+			var MenuClass = Uize.Widget.V2.subclass ({
+				stateProperties:{
+					menuShown:{value:false}
+				},
+				htmlBindings:{
+					menuShown:['menu:[shown]','menuText:[focused]']
+				},
+				eventWirings:{
+					showMenu:{click:function () {this.set ('menuShown',true)}}
+				}
+			});
+			................................................................
+
+		The Uize Approach (current)
+
+			HTML JST TEMPLATE
+			............................................................
+			<div id="<%. idPrefix %>">
+				 <button id="<%. idPrefix %>-showMenu">Show Menu</button>
+				 <div id="<%. idPrefix %>-menu">
+					  <input id="<%. idPrefix %>-menuText" type="text">
+				 </div>
+			</div>
+			............................................................
+
+			JAVASCRIPT
+			................................................................
+			var MenuClass = Uize.Widget.V2.subclass ({
+				stateProperties:{
+					menuShown:{value:false}
+				},
+				htmlBindings:{
+					menuShown:['menu:[shown]','menuText:[focused]']
+				},
+				eventWirings:{
+					showMenu:{click:function () {this.set ('menuShown',true)}}
+				}
+			});
+			................................................................
+
+	Example 2
+		Taken from [[http://www.adobe.com/devnet/html5/articles/angularjs-directives-and-the-computer-science-of-javascript.html]]
+
+		The Angular Approach
+
+			HTML TEMPLATE
+			.............................................................................................
+			<div>
+				<marquee ng-click="edit()" ng-hide="editMode" scrollamount="100%" ng-transclude></marquee>
+				<input type="text" ng-show="editMode">
+			</div>
+			.............................................................................................
+
+			JAVASCRIPT
+			.........................................................................
+			// add a namespace for custom directives
+			angular.module('mydirectives', []);
+
+			angular.module('mydirectives').directive('blink', function() {
+			  return {
+				 restrict: 'E',
+				 transclude: true,
+				 templateUrl: 'views/blink.html',
+				 link: function(scope, element, attrs) {
+
+					// select the needed DOM elements from the template
+					var marquee = element.find("marquee");
+					var input = element.find("input");
+
+					// attach a blur event to the input
+					input.bind('blur', function() {
+					  scope.$apply(function() {
+						 // exit edit mode
+						 scope.editMode = false;
+						 // update the text of the marquee
+						 marquee.text(input.val());
+					  });
+					});
+
+					// edit mode boolean controls the visibility of the blink and input
+					scope.editMode = false;
+					// called when the marquee tag is clicked
+					scope.edit = function() {
+						 scope.editMode = true;
+						 input.val(marquee.text());
+					};
+				 }
+			  };
+			});
+			.........................................................................
+
+		The Uize Approach
+
+			HTML TEMPLATE
+			.......................................................
+			<div>
+				<marquee id="marquee" scrollamount="100%"></marquee>
+				<input id="edit" type="text">
+			</div>
+			.......................................................
+
+			JAVASCRIPT
+			....................................................
+			var EditableBlinkWidget = Uize.Widget.V2.subclass ({
+				stateProperties:{
+					blinkText:{value:''},
+					editMode:{value:false}
+				},
+				htmlBindings:{
+					blinkText:['marguee','edit:value'],
+					editMode:['marquee:[hide]','edit:[show]']
+				},
+				eventBindings:{
+					marquee:{click:this.set ({editMode:true})},
+					edit:{
+						blur:function () {
+							this.set ({
+								blinkText,this.getNodeValue ('edit'),
+								editMode:false
+							});
+						}
+					}
+				}
+			});
+			....................................................
+
+	JSON Format for HTML
+
+		OBJECT FORM
+		...........................
+		{
+			tag:tagNameSTR,
+			attr:attributesOBJ,
+			children:childNodesARRAY
+		}
+		...........................
+
+		EXAMPLE
+		..............................................................
+		{
+			tag:'div',
+			children:[
+				{tag:'marquee',attr:{id:'marquee',scrollamount:'100%'}},
+				{tag:'input',attr:{id:'edit',type:'text'}},
+			]
+		}
+		..............................................................
+
+		Array Forms
+			ARRAY FORM - TAG, ATTRIBUTES, CHILDREN
+			............................................................................................
+			[tagNameSTR,attributesOBJ,childNodesARRAY]  // tag, with attributes and children specified
+			[tagNameSTR,attributesOBJ]                  // tag, with attributes specified
+			[tagNameSTR,childNodesARRAY]                // tag, with children specified
+			[tagNameSTR]                                // tag, with no attributes or children specified
+			[attributesOBJ]                             // div tag, with attributes specified
+			[childNodesARRAY]                           // div tag, with children specified
+			............................................................................................
+
+		EXAMPLE
+		..................................................
+		['div',[
+			['marquee',{id:'marquee',scrollamount:'100%'}],
+			['input',{id:'edit',type:'text'}]
+		]]
+		..................................................
+
+	Simple Format for HTML
+
+		........................................
+		div
+			marquee: id=marquee scrollamount=100%
+			input: id=edit type=text
+		........................................
+
+		.........................
+		div
+			marquee
+				@id: marquee
+				@scrollamount: 100%
+			input
+				@id: edit
+				@type: text
+		.........................
+
+	Downsides of HTML Templates Being Pure HTML
+
+		Control Flow
+			How does one do repetition or conditionals?
+
+		Inline Functions
+			How important are functions, and how would they be supported?
+
+		Subclassing Templates
+			How does one extend a widget superclass' HTML?
+
+		Child Widgets
+			How does one do child widgets?
+
+			Some form of custom tags...
+
+			............................
+			<div>
+				<slider id="sliderRed"/>
+				<slider id="sliderBlue"/>
+			</div>
+			............................
+
+			A standard =widget= tag with =type= attribute...
+
+			...........................................
+			<div>
+				<widget id="sliderRed" type="slider"/>
+				<widget id="sliderGreen" type="slider"/>
+				<widget id="sliderBlue" type="slider"/>
+			</div>
+			...........................................
+
+			Type attribute does not need to be specified if the child widget is created in the JavaScript.
+
+			.............................
+			<div>
+				<widget id="sliderRed"/>
+				<widget id="sliderGreen"/>
+				<widget id="sliderBlue"/>
+			</div>
+			.............................
+
+		Arbitrary JavaScript
+			How does one use any other JavaScript code in construction of templates?
+
+			Perhaps for the pure HTML template approach, JST format JavaScript code is pre-processed in the same way as CSS, before the template HTML is parsed.
+
+	Turning HTML and Bindings Into Template Function
+		- parse HTML into object representation
+		- translate bindings into structure modifiers
+		- re-serialize object representation of HTML, replacing all dynamic sections with expressions to form a single concatenation expression
+
+	Parsing HTML
+		- states
+			- in open tag
+				- in tagName
+				- in attribute
+					- in attribute name
+					- in attribute name/value delimiter
+					- in attribute value
+			- in close tag
+			- in tag contents
+			- in text
+			- in comment
+
+	Serializing to HTML
+		All dynamic sections are replaced with expressions to form a single concatenation expression.
+
+		For =widget= tags, serialize to expression that calls =childHtml= method, where values of attributes are provided as values for state properties.
+
+		Serializing Child Widgets
+			what about child widgets where the values for some properties need to, themselves, be child widgets?
+
+			.........................................
+			<widget type="boxWithHeading">
+				<heading>This is the heading</heading>
+				<body>
+					<widget type="foo"/>
+				</body>
+			</widget>
+			.........................................
+

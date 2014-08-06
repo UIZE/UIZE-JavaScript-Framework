@@ -1,7 +1,7 @@
 /*______________
 |       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
 |     /      /  |   ---------------------------------------------------
-|    /    O /   |    MODULE : Uize.Widget.mWeb Class
+|    /    O /   |    MODULE : Uize.Widget.mWeb Mixin
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
 | /____/ /__/_| | COPYRIGHT : (c)2013-2014 UIZE
@@ -10,7 +10,7 @@
 */
 
 /* Module Meta Data
-	type: Class
+	type: Mixin
 	importance: 8
 	codeCompleteness: 100
 	docCompleteness: 100
@@ -28,12 +28,12 @@ Uize.module ({
 	required:'Uize.Web',
 	builder:function () {
 		'use strict';
-		
+
 		var
 			/*** Variables for Scruncher Optimization ***/
 				_Uize = Uize
 		;
-		
+
 		return function(_class) {
 			_class.declare({
 				instanceMethods:{
@@ -47,38 +47,38 @@ Uize.module ({
 							Instance Methods
 								web
 									Returns a =Uize.Web= object reference, allowing for syntax-friendly manipulation and/or interrogation of the specified implied node(s) of the widget.
-		
+
 									SYNTAX
 									..................................................
 									webOBJ = widgetOBJ.web(impliedNodeSTRorBLOB);
 									..................................................
-		
+
 									EXAMPLE
 									...........................................
 									var knob = this.web('knob');
 									...........................................
-		
+
 									Returns a =Uize.Web= object that contains the "knob" implied node of the widget.
-		
+
 									EXAMPLE
 									.........................................
 									var rootNode = this.web();
 									.........................................
-		
+
 									Returns a =Uize.Web= object that contains the `root node` of the the widget.
-									
+
 									VARIATION
 									..................................................
 									webOBJ = widgetOBJ.web(childWidgetOBJ);
 									..................................................
-		
+
 									EXAMPLE
 									...........................................
 									var childRootNode = mySlider.web(this.children.foo);
 									...........................................
-		
+
 									Returns a =Uize.Web= object that contains the `root node` node of the =foo= child widget.
-		
+
 									NOTES
 									- The =impliedNodeSTRorBLOB= parameter can be a string specifying the name of the implied node, or an object reference to the implied node.
 									- When the =impliedNodeSTRorBLOB= parameter has a value of =null=, then an empty =Uize.Web= object is returned.

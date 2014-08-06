@@ -1,0 +1,121 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Basic Color Grid | JavaScript Examples | UIZE JavaScript Framework</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<meta name="keywords" content="color Uize.Widget.ColorGrid"/>
+	<meta name="description" content="See an example of a color grid, where the color swatches in the grid are interpolated from RGB corner colors that can be dynamically set by the user."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.example.css"/>
+	<style type="text/css">
+		.swatch {
+			width:30px;
+			height:30px;
+			margin-left:1px;
+			margin-top:1px;
+		}
+	</style>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="header">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	<a href="../index.html" class="homeLinkText" title="UIZE JavaScript Framework home">UIZE JavaScript Framework</a>
+</h1>
+
+<div class="main">
+	<h1 class="document-title">
+		<a href="../javascript-examples.html" class="breadcrumb breadcrumbWithArrow">JAVASCRIPT EXAMPLES</a>
+		Basic Color Grid
+		<div class="pageActionsShell">
+			<div id="page-actions" class="pageActions"><a href="source-code/color-grid.html" class="buttonLink">SOURCE</a></div>
+		</div>
+	</h1>
+
+	<!-- explanation copy -->
+
+	<div class="explanation">
+		<p>In this example, an instance of the <a href="../reference/Uize.Widget.ColorGrid.html"><code>Uize.Widget.ColorGrid</code></a> class is wired up to provide a color grid that shows a color matrix (or color grid) of all the interpolated colors between four adjustable corner colors. Enter hex RGB values for any colors at any of the four corners, then click the "UPDATE" button below the grid to see the result. This grid is 10x10 and represents 100 colors, but the widget can be configured for different numbers of divisions on both the X and Y axes by setting the <code>divisionsX</code> and <code>divisionsY</code> state properties, respectively. With additional code, a subclass or other widget could use the color grid widget as a color selection palette, allowing the user to explore color ranges in 2D.</p>
+	</div>
+
+	<!-- "wireframe" for the UI -->
+
+	<form>
+		<table border="0" cellspacing="0" cellpadding="3" style="margin:auto;">
+			<tr>
+				<td><input id="page-colorTopLeft" type="text" size="6"/></td>
+				<td></td>
+				<td><input id="page-colorTopRight" type="text" size="6"/></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td id="page_colorGrid"></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td><input id="page-colorBottomLeft" type="text" size="6"/></td>
+				<td id="page_updateButton-shell" align="center"></td>
+				<td><input id="page-colorBottomRight" type="text" size="6"/></td>
+			</tr>
+		</table>
+	</form>
+</div>
+
+<script type="text/javascript">
+
+Uize.require (
+	[
+		'UizeSite.Page.Example.library',
+		'UizeSite.Page.Example',
+		'Uize.Widget.ColorGrid',
+		'Uize.Templates.ColorGrid',
+		'Uize.Widgets.Button.Widget'
+	],
+	function () {
+		'use strict';
+
+		/*** create the example page widget ***/
+			var page = window.page = UizeSite.Page.Example ();
+
+		/*** create the Uize.Widget.ColorGrid object ***/
+			var colorGrid = page.addChild ('colorGrid',Uize.Widget.ColorGrid,{built:false,html:Uize.Templates.ColorGrid});
+
+			function updateColorGridFromInputs () {
+				colorGrid.set ({colorTopLeft:page.getNodeValue ('colorTopLeft')});
+				colorGrid.set ({colorTopRight:page.getNodeValue ('colorTopRight')});
+				colorGrid.set ({colorBottomLeft:page.getNodeValue ('colorBottomLeft')});
+				colorGrid.set ({colorBottomRight:page.getNodeValue ('colorBottomRight')});
+			}
+
+		/*** initialize input nodes ***/
+			page.setNodeValue ('colorTopLeft',colorGrid.get ('colorTopLeft'));
+			page.setNodeValue ('colorTopRight',colorGrid.get ('colorTopRight'));
+			page.setNodeValue ('colorBottomLeft',colorGrid.get ('colorBottomLeft'));
+			page.setNodeValue ('colorBottomRight',colorGrid.get ('colorBottomRight'));
+
+		/*** add update button ***/
+			page.addChild (
+				'updateButton',
+				Uize.Widgets.Button.Widget,
+				{
+					built:false,
+					text:'UPDATE',
+					size:'small',
+					action:updateColorGridFromInputs
+				}
+			);
+
+		/*** wire up the page widget ***/
+			page.wireUi ();
+	}
+);
+
+</script>
+
+</body>
+</html>
+

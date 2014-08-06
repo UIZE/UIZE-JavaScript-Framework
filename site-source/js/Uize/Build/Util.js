@@ -49,7 +49,7 @@ Uize.module ({
 				_fileSystem = Uize.Services.FileSystem.singleton (),
 				_compiledJstFilesByPath = {},
 				_package,
-				_jsModuleExtensions = ['.js','.js.jst','.csst','.htmlt','.loc'],
+				_jsModuleExtensions = ['.js','.js.jst','.csst','.htmlt','.loc','.simpledata'],
 				_jsModuleExtensionRegExp = new RegExp (
 					'(' + Uize.map (_jsModuleExtensions,'Uize.escapeRegExpLiteral (value)').join ('|') + ')$'
 				)

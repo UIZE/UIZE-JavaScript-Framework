@@ -1117,6 +1117,32 @@ Uize.module ({
 							- test state properties and inheritance
 								- test that state properties are inherited by subclasses
 						*/
+						{
+							title:
+								'When a state property is defined by a private name in a base class and then is augmented in a subclass with a declaration that uses its public name, onChange handlers added in the subclass\' declaration are executed when the value is set by its private name in the base class',
+							test:function () {
+								var
+									_handlersCalled = [],
+									_Class = Uize.Class.subclass ({
+										stateProperties:{
+											privateName:{
+												name:'publicName',
+												onChange:function () {_handlersCalled.push ('class')}
+											}
+										}
+									}),
+									_SubClass = _Class.subclass ({
+										stateProperties:{
+											publicName:{
+												onChange:function () {_handlersCalled.push ('subclass')}
+											}
+										}
+									}),
+									_instance = _SubClass ({privateName:'hello'})
+								;
+								return this.expect (['class','subclass'],_handlersCalled);
+							}
+						}
 					]],
 					['Uize.Class.doMy',[
 						{

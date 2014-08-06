@@ -46,16 +46,15 @@ Uize.module ({
 			builderInputs:function (_urlParts) {
 				return {cssSource:this.sourceUrlFromBuiltUrl (_urlParts.pathname) + 't'};
 			},
-			builder:function (_inputs) {
+			builder:function (_inputs,_urlParts) {
 				var
-					_cssSource = _inputs.cssSource,
 					_params = this.params,
 					_cssClassPrefix = Uize.Build.Util.moduleNameFromModulePath (
-						_cssSource.slice ((_params.sourcePath + '/' + _params.modulesFolder + '/').length),
+						(_urlParts.pathname + 't').slice ((_params.builtPath + '/' + _params.modulesFolder + '/').length),
 						true
 					).replace (/\./g,'_'),
 					_template = Uize.Template.compile (
-						this.readFile ({path:_cssSource}).replace (
+						this.readFile ({path:_inputs.cssSource}).replace (
 							/`([^`]*)`/g,
 							function (_match,_cssClass) {return _cssClassPrefix + (_cssClass && '-') + _cssClass}
 						),

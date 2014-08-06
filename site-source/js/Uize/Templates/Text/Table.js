@@ -634,28 +634,18 @@ Uize.module ({
 	required:[
 		'Uize.Data.Util',
 		'Uize.Array.Util',
-		'Uize.Str.Repeat'
+		'Uize.Str.Limit'
 	],
 	builder:function () {
 		'use strict';
 
 		var
 			/*** Variables for Performance Optimization ***/
-				_repeat = Uize.Str.Repeat.repeat
+				_pad = Uize.Str.Limit.lengthize
 		;
 
 		return Uize.package ({
 			process:function (_input) {
-				function _pad (_sourceStr,_length,_align) {
-					var
-						_totalPadding = _length - _sourceStr.length,
-						_leftPadding = Math.floor (
-							_totalPadding * (typeof _align == 'string' ? {left:0,center:.5,right:1} [_align] : +_align || 0)
-						)
-					;
-					return _repeat (' ',_leftPadding) + _sourceStr + _repeat (' ',_totalPadding - _leftPadding);
-				}
-
 				var
 					_title = _input.title,
 					_columns = _input.columns,

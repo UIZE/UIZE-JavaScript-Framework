@@ -1,0 +1,1251 @@
+linear
+	curve: Uize.Curve.linear
+	duration: 800
+
+################
+### Acceleration
+################
+
+Acceleration + Deceleration - celeration (1,0)
+	curve::
+		Uize.Fade.celeration (
+			1,  // acceleration phase width (0-1)
+			0   // deceleration phase width (0-1)
+		)
+	duration: 800
+
+Acceleration + Deceleration - celeration (.5,0)
+	curve::
+		Uize.Fade.celeration (
+			.5,  // acceleration phase width (0-1)
+			0    // deceleration phase width (0-1)
+		)
+	duration: 800
+
+Acceleration + Deceleration - celeration (0,1)
+	curve::
+		Uize.Fade.celeration (
+			0,  // acceleration phase width (0-1)
+			1   // deceleration phase width (0-1)
+		)
+	duration: 800
+
+Acceleration + Deceleration - celeration (0,.5)
+	curve::
+		Uize.Fade.celeration (
+			0,  // acceleration phase width (0-1)
+			.5  // deceleration phase width (0-1)
+		)
+	duration: 800
+
+Acceleration + Deceleration - celeration (.5,.5)
+	curve::
+		Uize.Fade.celeration (
+			.5,  // acceleration phase width (0-1)
+			.5   // deceleration phase width (0-1)
+		)
+	duration: 800
+
+Acceleration + Deceleration - celeration (.25,.25)
+	curve::
+		Uize.Fade.celeration (
+			.25,  // acceleration phase width (0-1)
+			.25   // deceleration phase width (0-1)
+		)
+	duration: 800
+
+Acceleration + Deceleration - celeration (.75,.25)
+	curve::
+		Uize.Fade.celeration (
+			.75,  // acceleration phase width (0-1)
+			.25   // deceleration phase width (0-1)
+		)
+	duration: 800
+
+Acceleration + Deceleration - celeration (.25,.75)
+	curve::
+		Uize.Fade.celeration (
+			.25,  // acceleration phase width (0-1)
+			.75   // deceleration phase width (0-1)
+		)
+	duration: 800
+
+##########################
+### Power Easing
+##########################
+
+Power Easing - easeInPow (2) - quadratic
+	curve::
+		Uize.Curve.easeInPow (
+			2  // power (0-Infinity)
+		)
+	duration: 800
+
+Power Easing - easeInPow (3) - cubic
+	curve::
+		Uize.Curve.easeInPow (
+			3  // power (0-Infinity)
+		)
+	duration: 800
+
+Power Easing - easeInPow (4) - quartic
+	curve::
+		Uize.Curve.easeInPow (
+			4  // power (0-Infinity)
+		)
+	duration: 800
+
+Power Easing - easeInPow (5) - quintic
+	curve::
+		Uize.Curve.easeInPow (
+			5  // power (0-Infinity)
+		)
+	duration: 800
+
+Power Easing - easeInPow (6)
+	curve::
+		Uize.Curve.easeInPow (
+			6  // power (0-Infinity)
+		)
+	duration: 800
+
+Power Easing - easeInPow (12)
+	curve::
+		Uize.Curve.easeInPow (
+			12  // power (0-Infinity)
+		)
+	duration: 800
+
+Power Easing - easeInPow (1/2)
+	curve::
+		Uize.Curve.easeInPow (
+			1/2  // power (0-Infinity)
+		)
+	duration: 800
+
+Power Easing - easeInPow (1/5)
+	curve::
+		Uize.Curve.easeInPow (
+			1/5  // power (0-Infinity)
+		)
+	duration: 800
+
+Power Easing - easeOutPow (2) - quadratic
+	curve::
+		Uize.Curve.easeOutPow (
+			2  // power (0-Infinity)
+		)
+	duration: 800
+
+Power Easing - easeOutPow (3) - cubic
+	curve::
+		Uize.Curve.easeOutPow (
+			3  // power (0-Infinity)
+		)
+	duration: 800
+
+Power Easing - easeOutPow (4) - quartic
+	curve::
+		Uize.Curve.easeOutPow (
+			4  // power (0-Infinity)
+		)
+	duration: 800
+
+Power Easing - easeOutPow (5) - quintic
+	curve::
+		Uize.Curve.easeOutPow (
+			5  // power (0-Infinity)
+		)
+	duration: 800
+
+Power Easing - easeOutPow (6)
+	curve::
+		Uize.Curve.easeOutPow (
+			6  // power (0-Infinity)
+		)
+	duration: 800
+
+Power Easing - easeOutPow (12)
+	curve::
+		Uize.Curve.easeOutPow (
+			12  // power (0-Infinity)
+		)
+	duration: 800
+
+Power Easing - easeOutPow (1/2)
+	curve::
+		Uize.Curve.easeOutPow (
+			1/2  // power (0-Infinity)
+		)
+	duration: 800
+
+Power Easing - easeOutPow (1/5)
+	curve::
+		Uize.Curve.easeOutPow (
+			1/5  // power (0-Infinity)
+		)
+	duration: 800
+
+Power Easing - easeInOutPow (2) - quadratic
+	curve::
+		Uize.Curve.easeInOutPow (
+			2  // power (0-Infinity)
+		)
+	duration: 800
+
+Power Easing - easeInOutPow (3) - cubic
+	curve::
+		Uize.Curve.easeInOutPow (
+			3  // power (0-Infinity)
+		)
+	duration: 800
+
+Power Easing - easeInOutPow (4) - quartic
+	curve::
+		Uize.Curve.easeInOutPow (
+			4  // power (0-Infinity)
+		)
+	duration: 800
+
+Power Easing - easeInOutPow (5) - quintic
+	curve::
+		Uize.Curve.easeInOutPow (
+			5  // power (0-Infinity)
+		)
+	duration: 800
+
+Power Easing - easeInOutPow (6)
+	curve::
+		Uize.Curve.easeInOutPow (
+			6  // power (0-Infinity)
+		)
+	duration: 800
+
+Power Easing - easeInOutPow (12)
+	curve::
+		Uize.Curve.easeInOutPow (
+			12  // power (0-Infinity)
+		)
+	duration: 800
+
+Power Easing - easeInOutPow (1/2)
+	curve::
+		Uize.Curve.easeInOutPow (
+			1/2  // power (0-Infinity)
+		)
+	duration: 800
+
+Power Easing - easeInOutPow (1/5)
+	curve::
+		Uize.Curve.easeInOutPow (
+			1/5  // power (0-Infinity)
+		)
+	duration: 800
+
+Power Easing - easeMiddlePow (2) - quadratic
+	curve::
+		Uize.Curve.easeMiddlePow (
+			2  // power (0-Infinity)
+		)
+	duration: 800
+
+Power Easing - easeMiddlePow (3) - cubic
+	curve::
+		Uize.Curve.easeMiddlePow (
+			3  // power (0-Infinity)
+		)
+	duration: 800
+
+Power Easing - easeMiddlePow (4) - quartic
+	curve::
+		Uize.Curve.easeMiddlePow (
+			4  // power (0-Infinity)
+		)
+	duration: 800
+
+Power Easing - easeMiddlePow (5) - quintic
+	curve::
+		Uize.Curve.easeMiddlePow (
+			5  // power (0-Infinity)
+		)
+	duration: 800
+
+Power Easing - easeMiddlePow (6)
+	curve::
+		Uize.Curve.easeMiddlePow (
+			6  // power (0-Infinity)
+		)
+	duration: 800
+
+Power Easing - easeMiddlePow (12)
+	curve::
+		Uize.Curve.easeMiddlePow (
+			12  // power (0-Infinity)
+		)
+	duration: 800
+
+Power Easing - easeMiddlePow (1/2)
+	curve::
+		Uize.Curve.easeMiddlePow (
+			1/2  // power (0-Infinity)
+		)
+	duration: 800
+
+Power Easing - easeMiddlePow (1/5)
+	curve::
+		Uize.Curve.easeMiddlePow (
+			1/5  // power (0-Infinity)
+		)
+	duration: 800
+
+####################################
+### Sweetened Power Easing
+####################################
+
+Sweetened Power Easing - easeInSweetPow (2)
+	curve::
+		Uize.Curve.easeInSweetPow (
+			2  // power (0-Infinity)
+		)
+	duration: 800
+
+Sweetened Power Easing - easeInSweetPow (3)
+	curve::
+		Uize.Curve.easeInSweetPow (
+			3  // power (0-Infinity)
+		)
+	duration: 800
+
+Sweetened Power Easing - easeInSweetPow (4)
+	curve::
+		Uize.Curve.easeInSweetPow (
+			4  // power (0-Infinity)
+		)
+	duration: 800
+
+Sweetened Power Easing - easeInSweetPow (5)
+	curve::
+		Uize.Curve.easeInSweetPow (
+			5  // power (0-Infinity)
+		)
+	duration: 800
+
+Sweetened Power Easing - easeOutSweetPow (2)
+	curve::
+		Uize.Curve.easeOutSweetPow (
+			2  // power (0-Infinity)
+		)
+	duration: 800
+
+Sweetened Power Easing - easeOutSweetPow (3)
+	curve::
+		Uize.Curve.easeOutSweetPow (
+			3  // power (0-Infinity)
+		)
+	duration: 800
+
+Sweetened Power Easing - easeOutSweetPow (4)
+	curve::
+		Uize.Curve.easeOutSweetPow (
+			4  // power (0-Infinity)
+		)
+	duration: 800
+
+Sweetened Power Easing - easeOutSweetPow (5)
+	curve::
+		Uize.Curve.easeOutSweetPow (
+			5  // power (0-Infinity)
+		)
+	duration: 800
+
+Sweetened Power Easing - easeInOutSweetPow (2)
+	curve::
+		Uize.Curve.easeInOutSweetPow (
+			2  // power (0-Infinity)
+		)
+	duration: 800
+
+Sweetened Power Easing - easeInOutSweetPow (3)
+	curve::
+		Uize.Curve.easeInOutSweetPow (
+			3  // power (0-Infinity)
+		)
+	duration: 800
+
+Sweetened Power Easing - easeInOutSweetPow (4)
+	curve::
+		Uize.Curve.easeInOutSweetPow (
+			4  // power (0-Infinity)
+		)
+	duration: 800
+
+Sweetened Power Easing - easeInOutSweetPow (5)
+	curve::
+		Uize.Curve.easeInOutSweetPow (
+			5  // power (0-Infinity)
+		)
+	duration: 800
+
+Sweetened Power Easing - easeMiddleSweetPow (2)
+	curve::
+		Uize.Curve.easeMiddleSweetPow (
+			2  // power (0-Infinity)
+		)
+	duration: 800
+
+Sweetened Power Easing - easeMiddleSweetPow (3)
+	curve::
+		Uize.Curve.easeMiddleSweetPow (
+			3  // power (0-Infinity)
+		)
+	duration: 800
+
+Sweetened Power Easing - easeMiddleSweetPow (4)
+	curve::
+		Uize.Curve.easeMiddleSweetPow (
+			4  // power (0-Infinity)
+		)
+	duration: 800
+
+Sweetened Power Easing - easeMiddleSweetPow (5)
+	curve::
+		Uize.Curve.easeMiddleSweetPow (
+			5  // power (0-Infinity)
+		)
+	duration: 800
+
+######################
+### Exponential Easing
+######################
+
+Exponential Easing - easeInExpo
+	curve: Uize.Curve.easeInExpo ()
+	duration: 800
+
+Exponential Easing - easeOutExpo
+	curve: Uize.Curve.easeOutExpo ()
+	duration: 800
+
+Exponential Easing - easeInOutExpo
+	curve: Uize.Curve.easeInOutExpo ()
+	duration: 800
+
+Exponential Easing - easeMiddleExpo
+	curve: Uize.Curve.easeMiddleExpo ()
+	duration: 800
+
+###################
+### Circular Easing
+###################
+
+Circular Easing - easeInCircular
+	curve: Uize.Curve.easeInCircular ()
+	duration: 800
+
+Circular Easing - easeInCircular (3)
+	curve::
+		Uize.Curve.easeInCircular (
+			3  // power (0-Infinity)
+		)
+	duration: 800
+
+Circular Easing - easeInCircular (4)
+	curve::
+		Uize.Curve.easeInCircular (
+			4  // power (0-Infinity)
+		)
+	duration: 800
+
+Circular Easing - easeOutCircular
+	curve: Uize.Curve.easeOutCircular ()
+	duration: 800
+
+Circular Easing - easeOutCircular (3)
+	curve::
+		Uize.Curve.easeOutCircular (
+			3  // power (0-Infinity)
+		)
+	duration: 800
+
+Circular Easing - easeOutCircular (4)
+	curve::
+		Uize.Curve.easeOutCircular (
+			4  // power (0-Infinity)
+		)
+	duration: 800
+
+Circular Easing - easeInOutCircular
+	curve: Uize.Curve.easeInOutCircular ()
+	duration: 800
+
+Circular Easing - easeInOutCircular (3)
+	curve::
+		Uize.Curve.easeInOutCircular (
+			3  // power (0-Infinity)
+		)
+	duration: 800
+
+Circular Easing - easeInOutCircular (4)
+	curve::
+		Uize.Curve.easeInOutCircular (
+			4  // power (0-Infinity)
+		)
+	duration: 800
+
+Circular Easing - easeMiddleCircular
+	curve: Uize.Curve.easeMiddleCircular ()
+	duration: 800
+
+Circular Easing - easeMiddleCircular (3)
+	curve::
+		Uize.Curve.easeMiddleCircular (
+			3  // power (0-Infinity)
+		)
+	duration: 800
+
+Circular Easing - easeMiddleCircular (4)
+	curve::
+		Uize.Curve.easeMiddleCircular (
+			4  // power (0-Infinity)
+		)
+	duration: 800
+
+#####################
+### Sinusoidal Easing
+#####################
+
+Sinusoidal Easing - easeInSine
+	curve: Uize.Curve.easeInSine ()
+	duration: 800
+
+Sinusoidal Easing - easeOutSine
+	curve: Uize.Curve.easeOutSine ()
+	duration: 800
+
+Sinusoidal Easing - easeInOutSine
+	curve: Uize.Curve.easeInOutSine ()
+	duration: 800
+
+Sinusoidal Easing - easeMiddleSine
+	curve: Uize.Curve.easeMiddleSine ()
+	duration: 800
+
+################
+### Back Easing
+################
+
+Back Easing w/ Overshoot - easeInBack
+	curve: Uize.Curve.Rubber.easeInBack ()
+	duration: 800
+
+Back Easing w/ Overshoot - easeOutBack
+	curve: Uize.Curve.Rubber.easeOutBack ()
+	duration: 800
+
+Back Easing w/ Overshoot - easeInOutBack (3)
+	curve::
+		Uize.Curve.Rubber.easeInOutBack (
+			3  // overshoot
+		)
+	duration: 800
+
+Back Easing w/ Overshoot - easeMiddleBack (3)
+	curve::
+		Uize.Curve.Rubber.easeMiddleBack (
+			3  // overshoot
+		)
+	duration: 800
+
+##################
+### Elastic Easing
+##################
+
+Elastic Easing - easeInElastic (.6)
+	curve::
+		Uize.Curve.Rubber.easeInElastic (
+			.6  // period (0-Infinity)
+		)
+	duration: 1500
+
+Elastic Easing - easeInElastic (.3)
+	curve::
+		Uize.Curve.Rubber.easeInElastic (
+			.3  // period (0-Infinity)
+		)
+	duration: 1500
+
+Elastic Easing - easeInElastic (.2)
+	curve::
+		Uize.Curve.Rubber.easeInElastic (
+			.2  // period (0-Infinity)
+		)
+	duration: 1500
+
+Elastic Easing - easeInElastic (.1)
+	curve::
+		Uize.Curve.Rubber.easeInElastic (
+			.1  // period (0-Infinity)
+		)
+	duration: 1500
+
+Elastic Easing - easeOutElastic (.6)
+	curve::
+		Uize.Curve.Rubber.easeOutElastic (
+			.6  // period (0-Infinity)
+		)
+	duration: 1500
+
+Elastic Easing - easeOutElastic (.3)
+	curve::
+		Uize.Curve.Rubber.easeOutElastic (
+			.3  // period (0-Infinity)
+		)
+	duration: 1500
+
+Elastic Easing - easeOutElastic (.2)
+	curve::
+		Uize.Curve.Rubber.easeOutElastic (
+			.2  // period (0-Infinity)
+		)
+	duration: 1500
+
+Elastic Easing - easeOutElastic (.1)
+	curve::
+		Uize.Curve.Rubber.easeOutElastic (
+			.1  // period (0-Infinity)
+		)
+	duration: 1500
+
+Elastic Easing - easeInOutElastic (.6)
+	curve::
+		Uize.Curve.Rubber.easeInOutElastic (
+			.6  // period (0-Infinity)
+		)
+	duration: 1500
+
+Elastic Easing - easeInOutElastic (.3)
+	curve::
+		Uize.Curve.Rubber.easeInOutElastic (
+			.3  // period (0-Infinity)
+		)
+	duration: 1500
+
+Elastic Easing - easeInOutElastic (.2)
+	curve::
+		Uize.Curve.Rubber.easeInOutElastic (
+			.2  // period (0-Infinity)
+		)
+	duration: 1500
+
+Elastic Easing - easeInOutElastic (.1)
+	curve::
+		Uize.Curve.Rubber.easeInOutElastic (
+			.1  // period (0-Infinity)
+		)
+	duration: 1500
+
+Elastic Easing - easeMiddleElastic (.6)
+	curve::
+		Uize.Curve.Rubber.easeMiddleElastic (
+			.6  // period (0-Infinity)
+		)
+	duration: 1500
+
+Elastic Easing - easeMiddleElastic (.3)
+	curve::
+		Uize.Curve.Rubber.easeMiddleElastic (
+			.3  // period (0-Infinity)
+		)
+	duration: 1500
+
+Elastic Easing - easeMiddleElastic (.2)
+	curve::
+		Uize.Curve.Rubber.easeMiddleElastic (
+			.2  // period (0-Infinity)
+		)
+	duration: 1500
+
+Elastic Easing - easeMiddleElastic (.1)
+	curve::
+		Uize.Curve.Rubber.easeMiddleElastic (
+			.1  // period (0-Infinity)
+		)
+	duration: 1500
+
+#################
+### Bounce Easing
+#################
+
+Bounce Easing - easeInBounce
+	curve: Uize.Curve.Rubber.easeInBounce ()
+	duration: 1200
+
+Bounce Easing - easeInBounce - third time's a charm
+	curve::
+		Uize.Curve.Rubber.easeInBounce (
+			3,   // bounces (2-Infinity)
+			1.3, // bounciness (-Infinity to Infinity)
+			1,   // bounce width ratio (0-Infinity)
+			Uize.Curve.easeInCircular ()
+		)
+	duration: 2000
+
+Bounce Easing - easeOutBounce
+	curve: Uize.Curve.Rubber.easeOutBounce ()
+	duration: 1200
+
+Bounce Easing - easeOutBounce - more bouncy
+	curve::
+		Uize.Curve.Rubber.easeOutBounce (
+			4,   // bounces (2-Infinity)
+			1.5  // bounciness (-Infinity to Infinity)
+		)
+	duration: 1200
+
+Bounce Easing - easeOutBounce - very bouncy
+	curve::
+		Uize.Curve.Rubber.easeOutBounce (
+			4,  // bounces (2-Infinity)
+			4   // bounciness (-Infinity to Infinity)
+		)
+	duration: 1200
+
+Bounce Easing - easeOutBounce - super bouncy
+	curve::
+		Uize.Curve.Rubber.easeOutBounce (
+			9,    // bounces (2-Infinity)
+			4,    // bounciness (-Infinity to Infinity)
+			1.25  // bounce width ratio (0-Infinity)
+		)
+	duration: 2000
+
+Bounce Easing - easeOutBounce - muffled
+	curve::
+		Uize.Curve.Rubber.easeOutBounce (
+			3,   // bounces (2-Infinity)
+			-4,  // bounciness (-Infinity to Infinity)
+			1.7  // bounce width ratio (0-Infinity)
+		)
+	duration: 800
+
+Bounce Easing - easeOutBounce - fast thud
+	curve::
+		Uize.Curve.Rubber.easeOutBounce (
+			6,   // bounces (2-Infinity)
+			-8,  // bounciness (-Infinity to Infinity)
+			1.5  // bounce width ratio (0-Infinity)
+		)
+	duration: 800
+
+Bounce Easing - easeOutBounce - violent, slowing
+	curve::
+		Uize.Curve.Rubber.easeOutBounce (
+			10,  // bounces (2-Infinity)
+			4,   // bounciness (-Infinity to Infinity)
+			.6   // bounce width ratio (0-Infinity)
+		)
+	duration: 3000
+
+Bounce Easing - easeOutBounce - jumping bean
+	curve::
+		Uize.Curve.Rubber.easeOutBounce (
+			3,    // bounces (2-Infinity)
+			2,    // bounciness (-Infinity to Infinity)
+			1.3,  // bounce width ratio (0-Infinity)
+			Uize.Curve.Rubber.easeInBounce (
+				4,   // bounces (2-Infinity)
+				2,   // bounciness (-Infinity to Infinity)
+				1.5  // bounce width ratio (0-Infinity)
+			)
+		)
+	duration: 5000
+
+Bounce Easing - easeInOutBounce
+	curve: Uize.Curve.Rubber.easeInOutBounce ()
+	duration: 1200
+
+Bounce Easing - easeInOutBounce - very bouncy
+	curve::
+		Uize.Curve.Rubber.easeInOutBounce (
+			5,   // bounces (2-Infinity)
+			3,   // bounciness (-Infinity to Infinity)
+			1.5  // bounce width ratio (0-Infinity)
+		)
+	duration: 2200
+
+Bounce Easing - easeMiddleBounce
+	curve: Uize.Curve.Rubber.easeMiddleBounce ()
+	duration: 1200
+
+##################
+### Sawtooth Curve
+##################
+
+Sawtooth Curve - saw (3)
+	curve::
+		Uize.Curve.saw (
+			3,  // teeth (1-Infinity)
+			.5  // linear/sawtooth blend (0-1)
+		)
+	duration: 1000
+
+Sawtooth Curve - saw (10)
+	curve::
+		Uize.Curve.saw (
+			10,  // teeth (1-Infinity)
+			.5   // linear/sawtooth blend (0-1)
+		)
+	duration: 1500
+
+Sawtooth Curve - saw (10,.2)
+	curve::
+		Uize.Curve.saw (
+			10,  // teeth (1-Infinity)
+			.2   // linear/sawtooth blend (0-1)
+		)
+	duration: 1500
+
+Sawtooth Curve - saw (10,.05)
+	curve::
+		Uize.Curve.saw (
+			10,  // teeth (1-Infinity)
+			.05  // linear/sawtooth blend (0-1)
+		)
+	duration: 1500
+
+###################
+### Curve Modifiers
+###################
+
+Curve Modifiers - quickly to middle, slowly to end
+	curve::
+		Uize.Curve.Mod.blend (
+			10,  // power curve function (-Infinity to Infinity)
+			.5   // power curve function (-Infinity to Infinity)
+		)
+	duration: 800
+
+Curve Modifiers - quick, then slow, then quick
+	curve::
+		Uize.Curve.Mod.rotate (
+			6,  // power curve function (-Infinity to Infinity)
+			.8  // blend of rotated (0-1)
+		)
+	duration: 800
+
+Curve Modifiers - quickly to middle, hesitate, quickly to end
+	curve::
+		Uize.Curve.Mod.blend (
+			Uize.Curve.easeInSweetPow (1/6),
+			Uize.Curve.easeOutSweetPow (1/12),
+			Uize.Curve.line (
+				0,  // start value (0-1)
+				1   // end value (0-1)
+			)
+		)
+	duration: 1100
+
+Curve Modifiers - 2x stairs easeOutBounce (4,1.75)
+	curve::
+		Uize.Curve.Mod.repeat (
+			Uize.Curve.Rubber.easeOutBounce (
+				4,    // bounces (2-Infinity)
+				1.75  // bounciness
+			),
+			2,  // repeats (0-Infinity)
+			1   // stairs degree (0-1)
+		)
+	duration: 2000
+
+Curve Modifiers - 3x stairs easeInOutPow (3)
+	curve::
+		Uize.Curve.Mod.repeat (
+			Uize.Curve.easeInOutPow (3),
+			3,  // repeats (0-Infinity)
+			1   // stairs degree (0-1)
+		)
+	duration: 1500
+
+Curve Modifiers - wobbly easeInOutPow (4)
+	curve::
+		Uize.Curve.Mod.redraw (
+			Uize.Curve.easeInOutPow (4),
+			12,  // segments (1-Infinity)
+			Uize.Curve.Rubber.easeInOutBack (4)
+		)
+	duration: 2000
+
+Curve Modifiers - 5x stairs band (.5,.5)
+	curve::
+		Uize.Curve.Mod.repeat (
+			Uize.Curve.Mod.band (
+				1,   // curve (1 == linear)
+				.5,  // band X size (0-1)
+				.5   // band X align (0-1)
+			),
+			5,  // repeats (0-Infinity)
+			1   // stairs degree (0-1)
+		)
+	duration: 2000
+
+Curve Modifiers - stairs easeInOutPow (3) + easeInElastic (.1)
+	curve::
+		Uize.Curve.Mod.repeat (
+			[
+				Uize.Curve.easeInOutPow (3),
+				Uize.Curve.Rubber.easeInElastic (
+					.1  // period (0-Infinity)
+				)
+			],
+			2,  // repeats (0-Infinity)
+			1   // stairs degree (0-1)
+		)
+	duration: 2000
+
+Curve Modifiers - easeInOutElastic multiplied by mild easeInPow
+	curve::
+		Uize.Curve.Mod.multiply (
+			Uize.Curve.Rubber.easeInOutElastic (
+				.1,  // period (0-Infinity)
+				2    // amplitude (1-Infinity)
+			),
+			Uize.Curve.easeInPow (
+				1.2   // power (0-Infinity)
+			)
+		)
+	duration: 2000
+
+Curve Modifiers - easeInOut of easeInOutPow (3) + easeInElastic
+	curve::
+		Uize.Curve.makeEaseInOut (
+			Uize.Curve.Mod.repeat (
+				[
+					Uize.Curve.easeInOutPow (3),
+					Uize.Curve.Rubber.easeInElastic (
+						.2,  // period (0-Infinity)
+						2    // amplitude (1-Infinity)
+					)
+				],
+				2,  // repeats (0-Infinity)
+				1   // stairs degree (0-1)
+			)
+		)
+	duration: 2000
+
+Curve Modifiers - pull and release elastic
+	curve::
+		Uize.Curve.Mod.repeat (
+			[
+				Uize.Curve.Mod.band (
+					Uize.Curve.easeOutPow (5),
+					1,    // band X size (0-1)
+					0,    // band X align (0-1)
+					-.3,  // band Y size (0-1)
+					0     // band X align (0-1)
+				),
+				Uize.Curve.Rubber.easeOutElastic (
+					.1  // period (0-Infinity)
+				)
+			],
+			2  // repeats (0-Infinity)
+		)
+	duration: 2200
+
+Curve Modifiers - 4x stairs elastic w/rotate
+	curve::
+		Uize.Curve.Mod.repeat (
+			Uize.Curve.Rubber.easeInElastic (
+				.1  // period (0-Infinity)
+			),
+			4,     // repeats (0-Infinity)
+			1,     // stairs degree (0-1)
+			true,  // alternating flip horizontal
+			true   // alternating flip vertical
+		)
+	duration: 8000
+
+Curve Modifiers - stairs easeInSweetPow (1/5) + easeOutBounce
+	curve::
+		Uize.Curve.Mod.repeat (
+			[
+				Uize.Curve.easeInSweetPow (
+					1/5  // power (0-Infinity)
+				),
+				Uize.Curve.Rubber.easeOutBounce (
+					4,  // bounces (2-Infinity)
+					2   // bounciness (-Infinity to Infinity)
+				)
+			],
+			2,  // repeats (0-Infinity)
+			1   // stairs degree (0-1)
+		)
+	duration: 1000
+
+Curve Modifiers - blend easeOutElastic (.2) + easeOutElastic (.1)
+	curve::
+		Uize.Curve.Mod.blend (
+			Uize.Curve.Rubber.easeOutElastic (
+				.2  // period (0-Infinity)
+			),
+			Uize.Curve.Rubber.easeOutElastic (
+				.1  // period (0-Infinity)
+			)
+		)
+	duration:2500
+
+Curve Modifiers - blend easeOutElastic (.3) + easeInElastic (.1)
+	curve::
+		Uize.Curve.Mod.blend (
+			Uize.Curve.Rubber.easeOutElastic (
+				.3  // period (0-Infinity)
+			),
+			Uize.Curve.Rubber.easeInElastic (
+				.1  // period (0-Infinity)
+			)
+		)
+	duration:1500
+
+Curve Modifiers - blend easeOutElastic (.2,2) + easeInElastic (.3)
+	curve::
+		Uize.Curve.Mod.blend (
+			Uize.Curve.Rubber.easeOutElastic (
+				.2,  // period (0-Infinity)
+				2    // amplitude (1-Infinity)
+			),
+			Uize.Curve.Rubber.easeInElastic (
+				.3   // period (0-Infinity)
+			)
+		)
+	duration:1500
+
+Curve Modifiers - coin settle effect
+	curve::
+		Uize.Curve.Mod.bend (
+			Uize.Curve.Mod.rotate (
+				Uize.Curve.Mod.multiply (
+					Uize.Curve.easeInPow (3),
+					Uize.Curve.Mod.repeat (
+						Uize.Curve.easeInCircular (),
+						45,   // repeats (0-Infinity), odd to end at 1
+						0,    // stairs degree (0-1)
+						true  // alternating flip horizontal
+					)
+				)
+			),
+			2  // horizontal bend (-Infinity to Infinity)
+		)
+	duration: 4000
+
+Curve Modifiers - gentle into gentle bounce
+	curve::
+		Uize.Curve.Mod.bend (
+			Uize.Curve.Rubber.easeOutBounce (
+				10,  // bounces (2-Infinity)
+				-2,  // bounce peak curve
+				2,   // bounce width ratio (0-Infinity)
+				2.5  // bounce curve
+			),
+			Uize.Curve.easeInOutPow (2)  // horz bend curve
+		)
+	duration: 1500
+
+Curve Modifiers - ultra bouncy
+	curve::
+		Uize.Curve.Mod.bend (
+			Uize.Curve.Rubber.easeOutBounce (
+				20,  // bounces (2-Infinity)
+				4,   // bounce peak curve
+				1.1  // bounce width ratio (0-Infinity)
+			),
+			1.5  // horizontal bend (-Infinity to Infinity)
+		)
+	duration: 4500
+
+Curve Modifiers - bounce down the stairs
+	curve::
+		Uize.Curve.Mod.blend (
+			Uize.Curve.easeInPow (
+				3  // power (0-Infinity)
+			),
+			Uize.Curve.easeOutPow (
+				1.5  // power (0-Infinity)
+			),
+			Uize.Curve.Rubber.easeOutBounce (
+				10,  // bounces (2-Infinity)
+				4,   // bounciness (-Infinity to Infinity)
+				1.1  // bounce width ratio (0-Infinity)
+			)
+		)
+	duration: 3000
+
+Curve Modifiers - climbing up the stairs
+	curve::
+		Uize.Curve.Mod.blend (
+			Uize.Curve.Mod.band (
+				1,   // curve function (1 == linear)
+				1,   // band X size (0-1)
+				0,   // band X align (0-1)
+				.8,  // band Y size (0-1)
+				0    // band X align (0-1)
+			),
+			Uize.Curve.Mod.band (
+				1,   // curve function (1 == linear)
+				1,   // band X size (0-1)
+				0,   // band X align (0-1)
+				.8,  // band Y size (0-1)
+				1    // band X align (0-1)
+			),
+			Uize.Curve.Rubber.easeOutBounce (
+				6,   // bounces (2-Infinity)
+				Uize.Curve.Mod.band (1,0,0),
+				1,   // bounce width ratio (0-Infinity)
+				-2   // bounce curve
+			)
+		)
+	duration: 2500
+
+Curve Modifiers - bounce between walls
+	curve::
+		Uize.Curve.Mod.bend (
+			Uize.Curve.Mod.repeat (
+				1,    // curve function (1 == linear)
+				7,    // repeats (0-Infinity), odd to end at 1
+				0,    // stairs degree (0-1)
+				true  // alternating flip horizontal
+			),
+			-4,  // horizontal bend (-Infinity to Infinity)
+			-4   // vertical bend (-Infinity to Infinity)
+		)
+	duration: 1500
+
+Curve Modifiers - shutters slamming
+	curve::
+		Uize.Curve.Mod.bend (
+			Uize.Curve.Rubber.easeOutBounce (
+				5,   // bounces (2-Infinity)
+				-3,  // bounciness (-Infinity to Infinity)
+				.1   // bounce width ratio (0-Infinity)
+			),
+			6  // horizontal bend (-Infinity to Infinity)
+		)
+	duration: 3000
+
+Curve Modifiers - twisted helix
+	curve::
+		Uize.Curve.Mod.blend (
+			Uize.Curve.easeMiddleCircular (3.5),
+			Uize.Curve.easeInOutCircular (3.5),
+			Uize.Curve.Mod.repeat (
+				Uize.Curve.easeInOutCircular (7),
+				31,   // repeats (0-Infinity), odd to end at 1
+				0,    // stairs degree (0-1)
+				true  // alternating flip horizontal
+			)
+		)
+	duration: 4000
+
+Curve Modifiers - 7 x stairs repeat, linear + saw (5,.3)
+	curve::
+		Uize.Curve.Mod.repeat (
+			[
+				Uize.Curve.linear,
+				Uize.Curve.saw (
+					5,  // teeth (1-Infinity)
+					.5  // linear/sawtooth blend (0-1)
+				)
+			],
+			7,  // repeats (0-Infinity)
+			1   // stairs degree (0-1)
+		)
+	duration: 2000
+
+Curve Modifiers - graduated blend easeOutPow (4) + saw (20)
+	curve::
+		Uize.Curve.Mod.blend (
+			Uize.Curve.easeOutPow (4),
+			Uize.Curve.saw (
+				20,  // teeth (1-Infinity)
+				.5   // linear/sawtooth blend (0-1)
+			),
+			Uize.Curve.line (
+				0,  // start value (0-1)
+				1   // end value (0-1)
+			)
+		)
+	duration: 2000
+
+Curve Modifiers - lots of sawtooth multiplying
+	curve::
+		Uize.Curve.Mod.multiply (
+			Uize.Curve.linear,
+			Uize.Curve.Mod.multiply (
+				Uize.Curve.saw (
+					3  // teeth (1-Infinity)
+				),
+				Uize.Curve.saw (
+					21,  // teeth (1-Infinity)
+					.3   // linear/sawtooth blend (0-1)
+				)
+			)
+		)
+	duration: 2000
+
+Curve Modifiers - 2.5x triangular
+	curve::
+		Uize.Curve.Mod.repeat (
+			1,    // curve function (1 == linear)
+			5,    // repeats (0-Infinity), odd to end at 1
+			0,    // stairs degree (0-1)
+			true  // alternating flip horizontal
+		)
+	duration: 1000
+
+Curve Modifiers - 10 steps in a staircase
+	curve::
+		Uize.Curve.Mod.quantize (
+			1,   // curve function (1 == linear)
+			10,  // intervals (1-Infinity)
+			1    // step align
+		)
+	duration: 2000
+
+Curve Modifiers - bent staircase with 10 steps
+	curve::
+		Uize.Curve.Mod.bend (
+			Uize.Curve.Mod.quantize (
+				1,   // curve function (1 == linear)
+				10,  // intervals (1-Infinity)
+				1    // step align
+			),
+			2,  // horizontal bend (-Infinity to Infinity)
+			-2  // vertical bend (-Infinity to Infinity)
+		)
+	duration: 2000
+
+Curve Modifiers - quantized easeInPow (4) w/10 steps
+	curve::
+		Uize.Curve.Mod.quantize (
+			Uize.Curve.easeInPow (4),
+			10,  // intervals (1-Infinity)
+			.5   // step align
+		)
+	duration: 2000
+
+Curve Modifiers - band
+	curve::
+		Uize.Curve.Mod.band (
+			1,    // curve (1 == linear)
+			.25,  // band X size (0-1)
+			.5    // band X align (0-1)
+		)
+	duration: 1000
+
+Curve Modifiers - banded easeOutBounce
+	curve::
+		Uize.Curve.Mod.band (
+			Uize.Curve.Rubber.easeOutBounce (),
+			.5,  // band X size (0-1)
+			.5   // band X align (0-1)
+		)
+	duration: 1000
+

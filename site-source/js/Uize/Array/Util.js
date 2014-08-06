@@ -207,6 +207,26 @@ Uize.module ({
 				;
 				return _result;
 			}
+			/*?
+				Static Methods
+					Uize.Array.Util.sum
+						Returns the sum of all the elements of the specified source array.
+
+						SYNTAX
+						...........................................
+						sumNUM = Uize.Array.Util.sum (sourceARRAY);
+						...........................................
+
+						EXAMPLES
+						...........................................................
+						Uize.Array.Util.sum ([]);                     // returns 0
+						Uize.Array.Util.sum ([1]);                    // returns 1
+						Uize.Array.Util.sum ([1,2,3,4,5]);            // returns 15
+						Uize.Array.Util.sum (['1','2','3','4','5']);  // returns 15
+						...........................................................
+
+						When summing the elements of the source array, all element values will be coerced to numbers by invoking the =valueOf= intrinsic method on the values. So, the statement =Uize.Array.Util.sum (['1','2','3','4','5'])= is equivalent to the statement =Uize.Array.Util.sum ([1,2,3,4,5])=.
+			*/
 		});
 	}
 });

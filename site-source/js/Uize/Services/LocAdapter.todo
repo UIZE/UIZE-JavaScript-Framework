@@ -1,5 +1,12 @@
 This is a TO DO document for the =Uize.Services.LocAdapter= module.
 
+Configuration of Language Support Per Brand
+	Implement support for brand-specific configuration of supported languages.
+
+	- if there is no explicit configuration of supported languages per brand, then use the base configuration of supported languages
+	- for brand-specific strings, they are only placed in a language-specific canonical =.json= file if the brand supports the language
+	- it should be possible to handle this all in the =export= method. If brand-specific strings don't exist for a language in the canonical =.json= file, then they won't appear in the exported translation jobs. Also, there won't be brand-specific resource files generated in the project's codebase from the =import= method for languages that aren't supported for the brand.
+
 Repair on Export
 	The export implementation should be updated to perform repair / synchronization for non-primary language files.
 
