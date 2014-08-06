@@ -556,13 +556,13 @@ Uize.module ({
 				},
 
 				isBrandResourceFile:function (_filePath) {
-					// this method should be implemented by subclasses
-					return false;
+					// this method can optionally be overridden by subclasses
+					return !!this.getResourceFileBrand (_filePath);
 				},
 
 				isBrandResourceString:function (_resourceStringPath) {
-					// this method should be implemented by subclasses
-					return false;
+					// this method can optionally be overridden by subclasses
+					return !!this.getStringBrand (_resourceStringPath);
 				},
 
 				getResourceFileBrand:function (_filePath) {
