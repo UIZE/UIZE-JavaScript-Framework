@@ -57,37 +57,43 @@ Uize.module ({
 				var
 					_returnType = _request.returnType,
 					_requestCallback = _request.callback,
+					_errorCallback = _request.errorCallback,
 					_cachedResponse = _getCachedResponse (m,_request)
 				;
-				if (_cachedResponse) {
-					var _returnTypeIsObject = _returnType == 'object';
-					if (_requestCallback) {
-						_request.responseText = '';
-						_request.responseJson = _request.responseXml = null;
-						if (_returnTypeIsObject || _returnType == 'xml')
-							_request.responseXml = _clone (_cachedResponse.responseXml)
-						;
-						if (_returnTypeIsObject || _returnType == 'text')
-							_request.responseText = _cachedResponse.responseText
-						;
-						if (_returnTypeIsObject || _returnType == 'json')
-							_request.responseJson = _clone (_cachedResponse.responseJson)
+
+				if (_request.error)
+					_errorCallback && _errorCallback(_request.error);
+				else {
+					if (_cachedResponse) {
+						var _returnTypeIsObject = _returnType == 'object';
+						if (_requestCallback) {
+							_request.responseText = '';
+							_request.responseJson = _request.responseXml = null;
+							if (_returnTypeIsObject || _returnType == 'xml')
+								_request.responseXml = _clone (_cachedResponse.responseXml)
+							;
+							if (_returnTypeIsObject || _returnType == 'text')
+								_request.responseText = _cachedResponse.responseText
+							;
+							if (_returnTypeIsObject || _returnType == 'json')
+								_request.responseJson = _clone (_cachedResponse.responseJson)
+							;
+						}
+					} else {
+						if (_request.cache == 'memory')
+							m._responseCache [_request.url] = {
+								responseXml:_clone (_request.responseXml),
+								responseJson:_clone (_request.responseJson),
+								responseText:_request.responseText
+							}
 						;
 					}
-				} else {
-					if (_request.cache == 'memory')
-						m._responseCache [_request.url] = {
-							responseXml:_clone (_request.responseXml),
-							responseJson:_clone (_request.responseJson),
-							responseText:_request.responseText
-						}
+					_requestCallback &&
+						_requestCallback (
+							_returnType == 'object' ? _request : _request [_getResponsePropertyNameForRequest (_request)]
+						)
 					;
 				}
-				_requestCallback &&
-					_requestCallback (
-						_returnType == 'object' ? _request : _request [_getResponsePropertyNameForRequest (_request)]
-					)
-				;
 			}
 
 			function _fireRequestQueueUpdatedEvent (m) {
@@ -315,8 +321,9 @@ Uize.module ({
 									*/
 									m.performRequest (
 										_request,
-										function () {
+										function (_error) {
 											_request.completed = _true;
+											_request.error = _error;
 											_cleanFromQueue ();
 										}
 									);
@@ -376,7 +383,7 @@ Uize.module ({
 												m.fire ({name:'Perform Request',request:_batchRequest});
 												m.performRequest (
 													_batchRequest,
-													function () {
+													function (_error) {
 														var
 															_batchResponses = _batchingAgent.responseParser (_batchRequest),
 															_batchResponseNo = 0
@@ -388,6 +395,7 @@ Uize.module ({
 																	_batchResponses [_batchResponseNo++]
 																;
 																_request.completed = _true;
+																_request.error = _error;
 															}
 														}
 														_cleanFromQueue ();
@@ -516,4 +524,3 @@ Uize.module ({
 		});
 	}
 });
-

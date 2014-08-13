@@ -41,7 +41,7 @@ Uize.module ({
 					_jsModuleExtensionRegExp = Uize.Build.Util.jsModuleExtensionRegExp
 				;
 				_fileSystem.writeFile ({
-					path:'logs/Uize.Build.ListJsModules.log',
+					path:(_params.logsPath || 'logs') + '/Uize.Build.ListJsModules.log',
 					contents:_fileSystem.getFiles ({
 						path:_params.sourcePath,
 						recursive:true,

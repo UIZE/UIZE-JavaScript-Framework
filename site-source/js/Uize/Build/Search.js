@@ -110,7 +110,7 @@ Uize.module ({
 					recursive:true
 				});
 				_log ('SUMMARY: ' + _totalMatches + ' matches in ' + _totalFilesWithMatches + ' files');
-				_fileSystem.writeFile ({path:'logs/search-' + _preset + '.log',contents:_logChunks.join ('\n')});
+				_fileSystem.writeFile ({path:(_params.logsPath || 'logs') + '/search-' + _preset + '.log',contents:_logChunks.join ('\n')});
 			}
 		});
 	}

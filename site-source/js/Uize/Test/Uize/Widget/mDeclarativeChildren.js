@@ -36,9 +36,9 @@ Uize.module ({
 
 			return true;
 		}
-
-		function _getDeclaredChildren(_declarativeChildren, _getContainerMethod) {
-			return (Uize.Widget.subclass (
+		
+		function _getWidgetClass(_declarativeChildren, _getContainerMethod) {
+			return Uize.Widget.subclass (
 				Uize.copyInto(
 					{
 						mixins:Uize.Widget.mDeclarativeChildren,
@@ -70,7 +70,11 @@ Uize.module ({
 						? {instanceMethods:{mDeclarativeChildren_getContainer:_getContainerMethod}}
 						: null
 				)
-			) ({name:'parent'})).children;
+			);
+		}
+
+		function _getDeclaredChildren(_declarativeChildren, _getContainerMethod) {
+			return _getWidgetClass(_declarativeChildren, _getContainerMethod) ({name:'parent'}).children;
 		}
 
 		function _generateTest(_title, _declarativeChildren, _expectedChildren) {

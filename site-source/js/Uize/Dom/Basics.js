@@ -640,186 +640,188 @@ Uize.module ({
 				},
 
 				injectHtml:function (_nodeBlob,_htmlToInject,_mode) {
-					var
-						_isInnerReplace, _isOuterReplace, _isInnerTop, _isOuterTop, _isOuterBottom, _isInnerBottom,
-						_areNodes =
-							_Uize.isList (_htmlToInject) ||
-							(_isNode (_htmlToInject) && (_htmlToInject = [_htmlToInject]))
-					;
-					(
-						(_isInnerReplace = _mode == 'inner replace') ||
-						(_isOuterReplace = _mode == 'outer replace') ||
-						(_isInnerTop = _mode == 'inner top') ||
-						(_isOuterTop = _mode == 'outer top') ||
-						(_isOuterBottom = _mode == 'outer bottom') ||
-						(_isInnerBottom = _true)
-					);
-					_areNodes || (_htmlToInject += ''); // coerce to a string value by invoking valueOf method
-
-					_doForAll (
-						_nodeBlob,
-						function (_node) {
-							var _nodeChildNodes = _node.childNodes;
-							function _htmlHasScript (_html) {
-								return _html && /<script/i.test (_html)
-							}
-							function _htmlToInjectHasScript () {
-								return _htmlHasScript (_htmlToInject)
-							}
-							if (
-								(_isInnerReplace || (!_nodeChildNodes.length && (_isInnerTop || _isInnerBottom))) &&
-								!_isNode &&
-								!_htmlToInjectHasScript ()
-							) {
-								_node.innerHTML = _htmlToInject;
-							} else if (_isOuterReplace && _isIe && !_isNode && !_htmlToInjectHasScript ()) {
-								_node.outerHTML = _htmlToInject;
-							} else {
-								var _nodesToInject = [];
-								if (_isInnerReplace)
-									if (_isIe && _ieInnerHtmlReadOnly [_node.tagName]) {
-										var _newNode = _node.cloneNode ();
-										_node.replaceNode (_newNode);
-										_node = _newNode;
-									} else
-										_node.innerHTML = '';
-								if (_areNodes) {
-									for (var _nodeNo = -1, _nodesLength = _htmlToInject.length; ++_nodeNo < _nodesLength;) {
-										var _nodeToInject = _htmlToInject [_nodeNo];
-										if (_nodeToInject) {
-											if (_nodeToInject.parentNode)
-												_nodeToInject = _nodeToInject.cloneNode (_true);
-											_nodesToInject.push (_nodeToInject);
-										}
-									}
+					if (_htmlToInject != _null) {
+						var
+							_isInnerReplace, _isOuterReplace, _isInnerTop, _isOuterTop, _isOuterBottom, _isInnerBottom,
+							_areNodes =
+								_Uize.isList (_htmlToInject) ||
+								(_isNode (_htmlToInject) && (_htmlToInject = [_htmlToInject]))
+						;
+						(
+							(_isInnerReplace = _mode == 'inner replace') ||
+							(_isOuterReplace = _mode == 'outer replace') ||
+							(_isInnerTop = _mode == 'inner top') ||
+							(_isOuterTop = _mode == 'outer top') ||
+							(_isOuterBottom = _mode == 'outer bottom') ||
+							(_isInnerBottom = _true)
+						);
+						_areNodes || (_htmlToInject += ''); // coerce to a string value by invoking valueOf method
+	
+						_doForAll (
+							_nodeBlob,
+							function (_node) {
+								var _nodeChildNodes = _node.childNodes;
+								function _htmlHasScript (_html) {
+									return _html && /<script/i.test (_html)
+								}
+								function _htmlToInjectHasScript () {
+									return _htmlHasScript (_htmlToInject)
+								}
+								if (
+									(_isInnerReplace || (!_nodeChildNodes.length && (_isInnerTop || _isInnerBottom))) &&
+									!_isNode &&
+									!_htmlToInjectHasScript ()
+								) {
+									_node.innerHTML = _htmlToInject;
+								} else if (_isOuterReplace && _isIe && !_isNode && !_htmlToInjectHasScript ()) {
+									_node.outerHTML = _htmlToInject;
 								} else {
-									// IE is "special" in that it has nodes that don't accept innerHTML, so the solution to parse
-									// the HTML string is to parse it as XML with the XMLDOM ACtiveX control. But XmlDom is different
-									// than HtmlDom nodes, so we have to traverse the XmlDom tree creating corresponding HtmlDom nodes
-									if (_ActiveXObject && _ieInnerHtmlReadOnly [_node.tagName]) {
-										var _activeXObject = new _ActiveXObject('Microsoft.XMLDOM');
-										_activeXObject.async = _false;
-										_activeXObject.loadXML('<foo>' + _htmlToInject.replace(/&/g, '&amp;') + '</foo>');
-
-										var
-											_xmlChildNodes = _activeXObject.documentElement.childNodes,
-											_convertToHtmlNode = function (_xmlNode) {
-												var _htmlNode;
-												switch (_xmlNode.nodeType) {
-													case 1: // element
-														_htmlNode = document.createElement(_xmlNode.tagName);
-
-														// add attributes
-														for (
-															var
-																_xmlNodeAttributes = _xmlNode.attributes,
-																_attributeNo = _xmlNodeAttributes.length
-															;
-															--_attributeNo >= 0;
-														) {
-															var _attribute = _xmlNodeAttributes[_attributeNo];
-															_htmlNode.setAttribute(_attribute.nodeName, _attribute.nodeValue);
-														}
-
-														// handle scripts specially but just getting text contents
-														if (_htmlNode.tagName == 'SCRIPT')
-															_htmlNode.text = _xmlNode.text;
-														else {
-															// all others iterate through child nodes and get their html equivalents
+									var _nodesToInject = [];
+									if (_isInnerReplace)
+										if (_isIe && _ieInnerHtmlReadOnly [_node.tagName]) {
+											var _newNode = _node.cloneNode ();
+											_node.replaceNode (_newNode);
+											_node = _newNode;
+										} else
+											_node.innerHTML = '';
+									if (_areNodes) {
+										for (var _nodeNo = -1, _nodesLength = _htmlToInject.length; ++_nodeNo < _nodesLength;) {
+											var _nodeToInject = _htmlToInject [_nodeNo];
+											if (_nodeToInject) {
+												if (_nodeToInject.parentNode)
+													_nodeToInject = _nodeToInject.cloneNode (_true);
+												_nodesToInject.push (_nodeToInject);
+											}
+										}
+									} else {
+										// IE is "special" in that it has nodes that don't accept innerHTML, so the solution to parse
+										// the HTML string is to parse it as XML with the XMLDOM ACtiveX control. But XmlDom is different
+										// than HtmlDom nodes, so we have to traverse the XmlDom tree creating corresponding HtmlDom nodes
+										if (_ActiveXObject && _ieInnerHtmlReadOnly [_node.tagName]) {
+											var _activeXObject = new _ActiveXObject('Microsoft.XMLDOM');
+											_activeXObject.async = _false;
+											_activeXObject.loadXML('<foo>' + _htmlToInject.replace(/&/g, '&amp;') + '</foo>');
+	
+											var
+												_xmlChildNodes = _activeXObject.documentElement.childNodes,
+												_convertToHtmlNode = function (_xmlNode) {
+													var _htmlNode;
+													switch (_xmlNode.nodeType) {
+														case 1: // element
+															_htmlNode = document.createElement(_xmlNode.tagName);
+	
+															// add attributes
 															for (
 																var
-																	_childNodeNo = -1,
-																	_xmlNodeChildNodes = _xmlNode.childNodes,
-																	_xmlNodeChildNodesLength = _xmlNodeChildNodes.length,
-																	_htmlChildNode
+																	_xmlNodeAttributes = _xmlNode.attributes,
+																	_attributeNo = _xmlNodeAttributes.length
 																;
-																++_childNodeNo < _xmlNodeChildNodesLength;
-															)
-																(_htmlChildNode = _convertToHtmlNode(_xmlNodeChildNodes[_childNodeNo]))
-																	&& _htmlNode.appendChild(_htmlChildNode)
-															;
-														}
-
-														break;
-													case 3:	// text
-														_htmlNode = document.createTextNode(_xmlNode.nodeValue);
-														break;
-													case 8: // comment
-														_htmlNode = document.createComment(_xmlNode.nodeValue);
-														break;
+																--_attributeNo >= 0;
+															) {
+																var _attribute = _xmlNodeAttributes[_attributeNo];
+																_htmlNode.setAttribute(_attribute.nodeName, _attribute.nodeValue);
+															}
+	
+															// handle scripts specially but just getting text contents
+															if (_htmlNode.tagName == 'SCRIPT')
+																_htmlNode.text = _xmlNode.text;
+															else {
+																// all others iterate through child nodes and get their html equivalents
+																for (
+																	var
+																		_childNodeNo = -1,
+																		_xmlNodeChildNodes = _xmlNode.childNodes,
+																		_xmlNodeChildNodesLength = _xmlNodeChildNodes.length,
+																		_htmlChildNode
+																	;
+																	++_childNodeNo < _xmlNodeChildNodesLength;
+																)
+																	(_htmlChildNode = _convertToHtmlNode(_xmlNodeChildNodes[_childNodeNo]))
+																		&& _htmlNode.appendChild(_htmlChildNode)
+																;
+															}
+	
+															break;
+														case 3:	// text
+															_htmlNode = document.createTextNode(_xmlNode.nodeValue);
+															break;
+														case 8: // comment
+															_htmlNode = document.createComment(_xmlNode.nodeValue);
+															break;
+													}
+													return _htmlNode;
 												}
-												return _htmlNode;
-											}
-										;
-
-										// iterate through XML nodes and convert to their HTML equivalents
-										for (var _nodeNo = -1; ++_nodeNo < _xmlChildNodes.length;)
-											_nodesToInject.push(
-												_convertToHtmlNode(_xmlChildNodes[_nodeNo])
-											)
-										;
-
-										// we have an array of nodes as opposed to a NodeList
-										_areNodes = _true;
-									} else {
-										var _dummyNode = document.createElement (_node.tagName);
-										_dummyNode.innerHTML = '<i>e</i>'	// fix for IE NoScope issue (http://www.thecssninja.com/javascript/noscope)
-											+ _htmlToInject
-										;
-										_nodesToInject = _dummyNode.childNodes;
-									}
-								}
-								var
-									_nodeToInsertBefore = _isInnerTop
-										? _nodeChildNodes [0]
-										: _isOuterBottom ? _node.nextSibling : _node
-									,
-									_nodeParentNode = _node.parentNode,
-									_nodesToSkip = +!_areNodes, // IE NoScope fix not needed when given dom nodes
-									_fixCrippledScripts = function (_node) {
-										if (_node.tagName == 'SCRIPT') {
-											/* WORKAROUND:
-												This is a workaround for an issue where script tags, that are part of HTML that is injected through innerHTML replacement, become crippled in the document. This is particularly an issue for component markup that is loaded and inserted dynamically and that may wish to define properties in companion script tags using the $[idPrefix] syntax.
-											*/
-											var _activatedScriptNode = document.createElement ('script');
-
-											/*** transfer properties of crippled script node to fresh script node ***/
-												if (_node.id) _activatedScriptNode.id = _node.id;
-												if (_node.type) _activatedScriptNode.type = _node.type;
-												_activatedScriptNode.text = _node.text;
-												if (_node.src) _activatedScriptNode.src = _node.src;
-
-											_node.parentNode.replaceChild (_activatedScriptNode,_node);
-										} else if (_htmlHasScript (_node.innerHTML)) {
-											_Uize.forEach (_node.childNodes,_fixCrippledScripts);
+											;
+	
+											// iterate through XML nodes and convert to their HTML equivalents
+											for (var _nodeNo = -1; ++_nodeNo < _xmlChildNodes.length;)
+												_nodesToInject.push(
+													_convertToHtmlNode(_xmlChildNodes[_nodeNo])
+												)
+											;
+	
+											// we have an array of nodes as opposed to a NodeList
+											_areNodes = _true;
+										} else {
+											var _dummyNode = document.createElement (_node.tagName);
+											_dummyNode.innerHTML = '<i>e</i>'	// fix for IE NoScope issue (http://www.thecssninja.com/javascript/noscope)
+												+ _htmlToInject
+											;
+											_nodesToInject = _dummyNode.childNodes;
 										}
 									}
-								;
-								while (_nodesToInject.length > _nodesToSkip) {
-									var _childNodeToInject = _areNodes ?
-										_nodesToInject.shift () :
-										_nodesToInject [_nodesToSkip];
-									if (_isInnerBottom || _isInnerReplace) {
-										_node.appendChild (_childNodeToInject);
-									} else if (_isInnerTop) {
-										_nodeToInsertBefore
-											? _node.insertBefore (_childNodeToInject,_nodeToInsertBefore)
-											: _node.appendChild (_childNodeToInject)
-										;
-									} else if (_isOuterTop || _isOuterReplace) {
-										_nodeParentNode.insertBefore (_childNodeToInject,_nodeToInsertBefore);
-									} else if (_isOuterBottom) {
-										_nodeToInsertBefore
-											? _nodeParentNode.insertBefore (_childNodeToInject,_nodeToInsertBefore)
-											: _nodeParentNode.appendChild (_childNodeToInject)
-										;
+									var
+										_nodeToInsertBefore = _isInnerTop
+											? _nodeChildNodes [0]
+											: _isOuterBottom ? _node.nextSibling : _node
+										,
+										_nodeParentNode = _node.parentNode,
+										_nodesToSkip = +!_areNodes, // IE NoScope fix not needed when given dom nodes
+										_fixCrippledScripts = function (_node) {
+											if (_node.tagName == 'SCRIPT') {
+												/* WORKAROUND:
+													This is a workaround for an issue where script tags, that are part of HTML that is injected through innerHTML replacement, become crippled in the document. This is particularly an issue for component markup that is loaded and inserted dynamically and that may wish to define properties in companion script tags using the $[idPrefix] syntax.
+												*/
+												var _activatedScriptNode = document.createElement ('script');
+	
+												/*** transfer properties of crippled script node to fresh script node ***/
+													if (_node.id) _activatedScriptNode.id = _node.id;
+													if (_node.type) _activatedScriptNode.type = _node.type;
+													_activatedScriptNode.text = _node.text;
+													if (_node.src) _activatedScriptNode.src = _node.src;
+	
+												_node.parentNode.replaceChild (_activatedScriptNode,_node);
+											} else if (_htmlHasScript (_node.innerHTML)) {
+												_Uize.forEach (_node.childNodes,_fixCrippledScripts);
+											}
+										}
+									;
+									while (_nodesToInject.length > _nodesToSkip) {
+										var _childNodeToInject = _areNodes ?
+											_nodesToInject.shift () :
+											_nodesToInject [_nodesToSkip];
+										if (_isInnerBottom || _isInnerReplace) {
+											_node.appendChild (_childNodeToInject);
+										} else if (_isInnerTop) {
+											_nodeToInsertBefore
+												? _node.insertBefore (_childNodeToInject,_nodeToInsertBefore)
+												: _node.appendChild (_childNodeToInject)
+											;
+										} else if (_isOuterTop || _isOuterReplace) {
+											_nodeParentNode.insertBefore (_childNodeToInject,_nodeToInsertBefore);
+										} else if (_isOuterBottom) {
+											_nodeToInsertBefore
+												? _nodeParentNode.insertBefore (_childNodeToInject,_nodeToInsertBefore)
+												: _nodeParentNode.appendChild (_childNodeToInject)
+											;
+										}
+										_areNodes || _fixCrippledScripts (_childNodeToInject); // Assume if given nodes that the proper fixes have already been applied
 									}
-									_areNodes || _fixCrippledScripts (_childNodeToInject); // Assume if given nodes that the proper fixes have already been applied
+									_isOuterReplace && _nodeParentNode.removeChild (_node);
 								}
-								_isOuterReplace && _nodeParentNode.removeChild (_node);
 							}
-						}
-					);
+						);
+					}
 					/*?
 						Static Methods
 							Uize.Dom.Basics.injectHtml
@@ -1198,7 +1200,7 @@ Uize.module ({
 								} else if (_nodeType == 'radio') {
 									_node.checked = _node.value == _value;
 								} else {	// text, password, hidden, HTML5 types, etc.
-									_node.value = _value
+									_node.value = _value;
 								}
 							} else if (_nodeTagName == 'SELECT') {
 								var _options = _node.options;

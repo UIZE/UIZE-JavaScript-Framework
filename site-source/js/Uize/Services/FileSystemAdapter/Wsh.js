@@ -76,6 +76,30 @@ Uize.module ({
 							;
 						}
 					},
+					
+					_readFile:function(_path) {
+						var
+							_fileSystemObject = this._fileSystemObject,
+							_text = ''
+						;
+						if (_fileSystemObject.GetFile (_path).Size) {
+							var _file = _fileSystemObject.OpenTextFile (_path,1);
+							_text = _file.ReadAll ();
+							_file.Close ();
+						}
+						
+						return _text;
+					},
+
+					_writeFile:function (_path, _contents) {
+						var m = this;
+						m._makeFolder (_getParentFolderPath (_path));
+
+						/*** write text to file and close ***/
+							var _file = m._fileSystemObject.CreateTextFile (_path);
+							_file.Write (_contents);
+							_file.Close ();
+					},
 
 				/*** Public Instance Methods ***/
 					copyFile:function (_params,_callback) {
@@ -84,7 +108,10 @@ Uize.module ({
 							_targetPath = _params.targetPath
 						;
 						m._makeFolder (_getParentFolderPath (_targetPath));
-						m._fileSystemObject.CopyFile (_params.path,_targetPath,true);
+						m._writeFile(
+							_targetPath,
+							m._readFile(_params.path)
+						);
 						_callback ();
 					},
 
@@ -150,31 +177,11 @@ Uize.module ({
 					},
 
 					readFile:function (_params,_callback) {
-						var
-							_fileSystemObject = this._fileSystemObject,
-							_path = _params.path,
-							_text = ''
-						;
-						if (_fileSystemObject.GetFile (_path).Size) {
-							var _file = _fileSystemObject.OpenTextFile (_path,1);
-							_text = _file.ReadAll ();
-							_file.Close ();
-						}
-						_callback (_text);
+						_callback (this._readFile(_params.path));
 					},
 
 					writeFile:function (_params,_callback) {
-						var
-							m = this,
-							_path = _params.path
-						;
-						m._makeFolder (_getParentFolderPath (_path));
-
-						/*** write text to file and close ***/
-							var _file = m._fileSystemObject.CreateTextFile (_path);
-							_file.Write (_params.contents);
-							_file.Close ();
-
+						this._writeFile(_params.path, _params.contents);
 						_callback ();
 					},
 

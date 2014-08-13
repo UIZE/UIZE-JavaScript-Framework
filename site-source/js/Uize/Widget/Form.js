@@ -216,9 +216,12 @@ Uize.module ({
 									m.set({_isSubmitting:_false});
 							},
 							'Changed.tentativeValue':function() {
-								m.set({
-									_isSubmitting:_false,
+								//FormElement.tentativeValue onChange also sets this to false,
+								//	as it gets the event before us and so might trigger other stuff
+								//	which causes a form submission.
+								m.set({_isSubmitting:_false});
 
+								m.set({
 									// NOTE: in order to support async validation, we could no longer set isSubmitting to false
 									// if isValid was false, which means that there was nothing setting isSubmitting to false after
 									// clicking the submit. This means that you could run into a case where you submit and invalid form,

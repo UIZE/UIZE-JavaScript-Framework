@@ -333,8 +333,13 @@ Uize.module ({
 							'Item Mouse Down',
 							function (_event) {
 								if (m._dragToReorder) {
-									_itemInitiatingDrag = _event.source;
-									_drag.initiate (_event.domEvent);
+									setTimeout(
+										function() {
+											_itemInitiatingDrag = _event.source;
+											_drag.initiate (_event.domEvent);
+										},
+										0
+									);
 								}
 								_event.bubble = _false;
 							}

@@ -44,6 +44,9 @@ Uize.module ({
 				_false = false,
 				_undefined,
 
+				_Uize = Uize,
+				_Uize_Util_Oop = _Uize.Util.Oop,
+
 			/*** General Variables ***/
 				_forceAsync = typeof navigator == 'object',
 					/* NOTE:
@@ -60,14 +63,14 @@ Uize.module ({
 
 		/*** Utility Functions ***/
 			function _valueToJsonSerializer (_value) {
-				return function () {return Uize.Json.to (_value)};
+				return function () {return _Uize.Json.to (_value)};
 			}
 
 			function _migratedStaticFeaturesTest (_migratedFeatures,_featureType) {
 				var _featureTypeIsMethod = _featureType == 'method';
 				return {
 					title:'Test that various deprecated static ' + (_featureTypeIsMethod ? 'methods' : 'properties') + ' that have been migrated are still supported and map correctly to their new locations',
-					test:Uize.map (
+					test:_Uize.map (
 						_migratedFeatures,
 						function (_migratedFeature) {
 							var
@@ -79,7 +82,7 @@ Uize.module ({
 								test:function () {
 									function _getStatic (_staticName) {
 										var _hostAndProperty = _splitHostAndProperty (_staticName);
-										return Uize.getModuleByName (_hostAndProperty.host) [_hostAndProperty.property];
+										return _Uize.getModuleByName (_hostAndProperty.host) [_hostAndProperty.property];
 									}
 									var _newStatic = _getStatic (_newName);
 									return (
@@ -99,7 +102,7 @@ Uize.module ({
 					m.set ({
 						_reasonForFailure:
 							'EXPECTED:\n\n' +
-							(Uize.isFunction (_serializeExpected) ? _serializeExpected () : _serializeExpected) + '\n\n' +
+							(_Uize.isFunction (_serializeExpected) ? _serializeExpected () : _serializeExpected) + '\n\n' +
 							'ACTUAL:\n\n' +
 							_serializeActual ()
 					})
@@ -112,7 +115,7 @@ Uize.module ({
 				expect:function (_expectedValue,_value) {
 					return _expectSuccess (
 						this,
-						Uize.Data.Compare.identical (_expectedValue,_value),
+						_Uize.Data.Compare.identical (_expectedValue,_value),
 						_valueToJsonSerializer (_expectedValue),
 						_valueToJsonSerializer (_value)
 					);
@@ -136,11 +139,35 @@ Uize.module ({
 								- this method is one of the many available `expectation methods`
 					*/
 				},
+				
+				
+				expectNotIdentical:function (_expectedValue,_value) {
+					return _expectSuccess (
+						this,
+						!_Uize.Data.Compare.identical (_expectedValue,_value),
+						_valueToJsonSerializer (_expectedValue),
+						_valueToJsonSerializer (_value)
+					);
+					/*?
+						Instance Methods
+							expectNotIdentical
+								Returns a boolean value, indicating whether or not the specified actual value is not identical to the specified expected value.
+
+								SYNTAX
+								...............................................................
+								resultBOOL = myTest.expectNotIdentical (expectedValueANYTYPE,valueANYTYPE);
+								...............................................................
+
+								NOTES
+								- compare to the =expect= and =expectNotSameAs= instance methods
+								- this method is one of the many available `expectation methods`
+					*/
+				},
 
 				expectSameAs:function (_expectedValue,_value) {
 					return _expectSuccess (
 						this,
-						Uize.isSameAs (_value,_expectedValue),
+						_Uize.isSameAs (_value,_expectedValue),
 						_valueToJsonSerializer (_expectedValue),
 						_valueToJsonSerializer (_value)
 					);
@@ -168,8 +195,8 @@ Uize.module ({
 				expectNotSameAs:function (_expectedNotSameAsValue,_value) {
 					return _expectSuccess (
 						this,
-						!Uize.isSameAs (_value,_expectedNotSameAsValue),
-						function () {return 'not same as ' + Uize.Json.to (_expectedNotSameAsValue)},
+						!_Uize.isSameAs (_value,_expectedNotSameAsValue),
+						function () {return 'not same as ' + _Uize.Json.to (_expectedNotSameAsValue)},
 						_valueToJsonSerializer (_value)
 					);
 				},
@@ -269,9 +296,9 @@ Uize.module ({
 						return _expectSuccess (
 							this,
 							_value != _undefined &&
-							_value.constructor == Uize.getModuleByName (_class),
-							function () {return 'instance of ' + Uize.Util.Oop.getClassName (_class)},
-							function () {return 'instance of ' + Uize.Util.Oop.getClassName (_value.constructor)}
+							_value.constructor == _Uize.getModuleByName (_class),
+							function () {return 'instance of ' + _Uize_Util_Oop.getClassName (_class)},
+							function () {return 'instance of ' + _Uize_Util_Oop.getClassName (_value.constructor)}
 						);
 						/*?
 							Instance Methods
@@ -602,7 +629,7 @@ Uize.module ({
 					expectInRange:function (_minValue,_maxValue,_value) {
 						return _expectSuccess (
 							this,
-							Uize.constrain (_value,_minValue,_maxValue) === _value,
+							_Uize.constrain (_value,_minValue,_maxValue) === _value,
 							function () {return 'value within range ' + _minValue + ' to ' + _maxValue},
 							_valueToJsonSerializer (_value)
 						);
@@ -810,7 +837,7 @@ Uize.module ({
 						var _valueLength = _value.length;
 						return _expectSuccess (
 							this,
-							Uize.constrain (_valueLength,_minLength,_maxLength) === _valueLength,
+							_Uize.constrain (_valueLength,_minLength,_maxLength) === _valueLength,
 							function () {return 'length within range ' + _minLength + ' to ' + _maxLength},
 							function () {return _valueLength}
 						);
@@ -872,7 +899,7 @@ Uize.module ({
 					},
 
 					expectEmpty:function (_value) {
-						return _expectSuccess (this,Uize.isEmpty (_value),'empty',_valueToJsonSerializer (_value));
+						return _expectSuccess (this,_Uize.isEmpty (_value),'empty',_valueToJsonSerializer (_value));
 						/*?
 							Instance Methods
 								expectEmpty
@@ -901,7 +928,7 @@ Uize.module ({
 					},
 
 					expectNonEmpty:function (_value) {
-						return _expectSuccess (this,!Uize.isEmpty (_value),'non-empty',_valueToJsonSerializer (_value));
+						return _expectSuccess (this,!_Uize.isEmpty (_value),'non-empty',_valueToJsonSerializer (_value));
 						/*?
 							Instance Methods
 								expectNonEmpty
@@ -1098,7 +1125,7 @@ Uize.module ({
 					expectNoRepeats:function (_value) {
 						return _expectSuccess (
 							this,
-							Uize.totalKeys (Uize.lookup (_value)) == _value.length,
+							_Uize.totalKeys (_Uize.lookup (_value)) == _value.length,
 							'array with no repeated values',
 							_valueToJsonSerializer (_value)
 						);
@@ -1364,7 +1391,7 @@ Uize.module ({
 					var _totalTests = 0;
 					function _getTotalTests (_subtests) {
 						_totalTests++;
-						if (Uize.isArray (_subtests)) {
+						if (_Uize.isArray (_subtests)) {
 							for (var _subtestNo = -1, _subtestsLength = _subtests.length; ++_subtestNo < _subtestsLength;)
 								_getTotalTests (_subtests [_subtestNo]._test)
 							;
@@ -1446,7 +1473,7 @@ Uize.module ({
 
 				stop:function () {
 					var m = this;
-					Uize.isArray (m._test) && Uize.callOn (m._test,'stop');
+					_Uize.isArray (m._test) && _Uize.callOn (m._test,'stop');
 					m.set ({_inProgress:false});
 					/*?
 						Instance Methods
@@ -1525,7 +1552,7 @@ Uize.module ({
 							m._isAsync && _callback && _callback (_testResult);
 						}
 					}
-					if (Uize.isArray (_test)) {
+					if (_Uize.isArray (_test)) {
 						var
 							_testLength = _test.length,
 							_testNo = -1,
@@ -1694,10 +1721,10 @@ Uize.module ({
 
 				set:function (_properties) {
 					var m = this;
-					if (_properties && !Uize.isInstance (m)) {
+					if (_properties && !_Uize.isInstance (m)) {
 						/*** resolve test property ***/
 							var _test = _properties.test;
-							if (Uize.isArray (_test)) {
+							if (_Uize.isArray (_test)) {
 								for (
 									var _subtestNo = -1, _subtestsLength = _test.length, _subtest;
 									++_subtestNo < _subtestsLength;
@@ -1712,7 +1739,7 @@ Uize.module ({
 
 				/*** factory methods for creating test classes using declarative syntax ***/
 					resolve:function (_test) {
-						return Uize.Util.Oop.inheritsFrom (_test,Uize.Test) ? _test : this.subclass ({set:_test});
+						return _Uize_Util_Oop.inheritsFrom (_test,_Uize.Test) ? _test : this.subclass ({set:_test});
 						/*?
 							Static Methods
 								Uize.Test.resolve
@@ -1801,7 +1828,7 @@ Uize.module ({
 					requiredModulesTest:function (_modules) {
 						return this.resolve ({
 							title:'REQUIRED MODULES TEST: ' + _modules,
-							test:function (_continue) {Uize.require (_modules,function () {_continue (true)})}
+							test:function (_continue) {_Uize.require (_modules,function () {_continue (true)})}
 						});
 						/*?
 							Static Methods
@@ -1853,14 +1880,14 @@ Uize.module ({
 							test:[
 								{
 									title:'Test that host ' + _propertyHost + ' is defined',
-									test:function () {return this.expectNonNull (Uize.getModuleByName (_propertyHost))}
+									test:function () {return this.expectNonNull (_Uize.getModuleByName (_propertyHost))}
 								},
 								{
 									title:'Test that ' + _propertyFullName + ' is a ' + _expectedType,
 									test:function () {
 										return this.expectType (
 											_expectedType,
-											Uize.getModuleByName (_propertyHost) [_hostAndProperty.property]
+											_Uize.getModuleByName (_propertyHost) [_hostAndProperty.property]
 										);
 									}
 								}
@@ -1919,33 +1946,33 @@ Uize.module ({
 						;
 						function _getCaseTest (_case) {
 							var
-								_caseIsArray = Uize.isArray (_case),
+								_caseIsArray = _Uize.isArray (_case),
 								_caseTest = _caseIsArray
 									? {
 										title:_case [0],
 										test:function () {
 											var
-												_methodHost = Uize.getModuleByName (_methodHostName),
-												_arguments = this.get ('cloneArguments') ? Uize.clone (_case [1]) : _case [1]
+												_methodHost = _Uize.getModuleByName (_methodHostName),
+												_arguments = this.get ('cloneArguments') ? _Uize.clone (_case [1]) : _case [1]
 											;
 											return this.expect (
 												_case [2],
 												_methodHost [_methodName].apply (
 													_methodHost,
-													Uize.isArray (_arguments) ? _arguments : [_arguments]
+													_Uize.isArray (_arguments) ? _arguments : [_arguments]
 												)
 											);
 										}
 									}
 									: _case
 							;
-							if (!_caseIsArray && Uize.isArray (_case.test))
-								_case.test = Uize.map (_case.test,_getCaseTest)
+							if (!_caseIsArray && _Uize.isArray (_case.test))
+								_case.test = _Uize.map (_case.test,_getCaseTest)
 							;
 							if (_caseTestProperties)
-								Uize.Util.Oop.inheritsFrom (_caseTest,Uize.Test)
+								_Uize_Util_Oop.inheritsFrom (_caseTest,_Uize.Test)
 									? _caseTest.set (_caseTestProperties)
-									: Uize.copyInto (_caseTest,_caseTestProperties)
+									: _Uize.copyInto (_caseTest,_caseTestProperties)
 							;
 							return _caseTest;
 						}
@@ -1953,7 +1980,7 @@ Uize.module ({
 							_test.push (_getCaseTest (_cases [_caseNo]))
 						;
 						var _testClass = m.resolve (
-							Uize.copyInto (
+							_Uize.copyInto (
 								{
 									title:'STATIC METHOD TEST: ' + _methodFullName,
 									test:_test
@@ -2058,11 +2085,11 @@ Uize.module ({
 						var m = this;
 						return m.resolve ({
 							title:'Static Method Tests',
-							test:Uize.map (
+							test:_Uize.map (
 								_staticMethodsTest,
 								function (_staticMethodTest) {
 									return (
-										Uize.isArray (_staticMethodTest)
+										_Uize.isArray (_staticMethodTest)
 											? m.staticMethodTest.apply (m,_staticMethodTest)
 											: _staticMethodTest
 									);
@@ -2195,7 +2222,7 @@ Uize.module ({
 									test:function (_continue) {
 										var
 											m = this,
-											_testModuleInstance = Uize.getModuleByName (_testModule) ()
+											_testModuleInstance = _Uize.getModuleByName (_testModule) ()
 										;
 										if (_testModuleInstance) {
 											_testModuleInstance.wire (
@@ -2244,7 +2271,7 @@ Uize.module ({
 						var m = this;
 						return m.resolve ({
 							title:_testSuiteTitle,
-							test:Uize.map (
+							test:_Uize.map (
 								_testSuiteModules,
 								function (_testSuiteModule) {return m.testModuleTest (_testSuiteModule)}
 							)
@@ -2288,17 +2315,17 @@ Uize.module ({
 					},
 
 					moduleAliasTest:function (_moduleAliasName,_moduleTrueName) {
-						return Uize.Test.resolve ({
+						return _Uize.Test.resolve ({
 							title:'Test for the ' + _moduleAliasName + ' Alias Module',
 							test:[
-								Uize.Test.requiredModulesTest (_moduleAliasName),
-								Uize.Test.requiredModulesTest (_moduleTrueName),
+								_Uize.Test.requiredModulesTest (_moduleAliasName),
+								_Uize.Test.requiredModulesTest (_moduleTrueName),
 								{
 									title:'Test that the ' + _moduleAliasName + ' module is simply an alias / reference to the ' + _moduleTrueName + ' module',
 									test:function () {
 										return this.expectSameAs (
-											Uize.getModuleByName (_moduleAliasName),
-											Uize.getModuleByName (_moduleTrueName)
+											_Uize.getModuleByName (_moduleAliasName),
+											_Uize.getModuleByName (_moduleTrueName)
 										);
 									}
 								}
@@ -2441,9 +2468,9 @@ Uize.module ({
 				_test:{
 					name:'test',
 					conformer:function (_value) {
-						if (Uize.isArray (_value)) {
+						if (_Uize.isArray (_value)) {
 							var m = this;
-							_value = Uize.map (_value,function (_subtest) {return new _subtest ({parent:m})});
+							_value = _Uize.map (_value,function (_subtest) {return new _subtest ({parent:m})});
 							/*?
 								Instance Properties
 									parent
@@ -2453,9 +2480,27 @@ Uize.module ({
 
 										NOTES
 										- the initial value is =undefined=
+										- see also the related =children= instance property
 							*/
 						}
 						return _value;
+					},
+					onChange:function() {
+						var m = this;
+						m.children = _Uize.isArray(m._test) ? m._test : _undefined;
+							/*?
+								Instance Properties
+									children
+										An array of child tests where each element is an instance of a =Uize.Test= subclass.
+										
+										A test instance contains children when its =test= state property is an array. When its =test= state property is not an array, =children= will be =undefined=.
+
+										NOTES
+										- the =children= array is read-only - its contents should not be directly modified
+										- the initial value is =undefined=
+										- see also related =test= state property
+										- see also the related =parent= instance property
+							*/
 					}
 					/*?
 						State Properties
