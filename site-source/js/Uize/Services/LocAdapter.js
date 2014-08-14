@@ -56,6 +56,10 @@ Uize.module ({
 					quoteChar:'"',
 					indentChars:'',
 					linebreakChars:''
+				},
+				_fileTypeExtensionsLookup = {
+					csv:'csv',
+					xliff:'xlf'
 				}
 		;
 
@@ -388,6 +392,13 @@ Uize.module ({
 
 			function _languageResourcesFilePath (m,_language) {
 				return m._workingFolderPath + _language + '.json';
+			}
+
+			function _getTranslationJobFilePath (m,_language) {
+				return (
+					m._workingFolderPath + 'jobs/' + _language +
+					'.' + _fileTypeExtensionsLookup [m.project.translationJobFileFormat || 'csv']
+				);
 			}
 
 			function _readLanguageResourcesFile (m,_language) {
@@ -782,14 +793,9 @@ Uize.module ({
 								m.stepCompleted (_language + ': calculated translation job metrics');
 
 							/*** write translation job file ***/
-								var
-									_translationJobFileFormat = _project.translationJobFileFormat || 'csv',
-									_translationJobFilePath = _jobsPath + _language + '.' + _translationJobFileFormat,
-									_tokenRegExp = m.tokenRegExp
-								;
 								_fileSystem.writeFile ({
-									path:_translationJobFilePath,
-									contents:_translationJobFileFormat == 'xliff'
+									path:_getTranslationJobFilePath (m,_language),
+									contents:_project.translationJobFileFormat == 'xliff'
 										? Uize.Loc.Xliff.to (
 											{
 												sourceLanguage:_primaryLanguage,
@@ -798,7 +804,7 @@ Uize.module ({
 											},
 											{
 												seedTarget:true,
-												tokenSplitter:_tokenRegExp
+												tokenSplitter:m.tokenRegExp
 											}
 										)
 										: Uize.Data.Csv.to (
@@ -833,14 +839,13 @@ Uize.module ({
 						function (_language) {
 							/*** determine strings that have been translated ***/
 								var
-									_translationJobFileFormat = _project.translationJobFileFormat || 'csv',
-									_translationJobFilePath = _jobsPath + _language + '.' + _translationJobFileFormat,
+									_translationJobFilePath = _getTranslationJobFilePath (m,_language),
 									_translationJobFile = _fileSystem.fileExists ({path:_translationJobFilePath})
 										? _fileSystem.readFile ({path:_translationJobFilePath})
 										: '',
 									_translatedStrings = _translationJobFile
 										? Uize.Data.Diff.diff (
-											_translationJobFileFormat == 'xliff'
+											_project.translationJobFileFormat == 'xliff'
 												? Uize.Loc.Xliff.from (_translationJobFile)
 												: Uize.Data.Flatten.unflatten (
 													Uize.Data.NameValueRecords.toHash (Uize.Data.Csv.from (_translationJobFile),0,1),
