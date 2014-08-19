@@ -120,7 +120,7 @@ Uize.module ({
 						title:'A property can be serialized',
 						test:[
 							Uize.Test.ParserTest.serializerTest (
-								'When a property is serialized, an "=" (equals sign) padded with a single space on either side is used as the name-value separator',
+								'When a property is serialized, an "=" (equals sign) with no padding is used as the name-value separator',
 								{
 									name:{
 										name:'PropertyName',
@@ -132,7 +132,7 @@ Uize.module ({
 									},
 									isValid:true
 								},
-								'PropertyName = PropertyValue'
+								'PropertyName=PropertyValue'
 							)
 						]
 					}

@@ -86,7 +86,7 @@ Uize.module ({
 					},
 
 					serialize:function () {
-						return this.isValid ? this.name.serialize () + ' = ' + this.value.serialize () : '';
+						return this.isValid ? this.name.serialize () + '=' + this.value.serialize () : '';
 					}
 				}
 			}

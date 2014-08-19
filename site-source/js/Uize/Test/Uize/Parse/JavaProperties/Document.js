@@ -207,7 +207,7 @@ Uize.module ({
 								[
 									[
 										'',
-										'Property1Name = Property1Value',
+										'Property1Name=Property1Value',
 										'',
 										'#comment number 1',
 										'',
@@ -251,17 +251,17 @@ Uize.module ({
 						test:function () {
 							return this.expect (
 								[
-									'Property1Name = Property1Value',
+									'Property1Name=Property1Value',
 									'#comment number 1',
 									'#comment number 2',
-									'Property2Name = Property2Value',
+									'Property2Name=Property2Value',
 									'#comment number 3',
-									'Property3Name = Property3Value'
+									'Property3Name=Property3Value'
 								].join ('\n'),
 								new Uize.Parse.JavaProperties.Document (
 									[
 										'',
-										'Property1Name = Property1Value',
+										'Property1Name=Property1Value',
 										'',
 										'#comment number 1',
 										'',
