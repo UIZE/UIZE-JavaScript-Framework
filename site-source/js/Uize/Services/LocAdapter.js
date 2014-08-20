@@ -444,6 +444,7 @@ Uize.module ({
 
 			function _getStringMetrics (m,_sourceStr) {
 				var
+					_words = 0,
 					_chars = 0,
 					_tokens = [],
 					_tokenRegExp = m.tokenRegExp
@@ -471,14 +472,18 @@ Uize.module ({
 					var
 						_stringSegmentNo = -2,
 						_stringSegments = _split (_sourceStr,m.wordSplitter),
-						_stringSegmentsLength = _stringSegments.length
+						_stringSegmentsLength = _stringSegments.length,
+						_wordChars
 					;
 					(_stringSegmentNo += 2) < _stringSegmentsLength;
-				)
-					_chars += _stringSegments [_stringSegmentNo].length
-				;
+				) {
+					if (_wordChars = _stringSegments [_stringSegmentNo].length) {
+						_words++;
+						_chars += _wordChars;
+					}
+				}
 				return {
-					words:(_stringSegmentsLength + 1) / 2,
+					words:_words,
 					chars:_chars,
 					tokens:_tokens
 				};
