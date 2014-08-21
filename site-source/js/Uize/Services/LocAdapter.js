@@ -34,7 +34,7 @@ Uize.module ({
 		'Uize.Loc.Xliff',
 		'Uize.Data.Diff',
 		'Uize.Loc.Pseudo',
-		'Uize.Str.Split',
+		'Uize.Loc.Strings.Metrics',
 		'Uize.Templates.Text.Tables.Breakdown',
 		'Uize.Templates.Text.Tables.YinYangBreakdown',
 		'Uize.Templates.Text.Tables.Histogram'
@@ -46,8 +46,10 @@ Uize.module ({
 		var
 			/*** Variables for Scruncher Optimization ***/
 				_undefined,
-				_split = Uize.Str.Split.split,
 				_breakdownTable = Uize.Templates.Text.Tables.Breakdown.process,
+
+			/*** Variables for Performance Optimization ***/
+				_getStringMetrics = Uize.Loc.Strings.Metrics.getMetrics,
 
 			/*** General Variables ***/
 				_fileSystem = Uize.Services.FileSystem.singleton (),
@@ -84,7 +86,9 @@ Uize.module ({
 				var
 					_project = m.project,
 					_stringsInfo = [],
-					_infoFilePath = m._workingFolderPath + _subFolder + 'strings-info/' + _language
+					_infoFilePath = m._workingFolderPath + _subFolder + 'strings-info/' + _language,
+					_wordSplitter = m.wordSplitter,
+					_tokenRegExp = m.tokenRegExp
 				;
 				Uize.forEach (
 					_languageResources,
@@ -103,7 +107,7 @@ Uize.module ({
 										key:_path [_path.length - 1],
 										value:_value
 									}),
-									_stringMetrics = _getStringMetrics (m,_value),
+									_stringMetrics = _getStringMetrics (_value,_wordSplitter,_tokenRegExp),
 									_isBrandSpecific = _resourceFileIsBrandSpecific || m.isBrandResourceString (_path)
 								;
 
@@ -440,53 +444,6 @@ Uize.module ({
 
 			function _forEachTranslatableLanguage (m,_iterationHandler) {
 				Uize.forEach (_getTranslatableLanguages (m),function (_language) {_iterationHandler (_language)});
-			}
-
-			function _getStringMetrics (m,_sourceStr) {
-				var
-					_words = 0,
-					_chars = 0,
-					_tokens = [],
-					_tokenRegExp = m.tokenRegExp
-				;
-				if (_tokenRegExp) {
-					var
-						_match,
-						_tokenName,
-						_tokenAdded = {}
-					;
-					_tokenRegExp.lastIndex = 0;
-					while (_match = _tokenRegExp.exec (_sourceStr)) {
-						if (!(_tokenName = _match [1])) {
-							for (var _matchSegmentNo = _match.length; !_tokenName && --_matchSegmentNo >= 0;)
-								_tokenName = _match [_matchSegmentNo]
-							;
-						}
-						if (!_tokenAdded [_tokenName]) {
-							_tokens.push (_tokenName);
-							_tokenAdded [_tokenName] = 1;
-						}
-					}
-				}
-				for (
-					var
-						_stringSegmentNo = -2,
-						_stringSegments = _split (_sourceStr,m.wordSplitter),
-						_stringSegmentsLength = _stringSegments.length,
-						_wordChars
-					;
-					(_stringSegmentNo += 2) < _stringSegmentsLength;
-				) {
-					if (_wordChars = _stringSegments [_stringSegmentNo].length) {
-						_words++;
-						_chars += _wordChars;
-					}
-				}
-				return {
-					words:_words,
-					chars:_chars,
-					tokens:_tokens
-				};
 			}
 
 			function _processStrings (_strings,_stringProcessor) {
