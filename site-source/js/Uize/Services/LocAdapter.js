@@ -84,7 +84,6 @@ Uize.module ({
 		/*** Private Instance Methods ***/
 			function _calculateStringsInfoForLanguage (m,_language,_languageResources,_subFolder) {
 				var
-					_project = m.project,
 					_stringsInfo = [],
 					_infoFilePath = m._workingFolderPath + _subFolder + 'strings-info/' + _language,
 					_wordSplitter = m.wordSplitter,
