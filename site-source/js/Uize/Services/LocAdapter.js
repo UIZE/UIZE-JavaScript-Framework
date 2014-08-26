@@ -523,8 +523,24 @@ Uize.module ({
 					return _resources;
 				},
 
-				getLanguageResourcePath:function (_enResourcePath,_language) {
-					// this method should be implemented by subclasses
+				getLanguageResourcePath:function () {
+					throw new Error ('The getLanguageResourcePath method must be implemented.');
+					/*?
+						Instance Methods
+							getLanguageResourcePath
+								Returns a string, representing the file path for a language specific version of the specified primary language resource file.
+
+								SYNTAX
+								............................................................................................
+								resourcePathSTR = this.getLanguageResourcePath (primaryLanguageResourcePathSTR,languageSTR);
+								............................................................................................
+
+								The =primaryLanguageResourcePathSTR= parameter is used to specify the path for the primary language version of a specific resource file, while the =languageSTR= parameter is used to specify the language for which a language specific resource file path should be generated.
+
+								The implementation of the =getLanguageResourcePath= method should take the values for these two parameters and then use the project specific rules for resource file naming and organization to derive the path for the language specific version of the resource file and return this path.
+
+								The =getLanguageResourcePath= method is used when generating resource files in the codebase for all the translatable languages configured for a project. This method *must* be overridden by subclasses, since the base class' version contains no implementation and will throw an exception if called.
+					*/
 				},
 
 				isBrandResourceFile:function (_filePath) {
@@ -583,24 +599,27 @@ Uize.module ({
 				},
 
 				isResourceFile:function (_filePath) {
+					throw new Error ('The isResourceFile method must be implemented.');
 					// this method should be implemented by subclasses
 				},
 
 				parseResourceFile:function (_resourceFileText) {
+					throw new Error ('The parseResourceFile method must be implemented.');
 					// this method should be implemented by subclasses
 				},
 
 				serializeResourceFile:function (_strings) {
+					throw new Error ('The serializeResourceFile method must be implemented');
 					// this method should be implemented by subclasses
 				},
 
 				getReferencingCodeFiles:function () {
-					return [];
+					throw new Error ('The getReferencingCodeFiles method must be implemented');
 					// this method should be implemented by subclasses
 				},
 
 				getReferencesFromCodeFile:function (_filePath) {
-					return {};
+					throw new Error ('The getReferencesFromCodeFile method must be implemented');
 					// this method should be implemented by subclasses
 				},
 
@@ -835,7 +854,7 @@ Uize.module ({
 				},
 
 				extract:function (_params,_callback) {
-					_callback ();
+					throw new Error ('The extract method must be implemented');
 				},
 
 				metrics:function (_params,_callback) {
