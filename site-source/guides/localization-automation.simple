@@ -4,7 +4,7 @@ Introduction
 	Localization as a Service
 		UIZE exposes localization automation processes through a service, whose interface is defined in the =Uize.Services.Loc= abstract class.
 
-		The =Uize.Services.Loc= service module defines the following `localization methods`...
+		The =Uize.Services.Loc= service module defines the following `localization service methods`...
 
 		- =metrics= - generates a `metrics report` for the `primary language` resource strings of a project
 		- =export= - gathers strings from `distributed resource files` and exports them to `consolidated language resources files`, for each of the project's `supported languages`
@@ -20,7 +20,7 @@ Introduction
 			While it is possible to implement any adapter for the localization service, in reality there are sufficient commonalities between many different types of projects, such that it is beneficial to share implementation for the service adapter across as many different types of projects as possible. This is where the =Uize.Services.LocAdapter= module comes in. This module can be subclassed to create adapters for the localization service for different types of projects with minimal additional project type specific code needed.
 
 	Accessed Through a Build Script
-		The various `localization methods` can be accessed using the =Uize.Build.Loc= build script.
+		The various `localization service methods` can be accessed using the =Uize.Build.Loc= build script.
 
 		Running the Build Script
 			The localization build script can be run in NodeJS using the following command...
@@ -32,12 +32,12 @@ Introduction
 
 			Parameters
 				project
-					The =project= parameter is used to specify the project for which the specified localization method should be executed.
+					The =project= parameter is used to specify the project for which the specified `localization service method` should be executed.
 
 					The value specified for the =project= parameter should match one of the keys in the =moduleConfigs ['Uize.Build.Loc'].projects= object of the =uize-config.json= file.
 
 					Executing a Method For All Projects
-						To execute a localization method for all projects listed in the config, one can either omit the =project= parameter or one can specify the special "*" wildcard value.
+						To execute a `localization service method` for all projects listed in the config, one can either omit the =project= parameter or one can specify the special "*" wildcard value.
 
 						EXAMPLES
 						......................................................................
@@ -46,9 +46,9 @@ Introduction
 						......................................................................
 
 				method
-					The =method= parameter is used to specify the localization method that should be executed for the specified project.
+					The =method= parameter is used to specify the `localization service method` that should be executed for the specified project.
 
-					The value of the =method= parameter should be the name of any of the `localization methods` supported by the localization service, such as...
+					The value of the =method= parameter should be the name of any of the `localization service methods` supported by the localization service, such as...
 
 					- =metrics=
 					- =export=
@@ -59,13 +59,13 @@ Introduction
 					- =extract=
 
 				console
-					The =console= parameter is used to specify the amount of information that should be logged to the console while the localization method is being executed.
+					The =console= parameter is used to specify the amount of information that should be logged to the console while the `localization service method` is being executed.
 
 					The =console= parameter supports the following possible values...
 
 					- =silent= - no information will be logged to the console
-					- =summary= - only a summary will be logged to the console once execution of the localization method is complete
-					- =verbose= - information will be logged to the console for every step that is performed while the localization method is being executed
+					- =summary= - only a summary will be logged to the console once execution of the `localization service method` is complete
+					- =verbose= - information will be logged to the console for every step that is performed while the `localization service method` is being executed
 
 ### Project ~~ Projects
 	.
@@ -95,8 +95,8 @@ Introduction
 	Performs Automatic Pseudo-localization
 		.
 
-Localization Methods
-	The =Uize.Services.Loc= service module defines a number of different localization methods.
+Localization Service Methods ~~ Localization Service Method
+	The =Uize.Services.Loc= service module defines a number of different localization service methods.
 
 	metrics
 		Metrics can be generated for a project using the =metrics= method of the localization service.
@@ -223,7 +223,7 @@ Configuring Projects
 		Working Folder ~~ workingFolder
 			The =workingFolder= config option specifies the path, relative to the current working directory, to the working folder for the =Uize.Build.Loc= build script.
 
-			The working folder is used to store the output of the various localization methods.
+			The working folder is used to store the output of the various `localization service methods`.
 
 		Per Project Configuration Options
 			.
@@ -258,6 +258,62 @@ Configuring Projects
 		Common Project Configuration Options ~~ common
 			.
 
+Localization Service Workflows
+	### Performing Translation
+		.
+
+		Exporting Strings for Translation
+			.
+
+		Importing Translated Strings
+			.
+
+	Changes to Resource Strings
+		Deleting Resource Strings
+			At times, it will be necessary to delete one or more resource strings because a component has been modified.
+
+			Consider that the application may support multiple different languages and there may be translations in the resource files for different languages for the resource strings you wish to delete. With the Loc service, it is not necessary to remove the resource strings from the translated resource files - they will be repaired if you follow these steps...
+
+			+. Delete the resource strings in the primary language resource files. Be sure to remove all brand-specific overrides, if any exist, from the primary language resource files.
+			+. Execute the =export= method of the Loc service to update the =.json= resource master files.
+			+. Execute the =import= method of the Loc service to re-generate the resource files for the supported languages of the project.
+
+			Performing the =export= followed by the =import= will have the effect of repairing the resource files in the codebase so that the removed resource strings will no longer exist in the resource files for the supported languages.
+
+		### Modifying Resource Strings
+			.
+
+		### Adding Resource Strings
+			.
+
+		Renaming Resource Strings
+			At times, it will be necessary to rename one or more resource strings because a component has been modified.
+
+			Consider that the application may support multiple different languages and there may be translations in the resource files for different languages for the resource strings you wish to rename. The Loc service does not provide any special handling for such situations and you will need to rename the resource strings in the resource files for the primary language and all other supported languages.
+
+		### Re-translating Resource Strings
+			.
+
+	### Changes to Resource Files
+		Deleting Resource Files
+			.
+
+		Adding Resource Files
+			.
+
+	### Changes to Language Support
+		Adding Support for a New Language
+			.
+
+		Removing Support for a Language
+			.
+
+	### Changes in Projects
+		Adding a New Project
+			.
+
+		Branching a Project
+			.
 Advanced Topics
 	Non-translatable Strings
 		Non-translatable strings are strings that should never be pseudo-localized and should never be sent to translators for translation.
@@ -313,7 +369,7 @@ Advanced Topics
 				- it is easy to add new non-translatable strings of different types later to a project later, without needing to update the implementation of the =isTranslatableString= method
 
 	Metrics Reports ~~ Metrics Report
-		A metrics report can be produced for a project by using the =metrics= localization method.
+		A metrics report can be produced for a project by using the =metrics= `localization service method`.
 
 		EXAMPLE
 		.............................................................................
