@@ -45,7 +45,6 @@
 					rootFolderPath:'site-source/js',
 					languages:[
 						'en-US',
-						'pseudo',
 						'de-DE',
 						'fr-FR',
 						'ja-JP',
@@ -54,7 +53,7 @@
 						'zh-CN'
 					],
 					primaryLanguage:'en-US',
-					pseudoLocale:'pseudo'
+					pseudoLocale:'en-ZZ'
 				}
 			}
 		}
