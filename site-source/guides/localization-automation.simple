@@ -4,7 +4,7 @@ Introduction
 	Localization as a Service
 		UIZE exposes localization automation processes through a service, whose interface is defined in the =Uize.Services.Loc= abstract class.
 
-		The =Uize.Services.Loc= service module defines the following service methods...
+		The =Uize.Services.Loc= service module defines the following `localization methods`...
 
 		- =metrics= - generates a `metrics report` for the `primary language` resource strings of a project
 		- =export= - gathers strings from `distributed resource files` and exports them to `consolidated language resources files`, for each of the project's `supported languages`
@@ -20,7 +20,7 @@ Introduction
 			While it is possible to implement any adapter for the localization service, in reality there are sufficient commonalities between many different types of projects, such that it is beneficial to share implementation for the service adapter across as many different types of projects as possible. This is where the =Uize.Services.LocAdapter= module comes in. This module can be subclassed to create adapters for the localization service for different types of projects with minimal additional project type specific code needed.
 
 	Accessed Through a Build Script
-		The various localization methods can be accessed using the =Uize.Build.Loc= build script.
+		The various `localization methods` can be accessed using the =Uize.Build.Loc= build script.
 
 		Running the Build Script
 			The localization build script can be run in NodeJS using the following command...
@@ -48,7 +48,24 @@ Introduction
 				method
 					The =method= parameter is used to specify the localization method that should be executed for the specified project.
 
-					The value of the =method= parameter should be the name of any of the `service methods` supported by the localization service.
+					The value of the =method= parameter should be the name of any of the `localization methods` supported by the localization service, such as...
+
+					- =metrics=
+					- =export=
+					- =import=
+					- =exportJobs=
+					- =importJobs=
+					- =usage=
+					- =extract=
+
+				console
+					The =console= parameter is used to specify the amount of information that should be logged to the console while the localization method is being executed.
+
+					The =console= parameter supports the following possible values...
+
+					- =silent= - no information will be logged to the console
+					- =summary= - only a summary will be logged to the console once execution of the localization method is complete
+					- =verbose= - information will be logged to the console for every step that is performed while the localization method is being executed
 
 ### Project ~~ Projects
 	.
@@ -62,6 +79,184 @@ Introduction
 
 	Translatable Languages
 		.
+
+### Key Features
+	.
+
+	Supports Multiple Projects
+		.
+
+	Adaptable to Different Project Types
+		.
+
+	Performs Diffing to Reduce Translation Load
+		.
+
+	Performs Automatic Pseudo-localization
+		.
+
+Localization Methods
+	The =Uize.Services.Loc= service module defines a number of different localization methods.
+
+	metrics
+		Metrics can be generated for a project using the =metrics= method of the localization service.
+
+		.............................................................................
+		node [pathToUize]build.js Uize.Build.Loc project=[projectName] method=metrics
+		.............................................................................
+
+		Generates a Strings Metrics File
+			The metrics method analyzes the resource strings for the project's `primary language` and generates a JSON format metrics file with the path...
+
+			..............................................
+			[workingFolder]/metrics/[primaryLanguage].json
+			..............................................
+
+			Using this scheme, if the value of the =workingFolder= config option is ='loc'=, and the value of the =primaryLanguage= config option is ='en-US'=, then the path for the metrics file would be...
+
+			......................
+			loc/metrics/en-US.json
+			......................
+
+		Generates Strings Info Files
+			In addition to generating the strings metrics JSON file, the =metrics= method also generates JSON and CSV format `strings info files` for the primary language.
+
+			These files are output to the following paths...
+
+			...................................................
+			[workingFolder]/strings-info/[primaryLanguage].csv
+			[workingFolder]/strings-info/[primaryLanguage].json
+			...................................................
+
+			Using this scheme, if the value of the =workingFolder= config option is ='loc'=, and the value of the =primaryLanguage= config option is ='en-US'=, then the paths for the strings info files would be...
+
+			...........................
+			loc/strings-info/en-US.csv
+			loc/strings-info/en-US.json
+			...........................
+
+	export
+		.
+
+		............................................................................
+		node [pathToUize]build.js Uize.Build.Loc project=[projectName] method=export
+		............................................................................
+
+	import
+		.
+
+		............................................................................
+		node [pathToUize]build.js Uize.Build.Loc project=[projectName] method=import
+		............................................................................
+
+	exportJobs
+		.
+
+		................................................................................
+		node [pathToUize]build.js Uize.Build.Loc project=[projectName] method=exportJobs
+		................................................................................
+
+	importJobs
+		.
+
+		................................................................................
+		node [pathToUize]build.js Uize.Build.Loc project=[projectName] method=importJobs
+		................................................................................
+
+	usage
+		.
+
+		...........................................................................
+		node [pathToUize]build.js Uize.Build.Loc project=[projectName] method=usage
+		...........................................................................
+
+	extract
+		.
+
+		.............................................................................
+		node [pathToUize]build.js Uize.Build.Loc project=[projectName] method=extract
+		.............................................................................
+
+Configuring Projects
+	The behavior of the =Uize.Build.Loc= build script is configurable to support one or more projects of potentially different types.
+
+	`Config options` for the =Uize.Build.Loc= build script should be placed inside the =uize-config.json= config file, under the path =moduleConfigs ['Uize.Build.Loc']=, as illustrated by the example below...
+
+	EXAMPLE
+	..............................................................
+	{
+		// other config options
+		// other config options
+		// other config options
+		// other config options
+
+		moduleConfigs:{
+			'Uize.Build.Loc':{
+				workingFolder:'loc',
+				projects:{
+					Uize:{
+						serviceAdapter:'Uize.Services.LocAdapter.Uize',
+						rootFolderPath:'site-source/js',
+						languages:[
+							'en-US',
+							'de-DE',
+							'fr-FR',
+							'ja-JP',
+							'nl-NL',
+							'ru-RU',
+							'zh-CN'
+						],
+						primaryLanguage:'en-US',
+						pseudoLocale:'en-ZZ'
+					}
+				}
+			}
+		}
+	}
+	..............................................................
+
+	The above example shows the configuration of the =Uize.Build.Loc= build script for the UIZE project.
+
+	Config Options
+		The =Uize.Build.Loc= build script supports a number of configuration options.
+
+		Working Folder ~~ workingFolder
+			The =workingFolder= config option specifies the path, relative to the current working directory, to the working folder for the =Uize.Build.Loc= build script.
+
+			The working folder is used to store the output of the various localization methods.
+
+		Per Project Configuration Options
+			.
+
+			Service Adapter ~~ serviceAdapter
+				.
+
+			Root Folder Path ~~ rootFolderPath
+				.
+
+			Languages ~~ languages
+				.
+
+			Brand Languages ~~ brandLanguages
+				.
+
+			Primary Language ~~ primaryLanguage
+				.
+
+			Pseudo-locale ~~ pseudoLocale
+				.
+
+			Pseudo-localization ~~ pseudoLocalization
+				.
+
+			Translation Job File Format ~~ translationJobFileFormat
+				.
+
+				- =csv= -
+				- =xliff= -
+
+		Common Project Configuration Options ~~ common
+			.
 
 Advanced Topics
 	Non-translatable Strings
@@ -156,106 +351,22 @@ Advanced Topics
 
 				What constitutes a brand-specific resource file will vary by project and depend on the project definition. Typically, brand-specific resource files provide overrides for certain resource strings that need to be different for specific brands, so the number of brand-specific resource files is usually smaller than the total number of resource files. Moreover, different brands may have a differing number of brand-specific resource files.
 
-### Key Features
-	.
-
-	Supports Multiple Projects
-		.
-
-	Adaptable to Different Project Types
-		.
-
-	Performs Diffing to Reduce Translation Load
-		.
-
-	Performs Automatic Pseudo-localization
-		.
-
-### Service Methods
-	.
-
-	metrics
-		Metrics can be generated for a project using the =metrics= method of the localization service.
-
-		.............................................................................
-		node [pathToUize]build.js Uize.Build.Loc project=[projectName] method=metrics
-		.............................................................................
-
-	export
-		.
-
-		............................................................................
-		node [pathToUize]build.js Uize.Build.Loc project=[projectName] method=export
-		............................................................................
-
-	import
-		.
-
-		............................................................................
-		node [pathToUize]build.js Uize.Build.Loc project=[projectName] method=import
-		............................................................................
-
-	exportJobs
-		.
-
-		................................................................................
-		node [pathToUize]build.js Uize.Build.Loc project=[projectName] method=exportJobs
-		................................................................................
-
-	importJobs
-		.
-
-		................................................................................
-		node [pathToUize]build.js Uize.Build.Loc project=[projectName] method=importJobs
-		................................................................................
-
-	usage
-		.
-
-		...........................................................................
-		node [pathToUize]build.js Uize.Build.Loc project=[projectName] method=usage
-		...........................................................................
-
-	extract
-		.
-
-		.............................................................................
-		node [pathToUize]build.js Uize.Build.Loc project=[projectName] method=extract
-		.............................................................................
-
-### Configuring Projects
-	.
-
-	Per Project Configuration Options
-		.
-
-		Service Adapter
-			.
-
-		Languages
-			.
-
-		Primary Language
-			.
-
-		Pseudo-locale
-			.
-
-	Common Project Configuration Options
-		.
-
-	Pseudo-localization
-		.
-
 ###
-	Distributed Resource Files
-		.
+	Different Classes of Files
+		Distributed Resource Files
+			.
 
-	Consolidated Resource Files
-		.
+		Consolidated Resource Files
+			.
 
-	Translation Job Files
-		.
+		Translation Job Files
+			.
+
+		Strings Metrics Files
+			.
+
+		Strings Info Files
+			.
 
 ### Use With Other Projects
 	.
