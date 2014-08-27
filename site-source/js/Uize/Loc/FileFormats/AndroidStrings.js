@@ -113,7 +113,7 @@ Uize.module ({
 									: '\t<string name="' + _name + '">' + _encodeHtml (_value) + '</string>'
 							);
 						}
-					).join ('\n') +
+					).join ('\n') + '\n' +
 					'</resources>\n'
 				);
 				/*?
