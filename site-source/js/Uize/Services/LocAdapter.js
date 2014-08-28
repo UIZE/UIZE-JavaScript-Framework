@@ -995,11 +995,15 @@ Uize.module ({
 								Uize.forEach (
 									_stringReferences,
 									function (_stringReference) {
-										var _filePath = _stringReference.filePath;
-										(
-											_stringsReferencesByCodeFile [_filePath] ||
-											(_stringsReferencesByCodeFile [_filePath] = [])
-										).push (_stringId);
+										var
+											_filePath = _stringReference.filePath,
+											_stringsReferencesForCodeFile =
+												_stringsReferencesByCodeFile [_filePath] ||
+												(_stringsReferencesByCodeFile [_filePath] = {})
+										;
+										_stringsReferencesForCodeFile [_stringId] =
+											(_stringsReferencesForCodeFile [_stringId] || 0) + 1
+										;
 									}
 								);
 							}
