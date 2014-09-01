@@ -38,6 +38,7 @@ Uize.module ({
 	required:[
 		'Uize.Widget.mV2',
 		'Uize.Widget.mWidthHeight',
+		'Uize.Widgets.SegmentDisplay.mSegmentColor',
 		'Uize.Widgets.SegmentDisplay.Seven.Html',
 		'Uize.Widgets.SegmentDisplay.Seven.Css'
 	],
@@ -46,7 +47,7 @@ Uize.module ({
 
 		/*** build objects for HTML bindings declaration ***/
 			var
-				_segmentColorAsRgbHexHtmlBindings = [],
+				_segmentBgStyleHtmlBindings = [],
 				_segmentThicknessPxHtmlBindings = [],
 				_segmentThicknessDiv2PxHtmlBindings = []
 			;
@@ -54,7 +55,7 @@ Uize.module ({
 				{A:0,B:1,C:1,D:0,E:1,F:1,G:0},
 				function (_isVert,_segmentCode) {
 					var _segmentName = 'segment' + _segmentCode;
-					_segmentColorAsRgbHexHtmlBindings.push (
+					_segmentBgStyleHtmlBindings.push (
 						_segmentName + 'Bar:style.background',
 						_segmentName + 'EndA:style.border' + (_isVert ? 'Bottom' : 'Right') + 'Color',
 						_segmentName + 'EndB:style.border' + (_isVert ? 'Top' : 'Left') + 'Color'
@@ -70,7 +71,8 @@ Uize.module ({
 		return _superclass.subclass ({
 			mixins:[
 				Uize.Widget.mV2,
-				Uize.Widget.mWidthHeight
+				Uize.Widget.mWidthHeight,
+				Uize.Widgets.SegmentDisplay.mSegmentColor
 			],
 
 			omegastructor:function () {
@@ -95,19 +97,12 @@ Uize.module ({
 					name:'segmentThickness',
 					value:16
 				},
-				_segmentColor:{
-					name:'segmentColor',
-					value:'3f6'
-				},
 				_segmentGap:{
 					name:'segmentGap',
 					value:1
 				},
 
 				/*** derived properties for HTML bindings ***/
-					segmentColorAsRgbHex:{
-						derived:'segmentColor: "#" + segmentColor'
-					},
 					segmentThicknessPx:{
 						derived:'segmentThickness: segmentThickness + "px"'
 					},
@@ -135,7 +130,7 @@ Uize.module ({
 			},
 
 			htmlBindings:{
-				segmentColorAsRgbHex:_segmentColorAsRgbHexHtmlBindings,
+				segmentBgStyle:_segmentBgStyleHtmlBindings,
 				segmentThicknessPx:_segmentThicknessPxHtmlBindings,
 				segmentGTopPx:'segmentG:style.top',
 				segmentGapPx:[

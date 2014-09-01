@@ -38,6 +38,7 @@ Uize.module ({
 	required:[
 		'Uize.Widget.mV2',
 		'Uize.Widget.mWidthHeight',
+		'Uize.Widgets.SegmentDisplay.mSegmentColor',
 		'Uize.Widgets.SegmentDisplay.Matrix3x5.Html',
 		'Uize.Widgets.SegmentDisplay.Matrix3x5.Css'
 	],
@@ -133,7 +134,8 @@ Uize.module ({
 		return _superclass.subclass ({
 			mixins:[
 				Uize.Widget.mV2,
-				Uize.Widget.mWidthHeight
+				Uize.Widget.mWidthHeight,
+				Uize.Widgets.SegmentDisplay.mSegmentColor
 			],
 
 			omegastructor:function () {
@@ -148,25 +150,19 @@ Uize.module ({
 			},
 
 			set:{
+				segmentColor:'000',
 				width:20,
 				height:34,
 				html:Uize.Widgets.SegmentDisplay.Matrix3x5.Html
 			},
 
 			stateProperties:{
-				_segmentColor:{
-					name:'segmentColor',
-					value:'000'
-				},
 				_segmentGap:{
 					name:'segmentGap',
 					value:1
 				},
 
 				/*** derived properties for HTML bindings ***/
-					segmentColorAsRgbHex:{
-						derived:'segmentColor: "#" + segmentColor'
-					},
 					colPositions:{
 						derived:function (width,segmentGap) {return _calculateSegmentsPosAndDim (width,segmentGap,_cols)}
 					},
@@ -176,7 +172,7 @@ Uize.module ({
 			},
 
 			htmlBindings:{
-				segmentColorAsRgbHex:Uize.map (_segmentLetters,'"segment" + value + ":style.background"'),
+				segmentBgStyle:Uize.map (_segmentLetters,'"segment" + value + ":style.background"'),
 			}
 		}).declare ({
 			stateProperties:_segmentStateProperties,
