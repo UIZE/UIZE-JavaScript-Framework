@@ -44,6 +44,29 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
+		/*** build objects for HTML bindings declaration ***/
+			var
+				_segmentColorAsRgbHexHtmlBindings = [],
+				_segmentThicknessPxHtmlBindings = [],
+				_segmentThicknessDiv2PxHtmlBindings = []
+			;
+			Uize.forEach (
+				{A:0,B:1,C:1,D:0,E:1,F:1,G:0},
+				function (_isVert,_segmentCode) {
+					var _segmentName = 'segment' + _segmentCode;
+					_segmentColorAsRgbHexHtmlBindings.push (
+						_segmentName + 'Bar:style.background',
+						_segmentName + 'EndA:style.border' + (_isVert ? 'Bottom' : 'Right') + 'Color',
+						_segmentName + 'EndB:style.border' + (_isVert ? 'Top' : 'Left') + 'Color'
+					);
+					_segmentThicknessPxHtmlBindings.push (_segmentName + ':style.' + (_isVert ? 'width' : 'height'));
+					_segmentThicknessDiv2PxHtmlBindings.push (
+						_segmentName + 'EndA:style.borderWidth',
+						_segmentName + 'EndB:style.borderWidth'
+					);
+				}
+			);
+
 		return _superclass.subclass ({
 			mixins:[
 				Uize.Widget.mV2,
@@ -112,80 +135,22 @@ Uize.module ({
 			},
 
 			htmlBindings:{
-				segmentColorAsRgbHex:[
-					/*** segment A color ***/
-						'segmentABar:style.background',
-						'segmentALeftEnd:style.borderRightColor',
-						'segmentARightEnd:style.borderLeftColor',
-
-					/*** segment B color ***/
-						'segmentBBar:style.background',
-						'segmentBTopEnd:style.borderBottomColor',
-						'segmentBBottomEnd:style.borderTopColor',
-
-					/*** segment C color ***/
-						'segmentCBar:style.background',
-						'segmentCTopEnd:style.borderBottomColor',
-						'segmentCBottomEnd:style.borderTopColor',
-
-					/*** segment D color ***/
-						'segmentDBar:style.background',
-						'segmentDLeftEnd:style.borderRightColor',
-						'segmentDRightEnd:style.borderLeftColor',
-
-					/*** segment E color ***/
-						'segmentEBar:style.background',
-						'segmentETopEnd:style.borderBottomColor',
-						'segmentEBottomEnd:style.borderTopColor',
-
-					/*** segment F color ***/
-						'segmentFBar:style.background',
-						'segmentFTopEnd:style.borderBottomColor',
-						'segmentFBottomEnd:style.borderTopColor',
-
-					/*** segment G color ***/
-						'segmentGBar:style.background',
-						'segmentGLeftEnd:style.borderRightColor',
-						'segmentGRightEnd:style.borderLeftColor'
-				],
-				segmentThicknessPx:[
-					'segmentA:style.height',
-					'segmentB:style.width',
-					'segmentC:style.width',
-					'segmentD:style.height',
-					'segmentE:style.width',
-					'segmentF:style.width',
-					'segmentG:style.height'
-				],
+				segmentColorAsRgbHex:_segmentColorAsRgbHexHtmlBindings,
+				segmentThicknessPx:_segmentThicknessPxHtmlBindings,
 				segmentGTopPx:'segmentG:style.top',
 				segmentGapPx:[
-					'segmentALeftEnd:style.left',
-					'segmentARightEnd:style.right',
-					'segmentBTopEnd:style.top',
-					'segmentCBottomEnd:style.bottom',
-					'segmentDLeftEnd:style.left',
-					'segmentDRightEnd:style.right',
-					'segmentEBottomEnd:style.bottom',
-					'segmentFTopEnd:style.top',
-					'segmentGLeftEnd:style.left',
-					'segmentGRightEnd:style.right'
+					'segmentAEndA:style.left',
+					'segmentAEndB:style.right',
+					'segmentBEndA:style.top',
+					'segmentCEndB:style.bottom',
+					'segmentDEndA:style.left',
+					'segmentDEndB:style.right',
+					'segmentEEndB:style.bottom',
+					'segmentFEndA:style.top',
+					'segmentGEndA:style.left',
+					'segmentGEndB:style.right'
 				],
-				segmentThicknessDiv2Px:[
-					'segmentALeftEnd:style.borderWidth',
-					'segmentARightEnd:style.borderWidth',
-					'segmentBTopEnd:style.borderWidth',
-					'segmentBBottomEnd:style.borderWidth',
-					'segmentCTopEnd:style.borderWidth',
-					'segmentCBottomEnd:style.borderWidth',
-					'segmentDLeftEnd:style.borderWidth',
-					'segmentDRightEnd:style.borderWidth',
-					'segmentETopEnd:style.borderWidth',
-					'segmentEBottomEnd:style.borderWidth',
-					'segmentFTopEnd:style.borderWidth',
-					'segmentFBottomEnd:style.borderWidth',
-					'segmentGLeftEnd:style.borderWidth',
-					'segmentGRightEnd:style.borderWidth'
-				],
+				segmentThicknessDiv2Px:_segmentThicknessDiv2PxHtmlBindings,
 				segmentThicknessPlusSegmentGapPx:[
 					'segmentABar:style.left',
 					'segmentABar:style.right',
@@ -199,10 +164,10 @@ Uize.module ({
 					'segmentGBar:style.right'
 				],
 				segmentGapMinusSegmentThicknessDiv2Px:[
-					'segmentBBottomEnd:style.bottom',
-					'segmentCTopEnd:style.top',
-					'segmentETopEnd:style.top',
-					'segmentFBottomEnd:style.bottom'
+					'segmentBEndB:style.bottom',
+					'segmentCEndA:style.top',
+					'segmentEEndA:style.top',
+					'segmentFEndB:style.bottom'
 				],
 				segmentGapPlusSegmentThicknessDiv2Px:[
 					'segmentBBar:style.bottom',
