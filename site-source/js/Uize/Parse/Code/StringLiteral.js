@@ -64,10 +64,13 @@ Uize.module ({
 						var _currentChar = _source.charAt (_index);
 						if (m.isValid = _currentChar == '"' || _currentChar == '\'') {
 							_index++;
-							var _inEscape = false;
+							var
+								_inEscape = false,
+								_quoteChar = _currentChar
+							;
 							while (_index < _sourceLength) {
 								var _char = _source.charAt (_index);
-								if (_char == '"' && !_inEscape) {
+								if (_char == _quoteChar && !_inEscape) {
 									m.isValid = true;
 									m.value = _unescapeReplacer (_source.slice (m.index + 1,_index));
 									m.length = ++_index - m.index;
