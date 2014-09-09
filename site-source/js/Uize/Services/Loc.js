@@ -141,6 +141,18 @@ Uize.module ({
 					*/
 				},
 
+				about:{
+					async:_false
+					/*?
+						Instance Methods
+							about
+								Displays the configuration information for the project.
+
+								NOTES
+								- this service method is asynchronous
+					*/
+				},
+
 				init:{
 					async:_true
 					/*?

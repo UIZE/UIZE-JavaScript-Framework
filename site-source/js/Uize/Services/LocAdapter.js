@@ -1102,6 +1102,18 @@ Uize.module ({
 					_callback ();
 				},
 
+				about:function (_params,_callback) {
+					var _project = this.project;
+					console.log (
+						'\n' +
+						'------------------------------- Project: ' + _project.name + ' -------------------------------\n\n' +
+						Uize.Json.to (_project,{sortKeys:true}) +
+						'\n'
+					);
+
+					_callback ();
+				},
+
 				init:function (_params,_callback) {
 					var
 						m = this,
