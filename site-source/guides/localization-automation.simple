@@ -99,7 +99,7 @@ Localization Service Methods ~~ Localization Service Method
 	The =Uize.Services.Loc= service module defines a number of different localization service methods.
 
 	metrics
-		Metrics can be generated for a project using the =metrics= method of the localization service.
+		Generates a metrics report for a project using the =metrics= method of the localization service.
 
 		.............................................................................
 		node [pathToUize]build.js Uize.Build.Loc project=[projectName] method=metrics
@@ -136,18 +136,42 @@ Localization Service Methods ~~ Localization Service Method
 			...........................
 
 	export
-		.
+		Exports the resource strings from the `codebase resource files` of a project to the `master resource files`.
 
 		............................................................................
 		node [pathToUize]build.js Uize.Build.Loc project=[projectName] method=export
 		............................................................................
 
+		The `master resource files` are output to the following paths...
+
+		.............................................
+		[workingFolder]/[primaryLanguage].json
+		[workingFolder]/[pseudoLocale].json
+		[workingFolder]/[translatableLanguages1].json
+		[workingFolder]/[translatableLanguages2].json
+		... ... ... ... ... ... ... ... ... ... ...
+		[workingFolder]/[translatableLanguagesN].json
+		.............................................
+
+		EXAMPLE
+		..............
+		loc/en-US.json
+		loc/en-ZZ.json
+		loc/en-GB.json
+		loc/fr-FR.json
+		loc/de-DE.json
+		..............
+
+		In the above example, the =workingFolder= config option is set to ='loc'=, the =primaryLanguage= config option is set to ='en-US'=, the =pseudoLocale= config option is set to ='en-ZZ'=, and the configured translatable languages are ='en-GB'= (English for Great Britain), ='fr-FR'= (French), and ='de-DE'= (German).
+
 	import
-		.
+		Imports the resource strings from the `master resource files` of a project back into the `codebase resource files`.
 
 		............................................................................
 		node [pathToUize]build.js Uize.Build.Loc project=[projectName] method=import
 		............................................................................
+
+		Executing the =import= method will have the effect of overwriting all the `codebase resource files` for the pseudo-locale and the translatable languages so that their contents reflects the contents of the `master resource files`. The =import= method will also create new codebase resource files, as necessary, if they did not previously exist.
 
 	exportJobs
 		.
