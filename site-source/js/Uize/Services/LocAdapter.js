@@ -32,9 +32,10 @@ Uize.module ({
 		'Uize.Data.NameValueRecords',
 		'Uize.Data.Csv',
 		'Uize.Loc.Xliff',
-		'Uize.Data.Diff',
 		'Uize.Loc.Pseudo',
 		'Uize.Loc.Strings.Metrics',
+		'Uize.Data.Diff',
+		'Uize.Str.Whitespace',
 		'Uize.Templates.Text.Tables.Breakdown',
 		'Uize.Templates.Text.Tables.YinYangBreakdown',
 		'Uize.Templates.Text.Tables.Histogram'
@@ -50,6 +51,7 @@ Uize.module ({
 
 			/*** Variables for Performance Optimization ***/
 				_getStringMetrics = Uize.Loc.Strings.Metrics.getMetrics,
+				_hasNonWhitespace = Uize.Str.Whitespace.hasNonWhitespace,
 
 			/*** General Variables ***/
 				_fileSystem = Uize.Services.FileSystem.singleton (),
@@ -82,6 +84,10 @@ Uize.module ({
 			}
 
 		/*** Private Instance Methods ***/
+			function _isTranslatableString (m,_stringInfo) {
+				return _hasNonWhitespace (_stringInfo.value) && m.isTranslatableString (_stringInfo);
+			}
+
 			function _calculateStringsInfoForLanguage (m,_language,_languageResources,_subFolder) {
 				var
 					_stringsInfo = [],
@@ -102,10 +108,7 @@ Uize.module ({
 							_resourceFileStrings,
 							function (_value,_path) {
 								var
-									_isTranslatable = m.isTranslatableString ({
-										key:_path [_path.length - 1],
-										value:_value
-									}),
+									_isTranslatable = _isTranslatableString (m,{key:_path [_path.length - 1],value:_value}),
 									_stringMetrics = _getStringMetrics (_value,_wordSplitter,_tokenRegExp),
 									_isBrandSpecific = _resourceFileIsBrandSpecific || m.isBrandResourceString (_path)
 								;
@@ -380,7 +383,7 @@ Uize.module ({
 								_primaryLanguageResources [_resourceFileSubPath],
 								{},
 								function (_string) {
-									if (m.isTranslatableString (_string))
+									if (_isTranslatableString (m,_string))
 										_string.value = Uize.Loc.Pseudo.pseudoLocalize (_string.value,_pseudoLocalizeOptions)
 									;
 									return _string;
@@ -758,7 +761,7 @@ Uize.module ({
 											return (
 												_languageString &&
 												!_languageString.value &&
-												m.isTranslatableString (_primaryLanguageString)
+												_isTranslatableString (m,_primaryLanguageString)
 													? _primaryLanguageString
 													: _undefined
 											);
