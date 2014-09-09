@@ -242,6 +242,24 @@ Uize.module ({
 								}
 							}
 						],
+						['An XLIFF format document may contain trans-unit tags with empty, self-closing source and target tags, and such tags are parsed to empty string values',
+							'<?xml version="1.0" ?>\n' +
+							'<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">\n' +
+							'	<file original="foo/bar.properties" source-language="en_US" target-language="fr_FR" datatype="plaintext">\n' +
+							'		<body>\n' +
+							'			<trans-unit id="[&apos;STR&apos;]">\n' +
+							'				<source/>\n' +
+							'				<target/>' +
+							'			</trans-unit>\n' +
+							'		</body>\n' +
+							'	</file>\n' +
+							'</xliff>',
+							{
+								'foo/bar.properties':{
+									STR:''
+								}
+							}
+						],
 						{
 							title:
 								'When an XLIFF document is serialized from a strings object using the Uize.Loc.Xliff.to method and the seedTarget option, and that document is then parsed to produce a strings object using the Uize.Loc.Xliff.from method, the returned strings object is identical to the original strings object',

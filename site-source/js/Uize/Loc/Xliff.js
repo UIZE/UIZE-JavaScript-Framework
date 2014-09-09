@@ -142,9 +142,10 @@ Uize.module ({
 						Uize.forEach (
 							_getTags (_getTags (_fileTag.childNodes,'body') [0].childNodes,'trans-unit'),
 							function (_transUnitTag) {
-								_fileStrings [_getAttributeValue (_transUnitTag,'id')] =
-									Uize.map (
-										_getTags (_transUnitTag.childNodes,'target') [0].childNodes.nodes,
+								var _targetTagChildNodes = _getTags (_transUnitTag.childNodes,'target') [0].childNodes;
+								_fileStrings [_getAttributeValue (_transUnitTag,'id')] = _targetTagChildNodes
+									? Uize.map (
+										_targetTagChildNodes.nodes,
 										function (_node) {
 											if ('text' in _node) {
 												return _node.text;
@@ -154,6 +155,7 @@ Uize.module ({
 											}
 										}
 									).join ('')
+									: ''
 								;
 							}
 						);
