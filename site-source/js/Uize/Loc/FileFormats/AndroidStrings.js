@@ -34,6 +34,16 @@ Uize.module ({
 	builder:function () {
 		'use strict';
 
+		/*** Utility Functions ***/
+			function _recurseParserObjects (_node,_nodeHandler) {
+				function _processNode (_node) {
+					_nodeHandler (_node);
+					var _childNodes = _node.childNodes;
+					_childNodes && Uize.forEach (_childNodes.nodes,_processNode);
+				}
+				_processNode (_node);
+			}
+
 		return Uize.package ({
 			from:function (_stringsFileStr) {
 				function _isTag (_node,_tagName) {
@@ -54,13 +64,18 @@ Uize.module ({
 							return _node.tagAttributes.attributes [0].value.value;
 						}
 						if (_isTag (_node,'string')) {
-							var
-								_string = Uize.map (
-									_node.childNodes.nodes,
-									function (_node) {
-										return (_isTag (_node,'xliff:g') ? _node.childNodes.nodes [0] : _node).text || '';
+							_recurseParserObjects (
+								_node,
+								function (_node) {
+									if ('text' in _node) {
+										_node.serialize = function () {return this.text};
+									} else if (_isTag (_node,'xliff:g')) {
+										_node.serialize = function () {return this.childNodes.nodes [0].text};
 									}
-								).join (''),
+								}
+							);
+							var
+								_string = _node.childNodes.serialize (),
 								_stringFirstChar = _string.charAt (0)
 							;
 							_stringLiteralParser.parse (
