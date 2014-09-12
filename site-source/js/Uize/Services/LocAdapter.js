@@ -29,6 +29,7 @@ Uize.module ({
 		'Uize.Services.FileSystem',
 		'Uize.Json',
 		'Uize.Data.Flatten',
+		'Uize.Data.Matches',
 		'Uize.Data.NameValueRecords',
 		'Uize.Data.Csv',
 		'Uize.Loc.Xliff',
@@ -424,24 +425,11 @@ Uize.module ({
 			}
 
 			function _getTranslatableLanguages (m) {
-				for (
-					var
-						_languageNo = -1,
-						_translatableLanguages = [],
-						_project = m.project,
-						_languages = _project.languages,
-						_languagesLength = _languages.length,
-						_primaryLanguage = _project.primaryLanguage,
-						_pseudoLocale = _project.pseudoLocale,
-						_language
-					;
-					++_languageNo < _languagesLength;
-				) {
-					if ((_language = _languages [_languageNo]) != _primaryLanguage && _language != _pseudoLocale)
-						_translatableLanguages.push (_language)
-					;
-				}
-				return _translatableLanguages;
+				var _project = m.project;
+				return Uize.Data.Matches.remove (
+					_project.languages,
+					Uize.lookup ([_project.primaryLanguage,_project.pseudoLocale])
+				);
 			}
 
 			function _forEachTranslatableLanguage (m,_iterationHandler) {
@@ -1112,6 +1100,10 @@ Uize.module ({
 					);
 
 					_callback ();
+				},
+
+				preview:function (_params,_callback) {
+					throw new Error ('The preview method is not implemented in this adapter.');
 				},
 
 				init:function (_params,_callback) {
