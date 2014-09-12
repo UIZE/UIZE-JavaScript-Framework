@@ -909,6 +909,20 @@ Uize.module ({
 										[0,2,3,4,5,6,7,8,9,20,22,23,24,25,26,27,28,29]
 									],
 
+								/*** test when lookup object is specified for matcher ***/
+									['When a lookup object is specified for the matcher, only elements of an array source whose values are mapped to a truthy value in the lookup are removed',
+										[['foo','bar','baz','qux'],{bar:1,baz:1}],
+										['foo','qux']
+									],
+									['When a lookup object is specified for the matcher, only properties of an object source whose values are mapped to a truthy value in the lookup are removed',
+										[{foo:'foo',bar:'bar',baz:'baz',qux:'qux'},{bar:1,baz:1}],
+										{foo:'foo',qux:'qux'}
+									],
+									['When a lookup object is specified for the matcher, only values of a range source that are mapped to a truthy value in the lookup are removed',
+										[10,{3:true,5:true,9:true}],
+										[0,1,2,4,6,7,8]
+									],
+
 							/*** test support for the maxMatches parameter ***/
 								['Specifying the value 0 for the maxMatches parameter results in no elements of an array source being removed, even if there are matches',
 									[

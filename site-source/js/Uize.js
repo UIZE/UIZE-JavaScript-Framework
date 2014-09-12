@@ -1664,7 +1664,13 @@ Uize = (function () {
 			},
 
 			resolveMatcher:function (_matcher) {
-				return _matcher == _undefined ? _package.returnTrue : _resolveTransformer (_matcher);
+				return (
+					_matcher == _undefined
+						? _package.returnTrue
+						: _isPlainObject (_matcher)
+							? function (_value) {return !!_matcher [_value]}
+							: _resolveTransformer (_matcher)
+				);
 				/*?
 					Static Methods
 						Uize.resolveMatcher
