@@ -452,6 +452,13 @@ Uize.module ({
 
 		return _superclass.subclass ({
 			instanceMethods:{
+				getTranslatableLanguages:function () {return _getTranslatableLanguages (this)},
+
+				getLanguages:function () {
+					var _project = this.project;
+					return Uize.push (_getTranslatableLanguages (this),[_project.primaryLanguage,_project.pseudoLocale]);
+				},
+
 				distributeResources:function (_resources,_language) {
 					// NOTE: this method can be useful for implementation of the extract method
 					var
@@ -1050,7 +1057,7 @@ Uize.module ({
 						);
 
 					/*** write report file ***/
-						var _usageReportFilePath = m.workingFolderPath + 'metrics/usage-report.json';
+						var _usageReportFilePath = m._workingFolderPath + 'metrics/usage-report.json';
 						_fileSystem.writeFile ({
 							path:_usageReportFilePath,
 							contents:Uize.Json.to ({
