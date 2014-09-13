@@ -53,7 +53,8 @@
 						'zh-CN'
 					],
 					primaryLanguage:'en-US',
-					pseudoLocale:'en-ZZ'
+					pseudoLocale:'en-ZZ',
+					translationJobFileFormat:'xliff' // csv | xliff
 				}
 			}
 		}
