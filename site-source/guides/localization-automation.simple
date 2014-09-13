@@ -350,6 +350,38 @@ Localization Service Workflows
 		Branching a Project
 			.
 
+	### Iterative Translation
+		revision A
+			- initiate translations
+				export
+				exportJobs
+					- XLIFF files for translatable languages will have entries for only strings that are empty (the delta)
+
+		revision B
+			- one string was added
+			- one string was removed
+			- one string was changed
+			- .json mater file should reflect state of codebase at revision A
+			- importJobs
+			- import
+				- resource files for primary language are not modified
+			- after import, codebase resource files for translatable languages will contain...
+				- no string for string that was added since revision A
+				- the old translations for the string that was removed since revision A
+				- the old translations for the string that was changed since revision A
+			- repair, using export + import
+			- after repair...
+				- there will be an empty string value for the string that was added since revision A
+				- translations for string that was removed since revision A will be gone
+				- the defunct translations for the string that was changed since revision A will be blanked out
+
+			- initiate translations
+				export
+				exportJobs
+					- XLIFF files for translatable languages will have entries for...
+						- strings that were added since revision A
+						- strings that were changed since revision A
+
 Advanced Topics
 	Non-translatable Strings
 		Non-translatable strings are strings that should never be pseudo-localized and should never be sent to translators for translation.
