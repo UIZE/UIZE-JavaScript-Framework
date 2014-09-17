@@ -12,7 +12,7 @@
 /* Module Meta Data
 	type: Package
 	importance: 1
-	codeCompleteness: 100
+	codeCompleteness: 70
 	docCompleteness: 4
 */
 
@@ -29,8 +29,13 @@ Uize.module ({
 	builder:function () {
 		'use strict';
 
-		/*** Utility Functions ***/
-			function _getCharPosObject (_text,_charPos) {
+		var
+			/*** References to Methods Used Internally ***/
+				_getCharPosObject
+		;
+
+		return Uize.package ({
+			getLineAndChar:_getCharPosObject = function (_text,_charPos) {
 				var
 					_linesUpToChar = Uize.Str.Lines.split (_text.slice (0,_charPos + 1)),
 					_line = _linesUpToChar.length - 1,
@@ -44,9 +49,8 @@ Uize.module ({
 					lineChar:_lineChar,
 					char:_charPos
 				};
-			}
+			},
 
-		return Uize.package ({
 			search:function (_sourceStr,_matcher) {
 				_matcher = new RegExp (
 					_matcher.source,

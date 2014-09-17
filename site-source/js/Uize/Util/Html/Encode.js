@@ -104,7 +104,13 @@ Uize.module ({
 							NOTES
 							- see also the corresponding =Uize.Util.Html.Encode.encode= static method
 				*/
-			}
+			},
+
+			encodeTextNode:Uize.Str.Replace.replacerByLookup ({
+				'&':'&amp;',
+				'<':'&lt;',
+				'>':'&gt;'
+			})
 		});
 	}
 });

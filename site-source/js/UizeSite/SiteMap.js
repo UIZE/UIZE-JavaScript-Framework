@@ -180,9 +180,20 @@ Uize.module ({
 							_divider,
 							_guide ('DOM Events','javascript-dom-events'),
 							_guide ('Widgets','javascript-widgets'),
-							_guide ('Localization','javascript-localization'),
 							_guide ('Templates','javascript-templates'),
 							_guide ('Animation and Effects','javascript-animation-and-effects'),
+							_divider,
+							{
+								title:'i18n & Localization',
+								items:
+									[
+										_guide ('Localization','javascript-localization'),
+										_guide ('Localization Automation'),
+										_divider,
+										_whitePaper ('Whitepaper - Localization','localization'),
+										_whitePaper ('Whitepaper - Resource String Guidelines','resource-string-guidelines')
+									]
+							},
 							_divider,
 							_guide ('Libraries','javascript-libraries'),
 							_guide ('Build Scripts','javascript-build-scripts'),

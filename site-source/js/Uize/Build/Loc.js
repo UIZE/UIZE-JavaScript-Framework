@@ -75,7 +75,11 @@ Uize.module ({
 				Uize.forEach (
 					!_projectName || _projectName == '*' ? Uize.keys (_projects) : _projectName.split (','),
 					function _performLocMethodForProject (_projectName) {
-						var _project = Uize.merge (_scriptConfig.common,_projects [_projectName],{name:_projectName});
+						var _project = Uize.merge (
+							Uize.clone (_scriptConfig.common),
+							{name:_projectName},
+							_projects [_projectName]
+						);
 						Uize.require (
 							_project.serviceAdapter,
 							function (_locServiceAdapter) {

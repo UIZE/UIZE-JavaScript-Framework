@@ -1,38 +1,38 @@
 <div>
 	<div id="segmentA" class="segment horzSegment horzSegmentTop segmentOff">
-		<div id="segmentALeftEnd" class="segmentEnd"></div>
+		<div id="segmentAEndA" class="segmentEnd"></div>
 		<div id="segmentABar" class="segmentBar"></div>
-		<div id="segmentARightEnd" class="segmentEnd"></div>
+		<div id="segmentAEndB" class="segmentEnd"></div>
 	</div>
 	<div id="segmentB" class="segment vertSegment vertSegmentRight vertSegmentTop segmentOff">
-		<div id="segmentBTopEnd" class="segmentEnd"></div>
+		<div id="segmentBEndA" class="segmentEnd"></div>
 		<div id="segmentBBar" class="segmentBar"></div>
-		<div id="segmentBBottomEnd" class="segmentEnd"></div>
+		<div id="segmentBEndB" class="segmentEnd"></div>
 	</div>
 	<div id="segmentC" class="segment vertSegment vertSegmentRight vertSegmentBottom segmentOff">
-		<div id="segmentCTopEnd" class="segmentEnd"></div>
+		<div id="segmentCEndA" class="segmentEnd"></div>
 		<div id="segmentCBar" class="segmentBar"></div>
-		<div id="segmentCBottomEnd" class="segmentEnd"></div>
+		<div id="segmentCEndB" class="segmentEnd"></div>
 	</div>
 	<div id="segmentD" class="segment horzSegment horzSegmentBottom segmentOff">
-		<div id="segmentDLeftEnd" class="segmentEnd"></div>
+		<div id="segmentDEndA" class="segmentEnd"></div>
 		<div id="segmentDBar" class="segmentBar"></div>
-		<div id="segmentDRightEnd" class="segmentEnd"></div>
+		<div id="segmentDEndB" class="segmentEnd"></div>
 	</div>
 	<div id="segmentE" class="segment vertSegment vertSegmentLeft vertSegmentBottom segmentOff">
-		<div id="segmentETopEnd" class="segmentEnd"></div>
+		<div id="segmentEEndA" class="segmentEnd"></div>
 		<div id="segmentEBar" class="segmentBar"></div>
-		<div id="segmentEBottomEnd" class="segmentEnd"></div>
+		<div id="segmentEEndB" class="segmentEnd"></div>
 	</div>
 	<div id="segmentF" class="segment vertSegment vertSegmentLeft vertSegmentTop segmentOff">
-		<div id="segmentFTopEnd" class="segmentEnd"></div>
+		<div id="segmentFEndA" class="segmentEnd"></div>
 		<div id="segmentFBar" class="segmentBar"></div>
-		<div id="segmentFBottomEnd" class="segmentEnd"></div>
+		<div id="segmentFEndB" class="segmentEnd"></div>
 	</div>
 	<div id="segmentG" class="segment horzSegment horzSegmentMiddle segmentOff">
-		<div id="segmentGLeftEnd" class="segmentEnd"></div>
+		<div id="segmentGEndA" class="segmentEnd"></div>
 		<div id="segmentGBar" class="segmentBar"></div>
-		<div id="segmentGRightEnd" class="segmentEnd"></div>
+		<div id="segmentGEndB" class="segmentEnd"></div>
 	</div>
 </div>
 

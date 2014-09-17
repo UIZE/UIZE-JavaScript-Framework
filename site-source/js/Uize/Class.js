@@ -863,9 +863,11 @@ Uize.module ({
 			}
 
 			function _resolveDerivation (_derivation) {
-				/* NOTE: this code will eventually be used also for derived properties */
 				var
-					_derivationCacheKey = _derivation + '',
+					_derivationIsPlainObject = Uize.isPlainObject (_derivation),
+					_derivationCacheKey = _derivationIsPlainObject
+						? _derivation.determinants + ' : ' + _derivation.determiner
+						: _derivation + '',
 					_resolvedDerivation = _derivationCache [_derivationCacheKey]
 				;
 				function _getDeterminantsFromListStr (_determinantsStr) {
@@ -881,7 +883,10 @@ Uize.module ({
 						_determinants,
 						_determiner
 					;
-					if (_isFunction (_derivation)) {
+					if (_derivationIsPlainObject) {
+						_determinants = _derivation.determinants;
+						_determiner = _derivation.determiner;
+					} else if (_isFunction (_derivation)) {
 						_determinants = _getDeterminantsFromListStr ((_derivation + '').match (/\(([^\)]*)\)/) [1]);
 						_determiner = _derivation;
 					} else {

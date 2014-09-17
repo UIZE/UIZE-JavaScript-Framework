@@ -4,15 +4,15 @@ Introduction
 	Localization as a Service
 		UIZE exposes localization automation processes through a service, whose interface is defined in the =Uize.Services.Loc= abstract class.
 
-		The =Uize.Services.Loc= service module defines the following service methods...
+		The =Uize.Services.Loc= service module defines the following `localization service methods`...
 
 		- =metrics= - generates a `metrics report` for the `primary language` resource strings of a project
-		- =export= - gathers strings from `distributed resource files` and exports them to `consolidated language resources files`, for each of the project's `supported languages`
-		- =import= - distributes strings from the `consolidated language resources files` to `distributed resource files`, for each of the project's `supported languages`
+		- =export= - gathers strings from `codebase resource files` and exports them to `consolidated language resources files`, for each of the project's `supported languages`
+		- =import= - distributes strings from the `consolidated language resources files` to `codebase resource files`, for each of the project's `supported languages`
 		- =exportJobs= - exports `translation job files` from the `consolidated language resources files`, for each of the project's `translatable languages`
 		- =importJobs= - imports translated strings from `translation job files` and merges them into the `consolidated language resources files`, for each of the project's `translatable languages`
 		- =usage= - generates a `usage report` that contains details about usage of resource strings throughout a project, including information about unreferenced resource strings
-		- =extract= - extracts strings from the project's codebase and generates `distributed resource files` for the project's `primary language` (may not be supported for a project)
+		- =extract= - extracts strings from the project's codebase and generates `codebase resource files` for the project's `primary language` (may not be supported for a project)
 
 		Localization Service Adapter
 			As a convenience, UIZE provides an adapter base class for the =Uize.Services.Loc= service that can be applied, with some protected method overrides and configuration, to a variety of different types of projects.
@@ -20,7 +20,7 @@ Introduction
 			While it is possible to implement any adapter for the localization service, in reality there are sufficient commonalities between many different types of projects, such that it is beneficial to share implementation for the service adapter across as many different types of projects as possible. This is where the =Uize.Services.LocAdapter= module comes in. This module can be subclassed to create adapters for the localization service for different types of projects with minimal additional project type specific code needed.
 
 	Accessed Through a Build Script
-		The various localization methods can be accessed using the =Uize.Build.Loc= build script.
+		The various `localization service methods` can be accessed using the =Uize.Build.Loc= build script.
 
 		Running the Build Script
 			The localization build script can be run in NodeJS using the following command...
@@ -32,12 +32,12 @@ Introduction
 
 			Parameters
 				project
-					The =project= parameter is used to specify the project for which the specified localization method should be executed.
+					The =project= parameter is used to specify the project for which the specified `localization service method` should be executed.
 
 					The value specified for the =project= parameter should match one of the keys in the =moduleConfigs ['Uize.Build.Loc'].projects= object of the =uize-config.json= file.
 
 					Executing a Method For All Projects
-						To execute a localization method for all projects listed in the config, one can either omit the =project= parameter or one can specify the special "*" wildcard value.
+						To execute a `localization service method` for all projects listed in the config, one can either omit the =project= parameter or one can specify the special "*" wildcard value.
 
 						EXAMPLES
 						......................................................................
@@ -46,9 +46,26 @@ Introduction
 						......................................................................
 
 				method
-					The =method= parameter is used to specify the localization method that should be executed for the specified project.
+					The =method= parameter is used to specify the `localization service method` that should be executed for the specified project.
 
-					The value of the =method= parameter should be the name of any of the `service methods` supported by the localization service.
+					The value of the =method= parameter should be the name of any of the `localization service methods` supported by the localization service, such as...
+
+					- =metrics=
+					- =export=
+					- =import=
+					- =exportJobs=
+					- =importJobs=
+					- =usage=
+					- =extract=
+
+				console
+					The =console= parameter is used to specify the amount of information that should be logged to the console while the `localization service method` is being executed.
+
+					The =console= parameter supports the following possible values...
+
+					- =silent= - no information will be logged to the console
+					- =summary= - only a summary will be logged to the console once execution of the `localization service method` is complete
+					- =verbose= - information will be logged to the console for every step that is performed while the `localization service method` is being executed
 
 ### Project ~~ Projects
 	.
@@ -62,6 +79,308 @@ Introduction
 
 	Translatable Languages
 		.
+
+### Key Features
+	.
+
+	Supports Multiple Projects
+		.
+
+	Adaptable to Different Project Types
+		.
+
+	Performs Diffing to Reduce Translation Load
+		.
+
+	Performs Automatic Pseudo-localization
+		.
+
+Localization Service Methods ~~ Localization Service Method
+	The =Uize.Services.Loc= service module defines a number of different localization service methods.
+
+	metrics
+		Generates a metrics report for a project using the =metrics= method of the localization service.
+
+		.............................................................................
+		node [pathToUize]build.js Uize.Build.Loc project=[projectName] method=metrics
+		.............................................................................
+
+		Generates a Strings Metrics File
+			The metrics method analyzes the resource strings for the project's `primary language` and generates a JSON format metrics file with the path...
+
+			..............................................
+			[workingFolder]/metrics/[primaryLanguage].json
+			..............................................
+
+			Using this scheme, if the value of the =workingFolder= config option is ='loc'=, and the value of the =primaryLanguage= config option is ='en-US'=, then the path for the metrics file would be...
+
+			......................
+			loc/metrics/en-US.json
+			......................
+
+		Generates Strings Info Files
+			In addition to generating the strings metrics JSON file, the =metrics= method also generates JSON and CSV format `strings info files` for the primary language.
+
+			These files are output to the following paths...
+
+			...................................................
+			[workingFolder]/strings-info/[primaryLanguage].csv
+			[workingFolder]/strings-info/[primaryLanguage].json
+			...................................................
+
+			Using this scheme, if the value of the =workingFolder= config option is ='loc'=, and the value of the =primaryLanguage= config option is ='en-US'=, then the paths for the strings info files would be...
+
+			...........................
+			loc/strings-info/en-US.csv
+			loc/strings-info/en-US.json
+			...........................
+
+	export
+		Exports the resource strings from the `codebase resource files` of a project to the `master resource files`.
+
+		............................................................................
+		node [pathToUize]build.js Uize.Build.Loc project=[projectName] method=export
+		............................................................................
+
+		The `master resource files` are output to the following paths...
+
+		.............................................
+		[workingFolder]/[primaryLanguage].json
+		[workingFolder]/[pseudoLocale].json
+		[workingFolder]/[translatableLanguages1].json
+		[workingFolder]/[translatableLanguages2].json
+		... ... ... ... ... ... ... ... ... ... ...
+		[workingFolder]/[translatableLanguagesN].json
+		.............................................
+
+		EXAMPLE
+		..............
+		loc/en-US.json
+		loc/en-ZZ.json
+		loc/en-GB.json
+		loc/fr-FR.json
+		loc/de-DE.json
+		..............
+
+		In the above example, the =workingFolder= config option is set to ='loc'=, the =primaryLanguage= config option is set to ='en-US'=, the =pseudoLocale= config option is set to ='en-ZZ'=, and the configured translatable languages are ='en-GB'= (English for Great Britain), ='fr-FR'= (French), and ='de-DE'= (German).
+
+	import
+		Imports the resource strings from the `master resource files` of a project back into the `codebase resource files`.
+
+		............................................................................
+		node [pathToUize]build.js Uize.Build.Loc project=[projectName] method=import
+		............................................................................
+
+		Executing the =import= method will have the effect of overwriting all the `codebase resource files` for the pseudo-locale and the translatable languages so that their contents reflects the contents of the `master resource files`. The =import= method will also create new codebase resource files, as necessary, if they did not previously exist.
+
+	exportJobs
+		.
+
+		................................................................................
+		node [pathToUize]build.js Uize.Build.Loc project=[projectName] method=exportJobs
+		................................................................................
+
+	importJobs
+		.
+
+		................................................................................
+		node [pathToUize]build.js Uize.Build.Loc project=[projectName] method=importJobs
+		................................................................................
+
+	usage
+		.
+
+		...........................................................................
+		node [pathToUize]build.js Uize.Build.Loc project=[projectName] method=usage
+		...........................................................................
+
+	extract
+		.
+
+		.............................................................................
+		node [pathToUize]build.js Uize.Build.Loc project=[projectName] method=extract
+		.............................................................................
+
+Configuring Projects
+	The behavior of the =Uize.Build.Loc= build script is configurable to support one or more projects of potentially different types.
+
+	`Config options` for the =Uize.Build.Loc= build script should be placed inside the =uize-config.json= config file, under the path =moduleConfigs ['Uize.Build.Loc']=, as illustrated by the example below...
+
+	EXAMPLE
+	..............................................................
+	{
+		// other config options
+		// other config options
+		// other config options
+		// other config options
+
+		moduleConfigs:{
+			'Uize.Build.Loc':{
+				workingFolder:'loc',
+				projects:{
+					Uize:{
+						serviceAdapter:'Uize.Services.LocAdapter.Uize',
+						rootFolderPath:'site-source/js',
+						languages:[
+							'en-US',
+							'de-DE',
+							'fr-FR',
+							'ja-JP',
+							'nl-NL',
+							'ru-RU',
+							'zh-CN'
+						],
+						primaryLanguage:'en-US',
+						pseudoLocale:'en-ZZ'
+					}
+				}
+			}
+		}
+	}
+	..............................................................
+
+	The above example shows the configuration of the =Uize.Build.Loc= build script for the UIZE project.
+
+	Config Options
+		The =Uize.Build.Loc= build script supports a number of configuration options.
+
+		Working Folder ~~ workingFolder
+			The =workingFolder= config option specifies the path, relative to the current working directory, to the working folder for the =Uize.Build.Loc= build script.
+
+			The working folder is used to store the output of the various `localization service methods`.
+
+		Per Project Configuration Options
+			.
+
+			Service Adapter ~~ serviceAdapter
+				.
+
+			Root Folder Path ~~ rootFolderPath
+				.
+
+			Languages ~~ languages
+				.
+
+			Brand Languages ~~ brandLanguages
+				.
+
+			Primary Language ~~ primaryLanguage
+				.
+
+			Pseudo-locale ~~ pseudoLocale
+				.
+
+			Pseudo-localization ~~ pseudoLocalization
+				.
+
+			Translation Job File Format ~~ translationJobFileFormat
+				.
+
+				- =csv= -
+				- =xliff= -
+
+		Common Project Configuration Options ~~ common
+			.
+
+Localization Service Workflows
+	Performing Translation
+		In order to have the resource strings for a project be translated, one must first `export the resource strings for translation` and then `import the translated resource strings`.
+
+		Export the Resource Strings for Translation
+			Exporting the resource strings for translation for a project involves the following steps...
+
+			+. Execute the =export= `localization service method` to update the =.json= `master resource files` to reflect the current state of the `codebase resource files`.
+			+. Execute the =exportJobs= `localization service method` to generate updated `translation job files`.
+
+			Once the `translation job files` have been generated to reflect the current state of the project's codebase and the strings that actually need translation, these files can be sent to translators for translation.
+
+		Import the Translated Resource Strings
+			Once the translation job files have been processed by the translators and the strings have been translated, the translations can be imported back into the project's codebase with the following steps...
+
+			+. Replace the `translation job files` inside the *jobs* folder with the updated files delivered by the trabslators.
+			+. Execute the =importJobs= `localization service method` to update the =.json= `master resource files` with the translations contained inside the `translation job files`.
+			+. Execute the =import= `localization service method` to update the `codebase resource files` of the project with the strings from the updated =.json= `master resource files`.
+
+			Once the `codebase resource files` have been updated, a diff sanity check in one's source control tool should verify that the translations have made their way into the resource files in the project's codebase.
+
+	Changes to Resource Strings
+		Deleting Resource Strings
+			At times, it will be necessary to delete one or more resource strings because a component has been modified.
+
+			Consider that the application may support multiple different languages and there may be translations in the resource files for different languages for the resource strings you wish to delete. With the Loc service, it is not necessary to remove the resource strings from the translated resource files - they will be repaired if you follow these steps...
+
+			+. Delete the resource strings in the primary language resource files. Be sure to remove all brand-specific overrides, if any exist, from the primary language resource files.
+			+. Execute the =export= method of the Loc service to update the =.json= `master resource files`.
+			+. Execute the =import= method of the Loc service to re-generate the resource files for the supported languages of the project.
+
+			Performing the =export= followed by the =import= will have the effect of repairing the resource files in the codebase so that the removed resource strings will no longer exist in the resource files for the supported languages.
+
+		### Modifying Resource Strings
+			.
+
+		### Adding Resource Strings
+			.
+
+		Renaming Resource Strings
+			At times, it will be necessary to rename one or more resource strings because a component has been modified.
+
+			Consider that the application may support multiple different languages and there may be translations in the resource files for different languages for the resource strings you wish to rename. The Loc service does not provide any special handling for such situations and you will need to rename the resource strings in the resource files for the primary language and all other supported languages.
+
+		### Re-translating Resource Strings
+			.
+
+	### Changes to Resource Files
+		Deleting Resource Files
+			.
+
+		Adding Resource Files
+			.
+
+	### Changes to Language Support
+		Adding Support for a New Language
+			.
+
+		Removing Support for a Language
+			.
+
+	### Changes in Projects
+		Adding a New Project
+			.
+
+		Branching a Project
+			.
+
+	### Iterative Translation
+		revision A
+			- initiate translations
+				export
+				exportJobs
+					- XLIFF files for translatable languages will have entries for only strings that are empty (the delta)
+
+		revision B
+			- one string was added
+			- one string was removed
+			- one string was changed
+			- .json mater file should reflect state of codebase at revision A
+			- importJobs
+			- import
+				- resource files for primary language are not modified
+			- after import, codebase resource files for translatable languages will contain...
+				- no string for string that was added since revision A
+				- the old translations for the string that was removed since revision A
+				- the old translations for the string that was changed since revision A
+			- repair, using export + import
+			- after repair...
+				- there will be an empty string value for the string that was added since revision A
+				- translations for string that was removed since revision A will be gone
+				- the defunct translations for the string that was changed since revision A will be blanked out
+
+			- initiate translations
+				export
+				exportJobs
+					- XLIFF files for translatable languages will have entries for...
+						- strings that were added since revision A
+						- strings that were changed since revision A
 
 Advanced Topics
 	Non-translatable Strings
@@ -78,7 +397,7 @@ Advanced Topics
 		It is a potential waste of money to send non-translatable strings to translators, since they likely won't know what to do with them and determining how to handle them may involve some costly back-and-forth communication between the project managers on both sides of the process. Worse still, accidental pseudo-localization of some non-translatable strings (such as IDs or URLs) may actually break the pseudo-localized application and hinder localization QA testing of the pseudo-localized version.
 
 		Non-translatable Strings Vary by Project
-			Different types of projects will likely have different varieties of non-translatable strings that it is convenient for the project to store in `distributed resource files`.
+			Different types of projects will likely have different varieties of non-translatable strings that it is convenient for the project to store in `codebase resource files`.
 
 			Therefore, it is up to each project to determine which strings are translatable and which strings are not. This is accomplished by implementing an override to the new =isTranslatableString= method in the `localization service adapter`. The implementation in the adapter base class just returns =true=, so all resource strings are considered translatable by default.
 
@@ -113,12 +432,12 @@ Advanced Topics
 
 				Following such a convention would provide the following benefits...
 
-				- it becomes clear from the `distributed resource files` exactly which strings are not to be translated
+				- it becomes clear from the `codebase resource files` exactly which strings are not to be translated
 				- the =isTranslatableString= test is simple, robust, and highly performant
 				- it is easy to add new non-translatable strings of different types later to a project later, without needing to update the implementation of the =isTranslatableString= method
 
 	Metrics Reports ~~ Metrics Report
-		A metrics report can be produced for a project by using the =metrics= localization method.
+		A metrics report can be produced for a project by using the =metrics= `localization service method`.
 
 		EXAMPLE
 		.............................................................................
@@ -149,113 +468,28 @@ Advanced Topics
 			Total Resource Files
 				The total number of resource files for the language is represented by the =resourceFiles= property.
 
-				The value of the =resourceFiles= property reflects the total number of distributed resource files for the language and not the total for all languages, so this value doesn't increase as you add support for new languages.
+				The value of the =resourceFiles= property reflects the total number of codebase resource files for the language and not the total for all languages, so this value doesn't increase as you add support for new languages.
 
 			Brand-specific Resource Files
 				The total number of brand-specific resource files for the language is represented by the =brandSpecificResourceFiles= property.
 
 				What constitutes a brand-specific resource file will vary by project and depend on the project definition. Typically, brand-specific resource files provide overrides for certain resource strings that need to be different for specific brands, so the number of brand-specific resource files is usually smaller than the total number of resource files. Moreover, different brands may have a differing number of brand-specific resource files.
 
-### Key Features
-	.
-
-	Supports Multiple Projects
-		.
-
-	Adaptable to Different Project Types
-		.
-
-	Performs Diffing to Reduce Translation Load
-		.
-
-	Performs Automatic Pseudo-localization
-		.
-
-### Service Methods
-	.
-
-	metrics
-		Metrics can be generated for a project using the =metrics= method of the localization service.
-
-		.............................................................................
-		node [pathToUize]build.js Uize.Build.Loc project=[projectName] method=metrics
-		.............................................................................
-
-	export
-		.
-
-		............................................................................
-		node [pathToUize]build.js Uize.Build.Loc project=[projectName] method=export
-		............................................................................
-
-	import
-		.
-
-		............................................................................
-		node [pathToUize]build.js Uize.Build.Loc project=[projectName] method=import
-		............................................................................
-
-	exportJobs
-		.
-
-		................................................................................
-		node [pathToUize]build.js Uize.Build.Loc project=[projectName] method=exportJobs
-		................................................................................
-
-	importJobs
-		.
-
-		................................................................................
-		node [pathToUize]build.js Uize.Build.Loc project=[projectName] method=importJobs
-		................................................................................
-
-	usage
-		.
-
-		...........................................................................
-		node [pathToUize]build.js Uize.Build.Loc project=[projectName] method=usage
-		...........................................................................
-
-	extract
-		.
-
-		.............................................................................
-		node [pathToUize]build.js Uize.Build.Loc project=[projectName] method=extract
-		.............................................................................
-
-### Configuring Projects
-	.
-
-	Per Project Configuration Options
-		.
-
-		Service Adapter
+	### Different Classes of Files
+		Codebase Resource Files
 			.
 
-		Languages
+		Master Resource Files
 			.
 
-		Primary Language
+		Translation Job Files
 			.
 
-		Pseudo-locale
+		Strings Metrics Files
 			.
 
-	Common Project Configuration Options
-		.
-
-	Pseudo-localization
-		.
-
-###
-	Distributed Resource Files
-		.
-
-	Consolidated Resource Files
-		.
-
-	Translation Job Files
-		.
+		Strings Info Files
+			.
 
 ### Use With Other Projects
 	.

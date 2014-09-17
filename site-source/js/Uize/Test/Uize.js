@@ -1239,6 +1239,23 @@ Uize.module ({
 									this.expect (false,_resolvedMatcher ('foo'))
 								);
 							}
+						},
+						{
+							title:'Specifying a plain object results in a function being created that uses the specified object as a lookup, where the returned result is true if the looked up value is truthy and false otherwise',
+							test:function () {
+								var _resolvedMatcher = Uize.resolveMatcher ({
+									foo:1,
+									bar:true,
+									baz:0
+								});
+								return (
+									this.expectType ('function',_resolvedMatcher) &&
+									this.expect (true,_resolvedMatcher ('foo')) &&
+									this.expect (true,_resolvedMatcher ('bar')) &&
+									this.expect (false,_resolvedMatcher ('baz')) &&
+									this.expect (false,_resolvedMatcher ('qux'))
+								);
+							}
 						}
 					]],
 					['Uize.escapeRegExpLiteral',[

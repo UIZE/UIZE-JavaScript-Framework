@@ -29,12 +29,14 @@ Uize.module ({
 		'Uize.Services.FileSystem',
 		'Uize.Json',
 		'Uize.Data.Flatten',
+		'Uize.Data.Matches',
 		'Uize.Data.NameValueRecords',
 		'Uize.Data.Csv',
 		'Uize.Loc.Xliff',
-		'Uize.Data.Diff',
 		'Uize.Loc.Pseudo',
-		'Uize.Str.Split',
+		'Uize.Loc.Strings.Metrics',
+		'Uize.Data.Diff',
+		'Uize.Str.Whitespace',
 		'Uize.Templates.Text.Tables.Breakdown',
 		'Uize.Templates.Text.Tables.YinYangBreakdown',
 		'Uize.Templates.Text.Tables.Histogram'
@@ -46,8 +48,11 @@ Uize.module ({
 		var
 			/*** Variables for Scruncher Optimization ***/
 				_undefined,
-				_split = Uize.Str.Split.split,
 				_breakdownTable = Uize.Templates.Text.Tables.Breakdown.process,
+
+			/*** Variables for Performance Optimization ***/
+				_getStringMetrics = Uize.Loc.Strings.Metrics.getMetrics,
+				_hasNonWhitespace = Uize.Str.Whitespace.hasNonWhitespace,
 
 			/*** General Variables ***/
 				_fileSystem = Uize.Services.FileSystem.singleton (),
@@ -56,6 +61,10 @@ Uize.module ({
 					quoteChar:'"',
 					indentChars:'',
 					linebreakChars:''
+				},
+				_fileTypeExtensionsLookup = {
+					csv:'csv',
+					xliff:'xlf'
 				}
 		;
 
@@ -76,11 +85,16 @@ Uize.module ({
 			}
 
 		/*** Private Instance Methods ***/
+			function _isTranslatableString (m,_stringInfo) {
+				return _hasNonWhitespace (_stringInfo.value) && m.isTranslatableString (_stringInfo);
+			}
+
 			function _calculateStringsInfoForLanguage (m,_language,_languageResources,_subFolder) {
 				var
-					_project = m.project,
 					_stringsInfo = [],
-					_infoFilePath = m._workingFolderPath + _subFolder + 'strings-info/' + _language
+					_infoFilePath = m._workingFolderPath + _subFolder + 'strings-info/' + _language,
+					_wordSplitter = m.wordSplitter,
+					_tokenRegExp = m.tokenRegExp
 				;
 				Uize.forEach (
 					_languageResources,
@@ -95,11 +109,8 @@ Uize.module ({
 							_resourceFileStrings,
 							function (_value,_path) {
 								var
-									_isTranslatable = m.isTranslatableString ({
-										key:_path [_path.length - 1],
-										value:_value
-									}),
-									_stringMetrics = _getStringMetrics (m,_value),
+									_isTranslatable = _isTranslatableString (m,{key:_path [_path.length - 1],value:_value}),
+									_stringMetrics = _getStringMetrics (_value,_wordSplitter,_tokenRegExp),
 									_isBrandSpecific = _resourceFileIsBrandSpecific || m.isBrandResourceString (_path)
 								;
 
@@ -373,7 +384,7 @@ Uize.module ({
 								_primaryLanguageResources [_resourceFileSubPath],
 								{},
 								function (_string) {
-									if (m.isTranslatableString (_string))
+									if (_isTranslatableString (m,_string))
 										_string.value = Uize.Loc.Pseudo.pseudoLocalize (_string.value,_pseudoLocalizeOptions)
 									;
 									return _string;
@@ -388,6 +399,13 @@ Uize.module ({
 
 			function _languageResourcesFilePath (m,_language) {
 				return m._workingFolderPath + _language + '.json';
+			}
+
+			function _getTranslationJobFilePath (m,_language) {
+				return (
+					m._workingFolderPath + 'jobs/' + _language +
+					'.' + _fileTypeExtensionsLookup [m.project.translationJobFileFormat || 'csv']
+				);
 			}
 
 			function _readLanguageResourcesFile (m,_language) {
@@ -407,70 +425,15 @@ Uize.module ({
 			}
 
 			function _getTranslatableLanguages (m) {
-				for (
-					var
-						_languageNo = -1,
-						_translatableLanguages = [],
-						_project = m.project,
-						_languages = _project.languages,
-						_languagesLength = _languages.length,
-						_primaryLanguage = _project.primaryLanguage,
-						_pseudoLocale = _project.pseudoLocale,
-						_language
-					;
-					++_languageNo < _languagesLength;
-				) {
-					if ((_language = _languages [_languageNo]) != _primaryLanguage && _language != _pseudoLocale)
-						_translatableLanguages.push (_language)
-					;
-				}
-				return _translatableLanguages;
+				var _project = m.project;
+				return Uize.Data.Matches.remove (
+					_project.languages,
+					Uize.lookup ([_project.primaryLanguage,_project.pseudoLocale])
+				);
 			}
 
 			function _forEachTranslatableLanguage (m,_iterationHandler) {
 				Uize.forEach (_getTranslatableLanguages (m),function (_language) {_iterationHandler (_language)});
-			}
-
-			function _getStringMetrics (m,_sourceStr) {
-				var
-					_chars = 0,
-					_tokens = [],
-					_tokenRegExp = m.tokenRegExp
-				;
-				if (_tokenRegExp) {
-					var
-						_match,
-						_tokenName,
-						_tokenAdded = {}
-					;
-					_tokenRegExp.lastIndex = 0;
-					while (_match = _tokenRegExp.exec (_sourceStr)) {
-						if (!(_tokenName = _match [1])) {
-							for (var _matchSegmentNo = _match.length; !_tokenName && --_matchSegmentNo >= 0;)
-								_tokenName = _match [_matchSegmentNo]
-							;
-						}
-						if (!_tokenAdded [_tokenName]) {
-							_tokens.push (_tokenName);
-							_tokenAdded [_tokenName] = 1;
-						}
-					}
-				}
-				for (
-					var
-						_stringSegmentNo = -2,
-						_stringSegments = _split (_sourceStr,m.wordSplitter),
-						_stringSegmentsLength = _stringSegments.length
-					;
-					(_stringSegmentNo += 2) < _stringSegmentsLength;
-				)
-					_chars += _stringSegments [_stringSegmentNo].length
-				;
-				return {
-					words:(_stringSegmentsLength + 1) / 2,
-					chars:_chars,
-					tokens:_tokens
-				};
 			}
 
 			function _processStrings (_strings,_stringProcessor) {
@@ -489,6 +452,13 @@ Uize.module ({
 
 		return _superclass.subclass ({
 			instanceMethods:{
+				getTranslatableLanguages:function () {return _getTranslatableLanguages (this)},
+
+				getLanguages:function () {
+					var _project = this.project;
+					return Uize.push (_getTranslatableLanguages (this),[_project.primaryLanguage,_project.pseudoLocale]);
+				},
+
 				distributeResources:function (_resources,_language) {
 					// NOTE: this method can be useful for implementation of the extract method
 					var
@@ -551,18 +521,34 @@ Uize.module ({
 					return _resources;
 				},
 
-				getLanguageResourcePath:function (_enResourcePath,_language) {
-					// this method should be implemented by subclasses
+				getLanguageResourcePath:function () {
+					throw new Error ('The getLanguageResourcePath method must be implemented.');
+					/*?
+						Instance Methods
+							getLanguageResourcePath
+								Returns a string, representing the file path for a language specific version of the specified primary language resource file.
+
+								SYNTAX
+								............................................................................................
+								resourcePathSTR = this.getLanguageResourcePath (primaryLanguageResourcePathSTR,languageSTR);
+								............................................................................................
+
+								The =primaryLanguageResourcePathSTR= parameter is used to specify the path for the primary language version of a specific resource file, while the =languageSTR= parameter is used to specify the language for which a language specific resource file path should be generated.
+
+								The implementation of the =getLanguageResourcePath= method should take the values for these two parameters and then use the project specific rules for resource file naming and organization to derive the path for the language specific version of the resource file and return this path.
+
+								The =getLanguageResourcePath= method is used when generating resource files in the codebase for all the translatable languages configured for a project. This method *must* be overridden by subclasses, since the base class' version contains no implementation and will throw an exception if called.
+					*/
 				},
 
 				isBrandResourceFile:function (_filePath) {
-					// this method should be implemented by subclasses
-					return false;
+					// this method can optionally be overridden by subclasses
+					return !!this.getResourceFileBrand (_filePath);
 				},
 
 				isBrandResourceString:function (_resourceStringPath) {
-					// this method should be implemented by subclasses
-					return false;
+					// this method can optionally be overridden by subclasses
+					return !!this.getStringBrand (_resourceStringPath);
 				},
 
 				getResourceFileBrand:function (_filePath) {
@@ -611,24 +597,27 @@ Uize.module ({
 				},
 
 				isResourceFile:function (_filePath) {
+					throw new Error ('The isResourceFile method must be implemented.');
 					// this method should be implemented by subclasses
 				},
 
 				parseResourceFile:function (_resourceFileText) {
+					throw new Error ('The parseResourceFile method must be implemented.');
 					// this method should be implemented by subclasses
 				},
 
 				serializeResourceFile:function (_strings) {
+					throw new Error ('The serializeResourceFile method must be implemented');
 					// this method should be implemented by subclasses
 				},
 
 				getReferencingCodeFiles:function () {
-					return [];
+					throw new Error ('The getReferencingCodeFiles method must be implemented');
 					// this method should be implemented by subclasses
 				},
 
 				getReferencesFromCodeFile:function (_filePath) {
-					return {};
+					throw new Error ('The getReferencesFromCodeFile method must be implemented');
 					// this method should be implemented by subclasses
 				},
 
@@ -767,7 +756,7 @@ Uize.module ({
 											return (
 												_languageString &&
 												!_languageString.value &&
-												m.isTranslatableString (_primaryLanguageString)
+												_isTranslatableString (m,_primaryLanguageString)
 													? _primaryLanguageString
 													: _undefined
 											);
@@ -782,14 +771,9 @@ Uize.module ({
 								m.stepCompleted (_language + ': calculated translation job metrics');
 
 							/*** write translation job file ***/
-								var
-									_translationJobFileFormat = _project.translationJobFileFormat || 'csv',
-									_translationJobFilePath = _jobsPath + _language + '.' + _translationJobFileFormat,
-									_tokenRegExp = m.tokenRegExp
-								;
 								_fileSystem.writeFile ({
-									path:_translationJobFilePath,
-									contents:_translationJobFileFormat == 'xliff'
+									path:_getTranslationJobFilePath (m,_language),
+									contents:_project.translationJobFileFormat == 'xliff'
 										? Uize.Loc.Xliff.to (
 											{
 												sourceLanguage:_primaryLanguage,
@@ -798,7 +782,7 @@ Uize.module ({
 											},
 											{
 												seedTarget:true,
-												tokenSplitter:_tokenRegExp
+												tokenSplitter:m.tokenRegExp
 											}
 										)
 										: Uize.Data.Csv.to (
@@ -833,14 +817,13 @@ Uize.module ({
 						function (_language) {
 							/*** determine strings that have been translated ***/
 								var
-									_translationJobFileFormat = _project.translationJobFileFormat || 'csv',
-									_translationJobFilePath = _jobsPath + _language + '.' + _translationJobFileFormat,
+									_translationJobFilePath = _getTranslationJobFilePath (m,_language),
 									_translationJobFile = _fileSystem.fileExists ({path:_translationJobFilePath})
 										? _fileSystem.readFile ({path:_translationJobFilePath})
 										: '',
 									_translatedStrings = _translationJobFile
 										? Uize.Data.Diff.diff (
-											_translationJobFileFormat == 'xliff'
+											_project.translationJobFileFormat == 'xliff'
 												? Uize.Loc.Xliff.from (_translationJobFile)
 												: Uize.Data.Flatten.unflatten (
 													Uize.Data.NameValueRecords.toHash (Uize.Data.Csv.from (_translationJobFile),0,1),
@@ -869,7 +852,7 @@ Uize.module ({
 				},
 
 				extract:function (_params,_callback) {
-					_callback ();
+					throw new Error ('The extract method must be implemented');
 				},
 
 				metrics:function (_params,_callback) {
@@ -1010,11 +993,15 @@ Uize.module ({
 								Uize.forEach (
 									_stringReferences,
 									function (_stringReference) {
-										var _filePath = _stringReference.filePath;
-										(
-											_stringsReferencesByCodeFile [_filePath] ||
-											(_stringsReferencesByCodeFile [_filePath] = [])
-										).push (_stringId);
+										var
+											_filePath = _stringReference.filePath,
+											_stringsReferencesForCodeFile =
+												_stringsReferencesByCodeFile [_filePath] ||
+												(_stringsReferencesByCodeFile [_filePath] = {})
+										;
+										_stringsReferencesForCodeFile [_stringId] =
+											(_stringsReferencesForCodeFile [_stringId] || 0) + 1
+										;
 									}
 								);
 							}
@@ -1070,7 +1057,7 @@ Uize.module ({
 						);
 
 					/*** write report file ***/
-						var _usageReportFilePath = m.workingFolderPath + 'metrics/usage-report.json';
+						var _usageReportFilePath = m._workingFolderPath + 'metrics/usage-report.json';
 						_fileSystem.writeFile ({
 							path:_usageReportFilePath,
 							contents:Uize.Json.to ({
@@ -1108,6 +1095,22 @@ Uize.module ({
 						);
 
 					_callback ();
+				},
+
+				about:function (_params,_callback) {
+					var _project = this.project;
+					console.log (
+						'\n' +
+						'------------------------------- Project: ' + _project.name + ' -------------------------------\n\n' +
+						Uize.Json.to (_project,{sortKeys:true}) +
+						'\n'
+					);
+
+					_callback ();
+				},
+
+				preview:function (_params,_callback) {
+					throw new Error ('The preview method is not implemented in this adapter.');
 				},
 
 				init:function (_params,_callback) {

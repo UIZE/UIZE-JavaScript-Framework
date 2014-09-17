@@ -18,7 +18,7 @@
 
 /*?
 	Introduction
-		The =Uize.Loc.FileFormats.AndroidStrings= module provides support for serializing to and parsing from Android resource strings files.
+		The =Uize.Loc.FileFormats.AndroidStrings= module provides support for serializing to and parsing from [[http://developer.android.com/guide/topics/resources/string-resource.html][Android string resources files]].
 
 		*DEVELOPERS:* `Chris van Rensburg`
 */
@@ -27,11 +27,22 @@ Uize.module ({
 	name:'Uize.Loc.FileFormats.AndroidStrings',
 	required:[
 		'Uize.Parse.Xml.NodeList',
-		'Uize.Util.Html.Encode',
-		'Uize.Data.NameValueRecords'
+		'Uize.Str.Replace',
+		'Uize.Data.NameValueRecords',
+		'Uize.Parse.Code.StringLiteral'
 	],
 	builder:function () {
 		'use strict';
+
+		/*** Utility Functions ***/
+			function _recurseParserObjects (_node,_nodeHandler) {
+				function _processNode (_node) {
+					_nodeHandler (_node);
+					var _childNodes = _node.childNodes;
+					_childNodes && Uize.forEach (_childNodes.nodes,_processNode);
+				}
+				_processNode (_node);
+			}
 
 		return Uize.package ({
 			from:function (_stringsFileStr) {
@@ -40,7 +51,8 @@ Uize.module ({
 				}
 				var
 					_xliffNodeList = new Uize.Parse.Xml.NodeList (_stringsFileStr.replace (/<\?.*?\?>/,'')),
-					_strings = {}
+					_strings = {},
+					_stringLiteralParser = new Uize.Parse.Code.StringLiteral
 				;
 				Uize.forEach (
 					Uize.findRecord (
@@ -52,12 +64,24 @@ Uize.module ({
 							return _node.tagAttributes.attributes [0].value.value;
 						}
 						if (_isTag (_node,'string')) {
-							_strings [_getStringName ()] = Uize.map (
-								_node.childNodes.nodes,
+							_recurseParserObjects (
+								_node,
 								function (_node) {
-									return (_isTag (_node,'xliff:g') ? _node.childNodes.nodes [0] : _node).text || '';
+									if ('text' in _node) {
+										_node.serialize = function () {return this.text};
+									} else if (_isTag (_node,'xliff:g')) {
+										_node.serialize = function () {return this.childNodes.nodes [0].text};
+									}
 								}
-							).join ('');
+							);
+							var
+								_string = _node.childNodes.serialize (),
+								_stringFirstChar = _string.charAt (0)
+							;
+							_stringLiteralParser.parse (
+								_stringFirstChar == '\'' || _stringFirstChar == '"' ? _string : '"' + _string + '"'
+							);
+							_strings [_getStringName ()] = _stringLiteralParser.value;
 						} else if (_isTag (_node,'string-array')) {
 							var _stringsArray = _strings [_getStringName ()] = [];
 							Uize.forEach (
@@ -89,32 +113,46 @@ Uize.module ({
 			},
 
 			to:function (_strings) {
-				var _encodeHtml = Uize.Util.Html.Encode.encode;
+				var _encodeString = Uize.Str.Replace.replacerByLookup ({
+					// characters that need to be backslash-escaped for Android's peculiar resource file format
+					'"':'\\\"',
+					'\'':'\\\'',
+					'\\':'\\\\',
+
+					// characters that need to be XML-escaped using XML character entities
+					'&':'&amp;',
+					'<':'&lt;',
+					'>':'&gt;'
+				});
 				return (
-					'<?xml version="1.0" encoding="utf-8"?>\n' +
-					'<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">\n' +
-					Uize.map (
-						Uize.Data.NameValueRecords.fromHash (_strings),
-						function (_record) {
-							var
-								_name = _record.name,
-								_value = _record.value
-							;
-							return (
-								Uize.isArray (_value)
-									? (
-										'\t<string-array name="' + _name + '">\n' +
-										Uize.map (
-											_value,
-											function (_value) {return '\t\t<item>' + _encodeHtml (_value) + '</item>\n'}
-										).join ('') +
-										'\t</string-array>'
-									)
-									: '\t<string name="' + _name + '">' + _encodeHtml (_value) + '</string>'
-							);
-						}
-					).join ('\n') +
-					'</resources>\n'
+					[
+						'<?xml version="1.0" encoding="utf-8"?>',
+						'<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">'
+					].concat (
+						Uize.map (
+							Uize.Data.NameValueRecords.fromHash (_strings),
+							function (_record) {
+								var
+									_name = _record.name,
+									_value = _record.value
+								;
+								return (
+									Uize.isArray (_value)
+										? (
+											'\t<string-array name="' + _name + '">\n' +
+											Uize.map (
+												_value,
+												function (_value) {return '\t\t<item>' + _encodeString (_value) + '</item>\n'}
+											).join ('') +
+											'\t</string-array>'
+										)
+										: '\t<string name="' + _name + '">' + _encodeString (_value) + '</string>'
+								);
+							}
+						),
+						'</resources>',
+						''
+					).join ('\n')
 				);
 				/*?
 					Static Methods
