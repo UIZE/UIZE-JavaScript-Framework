@@ -84,9 +84,42 @@ Uize.module ({
 				return Uize.Json.to (_path,_pathJsonSerializationOptions);
 			}
 
+			function _processStrings (_strings,_stringProcessor) {
+				function _processSection (_section,_path) {
+					for (var _key in _section) {
+						var _value = _section [_key];
+						if (Uize.isObject (_value)) {
+							_processSection (_value,_path.concat (_key));
+						} else if (typeof _value == 'string') {
+							_section [_key] = _stringProcessor (_section [_key],_path.concat (_key));
+						}
+					}
+				}
+				_processSection (_strings,[]);
+			}
+
 		/*** Private Instance Methods ***/
 			function _isTranslatableString (m,_stringInfo) {
 				return _hasNonWhitespace (_stringInfo.value) && m.isTranslatableString (_stringInfo);
+			}
+
+			function _parseResourceFile (m,_resourceFilePath,_language) {
+				var
+					_project = m.project,
+					_resourceFileFullPath = _project.rootFolderPath + '/' + _resourceFilePath
+				;
+				return (
+					_fileSystem.fileExists ({path:_resourceFileFullPath})
+						? m.parseResourceFile (
+							_fileSystem.readFile ({path:_resourceFileFullPath}),
+							{
+								path:_resourceFileFullPath,
+								language:_language,
+								isPrimaryLanguage:_language == _project.primaryLanguage
+							}
+						)
+						: {}
+				);
 			}
 
 			function _calculateStringsInfoForLanguage (m,_language,_languageResources,_subFolder) {
@@ -436,20 +469,6 @@ Uize.module ({
 				Uize.forEach (_getTranslatableLanguages (m),function (_language) {_iterationHandler (_language)});
 			}
 
-			function _processStrings (_strings,_stringProcessor) {
-				function _processSection (_section,_path) {
-					for (var _key in _section) {
-						var _value = _section [_key];
-						if (Uize.isObject (_value)) {
-							_processSection (_value,_path.concat (_key));
-						} else if (typeof _value == 'string') {
-							_section [_key] = _stringProcessor (_section [_key],_path.concat (_key));
-						}
-					}
-				}
-				_processSection (_strings,[]);
-			}
-
 		return _superclass.subclass ({
 			instanceMethods:{
 				getTranslatableLanguages:function () {return _getTranslatableLanguages (this)},
@@ -468,11 +487,8 @@ Uize.module ({
 					Uize.forEach (
 						_resources,
 						function (_resourceFileStrings,_resourceFileSubPath) {
-							var _resourceFileFullPath =
-								_rootFolderPath + '/' + m.getLanguageResourcePath (_resourceFileSubPath,_language)
-							;
 							_fileSystem.writeFile ({
-								path:_resourceFileFullPath,
+								path:_rootFolderPath + '/' + m.getLanguageResourcePath (_resourceFileSubPath,_language),
 								contents:m.serializeResourceFile (_resourceFileStrings,_language)
 							});
 						}
@@ -496,9 +512,10 @@ Uize.module ({
 					var
 						m = this,
 						_resources = {},
-						_rootFolderPath = m.project.rootFolderPath,
+						_project = m.project,
+						_primaryLanguage = _project.primaryLanguage,
 						_resourceFiles = _fileSystem.getFiles ({
-							path:_rootFolderPath,
+							path:_project.rootFolderPath,
 							pathMatcher:function (_filePath) {return m.isResourceFile (_filePath)},
 							recursive:true
 						})
@@ -507,9 +524,7 @@ Uize.module ({
 						_resourceFiles,
 						function (_filePath) {
 							try {
-								_resources [_filePath] = m.parseResourceFile (
-									_fileSystem.readFile ({path:_rootFolderPath + '/' + _filePath})
-								);
+								_resources [_filePath] = _parseResourceFile (m,_filePath,_primaryLanguage);
 							} catch (_error) {
 								console.log (
 									'ERROR: problem parsing file ' + _filePath + '\n' +
@@ -601,7 +616,7 @@ Uize.module ({
 					// this method should be implemented by subclasses
 				},
 
-				parseResourceFile:function (_resourceFileText) {
+				parseResourceFile:function (_resourceFileText,_resourceFileInfo) {
 					throw new Error ('The parseResourceFile method must be implemented.');
 					// this method should be implemented by subclasses
 				},
@@ -691,12 +706,8 @@ Uize.module ({
 											_resourceFileBrand = m.getResourceFileBrand (_resourceFileSubPath)
 										;
 										if (m.doesBrandSupportLanguage (_resourceFileBrand,_language)) {
-											var _resourceFileFullPath = _rootFolderPath + '/' + _resourceFilePath;
 											_languageResources [_resourceFileSubPath] = Uize.Data.Diff.diff (
-												_fileSystem.fileExists ({path:_resourceFileFullPath})
-													? m.parseResourceFile (_fileSystem.readFile ({path:_resourceFileFullPath}))
-													: {}
-												,
+												_parseResourceFile (m,_resourceFilePath,_language),
 												_primaryLanguageResourcesDiff [_resourceFileSubPath],
 												function (_gatheredProperty,_propertyDiff,_path) {
 													return (
