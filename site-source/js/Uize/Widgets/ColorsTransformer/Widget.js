@@ -38,7 +38,7 @@ Uize.module ({
 	required:[
 		'Uize.Color',
 		'Uize.Widgets.Slider.Widget',
-		'Uize.Widgets.Button.Widget',
+		'Uize.Widgets.Buttons.Reset.Widget',
 		'Uize.Widgets.ColorsTransformer.Html',
 		'Uize.Widgets.ColorsTransformer.Css',
 		'Uize.Widget.mChildBindings',
@@ -86,8 +86,7 @@ Uize.module ({
 				),
 				{
 					reset:{
-						text:'RESET', // TODO: make this a resource string
-						widgetClass:Uize.Widgets.Button.Widget,
+						widgetClass:Uize.Widgets.Buttons.Reset.Widget,
 						action:function () {
 							this.parent.set ({
 								hueRange:50,
