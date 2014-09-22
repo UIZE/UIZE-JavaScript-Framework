@@ -241,7 +241,7 @@ Uize.require (
 			function updatePreview () {
 				var transformedThemeColors = colorsTransformer.get ('transformedColors');
 				function transformedThemeColor (colorName) {
-					return transformedThemeColors [colorThemeColorNameToIndex [colorName]];
+					return '#' + transformedThemeColors [colorThemeColorNameToIndex [colorName]];
 				}
 
 				page.setNodeStyle ('previewGutter',{background:transformedThemeColor ('gutterBackground')});

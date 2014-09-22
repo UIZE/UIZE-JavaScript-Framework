@@ -73,26 +73,25 @@ Uize.module ({
 					lightnessShift:{
 						value:0
 					},
-					colorsAsHslObjects:{
+					colorsAsTupless:{
 						derived:{
 							determinants:['colors'],
 							determiner:function (_colors) {
 								return Uize.map (
 									_colors,
-									function (_color) {return _Uize_Color.from (_color).setEncoding ('HSL array')}
+									function (_color) {return _Uize_Color.from (_color).setEncoding ('HSL array').tuple}
 								);
 							}
 						}
 					},
 					colorsMaxMin:{
 						derived:{
-							determinants:['colorsAsHslObjects'],
-							determiner:function (_colorsAsHslObjects) {
+							determinants:['colorsAsTupless'],
+							determiner:function (_colorsAsTupless) {
 								var
-									_tuples = _getColumn (_colorsAsHslObjects,'tuple'),
-									_tuplesComponent0 = _getColumn (_tuples,0),
-									_tuplesComponent1 = _getColumn (_tuples,1),
-									_tuplesComponent2 = _getColumn (_tuples,2)
+									_tuplesComponent0 = _getColumn (_colorsAsTupless,0),
+									_tuplesComponent1 = _getColumn (_colorsAsTupless,1),
+									_tuplesComponent2 = _getColumn (_colorsAsTupless,2)
 								;
 								return {
 									_component0Min:_min (_tuplesComponent0),
@@ -108,10 +107,10 @@ Uize.module ({
 					transformedColors:{
 						derived:{
 							determinants:[
-								'colorsAsHslObjects', 'colorsMaxMin', 'hueRange', 'hueShift', 'saturationRange', 'saturationShift', 'lightnessRange', 'lightnessShift'
+								'colorsAsTupless', 'colorsMaxMin', 'hueRange', 'hueShift', 'saturationRange', 'saturationShift', 'lightnessRange', 'lightnessShift'
 							],
 							determiner:function (
-								_colorsAsHslObjects, _colorsMaxMin, _hueRange, _hueShift, _saturationRange, _saturationShift, _lightnessRange, _lightnessShift
+								_colorsAsTupless, _colorsMaxMin, _hueRange, _hueShift, _saturationRange, _saturationShift, _lightnessRange, _lightnessShift
 							) {
 								function _blendValues (_valueA,_valueB,_blendAmount) {
 									return _valueA + (_valueB - _valueA) * _blendAmount;
@@ -141,32 +140,31 @@ Uize.module ({
 								}
 
 								return Uize.map (
-									_colorsAsHslObjects,
-									function (_colorsAsHslObject) {
-										var _colorTuple = _colorsAsHslObject.tuple;
+									_colorsAsTupless,
+									function (_colorAsTuple) {
 										_Uize_Color.setTuple (
 											_workingColor.tuple,
 											_transformComponent (
-												_colorTuple [0],
+												_colorAsTuple [0],
 												_colorsMaxMin._component0Min,_colorsMaxMin._component0Max,
 												0,360,
 												_hueRange,_hueShift,
 												'wrap'
 											),
 											_transformComponent (
-												_colorTuple [1],
+												_colorAsTuple [1],
 												_colorsMaxMin._component1Min,_colorsMaxMin._component1Max,
 												0,100,
 												_saturationRange,_saturationShift
 											),
 											_transformComponent (
-												_colorTuple [2],
+												_colorAsTuple [2],
 												_colorsMaxMin._component2Min,_colorsMaxMin._component2Max,
 												0,100,
 												_lightnessRange,_lightnessShift
 											)
 										);
-										return _workingColor.to ('#hex');
+										return _workingColor.to ('hex');
 									}
 								);
 							}
