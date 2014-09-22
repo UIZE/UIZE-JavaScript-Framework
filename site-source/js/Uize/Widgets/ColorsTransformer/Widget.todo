@@ -1,0 +1,6 @@
+This is a TO DO document for the =Uize.Widgets.ColorsTransformer.Widget= module.
+
+Miscellaneous
+	- make new slider widget with min and max buttons, both for showing range labels as well as allowing setting value directly to min or max values in range
+	- for each transformation slider, include text input field for display and entry of value
+

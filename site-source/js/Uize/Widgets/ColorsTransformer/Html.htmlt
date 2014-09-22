@@ -1,0 +1,51 @@
+<table border="0" cellspacing="2" cellpadding="0">
+	<tr>
+		<td class="sliderLabel">HUE RANGE</td>
+		<td class="sliderValueLabel sliderMinValue">0</td>
+		<td class="sliderSlot"><child name="hueRangeSlider"/></td>
+		<td class="sliderValueLabel sliderMaxValue">100</td>
+	</tr>
+	<tr>
+		<td class="sliderLabel">HUE SHIFT</td>
+		<td class="sliderValueLabel sliderMinValue">-180</td>
+		<td class="sliderSlot"><child name="hueShiftSlider"/></td>
+		<td class="sliderValueLabel sliderMaxValue">+180</td>
+	</tr>
+	<tr>
+		<td colspan="4" style="height:4px;"></td>
+	</tr>
+	<tr>
+		<td class="sliderLabel">SATURATION RANGE</td>
+		<td class="sliderValueLabel sliderMinValue">0</td>
+		<td class="sliderSlot"><child name="saturationRangeSlider"/></td>
+		<td class="sliderValueLabel sliderMaxValue">100</td>
+	</tr>
+	<tr>
+		<td class="sliderLabel">SATURATION SHIFT</td>
+		<td class="sliderValueLabel sliderMinValue">-100</td>
+		<td class="sliderSlot"><child name="saturationShiftSlider"/></td>
+		<td class="sliderValueLabel sliderMaxValue">+100</td>
+	</tr>
+	<tr>
+		<td colspan="4" style="height:4px;"></td>
+	</tr>
+	<tr>
+		<td class="sliderLabel">LIGHTNESS RANGE</td>
+		<td class="sliderValueLabel sliderMinValue">0</td>
+		<td class="sliderSlot"><child name="lightnessRangeSlider"/></td>
+		<td class="sliderValueLabel sliderMaxValue">100</td>
+	</tr>
+	<tr>
+		<td class="sliderLabel">LIGHTNESS SHIFT</td>
+		<td class="sliderValueLabel sliderMinValue">-100</td>
+		<td class="sliderSlot"><child name="lightnessShiftSlider"/></td>
+		<td class="sliderValueLabel sliderMaxValue">+100</td>
+	</tr>
+	<tr>
+		<td></td>
+		<td></td>
+		<td style="text-align: center;"><child name="reset"/></td>
+		<td></td>
+	</tr>
+</table>
+
