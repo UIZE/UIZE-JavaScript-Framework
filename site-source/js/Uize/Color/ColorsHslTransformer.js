@@ -49,128 +49,138 @@ Uize.module ({
 				_workingColor = _Uize_Color ('hsl(0,0,0)')
 		;
 
-		return _superclass.subclass ({
-			stateProperties:{
-				colors:{
-					value:[]
-				},
-				hueRange:{
-					value:50
-				},
-				hueShift:{
-					value:0
-				},
-				saturationRange:{
-					value:50
-				},
-				saturationShift:{
-					value:0
-				},
-				lightnessRange:{
-					value:50
-				},
-				lightnessShift:{
-					value:0
-				},
-				colorsAsHslObjects:{
-					derived:{
-						determinants:['colors'],
-						determiner:function (_colors) {
-							return Uize.map (
-								_colors,
-								function (_color) {return _Uize_Color.from (_color).setEncoding ('HSL array')}
-							);
-						}
-					}
-				},
-				colorsMaxMin:{
-					derived:{
-						determinants:['colorsAsHslObjects'],
-						determiner:function (_colorsAsHslObjects) {
-							var
-								_tuples = _getColumn (_colorsAsHslObjects,'tuple'),
-								_tuplesComponent0 = _getColumn (_tuples,0),
-								_tuplesComponent1 = _getColumn (_tuples,1),
-								_tuplesComponent2 = _getColumn (_tuples,2)
-							;
-							return {
-								_component0Min:_min (_tuplesComponent0),
-								_component0Max:_max (_tuplesComponent0),
-								_component1Min:_min (_tuplesComponent1),
-								_component1Max:_max (_tuplesComponent1),
-								_component2Min:_min (_tuplesComponent2),
-								_component2Max:_max (_tuplesComponent2)
-							};
-						}
-					}
-				},
-				transformedColors:{
-					derived:{
-						determinants:[
-							'colorsAsHslObjects', 'colorsMaxMin', 'hueRange', 'hueShift', 'saturationRange', 'saturationShift', 'lightnessRange', 'lightnessShift'
-						],
-						determiner:function (
-							_colorsAsHslObjects, _colorsMaxMin, _hueRange, _hueShift, _saturationRange, _saturationShift, _lightnessRange, _lightnessShift
-						) {
-							function _blendValues (_valueA,_valueB,_blendAmount) {
-								return _valueA + (_valueB - _valueA) * _blendAmount;
+		function _mixin (_class) {
+			_class.declare ({
+				stateProperties:{
+					colors:{
+						value:[]
+					},
+					hueRange:{
+						value:50
+					},
+					hueShift:{
+						value:0
+					},
+					saturationRange:{
+						value:50
+					},
+					saturationShift:{
+						value:0
+					},
+					lightnessRange:{
+						value:50
+					},
+					lightnessShift:{
+						value:0
+					},
+					colorsAsHslObjects:{
+						derived:{
+							determinants:['colors'],
+							determiner:function (_colors) {
+								return Uize.map (
+									_colors,
+									function (_color) {return _Uize_Color.from (_color).setEncoding ('HSL array')}
+								);
 							}
-							function _transformComponent (
-								_value,_minValue,_maxValue,_componentMin,_componentMax,_range,_shift,_shiftMode
+						}
+					},
+					colorsMaxMin:{
+						derived:{
+							determinants:['colorsAsHslObjects'],
+							determiner:function (_colorsAsHslObjects) {
+								var
+									_tuples = _getColumn (_colorsAsHslObjects,'tuple'),
+									_tuplesComponent0 = _getColumn (_tuples,0),
+									_tuplesComponent1 = _getColumn (_tuples,1),
+									_tuplesComponent2 = _getColumn (_tuples,2)
+								;
+								return {
+									_component0Min:_min (_tuplesComponent0),
+									_component0Max:_max (_tuplesComponent0),
+									_component1Min:_min (_tuplesComponent1),
+									_component1Max:_max (_tuplesComponent1),
+									_component2Min:_min (_tuplesComponent2),
+									_component2Max:_max (_tuplesComponent2)
+								};
+							}
+						}
+					},
+					transformedColors:{
+						derived:{
+							determinants:[
+								'colorsAsHslObjects', 'colorsMaxMin', 'hueRange', 'hueShift', 'saturationRange', 'saturationShift', 'lightnessRange', 'lightnessShift'
+							],
+							determiner:function (
+								_colorsAsHslObjects, _colorsMaxMin, _hueRange, _hueShift, _saturationRange, _saturationShift, _lightnessRange, _lightnessShift
 							) {
-								if (_range != 50)
-									_value = _range > 50
-										? _blendValues (
-											_value,
-											_blendValues (
-												_componentMin,
-												_componentMax,
-												(_value - _minValue) / (_maxValue - _minValue || 1)
-											),
-											(_range - 50) / 50
-										)
-										: _blendValues ((_minValue + _maxValue) / 2,_value,_range / 50)
-								;
-								if (_shift)
-									_value = _shiftMode == 'wrap'
-										? (((_value + _shift) % _componentMax) + _componentMax) % _componentMax
-										: Uize.constrain (_value + _shift,_componentMin,_componentMax)
-								;
-								return _value;
-							}
-
-							return Uize.map (
-								_colorsAsHslObjects,
-								function (_colorsAsHslObject) {
-									var _colorTuple = _colorsAsHslObject.tuple;
-									_Uize_Color.setTuple (
-										_workingColor.tuple,
-										_transformComponent (
-											_colorTuple [0],
-											_colorsMaxMin._component0Min,_colorsMaxMin._component0Max,
-											0,360,
-											_hueRange,_hueShift,
-											'wrap'
-										),
-										_transformComponent (
-											_colorTuple [1],
-											_colorsMaxMin._component1Min,_colorsMaxMin._component1Max,
-											0,100,
-											_saturationRange,_saturationShift
-										),
-										_transformComponent (
-											_colorTuple [2],
-											_colorsMaxMin._component2Min,_colorsMaxMin._component2Max,
-											0,100,
-											_lightnessRange,_lightnessShift
-										)
-									);
-									return _workingColor.to ('#hex');
+								function _blendValues (_valueA,_valueB,_blendAmount) {
+									return _valueA + (_valueB - _valueA) * _blendAmount;
 								}
-							);
+								function _transformComponent (
+									_value,_minValue,_maxValue,_componentMin,_componentMax,_range,_shift,_shiftMode
+								) {
+									if (_range != 50)
+										_value = _range > 50
+											? _blendValues (
+												_value,
+												_blendValues (
+													_componentMin,
+													_componentMax,
+													(_value - _minValue) / (_maxValue - _minValue || 1)
+												),
+												(_range - 50) / 50
+											)
+											: _blendValues ((_minValue + _maxValue) / 2,_value,_range / 50)
+									;
+									if (_shift)
+										_value = _shiftMode == 'wrap'
+											? (((_value + _shift) % _componentMax) + _componentMax) % _componentMax
+											: Uize.constrain (_value + _shift,_componentMin,_componentMax)
+									;
+									return _value;
+								}
+
+								return Uize.map (
+									_colorsAsHslObjects,
+									function (_colorsAsHslObject) {
+										var _colorTuple = _colorsAsHslObject.tuple;
+										_Uize_Color.setTuple (
+											_workingColor.tuple,
+											_transformComponent (
+												_colorTuple [0],
+												_colorsMaxMin._component0Min,_colorsMaxMin._component0Max,
+												0,360,
+												_hueRange,_hueShift,
+												'wrap'
+											),
+											_transformComponent (
+												_colorTuple [1],
+												_colorsMaxMin._component1Min,_colorsMaxMin._component1Max,
+												0,100,
+												_saturationRange,_saturationShift
+											),
+											_transformComponent (
+												_colorTuple [2],
+												_colorsMaxMin._component2Min,_colorsMaxMin._component2Max,
+												0,100,
+												_lightnessRange,_lightnessShift
+											)
+										);
+										return _workingColor.to ('#hex');
+									}
+								);
+							}
 						}
 					}
 				}
+			});
+		}
+
+		return _superclass.subclass ({
+			mixins:_mixin,
+
+			staticMethods:{
+				mixin:_mixin
 			}
 		});
 	}
