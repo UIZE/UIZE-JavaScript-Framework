@@ -31,6 +31,9 @@ Uize.module ({
 		var _highlightColor = '#ffa200';
 
 		return Uize.package ({
+			font:{
+				family:'Arial, Helvetica, Verdana'
+			},
 			box:{
 				border:{
 					color:'#ccc',
