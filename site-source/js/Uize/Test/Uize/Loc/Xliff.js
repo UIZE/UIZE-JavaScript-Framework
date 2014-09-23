@@ -164,6 +164,59 @@ Uize.module ({
 							'		</body>\n' +
 							'	</file>\n' +
 							'</xliff>'
+						],
+						['When an object value is specified for the seedTarget option, then the value of each <trans-unit> tag\'s <target> tag is seeded with a corresponding value from the seedTarget object, if present, or the untranslated source value of the resource string',
+							[
+								{
+									sourceLanguage:'en_US',
+									targetLanguage:'fr_FR',
+									strings:{
+										'foo/bar.properties':{
+											widget1:{
+												TITLE:'widget 1 title',
+												DESCRIPTION:'the first widget'
+											},
+											widget2:{
+												TITLE:'widget 2 title',
+												DESCRIPTION:'the second widget'
+											}
+										}
+									}
+								},
+								{
+									seedTarget:{
+										'foo/bar.properties':{
+											widget1:{
+												TITLE:'titre de widget de 1',
+												DESCRIPTION:'le premier widget'
+											}
+										}
+									}
+								}
+							],
+							'<?xml version="1.0" ?>\n' +
+							'<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">\n' +
+							'	<file original="foo/bar.properties" source-language="en_US" target-language="fr_FR" datatype="plaintext">\n' +
+							'		<body>\n' +
+							'			<trans-unit id="[&apos;widget1&apos;,&apos;TITLE&apos;]">\n' +
+							'				<source>widget 1 title</source>\n' +
+							'				<target>titre de widget de 1</target>\n' +
+							'			</trans-unit>\n' +
+							'			<trans-unit id="[&apos;widget1&apos;,&apos;DESCRIPTION&apos;]">\n' +
+							'				<source>the first widget</source>\n' +
+							'				<target>le premier widget</target>\n' +
+							'			</trans-unit>\n' +
+							'			<trans-unit id="[&apos;widget2&apos;,&apos;TITLE&apos;]">\n' +
+							'				<source>widget 2 title</source>\n' +
+							'				<target>widget 2 title</target>\n' +
+							'			</trans-unit>\n' +
+							'			<trans-unit id="[&apos;widget2&apos;,&apos;DESCRIPTION&apos;]">\n' +
+							'				<source>the second widget</source>\n' +
+							'				<target>the second widget</target>\n' +
+							'			</trans-unit>\n' +
+							'		</body>\n' +
+							'	</file>\n' +
+							'</xliff>'
 						]
 					]],
 					['Uize.Loc.Xliff.from',[
