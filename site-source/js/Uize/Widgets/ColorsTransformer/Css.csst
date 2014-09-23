@@ -19,11 +19,3 @@
 	text-align: left;
 }
 
-.`sliderPlaceholder` {
-	width: 330px;
-}
-
-.`sliderSlot` {
-	width: 500px;
-}
-

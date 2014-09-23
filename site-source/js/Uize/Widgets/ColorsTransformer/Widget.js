@@ -78,6 +78,7 @@ Uize.module ({
 							orientation:'horizontal',
 							fullColor:'#fff',
 							emptyColor:'#fff',
+							trackLength:470,
 							minValue:_arguments [0],
 							maxValue:_arguments [1],
 							value:_arguments [2]
