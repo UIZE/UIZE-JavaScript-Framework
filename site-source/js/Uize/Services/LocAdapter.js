@@ -751,7 +751,9 @@ Uize.module ({
 						_project = m.project,
 						_primaryLanguage = _project.primaryLanguage,
 						_primaryLanguageResources = _readLanguageResourcesFile (m,_primaryLanguage),
-						_totalTranslatableLanguages = _getTranslatableLanguages (m).length
+						_totalTranslatableLanguages = _getTranslatableLanguages (m).length,
+						_filter = _params.filter || 'missing',
+						_filterIsAll = _filter == 'all'
 					;
 					m.prepareToExecuteMethod (_totalTranslatableLanguages * 3);
 
@@ -760,13 +762,14 @@ Uize.module ({
 						function (_language) {
 							/*** determine strings that need translation ***/
 								var
+									_languageResources = _readLanguageResourcesFile (m,_language) || {},
 									_translationJobStrings = Uize.Data.Diff.diff (
-										_readLanguageResourcesFile (m,_language) || {},
+										_languageResources,
 										_primaryLanguageResources,
 										function (_languageString,_primaryLanguageString) {
 											return (
 												_primaryLanguageString &&
-												(!_languageString || !_languageString.value) &&
+												(_filterIsAll || !_languageString || !_languageString.value) &&
 												_isTranslatableString (m,_primaryLanguageString)
 													? _primaryLanguageString
 													: _undefined
@@ -792,7 +795,7 @@ Uize.module ({
 												strings:_translationJobStrings
 											},
 											{
-												seedTarget:true,
+												seedTarget:_filterIsAll ? _languageResources : true,
 												tokenSplitter:m.tokenRegExp
 											}
 										)
