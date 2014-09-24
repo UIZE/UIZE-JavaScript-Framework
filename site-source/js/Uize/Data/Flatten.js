@@ -468,7 +468,7 @@ Uize.module ({
 							;
 						} else {
 							for (var _subNodeNo = -1, _treeNodeLength = _treeNode.length; ++_subNodeNo < _treeNodeLength;)
-								_processTreeNode (_treeNode [_subNodeNo],_path.concat (_subNodeNo))
+								_subNodeNo in _treeNode && _processTreeNode (_treeNode [_subNodeNo],_path.concat (_subNodeNo))
 							;
 						}
 					} else {

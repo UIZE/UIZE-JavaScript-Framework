@@ -28,6 +28,13 @@ Uize.module ({
 	builder:function () {
 		'use strict';
 
+		function _pathToKeyMapper (_key) {
+			return Uize.map (
+				_key.split ('.'),
+				function (_pathPart) {return Uize.toNumber (_pathPart,_pathPart)}
+			)
+		}
+
 		return Uize.Test.resolve ({
 			title:'Uize.Data.Flatten Module Test',
 			test:[
@@ -197,50 +204,67 @@ Uize.module ({
 							[{foo:{bar:{baz:{qux:1}}}},'.',undefined],
 							{'foo.bar.baz.qux':1}
 						],
-						['When the value true is specified for the optional allowArraysNodes parameter, then array values are treated as non-leaf nodes',
-							[
-								{
-									foo:['a','b'],
-									bar:{
-										baz:[['c','d'],['e','f']],
-										qux:42
-									}
-								},
-								null,
-								false,
-								true
-							],
-							{
-								'foo.0':'a',
-								'foo.1':'b',
-								'bar.baz.0.0':'c',
-								'bar.baz.0.1':'d',
-								'bar.baz.1.0':'e',
-								'bar.baz.1.1':'f',
-								'bar.qux':42
-							}
-						],
-						['When the value true is specified for the optional allowArraysNodes parameter, then the object being flattened can be an array and will be treated as a non-leaf node as expected',
-							[
+
+						/*** test support for the optional allowArraysNodes parameter ***/
+							['When the value true is specified for the optional allowArraysNodes parameter, then array values are treated as non-leaf nodes',
 								[
-									'a',
-									['b','c'],
-									['d','e'],
-									'f'
+									{
+										foo:['a','b'],
+										bar:{
+											baz:[['c','d'],['e','f']],
+											qux:42
+										}
+									},
+									null,
+									false,
+									true
 								],
-								null,
-								false,
-								true
+								{
+									'foo.0':'a',
+									'foo.1':'b',
+									'bar.baz.0.0':'c',
+									'bar.baz.0.1':'d',
+									'bar.baz.1.0':'e',
+									'bar.baz.1.1':'f',
+									'bar.qux':42
+								}
 							],
-							{
-								'0':'a',
-								'1.0':'b',
-								'1.1':'c',
-								'2.0':'d',
-								'2.1':'e',
-								'3':'f'
-							}
-						]
+							['When the value true is specified for the optional allowArraysNodes parameter, then the object being flattened can be an array and will be treated as a non-leaf node as expected',
+								[
+									[
+										'a',
+										['b','c'],
+										['d','e'],
+										'f'
+									],
+									null,
+									false,
+									true
+								],
+								{
+									'0':'a',
+									'1.0':'b',
+									'1.1':'c',
+									'2.0':'d',
+									'2.1':'e',
+									'3':'f'
+								}
+							],
+							['When the value true is specified for the optional allowArraysNodes parameter, missing elements in sparsely populated array values are excluded from the resulting hash object',
+								[
+									{
+										foo:(function () {var _array = ['a','b']; _array [9] = 'c'; return _array}) ()
+									},
+									null,
+									false,
+									true
+								],
+								{
+									'foo.0':'a',
+									'foo.1':'b',
+									'foo.9':'c'
+								}
+							]
 					]],
 					['Uize.Data.Flatten.unflatten',[
 						['Unflattening an empty object produces an empty object',
@@ -352,59 +376,71 @@ Uize.module ({
 								);
 							}
 						},
-						['When the value true is specified for the optional allowArraysNodes parameter, then number type elements of the path array are treated as array indexes of array nodes',
-							[
+
+						/*** test support for the optional allowArraysNodes parameter ***/
+							['When the value true is specified for the optional allowArraysNodes parameter, then number type elements of the path array are treated as array indexes of array nodes',
+								[
+									{
+										'foo.0':'a',
+										'foo.1':'b',
+										'bar.baz.0.0':'c',
+										'bar.baz.0.1':'d',
+										'bar.baz.1.0':'e',
+										'bar.baz.1.1':'f',
+										'bar.qux':42
+									},
+									_pathToKeyMapper,
+									true
+								],
 								{
-									'foo.0':'a',
-									'foo.1':'b',
-									'bar.baz.0.0':'c',
-									'bar.baz.0.1':'d',
-									'bar.baz.1.0':'e',
-									'bar.baz.1.1':'f',
-									'bar.qux':42
-								},
-								function (_key) {
-									return Uize.map (
-										_key.split ('.'),
-										function (_pathPart) {return Uize.toNumber (_pathPart,_pathPart)}
-									)
-								},
-								true
+									foo:['a','b'],
+									bar:{
+										baz:[['c','d'],['e','f']],
+										qux:42
+									}
+								}
+							],
+							['When the value true is specified for the optional allowArraysNodes parameter, then the unflattened object will be an array if the path elements at the root of the paths are number type',
+								[
+									{
+										'0':'a',
+										'1.0':'b',
+										'1.1':'c',
+										'2.0':'d',
+										'2.1':'e',
+										'3':'f'
+									},
+									_pathToKeyMapper,
+									true
+								],
+								[
+									'a',
+									['b','c'],
+									['d','e'],
+									'f'
+								]
 							],
 							{
-								foo:['a','b'],
-								bar:{
-									baz:[['c','d'],['e','f']],
-									qux:42
+								title:
+									'When the value true is specified for the optional allowArraysNodes parameter, then sparsely populated array values will be produced in the unflattened object if there are missing keys for some indexes',
+								test:function () {
+									var
+										_result = Uize.Data.Flatten.unflatten (
+											{
+												'foo.0':'a',
+												'foo.1':'b',
+												'foo.9':'c'
+											},
+											_pathToKeyMapper,
+											true
+										),
+										_array = ['a','b']
+									;
+									_array [9] = 'c';
+									return this.expect ({foo:_array},_result);
 								}
 							}
-						],
-						['When the value true is specified for the optional allowArraysNodes parameter, then the unflattened object will be an array if the path elements at the root of the paths are number type',
-							[
-								{
-									'0':'a',
-									'1.0':'b',
-									'1.1':'c',
-									'2.0':'d',
-									'2.1':'e',
-									'3':'f'
-								},
-								function (_key) {
-									return Uize.map (
-										_key.split ('.'),
-										function (_pathPart) {return Uize.toNumber (_pathPart,_pathPart)}
-									)
-								},
-								true
-							],
-							[
-								'a',
-								['b','c'],
-								['d','e'],
-								'f'
-							]
-						]
-					]]
+						]]
 				])
 			]
 		});
