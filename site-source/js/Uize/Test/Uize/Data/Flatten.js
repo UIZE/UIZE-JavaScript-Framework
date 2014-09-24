@@ -196,6 +196,50 @@ Uize.module ({
 						['Specifying the value undefined for the optional inclueNonLeafNodes argument results in only leaf nodes being included in the flattened object',
 							[{foo:{bar:{baz:{qux:1}}}},'.',undefined],
 							{'foo.bar.baz.qux':1}
+						],
+						['When the value true is specified for the optional allowArraysNodes parameter, then array values are treated as non-leaf nodes',
+							[
+								{
+									foo:['a','b'],
+									bar:{
+										baz:[['c','d'],['e','f']],
+										qux:42
+									}
+								},
+								null,
+								false,
+								true
+							],
+							{
+								'foo.0':'a',
+								'foo.1':'b',
+								'bar.baz.0.0':'c',
+								'bar.baz.0.1':'d',
+								'bar.baz.1.0':'e',
+								'bar.baz.1.1':'f',
+								'bar.qux':42
+							}
+						],
+						['When the value true is specified for the optional allowArraysNodes parameter, then the object being flattened can be an array and will be treated as a non-leaf node as expected',
+							[
+								[
+									'a',
+									['b','c'],
+									['d','e'],
+									'f'
+								],
+								null,
+								false,
+								true
+							],
+							{
+								'0':'a',
+								'1.0':'b',
+								'1.1':'c',
+								'2.0':'d',
+								'2.1':'e',
+								'3':'f'
+							}
 						]
 					]],
 					['Uize.Data.Flatten.unflatten',[
@@ -307,7 +351,59 @@ Uize.module ({
 									Uize.Data.Flatten.unflatten (Uize.Data.Flatten.flatten (_unflattened,'.',true),'.')
 								);
 							}
-						}
+						},
+						['When the value true is specified for the optional allowArraysNodes parameter, then number type elements of the path array are treated as array indexes of array nodes',
+							[
+								{
+									'foo.0':'a',
+									'foo.1':'b',
+									'bar.baz.0.0':'c',
+									'bar.baz.0.1':'d',
+									'bar.baz.1.0':'e',
+									'bar.baz.1.1':'f',
+									'bar.qux':42
+								},
+								function (_key) {
+									return Uize.map (
+										_key.split ('.'),
+										function (_pathPart) {return Uize.toNumber (_pathPart,_pathPart)}
+									)
+								},
+								true
+							],
+							{
+								foo:['a','b'],
+								bar:{
+									baz:[['c','d'],['e','f']],
+									qux:42
+								}
+							}
+						],
+						['When the value true is specified for the optional allowArraysNodes parameter, then the unflattened object will be an array if the path elements at the root of the paths are number type',
+							[
+								{
+									'0':'a',
+									'1.0':'b',
+									'1.1':'c',
+									'2.0':'d',
+									'2.1':'e',
+									'3':'f'
+								},
+								function (_key) {
+									return Uize.map (
+										_key.split ('.'),
+										function (_pathPart) {return Uize.toNumber (_pathPart,_pathPart)}
+									)
+								},
+								true
+							],
+							[
+								'a',
+								['b','c'],
+								['d','e'],
+								'f'
+							]
+						]
 					]]
 				])
 			]

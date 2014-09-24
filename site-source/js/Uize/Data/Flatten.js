@@ -13,7 +13,7 @@
 	type: Package
 	importance: 1
 	codeCompleteness: 100
-	docCompleteness: 90
+	docCompleteness: 75
 */
 
 /*?
@@ -426,7 +426,11 @@ Uize.module ({
 
 		var
 			/*** Variables for Scruncher Optimization ***/
-				_undefined
+				_undefined,
+
+			/*** Variables for Performance Optimization ***/
+				_isPlainObject = Uize.isPlainObject,
+				_isArray = Uize.isArray
 		;
 
 		/*** Utility Functions ***/
@@ -444,7 +448,7 @@ Uize.module ({
 			;
 
 		return Uize.package ({
-			flatten:function (_tree,_pathToKey,_inclueNonLeafNodes) {
+			flatten:function (_tree,_pathToKey,_inclueNonLeafNodes,_allowArraysNodes) {
 				_pathToKey = _pathToKey == _undefined
 					? _pathToKeyPeriodDelimited
 					: typeof _pathToKey == 'string'
@@ -453,13 +457,20 @@ Uize.module ({
 				;
 				var _hash = {};
 				function _processTreeNode (_treeNode,_path) {
-					if (Uize.isPlainObject (_treeNode)) {
+					var _treeNodeIsPlainObject = _isPlainObject (_treeNode);
+					if (_treeNodeIsPlainObject || (_allowArraysNodes && _isArray (_treeNode))) {
 						if (_inclueNonLeafNodes && _path.length)
 							_hash [_pathToKey (_path)] = _treeNode
 						;
-						for (var _subNodeName in _treeNode)
-							_processTreeNode (_treeNode [_subNodeName],_path.concat (_subNodeName))
-						;
+						if (_treeNodeIsPlainObject) {
+							for (var _subNodeName in _treeNode)
+								_processTreeNode (_treeNode [_subNodeName],_path.concat (_subNodeName))
+							;
+						} else {
+							for (var _subNodeNo = -1, _treeNodeLength = _treeNode.length; ++_subNodeNo < _treeNodeLength;)
+								_processTreeNode (_treeNode [_subNodeNo],_path.concat (_subNodeNo))
+							;
+						}
 					} else {
 						_hash [_pathToKey (_path)] = _treeNode;
 					}
@@ -665,7 +676,7 @@ Uize.module ({
 				*/
 			},
 
-			unflatten:function (_hash,_keyToPath) {
+			unflatten:function (_hash,_keyToPath,_allowArraysNodes) {
 				_keyToPath = _keyToPath == _undefined
 					? _keyToPathPeriodDelimited
 					: typeof _keyToPath == 'string'
@@ -679,17 +690,30 @@ Uize.module ({
 							_path = _keyToPath (_key),
 							_pathPartNo = -1,
 							_pathLength = _path.length,
-							_pathPart,
-							_treeNode = _tree
+							_parentParentNode = _tree,
+							_parentNodeName = 'root'
 						;
 						++_pathPartNo < _pathLength;
-					)
-						_treeNode =
-							_treeNode [_pathPart = _path [_pathPartNo]] ||
-							(_treeNode [_pathPart] = _pathLength - 1 - _pathPartNo ? {} : _hash [_key])
-					;
+					) {
+						var
+							_pathPart = _path [_pathPartNo],
+							_parentNode =
+								_parentParentNode [_parentNodeName] ||
+								(
+									_parentParentNode [_parentNodeName] = _allowArraysNodes && typeof _pathPart == 'number'
+										? []
+										: {}
+								)
+						;
+						if (_pathPartNo < _pathLength - 1) {
+							_parentParentNode = _parentNode;
+							_parentNodeName = _pathPart;
+						} else {
+							_parentNode [_pathPart] = _hash [_key];
+						}
+					}
 				}
-				return _tree;
+				return _tree.root || {};
 				/*?
 					Static Methods
 						Uize.Data.Flatten.unflatten
