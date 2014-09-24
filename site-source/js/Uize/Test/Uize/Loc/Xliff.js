@@ -217,6 +217,51 @@ Uize.module ({
 							'		</body>\n' +
 							'	</file>\n' +
 							'</xliff>'
+						],
+						['An object containing string arrays for a file can be serialized to XLIFF format',
+							{
+								sourceLanguage:'en_US',
+								targetLanguage:'fr_FR',
+								strings:{
+									'foo/bar.properties':{
+										widget1:{
+											OPTIONS:[
+												'Option 1',
+												'Option 2'
+											]
+										},
+										widget2:{
+											OPTIONS:[
+												'foo',
+												'bar'
+											]
+										}
+									}
+								}
+							},
+							'<?xml version="1.0" ?>\n' +
+							'<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">\n' +
+							'	<file original="foo/bar.properties" source-language="en_US" target-language="fr_FR" datatype="plaintext">\n' +
+							'		<body>\n' +
+							'			<trans-unit id="[&apos;widget1&apos;,&apos;OPTIONS&apos;,0]">\n' +
+							'				<source>Option 1</source>\n' +
+							'				<target></target>\n' +
+							'			</trans-unit>\n' +
+							'			<trans-unit id="[&apos;widget1&apos;,&apos;OPTIONS&apos;,1]">\n' +
+							'				<source>Option 2</source>\n' +
+							'				<target></target>\n' +
+							'			</trans-unit>\n' +
+							'			<trans-unit id="[&apos;widget2&apos;,&apos;OPTIONS&apos;,0]">\n' +
+							'				<source>foo</source>\n' +
+							'				<target></target>\n' +
+							'			</trans-unit>\n' +
+							'			<trans-unit id="[&apos;widget2&apos;,&apos;OPTIONS&apos;,1]">\n' +
+							'				<source>bar</source>\n' +
+							'				<target></target>\n' +
+							'			</trans-unit>\n' +
+							'		</body>\n' +
+							'	</file>\n' +
+							'</xliff>'
 						]
 					]],
 					['Uize.Loc.Xliff.from',[
@@ -310,6 +355,47 @@ Uize.module ({
 							{
 								'foo/bar.properties':{
 									STR:''
+								}
+							}
+						],
+						['An XLIFF format document may contain trans-unit tags that contain values for elements of string arrays, and these are parsed to produce string arrays in the returned strings object',
+							'<?xml version="1.0" ?>\n' +
+							'<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">\n' +
+							'	<file original="foo/bar.properties" source-language="en_US" target-language="fr_FR" datatype="plaintext">\n' +
+							'		<body>\n' +
+							'			<trans-unit id="[&apos;widget1&apos;,&apos;OPTIONS&apos;,0]">\n' +
+							'				<source>Option 1</source>\n' +
+							'				<target>Option 1</target>\n' +
+							'			</trans-unit>\n' +
+							'			<trans-unit id="[&apos;widget1&apos;,&apos;OPTIONS&apos;,1]">\n' +
+							'				<source>Option 2</source>\n' +
+							'				<target>Option 2</target>\n' +
+							'			</trans-unit>\n' +
+							'			<trans-unit id="[&apos;widget2&apos;,&apos;OPTIONS&apos;,0]">\n' +
+							'				<source>foo</source>\n' +
+							'				<target>le foo</target>\n' +
+							'			</trans-unit>\n' +
+							'			<trans-unit id="[&apos;widget2&apos;,&apos;OPTIONS&apos;,1]">\n' +
+							'				<source>bar</source>\n' +
+							'				<target>le bar</target>\n' +
+							'			</trans-unit>\n' +
+							'		</body>\n' +
+							'	</file>\n' +
+							'</xliff>',
+							{
+								'foo/bar.properties':{
+									widget1:{
+										OPTIONS:[
+											'Option 1',
+											'Option 2'
+										]
+									},
+									widget2:{
+										OPTIONS:[
+											'le foo',
+											'le bar'
+										]
+									}
 								}
 							}
 						],

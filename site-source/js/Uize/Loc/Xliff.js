@@ -69,7 +69,9 @@ Uize.module ({
 						function _flattenResourceStrings (_resourceFileStrings) {
 							return Uize.Data.Flatten.flatten (
 								_resourceFileStrings,
-								function (_path) {return Uize.Json.to (_path,'mini')}
+								function (_path) {return Uize.Json.to (_path,'mini')},
+								false,
+								true
 							);
 						}
 
@@ -171,7 +173,8 @@ Uize.module ({
 						);
 						_strings [_getAttributeValue (_fileTag,'original')] = Uize.Data.Flatten.unflatten (
 							_fileStrings,
-							Uize.Json.from
+							Uize.Json.from,
+							true
 						);
 					}
 				);
