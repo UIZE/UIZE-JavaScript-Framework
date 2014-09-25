@@ -150,6 +150,24 @@ Uize.module ({
 						['A strings object containing a multiple contexts with multiple strings per context is serialized correctly',
 							Uize.clone (_stringsMultipleContextsWithMultipleStrings),
 							_tsFileMultipleContextsWithMultipleStrings
+						],
+						['When the value for a string is empty, then the attribute type="unfinished" is added to the translation tag',
+							{
+								'First Context':{
+									foo:''
+								}
+							},
+							'<?xml version="1.0" encoding="utf-8"?>\n' +
+							'<!DOCTYPE TS>\n' +
+							'<TS version="2.1" language="en">\n' +
+							'	<context>\n' +
+							'		<name>First Context</name>\n' +
+							'		<message>\n' +
+							'			<source>foo</source>\n' +
+							'			<translation type="unfinished"></translation>\n' +
+							'		</message>\n' +
+							'	</context>\n' +
+							'</TS>\n'
 						]
 					]]
 				])

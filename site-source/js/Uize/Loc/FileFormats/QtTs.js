@@ -116,7 +116,7 @@ Uize.module ({
 								_lines.push (
 									'		<message>',
 									'			<source>' + _encodeString (_stringId) + '</source>',
-									'			<translation>' + _encodeString (_stringValue) + '</translation>',
+									'			<translation' + (_stringValue ? '' : ' type="unfinished"') + '>' + _encodeString (_stringValue) + '</translation>',
 									'		</message>'
 								);
 							}
