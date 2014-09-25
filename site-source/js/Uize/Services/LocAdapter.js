@@ -856,7 +856,18 @@ Uize.module ({
 									_writeLanguageResourcesFile (
 										m,
 										_language,
-										Uize.mergeInto (_readLanguageResourcesFile (m,_language),_translatedStrings)
+										Uize.Data.Diff.diff (
+											_readLanguageResourcesFile (m,_language),
+											_translatedStrings,
+											function (_languageString,_translatedString) {
+												return (
+													_languageString
+														? (_translatedString && _translatedString.value && _translatedString) ||
+															_languageString
+														: undefined
+												);
+											}
+										)
 									)
 								;
 								m.stepCompleted (_language + ': updated language resources file');
