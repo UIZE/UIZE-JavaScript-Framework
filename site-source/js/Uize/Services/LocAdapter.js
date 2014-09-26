@@ -37,6 +37,7 @@ Uize.module ({
 		'Uize.Loc.Strings.Metrics',
 		'Uize.Data.Diff',
 		'Uize.Str.Whitespace',
+		'Uize.Str.Lines',
 		'Uize.Templates.Text.Tables.Breakdown',
 		'Uize.Templates.Text.Tables.YinYangBreakdown',
 		'Uize.Templates.Text.Tables.Histogram'
@@ -53,9 +54,12 @@ Uize.module ({
 			/*** Variables for Performance Optimization ***/
 				_getStringMetrics = Uize.Loc.Strings.Metrics.getMetrics,
 				_hasNonWhitespace = Uize.Str.Whitespace.hasNonWhitespace,
+				_switchIndentType = Uize.Str.Lines.switchIndentType,
+				_switchLinebreakType = Uize.Str.Lines.switchLinebreakType,
 
 			/*** General Variables ***/
 				_fileSystem = Uize.Services.FileSystem.singleton (),
+				_sacredEmptyObject = {},
 				_sacredEmptyArray = [],
 				_pathJsonSerializationOptions = {
 					quoteChar:'"',
@@ -482,14 +486,31 @@ Uize.module ({
 					// NOTE: this method can be useful for implementation of the extract method
 					var
 						m = this,
-						_rootFolderPath = m.project.rootFolderPath
+						_project = m.project,
+						_rootFolderPath = _project.rootFolderPath,
+						_resourceFileWhitespace = _project.resourceFileWhitespace || _sacredEmptyObject,
+						_indentChars = _resourceFileWhitespace.indentChars != _undefined
+							? _resourceFileWhitespace.indentChars
+							: '\t',
+						_linebreakChars = _resourceFileWhitespace.linebreakChars != _undefined
+							? _resourceFileWhitespace.linebreakChars
+							: '\n',
+						_mustSwitchIndentType = _indentChars != '\t',
+						_mustSwitchLinebreakType = _linebreakChars != '\n'
 					;
 					Uize.forEach (
 						_resources,
 						function (_resourceFileStrings,_resourceFileSubPath) {
+							var _serializedResourceFile = m.serializeResourceFile (_resourceFileStrings,_language);
+							if (_mustSwitchIndentType)
+								_serializedResourceFile = _switchIndentType (_serializedResourceFile,'\t',_indentChars)
+							;
+							if (_mustSwitchLinebreakType)
+								_serializedResourceFile = _switchLinebreakType (_serializedResourceFile,_linebreakChars)
+							;
 							_fileSystem.writeFile ({
 								path:_rootFolderPath + '/' + m.getLanguageResourcePath (_resourceFileSubPath,_language),
-								contents:m.serializeResourceFile (_resourceFileStrings,_language)
+								contents:_serializedResourceFile
 							});
 						}
 					);
@@ -864,7 +885,7 @@ Uize.module ({
 													_languageString
 														? (_translatedString && _translatedString.value && _translatedString) ||
 															_languageString
-														: undefined
+														: _undefined
 												);
 											}
 										)
