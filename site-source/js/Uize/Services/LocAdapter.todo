@@ -1,5 +1,137 @@
 This is a TO DO document for the =Uize.Services.LocAdapter= module.
 
+Add Support for Plural Forms
+
+	Different Pluralization Formats
+
+		- Qt Pluralization
+		- Android Pluralization
+		- gettext Pluralization
+
+		GNU gettext
+
+			EXAMPLE
+			...........................................................
+			msgid "I will call you back in one minute."
+			msgstr "I will call you back in one minute."
+
+			msgid_plural "I will call you back in <number:CN> minutes."
+			msgstr[0] ""
+			msgstr[1] ""
+			msgstr[2] ""
+			...........................................................
+
+	YAML
+
+		Sub-object With Special Name
+
+			EXAMPLE
+			...........................................
+			newMessages
+				[plurals]
+					zero: You have no new messages.
+					one: You have one new message.
+					two You have two new messages.
+					5: You have five new messages.
+					other: You have {count} new messages.
+					few: --
+					many: --
+			...........................................
+
+		Object With Special Key
+
+			EXAMPLE
+			...........................................
+			newMessages
+				[plurals]
+				zero: You have no new messages.
+				one: You have one new message.
+				two You have two new messages.
+				5: You have five new messages.
+				other: You have {count} new messages.
+				few: --
+				many: --
+			...........................................
+
+		String Key With Special Suffix
+
+			EXAMPLE
+			...........................................
+			newMessages[plurals]
+				zero: You have no new messages.
+				one: You have one new message.
+				two: You have two new messages.
+				5: You have five new messages.
+				other: You have {count} new messages.
+				few: --
+				many: --
+			...........................................
+
+	Basic Use Case
+		In a basic use case, a reduced set of plural forms can be specified for a primary language (eg. US English) resource file...
+
+		EXAMPLE
+		...........................................
+		newMessages
+			[plurals]
+				zero: You have no new messages.
+				one: You have one new message.
+				other: You have {count} new messages.
+		...........................................
+
+	Normalized Form
+
+		Possible Approaches
+			- all plural forms in flat list, with some form of special key suffix
+			- all plural forms grouped together in an object
+
+		Requirements of Normalized Form
+			- any special keys should not be treated as a resource string
+				- should not be sent for translation
+				- should not be serialized as resource strings into resource files
+				- should not confuse or otherwise interfere with diffing processes
+			- ultimately, all plural variations of a string should be handled by translators as discrete resource string translations
+			- there must be the same number of strings per language
+				- for languages for which certain plural categories are not applicable, the strings for the plural categories should exist but can be autofilled with a special code (such as "--" or "n/a") so that they appear to have been already translated
+			- it must be clear to the localization automation process that it is dealing with a string that has plural forms
+				- perhaps it is the responsibility of the parseResourceFile and serializeResourceFile methods to handle the conversion to and from the normalized form
+			- it should be possible to transpose in both directions between the native representation for plural forms and the normalized form
+
+			JSON
+			......................................................
+			{
+				newMessages:{
+					'plural=zero':'You have no new messages.',
+					'plural=one':'You have one new message.',
+					'plural=two':'You have two new messages.',
+					'plural=5':'You have five new messages.',
+					'plural=other':'You have {count} new messages.',
+					'plural=few':'--',
+					'plural=many':'--'
+				}
+			}
+			......................................................
+
+	Plural Forms and Translation Memory
+		Ideally, the actual string text for different plural variations is different, to avoid problems with translations being picked up from translation memory.
+
+		This could potentially be accomplished by supporting a qualifier in the token syntax...
+
+		EXAMPLE
+		......................................................
+		{
+			newMessages:{
+				'plural=zero':'You have no new messages.',
+				'plural=one':'You have one new message.',
+				'plural=two':'You have two new messages.',
+				'plural=5':'You have five new messages.',
+				'plural=other':'You have {count:other} new messages.',
+				'plural=few':'You have {count:few} new messages.',
+				'plural=many':'You have {count:many} new messages.'
+			}
+		}
+		......................................................
+
 Configuration of Language Support Per Brand
 	Implement support for brand-specific configuration of supported languages.
 
