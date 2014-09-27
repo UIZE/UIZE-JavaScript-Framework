@@ -1,24 +1,18 @@
 <table border="0" cellspacing="2" cellpadding="0">
 	<tr>
-		<td class="sliderLabel">HUE RANGE</td>
-		<td class="sliderValueLabel sliderMinValue">0</td>
-		<td><child name="hueRangeSlider"/></td>
-		<td class="sliderValueLabel sliderMaxValue">100</td>
-	</tr>
-	<tr>
 		<td class="sliderLabel">HUE SHIFT</td>
 		<td class="sliderValueLabel sliderMinValue">-180</td>
 		<td><child name="hueShiftSlider"/></td>
 		<td class="sliderValueLabel sliderMaxValue">+180</td>
 	</tr>
 	<tr>
-		<td colspan="4" style="height:4px;"></td>
+		<td class="sliderLabel">HUE RANGE</td>
+		<td class="sliderValueLabel sliderMinValue">0</td>
+		<td><child name="hueRangeSlider"/></td>
+		<td class="sliderValueLabel sliderMaxValue">100</td>
 	</tr>
 	<tr>
-		<td class="sliderLabel">SATURATION RANGE</td>
-		<td class="sliderValueLabel sliderMinValue">0</td>
-		<td><child name="saturationRangeSlider"/></td>
-		<td class="sliderValueLabel sliderMaxValue">100</td>
+		<td colspan="4" style="height:4px;"></td>
 	</tr>
 	<tr>
 		<td class="sliderLabel">SATURATION SHIFT</td>
@@ -27,19 +21,25 @@
 		<td class="sliderValueLabel sliderMaxValue">+100</td>
 	</tr>
 	<tr>
-		<td colspan="4" style="height:4px;"></td>
+		<td class="sliderLabel">SATURATION RANGE</td>
+		<td class="sliderValueLabel sliderMinValue">0</td>
+		<td><child name="saturationRangeSlider"/></td>
+		<td class="sliderValueLabel sliderMaxValue">100</td>
 	</tr>
 	<tr>
-		<td class="sliderLabel">LIGHTNESS RANGE</td>
-		<td class="sliderValueLabel sliderMinValue">0</td>
-		<td><child name="lightnessRangeSlider"/></td>
-		<td class="sliderValueLabel sliderMaxValue">100</td>
+		<td colspan="4" style="height:4px;"></td>
 	</tr>
 	<tr>
 		<td class="sliderLabel">LIGHTNESS SHIFT</td>
 		<td class="sliderValueLabel sliderMinValue">-100</td>
 		<td><child name="lightnessShiftSlider"/></td>
 		<td class="sliderValueLabel sliderMaxValue">+100</td>
+	</tr>
+	<tr>
+		<td class="sliderLabel">LIGHTNESS RANGE</td>
+		<td class="sliderValueLabel sliderMinValue">0</td>
+		<td><child name="lightnessRangeSlider"/></td>
+		<td class="sliderValueLabel sliderMaxValue">100</td>
 	</tr>
 	<tr>
 		<td></td>
