@@ -52,6 +52,8 @@ Uize.module ({
 		;
 
 		return _superclass.subclass ({
+			hasLoc:true,
+
 			mixins:[
 				Uize.Color.ColorsHslTransformer.mixin,
 				Uize.Widget.mChildBindings
@@ -68,17 +70,14 @@ Uize.module ({
 			children:{
 				hueShiftAndRange:{
 					widgetClass:_shiftAndRangeWidgetClass,
-					heading:'Hue',
 					shiftExtent:180
 				},
 				saturationShiftAndRange:{
 					widgetClass:_shiftAndRangeWidgetClass,
-					heading:'Saturation',
 					shiftExtent:100
 				},
 				lightnessShiftAndRange:{
 					widgetClass:_shiftAndRangeWidgetClass,
-					heading:'Lightness',
 					shiftExtent:100
 				},
 				reset:{
@@ -103,6 +102,9 @@ Uize.module ({
 				saturationRange:'saturationShiftAndRange.range',
 				lightnessShift:'lightnessShiftAndRange.shift',
 				lightnessRange:'lightnessShiftAndRange.range',
+				loc_hue:'->hueShiftAndRange.heading',
+				loc_saturation:'->saturationShiftAndRange.heading',
+				loc_lightness:'->lightnessShiftAndRange.heading',
 				sliderTrackLength:[
 					'->hueShiftAndRange.sliderTrackLength',
 					'->saturationShiftAndRange.sliderTrackLength',
