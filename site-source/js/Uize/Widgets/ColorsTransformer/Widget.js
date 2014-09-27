@@ -37,15 +37,19 @@ Uize.module ({
 	superclass:'Uize.Widget.V2',
 	required:[
 		'Uize.Color',
-		'Uize.Widgets.Slider.Widget',
+		'Uize.Widgets.ColorsTransformer.ShiftAndRange.Widget',
 		'Uize.Widgets.Buttons.Reset.Widget',
 		'Uize.Widgets.ColorsTransformer.Html',
-		'Uize.Widgets.ColorsTransformer.Css',
-		'Uize.Widget.mChildBindings',
-		'Uize.Color.ColorsHslTransformer'
+		'Uize.Color.ColorsHslTransformer',
+		'Uize.Widget.mChildBindings'
 	],
 	builder:function (_superclass) {
 		'use strict';
+
+		var
+			/*** Variables for Scruncher Optimization ***/
+				_shiftAndRangeWidgetClass = Uize.Widgets.ColorsTransformer.ShiftAndRange.Widget
+		;
 
 		return _superclass.subclass ({
 			mixins:[
@@ -57,58 +61,53 @@ Uize.module ({
 				html:Uize.Widgets.ColorsTransformer.Html
 			},
 
-			staticProperties:{
-				cssModule:Uize.Widgets.ColorsTransformer.Css
+			stateProperties:{
+				sliderTrackLength:{value:300}
 			},
 
-			children:Uize.copyInto (
-				Uize.map (
-					{
-						hueRangeSlider:[0,100,50],
-						hueShiftSlider:[-180,180,0],
-						saturationRangeSlider:[0,100,50],
-						saturationShiftSlider:[-100,100,0],
-						lightnessRangeSlider:[0,100,50],
-						lightnessShiftSlider:[-100,100,0]
-					},
-					function (_arguments) {
-						return {
-							widgetClass:Uize.Widgets.Slider.Widget,
-							increments:0,
-							orientation:'horizontal',
-							fullColor:'#fff',
-							emptyColor:'#fff',
-							trackLength:470,
-							minValue:_arguments [0],
-							maxValue:_arguments [1],
-							value:_arguments [2]
-						};
-					}
-				),
-				{
-					reset:{
-						widgetClass:Uize.Widgets.Buttons.Reset.Widget,
-						action:function () {
-							this.parent.set ({
-								hueRange:50,
-								hueShift:0,
-								saturationRange:50,
-								saturationShift:0,
-								lightnessRange:50,
-								lightnessShift:0
-							});
-						}
+			children:{
+				hueShiftAndRange:{
+					widgetClass:_shiftAndRangeWidgetClass,
+					heading:'Hue',
+					shiftExtent:180
+				},
+				saturationShiftAndRange:{
+					widgetClass:_shiftAndRangeWidgetClass,
+					heading:'Saturation',
+					shiftExtent:100
+				},
+				lightnessShiftAndRange:{
+					widgetClass:_shiftAndRangeWidgetClass,
+					heading:'Lightness',
+					shiftExtent:100
+				},
+				reset:{
+					widgetClass:Uize.Widgets.Buttons.Reset.Widget,
+					action:function () {
+						this.parent.set ({
+							hueRange:50,
+							hueShift:0,
+							saturationRange:50,
+							saturationShift:0,
+							lightnessRange:50,
+							lightnessShift:0
+						});
 					}
 				}
-			),
+			},
 
 			childBindings:{
-				hueRange:'hueRangeSlider.value',
-				hueShift:'hueShiftSlider.value',
-				saturationRange:'saturationRangeSlider.value',
-				saturationShift:'saturationShiftSlider.value',
-				lightnessRange:'lightnessRangeSlider.value',
-				lightnessShift:'lightnessShiftSlider.value'
+				hueShift:'hueShiftAndRange.shift',
+				hueRange:'hueShiftAndRange.range',
+				saturationShift:'saturationShiftAndRange.shift',
+				saturationRange:'saturationShiftAndRange.range',
+				lightnessShift:'lightnessShiftAndRange.shift',
+				lightnessRange:'lightnessShiftAndRange.range',
+				sliderTrackLength:[
+					'->hueShiftAndRange.sliderTrackLength',
+					'->saturationShiftAndRange.sliderTrackLength',
+					'->lightnessShiftAndRange.sliderTrackLength'
+				]
 			}
 		});
 	}
