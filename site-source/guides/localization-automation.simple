@@ -174,11 +174,28 @@ Localization Service Methods ~~ Localization Service Method
 		Executing the =import= method will have the effect of overwriting all the `codebase resource files` for the pseudo-locale and the translatable languages so that their contents reflects the contents of the `master resource files`. The =import= method will also create new codebase resource files, as necessary, if they did not previously exist.
 
 	exportJobs
-		.
+		Exports resource strings for translation  from the `master resource files` of a project into the `translation job files`.
 
 		................................................................................
 		node [pathToUize]build.js Uize.Build.Loc project=[projectName] method=exportJobs
 		................................................................................
+
+		Export Filters
+			.
+
+			.....................................................................................................
+			node [pathToUize]build.js Uize.Build.Loc project=[projectName] method=exportJobs filter=[missing|all]
+			.....................................................................................................
+
+		Export Format
+			.
+
+		###
+			- for all translatable languages - excludes primary language and pseudo-locale
+			- only the strings for which translation is needed
+			- file format
+
+			- make sure `master resource files` are up-to-date before executing the =exportJobs= method by first executing the =export= method
 
 	importJobs
 		.
@@ -349,6 +366,42 @@ Localization Service Workflows
 
 		Branching a Project
 			.
+
+	Localization Loop
+
+		..................................................................................................
+		            -------> 4. translate jobs -------> -------> 9. translate jobs -------> ----------->
+		            ∧                                 | ∧                                 | ∧
+		            |                                 | |                                 | |
+		            | 3. export             5. import | | 8. export            10. import | | 13. export
+		            |    jobs                  jobs   | |    jobs                  jobs   | |     jobs
+		            |                                 ∨ |                                 ∨ |
+		    |-------------------------------------------------------------------------------------|
+		    |                                                                                     |
+		    |                               MASTER RESOURCE FILES                                 |
+		    |                                                                                     |
+		    |-------------------------------------------------------------------------------------|
+		          ∧ |                                 ∧ |                                 ∧ |
+		          | |                                 | |                                 | |
+		1. export | | 2. import             6. export ! | 7. import            11. export ! | 12. import
+		          ! |                                 ! |                                 ! |
+		          ! ∨                                 ! ∨                                 ! ∨
+		|---------------------------------------------------------------------------------------------|
+		|        |   |                               |   |                               |   |        |
+		|        | A |  ------> 4. develop ------->  | B |  ------> 9. develop ------->  | C |        |
+		|        |   |                               |   |                               |   |        |
+		|---------------------------------------------------------------------------------------------|
+		..................................................................................................
+
+		+. `export`
+		+. `import`
+		+. `export jobs`
+		+. `translate jobs` and `develop`
+		+. `import jobs`
+		+. `export`
+		+. `import`
+		+. `repeat from step 3`
+
 
 	### Iterative Translation
 		revision A
