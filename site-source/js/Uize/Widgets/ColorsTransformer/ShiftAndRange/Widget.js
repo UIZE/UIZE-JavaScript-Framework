@@ -45,6 +45,8 @@ Uize.module ({
 		'use strict';
 
 		return _superclass.subclass ({
+			hasLoc:true,
+
 			mixins:Uize.Widget.mChildBindings,
 
 			set:{
@@ -102,6 +104,8 @@ Uize.module ({
 
 			htmlBindings:{
 				heading:'heading:html',
+				loc_shift:'shiftLabel',
+				loc_range:'rangeLabel',
 				_shiftSliderMinValue:'shiftMinValue',
 				_shiftSliderMaxValue:'shiftMaxValue'
 			}

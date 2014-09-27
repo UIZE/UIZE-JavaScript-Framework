@@ -8,6 +8,7 @@
 .`sliderLabel` {
 	text-align: right;
 	font-size: 12px;
+	text-transform: uppercase;
 }
 
 .`sliderValueLabel` {

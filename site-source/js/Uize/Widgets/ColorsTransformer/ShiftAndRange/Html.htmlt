@@ -4,13 +4,13 @@
 		<div id="body" class="body">
 			<table border="0" cellspacing="2" cellpadding="0">
 				<tr>
-					<td class="sliderLabel">SHIFT</td>
+					<td id="shiftLabel" class="sliderLabel"></td>
 					<td id="shiftMinValue" class="sliderValueLabel sliderMinValue"></td>
 					<td><child name="shiftSlider"/></td>
 					<td id="shiftMaxValue" class="sliderValueLabel sliderMaxValue"></td>
 				</tr>
 				<tr>
-					<td class="sliderLabel">RANGE</td>
+					<td id="rangeLabel" class="sliderLabel"></td>
 					<td class="sliderValueLabel sliderMinValue">0</td>
 					<td><child name="rangeSlider"/></td>
 					<td class="sliderValueLabel sliderMaxValue">100</td>
