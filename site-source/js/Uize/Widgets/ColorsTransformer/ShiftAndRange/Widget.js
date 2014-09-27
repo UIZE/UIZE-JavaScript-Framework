@@ -66,7 +66,9 @@ Uize.module ({
 
 				/*** derived properties ***/
 					_shiftSliderMinValue:{derived:'shiftExtent: -shiftExtent'},
-					_shiftSliderMaxValue:{derived:'shiftExtent'}
+					_shiftSliderMaxValue:{derived:'shiftExtent'},
+					_shiftSliderMinValueLabel:{derived:'shiftExtent: "-" + shiftExtent'},
+					_shiftSliderMaxValueLabel:{derived:'shiftExtent: "+" + shiftExtent'}
 			},
 
 			children:Uize.map (
@@ -106,8 +108,8 @@ Uize.module ({
 				heading:'heading:html',
 				loc_shift:'shiftLabel',
 				loc_range:'rangeLabel',
-				_shiftSliderMinValue:'shiftMinValue',
-				_shiftSliderMaxValue:'shiftMaxValue'
+				_shiftSliderMinValueLabel:'shiftMinValue',
+				_shiftSliderMaxValueLabel:'shiftMaxValue'
 			}
 		});
 	}
