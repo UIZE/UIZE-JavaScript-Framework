@@ -420,9 +420,10 @@ Uize.module ({
 							Uize.Data.Diff.diff (
 								_primaryLanguageResources [_resourceFileSubPath],
 								{},
-								function (_string) {
+								function (_string,_propertyB,_path) {
+									_string.path = _path;
 									if (_isTranslatableString (m,_string))
-										_string.value = Uize.Loc.Pseudo.pseudoLocalize (_string.value,_pseudoLocalizeOptions)
+										_string.value = m.pseudoLocalizeString (_string,_pseudoLocalizeOptions)
 									;
 									return _string;
 								},
@@ -630,6 +631,11 @@ Uize.module ({
 						.................
 					*/
 					return true;
+				},
+
+				pseudoLocalizeString:function (_string,_pseudoLocalizeOptions) {
+					// this method can optionally be overridden by subclasses
+					return Uize.Loc.Pseudo.pseudoLocalize (_string.value,_pseudoLocalizeOptions);
 				},
 
 				isResourceFile:function (_filePath) {
