@@ -29,14 +29,11 @@ Uize.module ({
 		'use strict';
 
 		var
-			_whitespaceChars = [
+			_inlineWhitespaceChars = [
 				'\t',
-				'\n',
 				'\x0b',
 				' ',
 				'\f',
-				'\r',
-				'\x20',
 				'\xa0',
 				'\u2000',
 				'\u2001',
@@ -54,6 +51,11 @@ Uize.module ({
 				'\u2029',
 				'\u3000'
 			],
+			_linebreakWhitespaceChars = [
+				'\n',
+				'\r'
+			],
+			_whitespaceChars = _inlineWhitespaceChars.concat (_linebreakWhitespaceChars),
 			_whitespaceStr = _whitespaceChars.join ('')
 		;
 
@@ -298,7 +300,29 @@ Uize.module ({
 							-1
 						]
 					]]
-				])
+				]),
+
+				/*** tests for static properties ***/
+					Uize.Test.staticPropertyTest ('Uize.Str.Whitespace.inlineWhitespaceCharCodes','object'),
+					{
+						title:'The Uize.Str.Whitespace.inlineWhitespaceCharCodes static property contains a list of the character codes for all the inline whitespace characters',
+						test:function () {
+							return this.expect (
+								_inlineWhitespaceChars.sort (),
+								Uize.map (Uize.Str.Whitespace.inlineWhitespaceCharCodes,'String.fromCharCode (value)').sort ()
+							);
+						}
+					},
+					Uize.Test.staticPropertyTest ('Uize.Str.Whitespace.linebreakCharCodes','object'),
+					{
+						title:'The Uize.Str.Whitespace.linebreakCharCodes static property contains a list of the character codes for all the line break whitespace characters',
+						test:function () {
+							return this.expect (
+								_linebreakWhitespaceChars.sort (),
+								Uize.map (Uize.Str.Whitespace.linebreakCharCodes,'String.fromCharCode (value)').sort ()
+							);
+						}
+					}
 			]
 		});
 	}

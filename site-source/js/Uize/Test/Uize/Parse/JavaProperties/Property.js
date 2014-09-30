@@ -113,6 +113,51 @@ Uize.module ({
 									},
 									isValid:true
 								}
+							),
+							Uize.Test.ParserTest.parserTest (
+								'A property\'s value will be empty if there are no characters between the "=" delimiter and the next new line character',
+								['PropertyName =\n'],
+								{
+									name:{
+										name:'PropertyName',
+										isValid:true
+									},
+									value:{
+										value:'',
+										isValid:true
+									},
+									isValid:true
+								}
+							),
+							Uize.Test.ParserTest.parserTest (
+								'A property\'s value will be empty if there are no characters other than whitespace characters between the property name and the next new line character',
+								['PropertyName        \n'],
+								{
+									name:{
+										name:'PropertyName',
+										isValid:true
+									},
+									value:{
+										value:'',
+										isValid:true
+									},
+									isValid:true
+								}
+							),
+							Uize.Test.ParserTest.parserTest (
+								'A property\'s value will be empty if there are no characters between the "=" delimiter and another property on a new line',
+								['PropertyName =\nProperty2Name=Property2Value'],
+								{
+									name:{
+										name:'PropertyName',
+										isValid:true
+									},
+									value:{
+										value:'',
+										isValid:true
+									},
+									isValid:true
+								}
 							)
 						]
 					},
