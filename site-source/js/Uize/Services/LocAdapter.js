@@ -476,7 +476,9 @@ Uize.module ({
 
 		return _superclass.subclass ({
 			instanceMethods:{
-				getTranslatableLanguages:function () {return _getTranslatableLanguages (this)},
+				getTranslatableLanguages:function () {r
+					eturn _getTranslatableLanguages (this);
+				},
 
 				getLanguages:function () {
 					var _project = this.project;
@@ -579,13 +581,43 @@ Uize.module ({
 				},
 
 				isBrandResourceFile:function (_filePath) {
-					// this method can optionally be overridden by subclasses
 					return !!this.getResourceFileBrand (_filePath);
+					/*?
+						Instance Methods
+							isBrandResourceFile
+								Returns a boolean, indicating whether or not the specified file path is for a brand resource file.
+
+								SYNTAX
+								.................................................................
+								isBrandResourceFileBOOL = this.isBrandResourceFile (filePathSTR);
+								.................................................................
+
+								The implementation of this method, provided in this base class, leverages the related =getResourceFileBrand= instance method and returns =true= if the value returned by the =getResourceFileBrand= method is truthy. This method can be optionally overridden by subclasses to determine if a resource file is for a brand in a different manner.
+
+								NOTES
+								- see also the related =getResourceFileBrand= instance method
+					*/
 				},
 
 				isBrandResourceString:function (_resourceStringPath) {
-					// this method can optionally be overridden by subclasses
 					return !!this.getStringBrand (_resourceStringPath);
+					/*?
+						Instance Methods
+							isBrandResourceString
+								Returns a boolean, indicating whether or not the specified resource string is for a brand.
+
+								SYNTAX
+								.................................................................................
+								isBrandResourceStringBOOL = this.isBrandResourceString (resourceStringPathARRAY);
+								.................................................................................
+
+								The implementation of this method, provided in this base class, leverages the related =getStringBrand= instance method and returns =true= if the value returned by the =getStringBrand= method is truthy.
+
+								This method can be optionally overridden by subclasses, if it is necessary to determine if a resource string is for a brand in some different manner. When the =isBrandResourceString= method is called, it is passed a value for the =resourceStringPathARRAY= parameter that is a path array, where the last element can be regarded as the string key. An implementation for this method may use any elements of the path array to determine whether or not the string is for a brand.
+
+								NOTES
+								- see also the related =getStringBrand= instance method
+					*/
 				},
 
 				getResourceFileBrand:function (_filePath) {
