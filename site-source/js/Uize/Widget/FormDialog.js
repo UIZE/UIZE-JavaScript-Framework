@@ -42,9 +42,8 @@ Uize.module ({
 					)
 				;
 
-				_form.wire(
-					'Changed.okToSubmit',
-					function () {
+				_form.wire({
+					'Changed.okToSubmit': function () {
 						_form.get('okToSubmit')
 							&& m.handleFormValue(
 								function (_info) {
@@ -58,8 +57,12 @@ Uize.module ({
 								}
 							)
 						;
+					},
+					'Changed.numWarningsShown': function () {
+						// if the dialog changes height, update the position to prevent the case where the bottom of the dialog gets pushed out of view.
+						m.updateUiPositionIfShown();
 					}
-				);
+				});
 
 				m.wire({
 					Ok:function (_event) {

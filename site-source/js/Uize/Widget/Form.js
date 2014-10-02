@@ -260,6 +260,9 @@ Uize.module ({
 								_added && _wireAddedElement(_elementName);
 							}
 						);
+					},
+					_updateNumWarningsShown = function () {
+						m.set({ _numWarningsShown: m.get('warningShown') ? m._formWarnings.get('numWarnings') : 0 });
 					}
 				;
 
@@ -273,6 +276,10 @@ Uize.module ({
 					'Changed.*',
 					function(_event) { _wireAddedElements(_event.properties) }
 				);
+
+				// update numWarningsShown
+				m._formWarnings.wire('Changed.numWarnings', function () { _updateNumWarningsShown(); });
+				m.wire('Changed.warningShown', function () { _updateNumWarningsShown(); });
 
 				m._isInitialized = _true;
 			},
@@ -531,6 +538,10 @@ Uize.module ({
 				_method:{
 					name:'method',
 					onChange:_updateFormAttributes
+				},
+				_numWarningsShown:{
+					name: 'numWarningsShown',
+					value: 0
 				},
 				_okToSubmit:{ // readonly
 					name:'okToSubmit',

@@ -77,7 +77,7 @@ Uize.module ({
 												_expectFunc = _case.expectFunc
 											;
 											return {
-												title:_case.title || 'When state is set to ' + _Uize.Json.to(_state, 'mini') + ', ' + _propertyName + ' is properly set as ' + _bindingType + ' of ' + _nodeName,
+												title:_case.title || 'When state is set to ' + _Uize.Json.to(_state, 'mini') + ', ' + _propertyName + ' is properly set as ' + _bindingType + ' of ' + (_nodeName || '*root node*'),
 												test:function(_continue) {
 													var
 														m = this,

@@ -130,8 +130,8 @@ Uize.module ({
 					_windowDims = _getDimensions (window)
 				;
 				function _factorInDocScroll () {
-					_x += _documentElement.scrollLeft;
-					_y += _documentElement.scrollTop;
+					_x += (window.pageXOffset || _documentElement.scrollLeft);
+					_y += (window.pageYOffset || _documentElement.scrollTop);
 				}
 				if (_node == window) {
 					_factorInDocScroll ();
@@ -316,8 +316,8 @@ Uize.module ({
 				if (_node == window) {
 					var _documentElement = document.documentElement;
 					return {
-						width:_documentElement.clientWidth || window.innerWidth || _documentElement.offsetWidth,
-						height:_documentElement.clientHeight || window.innerHeight || _documentElement.offsetHeight
+						width:window.innerWidth || _documentElement.clientWidth || _documentElement.offsetWidth,
+						height:window.innerHeight || _documentElement.clientHeight || _documentElement.offsetHeight
 					};
 				} else if (_node = _getById (_node)) {
 					return {

@@ -29,7 +29,7 @@ Uize.module ({
 		'Uize.Str.Whitespace',
 		'Uize.Str.CharClass',
 		'Uize.Parse.JavaProperties.PropertyName',
-		'Uize.Parse.JavaProperties.PropertyValue',
+		'Uize.Parse.JavaProperties.PropertyValue'
 	],
 	builder:function () {
 		'use strict';
