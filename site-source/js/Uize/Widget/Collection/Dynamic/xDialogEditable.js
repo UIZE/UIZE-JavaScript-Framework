@@ -228,15 +228,13 @@ Uize.module ({
 			},
 
 			stateProperties:{
-				collectionItemControlName:'collectionItemControlName',
-				formDialogJsClass:'formDialogJsClass',
-				formDialogParams:'formDialogParams',
+				collectionItemControlName:{},
+				formDialogJsClass:{},
+				formDialogParams:{},
 				isEditable:{
-					name:'isEditable',
 					value:_false
 				},
 				itemsContainerNode:{
-					name:'itemsContainerNode',
 					value:'items'
 				}
 			}

@@ -99,7 +99,6 @@ Uize.module ({
 					if (_xmlHttpRequest.upload) { // test if XHR2 upload support
 						_xmlHttpRequest.upload.onprogress = function (_event) {
 							m.fire({name: 'Progress', xhrEvent: _event});
-							m.fire ({ name: 'Progress', xhrEvent: _event });
 						}
 					}
 
