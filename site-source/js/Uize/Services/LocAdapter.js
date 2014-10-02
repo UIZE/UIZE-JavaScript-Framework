@@ -476,7 +476,7 @@ Uize.module ({
 
 		return _superclass.subclass ({
 			instanceMethods:{
-				getTranslatableLanguages:function () {r
+				getTranslatableLanguages:function () {
 					return _getTranslatableLanguages (this);
 				},
 
