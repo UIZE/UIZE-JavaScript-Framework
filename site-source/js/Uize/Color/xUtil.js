@@ -713,7 +713,6 @@ Uize.module ({
 							- this method returns a reference to the array being sorted
 				*/
 			};
-
 	}
 });
 

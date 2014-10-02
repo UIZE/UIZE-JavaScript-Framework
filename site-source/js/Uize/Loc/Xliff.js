@@ -49,6 +49,7 @@ Uize.module ({
 					_sourceLanguage = _toEncode.sourceLanguage,
 					_targetLanguage = _toEncode.targetLanguage,
 					_seedTarget = _options.seedTarget,
+					_seedTargetIsObject = Uize.isPlainObject (_seedTarget),
 					_tokenSplitter = _options.tokenSplitter,
 					_phId = 0,
 					_xliffLines = [
@@ -65,6 +66,15 @@ Uize.module ({
 				Uize.forEach (
 					_toEncode.strings,
 					function (_resourceFileStrings,_resourceFileSubPath) {
+						function _flattenResourceStrings (_resourceFileStrings) {
+							return Uize.Data.Flatten.flatten (
+								_resourceFileStrings,
+								function (_path) {return Uize.Json.to (_path,'mini')},
+								false,
+								true
+							);
+						}
+
 						_xliffLines.push (
 							'\t<file ' +
 								'original="' + _htmlEncode (_resourceFileSubPath) + '" ' +
@@ -74,11 +84,11 @@ Uize.module ({
 							'>',
 							'\t\t<body>'
 						);
+						var _targetValues =
+							_seedTargetIsObject && _flattenResourceStrings (_seedTarget [_resourceFileSubPath] || {})
+						;
 						Uize.forEach (
-							Uize.Data.Flatten.flatten (
-								_resourceFileStrings,
-								function (_path) {return Uize.Json.to (_path,'mini')}
-							),
+							_flattenResourceStrings (_resourceFileStrings),
 							function (_resourceStringText,_id) {
 								var _source = _tokenSplitter
 									? Uize.map (
@@ -96,7 +106,9 @@ Uize.module ({
 								_xliffLines.push (
 									'\t\t\t<trans-unit id="' + _htmlEncode (_id) + '">',
 									'\t\t\t\t<source>' + _source + '</source>',
-									'\t\t\t\t<target>' + (_seedTarget ? _source : '') + '</target>',
+									'\t\t\t\t<target>' +
+										(_seedTarget ? ((_targetValues && _targetValues [_id]) || _source) : '') +
+									'</target>',
 									'\t\t\t</trans-unit>'
 								);
 							}
@@ -161,7 +173,8 @@ Uize.module ({
 						);
 						_strings [_getAttributeValue (_fileTag,'original')] = Uize.Data.Flatten.unflatten (
 							_fileStrings,
-							Uize.Json.from
+							Uize.Json.from,
+							true
 						);
 					}
 				);

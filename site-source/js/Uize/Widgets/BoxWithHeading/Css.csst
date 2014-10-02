@@ -1,5 +1,10 @@
+<%@ required ('Uize.Widgets.CssUtil'); %>
+<%
+	var _cssUtil = Uize.Widgets.CssUtil;
+%>
 .`` {
 	margin-bottom: 10px;
+	font-family: <%= _cssUtil.font.family %>
 }
 
 .`contents` {

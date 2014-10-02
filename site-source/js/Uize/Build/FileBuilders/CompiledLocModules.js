@@ -50,7 +50,7 @@ Uize.module ({
 			builderInputs:function (_urlParts) {
 				return {source:_locFileSourceUrlFromTempUrl (this,_urlParts.pathname)};
 			},
-			builder:function (_inputs) {
+			builder:function (_inputs,_urlParts) {
 				var
 					_params = this.params,
 					_source = _inputs.source,
@@ -63,9 +63,8 @@ Uize.module ({
 				);
 				return Uize.Build.Util.moduleAsText ({
 					name:Uize.Build.Util.moduleNameFromModulePath (
-						_source
-							.slice ((_params.sourcePath + '/' + _params.modulesFolder + '/').length)
-							.replace (/\.loc$/,'')
+						_urlParts.pathname.slice ((_params.tempPath + '/' + _params.modulesFolder + '/').length),
+						true
 					),
 					builder:[
 						'function () {',

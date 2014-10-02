@@ -112,7 +112,7 @@ Uize.module ({
 									function () {
 										var _methodName = _params.method;
 										_locService [_methodName] (
-											{},
+											_params,
 											function () {
 												var _logFilePath = _params.logFilePath;
 												_logFilePath &&

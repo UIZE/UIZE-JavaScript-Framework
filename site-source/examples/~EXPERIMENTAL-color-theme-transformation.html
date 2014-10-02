@@ -3,18 +3,12 @@
 <head>
 	<title>Color Theme Transformation | JavaScript Examples | UIZE JavaScript Framework</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-	<meta name="keywords" content="color Uize.Widgets.Slider.Widget Uize.Color.xUtil"/>
+	<meta name="keywords" content="color Uize.Widgets.ColorsTransformer.Widget"/>
 	<meta name="description" content=""/>
 	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
 	<link rel="stylesheet" href="../css/page.css"/>
 	<link rel="stylesheet" href="../css/page.example.css"/>
-	<link rel="stylesheet" href="css/labeled-horizontal-sliders.css"/>
 	<style type="text/css">
-		/*** labeled horizontal slider overrides ***/
-			.sliderSlot {
-				width:500px;
-			}
-
 		/*** styling for color theme preview ***/
 			.gutter {
 				width:700px;
@@ -108,9 +102,9 @@
 	</h1>
 
 	<form>
-		<table border="0" cellspacing="2" cellpadding="0" style="margin:auto;">
+		<table border="0" cellspacing="0" cellpadding="0" style="margin:auto;">
 			<tr>
-				<td colspan="4">
+				<td>
 					<div id="page-previewGutter" class="gutter">
 						<div id="page-previewContent" class="content">
 							<div id="page-previewPod" class="pod">
@@ -148,55 +142,10 @@
 				</td>
 			</tr>
 			<tr>
-				<td colspan="4" style="height:4px;"></td>
+				<td style="height:8px;"></td>
 			</tr>
 			<tr>
-				<td class="sliderLabel">HUE RANGE</td>
-				<td class="sliderValueLabel slideMinValue">0</td>
-				<td id="page_hueRangeSlider-shell" class="sliderSlot"></td>
-				<td class="sliderValueLabel sliderMaxValue">100</td>
-			</tr>
-			<tr>
-				<td class="sliderLabel">HUE SHIFT</td>
-				<td class="sliderValueLabel slideMinValue">-180</td>
-				<td id="page_hueShiftSlider-shell" class="sliderSlot"></td>
-				<td class="sliderValueLabel sliderMaxValue">+180</td>
-			</tr>
-			<tr>
-				<td colspan="4" style="height:4px;"></td>
-			</tr>
-			<tr>
-				<td class="sliderLabel">SATURATION RANGE</td>
-				<td class="sliderValueLabel slideMinValue">0</td>
-				<td id="page_saturationRangeSlider-shell" class="sliderSlot"></td>
-				<td class="sliderValueLabel sliderMaxValue">100</td>
-			</tr>
-			<tr>
-				<td class="sliderLabel">SATURATION SHIFT</td>
-				<td class="sliderValueLabel slideMinValue">-100</td>
-				<td id="page_saturationShiftSlider-shell" class="sliderSlot"></td>
-				<td class="sliderValueLabel sliderMaxValue">+100</td>
-			</tr>
-			<tr>
-				<td colspan="4" style="height:4px;"></td>
-			</tr>
-			<tr>
-				<td class="sliderLabel">LIGHTNESS RANGE</td>
-				<td class="sliderValueLabel slideMinValue">0</td>
-				<td id="page_lightnessRangeSlider-shell" class="sliderSlot"></td>
-				<td class="sliderValueLabel sliderMaxValue">100</td>
-			</tr>
-			<tr>
-				<td class="sliderLabel">LIGHTNESS SHIFT</td>
-				<td class="sliderValueLabel slideMinValue">-100</td>
-				<td id="page_lightnessShiftSlider-shell" class="sliderSlot"></td>
-				<td class="sliderValueLabel sliderMaxValue">+100</td>
-			</tr>
-			<tr>
-				<td></td>
-				<td></td>
-				<td id="page_reset-shell" style="text-align: center;"></td>
-				<td></td>
+				<td id="page_colorsTransformer-shell" align="center"></td>
 			</tr>
 		</table>
 	</form>
@@ -210,10 +159,7 @@ Uize.require (
 	[
 		'UizeSite.Page.Example.library',
 		'UizeSite.Page.Example',
-		'Uize.Widgets.Slider.Widget',
-		'Uize.Widgets.Button.Widget',
-		'Uize.Color',
-		'Uize.Color.xUtil'
+		'Uize.Widgets.ColorsTransformer.Widget'
 	],
 	function () {
 		'use strict';
@@ -226,12 +172,7 @@ Uize.require (
 				- two swatches for each color in set - one to show original color, and the other to show transformed color
 				- each swatch to contain serialized color value (so, swatches need to be wide enough)
 				- mousing over color swatches to show color info tooltip
-			- make new slider widget with min and max buttons, both for showing range labels as well as allowing setting value directly to min or max values in range
-			- for each transformation slider, include text input field for display and entry of value
 
-			- factor out code for getting min color and getting max color (add some method to Uize.Color.xUtil)
-			- factor out code for transforming a set of colors (add some method to Uize.Color.xUtil)
-			- a means in the UI for resetting all the sliders to their neutral points
 			- a means for picking new color themes, and a suite of useful preset color themes (start with a select box)
 			- add explanation
 			- ability to select which colors are to be modified
@@ -282,184 +223,82 @@ Uize.require (
 					podHeadingText:'2C3635',
 					podDivider:'aca'
 				},
-				colorThemeObjects = {},
-				transformedColorTheme = {}
-			;
-			for (var colorKey in colorTheme)
-				colorThemeObjects [colorKey] = Uize.Color.from (colorTheme [colorKey]).setEncoding ('HSL array')
+				colorThemeColorNameToIndex = Uize.reverseLookup (Uize.keys (colorTheme))
 			;
 
-		/*** code to transform the color theme and update the preview ***/
-			var color = Uize.Color ('hsl(0,0,0)');
-
-			/*** calculate min/max range for components of colors ***/
-				var
-					component0Min = Infinity,
-					component0Max = -Infinity,
-					component1Min = Infinity,
-					component1Max = -Infinity,
-					component2Min = Infinity,
-					component2Max = -Infinity
-				;
-				for (var colorKey in colorTheme) {
-					var
-						colorTuple = colorThemeObjects [colorKey].tuple,
-						component0 = colorTuple [0],
-						component1 = colorTuple [1],
-						component2 = colorTuple [2]
-					;
-					component0Min = Math.min (component0Min,component0);
-					component0Max = Math.max (component0Max,component0);
-					component1Min = Math.min (component1Min,component1);
-					component1Max = Math.max (component1Max,component1);
-					component2Min = Math.min (component2Min,component2);
-					component2Max = Math.max (component2Max,component2);
-				}
-
-			function transformColorThemeAndUpdatePreview () {
-				/*** using min/max range and slider values, compute transformed colors ***/
-					function _blendValues (_valueA,_valueB,_blendAmount) {
-						return _valueA + (_valueB - _valueA) * _blendAmount
-					}
-					function transformComponent (value,minValue,maxValue,componentMin,componentMax,range,shift,shiftMode) {
-						if (range != 50)
-							value = range > 50
-								? _blendValues (
-									value,
-									_blendValues (componentMin,componentMax,(value - minValue) / (maxValue - minValue || 1)),
-									(range - 50) / 50
-								)
-								: _blendValues ((minValue + maxValue) / 2,value,range / 50)
-						;
-						if (shift)
-							value = shiftMode == 'wrap'
-								? (((value + shift) % componentMax) + componentMax) % componentMax
-								: Uize.constrain (value + shift,componentMin,componentMax)
-						;
-						return value;
-					}
-					for (var colorKey in colorTheme) {
-						var colorTuple = colorThemeObjects [colorKey].tuple;
-						Uize.Color.setTuple (
-							color.tuple,
-							transformComponent (
-								colorTuple [0],
-								component0Min,component0Max,0,360,+hueRangeSlider,+hueShiftSlider,'wrap'
-							),
-							transformComponent (
-								colorTuple [1],
-								component1Min,component1Max,0,100,+saturationRangeSlider,+saturationShiftSlider
-							),
-							transformComponent (
-								colorTuple [2],
-								component2Min,component2Max,0,100,+lightnessRangeSlider,+lightnessShiftSlider
-							)
-						);
-						transformedColorTheme [colorKey] = color.to ('#hex');
-					}
-
-				/*** update the preview ***/
-					page.setNodeStyle ('previewGutter',{background:transformedColorTheme.gutterBackground});
-
-					/*** content ***/
-						page.setNodeStyle (
-							'previewContent',
-							{
-								color:transformedColorTheme.contentText,
-								background:transformedColorTheme.contentBackground,
-								borderColor:transformedColorTheme.contentStroke
-							}
-						);
-						page.setNodeStyle (
-							['previewContentHeading1','previewContentHeading2'],
-							{
-								color:transformedColorTheme.contentHeadingText,
-								background:transformedColorTheme.contentHeadingBackground,
-								borderColor:transformedColorTheme.contentHeadingStroke
-							}
-						);
-						page.setNodeStyle (
-							['previewContentLink1','previewContentLink2','previewContentLink3'],
-							{color:transformedColorTheme.contentLink}
-						);
-						page.setNodeStyle ('previewContentDivider',{background:transformedColorTheme.contentDivider});
-
-					/*** pod ***/
-						page.setNodeStyle (
-							'previewPod',
-							{
-								color:transformedColorTheme.podText,
-								background:transformedColorTheme.podBackground,
-								borderColor:transformedColorTheme.podStroke
-							}
-						);
-						page.setNodeStyle (
-							['previewPodHeading1','previewPodHeading2'],
-							{
-								color:transformedColorTheme.podHeadingText,
-								background:transformedColorTheme.podHeadingBackground,
-								borderColor:transformedColorTheme.podHeadingStroke
-							}
-						);
-						page.setNodeStyle (
-							['previewPodLink1','previewPodLink2','previewPodLink3'],
-							{color:transformedColorTheme.podLink}
-						);
-						page.setNodeStyle ('previewPodDivider',{background:transformedColorTheme.podDivider});
-			}
-
-		/*** add the various slider child widgets ***/
-			function addSliderWidget (sliderName,minValue,maxValue,value) {
-				var slider = page.addChild (
-					sliderName,
-					Uize.Widgets.Slider.Widget,
-					{
-						increments:0,
-						orientation:'horizontal',
-						built:false,
-						fullColor:'#fff',
-						emptyColor:'#fff',
-						size:'small',
-						minValue:minValue,
-						maxValue:maxValue,
-						value:value
-					}
-				);
-				slider.wire ('Changed.value',transformColorThemeAndUpdatePreview);
-				return slider;
-			}
-			var
-				hueRangeSlider = addSliderWidget ('hueRangeSlider',0,100,50),
-				hueShiftSlider = addSliderWidget ('hueShiftSlider',-180,180,0),
-				saturationRangeSlider = addSliderWidget ('saturationRangeSlider',0,100,50),
-				saturationShiftSlider = addSliderWidget ('saturationShiftSlider',-100,100,0),
-				lightnessRangeSlider = addSliderWidget ('lightnessRangeSlider',0,100,50),
-				lightnessShiftSlider = addSliderWidget ('lightnessShiftSlider',-100,100,0)
-			;
-
-		/*** add the reset button ***/
-			page.addChild (
-				'reset',
-				Uize.Widgets.Button.Widget,
+		/*** add the colors transformer widget ***/
+			var colorsTransformer = page.addChild (
+				'colorsTransformer',
+				Uize.Widgets.ColorsTransformer.Widget,
 				{
-					text:'RESET',
-					built:false,
-					action:function () {
-						hueRangeSlider.set ({value:50});
-						hueShiftSlider.set ({value:0});
-						saturationRangeSlider.set ({value:50});
-						saturationShiftSlider.set ({value:0});
-						lightnessRangeSlider.set ({value:50});
-						lightnessShiftSlider.set ({value:0});
-					}
+					colors:Uize.values (colorTheme),
+					size:'small',
+					built:false
 				}
 			);
+
+		/*** code to transform the color theme and update the preview ***/
+			function updatePreview () {
+				var transformedThemeColors = colorsTransformer.get ('transformedColors');
+				function transformedThemeColor (colorName) {
+					return '#' + transformedThemeColors [colorThemeColorNameToIndex [colorName]];
+				}
+
+				page.setNodeStyle ('previewGutter',{background:transformedThemeColor ('gutterBackground')});
+
+				/*** content ***/
+					page.setNodeStyle (
+						'previewContent',
+						{
+							color:transformedThemeColor ('contentText'),
+							background:transformedThemeColor ('contentBackground'),
+							borderColor:transformedThemeColor ('contentStroke')
+						}
+					);
+					page.setNodeStyle (
+						['previewContentHeading1','previewContentHeading2'],
+						{
+							color:transformedThemeColor ('contentHeadingText'),
+							background:transformedThemeColor ('contentHeadingBackground'),
+							borderColor:transformedThemeColor ('contentHeadingStroke')
+						}
+					);
+					page.setNodeStyle (
+						['previewContentLink1','previewContentLink2','previewContentLink3'],
+						{color:transformedThemeColor ('contentLink')}
+					);
+					page.setNodeStyle ('previewContentDivider',{background:transformedThemeColor ('contentDivider')});
+
+				/*** pod ***/
+					page.setNodeStyle (
+						'previewPod',
+						{
+							color:transformedThemeColor ('podText'),
+							background:transformedThemeColor ('podBackground'),
+							borderColor:transformedThemeColor ('podStroke')
+						}
+					);
+					page.setNodeStyle (
+						['previewPodHeading1','previewPodHeading2'],
+						{
+							color:transformedThemeColor ('podHeadingText'),
+							background:transformedThemeColor ('podHeadingBackground'),
+							borderColor:transformedThemeColor ('podHeadingStroke')
+						}
+					);
+					page.setNodeStyle (
+						['previewPodLink1','previewPodLink2','previewPodLink3'],
+						{color:transformedThemeColor ('podLink')}
+					);
+					page.setNodeStyle ('previewPodDivider',{background:transformedThemeColor ('podDivider')});
+			}
+			colorsTransformer.wire ('Changed.transformedColors',updatePreview);
 
 		/*** wire up the page widget ***/
 			page.wireUi ();
 
 		/*** initialize ***/
-			transformColorThemeAndUpdatePreview ();
+			updatePreview ();
 	}
 );
 

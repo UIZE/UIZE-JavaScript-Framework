@@ -20,6 +20,7 @@
 %>
 /*** base styling ***/
 	.``, .``:link, .``:visited, .``:hover, .``:active {
+		font-family: <%= _cssUtil.font.family %>;
 		font-weight: bold;
 		display: inline-block;
 		border-width: <%= _boxBorderWidth %>px;

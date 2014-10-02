@@ -1,0 +1,15 @@
+<table border="0" cellpadding="0">
+	<tr>
+		<td><child name="hueShiftAndRange"/></td>
+	</tr>
+	<tr>
+		<td><child name="saturationShiftAndRange"/></td>
+	</tr>
+	<tr>
+		<td><child name="lightnessShiftAndRange"/></td>
+	</tr>
+	<tr>
+		<td style="text-align: center;"><child name="reset"/></td>
+	</tr>
+</table>
+

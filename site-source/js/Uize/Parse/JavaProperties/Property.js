@@ -27,8 +27,9 @@ Uize.module ({
 	name:'Uize.Parse.JavaProperties.Property',
 	required:[
 		'Uize.Str.Whitespace',
+		'Uize.Str.CharClass',
 		'Uize.Parse.JavaProperties.PropertyName',
-		'Uize.Parse.JavaProperties.PropertyValue'
+		'Uize.Parse.JavaProperties.PropertyValue',
 	],
 	builder:function () {
 		'use strict';
@@ -37,10 +38,10 @@ Uize.module ({
 			/*** Variables for Performance Optimization ***/
 				_Uize_Parse_JavaProperties_PropertyName = Uize.Parse.JavaProperties.PropertyName,
 				_Uize_Parse_JavaProperties_PropertyValue = Uize.Parse.JavaProperties.PropertyValue,
-				_indexOfNonWhitespace = Uize.Str.Whitespace.indexOfNonWhitespace,
 
 			/*** General Variables ***/
-				_separatorCharsLookup = _charsLookup ('=:')
+				_separatorCharsLookup = _charsLookup ('=:'),
+				_inlineWhitespaceCharClass = Uize.Str.CharClass (Uize.Str.Whitespace.inlineWhitespaceCharCodes)
 		;
 
 		/*** Utility Functions ***/
@@ -64,7 +65,9 @@ Uize.module ({
 
 					parse:function (_source,_index) {
 						function _eatWhitespace () {
-							_index = (_indexOfNonWhitespace (_source,_index) + 1 || _sourceLength + 1) - 1;
+							_index =
+								(_inlineWhitespaceCharClass.indexOfNonClassChar (_source,_index) + 1 || _sourceLength + 1) - 1
+							;
 						}
 						var
 							m = this,
