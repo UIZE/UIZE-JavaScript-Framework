@@ -27,6 +27,7 @@ Uize.module ({
 	name:'Uize.Loc.FileFormats.AndroidStrings',
 	required:[
 		'Uize.Parse.Xml.NodeList',
+		'Uize.Parse.Xml.Util',
 		'Uize.Str.Replace',
 		'Uize.Data.NameValueRecords',
 		'Uize.Parse.Code.StringLiteral'
@@ -34,37 +35,31 @@ Uize.module ({
 	builder:function () {
 		'use strict';
 
-		/*** Utility Functions ***/
-			function _recurseParserObjects (_node,_nodeHandler) {
-				function _processNode (_node) {
-					_nodeHandler (_node);
-					var _childNodes = _node.childNodes;
-					_childNodes && Uize.forEach (_childNodes.nodes,_processNode);
-				}
-				_processNode (_node);
-			}
+		var
+			/*** Variables for Scruncher Optimization ***/
+				_Uize_Parse_Xml_Util = Uize.Parse.Xml.Util,
+
+			/*** Variables for Performance Optimization ***/
+				_findNodeByTagName = _Uize_Parse_Xml_Util.findNodeByTagName,
+				_isTag = _Uize_Parse_Xml_Util.isTag,
+				_recurseNodes = _Uize_Parse_Xml_Util.recurseNodes
+		;
 
 		return Uize.package ({
 			from:function (_stringsFileStr) {
-				function _isTag (_node,_tagName) {
-					return _node.tagName && _node.tagName.serialize () == _tagName;
-				}
 				var
 					_xliffNodeList = new Uize.Parse.Xml.NodeList (_stringsFileStr.replace (/<\?.*?\?>/,'')),
 					_strings = {},
 					_stringLiteralParser = new Uize.Parse.Code.StringLiteral
 				;
 				Uize.forEach (
-					Uize.findRecord (
-						_xliffNodeList.nodes,
-						function (_node) {return _isTag (_node,'resources')}
-					).childNodes.nodes,
+					_findNodeByTagName (_xliffNodeList,'resources').childNodes.nodes,
 					function (_node) {
 						function _getStringName () {
 							return _node.tagAttributes.attributes [0].value.value;
 						}
 						if (_isTag (_node,'string')) {
-							_recurseParserObjects (
+							_recurseNodes (
 								_node,
 								function (_node) {
 									if ('text' in _node) {
