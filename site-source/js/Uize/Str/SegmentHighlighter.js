@@ -49,10 +49,10 @@ Uize.module ({
 					value:''
 				},
 				_stringLines:{
-					derived:function (string) {return Uize.Str.Lines.split (string)}
+					derived:'string: Uize.Str.Lines.split (string)'
 				},
 				_stringLinesDeTabbed:{
-					derived:function (string) {return []}
+					derived:'string: []'
 				}
 			},
 

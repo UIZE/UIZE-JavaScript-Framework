@@ -253,7 +253,7 @@ Uize.module ({
 					*/
 				},
 				_orientationNo:{
-					derived:function(orientation) { return orientation == 'vertical' ? 1 : 0 },
+					derived:'orientation: orientation == "vertical" ? 1 : 0',
 					onChange:_updateUi
 				},
 				// this function can show the value in differe scale: eg, log(x+1), 1-1/x, x^2, etc.

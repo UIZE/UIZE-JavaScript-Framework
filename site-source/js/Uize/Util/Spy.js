@@ -93,11 +93,14 @@ Uize.module ({
 				},
 				_recentCall:{
 					name:'recentCall',
-					derived:function(calls) {
-						return calls.length
-							? calls[calls.length-1]
-							: undefined
-						;
+					derived:{
+						determinants:['calls'],
+						determiner:function(_calls) {
+							return _calls.length
+								? _calls[_calls.length-1]
+								: undefined
+							;
+						}
 					}
 				}
 			},
