@@ -107,6 +107,30 @@ Uize.module ({
 				'			<translation>QUX</translation>\n' +
 				'		</message>\n' +
 				'	</context>\n' +
+				'</TS>\n',
+
+			_stringsNumerusForms = {
+				'First Context':{
+					'{count} foo(s)':[
+						'{count} foo',
+						'{count} foos'
+					]
+				}
+			},
+			_tsFileNumerusForms =
+				'<?xml version="1.0" encoding="utf-8"?>\n' +
+				'<!DOCTYPE TS>\n' +
+				'<TS version="2.1" language="en">\n' +
+				'	<context>\n' +
+				'		<name>First Context</name>\n' +
+				'		<message numerus="yes">\n' +
+				'			<source>{count} foo(s)</source>\n' +
+				'			<translation>\n' +
+				'				<numerusform>{count} foo</numerusform>\n' +
+				'				<numerusform>{count} foos</numerusform>\n' +
+				'			</translation>\n' +
+				'		</message>\n' +
+				'	</context>\n' +
 				'</TS>\n'
 		;
 
@@ -131,6 +155,10 @@ Uize.module ({
 						['A TS file may contain multiple contexts containing multiple messages each',
 							_tsFileMultipleContextsWithMultipleStrings,
 							Uize.clone (_stringsMultipleContextsWithMultipleStrings)
+						],
+						['A TS file may contain numerus form message nodes',
+							_tsFileNumerusForms,
+							Uize.clone (_stringsNumerusForms)
 						]
 					]]
 					,
@@ -150,6 +178,10 @@ Uize.module ({
 						['A strings object containing a multiple contexts with multiple strings per context is serialized correctly',
 							Uize.clone (_stringsMultipleContextsWithMultipleStrings),
 							_tsFileMultipleContextsWithMultipleStrings
+						],
+						['A strings object containing strings with numerus forms is serialized correctly',
+							Uize.clone (_stringsNumerusForms),
+							_tsFileNumerusForms
 						],
 						['When the value for a string is empty, then the attribute type="unfinished" is added to the translation tag',
 							{
