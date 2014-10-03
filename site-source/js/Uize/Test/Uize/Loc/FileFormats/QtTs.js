@@ -29,109 +29,114 @@ Uize.module ({
 		'use strict';
 
 		var
-			_stringsNoContents = {},
-			_tsFileNoContents =
-				'<?xml version="1.0" encoding="utf-8"?>\n' +
-				'<!DOCTYPE TS>\n' +
-				'<TS version="2.1" language="en">\n' +
-				'</TS>\n',
+			/*** no contents ***/
+				_stringsNoContents = {},
+				_fileNoContents =
+					'<?xml version="1.0" encoding="utf-8"?>\n' +
+					'<!DOCTYPE TS>\n' +
+					'<TS version="2.1" language="en">\n' +
+					'</TS>\n',
 
-			_stringsEmptyContext = {
-				'First Context':{}
-			},
-			_tsFileEmptyContext =
-				'<?xml version="1.0" encoding="utf-8"?>\n' +
-				'<!DOCTYPE TS>\n' +
-				'<TS version="2.1" language="en">\n' +
-				'	<context>\n' +
-				'		<name>First Context</name>\n' +
-				'	</context>\n' +
-				'</TS>\n',
-
-			_stringsContextWithStrings = {
-				'First Context':{
-					foo:'FOO',
-					bar:'BAR'
-				}
-			},
-			_tsFileOneContextWithStrings =
-				'<?xml version="1.0" encoding="utf-8"?>\n' +
-				'<!DOCTYPE TS>\n' +
-				'<TS version="2.1" language="en">\n' +
-				'	<context>\n' +
-				'		<name>First Context</name>\n' +
-				'		<message>\n' +
-				'			<source>foo</source>\n' +
-				'			<translation>FOO</translation>\n' +
-				'		</message>\n' +
-				'		<message>\n' +
-				'			<source>bar</source>\n' +
-				'			<translation>BAR</translation>\n' +
-				'		</message>\n' +
-				'	</context>\n' +
-				'</TS>\n',
-
-			_stringsMultipleContextsWithMultipleStrings = {
-				'First Context':{
-					foo:'FOO',
-					bar:'BAR'
+			/*** empty context ***/
+				_stringsEmptyContext = {
+					'First Context':{}
 				},
-				'Second Context':{
-					baz:'BAZ',
-					qux:'QUX'
-				}
-			},
-			_tsFileMultipleContextsWithMultipleStrings =
-				'<?xml version="1.0" encoding="utf-8"?>\n' +
-				'<!DOCTYPE TS>\n' +
-				'<TS version="2.1" language="en">\n' +
-				'	<context>\n' +
-				'		<name>First Context</name>\n' +
-				'		<message>\n' +
-				'			<source>foo</source>\n' +
-				'			<translation>FOO</translation>\n' +
-				'		</message>\n' +
-				'		<message>\n' +
-				'			<source>bar</source>\n' +
-				'			<translation>BAR</translation>\n' +
-				'		</message>\n' +
-				'	</context>\n' +
-				'	<context>\n' +
-				'		<name>Second Context</name>\n' +
-				'		<message>\n' +
-				'			<source>baz</source>\n' +
-				'			<translation>BAZ</translation>\n' +
-				'		</message>\n' +
-				'		<message>\n' +
-				'			<source>qux</source>\n' +
-				'			<translation>QUX</translation>\n' +
-				'		</message>\n' +
-				'	</context>\n' +
-				'</TS>\n',
+				_fileEmptyContext =
+					'<?xml version="1.0" encoding="utf-8"?>\n' +
+					'<!DOCTYPE TS>\n' +
+					'<TS version="2.1" language="en">\n' +
+					'	<context>\n' +
+					'		<name>First Context</name>\n' +
+					'	</context>\n' +
+					'</TS>\n',
 
-			_stringsNumerusForms = {
-				'First Context':{
-					'{count} foo(s)':[
-						'{count} foo',
-						'{count} foos'
-					]
-				}
-			},
-			_tsFileNumerusForms =
-				'<?xml version="1.0" encoding="utf-8"?>\n' +
-				'<!DOCTYPE TS>\n' +
-				'<TS version="2.1" language="en">\n' +
-				'	<context>\n' +
-				'		<name>First Context</name>\n' +
-				'		<message numerus="yes">\n' +
-				'			<source>{count} foo(s)</source>\n' +
-				'			<translation>\n' +
-				'				<numerusform>{count} foo</numerusform>\n' +
-				'				<numerusform>{count} foos</numerusform>\n' +
-				'			</translation>\n' +
-				'		</message>\n' +
-				'	</context>\n' +
-				'</TS>\n'
+			/*** context with strings ***/
+				_stringsContextWithStrings = {
+					'First Context':{
+						foo:'FOO',
+						bar:'BAR'
+					}
+				},
+				_fileOneContextWithStrings =
+					'<?xml version="1.0" encoding="utf-8"?>\n' +
+					'<!DOCTYPE TS>\n' +
+					'<TS version="2.1" language="en">\n' +
+					'	<context>\n' +
+					'		<name>First Context</name>\n' +
+					'		<message>\n' +
+					'			<source>foo</source>\n' +
+					'			<translation>FOO</translation>\n' +
+					'		</message>\n' +
+					'		<message>\n' +
+					'			<source>bar</source>\n' +
+					'			<translation>BAR</translation>\n' +
+					'		</message>\n' +
+					'	</context>\n' +
+					'</TS>\n',
+
+			/*** multiple contexts with multiple strings ***/
+				_stringsMultipleContextsWithMultipleStrings = {
+					'First Context':{
+						foo:'FOO',
+						bar:'BAR'
+					},
+					'Second Context':{
+						baz:'BAZ',
+						qux:'QUX'
+					}
+				},
+				_fileMultipleContextsWithMultipleStrings =
+					'<?xml version="1.0" encoding="utf-8"?>\n' +
+					'<!DOCTYPE TS>\n' +
+					'<TS version="2.1" language="en">\n' +
+					'	<context>\n' +
+					'		<name>First Context</name>\n' +
+					'		<message>\n' +
+					'			<source>foo</source>\n' +
+					'			<translation>FOO</translation>\n' +
+					'		</message>\n' +
+					'		<message>\n' +
+					'			<source>bar</source>\n' +
+					'			<translation>BAR</translation>\n' +
+					'		</message>\n' +
+					'	</context>\n' +
+					'	<context>\n' +
+					'		<name>Second Context</name>\n' +
+					'		<message>\n' +
+					'			<source>baz</source>\n' +
+					'			<translation>BAZ</translation>\n' +
+					'		</message>\n' +
+					'		<message>\n' +
+					'			<source>qux</source>\n' +
+					'			<translation>QUX</translation>\n' +
+					'		</message>\n' +
+					'	</context>\n' +
+					'</TS>\n',
+
+			/*** numerus forms ***/
+				_stringsNumerusForms = {
+					'First Context':{
+						'{count} foo(s)':[
+							'{count} foo',
+							'{count} foos'
+						]
+					}
+				},
+				_fileNumerusForms =
+					'<?xml version="1.0" encoding="utf-8"?>\n' +
+					'<!DOCTYPE TS>\n' +
+					'<TS version="2.1" language="en">\n' +
+					'	<context>\n' +
+					'		<name>First Context</name>\n' +
+					'		<message numerus="yes">\n' +
+					'			<source>{count} foo(s)</source>\n' +
+					'			<translation>\n' +
+					'				<numerusform>{count} foo</numerusform>\n' +
+					'				<numerusform>{count} foos</numerusform>\n' +
+					'			</translation>\n' +
+					'		</message>\n' +
+					'	</context>\n' +
+					'</TS>\n'
 		;
 
 		return Uize.Test.resolve ({
@@ -141,23 +146,23 @@ Uize.module ({
 				Uize.Test.staticMethodsTest ([
 					['Uize.Loc.FileFormats.QtTs.from',[
 						['Parsing an empty resource TS file produces an empty strings object',
-							_tsFileNoContents,
+							_fileNoContents,
 							Uize.clone (_stringsNoContents)
 						],
 						['A TS file may contain a context with no messages',
-							_tsFileEmptyContext,
+							_fileEmptyContext,
 							Uize.clone (_stringsEmptyContext)
 						],
 						['A TS file may contain a context with multiple messages',
-							_tsFileOneContextWithStrings,
+							_fileOneContextWithStrings,
 							Uize.clone (_stringsContextWithStrings)
 						],
 						['A TS file may contain multiple contexts containing multiple messages each',
-							_tsFileMultipleContextsWithMultipleStrings,
+							_fileMultipleContextsWithMultipleStrings,
 							Uize.clone (_stringsMultipleContextsWithMultipleStrings)
 						],
 						['A TS file may contain numerus form message nodes',
-							_tsFileNumerusForms,
+							_fileNumerusForms,
 							Uize.clone (_stringsNumerusForms)
 						]
 					]]
@@ -165,23 +170,23 @@ Uize.module ({
 					['Uize.Loc.FileFormats.QtTs.to',[
 						['Serializing an empty strings object produces a valid resource TS file containing no message nodes',
 							Uize.clone (_stringsNoContents),
-							_tsFileNoContents
+							_fileNoContents
 						],
 						['A strings object containing a context with no strings is serialized to a TS file containing an empty context tag',
 							Uize.clone (_stringsEmptyContext),
-							_tsFileEmptyContext
+							_fileEmptyContext
 						],
 						['A strings object containing a context with multiple strings is serialized correctly',
 							Uize.clone (_stringsContextWithStrings),
-							_tsFileOneContextWithStrings
+							_fileOneContextWithStrings
 						],
 						['A strings object containing a multiple contexts with multiple strings per context is serialized correctly',
 							Uize.clone (_stringsMultipleContextsWithMultipleStrings),
-							_tsFileMultipleContextsWithMultipleStrings
+							_fileMultipleContextsWithMultipleStrings
 						],
 						['A strings object containing strings with numerus forms is serialized correctly',
 							Uize.clone (_stringsNumerusForms),
-							_tsFileNumerusForms
+							_fileNumerusForms
 						],
 						['When the value for a string is empty, then the attribute type="unfinished" is added to the translation tag',
 							{
