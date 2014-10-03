@@ -27,29 +27,26 @@ Uize.module ({
 	name:'Uize.Loc.FileFormats.QtTs',
 	required:[
 		'Uize.Parse.Xml.NodeList',
+		'Uize.Parse.Xml.Util',
 		'Uize.Util.Html.Encode'
 	],
 	builder:function () {
 		'use strict';
 
+		var
+			/*** Variables for Scruncher Optimization ***/
+				_Uize_Parse_Xml_Util = Uize.Parse.Xml.Util,
+
+			/*** Variables for Performance Optimization ***/
+				_findNodeByTagName = _Uize_Parse_Xml_Util.findNodeByTagName,
+				_getTags = _Uize_Parse_Xml_Util.getTags,
+				_isTag = _Uize_Parse_Xml_Util.isTag,
+				_getText = _Uize_Parse_Xml_Util.getText,
+				_getAttributeValue = _Uize_Parse_Xml_Util.getAttributeValue
+		;
+
 		return Uize.package ({
 			from:function (_stringsFileStr) {
-				function _findNodeByTagName (_nodeList,_tagName) {
-					return Uize.findRecord (_nodeList.nodes,function (_node) {return _isTag (_node,_tagName)});
-				}
-
-				function _isTag (_node,_tagName) {
-					return _node.tagName && _node.tagName.serialize () == _tagName;
-				}
-
-				function _getText (_node) {
-					var
-						_childNodes = _node && _node.childNodes,
-						_textNode = _childNodes && _childNodes.nodes [0]
-					;
-					return _textNode ? _textNode.text : '';
-				}
-
 				var
 					_nodeList = new Uize.Parse.Xml.NodeList (_stringsFileStr.replace (/<\?.*?\?>|<!DOCTYPE\s+TS>/g,'')),
 					_strings = {},
@@ -66,9 +63,20 @@ Uize.module ({
 									if (_isTag (_node,'message')) {
 										var _childNodes = _node.childNodes;
 										if (_childNodes) {
-											_contextStrings [_getText (_findNodeByTagName (_childNodes,'source'))] =
-												_getText (_findNodeByTagName (_childNodes,'translation'))
+											var
+												_stringValue,
+												_translationTag = _findNodeByTagName (_childNodes,'translation')
 											;
+											if (_getAttributeValue (_node,'numerus') == 'yes') {
+												_stringValue = [];
+												Uize.forEach (
+													_getTags (_translationTag.childNodes,'numerusform'),
+													function (_node) {_stringValue.push (_getText (_node))}
+												);
+											} else {
+												_stringValue = _getText (_translationTag);
+											}
+											_contextStrings [_getText (_findNodeByTagName (_childNodes,'source'))] = _stringValue;
 										}
 									} else if (_isTag (_node,'name')) {
 										_strings [_getText (_node)] = _contextStrings;
@@ -113,10 +121,33 @@ Uize.module ({
 						Uize.forEach (
 							_contextStrings,
 							function (_stringValue,_stringId) {
+								var _isNumerus = Uize.isArray (_stringValue);
 								_lines.push (
-									'		<message>',
-									'			<source>' + _encodeString (_stringId) + '</source>',
-									'			<translation' + (_stringValue ? '' : ' type="unfinished"') + '>' + _encodeString (_stringValue) + '</translation>',
+									'		<message' + (_isNumerus ? ' numerus="yes"': '') + '>',
+									'			<source>' + _encodeString (_stringId) + '</source>'
+								);
+								if (_isNumerus) {
+									var
+										_unfinished = true,
+										_numerusFormLines = Uize.map (
+											_stringValue,
+											function (_numerusFormValue) {
+												_unfinished = _unfinished && !_numerusFormValue;
+												return (
+													'				<numerusform>' + _encodeString (_numerusFormValue) + '</numerusform>'
+												);
+											}
+										)
+									;
+									_lines.push ('			<translation' + (_unfinished ? ' type="unfinished"' : '') + '>');
+									Uize.push (_lines,_numerusFormLines);
+									_lines.push ('			</translation>');
+								} else {
+									_lines.push (
+										'			<translation' + (_stringValue ? '' : ' type="unfinished"') + '>' + _encodeString (_stringValue) + '</translation>'
+									);
+								}
+								_lines.push (
 									'		</message>'
 								);
 							}
