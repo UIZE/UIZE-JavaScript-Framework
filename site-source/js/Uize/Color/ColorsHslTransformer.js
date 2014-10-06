@@ -75,8 +75,8 @@ Uize.module ({
 					},
 					colorsAsTupless:{
 						derived:{
-							determinants:['colors'],
-							determiner:function (_colors) {
+							properties:'colors',
+							derivation:function (_colors) {
 								return Uize.map (
 									_colors,
 									function (_color) {return _Uize_Color.from (_color).setEncoding ('HSL array').tuple}
@@ -86,8 +86,8 @@ Uize.module ({
 					},
 					colorsMaxMin:{
 						derived:{
-							determinants:['colorsAsTupless'],
-							determiner:function (_colorsAsTupless) {
+							properties:'colorsAsTupless',
+							derivation:function (_colorsAsTupless) {
 								var
 									_tuplesComponent0 = _getColumn (_colorsAsTupless,0),
 									_tuplesComponent1 = _getColumn (_colorsAsTupless,1),
@@ -106,10 +106,10 @@ Uize.module ({
 					},
 					transformedColors:{
 						derived:{
-							determinants:[
+							properties:[
 								'colorsAsTupless', 'colorsMaxMin', 'hueRange', 'hueShift', 'saturationRange', 'saturationShift', 'lightnessRange', 'lightnessShift'
 							],
-							determiner:function (
+							derivation:function (
 								_colorsAsTupless, _colorsMaxMin, _hueRange, _hueShift, _saturationRange, _saturationShift, _lightnessRange, _lightnessShift
 							) {
 								function _blendValues (_valueA,_valueB,_blendAmount) {

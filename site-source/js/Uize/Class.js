@@ -866,7 +866,7 @@ Uize.module ({
 				var
 					_derivationIsPlainObject = Uize.isPlainObject (_derivation),
 					_derivationCacheKey = _derivationIsPlainObject
-						? _derivation.determinants + ' : ' + _derivation.determiner
+						? _derivation.properties + ' : ' + _derivation.derivation
 						: _derivation + '',
 					_resolvedDerivation = _derivationCache [_derivationCacheKey]
 				;
@@ -884,13 +884,16 @@ Uize.module ({
 						_determiner
 					;
 					if (_derivationIsPlainObject) {
-						_determinants = _derivation.determinants;
-						_determiner = _derivation.determiner;
+						_determinants = _derivation.properties;
+						if (typeof _determinants == _typeString)
+							_determinants = _getDeterminantsFromListStr (_determinants)
+						;
+						_determiner = _derivation.derivation;
 					} else if (_isFunction (_derivation)) {
 						_determinants = _getDeterminantsFromListStr ((_derivation + '').match (/\(([^\)]*)\)/) [1]);
 						_determiner = _derivation;
 					} else {
-						if (typeof _derivation == 'string') {
+						if (typeof _derivation == _typeString) {
 							var _separatorPos = _derivation.indexOf (':');
 							if (_separatorPos > -1) {
 								_determiner = _Function (
