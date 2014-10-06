@@ -12,7 +12,7 @@
 /* Module Meta Data
 	type: Object
 	importance: 1
-	codeCompleteness: 1
+	codeCompleteness: 100
 	docCompleteness: 2
 */
 
@@ -64,7 +64,7 @@ Uize.module ({
 					isValid:false,
 
 					parse:function (_source,_index) {
-						function _eatWhitespace () {
+						function _eatInlineWhitespace () {
 							_index =
 								(_inlineWhitespaceCharClass.indexOfNonClassChar (_source,_index) + 1 || _sourceLength + 1) - 1
 							;
@@ -77,10 +77,10 @@ Uize.module ({
 						m.name.parse (_source,_index);
 						if (m.name.isValid) {
 							_index += m.name.length;
-							_eatWhitespace ();
+							_eatInlineWhitespace ();
 							if (_separatorCharsLookup [_source.charAt (_index)]) {
 								_index++;
-								_eatWhitespace ();
+								_eatInlineWhitespace ();
 							}
 							m.value.parse (_source,_index);
 							_index += m.value.length;
