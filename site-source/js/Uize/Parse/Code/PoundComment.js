@@ -25,6 +25,7 @@
 
 Uize.module ({
 	name:'Uize.Parse.Code.PoundComment',
+	required:'Uize.Str.Whitespace',
 	builder:function () {
 		'use strict';
 
