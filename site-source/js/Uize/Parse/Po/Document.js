@@ -39,7 +39,7 @@ Uize.module ({
 				_Uize_Parse_Code = _Uize_Parse.Code,
 
 			/*** General Variables ***/
-				_parserClassesByType = {
+				_itemTypes = {
 					comment:_Uize_Parse_Code.PoundComment,
 					nameValue:_Uize_Parse.Po.NameValue,
 					whitespace:_Uize_Parse_Code.Whitespace
@@ -62,19 +62,6 @@ Uize.module ({
 					isValid:true,
 
 					parse:function (_source,_index) {
-						function _tryParseItem (_itemType) {
-							var _item =
-								m._currentItems [_itemType] ||
-								(m._currentItems [_itemType] = new _parserClassesByType [_itemType])
-							;
-							_item.parse (_source,_index);
-							if (_item.isValid) {
-								_items.push (_item);
-								m._currentItems [_itemType] = null;
-								_index += _item.length;
-							}
-							return _item.isValid;
-						}
 						var
 							m = this,
 							_sourceLength = (m.source = _source = _source || '').length,
@@ -82,15 +69,21 @@ Uize.module ({
 						;
 						_items.length = 0;
 						m.index = _index || (_index = 0);
-						while (
-							_index < _sourceLength &&
-							(
-								_tryParseItem ('comment') ||
-								_tryParseItem ('nameValue') ||
-								_tryParseItem ('whitespace') ||
-								true
-							)
-						);
+						while (_index < _sourceLength) {
+							for (var _itemType in _itemTypes) {
+								var _item =
+									m._currentItems [_itemType] ||
+									(m._currentItems [_itemType] = new _itemTypes [_itemType])
+								;
+								_item.parse (_source,_index);
+								if (_item.isValid) {
+									_items.push (_item);
+									m._currentItems [_itemType] = null;
+									_index += _item.length;
+								}
+								if (_item.isValid) break;
+							}
+						}
 						m.length = _index - m.index;
 					},
 
