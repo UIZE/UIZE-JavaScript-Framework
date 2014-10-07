@@ -71,20 +71,21 @@ Uize.module ({
 						m.isValid = true;
 						var
 							_parts = [],
-							_char
+							_char,
+							_indexBeforeEatingWhitespace = _index
 						;
 						while (_index < _sourceLength) {
 							_stringLiteralParser.parse (_source,_index);
 							if (_stringLiteralParser.isValid) {
 								_parts.push (_stringLiteralParser.value);
-								_index += _stringLiteralParser.length;
+								_indexBeforeEatingWhitespace = (_index += _stringLiteralParser.length);
 								_eatWhitespace ();
 							} else {
 								break;
 							}
 						}
 						m.value = _parts.join ('');
-						m.isValid = !!(m.length = _index - m.index);
+						m.isValid = !!(m.length = _indexBeforeEatingWhitespace - m.index);
 					},
 
 					serialize:function () {

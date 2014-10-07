@@ -62,6 +62,15 @@ Uize.module ({
 									value:'',
 									isValid:false
 								}
+							),
+							Uize.Test.ParserTest.parserTest (
+								'A value does not consume the trailing whitespace after the last part',
+								['"foo"\n" bar"\n" baz"\n\n\n    \t\t\t  \r'],
+								{
+									value:'foo bar baz',
+									isValid:true,
+									length:19
+								}
 							)
 						]
 					},
