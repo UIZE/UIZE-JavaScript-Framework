@@ -22,7 +22,7 @@
 	letter-spacing: 2px;
 }
 
-.`clearButton` {
+.`topRightButton` {
 	position: absolute;
 	right: 2px;
 	top: 2px;
