@@ -54,6 +54,14 @@ Uize.module ({
 									value:'foo bar baz qux',
 									isValid:true
 								}
+							),
+							Uize.Test.ParserTest.parserTest (
+								'A value must start with a quote character',
+								['\n"foo"'],
+								{
+									value:'',
+									isValid:false
+								}
 							)
 						]
 					},

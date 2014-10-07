@@ -84,7 +84,7 @@ Uize.module ({
 							}
 						}
 						m.value = _parts.join ('');
-						m.length = _index - m.index;
+						m.isValid = !!(m.length = _index - m.index);
 					},
 
 					serialize:function () {
