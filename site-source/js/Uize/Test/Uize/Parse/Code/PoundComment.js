@@ -1,7 +1,7 @@
 /*______________
 |       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
 |     /      /  |   ---------------------------------------------------
-|    /    O /   |    MODULE : Uize.Test.Uize.Parse.JavaProperties.Comment Class
+|    /    O /   |    MODULE : Uize.Test.Uize.Parse.Code.PoundComment Class
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
 | /____/ /__/_| | COPYRIGHT : (c)2014 UIZE
@@ -18,24 +18,24 @@
 
 /*?
 	Introduction
-		The =Uize.Test.Uize.Parse.JavaProperties.Comment= module defines a suite of unit tests for the =Uize.Parse.JavaProperties.Comment= module.
+		The =Uize.Test.Uize.Parse.Code.PoundComment= module defines a suite of unit tests for the =Uize.Parse.Code.PoundComment= module.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 */
 
 Uize.module ({
-	name:'Uize.Test.Uize.Parse.JavaProperties.Comment',
+	name:'Uize.Test.Uize.Parse.Code.PoundComment',
 	superclass:'Uize.Test.ParserTest',
 	builder:function (_superclass) {
 		'use strict';
 
 		return _superclass.subclass ({
-			staticProperties:{parserClass:'Uize.Parse.JavaProperties.Comment'},
+			staticProperties:{parserClass:'Uize.Parse.Code.PoundComment'},
 
 			set:{
-				title:'Test for Uize.Parse.JavaProperties.Comment Module',
+				title:'Test for Uize.Parse.Code.PoundComment Module',
 				test:[
-					Uize.Test.requiredModulesTest ('Uize.Parse.JavaProperties.Comment'),
+					Uize.Test.requiredModulesTest ('Uize.Parse.Code.PoundComment'),
 					{
 						title:'A comment can be parsed',
 						test:[

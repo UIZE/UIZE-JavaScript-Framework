@@ -28,15 +28,21 @@ Uize.module ({
 	required:[
 		'Uize.Str.Whitespace',
 		'Uize.Parse.JavaProperties.Property',
-		'Uize.Parse.JavaProperties.Comment'
+		'Uize.Parse.Code.PoundComment'
 	],
 	builder:function () {
 		'use strict';
 
 		var
 			/*** Variables for Performance Optimization ***/
-				_Uize_Parse_JavaProperties = Uize.Parse.JavaProperties,
-				_indexOfNonWhitespace = Uize.Str.Whitespace.indexOfNonWhitespace
+				_Uize_Parse = Uize.Parse,
+				_indexOfNonWhitespace = Uize.Str.Whitespace.indexOfNonWhitespace,
+
+			/*** General Variables ***/
+				_parserClassesByType = {
+					comment:_Uize_Parse.Code.PoundComment,
+					property:_Uize_Parse.JavaProperties.Property
+				}
 		;
 
 		return Uize.mergeInto (
@@ -58,7 +64,7 @@ Uize.module ({
 						function _tryParseItem (_itemType) {
 							var _item =
 								m._currentItems [_itemType] ||
-								(m._currentItems [_itemType] = new _Uize_Parse_JavaProperties [_itemType])
+								(m._currentItems [_itemType] = new _parserClassesByType [_itemType])
 							;
 							_item.parse (_source,_index);
 							if (_item.isValid) {
@@ -81,8 +87,8 @@ Uize.module ({
 						while (
 							_index < _sourceLength &&
 							(
-								_tryParseItem ('Comment') ||
-								_tryParseItem ('Property') ||
+								_tryParseItem ('comment') ||
+								_tryParseItem ('property') ||
 								_eatWhitespace () ||
 								true
 							)
