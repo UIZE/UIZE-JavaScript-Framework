@@ -94,8 +94,8 @@ Uize.module ({
 				_recentCall:{
 					name:'recentCall',
 					derived:{
-						determinants:['calls'],
-						determiner:function(_calls) {
+						properties:['calls'],
+						derivation:function(_calls) {
 							return _calls.length
 								? _calls[_calls.length-1]
 								: undefined
