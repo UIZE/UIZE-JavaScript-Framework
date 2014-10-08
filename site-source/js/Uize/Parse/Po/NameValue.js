@@ -1,7 +1,7 @@
 /*______________
 |       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
 |     /      /  |   ---------------------------------------------------
-|    /    O /   |    MODULE : Uize.Parse.JavaProperties.Property Object
+|    /    O /   |    MODULE : Uize.Parse.Po.NameValue Object
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
 | /____/ /__/_| | COPYRIGHT : (c)2014 UIZE
@@ -18,42 +18,36 @@
 
 /*?
 	Introduction
-		The =Uize.Parse.JavaProperties.Property= module provides methods for parsing and serializing properties in [[http://en.wikipedia.org/wiki/.properties][Java properties]] files.
+		The =Uize.Parse.Po.NameValue= module provides methods for parsing and serializing name-value pairs in GNU gettext [[https://www.gnu.org/software/gettext/manual/html_node/PO-Files.html][PO files]].
 
 		*DEVELOPERS:* `Chris van Rensburg`
 */
 
 Uize.module ({
-	name:'Uize.Parse.JavaProperties.Property',
+	name:'Uize.Parse.Po.NameValue',
 	required:[
 		'Uize.Str.Whitespace',
 		'Uize.Str.CharClass',
-		'Uize.Parse.JavaProperties.PropertyName',
-		'Uize.Parse.JavaProperties.PropertyValue'
+		'Uize.Parse.Po.Name',
+		'Uize.Parse.Po.Value',
 	],
 	builder:function () {
 		'use strict';
 
 		var
 			/*** Variables for Performance Optimization ***/
-				_Uize_Parse_JavaProperties_PropertyName = Uize.Parse.JavaProperties.PropertyName,
-				_Uize_Parse_JavaProperties_PropertyValue = Uize.Parse.JavaProperties.PropertyValue,
+				_Uize_Parse_Po_Name = Uize.Parse.Po.Name,
+				_Uize_Parse_Po_Value = Uize.Parse.Po.Value,
 
 			/*** General Variables ***/
-				_separatorCharsLookup = _charsLookup ('=:'),
 				_inlineWhitespaceCharClass = Uize.Str.CharClass (Uize.Str.Whitespace.inlineWhitespaceCharCodes)
 		;
-
-		/*** Utility Functions ***/
-			function _charsLookup (_charsStr) {
-				return Uize.lookup (_charsStr.split (''));
-			}
 
 		return Uize.mergeInto (
 			function (_source,_index) {
 				var m = this;
-				m.name = new _Uize_Parse_JavaProperties_PropertyName;
-				m.value = new _Uize_Parse_JavaProperties_PropertyValue;
+				m.name = new _Uize_Parse_Po_Name;
+				m.value = new _Uize_Parse_Po_Value;
 				this.parse (_source,_index);
 			},
 			{
@@ -78,18 +72,14 @@ Uize.module ({
 						if (m.name.isValid) {
 							_index += m.name.length;
 							_eatInlineWhitespace ();
-							if (_separatorCharsLookup [_source.charAt (_index)]) {
-								_index++;
-								_eatInlineWhitespace ();
-							}
 							m.value.parse (_source,_index);
-							_index += m.value.length;
+							_index = m.value.isValid ? _index + m.value.length : m.index;
 						}
 						m.isValid = !!(m.length = _index - m.index);
 					},
 
 					serialize:function () {
-						return this.isValid ? this.name.serialize () + '=' + this.value.serialize () : '';
+						return this.isValid ? this.name.serialize () + ' ' + this.value.serialize () : '';
 					}
 				}
 			}

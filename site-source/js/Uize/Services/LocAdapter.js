@@ -245,7 +245,6 @@ Uize.module ({
 
 			function _calculateMetricsForLanguage (m,_language,_languageResources,_subFolder) {
 				var
-					_project = m.project,
 					_totalResourceFiles = 0,
 					_totalBrandSpecificResourceFiles = 0,
 					_totalResourceFilesPerBrand = {},

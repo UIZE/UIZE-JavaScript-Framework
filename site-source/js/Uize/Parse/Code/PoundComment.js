@@ -1,7 +1,7 @@
 /*______________
 |       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
 |     /      /  |   ---------------------------------------------------
-|    /    O /   |    MODULE : Uize.Parse.JavaProperties.Comment Object
+|    /    O /   |    MODULE : Uize.Parse.Code.PoundComment Object
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
 | /____/ /__/_| | COPYRIGHT : (c)2014 UIZE
@@ -18,13 +18,14 @@
 
 /*?
 	Introduction
-		The =Uize.Parse.JavaProperties.Comment= module provides methods for parsing and serializing property names in [[http://en.wikipedia.org/wiki/.properties][Java properties]] files.
+		The =Uize.Parse.Code.PoundComment= module provides methods for parsing and serializing single line comments that start with a pound character.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 */
 
 Uize.module ({
-	name:'Uize.Parse.JavaProperties.Comment',
+	name:'Uize.Parse.Code.PoundComment',
+	required:'Uize.Str.Whitespace',
 	builder:function () {
 		'use strict';
 

@@ -30,14 +30,20 @@ Uize.module ({
 		'Uize.Data.Flatten',
 		'Uize.Json',
 		'Uize.Parse.Xml.NodeList',
-		'Uize.Data.Matches',
+		'Uize.Parse.Xml.Util',
 		'Uize.Str.Split'
 	],
 	builder:function () {
 		'use strict';
 
 		var
+			/*** Variables for Scruncher Optimization ***/
+				_Uize_Parse_Xml_Util = Uize.Parse.Xml.Util,
+
 			/*** Variable for Performance Optimization ***/
+				_getTags = _Uize_Parse_Xml_Util.getTags,
+				_isTag = _Uize_Parse_Xml_Util.isTag,
+				_getAttributeValue = _Uize_Parse_Xml_Util.getAttributeValue,
 				_htmlEncode = Uize.Util.Html.Encode.encode,
 				_split = Uize.Str.Split.split
 		;
@@ -124,25 +130,6 @@ Uize.module ({
 			},
 
 			from:function (_toDecode) {
-				function _isTag (_node,_tagName) {
-					return _node.tagName && _node.tagName.serialize () == _tagName;
-				}
-
-				function _getTags (_nodeList,_tagName) {
-					return Uize.Data.Matches.values (
-						_nodeList.nodes,
-						function (_node) {return _isTag (_node,_tagName)}
-					);
-				}
-
-				function _getAttributeValue (_node,_attributeName) {
-					var _attribute = Uize.findRecord (
-						_node.tagAttributes.attributes,
-						function (_attribute) {return _attribute.name.name == _attributeName}
-					);
-					return _attribute ? _attribute.value.value : '';
-				}
-
 				var _strings = {};
 				Uize.forEach (
 					_getTags (
