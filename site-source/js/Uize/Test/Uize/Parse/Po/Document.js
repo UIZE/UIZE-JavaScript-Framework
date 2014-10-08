@@ -54,7 +54,7 @@ Uize.module ({
 				test:[
 					Uize.Test.requiredModulesTest ('Uize.Parse.Po.Document'),
 					{
-						title:'A Java properties document can be parsed',
+						title:'A PO file can be parsed',
 						test:[
 							Uize.Test.ParserTest.parserTest (
 								'A document may be empty',
@@ -230,7 +230,7 @@ Uize.module ({
 						]
 					},
 					{
-						title:'A Java properties document can be serialized',
+						title:'A PO file properties document can be serialized',
 						test:function () {
 							return this.expect (
 								_poDocument,
