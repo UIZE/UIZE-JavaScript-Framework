@@ -924,7 +924,8 @@ Uize.module ({
 															_languageString
 														: _undefined
 												);
-											}
+											},
+											{skeleton:true}
 										)
 									)
 								;
