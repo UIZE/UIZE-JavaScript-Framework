@@ -51,23 +51,24 @@ Uize.module ({
 							_sourceLength = (m.source = _source = _source || '').length,
 							_items = m.items,
 							_workingItems = m.workingItems,
-							_itemTypes = m.constructor.itemTypes
+							_itemTypes = m.constructor.itemTypes,
+							_keepParsing = true
 						;
 						_items.length = 0;
 						m.index = _index || (_index = 0);
-						while (_index < _sourceLength) {
+						while (_keepParsing && _index < _sourceLength) {
 							for (var _itemType in _itemTypes) {
 								var _item =
 									_workingItems [_itemType] ||
 									(_workingItems [_itemType] = new _itemTypes [_itemType])
 								;
 								_item.parse (_source,_index);
-								if (_item.isValid) {
+								if (_keepParsing = _item.isValid) {
 									_items.push (_item);
 									_workingItems [_itemType] = null;
 									_index += _item.length;
+									break;
 								}
-								if (_item.isValid) break;
 							}
 						}
 						m.length = _index - m.index;
