@@ -265,7 +265,7 @@ Uize.module ({
 						]
 					]],
 					['Uize.Loc.Xliff.from',[
-						['An XLIFF format document containing multiple resource strings for a file can be parsed to produce an resource strings object',
+						['An XLIFF format document containing multiple resource strings for a file can be parsed to produce a resource strings object',
 							'<?xml version="1.0" ?>\n' +
 							'<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">\n' +
 							'	<file original="foo/bar.properties" source-language="en_US" target-language="fr_FR" datatype="plaintext">\n' +
