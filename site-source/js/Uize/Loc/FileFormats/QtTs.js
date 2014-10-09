@@ -102,13 +102,15 @@ Uize.module ({
 				*/
 			},
 
-			to:function (_strings) {
+			to:function (_strings,_options) {
+				if (!_options) _options = {};
 				var
 					_encodeString = Uize.Util.Html.Encode.encode,
+					_language = _options.language || 'en',
 					_lines = [
 						'<?xml version="1.0" encoding="utf-8"?>',
 						'<!DOCTYPE TS>',
-						'<TS version="2.1" language="en">'
+						'<TS version="2.1" language="' + _language + '">'
 					]
 				;
 				Uize.forEach (

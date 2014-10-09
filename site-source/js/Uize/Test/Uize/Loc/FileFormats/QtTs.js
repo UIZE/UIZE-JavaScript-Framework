@@ -136,6 +136,25 @@ Uize.module ({
 					'			</translation>\n' +
 					'		</message>\n' +
 					'	</context>\n' +
+					'</TS>\n',
+
+			/*** type="unfinished" ***/
+				_stringsUnfinishedStrings = {
+					'First Context':{
+						foo:''
+					}
+				},
+				_fileUnfinishedStrings =
+					'<?xml version="1.0" encoding="utf-8"?>\n' +
+					'<!DOCTYPE TS>\n' +
+					'<TS version="2.1" language="en">\n' +
+					'	<context>\n' +
+					'		<name>First Context</name>\n' +
+					'		<message>\n' +
+					'			<source>foo</source>\n' +
+					'			<translation type="unfinished"></translation>\n' +
+					'		</message>\n' +
+					'	</context>\n' +
 					'</TS>\n'
 		;
 
@@ -164,9 +183,12 @@ Uize.module ({
 						['A TS file may contain numerus form message nodes',
 							_fileNumerusForms,
 							Uize.clone (_stringsNumerusForms)
+						],
+						['A TS file may contain messages that are marked as being unfinished using the optional type attribute, and this information is ignored during parsing',
+							_fileUnfinishedStrings,
+							Uize.clone (_stringsUnfinishedStrings)
 						]
-					]]
-					,
+					]],
 					['Uize.Loc.FileFormats.QtTs.to',[
 						['Serializing an empty strings object produces a valid resource TS file containing no message nodes',
 							Uize.clone (_stringsNoContents),
@@ -189,21 +211,17 @@ Uize.module ({
 							_fileNumerusForms
 						],
 						['When the value for a string is empty, then the attribute type="unfinished" is added to the translation tag',
-							{
-								'First Context':{
-									foo:''
-								}
-							},
+							Uize.clone (_stringsUnfinishedStrings),
+							_fileUnfinishedStrings
+						],
+						['When the language is specified in the options, the language value is reflected in the language attribute of the root TS tag',
+							[
+								{},
+								{language:'fr-CA'}
+							],
 							'<?xml version="1.0" encoding="utf-8"?>\n' +
 							'<!DOCTYPE TS>\n' +
-							'<TS version="2.1" language="en">\n' +
-							'	<context>\n' +
-							'		<name>First Context</name>\n' +
-							'		<message>\n' +
-							'			<source>foo</source>\n' +
-							'			<translation type="unfinished"></translation>\n' +
-							'		</message>\n' +
-							'	</context>\n' +
+							'<TS version="2.1" language="fr-CA">\n' +
 							'</TS>\n'
 						]
 					]]
