@@ -47,14 +47,16 @@ Uize.module ({
 							_sourceLength = (m.source = _source = _source || '').length
 						;
 						m.index = _index || (_index = 0);
-						if (m.isValid = _source.substr (_index,9) == '<![CDATA[') {
-							var _endPos = ((_source.indexOf (']]>',_index += 9)) + 1 || _sourceLength + 1) - 1;
-							m.cdata = _source.slice (_index,_endPos);
-							m.length = _endPos - _index + 12;
-						} else {
-							m.cdata = '';
-							m.length = 0;
+						m.cdata = '';
+						m.length = 0;
+						if (_source.substr (_index,9) == '<![CDATA[') {
+							var _endPos = _source.indexOf (']]>',_index += 9);
+							if (_endPos > -1) {
+								m.cdata = _source.slice (_index,_endPos);
+								m.length = _endPos - _index + 12;
+							}
 						}
+						m.isValid = !!m.length;
 					},
 
 					serialize:function () {
