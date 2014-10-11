@@ -73,18 +73,18 @@ Uize.module ({
 							),
 							Uize.Test.ParserTest.parserTest (
 								'A text node may contain character entity escape sequences, and such escape sequences are unescaped',
-								['<'],
+								['&amp;&quot;&lt;&gt;&#216;'],
 								{
-									text:'',
-									isValid:false
+									text:'&"<>Ø',
+									isValid:true
 								}
 							),
 							Uize.Test.ParserTest.parserTest (
 								'A text node may not start with a "<" character',
-								['some text content'],
+								['<'],
 								{
-									text:'some text content',
-									isValid:true
+									text:'',
+									isValid:false
 								}
 							)
 						]
