@@ -34,7 +34,6 @@ Uize.module ({
 
 		var
 			/*** Variables for Scruncher Optimization ***/
-				_undefined,
 				_Uize_Util_Html_Encode = Uize.Util.Html.Encode,
 
 			/*** Variables for Performance Optimization ***/
@@ -68,14 +67,17 @@ Uize.module ({
 						;
 						_index = _currentCharIsQuote
 							? _source.indexOf (_currentChar,_index + 1)
-							: _indexOfWhitespace (_source,_index)
+							: ((_indexOfWhitespace (_source,_index) + 1) || _sourceLength + 1) - 1
 						;
-						if (_index < 0)
-							_index = _sourceLength
-						;
-						m.value = _htmlDecode (_source.slice (m.index + _currentCharIsQuote,_index));
-						m.length = _index + _currentCharIsQuote - m.index;
-						m.isValid = true;
+						if (_index > -1) {
+							m.value = _htmlDecode (_source.slice (m.index + _currentCharIsQuote,_index));
+							m.length = _index + _currentCharIsQuote - m.index;
+							m.isValid = true;
+						} else {
+							m.value = '';
+							m.length = 0;
+							m.isValid = false;
+						}
 					},
 
 					serialize:function () {
