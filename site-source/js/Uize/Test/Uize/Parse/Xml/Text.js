@@ -65,9 +65,9 @@ Uize.module ({
 							),
 							Uize.Test.ParserTest.parserTest (
 								'A text node may contain linebreaks and other whitespace characters, and such characters are treated as literal text that is part of the contents of that text node',
-								['Line 1\bLine 2\rLine 3\r\n\t\tLine 4'],
+								['Line 1\nLine 2\rLine 3\r\n\t\tLine 4'],
 								{
-									text:'Line 1\bLine 2\rLine 3\r\n\t\tLine 4',
+									text:'Line 1\nLine 2\rLine 3\r\n\t\tLine 4',
 									isValid:true
 								}
 							),
