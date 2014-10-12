@@ -46,16 +46,13 @@ Uize.module ({
 		'Uize.Widgets.Slider.Widget',
 		'Uize.Widgets.Buttons.Reset.Widget',
 		'Uize.Widgets.ColorsTransformer.ShiftAndRange.Html',
-		'Uize.Widgets.ColorsTransformer.ShiftAndRange.Css',
-		'Uize.Widget.mChildBindings'
+		'Uize.Widgets.ColorsTransformer.ShiftAndRange.Css'
 	],
 	builder:function (_superclass) {
 		'use strict';
 
 		return _superclass.subclass ({
 			hasLoc:true,
-
-			mixins:Uize.Widget.mChildBindings,
 
 			set:{
 				html:Uize.Widgets.ColorsTransformer.ShiftAndRange.Html

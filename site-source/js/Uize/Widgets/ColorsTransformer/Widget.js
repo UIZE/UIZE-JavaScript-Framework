@@ -40,8 +40,7 @@ Uize.module ({
 		'Uize.Widgets.ColorsTransformer.ShiftAndRange.Widget',
 		'Uize.Widgets.Buttons.Reset.Widget',
 		'Uize.Widgets.ColorsTransformer.Html',
-		'Uize.Color.ColorsHslTransformer',
-		'Uize.Widget.mChildBindings'
+		'Uize.Color.ColorsHslTransformer'
 	],
 	builder:function (_superclass) {
 		'use strict';
@@ -54,10 +53,7 @@ Uize.module ({
 		return _superclass.subclass ({
 			hasLoc:true,
 
-			mixins:[
-				Uize.Color.ColorsHslTransformer.mixin,
-				Uize.Widget.mChildBindings
-			],
+			mixins:Uize.Color.ColorsHslTransformer.mixin,
 
 			set:{
 				html:Uize.Widgets.ColorsTransformer.Html
