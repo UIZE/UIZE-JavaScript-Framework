@@ -88,8 +88,16 @@ Uize.module ({
 								}
 							),
 							Uize.Test.ParserTest.parserTest (
-								'If a tag attribute value does not start with a quote character, then it is terminated at the first whitespace character',
-								['foo bar baz qux'],
+								'If a tag attribute value does not start with a quote character, then it is terminated at the first whitespace character, if that whitespace character occurs before the first ">" character',
+								['foo bar> baz qux'],
+								{
+									value:'foo',
+									isValid:true
+								}
+							),
+							Uize.Test.ParserTest.parserTest (
+								'If a tag attribute value does not start with a quote character, then it is terminated at the first ">" character, if that ">" character occurs before the first whitespace character',
+								['foo>bar baz qux'],
 								{
 									value:'foo',
 									isValid:true

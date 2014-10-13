@@ -67,7 +67,10 @@ Uize.module ({
 						;
 						_index = _currentCharIsQuote
 							? _source.indexOf (_currentChar,_index + 1)
-							: ((_indexOfWhitespace (_source,_index) + 1) || _sourceLength + 1) - 1
+							: Math.min (
+								((_indexOfWhitespace (_source,_index) + 1) || _sourceLength + 1) - 1,
+								((_source.indexOf ('>',_index) + 1) || _sourceLength + 1) - 1
+							)
 						;
 						if (_index > -1) {
 							m.value = _htmlDecode (_source.slice (m.index + _currentCharIsQuote,_index));
