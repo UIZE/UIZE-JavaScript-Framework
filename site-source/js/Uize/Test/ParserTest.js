@@ -61,12 +61,15 @@ Uize.module ({
 					};
 				},
 
-				serializerTest:function (_title,_instanceState,_expected) {
+				serializerTest:function (_title,_instanceStateOrSourceText,_expected) {
 					return {
 						title:_title,
 						test:function () {
 							var _parser = new (Uize.getModuleByName (this.Class.parserClass));
-							Uize.mergeInto (_parser,_instanceState);
+							typeof _instanceStateOrSourceText == 'string'
+								? _parser.parse (_instanceStateOrSourceText)
+								: Uize.mergeInto (_parser,_instanceStateOrSourceText)
+							;
 							return this.expect (_expected,_parser.serialize ());
 						}
 					};
