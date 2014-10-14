@@ -66,6 +66,7 @@ Uize.module ({
 							_sourceLength = (m.source = _source = _source || '').length
 						;
 						m.index = _index || (_index = 0);
+						m.isValid = false;
 						if (_source.charAt (_index) == '<') {
 							_index++;
 							_eatWhitespace ();
@@ -80,23 +81,41 @@ Uize.module ({
 									m.childNodes = new _Uize_Util_Xml.NodeList (_source,++_index);
 									_index += m.childNodes.length;
 									_eatWhitespace ();
-									var
-										_closingTag = '</' + m.tagName.serialize () + '>',
-										_closingTagLength = _closingTag.length
-									;
-									if (_source.substr (_index,_closingTagLength) == _closingTag)
-										_index += _closingTagLength
-									;
-								} else if (_source.substr (_index,2) == '/>') {
-									_index += 2;
-									m.childNodes = _undefined;
+									if (_source.charAt (_index) == '<') {
+										_index++;
+										_eatWhitespace ();
+										if (_source.charAt (_index) == '/') {
+											_index++;
+											_eatWhitespace ();
+											var
+												_tagNameSerialized = m.tagName.serialize (),
+												_tagNameSerializedLength = _tagNameSerialized.length
+											;
+											if (_source.substr (_index,_tagNameSerializedLength) == _tagNameSerialized) {
+												_index += _tagNameSerializedLength;
+												_eatWhitespace ();
+												if (_source.charAt (_index) == '>') {
+													_index++;
+													m.isValid = true;
+												}
+											}
+										}
+									}
+								} else if (_source.charAt (_index) == '/') {
+									_index++;
+									_eatWhitespace ();
+									if (_source.charAt (_index) == '>') {
+										m.childNodes = _undefined;
+										m.isValid = true;
+									}
 								}
-							} else {
-								_index = m.index;
 							}
-						};
+						}
+						if (!m.isValid)
+							_index = m.index
+						;
 						m.tag = _source.slice (m.index,_index);
-						m.isValid = !!(m.length = _index - m.index);
+						m.length = _index - m.index;
 					},
 
 					serialize:function () {
