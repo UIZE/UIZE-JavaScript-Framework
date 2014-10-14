@@ -79,14 +79,14 @@ Uize.module ({
 								}
 							),
 							Uize.Test.ParserTest.parserTest (
-								'A node list may contain just a single cdata node',
-								['<![CDATA[this is a cdata section]]>'],
+								'A node list may contain just a single CDATA node',
+								['<![CDATA[this is a CDATA section]]>'],
 								{
 									isValid:true,
 									nodes:{
 										0:{
 											isValid:true,
-											cdata:'this is a cdata section'
+											cdata:'this is a CDATA section'
 										},
 										length:1
 									}
@@ -128,7 +128,7 @@ Uize.module ({
 							),
 							Uize.Test.ParserTest.parserTest (
 								'A node list may contain a mixture of multiple different types of nodes',
-								['text node 1<!--this is a comment-->text node 2<![CDATA[this is a cdata section]]>text node 3<foo bar="baz"></foo>text node 4'],
+								['text node 1<!--this is a comment-->text node 2<![CDATA[this is a CDATA section]]>text node 3<foo bar="baz"></foo>text node 4'],
 								{
 									isValid:true,
 									nodes:{
@@ -146,7 +146,7 @@ Uize.module ({
 										},
 										3:{
 											isValid:true,
-											cdata:'this is a cdata section'
+											cdata:'this is a CDATA section'
 										},
 										4:{
 											isValid:true,
@@ -186,7 +186,7 @@ Uize.module ({
 							),
 							Uize.Test.ParserTest.parserTest (
 								'A node list may contain a multiple consecutive nodes of the same type',
-								['<!--comment 1--><!--comment 2--><![CDATA[cdata section 1]]><![CDATA[cdata section 2]]>'],
+								['<!--comment 1--><!--comment 2--><![CDATA[CDATA section 1]]><![CDATA[CDATA section 2]]>'],
 								{
 									isValid:true,
 									nodes:{
@@ -200,11 +200,11 @@ Uize.module ({
 										},
 										2:{
 											isValid:true,
-											cdata:'cdata section 1'
+											cdata:'CDATA section 1'
 										},
 										3:{
 											isValid:true,
-											cdata:'cdata section 2'
+											cdata:'CDATA section 2'
 										},
 										length:4
 									}
@@ -233,8 +233,8 @@ Uize.module ({
 							),
 							Uize.Test.ParserTest.serializerTest (
 								'A node list containing multiple nodes is serialized correctly',
-								'text node 1<!--this is a comment-->text node 2<![CDATA[this is a cdata section]]>text node 3<foo bar="baz"></foo>text node 4',
-								'text node 1<!--this is a comment-->text node 2<![CDATA[this is a cdata section]]>text node 3<foo bar="baz"></foo>text node 4'
+								'text node 1<!--this is a comment-->text node 2<![CDATA[this is a CDATA section]]>text node 3<foo bar="baz"></foo>text node 4',
+								'text node 1<!--this is a comment-->text node 2<![CDATA[this is a CDATA section]]>text node 3<foo bar="baz"></foo>text node 4'
 							)
 						]
 					}
