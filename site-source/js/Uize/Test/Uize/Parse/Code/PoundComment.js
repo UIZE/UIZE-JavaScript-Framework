@@ -40,7 +40,7 @@ Uize.module ({
 						title:'A comment can be parsed',
 						test:[
 							Uize.Test.ParserTest.parserTest (
-								'A comment may start with a "#" (pound) character',
+								'A comment may start with a "#" character',
 								['#this is a comment'],
 								{
 									comment:'this is a comment',
@@ -48,7 +48,7 @@ Uize.module ({
 								}
 							),
 							Uize.Test.ParserTest.parserTest (
-								'A comment may start with an "!" (exclamation mark) character',
+								'A comment may start with an "!" character',
 								['!this is a comment'],
 								{
 									comment:'this is a comment',
@@ -87,6 +87,22 @@ Uize.module ({
 									isValid:true
 								}
 							),
+							Uize.Test.ParserTest.parserTest (
+								'A comment that starts with a "#" character may be empty',
+								['#'],
+								{
+									comment:'',
+									isValid:true
+								}
+							),
+							Uize.Test.ParserTest.parserTest (
+								'A comment that starts with a "!" character may be empty',
+								['!'],
+								{
+									comment:'',
+									isValid:true
+								}
+							),
 
 							/*** tests for invalid comments ***/
 								Uize.Test.ParserTest.parserTest (
@@ -111,7 +127,7 @@ Uize.module ({
 						title:'A comment can be serialized',
 						test:[
 							Uize.Test.ParserTest.serializerTest (
-								'When a comment is serialized, the "#" (pound) character is used as the default comment start character',
+								'When a comment is serialized, the "#" character is used as the default comment start character',
 								{
 									comment:'this is a comment',
 									isValid:true
