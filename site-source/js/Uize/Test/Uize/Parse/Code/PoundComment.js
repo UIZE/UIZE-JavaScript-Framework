@@ -56,22 +56,6 @@ Uize.module ({
 								}
 							),
 							Uize.Test.ParserTest.parserTest (
-								'A comment may not start with whitespace',
-								[' !this is not a comment'],
-								{
-									comment:'',
-									isValid:false
-								}
-							),
-							Uize.Test.ParserTest.parserTest (
-								'A comment may not start with a character that is not a comment start character',
-								['this is not a comment'],
-								{
-									comment:'',
-									isValid:false
-								}
-							),
-							Uize.Test.ParserTest.parserTest (
 								'A comment is terminated by the first carriage return character',
 								['!this is a comment\r\r\r\n\n\nthis is not part of the comment'],
 								{
@@ -86,7 +70,41 @@ Uize.module ({
 									comment:'this is a comment',
 									isValid:true
 								}
-							)
+							),
+							Uize.Test.ParserTest.parserTest (
+								'A comment that is started with a "!" character may contain more "!" characters on the same line, and these are treated as part of the comment text',
+								['!foo !!!!! bar\nthis is not part of the comment'],
+								{
+									comment:'foo !!!!! bar',
+									isValid:true
+								}
+							),
+							Uize.Test.ParserTest.parserTest (
+								'A comment that is started with a "#" character may contain more "#" characters on the same line, and these are treated as part of the comment text',
+								['#foo ##### bar\nthis is not part of the comment'],
+								{
+									comment:'foo ##### bar',
+									isValid:true
+								}
+							),
+
+							/*** tests for invalid comments ***/
+								Uize.Test.ParserTest.parserTest (
+									'A comment may not start with whitespace',
+									[' !this is not a comment'],
+									{
+										comment:'',
+										isValid:false
+									}
+								),
+								Uize.Test.ParserTest.parserTest (
+									'A comment may not start with a character that is not a comment start character',
+									['this is not a comment'],
+									{
+										comment:'',
+										isValid:false
+									}
+								)
 						]
 					},
 					{
@@ -99,6 +117,14 @@ Uize.module ({
 									isValid:true
 								},
 								'#this is a comment'
+							),
+							Uize.Test.ParserTest.serializerTest (
+								'An empty comment is serialized correctly',
+								{
+									comment:'',
+									isValid:true
+								},
+								'#'
 							)
 						]
 					}
