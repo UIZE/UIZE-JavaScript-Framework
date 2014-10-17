@@ -829,7 +829,7 @@ Uize.module ({
 				},
 
 				pseudoLocalizeString:function (_stringInfo,_pseudoLocalizeOptions) {
-					return Uize.Loc.Pseudo.pseudoLocalize (_string.value,_pseudoLocalizeOptions);
+					return Uize.Loc.Pseudo.pseudoLocalize (_stringInfo.value,_pseudoLocalizeOptions);
 					/*?
 						Instance Methods
 							pseudoLocalizeString
