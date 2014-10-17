@@ -564,14 +564,59 @@ Uize.module ({
 				prepareToExecuteMethod:function (_totalSteps) {
 					this._methodTotalSteps = _totalSteps;
 					this._methodCompletedSteps = 0;
+					/*?
+						Instance Methods
+							prepareToExecuteMethod
+								Prepares the method progress logger to expect the specified number of total steps to be performed during execution of a method.
+
+								SYNTAX
+								............................................
+								this.prepareToExecuteMethod (totalStepsINT);
+								............................................
+
+								The =prepareToExecuteMethod= method is used internally in the implementations for localization service methods, such as the =export= method. When used, it should be called early in the execution of a localization method, after the scope of the method's work has been determined, but before any of the work has been performed. Thereafter, the related =stepCompleted= and =methodExecutionComplete= methods should be used.
+
+								NOTES
+								- see the related =stepCompleted= and =methodExecutionComplete= instance methods
+					*/
 				},
 
 				stepCompleted:function (_message) {
 					this._log (_message,++this._methodCompletedSteps / this._methodTotalSteps);
+					/*?
+						Instance Methods
+							stepCompleted
+								Informs the method progress logger of the completion of one of the steps of a localization service method's execution.
+
+								SYNTAX
+								................................
+								this.stepCompleted (messageSTR);
+								................................
+
+								The =stepCompleted= method is used internally in the implementations for localization service methods, such as the =export= method. When used, it should be called during the execution of a localization service method, exactly as many times as the number of total steps specified when earlier calling the =prepareToExecuteMethod= method. A string value should be passed for the =messageSTR= parameter, so that information about the step that has been completed can be logged.
+
+								NOTES
+								- see the related =prepareToExecuteMethod= and =methodExecutionComplete= instance methods
+					*/
 				},
 
 				methodExecutionComplete:function (_summary) {
 					this._log (_summary,'summary');
+					/*?
+						Instance Methods
+							methodExecutionComplete
+								Informs the method progress logger of the completion of a localization service method's execution.
+
+								SYNTAX
+								..........................................
+								this.methodExecutionComplete (summarySTR);
+								..........................................
+
+								The =methodExecutionComplete= method is used internally in the implementations for localization service methods, such as the =export= method. When used, it should be called after all steps in the execution of a method have been completed. A string value should be passed for the =summarySTR= parameter, so that summary information can be logged for the method.
+
+								NOTES
+								- see the related =prepareToExecuteMethod= and =stepCompleted= instance methods
+					*/
 				},
 
 				gatherResources:function () {
@@ -610,11 +655,9 @@ Uize.module ({
 								Returns a string, representing the file path for a language specific version of the specified primary language resource file.
 
 								SYNTAX
-								................................................
-								resourcePathSTR = this.getLanguageResourcePath (
-									primaryLanguageResourcePathSTR,languageSTR
-								);
-								................................................
+								............................................................................................
+								resourcePathSTR = this.getLanguageResourcePath (primaryLanguageResourcePathSTR,languageSTR);
+								............................................................................................
 
 								The =primaryLanguageResourcePathSTR= parameter is used to specify the path for the primary language version of a specific resource file, while the =languageSTR= parameter is used to specify the language for which a language specific resource file path should be generated.
 
@@ -847,11 +890,9 @@ Uize.module ({
 								Returns a string, being a pseudo-localized version of the specified resource string.
 
 								SYNTAX
-								................................................
-								pseudoLocalizedSTR = this.pseudoLocalizeString (
-									stringInfoOBJ,pseudoLocalizationOptionsOBJ
-								);
-								................................................
+								............................................................................................
+								pseudoLocalizedSTR = this.pseudoLocalizeString (stringInfoOBJ,pseudoLocalizationOptionsOBJ);
+								............................................................................................
 
 								When the resource strings for a project are exported using the =export= localization service method, pseudo-localized values for all translatable strings are automatically generated for the configured pseudo-locale of the project. These pseudo-localized values are created by calling the =pseudoLocalizeString= method.
 
@@ -949,7 +990,43 @@ Uize.module ({
 
 				serializeResourceFile:function (_strings,_resourceFileInfo) {
 					throw new Error ('The serializeResourceFile method must be implemented');
-					// this method should be implemented by subclasses
+					/*?
+						Instance Methods
+							serializeResourceFile
+								Returns a string, being the specified resource strings object serialized to the text contents of a resource file.
+
+								SYNTAX
+								..........................................................................................
+								resourceFileTextSTR = this.serializeResourceFile (resourceStringsOBJ,resourceFileInfoOBJ);
+								..........................................................................................
+
+								The implementation of this method, provided in this base class, throws an error. This means that this method *must* be overridden by an adapter subclass for a project.
+
+								When the =serializeResourceFile= method is called, two parameters are passed to it: =resourceStringsOBJ= and =resourceFileInfoOBJ=.
+
+								resourceStringsOBJ
+									An object, containing the resource strings that should be serialized to produce the resulting resource file text.
+
+								resourceFileInfoOBJ
+									An object, providing additional information about the resource file being serialized, of the form...
+
+									RESOURCE FILE INFO
+									..........................................
+									{
+										path:filePathSTR,
+										language:localeSTR,
+										isPrimaryLanguage:isPrimaryLanguageBOOL
+									}
+									..........................................
+
+									An implementation of the =serializeResourceFile= method can optionally use any or all of the information contained inside the resource file info object to conditionalize how a resource file is serialized.
+
+									In particular, certain resource file formats may require that the language of the strings contained inside a file be specified in some internal markup inside the file, such as in an XML tag attribute. Using the value of the =language= property of the resource file info object, the serializer can represent the language in the serialized resource file text in whatever way is appropriate for the resource file format being used by a project.
+
+								NOTES
+								- see the companion =parseResourceFile= instance method
+								- the =serializeResourceFile= method is used in the implementation of the =distributeResources= instance method
+					*/
 				},
 
 				getReferencingCodeFiles:function () {
