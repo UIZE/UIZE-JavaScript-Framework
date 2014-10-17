@@ -146,7 +146,10 @@ Uize.module ({
 							_resourceFileStrings,
 							function (_value,_path) {
 								var
-									_isTranslatable = _isTranslatableString (m,{key:_path [_path.length - 1],value:_value}),
+									_isTranslatable = _isTranslatableString (
+										m,
+										{key:_path [_path.length - 1],value:_value}
+									),
 									_stringMetrics = _getStringMetrics (_value,_wordSplitter,_tokenRegExp),
 									_isBrandSpecific = _resourceFileIsBrandSpecific || m.isBrandResourceString (_path)
 								;
@@ -477,11 +480,40 @@ Uize.module ({
 			instanceMethods:{
 				getTranslatableLanguages:function () {
 					return _getTranslatableLanguages (this);
+					/*?
+						Instance Methods
+							getTranslatableLanguages
+								Returns an array, containing the locale codes for all the translatable languages configured for the project (i.e. excluding the primary language and the pseudo-locale).
+
+								SYNTAX
+								..............................................................
+								translatableLanguagesARRAY = this.getTranslatableLanguages ();
+								..............................................................
+
+								NOTES
+								- compare to the related =getLanguages= instance method
+					*/
 				},
 
 				getLanguages:function () {
 					var _project = this.project;
-					return Uize.push (_getTranslatableLanguages (this),[_project.primaryLanguage,_project.pseudoLocale]);
+					return Uize.push (
+						_getTranslatableLanguages (this),
+						[_project.primaryLanguage,_project.pseudoLocale]
+					);
+					/*?
+						Instance Methods
+							getLanguages
+								Returns an array, containing the locale codes for all the languages configured for the project, including the primary language and the pseudo-locale.
+
+								SYNTAX
+								......................................
+								languagesARRAY = this.getLanguages ();
+								......................................
+
+								NOTES
+								- compare to the related =getTranslatableLanguages= instance method
+					*/
 				},
 
 				distributeResources:function (_resources,_language) {
@@ -567,9 +599,11 @@ Uize.module ({
 								Returns a string, representing the file path for a language specific version of the specified primary language resource file.
 
 								SYNTAX
-								............................................................................................
-								resourcePathSTR = this.getLanguageResourcePath (primaryLanguageResourcePathSTR,languageSTR);
-								............................................................................................
+								................................................
+								resourcePathSTR = this.getLanguageResourcePath (
+									primaryLanguageResourcePathSTR,languageSTR
+								);
+								................................................
 
 								The =primaryLanguageResourcePathSTR= parameter is used to specify the path for the primary language version of a specific resource file, while the =languageSTR= parameter is used to specify the language for which a language specific resource file path should be generated.
 
@@ -620,66 +654,289 @@ Uize.module ({
 				},
 
 				getResourceFileBrand:function (_filePath) {
-					// this method should be implemented by subclasses
 					return '';
+					/*?
+						Instance Methods
+							getResourceFileBrand
+								Returns a string, representing the brand ID for the specified resource file, or an empty string if the resource file is brand-neutral.
+
+								SYNTAX
+								.............................................................
+								brandIdSTR = this.getResourceFileBrand (resourceFilePathSTR);
+								.............................................................
+
+								The implementation of this method, provided in this base class, simply returns an empty string. This method can be optionally overridden by subclasses, for projects that support branded resources.
+
+								NOTES
+								- compare to the related =getStringBrand= instance method
+					*/
 				},
 
-				getStringBrand:function (_resourceStringPath) {
-					// this method should be implemented by subclasses
+				getStringBrand:function (_stringPath) {
 					return '';
+					/*?
+						Instance Methods
+							getStringBrand
+								Returns a string, representing the brand ID for the specified resource string, or an empty string if the resource string is brand-neutral.
+
+								SYNTAX
+								...................................................
+								brandIdSTR = this.getStringBrand (stringPathARRAY);
+								...................................................
+
+								The implementation of this method, provided in this base class, simply returns an empty string. This method can be optionally overridden by subclasses, for projects that support branded resources.
+
+								When the =getStringBrand= method is called, a value is passed for the =stringPathARRAY= parameter that specifies the full path to the string, where the first element in the path array specifies the path for the resource file to which the string belongs, and the remaining elements of the path array specify the location of the string internal to the resource file (this may consist of simply a key element, or multiple elements if the resource files for a project are hierarchical rather than flat).
+
+								NOTES
+								- compare to the related =getResourceFileBrand= instance method
+					*/
 				},
 
-				stringHasHtml:function (_path,_value) {
-					// this method can be overridden by subclasses
+				stringHasHtml:function (_stringPath,_value) {
 					return /<[^<]+>/.test (_value); // NOTE: this is not the most robust test, so probably RegExpComposition should be used
+					/*?
+						Instance Methods
+							stringHasHtml
+								Returns a boolean, indicating whether or not the specified string contains HTML tags.
+
+								SYNTAX
+								..................................................................
+								hasHtmlBOOL = this.stringHasHtml (stringPathARRAY,stringValueSTR);
+								..................................................................
+
+								The implementation of this method, provided in this base class, performs a very simple (and performant), regular expression match based test to determine if a string contains HTML tags. Some projects may use a format for substitution tokens that resembles the HTML tag format, and this may confuse the test in the base class' implementation of this method. In such cases, this method can be overridden in a subclass.
+
+								When the =stringHasHtml= method is called, two parameters are passed to it: =stringPathARRAY= and =stringValueSTR=.
+
+								stringPathARRAY
+									An array, specifying the full path to the string.
+
+									The path can be used to determine if a string contains HTML if the project organizes resource strings in such a way that strings that contain HTML are either separated in some way from those that don't, or if some naming convention is used for the string keys (or other elements of the string path array) to indicate that a string contains HTML.
+
+								stringValueSTR
+									A string, representing the actual text of the resource string.
+
+									With the value of a resource string, a regular expression match or other form of test (such as HTML parsing) can be performed to determine if the string contains HTML tags.
+
+								NOTES
+								- the result returned by this method is used by the =metrics= method when producing its metrics report
+					*/
 				},
 
 				isStringLong:function (_stringMetrics) {
-					// this method can be overridden by subclasses
 					return _stringMetrics.words > 50 || _stringMetrics.chars > 500;
+					/*?
+						Instance Methods
+							isStringLong
+								Returns a boolean, indicating whether or not a string is considered to be long.
+
+								SYNTAX
+								..................................................
+								isLongBOOL = this.isStringLong (stringMetricsOBJ);
+								..................................................
+
+								The implementation of this method, provided in this base class, judges a string to be long if it contains more than 50 words or more than 500 characters.
+
+								When the =isStringLong= method is called, a string metrics object is passed as a value to the =stringMetricsOBJ= parameter. The string metrics object is generated by the =Uize.Loc.Strings.Metrics.getMetrics= method of the =Uize.Loc.Strings.Metrics= module and contains information on the word count and character count of the string. This information can be used in the implementation of the =isStringLong= method.
+
+								NOTES
+								- the result returned by this method is used by the =metrics= method when producing its metrics report
+					*/
 				},
 
-				isStringKeyValid:function (_path) {
-					// this method can be overridden by subclasses
+				isStringKeyValid:function (_stringPath) {
 					return true;
+					/*?
+						Instance Methods
+							isStringKeyValid
+								Returns a boolean, indicating whether or not a string's key is valid.
+
+								SYNTAX
+								......................................................
+								isValidBOOL = this.isStringKeyValid (stringPathARRAY);
+								......................................................
+
+								The implementation of this method, provided in this base class, always returns the value =true=.
+
+								When the =isStringKeyValid= method is called, a value is passed for the =stringPathARRAY= parameter that specifies the full path to the string. Generally, the key is considered to be the very last element in the string path array, but an implementation of this method can use any or all of the elements of the path array to determine if the string's "key" is valid.
+
+								NOTES
+								- the result returned by this method is used by the =metrics= method when producing its metrics report
+					*/
 				},
 
 				isTokenWeak:function (_tokenName) {
-					// this method can be overridden by subclasses
 					return _tokenName.length < 3 || /^\d+$/.test (_tokenName);
+					/*?
+						Instance Methods
+							isTokenWeak
+								Returns a boolean, indicating whether or not the name of a substitution token is considered weak.
+
+								SYNTAX
+								.............................................
+								isWeakBOOL = this.isTokenWeak (tokenNameSTR);
+								.............................................
+
+								The implementation of this method, provided in this base class, judges the name of a token to be weak if it is less than three characters in length, or if it is a number.
+
+								When the =isTokenWeak= method is called, the name of a token to test is passed to the =tokenNameSTR= parameter. An implementation of this method can use any criteria suitable to the project to determine whether or not a token name is weak.
+
+								NOTES
+								- the result returned by this method is used by the =metrics= method when producing its metrics report
+					*/
 				},
 
 				isTranslatableString:function (_stringInfo) {
-					// this method should be implemented by subclasses
-					/* NOTE:
-						the _stringInfo argument is an object of the form...
-
-						.................
-						{
-							key:keySTR,
-							value:valueSTR
-						}
-						.................
-					*/
 					return true;
+					/*?
+						Instance Methods
+							isTranslatableString
+								Returns a boolean, indicating whether or not the specified string is translatable.
+
+								SYNTAX
+								...............................................................
+								isTranslatableBOOL = this.isTranslatableString (stringInfoOBJ);
+								...............................................................
+
+								The implementation of this method, provided in this base class, always returns the value =true=. If the resource files for a project are expected to contain any strings that should never be translated, then this method should be overridden in an adapter subclass for the project to return the value =false= for such strings.
+
+								When the =isTranslatableString= method is called, a value is passed for the =stringInfoOBJ= parameter that provides information about the string and is of the form...
+
+								STRING INFO
+								................................................
+								{
+									key:keySTR,     // the key of the string path
+									value:valueSTR  // the text of the string
+								}
+								................................................
+
+								Techniques for Determining Translatability
+									An implementation of the =isTranslatableString= method can use any criteria suitable to the project to determine whether or not a given string is translatable.
+
+									In one approach, a special naming convention could be used for string keys to indicate strings that should not be translated, and then the implementation of this method can perform a test using the value of the =key= property of the string info object.
+
+									Alternatively, or in addition to, the text of the string can be used to determine whether or not it is translatable. For example, a regular expression based match could be used to detect strings whose values are URLs, phone numbers, e-mail addresses, etc. that should not be translated.
+
+								How the Result is Used
+									The value returned by the =isTranslatableString= method is used to determine whether or not a string's value should be pseudo-localized by the =pseudoLocalizeString= instance method, and whether or not a string's value should be exported into translation jobs by the =exportJobs= instance method.
+
+								Pure Whitespace is Not Translatable
+									The =isTranslatableString= method is never called for strings whose values are either empty or pure whitespace (containing no non-whitespace characters).
+
+									It is not often that the value of a string for the primary language of a project is pure whitespace, but this does occur from time to time. In such cases, these strings are always considered non-translatable.
+					*/
 				},
 
-				pseudoLocalizeString:function (_string,_pseudoLocalizeOptions) {
-					// this method can optionally be overridden by subclasses
+				pseudoLocalizeString:function (_stringInfo,_pseudoLocalizeOptions) {
 					return Uize.Loc.Pseudo.pseudoLocalize (_string.value,_pseudoLocalizeOptions);
+					/*?
+						Instance Methods
+							pseudoLocalizeString
+								Returns a string, being a pseudo-localized version of the specified resource string.
+
+								SYNTAX
+								................................................
+								pseudoLocalizedSTR = this.pseudoLocalizeString (
+									stringInfoOBJ,pseudoLocalizationOptionsOBJ
+								);
+								................................................
+
+								When the resource strings for a project are exported using the =export= localization service method, pseudo-localized values for all translatable strings are automatically generated for the configured pseudo-locale of the project. These pseudo-localized values are created by calling the =pseudoLocalizeString= method.
+
+								The implementation of this method, provided in this base class, pseudo-localizes resource strings by calling the =Uize.Loc.Pseudo.pseudoLocalize= method of the =Uize.Loc.Pseudo= module. This behavior is generally adequate for most projects. However, the implementation of this method can optionally be overridden in an adapter subclass for a project if any kind of special handling might be needed for specific strings, or if a different process of pseudo-localization needs to be employed.
+
+								When the =pseudoLocalizeString= method is called, two parameters are passed to it: =stringInfoOBJ= and =stringValueSTR=.
+
+								stringInfoOBJ
+									An object that provides information about the string, of the form...
+
+									STRING INFO
+									...........................................................
+									{
+										key:keySTR,      // the key of the string path
+										value:valueSTR,  // the text of the string
+										path:pathSTR     // the full path of the resource string
+									}
+									...........................................................
+
+									An implementation of this method can optionally use the values of the =key= or =path= properties of the string info object to conditionalize how pseudo-localized versions of resource strings should be derived from the =value= property of the string info object.
+
+								pseudoLocalizationOptionsOBJ
+									An object, containing the configured pseudo-localization options for the project.
+
+									The properties of this options object will depend upon the configuration of the project and the pseudo-localization process being used.
+					*/
 				},
 
 				isResourceFile:function (_filePath) {
 					throw new Error ('The isResourceFile method must be implemented.');
-					// this method should be implemented by subclasses
+					/*?
+						Instance Methods
+							isResourceFile
+								Returns a boolean, indicating whether or not the specified file is a resource file.
+
+								SYNTAX
+								.......................................................
+								isResourceFileBOOL = this.isResourceFile (filePathSTR);
+								.......................................................
+
+								The implementation of this method, provided in this base class, throws an error. This means that this method *must* be overridden by an adapter subclass for a project.
+
+								When the =isResourceFile= method is called, it is passed a value for the =filePathSTR= parameter that specifies the path for the file being tested, that is relative to the configured root folder path for the project.
+
+								An implementation for this method can perform any test against the file path to determine whether or not the file is a resource file. Assuming that a project follows a sensible naming convention for resource files, it is quite reasonable to use a regular epxression based match.
+
+								NOTES
+								- see also the related =isBrandResourceFile= and =getResourceFileBrand= instance methods
+					*/
 				},
 
 				parseResourceFile:function (_resourceFileText,_resourceFileInfo) {
 					throw new Error ('The parseResourceFile method must be implemented.');
-					// this method should be implemented by subclasses
+					/*?
+						Instance Methods
+							parseResourceFile
+								Returns a resource strings object, being the resource strings parsed from the specified resource file.
+
+								SYNTAX
+								......................................................................................
+								resourceStringsOBJ = this.parseResourceFile (resourceFileTextSTR,resourceFileInfoOBJ);
+								......................................................................................
+
+								The implementation of this method, provided in this base class, throws an error. This means that this method *must* be overridden by an adapter subclass for a project.
+
+								When the =parseResourceFile= method is called, two parameters are passed to it: =resourceFileTextSTR= and =resourceFileInfoOBJ=.
+
+								resourceFileTextSTR
+									A string, representing the text contents of the resource file being parsed.
+
+								resourceFileInfoOBJ
+									An object, providing additional information about the resource file being parsed, of the form...
+
+									RESOURCE FILE INFO
+									..........................................
+									{
+										path:filePathSTR,
+										language:localeSTR,
+										isPrimaryLanguage:isPrimaryLanguageBOOL
+									}
+									..........................................
+
+									An implementation of the =parseResourceFile= method can optionally use any or all of the information contained inside the resource file info object to conditionalize how a resource file is parsed.
+
+									Primary Language Value Defaulting
+										Some resource file formats follow a convention of using the text for the primary language version of resource strings as string keys, and often the values in the primary language resource files are left blank.
+
+										But, to satisfy the needs of the localization service adapter, string values must not be empty for internal operations. In such cases, then, the implementation of the =parseResourceFile= method in the adapter subclass for the project can default the values to the keys when parsing the resource files for the primary language, but not perform this defaulting behavior for resource files for the translatable languages.
+
+								NOTES
+								- see the companion =serializeResourceFile= instance method
+								- the =parseResourceFile= method is used in the implementations of the =gatherResources= and =export= instance methods
+					*/
 				},
 
-				serializeResourceFile:function (_strings) {
+				serializeResourceFile:function (_strings,_language) {
 					throw new Error ('The serializeResourceFile method must be implemented');
 					// this method should be implemented by subclasses
 				},
