@@ -107,6 +107,14 @@ Uize.module ({
 				return _hasNonWhitespace (_stringInfo.value) && m.isTranslatableString (_stringInfo);
 			}
 
+			function _getResourceFileInfo (m,_resourceFileFullPath,_language) {
+				return {
+					path:_resourceFileFullPath,
+					language:_language,
+					isPrimaryLanguage:_language == m.project.primaryLanguage
+				};
+			}
+
 			function _parseResourceFile (m,_resourceFilePath,_language) {
 				var
 					_project = m.project,
@@ -116,11 +124,7 @@ Uize.module ({
 					_fileSystem.fileExists ({path:_resourceFileFullPath})
 						? m.parseResourceFile (
 							_fileSystem.readFile ({path:_resourceFileFullPath}),
-							{
-								path:_resourceFileFullPath,
-								language:_language,
-								isPrimaryLanguage:_language == _project.primaryLanguage
-							}
+							_getResourceFileInfo (m,_resourceFileFullPath,_language)
 						)
 						: {}
 				);
@@ -535,7 +539,14 @@ Uize.module ({
 					Uize.forEach (
 						_resources,
 						function (_resourceFileStrings,_resourceFileSubPath) {
-							var _serializedResourceFile = m.serializeResourceFile (_resourceFileStrings,_language);
+							var
+								_resourceFileFullPath =
+									_rootFolderPath + '/' + m.getLanguageResourcePath (_resourceFileSubPath,_language),
+								_serializedResourceFile = m.serializeResourceFile (
+									_resourceFileStrings,
+									_getResourceFileInfo (m,_resourceFileFullPath,_language)
+								)
+							;
 							if (_mustSwitchIndentType)
 								_serializedResourceFile = _switchIndentType (_serializedResourceFile,'\t',_indentChars)
 							;
@@ -543,7 +554,7 @@ Uize.module ({
 								_serializedResourceFile = _switchLinebreakType (_serializedResourceFile,_linebreakChars)
 							;
 							_fileSystem.writeFile ({
-								path:_rootFolderPath + '/' + m.getLanguageResourcePath (_resourceFileSubPath,_language),
+								path:_resourceFileFullPath,
 								contents:_serializedResourceFile
 							});
 						}
@@ -936,7 +947,7 @@ Uize.module ({
 					*/
 				},
 
-				serializeResourceFile:function (_strings,_language) {
+				serializeResourceFile:function (_strings,_resourceFileInfo) {
 					throw new Error ('The serializeResourceFile method must be implemented');
 					// this method should be implemented by subclasses
 				},
