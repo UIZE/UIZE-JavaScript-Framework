@@ -521,7 +521,6 @@ Uize.module ({
 				},
 
 				distributeResources:function (_resources,_language) {
-					// NOTE: this method can be useful for implementation of the extract method
 					var
 						m = this,
 						_project = m.project,
@@ -559,6 +558,24 @@ Uize.module ({
 							});
 						}
 					);
+					/*?
+						Instance Methods
+							distributeResources
+								Distributes the resource strings from the specified project resource strings object to a project's codebase as resource files.
+
+								SYNTAX
+								..........................................................
+								this.distributeResources (stringResourcesOBJ,languageSTR);
+								..........................................................
+
+								The =distributeResources= method iterates through the project resource strings object passed to it and uses the =serializeResourceFile= instance method to generate the contents for resource files that are then written to the codebase of the project. A language identifier should be passed to the =languageSTR= parameter so that the =distributeResources= method can know for which language resource files are to be generated - this information will govern the naming of the generated files.
+
+								In addition to being used internally in the implementation of the =import= localization service method, the =distributeResources= method can be used in the implementation of the =extract= localization service method for generating resource files for the primary language, based upon resource strings that have been extracted from the project's source code files.
+
+								NOTES
+								- see the related =serializeResourceFile= instance method
+								- see also the companion =gatherResources= instance method
+					*/
 				},
 
 				prepareToExecuteMethod:function (_totalSteps) {
@@ -645,6 +662,22 @@ Uize.module ({
 						}
 					);
 					return _resources;
+					/*?
+						Instance Methods
+							gatherResources
+								Returns a project resource strings object, being the complete set of resource strings for the primary language of a project, as parsed from all the primary language resource files of the project.
+
+								SYNTAX
+								.............................................
+								stringResourcesOBJ = this.gatherResources ();
+								.............................................
+
+								The =gatherResources= method recurses through all the folders under the configured root folder path for a project, finding all the resource files (as determined by the =isResourceFile= instance method), and parses the resource strings from these files using the =parseResourceFile= instance method. The parsed resource strings are populated into the master project resource strings object.
+
+								NOTES
+								- see the related =isResourceFile= and =parseResourceFile= instance methods
+								- see also the companion =distributeResources= instance method
+					*/
 				},
 
 				getLanguageResourcePath:function () {
@@ -1050,6 +1083,23 @@ Uize.module ({
 						;
 						return _languagesForBrand ? Uize.isIn (_languagesForBrand,_language) : true;
 					}
+					/*?
+						Instance Methods
+							doesBrandSupportLanguage
+								Returns a boolean, indicating whether or not the specified brand supports the specified language.
+
+								SYNTAX
+								..............................................................................
+								supportsLanguageBOOL = this.doesBrandSupportLanguage (brandIdSTR,languageSTR);
+								..............................................................................
+
+								Whether or not a particular language is supported for a brand is governed by the brand language configuration for a project. Internally, the =doesBrandSupportLanguage= method is used in the implementation of the =export= localization service method to determine if branded resource strings should be gathered for any given translatable language for which strings are being exported.
+
+								If an empty string is specified for the =brandIdSTR= parameter, or if the language identifier for the pseudo-locale that is configured for the project is specified for the =languageSTR= parameter, then the =doesBrandSupportLanguage= method will return the value =true=.
+
+								NOTES
+								- see the related =getResourceFileBrand= and =getStringBrand= instance methods
+					*/
 				},
 
 				'import':function (_params,_callback) {
