@@ -1064,12 +1064,106 @@ Uize.module ({
 
 				getReferencingCodeFiles:function () {
 					throw new Error ('The getReferencingCodeFiles method must be implemented');
-					// this method should be implemented by subclasses
+					/*?
+						Instance Methods
+							getReferencingCodeFiles
+								Returns an array of file paths, representing the code files in a project's codebase that may contain references to resource strings.
+
+								SYNTAX
+								.................................................
+								filePathsARRAY = this.getReferencingCodeFiles ();
+								.................................................
+
+								The implementation of this method, provided in this base class, throws an error. This means that, if the =usage= localization service method is to be used for a project, then this method *must* be overridden by the adapter subclass for the project.
+
+								The =getReferencingCodeFiles= method is not passed any parameters when it is called. As an instance method, an implementation for this method can access the project properties through the properties of the instance. The implementation can determine the list of referencing files in any way that suits the nature of the project. The only requirement is that the method return an array of file paths.
+
+								The =usage= method iterates over the list of referencing files that is returned by this method and, for each file, uses the =getReferencesFromCodeFile= instance method to obtain the file's resource string references.
+
+								NOTES
+								- see also the related =usage= and =getReferencesFromCodeFile= instance methods
+					*/
 				},
 
 				getReferencesFromCodeFile:function (_filePath) {
 					throw new Error ('The getReferencesFromCodeFile method must be implemented');
-					// this method should be implemented by subclasses
+					/*?
+						Instance Methods
+							getReferencesFromCodeFile
+								Returns a string references lookup object, representing the information for zero or more resource string references detected within the specified code file.
+
+								SYNTAX
+								...................................................................
+								stringReferencesOBJ = this.getReferencesFromCodeFile (filePathSTR);
+								...................................................................
+
+								The =usage= method iterates over the list of referencing files that is returned by the =getReferencingCodeFiles= instance method and, for each file, uses the =getReferencesFromCodeFile= instance method to obtain the file's resource string references.
+
+								The implementation of this method, provided in this base class, throws an error. This means that, if the =usage= localization service method is to be used for a project, then this method *must* be overridden by the adapter subclass for the project.
+
+								When the =getReferencesFromCodeFile= method is called, the file path for a code file is passed to its =filePathSTR= parameter. As an instance method, an implementation for this method can access the project properties through the properties of the instance.
+
+								The implementation can detect resource string references in any way that suits the nature of the project and the language(s) of its code files. The only requirement is that the method return a lookup object of string references arrays, where the keys of the lookup object are string ID's, and where the values of the lookup are references arrays containing any number of reference info objects describing the references to the string within the code file.
+
+
+								STRING REFERENCES LOOKUP OBJECT
+								..........................
+								{
+									myString1:[
+										{
+											// reference info
+										},
+										{
+											// reference info
+										},
+										...
+									],
+									myString2:[
+										{
+											// reference info
+										},
+										{
+											// reference info
+										},
+										...
+									],
+									...
+									...
+									...
+									myStringN:[
+										{
+											// reference info
+										},
+										{
+											// reference info
+										},
+										...
+									]
+								}
+								..........................
+
+								The information that is returned in the string reference objects is left to the discretion of the adapter subclass for the project. The following structure is recommended as a guideline...
+
+								STRING REFERENCE OBJECT
+								................................................................................
+								{
+									reference:referenceTextSTR,
+									start:{
+										line:startLineINT,          // the line number where the reference starts
+										lineChar:startLineCharINT,  // the starting character on the starting line
+										char:startCharINT           // the starting character within the file
+									},
+									end:{
+										line:endLineINT,            // the line number where the reference ends
+										lineChar:endLineCharINT,    // the ending character on the ending line
+										char:endCharINT             // the ending character within the file
+									}
+								}
+								................................................................................
+
+								NOTES
+								- see also the related =usage= and =getReferencingCodeFiles= instance methods
+					*/
 				},
 
 				doesBrandSupportLanguage:function (_brand,_language) {
@@ -1456,7 +1550,12 @@ Uize.module ({
 									function (_stringReferences,_stringId) {
 										Uize.push (
 											_allReferencesLookup [_stringId] || (_allReferencesLookup [_stringId] = []),
-											_stringReferences
+											Uize.map (
+												_stringReferences,
+												function (_stringReference) {
+													return Uize.copyInto ({filePath:_filePath},_stringReference);
+												}
+											)
 										);
 									}
 								);
