@@ -106,6 +106,7 @@ Uize.module ({
 									_eatWhitespace ();
 									if (_source.charAt (_index) == '>') {
 										m.childNodes = _undefined;
+										_index++;
 										m.isValid = true;
 									}
 								}

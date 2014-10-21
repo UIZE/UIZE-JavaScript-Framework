@@ -44,13 +44,14 @@ Uize.module ({
 						test:[
 							Uize.Test.ParserTest.parserTest (
 								'A tag may be self-closing',
-								['<foo/>'],
+								['<foo/><bar></bar>'],
 								{
 									isValid:true,
 									tagName:{
 										isValid:true,
 										name:'foo'
 									},
+									length:6,
 									childNodes:undefined
 								}
 							),
