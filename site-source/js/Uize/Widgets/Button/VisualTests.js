@@ -65,6 +65,13 @@ Uize.module ({
 					size:_allSizes
 				});
 				this.addStateCombinationTestCases ({
+					text:'RESET',
+					flavor:'subdued',
+					enabled:[true,false],
+					selected:[false,true],
+					size:_allSizes
+				});
+				this.addStateCombinationTestCases ({
 					text:'Settings',
 					enabled:[true,false],
 					busy:[false,true],

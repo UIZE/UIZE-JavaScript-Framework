@@ -81,6 +81,56 @@
 			cursor: default;
 		}
 
+	/*** subdued flavor ***/
+		.`subdued`,
+		.`subdued`:link,
+		.`subdued`:visited,
+		.`subdued`:hover,
+		.`subdued`:active {
+			border-color: transparent;
+			color: #444;
+			text-shadow: none;
+			background; none;
+		}
+
+		.`subdued-over`,
+		.`subdued-over`:link,
+		.`subdued-over`:visited,
+		.`subdued-over`:hover,
+		.`subdued-over`:active {
+			border-color: #aaa #777 #777 #aaa;
+			color: #222;
+			text-shadow: 1px -1px 0 #fff, 1px 0px 0 #fff, 1px 1px 0 #fff;
+			background: #efefef;
+			filter: none;
+		}
+
+		.`subdued-active`,
+		.`subdued-active`:link,
+		.`subdued-active`:visited,
+		.`subdued-active`:hover,
+		.`subdued-active`:active {
+			border-color: #666;
+			color: #000;
+			text-shadow: 1px -1px 0 #fff, 1px 0px 0 #fff, 1px 1px 0 #fff;
+			box-shadow: inset 0 2px 4px rgba(0,0,0,.1);
+			background: #fff;
+			filter: none;
+		}
+
+		.`subdued-disabled`,
+		.`subdued-disabled`:link,
+		.`subdued-disabled`:visited,
+		.`subdued-disabled`:hover,
+		.`subdued-disabled`:active {
+			border-color: transparent;
+			background: none;
+			filter: none;
+			color: #bbb;
+			text-shadow: none;
+			cursor: default;
+		}
+
 	/*** positive flavor ***/
 		.`positive`,
 		.`positive`:link,

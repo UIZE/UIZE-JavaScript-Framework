@@ -57,6 +57,11 @@ Uize.module ({
 					flavor:'primary',
 					size:_allSizes
 				});
+				this.addStateCombinationSamples ({
+					text:'RESET',
+					flavor:'subdued',
+					size:_allSizes
+				});
 			},
 
 			set:{

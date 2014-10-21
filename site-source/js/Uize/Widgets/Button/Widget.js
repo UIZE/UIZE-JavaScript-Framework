@@ -465,7 +465,7 @@ Uize.module ({
 				},
 				_flavor:{
 					name:'flavor',
-					value:'normal' // values can be 'normal' | 'primary' | 'positive' | 'negative'
+					value:'normal' // values can be 'normal' | 'primary' | 'positive' | 'negative' | 'subdued'
 				}
 			},
 
