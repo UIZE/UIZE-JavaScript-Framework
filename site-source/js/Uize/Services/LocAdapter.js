@@ -1254,18 +1254,31 @@ Uize.module ({
 										;
 										if (m.doesBrandSupportLanguage (_resourceFileBrand,_language)) {
 											_languageResources [_resourceFileSubPath] = Uize.Data.Diff.diff (
-												_parseResourceFile (m,_resourceFilePath,_language),
-												_primaryLanguageResourcesDiff [_resourceFileSubPath],
-												function (_gatheredProperty,_propertyDiff,_path) {
+												Uize.Data.Diff.diff (
+													_parseResourceFile (m,_resourceFilePath,_language),
+													_primaryLanguageResourcesDiff [_resourceFileSubPath],
+													function (_gatheredProperty,_propertyDiff,_path) {
+														return (
+															!_propertyDiff || _propertyDiff.value == 'removed' ||
+															!m.doesBrandSupportLanguage (m.getStringBrand (_path),_language)
+																? _undefined
+																: {
+																	value:_propertyDiff.value == 'modified'
+																		? ''
+																		: _gatheredProperty ? _gatheredProperty.value : ''
+																}
+														);
+													},
+													{skeleton:true}
+												),
+												_resourceFileStrings,
+												function (_languageString,_primaryLanguageString) {
 													return (
-														!_propertyDiff || _propertyDiff.value == 'removed' ||
-														!m.doesBrandSupportLanguage (m.getStringBrand (_path),_language)
-															? _undefined
-															: {
-																value:_propertyDiff.value == 'modified'
-																	? ''
-																	: _gatheredProperty ? _gatheredProperty.value : ''
-															}
+														_languageString &&
+														!_languageString.value &&
+														!_isTranslatableString (m,_primaryLanguageString)
+															? _primaryLanguageString
+															: _languageString
 													);
 												},
 												{skeleton:true}
