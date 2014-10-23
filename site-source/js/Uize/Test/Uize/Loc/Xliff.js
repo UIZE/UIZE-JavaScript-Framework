@@ -218,6 +218,54 @@ Uize.module ({
 							'	</file>\n' +
 							'</xliff>'
 						],
+						['When an object value is specified for the seedTarget option, the value for each <trans-unit> tag\'s <target> tag is encoded in the same way as the value for its <source> tag',
+							[
+								{
+									sourceLanguage:'en_US',
+									targetLanguage:'fr_FR',
+									strings:{
+										'foo/bar.properties':{
+											widgetN:{
+												TITLE:'widget {widgetNo} title',
+												DESCRIPTION:'<b>the first widget</b>',
+												BODY:'<div>{body}</div>'
+											}
+										}
+									}
+								},
+								{
+									seedTarget:{
+										'foo/bar.properties':{
+											widgetN:{
+												TITLE:'titre de widget de {widgetNo}',
+												DESCRIPTION:'<b>le premier widget</b>',
+												BODY:'<div>{body}</div>'
+											}
+										}
+									},
+									tokenSplitter:/\{[\w\d]+\}/
+								}
+							],
+							'<?xml version="1.0" ?>\n' +
+							'<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">\n' +
+							'	<file original="foo/bar.properties" source-language="en_US" target-language="fr_FR" datatype="plaintext">\n' +
+							'		<body>\n' +
+							'			<trans-unit id="[&apos;widgetN&apos;,&apos;TITLE&apos;]">\n' +
+							'				<source>widget <ph id="1" ctype="x-param">{widgetNo}</ph> title</source>\n' +
+							'				<target>titre de widget de <ph id="2" ctype="x-param">{widgetNo}</ph></target>\n' +
+							'			</trans-unit>\n' +
+							'			<trans-unit id="[&apos;widgetN&apos;,&apos;DESCRIPTION&apos;]">\n' +
+							'				<source>&lt;b&gt;the first widget&lt;/b&gt;</source>\n' +
+							'				<target>&lt;b&gt;le premier widget&lt;/b&gt;</target>\n' +
+							'			</trans-unit>\n' +
+							'			<trans-unit id="[&apos;widgetN&apos;,&apos;BODY&apos;]">\n' +
+							'				<source>&lt;div&gt;<ph id="3" ctype="x-param">{body}</ph>&lt;/div&gt;</source>\n' +
+							'				<target>&lt;div&gt;<ph id="3" ctype="x-param">{body}</ph>&lt;/div&gt;</target>\n' +
+							'			</trans-unit>\n' +
+							'		</body>\n' +
+							'	</file>\n' +
+							'</xliff>'
+						],
 						['An object containing string arrays for a file can be serialized to XLIFF format',
 							{
 								sourceLanguage:'en_US',

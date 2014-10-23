@@ -81,6 +81,23 @@ Uize.module ({
 							);
 						}
 
+						function _encodeResourceStringText (_text) {
+							return (
+								_tokenSplitter
+									? Uize.map (
+										_tokenSplitter (_text),
+										function (_segment,_segmentNo) {
+											return (
+												_segmentNo % 2
+													? '<ph id="' + ++_phId + '" ctype="x-param">' + _htmlEncode (_segment) + '</ph>'
+													: _htmlEncode (_segment)
+											);
+										}
+									).join ('')
+									: _htmlEncode (_text)
+							);
+						}
+
 						_xliffLines.push (
 							'\t<file ' +
 								'original="' + _htmlEncode (_resourceFileSubPath) + '" ' +
@@ -95,25 +112,25 @@ Uize.module ({
 						;
 						Uize.forEach (
 							_flattenResourceStrings (_resourceFileStrings),
-							function (_resourceStringText,_id) {
-								var _source = _tokenSplitter
-									? Uize.map (
-										_tokenSplitter (_resourceStringText),
-										function (_segment,_segmentNo) {
-											return (
-												_segmentNo % 2
-													? '<ph id="' + ++_phId + '" ctype="x-param">' + _htmlEncode (_segment) + '</ph>'
-													: _htmlEncode (_segment)
-											);
-										}
-									).join ('')
-									: _htmlEncode (_resourceStringText)
+							function (_resourceStringSource,_id) {
+								var
+									_resourceStringTarget = (
+										_seedTarget ? ((_targetValues && _targetValues [_id]) || _resourceStringSource) : ''
+									),
+									_source = _encodeResourceStringText (_resourceStringSource)
 								;
 								_xliffLines.push (
 									'\t\t\t<trans-unit id="' + _htmlEncode (_id) + '">',
 									'\t\t\t\t<source>' + _source + '</source>',
 									'\t\t\t\t<target>' +
-										(_seedTarget ? ((_targetValues && _targetValues [_id]) || _source) : '') +
+										(
+											_resourceStringTarget &&
+											(
+												_resourceStringTarget == _resourceStringSource
+													? _source
+													: _encodeResourceStringText (_resourceStringTarget)
+											)
+										) +
 									'</target>',
 									'\t\t\t</trans-unit>'
 								);
