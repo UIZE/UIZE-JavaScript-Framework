@@ -322,6 +322,30 @@ Uize.module ({
 								'	</file>',
 								'</xliff>'
 							].join ('\n')
+						],
+						['When resource strings contain line break characters, these characters are encoded as XML entities',
+							{
+								sourceLanguage:'en_US',
+								targetLanguage:'fr_FR',
+								strings:{
+									'foo/bar.properties':{
+										STR:'this string\nspans\rmultiple\r\nlines'
+									}
+								}
+							},
+							[
+								'<?xml version="1.0" ?>',
+								'<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">',
+								'	<file original="foo/bar.properties" source-language="en_US" target-language="fr_FR" datatype="plaintext">',
+								'		<body>',
+								'			<trans-unit id="[&apos;STR&apos;]">',
+								'				<source>this string&#10;spans&#13;multiple&#13;&#10;lines</source>',
+								'				<target></target>',
+								'			</trans-unit>',
+								'		</body>',
+								'	</file>',
+								'</xliff>'
+							].join ('\n')
 						]
 					]],
 					['Uize.Loc.Xliff.from',[
