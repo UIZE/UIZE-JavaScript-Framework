@@ -51,29 +51,31 @@ Uize.module ({
 									}
 								}
 							},
-							'<?xml version="1.0" ?>\n' +
-							'<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">\n' +
-							'	<file original="foo/bar.properties" source-language="en_US" target-language="fr_FR" datatype="plaintext">\n' +
-							'		<body>\n' +
-							'			<trans-unit id="[&apos;widget1&apos;,&apos;TITLE&apos;]">\n' +
-							'				<source>widget 1 title</source>\n' +
-							'				<target></target>\n' +
-							'			</trans-unit>\n' +
-							'			<trans-unit id="[&apos;widget1&apos;,&apos;DESCRIPTION&apos;]">\n' +
-							'				<source>the first widget</source>\n' +
-							'				<target></target>\n' +
-							'			</trans-unit>\n' +
-							'			<trans-unit id="[&apos;widget2&apos;,&apos;TITLE&apos;]">\n' +
-							'				<source>widget 2 title</source>\n' +
-							'				<target></target>\n' +
-							'			</trans-unit>\n' +
-							'			<trans-unit id="[&apos;widget2&apos;,&apos;DESCRIPTION&apos;]">\n' +
-							'				<source>the second widget</source>\n' +
-							'				<target></target>\n' +
-							'			</trans-unit>\n' +
-							'		</body>\n' +
-							'	</file>\n' +
-							'</xliff>'
+							[
+								'<?xml version="1.0" ?>',
+								'<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">',
+								'	<file original="foo/bar.properties" source-language="en_US" target-language="fr_FR" datatype="plaintext">',
+								'		<body>',
+								'			<trans-unit id="[&apos;widget1&apos;,&apos;TITLE&apos;]">',
+								'				<source>widget 1 title</source>',
+								'				<target></target>',
+								'			</trans-unit>',
+								'			<trans-unit id="[&apos;widget1&apos;,&apos;DESCRIPTION&apos;]">',
+								'				<source>the first widget</source>',
+								'				<target></target>',
+								'			</trans-unit>',
+								'			<trans-unit id="[&apos;widget2&apos;,&apos;TITLE&apos;]">',
+								'				<source>widget 2 title</source>',
+								'				<target></target>',
+								'			</trans-unit>',
+								'			<trans-unit id="[&apos;widget2&apos;,&apos;DESCRIPTION&apos;]">',
+								'				<source>the second widget</source>',
+								'				<target></target>',
+								'			</trans-unit>',
+								'		</body>',
+								'	</file>',
+								'</xliff>'
+							].join ('\n')
 						],
 						['When the resource strings contain substitution tokens and a value is specified for the tokenSplitter option, then the substitution tokens are wrapped in <ph> tags when serialized to XLIFF format',
 							[
@@ -93,33 +95,35 @@ Uize.module ({
 								},
 								{tokenSplitter:/\{[\w\d]+\}/}
 							],
-							'<?xml version="1.0" ?>\n' +
-							'<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">\n' +
-							'	<file original="foo/bar.properties" source-language="en_US" target-language="fr_FR" datatype="plaintext">\n' +
-							'		<body>\n' +
-							'			<trans-unit id="[&apos;STR1&apos;]">\n' +
-							'				<source>foo <ph id="1" ctype="x-param">{param}</ph> bar</source>\n' +
-							'				<target></target>\n' +
-							'			</trans-unit>\n' +
-							'			<trans-unit id="[&apos;STR2&apos;]">\n' +
-							'				<source>foo <ph id="2" ctype="x-param">{param}</ph></source>\n' +
-							'				<target></target>\n' +
-							'			</trans-unit>\n' +
-							'			<trans-unit id="[&apos;STR3&apos;]">\n' +
-							'				<source><ph id="3" ctype="x-param">{param}</ph> bar</source>\n' +
-							'				<target></target>\n' +
-							'			</trans-unit>\n' +
-							'			<trans-unit id="[&apos;STR4&apos;]">\n' +
-							'				<source><ph id="4" ctype="x-param">{param}</ph></source>\n' +
-							'				<target></target>\n' +
-							'			</trans-unit>\n' +
-							'			<trans-unit id="[&apos;STR5&apos;]">\n' +
-							'				<source><ph id="5" ctype="x-param">{param1}</ph><ph id="6" ctype="x-param">{param2}</ph></source>\n' +
-							'				<target></target>\n' +
-							'			</trans-unit>\n' +
-							'		</body>\n' +
-							'	</file>\n' +
-							'</xliff>'
+							[
+								'<?xml version="1.0" ?>',
+								'<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">',
+								'	<file original="foo/bar.properties" source-language="en_US" target-language="fr_FR" datatype="plaintext">',
+								'		<body>',
+								'			<trans-unit id="[&apos;STR1&apos;]">',
+								'				<source>foo <ph id="1" ctype="x-param">{param}</ph> bar</source>',
+								'				<target></target>',
+								'			</trans-unit>',
+								'			<trans-unit id="[&apos;STR2&apos;]">',
+								'				<source>foo <ph id="2" ctype="x-param">{param}</ph></source>',
+								'				<target></target>',
+								'			</trans-unit>',
+								'			<trans-unit id="[&apos;STR3&apos;]">',
+								'				<source><ph id="3" ctype="x-param">{param}</ph> bar</source>',
+								'				<target></target>',
+								'			</trans-unit>',
+								'			<trans-unit id="[&apos;STR4&apos;]">',
+								'				<source><ph id="4" ctype="x-param">{param}</ph></source>',
+								'				<target></target>',
+								'			</trans-unit>',
+								'			<trans-unit id="[&apos;STR5&apos;]">',
+								'				<source><ph id="5" ctype="x-param">{param1}</ph><ph id="6" ctype="x-param">{param2}</ph></source>',
+								'				<target></target>',
+								'			</trans-unit>',
+								'		</body>',
+								'	</file>',
+								'</xliff>'
+							].join ('\n')
 						],
 						['When the value true is specified for the seedTarget option, then the value of each <trans-unit> tag\'s <target> tag is seeded with the untranslated source value of the resource string',
 							[
@@ -141,29 +145,31 @@ Uize.module ({
 								},
 								{seedTarget:true}
 							],
-							'<?xml version="1.0" ?>\n' +
-							'<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">\n' +
-							'	<file original="foo/bar.properties" source-language="en_US" target-language="fr_FR" datatype="plaintext">\n' +
-							'		<body>\n' +
-							'			<trans-unit id="[&apos;widget1&apos;,&apos;TITLE&apos;]">\n' +
-							'				<source>widget 1 title</source>\n' +
-							'				<target>widget 1 title</target>\n' +
-							'			</trans-unit>\n' +
-							'			<trans-unit id="[&apos;widget1&apos;,&apos;DESCRIPTION&apos;]">\n' +
-							'				<source>the first widget</source>\n' +
-							'				<target>the first widget</target>\n' +
-							'			</trans-unit>\n' +
-							'			<trans-unit id="[&apos;widget2&apos;,&apos;TITLE&apos;]">\n' +
-							'				<source>widget 2 title</source>\n' +
-							'				<target>widget 2 title</target>\n' +
-							'			</trans-unit>\n' +
-							'			<trans-unit id="[&apos;widget2&apos;,&apos;DESCRIPTION&apos;]">\n' +
-							'				<source>the second widget</source>\n' +
-							'				<target>the second widget</target>\n' +
-							'			</trans-unit>\n' +
-							'		</body>\n' +
-							'	</file>\n' +
-							'</xliff>'
+							[
+								'<?xml version="1.0" ?>',
+								'<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">',
+								'	<file original="foo/bar.properties" source-language="en_US" target-language="fr_FR" datatype="plaintext">',
+								'		<body>',
+								'			<trans-unit id="[&apos;widget1&apos;,&apos;TITLE&apos;]">',
+								'				<source>widget 1 title</source>',
+								'				<target>widget 1 title</target>',
+								'			</trans-unit>',
+								'			<trans-unit id="[&apos;widget1&apos;,&apos;DESCRIPTION&apos;]">',
+								'				<source>the first widget</source>',
+								'				<target>the first widget</target>',
+								'			</trans-unit>',
+								'			<trans-unit id="[&apos;widget2&apos;,&apos;TITLE&apos;]">',
+								'				<source>widget 2 title</source>',
+								'				<target>widget 2 title</target>',
+								'			</trans-unit>',
+								'			<trans-unit id="[&apos;widget2&apos;,&apos;DESCRIPTION&apos;]">',
+								'				<source>the second widget</source>',
+								'				<target>the second widget</target>',
+								'			</trans-unit>',
+								'		</body>',
+								'	</file>',
+								'</xliff>'
+							].join ('\n')
 						],
 						['When an object value is specified for the seedTarget option, then the value of each <trans-unit> tag\'s <target> tag is seeded with a corresponding value from the seedTarget object, if present, or the untranslated source value of the resource string',
 							[
@@ -194,29 +200,31 @@ Uize.module ({
 									}
 								}
 							],
-							'<?xml version="1.0" ?>\n' +
-							'<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">\n' +
-							'	<file original="foo/bar.properties" source-language="en_US" target-language="fr_FR" datatype="plaintext">\n' +
-							'		<body>\n' +
-							'			<trans-unit id="[&apos;widget1&apos;,&apos;TITLE&apos;]">\n' +
-							'				<source>widget 1 title</source>\n' +
-							'				<target>titre de widget de 1</target>\n' +
-							'			</trans-unit>\n' +
-							'			<trans-unit id="[&apos;widget1&apos;,&apos;DESCRIPTION&apos;]">\n' +
-							'				<source>the first widget</source>\n' +
-							'				<target>le premier widget</target>\n' +
-							'			</trans-unit>\n' +
-							'			<trans-unit id="[&apos;widget2&apos;,&apos;TITLE&apos;]">\n' +
-							'				<source>widget 2 title</source>\n' +
-							'				<target>widget 2 title</target>\n' +
-							'			</trans-unit>\n' +
-							'			<trans-unit id="[&apos;widget2&apos;,&apos;DESCRIPTION&apos;]">\n' +
-							'				<source>the second widget</source>\n' +
-							'				<target>the second widget</target>\n' +
-							'			</trans-unit>\n' +
-							'		</body>\n' +
-							'	</file>\n' +
-							'</xliff>'
+							[
+								'<?xml version="1.0" ?>',
+								'<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">',
+								'	<file original="foo/bar.properties" source-language="en_US" target-language="fr_FR" datatype="plaintext">',
+								'		<body>',
+								'			<trans-unit id="[&apos;widget1&apos;,&apos;TITLE&apos;]">',
+								'				<source>widget 1 title</source>',
+								'				<target>titre de widget de 1</target>',
+								'			</trans-unit>',
+								'			<trans-unit id="[&apos;widget1&apos;,&apos;DESCRIPTION&apos;]">',
+								'				<source>the first widget</source>',
+								'				<target>le premier widget</target>',
+								'			</trans-unit>',
+								'			<trans-unit id="[&apos;widget2&apos;,&apos;TITLE&apos;]">',
+								'				<source>widget 2 title</source>',
+								'				<target>widget 2 title</target>',
+								'			</trans-unit>',
+								'			<trans-unit id="[&apos;widget2&apos;,&apos;DESCRIPTION&apos;]">',
+								'				<source>the second widget</source>',
+								'				<target>the second widget</target>',
+								'			</trans-unit>',
+								'		</body>',
+								'	</file>',
+								'</xliff>'
+							].join ('\n')
 						],
 						['When an object value is specified for the seedTarget option, the value for each <trans-unit> tag\'s <target> tag is encoded in the same way as the value for its <source> tag',
 							[
@@ -246,25 +254,27 @@ Uize.module ({
 									tokenSplitter:/\{[\w\d]+\}/
 								}
 							],
-							'<?xml version="1.0" ?>\n' +
-							'<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">\n' +
-							'	<file original="foo/bar.properties" source-language="en_US" target-language="fr_FR" datatype="plaintext">\n' +
-							'		<body>\n' +
-							'			<trans-unit id="[&apos;widgetN&apos;,&apos;TITLE&apos;]">\n' +
-							'				<source>widget <ph id="1" ctype="x-param">{widgetNo}</ph> title</source>\n' +
-							'				<target>titre de widget de <ph id="2" ctype="x-param">{widgetNo}</ph></target>\n' +
-							'			</trans-unit>\n' +
-							'			<trans-unit id="[&apos;widgetN&apos;,&apos;DESCRIPTION&apos;]">\n' +
-							'				<source>&lt;b&gt;the first widget&lt;/b&gt;</source>\n' +
-							'				<target>&lt;b&gt;le premier widget&lt;/b&gt;</target>\n' +
-							'			</trans-unit>\n' +
-							'			<trans-unit id="[&apos;widgetN&apos;,&apos;BODY&apos;]">\n' +
-							'				<source>&lt;div&gt;<ph id="3" ctype="x-param">{body}</ph>&lt;/div&gt;</source>\n' +
-							'				<target>&lt;div&gt;<ph id="3" ctype="x-param">{body}</ph>&lt;/div&gt;</target>\n' +
-							'			</trans-unit>\n' +
-							'		</body>\n' +
-							'	</file>\n' +
-							'</xliff>'
+							[
+								'<?xml version="1.0" ?>',
+								'<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">',
+								'	<file original="foo/bar.properties" source-language="en_US" target-language="fr_FR" datatype="plaintext">',
+								'		<body>',
+								'			<trans-unit id="[&apos;widgetN&apos;,&apos;TITLE&apos;]">',
+								'				<source>widget <ph id="1" ctype="x-param">{widgetNo}</ph> title</source>',
+								'				<target>titre de widget de <ph id="2" ctype="x-param">{widgetNo}</ph></target>',
+								'			</trans-unit>',
+								'			<trans-unit id="[&apos;widgetN&apos;,&apos;DESCRIPTION&apos;]">',
+								'				<source>&lt;b&gt;the first widget&lt;/b&gt;</source>',
+								'				<target>&lt;b&gt;le premier widget&lt;/b&gt;</target>',
+								'			</trans-unit>',
+								'			<trans-unit id="[&apos;widgetN&apos;,&apos;BODY&apos;]">',
+								'				<source>&lt;div&gt;<ph id="3" ctype="x-param">{body}</ph>&lt;/div&gt;</source>',
+								'				<target>&lt;div&gt;<ph id="3" ctype="x-param">{body}</ph>&lt;/div&gt;</target>',
+								'			</trans-unit>',
+								'		</body>',
+								'	</file>',
+								'</xliff>'
+							].join ('\n')
 						],
 						['An object containing string arrays for a file can be serialized to XLIFF format',
 							{
@@ -287,56 +297,60 @@ Uize.module ({
 									}
 								}
 							},
-							'<?xml version="1.0" ?>\n' +
-							'<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">\n' +
-							'	<file original="foo/bar.properties" source-language="en_US" target-language="fr_FR" datatype="plaintext">\n' +
-							'		<body>\n' +
-							'			<trans-unit id="[&apos;widget1&apos;,&apos;OPTIONS&apos;,0]">\n' +
-							'				<source>Option 1</source>\n' +
-							'				<target></target>\n' +
-							'			</trans-unit>\n' +
-							'			<trans-unit id="[&apos;widget1&apos;,&apos;OPTIONS&apos;,1]">\n' +
-							'				<source>Option 2</source>\n' +
-							'				<target></target>\n' +
-							'			</trans-unit>\n' +
-							'			<trans-unit id="[&apos;widget2&apos;,&apos;OPTIONS&apos;,0]">\n' +
-							'				<source>foo</source>\n' +
-							'				<target></target>\n' +
-							'			</trans-unit>\n' +
-							'			<trans-unit id="[&apos;widget2&apos;,&apos;OPTIONS&apos;,1]">\n' +
-							'				<source>bar</source>\n' +
-							'				<target></target>\n' +
-							'			</trans-unit>\n' +
-							'		</body>\n' +
-							'	</file>\n' +
-							'</xliff>'
+							[
+								'<?xml version="1.0" ?>',
+								'<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">',
+								'	<file original="foo/bar.properties" source-language="en_US" target-language="fr_FR" datatype="plaintext">',
+								'		<body>',
+								'			<trans-unit id="[&apos;widget1&apos;,&apos;OPTIONS&apos;,0]">',
+								'				<source>Option 1</source>',
+								'				<target></target>',
+								'			</trans-unit>',
+								'			<trans-unit id="[&apos;widget1&apos;,&apos;OPTIONS&apos;,1]">',
+								'				<source>Option 2</source>',
+								'				<target></target>',
+								'			</trans-unit>',
+								'			<trans-unit id="[&apos;widget2&apos;,&apos;OPTIONS&apos;,0]">',
+								'				<source>foo</source>',
+								'				<target></target>',
+								'			</trans-unit>',
+								'			<trans-unit id="[&apos;widget2&apos;,&apos;OPTIONS&apos;,1]">',
+								'				<source>bar</source>',
+								'				<target></target>',
+								'			</trans-unit>',
+								'		</body>',
+								'	</file>',
+								'</xliff>'
+							].join ('\n')
 						]
 					]],
 					['Uize.Loc.Xliff.from',[
 						['An XLIFF format document containing multiple resource strings for a file can be parsed to produce a resource strings object',
-							'<?xml version="1.0" ?>\n' +
-							'<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">\n' +
-							'	<file original="foo/bar.properties" source-language="en_US" target-language="fr_FR" datatype="plaintext">\n' +
-							'		<body>\n' +
-							'			<trans-unit id="[&apos;widget1&apos;,&apos;TITLE&apos;]">\n' +
-							'				<source>widget 1 title</source>\n' +
-							'				<target>titre de widget de 1</target>\n' +
-							'			</trans-unit>\n' +
-							'			<trans-unit id="[&apos;widget1&apos;,&apos;DESCRIPTION&apos;]">\n' +
-							'				<source>the first widget</source>\n' +
-							'				<target>le premier widget</target>\n' +
-							'			</trans-unit>\n' +
-							'			<trans-unit id="[&apos;widget2&apos;,&apos;TITLE&apos;]">\n' +
-							'				<source>widget 2 title</source>\n' +
-							'				<target>titre de widget de 2</target>\n' +
-							'			</trans-unit>\n' +
-							'			<trans-unit id="[&apos;widget2&apos;,&apos;DESCRIPTION&apos;]">\n' +
-							'				<source>the second widget</source>\n' +
-							'				<target>le deuxième widget</target>\n' +
-							'			</trans-unit>\n' +
-							'		</body>\n' +
-							'	</file>\n' +
-							'</xliff>',
+							[
+								'<?xml version="1.0" ?>',
+								'<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">',
+								'	<file original="foo/bar.properties" source-language="en_US" target-language="fr_FR" datatype="plaintext">',
+								'		<body>',
+								'			<trans-unit id="[&apos;widget1&apos;,&apos;TITLE&apos;]">',
+								'				<source>widget 1 title</source>',
+								'				<target>titre de widget de 1</target>',
+								'			</trans-unit>',
+								'			<trans-unit id="[&apos;widget1&apos;,&apos;DESCRIPTION&apos;]">',
+								'				<source>the first widget</source>',
+								'				<target>le premier widget</target>',
+								'			</trans-unit>',
+								'			<trans-unit id="[&apos;widget2&apos;,&apos;TITLE&apos;]">',
+								'				<source>widget 2 title</source>',
+								'				<target>titre de widget de 2</target>',
+								'			</trans-unit>',
+								'			<trans-unit id="[&apos;widget2&apos;,&apos;DESCRIPTION&apos;]">',
+								'				<source>the second widget</source>',
+								'				<target>le deuxième widget</target>',
+								'			</trans-unit>',
+								'		</body>',
+								'	</file>',
+								'</xliff>'
+							].join ('\n'),
 							{
 								'foo/bar.properties':{
 									widget1:{
@@ -351,33 +365,35 @@ Uize.module ({
 							}
 						],
 						['An XLIFF format document may contain trans-unit tags with substitution tokens wrapped in <ph> tags',
-							'<?xml version="1.0" ?>\n' +
-							'<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">\n' +
-							'	<file original="foo/bar.properties" source-language="en_US" target-language="fr_FR" datatype="plaintext">\n' +
-							'		<body>\n' +
-							'			<trans-unit id="[&apos;STR1&apos;]">\n' +
-							'				<source>foo <ph id="1" ctype="x-param">{param}</ph> bar</source>\n' +
-							'				<target>foo <ph id="1" ctype="x-param">{param}</ph> bar</target>\n' +
-							'			</trans-unit>\n' +
-							'			<trans-unit id="[&apos;STR2&apos;]">\n' +
-							'				<source>foo <ph id="2" ctype="x-param">{param}</ph></source>\n' +
-							'				<target>foo <ph id="2" ctype="x-param">{param}</ph></target>\n' +
-							'			</trans-unit>\n' +
-							'			<trans-unit id="[&apos;STR3&apos;]">\n' +
-							'				<source><ph id="3" ctype="x-param">{param}</ph> bar</source>\n' +
-							'				<target><ph id="3" ctype="x-param">{param}</ph> bar</target>\n' +
-							'			</trans-unit>\n' +
-							'			<trans-unit id="[&apos;STR4&apos;]">\n' +
-							'				<source><ph id="4" ctype="x-param">{param}</ph></source>\n' +
-							'				<target><ph id="4" ctype="x-param">{param}</ph></target>\n' +
-							'			</trans-unit>\n' +
-							'			<trans-unit id="[&apos;STR5&apos;]">\n' +
-							'				<source><ph id="5" ctype="x-param">{param1}</ph><ph id="6" ctype="x-param">{param2}</ph></source>\n' +
-							'				<target><ph id="5" ctype="x-param">{param1}</ph><ph id="6" ctype="x-param">{param2}</ph></target>\n' +
-							'			</trans-unit>\n' +
-							'		</body>\n' +
-							'	</file>\n' +
-							'</xliff>',
+							[
+								'<?xml version="1.0" ?>',
+								'<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">',
+								'	<file original="foo/bar.properties" source-language="en_US" target-language="fr_FR" datatype="plaintext">',
+								'		<body>',
+								'			<trans-unit id="[&apos;STR1&apos;]">',
+								'				<source>foo <ph id="1" ctype="x-param">{param}</ph> bar</source>',
+								'				<target>foo <ph id="1" ctype="x-param">{param}</ph> bar</target>',
+								'			</trans-unit>',
+								'			<trans-unit id="[&apos;STR2&apos;]">',
+								'				<source>foo <ph id="2" ctype="x-param">{param}</ph></source>',
+								'				<target>foo <ph id="2" ctype="x-param">{param}</ph></target>',
+								'			</trans-unit>',
+								'			<trans-unit id="[&apos;STR3&apos;]">',
+								'				<source><ph id="3" ctype="x-param">{param}</ph> bar</source>',
+								'				<target><ph id="3" ctype="x-param">{param}</ph> bar</target>',
+								'			</trans-unit>',
+								'			<trans-unit id="[&apos;STR4&apos;]">',
+								'				<source><ph id="4" ctype="x-param">{param}</ph></source>',
+								'				<target><ph id="4" ctype="x-param">{param}</ph></target>',
+								'			</trans-unit>',
+								'			<trans-unit id="[&apos;STR5&apos;]">',
+								'				<source><ph id="5" ctype="x-param">{param1}</ph><ph id="6" ctype="x-param">{param2}</ph></source>',
+								'				<target><ph id="5" ctype="x-param">{param1}</ph><ph id="6" ctype="x-param">{param2}</ph></target>',
+								'			</trans-unit>',
+								'		</body>',
+								'	</file>',
+								'</xliff>'
+							].join ('\n'),
 							{
 								'foo/bar.properties':{
 									STR1:'foo {param} bar',
@@ -389,17 +405,19 @@ Uize.module ({
 							}
 						],
 						['An XLIFF format document may contain trans-unit tags with empty, self-closing source and target tags, and such tags are parsed to empty string values',
-							'<?xml version="1.0" ?>\n' +
-							'<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">\n' +
-							'	<file original="foo/bar.properties" source-language="en_US" target-language="fr_FR" datatype="plaintext">\n' +
-							'		<body>\n' +
-							'			<trans-unit id="[&apos;STR&apos;]">\n' +
-							'				<source/>\n' +
-							'				<target/>' +
-							'			</trans-unit>\n' +
-							'		</body>\n' +
-							'	</file>\n' +
-							'</xliff>',
+							[
+								'<?xml version="1.0" ?>',
+								'<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">',
+								'	<file original="foo/bar.properties" source-language="en_US" target-language="fr_FR" datatype="plaintext">',
+								'		<body>',
+								'			<trans-unit id="[&apos;STR&apos;]">',
+								'				<source/>',
+								'				<target/>' +
+								'			</trans-unit>',
+								'		</body>',
+								'	</file>',
+								'</xliff>'
+							].join ('\n'),
 							{
 								'foo/bar.properties':{
 									STR:''
@@ -407,29 +425,31 @@ Uize.module ({
 							}
 						],
 						['An XLIFF format document may contain trans-unit tags that contain values for elements of string arrays, and these are parsed to produce string arrays in the returned strings object',
-							'<?xml version="1.0" ?>\n' +
-							'<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">\n' +
-							'	<file original="foo/bar.properties" source-language="en_US" target-language="fr_FR" datatype="plaintext">\n' +
-							'		<body>\n' +
-							'			<trans-unit id="[&apos;widget1&apos;,&apos;OPTIONS&apos;,0]">\n' +
-							'				<source>Option 1</source>\n' +
-							'				<target>Option 1</target>\n' +
-							'			</trans-unit>\n' +
-							'			<trans-unit id="[&apos;widget1&apos;,&apos;OPTIONS&apos;,1]">\n' +
-							'				<source>Option 2</source>\n' +
-							'				<target>Option 2</target>\n' +
-							'			</trans-unit>\n' +
-							'			<trans-unit id="[&apos;widget2&apos;,&apos;OPTIONS&apos;,0]">\n' +
-							'				<source>foo</source>\n' +
-							'				<target>le foo</target>\n' +
-							'			</trans-unit>\n' +
-							'			<trans-unit id="[&apos;widget2&apos;,&apos;OPTIONS&apos;,1]">\n' +
-							'				<source>bar</source>\n' +
-							'				<target>le bar</target>\n' +
-							'			</trans-unit>\n' +
-							'		</body>\n' +
-							'	</file>\n' +
-							'</xliff>',
+							[
+								'<?xml version="1.0" ?>',
+								'<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">',
+								'	<file original="foo/bar.properties" source-language="en_US" target-language="fr_FR" datatype="plaintext">',
+								'		<body>',
+								'			<trans-unit id="[&apos;widget1&apos;,&apos;OPTIONS&apos;,0]">',
+								'				<source>Option 1</source>',
+								'				<target>Option 1</target>',
+								'			</trans-unit>',
+								'			<trans-unit id="[&apos;widget1&apos;,&apos;OPTIONS&apos;,1]">',
+								'				<source>Option 2</source>',
+								'				<target>Option 2</target>',
+								'			</trans-unit>',
+								'			<trans-unit id="[&apos;widget2&apos;,&apos;OPTIONS&apos;,0]">',
+								'				<source>foo</source>',
+								'				<target>le foo</target>',
+								'			</trans-unit>',
+								'			<trans-unit id="[&apos;widget2&apos;,&apos;OPTIONS&apos;,1]">',
+								'				<source>bar</source>',
+								'				<target>le bar</target>',
+								'			</trans-unit>',
+								'		</body>',
+								'	</file>',
+								'</xliff>'
+							].join ('\n'),
 							{
 								'foo/bar.properties':{
 									widget1:{
