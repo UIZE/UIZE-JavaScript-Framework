@@ -1329,11 +1329,8 @@ Uize.module ({
 										_primaryLanguageResources,
 										function (_languageString,_primaryLanguageString) {
 											return (
-												_primaryLanguageString &&
-												(
-													_filterIsAll ||
-													!!(_languageString && _languageString.value) == _filterIsTranslated
-												) &&
+												_languageString &&
+												(_filterIsAll || !!_languageString.value == _filterIsTranslated) &&
 												_isTranslatableString (m,_primaryLanguageString)
 													? _primaryLanguageString
 													: _undefined
