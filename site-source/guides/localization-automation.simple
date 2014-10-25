@@ -174,18 +174,25 @@ Localization Service Methods ~~ Localization Service Method
 		Executing the =import= method will have the effect of overwriting all the `codebase resource files` for the pseudo-locale and the translatable languages so that their contents reflects the contents of the `master resource files`. The =import= method will also create new codebase resource files, as necessary, if they did not previously exist.
 
 	exportJobs
-		Exports resource strings for translation  from the `master resource files` of a project into the `translation job files`.
+		Exports resource strings for translation from the `master resource files` of a project to `translation job files`.
 
 		................................................................................
 		node [pathToUize]build.js Uize.Build.Loc project=[projectName] method=exportJobs
 		................................................................................
 
 		Export Filters
-			.
+			The =exportJobs= method supports the ability to filter the strings that are exported to the translation job files, using the optional =filter= paramter.
 
-			.....................................................................................................
-			node [pathToUize]build.js Uize.Build.Loc project=[projectName] method=exportJobs filter=[missing|all]
-			.....................................................................................................
+			....................................................................................................
+			node [pathToUize]build.js Uize.Build.Loc project=[projectName] method=exportJobs filter=[filterName]
+			....................................................................................................
+
+			filterName
+				The localization service adapter base class supports the following filters for the =exportJobs= method...
+
+				- =missing= (defualt) -
+				- =translated= -
+				- =all= -
 
 		Export Format
 			.
@@ -441,34 +448,58 @@ Advanced Topics
 
 		Examples of non-translatable resource strings would be...
 
-		- URLs that should be different per language
+		- URLs
 		- media asset IDs
 		- dimension values
 		- color values
-		- support e-mail addresses
+		- support e-mail addresses or phone numbers
+		- item codes
 
-		It is a potential waste of money to send non-translatable strings to translators, since they likely won't know what to do with them and determining how to handle them may involve some costly back-and-forth communication between the project managers on both sides of the process. Worse still, accidental pseudo-localization of some non-translatable strings (such as IDs or URLs) may actually break the pseudo-localized application and hinder localization QA testing of the pseudo-localized version.
+		Reasons for Treating Some Strings as Non-translatable
+			There are good reasons to identify certain strings as being non-translatable and then handle such strings differently in the automation process.
+
+			A Waste of Money
+				For one thing, it is a waste of money to send non-translatable strings to translators.
+
+				Translators will likely not know what to do with such strings, and determining how to handle them may involve some costly back-and-forth communication between the project managers on both sides of the process. And if they actually translate such strings by accident, then they will charge for that translation work.
+
+			Breakage from Accidental Translation
+				Accidental translation of strings that should not be translated can result in breakage of the application.
+
+				For example, a resource string may be used for storing a color value that should be different per language. Technologies such as CSS support named color values, such as "red" or "green". If the intention is to use the color red for one language and the color green for another language, it is not helpful if the actual text "red" is translated to some other language by the translators. Translating "red" to "rouge" in French would break the application in that the translated color value would not be recognized by CSS.
+
+				Instead, such a string should be treated as a non-translatable string, and it would then be the responsibility of a developer to manually change the value in the resource files of the translatable languages, under the direction of a product manager who makes the decision what colors best suit different language audiences.
+
+			Breakage from Pseudo-localization
+				Accidental pseudo-localization of some non-translatable strings (such as IDs or URLs) may break the pseudo-localized version of the application and hinder localization QA testing of the pseudo-localized version.
+
+				For example, if a resource string was being used to store a code like ="AdvancedMode"=, where this code is being used by the application logic and is intended to be different per language, then pseudo-localizing the value from the primary language to ="[ÅðṽåñçéðṀöðé____]"= would break the application as it would not understand this value.
 
 		Non-translatable Strings Vary by Project
 			Different types of projects will likely have different varieties of non-translatable strings that it is convenient for the project to store in `codebase resource files`.
 
-			Therefore, it is up to each project to determine which strings are translatable and which strings are not. This is accomplished by implementing an override to the new =isTranslatableString= method in the `localization service adapter`. The implementation in the adapter base class just returns =true=, so all resource strings are considered translatable by default.
+			Therefore, it is up to each project to determine which strings are translatable and which strings are not. This is accomplished by implementing an override to the new =isTranslatableString= method in the `localization service adapter`.
 
-			An implementation for the =isTranslatableString= method should expect to receive a single argument, being a string info object that describes any given resource string. The string info object will contain a =key= property that specifies the resource string's key name, along with a =value= property that specifies the value of the resource string for the `primary language`.
+			isTranslatableString
+				Implementing support for non-translatable strings in a project involves providing an implementation for the =isTranslatableString= instance method in the localization adapter subclass for the project.
 
-			The method implementation should use the information in the string info object to determine a boolean return value, indicating whether or not the string is translatable. The implementation can use either or both of the =key= and =value= properties to reach its determination- whichever is best suited to the nature of the resource strings in the project.
+				The implementation in the adapter base class just returns =true=, so all resource strings are considered translatable by default.
 
-			EXAMPLE
-			..................................................................................
-			function (stringInfo) {
-				return (
-					!/_(ID|EMAIL)$/.test (stringInfo.key) &&  // it's an ID or an e-mail address
-					!/^https?:\/\//.test (stringInfo.value)   // it's a URL
-				);
-			}
-			..................................................................................
+				An implementation for the =isTranslatableString= method should expect to receive a single argument, being a string info object that describes a resource string. The string info object will contain a =key= property that specifies the resource string's key name, along with a =value= property that specifies the value of the resource string for the `primary language`.
 
-			In the above example implementation for the =isTranslatableString= method, the method is first performing a test on the key of the resource string, checking to see if it ends with "_ID" or "_EMAIL". If this test fails, the method is then testing if the value of the resource string starts with "http://" or "https://".
+				The method implementation should use the information in the string info object to determine a boolean return value, indicating whether or not the string is translatable. The implementation can use either or both of the =key= and =value= properties to reach its determination- whichever is best suited to the nature of the resource strings in the project.
+
+				EXAMPLE
+				..................................................................................
+				function (stringInfo) {
+					return (
+						!/_(ID|EMAIL)$/.test (stringInfo.key) &&  // it's an ID or an e-mail address
+						!/^https?:\/\//.test (stringInfo.value)   // it's a URL
+					);
+				}
+				..................................................................................
+
+				In the above example implementation for the =isTranslatableString= method, the method is first performing a test on the key of the resource string, checking to see if it ends with "_ID" or "_EMAIL". If this test fails, the method is then testing if the value of the resource string starts with "http://" or "https://".
 
 			Establish a Convention for Non-translatable Strings
 				While it is possible to write complex matching logic to test whether or not resource strings should be translatable, it is recommended that projects establish a simple and robust convention.
@@ -488,6 +519,41 @@ Advanced Topics
 				- it becomes clear from the `codebase resource files` exactly which strings are not to be translated
 				- the =isTranslatableString= test is simple, robust, and highly performant
 				- it is easy to add new non-translatable strings of different types later to a project later, without needing to update the implementation of the =isTranslatableString= method
+
+			Surveying Non-translatable Strings
+				In order to verify that one's implementation of the =isTranslatableString= method for a project is doing the right thing, you can survey the strings that are determined to be non-translatable by using the =metrics= localization service method.
+
+				When you execute the =metrics= method, one of its by-products will be the strings info files that are written to the "strings-info" folder. The strings info is obtained from the resource strings in the primary language resource files for the project and is written to two different format files: one JSON format file, and one CSV format file.
+
+				- *.json* - The JSON format file contains an array of string info objects for all of the strings of the project, where each string info object contains properties such as =path=, =value=, =isTranslatable=, etc., and where the values for some properties (such as the =metrics= property) are sub-objects.
+				- *.csv* - The CSV format file contains a table of rows for all of the strings of the project, where each row contains a number of columns that represent a flattened version of the string info object for a string.
+
+				Both of these two strings info files contain the same information, but expressed slightly differently. The CSV file is particularly easy to "consume" and can be loaded up in any spreadsheet editor (such as Google Sheets) that correctly supports the CSV format's ability to have quoted field values that contain line breaks (some of your resource strings may contain line break characters).
+
+				Once loaded into a spreadsheet tool, the =Translatable= column can be used to sort or filter the strings info rows based upon whether or not the strings are considered translatable. For non-translatable strings, the value in the =Translatable= column will be =false=. The spreadsheet can then be used to verify that there are no non-translatable strings being missed by the =isTranslatableString= method, and there are no translatable strings that are being incorrectly caught by it.
+
+		Handling of Non-translatable Strings
+			Non-translatable strings are handled according to the following rules...
+
+			Never Pseudo-localized
+				Non-translatable strings are never pseudo-localized when resource strings for the pseudo-locale are generated by the =export= localization service method.
+
+				Instead, the values from the primary language will be used as is.
+
+			Never Exported for Translation
+				Non-translatable strings are never exported to `translation job files` by the =exportJobs= localization service method.
+
+				This means that translators never have to deal with these strings, and there's never a possibility that translators will accidentally translate them, resulting in charges for wasted effort or even problems for the application.
+
+			Initialized to Primary Language Values
+				Whenever a non-translatable string is added or modified for the primary language of a project, the values for the string for the translatable languages are initialized to the value from the primary language.
+
+				In this way, the values for the string in the resource files for the translatable languages don't need to be manually initialized by developers.
+
+			Manually Modified Values are Respected
+				While the values for non-translatable strings are `initialized to primary language values`, the values for the strings in the translatable languages can subsequently be manually modified by developers.
+
+				Non-empty values for non-translatable strings in the resource files for the translatable languages of a project are respected throughout the localization automation process.
 
 	Metrics Reports ~~ Metrics Report
 		A metrics report can be produced for a project by using the =metrics= `localization service method`.
