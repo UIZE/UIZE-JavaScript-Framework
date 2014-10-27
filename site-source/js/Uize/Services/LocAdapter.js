@@ -535,14 +535,14 @@ Uize.module ({
 						_mustSwitchIndentType = _indentChars != '\t',
 						_mustSwitchLinebreakType = _linebreakChars != '\n',
 						_skipEmptyValues = _project.skipEmptyValues === true,
-						removeEmptyStrings = function(object) {
-							for (var key in object) {
-								if (object.hasOwnProperty(key)) {
-									var val = object[key];
-									if (typeof val === 'object') {
-										removeEmptyStrings(val);
-									} else if (val === '') {
-									delete object[key];
+						_removeEmptyStrings = function (_object) {
+							for (var _key in _object) {
+								if (_object.hasOwnProperty(_key)) {
+									var _value = _object[_key];
+									if (typeof _value == 'object') {
+										_removeEmptyStrings(_value);
+									} else if (_value === '') {
+										delete _object[_key];
 									}
 								}
 							}
@@ -552,7 +552,7 @@ Uize.module ({
 						_resources,
 						function (_resourceFileStrings,_resourceFileSubPath) {
 							if (_skipEmptyValues) {
-								removeEmptyStrings(_resourceFileStrings);
+								_removeEmptyStrings(_resourceFileStrings);
 							}
 							var
 								_resourceFileFullPath =
