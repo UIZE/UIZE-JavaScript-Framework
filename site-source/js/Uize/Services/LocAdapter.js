@@ -533,11 +533,27 @@ Uize.module ({
 							? _resourceFileWhitespace.linebreakChars
 							: '\n',
 						_mustSwitchIndentType = _indentChars != '\t',
-						_mustSwitchLinebreakType = _linebreakChars != '\n'
+						_mustSwitchLinebreakType = _linebreakChars != '\n',
+						_skipEmptyValues = _project.skipEmptyValues === true,
+						removeEmptyStrings = function(object) {
+							for (var key in object) {
+								if (object.hasOwnProperty(key)) {
+									var val = object[key];
+									if (typeof val === 'object') {
+										removeEmptyStrings(val);
+									} else if (val === '') {
+									delete object[key];
+									}
+								}
+							}
+						}
 					;
 					Uize.forEach (
 						_resources,
 						function (_resourceFileStrings,_resourceFileSubPath) {
+							if (_skipEmptyValues) {
+								removeEmptyStrings(_resourceFileStrings);
+							}
 							var
 								_resourceFileFullPath =
 									_rootFolderPath + '/' + m.getLanguageResourcePath (_resourceFileSubPath,_language),
