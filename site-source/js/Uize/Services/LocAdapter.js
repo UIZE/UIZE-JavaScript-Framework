@@ -88,20 +88,6 @@ Uize.module ({
 				return Uize.Json.to (_path,_pathJsonSerializationOptions);
 			}
 
-			function _processStrings (_strings,_stringProcessor) {
-				function _processSection (_section,_path) {
-					for (var _key in _section) {
-						var _value = _section [_key];
-						if (Uize.isObject (_value)) {
-							_processSection (_value,_path.concat (_key));
-						} else if (typeof _value == 'string') {
-							_section [_key] = _stringProcessor (_section [_key],_path.concat (_key));
-						}
-					}
-				}
-				_processSection (_strings,[]);
-			}
-
 		/*** Private Instance Methods ***/
 			function _isTranslatableString (m,_stringInfo) {
 				return _hasNonWhitespace (_stringInfo.value) && m.isTranslatableString (_stringInfo);
@@ -146,14 +132,13 @@ Uize.module ({
 								? m.getResourceFileBrand (_resourceFileSubPath)
 								: ''
 						;
-						_processStrings (
+						Uize.Data.Diff.diff (
 							_resourceFileStrings,
-							function (_value,_path) {
+							{},
+							function (_string,_dummy,_path) {
 								var
-									_isTranslatable = _isTranslatableString (
-										m,
-										{key:_path [_path.length - 1],value:_value}
-									),
+									_value = _string.value,
+									_isTranslatable = _isTranslatableString (m,_string),
 									_stringMetrics = _getStringMetrics (_value,_wordSplitter,_tokenRegExp),
 									_isBrandSpecific = _resourceFileIsBrandSpecific || m.isBrandResourceString (_path)
 								;
@@ -184,7 +169,6 @@ Uize.module ({
 									hasWeakTokens:_hasWeakTokens,
 									isTranslatable:_isTranslatable
 								});
-								return _value;
 							}
 						);
 					}
