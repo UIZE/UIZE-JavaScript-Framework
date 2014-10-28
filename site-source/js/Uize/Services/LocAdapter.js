@@ -518,31 +518,22 @@ Uize.module ({
 							: '\n',
 						_mustSwitchIndentType = _indentChars != '\t',
 						_mustSwitchLinebreakType = _linebreakChars != '\n',
-						_skipEmptyValues = _project.skipEmptyValues === true,
-						_removeEmptyStrings = function (_object) {
-							for (var _key in _object) {
-								if (_object.hasOwnProperty(_key)) {
-									var _value = _object[_key];
-									if (typeof _value == 'object') {
-										_removeEmptyStrings(_value);
-									} else if (_value === '') {
-										delete _object[_key];
-									}
-								}
-							}
-						}
+						_skipEmptyValues = _project.skipEmptyValues === true
 					;
 					Uize.forEach (
 						_resources,
 						function (_resourceFileStrings,_resourceFileSubPath) {
-							if (_skipEmptyValues) {
-								_removeEmptyStrings(_resourceFileStrings);
-							}
 							var
 								_resourceFileFullPath =
 									_rootFolderPath + '/' + m.getLanguageResourcePath (_resourceFileSubPath,_language),
 								_serializedResourceFile = m.serializeResourceFile (
-									_resourceFileStrings,
+									_skipEmptyValues
+										? Uize.Data.Diff.diff (
+											_resourceFileStrings,
+											{},
+											function (_string) {return _string.value === '' ? undefined : _string}
+										)
+										: _resourceFileStrings,
 									_getResourceFileInfo (m,_resourceFileFullPath,_language)
 								)
 							;
