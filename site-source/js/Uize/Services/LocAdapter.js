@@ -37,7 +37,7 @@ Uize.module ({
 		'Uize.Loc.Strings.Metrics',
 		'Uize.Data.Diff',
 		'Uize.Str.Whitespace',
-		'Uize.Str.Lines',
+		'Uize.Build.Util.Whitespace',
 		'Uize.Templates.Text.Tables.Breakdown',
 		'Uize.Templates.Text.Tables.YinYangBreakdown',
 		'Uize.Templates.Text.Tables.Histogram'
@@ -54,8 +54,6 @@ Uize.module ({
 			/*** Variables for Performance Optimization ***/
 				_getStringMetrics = Uize.Loc.Strings.Metrics.getMetrics,
 				_hasNonWhitespace = Uize.Str.Whitespace.hasNonWhitespace,
-				_switchIndentType = Uize.Str.Lines.switchIndentType,
-				_switchLinebreakType = Uize.Str.Lines.switchLinebreakType,
 
 			/*** General Variables ***/
 				_fileSystem = Uize.Services.FileSystem.singleton (),
@@ -507,45 +505,29 @@ Uize.module ({
 				distributeResources:function (_resources,_language) {
 					var
 						m = this,
-						_project = m.project,
-						_rootFolderPath = _project.rootFolderPath,
-						_resourceFileWhitespace = _project.resourceFileWhitespace || _sacredEmptyObject,
-						_indentChars = _resourceFileWhitespace.indentChars != _undefined
-							? _resourceFileWhitespace.indentChars
-							: '\t',
-						_linebreakChars = _resourceFileWhitespace.linebreakChars != _undefined
-							? _resourceFileWhitespace.linebreakChars
-							: '\n',
-						_mustSwitchIndentType = _indentChars != '\t',
-						_mustSwitchLinebreakType = _linebreakChars != '\n',
-						_skipEmptyValues = _project.skipEmptyValues === true
+						_project = m.project
 					;
 					Uize.forEach (
 						_resources,
 						function (_resourceFileStrings,_resourceFileSubPath) {
-							var
-								_resourceFileFullPath =
-									_rootFolderPath + '/' + m.getLanguageResourcePath (_resourceFileSubPath,_language),
-								_serializedResourceFile = m.serializeResourceFile (
-									_skipEmptyValues
-										? Uize.Data.Diff.diff (
-											_resourceFileStrings,
-											{},
-											function (_string) {return _string.value === '' ? undefined : _string}
-										)
-										: _resourceFileStrings,
-									_getResourceFileInfo (m,_resourceFileFullPath,_language)
-								)
-							;
-							if (_mustSwitchIndentType)
-								_serializedResourceFile = _switchIndentType (_serializedResourceFile,'\t',_indentChars)
-							;
-							if (_mustSwitchLinebreakType)
-								_serializedResourceFile = _switchLinebreakType (_serializedResourceFile,_linebreakChars)
+							var _resourceFileFullPath =
+								_project.rootFolderPath + '/' + m.getLanguageResourcePath (_resourceFileSubPath,_language)
 							;
 							_fileSystem.writeFile ({
 								path:_resourceFileFullPath,
-								contents:_serializedResourceFile
+								contents:Uize.Build.Util.Whitespace.alterNormalizedWhitespace (
+									m.serializeResourceFile (
+										_project.skipEmptyValues === true
+											? Uize.Data.Diff.diff (
+												_resourceFileStrings,
+												{},
+												function (_string) {return _string.value === '' ? undefined : _string}
+											)
+											: _resourceFileStrings,
+										_getResourceFileInfo (m,_resourceFileFullPath,_language)
+									),
+									_project.resourceFileWhitespace
+								)
 							});
 						}
 					);
