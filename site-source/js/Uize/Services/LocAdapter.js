@@ -30,9 +30,9 @@ Uize.module ({
 		'Uize.Json',
 		'Uize.Data.Flatten',
 		'Uize.Data.Matches',
-		'Uize.Data.NameValueRecords',
 		'Uize.Data.Csv',
 		'Uize.Loc.Xliff',
+		'Uize.Loc.FileFormats.ProjectStrings.Csv',
 		'Uize.Loc.Pseudo',
 		'Uize.Loc.Strings.Metrics',
 		'Uize.Data.Diff',
@@ -1337,16 +1337,7 @@ Uize.module ({
 												tokenSplitter:m.tokenRegExp
 											}
 										)
-										: Uize.Data.Csv.to (
-											Uize.Data.NameValueRecords.fromHash (
-												Uize.Data.Flatten.flatten (
-													_translationJobStrings,
-													function (_path) {return Uize.Json.to (_path,'mini')}
-												),
-												0,
-												1
-											)
-										)
+										: Uize.Loc.FileFormats.ProjectStrings.Csv.to (_translationJobStrings)
 								});
 
 								m.stepCompleted (_language + ': created translation job file');
@@ -1377,10 +1368,7 @@ Uize.module ({
 										? _removeEmptyStrings (
 											_project.translationJobFileFormat == 'xliff'
 												? Uize.Loc.Xliff.from (_translationJobFile)
-												: Uize.Data.Flatten.unflatten (
-													Uize.Data.NameValueRecords.toHash (Uize.Data.Csv.from (_translationJobFile),0,1),
-													Uize.Json.from
-												)
+												: Uize.Loc.FileFormats.ProjectStrings.Csv.from (_translationJobFile)
 										)
 										: {}
 								;
