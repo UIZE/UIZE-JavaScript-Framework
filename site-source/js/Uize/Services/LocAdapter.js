@@ -86,6 +86,14 @@ Uize.module ({
 				return Uize.Json.to (_path,_pathJsonSerializationOptions);
 			}
 
+			function _removeEmptyStrings (_strings) {
+				return Uize.Data.Diff.diff (
+					_strings,
+					{},
+					function (_string) {return _string.value === '' ? _undefined : _string}
+				);
+			}
+
 		/*** Private Instance Methods ***/
 			function _isTranslatableString (m,_stringInfo) {
 				return _hasNonWhitespace (_stringInfo.value) && m.isTranslatableString (_stringInfo);
@@ -518,11 +526,7 @@ Uize.module ({
 								contents:Uize.Build.Util.Whitespace.alterNormalizedWhitespace (
 									m.serializeResourceFile (
 										_project.skipEmptyValues === true
-											? Uize.Data.Diff.diff (
-												_resourceFileStrings,
-												{},
-												function (_string) {return _string.value === '' ? undefined : _string}
-											)
+											? _removeEmptyStrings (_resourceFileStrings)
 											: _resourceFileStrings,
 										_getResourceFileInfo (m,_resourceFileFullPath,_language)
 									),
@@ -1370,16 +1374,13 @@ Uize.module ({
 										? _fileSystem.readFile ({path:_translationJobFilePath})
 										: '',
 									_translatedStrings = _translationJobFile
-										? Uize.Data.Diff.diff (
+										? _removeEmptyStrings (
 											_project.translationJobFileFormat == 'xliff'
 												? Uize.Loc.Xliff.from (_translationJobFile)
 												: Uize.Data.Flatten.unflatten (
 													Uize.Data.NameValueRecords.toHash (Uize.Data.Csv.from (_translationJobFile),0,1),
 													Uize.Json.from
 												)
-											,
-											{},
-											function (_string) {return _string.value ? _string : _undefined}
 										)
 										: {}
 								;
