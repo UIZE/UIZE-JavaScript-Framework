@@ -77,6 +77,55 @@ Uize.module ({
 								'</xliff>'
 							].join ('\n')
 						],
+						['An object containing resource strings for multiple files can be serialized to XLIFF format',
+							{
+								sourceLanguage:'en_US',
+								targetLanguage:'fr_FR',
+								strings:{
+									'foo/bar.properties':{
+										widget1:{
+											TITLE:'widget 1 title',
+											DESCRIPTION:'the first widget'
+										}
+									},
+									'baz/qux.properties':{
+										widget2:{
+											TITLE:'widget 2 title',
+											DESCRIPTION:'the second widget'
+										}
+									}
+								}
+							},
+							[
+								'<?xml version="1.0" ?>',
+								'<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">',
+								'	<file original="foo/bar.properties" source-language="en_US" target-language="fr_FR" datatype="plaintext">',
+								'		<body>',
+								'			<trans-unit id="[&apos;widget1&apos;,&apos;TITLE&apos;]">',
+								'				<source>widget 1 title</source>',
+								'				<target></target>',
+								'			</trans-unit>',
+								'			<trans-unit id="[&apos;widget1&apos;,&apos;DESCRIPTION&apos;]">',
+								'				<source>the first widget</source>',
+								'				<target></target>',
+								'			</trans-unit>',
+								'		</body>',
+								'	</file>',
+								'	<file original="baz/qux.properties" source-language="en_US" target-language="fr_FR" datatype="plaintext">',
+								'		<body>',
+								'			<trans-unit id="[&apos;widget2&apos;,&apos;TITLE&apos;]">',
+								'				<source>widget 2 title</source>',
+								'				<target></target>',
+								'			</trans-unit>',
+								'			<trans-unit id="[&apos;widget2&apos;,&apos;DESCRIPTION&apos;]">',
+								'				<source>the second widget</source>',
+								'				<target></target>',
+								'			</trans-unit>',
+								'		</body>',
+								'	</file>',
+								'</xliff>'
+							].join ('\n')
+						],
 						['When the resource strings contain substitution tokens and a value is specified for the tokenSplitter option, then the substitution tokens are wrapped in <ph> tags when serialized to XLIFF format',
 							[
 								{
@@ -381,6 +430,51 @@ Uize.module ({
 										TITLE:'titre de widget de 1',
 										DESCRIPTION:'le premier widget'
 									},
+									widget2:{
+										TITLE:'titre de widget de 2',
+										DESCRIPTION:'le deuxième widget'
+									}
+								}
+							}
+						],
+						['An XLIFF format document containing resource strings for multiple files can be parsed to produce a resource strings object',
+							[
+								'<?xml version="1.0" ?>',
+								'<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">',
+								'	<file original="foo/bar.properties" source-language="en_US" target-language="fr_FR" datatype="plaintext">',
+								'		<body>',
+								'			<trans-unit id="[&apos;widget1&apos;,&apos;TITLE&apos;]">',
+								'				<source>widget 1 title</source>',
+								'				<target>titre de widget de 1</target>',
+								'			</trans-unit>',
+								'			<trans-unit id="[&apos;widget1&apos;,&apos;DESCRIPTION&apos;]">',
+								'				<source>the first widget</source>',
+								'				<target>le premier widget</target>',
+								'			</trans-unit>',
+								'		</body>',
+								'	</file>',
+								'	<file original="baz/qux.properties" source-language="en_US" target-language="fr_FR" datatype="plaintext">',
+								'		<body>',
+								'			<trans-unit id="[&apos;widget2&apos;,&apos;TITLE&apos;]">',
+								'				<source>widget 2 title</source>',
+								'				<target>titre de widget de 2</target>',
+								'			</trans-unit>',
+								'			<trans-unit id="[&apos;widget2&apos;,&apos;DESCRIPTION&apos;]">',
+								'				<source>the second widget</source>',
+								'				<target>le deuxième widget</target>',
+								'			</trans-unit>',
+								'		</body>',
+								'	</file>',
+								'</xliff>'
+							].join ('\n'),
+							{
+								'foo/bar.properties':{
+									widget1:{
+										TITLE:'titre de widget de 1',
+										DESCRIPTION:'le premier widget'
+									}
+								},
+								'baz/qux.properties':{
 									widget2:{
 										TITLE:'titre de widget de 2',
 										DESCRIPTION:'le deuxième widget'
