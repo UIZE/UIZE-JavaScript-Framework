@@ -28,11 +28,12 @@ Uize.module ({
 	builder:function () {
 		'use strict';
 
-		var _highlightColor = '#ffa200';
-
 		return Uize.package ({
 			font:{
 				family:'Arial, Helvetica, Verdana'
+			},
+			chrome:{
+				bgColor: '#f4f4f4'
 			},
 			box:{
 				border:{
@@ -43,7 +44,7 @@ Uize.module ({
 			},
 			selectedValue:{
 				color:'#fff',
-				bgColor:_highlightColor
+				bgColor:'#ffa200'
 			},
 			sizes:{
 				tiny:{
