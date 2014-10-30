@@ -27,8 +27,7 @@ Uize.module ({
 	name:'Uize.Loc.FileFormats.ProjectStrings.Csv',
 	required:[
 		'Uize.Data.NameValueRecords',
-		'Uize.Data.Flatten',
-		'Uize.Json',
+		'Uize.Loc.FileFormats.ProjectStrings.Util',
 		'Uize.Data.Csv'
 	],
 	builder:function () {
@@ -38,12 +37,7 @@ Uize.module ({
 			to:function (_toEncode) {
 				return Uize.Data.Csv.to (
 					Uize.Data.NameValueRecords.fromHash (
-						Uize.Data.Flatten.flatten (
-							_toEncode,
-							function (_path) {return Uize.Json.to (_path,'mini')},
-							false,
-							true
-						),
+						Uize.Loc.FileFormats.ProjectStrings.Util.flatten (_toEncode),
 						0,
 						1
 					)
@@ -51,10 +45,8 @@ Uize.module ({
 			},
 
 			from:function (_toDecode) {
-				return Uize.Data.Flatten.unflatten (
-					Uize.Data.NameValueRecords.toHash (Uize.Data.Csv.from (_toDecode),0,1),
-					Uize.Json.from,
-					true
+				return Uize.Loc.FileFormats.ProjectStrings.Util.unflatten (
+					Uize.Data.NameValueRecords.toHash (Uize.Data.Csv.from (_toDecode),0,1)
 				);
 			}
 		});

@@ -27,8 +27,7 @@ Uize.module ({
 	name:'Uize.Loc.Xliff',
 	required:[
 		'Uize.Util.Html.Encode',
-		'Uize.Data.Flatten',
-		'Uize.Json',
+		'Uize.Loc.FileFormats.ProjectStrings.Util',
 		'Uize.Parse.Xml.NodeList',
 		'Uize.Parse.Xml.Util',
 		'Uize.Str.Split'
@@ -73,12 +72,7 @@ Uize.module ({
 					_toEncode.strings,
 					function (_resourceFileStrings,_resourceFileSubPath) {
 						function _flattenResourceStrings (_resourceFileStrings) {
-							return Uize.Data.Flatten.flatten (
-								_resourceFileStrings,
-								function (_path) {return Uize.Json.to (_path,'mini')},
-								false,
-								true
-							);
+							return Uize.Loc.FileFormats.ProjectStrings.Util.flatten (_resourceFileStrings);
 						}
 
 						function _encodeResourceStringText (_text) {
@@ -175,11 +169,9 @@ Uize.module ({
 								;
 							}
 						);
-						_strings [_getAttributeValue (_fileTag,'original')] = Uize.Data.Flatten.unflatten (
-							_fileStrings,
-							Uize.Json.from,
-							true
-						);
+						_strings [_getAttributeValue (_fileTag,'original')] =
+							Uize.Loc.FileFormats.ProjectStrings.Util.unflatten (_fileStrings)
+						;
 					}
 				);
 				return _strings;
