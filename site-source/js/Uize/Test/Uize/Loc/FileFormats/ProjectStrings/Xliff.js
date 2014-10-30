@@ -1,7 +1,7 @@
 /*______________
 |       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
 |     /      /  |   ---------------------------------------------------
-|    /    O /   |    MODULE : Uize.Test.Uize.Loc.Xliff Class
+|    /    O /   |    MODULE : Uize.Test.Uize.Loc.FileFormats.ProjectStrings.Xliff Class
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
 | /____/ /__/_| | COPYRIGHT : (c)2014 UIZE
@@ -18,22 +18,22 @@
 
 /*?
 	Introduction
-		The =Uize.Test.Uize.Loc.Xliff= module defines a suite of unit tests for the =Uize.Loc.Xliff= module.
+		The =Uize.Test.Uize.Loc.FileFormats.ProjectStrings.Xliff= module defines a suite of unit tests for the =Uize.Loc.FileFormats.ProjectStrings.Xliff= module.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 */
 
 Uize.module ({
-	name:'Uize.Test.Uize.Loc.Xliff',
+	name:'Uize.Test.Uize.Loc.FileFormats.ProjectStrings.Xliff',
 	builder:function () {
 		'use strict';
 
 		return Uize.Test.resolve ({
-			title:'Test for Uize.Loc.Xliff Module',
+			title:'Test for Uize.Loc.FileFormats.ProjectStrings.Xliff Module',
 			test:[
-				Uize.Test.requiredModulesTest ('Uize.Loc.Xliff'),
+				Uize.Test.requiredModulesTest ('Uize.Loc.FileFormats.ProjectStrings.Xliff'),
 				Uize.Test.staticMethodsTest ([
-					['Uize.Loc.Xliff.to',[
+					['Uize.Loc.FileFormats.ProjectStrings.Xliff.to',[
 						['An object containing multiple resource strings for a file can be serialized to XLIFF format',
 							{
 								sourceLanguage:'en_US',
@@ -397,7 +397,7 @@ Uize.module ({
 							].join ('\n')
 						]
 					]],
-					['Uize.Loc.Xliff.from',[
+					['Uize.Loc.FileFormats.ProjectStrings.Xliff.from',[
 						['An XLIFF format document containing multiple resource strings for a file can be parsed to produce a resource strings object',
 							[
 								'<?xml version="1.0" ?>',
@@ -587,7 +587,7 @@ Uize.module ({
 						],
 						{
 							title:
-								'When an XLIFF document is serialized from a strings object using the Uize.Loc.Xliff.to method and the seedTarget option, and that document is then parsed to produce a strings object using the Uize.Loc.Xliff.from method, the returned strings object is identical to the original strings object',
+								'When an XLIFF document is serialized from a strings object using the Uize.Loc.FileFormats.ProjectStrings.Xliff.to method and the seedTarget option, and that document is then parsed to produce a strings object using the Uize.Loc.FileFormats.ProjectStrings.Xliff.from method, the returned strings object is identical to the original strings object',
 							test:function () {
 								var
 									_sourceStrings = {
@@ -602,8 +602,8 @@ Uize.module ({
 											}
 										}
 									},
-									_parsedStrings = Uize.Loc.Xliff.from (
-										Uize.Loc.Xliff.to (
+									_parsedStrings = Uize.Loc.FileFormats.ProjectStrings.Xliff.from (
+										Uize.Loc.FileFormats.ProjectStrings.Xliff.to (
 											{
 												sourceLanguage:'en_US',
 												targetLanguage:'fr_FR',

@@ -1,7 +1,7 @@
 /*______________
 |       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
 |     /      /  |   ---------------------------------------------------
-|    /    O /   |    MODULE : Uize.Loc.Xliff Package
+|    /    O /   |    MODULE : Uize.Loc.FileFormats.ProjectStrings.Xliff Package
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
 | /____/ /__/_| | COPYRIGHT : (c)2014 UIZE
@@ -18,13 +18,13 @@
 
 /*?
 	Introduction
-		The =Uize.Loc.Xliff= module provides methods to serialize a resource strings object to XLIFF format and parse a resource strings object from XLIFF format.
+		The =Uize.Loc.FileFormats.ProjectStrings.Xliff= module provides methods to serialize a resource strings object to XLIFF format and parse a resource strings object from XLIFF format.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 */
 
 Uize.module ({
-	name:'Uize.Loc.Xliff',
+	name:'Uize.Loc.FileFormats.ProjectStrings.Xliff',
 	required:[
 		'Uize.Util.Html.Encode',
 		'Uize.Loc.FileFormats.ProjectStrings.Util',

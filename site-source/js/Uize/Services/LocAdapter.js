@@ -31,7 +31,7 @@ Uize.module ({
 		'Uize.Data.Flatten',
 		'Uize.Data.Matches',
 		'Uize.Data.Csv',
-		'Uize.Loc.Xliff',
+		'Uize.Loc.FileFormats.ProjectStrings.Xliff',
 		'Uize.Loc.FileFormats.ProjectStrings.Csv',
 		'Uize.Loc.Pseudo',
 		'Uize.Loc.Strings.Metrics',
@@ -1326,7 +1326,7 @@ Uize.module ({
 								_fileSystem.writeFile ({
 									path:_getTranslationJobFilePath (m,_language),
 									contents:_project.translationJobFileFormat == 'xliff'
-										? Uize.Loc.Xliff.to (
+										? Uize.Loc.FileFormats.ProjectStrings.Xliff.to (
 											{
 												sourceLanguage:_primaryLanguage,
 												targetLanguage:_language,
@@ -1367,7 +1367,7 @@ Uize.module ({
 									_translatedStrings = _translationJobFile
 										? _removeEmptyStrings (
 											_project.translationJobFileFormat == 'xliff'
-												? Uize.Loc.Xliff.from (_translationJobFile)
+												? Uize.Loc.FileFormats.ProjectStrings.Xliff.from (_translationJobFile)
 												: Uize.Loc.FileFormats.ProjectStrings.Csv.from (_translationJobFile)
 										)
 										: {}
