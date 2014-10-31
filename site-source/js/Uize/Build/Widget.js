@@ -66,7 +66,7 @@ Uize.module ({
 						path:_getModulePath (_namespace + '.Html','htmlt'),
 						contents:[
 							'<div>',
-							'	<div class="title">BLACK WIDGET</div>',
+							'	<div class="title">BLANK WIDGET</div>',
 							'</div>'
 						].join ('\n')
 					});
