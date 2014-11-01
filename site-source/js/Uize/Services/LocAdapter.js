@@ -35,6 +35,7 @@ Uize.module ({
 		'Uize.Loc.FileFormats.ProjectStrings.Csv',
 		'Uize.Loc.Pseudo',
 		'Uize.Loc.Strings.Metrics',
+		'Uize.Loc.Strings.Util',
 		'Uize.Data.Diff',
 		'Uize.Str.Whitespace',
 		'Uize.Build.Util.Whitespace',
@@ -1230,7 +1231,7 @@ Uize.module ({
 											_resourceFileBrand = m.getResourceFileBrand (_resourceFileSubPath)
 										;
 										if (m.doesBrandSupportLanguage (_resourceFileBrand,_language)) {
-											_languageResources [_resourceFileSubPath] = Uize.Data.Diff.diff (
+											_languageResources [_resourceFileSubPath] = Uize.Loc.Strings.Util.initNonTranslatable (
 												Uize.Data.Diff.diff (
 													_parseResourceFile (m,_resourceFilePath,_language),
 													_primaryLanguageResourcesDiff [_resourceFileSubPath],
@@ -1249,20 +1250,14 @@ Uize.module ({
 													{skeleton:true}
 												),
 												_resourceFileStrings,
-												function (_languageString,_primaryLanguageString) {
-													return (
-														_languageString &&
-														!_languageString.value &&
-														!_isTranslatableString (m,_primaryLanguageString)
-															? _primaryLanguageString
-															: _languageString
-													);
-												},
-												{skeleton:true}
+												_params.initNonTranslatable,
+												function (_string) {return _isTranslatableString (m,_string)}
 											);
 											m.stepCompleted ('Gathered resources from file: ' + _resourceFilePath);
 										} else {
-											m.stepCompleted ('Skipped resource file (' + _language + ' not supported by brand ' + _resourceFileBrand + '): ' + _resourceFilePath);
+											m.stepCompleted (
+												'Skipped resource file (' + _language + ' not supported by brand ' + _resourceFileBrand + '): ' + _resourceFilePath
+											);
 										}
 									}
 								);
