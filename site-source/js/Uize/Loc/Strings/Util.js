@@ -25,7 +25,10 @@
 
 Uize.module ({
 	name:'Uize.Loc.Strings.Util',
-	required:'Uize.Data.Diff',
+	required:[
+		'Uize.Data.Diff',
+		'Uize.Json'
+	],
 	builder:function () {
 		'use strict';
 
@@ -73,7 +76,13 @@ Uize.module ({
 						{skeleton:true}
 					);
 				}
-			}
+			},
+
+			serializeStringPath:function (_path) {
+				return Uize.Json.to (_path,'mini');
+			},
+
+			parseStringPath:Uize.Json.from
 		});
 	}
 });

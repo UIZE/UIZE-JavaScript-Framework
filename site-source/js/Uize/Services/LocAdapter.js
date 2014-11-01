@@ -55,16 +55,12 @@ Uize.module ({
 			/*** Variables for Performance Optimization ***/
 				_getStringMetrics = Uize.Loc.Strings.Metrics.getMetrics,
 				_hasNonWhitespace = Uize.Str.Whitespace.hasNonWhitespace,
+				_serializeStringPath = Uize.Loc.Strings.Util.serializeStringPath,
 
 			/*** General Variables ***/
 				_fileSystem = Uize.Services.FileSystem.singleton (),
 				_sacredEmptyObject = {},
 				_sacredEmptyArray = [],
-				_pathJsonSerializationOptions = {
-					quoteChar:'"',
-					indentChars:'',
-					linebreakChars:''
-				},
 				_fileTypeExtensionsLookup = {
 					csv:'csv',
 					xliff:'xlf'
@@ -81,10 +77,6 @@ Uize.module ({
 						_groupBTitle,_groupBCount
 					)
 				});
-			}
-
-			function _serializeStringPath (_path) {
-				return Uize.Json.to (_path,_pathJsonSerializationOptions);
 			}
 
 			function _removeEmptyStrings (_strings) {
