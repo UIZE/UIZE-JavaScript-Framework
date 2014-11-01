@@ -144,14 +144,14 @@ Localization Service Methods ~~ Localization Service Method
 
 		The `master resource files` are output to the following paths...
 
-		.............................................
+		............................................
 		[workingFolder]/[primaryLanguage].json
 		[workingFolder]/[pseudoLocale].json
-		[workingFolder]/[translatableLanguages1].json
-		[workingFolder]/[translatableLanguages2].json
+		[workingFolder]/[translatableLanguage1].json
+		[workingFolder]/[translatableLanguage2].json
 		... ... ... ... ... ... ... ... ... ... ...
-		[workingFolder]/[translatableLanguagesN].json
-		.............................................
+		[workingFolder]/[translatableLanguageN].json
+		............................................
 
 		EXAMPLE
 		..............
@@ -163,6 +163,23 @@ Localization Service Methods ~~ Localization Service Method
 		..............
 
 		In the above example, the =workingFolder= config option is set to ='loc'=, the =primaryLanguage= config option is set to ='en-US'=, the =pseudoLocale= config option is set to ='en-ZZ'=, and the configured translatable languages are ='en-GB'= (English for Great Britain), ='fr-FR'= (French), and ='de-DE'= (German).
+
+		Initializing Values of Non-translatable Strings
+			The values of the non-translatable strings of a project can be initialized by executing the =export= command and specifying one of the supported initialization modes using the =initNonTranslatable= parameter.
+
+			...........................................................................................................
+			node [pathToUize]build.js Uize.Build.Loc project=[projectName] method=export initNonTranslatable=[initMode]
+			...........................................................................................................
+
+			initNonTranslatable
+				By default, the value for each non-translatable string is initialized to the corresponding value of the string from the primary language, but only if the non-translatable string is currently blank.
+
+				If this behavior is not suitable, one of the other available initialization modes can be specified using the =initNonTranslatable= parameter. The following initialization modes are supported...
+
+				- =primary-if-blank= (default) - initializes the values of only blank non-translatable strings to the corresponding values of the strings from the primary language
+				- =primary= - initializes the values of all non-translatable strings to the corresponding values of the strings from the primary language, regardless of their current values
+				- =blank= - initializes the values of all non-translatable strings to blank (empty string), regardless of their current values
+				- =never= - leaves the values of all non-translatable strings as is, keeping their current values
 
 	import
 		Imports the resource strings from the `master resource files` of a project back into the `codebase resource files`.
