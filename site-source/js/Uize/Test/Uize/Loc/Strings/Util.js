@@ -207,6 +207,8 @@ Uize.module ({
 												title:'Widget 2 Title',
 												tooltip:'Widget 2 Tooltip',
 												$color:'red'
+											},
+											widget3:{
 											}
 										}
 									}
@@ -231,6 +233,8 @@ Uize.module ({
 											title:'WIDGET 2 TITLE',
 											tooltip:'WIDGET 2 TOOLTIP',
 											$color:'red'
+										},
+										widget3:{
 										}
 									}
 								}
