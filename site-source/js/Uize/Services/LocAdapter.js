@@ -256,136 +256,143 @@ Uize.module ({
 					_charCountHistogram = {},
 					_stringsInfo = _calculateStringsInfoForLanguage (m,_language,_languageResources,_subFolder)
 				;
-				Uize.forEach (
-					_languageResources,
-					function (_resourceFileStrings,_resourceFileSubPath) {
-						_totalResourceFiles++;
-						if (m.isBrandResourceFile (_resourceFileSubPath)) {
-							_totalBrandSpecificResourceFiles++;
-							var _resourceFileBrand = m.getResourceFileBrand (_resourceFileSubPath);
-							if (_resourceFileBrand)
-								_totalResourceFilesPerBrand [_resourceFileBrand] =
-									(_totalResourceFilesPerBrand [_resourceFileBrand] || 0) + 1
-							;
-						}
-					}
-				);
-				Uize.forEach (
-					_stringsInfo,
-					function (_stringInfo) {
-						var
-							_path = _stringInfo.path,
-							_value = _stringInfo.value,
-							_stringFullPath = _serializeStringPath (_path)
-						;
 
-						/*** update information on duplicates ***/
-							if (_valuesLookup [_value]) {
-								_totalDupedResourceStrings++;
-								(
-									_dupedResourceStringsDetails [_value] ||
-									(_dupedResourceStringsDetails [_value] = [_valuesLookup [_value]])
-								).push (_stringFullPath);
-							} else {
-								_valuesLookup [_value] = _stringFullPath;
+				/*** calculate metrics on resource files ***/
+					Uize.forEach (
+						_languageResources,
+						function (_resourceFileStrings,_resourceFileSubPath) {
+							_totalResourceFiles++;
+							if (m.isBrandResourceFile (_resourceFileSubPath)) {
+								_totalBrandSpecificResourceFiles++;
+								var _resourceFileBrand = m.getResourceFileBrand (_resourceFileSubPath);
+								if (_resourceFileBrand)
+									_totalResourceFilesPerBrand [_resourceFileBrand] =
+										(_totalResourceFilesPerBrand [_resourceFileBrand] || 0) + 1
+								;
 							}
+						}
+					);
 
-						/*** get metrics for string ***/
+				/*** calculate metrics on resource strings ***/
+					Uize.forEach (
+						_stringsInfo,
+						function (_stringInfo) {
 							var
-								_stringMetrics = _stringInfo.metrics,
-								_words = _stringMetrics.words,
-								_chars = _stringMetrics.chars,
-								_stringTokens = _stringMetrics.tokens,
-								_stringTokensLength = _stringTokens.length
+								_path = _stringInfo.path,
+								_value = _stringInfo.value,
+								_stringFullPath = _serializeStringPath (_path)
 							;
 
-							_stringInfo.hasHtml && _totalHtmlResourceStrings++;
-							_stringInfo.isLong && _totalLongResourceStrings++;
-							_stringInfo.isKeyValid || _totalInvalidKeyResourceStrings++;
-							_stringInfo.hasWeakTokens && _totalWeakTokenResourceStrings++;
-							_stringInfo.isTranslatable || _totalNonTranslatableResourceStrings++;
-
-							/*** update general metrics ***/
-								_totalResourceStrings++;
-								_totalWordCount += _words;
-								_totalCharCount += _chars;
-								if (_stringInfo.isBrandSpecific) {
-									_totalBrandSpecificResourceStrings++;
-									_totalBrandSpecificWordCount += _words;
-									_totalBrandSpecificCharCount += _chars;
-
-									var _stringBrand = _stringInfo.brand;
-									if (_stringBrand) {
-										_totalResourceStringPerBrand [_stringBrand] =
-											(_totalResourceStringPerBrand [_stringBrand] || 0) + 1
-										;
-										_totalWordCountPerBrand [_stringBrand] =
-											(_totalWordCountPerBrand [_stringBrand] || 0) + _words
-										;
-										_totalCharCountPerBrand [_stringBrand] =
-											(_totalCharCountPerBrand [_stringBrand] || 0) + _chars
-										;
-									}
+							/*** update information on duplicates ***/
+								if (_valuesLookup [_value]) {
+									_totalDupedResourceStrings++;
+									(
+										_dupedResourceStringsDetails [_value] ||
+										(_dupedResourceStringsDetails [_value] = [_valuesLookup [_value]])
+									).push (_stringFullPath);
+								} else {
+									_valuesLookup [_value] = _stringFullPath;
 								}
-								_wordCountHistogram [_words] = (_wordCountHistogram [_words] || 0) + 1;
-								_charCountHistogram [_chars] = (_charCountHistogram [_chars] || 0) + 1;
 
-							/*** update metrics on tokenized strings and token usage ***/
-								_tokenHistogram [_stringTokensLength] = (_tokenHistogram [_stringTokensLength] || 0) + 1;
-								if (_stringTokensLength) {
-									Uize.forEach (
-										_stringTokens,
-										function (_tokenName) {
-											(_tokenUsage [_tokenName] || (_tokenUsage [_tokenName] = [])).push (
-												_stringFullPath
-											);
+							/*** get metrics for string ***/
+								var
+									_stringMetrics = _stringInfo.metrics,
+									_words = _stringMetrics.words,
+									_chars = _stringMetrics.chars,
+									_stringTokens = _stringMetrics.tokens,
+									_stringTokensLength = _stringTokens.length
+								;
+
+								_stringInfo.hasHtml && _totalHtmlResourceStrings++;
+								_stringInfo.isLong && _totalLongResourceStrings++;
+								_stringInfo.isKeyValid || _totalInvalidKeyResourceStrings++;
+								_stringInfo.hasWeakTokens && _totalWeakTokenResourceStrings++;
+								_stringInfo.isTranslatable || _totalNonTranslatableResourceStrings++;
+
+								/*** update general metrics ***/
+									_totalResourceStrings++;
+									_totalWordCount += _words;
+									_totalCharCount += _chars;
+									if (_stringInfo.isBrandSpecific) {
+										_totalBrandSpecificResourceStrings++;
+										_totalBrandSpecificWordCount += _words;
+										_totalBrandSpecificCharCount += _chars;
+
+										var _stringBrand = _stringInfo.brand;
+										if (_stringBrand) {
+											_totalResourceStringPerBrand [_stringBrand] =
+												(_totalResourceStringPerBrand [_stringBrand] || 0) + 1
+											;
+											_totalWordCountPerBrand [_stringBrand] =
+												(_totalWordCountPerBrand [_stringBrand] || 0) + _words
+											;
+											_totalCharCountPerBrand [_stringBrand] =
+												(_totalCharCountPerBrand [_stringBrand] || 0) + _chars
+											;
 										}
-									);
-									_totalTokens += _stringTokensLength;
-									_totalTokenizedResourceStrings++;
-								}
-					}
-				);
+									}
+									_wordCountHistogram [_words] = (_wordCountHistogram [_words] || 0) + 1;
+									_charCountHistogram [_chars] = (_charCountHistogram [_chars] || 0) + 1;
 
-				var _metrics = {
-					resourceFiles:{
-						all:_totalResourceFiles,
-						brandSpecific:_totalBrandSpecificResourceFiles,
-						perBrand:_totalResourceFilesPerBrand
-					},
-					resourceStrings:{
-						all:_totalResourceStrings,
-						brandSpecific:_totalBrandSpecificResourceStrings,
-						tokenized:_totalTokenizedResourceStrings,
-						html:_totalHtmlResourceStrings,
-						long:_totalLongResourceStrings,
-						invalidKey:_totalInvalidKeyResourceStrings,
-						weakTokens:_totalWeakTokenResourceStrings,
-						nonTranslatable:_totalNonTranslatableResourceStrings,
-						duped:_totalDupedResourceStrings,
-						perBrand:_totalResourceStringPerBrand
-					},
-					wordCount:{
-						all:_totalWordCount,
-						brandSpecific:_totalBrandSpecificWordCount,
-						perBrand:_totalWordCountPerBrand
-					},
-					charCount:{
-						all:_totalCharCount,
-						brandSpecific:_totalBrandSpecificCharCount,
-						perBrand:_totalCharCountPerBrand
-					},
-					tokens:_totalTokens,
-					dupedResourceStringsDetails:_dupedResourceStringsDetails,
-					tokenUsage:_tokenUsage,
-					tokenHistogram:_tokenHistogram,
-					wordCountHistogram:_wordCountHistogram,
-					charCountHistogram:_charCountHistogram
-				};
-				_fileSystem.writeFile ({
-					path:m._workingFolderPath + _subFolder + 'metrics/' + _language + '.json',
-					contents:Uize.Json.to (_metrics)
-				});
+								/*** update metrics on tokenized strings and token usage ***/
+									_tokenHistogram [_stringTokensLength] = (_tokenHistogram [_stringTokensLength] || 0) + 1;
+									if (_stringTokensLength) {
+										Uize.forEach (
+											_stringTokens,
+											function (_tokenName) {
+												(_tokenUsage [_tokenName] || (_tokenUsage [_tokenName] = [])).push (
+													_stringFullPath
+												);
+											}
+										);
+										_totalTokens += _stringTokensLength;
+										_totalTokenizedResourceStrings++;
+									}
+						}
+					);
+
+				/*** build metrics object ***/
+					var _metrics = {
+						resourceFiles:{
+							all:_totalResourceFiles,
+							brandSpecific:_totalBrandSpecificResourceFiles,
+							perBrand:_totalResourceFilesPerBrand
+						},
+						resourceStrings:{
+							all:_totalResourceStrings,
+							brandSpecific:_totalBrandSpecificResourceStrings,
+							tokenized:_totalTokenizedResourceStrings,
+							html:_totalHtmlResourceStrings,
+							long:_totalLongResourceStrings,
+							invalidKey:_totalInvalidKeyResourceStrings,
+							weakTokens:_totalWeakTokenResourceStrings,
+							nonTranslatable:_totalNonTranslatableResourceStrings,
+							duped:_totalDupedResourceStrings,
+							perBrand:_totalResourceStringPerBrand
+						},
+						wordCount:{
+							all:_totalWordCount,
+							brandSpecific:_totalBrandSpecificWordCount,
+							perBrand:_totalWordCountPerBrand
+						},
+						charCount:{
+							all:_totalCharCount,
+							brandSpecific:_totalBrandSpecificCharCount,
+							perBrand:_totalCharCountPerBrand
+						},
+						tokens:_totalTokens,
+						dupedResourceStringsDetails:_dupedResourceStringsDetails,
+						tokenUsage:_tokenUsage,
+						tokenHistogram:_tokenHistogram,
+						wordCountHistogram:_wordCountHistogram,
+						charCountHistogram:_charCountHistogram
+					};
+
+				/*** write metrics file ***/
+					_fileSystem.writeFile ({
+						path:m._workingFolderPath + _subFolder + 'metrics/' + _language + '.json',
+						contents:Uize.Json.to (_metrics)
+					});
 
 				return _metrics;
 			}
