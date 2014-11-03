@@ -149,6 +149,43 @@ Uize.module ({
 								}
 							}
 						]
+					]],
+					['Uize.Loc.Strings.Util.serializeStringPath',[
+						['A string path containing multiple elements can be serialized',
+							[['foo/bar.properties','widgetName','stringKey',0]],
+							'[\'foo/bar.properties\',\'widgetName\',\'stringKey\',0]'
+						]
+					]],
+					['Uize.Loc.Strings.Util.parseStringPath',[
+						['A serialized string path containing multiple elements can be parsed',
+							'[\'foo/bar.properties\',\'widgetName\',\'stringKey\',0]',
+							['foo/bar.properties','widgetName','stringKey',0]
+						]
+					]],
+					['Uize.Loc.Strings.Util.removeEmptyStrings',[
+						['All empty string values in a hierarchical strings object can be removed',
+							{
+								foo:'',
+								bar:undefined,
+								baz:{
+									qux:''
+								},
+								nux:'nux nux nux',
+								hello:{
+									world:null,
+									helloAgain:{
+										helloAgainAgain:''
+									}
+								}
+							},
+							{
+								bar:undefined,
+								nux:'nux nux nux',
+								hello:{
+									world:null
+								}
+							}
+						]
 					]]
 				])
 			]

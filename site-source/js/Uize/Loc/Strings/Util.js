@@ -82,7 +82,15 @@ Uize.module ({
 				return Uize.Json.to (_path,'mini');
 			},
 
-			parseStringPath:Uize.Json.from
+			parseStringPath:Uize.Json.from,
+
+			removeEmptyStrings:function (_strings) {
+				return Uize.Data.Diff.diff (
+					_strings,
+					{},
+					function (_string) {return _string.value === '' ? undefined : _string}
+				);
+			}
 		});
 	}
 });

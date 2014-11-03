@@ -51,6 +51,7 @@ Uize.module ({
 			/*** Variables for Scruncher Optimization ***/
 				_undefined,
 				_breakdownTable = Uize.Templates.Text.Tables.Breakdown.process,
+				_removeEmptyStrings = Uize.Loc.Strings.Util.removeEmptyStrings,
 
 			/*** Variables for Performance Optimization ***/
 				_getStringMetrics = Uize.Loc.Strings.Metrics.getMetrics,
@@ -77,14 +78,6 @@ Uize.module ({
 						_groupBTitle,_groupBCount
 					)
 				});
-			}
-
-			function _removeEmptyStrings (_strings) {
-				return Uize.Data.Diff.diff (
-					_strings,
-					{},
-					function (_string) {return _string.value === '' ? _undefined : _string}
-				);
 			}
 
 		/*** Private Instance Methods ***/
