@@ -186,6 +186,56 @@ Uize.module ({
 								}
 							}
 						]
+					]],
+					['Uize.Loc.Strings.Util.pseudoLocalizeResources',[
+						['All translatable string values in a hierarchical project strings object can be pseudo-localized',
+							[
+								{
+									'folder1/file1.properties':{
+										foo:'foo',
+										bar:'bar',
+										$baz:'baz'
+									},
+									'folder2/file2.properties':{
+										widget1:{
+											title:'Widget 1 Title',
+											tooltip:'Widget 1 Tooltip',
+											$url:'http://www.somewhere.com'
+										},
+										page:{
+											widget2:{
+												title:'Widget 2 Title',
+												tooltip:'Widget 2 Tooltip',
+												$color:'red'
+											}
+										}
+									}
+								},
+								function (_string) {return _string.key.charAt (0) != '$'},
+								function (_string) {return _string.value.toUpperCase ()}
+							],
+							{
+								'folder1/file1.properties':{
+									foo:'FOO',
+									bar:'BAR',
+									$baz:'baz'
+								},
+								'folder2/file2.properties':{
+									widget1:{
+										title:'WIDGET 1 TITLE',
+										tooltip:'WIDGET 1 TOOLTIP',
+										$url:'http://www.somewhere.com'
+									},
+									page:{
+										widget2:{
+											title:'WIDGET 2 TITLE',
+											tooltip:'WIDGET 2 TOOLTIP',
+											$color:'red'
+										}
+									}
+								}
+							}
+						]
 					]]
 				])
 			]

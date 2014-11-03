@@ -391,30 +391,12 @@ Uize.module ({
 			}
 
 			function _pseudoLocalizeResources (m,_primaryLanguageResources) {
-				var
-					_pseudoLocalizedResources = {},
-					_pseudoLocalizeOptions = Uize.copy (m.project.pseudoLocalization,{wordSplitter:m.wordSplitter})
-				;
-				Uize.forEach (
+				var _pseudoLocalizeOptions = Uize.copy (m.project.pseudoLocalization,{wordSplitter:m.wordSplitter});
+				return Uize.Loc.Strings.Util.pseudoLocalizeResources (
 					_primaryLanguageResources,
-					function (_resourceFileStrings,_resourceFileSubPath) {
-						_pseudoLocalizedResources [_resourceFileSubPath] =
-							Uize.Data.Diff.diff (
-								_primaryLanguageResources [_resourceFileSubPath],
-								{},
-								function (_string,_propertyB,_path) {
-									_string.path = _path;
-									if (_isTranslatableString (m,_string))
-										_string.value = m.pseudoLocalizeString (_string,_pseudoLocalizeOptions)
-									;
-									return _string;
-								},
-								{skeleton:true}
-							)
-						;
-					}
+					function (_string) {return _isTranslatableString (m,_string)},
+					function (_string) {return m.pseudoLocalizeString (_string,_pseudoLocalizeOptions)}
 				);
-				return _pseudoLocalizedResources;
 			}
 
 			function _languageResourcesFilePath (m,_language) {
@@ -1199,6 +1181,8 @@ Uize.module ({
 					m.prepareToExecuteMethod (
 						_totalTranslatableLanguages * Uize.totalKeys (_primaryLanguageResources) +
 							// total number of resource files to gather, across all translatable languages
+						1 +
+							// generate pseudo-localized resources from the primary language resources
 						_totalTranslatableLanguages + 2
 							// number of language resource files to write (includes primary language and pseudo-locale)
 					);
@@ -1251,6 +1235,7 @@ Uize.module ({
 
 					/*** generate resources for pseudo-locale ***/
 						_resoucesByLanguage [_project.pseudoLocale] = _pseudoLocalizeResources (m,_primaryLanguageResources);
+						m.stepCompleted ('Generated pseudo-localized resources from the primary language resources');
 
 					Uize.forEach (
 						_resoucesByLanguage,

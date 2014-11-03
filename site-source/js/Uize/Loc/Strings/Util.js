@@ -90,6 +90,28 @@ Uize.module ({
 					{},
 					function (_string) {return _string.value === '' ? undefined : _string}
 				);
+			},
+
+			pseudoLocalizeResources:function (_primaryLanguageResources,_isTranslatableString,_pseudoLocalizeString) {
+				var _pseudoLocalizedResources = {};
+				Uize.forEach (
+					_primaryLanguageResources,
+					function (_resourceFileStrings,_resourceFileSubPath) {
+						_pseudoLocalizedResources [_resourceFileSubPath] = Uize.Data.Diff.diff (
+							_primaryLanguageResources [_resourceFileSubPath],
+							{},
+							function (_string,_dummy,_path) {
+								_string.path = _path;
+								if (_isTranslatableString (_string))
+									_string.value = _pseudoLocalizeString (_string)
+								;
+								return _string;
+							},
+							{skeleton:true}
+						);
+					}
+				);
+				return _pseudoLocalizedResources;
 			}
 		});
 	}
