@@ -31,6 +31,8 @@ Introduction
 			..................................................................................
 
 			Parameters
+				All localization service methods support the following set of common parameters...
+
 				project
 					The =project= parameter is used to specify the project for which the specified `localization service method` should be executed.
 
@@ -164,12 +166,8 @@ Localization Service Methods ~~ Localization Service Method
 
 		In the above example, the =workingFolder= config option is set to ='loc'=, the =primaryLanguage= config option is set to ='en-US'=, the =pseudoLocale= config option is set to ='en-ZZ'=, and the configured translatable languages are ='en-GB'= (English for Great Britain), ='fr-FR'= (French), and ='de-DE'= (German).
 
-		Initializing Values of Non-translatable Strings
-			The values of the non-translatable strings of a project can be initialized by executing the =export= command and specifying one of the supported initialization modes using the =initNonTranslatable= parameter.
-
-			...........................................................................................................
-			node [pathToUize]build.js Uize.Build.Loc project=[projectName] method=export initNonTranslatable=[initMode]
-			...........................................................................................................
+		Parameters
+			The =export= method supports the following parameters...
 
 			initNonTranslatable
 				By default, the value for each non-translatable string is initialized to the corresponding value of the string from the primary language, but only if the non-translatable string is currently blank.
@@ -181,6 +179,11 @@ Localization Service Methods ~~ Localization Service Method
 				- =blank= - initializes the values of all non-translatable strings to blank (empty string), regardless of their current values
 				- =never= - leaves the values of all non-translatable strings as is, keeping their current values
 
+			languages
+				An optional, comma-separated list of one or more of the project's `translatable languages` for which the =export= operation should be performed.
+
+				For more detailed information, consult the section `Performing Methods for a Filtered Set of Languages`.
+
 	import
 		Imports the resource strings from the `master resource files` of a project back into the `codebase resource files`.
 
@@ -190,6 +193,14 @@ Localization Service Methods ~~ Localization Service Method
 
 		Executing the =import= method will have the effect of overwriting all the `codebase resource files` for the pseudo-locale and the translatable languages so that their contents reflects the contents of the `master resource files`. The =import= method will also create new codebase resource files, as necessary, if they did not previously exist.
 
+		Parameters
+			The =import= method supports the following parameters...
+
+			languages
+				An optional, comma-separated list of one or more of the project's `translatable languages` for which the =import= operation should be performed.
+
+				For more detailed information, consult the section `Performing Methods for a Filtered Set of Languages`.
+
 	exportJobs
 		Exports resource strings for translation from the `master resource files` of a project to `translation job files`.
 
@@ -197,27 +208,34 @@ Localization Service Methods ~~ Localization Service Method
 		node [pathToUize]build.js Uize.Build.Loc project=[projectName] method=exportJobs
 		................................................................................
 
-		Export Filters
-			The =exportJobs= method supports the ability to filter the strings that are exported to the translation job files, using the optional =filter= paramter.
+		Parameters
+			The =exportJobs= method supports the following parameters...
 
-			....................................................................................................
-			node [pathToUize]build.js Uize.Build.Loc project=[projectName] method=exportJobs filter=[filterName]
-			....................................................................................................
+			filter
+				The =exportJobs= method supports the ability to filter the strings that are exported to the translation job files, using the optional =filter= paramter.
 
-			filterName
-				The localization service adapter base class supports the following filters for the =exportJobs= method...
+				....................................................................................................
+				node [pathToUize]build.js Uize.Build.Loc project=[projectName] method=exportJobs filter=[filterName]
+				....................................................................................................
 
-				- =missing= (defualt) -
-				- =translated= -
-				- =all= -
+				filterName
+					The following filters are supported for the =exportJobs= method...
 
-		Export Format
-			.
+					- =missing= (defualt) - only the translatable strings for which translations are missing for a translatable language will be exported in the translation job file for the language
+					- =translated= - only the translatable strings for which translations exist for a translatable language will be exported in the translation job file for the language
+					- =all= - all translatable strings for a translatable language will be exported in the translation job file for the language, whether they have existing translations or not
+
+			languages
+				An optional, comma-separated list of one or more of the project's `translatable languages` for which the =exportJobs= operation should be performed.
+
+				For more detailed information, consult the section `Performing Methods for a Filtered Set of Languages`.
+
+		File Format
+			The =exportJobs= method will write `translation job files` in the `translation job file format` that is configured for the project.
 
 		###
 			- for all translatable languages - excludes primary language and pseudo-locale
 			- only the strings for which translation is needed
-			- file format
 
 			- make sure `master resource files` are up-to-date before executing the =exportJobs= method by first executing the =export= method
 
@@ -227,6 +245,14 @@ Localization Service Methods ~~ Localization Service Method
 		................................................................................
 		node [pathToUize]build.js Uize.Build.Loc project=[projectName] method=importJobs
 		................................................................................
+
+		Parameters
+			The =importJobs= method supports the following parameters...
+
+			languages
+				An optional, comma-separated list of one or more of the project's `translatable languages` for which the =importJobs= operation should be performed.
+
+				For more detailed information, consult the section `Performing Methods for a Filtered Set of Languages`.
 
 	usage
 		.
@@ -460,6 +486,25 @@ Localization Service Workflows
 						- strings that were changed since revision A
 
 Advanced Topics
+	Performing Methods for a Filtered Set of Languages
+		Various of the localization service methods support the optional =languages= parameter, which lets you execute the methods for a filtered set of the project's `translatable languages`.
+
+		EXAMPLE
+		........................................................................................
+		node [pathToUize]build.js Uize.Build.Loc project=Foo method=export languages=fr-FR,fr-CA
+		........................................................................................
+
+		In the above example, the =export= method's operation will be performed for just the "fr-FR" (French French) and "fr-CA" (Canadian French) languages, even though the "Foo" project may support a larger set of translatable languages.
+
+		The following methods support the optional =languages= parameter...
+
+		- =export=
+		- =exportJobs=
+		- =import=
+		- =importJobs=
+
+		When the optional =languages= parameter is either not specified (or if an empty value is specified) when executing any of the above methods, then the method's operation will be performed for all the `trnslatable languages` configured for the project.
+
 	Non-translatable Strings
 		Non-translatable strings are strings that should never be pseudo-localized and should never be sent to translators for translation.
 
@@ -571,6 +616,15 @@ Advanced Topics
 				While the values for non-translatable strings are `initialized to primary language values`, the values for the strings in the translatable languages can subsequently be manually modified by developers.
 
 				Non-empty values for non-translatable strings in the resource files for the translatable languages of a project are respected throughout the localization automation process.
+
+		Initializing Values of Non-translatable Strings
+			The values of the non-translatable strings of a project can be initialized by executing the =export= command and specifying one of the supported initialization modes using the =initNonTranslatable= parameter.
+
+			...........................................................................................................
+			node [pathToUize]build.js Uize.Build.Loc project=[projectName] method=export initNonTranslatable=[initMode]
+			...........................................................................................................
+
+			The non-translatable strings initialized in this way will then be updated in the `codebase resource files` during the next =import= operation.
 
 	Metrics Reports ~~ Metrics Report
 		A metrics report can be produced for a project by using the =metrics= `localization service method`.

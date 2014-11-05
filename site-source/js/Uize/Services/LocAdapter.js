@@ -315,8 +315,16 @@ Uize.module ({
 				);
 			}
 
-			function _forEachTranslatableLanguage (m,_iterationHandler) {
-				Uize.forEach (_getTranslatableLanguages (m),function (_language) {_iterationHandler (_language)});
+			function _getLanguagesForOperation (m,_params) {
+				var
+					_translatableLanguages = _getTranslatableLanguages (m),
+					_languagesFilter = _params.languages
+				;
+				return (
+					_languagesFilter
+						? Uize.Data.Matches.retain (_translatableLanguages,Uize.lookup (_languagesFilter.split (',')))
+						: _translatableLanguages
+				);
 			}
 
 		return _superclass.subclass ({
@@ -1026,7 +1034,8 @@ Uize.module ({
 					var
 						m = this,
 						_project = m.project,
-						_importPrimary = _project.importPrimary
+						_importPrimary = _project.importPrimary,
+						_languagesForOperation = _getLanguagesForOperation (m,_params)
 					;
 					function _importLanguage (_language) {
 						var _resources = _readLanguageResourcesFile (m,_language);
@@ -1034,9 +1043,9 @@ Uize.module ({
 						_resources && m.distributeResources (_resources,_language);
 						m.stepCompleted (_language + ': distributed strings to individual resource files');
 					}
-					m.prepareToExecuteMethod ((_getTranslatableLanguages (m).length + 1 + !!_importPrimary) * 2);
+					m.prepareToExecuteMethod ((_languagesForOperation.length + 1 + !!_importPrimary) * 2);
 					_importPrimary && _importLanguage (_project.primaryLanguage);
-					_forEachTranslatableLanguage (m,_importLanguage);
+					Uize.forEach (_languagesForOperation,_importLanguage);
 					_importLanguage (_project.pseudoLocale);
 					_callback ();
 				},
@@ -1056,21 +1065,22 @@ Uize.module ({
 							{skeleton:true}
 						),
 						_resoucesByLanguage = Uize.pairUp (_primaryLanguage,_primaryLanguageResources),
-						_totalTranslatableLanguages = _getTranslatableLanguages (m).length
+						_languagesForOperation = _getLanguagesForOperation (m,_params),
+						_languagesForOperationLength = _languagesForOperation.length
 					;
 
 					m.prepareToExecuteMethod (
-						_totalTranslatableLanguages * Uize.totalKeys (_primaryLanguageResources) +
+						_languagesForOperationLength * Uize.totalKeys (_primaryLanguageResources) +
 							// total number of resource files to gather, across all translatable languages
 						1 +
 							// generate pseudo-localized resources from the primary language resources
-						_totalTranslatableLanguages + 2
+						_languagesForOperationLength + 2
 							// number of language resource files to write (includes primary language and pseudo-locale)
 					);
 
 					/*** gather resources for all translatable languages ***/
-						_forEachTranslatableLanguage (
-							m,
+						Uize.forEach (
+							_languagesForOperation,
 							function (_language) {
 								var _languageResources = _resoucesByLanguage [_language] = {};
 								Uize.forEach (
@@ -1134,15 +1144,15 @@ Uize.module ({
 						_project = m.project,
 						_primaryLanguage = _project.primaryLanguage,
 						_primaryLanguageResources = _readLanguageResourcesFile (m,_primaryLanguage),
-						_totalTranslatableLanguages = _getTranslatableLanguages (m).length,
+						_languagesForOperation = _getLanguagesForOperation (m,_params),
 						_filter = _params.filter || 'missing',
 						_filterIsAll = _filter == 'all',
 						_filterIsTranslated = _filter == 'translated'
 					;
-					m.prepareToExecuteMethod (_totalTranslatableLanguages * 3);
+					m.prepareToExecuteMethod (_languagesForOperation.length * 3);
 
-					_forEachTranslatableLanguage (
-						m,
+					Uize.forEach (
+						_languagesForOperation,
 						function (_language) {
 							/*** determine strings that need translation ***/
 								var
@@ -1196,13 +1206,13 @@ Uize.module ({
 					var
 						m = this,
 						_project = m.project,
-						_totalTranslatableLanguages = _getTranslatableLanguages (m).length,
+						_languagesForOperation = _getLanguagesForOperation (m,_params),
 						_jobsPath = m._workingFolderPath + 'jobs/'
 					;
-					m.prepareToExecuteMethod (_totalTranslatableLanguages * 2);
+					m.prepareToExecuteMethod (_languagesForOperation.length * 2);
 
-					_forEachTranslatableLanguage (
-						m,
+					Uize.forEach (
+						_languagesForOperation,
 						function (_language) {
 							/*** determine strings that have been translated ***/
 								var
