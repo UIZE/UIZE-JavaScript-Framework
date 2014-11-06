@@ -26,16 +26,11 @@
 Uize.module ({
 	name:'Uize.Widgets.DigitalClock.Base.Widget',
 	superclass:'Uize.Widget.V2',
-	required:[
-		'Uize.Widget.mChildBindings',
-		'Uize.Date.Formatter'
-	],
+	required:'Uize.Date.Formatter',
 	builder:function (_superclass) {
 		'use strict';
 
 		return _superclass.subclass ({
-			mixins:Uize.Widget.mChildBindings,
-
 			omegastructor:function () {
 				var m = this;
 				function _updateTime () {m.set ({_value:Uize.now ()})}

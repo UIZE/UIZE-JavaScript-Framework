@@ -1,7 +1,7 @@
 /*______________
 |       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
 |     /      /  |   ---------------------------------------------------
-|    /    O /   |    MODULE : Uize.Loc.Xliff Package
+|    /    O /   |    MODULE : Uize.Loc.FileFormats.ProjectStrings.Xliff Package
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
 | /____/ /__/_| | COPYRIGHT : (c)2014 UIZE
@@ -18,17 +18,16 @@
 
 /*?
 	Introduction
-		The =Uize.Loc.Xliff= module provides methods to serialize a resource strings object to XLIFF format and parse a resource strings object from XLIFF format.
+		The =Uize.Loc.FileFormats.ProjectStrings.Xliff= module provides methods to serialize a resource strings object to XLIFF format and parse a resource strings object from XLIFF format.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 */
 
 Uize.module ({
-	name:'Uize.Loc.Xliff',
+	name:'Uize.Loc.FileFormats.ProjectStrings.Xliff',
 	required:[
 		'Uize.Util.Html.Encode',
-		'Uize.Data.Flatten',
-		'Uize.Json',
+		'Uize.Loc.FileFormats.ProjectStrings.Util',
 		'Uize.Parse.Xml.NodeList',
 		'Uize.Parse.Xml.Util',
 		'Uize.Str.Split'
@@ -73,11 +72,23 @@ Uize.module ({
 					_toEncode.strings,
 					function (_resourceFileStrings,_resourceFileSubPath) {
 						function _flattenResourceStrings (_resourceFileStrings) {
-							return Uize.Data.Flatten.flatten (
-								_resourceFileStrings,
-								function (_path) {return Uize.Json.to (_path,'mini')},
-								false,
-								true
+							return Uize.Loc.FileFormats.ProjectStrings.Util.flatten (_resourceFileStrings);
+						}
+
+						function _encodeResourceStringText (_text) {
+							return (
+								_tokenSplitter
+									? Uize.map (
+										_tokenSplitter (_text),
+										function (_segment,_segmentNo) {
+											return (
+												_segmentNo % 2
+													? '<ph id="' + ++_phId + '" ctype="x-param">' + _htmlEncode (_segment) + '</ph>'
+													: _htmlEncode (_segment)
+											);
+										}
+									).join ('')
+									: _htmlEncode (_text)
 							);
 						}
 
@@ -95,25 +106,25 @@ Uize.module ({
 						;
 						Uize.forEach (
 							_flattenResourceStrings (_resourceFileStrings),
-							function (_resourceStringText,_id) {
-								var _source = _tokenSplitter
-									? Uize.map (
-										_tokenSplitter (_resourceStringText),
-										function (_segment,_segmentNo) {
-											return (
-												_segmentNo % 2
-													? '<ph id="' + ++_phId + '" ctype="x-param">' + _htmlEncode (_segment) + '</ph>'
-													: _htmlEncode (_segment)
-											);
-										}
-									).join ('')
-									: _htmlEncode (_resourceStringText)
+							function (_resourceStringSource,_id) {
+								var
+									_resourceStringTarget = (
+										_seedTarget ? ((_targetValues && _targetValues [_id]) || _resourceStringSource) : ''
+									),
+									_source = _encodeResourceStringText (_resourceStringSource)
 								;
 								_xliffLines.push (
 									'\t\t\t<trans-unit id="' + _htmlEncode (_id) + '">',
 									'\t\t\t\t<source>' + _source + '</source>',
 									'\t\t\t\t<target>' +
-										(_seedTarget ? ((_targetValues && _targetValues [_id]) || _source) : '') +
+										(
+											_resourceStringTarget &&
+											(
+												_resourceStringTarget == _resourceStringSource
+													? _source
+													: _encodeResourceStringText (_resourceStringTarget)
+											)
+										) +
 									'</target>',
 									'\t\t\t</trans-unit>'
 								);
@@ -158,11 +169,9 @@ Uize.module ({
 								;
 							}
 						);
-						_strings [_getAttributeValue (_fileTag,'original')] = Uize.Data.Flatten.unflatten (
-							_fileStrings,
-							Uize.Json.from,
-							true
-						);
+						_strings [_getAttributeValue (_fileTag,'original')] =
+							Uize.Loc.FileFormats.ProjectStrings.Util.unflatten (_fileStrings)
+						;
 					}
 				);
 				return _strings;

@@ -1,6 +1,6 @@
 <div>
 	<div class="contents">
-		<div id="heading" class="heading"></div>
+		<div class="heading"><span id="title"></span><child name="reset" size="tiny" flavor="subdued" extraClasses="topRightButton"/></div>
 		<div id="body" class="body">
 			<table border="0" cellspacing="2" cellpadding="0">
 				<tr>

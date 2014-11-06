@@ -87,11 +87,11 @@ Uize.module ({
 					colorsMaxMin:{
 						derived:{
 							properties:'colorsAsTupless',
-							derivation:function (_colorsAsTupless) {
+							derivation:function (_colorsAsTuples) {
 								var
-									_tuplesComponent0 = _getColumn (_colorsAsTupless,0),
-									_tuplesComponent1 = _getColumn (_colorsAsTupless,1),
-									_tuplesComponent2 = _getColumn (_colorsAsTupless,2)
+									_tuplesComponent0 = _getColumn (_colorsAsTuples,0),
+									_tuplesComponent1 = _getColumn (_colorsAsTuples,1),
+									_tuplesComponent2 = _getColumn (_colorsAsTuples,2)
 								;
 								return {
 									_component0Min:_min (_tuplesComponent0),
@@ -110,7 +110,7 @@ Uize.module ({
 								'colorsAsTupless', 'colorsMaxMin', 'hueRange', 'hueShift', 'saturationRange', 'saturationShift', 'lightnessRange', 'lightnessShift'
 							],
 							derivation:function (
-								_colorsAsTupless, _colorsMaxMin, _hueRange, _hueShift, _saturationRange, _saturationShift, _lightnessRange, _lightnessShift
+								_colorsAsTuples, _colorsMaxMin, _hueRange, _hueShift, _saturationRange, _saturationShift, _lightnessRange, _lightnessShift
 							) {
 								function _blendValues (_valueA,_valueB,_blendAmount) {
 									return _valueA + (_valueB - _valueA) * _blendAmount;
@@ -140,7 +140,7 @@ Uize.module ({
 								}
 
 								return Uize.map (
-									_colorsAsTupless,
+									_colorsAsTuples,
 									function (_colorAsTuple) {
 										_Uize_Color.setTuple (
 											_workingColor.tuple,

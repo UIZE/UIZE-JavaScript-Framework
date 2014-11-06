@@ -1,8 +1,13 @@
-.`` {
+.`heading` {
+	position: relative;
+	text-align: center;
+	height: 17px;
 }
 
-.`heading` {
-	text-align: center;
+.`topRightButton` {
+	position: absolute;
+	right: 2px;
+	top: 2px;
 }
 
 .`sliderLabel` {

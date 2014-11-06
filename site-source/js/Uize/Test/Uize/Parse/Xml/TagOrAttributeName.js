@@ -40,7 +40,7 @@ Uize.module ({
 						title:'A tag or attribute name can be parsed',
 						test:[
 							Uize.Test.ParserTest.parserTest (
-								'An empty string fails parsing as a tag/attribute name',
+								'A tag or attribute name may not be an empty string',
 								[''],
 								{
 									name:'',
@@ -49,7 +49,7 @@ Uize.module ({
 								}
 							),
 							Uize.Test.ParserTest.parserTest (
-								'A string fails parsing as a tag/attribute name if the first character is not a valid tag/attribute name start character',
+								'A tag or attribute name must start with a valid character for tag or attribute names',
 								['0img'],
 								{
 									name:'',
@@ -67,7 +67,7 @@ Uize.module ({
 								}
 							),
 							Uize.Test.ParserTest.parserTest (
-								'All characters, following the initial start character, that are valid tag/attribute name continuation characters are included in the parse tag/attribute name',
+								'All characters, following the initial start character, that are valid tag/attribute name continuation characters are included in the parsed tag/attribute name',
 								['__abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-0123456789###'],
 								{
 									name:'__abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-0123456789',

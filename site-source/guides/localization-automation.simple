@@ -31,6 +31,8 @@ Introduction
 			..................................................................................
 
 			Parameters
+				All localization service methods support the following set of common parameters...
+
 				project
 					The =project= parameter is used to specify the project for which the specified `localization service method` should be executed.
 
@@ -101,6 +103,7 @@ Localization Service Methods ~~ Localization Service Method
 	metrics
 		Generates a metrics report for a project using the =metrics= method of the localization service.
 
+		SYNTAX
 		.............................................................................
 		node [pathToUize]build.js Uize.Build.Loc project=[projectName] method=metrics
 		.............................................................................
@@ -138,20 +141,21 @@ Localization Service Methods ~~ Localization Service Method
 	export
 		Exports the resource strings from the `codebase resource files` of a project to the `master resource files`.
 
+		SYNTAX
 		............................................................................
 		node [pathToUize]build.js Uize.Build.Loc project=[projectName] method=export
 		............................................................................
 
 		The `master resource files` are output to the following paths...
 
-		.............................................
+		............................................
 		[workingFolder]/[primaryLanguage].json
 		[workingFolder]/[pseudoLocale].json
-		[workingFolder]/[translatableLanguages1].json
-		[workingFolder]/[translatableLanguages2].json
+		[workingFolder]/[translatableLanguage1].json
+		[workingFolder]/[translatableLanguage2].json
 		... ... ... ... ... ... ... ... ... ... ...
-		[workingFolder]/[translatableLanguagesN].json
-		.............................................
+		[workingFolder]/[translatableLanguageN].json
+		............................................
 
 		EXAMPLE
 		..............
@@ -164,59 +168,138 @@ Localization Service Methods ~~ Localization Service Method
 
 		In the above example, the =workingFolder= config option is set to ='loc'=, the =primaryLanguage= config option is set to ='en-US'=, the =pseudoLocale= config option is set to ='en-ZZ'=, and the configured translatable languages are ='en-GB'= (English for Great Britain), ='fr-FR'= (French), and ='de-DE'= (German).
 
+		Parameters
+			The =export= method supports the following parameters...
+
+			initNonTranslatable
+				By default, the value for each non-translatable string is initialized to the corresponding value of the string from the primary language, but only if the non-translatable string is currently blank.
+
+				If this behavior is not suitable, one of the other available initialization modes can be specified using the =initNonTranslatable= parameter. The following initialization modes are supported...
+
+				- =primary-if-blank= (default) - initializes the values of only blank non-translatable strings to the corresponding values of the strings from the primary language
+				- =primary= - initializes the values of all non-translatable strings to the corresponding values of the strings from the primary language, regardless of their current values
+				- =blank= - initializes the values of all non-translatable strings to blank (empty string), regardless of their current values
+				- =never= - leaves the values of all non-translatable strings as is, keeping their current values
+
+			languages
+				An optional, comma-separated list of one or more of the project's `translatable languages` for which the =export= operation should be performed.
+
+				For more detailed information, consult the section `Performing Methods for a Filtered Set of Languages`.
+
 	import
 		Imports the resource strings from the `master resource files` of a project back into the `codebase resource files`.
 
+		SYNTAX
 		............................................................................
 		node [pathToUize]build.js Uize.Build.Loc project=[projectName] method=import
 		............................................................................
 
-		Executing the =import= method will have the effect of overwriting all the `codebase resource files` for the pseudo-locale and the translatable languages so that their contents reflects the contents of the `master resource files`. The =import= method will also create new codebase resource files, as necessary, if they did not previously exist.
+		Executing the =import= method will have the effect of overwriting all the `codebase resource files` for the `pseudo-locale` and the translatable languages so that their contents reflects the contents of the `master resource files`. The =import= method will also create new codebase resource files, as necessary, if they did not previously exist.
+
+		Parameters
+			The =import= method supports the following parameters...
+
+			languages
+				An optional, comma-separated list of one or more of the project's `translatable languages` for which the =import= operation should be performed.
+
+				For more detailed information, consult the section `Performing Methods for a Filtered Set of Languages`.
 
 	exportJobs
-		Exports resource strings for translation  from the `master resource files` of a project into the `translation job files`.
+		Exports resource strings for translation from the `master resource files` of a project to `translation job files`.
 
+		SYNTAX
 		................................................................................
 		node [pathToUize]build.js Uize.Build.Loc project=[projectName] method=exportJobs
 		................................................................................
 
-		Export Filters
-			.
+		Parameters
+			The =exportJobs= method supports the following parameters...
 
-			.....................................................................................................
-			node [pathToUize]build.js Uize.Build.Loc project=[projectName] method=exportJobs filter=[missing|all]
-			.....................................................................................................
+			filter
+				The =exportJobs= method supports the ability to filter the strings that are exported to the translation job files, using the optional =filter= paramter.
 
-		Export Format
-			.
+				SYNTAX
+				....................................................................................................
+				node [pathToUize]build.js Uize.Build.Loc project=[projectName] method=exportJobs filter=[filterName]
+				....................................................................................................
 
-		###
-			- for all translatable languages - excludes primary language and pseudo-locale
-			- only the strings for which translation is needed
-			- file format
+				filterName
+					The following filters are supported for the =exportJobs= method...
 
-			- make sure `master resource files` are up-to-date before executing the =exportJobs= method by first executing the =export= method
+					- =missing= (defualt) - only the translatable strings for which translations are missing for a translatable language will be exported in the translation job file for the language
+					- =translated= - only the translatable strings for which translations exist for a translatable language will be exported in the translation job file for the language
+					- =all= - all translatable strings for a translatable language will be exported in the translation job file for the language, whether they have existing translations or not
+
+			languages
+				An optional, comma-separated list of one or more of the project's `translatable languages` for which the =exportJobs= operation should be performed.
+
+				For more detailed information, consult the section `Performing Methods for a Filtered Set of Languages`.
+
+		Only Translatable Languages
+			The =exportJobs= method generates `translation job files` for only the `translatable languages` configured for the project.
+
+			In particular, this means that translation job files are never generated for the `primary language` or `pseudo-locale` configured for the project.
+
+		Only Translatable Strings
+			The `translation job files` generated by the =exportJobs= method contain only translatable strings.
+
+			All non-translatable strings will be excluded from the translation job files. For more detailed information, consult the section `Non-translatable Strings`.
+
+		File Format
+			The =exportJobs= method will write `translation job files` in the `translation job file format` that is configured for the project.
+
+		NOTES
+		- before executing the =exportJobs= method, make sure that the `master resource files` are up-to-date by executing the =export= method, if necessary
 
 	importJobs
-		.
+		Imports translated resource strings from `translation job files` into the `master resource files` of a project.
 
+		SYNTAX
 		................................................................................
 		node [pathToUize]build.js Uize.Build.Loc project=[projectName] method=importJobs
 		................................................................................
 
-	usage
-		.
+		Parameters
+			The =importJobs= method supports the following parameters...
 
+			languages
+				An optional, comma-separated list of one or more of the project's `translatable languages` for which the =importJobs= operation should be performed.
+
+				For more detailed information, consult the section `Performing Methods for a Filtered Set of Languages`.
+
+	usage
+		Generates a `usage report file` for the project, containing information about resource string references in the project's code, along with an assessment of unreferenced strings.
+
+		SYNTAX
 		...........................................................................
 		node [pathToUize]build.js Uize.Build.Loc project=[projectName] method=usage
 		...........................................................................
 
-	extract
-		.
+		The =usage= method generates a JSON format usage report file with the path...
 
+		.........................................
+		[workingFolder]/metrics/usage-report.json
+		.........................................
+
+		In order for the =usage= method to work reliably, the localization adapter subclass for the project must implement the =getReferencingCodeFiles= and =getReferencesFromCodeFile= instance methods.
+
+		NOTES
+		- see also the =extract= localization service method
+
+	extract
+		Extracts resource strings from references inside the code files of a project and generates one or more `codebase resource files`.
+
+		SYNTAX
 		.............................................................................
 		node [pathToUize]build.js Uize.Build.Loc project=[projectName] method=extract
 		.............................................................................
+
+		This method can be useful for projects where developers typically create resource strings by first referencing them in translation calls in the code, rather than by first creating entries in resource files.
+
+		The =extract= method is not implemented by the localization service adapter base class - the base class' version of this method just throws an error. Therefore, the localization adapter subclass for the project must implement this method. The =getReferencingCodeFiles= and =getReferencesFromCodeFile= instance methods that need to be implemented by an adapter subclass in order to support the =usage= method can be used in one's implementation of the =extract= method.
+
+		NOTES
+		- see also the =usage= localization service method
 
 Configuring Projects
 	The behavior of the =Uize.Build.Loc= build script is configurable to support one or more projects of potentially different types.
@@ -291,10 +374,12 @@ Configuring Projects
 				.
 
 			Translation Job File Format ~~ translationJobFileFormat
-				.
+				The format of `translation job files` written by the =exportJobs= method can be configured using the =translationJobFileFormat= config option.
 
-				- =csv= -
-				- =xliff= -
+				The =translationJobFileFormat= config option supports the following possible values...
+
+				- =csv= - translation job files will be exported in CSV (Comma-separated Values) format
+				- =xliff= - translation job files will be exported in XLIFF (XML Localization Interchange File Format)
 
 		Common Project Configuration Options ~~ common
 			.
@@ -436,39 +521,82 @@ Localization Service Workflows
 						- strings that were changed since revision A
 
 Advanced Topics
+	Performing Methods for a Filtered Set of Languages
+		Various of the localization service methods support the optional =languages= parameter, which lets you execute the methods for a filtered set of the project's `translatable languages`.
+
+		EXAMPLE
+		........................................................................................
+		node [pathToUize]build.js Uize.Build.Loc project=Foo method=export languages=fr-FR,fr-CA
+		........................................................................................
+
+		In the above example, the =export= method's operation will be performed for just the "fr-FR" (French French) and "fr-CA" (Canadian French) languages, even though the "Foo" project may support a larger set of translatable languages.
+
+		The following methods support the optional =languages= parameter...
+
+		- =export=
+		- =exportJobs=
+		- =import=
+		- =importJobs=
+
+		When the optional =languages= parameter is either not specified (or if an empty value is specified) when executing any of the above methods, then the method's operation will be performed for all the `trnslatable languages` configured for the project.
+
 	Non-translatable Strings
 		Non-translatable strings are strings that should never be pseudo-localized and should never be sent to translators for translation.
 
 		Examples of non-translatable resource strings would be...
 
-		- URLs that should be different per language
+		- URLs
 		- media asset IDs
 		- dimension values
 		- color values
-		- support e-mail addresses
+		- support e-mail addresses or phone numbers
+		- item codes
 
-		It is a potential waste of money to send non-translatable strings to translators, since they likely won't know what to do with them and determining how to handle them may involve some costly back-and-forth communication between the project managers on both sides of the process. Worse still, accidental pseudo-localization of some non-translatable strings (such as IDs or URLs) may actually break the pseudo-localized application and hinder localization QA testing of the pseudo-localized version.
+		Reasons for Treating Some Strings as Non-translatable
+			There are good reasons to identify certain strings as being non-translatable and then handle such strings differently in the automation process.
+
+			A Waste of Money
+				For one thing, it is a waste of money to send non-translatable strings to translators.
+
+				Translators will likely not know what to do with such strings, and determining how to handle them may involve some costly back-and-forth communication between the project managers on both sides of the process. And if they actually translate such strings by accident, then they will charge for that translation work.
+
+			Breakage from Accidental Translation
+				Accidental translation of strings that should not be translated can result in breakage of the application.
+
+				For example, a resource string may be used for storing a color value that should be different per language. Technologies such as CSS support named color values, such as "red" or "green". If the intention is to use the color red for one language and the color green for another language, it is not helpful if the actual text "red" is translated to some other language by the translators. Translating "red" to "rouge" in French would break the application in that the translated color value would not be recognized by CSS.
+
+				Instead, such a string should be treated as a non-translatable string, and it would then be the responsibility of a developer to manually change the value in the resource files of the translatable languages, under the direction of a product manager who makes the decision what colors best suit different language audiences.
+
+			Breakage from Pseudo-localization
+				Accidental pseudo-localization of some non-translatable strings (such as IDs or URLs) may break the pseudo-localized version of the application and hinder localization QA testing of the pseudo-localized version.
+
+				For example, if a resource string was being used to store a code like ="AdvancedMode"=, where this code is being used by the application logic and is intended to be different per language, then pseudo-localizing the value from the primary language to ="[ÅðṽåñçéðṀöðé____]"= would break the application as it would not understand this value.
 
 		Non-translatable Strings Vary by Project
 			Different types of projects will likely have different varieties of non-translatable strings that it is convenient for the project to store in `codebase resource files`.
 
-			Therefore, it is up to each project to determine which strings are translatable and which strings are not. This is accomplished by implementing an override to the new =isTranslatableString= method in the `localization service adapter`. The implementation in the adapter base class just returns =true=, so all resource strings are considered translatable by default.
+			Therefore, it is up to each project to determine which strings are translatable and which strings are not. This is accomplished by implementing an override to the new =isTranslatableString= method in the `localization service adapter`.
 
-			An implementation for the =isTranslatableString= method should expect to receive a single argument, being a string info object that describes any given resource string. The string info object will contain a =key= property that specifies the resource string's key name, along with a =value= property that specifies the value of the resource string for the `primary language`.
+			isTranslatableString
+				Implementing support for non-translatable strings in a project involves providing an implementation for the =isTranslatableString= instance method in the localization adapter subclass for the project.
 
-			The method implementation should use the information in the string info object to determine a boolean return value, indicating whether or not the string is translatable. The implementation can use either or both of the =key= and =value= properties to reach its determination- whichever is best suited to the nature of the resource strings in the project.
+				The implementation in the adapter base class just returns =true=, so all resource strings are considered translatable by default.
 
-			EXAMPLE
-			..................................................................................
-			function (stringInfo) {
-				return (
-					!/_(ID|EMAIL)$/.test (stringInfo.key) &&  // it's an ID or an e-mail address
-					!/^https?:\/\//.test (stringInfo.value)   // it's a URL
-				);
-			}
-			..................................................................................
+				An implementation for the =isTranslatableString= method should expect to receive a single argument, being a string info object that describes a resource string. The string info object will contain a =key= property that specifies the resource string's key name, along with a =value= property that specifies the value of the resource string for the `primary language`.
 
-			In the above example implementation for the =isTranslatableString= method, the method is first performing a test on the key of the resource string, checking to see if it ends with "_ID" or "_EMAIL". If this test fails, the method is then testing if the value of the resource string starts with "http://" or "https://".
+				The method implementation should use the information in the string info object to determine a boolean return value, indicating whether or not the string is translatable. The implementation can use either or both of the =key= and =value= properties to reach its determination- whichever is best suited to the nature of the resource strings in the project.
+
+				EXAMPLE
+				..................................................................................
+				function (stringInfo) {
+					return (
+						!/_(ID|EMAIL)$/.test (stringInfo.key) &&  // it's an ID or an e-mail address
+						!/^https?:\/\//.test (stringInfo.value)   // it's a URL
+					);
+				}
+				..................................................................................
+
+				In the above example implementation for the =isTranslatableString= method, the method is first performing a test on the key of the resource string, checking to see if it ends with "_ID" or "_EMAIL". If this test fails, the method is then testing if the value of the resource string starts with "http://" or "https://".
 
 			Establish a Convention for Non-translatable Strings
 				While it is possible to write complex matching logic to test whether or not resource strings should be translatable, it is recommended that projects establish a simple and robust convention.
@@ -488,6 +616,50 @@ Advanced Topics
 				- it becomes clear from the `codebase resource files` exactly which strings are not to be translated
 				- the =isTranslatableString= test is simple, robust, and highly performant
 				- it is easy to add new non-translatable strings of different types later to a project later, without needing to update the implementation of the =isTranslatableString= method
+
+			Surveying Non-translatable Strings
+				In order to verify that one's implementation of the =isTranslatableString= method for a project is doing the right thing, you can survey the strings that are determined to be non-translatable by using the =metrics= localization service method.
+
+				When you execute the =metrics= method, one of its by-products will be the strings info files that are written to the "strings-info" folder. The strings info is obtained from the resource strings in the primary language resource files for the project and is written to two different format files: one JSON format file, and one CSV format file.
+
+				- *.json* - The JSON format file contains an array of string info objects for all of the strings of the project, where each string info object contains properties such as =path=, =value=, =isTranslatable=, etc., and where the values for some properties (such as the =metrics= property) are sub-objects.
+				- *.csv* - The CSV format file contains a table of rows for all of the strings of the project, where each row contains a number of columns that represent a flattened version of the string info object for a string.
+
+				Both of these two strings info files contain the same information, but expressed slightly differently. The CSV file is particularly easy to "consume" and can be loaded up in any spreadsheet editor (such as Google Sheets) that correctly supports the CSV format's ability to have quoted field values that contain line breaks (some of your resource strings may contain line break characters).
+
+				Once loaded into a spreadsheet tool, the =Translatable= column can be used to sort or filter the strings info rows based upon whether or not the strings are considered translatable. For non-translatable strings, the value in the =Translatable= column will be =false=. The spreadsheet can then be used to verify that there are no non-translatable strings being missed by the =isTranslatableString= method, and there are no translatable strings that are being incorrectly caught by it.
+
+		Handling of Non-translatable Strings
+			Non-translatable strings are handled according to the following rules...
+
+			Never Pseudo-localized
+				Non-translatable strings are never pseudo-localized when resource strings for the `pseudo-locale` are generated by the =export= localization service method.
+
+				Instead, the values from the primary language will be used as is.
+
+			Never Exported for Translation
+				Non-translatable strings are never exported to `translation job files` by the =exportJobs= localization service method.
+
+				This means that translators never have to deal with these strings, and there's never a possibility that translators will accidentally translate them, resulting in charges for wasted effort or even problems for the application.
+
+			Initialized to Primary Language Values
+				Whenever a non-translatable string is added or modified for the primary language of a project, the values for the string for the translatable languages are initialized to the value from the primary language.
+
+				In this way, the values for the string in the resource files for the translatable languages don't need to be manually initialized by developers.
+
+			Manually Modified Values are Respected
+				While the values for non-translatable strings are `initialized to primary language values`, the values for the strings in the translatable languages can subsequently be manually modified by developers.
+
+				Non-empty values for non-translatable strings in the resource files for the translatable languages of a project are respected throughout the localization automation process.
+
+		Initializing Values of Non-translatable Strings
+			The values of the non-translatable strings of a project can be initialized by executing the =export= command and specifying one of the supported initialization modes using the =initNonTranslatable= parameter.
+
+			...........................................................................................................
+			node [pathToUize]build.js Uize.Build.Loc project=[projectName] method=export initNonTranslatable=[initMode]
+			...........................................................................................................
+
+			The non-translatable strings initialized in this way will then be updated in the `codebase resource files` during the next =import= operation.
 
 	Metrics Reports ~~ Metrics Report
 		A metrics report can be produced for a project by using the =metrics= `localization service method`.
@@ -529,19 +701,22 @@ Advanced Topics
 				What constitutes a brand-specific resource file will vary by project and depend on the project definition. Typically, brand-specific resource files provide overrides for certain resource strings that need to be different for specific brands, so the number of brand-specific resource files is usually smaller than the total number of resource files. Moreover, different brands may have a differing number of brand-specific resource files.
 
 	### Different Classes of Files
-		Codebase Resource Files
+		Codebase Resource Files ~~ Codebase Resource File
 			.
 
-		Master Resource Files
+		Master Resource Files ~~ Master Resource File
 			.
 
-		Translation Job Files
+		Translation Job Files ~~ Translation Job File
 			.
 
-		Strings Metrics Files
+		Strings Metrics Files ~~ Strings Metrics File
 			.
 
-		Strings Info Files
+		Strings Info Files ~~ Strings Info File
+			.
+
+		Usage Report Files ~~ Usage Report File
 			.
 
 ### Use With Other Projects
@@ -553,4 +728,9 @@ Advanced Topics
 
 	Non-translatable Text
 		.
+
+		examples...
+
+		- HTML tags
+		- substitution tokens
 

@@ -31,15 +31,19 @@ Uize.module ({
 
 		var
 			/*** General Variables ***/
-				_escapedCharsLookup = {
+				_escapeReplacer = Uize.Str.Replace.replacerByLookup ({
 					'\\':'\\\\',
 					'\n':'\\n',
 					'\r':'\\r',
-					'"':'\\"',
-					'\'':'\\\''
-				},
-				_escapeReplacer = Uize.Str.Replace.replacerByLookup (_escapedCharsLookup),
-				_unescapeReplacer = Uize.Str.Replace.replacerByLookup (Uize.reverseLookup (_escapedCharsLookup))
+					'"':'\\"'
+				}),
+				_unescapeReplacer = Uize.Str.Replace.replacerByLookup ({
+					'\\\\':'\\',
+					'\\n':'\n',
+					'\\r':'\r',
+					'\\"':'"',
+					'\\\'':'\''
+				})
 		;
 
 		return Uize.mergeInto (
@@ -61,8 +65,9 @@ Uize.module ({
 							_sourceLength = (m.source = _source = _source || '').length
 						;
 						m.index = _index || (_index = 0);
+						m.isValid = false;
 						var _currentChar = _source.charAt (_index);
-						if (m.isValid = _currentChar == '"' || _currentChar == '\'') {
+						if (_currentChar == '"' || _currentChar == '\'') {
 							_index++;
 							var
 								_inEscape = false,

@@ -68,18 +68,22 @@ Uize.module ({
 					_projectName = _params.project,
 					_scriptConfig = _params.moduleConfigs ['Uize.Build.Loc'],
 					_projects = _scriptConfig.projects,
+					_projectNames = Uize.keys (_projects),
 					_progressBar = _params.progressBar + '' != 'false',
 					_console = _params.console || 'verbose',
 					_fileSystem = Uize.Services.FileSystem.singleton ()
 				;
 				Uize.forEach (
-					!_projectName || _projectName == '*' ? Uize.keys (_projects) : _projectName.split (','),
+					!_projectName || _projectName == '*' ? _projectNames : _projectName.split (','),
 					function _performLocMethodForProject (_projectName) {
-						var _project = Uize.merge (
-							Uize.clone (_scriptConfig.common),
-							{name:_projectName},
-							_projects [_projectName]
-						);
+						var _project = _projects [_projectName];
+						if (!_project)
+							throw new Error (
+								'No project named "' + _projectName + '". ' +
+								'Projects defined are: ' + _projectNames.join (', ') + '.'
+							)
+						;
+						_project = Uize.merge (Uize.clone (_scriptConfig.common),{name:_projectName},_project);
 						Uize.require (
 							_project.serviceAdapter,
 							function (_locServiceAdapter) {

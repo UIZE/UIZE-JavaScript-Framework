@@ -23,13 +23,10 @@
 		*DEVELOPERS:* `Chris van Rensburg`
 */
 
-/* TODO:
-	- for XML documents, support <?xml tag
-*/
-
 Uize.module ({
 	name:'Uize.Parse.Xml.NodeList',
 	required:[
+		'Uize.Parse.Items',
 		'Uize.Parse.Xml.Tag',
 		'Uize.Parse.Xml.Cdata',
 		'Uize.Parse.Xml.Comment',
@@ -40,63 +37,27 @@ Uize.module ({
 
 		var
 			/*** Variables for Scruncher Optimization ***/
-				_Uize_Parse_Xml = Uize.Parse.Xml
+				_superclass = Uize.Parse.Items,
+				_Uize_Parse_Xml = Uize.Parse.Xml,
+
+			/*** General Variables ***/
+				_class = function (_source,_index) {
+					var m = this;
+					_superclass.call (m,_source,_index);
+					m.nodes = m.items;
+				}
 		;
 
-		return Uize.mergeInto (
-			function (_source,_index) {
-				var m = this;
-				m._nodes = m.nodes = [];
-				m._currentNodes = {};
-				m.parse (_source,_index);
-			},
+		_class.itemTypes = {
+			tag:_Uize_Parse_Xml.Tag,
+			cdata:_Uize_Parse_Xml.Cdata,
+			comment:_Uize_Parse_Xml.Comment,
+			text:_Uize_Parse_Xml.Text
+		};
 
-			{
-				prototype:{
-					source:'',
-					index:0,
-					length:0,
-					isValid:true,
+		Uize.copyInto (_class.prototype,_superclass.prototype);
 
-					parse:function (_source,_index) {
-						function _tryParseNode (_nodeType) {
-							var _node =
-								m._currentNodes [_nodeType] ||
-								(m._currentNodes [_nodeType] = new _Uize_Parse_Xml [_nodeType])
-							;
-							_node.parse (_source,_index);
-							if (_node.isValid) {
-								_nodes.push (_node);
-								m._currentNodes [_nodeType] = null;
-								_index += _node.length;
-							}
-							return _node.isValid;
-						}
-						var
-							m = this,
-							_sourceLength = (m.source = _source = _source || '').length,
-							_nodes = m._nodes
-						;
-						_nodes.length = 0;
-						m.index = _index || (_index = 0);
-						while (
-							_index < _sourceLength &&
-							(
-								_tryParseNode ('Tag') ||
-								_tryParseNode ('Comment') ||
-								_tryParseNode ('Cdata') ||
-								_tryParseNode ('Text')
-							)
-						);
-						m.length = _index - m.index;
-					},
-
-					serialize:function () {
-						return this.isValid ? Uize.map (this._nodes,'value.serialize ()').join ('') : '';
-					}
-				}
-			}
-		);
+		return _class;
 	}
 });
 

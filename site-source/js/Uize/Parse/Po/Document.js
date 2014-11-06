@@ -26,6 +26,7 @@
 Uize.module ({
 	name:'Uize.Parse.Po.Document',
 	required:[
+		'Uize.Parse.Items',
 		'Uize.Parse.Po.NameValue',
 		'Uize.Parse.Code.PoundComment',
 		'Uize.Parse.Code.Whitespace'
@@ -34,65 +35,22 @@ Uize.module ({
 		'use strict';
 
 		var
-			/*** Variables for Performance Optimization ***/
-				_Uize_Parse = Uize.Parse,
-				_Uize_Parse_Code = _Uize_Parse.Code,
+			/*** Variables for Scruncher Optimization ***/
+				_superclass = Uize.Parse.Items,
 
 			/*** General Variables ***/
-				_itemTypes = {
-					comment:_Uize_Parse_Code.PoundComment,
-					nameValue:_Uize_Parse.Po.NameValue,
-					whitespace:_Uize_Parse_Code.Whitespace
-				}
+				_class = function (_source,_index) {_superclass.call (this,_source,_index)}
 		;
 
-		return Uize.mergeInto (
-			function (_source,_index) {
-				var m = this;
-				m._items = m.items = [];
-				m._currentItems = {};
-				m.parse (_source,_index);
-			},
+		_class.itemTypes = {
+			comment:Uize.Parse.Code.PoundComment,
+			nameValue:Uize.Parse.Po.NameValue,
+			whitespace:Uize.Parse.Code.Whitespace
+		};
 
-			{
-				prototype:{
-					source:'',
-					index:0,
-					length:0,
-					isValid:true,
+		Uize.copyInto (_class.prototype,_superclass.prototype);
 
-					parse:function (_source,_index) {
-						var
-							m = this,
-							_sourceLength = (m.source = _source = _source || '').length,
-							_items = m._items
-						;
-						_items.length = 0;
-						m.index = _index || (_index = 0);
-						while (_index < _sourceLength) {
-							for (var _itemType in _itemTypes) {
-								var _item =
-									m._currentItems [_itemType] ||
-									(m._currentItems [_itemType] = new _itemTypes [_itemType])
-								;
-								_item.parse (_source,_index);
-								if (_item.isValid) {
-									_items.push (_item);
-									m._currentItems [_itemType] = null;
-									_index += _item.length;
-								}
-								if (_item.isValid) break;
-							}
-						}
-						m.length = _index - m.index;
-					},
-
-					serialize:function () {
-						return this.isValid ? Uize.map (this._items,'value.serialize ()').join ('') : '';
-					}
-				}
-			}
-		);
+		return _class;
 	}
 });
 
