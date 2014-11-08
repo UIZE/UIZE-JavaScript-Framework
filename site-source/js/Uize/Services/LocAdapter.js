@@ -30,6 +30,7 @@ Uize.module ({
 		'Uize.Json',
 		'Uize.Data.Flatten',
 		'Uize.Data.Matches',
+		'Uize.Data.Mappings',
 		'Uize.Data.Csv',
 		'Uize.Loc.FileFormats.ProjectStrings.Xliff',
 		'Uize.Loc.FileFormats.ProjectStrings.Csv',
@@ -1503,6 +1504,82 @@ Uize.module ({
 								occurrencesByValue:_referencesHistogram
 							})
 						);
+
+					_callback ();
+				},
+
+				auditTranslations:function (_params,_callback) {
+					var
+						m = this,
+						_project = m.project,
+						_languagesForOperation = _getLanguagesForOperation (m,_params),
+						_summaryChunks = []
+					;
+					m.prepareToExecuteMethod (1 + _languagesForOperation.length * 3);
+
+					var _primaryLanguageResources = _readLanguageResourcesFile (m,m.project.primaryLanguage);
+					m.stepCompleted ('Loaded resources for the primary language');
+
+					Uize.forEach (
+						_languagesForOperation,
+						function (_language) {
+							/*** load language resource strings ***/
+								var _languageResources = _readLanguageResourcesFile (m,_language);
+								m.stepCompleted (_language + ': read language resources file');
+
+							/*** scan for translation inconsistencies ***/
+								var _inconsistentTranslations = [];
+								Uize.forEach (
+									Uize.Data.Mappings.getDeviantMappings (
+										_languageResources,
+										_primaryLanguageResources,
+										function (_languageString,_primaryLanguageString) {
+											return _languageString.value && _primaryLanguageString.value;
+										}
+									),
+									function (_translationsMap,_primaryLanguageStringValue) {
+										_inconsistentTranslations.push ({
+											source:_primaryLanguageStringValue,
+											translations:Uize.map (
+												Uize.keys (_translationsMap),
+												function (_translation) {
+													return {
+														translation:_translation,
+														strings:_translationsMap [_translation]
+													}
+												}
+											)
+										});
+									}
+								);
+
+								_summaryChunks.push (
+									_language + ': ' +
+									(
+										_inconsistentTranslations.length
+											? _inconsistentTranslations.length + ' strings(s) with inconsistent translations'
+											: 'all translations consistent'
+									)
+								);
+								m.stepCompleted (_language + ': scanned for translation inconsistencies');
+
+							/*** write inconsistencies report ***/
+								var _reportFilePath =
+									m._workingFolderPath + 'translation-audit/inconsistencies-' + _language + '.json'
+								;
+								_fileSystem.writeFile ({
+									path:_reportFilePath,
+									contents:Uize.Json.to (_inconsistentTranslations)
+								});
+								m.stepCompleted (_language + ': generated inconsistencies report... ' + _reportFilePath);
+						}
+					);
+					m.methodExecutionComplete (
+						'\n' +
+						'SUMMARY OF TRANSLATION INCONSISTENCIES\n\n' +
+						_summaryChunks.join ('\n') +
+						'\n'
+					);
 
 					_callback ();
 				},

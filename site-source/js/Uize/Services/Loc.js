@@ -141,6 +141,18 @@ Uize.module ({
 					*/
 				},
 
+				auditTranslations:{
+					async:_true
+					/*?
+						Instance Methods
+							auditTranslations
+								Performs an audit of the resource strings for the translatable languages of the project, to find issues like inconsistent translations within a translatable language of the same primary language text.
+
+								NOTES
+								- this service method is asynchronous
+					*/
+				},
+
 				about:{
 					async:_false
 					/*?
