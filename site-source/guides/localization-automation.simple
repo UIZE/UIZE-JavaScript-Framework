@@ -350,30 +350,131 @@ Configuring Projects
 			The working folder is used to store the output of the various `localization service methods`.
 
 		Per Project Configuration Options
-			.
+			The localization service supports a number of per project configuration options.
 
-			Service Adapter ~~ serviceAdapter
-				.
+			serviceAdapter ~~ Service Adapter
+				The service adapter can be configured for a project by specifying a module name for the =serviceAdapter= config option.
 
-			Root Folder Path ~~ rootFolderPath
-				.
+				EXAMPLE
+				................................................................
+				serviceAdapter:'MyNamespace.LocServiceAdapters.MobileAppAndroid'
+				................................................................
 
-			Languages ~~ languages
-				.
+				Typically, each project has its own localization service adapter subclass, but it is possible for multiple projects to share the same service adapter module if they are all of the same type but differ in other aspects of their configuration.
 
-			Brand Languages ~~ brandLanguages
-				.
+			rootFolderPath ~~ Root Folder Path
+				The =rootFolderPath= config option lets you specify the path to the root folder under which all the project's `codebase resource files` can be found.
 
-			Primary Language ~~ primaryLanguage
-				.
+				EXAMPLE
+				...........................................
+				rootFolderPath:'~/git-repos/my-project/res'
+				...........................................
 
-			Pseudo-locale ~~ pseudoLocale
-				.
+				If a relative path is specified for the =rootFolderPath= option, the path should be relative to the current directory at the time that the localization service scripts are run.
 
-			Pseudo-localization ~~ pseudoLocalization
-				.
+			languages ~~ Languages
+				The =languages= config option lets you specify the `translatable languages` of the project, for which translation should be managed by the localization service.
 
-			Translation Job File Format ~~ translationJobFileFormat
+				It is recommended that the value specified for the =languages= option be an array of [[http://en.wikipedia.org/wiki/IETF_language_tag][BCP 47]] locale codes, containing both the language and region codes.
+
+				EXAMPLE
+				........................
+				languages:[
+					'de-DE',  // German
+					'fr-FR',  // French
+					'ja-JP',  // Japanese
+					'nl-NL',  // Dutch
+					'ru-RU',  // Russian
+					'zh-CN'   // Chinese
+				]
+				........................
+
+				The languages list may redundantly contain the primary language that is configured for the project in the separate =primaryLanguage= config option, but it is not required and it is recommended to omit the primary language from this list. In any event, the primary language is not considered to be a `translatable language`.
+
+			brandLanguages ~~ Brand Languages
+				Lets you configure the `translatable languages` supported per brand.
+
+				It is not uncommon, in situations where a project supports multiple brands, for those brands to be associated with markets in different regions, with different regional languages for those regions. In projects that have `brand-specific resource strings`, the =brandLanguages= config option lets you configure different sets of translatable languages on a per brand basis.
+
+				EXAMPLE
+				..........................................
+				brandLanguages:{
+					fooBrand:[
+						'de-DE',  // German
+						'fr-FR',  // French
+						'en-GB'   // English (Great Britain)
+					],
+					barBrand:[
+						'es-MX',  // Spanish (Mexico)
+						'pt-BR'   // Portuguese (Brazil)
+					]
+				}
+				..........................................
+
+				In the above example, the brand "fooBrand" supports three languages, while brand "barBrand" supports two languages. There is no overlap in the languages supported by these two brands. Resource strings that are specific to "fooBrand" are not translated to Spanish or Portuguese, while resource strings that are specific to "barBrand" are not translated to German, French, or British English. Resource strings that are not brand-specific and that are, therefore, common to these two brands will be translated for the superset of all the brand languages.
+
+			primaryLanguage ~~ Primary Language
+				Lets you specify the primary language for the project.
+
+				The primary language is the language that will be used as the source of truth, and the resource strings from the primary language resource files will drive the translation process. Resource strings for the configured `translatable languages` of the project will be produced by translating the corresponding values of the strings from the primary language resource files.
+
+				EXAMPLE
+				......................................
+				primaryLanguage:'en-US'  // US English
+				......................................
+
+				It is fairly common for the primary language to be a regional variant of English (such as US English), but this is not a strict requirement. It is recommended that the value specified for the =primaryLanguage= option be a `BCP 47` locale code, containing both the language and region codes.
+
+			pseudoLocale ~~ Pseudo-locale
+				Lets you specify the locale code to be used for the pseudo-locale.
+
+				It is recommended that the value specified for the =pseudoLocale= option be a `BCP 47` locale code, containing both the language and region codes. It is further recommended that specifically the "en-ZZ" locale code be used for the pseudo-locale, since this locale code exists in a range of BCP 47 locale codes that are not assigned to specific languages and are free to be used for proprietary purposes such as pseudo-localization.
+
+				EXAMPLE
+				....................
+				pseudoLocale:'en-ZZ'
+				....................
+
+			pseudoLocalization ~~ Pseudo-localization
+				Lets you specify configuration options for the `pseudo-localization` process that is performed when executing the =export= localization service method.
+
+				EXAMPLE
+				....................
+				pseudoLocalization:{
+					expansion:1.15,
+					wrapper:'[]'
+				}
+				....................
+
+				Generally, it is not necessary to explicitly configure the pseudo-localization process, since the default configuration should suit most projects. If any pseudo-localization option is to be configured differently for specific projects, it is likely to be the expansion factor. The most suitable expansion factor to use will be influenced by the set of `translatable languages` that the project needs to support, since different languages introduce different amounts of expansion during translation.
+
+			resourceFileWhitespace ~~ Resource File Whitespace
+				Lets you configure the whitespace options that should be used by the =import= localization service method when it writes `codebase resource files`.
+
+				EXAMPLE
+				........................
+				resourceFileWhitespace:{
+					indentChars:'    ',
+					linebreakChars:'\n'
+				}
+				........................
+
+				By default, resource files are serialized using a single tab character for indentation and a single new line character linebreaks. If these defaults are not suitable for the project's codebase, then the whitespace options can be specified explicitly using the =resourceFileWhitespace= config option.
+
+				Whitespace Options
+					The value specified for the =resourceFileWhitespace= option should be an object containing any of the following supported properties...
+
+					indentChars ~~ Indent Characters
+						A string, specifying the character(s) that should be used to denote one level of indentation.
+
+						The default value for this property, if not specified, is a single tab character.
+
+					linebreakChars ~~ Linebreak Characters
+						A string, specifying the character(s) that should be used to denote a linebreak.
+
+						The default value for this property, if not specified, is a single new line character.
+
+			translationJobFileFormat ~~ Translation Job File Format
 				The format of `translation job files` written by the =exportJobs= method can be configured using the =translationJobFileFormat= config option.
 
 				The =translationJobFileFormat= config option supports the following possible values...
@@ -381,7 +482,7 @@ Configuring Projects
 				- =csv= - translation job files will be exported in CSV (Comma-separated Values) format
 				- =xliff= - translation job files will be exported in XLIFF (XML Localization Interchange File Format)
 
-		Common Project Configuration Options ~~ common
+		### Common Project Configuration Options ~~ common
 			.
 
 Localization Service Workflows
@@ -722,6 +823,13 @@ Advanced Topics
 ### Use With Other Projects
 	.
 
+### TO DOCUMENT
+	wordSplitter ~~ Word Splitter
+		.
+
+	tokenRegExp ~~ Token Regular Expression
+		.
+
 ### Key Concepts
 	Translatable Words
 		.
@@ -733,4 +841,7 @@ Advanced Topics
 
 		- HTML tags
 		- substitution tokens
+
+	Brand-specific Resource Strings
+		.
 
