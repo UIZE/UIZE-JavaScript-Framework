@@ -1513,7 +1513,8 @@ Uize.module ({
 						m = this,
 						_project = m.project,
 						_languagesForOperation = _getLanguagesForOperation (m,_params),
-						_summaryChunks = []
+						_identicalTranslationsSummaryChunks = [],
+						_inconsistentTranslationsSummaryChunks = []
 					;
 					m.prepareToExecuteMethod (1 + _languagesForOperation.length * 3);
 
@@ -1523,9 +1524,40 @@ Uize.module ({
 					Uize.forEach (
 						_languagesForOperation,
 						function (_language) {
+							function _bothPropertiesHaveNonEmptyValues (_propertyA,_propertyB) {
+								return _propertyA.value && _propertyB.value;
+							}
+
 							/*** load language resource strings ***/
 								var _languageResources = _readLanguageResourcesFile (m,_language);
 								m.stepCompleted (_language + ': read language resources file');
+
+							/*** scan for identical translations ***/
+								var _identicalTranslations = [];
+								Uize.Data.Diff.diff (
+									_languageResources,
+									_primaryLanguageResources,
+									function (_languageString,_primaryLanguageString,_path) {
+										if (
+											_languageString && _primaryLanguageString &&
+											_bothPropertiesHaveNonEmptyValues (_languageString,_primaryLanguageString) &&
+											_languageString.value == _primaryLanguageString.value
+										)
+											_identicalTranslations.push ({
+												path:_path.concat (),
+												value:_languageString.value
+											})
+										;
+									}
+								);
+								_identicalTranslationsSummaryChunks.push (
+									_language + ': ' +
+									(
+										_identicalTranslations.length
+											? _identicalTranslations.length + ' strings(s) have identical translations'
+											: 'no strings have identical translations'
+									)
+								);
 
 							/*** scan for translation inconsistencies ***/
 								var _inconsistentTranslations = [];
@@ -1533,9 +1565,7 @@ Uize.module ({
 									Uize.Data.Mappings.getDeviantMappings (
 										_languageResources,
 										_primaryLanguageResources,
-										function (_languageString,_primaryLanguageString) {
-											return _languageString.value && _primaryLanguageString.value;
-										}
+										_bothPropertiesHaveNonEmptyValues
 									),
 									function (_translationsMap,_primaryLanguageStringValue) {
 										_inconsistentTranslations.push ({
@@ -1553,34 +1583,41 @@ Uize.module ({
 									}
 								);
 
-								_summaryChunks.push (
+								_inconsistentTranslationsSummaryChunks.push (
 									_language + ': ' +
 									(
 										_inconsistentTranslations.length
 											? _inconsistentTranslations.length + ' strings(s) with inconsistent translations'
-											: 'all translations consistent'
+											: 'no inconsistent translations'
 									)
 								);
 								m.stepCompleted (_language + ': scanned for translation inconsistencies');
 
 							/*** write inconsistencies report ***/
-								var _reportFilePath =
-									m._workingFolderPath + 'translation-audit/inconsistencies-' + _language + '.json'
-								;
+								var _reportFilePath = m._workingFolderPath + 'translation-audit/' + _language + '.json';
 								_fileSystem.writeFile ({
 									path:_reportFilePath,
-									contents:Uize.Json.to (_inconsistentTranslations)
+									contents:Uize.Json.to ({
+										inconsistentTranslations:_inconsistentTranslations,
+										identicalTranslations:_identicalTranslations
+									})
 								});
 								m.stepCompleted (_language + ': generated inconsistencies report... ' + _reportFilePath);
 						}
 					);
 					m.methodExecutionComplete (
-						'\n' +
-						'SUMMARY OF TRANSLATION INCONSISTENCIES\n\n' +
-						_summaryChunks.join ('\n') +
-						'\n'
+						[
+							'',
+							'IDENTICAL TRANSLATIONS',
+							'',
+							_identicalTranslationsSummaryChunks.join ('\n'),
+							'',
+							'INCONSISTENT TRANSLATIONS',
+							'',
+							_inconsistentTranslationsSummaryChunks.join ('\n'),
+							''
+						].join ('\n')
 					);
-
 					_callback ();
 				},
 
