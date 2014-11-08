@@ -608,21 +608,21 @@ Uize.module({
 						);
 
 						// move suggestions palette to root
-						if (_suggestionsPaletteNode && _suggestionsPaletteNode.parentNode != _docBody) {
+						if (m._moveSuggestionsPaletteToRoot && _suggestionsPaletteNode && _suggestionsPaletteNode.parentNode != _docBody)
 							_docBody.insertBefore(_suggestionsPaletteNode, _docBody.childNodes[0]);
-							m.setNodeStyle(
-								_suggestionsPaletteNode,
-								{
-									display: 'none',
-									position: 'absolute',
-									zIndex: 10000,
-									left: '',
-									top: '',
-									right: '',
-									bottom: ''
-								}
-							);
-						}
+
+						m.setNodeStyle(
+							_suggestionsPaletteNode,
+							{
+								display: 'none',
+								position: 'absolute',
+								zIndex: 10000,
+								left: '',
+								top: '',
+								right: '',
+								bottom: ''
+							}
+						);
 
 						// disable browser autocomplete
 						m.setNodeProperties('input', { autocomplete: 'off' });
@@ -706,6 +706,18 @@ Uize.module({
 								NOTES
 								- the initial value is =undefined=
 								- Read Only
+					*/
+				},
+				_moveSuggestionsPaletteToRoot: {
+					name: 'moveSuggestionsPaletteToRoot',
+					value: _true
+					/*?
+						State Properties
+							moveSuggestionsPaletteToRoot
+								A bool, specifies whether or not to move the suggestions palette to the document root
+
+								NOTES
+								- the initial value is =true=
 					*/
 				},
 				_numCharsBeforeSuggest: {

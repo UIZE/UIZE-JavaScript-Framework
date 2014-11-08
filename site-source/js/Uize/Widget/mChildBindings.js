@@ -48,7 +48,7 @@ Uize.module ({
 			_destinationWidget.set(
 				_destinationProperty,
 				_valueTransformer
-					? _valueTransformer(_sourceValue)
+					? _valueTransformer(_sourceValue, _sourceWidget, _destinationWidget)
 					: _sourceValue
 			);
 		}

@@ -49,7 +49,7 @@ Uize.module ({
 							_buildSequence,
 							function (_buildModuleName) {
 								Uize.getModuleByName (_buildModuleName).perform (
-									Uize.copy (_params,{logFilePath:'logs/' + _buildModuleName + '.log'})
+									Uize.copy (_params,{logFilePath:(_params.logsPath || 'logs') + '/' + _buildModuleName + '.log'})
 								);
 							}
 						);

@@ -27,7 +27,7 @@ Uize.module ({
 	name:'Uize.Test.Uize.Widget.mEventBindings',
 	required:[
 		'Uize.Comm',
-		'Uize.Class'
+		'Uize.Test.Widget'
 	],
 	builder:function () {
 		'use strict';
@@ -40,29 +40,7 @@ Uize.module ({
 			_originalWindow
 		;
 
-		function _getMockDomNode(_name) {
-			return Uize.Class.subclass({
-				alphastructor:function() {
-					this._events = {};
-				},
-				instanceProperties:{
-					tagName:'DIV',
-					nodeType:1
-				},
-				instanceMethods:{
-					addEventListener:function(_eventName, _handler) {
-						(this._events[_eventName] || (this._events[_eventName] = [])).push(_handler);
-					},
-					triggerEvent:function(_event) {
-						this._events[_event.name]
-							&& Uize.applyAll(this, this._events[_event.name], [_event]);
-					}
-				},
-				stateProperties:{
-					_name:'name'
-				}
-			}) ({name:_name});
-		}
+		function _getMockDomNode(_name) { return Uize.Test.Widget.getMockDomNode(_name) }
 
 		function _getTestWidgetClass(_eventBindings, _children) {
 			return Uize.Widget.subclass ({

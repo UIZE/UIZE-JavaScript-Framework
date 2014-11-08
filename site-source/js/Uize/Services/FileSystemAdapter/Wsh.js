@@ -71,9 +71,34 @@ Uize.module ({
 								_pathToCreate = _getParentFolderPath (_pathToCreate);
 							}
 							for (var _pathToCreateNo = _pathsToCreate.length; --_pathToCreateNo >= 0;)
-								 _fileSystemObject.CreateFolder (_pathsToCreate [_pathToCreateNo])
+								!_fileSystemObject.FolderExists (_pathsToCreate [_pathToCreateNo])
+									&& _fileSystemObject.CreateFolder (_pathsToCreate [_pathToCreateNo])
 							;
 						}
+					},
+					
+					_readFile:function(_path) {
+						var
+							_fileSystemObject = this._fileSystemObject,
+							_text = ''
+						;
+						if (_fileSystemObject.GetFile (_path).Size) {
+							var _file = _fileSystemObject.OpenTextFile (_path,1);
+							_text = _file.ReadAll ();
+							_file.Close ();
+						}
+						
+						return _text;
+					},
+
+					_writeFile:function (_path, _contents) {
+						var m = this;
+						m._makeFolder (_getParentFolderPath (_path));
+
+						/*** write text to file and close ***/
+							var _file = m._fileSystemObject.CreateTextFile (_path);
+							_file.Write (_contents);
+							_file.Close ();
 					},
 
 				/*** Public Instance Methods ***/
@@ -90,6 +115,15 @@ Uize.module ({
 					deleteFile:function (_params,_callback) {
 						try {
 							this._fileSystemObject.DeleteFile (_params.path);
+						} catch (_error) {
+							// do nothing for now
+						}
+						_callback ();
+					},
+
+					deleteFolder:function (_params,_callback) {
+						try {
+							this._fileSystemObject.DeleteFolder (_params.path);
 						} catch (_error) {
 							// do nothing for now
 						}
@@ -140,31 +174,11 @@ Uize.module ({
 					},
 
 					readFile:function (_params,_callback) {
-						var
-							_fileSystemObject = this._fileSystemObject,
-							_path = _params.path,
-							_text = ''
-						;
-						if (_fileSystemObject.GetFile (_path).Size) {
-							var _file = _fileSystemObject.OpenTextFile (_path,1);
-							_text = _file.ReadAll ();
-							_file.Close ();
-						}
-						_callback (_text);
+						_callback (this._readFile(_params.path));
 					},
 
 					writeFile:function (_params,_callback) {
-						var
-							m = this,
-							_path = _params.path
-						;
-						m._makeFolder (_getParentFolderPath (_path));
-
-						/*** write text to file and close ***/
-							var _file = m._fileSystemObject.CreateTextFile (_path);
-							_file.Write (_params.contents);
-							_file.Close ();
-
+						this._writeFile(_params.path, _params.contents);
 						_callback ();
 					},
 

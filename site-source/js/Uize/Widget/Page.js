@@ -210,45 +210,43 @@ Uize.module ({
 					var
 						m = this,
 						_rootNodeId = _injectionParams.rootNodeId,
-						_callback = _getCallbackFromDirectives (_loaderDirectives),
-						_loaderDirectivesIsValidObject = typeof _loaderDirectives == 'object' && _loaderDirectives,
-						_loadHtmlCallbackObject = {
-							callback:function (_html) {
-								function _injectHmtl() {
-									var
-										_documentBody = document.body,
-										_node = _injectionParams.node != undefined
-											? m.getNode (_injectionParams.node)
-											: (_rootNodeId ? _Uize_Dom_Basics.getById (_rootNodeId + '-shell') : _null) || _documentBody
-									;
-
-									_Uize_Dom_Basics.injectHtml (
-										_node,
-										_html,
-										_injectionParams.injectMode || (_node == _documentBody ? 'inner bottom' : 'inner replace')
-									);
-
-									/* NOTE:
-										Need to break synchronous execution of the page between HTML injection and child widget adoption so the browser has time to insert any widget data into the window object
-									*/
-									setTimeout(function() { _adoptChildWidgets (m,_callback) }, 0);
-								}
-
-								_loaderDirectivesIsValidObject && _loaderDirectivesIsValidObject.beforeInject
-									? _loaderDirectivesIsValidObject.beforeInject(_injectHmtl, _html)
-									: _injectHmtl()
-								;
-							}
-						}
+						_callback = _getCallbackFromDirectives (_loaderDirectives)
 					;
+
+					if (typeof _loaderDirectives !== 'object') {
+						_loaderDirectives = {};
+					}
+
+					_loaderDirectives.callback = function (_html) {
+						function _injectHmtl() {
+							var
+								_documentBody = document.body,
+								_node = _injectionParams.node != undefined
+									? m.getNode (_injectionParams.node)
+									: (_rootNodeId ? _Uize_Dom_Basics.getById (_rootNodeId + '-shell') : _null) || _documentBody
+							;
+
+							_Uize_Dom_Basics.injectHtml(
+								_node,
+								_html,
+								_injectionParams.injectMode || (_node == _documentBody ? 'inner bottom' : 'inner replace')
+							);
+
+							/* NOTE:
+								Need to break synchronous execution of the page between HTML injection and child widget adoption so the browser has time to insert any widget data into the window object
+							*/
+							setTimeout (function () { _adoptChildWidgets (m,_callback) }, 0);
+						}
+
+						_loaderDirectives.beforeInject
+							? _loaderDirectives.beforeInject (_injectHmtl,_html)
+							: _injectHmtl()
+						;
+					};
+
 					_injectionParams.alwaysReplace === _false && _rootNodeId && _Uize_Dom_Basics.getById (_rootNodeId)
-						? _callback ()
-						: m.loadHtml (
-							_htmlParams,
-							_loaderDirectivesIsValidObject
-								? _Uize.copy (_loaderDirectives,_loadHtmlCallbackObject)
-								: _loadHtmlCallbackObject
-						)
+						? _callback()
+						: m.loadHtml(_htmlParams, _loaderDirectives)
 					;
 					/*?
 						Instance Methods
@@ -487,7 +485,6 @@ Uize.module ({
 					function _loadDialog() {
 						function _createDialogWidget() {
 							var _dialogWidgetClassName = _params.widgetClassName;
-							_loadingDialogs[_dialogWidgetName] = _false;
 							_Uize.require (
 								_dialogWidgetClassName,
 								function (_dialogWidgetClass) {
@@ -502,16 +499,27 @@ Uize.module ({
 									_dialogWidget.Page_componentProfile = _componentProfile;
 									_dialogWidget.insertOrWireUi ();
 									_showDialog (_refetch ? 'refetched' : 'initial');
+									_loadingDialogs[_dialogWidgetName] = _false;
 								}
 							);
 						}
+						function _loadError (_error) {
+							var _widgetEventHandlers = _params && _params.widgetEventHandlers;
+
+							_loadingDialogs [_dialogWidgetName] = _false;
+
+							if (_widgetEventHandlers && _widgetEventHandlers.Error)
+								_widgetEventHandlers.Error (_error);
+							else if (_widgetEventHandlers && _widgetEventHandlers.Cancel)
+								_widgetEventHandlers.Cancel (_error);
+						}
 						if (!_loadingDialogs[_dialogWidgetName]) { // if we're already loading a dialog of that name just ignore
+							_loadingDialogs[_dialogWidgetName] = _true;
 							var _refetch = _componentProfile && !!_dialogWidget;
 							if (_refetch) {
 								_dialogWidget.removeUi ();
 								_dialogWidgetParent.removeChild (_dialogWidgetName);
 							}
-							_loadingDialogs[_dialogWidgetName] = _true;
 							_componentProfile
 								? m.loadHtmlIntoNode (
 									{
@@ -523,7 +531,8 @@ Uize.module ({
 									_Uize.copyInto ({cp:_componentProfile.name},_componentProfile.params),
 									{
 										cache:'memory',
-										callback:_createDialogWidget
+										callback:_createDialogWidget,
+										errorCallback:_loadError
 									}
 								)
 								: _createDialogWidget ()
@@ -540,6 +549,7 @@ Uize.module ({
 									_Uize_Data_Compare.identical (_dialogWidget.Page_componentProfile,_componentProfile)
 										? _showDialog ('subsequent')
 										: _loadDialog()
+									;
 								}
 							);
 						}

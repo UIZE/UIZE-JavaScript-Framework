@@ -29,7 +29,7 @@ Uize.module ({
 		'Uize.Str.Whitespace',
 		'Uize.Str.CharClass',
 		'Uize.Parse.Po.Name',
-		'Uize.Parse.Po.Value',
+		'Uize.Parse.Po.Value'
 	],
 	builder:function () {
 		'use strict';

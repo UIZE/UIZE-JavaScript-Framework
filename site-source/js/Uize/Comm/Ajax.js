@@ -61,8 +61,8 @@ Uize.module ({
 							m._xmlHttpRequest = window.XMLHttpRequest
 								? new XMLHttpRequest
 								: new ActiveXObject ('Microsoft.XMLHTTP')
-						);
-
+						)
+					;
 					_xmlHttpRequest.onreadystatechange = function () {
 						if (_xmlHttpRequest.readyState == 4) {
 							_xmlHttpRequest.onreadystatechange = _nop;
@@ -81,23 +81,25 @@ Uize.module ({
 										: null
 								;
 								_xmlHttpRequest.abort();
-								m.fire({ name: 'XHR Load', responseText: _responseText });
+								// no args means no error
 								_callback ();
 							}
 							else {
-								//alert ('There was a problem retrieving the data:\n' + m._xmlHttpRequest.statusText);
-							  _xmlHttpRequest.abort();
-							  m.fire({ name: 'XHR Error', statusText: m._xmlHttpRequest.statusText });
+								_xmlHttpRequest.abort();
+
+								// callback with error object
+								_callback ({
+									status: _xmlHttpRequest.status,
+									statusText: _xmlHttpRequest.statusText
+								});
 							}
 						}
 					};
 
-					if (_xmlHttpRequest.upload) { // test if XHR2
-					  _xmlHttpRequest.onprogress = function (_event) {
-					    // Pass on the event obj with our event name
-					    _event.name = 'XHR Progress';
-					    m.fire(_event);
-					  }
+					if (_xmlHttpRequest.upload) { // test if XHR2 upload support
+						_xmlHttpRequest.upload.onprogress = function (_event) {
+							m.fire({name: 'Progress', xhrEvent: _event});
+						}
 					}
 
 					if (_requestMethodIsPost && !_requestData) {
@@ -105,21 +107,20 @@ Uize.module ({
 						_requestData = _requestUrl.substr (_queryPos + 1);
 						_requestUrl = _requestUrl.slice (0,_queryPos);
 					}
-					m._xmlHttpRequest.open (_requestMethod,_requestUrl,true);
+					_xmlHttpRequest.open (_requestMethod,_requestUrl,true);
 					if (_requestMethodIsPost) {
 						// don't set the content-type request header if it's multipart/form-data; the built-in FormData object will take care of that
 						_request.contentType != 'multipart/form-data' &&
-							m._xmlHttpRequest.setRequestHeader (
+							_xmlHttpRequest.setRequestHeader (
 								'Content-type',
 								_request.contentType || 'application/x-www-form-urlencoded'
 							)
 						;
-						//m._xmlHttpRequest.setRequestHeader ('Content-length', _requestData.length);
+						//_xmlHttpRequest.setRequestHeader ('Content-length', _requestData.length);
 					}
-					m._xmlHttpRequest.send (_requestData);
+					_xmlHttpRequest.send (_requestData);
 				}
 			}
 		});
 	}
 });
-

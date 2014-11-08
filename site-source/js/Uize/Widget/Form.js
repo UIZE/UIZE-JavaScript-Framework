@@ -216,9 +216,12 @@ Uize.module ({
 									m.set({_isSubmitting:_false});
 							},
 							'Changed.tentativeValue':function() {
-								m.set({
-									_isSubmitting:_false,
+								//FormElement.tentativeValue onChange also sets this to false,
+								//	as it gets the event before us and so might trigger other stuff
+								//	which causes a form submission.
+								m.set({_isSubmitting:_false});
 
+								m.set({
 									// NOTE: in order to support async validation, we could no longer set isSubmitting to false
 									// if isValid was false, which means that there was nothing setting isSubmitting to false after
 									// clicking the submit. This means that you could run into a case where you submit and invalid form,
@@ -257,6 +260,9 @@ Uize.module ({
 								_added && _wireAddedElement(_elementName);
 							}
 						);
+					},
+					_updateNumWarningsShown = function () {
+						m.set({ _numWarningsShown: m.get('warningShown') ? m._formWarnings.get('numWarnings') : 0 });
 					}
 				;
 
@@ -270,6 +276,10 @@ Uize.module ({
 					'Changed.*',
 					function(_event) { _wireAddedElements(_event.properties) }
 				);
+
+				// update numWarningsShown
+				m._formWarnings.wire('Changed.numWarnings', function () { _updateNumWarningsShown(); });
+				m.wire('Changed.warningShown', function () { _updateNumWarningsShown(); });
 
 				m._isInitialized = _true;
 			},
@@ -528,6 +538,10 @@ Uize.module ({
 				_method:{
 					name:'method',
 					onChange:_updateFormAttributes
+				},
+				_numWarningsShown:{
+					name: 'numWarningsShown',
+					value: 0
 				},
 				_okToSubmit:{ // readonly
 					name:'okToSubmit',

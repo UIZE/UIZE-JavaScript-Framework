@@ -145,6 +145,19 @@ Uize.module ({
 								);
 							}
 						);
+						m.set({ numWarnings: _warningElements.length });
+					} else if (m.isWired) {
+						// if there is no template node, we'd still like to calculate the number of warnings.
+						var _numWarnings = 0;
+						(function _addFormWarnings(_elements) {
+							for (var _elementNo = -1; ++_elementNo < _elements.length;) {
+								var _element = _elements[_elementNo];
+								_element.get('isValid') == _false && !_element.isForm &&
+									(_numWarnings += 1)
+								;
+							}
+						})(m._watchedElements);
+						m.set({ numWarnings: _numWarnings });
 					}
 				}
 		;
@@ -250,6 +263,10 @@ Uize.module ({
 						}
 					},
 					value:_false
+				},
+				_numWarnings:{
+					name: 'numWarnings',
+					value: 0
 				},
 				_watchedElements:{
 					name:'watchedElements',

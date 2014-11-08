@@ -53,6 +53,7 @@ Uize.module ({
 				_doForAll = _Uize_Dom_Basics.doForAll,
 				_callOn = _Uize.callOn,
 				_substituteInto = _Uize.substituteInto,
+				_global = _Uize.global(),
 
 			/*** References for Performance Optimization ***/
 				_isNode = _Uize_Dom_Basics.isNode,
@@ -62,19 +63,21 @@ Uize.module ({
 		/*** Utility Functions ***/
 			function _harvestDeclarativeWidgetProperties (_idPrefix,_parent) {
 				var
+					_window = _global.window,
 					_properties,
 					_globalVariableName
 				;
 				(
+					_window &&
 					_idPrefix &&
-					(_properties = window [_globalVariableName = '$' + _idPrefix]) &&
+					(_properties = _window [_globalVariableName = '$' + _idPrefix]) &&
 					typeof _properties == 'object' &&
 					(!_parent || _idPrefix != _parent._idPrefix)
 						/* NOTE:
 							There are still some widgets that are implemented using child widgets where the idPrefix of the child widgets is set to that of the parent widget, and we don't want the global qualifier properties being applied to those child widgets, so we check for this condition.
 						*/
 				)
-					? (window [_globalVariableName] = _undefined)
+					? (_window [_globalVariableName] = _undefined)
 						/* NOTE:
 							We've harvested the global variable for the declarative widget properties, so we set it to undefined so there aren't lingering references to the data lying around (which could impact memory usage).
 						*/
@@ -2162,7 +2165,7 @@ Uize.module ({
 								The busy state can be useful when a complex set of processes needs to be performed and user interaction with certain widgets needs to be blocked during that time. Widgets that are in a busy state should not allow user interaction. It is up to an individual widget class to provide its own implementation for the busy state.
 
 								NOTES
-								- the initial value is =true=
+								- the initial value is =false=
 								- this state property has a significantly different effect to the =enabled= state property
 
 							busyInherited

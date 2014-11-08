@@ -415,10 +415,10 @@ Uize.module ({
 							// issues with Samsung Galaxy Tab 10.1)
 							if (_focused && _inputNode && document.activeElement != _inputNode) {
 								setTimeout(
-									function() {
+									function () {
 										try { (_Uize_Node.isNode(_inputNode) ? _inputNode : _inputNode[0]).focus(); }
 										catch(_ex) {}
-									}, 0
+									}, 50
 								);
 
 								// sync up the value with the UI, in case conformer had changed a UI value to something that already matched the programmatic value

@@ -1165,7 +1165,7 @@ Uize.module ({
 					*/
 				};
 
-				_objectPrototype.trigger = function(_eventName) {
+				_objectPrototype.trigger = function(_eventName, _eventProperties) {
 					var m = this;
 					if (_eventName) {
 						var _event;
@@ -1178,6 +1178,8 @@ Uize.module ({
 							_event = _document.createEventObject();
 							_event.eventType = _eventName;
 						}
+						
+						_Uize.copyInto(_event, _eventProperties);
 
 						m._each(
 							function() {
@@ -1198,6 +1200,11 @@ Uize.module ({
 								SYNTAX
 								........................................................
 								myWeb = myWeb.trigger(eventNameSTR);
+								........................................................
+
+								VARIATION
+								........................................................
+								myWeb = myWeb.trigger(eventNameSTR, eventPropertiesOBJ);
 								........................................................
 
 								NOTES
@@ -1438,12 +1445,12 @@ Uize.module ({
 					_makeWireMethod = function(_methodName, _eventNameorNames) {
 						_objectPrototype[_methodName] = function(_handler, _target) { return this.wire(_eventNameorNames || _methodName, _handler, _target) };
 					},
-					_wireAndTriggerComboFunc = function(_eventName, _handler, _param3, _param4) {
+					_wireAndTriggerComboFunc = function(_eventName, _param2, _param3, _param4) {
 						var
 							_throttleTimeout = 0,
 							_param3IsNumber = _Uize.isNumber(_param3) // _param3 is throttle when a number, otherwise selector
 						;
-						return _Uize_isFunction(_handler)
+						return _Uize_isFunction(_param2)
 							? this.wire(
 								_eventName,
 								_param3IsNumber
@@ -1452,21 +1459,21 @@ Uize.module ({
 											_throttleTimeout = setTimeout(
 												function() {
 													_throttleTimeout = 0;
-													_handler(_event);
+													_param2(_event);
 												},
 												_param3
 											);
 										}
 									}
-									: _handler,
+									: _param2,
 								_param3IsNumber ? _param4 : _param3
 							)
-							: this.trigger(_eventName)
+							: this.trigger(_eventName, _param2)
 						;
 					},
 					_makeWireAndTriggerComboMethod = function(_eventName) {
-						_objectPrototype[_eventName] = function(_handler, _param2, _param3) {
-							return _wireAndTriggerComboFunc.call(this, _eventName, _handler, _param2, _param3);
+						_objectPrototype[_eventName] = function(_param1, _param2, _param3) {
+							return _wireAndTriggerComboFunc.call(this, _eventName, _param1, _param2, _param3);
 						};
 					}
 				;

@@ -87,7 +87,7 @@ Uize.module ({
 										(_console != 'silent' || _reasonForFailure) && _consoleLog (_synopsis);
 										_logChunks.push (_synopsis);
 										_onDone && _onDone (_reasonForFailure,_logChunks);
-										_test.get ('result') || WScript.Quit (1);
+										_test.get ('result') || (_Uize.global().WScript && WScript.Quit (1));
 									}
 							}
 					});
@@ -103,28 +103,16 @@ Uize.module ({
 							var
 								_moduleNameMatcher = _Uize.Util.ModuleNameMatcher.resolve (_module),
 								_libraryModuleSuffixRegExp = /\.library$/i,
-								_testIgnoreNamespaces = (_params.testIgnoreNamespaces || '') + '',
-								_testIgnoreNamespacesRegExp = _testIgnoreNamespaces
-									? new RegExp (
-										'^(' +
-										_Uize.map (_testIgnoreNamespaces.split (','),_Uize.escapeRegExpLiteral).join ('|') +
-										')(\\..+|$)'
-									)
-									: null
-								,
-								_modulesExcludingLibraryModulesAndTestIgnoreNamespaces = _matchingValues (
+								_modulesExcludingLibraryModules = _matchingValues (
 									_getJsModules ().sort (),
 									function (_moduleName) {
-										return (
-											!_libraryModuleSuffixRegExp.test (_moduleName) && // ignore .library modules
-											(!_testIgnoreNamespacesRegExp || !_testIgnoreNamespacesRegExp.test (_moduleName))
-										);
+										return !_libraryModuleSuffixRegExp.test (_moduleName); // ignore .library modules
 									}
 								),
-								_modulesLookup = _Uize.lookup (_modulesExcludingLibraryModulesAndTestIgnoreNamespaces)
+								_modulesLookup = _Uize.lookup (_modulesExcludingLibraryModules)
 							;
 							_modulesToTest = _matchingValues (
-								_modulesExcludingLibraryModulesAndTestIgnoreNamespaces,
+								_modulesExcludingLibraryModules,
 								function (_moduleName) {
 									return (
 										!/^[a-zA-Z_\$][a-zA-Z0-9_\$]*\.Test($|\.)/.test (_moduleName) && // ignore test modules

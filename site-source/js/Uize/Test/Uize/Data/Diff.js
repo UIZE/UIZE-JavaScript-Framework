@@ -479,7 +479,7 @@ Uize.module ({
 												prop1:'foo',
 												prop2:'BAR',
 												prop4:'qux',
-												prop5:['foo'],
+												prop5:['foo']
 											},
 											prop7:['foo','bar']
 										},
