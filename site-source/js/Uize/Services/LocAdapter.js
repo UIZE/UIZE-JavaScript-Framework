@@ -1541,7 +1541,7 @@ Uize.module ({
 										if (
 											_languageString && _primaryLanguageString &&
 											_bothPropertiesHaveNonEmptyValues (_languageString,_primaryLanguageString) &&
-											_languageString.value == _primaryLanguageString.value
+											_languageString.value === _primaryLanguageString.value
 										)
 											_identicalTranslations.push ({
 												path:_path.concat (),
@@ -1606,17 +1606,17 @@ Uize.module ({
 						}
 					);
 					m.methodExecutionComplete (
-						[
+						[].concat (
 							'',
 							'IDENTICAL TRANSLATIONS',
 							'',
-							_identicalTranslationsSummaryChunks.join ('\n'),
+							_identicalTranslationsSummaryChunks,
 							'',
 							'INCONSISTENT TRANSLATIONS',
 							'',
-							_inconsistentTranslationsSummaryChunks.join ('\n'),
+							_inconsistentTranslationsSummaryChunks,
 							''
-						].join ('\n')
+						).join ('\n')
 					);
 					_callback ();
 				},
