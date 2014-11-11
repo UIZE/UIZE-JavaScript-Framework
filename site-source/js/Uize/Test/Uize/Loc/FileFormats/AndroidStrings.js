@@ -12,7 +12,7 @@
 /* Module Meta Data
 	type: Test
 	importance: 1
-	codeCompleteness: 5
+	codeCompleteness: 100
 	docCompleteness: 100
 */
 
@@ -68,6 +68,32 @@ Uize.module ({
 					'<?xml version="1.0" encoding="utf-8"?>\n' +
 					'<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">\n' +
 					'	<string name="foo">This string contains a \\\' (single quote), a \\" (double quote), and a \\\\ (backslash).</string>\n' +
+					'</resources>\n',
+
+			/*** string arrays ***/
+				_stringsStringArrays = {
+					foo:[
+						'foo string 1',
+						'foo string 2',
+						'foo string 3'
+					],
+					bar:[
+						'bar string 1',
+						'bar string 2'
+					]
+				},
+				_fileStringArrays =
+					'<?xml version="1.0" encoding="utf-8"?>\n' +
+					'<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">\n' +
+					'	<string-array name="foo">\n' +
+					'		<item>foo string 1</item>\n' +
+					'		<item>foo string 2</item>\n' +
+					'		<item>foo string 3</item>\n' +
+					'	</string-array>\n' +
+					'	<string-array name="bar">\n' +
+					'		<item>bar string 1</item>\n' +
+					'		<item>bar string 2</item>\n' +
+					'	</string-array>\n' +
 					'</resources>\n'
 		;
 
@@ -93,6 +119,10 @@ Uize.module ({
 							_fileSpecialCharacters,
 							Uize.clone (_stringsSpecialCharacters)
 						],
+						['A resource strings file may contain string arrays represented with the <string-array> tag, and such string array tags are parsed to string array values in the returned strings object',
+							_fileStringArrays,
+							Uize.clone (_stringsStringArrays)
+						],
 
 						/*** test support for enclosing values in quotes ***/
 							['String values inside string tags can be enclosed in single or double quotes, and these quotes are not considered to be part of the value',
@@ -100,10 +130,18 @@ Uize.module ({
 								'<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">\n' +
 								'	<string name="foo">\'This string is enclosed in single quotes.\'</string>\n' +
 								'	<string name="bar">"This string is enclosed in double quotes."</string>\n' +
+								'	<string-array name="baz">\n' +
+								'		<item>\'This string is enclosed in single quotes.\'</item>\n' +
+								'		<item>"This string is enclosed in double quotes."</item>\n' +
+								'	</string-array>\n' +
 								'</resources>\n',
 								{
 									foo:'This string is enclosed in single quotes.',
-									bar:'This string is enclosed in double quotes.'
+									bar:'This string is enclosed in double quotes.',
+									baz:[
+										'This string is enclosed in single quotes.',
+										'This string is enclosed in double quotes.',
+									]
 								}
 							],
 
@@ -112,18 +150,30 @@ Uize.module ({
 								'<?xml version="1.0" encoding="utf-8"?>\n' +
 								'<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">\n' +
 								'	<string name="foo">This string contains a <b>bolded</b> word, an <u>underlined</u> word, and an <i>italicized</i> sord.</string>\n' +
+								'	<string-array name="bar">\n' +
+								'		<item>This string contains a <b>bolded</b> word, an <u>underlined</u> word, and an <i>italicized</i> sord.</item>\n' +
+								'	</string-array>\n' +
 								'</resources>\n',
 								{
-									foo:'This string contains a <b>bolded</b> word, an <u>underlined</u> word, and an <i>italicized</i> sord.'
+									foo:'This string contains a <b>bolded</b> word, an <u>underlined</u> word, and an <i>italicized</i> sord.',
+									bar:[
+										'This string contains a <b>bolded</b> word, an <u>underlined</u> word, and an <i>italicized</i> sord.'
+									]
 								}
 							],
 							['Bold, underline, and italics HTML tags inside a string tag may be nested inside one another.',
 								'<?xml version="1.0" encoding="utf-8"?>\n' +
 								'<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">\n' +
 								'	<string name="foo">This string contains a section that is <i><u><b>bolded, underlined, and italicized</b></u></i>.</string>\n' +
+								'	<string-array name="bar">\n' +
+								'		<item>This string contains a section that is <i><u><b>bolded, underlined, and italicized</b></u></i>.</item>\n' +
+								'	</string-array>\n' +
 								'</resources>\n',
 								{
-									foo:'This string contains a section that is <i><u><b>bolded, underlined, and italicized</b></u></i>.'
+									foo:'This string contains a section that is <i><u><b>bolded, underlined, and italicized</b></u></i>.',
+									bar:[
+										'This string contains a section that is <i><u><b>bolded, underlined, and italicized</b></u></i>.'
+									]
 								}
 							],
 							['A string tag may contain xliff:g tags to denote native code sequences, and the contents of these tags are treated as literal text.',
@@ -131,19 +181,31 @@ Uize.module ({
 								'<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">\n' +
 								'	<string name="foo">This string contains an xliff:g tag for a <xliff:g id="someId1">{{nativeCodeSequence}}</xliff:g>.</string>\n' +
 								'	<string name="bar">This string two xliff:g tags: <xliff:g id="someId2">{{nativeCodeSequence1}}</xliff:g> and <xliff:g id="someId3">[#nativeCodeSequence2#]</xliff:g>.</string>\n' +
+								'	<string-array name="baz">\n' +
+								'		<item>This string two xliff:g tags: <xliff:g id="someId2">{{nativeCodeSequence1}}</xliff:g> and <xliff:g id="someId3">[#nativeCodeSequence2#]</xliff:g>.</item>\n' +
+								'	</string-array>\n' +
 								'</resources>\n',
 								{
 									foo:'This string contains an xliff:g tag for a {{nativeCodeSequence}}.',
-									bar:'This string two xliff:g tags: {{nativeCodeSequence1}} and [#nativeCodeSequence2#].'
+									bar:'This string two xliff:g tags: {{nativeCodeSequence1}} and [#nativeCodeSequence2#].',
+									baz:[
+										'This string two xliff:g tags: {{nativeCodeSequence1}} and [#nativeCodeSequence2#].'
+									]
 								}
 							],
 							['A string tag may contain xliff:g tags that are wrapped in bold, underline, and italics HTML tags',
 								'<?xml version="1.0" encoding="utf-8"?>\n' +
 								'<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">\n' +
 								'	<string name="foo">This string contains an xliff:g tag for a <i><u><b><xliff:g id="someId">{{nativeCodeSequence}}</xliff:g></b></u></i> that is wrapped in the supported HTML formatting tags.</string>\n' +
+								'	<string-array name="bar">\n' +
+								'		<item>This string contains an xliff:g tag for a <i><u><b><xliff:g id="someId">{{nativeCodeSequence}}</xliff:g></b></u></i> that is wrapped in the supported HTML formatting tags.</item>\n' +
+								'	</string-array>\n' +
 								'</resources>\n',
 								{
-									foo:'This string contains an xliff:g tag for a <i><u><b>{{nativeCodeSequence}}</b></u></i> that is wrapped in the supported HTML formatting tags.'
+									foo:'This string contains an xliff:g tag for a <i><u><b>{{nativeCodeSequence}}</b></u></i> that is wrapped in the supported HTML formatting tags.',
+									bar:[
+										'This string contains an xliff:g tag for a <i><u><b>{{nativeCodeSequence}}</b></u></i> that is wrapped in the supported HTML formatting tags.'
+									]
 								}
 							]
 					]],
@@ -163,6 +225,10 @@ Uize.module ({
 						['Double quote, single quote, and backslash characters inside strings are escaped with backslashes, to satisfy the idiosyncratic requirements of the Android resource file format',
 							Uize.clone (_stringsSpecialCharacters),
 							_fileSpecialCharacters
+						],
+						['Serializing a strings object with string array values produces a resource strings file containing <string-array> tags representing the string array values',
+							Uize.clone (_stringsStringArrays),
+							_fileStringArrays
 						]
 					]]
 				])

@@ -58,7 +58,7 @@ Uize.module ({
 						function _getStringName () {
 							return _node.tagAttributes.attributes [0].value.value;
 						}
-						if (_isTag (_node,'string')) {
+						function _getStringText (_node) {
 							_recurseNodes (
 								_node,
 								function (_node) {
@@ -76,16 +76,16 @@ Uize.module ({
 							_stringLiteralParser.parse (
 								_stringFirstChar == '\'' || _stringFirstChar == '"' ? _string : '"' + _string + '"'
 							);
-							_strings [_getStringName ()] = _stringLiteralParser.value;
+							return _stringLiteralParser.value;
+						}
+						if (_isTag (_node,'string')) {
+							_strings [_getStringName ()] = _getStringText (_node);
 						} else if (_isTag (_node,'string-array')) {
 							var _stringsArray = _strings [_getStringName ()] = [];
 							Uize.forEach (
 								_node.childNodes.nodes,
 								function (_node) {
-									if (_isTag (_node,'item')) {
-										var _textNode = _node.childNodes.nodes [0];
-										_stringsArray.push (_textNode ? _textNode.text : '');
-									}
+									_isTag (_node,'item') && _stringsArray.push (_getStringText (_node));
 								}
 							);
 						}
