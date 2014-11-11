@@ -267,6 +267,33 @@ Localization Service Methods ~~ Localization Service Method
 
 				For more detailed information, consult the section `Performing Methods for a Filtered Set of Languages`.
 
+	auditTranslations
+		Performs an audit of the resource strings in the `master resource files` for all the `translatable languages` of the project, to detect potential issues of `inconsistent translations` and `identical translations`.
+
+		EXAMPLE
+		.......................................................................................
+		node [pathToUize]build.js Uize.Build.Loc project=[projectName] method=auditTranslations
+		.......................................................................................
+
+		The =auditTranslations= method analyzes the resource strings for each of the `translatable languages` of the project, comparing them to the corresponding values from the `primary language` to detect potential issues of `inconsistent translations` and `identical translations`, and then writes a =.json= report file for each translatable language with a path of the form...
+
+		...........................................................................
+		[workingFolder]/[projectName]/translation-audit/[translatableLanguage].json
+		...........................................................................
+
+		Parameters
+			The =auditTranslations= method supports the following parameters...
+
+			languages
+				An optional, comma-separated list of one or more of the project's `translatable languages` for which the =auditTranslations= operation should be performed.
+
+				For more detailed information, consult the section `Performing Methods for a Filtered Set of Languages`.
+
+		For a more detailed discussion and information on the contents of the reports, consult the section `Translation Audit Reports`.
+
+		NOTES
+		- before executing the =auditTranslations= method, make sure that the `master resource files` are up-to-date by executing the =export= method, if necessary
+
 	usage
 		Generates a `usage report file` for the project, containing information about resource string references in the project's code, along with an assessment of unreferenced strings.
 
@@ -638,6 +665,7 @@ Advanced Topics
 		- =exportJobs=
 		- =import=
 		- =importJobs=
+		- =auditTranslations=
 
 		When the optional =languages= parameter is either not specified (or if an empty value is specified) when executing any of the above methods, then the method's operation will be performed for all the `trnslatable languages` configured for the project.
 
@@ -770,36 +798,192 @@ Advanced Topics
 		node [pathToUize]build.js Uize.Build.Loc project=[projectName] method=metrics
 		.............................................................................
 
-		The =metrics= method analyzes the primary language resource strings for a porject and generates a =.json= file to the following path...
+		The =metrics= method analyzes the primary language resource strings for a project and writes a =.json= file to the following path...
 
 		............................................................
 		[workingFolder]/[projectName]/metrics/[primaryLanguage].json
 		............................................................
 
-		The metrics report is a JSON file, so the data contained in it could be loaded by other scripts or an application and used to present a visualization of the metrics or to estimate cost for translation.
+		The metrics report is a JSON file, so the data contained in it can be easily loaded by other scripts or an application and used to present a visualization of the metrics or to estimate cost for translation.
 
 		Metrics Report Contents
-			Total Word Count
-				The total number of translatable words in all primary language resource files for the project is represented by the =resourceFiles= property.
+			Total Word Count ~~ wordCount
+				The total number of translatable words in all primary language resource files for the project is represented by the =wordCount= property.
 
 				The value of the =wordCount= property is only an estimate and the accuracy of the value depends on how well the project is defined to understand the difference between `translatable words` and `non-translatable text`.
 
 				The value of this property is useful when estimating the full translation cost for a project, since translators often charge for their services based upon word count and a cost per word.
 
-			Total Character Count
-				The total number of translatable words in all primary language resource files for the project is represented by the =resourceFiles= property.
+			Total Character Count ~~ charCount
+				The total character count for all the translatable words in all primary language resource files for the project is represented by the =charCount= property.
 
 				The accuracy of the value of this property depends on the accuracy of the =wordCount= property, since this property is the sum of the character count for all `translatable words`. This value can be useful when estimating the full translation cost for a project, since translators may base cost estimates for their services partially upon total character count for all `translatable words`.
 
-			Total Resource Files
+			Total Resource Files ~~ resourceFiles
 				The total number of resource files for the language is represented by the =resourceFiles= property.
 
 				The value of the =resourceFiles= property reflects the total number of codebase resource files for the language and not the total for all languages, so this value doesn't increase as you add support for new languages.
 
-			Brand-specific Resource Files
-				The total number of brand-specific resource files for the language is represented by the =brandSpecificResourceFiles= property.
+				Brand-specific Resource Files
+					The total number of brand-specific resource files for the language is represented by the =brandSpecific= property of the =resourceFiles= object.
 
-				What constitutes a brand-specific resource file will vary by project and depend on the project definition. Typically, brand-specific resource files provide overrides for certain resource strings that need to be different for specific brands, so the number of brand-specific resource files is usually smaller than the total number of resource files. Moreover, different brands may have a differing number of brand-specific resource files.
+					What constitutes a brand-specific resource file will vary by project and depend on the project definition. Typically, brand-specific resource files provide overrides for certain resource strings that need to be different for specific brands, so the number of brand-specific resource files is usually smaller than the total number of resource files. Moreover, different brands may have a differing number of brand-specific resource files.
+
+	Translation Audit Reports ~~ Translation Audit Report
+		A translation audit report can be produced for a project by using the =auditTranslations= `localization service method`.
+
+		EXAMPLE
+		.......................................................................................
+		node [pathToUize]build.js Uize.Build.Loc project=[projectName] method=auditTranslations
+		.......................................................................................
+
+		The =auditTranslations= method analyzes the resource strings for each of the `translatable languages` of the project, comparing them to the corresponding values from the `primary language` to detect potential issues of `inconsistent translations` and `identical translations`, and then writes a =.json= report file for each translatable language with a path of the form...
+
+		...........................................................................
+		[workingFolder]/[projectName]/translation-audit/[translatableLanguage].json
+		...........................................................................
+
+		Not a Guarantee of Problems
+			It is important to note that the issues listed in the translation audit reports are not a guarantee of real problems in translation.
+
+			For instance, there can be valid reasons for translations of any given `primary language` text to be inconsistent for a `translatable language`. For example, a single word that is used for different resource strings can have a different meaning based upon context In one context, the word may be used as a verb, while in another context the same word may be used as a noun. In the translatable language, the verb and noun forms may be different, while in the primary language they may be the same. This is the case with an English word like "call".
+
+			There can also be valid reasons for translations of any given `primary language` text to be identical for a `translatable language`. This will, naturally, be the case for many resource strings when translating from US English to British English, but it can also be the case for specific English words whose usage has been adopted in other languages. Such is the case with a word like "OK" (typically used in the UI in OK buttons), which is considered acceptable (and even preferable) in French language UI.
+
+			Generally, the longer the source text from the primary language, the more likely that an issue listed in the `translation audit report` is a real problem. The reports are provided as a useful guide to potential issues, and these potential issues should be assessed and investigated further, if necessary.
+
+		Translation Audit Report Contents
+			The translation audit report object contains the following sections, describing different potential translation issues...
+
+			Identical Translations ~~ identicalTranslations
+				An identical translation is a translation where the value of a resource string in a `translatable language` is identical to the corresponding value of that resource string in the `primary language`.
+
+				Identical translations can be an indication of errors made during the translation process, where the source text is accidentally used unaltered as the translation. Information on all the resource strings that have identical translations for a given translatable language can be found in the =identicalTranslations= property in the `translation audit report` for the language. The value of the =identicalTranslations= property is an array of the form..
+
+				............................
+				identicalTranslations:[
+					identicalTranslation0OBJ,
+					identicalTranslation1OBJ,
+					...
+					identicalTranslationNOBJ
+				]
+				............................
+
+				Each element of the =identicalTranslations= array is an object describing an instance of an identical translation, having the form...
+
+				........................
+				{
+					path:stringPathARRAY,
+					value:stringValueSTR
+				}
+				........................
+
+				The value of the =path= property is a string path array that contains all the information necessary to identify the resource string in the project, starting with the resource file that contains the string as the first element, and ending with the string key as the last element. The value of the =value= property is a string, specifying the value (i.e. text) of the string.
+
+				EXAMPLE
+				.......................
+				identicalTranslations:[
+					{
+						path:[
+							'strings.xml',
+							'OkButton'
+						],
+						value:'OK'
+					},
+					{
+						path:[
+							'strings.xml',
+							'FaxButton'
+						],
+						value:'FAX'
+					}
+				]
+				.......................
+
+				In the above example, two strings have translations that are identical to the source text from the primary language (English, in this case). This case can arise with a language like French, where it is acceptable to use "OK" and "FAX" in UI text. In fact, "OK" would even be considered preferable to using a stricter translation like "D'accord". So, in this case, the indentical translations are not an indication of a real problem.
+
+			Inconsistent Translations ~~ inconsistentTranslations
+				An inconsistent translation is a case in which some source text contained in resource strings of the `primary language` is translated in more than one way in the resource strings of a `translatable language`.
+
+				Inappropriate inconsistent translations can arise in larger projects where translation jobs are distributed amongst multiple translators who translate in parallel and don't leverage shared translation memory, or when translation of future additions to an existing project are handed off to a new translation vendor without providing them with a translation memory or previous translations. Inconsistencies can also arise through basic mistakes in the translation process.
+
+				Information on all inconsistent translations for a given translatable language can be found in the =inconsistentTranslations= property in the `translation audit report` for the language. The value of the =inconsistentTranslations= property is an array of the form...
+
+				...............................
+				inconsistentTranslations:[
+					inconsistentTranslation0OBJ,
+					inconsistentTranslation1OBJ,
+					...
+					inconsistentTranslationNOBJ
+				]
+				...............................
+
+				Each element of the =inconsistentTranslations= array is an object of the form...
+
+				........................
+				{
+					source:sourceTextSTR,
+					translations:[
+						translation0OBJ,
+						translation1OBJ,
+						...
+						translationNOBJ
+					]
+				}
+				........................
+
+				The value of the =source= property is a string, specifying the source text from the `primary language`. The value of the =translations= property is an array of objects describing the different translations of the source text, where each object has the form...
+
+				..................................
+				{
+					translation:translationTextSTR,
+					strings:[
+						stringPath0ARRAY,
+						stringPath1ARRAY,
+						...
+						stringPathNARRAY
+					]
+				}
+				..................................
+
+				The value of the =translation= property is a string, specifying the translated text from the `translatable language`. The value of the =strings= property is an array of string path arrays, identifying all the strings that have this translation for the `translatable language`. The value for each element of the =strings= array is a string path array that contains all the information necessary to identify the resource string in the project, starting with the resource file that contains the string as the first element, and ending with the string key as the last element.
+
+				The structure of the =inconsistentTranslations= object is illustrated by the following example, in which there are two different translations for the source text "Call".
+
+				EXAMPLE
+				....................................
+				inconsistentTranslations:[
+					{
+						source:'Call',
+						translations:[
+							{
+								translation:'Appeler',
+								strings:[
+									[
+										'strings.xml',
+										'CallButton'
+									],
+									[
+										'strings.xml',
+										'CallLink'
+									]
+								]
+							},
+							{
+								translation:'Appel',
+								strings:[
+									[
+										'strings.xml',
+										'CallHistoryLabel'
+									]
+								]
+							}
+						]
+					}
+				]
+				....................................
+
+				In this example, the inconsistent French translations are legititate because the word "Call" is used as a verb in the first case (translated to "Appeler") and as a noun in the second (translated to "Appel").
 
 	### Different Classes of Files
 		Codebase Resource Files ~~ Codebase Resource File
