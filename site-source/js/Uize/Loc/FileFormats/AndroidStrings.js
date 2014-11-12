@@ -41,6 +41,7 @@ Uize.module ({
 
 			/*** Variables for Performance Optimization ***/
 				_findNodeByTagName = _Uize_Parse_Xml_Util.findNodeByTagName,
+				_getAttributeValue = _Uize_Parse_Xml_Util.getAttributeValue,
 				_isTag = _Uize_Parse_Xml_Util.isTag,
 				_recurseNodes = _Uize_Parse_Xml_Util.recurseNodes
 		;
@@ -55,9 +56,6 @@ Uize.module ({
 				Uize.forEach (
 					_findNodeByTagName (_xliffNodeList,'resources').childNodes.nodes,
 					function (_node) {
-						function _getStringName () {
-							return _node.tagAttributes.attributes [0].value.value;
-						}
 						function _getStringText (_node) {
 							_recurseNodes (
 								_node,
@@ -78,16 +76,33 @@ Uize.module ({
 							);
 							return _stringLiteralParser.value;
 						}
+
+						var _stringValue;
 						if (_isTag (_node,'string')) {
-							_strings [_getStringName ()] = _getStringText (_node);
+							_stringValue = _getStringText (_node);
 						} else if (_isTag (_node,'string-array')) {
-							var _stringsArray = _strings [_getStringName ()] = [];
+							_stringValue = [];
 							Uize.forEach (
 								_node.childNodes.nodes,
 								function (_node) {
-									_isTag (_node,'item') && _stringsArray.push (_getStringText (_node));
+									if (_isTag (_node,'item'))
+										_stringValue.push (_getStringText (_node))
+									;
 								}
 							);
+						} else if (_isTag (_node,'plurals')) {
+							_stringValue = {};
+							Uize.forEach (
+								_node.childNodes.nodes,
+								function (_node) {
+									if (_isTag (_node,'item'))
+										_stringValue [_getAttributeValue (_node,'quantity')] = _getStringText (_node)
+									;
+								}
+							);
+						}
+						if (_stringValue != undefined) {
+							_strings [_getAttributeValue (_node,'name')] = _stringValue;
 						}
 					}
 				);
@@ -134,14 +149,33 @@ Uize.module ({
 								return (
 									Uize.isArray (_value)
 										? (
-											'\t<string-array name="' + _name + '">\n' +
+											'\t<string-array name="' + _encodeString (_name) + '">\n' +
 											Uize.map (
 												_value,
 												function (_value) {return '\t\t<item>' + _encodeString (_value) + '</item>\n'}
 											).join ('') +
 											'\t</string-array>'
 										)
-										: '\t<string name="' + _name + '">' + _encodeString (_value) + '</string>'
+										: Uize.isPlainObject (_value)
+											? (
+												'\t<plurals name="' + _encodeString (_name) + '">\n' +
+												Uize.map (
+													Uize.keys (_value),
+													function (_key) {
+														return (
+															'\t\t<item quantity="' + _encodeString (_key) + '">' +
+															_encodeString (_value [_key]) +
+															'</item>\n'
+														);
+													}
+												).join ('') +
+												'\t</plurals>'
+											)
+											: (
+												'\t<string name="' + _encodeString (_name) + '">' +
+												_encodeString (_value) +
+												'</string>'
+											)
 								);
 							}
 						),

@@ -94,6 +94,22 @@ Uize.module ({
 					'		<item>bar string 1</item>\n' +
 					'		<item>bar string 2</item>\n' +
 					'	</string-array>\n' +
+					'</resources>\n',
+
+			/*** plural forms ***/
+				_stringsPluralForms = {
+					foo:{
+						one:'Delete the selected file?',
+						other:'Delete the selected {count} files?'
+					}
+				},
+				_filePluralForms =
+					'<?xml version="1.0" encoding="utf-8"?>\n' +
+					'<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">\n' +
+					'	<plurals name="foo">\n' +
+					'		<item quantity="one">Delete the selected file?</item>\n' +
+					'		<item quantity="other">Delete the selected {count} files?</item>\n' +
+					'	</plurals>\n' +
 					'</resources>\n'
 		;
 
@@ -123,6 +139,10 @@ Uize.module ({
 							_fileStringArrays,
 							Uize.clone (_stringsStringArrays)
 						],
+						['A resource strings file may contain strings with plural forms represented with the <plurals> tag, and such plural forms tags are parsed to object values in the returned strings object',
+							_filePluralForms,
+							Uize.clone (_stringsPluralForms)
+						],
 
 						/*** test support for enclosing values in quotes ***/
 							['String values inside string tags can be enclosed in single or double quotes, and these quotes are not considered to be part of the value',
@@ -134,6 +154,10 @@ Uize.module ({
 								'		<item>\'This string is enclosed in single quotes.\'</item>\n' +
 								'		<item>"This string is enclosed in double quotes."</item>\n' +
 								'	</string-array>\n' +
+								'	<plurals name="qux">\n' +
+								'		<item quantity="one">\'Delete the selected file?\'</item>\n' +
+								'		<item quantity="other">"Delete the selected {count} files?"</item>\n' +
+								'	</plurals>\n' +
 								'</resources>\n',
 								{
 									foo:'This string is enclosed in single quotes.',
@@ -141,7 +165,11 @@ Uize.module ({
 									baz:[
 										'This string is enclosed in single quotes.',
 										'This string is enclosed in double quotes.',
-									]
+									],
+									qux:{
+										one:'Delete the selected file?',
+										other:'Delete the selected {count} files?'
+									}
 								}
 							],
 
@@ -153,12 +181,20 @@ Uize.module ({
 								'	<string-array name="bar">\n' +
 								'		<item>This string contains a <b>bolded</b> word, an <u>underlined</u> word, and an <i>italicized</i> sord.</item>\n' +
 								'	</string-array>\n' +
+								'	<plurals name="baz">\n' +
+								'		<item quantity="one">Delete the selected <b>file</b>?</item>\n' +
+								'		<item quantity="other">Delete the selected {count} <u>files</u>?</item>\n' +
+								'	</plurals>\n' +
 								'</resources>\n',
 								{
 									foo:'This string contains a <b>bolded</b> word, an <u>underlined</u> word, and an <i>italicized</i> sord.',
 									bar:[
 										'This string contains a <b>bolded</b> word, an <u>underlined</u> word, and an <i>italicized</i> sord.'
-									]
+									],
+									baz:{
+										one:'Delete the selected <b>file</b>?',
+										other:'Delete the selected {count} <u>files</u>?'
+									}
 								}
 							],
 							['Bold, underline, and italics HTML tags inside a string tag may be nested inside one another.',
@@ -168,12 +204,20 @@ Uize.module ({
 								'	<string-array name="bar">\n' +
 								'		<item>This string contains a section that is <i><u><b>bolded, underlined, and italicized</b></u></i>.</item>\n' +
 								'	</string-array>\n' +
+								'	<plurals name="baz">\n' +
+								'		<item quantity="one">Delete the selected <i><u><b>file</b></u></i>?</item>\n' +
+								'		<item quantity="other">Delete the selected {count} <b><i><u>files</u></i></b>?</item>\n' +
+								'	</plurals>\n' +
 								'</resources>\n',
 								{
 									foo:'This string contains a section that is <i><u><b>bolded, underlined, and italicized</b></u></i>.',
 									bar:[
 										'This string contains a section that is <i><u><b>bolded, underlined, and italicized</b></u></i>.'
-									]
+									],
+									baz:{
+										one:'Delete the selected <i><u><b>file</b></u></i>?',
+										other:'Delete the selected {count} <b><i><u>files</u></i></b>?'
+									}
 								}
 							],
 							['A string tag may contain xliff:g tags to denote native code sequences, and the contents of these tags are treated as literal text.',
@@ -182,30 +226,46 @@ Uize.module ({
 								'	<string name="foo">This string contains an xliff:g tag for a <xliff:g id="someId1">{{nativeCodeSequence}}</xliff:g>.</string>\n' +
 								'	<string name="bar">This string two xliff:g tags: <xliff:g id="someId2">{{nativeCodeSequence1}}</xliff:g> and <xliff:g id="someId3">[#nativeCodeSequence2#]</xliff:g>.</string>\n' +
 								'	<string-array name="baz">\n' +
-								'		<item>This string two xliff:g tags: <xliff:g id="someId2">{{nativeCodeSequence1}}</xliff:g> and <xliff:g id="someId3">[#nativeCodeSequence2#]</xliff:g>.</item>\n' +
+								'		<item>This string two xliff:g tags: <xliff:g id="someId4">{{nativeCodeSequence1}}</xliff:g> and <xliff:g id="someId5">[#nativeCodeSequence2#]</xliff:g>.</item>\n' +
 								'	</string-array>\n' +
+								'	<plurals name="qux">\n' +
+								'		<item quantity="one">Delete the selected file?</item>\n' +
+								'		<item quantity="other">Delete the selected <xliff:g id="someId6">{count}</xliff:g> files?</item>\n' +
+								'	</plurals>\n' +
 								'</resources>\n',
 								{
 									foo:'This string contains an xliff:g tag for a {{nativeCodeSequence}}.',
 									bar:'This string two xliff:g tags: {{nativeCodeSequence1}} and [#nativeCodeSequence2#].',
 									baz:[
 										'This string two xliff:g tags: {{nativeCodeSequence1}} and [#nativeCodeSequence2#].'
-									]
+									],
+									qux:{
+										one:'Delete the selected file?',
+										other:'Delete the selected {count} files?'
+									}
 								}
 							],
 							['A string tag may contain xliff:g tags that are wrapped in bold, underline, and italics HTML tags',
 								'<?xml version="1.0" encoding="utf-8"?>\n' +
 								'<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">\n' +
-								'	<string name="foo">This string contains an xliff:g tag for a <i><u><b><xliff:g id="someId">{{nativeCodeSequence}}</xliff:g></b></u></i> that is wrapped in the supported HTML formatting tags.</string>\n' +
+								'	<string name="foo">This string contains an xliff:g tag for a <i><u><b><xliff:g id="someId1">{{nativeCodeSequence}}</xliff:g></b></u></i> that is wrapped in the supported HTML formatting tags.</string>\n' +
 								'	<string-array name="bar">\n' +
-								'		<item>This string contains an xliff:g tag for a <i><u><b><xliff:g id="someId">{{nativeCodeSequence}}</xliff:g></b></u></i> that is wrapped in the supported HTML formatting tags.</item>\n' +
+								'		<item>This string contains an xliff:g tag for a <i><u><b><xliff:g id="someId2">{{nativeCodeSequence}}</xliff:g></b></u></i> that is wrapped in the supported HTML formatting tags.</item>\n' +
 								'	</string-array>\n' +
+								'	<plurals name="qux">\n' +
+								'		<item quantity="one">Delete the selected file?</item>\n' +
+								'		<item quantity="other">Delete the selected <i><u><b><xliff:g id="someId3">{count}</xliff:g></b></u></i> files?</item>\n' +
+								'	</plurals>\n' +
 								'</resources>\n',
 								{
 									foo:'This string contains an xliff:g tag for a <i><u><b>{{nativeCodeSequence}}</b></u></i> that is wrapped in the supported HTML formatting tags.',
 									bar:[
 										'This string contains an xliff:g tag for a <i><u><b>{{nativeCodeSequence}}</b></u></i> that is wrapped in the supported HTML formatting tags.'
-									]
+									],
+									qux:{
+										one:'Delete the selected file?',
+										other:'Delete the selected <i><u><b>{count}</b></u></i> files?'
+									}
 								}
 							]
 					]],
@@ -229,6 +289,10 @@ Uize.module ({
 						['Serializing a strings object with string array values produces a resource strings file containing <string-array> tags representing the string array values',
 							Uize.clone (_stringsStringArrays),
 							_fileStringArrays
+						],
+						['Serializing a strings object with object values representing strings with plural forms produces a resource strings file containing <plurals> tags representing the strings with plural forms',
+							Uize.clone (_stringsPluralForms),
+							_filePluralForms
 						]
 					]]
 				])
