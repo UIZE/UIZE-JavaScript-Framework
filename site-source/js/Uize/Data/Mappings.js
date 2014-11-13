@@ -51,10 +51,10 @@ Uize.module ({
 							var
 								_sourcePropertyValue = _sourceProperty.value,
 								_mappedPropertyValue = _mappedProperty.value,
-								_mappedValueMap = _mappings [_mappedPropertyValue] || (_mappings [_mappedPropertyValue] = {})
+								_mappedValueMap = _mappings [_sourcePropertyValue] || (_mappings [_sourcePropertyValue] = {})
 							;
 							(
-								_mappedValueMap [_sourcePropertyValue] || (_mappedValueMap [_sourcePropertyValue] = [])
+								_mappedValueMap [_mappedPropertyValue] || (_mappedValueMap [_mappedPropertyValue] = [])
 							).push (_path.concat ());
 						}
 					}

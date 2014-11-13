@@ -328,6 +328,11 @@ Uize.module ({
 				);
 			}
 
+			function _mustPerformOperationForPseudoLocale (m,_params) {
+				var _languagesFilter = _params.languages;
+				return _languagesFilter ? Uize.isIn (_languagesFilter.split (','),m.project.pseudoLocale) : true;
+			}
+
 		return _superclass.subclass ({
 			instanceMethods:{
 				getTranslatableLanguages:function () {
@@ -1036,7 +1041,8 @@ Uize.module ({
 						m = this,
 						_project = m.project,
 						_importPrimary = _project.importPrimary,
-						_languagesForOperation = _getLanguagesForOperation (m,_params)
+						_languagesForOperation = _getLanguagesForOperation (m,_params),
+						_mustImportPseudoLocale = _mustPerformOperationForPseudoLocale (m,_params)
 					;
 					function _importLanguage (_language) {
 						var _resources = _readLanguageResourcesFile (m,_language);
@@ -1044,10 +1050,12 @@ Uize.module ({
 						_resources && m.distributeResources (_resources,_language);
 						m.stepCompleted (_language + ': distributed strings to individual resource files');
 					}
-					m.prepareToExecuteMethod ((_languagesForOperation.length + 1 + !!_importPrimary) * 2);
+					m.prepareToExecuteMethod (
+						(_languagesForOperation.length + _mustImportPseudoLocale + !!_importPrimary) * 2
+					);
 					_importPrimary && _importLanguage (_project.primaryLanguage);
 					Uize.forEach (_languagesForOperation,_importLanguage);
-					_importLanguage (_project.pseudoLocale);
+					_mustImportPseudoLocale && _importLanguage (_project.pseudoLocale);
 					_callback ();
 				},
 
@@ -1067,15 +1075,16 @@ Uize.module ({
 						),
 						_resoucesByLanguage = Uize.pairUp (_primaryLanguage,_primaryLanguageResources),
 						_languagesForOperation = _getLanguagesForOperation (m,_params),
-						_languagesForOperationLength = _languagesForOperation.length
+						_languagesForOperationLength = _languagesForOperation.length,
+						_mustExportPseudoLocale = _mustPerformOperationForPseudoLocale (m,_params)
 					;
 
 					m.prepareToExecuteMethod (
 						_languagesForOperationLength * Uize.totalKeys (_primaryLanguageResources) +
 							// total number of resource files to gather, across all translatable languages
-						1 +
+						_mustExportPseudoLocale +
 							// generate pseudo-localized resources from the primary language resources
-						_languagesForOperationLength + 2
+						_languagesForOperationLength + _mustExportPseudoLocale + 1
 							// number of language resource files to write (includes primary language and pseudo-locale)
 					);
 
@@ -1126,8 +1135,12 @@ Uize.module ({
 						);
 
 					/*** generate resources for pseudo-locale ***/
-						_resoucesByLanguage [_project.pseudoLocale] = _pseudoLocalizeResources (m,_primaryLanguageResources);
-						m.stepCompleted ('Generated pseudo-localized resources from the primary language resources');
+						if (_mustExportPseudoLocale) {
+							_resoucesByLanguage [_project.pseudoLocale] =
+								_pseudoLocalizeResources (m,_primaryLanguageResources)
+							;
+							m.stepCompleted ('Generated pseudo-localized resources from the primary language resources');
+						}
 
 					Uize.forEach (
 						_resoucesByLanguage,
@@ -1563,8 +1576,8 @@ Uize.module ({
 								var _inconsistentTranslations = [];
 								Uize.forEach (
 									Uize.Data.Mappings.getDeviantMappings (
-										_languageResources,
 										_primaryLanguageResources,
+										_languageResources,
 										_bothPropertiesHaveNonEmptyValues
 									),
 									function (_translationsMap,_primaryLanguageStringValue) {
