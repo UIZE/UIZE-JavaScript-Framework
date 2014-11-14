@@ -55,7 +55,8 @@ Uize.module ({
 					return Uize.Data.Diff.diff (
 						_translatableLanguageStrings,
 						_primaryLanguageStrings,
-						function (_translatableLanguageString,_primaryLanguageString) {
+						function (_translatableLanguageString,_primaryLanguageString,_path) {
+							_primaryLanguageString.path = _path;
 							return (
 								_translatableLanguageString &&
 								(
@@ -96,25 +97,18 @@ Uize.module ({
 			},
 
 			pseudoLocalizeResources:function (_primaryLanguageResources,_isTranslatableString,_pseudoLocalizeString) {
-				var _pseudoLocalizedResources = {};
-				Uize.forEach (
+				return Uize.Data.Diff.diff (
 					_primaryLanguageResources,
-					function (_resourceFileStrings,_resourceFileSubPath) {
-						_pseudoLocalizedResources [_resourceFileSubPath] = Uize.Data.Diff.diff (
-							_primaryLanguageResources [_resourceFileSubPath],
-							{},
-							function (_string,_dummy,_path) {
-								_string.path = _path;
-								if (_isTranslatableString (_string))
-									_string.value = _pseudoLocalizeString (_string)
-								;
-								return _string;
-							},
-							{skeleton:true}
-						);
-					}
+					{},
+					function (_string,_dummy,_path) {
+						_string.path = _path;
+						if (_isTranslatableString (_string))
+							_string.value = _pseudoLocalizeString (_string)
+						;
+						return _string;
+					},
+					{skeleton:true}
 				);
-				return _pseudoLocalizedResources;
 			},
 
 			stringsMetricsFromStringsInfo:function (_stringsInfo) {
