@@ -129,6 +129,7 @@ Uize.module ({
 							_resourceFileStrings,
 							{},
 							function (_string,_dummy,_path) {
+								_string.path = _path;
 								var
 									_value = _string.value,
 									_isTranslatable = _isTranslatableString (m,_string),
@@ -1082,6 +1083,8 @@ Uize.module ({
 					m.prepareToExecuteMethod (
 						_languagesForOperationLength * Uize.totalKeys (_primaryLanguageResources) +
 							// total number of resource files to gather, across all translatable languages
+						_languagesForOperationLength +
+							// initialization of non-translatable strings
 						_mustExportPseudoLocale +
 							// generate pseudo-localized resources from the primary language resources
 						_languagesForOperationLength + _mustExportPseudoLocale + 1
@@ -1092,7 +1095,7 @@ Uize.module ({
 						Uize.forEach (
 							_languagesForOperation,
 							function (_language) {
-								var _languageResources = _resoucesByLanguage [_language] = {};
+								var _languageResources = {};
 								Uize.forEach (
 									_primaryLanguageResources,
 									function (_resourceFileStrings,_resourceFileSubPath) {
@@ -1101,27 +1104,22 @@ Uize.module ({
 											_resourceFileBrand = m.getResourceFileBrand (_resourceFileSubPath)
 										;
 										if (m.doesBrandSupportLanguage (_resourceFileBrand,_language)) {
-											_languageResources [_resourceFileSubPath] = Uize.Loc.Strings.Util.initNonTranslatable (
-												Uize.Data.Diff.diff (
-													_parseResourceFile (m,_resourceFilePath,_language),
-													_primaryLanguageResourcesDiff [_resourceFileSubPath],
-													function (_gatheredProperty,_propertyDiff,_path) {
-														return (
-															!_propertyDiff || _propertyDiff.value == 'removed' ||
-															!m.doesBrandSupportLanguage (m.getStringBrand (_path),_language)
-																? _undefined
-																: {
-																	value:_propertyDiff.value == 'modified'
-																		? ''
-																		: _gatheredProperty ? _gatheredProperty.value : ''
-																}
-														);
-													},
-													{skeleton:true}
-												),
-												_resourceFileStrings,
-												_params.initNonTranslatable,
-												function (_string) {return _isTranslatableString (m,_string)}
+											_languageResources [_resourceFileSubPath] = Uize.Data.Diff.diff (
+												_parseResourceFile (m,_resourceFilePath,_language),
+												_primaryLanguageResourcesDiff [_resourceFileSubPath],
+												function (_gatheredProperty,_propertyDiff,_path) {
+													return (
+														!_propertyDiff || _propertyDiff.value == 'removed' ||
+														!m.doesBrandSupportLanguage (m.getStringBrand (_path),_language)
+															? _undefined
+															: {
+																value:_propertyDiff.value == 'modified'
+																	? ''
+																	: _gatheredProperty ? _gatheredProperty.value : ''
+															}
+													);
+												},
+												{skeleton:true}
 											);
 											m.stepCompleted ('Gathered resources from file: ' + _resourceFilePath);
 										} else {
@@ -1131,6 +1129,15 @@ Uize.module ({
 										}
 									}
 								);
+
+								/*** initialize non-translatable strings ***/
+									_resoucesByLanguage [_language] = Uize.Loc.Strings.Util.initNonTranslatable (
+										_languageResources,
+										_primaryLanguageResources,
+										_params.initNonTranslatable,
+										function (_string) {return _isTranslatableString (m,_string)}
+									);
+									m.stepCompleted ('Initialized non-translatable strings for language: ' + _language);
 							}
 						);
 
@@ -1174,7 +1181,8 @@ Uize.module ({
 									_translationJobStrings = Uize.Data.Diff.diff (
 										_languageResources,
 										_primaryLanguageResources,
-										function (_languageString,_primaryLanguageString) {
+										function (_languageString,_primaryLanguageString,_path) {
+											_primaryLanguageString.path = _path;
 											return (
 												_languageString &&
 												(_filterIsAll || !!_languageString.value == _filterIsTranslated) &&
