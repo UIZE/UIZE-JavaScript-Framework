@@ -11,7 +11,7 @@
 
 /* Module Meta Data
 	type: Test
-	importance: 5
+	importance: 1
 	codeCompleteness: 100
 	docCompleteness: 100
 */
@@ -184,15 +184,90 @@ Uize.module ({
 									_argumentsForMatcherCalls
 								);
 							}
-						}
-						/*
-							- All properties for which the optional matcher returns false are excluded and all properties for which the matcher returns true are included
-						*/
+						},
+						['All properties for which the optional matcher returns false are excluded and all properties for which the matcher returns true are included',
+							[
+								{
+									string1:'foo',
+									string2:'bar',
+									more:{
+										strings:[
+											'baz',
+											'qux',
+											'foo'
+										]
+									},
+									string3:'foo'
+								},
+								{
+									string1:'FOO',
+									string2:'BAR',
+									more:{
+										strings:[
+											'BAZ',
+											'QUX',
+											'FOO!!!'
+										]
+									},
+									string3:'FOO'
+								},
+								function (_propertyAInfo) {return typeof _propertyAInfo.key == 'string'}
+							],
+							{
+								foo:{
+									FOO:[
+										['string1'],
+										['string3']
+									]
+								},
+								bar:{
+									BAR:[
+										['string2']
+									]
+								}
+							}
+						]
 					]],
 					['Uize.Data.Mappings.getDeviantMappings',[
-						/*
-						- The deviant mappings object will contain entries for only values that have more than one mapping
-						*/
+						['The deviant mappings object will contain entries for only values that have more than one mapping',
+							[
+								{
+									string1:'foo',
+									string2:'bar',
+									more:{
+										strings:[
+											'baz',
+											'qux',
+											'foo'
+										]
+									},
+									string3:'foo'
+								},
+								{
+									string1:'FOO',
+									string2:'BAR',
+									more:{
+										strings:[
+											'BAZ',
+											'QUX',
+											'FOO!!!'
+										]
+									},
+									string3:'FOO'
+								}
+							],
+							{
+								foo:{
+									FOO:[
+										['string1'],
+										['string3']
+									],
+									'FOO!!!':[
+										['more','strings',2]
+									]
+								}
+							}
+						]
 					]]
 				])
 			]
