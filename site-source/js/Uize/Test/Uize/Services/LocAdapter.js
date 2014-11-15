@@ -220,7 +220,7 @@ Uize.module ({
 							],
 							true
 						],
-						['A language is considered unsupported for an unconfigured brand if the language is not one of the specified common languages for the project',
+						['A language is considered unsupported for an unconfigured brand if the language is not one of the specified common languages for the project, even if it is one of the specified brand languages for one of the configured brands',
 							[
 								{
 									languages:['en-GB'],
