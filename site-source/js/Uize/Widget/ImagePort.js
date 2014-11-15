@@ -82,14 +82,18 @@ Uize.module ({
 							m._imageNaturalWidth = _imageDims.width;
 							m._imageNaturalHeight = _imageDims.height;
 						}
-						m._paramsForGetScaledRect = {
-							portWidth:_shellDims.width,
-							portHeight:_shellDims.height,
-							rectWidth:m._imageNaturalWidth,
-							rectHeight:m._imageNaturalHeight
-						};
-						_isIe && m.setNodeStyle ('image',{msInterpolationMode:'bicubic'});
-						_updateUiPosition (m);
+						if (m._imageNaturalWidth) {
+							m._paramsForGetScaledRect = {
+								portWidth:_shellDims.width,
+								portHeight:_shellDims.height,
+								rectWidth:m._imageNaturalWidth,
+								rectHeight:m._imageNaturalHeight
+							};
+							_isIe && m.setNodeStyle ('image',{msInterpolationMode:'bicubic'});
+							_updateUiPosition (m);
+						} else {
+							setTimeout (function () {m.updateUi ()},0);
+						}
 					}
 				},
 
