@@ -31,6 +31,8 @@ Uize.module ({
 		'Uize.Data.Flatten',
 		'Uize.Data.Matches',
 		'Uize.Data.Mappings',
+		'Uize.Array.Dupes',
+		'Uize.Array.Util',
 		'Uize.Data.Csv',
 		'Uize.Loc.FileFormats.ProjectStrings.Xliff',
 		'Uize.Loc.FileFormats.ProjectStrings.Csv',
@@ -312,7 +314,7 @@ Uize.module ({
 			function _getTranslatableLanguages (m) {
 				var _project = m.project;
 				return Uize.Data.Matches.remove (
-					_project.languages,
+					_project.languagesSuperset,
 					Uize.lookup ([_project.primaryLanguage,_project.pseudoLocale])
 				);
 			}
@@ -1008,16 +1010,7 @@ Uize.module ({
 				},
 
 				doesBrandSupportLanguage:function (_brand,_language) {
-					var _project = this.project;
-					if (_language == _project.pseudoLocale) {
-						return true;
-					} else {
-						var
-							_brandLanguages = _project.brandLanguages,
-							_languagesForBrand = _brand && _brandLanguages && _brandLanguages [_brand]
-						;
-						return _languagesForBrand ? Uize.isIn (_languagesForBrand,_language) : true;
-					}
+					return this.Class.doesBrandSupportLanguage (this.project,_brand,_language);
 					/*?
 						Instance Methods
 							doesBrandSupportLanguage
@@ -1664,29 +1657,7 @@ Uize.module ({
 						_project = m.project = _params.project
 					;
 
-					/*** ensure that the languages property exists and is a superset of all the brand languages ***/
-						var
-							_languages = _project.languages || (_project.languages = []),
-							_brandLanguages = _project.brandLanguages
-						;
-						if (_brandLanguages) {
-							var _languagesLookup = Uize.lookup (_languages);
-							Uize.forEach (
-								_brandLanguages,
-								function (_languagesForBrand) {
-									Uize.forEach (
-										_languagesForBrand,
-										function (_language) {
-											if (!_languagesLookup [_language]) {
-												_languages.push (_language);
-												_languagesLookup [_language] = true;
-											}
-										}
-									);
-								}
-							);
-						}
-
+					m.Class.resolveProjectLanguages (_project);
 					m._workingFolderPath = m.workingFolderPath = _params.workingFolder + '/' + _project.name + '/';
 					m._log = _params.log || Uize.nop;
 
@@ -1697,6 +1668,31 @@ Uize.module ({
 			instanceProperties:{
 				wordSplitter:null,
 				tokenRegExp:null
+			},
+
+			staticMethods:{
+				resolveProjectLanguages:function (_project) {
+					_project.languagesSuperset = Uize.Array.Dupes.dedupe (
+						(_project.languages || (_project.languages = [])).concat (
+							Uize.Array.Util.flatten (Uize.values (_project.brandLanguages))
+						)
+					);
+					return _project;
+				},
+
+				doesBrandSupportLanguage:function (_project,_brand,_language) {
+					return (
+						_language == _project.pseudoLocale ||
+						Uize.isIn (
+							_brand
+								? _project.languages.concat (
+									(_project.brandLanguages || _sacredEmptyObject) [_brand] || _sacredEmptyArray
+								)
+								: _project.languagesSuperset,
+							_language
+						)
+					);
+				}
 			}
 		});
 	}
