@@ -1,0 +1,9 @@
+.`` {
+	position: relative;
+	display: inline-block;
+}
+
+.`image` {
+	position: absolute;
+}
+
