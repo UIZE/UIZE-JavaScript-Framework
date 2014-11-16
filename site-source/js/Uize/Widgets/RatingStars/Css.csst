@@ -1,0 +1,55 @@
+<%@ required ('Uize.Widgets.CssUtil'); %>
+<%
+	var _cssUtil = Uize.Widgets.CssUtil;
+%>
+.`` {
+	display: inline-block;
+	position: relative;
+}
+
+.`stars` {
+	font-family: Arial;
+	white-space: nowrap;
+	padding: 0;
+	letter-spacing: 0;
+}
+
+.`starsOff` {
+	color: #999;
+	opacity: .7
+}
+
+.`starsOn` {
+	position: absolute;
+	left: 0;
+	top: 0;
+	color: #fc0;
+	overflow: hidden;
+}
+
+/*** styling for different sizes ***/
+<%
+	var _sizes = _cssUtil.sizes;
+	function _sizeStyleProperties (_sizeName,_letterSpacing) {
+		var _sizeOuter = _sizes [_sizeName].outer;
+		%>font-size: <%= _sizeOuter %>px;
+		letter-spacing: <%= _letterSpacing %>px;
+		line-height: <%= _sizeOuter %>px;<%
+	}
+%>
+	.`tiny` .`stars` {
+		<% _sizeStyleProperties ('tiny',0) %>
+	}
+
+	.`small` .`stars` {
+		<% _sizeStyleProperties ('small',-1) %>
+	}
+
+	.`medium` .`stars` {
+		<% _sizeStyleProperties ('medium',-2) %>
+	}
+
+	.`large` .`stars` {
+		<% _sizeStyleProperties ('large',-3) %>
+	}
+
