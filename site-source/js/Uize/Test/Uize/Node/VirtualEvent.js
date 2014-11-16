@@ -29,7 +29,7 @@ Uize.module ({
 		'use strict';
 
 		return Uize.Test.resolve ({
-			title:'Test for Uize.String Module',
+			title:'Test for Uize.Node.VirtualEvent Module',
 			test:[
 				Uize.Test.requiredModulesTest ([
 					'Uize.Dom.VirtualEvent',

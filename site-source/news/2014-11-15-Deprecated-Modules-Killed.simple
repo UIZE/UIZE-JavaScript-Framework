@@ -1,0 +1,17 @@
+Various deprecated alias modules under the =Uize.String= namespace, that were left in place for backwards compatibility purposes after the modules were migrated to the new =Uize.Str= namespace, have finally been killed.
+
+..........................................................................................
+Uize.String                  >> BECOMES >>  !!! DEAD !!!
+Uize.String.Builder          >> BECOMES >>  !!! DEAD !!!  --  use Uize.Str.Builder
+Uize.String.Discombobulator  >> BECOMES >>  !!! DEAD !!!  --  use Uize.Str.Discombobulator
+Uize.String.Lines            >> BECOMES >>  !!! DEAD !!!  --  use Uize.Str.Lines
+Uize.String.Replace          >> BECOMES >>  !!! DEAD !!!  --  use Uize.Str.Replace
+..........................................................................................
+
+These modules were turned into backwards compatibility alias modules after their functionality was migrated to under the new =Uize.Str= namespace in October of 2013, so the backwards compatibility provision has been available for a year. The alias modules are now being removed to keep the framework clean. For background on this change, see the original deprecation notice [[2013-10-21-Uize.String-Module-Deprecated.html][2013-10-21 - Uize.String Module Deprecated]].
+
+....................................................................................
+<< metadata >>
+
+title: 2014-11-15 - Deprecated Modules Killed
+....................................................................................
