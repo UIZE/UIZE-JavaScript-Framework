@@ -1,0 +1,35 @@
+The new =Uize.Widgets.ImagePort.Widget= module implements a widget class for a rating stars widget.
+
+A Simple Interface
+	The =Uize.Widgets.ImagePort.Widget= widget module supports a very simple interface with two state properties: =value= and =maxValue=.
+
+	The =maxValue= state property is used to specify the maximum possible number of stars that a rating can have, and the =value= state property is used to specify the number of rating stars for the current rating value.
+
+	EXAMPLE
+	....................................................
+	var ratingStars = Uize.Widgets.RatingStars.Widget ({
+		value:2.5,
+		maxValue:5,
+		size:'tiny'
+	});
+	....................................................
+
+	In the above example, a rating stars widget is being created to display a two and half stars out of five rating at the ='tiny'= size.
+
+Visual Sampler
+	Below is a visual sampler of the =Uize.Widgets.RatingStars.Widget= class...
+
+	...................................................
+	<< widget >>
+
+	widgetClass: Uize.Widgets.RatingStars.VisualSampler
+	...................................................
+
+Visual Tests
+	The =Uize.Widgets.ImagePort.Widget= module has comprehensive [[../examples/widget-visual-tests.html?widgetClass=Uize.Widgets.RatingStars.Widget][visual tests]].
+
+....................................................................................
+<< metadata >>
+
+title: 2014-11-16 - NEW MODULE: Uize.Widgets.RatingStars.Widget
+....................................................................................
