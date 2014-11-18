@@ -131,7 +131,7 @@ Uize.module ({
 							_fileMultipleStrings,
 							Uize.clone (_stringsMultipleStrings)
 						],
-						['Backslash-escaped double quote, single quote, and backslash characters inside strings are unescaped',
+						['Backslash-escaped double quote, single quote, "r", "n", and backslash characters inside strings are unescaped',
 							_fileSpecialCharacters,
 							Uize.clone (_stringsSpecialCharacters)
 						],
@@ -282,7 +282,7 @@ Uize.module ({
 							Uize.clone (_stringsMultipleStrings),
 							_fileMultipleStrings
 						],
-						['Double quote, single quote, and backslash characters inside strings are escaped with backslashes, to satisfy the idiosyncratic requirements of the Android resource file format',
+						['Double quote, single quote, carriage return, new line, and backslash characters inside strings are escaped with backslashes, to satisfy the idiosyncratic requirements of the Android resource file format',
 							Uize.clone (_stringsSpecialCharacters),
 							_fileSpecialCharacters
 						],
