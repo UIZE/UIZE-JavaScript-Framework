@@ -62,12 +62,12 @@ Uize.module ({
 
 			/*** special characters ***/
 				_stringsSpecialCharacters = {
-					foo:'This string contains a \' (single quote), a " (double quote), and a \\ (backslash).'
+					foo:'This string contains a \' (single quote), a " (double quote), a \r (carriage return), a \n (new line), and a \\ (backslash).'
 				},
 				_fileSpecialCharacters =
 					'<?xml version="1.0" encoding="utf-8"?>\n' +
 					'<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">\n' +
-					'	<string name="foo">This string contains a \\\' (single quote), a \\" (double quote), and a \\\\ (backslash).</string>\n' +
+					'	<string name="foo">This string contains a \\\' (single quote), a \\" (double quote), a \\r (carriage return), a \\n (new line), and a \\\\ (backslash).</string>\n' +
 					'</resources>\n',
 
 			/*** string arrays ***/

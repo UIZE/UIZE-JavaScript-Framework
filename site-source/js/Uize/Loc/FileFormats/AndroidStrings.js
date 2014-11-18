@@ -128,6 +128,8 @@ Uize.module ({
 					'"':'\\\"',
 					'\'':'\\\'',
 					'\\':'\\\\',
+					'\r':'\\r',
+					'\n':'\\n',
 
 					// characters that need to be XML-escaped using XML character entities
 					'&':'&amp;',
