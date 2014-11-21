@@ -102,7 +102,10 @@
 
 Uize.module ({
 	name:'Uize.Data.Csv',
-	required:'Uize.Str.Trim',
+	required:[
+		'Uize.Str.Trim',
+		'Uize.Str.Whitespace'
+	],
 	builder:function () {
 		'use strict';
 
@@ -114,6 +117,7 @@ Uize.module ({
 				_Uize_Str_Trim = Uize.Str.Trim,
 				_trim = _Uize_Str_Trim.trim,
 				_hasPadding = _Uize_Str_Trim.hasPadding,
+				_hasNonWhitespace = Uize.Str.Whitespace.hasNonWhitespace,
 
 			/*** General Variables ***/
 				_optionDefaults = {
@@ -607,7 +611,8 @@ Uize.module ({
 					_quoteChar = _getDefaultedOption (_encodingOptions,'quoteChar'),
 					_rowType = _getDefaultedOption (_encodingOptions,'rowType'),
 					_valueDelimiter = _getDefaultedOption (_encodingOptions,'valueDelimiter'),
-					_valueDelimiterHasPadding = _hasPadding (_valueDelimiter),
+					_valueDelimiterIsNonWhitespaceWithPadding =
+						_hasNonWhitespace (_valueDelimiter) && _hasPadding (_valueDelimiter),
 					_escapedQuoteChar = _getEscapedQuoteChar (_encodingOptions),
 					_quoteRegExp = _globalLiteralRegExp (_quoteChar),
 					_rowTypeIsObject = _rowType == 'object' || (_rowType == 'auto' && _firstRow && !Uize.isArray (_firstRow))
@@ -629,7 +634,7 @@ Uize.module ({
 							_quoteCharForValue =
 								_valueHasQuoteChar ||
 								_alwaysQuote ||
-								(_trimPaddingOnParse ? _hasPadding (_columnValue) : _valueDelimiterHasPadding) ||
+								(_trimPaddingOnParse ? _hasPadding (_columnValue) : _valueDelimiterIsNonWhitespaceWithPadding) ||
 								_columnValue.indexOf (_valueDelimiter) > -1 ||
 								_columnValue.indexOf ('\n') > -1 ||
 								_columnValue.indexOf ('\r') > -1

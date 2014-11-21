@@ -339,7 +339,7 @@ Uize.module ({
 									['Marie','Stevenson','(415) 456-7890'],
 									['Craig','Pollack','(310) 987-6543']
 								],
-								{quoteChar:'#',valueDelimiter:' '}
+								{quoteChar:'#',valueDelimiter:' ',whenToQuoteValues:'always'}
 							],
 							'#John# #Wilkey# #(650) 123-4567#\n' +
 							'#Marie# #Stevenson# #(415) 456-7890#\n' +
