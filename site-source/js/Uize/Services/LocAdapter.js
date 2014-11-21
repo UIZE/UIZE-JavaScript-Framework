@@ -104,7 +104,7 @@ Uize.module ({
 				return (
 					_fileSystem.fileExists ({path:_resourceFileFullPath})
 						? m.parseResourceFile (
-							_fileSystem.readFile ({path:_resourceFileFullPath}),
+							_fileSystem.readFile ({path:_resourceFileFullPath,encoding:_project.resourceFileEncoding}),
 							_getResourceFileInfo (m,_resourceFileFullPath,_language)
 						)
 						: {}
@@ -397,7 +397,8 @@ Uize.module ({
 										_getResourceFileInfo (m,_resourceFileFullPath,_language)
 									),
 									_project.resourceFileWhitespace
-								)
+								),
+								encoding:_project.resourceFileEncoding
 							});
 						}
 					);
