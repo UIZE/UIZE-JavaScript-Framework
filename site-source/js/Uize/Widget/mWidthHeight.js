@@ -34,17 +34,17 @@ Uize.module ({
 				mixins:Uize.Widget.mHtmlBindings,
 
 				stateProperties:{
-					_width:'width',
-					_height:'height',
+					width:{},
+					height:{},
 
 					/*** derived properties for bindings ***/
-						_widthResolved:{derived:'width: typeof width == "string" ? width : +width + "px"'},
-						_heightResolved:{derived:'height: typeof height == "string" ? height : +height + "px"'}
+						mWidthHeight_widthResolved:{derived:'width: typeof width == "string" ? width : +width + "px"'},
+						mWidthHeight_heightResolved:{derived:'height: typeof height == "string" ? height : +height + "px"'}
 				},
 
 				htmlBindings:{
-					_widthResolved:':style.width',
-					_heightResolved:':style.height'
+					mWidthHeight_widthResolved:':style.width',
+					mWidthHeight_heightResolved:':style.height'
 				}
 			});
 		};
