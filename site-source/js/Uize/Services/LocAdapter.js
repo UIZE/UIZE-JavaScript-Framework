@@ -136,7 +136,7 @@ Uize.module ({
 									_stringValue = _string.value,
 									_isTranslatable = _isTranslatableString (m,_string),
 									_stringMetrics = _getStringMetrics (_stringValue,_wordSplitter,_tokenRegExp),
-									_isBrandSpecific = _resourceFileIsBrandSpecific || m.isBrandResourceString (_path)
+									_isBrandSpecific = _resourceFileIsBrandSpecific || m.isBrandResourceString (_stringPath)
 								;
 
 								/*** check for weak tokens ***/
@@ -158,10 +158,10 @@ Uize.module ({
 									value:_stringValue,
 									metrics:_stringMetrics,
 									isBrandSpecific:_isBrandSpecific,
-									brand:_isBrandSpecific ? _resourceFileBrand || m.getStringBrand (_path) : '',
-									hasHtml:m.stringHasHtml (_path,_stringValue),
+									brand:_isBrandSpecific ? _resourceFileBrand || m.getStringBrand (_stringPath) : '',
+									hasHtml:m.stringHasHtml (_stringPath,_stringValue),
 									isLong:_isTranslatable && m.isStringLong (_stringMetrics),
-									isKeyValid:m.isStringKeyValid (_path),
+									isKeyValid:m.isStringKeyValid (_stringPath),
 									hasWeakTokens:_hasWeakTokens,
 									isTranslatable:_isTranslatable
 								});
