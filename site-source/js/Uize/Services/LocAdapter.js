@@ -131,11 +131,11 @@ Uize.module ({
 							_resourceFileStrings,
 							{},
 							function (_string,_dummy,_path) {
-								_string.path = _path;
 								var
-									_value = _string.value,
+									_stringPath = _string.path = [_resourceFileSubPath].concat (_path),
+									_stringValue = _string.value,
 									_isTranslatable = _isTranslatableString (m,_string),
-									_stringMetrics = _getStringMetrics (_value,_wordSplitter,_tokenRegExp),
+									_stringMetrics = _getStringMetrics (_stringValue,_wordSplitter,_tokenRegExp),
 									_isBrandSpecific = _resourceFileIsBrandSpecific || m.isBrandResourceString (_path)
 								;
 
@@ -154,12 +154,12 @@ Uize.module ({
 									}
 
 								_stringsInfo.push ({
-									path:[_resourceFileSubPath].concat (_path),
-									value:_value,
+									path:_stringPath,
+									value:_stringValue,
 									metrics:_stringMetrics,
 									isBrandSpecific:_isBrandSpecific,
 									brand:_isBrandSpecific ? _resourceFileBrand || m.getStringBrand (_path) : '',
-									hasHtml:m.stringHasHtml (_path,_value),
+									hasHtml:m.stringHasHtml (_path,_stringValue),
 									isLong:_isTranslatable && m.isStringLong (_stringMetrics),
 									isKeyValid:m.isStringKeyValid (_path),
 									hasWeakTokens:_hasWeakTokens,
