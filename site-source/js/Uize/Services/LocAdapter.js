@@ -1128,7 +1128,7 @@ Uize.module ({
 									_resoucesByLanguage [_language] = Uize.Loc.Strings.Util.initNonTranslatable (
 										_languageResources,
 										_primaryLanguageResources,
-										_params.initNonTranslatable,
+										_params.initValues || _params.initNonTranslatable,
 										function (_string) {return _isTranslatableString (m,_string)}
 									);
 									m.stepCompleted ('Initialized non-translatable strings for language: ' + _language);
