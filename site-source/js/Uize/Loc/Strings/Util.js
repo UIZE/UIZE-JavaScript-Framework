@@ -35,6 +35,7 @@ Uize.module ({
 		var
 			/*** references to methods used internally ***/
 				_serializeStringPath,
+				_initValues,
 
 			/*** General Variables ***/
 				_blankStringPropertyObject = {value:''}
@@ -44,13 +45,35 @@ Uize.module ({
 			initNonTranslatable:function (
 				_translatableLanguageStrings,_primaryLanguageStrings,_initNonTranslatable,_isTranslatableString
 			) {
-				if (_initNonTranslatable == 'never') {
+				var _initNonTranslatableParts = (
+					{
+						never:',never,',
+						primary:'non-translatable,always,primary',
+						blank:'non-translatable,always,blank',
+						'primary-if-blank':'non-translatable,if-blank,primary'
+					} [_initNonTranslatable || 'primary-if-blank'] || _initNonTranslatable
+				).split (',');
+				return _initValues (
+					_translatableLanguageStrings,
+					_primaryLanguageStrings,
+					_initNonTranslatableParts [0],
+					_initNonTranslatableParts [1],
+					_initNonTranslatableParts [2],
+					_isTranslatableString
+				);
+			},
+
+			initValues:_initValues = function (
+				_translatableLanguageStrings,_primaryLanguageStrings,_initWhat,_initWhen,_initTo,_isTranslatableString
+			) {
+				if (_initWhat == 'none' || _initWhen == 'never') {
 					return _translatableLanguageStrings;
 				} else {
 					var
-						_initNonTranslatableToPrimaryIfBlank =
-							!_initNonTranslatable || _initNonTranslatable == 'primary-if-blank',
-						_initNonTranslatableToPrimary = _initNonTranslatable == 'primary'
+						_initWhatIsAll = _initWhat == 'all',
+						_initWhatIsTranslatable = _initWhat == 'translatable',
+						_initWhenIsAlways = _initWhen == 'always',
+						_initToIsBlank = _initTo == 'blank'
 					;
 					return Uize.Data.Diff.diff (
 						_translatableLanguageStrings,
@@ -60,20 +83,13 @@ Uize.module ({
 							return (
 								_translatableLanguageString &&
 								(
-									_initNonTranslatableToPrimaryIfBlank
-										? (
-											!_translatableLanguageString.value &&
-											!_isTranslatableString (_primaryLanguageString)
-												? _primaryLanguageString
-												: _translatableLanguageString
-										)
-										: (
-											_isTranslatableString (_primaryLanguageString)
-												? _translatableLanguageString
-												: _initNonTranslatableToPrimary
-													? _primaryLanguageString
-													: _blankStringPropertyObject
-										)
+									(
+										_initWhatIsAll ||
+										_initWhatIsTranslatable == _isTranslatableString (_primaryLanguageString)
+									) &&
+									(_initWhenIsAlways || !_translatableLanguageString.value)
+										? (_initToIsBlank ? _blankStringPropertyObject : _primaryLanguageString)
+										: _translatableLanguageString
 								)
 							);
 						},
