@@ -40,7 +40,7 @@ Uize.module ({
 					widget2:{
 						translatableString1:'[Widget 2, Translatable String 1]',
 						$nonTranslatableString1:'[Widget 2, Non-translatable String 1]',
-						translatableString2:'[Widget 2, Translatable String 2]',
+						translatableString2:'',
 						$nonTranslatableString2:''
 					}
 				},
@@ -100,7 +100,7 @@ Uize.module ({
 								widget2:{
 									translatableString1:'[Widget 2, Translatable String 1]',
 									$nonTranslatableString1:'',
-									translatableString2:'[Widget 2, Translatable String 2]',
+									translatableString2:'',
 									$nonTranslatableString2:''
 								}
 							}
@@ -122,7 +122,7 @@ Uize.module ({
 								widget2:{
 									translatableString1:'[Widget 2, Translatable String 1]',
 									$nonTranslatableString1:'Widget 2, Non-translatable String 1',
-									translatableString2:'[Widget 2, Translatable String 2]',
+									translatableString2:'',
 									$nonTranslatableString2:'Widget 2, Non-translatable String 2'
 								}
 							}
@@ -144,7 +144,29 @@ Uize.module ({
 								widget2:{
 									translatableString1:'[Widget 2, Translatable String 1]',
 									$nonTranslatableString1:'[Widget 2, Non-translatable String 1]',
-									translatableString2:'[Widget 2, Translatable String 2]',
+									translatableString2:'',
+									$nonTranslatableString2:'Widget 2, Non-translatable String 2'
+								}
+							}
+						],
+						['When a falsy value is specified for the initNonTranslatable parameter, then it is defaulted to  "primary-if-blank"',
+							[
+								Uize.clone (_translatableLanguageStrings),
+								Uize.clone (_primaryLanguageStrings),
+								null,
+								_isStringTranslatable
+							],
+							{
+								widget1:{
+									translatableString1:'[Widget 1, Translatable String 1]',
+									$nonTranslatableString1:'Widget 1, Non-Translatable String 1',
+									translatableString2:'[Widget 1, Translatable String 2]',
+									$nonTranslatableString2:'[Widget 1, Non-translatable String 2]'
+								},
+								widget2:{
+									translatableString1:'[Widget 2, Translatable String 1]',
+									$nonTranslatableString1:'[Widget 2, Non-translatable String 1]',
+									translatableString2:'',
 									$nonTranslatableString2:'Widget 2, Non-translatable String 2'
 								}
 							}
