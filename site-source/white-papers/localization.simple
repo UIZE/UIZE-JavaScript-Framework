@@ -409,6 +409,28 @@ Localization Guidelines
 
 		To avoid these kinds of problems, the canonical string should be regarded as the only authority, and all translations of a string should be regarded as derived / generated. A better solution in such situations would be for the developer or translators to add metadata for the canonical string that notes any language-specific considerations for translating the string.
 
+	### TO ADDRESS: Layers of Encoding
+		examples
+			- simple strings
+			- strings containing HTML
+			- strings containing HTML containing JavaScript
+			- strings containing HTML containing JavaScript that writes HTML that contains links
+			- different strings with different types of substitution tokens
+
+		- issues
+			- context specific encoding
+			- multiple layers of encoding, context within a context
+
+		.......................................................
+		<a
+			href="www.domain.com/TELUS%20Business%20Connect"
+			title="TELUS Business Connect"
+			onmouseover="showTooltip ('TELUS Business Connect')"
+		>
+			TELUS Business Connect
+		</a>
+		.......................................................
+
 Pseudo-localization
 	In a nutshell, a mode of running an application that replaces externalized resource strings with pseudo-localized strings that are derived from the source strings.
 
