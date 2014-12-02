@@ -517,8 +517,8 @@ Uize.module ({
 				_undefined,
 
 			/*** General Variables ***/
-				_sacredEmpyObject = {},
-				_sacredEmpyArray = []
+				_sacredEmptyObject = {},
+				_sacredEmptyArray = []
 		;
 
 		/*** Utility Functions ***/
@@ -537,7 +537,7 @@ Uize.module ({
 		return Uize.package ({
 			diff:function (_object1,_object2,_propertyComparer,_options) {
 				_propertyComparer || (_propertyComparer = _defaultPropertyComparer);
-				_options || (_options = _sacredEmpyObject);
+				_options || (_options = _sacredEmptyObject);
 				var
 					_path = [],
 					_object1PropertyProfile = {},
@@ -555,8 +555,8 @@ Uize.module ({
 						;
 						if (_isPlainObject (_object1PropertyValue) || _isPlainObject (_object2PropertyValue)) {
 							var _subNodeComparison = _compareNode (
-								_object1PropertyValue || _sacredEmpyObject,
-								_object2PropertyValue || _sacredEmpyObject
+								_object1PropertyValue || _sacredEmptyObject,
+								_object2PropertyValue || _sacredEmptyObject
 							);
 							_propertyComparisonResult = !_isEmpty (_subNodeComparison)
 								? {value:_subNodeComparison}
@@ -574,8 +574,8 @@ Uize.module ({
 								(_object2PropertyValueIsArray || !_propertyInObject2)
 							) {
 								var _subNodeComparison = _compareNode (
-									_object1PropertyValue || _sacredEmpyArray,
-									_object2PropertyValue || _sacredEmpyArray
+									_object1PropertyValue || _sacredEmptyArray,
+									_object2PropertyValue || _sacredEmptyArray
 								);
 								_propertyComparisonResult = !_isEmpty (_subNodeComparison)
 									? {value:_subNodeComparison}
