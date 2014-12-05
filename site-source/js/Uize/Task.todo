@@ -1,0 +1,61 @@
+This is a TO DO document for the proposed =Uize.Task= module.
+
+The =Uize.Task= module defines a class for expressing tasks that can be either synchronous or asynchronous in their execution. It is reasonable that the task interface implemented in the =Uize.Task= class can also be applied to the =Uize.Test= class and, in fact, it may be possible to refactor the =Uize.Test= class to become a subclass of the =Uize.Task= class, since a test or test suite can be viewed as a being specific form of task.
+
+It is also reasonable that a task interface can be applied to other common types of asynchronous processes, such as an Ajax communication between a client and a server.
+
+Task Interface
+
+	Methods
+		- start
+		- stop
+		- pause
+		- resume
+
+	State
+		progress
+		currentSteps
+
+Other Concepts
+	Estimates
+		Time Estimate
+			.
+
+		Resource Estimates
+			.
+
+	Description
+		.
+
+	Manifest
+		.
+
+	Events
+		.
+
+	Result
+		.
+
+	Summary
+		.
+
+	Explanation
+		.
+
+	Parallelism
+		.
+
+	Orchestration
+		.
+
+	Mixed Synchronous and Asynchronous Operation
+		.
+
+	Sub-tasks / Task Nesting
+		.
+
+Synchronous Versus Asynchronous
+
+Design Objectives
+	At one level, the task construct is intended to achieve the objective that, at any time during the execution of a long-running or asynchronous task, the question can be asked plainly "What is going on? Where are things at?". The task construct aims to encourage design that facilitates visibility into what is occuring.
+
