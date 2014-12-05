@@ -1,5 +1,53 @@
 This is a TO DO document for the =Uize= module.
 
+Uize.pipe
+	Pipes a value through a series of processes.
+
+	The =Uize.pipe= method makes it possible to express serial processing of values in forward rather than backwards order, and also eliminates the issue of cumulative indentation that is associated with nested function calls.
+
+	IMPLEMENTATION
+	........................................................................
+	_package.pipe = function () {
+		for (
+			var
+				_argumentNo = 0,
+				_arguments = arguments,
+				_argumentsLength = _arguments.length,
+				_argument,
+				_input = _arguments [0]
+			;
+			++_argumentNo < _argumentsLength;
+		) {
+			_input = Uize.isArray (_argument = _arguments [_argumentNo])
+				? _argument [0].apply (0,[_input].concat (_argument.slice (1)))
+				: _argument (_input)
+			;
+		}
+		return _input;
+	}
+	........................................................................
+
+	INSTEAD OF...
+	...................................................................
+	return Uize.Data.Csv.to (
+		Uize.Data.NameValueRecords.fromHash (
+			Uize.Loc.FileFormats.ProjectStrings.Util.flatten (_toEncode),
+			0,
+			1
+		)
+	);
+	...................................................................
+
+	USE...
+	....................................................
+	return Uize.pipe (
+		_toEncode,
+		Uize.Loc.FileFormats.ProjectStrings.Util.flatten,
+		[Uize.Data.NameValueRecords.fromHash,0,1],
+		Uize.Data.Csv.to
+	);
+	....................................................
+
 Uize.log
 	Logs a message, using the configured logging options.
 
@@ -211,10 +259,10 @@ Uize.forEach
 Uize.map
 	- Use native map function if available and _source is an array & _target is a new array
 	- Add support for _source being a string?
-	
+
 Uize.filter
 	Works much in the same way as Uize.map instead returns the matched set. Should use native filter function when appropriate.
-	
+
 Uize.keys
 	- Use native Object.keys function if available
 
