@@ -31,10 +31,7 @@ Uize.module ({
 		return _superclass.subclass ({
 			staticMethods:{
 				determineFilesToBuild:function (_params) {
-					var
-						_sourcePath = _params.sourcePath,
-						_jstDerivedPagePathMatcher = /\.([\w\d\-]+)\.jst$/
-					;
+					var _jstDerivedPagePathMatcher = /\.([\w\d\-]+)\.jst$/;
 					this.addFiles (
 						this.fileSystem.getFiles ({
 							path:_params.sourcePath,
