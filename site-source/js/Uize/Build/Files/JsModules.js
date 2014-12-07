@@ -37,10 +37,8 @@ Uize.module ({
 						_fileSystem = m.fileSystem,
 						_modulesFolder = _params.modulesFolder,
 						_uizeModulesFolder = _params.uizeModulesFolder || 'js',
-						_sourcePath = _params.sourcePath,
-						_uizePath = _params.uizePath,
-						_sourceModulesPath = _sourcePath + '/' + _modulesFolder,
-						_uizeModulesPath = _uizePath + '/' + _uizeModulesFolder,
+						_sourceModulesPath = _params.sourcePath + '/' + _modulesFolder,
+						_uizeModulesPath = _params.uizePath + '/' + _uizeModulesFolder,
 						_isUizeRegExp = /^Uize[\.\/]/,
 						_jsModuleExtensionRegExp = Uize.Build.Util.jsModuleExtensionRegExp
 					;
