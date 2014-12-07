@@ -35,7 +35,7 @@ Uize.module ({
 						_sourcePath = _params.sourcePath,
 						_uizePath = _params.uizePath,
 						_uizeModulesFolder = _params.uizeModulesFolder || 'js',
-						_staticFilePathMatcher = _params.staticFilePathMatcher
+						_staticFilePathMatcher = Uize.resolveMatcher (_params.staticFilePathMatcher)
 					;
 					this.addFiles (
 						this.fileSystem.getFiles ({
@@ -49,7 +49,9 @@ Uize.module ({
 							this.fileSystem.getFiles ({
 								path:_uizePath + '/' + _uizeModulesFolder,
 								recursive:true,
-								pathMatcher:_staticFilePathMatcher,
+								pathMatcher:function (_filePath) {
+									return _staticFilePathMatcher (_filePath) && /^Uize[\.\/]/.test (_filePath);
+								},
 								pathTransformer:'"' + _params.modulesFolder + '/" + value'
 							})
 						)
