@@ -31,11 +31,11 @@ Uize.module ({
 		'Uize.Url',
 		'Uize.Doc.Sucker',
 		'Uize.Build.Util',
-		'UizeSite.Build.Util'
+		'Uize.Util.ModuleNaming'
 	],
 	builder:function () {
 		var
-			_visualTestsModuleNameFromWidgetClass = UizeSite.Build.Util.visualTestsModuleNameFromWidgetClass,
+			_visualTestsModuleNameFromWidgetClass = Uize.Util.ModuleNaming.visualTestsModuleNameFromWidgetClass,
 			_jsModuleExtensions = Uize.Build.Util.jsModuleExtensions
 		;
 

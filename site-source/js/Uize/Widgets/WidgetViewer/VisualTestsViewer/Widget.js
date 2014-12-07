@@ -28,14 +28,14 @@ Uize.module ({
 	superclass:'Uize.Widgets.WidgetViewer.Widget',
 	required:[
 		'Uize.Data.Matches',
-		'UizeSite.Build.Util'
+		'Uize.Util.ModuleNaming'
 	],
 	builder:function (_superclass) {
 		'use strict';
 
 		var
 			/*** variables for performance optimization ***/
-				_visualTestsModuleNameFromWidgetClass = UizeSite.Build.Util.visualTestsModuleNameFromWidgetClass
+				_visualTestsModuleNameFromWidgetClass = Uize.Util.ModuleNaming.visualTestsModuleNameFromWidgetClass
 		;
 
 		return _superclass.subclass ({

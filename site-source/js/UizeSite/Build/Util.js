@@ -33,11 +33,10 @@ Uize.module ({
 	builder:function () {
 		'use strict';
 
-		/*** General Variables ***/
-			var
-				_fileSystem = Uize.Services.FileSystem.singleton (),
-				_widgetClassSuffixRegExp = /\.Widget$/
-			;
+		var
+			/*** General Variables ***/
+				_fileSystem = Uize.Services.FileSystem.singleton ()
+		;
 
 		return Uize.package ({
 			getIndexableFiles:function (_sourcePath,_indexableFolderUnderSource,_indexableFileExtensionRegExp) {
@@ -65,72 +64,6 @@ Uize.module ({
 							.................................................................
 
 							This method returns all the files in the folder specified by the =indexableFolderUnderSourceSTR= parameter, that is under the source path specified by the =sourcePathSTR= parameter, and that match the file extension regular expression specified by the =indexableFileExtensionREGEXP= parameter. This method excludes all files whose filenames start with a "~" (tilde) character, since these files are considered veiled and not ready for primetime.
-				*/
-			},
-
-			visualTestsModuleNameFromWidgetClass:function (_widgetClass) {
-				return (
-					_widgetClassSuffixRegExp.test (_widgetClass)
-						? _widgetClass.replace (_widgetClassSuffixRegExp,'.VisualTests')
-						: ''
-				);
-				/*?
-					Static Methods
-						UizeSite.Build.Util.visualTestsModuleNameFromWidgetClass
-							Returns a string, representing the name of the corresponding visual tests module for the specified widget class name.
-
-							SYNTAX
-							.....................................................................................
-							visualTestsModuleNameSTR = UizeSite.Build.Util.visualTestsModuleNameFromWidgetClass (
-								widgetClassNameSTR
-							);
-							.....................................................................................
-
-							EXAMPLE
-							.....................................................................................
-							UizeSite.Build.Util.visualTestsModuleNameFromWidgetClass ('Uize.Widgets.Log.Widget');
-							.....................................................................................
-
-							RESULT
-							..............................
-							'Uize.Widgets.Log.VisualTests'
-							..............................
-
-							NOTES
-							- see also the companion =UizeSite.Build.Util.visualSamplerModuleNameFromWidgetClass= static method
-				*/
-			},
-
-			visualSamplerModuleNameFromWidgetClass:function (_widgetClass) {
-				return (
-					_widgetClassSuffixRegExp.test (_widgetClass)
-						? _widgetClass.replace (_widgetClassSuffixRegExp,'.VisualSampler')
-						: ''
-				);
-				/*?
-					Static Methods
-						UizeSite.Build.Util.visualSamplerModuleNameFromWidgetClass
-							Returns a string, representing the name of the corresponding visual sampler module for the specified widget class name.
-
-							SYNTAX
-							.........................................................................................
-							visualSamplerModuleNameSTR = UizeSite.Build.Util.visualSamplerModuleNameFromWidgetClass (
-								widgetClassNameSTR
-							);
-							.........................................................................................
-
-							EXAMPLE
-							.......................................................................................
-							UizeSite.Build.Util.visualSamplerModuleNameFromWidgetClass ('Uize.Widgets.Log.Widget');
-							.......................................................................................
-
-							RESULT
-							................................
-							'Uize.Widgets.Log.VisualSampler'
-							................................
-
-							NOTES
-							- see also the companion =UizeSite.Build.Util.visualTestsModuleNameFromWidgetClass= static method
 				*/
 			}
 		});

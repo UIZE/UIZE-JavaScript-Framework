@@ -158,7 +158,8 @@ Uize.module ({
 				_moduleNameRegExp = new RegExp (_moduleNamingRegExpComposition.get ('moduleName').source),
 				_testModuleNameRegExp = new RegExp (_moduleNamingRegExpComposition.get ('testModuleName').source),
 				_extensionModuleNameRegExp = new RegExp (_moduleNamingRegExpComposition.get ('extensionModuleName').source),
-				_mixinModuleNameRegExp = new RegExp (_moduleNamingRegExpComposition.get ('mixinModuleName').source)
+				_mixinModuleNameRegExp = new RegExp (_moduleNamingRegExpComposition.get ('mixinModuleName').source),
+				_widgetClassSuffixRegExp = /\.Widget$/
 		;
 
 		return Uize.package ({
@@ -357,6 +358,72 @@ Uize.module ({
 							Uize.Util.ModuleNaming.isModuleName ('1Namespace.MyModule');       // returns false
 							Uize.Util.ModuleNaming.isModuleName ('Namespace.1MyModule');       // returns false
 							...................................................................................
+				*/
+			},
+
+			visualTestsModuleNameFromWidgetClass:function (_widgetClass) {
+				return (
+					_widgetClassSuffixRegExp.test (_widgetClass)
+						? _widgetClass.replace (_widgetClassSuffixRegExp,'.VisualTests')
+						: ''
+				);
+				/*?
+					Static Methods
+						Uize.Util.ModuleNaming.visualTestsModuleNameFromWidgetClass
+							Returns a string, representing the name of the corresponding visual tests module for the specified widget class name.
+
+							SYNTAX
+							........................................................................................
+							visualTestsModuleNameSTR = Uize.Util.ModuleNaming.visualTestsModuleNameFromWidgetClass (
+								widgetClassNameSTR
+							);
+							........................................................................................
+
+							EXAMPLE
+							........................................................................................
+							Uize.Util.ModuleNaming.visualTestsModuleNameFromWidgetClass ('Uize.Widgets.Log.Widget');
+							........................................................................................
+
+							RESULT
+							..............................
+							'Uize.Widgets.Log.VisualTests'
+							..............................
+
+							NOTES
+							- see also the companion =Uize.Util.ModuleNaming.visualSamplerModuleNameFromWidgetClass= static method
+				*/
+			},
+
+			visualSamplerModuleNameFromWidgetClass:function (_widgetClass) {
+				return (
+					_widgetClassSuffixRegExp.test (_widgetClass)
+						? _widgetClass.replace (_widgetClassSuffixRegExp,'.VisualSampler')
+						: ''
+				);
+				/*?
+					Static Methods
+						Uize.Util.ModuleNaming.visualSamplerModuleNameFromWidgetClass
+							Returns a string, representing the name of the corresponding visual sampler module for the specified widget class name.
+
+							SYNTAX
+							............................................................................................
+							visualSamplerModuleNameSTR = Uize.Util.ModuleNaming.visualSamplerModuleNameFromWidgetClass (
+								widgetClassNameSTR
+							);
+							............................................................................................
+
+							EXAMPLE
+							..........................................................................................
+							Uize.Util.ModuleNaming.visualSamplerModuleNameFromWidgetClass ('Uize.Widgets.Log.Widget');
+							..........................................................................................
+
+							RESULT
+							................................
+							'Uize.Widgets.Log.VisualSampler'
+							................................
+
+							NOTES
+							- see also the companion =Uize.Util.ModuleNaming.visualTestsModuleNameFromWidgetClass= static method
 				*/
 			}
 		});
