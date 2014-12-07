@@ -101,7 +101,12 @@ Uize.module ({
 			}
 
 			function _getContainer (m) {
-				return m._container || m.getNode ('shell') || m.getNode () || (m.parent && m.parent.getNode (m._name));
+				return (
+					_getById (m._container) ||
+					m.getNode ('shell') ||
+					m.getNode () ||
+					(m.parent && m.parent.getNode (m._name))
+				);
 				/*?
 					Implied Nodes
 						Root Node
@@ -861,13 +866,13 @@ Uize.module ({
 							;
 							if (_html) {
 								if (_html === _true) {
-									var _nodeToInjectInto = _getContainer (m);
-									_html = m._html = _Uize.Template && _nodeToInjectInto
+									var _container = _getContainer (m);
+									_html = m._html = _Uize.Template && _container
 										? {
 											process:_Uize.Template.compile (
 												(
-													_Uize_Dom_Basics.find ({root:_nodeToInjectInto,tagName:'SCRIPT',type:'text/jst'}) [0] ||
-													_nodeToInjectInto
+													_Uize_Dom_Basics.find ({root:_container,tagName:'SCRIPT',type:'text/jst'}) [0] ||
+													_container
 												).innerHTML,
 												{openerToken:'[%',closerToken:'%]'}
 											)
@@ -905,11 +910,11 @@ Uize.module ({
 								_html = m.getHtml (_alternateTemplateInput)
 							;
 							if (_html != _undefined) {
-								var _nodeToInjectInto = _getContainer (m);
+								var _container = _getContainer (m);
 								_Uize_Dom_Basics.injectHtml (
-									_nodeToInjectInto || document.body,
+									_container || document.body,
 									_html,
-									m._insertionMode || (_nodeToInjectInto ? 'inner replace' : 'inner bottom')
+									m._insertionMode || (_container ? 'inner replace' : 'inner bottom')
 								);
 								m._nodeCache = _null;
 								m.set ({_built:_true});

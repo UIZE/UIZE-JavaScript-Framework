@@ -25,7 +25,6 @@
 
 Uize.module ({
 	name:'Uize.Widget.Population',
-	required:'Uize.Dom.Basics',
 	builder:function (_superclass) {
 		'use strict';
 
@@ -238,17 +237,12 @@ Uize.module ({
 						(_changesSinceLastUpdate._templateStr || _changesSinceLastUpdate._items) &&
 						m.get ('enabledInherited')
 					) {
-						var _nodeToInjectInto =
-							Uize.Dom.Basics.getById (m.get ('container')) ||
-							m.getNode ('shell') ||
-							m.getNode () ||
-							(m.parent && m.parent.getNode (m.get ('name')))
-						;
-						if (_nodeToInjectInto) {
-							if (!m._templateStr) m._templateStr = _nodeToInjectInto.innerHTML;
+						var _container = m.getContainer ();
+						if (_container) {
+							if (!m._templateStr) m._templateStr = _container.innerHTML;
 							var _newHtml = m.getHtml ();
 							if (_newHtml !== m._oldHtml)
-								_nodeToInjectInto.innerHTML = m._oldHtml = _newHtml
+								_container.innerHTML = m._oldHtml = _newHtml
 							;
 							_changesSinceLastUpdate._templateStr = _changesSinceLastUpdate._items = false;
 						}
