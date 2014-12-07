@@ -25,11 +25,7 @@
 
 Uize.module ({
 	name:'Uize.Build.Files.JsModules',
-	required:[
-		'Uize.Build.Util',
-		'Uize.Str.Has',
-		'Uize.Url'
-	],
+	required:'Uize.Build.Util',
 	builder:function (_superclass) {
 		'use strict';
 
@@ -45,21 +41,18 @@ Uize.module ({
 						_uizePath = _params.uizePath,
 						_sourceModulesPath = _sourcePath + '/' + _modulesFolder,
 						_uizeModulesPath = _uizePath + '/' + _uizeModulesFolder,
-						_isUizeWebSite = _uizeModulesPath == _sourceModulesPath,
+						_isUizeRegExp = /^Uize[\.\/]/,
 						_jsModuleExtensionRegExp = Uize.Build.Util.jsModuleExtensionRegExp
 					;
 
 					/*** add URLs for JavaScript modules ***/
-						function _addUrlsForJavaScriptModules (_sourceModulesPath,_modulesFolder) {
+						function _addUrlsForJavaScriptModules (_sourceModulesPath,_modulesFolder,_isUize) {
 							m.addFiles (
 								_fileSystem.getFiles ({
 									path:_sourceModulesPath,
 									recursive:true,
 									pathMatcher:function (_path) {
-										return (
-											_jsModuleExtensionRegExp.test (_path) &&
-											(_isUizeWebSite || Uize.Str.Has.hasPrefix (_path,'Uize.'))
-										);
+										return _jsModuleExtensionRegExp.test (_path) && _isUizeRegExp.test (_path) == _isUize;
 									},
 									pathTransformer:function (_modulePath) {
 										return _modulesFolder + '/' + _modulePath.replace (_jsModuleExtensionRegExp,'.js');
@@ -69,13 +62,13 @@ Uize.module ({
 						}
 
 						/*** folders under site's modules folder ***/
-							_addUrlsForJavaScriptModules (_sourceModulesPath,_modulesFolder);
+							_addUrlsForJavaScriptModules (_sourceModulesPath,_modulesFolder,false);
 
 						/*** folders under UIZE site's modules folder ***/
-							_isUizeWebSite || _addUrlsForJavaScriptModules (_uizeModulesPath,_uizeModulesFolder);
+							_addUrlsForJavaScriptModules (_uizeModulesPath,_uizeModulesFolder,true);
 
 					/*** add URLs for generated namespace modules ***/
-						function _addUrlsForGeneratedNamespaceModules (_sourceModulesPath,_modulesFolder) {
+						function _addUrlsForGeneratedNamespaceModules (_sourceModulesPath,_modulesFolder,_isUize) {
 							var _moduleNameFromModulePath = Uize.Build.Util.moduleNameFromModulePath;
 							m.addFiles (
 								_fileSystem.getFolders ({
@@ -87,7 +80,7 @@ Uize.module ({
 											- folders not under folder organized namespaces
 											- folders for which there are explicit corresponding JavaScript modules
 										*/
-										return true;
+										return _isUizeRegExp.test (_path) == _isUize;
 									},
 									pathTransformer:function (_modulePath) {
 										return (
@@ -101,10 +94,10 @@ Uize.module ({
 						}
 
 						/*** folders under site's modules folder ***/
-							_addUrlsForGeneratedNamespaceModules (_sourceModulesPath,_modulesFolder);
+							_addUrlsForGeneratedNamespaceModules (_sourceModulesPath,_modulesFolder,false);
 
 						/*** folders under UIZE site's modules folder ***/
-							_isUizeWebSite || _addUrlsForGeneratedNamespaceModules (_uizeModulesPath,_uizeModulesFolder);
+							_addUrlsForGeneratedNamespaceModules (_uizeModulesPath,_uizeModulesFolder,true);
 				}
 			}
 		});
