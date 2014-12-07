@@ -42,14 +42,7 @@ Uize.module ({
 				insertViewer:function (_value) {
 					var
 						m = this,
-						_viewer = m.addChild (
-							'viewer',
-							Uize.Widgets.Container.Widget,
-							{
-								built:false,
-								container:m.getNode ('viewer')
-							}
-						)
+						_viewer = m.addChild ('viewer',Uize.Widgets.Container.Widget,{built:false})
 					;
 					_viewer.insertUi ();
 					var _visualSamplerProperties = {

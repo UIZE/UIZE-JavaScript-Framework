@@ -197,7 +197,7 @@
 			#page-homeLink:visited,
 			#page-homeLink:hover,
 			#page-homeLink:active,
-			.siteMenuShell {
+			.siteMenu {
 				position: absolute;
 				display: block;
 				left: 10px;
@@ -290,7 +290,7 @@
 		}
 
 /*** site nav and site assistant panes ***/
-	#page-siteNavPane, #page-siteAssistantPane {
+	#page-siteNavPane, #page-siteAssistant {
 		position: fixed;
 		top: 46px;
 		width: 130px;
@@ -302,7 +302,7 @@
 		left: 0;
 		box-shadow: 1px 7px 6px 2px rgba(0,0,0,.2);
 	}
-	#page-siteNavShell {
+	#page-siteNav {
 		position: absolute;
 		left: 10px;
 		top: 0;
@@ -315,16 +315,16 @@
 		overflow: hidden;
 		box-shadow: 0 0 7px rgba(0,0,0,.2);
 	}
-	#page-siteNavShell:hover {
+	#page-siteNav:hover {
 		overflow: auto;
 	}
-	#page-siteAssistantPane {
+	#page-siteAssistant {
 		right: 0;
 		box-shadow: -1px 7px 6px 2px rgba(0,0,0,.2);
 	}
 
-/*** footer shell ***/
-	#page-footerShell {
+/*** footer ***/
+	#page-footer {
 		margin: 40px -14px 0 -14px;
 	}
 

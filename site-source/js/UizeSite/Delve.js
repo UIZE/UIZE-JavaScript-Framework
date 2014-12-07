@@ -1162,7 +1162,12 @@ Uize.module ({
 								);
 
 							/*** determine HTML for the widget ***/
-								var _widgetNode = _object.get ('container') || _object.getNode ('shell') || _object.getNode ();
+								var _widgetNode =
+									_object.get ('container') ||
+									_object.getNode ('shell') ||
+									_object.getNode () ||
+									(_object.parent && _object.parent.getNode (_object.get ('name')))
+								;
 								_addTabContentsSection (
 									_htmlChunks,
 									'HTML',

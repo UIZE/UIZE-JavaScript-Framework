@@ -239,7 +239,10 @@ Uize.module ({
 						m.get ('enabledInherited')
 					) {
 						var _nodeToInjectInto =
-							Uize.Dom.Basics.getById (m.get ('container')) || m.getNode ('shell') || m.getNode ()
+							Uize.Dom.Basics.getById (m.get ('container')) ||
+							m.getNode ('shell') ||
+							m.getNode () ||
+							(m.parent && m.parent.getNode (m.get ('name')))
 						;
 						if (_nodeToInjectInto) {
 							if (!m._templateStr) m._templateStr = _nodeToInjectInto.innerHTML;

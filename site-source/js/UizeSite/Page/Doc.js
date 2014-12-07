@@ -93,7 +93,7 @@ Uize.module ({
 						/*** populate contents tree's data ***/
 							var
 								_contents = m.children.contents,
-								_contentsTreeItems = Uize.Dom.Tree.getTreeFromList (_contents.getNode ('shell'))
+								_contentsTreeItems = Uize.Dom.Tree.getTreeFromList (m.getNode ('contents'))
 							;
 							m.set ({contentsTreeItems:_contentsTreeItems});
 							_contents.set ({items:_contentsTreeItems});
@@ -228,7 +228,7 @@ Uize.module ({
 						_superclass.doMy (m,'wireUi');
 
 						m.children.tooltip.displayNode ('',false);
-						_contents.setNodeStyle ('shell',{maxHeight:'none',overflow:'visible'});
+						m.setNodeStyle ('contents',{maxHeight:'none',overflow:'visible'});
 					}
 				}
 			}

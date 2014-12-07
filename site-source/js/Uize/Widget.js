@@ -100,8 +100,8 @@ Uize.module ({
 				_declarativeWidgetProperties && m.set (_declarativeWidgetProperties);
 			}
 
-			function _getNodeToInjectInto (m) {
-				return m._container || m.getNode ('shell') || m.getNode ();
+			function _getContainer (m) {
+				return m._container || m.getNode ('shell') || m.getNode () || (m.parent && m.parent.getNode (m._name));
 				/*?
 					Implied Nodes
 						Root Node
@@ -861,7 +861,7 @@ Uize.module ({
 							;
 							if (_html) {
 								if (_html === _true) {
-									var _nodeToInjectInto = _getNodeToInjectInto (m);
+									var _nodeToInjectInto = _getContainer (m);
 									_html = m._html = _Uize.Template && _nodeToInjectInto
 										? {
 											process:_Uize.Template.compile (
@@ -905,7 +905,7 @@ Uize.module ({
 								_html = m.getHtml (_alternateTemplateInput)
 							;
 							if (_html != _undefined) {
-								var _nodeToInjectInto = _getNodeToInjectInto (m);
+								var _nodeToInjectInto = _getContainer (m);
 								_Uize_Dom_Basics.injectHtml (
 									_nodeToInjectInto || document.body,
 									_html,
@@ -1017,6 +1017,10 @@ Uize.module ({
 										- When the =impliedNodeSTRorBLOB= parameter has a value of =null=, then the value =null= is returned.
 										- When the =impliedNodeSTRorBLOB= parameter has a value of =undefined= or is not specified, then the root node of the widget is returned. This has the same effect as specifying the empty string. (ie. =getNode ()= is equivalent to =getNode ('')=)
 							*/
+						},
+
+						getContainer:function () {
+							return _getContainer (this);
 						},
 
 						flushNodeCache:function (_impliedNodeName) {

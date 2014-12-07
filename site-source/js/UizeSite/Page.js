@@ -116,10 +116,10 @@ Uize.module ({
 												)
 											;
 
-										/*** add shell node for site menu, that will overlay homeLink node ***/
+										/*** add container node for site menu, that will overlay homeLink node ***/
 											m.injectNodeHtml (
 												m.getNode ('homeLink').parentNode,
-												'<div id="page_siteMenu-shell" class="siteMenuShell"></div>'
+												'<div id="page-siteMenu" class="siteMenu"></div>'
 											);
 
 										/*** wire menu ***/
@@ -138,30 +138,16 @@ Uize.module ({
 									// add widget and inject its HTML
 									Uize.Node.injectHtml (
 										document.body,
-										'<div id="page-siteNavPane"><div id="page-siteNavShell"></div></div>'
+										'<div id="page-siteNavPane"><div id="page-siteNav"></div></div>'
 									);
-									m.addChild (
-										'siteNav',
-										UizeSite.Widgets.SiteNav.Widget,
-										{
-											container:m.getNode ('siteNavShell'),
-											built:false
-										}
-									);
+									m.addChild ('siteNav',UizeSite.Widgets.SiteNav.Widget,{built:false});
 								}
 
 							/*** inject site assistant (if desired) ***/
 								if (m._showSiteAssistant) {
 									// add widget and inject its HTML
-									Uize.Node.injectHtml (document.body,'<div id="page-siteAssistantPane"></div>');
-									m.addChild (
-										'siteAssistant',
-										UizeSite.Widgets.SiteAssistant.Widget,
-										{
-											container:m.getNode ('siteAssistantPane'),
-											built:false
-										}
-									);
+									Uize.Node.injectHtml (document.body,'<div id="page-siteAssistant"></div>');
+									m.addChild ('siteAssistant',UizeSite.Widgets.SiteAssistant.Widget,{built:false});
 								}
 
 							/*** manage resizing of gutter panes ***/
@@ -194,7 +180,7 @@ Uize.module ({
 											_siteNavWidth = 0;
 										}
 										_showPane (_showSiteNav,'siteNavPane',_siteNavWidth);
-										_showPane (_showSiteAssistant,'siteAssistantPane',_siteAssistantWidth);
+										_showPane (_showSiteAssistant,'siteAssistant',_siteAssistantWidth);
 										m.setNodeStyle (
 											_mainNode,
 											{marginRight:_siteAssistantWidth == 0 && !!_siteNavWidth ? '0' : 'auto'}
@@ -207,15 +193,8 @@ Uize.module ({
 
 						/*** inject footer (if desired) ***/
 							if (m._showFooter) {
-								Uize.Node.injectHtml (_mainNode,'<div id="page-footerShell"></div>');
-								m.addChild (
-									'footer',
-									UizeSite.Widgets.Footer.Widget,
-									{
-										container:m.getNode ('footerShell'),
-										built:false
-									}
-								);
+								Uize.Node.injectHtml (_mainNode,'<div id="page-footer"></div>');
+								m.addChild ('footer',UizeSite.Widgets.Footer.Widget,{built:false});
 							}
 
 						_superclass.doMy (m,'wireUi');

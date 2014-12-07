@@ -107,11 +107,11 @@
 		margin-top: 76px;
 	}
 
-	.inTour #page-siteNavPane, .inTour #page-siteAssistantPane {
+	.inTour #page-siteNavPane, .inTour #page-siteAssistant {
 		top: 76px;
 	}
 
-	#page-tourBarShell {
+	#page-tourBar {
 		position: fixed;
 		top: 48px;
 		left: 0;

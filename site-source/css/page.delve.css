@@ -102,7 +102,7 @@ hr {
 		}
 
 	/*** Contents Trees ***/
-		.tree-list-shell {
+		.tree-list {
 			position: absolute;
 			left: 10px;
 			top: 93px;
@@ -227,7 +227,7 @@ hr {
 			}
 
 		/*** events tab ***/
-			#page_objectInspectorEventsLog-shell {
+			#page-objectInspectorEventsLog {
 				position: relative;
 				width: 100%;
 				height: 100%;

@@ -103,7 +103,7 @@ Uize.module ({
 							if (_tour) {
 								var _documentBody = document.body;
 								Uize.Dom.Classes.addClass (_documentBody,'inTour');
-								Uize.Node.injectHtml (_documentBody,'<div id="page-tourBarShell"></div>');
+								Uize.Node.injectHtml (_documentBody,'<div id="page-tourBar"></div>');
 								Uize.require (
 									'UizeSite.Widgets.TourBar.Widget',
 									function () {
@@ -112,7 +112,6 @@ Uize.module ({
 											UizeSite.Widgets.TourBar.Widget,
 											{
 												tour:_tour,
-												container:m.getNode ('tourBarShell'),
 												built:false
 											}
 										).insertUi ();

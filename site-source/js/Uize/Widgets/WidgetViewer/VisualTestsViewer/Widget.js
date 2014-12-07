@@ -47,14 +47,7 @@ Uize.module ({
 					Uize.require (
 						_visualTestsModuleNameFromWidgetClass (_value),
 						function (_visualTestsModule) {
-							m.addChild (
-								'viewer',
-								_visualTestsModule,
-								{
-									built:false,
-									container:m.getNode ('viewer')
-								}
-							).insertUi ();
+							m.addChild ('viewer',_visualTestsModule,{built:false}).insertUi ();
 						}
 					);
 				}
