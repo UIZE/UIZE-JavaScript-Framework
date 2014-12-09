@@ -1,0 +1,33 @@
+<div>
+	<table class="settings">
+		<tr>
+			<td id="accentingLabel"></td>
+			<td><input id="accenting" type="checkbox"/></td>
+		</tr>
+		<tr>
+			<td id="wrapperLabel"></td>
+			<td><input id="wrapper" type="text"/></td>
+		</tr>
+		<tr>
+			<td id="expansionFactorLabel"></td>
+			<td><child name="expansionFactor" size="tiny"/></td>
+		</tr>
+		<tr>
+			<td id="expansionCharLabel"></td>
+			<td><input id="expansionChar" type="text"/></td>
+		</tr>
+	</table>
+	<div class="viewButtons">
+		<child name="sourceViewButton" extraClasses="viewButton"/>
+		<child name="resultViewButton" extraClasses="viewButton"/>
+		<br style="clear: left;"/>
+	</div>
+	<div class="views">
+		<div id="sourceView" class="view sourceView">
+			<div class="textareaShell"><textarea id="source"></textarea></div>
+		</div>
+		<div id="resultView" class="view resultView">
+			<div class="textareaShell"><textarea id="result" readonly="readonly"></textarea></div>
+		</div>
+	</div>
+</div>
