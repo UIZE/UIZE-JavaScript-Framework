@@ -59,7 +59,7 @@ Uize.module ({
 					number:/\d+(?:\.\d+)?/,
 					whitespace:/\s+/,
 					htmlTag:/<(?:.|[\r\n\f])+?>/,
-					token:/\{[^\}]+\}/,
+					token:/\{\{[^\}]+\}\}/,
 					wordSplitter:/({htmlTag}|{token}|{whitespace}|{punctuation}|{number})/
 				}),
 				_wordSplitterRegExp = _wordSplitterRegExpComposition.get ('wordSplitter')
