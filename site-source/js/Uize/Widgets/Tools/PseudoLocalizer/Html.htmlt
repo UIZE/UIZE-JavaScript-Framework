@@ -9,8 +9,8 @@
 			<td><input id="wrapper" type="text"/></td>
 		</tr>
 		<tr>
-			<td id="expansionFactorLabel"></td>
-			<td><child name="expansionFactor" size="tiny"/></td>
+			<td id="expansionLabel"></td>
+			<td><child name="expansion" size="tiny"/></td>
 		</tr>
 		<tr>
 			<td id="expansionCharLabel"></td>

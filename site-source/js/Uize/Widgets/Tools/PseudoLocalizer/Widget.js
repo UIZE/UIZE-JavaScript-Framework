@@ -80,15 +80,15 @@ Uize.module ({
 				source:{value:''},
 				result:{
 					derived:{
-						properties:['source','accenting','wrapper','expansionFactor','expansionChar'],
-						derivation:function (_source,_accenting,_wrapper,_expansionFactor,_expansionChar) {
+						properties:['source','accenting','wrapper','expansion','expansionChar'],
+						derivation:function (_source,_accenting,_wrapper,_expansion,_expansionChar) {
 							return Uize.Loc.Pseudo.pseudoLocalize (
 								_source,
 								{
 									accent:_accenting,
 									wordSplitter:_wordSplitterRegExp,
 									wrapper:_wrapper,
-									expansion:_expansionFactor,
+									expansion:_expansion,
 									expansionChar:_expansionChar
 								}
 							);
@@ -97,8 +97,8 @@ Uize.module ({
 				},
 				accenting:{value:true},
 				wrapper:{value:'[]'},
+				expansion:{value:1.3},
 				expansionChar:{value:'_'},
-				expansionFactor:{value:1.3},
 				sourceViewShown:{value:true},
 				resultViewShown:{value:true},
 
@@ -117,7 +117,7 @@ Uize.module ({
 			children:{
 				sourceViewButton:_buttonWidgetProperties,
 				resultViewButton:_buttonWidgetProperties,
-				expansionFactor:{
+				expansion:{
 					widgetClass:Uize.Widgets.Slider.Widget,
 					minValue:1,
 					maxValue:2,
@@ -154,19 +154,19 @@ Uize.module ({
 				resultViewButtonSelected:'->resultViewButton.selected',
 				loc_sourceViewButtonLabel:'->sourceViewButton.text',
 				loc_resultViewButtonLabel:'->resultViewButton.text',
-				expansionFactor:'expansionFactor.value'
+				expansion:'expansion.value'
 			},
 
 			htmlBindings:{
 				sourceViewShown:'sourceView:?',
 				resultViewShown:'resultView:?',
-				source:'source:value',
-				result:'result:value',
+				source:'source',
+				result:'result',
 				loc_accentingLabel:'accentingLabel',
 				accenting:'accenting',
 				loc_wrapperLabel:'wrapperLabel',
 				wrapper:'wrapper',
-				loc_expansionFactorLabel:'expansionFactorLabel',
+				loc_expansionLabel:'expansionLabel',
 				loc_expansionCharLabel:'expansionCharLabel',
 				expansionChar:'expansionChar'
 			},
