@@ -32,6 +32,10 @@
 
 	<div class="explanation">
 		<p>The <b>Pseudo-localizer</b> tool (which makes use of the <a href="../reference/Uize.Widgets.Tools.PseudoLocalizer.html"><code>Uize.Widgets.Tools.PseudoLocalizer</code></a> widget module) lets you experiment with the technique of pseudo-localiztion.</p>
+
+		<p>Pseudo-localization is a process of programmatically "translating" application text (typically English) to a pseudo-locale to aid in identifying i18n (internationalization) and L10n (localization) issues in the application. Pseudo-localization comprises the processes of accenting, expansion, and wrapping, which are applied to the source (untranslated) text to produce the pseudo-localized text. For more information on pseudo-localization, consult the reference for the <a href="../reference/Uize.Loc.Pseudo.html"><code>Uize.Loc.Pseudo</code></a> module.</p>
+
+		<p>This tool lets you customize the various pseudo-localization options that are supported by the <code>Uize.Loc.Pseudo</code> module and pseudo-localize any custom source text that you enter.</p>
 	</div>
 
 	<div id="page-pseudoLocalizer"></div>
@@ -42,7 +46,7 @@
 Uize.require (
 	[
 		'UizeSite.Page.Example',
-		'Uize.Widgets.Tools.PseudoLocalizer'
+		'Uize.Widgets.Tools.PseudoLocalizer.Widget'
 	],
 	function () {
 		'use strict';
@@ -53,7 +57,7 @@ Uize.require (
 		/*** add the pseudo-localizer widget ***/
 			page.addChild (
 				'pseudoLocalizer',
-				Uize.Widgets.Tools.PseudoLocalizer,
+				Uize.Widgets.Tools.PseudoLocalizer.Widget,
 				{
 					built:false,
 					source:[
