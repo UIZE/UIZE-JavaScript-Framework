@@ -33,6 +33,30 @@ Uize.module ({
 		return _superclass.subclass ({
 			omegastructor:function () {
 				this.addStateTestCase ({
+					source:[
+						'This is some text that should be pseudo-localized.',
+						'',
+						'Text may contain <span style="font-weight: bold;">HTML<span> tags, and the tags will not be pseudo-localized.',
+						'',
+						'Expansion is based on the character count of the pseudo-localizable words, and is not influenced by numbers (123456789.0123456789), or whitespace (        ) or punctuation (!?.,;:&-=[]).'
+					].join ('\n')
+				});
+				this.addStateCombinationTestCases ({
+					source:'This is some text that should be pseudo-localized.',
+					accenting:[false,true]
+				});
+				this.addStateCombinationTestCases ({
+					source:'This is some text that should be pseudo-localized.',
+					expansion:[1,1.3,2]
+				});
+				this.addStateCombinationTestCases ({
+					source:'This is some text that should be pseudo-localized.',
+					expansion:2,
+					expansionChar:['-','_-']
+				});
+				this.addStateCombinationTestCases ({
+					source:'foo',
+					wrapper:['<>','{{}}']
 				});
 			},
 
