@@ -1,0 +1,14 @@
+The new [[../examples/pseudo-localizer.html][Pseudo-localizer]] tool (which makes use of the =Uize.Widgets.Tools.PseudoLocalizer= widget module) lets you experiment with the technique of pseudo-localiztion.
+
+Pseudo-localization is a process of programmatically "translating" application text (typically English) to a pseudo-locale to aid in identifying i18n (internationalization) and L10n (localization) issues in the application. Pseudo-localization comprises the processes of accenting, expansion, and wrapping, which are applied to the source (untranslated) text to produce the pseudo-localized text. For more information on pseudo-localization, consult the reference for the =Uize.Loc.Pseudo= module.
+
+The new Pseudo-localizer tool lets you customize the various pseudo-localization options that are supported by the =Uize.Loc.Pseudo= module and pseudo-localize any custom source text that you enter.
+
+[[../examples/pseudo-localizer.html][CHECK IT OUT]]
+
+....................................................................................
+<< metadata >>
+
+title: 2014-12-09 - NEW TOOL: Pseudo-localizer
+....................................................................................
+
