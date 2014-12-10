@@ -391,6 +391,7 @@ Uize.module ({
 						_accent = _options.accent != _undefined ? _options.accent : true,
 						_expansion = Uize.toNumber (_options.expansion,1.3),
 						_expansionChar = _options.expansionChar != _undefined ? _options.expansionChar : '_',
+						_expansionCharLength = _expansionChar.length,
 						_wrapper = _options.wrapper != _undefined ? _options.wrapper : '[]',
 						_wrapperCenterPos = Math.ceil (_wrapper.length / 2),
 						_wrapperOpener = _wrapper.slice (0,_wrapperCenterPos),
@@ -415,7 +416,11 @@ Uize.module ({
 											_expansionCharsAdded
 										;
 										if (_charsToAddToWord) {
-											_stringSegment += _repeat (_expansionChar,_charsToAddToWord);
+											_stringSegment += _expansionCharLength > 1
+												? _repeat (_expansionChar,Math.ceil (_charsToAddToWord / _expansionCharLength))
+													.slice (0,_charsToAddToWord)
+												: _repeat (_expansionChar,_charsToAddToWord)
+											;
 											_expansionCharsAdded += _charsToAddToWord;
 										}
 									}
