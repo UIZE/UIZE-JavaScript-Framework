@@ -1,6 +1,10 @@
 .`` {
 }
 
+.`settings` {
+	margin: auto;
+}
+
 .`viewButtons` {
 	width: 100%;
 	white-space: nowrap;
