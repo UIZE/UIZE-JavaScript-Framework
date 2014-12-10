@@ -20,7 +20,7 @@
 	Introduction
 		The =Uize.Widgets.Tools.PseudoLocalizer.VisualTests= class implements a set of visual tests for the =Uize.Widgets.Tools.PseudoLocalizer.Widget= class.
 
-		*DEVELOPERS:* 
+		*DEVELOPERS:* `Chris van Rensburg`
 */
 
 Uize.module ({

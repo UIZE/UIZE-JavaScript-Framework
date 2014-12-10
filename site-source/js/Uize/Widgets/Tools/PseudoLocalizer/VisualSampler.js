@@ -20,7 +20,7 @@
 	Introduction
 		The =Uize.Widgets.Tools.PseudoLocalizer.VisualSampler= class implements a visual sampler widget for the =Uize.Widgets.Tools.PseudoLocalizer.Widget= class.
 
-		*DEVELOPERS:* 
+		*DEVELOPERS:* `Chris van Rensburg`
 */
 
 Uize.module ({
@@ -33,6 +33,13 @@ Uize.module ({
 		return _superclass.subclass ({
 			omegastructor:function () {
 				this.addSample ({
+					source:[
+						'This is some text that should be pseudo-localized.',
+						'',
+						'Text may contain <span style="font-weight: bold;">HTML<span> tags, and the tags will not be pseudo-localized.',
+						'',
+						'Expansion is based on the character count of the pseudo-localizable words, and is not influenced by numbers (123456789.0123456789), or whitespace (        ) or punctuation (!?.,;:&-=[]).'
+					].join ('\n')
 				});
 			},
 
