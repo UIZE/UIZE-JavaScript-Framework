@@ -27,7 +27,7 @@ Introduction
 
 			SYNTAX
 			..................................................................................
-			node [pathToUize]build.js Uize.Build.Loc project=[projectName] method=[methodName]
+			node [pathToUize]build.js Uize.Build.Loc method=[methodName] project=[projectName]
 			..................................................................................
 
 			Parameters
@@ -44,7 +44,7 @@ Introduction
 						EXAMPLES
 						......................................................................
 						node [pathToUize]build.js Uize.Build.Loc method=[methodName]
-						node [pathToUize]build.js Uize.Build.Loc project=* method=[methodName]
+						node [pathToUize]build.js Uize.Build.Loc method=[methodName] project=*
 						......................................................................
 
 				method
@@ -105,7 +105,7 @@ Localization Service Methods ~~ Localization Service Method
 
 		SYNTAX
 		.............................................................................
-		node [pathToUize]build.js Uize.Build.Loc project=[projectName] method=metrics
+		node [pathToUize]build.js Uize.Build.Loc method=metrics project=[projectName]
 		.............................................................................
 
 		Generates a Strings Metrics File
@@ -143,7 +143,7 @@ Localization Service Methods ~~ Localization Service Method
 
 		SYNTAX
 		............................................................................
-		node [pathToUize]build.js Uize.Build.Loc project=[projectName] method=export
+		node [pathToUize]build.js Uize.Build.Loc method=export project=[projectName]
 		............................................................................
 
 		The `master resource files` are output to the following paths...
@@ -191,7 +191,7 @@ Localization Service Methods ~~ Localization Service Method
 
 		SYNTAX
 		............................................................................
-		node [pathToUize]build.js Uize.Build.Loc project=[projectName] method=import
+		node [pathToUize]build.js Uize.Build.Loc method=import project=[projectName]
 		............................................................................
 
 		Executing the =import= method will have the effect of overwriting all the `codebase resource files` for the `pseudo-locale` and the translatable languages so that their contents reflects the contents of the `master resource files`. The =import= method will also create new codebase resource files, as necessary, if they did not previously exist.
@@ -209,7 +209,7 @@ Localization Service Methods ~~ Localization Service Method
 
 		SYNTAX
 		................................................................................
-		node [pathToUize]build.js Uize.Build.Loc project=[projectName] method=exportJobs
+		node [pathToUize]build.js Uize.Build.Loc method=exportJobs project=[projectName]
 		................................................................................
 
 		Parameters
@@ -220,7 +220,7 @@ Localization Service Methods ~~ Localization Service Method
 
 				SYNTAX
 				....................................................................................................
-				node [pathToUize]build.js Uize.Build.Loc project=[projectName] method=exportJobs filter=[filterName]
+				node [pathToUize]build.js Uize.Build.Loc method=exportJobs project=[projectName] filter=[filterName]
 				....................................................................................................
 
 				filterName
@@ -256,7 +256,7 @@ Localization Service Methods ~~ Localization Service Method
 
 		SYNTAX
 		................................................................................
-		node [pathToUize]build.js Uize.Build.Loc project=[projectName] method=importJobs
+		node [pathToUize]build.js Uize.Build.Loc method=importJobs project=[projectName]
 		................................................................................
 
 		Parameters
@@ -272,7 +272,7 @@ Localization Service Methods ~~ Localization Service Method
 
 		EXAMPLE
 		.......................................................................................
-		node [pathToUize]build.js Uize.Build.Loc project=[projectName] method=auditTranslations
+		node [pathToUize]build.js Uize.Build.Loc method=auditTranslations project=[projectName]
 		.......................................................................................
 
 		The =auditTranslations= method analyzes the resource strings for each of the `translatable languages` of the project, comparing them to the corresponding values from the `primary language` to detect potential issues of `inconsistent translations` and `identical translations`, and then writes a =.json= report file for each translatable language with a path of the form...
@@ -289,17 +289,50 @@ Localization Service Methods ~~ Localization Service Method
 
 				For more detailed information, consult the section `Performing Methods for a Filtered Set of Languages`.
 
-		For a more detailed discussion and information on the contents of the reports, consult the section `Translation Audit Reports`.
+		For a more detailed discussion and for information on the contents of the reports, consult the section `Translation Audit Reports`.
 
 		NOTES
 		- before executing the =auditTranslations= method, make sure that the `master resource files` are up-to-date by executing the =export= method, if necessary
+
+	diffLanguages
+		Performs a diff between the resource strings in the `master resource files` of the two specified languages.
+
+		EXAMPLE
+		.....................................................................................................
+		node [pathToUize]build.js Uize.Build.Loc method=diffLanguages project=... languageA=... languageB=...
+		.....................................................................................................
+
+		The =diffLanguages= method loads the resource strings from the `master resource files` for each of the two specified languages, performs a diff comparison of the resource strings for the two languages, and then writes =.json= and =.csv= report files containing details regarding the differences, with paths of the form...
+
+		............................................................................
+		[workingFolder]/[projectName]/language-diffs/[languageA]-vs-[languageB].json
+		[workingFolder]/[projectName]/language-diffs/[languageA]-vs-[languageB].csv
+		............................................................................
+
+		Parameters
+			The =diffLanguages= method supports the following parameters...
+
+			languageA
+				A locale code string, specifying the first of the two languages whose resource strings should be diffed.
+
+				The default value for this property, if not specified, is the locale code of the `primary language` configured for the project.
+
+			languageB
+				A locale code string, specifying the second of the two languages whose resource strings should be diffed.
+
+				The default value for this property, if not specified, is the locale code of the `primary language` configured for the project.
+
+		For a more detailed discussion and for information on the contents of the reports, consult the section `Language Diff Reports`.
+
+		NOTES
+		- before executing the =diffLanguages= method, make sure that the `master resource files` are up-to-date by executing the =export= method, if necessary
 
 	usage
 		Generates a `usage report file` for the project, containing information about resource string references in the project's code, along with an assessment of unreferenced strings.
 
 		SYNTAX
 		...........................................................................
-		node [pathToUize]build.js Uize.Build.Loc project=[projectName] method=usage
+		node [pathToUize]build.js Uize.Build.Loc method=usage project=[projectName]
 		...........................................................................
 
 		The =usage= method generates a JSON format usage report file with the path...
@@ -318,7 +351,7 @@ Localization Service Methods ~~ Localization Service Method
 
 		SYNTAX
 		.............................................................................
-		node [pathToUize]build.js Uize.Build.Loc project=[projectName] method=extract
+		node [pathToUize]build.js Uize.Build.Loc method=extract project=[projectName]
 		.............................................................................
 
 		This method can be useful for projects where developers typically create resource strings by first referencing them in translation calls in the code, rather than by first creating entries in resource files.
@@ -654,7 +687,7 @@ Advanced Topics
 
 		EXAMPLE
 		........................................................................................
-		node [pathToUize]build.js Uize.Build.Loc project=Foo method=export languages=fr-FR,fr-CA
+		node [pathToUize]build.js Uize.Build.Loc method=export project=Foo languages=fr-FR,fr-CA
 		........................................................................................
 
 		In the above example, the =export= method's operation will be performed for just the "fr-FR" (French French) and "fr-CA" (Canadian French) languages, even though the "Foo" project may support a larger set of translatable languages.
@@ -785,7 +818,7 @@ Advanced Topics
 			The values of the non-translatable strings of a project can be initialized by executing the =export= command and specifying one of the supported initialization modes using the =initNonTranslatable= parameter.
 
 			...........................................................................................................
-			node [pathToUize]build.js Uize.Build.Loc project=[projectName] method=export initNonTranslatable=[initMode]
+			node [pathToUize]build.js Uize.Build.Loc method=export project=[projectName] initNonTranslatable=[initMode]
 			...........................................................................................................
 
 			The non-translatable strings initialized in this way will then be updated in the `codebase resource files` during the next =import= operation.
@@ -795,7 +828,7 @@ Advanced Topics
 
 		EXAMPLE
 		.............................................................................
-		node [pathToUize]build.js Uize.Build.Loc project=[projectName] method=metrics
+		node [pathToUize]build.js Uize.Build.Loc method=metrics project=[projectName]
 		.............................................................................
 
 		The =metrics= method analyzes the primary language resource strings for a project and writes a =.json= file to the following path...
@@ -834,7 +867,7 @@ Advanced Topics
 
 		EXAMPLE
 		.......................................................................................
-		node [pathToUize]build.js Uize.Build.Loc project=[projectName] method=auditTranslations
+		node [pathToUize]build.js Uize.Build.Loc method=auditTranslations project=[projectName]
 		.......................................................................................
 
 		The =auditTranslations= method analyzes the resource strings for each of the `translatable languages` of the project, comparing them to the corresponding values from the `primary language` to detect potential issues of `inconsistent translations` and `identical translations`, and then writes a =.json= report file for each translatable language with a path of the form...
@@ -984,6 +1017,9 @@ Advanced Topics
 				....................................
 
 				In this example, the inconsistent French translations are legititate because the word "Call" is used as a verb in the first case (translated to "Appeler") and as a noun in the second (translated to "Appel").
+
+	Language Diff Reports ~~ Language Diff Report
+		.
 
 	### Different Classes of Files
 		Codebase Resource Files ~~ Codebase Resource File
