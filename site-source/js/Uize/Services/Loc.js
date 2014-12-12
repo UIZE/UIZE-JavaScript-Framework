@@ -153,6 +153,25 @@ Uize.module ({
 					*/
 				},
 
+				diffLanguages:{
+					async:_true
+					/*?
+						Instance Methods
+							diffLanguages
+								Performs a diff between the resource strings of the two specified languages.
+
+								Parameters
+									languageA
+										A locale code string, specifying the first of the two languages whose resource strings should be diffed.
+
+									languageB
+										A locale code string, specifying the second of the two languages whose resource strings should be diffed.
+
+								NOTES
+								- this service method is asynchronous
+					*/
+				},
+
 				about:{
 					async:_false
 					/*?

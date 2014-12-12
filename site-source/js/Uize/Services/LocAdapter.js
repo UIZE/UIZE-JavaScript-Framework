@@ -1636,6 +1636,104 @@ Uize.module ({
 					_callback ();
 				},
 
+				diffLanguages:function (_params,_callback) {
+					var
+						m = this,
+						_project = m.project,
+						_primaryLanguage = _project.primaryLanguage,
+						_languageA = _params.languageA || _primaryLanguage,
+						_languageB = _params.languageB || _primaryLanguage
+					;
+					m.prepareToExecuteMethod (5);
+
+					/*** load resources for language A ***/
+						var _languageAResources = _readLanguageResourcesFile (m,_languageA);
+						m.stepCompleted ('Loaded resources for ' + _languageA + ' (language A)');
+
+					/*** load resources for language B ***/
+						var _languageBResources = _readLanguageResourcesFile (m,_languageB);
+						m.stepCompleted ('Loaded resources for ' + _languageB + ' (language B)');
+
+					/*** perform diff between resources of language A and language B ***/
+						var _diffReport = [];
+						Uize.Data.Diff.diff (
+							_languageAResources,
+							_languageBResources,
+							function (_languageAString,_languageBString,_path) {
+								if (
+									!_languageAString ||
+									!_languageBString ||
+									_languageAString.value !== _languageBString.value
+								) {
+									var
+										_languageAValue = (_languageAString || _sacredEmptyObject).value || '',
+										_languageBValue = (_languageBString || _sacredEmptyObject).value || ''
+									;
+									_diffReport.push ({
+										key:_path [_path.length - 1],
+										path:_path.concat (),
+										languageAValue:_languageAValue,
+										languageBValue:_languageBValue,
+										difference:!_languageAString || !_languageAValue
+											? 'missing in A'
+											: !_languageBString || !_languageBValue
+												? 'missing in B'
+												: 'different'
+									});
+								}
+							}
+						);
+						m.stepCompleted (
+							'Performed diff between ' + _languageA + ' (language A) and ' + _languageB + ' (language B)'
+						);
+
+					/*** write the diff report files ***/
+						var
+							_diffFilePath = m._workingFolderPath + 'language-diffs/' + _languageA + '-vs-' + _languageB,
+							_diffJsonFilePath = _diffFilePath + '.json',
+							_diffCsvFilePath = _diffFilePath + '.csv'
+						;
+
+						/*** generate and write a JSON file version ***/
+							_fileSystem.writeFile ({path:_diffJsonFilePath,contents:Uize.Json.to (_diffReport)});
+							m.stepCompleted ('Generated JSON diff report at ' + _diffJsonFilePath);
+
+						/*** generate and write a flat CSV file version ***/
+							_fileSystem.writeFile ({
+								path:_diffCsvFilePath,
+								contents:Uize.Data.Csv.to (
+									Uize.map (
+										_diffReport,
+										function (_stringDiff) {
+											var _path = _stringDiff.path;
+											return [
+												_path [0],
+												_stringDiff.key,
+												_serializeStringPath (_path),
+												_stringDiff.difference,
+												_stringDiff.languageAValue,
+												_stringDiff.languageBValue
+											];
+										}
+									),
+									{
+										hasHeader:true,
+										columns:[
+											'Resource File',
+											'Key',
+											'Path',
+											'Difference',
+											'Language A Value',
+											'Language B Value'
+										]
+									}
+								)
+							});
+							m.stepCompleted ('Generated CSV diff report at ' + _diffCsvFilePath);
+
+					_callback ();
+				},
+
 				about:function (_params,_callback) {
 					var _project = this.project;
 					console.log (
