@@ -27,6 +27,7 @@ Uize.module ({
 	name:'Uize.Loc.Strings.Util',
 	required:[
 		'Uize.Data.Diff',
+		'Uize.Data.Csv',
 		'Uize.Json'
 	],
 	builder:function () {
@@ -43,24 +44,44 @@ Uize.module ({
 
 		return Uize.package ({
 			initNonTranslatable:function (
-				_translatableLanguageStrings,_primaryLanguageStrings,_initNonTranslatable,_isTranslatableString
+				_translatableLanguageStrings,_primaryLanguageStrings,_initMode,_isTranslatableString
 			) {
-				var _initNonTranslatableParts = (
+				var _initModeParts = (
 					{
 						never:',never,',
 						primary:'non-translatable,always,primary',
 						blank:'non-translatable,always,blank',
 						'primary-if-blank':'non-translatable,if-blank,primary'
-					} [_initNonTranslatable || 'primary-if-blank'] || _initNonTranslatable
+					} [_initMode || 'primary-if-blank'] || _initMode
 				).split (',');
 				return _initValues (
 					_translatableLanguageStrings,
 					_primaryLanguageStrings,
-					_initNonTranslatableParts [0],
-					_initNonTranslatableParts [1],
-					_initNonTranslatableParts [2],
+					_initModeParts [0],
+					_initModeParts [1],
+					_initModeParts [2],
 					_isTranslatableString
 				);
+				/*?
+					Static Methods
+						Uize.Loc.Strings.Util.initNonTranslatable
+							Lets you initialize the non-translatable strings in a project resource strings object.
+
+							SYNTAX
+							...................................................................
+							initializedStringsOBJ = Uize.Loc.Strings.Util.initNonTranslatable (
+								translatableLanguageStringsOBJ,
+								primaryLanguageStringsOBJ,
+								initModeSTR,
+								isTranslatableStringFUNC
+							);
+							...................................................................
+
+							The =Uize.Loc.Strings.Util.initNonTranslatable= method is essentially a specialized usage of the more versatile =Uize.Loc.Strings.Util.initValues= static method.
+
+							NOTES
+							- compare to the related =Uize.Loc.Strings.Util.initValues= static method
+				*/
 			},
 
 			initValues:_initValues = function (
@@ -96,13 +117,59 @@ Uize.module ({
 						{skeleton:true}
 					);
 				}
+				/*?
+					Static Methods
+						Uize.Loc.Strings.Util.initValues
+							Lets you initialize strings in a project resource strings object, with versatile options that make it possible to achieve a variety of different initialization behaviors.
+
+							SYNTAX
+							..........................................................
+							initializedStringsOBJ = Uize.Loc.Strings.Util.initValues (
+								translatableLanguageStringsOBJ,
+								primaryLanguageStringsOBJ,
+								initWhatSTR,
+								initWhenSTR,
+								initToSTR,
+								isTranslatableStringFUNC
+							);
+							..........................................................
+
+							NOTES
+							- compare to the related =Uize.Loc.Strings.Util.initNonTranslatable= static method
+				*/
 			},
 
 			serializeStringPath:_serializeStringPath = function (_path) {
 				return Uize.Json.to (_path,'mini');
+				/*?
+					Static Methods
+						Uize.Loc.Strings.Util.serializeStringPath
+							Returns a string, representing the serialized form of the specified string path array.
+
+							SYNTAX
+							......................................................................................
+							serializedStringPathSTR = Uize.Loc.Strings.Util.serializeStringPath (stringPathARRAY);
+							......................................................................................
+
+							NOTES
+							- see the companion =Uize.Loc.Strings.Util.parseStringPath= static method
+				*/
 			},
 
 			parseStringPath:Uize.Json.from,
+				/*?
+					Static Methods
+						Uize.Loc.Strings.Util.parseStringPath
+							Returns an array, representing the string path array parsed from the specified serialized string path.
+
+							SYNTAX
+							..................................................................................
+							stringPathARRAY = Uize.Loc.Strings.Util.parseStringPath (serializedStringPathSTR);
+							..................................................................................
+
+							NOTES
+							- see the companion =Uize.Loc.Strings.Util.serializeStringPath= static method
+				*/
 
 			removeEmptyStrings:function (_strings) {
 				return Uize.Data.Diff.diff (
@@ -110,6 +177,16 @@ Uize.module ({
 					{},
 					function (_string) {return _string.value === '' ? undefined : _string}
 				);
+				/*?
+					Static Methods
+						Uize.Loc.Strings.Util.removeEmptyStrings
+							Returns a new project resource strings object, being the specified project resource strings object with all empty strings removed.
+
+							SYNTAX
+							.........................................................................
+							prunedStringsOBJ = Uize.Loc.Strings.Util.removeEmptyStrings (stringsOBJ);
+							.........................................................................
+				*/
 			},
 
 			pseudoLocalizeResources:function (_primaryLanguageResources,_isTranslatableString,_pseudoLocalizeString) {
@@ -125,6 +202,20 @@ Uize.module ({
 					},
 					{skeleton:true}
 				);
+				/*?
+					Static Methods
+						Uize.Loc.Strings.Util.pseudoLocalizeResources
+							Returns a new project resource strings object, being the specified project resource strings object with all translatable strings pseudo-localized.
+
+							SYNTAX
+							...........................................................................
+							pseudoLocalizedStringsOBJ = Uize.Loc.Strings.Util.pseudoLocalizeResources (
+								stringsOBJ,
+								isTranslatableStringFUNC,
+								pseudoLocalizeStringFUNC
+							);
+							...........................................................................
+				*/
 			},
 
 			stringsMetricsFromStringsInfo:function (_stringsInfo) {
@@ -263,6 +354,98 @@ Uize.module ({
 					wordCountHistogram:_wordCountHistogram,
 					charCountHistogram:_charCountHistogram
 				};
+				/*?
+					Static Methods
+						Uize.Loc.Strings.Util.stringsMetricsFromStringsInfo
+							Returns a strings metrics object, containing metrics information produced by an analysis of the specified strings info array.
+
+							SYNTAX
+							...................................................................................................
+							pseudoLocalizedStringsOBJ = Uize.Loc.Strings.Util.stringsMetricsFromStringsInfo (stringsInfoARRAY);
+							...................................................................................................
+				*/
+			},
+
+			diffResources:function (_resourcesA,_resourcesB) {
+				var _resourcesDiff = [];
+				Uize.Data.Diff.diff (
+					_resourcesA,
+					_resourcesB,
+					function (_languageAString,_languageBString,_path) {
+						if (
+							!_languageAString ||
+							!_languageBString ||
+							_languageAString.value !== _languageBString.value
+						) {
+							var
+								_languageAValue = (_languageAString || _sacredEmptyObject).value || '',
+								_languageBValue = (_languageBString || _sacredEmptyObject).value || ''
+							;
+							_resourcesDiff.push ({
+								key:_path [_path.length - 1],
+								path:_path.concat (),
+								languageAValue:_languageAValue,
+								languageBValue:_languageBValue,
+								difference:!_languageAString || !_languageAValue
+									? 'missing in A'
+									: !_languageBString || !_languageBValue
+										? 'missing in B'
+										: 'different'
+							});
+						}
+					}
+				);
+				return _resourcesDiff;
+				/*?
+					Static Methods
+						Uize.Loc.Strings.Util.diffResources
+							Returns a strings diff array, containing string diff objects for every string for which there are differences between the two specified project resource strings objects.
+
+							SYNTAX
+							.................................................................................
+							stringsDiffARRAY = Uize.Loc.Strings.Util.diffResources (stringsAOBJ,stringsBOBJ);
+							.................................................................................
+				*/
+			},
+
+			resourcesDiffAsCsv:function (_resourcesDiff) {
+				return Uize.Data.Csv.to (
+					Uize.map (
+						_resourcesDiff,
+						function (_stringDiff) {
+							var _path = _stringDiff.path;
+							return [
+								_path [0],
+								_stringDiff.key,
+								_serializeStringPath (_path),
+								_stringDiff.difference,
+								_stringDiff.languageAValue,
+								_stringDiff.languageBValue
+							];
+						}
+					),
+					{
+						hasHeader:true,
+						columns:[
+							'Resource File',
+							'Key',
+							'Path',
+							'Difference',
+							'Value in A',
+							'Value in B'
+						]
+					}
+				);
+				/*?
+					Static Methods
+						Uize.Loc.Strings.Util.resourcesDiffAsCsv
+							Returns a strings, being the specified strings diff array serialized to CSV format.
+
+							SYNTAX
+							..................................................................................
+							stringsDiffAsCsvSTR = Uize.Loc.Strings.Util.resourcesDiffAsCsv (stringsDiffARRAY);
+							..................................................................................
+				*/
 			}
 		});
 	}

@@ -1655,79 +1655,24 @@ Uize.module ({
 						m.stepCompleted ('Loaded resources for ' + _languageB + ' (language B)');
 
 					/*** perform diff between resources of language A and language B ***/
-						var _diffReport = [];
-						Uize.Data.Diff.diff (
-							_languageAResources,
-							_languageBResources,
-							function (_languageAString,_languageBString,_path) {
-								if (
-									!_languageAString ||
-									!_languageBString ||
-									_languageAString.value !== _languageBString.value
-								) {
-									var
-										_languageAValue = (_languageAString || _sacredEmptyObject).value || '',
-										_languageBValue = (_languageBString || _sacredEmptyObject).value || ''
-									;
-									_diffReport.push ({
-										key:_path [_path.length - 1],
-										path:_path.concat (),
-										languageAValue:_languageAValue,
-										languageBValue:_languageBValue,
-										difference:!_languageAString || !_languageAValue
-											? 'missing in A'
-											: !_languageBString || !_languageBValue
-												? 'missing in B'
-												: 'different'
-									});
-								}
-							}
-						);
+						var _languagesDiff = Uize.Loc.Strings.Util.diffResources (_languageAResources,_languageBResources);
 						m.stepCompleted (
 							'Performed diff between ' + _languageA + ' (language A) and ' + _languageB + ' (language B)'
 						);
 
 					/*** write the diff report files ***/
-						var
-							_diffFilePath = m._workingFolderPath + 'language-diffs/' + _languageA + '-vs-' + _languageB,
-							_diffJsonFilePath = _diffFilePath + '.json',
-							_diffCsvFilePath = _diffFilePath + '.csv'
-						;
+						var _diffFilePath = m._workingFolderPath + 'language-diffs/' + _languageA + '-vs-' + _languageB;
 
 						/*** generate and write a JSON file version ***/
-							_fileSystem.writeFile ({path:_diffJsonFilePath,contents:Uize.Json.to (_diffReport)});
+							var _diffJsonFilePath = _diffFilePath + '.json';
+							_fileSystem.writeFile ({path:_diffJsonFilePath,contents:Uize.Json.to (_languagesDiff)});
 							m.stepCompleted ('Generated JSON diff report at ' + _diffJsonFilePath);
 
 						/*** generate and write a flat CSV file version ***/
+							var _diffCsvFilePath = _diffFilePath + '.csv';
 							_fileSystem.writeFile ({
 								path:_diffCsvFilePath,
-								contents:Uize.Data.Csv.to (
-									Uize.map (
-										_diffReport,
-										function (_stringDiff) {
-											var _path = _stringDiff.path;
-											return [
-												_path [0],
-												_stringDiff.key,
-												_serializeStringPath (_path),
-												_stringDiff.difference,
-												_stringDiff.languageAValue,
-												_stringDiff.languageBValue
-											];
-										}
-									),
-									{
-										hasHeader:true,
-										columns:[
-											'Resource File',
-											'Key',
-											'Path',
-											'Difference',
-											'Language A Value',
-											'Language B Value'
-										]
-									}
-								)
+								contents:Uize.Loc.Strings.Util.resourcesDiffAsCsv (_languagesDiff)
 							});
 							m.stepCompleted ('Generated CSV diff report at ' + _diffCsvFilePath);
 
