@@ -371,24 +371,24 @@ Uize.module ({
 				Uize.Data.Diff.diff (
 					_resourcesA,
 					_resourcesB,
-					function (_languageAString,_languageBString,_path) {
+					function (_resourcesAString,_resourcesBString,_path) {
 						if (
-							!_languageAString ||
-							!_languageBString ||
-							_languageAString.value !== _languageBString.value
+							!_resourcesAString ||
+							!_resourcesBString ||
+							_resourcesAString.value !== _resourcesBString.value
 						) {
 							var
-								_languageAValue = (_languageAString || _sacredEmptyObject).value || '',
-								_languageBValue = (_languageBString || _sacredEmptyObject).value || ''
+								_valueInA = (_resourcesAString || _sacredEmptyObject).value || '',
+								_valueInB = (_resourcesBString || _sacredEmptyObject).value || ''
 							;
 							_resourcesDiff.push ({
 								key:_path [_path.length - 1],
 								path:_path.concat (),
-								languageAValue:_languageAValue,
-								languageBValue:_languageBValue,
-								difference:!_languageAString || !_languageAValue
+								valueInA:_valueInA,
+								valueInB:_valueInB,
+								difference:!_resourcesAString || !_valueInA
 									? 'missing in A'
-									: !_languageBString || !_languageBValue
+									: !_resourcesBString || !_valueInB
 										? 'missing in B'
 										: 'different'
 							});
@@ -419,8 +419,8 @@ Uize.module ({
 								_stringDiff.key,
 								_serializeStringPath (_path),
 								_stringDiff.difference,
-								_stringDiff.languageAValue,
-								_stringDiff.languageBValue
+								_stringDiff.valueInA,
+								_stringDiff.valueInB
 							];
 						}
 					),
