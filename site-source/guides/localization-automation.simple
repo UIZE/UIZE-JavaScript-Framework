@@ -1019,7 +1019,97 @@ Advanced Topics
 				In this example, the inconsistent French translations are legititate because the word "Call" is used as a verb in the first case (translated to "Appeler") and as a noun in the second (translated to "Appel").
 
 	Language Diff Reports ~~ Language Diff Report
-		.
+		A language diff report can be produced for a project by using the =diffLanguages= `localization service method`.
+
+		EXAMPLE
+		.....................................................................................................
+		node [pathToUize]build.js Uize.Build.Loc method=diffLanguages project=... languageA=... languageB=...
+		.....................................................................................................
+
+		The =diffLanguages= method loads the resource strings from the `master resource files` for each of the two specified languages, performs a diff comparison of the resource strings for the two languages, and then writes =.json= and =.csv= report files containing details regarding the differences, with paths of the form...
+
+		............................................................................
+		[workingFolder]/[projectName]/language-diffs/[languageA]-vs-[languageB].json
+		[workingFolder]/[projectName]/language-diffs/[languageA]-vs-[languageB].csv
+		............................................................................
+
+		Investigating Drift
+			Language diff reports may be useful in situations where you suspect that string values may have drifted in an undesirable way between two regional variants of a language, such as between US English (en-US) and British English (en-GB).
+
+			In one example, undesirable drift may occur if process is not followed correctly and changes are made directly in the resource strings for one regional variant of a language and those changes are not replicated in other regional variants of that same language, particularly if the values were identical beforehand and no longer are after the change.
+
+		Difference Types
+			Language diff reports are very straightforward and describe just three types of differences...
+
+			- ='missing in A'= - the string is missing or empty for language A, but present and non-empty for language B
+			- ='missing in B'= - the string is missing or empty for language B, but present and non-empty for language A
+			- ='different'= - the string is present and non-empty for both language A and language B, but the values differ
+
+		Language Diff Report Contents
+			When you execute the =diffLanguages= method, two different format report files are written to the "language-diffs" folder: one JSON format file, and one CSV format file.
+
+			- *.json* - The JSON format file contains an array of string diff objects for all strings that have differences, where each string diff object contains the properties =key=, =path=, =valueInA=, =valueInB=, and =difference=.
+			- *.csv* - The CSV format file contains a table of rows for all of the strings that have differences, where each row contains columns that represent a flattened version of the string diff object for a string.
+
+			Both of these two diff report files contain the same information, but expressed slightly differently. The CSV file is particularly easy to "consume" and can be loaded up in any spreadsheet editor (such as Google Sheets) that correctly supports the CSV format's ability to have quoted field values that contain line breaks (some of your resource strings may contain line break characters). Once loaded into a spreadsheet tool, the spreadsheet can be sorted by the "Difference" column or filtered by the difference type you are interested in.
+
+			JSON Format Diff Report
+
+				..................
+				[
+					stringDiff0OBJ,
+					stringDiff1OBJ,
+					...,
+					stringDiffNOBJ
+				]
+				..................
+
+				.............................................................................
+				{
+					key:keySTR,
+					path:pathARRAY,
+					valueInA:valueInASTR,
+					valueInB:valueInBSTR,
+					difference:differenceSTR  // 'different' | 'missing in A' | 'missing in B'
+				}
+				.............................................................................
+
+				EXAMPLE
+				..........................................
+				[
+					{
+						key:'label',
+						path:[
+							'strings.js',
+							'colorPicker',
+							'label'
+						],
+						valueInA:'color',
+						valueInB:'colour',
+						difference:'different'
+					},
+					{
+						key:'tooltip',
+						path:[
+							'strings.js',
+							'colorPicker',
+							'tooltip'
+						],
+						valueInA:'Click to choose a color.',
+						valueInB:'',
+						difference:'missing in B'
+					}
+				]
+				..........................................
+
+			CSV Format Diff Report
+
+				CSV EXAMPLE
+				..................................................................................................
+				Resource File,Key,Path,Difference,Value in A,Value in B
+				strings.js,label,"['strings.js','colorPicker','label']",different,color,colour
+				strings.js,tooltip,"['strings.js','colorPicker','tooltip']",missing in B,Click to choose a color.,
+				..................................................................................................
 
 	### Different Classes of Files
 		Codebase Resource Files ~~ Codebase Resource File
