@@ -39,6 +39,7 @@ Uize.module ({
 		'Uize.Widgets.Tools.PseudoLocalizer.Html',
 		'Uize.Widgets.Tools.PseudoLocalizer.Css',
 		'Uize.Widgets.Button.Widget',
+		'Uize.Widgets.Button.Toggle.OnOff.Widget',
 		'Uize.Loc.Pseudo',
 		'Uize.Util.RegExpComposition',
 		'Uize.Widgets.Slider.Widget'
@@ -117,6 +118,7 @@ Uize.module ({
 			children:{
 				sourceViewButton:_buttonWidgetProperties,
 				resultViewButton:_buttonWidgetProperties,
+				accenting:{widgetClass:Uize.Widgets.Button.Toggle.OnOff.Widget},
 				expansion:{
 					widgetClass:Uize.Widgets.Slider.Widget,
 					minValue:1,
@@ -138,9 +140,6 @@ Uize.module ({
 				'#source:keyup':function (_event) {
 					this.set ({source:_event.target.value});
 				},
-				'#accenting:click':function () {
-					this.toggle ('accenting');
-				},
 				'#wrapper:keyup':function (_event) {
 					this.set ({wrapper:_event.target.value});
 				},
@@ -154,6 +153,7 @@ Uize.module ({
 				resultViewButtonSelected:'->resultViewButton.selected',
 				loc_sourceViewButtonLabel:'->sourceViewButton.text',
 				loc_resultViewButtonLabel:'->resultViewButton.text',
+				accenting:'accenting.selected',
 				expansion:'expansion.value'
 			},
 

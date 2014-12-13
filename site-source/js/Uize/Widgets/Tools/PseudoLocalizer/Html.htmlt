@@ -2,7 +2,7 @@
 	<table class="settings">
 		<tr>
 			<td id="accentingLabel"></td>
-			<td><input id="accenting" type="checkbox"/></td>
+			<td><child name="accenting" size="tiny"/></td>
 		</tr>
 		<tr>
 			<td id="wrapperLabel"></td>
