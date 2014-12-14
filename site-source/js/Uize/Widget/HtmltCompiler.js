@@ -56,7 +56,8 @@ Uize.module ({
 				_trueFlag = {},
 				_tagsThatSupportValueLookup = {
 					option:_trueFlag,
-					input:_trueFlag
+					input:_trueFlag,
+					select:_trueFlag
 				}
 		;
 
@@ -240,7 +241,7 @@ Uize.module ({
 												}
 
 											if (_bindingType == 'value') {
-												if (_tagsThatSupportValueLookup [_tagName]) {
+												if (_tagsThatSupportValueLookup [_tagName] == _trueFlag) {
 													if (_tagName == 'input') {
 														var _inputType = _getAttributeValue (_node,'type');
 														if (_inputType == 'text') {
