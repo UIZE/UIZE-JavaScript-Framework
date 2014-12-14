@@ -38,22 +38,16 @@ Uize.module ({
 	required:[
 		'Uize.Widgets.Tools.PseudoLocalizer.Html',
 		'Uize.Widgets.Tools.PseudoLocalizer.Css',
-		'Uize.Widgets.Button.Widget',
 		'Uize.Widgets.Button.Toggle.OnOff.Widget',
+		'Uize.Widgets.Slider.Widget',
+		'Uize.Widgets.Tools.SourceVsResult.Widget',
 		'Uize.Loc.Pseudo',
-		'Uize.Util.RegExpComposition',
-		'Uize.Widgets.Slider.Widget'
+		'Uize.Util.RegExpComposition'
 	],
 	builder:function (_superclass) {
 		'use strict';
 
 		var
-			/*** Variables for Scruncher Optimization ***/
-				_buttonWidgetProperties = {
-					widgetClass:Uize.Widgets.Button.Widget,
-					allowClickWhenSelected:true
-				},
-
 			/*** General Variables ***/
 				_wordSplitterRegExpComposition = Uize.Util.RegExpComposition ({
 					punctuation:/[\?!\.;,&=\-\(\)\[\]"]/,
@@ -79,45 +73,32 @@ Uize.module ({
 
 			stateProperties:{
 				source:{value:''},
-				result:{
-					derived:{
-						properties:['source','accenting','wrapper','expansion','expansionChar'],
-						derivation:function (_source,_accenting,_wrapper,_expansion,_expansionChar) {
-							return Uize.Loc.Pseudo.pseudoLocalize (
-								_source,
-								{
-									accent:_accenting,
-									wordSplitter:_wordSplitterRegExp,
-									wrapper:_wrapper,
-									expansion:_expansion,
-									expansionChar:_expansionChar
-								}
-							);
-						}
-					}
-				},
 				accenting:{value:true},
 				wrapper:{value:'[]'},
 				expansion:{value:1.3},
 				expansionChar:{value:'_'},
-				sourceViewShown:{value:true},
-				resultViewShown:{value:true},
 
 				/*** derived properties ***/
-					sourceViewButtonSelected:{
-						derived:'sourceViewShown,resultViewShown: sourceViewShown && !resultViewShown'
-					},
-					resultViewButtonSelected:{
-						derived:'sourceViewShown,resultViewShown: resultViewShown && !sourceViewShown'
-					},
-					splitView:{
-						derived:'sourceViewShown,resultViewShown: sourceViewShown && resultViewShown'
+					result:{
+						derived:{
+							properties:['source','accenting','wrapper','expansion','expansionChar'],
+							derivation:function (_source,_accenting,_wrapper,_expansion,_expansionChar) {
+								return Uize.Loc.Pseudo.pseudoLocalize (
+									_source,
+									{
+										accent:_accenting,
+										wordSplitter:_wordSplitterRegExp,
+										wrapper:_wrapper,
+										expansion:_expansion,
+										expansionChar:_expansionChar
+									}
+								);
+							}
+						}
 					}
 			},
 
 			children:{
-				sourceViewButton:_buttonWidgetProperties,
-				resultViewButton:_buttonWidgetProperties,
 				accenting:{widgetClass:Uize.Widgets.Button.Toggle.OnOff.Widget},
 				expansion:{
 					widgetClass:Uize.Widgets.Slider.Widget,
@@ -125,21 +106,11 @@ Uize.module ({
 					maxValue:2,
 					increments:0,
 					orientation:'horizontal'
-				}
+				},
+				sourceVsResult:{widgetClass:Uize.Widgets.Tools.SourceVsResult.Widget}
 			},
 
 			eventBindings:{
-				'sourceViewButton:Click':function () {
-					this.set ({sourceViewShown:true});
-					this.toggle ('resultViewShown');
-				},
-				'resultViewButton:Click':function () {
-					this.set ({resultViewShown:true});
-					this.toggle ('sourceViewShown');
-				},
-				'#source:keyup':function (_event) {
-					this.set ({source:_event.target.value});
-				},
 				'#wrapper:keyup':function (_event) {
 					this.set ({wrapper:_event.target.value});
 				},
@@ -149,30 +120,21 @@ Uize.module ({
 			},
 
 			childBindings:{
-				sourceViewButtonSelected:'->sourceViewButton.selected',
-				resultViewButtonSelected:'->resultViewButton.selected',
-				loc_sourceViewButtonLabel:'->sourceViewButton.text',
-				loc_resultViewButtonLabel:'->resultViewButton.text',
+				loc_sourceViewButtonLabel:'->sourceVsResult.sourceViewButtonLabel',
+				loc_resultViewButtonLabel:'->sourceVsResult.resultViewButtonLabel',
+				source:'sourceVsResult.source',
+				result:'->sourceVsResult.result',
 				accenting:'accenting.selected',
 				expansion:'expansion.value'
 			},
 
 			htmlBindings:{
-				sourceViewShown:'sourceView:?',
-				resultViewShown:'resultView:?',
-				source:'source',
-				result:'result',
 				loc_accentingLabel:'accentingLabel',
-				accenting:'accenting',
 				loc_wrapperLabel:'wrapperLabel',
 				wrapper:'wrapper',
 				loc_expansionLabel:'expansionLabel',
 				loc_expansionCharLabel:'expansionCharLabel',
 				expansionChar:'expansionChar'
-			},
-
-			cssBindings:{
-				splitView:['','splitView']
 			}
 		});
 	}

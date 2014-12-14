@@ -1,0 +1,61 @@
+.`` {
+}
+
+.`viewButtons` {
+	width: 100%;
+	white-space: nowrap;
+}
+
+.`viewButton` {
+	box-sizing: border-box;
+	width: 50%;
+	margin: 0;
+	text-align: center;
+	float: left;
+}
+
+.`views` {
+	position: relative;
+	box-sizing: border-box;
+	width: 100%;
+	height: 300px;
+	border: 1px solid #ccc;
+}
+
+.`view` {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+}
+
+.`view` .`textareaShell` {
+	position: absolute;
+	left: 4px;
+	top: 4px;
+	right: 4px;
+	bottom: 4px;
+}
+
+.`view` textarea {
+	position: absolute;
+	box-sizing: border-box;
+	font-family: Arial;
+	font-size: 14px;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+}
+
+.`sourceView` {
+	left: 0;
+}
+
+.`resultView` {
+	right: 0;
+}
+
+.`splitView` .`view` {
+	width: 50%;
+}
