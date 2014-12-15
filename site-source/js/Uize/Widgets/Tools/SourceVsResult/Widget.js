@@ -67,6 +67,7 @@ Uize.module ({
 				resultViewShown:{value:true},
 				sourceViewButtonLabel:{value:''},
 				resultViewButtonLabel:{value:''},
+				twoWay:{value:false},
 
 				/*** derived properties ***/
 					sourceViewButtonSelected:{
@@ -77,6 +78,9 @@ Uize.module ({
 					},
 					splitView:{
 						derived:'sourceViewShown,resultViewShown: sourceViewShown && resultViewShown'
+					},
+					resultViewReadOnly:{
+						derived:'!twoWay'
 					}
 			},
 
@@ -96,6 +100,9 @@ Uize.module ({
 				},
 				'#source:keyup':function (_event) {
 					this.set ({source:_event.target.value});
+				},
+				'#result:keyup':function (_event) {
+					this.twoWay && this.set ({result:_event.target.value});
 				}
 			},
 
@@ -109,6 +116,7 @@ Uize.module ({
 			htmlBindings:{
 				sourceViewShown:'sourceView:?',
 				resultViewShown:'resultView:?',
+				resultViewReadOnly:'result:readOnly',
 				source:'source',
 				result:'result'
 			},

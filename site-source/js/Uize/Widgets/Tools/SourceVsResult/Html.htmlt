@@ -9,7 +9,7 @@
 			<div class="textareaShell"><textarea id="source"></textarea></div>
 		</div>
 		<div id="resultView" class="view resultView">
-			<div class="textareaShell"><textarea id="result" readonly="readonly"></textarea></div>
+			<div class="textareaShell"><textarea id="result"></textarea></div>
 		</div>
 	</div>
 </div>
