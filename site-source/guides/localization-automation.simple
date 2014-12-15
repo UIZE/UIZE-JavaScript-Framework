@@ -1038,7 +1038,7 @@ Advanced Topics
 
 			In one example, undesirable drift may occur if process is not followed correctly and changes are made directly in the resource strings for one regional variant of a language and those changes are not replicated in other regional variants of that same language, particularly if the values were identical beforehand and no longer are after the change.
 
-		Difference Types
+		Difference Types ~~ Difference Type
 			Language diff reports are very straightforward and describe just three types of differences...
 
 			- ='missing in A'= - the string is missing or empty for language A, but present and non-empty for language B
@@ -1048,12 +1048,13 @@ Advanced Topics
 		Language Diff Report Contents
 			When you execute the =diffLanguages= method, two different format report files are written to the "language-diffs" folder: one JSON format file, and one CSV format file.
 
-			- *.json* - The JSON format file contains an array of string diff objects for all strings that have differences, where each string diff object contains the properties =key=, =path=, =valueInA=, =valueInB=, and =difference=.
-			- *.csv* - The CSV format file contains a table of rows for all of the strings that have differences, where each row contains columns that represent a flattened version of the string diff object for a string.
+			- *.json* - The `JSON format diff report` contains an array of string diff objects for all strings that have differences, where each string diff object contains the properties =key=, =path=, =valueInA=, =valueInB=, and =difference=.
+			- *.csv* - The `CSV format diff report` contains a table of rows for all of the strings that have differences, where each row contains columns that represent a flattened version of the string diff object for a string.
 
-			Both of these two diff report files contain the same information, but expressed slightly differently. The CSV file is particularly easy to "consume" and can be loaded up in any spreadsheet editor (such as Google Sheets) that correctly supports the CSV format's ability to have quoted field values that contain line breaks (some of your resource strings may contain line break characters). Once loaded into a spreadsheet tool, the spreadsheet can be sorted by the "Difference" column or filtered by the difference type you are interested in.
+			Both of these two diff report files contain the same information, but expressed slightly differently. The CSV file is particularly easy to "consume" and can be loaded up in any spreadsheet editor (such as Google Sheets) that correctly supports the CSV format's ability to have quoted field values that contain line breaks (some of your resource strings may contain line break characters). Once loaded into a spreadsheet tool, the spreadsheet can be sorted by the "Difference" column or filtered by the `difference type` you are interested in.
 
 			JSON Format Diff Report
+				The JSON format diff report is a serialized array of string diff objects, of the form...
 
 				..................
 				[
@@ -1064,6 +1065,8 @@ Advanced Topics
 				]
 				..................
 
+				Each element of the string diff objects array is a string diff object of the form...
+
 				.............................................................................
 				{
 					key:keySTR,
@@ -1073,6 +1076,16 @@ Advanced Topics
 					difference:differenceSTR  // 'different' | 'missing in A' | 'missing in B'
 				}
 				.............................................................................
+
+				Each string diff object contains the following properties...
+
+				- =key= - a string, specifying the key of the resource string (the last element of the string path array)
+				- =path= - an array, specifying the full path of the resource string, where the first element is the path of the resource file containing the string, and where the last element is the key of the resource string
+				- =valueInA= - a string, specifying the value of the resource string in language A, or an empty string if the string is missing in language A
+				- =valueInB= - a string, specifying the value of the resource string in language B, or an empty string if the string is missing in language B
+				- =difference= - a string, specifying the `difference type` for the resource string between language A and language B
+
+				The structure of the JSON format language diff report is illustrated by the following example, in which there are two differences between the two languages compared in the diff...
 
 				EXAMPLE
 				..........................................
@@ -1103,6 +1116,16 @@ Advanced Topics
 				..........................................
 
 			CSV Format Diff Report
+				The CSV format diff report is a table containing the following columns...
+
+				- *Resource File* - the path of the resource file containing the resource string
+				- *Key* - the key of the resource string
+				- *Path* - a JSON serialization of the full path of the resource string
+				- *Difference* - the `difference type` for the resource string between language A and language B
+				- *Value in A* - the value of the resource string in language A, or an empty string if the string is missing in language A
+				- *Value in B* - the value of the resource string in language B, or an empty string if the string is missing in language B
+
+				The structure of the CSV format language diff report is illustrated by the following example, in which there are two differences between the two languages compared in the diff...
 
 				CSV EXAMPLE
 				..................................................................................................
