@@ -3,13 +3,11 @@
 <head>
 	<title>Multi-line String Serializer | JavaScript Tools | UIZE JavaScript Framework</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-	<meta name="keywords" content="tool Uize.Json.MultiLineStringLiteral"/>
+	<meta name="keywords" content="tool Uize.Json.MultiLineStringLiteral Uize.Widgets.Tools.MultiLineStringSerializer.Widget"/>
 	<meta name="description" content="Take multi-line strings and serialize them to multi-line JavaScript string literal expressions using string concatenation."/>
 	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
 	<link rel="stylesheet" href="../css/page.css"/>
 	<link rel="stylesheet" href="../css/page.example.css"/>
-	<link rel="stylesheet" href="../css/widget.tabs.css"/>
-	<link rel="stylesheet" href="css/tabbed.css"/>
 </head>
 
 <body>
@@ -33,30 +31,14 @@
 	<!-- explanation copy -->
 
 	<div class="explanation">
-		<p>The <b>Multi-line String Serializer</b> tool (which makes use of the <a href="../reference/Uize.Json.MultiLineStringLiteral.html"><code>Uize.Json.MultiLineStringLiteral</code></a> module) lets you serialize multi-line text strings to multi-line JavaScript string literal expressions using string concatenation.</p>
+		<p>The <b>Multi-line String Serializer</b> tool (which makes use of the <a href="../reference/Uize.Json.MultiLineStringLiteral.html"><code>Uize.Json.MultiLineStringLiteral</code></a> and <a href="../reference/Uize.Widgets.Tools.MultiLineStringSerializer.Widget.html"><code>Uize.Widgets.Tools.MultiLineStringSerializer.Widget</code></a> modules) lets you serialize multi-line text strings to multi-line JavaScript string literal expressions that use string concatenation.</p>
 
-		<p>Paste some multi-line text into the <b>"MULTI-LINE TEXT"</b> tab and then switch to the <b>"MULTI-LINE JAVASCRIPT EXPRESSION"</b> tab to see the text serialized to a multi-line JavaScript string literal expression.</p>
+		<p>Paste some multi-line text into the <b>"Multi-line Text"</b> pane to see the text serialized to a multi-line JavaScript string literal expression in the <b>"Multi-line JavaScript Expression"</b> pane.</p>
 
-		<p>You can also enter a multi-line JavaScript string literal expression in the <b>"MULTI-LINE JAVASCRIPT EXPRESSION"</b> tab and switch to the <b>"MULTI-LINE TEXT"</b> tab to see the plain text version of that expression.</p>
+		<p>You can also enter a multi-line JavaScript string literal expression in the <b>"Multi-line JavaScript Expression"</b> pane to see the plain text version of that expression in the <b>"Multi-line Text"</b> pane.</p>
 	</div>
 
-	<form>
-	<div id="page_tabs" class="tabShell">
-		<div class="tabStubShell">
-			<a id="page_tabs_option0" class="tabStub" href="javascript://">MULTI-LINE TEXT</a>
-			<a id="page_tabs_option1" class="tabStub" href="javascript://">MULTI-LINE JAVASCRIPT EXPRESSION</a>
-			<br style="clear:left;"/>
-		</div>
-		<div class="tabBodyShell">
-			<div id="page_tabs-option0TabBody" class="tabBodyInactive">
-				<textarea id="page-multilineText" wrap="off"></textarea>
-			</div>
-			<div id="page_tabs-option1TabBody" class="tabBodyInactive">
-				<textarea id="page-multilineJavaScriptExpression" wrap="off"></textarea>
-			</div>
-		</div>
-	</div>
-	</form>
+	<div id="page-multiLineStringSerializer"></div>
 </div>
 
 <script type="text/javascript">
@@ -64,8 +46,7 @@
 Uize.require (
 	[
 		'UizeSite.Page.Example',
-		'Uize.Widget.Options.Tabbed',
-		'Uize.Json.MultiLineStringLiteral'
+		'Uize.Widgets.Tools.MultiLineStringSerializer.Widget'
 	],
 	function () {
 		'use strict';
@@ -73,54 +54,30 @@ Uize.require (
 		/*** create the example page widget ***/
 			var page = window.page = UizeSite.Page.Example ();
 
-		/*** add the tabs child widget ***/
-			var tabs = window.tabs = page.addChild (
-				'tabs',
-				Uize.Widget.Options.Tabbed,
+		/*** add the pseudo-localizer widget ***/
+			page.addChild (
+				'multiLineStringSerializer',
+				Uize.Widgets.Tools.MultiLineStringSerializer.Widget,
 				{
-					bodyClassActive:'tabBodyActive',
-					bodyClassInactive:'tabBodyInactive',
-					values:['multilineText','multilineJavaScriptExpression'],
-					value:'multilineText'
-				}
-			);
-			tabs.wire (
-				'Changed.value',
-				function () {
-					tabs + '' == 'multilineJavaScriptExpression'
-						? page.setNodeValue (
-							'multilineJavaScriptExpression',
-							Uize.Json.MultiLineStringLiteral.serialize (page.getNodeValue ('multilineText'))
-						)
-						: page.setNodeValue (
-							'multilineText',
-							Uize.Json.from (page.getNodeValue ('multilineJavaScriptExpression'))
-						)
-					;
+					built:false,
+					source:[
+						'This is some multi-line text',
+						'that should be turned into a',
+						'multi-line JavaScript string literal',
+						'expression that allows text blocks',
+						'to be conveniently processed for',
+						'inclusion into JavaScript source code.',
+						'',
+						'You can also convert in the other',
+						'direction by first entering a multi-line',
+						'JavaScript string literal expression',
+						'in the other pane.'
+					].join ('\n')
 				}
 			);
 
 		/*** wire up the page widget ***/
 			page.wireUi ();
-
-		/*** initialize sample data ***/
-			page.setNodeValue (
-				'multilineText',
-				[
-					'This is some multi=line text',
-					'that should be turned into a',
-					'multi-line JavaScript string literal',
-					'expression that allows text blocks',
-					'to be conveniently processed for',
-					'inclusion into JavaScript source code.',
-					'',
-					'You can also convert in the other',
-					'direction by first entering a multi-line',
-					'JavaScript string literal expression',
-					'in the other tab and then switching',
-					'back to this tab.'
-				].join ('\n')
-			);
 	}
 );
 
