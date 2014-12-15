@@ -1,7 +1,7 @@
 <div>
 	<div class="viewButtons">
-		<child name="sourceViewButton" extraClasses="viewButton"/>
-		<child name="resultViewButton" extraClasses="viewButton"/>
+		<child name="sourceViewButton" class="viewButton"/>
+		<child name="resultViewButton" class="viewButton"/>
 		<br style="clear: left;"/>
 	</div>
 	<div class="views">

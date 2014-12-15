@@ -3,7 +3,7 @@
 		<td colspan="5">
 			<div class="entryShell">
 				<div class="entryBevel"><
-					child name="entry" extraClasses="entry"
+					child name="entry" class="entry"
 				/></div>
 			</div>
 		</td>

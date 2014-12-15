@@ -1,6 +1,6 @@
 <div>
 	<div class="contents">
-		<div class="heading"><span id="title"/><child name="clear" size="tiny" extraClasses="topRightButton"/></div>
+		<div class="heading"><span id="title"/><child name="clear" size="tiny" class="topRightButton"/></div>
 		<div id="body" class="body"><div id="messages" class="messages"></div></div>
 	</div>
 </div>
