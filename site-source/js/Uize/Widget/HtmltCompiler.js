@@ -289,6 +289,12 @@ Uize.module ({
 												);
 											} else if (_bindingType.slice (0,6) == 'style.') {
 												_addStylePropertyReplacement (_bindingType.slice (6),_bindingPropertyReference);
+											} else if (_bindingType == 'readOnly') {
+												_addWholeAttributeReplacement (
+													_node,
+													'readonly',
+													'(' + _bindingPropertyReference + ' ? \'readonly="readonly"\' : \'\')'
+												);
 											}
 										}
 									);
