@@ -1134,6 +1134,62 @@ Advanced Topics
 				strings.js,tooltip,"['strings.js','colorPicker','tooltip']",missing in B,Click to choose a color.,
 				..................................................................................................
 
+	Initializing Resource Strings
+		The values of resource strings of a project can be initialized by executing the =export= command and specifying `value initialization options` using the =initValues= parameter.
+
+		.....................................................................................................
+		node [pathToUize]build.js Uize.Build.Loc method=export project=[projectName] initValues=[initOptions]
+		.....................................................................................................
+
+		The strings initialized in this way will then be updated in the `codebase resource files` during the next =import= operation.
+
+		Value Initialization Options
+			Value initialization options are specified using the =initValues= parameter, and these options determine which resource strings get initialized, when (under which conditions) they get initialized, and to what values they get initialized.
+
+			The value specified for the =initValues= parameter should have the following syntax...
+
+			.........................................
+			initValues=[initWhat],[initWhen],[initTo]
+			.........................................
+
+			initWhat
+				The first portion of the initialization options specifies what resource strings should be initialized, and supports the following values...
+
+				- =none= - None of the resource strings will be initialized (this value can be used to defeat the feature).
+				- =all= - All of the resource strings will be initialized (this includes translatable and non-translatable strings).
+				- =translatable= - Only the translatable strings will be initialized.
+				- =non-translatable= - Only the non-translatable strings will be initializd.
+
+			initWhen
+				The second portion of the initialization options specifies when (under which conditions) the strings should be initialized, and supports the following values...
+
+				- =never= - The resource strings will never be initialized (this value can be used to defeat the feature).
+				- =always= - The resource strings will always be initialized.
+				- =blank= - The resource strings will only be initialized when they are blank.
+
+			initTo
+				The third portion of the initialization options specifies to what values the strings should be initialized, and supports the following values...
+
+				- =primary= - The resource strings will be initialized to the values for the strings from the primary language.
+				- =blank= - The resource strings will be initialized to blank values (empty strings).
+
+			Examples
+				In a simple example, the value initialization feature can be used to `initialize values of non-translatable strings`.
+
+				To initialize the values of the non-translatable strings that are blank to the values from the primary language, one can use the following value for the =initValues= parameter...
+
+				.........................................
+				initValues=non-translatable,blank,primary
+				.........................................
+
+				In another example, the value initialization feature can be used to initialize all the strings for the =en-GB= (British English) language to the values from the primary language (presumably US English in this example), using the following parameters for the =export= method...
+
+				.............................................
+				languages=en-GB initValues=all,always,primary
+				.............................................
+
+				Note that we are using the =languages= parameter and specifying the value =en-GB= in order to perform this initialization during export for just the British English language (refer to the section `Performing Methods for a Filtered Set of Languages`).
+
 	### Different Classes of Files
 		Codebase Resource Files ~~ Codebase Resource File
 			.
