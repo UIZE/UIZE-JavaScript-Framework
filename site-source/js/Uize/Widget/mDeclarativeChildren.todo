@@ -1,1 +1,7 @@
 This is a TO DO document for the =Uize.Widget.mDeclarativeChildren= mix-in module.
+
+Deferred Adding of Children
+	An *htmlt* template has a =child= tag, which is compiled to a method call that obtains the child HTML.
+
+	Now, if the child does not exist at the time, then the call to the method should return an empty string. The child may not exist because the creation of the child widget may be deferred. If the declarative children feature results in a deferred child widget being added at a later stage when the parent widget is already wired, then the HTML for the child widget should be generated and inserted into the DOM of the parent widget and then wired. If, when the declarative children feature first attempts to add the declarative children, some of the children are marked as being not connected, the adding of these children can be deferred until they first become connected.
+
