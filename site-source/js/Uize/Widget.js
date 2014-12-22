@@ -199,7 +199,7 @@ Uize.module ({
 									- see also the related =parent= instance property
 						*/
 
-					m.addedChildren = m._addedChildren = new _Uize.Class;
+					m.addedChildren = m._addedChildren = _Uize.Class ();
 			},
 
 			instanceMethods:_copyInto (
