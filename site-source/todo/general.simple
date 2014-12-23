@@ -1,5 +1,22 @@
 This document lists to do tasks that relate to the UIZE JavaScript Framework in general - not relating to the documentation or the site (see [[documentation.html][TO DO - Documentation]]), or specific JavaScript modules (see [[modules.html][TO DO - Modules]]).
 
+Localization
+	Defaulting Missing Translations
+		Questions
+			- is it appropriate to default missing strings to the primary language counterparts, or should they remain empty?
+			- if missing strings are defaulted, should they be wrapped in some way to indicate that they have been defaulted, for the sake of development, QA testing, linguistic QA, etc.
+			- should defaulting / fallback be a configurable behavior?
+			- should the defaulting approach be different for different environments / situations (dev vs production)?
+			- should defaulting be handled by a project's own build process, or can it be handled by the localization service? Is defaulting a service that can be made available to a project's own build process?
+
+		Ways to Handle Missing Strings
+			- they remain blank
+			- they are defaulted to the key
+			- they are defaulted to the primary language value (eg. fr-CA -> en-US)
+			- they are defaulted to a fallback language's value (eg. fr-CA -> fr-FR)
+			- they are defaulted using a cascade of fallback languages' values, which may include the primary language (eg. fr-CA -> fr-FR -> fr-CH -> en-US)
+			- they are optionally wrapped with an indicator that they have been defaulted
+
 Eliminate All Extension Modules
 	Eliminate all extension modules and replace them with either helper objects containing purely static methods or mixin modules.
 
