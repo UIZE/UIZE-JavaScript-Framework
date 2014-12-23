@@ -1,0 +1,46 @@
+<div>
+	<table class="settings">
+		<tr>
+			<td id="presetsLabel"></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td id="indentCharsLabel"></td>
+			<td><input id="indentChars" type="text"/></td>
+		</tr>
+		<tr>
+			<td id="linebreakCharsLabel"></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td id="quoteCharLabel"></td>
+			<td>
+				<select id="quoteChar">
+					<option value="'">'</option>
+					<option value="&quot;">&quot;</option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td id="keyDelimiterLabel"></td>
+			<td><input id="keyDelimiter" type="text"/></td>
+		</tr>
+		<tr>
+			<td id="padKeysLabel"></td>
+			<td><child name="padKeys" size="tiny"/></td>
+		</tr>
+		<tr>
+			<td id="keyAlignLabel"></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td id="whenToQuoteKeysLabel"></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td id="sortKeysLabel"></td>
+			<td><child name="sortKeys" size="tiny"/></td>
+		</tr>
+	</table>
+	<child name="sourceVsResult" class="monospace"/>
+</div>

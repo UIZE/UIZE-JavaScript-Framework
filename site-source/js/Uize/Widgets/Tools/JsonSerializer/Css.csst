@@ -1,0 +1,11 @@
+.`` {
+}
+
+.`settings` {
+	margin: auto;
+}
+
+.`monospace` textarea {
+	font-family: Courier!important; /* !important sucks, so this must be a weak approach! */
+}
+
