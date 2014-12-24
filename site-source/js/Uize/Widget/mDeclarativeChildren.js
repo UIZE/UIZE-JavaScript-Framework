@@ -25,6 +25,7 @@
 
 Uize.module ({
 	name:'Uize.Widget.mDeclarativeChildren',
+	required:'Uize.Widget.mChildrenLinked',
 	builder:function () {
 		'use strict';
 
@@ -35,32 +36,50 @@ Uize.module ({
 
 		return function (_class) {
 			_class.declare ({
+				mixins:_Uize.Widget.mChildrenLinked,
+
 				omegastructor:function () {
 					var
 						m = this,
-						_declarativeChildren = m.Class.mDeclarativeChildren_children
+						_linkedChildren = m.linkedChildren
 					;
+					Uize.forEach (
+						m.Class.mDeclarativeChildren_children,
+						function (_declarativeChild,_childName) {
+							function _addChild () {
+								var
+									_childWidgetClass = _declarativeChild._widgetClass,
+									_childProperties = _declarativeChild._properties
+								;
 
-					for (var _childName in _declarativeChildren) {
-						var
-							_declarativeChild = _declarativeChildren[_childName],
-							_childWidgetClass = _declarativeChild._widgetClass,
-							_childProperties = _declarativeChild._properties
+								// When value is a function call the function in the context of this widget
+								if (_declarativeChild._isFunction) {
+									_childProperties = _Uize.copy(_childProperties.call(m, _childName));
+									_childWidgetClass = _childProperties.widgetClass;
+									delete _childProperties.widgetClass;
+								}
 
-						;
-
-						// When value is a function call the function in the context of this widget
-						if (_declarativeChild._isFunction) {
-							_childProperties = _Uize.copy(_childProperties.call(m, _childName));
-							_childWidgetClass = _childProperties.widgetClass;
-							delete _childProperties.widgetClass;
+								// NOTE: Filter out children w/o widgetClass. They will be deferred loaded by some other mechanism. They were there for feature detection.
+								return _childWidgetClass && m.mDeclarativeChildren_getContainer(_childName).addChild(
+									_childName,
+									_childWidgetClass,
+									_childProperties
+								);
+							}
+							var _linkedChildrenCondition = '~' + _childName;
+							if (_linkedChildren.get (_linkedChildrenCondition) === false) {
+								_linkedChildren.once (
+									_linkedChildrenCondition,
+									function () {
+										var _child = _addChild ();
+										m.isWired && _child.insertUi ();
+									}
+								);
+							} else {
+								_addChild ();
+							}
 						}
-
-						// NOTE: Filter out children w/o widgetClass. They will be deferred loaded by some other mechanism. They were there for feature detection.
-						_childWidgetClass
-							&& m.mDeclarativeChildren_getContainer(_childName).addChild(_childName, _childWidgetClass, _childProperties)
-						;
-					}
+					);
 				},
 
 				staticMethods:{

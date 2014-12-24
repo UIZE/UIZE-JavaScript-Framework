@@ -28,6 +28,7 @@ Uize.module ({
 	required:[
 		'Uize.Widget.mHtmlBindings',
 		'Uize.Widget.mCssBindings',
+		'Uize.Widget.mChildrenLinked',
 		'Uize.Widget.mEventBindings',
 		'Uize.Widget.mChildBindings',
 		'Uize.Widget.mDeclarativeChildren',
@@ -48,6 +49,7 @@ Uize.module ({
 				mixins:[
 					_Uize_Widget.mHtmlBindings,
 					_Uize_Widget.mCssBindings,
+					_Uize_Widget.mChildrenLinked,
 					_Uize_Widget.mEventBindings,
 					_Uize_Widget.mChildBindings,
 					_Uize_Widget.mDeclarativeChildren,
@@ -60,38 +62,34 @@ Uize.module ({
 							m = this,
 							_childName =
 								_properties.name ||
-								(
-									'generatedChildName' +
-									(m.mV2_generatedChildNames == _undefined ? (m.mV2_generatedChildNames = 0) : m.mV2_generatedChildNames++)
-								),
-							_widgetClass = _Uize.getModuleByName (_properties.widgetClass) || _class,
-							_widgetClassName = _widgetClass.moduleName,
-							_children = m.children
+								('generatedChildName' + (m.mV2_generatedChildNames = (m.mV2_generatedChildNames || 0) + 1)),
+							_widgetClass = _Uize.getModuleByName (_properties.widgetClass),
+							_child = m.children [_childName],
+							_childExisted = !!_child,
+							_html = ''
 						;
 
-						delete _properties.name;
-						delete _properties.widgetClass;
+						if (_childExisted || _widgetClass) {
+							_properties = _Uize.copy (_properties);
+							delete _properties.name;
+							delete _properties.widgetClass;
+							var _inlineState = _Uize.copy (_properties);
+							_childExisted
+								? _child.set (_properties)
+								: (_child = m.addChild (_childName,_widgetClass,_properties))
+							;
+							_html = _child.get ('built')
+								? _child.getHtml ()
+								: '<div id="' + m.nodeId (_childName) + '"></div>'
+							;
+							_childExisted ||
+								_Uize.copyInto (_inlineState,{widgetClass:_widgetClass.moduleName})
+							;
+							if (!_Uize.isEmpty (_inlineState))
+								_child.inlineState = _inlineState
+							;
+						}
 
-						var
-							_inlineState = _Uize.copy (_properties),
-							_html = '',
-							_child = _children [_childName],
-							_childExisted = !!_child
-						;
-						_child
-							? _child.set (_properties)
-							: (_child = m.addChild (_childName,_widgetClass,_properties))
-						;
-						_html = _child.get ('built')
-							? _child.getHtml ()
-							: '<div id="' + _child.nodeId ('shell') + '"></div>'
-						;
-						_childExisted ||
-							_Uize.copyInto (_inlineState,{widgetClass:_widgetClassName})
-						;
-						if (!_Uize.isEmpty (_inlineState))
-							_child.inlineState = _inlineState
-						;
 						return _html;
 						/*?
 							Instance Methods
