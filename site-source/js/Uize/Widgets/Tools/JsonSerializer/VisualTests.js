@@ -26,14 +26,18 @@
 Uize.module ({
 	name:'Uize.Widgets.Tools.JsonSerializer.VisualTests',
 	superclass:'Uize.Widgets.VisualTests.Widget',
-	required:'Uize.Widgets.Tools.JsonSerializer.Widget',
+	required:[
+		'Uize.Widgets.Tools.JsonSerializer.Widget',
+		'Uize.Widgets.Tools.JsonSerializer.TestData',
+		'Uize.Json'
+	],
 	builder:function (_superclass) {
 		'use strict';
 
 		return _superclass.subclass ({
 			omegastructor:function () {
 				this.addStateTestCase ({
-					source:'{foo:\'bar\'}'
+					source:Uize.Json.to (Uize.Widgets.Tools.JsonSerializer.TestData ())
 				});
 			},
 

@@ -2,7 +2,13 @@
 	<table class="settings">
 		<tr>
 			<td id="presetsLabel"></td>
-			<td></td>
+			<td>
+				<a id="presetPretty" href="javascript://"></a>
+				&nbsp;|&nbsp;
+				<a id="presetCompact" href="javascript://"></a>
+				&nbsp;|&nbsp;
+				<a id="presetPaddedAndSorted" href="javascript://"></a>
+			</td>
 		</tr>
 		<tr>
 			<td id="indentCharsLabel"></td>
@@ -10,7 +16,7 @@
 		</tr>
 		<tr>
 			<td id="linebreakCharsLabel"></td>
-			<td></td>
+			<td><textarea id="linebreakChars"></textarea></td>
 		</tr>
 		<tr>
 			<td id="quoteCharLabel"></td>
@@ -31,11 +37,23 @@
 		</tr>
 		<tr>
 			<td id="keyAlignLabel"></td>
-			<td></td>
+			<td>
+				<select id="keyAlign">
+					<option id="keyAlignLeft" value="left"></option>
+					<option id="keyAlignCenter" value="center"></option>
+					<option id="keyAlignRight" value="right"></option>
+				</select>
+			</td>
 		</tr>
 		<tr>
 			<td id="whenToQuoteKeysLabel"></td>
-			<td></td>
+			<td>
+				<select id="whenToQuoteKeys">
+					<option id="whenToQuoteKeysAuto" value="auto"></option>
+					<option id="whenToQuoteKeysAutoAll" value="auto all"></option>
+					<option id="whenToQuoteKeysAlways" value="always"></option>
+				</select>
+			</td>
 		</tr>
 		<tr>
 			<td id="sortKeysLabel"></td>

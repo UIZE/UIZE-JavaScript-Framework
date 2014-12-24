@@ -12,7 +12,7 @@
 /* Module Meta Data
 	type: Class
 	importance: 1
-	codeCompleteness: 5
+	codeCompleteness: 100
 	docCompleteness: 100
 */
 
@@ -26,14 +26,18 @@
 Uize.module ({
 	name:'Uize.Widgets.Tools.JsonSerializer.VisualSampler',
 	superclass:'Uize.Widgets.VisualSampler.Widget',
-	required:'Uize.Widgets.Tools.JsonSerializer.Widget',
+	required:[
+		'Uize.Widgets.Tools.JsonSerializer.Widget',
+		'Uize.Widgets.Tools.JsonSerializer.TestData',
+		'Uize.Json'
+	],
 	builder:function (_superclass) {
 		'use strict';
 
 		return _superclass.subclass ({
 			omegastructor:function () {
 				this.addSample ({
-					source:'{helloThere:\'world\',foo:\'bar\'}'
+					source:Uize.Json.to (Uize.Widgets.Tools.JsonSerializer.TestData ())
 				});
 			},
 

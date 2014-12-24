@@ -64,16 +64,39 @@ Uize.module ({
 			stateProperties:{
 				source:{value:''},
 				indentChars:{value:'\t'},
+				linebreakChars:{value:'\n'},
 				quoteChar:{value:'\''},
 				keyDelimiter:{value:':'},
 				padKeys:{value:false},
+				keyAlign:{value:'left'},
 				sortKeys:{value:false},
+				whenToQuoteKeys:{value:'auto'},
 
 				/*** derived properties ***/
 					result:{
 						derived:{
-							properties:['source','indentChars','quoteChar','keyDelimiter','padKeys','sortKeys'],
-							derivation:function (_source,_indentChars,_quoteChar,_keyDelimiter,_padKeys,_sortKeys) {
+							properties:[
+								'source',
+								'indentChars',
+								'linebreakChars',
+								'quoteChar',
+								'keyDelimiter',
+								'padKeys',
+								'keyAlign',
+								'whenToQuoteKeys',
+								'sortKeys'
+							],
+							derivation:function (
+								_source,
+								_indentChars,
+								_linebreakChars,
+								_quoteChar,
+								_keyDelimiter,
+								_padKeys,
+								_keyAlign,
+								_whenToQuoteKeys,
+								_sortKeys
+							) {
 								try {
 									return (
 										_source === ''
@@ -82,9 +105,12 @@ Uize.module ({
 												Uize.Json.from (_source),
 												{
 													indentChars:_indentChars,
+													linebreakChars:_linebreakChars,
 													quoteChar:_quoteChar,
 													keyDelimiter:_keyDelimiter,
 													padKeys:_padKeys,
+													keyAlign:_keyAlign,
+													whenToQuoteKeys:_whenToQuoteKeys,
 													sortKeys:_sortKeys
 												}
 											)
@@ -104,14 +130,59 @@ Uize.module ({
 			},
 
 			eventBindings:{
+				'#presetPretty:click':function () {
+					this.set ({
+						indentChars:'   ',
+						linebreakChars:'\n',
+						quoteChar:'\'',
+						keyDelimiter:': ',
+						padKeys:false,
+						keyAlign:'left',
+						whenToQuoteKeys:'auto',
+						sortKeys:false
+					});
+				},
+				'#presetCompact:click':function () {
+					this.set ({
+						indentChars:'',
+						linebreakChars:'',
+						quoteChar:'\'',
+						keyDelimiter:':',
+						padKeys:false,
+						keyAlign:'left',
+						whenToQuoteKeys:'auto',
+						sortKeys:false
+					});
+				},
+				'#presetPaddedAndSorted:click':function () {
+					this.set ({
+						indentChars:'   ',
+						linebreakChars:'\n',
+						quoteChar:'\'',
+						keyDelimiter:' : ',
+						padKeys:true,
+						keyAlign:'left',
+						whenToQuoteKeys:'auto all',
+						sortKeys:true
+					});
+				},
 				'#indentChars:keyup':function (_event) {
 					this.set ({indentChars:_event.target.value});
+				},
+				'#linebreakChars:keyup':function (_event) {
+					this.set ({linebreakChars:_event.target.value});
 				},
 				'#quoteChar:change':function (_event) {
 					this.set ({quoteChar:_event.target.value});
 				},
 				'#keyDelimiter:keyup':function (_event) {
 					this.set ({keyDelimiter:_event.target.value});
+				},
+				'#keyAlign:change':function (_event) {
+					this.set ({keyAlign:_event.target.value});
+				},
+				'#whenToQuoteKeys:change':function (_event) {
+					this.set ({whenToQuoteKeys:_event.target.value});
 				}
 			},
 
@@ -126,16 +197,27 @@ Uize.module ({
 
 			htmlBindings:{
 				loc_presetsLabel:'presetsLabel',
+				loc_presetPretty:'presetPretty',
+				loc_presetCompact:'presetCompact',
+				loc_presetPaddedAndSorted:'presetPaddedAndSorted',
 				loc_indentCharsLabel:'indentCharsLabel',
 				indentChars:'indentChars',
 				loc_linebreakCharsLabel:'linebreakCharsLabel',
+				linebreakChars:'linebreakChars',
 				loc_quoteCharLabel:'quoteCharLabel',
 				quoteChar:'quoteChar',
 				loc_keyDelimiterLabel:'keyDelimiterLabel',
 				keyDelimiter:'keyDelimiter',
 				loc_padKeysLabel:'padKeysLabel',
 				loc_keyAlignLabel:'keyAlignLabel',
+				loc_keyAlignLeft:'keyAlignLeft',
+				loc_keyAlignCenter:'keyAlignCenter',
+				loc_keyAlignRight:'keyAlignRight',
+				keyAlign:'keyAlign',
 				loc_whenToQuoteKeysLabel:'whenToQuoteKeysLabel',
+				loc_whenToQuoteKeysAuto:'whenToQuoteKeysAuto',
+				loc_whenToQuoteKeysAutoAll:'whenToQuoteKeysAutoAll',
+				loc_whenToQuoteKeysAlways:'whenToQuoteKeysAlways',
 				loc_sortKeysLabel:'sortKeysLabel'
 			}
 		});

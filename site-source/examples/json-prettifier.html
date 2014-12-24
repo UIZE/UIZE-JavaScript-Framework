@@ -169,7 +169,7 @@ Uize.require (
 		'Uize.Widget.Options.Tabbed',
 		'Uize.Json',
 		'Uize.Dom.Form',
-		'UizeSite.TestData.Object',
+		'Uize.Widgets.Tools.JsonSerializer.TestData',
 		'Uize.Widgets.Container.Widget',
 		'Uize.Widgets.Button.Widget'
 	],
@@ -242,7 +242,10 @@ Uize.require (
 				tabs.set ({value:'serialized'});
 			}
 			function resetTestData () {
-				page.setNodeValue ('sourceJson',Uize.Json.to (UizeSite.TestData.Object (),presets.pretty));
+				page.setNodeValue (
+					'sourceJson',
+					Uize.Json.to (Uize.Widgets.Tools.JsonSerializer.TestData (),presets.pretty)
+				);
 				serializeUsingCurrentSettings ();
 			}
 
