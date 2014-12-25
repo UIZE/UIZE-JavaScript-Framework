@@ -65,16 +65,13 @@ Uize.module ({
 								('generatedChildName' + (m.mV2_generatedChildNames = (m.mV2_generatedChildNames || 0) + 1)),
 							_widgetClass = _Uize.getModuleByName (_properties.widgetClass),
 							_child = m.children [_childName],
-							_childExisted = !!_child,
 							_html = ''
 						;
-
-						if (_childExisted || _widgetClass) {
+						if (_child || _widgetClass) {
 							_properties = _Uize.copy (_properties);
 							delete _properties.name;
 							delete _properties.widgetClass;
-							var _inlineState = _Uize.copy (_properties);
-							_childExisted
+							_child
 								? _child.set (_properties)
 								: (_child = m.addChild (_childName,_widgetClass,_properties))
 							;
@@ -82,14 +79,7 @@ Uize.module ({
 								? _child.getHtml ()
 								: '<div id="' + m.nodeId (_childName) + '"></div>'
 							;
-							_childExisted ||
-								_Uize.copyInto (_inlineState,{widgetClass:_widgetClass.moduleName})
-							;
-							if (!_Uize.isEmpty (_inlineState))
-								_child.inlineState = _inlineState
-							;
 						}
-
 						return _html;
 						/*?
 							Instance Methods
