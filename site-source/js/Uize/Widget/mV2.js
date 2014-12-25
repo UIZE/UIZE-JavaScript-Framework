@@ -39,7 +39,6 @@ Uize.module ({
 
 		var
 			/*** Variables for Scruncher Optimization ***/
-				_undefined,
 				_Uize = Uize,
 				_Uize_Widget = _Uize.Widget
 		;
