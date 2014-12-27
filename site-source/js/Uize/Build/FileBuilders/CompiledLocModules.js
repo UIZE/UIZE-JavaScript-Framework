@@ -30,9 +30,18 @@ Uize.module ({
 	required:[
 		'Uize.Build.Util',
 		'Uize.Json',
-		'Uize.Str.Lines'
+		'Uize.Str.Lines',
+		'Uize.Str.Split'
 	],
 	builder:function () {
+		var
+			/*** Variables for Performance Optimization ***/
+				_split = Uize.Str.Split.split,
+
+			/*** General Variables ***/
+				_tokenRegExp = /\[\[([^\[\]]+)\]\]/
+		;
+
 		function _locFileSourceUrlFromTempUrl (m,_urlParts) {
 			return m.sourceUrlFromTempUrl (_urlParts).replace (/\.js$/,'.loc');
 		}
@@ -59,7 +68,26 @@ Uize.module ({
 				;
 				Uize.forEach (
 					_strings,
-					function (_stringValue,_stringKey) {_stringsAsStateProperties ['loc_' + _stringKey] = _stringValue}
+					function (_stringValue,_stringKey) {
+						if (_tokenRegExp.test (_stringValue)) {
+							var _expressionParts = [];
+							Uize.forEach (
+								_split (_stringValue,_tokenRegExp),
+								function (_segment,_segmentNo) {
+									var _segmentIsToken = _segmentNo % 2;
+									if (_segmentIsToken || _segment)
+										_expressionParts.push (
+											(_segmentIsToken ? 'i [' : '') +
+											Uize.Json.to (_segment) +
+											(_segmentIsToken ? ']' : '')
+										)
+									;
+								}
+							);
+							_stringValue = Function ('i','return ' + _expressionParts.join (' + ') + ';');
+						}
+						_stringsAsStateProperties ['loc_' + _stringKey] = _stringValue;
+					}
 				);
 				return Uize.Build.Util.moduleAsText ({
 					name:Uize.Build.Util.moduleNameFromModulePath (
