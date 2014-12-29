@@ -4,6 +4,11 @@
 	height: 17px;
 }
 
+.`body` {
+	padding-left: 0;
+	padding-right: 0;
+}
+
 .`topRightButton` {
 	position: absolute;
 	right: 2px;
@@ -11,7 +16,7 @@
 }
 
 .`sliderLabel` {
-	text-align: right;
+	text-align: center;
 	font-size: 12px;
 	text-transform: uppercase;
 }
