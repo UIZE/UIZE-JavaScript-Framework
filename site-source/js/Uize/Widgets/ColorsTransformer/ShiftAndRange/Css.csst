@@ -23,14 +23,13 @@
 
 .`sliderValueLabel` {
 	font-size: 11px;
-	width: 40px;
 }
 
 .`sliderMinValue` {
-	text-align: right;
+	text-align: left;
 }
 
 .`sliderMaxValue` {
-	text-align: left;
+	text-align: right;
 }
 
