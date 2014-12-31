@@ -2011,6 +2011,34 @@ Uize.module ({
 										var _instance = new _Subclass;
 										return this.expect ({myProperty1:undefined,myProperty2:undefined},_instance.get ());
 									}
+								},
+								{
+									title:'When a state property is first declared with private name and later with public name, the definitions are merged'	,
+									test:function() {
+										var
+											_Subclass = Uize.Class.subclass (),
+											_called = false
+										;
+										_Subclass.stateProperties ({_myProperty1:{name:'myProperty1',value:3}});
+										_Subclass.stateProperties ({myProperty1:{name:'myProperty1',onChange:function() { _called = true}}});
+										var _instance = new _Subclass;
+										_instance.set('myProperty1', 5);
+										return this.expect (true,_called);
+									}
+								},
+								{
+									title:'When a state property is first declared with public name and later with private name, the definitions are merged'	,
+									test:function() {
+										var
+											_Subclass = Uize.Class.subclass (),
+											_called = false
+										;
+										_Subclass.stateProperties ({myProperty1:{name:'myProperty1',onChange:function() { _called = true}}});
+										_Subclass.stateProperties ({_myProperty1:{name:'myProperty1',value:3}});
+										var _instance = new _Subclass;
+										_instance.set('myProperty1', 5);
+										return this.expect (true,_called);
+									}
 								}
 							]
 						},

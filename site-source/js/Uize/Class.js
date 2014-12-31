@@ -1615,6 +1615,7 @@ Uize.module ({
 								_propertyName,
 							_propertyPrimaryPublicName = _propertyPublicName,
 							_propertyProfile = _propertyProfilesByPrivateName [_propertyPrivateName]
+								|| _propertyProfilesByPrivateName [_propertyPublicName] // if not found by private name, try public name in case the property was registered by public name first
 						;
 						_propertyPrivateNameLookup [_propertyPrivateName] = _propertyPrivateName;
 						if (!_propertyProfile) {
