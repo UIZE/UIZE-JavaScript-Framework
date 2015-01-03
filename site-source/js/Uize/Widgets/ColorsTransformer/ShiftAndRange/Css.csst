@@ -1,6 +1,5 @@
 .`heading` {
 	position: relative;
-	text-align: center;
 	height: 17px;
 }
 
