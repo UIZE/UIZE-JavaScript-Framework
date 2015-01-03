@@ -656,7 +656,7 @@ Uize.module ({
 							(_isInnerBottom = _true)
 						);
 						_areNodes || (_htmlToInject += ''); // coerce to a string value by invoking valueOf method
-	
+
 						_doForAll (
 							_nodeBlob,
 							function (_node) {
@@ -701,7 +701,7 @@ Uize.module ({
 											var _activeXObject = new _ActiveXObject('Microsoft.XMLDOM');
 											_activeXObject.async = _false;
 											_activeXObject.loadXML('<foo>' + _htmlToInject.replace(/&/g, '&amp;') + '</foo>');
-	
+
 											var
 												_xmlChildNodes = _activeXObject.documentElement.childNodes,
 												_convertToHtmlNode = function (_xmlNode) {
@@ -709,7 +709,7 @@ Uize.module ({
 													switch (_xmlNode.nodeType) {
 														case 1: // element
 															_htmlNode = document.createElement(_xmlNode.tagName);
-	
+
 															// add attributes
 															for (
 																var
@@ -721,7 +721,7 @@ Uize.module ({
 																var _attribute = _xmlNodeAttributes[_attributeNo];
 																_htmlNode.setAttribute(_attribute.nodeName, _attribute.nodeValue);
 															}
-	
+
 															// handle scripts specially but just getting text contents
 															if (_htmlNode.tagName == 'SCRIPT')
 																_htmlNode.text = _xmlNode.text;
@@ -740,7 +740,7 @@ Uize.module ({
 																		&& _htmlNode.appendChild(_htmlChildNode)
 																;
 															}
-	
+
 															break;
 														case 3:	// text
 															_htmlNode = document.createTextNode(_xmlNode.nodeValue);
@@ -752,14 +752,14 @@ Uize.module ({
 													return _htmlNode;
 												}
 											;
-	
+
 											// iterate through XML nodes and convert to their HTML equivalents
 											for (var _nodeNo = -1; ++_nodeNo < _xmlChildNodes.length;)
 												_nodesToInject.push(
 													_convertToHtmlNode(_xmlChildNodes[_nodeNo])
 												)
 											;
-	
+
 											// we have an array of nodes as opposed to a NodeList
 											_areNodes = _true;
 										} else {
@@ -783,13 +783,13 @@ Uize.module ({
 													This is a workaround for an issue where script tags, that are part of HTML that is injected through innerHTML replacement, become crippled in the document. This is particularly an issue for component markup that is loaded and inserted dynamically and that may wish to define properties in companion script tags using the $[idPrefix] syntax.
 												*/
 												var _activatedScriptNode = document.createElement ('script');
-	
+
 												/*** transfer properties of crippled script node to fresh script node ***/
 													if (_node.id) _activatedScriptNode.id = _node.id;
 													if (_node.type) _activatedScriptNode.type = _node.type;
 													_activatedScriptNode.text = _node.text;
 													if (_node.src) _activatedScriptNode.src = _node.src;
-	
+
 												_node.parentNode.replaceChild (_activatedScriptNode,_node);
 											} else if (_htmlHasScript (_node.innerHTML)) {
 												_Uize.forEach (_node.childNodes,_fixCrippledScripts);
@@ -1192,7 +1192,9 @@ Uize.module ({
 							;
 							if (_oldReadOnly) _node.readOnly = _false;
 							if (_nodeTagName == 'TEXTAREA') {
-								_node.value = _value;
+								if (_value != _node.value)
+									_node.value = _value
+								;
 							} else if (_nodeTagName == 'INPUT') {
 								var _nodeType = _node.type;
 								if (_nodeType == 'checkbox') {
@@ -1200,7 +1202,9 @@ Uize.module ({
 								} else if (_nodeType == 'radio') {
 									_node.checked = _node.value == _value;
 								} else {	// text, password, hidden, HTML5 types, etc.
-									_node.value = _value;
+									if (_value != _node.value)
+										_node.value = _value
+									;
 								}
 							} else if (_nodeTagName == 'SELECT') {
 								var _options = _node.options;
