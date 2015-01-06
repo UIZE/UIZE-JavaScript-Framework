@@ -39,7 +39,8 @@ Uize.module ({
 				_initValues,
 
 			/*** General Variables ***/
-				_blankStringPropertyObject = {value:''}
+				_blankStringPropertyObject = {value:''},
+				_sacredEmptyObject = {}
 		;
 
 		return Uize.package ({
