@@ -35,6 +35,7 @@ Uize.module ({
 	superclass:'Uize.Widget.FormElement',
 	required:[
 		'Uize.Widget.Button.ValueDisplay',
+		'Uize.Dom.Pos',
 		'Uize.Dom.Event'
 	],
 	builder:function (_superclass) {
@@ -108,7 +109,7 @@ Uize.module ({
 
 					var
 						_mooringNode = m.getMooringNode(),
-						_mooringNodeDims = Uize.Node.getDimensions (_mooringNode)
+						_mooringNodeDims = Uize.Dom.Pos.getDimensions (_mooringNode)
 					;
 
 					function _possiblyFocus () {

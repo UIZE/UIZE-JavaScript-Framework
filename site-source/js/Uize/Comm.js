@@ -492,7 +492,7 @@ Uize.module ({
 										});
 									},
 									function () {
-										Uize.Node.setInnerHtml ('imagesInfo',imagesInfoHtml);
+										Uize.Dom.Basics.setInnerHtml ('imagesInfo',imagesInfoHtml);
 									}
 								);
 								........................................................................................

@@ -20,7 +20,8 @@ Uize.module ({
 	name:'UizeSite.WidgetToGoPage',
 	superclass:'Uize.Widget.Page',
 	required:[
-		'Uize.Node',
+		'Uize.Dom.Basics',
+		'Uize.Dom.Pos',
 		'UizeSite.Templates.WidgetToGoTitle',
 		'Uize.Widget.PopupPalette'
 	],
@@ -44,7 +45,7 @@ Uize.module ({
 					var m = this;
 					if (!m.isWired) {
 						/*** insert the title HTML ***/
-							Uize.Node.injectHtml (
+							Uize.Dom.Basics.injectHtml (
 								document.body,
 								UizeSite.Templates.WidgetToGoTitle.process ({
 									idPrefix:m.get ('idPrefix'),
@@ -99,7 +100,7 @@ Uize.module ({
 								'openInNewWindow',
 								'click',
 								function () {
-									var _windowDims = Uize.Node.getDimensions (window);
+									var _windowDims = Uize.Dom.Pos.getDimensions (window);
 									_launchPopup ('',location.href,_windowDims.width,_windowDims.height,0);
 								}
 							);

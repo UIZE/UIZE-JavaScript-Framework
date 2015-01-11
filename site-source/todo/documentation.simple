@@ -221,7 +221,6 @@ Bugs
 	file:///C:/~uize/UIZE-JavaScript-Framework/examples/slideshow-of-data.html
 		- data bars don't have any space around them (has to do with IE8's handling of cellspacing attribute of table)
 	- weird bug with slideshow with wipes, where if you navigate forward and then back (or vice versa), it starts coming up with bogus wipe effect settings. Is this a side effect of the code that picks a new random wipe each slide? Or is this a side effect of recent loop optimizations? Seems like it may have to do with the images for the various panes being cached. Maybe something about the load handler behavior. Doesn't seem reproducable at all when going straight through - regardless of direction. Flipping back and forth between two images, however, causes corruption of the effects.
-	- Chrome: issue with thumbzoom in some examples (zoomed image disappears as soon as its zoomed out)
 	- FF: issue with ThumbZoom and horizontal scrolly in scrolly example - zooms out from pancaked sliver (could this be a result of changes in getCoordinates?)
 	- IE7: Hover Fader Stretching Menu - weird flickering with some presets, screwy sticky shifting of entire menu with other presets
 
@@ -649,7 +648,7 @@ XHTML Validation Problems
 		.........................................................
 
 Design Philosophy (some ramblings)
-	Node-related methods implemented in Uize.Widget are a reflection of static methods from the Uize.Node package that are the most useful and frequently used in the context of widget implementations. If you need to use more esoteric methods, you can access those from the Uize.Node package and use the getNode instance method to get references to implied nodes to supply to the methods of the Uize.Node package.
+	DOM node related methods implemented in Uize.Widget are a reflection of static methods from the Uize.Dom.Basics package that are the most useful and frequently used in the context of widget implementations. If you need to use more esoteric methods, you can access those from the Uize.Dom.Basics package and use the getNode instance method to get references to implied nodes to supply to the methods of the Uize.Dom.Basics package.
 
 	UIZE takes the approach of exposing abstractions for things for which it is useful to provide abstractions. Beyond these useful abstractions, UIZE does not attempt to provide a comprehensive abstraction of all DOM APIs. There's nothing wrong with using safe and consistently implemented methods of the standard DOM APIs.
 
@@ -816,7 +815,7 @@ New Examples to Create
 
 	Uize.Widget.Options.Accordion
 
-	Uize.Node.injectHtml
+	Uize.Dom.Basics.injectHtml
 		- migrate existing test from functionality test and add explanation
 		- create interactive example that lets you add things in different places
 

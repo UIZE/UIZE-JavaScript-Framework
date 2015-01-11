@@ -30,6 +30,7 @@
 Uize.module ({
 	name:'Uize.Widget.AutoTooltip',
 	required:[
+		'Uize.Dom.Basics',
 		'Uize.Tooltip',
 		'Uize.Str.Camel',
 		'Uize.Str.Split'
@@ -59,7 +60,7 @@ Uize.module ({
 				if (m.isWired) {
 					/* TO DO: Must do something to unwire existing nodes and wire up new nodes. */
 					m.wireNode (
-						m._nodes = Uize.Node.find (m._nodes),
+						m._nodes = Uize.Dom.Basics.find (m._nodes),
 						{
 							mouseover:
 								function () {
@@ -218,7 +219,7 @@ Uize.module ({
 							nodes
 								An array, representing the nodes that should be wired up to display an automatically generated tooltip when mousing over them.
 
-								To easily set a value for this property, a method such as the =Uize.Node.find= static method may be used to find nodes in the document.
+								To easily set a value for this property, a method such as the =Uize.Dom.Basics.find= static method may be used to find nodes in the document.
 
 								NOTES
 								- the initial value is =undefined=

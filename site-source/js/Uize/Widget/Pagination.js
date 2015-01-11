@@ -29,7 +29,7 @@ Uize.module ({
 	name:'Uize.Widget.Pagination',
 	required:[
 		'Uize.Widget.Button',
-		'Uize.Node',
+		'Uize.Dom.Basics',
 		'Uize.Dom.Classes',
 		'Uize.Url'
 	],
@@ -122,11 +122,11 @@ Uize.module ({
 
 					if (_hasMultiplePages) {
 						var
-							_display = function(_pageButtonName, _mustDisplay) {
+							_display = function (_pageButtonName, _mustDisplay) {
 								_children[_pageButtonName] &&
 									_children[_pageButtonName].displayNode('', _mustDisplay);
 							},
-							_setText = function(_pageButtonName, _pageNumber) {
+							_setText = function (_pageButtonName, _pageNumber) {
 								_children[_pageButtonName] &&
 									_children[_pageButtonName].set({text:_formatNumber(_pageNumber)});
 							}
@@ -184,18 +184,20 @@ Uize.module ({
 					}
 				},
 
-				wireUi:function() {
+				wireUi:function () {
 					var m = this;
 
 					if (!m.isWired) {
 						/*** Determine which page links exist ***/
 							var
-								_childExists = function(_childName) { return !!Uize.Node.getById(m.get('idPrefix') + '_' + _childName) },
-								_addPageButton = function(_pageNo) {
+								_childExists = function (_childName) {
+									return !!Uize.Dom.Basics.getById(m.get('idPrefix') + '_' + _childName);
+								},
+								_addPageButton = function (_pageNo) {
 									_addChildButton(
 										m,
 										'page' + _pageNo,
-										function() { _gotoPage(m,_calculatePagesStart(m) + _pageNo) }
+										function () { _gotoPage(m,_calculatePagesStart(m) + _pageNo) }
 									);
 								}
 							;
@@ -233,7 +235,7 @@ Uize.module ({
 				},
 				_pageSize:{
 					name:'pageSize',
-					conformer:function(_newPageSize) { return _newPageSize ? _newPageSize : 30 },
+					conformer:function (_newPageSize) { return _newPageSize ? _newPageSize : 30 },
 					onChange:_updatePages,
 					value:30
 				},

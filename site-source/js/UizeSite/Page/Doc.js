@@ -19,7 +19,7 @@
 Uize.module ({
 	name:'UizeSite.Page.Doc',
 	required:[
-		'Uize.Node',
+		'Uize.Dom.Basics',
 		'Uize.Dom.Tree',
 		'Uize.Widgets.NavTree.List.Widget',
 		'Uize.Url',
@@ -30,7 +30,13 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		var _sacredEmptyObject = {};
+		var
+			/*** Variables for Scruncher Optimization ***/
+				_Uize_Dom_Basics = Uize.Dom.Basics,
+
+			/*** General Variables ***/
+				_sacredEmptyObject = {}
+		;
 
 		/*** Utility Functions ***/
 			function _getAnchorFromLinkTag (_linkTag) {
@@ -136,8 +142,8 @@ Uize.module ({
 								);
 
 						/*** wire up behavior for scrolling to anchors ***/
-							var _titleBar = Uize.Node.find ({tagName:'h1',className:'document-title'}) [0];
-							Uize.Node.getStyle (_titleBar,'position') == 'fixed' &&
+							var _titleBar = _Uize_Dom_Basics.find ({tagName:'h1',className:'document-title'}) [0];
+							_Uize_Dom_Basics.getStyle (_titleBar,'position') == 'fixed' &&
 								m.wireNode (
 									document.body,
 									'click',
@@ -146,7 +152,7 @@ Uize.module ({
 										_target.tagName == 'A' && _getAnchorFromLinkTag (_target) &&
 											setTimeout (
 												function () {
-													var _body = Uize.Node.isSafari ? document.body : document.documentElement;
+													var _body = _Uize_Dom_Basics.isSafari ? document.body : document.documentElement;
 													_body.scrollTop && (_body.scrollTop -= 48);
 														/* NOTE:
 															Only adjust scroll if it's not zero (in the case of Safari on the iPad, it remains 0 even with user scrolling or linking to anchors).
@@ -163,15 +169,15 @@ Uize.module ({
 							Uize.Flo.forEach (
 								function (_next) {
 									_next (
-										Uize.Node.find ({
-											root:Uize.Node.find ({className:'contents0'}) [0],
+										_Uize_Dom_Basics.find ({
+											root:_Uize_Dom_Basics.find ({className:'contents0'}) [0],
 											tagName:'A',
 											href:/.+/
 										})
 									);
 								},
 								function (_next) {
-									Uize.Node.wire (
+									_Uize_Dom_Basics.wire (
 										_next.flo.value,
 										{
 											onmouseover:function () {

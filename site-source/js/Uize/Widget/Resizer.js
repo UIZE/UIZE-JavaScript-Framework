@@ -35,7 +35,8 @@
 Uize.module ({
 	name:'Uize.Widget.Resizer',
 	required:[
-		'Uize.Node',
+		'Uize.Dom.Basics',
+		'Uize.Dom.Pos',
 		'Uize.Widget.Drag'
 	],
 	builder:function  (_superclass) {
@@ -45,8 +46,8 @@ Uize.module ({
 			/*** Variables for Scruncher Optimization ***/
 				_true = true,
 				_false = false,
-				_Uize_Node = Uize.Node,
-				_isIe = _Uize_Node.isIe,
+				_Uize_Dom_Basics = Uize.Dom.Basics,
+				_isIe = _Uize_Dom_Basics.isIe,
 
 			/*** General Variables ***/
 				_ieQuirkyBoxes = _isIe && document.compatMode != 'CSS1Compat',
@@ -84,7 +85,7 @@ Uize.module ({
 
 			function _updateShellBounds (m) {
 				if (m.isWired && !(m._bounds = m._constrainBounds)) {
-					var _shellDims = _Uize_Node.getDimensions (m.getNode ('shell'));
+					var _shellDims = Uize.Dom.Pos.getDimensions (m.getNode ('shell'));
 					if (_shellDims.width && _shellDims.height)
 						m._bounds = [0,0,_shellDims.width - 1,_shellDims.height - 1]
 					;
@@ -199,7 +200,7 @@ Uize.module ({
 								if (_area) {
 									var
 										_getBorderWidth = function(_side) {
-											return parseInt (_Uize_Node.getStyle (_area,'border' + _side + 'Width')) || 0;
+											return parseInt (_Uize_Dom_Basics.getStyle (_area,'border' + _side + 'Width')) || 0;
 										},
 										_newAreaWidth = Math.max (
 											m._width - (_ieQuirkyBoxes ? _getBorderWidth ('Left') + _getBorderWidth ('Right') : 0),0
@@ -212,7 +213,7 @@ Uize.module ({
 											? m.displayNode ('jiggler',m._jigglerShown = !m._jigglerShown)
 											: (m._lastAreaWidth [_areaNode] = _newAreaWidth)
 									;
-									_Uize_Node.setStyle (
+									_Uize_Dom_Basics.setStyle (
 										_area,
 										{
 											left:m._left,
@@ -448,7 +449,7 @@ Uize.module ({
 								if (_areaNode) {
 									var _jiggler = document.createElement ('div');
 									_jiggler.id = m.get ('idPrefix') + '-jiggler';
-									_Uize_Node.setStyle (_jiggler,{position:'absolute'});
+									_Uize_Dom_Basics.setStyle (_jiggler,{position:'absolute'});
 									_areaNode.appendChild (_jiggler);
 								}
 							}

@@ -28,7 +28,7 @@
 Uize.module ({
 	name:'Uize.Widget.Bar.Slider.xSkin',
 	required:[
-		'Uize.Node',
+		'Uize.Dom.Pos',
 		'Uize.Dom.Util'
 	],
 	builder:function (_class) {
@@ -53,7 +53,6 @@ Uize.module ({
 						}
 						var
 							m = this,
-							_Uize_Node = Uize.Node,
 							_getOpacityStr = Uize.Dom.Util.getOpacityStr,
 							_idPrefix = _input.idPrefix,
 							_orientation = _input.orientation,
@@ -61,7 +60,7 @@ Uize.module ({
 							_borderThickness = _input.borderThickness != _undefined ? _input.borderThickness : 5,
 							_knobSize = _input.knobSize != _undefined ? _input.knobSize : 15,
 							_shell = m.getNode (),
-							_shellDims = _Uize_Node.getDimensions (_shell),
+							_shellDims = Uize.Dom.Pos.getDimensions (_shell),
 							_dimAttributes = ['width','height'],
 							_outerDims = _shell
 								? [

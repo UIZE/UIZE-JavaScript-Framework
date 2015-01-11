@@ -26,7 +26,8 @@
 Uize.module ({
 	name:'Uize.Widget.PopupPalette',
 	required:[
-		'Uize.Node',
+		'Uize.Dom.Basics',
+		'Uize.Dom.Pos',
 		'Uize.Fade',
 		'Uize.Widget.Button'
 	],
@@ -37,7 +38,7 @@ Uize.module ({
 			/*** Variables for Scruncher Optimization ***/
 				_true = true,
 				_false = false,
-				_Uize_Node = Uize.Node,
+				_Uize_Dom = Uize.Dom,
 				_addChildButton = Uize.Widget.Button.addChildButton,
 
 			/*** General Variables ***/
@@ -292,9 +293,9 @@ Uize.module ({
 											m.displayNode ('palette',_before);
 										}
 									;
-									if (_Uize_Node.isNode(_nodeToPositionAdjacentTo)) {
+									if (_Uize_Dom.Basics.isNode(_nodeToPositionAdjacentTo)) {
 										_displayHiddenForPositioning (_true);
-										_Uize_Node.setAbsPosAdjacentTo (_paletteNode, _nodeToPositionAdjacentTo);
+										_Uize_Dom.Pos.setAbsPosAdjacentTo (_paletteNode, _nodeToPositionAdjacentTo);
 										_displayHiddenForPositioning (_false);
 									}
 								}

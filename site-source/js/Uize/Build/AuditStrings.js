@@ -63,7 +63,7 @@
 					 --- 92,101,189
 					TD --- 54
 					TR --- 142,249,274
-					Uize.Node --- 22
+					Uize.Dom.Basics --- 22
 					Uize.Widget.TableSort --- 21
 					headingLitClass --- 346
 					headingOverClass --- 342

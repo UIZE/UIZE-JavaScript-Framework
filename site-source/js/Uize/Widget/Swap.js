@@ -158,7 +158,6 @@
 Uize.module ({
 	name:'Uize.Widget.Swap',
 	required:[
-		'Uize.Node',
 		'Uize.Dom.Util',
 		'Uize.Fade'
 	],
@@ -167,7 +166,6 @@ Uize.module ({
 
 		var
 			/*** Variables for Scruncher Optimization ***/
-				_Uize_Node = Uize.Node,
 				_getOpacityProperties = Uize.Dom.Util.getOpacityProperties,
 
 			/*** General Variables ***/
@@ -222,7 +220,7 @@ Uize.module ({
 						'rect(' + _cropCoords [1] + _cropCoords [2] + _cropCoords [3] + _cropCoords [0] + ')'
 					;
 				}
-				_Uize_Node.setStyle (_item,_styleProperties);
+				m.setNodeStyle (_item,_styleProperties);
 			}
 
 		return _superclass.subclass ({
@@ -299,8 +297,8 @@ Uize.module ({
 					var
 						m = this,
 						_node = m.getNode () || _nextItem,
-						_viewFinalDimsW = parseInt (_Uize_Node.getStyle (_node,'width')),
-						_viewFinalDimsH = parseInt (_Uize_Node.getStyle (_node,'height'))
+						_viewFinalDimsW = parseInt (m.getNodeStyle (_node,'width')),
+						_viewFinalDimsH = parseInt (m.getNodeStyle (_node,'height'))
 					;
 					m.fade.stop ();
 					m._cyclingPropertySets &&

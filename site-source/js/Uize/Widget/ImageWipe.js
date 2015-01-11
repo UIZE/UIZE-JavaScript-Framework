@@ -142,7 +142,8 @@
 Uize.module ({
 	name:'Uize.Widget.ImageWipe',
 	required:[
-		'Uize.Node',
+		'Uize.Dom.Basics',
+		'Uize.Dom.Pos',
 		'Uize.Dom.Util',
 		'Uize.Fade',
 		'Uize.Array.Order'
@@ -152,7 +153,7 @@ Uize.module ({
 
 		var
 			/*** Variables for Scruncher Optimization ***/
-				_Uize_Node = Uize.Node
+				_Uize_Dom_Basics = Uize.Dom.Basics
 		;
 
 		return _superclass.subclass ({
@@ -210,14 +211,14 @@ Uize.module ({
 							}
 							var _paneNode = _paneNodes [_paneNo];
 							_paneCoordsChanged &&
-								_Uize_Node.setClipRect (
+								_Uize_Dom_Basics.setClipRect (
 									_paneNode,
 									_paneCoords [1],_paneCoords [2],_paneCoords [3],_paneCoords [0]
 								)
 							;
 							var _opacity = m._dissolve ? _paneProgressFraction : 1;
 							_opacity !== _pane._opacity &&
-								_Uize_Node.setOpacity (_paneNode,_pane._opacity = _opacity)
+								_Uize_Dom_Basics.setOpacity (_paneNode,_pane._opacity = _opacity)
 							;
 						}
 					}
@@ -231,11 +232,11 @@ Uize.module ({
 						/* NOTE:
 							for better performance (especially in IE, it seems), make sure there is only one pane node for displaying the current item underneath the pane nodes for the next item
 						*/
-						_Uize_Node.display (_currentItemPaneNodes,false);
-						_Uize_Node.display (_currentItemPaneNodes [0]);
-						_Uize_Node.setStyle (_currentItemPaneNodes [0],{clip:'rect(auto, auto, auto, auto)',opacity:1});
+						_Uize_Dom_Basics.display (_currentItemPaneNodes,false);
+						_Uize_Dom_Basics.display (_currentItemPaneNodes [0]);
+						_Uize_Dom_Basics.setStyle (_currentItemPaneNodes [0],{clip:'rect(auto, auto, auto, auto)',opacity:1});
 					}
-					_Uize_Node.display (this._paneNodes = _nextItem.getElementsByTagName ('IMG'));
+					_Uize_Dom_Basics.display (this._paneNodes = _nextItem.getElementsByTagName ('IMG'));
 				},
 
 				setCurrentItem:function (_currentItem) {
@@ -691,7 +692,7 @@ Uize.module ({
 							} else {
 								var _imageLoader = new Image;
 								/* NOTE:
-									We can't use the Uize.Node.wire method here because Safari doesn't implement instances of the Image object as real IMG DOM nodes, and Uize.Node.wire has no effect.
+									We can't use the Uize.Dom.Basics.wire method here because Safari doesn't implement instances of the Image object as real IMG DOM nodes, and Uize.Dom.Basics.wire has no effect.
 								*/
 								_imageLoader.onload = _imageLoader.onerror = _imageLoader.onabort =
 									function () {
@@ -730,7 +731,7 @@ Uize.module ({
 						var
 							m = this,
 							_shellNode = m.getNode (),
-							_shellSize = _Uize_Node.getDimensions (_shellNode),
+							_shellSize = Uize.Dom.Pos.getDimensions (_shellNode),
 							_background = input.background || Uize.Dom.Util.getEffectiveBgColor (_shellNode),
 							_htmlChunks = []
 						;

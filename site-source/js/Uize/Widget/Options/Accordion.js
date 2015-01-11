@@ -26,7 +26,7 @@
 Uize.module ({
 	name:'Uize.Widget.Options.Accordion',
 	required:[
-		'Uize.Node',
+		'Uize.Dom.Pos',
 		'Uize.Fade'
 	],
 	builder:function (_superclass) {
@@ -35,7 +35,7 @@ Uize.module ({
 		var
 			/*** Variables for Scruncher Optimization ***/
 				_Uize = Uize,
-				_Uize_Node = _Uize.Node,
+				_getDimensions = _Uize.Dom.Pos.getDimensions,
 				_Uize_Fade = _Uize.Fade
 		;
 
@@ -74,8 +74,7 @@ Uize.module ({
 						var
 							// If an explicit height is set then we want that to be the max value not the calculated
 							// height. That way you can still have fixed height accordions
-							_newTabHeight = parseInt(_newTabBodyNodeStyleHeight)
-								|| _Uize_Node.getDimensions(_newTabBodyNode).height
+							_newTabHeight = parseInt(_newTabBodyNodeStyleHeight) || _getDimensions(_newTabBodyNode).height
 						;
 
 						_newTabHeight
@@ -151,9 +150,7 @@ Uize.module ({
 					Start:function () {
 						_tabBodyStart(m._previousTabNo);
 						_tabBodyStart(m.get('valueNo'));
-						_previousTabNodeHeight = _Uize_Node.getDimensions(
-							_getTabBodyNode(m,m._previousTabNo)
-						).height;
+						_previousTabNodeHeight = _getDimensions(_getTabBodyNode(m,m._previousTabNo)).height;
 						_newTabNodeHeight = m.fade.get('endValue');
 					},
 					'Changed.value':function () {

@@ -26,7 +26,7 @@
 Uize.module ({
 	name:'Uize.Widget.TextInput',
 	required:[
-		'Uize.Node',
+		'Uize.Dom.Basics',
 		'Uize.Dom.Event',
 		'Uize.Tooltip'
 	],
@@ -218,7 +218,7 @@ Uize.module ({
 							'warningIcon',
 							{
 								mouseover:function () {
-									Uize.Node.setInnerHtml (m._tooltip, m._selectWarningMessage());
+									Uize.Dom.Basics.setInnerHtml (m._tooltip, m._selectWarningMessage());
 									Uize.Tooltip.showTooltip (m._tooltip,_true);
 								},
 								mouseout:function () {Uize.Tooltip.hideTooltip(m._tooltip)}

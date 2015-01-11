@@ -42,7 +42,7 @@ Uize.module({
 	superclass: 'Uize.Widget.FormElement.Text',
 	required: [
 		'Uize.Data.NameValueRecords',
-		'Uize.Node',
+		'Uize.Dom.Pos',
 		'Uize.Dom.Event',
 		'Uize.Str.Trim',
 		'Uize.Widget.Options.Selector'
@@ -59,7 +59,7 @@ Uize.module({
 				_emptyString = '',
 				_Uize = Uize,
 				_Uize_Data = _Uize.Data,
-				_Uize_Node = _Uize.Node,
+				_Uize_Dom_Pos = _Uize.Dom.Pos,
 				_Uize_Dom_Event = _Uize.Dom.Event,
 				_trim = Uize.Str.Trim.trim,
 				_supportsPlaceholder = typeof document != 'undefined'
@@ -380,12 +380,12 @@ Uize.module({
 						m.showNode(_suggestionsPaletteNode, _false);
 						m.displayNode(_suggestionsPaletteNode);
 						if (m.get('autoPositionSuggestionsPalette')) {
-							_Uize_Node.setAbsPosAdjacentTo(_suggestionsPaletteNode, _inputNode, 'y');
+							_Uize_Dom_Pos.setAbsPosAdjacentTo(_suggestionsPaletteNode, _inputNode, 'y');
 							// We want the palette to be at least as wide as the input and as wide as needed to display every
 							// suggestion.
 							m.setNodeStyle(
 								_suggestionsPaletteNode,
-								{ minWidth: _Uize_Node.getDimensions(_inputNode).width }
+								{ minWidth: _Uize_Dom_Pos.getDimensions(_inputNode).width }
 							);
 						}
 						m.showNode(_suggestionsPaletteNode);

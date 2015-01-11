@@ -26,7 +26,7 @@
 Uize.module ({
 	name:'Uize.Widget.FormElement',
 	required:[
-		'Uize.Node',
+		'Uize.Dom.Basics',
 		'Uize.Dom.Event',
 		'Uize.Dom.Classes',
 		'Uize.Widget.FormElementWarning'
@@ -41,7 +41,7 @@ Uize.module ({
 				_null = null,
 				_undefined,
 				_Uize = Uize,
-				_Uize_Node = _Uize.Node,
+				_Uize_Dom_Basics = _Uize.Dom.Basics,
 				_Uize_Dom_Event = _Uize.Dom.Event,
 				_checkWarningShown = 'checkWarningShown',
 
@@ -310,7 +310,7 @@ Uize.module ({
 										nodeMap:_Uize.copyInto(
 											m.get('nodeMap') || {},
 											{
-												input:_Uize_Node.find({
+												input:_Uize_Dom_Basics.find({
 													tagName:'INPUT',
 													type:'radio',
 													name:m._elementName
@@ -416,7 +416,7 @@ Uize.module ({
 							if (_focused && _inputNode && document.activeElement != _inputNode) {
 								setTimeout(
 									function () {
-										try { (_Uize_Node.isNode(_inputNode) ? _inputNode : _inputNode[0]).focus(); }
+										try { (_Uize_Dom_Basics.isNode(_inputNode) ? _inputNode : _inputNode[0]).focus(); }
 										catch(_ex) {}
 									}, 50
 								);

@@ -558,7 +558,7 @@ Uize.module ({
 
 							EXAMPLE
 							................................................................................
-							Uize.Node.setStyle (
+							Uize.Dom.Basics.setStyle (
 								'myNodeId',
 								{color:Uize.Color.random ('#hex'),backgroundColor:Uize.Color.random ('#hex')}
 							);

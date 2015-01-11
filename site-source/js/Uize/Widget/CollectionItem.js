@@ -35,7 +35,6 @@
 Uize.module ({
 	name:'Uize.Widget.CollectionItem',
 	required:[
-		'Uize.Node',
 		'Uize.Widget.Button',
 		'Uize.Dom.Classes'
 	],

@@ -26,7 +26,8 @@
 Uize.module ({
 	name:'Uize.Widget.Swap.Image',
 	required:[
-		'Uize.Node',
+		'Uize.Dom.Basics',
+		'Uize.Dom.Pos',
 		'Uize.Dom.Util'
 	],
 	builder:function (_superclass) {
@@ -34,7 +35,7 @@ Uize.module ({
 
 		var
 			/*** Variables for Scruncher Optimization ***/
-				_Uize_Node = Uize.Node
+				_Uize_Dom_Basics = Uize.Dom.Basics
 		;
 
 		function _updateUiSrc () {
@@ -51,7 +52,7 @@ Uize.module ({
 
 				var _loadNextImage = function () {
 					var _image = m._imagesLoaded [m._src];
-					_Uize_Node.setStyle (
+					_Uize_Dom_Basics.setStyle (
 						_nextItem,
 						{
 							paddingLeft:(m.viewFinalCoords [2] + 1 - _image._width) / 2,
@@ -78,7 +79,7 @@ Uize.module ({
 								abort:_nextImageLoaded
 							}
 						);
-						if (_Uize_Node.isIe && /\.png$/i.test (m._src)) {
+						if (_Uize_Dom_Basics.isIe && /\.png$/i.test (m._src)) {
 							_nextItemImg.style.filter = 'progid:DXImageTransform.Microsoft.AlphaImageLoader(src=\'' + m._src + '\', sizingMethod=\'crop\')';
 							_nextItemImg.src = m.Class.getBlankImageUrl ();
 						}
@@ -96,7 +97,7 @@ Uize.module ({
 				} else {
 					var _imageLoader = new Image;
 					/* NOTE:
-						We can't use the Uize.Node.wire method here because Safari doesn't implement instances of the Image object as real IMG DOM nodes, and Uize.Node.wire has no effect.
+						We can't use the Uize.Dom.Basics.wire method here because Safari doesn't implement instances of the Image object as real IMG DOM nodes, and Uize.Dom.Basics.wire has no effect.
 					*/
 					_imageLoader.onload = _imageLoader.onerror = _imageLoader.onabort =
 						function () {
@@ -145,7 +146,7 @@ Uize.module ({
 						var
 							m = this,
 							_shellNode = this.getNode (),
-							_shellSize = _Uize_Node.getDimensions (_shellNode),
+							_shellSize = Uize.Dom.Pos.getDimensions (_shellNode),
 							_background = input.background || Uize.Dom.Util.getEffectiveBgColor (_shellNode)
 						;
 						function _getItemTag (_itemNo) {

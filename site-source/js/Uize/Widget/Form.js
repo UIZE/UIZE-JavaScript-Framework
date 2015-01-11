@@ -31,7 +31,6 @@ Uize.module ({
 		'Uize.Widget.Committer',
 		'Uize.Widget.FormWarnings',
 		'Uize.Widget.Button',
-		'Uize.Node',
 		'Uize.Dom.Event',
 		'Uize.Data.Compare',
 		'Uize.Widget.mDeclarativeChildren',

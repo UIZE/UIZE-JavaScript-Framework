@@ -60,7 +60,7 @@ Sections of This Web Site
 Search Tips
 	If you're looking for information on something in particular, be sure to use the convenient *"SEARCH"* link located in the lower left - at the very bottom of the contents menu pane.
 
-	You may be looking for references to a certain topic (such as "Ajax"), or you may be looking for references to method names (eg "Uize.Node.setStyle"), or module names (eg. "Uize.Widget.Calendar"), or types of widgets (eg. "calendar"). Search for anything within the UIZE Web site. Just click the *"SEARCH"* link, enter your search query in the search page that loads in, and then click on one of the search buttons for the various main sections of the site - your search will be conducted within that section.
+	You may be looking for references to a certain topic (such as "Ajax"), or you may be looking for references to method names (eg "Uize.Dom.Basics.setStyle"), or module names (eg. "Uize.Widget.Calendar"), or types of widgets (eg. "calendar"). Search for anything within the UIZE Web site. Just click the *"SEARCH"* link, enter your search query in the search page that loads in, and then click on one of the search buttons for the various main sections of the site - your search will be conducted within that section.
 
 	Searching for References to a Module
 		When you're reading up on a particular JavaScript module and you want to understand more about it by viewing examples that use it, or by reading guides that reference it, or by seeing how it's used by other modules, etc., then a dedicated feature of the module reference documents will make your life easier.

@@ -22,7 +22,6 @@
 	Uize.Dom.Basics
 	Uize.Dom.Pos
 	Uize.Event.Bus
-	Uize.Node
 	Uize.Dom.Classes
 	Uize.Web
 	Uize.Web.xEffects

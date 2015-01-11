@@ -303,7 +303,7 @@ UIZE Config Options
 			- =Uize.Comm= (and all submodules)
 			- =Uize.Cookie=
 			- =Uize.Fx= (and all submodules)
-			- =Uize.Node= (and all submodules)
+			- =Uize.Dom= (and all submodules)
 			- =Uize.Tooltip=
 			- =Uize.Util.Cycle=
 			- =Uize.Widget= (and all submodules)

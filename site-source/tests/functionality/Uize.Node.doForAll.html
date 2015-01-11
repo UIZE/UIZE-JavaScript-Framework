@@ -1,35 +1,49 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<title>TEST: Uize.Node.doForAll | UIZE JavaScript Framework</title>
+	<title>TEST: Uize.Dom.Basics.doForAll | UIZE JavaScript Framework</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<style type="text/css">
+		.node {
+			position: absolute;
+			display: none;
+			visibility: hidden;
+			background: #fff;
+			border: solid 1px #000;
+		}
+	</style>
 </head>
 <body>
 
 <script type="text/javascript" src="../../js/Uize.js"></script>
-<script type="text/javascript" src="../../js/Uize.Node.js"></script>
 
-<div id="node1" style="position:absolute; visibility:hidden; background:#fff; border:solid 1px #000;"></div>
+<div id="node1" class="node"></div>
 <br/><br/>
-<div id="node2" style="position:absolute; visibility:hidden; background:#fff; border:solid 1px #000;"></div>
+<div id="node2" class="node"></div>
 <br/><br/>
-<div id="node3" style="position:absolute; visibility:hidden; background:#fff; border:solid 1px #000;"></div>
+<div id="node3" class="node"></div>
 <br/><br/>
 
 <script type="text/javascript">
 
-var _nodeBlob = {blah:'node1',other:['node2',{spludge:'node3'}]};
-Uize.Node.setInnerHtml (_nodeBlob,'blah');
-Uize.Node.wire (
-	_nodeBlob,
-	{
-		mouseover:function () {this.style.background = '#f00'},
-		mouseout:function () {this.style.background = '#fff'},
-		click:function () {alert ('hello')}
+Uize.require (
+	'Uize.Dom.Basics',
+	function () {
+		var _nodeBlob = {blah:'node1',other:['node2',{spludge:'node3'}]};
+		Uize.Dom.Basics.setInnerHtml (_nodeBlob,'blah');
+		Uize.Dom.Basics.wire (
+			_nodeBlob,
+			{
+				mouseover:function () {this.style.background = '#f00'},
+				mouseout:function () {this.style.background = '#fff'},
+				click:function () {alert ('hello')}
+			}
+		);
+		Uize.Dom.Basics.setStyle (_nodeBlob,{position:'relative'});
+		Uize.Dom.Basics.show (_nodeBlob);
+		Uize.Dom.Basics.display (_nodeBlob);
 	}
 );
-Uize.Node.show (_nodeBlob);
-Uize.Node.showInLayoutFlow (_nodeBlob);
 
 </script>
 

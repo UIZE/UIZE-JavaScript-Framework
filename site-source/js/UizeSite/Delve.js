@@ -619,11 +619,21 @@ Uize.module ({
 			function _windowFind (m) {
 				var _windowUize = m._window.Uize;
 				return (_windowUize.Node || _windowUize.Dom.Basics).find;
+				/* NOTE:
+					A better approach here would be to allow the Uize.Dom.* modules to be invoked with a window or document context. This would require restructuring so that such modules become classes, of which instances or singletons can be created.
+
+					At the very least, the Uize.Dom.Basics module could support a static property for the window that should be used as the context, and this function could return a function that changed the context before executing the Uize.Dom.* methods and then restored the context afterwards.
+				*/
 			}
 
 			function _windowGetCoords (m) {
 				var _windowUize = m._window.Uize;
 				return (_windowUize.Node || _windowUize.Dom.Pos).getCoords;
+				/* NOTE:
+					A better approach here would be to allow the Uize.Dom.* modules to be invoked with a window or document context. This would require restructuring so that such modules become classes, of which instances or singletons can be created.
+
+					At the very least, the Uize.Dom.Basics module could support a static property for the window that should be used as the context, and this function could return a function that changed the context before executing the Uize.Dom.* methods and then restored the context afterwards.
+				*/
 			}
 
 			function _getWidgetNodesInfo (m,_widget) {

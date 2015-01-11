@@ -25,7 +25,10 @@
 
 Uize.module ({
 	name:'Uize.Widget.Resizer.Marquee',
-	required:'Uize.Node',
+	required:[
+		'Uize.Dom.Basics',
+		'Uize.Dom.Pos'
+	],
 	builder:function  (_superclass) {
 		'use strict';
 
@@ -33,7 +36,8 @@ Uize.module ({
 			/*** Variables for Scruncher Optimization ***/
 				_true = true,
 				_false = false,
-				_Uize_Node = Uize.Node,
+				_Uize_Dom_Basics = Uize.Dom.Basics,
+				_Uize_Dom_Pos = Uize.Dom.Pos,
 
 			/*** General Variables ***/
 				_centerAlign = [.5,.5],
@@ -93,10 +97,10 @@ Uize.module ({
 							var
 								_pointIds = _pointIdsMap [_handleName],
 								_handleNode = m.getNode (_handleName),
-								_handleDims = _Uize_Node.getDimensions (_handleNode),
+								_handleDims = _Uize_Dom_Pos.getDimensions (_handleNode),
 								_handleAlign = _handlesAlign [_handleName] || _centerAlign
 							;
-							_Uize_Node.setStyle (
+							_Uize_Dom_Basics.setStyle (
 								_handleNode,
 								{
 									left:_left + _pointIds [0] * _widthMinus1 - (_handleDims.width - 1) * _handleAlign [0],
@@ -166,8 +170,8 @@ Uize.module ({
 													/* NOTE:
 														because we have the don't-swap-sides hack for when an aspect ratio is set, we can only create marquee by dragging from top left to bottom right, and so we start drag with the bottom right handle
 													*/
-												_shellCoords = _Uize_Node.getCoords (_shell),
-												_eventAbsPos = _Uize_Node.getEventAbsPos (_event)
+												_shellCoords = _Uize_Dom_Pos.getCoords (_shell),
+												_eventAbsPos = _Uize_Dom_Pos.getEventAbsPos (_event)
 											;
 											m.set ({creatingNew:_true});
 											m.setPositionDuringDrag (
@@ -180,7 +184,7 @@ Uize.module ({
 										}
 									}
 								;
-								_Uize_Node.setStyle (_shell,{cursor:'crosshair'});
+								_Uize_Dom_Basics.setStyle (_shell,{cursor:'crosshair'});
 								m.wireNode (_shell,{mousedown:_initiateDrag,touchstart:_initiateDrag});
 							}
 
@@ -212,8 +216,9 @@ Uize.module ({
 									m.addChild ('rotate', _Uize_Widget_Drag).wire ({
 										'Before Drag Start':function (_event) {
 											var
-												_buttonCoords = _Uize_Node.getCoords (m.getNode ('rotate')),
-												_centerCoords = _Uize_Node.getCoords (m.getNode (m.get ('areaNodes') [0])) // assume that an area node always exists
+												_buttonCoords = _Uize_Dom_Pos.getCoords (m.getNode ('rotate')),
+												_centerCoords = _Uize_Dom_Pos.getCoords (m.getNode (m.get ('areaNodes') [0]))
+													// assume that an area node always exists
 											;
 
 											_initialRotation = m.get ('rotation');

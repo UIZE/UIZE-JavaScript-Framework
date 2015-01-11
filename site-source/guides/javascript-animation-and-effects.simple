@@ -49,7 +49,7 @@ Some Examples
 		- [[../examples/progress-bar.html][*Basic Progress Bar*]] - Demonstrates how you can use the =Uize.Widget.Bar.Progress= widget class to provide feedback on the progress of a task of indeterminate length (such as an AJAX request).
 
 	Reveal Effects
-		- [[../examples/sequenced-show-using-swap.html][*Sequenced Show Using Swap*]] - Demonstrates use of the =Uize.Array.Order.jumble= method of the =Uize.Array.Order= package in conjunction with the =Uize.Node.find= method in order to sequence the showing of thumbnail images in a grid, with a JavaScript animation reveal effect provided by the =Uize.Widget.Swap= class.
+		- [[../examples/sequenced-show-using-swap.html][*Sequenced Show Using Swap*]] - Demonstrates use of the =Uize.Array.Order.jumble= method of the =Uize.Array.Order= package in conjunction with the =Uize.Dom.Basics.find= method in order to sequence the showing of thumbnail images in a grid, with a JavaScript animation reveal effect provided by the =Uize.Widget.Swap= class.
 		- [[../examples/thumbzoom.html][*Uize.Widget.ThumbZoom*]] - Demonstrates how the =Uize.Widget.ThumbZoom= widget class can be used to wire up an aribitrary number of thumbnail images on the page, so that clicking on a thumbnail loads its larger version and then displays it using a zoom out JavaScript animation effect.
 
 	Miscellaneous Examples
@@ -99,15 +99,15 @@ The Engine
 		When this interpolation is driven by its timer, an instance of this class can be used to control an animation over time. Code that uses a =Uize.Fade= instance can wire handlers for various events in order to be notified when value updates - and other key state changes - occur. Let's consider a simple example...
 
 		EXAMPLE
-		...................................................................................
+		.........................................................................................
 		var myFade = Uize.Fade ({startValue:0,endValue:100,duration:5000});
-		myFade.wire ('Changed.value',function () {Uize.Node.setValue ('testNode',myFade)});
+		myFade.wire ('Changed.value',function () {Uize.Dom.Basics.setValue ('testNode',myFade)});
 		myFade.start ();
-		...................................................................................
+		.........................................................................................
 
 		In the above example, a value will be faded between =0= and =100= over a period of =5000= milliseconds (5 seconds) when the =start= instance method is called. In order to have something noticeable happen during the fade, a handler is wired to the =Changed.value= instance event - an event that is fired each time the =value= state property is updated (if you need a refresher on the =Change.[propertyName] Virtual Event=, consult the [[state-properties.html][State Properties]] guide and read through the `Changed Events` section).
 
-		In this case, the handler code simply displays the current value in the DOM node with the =id= of ='testNode'=, using the =Uize.Node.setValue= static method of the =Uize.Node= module. We can pass just the reference to =myFade= here because the =Uize.Node.setValue= method will coerce it to a string and thereby invoke the =valueOf Intrinsic Method= which returns the value of the =value= state property - a nice little shorthand. Now, if we didn't wire a handler to this event, then the value would still fade when the =start= method was called, but nobody would see that anything was happening.
+		In this case, the handler code simply displays the current value in the DOM node with the =id= of ='testNode'=, using the =Uize.Dom.Basics.setValue= static method of the =Uize.Dom.Basics= module. We can pass just the reference to =myFade= here because the =Uize.Dom.Basics.setValue= method will coerce it to a string and thereby invoke the =valueOf Intrinsic Method= which returns the value of the =value= state property - a nice little shorthand. Now, if we didn't wire a handler to this event, then the value would still fade when the =start= method was called, but nobody would see that anything was happening.
 
 	Key Features
 		The =Uize.Fade= class supports the following key features...
@@ -126,11 +126,11 @@ The Engine
 		The =Uize.Fade= class provides a highly versatile mechanism for configuring aribtrary quantization. In our earlier example that displayed an interpolated number in the range of =0= to =100= in a DOM node during the fade, there was no quantization. Consequently, you would see all manner of floating point number displayed throughout the course of the fade. If we were instead using this interpolated value to set something like left position, measured in pixels, then we wouldn't have a healthy value. And even if we rounded the number in our =Changed.value= event handler code, or if the browser forgave floating point pixel measurements, we would still potentially be touching the DOM far more than we would need to - the fractional values will not be noticeable but the unnecessary updates will cost us in performance. This is where the =quantization= state property of the =Uize.Fade= class comes in. Consider an updated version of the earlier example...
 
 		EXAMPLE
-		...................................................................................
+		.........................................................................................
 		var myFade = Uize.Fade ({startValue:0,endValue:100,duration:5000,quantization:1});
-		myFade.wire ('Changed.value',function () {Uize.Node.setValue ('testNode',myFade)});
+		myFade.wire ('Changed.value',function () {Uize.Dom.Basics.setValue ('testNode',myFade)});
 		myFade.start ();
-		...................................................................................
+		.........................................................................................
 
 		By setting the value of the =quantization= state property to =1=, we are ensuring that the value of the =value= state property will always be in increments of =1=. Since the start value is an integer, this will ensure that the interpolated value at any given point in time will always be an integer. Now when the =start= method is called, you would only see integers displayed throughout the course of the fade.
 
@@ -140,7 +140,7 @@ The Engine
 		Start and end values for a fade don't need to be exclusively simple number type values - they can be arrays of numbers, or arrays of arrays of numbers, or objects containing properties with number values, etc. Consider the very practical use case of animating the coordinates of an absolutely positioned DOM node over time by fading the values of its =left=, =top=, =width=, and =height= CSS style properties...
 
 		EXAMPLE
-		.........................................................................
+		...............................................................................
 		var positionFade = Uize.Fade ({
 			startValue:{left:0,top:0,width:10,height:10},
 			endValue:{left:100,top:100,width:200,height:200},
@@ -149,12 +149,12 @@ The Engine
 		});
 		positionFade.wire (
 			'Changed.value',
-			function () {Uize.Node.setStyle ('myNode',positionFade.get ('value'))}
+			function () {Uize.Dom.Basics.setStyle ('myNode',positionFade.get ('value'))}
 		);
 		positionFade.start ();
-		.........................................................................
+		...............................................................................
 
-		In the above example, the DOM node with the =id= of ='myNode'= is being moved and resized, starting from a position of 0,0 and a size of 10 x 10, and ending up at the position of 100,100 and a size of 200 x 200. Because the values of the =startValue= and =endValue= state properties are both objects containing the properties =left=, =top=, =width=, and =height=, so the value of the =value= state property is also an object containing these properties. The =Uize.Node.setStyle= static method conveniently accepts an object with an arbitrary number of properties for different CSS style properties, and =left=, =top=, =width=, and =height= happen to be valid names of CSS style properties. Furthermore, this method resolves numerical values for coordinate properties by appending the unit string ='px'=. So we're golden - we can just pass the value of the fade's =value= state property to the =Uize.Node.setStyle= method and it will position and resize the DOM node as desired.
+		In the above example, the DOM node with the =id= of ='myNode'= is being moved and resized, starting from a position of 0,0 and a size of 10 x 10, and ending up at the position of 100,100 and a size of 200 x 200. Because the values of the =startValue= and =endValue= state properties are both objects containing the properties =left=, =top=, =width=, and =height=, so the value of the =value= state property is also an object containing these properties. The =Uize.Dom.Basics.setStyle= static method conveniently accepts an object with an arbitrary number of properties for different CSS style properties, and =left=, =top=, =width=, and =height= happen to be valid names of CSS style properties. Furthermore, this method resolves numerical values for coordinate properties by appending the unit string ='px'=. So we're golden - we can just pass the value of the fade's =value= state property to the =Uize.Dom.Basics.setStyle= method and it will position and resize the DOM node as desired.
 
 		Now this, of course, is *not* the most concise way to animate coordinates using the UIZE JavaScript Framework - the framework provides convenient modules for easily `animating CSS style properties` - but this example illustrates the benefit of interpolating compound values. And those other, more convenient features for easily animating CSS properties rely on this mechanism, anyway.
 
@@ -181,8 +181,8 @@ The Engine
 					value = positionAndBgFade.get ('value'),
 					bg = value.bg
 				;
-				Uize.Node.setStyle ('myNode',value.coords);
-				Uize.Node.setStyle (
+				Uize.Dom.Basics.setStyle ('myNode',value.coords);
+				Uize.Dom.Basics.setStyle (
 					'myNode',
 					{backgroundColor:'rgb(' + bg.red + ',' + bg.green + ',' + bg.blue + ')'}
 				);
@@ -215,7 +215,7 @@ The Engine
 						value = positionAndBgFade.get ('value'),
 						bg = value.bg
 					;
-					Uize.Node.setStyle (
+					Uize.Dom.Basics.setStyle (
 						'myNode',
 						{
 							opacity:value.opacity,
@@ -242,15 +242,15 @@ The Fade Factory
 	In the section `The Engine` we looked at the most atomic unit of animations: an instance of the =Uize.Fade= class. When using the =Uize.Fade= class directly, it is your responsibility to keep track of the fade instances you create, wire event handlers for them, start them and and stop them as desired, etc. For certain situations where you just want to quickly kick off an animation and where your code doesn't have a long-term interest in holding on to the =Uize.Fade= instance used to service the animation, the =Uize.Fade.xFactory= extension module comes in, providing a number of useful factory methods for initiating fades in a carefree manner.
 
 	EXAMPLE
-	......................................................................................
+	............................................................................................
 	Uize.Fade.fade (
-		function (value) {Uize.Node.setStyle ('myNode',value)},  // update handler function
-		{left:0,top:0,width:10,height:10},                       // start value
-		{left:100,top:100,width:200,height:200},                 // end value
-		2000,                                                    // duration
-		{quantization:1}                                         // extra fade properties
+		function (value) {Uize.Dom.Basics.setStyle ('myNode',value)},  // update handler function
+		{left:0,top:0,width:10,height:10},                             // start value
+		{left:100,top:100,width:200,height:200},                       // end value
+		2000,                                                          // duration
+		{quantization:1}                                               // extra fade properties
 	);
-	......................................................................................
+	............................................................................................
 
 	The above example is a reformulation of the first example shown in the `compound Value Interpolation` section, to now use the =Uize.Fade.fade= static method that is defined in the =Uize.Fade.xFactory= extension module. If you compare the two examples, you will notice that this one is shorter. It's still not as short as it could be, because we're not using the convenient =Uize.Fx.fadeStyle= static method that's defined in the =Uize.Fx= module and that's designed specifically for the purpose of making `animating CSS style properties` dead simple. It is, however, shorter than the example that directly uses the =Uize.Fade= class, because it leaves it to the =Uize.Fade.fade= method to create the =Uize.Fade= instance, wire event handlers, and start the fade.
 
@@ -269,11 +269,11 @@ The Fade Factory
 		This particular behavior comes in handy when we want to interpolate an arguments array for a function call, between a start arguments array and an end arguments array. Consider the following example...
 
 		EXAMPLE
-		.....................................................................
-		Uize.Fade.fade (Uize.Node.setOpacity,['myNode',1],['myNode',0],2000);
-		.....................................................................
+		...........................................................................
+		Uize.Fade.fade (Uize.Dom.Basics.setOpacity,['myNode',1],['myNode',0],2000);
+		...........................................................................
 
-		In the above example, we are animating calls to the =Uize.Node.setOpacity= static method defined in the =Uize.Node= module in order to fade the opacity of the node with the =id= of ='myNode'= from =1= to =0= over a period of =2000= milliseconds (2 seconds). The start and end values for the fade are arguments arrays for the function call, with the first argument specifying the DOM node and the second argument specifying the opacity level. What is interpolated for each update of the fade is an arguments array where the first element will always be ='myNode'=, and the second element will be an interpolated floating point number in the range of =1= to =0=.
+		In the above example, we are animating calls to the =Uize.Dom.Basics.setOpacity= static method defined in the =Uize.Dom.Basics= module in order to fade the opacity of the node with the =id= of ='myNode'= from =1= to =0= over a period of =2000= milliseconds (2 seconds). The start and end values for the fade are arguments arrays for the function call, with the first argument specifying the DOM node and the second argument specifying the opacity level. What is interpolated for each update of the fade is an arguments array where the first element will always be ='myNode'=, and the second element will be an interpolated floating point number in the range of =1= to =0=.
 
 		This principle applies fundamentally to the way that the =Uize.Fade= class does interpolation, so we get the benefit of it in the =Uize.Fade.fade= static method - and all the other factory static methods that are implemented by the =Uize.Fade.xFactory= module - because the =Uize.Fade.xFactory= module is built on top of the =Uize.Fade= class.
 
@@ -309,15 +309,15 @@ The Fade Factory
 		Fading Static Methods As Functions
 			For fading static methods, one can usually just use the =Uize.Fade.fade= method.
 
-			This is because most static methods don't care about the context on which they are called and are really just static properties that happen to be references to functions. This is the case with most of the static methods defined in package modules, such as the =Uize.Node.setOpacity= static method of the =Uize.Node= module. So, the following two statements would be equivalent...
+			This is because most static methods don't care about the context on which they are called and are really just static properties that happen to be references to functions. This is the case with most of the static methods defined in package modules, such as the =Uize.Dom.Basics.setOpacity= static method of the =Uize.Dom.Basics= module. So, the following two statements would be equivalent...
 
-			.............................................................................
-			Uize.Fade.fade (Uize.Node.setOpacity,['myNode',1],['myNode',0],2000);
+			...................................................................................
+			Uize.Fade.fade (Uize.Dom.Basics.setOpacity,['myNode',1],['myNode',0],2000);
 
-			Uize.Fade.fadeMethod (Uize.Node,'setOpacity',['myNode',1],['myNode',0],2000);
-			.............................................................................
+			Uize.Fade.fadeMethod (Uize.Dom.Basics,'setOpacity',['myNode',1],['myNode',0],2000);
+			...................................................................................
 
-			In the above example, both statements would have the effect of fading the opacity of the node with the =id= of ='myNode'= from =1= to =0= over a period of =2000= milliseconds (2 seconds). The first statement is animating calls to the function =Uize.Node.setOpacity=, while the second statement is animating calling the method =setOpacity= on the context =Uize.Node=. Now, the implementation of the =Uize.Node.setOpacity= static method does not use the =this= keyword, so the context that it is called on does not affect its execution. So, one may as well just animate the opacity using the `fading a function call` approach. As you can see, in such cases the =Uize.Fade.fadeMethod= method does not even produce the most concise code.
+			In the above example, both statements would have the effect of fading the opacity of the node with the =id= of ='myNode'= from =1= to =0= over a period of =2000= milliseconds (2 seconds). The first statement is animating calls to the function =Uize.Dom.Basics.setOpacity=, while the second statement is animating calling the method =setOpacity= on the context =Uize.Dom.Basics=. Now, the implementation of the =Uize.Dom.Basics.setOpacity= static method does not use the =this= keyword, so the context that it is called on does not affect its execution. So, one may as well just animate the opacity using the `fading a function call` approach. As you can see, in such cases the =Uize.Fade.fadeMethod= method does not even produce the most concise code.
 
 			IMPORTANT
 
@@ -337,15 +337,15 @@ The Fade Factory
 
 			In cases where you need to animate the calling of a particular method on a particular context, you can use the =Uize.Fade.fadeMethod= static method, as discussed in the section `Fading a Method Call`.
 
-		Fading Uize.Node Method Calls
-			The =Uize.Fade.fade= static method lets you animate calls to any arbitrary function, including static methods of the =Uize.Node= module that don't need to be called with =Uize.Node= as the context (see `Fading Static Methods As Functions`).
+		Fading Uize.Dom.Basics Method Calls
+			The =Uize.Fade.fade= static method lets you animate calls to any arbitrary function, including static methods of the =Uize.Dom.Basics= module that don't need to be called with =Uize.Dom.Basics= as the context (see `Fading Static Methods As Functions`).
 
 			EXAMPLE
-			.........................................................................
-			Uize.Fade.fade (Uize.Node.setValue,['testNode',0],['testNode',100],5000);
-			.........................................................................
+			...............................................................................
+			Uize.Fade.fade (Uize.Dom.Basics.setValue,['testNode',0],['testNode',100],5000);
+			...............................................................................
 
-			In the above example, a value will be faded between =0= and =100= over a period of =5000= milliseconds (5 seconds) and this value will be displayed in the DOM node with the =id= of ='testNode'=. The =Uize.Node.setValue= method takes two arguments - the first for the DOM node, and the second for the value. Because the value of the first parameter is the same between the start value arguments array and the end value arguments array, its value is not interpolated and is always ='testNode'=.
+			In the above example, a value will be faded between =0= and =100= over a period of =5000= milliseconds (5 seconds) and this value will be displayed in the DOM node with the =id= of ='testNode'=. The =Uize.Dom.Basics.setValue= method takes two arguments - the first for the DOM node, and the second for the value. Because the value of the first parameter is the same between the start value arguments array and the end value arguments array, its value is not interpolated and is always ='testNode'=.
 
 	Fading a Method Call
 		There may be cases where you would like to animate the calling of a method - either on an instance or on a class.
@@ -767,7 +767,7 @@ Curves
 			When not specifying a curve to a =Uize.Fade= instance, the fade's transition will be linear in nature. In other words, the rate of change will remain constant throughout the fade process. Specifying our own curve allows us to make the fade non-linear in order to emulate motion effects like bounce, springiness, wobble, elasticity, etc.
 
 			EXAMPLE
-			.........................................................................
+			...............................................................................
 			var positionFade = Uize.Fade ({
 				startValue:{left:0,top:0},
 				endValue:{left:100,top:100},
@@ -777,10 +777,10 @@ Curves
 			});
 			positionFade.wire (
 				'Changed.value',
-				function () {Uize.Node.setStyle ('myNode',positionFade.get ('value'))}
+				function () {Uize.Dom.Basics.setStyle ('myNode',positionFade.get ('value'))}
 			);
 			positionFade.start ();
-			.........................................................................
+			...............................................................................
 
 			Although there are more concise ways of `animating CSS style properties` in order to fade the position of a node, the above example illustrates how a curve function can be specified as a value for the =curve= state property of an instance of the =Uize.Fade= class.
 

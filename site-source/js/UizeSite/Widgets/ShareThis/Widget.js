@@ -36,7 +36,7 @@ Uize.module ({
 	name:'UizeSite.Widgets.ShareThis.Widget',
 	superclass:'Uize.Widget.V2',
 	required:[
-		'Uize.Node',
+		'Uize.Dom.Basics',
 		'UizeSite.Widgets.ShareThis.Html',
 		'UizeSite.Widgets.ShareThis.Css'
 	],
@@ -49,12 +49,12 @@ Uize.module ({
 
 				if (typeof navigator != 'undefined') {
 					var _getMetaTagContent = function (_metaTagName) {
-						var _metaTag = Uize.Node.find ({
+						var _metaTag = Uize.Dom.Basics.find ({
 							tagName:'meta',
 							self:function () {
 								return this.name == _metaTagName
 								/* ISSUE:
-									can't use name property in find object, because it doesn't seem to find the tags in FF. Perhaps getElementsByName is being used in Uize.Node.find, or something, and that doesn't work with meta tags? Weird!
+									Can't use name property in find object, because it doesn't seem to find the tags in FF. Perhaps getElementsByName is being used in Uize.Dom.Basics.find, or something, and that doesn't work with meta tags? Weird!
 								*/
 							}
 						}) [0];

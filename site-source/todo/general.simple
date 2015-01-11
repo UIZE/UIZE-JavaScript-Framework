@@ -180,7 +180,7 @@ Possible New Namespaces
 Code to Factor Out
 	Code to factor out of widget classes into non-Web specific modules...
 
-	- =Uize.Widget.Drag= - the =Uize.Widget.Drag.insertShield= and =Uize.Widget.Drag.resizeShield= static methods should maybe be factored out into a generic shield module (possibly a package module under the =Uize.Node= namespace)
+	- =Uize.Widget.Drag= - the =Uize.Widget.Drag.insertShield= and =Uize.Widget.Drag.resizeShield= static methods should maybe be factored out into a generic shield module (possibly a package module under the =Uize.Dom= namespace)
 	- =Uize.Widget.ImagePort= - the =Uize.Widget.ImagePort.getScaledRect= and =Uize.Widget.ImagePort.getSizingAndAlign= static methods have been factored out into the =Uize.Math.LogicalPos= module, so they should now be deprecated in the =Uize.Widget.ImagePort= module
 	- =Uize.Widget.Population= - pure population string functionality should be migrated into a new =Uize.Str.Population= module (or =Uize.Template.Population=?)
 	- =Uize.Widget.Tree= - model stuff for the data structure that represents a tree (=Uize.Data.Tree=?)
@@ -886,8 +886,8 @@ Value Transformer Function
 		- Uize.Fade.fadeProperty
 		- Uize.Fade.fadeProperties
 		- Uize.Fx.fadeStyle
-		- Uize.Node.setStyle, myWidget.setNodeStyle
-		- Uize.Node.setProperty, myWidget.setNodeProperty
+		- Uize.Dom.Basics.setStyle, myWidget.setNodeStyle
+		- Uize.Dom.Basics.setProperty, myWidget.setNodeProperty
 
 	- makes sense where the value for which a value transformer is being specified is intended to set a new value for something for which a current value is known, where the new value is derived by applying the specified value transformer to the current value
 
@@ -1152,10 +1152,10 @@ Only Change Property Values Using the set Method
 
 	- could be used...
 		- Uize (modify Uize.recordMatches)
-		- Uize.Node.find
+		- Uize.Dom.Basics.find
 
 - should factor out code to set HTML for frame or iframe (best implementation so far in Simple Doc Tester)
-	- while at it, should factor out code for replacing contents of any window, and move into Uize.Node.setInnerHtml? Or Uize.Node.injectHtml? Or should there be a window utilities package?
+	- while at it, should factor out code for replacing contents of any window, and move into Uize.Dom.Basics.setInnerHtml? Or Uize.Dom.Basics.injectHtml? Or should there be a window utilities package?
 		Uize.Browser.Window.write
 			Uize.Browser.Window.write (window,content)
 			Uize.Browser.Window.write (window,content,contentType)

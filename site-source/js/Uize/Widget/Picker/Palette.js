@@ -25,7 +25,10 @@
 
 Uize.module ({
 	name:'Uize.Widget.Picker.Palette',
-	required:'Uize.Node',
+	required:[
+		'Uize.Dom.Basics',
+		'Uize.Dom.Pos'
+	],
 	builder:function (_superclass) {
 		'use strict';
 
@@ -33,7 +36,7 @@ Uize.module ({
 			/*** Variables for Scruncher Optimization ***/
 				_true = true,
 				_false = false,
-				_Uize_Node = Uize.Node,
+				_getDimensions = Uize.Dom.Pos.getDimensions,
 				_copyInto = Uize.copyInto
 		;
 
@@ -41,7 +44,7 @@ Uize.module ({
 			function _getMooringNodeWidth (m) {
 				var _mooringNode = m.getMooringNode();
 
-				return _mooringNode ? _Uize_Node.getDimensions(_mooringNode).width : undefined;
+				return _mooringNode ? _getDimensions(_mooringNode).width : undefined;
 			}
 
 			function _updateUiSelector (m) {
@@ -51,7 +54,7 @@ Uize.module ({
 				if (m.isWired) {
 					var
 						_valueDisplayShellNode = m.children.selector.getNode('valueDisplayShell'),
-						_valueDisplayShellNodeWidth = _Uize_Node.getDimensions(_valueDisplayShellNode).width,
+						_valueDisplayShellNodeWidth = _getDimensions(_valueDisplayShellNode).width,
 						_valueDisplayShellNodeMaxWidth = parseInt(m.getNodeStyle(_valueDisplayShellNode, 'maxWidth')),
 						_previousValueDisplayShellWidth = m._previousValueDisplayShellWidth
 					;
@@ -157,7 +160,7 @@ Uize.module ({
 										var _paletteShield = _palette.getNode('shield');
 
 										// detach from current place in DOM
-										_Uize_Node.remove([_paletteRoot, _paletteShield]);
+										Uize.Dom.Basics.remove([_paletteRoot, _paletteShield]);
 
 										_paletteShield && _documentBody.appendChild(_paletteShield);
 										_documentBody.appendChild(_paletteRoot);

@@ -185,7 +185,7 @@ Uize.module ({
 								height:'300px',
 								overflow:'hidden'
 							};
-							Uize.Node.setStyle (
+							Uize.Dom.Basics.setStyle (
 								'someOtherNode',Uize.Data.Util.filter (someNodeStyle,['left','top','width','height'])
 							);
 							........................................................................................
@@ -194,7 +194,7 @@ Uize.module ({
 
 							Without this method, the =setStyle= method call would look like...
 							.................................
-							Uize.Node.setStyle (
+							Uize.Dom.Basics.setStyle (
 								'someOtherNode',
 								{
 									left:someNodeStyle.left,

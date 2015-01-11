@@ -2664,12 +2664,12 @@ Uize.module ({
 								Event handlers registered using this method will handle events fired for the instance using the =fire= instance method, and not those events fired using the =Uize.Class.fire= static method. A =Uize.Class= subclass may not provide any instance events, so you should consult the reference documentation for a class to learn more about its suite of events. Handlers specified by the =eventHandlerSTRorFNorOBJ= parameter may be of string, function, or object type.
 
 								EXAMPLE
-								......................................................................
+								..................................................................
 								mySlider.wire (
 									'Changed.value',
-									function (event) {Uize.Node.setValue ('valueField',event.newValue)}
+									function (event) {console.log ('NEW VALUE: ' + event.newValue)}
 								);
-								......................................................................
+								..................................................................
 
 								VARIATION
 								.............................................
@@ -2679,16 +2679,16 @@ Uize.module ({
 								When only a single =eventNamesToHandlersMapOBJ= parameter is specified, then event handlers for multiple events can be specified using an object hash. This variation is provided as a convenience and has the effect of iteratively calling the =wire= instance method for each event-name-to-handler mapping in the =eventNamesToHandlersMapOBJ= object.
 
 								EXAMPLE
-								.............................................................................
+								..........................................................................
 								mySlider.wire ({
 									'Changed.value':
-										function (event) {Uize.Node.setValue ('valueField',event.newValue)},
+										function (event) {console.log ('NEW VALUE: ' + event.newValue)},
 									'Changed.maxValue':
-										function (event) {Uize.Node.setValue ('maxValueField',event.newValue)},
+										function (event) {console.log ('NEW MAX VALUE: ' + event.newValue)},
 									'Changed.minValue':
-										function (event) {Uize.Node.setValue ('minValueField',event.newValue)}
+										function (event) {console.log ('NEW MIN VALUE: ' + event.newValue)}
 								});
-								.............................................................................
+								..........................................................................
 
 								SPECIAL VALUES
 								- the string value ="*"= acts as a wildcard when specified for the =eventNameSTR= parameter, meaning that the specified handler should be executed for all events of the instance

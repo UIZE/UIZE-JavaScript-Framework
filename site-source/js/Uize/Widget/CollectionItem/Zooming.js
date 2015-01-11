@@ -26,7 +26,8 @@
 Uize.module ({
 	name:'Uize.Widget.CollectionItem.Zooming',
 	required:[
-		'Uize.Node',
+		'Uize.Dom.Basics',
+		'Uize.Dom.Pos',
 		'Uize.Dom.VirtualEvents.Remain',
 		'Uize.Fade'
 	],
@@ -37,16 +38,17 @@ Uize.module ({
 			/*** Variables for Scruncher Optimization ***/
 				_true = true,
 				_false = false,
-				_Uize_Node = Uize.Node
+				_Uize_Dom_Basics = Uize.Dom.Basics,
+				_Uize_Dom_Pos = Uize.Dom.Pos
 		;
 
 		/*** Utility Functions ***/
 			function _getNodeBorderWidth (_node,_edge) {
 				var _stylePropertyPrefix = 'border' + Uize.capFirstChar (_edge);
 				return (
-					_Uize_Node.getStyle (_node,_stylePropertyPrefix + 'Style') == 'none'
+					_Uize_Dom_Basics.getStyle (_node,_stylePropertyPrefix + 'Style') == 'none'
 						? 0
-						: +_Uize_Node.getStyle (_node,_stylePropertyPrefix + 'Width').replace (/px/i,'') || 0
+						: +_Uize_Dom_Basics.getStyle (_node,_stylePropertyPrefix + 'Width').replace (/px/i,'') || 0
 				);
 			}
 
@@ -103,12 +105,12 @@ Uize.module ({
 							var _previewNode = m.getNode ('preview');
 
 							/*** capture coordinates and dimensions, if necessary ***/
-								m._previewShellNodeCoords = _Uize_Node.getCoords (
+								m._previewShellNodeCoords = _Uize_Dom_Pos.getCoords (
 									m.getNode ('previewShell') || (_previewNode ? _previewNode.parentNode : null)
 								);
 
 							/*** capture dimensions of preview node ***/
-								var _previewNodeDims = m._previewNodeDims = _Uize_Node.getDimensions (_previewNode);
+								var _previewNodeDims = m._previewNodeDims = _Uize_Dom_Pos.getDimensions (_previewNode);
 
 								/*** subtract border width for each axis ***/
 									_previewNodeDims.width -=
@@ -122,7 +124,7 @@ Uize.module ({
 
 							/*** adjust style properties for parent node of previewNode ***/
 								var _previewNodeParentNode = _previewNode.parentNode;
-								_Uize_Node.setStyle (
+								_Uize_Dom_Basics.setStyle (
 									_previewNodeParentNode,
 									{
 										overflow:'hidden',
@@ -136,7 +138,7 @@ Uize.module ({
 							if (!m.getNode (_nodeName)) {
 								m.flushNodeCache (_nodeName);
 								var _previewZoomNode = _previewNode.cloneNode (_true);
-								_Uize_Node.setProperties (
+								_Uize_Dom_Basics.setProperties (
 									_previewZoomNode,
 									{
 										id:m.get ('idPrefix') + '-' + _nodeName,
@@ -161,7 +163,7 @@ Uize.module ({
 											NOTES
 											- see the companion =previewZoom= implied node
 								*/
-								_Uize_Node.setStyle (
+								_Uize_Dom_Basics.setStyle (
 									_previewZoomNode,
 									{
 										left:0,
@@ -286,7 +288,7 @@ Uize.module ({
 							function () {
 								if (!m.get ('over')) return;
 									/* HACK:
-										Dragging in Uize.Widget.Collection.Dynamic sets over to false. This hack wouldn't be necessary if mousing down prevented the mouserest event (implemented in Uize.Node) being fired, even on subsequent mouse moves.
+										Dragging in Uize.Widget.Collection.Dynamic sets over to false. This hack wouldn't be necessary if mousing down prevented the mouserest event (implemented in Uize.Dom.Basics) being fired, even on subsequent mouse moves.
 									*/
 
 								if (m._zoomPower > 1) {
@@ -295,7 +297,7 @@ Uize.module ({
 									/*** wire up document mousemove event ***/
 										var _handleMouseMove = function () {
 											var
-												_eventAbsPos = _Uize_Node.getEventAbsPos (),
+												_eventAbsPos = _Uize_Dom_Pos.getEventAbsPos (),
 												_deadMargin = m._deadMargin
 											;
 											function _getAlignForAxis (_axisIsY) {

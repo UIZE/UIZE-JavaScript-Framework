@@ -13,7 +13,7 @@
 </head>
 <body>
 
-<script type="text/javascript" src="../../js/Uize.Node.js"></script>
+<script type="text/javascript" src="../../js/Uize.js"></script>
 
 <table id="testNode" style="background:#fff; border:15px solid #800;" cellspacing="0" cellpadding="0"><tr><td>
 <img id="row0cell0" src="../../images/blank.gif" alt=""/><img id="row0cell1" src="../../images/blank.gif" alt=""/><img id="row0cell2" src="../../images/blank.gif" alt=""/><br/>
@@ -27,28 +27,32 @@
 </form>
 
 <script type="text/javascript">
-	var
-		mouseoverCount = 0,
-		mouseoutCount = 0
-	;
 
-	var _testNode = Uize.Node.getById ('testNode');
-	Uize.Node.wire (
-		_testNode,
-		{
-			mouseover:
-				function (_event) {
-					Uize.Node.getById ('mouseoverCountNode').value = ++mouseoverCount;
-					_testNode.style.background = '#f00';
-				}
-			,
-			mouseout:
-				function (_event) {
-					Uize.Node.getById ('mouseoutCountNode').value = ++mouseoutCount;
-					_testNode.style.background = '#fff';
-				}
-		}
-	);
+Uize.require (
+	'Uize.Dom.Basics',
+	function (_Uize_Dom_Basics) {
+		var
+			mouseoverCount = 0,
+			mouseoutCount = 0
+		;
+		_Uize_Dom_Basics.wire (
+			'testNode',
+			{
+				mouseover:
+					function (_event) {
+						_Uize_Dom_Basics.setValue ('mouseoverCountNode',++mouseoverCount);
+						_Uize_Dom_Basics.setStyle ('testNode',{background:'#f00'})
+					}
+				,
+				mouseout:
+					function (_event) {
+						_Uize_Dom_Basics.setValue ('mouseoutCountNode',++mouseoutCount);
+						_Uize_Dom_Basics.setStyle ('testNode',{background:'#fff'})
+					}
+			}
+		);
+	}
+);
 
 </script>
 

@@ -27,14 +27,18 @@
 
 Uize.module ({
 	name:'Uize.Widget.Bar',
-	required:'Uize.Node',
+	required:[
+		'Uize.Dom.Basics',
+		'Uize.Dom.Pos'
+	],
 	builder:function (_superclass) {
 		'use strict';
 
 		var
 			/*** Variables for Scruncher Optimization ***/
 				_undefined,
-				_Uize_Node = Uize.Node
+				_Uize_Dom_Basics = Uize.Dom.Basics,
+				_Uize_Dom_Pos = Uize.Dom.Pos
 		;
 
 		/*** Private Instance Methods ***/
@@ -58,10 +62,10 @@ Uize.module ({
 				if (m.isWired) {
 					var
 						_orientationNo = m._orientationNo,
-						_trackDimsObj = _Uize_Node.getDimensions (m._trackNode),
+						_trackDimsObj = _Uize_Dom_Pos.getDimensions (m._trackNode),
 						_trackDims = [_trackDimsObj.width,_trackDimsObj.height],
 						_knobNode = m._knobNode,
-						_knobDimsObj = _Uize_Node.getDimensions (_knobNode),
+						_knobDimsObj = _Uize_Dom_Pos.getDimensions (_knobNode),
 						_knobDims = [_knobDimsObj.width,_knobDimsObj.height],
 						_scaleFunc = m._scaleFunc,
 						_scaleMin = _scaleFunc(m._minValue),
@@ -79,7 +83,7 @@ Uize.module ({
 						_knobNode.title = _value;
 					}
 					m._fullNode &&
-						_Uize_Node.setClipRect (
+						_Uize_Dom_Basics.setClipRect (
 							m._fullNode,
 							_orientationNo ? _knobCenter : 0,
 							_orientationNo ? _trackDims [0] : _knobCenter,
@@ -88,7 +92,7 @@ Uize.module ({
 						)
 					;
 					m._emptyNode &&
-						_Uize_Node.setClipRect (
+						_Uize_Dom_Basics.setClipRect (
 							m._emptyNode,
 							0,
 							_trackDims [0],
@@ -97,7 +101,7 @@ Uize.module ({
 						)
 					;
 					m._valueNode &&
-						_Uize_Node.setInnerHtml (
+						_Uize_Dom_Basics.setInnerHtml (
 							m._valueNode,
 							Uize.isNumber (m._decimalPlacesToDisplay)
 								? m._value.toFixed (m._decimalPlacesToDisplay)

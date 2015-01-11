@@ -26,7 +26,8 @@
 Uize.module ({
 	name:'Uize.Widget.Drag',
 	required:[
-		'Uize.Node',
+		'Uize.Dom.Basics',
+		'Uize.Dom.Pos',
 		'Uize.Dom.Event'
 	],
 	builder:function  (_superclass) {
@@ -37,9 +38,9 @@ Uize.module ({
 				_undefined,
 				_true = true,
 				_false = false,
-				_Uize_Node = Uize.Node,
-				_Uize_Node_getEventAbsPos = _Uize_Node.getEventAbsPos,
-				_isIe = _Uize_Node.isIe,
+				_Uize_Dom_Basics = Uize.Dom.Basics,
+				_getEventAbsPos = Uize.Dom.Pos.getEventAbsPos,
+				_isIe = _Uize_Dom_Basics.isIe,
 
 			/*** General Variables ***/
 				_dragShield,
@@ -48,7 +49,7 @@ Uize.module ({
 		;
 
 		if (typeof navigator != 'undefined') {
-			var _ieMajorVersion = _Uize_Node.ieMajorVersion;
+			var _ieMajorVersion = _Uize_Dom_Basics.ieMajorVersion;
 			_hasStickyDragIssue = _isIe && _ieMajorVersion < 9;
 			_useFixedPositioningForShield = !_isIe || _ieMajorVersion > 6;
 		}
@@ -68,11 +69,11 @@ Uize.module ({
 				if (m.isWired) {
 					var _node = m.getNode ();
 					m._cursor
-						? _Uize_Node.setStyle (
+						? _Uize_Dom_Basics.setStyle (
 							m._inDrag ? [_node,_dragShield] : _node,
 							{cursor:m.get ('enabledInherited') ? m._cursor : 'not-allowed'}
 						)
-						: m.set ({_cursor:_Uize_Node.getStyle (_node,'cursor')})
+						: m.set ({_cursor:_Uize_Dom_Basics.getStyle (_node,'cursor')})
 					;
 				}
 			}
@@ -198,12 +199,12 @@ Uize.module ({
 					if (!m._dragStarted) {
 						if (!_isTouch) {
 							m.Class.resizeShield (_dragShield);
-							_Uize_Node.display (_dragShield);
+							_Uize_Dom_Basics.display (_dragShield);
 						}
 						m.set ({_dragStarted:_true});
 						m.fire ({name:'Drag Start',domEvent:_event});
 					}
-					var _dragEventPos = _Uize_Node_getEventAbsPos (_event);
+					var _dragEventPos = _getEventAbsPos (_event);
 					_dragMove (_dragEventPos.left,_dragEventPos.top);
 				}
 			}
@@ -231,7 +232,7 @@ Uize.module ({
 
 				m.fire ({name:'Before Drag Start',domEvent:_event});
 
-				var _dragEventPos = _Uize_Node_getEventAbsPos (_event);
+				var _dragEventPos = _getEventAbsPos (_event);
 				_eventStartPos [0] = _eventPos [0] = _eventPreviousPos [0] = _dragEventPos.left;
 				_eventStartPos [1] = _eventPos [1] = _eventPreviousPos [1] = _dragEventPos.top;
 				m._eventTime = m._eventPreviousTime = Uize.now ();
@@ -268,7 +269,7 @@ Uize.module ({
 				} else {
 					var _cleanupAfterMouseDrag = function (_event) {
 						Uize.copyInto (document,_oldDocumentEvents);
-						_Uize_Node.display (_dragShield,_false);
+						_Uize_Dom_Basics.display (_dragShield,_false);
 						m._dragCancelled || _endDragWithPossibleReleaseTravel (_event);
 					};
 					document.onmousemove = function (_event) {
@@ -327,7 +328,7 @@ Uize.module ({
 						if (!_dragShield) {
 							_dragShield = m.Class.insertShield ({zIndex:50000});
 							_useFixedPositioningForShield ||
-								_Uize_Node.wire (window,'resize',function () {m.Class.resizeShield (_dragShield)})
+								_Uize_Dom_Basics.wire (window,'resize',function () {m.Class.resizeShield (_dragShield)})
 							;
 						}
 
@@ -354,7 +355,7 @@ Uize.module ({
 						*/
 					;
 					var _shield = document.createElement ('div');
-					_Uize_Node.setStyle (_shield,Uize.copyInto (_styleProperties,_extraStyleProperties));
+					_Uize_Dom_Basics.setStyle (_shield,Uize.copyInto (_styleProperties,_extraStyleProperties));
 					_shield.Uize_Widget_Drag_shield = _true;
 					document.body.appendChild (_shield);
 					m.resizeShield (_shield);
@@ -366,7 +367,7 @@ Uize.module ({
 						- for browsers that support fixed positioning, updating the position and size only needs to happen once: at the time of initializing the shield. For IE6, we need to watch document scroll and resize. The best way to clean this up and factor it out would be to create a shield widget. Uize.Widget.Drag could share one instance, and instances of Uize.Widget.Dialog could each create their own.
 					*/
 					if (_useFixedPositioningForShield) {
-						_Uize_Node.setStyle (
+						_Uize_Dom_Basics.setStyle (
 							_shield,
 							{
 								left:'0',
@@ -384,7 +385,7 @@ Uize.module ({
 							TO DO: just the following will work better, if we watch scroll events and reposition each time...
 
 								var _documentElement = document.documentElement;
-								_Uize_Node.setStyle (
+								_Uize_Dom_Basics.setStyle (
 									_shield,
 									{
 										left:'0',
@@ -395,12 +396,12 @@ Uize.module ({
 								);
 						*/
 						var
-							_shieldStyleDisplay = _Uize_Node.getStyle (_shield,'display'),
+							_shieldStyleDisplay = _Uize_Dom_Basics.getStyle (_shield,'display'),
 							_documentElement = document.documentElement,
 							_documentBody = document.body
 						;
-						_Uize_Node.display (_shield,_false);
-						_Uize_Node.setStyle (
+						_Uize_Dom_Basics.display (_shield,_false);
+						_Uize_Dom_Basics.setStyle (
 							_shield,
 							{
 								left:0,

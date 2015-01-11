@@ -1,3 +1,23 @@
+Uize.Node Modules Deprecated
+	Still to do...
+
+	- Update documentation to change all references to Uize.Node.* to new Uize.Dom.* equivalents
+	- consider renaming Uize.Dom.Basics to Uize.Dom.Core
+	- consider possibly migrating DOM event wiring methods into Uize.Dom.Event module (consider the size increase for current modules that need the events fundamentals), or possibly a new Uize.Dom.Wiring module
+
+	DEPRECATED
+	.......................................................................
+	Uize.Node                    >> BECOMES >>  ---
+	Uize.Node.Event              >> BECOMES >>  Uize.Dom.Event
+	Uize.Node.Classes            >> BECOMES >>  Uize.Dom.Classes
+	Uize.Node.CssModule          >> BECOMES >>  Uize.Dom.CssModule
+	Uize.Node.Form               >> BECOMES >>  Uize.Dom.Form
+	Uize.Node.Tree               >> BECOMES >>  Uize.Dom.Tree
+	Uize.Node.Util               >> BECOMES >>  Uize.Dom.Util
+	Uize.Node.VirtualEvent       >> BECOMES >>  ---
+	Uize.Node.VirtualEvent.Edge  >> BECOMES >>  Uize.Dom.VirtualEvents.Edge
+	.......................................................................
+
 NEW MODULE: Uize.Json.MultiLineStringLiteral
 	Still to do...
 
@@ -118,27 +138,6 @@ NEW MODULE: Uize.Oop.mTreeInheritance
 
 NEW METHOD: Uize.Array.Util.sum
 	.
-
-Uize.Node Modules Deprecated
-
-	DEPRECATED
-	.......................................................................
-	Uize.Node                    >> BECOMES >>  ---
-	Uize.Node.Event              >> BECOMES >>  Uize.Dom.Event
-	Uize.Node.Classes            >> BECOMES >>  Uize.Dom.Classes
-	Uize.Node.CssModule          >> BECOMES >>  Uize.Dom.CssModule
-	Uize.Node.Form               >> BECOMES >>  Uize.Dom.Form
-	Uize.Node.Tree               >> BECOMES >>  Uize.Dom.Tree
-	Uize.Node.Util               >> BECOMES >>  Uize.Dom.Util
-	Uize.Node.VirtualEvent       >> BECOMES >>  ---
-	Uize.Node.VirtualEvent.Edge  >> BECOMES >>  Uize.Dom.VirtualEvents.Edge
-	.......................................................................
-
-	Still to do...
-
-	- Update documentation to change all references to Uize.Node.* to new Uize.Dom.* equivalents
-	- consider renaming Uize.Dom.Basics to Uize.Dom.Core
-	- consider possibly migrating DOM event wiring methods into Uize.Dom.Event module (consider the size increase for current modules that need the events fundamentals), or possibly a new Uize.Dom.Wiring module
 
 Shorter This Reference
 	Switched all modules over to using "m" for capturing a reference to this.

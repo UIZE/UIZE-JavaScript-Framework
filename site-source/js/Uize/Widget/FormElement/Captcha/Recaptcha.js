@@ -33,7 +33,7 @@ Uize.module ({
 	name:'Uize.Widget.FormElement.Captcha.Recaptcha',
 	required:[
 		'Uize.Comm.Script',
-		'Uize.Node',
+		'Uize.Dom.Basics',
 		'Uize.Dom.Event'
 	],
 	builder:function (_superclass) {
@@ -44,7 +44,7 @@ Uize.module ({
 				_true = true,
 				_false = false,
 				_Uize = Uize,
-				_Uize_Node = _Uize.Node,
+				_Uize_Dom_Basics = _Uize.Dom.Basics,
 				_Uize_Dom_Event = _Uize.Dom.Event,
 				_isFunction = _Uize.isFunction
 		;
@@ -58,7 +58,7 @@ Uize.module ({
 
 				if (m.isWired) {
 					// if the recaptcha node already exists, unwire it
-					_Uize_Node.unwire (_recaptchaInputId);
+					_Uize_Dom_Basics.unwire (_recaptchaInputId);
 
 					_recaptchaObject
 						&& _recaptchaObject.create (
@@ -79,7 +79,7 @@ Uize.module ({
 										});
 									}
 
-									_Uize_Node.wire (
+									_Uize_Dom_Basics.wire (
 										_recaptchaInputId,
 										{
 											// Copied from Uize.Widget.FormElement
@@ -89,10 +89,10 @@ Uize.module ({
 													m.fireOkOnEnter () && _fire ('Ok', _event);
 												} else if (_Uize_Dom_Event.isKeyEscape (_event)) {
 													_fire ('Cancel', _event);
-													_Uize_Node.getById (_recaptchaInputId).blur ();
+													_Uize_Dom_Basics.getById (_recaptchaInputId).blur ();
 												} else {
 													m.set ({
-														tentativeValue:_Uize_Node.getValue (_recaptchaInputId),
+														tentativeValue:_Uize_Dom_Basics.getValue (_recaptchaInputId),
 														isFinished:_false
 													});
 												}

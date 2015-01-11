@@ -227,7 +227,7 @@ Uize.module ({
 
 										NOTES
 										- compare to the =showNode= instance method
-										- compare to the =Uize.Node.display= static method
+										- compare to the =Uize.Dom.Basics.display= static method
 							*/
 
 						getNodeStyle:1,
@@ -260,7 +260,7 @@ Uize.module ({
 
 										NOTES
 										- see also the companion =setNodeStyle= instance method
-										- compare to the =Uize.Node.getStyle= and =Uize.Node.setStyle= static methods
+										- compare to the =Uize.Dom.Basics.getStyle= and =Uize.Dom.Basics.setStyle= static methods
 							*/
 
 						getNodeValue:1,
@@ -274,11 +274,11 @@ Uize.module ({
 										nodeValueSTRorBOOL = myWidget.getNodeValue (impliedNodeSTRorOBJ);
 										.................................................................
 
-										This method uses the =Uize.Node.getValue= static method in its implementation. For more details, consult the reference for the =Uize.Node= module.
+										This method uses the =Uize.Dom.Basics.getValue= static method in its implementation. For more details, consult the reference for the =Uize.Dom.Basics= module.
 
 										NOTES
 										- see the corresponding =setNodeValue= instance method
-										- compare to the =Uize.Node.getValue= static method
+										- compare to the =Uize.Dom.Basics.getValue= static method
 							*/
 
 						injectNodeHtml:1,
@@ -292,7 +292,7 @@ Uize.module ({
 										myWidget.injectNodeHtml (impliedNodeSTRorBLOB,htmlSTR,injectModeSTR);
 										.....................................................................
 
-										This method uses the =Uize.Node.injectHtml= static method in its implementation. For more details and for a more in-depth discussion of the supported injection modes and how they behave, consult the reference for the =Uize.Node= module.
+										This method uses the =Uize.Dom.Basics.injectHtml= static method in its implementation. For more details and for a more in-depth discussion of the supported injection modes and how they behave, consult the reference for the =Uize.Dom.Basics= module.
 
 										VARIATION
 										.......................................................
@@ -303,7 +303,7 @@ Uize.module ({
 
 										NOTES
 										- compare to the =setNodeInnerHtml= instance method
-										- compare to the =Uize.Node.injectHtml= static method
+										- compare to the =Uize.Dom.Basics.injectHtml= static method
 							*/
 
 						setNodeClipRect:1,
@@ -317,7 +317,7 @@ Uize.module ({
 										myWidget.setNodeClipRect (impliedNodeSTRorBLOB,leftINT,topINT,rightINT,bottomINT);
 										..................................................................................
 
-										- compare to the =Uize.Node.setClipRect= static method
+										- compare to the =Uize.Dom.Basics.setClipRect= static method
 							*/
 
 						setNodeInnerHtml:1,
@@ -331,7 +331,7 @@ Uize.module ({
 										myWidget.setNodeInnerHtml (impliedNodeSTRorBLOB,htmlSTR);
 										.........................................................
 
-										This method uses the =Uize.Node.setInnerHtml= static method in its implementation. For more details, consult the reference for the =Uize.Node= module.
+										This method uses the =Uize.Dom.Basics.setInnerHtml= static method in its implementation. For more details, consult the reference for the =Uize.Dom.Basics= module.
 
 										EXAMPLE
 										..............................................................................
@@ -343,7 +343,7 @@ Uize.module ({
 
 										NOTES
 										- compare to the =injectNodeHtml= instance method
-										- compare to the =Uize.Node.setInnerHtml= static method
+										- compare to the =Uize.Dom.Basics.setInnerHtml= static method
 							*/
 
 						setNodeOpacity:1,
@@ -360,7 +360,7 @@ Uize.module ({
 										The value of the =opacityFLOATorOBJ= parameter should be a number in the range of =0= to =1=, where =0= represents completely invisible, =1= represents completely opaque, and any fractional values inbetween represent varying degrees of transparency / opacity. Alternatively, if an instance of a =Uize.Class= subclass is specified, then a value will be obtained by invoking the instance's =valueOf Intrinsic Method=.
 
 										NOTES
-										- compare to the =Uize.Node.setOpacity= static method
+										- compare to the =Uize.Dom.Basics.setOpacity= static method
 							*/
 
 						setNodeProperties:1,
@@ -388,7 +388,7 @@ Uize.module ({
 										............................
 
 										NOTES
-										- compare to the =Uize.Node.setProperties= static method
+										- compare to the =Uize.Dom.Basics.setProperties= static method
 							*/
 
 						setNodeStyle:1,
@@ -415,11 +415,11 @@ Uize.module ({
 										);
 										..................................................
 
-										When number type values are specified for CSS style properties, those values will be converted to strings by appending the "px" unit. When string type values are specified, the unit should already be present in the value. Instances of =Uize.Class= subclasses can also be specified, and they will be converted to values by invoking their =valueOf Intrinsic Method=. For a more detailed discussion, consult the reference for the =Uize.Node.setStyle= static method.
+										When number type values are specified for CSS style properties, those values will be converted to strings by appending the "px" unit. When string type values are specified, the unit should already be present in the value. Instances of =Uize.Class= subclasses can also be specified, and they will be converted to values by invoking their =valueOf Intrinsic Method=. For a more detailed discussion, consult the reference for the =Uize.Dom.Basics.setStyle= static method.
 
 										NOTES
 										- see also the companion =getNodeStyle= instance method
-										- compare to the =Uize.Node.getStyle= and =Uize.Node.setStyle= static methods
+										- compare to the =Uize.Dom.Basics.getStyle= and =Uize.Dom.Basics.setStyle= static methods
 							*/
 
 						setNodeValue:1,
@@ -433,13 +433,13 @@ Uize.module ({
 										myWidget.setNodeValue (impliedNodeSTRorBLOB,valueSTRorBOOLorNUM);
 										.................................................................
 
-										This method uses the =Uize.Node.setValue= static method in its implementation. For more details, consult the reference for the =Uize.Node= module.
+										This method uses the =Uize.Dom.Basics.setValue= static method in its implementation. For more details, consult the reference for the =Uize.Dom.Basics= module.
 
 										NOTES
 										- you can use the =setNodeValue= instance method to set values on readonly form elements
 										- see the corresponding =getNodeValue= instance method
 										- the =value= parameter can be an object that implements a =valueOf= interface (such as an instance of a =Uize.Class= subclass that implements the =value= state property)
-										- compare to the =Uize.Node.setValue= static method
+										- compare to the =Uize.Dom.Basics.setValue= static method
 							*/
 
 						showNode:1
@@ -464,7 +464,7 @@ Uize.module ({
 
 										NOTES
 										- compare to the =displayNode= instance method
-										- compare to the =Uize.Node.show= static method
+										- compare to the =Uize.Dom.Basics.show= static method
 							*/
 					},
 					function (_dummyValue,_methodName) {
@@ -1165,7 +1165,7 @@ Uize.module ({
 
 										NOTES
 										- see the companion =unwireNode= instance method
-										- compare to the =Uize.Node.wire= static method of the =Uize.Node= module
+										- compare to the =Uize.Dom.Basics.wire= static method of the =Uize.Dom.Basics= module
 							*/
 						},
 
@@ -1288,7 +1288,7 @@ Uize.module ({
 										NOTES
 										- see the companion =wireNode= instance method
 										- compare to the =unwireNodeEventsByMatch= instance method
-										- compare to the =Uize.Node.unwire= static method of the =Uize.Node= module
+										- compare to the =Uize.Dom.Basics.unwire= static method of the =Uize.Dom.Basics= module
 							*/
 						},
 
@@ -2056,23 +2056,23 @@ Uize.module ({
 								This property works in conjunction with the =built=, =container=, and =html= state properties. If the value for the =built= property is =true= for a widget instance, then =insertionMode= is not applicable. But if the value for =built= is =false=, then the HTML generated using the =html= state property will be injected into a container node specified by the =container= state property (or the =shell= implied node, or the `root node` of the widget instance, or the document's body, whichever is non-null) using the mode specified by =insertionMode=.
 
 								EXAMPLE
-								......................................................
+								............................................................
 								page.addChild (
 									'quantitySlider',
 									Uize.Widget.Bar.Slider,
 									{
 										html:MySiteNamespace.Templates.Slider,
 										built:false,
-										container:Uize.Node.getById ('quantityUiShell'),
+										container:Uize.Dom.Basics.getById ('quantityUiShell'),
 										insertionMode:'inner bottom'
 									}
 								);
-								......................................................
+								............................................................
 
 								In the above example, an instance of the =Uize.Widget.Bar.Slider= class will have its HTML generated by the template module =MySiteNamespace.Templates.Slider= and then inserted into the container node =quantityUiShell=, using the ='inner bottom'= insertion mode. This means that if the =quantityUiShell= node already contained contents, that contents will not be replaced by insertion of the widget's HTML, but the widget's HTML will be inserted at the bottom - under the existing contents.
 
 								Values
-									The possible values for the =insertionMode= state property are the same as the valid values for the =injectModeSTR= parameter of the =Uize.Node.injectHtml= static method: ='inner bottom'=, ='inner top'=, ='outer bottom'=, ='outer top'=, ='inner replace'=, and ='outer replace'=. For a more in-depth discussion of insertion modes and how they behave, consult the reference for the =Uize.Node.injectHtml= static method.
+									The possible values for the =insertionMode= state property are the same as the valid values for the =injectModeSTR= parameter of the =Uize.Dom.Basics.injectHtml= static method: ='inner bottom'=, ='inner top'=, ='outer bottom'=, ='outer top'=, ='inner replace'=, and ='outer replace'=. For a more in-depth discussion of insertion modes and how they behave, consult the reference for the =Uize.Dom.Basics.injectHtml= static method.
 
 									If the value of the =insertionMode= state property is =null=, =undefined=, or an empty string, then an insertion mode is chosen automatically based upon the node that the HTML is being inserted into: ='inner replace'= if a container node is specified, and ='inner bottom'= into the document body if no container node is specified or if the document body is specified for the container.
 
@@ -2286,7 +2286,7 @@ Uize.module ({
 								Special Meaning of idPrefix
 									The number of widgets spawned is determined by the value of the "idPrefix" property in the =propertiesOBJ= object.
 
-									A value for "idPrefix" must be specified, otherwise the =Uize.Widget.spawn= method will not work correctly. The value of this property identifies one or more DOM nodes for which the widget instances should be spawned, and may be a DOM node reference, a string representing the =id= of a DOM node, an array of DOM node references, or a find expression object that will be used with the =Uize.Node.find= static method to find the DOM nodes.
+									A value for "idPrefix" must be specified, otherwise the =Uize.Widget.spawn= method will not work correctly. The value of this property identifies one or more DOM nodes for which the widget instances should be spawned, and may be a DOM node reference, a string representing the =id= of a DOM node, an array of DOM node references, or a find expression object that will be used with the =Uize.Dom.Basics.find= static method to find the DOM nodes.
 
 									Once the value of the "idPrefix" property has been resolved to one or more DOM nodes, an instance of the widget class on which the method is called will be created for each of the DOM nodes. For each widget instance that is created, the actual =idPrefix= value for the instance will be derived from the =id= attribute of the DOM node for which the instance is being created. For this reason, the DOM nodes represented by the "idPrefix" property should be the root nodes for the widget instances that will be spawned.
 

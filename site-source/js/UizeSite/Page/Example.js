@@ -19,7 +19,7 @@
 Uize.module ({
 	name:'UizeSite.Page.Example',
 	required:[
-		'Uize.Node',
+		'Uize.Dom.Basics',
 		'Uize.Dom.Classes',
 		'Uize.Url'
 	],
@@ -90,7 +90,7 @@ Uize.module ({
 						/*** wire programmatic links ***/
 							m._evaluator &&
 								m.wireNode (
-									Uize.Node.find ({tagName:'A',className:/\blinkedJs\b/}),
+									Uize.Dom.Basics.find ({tagName:'A',className:/\blinkedJs\b/}),
 									'click',
 									function () {m._evaluator (this.title || this.innerHTML)}
 								)
@@ -103,7 +103,7 @@ Uize.module ({
 							if (_tour) {
 								var _documentBody = document.body;
 								Uize.Dom.Classes.addClass (_documentBody,'inTour');
-								Uize.Node.injectHtml (_documentBody,'<div id="page-tourBar"></div>');
+								Uize.Dom.Basics.injectHtml (_documentBody,'<div id="page-tourBar"></div>');
 								Uize.require (
 									'UizeSite.Widgets.TourBar.Widget',
 									function () {

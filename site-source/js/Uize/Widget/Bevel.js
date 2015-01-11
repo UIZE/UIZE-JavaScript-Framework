@@ -26,7 +26,7 @@
 Uize.module ({
 	name:'Uize.Widget.Bevel',
 	required:[
-		'Uize.Node',
+		'Uize.Dom.Basics',
 		'Uize.Dom.Util'
 	],
 	builder:function (_superclass) {
@@ -34,7 +34,7 @@ Uize.module ({
 
 		var
 			/*** Variables for Scruncher Optimization ***/
-				_isIe = Uize.Node.isIe
+				_isIe = Uize.Dom.Basics.isIe
 		;
 
 		/*** Private Instance Methods ***/

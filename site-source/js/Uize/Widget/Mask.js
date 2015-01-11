@@ -25,13 +25,16 @@
 
 Uize.module ({
 	name:'Uize.Widget.Mask',
-	required:'Uize.Node',
+	required:[
+		'Uize.Dom.Basics',
+		'Uize.Dom.Pos'
+	],
 	builder:function (_superclass) {
 		'use strict';
 
 		var
 			/*** Variables for Scruncher Optimization ***/
-				_Uize_Node = Uize.Node,
+				_Uize_Dom_Basics = Uize.Dom.Basics,
 				_updateUi = 'updateUi',
 
 			/*** General Variables ***/
@@ -48,7 +51,7 @@ Uize.module ({
 				if (_img) {
 					// temporary code while IE6 still exists. It makes the assumption that the img is transparent
 					// because this is supposed to be a mask overlay, not a solid mask.
-					if (_Uize_Node.isIe && /MSIE 6.0/.test (navigator.appVersion)) {
+					if (_Uize_Dom_Basics.isIe && /MSIE 6.0/.test (navigator.appVersion)) {
 						_imgNode.style.filter = 'progid:DXImageTransform.Microsoft.AlphaImageLoader(src=\'' + _img + '\', sizingMethod=\'crop\')';
 						_imgNode.src = _class.getBlankImageUrl();
 					}
@@ -100,7 +103,7 @@ Uize.module ({
 								_width = m._width,
 								_height = m._height,
 								_viewBottom = _top + _height,
-								_setClipRect = _Uize_Node.setClipRect,
+								_setClipRect = _Uize_Dom_Basics.setClipRect,
 								_maskNodeTop = m._maskNodeTop,
 								_maskNodeLeft = m._maskNodeLeft,
 								_maskNodeRight = m._maskNodeRight,
@@ -130,7 +133,7 @@ Uize.module ({
 							_getClonedMaskNode = function () {
 								var _node = _shell.cloneNode (false);
 								_node.removeAttribute ('id');
-								_Uize_Node.setStyle (
+								_Uize_Dom_Basics.setStyle (
 									_node,
 									{
 										position:'absolute',
@@ -142,13 +145,13 @@ Uize.module ({
 								return _node;
 							}
 						;
-						m._shellBoundsObj = _Uize_Node.getDimensions (_shell);
+						m._shellBoundsObj = Uize.Dom.Pos.getDimensions (_shell);
 						m._maskNodeTop = _getClonedMaskNode ();
 						m._maskNodeLeft = _getClonedMaskNode ();
 						m._maskNodeRight = _getClonedMaskNode ();
 						m._maskNodeBottom = _getClonedMaskNode ();
 						_img && _setImageNode (m);
-						_Uize_Node.setStyle (
+						_Uize_Dom_Basics.setStyle (
 							_shell,
 							{
 								background:'transparent',

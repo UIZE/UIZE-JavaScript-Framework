@@ -11,9 +11,6 @@
 <!-- load in the necessary JavaScript libraries -->
 
 <script type="text/javascript" src="../../js/Uize.js"></script>
-<script type="text/javascript" src="../../js/Uize.Node.js"></script>
-<script type="text/javascript" src="../../js/Uize.Widget.js"></script>
-<script type="text/javascript" src="../../js/Uize.Widget.TableSort.js"></script>
 
 <!-- table of data to which Uize.Widget.TableSort object will be attached -->
 
@@ -137,8 +134,12 @@
 
 <script type="text/javascript">
 
-	/*** spawn (and automatically wire) the Uize.Widget.TableSort object ***/
-		Uize.Widget.TableSort.spawn ({idPrefix:'friendsTable'});
+Uize.require (
+	'Uize.Widget.TableSort',
+	function (_Uize_Widget_TableSort) {
+		_Uize_Widget_TableSort.spawn ({idPrefix:'friendsTable'});
+	}
+);
 
 </script>
 

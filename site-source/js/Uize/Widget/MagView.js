@@ -31,7 +31,8 @@
 Uize.module ({
 	name:'Uize.Widget.MagView',
 	required:[
-		'Uize.Node',
+		'Uize.Dom.Basics',
+		'Uize.Dom.Pos',
 		'Uize.Fade',
 		'Uize.Widget.ImagePort'
 	],
@@ -44,7 +45,8 @@ Uize.module ({
 				_false = false,
 				_undefined,
 				_null = null,
-				_Uize_Node = Uize.Node,
+				_Uize_Dom_Basics = Uize.Dom.Basics,
+				_Uize_Dom_Pos = Uize.Dom.Pos,
 
 			/*** General Variables ***/
 				_imagesCached = {}
@@ -98,7 +100,7 @@ Uize.module ({
 						/* NOTE: check if image in magImagePort needs to be updated */
 						var
 							_displayHighRes = function (_mustDisplay) {
-								_Uize_Node.show (m.getNode ('magImageHighRes'),_mustDisplay);
+								_Uize_Dom_Basics.show (m.getNode ('magImageHighRes'),_mustDisplay);
 								m.displayNode ('magImageLowRes',!_mustDisplay);
 							},
 							_magImageHighResUrlCached = _imagesCached [_magImageHighResUrl]
@@ -243,7 +245,7 @@ Uize.module ({
 					if (!m.isWired) {
 						/*** capture dimensions of regular view ***/
 							var
-								_regViewDims = _Uize_Node.getDimensions (m.getNode ()),
+								_regViewDims = _Uize_Dom_Pos.getDimensions (m.getNode ()),
 								_regViewWidth = m._regViewWidth = _regViewDims.width,
 								_regViewHeight = m._regViewHeight = _regViewDims.height
 							;
@@ -269,7 +271,7 @@ Uize.module ({
 												_docBody = document.body,
 												_moveNodeToRoot = function (_node) {
 													_docBody.insertBefore (_node,_docBody.childNodes [0]);
-													_Uize_Node.setStyle (
+													_Uize_Dom_Basics.setStyle (
 														_node,
 														{
 															zIndex:100000,
@@ -288,8 +290,8 @@ Uize.module ({
 											This has to be done here after revealing the shell, otherwise all dimensions of display:none nodes register as zero. The other alternative is to require the width and height to be explicit in the style attribute of the nodes.
 										*/
 										var
-											_regViewCoords = _Uize_Node.getCoords (m.getNode ()),
-											_magImagePortDims = _Uize_Node.getDimensions (m._magImagePort.getNode ())
+											_regViewCoords = _Uize_Dom_Pos.getCoords (m.getNode ()),
+											_magImagePortDims = _Uize_Dom_Pos.getDimensions (m._magImagePort.getNode ())
 										;
 										m._regViewX = _regViewCoords.x;
 										m._regViewY = _regViewCoords.y;
@@ -316,9 +318,9 @@ Uize.module ({
 										_oldOnclick = document.onclick
 									;
 									function _handleMouseMove () {
-										m._eventAbsPos = _Uize_Node.getEventAbsPos ();
+										m._eventAbsPos = _Uize_Dom_Pos.getEventAbsPos ();
 										if (
-											_Uize_Node.doRectanglesOverlap (
+											_Uize_Dom_Pos.doRectanglesOverlap (
 												m._eventAbsPos.left,m._eventAbsPos.top,1,1,
 												m._regViewX,m._regViewY,_regViewWidth,_regViewHeight
 											)
@@ -455,7 +457,7 @@ Uize.module ({
 
 							/*** set the cursor to indicate either zoom in or zoom out ability ***/
 								/*
-								var _isIe = _Uize_Node.isIe;
+								var _isIe = _Uize_Dom_Basics.isIe;
 								m.setNodeStyle (
 									'highlight',
 									{

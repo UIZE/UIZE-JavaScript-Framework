@@ -26,7 +26,8 @@
 Uize.module ({
 	name:'Uize.Widget.Dialog',
 	required:[
-		'Uize.Node',
+		'Uize.Dom.Basics',
+		'Uize.Dom.Pos',
 		'Uize.Widget.Button',
 		'Uize.Widget.Drag',
 		'Uize.Fade'
@@ -39,7 +40,8 @@ Uize.module ({
 				_true = true,
 				_false = false,
 				_undefined,
-				_Uize_Node = Uize.Node,
+				_Uize_Dom_Basics = Uize.Dom.Basics,
+				_Uize_Dom_Pos = Uize.Dom.Pos,
 				_Uize_Widget = Uize.Widget,
 				_Uize_Widget_Drag = _Uize_Widget.Drag,
 				_updateUiDimsIfShown = 'updateUiDimsIfShown',
@@ -49,7 +51,7 @@ Uize.module ({
 				_sacredEmptyObject = {},
 				_zIndexSlots = {},
 				_totalShown = 0,
-				_browserHasSelectShowThroughIssue = _Uize_Node.ieMajorVersion == 6
+				_browserHasSelectShowThroughIssue = _Uize_Dom_Basics.ieMajorVersion == 6
 		;
 
 		/*** Private Instance Methods ***/
@@ -135,17 +137,17 @@ Uize.module ({
 							},
 						'Drag Done':
 							function () {
-								var _mooringNode = _Uize_Node.getById (m._mooringNode);
+								var _mooringNode = _Uize_Dom_Basics.getById (m._mooringNode);
 								if (_mooringNode) {
 									var
-										_mooringCoords = _Uize_Node.getCoords (_mooringNode),
+										_mooringCoords = _Uize_Dom_Pos.getCoords (_mooringNode),
 										_rootNode = m.getNode ()
 									;
 									m.set ({
 										offsetX:
-											parseInt (_Uize_Node.getStyle (_rootNode,'left')) - _mooringCoords.left,
+											parseInt (_Uize_Dom_Basics.getStyle (_rootNode,'left')) - _mooringCoords.left,
 										offsetY:
-											parseInt (_Uize_Node.getStyle (_rootNode,'top')) - _mooringCoords.top
+											parseInt (_Uize_Dom_Basics.getStyle (_rootNode,'top')) - _mooringCoords.top
 									});
 								}
 							}
@@ -165,8 +167,8 @@ Uize.module ({
 							'Before Drag Start':
 								function () {
 									_rootNode = m.getNode ();
-									_dragStartRootNodePos [0] = parseInt (_Uize_Node.getStyle (_rootNode,'left'));
-									_dragStartRootNodePos [1] = parseInt (_Uize_Node.getStyle (_rootNode,'top'));
+									_dragStartRootNodePos [0] = parseInt (_Uize_Dom_Basics.getStyle (_rootNode,'left'));
+									_dragStartRootNodePos [1] = parseInt (_Uize_Dom_Basics.getStyle (_rootNode,'top'));
 								},
 							'Changed.inDrag':function (_event) {m.set ({_inDrag:_event.newValue})},
 							'Drag Start':m,
@@ -182,7 +184,7 @@ Uize.module ({
 							'Drag Update':
 								function () {
 									var _eventDeltaPos = m._drag.eventDeltaPos;
-									_Uize_Node.setStyle (
+									_Uize_Dom_Basics.setStyle (
 										_rootNode,
 										{
 											left:_dragStartRootNodePos [0] + _eventDeltaPos [0],
@@ -299,10 +301,10 @@ Uize.module ({
 
 					// next determine if the dialog is too big
 					var
-						_windowCoords = _Uize_Node.getCoords(window),
-						_rootNodeDims = _Uize_Node.getDimensions(_rootNode),
+						_windowCoords = _Uize_Dom_Pos.getCoords(window),
+						_rootNodeDims = _Uize_Dom_Pos.getDimensions(_rootNode),
 						_nodeToSetIsRoot = _nodeToSetDimension == _rootNode,
-						_nodeToSetDims = _nodeToSetIsRoot ? _rootNodeDims : _Uize_Node.getDimensions(_nodeToSetDimension)
+						_nodeToSetDims = _nodeToSetIsRoot ? _rootNodeDims : _Uize_Dom_Pos.getDimensions(_nodeToSetDimension)
 					;
 
 					// set max width/height such that the root node will be 100% in either dimension
@@ -316,7 +318,7 @@ Uize.module ({
 
 					// update the root node dims object if we set max width/height above
 					if (_rootNodeDims.width > _windowCoords.width || _rootNodeDims.height > _windowCoords.height)
-						_rootNodeDims = _Uize_Node.getDimensions(_rootNode);
+						_rootNodeDims = _Uize_Dom_Pos.getDimensions(_rootNode);
 
 					// lastly center position if small enough or 0,0 if too big
 					var
@@ -356,21 +358,21 @@ Uize.module ({
 						if (m._autoPosition) {
 							var
 								_rootNode = m.getNode (),
-								_mooringNode = _Uize_Node.getById (m._mooringNode),
+								_mooringNode = _Uize_Dom_Basics.getById (m._mooringNode),
 								_offsetX = m._offsetX,
 								_offsetY = m._offsetY
 							;
 							if (!_mooringNode || _offsetX == _undefined || _offsetY == _undefined) {
 								m.responsiveUpdateUiPositionAndDimensions();
-								//_Uize_Node.centerInWindow(_rootNode);
+								//_Uize_Dom_Pos.centerInWindow(_rootNode);
 							}
 							if (_mooringNode) {
 								if (_offsetX == 'adjacent' || _offsetY == 'adjacent') {
-									_Uize_Node.setAbsPosAdjacentTo (_rootNode, _mooringNode);
+									_Uize_Dom_Pos.setAbsPosAdjacentTo (_rootNode, _mooringNode);
 								}
 								else {
-									var _mooringCoords = _Uize_Node.getCoords (_mooringNode);
-									_Uize_Node.setStyle (
+									var _mooringCoords = _Uize_Dom_Pos.getCoords (_mooringNode);
+									_Uize_Dom_Basics.setStyle (
 										_rootNode,
 										Uize.copy (
 											_offsetX != _undefined ? {left:_mooringCoords.left + _offsetX} : _undefined,

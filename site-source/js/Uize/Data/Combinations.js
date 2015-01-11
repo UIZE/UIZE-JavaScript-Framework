@@ -435,14 +435,14 @@
 							}
 						}
 					}
-					Uize.Node.setInnerHtml ('styleCombos',htmlChunks.join ('\n'));
+					Uize.Dom.Basics.setInnerHtml ('styleCombos',htmlChunks.join ('\n'));
 					...........................................................................................
 
 					Of course, if we wanted a more concise and elegant solution - one that is more easily scalable when we want to add more styling dimensions - we could use the =Uize.Data.Combinations.generate= method as follows...
 
 					THE CONCISE WAY
 					..............................................................................
-					Uize.Node.setInnerHtml (
+					Uize.Dom.Basics.setInnerHtml (
 						'styleCombos',
 						Uize.Data.Combinations.generate (
 							[

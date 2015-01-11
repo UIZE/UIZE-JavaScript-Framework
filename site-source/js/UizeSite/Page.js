@@ -20,7 +20,8 @@ Uize.module ({
 	name:'UizeSite.Page',
 	superclass:'Uize.Widget.Page',
 	required:[
-		'Uize.Node',
+		'Uize.Dom.Basics',
+		'Uize.Dom.Pos',
 		'Uize.Url',
 		'UizeSite.Widgets.SiteNav.Widget',
 		'UizeSite.Widgets.SiteAssistant.Widget',
@@ -28,6 +29,13 @@ Uize.module ({
 	],
 	builder:function (_superclass) {
 		'use strict';
+
+		var
+			/*** Variables for Scruncher Optimization ***/
+				_Uize_Dom_Basics = Uize.Dom.Basics,
+				_injectHtml = _Uize_Dom_Basics.injectHtml,
+				_getDimensions = Uize.Dom.Pos.getDimensions
+		;
 
 		return _superclass.subclass ({
 			instanceMethods:{
@@ -130,13 +138,13 @@ Uize.module ({
 							};
 							m.wireNode ('homeLink','mouseover',_wireUpSiteMenu);
 
-						var _mainNode = Uize.Node.find ({tagName:'div',className:/\bmain\b/}) [0];
+						var _mainNode = _Uize_Dom_Basics.find ({tagName:'div',className:/\bmain\b/}) [0];
 
 						if (_mainNode) {
 							/*** inject site nav (if desired) ***/
 								if (m._showSiteNav) {
 									// add widget and inject its HTML
-									Uize.Node.injectHtml (
+									_injectHtml (
 										document.body,
 										'<div id="page-siteNavPane"><div id="page-siteNav"></div></div>'
 									);
@@ -146,7 +154,7 @@ Uize.module ({
 							/*** inject site assistant (if desired) ***/
 								if (m._showSiteAssistant) {
 									// add widget and inject its HTML
-									Uize.Node.injectHtml (document.body,'<div id="page-siteAssistant"></div>');
+									_injectHtml (document.body,'<div id="page-siteAssistant"></div>');
 									m.addChild ('siteAssistant',UizeSite.Widgets.SiteAssistant.Widget,{built:false});
 								}
 
@@ -158,8 +166,7 @@ Uize.module ({
 									;
 									if (_showSiteNav || _showSiteAssistant) {
 										var
-											_gutterWidth =
-												Uize.Node.getDimensions (window).width - Uize.Node.getDimensions (_mainNode).width,
+											_gutterWidth = _getDimensions (window).width - _getDimensions (_mainNode).width,
 											_halfGutterWidth = _gutterWidth / 2,
 											_showBoth = _showSiteNav && _showSiteAssistant,
 											_showPane = function (_mustShow,_node,_width) {
@@ -188,12 +195,12 @@ Uize.module ({
 									}
 								};
 								_resizeGutterPanes ();
-								Uize.Node.wire (window,'resize',_resizeGutterPanes);
+								_Uize_Dom_Basics.wire (window,'resize',_resizeGutterPanes);
 						}
 
 						/*** inject footer (if desired) ***/
 							if (m._showFooter) {
-								Uize.Node.injectHtml (_mainNode,'<div id="page-footer"></div>');
+								_injectHtml (_mainNode,'<div id="page-footer"></div>');
 								m.addChild ('footer',UizeSite.Widgets.Footer.Widget,{built:false});
 							}
 

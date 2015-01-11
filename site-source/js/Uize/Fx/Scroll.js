@@ -26,7 +26,8 @@
 Uize.module ({
 	name:'Uize.Fx.Scroll',
 	required:[
-		'Uize.Node',
+		'Uize.Dom.Basics',
+		'Uize.Dom.Pos',
 		'Uize.Fade'
 	],
 	builder:function () {
@@ -34,23 +35,25 @@ Uize.module ({
 
 		var
 			/*** Variables for Scruncher Optimization ***/
-				_undefined
+				_undefined,
+				_Uize_Dom = Uize.Dom,
+				_Uize_Dom_Basics = _Uize_Dom.Basics,
+				_Uize_Dom_Pos = _Uize_Dom.Pos,
+				_getCoords = _Uize_Dom_Pos.getCoords,
+				_getDimensions = _Uize_Dom_Pos.getDimensions,
+				_Uize_Fade = Uize.Fade
 		;
 
 		return Uize.package ({
 			scrollToNode:function (_targetNode, _scrollParams) {
 				var
-					_Uize_Node = Uize.Node,
-					_Uize_Node_getDimensions = _Uize_Node.getDimensions,
-					_Uize_Node_getCoords = _Uize_Node.getCoords,
-					_Uize_Fade = Uize.Fade,
 					_document = document,
 					_bodyNode = _document.body,
 					_documentElement = _document.documentElement,
-					_getNodeHeight = function (_node) {return _Uize_Node_getDimensions(_node).height}
+					_getNodeHeight = function (_node) {return _getDimensions(_node).height}
 				;
 
-				_targetNode = _Uize_Node.getById(_targetNode) || _bodyNode;
+				_targetNode = _Uize_Dom_Basics.getById(_targetNode) || _bodyNode;
 				_scrollParams = _scrollParams || {};
 
 				var
@@ -67,7 +70,7 @@ Uize.module ({
 					_scrollableContainerNode = _scrollableContainerNode.parentNode;
 
 					if (_scrollableContainerNode.parentNode != _documentElement) {
-						if (_Uize_Node.getStyle(_scrollableContainerNode, 'overflowY') in _overflowScrollLookup)
+						if (_Uize_Dom_Basics.getStyle(_scrollableContainerNode, 'overflowY') in _overflowScrollLookup)
 							break;
 						if (_getNodeHeight(_scrollableContainerNode) > _getNodeHeight(_scrollableContainerNode.parentNode)) {
 							_scrollableContainerNode = _scrollableContainerNode.parentNode;
@@ -77,11 +80,11 @@ Uize.module ({
 				}
 
 				var
-					_scrollableContainerNodeCoords = _Uize_Node_getCoords(_scrollableContainerNode),
-					_targetNodeCoords = _Uize_Node_getCoords(_targetNode),
-					_scrollableBodyNode = _Uize_Node.getDocumentScrollElement(),
+					_scrollableContainerNodeCoords = _getCoords(_scrollableContainerNode),
+					_targetNodeCoords = _getCoords(_targetNode),
+					_scrollableBodyNode = _Uize_Dom_Pos.getDocumentScrollElement(),
 					_window = window,
-					_windowDimensions = _Uize_Node_getDimensions(_window),
+					_windowDimensions = _getDimensions(_window),
 					_windowScrollX = _scrollableBodyNode.scrollLeft,
 					_windowScrollY = _scrollableBodyNode.scrollTop,
 					_windowWidth = _windowDimensions.width,
@@ -113,7 +116,7 @@ Uize.module ({
 					// full - the node must be wholly within the window view port
 					// partial - the top-left corner of the node must be within the
 					//           window view port, but the entire node does not have to be
-					return _Uize_Node.doRectanglesOverlap(
+					return _Uize_Dom_Pos.doRectanglesOverlap(
 							_nodeLeft, _nodeTop, _nodeWidth, 1,
 							_containerScrollX, _containerScrollY, _containerWidth, _containerHeight
 						)

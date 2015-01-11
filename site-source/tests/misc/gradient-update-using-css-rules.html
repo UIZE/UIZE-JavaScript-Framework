@@ -41,7 +41,7 @@
 
 Uize.require (
 	[
-		'Uize.Node',
+		'Uize.Dom.Basics',
 		'Uize.Widget',
 		'Uize.Widget.Bar',
 		'Uize.Widget.Drag',
@@ -82,7 +82,7 @@ Uize.require (
 			}
 			_html += '</div>';
 
-			Uize.Node.injectHtml ('colorGradient',_html);
+			Uize.Dom.Basics.injectHtml ('colorGradient',_html);
 
 		/*** insert the UI for the color pickers ***/
 			colorPicker1.insertUi ();

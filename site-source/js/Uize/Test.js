@@ -139,8 +139,8 @@ Uize.module ({
 								- this method is one of the many available `expectation methods`
 					*/
 				},
-				
-				
+
+
 				expectNotIdentical:function (_expectedValue,_value) {
 					return _expectSuccess (
 						this,
@@ -271,7 +271,7 @@ Uize.module ({
 
 								myTest.expectNully (null);           // returns true
 								myTest.expectNully (undefined);      // returns true
-								
+
 								// when called with non-null values...
 
 								myTest.expectNully (1);              // returns false
@@ -446,8 +446,8 @@ Uize.module ({
 									- anonymous functions
 									- functions created using the =Function= constructor
 									- constructors for the built-in JavaScript objects, such as =String=, =Boolean=, =Number=, =RegExp=, =Function=, etc.
-									- pure =Uize= namespace modules, such as =Uize.Templates=, =Uize.Util=, etc.
-									- package modules, such as =Uize.Data=, =Uize.Fx=, =Uize.Node=, etc.
+									- pure =Uize= namespace modules, such as =Uize.Dom=, =Uize.Util=, etc.
+									- package modules, such as =Uize.Data.Diff=, =Uize.Dom.Basics=, etc.
 									- class modules, such as =Uize.Class=, =Uize.Fade=, =Uize.Widget=, etc.
 
 									EXAMPLE
@@ -458,7 +458,7 @@ Uize.module ({
 									myTest.expectFunction (Function ('value','alert (value')));  // returns true
 									myTest.expectFunction (Date);                                // returns true
 									myTest.expectFunction (Uize.Util);                           // returns true
-									myTest.expectFunction (Uize.Node);                           // returns true
+									myTest.expectFunction (Uize.Dom.Basics);                     // returns true
 									myTest.expectFunction (Uize.Widget);                         // returns true
 									............................................................................
 
@@ -1168,7 +1168,7 @@ Uize.module ({
 									............................................................................
 									myTest.expectEmptyArray ([]);                            // returns true
 									myTest.expectEmptyArray (new Array);                     // returns true
-									
+
 									myTest.expectEmptyArray (['foo','bar']);                 // returns false
 									myTest.expectEmptyArray (new Array ('foo','bar'));       // returns false
 									myTest.expectEmptyArray (new Array (5));                 // returns false
@@ -1316,7 +1316,7 @@ Uize.module ({
 									EXAMPLES
 									...........................................................................
 									myTest.expectEmptyString ('');                          // returns true
-									
+
 									myTest.expectEmptyString ('foo');                       // returns false
 									myTest.expectEmptyString (new String (''));             // returns false
 									myTest.expectEmptyString (new String ('foo'));          // returns false
@@ -2492,7 +2492,7 @@ Uize.module ({
 								Instance Properties
 									children
 										An array of child tests where each element is an instance of a =Uize.Test= subclass.
-										
+
 										A test instance contains children when its =test= state property is an array. When its =test= state property is not an array, =children= will be =undefined=.
 
 										NOTES

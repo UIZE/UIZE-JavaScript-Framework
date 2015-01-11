@@ -38,7 +38,7 @@
 					nodes.length
 				);
 				for (var nodeNo = nodes.length; --nodeNo >= 0;) {
-					Uize.Node.setStyle (
+					Uize.Dom.Basics.setStyle (
 						nodes [nodeNo],
 						{backgroundColor:Uize.Color.to (colors [nodeNo],'#hex')}
 					);

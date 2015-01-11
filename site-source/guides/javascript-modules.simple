@@ -11,7 +11,7 @@ A Simple Example
 	Uize.module ({
 		name:'Uize.Widget.MagView',
 		required:[
-			'Uize.Node',
+			'Uize.Dom.Basics',
 			'Uize.Fade',
 			'Uize.Widget.ImagePort'
 		],
@@ -94,26 +94,26 @@ Uize.module
 
 			For example, the following...
 
-			...................................................
-			required:'Uize.Node,Uize.Color,Uize.Data,Uize.Fade'
-			...................................................
+			.........................................................
+			required:'Uize.Dom.Basics,Uize.Color,Uize.Data,Uize.Fade'
+			.........................................................
 
 			...is equivalent to...
 
-			...........................................................
-			required:['Uize.Node','Uize.Color','Uize.Data','Uize.Fade']
-			...........................................................
+			.................................................................
+			required:['Uize.Dom.Basics','Uize.Color','Uize.Data','Uize.Fade']
+			.................................................................
 
 			Using the array form has the advantage of permitting prettiness, by allowing the required list to be spread across multiple lines, as follows...
 
-			................
+			.....................
 			required:[
-				'Uize.Node',
+				'Uize.Dom.Basics',
 				'Uize.Color',
 				'Uize.Data',
 				'Uize.Fade'
 			]
-			................
+			.....................
 
 			Don't Require Implicit Dependencies
 				It is redundant to require a module that is implicitly required.
@@ -149,9 +149,9 @@ Uize.module
 
 				The corollary to the rule of "don't require on behalf of required modules", is don't *avoid* requiring modules that you immediately use - just because you know that other modules you're using require them.
 
-				A prime example is the much used =Uize.Node= module. The =Uize.Widget= base class relies heavily upon the =Uize.Node= package in its implementation. Therefore, every widget that is a subclass of =Uize.Widget= is effectively requiring =Uize.Node=. However, even if you are declaring a module that is a subclass of =Uize.Widget= and the module's code directly accesses methods of =Uize.Node=, then the required list should include ='Uize.Node'=.
+				A prime example is the much used =Uize.Dom.Basics= module. The =Uize.Widget= base class relies heavily upon the =Uize.Dom.Basics= package in its implementation. Therefore, every widget that is a subclass of =Uize.Widget= is effectively requiring =Uize.Dom.Basics=. However, even if you are declaring a module that is a subclass of =Uize.Widget= and the module's code directly accesses methods of =Uize.Dom.Basics=, then the required list should include ='Uize.Dom.Basics'=.
 
-				It's a slippery slope when you start weaving too much knowledge about other module's implementations into your own implementation and building in questionable assumptions that may later break. For argument sake, the structure of the framework could change over time. In one scenario, a =Uize.Node= package may be kept for backwards compability while the =Uize.Widget= implementation may be migrated away from using it. You don't want assumptions about the implementation of the =Uize.Widget= base class to break all widgets implemented for the framework.
+				It's a slippery slope when you start weaving too much knowledge about other module's implementations into your own implementation and building in questionable assumptions that may later break. For argument sake, the structure of the framework could change over time. In one scenario, a DOM utilities package under the =Uize.Dom= namespace may be kept for backwards compability while the =Uize.Widget= implementation may be migrated away from using it. You don't want assumptions about the implementation of the =Uize.Widget= base class to break all widgets implemented for the framework.
 
 			Avoid Circular Dependencies
 				Avoid circular dependencies between two or more modules.
@@ -270,7 +270,7 @@ Types of Modules
 			name:'MyNamespace.MyWidgetClass',
 			superclass:'Uize.Widget',
 			required:[
-				'Uize.Node',
+				'Uize.Dom.Basics',
 				'Uize.Fade'
 			],
 			builder:function (_superclass) {
@@ -293,7 +293,7 @@ Types of Modules
 		});
 		....................................
 
-		In the above example, the implementation of the =MyNamespace.MyWidgetClass= module has become more complex and it now requires the additional modules =Uize.Node= and =Uize.Fade=. Notice, however, that the modules =MyNamespace= and =Uize.Widget= (the host and superclass, respectively) are not in the required list, since their requirement is implicit.
+		In the above example, the implementation of the =MyNamespace.MyWidgetClass= module has become more complex and it now requires the additional modules =Uize.Dom.Basics= and =Uize.Fade=. Notice, however, that the modules =MyNamespace= and =Uize.Widget= (the host and superclass, respectively) are not in the required list, since their requirement is implicit.
 
 	Package Module
 		A package in the UIZE JavaScript Framework is often just a collection of helper static methods or data properties, and is not derived from a superclass.
@@ -303,7 +303,7 @@ Types of Modules
 		PACKAGE MODULE
 		.....................................
 		Uize.module ({
-			name:'Uize.Node',
+			name:'Uize.Dom.Basics',
 			builder:function () {
 				'use strict';
 
@@ -360,7 +360,7 @@ Types of Modules
 			..............................................
 			Uize.module ({
 				required:[
-					'Uize.Node',
+					'Uize.Dom.Basics',
 					'Uize.Widget.ImagePort',
 					'Uize.Widget.Bar.Slider.xSkin',
 					'Uize.Widget.Resizer.Marquee'
@@ -375,7 +375,7 @@ Types of Modules
 			});
 			..............................................
 
-			In the above example, the page wiring code will only execute once the =Uize.Node=, =Uize.Widget.ImagePort=, =Uize.Widget.Bar.Slider.xSkin=, and =Uize.Widget.Resizer.Marquee= modules, along with all of their required modules, have been loaded in and built.
+			In the above example, the page wiring code will only execute once the =Uize.Dom.Basics=, =Uize.Widget.ImagePort=, =Uize.Widget.Bar.Slider.xSkin=, and =Uize.Widget.Resizer.Marquee= modules, along with all of their required modules, have been loaded in and built.
 
 		Deferred Loading
 			It is also possible to use the =Uize.module= method to declare an anonymous module of code that is deeply nested inside the main module's implementation. This module of code can then require modules that aren't required by the main module.
@@ -437,7 +437,8 @@ Types of Modules
 		..........................................
 		/* Library Contents
 			Uize.Class
-			Uize.Node
+			Uize.Dom
+			Uize.Dom.Basics
 			Uize.Fade
 			Uize.Xml
 			Uize.Tooltip

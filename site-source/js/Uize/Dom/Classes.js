@@ -32,12 +32,12 @@
 					To illustrate the ease of use of the =Uize.Dom.Classes= module, consider the following example of adding a CSS class to a node's =className= property...
 
 					BEFORE
-					....................................................
-					var node = Uize.Node.getById ('recommendationsPod');
+					..........................................................
+					var node = Uize.Dom.Basics.getById ('recommendationsPod');
 					if (!/\bpodPopulated\b/.test (node.className)) {
 						node.className += ' podPopulated';
 					}
-					....................................................
+					..........................................................
 
 					AFTER
 					................................................................
@@ -51,7 +51,7 @@
 
 					BEFORE
 					...................................................................
-					var node = Uize.Node.getById ('recommendationsPod');
+					var node = Uize.Dom.Basics.getById ('recommendationsPod');
 					if (/\bpodPopulated\b/.test (node.className)) {
 						node.className = node.className.replace (/\bpodPopulated\b/,'');
 					} else {

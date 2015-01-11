@@ -82,7 +82,7 @@ Uize.module ({
 	name:'Uize.Widget.Dialog.xResizable',
 	required:[
 		'Uize.Widget.Resizer',
-		'Uize.Node'
+		'Uize.Dom.Pos'
 	],
 	builder:function (_class) {
 		'use strict';
@@ -92,7 +92,7 @@ Uize.module ({
 				_true = true,
 				_false = false,
 				_Uize = Uize,
-				_Uize_Node = _Uize.Node,
+				_Uize_Dom_Pos = Uize.Dom.Pos,
 
 			/*** Names for Namespaced Privates ***/
 				_privatesNamespace = 'Uize.Widget.Dialog.xResizable.',
@@ -159,8 +159,8 @@ Uize.module ({
 						var _syncResizerToDialogPosition = function () {
 							if (m.isWired && m.get ('shown')) {
 								var _rootNode = m.getNode ();
-								if (_Uize_Node.getStyle (_rootNode,'display') != 'none') {
-									var _rootNodeCoords = _Uize_Node.getCoords (_rootNode);
+								if (m.getNodeStyle (_rootNode,'display') != 'none') {
+									var _rootNodeCoords = _Uize_Dom_Pos.getCoords (_rootNode);
 									_resizer.set ({
 										left:_rootNodeCoords.left,
 										top:_rootNodeCoords.top,
@@ -247,9 +247,9 @@ Uize.module ({
 							//m.setNodeStyle('', { width: m.get('width') });
 						} else {
 							var
-								_contentDims = _Uize_Node.getDimensions(m.getNode(_nodeToSetDimension)),
-								_rootDims = _Uize_Node.getDimensions(m.getNode()),
-								_windowCoords = _Uize_Node.getCoords(window)
+								_contentDims = _Uize_Dom_Pos.getDimensions(m.getNode(_nodeToSetDimension)),
+								_rootDims = _Uize_Dom_Pos.getDimensions(m.getNode()),
+								_windowCoords = _Uize_Dom_Pos.getCoords(window)
 							;
 							m.setNodeStyle(
 								'',

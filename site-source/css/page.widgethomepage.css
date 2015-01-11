@@ -27,6 +27,9 @@
 	.paramsTable .fieldLabel {
 		font-size: 11px;
 	}
+	.paramsTable input {
+		width: 150px;
+	}
 	a.seeMoreWidgetsButton,
 	a.seeMoreWidgetsButton:link,
 	a.seeMoreWidgetsButton:visited,

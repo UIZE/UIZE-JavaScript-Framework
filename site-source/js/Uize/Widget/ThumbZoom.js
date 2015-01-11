@@ -33,7 +33,8 @@ Uize.module ({
 	required:[
 		'Uize.Widget.ImagePort',
 		'Uize.Widget.Drag',
-		'Uize.Node',
+		'Uize.Dom.Basics',
+		'Uize.Dom.Pos',
 		'Uize.Fade'
 	],
 	builder:function (_superclass) {
@@ -43,7 +44,8 @@ Uize.module ({
 			/*** Variables for Scruncher Optimization ***/
 				_true = true,
 				_false = false,
-				_Uize_Node = Uize.Node,
+				_Uize_Dom_Basics = Uize.Dom.Basics,
+				_Uize_Dom_Pos = Uize.Dom.Pos,
 				_Uize_Widget = Uize.Widget,
 
 			/*** General Variables ***/
@@ -130,7 +132,7 @@ Uize.module ({
 							_prepareZoomedImageNode = function () {
 								if (!_zoomedImageNode) {
 									_zoomedImageNode = document.createElement ('img');
-									_Uize_Node.setStyle (
+									m.setNodeStyle (
 										_zoomedImageNode,
 										{
 											display:'none',
@@ -143,11 +145,11 @@ Uize.module ({
 										'load',
 										function (_event) {
 											m._showLoadingProgress && m._loadingProgress.set ({inProgress:_false});
-											_Uize_Node.display (_zoomedImageNode);
-											_Uize_Node.setOpacity (_zoomedImageNode,1);
+											m.displayNode (_zoomedImageNode);
+											m.setNodeOpacity (_zoomedImageNode,1);
 											var
-												_coords = _Uize_Node.getCoords (_thumbNode),
-												_windowDims = _Uize_Node.getDimensions (window),
+												_coords = _Uize_Dom_Pos.getCoords (_thumbNode),
+												_windowDims = _Uize_Dom_Pos.getDimensions (window),
 												_scaledImageCoords = _Uize_Widget.ImagePort.getScaledRect ({
 													portWidth:_windowDims.width,
 													portHeight:_windowDims.height,
@@ -170,8 +172,9 @@ Uize.module ({
 													_oldOnkeydown = document.onkeydown,
 													_oldOnmousemove = document.onmousemove,
 													_oldOnmousedown = document.onmousedown,
-													_initiatingClientX = _event.clientX,
-													_initiatingClientY = _event.clientY
+													_mousePos = _Uize_Dom_Basics.mousePos,
+													_initiatingClientX = _mousePos.pageX,
+													_initiatingClientY = _mousePos.pageY
 												;
 												function _dismissImage () {
 													_showFade.stop ();
@@ -179,7 +182,7 @@ Uize.module ({
 													document.onmousedown = _oldOnmousedown;
 													document.onkeydown = _oldOnkeydown;
 													_shieldFade.stop ();
-													_Uize_Node.display (_shield,_false);
+													m.displayNode (_shield,_false);
 													_hideFade.start ();
 													return _false;
 												}
@@ -187,7 +190,7 @@ Uize.module ({
 												document.onmousemove = function (_event) {
 													_event = _event || event;
 													return (
-														_event.clientX != _initiatingClientX || _event.clientY != _initiatingClientY
+														_mousePos.pageX != _initiatingClientX || _mousePos.pageY != _initiatingClientY
 															? _dismissImage ()
 															: _false
 													);
@@ -216,20 +219,20 @@ Uize.module ({
 										})
 									;
 									_showFade.wire ({
-										'Changed.value':function (_event) {_Uize_Node.setStyle (_zoomedImageNode,_event.newValue)},
+										'Changed.value':function (_event) {m.setNodeStyle (_zoomedImageNode,_event.newValue)},
 										Done:
 											function () {
-												_Uize_Node.setOpacity (_shield,0);
-												_Uize_Node.display (_shield);
+												m.setNodeOpacity (_shield,0);
+												m.displayNode (_shield);
 												_shieldFade.start ();
 											}
 									});
 									_hideFade.wire ({
-										'Changed.value':function (_event) {_Uize_Node.setOpacity (_zoomedImageNode,_event.newValue)},
-										Done:function () {_Uize_Node.display (_zoomedImageNode,_false)}
+										'Changed.value':function (_event) {m.setNodeOpacity (_zoomedImageNode,_event.newValue)},
+										Done:function () {m.displayNode (_zoomedImageNode,_false)}
 									});
 									_shieldFade.wire ({
-										'Changed.value':function (_event) {_Uize_Node.setOpacity (_shield,_event.newValue)}
+										'Changed.value':function (_event) {m.setNodeOpacity (_shield,_event.newValue)}
 									});
 								}
 							}
@@ -254,7 +257,7 @@ Uize.module ({
 
 										/*** position progress bar and activate ***/
 											if (m._showLoadingProgress) {
-												var _coords = _Uize_Node.getCoords (_thumbNode);
+												var _coords = _Uize_Dom_Pos.getCoords (_thumbNode);
 												m._loadingProgress.setNodeStyle (
 													'',
 													{
@@ -266,7 +269,7 @@ Uize.module ({
 											}
 
 										/*** initiate loading of large image ***/
-											_Uize_Node.setStyle (
+											m.setNodeStyle (
 												_zoomedImageNode,
 												{width:'',height:'',left:-10000,top:-10000}
 											);
@@ -276,8 +279,8 @@ Uize.module ({
 								}
 								return !_clickHandled;
 							};
-							_Uize_Node.doForAll (
-								_Uize_Node.find (m._thumbNodes),
+							_Uize_Dom_Basics.doForAll (
+								_Uize_Dom_Basics.find (m._thumbNodes),
 								function (_node) {
 									_node.onclick = Uize.returnFalse;
 									m.wireNode (_node,'click',_handleThumbNodeClick);

@@ -285,7 +285,7 @@ More on Widgets
 			nodeOBJ = myWidget.getNode (impliedNodeSTRorBLOB);
 			..................................................
 
-			Additionally, the `node related instance methods` of the =Uize.Widget= class allow implied nodes to be specified by their name, so it is *not* necessary in most cases to even use the =getNode= method when using these node related instance methods. However, the =getNode= method *is* quite useful for other methods - possibly outside of the =Uize.Widget= class - that deal in node references. This is true of some of the static methods in the =Uize.Node= module, since not all of the static methods of this module have analogs in the =Uize.Widget= class - only the most generally useful ones do.
+			Additionally, the `node related instance methods` of the =Uize.Widget= class allow implied nodes to be specified by their name, so it is *not* necessary in most cases to even use the =getNode= method when using these node related instance methods. However, the =getNode= method *is* quite useful for other methods - possibly outside of the =Uize.Widget= class - that deal in node references. This is true of some of the static methods in the =Uize.Dom.Basics= module, since not all of the static methods of this module have analogs in the =Uize.Widget= class - only the most generally useful ones do.
 
 			EXAMPLE
 			.........................................................................
@@ -293,7 +293,7 @@ More on Widgets
 			var myWidget = Uize.Widget ({idPrefix:'myWidget'});
 
 			// inject some HTML into the document for the widget instance
-			Uize.Node.injectHtml (
+			Uize.Dom.Basics.injectHtml (
 				document.body,
 				'<span id="myWidget-title">this is the title implied node</span>'
 			);
@@ -308,42 +308,42 @@ More on Widgets
 			The above example illustrates both specifying an implied node by name when using the =setNodeStyle= node related instance method, as well as getting a reference to a node using the =getNode= method.
 
 		Node Related Instance Methods
-			Various static methods of the =Uize.Node= module are exposed as instance methods of the =Uize.Widget= class.
+			Various static methods of the =Uize.Dom.Basics= module are exposed as instance methods of the =Uize.Widget= class.
 
-			The node related instance methods of the =Uize.Widget= class differ from their counterparts in the =Uize.Node= module in the following key ways:
+			The node related instance methods of the =Uize.Widget= class differ from their counterparts in the =Uize.Dom.Basics= module in the following key ways:
 
 			1) they are named differently
 			2) string values for nodes are implied node names, rather than node ids
 			3) some =Uize.Widget= class counterparts provide additional logic
 
 			Naming Scheme for Node Related Instance Methods
-				Node related instance methods of the =Uize.Widget= class are named like their counterparts in the =Uize.Node= module, but with the word "Node" spliced in at an appropriate spot.
+				Node related instance methods of the =Uize.Widget= class are named like their counterparts in the =Uize.Dom.Basics= module, but with the word "Node" spliced in at an appropriate spot.
 
 				EXAMPLES
-				........................................................
-				Uize.Node                     Uize.Widget
-				---------                     -----------
-				Uize.Node.display             myWidget.displayNode
-				Uize.Node.getStyle            myWidget.getNodeStyle
-				Uize.Node.getValue            myWidget.getNodeValue
-				Uize.Node.remove              myWidget.removeNode
-				Uize.Node.setClipRect         myWidget.setNodeClipRect
-				Uize.Node.setInnerHtml        myWidget.setNodeInnerHtml
-				Uize.Node.setOpacity          myWidget.setNodeOpacity
-				Uize.Node.setProperties       myWidget.setNodeProperties
-				Uize.Node.setValue            myWidget.setNodeValue
-				Uize.Node.show                myWidget.showNode
-				Uize.Node.wire                myWidget.wireNode
-				Uize.Node.unwire              myWidget.unwireNode
-				........................................................
+				..............................................................
+				Uize.Dom.Basics                     Uize.Widget
+				---------------                     -----------
+				Uize.Dom.Basics.display             myWidget.displayNode
+				Uize.Dom.Basics.getStyle            myWidget.getNodeStyle
+				Uize.Dom.Basics.getValue            myWidget.getNodeValue
+				Uize.Dom.Basics.remove              myWidget.removeNode
+				Uize.Dom.Basics.setClipRect         myWidget.setNodeClipRect
+				Uize.Dom.Basics.setInnerHtml        myWidget.setNodeInnerHtml
+				Uize.Dom.Basics.setOpacity          myWidget.setNodeOpacity
+				Uize.Dom.Basics.setProperties       myWidget.setNodeProperties
+				Uize.Dom.Basics.setValue            myWidget.setNodeValue
+				Uize.Dom.Basics.show                myWidget.showNode
+				Uize.Dom.Basics.wire                myWidget.wireNode
+				Uize.Dom.Basics.unwire              myWidget.unwireNode
+				..............................................................
 
 			Node Related Instance Methods Are More Concise
 				The node related instance methods are provided as a convenience, as they are more concise and more semantically elegant.
 
 				INSTEAD OF...
-				.....................................................................................
-				Uize.Node.setStyle (myWidget.getNode ('title'),{color:'#fff',backgroudColor:'#000'});
-				.....................................................................................
+				...........................................................................................
+				Uize.Dom.Basics.setStyle (myWidget.getNode ('title'),{color:'#fff',backgroudColor:'#000'});
+				...........................................................................................
 
 				USE...
 				.....................................................................
@@ -351,22 +351,22 @@ More on Widgets
 				.....................................................................
 
 			Straight Mappings, For the Most Part
-				Most of the node related instance methods are straight mappings to their =Uize.Node= module counterparts, with the differences mentioned above in method name and how nodes are specified.
+				Most of the node related instance methods are straight mappings to their =Uize.Dom.Basics= module counterparts, with the differences mentioned above in method name and how nodes are specified.
 
 				So, for example, the following two statements are equivalent...
 
-				.....................................................................................
-				Uize.Node.setStyle (myWidget.getNode ('title'),{color:'#fff',backgroudColor:'#000'});
+				...........................................................................................
+				Uize.Dom.Basics.setStyle (myWidget.getNode ('title'),{color:'#fff',backgroudColor:'#000'});
 				myWidget.setNodeStyle ('title',{color:'#fff',backgroudColor:'#000'});
-				.....................................................................................
+				...........................................................................................
 
-				A few of the instance methods, however, add additional logic not implemeted in the =Uize.Node= module. Example of such methods include the =removeNode= and =wireNode= instance methods.
+				A few of the instance methods, however, add additional logic not implemeted in the =Uize.Dom.Basics= module. Example of such methods include the =removeNode= and =wireNode= instance methods.
 
-				When removing a node from the DOM using the =removeNode= instance method, the cached reference to the removed implied node is cleared from `the node cache`. When wiring events on implied nodes using the =wireNode= instance method, an ID for the widget instance that owns the event wirings is provided to the =Uize.Node.wire= static method, so that events can be unwired later by the widget by providing the same owner ID to the =Uize.Node.unwire= static method.
+				When removing a node from the DOM using the =removeNode= instance method, the cached reference to the removed implied node is cleared from `the node cache`. When wiring events on implied nodes using the =wireNode= instance method, an ID for the widget instance that owns the event wirings is provided to the =Uize.Dom.Basics.wire= static method, so that events can be unwired later by the widget by providing the same owner ID to the =Uize.Dom.Basics.unwire= static method.
 
 				INCORRECT
 				................................................
-				Uize.Node.wire (
+				Uize.Dom.Basics.wire (
 					myWidget.getNode ('title'),
 					'click',
 					function () {alert ('You clicked the title')}
@@ -433,7 +433,7 @@ More on Widgets
 				myWidget.setNodeInnerHtml ('bar','I fail silently [shhhhhh]');
 
 				// now we inject the HTML for the "bar" implied node into the body
-				Uize.Node.injectHtml (document.body,'<div id="foo-bar"></div>');
+				Uize.Dom.Basics.injectHtml (document.body,'<div id="foo-bar"></div>');
 
 				// now "bar" implied node exists, but null value is cached, so nothing happens
 				myWidget.setNodeInnerHtml ('bar','D\'OH!');
@@ -920,7 +920,7 @@ Widget Adoption
 		Special Meaning of idPrefix
 			The number of widgets spawned is determined by the value of the "idPrefix" property in the object that specifies the instance properties.
 
-			A value for "idPrefix" must be specified, otherwise the declarative spawning will not work correctly. The value of this property identifies one or more DOM nodes for which the widget instances should be spawned, and may be a DOM node reference, a string representing the =id= of a DOM node, an array of DOM node references, or a find expression object that will be used with the =Uize.Node.find= static method to find the DOM nodes.
+			A value for "idPrefix" must be specified, otherwise the declarative spawning will not work correctly. The value of this property identifies one or more DOM nodes for which the widget instances should be spawned, and may be a DOM node reference, a string representing the =id= of a DOM node, an array of DOM node references, or a find expression object that will be used with the =Uize.Dom.Basics.find= static method to find the DOM nodes.
 
 			Once the value of the "idPrefix" property has been resolved to one or more DOM nodes, an instance of the specified widget class will be created for each of the DOM nodes. For each widget instance that is created, the actual =idPrefix= value for the instance will be derived from the =id= attribute of the DOM node for which the instance is being created. For this reason, the DOM nodes represented by the "idPrefix" property should be the root nodes for the widget instances that will be spawned.
 

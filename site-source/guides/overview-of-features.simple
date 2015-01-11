@@ -329,7 +329,7 @@ DOM Manipulation
 
 	EXAMPLE
 	...................................
-	Uize.Node.setStyle (
+	Uize.Dom.Basics.setStyle (
 		['myNode1','myNode2','myNode3'],
 		{
 			width:'100px',
@@ -340,9 +340,9 @@ DOM Manipulation
 	);
 	...................................
 
-	The above example demonstrates how the =Uize.Node.setStyle= static method of the =Uize.Node= module is used to set the =width=, =height=, =backgroundColor=, and =fontFamily= CSS style properties for the three nodes with the ids "myNode1", "myNode2", and "myNode3".
+	The above example demonstrates how the =Uize.Dom.Basics.setStyle= static method of the =Uize.Dom.Basics= module is used to set the =width=, =height=, =backgroundColor=, and =fontFamily= CSS style properties for the three nodes with the ids "myNode1", "myNode2", and "myNode3".
 
-	For a more in-depth discussion of DOM manipulation, consult the reference for the =Uize.Node= module.
+	For a more in-depth discussion of DOM manipulation, consult the references for the =Uize.Dom.Basics= module and other modules under the =Uize.Dom= namespace.
 
 Widgets Framework
 	UIZE provides a system to facilitate the development of widgets that can be embedded in HTML pages.
@@ -714,14 +714,14 @@ Extensive Documentation
 Cross-compatibility and Browser Abstraction
 	A number of compatibility issues arise when developing applications that must run on a variety of different Web browsers.
 
-	UIZE implements some abstractions to help with cross-browser development, such as abstracting the differences between how DOM events are implemented, or how opacity is supported in CSS. Most of these abstractions are implemented in the =Uize.Node= module.
+	UIZE implements some abstractions to help with cross-browser development, such as abstracting the differences between how DOM events are implemented, or how opacity is supported in CSS. Most of these abstractions are implemented in the =Uize.Dom.Basics= module.
 
 	EXAMPLE
-	.........................................................................
-	Uize.Node.wire ('myNode','click',function () {alert ('You clicked me')});
-	.........................................................................
+	...............................................................................
+	Uize.Dom.Basics.wire ('myNode','click',function () {alert ('You clicked me')});
+	...............................................................................
 
-	The above example shows how the =Uize.Node.wire= static method of the =Uize.Node= module is used to wire a handler function to the =click= event of a DOM node with the id "myNode". The =Uize.Node.wire= method abstracts differences between the event systems of different browsers so that application developers don't need to conditionalize their code.
+	The above example shows how the =Uize.Dom.Basics.wire= static method of the =Uize.Dom.Basics= module is used to wire a handler function to the =click= event of a DOM node with the id "myNode". The =Uize.Dom.Basics.wire= method abstracts differences between the event systems of different browsers so that application developers don't need to conditionalize their code.
 
 Progressive Enhancement / Unobtrusive JavaScript
 	UIZE offers its fair share of features that can be "stitched on" to a page's markup, without the page's knowledge or deliberate consent.

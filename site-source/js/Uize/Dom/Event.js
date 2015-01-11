@@ -257,7 +257,7 @@ Uize.module ({
 
 									EXAMPLE
 									..........................................................
-									Uize.Node.wire (
+									Uize.Dom.Basics.wire (
 										myNode,
 										'click',
 										function (domEvent) {
@@ -265,7 +265,7 @@ Uize.module ({
 											alert ('You should see this message.');
 										}
 									);
-									Uize.Node.wire (
+									Uize.Dom.Basics.wire (
 										myNode.parentNode,
 										'click',
 										function (domEvent) {
