@@ -10,22 +10,23 @@
 	<link rel="stylesheet" href="../css/page.example.css"/>
 	<style type="text/css">
 		.rotationViewer {
-			position:relative;
-			width:640px;
-			height:378px;
-			border-style:solid;
-			border-width:1px;
-			margin:auto;
-			margin-bottom:10px;
-			cursor:pointer;
+			position: relative;
+			width: 710px;
+			height: 445px;
+			border-style: solid;
+			border-width: 1px;
+			margin: auto;
+			margin-bottom: 10px;
+			cursor: pointer;
+			overflow: hidden;
 		}
 		.rotationViewer img {
-			position:absolute;
-			visibility:hidden;
-			left:0;
-			top:0;
-			width:100%;
-			height:100%;
+			position: absolute;
+			visibility: hidden;
+			left: -115px;
+			top: 0;
+			width: 940px;
+			height: 445px;
 		}
 	</style>
 </head>
@@ -51,7 +52,7 @@
 	<!-- explanation copy -->
 
 	<div class="explanation">
-		<p>This example is inspired by a <a href="http://www.apple.com/html5/showcase/threesixty/" target="_blank">showcase example</a> by Apple of HTML5 technologies. The UIZE implementation works in pretty much all browsers, with no need for HTML5 or CSS3 features. This was an exercise in seeing how easy it would be to create an equivalent experience in UIZE. It was easy, taking less than a day. The code is all original, with absolutely no referencing of Apple's code (but thanks to Apple for their delicious iPod Touch products, and for their fabulous photos of said products). In the example, an instance of the <a href="../reference/Uize.Widget.Drag.html"><code>Uize.Widget.Drag</code></a> class is being used to create a simple 3D rotation viewer. Using a mouse, you can click and drag to rotate the 3D image. On an Apple iPad, you can use your finger. The viewer implements a deceleration behavior - the speed at the time of release determines how long it will take to spin down to a stop. When the page loads initially, the image is animated 360 degrees clockwise. Buttons beneath the viewer let you trigger other kinds of spins.</p>
+		<p>In this example, an instance of the <a href="../reference/Uize.Widget.Drag.html"><code>Uize.Widget.Drag</code></a> class is being used to create a simple 3D rotation viewer. Using a mouse, you can click and drag to rotate the 3D image. On a tablet device (or any computer with a touch screen) you can use your finger. The viewer implements a deceleration behavior - the speed at the time of release determines how long it will take to spin down to a stop. When the page loads initially, the image is animated 360 degrees clockwise. Buttons beneath the viewer let you trigger other kinds of spins.</p>
 	</div>
 
 	<!-- HTML "wireframe" for 3D rotation viewer -->
@@ -84,9 +85,9 @@ Uize.require (
 
 		/*** configuration variables ***/
 			var
-				totalFrames = 72,
+				totalFrames = 36,
 				frameUrlTemplate =
-					'http://www.apple.com/html5/showcase/threesixty/images/optimized/Seq_v04_640x378_[#frame].jpg'
+					'http://www.jeep.com/assets/images/vehicles/2015/cherokee/vlp/mod-exterior-360/frame-[#frame].jpg'
 			;
 
 		/*** state variables ***/
@@ -122,7 +123,7 @@ Uize.require (
 							htmlChunks.push (
 								'<img' +
 									' id="' + frameNodeIdPrefix + frameNo + '"' +
-									' src="' + Uize.substituteInto (frameUrlTemplate,{frame:(frameNo < 10 ? '0' : '') + frameNo}) +'"' +
+									' src="' + Uize.substituteInto (frameUrlTemplate,{frame:frameNo}) +'"' +
 								'/>'
 							);
 						}
