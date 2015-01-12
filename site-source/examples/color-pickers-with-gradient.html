@@ -45,7 +45,7 @@
 	<table border="0" cellspacing="0" cellpadding="0" style="margin:auto;">
 		<tr>
 			<td class="heading">Color 1</td>
-			<td class="heading">Uize.Widget.ColorCube Instance</td>
+			<td class="heading">Uize.Widget.ColorGrid Instance</td>
 			<td class="heading">Color 2</td>
 		</tr>
 		<tr>
@@ -65,8 +65,8 @@ Uize.require (
 		'UizeSite.Page.Example.library',
 		'UizeSite.Page.Example',
 		'Uize.Widgets.RgbSliders.Widget',
-		'Uize.Widget.ColorCube',
-		'Uize.Templates.ColorCube'
+		'Uize.Widget.ColorGrid',
+		'Uize.Templates.ColorGrid'
 	],
 	function () {
 		'use strict';
@@ -77,14 +77,14 @@ Uize.require (
 		/*** add the color grid child widget used for the gradient effect ***/
 			var colorCube = page.addChild (
 				'colorCube',
-				Uize.Widget.ColorCube,
+				Uize.Widget.ColorGrid,
 				{
 					divisionsX:100,
 					divisionsY:1,
 					colorTopLeft:'ffff00',
 					colorTopRight:'ff0000',
 					built:false,
-					html:Uize.Templates.ColorCube
+					html:Uize.Templates.ColorGrid
 				}
 			);
 
