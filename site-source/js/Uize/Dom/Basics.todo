@@ -1,6 +1,18 @@
 This is a TO DO document for the =Uize.Dom.Basics= module.
 
-- Uize.Dom.Basics.isOnNodeTree can use the contains() method on DOM nodes (if available)
-- Uize.Dom.Basics.injectHtml can use the insertAdjacentHTML() method on DOM nodes (if available)
-- Uize.Dom.Basics.getDimensions can use the getBoundingClientRect() method on DOM nodes (if available)
-- Uize.Dom.Basics.getCoords can use the getBoundingClientRect() method on DOM nodes (if avaialble)
+Implementation Improvements
+	- Uize.Dom.Basics.isOnNodeTree can use the contains() method on DOM nodes (if available)
+	- Uize.Dom.Basics.injectHtml can use the insertAdjacentHTML() method on DOM nodes (if available)
+	- Uize.Dom.Basics.getDimensions can use the getBoundingClientRect() method on DOM nodes (if available)
+	- Uize.Dom.Basics.getCoords can use the getBoundingClientRect() method on DOM nodes (if avaialble)
+
+Rename to Uize.Dom.Core
+	Consider renaming =Uize.Dom.Basics= to =Uize.Dom.Core=.
+
+	The name =Uize.Dom.Core= has a bit more gravitas, while =Uize.Dom.Basics= sounds a bit weak / simple.
+
+Factor Out Event Wiring Functionality
+	Consider migrating DOM event wiring methods into the =Uize.Dom.Event= module.
+
+	The size increase for current modules that need just the event wiring fundamentals should be considered, since the existing =Uize.Dom.Event= module, while not large, contains some slightly more esoteric functionality. As an alternative, the event wiring functionality could be factored out to a new =Uize.Dom.Wiring= module.
+

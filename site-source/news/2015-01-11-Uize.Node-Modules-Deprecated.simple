@@ -1,0 +1,51 @@
+All modules under the =Uize.Node= namespace have been migrated to under the new =Uize.Dom= namespace.
+
+Migrated Modules
+	Following is a map of modules that have been migrated from the =Uize.Node= namespace, along with their new names under the new =Uize.Dom= namespace...
+
+	..............................................................
+	<< table >>
+
+	data:
+	:| OLD MODULE NAME             | NEW MODULE NAME             |
+	:| Uize.Node                   | -- DEFUNCT --               |
+	:| Uize.Node.Classes           | Uize.Dom.Classes            |
+	:| Uize.Node.Event             | Uize.Dom.Event              |
+	:| Uize.Node.Form              | Uize.Dom.Form               |
+	:| Uize.Node.Tree              | Uize.Dom.Tree               |
+	:| Uize.Node.Util              | Uize.Dom.Util               |
+	:| Uize.Node.VirtualEvent      | Uize.Dom.VirtualEvent       |
+	:| Uize.Node.VirtualEvent.Edge | Uize.Dom.VirtualEvents.Edge |
+	..............................................................
+
+New Modules
+	As part of the migration process, several new modules have been created under the new =Uize.Dom= namespace that do not directly map to deprecated modules under the now defunct =Uize.Node= namespace.
+
+	In particular, as part of the deprecating of the =Uize.Node= module, the functionality of this module has been separated out into several smaller modules under the =Uize.Dom= namespace, as follows...
+
+	- =Uize.Dom.Basics= - provides a very minimal set of methods to ease working with DOM nodes - just the basics that are needed by the =Uize.Widget= class
+	- =Uize.Dom.Pos= - provides a set of methods for working with positioning and coordinates of DOM nodes
+	- =Uize.Dom.Text= - provides a method for getting the text content of DOM nodes
+
+	It's important to note that the new =Uize.Dom= module is a pure namespace module, and there is no single module under the =Uize.Dom= namespace that contains the entire, equivalent set of functionality that was contained in the =Uize.Node= module. The =Uize.Dom.Basics= module was split out from the deprecated =Uize.Node= module by specifically identifying the functionality that is needed by the =Uize.Widget= module, so that widgets can be as compact as possible and not have a dependency on a bloated DOM utilities kitchen sink style module or library.
+
+	The Uize.Dom.VirtualEvents Namespace
+		The new =Uize.Dom.VirtualEvents= namespace module has been created to organize modules that implement different types of virtual DOM events.
+
+		Under the old =Uize.Node= namespace, the virtual DOM events modules were organized under the =Uize.Node.VirtualEvent= module that also implemented the virtual DOM events mechanism. Under the new =Uize.Dom= namespace, the =Uize.Dom.VirtualEvent= module implements the virtual DOM events mechanism, while the =Uize.Dom.VirtualEvents= module defines a namespace under which virtual DOM event modules, such as the =Uize.Dom.VirtualEvents.Edge= module, are organized.
+
+Code Updates
+	Because of this change, all modules and other code that was using the modules under the =Uize.Node= namespace must be updated to use the appropriate modules under the new =Uize.Dom= namespace.
+
+	All modules, build scripts, examples, and documentation in the UIZE JavaScript Framework have already been updated accordingly.
+
+Backwards Compatibility
+	Because of the relative importance of the =Uize.Node= modules, the migration to the new =Uize.Dom= namespace is being phased in.
+
+	For a year, stub modules are being maintained under the defunct =Uize.Node= namespace that are identical in the composition of their functionality to the deprecated =Uize.Node= modules. These stub modules aggregate functionality from the modules under the new =Uize.Dom= namespace and present exactly the same interfaces as the old =Uize.Node= modules. Once the grace period is over, these modules will finally be eliminated.
+
+....................................................................................
+<< metadata >>
+
+title: 2015-01-11 - Uize.Node Modules Deprecated
+....................................................................................
