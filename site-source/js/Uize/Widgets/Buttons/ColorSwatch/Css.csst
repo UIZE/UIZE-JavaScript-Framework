@@ -1,0 +1,33 @@
+.`swatch` {
+	position: absolute;
+	border: 1px solid #666;
+	background: #000;
+}
+
+/*** different sizes ***/
+<%
+	function _sizeStyleProperties (_sizeNo) {
+		var _pos = _sizeNo + 2;
+		%>
+		left: <%= _pos %>px;
+		top: <%= _pos %>px;
+		right: <%= _pos %>px;
+		bottom: <%= _pos %>px;
+		<%
+	}
+%>
+	.`tiny` .`swatch` {
+		<% _sizeStyleProperties (0) %>
+	}
+
+	.`small` .`swatch` {
+		<% _sizeStyleProperties (1) %>
+	}
+
+	.`medium` .`swatch` {
+		<% _sizeStyleProperties (2) %>
+	}
+
+	.`large` .`swatch` {
+		<% _sizeStyleProperties (3) %>
+	}
