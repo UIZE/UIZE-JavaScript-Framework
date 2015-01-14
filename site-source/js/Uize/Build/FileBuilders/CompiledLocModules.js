@@ -29,18 +29,10 @@ Uize.module ({
 	name:'Uize.Build.FileBuilders.CompiledLocModules',
 	required:[
 		'Uize.Build.Util',
-		'Uize.Json',
-		'Uize.Str.Lines',
-		'Uize.Str.Split'
+		'Uize.Loc.Util.LocModuleCompiler'
 	],
 	builder:function () {
-		var
-			/*** Variables for Performance Optimization ***/
-				_split = Uize.Str.Split.split,
-
-			/*** General Variables ***/
-				_tokenRegExp = /\[\[([^\[\]]+)\]\]/
-		;
+		'use strict';
 
 		function _locFileSourceUrlFromTempUrl (m,_urlParts) {
 			return m.sourceUrlFromTempUrl (_urlParts).replace (/\.js$/,'.loc');
@@ -60,48 +52,14 @@ Uize.module ({
 				return {source:_locFileSourceUrlFromTempUrl (this,_urlParts.pathname)};
 			},
 			builder:function (_inputs,_urlParts) {
-				var
-					_params = this.params,
-					_source = _inputs.source,
-					_strings = Uize.Build.Util.readSimpleDataFile (_source),
-					_stringsAsStateProperties = {}
-				;
-				Uize.forEach (
-					_strings,
-					function (_stringValue,_stringKey) {
-						if (_tokenRegExp.test (_stringValue)) {
-							var _expressionParts = [];
-							Uize.forEach (
-								_split (_stringValue,_tokenRegExp),
-								function (_segment,_segmentNo) {
-									var _segmentIsToken = _segmentNo % 2;
-									if (_segmentIsToken || _segment)
-										_expressionParts.push (
-											(_segmentIsToken ? 'i [' : '') +
-											Uize.Json.to (_segment) +
-											(_segmentIsToken ? ']' : '')
-										)
-									;
-								}
-							);
-							_stringValue = Function ('i','return ' + _expressionParts.join (' + ') + ';');
-						}
-						_stringsAsStateProperties ['loc_' + _stringKey] = _stringValue;
-					}
-				);
-				return Uize.Build.Util.moduleAsText ({
-					name:Uize.Build.Util.moduleNameFromModulePath (
+				var _params = this.params;
+				return Uize.Loc.Util.LocModuleCompiler.compile (
+					Uize.Build.Util.moduleNameFromModulePath (
 						_urlParts.pathname.slice ((_params.tempPath + '/' + _params.modulesFolder + '/').length),
 						true
 					),
-					builder:[
-						'function () {',
-						'	return ' +
-							Uize.Str.Lines.indent (Uize.Json.to (_stringsAsStateProperties),1,'\t',false) +
-							';',
-						'}'
-					].join ('\n')
-				});
+					_inputs.source
+				);
 			}
 		});
 	}
