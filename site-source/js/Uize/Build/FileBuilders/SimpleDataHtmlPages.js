@@ -29,6 +29,8 @@ Uize.module ({
 	name:'Uize.Build.FileBuilders.SimpleDataHtmlPages',
 	required:'Uize.Url',
 	builder:function () {
+		'use strict';
+
 		var _htmlSimpledataFileExtensionRegExp = /\.html\.simpledata$/;
 		return Uize.package ({
 			description:'HTML Pages Derived from .html.simpledata Files',

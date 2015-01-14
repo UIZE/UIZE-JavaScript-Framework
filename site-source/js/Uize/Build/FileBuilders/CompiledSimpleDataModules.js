@@ -29,6 +29,8 @@ Uize.module ({
 	name:'Uize.Build.FileBuilders.CompiledSimpleDataModules',
 	required:'Uize.Build.Util',
 	builder:function () {
+		'use strict';
+
 		/*** Private Instance Methods ***/
 			function _getSourceFilePath (m,_pathname) {
 				return m.sourceUrlFromTempUrl (_pathname).replace (/\.js$/,'.simpledata');

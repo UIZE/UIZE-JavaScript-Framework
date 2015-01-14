@@ -28,6 +28,8 @@
 Uize.module ({
 	name:'Uize.Build.FileBuilders.JstDerivedPages',
 	builder:function () {
+		'use strict';
+
 		return Uize.package ({
 			description:'Pages derived from JST template files',
 			urlMatcher:function (_urlParts) {

@@ -32,6 +32,8 @@ Uize.module ({
 		'Uize.Build.Util'
 	],
 	builder:function () {
+		'use strict';
+
 		return Uize.package ({
 			description:'Compiled JST modules, generated from .js.jst files',
 			urlMatcher:function (_urlParts) {

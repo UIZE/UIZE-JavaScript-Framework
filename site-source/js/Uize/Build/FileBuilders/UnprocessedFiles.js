@@ -28,6 +28,8 @@
 Uize.module ({
 	name:'Uize.Build.FileBuilders.UnprocessedFiles',
 	builder:function () {
+		'use strict';
+
 		return Uize.package ({
 			description:'Files that are unprocessed',
 			urlMatcher:function (_urlParts) {

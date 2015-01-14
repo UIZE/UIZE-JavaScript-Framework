@@ -29,6 +29,8 @@ Uize.module ({
 	name:'Uize.Build.FileBuilders.InMemoryModuleDirectDependencies',
 	required:'Uize.Build.ModuleInfo',
 	builder:function () {
+		'use strict';
+
 		var _moduleDepsExtensionRegExp = /\.js\.deps$/;
 
 		return Uize.package ({

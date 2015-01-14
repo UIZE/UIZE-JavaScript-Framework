@@ -29,6 +29,8 @@ Uize.module ({
 	name:'Uize.Build.FileBuilders.InMemoryParsedSimpleDataFiles',
 	required:'Uize.Data.Simple',
 	builder:function () {
+		'use strict';
+
 		return Uize.package ({
 			description:'In-memory parsed SimpleData files',
 			urlMatcher:function (_urlParts) {

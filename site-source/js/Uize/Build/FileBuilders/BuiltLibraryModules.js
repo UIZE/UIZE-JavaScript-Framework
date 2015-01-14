@@ -36,6 +36,8 @@ Uize.module ({
 		'Uize.Build.ModuleInfo'
 	],
 	builder:function () {
+		'use strict';
+
 		var
 			_contentsCommentRegExp = /\/\*\s*Library\s*Contents/i,
 			_lineStartsWithIdentifierCharRegExp = /^[a-zA-Z_$]/,

@@ -29,6 +29,8 @@ Uize.module ({
 	name:'Uize.Build.FileBuilders.InMemoryHtmlInfo',
 	required:'Uize.Build.Util',
 	builder:function () {
+		'use strict';
+
 		var _htmlInfoExtensionRegExp = /\.html\.info$/;
 
 		return Uize.package ({

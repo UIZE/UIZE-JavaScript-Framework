@@ -33,6 +33,8 @@ Uize.module ({
 		'Uize.Template'
 	],
 	builder:function () {
+		'use strict';
+
 		return Uize.package ({
 			description:'Compiled CSS files, generated from .csst files',
 			urlMatcher:function (_urlParts) {

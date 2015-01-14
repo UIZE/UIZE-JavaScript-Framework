@@ -33,6 +33,8 @@ Uize.module ({
 		'Uize.Url'
 	],
 	builder:function () {
+		'use strict';
+
 		return Uize.package ({
 			description:'SimpleDoc pages',
 			urlMatcher:function (_urlParts) {

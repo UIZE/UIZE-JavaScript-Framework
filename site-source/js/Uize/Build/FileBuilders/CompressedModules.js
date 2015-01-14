@@ -36,6 +36,8 @@ Uize.module ({
 		'Uize.Str.Has'
 	],
 	builder:function () {
+		'use strict';
+
 		var
 			_scruncherPrefixChars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ',
 			_dotJsRegExp = /\.js$/,

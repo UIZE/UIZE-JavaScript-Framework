@@ -29,6 +29,8 @@ Uize.module ({
 	name:'Uize.Build.FileBuilders.TempGeneratedNamespaceModules',
 	required:'Uize.Build.Util',
 	builder:function () {
+		'use strict';
+
 		var _jsExtensionRegExp = /\.js$/;
 
 		function _removeJsFileExtension (_path) {return _path.replace (_jsExtensionRegExp,'')}

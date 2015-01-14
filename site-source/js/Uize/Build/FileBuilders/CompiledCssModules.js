@@ -32,6 +32,8 @@ Uize.module ({
 		'Uize.Json'
 	],
 	builder:function () {
+		'use strict';
+
 		return Uize.package ({
 			description:'Compiled CSS modules, generated from built .css files',
 			urlMatcher:function (_urlParts) {

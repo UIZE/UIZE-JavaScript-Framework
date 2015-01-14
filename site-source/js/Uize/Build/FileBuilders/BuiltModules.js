@@ -28,6 +28,8 @@
 Uize.module ({
 	name:'Uize.Build.FileBuilders.BuiltModules',
 	builder:function () {
+		'use strict';
+
 		var _dotJsRegExp = /\.js$/;
 
 		return Uize.package ({

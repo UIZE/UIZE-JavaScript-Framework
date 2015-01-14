@@ -29,6 +29,8 @@ Uize.module ({
 	name:'Uize.Build.FileBuilders.TempJsModules',
 	required:'Uize.Build.Util',
 	builder:function () {
+		'use strict';
+
 		return Uize.package ({
 			description:'Regular JavaScript modules under temp',
 			urlMatcher:function (_urlParts) {

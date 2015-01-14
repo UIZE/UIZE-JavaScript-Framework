@@ -1,0 +1,580 @@
+Background
+	When considering a scalable solution to supporting localization of telephony prompts, the following background informartion should be considered...
+
+	There are Many Prompts
+		There are 500+ telephony prompts based on voice recordings.
+
+		The list is likely to grow as the telephony feature set grows. The number of voie recordings will grow as more languages are supported.
+
+	Programmatic Construction
+		Numerous of the prompts involve programmatic construction of sentences, combining voice recording segments with dynamic segments that may be custom uploaded audio (such as recordings of user names) or TTS-generated.
+
+		Pluralization
+			Some of the tokenized prompts have pluralization implications, such as...
+
+			.........................
+			<CallYouBack> <5> minutes
+			.........................
+
+			The current approach to pluralization is not sufficiently robust to support multiple languages.
+
+		Gender
+			Some of the tokenized prompts may have gender implications, such as...
+
+			.....................................
+			<Hello> <Bill Gates> <YouHaveACaller>
+			.....................................
+
+			There is currently no provision for grammatical differences that could be driven by system knowledge of the gender of a person name that is substituted as dynamic content into a voice prompt.
+
+		Static Sentence Construction
+			In some cases, there are voice prompts that are defined as being concatenations of other voice recording fragments, such as...
+
+			.......................................................................
+			Voicemail = "voicemail"
+			Greeting = "greeting"
+			NoRule = "There are no rules currently using a <Voicemail> <Greeting>."
+			.......................................................................
+
+			Sentence construction is inherently problematic, because sentence structure variues by languages and one can't simply translate the various parts to a different language, produce the voice recordings for the fragments, and then construct a voice prompt by concatenating the fragment voice recordings according the sentence structure of the English source. Consider what this would produce for French...
+
+			TRANSLATED TO FRENCH
+			.......................................................................................
+			Voicemail = "message d'accueil"
+			Greeting = "accueil"
+			NoRule = "Il n'y a pas de règles qui utilisent actuellement une <Voicemail> <Greeting>"
+			.......................................................................................
+
+			INCORRECT CONSTRUCTION
+			................................................................................
+			Il n'y a pas de règles qui utilisent actuellement une message d'accueil accueil.
+			................................................................................
+
+			GOOD TRANSLATION
+			........................................................................
+			Il n'y a pas de règles qui utilisent actuellement une message d'accueil.
+			........................................................................
+
+			Another Example
+				In another example of problematic sentence construction, a substituted fragment that is translated separately may appear to be a noun when translated separately but may in fact function as an adjective in the sentence.
+
+				............................................................
+				AfterHours = "After hours"
+				OffHours = "Off hours"
+				BusinessHours = "Business hours"
+				DoNotDisturb = "Do not disturb"
+				GreetingAssigned = Your <RuleName> rule has been updated.
+				ToRecordGreetAR = "To record greetings for rule <RuleName>,"
+				ForRule = "For <RuleName>"
+				............................................................
+
+				In this example, code is programmatically selecting a translation for "after hours", "off hours", "business hours", or "do not disturb", depending on the value of a rule variable, and then substituting the translated rule name into any of several different sentences.
+
+				The problem here arises from the fact that, in a language like French, one can't simply take a discrete translation for a phrase like "Business hours" and place it alongside a French translation for a word like "rule". Using this approach you get...
+
+				........................................
+				"rule" => "règle"
+				"Business hours" => "heures d'ouverture"
+				........................................
+
+				INCORRECT CONSTRUCTION
+				.......................................................
+				"Business hours" + "rule" => "heures d'ouverture règle"
+				.......................................................
+
+				GOOD TRANSLATION
+				......................................................
+				"business hours rule" => "règle des heures d'affaires"
+				......................................................
+
+				A better approach in this instance is to combine the adjective and noun in the translatable fragments, as follows...
+
+				BETTER
+				...........................................................
+				AfterHoursRule = "After hours rule"
+				OffHoursRule = "Off hours rule"
+				BusinessHoursRule = "Business hours rule"
+				DoNotDisturbRule = "Do not disturb rule"
+				GreetingAssigned = Your <RuleName> has been updated.
+				ToRecordGreetAR = "To record greetings for the <RuleName>,"
+				ForRule = "For the <RuleName>"
+				...........................................................
+
+				This is a safer approach, but a linguist and/or localization expert should ideally be consulted first before proceeding down the path of performing sentence constructions in resource strings.
+
+		Dynamic Sentence Construction
+			In some cases, there are prompts that are defined as concatenations of other voice recording fragments along with dynamically generated, TTS-based fragments...
+
+			......................................................
+			CallYouBack = "I will call you back in"
+			CallYouBackInMinutes = "<CallYouBack> <count> minutes"
+			......................................................
+
+			This kind of sentence construction is problematic as there are `pluralization` effects that vary by language, where in some languages there may need to be multiple plural forms.
+
+			Moreover, it can't be assumed that the sentence structure will be the same in all languages. For example, in Mandarin, a sentence like "I will call you back in 5 minutes." might be translated to a form that is more equivalent to the English "I will call you back 5 minutes later".
+
+			In our prompt definition, we fragment based upon assumptions rooted in English grammar, so we have a dedicated fragment for "I will call you back in". A translator translating that fragment to Mandarin will not be able to come up with a suitable translation, since the "in" doesn't really belong in that fragment in Mandarin.
+
+			Furthermore, the usage of that fragment in other strings does not provide sufficient context to the translator to know that they would need to add the Mandarin equivalent of "later" at the end, since they would see just "<CallYouBack> <5> minutes". For these and other reasons, it is best not to define sentences using sentence fragments, but rather to be explicit, as in "I will call you back in <5> minutes."
+
+		Sentence Concatenation
+			Many of the prompts are multi-sentence and programmatically constructed by sequencing audio specific to the prompt along with the audio from other prompts, such as...
+
+			..........................................................................
+			PleaseTryAgain = "Please try again."
+			IncorrectExtension = "I'm sorry. That extension is not recognized."
+			IncorrectExtensionPleaseTryAgain = "<IncorrectExtension> <PleaseTryAgain>"
+			..........................................................................
+
+			This should generally be quite safe.
+
+	Existing Prompts
+		A list of existing voice prompts can be viewed on the Wiki in the form of a spreadsheet...
+
+			[[http://wiki.ringcentral.com/download/attachments/180533407/IVR-Prompts.xls]]
+
+			This list doesn't include prompts for features like ACR, Call Park, Intercom, and Paging.
+
+Proposed Solution
+	Core Tenet
+		The core tenet behind this proposal is that a robust solution for localizing voice prompts should leverage existing approaches that have been established for localization of displayed text, and should determine how to map such solutions to the problem of localizing voice prompts.
+
+		Particularly as it relates to the grammatical differences between different languages and how this should be handled when messages need to be constructed to contain dynamic segments, such as quantities or gendered values such as personal names, techniques have been developed after much study of the problem.
+
+		The recommendation proposes that the localization of voice prompts be geared towards leveraging such approaches and, if possible, existing localization code libraries especially to the extent that those libraries will continue to be developed to provide better support for string variants and variant selection.
+
+	Components of the Solution
+		The proposed solution involves the following components...
+
+		Externalized Resource String Files
+			As with other systems employing different technologies but needing to localize resource strings, it is recommended that the voice prompts be externalized in separate resource string files.
+
+			Visible to Localization Automation
+				By centralizing the text for all the voice prompts in resource files, the voice prompts can be "visible" to scripts set up to sutomate the localization process.
+
+				In orrder to achieve visibility, the following conditions need to be met...
+
+				- the resource string files should be of a type that is recognized by the automation scripts
+				- the telephony project should be registered with the automation scripts as part of a configuration of those scripts
+
+				Now, whenever a voice prompt is added or an existing voice prompt is modified, the very first step of a developer would be to modify the appropriate resource string file. This change is noticed by the automation scripts and the new text for translation is sent to the translation agency. Upon translation of the text, the translated text is returned to the telco project by the localization automation process. A further automated process detects changes in the translated text in the language specific resource files and generates voice recording tasks.
+
+		Voice Recording Manager
+			The voice recording manager is responsible for managing the process of generating voice recording tasks from the translated resource strings.
+
+			Determine Strings for Recording from Translated Text
+				In order to automate as much of the process as possible, the recommendation proposes that the voice recording tasks be generated and derived from the translations of the voice prompt text.
+
+				This is particularly important as it relates to the grammatical differences between languages, where assumptions about sentence structure of a voice prompt made from looking at the source language text of the prompt may not apply to other languages that are to be supported. A sentence with two dynamic substitutions may have anywhere between one and three static segments, depending on the sentence structure of a language and the most natural way of saying a specific thing in the language.
+
+				.............................
+				{token1} ........... {token2}
+				..... {token1}, {token2} ....
+				{token1}, .... {token2} .....
+				... {token1} ... {token2} ...
+				.............................
+
+				Additionally, the number of static segments for the same message may vary from language to language. Because of this, it is recommended to derive the sentence fragments that should be recorded by the voice talent from the translated resource strings for each language.
+
+			Generate Fragment Filenames from Fragment Text
+				Because the static segments should be dtermined from the indicidual translations, they cannot be decided upfront by developers and therefore cannot be given file names before translation.
+
+				Instead, the file naming should be automatically derived using the text of the fragments, among other data such as language code and possibly string key (and even string variant name, in cases where pluralization comes into play).
+
+			Recording of Voice Audio
+				The recommendation proposes that the recording of voice audio be driven by changes in the translated resource string files, where segments to be recorded are parsed from the translated text.
+
+				Upon noticing changes in the translated resource string files, the `voice recording manager` would process the translated voice prompt text and parse out static fragments for which voice recordings should be produced. These voice recording tasks would be submitted to the voice recording service. Voice recording tasks would contain the following information...
+
+				- the language
+				- the text that should be recorded
+				- the filename that should be used for the voice recording audio file
+				- additional context information that can be used by the voice talent to guide their performance
+
+				Context Information
+					When voice recording tasks are generated from the translated resource string files, context information should be provided along with the individual tasks.
+
+					This is particularly important if the `voice recording name generator` is configured to produce sharing of voice recordings across multiple resource strings that share the same text fragments. Context information can be provided in a generic fashion, according to the following process...
+
+					- translated resource strings are parsed by their substitution tokens
+					- for every static sentence fragment, a voice recording name is generated by the `voice recording name generator`
+					- if a generated voice recording name is already in the index, the context information from the current resource string being processes is added
+
+					This will result in a situation where every voice recording task has the following context information for every resource string to which the task is applicable...
+
+					- full text of the resource string for which the voice recording will be used
+					- all the context meta data of the resource string for which the voice recording will be used
+
+		Runtime Construction of Voice Prompts
+			At runtime, voice prompts are constructed in a way that is driven by the translations of the resources strings for the supported languages.
+
+			Resource String Selection
+				At runtime, the resource string selection logic will be invoked to select a resource string based upon the following ...
+
+				- language code
+				- string key
+				- substitution token values, if applicable
+
+				Using the inputs of language code, string key, and substitution token values, the resource string selection logic will select an appropriate resource string for the language and, if there are any substitution values, an appropriate variant to support any pluralization or gender effects imposed by the substitution values.
+
+				Consider the example of a =YouHaveNewMessages= voice prompt that would be represented by the following resource strings...
+
+				US ENGLISH
+				...........................................................
+				YouHaveNewMessages_one = "You have one new message."
+				YouHaveNewMessages_other = "You have {count} new messages."
+				...........................................................
+
+				CHINESE
+				................................................
+				YouHaveNewMessages_other = "你有{count}个新邮件。"
+				................................................
+
+				RUSSIAN
+				................................................................
+				YouHaveNewMessages_one = "У вас есть {count} новое сообщение."
+				YouHaveNewMessages_many = "У вас есть {count} новых сообщений."
+				YouHaveNewMessages_other = "У вас есть {count} новые сообщения."
+				................................................................
+
+				PSEUDOCODE
+				..........................................................
+				getResourceString ('YouHaveNewMessages','ru-RU',{count:5})
+				..........................................................
+
+				Based upon specifying the string key of ='YouHaveNewMessages'= (omitting the variant suffix), the Russian language code ='ru-RU'=, and the value =5= for the =count= substitution token, the resource string selector chooses the actual resource string variant "YouHaveNewMessages_many". To choose the correct plural variant for the language, the selection code relies on [[http://unicode.org/repos/cldr-tmp/trunk/diff/supplemental/language_plural_rules.html][established CLDR rules]], possibly embodied in a library such as [[http://www.icu-project.org/apiref/icu4c/][ICU4C]] that may be available to the telco application and provides features to handle [[http://www.icu-project.org/apiref/icu4c/classicu_1_1PluralRules.html][plural rules]].
+
+			Resource Strings Parsing
+				Once the text for the voice prompt has been determined through `resource string selection`, the text is parsed out into static and dynamic segments.
+
+				Parsing of the text for a resource string produces fragments that can be either static or dynamic. Using the example of the Russian resource string with the text "У вас есть {count} новых сообщений.", parsing the string would produce the following fragments...
+
+				- "У вас есть "
+				- "{count}"
+				- " новых сообщений."
+
+				Untokenized Strings
+					In cases where a resource string does not contain any substitution tokens, only a single fragment would be produced by the parsing.
+
+					So, for example, the Russian resource string with the text "Мне очень жаль. Вы задали количество не признается." would produce only the single fragment "Мне очень жаль. Вы задали количество не признается.".
+
+				Performance Optimization
+					As a performance optimization, the method that performs resource string parsing can be memoized because the method is deterministic in nature.
+
+			Voice Recording Selection
+				Once `resource string parsing` has been performed to produce one or more fragments, voice recordings can be selected (or generated) for each of the fragments.
+
+				Voice recording selection for parsed fragments relies on the same `voice recording name generator` logic that is used by the `voice recording manager` to generate the `recording of voice audio`. Using the names generated for the fragments by the `voice recording name generator`, the voice recordings are retrieved for `voice prompt construction`.
+
+			Dynamic Fragment Rendering
+				For fragments that are substitution tokens, no voice recordings are retrieved because the audio for those fragments will be rendered through TTS or custom uploaded audio stored with an account.
+
+				- for substitution token fragments that are to be TTS-generated, the TTS engine will be employed to render the audio using a voice appropriate for the language of the voice prompt
+				- for substitution token fragments that are references to custom uploaded audio, the audio will be retrieved from the database
+
+			Voice Prompt Construction
+				Given the voice recording files retrieved during `voice recording selection`, and any audio delivered by `dynamic fragment rendering`, a full voice prompt can be constructed.
+
+			TTS Fallback Mechanism
+				As a possible enhancement to the solution, TTS could be used as a fallback during `voice recording selection` for any static fragments for which voice recordings have not been produced.
+
+				Alternatively, TTS could be used in a process of automatically producing machine-generated voice recordings for newly translated resource strings. This could be a useful tool during testing and development and before voice recording talent is engaged.
+
+		Resource String Parser
+			The resource string parser is a component that parses the text of resource strings to produce fragments that can be mapped to voice recording files or used to render audio through TTS.
+
+			The parser is used in two parts of the process...
+
+			- the `voice recording manager` uses the `resource string parser` to generate voice recording tasks
+			- during `runtime construction of voice prompts`, the `resource strings parsing` step uses the `resource string parser` to determine voice recordings that should be used to construct complete voice prompts
+
+		Voice Recording Name Generator
+			Voice recordings would be named according to a system that would be employed both by the `voice recording manager` when generating the voice recording tasks, and also by the code that performs the `runtime construction of Voice prompts`.
+
+			Tunable Naming
+				Since the `voice recording name generator` would be employed as a central component, it could be made to be tunable in order to test the trade-offs of sharing sentence fragments across multiple resource strings.
+
+				In order to generate names for voice recordings, the name generator would use the following information...
+
+				- the language code
+				- the text of the voice recording
+				- optionally, the key name of the voice recording's associated resouce string
+				- optionally, the name of the voice recording's associated resource string variant
+
+				Language Code and Text, at a Mimimum
+					At a minimum, the name to use for a voice recording should contain both the language code and the text of the voice recording, thus ensuring that the recordings of a single for multiple languages can co-exist in a shared storage location.
+
+					Consider the case of a resource string that needs to be translated for US English and UK English. The translated text for the same resource string might be identical between the two languages in many cases, but it is still desirable to have unique recordings to account for the significantly different accents.
+
+					The same principle applies for other languages where the text for many resource strings might be identical between the different variants of the languages, but where there are subtle but important differences in the regional accents that should be used. Consider the case of the French language, where there are French French and Canadian French variants, or the Spanish language where there are Mexican, Castillian, Catalonian, and other variants).
+
+				Configurable Sharing Levels
+					A few levels of sharing of voice recordings could be configured using simple configurations of the voice recording naming scheme.
+
+					Sharing Use Case
+						To illustrate how voice recordings can be shared, consider the following use case involving English resource strings...
+
+						............................................................................
+						YouHaveNewMessages_one = "You have {count} new message."
+						YouHaveNewMessages_other = "You have {count} new messages."
+						YouHaveSavedMessages_one = "You have {count} saved message."
+						YouHaveSavedMessages_other = "You have {count} saved messages."
+						MinutesAvailable_one = "You have {count} minute available for this call."
+						MinutesAvailable_other = "You have {count} minutes available for this call."
+						............................................................................
+
+					Shared Across All Resource Strings
+						By omitting the resource string key name and variant name from the voice recording naming, voice recordings can be shared across all resource strings for a language.
+
+						Looking at our `sharing use case`, we would generate voice recording names for the "You have" sentence fragment as follows...
+
+						..................................................
+						<< table >>
+
+						title: Language Code + Fragment Text
+						data:
+						:| Resource String | Voice Recording Name |
+						:| YouHaveNewMessages_one | en-US ~ You have |
+						:| YouHaveNewMessages_other | en-US ~ You have |
+						:| YouHaveSavedMessages_one | en-US ~ You have |
+						:| YouHaveSavedMessages_other | en-US ~ You have |
+						:| MinutesAvailable_one | en-US ~ You have |
+						:| MinutesAvailable_other | en-US ~ You have |
+						..................................................
+
+						Here we are naming the voice recordings for the different instances of "You have" using just the language code and the fragment text. This results in the same voice recording being used by all variants of all resource strings that contain the text "You have".
+
+					Shared Across All Resource String Variants
+						By including the resource string key name but omitting the variant name portion in the voice recording naming, voice recordings can be shared across only the variants of strings for a language but not across different strings.
+
+						Looking at our `sharing use case`, we would generate voice recording names for the "You have" sentence fragment as follows...
+
+						.........................................................................
+						<< table >>
+
+						title: Language Code + String Name + Fragment Text
+						data:
+						:| Resource String | Voice Recording Name |
+						:| YouHaveNewMessages_one | en-US ~ YouHaveNewMessages ~ You have |
+						:| YouHaveNewMessages_other | en-US ~ YouHaveNewMessages ~ You have |
+						:| YouHaveSavedMessages_one | en-US ~ YouHaveSavedMessages ~ You have |
+						:| YouHaveSavedMessages_other | en-US ~ YouHaveSavedMessages ~ You have |
+						:| MinutesAvailable_one | en-US ~ MinutesAvailable ~ You have |
+						:| MinutesAvailable_other | en-US ~ MinutesAvailable ~ You have |
+						.........................................................................
+
+						Here we are naming the voice recordings for the different instances of "You have" using the language code as well as the string key name and the fragment text, but not including the variant suffix. This results in the same voice recording being used by all variants of a single resource string that contain the text "You have", but not by different resource strings that contain this text.
+
+					Unique to Each Resource String Variant
+						By including the full resource string key, including the variant name portion, in the voice recording naing, voice recordings can be made unique to the variants so that there is no sharing of voice recordings for text that is common across variants.
+
+						Looking at our `sharing use case`, we would generate voice recording names for the "You have" sentence fragment as follows...
+
+						...............................................................................
+						<< table >>
+
+						title: Language Code + String Variant Name + Fragment Text
+						data:
+						:| Resource String | Voice Recording Name |
+						:| YouHaveNewMessages_one | en-US ~ YouHaveNewMessages_one ~ You have |
+						:| YouHaveNewMessages_other | en-US ~ YouHaveNewMessages_other ~ You have |
+						:| YouHaveSavedMessages_one | en-US ~ YouHaveSavedMessages_one ~ You have |
+						:| YouHaveSavedMessages_other | en-US ~ YouHaveSavedMessages_other ~ You have |
+						:| MinutesAvailable_one | en-US ~ MinutesAvailable_one ~ You have |
+						:| MinutesAvailable_other | en-US ~ MinutesAvailable_other ~ You have |
+						...............................................................................
+
+
+						Here we are naming the voice recordings for the different instances of "You have" using the language code as well as the full string key name (including the variant suffix) and the fragment text. This results in no sharing of voice recordings across different strings that contain the text "You have".
+
+						While this sharing level will result in the least sharing of voice recordings and, therefore, the greatest cost for the voice recording process, the results may be preferable to sharing of voice recordings for the following reasons...
+
+						- There may be valid reasons why, for a specific language, it may be desirable and more natural sounding to deliver the exact same written text in slightly different ways, depending on the surrounding context in a specific resource string variant. Pacing, tone, and emphasis may differ if the variants are delivered so as to sound as natural as possible.
+						- Even if it is acceptable to share a voice recording across multiple usages of the same text fragment, producing different voice recordings for every unique context may result in more variation throughout the telco voice prompts, leading to less monotony as the user experiences different voice prompts, and ultimately helping to make the voice prompts feel more human and less machine-like.
+
+		Examples of Translated Voice Prompt Text
+
+			US ENGLISH
+			................................................................................
+			Goodbye = "Goodbye."
+			PleaseTryAgain = "Please try again."
+			IncorrectNumberOrExt = "I'm sorry. The number you entered is not recognized."
+			IncorrectNumberOrExtPleaseTryAgain = "{@IncorrectNumberOrExt} {@PleaseTryAgain}"
+			IncorrectNumberOrExt3rdTime = "{@IncorrectNumberOrExt} {@Goodbye}"
+			MessageReceived = "Message received on {date} at {time} from {person}."
+			YouHaveNewMessages_one = "You have {count} new message."
+			YouHaveNewMessages_other = "You have {count} new messages."
+			................................................................................
+
+			CHINESE
+			................................................................................
+			Goodbye = "再见。"
+			PleaseTryAgain = "请再试一次。"
+			IncorrectNumberOrExt = "对不起。您输入的数字无法识别。"
+			IncorrectNumberOrExtPleaseTryAgain = "{@IncorrectNumberOrExt} {@PleaseTryAgain}"
+			IncorrectNumberOrExt3rdTime = "{@IncorrectNumberOrExt} {@Goodbye}"
+			MessageReceived = "{person}人在{date} {time}给你留了消息。"
+				# "{person} on {date} {time} left you a message."
+			YouHaveNewMessages_other = "你有{count}个新邮件。"
+			................................................................................
+
+			RUSSIAN
+			................................................................................
+			Goodbye = "До свидания."
+			PleaseTryAgain = "Пожалуйста, попробуйте еще раз."
+			IncorrectNumberOrExt = "Мне очень жаль. Вы задали количество не признается."
+			IncorrectNumberOrExtPleaseTryAgain = "{@IncorrectNumberOrExt} {@PleaseTryAgain}"
+			IncorrectNumberOrExt3rdTime = "{@IncorrectNumberOrExt} {@Goodbye}"
+			MessageReceived = "{date} в {time} получено новое сообщение от {person}"
+			YouHaveNewMessages_one = "У вас есть {count} новое сообщение."
+			YouHaveNewMessages_many = "У вас есть {count} новых сообщений."
+			YouHaveNewMessages_other = "У вас есть {count} новые сообщения."
+			................................................................................
+
+###
+	Requirements
+		- localization of voice prompts to multiple languages
+		- dynamic value substitution
+		- voice recording for grammatical variants
+		- grammatical variant selection at runtime
+		- multi-sentence prompt construction
+		- it should be possible for friendly versions of tokenized voice prompts to be recorded for specific values of substitution values, ideally without requiring the cooperation of code (eg. "You have two new messages." in place of "You have {count} new messages." when the value of =count= is =2=
+
+	- recommendations
+		- make the translated resource string files the authority to drive the audio recording tasks
+		- use tokens for sentences, but not for sentence fragments
+			- don't do sentence construction with sentence fragments, since assumptions based on English grammar may not translate to all languages
+		- use the same token syntax for both dynanic substitution tokens as well as reusable sentence fragments
+		- use a single token syntax that can be easily parsed by translators and treated as non-translatable segments
+			- a simple curly braces syntax is recommended (eg. ={personName}=)
+			- for prompt / prompt segment sharing, a convention could be used for the token naming, such as ={@promptSegmentName}=, where =promptSegmentName= is the key name for another resource string.
+
+	- questions
+		- is it a safe assumption that all identical shared sentence fragments can be rendered using a single voice recording, or might the accentuation of the sentence fragment be affected by the surrounding context?
+			- it may not always be best to reuse recording of sentence fragements, for the following reasons...
+				- the tone, accentuation, pronunciation of words in a sentence fragment may differ depending on the sentence context
+				- the pace of speaking may differ, depending on the length of the
+		- what is the cost of recording audio and how much is saved by the approach of using sentence fragments?
+		- if we had to have "You have" recorded multiple times redundantly as part of recording "You have no new messages.", "You have one new message.", and "You have {count} new messages.", how wasteful would that be?
+
+	- further ideas...
+		- an alternative to fragment recording might be whole sentence recording with post processing to separate out the fragment recordings
+			- pros
+				- better matching of voice tone, delivery, pacing, and audio levels
+				- less post-processing to match levels of separate segments
+			- cons
+				- post-processing needed to split segments and save as separete files using correct naming
+				- more chance of voice talent not pausing fully around substitutions
+
+Benefits
+	The proposed solution offers the following benefits...
+
+	Effective Language Support
+		By relying upon established approaches to tokenization of resource strings and selection of appropriate grammatical variants, the proposed approach will deliver effective support for multiple languages.
+
+		Specifically, the proposed solution will support...
+
+		- correct sentence structure per language (variable structure per language)
+		- correct plural forms per language (variable number of plural forms per language)
+		- correct gendered forms per language (variable between gendered and gender neutral per language)
+
+	Integration with Localization Processes
+		By utilizing externalized resource string files, the voice prompt text can be exposed to automated localization processes for translating text of new or modified voice prompts to all supported languages.
+
+		This means that the translation of voice prompts can be supported by the same processes that are used for the translation of text for other parts of the system (such as the UI text for Web, mobile, and desktop applications), the strings can be made visible to the shared localization process and automatically fed into a localization pipeline as new strings are added, strings are modified, or support for new languages is added
+
+	Scales Effectively to Support Multiple Languages
+		The proposed approach scales more effectively to support multiple languages in a number of ways...
+
+		- by leveraging standard approaches to handling tokenization of resource strings, support for new languages can be added without manually addressing cases of grammatical variations between languages
+		- by leveraging standard approaches to externalizing resource strings, localization automation process can be more easily employed to minimize the cost of adding support for new languages
+
+	Tunable Sharing of Voice Recordings
+		By making the `voice recording name generator` support `tunable naming`, the degree of sharing of voice recordings across prompts that share the same static text fragments can easily be tuned between the extremes of little sharing and liberal sharing.
+
+		Moreover, because sharing is driven entirely by an algorithmic process that is opaque to the code that uses voice prompts, such code never needs to be aware of sharing of voice recordings - it is an optimization that the code doesn't care about. Therefore, also, the degree of sharing can be tuned without having to re-formulate code that needs to generate voice prompts, because there will be no hard-coded references to voice recordings for sentence fragments in the code.
+
+	Living Inventory of Voice Prompt Text
+		By using string resource files as the central authority that drives the algorithmic construction of prompt audio, there is always an inventory of all the voice prompt text.
+
+		With the existing system, the text for prompts is distributed in various places...
+
+		- some of the prompts' text is stored in an Excel spreadsheet
+		- some text is distributed in various closed JIRA tickets for the features for which the prompts were required
+		- some of the text is redundantly duplicated in
+
+		A nice side effect of the proposed new approach is that the life of a voice prompt begins in the resource file(s), so the resource file(s) serve as a living, central authority on all the voice prompts that are supported by the telco system.
+
+	TTS Rendering of Unrecorded Voice Prompts
+		By using externalized resource strings to drive the voice prompt system, TTS rendering of prompt audio can be utilized during the development process.
+
+		Given that each language supported by the telco system requires an appropriate voice pack to drive the TTS component for TTS generated prompt fragments, and given that the text for all voice prompts is contained within the resource files, TTS generation can be used as a fallback / stopgap during the development cycle for prompt fragments for which voice recordings have not been produced.
+
+		This can be done in one of two possible ways...
+
+		- as part of a build process, an automation script can utilize TTS to generate TTS-based fallbacks of all voice prompt fragments for which audio is not yet recorded
+		- at runtime, during the process of `voice recording selection`, TTS could be used to dynamically generate audio (with caching) for any static fragments for which voice recordings have not been produced
+
+	Transcripts for Voice Prompts
+		With the text for all voice prompts residing in resource files, text transcripts can be generated to accompany any voice prompt audio that is delivered.
+
+		This can facilitate...
+
+		- previewing of voice prompt text transcripts in applications such as Service Web, in cases where the user has the ability to customize telco voice prompts (eg. "You have reached the voicemail box of {name}")
+		- alternate or simultaneous presentation of audio IVR in text form on smart phones or desktop phone software ()
+
+	Easier Dedicated Voice Recordings for Special Cases
+		With the help of a versatile runtime system of variant selection for resource strings, dedicated recordings for special cases can be supported through resource strings rather than through implementation of specialized logic in the code.
+
+		Consider the example of a new messages prompt. Given the distritution curve for the number of new messages that any user may have, it may make sense to produce dedicated voice recordings for the cases of small numbers of new messages, such as for the new message counts from =0= through =9=. This way, the voice recordings that users hear most of the time will sound very natural and won't need to contain TTS generated fragments.
+
+		With a versatile resource string system, along the lines of what is supported through the ICU Message Format, one might be able to define this specialized handling purely through the resource strings by defining dedicated translations for specific states of the substitution values for a string.
+
+		In our example of the new messages prompt, we might define dedicated resource strings for as follows...
+
+		US ENGLISH
+		...........................................................
+		YouHaveNewMessages_0 = "You have no new messages."
+		YouHaveNewMessages_1 = "You have one new message."
+		YouHaveNewMessages_2 = "You have two new messages."
+		YouHaveNewMessages_3 = "You have three new messages."
+		YouHaveNewMessages_4 = "You have four new messages."
+		YouHaveNewMessages_5 = "You have five new messages."
+		YouHaveNewMessages_6 = "You have six new messages."
+		YouHaveNewMessages_7 = "You have seven new messages."
+		YouHaveNewMessages_8 = "You have eight new messages."
+		YouHaveNewMessages_9 = "You have nine new messages."
+		YouHaveNewMessages_one = "You have {count} new message."
+		YouHaveNewMessages_other = "You have {count} new messages."
+		...........................................................
+
+		As a result of defining these dedicated variants of the =YouHaveNewMessages= string, they will get translated to all of the supported languages as part of the normal localization process. For Russian, this may leave us with the following translated strings for the Russian language...
+
+		RUSSIAN
+		................................................................
+		YouHaveNewMessages_0 = "У вас нет новых сообщений."
+		YouHaveNewMessages_1 = "У вас одно новое сообщение."
+		YouHaveNewMessages_2 = "У вас есть два новых сообщения."
+		YouHaveNewMessages_3 = "У вас есть три новые сообщения."
+		YouHaveNewMessages_4 = "У вас есть четыре новых сообщений."
+		YouHaveNewMessages_5 = "У вас есть пять новых сообщений."
+		YouHaveNewMessages_6 = "У вас есть шесть новых сообщений."
+		YouHaveNewMessages_7 = "У вас есть семь новых сообщений."
+		YouHaveNewMessages_8 = "У вас есть восемь новых сообщений."
+		YouHaveNewMessages_9 = "У вас есть девять новых сообщений."
+		YouHaveNewMessages_one = "У вас есть {count} новое сообщение."
+		YouHaveNewMessages_many = "У вас есть {count} новых сообщений."
+		YouHaveNewMessages_other = "У вас есть {count} новые сообщения."
+		................................................................
+
+		Once translation has been performed and new translated strings are detected by the `voice recording manager`, recording tasks will be created and the appropriate recordings will be produced. Now all that remains is for the runtime `resource string selection` logic to select the appropriate variant of the resource string for the values =0= through =9= of the =count= substitution value, based upon what is present in the resource file, after which the corresponding audio recording of the selected resource string variant will be retrieved.
+
+		An approach like this eliminates the need for the code to have intimate knowledge of the variants that are provided in the resource file and lets the decision over how many extra dedicated recordings are produced to be made independently and without impact on the code.
+
+	Voice Prompt Metadata
+		By using a resource string file format that allows metadata to be provided for strings, notes and instructions can be stored along with the strings to provide guidance to the voice talent that will produce the voice recordings.
+
+		For example, for a voice prompt with the text "I'm sorry. The number you entered is not recognized." one might provide an accompanying note like "Tone to be apologetic and sympathetic, but not so much so that it sounds fake or insincere". In another exmple, for a voice prompt with the text "Thank you for calling." one might provide an accompanying note like "Tone to be upbeat and welcoming / friendly".
+
+		With the ability to specify metadata for resource strings, notes on desired tone and pacing can be added per string.

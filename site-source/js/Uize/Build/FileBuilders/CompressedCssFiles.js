@@ -29,6 +29,8 @@ Uize.module ({
 	name:'Uize.Build.FileBuilders.CompressedCssFiles',
 	required:'Uize.Str.Has',
 	builder:function () {
+		'use strict';
+
 		var
 			_cssFileExtension = '.css',
 			_compressedCssFileExtension = '.min' + _cssFileExtension

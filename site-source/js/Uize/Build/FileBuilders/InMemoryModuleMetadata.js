@@ -33,6 +33,8 @@ Uize.module ({
 		'Uize.Str.Lines'
 	],
 	builder:function () {
+		'use strict';
+
 		var
 			_moduleMetaDataExtensionRegExp = /\.js\.metadata$/,
 			_metaDataCommentRegExp = /\/\*\s*Module\s*Meta\s*Data/i

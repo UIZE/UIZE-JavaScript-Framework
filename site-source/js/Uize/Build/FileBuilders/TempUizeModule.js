@@ -32,6 +32,8 @@ Uize.module ({
 		'Uize.Json'
 	],
 	builder:function () {
+		'use strict';
+
 		return Uize.package ({
 			description:'The Uize JavaScript base module under temp',
 			urlMatcher:function (_urlParts) {

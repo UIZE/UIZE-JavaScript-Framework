@@ -28,6 +28,8 @@
 Uize.module ({
 	name:'Uize.Build.FileBuilders.InMemoryModuleBuiltSize',
 	builder:function () {
+		'use strict';
+
 		var _moduleBuiltSizeExtensionRegExp = /\.js\.builtsize$/;
 
 		return Uize.package ({

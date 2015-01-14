@@ -28,6 +28,8 @@
 Uize.module ({
 	name:'Uize.Build.FileBuilders.SourceFiles',
 	builder:function () {
+		'use strict';
+
 		return Uize.package ({
 			description:'Short-circuit handling for source files',
 			urlMatcher:function (_urlParts) {return this.isSourceUrl (_urlParts.folderPath)}

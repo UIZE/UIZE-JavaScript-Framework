@@ -33,6 +33,8 @@ Uize.module ({
 		'Uize.Str.Lines'
 	],
 	builder:function () {
+		'use strict';
+
 		/*** Utility Functions ***/
 			function _sourceUrlFromTempUrl (m,_pathname) {
 				return m.sourceUrlFromTempUrl (_pathname).replace (/\.js$/,'.htmlt');
