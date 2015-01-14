@@ -28,7 +28,6 @@ Uize.module ({
 	required:[
 		'Uize.Build.Util',
 		'Uize.Json',
-		'Uize.Str.Lines',
 		'Uize.Str.Split'
 	],
 	builder:function () {
@@ -44,40 +43,39 @@ Uize.module ({
 
 		return Uize.package ({
 			compile:function (_moduleName,_source) {
-				var
-					_strings = Uize.Build.Util.readSimpleDataFile (_source),
-					_stringsAsStateProperties = {}
-				;
-				Uize.forEach (
-					_strings,
-					function (_stringValue,_stringKey) {
-						if (_tokenRegExp.test (_stringValue)) {
-							var _expressionParts = [];
-							Uize.forEach (
-								_split (_stringValue,_tokenRegExp),
-								function (_segment,_segmentNo) {
-									var _segmentIsToken = _segmentNo % 2;
-									if (_segmentIsToken || _segment)
-										_expressionParts.push (
-											(_segmentIsToken ? 'i [' : '') +
-											Uize.Json.to (_segment) +
-											(_segmentIsToken ? ']' : '')
-										)
-									;
-								}
-							);
-							_stringValue = Function ('i','return ' + _expressionParts.join (' + ') + ';');
-						}
-						_stringsAsStateProperties ['loc_' + _stringKey] = _stringValue;
-					}
-				);
+				var _strings = Uize.Build.Util.readSimpleDataFile (_source);
 				return Uize.Build.Util.moduleAsText ({
 					name:_moduleName,
 					builder:[
 						'function () {',
-						'	return ' +
-							Uize.Str.Lines.indent (Uize.Json.to (_stringsAsStateProperties),1,'\t',false) +
-							';',
+						'	return {',
+							Uize.map (
+								Uize.keys (_strings),
+								function (_key) {
+									var _stringValue = _strings [_key];
+									if (_tokenRegExp.test (_stringValue)) {
+										var _expressionParts = [];
+										Uize.forEach (
+											_split (_stringValue,_tokenRegExp),
+											function (_segment,_segmentNo) {
+												var _segmentIsToken = _segmentNo % 2;
+												if (_segmentIsToken || _segment)
+													_expressionParts.push (
+														(_segmentIsToken ? 'i [' : '') +
+														Uize.Json.to (_segment) +
+														(_segmentIsToken ? ']' : '')
+													)
+												;
+											}
+										);
+										_stringValue = 'function (i) {return ' + _expressionParts.join (' + ') + '}';
+									} else {
+										_stringValue = Uize.Json.to (_stringValue);
+									}
+									return '		' + Uize.Json.to ('loc_' + _key) + ':' + _stringValue;
+								}
+							).join (',\n'),
+						'	};',
 						'}'
 					].join ('\n')
 				});
