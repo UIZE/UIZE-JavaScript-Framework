@@ -53,7 +53,15 @@ Uize.module ({
 								Uize.keys (_strings),
 								function (_key) {
 									var _stringValue = _strings [_key];
-									if (_tokenRegExp.test (_stringValue)) {
+									if (Uize.isPlainObject (_stringValue)) {
+										_stringValue = 'function (i) {return "pluralicious"}';
+										/* NOTE:
+											- will need to require plural module for locale
+											- get plural category, by calling method of plural module, based upon first token that has number value
+											- select appropriate plural string
+											- must be a case for each of the possible plural categories for the locale
+										*/
+									} else if (_tokenRegExp.test (_stringValue)) {
 										var _expressionParts = [];
 										Uize.forEach (
 											_split (_stringValue,_tokenRegExp),
