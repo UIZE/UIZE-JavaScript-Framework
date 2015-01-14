@@ -4,7 +4,7 @@
 |    /    O /   |    MODULE : Uize.Loc.Plurals.Langs.pt Package
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
-| /____/ /__/_| | COPYRIGHT : (c)2014-2015 UIZE
+| /____/ /__/_| | COPYRIGHT : (c)2015 UIZE
 |          /___ |   LICENSE : Available under MIT License or GNU General Public License
 |_______________|             http://www.uize.com/license.html
 */
@@ -29,8 +29,8 @@
 			title: Plural Categories
 			data:
 			:| Category | Rule |
-			:| one | i = 1 and v = 0 or i = 0 and t = 1 @integer 1 @decimal 0.1, 0.01, 0.10, 0.001, 0.010, 0.100, 0.0001, 0.0010, 0.0100, 0.1000 |
-			:| other |  @integer 0, 2~16, 100, 1000, 10000, 100000, 1000000, … @decimal 0.0, 0.2~1.6, 10.0, 100.0, 1000.0, 10000.0, 100000.0, 1000000.0, … |
+			:| one | n = 0..2 and n != 2 @integer 0, 1 @decimal 0.0, 1.0, 0.00, 1.00, 0.000, 1.000, 0.0000, 1.0000 |
+			:| other |  @integer 2~17, 100, 1000, 10000, 100000, 1000000, … @decimal 0.1~0.9, 1.1~1.7, 10.0, 100.0, 1000.0, 10000.0, 100000.0, 1000000.0, … |
 			........................................................
 */
 
@@ -45,7 +45,7 @@ Uize.module ({
 				return Uize.Loc.Plurals.Util.getPluralCategory (
 					_value,
 					function (n,i,f,t,v,w,within) {
-						return i == 1 && v == 0 || i == 0 && t == 1 ? 'one' : 'other';
+						return within (n,[[0,2]]) && n != 2 ? 'one' : 'other';
 					}
 				);
 			}
