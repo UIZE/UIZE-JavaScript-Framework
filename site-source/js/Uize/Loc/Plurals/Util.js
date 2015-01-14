@@ -56,6 +56,16 @@ Uize.module ({
 			},
 
 			getPluralCategory:function (_value,_pluralRulesFunction) {
+				/*** when the value is a params object, find the first number param ***/
+					if (Uize.isPlainObject (_value)) {
+						for (var _key in _value) {
+							if (typeof _value [_key] == 'number') {
+								_value = _value [_key];
+								break;
+							}
+						}
+					}
+
 				var _numberInfo = _getNumberInfo (_value);
 				return _pluralRulesFunction (
 					_numberInfo.n,
