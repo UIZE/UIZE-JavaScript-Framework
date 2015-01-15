@@ -38,7 +38,7 @@ Uize.module ({
 				this.addStateCombinationTestCases ({
 					directionX:[-1,0,1],
 					directionY:[-1,0,1],
-					size:Uize.Widgets.StateValues.sizes
+					size:Uize.Widgets.StateValues.size
 				});
 				this.addStateCombinationTestCases ({
 					directionX:1,

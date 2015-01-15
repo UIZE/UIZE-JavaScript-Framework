@@ -33,7 +33,7 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		var _allSizes = Uize.Widgets.StateValues.sizes;
+		var _allSizes = Uize.Widgets.StateValues.size;
 		return _superclass.subclass ({
 			omegastructor:function () {
 				this.addStateCombinationTestCases ({
