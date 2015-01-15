@@ -32,14 +32,29 @@ Uize.module ({
 			_isList = Uize.isList,
 
 			/*** references to static methods used internally ***/
+				_resolveValue,
 				_getNumberInfo,
 				_within
 		;
 
 		return Uize.package ({
+			resolveValue:_resolveValue = function (_value) {
+				/*** when the value is a params object, find the first number param ***/
+					if (Uize.isPlainObject (_value)) {
+						for (var _key in _value) {
+							if (typeof _value [_key] == 'number') {
+								_value = _value [_key];
+								break;
+							}
+						}
+					}
+
+				return _value;
+			},
+
 			getNumberInfo:_getNumberInfo = function (_value) {
 				var
-					_valueStr = _value + '',
+					_valueStr = (_value = _resolveValue (_value)) + '',
 					_integerAndFractional = _valueStr.split ('.'),
 					_fractional = _integerAndFractional [1] || '',
 					_fractionalWithoutTrailing = _fractional.replace (/0+$/,''),
@@ -56,16 +71,6 @@ Uize.module ({
 			},
 
 			getPluralCategory:function (_value,_pluralRulesFunction) {
-				/*** when the value is a params object, find the first number param ***/
-					if (Uize.isPlainObject (_value)) {
-						for (var _key in _value) {
-							if (typeof _value [_key] == 'number') {
-								_value = _value [_key];
-								break;
-							}
-						}
-					}
-
 				var _numberInfo = _getNumberInfo (_value);
 				return _pluralRulesFunction (
 					_numberInfo.n,
