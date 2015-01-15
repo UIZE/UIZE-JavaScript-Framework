@@ -58,7 +58,8 @@ Uize.module ({
 						_urlParts.pathname.slice ((_params.tempPath + '/' + _params.modulesFolder + '/').length),
 						true
 					),
-					_inputs.source
+					_inputs.source,
+					_urlParts.fileName
 				);
 			}
 		});
