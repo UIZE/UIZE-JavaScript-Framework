@@ -27,6 +27,8 @@ Uize.module ({
 	name:'UizeSite.Build.FileBuilders.IndexPages.JavaScriptReference',
 	required:'UizeSite.Build.FileBuilders.IndexPages',
 	builder:function () {
+		'use strict';
+
 		return UizeSite.Build.FileBuilders.IndexPages.getIndexPageUrlHandler (
 			'JavaScript reference index',
 			'javascript-reference',

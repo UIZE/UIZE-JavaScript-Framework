@@ -28,6 +28,8 @@
 Uize.module ({
 	name:'UizeSite.Build.FileBuilders.InMemoryNewsByYearLookup',
 	builder:function () {
+		'use strict';
+
 		return Uize.package ({
 			description:'News-by-year lookup',
 			urlMatcher:function (_urlParts) {

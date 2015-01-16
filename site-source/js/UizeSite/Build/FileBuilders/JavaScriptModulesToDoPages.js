@@ -33,6 +33,8 @@ Uize.module ({
 		'Uize.Str.Has'
 	],
 	builder:function () {
+		'use strict';
+
 		function _todoSourceFilePath (m,_urlParts) {
 			return m.sourceUrl (m.getModuleUrl (_urlParts.fileName,false) + '.todo');
 		}

@@ -32,6 +32,8 @@ Uize.module ({
 		'UizeSite.Build.Util'
 	],
 	builder:function () {
+		'use strict';
+
 		var
 			_modulesSourceCodePagesPath = '/reference/source-code/',
 			_jsExtension = '.js',

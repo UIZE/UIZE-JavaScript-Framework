@@ -3,6 +3,8 @@
 Uize.module ({
 	name:'UizeSite.ModulesTree',
 	builder:function () {
+		'use strict';
+
 		return function () {return {}};
 	}
 });

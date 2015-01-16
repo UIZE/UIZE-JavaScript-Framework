@@ -28,6 +28,8 @@
 Uize.module ({
 	name:'UizeSite.Build.FileBuilders.NewsByYearIndexPages',
 	builder:function () {
+		'use strict';
+
 		var _newsByYearRegExp = /^(news-(\d{4})|latest-news)$/;
 
 		return Uize.package ({

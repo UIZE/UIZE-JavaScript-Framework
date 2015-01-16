@@ -28,6 +28,8 @@
 Uize.module ({
 	name:'UizeSite.Build.FileBuilders.InMemoryExamplesByKeywordLookup',
 	builder:function () {
+		'use strict';
+
 		return Uize.package ({
 			description:'Examples-by-keyword lookup',
 			urlMatcher:function (_urlParts) {

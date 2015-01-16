@@ -26,6 +26,8 @@
 Uize.module ({
 	name:'Uize.Event.Bus',
 	builder:function () {
+		'use strict';
+
 		var
 			/*** references to utility methods of Uize ***/
 				_isFunction = Uize.isFunction,

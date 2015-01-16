@@ -29,6 +29,8 @@ Uize.module ({
 	name:'UizeSite.Build.FileBuilders.WidgetsToGo.IndexPage',
 	required:'UizeSite.Build.FileBuilders.WidgetsToGo',
 	builder:function () {
+		'use strict';
+
 		var _widgetsToGoPath = UizeSite.Build.FileBuilders.WidgetsToGo.widgetsToGoPath;
 		return Uize.package ({
 			description:'Widgets To Go index page',

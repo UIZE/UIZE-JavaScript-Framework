@@ -33,6 +33,8 @@ Uize.module ({
 		'Uize.Str.Has'
 	],
 	builder:function () {
+		'use strict';
+
 		return Uize.package ({
 			description:'Widget IFRAME pages',
 			urlMatcher:function (_urlParts) {

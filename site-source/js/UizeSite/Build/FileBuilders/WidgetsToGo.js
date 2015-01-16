@@ -26,6 +26,8 @@
 Uize.module ({
 	name:'UizeSite.Build.FileBuilders.WidgetsToGo',
 	builder:function () {
+		'use strict';
+
 		return Uize.package ({
 			widgetsToGoPath:'widgets/',
 			threeFoldersDeepRegExp:/^([^\\\/]+)[\\\/]([^\\\/]+)[\\\/]([^\\\/]+)[\\\/][^\\\/]+$/,

@@ -32,6 +32,8 @@ Uize.module ({
 		'Uize.Build.Util'
 	],
 	builder:function () {
+		'use strict';
+
 		return Uize.package ({
 			description:'In-memory modules tree object',
 			urlMatcher:function (_urlParts) {

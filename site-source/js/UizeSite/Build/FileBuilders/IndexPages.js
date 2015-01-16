@@ -30,6 +30,8 @@ Uize.module ({
 		'Uize.Array.Sort'
 	],
 	builder:function () {
+		'use strict';
+
 		function _getInMemoryHtmlFilesIndexHandler (
 			_indexableFolderUnderSource,
 			_indexableFolderUnderBuilt,

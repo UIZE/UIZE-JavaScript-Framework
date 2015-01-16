@@ -34,6 +34,8 @@ Uize.module ({
 		'Uize.Util.ModuleNaming'
 	],
 	builder:function () {
+		'use strict';
+
 		var
 			_visualTestsModuleNameFromWidgetClass = Uize.Util.ModuleNaming.visualTestsModuleNameFromWidgetClass,
 			_jsModuleExtensions = Uize.Build.Util.jsModuleExtensions

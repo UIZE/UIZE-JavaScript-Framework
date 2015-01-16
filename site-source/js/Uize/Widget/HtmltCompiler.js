@@ -34,6 +34,8 @@ Uize.module ({
 		'Uize.Str.Trim'
 	],
 	builder:function () {
+		'use strict';
+
 		var
 			/*** Variables for Scruncher Optimization ***/
 				_undefined,

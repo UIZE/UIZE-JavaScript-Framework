@@ -28,6 +28,8 @@
 Uize.module ({
 	name:'UizeSite.Build.FileBuilders.JavaScriptExamplesByModule',
 	builder:function () {
+		'use strict';
+
 		var _examplesByModuleFile = 'javascript-examples-by-module.html';
 
 		return Uize.package ({

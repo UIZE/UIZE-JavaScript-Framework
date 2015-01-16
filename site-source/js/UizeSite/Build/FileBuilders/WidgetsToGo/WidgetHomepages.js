@@ -32,6 +32,8 @@ Uize.module ({
 		'Uize.Data.Matches'
 	],
 	builder:function () {
+		'use strict';
+
 		return Uize.package ({
 			description:'Widget homepages',
 			urlMatcher:function (_urlParts) {

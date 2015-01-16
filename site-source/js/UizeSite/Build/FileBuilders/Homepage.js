@@ -29,6 +29,8 @@ Uize.module ({
 	name:'UizeSite.Build.FileBuilders.Homepage',
 	required:'Uize.Doc.Simple',
 	builder:function () {
+		'use strict';
+
 		return Uize.package ({
 			description:'Homepage',
 			urlMatcher:function (_urlParts) {

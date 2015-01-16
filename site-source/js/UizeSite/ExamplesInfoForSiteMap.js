@@ -3,6 +3,8 @@
 Uize.module ({
 	name:'UizeSite.ExamplesInfoForSiteMap',
 	builder:function () {
+		'use strict';
+
 		return function () {return {}};
 	}
 })

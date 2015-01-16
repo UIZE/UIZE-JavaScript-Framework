@@ -29,6 +29,8 @@ Uize.module ({
 	name:'UizeSite.Build.FileBuilders.InMemoryExamplesInfoForSiteMap',
 	required:'Uize.Data.Matches',
 	builder:function () {
+		'use strict';
+
 		return Uize.package ({
 			description:'In-memory examples-info-for-sitemap object',
 			urlMatcher:function (_urlParts) {

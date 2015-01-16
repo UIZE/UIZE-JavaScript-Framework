@@ -29,6 +29,8 @@ Uize.module ({
 	name:'UizeSite.Build.FileBuilders.TempExamplesModule',
 	required:'Uize.Build.Util',
 	builder:function () {
+		'use strict';
+
 		var _examplesDataModuleName = 'UizeSite.Examples';
 
 		return Uize.package ({

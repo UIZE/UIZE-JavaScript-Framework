@@ -32,6 +32,8 @@ Uize.module ({
 		'Uize.Str.Has'
 	],
 	builder:function () {
+		'use strict';
+
 		var
 			_moduleInfoModulesNamespace = 'UizeSite.ModuleInfo' + '.',
 			_moduleInfoModulesNamespaceLength = _moduleInfoModulesNamespace.length,

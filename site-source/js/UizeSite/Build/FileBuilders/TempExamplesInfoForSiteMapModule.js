@@ -29,6 +29,8 @@ Uize.module ({
 	name:'UizeSite.Build.FileBuilders.TempExamplesInfoForSiteMapModule',
 	required:'Uize.Build.Util',
 	builder:function () {
+		'use strict';
+
 		var _examplesInfoForSiteMapModuleName = 'UizeSite.ExamplesInfoForSiteMap';
 
 		return Uize.package ({

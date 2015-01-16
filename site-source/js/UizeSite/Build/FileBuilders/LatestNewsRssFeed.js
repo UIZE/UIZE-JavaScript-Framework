@@ -28,6 +28,8 @@
 Uize.module ({
 	name:'UizeSite.Build.FileBuilders.LatestNewsRssFeed',
 	builder:function () {
+		'use strict';
+
 		return Uize.package ({
 			description:'Latest news RSS feed',
 			urlMatcher:function (_urlParts) {

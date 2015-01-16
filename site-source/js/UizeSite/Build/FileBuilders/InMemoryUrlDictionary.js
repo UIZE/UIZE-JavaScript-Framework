@@ -32,6 +32,8 @@ Uize.module ({
 		'Uize.Build.Util'
 	],
 	builder:function () {
+		'use strict';
+
 		return Uize.package ({
 			description:'In-memory URL dictionary for SimpleDoc pages',
 			urlMatcher:function (_urlParts) {

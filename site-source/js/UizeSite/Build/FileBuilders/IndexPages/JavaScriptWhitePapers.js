@@ -27,6 +27,8 @@ Uize.module ({
 	name:'UizeSite.Build.FileBuilders.IndexPages.JavaScriptWhitePapers',
 	required:'UizeSite.Build.FileBuilders.IndexPages',
 	builder:function () {
+		'use strict';
+
 		return UizeSite.Build.FileBuilders.IndexPages.getIndexPageUrlHandler (
 			'JavaScript white papers index page',
 			'javascript-white-papers',

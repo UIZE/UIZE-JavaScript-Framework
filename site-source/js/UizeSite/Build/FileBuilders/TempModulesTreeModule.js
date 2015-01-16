@@ -29,6 +29,8 @@ Uize.module ({
 	name:'UizeSite.Build.FileBuilders.TempModulesTreeModule',
 	required:'Uize.Build.Util',
 	builder:function () {
+		'use strict';
+
 		var _modulesTreeDataModuleName = 'UizeSite.ModulesTree';
 
 		return Uize.package ({

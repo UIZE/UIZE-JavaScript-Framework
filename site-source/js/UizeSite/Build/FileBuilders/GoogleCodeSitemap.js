@@ -29,6 +29,8 @@ Uize.module ({
 	name:'UizeSite.Build.FileBuilders.GoogleCodeSitemap',
 	required:'Uize.Build.Util',
 	builder:function () {
+		'use strict';
+
 		return Uize.package ({
 			description:'Google Code sitemap',
 			urlMatcher:function (_urlParts) {

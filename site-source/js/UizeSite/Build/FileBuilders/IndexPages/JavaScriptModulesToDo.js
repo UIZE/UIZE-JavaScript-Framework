@@ -30,6 +30,8 @@ Uize.module ({
 		'Uize.Build.Util'
 	],
 	builder:function () {
+		'use strict';
+
 		return UizeSite.Build.FileBuilders.IndexPages.getIndexPageUrlHandler (
 			'JavaScript modules TO DO index page',
 			'todo/modules',

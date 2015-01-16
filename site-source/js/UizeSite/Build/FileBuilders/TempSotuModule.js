@@ -32,6 +32,8 @@ Uize.module ({
 		'Uize.Build.Util'
 	],
 	builder:function () {
+		'use strict';
+
 		var
 			_sotuModuleName = 'UizeSite.Sotu',
 			_hasPrefix = Uize.Str.Has.hasPrefix

@@ -29,6 +29,8 @@ Uize.module ({
 	name:'UizeSite.Build.FileBuilders.DirectoryPage',
 	required:'UizeSite.SiteMap',
 	builder:function () {
+		'use strict';
+
 		return Uize.package ({
 			description:'Directory page',
 			urlMatcher:function (_urlParts) {

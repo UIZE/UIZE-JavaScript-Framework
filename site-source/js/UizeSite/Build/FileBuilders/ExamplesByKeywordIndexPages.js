@@ -28,6 +28,8 @@
 Uize.module ({
 	name:'UizeSite.Build.FileBuilders.ExamplesByKeywordIndexPages',
 	builder:function () {
+		'use strict';
+
 		var _examplesKeywordRegExp = /^javascript-((.+?)-)?examples$/;
 
 		return Uize.package ({

@@ -29,6 +29,8 @@ Uize.module ({
 	name:'UizeSite.Build.FileBuilders.ExampleSourceCodePages',
 	required:'Uize.Url',
 	builder:function () {
+		'use strict';
+
 		var _examplesSourceCodePagesPath = '/examples/source-code/';
 
 		return Uize.package ({

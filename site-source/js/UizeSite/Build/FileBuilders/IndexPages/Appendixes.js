@@ -27,6 +27,8 @@ Uize.module ({
 	name:'UizeSite.Build.FileBuilders.IndexPages.Appendixes',
 	required:'UizeSite.Build.FileBuilders.IndexPages',
 	builder:function () {
+		'use strict';
+
 		return UizeSite.Build.FileBuilders.IndexPages.getIndexPageUrlHandler (
 			'Appendixes index page',
 			'appendixes',
