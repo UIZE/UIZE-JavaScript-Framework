@@ -89,13 +89,13 @@ Uize.module ({
 				;
 
 				function _addRequired (_moduleOrModules) {
-					if (_moduleOrModules) {
-						function _addSingleRequired (_module) {
-							if (_alreadyRequired [_module] != _trueFlag) {
-								_alreadyRequired [_module] = _trueFlag;
-								_required.push (_module);
-							}
+					function _addSingleRequired (_module) {
+						if (_alreadyRequired [_module] != _trueFlag) {
+							_alreadyRequired [_module] = _trueFlag;
+							_required.push (_module);
 						}
+					}
+					if (_moduleOrModules) {
 						typeof _moduleOrModules == 'string'
 							? _addSingleRequired (_moduleOrModules)
 							: Uize.forEach (_moduleOrModules,_addSingleRequired)
