@@ -1,3 +1,5 @@
+<div id="<% .idPrefix %>">
 <% for (var _divisionY = -1, _divisionsY = input.divisionsY; ++_divisionY < _divisionsY;) { %>
 <% 	for (var _divisionX = -1, _divisionsX = input.divisionsX; ++_divisionX < _divisionsX;) { %><img id="<% .idPrefix %>-x<%= _divisionX %>y<%= _divisionY %>" src="<% .blankGif %>" class="swatch"/><% 	} %><br/>
 <% } %>
+</div>
