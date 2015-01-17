@@ -120,9 +120,6 @@ Code Size Optimization
 	Migrate or Remove Features
 		Look at migrating some lesser used features out of core modules into new / other modules.
 
-		Uize.Class
-			Remove =Uize.Class.valueOf= static method.
-
 		Uize.Widget
 			Specific features to be decided.
 

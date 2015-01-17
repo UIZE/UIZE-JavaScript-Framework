@@ -5147,22 +5147,22 @@ Uize = (function () {
 			},
 
 			noNew:function (_constructor) {
-				var _constructorCallIsShim;
-				function _constructorSupportingNoNew () {
-					if (_constructorCallIsShim) {
-						_constructorCallIsShim = _false;
+				var _onlyInstantiate;
+				function _Class () {
+					if (_onlyInstantiate) {
+						_onlyInstantiate = _false;
 						return this;
 					} else {
 						var m = this;
-						if (m == _undefined || m.constructor != _constructorSupportingNoNew) {
-							_constructorCallIsShim = _true;
-							m = new _constructorSupportingNoNew;
+						if (m == _undefined || m.constructor != _Class) {
+							_onlyInstantiate = _true;
+							m = new _Class;
 						}
 						_constructor.apply (m,arguments);
 						return m;
 					}
 				}
-				return _constructorSupportingNoNew;
+				return _Class;
 				/*?
 					Static Methods
 						Uize.noNew

@@ -66,29 +66,29 @@ The Basics
 	Setting a State Property's Value
 		Once a state property has been declared, its value can be easily set using the =set= instance method that is inherited from the =Uize.Class= base class, as follows...
 
-		.............................................
-		var myClass = new MyClass;
-		myClass.set ({propertyName:'propertyValue'});
-		.............................................
+		................................................
+		var myInstance = new MyClass;
+		myInstance.set ({propertyName:'propertyValue'});
+		................................................
 
 	Getting a State Property's Value
 		Once a state property has been declared, its value can be easily queried using the =get= instance method that is inherited from the =Uize.Class= base class, as follows...
 
-		.............................................
-		var myClass = new MyClass;
-		myClass.set ({propertyName:'propertyValue'});
-		alert (myClass.get ('propertyName'));
-		.............................................
+		................................................
+		var myInstance = new MyClass;
+		myInstance.set ({propertyName:'propertyValue'});
+		alert (myInstance.get ('propertyName'));
+		................................................
 
 		In the above code, the =alert= statement will display the text =propertyValue= in the alert dialog.
 
 	Setting During Construction
 		Once a state property has been declared, its value can be easily set during construction of a new instance of your class, as follows...
 
-		...........................................................
-		var myClass = new MyClass ({propertyName:'propertyValue'});
-		alert (myClass.get ('propertyName'));
-		...........................................................
+		..............................................................
+		var myInstance = new MyClass ({propertyName:'propertyValue'});
+		alert (myInstance.get ('propertyName'));
+		..............................................................
 
 		In the above code, the =alert= statement will display the text =propertyValue= in the alert dialog.
 
@@ -106,8 +106,8 @@ The Basics
 				value:0
 			}
 		});
-		var myClass = new MyClass ({percentLoaded:200});
-		alert (myClass.get ('percentLoaded'));
+		var myInstance = new MyClass ({percentLoaded:200});
+		alert (myInstance.get ('percentLoaded'));
 		.........................................................................
 
 		In the above code, the =alert= statement will display the text =100= in the alert dialog.
@@ -165,14 +165,14 @@ More on Setting Values
 		The =Uize.Class= base class provides a convenient way to toggle the value of a boolean state property, in the form of the =toggle= instance method.
 
 		INSTEAD OF...
-		...........................................................
-		myClass.set ({propertyName:!myClass.get ('propertyName')});
-		...........................................................
+		.................................................................
+		myInstance.set ({propertyName:!myInstance.get ('propertyName')});
+		.................................................................
 
 		USE...
-		................................
-		myClass.toggle ('propertyName');
-		................................
+		...................................
+		myInstance.toggle ('propertyName');
+		...................................
 
 	Setting Values for Multiple State Properties
 		The =set= method lets you set values for multiple state properties in a single call.
@@ -180,15 +180,15 @@ More on Setting Values
 		The parameter passed to the =set= method is an object, containing values for all the state properties you wish to set.
 
 		INSTEAD OF...
-		...............................................
-		myClass.set ({property1Name:'property1Value'});
-		myClass.set ({property2Name:'property2Value'});
-		myClass.set ({property3Name:'property3Value'});
-		...............................................
+		..................................................
+		myInstance.set ({property1Name:'property1Value'});
+		myInstance.set ({property2Name:'property2Value'});
+		myInstance.set ({property3Name:'property3Value'});
+		..................................................
 
 		USE...
 		..................................
-		myClass.set ({
+		myInstance.set ({
 			property1Name:'property1Value',
 			property2Name:'property2Value',
 			property3Name:'property3Value'
@@ -237,16 +237,16 @@ More on Getting Values
 
 		Let's consider an example...
 
-		.............................................................................
-		myClass.set ({
+		................................................................................
+		myInstance.set ({
 			property1Name:'property1Value',
 			property2Name:'property2Value',
 			property3Name:'property3Value',
 			property4Name:'property4Value',
 			property5Name:'property5Value'
 		});
-		var values = myClass.get (['property1Name','property2Name','property3Name']);
-		.............................................................................
+		var values = myInstance.get (['property1Name','property2Name','property3Name']);
+		................................................................................
 
 		In the above example, the values for five state properties are being set in the =set= method call. Then, the =get= method is being called with an array type value that specifies the names of just three of those properties, and its result is assigned to the =values= variable. After the code is executed, =values= will be an object with the contents...
 
@@ -264,18 +264,18 @@ More on Getting Values
 			This convenience provides for some code size optimization.
 
 			INSTEAD OF...
-			..............................................................
-			myClass2.set ({property1Name:myClass1.get ('property1Name')});
-			myClass2.set ({property2Name:myClass1.get ('property2Name')});
-			myClass2.set ({property3Name:myClass1.get ('property3Name')});
-			..............................................................
+			....................................................................
+			myInstance2.set ({property1Name:myInstance1.get ('property1Name')});
+			myInstance2.set ({property2Name:myInstance1.get ('property2Name')});
+			myInstance2.set ({property3Name:myInstance1.get ('property3Name')});
+			....................................................................
 
 			USE...
-			................................................................................
-			myClass2.set (myClass1.get (['property1Name','property2Name','property3Name']));
-			................................................................................
+			......................................................................................
+			myInstance2.set (myInstance1.get (['property1Name','property2Name','property3Name']));
+			......................................................................................
 
-			The laborious first form is calling the get and set methods three times - one for each state property - in order to transfer the state of the properties from the instance =myClass1= to =myClass2=. The more concise second form performs only one get to obtain the state for all three properties from =myClass1=, and then supplies that property values object to the set method in order to set those values on =myClass2=.
+			The laborious first form is calling the get and set methods three times - one for each state property - in order to transfer the state of the properties from the instance =myInstance1= to =myInstance2=. The more concise second form performs only one get to obtain the state for all three properties from =myInstance1=, and then supplies that property values object to the set method in order to set those values on =myInstance2=.
 
 			Besides just being more concise, the second form also may have performance benefits when writing classes with state properties that have sophisticated =onChange= handler code, in some cases avoiding multiple redundant updates from being triggered. The subject of =onChange= handlers and update optimization will be discussed in more detail later on.
 
@@ -292,8 +292,8 @@ More on Getting Values
 			_property3Name:{name:'property3Name',value:'property3Value'}
 		});
 		var
-			myClass = new MyClass,
-			values = myClass.get ()
+			myInstance = new MyClass,
+			values = myInstance.get ()
 		;
 		................................................................
 
@@ -323,7 +323,7 @@ More on Declaring State Properties
 		MyClass.stateProperties ({_propertyName:'propertyName'});
 		.........................................................
 
-		In the above example, a state property is being declared, with the private name =_propertyName= and the public name =propertyName=. It can be accessed in the class' implementation in an instance method as =this._propertyName=, set in the class' implementation in an instance method as =this.set ({_propertyName:'propertyValue'})=, and set outside of the class' implementation in application code in a statement such as =myClass.set ({propertyName:'propertyValue'})= (where =myClass= is an instance of the class =MyClass=).
+		In the above example, a state property is being declared, with the private name =_propertyName= and the public name =propertyName=. It can be accessed in the class' implementation in an instance method as =this._propertyName=, set in the class' implementation in an instance method as =this.set ({_propertyName:'propertyValue'})=, and set outside of the class' implementation in application code in a statement such as =myInstance.set ({propertyName:'propertyValue'})= (where =myInstance= is an instance of the class =MyClass=).
 
 		IMPORTANT
 
@@ -384,20 +384,20 @@ More on Declaring State Properties
 			By using an unscrunchable (effectively public) name for a state property's private name, and not specifying the public name so that it defaults to its unscrunchable private name, you end up with a "naked" state property whose value can be accessed outside of the implementation for a class (such as in application code) with a simple dereferencing.
 
 			EXAMPLE
-			.....................................................................................
+			........................................................................................
 			MyClass.stateProperties ({
-				prop1:null,        // private & public name is prop1 - accessible as myClass.prop1
-				prop2:'',          // private & public name is prop2 - accessible as myClass.prop2
-				prop3:{value:10},  // private & public name is prop3 - accessible as myClass.prop3
+				prop1:null,        // private & public name is prop1 - accessible as myInstance.prop1
+				prop2:'',          // private & public name is prop2 - accessible as myInstance.prop2
+				prop3:{value:10},  // private & public name is prop3 - accessible as myInstance.prop3
 				prop4:'prop4',     // SILLY!!! don't specify public name here - let it default
 				prop5:{            // SILLY!!! don't specify public name here - let it default
 					name:'prop5',
 					value:10
 				}
 			});
-			.....................................................................................
+			........................................................................................
 
-			In the above example, all the state properties have public names that are the same as their unscrunchable private names. While =prop1= should still be set using the =set= method, as in =myClass.set ({prop1:'value'})=, it can be accessed using a simple dereferencing, as in =myClass.prop1=.
+			In the above example, all the state properties have public names that are the same as their unscrunchable private names. While =prop1= should still be set using the =set= method, as in =myInstance.set ({prop1:'value'})=, it can be accessed using a simple dereferencing, as in =myInstance.prop1=.
 
 			USE WITH CAUTION
 
@@ -439,9 +439,9 @@ More on Declaring State Properties
 		........................................................
 		var MyClass = Uize.Class.subclass ();
 		MyClass.stateProperties ({_title:'title|displayTitle'});
-		var myClass = new MyClass;
-		myClass.set ({displayTitle:'HELLO'});
-		alert (myClass.get ('title'));
+		var myInstance = new MyClass;
+		myInstance.set ({displayTitle:'HELLO'});
+		alert (myInstance.get ('title'));
 		........................................................
 
 		In the above example, a state property is being declared for the class =MyClass=, with the two public names =title= and =displayTitle=. When creating an instance of =MyClass=, a call to set the value for =displayTitle= is equivalent to setting the value for =title=, since both public names map to the same underlying state property. So, in the above code, the =alert= statement will display the text =HELLO= in the alert dialog.
@@ -469,7 +469,7 @@ More on Declaring State Properties
 		When using the `the complete profile` form to declare a state property, an initial value for a property can be specified using the =value= property of the profile.
 
 		EXAMPLE
-		.........................................................................
+		............................................................................
 		var MyClass = Uize.Class.subclass ();
 		MyClass.stateProperties ({
 			_propertyName:'propertyName',
@@ -485,11 +485,11 @@ More on Declaring State Properties
 				value:0
 			}
 		});
-		var myClass = new MyClass;
-		alert (myClass.get ('propertyName'));   // will alert the value undefined
-		alert (myClass.get ('active'));         // will alert the value undefined
-		alert (myClass.get ('percentLoaded'));  // will alert the value 0
-		.........................................................................
+		var myInstance = new MyClass;
+		alert (myInstance.get ('propertyName'));   // will alert the value undefined
+		alert (myInstance.get ('active'));         // will alert the value undefined
+		alert (myInstance.get ('percentLoaded'));  // will alert the value 0
+		............................................................................
 
 		If a state property is declared using `the minimal profile`, or if it is declared using the `the complete profile` but no =value= property is specified in the profile, then the state property will be set to =undefined= for all freshly minted instances.
 
@@ -518,7 +518,7 @@ More on Declaring State Properties
 			During construction of an instance of a class, the value of each declared state property starts out as =undefined=. If an initial value is specified for the property (using the =value= property of the profile), then the value is set during construction, and a change in value from =undefined= to the specified initial value will trigger any =onChange= handler registered for the property.
 
 			EXAMPLE 1
-			..........................................................
+			.............................................................
 			var MyClass = Uize.Class.subclass ();
 			function _updateArea () {
 				this.set ({area:this._width * this._height});
@@ -536,11 +536,11 @@ More on Declaring State Properties
 					onChange:_updateArea
 				}
 			});
-			myClass = new MyClass;
-			alert (myClass.get ('area'));  // will alert the value 100
-			..........................................................
+			var myInstance = new MyClass;
+			alert (myInstance.get ('area'));  // will alert the value 100
+			.............................................................
 
-			In the above example, the =area= state property is declared. An =onChange= handler registered for each of the =width= and =height= state properties updates the value of =area= to be the product of =width= and =height=. Now, even though there is no call to the =set= method to set values for =width= and =height=, the value of =area= is correct immediately after construction of the =myClass= instance. This is because the =onChange= handler for =width= and =height= is executed the first time their values change from =undefined= to their declared initial value of =10=.
+			In the above example, the =area= state property is declared. An =onChange= handler registered for each of the =width= and =height= state properties updates the value of =area= to be the product of =width= and =height=. Now, even though there is no call to the =set= method to set values for =width= and =height=, the value of =area= is correct immediately after construction of the =myInstance= instance. This is because the =onChange= handler for =width= and =height= is executed the first time their values change from =undefined= to their declared initial value of =10=.
 
 			This behavior can be both a good thing and a bad thing. Without a question, it's something that needs to be kept in mind when writing =onChange= handler code. In the previous example, it was actually a convenient behavior. However, in some cases it may be necessary to conditionalize some code inside an =onChange= handler in order to make sure it's not executed too early on in the setup of an instance, such as when not every aspect of the instance is fully set up and ready/safe for the =onChange= code to be executed.
 
@@ -568,7 +568,7 @@ More on Declaring State Properties
 			So, for example, repeated attempts to set a state property to the same value will not result in repeated execution of the =onChange= handler - only for the first set that changes the property's value.
 
 			EXAMPLE
-			.................................................................................
+			....................................................................................
 			var MyClass = Uize.Class.subclass ();
 			MyClass.stateProperties ({
 				_percentLoaded:{
@@ -577,19 +577,19 @@ More on Declaring State Properties
 					value:0
 				}
 			});
-			var myClass = new MyClass;         // will alert the text 0
-			myClass.set ({percentLoaded:10});  // will alert the text 10
-			myClass.set ({percentLoaded:10});  // does nothing (because value doesn't change)
-			myClass.set ({percentLoaded:10});  // does nothing (because value doesn't change)
-			myClass.set ({percentLoaded:10});  // does nothing (because value doesn't change)
-			.................................................................................
+			var myInstance = new MyClass;         // will alert the text 0
+			myInstance.set ({percentLoaded:10});  // will alert the text 10
+			myInstance.set ({percentLoaded:10});  // does nothing (because value doesn't change)
+			myInstance.set ({percentLoaded:10});  // does nothing (because value doesn't change)
+			myInstance.set ({percentLoaded:10});  // does nothing (because value doesn't change)
+			....................................................................................
 
 			In the above example, there are four attempts to set the value of the =percentLoaded= state property to =10=. Only the first of those results in the property's value actually *changing* to =10=, so the =onChange= handler is only executed for the first of those sets, and you see the alert with the text "10" only once.
 
 			Similarly, if a =conformer= function is defined for the state property, then multiple attemps to set different values could still result in the value changing only once, if, for example, the registered conformer function has the effect of constraining the value of the property to a range.
 
 			EXAMPLE
-			.............................................................................
+			................................................................................
 			var MyClass = Uize.Class.subclass ();
 			MyClass.stateProperties ({
 				_percentLoaded:{
@@ -599,12 +599,12 @@ More on Declaring State Properties
 					value:0
 				}
 			});
-			var myClass = new MyClass;          // will alert the text 0
-			myClass.set ({percentLoaded:100});  // will alert the text 100
-			myClass.set ({percentLoaded:200});  // does nothing (because value stays 100)
-			myClass.set ({percentLoaded:300});  // does nothing (because value stays 100)
-			myClass.set ({percentLoaded:400});  // does nothing (because value stays 100)
-			.............................................................................
+			var myInstance = new MyClass;          // will alert the text 0
+			myInstance.set ({percentLoaded:100});  // will alert the text 100
+			myInstance.set ({percentLoaded:200});  // does nothing (because value stays 100)
+			myInstance.set ({percentLoaded:300});  // does nothing (because value stays 100)
+			myInstance.set ({percentLoaded:400});  // does nothing (because value stays 100)
+			................................................................................
 
 			In the above example, there are four attempts to set the value of the =percentLoaded= state property. Only the first of those results in the property's value actually *changing* to =100=, so the =onChange= handler is only executed for the first of those sets, and you see the alert with the text "100" only once. The other three set attempts all result in the value being constrained to the upper limit of =100= by the conformer function, and so they produce no change in the property's value.
 
@@ -698,14 +698,14 @@ More on Declaring State Properties
 					}
 				});
 
-				var myClass = new MyClass ({width:100});
-				alert (myClass.get ('width'));      // will alert the text 100
+				var myInstance = new MyClass ({width:100});
+				alert (myInstance.get ('width'));      // will alert the text 100
 
-				myClass.set ({maxWidth:50});
-				alert (myClass.get ('width'));      // will alert the text 50
+				myInstance.set ({maxWidth:50});
+				alert (myInstance.get ('width'));      // will alert the text 50
 
-				myClass.set ({minWidth:125,maxWidth:150});
-				alert (myClass.get ('width'));      // will alert the text 125
+				myInstance.set ({minWidth:125,maxWidth:150});
+				alert (myInstance.get ('width'));      // will alert the text 125
 				......................................................................
 
 	Conformer Function
@@ -723,8 +723,8 @@ More on Declaring State Properties
 				value:0
 			}
 		});
-		var myClass = new MyClass ({percentLoaded:200});
-		alert (myClass.get ('percentLoaded'));
+		var myInstance = new MyClass ({percentLoaded:200});
+		alert (myInstance.get ('percentLoaded'));
 		.........................................................................
 
 		In the above code, the =alert= statement will display the text =100= in the alert dialog.
@@ -742,7 +742,7 @@ More on Declaring State Properties
 
 			Consider the following example...
 
-			..................................................................................
+			.....................................................................................
 			var MyClass = Uize.Class.subclass ();
 			MyClass.stateProperties ({
 				_percentLoaded:{
@@ -752,11 +752,11 @@ More on Declaring State Properties
 					value:0
 				}
 			});
-			var myClass = new MyClass;          // will alert the text 0
-			myClass.set ({percentLoaded:200});  // will alert the text 100
-			myClass.set ({percentLoaded:200});  // does nothing (because value doesn't change)
-			myClass.set ({percentLoaded:200});  // does nothing (because value doesn't change)
-			..................................................................................
+			var myInstance = new MyClass;          // will alert the text 0
+			myInstance.set ({percentLoaded:200});  // will alert the text 100
+			myInstance.set ({percentLoaded:200});  // does nothing (because value doesn't change)
+			myInstance.set ({percentLoaded:200});  // does nothing (because value doesn't change)
+			.....................................................................................
 
 			Like the previous example, the =percentLoaded= state property has a conformer function registered that ensures that its value does not fall outside of the range of =0= to =100=. Additionally, an =onChange= handler function is registered that alerts the property's new value, each time it changes.
 
@@ -1019,7 +1019,7 @@ Changed Events
 		The =Changed.[propertyName]= virtual event lets you watch on changes in value for specified state properties.
 
 		EXAMPLE
-		......................................................................................
+		.........................................................................................
 		var MyClass = Uize.Class.subclass ();
 		MyClass.stateProperties ({
 			_percentLoaded:{
@@ -1028,17 +1028,17 @@ Changed Events
 				value:0
 			}
 		});
-		var myClass = new MyClass;
-		myClass.wire (
+		var myInstance = new MyClass;
+		myInstance.wire (
 			'Changed.percentLoaded',  // name of changed event for percentLoaded stete property
 			function (event) {alert (event.newValue)}
 		);
-		myClass.set ({percentLoaded:10});   // will alert the text 10
-		myClass.set ({percentLoaded:25});   // will alert the text 25
-		myClass.set ({percentLoaded:66});   // will alert the text 66
-		myClass.set ({percentLoaded:200});  // will alert the text 100 (because of conformer)
-		myClass.set ({percentLoaded:300});  // does nothing (because value doesn't change)
-		......................................................................................
+		myInstance.set ({percentLoaded:10});   // will alert the text 10
+		myInstance.set ({percentLoaded:25});   // will alert the text 25
+		myInstance.set ({percentLoaded:66});   // will alert the text 66
+		myInstance.set ({percentLoaded:200});  // will alert the text 100 (because of conformer)
+		myInstance.set ({percentLoaded:300});  // does nothing (because value doesn't change)
+		.........................................................................................
 
 		In the above example, a handler is being registered for the changed event of the =percentLoaded= state property, which is named =Changed.percentLoaded= (basically, any state property has a changed virtual event that is named after that property, with "Changed." prefixed).
 
@@ -1113,7 +1113,7 @@ The Special value State Property
 	The =valueOf Intrinsic Method= is invoked automatically by Javascript in certain contexts in order to convert an object to a value, such as when using an object reference in an expression. If you declare the special =value= state property for your class, then you will be able to use a reference to an instance of your class in string and mathematical expressions, and your instance reference will be automatically converted to the value of the =value= state property in such expressions. This is a handy shorthand that allows us to use a reference to a class instance as a proxy for its value in expressions.
 
 	EXAMPLE
-	..........................................................
+	.............................................................
 	var MyClass = Uize.Class.subclass ();
 	MyClass.stateProperties ({
 		_value:{
@@ -1121,22 +1121,22 @@ The Special value State Property
 			value:0
 		}
 	});
-	var myClass = new MyClass ({value:123);
-	alert (+myClass);               // will alert the text 123
-	alert (myClass + '');           // will alert the text 123
-	alert (myClass.valueOf ());     // will alert the text 123
-	alert (myClass.get ('value'));  // will alert the text 123
-	..........................................................
+	var myInstance = new MyClass ({value:123);
+	alert (+myInstance);               // will alert the text 123
+	alert (myInstance + '');           // will alert the text 123
+	alert (myInstance.valueOf ());     // will alert the text 123
+	alert (myInstance.get ('value'));  // will alert the text 123
+	.............................................................
 
 	In the above example, the special =value= state property is being declared for the class =MyClass=. The initial value for this property is =0=, as specified in the =value= property of its profile (don't confuse the special =value= state property with the =value= property of a state property's profile that lets you specify the initial value for a property).
 
-	As illustrated in this example, the value of the special =value= state property of the instance =myClass= can be accessed as: =+myClass= (coercing its type to number), =myClass + ''= (coercing its type to string), =myClass.valueOf ()= (leaves type unchanged), or =myClass.get ('value')= (leaves type unchanged). Of the various ways that the =value= state property can be accessed, using the =get= method is the least efficient. So, using the other techniques might be helpful in very heavily hit code that calls for hardcore performance optimization measures. As with other state properties, the value of the special =value= state property can be set using the =set= method, as in =myClass.set ({value:'newValue'})=.
+	As illustrated in this example, the value of the special =value= state property of the instance =myInstance= can be accessed as: =+myInstance= (coercing its type to number), =myInstance + ''= (coercing its type to string), =myInstance.valueOf ()= (leaves type unchanged), or =myInstance.get ('value')= (leaves type unchanged). Of the various ways that the =value= state property can be accessed, using the =get= method is the least efficient. So, using the other techniques might be helpful in very heavily hit code that calls for hardcore performance optimization measures. As with other state properties, the value of the special =value= state property can be set using the =set= method, as in =myInstance.set ({value:'newValue'})=.
 
 	Watching For Value Changes
 		If a =value= state property is declared for a class, then application code can watch on changes in the value for an instance by wiring a handler for the =Change.value= virtual event of the instance.
 
 		EXAMPLE
-		..............................................................
+		....................................................................
 		var MyClass = Uize.Class.subclass ();
 		MyClass.stateProperties ({
 			_value:{
@@ -1144,12 +1144,12 @@ The Special value State Property
 				value:0
 			}
 		});
-		var myClass = new MyClass;
-		myClass.wire ('Changed.value',function () {alert (+myClass)});
-		myClass.set ({value:10});  // will alert the text 10
-		..............................................................
+		var myInstance = new MyClass;
+		myInstance.wire ('Changed.value',function () {alert (+myInstance)});
+		myInstance.set ({value:10});  // will alert the text 10
+		....................................................................
 
-		In the above code, a handler is wired for the =Changed.value= event of the instance =myClass=. Setting the =value= state property to =10= causes its value to change from its initial value of =0= (as specified in the =value= property of its profile), thereby firing the =Changed.value= virtual event, and the handler for this event alerts the current value by prepending the plus ("+") operator to the instance reference, invoking the =valueOf Intrinsic Method=.
+		In the above code, a handler is wired for the =Changed.value= event of the instance =myInstance=. Setting the =value= state property to =10= causes its value to change from its initial value of =0= (as specified in the =value= property of its profile), thereby firing the =Changed.value= virtual event, and the handler for this event alerts the current value by prepending the plus ("+") operator to the instance reference, invoking the =valueOf Intrinsic Method=.
 
 	Any Class Can Implement Value Interface
 		The =valueOf Intrinsic Method= is implemented in the =Uize.Class= base class, so it is inherited by all subclasses of =Uize.Class=, including =Uize.Widget= and all subclasses of =Uize.Widget=, and all their subclasses, etc.
@@ -1169,10 +1169,10 @@ The Special value State Property
 				value:0
 			}
 		});
-		var myClass = new MyClass ({percentLoaded:10});
-		alert (myClass.get ('percentLoaded'));  // will alert the text 10
-		alert (myClass.get ('value'));          // will alert the text 10
-		alert (+myClass);                       // will alert the text 10
+		var myInstance = new MyClass ({percentLoaded:10});
+		alert (myInstance.get ('percentLoaded'));  // will alert the text 10
+		alert (myInstance.get ('value'));          // will alert the text 10
+		alert (+myInstance);                       // will alert the text 10
 		.........................................................................
 
 		In the above example, the =percentLoaded= state property is being declared. Even though this property might represent the primary value for instances of the class, it is desirable for the property's name to be =percentLoaded= (rather than the more generic =value=) for general usability/understandability of the class' interface. However, it would be nice to still be able to get the benefit of the =valueOf Intrinsic Method=. Not a problem. This is accomplished by naming the state property both =percentLoaded= *AND* =value=. Notice how the three last statements in the example all produce the same output.
@@ -1194,7 +1194,7 @@ Advanced Topics
 		Cases can arise where it is desirable to declare a state property whose value is derived from the values of one or more other state properties, and that acts as a kind of state summary for the instance.
 
 		EXAMPLE
-		.................................................................
+		....................................................................
 		var MyClass = Uize.Class.subclass ();
 		function _updateArea () {
 			this.set ({area:this._width * this._height});
@@ -1212,18 +1212,18 @@ Advanced Topics
 				onChange:_updateArea
 			}
 		});
-		myClass = new MyClass;
-		alert (myClass.get ('area'));         // will alert the value 100
+		var myInstance = new MyClass;
+		alert (myInstance.get ('area'));         // will alert the value 100
 
-		myClass.set ({width:5});
-		alert (myClass.get ('area'));         // will alert the value 50
+		myInstance.set ({width:5});
+		alert (myInstance.get ('area'));         // will alert the value 50
 
-		myClass.set ({height:5});
-		alert (myClass.get ('area'));         // will alert the value 25
+		myInstance.set ({height:5});
+		alert (myInstance.get ('area'));         // will alert the value 25
 
-		myClass.set ({width:20,height:20});
-		alert (myClass.get ('area'));         // will alert the value 400
-		.................................................................
+		myInstance.set ({width:20,height:20});
+		alert (myInstance.get ('area'));         // will alert the value 400
+		....................................................................
 
 		In the above example, the =area= state property is being declared. This property is not intended to be set by an application, since its value is derived in the class' implementation from the values of two other state properties declared for the class: =width= and =height=. An =onChange= handler function is registered in the profile for each of the =width= and =height= state properties. If the value of either (or both) of these properties changes, then the =_updateArea= function is called as a method on the instance, and this function sets a new value for the =area= state property that is the product of the =width= and =height= values.
 

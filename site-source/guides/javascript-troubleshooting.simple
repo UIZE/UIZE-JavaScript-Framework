@@ -114,8 +114,8 @@ Basic Troubleshooting With Alerts
 		wired : true
 		.............................................................................................................
 
-	Alerting Values of Instances or Classes
-		The =Uize.Class= base class implements a =valueOf Intrinsic Method= that returns the value of the =value= state property - for instances of =Uize.Class= subclasses as well as =Uize.Class= subclasses.
+	Alerting Values of Instances
+		The =Uize.Class= base class implements a =valueOf Intrinsic Method= that returns the value of the =value= state property for instances of =Uize.Class= subclasses.
 
 		Because this method is implemented in the =Uize.Class= base class, all =Uize.Class= subclasses get to inherit it. For any class that implements a =value= state property, the value of an instance can be displayed in an alert dialog using a convenient shorthand. This can be done by prepending a "+" (plus sign) to the instance reference for classes that implement a number type value, or by appending a =+ ''= to the instance reference for classes that implement a string type value.
 

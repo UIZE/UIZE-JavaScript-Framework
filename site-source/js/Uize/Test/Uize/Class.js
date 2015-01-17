@@ -1081,37 +1081,6 @@ Uize.module ({
 					['Uize.Class.toggle',[
 						// NOTE: this method is thoroughly tested by the properties system tests (so, no tests here)
 					]],
-					['Uize.Class.valueOf',[
-						{
-							title:
-								'The valueOf method of a class returns the value of the special value state property for the class (ie. the initial value for the value state property)',
-							test:function () {
-								var _Subclass = Uize.Class.subclass ();
-								_Subclass.stateProperties ({
-									_value:{
-										name:'value',
-										value:'foo'
-									}
-								});
-								return this.expect (_Subclass.valueOf (),'foo');
-							}
-						},
-						{
-							title:
-								'The valueOf method of an instance returns the value of the special value state property for the instance',
-							test:function () {
-								var _Subclass = Uize.Class.subclass ();
-								_Subclass.stateProperties ({
-									_value:{
-										name:'value',
-										value:'foo'
-									}
-								});
-								var _instance = new _Subclass;
-								return this.expect (_instance.valueOf (),'foo');
-							}
-						}
-					]],
 					['Uize.Class.subclass',[
 						/*
 							- test state properties and inheritance
@@ -2053,7 +2022,22 @@ Uize.module ({
 							title:'Test getting values for state properties for instances and classes',
 							test:[
 								_getMethodTest ('Test that the get method works for instances',true),
-								_getMethodTest ('Test that the get method works for classes',false)
+								_getMethodTest ('Test that the get method works for classes',false),
+								{
+									title:
+										'The valueOf method of an instance returns the value of the special value state property for the instance',
+									test:function () {
+										var _Subclass = Uize.Class.subclass ();
+										_Subclass.stateProperties ({
+											_value:{
+												name:'value',
+												value:'foo'
+											}
+										});
+										var _instance = new _Subclass;
+										return this.expect (_instance.valueOf (),'foo');
+									}
+								}
 							]
 						},
 						{
@@ -3144,7 +3128,7 @@ Uize.module ({
 							]
 						},
 						{
-							title:'Test the alias mechanism',
+							title:'State properties can have aliases',
 							test:[
 								{
 									title:

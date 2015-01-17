@@ -433,21 +433,6 @@ Uize.module ({
 							NOTES
 							- see also the =Uize.Class.valueOf= static intrinsic method
 							- if the instance's class does not declare a =value= state property, then this method will return the value of the instance's =value= property, and if the instance has no =value= property, then this method will simply return =undefined=
-
-					Static Methods
-						Uize.Class.valueOf
-							Returns the value of the class' =value= state property.
-
-							SYNTAX
-							.......................................
-							classValueANYTYPE = MyClass.valueOf ();
-							.......................................
-
-							The =Uize.Class.valueOf= static intrinsic method is invoked automatically in certain contexts in order to convert a class to a value, such as when using a class reference in an expression (eg. =Uize.Widget.Bar.Slider + 0=). This static method is implemented primarily to provide parity with the =valueOf Intrinsic Method=. Its behavior is largely equivalent to that of the instance method, excepting that it applies to the static value of the =value= state property.
-
-							NOTES
-							- see also the =valueOf Intrinsic Method=
-							- if the class does not declare a =value= state property, then this method will return the value of the class' =value= property, and if the class has no =value= property, then this method will simply return =undefined=
 				*/
 			}
 
@@ -504,7 +489,7 @@ Uize.module ({
 						*/
 
 				/*** Non-inherited Public Static Properties ***/
-					_subclass.nonInheritableStatics = {_singletons:1,nonInheritableStatics:1,valueOf:0};
+					_subclass.nonInheritableStatics = {_singletons:1,nonInheritableStatics:1};
 						/*?
 							Static Properties
 								Uize.Class.nonInheritableStatics
@@ -549,9 +534,6 @@ Uize.module ({
 									alert (MyWidgetClass.superclass == Uize.Widget); // displays the text "true"
 									............................................................................
 						*/
-
-				/*** Non-inherited Public Static Methods ***/
-					_subclass.valueOf = _valueOf;
 
 			/*** Initialize Alphastructors and Omegastructors ***/
 				var
