@@ -635,8 +635,18 @@ Uize.module ({
 			);
 
 			/*** Seed Feature Declaration Methods ***/
-				_class.instanceMethods = _class.instanceProperties = function (_instanceFeatures) {
-					_copyInto (this.prototype,_instanceFeatures);
+				function _overrideMethods (_methodsHost,_methods) {
+					Uize.forEach (
+						_methods,
+						function (_method,_methodName) {
+							if (_method) _method.former = _methodsHost [_methodName] || Uize.nop;
+							_methodsHost [_methodName] = _method;
+						}
+					);
+				}
+
+				_class.instanceMethods = function (_instanceMethods) {
+					_overrideMethods (this.prototype,_instanceMethods);
 					/*?
 						Static Methods
 							Uize.Class.instanceMethods
@@ -667,7 +677,13 @@ Uize.module ({
 								NOTES
 								- this method may be called multiple times for a class to cumulatively define or override features
 								- see the other `feature declaration methods`
+					*/
+				};
 
+				_class.instanceProperties = function (_instanceProperties) {
+					_copyInto (this.prototype,_instanceProperties);
+					/*?
+						Static Methods
 							Uize.Class.instanceProperties
 								Lets you conveniently declare one or more instance properties, by specifying the properties and their initial values in an object.
 
@@ -693,8 +709,8 @@ Uize.module ({
 					*/
 				};
 
-				_class.staticMethods = _class.staticProperties = function (_staticFeatures) {
-					_copyInto (this,_staticFeatures);
+				_class.staticMethods = function (_staticMethods) {
+					_overrideMethods (this,_staticMethods);
 					/*?
 						Static Methods
 							Uize.Class.staticMethods
@@ -708,7 +724,13 @@ Uize.module ({
 								NOTES
 								- this method may be called multiple times for a class to cumulatively define or override features
 								- see the other `feature declaration methods`
+					*/
+				};
 
+				_class.staticProperties = function (_staticProperties) {
+					_copyInto (this,_staticProperties);
+					/*?
+						Static Methods
 							Uize.Class.staticProperties
 								Lets you conveniently declare one or more static properties, by specifying the properties and their initial values in an object.
 
