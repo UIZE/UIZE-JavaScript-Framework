@@ -639,7 +639,13 @@ Uize.module ({
 					Uize.forEach (
 						_methods,
 						function (_method,_methodName) {
-							if (_method) _method.former = _methodsHost [_methodName] || Uize.nop;
+							if (_method) {
+								var _former = _methodsHost [_methodName] || Uize.nop;
+								if (Uize.isArray (_method))
+									_method = _method [0] (_former)
+								;
+								_method.former = _former;
+							}
 							_methodsHost [_methodName] = _method;
 						}
 					);
