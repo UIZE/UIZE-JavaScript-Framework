@@ -1081,6 +1081,124 @@ Uize.module ({
 					['Uize.Class.toggle',[
 						// NOTE: this method is thoroughly tested by the properties system tests (so, no tests here)
 					]],
+					['Uize.Class.instanceMethods',[
+						/*** test support for the array wrapper construct for obtaining a reference to former ***/
+							{
+								title:
+									'Methods that are overridden in a subclass can be provided with a reference to the former version of the method taken from the superclass, by using the special array wrapper construct',
+								test:function () {
+									var
+										_Class = Uize.Class.subclass ({
+											instanceProperties:{
+												delimiter:'-'
+											},
+											instanceMethods:{
+												foo:function () {return this.delimiter + 'foo'}
+											}
+										}),
+										_SubClass = _Class.subclass ({
+											instanceMethods:{
+												foo:[function (_former) {
+													return function () {return _former.call (this) + this.delimiter + 'bar'}
+												}]
+											}
+										}),
+										_instance = _SubClass ()
+									;
+									return this.expect ('-foo-bar',_instance.foo ());
+								}
+							},
+							{
+								title:
+									'An instance method can be overridden any number of times in a single class, and for each subsequent method override the "former" property of the method function will be set to the former, previously declared version of the method',
+								test:function () {
+									var
+										_Class = Uize.Class.subclass ()
+											.declare ({
+												instanceProperties:{
+													delimiter:'<'
+												},
+												instanceMethods:{
+													foo:function (_arg) {
+														return this.delimiter + 'foo' + _arg;
+													}
+												}
+											})
+											.declare ({
+												instanceMethods:{
+													foo:[function (_former) {
+														return function (_arg) {
+															return _former.call (this,_arg) + this.delimiter + 'bar' + _arg;
+														}
+													}]
+												}
+											})
+											.declare ({
+												instanceMethods:{
+													foo:[function (_former) {
+														return function (_arg) {
+															return _former.call (this,_arg) + this.delimiter + 'baz' + _arg;
+														}
+													}]
+												}
+											})
+											.declare ({
+												instanceMethods:{
+													foo:[function (_former) {
+														return function (_arg) {
+															return _former.call (this,_arg) + this.delimiter + 'qux' + _arg;
+														}
+													}]
+												}
+											})
+										,
+										_instance = _Class ()
+									;
+									return this.expect ('<foo><bar><baz><qux>',_instance.foo ('>'));
+								}
+							},
+
+						/*** test support for the "former" property of instance method functions ***/
+							{
+								title:
+									'When an instance method is first declared for a class, the "former" property of the method function is set to a dummy function that performs no operation and returns the value undefined',
+								test:function () {
+									var
+										_Class = Uize.Class.subclass ({
+											instanceMethods:{
+												foo:function () {return 'foo'}
+											}
+										}),
+										_instance = _Class ()
+									;
+									return (
+										this.expectFunction (_instance.foo.former) &&
+										this.expect (undefined,_instance.foo.former.call (_instance))
+									);
+								}
+							},
+							{
+								title:
+									'When an instance method declared in a superclass is overridden in a subclass, the "former" property of the method function in the subclass is set to the former version of the method taken from the superclass',
+								test:function () {
+									var
+										_Class = Uize.Class.subclass ({
+											instanceMethods:{
+												foo:function () {return 'foo'}
+											}
+										}),
+										_SubClass = _Class.subclass ({
+											instanceMethods:{
+												foo:[function (_former) {
+													return function () {return _former.call (this) + 'bar'}
+												}]
+											}
+										})
+									;
+									return this.expectSameAs (_Class ().foo,_SubClass ().foo.former);
+								}
+							}
+					]],
 					['Uize.Class.subclass',[
 						/*
 							- test state properties and inheritance
