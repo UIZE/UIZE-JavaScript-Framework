@@ -1,7 +1,7 @@
 /*______________
 |       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
 |     /      /  |   ---------------------------------------------------
-|    /    O /   |    MODULE : Uize.Widgets.HslSliders.HueSlider.Widget Class
+|    /    O /   |    MODULE : Uize.Widgets.HslSliders.SaturationSlider.Widget Class
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
 | /____/ /__/_| | COPYRIGHT : (c)2015 UIZE
@@ -18,22 +18,22 @@
 
 /*?
 	Introduction
-		The =Uize.Widgets.HslSliders.HueSlider.Widget= module implements a widget class.
+		The =Uize.Widgets.HslSliders.SaturationSlider.Widget= module implements a widget class.
 
 		*DEVELOPERS:*
 
 		Visual Sampler
-			Below is a visual sampler of the =Uize.Widgets.HslSliders.HueSlider.Widget= class...
+			Below is a visual sampler of the =Uize.Widgets.HslSliders.SaturationSlider.Widget= class...
 
-			............................................................
+			...................................................................
 			<< widget >>
 
-			widgetClass: Uize.Widgets.HslSliders.HueSlider.VisualSampler
-			............................................................
+			widgetClass: Uize.Widgets.HslSliders.SaturationSlider.VisualSampler
+			...................................................................
 */
 
 Uize.module ({
-	name:'Uize.Widgets.HslSliders.HueSlider.Widget',
+	name:'Uize.Widgets.HslSliders.SaturationSlider.Widget',
 	superclass:'Uize.Widgets.Slider.Gradient.Widget',
 	required:'Uize.Color',
 	builder:function (_superclass) {
@@ -41,17 +41,21 @@ Uize.module ({
 
 		return _superclass.subclass ({
 			stateProperties:{
+				hue:{value:0},
+
 				/*** derived properties ***/
 					knobColor:{
-						derived:'value: Uize.Color.from ({hue:value,saturation:100,lightness:50}).to ("#hex")'
+						derived:'hue, value: Uize.Color.from ({hue:hue,saturation:value,lightness:50}).to ("#hex")'
+					},
+					gradient:{
+						derived:'hue: "#808080, " + Uize.Color.from ({hue:hue,saturation:100,lightness:50}).to ("#hex")'
 					}
 			},
 
 			set:{
 				increments:0,
 				minValue:0,
-				maxValue:360,
-				gradient:'red, yellow, lime, cyan, blue, magenta, red'
+				maxValue:100
 			}
 		});
 	}

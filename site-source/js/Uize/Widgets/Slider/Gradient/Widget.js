@@ -54,15 +54,20 @@ Uize.module ({
 
 			stateProperties:{
 				knobColor:{value:'000'},
+				gradient:{value:'black, white'},
 
 				/*** derived properties ***/
 					knobColorAsRgbHex:{
 						derived:'knobColor: Uize.Color.from (knobColor).to ("#hex")'
+					},
+					gradientAsBackGroundImage:{
+						derived:'gradient, orientation: "linear-gradient(" + (orientation == "horizontal" ? "to right" : "to top") + ", " + gradient + ")"'
 					}
 			},
 
 			htmlBindings:{
-				knobColorAsRgbHex:'knobColor:style.backgroundColor'
+				knobColorAsRgbHex:'knobColor:style.backgroundColor',
+				gradientAsBackGroundImage:'gradient:style.backgroundImage'
 			}
 		});
 	}
