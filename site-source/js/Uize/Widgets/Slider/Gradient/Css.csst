@@ -1,0 +1,151 @@
+<%@ required ('Uize.Widgets.CssUtil'); %>
+
+.`gradient` {
+	position: absolute;
+	border-radius: 3px;
+	border: 1px solid #aaa;
+	box-shadow: 5px 5px 15px rgba(0,0,0,.2) inset
+}
+
+/*** knob ***/
+	.`knobColorShell` {
+		position: absolute;
+	}
+
+	.`knobColor` {
+		position: absolute;
+		border: 1px solid rgba(255,255,255,.7);
+		box-sizing: border-box;
+	}
+
+/*** different orientations ***/
+	<%
+		var
+			_sizes = Uize.Widgets.CssUtil.sizes,
+			_tiny = _sizes.tiny,
+			_small = _sizes.small,
+			_medium = _sizes.medium,
+			_large = _sizes.large,
+			_tinyGradientPos = _tiny.outer * .8 / 2,
+			_tinyGradientGutter = 5,
+			_smallGradientPos = _small.outer * .8 / 2,
+			_smallGradientGutter = 6,
+			_mediumGradientPos = _medium.outer * .8 / 2,
+			_mediumGradientGutter = 7,
+			_largeGradientPos = _large.outer * .8 / 2,
+			_largeGradientGutter = 9
+		;
+	%>
+	/*** horizontal ***/
+		.`horizontal` .`gradient` {
+			background-image: linear-gradient(to right, red, yellow, lime, cyan, blue, magenta, red);
+		}
+
+		.`horizontal` .`knob` {
+			border-color: rgba(204,204,204,.5) rgba(153,153,153,.5) rgba(153,153,153,.5) rgba(255,255,255,.5);
+			background: linear-gradient(to bottom,  rgba(255,255,255,1) 0%,rgba(204,204,204,.5) 25%,rgba(204,204,204,.5) 75%,rgba(170,170,170,1) 100%);
+		}
+
+		.`horizontal` .`knobColorShell` {
+			left: 50%;
+			width: 0;
+			top: 0;
+			bottom: 0;
+		}
+
+		.`horizontal` .`knobColor` {
+			left: -3px;
+			top: 2px;
+			bottom: 2px;
+			width: 6px;
+		}
+
+		/*** different sizes ***/
+			/*** tiny ***/
+				.`horizontal`.`tiny` .`gradient` {
+					left: <%= _tinyGradientPos - 1 %>px;
+					top: <%= _tinyGradientGutter - 1 %>px;
+					right: <%= _tinyGradientPos -1 %>px;
+					bottom: <%= _tinyGradientGutter - 1 %>px;
+				}
+
+			/*** small ***/
+				.`horizontal`.`small` .`gradient` {
+					left: <%= _smallGradientPos - 1 %>px;
+					top: <%= _smallGradientGutter - 1 %>px;
+					right: <%= _smallGradientPos - 1 %>px;
+					bottom: <%= _smallGradientGutter - 1 %>px;
+				}
+
+			/*** medium ***/
+				.`horizontal`.`medium` .`gradient` {
+					left: <%= _mediumGradientPos - 1 %>px;
+					top: <%= _mediumGradientGutter - 1 %>px;
+					right: <%= _mediumGradientPos - 1 %>px;
+					bottom: <%= _mediumGradientGutter - 1 %>px;
+				}
+
+			/*** large ***/
+				.`horizontal`.`large` .`gradient` {
+					left: <%= _largeGradientPos - 1 %>px;
+					top: <%= _largeGradientGutter - 1 %>px;
+					right: <%= _largeGradientPos - 1 %>px;
+					bottom: <%= _largeGradientGutter - 1 %>px;
+				}
+
+	/*** vertical ***/
+		.`vertical` .`gradient` {
+			background-image: linear-gradient(to top, red, yellow, lime, cyan, blue, magenta, red);
+		}
+
+		.`vertical` .`knob` {
+			border-color: rgba(255,255,255,.5) rgba(153,153,153,.5) rgba(153,153,153,.5) rgba(204,204,204,.5);
+			background: linear-gradient(to right,  rgba(255,255,255,1) 0%,rgba(204,204,204,.5) 25%,rgba(204,204,204,.5) 75%,rgba(170,170,170,1) 100%);
+		}
+
+		.`vertical` .`knobColorShell` {
+			top: 50%;
+			height: 0;
+			left: 0;
+			right: 0;
+		}
+
+		.`vertical` .`knobColor` {
+			top: -3px;
+			left: 2px;
+			right: 2px;
+			height: 6px;
+		}
+
+		/*** different sizes ***/
+			/*** tiny ***/
+				.`vertical`.`tiny` .`gradient` {
+					left: <%= _tinyGradientGutter - 1 %>px;
+					top: <%= _tinyGradientPos - 1 %>px;
+					right: <%= _tinyGradientGutter - 1 %>px;
+					bottom: <%= _tinyGradientPos - 1 %>px;
+				}
+
+			/*** small ***/
+				.`vertical`.`small` .`gradient` {
+					left: <%= _smallGradientGutter - 1 %>px;
+					top: <%= _smallGradientPos - 1 %>px;
+					right: <%= _smallGradientGutter - 1 %>px;
+					bottom: <%= _smallGradientPos - 1 %>px;
+				}
+
+			/*** medium ***/
+				.`vertical`.`medium` .`gradient` {
+					left: <%= _mediumGradientGutter - 1 %>px;
+					top: <%= _mediumGradientPos - 1 %>px;
+					right: <%= _mediumGradientGutter - 1 %>px;
+					bottom: <%= _mediumGradientPos - 1 %>px;
+				}
+
+			/*** large ***/
+				.`vertical`.`large` .`gradient` {
+					left: <%= _largeGradientGutter - 1 %>px;
+					top: <%= _largeGradientPos - 1 %>px;
+					right: <%= _largeGradientGutter - 1 %>px;
+					bottom: <%= _largeGradientPos - 1 %>px;
+				}
