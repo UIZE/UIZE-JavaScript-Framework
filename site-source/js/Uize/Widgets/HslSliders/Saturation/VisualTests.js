@@ -1,7 +1,7 @@
 /*______________
 |       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
 |     /      /  |   ---------------------------------------------------
-|    /    O /   |    MODULE : Uize.Widgets.HslSliders.SaturationSlider.VisualTests Class
+|    /    O /   |    MODULE : Uize.Widgets.HslSliders.Saturation.VisualTests Class
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
 | /____/ /__/_| | COPYRIGHT : (c)2015 UIZE
@@ -18,15 +18,15 @@
 
 /*?
 	Introduction
-		The =Uize.Widgets.HslSliders.SaturationSlider.VisualTests= class implements a set of visual tests for the =Uize.Widgets.HslSliders.SaturationSlider.Widget= class.
+		The =Uize.Widgets.HslSliders.Saturation.VisualTests= class implements a set of visual tests for the =Uize.Widgets.HslSliders.Saturation.Widget= class.
 
-		*DEVELOPERS:* 
+		*DEVELOPERS:*
 */
 
 Uize.module ({
-	name:'Uize.Widgets.HslSliders.SaturationSlider.VisualTests',
+	name:'Uize.Widgets.HslSliders.Saturation.VisualTests',
 	superclass:'Uize.Widgets.VisualTests.Widget',
-	required:'Uize.Widgets.HslSliders.SaturationSlider.Widget',
+	required:'Uize.Widgets.HslSliders.Saturation.Widget',
 	builder:function (_superclass) {
 		'use strict';
 
@@ -37,7 +37,7 @@ Uize.module ({
 			},
 
 			staticProperties:{
-				widgetClass:Uize.Widgets.HslSliders.SaturationSlider.Widget
+				widgetClass:Uize.Widgets.HslSliders.Saturation.Widget
 			}
 		});
 	}

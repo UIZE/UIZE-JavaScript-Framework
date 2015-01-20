@@ -1,7 +1,7 @@
 /*______________
 |       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
 |     /      /  |   ---------------------------------------------------
-|    /    O /   |    MODULE : Uize.Widgets.HslSliders.HueSlider.VisualTests Class
+|    /    O /   |    MODULE : Uize.Widgets.HslSliders.Lightness.VisualTests Class
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
 | /____/ /__/_| | COPYRIGHT : (c)2015 UIZE
@@ -18,15 +18,15 @@
 
 /*?
 	Introduction
-		The =Uize.Widgets.HslSliders.HueSlider.VisualTests= class implements a set of visual tests for the =Uize.Widgets.HslSliders.HueSlider.Widget= class.
+		The =Uize.Widgets.HslSliders.Lightness.VisualTests= class implements a set of visual tests for the =Uize.Widgets.HslSliders.Lightness.Widget= class.
 
-		*DEVELOPERS:* 
+		*DEVELOPERS:*
 */
 
 Uize.module ({
-	name:'Uize.Widgets.HslSliders.HueSlider.VisualTests',
+	name:'Uize.Widgets.HslSliders.Lightness.VisualTests',
 	superclass:'Uize.Widgets.VisualTests.Widget',
-	required:'Uize.Widgets.HslSliders.HueSlider.Widget',
+	required:'Uize.Widgets.HslSliders.Lightness.Widget',
 	builder:function (_superclass) {
 		'use strict';
 
@@ -37,7 +37,7 @@ Uize.module ({
 			},
 
 			staticProperties:{
-				widgetClass:Uize.Widgets.HslSliders.HueSlider.Widget
+				widgetClass:Uize.Widgets.HslSliders.Lightness.Widget
 			}
 		});
 	}

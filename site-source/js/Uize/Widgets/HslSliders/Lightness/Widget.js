@@ -1,7 +1,7 @@
 /*______________
 |       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
 |     /      /  |   ---------------------------------------------------
-|    /    O /   |    MODULE : Uize.Widgets.HslSliders.LightnessSlider.Widget Class
+|    /    O /   |    MODULE : Uize.Widgets.HslSliders.Lightness.Widget Class
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
 | /____/ /__/_| | COPYRIGHT : (c)2015 UIZE
@@ -18,22 +18,22 @@
 
 /*?
 	Introduction
-		The =Uize.Widgets.HslSliders.LightnessSlider.Widget= module implements a widget class.
+		The =Uize.Widgets.HslSliders.Lightness.Widget= module implements a widget class.
 
 		*DEVELOPERS:*
 
 		Visual Sampler
-			Below is a visual sampler of the =Uize.Widgets.HslSliders.LightnessSlider.Widget= class...
+			Below is a visual sampler of the =Uize.Widgets.HslSliders.Lightness.Widget= class...
 
 			..................................................................
 			<< widget >>
 
-			widgetClass: Uize.Widgets.HslSliders.LightnessSlider.VisualSampler
+			widgetClass: Uize.Widgets.HslSliders.Lightness.VisualSampler
 			..................................................................
 */
 
 Uize.module ({
-	name:'Uize.Widgets.HslSliders.LightnessSlider.Widget',
+	name:'Uize.Widgets.HslSliders.Lightness.Widget',
 	superclass:'Uize.Widgets.Slider.Gradient.Widget',
 	required:'Uize.Color',
 	builder:function (_superclass) {

@@ -1,7 +1,7 @@
 /*______________
 |       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
 |     /      /  |   ---------------------------------------------------
-|    /    O /   |    MODULE : Uize.Widgets.HslSliders.HueSlider.VisualSampler Class
+|    /    O /   |    MODULE : Uize.Widgets.HslSliders.Lightness.VisualSampler Class
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
 | /____/ /__/_| | COPYRIGHT : (c)2015 UIZE
@@ -18,16 +18,16 @@
 
 /*?
 	Introduction
-		The =Uize.Widgets.HslSliders.HueSlider.VisualSampler= class implements a visual sampler widget for the =Uize.Widgets.HslSliders.HueSlider.Widget= class.
+		The =Uize.Widgets.HslSliders.Lightness.VisualSampler= class implements a visual sampler widget for the =Uize.Widgets.HslSliders.Lightness.Widget= class.
 
 		*DEVELOPERS:*
 */
 
 Uize.module ({
-	name:'Uize.Widgets.HslSliders.HueSlider.VisualSampler',
+	name:'Uize.Widgets.HslSliders.Lightness.VisualSampler',
 	superclass:'Uize.Widgets.VisualSampler.Widget',
 	required:[
-		'Uize.Widgets.HslSliders.HueSlider.Widget',
+		'Uize.Widgets.HslSliders.Lightness.Widget',
 		'Uize.Widgets.StateValues'
 	],
 	builder:function (_superclass) {
@@ -48,7 +48,7 @@ Uize.module ({
 			},
 
 			set:{
-				samplerWidgetClass:Uize.Widgets.HslSliders.HueSlider.Widget
+				samplerWidgetClass:Uize.Widgets.HslSliders.Lightness.Widget
 			}
 		});
 	}

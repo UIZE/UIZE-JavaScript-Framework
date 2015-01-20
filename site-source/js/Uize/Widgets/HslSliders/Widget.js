@@ -38,9 +38,9 @@ Uize.module ({
 	required:[
 		'Uize.Widgets.HslSliders.Html',
 		'Uize.Widgets.HslSliders.Css',
-		'Uize.Widgets.HslSliders.HueSlider.Widget',
-		'Uize.Widgets.HslSliders.SaturationSlider.Widget',
-		'Uize.Widgets.HslSliders.LightnessSlider.Widget'
+		'Uize.Widgets.HslSliders.Hue.Widget',
+		'Uize.Widgets.HslSliders.Saturation.Widget',
+		'Uize.Widgets.HslSliders.Lightness.Widget'
 	],
 	builder:function (_superclass) {
 		'use strict';
@@ -63,9 +63,9 @@ Uize.module ({
 			},
 
 			children:{
-				hue:Uize.Widgets.HslSliders.HueSlider.Widget,
-				saturation:Uize.Widgets.HslSliders.SaturationSlider.Widget,
-				lightness:Uize.Widgets.HslSliders.LightnessSlider.Widget
+				hue:Uize.Widgets.HslSliders.Hue.Widget,
+				saturation:Uize.Widgets.HslSliders.Saturation.Widget,
+				lightness:Uize.Widgets.HslSliders.Lightness.Widget
 			},
 
 			childBindings:{
