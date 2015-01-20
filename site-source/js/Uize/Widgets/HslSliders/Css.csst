@@ -1,0 +1,22 @@
+.`sliderLabel` {
+	position: relative;
+	text-align: center;
+	font-size: 12px;
+	padding-bottom: 2px;
+	margin-top: 6px;
+	text-transform: uppercase;
+}
+
+.`sliderMinValue`, .`sliderMaxValue` {
+	position: absolute;
+	font-size: 11px;
+	top: 0;
+}
+
+.`sliderMinValue` {
+	left: 4px;
+}
+
+.`sliderMaxValue` {
+	right: 4px;
+}

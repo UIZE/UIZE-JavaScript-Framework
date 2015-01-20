@@ -1,0 +1,22 @@
+<div>
+	<div class="sliderLabel">
+		<span id="hueLabel"></span>
+		<div class="sliderMinValue">0</div>
+		<div class="sliderMaxValue">360</div>
+	</div>
+	<div><child name="hue" orientation="horizontal"/></div>
+
+	<div class="sliderLabel">
+		<span id="saturationLabel"></span>
+		<div class="sliderMinValue">0</div>
+		<div class="sliderMaxValue">100</div>
+	</div>
+	<div><child name="saturation" orientation="horizontal"/></div>
+
+	<div class="sliderLabel">
+		<span id="lightnessLabel"></span>
+		<div class="sliderMinValue">0</div>
+		<div class="sliderMaxValue">100</div>
+	</div>
+	<div><child name="lightness" orientation="horizontal"/></div>
+</div>
