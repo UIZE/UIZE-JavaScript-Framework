@@ -66,7 +66,6 @@ Uize.module ({
 								minValue:0,
 								maxValue:255,
 								orientation:'vertical',
-								emptyColor:'#fff',
 								fullColor:_sliderColor
 							}
 						);

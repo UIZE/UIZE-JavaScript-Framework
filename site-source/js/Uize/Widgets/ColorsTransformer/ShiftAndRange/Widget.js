@@ -91,9 +91,7 @@ Uize.module ({
 							{
 								widgetClass:Uize.Widgets.Slider.Widget,
 								increments:0,
-								orientation:'horizontal',
-								fullColor:'#fff',
-								emptyColor:'#fff'
+								orientation:'horizontal'
 							}
 						);
 					}
