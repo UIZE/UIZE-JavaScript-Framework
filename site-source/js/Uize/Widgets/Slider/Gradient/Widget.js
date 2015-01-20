@@ -34,7 +34,7 @@
 
 Uize.module ({
 	name:'Uize.Widgets.Slider.Gradient.Widget',
-	superclass:'Uize.Widgets.Slider.Widget',
+	superclass:'Uize.Widgets.Slider.Base.Widget',
 	required:[
 		'Uize.Widgets.Slider.Gradient.Html',
 		'Uize.Widgets.Slider.Gradient.Css',

@@ -34,65 +34,33 @@
 
 Uize.module ({
 	name:'Uize.Widgets.Slider.Widget',
-	superclass:'Uize.Widget.Bar.Slider',
+	superclass:'Uize.Widgets.Slider.Base.Widget',
 	required:[
-		'Uize.Widget.mV2',
 		'Uize.Widgets.Slider.Html',
 		'Uize.Widgets.Slider.Css'
 	],
 	builder:function (_superclass) {
 		'use strict';
 
-		var _superUpdateUi = _superclass.prototype.updateUi;
-
-		function _displayedStyleWidthHeight (_orientation,_trackLength,_isWidth) {
-			return (
-				(_orientation != 'horizontal') == _isWidth
-					? ''
-					: typeof _trackLength == 'number'
-						? _trackLength + 'px'
-						: _trackLength
-			);
-		}
-
 		return _superclass.subclass ({
-			mixins:Uize.Widget.mV2,
-
 			stateProperties:{
-				_trackLength:{
-					name:'trackLength',
-					value:''
+				_emptyColor:{
+					name:'emptyColor',
+					value:'#fff'
 				},
-				_emptyColor:'emptyColor',
-				_fullColor:'fullColor',
-				_displayedStyleWidth:{
-					name:'displayedStyleWidth',
-					derived:function (orientation,trackLength) {
-						return _displayedStyleWidthHeight (orientation,trackLength,true);
-					}
-				},
-				_displayedStyleHeight:{
-					name:'displayedStyleHeight',
-					derived:function (orientation,trackLength) {
-						return _displayedStyleWidthHeight (orientation,trackLength,false);
-					}
+				_fullColor:{
+					name:'fullColor',
+					value:'#fff'
 				}
 			},
 
 			set:{
-				html:Uize.Widgets.Slider.Html,
-				orientation:'horizontal'
-			},
-
-			cssBindings:{
-				orientation:'value'
+				html:Uize.Widgets.Slider.Html
 			},
 
 			htmlBindings:{
 				emptyColor:'empty:style.backgroundColor',
-				fullColor:'full:style.backgroundColor',
-				displayedStyleWidth:[':style.width',_superUpdateUi],
-				displayedStyleHeight:[':style.height',_superUpdateUi]
+				fullColor:'full:style.backgroundColor'
 			},
 
 			staticProperties:{
