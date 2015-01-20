@@ -48,7 +48,7 @@ Uize.module ({
 			},
 
 			set:{
-				increments:0,
+				increments:1,
 				minValue:0,
 				maxValue:360,
 				gradient:'red, yellow, lime, cyan, blue, magenta, red'

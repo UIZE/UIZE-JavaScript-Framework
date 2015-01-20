@@ -54,7 +54,7 @@ Uize.module ({
 			},
 
 			set:{
-				increments:0,
+				increments:1,
 				minValue:0,
 				maxValue:100
 			}
