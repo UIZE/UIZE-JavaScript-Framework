@@ -111,7 +111,7 @@ Uize.module ({
 				function _tabBodyStart(_tabNo) {
 					m.isWired
 						// prepare the node to animate its height by 1) making sure it's visible
-						// and 2) it's in the flow of the the container
+						// and 2) it's in the flow of the container
 						&& m.setNodeStyle(
 							_getTabBodyNode(m,_tabNo),
 							{

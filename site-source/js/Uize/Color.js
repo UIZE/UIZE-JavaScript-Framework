@@ -367,7 +367,7 @@ Uize.module ({
 				/*?
 					Instance Methods
 						getTuple
-							Returns an array, being the the tuple of color components for the instance, transformed for the specified color encoding or color space.
+							Returns an array, being the tuple of color components for the instance, transformed for the specified color encoding or color space.
 
 							SYNTAX
 							........................................................

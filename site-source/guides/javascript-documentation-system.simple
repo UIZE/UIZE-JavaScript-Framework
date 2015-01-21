@@ -1165,7 +1165,7 @@ Object Blocks
 		Object Block Enclosing Lines
 			Object blocks are denoted by enclosing their contents between two enclosing lines - the first of which is the object block opener, and the second of which is the object block closer.
 
-			The contents of an object block is contained between the `object block enclosing lines` and is comprised of the other two key parts of an object block: the the `object block type declaration` and the `object block data`. The enclosing lines for an object block must conform to the `rules for object block enclosing lines`.
+			The contents of an object block is contained between the `object block enclosing lines` and is comprised of the other two key parts of an object block: the `object block type declaration` and the `object block data`. The enclosing lines for an object block must conform to the `rules for object block enclosing lines`.
 
 			The following example of an `HTML object block` shows the two enclosing lines of the block made up of a series of "." (period) characters...
 

@@ -399,7 +399,7 @@ Uize.module ({
 
 										NOTE
 
-										It should be noted that for the ease-out version of this curve, and for the the ease-out phase of the ease-in-out and ease-in-the-middle versions of this curve, the bounce width ratio is actually the ratio of the width of the current bounce to the width of the next bounce. This is as a result of the curve being rotated 180 degrees.
+										It should be noted that for the ease-out version of this curve, and for the ease-out phase of the ease-in-out and ease-in-the-middle versions of this curve, the bounce width ratio is actually the ratio of the width of the current bounce to the width of the next bounce. This is as a result of the curve being rotated 180 degrees.
 
 									bounceCurveFUNCorFLOAT
 										A function reference for a curve function, or a numerical value that will be resolved to a power curve function using the =Uize.Curve.resolve= method.

@@ -65,7 +65,7 @@ Uize.module ({
 									var rootNode = this.web();
 									.........................................
 
-									Returns a =Uize.Web= object that contains the `root node` of the the widget.
+									Returns a =Uize.Web= object that contains the `root node` of the widget.
 
 									VARIATION
 									..................................................

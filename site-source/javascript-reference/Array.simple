@@ -666,7 +666,7 @@ Instance Methods
 				alert (array.join ());  // alerts the text "foo,,,bar"
 				......................................................
 
-				In the above example, the the middle elements of the array are =null= and =undefined=. When using =join= on the array, these two values get turned into empty strings. So, *instead* of the array being serialized to ='foo,null,undefined,bar'=, it gets serialized to ='foo,,,bar'=.
+				In the above example, the middle elements of the array are =null= and =undefined=. When using =join= on the array, these two values get turned into empty strings. So, *instead* of the array being serialized to ='foo,null,undefined,bar'=, it gets serialized to ='foo,,,bar'=.
 
 				This behavior of the =join= method can be used in a novel way to `repeat a value any number of times`. An equivalent behavior in the =toString= method (`toString is a special case of join`, after all) can be used to `create a string containing an arbitrary number of commas`.
 
@@ -1322,7 +1322,7 @@ Instance Methods
 				alert (array.toString ());  // alerts the text "foo,,,bar"
 				..........................................................
 
-				In the above example, the the middle elements of the array are =null= and =undefined=. When using =toString= on the array, these two values get turned into empty strings. So, *instead* of the array being serialized to ='foo,null,undefined,bar'=, it gets serialized to ='foo,,,bar'=.
+				In the above example, the middle elements of the array are =null= and =undefined=. When using =toString= on the array, these two values get turned into empty strings. So, *instead* of the array being serialized to ='foo,null,undefined,bar'=, it gets serialized to ='foo,,,bar'=.
 
 				This behavior of the =toString= method can be used in a novel way to `create a string containing an arbitrary number of commas`. An equivalent behavior in the =join= method (remember, `toString is a special case of join`) can be used to `repeat a value any number of times`.
 
