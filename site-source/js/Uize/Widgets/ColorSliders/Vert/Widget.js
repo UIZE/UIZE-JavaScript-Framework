@@ -48,7 +48,7 @@ Uize.module ({
 				var m = this;
 				if (!m._settingSliders) {
 					var _children = m.children;
-					Uize.Color.setTuple (m._color.tuple,+_children.slider0,+_children.slider1,+_children.slider2);
+					Uize.Color.setTuple (m._color.tuple,+_children.channel0,+_children.channel1,+_children.channel2);
 					m.set ({_value:m._color});
 				}
 			}
@@ -74,9 +74,9 @@ Uize.module ({
 						m._settingSliders = true;
 						m.set ({
 							children:{
-								slider0:{value:_colorTuple [0]},
-								slider1:{value:_colorTuple [1]},
-								slider2:{value:_colorTuple [2]}
+								channel0:{value:_colorTuple [0]},
+								channel1:{value:_colorTuple [1]},
+								channel2:{value:_colorTuple [2]}
 							}
 						});
 						m._settingSliders = false;
@@ -101,7 +101,7 @@ Uize.module ({
 			},
 
 			children:Uize.lookup (
-				['slider0','slider1','slider2'],
+				['channel0','channel1','channel2'],
 				{
 					orientation:'vertical',
 					trackLength:'100%',
@@ -111,9 +111,9 @@ Uize.module ({
 
 			htmlBindings:{
 				sliderHeightPx:[
-					'slider0:style.height',
-					'slider1:style.height',
-					'slider2:style.height'
+					'channel0:style.height',
+					'channel1:style.height',
+					'channel2:style.height'
 				],
 				loc_channel0Label:'channel0Label',
 				loc_channel0Tooltip:'channel0Label:title',
@@ -124,9 +124,9 @@ Uize.module ({
 			},
 
 			eventBindings:{
-				'slider0:Changed.value':_updateValueFromSliders,
-				'slider1:Changed.value':_updateValueFromSliders,
-				'slider2:Changed.value':_updateValueFromSliders
+				'channel0:Changed.value':_updateValueFromSliders,
+				'channel1:Changed.value':_updateValueFromSliders,
+				'channel2:Changed.value':_updateValueFromSliders
 			}
 		});
 	}

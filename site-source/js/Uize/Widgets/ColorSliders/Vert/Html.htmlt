@@ -1,10 +1,10 @@
 <table>
 	<tr>
-		<td id="slider0"><child name="slider0"/></td>
+		<td id="channel0"><child name="channel0"/></td>
 		<td class="horizontalSpacer"></td>
-		<td id="slider1"><child name="slider1"/></td>
+		<td id="channel1"><child name="channel1"/></td>
 		<td class="horizontalSpacer"></td>
-		<td id="slider2"><child name="slider2"/></td>
+		<td id="channel2"><child name="channel2"/></td>
 	</tr>
 	<tr>
 		<td colspan="5" class="verticalSpacer"></td>

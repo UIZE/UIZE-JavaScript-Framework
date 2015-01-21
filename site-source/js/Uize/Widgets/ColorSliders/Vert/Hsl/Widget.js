@@ -47,17 +47,17 @@ Uize.module ({
 			hasLoc:true,
 
 			children:{
-				slider0:{
+				channel0:{
 					widgetClass:Uize.Widgets.HslSliders.Hue.Widget,
 					minValue:0,
 					maxValue:360
 				},
-				slider1:{
+				channel1:{
 					widgetClass:Uize.Widgets.HslSliders.Saturation.Widget,
 					minValue:0,
 					maxValue:100
 				},
-				slider2:{
+				channel2:{
 					widgetClass:Uize.Widgets.HslSliders.Lightness.Widget,
 					minValue:0,
 					maxValue:100
@@ -80,10 +80,10 @@ Uize.module ({
 
 			childBindings:{
 				hue:[
-					'slider1.hue',
-					'slider2.hue'
+					'channel1.hue',
+					'channel2.hue'
 				],
-				saturation:'slider2.saturation'
+				saturation:'channel2.saturation'
 			}
 		});
 	}

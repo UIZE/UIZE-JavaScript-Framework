@@ -63,19 +63,19 @@ Uize.module ({
 			},
 
 			children:{
-				slider0:{
+				channel0:{
 					widgetClass:Uize.Widgets.Slider.Widget,
 					minValue:0,
 					maxValue:255,
 					fullColor:'#f00'
 				},
-				slider1:{
+				channel1:{
 					widgetClass:Uize.Widgets.Slider.Widget,
 					minValue:0,
 					maxValue:255,
 					fullColor:'#0f0'
 				},
-				slider2:{
+				channel2:{
 					widgetClass:Uize.Widgets.Slider.Widget,
 					minValue:0,
 					maxValue:255,
