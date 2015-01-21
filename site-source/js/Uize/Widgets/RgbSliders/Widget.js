@@ -34,9 +34,8 @@
 
 Uize.module ({
 	name:'Uize.Widgets.RgbSliders.Widget',
-	superclass:'Uize.Widget.V2',
+	superclass:'Uize.Widgets.ColorSliders.Vert.Widget',
 	required:[
-		'Uize.Color',
 		'Uize.Widgets.Slider.Widget',
 		'Uize.Widgets.RgbSliders.Html',
 		'Uize.Widgets.RgbSliders.Css'
@@ -44,53 +43,9 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		/*** Private Instance Methods ***/
-			function _updateValueFromSliders () {
-				var
-					m = this,
-					_children = m.children
-				;
-				m._settingSliders ||
-					m.set ({_value:m._color.from ([_children.sliderR,_children.sliderG,_children.sliderB]).to ('hex')})
-				;
-			}
-
 		return _superclass.subclass ({
-			alphastructor:function () {
-				this._color = Uize.Color ();
-			},
-
 			stateProperties:{
-				_sliderHeight:{
-					name:'sliderHeight',
-					value:286
-				},
-				_value:{
-					name:'value',
-					conformer:function (_value) {return Uize.Color.to (_value,'hex')},
-					onChange:function () {
-						var
-							m = this,
-							_colorTuple = m._color.from (m._value).tuple
-						;
-						m._settingSliders = true;
-						m.set ({
-							children:{
-								sliderR:{value:_colorTuple [0]},
-								sliderG:{value:_colorTuple [1]},
-								sliderB:{value:_colorTuple [2]}
-							}
-						});
-						m._settingSliders = false;
-					},
-					value:'000000'
-				},
-
 				/*** derived properties ***/
-					_sliderHeightPx:{
-						name:'sliderHeightPx',
-						derived:'sliderHeight: sliderHeight + "px"'
-					},
 					_valueAsHexRgb:{
 						name:'valueAsHexRgb',
 						derived:'value: "#" + value'
@@ -106,45 +61,28 @@ Uize.module ({
 			},
 
 			children:{
-				sliderR:{
+				slider0:{
 					widgetClass:Uize.Widgets.Slider.Widget,
 					minValue:0,
 					maxValue:255,
-					orientation:'vertical',
-					trackLength:'100%',
 					fullColor:'#f00'
 				},
-				sliderG:{
+				slider1:{
 					widgetClass:Uize.Widgets.Slider.Widget,
 					minValue:0,
 					maxValue:255,
-					orientation:'vertical',
-					trackLength:'100%',
 					fullColor:'#0f0'
 				},
-				sliderB:{
+				slider2:{
 					widgetClass:Uize.Widgets.Slider.Widget,
 					minValue:0,
 					maxValue:255,
-					orientation:'vertical',
-					trackLength:'100%',
 					fullColor:'#00f'
 				}
 			},
 
 			htmlBindings:{
-				valueAsHexRgb:['swatch:html','swatch:style.background'],
-				sliderHeightPx:[
-					'sliderR:style.height',
-					'sliderG:style.height',
-					'sliderB:style.height'
-				]
-			},
-
-			eventBindings:{
-				'sliderR:Changed.value':_updateValueFromSliders,
-				'sliderG:Changed.value':_updateValueFromSliders,
-				'sliderB:Changed.value':_updateValueFromSliders
+				valueAsHexRgb:['swatch:html','swatch:style.background']
 			}
 		});
 	}

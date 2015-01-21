@@ -8,11 +8,11 @@
 		<td colspan="5" class="verticalSpacer"></td>
 	</tr>
 	<tr>
-		<td id="sliderR"><child name="sliderR"/></td>
+		<td id="slider0"><child name="slider0"/></td>
 		<td class="horizontalSpacer"></td>
-		<td id="sliderG"><child name="sliderG"/></td>
+		<td id="slider1"><child name="slider1"/></td>
 		<td class="horizontalSpacer"></td>
-		<td id="sliderB"><child name="sliderB"/></td>
+		<td id="slider2"><child name="slider2"/></td>
 	</tr>
 	<tr>
 		<td colspan="5" class="verticalSpacer"></td>
