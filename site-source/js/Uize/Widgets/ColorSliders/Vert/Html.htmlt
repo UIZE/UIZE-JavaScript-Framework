@@ -1,0 +1,19 @@
+<table>
+	<tr>
+		<td id="slider0"><child name="slider0"/></td>
+		<td class="horizontalSpacer"></td>
+		<td id="slider1"><child name="slider1"/></td>
+		<td class="horizontalSpacer"></td>
+		<td id="slider2"><child name="slider2"/></td>
+	</tr>
+	<tr>
+		<td colspan="5" class="verticalSpacer"></td>
+	</tr>
+	<tr>
+		<td><div id="slider0Label" class="sliderLabel"></div></td>
+		<td width="3"></td>
+		<td><div id="slider1Label" class="sliderLabel"></div></td>
+		<td width="3"></td>
+		<td><div id="slider2Label" class="sliderLabel"></div></td>
+	</tr>
+</table>

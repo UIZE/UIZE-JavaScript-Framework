@@ -1,0 +1,59 @@
+<%@ required ('Uize.Widgets.CssUtil'); %>
+<%
+	var
+		_cssUtil = Uize.Widgets.CssUtil,
+		_boxBorder = _cssUtil.box.border
+	;
+%>
+.`` {
+	border-collapse: collapse;
+	border: none;
+	padding: 0;
+	margin: 0;
+}
+
+.`` tr, .`` td {
+	border: none;
+	padding: 0;
+	margin: 0;
+}
+
+.`verticalSpacer` {
+	height: 3px;
+}
+
+.`horizontalSpacer` {
+	width: 3px;
+}
+
+.`sliderLabel` {
+	border: <%= _boxBorder.width %>px solid <%= _boxBorder.color %>;
+	text-align: center;
+	font-weight: bold;
+	color: #000;
+	background: #eee;
+}
+
+/*** different sizes ***/
+<%
+	Uize.forEach (
+		_cssUtil.sizes,
+		function (_size,_sizeName) {
+			var
+				_sizeOuter = _size.outer,
+				_sizeFont = _size.font,
+				_padding = _sizeOuter - _sizeFont,
+				_paddingTop = Math.round (_padding / 2)
+			;
+			%>
+			/*** <%= _sizeName %> ***/
+				.`<%= _sizeName %>` .`sliderLabel` {
+					line-height: <%= _sizeFont %>px;
+					padding-top: <%= _paddingTop %>px;
+					padding-bottom: <%= _padding - _paddingTop %>px;
+					font-size: <%= _sizeFont %>px;
+				}
+			<%
+		}
+	);
+%>
