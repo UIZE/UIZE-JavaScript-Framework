@@ -111,6 +111,7 @@ Uize.module ({
 					minValue:0,
 					maxValue:255,
 					orientation:'vertical',
+					trackLength:'100%',
 					fullColor:'#f00'
 				},
 				sliderG:{
@@ -118,6 +119,7 @@ Uize.module ({
 					minValue:0,
 					maxValue:255,
 					orientation:'vertical',
+					trackLength:'100%',
 					fullColor:'#0f0'
 				},
 				sliderB:{
@@ -125,6 +127,7 @@ Uize.module ({
 					minValue:0,
 					maxValue:255,
 					orientation:'vertical',
+					trackLength:'100%',
 					fullColor:'#00f'
 				}
 			},
