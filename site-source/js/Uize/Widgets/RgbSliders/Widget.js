@@ -34,9 +34,8 @@
 
 Uize.module ({
 	name:'Uize.Widgets.RgbSliders.Widget',
-	superclass:'Uize.Widgets.ColorSliders.Vert.Widget',
+	superclass:'Uize.Widgets.ColorSliders.Vert.Rgb.Widget',
 	required:[
-		'Uize.Widgets.Slider.Widget',
 		'Uize.Widgets.RgbSliders.Html',
 		'Uize.Widgets.RgbSliders.Css'
 	],
@@ -44,8 +43,6 @@ Uize.module ({
 		'use strict';
 
 		return _superclass.subclass ({
-			hasLoc:true,
-
 			stateProperties:{
 				/*** derived properties ***/
 					_valueAsHexRgb:{
@@ -60,27 +57,6 @@ Uize.module ({
 
 			staticProperties:{
 				cssModule:Uize.Widgets.RgbSliders.Css
-			},
-
-			children:{
-				channel0:{
-					widgetClass:Uize.Widgets.Slider.Widget,
-					minValue:0,
-					maxValue:255,
-					fullColor:'#f00'
-				},
-				channel1:{
-					widgetClass:Uize.Widgets.Slider.Widget,
-					minValue:0,
-					maxValue:255,
-					fullColor:'#0f0'
-				},
-				channel2:{
-					widgetClass:Uize.Widgets.Slider.Widget,
-					minValue:0,
-					maxValue:255,
-					fullColor:'#00f'
-				}
 			},
 
 			htmlBindings:{
