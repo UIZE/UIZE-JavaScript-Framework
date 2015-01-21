@@ -8,11 +8,11 @@
 		<td colspan="5" class="verticalSpacer"></td>
 	</tr>
 	<tr>
-		<td id="sliderRShell"><child name="sliderR" trackLength="100%"/></td>
+		<td id="sliderR"><child name="sliderR" trackLength="100%"/></td>
 		<td class="horizontalSpacer"></td>
-		<td id="sliderGShell"><child name="sliderG" trackLength="100%"/></td>
+		<td id="sliderG"><child name="sliderG" trackLength="100%"/></td>
 		<td class="horizontalSpacer"></td>
-		<td id="sliderBShell"><child name="sliderB" trackLength="100%"/></td>
+		<td id="sliderB"><child name="sliderB" trackLength="100%"/></td>
 	</tr>
 	<tr>
 		<td colspan="5" class="verticalSpacer"></td>
