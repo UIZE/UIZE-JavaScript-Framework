@@ -1,0 +1,7 @@
+channel0Label: H
+channel0Tooltip: Hue
+channel1Label: S
+channel1Tooltip: Saturation
+channel2Label: L
+channel2Tooltip: Lightness
+

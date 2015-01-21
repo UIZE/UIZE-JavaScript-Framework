@@ -44,6 +44,8 @@ Uize.module ({
 		'use strict';
 
 		return _superclass.subclass ({
+			hasLoc:true,
+
 			stateProperties:{
 				/*** derived properties ***/
 					_valueAsHexRgb:{

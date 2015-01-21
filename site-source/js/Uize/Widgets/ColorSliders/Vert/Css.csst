@@ -26,7 +26,7 @@
 	width: 3px;
 }
 
-.`sliderLabel` {
+.`channelLabel` {
 	border: <%= _boxBorder.width %>px solid <%= _boxBorder.color %>;
 	text-align: center;
 	font-weight: bold;
@@ -47,7 +47,7 @@
 			;
 			%>
 			/*** <%= _sizeName %> ***/
-				.`<%= _sizeName %>` .`sliderLabel` {
+				.`<%= _sizeName %>` .`channelLabel` {
 					line-height: <%= _sizeFont %>px;
 					padding-top: <%= _paddingTop %>px;
 					padding-bottom: <%= _padding - _paddingTop %>px;

@@ -10,10 +10,10 @@
 		<td colspan="5" class="verticalSpacer"></td>
 	</tr>
 	<tr>
-		<td><div id="slider0Label" class="sliderLabel"></div></td>
+		<td><div id="channel0Label" class="channelLabel"></div></td>
 		<td width="3"></td>
-		<td><div id="slider1Label" class="sliderLabel"></div></td>
+		<td><div id="channel1Label" class="channelLabel"></div></td>
 		<td width="3"></td>
-		<td><div id="slider2Label" class="sliderLabel"></div></td>
+		<td><div id="channel2Label" class="channelLabel"></div></td>
 	</tr>
 </table>

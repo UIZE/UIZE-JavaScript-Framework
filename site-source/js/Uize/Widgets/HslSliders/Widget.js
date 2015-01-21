@@ -63,9 +63,15 @@ Uize.module ({
 			},
 
 			children:{
-				hue:Uize.Widgets.HslSliders.Hue.Widget,
-				saturation:Uize.Widgets.HslSliders.Saturation.Widget,
-				lightness:Uize.Widgets.HslSliders.Lightness.Widget
+				hue:{
+					widgetClass:Uize.Widgets.HslSliders.Hue.Widget
+				},
+				saturation:{
+					widgetClass:Uize.Widgets.HslSliders.Saturation.Widget
+				},
+				lightness:{
+					widgetClass:Uize.Widgets.HslSliders.Lightness.Widget
+				}
 			},
 
 			childBindings:{

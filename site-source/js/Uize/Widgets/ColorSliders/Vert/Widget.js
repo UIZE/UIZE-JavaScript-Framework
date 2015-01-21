@@ -45,18 +45,17 @@ Uize.module ({
 
 		/*** Private Instance Methods ***/
 			function _updateValueFromSliders () {
-				var
-					m = this,
-					_children = m.children
-				;
-				m._settingSliders ||
-					m.set ({_value:m._color.from ([_children.slider0,_children.slider1,_children.slider2]).to ('hex')})
-				;
+				var m = this;
+				if (!m._settingSliders) {
+					var _children = m.children;
+					Uize.Color.setTuple (m._color.tuple,+_children.slider0,+_children.slider1,+_children.slider2);
+					m.set ({_value:m._color});
+				}
 			}
 
 		return _superclass.subclass ({
 			alphastructor:function () {
-				this._color = Uize.Color ();
+				(this._color = Uize.Color ()).setEncoding (this.Class.colorEncoding);
 			},
 
 			stateProperties:{
@@ -66,7 +65,7 @@ Uize.module ({
 				},
 				_value:{
 					name:'value',
-					conformer:function (_value) {return Uize.Color.to (_value,'hex')},
+					conformer:function (_value) {return Uize.Color.to (_value,this.Class.colorEncoding)},
 					onChange:function () {
 						var
 							m = this,
@@ -97,17 +96,31 @@ Uize.module ({
 			},
 
 			staticProperties:{
-				cssModule:Uize.Widgets.ColorSliders.Vert.Css
+				cssModule:Uize.Widgets.ColorSliders.Vert.Css,
+				colorEncoding:'hex'
 			},
 
-			children:Uize.lookup (['slider0','slider1','slider2'],{orientation:'vertical',trackLength:'100%'}),
+			children:Uize.lookup (
+				['slider0','slider1','slider2'],
+				{
+					orientation:'vertical',
+					trackLength:'100%',
+					increments:1
+				}
+			),
 
 			htmlBindings:{
 				sliderHeightPx:[
 					'slider0:style.height',
 					'slider1:style.height',
 					'slider2:style.height'
-				]
+				],
+				loc_channel0Label:'channel0Label',
+				loc_channel0Tooltip:'channel0Label:title',
+				loc_channel1Label:'channel1Label',
+				loc_channel1Tooltip:'channel1Label:title',
+				loc_channel2Label:'channel2Label',
+				loc_channel2Tooltip:'channel2Label:title'
 			},
 
 			eventBindings:{

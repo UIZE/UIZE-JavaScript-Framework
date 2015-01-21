@@ -18,11 +18,11 @@
 		<td colspan="5" class="verticalSpacer"></td>
 	</tr>
 	<tr>
-		<td><div class="sliderLabel">R</div></td>
+		<td><div id="channel0Label" class="channelLabel"></div></td>
 		<td width="3"></td>
-		<td><div class="sliderLabel">G</div></td>
+		<td><div id="channel1Label" class="channelLabel"></div></td>
 		<td width="3"></td>
-		<td><div class="sliderLabel">B</div></td>
+		<td><div id="channel2Label" class="channelLabel"></div></td>
 	</tr>
 </table>
 
