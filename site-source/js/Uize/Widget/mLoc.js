@@ -54,7 +54,7 @@ Uize.module ({
 								}
 								if (_module.mLoc_hasLoc) {
 									var
-										_isPseudoLocale = _locale == 'pseudo',
+										_isPseudoLocale = _locale == 'en-ZZ',
 										_locModuleNamespace = _moduleName.replace (/\.Widget$/,'.Loc.')
 									;
 									_isPseudoLocale
