@@ -1,0 +1,21 @@
+<table>
+	<tr>
+		<td><child name="rgbButton" class="button buttingRight"/></td>
+		<td><child name="hslButton" class="button buttingLeft"/></td>
+	</tr>
+	<tr>
+		<td colspan="5" class="verticalSpacer"></td>
+	</tr>
+	<tr>
+		<td colspan="2"><div id="swatch" class="swatch"></div></td>
+	</tr>
+	<tr>
+		<td colspan="5" class="verticalSpacer"></td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<div id="rgb"><child name="rgb"/></div>
+			<div id="hsl"><child name="hsl"/></div>
+		</td>
+	</tr>
+</table>

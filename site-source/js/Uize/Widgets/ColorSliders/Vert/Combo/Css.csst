@@ -1,0 +1,63 @@
+<%@ required ('Uize.Widgets.CssUtil'); %>
+<%
+	var
+		_cssUtil = Uize.Widgets.CssUtil,
+		_boxBorder = _cssUtil.box.border
+	;
+%>
+
+.`` {
+	border-collapse: collapse;
+	border: none;
+	padding: 0;
+	margin: 0;
+}
+
+.`` tr, .`` td {
+	border: none;
+	padding: 0;
+	margin: 0;
+}
+
+.`verticalSpacer` {
+	height: 3px;
+}
+
+.`button` {
+	padding-left: 0!important;
+	padding-right: 0!important;
+	width: 100%;
+	box-sizing: border-box;
+	text-align: center!important;
+}
+
+.`buttingLeft` {
+	border-top-left-radius: 0!important;
+	border-bottom-left-radius: 0!important;
+}
+
+.`buttingRight` {
+	border-top-right-radius: 0!important;
+	border-bottom-right-radius: 0!important;
+}
+
+.`swatch` {
+	border: <%= _boxBorder.width %>px solid <%= _boxBorder.color %>;
+	box-sizing: border-box;
+}
+
+/*** different sizes ***/
+<%
+	var _sizes = _cssUtil.sizes;
+	Uize.forEach (
+		_sizes,
+		function (_size,_sizeName) {
+			%>
+			/*** <%= _sizeName %> ***/
+				.`<%= _sizeName %>` .`swatch` {
+					height: <%= _size.outer %>px;
+				}
+			<%
+		}
+	);
+%>
