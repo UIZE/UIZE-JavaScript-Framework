@@ -59,13 +59,25 @@ Uize.module ({
 
 			function _updateUi () {
 				var m = this;
+
+				function _updateDimsObj (_name,_node) {
+					var
+						_dimsObjects = m._dimsObjects || (m._dimsObjects = {}),
+						_newDimsObject = _Uize_Dom_Pos.getDimensions (_node)
+					;
+					if (!_dimsObjects [_name] || (_newDimsObject.width && _newDimsObject.height))
+						_dimsObjects [_name] = _newDimsObject
+					;
+					return _dimsObjects [_name];
+				}
+
 				if (m.isWired) {
 					var
 						_orientationNo = m._orientationNo,
-						_trackDimsObj = _Uize_Dom_Pos.getDimensions (m._trackNode),
+						_trackDimsObj = _updateDimsObj ('track',m._trackNode),
 						_trackDims = [_trackDimsObj.width,_trackDimsObj.height],
 						_knobNode = m._knobNode,
-						_knobDimsObj = _Uize_Dom_Pos.getDimensions (_knobNode),
+						_knobDimsObj = _updateDimsObj ('knob',_knobNode),
 						_knobDims = [_knobDimsObj.width,_knobDimsObj.height],
 						_scaleFunc = m._scaleFunc,
 						_scaleMin = _scaleFunc(m._minValue),
