@@ -104,7 +104,7 @@ Uize.require (
 		'Uize.Color.xHsv',
 		'Uize.Color.xCmyk',
 		'Uize.Color.xSvgColors',
-		'Uize.Widgets.RgbSliders.Widget',
+		'Uize.Widgets.ColorSliders.Vert.Combo.Widget',
 		'Uize.Widgets.ColorInfo.Widget',
 		'Uize.Widget.TextInput',
 		'Uize.Util.PropertyAdapter'
@@ -119,11 +119,10 @@ Uize.require (
 			Uize.Util.PropertyAdapter ({
 				propertyA:page.addChild (
 					'colorPicker',
-					Uize.Widgets.RgbSliders.Widget,
+					Uize.Widgets.ColorSliders.Vert.Combo.Widget,
 					{
 						value:'ee82ee',
 						built:false,
-						sliderWidth:40,
 						sliderHeight:270
 					}
 				),
