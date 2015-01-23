@@ -100,6 +100,7 @@ Uize.module ({
 										action:function () {this.parent.set ({mode:_mode})}
 									}
 								),
+								childrenLinked:Uize.pairUp (_mode,_modeSelectedProperty),
 								stateProperties:Uize.pairUp (
 									_modeSelectedProperty,{derived:'mode: mode == "' + _mode + '"'}
 								),
@@ -119,7 +120,12 @@ Uize.module ({
 
 			stateProperties:{
 				mode:{value:_modes [0]},
-				value:{value:'000'},
+				value:{
+					value:'fc6',
+					conformer:function (_value) {
+						return Uize.Color.to (_value,'hex');
+					}
+				},
 				sliderHeight:{value:250},
 
 				/*** derived properties ***/
