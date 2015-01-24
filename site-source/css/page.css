@@ -111,18 +111,6 @@
 		margin-right: 2px;
 	}
 
-	/*** form fields ***/
-		input[type="text"], textarea, select {
-			border: 1px solid #555;
-			color: #000;
-			background: #fff;
-			padding: 2px;
-		}
-		input[type="text"]:focus, textarea:focus, select:focus {
-			border: 2px solid #ffa200;
-			padding: 1px;
-		}
-
 	/*** tooltips ***/
 		.genericTooltip {
 			display: none;
