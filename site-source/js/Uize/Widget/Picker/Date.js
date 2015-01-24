@@ -95,6 +95,7 @@ Uize.module ({
 
 		/*** Override Initial Values for Inherited State Properties ***/
 			_class.set ({
+				value:undefined,
 				dialogWidgetClass:'Uize.Widget.Dialog.Picker.Date',
 					/*?
 						State Properties
