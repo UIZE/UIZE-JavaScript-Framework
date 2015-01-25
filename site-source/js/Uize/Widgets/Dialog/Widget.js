@@ -40,12 +40,17 @@ Uize.module ({
 			mixins:Uize.Widget.mV2,
 
 			set:{
-				html:Uize.Widgets.Dialog.Html
+				html:Uize.Widgets.Dialog.Html,
+				built:false
 			},
 
 			staticProperties:{
 				cssModule:Uize.Widgets.Dialog.Css,
 				buttonWidgetClass:Uize.Widgets.Button.Widget
+			},
+
+			children:{
+				contents:{}
 			}
 		});
 	}

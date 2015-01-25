@@ -31,7 +31,9 @@
 		</div>
 
 	<!-- contents -->
-		<div id="<% .idPrefix %>-contents" class="<%= m.cssClass ('contents') %>"></div>
+		<div id="<% .idPrefix %>-contents" class="<%= m.cssClass ('contents') %>"><%=
+			m.childHtml ({name:'contents'})
+		%></div>
 
 	<!-- status bar -->
 		<div class="<%= m.cssClass ('bar') %> <%= m.cssClass ('statusBar') %>">
