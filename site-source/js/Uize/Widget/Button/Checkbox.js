@@ -28,22 +28,12 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		/*** Class Constructor ***/
-			var
-				_class = _superclass.subclass (
-					function () {
-						var m = this;
-
-						/*** initialization ***/
-							m.wire ('Click',function () {m.toggle ('selected')});
-					}
-				)
-			;
-
-		/*** Override Initial Values for Inherited State Properties ***/
-			_class.set ({clickToDeselect:true});
-
-		return _class;
+		return _superclass.subclass ({
+			set:{
+				clickToSelect:true,
+				clickToDeselect:true
+			}
+		});
 	}
 });
 
