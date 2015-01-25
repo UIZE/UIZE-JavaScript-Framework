@@ -12,7 +12,7 @@
 		</tr>
 		<tr>
 			<td id="indentCharsLabel"></td>
-			<td><input id="indentChars" type="text"/></td>
+			<td><child name="indentChars"/></td>
 		</tr>
 		<tr>
 			<td id="linebreakCharsLabel"></td>
@@ -29,11 +29,11 @@
 		</tr>
 		<tr>
 			<td id="keyDelimiterLabel"></td>
-			<td><input id="keyDelimiter" type="text"/></td>
+			<td><child name="keyDelimiter"/></td>
 		</tr>
 		<tr>
 			<td id="padKeysLabel"></td>
-			<td><child name="padKeys" size="tiny"/></td>
+			<td><child name="padKeys"/></td>
 		</tr>
 		<tr>
 			<td id="keyAlignLabel"></td>
@@ -57,7 +57,7 @@
 		</tr>
 		<tr>
 			<td id="sortKeysLabel"></td>
-			<td><child name="sortKeys" size="tiny"/></td>
+			<td><child name="sortKeys"/></td>
 		</tr>
 	</table>
 	<child name="sourceVsResult" class="monospace"/>

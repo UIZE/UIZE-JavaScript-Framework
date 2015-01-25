@@ -2,19 +2,19 @@
 	<table class="settings">
 		<tr>
 			<td id="accentingLabel"></td>
-			<td><child name="accenting" size="tiny"/></td>
+			<td><child name="accenting"/></td>
 		</tr>
 		<tr>
 			<td id="wrapperLabel"></td>
-			<td><input id="wrapper" type="text"/></td>
+			<td><child name="wrapper"/></td>
 		</tr>
 		<tr>
 			<td id="expansionLabel"></td>
-			<td><child name="expansion" size="tiny"/></td>
+			<td><child name="expansion"/></td>
 		</tr>
 		<tr>
 			<td id="expansionCharLabel"></td>
-			<td><input id="expansionChar" type="text"/></td>
+			<td><child name="expansionChar"/></td>
 		</tr>
 	</table>
 	<child name="sourceVsResult"/>

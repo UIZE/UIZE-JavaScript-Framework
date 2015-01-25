@@ -38,6 +38,7 @@ Uize.module ({
 	required:[
 		'Uize.Widgets.Tools.JsonSerializer.Html',
 		'Uize.Widgets.Tools.JsonSerializer.Css',
+		'Uize.Widgets.Form.Input.Text.Widget',
 		'Uize.Widgets.Button.Toggle.OnOff.Widget',
 		'Uize.Widgets.Tools.SourceVsResult.Widget',
 		'Uize.Json'
@@ -125,6 +126,8 @@ Uize.module ({
 
 			children:{
 				sourceVsResult:{widgetClass:Uize.Widgets.Tools.SourceVsResult.Widget},
+				indentChars:{widgetClass:Uize.Widgets.Form.Input.Text.Widget},
+				keyDelimiter:{widgetClass:Uize.Widgets.Form.Input.Text.Widget},
 				padKeys:_onOffTogglerWidgetProperties,
 				sortKeys:_onOffTogglerWidgetProperties
 			},
@@ -166,17 +169,11 @@ Uize.module ({
 						sortKeys:true
 					});
 				},
-				'#indentChars:keyup':function (_event) {
-					this.set ({indentChars:_event.target.value});
-				},
 				'#linebreakChars:keyup':function (_event) {
 					this.set ({linebreakChars:_event.target.value});
 				},
 				'#quoteChar:change':function (_event) {
 					this.set ({quoteChar:_event.target.value});
-				},
-				'#keyDelimiter:keyup':function (_event) {
-					this.set ({keyDelimiter:_event.target.value});
 				},
 				'#keyAlign:change':function (_event) {
 					this.set ({keyAlign:_event.target.value});
@@ -191,6 +188,8 @@ Uize.module ({
 				loc_resultViewButtonLabel:'->sourceVsResult.resultViewButtonLabel',
 				source:'sourceVsResult.source',
 				result:'->sourceVsResult.result',
+				indentChars:'indentChars.value',
+				keyDelimiter:'keyDelimiter.value',
 				padKeys:'padKeys.selected',
 				sortKeys:'sortKeys.selected'
 			},
@@ -201,13 +200,11 @@ Uize.module ({
 				loc_presetCompact:'presetCompact',
 				loc_presetPaddedAndSorted:'presetPaddedAndSorted',
 				loc_indentCharsLabel:'indentCharsLabel',
-				indentChars:'indentChars',
 				loc_linebreakCharsLabel:'linebreakCharsLabel',
 				linebreakChars:'linebreakChars',
 				loc_quoteCharLabel:'quoteCharLabel',
 				quoteChar:'quoteChar',
 				loc_keyDelimiterLabel:'keyDelimiterLabel',
-				keyDelimiter:'keyDelimiter',
 				loc_padKeysLabel:'padKeysLabel',
 				loc_keyAlignLabel:'keyAlignLabel',
 				loc_keyAlignLeft:'keyAlignLeft',

@@ -40,6 +40,7 @@ Uize.module ({
 		'Uize.Widgets.Tools.PseudoLocalizer.Css',
 		'Uize.Widgets.Button.Toggle.OnOff.Widget',
 		'Uize.Widgets.Slider.Widget',
+		'Uize.Widgets.Form.Input.Text.Widget',
 		'Uize.Widgets.Tools.SourceVsResult.Widget',
 		'Uize.Loc.Pseudo',
 		'Uize.Util.RegExpComposition'
@@ -100,6 +101,7 @@ Uize.module ({
 
 			children:{
 				accenting:{widgetClass:Uize.Widgets.Button.Toggle.OnOff.Widget},
+				wrapper:{widgetClass:Uize.Widgets.Form.Input.Text.Widget},
 				expansion:{
 					widgetClass:Uize.Widgets.Slider.Widget,
 					minValue:1,
@@ -107,16 +109,8 @@ Uize.module ({
 					increments:0,
 					orientation:'horizontal'
 				},
+				expansionChar:{widgetClass:Uize.Widgets.Form.Input.Text.Widget},
 				sourceVsResult:{widgetClass:Uize.Widgets.Tools.SourceVsResult.Widget}
-			},
-
-			eventBindings:{
-				'#wrapper:keyup':function (_event) {
-					this.set ({wrapper:_event.target.value});
-				},
-				'#expansionChar:keyup':function (_event) {
-					this.set ({expansionChar:_event.target.value});
-				}
 			},
 
 			childBindings:{
@@ -125,16 +119,16 @@ Uize.module ({
 				source:'sourceVsResult.source',
 				result:'->sourceVsResult.result',
 				accenting:'accenting.selected',
-				expansion:'expansion.value'
+				wrapper:'wrapper.value',
+				expansion:'expansion.value',
+				expansionChar:'expansionChar.value'
 			},
 
 			htmlBindings:{
 				loc_accentingLabel:'accentingLabel',
 				loc_wrapperLabel:'wrapperLabel',
-				wrapper:'wrapper',
 				loc_expansionLabel:'expansionLabel',
-				loc_expansionCharLabel:'expansionCharLabel',
-				expansionChar:'expansionChar'
+				loc_expansionCharLabel:'expansionCharLabel'
 			}
 		});
 	}

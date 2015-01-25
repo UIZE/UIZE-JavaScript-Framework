@@ -3,7 +3,7 @@
 <head>
 	<title>Basic Color Grid | JavaScript Examples | UIZE JavaScript Framework</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-	<meta name="keywords" content="color Uize.Widget.ColorGrid"/>
+	<meta name="keywords" content="color Uize.Widget.ColorGrid Uize.Util.PropertyAdapter"/>
 	<meta name="description" content="See an example of a color grid, where the color swatches in the grid are interpolated from RGB corner colors that can be dynamically set by the user."/>
 	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
 	<link rel="stylesheet" href="../css/page.css"/>
@@ -14,6 +14,10 @@
 			height:30px;
 			margin-left:1px;
 			margin-top:1px;
+		}
+
+		.input {
+			width: 100px;
 		}
 	</style>
 </head>
@@ -39,7 +43,7 @@
 	<!-- explanation copy -->
 
 	<div class="explanation">
-		<p>In this example, an instance of the <a href="../reference/Uize.Widget.ColorGrid.html"><code>Uize.Widget.ColorGrid</code></a> class is wired up to provide a color grid that shows a color matrix (or color grid) of all the interpolated colors between four adjustable corner colors. Enter hex RGB values for any colors at any of the four corners, then click the "UPDATE" button below the grid to see the result. This grid is 10x10 and represents 100 colors, but the widget can be configured for different numbers of divisions on both the X and Y axes by setting the <code>divisionsX</code> and <code>divisionsY</code> state properties, respectively. With additional code, a subclass or other widget could use the color grid widget as a color selection palette, allowing the user to explore color ranges in 2D.</p>
+		<p>In this example, an instance of the <a href="../reference/Uize.Widget.ColorGrid.html"><code>Uize.Widget.ColorGrid</code></a> class is wired up to provide a color grid that shows a color matrix (or color grid) of all the interpolated colors between four adjustable corner colors. Enter hex RGB values for any colors at any of the four corners and the grid will automatically update while you type. This grid is 10x10 and represents 100 colors, but the widget can be configured for different numbers of divisions on both the X and Y axes by setting the <code>divisionsX</code> and <code>divisionsY</code> state properties, respectively. With additional code, a subclass or other widget could use the color grid widget as a color selection palette, allowing the user to explore color ranges in 2D.</p>
 	</div>
 
 	<!-- "wireframe" for the UI -->
@@ -47,19 +51,19 @@
 	<form>
 		<table border="0" cellspacing="0" cellpadding="3" style="margin:auto;">
 			<tr>
-				<td><input id="page-colorTopLeft" type="text" size="6"/></td>
+				<td id="page-colorTopLeft"></td>
 				<td></td>
-				<td><input id="page-colorTopRight" type="text" size="6"/></td>
+				<td id="page-colorTopRight"></td>
 			</tr>
 			<tr>
 				<td></td>
-				<td id="page_colorGrid"></td>
+				<td id="page-colorGrid"></td>
 				<td></td>
 			</tr>
 			<tr>
-				<td><input id="page-colorBottomLeft" type="text" size="6"/></td>
-				<td id="page-updateButton" align="center"></td>
-				<td><input id="page-colorBottomRight" type="text" size="6"/></td>
+				<td id="page-colorBottomLeft"></td>
+				<td></td>
+				<td id="page-colorBottomRight"></td>
 			</tr>
 		</table>
 	</form>
@@ -73,10 +77,13 @@ Uize.require (
 		'UizeSite.Page.Example',
 		'Uize.Widget.ColorGrid',
 		'Uize.Templates.ColorGrid',
-		'Uize.Widgets.Button.Widget'
+		'Uize.Widgets.Form.Input.Text.Widget',
+		'Uize.Util.PropertyAdapter'
 	],
 	function () {
 		'use strict';
+
+		var colorNames = ['colorTopLeft','colorTopRight','colorBottomLeft','colorBottomRight'];
 
 		/*** create the example page widget ***/
 			var page = window.page = UizeSite.Page.Example ();
@@ -84,28 +91,25 @@ Uize.require (
 		/*** create the Uize.Widget.ColorGrid object ***/
 			var colorGrid = page.addChild ('colorGrid',Uize.Widget.ColorGrid,{built:false,html:Uize.Templates.ColorGrid});
 
-			function updateColorGridFromInputs () {
-				colorGrid.set ({colorTopLeft:page.getNodeValue ('colorTopLeft')});
-				colorGrid.set ({colorTopRight:page.getNodeValue ('colorTopRight')});
-				colorGrid.set ({colorBottomLeft:page.getNodeValue ('colorBottomLeft')});
-				colorGrid.set ({colorBottomRight:page.getNodeValue ('colorBottomRight')});
-			}
-
-		/*** initialize input nodes ***/
-			page.setNodeValue ('colorTopLeft',colorGrid.get ('colorTopLeft'));
-			page.setNodeValue ('colorTopRight',colorGrid.get ('colorTopRight'));
-			page.setNodeValue ('colorBottomLeft',colorGrid.get ('colorBottomLeft'));
-			page.setNodeValue ('colorBottomRight',colorGrid.get ('colorBottomRight'));
-
-		/*** add update button ***/
-			page.addChild (
-				'updateButton',
-				Uize.Widgets.Button.Widget,
-				{
-					built:false,
-					text:'UPDATE',
-					size:'small',
-					action:updateColorGridFromInputs
+		/*** create input widgets ***/
+			Uize.forEach (
+				colorNames,
+				function (colorName) {
+					Uize.Util.PropertyAdapter ({
+						propertyA:page.addChild (
+							colorName,
+							Uize.Widgets.Form.Input.Text.Widget,
+							{
+								built:false,
+								value:colorGrid.get (colorName),
+								extraClasses:'input'
+							}
+						),
+						propertyB:{
+							instance:colorGrid,
+							property:colorName
+						}
+					});
 				}
 			);
 

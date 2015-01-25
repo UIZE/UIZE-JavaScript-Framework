@@ -3,7 +3,7 @@
 <head>
 	<title>Color Format Converter | JavaScript Examples | UIZE JavaScript Framework</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-	<meta name="keywords" content="tool color Uize.Color Uize.Color.xHsv Uize.Color.xSvgColors Uize.Color.xCmyk Uize.Widget.TextInput Uize.Util.PropertyAdapter"/>
+	<meta name="keywords" content="tool color Uize.Color Uize.Color.xHsv Uize.Color.xSvgColors Uize.Color.xCmyk Uize.Widgets.Form.Input.Text.Widget Uize.Util.PropertyAdapter"/>
 	<meta name="description" content="Easily convert color values from one format to another. Convert between RGB hex, RGB tuple string, HSL, HSV, CMYK, and SVG color names."/>
 	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
 	<link rel="stylesheet" href="../css/page.css"/>
@@ -61,27 +61,27 @@
 						</thead>
 						<tr>
 							<td class="fieldLabel">RGB (Red, Green, Blue) Hex Value</td>
-							<td><input id="page_colorAsRgbHex-input" type="text"/></td>
+							<td id="page-colorAsRgbHex"></td>
 						</tr>
 						<tr>
 							<td class="fieldLabel">RGB (Red, Green, Blue) Tuple</td>
-							<td><input id="page_colorAsRgb-input" type="text"/></td>
+							<td id="page-colorAsRgb"></td>
 						</tr>
 						<tr>
 							<td class="fieldLabel">HSL (Hue, Saturation, Lightness) Tuple</td>
-							<td><input id="page_colorAsHsl-input" type="text"/></td>
+							<td id="page-colorAsHsl"></td>
 						</tr>
 						<tr>
 							<td class="fieldLabel">HSV (Hue, Saturation, Value) Tuple</td>
-							<td><input id="page_colorAsHsv-input" type="text"/></td>
+							<td id="page-colorAsHsv"></td>
 						</tr>
 						<tr>
 							<td class="fieldLabel">CMYK (Cyan, Magenta, Yellow, Key) Tuple</td>
-							<td><input id="page_colorAsCmyk-input" type="text"/></td>
+							<td id="page-colorAsCmyk"></td>
 						</tr>
 						<tr>
 							<td class="fieldLabel">SVG Color Name (hex, if no SVG name)</td>
-							<td><input id="page_colorAsName-input" type="text"/></td>
+							<td id="page-colorAsName"></td>
 						</tr>
 					</table>
 				</td>
@@ -106,7 +106,7 @@ Uize.require (
 		'Uize.Color.xSvgColors',
 		'Uize.Widgets.ColorSliders.Vert.Combo.Widget',
 		'Uize.Widgets.ColorInfo.Widget',
-		'Uize.Widget.TextInput',
+		'Uize.Widgets.Form.Input.Text.Widget',
 		'Uize.Util.PropertyAdapter'
 	],
 	function () {
@@ -133,7 +133,7 @@ Uize.require (
 			function createColorFormatTextInput (widgetName,colorEncoding) {
 				Uize.Util.PropertyAdapter ({
 					propertyA:page.children.colorPicker,
-					propertyB:page.addChild (widgetName,Uize.Widget.TextInput),
+					propertyB:page.addChild (widgetName,Uize.Widgets.Form.Input.Text.Widget,{built:false}),
 					valueAdapter:Uize.Color.adapter ('hex',colorEncoding)
 				});
 			}
