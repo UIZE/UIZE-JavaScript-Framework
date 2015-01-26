@@ -1,0 +1,51 @@
+<%@ required ('Uize.Widgets.CssUtil'); %>
+<%
+	var _cssUtil = Uize.Widgets.CssUtil;
+%>
+.`` {
+	position: relative;
+}
+
+.`inputShell` {
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+
+.`` input {
+	font-family: "Courier New";
+	font-weight: bold;
+	color: #000;
+	width: 100%;
+	border-width: <%= _cssUtil.box.border.width %>px;
+	border-color: <%= _cssUtil.box.border.color %>;
+	border-style: solid;
+	box-sizing: border-box;
+}
+
+.`button` {
+	position: absolute;
+	right: 0;
+	top: 0;
+}
+
+/*** styling for different sizes ***/
+<%
+	Uize.forEach (
+		Uize.Widgets.CssUtil.sizes,
+		function (_size,_sizeName) {
+%>	/*** <%= _sizeName %> ***/
+		.`<%= _sizeName %>` {
+			height: <%= _size.outer %>px;
+		}
+		.`<%= _sizeName %>` .`inputShell` {
+			right: <%= _size.outer - 1 %>px;
+		}
+		.`<%= _sizeName %>` input {
+			height: <%= _size.outer %>px;
+			font-size: <%= _size.font %>px;
+			padding-left: <%= 3 + _size.sizeNo * 2 %>px;
+		}
+<%		}
+	);
+%>

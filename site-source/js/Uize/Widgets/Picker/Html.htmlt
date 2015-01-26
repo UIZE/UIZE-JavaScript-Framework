@@ -1,0 +1,4 @@
+<div>
+	<div class="inputShell"><input id="input" type="text"/></div>
+	<div class="button"><child name="selector"/></div>
+</div>
