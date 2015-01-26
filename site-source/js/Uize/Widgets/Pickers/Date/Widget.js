@@ -35,7 +35,7 @@
 Uize.module ({
 	name:'Uize.Widgets.Pickers.Date.Widget',
 	superclass:'Uize.Widgets.Picker.Widget',
-	required:'Uize.Widgets.Button.Square.Widget',
+	required:'Uize.Widgets.Buttons.Date.Widget',
 	builder:function (_superclass) {
 		'use strict';
 
@@ -68,7 +68,7 @@ Uize.module ({
 								NOTES
 								- the initial value is ='Uize.Widgets.Pickers.Dialogs.Date.Widget'=
 					*/
-				selectorButtonWidgetClass:Uize.Widgets.Button.Square.Widget,
+				selectorButtonWidgetClass:Uize.Widgets.Buttons.Date.Widget,
 				pipedProperties:[
 					'displayFormat',
 						/*?
