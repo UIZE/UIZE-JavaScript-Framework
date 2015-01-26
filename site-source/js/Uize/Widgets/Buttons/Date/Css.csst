@@ -1,0 +1,34 @@
+.`icon` {
+	position: absolute;
+	background: url(selector-icon.jpg) center center no-repeat;
+	background-size: 90%;
+	opacity: .7;
+}
+
+/*** different sizes ***/
+<%
+	function _sizeStyleProperties (_sizeNo) {
+		var _pos = _sizeNo + 2;
+		%>
+		left: <%= _pos %>px;
+		top: <%= _pos %>px;
+		right: <%= _pos %>px;
+		bottom: <%= _pos %>px;
+		<%
+	}
+%>
+	.`tiny` .`icon` {
+		<% _sizeStyleProperties (0) %>
+	}
+
+	.`small` .`icon` {
+		<% _sizeStyleProperties (1) %>
+	}
+
+	.`medium` .`icon` {
+		<% _sizeStyleProperties (2) %>
+	}
+
+	.`large` .`icon` {
+		<% _sizeStyleProperties (3) %>
+	}
