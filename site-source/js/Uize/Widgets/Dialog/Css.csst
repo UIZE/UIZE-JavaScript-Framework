@@ -1,3 +1,10 @@
+<%@ required ('Uize.Widgets.CssUtil'); %>
+<%
+	var
+		_cssUtil = Uize.Widgets.CssUtil,
+		_chromeBgColor = _cssUtil.chrome.bgColor
+	;
+%>
 .`` {
 	position: absolute;
 	display: none;
@@ -41,7 +48,7 @@
 			font-size: 14px;
 			font-family: Arial, Helvetica, Verdana;
 			margin: -1px;
-			background: #ccc repeat left top;
+			background: <%= _chromeBgColor %> repeat left top;
 		}
 		/*** title bar ***/
 			.`titleBar` {
@@ -50,7 +57,7 @@
 			.`title` {
 				width: 100%;
 				color: #000;
-				text-shadow: -1px -1px 2px #eee, -1px 1px 2px #eee, 0 -1px 2px #eee, 0 1px 2px #eee;
+				font-weight: bold;
 				line-height: 22px;
 				text-transform: uppercase;
 				letter-spacing: 1px;
@@ -81,7 +88,7 @@
 	/*** dialog corners / edges ***/
 		.`cornerEastWest`, .`cornerNorthSouth` {
 			position: absolute;
-			background: #ccc;
+			background: <%= _chromeBgColor %>;
 		}
 		.`cornerEastWest` {
 			height: 100%;
@@ -98,7 +105,7 @@
 			position: absolute;
 			width: 31px;
 			height: 31px;
-			background: #ccc;
+			background: <%= _chromeBgColor %>;
 		}
 		/*** edge positioning ***/
 			.`edgeWest` {left: -5px;}
