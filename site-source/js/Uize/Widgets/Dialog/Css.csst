@@ -56,7 +56,7 @@
 				letter-spacing: 1px;
 			}
 			.`closeButton` {
-				display: block;
+				display: none;
 				position: absolute;
 				right: 2px;
 				top: 0;
@@ -70,7 +70,6 @@
 			{
 				position: absolute;
 				bottom: 0;
-				min-width: 55px;
 			}
 			.`cancelButton` {
 				left: 2px;

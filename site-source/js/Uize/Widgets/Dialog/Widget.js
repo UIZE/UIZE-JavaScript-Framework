@@ -41,6 +41,9 @@ Uize.module ({
 
 			set:{
 				html:Uize.Widgets.Dialog.Html,
+				children:{
+					ok:{flavor:'primary'}
+				},
 				built:false
 			},
 
