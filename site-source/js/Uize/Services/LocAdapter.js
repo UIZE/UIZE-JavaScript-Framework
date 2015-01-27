@@ -384,22 +384,24 @@ Uize.module ({
 					Uize.forEach (
 						_resources,
 						function (_resourceFileStrings,_resourceFileSubPath) {
-							var _resourceFileFullPath =
-								_project.rootFolderPath + '/' + m.getLanguageResourcePath (_resourceFileSubPath,_language)
-							;
-							_fileSystem.writeFile ({
-								path:_resourceFileFullPath,
-								contents:Uize.Build.Util.Whitespace.alterNormalizedWhitespace (
-									m.serializeResourceFile (
-										_project.skipEmptyValues === true
-											? _removeEmptyStrings (_resourceFileStrings)
-											: _resourceFileStrings,
-										_getResourceFileInfo (m,_resourceFileFullPath,_language)
+							if (m.doesBrandSupportLanguage (m.getResourceFileBrand (_resourceFileSubPath),_language)) {
+								var _resourceFileFullPath =
+									_project.rootFolderPath + '/' + m.getLanguageResourcePath (_resourceFileSubPath,_language)
+								;
+								_fileSystem.writeFile ({
+									path:_resourceFileFullPath,
+									contents:Uize.Build.Util.Whitespace.alterNormalizedWhitespace (
+										m.serializeResourceFile (
+											_project.skipEmptyValues === true
+												? _removeEmptyStrings (_resourceFileStrings)
+												: _resourceFileStrings,
+											_getResourceFileInfo (m,_resourceFileFullPath,_language)
+										),
+										_project.resourceFileWhitespace
 									),
-									_project.resourceFileWhitespace
-								),
-								encoding:_project.resourceFileEncoding
-							});
+									encoding:_project.resourceFileEncoding
+								});
+							}
 						}
 					);
 					/*?
