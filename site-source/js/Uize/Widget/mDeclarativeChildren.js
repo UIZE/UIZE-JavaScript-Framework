@@ -109,7 +109,10 @@ Uize.module ({
 								_previous,
 								{
 									_widgetClass:_childWidgetClass,
-									_properties:Uize.copyInto (_previous._properties || {},_childProperties),
+									_properties:_childDeclarationIsFunction
+										? _childProperties
+										: Uize.copyInto (_previous._properties || {},_childProperties)
+									,
 									_isFunction:_childDeclarationIsFunction
 								}
 							);
