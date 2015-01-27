@@ -34,11 +34,8 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		/*** Class Constructor ***/
-			var _class = _superclass.subclass ();
-
-		/*** Override Initial Values for Inherited State Properties ***/
-			_class.set ({
+		return _superclass.subclass ({
+			set:{
 				valueWidgetClass:Uize.Widget.Calendar,
 				pipedProperties:[
 					'displayFormat',
@@ -74,9 +71,8 @@ Uize.module ({
 									- the initial value is =undefined=
 						*/
 				]
-			});
-
-		return _class;
+			}
+		});
 	}
 });
 

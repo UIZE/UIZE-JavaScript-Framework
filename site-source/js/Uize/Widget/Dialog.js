@@ -48,6 +48,7 @@ Uize.module ({
 				_updateUiPositionIfShown = 'updateUiPositionIfShown',
 
 			/*** General Variables ***/
+				_class,
 				_sacredEmptyObject = {},
 				_zIndexSlots = {},
 				_totalShown = 0,
@@ -96,7 +97,7 @@ Uize.module ({
 				_updateTextForButton (_children.cancel,m._cancelText || m._defaultCancelText);
 			}
 
-		var _class = _superclass.subclass ({
+		return _class = _superclass.subclass ({
 			alphastructor:function () {
 				var m = this;
 
@@ -872,8 +873,6 @@ Uize.module ({
 				openDialogs:{}
 			}
 		});
-
-		return _class;
 	}
 });
 

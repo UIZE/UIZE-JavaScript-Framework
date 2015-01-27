@@ -72,11 +72,8 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		/*** Class Constructor ***/
-			var _class = _superclass.subclass ();
-
-		/*** State Properties ***/
-			_class.stateProperties ({
+		return _superclass.subclass ({
+			stateProperties:{
 				_displayFormat:{
 					name:'displayFormat',
 					value:'{YYYY}-{MM}-{DD}'
@@ -91,10 +88,9 @@ Uize.module ({
 								- the initial value is ='{YYYY}-{MM}-{DD}'=
 					*/
 				}
-			});
+			},
 
-		/*** Override Initial Values for Inherited State Properties ***/
-			_class.set ({
+			set:{
 				value:undefined,
 				dialogWidgetClass:'Uize.Widget.Dialog.Picker.Date',
 					/*?
@@ -144,9 +140,8 @@ Uize.module ({
 						*/
 				],
 				valueFormatter:function (_value) {return Uize.Date.Formatter.format (_value,this._displayFormat)}
-			});
-
-		return _class;
+			}
+		});
 	}
 });
 

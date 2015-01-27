@@ -29,37 +29,35 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		/*** Class Constructor ***/
-			var _class = _superclass.subclass ();
+		return _superclass.subclass ({
+			instanceMethods:{
+				addChild:function (_childName, _childInstanceOrClass, _elementProperties) {
+					var
+						m = this,
+						_parentForm = m.parent,
+						_childElement = _superclass.doMy (
+							m,
+							'addChild',
+							[
+								_childName,
+								_childInstanceOrClass || Uize.Widget.FormElement,
+								Uize.copyInto(
+									{
+										value:_parentForm
+											? (m.parent.get('value') || {})[_childName]
+											: null
+									},
+									_elementProperties
+								)
+							]
+						)
+					;
 
-		/*** Override addChild method to provide extra handling ***/
-			_class.prototype.addChild = function (_childName, _childInstanceOrClass, _elementProperties) {
-				var
-					m = this,
-					_parentForm = m.parent,
-					_childElement = _superclass.doMy (
-						m,
-						'addChild',
-						[
-							_childName,
-							_childInstanceOrClass || Uize.Widget.FormElement,
-							Uize.copyInto(
-								{
-									value:_parentForm
-										? (m.parent.get('value') || {})[_childName]
-										: null
-								},
-								_elementProperties
-							)
-						]
-					)
-				;
+					m.fire({name:'Element Added', element:_childElement});
 
-				m.fire({name:'Element Added', element:_childElement});
-
-				return _childElement;
-			};
-
-		return _class;
+					return _childElement;
+				};
+			}
+		});
 	}
 });

@@ -48,7 +48,7 @@ Uize.module ({
 				return function () {return m [_methodName].apply (m,arguments)};
 			}
 
-		var _class = _superclass.subclass ({
+		return _superclass.subclass ({
 			staticProperties:{
 				_serviceMethods:{}
 			},
@@ -343,8 +343,6 @@ Uize.module ({
 				}
 			}
 		});
-
-		return _class;
 	}
 });
 
