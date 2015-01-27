@@ -56,7 +56,7 @@ Uize.module ({
 					m.fire({name:'Element Added', element:_childElement});
 
 					return _childElement;
-				};
+				}
 			}
 		});
 	}
