@@ -64,7 +64,25 @@ Uize.module ({
 				serializeResourceFile:function (_messages) {
 					return Uize.map (
 						Uize.Data.NameValueRecords.fromHash (_messages),
-						function (_nameValue) {return _nameValue.name + ': ' + _nameValue.value}
+						function (_nameValue) {
+							var
+								_name = _nameValue.name,
+								_value = _nameValue.value
+							;
+							return (
+								typeof _value == 'string'
+									? _name + ': ' + _value
+									: (
+										_name + '\n' +
+										Uize.map (
+											Uize.keys (_value),
+											function (_pluralClass) {
+												return '\t' + _pluralClass + ': ' + _value [_pluralClass];
+											}
+										).join ('\n')
+									)
+							);
+						}
 					).join ('\n');
 				}
 			},
