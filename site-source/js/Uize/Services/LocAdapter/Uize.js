@@ -40,9 +40,9 @@ Uize.module ({
 				punctuation:/[\?!\.;,&=\-\(\)\[\]"<>]+/,
 				number:/\d+(?:\.\d+)?/,
 				whitespace:/\s+/,
-				tokenName:/[\da-zA-Z]+/,
-				token:/\{{tokenName}\}/,
-				tokenWithNameCapture:/%({tokenName})%/,
+				tokenName:/[a-zA-Z_]+[0-9a-zA-Z_]*/,
+				token:/\[\[{tokenName}\]\]/,
+				tokenWithNameCapture:/\[\[({tokenName})\]\]/,
 				wordSplitter:/({whitespace}|{token}|{punctuation}|{number})/
 			})
 		;
