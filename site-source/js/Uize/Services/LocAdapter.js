@@ -39,6 +39,7 @@ Uize.module ({
 		'Uize.Loc.Pseudo',
 		'Uize.Loc.Strings.Metrics',
 		'Uize.Loc.Strings.Util',
+		'Uize.Loc.Strings.PluralUtils',
 		'Uize.Data.Diff',
 		'Uize.Str.Whitespace',
 		'Uize.Build.Util.Whitespace',
@@ -53,13 +54,16 @@ Uize.module ({
 		var
 			/*** Variables for Scruncher Optimization ***/
 				_undefined,
+				_Uize_Loc_Strings = Uize.Loc.Strings,
+				_Uize_Loc_Strings_Util = _Uize_Loc_Strings.Util,
+				_Uize_Loc_Strings_PluralUtils = _Uize_Loc_Strings.PluralUtils,
 				_breakdownTable = Uize.Templates.Text.Tables.Breakdown.process,
-				_removeEmptyStrings = Uize.Loc.Strings.Util.removeEmptyStrings,
+				_removeEmptyStrings = _Uize_Loc_Strings_Util.removeEmptyStrings,
 
 			/*** Variables for Performance Optimization ***/
-				_getStringMetrics = Uize.Loc.Strings.Metrics.getMetrics,
+				_getStringMetrics = _Uize_Loc_Strings.Metrics.getMetrics,
 				_hasNonWhitespace = Uize.Str.Whitespace.hasNonWhitespace,
-				_serializeStringPath = Uize.Loc.Strings.Util.serializeStringPath,
+				_serializeStringPath = _Uize_Loc_Strings_Util.serializeStringPath,
 
 			/*** General Variables ***/
 				_fileSystem = Uize.Services.FileSystem.singleton (),
@@ -261,7 +265,7 @@ Uize.module ({
 								perBrand:_totalResourceFilesPerBrand
 							}
 						},
-						Uize.Loc.Strings.Util.stringsMetricsFromStringsInfo (
+						_Uize_Loc_Strings_Util.stringsMetricsFromStringsInfo (
 							_calculateStringsInfoForLanguage (m,_language,_languageResources,_subFolder)
 						)
 					);
@@ -277,7 +281,7 @@ Uize.module ({
 
 			function _pseudoLocalizeResources (m,_primaryLanguageResources) {
 				var _pseudoLocalizeOptions = Uize.copy (m.project.pseudoLocalization,{wordSplitter:m.wordSplitter});
-				return Uize.Loc.Strings.Util.pseudoLocalizeResources (
+				return _Uize_Loc_Strings_Util.pseudoLocalizeResources (
 					_primaryLanguageResources,
 					function (_string) {return _isTranslatableString (m,_string)},
 					function (_string) {return m.pseudoLocalizeString (_string,_pseudoLocalizeOptions)}
@@ -381,6 +385,14 @@ Uize.module ({
 						m = this,
 						_project = m.project
 					;
+
+					/*** remove plural classes not supported for language ***/
+						_project.plurals &&
+							_Uize_Loc_Strings_PluralUtils.removeUnsupportedPluralsForTranslatableLanguage (
+								_resources,_language
+							)
+						;
+
 					Uize.forEach (
 						_resources,
 						function (_resourceFileStrings,_resourceFileSubPath) {
@@ -1061,7 +1073,15 @@ Uize.module ({
 						m = this,
 						_project = m.project,
 						_rootFolderPath = _project.rootFolderPath,
-						_primaryLanguageResources = m.gatherResources (),
+						_primaryLanguageResources = m.gatherResources ()
+					;
+
+					/*** normalize plural forms for primary language ***/
+						_project.plurals &&
+							_Uize_Loc_Strings_PluralUtils.normalizePluralStringsForPrimaryLanguage (_primaryLanguageResources)
+						;
+
+					var
 						_primaryLanguage = _project.primaryLanguage,
 						_primaryLanguageResourcesLast = _readLanguageResourcesFile (m,_primaryLanguage) || {},
 						_primaryLanguageResourcesDiff = Uize.Data.Diff.diff (
@@ -1126,8 +1146,15 @@ Uize.module ({
 									}
 								);
 
+								/*** normalize plural forms ***/
+									_project.plurals &&
+										_Uize_Loc_Strings_PluralUtils.normalizePluralStringsForTranslatableLanguage (
+											_languageResources,_language
+										)
+									;
+
 								/*** initialize non-translatable strings ***/
-									_resoucesByLanguage [_language] = Uize.Loc.Strings.Util.initNonTranslatable (
+									_resoucesByLanguage [_language] = _Uize_Loc_Strings_Util.initNonTranslatable (
 										_languageResources,
 										_primaryLanguageResources,
 										_params.initValues || _params.initNonTranslatable,
@@ -1657,7 +1684,7 @@ Uize.module ({
 						m.stepCompleted ('Loaded resources for ' + _languageB + ' (language B)');
 
 					/*** perform diff between resources of language A and language B ***/
-						var _languagesDiff = Uize.Loc.Strings.Util.diffResources (_languageAResources,_languageBResources);
+						var _languagesDiff = _Uize_Loc_Strings_Util.diffResources (_languageAResources,_languageBResources);
 						m.stepCompleted (
 							'Performed diff between ' + _languageA + ' (language A) and ' + _languageB + ' (language B)'
 						);
@@ -1674,7 +1701,7 @@ Uize.module ({
 							var _diffCsvFilePath = _diffFilePath + '.csv';
 							_fileSystem.writeFile ({
 								path:_diffCsvFilePath,
-								contents:Uize.Loc.Strings.Util.resourcesDiffAsCsv (_languagesDiff)
+								contents:_Uize_Loc_Strings_Util.resourcesDiffAsCsv (_languagesDiff)
 							});
 							m.stepCompleted ('Generated CSV diff report at ' + _diffCsvFilePath);
 
