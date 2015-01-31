@@ -54,7 +54,8 @@
 					],
 					primaryLanguage:'en-US',
 					pseudoLocale:'en-ZZ',
-					translationJobFileFormat:'xliff' // csv | xliff
+					translationJobFileFormat:'xliff', // csv | xliff
+					plurals:true
 				}
 			}
 		}
