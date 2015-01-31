@@ -1,20 +1,20 @@
-sourceViewButtonLabel: 
-resultViewButtonLabel: 
-presetsLabel: 
-presetPretty: 
-presetCompact: 
-presetPaddedAndSorted: 
-indentCharsLabel: 
-linebreakCharsLabel: 
-quoteCharLabel: 
-keyDelimiterLabel: 
-padKeysLabel: 
-keyAlignLabel: 
-keyAlignLeft: 
-keyAlignCenter: 
-keyAlignRight: 
-whenToQuoteKeysLabel: 
-whenToQuoteKeysAuto: 
-whenToQuoteKeysAutoAll: 
-whenToQuoteKeysAlways: 
-sortKeysLabel: 
+sourceViewButtonLabel: 来源JSON
+resultViewButtonLabel: JSON序列化
+presetsLabel: 预置
+presetPretty: 漂亮
+presetCompact: 紧凑
+presetPaddedAndSorted: 填充和排序
+indentCharsLabel: 缩进字符
+linebreakCharsLabel: 断行字符
+quoteCharLabel: 引号字符
+keyDelimiterLabel: 关键的分隔符
+padKeysLabel: 键填充
+keyAlignLabel: 关键对齐
+keyAlignLeft: 左
+keyAlignCenter: 中心
+keyAlignRight: 权
+whenToQuoteKeysLabel: 关键的报价模式
+whenToQuoteKeysAuto: 汽车
+whenToQuoteKeysAutoAll: 所有汽车
+whenToQuoteKeysAlways: 总
+sortKeysLabel: 关键排序

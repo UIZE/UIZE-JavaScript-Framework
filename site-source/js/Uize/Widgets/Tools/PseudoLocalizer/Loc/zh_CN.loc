@@ -1,6 +1,6 @@
-sourceViewButtonLabel: 
-resultViewButtonLabel: 
-accentingLabel: 
-wrapperLabel: 
-expansionCharLabel: 
-expansionLabel: 
+sourceViewButtonLabel: 源文本
+resultViewButtonLabel: 伪本地化的文本
+accentingLabel: 重音
+wrapperLabel: 包装纸
+expansionCharLabel: 扩张性
+expansionLabel: 膨胀系数
