@@ -1,20 +1,20 @@
-sourceViewButtonLabel: 
-resultViewButtonLabel: 
-presetsLabel: 
-presetPretty: 
-presetCompact: 
-presetPaddedAndSorted: 
-indentCharsLabel: 
-linebreakCharsLabel: 
-quoteCharLabel: 
-keyDelimiterLabel: 
-padKeysLabel: 
-keyAlignLabel: 
-keyAlignLeft: 
-keyAlignCenter: 
-keyAlignRight: 
-whenToQuoteKeysLabel: 
-whenToQuoteKeysAuto: 
-whenToQuoteKeysAutoAll: 
-whenToQuoteKeysAlways: 
-sortKeysLabel: 
+sourceViewButtonLabel: Source de JSON
+resultViewButtonLabel: JSON sérialisé
+presetsLabel: Presets
+presetPretty: Joli
+presetCompact: Compact
+presetPaddedAndSorted: Rembourré et triés
+indentCharsLabel: Caractères indentation
+linebreakCharsLabel: Caractères de saut de ligne
+quoteCharLabel: Guillemets
+keyDelimiterLabel: Séparateurs clés
+padKeysLabel: Padding clé
+keyAlignLabel: l'Alignement clé
+keyAlignLeft: Gauche
+keyAlignCenter: Centre
+keyAlignRight: Droit
+whenToQuoteKeysLabel: Mode de clé citant
+whenToQuoteKeysAuto: Automatique
+whenToQuoteKeysAutoAll: Tout, automatiquement
+whenToQuoteKeysAlways: Toujours
+sortKeysLabel: Tri des clés

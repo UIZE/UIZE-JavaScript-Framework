@@ -1,6 +1,6 @@
-sourceViewButtonLabel: 
-resultViewButtonLabel: 
-accentingLabel: 
-wrapperLabel: 
-expansionCharLabel: 
-expansionLabel: 
+sourceViewButtonLabel: Texte source
+resultViewButtonLabel: Texte pseudo-localisée
+accentingLabel: Accentuant
+wrapperLabel: Peignoir
+expansionCharLabel: Caractère d'extension
+expansionLabel: Facteur d'expansion
