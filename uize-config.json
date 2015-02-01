@@ -45,6 +45,7 @@
 					rootFolderPath:'site-source/js',
 					languages:[
 						'en-US',
+						'en-GB',
 						'de-DE',
 						'fr-FR',
 						'ja-JP',
