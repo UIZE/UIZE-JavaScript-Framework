@@ -54,6 +54,12 @@ Uize.module ({
 
 			staticProperties:{
 				cssModule:Uize.Widgets.Picker.Css
+			},
+
+			instanceMethods:{
+				getDialogWidgetProperties:function () {
+					return {locale:this.get ('localeInherited')};
+				}
 			}
 		});
 	}
