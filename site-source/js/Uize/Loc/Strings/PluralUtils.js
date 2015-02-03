@@ -39,7 +39,7 @@ Uize.module ({
 		;
 
 		/*** Utility Functions ***/
-			function _processPluralStrings (_strings,_processor) {
+			function _processPluralStrings (_languageResources,_processor) {
 				function _processStringsNode (_node) {
 					(
 						typeof _node == 'object' && _node &&
@@ -50,7 +50,7 @@ Uize.module ({
 						: Uize.forEach (_node,_processStringsNode)
 					;
 				}
-				_processStringsNode (_strings);
+				Uize.forEach (_languageResources,_processStringsNode);
 			}
 
 		return Uize.package ({
@@ -58,15 +58,10 @@ Uize.module ({
 				/* NOTE:
 					For the primary language (assuming a regional flavor of English), if a node in a resource file has "one" and "other" properties whose values are type string, then the node is considered a node containing plural forms, and the values for the plural classes that English does not support are initialized to the value of the "other" property. This results in translations for those plural classes for other languages to be based on the value of the "other" plural class.
 				*/
-				Uize.forEach (
+				_processPluralStrings (
 					_primaryLanguageResources,
-					function (_resourceFileStrings) {
-						_processPluralStrings (
-							_resourceFileStrings,
-							function (_plurals) {
-								_plurals.zero = _plurals.two = _plurals.few = _plurals.many = _plurals.other;
-							}
-						);
+					function (_plurals) {
+						_plurals.zero = _plurals.two = _plurals.few = _plurals.many = _plurals.other;
 					}
 				);
 			},
@@ -76,20 +71,15 @@ Uize.module ({
 					For each translatable language, the values for the plural classes that are not supported by the language are always set to the dummty value "---". This prevents them from being exported in translation jobs. If they are ever exported using the "all" filter for the exportJobs method, the dummy values do not contain translatable text and will be ignored / unaltered by translators.
 				*/
 				var _pluralsForLanguageLookup = Uize.lookup (_getPluralClasses (_language));
-				Uize.forEach (
+				_processPluralStrings (
 					_languageResources,
-					function (_resourceFileStrings) {
-						_processPluralStrings (
-							_resourceFileStrings,
-							function (_plurals) {
-								Uize.forEach (
-									_pluralClasses,
-									function (_pluralClass) {
-										if (!_pluralsForLanguageLookup.hasOwnProperty (_pluralClass))
-											_plurals [_pluralClass] = '---'
-										;
-									}
-								);
+					function (_plurals) {
+						Uize.forEach (
+							_pluralClasses,
+							function (_pluralClass) {
+								if (!_pluralsForLanguageLookup.hasOwnProperty (_pluralClass))
+									_plurals [_pluralClass] = '---'
+								;
 							}
 						);
 					}
@@ -98,20 +88,15 @@ Uize.module ({
 
 			removeUnsupportedPluralsForTranslatableLanguage:function (_languageResources,_language) {
 				var _pluralsForLanguageLookup = Uize.lookup (_getPluralClasses (_language));
-				Uize.forEach (
+				_processPluralStrings (
 					_languageResources,
-					function (_resourceFileStrings) {
-						_processPluralStrings (
-							_resourceFileStrings,
-							function (_plurals) {
-								Uize.forEach (
-									_pluralClasses,
-									function (_pluralClass) {
-										if (!_pluralsForLanguageLookup.hasOwnProperty (_pluralClass))
-											delete _plurals [_pluralClass]
-										;
-									}
-								);
+					function (_plurals) {
+						Uize.forEach (
+							_pluralClasses,
+							function (_pluralClass) {
+								if (!_pluralsForLanguageLookup.hasOwnProperty (_pluralClass))
+									delete _plurals [_pluralClass]
+								;
 							}
 						);
 					}
