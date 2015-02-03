@@ -18,7 +18,7 @@
 
 /*?
 	Introduction
-		The =Uize.Loc.Plurals.Langs.ka= module implements a .
+		The =Uize.Loc.Plurals.Langs.ka= module implements a feature for determining a plural category from a number value for the ka language.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 

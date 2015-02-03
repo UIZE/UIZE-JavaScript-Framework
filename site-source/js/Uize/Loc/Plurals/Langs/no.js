@@ -18,7 +18,7 @@
 
 /*?
 	Introduction
-		The =Uize.Loc.Plurals.Langs.no= module implements a .
+		The =Uize.Loc.Plurals.Langs.no= module implements a feature for determining a plural category from a number value for the no language.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 

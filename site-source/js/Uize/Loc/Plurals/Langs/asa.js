@@ -18,7 +18,7 @@
 
 /*?
 	Introduction
-		The =Uize.Loc.Plurals.Langs.asa= module implements a .
+		The =Uize.Loc.Plurals.Langs.asa= module implements a feature for determining a plural category from a number value for the asa language.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 

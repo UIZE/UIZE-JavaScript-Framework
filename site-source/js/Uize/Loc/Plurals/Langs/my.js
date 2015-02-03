@@ -18,7 +18,7 @@
 
 /*?
 	Introduction
-		The =Uize.Loc.Plurals.Langs.my= module implements a .
+		The =Uize.Loc.Plurals.Langs.my= module implements a feature for determining a plural category from a number value for the my language.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 

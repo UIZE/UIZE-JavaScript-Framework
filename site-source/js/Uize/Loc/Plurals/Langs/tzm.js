@@ -18,7 +18,7 @@
 
 /*?
 	Introduction
-		The =Uize.Loc.Plurals.Langs.tzm= module implements a .
+		The =Uize.Loc.Plurals.Langs.tzm= module implements a feature for determining a plural category from a number value for the tzm language.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 

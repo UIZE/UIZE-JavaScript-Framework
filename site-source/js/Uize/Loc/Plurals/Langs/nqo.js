@@ -18,7 +18,7 @@
 
 /*?
 	Introduction
-		The =Uize.Loc.Plurals.Langs.nqo= module implements a .
+		The =Uize.Loc.Plurals.Langs.nqo= module implements a feature for determining a plural category from a number value for the nqo language.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 

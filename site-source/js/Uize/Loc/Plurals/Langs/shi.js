@@ -18,7 +18,7 @@
 
 /*?
 	Introduction
-		The =Uize.Loc.Plurals.Langs.shi= module implements a .
+		The =Uize.Loc.Plurals.Langs.shi= module implements a feature for determining a plural category from a number value for the shi language.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 

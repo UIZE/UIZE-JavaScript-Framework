@@ -18,7 +18,7 @@
 
 /*?
 	Introduction
-		The =Uize.Loc.Plurals.Langs.vun= module implements a .
+		The =Uize.Loc.Plurals.Langs.vun= module implements a feature for determining a plural category from a number value for the vun language.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 

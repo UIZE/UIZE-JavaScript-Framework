@@ -18,7 +18,7 @@
 
 /*?
 	Introduction
-		The =Uize.Loc.Plurals.Langs.fo= module implements a .
+		The =Uize.Loc.Plurals.Langs.fo= module implements a feature for determining a plural category from a number value for the fo language.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 

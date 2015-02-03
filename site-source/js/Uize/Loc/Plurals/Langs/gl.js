@@ -18,7 +18,7 @@
 
 /*?
 	Introduction
-		The =Uize.Loc.Plurals.Langs.gl= module implements a .
+		The =Uize.Loc.Plurals.Langs.gl= module implements a feature for determining a plural category from a number value for the gl language.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 

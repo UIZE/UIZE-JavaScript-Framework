@@ -18,7 +18,7 @@
 
 /*?
 	Introduction
-		The =Uize.Loc.Plurals.Langs.wa= module implements a .
+		The =Uize.Loc.Plurals.Langs.wa= module implements a feature for determining a plural category from a number value for the wa language.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 

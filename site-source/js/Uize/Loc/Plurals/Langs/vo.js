@@ -18,7 +18,7 @@
 
 /*?
 	Introduction
-		The =Uize.Loc.Plurals.Langs.vo= module implements a .
+		The =Uize.Loc.Plurals.Langs.vo= module implements a feature for determining a plural category from a number value for the vo language.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 

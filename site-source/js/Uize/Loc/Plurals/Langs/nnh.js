@@ -18,7 +18,7 @@
 
 /*?
 	Introduction
-		The =Uize.Loc.Plurals.Langs.nnh= module implements a .
+		The =Uize.Loc.Plurals.Langs.nnh= module implements a feature for determining a plural category from a number value for the nnh language.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 

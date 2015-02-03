@@ -18,7 +18,7 @@
 
 /*?
 	Introduction
-		The =Uize.Loc.Plurals.Langs.ug= module implements a .
+		The =Uize.Loc.Plurals.Langs.ug= module implements a feature for determining a plural category from a number value for the ug language.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 

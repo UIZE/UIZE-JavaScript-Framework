@@ -18,7 +18,7 @@
 
 /*?
 	Introduction
-		The =Uize.Loc.Plurals.Langs.bg= module implements a .
+		The =Uize.Loc.Plurals.Langs.bg= module implements a feature for determining a plural category from a number value for the bg language.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 

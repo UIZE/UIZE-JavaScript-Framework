@@ -18,7 +18,7 @@
 
 /*?
 	Introduction
-		The =Uize.Loc.Plurals.Langs.fa= module implements a .
+		The =Uize.Loc.Plurals.Langs.fa= module implements a feature for determining a plural category from a number value for the fa language.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 

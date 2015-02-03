@@ -18,7 +18,7 @@
 
 /*?
 	Introduction
-		The =Uize.Loc.Plurals.Langs.nso= module implements a .
+		The =Uize.Loc.Plurals.Langs.nso= module implements a feature for determining a plural category from a number value for the nso language.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 

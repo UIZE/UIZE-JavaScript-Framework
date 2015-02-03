@@ -18,7 +18,7 @@
 
 /*?
 	Introduction
-		The =Uize.Loc.Plurals.Langs.sma= module implements a .
+		The =Uize.Loc.Plurals.Langs.sma= module implements a feature for determining a plural category from a number value for the sma language.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 

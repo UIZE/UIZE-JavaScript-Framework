@@ -18,7 +18,7 @@
 
 /*?
 	Introduction
-		The =Uize.Loc.Plurals.Langs.ny= module implements a .
+		The =Uize.Loc.Plurals.Langs.ny= module implements a feature for determining a plural category from a number value for the ny language.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 

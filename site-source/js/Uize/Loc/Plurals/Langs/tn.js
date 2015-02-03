@@ -18,7 +18,7 @@
 
 /*?
 	Introduction
-		The =Uize.Loc.Plurals.Langs.tn= module implements a .
+		The =Uize.Loc.Plurals.Langs.tn= module implements a feature for determining a plural category from a number value for the tn language.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 
