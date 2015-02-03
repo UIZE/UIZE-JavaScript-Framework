@@ -25,22 +25,17 @@
 
 Uize.module ({
 	name:'Uize.Loc.Strings.PluralUtils',
+	required:'Uize.Loc.Plurals.ClassesInfo',
 	builder:function () {
 		'use strict';
 
 		var
+			/*** Variables for Scruncher Optimization ***/
+				_getPluralClasses = Uize.Loc.Plurals.ClassesInfo.getPluralClasses,
+
 			/*** General Variables ***/
 				// NOTE: move this data into a generated data module, under Uize.Loc
-					_pluralClasses = ['zero','one','two','few','many','other'],
-					_pluralsForLanguages = {
-						de:['one','other'],
-						en:['one','other'],
-						fr:['one','other'],
-						ja:['other'],
-						nl:['one','other'],
-						ru:['one','few','many','other'],
-						zh:['other']
-					}
+					_pluralClasses = ['zero','one','two','few','many','other']
 		;
 
 		/*** Utility Functions ***/
@@ -80,7 +75,7 @@ Uize.module ({
 				/* NOTE:
 					For each translatable language, the values for the plural classes that are not supported by the language are always set to the dummty value "---". This prevents them from being exported in translation jobs. If they are ever exported using the "all" filter for the exportJobs method, the dummy values do not contain translatable text and will be ignored / unaltered by translators.
 				*/
-				var _pluralsForLanguageLookup = Uize.lookup (_pluralsForLanguages [_language.split ('-') [0]]);
+				var _pluralsForLanguageLookup = Uize.lookup (_getPluralClasses (_language));
 				Uize.forEach (
 					_languageResources,
 					function (_resourceFileStrings) {
@@ -102,8 +97,7 @@ Uize.module ({
 			},
 
 			removeUnsupportedPluralsForTranslatableLanguage:function (_languageResources,_language) {
-				var _pluralsForLanguageLookup = Uize.lookup (_pluralsForLanguages [_language.split ('-') [0]]);
-
+				var _pluralsForLanguageLookup = Uize.lookup (_getPluralClasses (_language));
 				Uize.forEach (
 					_languageResources,
 					function (_resourceFileStrings) {
