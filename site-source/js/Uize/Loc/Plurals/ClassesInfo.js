@@ -858,7 +858,7 @@ Uize.module ({
 		;
 
 		return Uize.package ({
-			getPluralClassesLanguage:function (_language) {
+			getPluralClasses:function (_language) {
 				return _classesByLanguage [_language] || _classesByLanguage [_language.split ('-') [0]];
 			}
 		});
