@@ -35,8 +35,7 @@ Uize.module ({
 		'Uize.Json',
 		'Uize.Loc.Plurals.RuleParser',
 		'Uize.Loc.Plurals.ModuleTemplate',
-		'Uize.Build.Templates.Module.Plurals.ClassesInfo',
-		'Uize.Build.Util'
+		'Uize.Build.Templates.Module.Plurals.ClassesInfo'
 	],
 	builder:function () {
 		'use strict';
