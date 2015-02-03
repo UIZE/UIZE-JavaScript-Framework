@@ -34,7 +34,9 @@ Uize.module ({
 		'Uize.Services.FileSystem',
 		'Uize.Json',
 		'Uize.Loc.Plurals.RuleParser',
-		'Uize.Loc.Plurals.ModuleTemplate'
+		'Uize.Loc.Plurals.ModuleTemplate',
+		'Uize.Build.Templates.Module.Plurals.ClassesInfo',
+		'Uize.Build.Util'
 	],
 	builder:function () {
 		'use strict';
@@ -43,34 +45,50 @@ Uize.module ({
 			perform:function (_params) {
 				var
 					_fileSystem = Uize.Services.FileSystem.singleton (),
-					_pluralRules = Uize.Json.from (_fileSystem.readFile ({path:_params.pluralRules})),
 					_modulesPath = _params.uizePath + '/' + _params.modulesFolder + '/',
-					_modulesNamespace = 'Uize.Loc.Plurals.Langs'
+					_modulesNamespace = 'Uize.Loc.Plurals',
+					_langsModulesNamespace = _modulesNamespace + '.Langs',
+					_pluralRules = Uize.Json.from (_fileSystem.readFile ({path:_params.pluralRules})),
+					_pluralRulesMapsByLanguage = Uize.map (
+						_pluralRules.supplemental ['plurals-type-cardinal'],
+						function (_languagePlurals,_language) {
+							var _pluralRulesMap = {};
+							Uize.forEach (
+								_languagePlurals,
+								function (_pluralRule,_pluralRuleName) {
+									_pluralRulesMap [_pluralRuleName.replace (/^pluralRule-count-/,'')] = _pluralRule;
+								}
+							);
+							return _pluralRulesMap;
+						}
+					)
 				;
-				Uize.forEach (
-					_pluralRules.supplemental ['plurals-type-cardinal'],
-					function (_languagePlurals,_language) {
-						var
-							_pluralRulesMap = {},
-							_prefixRegExp = /^pluralRule-count-/
-						;
-						Uize.forEach (
-							_languagePlurals,
-							function (_pluralRule,_pluralRuleName) {
-								_pluralRulesMap [_pluralRuleName.replace (_prefixRegExp,'')] = _pluralRule;
-							}
-						);
-						_fileSystem.writeFile ({
-							path:_modulesPath + Uize.modulePathResolver (_modulesNamespace + '.' + _language) + '.js',
-							contents:Uize.Loc.Plurals.ModuleTemplate.process ({
-								namespace:_modulesNamespace,
-								language:_language,
-								pluralRules:_pluralRulesMap,
-								pluralRulesFunction:Uize.Loc.Plurals.RuleParser.rulesToJsFunctionStr (_pluralRulesMap)
-							})
-						});
-					}
-				);
+
+				/*** generate the plurals classes info module ***/
+					var _classesInfoModuleName = _modulesNamespace + '.ClassesInfo';
+					_fileSystem.writeFile ({
+						path:_modulesPath + Uize.modulePathResolver (_classesInfoModuleName) + '.js',
+						contents:Uize.Build.Templates.Module.Plurals.ClassesInfo.process ({
+							name:_classesInfoModuleName,
+							classesByLanguage:Uize.map (_pluralRulesMapsByLanguage,'Uize.keys (value)')
+						})
+					});
+
+				/*** generate the per language plurals modules under Uize.Loc.Plurals.Langs ***/
+					Uize.forEach (
+						_pluralRulesMapsByLanguage,
+						function (_pluralRulesMap,_language) {
+							_fileSystem.writeFile ({
+								path:_modulesPath + Uize.modulePathResolver (_langsModulesNamespace + '.' + _language) + '.js',
+								contents:Uize.Loc.Plurals.ModuleTemplate.process ({
+									namespace:_langsModulesNamespace,
+									language:_language,
+									pluralRules:_pluralRulesMap,
+									pluralRulesFunction:Uize.Loc.Plurals.RuleParser.rulesToJsFunctionStr (_pluralRulesMap)
+								})
+							});
+						}
+					);
 			}
 		});
 	}

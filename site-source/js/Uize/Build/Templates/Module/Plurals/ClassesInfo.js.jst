@@ -1,0 +1,54 @@
+<%@
+	required (
+		'Uize.Build.Templates.Module.HeadComment',
+		'Uize.Str.Lines',
+		'Uize.Json'
+	);
+	input ({
+		name:'string',
+		classesByLanguage:'object'
+	});
+%><%
+	var
+		_input = input,
+		_moduleName = _input.name
+	;
+%><%=
+	Uize.Build.Templates.Module.HeadComment.process ({
+		moduleName:_moduleName,
+		moduleType:'Package',
+		creationYear:(new Date).getFullYear ()
+	})
+%>/* Module Meta Data
+	type: Package
+	importance: 1
+	codeCompleteness: 100
+	docCompleteness: 100
+*/
+
+/*?
+	Introduction
+		The =<%= _moduleName %>= module implements a feature for determining the plural categories supported for a specific language.
+
+		*DEVELOPERS:* `Chris van Rensburg`
+*/
+
+Uize.module ({
+	name:'<%= _moduleName %>',
+	builder:function () {
+		'use strict';
+
+		var
+			/*** General Variables ***/
+				_classesByLanguage = <%= Uize.Str.Lines.indent (Uize.Json.to (_input.classesByLanguage),4,'\t',false)
+%>
+		;
+
+		return Uize.package ({
+			getPluralClassesLanguage:function (_language) {
+				return _classesByLanguage [_language] || _classesByLanguage [_language.split ('-') [0]];
+			}
+		});
+	}
+});
+
