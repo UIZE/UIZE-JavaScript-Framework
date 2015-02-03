@@ -34,7 +34,7 @@ Uize.module ({
 		'Uize.Services.FileSystem',
 		'Uize.Json',
 		'Uize.Loc.Plurals.RuleParser',
-		'Uize.Loc.Plurals.ModuleTemplate',
+		'Uize.Build.Templates.Module.Plurals.ModuleTemplate',
 		'Uize.Build.Templates.Module.Plurals.ClassesInfo'
 	],
 	builder:function () {
@@ -79,7 +79,7 @@ Uize.module ({
 						function (_pluralRulesMap,_language) {
 							_fileSystem.writeFile ({
 								path:_modulesPath + Uize.modulePathResolver (_langsModulesNamespace + '.' + _language) + '.js',
-								contents:Uize.Loc.Plurals.ModuleTemplate.process ({
+								contents:Uize.Build.Templates.Module.Plurals.ModuleTemplate.process ({
 									namespace:_langsModulesNamespace,
 									language:_language,
 									pluralRules:_pluralRulesMap,
