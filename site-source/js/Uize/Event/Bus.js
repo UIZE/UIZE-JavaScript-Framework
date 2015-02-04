@@ -127,27 +127,34 @@ Uize.module ({
 							m = this,
 							_eventHandlers = m._eventHandlers
 						;
+						function _unwire (_eventName,_handler) {
+							m.wireUnwireWrapper (
+								_eventName,
+								function (_eventName) {
+									var _handlersForEventName = _eventHandlers [_eventName];
+									if (_handlersForEventName) {
+										if (_handler) {
+											for (var _handlerNo = _handlersForEventName.length; --_handlerNo >= 0;)
+												_handlersForEventName [_handlerNo]._originalHandler == _handler &&
+													_handlersForEventName.splice (_handlerNo,1)
+											;
+										}
+										(_handler && _handlersForEventName.length) || delete _eventHandlers [_eventName];
+									}
+								}
+							);
+						}
 						if (_eventHandlers) {
-							if (_isObject (_eventNameOrEventsMap)) {
+							if (!arguments.length) {
+								for (var _eventName in _eventHandlers)
+									_unwire (_eventName)
+								;
+							} else if (_isObject (_eventNameOrEventsMap)) {
 								for (var _eventName in _eventNameOrEventsMap)
-									m.unwire (_eventName,_eventNameOrEventsMap [_eventName])
+									_unwire (_eventName,_eventNameOrEventsMap [_eventName])
 								;
 							} else {
-								m.wireUnwireWrapper (
-									_eventNameOrEventsMap,
-									function (_eventName) {
-										var _handlersForEventName = _eventHandlers [_eventName];
-										if (_handlersForEventName) {
-											if (_handler) {
-												for (var _handlerNo = _handlersForEventName.length; --_handlerNo >= 0;)
-													_handlersForEventName [_handlerNo]._originalHandler == _handler &&
-														_handlersForEventName.splice (_handlerNo,1)
-												;
-											}
-											(_handler && _handlersForEventName.length) || delete _eventHandlers [_eventName];
-										}
-									}
-								);
+								_unwire (_eventNameOrEventsMap,_handler);
 							}
 						}
 					},

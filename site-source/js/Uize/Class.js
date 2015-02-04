@@ -2848,24 +2848,61 @@ Uize.module ({
 							unwire
 								Lets you remove a handler previously wired to an instance event, or handlers wired for multiple instance events.
 
-								SYNTAX
+								DIFFERENT USAGES
+
+								`Unwire a Specific Handler for an Instance Event`
 								..........................................................
 								myInstance.unwire (eventNameSTR,eventHandlerSTRorFNorOBJ);
 								..........................................................
 
-								VARIATION 1
+								`Unwire All Handlers for an Instance Event`
 								.................................
 								myInstance.unwire (eventNameSTR);
 								.................................
 
-								When no =eventHandlerSTRorFNorOBJ= parameter is specified, then all handlers registered for the event specified in the =eventNameSTR= parameter will be removed.
-
-								VARIATION 2
+								`Unwire Handlers for Multiple Instance Events, by Specifying a Wirings Object`
 								...............................................
 								myInstance.unwire (eventNamesToHandlersMapOBJ);
 								...............................................
 
-								When only a single =eventNamesToHandlersMapOBJ= parameter is specified, then event handlers for multiple events can be specified using an object hash. This variation is provided as a convenience and has the effect of iteratively calling the =unwire= instance method for each event-name-to-handler mapping in the =eventNamesToHandlersMapOBJ= object.
+								`Unwire All Handlers for All Instance Events`
+								.....................
+								myInstance.unwire ();
+								.....................
+
+								Unwire a Specific Handler for an Instance Event
+									A handler for a specific event can be unwired by specifying the name of the event as the first argument and the previously wired handler for the event as the second argument.
+
+									SYNTAX
+									..........................................................
+									myInstance.unwire (eventNameSTR,eventHandlerSTRorFNorOBJ);
+									..........................................................
+
+								Unwire All Handlers for an Instance Event
+									When no =eventHandlerSTRorFNorOBJ= parameter is specified, then all handlers registered for the event specified in the =eventNameSTR= parameter will be removed.
+
+									SYNTAX
+									.................................
+									myInstance.unwire (eventNameSTR);
+									.................................
+
+								Unwire Handlers for Multiple Instance Events, by Specifying a Wirings Object
+									When only a single =eventNamesToHandlersMapOBJ= parameter is specified, then event handlers for multiple events can be specified using an object hash.
+
+									SYNTAX
+									...............................................
+									myInstance.unwire (eventNamesToHandlersMapOBJ);
+									...............................................
+
+									This variation is provided as a convenience and has the effect of iteratively calling the =unwire= instance method for each event-name-to-handler mapping in the =eventNamesToHandlersMapOBJ= object.
+
+								Unwire All Handlers for All Instance Events
+									All previously wired handlers for all events can be unwired by specifying no arguments.
+
+									SYNTAX
+									.....................
+									myInstance.unwire ();
+									.....................
 
 								NOTES
 								- see the related =fire= and =wire= instance methods
@@ -2875,24 +2912,61 @@ Uize.module ({
 							Uize.Class.unwire
 								Lets you remove a handler previously wired to a static event, or handlers wired for multiple static events.
 
-								SYNTAX
+								DIFFERENT USAGES
+
+								`Unwire a Specific Handler for a Static Event`
 								.......................................................
 								MyClass.unwire (eventNameSTR,eventHandlerSTRorFNorOBJ);
 								.......................................................
 
-								VARIATION 1
+								`Unwire All Handlers for a Static Event`
 								..............................
 								MyClass.unwire (eventNameSTR);
 								..............................
 
-								When no =eventHandlerSTRorFNorOBJ= parameter is specified, then all handlers registered for the event specified in the =eventNameSTR= parameter will be removed.
-
-								VARIATION 2
+								`Unwire Handlers for Multiple Static Events, by Specifying a Wirings Object`
 								............................................
 								MyClass.unwire (eventNamesToHandlersMapOBJ);
 								............................................
 
-								When only a single =eventNamesToHandlersMapOBJ= parameter is specified, then event handlers for multiple events can be specified using an object hash. This variation is provided as a convenience and has the effect of iteratively calling the =Uize.Class.unwire= static method for each event-name-to-handler mapping in the =eventNamesToHandlersMapOBJ= object.
+								`Unwire All Handlers for All Static Events`
+								..................
+								MyClass.unwire ();
+								..................
+
+								Unwire a Specific Handler for a Static Event
+									A handler for a specific event can be unwired by specifying the name of the event as the first argument and the previously wired handler for the event as the second argument.
+
+									SYNTAX
+									.......................................................
+									MyClass.unwire (eventNameSTR,eventHandlerSTRorFNorOBJ);
+									.......................................................
+
+								Unwire All Handlers for a Static Event
+									When no =eventHandlerSTRorFNorOBJ= parameter is specified, then all handlers registered for the event specified in the =eventNameSTR= parameter will be removed.
+
+									SYNTAX
+									..............................
+									MyClass.unwire (eventNameSTR);
+									..............................
+
+								Unwire Handlers for Multiple Static Events, by Specifying a Wirings Object
+									When only a single =eventNamesToHandlersMapOBJ= parameter is specified, then event handlers for multiple events can be specified using an object hash.
+
+									SYNTAX
+									............................................
+									MyClass.unwire (eventNamesToHandlersMapOBJ);
+									............................................
+
+									This variation is provided as a convenience and has the effect of iteratively calling the =Uize.Class.unwire= static method for each event-name-to-handler mapping in the =eventNamesToHandlersMapOBJ= object.
+
+								Unwire All Handlers for All Static Events
+									All previously wired handlers for all events can be unwired by specifying no arguments.
+
+									SYNTAX
+									..................
+									MyClass.unwire ();
+									..................
 
 								NOTES
 								- see the related =Uize.Class.fire= and =Uize.Class.wire= static methods

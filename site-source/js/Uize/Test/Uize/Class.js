@@ -348,6 +348,25 @@ Uize.module ({
 							return this.expect ('handler1,handler2,handler3,handler2,handler3',_coverageAndOrder + '');
 						}
 					},
+					{
+						title:
+							'Specifying no arguments when calling the unwire method will unwire all wired handlers for any events',
+						test:function () {
+							var
+								_coverageAndOrder = [],
+								_eventSource = _getEventSource ()
+							;
+							_eventSource.wire ('*',function () {_coverageAndOrder.push ('handler1')});
+							_eventSource.wire ('testEvent1',function () {_coverageAndOrder.push ('handler2')});
+							_eventSource.wire ('testEvent1',function () {_coverageAndOrder.push ('handler3')});
+							_eventSource.wire ('testEvent2',function () {_coverageAndOrder.push ('handler4')});
+							_eventSource.unwire ();
+							_eventSource.fire ('testEvent1');
+							_eventSource.fire ('testEvent2');
+
+							return this.expect ([],_coverageAndOrder);
+						}
+					},
 					_isInstance
 						? {
 							title:'Instance events can be bubbled up the parent chain',
