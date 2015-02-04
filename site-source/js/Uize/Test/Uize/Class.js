@@ -2066,6 +2066,39 @@ Uize.module ({
 										_instance.set ({myProperty3:++_myProperty3NewValue});
 										return this.expect (4,_onChangeHandlerCount);
 									}
+								},
+								{
+									title:
+										'The execute-once optimization for onChange handlers shared across properties does not prevent an onChange handler from executing on chain reaction sets, because the redundancy elimination is contained to the scope of a single instance of a set call',
+									test:function () {
+										function _onChangeHandlerFunction () {
+											this.set ({myProperty3:this.get (['myProperty1','myProperty2'])});
+										}
+										var
+											_Subclass = Uize.Class.subclass ({
+												stateProperties:{
+													myProperty1:{
+														onChange:_onChangeHandlerFunction
+													},
+													myProperty2:{
+														onChange:[
+															function () {this.set ({myProperty1:'baz'})},
+															_onChangeHandlerFunction
+														]
+													},
+													myProperty3:{}
+												}
+											}),
+											_instance = _Subclass ({
+												myProperty1:'foo',
+												myProperty2:'bar'
+											})
+										;
+										return this.expect (
+											{myProperty1:'baz',myProperty2:'bar'},
+											_instance.get ('myProperty3')
+										);
+									}
 								}
 							]
 						},
