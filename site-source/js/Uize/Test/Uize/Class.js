@@ -1410,635 +1410,7 @@ Uize.module ({
 					title:'Instances and classes support events',
 					test:[
 						_eventsSystemTest ('Instances support events',true),
-						_eventsSystemTest ('Classes support events',false),
-						{
-							title:'Test support for compound conditions',
-							test:[
-								{
-									title:'Test that the once instance method works correctly',
-									test:[
-										_onceMethodTest (false),
-										_onceMethodTest (true),
-										{
-											title:'Test that specifying an array of property names for the condition is handled correctly',
-											test:function () {
-												var _Class = Uize.Class.subclass ();
-												_Class.stateProperties ({
-													phase1Done:{value:false},
-													phase2Done:{value:false},
-													phase3Done:{value:false}
-												});
-												var
-													_instance = _Class (),
-													_valuesPassedToHandler = []
-												;
-												_instance.once (
-													['phase1Done','phase2Done','phase3Done'],
-													function () {_valuesPassedToHandler.push ([].slice.call (arguments))}
-												);
-												_instance.set ({phase1Done:1});
-												_instance.set ({phase2Done:true});
-												_instance.set ({phase3Done:'foo'});
-												return this.expect ([[1,true,'foo']],_valuesPassedToHandler);
-											}
-										},
-										{
-											title:'When specifying an array of property names for the condition, prefixing some property names with a "!" to not their value is handled correctly',
-											test:function () {
-												var _Class = Uize.Class.subclass ();
-												_Class.stateProperties ({
-													ready:{value:false},
-													empty:{value:true}
-												});
-												var
-													_instance = _Class (),
-													_valuesPassedToHandler = []
-												;
-												_instance.once (
-													['ready','!empty'],
-													function () {_valuesPassedToHandler.push ([].slice.call (arguments))}
-												);
-												_instance.set ({ready:true});
-												_instance.set ({empty:false});
-												return this.expect ([[true,false]],_valuesPassedToHandler);
-											}
-										},
-										{
-											title:'When specifying an array of property names for the condition, property names may contain spaces and special characters',
-											test:function () {
-												var _Class = Uize.Class.subclass ();
-												_Class.stateProperties ({
-													'property name with spaces':{value:false},
-													'~@#$%^&*(){}[]:;<>,.?/':{value:false}
-												});
-												var
-													_instance = _Class (),
-													_valuesPassedToHandler = []
-												;
-												_instance.once (
-													['property name with spaces','~@#$%^&*(){}[]:;<>,.?/'],
-													function () {_valuesPassedToHandler.push ([].slice.call (arguments))}
-												);
-												_instance.set ({'property name with spaces':42});
-												_instance.set ({'~@#$%^&*(){}[]:;<>,.?/':'forty two'});
-												return this.expect ([[42,'forty two']],_valuesPassedToHandler);
-											}
-										},
-										{
-											title:'Test that specifying a comma-separated list of property names for the condition is handled correctly',
-											test:function () {
-												var _Class = Uize.Class.subclass ();
-												_Class.stateProperties ({
-													phase1Done:{value:false},
-													phase2Done:{value:false},
-													phase3Done:{value:false}
-												});
-												var
-													_instance = _Class (),
-													_valuesPassedToHandler = []
-												;
-												_instance.once (
-													'phase1Done, phase2Done, phase3Done',
-													function () {_valuesPassedToHandler.push ([].slice.call (arguments))}
-												);
-												_instance.set ({phase1Done:1});
-												_instance.set ({phase2Done:true});
-												_instance.set ({phase3Done:'foo'});
-												return this.expect ([[1,true,'foo']],_valuesPassedToHandler);
-											}
-										},
-										{
-											title:'When specifying a comma-separated list of property names for the condition, prefixing some property names with a "!" to not their value is handled correctly',
-											test:function () {
-												var _Class = Uize.Class.subclass ();
-												_Class.stateProperties ({
-													ready:{value:false},
-													empty:{value:true}
-												});
-												var
-													_instance = _Class (),
-													_valuesPassedToHandler = []
-												;
-												_instance.once (
-													'ready, !empty',
-													function () {_valuesPassedToHandler.push ([].slice.call (arguments))}
-												);
-												_instance.set ({ready:true});
-												_instance.set ({empty:false});
-												return this.expect ([[true,false]],_valuesPassedToHandler);
-											}
-										},
-										{
-											title:'Test that a compound condition specified as a string, consisting of a properties list and a condition evaluator expression, is handled correctly',
-											test:function () {
-												var _Class = Uize.Class.subclass ();
-												_Class.stateProperties ({
-													width:{value:0},
-													height:{value:0},
-													depth:{value:0}
-												});
-												var
-													_instance = _Class (),
-													_valuesPassedToHandler = []
-												;
-												_instance.once (
-													'width, height, depth: width * height * depth > 1000',
-													function () {_valuesPassedToHandler.push ([].slice.call (arguments))}
-												);
-												_instance.set ({width:10});
-												_instance.set ({height:11});
-												_instance.set ({depth:12});
-												return this.expect ([[10,11,12]],_valuesPassedToHandler);
-											}
-										},
-										{
-											title:'Test that a compound condition specified as a function is handled correctly',
-											test:function () {
-												var _Class = Uize.Class.subclass ();
-												_Class.stateProperties ({
-													width:{value:0},
-													height:{value:0},
-													depth:{value:0}
-												});
-												var
-													_instance = _Class (),
-													_valuesPassedToHandler = []
-												;
-												_instance.once (
-													function (width,height,depth) {return width * height * depth > 1000},
-													function () {_valuesPassedToHandler.push ([].slice.call (arguments))}
-												);
-												_instance.set ({width:10});
-												_instance.set ({height:11});
-												_instance.set ({depth:12});
-												return this.expect ([[10,11,12]],_valuesPassedToHandler);
-											}
-										},
-										{
-											title:'A wirings object is returned, that contains wirings for the Changed.[propertyName] event of every property',
-											test:function () {
-												var _Class = Uize.Class.subclass ();
-												_Class.stateProperties ({
-													phase1Done:{value:false},
-													phase2Done:{value:false},
-													phase3Done:{value:false}
-												});
-												var
-													_instance = _Class (),
-													_wirings = _instance.once (
-														['phase1Done','phase2Done','phase3Done'],
-														Uize.nop
-													)
-												;
-												return (
-													this.expect (
-														['Changed.phase1Done','Changed.phase2Done','Changed.phase3Done'],
-														Uize.keys (_wirings)
-													) &&
-													this.expectType ('function',_wirings ['Changed.phase1Done']) &&
-													this.expectType ('function',_wirings ['Changed.phase2Done']) &&
-													this.expectType ('function',_wirings ['Changed.phase3Done'])
-												);
-											}
-										},
-										{
-											title:'Unwiring the event wirings for a compound condition before it is met results in the handler for the condition not being executed',
-											test:function () {
-												var _Class = Uize.Class.subclass ();
-												_Class.stateProperties ({
-													phase1Done:{value:false},
-													phase2Done:{value:false},
-													phase3Done:{value:false}
-												});
-												var
-													_instance = _Class (),
-													_handlerCalled = false
-												;
-												_instance.unwire (
-													_instance.once (
-														'phase1Done, phase2Done, phase3Done',
-														function () {_handlerCalled = true}
-													)
-												);
-												_instance.set ({phase1Done:true,phase2Done:true,phase3Done:true});
-												return this.expect (false,_handlerCalled);
-											}
-										},
-										{
-											title:'The handler receives the values of all the determinants are arguments',
-											test:function () {
-												var
-													_Class = Uize.Class.subclass ({
-														stateProperties:{
-															propertyA:{value:false},
-															propertyB:{value:0},
-															propertyC:{value:''},
-															propertyD:{value:null}
-														}
-													}),
-													_actualHandlerArguments,
-													_instance = _Class ()
-												;
-												_instance.once (
-													function (propertyA,propertyB,propertyC,propertyD) {
-														return propertyA || propertyB || propertyC || propertyD;
-													},
-													function () {_actualHandlerArguments = Uize.copyList (arguments)}
-												);
-												_instance.set ({
-													propertyA:true,
-													propertyB:42,
-													propertyC:'hello',
-													propertyD:[]
-												});
-												return this.expect ([true,42,'hello',[]],_actualHandlerArguments);
-											}
-										}
-									]
-								}
-							]
-						},
-						{
-							title:'Test the onChange instance method',
-							test:[
-								{
-									title:'The handler is executed once upon registering a change handler',
-									test:function () {
-										var
-											_Class = Uize.Class.subclass ({
-												stateProperties:{
-													width:{value:9},
-													height:{value:11}
-												}
-											}),
-											_coverageAndOrder = [],
-											_instance = _Class ()
-										;
-										_instance.onChange (
-											function (width,height) {return width * height},
-											function (_area) {_coverageAndOrder.push (_area)}
-										);
-										return this.expect ([99],_coverageAndOrder);
-									}
-								},
-								{
-									title:'The handler is only executed when the computed value actually changes, not every time the determinants change',
-									test:function () {
-										var
-											_Class = Uize.Class.subclass ({
-												stateProperties:{
-													width:{value:9},
-													height:{value:11}
-												}
-											}),
-											_coverageAndOrder = [],
-											_instance = _Class ()
-										;
-										_instance.onChange (
-											function (width,height) {return width * height},
-											function (_area) {_coverageAndOrder.push (_area)}
-										);
-										_instance.set ({width:11,height:9});
-										_instance.set ({width:10,height:20});
-										_instance.set ({width:20,height:10});
-										_instance.set ({width:5,height:40});
-										_instance.set ({width:5,height:50});
-										return this.expect ([99,200,250],_coverageAndOrder);
-									}
-								},
-								{
-									title:'A wirings object is returned that allows the change handler to be fully unwired',
-									test:function () {
-										var
-											_Class = Uize.Class.subclass ({
-												stateProperties:{
-													width:{value:9},
-													height:{value:11}
-												}
-											}),
-											_coverageAndOrder = [],
-											_instance = _Class (),
-											_wirings = _instance.onChange (
-												function (width,height) {return width * height},
-												function (_area) {_coverageAndOrder.push (_area)}
-											)
-										;
-										_instance.unwire (_wirings);
-										_instance.set ({width:10,height:20});
-										return (
-											this.expect ([99],_coverageAndOrder) &&
-											this.expect (['Changed.width','Changed.height'],Uize.keys (_wirings))
-										);
-									}
-								},
-								{
-									title:'The handler receives two arguments, being the derived value and an array containing the values of the determinants',
-									test:function () {
-										var
-											_Class = Uize.Class.subclass ({
-												stateProperties:{
-													width:{value:9},
-													height:{value:11}
-												}
-											}),
-											_actualHandlerArguments,
-											_instance = _Class ()
-										;
-										_instance.onChange (
-											function (width,height) {return width * height},
-											function () {_actualHandlerArguments = Uize.copyList (arguments)}
-										);
-										return this.expect ([99,[9,11]],_actualHandlerArguments);
-									}
-								},
-								{
-									title:'Test that various types of derivation specifiers are supported correctly',
-									test:Uize.map (
-										[
-											{
-												title:'Test that a function derivation is supported correctly',
-												properties:{width:9,height:11},
-												derivation:function (width,height) {return width * height},
-												expectedDerivedValue:99
-											},
-											{
-												title:'Test that a string derivation expression is supported correctly',
-												properties:{width:9,height:11},
-												derivation:'width, height : width * height',
-												expectedDerivedValue:99
-											},
-											{
-												title:'Test that a properties array boolean derivation is supported correctly',
-												properties:{isSolid:true,isRound:false},
-												derivation:['isSolid','isRound'],
-												expectedDerivedValue:false
-											},
-											{
-												title:'Test that a properties array boolean derivation, with some inverted properties, is supported correctly',
-												properties:{isSolid:true,isRound:false},
-												derivation:['isSolid','!isRound'],
-												expectedDerivedValue:true
-											},
-											{
-												title:'Test that a properties list string boolean derivation is supported correctly',
-												properties:{isSolid:true,isRound:false},
-												derivation:'isSolid, isRound',
-												expectedDerivedValue:false
-											},
-											{
-												title:'Test that a properties list string boolean derivation, with some inverted properties, is supported correctly',
-												properties:{isSolid:true,isRound:false},
-												derivation:'isSolid, !isRound',
-												expectedDerivedValue:true
-											},
-											{
-												title:'Test that a string property name derivation is supported correctly',
-												properties:{LTUAE:42},
-												derivation:'LTUAE',
-												expectedDerivedValue:42
-											},
-											{
-												title:'Test that a string property name derivation, with inversion, is supported correctly',
-												properties:{isSolid:true},
-												derivation:'!isSolid',
-												expectedDerivedValue:false
-											}
-										],
-										function (_testInfo) {
-											return {
-												title:_testInfo.title,
-												test:function () {
-													var
-														_actualDerivedValue,
-														_Class = Uize.Class.subclass ({set:_testInfo.properties}),
-														_instance = _Class ()
-													;
-													_instance.onChange (
-														_testInfo.derivation,
-														function (_derivedValue) {_actualDerivedValue = _derivedValue}
-													);
-													return this.expect (_testInfo.expectedDerivedValue,_actualDerivedValue);
-												}
-											}
-										}
-									)
-								}
-							]
-						},
-						{
-							title:'Test the whenever instance method',
-							test:[
-								{
-									title:'The handler is not executed upon registering a whenever handler if the derivation is not truthy at the time',
-									test:function () {
-										var
-											_Class = Uize.Class.subclass ({
-												stateProperties:{
-													propertyA:{value:false},
-													propertyB:{value:true}
-												}
-											}),
-											_instance = _Class (),
-											_handlerCalled = false
-										;
-										_instance.whenever (
-											function (propertyA,propertyB) {return propertyA && propertyB},
-											function () {_handlerCalled = true}
-										);
-										return this.expect (false,_handlerCalled);
-									}
-								},
-								{
-									title:'The handler is executed immediately upon registering a whenever handler if the derivation is truthy at the time',
-									test:function () {
-										var
-											_Class = Uize.Class.subclass ({
-												stateProperties:{
-													propertyA:{value:true},
-													propertyB:{value:true}
-												}
-											}),
-											_instance = _Class (),
-											_handlerCalled = false
-										;
-										_instance.whenever (
-											function (propertyA,propertyB) {return propertyA && propertyB},
-											function () {_handlerCalled = true}
-										);
-										return this.expect (true,_handlerCalled);
-									}
-								},
-								{
-									title:'The handler is only executed when the computed value actually becomes truthy, not every time the determinants change',
-									test:function () {
-										var
-											_Class = Uize.Class.subclass ({
-												stateProperties:{
-													propertyA:{value:false},
-													propertyB:{value:false}
-												}
-											}),
-											_handlerCalled,
-											_handlerCalledHistory = [],
-											_instance = _Class ()
-										;
-
-										_handlerCalled = false;
-										_instance.whenever (
-											function (propertyA,propertyB) {return propertyA || propertyB},
-											function () {_handlerCalled = true}
-										);
-										_handlerCalledHistory.push (_handlerCalled);
-
-										_handlerCalled = false;
-										_instance.set ({propertyA:false,propertyB:true});
-										_handlerCalledHistory.push (_handlerCalled);
-
-										_handlerCalled = false;
-										_instance.set ({propertyA:true,propertyB:false});
-										_handlerCalledHistory.push (_handlerCalled);
-
-										_handlerCalled = false;
-										_instance.set ({propertyA:true,propertyB:true});
-										_handlerCalledHistory.push (_handlerCalled);
-
-										_handlerCalled = false;
-										_instance.set ({propertyA:false,propertyB:false});
-										_handlerCalledHistory.push (_handlerCalled);
-
-										return this.expect ([false,true,false,false,false],_handlerCalledHistory);
-									}
-								},
-								{
-									title:'A wirings object is returned that allows the whenever handler to be fully unwired',
-									test:function () {
-										var
-											_Class = Uize.Class.subclass ({
-												stateProperties:{
-													propertyA:{value:false},
-													propertyB:{value:false}
-												}
-											}),
-											_handlerCalled = false,
-											_instance = _Class (),
-											_wirings = _instance.whenever (
-												function (propertyA,propertyB) {return propertyA || propertyB},
-												function () {_handlerCalled = true}
-											)
-										;
-										_instance.unwire (_wirings);
-										_instance.set ({propertyA:true,propertyB:true});
-										return this.expect (false,_handlerCalled);
-									}
-								},
-								{
-									title:'The handler receives the values of all the determinants are arguments',
-									test:function () {
-										var
-											_Class = Uize.Class.subclass ({
-												stateProperties:{
-													propertyA:{value:false},
-													propertyB:{value:0},
-													propertyC:{value:''},
-													propertyD:{value:null}
-												}
-											}),
-											_actualHandlerArguments,
-											_instance = _Class ()
-										;
-										_instance.whenever (
-											function (propertyA,propertyB,propertyC,propertyD) {
-												return propertyA || propertyB || propertyC || propertyD;
-											},
-											function () {_actualHandlerArguments = Uize.copyList (arguments)}
-										);
-										_instance.set ({
-											propertyA:true,
-											propertyB:42,
-											propertyC:'hello',
-											propertyD:[]
-										});
-										return this.expect ([true,42,'hello',[]],_actualHandlerArguments);
-									}
-								},
-								{
-									title:'Test that various types of derivation specifiers are supported correctly',
-									test:Uize.map (
-										[
-											{
-												title:'Test that a function derivation is supported correctly',
-												derivation:function (propertyA,propertyB) {return propertyA && propertyB},
-												falseExpected:{propertyA:false,propertyB:true},
-												trueExpected:{propertyA:true,propertyB:true}
-											},
-											{
-												title:'Test that a string derivation expression is supported correctly',
-												derivation:'propertyA, propertyB : propertyA && propertyB',
-												falseExpected:{propertyA:false,propertyB:true},
-												trueExpected:{propertyA:true,propertyB:true}
-											},
-											{
-												title:'Test that a properties array boolean derivation is supported correctly',
-												derivation:['propertyA', 'propertyB'],
-												falseExpected:{propertyA:false,propertyB:true},
-												trueExpected:{propertyA:true,propertyB:true}
-											},
-											{
-												title:'Test that a properties array boolean derivation, with some inverted properties, is supported correctly',
-												derivation:['propertyA', '!propertyB'],
-												falseExpected:{propertyA:true,propertyB:true},
-												trueExpected:{propertyA:true,propertyB:false}
-											},
-											{
-												title:'Test that a properties list string boolean derivation is supported correctly',
-												derivation:'propertyA, propertyB',
-												falseExpected:{propertyA:false,propertyB:true},
-												trueExpected:{propertyA:true,propertyB:true}
-											},
-											{
-												title:'Test that a properties list string boolean derivation, with some inverted properties, is supported correctly',
-												derivation:'propertyA, !propertyB',
-												falseExpected:{propertyA:true,propertyB:true},
-												trueExpected:{propertyA:true,propertyB:false}
-											},
-											{
-												title:'Test that a string property name derivation is supported correctly',
-												derivation:'property',
-												falseExpected:{property:false},
-												trueExpected:{property:true}
-											},
-											{
-												title:'Test that a string property name derivation, with inversion, is supported correctly',
-												derivation:'!property',
-												falseExpected:{property:true},
-												trueExpected:{property:false}
-											}
-										],
-										function (_testInfo) {
-											return {
-												title:_testInfo.title,
-												test:function () {
-													var
-														_Class = Uize.Class.subclass (),
-														_instance = _Class (),
-														_handlerCalled = false,
-														_handlerCalledAfterFirstSet = false
-													;
-													_instance.set (_testInfo.falseExpected);
-													_instance.whenever (_testInfo.derivation,function () {_handlerCalled = true});
-													_handlerCalledAfterFirstSet = _handlerCalled;
-													_instance.set (_testInfo.trueExpected);
-													return (
-														this.expect (false,_handlerCalledAfterFirstSet) &&
-														this.expect (true,_handlerCalled)
-													);
-												}
-											}
-										}
-									)
-								}
-							]
-						}
+						_eventsSystemTest ('Classes support events',false)
 					]
 				},
 				{
@@ -3655,45 +3027,673 @@ Uize.module ({
 									}
 								}
 							]
-						},
+						}
+					]
+				},
+				{
+					title:'Instances provide methods for a conditions mechanism',
+					test:[
 						{
-							title:'Instances provide methods for a conditions mechanism',
+							title:'Test that the is instance method works correctly',
 							test:[
 								{
-									title:'Test that the is instance method works correctly',
+									title:'The value false is returned when the specified condition property is not declared',
+									test:function () {
+										var
+											_Subclass = Uize.Class.subclass (),
+											_instance = new _Subclass
+										;
+										return this.expect (false,_instance.is ('nonExistentProperty'));
+									}
+								},
+								{
+									title:'The value true is returned for all truthy values of the specified condition property, while the value false is returned for all falsy values of the property',
+									test:function () {
+										var _Class = Uize.Class.subclass ();
+										_Class.stateProperties ({myProperty:{}});
+										var _instance = _Class ();
+										return this.expect (
+											Uize.map (_falsyAndTruthyValues,'!!value'),
+											Uize.map (
+												_falsyAndTruthyValues,
+												function (_value) {
+													_instance.set ({myProperty:_value});
+													return _instance.is ('myProperty');
+												}
+											)
+										);
+									}
+								}
+							]
+						},
+						_metUnmetMethodTest (true),
+						_metUnmetMethodTest (false),
+						{
+							title:'Test support for compound conditions',
+							test:[
+								{
+									title:'Test that the once instance method works correctly',
 									test:[
+										_onceMethodTest (false),
+										_onceMethodTest (true),
 										{
-											title:'The value false is returned when the specified condition property is not declared',
+											title:'Test that specifying an array of property names for the condition is handled correctly',
 											test:function () {
+												var _Class = Uize.Class.subclass ();
+												_Class.stateProperties ({
+													phase1Done:{value:false},
+													phase2Done:{value:false},
+													phase3Done:{value:false}
+												});
 												var
-													_Subclass = Uize.Class.subclass (),
-													_instance = new _Subclass
+													_instance = _Class (),
+													_valuesPassedToHandler = []
 												;
-												return this.expect (false,_instance.is ('nonExistentProperty'));
+												_instance.once (
+													['phase1Done','phase2Done','phase3Done'],
+													function () {_valuesPassedToHandler.push ([].slice.call (arguments))}
+												);
+												_instance.set ({phase1Done:1});
+												_instance.set ({phase2Done:true});
+												_instance.set ({phase3Done:'foo'});
+												return this.expect ([[1,true,'foo']],_valuesPassedToHandler);
 											}
 										},
 										{
-											title:'The value true is returned for all truthy values of the specified condition property, while the value false is returned for all falsy values of the property',
+											title:'When specifying an array of property names for the condition, prefixing some property names with a "!" to not their value is handled correctly',
 											test:function () {
 												var _Class = Uize.Class.subclass ();
-												_Class.stateProperties ({myProperty:{}});
-												var _instance = _Class ();
-												return this.expect (
-													Uize.map (_falsyAndTruthyValues,'!!value'),
-													Uize.map (
-														_falsyAndTruthyValues,
-														function (_value) {
-															_instance.set ({myProperty:_value});
-															return _instance.is ('myProperty');
-														}
+												_Class.stateProperties ({
+													ready:{value:false},
+													empty:{value:true}
+												});
+												var
+													_instance = _Class (),
+													_valuesPassedToHandler = []
+												;
+												_instance.once (
+													['ready','!empty'],
+													function () {_valuesPassedToHandler.push ([].slice.call (arguments))}
+												);
+												_instance.set ({ready:true});
+												_instance.set ({empty:false});
+												return this.expect ([[true,false]],_valuesPassedToHandler);
+											}
+										},
+										{
+											title:'When specifying an array of property names for the condition, property names may contain spaces and special characters',
+											test:function () {
+												var _Class = Uize.Class.subclass ();
+												_Class.stateProperties ({
+													'property name with spaces':{value:false},
+													'~@#$%^&*(){}[]:;<>,.?/':{value:false}
+												});
+												var
+													_instance = _Class (),
+													_valuesPassedToHandler = []
+												;
+												_instance.once (
+													['property name with spaces','~@#$%^&*(){}[]:;<>,.?/'],
+													function () {_valuesPassedToHandler.push ([].slice.call (arguments))}
+												);
+												_instance.set ({'property name with spaces':42});
+												_instance.set ({'~@#$%^&*(){}[]:;<>,.?/':'forty two'});
+												return this.expect ([[42,'forty two']],_valuesPassedToHandler);
+											}
+										},
+										{
+											title:'Test that specifying a comma-separated list of property names for the condition is handled correctly',
+											test:function () {
+												var _Class = Uize.Class.subclass ();
+												_Class.stateProperties ({
+													phase1Done:{value:false},
+													phase2Done:{value:false},
+													phase3Done:{value:false}
+												});
+												var
+													_instance = _Class (),
+													_valuesPassedToHandler = []
+												;
+												_instance.once (
+													'phase1Done, phase2Done, phase3Done',
+													function () {_valuesPassedToHandler.push ([].slice.call (arguments))}
+												);
+												_instance.set ({phase1Done:1});
+												_instance.set ({phase2Done:true});
+												_instance.set ({phase3Done:'foo'});
+												return this.expect ([[1,true,'foo']],_valuesPassedToHandler);
+											}
+										},
+										{
+											title:'When specifying a comma-separated list of property names for the condition, prefixing some property names with a "!" to not their value is handled correctly',
+											test:function () {
+												var _Class = Uize.Class.subclass ();
+												_Class.stateProperties ({
+													ready:{value:false},
+													empty:{value:true}
+												});
+												var
+													_instance = _Class (),
+													_valuesPassedToHandler = []
+												;
+												_instance.once (
+													'ready, !empty',
+													function () {_valuesPassedToHandler.push ([].slice.call (arguments))}
+												);
+												_instance.set ({ready:true});
+												_instance.set ({empty:false});
+												return this.expect ([[true,false]],_valuesPassedToHandler);
+											}
+										},
+										{
+											title:'Test that a compound condition specified as a string, consisting of a properties list and a condition evaluator expression, is handled correctly',
+											test:function () {
+												var _Class = Uize.Class.subclass ();
+												_Class.stateProperties ({
+													width:{value:0},
+													height:{value:0},
+													depth:{value:0}
+												});
+												var
+													_instance = _Class (),
+													_valuesPassedToHandler = []
+												;
+												_instance.once (
+													'width, height, depth: width * height * depth > 1000',
+													function () {_valuesPassedToHandler.push ([].slice.call (arguments))}
+												);
+												_instance.set ({width:10});
+												_instance.set ({height:11});
+												_instance.set ({depth:12});
+												return this.expect ([[10,11,12]],_valuesPassedToHandler);
+											}
+										},
+										{
+											title:'Test that a compound condition specified as a function is handled correctly',
+											test:function () {
+												var _Class = Uize.Class.subclass ();
+												_Class.stateProperties ({
+													width:{value:0},
+													height:{value:0},
+													depth:{value:0}
+												});
+												var
+													_instance = _Class (),
+													_valuesPassedToHandler = []
+												;
+												_instance.once (
+													function (width,height,depth) {return width * height * depth > 1000},
+													function () {_valuesPassedToHandler.push ([].slice.call (arguments))}
+												);
+												_instance.set ({width:10});
+												_instance.set ({height:11});
+												_instance.set ({depth:12});
+												return this.expect ([[10,11,12]],_valuesPassedToHandler);
+											}
+										},
+										{
+											title:'A wirings object is returned, that contains wirings for the Changed.[propertyName] event of every property',
+											test:function () {
+												var _Class = Uize.Class.subclass ();
+												_Class.stateProperties ({
+													phase1Done:{value:false},
+													phase2Done:{value:false},
+													phase3Done:{value:false}
+												});
+												var
+													_instance = _Class (),
+													_wirings = _instance.once (
+														['phase1Done','phase2Done','phase3Done'],
+														Uize.nop
+													)
+												;
+												return (
+													this.expect (
+														['Changed.phase1Done','Changed.phase2Done','Changed.phase3Done'],
+														Uize.keys (_wirings)
+													) &&
+													this.expectType ('function',_wirings ['Changed.phase1Done']) &&
+													this.expectType ('function',_wirings ['Changed.phase2Done']) &&
+													this.expectType ('function',_wirings ['Changed.phase3Done'])
+												);
+											}
+										},
+										{
+											title:'Unwiring the event wirings for a compound condition before it is met results in the handler for the condition not being executed',
+											test:function () {
+												var _Class = Uize.Class.subclass ();
+												_Class.stateProperties ({
+													phase1Done:{value:false},
+													phase2Done:{value:false},
+													phase3Done:{value:false}
+												});
+												var
+													_instance = _Class (),
+													_handlerCalled = false
+												;
+												_instance.unwire (
+													_instance.once (
+														'phase1Done, phase2Done, phase3Done',
+														function () {_handlerCalled = true}
 													)
 												);
+												_instance.set ({phase1Done:true,phase2Done:true,phase3Done:true});
+												return this.expect (false,_handlerCalled);
+											}
+										},
+										{
+											title:'The handler receives the values of all the determinants are arguments',
+											test:function () {
+												var
+													_Class = Uize.Class.subclass ({
+														stateProperties:{
+															propertyA:{value:false},
+															propertyB:{value:0},
+															propertyC:{value:''},
+															propertyD:{value:null}
+														}
+													}),
+													_actualHandlerArguments,
+													_instance = _Class ()
+												;
+												_instance.once (
+													function (propertyA,propertyB,propertyC,propertyD) {
+														return propertyA || propertyB || propertyC || propertyD;
+													},
+													function () {_actualHandlerArguments = Uize.copyList (arguments)}
+												);
+												_instance.set ({
+													propertyA:true,
+													propertyB:42,
+													propertyC:'hello',
+													propertyD:[]
+												});
+												return this.expect ([true,42,'hello',[]],_actualHandlerArguments);
 											}
 										}
 									]
+								}
+							]
+						},
+						{
+							title:'Test the onChange instance method',
+							test:[
+								{
+									title:'The handler is executed once upon registering a change handler',
+									test:function () {
+										var
+											_Class = Uize.Class.subclass ({
+												stateProperties:{
+													width:{value:9},
+													height:{value:11}
+												}
+											}),
+											_coverageAndOrder = [],
+											_instance = _Class ()
+										;
+										_instance.onChange (
+											function (width,height) {return width * height},
+											function (_area) {_coverageAndOrder.push (_area)}
+										);
+										return this.expect ([99],_coverageAndOrder);
+									}
 								},
-								_metUnmetMethodTest (true),
-								_metUnmetMethodTest (false)
+								{
+									title:'The handler is only executed when the computed value actually changes, not every time the determinants change',
+									test:function () {
+										var
+											_Class = Uize.Class.subclass ({
+												stateProperties:{
+													width:{value:9},
+													height:{value:11}
+												}
+											}),
+											_coverageAndOrder = [],
+											_instance = _Class ()
+										;
+										_instance.onChange (
+											function (width,height) {return width * height},
+											function (_area) {_coverageAndOrder.push (_area)}
+										);
+										_instance.set ({width:11,height:9});
+										_instance.set ({width:10,height:20});
+										_instance.set ({width:20,height:10});
+										_instance.set ({width:5,height:40});
+										_instance.set ({width:5,height:50});
+										return this.expect ([99,200,250],_coverageAndOrder);
+									}
+								},
+								{
+									title:'A wirings object is returned that allows the change handler to be fully unwired',
+									test:function () {
+										var
+											_Class = Uize.Class.subclass ({
+												stateProperties:{
+													width:{value:9},
+													height:{value:11}
+												}
+											}),
+											_coverageAndOrder = [],
+											_instance = _Class (),
+											_wirings = _instance.onChange (
+												function (width,height) {return width * height},
+												function (_area) {_coverageAndOrder.push (_area)}
+											)
+										;
+										_instance.unwire (_wirings);
+										_instance.set ({width:10,height:20});
+										return (
+											this.expect ([99],_coverageAndOrder) &&
+											this.expect (['Changed.width','Changed.height'],Uize.keys (_wirings))
+										);
+									}
+								},
+								{
+									title:'The handler receives two arguments, being the derived value and an array containing the values of the determinants',
+									test:function () {
+										var
+											_Class = Uize.Class.subclass ({
+												stateProperties:{
+													width:{value:9},
+													height:{value:11}
+												}
+											}),
+											_actualHandlerArguments,
+											_instance = _Class ()
+										;
+										_instance.onChange (
+											function (width,height) {return width * height},
+											function () {_actualHandlerArguments = Uize.copyList (arguments)}
+										);
+										return this.expect ([99,[9,11]],_actualHandlerArguments);
+									}
+								},
+								{
+									title:'Test that various types of derivation specifiers are supported correctly',
+									test:Uize.map (
+										[
+											{
+												title:'Test that a function derivation is supported correctly',
+												properties:{width:9,height:11},
+												derivation:function (width,height) {return width * height},
+												expectedDerivedValue:99
+											},
+											{
+												title:'Test that a string derivation expression is supported correctly',
+												properties:{width:9,height:11},
+												derivation:'width, height : width * height',
+												expectedDerivedValue:99
+											},
+											{
+												title:'Test that a properties array boolean derivation is supported correctly',
+												properties:{isSolid:true,isRound:false},
+												derivation:['isSolid','isRound'],
+												expectedDerivedValue:false
+											},
+											{
+												title:'Test that a properties array boolean derivation, with some inverted properties, is supported correctly',
+												properties:{isSolid:true,isRound:false},
+												derivation:['isSolid','!isRound'],
+												expectedDerivedValue:true
+											},
+											{
+												title:'Test that a properties list string boolean derivation is supported correctly',
+												properties:{isSolid:true,isRound:false},
+												derivation:'isSolid, isRound',
+												expectedDerivedValue:false
+											},
+											{
+												title:'Test that a properties list string boolean derivation, with some inverted properties, is supported correctly',
+												properties:{isSolid:true,isRound:false},
+												derivation:'isSolid, !isRound',
+												expectedDerivedValue:true
+											},
+											{
+												title:'Test that a string property name derivation is supported correctly',
+												properties:{LTUAE:42},
+												derivation:'LTUAE',
+												expectedDerivedValue:42
+											},
+											{
+												title:'Test that a string property name derivation, with inversion, is supported correctly',
+												properties:{isSolid:true},
+												derivation:'!isSolid',
+												expectedDerivedValue:false
+											}
+										],
+										function (_testInfo) {
+											return {
+												title:_testInfo.title,
+												test:function () {
+													var
+														_actualDerivedValue,
+														_Class = Uize.Class.subclass ({set:_testInfo.properties}),
+														_instance = _Class ()
+													;
+													_instance.onChange (
+														_testInfo.derivation,
+														function (_derivedValue) {_actualDerivedValue = _derivedValue}
+													);
+													return this.expect (_testInfo.expectedDerivedValue,_actualDerivedValue);
+												}
+											}
+										}
+									)
+								}
+							]
+						},
+						{
+							title:'Test the whenever instance method',
+							test:[
+								{
+									title:'The handler is not executed upon registering a whenever handler if the derivation is not truthy at the time',
+									test:function () {
+										var
+											_Class = Uize.Class.subclass ({
+												stateProperties:{
+													propertyA:{value:false},
+													propertyB:{value:true}
+												}
+											}),
+											_instance = _Class (),
+											_handlerCalled = false
+										;
+										_instance.whenever (
+											function (propertyA,propertyB) {return propertyA && propertyB},
+											function () {_handlerCalled = true}
+										);
+										return this.expect (false,_handlerCalled);
+									}
+								},
+								{
+									title:'The handler is executed immediately upon registering a whenever handler if the derivation is truthy at the time',
+									test:function () {
+										var
+											_Class = Uize.Class.subclass ({
+												stateProperties:{
+													propertyA:{value:true},
+													propertyB:{value:true}
+												}
+											}),
+											_instance = _Class (),
+											_handlerCalled = false
+										;
+										_instance.whenever (
+											function (propertyA,propertyB) {return propertyA && propertyB},
+											function () {_handlerCalled = true}
+										);
+										return this.expect (true,_handlerCalled);
+									}
+								},
+								{
+									title:'The handler is only executed when the computed value actually becomes truthy, not every time the determinants change',
+									test:function () {
+										var
+											_Class = Uize.Class.subclass ({
+												stateProperties:{
+													propertyA:{value:false},
+													propertyB:{value:false}
+												}
+											}),
+											_handlerCalled,
+											_handlerCalledHistory = [],
+											_instance = _Class ()
+										;
+
+										_handlerCalled = false;
+										_instance.whenever (
+											function (propertyA,propertyB) {return propertyA || propertyB},
+											function () {_handlerCalled = true}
+										);
+										_handlerCalledHistory.push (_handlerCalled);
+
+										_handlerCalled = false;
+										_instance.set ({propertyA:false,propertyB:true});
+										_handlerCalledHistory.push (_handlerCalled);
+
+										_handlerCalled = false;
+										_instance.set ({propertyA:true,propertyB:false});
+										_handlerCalledHistory.push (_handlerCalled);
+
+										_handlerCalled = false;
+										_instance.set ({propertyA:true,propertyB:true});
+										_handlerCalledHistory.push (_handlerCalled);
+
+										_handlerCalled = false;
+										_instance.set ({propertyA:false,propertyB:false});
+										_handlerCalledHistory.push (_handlerCalled);
+
+										return this.expect ([false,true,false,false,false],_handlerCalledHistory);
+									}
+								},
+								{
+									title:'A wirings object is returned that allows the whenever handler to be fully unwired',
+									test:function () {
+										var
+											_Class = Uize.Class.subclass ({
+												stateProperties:{
+													propertyA:{value:false},
+													propertyB:{value:false}
+												}
+											}),
+											_handlerCalled = false,
+											_instance = _Class (),
+											_wirings = _instance.whenever (
+												function (propertyA,propertyB) {return propertyA || propertyB},
+												function () {_handlerCalled = true}
+											)
+										;
+										_instance.unwire (_wirings);
+										_instance.set ({propertyA:true,propertyB:true});
+										return this.expect (false,_handlerCalled);
+									}
+								},
+								{
+									title:'The handler receives the values of all the determinants are arguments',
+									test:function () {
+										var
+											_Class = Uize.Class.subclass ({
+												stateProperties:{
+													propertyA:{value:false},
+													propertyB:{value:0},
+													propertyC:{value:''},
+													propertyD:{value:null}
+												}
+											}),
+											_actualHandlerArguments,
+											_instance = _Class ()
+										;
+										_instance.whenever (
+											function (propertyA,propertyB,propertyC,propertyD) {
+												return propertyA || propertyB || propertyC || propertyD;
+											},
+											function () {_actualHandlerArguments = Uize.copyList (arguments)}
+										);
+										_instance.set ({
+											propertyA:true,
+											propertyB:42,
+											propertyC:'hello',
+											propertyD:[]
+										});
+										return this.expect ([true,42,'hello',[]],_actualHandlerArguments);
+									}
+								},
+								{
+									title:'Test that various types of derivation specifiers are supported correctly',
+									test:Uize.map (
+										[
+											{
+												title:'Test that a function derivation is supported correctly',
+												derivation:function (propertyA,propertyB) {return propertyA && propertyB},
+												falseExpected:{propertyA:false,propertyB:true},
+												trueExpected:{propertyA:true,propertyB:true}
+											},
+											{
+												title:'Test that a string derivation expression is supported correctly',
+												derivation:'propertyA, propertyB : propertyA && propertyB',
+												falseExpected:{propertyA:false,propertyB:true},
+												trueExpected:{propertyA:true,propertyB:true}
+											},
+											{
+												title:'Test that a properties array boolean derivation is supported correctly',
+												derivation:['propertyA', 'propertyB'],
+												falseExpected:{propertyA:false,propertyB:true},
+												trueExpected:{propertyA:true,propertyB:true}
+											},
+											{
+												title:'Test that a properties array boolean derivation, with some inverted properties, is supported correctly',
+												derivation:['propertyA', '!propertyB'],
+												falseExpected:{propertyA:true,propertyB:true},
+												trueExpected:{propertyA:true,propertyB:false}
+											},
+											{
+												title:'Test that a properties list string boolean derivation is supported correctly',
+												derivation:'propertyA, propertyB',
+												falseExpected:{propertyA:false,propertyB:true},
+												trueExpected:{propertyA:true,propertyB:true}
+											},
+											{
+												title:'Test that a properties list string boolean derivation, with some inverted properties, is supported correctly',
+												derivation:'propertyA, !propertyB',
+												falseExpected:{propertyA:true,propertyB:true},
+												trueExpected:{propertyA:true,propertyB:false}
+											},
+											{
+												title:'Test that a string property name derivation is supported correctly',
+												derivation:'property',
+												falseExpected:{property:false},
+												trueExpected:{property:true}
+											},
+											{
+												title:'Test that a string property name derivation, with inversion, is supported correctly',
+												derivation:'!property',
+												falseExpected:{property:true},
+												trueExpected:{property:false}
+											}
+										],
+										function (_testInfo) {
+											return {
+												title:_testInfo.title,
+												test:function () {
+													var
+														_Class = Uize.Class.subclass (),
+														_instance = _Class (),
+														_handlerCalled = false,
+														_handlerCalledAfterFirstSet = false
+													;
+													_instance.set (_testInfo.falseExpected);
+													_instance.whenever (_testInfo.derivation,function () {_handlerCalled = true});
+													_handlerCalledAfterFirstSet = _handlerCalled;
+													_instance.set (_testInfo.trueExpected);
+													return (
+														this.expect (false,_handlerCalledAfterFirstSet) &&
+														this.expect (true,_handlerCalled)
+													);
+												}
+											}
+										}
+									)
+								}
 							]
 						}
 					]
