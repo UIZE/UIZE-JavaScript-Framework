@@ -577,6 +577,7 @@ Uize.module ({
 									_wireUnwire (_eventName);
 								}
 							};
+							m._onChangeHandlerAddedFlagName = m.instanceId + '_handlerAlreadyAdded';
 
 						/*** Public Instance Properties ***/
 							m.instanceId = _Uize.getGuid ();
@@ -2114,7 +2115,7 @@ Uize.module ({
 						_propertyProfile,
 						_onChangeHandlers,
 						_propertiesChanged = {},
-						_onChangeHandlerAddedFlagName,
+						_onChangeHandlerAddedFlagName = m._onChangeHandlerAddedFlagName,
 						_onChangeHandler,
 						_hasChangedHandlers = _thisIsInstance && m._hasChangedHandlers,
 						_hasChangedDotStarHandlers = _hasChangedHandlers && _hasChangedHandlers ['*'],
@@ -2214,17 +2215,14 @@ Uize.module ({
 
 								/*** build up list of onChange handlers to execute ***/
 									var _processOnChangeHandler = function (_onChangeHandler) {
+										if (typeof _onChangeHandler == _typeString)
+											_onChangeHandler = m [_onChangeHandler]
+										;
 										if (_isFunction (_onChangeHandler)) {
-											if (!_onChangeHandlers) {
-												_onChangeHandlers = [];
-												_onChangeHandlerAddedFlagName = m.instanceId + '_handlerAlreadyAdded';
-											}
 											if (!_onChangeHandler [_onChangeHandlerAddedFlagName]) {
 												_onChangeHandler [_onChangeHandlerAddedFlagName] = 1;
-												_onChangeHandlers.push (_onChangeHandler);
+												(_onChangeHandlers || (_onChangeHandlers = [])).push (_onChangeHandler);
 											}
-										} else if (typeof _onChangeHandler == _typeString) {
-											_processOnChangeHandler (m [_onChangeHandler]);
 										} else if (_isArray (_onChangeHandler)) {
 											_forEach (_onChangeHandler,_processOnChangeHandler);
 										}
