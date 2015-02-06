@@ -1391,7 +1391,10 @@ Uize.module ({
 				},
 
 				pseudoLocalize:function (_params,_callback) {
-					var m = this;
+					var
+						m = this,
+						_project = m.project
+					;
 					m.prepareToExecuteMethod (3);
 
 					/*** gather resources for primary language ***/
@@ -1403,7 +1406,10 @@ Uize.module ({
 						m.stepCompleted ('pseudo-localized resources for primary language');
 
 					/*** distributed pseudo-localized resources to individual resource files ***/
-						m.distributeResources (_pseudoLocalizedResources,m.project.primaryLanguage);
+						m.distributeResources (
+							_pseudoLocalizedResources,
+							_params.target != 'pseudo' ? _project.primaryLanguage : _project.pseudoLocale
+						);
 						m.stepCompleted ('distributed pseudo-localized resources to individual resource files');
 
 					_callback ();
