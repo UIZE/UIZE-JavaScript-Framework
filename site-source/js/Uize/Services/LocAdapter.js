@@ -1408,7 +1408,7 @@ Uize.module ({
 					/*** distributed pseudo-localized resources to individual resource files ***/
 						m.distributeResources (
 							_pseudoLocalizedResources,
-							_params.target != 'pseudo' ? _project.primaryLanguage : _project.pseudoLocale
+							_params.target == 'primary' ? _project.primaryLanguage : _project.pseudoLocale
 						);
 						m.stepCompleted ('distributed pseudo-localized resources to individual resource files');
 
