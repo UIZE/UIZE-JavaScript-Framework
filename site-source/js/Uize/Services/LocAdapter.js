@@ -1126,7 +1126,10 @@ Uize.module ({
 												function (_gatheredProperty,_propertyDiff,_path) {
 													return (
 														!_propertyDiff || _propertyDiff.value == 'removed' ||
-														!m.doesBrandSupportLanguage (m.getStringBrand (_path),_language)
+														!m.doesBrandSupportLanguage (
+															m.getStringBrand ([_resourceFileSubPath].concat (_path)),
+															_language
+														)
 															? _undefined
 															: {
 																value:_propertyDiff.value == 'modified'
