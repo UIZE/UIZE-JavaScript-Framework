@@ -10,21 +10,21 @@
 		superclass:'string',
 		developers:'array',
 		hasHtml:'boolean',
-		hasCss:'boolean'
+		hasCss:'boolean',
+		hasLoc:'boolean'
 	});
 %><%
 	var
-		_widgetNamespace = input.widgetNamespace,
+		_input = input,
+		_widgetNamespace = _input.widgetNamespace,
 		_widgetModuleName = _widgetNamespace + '.Widget',
 		_widgetVisualSamplerModuleName = _widgetNamespace + '.VisualSampler',
-		_hasHtml = input.hasHtml,
-		_hasCss = input.hasCss,
 		_htmlModuleName = _widgetNamespace + '.Html',
 		_cssModuleName = _widgetNamespace + '.Css',
 		_required = []
 	;
-	_hasHtml && _required.push (_htmlModuleName);
-	_hasCss && _required.push (_cssModuleName);
+	_input.hasHtml && _required.push (_htmlModuleName);
+	_input.hasCss && _required.push (_cssModuleName);
 %><%
 	.headComment
 %>/* Module Meta Data
@@ -38,7 +38,7 @@
 	Introduction
 		The =<%= _widgetModuleName %>= module implements a widget class.
 
-		*DEVELOPERS:* <%= Uize.Array.Join.hugJoin (input.developers || [],'`','`',', ') %>
+		*DEVELOPERS:* <%= Uize.Array.Join.hugJoin (_input.developers || [],'`','`',', ') %>
 
 		Visual Sampler
 			Below is a visual sampler of the =<%= _widgetModuleName %>= class...
@@ -49,33 +49,40 @@
 			widgetClass: <%= _widgetVisualSamplerModuleName %>
 			.............<%= Uize.Str.Repeat.repeat ('.',_widgetVisualSamplerModuleName.length) %>
 */
-
+<%@
+	startBlock ('locPart')
+%>			hasLoc:true<%@
+	endBlock ()
+%><%@
+	startBlock ('htmlPart')
+%>			set:{
+				html:<%= _htmlModuleName %>
+			}<%@
+	endBlock ()
+%><%@
+	startBlock ('cssPart')
+%>			staticProperties:{
+				cssModule:<%= _cssModuleName %>
+			}<%@
+	endBlock ()
+%>
 Uize.module ({
 	name:'<%= _widgetModuleName %>',
-	superclass:'<%= input.superclass || 'Uize.Widget.V2' %>',
+	superclass:'<%= _input.superclass || 'Uize.Widget.V2' %>',
 	required:<%= Uize.Str.Lines.indent (Uize.Json.to (_required),1,'\t',false) %>,
 	builder:function (_superclass) {
 		'use strict';
 
 		return _superclass.subclass ({
 <%
-		if (_hasHtml) {
-%>			set:{
-				html:<%= _htmlModuleName %>
-			}<%
-			if (_hasCss) { %>,
-
-
-<% 		} else { %>
-<%			}
-		}
-		if (_hasCss) {
-%>			staticProperties:{
-				cssModule:<%= _cssModuleName %>
-			}
-<%
-		}
-%>		});
+	var _parts = [];
+	_input.hasLoc && _parts.push (locPart ());
+	_input.hasHtml && _parts.push (htmlPart ());
+	_input.hasCss && _parts.push (cssPart ());
+%><%=
+	_parts.join (',\n\n')
+%>
+		});
 	}
 });
 

@@ -50,13 +50,24 @@ Uize.module ({
 			perform:function (_params) {
 				var
 					_fileSystem = Uize.Services.FileSystem.singleton (),
+					_fileSystemWriteFile = _fileSystem.writeFile,
 					_modulesPath = _params.sourcePath + '/' + _params.modulesFolder + '/',
 					_namespace = _params.namespace,
+					_projectNamespace = Uize.Util.ModuleNaming.getNamespace (_namespace),
 					_hasHtml = _params.hasHtml + '' != 'false',
 					_hasCss = _params.hasCss + '' != 'false',
+					_hasLoc = _params.hasLoc + '' != 'false',
+					_console = _params.console || 'verbose',
 					_developers = _params.developers
 				;
 				_developers = _developers ? _developers.split (',') : [];
+
+				_fileSystem.writeFile = function (_params) {
+					if (_console == 'verbose')
+						console.log ('CREATED FILE: ' + _params.path)
+					;
+					_fileSystemWriteFile.apply (_fileSystem,arguments);
+				};
 
 				function _getModulePath (_moduleName,_sourceType) {
 					return _modulesPath + Uize.modulePathResolver (_moduleName) + (_sourceType ? ('.' + _sourceType) : '');
@@ -64,11 +75,7 @@ Uize.module ({
 				/*** create the HTML module's source file, if necessary ***/
 					_hasHtml && _fileSystem.writeFile ({
 						path:_getModulePath (_namespace + '.Html','htmlt'),
-						contents:[
-							'<div>',
-							'	<div class="title">BLANK WIDGET</div>',
-							'</div>'
-						].join ('\n')
+						contents:'<div>BLANK WIDGET</div>'
 					});
 
 				/*** create the CSS module's source .csst file, if necessary ***/
@@ -78,13 +85,20 @@ Uize.module ({
 							'.`` {',
 							'	background: #ccc;',
 							'	padding: 5px;',
-							'}',
-							'',
-							'.`title` {',
-							'	color: #000;',
-							'	background: #eee;',
 							'}'
 						].join ('\n')
+					});
+
+				/*** create the primary language's source .loc file, if necessary ***/
+					var
+						_locConfig = (_params.moduleConfigs || {}) ['Uize.Build.Loc'] || {},
+						_locProjectConfig = (_locConfig.projects || {}) [_projectNamespace] || {},
+						_locCommonConfig = _locConfig.common || {},
+						_primaryLanguage = _locProjectConfig.primaryLanguage || _locCommonConfig.primaryLanguage || 'en-US'
+					;
+					_hasLoc && _fileSystem.writeFile ({
+						path:_getModulePath (_namespace + '.Loc.' + _primaryLanguage.replace ('-','_'),'loc'),
+						contents:''
 					});
 
 				/*** create the CSS assets folder, if necessary ***/
@@ -94,7 +108,7 @@ Uize.module ({
 
 				/*** create the JavaScript modules ***/
 					var
-						_headCommentModule = (_params.headComments || {}) [Uize.Util.ModuleNaming.getNamespace (_namespace)],
+						_headCommentModule = (_params.headComments || {}) [_projectNamespace],
 						_headCommentGenerator
 					;
 					Uize.Flo.block (
@@ -140,7 +154,8 @@ Uize.module ({
 								{
 									superclass:_params.superclass,
 									hasHtml:_hasHtml,
-									hasCss:_hasCss
+									hasCss:_hasCss,
+									hasLoc:_hasLoc
 								}
 							);
 							_createJavaScriptModule ('VisualSampler');
