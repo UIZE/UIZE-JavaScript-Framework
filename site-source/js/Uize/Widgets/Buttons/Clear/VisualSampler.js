@@ -25,27 +25,12 @@
 
 Uize.module ({
 	name:'Uize.Widgets.Buttons.Clear.VisualSampler',
-	superclass:'Uize.Widgets.VisualSampler.Widget',
-	required:[
-		'Uize.Widgets.Buttons.Clear.Widget',
-		'Uize.Widgets.StateValues'
-	],
+	superclass:'Uize.Widgets.Buttons.LocalizedButtonVisualSampler',
+	required:'Uize.Widgets.Buttons.Clear.Widget',
 	builder:function (_superclass) {
 		'use strict';
 
 		return _superclass.subclass ({
-			omegastructor:function () {
-				this.addStateCombinationSamples ({
-					locale:Uize.Widgets.StateValues.locale
-				});
-				this.addStateCombinationSamples ({
-					flavor:['normal','negative','positive','primary']
-				});
-				this.addStateCombinationSamples ({
-					size:Uize.Widgets.StateValues.size
-				});
-			},
-
 			set:{
 				samplerWidgetClass:Uize.Widgets.Buttons.Clear.Widget
 			}

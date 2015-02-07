@@ -1,7 +1,7 @@
 /*______________
 |       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
 |     /      /  |   ---------------------------------------------------
-|    /    O /   |    MODULE : Uize.Widgets.Buttons.Clear.VisualTests Class
+|    /    O /   |    MODULE : Uize.Widgets.Buttons.LocalizedButtonVisualSampler Class
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
 | /____/ /__/_| | COPYRIGHT : (c)2014-2015 UIZE
@@ -18,22 +18,30 @@
 
 /*?
 	Introduction
-		The =Uize.Widgets.Buttons.Clear.VisualTests= class implements a set of visual tests for the =Uize.Widgets.Buttons.Clear.Widget= class.
+		The =Uize.Widgets.Buttons.LocalizedButtonVisualSampler= class implements a visual sampler widget base class for localized button widget classes.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 */
 
 Uize.module ({
-	name:'Uize.Widgets.Buttons.Clear.VisualTests',
-	superclass:'Uize.Widgets.Buttons.LocalizedButtonVisualTests',
-	required:'Uize.Widgets.Buttons.Clear.Widget',
+	name:'Uize.Widgets.Buttons.LocalizedButtonVisualSampler',
+	superclass:'Uize.Widgets.VisualSampler.Widget',
+	required:'Uize.Widgets.StateValues',
 	builder:function (_superclass) {
 		'use strict';
 
 		return _superclass.subclass ({
-			staticProperties:{
-				widgetClass:Uize.Widgets.Buttons.Clear.Widget
-			}
+			omegastructor:function () {
+				this.addStateCombinationSamples ({
+					locale:Uize.Widgets.StateValues.locale
+				});
+				this.addStateCombinationSamples ({
+					flavor:['normal','negative','positive','primary']
+				});
+				this.addStateCombinationSamples ({
+					size:Uize.Widgets.StateValues.size
+				});
+			},
 		});
 	}
 });
