@@ -39,6 +39,8 @@ Uize.module ({
 		return _superclass.subclass ({
 			mixins:Uize.Widget.mV2,
 
+			hasLoc:true,
+
 			set:{
 				html:Uize.Widgets.Dialog.Html,
 				children:{
@@ -54,6 +56,11 @@ Uize.module ({
 
 			children:{
 				contents:{}
+			},
+
+			childBindings:{
+				loc_cancelLabel:'->cancel.text',
+				loc_okLabel:'->ok.text'
 			}
 		});
 	}
