@@ -31,8 +31,9 @@ Uize.module ({
 		'use strict';
 
 		return _superclass.subclass ({
+			hasLoc:true,
+
 			set:{
-				title:'Pick a color',
 				keepOpen:true,
 				valueWidgetClass:Uize.Widgets.ColorSliders.Vert.Combo.Widget
 			}

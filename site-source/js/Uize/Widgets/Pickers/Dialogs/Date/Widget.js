@@ -36,8 +36,9 @@ Uize.module ({
 		'use strict';
 
 		return _superclass.subclass ({
+			hasLoc:true,
+
 			set:{
-				title:'Pick a date',
 				valueWidgetClass:Uize.Widgets.Calendar.Widget,
 				pipedProperties:[
 					'displayFormat',

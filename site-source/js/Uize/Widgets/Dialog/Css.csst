@@ -59,7 +59,6 @@
 				color: #000;
 				font-weight: bold;
 				line-height: 22px;
-				text-transform: uppercase;
 				letter-spacing: 1px;
 			}
 			.`closeButton` {

@@ -195,7 +195,7 @@ Uize.module ({
 								NOTES
 								- the initial value is =undefined=
 					*/
-				_value:'value'
+				_value:'value',
 					/*?
 						State Properties
 							value
@@ -204,6 +204,9 @@ Uize.module ({
 								NOTES
 								- the initial value is =undefined=
 					*/
+
+					/*** derived properties ***/
+						title:{derived:'loc_title'}
 			},
 
 			set:{
