@@ -10,6 +10,7 @@
 	border: none;
 	padding: 0;
 	margin: 0;
+	font-family: <%= _cssUtil.font.family %>;
 }
 
 .`` tr, .`` td {
