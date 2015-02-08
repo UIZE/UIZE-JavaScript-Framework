@@ -1,7 +1,7 @@
 /*______________
 |       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
 |     /      /  |   ---------------------------------------------------
-|    /    O /   |    MODULE : Uize.Widgets.Buttons.LocalizedButtonVisualSampler Class
+|    /    O /   |    MODULE : Uize.Widgets.Buttons.Localized.VisualSampler Class
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
 | /____/ /__/_| | COPYRIGHT : (c)2014-2015 UIZE
@@ -18,15 +18,18 @@
 
 /*?
 	Introduction
-		The =Uize.Widgets.Buttons.LocalizedButtonVisualSampler= class implements a visual sampler widget base class for localized button widget classes.
+		The =Uize.Widgets.Buttons.Localized.VisualSampler= class implements a visual sampler widget base class for localized button widget classes.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 */
 
 Uize.module ({
-	name:'Uize.Widgets.Buttons.LocalizedButtonVisualSampler',
+	name:'Uize.Widgets.Buttons.Localized.VisualSampler',
 	superclass:'Uize.Widgets.VisualSampler.Widget',
-	required:'Uize.Widgets.StateValues',
+	required:[
+		'Uize.Widgets.StateValues',
+		'Uize.Widgets.Buttons.Localized.Widget'
+	],
 	builder:function (_superclass) {
 		'use strict';
 
@@ -42,6 +45,10 @@ Uize.module ({
 					size:Uize.Widgets.StateValues.size
 				});
 			},
+
+			set:{
+				samplerWidgetClass:Uize.Widgets.Buttons.Localized.Widget
+			}
 		});
 	}
 });

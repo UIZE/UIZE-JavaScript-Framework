@@ -34,18 +34,11 @@
 
 Uize.module ({
 	name:'Uize.Widgets.Buttons.Ok.Widget',
-	superclass:'Uize.Widgets.Button.Widget',
-	required:[],
+	superclass:'Uize.Widgets.Buttons.Localized.Widget',
 	builder:function (_superclass) {
 		'use strict';
 
-		return _superclass.subclass ({
-			hasLoc:true,
-
-			stateProperties:{
-				text:{derived:'loc_label'}
-			}
-		});
+		return _superclass.subclass ({hasLoc:true});
 	}
 });
 

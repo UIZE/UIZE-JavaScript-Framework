@@ -1,7 +1,7 @@
 /*______________
 |       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
 |     /      /  |   ---------------------------------------------------
-|    /    O /   |    MODULE : Uize.Widgets.Buttons.LocalizedButtonVisualTests Class
+|    /    O /   |    MODULE : Uize.Widgets.Buttons.Localized.VisualTests Class
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
 | /____/ /__/_| | COPYRIGHT : (c)2014-2015 UIZE
@@ -18,15 +18,18 @@
 
 /*?
 	Introduction
-		The =Uize.Widgets.Buttons.LocalizedButtonVisualTests= class implements a visual tests widget base class for localized button widget classes.
+		The =Uize.Widgets.Buttons.Localized.VisualTests= class implements a visual tests widget base class for localized button widget classes.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 */
 
 Uize.module ({
-	name:'Uize.Widgets.Buttons.LocalizedButtonVisualTests',
+	name:'Uize.Widgets.Buttons.Localized.VisualTests',
 	superclass:'Uize.Widgets.VisualTests.Widget',
-	required:'Uize.Widgets.StateValues',
+	required:[
+		'Uize.Widgets.StateValues',
+		'Uize.Widgets.Buttons.Localized.Widget'
+	],
 	builder:function (_superclass) {
 		'use strict';
 
@@ -40,6 +43,10 @@ Uize.module ({
 					enabled:[true,false],
 					selected:[false,true]
 				});
+			},
+
+			staticProperties:{
+				widgetClass:Uize.Widgets.Buttons.Localized.Widget
 			}
 		});
 	}

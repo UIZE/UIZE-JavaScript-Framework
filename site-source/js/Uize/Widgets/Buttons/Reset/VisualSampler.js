@@ -25,27 +25,12 @@
 
 Uize.module ({
 	name:'Uize.Widgets.Buttons.Reset.VisualSampler',
-	superclass:'Uize.Widgets.VisualSampler.Widget',
-	required:[
-		'Uize.Widgets.Buttons.Reset.Widget',
-		'Uize.Widgets.StateValues'
-	],
+	superclass:'Uize.Widgets.Buttons.Localized.VisualSampler',
+	required:'Uize.Widgets.Buttons.Reset.Widget',
 	builder:function (_superclass) {
 		'use strict';
 
 		return _superclass.subclass ({
-			omegastructor:function () {
-				this.addStateCombinationSamples ({
-					locale:Uize.Widgets.StateValues.locale
-				});
-				this.addStateCombinationSamples ({
-					flavor:['normal','negative','positive','primary']
-				});
-				this.addStateCombinationSamples ({
-					size:Uize.Widgets.StateValues.size
-				});
-			},
-
 			set:{
 				samplerWidgetClass:Uize.Widgets.Buttons.Reset.Widget
 			}

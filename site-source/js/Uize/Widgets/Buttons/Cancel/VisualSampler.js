@@ -25,7 +25,7 @@
 
 Uize.module ({
 	name:'Uize.Widgets.Buttons.Cancel.VisualSampler',
-	superclass:'Uize.Widgets.Buttons.LocalizedButtonVisualSampler',
+	superclass:'Uize.Widgets.Buttons.Localized.VisualSampler',
 	required:'Uize.Widgets.Buttons.Cancel.Widget',
 	builder:function (_superclass) {
 		'use strict';

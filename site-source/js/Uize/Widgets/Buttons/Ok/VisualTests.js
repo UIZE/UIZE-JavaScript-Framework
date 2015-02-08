@@ -25,7 +25,7 @@
 
 Uize.module ({
 	name:'Uize.Widgets.Buttons.Ok.VisualTests',
-	superclass:'Uize.Widgets.Buttons.LocalizedButtonVisualTests',
+	superclass:'Uize.Widgets.Buttons.Localized.VisualTests',
 	required:'Uize.Widgets.Buttons.Ok.Widget',
 	builder:function (_superclass) {
 		'use strict';

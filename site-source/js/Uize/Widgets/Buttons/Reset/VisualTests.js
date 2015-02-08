@@ -25,26 +25,12 @@
 
 Uize.module ({
 	name:'Uize.Widgets.Buttons.Reset.VisualTests',
-	superclass:'Uize.Widgets.VisualTests.Widget',
-	required:[
-		'Uize.Widgets.Buttons.Reset.Widget',
-		'Uize.Widgets.StateValues'
-	],
+	superclass:'Uize.Widgets.Buttons.Localized.VisualTests',
+	required:'Uize.Widgets.Buttons.Reset.Widget',
 	builder:function (_superclass) {
 		'use strict';
 
 		return _superclass.subclass ({
-			omegastructor:function () {
-				this.addStateCombinationTestCases ({
-					locale:Uize.Widgets.StateValues.locale,
-					size:Uize.Widgets.StateValues.size
-				});
-				this.addStateCombinationTestCases ({
-					enabled:[true,false],
-					selected:[false,true]
-				});
-			},
-
 			staticProperties:{
 				widgetClass:Uize.Widgets.Buttons.Reset.Widget
 			}
