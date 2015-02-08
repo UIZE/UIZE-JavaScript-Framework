@@ -556,29 +556,6 @@ Uize.module ({
 					function () {
 						var m = this;
 
-						/*** Private Instance Properties ***/
-							(m._eventBus = new _Uize_Event_Bus).wireUnwireWrapper = function (_eventName,_wireUnwire) {
-								if (_eventName.charCodeAt (0) == 67 && !_eventName.indexOf ('Changed.')) {
-									var
-										_propertyPublicName = _eventName.slice (8),
-										_propertyProfile = _getClass (m)._propertyProfilesByPrivateName [
-											_getPropertyPrivateName (m,_propertyPublicName)
-										]
-									;
-									if (_propertyProfile && _propertyPublicName != _propertyProfile._publicName)
-										// use the canonical public name, since a pseudonym could have been specified
-										_eventName = 'Changed.' + (_propertyPublicName = _propertyProfile._publicName)
-									;
-									_wireUnwire (_eventName);
-									(m._hasChangedHandlers || (m._hasChangedHandlers = {})) [_propertyPublicName] =
-										this.hasHandlers (_eventName)
-									;
-								} else {
-									_wireUnwire (_eventName);
-								}
-							};
-							m._onChangeHandlerAddedFlagName = m.instanceId + '_handlerAlreadyAdded';
-
 						/*** Public Instance Properties ***/
 							m.instanceId = _Uize.getGuid ();
 								/*?
@@ -610,6 +587,29 @@ Uize.module ({
 											NOTES
 											- the =instanceId= property's value is guaranteed to be unique for all instances of all =Uize.Class= subclasses in a document, but not across frames in a frameset, or across multiple pages in a Web site
 								*/
+
+						/*** Private Instance Properties ***/
+							(m._eventBus = new _Uize_Event_Bus).wireUnwireWrapper = function (_eventName,_wireUnwire) {
+								if (_eventName.charCodeAt (0) == 67 && !_eventName.indexOf ('Changed.')) {
+									var
+										_propertyPublicName = _eventName.slice (8),
+										_propertyProfile = _getClass (m)._propertyProfilesByPrivateName [
+											_getPropertyPrivateName (m,_propertyPublicName)
+										]
+									;
+									if (_propertyProfile && _propertyPublicName != _propertyProfile._publicName)
+										// use the canonical public name, since a pseudonym could have been specified
+										_eventName = 'Changed.' + (_propertyPublicName = _propertyProfile._publicName)
+									;
+									_wireUnwire (_eventName);
+									(m._hasChangedHandlers || (m._hasChangedHandlers = {})) [_propertyPublicName] =
+										this.hasHandlers (_eventName)
+									;
+								} else {
+									_wireUnwire (_eventName);
+								}
+							};
+							m._onChangeHandlerAddedFlagName = m.instanceId + '_handlerAlreadyAdded';
 					},
 				/*** omegastructor ***/
 					function (_properties) {
