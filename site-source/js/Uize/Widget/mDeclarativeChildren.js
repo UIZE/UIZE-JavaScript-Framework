@@ -102,20 +102,17 @@ Uize.module ({
 								delete _childProperties.widgetClass;
 							}
 
-							// NOTE: support multiple calls to children that could potentially include the same child again w/ additional properties (for whatever reason)
+							// NOTE: support multiple calls to children that could potentially include the same child again w/ additional properties
 							// As such we can't omit the children that don't have widgetClass set, yet, because the widgetClass *could* be added in a subsequent call to children. Will handle in constructor.
-							var _previous = _declarativeChildren[_childName] || {};
-							_declarativeChildren[_childName] = _Uize.copyInto(
-								_previous,
-								{
-									_widgetClass:_childWidgetClass,
-									_properties:_childDeclarationIsFunction
-										? _childProperties
-										: Uize.copyInto (_previous._properties || {},_childProperties)
-									,
-									_isFunction:_childDeclarationIsFunction
-								}
-							);
+							var _previous =
+								_declarativeChildren[_childName] || (_declarativeChildren[_childName] = {_properties:{}})
+							;
+							_previous._widgetClass = _childWidgetClass || _previous._widgetClass;
+							_previous._isFunction = _childDeclarationIsFunction;
+							_childDeclarationIsFunction
+								? (_previous._properties = _childProperties)
+								: _Uize.copyInto (_previous._properties || {},_childProperties)
+							;
 						}
 						/*?
 							Static Methods
