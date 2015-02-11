@@ -2071,33 +2071,33 @@ Uize.module ({
 									title:
 										'The execute-once optimization for onChange handlers shared across properties does not prevent an onChange handler from executing on chain reaction sets, because the redundancy elimination is contained to the scope of a single instance of a set call',
 									test:function () {
-										function _onChangeHandlerFunction () {
-											this.set ({myProperty3:this.get (['myProperty1','myProperty2'])});
+										function _sharedOnChangeA (_propertiesBeingSet) {
+											if ('foo' in _propertiesBeingSet) this.set ({bar:this.get('foo') + 2});
+										}
+										function _sharedOnChangeB (_propertiesBeingSet) {
+											if ('bar' in _propertiesBeingSet) this.set ({baz:this.get('bar') * 2});
 										}
 										var
-											_Subclass = Uize.Class.subclass ({
+											_MyClass = Uize.Class.subclass ({
 												stateProperties:{
-													myProperty1:{
-														onChange:_onChangeHandlerFunction
+													foo:{
+														value:10,
+														onChange:[_sharedOnChangeA,_sharedOnChangeB]
 													},
-													myProperty2:{
-														onChange:[
-															function () {this.set ({myProperty1:'baz'})},
-															_onChangeHandlerFunction
-														]
+													bar:{
+														value:20,
+														onChange:[_sharedOnChangeA,_sharedOnChangeB]
 													},
-													myProperty3:{}
+													baz:{
+														value:3
+													}
 												}
 											}),
-											_instance = _Subclass ({
-												myProperty1:'foo',
-												myProperty2:'bar'
-											})
+											_myInstance = _MyClass ()
 										;
-										return this.expect (
-											{myProperty1:'baz',myProperty2:'bar'},
-											_instance.get ('myProperty3')
-										);
+										_myInstance.set ({foo:30});
+
+										return this.expect (64,_myInstance.get ('baz'));
 									}
 								}
 							]

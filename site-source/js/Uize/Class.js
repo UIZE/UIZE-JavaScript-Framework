@@ -610,6 +610,7 @@ Uize.module ({
 								}
 							};
 							m._onChangeHandlerAddedFlagName = m.instanceId + '_handlerAlreadyAdded';
+							m._setsInProgress = 0;
 					},
 				/*** omegastructor ***/
 					function (_properties) {
@@ -2115,7 +2116,7 @@ Uize.module ({
 						_propertyProfile,
 						_onChangeHandlers,
 						_propertiesChanged = {},
-						_onChangeHandlerAddedFlagName = m._onChangeHandlerAddedFlagName,
+						_onChangeHandlerAddedFlagName,
 						_onChangeHandler,
 						_hasChangedHandlers = _thisIsInstance && m._hasChangedHandlers,
 						_hasChangedDotStarHandlers = _hasChangedHandlers && _hasChangedHandlers ['*'],
@@ -2130,6 +2131,7 @@ Uize.module ({
 						_propertiesKeys = [],
 						_propertyPublicOrPrivateName
 					;
+					m._setsInProgress++;
 					for (_propertyPublicOrPrivateName in _properties) {
 						_propertyProfile = _propertyProfilesByPrivateName [
 							_propertyPrivateNameLookup [_propertyPublicOrPrivateName] || _propertyPublicOrPrivateName
@@ -2219,6 +2221,9 @@ Uize.module ({
 											_onChangeHandler = m [_onChangeHandler]
 										;
 										if (_isFunction (_onChangeHandler)) {
+											if (!_onChangeHandlerAddedFlagName)
+												_onChangeHandlerAddedFlagName = m._onChangeHandlerAddedFlagName + m._setsInProgress
+											;
 											if (!_onChangeHandler [_onChangeHandlerAddedFlagName]) {
 												_onChangeHandler [_onChangeHandlerAddedFlagName] = 1;
 												(_onChangeHandlers || (_onChangeHandlers = [])).push (_onChangeHandler);
@@ -2335,6 +2340,7 @@ Uize.module ({
 					} else {
 						_class._instancePropertyDefaults = m.get ();
 					}
+					m._setsInProgress--;
 					/*?
 						Instance Methods
 							set
