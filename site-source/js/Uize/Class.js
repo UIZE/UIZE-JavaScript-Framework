@@ -609,8 +609,6 @@ Uize.module ({
 									_wireUnwire (_eventName);
 								}
 							};
-							m._onChangeHandlerAddedFlagName = m.instanceId + '_handlerAlreadyAdded';
-							m._setsInProgress = 0;
 					},
 				/*** omegastructor ***/
 					function (_properties) {
@@ -2116,7 +2114,7 @@ Uize.module ({
 						_propertyProfile,
 						_onChangeHandlers,
 						_propertiesChanged = {},
-						_onChangeHandlerAddedFlagName,
+						_onChangeHandlerAddedFlagName = 'handlerAlreadyAdded',
 						_onChangeHandler,
 						_hasChangedHandlers = _thisIsInstance && m._hasChangedHandlers,
 						_hasChangedDotStarHandlers = _hasChangedHandlers && _hasChangedHandlers ['*'],
@@ -2131,7 +2129,6 @@ Uize.module ({
 						_propertiesKeys = [],
 						_propertyPublicOrPrivateName
 					;
-					m._setsInProgress++;
 					for (_propertyPublicOrPrivateName in _properties) {
 						_propertyProfile = _propertyProfilesByPrivateName [
 							_propertyPrivateNameLookup [_propertyPublicOrPrivateName] || _propertyPublicOrPrivateName
@@ -2221,9 +2218,6 @@ Uize.module ({
 											_onChangeHandler = m [_onChangeHandler]
 										;
 										if (_isFunction (_onChangeHandler)) {
-											if (!_onChangeHandlerAddedFlagName)
-												_onChangeHandlerAddedFlagName = m._onChangeHandlerAddedFlagName + m._setsInProgress
-											;
 											if (!_onChangeHandler [_onChangeHandlerAddedFlagName]) {
 												_onChangeHandler [_onChangeHandlerAddedFlagName] = 1;
 												(_onChangeHandlers || (_onChangeHandlers = [])).push (_onChangeHandler);
@@ -2240,13 +2234,17 @@ Uize.module ({
 					_propertiesToDeclare && _class.stateProperties (_propertiesToDeclare);
 					if (_thisIsInstance) {
 						if (_onChangeHandlers) {
-							for (
-								var _handlerNo = -1, _onChangeHandlersLength = _onChangeHandlers.length;
-								++_handlerNo < _onChangeHandlersLength;
-							) {
-								delete (_onChangeHandler = _onChangeHandlers [_handlerNo]) [_onChangeHandlerAddedFlagName];
-								_onChangeHandler.call (m,_propertiesBeingSet);
-							}
+							var _onChangeHandlersLength = _onChangeHandlers.length;
+
+							/*** remove all onChange handler added flags before executing any handlers ***/
+								for (var _handlerNo = _onChangeHandlersLength; --_handlerNo >= 0;)
+									delete _onChangeHandlers [_handlerNo] [_onChangeHandlerAddedFlagName]
+								;
+
+							/*** execute handlers, after flags have been cleared ***/
+								for (var _handlerNo = -1; ++_handlerNo < _onChangeHandlersLength;)
+									_onChangeHandlers [_handlerNo].call (m,_propertiesBeingSet)
+								;
 						}
 						_propertiesForChangedDotStar &&
 							m.fire ({name:'Changed.*',properties:_propertiesForChangedDotStar})
@@ -2340,7 +2338,6 @@ Uize.module ({
 					} else {
 						_class._instancePropertyDefaults = m.get ();
 					}
-					m._setsInProgress--;
 					/*?
 						Instance Methods
 							set
