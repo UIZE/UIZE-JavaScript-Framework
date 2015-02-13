@@ -1279,7 +1279,15 @@ Uize.module ({
 								m.stepCompleted (_language + ': determined strings that have been translated');
 
 							/*** update language resources file ***/
-								if (!Uize.isEmpty (_translatedStrings))
+								if (Uize.isEmpty (_translatedStrings)) {
+									m.stepCompleted (
+										_language + ': skipped updating language resources file -- NO STRINGS TO IMPORT'
+									);
+								} else {
+									var
+										_totalInvalidStrings = 0,
+										_updatedStrings = 0
+									;
 									_writeLanguageResourcesFile (
 										m,
 										_language,
@@ -1287,18 +1295,22 @@ Uize.module ({
 											_readLanguageResourcesFile (m,_language),
 											_translatedStrings,
 											function (_languageString,_translatedString) {
-												return (
-													_languageString
-														? (_translatedString && _translatedString.value && _translatedString) ||
-															_languageString
-														: _undefined
-												);
+												if (!_languageString) {
+													_totalInvalidStrings++;
+												} else if (_translatedString && _translatedString.value) {
+													_updatedStrings++;
+													_languageString = _translatedString;
+												}
+												return _languageString;
 											},
 											{skeleton:true}
 										)
-									)
-								;
-								m.stepCompleted (_language + ': updated language resources file');
+									);
+									m.stepCompleted (
+										_language + ': updated language resources file -- ' +
+										(_totalInvalidStrings ? 'IGNORED ' + _totalInvalidStrings + ' INVALID STRINGS' : '')
+									);
+								}
 						}
 					);
 					_callback ();
