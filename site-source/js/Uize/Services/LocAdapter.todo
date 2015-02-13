@@ -1,5 +1,19 @@
 This is a TO DO document for the =Uize.Services.LocAdapter= module.
 
+Translation Metrics
+	Implement support for producing metrics reports for translated strings.
+
+	In particular, provide assessment of expansion factors for translated strings, by comparing the translated strings to their equivalent primary language versions.
+
+	- what is the expansion factor?
+	- expansion factor should be based upon translatable words (i.e. excluding tokens and word splitter segments)
+	- separate expansion factors for words and characters
+
+	Layout Issue Prediction
+		Produce assessment of potential layout problems by comparing expansion factor for translated strings to pseudo-localization expansion factor.
+
+		For translated strings with an expansion factor greater than the pseudo-localization expansion factor, consider these candidates for layout checks. In particular, for such strings where the primary language string is relatively short or has few words, these are more likely to cause layout issues, since much larger strings are probably accommodated by flexible layout approaches. Furthermore, if all other translations of the string for other languages are shorter than the language being assessed in the report, this is a clue that the other language translation already needed to be adapted to fit within layout constraints. Besides using clues and heuristics to guide the analysis, explicit information about layout constraints for specific strings contained in meta data can be used.
+
 Add Support for Plural Forms
 
 	Different Pluralization Formats
