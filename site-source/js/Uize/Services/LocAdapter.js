@@ -1286,7 +1286,8 @@ Uize.module ({
 								} else {
 									var
 										_totalInvalidStrings = 0,
-										_updatedStrings = 0
+										_totalUpdatedStrings = 0,
+										_notesParts = []
 									;
 									_writeLanguageResourcesFile (
 										m,
@@ -1298,7 +1299,7 @@ Uize.module ({
 												if (!_languageString) {
 													_totalInvalidStrings++;
 												} else if (_translatedString && _translatedString.value) {
-													_updatedStrings++;
+													_totalUpdatedStrings++;
 													_languageString = _translatedString;
 												}
 												return _languageString;
@@ -1306,9 +1307,14 @@ Uize.module ({
 											{skeleton:true}
 										)
 									);
+									_totalUpdatedStrings &&
+										_notesParts.push ('UPDATED ' + _totalUpdatedStrings + ' STRINGS')
+									;
+									_totalInvalidStrings &&
+										_notesParts.push ('IGNORED ' + _totalInvalidStrings + ' INVALID STRINGS')
+									;
 									m.stepCompleted (
-										_language + ': updated language resources file -- ' +
-										(_totalInvalidStrings ? 'IGNORED ' + _totalInvalidStrings + ' INVALID STRINGS' : '')
+										_language + ': updated language resources file -- ' + _notesParts.join (', ')
 									);
 								}
 						}
