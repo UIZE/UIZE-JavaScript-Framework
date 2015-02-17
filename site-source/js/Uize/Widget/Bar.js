@@ -80,10 +80,13 @@ Uize.module ({
 						_knobDimsObj = _updateDimsObj ('knob',_knobNode),
 						_knobDims = [_knobDimsObj.width,_knobDimsObj.height],
 						_scaleFunc = m._scaleFunc,
-						_scaleMin = _scaleFunc(m._minValue),
-						_scaleMax = _scaleFunc(m._maxValue),
-						_scaleVal = _scaleFunc(m._value),
-						_knobVirtualPos = Math.round ((_scaleVal - _scaleMin) / (_scaleMax - _scaleMin) * (_trackDims [_orientationNo] - _knobDims [_orientationNo])),
+						_minValueScaled = _scaleFunc (m._minValue),
+						_maxValueScaled = _scaleFunc (m._maxValue),
+						_valueScaled = _scaleFunc (m._value),
+						_knobVirtualPos = Math.round (
+							(_valueScaled - _minValueScaled) /
+							(_maxValueScaled - _minValueScaled) * (_trackDims [_orientationNo] - _knobDims [_orientationNo])
+						),
 						_knobPos = _orientationNo ? _trackDims [1] - _knobDims [1] - _knobVirtualPos : _knobVirtualPos,
 						_knobCenter = Math.round (_knobPos + _knobDims [_orientationNo] / 2),
 						_value = Uize.isNumber (m._decimalPlacesToDisplay)
