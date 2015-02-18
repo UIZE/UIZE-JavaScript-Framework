@@ -18,7 +18,7 @@
 
 /*?
 	Introduction
-		The =Uize.Widget.Bar= class implements a widget for displaying numerical values using a bar, with full and empty indicators and an optional value knob.
+		The =Uize.Widgets.Bar.Widget= class implements a widget for displaying numerical values using a bar, with full and empty indicators and an optional value knob.
 
 		*DEVELOPERS:* `Chris van Rensburg`, `Bryan Hsueh`
 
