@@ -111,7 +111,7 @@ Uize.module ({
 							_fileSystem.readFile ({path:_resourceFileFullPath,encoding:_project.resourceFileEncoding}),
 							_getResourceFileInfo (m,_resourceFileFullPath,_language)
 						)
-						: {}
+						: undefined
 				);
 			}
 
@@ -329,9 +329,9 @@ Uize.module ({
 					_languagesFilter = _params.languages
 				;
 				return (
-					_languagesFilter
-						? Uize.Data.Matches.retain (_translatableLanguages,Uize.lookup (_languagesFilter.split (',')))
-						: _translatableLanguages
+					(_languagesFilter || '*') == '*'
+						? _translatableLanguages
+						: Uize.Data.Matches.retain (_translatableLanguages,Uize.lookup (_languagesFilter.split (',')))
 				);
 			}
 
@@ -494,26 +494,34 @@ Uize.module ({
 					*/
 				},
 
-				gatherResources:function () {
+				gatherResources:function (_language) {
 					var
 						m = this,
 						_resources = {},
 						_project = m.project,
-						_primaryLanguage = _project.primaryLanguage,
 						_resourceFiles = _fileSystem.getFiles ({
 							path:_project.rootFolderPath,
 							pathMatcher:function (_filePath) {return m.isResourceFile (_filePath)},
 							recursive:true
-						})
+						}),
+						_primaryLanguage = _project.primaryLanguage
 					;
+					_language || (_language = _primaryLanguage);
 					Uize.forEach (
 						_resourceFiles,
-						function (_filePath) {
+						function (_resourceFileSubPath) {
+							var _resourceFilePath = _language == _primaryLanguage
+								? _resourceFileSubPath
+								: m.getLanguageResourcePath (_resourceFileSubPath,_language)
+							;
 							try {
-								_resources [_filePath] = _parseResourceFile (m,_filePath,_primaryLanguage);
+								var _resourceFileStrings = _parseResourceFile (m,_resourceFilePath,_language);
+								if (_resourceFileStrings)
+									_resources [_resourceFileSubPath] = _resourceFileStrings
+								;
 							} catch (_error) {
 								console.log (
-									'ERROR: problem parsing file ' + _filePath + '\n' +
+									'ERROR: problem parsing file ' + _resourceFilePath + '\n' +
 									_error
 								);
 							}
@@ -1121,7 +1129,7 @@ Uize.module ({
 										;
 										if (m.doesBrandSupportLanguage (_resourceFileBrand,_language)) {
 											_languageResources [_resourceFileSubPath] = Uize.Data.Diff.diff (
-												_parseResourceFile (m,_resourceFilePath,_language),
+												_parseResourceFile (m,_resourceFilePath,_language) || {},
 												_primaryLanguageResourcesDiff [_resourceFileSubPath],
 												function (_gatheredProperty,_propertyDiff,_path) {
 													return (
@@ -1327,19 +1335,33 @@ Uize.module ({
 				},
 
 				metrics:function (_params,_callback) {
+					_params.languages = _params.languages || '-';
 					var
 						m = this,
-						_primaryLanguage = m.project.primaryLanguage
+						_languagesForOperation = _getLanguagesForOperation (m,_params)
 					;
-					m.prepareToExecuteMethod (2);
+					m.prepareToExecuteMethod ((1 + _languagesForOperation.length) * 2);
 
 					/*** gather resources for primary language ***/
 						var _primaryLanguageResources = m.gatherResources ();
 						m.stepCompleted ('gathered resources for primary language');
 
 					/*** calculate metrics for primary language ***/
-						var _metrics = _calculateMetricsForLanguage (m,_primaryLanguage,_primaryLanguageResources,'');
+						var _metrics =
+							_calculateMetricsForLanguage (m,m.project.primaryLanguage,_primaryLanguageResources,'')
+						;
 						m.stepCompleted ('calculated metrics for primary language');
+
+					/*** calculate metrics for translatable languages ***/
+						Uize.forEach (
+							_languagesForOperation,
+							function (_language) {
+								var _languageResources = m.gatherResources (_language);
+								m.stepCompleted (_language + ': gathered resources');
+								_calculateMetricsForLanguage (m,_language,_languageResources,'');
+								m.stepCompleted (_language + ': calculated metrics');
+							}
+						);
 
 					/*** produce summary ***/
 						/*** compile data for duplicates histogram ***/
