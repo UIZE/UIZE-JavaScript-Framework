@@ -1,20 +1,14 @@
 <%@ required ('Uize.Widgets.CssUtil'); %>
-.`` {
-	display: inline-block;
-	position: relative;
-	border-radius: 3px;
-	overflow: hidden;
-	width: 100%;
-	height: 100%;
+.`track`, .`trackLighting`, .`borderOverlay` {
+	cursor: pointer;
 }
 
-.`track`, .`trackLighting`, .`borderOverlay` {
+.`knobTrack` {
 	position: absolute;
-	left: 0;
 	top: 0;
+	left: 0;
 	right: 0;
 	bottom: 0;
-	cursor: pointer;
 }
 
 .`knob` {
@@ -24,34 +18,17 @@
 	border-style: solid;
 }
 
-.`borderOverlay` {
-	border: 1px solid rgba(0,0,0,.2);
-	borer-radius: 3px;
-}
-
 /*** different orientations ***/
 	<%
 		var
 			_sizes = Uize.Widgets.CssUtil.sizes,
-			_tiny = _sizes.tiny,
-			_small = _sizes.small,
-			_medium = _sizes.medium,
-			_large = _sizes.large
+			_knobSizeTiny = Math.round (_sizes.tiny.outer * .8),
+			_knobSizeSmall = Math.round (_sizes.small.outer * .8),
+			_knobSizeMedium = Math.round (_sizes.medium.outer * .8),
+			_knobSizeLarge = Math.round (_sizes.large.outer * .8)
 		;
 	%>
 	/*** horizontal ***/
-		.`horizontal` .`trackLighting` {
-			/* IE9 SVG, needs conditional override of 'filter' to 'none' */
-			background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzAwMDAwMCIgc3RvcC1vcGFjaXR5PSIwLjMiLz4KICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzAwMDAwMCIgc3RvcC1vcGFjaXR5PSIwIi8+CiAgPC9saW5lYXJHcmFkaWVudD4KICA8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMSIgaGVpZ2h0PSIxIiBmaWxsPSJ1cmwoI2dyYWQtdWNnZy1nZW5lcmF0ZWQpIiAvPgo8L3N2Zz4=);
-			background: -moz-linear-gradient(top,  rgba(0,0,0,0.3) 0%, rgba(0,0,0,0) 100%); /* FF3.6+ */
-			background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0.3)), color-stop(100%,rgba(0,0,0,0))); /* Chrome,Safari4+ */
-			background: -webkit-linear-gradient(top,  rgba(0,0,0,0.3) 0%,rgba(0,0,0,0) 100%); /* Chrome10+,Safari5.1+ */
-			background: -o-linear-gradient(top,  rgba(0,0,0,0.3) 0%,rgba(0,0,0,0) 100%); /* Opera 11.10+ */
-			background: -ms-linear-gradient(top,  rgba(0,0,0,0.3) 0%,rgba(0,0,0,0) 100%); /* IE10+ */
-			background: linear-gradient(to bottom,  rgba(0,0,0,0.3) 0%,rgba(0,0,0,0) 100%); /* W3C */
-			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4d000000', endColorstr='#00000000',GradientType=0 ); /* IE6-8 */
-		}
-
 		.`horizontal` .`knob` {
 			position: absolute;
 			top: 0;
@@ -74,54 +51,38 @@
 
 		/*** different sizes ***/
 			/*** tiny ***/
-				.`horizontal`.`tiny` {
-					height: <%= _tiny.outer %>px;
-				}
 				.`horizontal`.`tiny` .`knob` {
-					width: <%= _tiny.outer * .8 %>px;
+					width: <%= _knobSizeTiny %>px;
+				}
+				.`horizontal`.`tiny` .`knobTrack` {
+					right: <%= _knobSizeTiny %>px;
 				}
 
 			/*** small ***/
-				.`horizontal`.`small` {
-					height: <%= _small.outer %>px;
-				}
 				.`horizontal`.`small` .`knob` {
-					width: <%= _small.outer * .8 %>px;
+					width: <%= _knobSizeSmall %>px;
+				}
+				.`horizontal`.`small` .`knobTrack` {
+					right: <%= _knobSizeSmall %>px;
 				}
 
 			/*** medium ***/
-				.`horizontal`.`medium` {
-					height: <%= _medium.outer %>px;
-				}
 				.`horizontal`.`medium` .`knob` {
-					width: <%= _medium.outer * .8 %>px;
+					width: <%= _knobSizeMedium %>px;
+				}
+				.`horizontal`.`medium` .`knobTrack` {
+					right: <%= _knobSizeMedium %>px;
 				}
 
 			/*** large ***/
-				.`horizontal`.`large` {
-					height: <%= _large.outer %>px;
-				}
 				.`horizontal`.`large` .`knob` {
-					width: <%= _large.outer * .8 %>px;
+					width: <%= _knobSizeLarge %>px;
+				}
+				.`horizontal`.`large` .`knobTrack` {
+					right: <%= _knobSizeLarge %>px;
 				}
 
 	/*** vertical ***/
-		.`vertical` {
-			height: 200px;
-		}
-
-		.`vertical` .`trackLighting` {
-			/* IE9 SVG, needs conditional override of 'filter' to 'none' */
-			background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzAwMDAwMCIgc3RvcC1vcGFjaXR5PSIwLjMiLz4KICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzAwMDAwMCIgc3RvcC1vcGFjaXR5PSIwIi8+CiAgPC9saW5lYXJHcmFkaWVudD4KICA8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMSIgaGVpZ2h0PSIxIiBmaWxsPSJ1cmwoI2dyYWQtdWNnZy1nZW5lcmF0ZWQpIiAvPgo8L3N2Zz4=);
-			background: -moz-linear-gradient(left,  rgba(0,0,0,0.3) 0%, rgba(0,0,0,0) 100%); /* FF3.6+ */
-			background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(0,0,0,0.3)), color-stop(100%,rgba(0,0,0,0))); /* Chrome,Safari4+ */
-			background: -webkit-linear-gradient(left,  rgba(0,0,0,0.3) 0%,rgba(0,0,0,0) 100%); /* Chrome10+,Safari5.1+ */
-			background: -o-linear-gradient(left,  rgba(0,0,0,0.3) 0%,rgba(0,0,0,0) 100%); /* Opera 11.10+ */
-			background: -ms-linear-gradient(left,  rgba(0,0,0,0.3) 0%,rgba(0,0,0,0) 100%); /* IE10+ */
-			background: linear-gradient(to right,  rgba(0,0,0,0.3) 0%,rgba(0,0,0,0) 100%); /* W3C */
-			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4d000000', endColorstr='#00000000',GradientType=1 ); /* IE6-8 */
-		}
-
 		.`vertical` .`knob` {
 			position: absolute;
 			left: 0;
@@ -144,34 +105,34 @@
 
 		/*** different sizes ***/
 			/*** tiny ***/
-				.`vertical`.`tiny` {
-					width: <%= _tiny.outer %>px;
-				}
 				.`vertical`.`tiny` .`knob` {
-					height: <%= _tiny.outer * .8 %>px;
+					height: <%= _knobSizeTiny %>px;
+				}
+				.`vertical`.`tiny` .`knobTrack` {
+					top: <%= _knobSizeTiny %>px;
 				}
 
 			/*** small ***/
-				.`vertical`.`small` {
-					width: <%= _small.outer %>px;
-				}
 				.`vertical`.`small` .`knob` {
-					height: <%= _small.outer * .8 %>px;
+					height: <%= _knobSizeSmall %>px;
+				}
+				.`vertical`.`small` .`knobTrack` {
+					top: <%= _knobSizeSmall %>px;
 				}
 
 			/*** medium ***/
-				.`vertical`.`medium` {
-					width: <%= _medium.outer %>px;
-				}
 				.`vertical`.`medium` .`knob` {
-					height: <%= _medium.outer * .8 %>px;
+					height: <%= _knobSizeMedium %>px;
+				}
+				.`vertical`.`medium` .`knobTrack` {
+					top: <%= _knobSizeMedium %>px;
 				}
 
 			/*** large ***/
-				.`vertical`.`large` {
-					width: <%= _large.outer %>px;
-				}
 				.`vertical`.`large` .`knob` {
-					height: <%= _large.outer * .8 %>px;
+					height: <%= _knobSizeLarge %>px;
+				}
+				.`vertical`.`large` .`knobTrack` {
+					top: <%= _knobSizeLarge %>px;
 				}
 

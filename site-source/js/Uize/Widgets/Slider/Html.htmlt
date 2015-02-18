@@ -7,8 +7,10 @@
 			<div class="trackLighting"></div>
 		</div>
 		<div class="borderOverlay"></div>
-		<div id="knob" class="knob">
-			<div class="knobGrip"></div>
+		<div class="knobTrack">
+			<div id="knob" class="knob">
+				<div class="knobGrip"></div>
+			</div>
 		</div>
 	</div>
 </div>

@@ -36,6 +36,7 @@ Uize.module ({
 	name:'Uize.Widgets.Slider.Widget',
 	superclass:'Uize.Widgets.Slider.Base.Widget',
 	required:[
+		'Uize.Widgets.Bar.FullEmpty.mFullEmpty',
 		'Uize.Widgets.Slider.Html',
 		'Uize.Widgets.Slider.Css'
 	],
@@ -43,24 +44,10 @@ Uize.module ({
 		'use strict';
 
 		return _superclass.subclass ({
-			stateProperties:{
-				_emptyColor:{
-					name:'emptyColor',
-					value:'#fff'
-				},
-				_fullColor:{
-					name:'fullColor',
-					value:'#fff'
-				}
-			},
+			mixins:Uize.Widgets.Bar.FullEmpty.mFullEmpty,
 
 			set:{
 				html:Uize.Widgets.Slider.Html
-			},
-
-			htmlBindings:{
-				emptyColor:'empty:style.backgroundColor',
-				fullColor:'full:style.backgroundColor'
 			},
 
 			staticProperties:{

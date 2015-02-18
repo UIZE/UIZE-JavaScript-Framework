@@ -3,9 +3,11 @@
 		<div id="gradient" class="gradient"></div>
 		<div class="trackLighting"></div>
 		<div class="borderOverlay"></div>
-		<div id="knob" class="knob">
-			<div class="knobColorShell">
-				<div id="knobColor" class="knobColor"></div>
+		<div class="knobTrack">
+			<div id="knob" class="knob">
+				<div class="knobColorShell">
+					<div id="knobColor" class="knobColor"></div>
+				</div>
 			</div>
 		</div>
 	</div>

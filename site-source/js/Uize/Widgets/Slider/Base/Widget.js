@@ -34,54 +34,39 @@
 
 Uize.module ({
 	name:'Uize.Widgets.Slider.Base.Widget',
-	superclass:'Uize.Widget.Bar.Slider',
+	superclass:'Uize.Widgets.Bar.Widget',
 	required:[
-		'Uize.Widget.mV2',
+		'Uize.Widget.Bar.mSlider',
 		'Uize.Widgets.Slider.Base.Html',
 		'Uize.Widgets.Slider.Base.Css'
 	],
 	builder:function (_superclass) {
 		'use strict';
 
-		var _superUpdateUi = _superclass.prototype.updateUi;
-
-		function _displayedStyleDimPropertyProfile (_name,_isWidth) {
-			return {
-				name:_name,
-				derived:'orientation,trackLength: (orientation != "horizontal") == ' + _isWidth + ' ? "" : typeof trackLength == "number" ? trackLength + "px" : trackLength'
-			};
-		}
-
 		return _superclass.subclass ({
-			mixins:Uize.Widget.mV2,
-
-			stateProperties:{
-				_trackLength:{
-					name:'trackLength',
-					value:''
-				},
-
-				/*** derived properties ***/
-					_displayedStyleWidth:_displayedStyleDimPropertyProfile ('displayedStyleWidth',true),
-					_displayedStyleHeight:_displayedStyleDimPropertyProfile ('displayedStyleHeight',false)
-			},
+			mixins:Uize.Widget.Bar.mSlider,
 
 			set:{
-				html:Uize.Widgets.Slider.Base.Html,
-				orientation:'horizontal'
-			},
-
-			cssBindings:{
-				orientation:'value'
-			},
-
-			htmlBindings:{
-				displayedStyleWidth:[':style.width',_superUpdateUi],
-				displayedStyleHeight:[':style.height',_superUpdateUi]
+				html:Uize.Widgets.Slider.Base.Html
 			},
 
 			staticProperties:{
 				cssModule:Uize.Widgets.Slider.Base.Css
+			},
+
+			stateProperties:{
+				/*** derived properties ***/
+					knobStyleLeft:{
+						derived:'orientation,valuePosPercent: orientation == "horizontal" ? valuePosPercent + "%" : 0'
+					},
+					knobStyleBottom:{
+						derived:'orientation,valuePosPercent: orientation == "vertical" ? valuePosPercent + "%" : 0'
+					}
+			},
+
+			htmlBindings:{
+				knobStyleLeft:'knob:style.left',
+				knobStyleBottom:'knob:style.bottom'
 			}
 		});
 	}
