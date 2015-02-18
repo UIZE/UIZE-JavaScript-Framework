@@ -1,7 +1,7 @@
 <table>
 	<tr>
-		<td><child name="rgbButton" class="button buttingRight"/></td>
-		<td><child name="hslButton" class="button buttingLeft"/></td>
+		<td><child name="hslButton" class="button buttingRight"/></td>
+		<td><child name="rgbButton" class="button buttingLeft"/></td>
 	</tr>
 	<tr>
 		<td colspan="5" class="verticalSpacer"></td>

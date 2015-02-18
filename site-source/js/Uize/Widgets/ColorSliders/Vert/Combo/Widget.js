@@ -49,7 +49,7 @@ Uize.module ({
 
 		var
 			/*** General Variables ***/
-				_modes = ['rgb','hsl']
+				_modes = ['hsl','rgb']
 		;
 
 		return _superclass.subclass ({
