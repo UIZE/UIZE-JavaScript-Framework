@@ -278,7 +278,7 @@ Uize.module ({
 				// this function can show the value in differe scale: eg, log(x+1), 1-1/x, x^2, etc.
 				_scaleFunc:{
 					name:'scaleFunc',
-					value:function (_x) {return _x;}
+					value:Uize.returnX
 					/*?
 						State Properties
 							scaleFunc

@@ -1,0 +1,14 @@
+.`trackFull`, .`trackEmpty` {
+	position: absolute;
+}
+
+.`trackEmpty` {
+	right: 0;
+	top: 0;
+}
+
+.`trackFull` {
+	left: 0;
+	bottom: 0;
+}
+

@@ -1,0 +1,7 @@
+<div>
+	<div id="track" class="track">
+		<div class="trackLighting"></div>
+		<div class="borderOverlay"></div>
+	</div>
+</div>
+
