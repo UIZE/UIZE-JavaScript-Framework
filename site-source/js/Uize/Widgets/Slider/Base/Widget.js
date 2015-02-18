@@ -45,14 +45,11 @@ Uize.module ({
 
 		var _superUpdateUi = _superclass.prototype.updateUi;
 
-		function _displayedStyleWidthHeight (_orientation,_trackLength,_isWidth) {
-			return (
-				(_orientation != 'horizontal') == _isWidth
-					? ''
-					: typeof _trackLength == 'number'
-						? _trackLength + 'px'
-						: _trackLength
-			);
+		function _displayedStyleDimPropertyProfile (_name,_isWidth) {
+			return {
+				name:_name,
+				derived:'orientation,trackLength: (orientation != "horizontal") == ' + _isWidth + ' ? "" : typeof trackLength == "number" ? trackLength + "px" : trackLength'
+			};
 		}
 
 		return _superclass.subclass ({
@@ -65,18 +62,8 @@ Uize.module ({
 				},
 
 				/*** derived properties ***/
-					_displayedStyleWidth:{
-						name:'displayedStyleWidth',
-						derived:function (orientation,trackLength) {
-							return _displayedStyleWidthHeight (orientation,trackLength,true);
-						}
-					},
-					_displayedStyleHeight:{
-						name:'displayedStyleHeight',
-						derived:function (orientation,trackLength) {
-							return _displayedStyleWidthHeight (orientation,trackLength,false);
-						}
-					}
+					_displayedStyleWidth:_displayedStyleDimPropertyProfile ('displayedStyleWidth',true),
+					_displayedStyleHeight:_displayedStyleDimPropertyProfile ('displayedStyleHeight',false)
 			},
 
 			set:{
