@@ -30,6 +30,17 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
+		var
+			/*** General Variables ***/
+				_msPerHour = 60 * 60 * 1000,
+				_date = new Date,
+				_machineTimeZone =
+					(
+						(_date.getHours () * 60 + _date.getMinutes ()) -
+						(_date.getUTCHours () * 60 + _date.getUTCMinutes ())
+					) / 60
+		;
+
 		return _superclass.subclass ({
 			omegastructor:function () {
 				var m = this;
@@ -44,13 +55,22 @@ Uize.module ({
 
 			stateProperties:{
 				_value:'value',
+				_timeZone:'timeZone',
 				_hoursMode:{
 					name:'hoursMode',
 					value:'12'
 				},
 				hhMmSs:{
-					derived:function (value,hoursMode) {
-						return Uize.Date.Formatter.format (value,hoursMode == '12' ? '{hh12}{mm}{ss}' : '{hh}{mm}{ss}');
+					derived:{
+						properties:'value,timeZone,hoursMode',
+						derivation:function (_value,_timeZone,_hoursMode) {
+							return Uize.Date.Formatter.format (
+								_timeZone != null
+									? (new Date (_value)).getTime () + (_timeZone - _machineTimeZone) * _msPerHour
+									: _value,
+								_hoursMode == '12' ? '{hh12}{mm}{ss}' : '{hh}{mm}{ss}'
+							);
+						}
 					}
 				},
 				hoursTensValue:{derived:function (hhMmSs) {return this.remapDigitValue (0,hhMmSs.charAt (0))}},
