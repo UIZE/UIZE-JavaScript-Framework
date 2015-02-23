@@ -41,6 +41,9 @@ Uize.module ({
 					) / 60
 		;
 
+		/*** Utility Functions ***/
+			function _twoDigit (_value) {return isNaN (_value) ? '??' : (_value < 10 ? '0' : '') + _value}
+
 		return _superclass.subclass ({
 			omegastructor:function () {
 				var m = this;
@@ -60,16 +63,24 @@ Uize.module ({
 					name:'hoursMode',
 					value:'12'
 				},
+				_referenceTime:{
+					name:'referenceTime'
+				},
 				hhMmSs:{
 					derived:{
-						properties:'value,timeZone,hoursMode',
-						derivation:function (_value,_timeZone,_hoursMode) {
-							return Uize.Date.Formatter.format (
-								_timeZone != null
-									? (new Date (_value)).getTime () + (_timeZone - _machineTimeZone) * _msPerHour
-									: _value,
-								_hoursMode == '12' ? '{hh12}{mm}{ss}' : '{hh}{mm}{ss}'
-							);
+						properties:'value,timeZone,hoursMode,referenceTime',
+						derivation:function (_value,_timeZone,_hoursMode,_referenceTime) {
+							if (_hoursMode == 'timer') {
+								var _elapsed = _value - _referenceTime;
+								return _twoDigit (Math.floor (_elapsed / 1000 / 60)) + _twoDigit (Math.floor (_elapsed / 1000));
+							} else {
+								return Uize.Date.Formatter.format (
+									_timeZone != null
+										? (new Date (_value)).getTime () + (_timeZone - _machineTimeZone) * _msPerHour
+										: _value,
+									_hoursMode == '12' ? '{hh12}{mm}{ss}' : '{hh}{mm}{ss}'
+								);
+							}
 						}
 					}
 				},
