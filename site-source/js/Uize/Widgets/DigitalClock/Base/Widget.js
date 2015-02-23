@@ -71,8 +71,12 @@ Uize.module ({
 						properties:'value,timeZone,hoursMode,referenceTime',
 						derivation:function (_value,_timeZone,_hoursMode,_referenceTime) {
 							if (_hoursMode == 'timer') {
-								var _elapsed = _value - _referenceTime;
-								return _twoDigit (Math.floor (_elapsed / 1000 / 60)) + _twoDigit (Math.floor (_elapsed / 1000));
+								var
+									_elapsed = _value - _referenceTime,
+									_minutesElapsed = Math.floor (_elapsed / 1000 / 60),
+									_secondsElapsed = Math.floor ((_elapsed - (_minutesElapsed * 1000 * 60)) / 1000)
+								;
+								return _twoDigit (_minutesElapsed) + _twoDigit (_secondsElapsed);
 							} else {
 								return Uize.Date.Formatter.format (
 									_timeZone != null
