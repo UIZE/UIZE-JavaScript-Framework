@@ -1,0 +1,61 @@
+This is a TO DO document for the proposed =Uize.Data.ValuePack= module.
+
+Possible Implementation
+	...............................................................................................................
+	function init (_object) {
+		/*
+			- for both processes, make sure that array type property values are treated in the same way
+		*/
+
+		/*** generate function for transforming array into object ***/
+			/*
+				- map object values, replace values with unique character sequence that can be replaced with a regexp
+				- serialize the object to JSON
+				- use regexp replace to replace the property values to argument references
+				- compile function
+			*/
+			var _propertyNo = -1;
+			console.log (
+				Function (
+					'return ' +
+					Uize.Json.to (
+						Uize.Data.Diff.diff (
+							_object,
+							{},
+							function (_property) {
+								_property.value = '```' + ++_propertyNo + '```';
+								return _property;
+							}
+						)
+					).replace (
+						/'```(\d+)```'/g,
+						'arguments [$1]'
+					) + ';'
+				)
+			);
+
+		/*** generate function for transforming object into array ***/
+			/*
+				- flatten object
+				- use dereference serializer for serializing key paths
+					- instead of foo.bar.baz.qux, the serialization would be ['foo'] ['bar'] ['baz'] ['qux']
+				- concatenate dereferencings to produce an array construction
+			*/
+			console.log (
+				Function (
+					'return [' +
+					Uize.keys (
+						Uize.Data.Flatten.flatten (
+							_object,
+							function (_path) {
+								return 'arguments [' + Uize.map (_path,Uize.Json.to).join ('] [') + ']';
+							}
+						)
+					).join (',') +
+					']'
+				)
+			);
+
+	}
+	...............................................................................................................
+
