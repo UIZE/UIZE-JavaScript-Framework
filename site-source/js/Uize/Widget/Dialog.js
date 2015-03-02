@@ -234,7 +234,7 @@ Uize.module ({
 								qualifiedOk
 									A button instance, that lets the user submit the dialog with a qualification.
 
-									The =qualifiedOk= button is like a second =ok= button (kind of like an "ok, but with this one condition..." action). Having a second ok-like button is useful in a few cases, bust most dialogs will not provide markup for this button. When this button is clicked, the =Qualified Ok= event is fired on the dialog instance.
+									The =qualifiedOk= button is like a second =ok= button (kind of like an "ok, but with this one condition..." action). Having a second ok-like button is useful in a few cases, but most dialogs will not provide markup for this button. When this button is clicked, the =Qualified Ok= event is fired on the dialog instance.
 
 							Instance Events
 								Qualified Ok
@@ -412,7 +412,12 @@ Uize.module ({
 						m.wireNode(
 							'shield',
 							'click',
-							function () { m._dismissOnShieldClick && _dismiss (m,'Close') }
+							function () {
+								var _dismissOnShieldClick = m._dismissOnShieldClick;
+								_dismissOnShieldClick &&
+									_dismiss (m,typeof _dismissOnShieldClick == 'string' ? _dismissOnShieldClick : 'Close')
+								;
+							}
 						);
 
 						/*** fetch values for defaultTitle, defaultOkText, and defaultCancelText from markup ***/
@@ -537,7 +542,7 @@ Uize.module ({
 					/*?
 						State Properties
 							dismissOnShieldClick
-								An boolean, specifying whether or not clicking =shield= implied node should close the dialog.
+								A boolean, specifying whether or not clicking the =shield= node should close the dialog, or a string, specifying a dialog dismissal event that should be fired when the dialog is dismissed by clicking on the =shield= node.
 
 								A "chromeless" dialog may be desired in some case in order to display a palette without the visual clutter of title and button bars. In this case, there may not be a =close= button, so clicking outside of the dialog (on the =shield= implied node) would be one way to close the dialog.
 
