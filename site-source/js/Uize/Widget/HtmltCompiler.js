@@ -349,8 +349,8 @@ Uize.module ({
 												var _childName = _attributesLookup.name;
 
 											/*** special handling for the extraClasses (or class) property ***/
-												var _extraClasses = _attributesLookup.extraClasses || _attributesLookup.class;
-												delete _attributesLookup.class;
+												var _extraClasses = _attributesLookup.extraClasses || _attributesLookup ['class'];
+												delete _attributesLookup ['class'];
 												if (_extraClasses) {
 													_extraClasses = Uize.map (
 														_splitCssClasses (_extraClasses),

@@ -58,7 +58,10 @@ Uize.module ({
 
 			instanceMethods:{
 				getDialogWidgetProperties:function () {
-					return {locale:this.get ('localeInherited')};
+					return {
+						locale:this.get ('localeInherited'),
+						dismissOnShieldClick:'Ok'
+					};
 				}
 			}
 		});
