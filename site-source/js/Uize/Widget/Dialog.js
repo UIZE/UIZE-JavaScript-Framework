@@ -373,10 +373,10 @@ Uize.module ({
 								}
 								else {
 									var
-										_mooringCoords = _Uize_Node.getCoords(_mooringNode),
+										_mooringCoords = _Uize_Dom_Pos.getCoords(_mooringNode),
 										_rightAligned = m._offsetRegistrationCorner.indexOf('right') > -1,
 										_bottomAligned = m._offsetRegistrationCorner.indexOf('bottom') > -1,
-										_bodyDimensions = _Uize_Node.getDimensions(document.body),
+										_bodyDimensions = _Uize_Dom_Pos.getDimensions(document.body),
 										_stylesToSet = {}
 									;
 
