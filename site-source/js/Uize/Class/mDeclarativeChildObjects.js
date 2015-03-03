@@ -43,6 +43,8 @@ Uize.module ({
 							_declarativeFunctionName = _properties.declaration,
 							_addMethodName = _properties.addMethod,
 							_childObjectClassKey = _properties.childObjectClassKey,
+							_beforeAdd = _properties.beforeAdd,
+							_beforeAddIsFunction = _Uize.isFunction(_beforeAdd),
 							
 							_declarativeStaticDataName = 'mDeclarativeChildObjects_' + _declarativeFunctionName,
 							_getContainerInstanceMethodName = 'mDeclarativeChildObjects_' + _declarativeFunctionName + '_getContainer'
@@ -91,31 +93,40 @@ Uize.module ({
 									_declarativeChildObjects = m.Class[_declarativeStaticDataName]
 								;
 			
-								for (var _childName in _declarativeChildObjects) {
-									var
-										_declarativeChild = _declarativeChildObjects[_childName],
-										_childObjectClass = _declarativeChild._childObjectClass,
-										_childProperties = _declarativeChild._properties
-			
-									;
+								_Uize.forEach(
+									_declarativeChildObjects,
+									function (_declarativeChild, _childName) {
+										function _addChild() {
+											var
+												_childObjectClass = _declarativeChild._childObjectClass,
+												_childProperties = _declarativeChild._properties
+					
+											;
+		
+											// When value is a function call the function in the context of this widget
+											if (_declarativeChild._isFunction)
+												_childProperties = _childProperties.call(m, _childName);
+											
+											// Need to get the object class from the properties if it's there.
+											// If it is there we need to remove it from the properties, so we gotta copy it.
+											if (_childObjectClassKey in _childProperties) {
+												_childProperties = _Uize.copy(_childProperties);
+												_childObjectClass = _childProperties[_childObjectClassKey];
+												delete _childProperties[_childObjectClassKey];
+											}
 
-									// When value is a function call the function in the context of this widget
-									if (_declarativeChild._isFunction)
-										_childProperties = _childProperties.call(m, _childName);
-									
-									// Need to get the object class from the properties if it's there.
-									// If it is there we need to remove it from the properties, so we gotta copy it.
-									if (_childObjectClassKey in _childProperties) {
-										_childProperties = _Uize.copy(_childProperties);
-										_childObjectClass = _childProperties[_childObjectClassKey];
-										delete _childProperties[_childObjectClassKey];
+											// NOTE: Filter out children w/o child object class. They will be deferred loaded by some other mechanism. They were there for feature detection.
+											return _childObjectClass
+												&& m[_getContainerInstanceMethodName](_childName)[_addMethodName](_childName, _childObjectClass, _childProperties)
+											;
+										}
+
+										_beforeAddIsFunction
+											? _beforeAdd.call(m, _childName, _addChild)
+											: _addChild()
+										;
 									}
-
-									// NOTE: Filter out children w/o child object class. They will be deferred loaded by some other mechanism. They were there for feature detection.
-									_childObjectClass
-										&& m[_getContainerInstanceMethodName](_childName)[_addMethodName](_childName, _childObjectClass, _childProperties)
-									;
-								}
+								);
 							},
 
 							instanceMethods:_pairUp(
