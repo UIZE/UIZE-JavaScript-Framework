@@ -109,7 +109,10 @@ Uize.module ({
 										_initWhatIsAll ||
 										_initWhatIsTranslatable == _isTranslatableString (_primaryLanguageString)
 									) &&
-									(_initWhenIsAlways || !_translatableLanguageString.value)
+									(
+										_initWhenIsAlways ||
+										(_translatableLanguageString.value == null || _translatableLanguageString.value === '')
+									)
 										? (_initToIsBlank ? _blankStringPropertyObject : _primaryLanguageString)
 										: _translatableLanguageString
 								)
