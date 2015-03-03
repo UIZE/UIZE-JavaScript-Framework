@@ -4,7 +4,7 @@
 |    /    O /   |    MODULE : Uize.Test.Widget.mEventBindings Class
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
-| /____/ /__/_| | COPYRIGHT : (c)2010-2015 UIZE
+| /____/ /__/_| | COPYRIGHT : (c)2014-2015 UIZE
 |          /___ |   LICENSE : Available under MIT License or GNU General Public License
 |_______________|             http://www.uize.com/license.html
 */
@@ -20,7 +20,7 @@
 	Introduction
 		The =Uize.Test.Widget.mEventBindings= module provides convenience methods for writing test cases against =Uize.Widget= subclass modules that mix-in =Uize.Widget.mEventBindings=.
 
-		*DEVELOPERS:* `Ben Ilegbodu`
+		*DEVELOPERS:* `Ben Ilegbodu`, original code contributed by `Zazzle Inc.`
 */
 
 Uize.module ({

@@ -25,56 +25,12 @@
 
 Uize.module ({
 	name:'Uize.Widget.Dialog.Picker.Palette.Selector',
-	required:[
-		'Uize.Widget.Options.Selector',
-		'Uize.Util.Coupler'
-	],
+	required:'Uize.Widget.Dialog.Picker.Palette.mSelector',
 	builder:function (_superclass) {
 		'use strict';
 
-		/*** Private Instance Methods ***/
-			function _fireSubmissionComplete (_propertiesChanged) {
-				this.fireSubmissionComplete (true, _propertiesChanged);
-			}
-
 		return _superclass.subclass ({
-			omegastructor:function () {
-				var
-					m = this,
-					_valueWidget = m.children.value
-				;
-				m.wire(
-					'After Show',
-					function () { _valueWidget.updateUi() }
-				);
-				Uize.Util.Coupler({
-					instances:[m, _valueWidget],
-					properties:['valueNo', 'tentativeValueNo']
-				});
-			},
-
-			stateProperties:{
-				_tentativeValueNo:{
-					name:'tentativeValueNo',	// read-only
-					onChange:_fireSubmissionComplete,
-					value:-1
-				},
-				_valueNo:{
-					name:'valueNo',	// read-only
-					onChange:_fireSubmissionComplete,
-					value:-1
-				},
-				_values:{
-					name:'values',
-					value:[]
-				}
-			},
-
-			set:{
-				pipedProperties:['values'],
-				valueWidgetClass:Uize.Widget.Options.Selector,
-				shieldOpacity:.01
-			}
+			mixins:Uize.Widget.Dialog.Picker.Palette.mSelector
 		});
 	}
 });

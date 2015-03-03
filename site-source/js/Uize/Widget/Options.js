@@ -462,9 +462,11 @@ Uize.module ({
 							for (
 								var _valueNo = -1, _totalOptionChildButtons = m._totalOptionChildButtons || 0;
 								++_valueNo < _totalOptionChildButtons;
-							)
-								m.removeChild ('option' + _valueNo)
-							;
+							) {
+								var _option = m.children['option' + _valueNo];
+								m.removeChild (_option);
+								_option.kill();
+							}
 							m.unwireUi ();
 							m.get ('html') != _undefined && m.set ({built:_false});
 							m.set({_value:_getValidValue.call(m, m._value)});

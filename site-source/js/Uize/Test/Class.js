@@ -4,7 +4,7 @@
 |    /    O /   |    MODULE : Uize.Test.Class Class
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
-| /____/ /__/_| | COPYRIGHT : (c)2010-2015 UIZE
+| /____/ /__/_| | COPYRIGHT : (c)2014-2015 UIZE
 |          /___ |   LICENSE : Available under MIT License or GNU General Public License
 |_______________|             http://www.uize.com/license.html
 */
@@ -58,14 +58,15 @@ Uize.module ({
 							title:_case.title
 								|| (
 									'When ' + _Uize_Json_to(_case.instanceProperties, 'mini')
-										+ ', ' + _propertyName + ' is ' + _Uize_Json_to(_case.expected, 'mini')
+										+ ', ' + _propertyName + ' is '
+										+ (_case.expected ? _Uize_Json_to(_case.expected, 'mini') : '*expected*')
 								),
-							test:function () {
+							test:function (_continue) {
 								return _testFunc.call(
 									this,
 									_class.getModule(),
-									_case.instanceProperties,
-									_case.expected
+									_case,
+									_continue
 								);
 							}
 						}
@@ -120,22 +121,43 @@ Uize.module ({
 		function _makeDeclarativeCasesPropertyTest(_testTitlePrefix, _testParams) {
 			var
 				_propertyName = _testParams.propertyName,
-				_instanceProperties = _testParams.instanceProperties
+				_instanceProperties = _testParams.instanceProperties,
+				_create = _testParams.create,
+				_testParamsCreateParams = _testParams.createParams
 			;
 
-			// TODO: Add an initial test that verifies the state property actually exists and is derived?
+			// TODO: Add an initial test that verifies the state property actually exists?
 			return _makeDeclarativeCasesTest.call(
 				this,
 				_testTitlePrefix,
 				_testParams,
-				function(_moduleToTest, _initialProperties, _expectedValue) {
+				function(_moduleToTest, _case, _continue) {
+					function _getInstance(m, _caseCreateParams) {
+						return _Uize.isFunction(_create)
+							? m.setInstance(_create, _caseCreateParams || _testParamsCreateParams || [_instanceProperties])
+							: m.setInstance(_instanceProperties)
+						;
+					}
+					
 					var
-						_instance = new _moduleToTest(_Uize.copy(_instanceProperties, _initialProperties))
+						m = this,
+						_instance = _getInstance(m, _case.createParams),
+						_setup = _case.setup,
+						_expectFunc = _case.expectFunc
 					;
-					return this.expect(
-						_expectedValue,
-						_instance.get(_propertyName)
-					);
+					
+					// Provide opportunity for test to do some set up work (like set up spies)
+					_Uize.isFunction(_setup) && _setup.call(m, _instance, _continue);
+					
+					// cause property change
+					_instance.set(_case.instanceProperties);
+					
+					var _propertyActualValue = _instance.get(_propertyName);
+					
+					if ('expected' in _case)
+						return m.expect(_case.expected, _propertyActualValue);
+					else if (_Uize.isFunction(_expectFunc))
+						return _expectFunc.call(m, _propertyActualValue, _instance, _continue);
 				}
 			);
 		}
@@ -143,6 +165,7 @@ Uize.module ({
 		return _superclass.subclass({
 			staticMethods:{
 				derivedPropertyTest:function(_testParams) {
+					// TODO: Add an intial test that verifies that state property is derived?
 					return _makeDeclarativeCasesPropertyTest.call(
 						this,
 						'DERIVED PROPERTY TEST',
@@ -177,9 +200,21 @@ Uize.module ({
 											
 										expected
 											The expected derived value for the test case
+											
+										expectFunc
+											A function (in lieu of the =expected= property) that takes the derived property value and a reference to the instance as parameters. It will return =true= if the derived property value is what is expected, =false= otherwise.
+											
+										createParams
+											Optional parameters to pass to the =create= function (that override =createParams= for the =testParamsObBJ=).
 								
 									instanceProperties
 										.
+										
+									create
+										An alternative function for creating a model instance that would be different than just calling the constructor.
+										
+									createParams
+										Optional parameters to pass to the =create= function.
 										
 									testProperties
 										.
@@ -206,7 +241,9 @@ Uize.module ({
 											{
 												title:'Many total items',
 												instanceProperties:{totalItems:2},
-												expected:false
+												expectFunc:function(derivedPropertyValue, instance) {
+													return this.expect(false, derivedPropertyValue);
+												}
 											}
 										]
 									}
@@ -271,17 +308,23 @@ Uize.module ({
 						_testClass = this,
 						_methodName = _testParams.methodName,
 						_cases = _testParams.cases,
-						_instanceProperties = _testParams.instanceProperties
+						_testParamsInitialize = _testParams.initialize,
+						_instanceProperties = _testParams.instanceProperties,
+						_create = _testParams.create,
+						_testParamsCreateParams = _testParams.createParams
 					;
 					
-					function _getWidgetInstance(m, _caseInstanceProperties) {
-						return m.setInstance(_Uize.copy(_instanceProperties, _caseInstanceProperties));
+					function _getInstance(m, _caseCreateParams) {
+						return _Uize.isFunction(_create)
+							? m.setInstance(_create, _caseCreateParams || _testParamsCreateParams || [_instanceProperties])
+							: m.setInstance(_instanceProperties)
+						;
 					}
 					
 					return _testClass.resolve(
 						_Uize.copyInto(
 							{
-								title:'INSTANCE METHOD TEST: ' + _methodName,
+								title:_testParams.title || ('INSTANCE METHOD TEST: ' + _methodName),
 								test:Uize.map(
 									_cases,
 									function(_case) {
@@ -295,22 +338,31 @@ Uize.module ({
 											test:function(_continue) {
 												var
 													m = this,
-													_widgetInstance = _getWidgetInstance(m, _case.instanceProperties),
+													_instance = _getInstance(m, _case.createParams),
 													_test = _case.test
 												;
+												
+												// Allow for any initialization work that needs to happen before
+												// calling the method
+												_Uize.isFunction(_testParamsInitialize)
+													&& _testParamsInitialize.call(m, _instance)
+												;
+												
+												_Uize.isFunction(_initializeFunc)
+													&& _initializeFunc.call(m, _instance)
+												;
+												
+												// set initial state properties
+												// this isn't done on construction in case spies need to be set
+												// with initialize functions
+												_instance.set(_case.instanceProperties);
 												
 												return _Uize.isFunction(_test)
 													? _test.call(m, _continue)
 													: (
 														function() {
-															// Allow for any initialization work that needs to happen before
-															// calling the method
-															_Uize.isFunction(_initializeFunc)
-																&& _initializeFunc.call(m, _widgetInstance)
-															;
-															
 															// Call method w/ params
-															var _returnValue = _widgetInstance[_methodName].apply(_widgetInstance, _methodParams);
+															var _returnValue = _instance[_methodName].apply(_instance, _methodParams);
 			
 															// If expected parameter, than compare the returnValue
 															// otherwise call the expect function
@@ -367,9 +419,24 @@ Uize.module ({
 											
 										initialize
 											.
+											
+										createParams
+											Optional parameters to pass to the =create= function (that override =createParams= for the =testParamsObBJ=).
 									
 									instanceProperties
 										.
+										
+									initialize
+										.
+										
+									title
+										optional
+										
+									create
+										An alternative function for creating a instance that would be different than just calling the constructor.
+										
+									createParams
+										Optional parameters to pass to the =create= function.
 										
 									testProperties
 										.
@@ -390,7 +457,7 @@ Uize.module ({
 								......
 								
 								NOTES
-								- see the related =Uize.Test.Class.childBindingsTest= static method
+								- see the related =Uize.Test.Class.instanceMethodsTest= static method
 					*/
 				},
 				instanceMethodsTest:function(_instanceMethodsTests) {
@@ -473,7 +540,23 @@ Uize.module ({
 								NOTES
 								- see the related =Uize.Test.Class.makeMultipleDeclarativeCasesTest= static method
 					*/
-					
+				makeDeclarativeCasesPropertyTest:_makeDeclarativeCasesPropertyTest,
+					/*?
+						Static Methods
+							Uize.Test.Class.makeDeclarativeCasesPropertyTest
+								.
+								
+								SYNTAX
+								..................................................................
+								testCLASS = Uize.Test.Class.makeDeclarativeCasesPropertyTest (
+									testTitleSTR,
+									testParamsOBJ
+								);
+								..................................................................
+								
+								NOTES
+								- see the related =Uize.Test.Class.makeDeclarativeCasesTest= and =Uize.Test.Class.makeMultipleDeclarativeCasesTest= static methods
+					*/
 				makeMultipleDeclarativeCasesTest:_makeMultipleDeclarativeCasesTest,
 					/*?
 						Static Methods
@@ -490,7 +573,7 @@ Uize.module ({
 								..................................................................
 								
 								NOTES
-								- see the related =Uize.Test.Class.makeDeclarativeCasesTest= static method
+								- see the related and =Uize.Test.Class.makeDeclarativeCasesPropertyTest= =Uize.Test.Class.makeDeclarativeCasesTest= static methods
 					*/
 				
 				moduleToTest:function(_moduleToTest) {
@@ -618,14 +701,15 @@ Uize.module ({
 			},
 			
 			instanceMethods:{
-				setInstance:function(_instanceProperties) {
+				setInstance:function(_param1, _param2) {
 					var
 						m = this,
-						_instance = m.Class.getInstance(_instanceProperties)
+						_instance = _Uize.isFunction(_param1)
+							? _param1.apply(m, _param2)
+							: m.Class.getInstance(_param1)
 					;
 					
 					m.set({_instance:_instance});
-					
 					return _instance;
 				}
 			},

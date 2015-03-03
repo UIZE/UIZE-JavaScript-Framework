@@ -25,99 +25,26 @@
 
 Uize.module ({
 	name:'Uize.Widget.mDeclarativeChildren',
-	required:'Uize.Widget.mChildrenLinked',
+	required:[
+		'Uize.Class.mDeclarativeChildObjects',
+		'Uize.Widget.mChildrenLinked'
+	],
 	builder:function () {
 		'use strict';
 
-		var
-			/*** Variables for Scruncher Optimization ***/
-				_Uize = Uize
-		;
-
 		return function (_class) {
 			_class.declare ({
-				mixins:_Uize.Widget.mChildrenLinked,
-
-				omegastructor:function () {
-					var
-						m = this,
-						_linkedChildren = m.linkedChildren
-					;
-					Uize.forEach (
-						m.Class.mDeclarativeChildren_children,
-						function (_declarativeChild,_childName) {
-							function _addChild () {
-								var
-									_childWidgetClass = _declarativeChild._widgetClass,
-									_childProperties = _declarativeChild._properties
-								;
-
-								// When value is a function call the function in the context of this widget
-								if (_declarativeChild._isFunction) {
-									_childProperties = _Uize.copy(_childProperties.call(m, _childName));
-									_childWidgetClass = _childProperties.widgetClass;
-									delete _childProperties.widgetClass;
-								}
-
-								// NOTE: Filter out children w/o widgetClass. They will be deferred loaded by some other mechanism. They were there for feature detection.
-								return _childWidgetClass && m.mDeclarativeChildren_getContainer(_childName).addChild(
-									_childName,
-									_childWidgetClass,
-									_childProperties
-								);
-							}
-							var _linkedChildrenCondition = '~' + _childName;
-							if (_linkedChildren.get (_linkedChildrenCondition) === false) {
-								_linkedChildren.once (
-									_linkedChildrenCondition,
-									function () {
-										var _child = _addChild ();
-										m.isWired && _child.insertUi ();
-									}
-								);
-							} else {
-								_addChild ();
-							}
-						}
-					);
-				},
-
-				staticMethods:{
-					children:function(_children) {
-						var _declarativeChildren = this.mDeclarativeChildren_children;
-
-						for (var _childName in _children) {
-							var
-								_childDeclaration = _children[_childName],
-								_childDeclarationIsFunction = _Uize.isFunction(_childDeclaration) && !_childDeclaration.declare, // is a function, but not a class (since classes are functions)
-								_childDeclarationIsPlainObject = _Uize.isPlainObject(_childDeclaration),
-								_childProperties = !_childDeclarationIsFunction && !_childDeclarationIsPlainObject ? {widgetClass:_childDeclaration} : _childDeclaration,
-								_childWidgetClass = !_childDeclarationIsFunction && _childProperties.widgetClass
-							;
-
-							// Need to strip out the widgetClass from the childProperties, which means we need to copy it just in case
-							// it's a shared object
-							if (!_childDeclarationIsFunction && _childDeclarationIsPlainObject && _childWidgetClass) {
-								_childProperties = _Uize.copy(_childProperties);
-								delete _childProperties.widgetClass;
-							}
-
-							// NOTE: support multiple calls to children that could potentially include the same child again w/ additional properties
-							// As such we can't omit the children that don't have widgetClass set, yet, because the widgetClass *could* be added in a subsequent call to children. Will handle in constructor.
-							var _previous =
-								_declarativeChildren[_childName] || (_declarativeChildren[_childName] = {_properties:{}})
-							;
-							_previous._widgetClass = _childWidgetClass || _previous._widgetClass;
-							_previous._isFunction = _childDeclarationIsFunction;
-							_childDeclarationIsFunction
-								? (_previous._properties = _childProperties)
-								: _Uize.copyInto (_previous._properties || {},_childProperties)
-							;
-						}
+				mixins:[
+					Uize.Class.mDeclarativeChildObjects,
+					Uize.Widget.mChildrenLinked
+				],
+				
+				declarativeChildObjects:{
+					declaration:'children',
 						/*?
 							Static Methods
 								Uize.Widget.mDeclarativeChildren.children
-									.
+									Lets you conveniently declare one or more child widgets, by specifying the children in an object.
 
 									SYNTAX
 									.........................................
@@ -177,15 +104,27 @@ Uize.module ({
 									});
 									......................................................
 						*/
+					addMethod:'addChild',
+					childObjectClassKey:'widgetClass',
+					beforeAdd:function(_childName, _addChild) {
+						var
+							m = this,
+							_linkedChildren = m.linkedChildren
+						;
+						
+						var _linkedChildrenCondition = '~' + _childName;
+						if (_linkedChildren.get (_linkedChildrenCondition) === false) {
+							_linkedChildren.once (
+								_linkedChildrenCondition,
+								function () {
+									var _child = _addChild ();
+									m.isWired && _child.insertUi ();
+								}
+							);
+						} else {
+							_addChild ();
+						}
 					}
-				},
-
-				staticProperties:{
-					mDeclarativeChildren_children:{}
-				},
-
-				instanceMethods:{
-					mDeclarativeChildren_getContainer:function() { return this }
 				}
 			});
 		};

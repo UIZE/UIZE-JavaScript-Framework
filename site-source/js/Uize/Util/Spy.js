@@ -4,7 +4,7 @@
 |    /    O /   |    MODULE : Uize.Util.Spy Class
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
-| /____/ /__/_| | COPYRIGHT : (c)2010-2015 UIZE
+| /____/ /__/_| | COPYRIGHT : (c)2014-2015 UIZE
 |          /___ |   LICENSE : Available under MIT License or GNU General Public License
 |_______________|             http://www.uize.com/license.html
 */
@@ -36,11 +36,12 @@ Uize.module ({
 				var
 					m = this,
 					_object = m._object,
-					_methodName = m._methodName,
-					_originalMethod = m.originalMethod = _object && _methodName && _object[_methodName]
+					_methodName = m._methodName
 				;
 				
-				if (_Uize.isFunction(_originalMethod)) {
+				if (_object && _methodName) {
+					var _originalMethod = m.originalMethod = _object[_methodName];
+					
 					_object[_methodName] = function() {
 						var
 							_arguments = _Uize.copyList(arguments),
@@ -48,17 +49,17 @@ Uize.module ({
 								args:_arguments
 							}
 						;
-
+	
 						m.set({_calls:m._calls.concat([_call])});
 						
 						m.fire({
 							name:'Call',
 							call:_call
 						});
-
+	
 						if (_Uize.isFunction(m._mockMethod))
 							return m._mockMethod.apply(_object, _arguments);
-						else if (m._callThrough)
+						else if (m._callThrough && _Uize.isFunction(_originalMethod))
 							return _originalMethod.apply(_object, _arguments);
 					};
 				}

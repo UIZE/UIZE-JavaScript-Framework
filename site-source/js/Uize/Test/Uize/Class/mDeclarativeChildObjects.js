@@ -1,10 +1,10 @@
 /*______________
 |       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
 |     /      /  |   ---------------------------------------------------
-|    /    O /   |    MODULE : Uize.Test.Uize.Widget.mDeclarativeChildren Class
+|    /    O /   |    MODULE : Uize.Test.Uize.Class.mDeclarativeChildObjects Class
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
-| /____/ /__/_| | COPYRIGHT : (c)2014-2015 UIZE
+| /____/ /__/_| | COPYRIGHT : (c)2014 - 2015 UIZE
 |          /___ |   LICENSE : Available under MIT License or GNU General Public License
 |_______________|             http://www.uize.com/license.html
 */
@@ -18,15 +18,22 @@
 
 /*?
 	Introduction
-		The =Uize.Test.Uize.Widget.mDeclarativeChildren= module defines a suite of unit tests for the =Uize.Widget.mDeclarativeChildren= mixin module.
+		The =Uize.Test.Uize.Class.mDeclarativeChildObjects= module defines a suite of unit tests for the =Uize.Class.mDeclarativeChildObjects= mixin module.
 
 		*DEVELOPERS:* `Ben Ilegbodu`, original code contributed by `Zazzle Inc.`
 */
 
 Uize.module ({
-	name:'Uize.Test.Uize.Widget.mDeclarativeChildren',
+	name:'Uize.Test.Uize.Class.mDeclarativeChildObjects',
+	required:'Uize.Widget',
 	builder:function () {
 		'use strict';
+		
+		var
+			_Uize = Uize,
+			
+			_declarativeFunctionName = 'childObjects'
+		;
 
 		function _expectAll(_children, _expectFunc) {
 			for (var _childName in _children) {
@@ -37,24 +44,16 @@ Uize.module ({
 			return true;
 		}
 		
-		function _getWidgetClass(_declarativeChildren, _getContainerMethod) {
+		function _getClass(_declarativeChildObjects, _getContainerMethod) {
 			return Uize.Widget.subclass (
 				Uize.copyInto(
 					{
-						mixins:Uize.Widget.mDeclarativeChildren,
-						children:_declarativeChildren
-							? Uize.map(
-								_declarativeChildren,
-								function(_childProperties) {
-									if (Uize.isPlainObject(_childProperties) && _childProperties.widgetClass)
-										_childProperties.widgetClass = Uize.getModuleByName(_childProperties.widgetClass);
-									else if (Uize.isString(_childProperties))
-										_childProperties = Uize.getModuleByName(_childProperties);
-
-									return _childProperties;
-								}
-							)
-							: _declarativeChildren,
+						mixins:Uize.Class.mDeclarativeChildObjects,
+						declarativeChildObjects:{
+							declaration:_declarativeFunctionName,
+							addMethod:'addChild',
+							childObjectClassKey:'objectClass'
+						},
 						stateProperties:{
 							_propertyA:{
 								name:'propertyA',
@@ -66,57 +65,73 @@ Uize.module ({
 							}
 						}
 					},
+					_Uize.pairUp(
+						_declarativeFunctionName,
+						_declarativeChildObjects
+							? Uize.map(
+								_declarativeChildObjects,
+								function(_childProperties) {
+									if (Uize.isPlainObject(_childProperties) && _childProperties.objectClass)
+										_childProperties.objectClass = Uize.getModuleByName(_childProperties.objectClass);
+									else if (Uize.isString(_childProperties))
+										_childProperties = Uize.getModuleByName(_childProperties);
+
+									return _childProperties;
+								}
+							)
+							: _declarativeChildObjects
+					),
 					_getContainerMethod
-						? {instanceMethods:{mDeclarativeChildren_getContainer:_getContainerMethod}}
+						? {instanceMethods:_Uize.pairUp('mDeclarativeChildObjects_' + _declarativeFunctionName + '_getContainer',_getContainerMethod)}
 						: null
 				)
 			);
 		}
 
-		function _getDeclaredChildren(_declarativeChildren, _getContainerMethod) {
-			return _getWidgetClass(_declarativeChildren, _getContainerMethod) ({name:'parent'}).children;
+		function _getDeclaredChildObjects(_declarativeChildObjects, _getContainerMethod) {
+			return _getClass(_declarativeChildObjects, _getContainerMethod) ({name:'parent'}).children;
 		}
 
-		function _generateTest(_title, _declarativeChildren, _expectedChildren) {
-			function _getDeclaredChildrenForTest() { return _getDeclaredChildren(_declarativeChildren) }
-			function _expectAllDeclaredChildren(_expectFunc) { return _expectAll(_getDeclaredChildrenForTest(), _expectFunc) }
+		function _generateTest(_title, _declarativeChildObjects, _expectedChildObjects) {
+			function _getDeclaredChildObjectsForTest() { return _getDeclaredChildObjects(_declarativeChildObjects) }
+			function _expectAllDeclaredChildObjects(_expectFunc) { return _expectAll(_getDeclaredChildObjectsForTest(), _expectFunc) }
 
 			return {
 				title:_title,
 				test:[
 					{
 						title:'Children object is not null',
-						test:function() { return this.expectObject(_getDeclaredChildrenForTest()) }
+						test:function() { return this.expectObject(_getDeclaredChildObjectsForTest()) }
 					},
 					{
-						title:'Children object has the same child names as defined in declarative children w/ a widgetClass',
+						title:'Children object has the same child names as defined in declarative child objects w/ a objectClass',
 						test:function() {
 							var m = this;
-							return _expectAllDeclaredChildren(function(_child, _childName) { return m.expect(true, _childName in _expectedChildren) });
+							return _expectAllDeclaredChildObjects(function(_child, _childName) { return m.expect(true, _childName in _expectedChildObjects) });
 						}
 					},
 					{
 						title:'None of the children are null',
 						test:function() {
 							var m = this;
-							return _expectAllDeclaredChildren(function(_child) { return m.expectNonNull(_child) });
+							return _expectAllDeclaredChildObjects(function(_child) { return m.expectNonNull(_child) });
 						}
 					},
 					{
 						title:'Each child should be an object',
 						test:function() {
 							var m = this;
-							return _expectAllDeclaredChildren(function(_child) { return m.expectObject(_child) });
+							return _expectAllDeclaredChildObjects(function(_child) { return m.expectObject(_child) });
 						}
 					},
 					{
-						title:'Each child has the correct widget class',
+						title:'Each child has the correct object class',
 						test:function() {
 							var m = this;
 							return _expectAll(
-								_getDeclaredChildrenForTest(),
+								_getDeclaredChildObjectsForTest(),
 								function(_child, _childName) {
-									return m.expect(_expectedChildren[_childName].widgetClass, _child.Class.moduleName);
+									return m.expect(_expectedChildObjects[_childName].objectClass, _child.Class.moduleName);
 								}
 							);
 						}
@@ -126,9 +141,9 @@ Uize.module ({
 						test:function() {
 							var m = this;
 							return _expectAll(
-								_getDeclaredChildrenForTest(),
+								_getDeclaredChildObjectsForTest(),
 								function(_child, _childName) {
-									return m.expect(true, Uize.recordMatches(_child.get(), _expectedChildren[_childName].state));
+									return m.expect(true, Uize.recordMatches(_child.get(), _expectedChildObjects[_childName].state));
 								}
 							);
 						}
@@ -138,27 +153,24 @@ Uize.module ({
 		}
 
 		return Uize.Test.resolve ({
-			title:'Uize.Widget.mDeclarativeChildren Module Test',
+			title:'Uize.Class.mDeclarativeChildObjects Module Test',
 			test:[
-				Uize.Test.requiredModulesTest ([
-					'Uize.Widget',
-					'Uize.Widget.mDeclarativeChildren'
-				]),
+				Uize.Test.requiredModulesTest ('Uize.Class.mDeclarativeChildObjects'),
 				{
 					title:'Empty',
 					test:[
-						_generateTest('When no declarative children are specified, no children are added to the widget'),
-						_generateTest('When an empty declarative children is specified, no children are added to the widget', {})
+						_generateTest('When no declarative child objects are specified, no children are added to the instance'),
+						_generateTest('When an empty declarative child objects is specified, no children are added to the instance', {})
 					]
 				},
 				{
 					title:'Verbose Syntax',
 					test:[
 						_generateTest(
-							'When a single declarative children is specified, only one child is added to the widget with appopriate state properties',
+							'When a single declarative child objects is specified, only one child is added to the instance with appopriate state properties',
 							{
 								foo:{
-									widgetClass:'Uize.Widget',
+									objectClass:'Uize.Widget',
 									enabled:false,
 									busy:true,
 									container:'shell'
@@ -166,7 +178,7 @@ Uize.module ({
 							},
 							{
 								foo:{
-									widgetClass:'Uize.Widget',
+									objectClass:'Uize.Widget',
 									state:{
 										enabled:false,
 										busy:true,
@@ -176,27 +188,27 @@ Uize.module ({
 							}
 						),
 						_generateTest(
-							'When multiple declarative children are specified, an equal number of children are added added to the widget, each with their appopriate state properties',
+							'When multiple declarative child objects are specified, an equal number of children are added added to the instance, each with their appopriate state properties',
 							{
 								foo:{
-									widgetClass:'Uize.Widget',
+									objectClass:'Uize.Widget',
 									enabled:false,
 									busy:true,
 									container:'shell'
 								},
 								bar:{
-									widgetClass:'Uize.Widget',
+									objectClass:'Uize.Widget',
 									propretyA:1,
 									propertyB:'valueB'
 								},
 								lorem:{
-									widgetClass:'Uize.Widget',
+									objectClass:'Uize.Widget',
 									foo:2
 								}
 							},
 							{
 								foo:{
-									widgetClass:'Uize.Widget',
+									objectClass:'Uize.Widget',
 									state:{
 										enabled:false,
 										busy:true,
@@ -204,14 +216,14 @@ Uize.module ({
 									}
 								},
 								bar:{
-									widgetClass:'Uize.Widget',
+									objectClass:'Uize.Widget',
 									state:{
 										propretyA:1,
 										propertyB:'valueB'
 									}
 								},
 								lorem:{
-									widgetClass:'Uize.Widget',
+									objectClass:'Uize.Widget',
 									state:{
 										foo:2
 									}
@@ -219,7 +231,7 @@ Uize.module ({
 							}
 						),
 						_generateTest(
-							'When a declared child omits its widgetClass, it does not get added to the widget',
+							'When a declared child omits its objectClass, it does not get added to the instance',
 							{
 								ipsum:{
 									enabled:false,
@@ -227,24 +239,24 @@ Uize.module ({
 									container:'shell'
 								},
 								dolor:{
-									widgetClass:'Uize.Widget',
+									objectClass:'Uize.Widget',
 									value:'foo'
 								},
 								sit:{
-									widgetClass:'Uize.Widget',
+									objectClass:'Uize.Widget',
 									foo:2
 								},
 								blah:{}
 							},
 							{
 								dolor:{
-									widgetClass:'Uize.Widget',
+									objectClass:'Uize.Widget',
 									state:{
 										value:'foo'
 									}
 								},
 								sit:{
-									widgetClass:'Uize.Widget',
+									objectClass:'Uize.Widget',
 									state:{
 										foo:2
 									}
@@ -252,25 +264,25 @@ Uize.module ({
 							}
 						),
 						_generateTest(
-							'When a declared child has a falsy value for widgetClass, it does not getting added to the widget',
+							'When a declared child has a falsy value for objectClass, it does not getting added to the instance',
 							{
 								foo:{
-									widgetClass:''
+									objectClass:''
 								},
 								bar:{
-									widgetClass:null
+									objectClass:null
 								},
 								bat:{
-									widgetClass:undefined
+									objectClass:undefined
 								},
 								baz:{
-									widgetClass:0
+									objectClass:0
 								},
 								lorem:{
-									widgetClass:false
+									objectClass:false
 								},
 								ipsum:{
-									widgetClass:NaN
+									objectClass:NaN
 								}
 							},
 							{
@@ -283,18 +295,18 @@ Uize.module ({
 					title:'Shorthand Syntax',
 					test:[
 						_generateTest(
-							'When a single declarative children is specified, only one child is added to the widget with appopriate state properties',
+							'When a single declarative child objects is specified, only one child is added to the instance with appopriate state properties',
 							{
 								foo:'Uize.Widget'
 							},
 							{
 								foo:{
-									widgetClass:'Uize.Widget'
+									objectClass:'Uize.Widget'
 								}
 							}
 						),
 						_generateTest(
-							'When multiple declarative children are specified, an equal number of children are added added to the widget, each with their appopriate state properties',
+							'When multiple declarative child objects are specified, an equal number of children are added added to the instance, each with their appopriate state properties',
 							{
 								foo:'Uize.Widget',
 								bar:'Uize.Widget',
@@ -302,18 +314,18 @@ Uize.module ({
 							},
 							{
 								foo:{
-									widgetClass:'Uize.Widget'
+									objectClass:'Uize.Widget'
 								},
 								bar:{
-									widgetClass:'Uize.Widget'
+									objectClass:'Uize.Widget'
 								},
 								lorem:{
-									widgetClass:'Uize.Widget'
+									objectClass:'Uize.Widget'
 								}
 							}
 						),
 						_generateTest(
-							'When a declared child omits its widgetClass, it does not get added to the widget',
+							'When a declared child omits its objectClass, it does not get added to the instance',
 							{
 								ipsum:'',
 								dolor:'Uize.Widget',
@@ -321,15 +333,15 @@ Uize.module ({
 							},
 							{
 								dolor:{
-									widgetClass:'Uize.Widget'
+									objectClass:'Uize.Widget'
 								},
 								sit:{
-									widgetClass:'Uize.Widget'
+									objectClass:'Uize.Widget'
 								}
 							}
 						),
 						_generateTest(
-							'When a falsy value is specified for widgetClass of a declared child, it does not get added to the widget',
+							'When a falsy value is specified for objectClass of a declared child, it does not get added to the instance',
 							{
 								foo:'',
 								bar:null,
@@ -348,14 +360,14 @@ Uize.module ({
 					title:'Function Syntax',
 					test:[
 						{
-							title:'Function context is parent widget',
+							title:'Function context is parent instance',
 							test:function() {
 								var
 									m = this,
 									_returnValue = false
 								;
 
-								_getDeclaredChildren({
+								_getDeclaredChildObjects({
 									childA:function() {
 										_returnValue = m.expect('parent', this.get('name'));
 										return {};
@@ -373,7 +385,7 @@ Uize.module ({
 									_returnValue = false
 								;
 
-								_getDeclaredChildren({
+								_getDeclaredChildObjects({
 									childA:function(_childName) {
 										_returnValue = m.expect('childA', _childName);
 										return {};
@@ -384,11 +396,11 @@ Uize.module ({
 							}
 						},
 						_generateTest(
-							'When a single declarative children is specified (verbose synax), only one child is added to the widget with appopriate state properties',
+							'When a single declarative child objects is specified (verbose synax), only one child is added to the instance with appopriate state properties',
 							{
 								childA:function(_childName) {
 									return {
-										widgetClass:Uize.Widget,
+										objectClass:Uize.Widget,
 										propertyA:_childName,
 										propertyB:this._propertyB,
 										propertyC:Math.sqrt(16)
@@ -397,7 +409,7 @@ Uize.module ({
 							},
 							{
 								childA:{
-									widgetClass:'Uize.Widget',
+									objectClass:'Uize.Widget',
 									state:{
 										propertyA:'childA',
 										propertyB:'hello',
@@ -407,11 +419,11 @@ Uize.module ({
 							}
 						),
 						_generateTest(
-							'When multiple declarative children are specified, an equal number of children are added added to the widget, each with their appopriate state properties',
+							'When multiple declarative child objects are specified, an equal number of children are added added to the instance, each with their appopriate state properties',
 							{
 								foo:function() {
 									return {
-										widgetClass:Uize.Widget,
+										objectClass:Uize.Widget,
 										enabled:false,
 										busy:true,
 										container:'shell'
@@ -419,19 +431,19 @@ Uize.module ({
 								},
 								bar:function() {
 									return {
-										widgetClass:Uize.Widget
+										objectClass:Uize.Widget
 									};
 								},
 								lorem:function() {
 									return {
-										widgetClass:Uize.Widget,
+										objectClass:Uize.Widget,
 										foo:2
 									};
 								}
 							},
 							{
 								foo:{
-									widgetClass:'Uize.Widget',
+									objectClass:'Uize.Widget',
 									state:{
 										enabled:false,
 										busy:true,
@@ -439,10 +451,10 @@ Uize.module ({
 									}
 								},
 								bar:{
-									widgetClass:'Uize.Widget'
+									objectClass:'Uize.Widget'
 								},
 								lorem:{
-									widgetClass:'Uize.Widget',
+									objectClass:'Uize.Widget',
 									state:{
 										foo:2
 									}
@@ -450,7 +462,7 @@ Uize.module ({
 							}
 						),
 						_generateTest(
-							'When a declared child omits its widgetClass, it does not get added to the widget',
+							'When a declared child omits its objectClass, it does not get added to the instance',
 							{
 								ipsum:function() {
 									return {
@@ -461,60 +473,60 @@ Uize.module ({
 								},
 								dolor:function() {
 									return {
-										widgetClass:Uize.Widget,
+										objectClass:Uize.Widget,
 										value:'foo'
 									};
 								},
 								sit:function() {
 									return {
-										widgetClass:Uize.Widget
+										objectClass:Uize.Widget
 									};
 								},
 								blah:function() { return {} }
 							},
 							{
 								dolor:{
-									widgetClass:'Uize.Widget',
+									objectClass:'Uize.Widget',
 									state:{
 										value:'foo'
 									}
 								},
 								sit:{
-									widgetClass:'Uize.Widget'
+									objectClass:'Uize.Widget'
 								}
 							}
 						),
 						_generateTest(
-							'When a declared child has a falsy value for widgetClass, it does not getting added to the widget',
+							'When a declared child has a falsy value for objectClass, it does not getting added to the instance',
 							{
 								foo:function() {
 									return {
-										widgetClass:''
+										objectClass:''
 									};
 								},
 								bar:function() {
 									return {
-										widgetClass:null
+										objectClass:null
 									};
 								},
 								bat:function() {
 									return {
-										widgetClass:undefined
+										objectClass:undefined
 									};
 								},
 								baz:function() {
 									return {
-										widgetClass:0
+										objectClass:0
 									};
 								},
 								lorem:function() {
 									return {
-										widgetClass:false
-									}
+										objectClass:false
+									};
 								},
 								ipsum:function() {
 									return {
-										widgetClass:NaN
+										objectClass:NaN
 									};
 								}
 							},
@@ -527,7 +539,7 @@ Uize.module ({
 					test:function() {
 						var _returnValue = false;
 
-						_getDeclaredChildren(
+						_getDeclaredChildObjects(
 							{childA:'Uize.Widget'},
 							function() {
 								_returnValue = true;
@@ -535,7 +547,7 @@ Uize.module ({
 							}
 						);
 
-						return _returnValue
+						return _returnValue;
 					}
 				}
 			]

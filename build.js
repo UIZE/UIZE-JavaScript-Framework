@@ -92,7 +92,17 @@ function _eval (_toEval) {
 						_file = _fileSystem.OpenTextFile (_pathToRoot + _filePath,1),
 						_fileText = _file.ReadAll ()
 					;
-					_file.Close ();
+					_file.Close();
+					//BOM meaning it is UTF8. WScript can't read these and treats
+					//	them as UTF16, but ignored the BOM, so we just clip it off here.
+					//http://en.wikipedia.org/wiki/Byte_order_mark
+					if (
+						_fileText.charCodeAt(0) === 239
+						&& _fileText.charCodeAt(1) === 187
+						&& _fileText.charCodeAt(2) === 191
+					) {
+						_fileText = _fileText.substring(3);
+					}
 					return _fileText;
 				};
 			} else {
@@ -230,7 +240,7 @@ function _eval (_toEval) {
 			_params = _copyInto (
 				_copyInto (
 					_copyInto ({},_env),
-					{logFilePath:'logs/' + _buildModuleName + '.log'}
+					{logFilePath:(_env.logsPath || 'logs') + '/' + _buildModuleName + '.log'}
 				),
 				_params
 			);

@@ -372,13 +372,42 @@ Uize.module ({
 									_Uize_Dom_Pos.setAbsPosAdjacentTo (_rootNode, _mooringNode);
 								}
 								else {
-									var _mooringCoords = _Uize_Dom_Pos.getCoords (_mooringNode);
+									var
+										_mooringCoords = _Uize_Node.getCoords(_mooringNode),
+										_rightAligned = m._offsetRegistrationCorner.indexOf('right') > -1,
+										_bottomAligned = m._offsetRegistrationCorner.indexOf('bottom') > -1,
+										_bodyDimensions = _Uize_Node.getDimensions(document.body),
+										_stylesToSet = {}
+									;
+
+									// horizontal alignment
+									if (_rightAligned)
+										Uize.copyInto(_stylesToSet, {
+											left: 'auto',
+											right: _bodyDimensions.width - _mooringCoords.left - _offsetX
+										});
+									else
+										Uize.copyInto(_stylesToSet, {
+											left: _mooringCoords.left + _offsetX,
+											right: 'auto'
+										});
+
+									// vertical alignment
+									if (_bottomAligned)
+										Uize.copyInto(_stylesToSet, {
+											top: 'auto',
+											bottom: _bodyDimensions.height - _mooringCoords.top - _offsetY
+										});
+									else
+										Uize.copyInto(_stylesToSet, {
+											top: _mooringCoords.top + _offsetY,
+											bottom: 'auto'
+										});
+
+									// set styles
 									_Uize_Dom_Basics.setStyle (
 										_rootNode,
-										Uize.copy (
-											_offsetX != _undefined ? {left:_mooringCoords.left + _offsetX} : _undefined,
-											_offsetY != _undefined ? {top:_mooringCoords.top + _offsetY} : _undefined
-										)
+										_stylesToSet
 									);
 								}
 							}
@@ -603,7 +632,7 @@ Uize.module ({
 								When in the moored state, the dialog will maintain its offset position relative to the mooring node, as specified by the =offsetX= and =offsetY= state properties - even as the browser window is resized. Each time it is shown or the browser window is resized, the dialog will be re-positioned so that the top left corner of its =Root Node= is offset vertically and horizontally from the top left corner of the mooring node, by the number of pixels specified by the =offsetY= and =offsetX= state properties, respectively.
 
 								NOTES
-								- see the related =autoPosition=, =offsetX=, and =offsetY= state properties
+								- see the related =autoPosition=, =offsetRegistrationCorner=, =offsetX=, and =offsetY= state properties
 								- the initial value is =undefined=
 					*/
 				},
@@ -626,6 +655,21 @@ Uize.module ({
 								- see the companion =width= set-get property
 					*/
 				},
+				_offsetRegistrationCorner: {
+					name: 'offsetRegistrationCorner',
+					onChange: _updateUiPositionIfShown,
+					value: 'top|left'
+					/*?
+						State Properties
+							offsetRegistrationCorner
+								A pipe-separated string, specifying the registration corner of the dialog (i.e. which side of the dialog is moored to =mooringNode=).
+
+								NOTES
+								- when the =autoPosition= state property is set to =false=, then =offsetRegistrationCorner= has no effect
+								- see the related =autoPosition=, =mooringNode=, and =offsetY= state properties
+								- the initial value is ='top|left'=
+					*/
+				},
 				_offsetX:{
 					name:'offsetX',
 					onChange:_updateUiPositionIfShown,
@@ -639,7 +683,7 @@ Uize.module ({
 
 								NOTES
 								- when the =autoPosition= state property is set to =false=, then =offsetX= has no effect
-								- see the related =autoPosition=, =mooringNode=, and =offsetY= state properties
+								- see the related =autoPosition=, =mooringNode=, =offsetRegistrationCorner=, and =offsetY= state properties
 								- the initial value is =0=
 					*/
 				},
@@ -656,7 +700,7 @@ Uize.module ({
 
 								NOTES
 								- when the =autoPosition= state property is set to =false=, then =offsetY= has no effect
-								- see the related =autoPosition=, =mooringNode=, and =offsetX= state properties
+								- see the related =autoPosition=, =mooringNode=, =offsetRegistrationCorner=, and =offsetX= state properties
 								- the initial value is =0=
 					*/
 				},

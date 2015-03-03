@@ -196,10 +196,22 @@ Uize.module ({
 									NOTES
 									- the =children= object is read-only - its contents should not be directly modified
 									- see also the special `children state property`
-									- see also the related =parent= instance property
+									- see also the related =addedChildren= and =parent= instance properties
 						*/
 
-					m.addedChildren = m._addedChildren = _Uize.Class ();
+					m.addedChildren = m._addedChildren = _Uize.Class();
+						/*?
+							Instance Properties
+								addedChildren ~~ addedChildren Instance Property
+									A =Uize.Class= instance whose state properties reflect whether or not child widgets by the same name has been added.
+									
+									You can use the condition system methods like =isMet=, =once=, and =whenver= on =addedChildren= to determine if and when a child widget has been added to the widget. 
+									
+									NOTES
+									- the =addedChildren= object is read-only - its state should not be directly modified
+									- see also the related =children= instance property
+									
+						*/
 			},
 
 			instanceMethods:_copyInto (
@@ -1416,6 +1428,7 @@ Uize.module ({
 
 										NOTES
 										- returns a reference to the child widget instance that was added
+										- a state property matching the child widget name is marked as *met* in the =addedChildren= instance property
 										- the value of the =childWidgetNameSTR= can be =null= or =undefined= if a value is specified for the =name= property in the =childWidgetPropertiesOBJ= parameter
 										- see also the =removeChild= instance method, and the `children instance property`
 
@@ -1602,6 +1615,7 @@ Uize.module ({
 										When using this method, the child widget to remove can be specified by its name, or by an object reference to it.
 
 										NOTES
+										- a state property matching the child widget name is marked as *unmet* in the =addedChildren= instance property
 										- see also the =addChild= instance method, and the `children instance property`
 							*/
 						},

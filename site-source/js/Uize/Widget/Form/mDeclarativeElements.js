@@ -4,7 +4,7 @@
 |    /    O /   |    MODULE : Uize.Widget.Form.mDeclarativeElements Class
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
-| /____/ /__/_| | COPYRIGHT : (c)2014-2015 UIZE
+| /____/ /__/_| | COPYRIGHT : (c)2014 UIZE
 |          /___ |   LICENSE : Available under MIT License or GNU General Public License
 |_______________|             http://www.uize.com/license.html
 */
@@ -33,11 +33,13 @@ Uize.module ({
 		'use strict';
 
 		return function (_class) {
-			var _elementsAdded;
 
-			_class.declare ({
+			_class.declare({
+				staticProperties:{
+					mDeclarativeElements_elementsAdded:{}
+				},
 				staticMethods:{
-					elements:function(_elements) { this.children(_elementsAdded = _elements) }
+					elements:function (_elements) { this.children(this.mDeclarativeElements_elementsAdded = _elements) }
 						/*?
 							Static Methods
 								Uize.Widget.Form.mDeclarativeElements.elements
@@ -89,7 +91,8 @@ Uize.module ({
 				},
 
 				instanceMethods:{
-					mDeclarativeChildren_getContainer:function(_childName) {
+					mDeclarativeChildObjects_children_getContainer:function (_childName) {
+						var _elementsAdded = this.Class.mDeclarativeElements_elementsAdded;
 						return _elementsAdded && _childName in _elementsAdded
 							? this.children.elements
 							: this
