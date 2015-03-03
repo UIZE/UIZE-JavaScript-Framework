@@ -514,6 +514,7 @@ Uize.module ({
 				_isPlainObject = Uize.isPlainObject,
 				_isArray = Uize.isArray,
 				_isEmpty = Uize.isEmpty,
+				_canExtend = Uize.canExtend,
 				_undefined,
 
 			/*** General Variables ***/
@@ -545,7 +546,11 @@ Uize.module ({
 					_skeleton = _options.skeleton
 				;
 				function _compareNode (_object1,_object2) {
-					var _level = _path.length;
+					var
+						_level = _path.length,
+						_object1IsExtensible = _canExtend (_object1),
+						_object2IsExtensible = _canExtend (_object2)
+					;
 					function _compareProperty (_property) {
 						_path [_level] = _property;
 						var
@@ -564,8 +569,8 @@ Uize.module ({
 							;
 						} else {
 							var
-								_propertyInObject1 = _property in _object1,
-								_propertyInObject2 = _property in _object2,
+								_propertyInObject1 = _object1IsExtensible && (_property in _object1),
+								_propertyInObject2 = _object2IsExtensible && (_property in _object2),
 								_object1PropertyValueIsArray = _propertyInObject1 && _isArray (_object1PropertyValue),
 								_object2PropertyValueIsArray = _propertyInObject2 && _isArray (_object2PropertyValue)
 							;

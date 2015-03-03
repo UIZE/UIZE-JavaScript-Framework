@@ -550,6 +550,37 @@ Uize.module ({
 										}
 									}
 								}
+							],
+							['When a property in one object is a leaf node and the corresponding property in the other object is a non-leaf node, then the non-leaf node is recursed as if the leaf node was a non-leaf node',
+								[
+									{
+										foo:{hello:1,world:2},
+										bar:{hello:1,world:2},
+										baz:{hello:1,world:2},
+										FOO:'foo',
+										BAR:2,
+										BAZ:false
+									},
+									{
+										foo:'foo',
+										bar:2,
+										baz:false,
+										FOO:{hello:1,world:2},
+										BAR:{hello:1,world:2},
+										BAZ:{hello:1,world:2}
+									},
+									function (_object1PropertyInfo,_object2PropertyInfo) {
+										return _object1PropertyInfo || _object2PropertyInfo;
+									}
+								],
+								{
+									foo:{hello:1,world:2},
+									bar:{hello:1,world:2},
+									baz:{hello:1,world:2},
+									FOO:{hello:1,world:2},
+									BAR:{hello:1,world:2},
+									BAZ:{hello:1,world:2}
+								}
 							]
 					]]
 				])
