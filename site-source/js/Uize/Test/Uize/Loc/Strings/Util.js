@@ -170,6 +170,36 @@ Uize.module ({
 									$nonTranslatableString2:'Widget 2, Non-translatable String 2'
 								}
 							}
+						],
+						['Values for non-translatable strings are only initialized if they are null, undefined, or an empty string - falsy boolean or number type values are not initialized',
+							[
+								{
+									booleanA:false,
+									booleanB:true,
+									numberA:0,
+									numberB:1,
+									stringA:'',
+									stringB:'bar'
+								},
+								{
+									booleanA:true,
+									booleanB:false,
+									numberA:3,
+									numberB:5,
+									stringA:'foo',
+									stringB:'baz'
+								},
+								'primary-if-blank',
+								Uize.returnFalse
+							],
+							{
+								booleanA:false,
+								booleanB:true,
+								numberA:0,
+								numberB:1,
+								stringA:'foo',
+								stringB:'bar'
+							}
 						]
 					]],
 					['Uize.Loc.Strings.Util.serializeStringPath',[
