@@ -183,7 +183,7 @@ Uize.module ({
 												;
 												_child = _childName.charCodeAt (0) == 36 && _childName.charCodeAt (1) == 36
 													? _widgetClass.spawn (_childProperties,_parent)
-													: _parent.addChild (_childName,_widgetClass)
+													: _parent.addChild (_childName,_widgetClass,_childProperties)
 												;
 											}
 											return _child;
