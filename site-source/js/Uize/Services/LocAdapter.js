@@ -105,14 +105,21 @@ Uize.module ({
 					_project = m.project,
 					_resourceFileFullPath = _project.rootFolderPath + '/' + _resourceFilePath
 				;
-				return (
-					_fileSystem.fileExists ({path:_resourceFileFullPath})
-						? m.parseResourceFile (
-							_fileSystem.readFile ({path:_resourceFileFullPath,encoding:_project.resourceFileEncoding}),
-							_getResourceFileInfo (m,_resourceFileFullPath,_language)
-						)
-						: undefined
-				);
+				try {
+					return (
+						_fileSystem.fileExists ({path:_resourceFileFullPath})
+							? m.parseResourceFile (
+								_fileSystem.readFile ({path:_resourceFileFullPath,encoding:_project.resourceFileEncoding}),
+								_getResourceFileInfo (m,_resourceFileFullPath,_language)
+							)
+							: undefined
+					);
+				} catch (_error) {
+					console.log (
+						'ERROR: problem parsing file ' + _resourceFilePath + '\n' +
+						_error
+					);
+				}
 			}
 
 			function _calculateStringsInfoForLanguage (m,_language,_languageResources,_subFolder) {
@@ -510,21 +517,16 @@ Uize.module ({
 					Uize.forEach (
 						_resourceFiles,
 						function (_resourceFileSubPath) {
-							var _resourceFilePath = _language == _primaryLanguage
-								? _resourceFileSubPath
-								: m.getLanguageResourcePath (_resourceFileSubPath,_language)
+							var
+								_resourceFilePath = _language == _primaryLanguage
+									? _resourceFileSubPath
+									: m.getLanguageResourcePath (_resourceFileSubPath,_language)
+								,
+								_resourceFileStrings = _parseResourceFile (m,_resourceFilePath,_language)
 							;
-							try {
-								var _resourceFileStrings = _parseResourceFile (m,_resourceFilePath,_language);
-								if (_resourceFileStrings)
-									_resources [_resourceFileSubPath] = _resourceFileStrings
-								;
-							} catch (_error) {
-								console.log (
-									'ERROR: problem parsing file ' + _resourceFilePath + '\n' +
-									_error
-								);
-							}
+							if (_resourceFileStrings)
+								_resources [_resourceFileSubPath] = _resourceFileStrings
+							;
 						}
 					);
 					return _resources;
