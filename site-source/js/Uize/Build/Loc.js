@@ -62,13 +62,25 @@ Uize.module ({
 	builder:function () {
 		'use strict';
 
+		var
+			/*** references to static methods used internally ***/
+				_getProjectConfig
+		;
+
 		return Uize.package ({
+			getProjectConfig:_getProjectConfig = function (_params,_projectName) {
+				var
+					_scriptConfig = _params.moduleConfigs ['Uize.Build.Loc'],
+					_project = _scriptConfig.projects [_projectName]
+				;
+				return _project && Uize.merge (Uize.clone (_scriptConfig.common),{name:_projectName},_project);
+			},
+
 			perform:function (_params) {
 				var
 					_projectName = _params.project,
 					_scriptConfig = _params.moduleConfigs ['Uize.Build.Loc'],
-					_projects = _scriptConfig.projects,
-					_projectNames = Uize.keys (_projects),
+					_projectNames = Uize.keys (_scriptConfig.projects),
 					_progressBar = _params.progressBar + '' != 'false',
 					_console = _params.console || 'verbose',
 					_fileSystem = Uize.Services.FileSystem.singleton ()
@@ -76,14 +88,13 @@ Uize.module ({
 				Uize.forEach (
 					!_projectName || _projectName == '*' ? _projectNames : _projectName.split (','),
 					function _performLocMethodForProject (_projectName) {
-						var _project = _projects [_projectName];
+						var _project = _getProjectConfig (_params,_projectName);
 						if (!_project)
 							throw new Error (
 								'No project named "' + _projectName + '". ' +
 								'Projects defined are: ' + _projectNames.join (', ') + '.'
 							)
 						;
-						_project = Uize.merge (Uize.clone (_scriptConfig.common),{name:_projectName},_project);
 						Uize.require (
 							_project.serviceAdapter,
 							function (_locServiceAdapter) {
