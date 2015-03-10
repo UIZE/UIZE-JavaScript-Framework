@@ -89,7 +89,12 @@ Uize.module ({
 
 		/*** Private Instance Methods ***/
 			function _isTranslatableString (m,_stringInfo) {
-				return _hasNonWhitespace (_stringInfo.value) && m.isTranslatableString (_stringInfo);
+				var _stringValue = _stringInfo.value;
+				return (
+					typeof _stringValue == 'string' &&   // boolean or number type values are non-translatable
+					_hasNonWhitespace (_stringValue) &&  // strings that are only whitespace are non-translatable
+					m.isTranslatableString (_stringInfo)
+				);
 			}
 
 			function _getResourceFileInfo (m,_resourceFileFullPath,_language) {
