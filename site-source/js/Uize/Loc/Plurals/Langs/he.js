@@ -47,7 +47,7 @@ Uize.module ({
 				return Uize.Loc.Plurals.Util.getPluralCategory (
 					_value,
 					function (n,i,f,t,v,w,within) {
-						return i == 1 && v == 0 ? 'one' : i == 2 && v == 0 ? 'two' : v == 0 && within (n,[[0,10]]) && n % 10 == 0 ? 'many' : 'other';
+						return i == 1 && v == 0 ? 'one' : i == 2 && v == 0 ? 'two' : v == 0 && !within (n,[[0,10]]) && n % 10 == 0 ? 'many' : 'other';
 					}
 				);
 			}
