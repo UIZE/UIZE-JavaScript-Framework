@@ -79,6 +79,7 @@ Uize.module ({
 									return (
 										_rangeDetectorRegExp.test (_operandB)
 											?
+												(_operator == '!=' ? '!' : '') +
 												'within (' +
 													_operandA + ',' +
 													'[' +
