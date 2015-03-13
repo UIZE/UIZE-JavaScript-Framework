@@ -6,6 +6,10 @@
 	position: absolute;
 }
 
+.`segmentBar` {
+	box-sizing: border-box;
+}
+
 /*** segment states ***/
 	.`segmentOff` .`segmentBar`,
 	.`segmentOff` .`segmentEnd` {
@@ -22,7 +26,7 @@
 	}
 	.`horzSegment` .`segmentBar` {
 		top: 0;
-		height: 100%;
+		bottom: 0;
 	}
 	.`horzSegmentTop` {
 		top: 0;
@@ -37,7 +41,7 @@
 	}
 	.`vertSegment` .`segmentBar` {
 		left: 0;
-		width: 100%;
+		right: 0;
 	}
 	.`vertSegmentTop` {
 		top: 0;
