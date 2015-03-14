@@ -16,11 +16,6 @@
 	docCompleteness: 80
 */
 
-/*
-	OPTIONAL
-		- Uize.Widget.Beam.js (only if showBeam state property is true)
-*/
-
 /*?
 	Introduction
 		The =Uize.Widget.MagView= class implements a magnifier view widget that supports a configurable number of zoom levels, with animated zoom in / zoom out.
@@ -173,15 +168,6 @@ Uize.module ({
 				m._regViewWidthMinusHighlightWidth = _regViewWidth - _highlightWidth;
 				m._regViewHeightMinusHighlightHeight = _regViewHeight - _highlightHeight;
 				m._magImagePortSizingValue = Math.min (1 / _magRegionWidthFraction,1 / _magRegionHeightFraction);
-
-				/*** update the beam ***/
-					m._showBeam &&
-						m._beam.set ({
-							thinSize:m._highlightHeight / _regViewHeight,
-							height:_regViewHeight,
-							top:m._regViewY
-						})
-					;
 			}
 
 			function _updateUiDuringUse (m) {
@@ -190,13 +176,6 @@ Uize.module ({
 					_alignY = Uize.constrain ((m._eventAbsPos.top - m._regViewY - m._highlightOffsetY) / m._regViewHeightMinusHighlightHeight,0,1),
 					_highlightLeft = m._regViewX + m._regViewWidthMinusHighlightWidth * _alignX,
 					_highlightRight = _highlightLeft + m._highlightWidth
-				;
-				m._showBeam &&
-					m._beam.set ({
-						thinAlign:_alignY,
-						left:_highlightRight,
-						width:m._regViewX + m._regViewWidth - _highlightRight
-					})
 				;
 				m._magImagePort.set ({
 					alignX:_alignX,
@@ -232,11 +211,6 @@ Uize.module ({
 									An instance of the =Uize.Widget.ImagePort= class, used for displaying the zoomed in image off to the side of the main image.
 						*/
 					);
-
-				/*** create the beam widget ***/
-					if (m._showBeam)
-						m._beam = m.addChild ('beam',Uize.Widget.Beam)
-					;
 			},
 
 			instanceMethods:{
@@ -253,7 +227,7 @@ Uize.module ({
 						/*** wire up the mouseover and mouseout events ***/
 							var _displayMagUi = function (_mustDisplay) {
 								m.displayNode (
-									['magImagePortShell','highlight',m._showBeam ? m._beam.getNode () : _null],
+									['magImagePortShell','highlight'],
 									_mustDisplay
 								);
 								m._magShown = _mustDisplay;
@@ -264,7 +238,7 @@ Uize.module ({
 								function (_event) {
 									_displayMagUi (_true);
 
-									/*** move highlight, beam, and image port nodes to document root (if not already done) ***/
+									/*** move highlight, and image port nodes to document root (if not already done) ***/
 										if (!m._nodesMovedToRoot) {
 											m._nodesMovedToRoot = _true;
 											var
@@ -282,7 +256,6 @@ Uize.module ({
 											;
 											_moveNodeToRoot (m.getNode ('magImagePortShell'));
 											_moveNodeToRoot (m.getNode ('highlight'));
-											m._showBeam && _moveNodeToRoot (m._beam.getNode ());
 										}
 
 									/*** perform calibration that persists for the duration of use ***/
@@ -536,10 +509,6 @@ Uize.module ({
 								NOTES
 								- the initial value is =true=
 					*/
-				},
-				_showBeam:{
-					name:'showBeam',
-					value:_false
 				}
 			}
 		});
