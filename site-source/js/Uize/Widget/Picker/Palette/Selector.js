@@ -25,76 +25,12 @@
 
 Uize.module ({
 	name:'Uize.Widget.Picker.Palette.Selector',
-	required:'Uize.Widget.Button.ValueDisplay.Selector',
+	required:'Uize.Widget.Picker.Palette.mSelector',
 	builder:function (_superclass) {
 		'use strict';
 
 		return _superclass.subclass ({
-			omegastructor:function () {
-				var m = this;
-
-				function _syncValueDetails() {
-					var _valueObject = m.getValueObject();
-
-					m.set({valueDetails:_valueObject ? _valueObject.valueDetails : null});
-				}
-				m.wire({
-					'Changed.value': _syncValueDetails,
-					'Changed.values': _syncValueDetails
-				});
-
-				_syncValueDetails();
-			},
-
-			instanceMethods:{
-				getValueObject:function (_name) {
-					return Uize.findRecord (this._values,{name:_name == undefined ? this + '' : _name});
-				},
-
-				getMoreDialogEventHandlers:function () {
-					var m = this;
-
-					function _addHandler(_propertyName) {
-						return Uize.pairUp(
-							'Changed.' + _propertyName,
-							function (_event) {
-								var _dialogPropertyValue = _event.source.get(_propertyName);
-
-								_dialogPropertyValue !== undefined
-									&& m.set(_propertyName, _dialogPropertyValue)
-								;
-							}
-						);
-					}
-
-					return Uize.copyInto(
-						_superclass.doMy(m,'getMoreDialogEventHandlers') || {},
-						_addHandler('valueNo'),
-						_addHandler('tentativeValueNo')
-					);
-				}
-			},
-
-			stateProperties:{
-				_tentativeValueNo:{
-					name:'tentativeValueNo',	// read-only
-					value:-1
-				},
-				_valueNo:{
-					name:'valueNo',	// read-only
-					value:-1
-				},
-				_values:{
-					name:'values',
-					value:[]
-				}
-			},
-
-			set:{
-				pipedProperties:['values', 'valueNo', 'tentativeValueNo'],
-				selectorButtonWidgetClass:Uize.Widget.Button.ValueDisplay.Selector,
-				dialogWidgetClass:'Uize.Widget.Dialog.Picker.Palette.Selector'
-			}
+			mixins:Uize.Widget.Picker.Palette.mSelector
 		});
 	}
 });

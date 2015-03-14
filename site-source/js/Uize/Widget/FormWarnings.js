@@ -274,7 +274,7 @@ Uize.module ({
 						// before updating w/ new list, remove the old list
 						this._removeWatchedElements(this._watchedElements);
 
-						return _value;
+						return _value || [];
 					},
 					onChange:function () {
 						var m = this;

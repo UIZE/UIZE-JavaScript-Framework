@@ -475,7 +475,14 @@ Uize.module ({
 				},
 				_tentativeValue:{	// readonly
 					name:'tentativeValue',
-					onChange:function () {
+					onChange: function () {
+						var _parent = _getParentForm(this);
+						while (_parent) {
+							//Without this we could cause a form submit, see the
+							//'Changed.tentativeValue' event in Form.js for explanation.
+						    _parent.set({ isSubmitting: false });
+						    _parent = _getParentForm(_parent);
+						}
 						this._validateWhen == _tentativeValueChanged
 							&& this.validate()
 						;

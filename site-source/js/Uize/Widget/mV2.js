@@ -51,7 +51,7 @@ Uize.module ({
 					_Uize_Widget.mChildrenLinked,
 					_Uize_Widget.mEventBindings,
 					_Uize_Widget.mChildBindings,
-					_Uize_Widget.mDeclarativeChildren,
+					_Uize_Widget.mDeclarativeChildren, // this needs to be after mChildBindings when it's added for performance reasons, so that children can be added w/ bound initial state
 					_Uize_Widget.mLoc
 				],
 

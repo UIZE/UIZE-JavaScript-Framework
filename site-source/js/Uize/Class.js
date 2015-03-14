@@ -1437,10 +1437,11 @@ Uize.module ({
 				kill:function () {
 					var _instanceId = this.instanceId;
 					_Uize.eval ('if(typeof ' + _instanceId + '!=\'undefined\')' + _instanceId + '=null');
+					this.unwire();
 					/*?
 						Instance Methods
 							kill
-								Nulls out the global variable (or property of the =window= object) of the name =instanceId=.
+								Nulls out the global variable (or property of the =window= object) of the name =instanceId= and unwires all event handlers of the object..
 
 								This method may be useful if global (or window object level) references are made to instances of a class, usually for the purpose of group management, or the implementation of certain kinds of state exclusivity amongst instances of a class. This method is also intended to be overridden by subclasses where additional destructor style code may be desired.
 					*/

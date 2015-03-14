@@ -295,12 +295,15 @@ Uize.module ({
 						var
 							_cleanFromQueue = function () {
 								var _request;
-								while (
-									(_request = _requestQueue [0]) && (_getCachedResponse (m,_request) || _request.completed)
-								)
-									_callResponseCallback (m,_requestQueue.shift ())
-								;
-								m._usingQueue = _false;
+								try {
+									while (
+										(_request = _requestQueue[0]) && (_getCachedResponse(m, _request) || _request.completed)
+									)
+										_callResponseCallback(m, _requestQueue.shift())
+									;
+								} finally {
+									m._usingQueue = _false;
+								}
 								_fireRequestQueueUpdatedEvent (m);
 
 								_requestQueue.length && setTimeout (function () {m.useQueue ()},1);

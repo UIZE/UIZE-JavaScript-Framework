@@ -4,7 +4,7 @@
 |    /    O /   |    MODULE : Uize.Test.Class.mSpy Class
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
-| /____/ /__/_| | COPYRIGHT : (c)2010-2015 UIZE
+| /____/ /__/_| | COPYRIGHT : (c)2014-2015 UIZE
 |          /___ |   LICENSE : Available under MIT License or GNU General Public License
 |_______________|             http://www.uize.com/license.html
 */
@@ -20,7 +20,7 @@
 	Introduction
 		The =Uize.Test.Class.mSpy= module provides spying convenience methods for writing test cases against =Uize.Class= subclass modules.
 
-		*DEVELOPERS:* `Ben Ilegbodu`
+		*DEVELOPERS:* `Ben Ilegbodu`, original code contributed by `Zazzle Inc.`
 */
 
 Uize.module ({
@@ -85,6 +85,29 @@ Uize.module ({
 							!_spyObject.get('hasBeenCalled')
 								? _notCalled
 								: _methodName + ' method WAS called'
+						);
+					},
+					expectToNotHaveBeenCalledWith:function(_spyObject, _expectedArgs) {
+						var
+							_methodName = _spyObject.get('methodName'),
+							_expectedArgsLength = _expectedArgs.length,
+							_expectedArgsSerialized = _Uize.Json.to(_expectedArgs, 'mini'),
+							_matchingCalls = _Uize.map(
+								_spyObject.get('calls'),
+								function(_call) {
+									return _Uize.Data.Compare.identical(
+										_expectedArgs,
+										_call.args.slice(0, _expectedArgsLength)
+									);
+								}
+							),
+							_notCalled = _methodName + ' method was NOT called with expected args: ' + _expectedArgsSerialized
+						;
+						return this.expect( // compare with subset of args
+							_notCalled,
+							!_Uize.isIn(_matchingCalls, true)
+								? _notCalled
+								: _methodName + ' method was called with expected args: ' + _expectedArgsSerialized
 						);
 					},
 					spyOn:function() {
