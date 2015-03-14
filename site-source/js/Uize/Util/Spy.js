@@ -28,7 +28,7 @@ Uize.module ({
 	superclass:'Uize.Class',
 	builder:function (_superclass) {
 		'use strict';
-		
+
 		var
 			_Uize = Uize,
 
@@ -38,10 +38,10 @@ Uize.module ({
 					_object = m._object,
 					_methodName = m._methodName
 				;
-				
+
 				if (_object && _methodName) {
 					var _originalMethod = m.originalMethod = _object[_methodName];
-					
+
 					_object[_methodName] = function() {
 						var
 							_arguments = _Uize.copyList(arguments),
@@ -49,14 +49,14 @@ Uize.module ({
 								args:_arguments
 							}
 						;
-	
+
 						m.set({_calls:m._calls.concat([_call])});
-						
+
 						m.fire({
 							name:'Call',
 							call:_call
 						});
-	
+
 						if (_Uize.isFunction(m._mockMethod))
 							return m._mockMethod.apply(_object, _arguments);
 						else if (m._callThrough && _Uize.isFunction(_originalMethod))
@@ -105,15 +105,15 @@ Uize.module ({
 					}
 				}
 			},
-			
+
 			alphastructor:function() { this.reset() },
-			
+
 			instanceMethods:{
 				reset:function() { this.set({_calls:[]}) }
 			},
-			
+
 			instanceProperties:{
-				originalMethod:null	
+				originalMethod:null
 			}
 		});
 	}

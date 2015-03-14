@@ -32,14 +32,14 @@ Uize.module ({
 	],
 	builder:function (_superclass) {
 		'use strict';
-		
+
 		var
 			_Uize = Uize,
 			_Uize_Json_to = _Uize.Json.to,
-			
+
 			_superclass_requiredModulesTest = _superclass.requiredModulesTest
 		;
-		
+
 		// This is probably universally useful for all test modules
 		function _makeDeclarativeCasesTest(_testTitlePrefix, _testParams,  _testFunc) {
 			var
@@ -97,7 +97,7 @@ Uize.module ({
 				)
 			);
 		}
-		
+
 		function _makeMultipleDeclarativeCasesTest(_testTitle, _tests, _makeTestFunc) {
 			var _class = this;
 			return _class.resolve ({
@@ -117,7 +117,7 @@ Uize.module ({
 				)
 			});
 		}
-		
+
 		function _makeDeclarativeCasesPropertyTest(_testTitlePrefix, _testParams) {
 			var
 				_propertyName = _testParams.propertyName,
@@ -138,22 +138,22 @@ Uize.module ({
 							: m.setInstance(_instanceProperties)
 						;
 					}
-					
+
 					var
 						m = this,
 						_instance = _getInstance(m, _case.createParams),
 						_setup = _case.setup,
 						_expectFunc = _case.expectFunc
 					;
-					
+
 					// Provide opportunity for test to do some set up work (like set up spies)
 					_Uize.isFunction(_setup) && _setup.call(m, _instance, _continue);
-					
+
 					// cause property change
 					_instance.set(_case.instanceProperties);
-					
+
 					var _propertyActualValue = _instance.get(_propertyName);
-					
+
 					if ('expected' in _case)
 						return m.expect(_case.expected, _propertyActualValue);
 					else if (_Uize.isFunction(_expectFunc))
@@ -175,53 +175,53 @@ Uize.module ({
 						Static Methods
 							Uize.Test.Class.derivedPropertyTest
 								.
-								
+
 								SYNTAX
 								..................................................................
 								testCLASS = Uize.Test.Class.derivedPropertyTest (
 									testParamsOBJ
 								);
 								..................................................................
-								
+
 								testParamsOBJ
 									.
-									
+
 									propertyName
 										.
-										
+
 									cases
 										.
-										
+
 										title
 											The title of the test case
-											
+
 										instanceProperties
 											Properties to set on instance to cause derivation
-											
+
 										expected
 											The expected derived value for the test case
-											
+
 										expectFunc
 											A function (in lieu of the =expected= property) that takes the derived property value and a reference to the instance as parameters. It will return =true= if the derived property value is what is expected, =false= otherwise.
-											
+
 										createParams
 											Optional parameters to pass to the =create= function (that override =createParams= for the =testParamsObBJ=).
-								
+
 									instanceProperties
 										.
-										
+
 									create
 										An alternative function for creating a model instance that would be different than just calling the constructor.
-										
+
 									createParams
 										Optional parameters to pass to the =create= function.
-										
+
 									testProperties
 										.
-										
+
 									caseTestProperties
 										.
-								
+
 								EXAMPLE
 								.......
 								Uize.Test.Class.derivedPropertyTest (
@@ -249,7 +249,7 @@ Uize.module ({
 									}
 								);
 								......
-								
+
 								NOTES
 								- see the related =Uize.Test.Class.derivedPropertiesTest= static method
 					*/
@@ -265,17 +265,17 @@ Uize.module ({
 						Static Methods
 							Uize.Test.Class.derivedPropertiesTest
 								.
-								
+
 								SYNTAX
 								..................................................................
 								testCLASS = Uize.Test.Class.derivedPropertiesTest (
 									derivedPropertiesTestsARRAYorOBJ
 								);
 								..................................................................
-								
+
 								derivedPropertiesTestARRAYorOBJ
 									See =Uize.Test.Class.derivedPropertyTest= static method for the structure for each set of derived property tests.
-									
+
 								EXAMPLE
 								.......
 								Uize.Test.Class.derivedPropertiesTest (
@@ -298,7 +298,7 @@ Uize.module ({
 									]
 								);
 								......
-								
+
 								NOTES
 								- see the related =Uize.Test.Class.derivedPropertyTest= static method
 					*/
@@ -313,14 +313,14 @@ Uize.module ({
 						_create = _testParams.create,
 						_testParamsCreateParams = _testParams.createParams
 					;
-					
+
 					function _getInstance(m, _caseCreateParams) {
 						return _Uize.isFunction(_create)
 							? m.setInstance(_create, _caseCreateParams || _testParamsCreateParams || [_instanceProperties])
 							: m.setInstance(_instanceProperties)
 						;
 					}
-					
+
 					return _testClass.resolve(
 						_Uize.copyInto(
 							{
@@ -341,29 +341,29 @@ Uize.module ({
 													_instance = _getInstance(m, _case.createParams),
 													_test = _case.test
 												;
-												
+
 												// Allow for any initialization work that needs to happen before
 												// calling the method
 												_Uize.isFunction(_testParamsInitialize)
 													&& _testParamsInitialize.call(m, _instance)
 												;
-												
+
 												_Uize.isFunction(_initializeFunc)
 													&& _initializeFunc.call(m, _instance)
 												;
-												
+
 												// set initial state properties
 												// this isn't done on construction in case spies need to be set
 												// with initialize functions
 												_instance.set(_case.instanceProperties);
-												
+
 												return _Uize.isFunction(_test)
 													? _test.call(m, _continue)
 													: (
 														function() {
 															// Call method w/ params
 															var _returnValue = _instance[_methodName].apply(_instance, _methodParams);
-			
+
 															// If expected parameter, than compare the returnValue
 															// otherwise call the expect function
 															return 'expected' in _case
@@ -385,62 +385,62 @@ Uize.module ({
 						Static Methods
 							Uize.Test.Class.instanceMethodTest
 								.
-								
+
 								SYNTAX
 								..................................................................
 								testCLASS = Uize.Test.Class.instanceMethodTest (
 									paramsOBJ
 								);
 								..................................................................
-								
+
 								paramsOBJ
 									.
-									
+
 									methodName
 										.
-										
+
 									cases
 										.
-										
+
 										title
 											.
-											
+
 										params
 											.
-											
+
 										instanceProperties
 											.
-											
+
 										expected
 											.
-											
+
 										expectFunc
 											.
-											
+
 										initialize
 											.
-											
+
 										createParams
 											Optional parameters to pass to the =create= function (that override =createParams= for the =testParamsObBJ=).
-									
+
 									instanceProperties
 										.
-										
+
 									initialize
 										.
-										
+
 									title
 										optional
-										
+
 									create
 										An alternative function for creating a instance that would be different than just calling the constructor.
-										
+
 									createParams
 										Optional parameters to pass to the =create= function.
-										
+
 									testProperties
 										.
-								
+
 								EXAMPLE
 								.......
 								Uize.Test.Class.instanceMethodTest (
@@ -455,7 +455,7 @@ Uize.module ({
 									}
 								);
 								......
-								
+
 								NOTES
 								- see the related =Uize.Test.Class.instanceMethodsTest= static method
 					*/
@@ -471,17 +471,17 @@ Uize.module ({
 						Static Methods
 							Uize.Test.Class.instanceMethodsTest
 								.
-								
+
 								SYNTAX
 								..................................................................
 								testCLASS = Uize.Test.Class.instanceMethodsTest (
 									instanceMethodsTestsARRAYorOBJ
 								);
 								..................................................................
-								
+
 								instanceMethodsTestsARRAYorOBJ
 									See =Uize.Test.Class.instanceMethodTest= static method for the structure for each set of instance method tests.
-									
+
 								EXAMPLE
 								.......
 								Uize.Test.Class.instanceMethodsTest (
@@ -499,7 +499,7 @@ Uize.module ({
 									]
 								);
 								......
-								
+
 								NOTES
 								- see the related =Uize.Test.Class.instanceMethodTest= static method
 					*/
@@ -525,7 +525,7 @@ Uize.module ({
 						Static Methods
 							Uize.Test.Class.makeDeclarativeCasesTest
 								.
-								
+
 								SYNTAX
 								..................................................................
 								testCLASS = Uize.Test.Class.makeDeclarativeCasesTest (
@@ -536,7 +536,7 @@ Uize.module ({
 									caseTestPropertiesOBJ
 								);
 								..................................................................
-								
+
 								NOTES
 								- see the related =Uize.Test.Class.makeMultipleDeclarativeCasesTest= static method
 					*/
@@ -545,7 +545,7 @@ Uize.module ({
 						Static Methods
 							Uize.Test.Class.makeDeclarativeCasesPropertyTest
 								.
-								
+
 								SYNTAX
 								..................................................................
 								testCLASS = Uize.Test.Class.makeDeclarativeCasesPropertyTest (
@@ -553,7 +553,7 @@ Uize.module ({
 									testParamsOBJ
 								);
 								..................................................................
-								
+
 								NOTES
 								- see the related =Uize.Test.Class.makeDeclarativeCasesTest= and =Uize.Test.Class.makeMultipleDeclarativeCasesTest= static methods
 					*/
@@ -562,7 +562,7 @@ Uize.module ({
 						Static Methods
 							Uize.Test.Class.makeMultipleDeclarativeCasesTest
 								.
-								
+
 								SYNTAX
 								..................................................................
 								testCLASS = Uize.Test.Class.makeMultipleDeclarativeCasesTest (
@@ -571,11 +571,11 @@ Uize.module ({
 									casesARRAY
 								);
 								..................................................................
-								
+
 								NOTES
 								- see the related and =Uize.Test.Class.makeDeclarativeCasesPropertyTest= =Uize.Test.Class.makeDeclarativeCasesTest= static methods
 					*/
-				
+
 				moduleToTest:function(_moduleToTest) {
 					this.set({
 						title:'Test for ' + _moduleToTest,
@@ -592,41 +592,41 @@ Uize.module ({
 						Static Methods
 							Uize.Test.Class.propertyConformerTest
 								.
-								
+
 								SYNTAX
 								..................................................................
 								testCLASS = Uize.Test.Class.propertyConformerTest (
 									testParamsOBJ
 								);
 								..................................................................
-								
+
 								testParamsOBJ
 									.
-									
+
 									propertyName
 										.
-										
+
 									cases
 										.
-										
+
 										title
 											The title of the test case
-											
+
 										instanceProperties
 											Properties to set on instance to cause derivation
-											
+
 										expected
 											The expected derived value for the test case
-								
+
 									instanceProperties
 										.
-										
+
 									testProperties
 										.
-										
+
 									caseTestProperties
 										.
-								
+
 								EXAMPLE
 								.......
 								Uize.Test.Class.propertyConformerTest (
@@ -652,7 +652,7 @@ Uize.module ({
 									}
 								);
 								......
-								
+
 								NOTES
 								- see the related =Uize.Test.Class.propertyConformersTest= static method
 					*/
@@ -668,17 +668,17 @@ Uize.module ({
 						Static Methods
 							Uize.Test.Class.propertyConformersTest
 								.
-								
+
 								SYNTAX
 								..................................................................
 								testCLASS = Uize.Test.Class.propertyConformersTest (
 									propertyConformersTestARRAYorOBJ
 								);
 								..................................................................
-								
+
 								propertyConformersTestARRAYorOBJ
 									See =Uize.Test.Class.propertyConformerTest= static method for the structure for each set of property conformer tests.
-									
+
 								EXAMPLE
 								.......
 								Uize.Test.Class.propertyConformersTest (
@@ -692,14 +692,14 @@ Uize.module ({
 									]
 								);
 								......
-								
+
 								NOTES
 								- see the related =Uize.Test.Class.propertyConformerTest= static method
 					*/
 				},
 				requiredModulesTest:function() { return _superclass_requiredModulesTest.call(this, this.get('moduleToTest')) }
 			},
-			
+
 			instanceMethods:{
 				setInstance:function(_param1, _param2) {
 					var
@@ -708,15 +708,15 @@ Uize.module ({
 							? _param1.apply(m, _param2)
 							: m.Class.getInstance(_param1)
 					;
-					
+
 					m.set({_instance:_instance});
 					return _instance;
 				}
 			},
-			
+
 			stateProperties:{
 				_instance:'instance',
-				_moduleToTest:'moduleToTest'	
+				_moduleToTest:'moduleToTest'
 			}
 		});
 	}

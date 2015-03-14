@@ -21,9 +21,9 @@
 		The =Uize.Widget.mModels= widget mixin provides support for widgets that can contain child model class objects, allowing state between a widget and its child models to be bound.
 
 		*DEVELOPERS:* `Ben Ilegbodu`, original code contributed by `Zazzle Inc.`
-		
+
 		=Uize.Widget.mModels= mixes in =Uize.Class.mModels= which provides a majority of the model functionality. =Uize.Widget.mModels= provides the following additional support...
-		
+
 		- Any model objects added to a widget are passed down to its child widgets, provided that those child widgets also support containing model objects
 */
 
@@ -36,24 +36,24 @@ Uize.module ({
 		return function (_class) {
 			_class.declare ({
 				mixins:Uize.Class.mModels,
-				
+
 				alphastructor: function () {
 					var
 						m = this,
 						_children = m.children,
 						_models = m.models,
-						
+
 						_addModelsToChildren = function() {
 							for (var _childName in _children) {
 								var _child = _children[_childName];
-								
+
 								Uize.isFunction(_child.addModel)  // TODO: More robust way to determine that child mixes in Uize.Class.mModels?
 									&& _children[_childName].set({models:_models})
 								;
 							}
 						}
 					;
-					
+
 					m.addedModels.wire('Changed.*', _addModelsToChildren); // TODO: support for removed models
 					m.addedChildren.wire('Changed.*', _addModelsToChildren); // TODO: support for removed widgets
 				}

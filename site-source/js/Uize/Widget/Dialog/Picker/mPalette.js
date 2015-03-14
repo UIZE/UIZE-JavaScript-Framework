@@ -48,18 +48,18 @@ Uize.module ({
 					;
 				}
 			}
-		
+
 		return function (_class) {
 			_class.declare({
 				omegastructor:function () {
 					var m = this;
-	
+
 					// Sync tentativeValue & tentativeValueDetails back and forth with value widget
 					Uize.Util.Coupler({
 						instances:[m, m.children.value],
 						properties:['tentativeValue', 'tentativeValueDetails']
 					});
-	
+
 					m.wire(
 						'After Show',
 						function () {
@@ -68,7 +68,7 @@ Uize.module ({
 						}
 					);
 				},
-	
+
 				stateProperties:{
 					minWidth:{
 						name:'minWidth',
@@ -78,7 +78,7 @@ Uize.module ({
 						name:'tentativeValue',
 						onChange:function () {
 							var m = this;
-	
+
 							// Changed.tentativeValue could be fired prior to Changed.tentativeValueDetails, so break flow so that the tentativeValueDetails can be synced before the 'Submission Complete' event is fired
 							setTimeout(
 								function () {
@@ -97,7 +97,7 @@ Uize.module ({
 					},
 					tentativeValueDetails:'tentativeValueDetails'
 				},
-	
+
 				set:{
 					dismissOnShieldClick:true
 				}

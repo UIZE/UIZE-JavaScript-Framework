@@ -29,15 +29,15 @@ Uize.module ({
 	required:'Uize.Class',
 	builder:function (_superclass) {
 		'use strict';
-		
+
 		var
 			_Uize = Uize,
-			
+
 			_superclass_getInstance = _superclass.getInstance,
 			_document,
 			_getMockDomNode
 		;
-		
+
 		return _superclass.subclass({
 			staticMethods:{
 				getDocument:function() {
@@ -86,9 +86,9 @@ Uize.module ({
 					return _Uize.Class.subclass({
 						alphastructor:function() {
 							var m = this;
-							
+
 							m.style = {};
-							
+
 							m._events = {};
 							m._attributes = {};
 						},
@@ -119,16 +119,16 @@ Uize.module ({
 					}) ({name:_name});
 				}
 			},
-			
+
 			instanceMethods:{
 				setInstance:function(_widgetProperties, _nodes) {
 					var
 						m = this,
 						_widget = m.Class.getInstance(_widgetProperties, _nodes)
 					;
-					
+
 					m.set('instance', _widget);
-					
+
 					return _widget;
 				}
 			}

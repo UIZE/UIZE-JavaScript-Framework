@@ -42,7 +42,7 @@ Uize.module ({
 			/*** Variables for Performance Optimzation ***/
 				_bindingFormatRegExp = /^\s*([<\->]+)?\s*(\w*?)\s*(\.\s*(.+?))?\s*(\:\s*(.+?))?\s*$/
 		;
-		
+
 		function _getSourceValue(_sourceObject, _sourceProperty, _destinationObject, _valueTransformer) {
 			var _sourceValue = _sourceObject.get(_sourceProperty);
 			return _valueTransformer
@@ -54,7 +54,7 @@ Uize.module ({
 		function _syncObjects(_sourceObject, _sourceProperty, _destinationObject, _destinationProperty, _valueTransformer, _whenCondition) {
 			if (this.isMet(_whenCondition)) {
 				var _sourceValue = _getSourceValue(_sourceObject, _sourceProperty, _destinationObject, _valueTransformer);
-				
+
 				_sourceValue != _destinationObject.get(_destinationProperty)
 					&& _destinationObject.set(_destinationProperty, _sourceValue)
 				;
@@ -74,7 +74,7 @@ Uize.module ({
 							_bindingWiringsStaticDataName = 'mChildObjectBindings_' + _bindingsFunctionName + '_wirings',
 							_childObjectsToChildStaticDataName = 'mChildObjectBindings_' + _bindingsFunctionName + '_toChild'
 						;
-						
+
 						function _getChildObjectsToSet(m, _includePropertyFunc) {
 							var
 								_toChildInfo = m.Class[_childObjectsToChildStaticDataName],
@@ -87,10 +87,10 @@ Uize.module ({
 									_toChildInfoForChild = _toChildInfo[_childName],
 									_childObjectToSet = _childObjectsToSet[_childName] = _childObjectsToSet[_childName] || {}
 								;
-								
+
 								for (var _childPropertyName in _toChildInfoForChild) {
 									var _toChildInfoForChildProperty = _toChildInfoForChild[_childPropertyName];
-									
+
 									for (var _instancePropertyName in _toChildInfoForChildProperty) {
 										var _info = _toChildInfoForChildProperty[_instancePropertyName];
 
@@ -113,10 +113,10 @@ Uize.module ({
 									}
 								}
 							}
-							
+
 							return _childObjectsToSet;
 						}
-						
+
 						this.declare({
 							staticProperties:_pairUp(
 								_bindingWiringsStaticDataName, {},
@@ -131,17 +131,17 @@ Uize.module ({
 										_bindingWirings = mClass[_bindingWiringsStaticDataName],
 										_toChildInfo = mClass[_childObjectsToChildStaticDataName],
 										_sharedPropertiesOnChangedHandlerLookup = {},
-										
+
 										_sharedPropertiesOnChangeHandler = function(_changedState) {
 											var
 												m = this,
 												_childObjects = m[_childObjectsInstancePropertyName],
-												
+
 												_changedProperties = _Uize.lookup(_Uize.keys(_changedState)),
 												_childObjectsToSet = _getChildObjectsToSet(
 													m,
 													// make sure property is in the list of changed properties
-													function(_instancePropertyName) { return _instancePropertyName in _changedProperties } 
+													function(_instancePropertyName) { return _instancePropertyName in _changedProperties }
 												)
 											;
 
@@ -150,7 +150,7 @@ Uize.module ({
 													_childObject = _childName ? _childObjects[_childName] : m,
 													_childStateToSet = _childObjectsToSet[_childName]
 												;
-												
+
 												_childObject
 													&& !_Uize.isEmpty(_childStateToSet)
 													&& _childObject.set(_childStateToSet)
@@ -158,7 +158,7 @@ Uize.module ({
 											}
 										}
 									;
-			
+
 									_forEach(
 										_bindings,
 										function(_bindingForProperty, _propertyName) {
@@ -172,13 +172,13 @@ Uize.module ({
 														when:_formatMatch[6]
 													}
 												;
-												
+
 												var
 													_childName = _binding.child || '',
 													_childPropertyName = _binding.property || _propertyName
-												
+
 												;
-			
+
 												if (_childName || (_propertyName != _childPropertyName)) { // no point binding the same property to itself for an instance (!childName)
 													var
 														_direction = _binding.direction || '<->', // bi-directional is the default
@@ -187,12 +187,12 @@ Uize.module ({
 														_valueTransformerAtoB = _valueAdapter && _valueAdapter.aToB && _resolveTransformer(_valueAdapter.aToB),
 														_valueTransformerBtoA = _valueAdapter && _valueAdapter.bToA && _resolveTransformer(_valueAdapter.bToA),
 														_whenCondition = _binding.when || _returnTrue,
-			
+
 														_directionIsToChild = _direction.indexOf('->') == (_directionLength - 2),  // parent -> child
 														_directionIsFromChild = !_direction.indexOf('<-'),  // child -> parent
 														_directionIsTwoWay = !_direction.indexOf('<->'),
 														_childObjectChangedPropertyEventName = 'Changed.' + _childPropertyName,
-														
+
 														_toChildInfoForChild = _toChildInfo[_childName] = _toChildInfo[_childName] || {},
 														_toChildInfoForChildProperty = _toChildInfoForChild[_childPropertyName] = _toChildInfoForChild[_childPropertyName] || {}
 													;
@@ -223,7 +223,7 @@ Uize.module ({
 															_whenCondition:_whenCondition
 														};
 													}
-			
+
 													// Construct function to be called once the child is added. It will actually create the bindings
 													(_bindingWirings[_childName] = _bindingWirings[_childName] || {})[_propertyName + '/' + _childPropertyName] = function(m) {
 														var
@@ -231,11 +231,11 @@ Uize.module ({
 															_syncFromChildEvent,
 															_whenConditionWheneverWiring
 														;
-														
+
 														function _syncToChild() { _syncObjects.call(m, m, _propertyName, _childObject, _childPropertyName, _valueTransformerAtoB, _whenCondition) }
 														function _syncFromChild() { _syncObjects.call(m, _childObject, _childPropertyName, m, _propertyName, _valueTransformerBtoA, _whenCondition) }
-			
-														if (_directionIsToChild) {  
+
+														if (_directionIsToChild) {
 															// First set child object to have same value as instance. We still need this here despite setting
 															// the child objects' initial data when they are added in the event that a child is added, removed,
 															// and added again. In that case the child objects special state property won't have the data we need.
@@ -244,18 +244,18 @@ Uize.module ({
 															(!_directionIsTwoWay || m.get(_propertyName) !== _undefined)
 																&& _syncToChild()
 															;
-															
+
 															// Sync to child event is handled by adding onChange handler for state property
 														}
 														if (_directionIsFromChild) {
 															// First set instance to have same value as child if it's one-way (or the instance's property was undefined for bi-directional)
 															(!_directionIsTwoWay || m.get(_propertyName) == _undefined)
 																&& _syncFromChild();
-			
+
 															// Then wire Changed.* handler on child to update instance
 															_childObject.wire(_syncFromChildEvent = _pairUp(_childObjectChangedPropertyEventName, _syncFromChild));
 														}
-														
+
 														// if a when condition is specified, we need to register a whenever condition handler to sync when the condition
 														// becomes true
 														if (_whenCondition != _returnTrue)
@@ -269,7 +269,7 @@ Uize.module ({
 																}
 															)
 														;
-			
+
 														// Finally, wire up unwire if/when the child is removed
 														_childName
 															&& m[_addedChildObjectsPropertyName].whenever(
@@ -277,13 +277,13 @@ Uize.module ({
 																function() {
 																	if (_childObject) {
 																		// NOTE: can't unwire onChange (it just checks to see if child exists)
-																		
+
 																		// unwire child -> parent (even though child is removed, it is not necessarilly destroyed)
 																		_syncFromChildEvent && _childObject && _childObject.unwire(_syncFromChildEvent);
-																		
+
 																		// unwire whenever condition handler
 																		_whenConditionWheneverWiring && m.unwire(_whenConditionWheneverWiring);
-				
+
 																		// clear out our reference to the removed child object to not potentially hang on memory that can be disposed
 																		_childObject = undefined;
 																	}
@@ -293,7 +293,7 @@ Uize.module ({
 													};
 												}
 											}
-			
+
 											_isArray(_bindingForProperty)
 												? _forEach(_bindingForProperty, _processBinding)
 												: _processBinding(_bindingForProperty)
@@ -302,13 +302,13 @@ Uize.module ({
 									);
 								}
 							),
-							
+
 							alphastructor:function () {
 								var
 									m = this,
 									_addedChildObjects = m[_addedChildObjectsPropertyName]
 								;
-			
+
 								/* NOTE: Format of _bindingWiringsStaticDataName:
 									{
 										childA:{
@@ -336,10 +336,10 @@ Uize.module ({
 									}
 								);
 							},
-							
+
 							omegastructor:function() {
 								var m = this;
-								
+
 								// set initial values for children on state proprety so that when the children are
 								// constructed they'll have those values ready at construction, which should eliminate
 								// an initial changed event. Optimization!
@@ -365,9 +365,9 @@ Uize.module ({
 									.........................................
 									MyClass.mChildObjectBindings (childObjectBindingsPropertiesOBJ);
 									.........................................
-									
+
 									The sole =childObjectBindingsPropertiesOBJ= parameter supports the following properties...
-									
+
 									- =declaration= - the name of the actual child object bindings declaration =function= to create (such as ='childBindings'= for =Uize.Widget.mChildBindings=)
 									- =instanceProperty= - the name of the instance property that contains the references to the child objects (such as ='children'= for =Uize.Widget.mChildBindings=)
 									- =addedInstanceProperty= - the name of the =Uize.Class= instance property that contains state about which child objects have been added (such as ='addedChildren' for =Uize.Widget.mChildBindings=)

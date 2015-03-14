@@ -38,7 +38,7 @@ Uize.module ({
 					Uize.Class.mDeclarativeChildObjects,
 					Uize.Widget.mChildrenLinked
 				],
-				
+
 				declarativeChildObjects:{
 					declaration:'children',
 						/*?
@@ -111,7 +111,7 @@ Uize.module ({
 							m = this,
 							_linkedChildren = m.linkedChildren
 						;
-						
+
 						var _linkedChildrenCondition = '~' + _childName;
 						if (_linkedChildren.get (_linkedChildrenCondition) === false) {
 							_linkedChildren.once (

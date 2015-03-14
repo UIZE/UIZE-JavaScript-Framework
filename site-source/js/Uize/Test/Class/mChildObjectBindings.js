@@ -31,7 +31,7 @@ Uize.module ({
 	],
 	builder:function () {
 		'use strict';
-		
+
 		var
 			_Uize = Uize
 		;
@@ -45,7 +45,7 @@ Uize.module ({
 							_childObjectTestName = _properties.childObjectTestName,
 							_childObjectsPropertyName = _properties.childObjectsPropertyName
 						;
-						
+
 						_class.declare({
 							staticMethods:_Uize.pairUp(
 								_childObjectTestName,
@@ -54,13 +54,13 @@ Uize.module ({
 											_testClass = this,
 											_stateProperty = _testParams.propertyName
 										;
-										
+
 										function _getInstance(m, _instanceProperties) {
 											return m.setInstance(
 												_Uize.copy(_testParams.instanceProperties, _instanceProperties)
 											);
 										}
-										
+
 										return _testClass.resolve(
 											_Uize.copyInto(
 												{
@@ -75,37 +75,37 @@ Uize.module ({
 																	_direction = _case.direction,
 																	_instanceProperties = _case.instanceProperties
 																;
-																
+
 																return Uize.Array.Util.flatten(
 																	_Uize.map(
 																		_case.expect,
 																		function(_expect) {
 																			var _expectTests = [];
-																
+
 																			if (_direction.indexOf('->') > -1)
 																				_expectTests.push({
 																					title:'When instance is created and the ' + _stateProperty + ' property is set to {' + _expect.a + '}, the ' + _childProperty + ' property of ' + _childName + ' child object is set to {' + _expect.b + '}',
 																					test:function() {
 																						var _instance = _getInstance(this, _instanceProperties);
-																						
+
 																						_instance.set(_expect.aState || _Uize.pairUp(_stateProperty, _expect.a));
-				
+
 																						return this.expect(_expect.b, _instance[_childObjectsPropertyName][_childName].get(_childProperty));
 																					}
 																				});
-																
+
 																			if (_direction.indexOf('<-') > -1)
 																				_expectTests.push({
 																					title:'When instance is created and the ' + _childProperty + ' property of ' + _childName + ' child object is set to {' + _expect.b + '}, the ' + _stateProperty + ' property is set to {' + _expect.a + '}',
 																					test:function() {
 																						var _instance = _getInstance(this, _instanceProperties);
-																						
+
 																						_instance[_childObjectsPropertyName][_childName].set(_expect.bState || _Uize.pairUp(_childProperty, _expect.b));
-																						
+
 																						return this.expect(_expect.a, _instance.get(_stateProperty));
 																					}
 																				});
-																			
+
 																			return _expectTests;
 																		}
 																	)

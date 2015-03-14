@@ -28,10 +28,10 @@ Uize.module ({
 	required:'Uize.Widget',
 	builder:function () {
 		'use strict';
-		
+
 		var
 			_Uize = Uize,
-			
+
 			_declarativeFunctionName = 'childObjects'
 		;
 
@@ -43,7 +43,7 @@ Uize.module ({
 
 			return true;
 		}
-		
+
 		function _getClass(_declarativeChildObjects, _getContainerMethod) {
 			return Uize.Widget.subclass (
 				Uize.copyInto(

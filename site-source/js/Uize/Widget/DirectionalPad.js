@@ -107,7 +107,7 @@ Uize.module ({
 
 		return _superclass.subclass ({
 			mixins:_Uize.Widget.mWeb,
-			
+
 			omegastructor:function () {
 				var m = this;
 				if (!m._useLinks) {

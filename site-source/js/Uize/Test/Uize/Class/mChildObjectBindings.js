@@ -29,16 +29,16 @@ Uize.module ({
 	required:'Uize.Widget',
 	builder:function (_superclass) {
 		'use strict';
-		
+
 		var
 			_Uize = Uize,
-			
+
 			_bindingsFunctionName = 'childBindings',
 			_addMethodName = 'addChild',
 			_removeMethodName = 'removeChild',
 			_childObjectsInstancePropertyName = 'children',
 			_bindingWiringsStaticDataName = 'mChildObjectBindings_' + _bindingsFunctionName + '_wirings',
-			
+
 			_class = _superclass.subclass({
 				moduleToTest:'Uize.Class.mChildObjectBindings'
 			})
@@ -52,20 +52,20 @@ Uize.module ({
 				function (_childProperties, _childName) {
 					if (_childName) {
 						var _objectClass = _Uize.Widget;
-						
+
 						if ('objectClass' in _childProperties) {
 							_childProperties = _Uize.clone(_childProperties);
 							_objectClass = _childProperties.objectClass;
-							
+
 							delete _childProperties.objectClass;
 						}
-						
+
 						_instance[_addMethodName](_childName, _objectClass, _childProperties);
 					}
 				}
 			);
 		}
-		
+
 		function _getTestClass(_bindings, _stateProperties, _children) {
 			return Uize.Widget.subclass (
 				_Uize.copyInto(
@@ -185,13 +185,13 @@ Uize.module ({
 									}
 
 									_addChildren(_instance, _children);
-									
+
 									var
 										_child = _binding.child
 											? _instance[_childObjectsInstancePropertyName][_binding.child]
 											: _instance
 									;
-									
+
 									_continue(
 										this.expect(_bToA(_initialValue), _instance.get(_binding.instanceProperty))
 											&& this.expect(_aToB(_initialValue), _child.get(_binding.property))
@@ -304,7 +304,7 @@ Uize.module ({
 			set:{
 				test:[
 					_class.requiredModulesTest(),
-					
+
 					{
 						title:'Empty',
 						test:[
@@ -2222,7 +2222,7 @@ Uize.module ({
 														{childA:{propertyA:_childInstancePropertyValue}}
 													)
 												;
-												
+
 												return m.expect(_childInstancePropertyValue, _instance[_childObjectsInstancePropertyName].childA.get('propertyA'));
 											}
 										};
@@ -2257,7 +2257,7 @@ Uize.module ({
 														{childA:{propertyA:_getRandomPropertyValue()}}
 													)
 												;
-												
+
 												return m.expect(_instancePropertyValue, _instance.get('propertyA'));
 											}
 										};
@@ -2290,9 +2290,9 @@ Uize.module ({
 														{childA:{propertyA:_getRandomPropertyValue()}}
 													)
 												;
-												
+
 												_instance.met('whenProperty');
-												
+
 												return m.expect(_instancePropertyValue, _instance[_childObjectsInstancePropertyName].childA.get('propertyA'));
 											}
 										};
@@ -2320,9 +2320,9 @@ Uize.module ({
 											{childA:{propertyA:_childInstancePropertyValue}}
 										)
 									;
-									
+
 									_instance.met('whenProperty');
-									
+
 									return m.expect(_childInstancePropertyValue, _instance.get('propertyA'));
 								}
 							},
@@ -2346,9 +2346,9 @@ Uize.module ({
 											{childA:{propertyA:_childInstancePropertyValue}}
 										)
 									;
-									
+
 									_instance.set('propertyA', _getRandomPropertyValue());
-									
+
 									return m.expect(_childInstancePropertyValue, _instance[_childObjectsInstancePropertyName].childA.get('propertyA'));
 								}
 							},
@@ -2374,9 +2374,9 @@ Uize.module ({
 										),
 										_child = _instance[_childObjectsInstancePropertyName].childA
 									;
-									
+
 									_child.set('propertyA', _getRandomPropertyValue());
-									
+
 									return m.expect(_instancePropertyValue, _instance.get('propertyA'));
 								}
 							},
@@ -2400,7 +2400,7 @@ Uize.module ({
 											{childA:{propertyA:_getRandomPropertyValue()}}
 										)
 									;
-									
+
 									return m.expect(_instancePropertyValue, _instance[_childObjectsInstancePropertyName].childA.get('propertyA'));
 								}
 							},
@@ -2425,7 +2425,7 @@ Uize.module ({
 											{childA:{propertyA:_childInstancePropertyValue}}
 										)
 									;
-									
+
 									return m.expect(_childInstancePropertyValue, _instance.get('propertyA'));
 								}
 							},
@@ -2449,10 +2449,10 @@ Uize.module ({
 											{childA:{propertyA:_getRandomPropertyValue()}}
 										)
 									;
-									
+
 									_instance.unmet('whenProperty');
 									_instance.set('propertyA', _getRandomPropertyValue());
-									
+
 									return m.expect(_instancePropertyValue, _instance[_childObjectsInstancePropertyName].childA.get('propertyA'));
 								}
 							},
@@ -2478,10 +2478,10 @@ Uize.module ({
 										),
 										_child = _instance[_childObjectsInstancePropertyName].childA
 									;
-									
+
 									_instance.unmet('whenProperty');
 									_child.set('propertyA', _getRandomPropertyValue());
-									
+
 									return m.expect(_childInstancePropertyValue, _instance.get('propertyA'));
 								}
 							},
@@ -2506,10 +2506,10 @@ Uize.module ({
 										),
 										_child = _instance[_childObjectsInstancePropertyName].childA
 									;
-									
+
 									_instance.removeChild(_child);
 									_instance.met('whenProperty');
-									
+
 									return m.expect(_childInstancePropertyValue, _child.get('propertyA'));
 								}
 							},
@@ -2535,7 +2535,7 @@ Uize.module ({
 										),
 										_child = _instance[_childObjectsInstancePropertyName].childA
 									;
-									
+
 									_instance.removeChild(_child);
 									_instance.met('whenProperty');
 
@@ -2772,7 +2772,7 @@ Uize.module ({
 									;
 
 									_instance[_addMethodName]('childA', _childClass);
-																		
+
 									return m.expect(1, _childChangeHandlerCallCount);
 								}
 							},
@@ -2787,7 +2787,7 @@ Uize.module ({
 											{childA:{}}
 										)
 									;
-	
+
 									return this.expect(_instanceInitialPropertyValue, _instance.get('propertyA'))
 										&& this.expect(_instance.get('propertyA'), _instance[_childObjectsInstancePropertyName].childA.get('propertyA'))
 									;
@@ -2805,7 +2805,7 @@ Uize.module ({
 										),
 										_childAObject = _instance[_childObjectsInstancePropertyName].childA
 									;
-	
+
 									return this.expect(_childObjectInitialPropertyValue, _childAObject.get('propertyA'))
 										&& this.expect(_childAObject.get('propertyA'), _instance.get('propertyA'))
 									;
@@ -2847,12 +2847,12 @@ Uize.module ({
 										),
 										_childToRemove = _instance[_childObjectsInstancePropertyName].childA // keep reference so we'll have it after removal
 									;
-	
+
 									_instance[_removeMethodName](_childToRemove);
-	
+
 									// set instance to new value to see if child will also update (which it shouldn't)
 									_instance.set('propertyA', _getRandomPropertyValue());
-	
+
 									return this.expect(true, _instance.get('propertyA') != _childToRemove.get('propertyA'));
 								}
 							},
@@ -2867,12 +2867,12 @@ Uize.module ({
 										),
 										_childToRemove = _instance[_childObjectsInstancePropertyName].childA // keep reference so we'll have it after removal
 									;
-	
+
 									_instance[_removeMethodName](_childToRemove);
-	
+
 									// set instance to new value to see if child will also update (which it shouldn't)
 									_childToRemove.set('propertyA', _getRandomPropertyValue());
-	
+
 									return this.expect(true, _instance.get('propertyA') != _childToRemove.get('propertyA'));
 								}
 							},
@@ -2886,13 +2886,13 @@ Uize.module ({
 											{childA:{propertyA:_getRandomPropertyValue()}}
 										)
 									;
-	
+
 									// first remove the child
 									_instance[_removeMethodName]('childA');
-	
+
 									// then add back a new child with the same name (which should get bound again)
 									_instance.addChild('childA', Uize.Widget, {propertyA:_getRandomPropertyValue()});
-	
+
 									// state should match when the child's state is synched
 									return this.expect(_instance.get('propertyA'), _instance[_childObjectsInstancePropertyName].childA.get('propertyA'));
 								}
@@ -2907,16 +2907,16 @@ Uize.module ({
 											{childA:{propertyA:_getRandomPropertyValue()}}
 										)
 									;
-	
+
 									// first remove the child
 									_instance[_removeMethodName]('childA');
-	
+
 									// then add back a new child with the same name (which should get bound again)
 									_instance.addChild('childA', Uize.Widget, {propertyA:_getRandomPropertyValue()});
-	
+
 									// set instance to new value (which should get bound to child)
 									_instance.set('propertyA', _getRandomPropertyValue());
-	
+
 									return this.expect(_instance.get('propertyA'), _instance[_childObjectsInstancePropertyName].childA.get('propertyA'));
 								}
 							},
@@ -2964,7 +2964,7 @@ Uize.module ({
 										_ClassBindingsData = _Class[_bindingWiringsStaticDataName],
 										_SubclassBindingsData = _Subclass[_bindingWiringsStaticDataName]
 									;
-	
+
 									return this.expectSameAs(_SubclassBindingsData.childB['propertyA/propertyA'], _ClassBindingsData.childB['propertyA/propertyA'])
 										&& this.expectNotSameAs(_SubclassBindingsData.childA['propertyA/childPropertyA'], _ClassBindingsData.childA['propertyA/childPropertyA'])
 										&& this.expect(1, Uize.keys(_SubclassBindingsData.childA).length)

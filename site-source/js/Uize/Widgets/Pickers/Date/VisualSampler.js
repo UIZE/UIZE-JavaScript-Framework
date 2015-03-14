@@ -20,7 +20,7 @@
 	Introduction
 		The =Uize.Widgets.Pickers.Date.VisualSampler= class implements a visual sampler widget for the =Uize.Widgets.Pickers.Date.Widget= class.
 
-		*DEVELOPERS:* 
+		*DEVELOPERS:*
 */
 
 Uize.module ({

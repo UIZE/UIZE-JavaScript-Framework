@@ -1178,7 +1178,7 @@ Uize.module ({
 							_event = _document.createEventObject();
 							_event.eventType = _eventName;
 						}
-						
+
 						_Uize.copyInto(_event, _eventProperties);
 
 						m._each(

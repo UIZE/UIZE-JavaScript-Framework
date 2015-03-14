@@ -31,7 +31,7 @@ Uize.module ({
 		var
 			/*** Variables for Scruncher Optimization ***/
 				_Uize = Uize,
-				
+
 				_pairUp = _Uize.pairUp
 		;
 
@@ -45,11 +45,11 @@ Uize.module ({
 							_childObjectClassKey = _properties.childObjectClassKey,
 							_beforeAdd = _properties.beforeAdd,
 							_beforeAddIsFunction = _Uize.isFunction(_beforeAdd),
-							
+
 							_declarativeStaticDataName = 'mDeclarativeChildObjects_' + _declarativeFunctionName,
 							_getContainerInstanceMethodName = 'mDeclarativeChildObjects_' + _declarativeFunctionName + '_getContainer'
 						;
-						
+
 						this.declare({
 							staticProperties:_pairUp(_declarativeStaticDataName, {}),
 
@@ -57,7 +57,7 @@ Uize.module ({
 								_declarativeFunctionName,
 								function(_children) {
 									var _declarativeChildObjects = this[_declarativeStaticDataName];
-			
+
 									for (var _childName in _children) {
 										var
 											_childDeclaration = _children[_childName],
@@ -66,14 +66,14 @@ Uize.module ({
 											_childProperties = !_childDeclarationIsFunction && !_childDeclarationIsPlainObject ? _pairUp(_childObjectClassKey, _childDeclaration) : _childDeclaration,
 											_childObjectClass = !_childDeclarationIsFunction && _childProperties[_childObjectClassKey]
 										;
-			
+
 										// Need to strip out the object class from the objectProperties, which means we need to copy it just in case
 										// it's a shared object
 										if (!_childDeclarationIsFunction && _childObjectClassKey in _childProperties) {
 											_childProperties = _Uize.copy(_childProperties);
 											delete _childProperties[_childObjectClassKey];
 										}
-			
+
 										// NOTE: support multiple calls to declaration that could potentially include the same object again w/ additional properties (for whatever reason)
 										// As such we can't omit the objects that don't have object class set, yet, because the object class *could* be added in a subsequent call to declaration. Will handle in constructor.
 										var _previousChildDeclaration = _declarativeChildObjects[_childName] || (_declarativeChildObjects[_childName] = {_properties:{}});
@@ -86,13 +86,13 @@ Uize.module ({
 									}
 								}
 							),
-							
+
 							omegastructor:function() {
 								var
 									m = this,
 									_declarativeChildObjects = m.Class[_declarativeStaticDataName]
 								;
-			
+
 								_Uize.forEach(
 									_declarativeChildObjects,
 									function (_declarativeChild, _childName) {
@@ -100,13 +100,13 @@ Uize.module ({
 											var
 												_childObjectClass = _declarativeChild._childObjectClass,
 												_childProperties = _declarativeChild._properties
-					
+
 											;
-		
+
 											// When value is a function call the function in the context of this widget
 											if (_declarativeChild._isFunction)
 												_childProperties = _childProperties.call(m, _childName);
-											
+
 											// Need to get the object class from the properties if it's there.
 											// If it is there we need to remove it from the properties, so we gotta copy it.
 											if (_childObjectClassKey in _childProperties) {
@@ -143,9 +143,9 @@ Uize.module ({
 									.........................................
 									MyClass.declarativeChildObjects (declarativeChildObjectsPropertiesOBJ);
 									.........................................
-									
+
 									The sole =declarativeChildObjectsPropertiesOBJ= parameter supports the following properties...
-									
+
 									- =declaration= - the name of the actual child objects declaration =function= to create (such as ='children'= for =Uize.Widget.mDeclarativeChildren=)
 									- =addMethod= - the name of the instance method that adds individual child objects (such as ='addChild'= for =Uize.Widget.mDeclarativeChildren=)
 									- =childObjectClassKey= - the name of the key within the child object properties that would signify the child object class (such as ='widgetClass' for =Uize.Widget.mDeclarativeChildren=)

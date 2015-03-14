@@ -31,10 +31,10 @@ Uize.module ({
 	],
 	builder:function () {
 		'use strict';
-		
+
 		var
 			_Uize = Uize,
-			
+
 			_global = _Uize.global()
 		;
 
@@ -45,7 +45,7 @@ Uize.module ({
 					htmlBindingTest:function(_testParams) {
 						var
 							_testClass = this,
-							
+
 							_propertyName = _testParams.propertyName,
 							_nodeName = _testParams.nodeName,
 							_bindingType = _testParams.bindingType,
@@ -53,7 +53,7 @@ Uize.module ({
 							_nodes = _testParams.nodes,
 							_cases = _testParams.cases
 						;
-						
+
 						function _getWidgetInstance(m) {
 							return m.setInstance(
 								_instanceProperties,
@@ -64,7 +64,7 @@ Uize.module ({
 								)
 							);
 						}
-						
+
 						return _testClass.resolve(
 							_Uize.copyInto(
 								{
@@ -82,13 +82,13 @@ Uize.module ({
 													var
 														m = this,
 														_widgetInstance = _getWidgetInstance(m),
-														
+
 														_originalWindow = _global.window,
 														_originalDocument = _global.document,
-														
+
 														_expectedArgs = [_nodeName],
 														_expectedValueKey,
-														
+
 														_webSpy = _case.webSpy || [],
 														_webSpies = _Uize.isArray(_webSpy) ? _webSpy : [_webSpy],
 														_spyObject = m.spyOn({object:_widgetInstance}),
@@ -99,7 +99,7 @@ Uize.module ({
 																methodName:'web',
 																mockMethod:function(_nodeBlob) {
 																	var _webObject = _webSpyObject.originalMethod.call(this, _nodeBlob);
-																	
+
 																	_webSpyObjects = _Uize.map(
 																		_webSpies,
 																		function(_webSpyInfo) {
@@ -111,7 +111,7 @@ Uize.module ({
 																			);
 																		}
 																	);
-																	
+
 																	return _webObject;
 																}
 															})
@@ -120,14 +120,14 @@ Uize.module ({
 													// For Uize.Dom.Basics when its wiring things
 													_global.window = _global;
 													_global.document = _class.getDocument();
-													
+
 													_Uize.isFunction(_case.initialize)
 														&& _case.initialize.call(m, _continue)
 													;
-												
+
 													// wire the UI
 													_widgetInstance.met('wired');
-													
+
 													if (!_expectFunc) {
 														var _methodToSpy;
 
@@ -154,13 +154,13 @@ Uize.module ({
 															_methodToSpy = 'setNodeProperties';
 															_expectedValueKey = _bindingType;
 														}
-														
+
 														_spyObject.set({
 															methodName:_methodToSpy,
 															callThrough:true
 														});
 													}
-													
+
 													// add any override spy info
 													_spyObject.set(_case.spy);
 
@@ -169,18 +169,18 @@ Uize.module ({
 
 													_global.window = _originalWindow;
 													_global.document = _originalDocument;
-													
+
 													return (_expectFunc
 														|| function() {
 															var _propertyValue = _widgetInstance.get(_propertyName);
-															
+
 															if (_bindingType == 'value' || _bindingType == 'html' || _bindingType == 'innerHTML')
 																_propertyValue = _propertyValue == null ? '' : _propertyValue;
 															else if (_bindingType == '?')
 																_propertyValue = !!_propertyValue;
 															else if (_bindingType == 'show' || _bindingType == 'hide')
 																_propertyValue = !!_propertyValue == (_bindingType == 'show') ? '' : 'none';
-															
+
 															_expectedArgs.push(
 																_expectedValueKey
 																	? _Uize.pairUp(_expectedValueKey, _propertyValue)
@@ -204,56 +204,56 @@ Uize.module ({
 							Static Methods
 								Uize.Test.Widget.mHtmlBindings.htmlBindingTest
 									.
-									
+
 									SYNTAX
 									..................................................................
 									testCLASS = Uize.Test.Widget.mHtmlBindings.htmlBindingTest (
 										paramsOBJ
 									);
 									..................................................................
-									
+
 									paramsOBJ
 										.
-										
+
 										propertyNameSTR
 											.
-											
+
 										nodeNameSTR
 											.
-											
+
 										bindingTypeSTR
 											.
-											
+
 										casesARRAY
 											.
-											
+
 											state
 												.
-											
+
 											title
 												.
-												
+
 											expectFunc
 												.
-												
+
 											spy
 												.
-												
+
 											webSpy
 												.
-												
+
 											initialize
 												.
-												
+
 										nodesARRAYOrOBJ
 											.
-											
+
 										instancePropertiesOBJ
 											.
-											
+
 										testPropertiesOBJ
 											.
-									
+
 									EXAMPLE
 									.......
 									Uize.Test.Widget.mHtmlBindings.childTest (
@@ -271,7 +271,7 @@ Uize.module ({
 										}
 									);
 									......
-									
+
 									NOTES
 									- see the related =Uize.Test.Widget.mHtmlBindings.htmlBindingsTest= static method
 						*/
@@ -287,17 +287,17 @@ Uize.module ({
 							Static Methods
 								Uize.Test.Widget.mHtmlBindings.htmlBindingsTest
 									.
-									
+
 									SYNTAX
 									..................................................................
 									testCLASS = Uize.Test.Widget.mHtmlBindings.htmlBindingsTest (
 										htmlBindingsTestsARRAYorOBJ
 									);
 									..................................................................
-									
+
 									htmlBindingsTestsARRAYorOBJ
 										See =Uize.Test.Widget.mHtmlBindings.htmlBindingTest= static method for the structure for each set of HTML binding tests.
-										
+
 									EXAMPLE
 									.......
 									Uize.Test.Widget.mHtmlBindings.htmlBindingsTest  (
@@ -307,7 +307,7 @@ Uize.module ({
 												nodeName:'display',
 												bindingType:'html'
 												cases:[
-													
+
 												]
 											},
 											{
@@ -315,7 +315,7 @@ Uize.module ({
 												nodeName:'displayName'
 												bindingType:'html',
 												cases:[
-												
+
 												]
 											},
 											{
@@ -323,13 +323,13 @@ Uize.module ({
 												nodeName:'image',
 												bindingType:'style.left'
 												cases:[
-												
+
 												]
 											}
 										]
 									);
 									......
-									
+
 									NOTES
 									- see the related =Uize.Test.Widget.mHtmlBindings.htmlBindingTest= static method
 						*/

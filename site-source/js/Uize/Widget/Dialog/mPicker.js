@@ -51,12 +51,12 @@ Uize.module ({
 			function _updateUiKeepOpenState (m) {
 				m.pickerWidgetsAdded && m.children.keepOpen.set ({selected:m.keepOpen});
 			}
-		
+
 		return function (_class) {
 			_class.declare({
 				omegastructor:function () {
 					var m = this;
-	
+
 					/*** submit value ***/
 						function _fireSubmissionComplete (_keepOpen) {
 							var
@@ -64,9 +64,9 @@ Uize.module ({
 								_valueDetails = _valueWidget.get('valueDetails'),
 								_undefined
 							;
-	
+
 							m.submittedValue = _true;
-	
+
 							m.fireSubmissionComplete(
 								_keepOpen,
 								Uize.copyInto(
@@ -78,7 +78,7 @@ Uize.module ({
 								)
 							);
 						}
-	
+
 					/*** add the value child widget ***/
 						m.addChild ('value',m.valueWidgetClass).wire (
 							'Changed.value',
@@ -100,7 +100,7 @@ Uize.module ({
 										.
 							*/
 						);
-	
+
 					/*** add the keepOpen button ***/
 						m.addChild ('keepOpen',Uize.Widget.Button.Checkbox).wire (
 							'Changed.selected',
@@ -111,7 +111,7 @@ Uize.module ({
 										.
 							*/
 						);
-	
+
 					/*** add event handlers ***/
 						function _handleDismiss() {
 							if (m.submittedValue) {
@@ -126,9 +126,9 @@ Uize.module ({
 							'Before Show':function () {
 								/* WORKAROUND:
 									Ideally, the dialog class would have a state state property to indicate whether or not the dialog is actually shown, versus it just being desired to be shown because the shown state property is set to true.
-	
+
 									Another high level concept is the idea of whether or not the value of a state property is completely reflected, which could also apply to widgets that display images, where a url state property may change in order to change the image, but where the new value may not be completely reflected until the image has completed loading.
-	
+
 									Absent the above facilities, we do a workaround and track that we're in the beforeShow state so that the value change event handler on the value widget's value state property doesn't commit the value and dismiss the dialog.
 								*/
 								m.beforeShow = _true;
@@ -137,15 +137,15 @@ Uize.module ({
 								m.beforeShow = m.submittedValue = _false;
 							}
 						});
-	
+
 					m.pickerWidgetsAdded = _true;
 					_updateUiKeepOpenState (m);
 				},
-	
+
 				instanceMethods:{
 					fireSubmissionComplete:function (_keepOpen, _result) {
 						var m = this;
-	
+
 						m.get ('shown')
 							&& m.fire ({
 								name:'Submission Complete',
@@ -160,7 +160,7 @@ Uize.module ({
 						;
 					}
 				},
-	
+
 				stateProperties:{
 					keepOpen:{
 						name:'keepOpen',
@@ -170,7 +170,7 @@ Uize.module ({
 							State Properties
 								keepOpen
 									.
-	
+
 									NOTES
 									- the initial value is =false=
 						*/
@@ -182,7 +182,7 @@ Uize.module ({
 							State Properties
 								pipedProperties
 									.
-	
+
 									NOTES
 									- the initial value is =undefined=
 						*/
@@ -191,12 +191,12 @@ Uize.module ({
 							State Properties
 								value
 									.
-	
+
 									NOTES
 									- the initial value is =undefined=
 						*/
 				},
-	
+
 				set:{
 					shieldOpacity:0.01
 				}

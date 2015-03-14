@@ -31,10 +31,10 @@ Uize.module ({
 	],
 	builder:function () {
 		'use strict';
-		
+
 		var
 			_Uize = Uize,
-			
+
 			_global = _Uize.global()
 		;
 
@@ -45,7 +45,7 @@ Uize.module ({
 					eventBindingTest:function(_testParams) {
 						var
 							_testClass = this,
-							
+
 							_widgetName = _testParams.widgetName || '',
 							_nodeName = _testParams.nodeName,
 							_nodeNameSpecified = !_Uize.isNully(_nodeName),
@@ -54,10 +54,10 @@ Uize.module ({
 							_instanceProperties = _testParams.instanceProperties,
 							_nodes = _testParams.nodes,
 							_cases = _testParams.cases,
-							
+
 							_testName
 						;
-						
+
 						function _getWidgetInstance(m) {
 							return m.setInstance(
 								_instanceProperties,
@@ -68,7 +68,7 @@ Uize.module ({
 								)
 							);
 						}
-						
+
 						if (_nodeNameSpecified)
 							_testName = '#' + _nodeName + ':' + _eventName;
 						else {
@@ -77,7 +77,7 @@ Uize.module ({
 							else if (_eventName)
 								_testName = _widgetName + ':' + _eventName;
 						}
-						
+
 						return _testClass.resolve(
 							_Uize.copyInto(
 								{
@@ -91,7 +91,7 @@ Uize.module ({
 												_spies = _Uize.isArray(_spy) ? _spy : [_spy],
 												_webSpies = _Uize.isArray(_webSpy) ? _webSpy : [_webSpy],
 												_expected = _case.expected,
-												
+
 												_createWidgetAndTrigger = function(m, _continue) {
 													var
 														_widgetInstance = _getWidgetInstance(m),
@@ -101,7 +101,7 @@ Uize.module ({
 																_spyInfo = _Uize.clone(_spyInfo);
 																delete _spyInfo.args;
 																delete _spyInfo.notCalled;
-																
+
 																// add spy
 																return m.spyOn(
 																	_Uize.copyInto(
@@ -117,7 +117,7 @@ Uize.module ({
 																methodName:'web',
 																mockMethod:function(_nodeBlob) {
 																	var _webObject = _webSpyObject.originalMethod.call(this, _nodeBlob);
-																	
+
 																	_Uize.forEach(
 																		_webSpies,
 																		function(_webSpyInfo) {
@@ -129,14 +129,14 @@ Uize.module ({
 																			);
 																		}
 																	);
-																	
+
 																	return _webObject;
 																}
 															}),
 														_originalWindow = _global.window,
 														_originalDocument = _global.document
 													;
-													
+
 													_Uize.isFunction(_case.initialize)
 														&& _case.initialize.call(m, _continue)
 													;
@@ -149,16 +149,16 @@ Uize.module ({
 														// wire the UI
 														_widgetInstance.met('wired');
 													}
-													
+
 													// change state
 													_widgetInstance.set(_case.state);
-													
+
 													if (_nodeNameSpecified) {
 														// fire fake DOM event
 														_widgetInstance.getNode(_nodeName).triggerEvent({
-															name:_eventName	
+															name:_eventName
 														});
-											
+
 														_global.window = _originalWindow;
 														_global.document = _originalDocument;
 													}
@@ -190,7 +190,7 @@ Uize.module ({
 																	}
 																]
 															;
-															
+
 															if (_spyArgs)
 																_spyTests.push({
 																	title:'After event binding is triggered, ' + _spyInfo.methodName + ' method has been called with appropriate arguments',
@@ -200,13 +200,13 @@ Uize.module ({
 																	}
 																})
 															;
-															
+
 															return _spyTests;
 														}
 													)
 												)
 											;
-											
+
 											if (!_Uize.isNully(_expected))
 												_tests.push({
 													title:'After event binding is triggered, widget has expected state',
@@ -219,17 +219,17 @@ Uize.module ({
 													}
 												})
 											;
-											
+
 											if (_Uize.isFunction(_case.expectFunc))
 												_tests.push({
 													title:'After event binding is triggered, expected result happens',
 													test:function(_continue) {
 														_createWidgetAndTrigger(this, _continue);
-														return _case.expectFunc.call(this, _continue);	
+														return _case.expectFunc.call(this, _continue);
 													}
 												})
 											;
-											
+
 											return {
 												title:_case.title,
 												test:_tests
@@ -244,68 +244,68 @@ Uize.module ({
 							Static Methods
 								Uize.Test.Widget.mEventBindings.eventBindingTest
 									.
-									
+
 									SYNTAX
 									..................................................................
 									testCLASS = Uize.Test.Widget.mEventBindings.eventBindingTest (
 										paramsOBJ
 									);
 									..................................................................
-									
+
 									paramsOBJ
 										.
-										
+
 										widgetName
 											.
-											
+
 										nodeName
 											.
-											
+
 										eventName
 											.
-											
+
 										propertyName
 											.
-											
+
 										cases
 											.
-											
+
 											title
 												.
-											
+
 											state
 												.
-											
+
 											expected
 												.
-												
+
 											expectFunc
 												.
-												
+
 											spy
 												.
-												
+
 												args
 													.
-													
+
 												notCalled
 													.
-												
+
 											webSpy
 												.
-													
+
 											initialize
 												.
-												
+
 										nodes
 											.
-											
+
 										instanceProperties
 											.
-											
+
 										testProperties
 											.
-									
+
 									EXAMPLE
 									.......
 									Uize.Test.Widget.mEventBindings.childTest (
@@ -325,7 +325,7 @@ Uize.module ({
 										}
 									);
 									......
-									
+
 									NOTES
 									- see the related =Uize.Test.Widget.mEventBindings.eventBindingsTest= static method
 						*/
@@ -341,17 +341,17 @@ Uize.module ({
 							Static Methods
 								Uize.Test.Widget.mEventBindings.eventBindingsTest
 									.
-									
+
 									SYNTAX
 									..................................................................
 									testCLASS = Uize.Test.Widget.mEventBindings.eventBindingsTest (
 										eventBindingsTestsARRAYorOBJ
 									);
 									..................................................................
-									
+
 									eventBindingsTestsARRAYorOBJ
 										See =Uize.Test.Widget.mEventBindings.eventBindingTest= static method for the structure for each set of event binding tests.
-										
+
 									EXAMPLE
 									.......
 									Uize.Test.Widget.mEventBindings.eventBindingsTest  (
@@ -360,26 +360,26 @@ Uize.module ({
 												widgetName:'stop',
 												eventName:'Click',
 												cases:[
-													
+
 												]
 											},
 											{
 												nodeName:'image',
 												eventName:'click',
 												cases:[
-												
+
 												]
 											},
 											{
 												widgetName:'',
 												cases:[
-												
+
 												]
 											}
 										]
 									);
 									......
-									
+
 									NOTES
 									- see the related =Uize.Test.Widget.mEventBindings.eventBindingTest= static method
 						*/

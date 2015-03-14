@@ -38,7 +38,7 @@ Uize.module ({
 						/*?
 							Static Methods
 								Uize.Widget.mChildBindings.childBindings
-									Lets you conveniently bind the state of a widget to that of its child widgets. 
+									Lets you conveniently bind the state of a widget to that of its child widgets.
 
 									SYNTAX
 									.........................................

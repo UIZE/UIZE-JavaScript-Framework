@@ -28,7 +28,7 @@ Uize.module ({
 	required:'Uize.Test.Class.mDeclarativeChildObjects',
 	builder:function () {
 		'use strict';
-		
+
 		var
 			_Uize = Uize
 		;
@@ -43,17 +43,17 @@ Uize.module ({
 							Static Methods
 								Uize.Test.Widget.mDeclarativeChildren.childrenTest
 									.
-									
+
 									SYNTAX
 									..................................................................
 									testCLASS = Uize.Test.Widget.mDeclarativeChildren.childrenTest (
 										declarativeChildrenTestsARRAYorOBJ
 									);
 									..................................................................
-									
+
 									declarativeChildrenTestsARRAYorOBJ
 										See =Uize.Test.Widget.mDeclarativeChildren.childTest= static method for the structure for each set of declarative children tests.
-										
+
 									EXAMPLE
 									.......
 									Uize.Test.Widget.mDeclarativeChildren.childrenTest  (
@@ -74,7 +74,7 @@ Uize.module ({
 										]
 									);
 									......
-									
+
 									NOTES
 									- see the related =Uize.Test.Widget.mDeclarativeChildren.childTest= static method
 						*/
@@ -83,41 +83,41 @@ Uize.module ({
 							Static Methods
 								Uize.Test.Widget.mDeclarativeChildren.childTest
 									.
-									
+
 									SYNTAX
 									..................................................................
 									testCLASS = Uize.Test.Widget.mDeclarativeChildren.childTest (
 										paramsOBJ
 									);
 									..................................................................
-									
+
 									paramsOBJ
 										.
-										
+
 										childName
 											.
-									
+
 										cases
 											.
-											
+
 											widgetClassName
 												.
-												
+
 											expectedProperties
 												.
-												
+
 											instanceProperties
 												.
-											
+
 											NOTES
 											- Omitting =casesArray= signals that the child actually should *not* be added
-										
+
 										instanceProperties
 											.
-											
+
 										testProperties
 											.
-									
+
 									EXAMPLE
 									.......
 									Uize.Test.Widget.mDeclarativeChildren.childTest (
@@ -138,7 +138,7 @@ Uize.module ({
 										}
 									);
 									......
-									
+
 									NOTES
 									- see the related =Uize.Test.Widget.mDeclarativeChildren.childrenTest= static method
 						*/

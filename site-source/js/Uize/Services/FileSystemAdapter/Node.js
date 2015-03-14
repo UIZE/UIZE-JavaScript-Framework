@@ -72,7 +72,7 @@ Uize.module ({
 							;
 						}
 					},
-					
+
 					_unlink:function(_path) {
 						var m = this;
 						m._pathExists(_path) && m._fileSystem.unlinkSync(_path);

@@ -76,7 +76,7 @@ Uize.module ({
 							;
 						}
 					},
-					
+
 					_readFile:function(_path) {
 						var
 							_fileSystemObject = this._fileSystemObject,
@@ -85,7 +85,7 @@ Uize.module ({
 						if (_fileSystemObject.GetFile (_path).Size) {
 							var _file = _fileSystemObject.OpenTextFile (_path,1);
 							_text = _file.ReadAll ();
-							
+
 							//BOM meaning it is UTF8. WScript can't read these and treats
 							//	them as UTF16, but ignored the BOM, so we just clip it off here.
 							//http://en.wikipedia.org/wiki/Byte_order_mark
@@ -99,7 +99,7 @@ Uize.module ({
 
 							_file.Close ();
 						}
-						
+
 						return _text;
 					},
 

@@ -29,11 +29,11 @@ Uize.module ({
 	required:'Uize.Class',
 	builder:function (_superclass) {
 		'use strict';
-		
+
 		var
 			_Uize = Uize,
 			_Uize_Class = _Uize.Class,
-			
+
 			_class = _superclass.subclass({
 				moduleToTest:'Uize.Util.Spy'
 			})
@@ -43,7 +43,7 @@ Uize.module ({
 			set:{
 				test:[
 					_class.requiredModulesTest(),
-					
+
 					_class.derivedPropertiesTest([
 						{
 							propertyName:'callCount',
@@ -97,7 +97,7 @@ Uize.module ({
 							]
 						}
 					]),
-					
+
 					{
 						title:'Testing calls state',
 						test:[
@@ -126,9 +126,9 @@ Uize.module ({
 										_object = _Uize_Class(),
 										_spyObject = _class.getInstance({object:_object, methodName:'fire'})
 									;
-									
+
 									_object.fire('Foo');
-									
+
 									return this.expect(
 										1,
 										_spyObject.get('callCount')
@@ -142,12 +142,12 @@ Uize.module ({
 										_object = _Uize_Class(),
 										_spyObject = _class.getInstance({object:_object, methodName:'fire'})
 									;
-									
+
 									_object.fire('1st');
 									_object.fire('2nd');
 									_object.fire('3rd');
 									_object.fire('4th');
-									
+
 									return this.expect(
 										4,
 										_spyObject.get('callCount')
@@ -161,9 +161,9 @@ Uize.module ({
 										_object = _Uize_Class(),
 										_spyObject = _class.getInstance({object:_object, methodName:'fire'})
 									;
-									
+
 									_object.fire('Foo');
-									
+
 									return this.expect(
 										1,
 										_spyObject.get('calls')[0].args.length
@@ -177,9 +177,9 @@ Uize.module ({
 										_object = _Uize_Class(),
 										_spyObject = _class.getInstance({object:_object, methodName:'fire'})
 									;
-									
+
 									_object.fire('Foo', 'Bar', 'Baz');
-									
+
 									return this.expect(
 										3,
 										_spyObject.get('calls')[0].args.length
@@ -193,9 +193,9 @@ Uize.module ({
 										_object = _Uize_Class(),
 										_spyObject = _class.getInstance({object:_object, methodName:'fire'})
 									;
-									
+
 									_object.fire('Foo');
-									
+
 									return this.expect(
 										['Foo'],
 										_spyObject.get('calls')[0].args
@@ -209,9 +209,9 @@ Uize.module ({
 										_object = _Uize_Class(),
 										_spyObject = _class.getInstance({object:_object, methodName:'fire'})
 									;
-									
+
 									_object.fire('Foo', 'Bar', 'Baz');
-									
+
 									return this.expect(
 										['Foo', 'Bar', 'Baz'],
 										_spyObject.get('calls')[0].args
@@ -220,7 +220,7 @@ Uize.module ({
 							}
 						]
 					},
-					
+
 					{
 						title:'Testing callThrough',
 						test:[
@@ -240,12 +240,12 @@ Uize.module ({
 									;
 
 									_class.getInstance({object:_object, methodName:'foo'});
-									
+
 									_callThroughTimeout = setTimeout(
 										function() { _continue(true) },
 										0
 									);
-									
+
 									_object.foo();
 								}
 							},
@@ -263,7 +263,7 @@ Uize.module ({
 											}
 										}) ()
 									;
-									
+
 									_class.getInstance({
 										object: _object,
 										methodName: 'foo',
@@ -274,7 +274,7 @@ Uize.module ({
 										function() { _continue(false) },
 										0
 									);
-									
+
 									_object.foo();
 								}
 							},
@@ -293,7 +293,7 @@ Uize.module ({
 											}
 										}) ()
 									;
-									
+
 									_class.getInstance({
 										object: _object,
 										methodName: 'foo',
@@ -304,7 +304,7 @@ Uize.module ({
 										function() { _continue(false) },
 										0
 									);
-									
+
 									_object.foo();
 								}
 							},
@@ -323,7 +323,7 @@ Uize.module ({
 											}
 										}) ()
 									;
-									
+
 									_class.getInstance({
 										object: _object,
 										methodName: 'foo',
@@ -334,7 +334,7 @@ Uize.module ({
 										function() { _continue(false) },
 										0
 									);
-									
+
 									_object.foo('1', '2', '3');
 								}
 							},
@@ -354,7 +354,7 @@ Uize.module ({
 										methodName:'foo',
 										callThrough:true
 									});
-									
+
 									return this.expect(7, _object.foo(7));
 								}
 							},
@@ -372,7 +372,7 @@ Uize.module ({
 											}
 										}) ()
 									;
-									
+
 									_class.getInstance({
 										object: _object,
 										methodName: 'foo',
@@ -384,13 +384,13 @@ Uize.module ({
 										function() { _continue(true) },
 										0
 									);
-									
+
 									_object.foo();
 								}
 							}
 						]
 					},
-					
+
 					{
 						title:'Testing mockMethod',
 						test:[
@@ -402,7 +402,7 @@ Uize.module ({
 										methodName: 'fire',
 										mockMethod: 'not a function'
 									});
-									
+
 									return true;
 								}
 							},
@@ -413,7 +413,7 @@ Uize.module ({
 										_mockMethodTimeout,
 										_object = _Uize_Class()
 									;
-									
+
 									_class.getInstance({
 										object: _object,
 										methodName: 'fire',
@@ -427,7 +427,7 @@ Uize.module ({
 										function() { _continue(false) },
 										0
 									);
-									
+
 									_object.fire('Foo');
 								}
 							},
@@ -439,7 +439,7 @@ Uize.module ({
 										_mockMethodTimeout,
 										_object = _Uize_Class()
 									;
-									
+
 									_class.getInstance({
 										object: _object,
 										methodName: 'fire',
@@ -453,7 +453,7 @@ Uize.module ({
 										function() { _continue(false) },
 										0
 									);
-									
+
 									_object.fire('Foo');
 								}
 							},
@@ -465,7 +465,7 @@ Uize.module ({
 										_mockMethodTimeout,
 										_object = _Uize_Class()
 									;
-									
+
 									_class.getInstance({
 										object:_object,
 										methodName:'fire',
@@ -479,7 +479,7 @@ Uize.module ({
 										function() { _continue(false) },
 										0
 									);
-									
+
 									_object.fire('Foo', 'Bar');
 								}
 							},
@@ -495,13 +495,13 @@ Uize.module ({
 										methodName:'fire',
 										mockMethod:_Uize.returnFalse
 									});
-									
+
 									return this.expect(false, _object.fire('Foo'));
 								}
 							}
 						]
 					},
-					
+
 					{
 						title:'Testing object',
 						test:[
@@ -526,15 +526,15 @@ Uize.module ({
 											methodName:'foo'
 										})
 									;
-									
+
 									_subclass.foo('Foo', 'Bar');
-									
+
 									return _spyObject.get('hasBeenCalled');
 								}
 							}
 						]
 					},
-					
+
 					{
 						title:'Testing methodName',
 						test:[
@@ -557,7 +557,7 @@ Uize.module ({
 							}
 						]
 					},
-					
+
 					{
 						title:'Testing reset',
 						test:[
@@ -568,21 +568,21 @@ Uize.module ({
 										_object = _Uize_Class(),
 										_spyObject = _class.getInstance({object:_object, methodName:'fire'})
 									;
-									
+
 									_object.fire('Foo');
 									_object.fire('Foo');
 									_object.fire('Foo');
 									_object.fire('Foo');
 									_object.fire('Foo');
 									_object.fire('Foo');
-									
+
 									_spyObject.reset();
-									
+
 									return this.expect(
 										0,
 										_spyObject.get('callCount')
 									);
-										
+
 								}
 							},
 							{
@@ -592,21 +592,21 @@ Uize.module ({
 										_object = _Uize_Class(),
 										_spyObject = _class.getInstance({object:_object, methodName:'fire'})
 									;
-									
+
 									_object.fire('Foo');
 									_object.fire('Foo');
 									_object.fire('Foo');
 									_object.fire('Foo');
 									_object.fire('Foo');
 									_object.fire('Foo');
-									
+
 									_spyObject.set('object', _Uize_Class());
-									
+
 									return this.expect(
 										0,
 										_spyObject.get('callCount')
 									);
-										
+
 								}
 							},
 							{
@@ -616,21 +616,21 @@ Uize.module ({
 										_object = _Uize_Class(),
 										_spyObject = _class.getInstance({object:_object, methodName:'fire'})
 									;
-									
+
 									_object.fire('Foo');
 									_object.fire('Foo');
 									_object.fire('Foo');
 									_object.fire('Foo');
 									_object.fire('Foo');
 									_object.fire('Foo');
-									
+
 									_spyObject.set('methodName', 'wire');
-									
+
 									return this.expect(
 										0,
 										_spyObject.get('callCount')
 									);
-										
+
 								}
 							}
 						]

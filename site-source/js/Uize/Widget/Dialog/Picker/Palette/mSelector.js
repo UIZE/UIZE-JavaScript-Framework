@@ -36,7 +36,7 @@ Uize.module ({
 			function _fireSubmissionComplete (_propertiesChanged) {
 				this.fireSubmissionComplete (true, _propertiesChanged);
 			}
-		
+
 		return function (_class) {
 			_class.declare({
 				omegastructor:function () {
@@ -53,7 +53,7 @@ Uize.module ({
 						properties:['valueNo', 'tentativeValueNo']
 					});
 				},
-	
+
 				stateProperties:{
 					tentativeValueNo:{
 						name:'tentativeValueNo',	// read-only
@@ -70,7 +70,7 @@ Uize.module ({
 						value:[]
 					}
 				},
-	
+
 				set:{
 					pipedProperties:['values'],
 					valueWidgetClass:Uize.Widget.Options.Selector,

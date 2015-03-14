@@ -20,7 +20,7 @@
 	Introduction
 		The =Uize.Widgets.ColorSliders.Vert.Combo.VisualTests= class implements a set of visual tests for the =Uize.Widgets.ColorSliders.Vert.Combo.Widget= class.
 
-		*DEVELOPERS:* 
+		*DEVELOPERS:*
 */
 
 Uize.module ({

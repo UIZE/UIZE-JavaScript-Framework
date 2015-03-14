@@ -20,7 +20,7 @@
 	Introduction
 		The =Uize.Widgets.ColorSliders.Vert.Combo.VisualSampler= class implements a visual sampler widget for the =Uize.Widgets.ColorSliders.Vert.Combo.Widget= class.
 
-		*DEVELOPERS:* 
+		*DEVELOPERS:*
 */
 
 Uize.module ({

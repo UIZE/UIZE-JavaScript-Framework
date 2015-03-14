@@ -64,18 +64,18 @@ Uize.module ({
 										mClass = this,
 										_eventBindings = mClass[_eventBindingsStaticDataName]
 									;
-									
+
 									_forEach(
 										_eventBindingsTypesInfo,
 										function(_eventBindingsTypeInfo, _objectType) {
 											var
 												_eventBindingTypeNamePrefix = _eventBindingsTypeInfo.namePrefix,
 												_isRegularObjectEventBindings = _eventBindingTypeNamePrefix === '', // NOTE: "regular" event bindings are those on the instance and/or its child objects
-												
-												
+
+
 												_eventBindingsForType = _eventBindings[_objectType] = _eventBindings[_objectType] || {}
 											;
-					
+
 											_forEach(
 												_bindings,
 												function(_eventBindingValue, _eventBindingKey) {
@@ -84,7 +84,7 @@ Uize.module ({
 														_sourceName = _eventBindingKeyTokens[0],
 														_sourceNameStartsWithPrefix = !_sourceName.indexOf(_eventBindingTypeNamePrefix)
 													;
-													
+
 													if (_sourceNameStartsWithPrefix) {
 														var
 															_addBinding = function(_binding, _eventName) {
@@ -120,9 +120,9 @@ Uize.module ({
 																;
 															}
 														;
-														
+
 														_sourceName = _sourceName.substr(_eventBindingTypeNamePrefix.length);
-						
+
 														_eventBindingKeyTokens.length > 1 // short-hand syntax where the 2nd token is the event
 															? _addBinding(_eventBindingValue, _eventBindingKeyTokens[1])
 															: _forEach(_eventBindingValue, _addBinding)
@@ -134,7 +134,7 @@ Uize.module ({
 									);
 								}
 							),
-							
+
 							alphastructor:function () {
 								var
 									m = this,
@@ -144,7 +144,7 @@ Uize.module ({
 									_childObjects = m[_childObjectsInstancePropertyName],
 									_wiredRegularObjectEvents = {} // keep track of wired "regular" events so we can remove them if the child objects get removed
 								;
-			
+
 								function _wrapBinding(_context, _binding, _source, _defaultFireIf) {
 									return function(_event) {
 										// ensure that the required child objects have been added before calling the handler
@@ -155,7 +155,7 @@ Uize.module ({
 										;
 									};
 								}
-			
+
 								/* NOTE: format of bindings
 									{
 										[namePrefix]:{
@@ -172,7 +172,7 @@ Uize.module ({
 										}
 									}
 								*/
-								
+
 								_forEach(
 									_eventBindings,
 									function(_typeBindings, _objectType) {
@@ -180,9 +180,9 @@ Uize.module ({
 											_typeInfo = _eventBindingsTypesInfo[_objectType],
 											_namePrefix = _typeInfo.namePrefix,
 											_wireWhenever = _typeInfo.wireWhenever,
-											
+
 											_isRegularObjectEventBindings = _namePrefix === '',
-											
+
 											_wireBindings = function() {
 												if (_isRegularObjectEventBindings) { // wire up "regular" objects like the instance or child objects
 													_forEach(
@@ -200,9 +200,9 @@ Uize.module ({
 																		_bindingInfo = _bindings[_bindingNo],
 																		_eventToWire = _pairUp(_bindingInfo[0], _wrapBinding(m, _bindingInfo[1], _object, _returnTrue))
 																	;
-							
+
 																	_object.wire(_eventToWire);
-							
+
 																	// store a reference to the wired event for later unwiring
 																	(_wiredRegularObjectEvents[_objectName] || (_wiredRegularObjectEvents[_objectName] = [])).push(_eventToWire);
 																}
@@ -220,11 +220,11 @@ Uize.module ({
 																			// firing events
 																			for (var _wiredEventForInstance = _wiredRegularObjectEvents[_objectName], _eventNo = -1; ++_eventNo < _wiredEventForInstance.length;)
 																				_childObject.unwire(_wiredEventForInstance[_eventNo]);
-							
+
 																			// delete our cache of the wired event so things don't get mixed up when if we
 																			// add back a child w/ the same name
 																			delete _wiredRegularObjectEvents[_objectName];
-							
+
 																			// clear out our reference to the removed child object to not potentially hang on memory that can be disposed
 																			_childObject = undefined;
 																		}
@@ -241,7 +241,7 @@ Uize.module ({
 														_wireObjectMethodName = _typeInfo.wireObjectMethod,
 														_defaultFireIf = _typeInfo.defaultFireIf
 													;
-													
+
 													for (var _objectName in _typeBindings) {
 														for (
 															var
@@ -259,7 +259,7 @@ Uize.module ({
 												}
 											}
 										;
-										
+
 										_wireWhenever
 											? m.whenever(_wireWhenever, _wireBindings)
 											: _wireBindings()
@@ -277,21 +277,21 @@ Uize.module ({
 									.........................................
 									MyClass.childObjectEventBindings (childObjectEventBindingsPropertiesOBJ);
 									.........................................
-									
+
 									The sole =childObjectEventBindingsPropertiesOBJ= parameter supports the following properties...
-									
+
 									- =declaration= - the name of the actual child object event bindings declaration =function= to create (such as ='eventBindings'= for =Uize.Widget.mEventBindings=)
 									- =instanceProperty= - the name of the instance property that contains the references to the child objects (such as ='children'= for =Uize.Widget.mEventBindings=)
 									- =addedInstanceProperty= - the name of the =Uize.Class= instance property that contains state about which child objects have been added (such as ='addedChildren' for =Uize.Widget.mEventBindings=)
 									- =additionalTypes= - an =object= of additional type name =string=s to type definition =object=s
-									
+
 									Each =object= in =additionalTypes= supports the following properties...
 									- =namePrefix= - a =string= representing the prefix indicating that a source object name is of the given type (such as ='#'= for node events for =Uize.Widget.mEventBindings=)
 									- =wireWhenever= - a condition =string=, =array= or =function= indicating when to wire up the event bindings (such as ='wired'= for node events for =Uize.Widget.mEventBindings=). Default value is =undefined=, meaning the events will be wired immediately upon construction of the instance.
 									- =getObjectMethod= - the name of he instance method that returns the object given the object's name (such as ='getNode'= for nodes for =Uize.Widget.mEventBindings=)
 									- =wireObjectMethod= - the name of the instance method that wires the object, given an event name and handler =function= (such as ='wireNode'= for nodes for =Uize.Widget.mEventingBindings=)
 									- =defaultFireIf= - a default condition =string=, =array= or =function= indicating under what conditions the instance must be in order to call an event handler if an explicit condition is unspecified in the event bindings (such as ='enabledInherited,!busyInherited'= for nodes for =Uize.Widget.mEventBindings=)
-									
+
 									NOTES
 									- An assumption is made that for non-"regular" types (i.e. those that specify =namePrefix=) that if the object is removed from the instance unwiring will happen automatically or will otherwise be taken care of (such as when nodes are removed from a widget, they are also unwired)
 						*/

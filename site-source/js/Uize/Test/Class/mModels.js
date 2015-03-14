@@ -31,7 +31,7 @@ Uize.module ({
 	],
 	builder:function () {
 		'use strict';
-		
+
 		var
 			_Uize_Test_Class = Uize.Test.Class
 		;
@@ -49,17 +49,17 @@ Uize.module ({
 							Static Methods
 								Uize.Test.Class.mModels.declarativeModelsTest
 									.
-									
+
 									SYNTAX
 									..................................................................
 									testCLASS = Uize.Test.Class.mModels.declarativeModelsTest (
 										declarativeModelsTestsARRAYorOBJ
 									);
 									..................................................................
-									
+
 									declarativeModelsTestsARRAYorOBJ
 										See =Uize.Test.Class.mModels.declarativeModelTest= static method for the structure for each set of declarative children tests.
-										
+
 									EXAMPLE
 									.......
 									Uize.Test.Class.mModels.declarativeModelsTest  (
@@ -80,7 +80,7 @@ Uize.module ({
 										]
 									);
 									......
-									
+
 									NOTES
 									- see the related =Uize.Test.Class.mModels.declarativeModelTest= static method
 						*/
@@ -89,41 +89,41 @@ Uize.module ({
 							Static Methods
 								Uize.Test.Class.mModels.declarativeModelTest
 									.
-									
+
 									SYNTAX
 									..................................................................
 									testCLASS = Uize.Test.Class.mModels.declarativeModelTest (
 										paramsOBJ
 									);
 									..................................................................
-									
+
 									paramsOBJ
 										.
-										
+
 										childName
 											.
-									
+
 										cases
 											.
-											
+
 											modelClassName
 												.
-												
+
 											expectedProperties
 												.
-												
+
 											instanceProperties
 												.
-											
+
 											NOTES
 											- Omitting =casesArray= signals that the child actually should *not* be added
-										
+
 										instanceProperties
 											.
-											
+
 										testProperties
 											.
-									
+
 									EXAMPLE
 									.......
 									Uize.Test.Class.mModels.declarativeModelTest (
@@ -144,31 +144,31 @@ Uize.module ({
 										}
 									);
 									......
-									
+
 									NOTES
 									- see the related =Uize.Test.Class.mModels.declarativeModelsTest= static method
 						*/
 					childObjectsPropertyName:'models',
 					childObjectClassKey:'modelClassName'
 				},
-				
+
 				childObjectBindingsTest:{
 					childObjectTestsName:'modelBindingsTest',
 						/*?
 							Static Methods
 								Uize.Test.Class.mModels.modelBindingsTest
 									.
-									
+
 									SYNTAX
 									..................................................................
 									testCLASS = Uize.Test.Class.mModels.modelBindingsTest (
 										modelBindingsTestsARRAYorOBJ
 									);
 									..................................................................
-									
+
 									modelBindingsTestsARRAYorOBJ
 										See =Uize.Test.Class.mModels.modelBindingTest= static method for the structure for each set of child binding tests.
-										
+
 									EXAMPLE
 									.......
 									Uize.Test.Class.mModels.modelBindingsTest  (
@@ -191,7 +191,7 @@ Uize.module ({
 										]
 									);
 									......
-									
+
 									NOTES
 									- see the related =Uize.Test.Class.mModels.modelBindingTest= static method
 						*/
@@ -200,44 +200,44 @@ Uize.module ({
 							Static Methods
 								Uize.Test.Class.mModels.modelBindingTest
 									.
-									
+
 									SYNTAX
 									..................................................................
 									testCLASS = Uize.Test.Class.mModels.modelBindingTest (
 										paramsOBJ
 									);
 									..................................................................
-									
+
 									paramsOBJ
 										.
-										
+
 										propertyName
 											.
-											
+
 										cases
 											.
-											
+
 											child
 												name of the bound child
-												
+
 											property
 												child state property name
-												
+
 											direction
 												binding direction
-												
+
 											expect
 												array of expectations
-												
+
 											instanceProperties
 												instance properties for the case
-										
+
 										instanceProperties
 											.
-											
+
 										testProperties
 											.
-									
+
 									EXAMPLE
 									.......
 									Uize.Test.Class.mModels.modelBindingTest (
@@ -256,7 +256,7 @@ Uize.module ({
 										}
 									);
 									......
-									
+
 									NOTES
 									- see the related =Uize.Test.Class.mModels.childBindingsTest= static method
 						*/

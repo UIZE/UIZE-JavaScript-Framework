@@ -28,7 +28,7 @@ Uize.module ({
 	required:'Uize.Json',
 	builder:function () {
 		'use strict';
-		
+
 		var
 			_Uize = Uize
 		;
@@ -39,16 +39,16 @@ Uize.module ({
 					cssBindingTest:function(_testParams) {
 						var
 							_testClass = this,
-							
+
 							_propertyName = _testParams.propertyName,
 							_instanceProperties = _testParams.instanceProperties,
 							_cases = _testParams.cases
 						;
-						
+
 						function _getWidgetInstance(m) {
 							return m.setInstance(_instanceProperties);
 						}
-						
+
 						return _testClass.resolve(
 							_Uize.copyInto(
 								{
@@ -87,38 +87,38 @@ Uize.module ({
 							Static Methods
 								Uize.Test.Widget.mCssBindings.cssBindingTest
 									.
-									
+
 									SYNTAX
 									..................................................................
 									testCLASS = Uize.Test.Widget.mCssBindings.cssBindingTest (
 										paramsOBJ
 									);
 									..................................................................
-									
+
 									paramsOBJ
 										.
-										
+
 										propertyNameSTR
 											.
-											
+
 										casesARRAY
 											.
-											
+
 											state
 												.
-												
+
 											expected
 												.
-											
+
 											title
 												.
-											
+
 										instancePropertiesOBJ
 											.
-											
+
 										testPropertiesOBJ
 											.
-									
+
 									EXAMPLE
 									.......
 									Uize.Test.Widget.mCssBindings.childTest (
@@ -141,7 +141,7 @@ Uize.module ({
 										}
 									);
 									......
-									
+
 									NOTES
 									- see the related =Uize.Test.Widget.mCssBindings.cssBindingsTest= static method
 						*/
@@ -157,17 +157,17 @@ Uize.module ({
 							Static Methods
 								Uize.Test.Widget.mCssBindings.cssBindingsTest
 									.
-									
+
 									SYNTAX
 									..................................................................
 									testCLASS = Uize.Test.Widget.mCssBindings.cssBindingsTest (
 										cssBindingsTestsARRAYorOBJ
 									);
 									..................................................................
-									
+
 									cssBindingsTestsARRAYorOBJ
 										See =Uize.Test.Widget.mCssBindings.cssBindingTest= static method for the structure for each set of CSS binding tests.
-										
+
 									EXAMPLE
 									.......
 									Uize.Test.Widget.mCssBindings.cssBindingsTest  (
@@ -175,25 +175,25 @@ Uize.module ({
 											{
 												propertyName:'value',
 												cases:[
-													
+
 												]
 											},
 											{
 												propertyName:'displayName',
 												cases:[
-												
+
 												]
 											},
 											{
 												propertyName:'posX',
 												cases:[
-												
+
 												]
 											}
 										]
 									);
 									......
-									
+
 									NOTES
 									- see the related =Uize.Test.Widget.mCssBindings.cssBindingTest= static method
 						*/

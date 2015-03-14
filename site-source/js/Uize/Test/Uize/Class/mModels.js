@@ -33,12 +33,12 @@ Uize.module ({
 	],
 	builder:function (_superclass) {
 		'use strict';
-		
+
 		var
 			_true = true,
 			_false = false,
 			_undefined,
-		
+
 			_Uize = Uize,
 			_Uize_Class = _Uize.Class,
 
@@ -50,18 +50,18 @@ Uize.module ({
 			_createInstance = function(_properties) {
 				return _createClass()(_properties);
 			},
-			
+
 			_class = _superclass.subclass({
 				mixins:_Uize.Test.Class.mSpy,
 				moduleToTest:'Uize.Class.mModels'
 			})
 		;
-		
+
 		return _class.declare({
 			set:{
 				test:[
 					_class.requiredModulesTest(),
-					
+
 					_class.instanceMethodsTest([
 						{
 							methodName:'addModel',
@@ -182,7 +182,7 @@ Uize.module ({
 												params:['model', _existingModel],
 												expectFunc:function() {
 													var m = this;
-													
+
 													return m.expectToNotHaveBeenCalled(m._spyObject);
 												}
 											};
@@ -197,7 +197,7 @@ Uize.module ({
 											params:['model', _Uize_Class],
 											expectFunc:function() {
 												var m = this;
-												
+
 												return m.expectToHaveBeenCalledWith(m._spyObject, [m._existingModel]);
 											}
 										},
@@ -211,7 +211,7 @@ Uize.module ({
 											params:['model', new _Uize_Class()],
 											expectFunc:function() {
 												var m = this;
-												
+
 												return m.expectToHaveBeenCalledWith(m._spyObject, [m._existingModel]);
 											}
 										},
@@ -225,7 +225,7 @@ Uize.module ({
 											params:['model', _Uize_Class],
 											expectFunc:function(_addedModel) {
 												var m = this;
-												
+
 												return m.expectNotSameAs(_addedModel, m._existingModel);
 											}
 										},
@@ -241,7 +241,7 @@ Uize.module ({
 												params:['model', _newModel],
 												expectFunc:function(_addedModel) {
 													var m = this;
-													
+
 													return m.expect(_addedModel, _newModel);
 												}
 											};
@@ -256,7 +256,7 @@ Uize.module ({
 											params:['model', _Uize_Class],
 											expectFunc:function(_addedModel) {
 												var m = this;
-												
+
 												return m.expect(_addedModel, m.get('instance').models.model);
 											}
 										},
@@ -270,7 +270,7 @@ Uize.module ({
 											params:['model', new _Uize_Class()],
 											expectFunc:function(_addedModel) {
 												var m = this;
-												
+
 												return m.expect(_addedModel, m.get('instance').models.model);
 											}
 										}
@@ -334,7 +334,7 @@ Uize.module ({
 							create:_createInstance
 						}
 					]),
-					
+
 					_class.propertyConformersTest([
 						{
 							propertyName:'models',
@@ -485,19 +485,19 @@ Uize.module ({
 															_instance = m.get('instance'),
 															_propertiesUpdated = _true
 														;
-														
+
 														_Uize.forEach(
 															_modelsData,
 															function(_modelData, _modelName) {
 																var _model = _instance.models[_modelName];
-																
+
 																if (_model)
 																	_propertiesUpdated = _propertiesUpdated
 																		&& m.expect(_modelData, _model.get(_Uize.keys(_modelData)))
 																;
 															}
 														);
-														
+
 														return m.expect(_true, _propertiesUpdated);
 													}
 												},
@@ -505,18 +505,18 @@ Uize.module ({
 													_title:'mModels_unappliedModelsProperties has leftover data',
 													_expectFunc:function() {
 														var _expectedUnappliedModelsProperties = _Uize.copy(_modelsData);
-														
+
 														_Uize.forEach(
 															_existingModels,
 															function(_existingModel) {
 																delete _expectedUnappliedModelsProperties[_existingModel[0]];
 															}
 														);
-														
+
 														return this.expect(
 															_expectedUnappliedModelsProperties,
 															this.get('instance').mModels_unappliedModelsProperties
-														);	
+														);
 													}
 												}
 											],
@@ -545,7 +545,7 @@ Uize.module ({
 										title:'When instances are included, they are added',
 										instanceProperties:{
 											models:{
-												model:_modelInstanceToAdd	
+												model:_modelInstanceToAdd
 											}
 										},
 										expectFunc:function() {
@@ -569,7 +569,7 @@ Uize.module ({
 										},
 										instanceProperties:{
 											models:{
-												model:new _Uize_Class()	
+												model:new _Uize_Class()
 											}
 										},
 										expectFunc:function() {
@@ -586,7 +586,7 @@ Uize.module ({
 										},
 										instanceProperties:{
 											models:{
-												model:_modelInstanceToAdd	
+												model:_modelInstanceToAdd
 											}
 										},
 										expectFunc:function() {
@@ -631,7 +631,7 @@ Uize.module ({
 										},
 										instanceProperties:{
 											models:{
-												model:_model	
+												model:_model
 											}
 										},
 										expectFunc:function() {

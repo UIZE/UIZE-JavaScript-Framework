@@ -147,7 +147,7 @@ Uize.module ({
 		return _superclass.subclass ({
 			alphastructor:function () {
 				var m = this;
-				
+
 				/*** Private Instance Properties ***/
 					m._itemWidgetNameUniquifier = 0;
 

@@ -20,7 +20,7 @@
 	Introduction
 		The =Uize.Widgets.Picker.VisualSampler= class implements a visual sampler widget for the =Uize.Widgets.Picker.Widget= class.
 
-		*DEVELOPERS:* 
+		*DEVELOPERS:*
 */
 
 Uize.module ({

@@ -28,7 +28,7 @@ Uize.module ({
 	required:'Uize.Array.Util',
 	builder:function () {
 		'use strict';
-		
+
 		var
 			_Uize = Uize
 		;
@@ -43,7 +43,7 @@ Uize.module ({
 							_childObjectsPropertyName = _properties.childObjectsPropertyName,
 							_childObjectClassKey = _properties.childObjectClassKey
 						;
-						
+
 						_class.declare({
 							staticMethods:_Uize.pairUp(
 								_childObjectTestName,
@@ -55,11 +55,11 @@ Uize.module ({
 											_instanceProperties = _testParams.instanceProperties,
 											_tests
 										;
-										
+
 										function _getInstance(m, _initialProperties) {
 											return m.setInstance(_Uize.copy(_instanceProperties, _initialProperties));
 										}
-										
+
 										if (!_cases) {
 											_tests = [
 												{
@@ -83,7 +83,7 @@ Uize.module ({
 																{
 																	title:'When instance is created, ' + _childName + ' child object is added',
 																	test:function() {
-																		return this.expectNonNull(_getInstance(this)[_childObjectsPropertyName][_childName]);	
+																		return this.expectNonNull(_getInstance(this)[_childObjectsPropertyName][_childName]);
 																	}
 																},
 																{
@@ -94,9 +94,9 @@ Uize.module ({
 																}
 															]
 														;
-														
+
 														if (_expectedChildProperties) {
-															// NOTE: For when a child is declared w/ initial state properties 
+															// NOTE: For when a child is declared w/ initial state properties
 															_caseTests.push({
 																title:'When instance is created, ' + _childName + ' child object has the correct initial state properties',
 																test:function() {
@@ -105,13 +105,13 @@ Uize.module ({
 																}
 															});
 														}
-														
+
 														return _caseTests;
 													}
 												)
 											);
 										}
-										
+
 										return _testClass.resolve(
 											_Uize.copyInto(
 												{

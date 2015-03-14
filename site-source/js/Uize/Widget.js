@@ -204,13 +204,13 @@ Uize.module ({
 							Instance Properties
 								addedChildren ~~ addedChildren Instance Property
 									A =Uize.Class= instance whose state properties reflect whether or not child widgets by the same name has been added.
-									
-									You can use the condition system methods like =isMet=, =once=, and =whenver= on =addedChildren= to determine if and when a child widget has been added to the widget. 
-									
+
+									You can use the condition system methods like =isMet=, =once=, and =whenver= on =addedChildren= to determine if and when a child widget has been added to the widget.
+
 									NOTES
 									- the =addedChildren= object is read-only - its state should not be directly modified
 									- see also the related =children= instance property
-									
+
 						*/
 			},
 

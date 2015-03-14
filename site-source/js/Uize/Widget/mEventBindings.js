@@ -89,7 +89,7 @@ Uize.module ({
 										}
 									});
 									......................................................
-									
+
 									NOTES
 									- You cannot use =Uize.Widget.mEventBindings.eventBindings= to wire events that have colons (=:=) in their names
 						*/

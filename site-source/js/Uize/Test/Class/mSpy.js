@@ -32,7 +32,7 @@ Uize.module ({
 	],
 	builder:function () {
 		'use strict';
-		
+
 		var
 			_Uize = Uize
 		;
@@ -120,7 +120,7 @@ Uize.module ({
 									: _arguments[0]
 							)
 						;
-						
+
 						return _spyObject;
 					}
 				}

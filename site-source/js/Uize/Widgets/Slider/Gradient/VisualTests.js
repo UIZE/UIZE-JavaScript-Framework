@@ -20,7 +20,7 @@
 	Introduction
 		The =Uize.Widgets.Slider.Gradient.VisualTests= class implements a set of visual tests for the =Uize.Widgets.Slider.Gradient.Widget= class.
 
-		*DEVELOPERS:* 
+		*DEVELOPERS:*
 */
 
 Uize.module ({

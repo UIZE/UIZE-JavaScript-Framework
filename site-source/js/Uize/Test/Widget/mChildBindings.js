@@ -28,7 +28,7 @@ Uize.module ({
 	required:'Uize.Test.Class.mChildObjectBindings',
 	builder:function () {
 		'use strict';
-		
+
 		var
 			_Uize = Uize
 		;
@@ -36,24 +36,24 @@ Uize.module ({
 		return function (_class) {
 			_class.declare({
 				mixins:Uize.Test.Class.mChildObjectBindings,
-				
+
 				childObjectBindingsTest:{
 					childObjectTestsName:'childBindingsTest',
 						/*?
 							Static Methods
 								Uize.Test.Widget.mChildBindings.childBindingsTest
 									.
-									
+
 									SYNTAX
 									..................................................................
 									testCLASS = Uize.Test.Widget.mChildBindings.childBindingsTest (
 										childBindingsTestsARRAYorOBJ
 									);
 									..................................................................
-									
+
 									childBindingsTestsARRAYorOBJ
 										See =Uize.Test.Widget.mChildBindings.childBindingTest= static method for the structure for each set of child binding tests.
-										
+
 									EXAMPLE
 									.......
 									Uize.Test.Widget.mChildBindings.childBindingsTest  (
@@ -76,7 +76,7 @@ Uize.module ({
 										]
 									);
 									......
-									
+
 									NOTES
 									- see the related =Uize.Test.Widget.mChildBindings.childBindingTest= static method
 						*/
@@ -85,44 +85,44 @@ Uize.module ({
 							Static Methods
 								Uize.Test.Widget.mChildBindings.childBindingTest
 									.
-									
+
 									SYNTAX
 									..................................................................
 									testCLASS = Uize.Test.Widget.mChildBindings.childBindingTest (
 										paramsOBJ
 									);
 									..................................................................
-									
+
 									paramsOBJ
 										.
-										
+
 										propertyName
 											.
-											
+
 										cases
 											.
-											
+
 											child
 												name of the bound child
-												
+
 											property
 												child state property name
-												
+
 											direction
 												binding direction
-												
+
 											expect
 												array of expectations
-												
+
 											instanceProperties
 												instance properties for the case
-										
+
 										instanceProperties
 											.
-											
+
 										testProperties
 											.
-									
+
 									EXAMPLE
 									.......
 										{
@@ -140,7 +140,7 @@ Uize.module ({
 										}
 									);
 									......
-									
+
 									NOTES
 									- see the related =Uize.Test.Widget.mChildBindings.childBindingsTest= static method
 						*/
