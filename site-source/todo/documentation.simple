@@ -681,7 +681,6 @@ For All Examples
 		- C:/~uize/UIZE-JavaScript-Framework/examples/hierarchical-selector.html
 		- C:/~uize/UIZE-JavaScript-Framework/examples/two-hierarchical-selectors.html
 		- C:/~uize/UIZE-JavaScript-Framework/examples/button-toggle.html
-		- C:/~uize/UIZE-JavaScript-Framework/examples/swap-image-png.html -- mention "JavaScript animation"
 
 	- for examples that should wait until all images are loaded (eg. sequenced show), for now use Uize.Widget's "Document Loaded" event as a proxy for detecting that state
 
