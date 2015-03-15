@@ -28,6 +28,7 @@ Uize.module ({
 	superclass:'Uize.Widget.Dialog',
 	required:[
 		'Uize.Widget.mV2',
+		'Uize.Widget',
 		'Uize.Widgets.Button.Widget',
 		'Uize.Widget.Dialog.xResizable',
 		'Uize.Widgets.Dialog.Html',
@@ -55,12 +56,18 @@ Uize.module ({
 			},
 
 			children:{
-				contents:{}
+				contents:{
+					widgetClass:Uize.Widget
+				}
 			},
 
 			childBindings:{
 				loc_cancelLabel:'->cancel.text',
 				loc_okLabel:'->ok.text'
+			},
+
+			cssBindings:{
+				resizable:['','resizable']
 			}
 		});
 	}

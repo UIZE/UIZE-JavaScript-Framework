@@ -122,6 +122,11 @@
 	.`contents` {
 		position: relative;
 		padding: 8px;
+	}
+
+	.`resizable` .`contents` {
 		overflow: auto;
+		height: 100%;
+		box-sizing: border-box;
 	}
 
