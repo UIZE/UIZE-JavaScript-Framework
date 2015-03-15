@@ -3,12 +3,11 @@
 <head>
 	<title>Resizable Dialog | JavaScript Examples | UIZE JavaScript Framework</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-	<meta name="keywords" content="featured drag-and-drop widget Uize.Widget.Dialog.xResizable"/>
+	<meta name="keywords" content="featured drag-and-drop widget Uize.Widgets.Dialog.Widget"/>
 	<meta name="description" content="See an example of a draggable and resizable modal JavaScript dialog that uses inline HTML (rather than a blockable popup window) and is configurable."/>
 	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
 	<link rel="stylesheet" href="../css/page.css"/>
 	<link rel="stylesheet" href="../css/page.example.css"/>
-	<link rel="stylesheet" href="../css/widget.dialog.css"/>
 </head>
 
 <body>
@@ -32,7 +31,7 @@
 	<!-- explanation copy -->
 
 	<div class="explanation">
-		<p>In this example, an instance of the <a href="../reference/Uize.Widget.Dialog.html"><code>Uize.Widget.Dialog</code></a> class is being used to implement a resizable modal dialog. The dialog can be resized by dragging on any of the corners or sides. Dragging on a side changes the dialog's dimensions in one axis only, while dragging on a corner changes the dimensions in both axes. In any given HTML implementation of a resizable dialog, all drag handles are optional. If you like, you can provide just a lower right corner drag handle. Since resizable dialogs share code with the marquee widget (<a href="../reference/Uize.Widget.Resizer.Marquee.html"><code>Uize.Widget.Resizer.Marquee</code></a>), it is possible to configure a resizable dialog to have a constrained aspect ratio, or to be resizable only in one axis, by setting state for its <code>resizer</code> child widget. The resizable dialog widget has child widgets for the <b>"OK"</b>, <b>"CANCEL"</b>, and <b>"CLOSE"</b> buttons.</p>
+		<p>In this example, an instance of the <a href="../reference/Uize.Widgets.Dialog.Widget.html"><code>Uize.Widgets.Dialog.Widget</code></a> class is being used to implement a resizable modal dialog. The dialog can be resized by dragging on any of the corners or sides. Dragging on a side changes the dialog's dimensions in one axis only, while dragging on a corner changes the dimensions in both axes. In any given HTML implementation of a resizable dialog, all drag handles are optional. If you like, you can provide just a lower right corner drag handle. Since resizable dialogs share code with the marquee widget (<a href="../reference/Uize.Widget.Resizer.Marquee.html"><code>Uize.Widget.Resizer.Marquee</code></a>), it is possible to configure a resizable dialog to have a constrained aspect ratio, or to be resizable only in one axis, by setting state for its <code>resizer</code> child widget. The resizable dialog widget has child widgets for the <b>"OK"</b>, <b>"CANCEL"</b>, and <b>"CLOSE"</b> buttons.</p>
 
 		<p>To open the dialog, click the <b>"OPEN DIALOG"</b> button below.</p>
 	</div>
@@ -63,7 +62,7 @@ Uize.require (
 	[
 		'UizeSite.Page.Example.library',
 		'UizeSite.Page.Example',
-		'Uize.Widget.Dialog.xResizable',
+		'Uize.Widgets.Dialog.Widget',
 		'UizeSite.Templates.Dialog',
 		'Uize.Str.Repeat',
 		'Uize.Widgets.Button.Widget'
@@ -74,23 +73,26 @@ Uize.require (
 		/*** create the example page widget ***/
 			var page = window.page = UizeSite.Page.Example ({evaluator:function (code) {eval (code)}});
 
-		/*** create the Uize.Widget.Dialog object ***/
+		/*** create the Uize.Widgets.Dialog.Widget object ***/
 			var dialog = page.addChild (
 				'dialog',
-				Uize.Widget.Dialog,
+				Uize.Widgets.Dialog.Widget,
 				{
 					mooringNode:'page-openDialogLink',
 					offsetX:-100,
 					offsetY:-100,
+					width:500,
+					height:300,
 					built:false,
 					title:'RESIZABLE DIALOG',
-					html:UizeSite.Templates.Dialog.process ({
-						idPrefix:'page_dialog',
-						contents:
-							'<div style="padding:5px;">' +
-								Uize.Str.Repeat.repeat ('This is a resizable dialog. ',50) +
-							'</div>'
-					}),
+					children:{
+						contents:{
+							html:
+								'<div style="padding:5px;">' +
+									Uize.Str.Repeat.repeat ('This is a resizable dialog. ',50) +
+								'</div>'
+						}
+					},
 					resizable:true
 				}
 			);

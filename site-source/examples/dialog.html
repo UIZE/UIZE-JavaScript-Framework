@@ -3,12 +3,11 @@
 <head>
 	<title>Dialog | JavaScript Examples | UIZE JavaScript Framework</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-	<meta name="keywords" content="Uize.Widget.Dialog"/>
+	<meta name="keywords" content="Uize.Widgets.Dialog.Widget"/>
 	<meta name="description" content="See an example of a draggable modal JavaScript dialog that uses inline HTML (rather than a blockable popup window) and has a shield to block the page."/>
 	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
 	<link rel="stylesheet" href="../css/page.css"/>
 	<link rel="stylesheet" href="../css/page.example.css"/>
-	<link rel="stylesheet" href="../css/widget.dialog.css"/>
 </head>
 
 <body>
@@ -32,7 +31,7 @@
 	<!-- explanation copy -->
 
 	<div class="explanation">
-		<p>In this example, an instance of the <a href="../reference/Uize.Widget.Dialog.html"><code>Uize.Widget.Dialog</code></a> class is being used to implement a draggable dialog for a modal dialog. The dialog is not resizable (the corners and sides are NOT active), but it is draggable and can be moved around by clicking-and-dragging on its title bar. The draggable dialog widget has child widgets for the <b>"OK"</b>, <b>"CANCEL"</b>, and <b>"CLOSE"</b> buttons.</p>
+		<p>In this example, an instance of the <a href="../reference/Uize.Widgets.Dialog.Widget.html"><code>Uize.Widgets.Dialog.Widget</code></a> class is being used to implement a draggable dialog for a modal dialog. The dialog is not resizable (the corners and sides are NOT active), but it is draggable and can be moved around by clicking-and-dragging on its title bar. The draggable dialog widget has child widgets for the <b>"OK"</b>, <b>"CANCEL"</b>, and <b>"CLOSE"</b> buttons.</p>
 
 		<p>There is a shield that is displayed when the dialog is opened up. This shield is faded out when you drag the dialog, with the idea being that if the user moves a dialog they quite likely are trying to move it out of the way in order to reveal something behind it, so nothing behind the dialog should remain obscured by a shield. Even when not visible, the shield is still present and blocks events to elements beneath the dialog in order to ensure its modal behavior.</p>
 
@@ -59,8 +58,7 @@ Uize.require (
 	[
 		'UizeSite.Page.Example.library',
 		'UizeSite.Page.Example',
-		'Uize.Widget.Dialog',
-		'UizeSite.Templates.Dialog',
+		'Uize.Widgets.Dialog.Widget',
 		'Uize.Str.Repeat',
 		'Uize.Widgets.Button.Widget'
 	],
@@ -70,23 +68,25 @@ Uize.require (
 		/*** create the example page widget ***/
 			var page = window.page = UizeSite.Page.Example ();
 
-		/*** create the Uize.Widget.Dialog object ***/
+		/*** create the Uize.Widgets.Dialog.Widget object ***/
 			var dialog = page.addChild (
 				'dialog',
-				Uize.Widget.Dialog,
+				Uize.Widgets.Dialog.Widget,
 				{
 					mooringNode:'dialogMooringNode',
 					offsetX:30,
 					offsetY:-150,
 					built:false,
+					width:500,
 					title:'DRAGGABLE DIALOG',
-					html:UizeSite.Templates.Dialog.process ({
-						idPrefix:'page_dialog',
-						contents:
-							'<div style="padding:5px;">' +
-								Uize.Str.Repeat.repeat ('This is a draggable dialog. ',50) +
-							'</div>'
-					})
+					children:{
+						contents:{
+							html:
+								'<div style="padding:5px;">' +
+									Uize.Str.Repeat.repeat ('This is a draggable dialog. ',50) +
+								'</div>'
+						}
+					}
 				}
 			);
 
