@@ -20,7 +20,7 @@
 	Introduction
 		The =Uize.Widgets.HslSliders.Lightness.VisualTests= class implements a set of visual tests for the =Uize.Widgets.HslSliders.Lightness.Widget= class.
 
-		*DEVELOPERS:*
+		*DEVELOPERS:* `Chris van Rensburg`
 */
 
 Uize.module ({

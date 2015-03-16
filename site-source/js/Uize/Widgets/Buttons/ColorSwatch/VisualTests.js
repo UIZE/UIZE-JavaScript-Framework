@@ -20,7 +20,7 @@
 	Introduction
 		The =Uize.Widgets.Buttons.ColorSwatch.VisualTests= class implements a set of visual tests for the =Uize.Widgets.Buttons.ColorSwatch.Widget= class.
 
-		*DEVELOPERS:*
+		*DEVELOPERS:* `Chris van Rensburg`
 */
 
 Uize.module ({

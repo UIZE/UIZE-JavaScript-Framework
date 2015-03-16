@@ -20,7 +20,7 @@
 	Introduction
 		The =Uize.Widgets.HslSliders.VisualTests= class implements a set of visual tests for the =Uize.Widgets.HslSliders.Widget= class.
 
-		*DEVELOPERS:*
+		*DEVELOPERS:* `Chris van Rensburg`
 */
 
 Uize.module ({

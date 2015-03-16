@@ -20,7 +20,7 @@
 	Introduction
 		The =Uize.Widgets.Form.Input.Text.VisualTests= class implements a set of visual tests for the =Uize.Widgets.Form.Input.Text.Widget= class.
 
-		*DEVELOPERS:*
+		*DEVELOPERS:* `Chris van Rensburg`
 */
 
 Uize.module ({

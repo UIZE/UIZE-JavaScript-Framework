@@ -20,7 +20,7 @@
 	Introduction
 		The =Uize.Widgets.Buttons.Cancel.VisualTests= class implements a set of visual tests for the =Uize.Widgets.Buttons.Cancel.Widget= class.
 
-		*DEVELOPERS:*
+		*DEVELOPERS:* `Chris van Rensburg`
 */
 
 Uize.module ({

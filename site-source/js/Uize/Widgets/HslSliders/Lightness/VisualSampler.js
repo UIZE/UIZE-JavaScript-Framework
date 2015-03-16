@@ -20,7 +20,7 @@
 	Introduction
 		The =Uize.Widgets.HslSliders.Lightness.VisualSampler= class implements a visual sampler widget for the =Uize.Widgets.HslSliders.Lightness.Widget= class.
 
-		*DEVELOPERS:*
+		*DEVELOPERS:* `Chris van Rensburg`
 */
 
 Uize.module ({

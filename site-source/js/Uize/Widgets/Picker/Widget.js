@@ -20,7 +20,7 @@
 	Introduction
 		The =Uize.Widgets.Picker.Widget= module implements a widget class.
 
-		*DEVELOPERS:*
+		*DEVELOPERS:* `Chris van Rensburg`
 
 		Visual Sampler
 			Below is a visual sampler of the =Uize.Widgets.Picker.Widget= class...

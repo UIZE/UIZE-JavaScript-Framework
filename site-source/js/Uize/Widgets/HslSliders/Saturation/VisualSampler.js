@@ -20,7 +20,7 @@
 	Introduction
 		The =Uize.Widgets.HslSliders.Saturation.VisualSampler= class implements a visual sampler widget for the =Uize.Widgets.HslSliders.Saturation.Widget= class.
 
-		*DEVELOPERS:*
+		*DEVELOPERS:* `Chris van Rensburg`
 */
 
 Uize.module ({

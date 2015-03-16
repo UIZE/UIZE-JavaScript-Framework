@@ -20,7 +20,7 @@
 	Introduction
 		The =Uize.Widgets.Buttons.Date.VisualSampler= class implements a visual sampler widget for the =Uize.Widgets.Buttons.Date.Widget= class.
 
-		*DEVELOPERS:*
+		*DEVELOPERS:* `Chris van Rensburg`
 */
 
 Uize.module ({

@@ -20,7 +20,7 @@
 	Introduction
 		The =Uize.Widgets.Form.Input.Text.VisualSampler= class implements a visual sampler widget for the =Uize.Widgets.Form.Input.Text.Widget= class.
 
-		*DEVELOPERS:*
+		*DEVELOPERS:* `Chris van Rensburg`
 */
 
 Uize.module ({

@@ -20,7 +20,7 @@
 	Introduction
 		The =Uize.Widgets.Pickers.Color.Widget= module implements a widget class.
 
-		*DEVELOPERS:*
+		*DEVELOPERS:* `Chris van Rensburg`
 
 		Visual Sampler
 			Below is a visual sampler of the =Uize.Widgets.Pickers.Color.Widget= class...

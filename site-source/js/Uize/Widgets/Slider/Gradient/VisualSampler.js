@@ -20,7 +20,7 @@
 	Introduction
 		The =Uize.Widgets.Slider.Gradient.VisualSampler= class implements a visual sampler widget for the =Uize.Widgets.Slider.Gradient.Widget= class.
 
-		*DEVELOPERS:*
+		*DEVELOPERS:* `Chris van Rensburg`
 */
 
 Uize.module ({

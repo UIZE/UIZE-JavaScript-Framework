@@ -20,7 +20,7 @@
 	Introduction
 		The =Uize.Widgets.Buttons.ColorSwatch.Widget= module implements a widget class.
 
-		*DEVELOPERS:*
+		*DEVELOPERS:* `Chris van Rensburg`
 
 		Visual Sampler
 			Below is a visual sampler of the =Uize.Widgets.Buttons.ColorSwatch.Widget= class...

@@ -20,7 +20,7 @@
 	Introduction
 		The =Uize.Widgets.FlavoredMessage.VisualSampler= class implements a visual sampler widget for the =Uize.Widgets.FlavoredMessage.Widget= class.
 
-		*DEVELOPERS:*
+		*DEVELOPERS:* `Chris van Rensburg`
 */
 
 Uize.module ({

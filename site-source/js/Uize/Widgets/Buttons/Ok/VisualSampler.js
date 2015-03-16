@@ -20,7 +20,7 @@
 	Introduction
 		The =Uize.Widgets.Buttons.Ok.VisualSampler= class implements a visual sampler widget for the =Uize.Widgets.Buttons.Ok.Widget= class.
 
-		*DEVELOPERS:*
+		*DEVELOPERS:* `Chris van Rensburg`
 */
 
 Uize.module ({

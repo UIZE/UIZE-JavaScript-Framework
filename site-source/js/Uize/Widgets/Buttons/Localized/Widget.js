@@ -20,7 +20,7 @@
 	Introduction
 		The =Uize.Widgets.Buttons.Localized.Widget= module implements an abstract base class for localized button widget classes.
 
-		*DEVELOPERS:*
+		*DEVELOPERS:* `Chris van Rensburg`
 
 		Visual Sampler
 			Below is a visual sampler of the =Uize.Widgets.Buttons.Localized.Widget= class...

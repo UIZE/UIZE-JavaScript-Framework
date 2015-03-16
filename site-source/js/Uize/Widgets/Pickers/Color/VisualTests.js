@@ -20,7 +20,7 @@
 	Introduction
 		The =Uize.Widgets.Pickers.Color.VisualTests= class implements a set of visual tests for the =Uize.Widgets.Pickers.Color.Widget= class.
 
-		*DEVELOPERS:*
+		*DEVELOPERS:* `Chris van Rensburg`
 */
 
 Uize.module ({

@@ -20,7 +20,7 @@
 	Introduction
 		The =Uize.Widgets.Buttons.ColorSwatch.VisualSampler= class implements a visual sampler widget for the =Uize.Widgets.Buttons.ColorSwatch.Widget= class.
 
-		*DEVELOPERS:*
+		*DEVELOPERS:* `Chris van Rensburg`
 */
 
 Uize.module ({

@@ -20,7 +20,7 @@
 	Introduction
 		The =Uize.Widgets.HslSliders.VisualSampler= class implements a visual sampler widget for the =Uize.Widgets.HslSliders.Widget= class.
 
-		*DEVELOPERS:*
+		*DEVELOPERS:* `Chris van Rensburg`
 */
 
 Uize.module ({
