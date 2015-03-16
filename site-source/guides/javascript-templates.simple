@@ -340,7 +340,7 @@ Directives
 			EXAMPLE
 			.......................................................................
 			<%@ input ({idPrefix:'string'}) %>
-			<%@ required ('UizeSite.Templates.Dialog') %>
+			<%@ required ('MyNamespace.Templates.Dialog') %>
 			<%@ startBlock ('dialogContents') %>
 				<p>
 					Renewable energy is energy generated from natural resources
@@ -352,14 +352,14 @@ Directives
 				</p>
 			<%@ endBlock () %>
 			<%=
-				UizeSite.Templates.Dialog.process ({
+				MyNamespace.Templates.Dialog.process ({
 					idPrefix:input.idPrefix,
 					contents:dialogContents ()}
 				)
 			%>
 			.......................................................................
 
-			In the above example, the =dialogContents= block is being used to generate contents for a dialog. The output of the block is passed to the =process= method of the compiled =UizeSite.Templates.Dialog= template in the =contents= property of its input. The result of calling the =process= method is then assigned to the template's output. This provides a means for a template to use other templates in its implementation, where those other templates can essentially define content placeholders, and where the template that use them can then build the contents for those content placeholders using block directives.
+			In the above example, the =dialogContents= block is being used to generate contents for a dialog. The output of the block is passed to the =process= method of the compiled =MyNamespace.Templates.Dialog= template in the =contents= property of its input. The result of calling the =process= method is then assigned to the template's output. This provides a means for a template to use other templates in its implementation, where those other templates can essentially define content placeholders, and where the template that use them can then build the contents for those content placeholders using block directives.
 
 	What Are Directives, Really?
 		In contrast to template code that is JavaScript code compiled into the template function and executed at processing time, directives are bits of JavaScript code that are executed at compile time for templates.

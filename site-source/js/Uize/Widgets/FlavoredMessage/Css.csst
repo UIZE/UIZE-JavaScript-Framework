@@ -1,0 +1,86 @@
+<%@ required ('Uize.Widgets.CssUtil'); %>
+<%
+	var
+		_cssUtil = Uize.Widgets.CssUtil,
+		_sizes = _cssUtil.sizes
+	;
+%>.`` {
+	border-collapse: collapse;
+}
+
+.`` td {
+	vertical-align: middle;
+	padding: 5px;
+}
+
+.`icon` {
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+.`message` {
+	max-width: 600px;
+}
+
+/*** icon flavors ***/
+	.`info` .`icon` {
+		background-image: url(info.png);
+	}
+	.`warning` .`icon` {
+		background-image: url(warning.png);
+	}
+	.`error` .`icon` {
+		background-image: url(error.png);
+	}
+	.`success` .`icon` {
+		background-image: url(success.png);
+	}
+	.`confirm` .`icon` {
+		background-image: url(error.png);
+	}
+
+/*** styling for different sizes ***/
+<%
+	var
+		_tiny = _sizes.tiny,
+		_small = _sizes.small,
+		_medium = _sizes.medium,
+		_large = _sizes.large
+	;
+%>
+	/*** tiny ***/
+		.`tiny` .`icon` {
+			width: <%= _tiny.outer %>px;
+			height: <%= _tiny.outer %>px;
+		}
+		.`tiny` .`message` {
+			font-size: <%= _tiny.font %>px;
+		}
+
+	/*** small ***/
+		.`small` .`icon` {
+			width: <%= _small.outer %>px;
+			height: <%= _small.outer %>px;
+		}
+		.`small` .`message` {
+			font-size: <%= _small.font %>px;
+		}
+
+	/*** medium ***/
+		.`medium` .`icon` {
+			width: <%= _medium.outer %>px;
+			height: <%= _medium.outer %>px;
+		}
+		.`medium` .`message` {
+			font-size: <%= _medium.font %>px;
+		}
+
+	/*** large ***/
+		.`large` .`icon` {
+			width: <%= _large.outer %>px;
+			height: <%= _large.outer %>px;
+		}
+		.`large` .`message` {
+			font-size: <%= _large.font %>px;
+		}

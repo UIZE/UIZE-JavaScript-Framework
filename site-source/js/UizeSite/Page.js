@@ -226,7 +226,7 @@ Uize.module ({
 			},
 
 			set:{
-				confirmDialog:{widgetClassName:'UizeSite.DialogConfirm'}
+				confirmDialog:{widgetClassName:'Uize.Widgets.Dialog.Confirm.Widget'}
 			}
 		});
 	}

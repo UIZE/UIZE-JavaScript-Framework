@@ -60,6 +60,8 @@
 				font-weight: bold;
 				line-height: 22px;
 				letter-spacing: 1px;
+				white-space: nowrap;
+				overflow: hidden;
 			}
 			.`closeButton` {
 				display: none;

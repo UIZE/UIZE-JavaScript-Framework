@@ -1,0 +1,6 @@
+<table>
+	<tr>
+		<td><div class="icon"></div></td>
+		<td id="message" class="message"></td>
+	</tr>
+</table>

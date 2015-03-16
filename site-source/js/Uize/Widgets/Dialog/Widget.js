@@ -55,15 +55,20 @@ Uize.module ({
 				buttonWidgetClass:Uize.Widgets.Button.Widget
 			},
 
+			stateProperties:{
+				/*** derived properties ***/
+					defaultCancelText:{
+						derived:'loc_cancelLabel'
+					},
+					defaultOkText:{
+						derived:'loc_okLabel'
+					}
+			},
+
 			children:{
 				contents:{
 					widgetClass:Uize.Widget
 				}
-			},
-
-			childBindings:{
-				loc_cancelLabel:'->cancel.text',
-				loc_okLabel:'->ok.text'
 			},
 
 			cssBindings:{
