@@ -127,6 +127,7 @@ Uize.module ({
 									this.expect ('one',_rulesFunction (1,1,0,0,0,0,_within)) &&
 									this.expect ('two',_rulesFunction (2,2,0,0,0,0,_within)) &&
 									this.expect ('few',_rulesFunction (5,5,0,0,0,0,_within)) &&
+									this.expect ('many',_rulesFunction (20,20,0,0,0,0,_within)) &&
 									this.expect ('other',_rulesFunction (100,100,0,0,0,0,_within))
 								);
 							}
