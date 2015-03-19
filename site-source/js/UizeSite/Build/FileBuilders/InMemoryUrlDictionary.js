@@ -78,20 +78,6 @@ Uize.module ({
 						}
 					);
 
-				/*** add links to JavaScript reference pages ***/
-					var
-						_simpleModuleExtensionRegExp = /\.simple$/,
-						_javaScriptReferenceFolder = 'javascript-reference'
-					;
-					m.fileSystem.getFiles ({
-						path:m.sourceUrl (_javaScriptReferenceFolder),
-						pathMatcher:_simpleModuleExtensionRegExp,
-						pathTransformer:function (_filePath) {
-							var _fileName = Uize.Url.from (_filePath).file.replace (_simpleModuleExtensionRegExp,'');
-							_urlDictionary [_fileName] = '/' + _javaScriptReferenceFolder + '/' + _fileName + '.html';
-						}
-					});
-
 				return _urlDictionary;
 			}
 		});

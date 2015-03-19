@@ -65,11 +65,6 @@ Uize.module ({
 					1,
 					true
 				),
-				_javaScriptBuiltInObjectsLookup = Uize.lookup (
-					['Array','Boolean','Function','Number','Object','RegExp','String','Window','XMLHttpRequest'],
-					1,
-					true
-				),
 				_objectNotValidOrNotLoadedMessage = '-- object is undefined, not valid, or is not loaded on page --',
 				_reportDivider = '------------------------------------------------------------------------------',
 				_treeListDividerQuery = {_title:'- - - - - - - - - - - - - - - - - - - - - - - - - - - -'},
@@ -1452,16 +1447,9 @@ Uize.module ({
 					_documentationUrl:
 						m._baseUrl + '/' +
 						(
-							(
-								_className &&
-								(
-									_isUizeModule (_className)
-										? 'reference/' + _className + '.html'
-										: _javaScriptBuiltInObjectsLookup [_className]
-											? 'javascript-reference/' + _className + '.html'
-											: null
-								)
-							) || 'guides/using-the-delve-tool.html'
+							_className && _isUizeModule (_className)
+								? 'reference/' + _className + '.html'
+								: 'guides/using-the-delve-tool.html'
 						)
 				});
 			}

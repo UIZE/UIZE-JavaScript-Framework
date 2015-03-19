@@ -72,7 +72,6 @@ Uize.module ({
 						_guide = function (_title,_link) {return _item (_title,'guides/',_link)},
 						_whitePaper = function (_title,_link) {return _item (_title,'white-papers/',_link)},
 						_news = function (_year) {return _item (_year + ' News','','news-' + _year)},
-						_javaScriptReference = function (_title,_link) {return _item (_title,'javascript-reference/',_link)},
 						_appendix = function (_title,_link) {return _item (_title,'appendixes/',_link)},
 						_todo = function (_title,_link) {return _item (_title,'todo/',_link)},
 						_perfTest = function (_title,_link) {return _item (_title,'tests/performance/',_link)}
@@ -165,8 +164,6 @@ Uize.module ({
 								]
 							)
 					},
-					_appendix ('Showcase'),
-					_divider,
 					{
 						title:'Guides',
 						link:'javascript-guides.html',
@@ -212,6 +209,7 @@ Uize.module ({
 						]
 					},
 					_modulesReferenceItem,
+					_divider,
 					{
 						title:'Latest News',
 						link:'latest-news.html',
@@ -248,7 +246,6 @@ Uize.module ({
 							_appendix ('Glossary')
 						]
 					},
-					_divider,
 					{
 						title:'UIZE Development',
 						items:[
@@ -302,23 +299,6 @@ Uize.module ({
 						link:'javascript-white-papers.html',
 						items:[
 							_whitePaper ('Localization')
-						]
-					},
-					{
-						title:'JavaScript Reference',
-						link:'javascript-reference.html',
-						items:[
-							_javaScriptReference ('Array'),
-							_javaScriptReference ('Boolean'),
-							_javaScriptReference ('Date'),
-							_javaScriptReference ('Function'),
-							_javaScriptReference ('Math'),
-							_javaScriptReference ('Number'),
-							_javaScriptReference ('Object'),
-							_javaScriptReference ('RegExp'),
-							_javaScriptReference ('String'),
-							_javaScriptReference ('Window'),
-							_javaScriptReference ('XMLHTTPRequest')
 						]
 					},
 					_divider,
