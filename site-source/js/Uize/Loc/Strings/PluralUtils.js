@@ -38,23 +38,27 @@ Uize.module ({
 		;
 
 		/*** Utility Functions ***/
+			function _isPluralString (_string) {
+				return (
+					typeof _string == 'object' && _string &&
+					_string.hasOwnProperty ('other') && typeof _string.other == 'string'
+				);
+			}
+
 			function _processPluralStrings (_languageResources,_processor) {
 				function _processStringsNode (_node) {
-					if (typeof _node == 'object' && _node) {
-						(
-							_node.hasOwnProperty ('one') && typeof _node.one == 'string' &&
-							_node.hasOwnProperty ('other') && typeof _node.other == 'string'
-						)
-							? _processor (_node)
-							: Uize.forEach (_node,_processStringsNode)
-						;
-					}
+					if (typeof _node == 'object' && _node)
+						_isPluralString (_node) ? _processor (_node) : Uize.forEach (_node,_processStringsNode)
+					;
 				}
 				Uize.forEach (_languageResources,_processStringsNode);
 			}
 
 		return Uize.package ({
 			pluralClasses:_pluralClasses,
+
+			isPluralString:_isPluralString,
+			processPluralStrings:_processPluralStrings,
 
 			normalizePluralStringsForPrimaryLanguage:function (_primaryLanguageResources) {
 				/* NOTE:
@@ -71,7 +75,7 @@ Uize.module ({
 
 			normalizePluralStringsForTranslatableLanguage:function (_languageResources,_language) {
 				/* NOTE:
-					For each translatable language, the values for the plural classes that are not supported by the language are always set to the dummty value "---". This prevents them from being exported in translation jobs. If they are ever exported using the "all" filter for the exportJobs method, the dummy values do not contain translatable text and will be ignored / unaltered by translators.
+					For each translatable language, the values for the plural classes that are not supported by the language are always set to the dummy value "---". This prevents them from being exported in translation jobs. If they are ever exported using the "all" filter for the exportJobs method, the dummy values do not contain translatable text and will be ignored / unaltered by translators.
 				*/
 				var _pluralsForLanguageLookup = Uize.lookup (_getPluralClasses (_language));
 				_processPluralStrings (
