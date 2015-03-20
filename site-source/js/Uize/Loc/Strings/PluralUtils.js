@@ -34,26 +34,28 @@ Uize.module ({
 				_getPluralClasses = Uize.Loc.Plurals.ClassesInfo.getPluralClasses,
 
 			/*** General Variables ***/
-				// NOTE: move this data into a generated data module, under Uize.Loc
-					_pluralClasses = ['zero','one','two','few','many','other']
+				_pluralClasses = ['zero','one','two','few','many','other']
 		;
 
 		/*** Utility Functions ***/
 			function _processPluralStrings (_languageResources,_processor) {
 				function _processStringsNode (_node) {
-					(
-						typeof _node == 'object' && _node &&
-						_node.hasOwnProperty ('one') && typeof _node.one == 'string' &&
-						_node.hasOwnProperty ('other') && typeof _node.other == 'string'
-					)
-						? _processor (_node)
-						: Uize.forEach (_node,_processStringsNode)
-					;
+					if (typeof _node == 'object' && _node) {
+						(
+							_node.hasOwnProperty ('one') && typeof _node.one == 'string' &&
+							_node.hasOwnProperty ('other') && typeof _node.other == 'string'
+						)
+							? _processor (_node)
+							: Uize.forEach (_node,_processStringsNode)
+						;
+					}
 				}
 				Uize.forEach (_languageResources,_processStringsNode);
 			}
 
 		return Uize.package ({
+			pluralClasses:_pluralClasses,
+
 			normalizePluralStringsForPrimaryLanguage:function (_primaryLanguageResources) {
 				/* NOTE:
 					For the primary language (assuming a regional flavor of English), if a node in a resource file has "one" and "other" properties whose values are type string, then the node is considered a node containing plural forms, and the values for the plural classes that English does not support are initialized to the value of the "other" property. This results in translations for those plural classes for other languages to be based on the value of the "other" plural class.
@@ -64,6 +66,7 @@ Uize.module ({
 						_plurals.zero = _plurals.two = _plurals.few = _plurals.many = _plurals.other;
 					}
 				);
+				return _primaryLanguageResources;
 			},
 
 			normalizePluralStringsForTranslatableLanguage:function (_languageResources,_language) {
@@ -84,6 +87,7 @@ Uize.module ({
 						);
 					}
 				);
+				return _languageResources;
 			},
 
 			removeUnsupportedPluralsForTranslatableLanguage:function (_languageResources,_language) {
@@ -101,6 +105,7 @@ Uize.module ({
 						);
 					}
 				);
+				return _languageResources;
 			}
 		});
 	}
