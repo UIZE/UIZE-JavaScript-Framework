@@ -35,7 +35,7 @@ Uize.module ({
 				Uize.Test.staticMethodsTest ([
 					['Uize.Loc.Strings.PluralUtils.processPluralStrings',[
 						{
-							title:'',
+							title:'A language resources object may contain multiple plural strings, at different levels in the resources object hierarchy, and all plural strings - and only plural strings - will be processed by the specified processor function',
 							test:function () {
 								var
 									_newMessages = {
