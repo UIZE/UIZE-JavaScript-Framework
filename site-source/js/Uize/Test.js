@@ -69,7 +69,7 @@ Uize.module ({
 			function _migratedStaticFeaturesTest (_migratedFeatures,_featureType) {
 				var _featureTypeIsMethod = _featureType == 'method';
 				return {
-					title:'Test that various deprecated static ' + (_featureTypeIsMethod ? 'methods' : 'properties') + ' that have been migrated are still supported and map correctly to their new locations',
+					title:'Deprecated static ' + (_featureTypeIsMethod ? 'methods' : 'properties') + ' that have been migrated are still supported and map correctly to their new locations',
 					test:_Uize.map (
 						_migratedFeatures,
 						function (_migratedFeature) {
@@ -78,7 +78,7 @@ Uize.module ({
 								_newName = _migratedFeature [1]
 							;
 							return {
-								title:'Test that the deprecated ' + _oldName + ' static ' + _featureType + ' still exists and is simply a reference to the new ' + _newName + ' static ' + _featureType,
+								title:'The deprecated ' + _oldName + ' static ' + _featureType + ' still exists and is simply a reference to the new ' + _newName + ' static ' + _featureType,
 								test:function () {
 									function _getStatic (_staticName) {
 										var _hostAndProperty = _splitHostAndProperty (_staticName);
@@ -1759,18 +1759,18 @@ Uize.module ({
 										The =Uize.Test.resolve= method allows for a more concise, declarative syntax for defining tests.
 
 										INSTEAD OF...
-										..................................................
+										.....................................................
 										var My2Plus2Equals4TestClass = Uize.Test.subclass ();
 										My2Plus2Equals4TestClass.set ({
-											title:'Test that 2 + 2 equals 4',
+											title:'2 + 2 equals 4',
 											test:function () {return this.expect (4,2 + 2)}
 										});
-										..................................................
+										.....................................................
 
 										USE...
 										..................................................
 										Uize.Test.resolve ({
-											title:'Test that 2 + 2 equals 4',
+											title:'2 + 2 equals 4',
 											test:function () {return this.expect (4,2 + 2)}
 										});
 										..................................................
@@ -1789,7 +1789,7 @@ Uize.module ({
 										EXAMPLE
 										..................................................
 										Uize.Test.resolve ({
-											title:'Test that 2 + 2 equals 4',
+											title:'2 + 2 equals 4',
 											test:function () {return this.expect (4,2 + 2)}
 										});
 										..................................................
@@ -1805,11 +1805,11 @@ Uize.module ({
 											title:'Test a whole bunch of things',
 											test:[
 												{
-													title:'Test that 2 + 2 equals 4',
+													title:'2 + 2 equals 4',
 													test:function () {return this.expect (4,2 + 2)}
 												},
 												Uize.Test.resolve ({
-													title:'Test that true is equal to 1 in a simple equality test',
+													title:'The value true is equal to 1 in a simple equality test',
 													test:function () {return this.expect (true,1 == true)}
 												}),
 												Uize.Test.staticPropertyTest ('Math.min','function'),
@@ -1876,14 +1876,14 @@ Uize.module ({
 							_propertyHost = _hostAndProperty.host
 						;
 						return this.resolve ({
-							title:'Test that ' + _propertyFullName + ' exists and is a ' + _expectedType,
+							title:'The static property ' + _propertyFullName + ' exists and is a ' + _expectedType,
 							test:[
 								{
-									title:'Test that host ' + _propertyHost + ' is defined',
+									title:'The host ' + _propertyHost + ' is defined',
 									test:function () {return this.expectNonNull (_Uize.getModuleByName (_propertyHost))}
 								},
 								{
-									title:'Test that ' + _propertyFullName + ' is a ' + _expectedType,
+									title:'The static property ' + _propertyFullName + ' is a ' + _expectedType,
 									test:function () {
 										return this.expectType (
 											_expectedType,
@@ -2137,70 +2137,38 @@ Uize.module ({
 										When a non-array value is specified for the =staticMethodTestARRAYorOBJ= value type, then it will be resolved to a =Uize.Test= subclass using the =Uize.Test.resolve= static method.
 
 									EXAMPLE
-									.................................................................................
+									.........................................................................
 									Uize.Test.staticMethodsTest ([
 										['Uize.Str.Trim.trimLeft',[
-											['Test that left-trimming empty string produces empty string',
+											['Left-trimming an empty string produces an empty string',
 												'',
 												''
 											],
-											['Test that left-trimming string with no padding returns the same string',
+											['Left-trimming a string with no padding returns the same string',
 												'hello',
 												'hello'
 											],
-											['Test that left-trimming string with leading spaces works',
-												'   hello',
-												'hello'
-											],
-											['Test that left-trimming string with trailing spaces works',
-												'hello   ',
-												'hello   '
-											],
-											['Test that left-trimming string with leading and trailing spaces works',
-												'   hello   ',
-												'hello   '
-											],
-											['Test that left-trimming does not affect inner whitesapce',
+											['Left-trimming does not affect inner whitesapce',
 												' hello \t there ',
 												'hello \t there '
-											],
-											['Test that left-trimming string with tab padding works',
-												'\t\thello\t\t',
-												'hello\t\t'
 											]
 										]],
 										['Uize.Str.Trim.trimRight',[
-											['Test that right-trimming empty string produces empty string',
+											['Right-trimming an empty string produces an empty string',
 												'',
 												''
 											],
-											['Test that right-trimming string with no padding returns the same string',
+											['Right-trimming a string with no padding returns the same string',
 												'hello',
 												'hello'
 											],
-											['Test that right-trimming string with leading spaces works',
-												'   hello',
-												'   hello'
-											],
-											['Test that right-trimming string with trailing spaces works',
-												'hello   ',
-												'hello'
-											],
-											['Test that right-trimming string with leading and trailing spaces works',
-												'   hello   ',
-												'   hello'
-											],
-											['Test that right-trimming does not affect inner whitesapce',
+											['Right-trimming does not affect inner whitesapce',
 												' hello \t there ',
 												' hello \t there'
-											],
-											['Test that right-trimming string with tab padding works',
-												'\t\thello\t\t',
-												'\t\thello'
 											]
 										]]
 									]);
-									.................................................................................
+									.........................................................................
 
 									In the above (rather long) example, static method tests are being declared for the =Uize.Str.Trim.trimLeft= and =Uize.Str.Trim.trimRight= static methods of the =Uize.Str.Trim= module.
 
@@ -2321,7 +2289,7 @@ Uize.module ({
 								_Uize.Test.requiredModulesTest (_moduleAliasName),
 								_Uize.Test.requiredModulesTest (_moduleTrueName),
 								{
-									title:'Test that the ' + _moduleAliasName + ' module is simply an alias / reference to the ' + _moduleTrueName + ' module',
+									title:'The ' + _moduleAliasName + ' module is simply an alias / reference to the ' + _moduleTrueName + ' module',
 									test:function () {
 										return this.expectSameAs (
 											_Uize.getModuleByName (_moduleAliasName),
