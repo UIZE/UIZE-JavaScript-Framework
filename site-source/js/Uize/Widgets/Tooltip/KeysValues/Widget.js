@@ -43,28 +43,31 @@ Uize.module ({
 			stateProperties:{
 				_data:'data',
 				body:{
-					derived:function (data) {
-						var
-							m = this,
-							_bodyChunks = []
-						;
-						if (data) {
-							_bodyChunks.push ('<table class="' + m.cssClass ('table') + '" cellspacing="1">');
+					derived:{
+						properties:'data',
+						derivation:function (_data) {
 							var
-								_keyCssClass = m.cssClass ('tableKey'),
-								_valueCssClass = m.cssClass ('tableValue')
+								m = this,
+								_bodyChunks = []
 							;
-							for (var _key in data)
-								_bodyChunks.push (
-									'<tr valign="top">' +
-										'<td class="' + _keyCssClass + '">' + _key + '</td>' +
-										'<td class="' + _valueCssClass + '">' + data [_key] + '</td>' +
-									'</tr>'
-								)
-							;
-							_bodyChunks.push ('</table>');
+							if (_data) {
+								_bodyChunks.push ('<table class="' + m.cssClass ('table') + '" cellspacing="1">');
+								var
+									_keyCssClass = m.cssClass ('tableKey'),
+									_valueCssClass = m.cssClass ('tableValue')
+								;
+								for (var _key in _data)
+									_bodyChunks.push (
+										'<tr valign="top">' +
+											'<td class="' + _keyCssClass + '">' + _key + '</td>' +
+											'<td class="' + _valueCssClass + '">' + _data [_key] + '</td>' +
+										'</tr>'
+									)
+								;
+								_bodyChunks.push ('</table>');
+							}
+							return _bodyChunks.join ('');
 						}
-						return _bodyChunks.join ('');
 					}
 				}
 			},

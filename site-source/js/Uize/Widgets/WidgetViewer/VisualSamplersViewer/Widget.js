@@ -72,86 +72,92 @@ Uize.module ({
 			stateProperties:{
 				_visualSamplerNamespaces:{
 					name:'visualSamplerNamespaces',
-					derived:function (modules) {
-						var m = this;
+					derived:{
+						properties:'modules',
+						derivation:function (_modules) {
+							var m = this;
 
-						/*** build visual sampler namespaces ***/
-							var
-								_modulesLookup = Uize.lookup (modules),
-								_visualSamplerDirectNamespaces = Uize.Data.Matches.values (
-									modules,
-									function (_moduleName) {
-										return _modulesLookup [_moduleName + '.Widget'] && _modulesLookup [_moduleName + '.VisualSampler'];
+							/*** build visual sampler namespaces ***/
+								var
+									_modulesLookup = Uize.lookup (_modules),
+									_visualSamplerDirectNamespaces = Uize.Data.Matches.values (
+										_modules,
+										function (_moduleName) {
+											return _modulesLookup [_moduleName + '.Widget'] && _modulesLookup [_moduleName + '.VisualSampler'];
+										}
+									),
+									_visualSamplerNamespaces = _visualSamplerDirectNamespaces.concat ()
+								;
+
+							/*** add namespaces that aggregate more than one visual sampler namespace ***/
+								/* EXAMPLE
+									MyNamespace.Widgets.Button
+									MyNamespace.Widgets.ProgressBar
+									MyNamespace.Widgets.CoolWidgets.Foo
+									MyNamespace.Widgets.CoolWidgets.More.Bar
+
+									With the above example of widget namespaces for widgets that have visual samplers, the following namespaces would also be added, because they clump / aggregate more than one namespace underneath them that contain visual samplers...
+
+									MyNamespace.Widgets
+									MyNamespace.Widgets.CoolWidgets
+
+									Note that the MyNamespace namespace would not be added, because it is redundant. In other words, selecting the MyNamespace namespace would show no more visual samplers than selecting the MyNamespace.Widgets namespace. The same applies to the MyNamespace.Widgets.CoolWidgets.More namespace.
+								*/
+								function _processNode (_path,_node) {
+									var _totalKeys = Uize.totalKeys (_node);
+									if (_totalKeys) {
+										_totalKeys > 1 && _visualSamplerNamespaces.push (_path);
+										for (var _subNode in _node)
+											_processNode (_path + (_path && '.') + _subNode,_node [_subNode])
+										;
 									}
-								),
-								_visualSamplerNamespaces = _visualSamplerDirectNamespaces.concat ()
-							;
-
-						/*** add namespaces that aggregate more than one visual sampler namespace ***/
-							/* EXAMPLE
-								MyNamespace.Widgets.Button
-								MyNamespace.Widgets.ProgressBar
-								MyNamespace.Widgets.CoolWidgets.Foo
-								MyNamespace.Widgets.CoolWidgets.More.Bar
-
-								With the above example of widget namespaces for widgets that have visual samplers, the following namespaces would also be added, because they clump / aggregate more than one namespace underneath them that contain visual samplers...
-
-								MyNamespace.Widgets
-								MyNamespace.Widgets.CoolWidgets
-
-								Note that the MyNamespace namespace would not be added, because it is redundant. In other words, selecting the MyNamespace namespace would show no more visual samplers than selecting the MyNamespace.Widgets namespace. The same applies to the MyNamespace.Widgets.CoolWidgets.More namespace.
-							*/
-							function _processNode (_path,_node) {
-								var _totalKeys = Uize.totalKeys (_node);
-								if (_totalKeys) {
-									_totalKeys > 1 && _visualSamplerNamespaces.push (_path);
-									for (var _subNode in _node)
-										_processNode (_path + (_path && '.') + _subNode,_node [_subNode])
-									;
 								}
-							}
-							_processNode ('',Uize.Data.PathsTree.fromList (_visualSamplerNamespaces));
-							_visualSamplerNamespaces.sort ();
+								_processNode ('',Uize.Data.PathsTree.fromList (_visualSamplerNamespaces));
+								_visualSamplerNamespaces.sort ();
 
-						/*** build lookup for visual sampler modules per namespace ***/
-							var _visualSamplerModulesByNamespace = m._visualSamplerModulesByNamespace = {};
-							Uize.forEach (
-								_visualSamplerNamespaces,
-								function (_namespace) {
-									_visualSamplerModulesByNamespace [_namespace] = Uize.map (
-										Uize.Data.Matches.values (
-											_visualSamplerDirectNamespaces,
-											function (_visualSamplerNamespace) {
-												return (
-													!_namespace ||
-													_visualSamplerNamespace == _namespace ||
-													Uize.Str.Has.hasPrefix (_visualSamplerNamespace,_namespace + '.')
-												);
-											}
-										),
-										'value + ".VisualSampler"'
-									);
-								}
-							);
+							/*** build lookup for visual sampler modules per namespace ***/
+								var _visualSamplerModulesByNamespace = m._visualSamplerModulesByNamespace = {};
+								Uize.forEach (
+									_visualSamplerNamespaces,
+									function (_namespace) {
+										_visualSamplerModulesByNamespace [_namespace] = Uize.map (
+											Uize.Data.Matches.values (
+												_visualSamplerDirectNamespaces,
+												function (_visualSamplerNamespace) {
+													return (
+														!_namespace ||
+														_visualSamplerNamespace == _namespace ||
+														Uize.Str.Has.hasPrefix (_visualSamplerNamespace,_namespace + '.')
+													);
+												}
+											),
+											'value + ".VisualSampler"'
+										);
+									}
+								);
 
-						return _visualSamplerNamespaces;
+							return _visualSamplerNamespaces;
+						}
 					}
 				},
 				displayedSelectorOptions:{
-					derived:function (visualSamplerNamespaces,loc_allNamespaces,loc_noSelectionText) {
-						var _visualSamplerModulesByNamespace = this._visualSamplerModulesByNamespace;
-						return [[loc_noSelectionText || '','-']].concat (
-							Uize.map (
-								visualSamplerNamespaces,
-								function (_namespace) {
-									return [
-										(_namespace || loc_allNamespaces || '') +
-										' (' + _visualSamplerModulesByNamespace [_namespace].length + ')',
-										_namespace
-									];
-								}
-							)
-						);
+					derived:{
+						properties:'visualSamplerNamespaces,loc_allNamespaces,loc_noSelectionText',
+						derivation:function (_visualSamplerNamespaces,_loc_allNamespaces,_loc_noSelectionText) {
+							var _visualSamplerModulesByNamespace = this._visualSamplerModulesByNamespace;
+							return [[_loc_noSelectionText || '','-']].concat (
+								Uize.map (
+									_visualSamplerNamespaces,
+									function (_namespace) {
+										return [
+											(_namespace || _loc_allNamespaces || '') +
+											' (' + _visualSamplerModulesByNamespace [_namespace].length + ')',
+											_namespace
+										];
+									}
+								)
+							);
+						}
 					}
 				}
 			}

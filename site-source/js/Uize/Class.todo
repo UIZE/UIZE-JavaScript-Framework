@@ -118,19 +118,19 @@ Derived Properties
 	A derived property is a special type of state property whose value is derived from the values of other state properties of the same instance.
 
 	EXAMPLE
-	...........................................................................................................
+	..........................................................................................
 	_class.stateProperties ({
 		_allSelected:{
 			name:'allSelected',
-			derived:function (totalSelected,totalItems) {return totalSelected > 0 && totalSelected == totalItems}
+			derived:'totalSelected,totalItems: totalSelected > 0 && totalSelected == totalItems'
 		},
 		_oneSelected:{
 			name:'oneSelected',
-			derived:function (totalSelected) {return totalSelected == 1}
+			derived:'totalSelected: totalSelected == 1'
 		},
 		_someSelected:{
 			name:'someSelected',
-			derived:function (totalSelected) {return totalSelected > 0}
+			derived:'totalSelected: totalSelected > 0'
 		},
 		_totalSelected:{
 			name:'totalSelected',
@@ -141,7 +141,7 @@ Derived Properties
 			value:0
 		}
 	});
-	...........................................................................................................
+	..........................................................................................
 
 	In the above example, the =allSelected=, =oneSelected=, and =someSelected= state properties are all derived properties. A state property is indicated as being a derived property by the presence of the =derived= property in the property profile. The =derived= property serves both to indicate that a state property is derived, as well to provide the deriver function that indicates from which other state properties the derived property is derived and how to calculate the derived value.
 

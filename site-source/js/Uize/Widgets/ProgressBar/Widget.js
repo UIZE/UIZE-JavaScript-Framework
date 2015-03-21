@@ -50,19 +50,22 @@ Uize.module ({
 			stateProperties:{
 				_displayedStatusText:{
 					name:'displayedStatusText',
-					derived:function (statusText,value,maxValue) {
-						return (
-							statusText
-								? statusText.call (
-									this,
-									{
-										stepsCompleted:value,
-										totalSteps:maxValue,
-										percentComplete:Math.round (value / maxValue * 100)
-									}
-								)
-								: ''
-						);
+					derived:{
+						properties:'statusText,value,maxValue',
+						derivation:function (_statusText,_value,_maxValue) {
+							return (
+								_statusText
+									? _statusText.call (
+										this,
+										{
+											stepsCompleted:_value,
+											totalSteps:_maxValue,
+											percentComplete:Math.round (_value / _maxValue * 100)
+										}
+									)
+									: ''
+							);
+						}
 					}
 				},
 

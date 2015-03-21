@@ -64,7 +64,12 @@ Uize.module ({
 				},
 				_directionName:{
 					name:'directionName',
-					derived:function (directionX,directionY) {return _directionNames [directionY + 1] [directionX + 1]}
+					derived:{
+						properties:'directionX,directionY',
+						derivation:function (_directionX,_directionY) {
+							return _directionNames [_directionY + 1] [_directionX + 1];
+						}
+					}
 				}
 			},
 

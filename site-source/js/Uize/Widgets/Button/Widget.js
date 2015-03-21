@@ -289,48 +289,66 @@ Uize.module ({
 					*/
 				_displayState:{
 					name:'displayState',
-					derived:function (
-						state, isOver, selected, playing, flavor, enabledInherited, busyInherited, statePrecedence, statePrecedenceMap
-					) {
-						var
-							m = this,
-							_state = state,
-							_stateCombinationNo =
-								/* disabled state  */ !enabledInherited * 16 |
-								/* default state */ (!_state || busyInherited) * 8 |
-								/* over state    */ isOver * 4 |
-								/* active state  */ (_state == 'down' || selected) * 2 |
-								/* playing state */ +playing
-							,
-							_statePrecedenceMap = statePrecedenceMap,
-							_displayState = _statePrecedenceMap [_stateCombinationNo]
-						;
-						if (_displayState == _undefined) {
-							for (
-								var
-									_stateNo = -1,
-									_statePrecedence = statePrecedence,
-									_statePrecedenceLength = _statePrecedence.length
-								;
-								++_stateNo < _statePrecedenceLength;
-							) {
-								var _stateName = _statePrecedence [_stateNo];
-								if (_stateCombinationNo & _stateNamesToBitMasks [_stateName]) {
-									_displayState = _stateName;
-									break;
+					derived:{
+						properties:[
+							'state',
+							'isOver',
+							'selected',
+							'playing',
+							'flavor',
+							'enabledInherited',
+							'busyInherited',
+							'statePrecedence',
+							'statePrecedenceMap'
+						],
+						derivation:function (
+							_state,
+							_isOver,
+							_selected,
+							_playing,
+							_flavor,
+							_enabledInherited,
+							_busyInherited,
+							_statePrecedence,
+							_statePrecedenceMap
+						) {
+							var
+								m = this,
+								_stateCombinationNo =
+									/* disabled state  */ !_enabledInherited * 16 |
+									/* default state */ (!_state || _busyInherited) * 8 |
+									/* over state    */ _isOver * 4 |
+									/* active state  */ (_state == 'down' || _selected) * 2 |
+									/* playing state */ +_playing
+								,
+								_displayState = _statePrecedenceMap [_stateCombinationNo]
+							;
+							if (_displayState == _undefined) {
+								for (
+									var
+										_stateNo = -1,
+										_statePrecedenceLength = _statePrecedence.length
+									;
+									++_stateNo < _statePrecedenceLength;
+								) {
+									var _stateName = _statePrecedence [_stateNo];
+									if (_stateCombinationNo & _stateNamesToBitMasks [_stateName]) {
+										_displayState = _stateName;
+										break;
+									}
 								}
+								_statePrecedenceMap [_stateCombinationNo] = _displayState;
 							}
-							_statePrecedenceMap [_stateCombinationNo] = _displayState;
+							return _flavor + (_displayState && ('-' + _displayState));
 						}
-						return flavor + (_displayState && ('-' + _displayState));
-					}
-					/*?
-						State Properties
-							displayState
+						/*?
+							State Properties
+								displayState
 
-								NOTES
-								- the initial value is =''= (empty string)
-					*/
+									NOTES
+									- the initial value is =''= (empty string)
+						*/
+					}
 				},
 				_playing:{
 					name:'playing',
@@ -402,17 +420,18 @@ Uize.module ({
 				},
 				_statePrecedenceMap:{
 					name:'statePrecedenceMap',
-					derived:function (statePrecedence) {
-						var
-							_statePrecedence = statePrecedence,
-							_statePrecedenceAsJoinedStr =
+					derived:{
+						properties:'statePrecedence',
+						derivation:function (_statePrecedence) {
+							var _statePrecedenceAsJoinedStr =
 								_statePrecedence._asJoinedStr ||
 								(_statePrecedence._asJoinedStr = _statePrecedence.join (','))
-						;
-						return (
-							_statePrecedenceMaps [_statePrecedenceAsJoinedStr] ||
-							(_statePrecedenceMaps [_statePrecedenceAsJoinedStr] = {})
-						);
+							;
+							return (
+								_statePrecedenceMaps [_statePrecedenceAsJoinedStr] ||
+								(_statePrecedenceMaps [_statePrecedenceAsJoinedStr] = {})
+							);
+						}
 					}
 				},
 				_text:{
@@ -456,9 +475,8 @@ Uize.module ({
 					*/
 				_tooltipShown:{
 					name:'tooltipShown',
-					derived:function (tooltip,wired,state,enabledInherited,selected) {
-						return !!(tooltip && wired && state == 'over' && enabledInherited && !selected);
-					},
+					derived:
+						'tooltip,wired,state,enabledInherited,selected: !!(tooltip && wired && state == "over" && enabledInherited && !selected)',
 					onChange:function () {
 						Uize.Tooltip && Uize.Tooltip.showTooltip (this._tooltip,this._tooltipShown);
 					}

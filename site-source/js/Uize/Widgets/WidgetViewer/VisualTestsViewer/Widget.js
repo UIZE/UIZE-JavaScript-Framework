@@ -56,22 +56,27 @@ Uize.module ({
 			stateProperties:{
 				_widgetsWithVisualTests:{
 					name:'widgetsWithVisualTests',
-					derived:function (modules) {
-						var
-							_modules = modules,
-							_modulesLookup = Uize.lookup (_modules)
-						;
-						return Uize.Data.Matches.values (
-							_modules,
-							function (_moduleName) {
-								return _modulesLookup [_visualTestsModuleNameFromWidgetClass (_moduleName)];
-							}
-						);
+					derived:{
+						properties:'modules',
+						derivation:function (_modules) {
+							var _modulesLookup = Uize.lookup (_modules);
+							return Uize.Data.Matches.values (
+								_modules,
+								function (_moduleName) {
+									return _modulesLookup [_visualTestsModuleNameFromWidgetClass (_moduleName)];
+								}
+							);
+						}
 					}
 				},
 				displayedSelectorOptions:{
-					derived:function (widgetsWithVisualTests,loc_noSelectionText) {
-						return [[loc_noSelectionText || '','-']].concat (Uize.map (widgetsWithVisualTests,'[value,value]'));
+					derived:{
+						properties:'widgetsWithVisualTests,loc_noSelectionText',
+						derivation:function (_widgetsWithVisualTests,_loc_noSelectionText) {
+							return [[_loc_noSelectionText || '','-']].concat (
+								Uize.map (_widgetsWithVisualTests,'[value,value]')
+							);
+						}
 					}
 				}
 			}

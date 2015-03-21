@@ -38,14 +38,17 @@ Uize.module ({
 					value:1
 				},
 				segmentBgStyle:{
-					derived:function (segmentColor,segmentOpacity) {
-						var _segmentColor = Uize.Color (segmentColor);
-						if (segmentOpacity == 1) {
-							return _segmentColor.to ('#hex');
-						} else {
-							var _colorTuple = _segmentColor.tuple;
-							_colorTuple [3] = segmentOpacity;
-							return 'rgba(' + _colorTuple.join (',') + ')';
+					derived:{
+						properties:'segmentColor,segmentOpacity',
+						derivation:function (_segmentColor,_segmentOpacity) {
+							_segmentColor = Uize.Color (_segmentColor);
+							if (_segmentOpacity == 1) {
+								return _segmentColor.to ('#hex');
+							} else {
+								var _colorTuple = _segmentColor.tuple;
+								_colorTuple [3] = _segmentOpacity;
+								return 'rgba(' + _colorTuple.join (',') + ')';
+							}
 						}
 					}
 				}

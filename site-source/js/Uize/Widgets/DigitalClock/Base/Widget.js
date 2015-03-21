@@ -88,10 +88,10 @@ Uize.module ({
 						}
 					}
 				},
-				hoursTensValue:{derived:function (hhMmSs) {return this.remapDigitValue (0,hhMmSs.charAt (0))}},
-				hoursOnesValue:{derived:function (hhMmSs) {return this.remapDigitValue (1,hhMmSs.charAt (1))}},
-				minutesTensValue:{derived:function (hhMmSs) {return this.remapDigitValue (2,hhMmSs.charAt (2))}},
-				minutesOnesValue:{derived:function (hhMmSs) {return this.remapDigitValue (3,hhMmSs.charAt (3))}}
+				hoursTensValue:{derived:'hhMmSs: this.remapDigitValue (0,hhMmSs.charAt (0))'},
+				hoursOnesValue:{derived:'hhMmSs: this.remapDigitValue (1,hhMmSs.charAt (1))'},
+				minutesTensValue:{derived:'hhMmSs: this.remapDigitValue (2,hhMmSs.charAt (2))'},
+				minutesOnesValue:{derived:'hhMmSs: this.remapDigitValue (3,hhMmSs.charAt (3))'}
 			},
 
 			children:{

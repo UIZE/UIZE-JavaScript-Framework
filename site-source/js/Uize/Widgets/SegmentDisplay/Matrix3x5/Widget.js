@@ -164,10 +164,20 @@ Uize.module ({
 
 				/*** derived properties for HTML bindings ***/
 					colPositions:{
-						derived:function (width,segmentGap) {return _calculateSegmentsPosAndDim (width,segmentGap,_cols)}
+						derived:{
+							properties:'width,segmentGap',
+							derivation:function (_width,_segmentGap) {
+								return _calculateSegmentsPosAndDim (_width,_segmentGap,_cols);
+							}
+						}
 					},
 					rowPositions:{
-						derived:function (height,segmentGap) {return _calculateSegmentsPosAndDim (height,segmentGap,_rows)}
+						derived:{
+							properties:'height,segmentGap',
+							derivation:function (_height,_segmentGap) {
+								return _calculateSegmentsPosAndDim (_height,_segmentGap,_rows);
+							}
+						}
 					}
 			},
 
