@@ -45,6 +45,16 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
+		/*** build object for segment state derived properties ***/
+			var _segmentStateDerivedProperties = {};
+			_superclass.forEachSegment (
+				function (_segmentNo,_segmentCode,_segmentMask) {
+					_segmentStateDerivedProperties ['segmentState' + _segmentCode] = {
+						derived:'segmentsState: !!(segmentsState & ' + _segmentMask + ')'
+					};
+				}
+			);
+
 		/*** build objects for HTML bindings declaration ***/
 			var
 				_segmentBgStyleHtmlBindings = [],
@@ -92,79 +102,121 @@ Uize.module ({
 				html:Uize.Widgets.SegmentDisplay.Seven.Html
 			},
 
-			stateProperties:{
-				_segmentThickness:{
-					name:'segmentThickness',
-					value:16
-				},
-				_segmentGap:{
-					name:'segmentGap',
-					value:1
-				},
+			stateProperties:Uize.copyInto (
+				_segmentStateDerivedProperties,
+				{
+					_segmentThickness:{
+						name:'segmentThickness',
+						value:16
+					},
+					_segmentGap:{
+						name:'segmentGap',
+						value:1
+					},
+					_segmentAbutMode:{
+						name:'segmentAbutMode',
+						value:0 // 0 (traditional) | 1 (flat end abut)
+					},
 
-				/*** derived properties for HTML bindings ***/
-					segmentThicknessPx:{
-						derived:'segmentThickness: segmentThickness + "px"'
-					},
-					segmentGapPx:{
-						derived:'segmentGap: segmentGap + "px"'
-					},
-					segmentGTopPx:{
-						derived:'height,segmentThickness: height / 2 - segmentThickness / 2 + "px"'
-					},
-					segmentThicknessDiv2:{
-						derived:'segmentThickness: segmentThickness / 2'
-					},
-					segmentThicknessDiv2Px:{
-						derived:'segmentThicknessDiv2: segmentThicknessDiv2 + "px"'
-					},
-					segmentThicknessPlusSegmentGapPx:{
-						derived:'segmentThickness,segmentGap: segmentThickness + segmentGap + "px"'
-					},
-					segmentGapMinusSegmentThicknessDiv2Px:{
-						derived:'segmentGap,segmentThicknessDiv2: segmentGap - segmentThicknessDiv2 + "px"'
-					},
-					segmentGapPlusSegmentThicknessDiv2Px:{
-						derived:'segmentGap,segmentThicknessDiv2: segmentGap + segmentThicknessDiv2 + "px"'
-					}
-			},
+					/*** derived properties for HTML bindings ***/
+						segmentThicknessPx:{
+							derived:'segmentThickness: segmentThickness + "px"'
+						},
+						segmentGapPx:{
+							derived:'segmentGap: segmentGap + "px"'
+						},
+						horzSegmentEndPos:{
+							derived:'segmentGap,segmentAbutMode,segmentThickness: segmentGap - segmentAbutMode * segmentThickness'
+						},
+						horzSegmentEndPosPx:{
+							derived:'horzSegmentEndPos: horzSegmentEndPos + "px"'
+						},
+						horzSegmentBarPosPx:{
+							derived:'horzSegmentEndPos,segmentThickness: horzSegmentEndPos + segmentThickness + "px"'
+						},
+						vertSegmentTopEndPos:{
+							derived:'segmentGap,segmentStateA,segmentAbutMode,segmentThickness: segmentGap - !segmentStateA * segmentAbutMode * segmentThickness'
+						},
+						vertSegmentTopEndPosPx:{
+							derived:'vertSegmentTopEndPos: vertSegmentTopEndPos + "px"'
+						},
+						vertSegmentTopBarPosPx:{
+							derived:'vertSegmentTopEndPos,segmentThickness: vertSegmentTopEndPos + segmentThickness + "px"'
+						},
+						vertSegmentMiddleEndPos:{
+							derived:'segmentGap,segmentStateG,segmentAbutMode,segmentThicknessDiv2: segmentGap - segmentThicknessDiv2 - !segmentStateG * segmentAbutMode * segmentThicknessDiv2'
+						},
+						vertSegmentMiddleEndPosPx:{
+							derived:'vertSegmentMiddleEndPos: vertSegmentMiddleEndPos + "px"'
+						},
+						vertSegmentMiddleBarPosPx:{
+							derived:'vertSegmentMiddleEndPos,segmentThickness: vertSegmentMiddleEndPos + segmentThickness + "px"'
+						},
+						vertSegmentBottomEndPos:{
+							derived:'segmentGap,segmentStateD,segmentAbutMode,segmentThickness: segmentGap - !segmentStateD * segmentAbutMode * segmentThickness'
+						},
+						vertSegmentBottomEndPosPx:{
+							derived:'vertSegmentBottomEndPos: vertSegmentBottomEndPos + "px"'
+						},
+						vertSegmentBottomBarPosPx:{
+							derived:'vertSegmentBottomEndPos,segmentThickness: vertSegmentBottomEndPos + segmentThickness + "px"'
+						},
+						segmentGTopPx:{
+							derived:'height,segmentThickness: height / 2 - segmentThickness / 2 + "px"'
+						},
+						segmentThicknessDiv2:{
+							derived:'segmentThickness: segmentThickness / 2'
+						},
+						segmentThicknessDiv2Px:{
+							derived:'segmentThicknessDiv2: segmentThicknessDiv2 + "px"'
+						}
+				}
+			),
 
 			htmlBindings:{
 				segmentBgStyle:_segmentBgStyleHtmlBindings,
 				segmentThicknessPx:_segmentThicknessPxHtmlBindings,
 				segmentGTopPx:'segmentG:style.top',
-				segmentGapPx:[
+				horzSegmentEndPosPx:[
 					'segmentAEndA:style.left',
 					'segmentAEndB:style.right',
-					'segmentBEndA:style.top',
-					'segmentCEndB:style.bottom',
 					'segmentDEndA:style.left',
 					'segmentDEndB:style.right',
-					'segmentEEndB:style.bottom',
-					'segmentFEndA:style.top',
 					'segmentGEndA:style.left',
 					'segmentGEndB:style.right'
 				],
+				vertSegmentTopEndPosPx:[
+					'segmentBEndA:style.top',
+					'segmentFEndA:style.top'
+				],
+				vertSegmentTopBarPosPx:[
+					'segmentBBar:style.top',
+					'segmentFBar:style.top'
+				],
+				vertSegmentBottomEndPosPx:[
+					'segmentCEndB:style.bottom',
+					'segmentEEndB:style.bottom'
+				],
+				vertSegmentBottomBarPosPx:[
+					'segmentCBar:style.bottom',
+					'segmentEBar:style.bottom'
+				],
 				segmentThicknessDiv2Px:_segmentThicknessDiv2PxHtmlBindings,
-				segmentThicknessPlusSegmentGapPx:[
+				horzSegmentBarPosPx:[
 					'segmentABar:style.left',
 					'segmentABar:style.right',
-					'segmentBBar:style.top',
-					'segmentCBar:style.bottom',
 					'segmentDBar:style.left',
 					'segmentDBar:style.right',
-					'segmentEBar:style.bottom',
-					'segmentFBar:style.top',
 					'segmentGBar:style.left',
 					'segmentGBar:style.right'
 				],
-				segmentGapMinusSegmentThicknessDiv2Px:[
+				vertSegmentMiddleEndPosPx:[
 					'segmentBEndB:style.bottom',
 					'segmentCEndA:style.top',
 					'segmentEEndA:style.top',
 					'segmentFEndB:style.bottom'
 				],
-				segmentGapPlusSegmentThicknessDiv2Px:[
+				vertSegmentMiddleBarPosPx:[
 					'segmentBBar:style.bottom',
 					'segmentCBar:style.top',
 					'segmentEBar:style.top',
