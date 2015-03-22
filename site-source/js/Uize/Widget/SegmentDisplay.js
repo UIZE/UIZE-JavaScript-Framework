@@ -64,13 +64,13 @@ Uize.module ({
 			}
 
 		return _superclass.subclass ({
-			instanceMethods:{
+			dualContextMethods:{
 				forEachSegment:function (_function) {
 					for (
 						var
 							m = this,
 							_segmentNo = -1,
-							_segmentCodes = m.Class.segmentCodes,
+							_segmentCodes = Uize.getClass (m).segmentCodes,
 							_segmentCodesLength = _segmentCodes.length,
 							_segmentMask = 1 << _segmentCodesLength
 						;
@@ -78,8 +78,10 @@ Uize.module ({
 					)
 						_function.call (m,_segmentNo,_segmentCodes [_segmentNo],_segmentMask = _segmentMask >> 1)
 					;
-				},
+				}
+			},
 
+			instanceMethods:{
 				getSegmentState:function (_segmentNo) {
 					return !!(this._segmentsState & (this.Class._firstSegmentMask >> _segmentNo));
 				},
