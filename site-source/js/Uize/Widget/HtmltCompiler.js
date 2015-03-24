@@ -73,7 +73,6 @@ Uize.module ({
 					_totalGeneratedReplacementNames = 0,
 					_required = [],
 					_alreadyRequired = {},
-					_widgetClass = _templateOptions.widgetClass,
 					_helperFunctions = {
 						'_cssClass':{
 							_source:'function _cssClass (_class) {return m.cssClass (_class)}'
@@ -136,7 +135,10 @@ Uize.module ({
 					_rootNode && _ensureNodeAttribute (_rootNode,'id','');
 
 				/*** build a lookup of HTML bindings by node ID ***/
-					var _bindingsById = {};
+					var
+						_widgetClass = _templateOptions.widgetClass,
+						_bindingsById = {}
+					;
 					_widgetClass && Uize.forEach (
 						_widgetClass.mHtmlBindings_bindings,
 						function (_bindings) {
@@ -358,8 +360,6 @@ Uize.module ({
 													).join (' + \' \' + ');
 													_attributesLookup.extraClasses = _extraClassesToken;
 												}
-
-											_widgetClass && _addRequired (_widgetClass);
 
 											/*** add replacement and replace child tag node with text node ***/
 												var _serializedProperties = Uize.Json.to (_attributesLookup,'mini');
