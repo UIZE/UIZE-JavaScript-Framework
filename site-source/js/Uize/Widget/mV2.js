@@ -92,10 +92,6 @@ Uize.module ({
 
 									The =childHtml= method is intended primarily for use within the HTML generator (usually a JST template) for a widget.
 						*/
-					},
-
-					superHtml:function (_input,_extraInput) {
-						return this.Class.superclass.get ('html').process.call (this,_Uize.copy (_input,_extraInput));
 					}
 				},
 
