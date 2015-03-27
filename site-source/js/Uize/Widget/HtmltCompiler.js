@@ -115,7 +115,7 @@ Uize.module ({
 					return _attribute;
 				}
 
-				/*** find root tag node and give it special treatment for id and class attributes ***/
+				/*** find root tag node and give it special treatment for id attribute ***/
 					function _findAttribute (_node,_attributeName) {
 						return Uize.findRecord (
 							_node.tagAttributes.attributes,
