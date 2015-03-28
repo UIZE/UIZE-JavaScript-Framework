@@ -218,7 +218,7 @@ Uize.module ({
 									'The value of a state property is HTML encoded when it is bound to replace the contents of a node',
 									{
 										stateProperties:{
-											foo:{value:'Characters that need to be HTML-encoded: <&'}
+											foo:{value:'Characters that need to be HTML-encoded: <&"'}
 										},
 										htmlBindings:{
 											foo:'foo'
@@ -228,7 +228,7 @@ Uize.module ({
 										'<div id="foo"></div>' +
 									'</div>',
 									'<div id="widget">' +
-										'<div id="widget-foo">Characters that need to be HTML-encoded: &lt;&amp;</div>' +
+										'<div id="widget-foo">Characters that need to be HTML-encoded: &lt;&amp;&quot;</div>' +
 									'</div>'
 								)
 							]
@@ -280,6 +280,272 @@ Uize.module ({
 													'<input id="widget-foo3" type="text" value="bar"/>' +
 												'</div>' +
 											'</div>'
+										),
+										_htmlBindingsTest (
+											'Multiple state properties can be bound to multiple respective text input nodes',
+											{
+												stateProperties:{
+													foo1:{value:'bar1'},
+													foo2:{value:'bar2'},
+													foo3:{value:'bar3'}
+												},
+												htmlBindings:{
+													foo1:'foo1',
+													foo2:'foo2',
+													foo3:'foo3'
+												}
+											},
+											'<div>' +
+												'<input id="foo1" type="text"/>' +
+												'<input id="foo2" type="text"/>' +
+												'<div>' +
+													'<input id="foo3" type="text"/>' +
+												'</div>' +
+											'</div>',
+											'<div id="widget">' +
+												'<input id="widget-foo1" type="text" value="bar1"/>' +
+												'<input id="widget-foo2" type="text" value="bar2"/>' +
+												'<div>' +
+													'<input id="widget-foo3" type="text" value="bar3"/>' +
+												'</div>' +
+											'</div>'
+										),
+										_htmlBindingsTest (
+											'The value of a state property is HTML encoded when it is bound to a text input node',
+											{
+												stateProperties:{
+													foo:{value:'Characters that need to be HTML-encoded: <&"'}
+												},
+												htmlBindings:{
+													foo:'foo'
+												}
+											},
+											'<div>' +
+												'<input id="foo" type="text"/>' +
+											'</div>',
+											'<div id="widget">' +
+												'<input id="widget-foo" type="text" value="Characters that need to be HTML-encoded: &lt;&amp;&quot;"/>' +
+											'</div>'
+										),
+										_htmlBindingsTest (
+											'If a text input node to which a state property has been bound already has a value attribute, its initial value is ignored and is replaced by the value from the state property binding',
+											{
+												stateProperties:{
+													foo:{value:'bar'}
+												},
+												htmlBindings:{
+													foo:'foo'
+												}
+											},
+											'<div>' +
+												'<input id="foo" type="text" value="foo"/>' +
+											'</div>',
+											'<div id="widget">' +
+												'<input id="widget-foo" type="text" value="bar"/>' +
+											'</div>'
+										)
+									]
+								},
+								{
+									title:'A state property can be bound to textarea nodes',
+									test:[
+										_htmlBindingsTest (
+											'A state property can be bound to a single textarea node',
+											{
+												stateProperties:{
+													foo:{value:'bar'}
+												},
+												htmlBindings:{
+													foo:'foo'
+												}
+											},
+											'<div>' +
+												'<textarea id="foo"></textarea>' +
+											'</div>',
+											'<div id="widget">' +
+												'<textarea id="widget-foo">bar</textarea>' +
+											'</div>'
+										),
+										_htmlBindingsTest (
+											'A state property can be bound to multiple textarea nodes',
+											{
+												stateProperties:{
+													foo:{value:'bar'}
+												},
+												htmlBindings:{
+													foo:['foo1','foo2','foo3']
+												}
+											},
+											'<div>' +
+												'<textarea id="foo1"></textarea>' +
+												'<textarea id="foo2"></textarea>' +
+												'<div>' +
+													'<textarea id="foo3"></textarea>' +
+												'</div>' +
+											'</div>',
+											'<div id="widget">' +
+												'<textarea id="widget-foo1">bar</textarea>' +
+												'<textarea id="widget-foo2">bar</textarea>' +
+												'<div>' +
+													'<textarea id="widget-foo3">bar</textarea>' +
+												'</div>' +
+											'</div>'
+										),
+										_htmlBindingsTest (
+											'Multiple state properties can be bound to multiple respective text input nodes',
+											{
+												stateProperties:{
+													foo1:{value:'bar1'},
+													foo2:{value:'bar2'},
+													foo3:{value:'bar3'}
+												},
+												htmlBindings:{
+													foo1:'foo1',
+													foo2:'foo2',
+													foo3:'foo3'
+												}
+											},
+											'<div>' +
+												'<textarea id="foo1"></textarea>' +
+												'<textarea id="foo2"></textarea>' +
+												'<div>' +
+													'<textarea id="foo3"></textarea>' +
+												'</div>' +
+											'</div>',
+											'<div id="widget">' +
+												'<textarea id="widget-foo1">bar1</textarea>' +
+												'<textarea id="widget-foo2">bar2</textarea>' +
+												'<div>' +
+													'<textarea id="widget-foo3">bar3</textarea>' +
+												'</div>' +
+											'</div>'
+										),
+										_htmlBindingsTest (
+											'The value of a state property is HTML encoded when it is bound to a textarea node',
+											{
+												stateProperties:{
+													foo:{value:'Characters that need to be HTML-encoded: <&"'}
+												},
+												htmlBindings:{
+													foo:'foo'
+												}
+											},
+											'<div>' +
+												'<textarea id="foo"></textarea>' +
+											'</div>',
+											'<div id="widget">' +
+												'<textarea id="widget-foo">Characters that need to be HTML-encoded: &lt;&amp;&quot;</textarea>' +
+											'</div>'
+										),
+										_htmlBindingsTest (
+											'If a textarea node to which a state property has been bound already contains content, this content is ignored and is replaced by the value from the state property binding',
+											{
+												stateProperties:{
+													foo:{value:'bar'}
+												},
+												htmlBindings:{
+													foo:'foo'
+												}
+											},
+											'<div>' +
+												'<textarea id="foo">foo</textarea>' +
+											'</div>',
+											'<div id="widget">' +
+												'<textarea id="widget-foo">bar</textarea>' +
+											'</div>'
+										)
+									]
+								},
+								{
+									title:'A state property can be bound to checkbox input nodes',
+									test:[
+										_htmlBindingsTest (
+											'A state property can be bound to a single checkbox input node',
+											{
+												stateProperties:{
+													foo:{value:true}
+												},
+												htmlBindings:{
+													foo:'foo'
+												}
+											},
+											'<div>' +
+												'<input id="foo" type="checkbox"/>' +
+											'</div>',
+											'<div id="widget">' +
+												'<input id="widget-foo" type="checkbox" checked="checked"/>' +
+											'</div>'
+										),
+										_htmlBindingsTest (
+											'A state property can be bound to multiple checkbox input nodes',
+											{
+												stateProperties:{
+													foo:{value:'bar'}
+												},
+												htmlBindings:{
+													foo:['foo1','foo2','foo3']
+												}
+											},
+											'<div>' +
+												'<input id="foo1" type="checkbox"/>' +
+												'<input id="foo2" type="checkbox"/>' +
+												'<div>' +
+													'<input id="foo3" type="checkbox"/>' +
+												'</div>' +
+											'</div>',
+											'<div id="widget">' +
+												'<input id="widget-foo1" type="checkbox" checked="checked"/>' +
+												'<input id="widget-foo2" type="checkbox" checked="checked"/>' +
+												'<div>' +
+													'<input id="widget-foo3" type="checkbox" checked="checked"/>' +
+												'</div>' +
+											'</div>'
+										),
+										_htmlBindingsTest (
+											'Multiple state properties can be bound to multiple respective checkbox input nodes',
+											{
+												stateProperties:{
+													foo1:{value:true},
+													foo2:{value:false},
+													foo3:{value:true}
+												},
+												htmlBindings:{
+													foo1:'foo1',
+													foo2:'foo2',
+													foo3:'foo3'
+												}
+											},
+											'<div>' +
+												'<input id="foo1" type="checkbox"/>' +
+												'<input id="foo2" type="checkbox"/>' +
+												'<div>' +
+													'<input id="foo3" type="checkbox"/>' +
+												'</div>' +
+											'</div>',
+											'<div id="widget">' +
+												'<input id="widget-foo1" type="checkbox" checked="checked"/>' +
+												'<input id="widget-foo2" type="checkbox" />' +
+												'<div>' +
+													'<input id="widget-foo3" type="checkbox" checked="checked"/>' +
+												'</div>' +
+											'</div>'
+										),
+										_htmlBindingsTest (
+											'When a state property is bound to a checkbox input node and the state property\'s value is false, the checked attribute will be absent',
+											{
+												stateProperties:{
+													foo:{value:false}
+												},
+												htmlBindings:{
+													foo:'foo'
+												}
+											},
+											'<div>' +
+												'<input id="foo" type="checkbox"/>' +
+											'</div>',
+											'<div id="widget">' +
+												'<input id="widget-foo" type="checkbox" />' +
+											'</div>'
 										)
 									]
 								}
@@ -288,17 +554,14 @@ Uize.module ({
 					]]
 					/*
 						- test value bindings to form elements
-							- text input
-							- textarea
-							- checkbox
 							- select (not yet supported)
 						- test various binding types...
-							- @attribute value bindings (@src, @href, @class)
 							- html, innerHTML
-							- className
+							- @attribute value bindings (@src, @href, @class)
+							- style.*
 							- ?, show
 							- hide
-							- style.*
+							- className
 							- readOnly
 						- test child tag
 					*/
