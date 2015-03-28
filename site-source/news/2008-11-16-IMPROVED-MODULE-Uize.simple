@@ -23,7 +23,7 @@ Uize.toString
 	wired : false
 	................................
 
-	This new behavior is similar to the existing behavior for instances of a =Uize= subclass, excepting that the summary of values for state properties is for the class (ie. static) rather than an instance.
+	This new behavior is similar to the existing behavior for instances of a =Uize= subclass, excepting that the summary of values for state properties is for the class (i.e. static) rather than an instance.
 
 Uize.valueOf
 	Less compelling than the new =Uize.toString= static implementation, the =valueOf= intrinsic method is now also implemented as a static method on =Uize= subclasses.

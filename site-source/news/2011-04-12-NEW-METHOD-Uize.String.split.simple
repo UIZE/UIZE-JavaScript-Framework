@@ -12,7 +12,7 @@ Incorrect Dropping of Empty Split Values
 	result = 'foo,,bar'.split (/,/);
 	................................
 
-	In the above example, a string is being split using a regular expression splitter that matches a single comma. In compliant JavaScript interpreters, the above statement would produce a result array with the value =['foo','','bar']= - exactly the same result as if you used a simple string splitter (ie. ='foo,,bar'.split (',')=).
+	In the above example, a string is being split using a regular expression splitter that matches a single comma. In compliant JavaScript interpreters, the above statement would produce a result array with the value =['foo','','bar']= - exactly the same result as if you used a simple string splitter (i.e. ='foo,,bar'.split (',')=).
 
 	For a reason that is hard to fathom, the JScript interpreter omits the second empty string element to produce, instead, the result =['foo','bar']=. It's hard to justify or defend this implementation choice, as it wreaks havoc with using the =split= instance method to parse lists of values that were serialized using the =Array= object's =join= instance method, and where some of the values were empty strings.
 

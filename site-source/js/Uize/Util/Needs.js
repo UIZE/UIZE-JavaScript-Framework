@@ -358,7 +358,7 @@
 					);
 					...........................................................................................
 
-					In the above example, a provider is being registered for the "auditSubsystem" need. Then, we are using the =once= method to register a handler that should be executed once the "auditSubsystem" need has been provided (ie. the value of the =auditSubsystem= property has become truthy). Registering this handler has no effect on the need being provided - if no needer were ever registered for the "auditSubsystem" need, then the provider would never get executed and our observer code would also not get executed. Finally, we're registering a needer for the "auditSubsystem" need. Once this has invoked the provider for the need and the provider has completed providing the "auditSubsystem" need, then our observer code will be executed and we will see the alert dialog.
+					In the above example, a provider is being registered for the "auditSubsystem" need. Then, we are using the =once= method to register a handler that should be executed once the "auditSubsystem" need has been provided (i.e. the value of the =auditSubsystem= property has become truthy). Registering this handler has no effect on the need being provided - if no needer were ever registered for the "auditSubsystem" need, then the provider would never get executed and our observer code would also not get executed. Finally, we're registering a needer for the "auditSubsystem" need. Once this has invoked the provider for the need and the provider has completed providing the "auditSubsystem" need, then our observer code will be executed and we will see the alert dialog.
 */
 
 Uize.module ({

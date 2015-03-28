@@ -161,7 +161,7 @@ Uize.module ({
 							'Namespace.Test',
 							false
 						],
-						['A module under the test namespace (eg. Namespace.Test) for a given root namespace (eg. Namespace) is not considered a test module if the first module name segment (eg. Foo) under the test namespace is not the root namespace',
+						['A module under the test namespace (e.g. Namespace.Test) for a given root namespace (e.g. Namespace) is not considered a test module if the first module name segment (e.g. Foo) under the test namespace is not the root namespace',
 							'Namespace.Test.Foo',
 							false
 						]

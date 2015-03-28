@@ -36,7 +36,7 @@
 			A Framework for Defining Color Encodings
 				Colors can be represented using different formats and color models. In UIZE, the combination of a color space and format is called a color encoding.
 
-				The =Uize.Color= object supports a wide variety of built-in `color encodings`. Multiple encodings often exist for the same color space. For example, the =#hex= (eg. =#ff00ff=), =RGB string= (eg. =rgb(255,0,255)=), and =name= (eg. =fuchsia=) encodings are all encodings for the =sRGB= color space.
+				The =Uize.Color= object supports a wide variety of built-in `color encodings`. Multiple encodings often exist for the same color space. For example, the =#hex= (e.g. =#ff00ff=), =RGB string= (e.g. =rgb(255,0,255)=), and =name= (e.g. =fuchsia=) encodings are all encodings for the =sRGB= color space.
 
 				............................................................
 				<< table >>
@@ -99,10 +99,10 @@
 				- doesn't modify internal tuple values, only for output
 				- similarly, encoding into a different color space doesn't modify internal tuple values
 			- changing color encoding / converting colors to different color spaces
-			- manipulating colors (eg. blending, mixing, sorting)
+			- manipulating colors (e.g. blending, mixing, sorting)
 
 			- defining custom encodings
-				- the tuplet string encoding naming scheme (eg. "RGB string")
+				- the tuplet string encoding naming scheme (e.g. "RGB string")
 			- explain some things about blending...
 				- when blending two colors, first color is authority on encoding (and, therefore, color space)
 				- when blending colors, they are blended in the color space of the encoding (not the target encoding)
@@ -374,7 +374,7 @@ Uize.module ({
 							tupleARRAY = myColor.getTuple (encodingOrColorSpaceSTR);
 							........................................................
 
-							If the color space of the instance's current encoding is the same as the color space defined by the =encodingOrColorSpaceSTR= parameter, then the value of the =tuple= instance property will be returned as is (ie. no transformation is performed). Otherwise, the necessary conversion functions will be employed to transform the instance's tuple for use in the desired color space.
+							If the color space of the instance's current encoding is the same as the color space defined by the =encodingOrColorSpaceSTR= parameter, then the value of the =tuple= instance property will be returned as is (i.e. no transformation is performed). Otherwise, the necessary conversion functions will be employed to transform the instance's tuple for use in the desired color space.
 
 							This method can be used by other methods that wish to blend, mix, or otherwise process multiple tuples in a single color space.
 
@@ -383,7 +383,7 @@ Uize.module ({
 							tupleARRAY = myColor.getTuple ();
 							.................................
 
-							When no =encodingOrColorSpaceSTR= parameter is specified, then the value of the =tuple= instance property will be returned (ie. no transformation is performed).
+							When no =encodingOrColorSpaceSTR= parameter is specified, then the value of the =tuple= instance property will be returned (i.e. no transformation is performed).
 
 							EXAMPLE
 							................................
@@ -936,7 +936,7 @@ Uize.module ({
 						/*?
 							Color Encodings
 								hex
-									A six digit, three digit, or one digit hexadecimal string (eg. the color chartreuse is encoded as ='7fff00'=).
+									A six digit, three digit, or one digit hexadecimal string (e.g. the color chartreuse is encoded as ='7fff00'=).
 
 									Encoding
 										When a color is encoded as =hex=, the hexadecimal number always contains six digits and is all lowercase.
@@ -954,7 +954,7 @@ Uize.module ({
 										...........................
 
 									Decoding
-										When a color is decoded from =hex=, the hexadecimal number may be specified using only one digit, three digits, or six digits, the "#" (pound) character is optional, and the digits may be in upper, lower, or mixed case (ie. *not* case sensitive).
+										When a color is decoded from =hex=, the hexadecimal number may be specified using only one digit, three digits, or six digits, the "#" (pound) character is optional, and the digits may be in upper, lower, or mixed case (i.e. *not* case sensitive).
 
 										.................................................................................
 										<< table >>
@@ -975,7 +975,7 @@ Uize.module ({
 						/*?
 							Color Encodings
 								#hex
-									A six digit, three digit, or one digit hexadecimal string, with a "#" (pound) character prefixed (eg. the color chartreuse is encoded as ='#7fff00'=).
+									A six digit, three digit, or one digit hexadecimal string, with a "#" (pound) character prefixed (e.g. the color chartreuse is encoded as ='#7fff00'=).
 
 									Encoding
 										When a color is encoded as =#hex=, the hexadecimal number always contains six digits, is all lowercase, and is prefixed with a "#" (pound) character.
@@ -993,7 +993,7 @@ Uize.module ({
 										............................
 
 									Decoding
-										When a color is decoded from =#hex=, the hexadecimal number may be specified using only one digit, three digits, or six digits, the "#" (pound) character is optional, and the digits may be in upper, lower, or mixed case (ie. *not* case sensitive).
+										When a color is decoded from =#hex=, the hexadecimal number may be specified using only one digit, three digits, or six digits, the "#" (pound) character is optional, and the digits may be in upper, lower, or mixed case (i.e. *not* case sensitive).
 
 										.................................................................................
 										<< table >>
@@ -1029,7 +1029,7 @@ Uize.module ({
 						/*?
 							Color Encodings
 								name
-									A string, representing the name for a color (eg. the color chartreuse is encoded as ='chartreuse'=).
+									A string, representing the name for a color (e.g. the color chartreuse is encoded as ='chartreuse'=).
 
 									Encoding
 										When a color is encoded as =name=, the name string is camelCase. If no named color is defined that matches the color being encoded, then the encoding source will be encoded as =hex= as a fallback.
@@ -1047,7 +1047,7 @@ Uize.module ({
 										............................
 
 									Decoding
-										When a color is decoded from =name=, the name may be in upper, lower, or mixed case (ie. *not* case sensitive). If no named color is defined by the name specified, then the color will be decoded as black (in the =sRGB= color space).
+										When a color is decoded from =name=, the name may be in upper, lower, or mixed case (i.e. *not* case sensitive). If no named color is defined by the name specified, then the color will be decoded as black (in the =sRGB= color space).
 
 										EXAMPLES
 										.......
@@ -1070,7 +1070,7 @@ Uize.module ({
 						/*?
 							Color Encodings
 								RGB array
-									An array, containing three elements for the red, green, and blue channels of an =sRGB= color, whose values are integers (eg. the color chartreuse is encoded as =[127,255,0]=).
+									An array, containing three elements for the red, green, and blue channels of an =sRGB= color, whose values are integers (e.g. the color chartreuse is encoded as =[127,255,0]=).
 
 									Encoding
 										When a color is encoded as =RGB array=, the resulting array is made up of three number type elements that represent the values of the source color's red, green, and blue channels, respectively.
@@ -1114,7 +1114,7 @@ Uize.module ({
 						/*?
 							Color Encodings
 								RGB int
-									An integer in the range of =0= to =16777215=, corresponding in value to the hexadecimal RGB representation of a color (eg. the color chartreuse is encoded as =8388352=, which is equivalent to the hex number representation =0x7fff00=).
+									An integer in the range of =0= to =16777215=, corresponding in value to the hexadecimal RGB representation of a color (e.g. the color chartreuse is encoded as =8388352=, which is equivalent to the hex number representation =0x7fff00=).
 
 									Encoding
 										When a color is encoded as =RGB int=, it is calculated as =red &#42; 65536 + green &#42; 255 + blue=.
@@ -1152,7 +1152,7 @@ Uize.module ({
 						/*?
 							Color Encodings
 								RGB object
-									An object, containing =red=, =green=, and =blue= properties for the three =sRGB= channels, whose values are integers (eg. the color chartreuse is encoded as ={red:127,green:255,blue:0}=).
+									An object, containing =red=, =green=, and =blue= properties for the three =sRGB= channels, whose values are integers (e.g. the color chartreuse is encoded as ={red:127,green:255,blue:0}=).
 
 									Encoding
 										When a color is encoded as =RGB object=, the resulting object will contain the three number type properties =red=, =green=, and =blue=, reflecting the values of the source color's red, green, and blue channels.
@@ -1194,7 +1194,7 @@ Uize.module ({
 						/*?
 							Color Encodings
 								RGB string
-									An =Rgb(...)= formatted CSS color style property value (eg. the color chartreuse is encoded as ='rgb(127,255,0)'=)
+									An =Rgb(...)= formatted CSS color style property value (e.g. the color chartreuse is encoded as ='rgb(127,255,0)'=)
 
 									Encoding
 										When a color is encoded as =RGB string=, the resulting string will always be all lowercase, without any spaces, and the values of the red, green, and blue components will be rounded and constrained to the range of =0= to =255=.
@@ -1212,7 +1212,7 @@ Uize.module ({
 										.....................................
 
 									Decoding
-										When a color is decoded from =RGB string=, the string may contain separating spaces, and may be in upper, lower, or mixed case (ie. *not* case sensitive).
+										When a color is decoded from =RGB string=, the string may contain separating spaces, and may be in upper, lower, or mixed case (i.e. *not* case sensitive).
 
 										FUCHSIA
 										.....................
@@ -1230,7 +1230,7 @@ Uize.module ({
 						/*?
 							Color Encodings
 								HSL array
-									An array, containing three elements for hue, saturation, and lightness, whose values may be floating point numbers (eg. the color chartreuse is encoded as =[90.11764705882354,100,50]=), and that specifies a color in the =HSL= color space.
+									An array, containing three elements for hue, saturation, and lightness, whose values may be floating point numbers (e.g. the color chartreuse is encoded as =[90.11764705882354,100,50]=), and that specifies a color in the =HSL= color space.
 
 									Encoding
 										When a color is encoded as =HSL array=, the resulting array is made up of three number type elements that represent the values of the source color's hue, saturation, and lightness, respectively.
@@ -1271,7 +1271,7 @@ Uize.module ({
 						/*?
 							Color Encodings
 								HSL object
-									An object, containing =hue=, =saturation=, and =lightness= properties, whose values may be floating point numbers (eg. the color chartreuse is encoded as ={hue:90.11764705882354,saturation:100,lightness:50}=), and that specifies a color in the =HSL= color space.
+									An object, containing =hue=, =saturation=, and =lightness= properties, whose values may be floating point numbers (e.g. the color chartreuse is encoded as ={hue:90.11764705882354,saturation:100,lightness:50}=), and that specifies a color in the =HSL= color space.
 
 									Encoding
 										When a color is encoded as =HSL object=, the resulting object will contain the three number type properties =hue=, =saturation=, and =lightness=, reflecting the values of the source color's hue, saturation, and lightness.
@@ -1320,7 +1320,7 @@ Uize.module ({
 						/*?
 							Color Encodings
 								HSL string
-									An =Hsl(...)= formatted CSS color style property value (eg. the color chartreuse is encoded as ='hsl(90,100%,50%)'=) that specifies a color in the =HSL= color space.
+									An =Hsl(...)= formatted CSS color style property value (e.g. the color chartreuse is encoded as ='hsl(90,100%,50%)'=) that specifies a color in the =HSL= color space.
 
 									Encoding
 										When a color is encoded as =HSL string=, the resulting string will always be all lowercase, without any spaces.
@@ -1343,7 +1343,7 @@ Uize.module ({
 										- because encoding as =HSL string= rounds the values for hue, saturation, and lightness, colors encoded as =HSL string= may not produce exactly the same original color when decoding the encoded =HSL string=
 
 									Decoding
-										When a color is decoded from =HSL string=, the string may contain separating spaces, may be in upper, lower, or mixed case (ie. *not* case sensitive), and the "%" (percent symbol) character for the saturation and lightness values may be omitted.
+										When a color is decoded from =HSL string=, the string may contain separating spaces, may be in upper, lower, or mixed case (i.e. *not* case sensitive), and the "%" (percent symbol) character for the saturation and lightness values may be omitted.
 
 										FUCHSIA
 										........................
@@ -1384,7 +1384,7 @@ Uize.module ({
 
 								- =colorSpace= - This is the name of the color space that is associated with the encoding, and should be one of the `color spaces` defined in the =Uize.Color.colorSpaces= static property.
 
-								- =from (decoder function)= - This is a function that should set the values of the elements of the provided tuple array, based upon the provided color value. The function should expect two parameters: 1) the color value, and 2) the tuple. The function should decode (ie. process or parse) the color value as needed in order to set the appropriate values for the components of the color in the provided tuple array. The function does not need to return anything, and anything it returns will be ignored.
+								- =from (decoder function)= - This is a function that should set the values of the elements of the provided tuple array, based upon the provided color value. The function should expect two parameters: 1) the color value, and 2) the tuple. The function should decode (i.e. process or parse) the color value as needed in order to set the appropriate values for the components of the color in the provided tuple array. The function does not need to return anything, and anything it returns will be ignored.
 
 								- =to (encoder function)= - This is a function that should use the values for the components of the color in the provided tuple array, and encode them as needed in order to produce a color value. The encoded color value should then be returned by the function.
 					*/

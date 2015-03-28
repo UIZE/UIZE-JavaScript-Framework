@@ -42,7 +42,7 @@ Uize.module ({
 		/*** Some Setup ***/
 			_window.handleResponse = function () {
 				/*
-					a dummy version of this function in case the user navigates back to a page using this code and a cached iframe server response tries to call this function (ie. no requests have been made yet)
+					a dummy version of this function in case the user navigates back to a page using this code and a cached iframe server response tries to call this function (i.e. no requests have been made yet)
 				*/
 			};
 

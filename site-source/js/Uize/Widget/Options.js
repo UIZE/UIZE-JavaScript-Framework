@@ -404,7 +404,7 @@ Uize.module ({
 								NOTES
 								- the initial value is =null=
 								- whenever the =value= state property is set, this property is also set to the same value
-								- in "resting" state (ie. when the user is not interacting with the widget), this property will have the same value as the =value= state property
+								- in "resting" state (i.e. when the user is not interacting with the widget), this property will have the same value as the =value= state property
 					*/
 				},
 				_tentativeValueNo:{

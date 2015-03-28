@@ -95,11 +95,11 @@ Uize.module ({
 					onChange:function () {_updateUiState (this)},
 					value:'info'
 					/* NOTES: states that are supported
-						- info (eg. "i" in blue circle)
-						- warning (eg. "!" in orange triangle)
-						- error (eg. "!" in red triangle, or "x" in red circle)
-						- confirm (eg. "?" in gray speech bubble)
-						- success (eg. green check mark, or check mark in a circle)
+						- info (e.g. "i" in blue circle)
+						- warning (e.g. "!" in orange triangle)
+						- error (e.g. "!" in red triangle, or "x" in red circle)
+						- confirm (e.g. "?" in gray speech bubble)
+						- success (e.g. green check mark, or check mark in a circle)
 					*/
 				}
 			}

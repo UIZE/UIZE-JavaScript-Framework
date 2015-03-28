@@ -7,7 +7,7 @@ Achieve Parity for Bindings
 		How this binding type is compiled with have to be affected by the node type, since the current runtime binding logic leverages the =setNodeValue= method, and this method is an abstraction that provides different handling for different node types.
 
 		Nodes Without Value Interface
-			For nodes without a value interface (such as =div= tag or =span= tag nodes), the value binding type will be compiled to an innerHTML replacement with literal value display (ie. entity-escaped HTML delimiters).
+			For nodes without a value interface (such as =div= tag or =span= tag nodes), the value binding type will be compiled to an innerHTML replacement with literal value display (i.e. entity-escaped HTML delimiters).
 
 		Nodes With Value Interface
 			For some of the node types that can have this binding, it will not be easy to achieve a compiled template equivalent.

@@ -670,7 +670,7 @@ Uize.module ({
 							treeOBJ = Uize.Dom.Tree.getTreeFromList (nodeSTRorOBJ);
 							........................................................
 
-							The =nodeSTRorOBJ= parameter should specify either a list node (ie. a =ul= or =ol= tag) or the immediate parent node of a list node. List type (unordered or ordered) does not affect the data in the `tree data object` returned by this method, and a hierarchical list can mix different types of lists.
+							The =nodeSTRorOBJ= parameter should specify either a list node (i.e. a =ul= or =ol= tag) or the immediate parent node of a list node. List type (unordered or ordered) does not affect the data in the `tree data object` returned by this method, and a hierarchical list can mix different types of lists.
 
 							EXAMPLE
 

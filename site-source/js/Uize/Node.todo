@@ -194,7 +194,7 @@ Uize.Node.getProperty
 
 Uize.Node.find
 	- provide a way to search through a specified set of nodes (so that one can chain searches)
-	- think about supporting node blob for root, or test object for root (ie. invoke find)
+	- think about supporting node blob for root, or test object for root (i.e. invoke find)
 	- think about testing...
 		- style properties
 		- calculated / computed style properties
@@ -211,29 +211,29 @@ Uize.Node.setStyle
 	- when setting opacity, if opacity is 1, set opacity properties to '' (empty string). Some browsers seem to still be processing opacity when set to 1, which is slowing down render time.
 
 Uize.Node.getStyle
-	- it would be useful to have a way to parse out a number from style attribute values that are denominated in px (eg. 128px -> 128, empty string -> 0)
+	- it would be useful to have a way to parse out a number from style attribute values that are denominated in px (e.g. 128px -> 128, empty string -> 0)
 
 Uize.Node.injectHtml
 	- support a node reference, or document fragment for html parameter
 
-- for Uize.Node.getCoords, consider deprecating some of the properties of the return object (eg. right, bottom) to simplify the interface (first investigate extent of usage)
+- for Uize.Node.getCoords, consider deprecating some of the properties of the return object (e.g. right, bottom) to simplify the interface (first investigate extent of usage)
 - for Uize.Node.isNode, is it possible to use instanceof in some way? What about the cross frames issue in FF?
-- consider "fixing" Uize.Node.doRectanglesOverlap method to be able to work as well for floating point and relative coordinates (ie. not just pixels). Could it then be used in Ben's DT code?
+- consider "fixing" Uize.Node.doRectanglesOverlap method to be able to work as well for floating point and relative coordinates (i.e. not just pixels). Could it then be used in Ben's DT code?
 - for Uize.Node.getByMatch, consider supporting regular expressions in the properties match object
 - rename: getDimensions -> getSize
 - new methods
 	- setSize
-- Uize.Node.wire to support array for _eventName parameters (ie. change to just _event)
+- Uize.Node.wire to support array for _eventName parameters (i.e. change to just _event)
 
 Refactoring Suggestions
 	=Uize.Node= has become sort of a catch-all for any DOM-related method and as such has grown rather large. =Uize.Widget= doesn't need all of the methods of =Uize.Node=, yet it has to pull everything in. So the proposal is to create a new DOM-specific namespace and parcel out =Uize.Node= to smaller modules.
-	
+
 	Uize.Dom
 		A suggested name for the new DOM-specific namespace.
-		
+
 	Uize.Dom.Common
 		Essentially the commonly-used methods (majority of which are used by =Uize.Widget=)
-		
+
 		Methods:
 		- =display=
 		- =doForAll=
@@ -257,21 +257,21 @@ Refactoring Suggestions
 		- =unwire=
 		- =unwireEventsByOwnerId= (used by =Uize.Node.unwire=)
 		- wire
-		
+
 		Static Properties:
 		- =ieMajorVersion=
 		- =isIe=
 		- =isMozilla=
 		- =isSfari=
-		
+
 		Methods that aren't used by =Uize.Widget=, but don't have a home:
 		- =getDocumentScrollElement=
 		- =getText=
 		- =showClickable=
-		
+
 	Uize.Dom.Pos
 		Essentially all of the positioning stuff
-		
+
 		Methods
 		- =centerInWindow=
 		- =getCoords=
@@ -280,9 +280,9 @@ Refactoring Suggestions
 		- =setAbsPos=
 		- =setAbsPosAdjacentTo=
 		- =setCoords=
-		
+
 	Uize.Math.LogicalPos
 		Added to this existing module
-		
+
 		Methods
 		- =doRectanglesOverlap=

@@ -122,7 +122,7 @@ Uize.module ({
 								true
 							],
 
-						/*** test support for integer state values (ie. more than two states) ***/
+						/*** test support for integer state values (i.e. more than two states) ***/
 							['The integer 0 is returned when the node\'s className string contains the first of three state classes',
 								[_mockNodeWithClassName ('BEFORE warning AFTER'),['warning','nonFatalError','fatalError']],
 								0

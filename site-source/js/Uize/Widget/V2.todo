@@ -27,7 +27,7 @@ Implement Next Generation Localization
 		There should be a =locale= state property, whose value should affect the loading a locale strings module for the class.
 
 		Locale and Locale Strings Module
-			Whenever the value of the =locale= state property changes, a locale stirngs module should be loaded if necessary (ie. not already loaded), and the values of the locale strings from the module should be used to set the corresponding locale string state properties on the instance.
+			Whenever the value of the =locale= state property changes, a locale stirngs module should be loaded if necessary (i.e. not already loaded), and the values of the locale strings from the module should be used to set the corresponding locale string state properties on the instance.
 
 			The =locale= state property should be a tree-inherited property, so that a locale change on a widget is propagated to all its child widgets, which are set by default to inherit the value of the property from the parent. Optionally, any widget can choose to not inherit the parent's value and explicitly set their own.
 

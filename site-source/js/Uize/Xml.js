@@ -291,7 +291,7 @@ Uize.module ({
 
 							NOTES
 							- all attribute values are enclosed in double quotes
-							- empty string attribute values are always fully serialized (eg. =myattribute&#61;""=)
+							- empty string attribute values are always fully serialized (e.g. =myattribute&#61;""=)
 							- see also the corresponding =Uize.Xml.fromParams= static method
 				*/
 			}

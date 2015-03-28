@@ -19,7 +19,7 @@ myWidget.once (
 );
 ........................................................
 
-In the above example, a handler is being registered to be executed once the widget =myWidget= has been wired (ie. the value of its =wired= state property hecomes =true=).
+In the above example, a handler is being registered to be executed once the widget =myWidget= has been wired (i.e. the value of its =wired= state property hecomes =true=).
 
 Return Value
 	The =once= method returns a wirings object that can be supplied to the =unwire= method in order to unwire the handler, in the unlikely event that one may wish to remove the handler before the property's value has become truthy.

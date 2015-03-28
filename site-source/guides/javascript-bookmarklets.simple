@@ -92,17 +92,17 @@ Useful Troubleshooting Bookmarklets
 		<< HTML >>
 
 		code::
-			<a href="javascript:(function(){var _a=prompt(&apos;Enter a module name (eg. Uize.Array.Sort)...&apos;,&apos;&apos;);if(_a){var _b=1000,_c=750,_d=window.screen,_e=window.open(&apos;http://www.uize.com/reference/&apos;+_a+&apos;.html&apos;,&apos;uizeReference&apos;,[&apos;width=&apos;+_b,&apos;height=&apos;+_c,&apos;left=&apos;+Math.max((_d.width-_b-10)&gt;&gt;1,0),&apos;top=&apos;+Math.max((_d.height-_c-40)&gt;&gt;1,0),&apos;toolbar=no&apos;,&apos;location=no&apos;,&apos;directories=no&apos;,&apos;status=no&apos;,&apos;menubar=no&apos;,&apos;scrollbars=yes&apos;].join(&apos;,&apos;));_e.focus();}})();">MODULE REFERENCE</a> &nbsp;&larr; drag the link to your bookmarks toolbar (or click it to try it now)
+			<a href="javascript:(function(){var _a=prompt(&apos;Enter a module name (e.g. Uize.Array.Sort)...&apos;,&apos;&apos;);if(_a){var _b=1000,_c=750,_d=window.screen,_e=window.open(&apos;http://www.uize.com/reference/&apos;+_a+&apos;.html&apos;,&apos;uizeReference&apos;,[&apos;width=&apos;+_b,&apos;height=&apos;+_c,&apos;left=&apos;+Math.max((_d.width-_b-10)&gt;&gt;1,0),&apos;top=&apos;+Math.max((_d.height-_c-40)&gt;&gt;1,0),&apos;toolbar=no&apos;,&apos;location=no&apos;,&apos;directories=no&apos;,&apos;status=no&apos;,&apos;menubar=no&apos;,&apos;scrollbars=yes&apos;].join(&apos;,&apos;));_e.focus();}})();">MODULE REFERENCE</a> &nbsp;&larr; drag the link to your bookmarks toolbar (or click it to try it now)
 		................................................................................................................
 		================================================================================================================
 
 		### scrunched, but pre-XML encoded
-			javascript:(function(){var _a=prompt('Enter a module name (eg. Uize.Array.Sort)...','');if(_a){var _b=1000,_c=750,_d=window.screen,_e=window.open('http://www.uize.com/reference/'+_a+'.html','uizeReference',['width='+_b,'height='+_c,'left='+Math.max((_d.width-_b-10)>>1,0),'top='+Math.max((_d.height-_c-40)>>1,0),'toolbar=no','location=no','directories=no','status=no','menubar=no','scrollbars=yes'].join(','));_e.focus();}})();
+			javascript:(function(){var _a=prompt('Enter a module name (e.g. Uize.Array.Sort)...','');if(_a){var _b=1000,_c=750,_d=window.screen,_e=window.open('http://www.uize.com/reference/'+_a+'.html','uizeReference',['width='+_b,'height='+_c,'left='+Math.max((_d.width-_b-10)>>1,0),'top='+Math.max((_d.height-_c-40)>>1,0),'toolbar=no','location=no','directories=no','status=no','menubar=no','scrollbars=yes'].join(','));_e.focus();}})();
 
 		BOOKMARKLET SOURCE CODE
 		...
 		(function () {
-			var _moduleName = prompt ('Enter a module name (eg. Uize.Array.Sort)...','');
+			var _moduleName = prompt ('Enter a module name (e.g. Uize.Array.Sort)...','');
 			if (_moduleName) {
 				var
 					_width = 1000,

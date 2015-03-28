@@ -180,7 +180,7 @@ State Properties and Binding
 	Optimized onChange Handler
 		All three of these properties share the same reference to the =calculateVolume= function, which gets called only once during a set if any or all of the properties change value during the set (this is a smart optimization of UIZE).
 
-		The =calculateVolume= function gets called as though an instance method (ie. with the instance as context), so it can use the =this= keyword. It uses the =get= instance method to obtain the current values of the three dimension properties to calculate the volume of the room and then sets a new value on the =volume= state property, making this property effectively a derived property.
+		The =calculateVolume= function gets called as though an instance method (i.e. with the instance as context), so it can use the =this= keyword. It uses the =get= instance method to obtain the current values of the three dimension properties to calculate the volume of the room and then sets a new value on the =volume= state property, making this property effectively a derived property.
 
 	Looking at Some Outcomes
 		Now let's take a look at what happens when we try setting the values of the state properties in a few different situations.
@@ -244,8 +244,8 @@ State Properties and Binding
 
 		Property binding utility modules include...
 
-		- =Uize.Util.Coupler= - lets you couple two or more instances (of any class) together, synchronizing a set of any number of their state properties between all instances (eg. synchronizing the =width=, =depth=, and =height= properties across any number of different =Room= instances)
-		- =Uize.Util.PropertyAdapter= - lets you connect any two properties of any two instance so that they remain synchronized bi-directionally, with an optional value transformer that can allows for the value to be transformed in different ways for each direction (eg. synchronizing two color properties where the color is stored in different formats in each of the properties)
+		- =Uize.Util.Coupler= - lets you couple two or more instances (of any class) together, synchronizing a set of any number of their state properties between all instances (e.g. synchronizing the =width=, =depth=, and =height= properties across any number of different =Room= instances)
+		- =Uize.Util.PropertyAdapter= - lets you connect any two properties of any two instance so that they remain synchronized bi-directionally, with an optional value transformer that can allows for the value to be transformed in different ways for each direction (e.g. synchronizing two color properties where the color is stored in different formats in each of the properties)
 
 	For a more detailed discussion of the state properties system, consult the [[state-properties.html][State Properties]] guide.
 
@@ -619,7 +619,7 @@ Powerful Build System ~~ Build System
 		- =integrated with development server= - the build system integrates with the `development server` that runs in NodeJS and takes care of automatically rebuilding any files that have become invalidated by changes made to any source files from which they may be derived - directly or indirectly
 		- =builds incrementally= - the build system can build files incrementally as needed and based upon changes that may invalidate one or more built files
 		- =dependency based= - the build system is entirely dependency based, so there's no more worries about things being out-of-date because you couldn't remember the right set of build steps - all the dependencies for a build product are known and can be traced recursively, so all build steps necessary to update a file are performed in the correct order, and only as much work as is necessary is done
-		- =one-to-many, many-to-one= - the build system supports one-to-many and many-to-one build relationships, so one file can be involved as a dependency in building many other files (eg. a source JavaScript file is used for building a compressed JavaScript file, a reference documentation file, a source code viewer HTML file, etc.), and many files can be used in building a single file (eg. a JavaScript source file and a documentation template file are involved in building a reference documentation HTML file)
+		- =one-to-many, many-to-one= - the build system supports one-to-many and many-to-one build relationships, so one file can be involved as a dependency in building many other files (e.g. a source JavaScript file is used for building a compressed JavaScript file, a reference documentation file, a source code viewer HTML file, etc.), and many files can be used in building a single file (e.g. a JavaScript source file and a documentation template file are involved in building a reference documentation HTML file)
 		- =entirely written in JS= - the build system is written entirely in JavaScript, which means you can leverage all your JavaScript skills in configuring and extending it. It also means that any of the UIZE modules or modules from your own project can be loaded during the build process so you can use them in writing your build processes
 		- =works in NodeJS as well as WSH (Windows Script Host)= - because the build system uses a file system service that abstracts the environment's file system API, the build system can be run in NodeJS, WSH (Windows Script Host), or any environment for which an adapter has been written for the file system service
 		- =blazingly fast= - the build system is written from the ground up to be highly efficient and blazingly fast, and its incremental build characteristic means you don't waste time rebuilding stuff that's entirely unrelated to what you've modified or stuff that may already be completely current
@@ -639,7 +639,7 @@ Code Compression
 
 	Obfuscation that is provided by the Scruncher is an artifact of the code compression process, and the Scruncher is not designed to provide robust obfuscation.
 
-	The two examples below show first an extract of JavaScript code, and second the compressed and obfuscated form of that code. Notice how, in the compressed version of the code, private identifiers that were prefixed with an underscore in the source code have been reduced down to enumerated forms (eg. =_a=, =_b=, =_c=). For the sake of readability in this example, the =LineCompacting= setting is turned off for the compressed code.
+	The two examples below show first an extract of JavaScript code, and second the compressed and obfuscated form of that code. Notice how, in the compressed version of the code, private identifiers that were prefixed with an underscore in the source code have been reduced down to enumerated forms (e.g. =_a=, =_b=, =_c=). For the sake of readability in this example, the =LineCompacting= setting is turned off for the compressed code.
 
 	SOURCE CODE
 	..............................................................................................
@@ -690,7 +690,7 @@ Code Compression
 Dev Server (NodeJS) ~~ Development Server
 	UIZE provides a NodeJS based development server that allows a project that involves many different types of built files to be developed without having to constantly run build scripts between changes.
 
-	The development server utilizes the `powerful build system` to build derived files whenever they are requested and are not current (ie. some of their dependencies have been modified since the last time they were built). The development server is used in the development of the UIZE framework, itself, and it can be used for any project for which static files will be generated as part of a build process.
+	The development server utilizes the `powerful build system` to build derived files whenever they are requested and are not current (i.e. some of their dependencies have been modified since the last time they were built). The development server is used in the development of the UIZE framework, itself, and it can be used for any project for which static files will be generated as part of a build process.
 
 	With the right configuration of your application server, you can pull all the static files that would be built as part of your build process from the development server running on your localhost. That way, you get the best of both worlds - you can keep using your existing server platform while using the UIZE development server for pre-processing of source code for static files.
 
@@ -821,7 +821,7 @@ More Features
 		- get an array of the values of an object's properties
 		- test if an object is empty
 		- get the min or max values from an array of numbers
-		- reorder the elements of an array (eg. reverse, inside out, jumbled, etc.)
+		- reorder the elements of an array (e.g. reverse, inside out, jumbled, etc.)
 
 		For a more in-depth discussion, consult the reference for the =Uize.Data= module.
 

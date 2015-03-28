@@ -211,7 +211,7 @@ Uize.module ({
 					/*?
 						Instance Methods
 							expectNonNull
-								Returns a boolean, indicating whether or not the specified value is non-null (ie. not =null= or =undefined=).
+								Returns a boolean, indicating whether or not the specified value is non-null (i.e. not =null= or =undefined=).
 
 								SYNTAX
 								.................................................
@@ -256,7 +256,7 @@ Uize.module ({
 					/*?
 						Instance Methods
 							expectNully
-								Returns a boolean, indicating whether or not the specified value is null (ie. =null= or =undefined=).
+								Returns a boolean, indicating whether or not the specified value is null (i.e. =null= or =undefined=).
 
 								SYNTAX
 								.................................................
@@ -409,7 +409,7 @@ Uize.module ({
 						/*?
 							Instance Methods
 								expectBoolean
-									Returns a boolean, indicating whether or not the specified value is a boolean primitive (ie. of type ='boolean'=).
+									Returns a boolean, indicating whether or not the specified value is a boolean primitive (i.e. of type ='boolean'=).
 
 									SYNTAX
 									.................................................
@@ -432,7 +432,7 @@ Uize.module ({
 						/*?
 							Instance Methods
 								expectFunction
-									Returns a boolean, indicating whether or not the specified value is a function (ie. of type ='function'=).
+									Returns a boolean, indicating whether or not the specified value is a function (i.e. of type ='function'=).
 
 									SYNTAX
 									..................................................
@@ -473,7 +473,7 @@ Uize.module ({
 						/*?
 							Instance Methods
 								expectNumber
-									Returns a boolean, indicating whether or not the specified value is a number primitive (ie. of type ='number'=).
+									Returns a boolean, indicating whether or not the specified value is a number primitive (i.e. of type ='number'=).
 
 									SYNTAX
 									................................................
@@ -505,7 +505,7 @@ Uize.module ({
 						/*?
 							Instance Methods
 								expectObject
-									Returns a boolean, indicating whether or not the specified value is an object (ie. of type ='object'=).
+									Returns a boolean, indicating whether or not the specified value is an object (i.e. of type ='object'=).
 
 									SYNTAX
 									................................................
@@ -573,7 +573,7 @@ Uize.module ({
 						/*?
 							Instance Methods
 								expectString
-									Returns a boolean, indicating whether or not the specified value is a string primitive (ie. of type ='string'=).
+									Returns a boolean, indicating whether or not the specified value is a string primitive (i.e. of type ='string'=).
 
 									SYNTAX
 									................................................
@@ -1715,7 +1715,7 @@ Uize.module ({
 								}
 								.............................
 
-								The value of the =propertyFullNameSTR= parameter should be a string that fully qualifies the path for referencing a property in the global context (eg. ='Uize.Test.resolve'=). The =Uize.Test.splitHostAndProperty= method splits this string into host and property strings, and packages these two string values into an object. Supplied our example value of ='Uize.Test.resolve'=, the =Uize.Test.splitHostAndProperty= method would return the object ={host:'Uize.Test',property:'declare'}=.
+								The value of the =propertyFullNameSTR= parameter should be a string that fully qualifies the path for referencing a property in the global context (e.g. ='Uize.Test.resolve'=). The =Uize.Test.splitHostAndProperty= method splits this string into host and property strings, and packages these two string values into an object. Supplied our example value of ='Uize.Test.resolve'=, the =Uize.Test.splitHostAndProperty= method would return the object ={host:'Uize.Test',property:'declare'}=.
 					*/
 				},
 
@@ -2044,7 +2044,7 @@ Uize.module ({
 												- =expectedResultANYTYPE= - the result that is expected to be returned by the static method when calling it with the arguments specified for the case
 
 											Asynchronous or Non-deterministic Cases
-												When a case is either asynchronous or non-deterministic (ie. you can't be guaranteed to always get the same result returned for the same argument values), then you cannot use the concise array syntax for declaring the case as you can with `synchronous and deterministic cases`.
+												When a case is either asynchronous or non-deterministic (i.e. you can't be guaranteed to always get the same result returned for the same argument values), then you cannot use the concise array syntax for declaring the case as you can with `synchronous and deterministic cases`.
 
 												Instead, you can use the object syntax accepted for the =testOBJ= parameter of the =Uize.Test.resolve= static method, or you can provide a =Uize.Test= subclass (created by one of the `test class factory methods`, or otherwise created).
 

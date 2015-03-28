@@ -153,7 +153,7 @@ UIZE Config Options
 		Template Inputs Properties
 			When a head comment template is processed, it will be provided with the following input properties...
 
-			- =creationYear= - the creation year (eg. =2013=) for the generated module
+			- =creationYear= - the creation year (e.g. =2013=) for the generated module
 			- =moduleName= - the name of the module being generated
 
 		NOTES

@@ -18,7 +18,7 @@
 
 /*?
 	Introduction
-		The =Uize.Build.Files.JstDerivedPages= package provides a method to recurse the source folder for a site and build pages derived from JST (=.jst=) files that have a type sub-extension (eg. =.html.jst= files).
+		The =Uize.Build.Files.JstDerivedPages= package provides a method to recurse the source folder for a site and build pages derived from JST (=.jst=) files that have a type sub-extension (e.g. =.html.jst= files).
 
 		*DEVELOPERS:* `Chris van Rensburg`
 */

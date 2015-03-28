@@ -19,9 +19,9 @@ NEW EXAMPLE: Decorated Confirm Dialog
 	[[../examples/decorated-confirm.html][CHECK IT OUT]]
 
 IMPROVED MODULE: Uize.Json
-	The =Uize.Json= module now supports serializing of values that are date objects (ie. instances of JavaScript's built-in =Date= object).
+	The =Uize.Json= module now supports serializing of values that are date objects (i.e. instances of JavaScript's built-in =Date= object).
 
-	Date values are serialized as a call to the =Date= constructor, with a value formatted in POSIX time (ie. milliseconds since January 1, 1970 UTC). This means that for objects serialized to JSON format and that contain values that are dates, they can be returned back to an in-memory representation using a simple JavaScript =eval=, since the =Date= constructor will be invoked to create true date objects.
+	Date values are serialized as a call to the =Date= constructor, with a value formatted in POSIX time (i.e. milliseconds since January 1, 1970 UTC). This means that for objects serialized to JSON format and that contain values that are dates, they can be returned back to an in-memory representation using a simple JavaScript =eval=, since the =Date= constructor will be invoked to create true date objects.
 
 	EXAMPLE
 	.....................................

@@ -133,9 +133,9 @@ Uize.module ({
 
 								- the comment close marker line must start with a "#" character, followed by one or more of one of the valid closer characters - ")", "]", "}", ">"
 
-								- the comment closer character used must be matched to the comment opener character (ie. "(" matches ")", "[" matches "]", "{" matches "}", and "<" matches ">")
+								- the comment closer character used must be matched to the comment opener character (i.e. "(" matches ")", "[" matches "]", "{" matches "}", and "<" matches ">")
 
-								- the number of opener characters used must match the number of closer characters used (ie. the comment opener "#<<<" matches the comment closed "#>>>", but does not match the comment closer "#>>")
+								- the number of opener characters used must match the number of closer characters used (i.e. the comment opener "#<<<" matches the comment closed "#>>>", but does not match the comment closer "#>>")
 							*/
 							var _openerChar = _line.charAt (_line.indexOf ('#') + 1);
 							while (_lineNo < _linesLengthMinus1) {

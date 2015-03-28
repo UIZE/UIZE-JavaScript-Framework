@@ -200,7 +200,7 @@ Uize.module
 		builder
 			The =builder= parameter lets you specify a function that will be responsible for building the module once all its dependencies have been satisfied.
 
-			Except for in the case of an =Anonymous Module= (ie. where there is no value specified for the =name= parameter), the builder function should return a reference to the built module, so that the =Uize.module= method can assign this to the host. For anonymous modules, any returned value will simply be ignored. For a =Subclass Module= or an =Extension Module=, the builder function should expect to receive a parameter, which is a reference to the superclass or class being extended, respectively.
+			Except for in the case of an =Anonymous Module= (i.e. where there is no value specified for the =name= parameter), the builder function should return a reference to the built module, so that the =Uize.module= method can assign this to the host. For anonymous modules, any returned value will simply be ignored. For a =Subclass Module= or an =Extension Module=, the builder function should expect to receive a parameter, which is a reference to the superclass or class being extended, respectively.
 
 			NOTES
 			- When declaring a =Subclass Module=, your builder function does not need to assign the subclass as a property on the host - the =Uize.module= method will take of this for you.
@@ -351,7 +351,7 @@ Types of Modules
 
 		They are useful when declaring isolated modules of code that have dependencies on other modules that may not already be defined by the time that the anonymous module declaration is encountered. Once the =Uize.module= method has resolved the anonymous module's dependencies, the module's builder function will be executed.
 
-		When not providing a =name= parameter value in the =Uize.module= method call, the result of the module's =builder= function will not be assigned to a host. Without a name for the module, there can be no host, so the value returned by the builder function is effectively ignored (ie. there is no point in returning a value).
+		When not providing a =name= parameter value in the =Uize.module= method call, the result of the module's =builder= function will not be assigned to a host. Without a name for the module, there can be no host, so the value returned by the builder function is effectively ignored (i.e. there is no point in returning a value).
 
 		Page Wiring
 			It is a common pattern to place page wiring code towards the bottom of the page. You could either ensure that all the modules needed by the page wiring code are already sourced in before the wiring code is encountered in the document, or you could place the wiring code inside an anonymous module declaration, as in the following example...

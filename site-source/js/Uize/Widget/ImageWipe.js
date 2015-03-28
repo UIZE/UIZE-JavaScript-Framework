@@ -113,7 +113,7 @@
 
 					- the value ='column'= means that the interpolation will be keyed to the column number of the current `pane` for which the value is being calculated, where the interpolated value for panes in the first column will be the specified =start= value, and the interpolated value for panes in the last column will be the specified =end= value. This is useful when specifying a value range for state properties that apply to the X-axis, such as =alignX= and =paneSeedSizeX=, although there's nothing to say that you couldn't key the interpolation of a Y-axis state property to column number.
 
-					- the value ='pane'= means that the interpolation will be keyed to the pane number of the current `pane` for which the value is being calculated, where the interpolated value for the first pane will be the specified =start= value, and the interpolated value for the last pane will be the specified =end= value. When the value =1= is specified for the =divisionsY= state property (ie. only one row), then the values ='column'= and ='pane'= for =keyedTo= will have the same effect. Similarly, when the value =1= is specified for the =divisionsX= state property (ie. only one column), then the values ='row'= and ='pane'= for =keyedTo= will have the same effect.
+					- the value ='pane'= means that the interpolation will be keyed to the pane number of the current `pane` for which the value is being calculated, where the interpolated value for the first pane will be the specified =start= value, and the interpolated value for the last pane will be the specified =end= value. When the value =1= is specified for the =divisionsY= state property (i.e. only one row), then the values ='column'= and ='pane'= for =keyedTo= will have the same effect. Similarly, when the value =1= is specified for the =divisionsX= state property (i.e. only one column), then the values ='row'= and ='pane'= for =keyedTo= will have the same effect.
 
 					- the value ='random'= means that the interpolation will be keyed to a random number, so that the value being calculated for each `pane` will be some random blend between the =start= value and the =end= value. *NOTE:* When using this value, the =wraps= and =wrapMode= properties become pretty much meaningless.
 
@@ -507,23 +507,23 @@ Uize.module ({
 								|  6   |  6   |  6   |  6   |  6   |  6   |  6   |  6   |  6   |  6   |  6   |
 								..............................................................................
 
-								This representation depicts a `wipe port` with a width of 66 and with 11 horizontal divisions (ie. =divisionsX= is set to =6=), so the normal width for each wipe port matrix column would be 6 (ie. 66 / 11).
+								This representation depicts a `wipe port` with a width of 66 and with 11 horizontal divisions (i.e. =divisionsX= is set to =6=), so the normal width for each wipe port matrix column would be 6 (i.e. 66 / 11).
 
-								To achieve the above distribution, =firstPaneSizeX= would be set to =100= (ie. 6 / 6), since the width of the first wipe port matrix column is 100% of the normal column width.
+								To achieve the above distribution, =firstPaneSizeX= would be set to =100= (i.e. 6 / 6), since the width of the first wipe port matrix column is 100% of the normal column width.
 
 								SIGMA DISTRIBUTION
 								..............................................................................
 								|1|2 | 3 | 4  |  5  |  6   |   7   |   8    |    9    |    10    |     11    |
 								..............................................................................
 
-								To achieve the above distribution, =firstPaneSizeX= would be set to =16.666= (ie. 1 / 6), since the width of the first wipe port matrix column is 16.666% of the normal column width.
+								To achieve the above distribution, =firstPaneSizeX= would be set to =16.666= (i.e. 1 / 6), since the width of the first wipe port matrix column is 16.666% of the normal column width.
 
 								ANOTHER SIGMA DISTRIBUTION
 								..............................................................................
 								|     11    |    10    |    9    |   8    |   7   |  6   |  5  | 4  | 3 |2 |1|
 								..............................................................................
 
-								To achieve the above distribution, =firstPaneSizeX= would be set to =183.333= (ie. 11 / 6), since the width of the first wipe port matrix column is 183.333% of the normal column width.
+								To achieve the above distribution, =firstPaneSizeX= would be set to =183.333= (i.e. 11 / 6), since the width of the first wipe port matrix column is 183.333% of the normal column width.
 
 								NOTES
 								- see the companion =firstPaneSizeY= state property

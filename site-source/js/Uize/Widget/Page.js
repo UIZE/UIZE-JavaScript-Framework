@@ -26,7 +26,7 @@
 
 	Key Features
 		Widget Adoption
-			This class implements a widget adoption mechanism that allows child widgets to be declared in the page's markup using a purely declarative syntax (ie. requiring no JavaScript to be previously loaded).
+			This class implements a widget adoption mechanism that allows child widgets to be declared in the page's markup using a purely declarative syntax (i.e. requiring no JavaScript to be previously loaded).
 
 			For more information on this feature, and for a discussion of some of the other features of the =Uize.Widget.Page= class, consult the guide [[../guides/javascript-widgets.html][JavaScript Widgets]] and see under the section `Page Widget`.
 
@@ -264,7 +264,7 @@ Uize.module ({
 
 								Parameters
 									injectionParamsOBJ
-										An object, specifying the node into which the loaded HTML should be injected, and *how* it should be injected (eg. inserted above existing contents, inserted after existing contents, replacing existing contents, etc.).
+										An object, specifying the node into which the loaded HTML should be injected, and *how* it should be injected (e.g. inserted above existing contents, inserted after existing contents, replacing existing contents, etc.).
 
 										The =injectionParamsOBJ= parameter's  value should be an object of the form...
 
@@ -292,7 +292,7 @@ Uize.module ({
 
 											NOTES
 											- optional
-											- the default value for this property is ='inner replace'=, except when the =node= is the document body (ie. a reference to the =document.body= object), in which case the property defaults to ='inner bottom'=
+											- the default value for this property is ='inner replace'=, except when the =node= is the document body (i.e. a reference to the =document.body= object), in which case the property defaults to ='inner bottom'=
 
 										alwaysReplace
 											A boolean, indicating whether or not any HTML that is already in the page and that is considered equivalent to the HTML being injected should be replaced.
@@ -906,19 +906,19 @@ Uize.module ({
 										If no URL is specified, then a `blank popup window` will be launched.
 
 									width
-										An integer, specifying the width of the document area of the popup window (ie. *not* the outside width, so excluding browser chrome).
+										An integer, specifying the width of the document area of the popup window (i.e. *not* the outside width, so excluding browser chrome).
 
 										When no value is specified for this property, or if the value =0=, =null=, or =undefined= is specified, then the default value of =850= will be used.
 
 									height
-										An integer, specifying the height of the document area of the popup window (ie. *not* the outside height, so excluding browser chrome).
+										An integer, specifying the height of the document area of the popup window (i.e. *not* the outside height, so excluding browser chrome).
 
 										When no value is specified for this property, or if the value =0=, =null=, or =undefined= is specified, then the default value of =600= will be used.
 
 									name
 										A string, specifying the name of the popup window.
 
-										The value of this property should be a valid JavaScript identifier (ie. no special characters or delimeters that would break an identifier). If a window is already open by the name specified in the =name= property, then it will be reused (see `Reusing Windows`). When no value is specified for this property, or if the value =null= or =undefined= is specified, then the default value ='popupWindow'= will be used. The special value =''= (empty string) will allow multiple popup windows to be opened, without having to worry about popup window reuse, and without having to programmatically generate unique names for each window opened.
+										The value of this property should be a valid JavaScript identifier (i.e. no special characters or delimeters that would break an identifier). If a window is already open by the name specified in the =name= property, then it will be reused (see `Reusing Windows`). When no value is specified for this property, or if the value =null= or =undefined= is specified, then the default value ='popupWindow'= will be used. The special value =''= (empty string) will allow multiple popup windows to be opened, without having to worry about popup window reuse, and without having to programmatically generate unique names for each window opened.
 
 									left
 										An integer, specifying the screen coordinate for the left edge of the popup window.

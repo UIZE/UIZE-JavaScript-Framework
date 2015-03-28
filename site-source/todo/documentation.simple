@@ -226,7 +226,7 @@ Bugs
 
 Doc Improvements
 	- integrate module meta data into reference doc
-	- link references to static methods and properties (eg. =Uize.clone=) to appropriate sections of reference documents
+	- link references to static methods and properties (e.g. =Uize.clone=) to appropriate sections of reference documents
 		- will need to settle on naming scheme for anchors for doc sections
 		- will need ability to register custom linker function, so that the doc build script can provide this meta level intelligence about the documentation
 	- tooltip behavior for linking to other documents in documentation
@@ -682,11 +682,11 @@ For All Examples
 		- C:/~uize/UIZE-JavaScript-Framework/examples/two-hierarchical-selectors.html
 		- C:/~uize/UIZE-JavaScript-Framework/examples/button-toggle.html
 
-	- for examples that should wait until all images are loaded (eg. sequenced show), for now use Uize.Widget's "Document Loaded" event as a proxy for detecting that state
+	- for examples that should wait until all images are loaded (e.g. sequenced show), for now use Uize.Widget's "Document Loaded" event as a proxy for detecting that state
 
 Performance Test Pages
 	Migrate Non-browser Performance Tests
-		For all environment agnostic (ie. non-browser) performance tests, migrate the tests from being dedicated HTML pages to being true tests using the =Uize.Test= class, under the =Uize.Test.Performance= namespace...
+		For all environment agnostic (i.e. non-browser) performance tests, migrate the tests from being dedicated HTML pages to being true tests using the =Uize.Test= class, under the =Uize.Test.Performance= namespace...
 
 		- C:/~uize/UIZE-JavaScript-Framework/site-source/tests/performance/declared-function-vs-function-object.html
 		- C:/~uize/UIZE-JavaScript-Framework/site-source/tests/performance/extended-string-class.html

@@ -2,7 +2,7 @@ Introduction
 	The UIZE JavaScript Framework provides a versatile mixin system for implementing reusable fragments of functionality that can be mixed in to different classes in a class hierarchy.
 
 	PROPOSAL
-		This document is a proposal for a feature and is written in the style of describing the feature as though it were already implemented (ie. documentation for a future feature).
+		This document is a proposal for a feature and is written in the style of describing the feature as though it were already implemented (i.e. documentation for a future feature).
 
 Mixins as Augmenter Modules
 	As implemented in the UIZE JavaScript Framework, mixins are essentially augmenter modules.

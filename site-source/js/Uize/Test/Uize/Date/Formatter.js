@@ -703,7 +703,7 @@ Uize.module ({
 								['2001','{YYYY}'],
 								_newDate (2001,1,1)
 							],
-							['Test that the {YYYY} token is handled correctly when year is less than 100 (ie. year is not placed in 20th century)',
+							['Test that the {YYYY} token is handled correctly when year is less than 100 (i.e. year is not placed in 20th century)',
 								['0099','{YYYY}'],
 								_newDate (99,1,1)
 							],
@@ -743,7 +743,7 @@ Uize.module ({
 								['13','{MM}'],
 								undefined
 							],
-							['Test that the {MM} token does not match a two digit number that is less than 1 (ie. 0)',
+							['Test that the {MM} token does not match a two digit number that is less than 1 (i.e. 0)',
 								['00','{MM}'],
 								undefined
 							],
@@ -765,7 +765,7 @@ Uize.module ({
 								['73','{monthNo}'],
 								_newDate (0,7,1)
 							],
-							['Test that the {monthNo} token does not match a one digit number that is less than 1 (ie. 0)',
+							['Test that the {monthNo} token does not match a one digit number that is less than 1 (i.e. 0)',
 								['0','{monthNo}'],
 								undefined
 							],
@@ -883,7 +883,7 @@ Uize.module ({
 								['32','{DD}'],
 								undefined
 							],
-							['Test that the {DD} token does not match a two digit number that is less than 1 (ie. 0)',
+							['Test that the {DD} token does not match a two digit number that is less than 1 (i.e. 0)',
 								['00','{DD}'],
 								undefined
 							],
@@ -905,7 +905,7 @@ Uize.module ({
 								['32','{dayNo}'],
 								_newDate (0,1,3)
 							],
-							['Test that the {dayNo} token does not match a one digit number that is less than 1 (ie. 0)',
+							['Test that the {dayNo} token does not match a one digit number that is less than 1 (i.e. 0)',
 								['0','{dayNo}'],
 								undefined
 							],
@@ -1035,7 +1035,7 @@ Uize.module ({
 								['9','{h12}'],
 								_newDate (0,1,1,9)
 							],
-							['Test that the {h12} token does not match a number that is less than 1 (ie. 0)',
+							['Test that the {h12} token does not match a number that is less than 1 (i.e. 0)',
 								['0','{h12}'],
 								undefined
 							],
@@ -1057,7 +1057,7 @@ Uize.module ({
 								['09','{hh12}'],
 								_newDate (0,1,1,9)
 							],
-							['Test that the {hh12} token does not match a two digit number that is less than 1 (ie. 0)',
+							['Test that the {hh12} token does not match a two digit number that is less than 1 (i.e. 0)',
 								['00','{hh12}'],
 								undefined
 							],

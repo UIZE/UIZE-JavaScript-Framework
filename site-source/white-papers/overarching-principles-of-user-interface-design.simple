@@ -46,13 +46,13 @@ UI Consistency
 	Logo Always Visible
 		Every app on every device should allocate space in a prominent location for placement of the company's logo, so that it is persistently visible.
 
-		It is reasonable to locate the logo towards the top of the UI - left or center. A possibly exception to this rule might be company branded hardware, where the logo is on the physical device. One could still argue, however, that in such hardware devices the logo on the physical case of the device is so peripheral that it is easily filtered out by the user. If the logo is visible within the interactive portion of the device (ie. its UI / display), the brand promotion effect should be stronger. Also, if the same software runs in company branded and non-branded hardware, then conditionally displaying the logo in the UI might present problems of what to use the allocated screen real estate for when the logo is not present. Essentially, it's simpler, more consistent, and more beneficial to the company to simply always have the logo appear in the UI.
+		It is reasonable to locate the logo towards the top of the UI - left or center. A possibly exception to this rule might be company branded hardware, where the logo is on the physical device. One could still argue, however, that in such hardware devices the logo on the physical case of the device is so peripheral that it is easily filtered out by the user. If the logo is visible within the interactive portion of the device (i.e. its UI / display), the brand promotion effect should be stronger. Also, if the same software runs in company branded and non-branded hardware, then conditionally displaying the logo in the UI might present problems of what to use the allocated screen real estate for when the logo is not present. Essentially, it's simpler, more consistent, and more beneficial to the company to simply always have the logo appear in the UI.
 
 	Be Consistent With Language
 		The UI should use language in a consistent way.
 
 		Be Consistent With Active vs Passive Style
-			The UI should be consistent with its use of active style (eg. "Change Settings") vs passive style (eg. "Settings").
+			The UI should be consistent with its use of active style (e.g. "Change Settings") vs passive style (e.g. "Settings").
 
 			For example, if buttons are to use a "call to action" / verb / action phrase style of language, then this style should be used consistently. There shouldn't be some buttons with labels like "Set Call Forwarding Rules" and other buttons with labels like "Music on Hold". The same principle applies to section headings. Passive language is recommended for section headings, while active language is recommended for buttons and links that perform actions when invoked. To use an example, a section that addresses call forwarding rules can be labeled "Call Forwarding Rules", while a button that may bring up UI for changing the rules can be labeled "Edit Call Forwarding Rules", "Change Call Forwarding Rules", "Set Call Forwarding Rules", etc.
 
@@ -115,7 +115,7 @@ Touch-friendly
 		In order to make every UI element that is interactive safe for touch, the UI should be designed according to the following criteria...
 
 		Big Enough for Touching
-			Every interactive element should be large enough to accommodate a fingertip, and ideally large enough so that some part of the element remains visible outside the fingertip to reinforce the user's belief that they are touching on the element (ie. their fingertip is within the boundaries of the element).
+			Every interactive element should be large enough to accommodate a fingertip, and ideally large enough so that some part of the element remains visible outside the fingertip to reinforce the user's belief that they are touching on the element (i.e. their fingertip is within the boundaries of the element).
 
 		Sufficient Clearance
 			Every interactive element that is only large enough to accommodate a fingertip and that doesn't have additional "breathing room" should have sufficient clearance around it to eliminate the possibility of accidentally touching adjacent interactive elements.
@@ -208,7 +208,7 @@ Testability
 		- app like interface
 		- fill entire screen
 		- be elastic
-		- fixed application chrome (ie. can't scroll entire app)
+		- fixed application chrome (i.e. can't scroll entire app)
 
 Scanability
 	The UI should facilitate the natural human behavior of scanning to find things.
@@ -264,7 +264,7 @@ Searchability
 			Simple Search
 				A simple search box interface should be provided that the user can use as a first step before utilizing the more advanced `parametric search` UI.
 
-				Search terms entered into the search bar would be effectively resolved to one or more parameters in the `parametric search`. Especially if a shorthand syntax is provided for selecting, a search string entered into the simple search UI might resolve to multiple parameters in the parametric search. For example, a shorthand might be provided to let a user search for a person in a particular department (eg. "john department:sales"). Such a search might be resolved to a parametric search involving two criteria.
+				Search terms entered into the search bar would be effectively resolved to one or more parameters in the `parametric search`. Especially if a shorthand syntax is provided for selecting, a search string entered into the simple search UI might resolve to multiple parameters in the parametric search. For example, a shorthand might be provided to let a user search for a person in a particular department (e.g. "john department:sales"). Such a search might be resolved to a parametric search involving two criteria.
 
 		Complex Structured Data Search
 			In addition to the ability to search data presented in tabular form, ideally a search facility would be provided to search complex structured data.
@@ -306,7 +306,7 @@ Standardize Control Heights
 		Large
 			As with the tiny size for UI components, the large size should be used sparingly.
 
-			The intent behind the large size is to allow a user interface to emphasize certain components very strongly - usually CTA type buttons (eg. "SIGN UP FOR FREE TRIAL"). The large size is to UI components as all-caps is to messaging - too many components using the large size is like yelling at the user and dilutes the impact that the large size has.
+			The intent behind the large size is to allow a user interface to emphasize certain components very strongly - usually CTA type buttons (e.g. "SIGN UP FOR FREE TRIAL"). The large size is to UI components as all-caps is to messaging - too many components using the large size is like yelling at the user and dilutes the impact that the large size has.
 
 	### Standardized Visual Cues
 		- navigational direction
@@ -396,7 +396,7 @@ Minimize User Annoyance
 		Just One Meaning to Interaction Highlights
 			Settle on a single meaning for interaction highlights, preferably as an indicator of clickability / touchability.
 
-			For instance, don't use interaction highlights in some parts of the UI to indicate clickability and in other parts of the UI merely to highlight the area of the UI (such as a data table row or some layout panel) that the user is engaged with (eg. mousing over), or establish a discernibly and consistently applied alternative means for calling out a currently focused / working area in the UI.
+			For instance, don't use interaction highlights in some parts of the UI to indicate clickability and in other parts of the UI merely to highlight the area of the UI (such as a data table row or some layout panel) that the user is engaged with (e.g. mousing over), or establish a discernibly and consistently applied alternative means for calling out a currently focused / working area in the UI.
 
 	Links Should Behave Like Links
 		When navigation links are provided in Web app UI, such link components should behave as expected by the user, fully consistent with standard links in a Web document.

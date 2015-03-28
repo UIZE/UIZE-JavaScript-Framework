@@ -155,7 +155,7 @@ Uize.module ({
 				_enableButton (_axisName == 'X' ? 'left' : 'up',_page);
 				_enableButton (_axisName == 'X' ? 'right' : 'down',(m.get ('maxPage' + _axisName) - _page + 1 || 2) > 1);
 					/* NOTE:
-						If maxPage is NaN, then maxPage - page is also NaN. Then, adding 1 still gives NaN, OR'ing with 2 gives you 2, which is greater than 1. This makes maxPage - page == NaN behave like 1 or above, rather than 0, but still makes 0 behave like 0 (ie. 0 + 1 || 2 is 1, which is not greater than 1).
+						If maxPage is NaN, then maxPage - page is also NaN. Then, adding 1 still gives NaN, OR'ing with 2 gives you 2, which is greater than 1. This makes maxPage - page == NaN behave like 1 or above, rather than 0, but still makes 0 behave like 0 (i.e. 0 + 1 || 2 is 1, which is not greater than 1).
 					*/
 			}
 
@@ -209,7 +209,7 @@ Uize.module ({
 									page.addChild ('myScrolly',Uize.Widget.Scrolly).fade.set ({duration:1000});
 									...........................................................................
 
-									In the above example, an instance of the =Uize.Widget.Scrolly= class is added as a child widget of a page widget instance, and then its fade duration is set to =1000= (ie. one second). Because the =addChild= instance method returns a reference to the child widget being added, and because the =fade= instance is created during construction of the =Uize.Widget.Scrolly= instance, the =set= instance method can be called in a chained fashion.
+									In the above example, an instance of the =Uize.Widget.Scrolly= class is added as a child widget of a page widget instance, and then its fade duration is set to =1000= (i.e. one second). Because the =addChild= instance method returns a reference to the child widget being added, and because the =fade= instance is created during construction of the =Uize.Widget.Scrolly= instance, the =set= instance method can be called in a chained fashion.
 						*/
 					});
 
@@ -246,7 +246,7 @@ Uize.module ({
 								left
 									An instance of the =Uize.Widget.Button= class, that is wired up so that clicking on it will scroll the =view= implied node left by one page.
 
-									Clicking this button has the effect of decrementing the value of the =pageX= state property. The markup for this button is optional. The enabled state of this button is managed by the =Uize.Widget.Scrolly= class, so that it is disabled whenever it is not possible to scroll left, such as when the =view= implied node is already scrolled all the way to the left (ie. the value of =pageX= is =0=).
+									Clicking this button has the effect of decrementing the value of the =pageX= state property. The markup for this button is optional. The enabled state of this button is managed by the =Uize.Widget.Scrolly= class, so that it is disabled whenever it is not possible to scroll left, such as when the =view= implied node is already scrolled all the way to the left (i.e. the value of =pageX= is =0=).
 
 									NOTES
 									- see the related =pageX= state property
@@ -258,7 +258,7 @@ Uize.module ({
 								right
 									An instance of the =Uize.Widget.Button= class, that is wired up so that clicking on it will scroll the =view= implied node right by one page.
 
-									Clicking this button has the effect of incrementing the value of the =pageX= state property. The markup for this button is optional. The enabled state of this button is managed by the =Uize.Widget.Scrolly= class, so that it is disabled whenever it is not possible to scroll right, such as when the =view= implied node is already scrolled all the way to the right (ie. the value of =pageX= is equal to the value of =maxPageX=).
+									Clicking this button has the effect of incrementing the value of the =pageX= state property. The markup for this button is optional. The enabled state of this button is managed by the =Uize.Widget.Scrolly= class, so that it is disabled whenever it is not possible to scroll right, such as when the =view= implied node is already scrolled all the way to the right (i.e. the value of =pageX= is equal to the value of =maxPageX=).
 
 									NOTES
 									- see the related =pageX= state property
@@ -270,7 +270,7 @@ Uize.module ({
 								up
 									An instance of the =Uize.Widget.Button= class, that is wired up so that clicking on it will scroll the =view= implied node up by one page.
 
-									Clicking this button has the effect of decrementing the value of the =pageY= state property. The markup for this button is optional. The enabled state of this button is managed by the =Uize.Widget.Scrolly= class, so that it is disabled whenever it is not possible to scroll up, such as when the =view= implied node is already scrolled all the way to the top (ie. the value of =pageY= is =0=).
+									Clicking this button has the effect of decrementing the value of the =pageY= state property. The markup for this button is optional. The enabled state of this button is managed by the =Uize.Widget.Scrolly= class, so that it is disabled whenever it is not possible to scroll up, such as when the =view= implied node is already scrolled all the way to the top (i.e. the value of =pageY= is =0=).
 
 									NOTES
 									- see the related =pageY= state property
@@ -282,7 +282,7 @@ Uize.module ({
 								down
 									An instance of the =Uize.Widget.Button= class, that is wired up so that clicking on it will scroll the =view= implied node down by one page.
 
-									Clicking this button has the effect of incrementing the value of the =pageY= state property. The markup for this button is optional. The enabled state of this button is managed by the =Uize.Widget.Scrolly= class, so that it is disabled whenever it is not possible to scroll down, such as when the =view= implied node is already scrolled all the way to the bottom (ie. the value of =pageY= is equal to the value of =maxPageY=).
+									Clicking this button has the effect of incrementing the value of the =pageY= state property. The markup for this button is optional. The enabled state of this button is managed by the =Uize.Widget.Scrolly= class, so that it is disabled whenever it is not possible to scroll down, such as when the =view= implied node is already scrolled all the way to the bottom (i.e. the value of =pageY= is equal to the value of =maxPageY=).
 
 									NOTES
 									- see the related =pageY= state property
@@ -334,7 +334,7 @@ Uize.module ({
 						function () {
 							this.set ({_isScrollableX:(this._maxPageX + 1 || 2) > 1});
 							/* NOTE:
-								If maxPageX is NaN, then adding 1 still gives NaN, OR'ing with 2 gives you 2, which is greater than 1. This makes NaN behave like 1 or above, rather than 0, but still makes 0 behave like 0 (ie. 0 + 1 || 2 is 1, which is not greater than 1).
+								If maxPageX is NaN, then adding 1 still gives NaN, OR'ing with 2 gives you 2, which is greater than 1. This makes NaN behave like 1 or above, rather than 0, but still makes 0 behave like 0 (i.e. 0 + 1 || 2 is 1, which is not greater than 1).
 							*/
 						},
 						_updateButtonsEnabledX
@@ -344,7 +344,7 @@ Uize.module ({
 							maxPageX
 								A read-only integer (whose value is managed by the =Uize.Widget.Scrolly= class), indicating the maximum possible value for the =pageX= state property.
 
-								The value of this property can be used as an indication of the number of horizontal pages for the contents of the =view= implied node. For example, a value of =0= indicates that there is only one page horizontally (ie. the maximum value for =pageX= is =0=). A value of =5=, on the other hand, indicates that there are six pages horizontally, where those six pages are represented by the values =0= through =5= for the =pageX= state property.
+								The value of this property can be used as an indication of the number of horizontal pages for the contents of the =view= implied node. For example, a value of =0= indicates that there is only one page horizontally (i.e. the maximum value for =pageX= is =0=). A value of =5=, on the other hand, indicates that there are six pages horizontally, where those six pages are represented by the values =0= through =5= for the =pageX= state property.
 
 								NOTES
 								- this property is read-only
@@ -358,7 +358,7 @@ Uize.module ({
 						function () {
 							this.set ({_isScrollableY:(this._maxPageY + 1 || 2) > 1});
 							/* NOTE:
-								If maxPageY is NaN, then adding 1 still gives NaN, OR'ing with 2 gives you 2, which is greater than 1. This makes NaN behave like 1 or above, rather than 0, but still makes 0 behave like 0 (ie. 0 + 1 || 2 is 1, which is not greater than 1).
+								If maxPageY is NaN, then adding 1 still gives NaN, OR'ing with 2 gives you 2, which is greater than 1. This makes NaN behave like 1 or above, rather than 0, but still makes 0 behave like 0 (i.e. 0 + 1 || 2 is 1, which is not greater than 1).
 							*/
 						},
 						_updateButtonsEnabledY
@@ -368,7 +368,7 @@ Uize.module ({
 							maxPageY
 								A read-only integer (whose value is managed by the =Uize.Widget.Scrolly= class), indicating the maximum possible value for the =pageY= state property.
 
-								The value of this property can be used as an indication of the number of vertical pages for the contents of the =view= implied node. For example, a value of =0= indicates that there is only one page vertically (ie. the maximum value for =pageY= is =0=). A value of =5=, on the other hand, indicates that there are six pages vertically, where those six pages are represented by the values =0= through =5= for the =pageY= state property.
+								The value of this property can be used as an indication of the number of vertical pages for the contents of the =view= implied node. For example, a value of =0= indicates that there is only one page vertically (i.e. the maximum value for =pageY= is =0=). A value of =5=, on the other hand, indicates that there are six pages vertically, where those six pages are represented by the values =0= through =5= for the =pageY= state property.
 
 								NOTES
 								- this property is read-only

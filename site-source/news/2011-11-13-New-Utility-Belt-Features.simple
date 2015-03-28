@@ -22,7 +22,7 @@ All the New Utility Belt Methods
 	The full list of utility belt methods that are new to the =Uize= module is as follows...
 
 	- =Uize.inRange= - tests if a value is within a specified value range (new method)
-	- =Uize.keys= - returns an array containing the names of the properties (ie. keys) in an object (promoted from =Uize.Data.getKeys=, shortened for brevity / convenience)
+	- =Uize.keys= - returns an array containing the names of the properties (i.e. keys) in an object (promoted from =Uize.Data.getKeys=, shortened for brevity / convenience)
 	- =Uize.values= - returns an array containing the values of the properties in an object (promoted from =Uize.Data.getValues=, shortened for brevity / convenience)
 	- =Uize.totalKeys= - counts the number of keys in an object (promoted from =Uize.Data.getTotalKeys=, shortened for brevity / convenience)
 	- =Uize.min= - returns the largest value in a values array (promoted from =Uize.Data.min=)

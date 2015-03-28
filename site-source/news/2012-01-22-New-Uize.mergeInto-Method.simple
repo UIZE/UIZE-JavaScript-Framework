@@ -79,7 +79,7 @@ Merge Multiple Source Objects Into a Target Object
 	targetOBJ = Uize.mergeInto (targetOBJ,source1OBJ,source2OBJ,...,sourceNOBJ);
 	............................................................................
 
-	When multiple source objects are specified, the contents of the source objects are merged into the target object in the order in which they are specified (ie. left to right in the arguments list). The contents of source objects are merged into the target object according to the =Uize.mergeInto= method's `merging rules`.
+	When multiple source objects are specified, the contents of the source objects are merged into the target object in the order in which they are specified (i.e. left to right in the arguments list). The contents of source objects are merged into the target object according to the =Uize.mergeInto= method's `merging rules`.
 
 	EXAMPLE
 	........................................................................

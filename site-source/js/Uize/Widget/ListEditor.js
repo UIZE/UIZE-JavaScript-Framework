@@ -28,7 +28,7 @@
 		Editing the List
 			The =Uize.Widget.ListEditor= class uses a number of child widgets and implied nodes to build a UI that lets the user edit the list.
 
-			The =input= child widget, which is an instance of the =Uize.Widget.TextInput= class, lets the user enter text for a new item to be added to the =list= array. The =add= child widget, which is an instance of the =Uize.Widget.Button= class, lets the user add the currently entered text as a new item in the =list= array. The =list Implied Node=, which is a multiple select =select= tag (ie. where the =multiple= attribute is set to the value ='multiple'=), displays the current list and lets the user select one or more items in the list to be removed. The =remove= child widget, which is an instance of the =Uize.Widget.Button= class, lets the user remove the items currently selected in the =list Implied Node= from the =list= array.
+			The =input= child widget, which is an instance of the =Uize.Widget.TextInput= class, lets the user enter text for a new item to be added to the =list= array. The =add= child widget, which is an instance of the =Uize.Widget.Button= class, lets the user add the currently entered text as a new item in the =list= array. The =list Implied Node=, which is a multiple select =select= tag (i.e. where the =multiple= attribute is set to the value ='multiple'=), displays the current list and lets the user select one or more items in the list to be removed. The =remove= child widget, which is an instance of the =Uize.Widget.Button= class, lets the user remove the items currently selected in the =list Implied Node= from the =list= array.
 
 			More on Adding Items
 				Conforming New Items
@@ -301,7 +301,7 @@ Uize.module ({
 								input
 									An instance of the =Uize.Widget.TextInput= class, that lets the user enter text for a new item to be added to the =list= array.
 
-									Text entered in the =input= child widget can be added to the =list= array by either pressing the enter key when the =input= child widget is focused, or by clicking on the =add= button. Upon adding the =input= widget's text to the =list= array, the value of the =input= widget is cleared (ie. set to an empty string). Pressing the escape key when the =input= child widget is focused will clear the value of the =input= widget without adding the item to the =list= array.
+									Text entered in the =input= child widget can be added to the =list= array by either pressing the enter key when the =input= child widget is focused, or by clicking on the =add= button. Upon adding the =input= widget's text to the =list= array, the value of the =input= widget is cleared (i.e. set to an empty string). Pressing the escape key when the =input= child widget is focused will clear the value of the =input= widget without adding the item to the =list= array.
 
 									NOTES
 									- see the related =add= child widget
@@ -384,7 +384,7 @@ Uize.module ({
 							/*?
 								Implied Nodes
 									list Implied Node
-										A multiple select =select= tag (ie. where the =multiple= attribute is set to the value ='multiple'=), that is used to display the current items in the =list= array, and that allows the user to select one or more items to remove.
+										A multiple select =select= tag (i.e. where the =multiple= attribute is set to the value ='multiple'=), that is used to display the current items in the =list= array, and that allows the user to select one or more items to remove.
 
 										When the =list Implied Node= is focused and one or more options of the select tag are selected, then pressing the delete key will result in the selected items being removed from the list.
 

@@ -54,15 +54,15 @@
 					The full year, represented using four digits, where leading zeros will be added as needed for dates before the year 1000.
 
 				{YY}
-					The year, represented using only two digits (ie. only year of century).
+					The year, represented using only two digits (i.e. only year of century).
 
-					When `parsing a date string` where the year is represented using the ={YY}= token, the year is assumed to be in the 20th century (ie. the value =99= represents the year 1999). When `formatting a date string` where the year is represented using the ={YY}= token, century information will be lost. Therefore, this token can only be safely used in a `date format` that will be applied to dates in the 20th century.
+					When `parsing a date string` where the year is represented using the ={YY}= token, the year is assumed to be in the 20th century (i.e. the value =99= represents the year 1999). When `formatting a date string` where the year is represented using the ={YY}= token, century information will be lost. Therefore, this token can only be safely used in a `date format` that will be applied to dates in the 20th century.
 
 				{MM}
-					The month number, represented always using two digits (ie. leading =0= if necessary), where January is represented by the value =01=, and where December is represented by the value =12=.
+					The month number, represented always using two digits (i.e. leading =0= if necessary), where January is represented by the value =01=, and where December is represented by the value =12=.
 
 				{monthNo}
-					The month number, represented using only as many digits as necessary (ie. no leading =0=), where January is represented by the value =1=, and where December is represented by the value =12=.
+					The month number, represented using only as many digits as necessary (i.e. no leading =0=), where January is represented by the value =1=, and where December is represented by the value =12=.
 
 				{monthName}
 					The full name of the month, as registered in the =Uize.Date.monthNames= static property of the =Uize.Date= module.
@@ -75,10 +75,10 @@
 					Unless overriding the value of the =Uize.Date.shortMonthNames= static property, the short month names will be derived from the English month names, as Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, and Dec.
 
 				{DD}
-					The day number, represented always using two digits (ie. leading =0= if necessary), where the first day of any month is represented by the value =01=, and where the last day of the month January is represented by the value =31=.
+					The day number, represented always using two digits (i.e. leading =0= if necessary), where the first day of any month is represented by the value =01=, and where the last day of the month January is represented by the value =31=.
 
 				{dayNo}
-					The day number, represented using only as many digits as necessary (ie. no leading =0=), where the first day of any month is represented by the value =1=, and where the last day of the month January is represented by the value =31=.
+					The day number, represented using only as many digits as necessary (i.e. no leading =0=), where the first day of any month is represented by the value =1=, and where the last day of the month January is represented by the value =31=.
 
 				{dayNoSuffix}
 					An English language suffix that can be appended after the value for the ={dayNo}= token in order to produce friendlier and more human readable date strings.
@@ -119,35 +119,35 @@
 					Unless overriding the value of the =Uize.Date.shortDayNames= static property, the short day names will be derived from the English day names, as Mon, Tue, Wed, Thu, Fri, Sat, and Sun. Because multiple days in a month can occur on the same day of the week and have the same short day name, the value of the ={shortDayName}= token is ambiguous and is not considered meaningful when parsing date strings formatted using this token - it is simply ignored.
 
 				{hh}
-					The hour in military time ([[http://en.wikipedia.org/wiki/24-hour_clock][24-hour clock]]), represented always using two digits (ie. leading =0= if necessary), where 12am (midnight) is represented by the value =00=, where 12pm (midday) is represented by the value =12=, and where 11pm is represented by the value =23=.
+					The hour in military time ([[http://en.wikipedia.org/wiki/24-hour_clock][24-hour clock]]), represented always using two digits (i.e. leading =0= if necessary), where 12am (midnight) is represented by the value =00=, where 12pm (midday) is represented by the value =12=, and where 11pm is represented by the value =23=.
 
 				{h12}
-					The hour of the day in 12-hour notation, represented using only as many digits as necessary (ie. no leading =0=), where 12am (midnight) and 12pm (midday) are both represented by the value =12=, and where 1am and 1pm are both represented by the value =1=.
+					The hour of the day in 12-hour notation, represented using only as many digits as necessary (i.e. no leading =0=), where 12am (midnight) and 12pm (midday) are both represented by the value =12=, and where 1am and 1pm are both represented by the value =1=.
 
 					Because the ={h12}= token does not convey whether the time is in the first or second half of the day, this token should be used in conjunction with the companion ={ampm}= token.
 
 				{hh12}
-					The hour of the day in 12-hour notation, represented always using two digits (ie. leading =0= if necessary), where 12am (midnight) and 12pm (midday) are both represented by the value =12=, and where 1am and 1pm are both represented by the value =01=.
+					The hour of the day in 12-hour notation, represented always using two digits (i.e. leading =0= if necessary), where 12am (midnight) and 12pm (midday) are both represented by the value =12=, and where 1am and 1pm are both represented by the value =01=.
 
 					Because the ={hh12}= token does not convey whether the time is in the first or second half of the day, this token should be used in conjunction with the companion ={ampm}= token.
 
 				{mm}
-					The minutes of the hour, represented always using two digits (ie. leading =0= if necessary), where the first minute of the hour is represented by the value =00=, and where the last minute of the hour is represented by the value =59=.
+					The minutes of the hour, represented always using two digits (i.e. leading =0= if necessary), where the first minute of the hour is represented by the value =00=, and where the last minute of the hour is represented by the value =59=.
 
 				{minutes}
-					The minutes of the hour, represented using only as many digits as necessary (ie. no leading =0=), where the first minute of the hour is represented by the value =0=, and where the last minute of the hour is represented by the value =59=.
+					The minutes of the hour, represented using only as many digits as necessary (i.e. no leading =0=), where the first minute of the hour is represented by the value =0=, and where the last minute of the hour is represented by the value =59=.
 
 				{ss}
-					The seconds of the minute, represented always using two digits (ie. leading =0= if necessary), where the first second of the minute is represented by the value =00=, and where the last second of the minute is represented by the value =59=.
+					The seconds of the minute, represented always using two digits (i.e. leading =0= if necessary), where the first second of the minute is represented by the value =00=, and where the last second of the minute is represented by the value =59=.
 
 				{seconds}
-					The seconds of the minute, represented using only as many digits as necessary (ie. no leading =0=), where the first second of the minute is represented by the value =0=, and where the last second of the minute is represented by the value =59=.
+					The seconds of the minute, represented using only as many digits as necessary (i.e. no leading =0=), where the first second of the minute is represented by the value =0=, and where the last second of the minute is represented by the value =59=.
 
 				{zzz}
-					The milliseconds of the second, represented always using three digits (ie. leading zeros as necessary), where the first millisecond of the second is represented by the value =000=, and where the last millisecond of the second is represented by the value =59=.
+					The milliseconds of the second, represented always using three digits (i.e. leading zeros as necessary), where the first millisecond of the second is represented by the value =000=, and where the last millisecond of the second is represented by the value =59=.
 
 				{milliseconds}
-					The milliseconds of the second, represented using only as many digits as necessary (ie. no leading zeros), where the first millisecond of the second is represented by the value =0=, and where the last millisecond of the second is represented by the value =999=.
+					The milliseconds of the second, represented using only as many digits as necessary (i.e. no leading zeros), where the first millisecond of the second is represented by the value =0=, and where the last millisecond of the second is represented by the value =999=.
 
 				{ampm}
 					An indicator of which half of the day the hour is in, where the first half of the day (morning) is represented by the value =am=, and where the second half of the day (afternoon and evening) is represented by the value =pm=.
@@ -247,19 +247,19 @@
 
 				- *year* - When there is no ={YYYY}= or ={YY}= token in the `date format` string, then the year for the date will be defaulted to the year =0=.
 
-				- *month* - When there is no ={MM}=, ={monthNo}=, ={monthName}=, or ={shortMonthName}= token in the `date format` string, then the month for the date will be defaulted to the first month of the year (ie. January).
+				- *month* - When there is no ={MM}=, ={monthNo}=, ={monthName}=, or ={shortMonthName}= token in the `date format` string, then the month for the date will be defaulted to the first month of the year (i.e. January).
 
-				- *day number* - When there is no ={DD}= or ={dayNo}= token in the `date format` string, then the day of the month for the date will be defaulted to =0= (ie. the first day of the month).
+				- *day number* - When there is no ={DD}= or ={dayNo}= token in the `date format` string, then the day of the month for the date will be defaulted to =0= (i.e. the first day of the month).
 
-				- *hour* - When there is no ={hh}=, ={h12}=, or ={hh12}= token in the `date format` string, then the default value for the hour of the day will be determined by the value of the ={ampm}= token, if present. If the ={ampm}= token is present, then the hour of the day will be defaulted to =0= when the value of the ={ampm}= token is "am" (ie. the hour is defaulted to 12am), and the hour will be defaulted to =12= when the value of the ={ampm}= token is "pm" (ie. the hour is defaulted to 12pm). If the ={ampm}= token is *not* present, then the hour of the day will be defaulted to =0= (ie. 12am).
+				- *hour* - When there is no ={hh}=, ={h12}=, or ={hh12}= token in the `date format` string, then the default value for the hour of the day will be determined by the value of the ={ampm}= token, if present. If the ={ampm}= token is present, then the hour of the day will be defaulted to =0= when the value of the ={ampm}= token is "am" (i.e. the hour is defaulted to 12am), and the hour will be defaulted to =12= when the value of the ={ampm}= token is "pm" (i.e. the hour is defaulted to 12pm). If the ={ampm}= token is *not* present, then the hour of the day will be defaulted to =0= (i.e. 12am).
 
 				- *ampm* - When there is no ={ampm}= token in the `date format` string, and when the hour of the day is specified using either of the ={h12}= or ={hh12}= tokens, then the time of day is defaulted to morning.
 
-				- *minutes* - When there is no ={mm}= or ={minutes}= token in the `date format` string, then the minutes of the hour for the date will be defaulted to =0= (ie. the first minute of the hour).
+				- *minutes* - When there is no ={mm}= or ={minutes}= token in the `date format` string, then the minutes of the hour for the date will be defaulted to =0= (i.e. the first minute of the hour).
 
-				- *seconds* - When there is no ={ss}= or ={seconds}= token in the `date format` string, then the seconds of the minute for the date will be defaulted to =0= (ie. the first second of the minute).
+				- *seconds* - When there is no ={ss}= or ={seconds}= token in the `date format` string, then the seconds of the minute for the date will be defaulted to =0= (i.e. the first second of the minute).
 
-				- *milliseconds* - When there is no ={zzz}= or ={milliseconds}= token in the `date format` string, then the milliseconds of the second for the date will be defaulted to =0= (ie. the first millisecond of the second).
+				- *milliseconds* - When there is no ={zzz}= or ={milliseconds}= token in the `date format` string, then the milliseconds of the second for the date will be defaulted to =0= (i.e. the first millisecond of the second).
 
 			Loss of Date Detail
 				Date detail can be lost when parsing a date string that is in a `date format` that doesn't contain a `date component token value` for all of the components of a date.

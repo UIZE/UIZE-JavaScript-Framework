@@ -1,6 +1,6 @@
 This is a TO DO document for the =Uize.Color= module.
 
-- support for % unit in "RGB string" decoder (eg. rgb(100%,50%,25%))
+- support for % unit in "RGB string" decoder (e.g. rgb(100%,50%,25%))
 	- support % generically in setTupleFromString, now that there are profiles for the color components
 - for color profile conversions, can component profile min/max info now be used for normalizing values to 0-1 range, and denormalizing as well?
 - for =to= and =Uize.Color.to= encoding methods, possibly a way to specify a target array or object for encodings that use arrays or objects (in some cases this would avoid wasteful creation of a temporary array)
@@ -24,7 +24,7 @@ This is a TO DO document for the =Uize.Color= module.
 
 		equivalent to =myColor.getComponent (0)=, but where naming a component might imply conversion across color spaces
 
-- need a way for encodings to register tests for auto-decoders (eg. when adding HSV, how does one detect HSV object?)
+- need a way for encodings to register tests for auto-decoders (e.g. when adding HSV, how does one detect HSV object?)
 - support for alpha
 
 - a reference: http://www.easyrgb.com/index.php?X=MATH&H=01#text1

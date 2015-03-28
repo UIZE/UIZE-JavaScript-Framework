@@ -125,7 +125,7 @@ Uize.module ({
 								- There are issues with some browsers and how they reflect (or don't reflect) changes in the cursor style property of an element that the mouse is already over.
 									- Safari seems to only reflect a cursor change on the next mousemove.
 									- Opera seems to only reflect a cursor change on a more radical repaint / re-render (not sure exactly what it's logic is).
-									- None of the browsers can pick up the key events if the document isn't focused (eg. the location field is focused instead).
+									- None of the browsers can pick up the key events if the document isn't focused (e.g. the location field is focused instead).
 							*/
 							m.wireNode (
 								document,

@@ -10,7 +10,7 @@ IMPROVED MODULE: Uize.Widget.Tree.List
 	IMPROVED MODULE: Uize.SimpleDoc
 		Any document created using the =Uize.SimpleDoc= module now contains a contents list that is generated based on the structure of the document.
 
-		The list item for each section is linked to the section's anchor in the document and has a =title= attribute (ie. a tooltip) that provides a preview of the section's first paragraph. Some other small tweaks were made to improve performance and the appearance of the generated markup.
+		The list item for each section is linked to the section's anchor in the document and has a =title= attribute (i.e. a tooltip) that provides a preview of the section's first paragraph. Some other small tweaks were made to improve performance and the appearance of the generated markup.
 
 	IMPROVED MODULE: Uize.Widget.Tree
 		The =Uize.Widget.Tree= module - that is the base class for the =Uize.Widget.Tree.List= module - now is implemented so that the =setExpandedDepth= instance method does not require the DOM for a list instance to already be created before this method can be called.

@@ -18,7 +18,7 @@
 
 /*?
 	Introduction
-		The =Uize.Class.Value= class is a simple class that merely implements the `value interface` (ie. it declares a =value= state property).
+		The =Uize.Class.Value= class is a simple class that merely implements the `value interface` (i.e. it declares a =value= state property).
 
 		*DEVELOPERS:* `Chris van Rensburg`
 

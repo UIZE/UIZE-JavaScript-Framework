@@ -29,7 +29,7 @@ When a Relative URL Can Be Created
 	- `when both URLs have the same domain`
 
 	When Both URLs Have the Same Back-relative Prefix
-		When both the base URL and the URL to relativize start with exactly the same back-relative prefix (ie. "/", "../", "../../", etc.), then a relative URL can be created.
+		When both the base URL and the URL to relativize start with exactly the same back-relative prefix (i.e. "/", "../", "../../", etc.), then a relative URL can be created.
 
 		Even though both URLs may be relative URLs, a relative URL can still be created between the base URL and the URL to relativize. This is because the URLs having the identical back-relative prefix means that they essentially share a common base, even though we don't know what it is.
 
@@ -49,7 +49,7 @@ When a Relative URL Can Be Created
 		......................
 
 	When Both URLs are Root-relative
-		When both the base URL and the URL to relativize are root-relative (ie. start with a "/"), then a relative URL can be created.
+		When both the base URL and the URL to relativize are root-relative (i.e. start with a "/"), then a relative URL can be created.
 
 		EXAMPLE
 		.......................................
@@ -101,14 +101,14 @@ When a Relative URL Cannot Be Created
 
 	Whenever the base URL and the URL to relativize do not have the same shared base, then a relative URL cannot be created. This can occur when...
 
-	- the base URL is absolute (ie. has a domain) and the URL to relativize is either root-relative, forward-relative, back-relative, or has a domain that doesn't match that of the base URL
-	- the base URL is root-relative and the URL to relativize is either forward-relative, back-relative, or is absolute (ie. has a domain)
-	- the base URL is forward-relative and the URL to relativize is either root-relative, back-relative, or is absolute (ie. has a domain)
-	- the base URL is back-relative and the URL to relativize is either root-relative, forward-relative, or is absolute (ie. has a domain), or is also back-relative but has a differing amount of back folder jumps than the base URL
+	- the base URL is absolute (i.e. has a domain) and the URL to relativize is either root-relative, forward-relative, back-relative, or has a domain that doesn't match that of the base URL
+	- the base URL is root-relative and the URL to relativize is either forward-relative, back-relative, or is absolute (i.e. has a domain)
+	- the base URL is forward-relative and the URL to relativize is either root-relative, back-relative, or is absolute (i.e. has a domain)
+	- the base URL is back-relative and the URL to relativize is either root-relative, forward-relative, or is absolute (i.e. has a domain), or is also back-relative but has a differing amount of back folder jumps than the base URL
 
 	EXAMPLES
 	............................................................................................
-	// base URL is absolute (ie. has a domain)
+	// base URL is absolute (i.e. has a domain)
 
 	Uize.Url.toRelative ('http://www.foo.com/','/foo/bar/');            // null
 	Uize.Url.toRelative ('http://www.foo.com/','foo/bar/');             // null
@@ -139,7 +139,7 @@ When a Relative URL Cannot Be Created
 	............................................................................................
 
 	When the URL to Relativize is Absolute
-		`When a relative URL cannot be created` and the URL to relativize is absolute (ie. has a domain), then the URL to relativize will be returned rather than the value =null=.
+		`When a relative URL cannot be created` and the URL to relativize is absolute (i.e. has a domain), then the URL to relativize will be returned rather than the value =null=.
 
 		The rationale behind this behavior is that an absolute URL, when resolved against another URL, will always produce that absolute URL. So, returning an absolute URL that can work against the base URL is better than returning =null=.
 

@@ -1,6 +1,6 @@
 A new [[../examples/options-dynamic.html][Dynamic Options]] example has been added.
 
-This new example demonstrates the =Uize.Widget= class' support for inline JST (JavaScript Template) script blocks for declaring a widget's HTML generator, as well as the =Uize.Widget.Options= class' behavior of invoking a registered generator to rebuild the UI each time the options set changes (ie. the value of the =values= state property changes).
+This new example demonstrates the =Uize.Widget= class' support for inline JST (JavaScript Template) script blocks for declaring a widget's HTML generator, as well as the =Uize.Widget.Options= class' behavior of invoking a registered generator to rebuild the UI each time the options set changes (i.e. the value of the =values= state property changes).
 
 [[../examples/options-dynamic.html][CHECK IT OUT]]
 

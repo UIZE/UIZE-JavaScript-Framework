@@ -574,7 +574,7 @@ Uize.module ({
 							When no =encodingSTR= parameter is specified, the default value ='hex'= will be used and the method will return a string value, being a hex formatted random RGB color value.
 
 							NOTES
-							- when the value ='color'= is specified for the =encodingSTR= parameter, then this method will return an instance of the =Uize.Color= object with its encoding set to ='hex'= (ie. in the =sRGB= color space)
+							- when the value ='color'= is specified for the =encodingSTR= parameter, then this method will return an instance of the =Uize.Color= object with its encoding set to ='hex'= (i.e. in the =sRGB= color space)
 							- see the related =random= instance method
 				*/
 			};
@@ -699,7 +699,7 @@ Uize.module ({
 
 							The above examples show different ways that different components in the color space can be completely ignored when sorting, simply by giving them a weight of =0=.
 
-							The "darkest to lightest" example sorts the array so that the darkest colors appear first. This is done by specifying a reference color in the =HSL= color space, with its lightness component set to =0= (ie. black), and with the components other than lightness given a weight of =0=. The "lightest to darkest" example operates in a similar way, excepting that the reference color for the sort has lightness set to =100= (ie. white). The "most to least saturated" example specifies weighting of =0= for hue and lightness so that only saturation affects the sort, and the saturation for the reference color is set to =100= (ie. most saturated first). The "hue only, starting with green" example makes hue the only component of importance, and the hue for the reference color is set to =120= (ie. green).
+							The "darkest to lightest" example sorts the array so that the darkest colors appear first. This is done by specifying a reference color in the =HSL= color space, with its lightness component set to =0= (i.e. black), and with the components other than lightness given a weight of =0=. The "lightest to darkest" example operates in a similar way, excepting that the reference color for the sort has lightness set to =100= (i.e. white). The "most to least saturated" example specifies weighting of =0= for hue and lightness so that only saturation affects the sort, and the saturation for the reference color is set to =100= (i.e. most saturated first). The "hue only, starting with green" example makes hue the only component of importance, and the hue for the reference color is set to =120= (i.e. green).
 
 							VARIATION 2
 							............................................

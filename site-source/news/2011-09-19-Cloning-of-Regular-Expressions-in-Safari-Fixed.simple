@@ -1,4 +1,4 @@
-A minor issue that was discovered in Safari with the =Uize.clone= method when cloning regular expressions (ie. instances of the =RegExp= object) has been fixed.
+A minor issue that was discovered in Safari with the =Uize.clone= method when cloning regular expressions (i.e. instances of the =RegExp= object) has been fixed.
 
 Because of a behavior in Safari's JavaScript interpreter, cloning a regular expression using the =Uize.clone= method was not actually creating a clone but was simply returning a reference to the =RegExp= instance that was to be cloned. A workaround was put in place for the Safari behavior, and cloning regular expressions using the =Uize.clone= method now works in all major browsers.
 

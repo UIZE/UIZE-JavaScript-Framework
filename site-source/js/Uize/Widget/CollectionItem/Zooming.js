@@ -332,7 +332,7 @@ Uize.module ({
 							alignX
 								A floating point number in the range of =0= to =1=, representing the horizontal alignment of the zoomed in image.
 
-								A value of =0= indicates that the zoomed in image is aligned so that its leftmost side is visible, a value of =1= indicates that the zoomed in image is aligned so that its rightmost side is visible, and a value of =.5= indicates that the zoomed in image is aligned so that its center horizontally is visible. The value of this property is automatically updated during user interaction with the instance (ie. when the =inUse= state property is set to =true=).
+								A value of =0= indicates that the zoomed in image is aligned so that its leftmost side is visible, a value of =1= indicates that the zoomed in image is aligned so that its rightmost side is visible, and a value of =.5= indicates that the zoomed in image is aligned so that its center horizontally is visible. The value of this property is automatically updated during user interaction with the instance (i.e. when the =inUse= state property is set to =true=).
 
 								NOTES
 								- the initial value is =0=
@@ -349,7 +349,7 @@ Uize.module ({
 							alignY
 								A floating point number in the range of =0= to =1=, representing the vertical alignment of the zoomed in image.
 
-								A value of =0= indicates that the zoomed in image is aligned so that its topmost side is visible, a value of =1= indicates that the zoomed in image is aligned so that its bottommost side is visible, and a value of =.5= indicates that the zoomed in image is aligned so that its center vertically is visible. The value of this property is automatically updated during user interaction with the instance (ie. when the =inUse= state property is set to =true=).
+								A value of =0= indicates that the zoomed in image is aligned so that its topmost side is visible, a value of =1= indicates that the zoomed in image is aligned so that its bottommost side is visible, and a value of =.5= indicates that the zoomed in image is aligned so that its center vertically is visible. The value of this property is automatically updated during user interaction with the instance (i.e. when the =inUse= state property is set to =true=).
 
 								NOTES
 								- the initial value is =0=

@@ -373,7 +373,7 @@
 						- =undefined=
 						- =null=
 
-						Particularly as it relates to object type values (such as regular expressions, function references, instances of =Uize.Class= subclasses, etc.), this means that these values will not be traversed deeper - even if they contain custom properties. Any object value that is not a plain object (ie. an instance of =Object=) will be treated as a leaf node value and not as a structure defining node.
+						Particularly as it relates to object type values (such as regular expressions, function references, instances of =Uize.Class= subclasses, etc.), this means that these values will not be traversed deeper - even if they contain custom properties. Any object value that is not a plain object (i.e. an instance of =Object=) will be treated as a leaf node value and not as a structure defining node.
 
 					Including Non-leaf Nodes
 						Non-leaf nodes of the source object can be included in the flattened object produced by the =Uize.Data.Flatten.flatten= method, by specifying the value =true= for the method's optional =includeNonLeafNodesBOOL= third argument.

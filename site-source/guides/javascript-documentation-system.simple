@@ -442,7 +442,7 @@ Lists
 				+) list item 3
 
 			Letter Labeled Lists
-				Letter labeled lists can be achieved by using a single lowercase letter (eg. "a"), a single uppercase letter (eg. "A"), or the "@" (at sign) character.
+				Letter labeled lists can be achieved by using a single lowercase letter (e.g. "a"), a single uppercase letter (e.g. "A"), or the "@" (at sign) character.
 
 				- *lowercase letters* - using a single lowercase letter ("a" through "z") will result in labeling using lowercase letters
 				- *uppercase letters* - using a single uppercase letter ("A" through "Z") will result in labeling using uppercase letters
@@ -882,7 +882,7 @@ Links
 			For more info, consult the `Sample Code Blocks` section.
 
 		Section Links Using Square Brackets
-			Text that is linked using the double square brackets syntax will be linked to a section in the same document, if there is a section whose heading exactly matches the URL part of the link (ie. the first pair of nested square brackets).
+			Text that is linked using the double square brackets syntax will be linked to a section in the same document, if there is a section whose heading exactly matches the URL part of the link (i.e. the first pair of nested square brackets).
 
 			Titled Section Links
 				When linking to a section using the square brackets syntax, the text that is linked to the section can be different to the section's heading by specifying a title for the link using the second pair of nested square brackets.
@@ -1487,7 +1487,7 @@ Object Blocks
 				Bear in mind that using SimpleData format does not allow you to differentiate between string, number, and boolean types for property values - all non-array and non-object values for nodes in a SimpleData data structure are string. If it is important to the object block type that some properties of the object block data have non-string type values, then you will need to use `JSON format for object block data`.
 
 			JSON Format for Object Block Data
-				In cases where type for property values of the `object block data` is important (ie. boolean vs number vs string, etc.), the data can be specified in JSON format as follows...
+				In cases where type for property values of the `object block data` is important (i.e. boolean vs number vs string, etc.), the data can be specified in JSON format as follows...
 
 				~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 				.................................................
@@ -1656,7 +1656,7 @@ Object Blocks
 					The =data= property of the `table object block` is required and allows the row data for the table to be specified.
 
 					Table Data is a Two Dimensional Array
-						The value of the =data= property must be a two dimensional array (ie. an array of arrays), where the outer array represents the rows of the table, and where each element of this rows array is an array of column values.
+						The value of the =data= property must be a two dimensional array (i.e. an array of arrays), where the outer array represents the rows of the table, and where each element of this rows array is an array of column values.
 
 						Because the `object block data` is specified using the SimpleData format, there are numerous available options for expressing the two dimensional table data array (see the section `Alternative Table Rows Formatting`), including the most common / suggested form shown in the earlier example.
 
@@ -2009,7 +2009,7 @@ Sample Code Blocks
 	When Sample Code Blocks Look Like Object Blocks
 		Sample code blocks may not start with text of the form "<< block type >>" as the first line of their contents, or that line would be confused for an `object block type declaration` of the more formal syntax for `object blocks`.
 
-		In the rare event that you need to start the contents of a sample code block with a line of text that follows the syntax of an `object block type declaration` (ie. "<< block type >>"), you can used the built-in `samplecode Object Block`, as follows...
+		In the rare event that you need to start the contents of a sample code block with a line of text that follows the syntax of an `object block type declaration` (i.e. "<< block type >>"), you can used the built-in `samplecode Object Block`, as follows...
 
 		INSTEAD OF...
 		~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -2191,8 +2191,8 @@ Comments
 
 			- the comment open marker line must start with a "#" character, followed by one or more of one of the valid opener characters - "(", "[", "{", "<"
 			- the comment close marker line must start with a "#" character, followed by one or more of one of the valid closer characters - ")", "]", "}", ">"
-			- the comment closer character used must be matched to the comment opener character (ie. "(" matches ")", "[" matches "]", "{" matches "}", and "<" matches ">")
-			- the number of opener characters used must match the number of closer characters used (ie. the comment opener "#<<<" matches the comment closed "#>>>", but does not match the comment closer "#>>")
+			- the comment closer character used must be matched to the comment opener character (i.e. "(" matches ")", "[" matches "]", "{" matches "}", and "<" matches ">")
+			- the number of opener characters used must match the number of closer characters used (i.e. the comment opener "#<<<" matches the comment closed "#>>>", but does not match the comment closer "#>>")
 
 			Below are some examples of valid comment regions...
 

@@ -297,7 +297,7 @@ Uize.module ({
 
 							IMPORTANT
 
-							The naming of style properties in the style properties objects for the =startStylePropertiesOBJ= and =endStylePropertiesOBJ= parameters should use the DOM reflected (ie. camelCased) names rather than the CSS format names. For example, the CSS style property =border-left-color= is reflected in the DOM as =borderLeftColor=.
+							The naming of style properties in the style properties objects for the =startStylePropertiesOBJ= and =endStylePropertiesOBJ= parameters should use the DOM reflected (i.e. camelCased) names rather than the CSS format names. For example, the CSS style property =border-left-color= is reflected in the DOM as =borderLeftColor=.
 
 							VARIATION 1
 							.............................
@@ -390,7 +390,7 @@ Uize.module ({
 								................................................................................
 
 							### Specifying Dimension Values
-								- mention that the value for any position and dimension CSS style property can be specified as a string in pixels (eg. {left:'100px'}) or as a number (eg. {left:100})
+								- mention that the value for any position and dimension CSS style property can be specified as a string in pixels (e.g. {left:'100px'}) or as a number (e.g. {left:100})
 
 							### Fading From Current
 

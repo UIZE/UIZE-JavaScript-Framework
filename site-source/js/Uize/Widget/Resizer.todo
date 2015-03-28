@@ -10,7 +10,7 @@ This is a TO DO document for the =Uize.Widget.Resizer= module.
 
 - support for floating point coordinates
 - support for resize pinned to center using ctrl modifier key
-- support for constraining to not fall entirely outside of a specified region (ie. hanging-on-by-a-thread mode)
+- support for constraining to not fall entirely outside of a specified region (i.e. hanging-on-by-a-thread mode)
 - support snapping behaviors, with modifier key for override
 - support for maximum dimensions (maxWidth, maxHeight)
 - support for allowing override of constrained aspect ratio (using modifier key?) -- is this the same as "concept of preferred aspect ratio" that I made a note about at one point?

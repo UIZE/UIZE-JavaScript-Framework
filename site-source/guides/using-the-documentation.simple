@@ -35,7 +35,7 @@ Sections of This Web Site
 		Structure of the Module Reference Section
 			The contents list under this section is structured according to the class and namespace hierarchy of the modules, themselves.
 
-			So, for example, the reference document for the =Uize.Widget.Page= class would be the item "Page" under the section "Widget" under the section "Uize" (ie. "Uize" -> "Widget" -> "Page"). For modules that also have modules underneath them, the item for the module will be named =&#91;&#91; BASE &#93;&#93;= and will be inside the section named after the last level in the module's name. For instance, the class =Uize.Widget= is represented as the item "&#91;&#91; BASE &#93;&#93;" under the section "Widget" under the section "Uize" (ie. "Uize" -> "Widget" -> "&#91;&#91; BASE &#93;&#93;"). This allows "Widget" to be a section that contains all the other subclasses and deeper namespaces alongside the =Uize.Widget= base class.
+			So, for example, the reference document for the =Uize.Widget.Page= class would be the item "Page" under the section "Widget" under the section "Uize" (i.e. "Uize" -> "Widget" -> "Page"). For modules that also have modules underneath them, the item for the module will be named =&#91;&#91; BASE &#93;&#93;= and will be inside the section named after the last level in the module's name. For instance, the class =Uize.Widget= is represented as the item "&#91;&#91; BASE &#93;&#93;" under the section "Widget" under the section "Uize" (i.e. "Uize" -> "Widget" -> "&#91;&#91; BASE &#93;&#93;"). This allows "Widget" to be a section that contains all the other subclasses and deeper namespaces alongside the =Uize.Widget= base class.
 
 		Viewing Module Source Code
 			On any one of the module reference documents, you can conveniently view the source code of the module by clicking the *"SOURCE"* button on the right hand side of the title bar.
@@ -60,7 +60,7 @@ Sections of This Web Site
 Search Tips
 	If you're looking for information on something in particular, be sure to use the convenient *"SEARCH"* link located in the lower left - at the very bottom of the contents menu pane.
 
-	You may be looking for references to a certain topic (such as "Ajax"), or you may be looking for references to method names (eg "Uize.Dom.Basics.setStyle"), or module names (eg. "Uize.Widget.Calendar"), or types of widgets (eg. "calendar"). Search for anything within the UIZE Web site. Just click the *"SEARCH"* link, enter your search query in the search page that loads in, and then click on one of the search buttons for the various main sections of the site - your search will be conducted within that section.
+	You may be looking for references to a certain topic (such as "Ajax"), or you may be looking for references to method names (eg "Uize.Dom.Basics.setStyle"), or module names (e.g. "Uize.Widget.Calendar"), or types of widgets (e.g. "calendar"). Search for anything within the UIZE Web site. Just click the *"SEARCH"* link, enter your search query in the search page that loads in, and then click on one of the search buttons for the various main sections of the site - your search will be conducted within that section.
 
 	Searching for References to a Module
 		When you're reading up on a particular JavaScript module and you want to understand more about it by viewing examples that use it, or by reading guides that reference it, or by seeing how it's used by other modules, etc., then a dedicated feature of the module reference documents will make your life easier.

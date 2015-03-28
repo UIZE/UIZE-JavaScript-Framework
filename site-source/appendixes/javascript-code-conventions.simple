@@ -68,12 +68,12 @@ Naming Conventions
 		Hungarian notation (where a type prefix is prepended to identifier names) is generally discouraged. When it is desirable to explicitly denote type in an identifier name, code in the UIZE JavaScript Framework follows the convention of appending a type indicator such as =Str= (as in =userInfoStr=) or =Obj= (as in =userProfileObj=).
 
 		Strings
-			Wherever possible and where it is semantically correct, use the suffix "Name" (eg. formFieldName, paramName, objectName, propertyName). It is implicit from such a suffix that the variable is a string type.
+			Wherever possible and where it is semantically correct, use the suffix "Name" (e.g. formFieldName, paramName, objectName, propertyName). It is implicit from such a suffix that the variable is a string type.
 
-			A common convention is to use the suffix "Str" (eg. field
+			A common convention is to use the suffix "Str" (e.g. =rgbColorStr=).
 
 		Numbers
-			A common convention is to use the suffix "No" (eg. =elementNo=) in iterator names to indicate that the identifier is an integer.
+			A common convention is to use the suffix "No" (e.g. =elementNo=) in iterator names to indicate that the identifier is an integer.
 
 		Booleans
 			Typically, Boolean identifier names contain a word (such as =is=, =must=, =can=, =are=, etc.) that indicates that the identifier is a Boolean, while still forming a readable name.
@@ -250,7 +250,7 @@ Layout
 	### Function Calls With Many Parameters
 
 	JSON Declarations
-		Following is an example of how indentation is used within the declaration of a JSON object (ie. literal syntax for object creation).
+		Following is an example of how indentation is used within the declaration of a JSON object (i.e. literal syntax for object creation).
 
 		EXAMPLE
 		......................................

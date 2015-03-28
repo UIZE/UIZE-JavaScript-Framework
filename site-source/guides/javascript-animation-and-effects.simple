@@ -7,7 +7,7 @@ Introduction
 
 	WHAT ALL CAN BE ANIMATED?
 
-	Many visible properties of a document can be animated, such as color style properties (eg. =color=, =background=, =backgroundColor=, =borderColor=, etc.), position style properties (eg. =top=, =right=, =bottom=, =left=, =backgroundPosition=), padding and margin style properties (eg. =padding=, =paddingTop=, =paddingRight=, =paddingBottom=, =paddingLeft=, =margin=, =marginTop=, etc.), dimension style properties (eg. =width=, =height=, =maxWidth=, =maxHeigh=, =borderWidth=, =borderTopWidth=, etc.), and font style properties (eg. =fontSize=, =letterSpacing=, =wordSpacing=, =lineHeight=, =textIndent=).
+	Many visible properties of a document can be animated, such as color style properties (e.g. =color=, =background=, =backgroundColor=, =borderColor=, etc.), position style properties (e.g. =top=, =right=, =bottom=, =left=, =backgroundPosition=), padding and margin style properties (e.g. =padding=, =paddingTop=, =paddingRight=, =paddingBottom=, =paddingLeft=, =margin=, =marginTop=, etc.), dimension style properties (e.g. =width=, =height=, =maxWidth=, =maxHeigh=, =borderWidth=, =borderTopWidth=, etc.), and font style properties (e.g. =fontSize=, =letterSpacing=, =wordSpacing=, =lineHeight=, =textIndent=).
 
 	In addition, the UIZE JavaScript Framework lets you animate the values of state properties for instances of =Uize.Class= subclasses, calls to methods, and calls to arbitrary functions. So, beyond just visible style properties of a document, you can animate state of anything. And you're not even limited to time-based effects - you can even use the effects system to produce color gradients and other `non-time based fades`.
 
@@ -257,8 +257,8 @@ The Fade Factory
 	Looking at the example, you should notice a few important things:
 
 	+. The first parameter is the update handler function, and it receives the interpolated value as its parameter.
-	+. The second and third parameters are the start and end values for the fade, respectively (ie. the values for the =Uize.Fade= instance's =startValue= and =endValues= state properties).
-	+. The fourth parameter is the fade's duration (ie. the value for the =Uize.Fade= instance's =duration= state property).
+	+. The second and third parameters are the start and end values for the fade, respectively (i.e. the values for the =Uize.Fade= instance's =startValue= and =endValues= state properties).
+	+. The fourth parameter is the fade's duration (i.e. the value for the =Uize.Fade= instance's =duration= state property).
 	+. The last parameter is for additional state property values that should be set on the =Uize.Fade= instance before the fade is started (in this case we're using it to set =quantization=).
 
 	Non-interpolated Values
@@ -445,7 +445,7 @@ The Fade Factory
 		Uize.Fade.fadeProperties (marquee,{width:10,height:10},{width:100,height:100},2000);
 		....................................................................................
 
-		In the above example, =marquee= is an instance of the =Uize.Widget.Resizer.Marquee= class. The statement will fade its dimensions (ie. the values of its =width= and =height= state properties) from 10 x 10 to 100 x 100 over a period of =2000= milliseconds (2 seconds).
+		In the above example, =marquee= is an instance of the =Uize.Widget.Resizer.Marquee= class. The statement will fade its dimensions (i.e. the values of its =width= and =height= state properties) from 10 x 10 to 100 x 100 over a period of =2000= milliseconds (2 seconds).
 
 		Now, for what it's worth, you could also accomplish the same effect using the =Uize.Fade.fadeMethod= method, as follows...
 
@@ -706,12 +706,12 @@ Curves
 				A curve function should be able to handle input values that were generated from some other curve function that used overshoot to achieve motion effects like bounce, springiness, wobble, elasticity, etc.
 
 			Start At 0, End At 1
-				A curve function should start at =0= (ie. the input value =0= should produce the output value =0=) and end at =1= (ie. the input value =1= should produce the output value =1=).
+				A curve function should start at =0= (i.e. the input value =0= should produce the output value =0=) and end at =1= (i.e. the input value =1= should produce the output value =1=).
 
 				Curve functions that produce curves that start at the value =0= and end at the value =1= can be rotated 180 degrees to produce new curves that still start at =0= and end at =1=. The rotated version of an `ease-in curve function` would produce an `ease-out curve function`. Similarly, the rotated version of an `ease-out curve function` would produce an `ease-in curve function`.
 
 			Deterministic
-				Ideally, a curve function should be deterministic (ie. it should always return the same output value for the same input value), although this is not a hard requirement.
+				Ideally, a curve function should be deterministic (i.e. it should always return the same output value for the same input value), although this is not a hard requirement.
 
 				Curve functions that are computationally complex can be sampled in order to improve performance, so that complex computations aren't performed repeatedly during peformance intensive animation effects. If a curve function is non-deterministic, then it will become deterministic as a result of being sampled. If apparent randomness or noise is desired in a curve, it is better to add it using a deterministic algorithm.
 

@@ -106,7 +106,7 @@ More Versatile wireNode Method
 - a way of easily binding any state property to either a child widget (or any widget) or an implied node
 	- the connection is bi-directional (changing the child widget's value or node's value updates state property, and changing state property value updates child widget's or node's value)
 - disabled reason mechanism
-	- a general mechanism for widgets to have reasons registered for why they are disabled. Then, a tooltip could display this reason (or reasons) on mousing over the widget, or a dialog with the reason (or reasons) could be displayed when trying to interact with the widget (eg. clicking or mousing down on it)
+	- a general mechanism for widgets to have reasons registered for why they are disabled. Then, a tooltip could display this reason (or reasons) on mousing over the widget, or a dialog with the reason (or reasons) could be displayed when trying to interact with the widget (e.g. clicking or mousing down on it)
 - node cache improvements
 	- different caching levels
 		- never
@@ -171,7 +171,7 @@ New Mode for Building HTML
 	- a way to set state all the way through a widget tree
 
 **** a way of cloning the DOM nodes used by one instance, to be used in another instance
-- a formalized means of declaring certain state properties as display properties (ie. properties that impact display)
+- a formalized means of declaring certain state properties as display properties (i.e. properties that impact display)
 
 - a way for one widget to have more than one set of DOM nodes for the same UI (to have the UI appear in more than one place)
 - provide an automatic way to bubble up inDrag state and the drag events for all widgets (an onChange handler for inDrag at the Uize.Widget level?)

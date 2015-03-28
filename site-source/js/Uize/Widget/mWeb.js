@@ -82,7 +82,7 @@ Uize.module ({
 									NOTES
 									- The =impliedNodeSTRorBLOB= parameter can be a string specifying the name of the implied node, or an object reference to the implied node.
 									- When the =impliedNodeSTRorBLOB= parameter has a value of =null=, then an empty =Uize.Web= object is returned.
-									- When the =impliedNodeSTRorBLOB= parameter has a value of =undefined= or is not specified, then the root node of the widget is contained by the returned =Uize.Web= object. This has the same effect as specifying the empty string. (ie. =web()= is equivalent to =web('')=)
+									- When the =impliedNodeSTRorBLOB= parameter has a value of =undefined= or is not specified, then the root node of the widget is contained by the returned =Uize.Web= object. This has the same effect as specifying the empty string. (i.e. =web()= is equivalent to =web('')=)
 									- See related =getNode= instance method of =Uize.Widget=
 									- See also =Uize.Web= object
 						*/

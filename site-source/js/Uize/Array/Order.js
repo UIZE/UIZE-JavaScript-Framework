@@ -160,7 +160,7 @@ Uize.module ({
 							;
 							.............................................................................
 
-							By default, the =Uize.Array.Order.reorder= method packages the reordered array elements into a new array and does not modify the source array (ie. it's non-destructive). Specifying the optional =targetARRAYorBOOL= parameter allows us to explicitly specify a target for the operation, into which the reordered elements will be packaged.
+							By default, the =Uize.Array.Order.reorder= method packages the reordered array elements into a new array and does not modify the source array (i.e. it's non-destructive). Specifying the optional =targetARRAYorBOOL= parameter allows us to explicitly specify a target for the operation, into which the reordered elements will be packaged.
 
 							VARIATION 2
 							......................................................
@@ -331,9 +331,9 @@ Uize.module ({
 
 					- When the *boolean* value =true= is specified (the default value for the =targetARRAYorBOOL= parameter if it is omitted), then the result of an array method's processing will be packaged into a new array.
 
-					- When the *boolean* value =false= is specified (not the same as not specifying a value), then the result of an array method's processing will be packaged into the source array that was supplied to the array method in its =sourceARRAY= parameter (ie. the method won't use a different target).
+					- When the *boolean* value =false= is specified (not the same as not specifying a value), then the result of an array method's processing will be packaged into the source array that was supplied to the array method in its =sourceARRAY= parameter (i.e. the method won't use a different target).
 
-					- When an *array* is explicitly specified, then the result of an array method's processing will be packaged into the specified target array. This is convenient if you already have an array into which you wish to package the result. Incidentally, specifying the source array that you supplied to an array method as also the target array has the same effect as specifying the value =false= for =targetARRAYorBOOL= (ie. use the source as the target, don't use a different target).
+					- When an *array* is explicitly specified, then the result of an array method's processing will be packaged into the specified target array. This is convenient if you already have an array into which you wish to package the result. Incidentally, specifying the source array that you supplied to an array method as also the target array has the same effect as specifying the value =false= for =targetARRAYorBOOL= (i.e. use the source as the target, don't use a different target).
 		*/
 	}
 });

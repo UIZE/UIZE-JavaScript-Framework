@@ -168,7 +168,7 @@ What They Look Like
 				});
 				....................................................................
 
-				By not requiring the modules that are listed in a library module, loading in a source version of a JavaScript library file should have no effect with regards to loading of modules, and it should be left up to the declaration of other modules in the page to kick off the dynamic loading of modules required by the page's code. This way, the JavaScript library file cannot mask any ommissions or other errors in the =required= lists of the other module declarations (eg. the anonymous module setting up the page widget instance) in the page.
+				By not requiring the modules that are listed in a library module, loading in a source version of a JavaScript library file should have no effect with regards to loading of modules, and it should be left up to the declaration of other modules in the page to kick off the dynamic loading of modules required by the page's code. This way, the JavaScript library file cannot mask any ommissions or other errors in the =required= lists of the other module declarations (e.g. the anonymous module setting up the page widget instance) in the page.
 
 	The Built Version
 		JavaScript library files are built by the =Uize.Build.Files.JsModules= build script into JavaScript files of the same name, but that are located in your project where scrunched JavaScript files are configured to be located (see the [[javascript-build-scripts.html][JavaScript Build Scripts]] guide for more information).

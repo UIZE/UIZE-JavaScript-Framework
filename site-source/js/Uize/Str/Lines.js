@@ -313,7 +313,7 @@ Uize.module ({
 							linebreakCharsSTR = Uize.Str.Lines.getLinebreakType (sourceSTR,defaultLinebreakCharsSTR);
 							.........................................................................................
 
-							The value returned by this method will be either ='\n'= (a linefeed character), ='\r'= (a carriage return character), or ='\r\n'= (a combination of a carriage return character followed by a linefeed character). If the string specified by the =sourceSTR= parameter does not contain any linebreak characters (ie. it's a single line string with no linebreak at the end), then this method will return the value of the optional =defaultLinebreakCharsSTR= parameter.
+							The value returned by this method will be either ='\n'= (a linefeed character), ='\r'= (a carriage return character), or ='\r\n'= (a combination of a carriage return character followed by a linefeed character). If the string specified by the =sourceSTR= parameter does not contain any linebreak characters (i.e. it's a single line string with no linebreak at the end), then this method will return the value of the optional =defaultLinebreakCharsSTR= parameter.
 
 							VARIATION
 							................................................................
@@ -524,14 +524,14 @@ Uize.module ({
 				/*?
 					Static Methods
 						Uize.Str.Lines.normalizeIndent
-							Returns a string, being the specified source string with its indentation normalized (ie. unindented as much as necessary), so that the least indented line ends up being flush against the left.
+							Returns a string, being the specified source string with its indentation normalized (i.e. unindented as much as necessary), so that the least indented line ends up being flush against the left.
 
 							SYNTAX
 							.........................................................................
 							multilineSTR = Uize.Str.Lines.normalizeIndent (sourceSTR,indentCharsSTR);
 							.........................................................................
 
-							This method is useful when extracting a portion of a structured text document that has many levels of indenting. In a portion that is extracted from such a string, the least indented line may still have many levels of indenting ahead of its first non-whitespace character. The =Uize.Str.Lines.normalizeIndent= method can be used to unindent all lines of the multi-line string, only as much as is necessary in order to make the least indented line(s) of the string have no indent (ie. be flush left).
+							This method is useful when extracting a portion of a structured text document that has many levels of indenting. In a portion that is extracted from such a string, the least indented line may still have many levels of indenting ahead of its first non-whitespace character. The =Uize.Str.Lines.normalizeIndent= method can be used to unindent all lines of the multi-line string, only as much as is necessary in order to make the least indented line(s) of the string have no indent (i.e. be flush left).
 
 							VARIATION
 							..........................................................

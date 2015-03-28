@@ -170,7 +170,7 @@ General Requirements for a Localization System
 
 			All UI components would ideally be implemented to allow updated resource strings to be dynamically propagated into the UI, and the app environment would support the ability to switch locale and have the necessary resource strings for the new locale be loaded for all the localized UI controls.
 
-			Live locale switching would ideally be supported at a UI component level, with the ability to use a locale switcher for an individual component. When a component is switched to a new locale, all of its child components and their child components (ie. the entire component tree beneath it) should be switched to the new locale as well.
+			Live locale switching would ideally be supported at a UI component level, with the ability to use a locale switcher for an individual component. When a component is switched to a new locale, all of its child components and their child components (i.e. the entire component tree beneath it) should be switched to the new locale as well.
 
 		Dynamic / Live Updating
 			In order to enable more responsive tools for translating resource strings and instantly previewing the translations in the UI, the UI framework's localization mechanism should ideally support dynamically updating the UI as resource strings are modified.
@@ -605,7 +605,7 @@ Resource Files
 			Token Type
 				.
 
-				the token syntax should support specifying of type and formatting options per type (eg. a substitution value that is a date value)
+				the token syntax should support specifying of type and formatting options per type (e.g. a substitution value that is a date value)
 
 				Formatting Options
 					.
@@ -651,7 +651,7 @@ Resource Files
 
 				- the translation is not to exceed a specified maximum number of characters in length
 				- the translation is not to exceed the length of the English source string (in case the UI layout can fit only as many characters as are in the existing English source string)
-				- the translation should be no more than a specified percentage longer than the English source string (eg. maximum 20% longer than original)
+				- the translation should be no more than a specified percentage longer than the English source string (e.g. maximum 20% longer than original)
 
 			Resource String Translation Instructions
 				The metadata facility can be used to provide general instructions to inform how a resource string should be translated.
@@ -690,7 +690,7 @@ Resource Files
 						- metadata can be structured objects if the resource file format supports a hierarchical structure (such as JSON, YAML)
 					- downsides to this approach...
 						- requires additional processing to remove resource string metadata that is not needed at runtime when building app for production
-						- structured metadata would need to be expressed through serialized JSON (or some other form) if the resource file format doesn't support a hierarchical structure (eg. *.strings* or *.properties* files)
+						- structured metadata would need to be expressed through serialized JSON (or some other form) if the resource file format doesn't support a hierarchical structure (e.g. *.strings* or *.properties* files)
 
 				Embed Metadata in Resource String Values
 					- store the metadata as embedded information inside the resource string values, using some form of markup format that can allow the metadata to be opaque to translators and ignored by their tools, or extracted and removed from the values during the process for exporting translation job files.
@@ -783,7 +783,7 @@ Resource Files
 			- contains no translations
 			- contains definitions of types for substitutions
 			- contains optional default formatting options for substitutions
-			- contains meta data that can provide cues to the translators (eg. context of usage, notes on screen real-estate limits / constraints, notes on tone of language, etc.)
+			- contains meta data that can provide cues to the translators (e.g. context of usage, notes on screen real-estate limits / constraints, notes on tone of language, etc.)
 			- example values for substitutions
 
 		- for substitutions, support the ability to define custom types that can have their own per-language example values

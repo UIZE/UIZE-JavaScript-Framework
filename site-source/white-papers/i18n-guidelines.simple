@@ -7,7 +7,7 @@ Expose Resource Strings to Localization
 		In particular, this means that some strings used in some atypical ways should also be "surfaced" so that they can be picked up by the localization process and translated accordingly.
 
 		Externalize Resources for Files That Require Post-Processing
-			Consider the example of source image files (eg. Photoshop =.psd= files) that contain text that needs to be translated and rasterized to produce unique =.jpeg= files per language.
+			Consider the example of source image files (e.g. Photoshop =.psd= files) that contain text that needs to be translated and rasterized to produce unique =.jpeg= files per language.
 
 			With just a source file in a project's codebase, the strings will not be automatically translated. In order to have these strings translated so that the post-processing can be performed to generate the language specific JPEGs, the strings should be in a resource file that is recognized by the localization process.
 

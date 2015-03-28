@@ -3,7 +3,7 @@ This is a TO DO document for the =UizeSite.Build.FileBuilders.TempSotuModule= mo
 Additional Information, Per Module
 	It would be nice to have the additional generated / derived information, per module...
 
-	- number of modules that require the module (ie. how shared is the module throughout framework, or is it more isolated)
+	- number of modules that require the module (i.e. how shared is the module throughout framework, or is it more isolated)
 	- total number of modules (directly and indirectly) required by the module
 	- total scrunched size of all modules (directly and indirectly) required by the module
 	- creation date of the module

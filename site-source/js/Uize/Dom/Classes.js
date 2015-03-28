@@ -341,7 +341,7 @@
 				Uize.Dom.Classes.toggleState ('recommendationsPod',['disabled','enabled']);
 				...........................................................................
 
-				In the above example, whichever of the two CSS classes ='disabled'= or ='enabled'= is present in the =className= property of the node with the =id= of ='recommendationsPod'= will be replaced with the other. So, if the =className= property contains the class ='disabled'=, then it will be replaced with the class ='enabled'=. Conversely, if the =className= property contains the class ='disabled'=, then it will be replaced with the class ='enabled'=. If the =className= property contains neither of the classes ='disabled'= or ='enabled'=, then the first of the state classes (ie. ='disabled'=) will be added.
+				In the above example, whichever of the two CSS classes ='disabled'= or ='enabled'= is present in the =className= property of the node with the =id= of ='recommendationsPod'= will be replaced with the other. So, if the =className= property contains the class ='disabled'=, then it will be replaced with the class ='enabled'=. Conversely, if the =className= property contains the class ='disabled'=, then it will be replaced with the class ='enabled'=. If the =className= property contains neither of the classes ='disabled'= or ='enabled'=, then the first of the state classes (i.e. ='disabled'=) will be added.
 
 				The =Uize.Dom.Classes.toggleState= method, along with the other state related methods, supports `multiple state classes`.
 
@@ -352,7 +352,7 @@
 
 					+. If none of the state classes are present in the node's =className= property, then the first of the state classes will be appended, with a single space separating it from the other classes (if present).
 					+. If any of the state classes other than the last of the state classes is present in the node's =className= property, then it will be replaced with the next state class in the list.
-					+. If the last of the state classes is present in the node's =className= property, then it will be replaced with the first state class in the list (ie. wrapping around).
+					+. If the last of the state classes is present in the node's =className= property, then it will be replaced with the first state class in the list (i.e. wrapping around).
 
 					To illustrate the above rules, consider the following example...
 
@@ -730,9 +730,9 @@ Uize.module ({
 					stateClassesSTRorARRAY
 						A comma-separated string or an array of strings, specifying a list of CSS classes that are to be mapped to a =stateBOOLorINT= type value.
 
-						Values of this type can be accepted by the `state related methods` (=Uize.Dom.Classes.setState=, =Uize.Dom.Classes.getState=, =Uize.Dom.Classes.toggleState=, and =Uize.Dom.Classes.removeState=). A =stateClassesSTRorARRAY= value should generally specify two or more state classes, typically specifying just two (eg. ='disabled,enabled'= or =['disabled','enabled']=).
+						Values of this type can be accepted by the `state related methods` (=Uize.Dom.Classes.setState=, =Uize.Dom.Classes.getState=, =Uize.Dom.Classes.toggleState=, and =Uize.Dom.Classes.removeState=). A =stateClassesSTRorARRAY= value should generally specify two or more state classes, typically specifying just two (e.g. ='disabled,enabled'= or =['disabled','enabled']=).
 
-						In the special case where only one state class is specified (eg. ='enabled'= or =['enabled']=), it is implicit that the class specified is the second of two state classes where the first class is an empty string. Therefore, the string value ='enabled'= and the array value =['enabled']= would be equivalent to the values =',enabled'= and =['','enabled']=, respectively. This behavior provides a convenient shorthand for simple `presence or absence state` cases, where a specified single CSS class is to be mapped to the =true= value of a binary state (such as an enabled or selected state, for example), and where the =false= value is represented by the absence of that class.
+						In the special case where only one state class is specified (e.g. ='enabled'= or =['enabled']=), it is implicit that the class specified is the second of two state classes where the first class is an empty string. Therefore, the string value ='enabled'= and the array value =['enabled']= would be equivalent to the values =',enabled'= and =['','enabled']=, respectively. This behavior provides a convenient shorthand for simple `presence or absence state` cases, where a specified single CSS class is to be mapped to the =true= value of a binary state (such as an enabled or selected state, for example), and where the =false= value is represented by the absence of that class.
 			*/
 		});
 	}

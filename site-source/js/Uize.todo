@@ -275,7 +275,7 @@ Uize.TreeWalker
 Quick Win Additions (in order of priority / usefulness)
 	STILL TO DO
 		Uize.indexOf, Uize.lastIndexOf
-			- essentially derived from indexIn, but adapted to also operate on strings and to use built-in indexOf when possible and supported by JavaScript built-in objects (ie. newer versions of JavaScript)
+			- essentially derived from indexIn, but adapted to also operate on strings and to use built-in indexOf when possible and supported by JavaScript built-in objects (i.e. newer versions of JavaScript)
 
 		Uize.indexIn
 			- adapt to add support for source being a string
@@ -411,7 +411,7 @@ Uize.willCall
 						}
 
 						// loop should be driven by _extraArgsMapping - not incoming arguments?
-						// what about incoming arguments for which there are no mappings (ie. beyond end of mapping array)
+						// what about incoming arguments for which there are no mappings (i.e. beyond end of mapping array)
 						: function () {
 							for (var _argumentNo = arguments.length; --_argumentNo >= 0;)
 								_arguments [_extraArgsMapping [_argumentNo]] = arguments [_argumentNo]
@@ -499,10 +499,10 @@ Uize.memoize
 	- consider supporting ability to dynamically unmemoize / turn memoization on or off
 	- expose more granular memoization cache methods to allow functions to cache more discriminately
 	- for basic memoization, support an optional function that can test the arguments values to determine whether or not memoization should be used for the specific call
-	- consider supporting functions that may be asynchronous (ie. use callbacks)
+	- consider supporting functions that may be asynchronous (i.e. use callbacks)
 	- support ability to clear entire cache
 	- support ability to invalidate cache for a specific set of argument values
-	- idea: ability to count time saved as a result of memoization (ie. keep track of number of times particular argument sets are encountered, and how long it took for first calculation)
+	- idea: ability to count time saved as a result of memoization (i.e. keep track of number of times particular argument sets are encountered, and how long it took for first calculation)
 
 Uize.constrain
 	Support a wrap flag

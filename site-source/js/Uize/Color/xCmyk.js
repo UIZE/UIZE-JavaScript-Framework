@@ -79,7 +79,7 @@ Uize.module ({
 						/*?
 							Color Encodings
 								CMYK array
-									An array, containing four elements for cyan, magenta, yellow, and key components of the color, whose values may be floating point numbers in the range of =0= to =100= (eg. the color chartreuse is encoded as =[50,0,100,0]=).
+									An array, containing four elements for cyan, magenta, yellow, and key components of the color, whose values may be floating point numbers in the range of =0= to =100= (e.g. the color chartreuse is encoded as =[50,0,100,0]=).
 
 									SYNTAX
 									..........................................................................
@@ -128,7 +128,7 @@ Uize.module ({
 						/*?
 							Color Encodings
 								CMYK object
-									An object, containing =cyan=, =magenta=, =yellow=, and =key= properties, whose values may be floating point numbers in the range of =0= to =100= (eg. the color chartreuse is encoded as ={cyan:50,magenta:0,yellow:100,key:0}=).
+									An object, containing =cyan=, =magenta=, =yellow=, and =key= properties, whose values may be floating point numbers in the range of =0= to =100= (e.g. the color chartreuse is encoded as ={cyan:50,magenta:0,yellow:100,key:0}=).
 
 									SYNTAX
 									................................
@@ -190,7 +190,7 @@ Uize.module ({
 						/*?
 							Color Encodings
 								CMYK string
-									A =Cmyk(...)= formatted 4-tuple string (eg. the color chartreuse is encoded as ='cmyk(50%,0%,100%,0%)'=).
+									A =Cmyk(...)= formatted 4-tuple string (e.g. the color chartreuse is encoded as ='cmyk(50%,0%,100%,0%)'=).
 
 									SYNTAX
 									.................................................................
@@ -218,7 +218,7 @@ Uize.module ({
 										- because encoding as =CMYK string= rounds the values for all four components of a color, colors encoded as =CMYK string= may not produce exactly the same original color when decoding the encoded =CMYK string=
 
 									Decoding
-										When a color is decoded from =CMYK string=, the string may contain separating spaces, may be in upper, lower, or mixed case (ie. *not* case sensitive), and the "%" (percent symbol) character for the saturation and value values may be omitted.
+										When a color is decoded from =CMYK string=, the string may contain separating spaces, may be in upper, lower, or mixed case (i.e. *not* case sensitive), and the "%" (percent symbol) character for the saturation and value values may be omitted.
 
 										FUCHSIA
 										............................

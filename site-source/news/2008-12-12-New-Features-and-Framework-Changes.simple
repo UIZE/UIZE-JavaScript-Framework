@@ -14,7 +14,7 @@ Deprecated Methods in Uize.Data
 SimpleDoc Improvements
 	Some improvements have been made to the modules that support the SimpleDoc documentation build scripts.
 
-	The =Uize.Simple= module has been refactored and optimized for code size and performance. Additionally, a bug was fixed with the =Uize.Simple.collapseChildren= static method that was causing failures in cases where the name of a child node was =name=, =value=, or =children=. Also, a bug was fixed in the =Uize.SimpleDoc= module that was causing certain bullet lists to not be recognized correctly (eg. =- &#61;title&#61; description=), and documents now only get a contents list if there are some sections in the document (yes, you *can* occasionally have a document that has no nested structure).
+	The =Uize.Simple= module has been refactored and optimized for code size and performance. Additionally, a bug was fixed with the =Uize.Simple.collapseChildren= static method that was causing failures in cases where the name of a child node was =name=, =value=, or =children=. Also, a bug was fixed in the =Uize.SimpleDoc= module that was causing certain bullet lists to not be recognized correctly (e.g. =- &#61;title&#61; description=), and documents now only get a contents list if there are some sections in the document (yes, you *can* occasionally have a document that has no nested structure).
 
 Miscellaneous Improvements
 	Various miscellaneous small improvements have been made.

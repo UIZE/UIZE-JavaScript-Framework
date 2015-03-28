@@ -218,7 +218,7 @@ Create Your UIZE Project
 ### Removing Unnecessary JavaScript Files
 	There are some JavaScript files that you can remove from your "js" folder, if you wish to tidy things up a bit.
 
-	In an earlier step you copied the =UIZE-JavaScript-Framework= folder's "js" folder to your Web site project. Now, because this folder is used by the UIZE Web site, it contains a number of JavaScript modules that are specific to the UIZE Web site. You don't need these modules for your own Web site project, since they are not part of the framework, per se. These modules are the ones under the =UizeSite= namespace. You can delete all the JavaScript files prefixed with "UizeSite" (eg. =UizeSite.Page.js=) from the "js" folder that you copied over, and from the "~source" folder inside the "js" folder. You don't need the source or the scrunched versions of these files.
+	In an earlier step you copied the =UIZE-JavaScript-Framework= folder's "js" folder to your Web site project. Now, because this folder is used by the UIZE Web site, it contains a number of JavaScript modules that are specific to the UIZE Web site. You don't need these modules for your own Web site project, since they are not part of the framework, per se. These modules are the ones under the =UizeSite= namespace. You can delete all the JavaScript files prefixed with "UizeSite" (e.g. =UizeSite.Page.js=) from the "js" folder that you copied over, and from the "~source" folder inside the "js" folder. You don't need the source or the scrunched versions of these files.
 
 	A PACKAGE DEAL
 

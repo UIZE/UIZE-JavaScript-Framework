@@ -126,7 +126,7 @@
 
 				Now, as the effect progresses, the new item is revealed within an ever growing rectangle that starts out as a vertical sliver on the right, to eventually become the entire swap port. As this rectangle grows, how is the positioning of the view content within this rectangle determined? How does one qualify the difference between a wipe reveal and a slide in reveal?
 
-				The answer is to be found in the values of the =viewContentAlignX= and =viewContentAlignY= state properties. In this example, =viewContentAlignX= is set to =0=. What this means is that the new item is positioned within the ever growing `view` rectangle so that it is aligned against its left edge. This has the effect of creating a slide in effect. Were the value of =viewContentAlignX= to be =1= (ie. right aligned) or ='none'=, then you would end up with a wipe reveal.
+				The answer is to be found in the values of the =viewContentAlignX= and =viewContentAlignY= state properties. In this example, =viewContentAlignX= is set to =0=. What this means is that the new item is positioned within the ever growing `view` rectangle so that it is aligned against its left edge. This has the effect of creating a slide in effect. Were the value of =viewContentAlignX= to be =1= (i.e. right aligned) or ='none'=, then you would end up with a wipe reveal.
 
 				The value ='none'= has the same effect as right alignment in this case because the view seed starts at the right edge of the swap port and the right edge of the view rectangle stays against the right edge of the swap port as the rectangle grows during the effect. By contrast, the value ='none'= would *not* have the same effect as =1= if the =viewSeedAlignX= state property were set to =.5=.
 

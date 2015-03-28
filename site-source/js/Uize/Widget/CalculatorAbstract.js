@@ -59,7 +59,7 @@
 			Button Highlighting
 				The =Uize.Widget.CalculatorAbstract= class implements highlighting of the buttons that correspond to keys that are being pressed on the keyboard, to simulate the buttons being clicked.
 
-				For example, if you focus the =entry= widget's input node and press down on the "7" key, then the =digit7= button widget will highlight as if you were clicking down on it (ie. the value of its =state= state property will be set to ='down'=). The =digit7= button will remain in this highlighted state until the "7" key is released.
+				For example, if you focus the =entry= widget's input node and press down on the "7" key, then the =digit7= button widget will highlight as if you were clicking down on it (i.e. the value of its =state= state property will be set to ='down'=). The =digit7= button will remain in this highlighted state until the "7" key is released.
 
 				Some keys have less than obvious mappings. For instance, the "Enter" key is mapped to trigger calculation of a result, so pressing the "Enter" key will cause the =equals= button to highlight. This button is likely to have a "&#61;" label, so highlighting of this button when the "&#61;" key is pressed is more understandable. For convenience, though, both the "Enter" and "&#61;" keys trigger this button's function.
 
@@ -145,9 +145,9 @@
 		Operation Completion
 			A pending binary operation (such as =3 x 5=, for example) can be completed in any of the following ways...
 
-			- clicking the =equals= button, or pressing the =&#61;= key when the =entry= child widget's input field is focused (ie. =3 x 5 &#61;=)
+			- clicking the =equals= button, or pressing the =&#61;= key when the =entry= child widget's input field is focused (i.e. =3 x 5 &#61;=)
 
-			- clicking a binary operator button, or pressing the button's corresponding key (ie. =3 x 5 +=) when the =entry= child widget's input field is focused
+			- clicking a binary operator button, or pressing the button's corresponding key (i.e. =3 x 5 +=) when the =entry= child widget's input field is focused
 
 			- clicking either the =memoryPlus= or =memoryMinus= button, or pressing the "m" key (for memory plus) when the =entry= child widget's input field is focused
 
@@ -197,7 +197,7 @@
 			............................................................
 
 			Percent As Setup For Multiplication
-				When there is either no pending binary operation, or when there is a completed binary operation that can be compounded, then the =percent= function has the effect of dividing the current =entry= value by =100= and setting up a =multiply= operation (ie. setting the value of the =operator= state property to ='multiply'=).
+				When there is either no pending binary operation, or when there is a completed binary operation that can be compounded, then the =percent= function has the effect of dividing the current =entry= value by =100= and setting up a =multiply= operation (i.e. setting the value of the =operator= state property to ='multiply'=).
 
 				This behavior allows calculations such as...
 
@@ -278,11 +278,11 @@
 
 			The following button enabling/disabling rules apply...
 
-			- the =equals= button is disabled when there is no pending or completed binary operation (ie. the value of the =operator= state property is =undefined=)
+			- the =equals= button is disabled when there is no pending or completed binary operation (i.e. the value of the =operator= state property is =undefined=)
 
 			- all buttons - except those that can be used to enter a new value, or that are not affected by the `error state` (such as the =memoryClear= button) - will be disabled when the calculator widget is in the `error state`
 
-			- the =memoryRecall= and =memoryClear= buttons are disabled when the memory is clear (ie. the value of the =memory= state property is =undefined=), and will be enabled whenever the calculator's memory is storing a value (=memory= is not =undefined=) - regardless of other state of the calculator widget
+			- the =memoryRecall= and =memoryClear= buttons are disabled when the memory is clear (i.e. the value of the =memory= state property is =undefined=), and will be enabled whenever the calculator's memory is storing a value (=memory= is not =undefined=) - regardless of other state of the calculator widget
 
 			- the =clear= and =clearEntry= buttons are always enabled
 
@@ -635,7 +635,7 @@ Uize.module ({
 											This button's function can also be triggered by a number of other interactions with the calculator widget (for more info, see the section `Operation Completion`).
 
 											NOTES
-											- this button will be disabled if the calculator is in the `error state`, or if there is not a pending or completed binary operation (ie. the value of the =operator= state property is =undefined=)
+											- this button will be disabled if the calculator is in the `error state`, or if there is not a pending or completed binary operation (i.e. the value of the =operator= state property is =undefined=)
 								*/
 							);
 
@@ -703,7 +703,7 @@ Uize.module ({
 
 											NOTES
 											- see the related =memoryPlus=, =memoryMinus=, and =memoryClear= child widgets
-											- this button will be disabled if there is no value in the calculator's memory (ie. the value of the =memory= state property is =undefined=)
+											- this button will be disabled if there is no value in the calculator's memory (i.e. the value of the =memory= state property is =undefined=)
 								*/
 							);
 							_addChildButton (
@@ -724,7 +724,7 @@ Uize.module ({
 
 											NOTES
 											- see the related =memoryPlus=, =memoryMinus=, and =memoryRecall= child widgets
-											- this button will be disabled if there is no value in the calculator's memory (ie. the value of the =memory= state property is =undefined=)
+											- this button will be disabled if there is no value in the calculator's memory (i.e. the value of the =memory= state property is =undefined=)
 								*/
 							);
 
@@ -800,7 +800,7 @@ Uize.module ({
 										subtract
 											A button instance, that lets the user set up the subtraction binary operation.
 
-											If a binary operation has already been set up (ie. the value of the =operator= state property is no longer =undefined=) but a value has not yet been entered for the second operand (ie. the =operandB= state property is still set to =undefined=), then clicking this button will make it behave as a negation operation. For more info on this behavior, see the section `Subtraction as Negation`.
+											If a binary operation has already been set up (i.e. the value of the =operator= state property is no longer =undefined=) but a value has not yet been entered for the second operand (i.e. the =operandB= state property is still set to =undefined=), then clicking this button will make it behave as a negation operation. For more info on this behavior, see the section `Subtraction as Negation`.
 
 											Otherwise, clicking the =subtract= button has the following effects...
 

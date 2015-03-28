@@ -145,7 +145,7 @@ Improvements
 
 Design Notes
 	- don't conflate sync vs. async with serial vs. parallel processing
-	- don't conflate async with function composition (ie. next chaining, piping)
+	- don't conflate async with function composition (i.e. next chaining, piping)
 	- don't conflate data utilities solution with sync vs. async solution
 	- don't conflate callback pattern with asynchonous execution
 	- flo does not make any presumptions about what problem asynchronous code is trying to solve

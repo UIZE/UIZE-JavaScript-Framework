@@ -37,7 +37,7 @@ Introduction
 		........................................
 
 	Static Events and Instance Events
-		The =Uize.Class= base class provides a convenient infrastructure for supporting both static (ie. class) and instance events.
+		The =Uize.Class= base class provides a convenient infrastructure for supporting both static (i.e. class) and instance events.
 
 		Events can conveniently be fired for a class or an instance of a class, and methods are provided to every class that subclasses the =Uize.Class= base class to allow code to manage the wiring and unwiring of event handlers at both the instance and class levels.
 

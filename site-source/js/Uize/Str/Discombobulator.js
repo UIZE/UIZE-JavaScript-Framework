@@ -185,7 +185,7 @@ Uize.module ({
 									- no bracketing is performed around a word that begins or ends with one of the bracketing characters
 										eg. 1] [this] [is] [the] [first] [item]
 
-									- no bracketing is performed around inter-word punctuation, since the punctuation is separated out initially and stitched back in later (ie. punctuation is not regarded as a word)
+									- no bracketing is performed around inter-word punctuation, since the punctuation is separated out initially and stitched back in later (i.e. punctuation is not regarded as a word)
 										eg. [so], [punctuation] [is] [not] [a] [word]!
 								*/
 								if (_mustPerformProcess (_settings._wordBracketing)) {

@@ -153,7 +153,7 @@ Uize.module ({
 									- for relative URLs that only specify a =pathname= and/or =search= and/or =hash=, the value of this property will be =''= (an empty string)
 
 								protocol
-									A string, representing the [[http://en.wikipedia.org/wiki/Internet_Protocol][Internet protocol]] in use by the URL (eg. =http=, =ftp=, =irc=, =ssh=, etc.)
+									A string, representing the [[http://en.wikipedia.org/wiki/Internet_Protocol][Internet protocol]] in use by the URL (e.g. =http=, =ftp=, =irc=, =ssh=, etc.)
 
 									ILLUSTRATION
 									.....................................................................
@@ -181,7 +181,7 @@ Uize.module ({
 									- this property is equivalent to the same named property of the =window.location= object (see `Properties Consistent with window.location`)
 
 								hostname
-									A string, representing the portion of the URL comprised of just the name of the host (ie. domain name or IP address) and without the =protocol= and =port= portions.
+									A string, representing the portion of the URL comprised of just the name of the host (i.e. domain name or IP address) and without the =protocol= and =port= portions.
 
 									ILLUSTRATION
 									.....................................................................
@@ -561,7 +561,7 @@ Uize.module ({
 								- `when both URLs have the same domain`
 
 								When Both URLs Have the Same Back-relative Prefix
-									When both the base URL and the URL to relativize start with exactly the same back-relative prefix (ie. "/", "../", "../../", etc.), then a relative URL can be created.
+									When both the base URL and the URL to relativize start with exactly the same back-relative prefix (i.e. "/", "../", "../../", etc.), then a relative URL can be created.
 
 									Even though both URLs may be relative URLs, a relative URL can still be created between the base URL and the URL to relativize. This is because the URLs having the identical back-relative prefix means that they essentially share a common base, even though we don't know what it is.
 
@@ -581,7 +581,7 @@ Uize.module ({
 									......................
 
 								When Both URLs are Root-relative
-									When both the base URL and the URL to relativize are root-relative (ie. start with a "/"), then a relative URL can be created.
+									When both the base URL and the URL to relativize are root-relative (i.e. start with a "/"), then a relative URL can be created.
 
 									EXAMPLE
 									.......................................
@@ -633,14 +633,14 @@ Uize.module ({
 
 								Whenever the base URL and the URL to relativize do not have the same shared base, then a relative URL cannot be created. This can occur when...
 
-								- the base URL is absolute (ie. has a domain) and the URL to relativize is either root-relative, forward-relative, back-relative, or has a domain that doesn't match that of the base URL
-								- the base URL is root-relative and the URL to relativize is either forward-relative, back-relative, or is absolute (ie. has a domain)
-								- the base URL is forward-relative and the URL to relativize is either root-relative, back-relative, or is absolute (ie. has a domain)
-								- the base URL is back-relative and the URL to relativize is either root-relative, forward-relative, or is absolute (ie. has a domain), or is also back-relative but has a differing amount of back folder jumps than the base URL
+								- the base URL is absolute (i.e. has a domain) and the URL to relativize is either root-relative, forward-relative, back-relative, or has a domain that doesn't match that of the base URL
+								- the base URL is root-relative and the URL to relativize is either forward-relative, back-relative, or is absolute (i.e. has a domain)
+								- the base URL is forward-relative and the URL to relativize is either root-relative, back-relative, or is absolute (i.e. has a domain)
+								- the base URL is back-relative and the URL to relativize is either root-relative, forward-relative, or is absolute (i.e. has a domain), or is also back-relative but has a differing amount of back folder jumps than the base URL
 
 								EXAMPLES
 								............................................................................................
-								// base URL is absolute (ie. has a domain)
+								// base URL is absolute (i.e. has a domain)
 
 								Uize.Url.toRelative ('http://www.foo.com/','/foo/bar/');            // null
 								Uize.Url.toRelative ('http://www.foo.com/','foo/bar/');             // null
@@ -671,7 +671,7 @@ Uize.module ({
 								............................................................................................
 
 								When the URL to Relativize is Absolute
-									`When a relative URL cannot be created` and the URL to relativize is absolute (ie. has a domain), then the URL to relativize will be returned rather than the value =null=.
+									`When a relative URL cannot be created` and the URL to relativize is absolute (i.e. has a domain), then the URL to relativize will be returned rather than the value =null=.
 
 									The rationale behind this behavior is that an absolute URL, when resolved against another URL, will always produce that absolute URL. So, returning an absolute URL that can work against the base URL is better than returning =null=.
 
@@ -798,7 +798,7 @@ Uize.module ({
 							queryParamsSTR = Uize.Url.toParams (urlParamsObjectsARRAY);
 							...........................................................
 
-							When a =urlParamsObjectsARRAY= parameter is specified, multiple params objects can be specified in an array. This provides for an easy way to merge query param sets from multiple sources, or to blend fixed params with parameterized params (eg. passed in a method call), or to override the values in param sets. The values from params objects later in the array override those from earlier params objects. None of the objects in the array will be modified by the operation.
+							When a =urlParamsObjectsARRAY= parameter is specified, multiple params objects can be specified in an array. This provides for an easy way to merge query param sets from multiple sources, or to blend fixed params with parameterized params (e.g. passed in a method call), or to override the values in param sets. The values from params objects later in the array override those from earlier params objects. None of the objects in the array will be modified by the operation.
 
 							EXAMPLE
 							..............................................................
@@ -965,7 +965,7 @@ Uize.module ({
 								urlSTR = Uize.Url.resolve (urlPathSTR,urlParamsObjectsARRAY);
 								.............................................................
 
-								When a =urlParamsObjectsARRAY= parameter is specified, multiple params objects can be specified in an array. This provides for an easy way to merge query param sets from multiple sources, or to blend fixed params with parameterized params (eg. passed in a method call), or to override the values in param sets. The values from params objects later in the array override those from earlier params objects. None of the objects in the array will be modified by the operation.
+								When a =urlParamsObjectsARRAY= parameter is specified, multiple params objects can be specified in an array. This provides for an easy way to merge query param sets from multiple sources, or to blend fixed params with parameterized params (e.g. passed in a method call), or to override the values in param sets. The values from params objects later in the array override those from earlier params objects. None of the objects in the array will be modified by the operation.
 
 								EXAMPLE
 								......................................

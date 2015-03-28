@@ -38,7 +38,7 @@ Uize.Date.getRange
 Uize.Date.isRecent
 	- ability to specify time unit for recency window (default to days)
 	- right now, always checks if specified date is recent, relative to now - could also allow reference point date to be specified
-	- right now, you can check if date is within a time window before or after now -- what about date being "around" now (ie. in a window some time leading up to and some time past now)
+	- right now, you can check if date is within a time window before or after now -- what about date being "around" now (i.e. in a window some time leading up to and some time past now)
 
 Uize.Date.constrain
 	- constrain a date to a specified Date range

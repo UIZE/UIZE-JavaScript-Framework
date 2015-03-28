@@ -589,15 +589,15 @@ Uize.module ({
 							],
 
 						/*** test handling for completely open / unbounded date range ***/
-							['The value -Infinity falls into the unbounded date range (ie. all of time)',
+							['The value -Infinity falls into the unbounded date range (i.e. all of time)',
 								[-Infinity,_dateRangeWithoutBounds],
 								true
 							],
-							['The value Infinity falls into the unbounded date range (ie. all of time)',
+							['The value Infinity falls into the unbounded date range (i.e. all of time)',
 								[Infinity,_dateRangeWithoutBounds],
 								true
 							],
-							['An invalid date doesn\'t fall anywhere in an unbounded date range (ie. all of time)',
+							['An invalid date doesn\'t fall anywhere in an unbounded date range (i.e. all of time)',
 								[new Date (NaN),_dateRangeWithoutBounds],
 								false
 							],

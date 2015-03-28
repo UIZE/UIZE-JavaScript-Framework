@@ -25,7 +25,7 @@
 		In a Nutshell
 			The =Uize.Util.Coupler= class makes it easy to keep desired state synchronized between two or more instances.
 
-			Coupled instances can be widget instances (ie. instances of =Uize.Widget= subclasses), but they do not have to be widgets. Coupled instances do not have to be of the same class - they only need to provide the same state properties that are to be synchronized between them.
+			Coupled instances can be widget instances (i.e. instances of =Uize.Widget= subclasses), but they do not have to be widgets. Coupled instances do not have to be of the same class - they only need to provide the same state properties that are to be synchronized between them.
 
 		An Example
 			Using the =Uize.Util.Coupler= class is easy: all you have to do is create an instance of it, specifying which properties of which instances you would like to be coupled together. Consider the following example...

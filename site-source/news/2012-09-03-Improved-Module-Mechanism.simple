@@ -5,7 +5,7 @@ Parallel Ascynchronous Loading of Required Modules
 
 	Whereas previously, modules required as direct dependencies for a module would be loaded asynchronously in a non-blocking fashion but in a one after another sequence, now required modules are loaded in parallel. This new approach takes full advantage of the ability of most modern browsers to open several simultaneous connections for loading in multiple external JavaScript files in parallel, asynchronously, and in no guaranteed order (using the =async= attribute of the =script= tag). Not to worry, the module mechanism still ensures that a module is only built once all its required modules are loaded, regardless of in which order those direct dependencies are loaded and built.
 
-	The effect of this change is to speed up loading of individual JavaScript modules (ie. when library modules are not being used).
+	The effect of this change is to speed up loading of individual JavaScript modules (i.e. when library modules are not being used).
 
 The New Uize.require Static Method
 	The new =Uize.require= static method, implemented in the =Uize= base module, ensures that all of the specified modules are loaded before calling the specified callback function, loading required modules as necessary.

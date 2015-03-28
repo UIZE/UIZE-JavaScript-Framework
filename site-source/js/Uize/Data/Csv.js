@@ -279,7 +279,7 @@ Uize.module ({
 								An array, that will be used to store the column names for the CSV data if the value =true= is specified for the =hasHeader= option, or that can be used to supply the names of columns if the value =false= is specified for the =hasHeader= option and the value ='object'= is specified for the =rowType= option.
 
 								When Data Has Header Row
-									When parsing a CSV data string that contains a header row, to an array of arrays (ie. specifying the value ='array'= for the =rowType= option), and specifying the value =true= for the =hasHeader= option, the column names row doesn't make its way into the returned records array.
+									When parsing a CSV data string that contains a header row, to an array of arrays (i.e. specifying the value ='array'= for the =rowType= option), and specifying the value =true= for the =hasHeader= option, the column names row doesn't make its way into the returned records array.
 
 									This is by design, because the column names are not part of the data set. In such cases, specifying an array value for the =columns= option provides a way for you to obtain the column names. Even when parsing such a CSV data string to an array of objects, where each record object has key names that reflect the column names obtained from the header row, it still may be useful to get back a separate array of the column names - especially for the occasional case where the CSV data string has no data, but just the column names header row.
 
@@ -288,7 +288,7 @@ Uize.module ({
 									The contents of an array specified for the =columns= option will be replaced with the column names from the CSV data string's header row. Typically, you would supply an empty array, but you could reuse an array with existing contents.
 
 								When Data Doesn't Have Header Row
-									When parsing a CSV data string that doesn't contain a header row, to an array of objects (ie. specifying the value ='object'= for the =rowType= option), then the =columns= option lets you specify the names of the columns.
+									When parsing a CSV data string that doesn't contain a header row, to an array of objects (i.e. specifying the value ='object'= for the =rowType= option), then the =columns= option lets you specify the names of the columns.
 
 									Column names supplied by the =columns= option will be used as the key names for the objects of the returned records array. In this case, the contents of the specified column names array will not be altered.
 
@@ -298,7 +298,7 @@ Uize.module ({
 							hasHeader
 								A boolean, specifying whether or not the CSV data string to be parsed has a header row for the column names.
 
-								When the value =true= is specified for this option, the first row of CSV data will be used for the column names and will be "gobbled" (ie. won't make its way into the returned records array). If an array reference is specified as a value for the =columns= option, then the column names read from the header row will be populated into the specified array. If the value ='object'= is specified for the =rowType= option, then the column names obtained from the header row will be used as the key names for the objects of the returned records array.
+								When the value =true= is specified for this option, the first row of CSV data will be used for the column names and will be "gobbled" (i.e. won't make its way into the returned records array). If an array reference is specified as a value for the =columns= option, then the column names read from the header row will be populated into the specified array. If the value ='object'= is specified for the =rowType= option, then the column names obtained from the header row will be used as the key names for the objects of the returned records array.
 
 								NOTES
 								- the default value for this option is =false=
@@ -351,7 +351,7 @@ Uize.module ({
 
 							Examples
 								Default Decoding Options
-									In this example, the CSV data string being parsed has been serialized in strict accordance to the rules laid out in RFC 4180, and is being parsed by the =Uize.Data.Csv.from= method using all the decoding option defaults (ie. no =decodingOptionsOBJ= parameter is being specified).
+									In this example, the CSV data string being parsed has been serialized in strict accordance to the rules laid out in RFC 4180, and is being parsed by the =Uize.Data.Csv.from= method using all the decoding option defaults (i.e. no =decodingOptionsOBJ= parameter is being specified).
 
 									INPUT
 									............................................
@@ -377,7 +377,7 @@ Uize.module ({
 
 									Looking at the CSV data string, you'll notice a few things...
 
-									- The value ="John ""Willy"""= is quoted because it contains the double quote quoting character, and the double quotes in the value are escaped by doubling them up (ie. two double quotes for each double quote being escaped).
+									- The value ="John ""Willy"""= is quoted because it contains the double quote quoting character, and the double quotes in the value are escaped by doubling them up (i.e. two double quotes for each double quote being escaped).
 									- The value ="(415) 456-7890, Ext. 214"= is quoted because it contains the comma value delimiter character.
 									- The phone number column for the last row is quoted because it contains a linebreak and spans two lines.
 
@@ -817,7 +817,7 @@ Uize.module ({
 
 									Comparing the source records array to the serialized CSV data string, you'll notice a few things...
 
-									- The value ='John "Willy"'= had to be quoted as ="John ""Willy"""=, because it contains the double quote quoting character. Therefore, the serialized value has double quotes around it, and the double quotes in the value are escaped by doubling them up (ie. two double quotes for each double quote being escaped).
+									- The value ='John "Willy"'= had to be quoted as ="John ""Willy"""=, because it contains the double quote quoting character. Therefore, the serialized value has double quotes around it, and the double quotes in the value are escaped by doubling them up (i.e. two double quotes for each double quote being escaped).
 									- The value ='(415) 456-7890, Ext. 214'= had to be quoted because it contains the comma value delimiter character.
 									- The value ='(650) 123-4567\n(650) 303-1000'= had to be quoted because it contains a linebreak and spans two lines.
 

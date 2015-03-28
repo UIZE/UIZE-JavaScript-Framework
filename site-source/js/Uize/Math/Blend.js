@@ -321,7 +321,7 @@ Uize.module ({
 								Uize.Math.Blend.blend (0,10,.5,0,function (value) {return Math.pow (value,2)});  // returns 2.5
 								...............................................................................................
 
-								In the above example, we are creating a halfway blend between the values =0= and =10=. With a typical linear blend, we would expect the result =5= to be produced, but in this case we are specifying the curve function =function (value) {return Math.pow (value,2)}= to produce a non-linear blend. Specifically, we are blending the values =0= and =10= using a quadratic curve, which takes the blend value and raises it to the power of =2= (ie. squares it). So, for our =.5= blend we actually end up getting a curve-adjusted =.25= blend, which produces the blend result of =2.5=.
+								In the above example, we are creating a halfway blend between the values =0= and =10=. With a typical linear blend, we would expect the result =5= to be produced, but in this case we are specifying the curve function =function (value) {return Math.pow (value,2)}= to produce a non-linear blend. Specifically, we are blending the values =0= and =10= using a quadratic curve, which takes the blend value and raises it to the power of =2= (i.e. squares it). So, for our =.5= blend we actually end up getting a curve-adjusted =.25= blend, which produces the blend result of =2.5=.
 
 								In addition to simple curve functions, the =curveFUNCorARRAYorOBJ= parameter also allows us to specify compound curve values using curve arrays or objects. For more information, consult the reference for the =curveFUNCorARRAYorOBJ= parameter.
 
@@ -382,14 +382,14 @@ Uize.module ({
 									Relative to First Value
 										It's important to note that a quantization value of =2= doesn't mean that a blend result will always be even (it could also be odd), since quantization determines the step increments from the first of the values being blended.
 
-										So, if the first value was =0=, then a quantization of =2= would produce blend results like =0=, =2=, =4=, etc. (ie. even numbers). But if the first value was =1=, then blend results like =1=, =3=, =5=, etc. (ie. odd numbers) would be produced.
+										So, if the first value was =0=, then a quantization of =2= would produce blend results like =0=, =2=, =4=, etc. (i.e. even numbers). But if the first value was =1=, then blend results like =1=, =3=, =5=, etc. (i.e. odd numbers) would be produced.
 
-										Similarly, a quantization value of =1= doesn't guarantee that a blend result will always be an integer. If the first value was =1=, then a quantization of =1= would produce blend results like =1=, =2=, =3=, etc. (ie. integers). However, if the first value was =1.5=, then a quantization of =1= would produce blend results like =1.5=, =2.5=, =3.5=, etc. (definitely *not* integers).
+										Similarly, a quantization value of =1= doesn't guarantee that a blend result will always be an integer. If the first value was =1=, then a quantization of =1= would produce blend results like =1=, =2=, =3=, etc. (i.e. integers). However, if the first value was =1.5=, then a quantization of =1= would produce blend results like =1.5=, =2.5=, =3.5=, etc. (definitely *not* integers).
 
 										This is generally not an obstacle for applications that desire integer interpolated values, because in those cases both of the values being blended are almost certain to be integers, and a quantization value of =1= will have the desired effect under such conditions.
 
 									Simple Quantization
-										It is possible to specify a single quantization number that should apply to all components of a compound value (eg. a color object with red, green, and blue properties).
+										It is possible to specify a single quantization number that should apply to all components of a compound value (e.g. a color object with red, green, and blue properties).
 
 										EXAMPLE
 										..........................................
@@ -451,7 +451,7 @@ Uize.module ({
 
 										In the above example, a blend of two structured values containing color and opacity information is being performed. Specifically, we are creating a halfway blend between fully transparent orange and fully opaque violet. This will produce the result ={color:{red:217,green:132,blue:128},opacity:.5}=
 
-										We are specifying a compound =quantization= value in this example. By specifying the value =1= for =color=, and not an entire subtree object with quantization values for =red=, =green=, and =blue=, the quantization of =1= applies to all three color channels. And by omitting a quantization value for =opacity=, the quantization for this component of the interpolated compound value defaults to =0= (ie. no quantization / floating point precision).
+										We are specifying a compound =quantization= value in this example. By specifying the value =1= for =color=, and not an entire subtree object with quantization values for =red=, =green=, and =blue=, the quantization of =1= applies to all three color channels. And by omitting a quantization value for =opacity=, the quantization for this component of the interpolated compound value defaults to =0= (i.e. no quantization / floating point precision).
 
 										So, a compound =quantization= value may have "terminations" and "omissions", both of which lead to defaulting behaviors. Omissions are essentially terminations with defaulting to =0=. So, in effect, omitting a subtree is equivalent to "terminating" the subtree by specifying the simple value =0=.
 
@@ -483,7 +483,7 @@ Uize.module ({
 										});
 										.......................................................
 
-										In the above example, a fade instance is created for fading two colors, =colorA= and =colorB=, where =colorA= is faded between orange and violet, and where =colorB= is faded between pure red and pure blue. A compound value is specified for =quantization=, where the structure mostly matches the structure of the start and end values, but with the key distinction that a simple number is specified for =colorB=, rather than an object with =red=, =green=, and =blue= properties as with =colorA=. This has the effect of defaulting the quantization for all components of the =colorB= subtree (ie. =red=, =green=, and =blue=) in the interpolated compound value to =1=.
+										In the above example, a fade instance is created for fading two colors, =colorA= and =colorB=, where =colorA= is faded between orange and violet, and where =colorB= is faded between pure red and pure blue. A compound value is specified for =quantization=, where the structure mostly matches the structure of the start and end values, but with the key distinction that a simple number is specified for =colorB=, rather than an object with =red=, =green=, and =blue= properties as with =colorA=. This has the effect of defaulting the quantization for all components of the =colorB= subtree (i.e. =red=, =green=, and =blue=) in the interpolated compound value to =1=.
 
 									Floating Point Quantization Values
 										There's nothing to say that values for the =quantizationNUMorARRAYorOBJ= parameter have to be integers.

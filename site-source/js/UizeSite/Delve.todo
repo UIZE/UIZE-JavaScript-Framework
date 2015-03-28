@@ -31,7 +31,7 @@ Miscellaneous
 	- write reference documentation
 
 Uber Report Improvements
-	- possibly provide percentage results (eg. % of widgets that are missing all DOM nodes)
+	- possibly provide percentage results (e.g. % of widgets that are missing all DOM nodes)
 	- possible conclusions section
 
 Events Log Improvements
@@ -39,7 +39,7 @@ Events Log Improvements
 	- for the source property, make it a linked object (this may mean having to make the log message generator configurable in Uize.Widget.Log.InstanceEvents, and providing some custom handling in DELVE)
 
 Features Tab
-	- maintain sort state across rewirings (ie. sort should be a property)
+	- maintain sort state across rewirings (i.e. sort should be a property)
 	- ability to filter the data in the table (say I only care about instance methods, for example)
 	- link to documentation for every feature
 
@@ -84,7 +84,7 @@ New Contents for Tree List
 		- widgets whose class inherits from a specific class?
 
 	Module Queries
-		- widget classes that have no subclasses and of which no instances have been created (ie. they're not abstract / base classes, so it's expected that they might be instantiated at some point)
+		- widget classes that have no subclasses and of which no instances have been created (i.e. they're not abstract / base classes, so it's expected that they might be instantiated at some point)
 
 	DOM node queries
 		- DOM nodes that have ids, but that don't appear to belong to widget instances

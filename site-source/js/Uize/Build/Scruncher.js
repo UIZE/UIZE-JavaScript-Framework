@@ -419,9 +419,9 @@ Uize.module ({
 							)
 						) {
 							/* NOTE: whitespace is necessary when it separates...
-								- two adjacent words (eg. function myFunction)
-								- two adjacent operators (eg. myVariable += ++ myOtherVariable)
-								- a word followed by a number that starts with a digit, rather than "+", "-", or "." (eg. return 1)
+								- two adjacent words (e.g. function myFunction)
+								- two adjacent operators (e.g. myVariable += ++ myOtherVariable)
+								- a word followed by a number that starts with a digit, rather than "+", "-", or "." (e.g. return 1)
 							*/
 							_currentToken = ' ' + _currentToken;
 							_savingsFromRemovedWhitespace--;

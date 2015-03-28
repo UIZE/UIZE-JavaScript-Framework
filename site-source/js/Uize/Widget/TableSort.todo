@@ -20,7 +20,7 @@ DESIRABLE
 PERHAPS
 
 - ability to have class values for rows persist regardless of changed row order (useful for tables that alternate classes for readability)
-- support for non-sortable columns (eg. a column in a table containing only pictures)
-- failure modes for complex tables that aren't suited to sorting (eg. columns with rowspans)
+- support for non-sortable columns (e.g. a column in a table containing only pictures)
+- failure modes for complex tables that aren't suited to sorting (e.g. columns with rowspans)
 - a way for the user to restore the table to its original state (unsort?)
 

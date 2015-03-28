@@ -39,7 +39,7 @@ Change Handler Signature
 	The handler for a change event can expect to receive the following two parameters...
 
 	- *derived value* - the new computed value for the `state properties derivation`
-	- *determinants values* - an array, containing the values of all the determinants (ie. the state properties) used in deriving the value, in the order in which they occur in the definition for the derivation
+	- *determinants values* - an array, containing the values of all the determinants (i.e. the state properties) used in deriving the value, in the order in which they occur in the definition for the derivation
 
 	EXAMPLE
 	........................................................................................

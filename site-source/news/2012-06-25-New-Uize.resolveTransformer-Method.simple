@@ -82,7 +82,7 @@ How Different Transformer Types are Resolved
 		.......................................................
 
 	When a Nully Transformer is Specified
-		When a nully value (ie. the value =null= or =undefined=) is specified for the =transformerANYTYPE= parameter, a function is produced that simply returns the value of its first argument unmodified.
+		When a nully value (i.e. the value =null= or =undefined=) is specified for the =transformerANYTYPE= parameter, a function is produced that simply returns the value of its first argument unmodified.
 
 		This behavior is useful for methods that want to offer an optional transformer and wish no transformation to be performed when the optional argument is not specified, or if the values =null= or =undefined= are explicitly specified.
 

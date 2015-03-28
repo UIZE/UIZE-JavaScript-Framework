@@ -129,7 +129,7 @@ Uize.module ({
 								pathToRootSTR = Uize.Build.Util.getPathToRoot (relativePathSTR);
 								................................................................
 
-								This method is used by build scripts that build pages for nested sections of a site that may have links that are root-absolute and need to be converted to paths that are relative to the document being built. The implementation is very basic (ie. non-robust) and simply counts all the slashes in the specified path and builds a prefix with that many "../" (back folder) segments.
+								This method is used by build scripts that build pages for nested sections of a site that may have links that are root-absolute and need to be converted to paths that are relative to the document being built. The implementation is very basic (i.e. non-robust) and simply counts all the slashes in the specified path and builds a prefix with that many "../" (back folder) segments.
 
 								EXAMPLES
 								...............................................................................

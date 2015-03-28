@@ -2,6 +2,6 @@ This is a TO DO document for the =Uize.Widget.Tree.Menu= module.
 
 - build submenus dynamically -- only when needed (for load performance optimization)
 - move to using UL/LI for markup
-- make highlight of active menu items "sticky" (ie. not based on a:hover pseudoclass), so that entire choice path can be indicated
+- make highlight of active menu items "sticky" (i.e. not based on a:hover pseudoclass), so that entire choice path can be indicated
 - support for heading items
 

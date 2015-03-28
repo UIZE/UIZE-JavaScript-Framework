@@ -494,7 +494,7 @@ Uize.module ({
 							/*?
 								Instance Methods
 									showInform
-										The implementation for a decorated inform (ie. alert) dialog.
+										The implementation for a decorated inform (i.e. alert) dialog.
 
 										This method will be used when the =infom= instance method is called. This method is typically implemented at the page widget level, although it can also be implemented by child widgets at any level on the widget tree.
 
@@ -1032,7 +1032,7 @@ Uize.module ({
 										NOTES
 										- The =impliedNodeSTRorBLOB= parameter can be a string specifying the name of the implied node, or an object reference to the implied node. When a reference is specified, it is simply returned.
 										- When the =impliedNodeSTRorBLOB= parameter has a value of =null=, then the value =null= is returned.
-										- When the =impliedNodeSTRorBLOB= parameter has a value of =undefined= or is not specified, then the root node of the widget is returned. This has the same effect as specifying the empty string. (ie. =getNode ()= is equivalent to =getNode ('')=)
+										- When the =impliedNodeSTRorBLOB= parameter has a value of =undefined= or is not specified, then the root node of the widget is returned. This has the same effect as specifying the empty string. (i.e. =getNode ()= is equivalent to =getNode ('')=)
 							*/
 						},
 
@@ -1687,7 +1687,7 @@ Uize.module ({
 											title:'This is My Diaog, Hear it Roar'
 										},
 										submitHandler:function (_confirmed) {
-											// handle dialog being submitted (ie. OK or CANCEL)
+											// handle dialog being submitted (i.e. OK or CANCEL)
 										}
 									});
 									.........................................................
@@ -2055,7 +2055,7 @@ Uize.module ({
 
 								- ='explicit'= - When =idPrefixConstruction= is set to ='explicit'=, an explicit value specified for a widget's =idPrefix= property will be used throughout the lifetime of the widget, and the =idPrefix= will not be otherwise derived.
 
-								- =undefined= (the default value) - When =idPrefixConstruction= is set to =undefined=, the behavior for the value ='concatenated'= will be used (ie. the value =undefined= is equivalent to the value ='concatenated'=).
+								- =undefined= (the default value) - When =idPrefixConstruction= is set to =undefined=, the behavior for the value ='concatenated'= will be used (i.e. the value =undefined= is equivalent to the value ='concatenated'=).
 
 								NOTES
 								- see the related =idPrefix= state property
@@ -2210,7 +2210,7 @@ Uize.module ({
 							enabled
 								A boolean, specifying whether or not the widget is enabled.
 
-								The enabled state can be useful when a complex set of processes needs to be performed and user interaction with certain widgets needs to be blocked during that time. Widgets that are not in an enabled state (ie. disabled) should not allow user interaction. It is up to an individual widget class to provide its own implementation for the enabled state.
+								The enabled state can be useful when a complex set of processes needs to be performed and user interaction with certain widgets needs to be blocked during that time. Widgets that are not in an enabled state (i.e. disabled) should not allow user interaction. It is up to an individual widget class to provide its own implementation for the enabled state.
 
 								NOTES
 								- the initial value is =true=

@@ -289,7 +289,7 @@ Uize.module ({
 					/*?
 						State Properties
 							cssClassActive
-								A string, specifying the CSS class name that should be added to the =className= property of the `root node` when the instance is selected (ie. the =selected= state property is set to =true=).
+								A string, specifying the CSS class name that should be added to the =className= property of the `root node` when the instance is selected (i.e. the =selected= state property is set to =true=).
 
 								For a more in-depth discussion of the interaction between this property and the companion =cssClassOver= property, consult the reference for the `root node`.
 
@@ -314,7 +314,7 @@ Uize.module ({
 					/*?
 						State Properties
 							cssClassImage
-								A string, specifying the value that should be set for the =className= property of the =preview= implied node when the user is not moused over the instance (ie. the =over= state property is set to =false=).
+								A string, specifying the value that should be set for the =className= property of the =preview= implied node when the user is not moused over the instance (i.e. the =over= state property is set to =false=).
 
 								For a more in-depth discussion of the interaction between this property and the companion =cssClassImageOver= property, consult the reference for the =preview= implied node.
 
@@ -327,7 +327,7 @@ Uize.module ({
 					/*?
 						State Properties
 							cssClassImageOver
-								A string, specifying the value that should be set for the =className= property of the =preview= implied node when the user mouses over the instance (ie. the =over= state property is set to =true=).
+								A string, specifying the value that should be set for the =className= property of the =preview= implied node when the user mouses over the instance (i.e. the =over= state property is set to =true=).
 
 								For a more in-depth discussion of the interaction between this property and the companion =cssClassImage= property, consult the reference for the =preview= implied node.
 
@@ -340,7 +340,7 @@ Uize.module ({
 					/*?
 						State Properties
 							cssClassOver
-								A string, specifying the CSS class name that should be added to the =className= property of the root node when the user is mousing over the instance and it is not already selected (ie. the =over= state property is set to =true= and the =selected= state property is set to =false=).
+								A string, specifying the CSS class name that should be added to the =className= property of the root node when the user is mousing over the instance and it is not already selected (i.e. the =over= state property is set to =true= and the =selected= state property is set to =false=).
 
 								For a more in-depth discussion of the interaction between this property and the companion =cssClassActive= property, consult the reference for the `root node`.
 
@@ -395,7 +395,7 @@ Uize.module ({
 								- ='Preview'= - Clicking will fire a bubbling ='Click Preview'= instance event.
 								- ='Select'= - Clicking will select the item, clearing any existing selection.
 								- ='Toggle Selected'= - Clicking will toggle the selected state of the item, not affecting any other currently selected items.
-								- =not defined= - When this property is not defined or is set to the value =null=, =false=, or =''= (empty string), then a bubbling ='Click Preview'= instance event will be fired (ie. defaulting to the behavior for the value ='Preview'=).
+								- =not defined= - When this property is not defined or is set to the value =null=, =false=, or =''= (empty string), then a bubbling ='Click Preview'= instance event will be fired (i.e. defaulting to the behavior for the value ='Preview'=).
 
 								NOTES
 								- the initial value is =undefined=

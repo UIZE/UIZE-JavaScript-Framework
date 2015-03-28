@@ -27,9 +27,9 @@ Improved Directive: @required
 	This applies both to duplicates that may occur within a single =@required= call, as well as duplicates that may arise across multiple =@required= calls. While duplicates are not a very likely occurrence, this protection does exist to prevent duplicates in the =required= property of the =Uize.Template.compile= method's full form result object. The =@required= directive now also supports a string that contains a comma-separated list of module names, in addition to the existing support for an array of module names.
 
 Improved Static Methods: Uize.Template.encode and Uize.Template.decode
-	The =Uize.Template.encode= and =Uize.Template.decode= static methods have been improved to now both support encoding chains, in the same format as can be used in assignment expressions in template code (eg. ='json -> urlPiece'=).
+	The =Uize.Template.encode= and =Uize.Template.decode= static methods have been improved to now both support encoding chains, in the same format as can be used in assignment expressions in template code (e.g. ='json -> urlPiece'=).
 
-	These methods now also support encoding options (eg. ='tagAttributes{nameCase:"lower"}'=), as well as mixed encoding directions (eg. ='!urlParams -> tagAttributes'=).
+	These methods now also support encoding options (e.g. ='tagAttributes{nameCase:"lower"}'=), as well as mixed encoding directions (e.g. ='!urlParams -> tagAttributes'=).
 
 Improved Documentation
 	The reference documentation for the =Uize.Template= module has been improved in a number of ways.

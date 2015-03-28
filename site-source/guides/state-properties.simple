@@ -420,7 +420,7 @@ More on Declaring State Properties
 			});
 			..............................................................................
 
-			In the above example, the state properties =_prop1=, =_prop2=, and =_prop3= are all private. Because their names will be scrunched, these names cannot be relied upon by application code outside of the class' implementation. Code inside the class can, however, access the properties (eg. =this.set ({_prop1:'value'})= or =this._prop1=). The benefit of a private state property is that you can employ the mechanisms that come with state properties, such as =onChange= handlers and =conformer= functions.
+			In the above example, the state properties =_prop1=, =_prop2=, and =_prop3= are all private. Because their names will be scrunched, these names cannot be relied upon by application code outside of the class' implementation. Code inside the class can, however, access the properties (e.g. =this.set ({_prop1:'value'})= or =this._prop1=). The benefit of a private state property is that you can employ the mechanisms that come with state properties, such as =onChange= handlers and =conformer= functions.
 
 			IMPORTANT
 
@@ -833,7 +833,7 @@ More on Declaring State Properties
 				});
 				......................................................................
 
-				In the above example, the conformer for the =width= state property keeps the value of this property within a legal range, as defined by the =minWidth= and =maxWidth= state properties. Initially, the minimum width is =0= and he maximum width is =Infinity= (ie. there is no upper limit).
+				In the above example, the conformer for the =width= state property keeps the value of this property within a legal range, as defined by the =minWidth= and =maxWidth= state properties. Initially, the minimum width is =0= and he maximum width is =Infinity= (i.e. there is no upper limit).
 
 			Conform to a Valid Values Set
 				A conformer function can be used to ensure that the value of a state property does not stray outside of a set of values that are valid for the property.
@@ -973,7 +973,7 @@ More on Declaring State Properties
 				In the above example, the conformer for the =title= state property limits the length of its value to a maximum of fifty characters. The value is first coerced to a string by concatenating an empty string.
 
 			Enforce Case
-				A conformer function can be used to ensure that a string state property's value is always in a desired case (eg. lowercase, or uppercase).
+				A conformer function can be used to ensure that a string state property's value is always in a desired case (e.g. lowercase, or uppercase).
 
 				EXAMPLE
 				........................................................................

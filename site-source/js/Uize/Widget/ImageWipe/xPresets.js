@@ -1118,7 +1118,7 @@ Uize.module ({
 							Static Properties
 								Uize.Widget.ImageWipe.presets
 									Uize.Widget.ImageWipe.presets.verticalFadeFromInside
-										A series of equal sized horizontal panes that are stacked vertically and that don't move in position but that progressively fade in over time, starting from the center / inside panes and progressively fading in towards the top and bottom simultaneously, so that the outside (ie. top and bottom) panes are the last to completely fade in.
+										A series of equal sized horizontal panes that are stacked vertically and that don't move in position but that progressively fade in over time, starting from the center / inside panes and progressively fading in towards the top and bottom simultaneously, so that the outside (i.e. top and bottom) panes are the last to completely fade in.
 						*/
 					],
 					verticalFadeFromOutside:[
@@ -1140,7 +1140,7 @@ Uize.module ({
 							Static Properties
 								Uize.Widget.ImageWipe.presets
 									Uize.Widget.ImageWipe.presets.verticalFadeFromOutside
-										A series of equal sized horizontal panes that are stacked vertically and that don't move in position but that progressively fade in over time, starting from the outside (ie. top and bottom) panes and progressively fading in towards the center from both directions simultaneously, so that the center / inside panes are the last to completely fade in.
+										A series of equal sized horizontal panes that are stacked vertically and that don't move in position but that progressively fade in over time, starting from the outside (i.e. top and bottom) panes and progressively fading in towards the center from both directions simultaneously, so that the center / inside panes are the last to completely fade in.
 						*/
 					],
 					horizontalFadeFromLeft:[
@@ -1206,7 +1206,7 @@ Uize.module ({
 							Static Properties
 								Uize.Widget.ImageWipe.presets
 									Uize.Widget.ImageWipe.presets.horizontalFadeFromInside
-										A series of equal sized vertical panes that are stacked horizontally and that don't move in position but that progressively fade in over time, starting from the center / inside panes and progressively fading in towards the left and right simultaneously, so that the outside (ie. left and right) panes are the last to completely fade in.
+										A series of equal sized vertical panes that are stacked horizontally and that don't move in position but that progressively fade in over time, starting from the center / inside panes and progressively fading in towards the left and right simultaneously, so that the outside (i.e. left and right) panes are the last to completely fade in.
 						*/
 					],
 					horizontalFadeFromOutside:[
@@ -1228,7 +1228,7 @@ Uize.module ({
 							Static Properties
 								Uize.Widget.ImageWipe.presets
 									Uize.Widget.ImageWipe.presets.horizontalFadeFromOutside
-										A series of equal sized vertical panes that are stacked horizontally and that don't move in position but that progressively fade in over time, starting from the outside (ie. left and right) panes and progressively fading in towards the center from both directions simultaneously, so that the center / inside panes are the last to completely fade in.
+										A series of equal sized vertical panes that are stacked horizontally and that don't move in position but that progressively fade in over time, starting from the outside (i.e. left and right) panes and progressively fading in towards the center from both directions simultaneously, so that the center / inside panes are the last to completely fade in.
 						*/
 					],
 					horizontalRibbonFadeFromInside:[
@@ -1250,7 +1250,7 @@ Uize.module ({
 							Static Properties
 								Uize.Widget.ImageWipe.presets
 									Uize.Widget.ImageWipe.presets.horizontalRibbonFadeFromInside
-										A series of horizontal panes that are stacked vertically and that fade in while growing in width from random points, starting from the center / inside panes and progressively fading and growing in towards the top and bottom simultaneously, so that the outside (ie. top and bottom) panes are the last to completely fade and grow in.
+										A series of horizontal panes that are stacked vertically and that fade in while growing in width from random points, starting from the center / inside panes and progressively fading and growing in towards the top and bottom simultaneously, so that the outside (i.e. top and bottom) panes are the last to completely fade and grow in.
 						*/
 					],
 					verticalRibbonFadeFromInside:[
@@ -1272,7 +1272,7 @@ Uize.module ({
 							Static Properties
 								Uize.Widget.ImageWipe.presets
 									Uize.Widget.ImageWipe.presets.verticalRibbonFadeFromInside
-										A series of vertical panes that are stacked horizontally and that fade in while growing in height from random points, starting from the center / inside panes and progressively fading and growing in towards the left and right simultaneously, so that the outside (ie. left and right) panes are the last to completely fade and grow in.
+										A series of vertical panes that are stacked horizontally and that fade in while growing in height from random points, starting from the center / inside panes and progressively fading and growing in towards the left and right simultaneously, so that the outside (i.e. left and right) panes are the last to completely fade and grow in.
 						*/
 					],
 					facetedFade:[

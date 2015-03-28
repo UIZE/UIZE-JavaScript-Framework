@@ -20,7 +20,7 @@ Implementation Info Subsection
 	Breakdown of Features
 		All the features of a module that can be automatically detected from the code are listed in the Implementation Info subsection, broken down into sections based upon where they are implemented in the inheritance chain (if the module defines a class).
 
-		- *Features Introduced in This Module* - This section lists all features that have been introduced in the module (ie. they have not been inherited from a superclass). For non-class modules, such as package modules, all of the module's features will be listed in this section.
+		- *Features Introduced in This Module* - This section lists all features that have been introduced in the module (i.e. they have not been inherited from a superclass). For non-class modules, such as package modules, all of the module's features will be listed in this section.
 
 		- *Features Overridden in This Module* - For class modules, this section lists all features that were introduced in some superclass up the class' inheritance chain, but that were overridden in this class (for non-class modules, there will be no features listed in this section). To find out where a specific overridden feature was first introduced, go to the reference documentation for the feature and read through the IMPLEMENTATION INFO notes section for the feature.
 

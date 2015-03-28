@@ -32,7 +32,7 @@
 
 				The diff result is an object whose structure is based on a union of the structures of the two objects being compared. Depending on the `property comparer` function that is used when performing the diff, the diff result can be a complete or sparse union of the structures of the objects being compared - it is not required that the diff result contain a property for every property that is compared.
 
-				The diff result can also be purely descriptive of the differences in properties between the objects being compared (eg. ='modified'=, ='added'=, ='removed'=, ='unchanged'=), or the diff result can reflect actual values from the properties (values for only the properties that are the same, values for only the properties that are different, etc.).
+				The diff result can also be purely descriptive of the differences in properties between the objects being compared (e.g. ='modified'=, ='added'=, ='removed'=, ='unchanged'=), or the diff result can reflect actual values from the properties (values for only the properties that are the same, values for only the properties that are different, etc.).
 
 				The diff result object is best explained with an example...
 
@@ -65,7 +65,7 @@
 				}
 				..................
 
-				In the diff result object, you will notice that there are properties for all of the combined properties of both of the objects being compared. This is due to the behavior of the `default property comparer`, which sets the values of the properties in the diff result object as descriptions of how the properties differ between the objects being compared - there are values in the diff result for properties that have been added or removed (ie. they don't exist in both objects).
+				In the diff result object, you will notice that there are properties for all of the combined properties of both of the objects being compared. This is due to the behavior of the `default property comparer`, which sets the values of the properties in the diff result object as descriptions of how the properties differ between the objects being compared - there are values in the diff result for properties that have been added or removed (i.e. they don't exist in both objects).
 
 			Diffing is Recursive
 				When two objects are compared using the =Uize.Data.Diff.diff= method, the objects are compared recursively so that all leaf nodes are compared.

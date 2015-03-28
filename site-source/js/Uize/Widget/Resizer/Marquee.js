@@ -207,7 +207,7 @@ Uize.module ({
 								function (_Uize_Widget_Drag) {
 									var
 										_initialRotation,
-										_centerX, _centerY, // the center of the visible marquee (ie. the dashed line + handles)
+										_centerX, _centerY, // the center of the visible marquee (i.e. the dashed line + handles)
 										_initialRotationOffset // the angle created by the line segment center-button center and the line f(x) = _center.x
 									;
 

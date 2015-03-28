@@ -7,7 +7,7 @@ isArgumentsBOOL = Uize.isArguments (valueANYTYPE);
 
 A value is considered an arguments object if, and only if, the value is a reference to an instance of JavaScript's built-in =Arguments= object. Arguments objects are created when calling functions in JavaScript and are referenced within a called function by the special =arguments= keyword.
 
-While an arguments object is listy in nature (ie. it is an object having a =length= property whose value is a number), listy objects that are not instances of JavaScript's =Arguments= object are not considered arguments objects by the =Uize.isArguments= method. So, for example, the array =['foo','bar']= is not considered an arguments object, nor is the listy object ={0:'foo',1:'bar',length:2}=.
+While an arguments object is listy in nature (i.e. it is an object having a =length= property whose value is a number), listy objects that are not instances of JavaScript's =Arguments= object are not considered arguments objects by the =Uize.isArguments= method. So, for example, the array =['foo','bar']= is not considered an arguments object, nor is the listy object ={0:'foo',1:'bar',length:2}=.
 
 The =Uize.isArguments= method is useful when wanting to distinguish between an arguments object and other listy objects in order to conditionalize the behavior for a function.
 

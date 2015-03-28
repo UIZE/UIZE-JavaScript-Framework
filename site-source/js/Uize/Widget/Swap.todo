@@ -2,5 +2,5 @@ This is a TO DO document for the =Uize.Widget.Swap= module.
 
 - refactor to move basic wipe code into some other module
 	- refactor various Zazzle classes that use this effect to instead use built in service
-- handle switching transition settings during a transition (ie. make sure all state is reflected correctly visually)
+- handle switching transition settings during a transition (i.e. make sure all state is reflected correctly visually)
 

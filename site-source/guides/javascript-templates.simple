@@ -202,7 +202,7 @@ Assignment Expressions
 
 		In the above example, the =searchParams= property of =input= is being written out into a script block, where the JSON encoding is being told to use a colon with spaces around it as the key delimiter for objects, thereby making the output more readable.
 
-	Reverse Encoding (ie. Decoding)
+	Reverse Encoding (i.e. Decoding)
 		A specific encoding can be reversed (provided that there is a defined decoder registered for that encoding) by simply prefixing the encoding name with the "!" character.
 
 		Let's say that the search params for a link generation template is being provided to the template as a serialized JSON string. If the server requires the search params as URL query params, then the template can first decode the JSON string to a query params object before encoding it as URL query params, as in the following example template...
@@ -217,7 +217,7 @@ Assignment Expressions
 	Encoding In Other Contexts
 		The convenient encodings syntax only applies to =<%. %>= and =<%&#61; %>= style assignment blocks.
 
-		If you wish to use encodings and/or decodings in more complex JavaScript code inside your templates, then you will have to use the =Uize.Template.encode= and =Uize.Template.decode= static methods. These methods provide access to all the same functionality, but in a more conventional (ie. long-winded) manner.
+		If you wish to use encodings and/or decodings in more complex JavaScript code inside your templates, then you will have to use the =Uize.Template.encode= and =Uize.Template.decode= static methods. These methods provide access to all the same functionality, but in a more conventional (i.e. long-winded) manner.
 
 		For example, the following template...
 
@@ -426,7 +426,7 @@ Non-significant Whitespace
 	%>
 	.................................................
 
-	Similarly, whitespace within control (ie. non-assignment) blocks is non-significant and does not affect output.
+	Similarly, whitespace within control (i.e. non-assignment) blocks is non-significant and does not affect output.
 
 Comments
 	Because any contents of non-assignment =<% %>= blocks is treated as JavaScript code, you can easily add comments to your templates by simply putting JavaScript style comments inside template blocks.

@@ -29,22 +29,22 @@
 		NON-INTERNATIONALIZABLE STRINGS
 			This category includes strings that are recognized by certain patterns as being non-internationalizable strings, including...
 
-			- DOM event names (eg. =click=)
-			- very JavaScript specific keywords (eg. =function=)
-			- HTML specific attribute names (eg. =href=)
-			- sufficiently distinctive HTML tag names (eg. =div=), file extensions (eg. =.gif=)
+			- DOM event names (e.g. =click=)
+			- very JavaScript specific keywords (e.g. =function=)
+			- HTML specific attribute names (e.g. =href=)
+			- sufficiently distinctive HTML tag names (e.g. =div=), file extensions (e.g. =.gif=)
 			- strings that are only whitespace
 			- strings that have no letter characters
-			- hex formatted RGB color values (eg. =#ff0000=)
-			- module names (eg. =Uize.Widget.Bar=)
+			- hex formatted RGB color values (e.g. =#ff0000=)
+			- module names (e.g. =Uize.Widget.Bar=)
 			- any string starting with "Uize"
-			- underscore delimited identifiers (eg. =button_big_disabled=)
-			- Changed.[propertyName] events (eg. =Changed.value=), and the Changed.&#42; event
-			- sufficiently distinguishable URL paths (eg. =myfolder/mysubfolder/myfile.html=)
-			- camelCase identifiers (eg. =languageSortAscending=)
+			- underscore delimited identifiers (e.g. =button_big_disabled=)
+			- Changed.[propertyName] events (e.g. =Changed.value=), and the Changed.&#42; event
+			- sufficiently distinguishable URL paths (e.g. =myfolder/mysubfolder/myfile.html=)
+			- camelCase identifiers (e.g. =languageSortAscending=)
 
 		LIKELY NON-INTERNATIONALIZABLE STRINGS
-			This category includes strings with only one letter character (eg. =a=), and strings that look like short url snippets (eg. =myfolder/mysubfolder=).
+			This category includes strings with only one letter character (e.g. =a=), and strings that look like short url snippets (e.g. =myfolder/mysubfolder=).
 
 		POSSIBLY INTERNATIONALIZABLE STRINGS
 			This category includes strings that are not filtered out into either the `NON-INTERNATIONALIZABLE STRINGS`, `LIKELY NON-INTERNATIONALIZABLE STRINGS`, or `LIKELY INTERNATIONALIZABLE STRINGS` categories.
@@ -127,7 +127,7 @@ Uize.module ({
 						'div', 'DIV', 'hr', 'HR', 'iframe', 'IFRAME', 'img', 'IMG', 'li', 'LI', 'ol', 'OL', 'span', 'SPAN', 'td', 'TD', 'textarea', 'TEXTAREA', 'tr', 'TR', 'ul', 'UL',
 
 					/*** file extensions ***/
-						'.asp', '.ASP', '.gif', '.html', '.jpg', '.js', '.jst', '.png', '.PNG', '.txt', '.xhtml', '.xml' // this could be in a regular expression, with leading period optional, and case insensitive, perhaps it would be good to add a filename match, to catch things like, filename.gif, .gif, and gif (ie. patterns like [[filename].]gif|jpg|html)
+						'.asp', '.ASP', '.gif', '.html', '.jpg', '.js', '.jst', '.png', '.PNG', '.txt', '.xhtml', '.xml' // this could be in a regular expression, with leading period optional, and case insensitive, perhaps it would be good to add a filename match, to catch things like, filename.gif, .gif, and gif (i.e. patterns like [[filename].]gif|jpg|html)
 				].concat (
 					_eventNames,
 					Uize.map (_eventNames,'\'on\' + value')

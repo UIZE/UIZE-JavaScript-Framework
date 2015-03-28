@@ -343,7 +343,7 @@ Uize.module ({
 									An integer, representing the time (in milliseconds) that the fade process should take to complete.
 
 									NOTES
-									- the initial value is =2000= (ie. two seconds)
+									- the initial value is =2000= (i.e. two seconds)
 									- the actual duration of the fade process is not affected by the value of the =curve= state property
 						*/
 					},

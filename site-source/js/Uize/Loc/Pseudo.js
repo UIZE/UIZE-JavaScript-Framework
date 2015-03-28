@@ -530,7 +530,7 @@ Uize.module ({
 										A number, specifying an `expansion factor` to be used when producing a pseudo-localized string from the source string.
 
 										- when a number value less than or equal to =1= is specified for this property, then no expansion will take place
-										- when a number value greater than =1= is specified for this property, then the words of the source string will be expanded by the factor specified by the =expansioin= property, using the expansion character specified by the companion =expansionChar= property (eg. if the value =2= is specified, then the word length in the pseudo-localized string will be double that of the source string)
+										- when a number value greater than =1= is specified for this property, then the words of the source string will be expanded by the factor specified by the =expansioin= property, using the expansion character specified by the companion =expansionChar= property (e.g. if the value =2= is specified, then the word length in the pseudo-localized string will be double that of the source string)
 										- when the value =null= or =undefined= is specified for this property, its value will be defaulted to =1.3=
 										- when a non-number value is specified for this property, it will be coerced to a number, so specifying the string ='1.5'= would be equivalent to specifying the number =1.5=
 										- to see examples of this option in use, see the use cases `Pseudo-localize a String, But Without Expansion` and `Pseudo-localize a String, Specifying a Custom Expansion Factor`

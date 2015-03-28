@@ -25,7 +25,7 @@
 		Simple Data is a data file format that is even more human readable than XML (how could this even be possible!?!?) and that uses indentation to indicate structure (so, kind of like Python, but for data). This build script finds all these files and builds pages from them, by processing the data in each file using an accompanying JavaScript Template (=.jst=) file.
 
 		File Naming Scheme
-			The filename for the JST file and the target (ie. built) file are determined by a simple file naming scheme that associates the two files with the Simple Data source file.
+			The filename for the JST file and the target (i.e. built) file are determined by a simple file naming scheme that associates the two files with the Simple Data source file.
 
 			According to this scheme, the filename for the JST file is the filename of the Simple Data file with the =.simpledata= file extension replaced with the =.jst= extension, and the filename of the built file is the filename of the Simple Data file with the =.simpledata= file extension stripped off. Consider the following example...
 

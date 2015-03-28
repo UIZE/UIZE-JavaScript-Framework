@@ -25,7 +25,7 @@
 		JavaScript Module Source Code Pages
 			A source code page is generated for every JavaScript module under the modules folder, including modules that are built from various non-JavaScript source files (such as CSS template files with the =.csst= file extension).
 
-			The build script iterates through all the JavaScript modules contained inside the modules folder, builds a source code page for each module using the JavaScript template =~SOURCE-CODE-TEMPLATE.html= contained inside the =reference/source-code= folder and places the built source code page inside that folder, where the source code page's filename is the name of the module with the file extension =.html= appended (eg. =Uize.Widget.html= for the =Uize.Widget= module).
+			The build script iterates through all the JavaScript modules contained inside the modules folder, builds a source code page for each module using the JavaScript template =~SOURCE-CODE-TEMPLATE.html= contained inside the =reference/source-code= folder and places the built source code page inside that folder, where the source code page's filename is the name of the module with the file extension =.html= appended (e.g. =Uize.Widget.html= for the =Uize.Widget= module).
 
 		Example Source Code Pages
 			A source code page is generated for every example page contained inside the =examples= folder.

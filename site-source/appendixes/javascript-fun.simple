@@ -1,8 +1,8 @@
 Introduction
-	This document explores some of the more unusual idiosyncracies of the JavaScript language, some of which may trip you up if you're not aware of them. 
+	This document explores some of the more unusual idiosyncracies of the JavaScript language, some of which may trip you up if you're not aware of them.
 
 Curious Expressions
-	Following is a list of expressions that are all true (ie. the result of the expressions is always the boolean value =true=). Some of the expressions are cute or ironic to look at. Others may just be plain puzzling to the uninitiated. Explanations appear below the expressions...
+	Following is a list of expressions that are all true (i.e. the result of the expressions is always the boolean value =true=). Some of the expressions are cute or ironic to look at. Others may just be plain puzzling to the uninitiated. Explanations appear below the expressions...
 
 	....................
 	(7 / 100) * 100 != 7

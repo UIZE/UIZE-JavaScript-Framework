@@ -90,7 +90,7 @@ Uize.module ({
 								{foo:'BAR!!!',many:'reasons why'}
 							]
 						],
-						['Specifying an empty array for every property of the combinations specifier results in an empty array (ie. no combinations) being returned',
+						['Specifying an empty array for every property of the combinations specifier results in an empty array (i.e. no combinations) being returned',
 							{foo:[],hello:[],many:[]},
 							[]
 						],

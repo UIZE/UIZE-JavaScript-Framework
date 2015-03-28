@@ -12,7 +12,7 @@ Uize.Fx.fadeStyle
 	- ability to chain fades
 	- support for compound TRBL values, like "1px 0px 10px 5px" (split up into multiple properties?)
 	- what's the best way to support compound, mixed type values like "1px solid #fff"? (split up into multiple properties?)
-	- ability to set style properties immediately for properties and terminate active fade (ie. like a fade with 0 duration)
+	- ability to set style properties immediately for properties and terminate active fade (i.e. like a fade with 0 duration)
 	- support for non-px units of dimension (em, pt)
 	- idea: ability to specify a node for start or end style, and have the style values for that node picked up
 	- ability to fade style for multiple nodes at the same time
@@ -22,6 +22,6 @@ Uize.Fx.fadeStyle
 - migrate effects from Uize.Widget.Swap into Uize.Fx
 - Uize.Fx.fadeOpacity
 - possibly higher level effects (could be in subnamespace), ala what's available in some other frameworks
-- for defineStylePropertiesProfile, support ability to build quantization object based upon decoded fade value, rather than assuming that one size fits all for quantization, especially since some properties like textShadow will have many different components, each with different quantization needs (eg. color and px vs. em or ex).
+- for defineStylePropertiesProfile, support ability to build quantization object based upon decoded fade value, rather than assuming that one size fits all for quantization, especially since some properties like textShadow will have many different components, each with different quantization needs (e.g. color and px vs. em or ex).
 
 

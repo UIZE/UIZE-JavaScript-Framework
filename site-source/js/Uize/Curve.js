@@ -71,7 +71,7 @@ Uize.module ({
 					/*?
 						Static Methods
 							Uize.Curve.linear
-								A simple linear curve function (ie. *NOT* a curve function generator) that merely returns the value that is passed into it.
+								A simple linear curve function (i.e. *NOT* a curve function generator) that merely returns the value that is passed into it.
 
 								SYNTAX
 								................................................
@@ -251,7 +251,7 @@ Uize.module ({
 								Caching of Paramless Versions
 									As an optimization, the =Uize.Curve.makeEasingCurveGenerators= method caches the results of the paramless calls to the curve functions generators that it creates.
 
-									This means that the statement =Uize.Curve.easeOutPow ()= will always return a reference to the same curve function - for a quadratic ease-out curve. In contrast, the statement =Uize.Curve.easeOutPow (3)= will always return different curve functions - even though they will always do the same thing (ie. produce a cubic ease-out curve).
+									This means that the statement =Uize.Curve.easeOutPow ()= will always return a reference to the same curve function - for a quadratic ease-out curve. In contrast, the statement =Uize.Curve.easeOutPow (3)= will always return different curve functions - even though they will always do the same thing (i.e. produce a cubic ease-out curve).
 
 								NOTES
 								- see the related =Uize.Curve.makeEaseOut=, =Uize.Curve.makeEaseInOut=, and =Uize.Curve.makeEaseMiddle= static methods
@@ -357,7 +357,7 @@ Uize.module ({
 									When the optional =sweetBOOL= parameter is not specified, its value will be defaulted to =false=.
 
 								polarityINT
-									An integer, specifying whether or not numerical values for the =curveFUNCorFLOAT= parameter should be negated (ie. multiplied by =-1=).
+									An integer, specifying whether or not numerical values for the =curveFUNCorFLOAT= parameter should be negated (i.e. multiplied by =-1=).
 
 									- =1= - When the value =1= is specified, numerical values for =curveFUNCorFLOAT= will be unaltered.
 
@@ -805,7 +805,7 @@ Uize.module ({
 								curveFUNC = Uize.Curve.line (startValue0to1FLOAT);
 								..................................................
 
-								When no =endValue0to1FLOAT= parameter is specified (or if the same value is specified for both the =startValue0to1FLOAT= and =endValue0to1FLOAT= parameters), then the curve function returned will be for a flat line that is always at the specified start value (ie. it starts at the start value and ends at the start value).
+								When no =endValue0to1FLOAT= parameter is specified (or if the same value is specified for both the =startValue0to1FLOAT= and =endValue0to1FLOAT= parameters), then the curve function returned will be for a flat line that is always at the specified start value (i.e. it starts at the start value and ends at the start value).
 
 								VARIATION 2
 								...............................

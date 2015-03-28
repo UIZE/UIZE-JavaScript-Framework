@@ -172,7 +172,7 @@ Uize.module ({
 							dateOBJ = Uize.Date.resolve ();
 							...............................
 
-							When no =dateSTRorNUMorOBJ= parameter is specified, or if an empty string or the value =null= is specified for this parameter, then a fresh =Date= object instance (ie. now) will be returned.
+							When no =dateSTRorNUMorOBJ= parameter is specified, or if an empty string or the value =null= is specified for this parameter, then a fresh =Date= object instance (i.e. now) will be returned.
 
 							NOTES
 							- when the value =''= (empty string), =null=, or =undefined= is specified for the =dateSTRorNUMorOBJ= parameter, and when no value is specified for the =defaultDateANYTYPE= parameter, then this parameter will be defaulted to the date at the time that the method is called (today's date, essentially)
@@ -205,7 +205,7 @@ Uize.module ({
 							Uize.Date.equal ('2009/09/10 18:19:25','2009/08/01 01:51:47','century');     // true
 							.....................................................................................
 
-							Values specified for the =date1STRorOBJ= and =date2STRorOBJ= parameters are of the =dateSTRorNUMorOBJ= value type. The values that can be specified for the =precisionSTR= parameter are all the values that can be specified for the =rangeSizeSTR= parameter of the =Uize.Date.getRangeAround= method (eg. ='minute'=, ='hour'=, ='am/pm'=, ='week'=, ='quarter'=, ='decade'=, etc.).
+							Values specified for the =date1STRorOBJ= and =date2STRorOBJ= parameters are of the =dateSTRorNUMorOBJ= value type. The values that can be specified for the =precisionSTR= parameter are all the values that can be specified for the =rangeSizeSTR= parameter of the =Uize.Date.getRangeAround= method (e.g. ='minute'=, ='hour'=, ='am/pm'=, ='week'=, ='quarter'=, ='decade'=, etc.).
 
 							MIND THE GAP
 

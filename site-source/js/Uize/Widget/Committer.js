@@ -181,7 +181,7 @@ Uize.module ({
 								clearAll
 									An instance of the =Uize.Widget.Button= class, that is wired up so that clicking on it will clear the values of all the watched properties by setting them to =''= (empty string).
 
-									The markup for this button is optional. The enabled state of this button is managed by the =Uize.Widget.Committer= class, so that it is disabled whenever the values of all watched properties are empty (ie. when the value of the =allClear= state property is =true= and clicking this button would have no effect).
+									The markup for this button is optional. The enabled state of this button is managed by the =Uize.Widget.Committer= class, so that it is disabled whenever the values of all watched properties are empty (i.e. when the value of the =allClear= state property is =true= and clicking this button would have no effect).
 
 									NOTES
 									- see the related =allClear= state property
@@ -191,9 +191,9 @@ Uize.module ({
 						/*?
 							Child Widgets
 								restoreInitial
-									An instance of the =Uize.Widget.Button= class, that is wired up so that clicking on it will restore the values of all the watched properties to their initial state (ie. before a =Uize.Widget.Committer= instance is wired up).
+									An instance of the =Uize.Widget.Button= class, that is wired up so that clicking on it will restore the values of all the watched properties to their initial state (i.e. before a =Uize.Widget.Committer= instance is wired up).
 
-									The markup for this button is optional. The enabled state of this button is managed by the =Uize.Widget.Committer= class, so that it is disabled whenever the values of all watched properties are at their initial state (ie. when the value of the =anyNotInitial= state property is =false= and clicking this button would have no effect). This could be right after wiring the instance, or right after using the =restoreInitial= button to retore the values of the watched properties to their initial state.
+									The markup for this button is optional. The enabled state of this button is managed by the =Uize.Widget.Committer= class, so that it is disabled whenever the values of all watched properties are at their initial state (i.e. when the value of the =anyNotInitial= state property is =false= and clicking this button would have no effect). This could be right after wiring the instance, or right after using the =restoreInitial= button to retore the values of the watched properties to their initial state.
 
 									NOTES
 									- see the related =anyNotInitial= state property
@@ -203,9 +203,9 @@ Uize.module ({
 						/*?
 							Child Widgets
 								restorePrevious
-									An instance of the =Uize.Widget.Button= class, that is wired up so that clicking on it will restore the values of all the watched properties to their previous committed state (ie. before any of the previously committed values were subsequently modified).
+									An instance of the =Uize.Widget.Button= class, that is wired up so that clicking on it will restore the values of all the watched properties to their previous committed state (i.e. before any of the previously committed values were subsequently modified).
 
-									The markup for this button is optional. The enabled state of this button is managed by the =Uize.Widget.Committer= class, so that it is disabled whenever there are no values to commit (ie. when the value of the =anyNotCommitted= state property is =false= and clicking this button would have no effect). This could be right after wiring the instance, right after using the =restorePrevious= button to retore the values of the watched properties to their previous committed state, or after editing the values of the watched properties in such a way that they return to their previously committed state.
+									The markup for this button is optional. The enabled state of this button is managed by the =Uize.Widget.Committer= class, so that it is disabled whenever there are no values to commit (i.e. when the value of the =anyNotCommitted= state property is =false= and clicking this button would have no effect). This could be right after wiring the instance, right after using the =restorePrevious= button to retore the values of the watched properties to their previous committed state, or after editing the values of the watched properties in such a way that they return to their previously committed state.
 
 									NOTES
 									- see the related =anyNotCommitted= state property
@@ -404,7 +404,7 @@ Uize.module ({
 					/*?
 						State Properties
 							allClear
-								A read-only boolean, indicating whether or not all the watched properties are clear (ie. set to =''=).
+								A read-only boolean, indicating whether or not all the watched properties are clear (i.e. set to =''=).
 
 								The value of this property is automatically managed by the =Uize.Widget.Committer= class and is updated as the values of the watched properties change.
 
@@ -469,7 +469,7 @@ Uize.module ({
 					/*?
 						State Properties
 							autoCommitDelay
-								An integer, specifying the amount of time (measured in milliseconds), after uncommited values become ready to commit (ie. the value of =readyToCommit= becomes =true=) and are no longer being modified, before those uncommitted values are automaticlly committed.
+								An integer, specifying the amount of time (measured in milliseconds), after uncommited values become ready to commit (i.e. the value of =readyToCommit= becomes =true=) and are no longer being modified, before those uncommitted values are automaticlly committed.
 
 								When the value of this property is set to =null=, =undefined=, =0=, or =false=, then the auto-commit feature will be disabled.
 
@@ -536,7 +536,7 @@ Uize.module ({
 							readyToCommit
 								A read-only boolean, indicating whether or not there are uncommitted values for watched properties that are ready to commit.
 
-								The value of this property is automatically managed by the =Uize.Widget.Committer= class and is updated as the values of the watched properties change. The value of this property will be =true= if there are any uncommitted values (ie. =anyNotCommitted= is set to =true=) and the values of all watched properties are valid (ie. =allValid= is set to =true=).
+								The value of this property is automatically managed by the =Uize.Widget.Committer= class and is updated as the values of the watched properties change. The value of this property will be =true= if there are any uncommitted values (i.e. =anyNotCommitted= is set to =true=) and the values of all watched properties are valid (i.e. =allValid= is set to =true=).
 
 								NOTES
 								- this property is read-only

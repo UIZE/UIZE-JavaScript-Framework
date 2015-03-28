@@ -21,7 +21,7 @@ Value Transformer
 		}
 		................................
 
-		In the above example, the function =cubed= transforms its input value to the input value to the power of three (ie. cubed).
+		In the above example, the function =cubed= transforms its input value to the input value to the power of three (i.e. cubed).
 
 		Using a Value Transformer Function
 			A `value transformer function` can be supplied as a parameter to any method that supports a value transformer function, such as the =Uize.map= static method. Consider the following example...
@@ -61,7 +61,7 @@ Value Transformer
 		'value * value * value'
 		.......................
 
-		In the above example, the expression transforms the value of the =value= variable to =value= to the power of three (ie. cubed).
+		In the above example, the expression transforms the value of the =value= variable to =value= to the power of three (i.e. cubed).
 
 		Using a Value Transformer Expression
 			A `value transformer expression` can be supplied as a parameter to any method that supports a value transformer expression, such as the =Uize.map= static method. Consider the following example...
@@ -159,7 +159,7 @@ Value Transformer
 				Uize.Array.Sort.sortBy (dateStrings,function (value) {return +(new Date (value))});
 				...................................................................................
 
-				In the above example, the =dateStrings= variable is a reference to an array containing correctly formatted date strings. The array of date strings is being sorted into chronological order by the =Uize.Array.Sort.sortBy= method, with a `value transformer function` specified for the sort value generator that transforms a date string value into a number, representing the date as the number of milliseconds elapsed since January 1st, 1970 (ie. POSIX time). While the sort value generator will be passed the index / key as the second parameter when it is called for each element of the =dateStrings= array, the function does not declare or use that second parameter.
+				In the above example, the =dateStrings= variable is a reference to an array containing correctly formatted date strings. The array of date strings is being sorted into chronological order by the =Uize.Array.Sort.sortBy= method, with a `value transformer function` specified for the sort value generator that transforms a date string value into a number, representing the date as the number of milliseconds elapsed since January 1st, 1970 (i.e. POSIX time). While the sort value generator will be passed the index / key as the second parameter when it is called for each element of the =dateStrings= array, the function does not declare or use that second parameter.
 
 		Any Type of Value Can Be Transformed
 			There is no limit to the kinds of values that can be transformed by a `value transformer`.
@@ -302,7 +302,7 @@ Value Matcher
 				In the above example, all lines that are either empty or only contain whitespace characters will be removed from the string specified by the =myString= variable, and the resulting string will be assigned back to the =myString= variable.
 
 			Uize.Str.Lines.retainMatching
-				The =Uize.Str.Lines.retainMatching= static method supports a value matcher to identify which lines of a multi-line string should be retained (ie. not removed).
+				The =Uize.Str.Lines.retainMatching= static method supports a value matcher to identify which lines of a multi-line string should be retained (i.e. not removed).
 
 				EXAMPLE
 				.............................................
@@ -398,7 +398,7 @@ Value Validator
 		- validate that a user entered phone number is correctly formatted
 		- validate that a user entered date falls within a valid date range
 		- validate that user entered text does not exceed a maximum allowable length
-		- validate that a user entered string does not contain illegal characters (eg. a user name that may not contain spaces or special characters)
+		- validate that a user entered string does not contain illegal characters (e.g. a user name that may not contain spaces or special characters)
 		- etc.
 
 	Value Validator Function

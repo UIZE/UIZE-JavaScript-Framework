@@ -1,4 +1,4 @@
-The new =Uize.isRegExp= static method, implemented in the =Uize= base module, returns a boolean, indicating whether or not the specified value is a regular expression (ie. an instance of JavaScript's built-in =RegExp= object).
+The new =Uize.isRegExp= static method, implemented in the =Uize= base module, returns a boolean, indicating whether or not the specified value is a regular expression (i.e. an instance of JavaScript's built-in =RegExp= object).
 
 SYNTAX
 ............................................

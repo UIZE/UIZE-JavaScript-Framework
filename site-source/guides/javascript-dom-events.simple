@@ -51,7 +51,7 @@ Event Wiring Basics
 		In the above example, we are wiring a handler for the =click= event of the link tag that has the =id= of "myLinkTag". The first parameter of the =Uize.Dom.Basics.wire= method call specifies the DOM node, the second parameter specifies the event, and the third parameter specifies the handler function. After the above statement has been executed, clicking on our wired link tag will pop up a JavaScript alert dialog with the message "You Clicked Me!".
 
 		Event Naming
-			The DOM event management methods of the UIZE JavaScript Framework opt to name events using the standardized names established in the [[http://www.w3.org/TR/DOM-Level-2-Events/events.html#Events-eventgroupings-htmlevents][DOM Level 2 Event Model]] and [[http://www.w3.org/TR/DOM-Level-3-Events/#event-definitions][DOM Level 3 Event Model]] specifications - without the "on" prefix that is used with the reflected properties of DOM nodes (eg. =onclick=, =onmouseover=, =onmouseout=, etc.).
+			The DOM event management methods of the UIZE JavaScript Framework opt to name events using the standardized names established in the [[http://www.w3.org/TR/DOM-Level-2-Events/events.html#Events-eventgroupings-htmlevents][DOM Level 2 Event Model]] and [[http://www.w3.org/TR/DOM-Level-3-Events/#event-definitions][DOM Level 3 Event Model]] specifications - without the "on" prefix that is used with the reflected properties of DOM nodes (e.g. =onclick=, =onmouseover=, =onmouseout=, etc.).
 
 			OLD SCHOOL
 			........................................................................................
@@ -442,7 +442,7 @@ Event Wiring Basics
 		Uize.Dom.Basics.unwire (['myDiv1','myDiv2','myDiv3'],undefined,sayHi);
 		......................................................................
 
-		In the above example, handlers are being wired for events of the nodes with the IDs of "myDiv1", "myDiv2", and "myDiv3". Some of the events are wired to execute the handler function =sayHi=, which would pop up an alert dialog with the message "hi!". Using the =Uize.Dom.Basics.unwire= method, we are then unwiring all events of our three =div= nodes that are wired to the =sayHi= handler. We do this by specifying a reference to =sayHi= for the handler function parameter, but specifying the value =undefined= for the event name parameter. The =undefined= value effectively acts as wildcard value (ie. any event name). After the above code has been executed, the only event wiring left standing will be the wiring of the =click= event of the =div= with the =id= of "myDiv3", so clicking on this node would produce an alert dialog with the message "You clicked me!".
+		In the above example, handlers are being wired for events of the nodes with the IDs of "myDiv1", "myDiv2", and "myDiv3". Some of the events are wired to execute the handler function =sayHi=, which would pop up an alert dialog with the message "hi!". Using the =Uize.Dom.Basics.unwire= method, we are then unwiring all events of our three =div= nodes that are wired to the =sayHi= handler. We do this by specifying a reference to =sayHi= for the handler function parameter, but specifying the value =undefined= for the event name parameter. The =undefined= value effectively acts as wildcard value (i.e. any event name). After the above code has been executed, the only event wiring left standing will be the wiring of the =click= event of the =div= with the =id= of "myDiv3", so clicking on this node would produce an alert dialog with the message "You clicked me!".
 
 ### Supported Events
 	### Events Common to All Nodes

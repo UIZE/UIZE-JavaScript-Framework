@@ -1,6 +1,6 @@
 This is a TO DO document for the =Uize.Fade= module.
 
-- instead of start / stop methods, just use property interface (ie. inProgress property)
+- instead of start / stop methods, just use property interface (i.e. inProgress property)
 - ability to pause and resume a time-based fade
 - ability to specify the number of updates in the fade
 	1 = gets to end immediately

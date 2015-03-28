@@ -168,7 +168,7 @@
 						);
 						........................................................
 
-						In the above example, a handler is being registered to be executed once the widget =myWidget= has been wired (ie. the value of its =wired= state property becomes =true=).
+						In the above example, a handler is being registered to be executed once the widget =myWidget= has been wired (i.e. the value of its =wired= state property becomes =true=).
 
 						EXAMPLE 2
 						................................................................
@@ -277,7 +277,7 @@
 						}
 						..............................................................................
 
-						In the above example, a compound condition is specified using a `condition expression string`. In this string, the part before the colon - "width, height, depth" - indicates that the condition is affected by the =width=, =height=, and =depth= state properties of the =myFishTankWater= instance. The part after the colon - "width &#42; height &#42; depth > 1000" - evaluates the condition to be =true= when the volume of the fish tank's water (ie. the product of the =width=, =height=, and =depth= properties) is greater than =1000=.
+						In the above example, a compound condition is specified using a `condition expression string`. In this string, the part before the colon - "width, height, depth" - indicates that the condition is affected by the =width=, =height=, and =depth= state properties of the =myFishTankWater= instance. The part after the colon - "width &#42; height &#42; depth > 1000" - evaluates the condition to be =true= when the volume of the fish tank's water (i.e. the product of the =width=, =height=, and =depth= properties) is greater than =1000=.
 
 					Condition Inversion
 						As a convenience, the =once= method supports condition inversion through an optional "!" (logical not) prefix that can be placed before the condition name.
@@ -292,7 +292,7 @@
 						);
 						................................................................
 
-						In the above example, code is being registered to execute once the =isEmpty= state property is =false=. This is done by prefixing the "isEmpty" condition name with a "!" (bang / exclamation) character to indicate that the code should execute only once the collection is not empty (ie. the value of the =isEmpty= state property becomes =false=). The `condition inversion` facility is convenient in situations like this where you wish to execute code only once a property's value becomes falsy, rather than once the property's value becomes truthy (which is the standard behavior for the =once= method).
+						In the above example, code is being registered to execute once the =isEmpty= state property is =false=. This is done by prefixing the "isEmpty" condition name with a "!" (bang / exclamation) character to indicate that the code should execute only once the collection is not empty (i.e. the value of the =isEmpty= state property becomes =false=). The `condition inversion` facility is convenient in situations like this where you wish to execute code only once a property's value becomes falsy, rather than once the property's value becomes truthy (which is the standard behavior for the =once= method).
 
 						Condition Inversion with Multiple Property Conditions
 							Condition inversion can be used both with single state property conditions as well as multiple property conditions.
@@ -1037,7 +1037,7 @@ Uize.module ({
 									The handler for a change event can expect to receive the following two parameters...
 
 									- *derived value* - the new computed value for the `state properties derivation`
-									- *determinants values* - an array, containing the values of all the determinants (ie. the state properties) used in deriving the value, in the order in which they occur in the definition for the derivation
+									- *determinants values* - an array, containing the values of all the determinants (i.e. the state properties) used in deriving the value, in the order in which they occur in the definition for the derivation
 
 									EXAMPLE
 									........................................................................................
@@ -1122,7 +1122,7 @@ Uize.module ({
 								Immediate Execution if Condition Already Met
 									If the condition specified in the call to the =once= method is already met at the time that the method is called, then the handler specified by the =handlerFUNC= parameter will be executed immediately.
 
-									Otherwise, handlers will be wired for the =Changed.*= (value change) events for all the state properties that affect the condition (the `determinants`). The condition evaluator will be executed each time any of the watched properties change value. As soon as the condition becomes met (ie. the condition evaluator produces a truthy result), the handlers wired to watch the value change events of the properties will be unwired and the handler function registered for the condition will be executed. By design, the handler is only executed for the first time that the condition becomes met.
+									Otherwise, handlers will be wired for the =Changed.*= (value change) events for all the state properties that affect the condition (the `determinants`). The condition evaluator will be executed each time any of the watched properties change value. As soon as the condition becomes met (i.e. the condition evaluator produces a truthy result), the handlers wired to watch the value change events of the properties will be unwired and the handler function registered for the condition will be executed. By design, the handler is only executed for the first time that the condition becomes met.
 
 								For More Information
 									The concept of a condition is common to multiple instance methods of the =Uize.Class= module.
@@ -1140,7 +1140,7 @@ Uize.module ({
 					/*?
 						Instance Methods
 							whenever
-								Lets you register a handler that should be executed whenever the specified condition becomes met (ie. changes from being falsy to being truthy).
+								Lets you register a handler that should be executed whenever the specified condition becomes met (i.e. changes from being falsy to being truthy).
 
 								The =whenever= method is useful when using one or more state properties to form a condition, and where you wish to register code that should be executed every time the condition changes state from not being met to being met, and immediately if the condition is already met at the time that the =whenever= method is called.
 
@@ -1193,7 +1193,7 @@ Uize.module ({
 								Immediate Execution if Condition Already Met
 									If the condition specified in the call to the =whenever= method is already met at the time that the method is called, then the handler specified by the =handlerFUNC= parameter will be executed immediately.
 
-									Handlers will also be wired for the =Changed.*= (value change) events for all the state properties that affect the condition (the `determinants`). The condition evaluator will be executed each time any of the watched properties change value. Whenever the condition becomes met (ie. the condition evaluator produces a truthy result after previously having produced a falsy result), the handler function registered for the condition will be executed.
+									Handlers will also be wired for the =Changed.*= (value change) events for all the state properties that affect the condition (the `determinants`). The condition evaluator will be executed each time any of the watched properties change value. Whenever the condition becomes met (i.e. the condition evaluator produces a truthy result after previously having produced a falsy result), the handler function registered for the condition will be executed.
 
 								For More Information
 									The concept of a condition is common to multiple instance methods of the =Uize.Class= module.
@@ -2280,7 +2280,7 @@ Uize.module ({
 											The name of a changed event that fires is of the form =Changed.[propertyName]=, where =propertyName= is the primary public name of the state property. For example, if you declared a state property named =value=, then a =Changed.value= event would fire each time this property is changed.
 
 										Property Aliases
-											If a state property has aliases, handlers can be registered for the property's changed event using any of the aliases. However, the name of the event when it fires will always be derived from the primary public name (ie. first in the alias list) of the property. So, for example, if a state property was declared with the public names =color= and =hexRgb=, both =Changed.color= and =Changed.hexRgb= would be treated as equivalent.
+											If a state property has aliases, handlers can be registered for the property's changed event using any of the aliases. However, the name of the event when it fires will always be derived from the primary public name (i.e. first in the alias list) of the property. So, for example, if a state property was declared with the public names =color= and =hexRgb=, both =Changed.color= and =Changed.hexRgb= would be treated as equivalent.
 
 											EXAMPLE
 											..........................................................

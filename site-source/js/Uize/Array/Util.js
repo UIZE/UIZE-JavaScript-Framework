@@ -187,7 +187,7 @@ Uize.module ({
 									.....................................
 
 								Flatten an Array to Infinite Depth
-									When the optional =depthINT= parameter is not specified, then the source array will be flattened to infinite depth (ie. until all elements are no longer arrays).
+									When the optional =depthINT= parameter is not specified, then the source array will be flattened to infinite depth (i.e. until all elements are no longer arrays).
 
 									EXAMPLE
 									....................................................................

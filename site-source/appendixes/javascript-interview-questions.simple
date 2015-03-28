@@ -11,7 +11,7 @@ Questions
 
 		REQUIREMENTS
 		- Your function should expect two parameters: the first being the array of items to process, and the second being a reference to an external function that should be called in order to process each item.
-		- The external function expects two parameters: the first being an item to process, and the second being a callback function that it will call once it has finished processing the item. The callback is important, because processing the item is asynchronous (eg. it may involve an AJAX request to a Web service). You don't have to implement the external function, and it's not particularly relevant what it does with each item.
+		- The external function expects two parameters: the first being an item to process, and the second being a callback function that it will call once it has finished processing the item. The callback is important, because processing the item is asynchronous (e.g. it may involve an AJAX request to a Web service). You don't have to implement the external function, and it's not particularly relevant what it does with each item.
 		- Your implementation must be encapsulated inside a function. You may not write other functions outside of it.
 		- Your implementation must not be destructive to the items array parameter.
 
@@ -60,7 +60,7 @@ Questions
 		See =ANSWER: Check if a String is Only Whitespace=
 
 	QUESTION: Push Onto Array
-		Write a function to push either a simple value or an array of values onto a specified array. For the purpose of the exercise, we will call the target array simply =array= and the stuff to push onto it (either a simple value or array) simply =toPush=. If =toPush= is a simple value, it should be pushed onto =array= as an element. If =toPush= is an array, all of its elements should be pushed onto =array=. Your solution should modify =array= (ie. not return a new array).
+		Write a function to push either a simple value or an array of values onto a specified array. For the purpose of the exercise, we will call the target array simply =array= and the stuff to push onto it (either a simple value or array) simply =toPush=. If =toPush= is a simple value, it should be pushed onto =array= as an element. If =toPush= is an array, all of its elements should be pushed onto =array=. Your solution should modify =array= (i.e. not return a new array).
 
 		COMPLETE
 		.......................................
@@ -84,7 +84,7 @@ Questions
 		See =ANSWER: Round a Positive Number=
 
 	QUESTION: Do Stuff If Object Not Empty
-		Write a function that accepts an object and does some stuff, but only if the object has some properties in it (ie. it's not an empty object). The "some stuff" is not important and can just be a placeholder comment =// do some stuff=.
+		Write a function that accepts an object and does some stuff, but only if the object has some properties in it (i.e. it's not an empty object). The "some stuff" is not important and can just be a placeholder comment =// do some stuff=.
 
 		COMPLETE
 		..............................
@@ -505,7 +505,7 @@ Answers
 
 		OBJECTIVES
 		- test basic knowledge of JSON syntax
-		- test basic problem solving skills (ie. arriving at conclusion to use two dimensional "hash tables")
+		- test basic problem solving skills (i.e. arriving at conclusion to use two dimensional "hash tables")
 		- test skills in gathering and digesting/understanding requirements
 		- test comfort level with language model, with the use of immediate indexing into anonymous objects that are constructed as part of a more complex expression
 		- test familiarity with JavaScript's handling of conditionals (using the || operator in defaulting of values)

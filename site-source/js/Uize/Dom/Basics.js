@@ -613,12 +613,12 @@ Uize.module ({
 									For =textarea= tags and =input= tags of type =text= and =hidden=, this method returns the value of the node's =value= property.
 
 								Select Boxes - Single Select
-									For =select= tags in single select mode (ie. where the =multiple= attribute is absent), this method returns the value of the selected option's =value= property.
+									For =select= tags in single select mode (i.e. where the =multiple= attribute is absent), this method returns the value of the selected option's =value= property.
 
 									In the event that no option is selected, this method will return the value =''= (empty array).
 
 								Select Boxes - Multiple Select
-									For =select= tags in multiple select mode (ie. where the =multiple= attribute is set to the value ='multiple'=), this method returns an array containing the values of the all selected options, in the order in which they appear in the options array.
+									For =select= tags in multiple select mode (i.e. where the =multiple= attribute is set to the value ='multiple'=), this method returns an array containing the values of the all selected options, in the order in which they appear in the options array.
 
 									In the event that no options are selected, this method will return an empty array.
 
@@ -1261,7 +1261,7 @@ Uize.module ({
 									For =textarea= tags and =input= tags of type =text= and =hidden=, the node's =value= property is set to the value of the =valueSTRorNUMorBOOLorOBJ= parameter.
 
 								Select Boxes - Single Select
-									For =select= tags in single select mode (ie. where the =multiple= attribute is absent), the node's =selectedIndex= property is set to the index of the option whose =value= property corresponds to the value of the =valueSTRorNUMorBOOLorOBJ= parameter.
+									For =select= tags in single select mode (i.e. where the =multiple= attribute is absent), the node's =selectedIndex= property is set to the index of the option whose =value= property corresponds to the value of the =valueSTRorNUMorBOOLorOBJ= parameter.
 
 									If there is no option whose =value= property corresponds, then the =selectedIndex= of the node will not be changed.
 
@@ -1269,9 +1269,9 @@ Uize.module ({
 										When the special value =''= (empty string) is specified, then the =selectedIndex= of the node will be set to the value =-1=, upon which no option will be selected.
 
 								Select Boxes - Multiple Select
-									For =select= tags in multiple select mode (ie. where the =multiple= attribute is set to the value ='multiple'=), the =selected= property for every option in the select box whose value is in the specified selected options value will be set to =true=.
+									For =select= tags in multiple select mode (i.e. where the =multiple= attribute is set to the value ='multiple'=), the =selected= property for every option in the select box whose value is in the specified selected options value will be set to =true=.
 
-									When using the =Uize.Dom.Basics.setValue= method to set the selected options of a multiple select =select= tag, the selected options can be specified either as an array of strings, or as a string formatted as a comma-separated list, where the items in the selected options list should be the values of the options that should become selected (ie. *not* the display text for the options).
+									When using the =Uize.Dom.Basics.setValue= method to set the selected options of a multiple select =select= tag, the selected options can be specified either as an array of strings, or as a string formatted as a comma-separated list, where the items in the selected options list should be the values of the options that should become selected (i.e. *not* the display text for the options).
 
 									Order Unimportant
 										The order in which the selected options are specified in the list is not important.
@@ -1364,7 +1364,7 @@ Uize.module ({
 										Executing the statement in the example would add the ='Solar'= and ='Wind'= options to the selected options. To avoid blowing away any currently selected options, the =Uize.Dom.Basics.getValue= method is used to get the currently selected options. The value returned from this method is an array, so we can use the =concat= method of the =Array= object to "merge in" the ='Solar'= and ='Wind'= options. The resulting array is then supplied to the =Uize.Dom.Basics.setValue= method to set the selected options. It doesn't matter if either - or both - of the ='Solar'= and ='Wind'= options were already selected, since `duplicate values are allowed` by the =Uize.Dom.Basics.setValue= method.
 
 								Checkboxes
-									For checkboxes (=input= tags of type =checkbox=), the =checked= property of the node is set to =true= or =false= dependending on whether or not the value of the =valueSTRorNUMorBOOLorOBJ= parameter is equivalent to =true= (ie. if it has the boolean value =true= or the string value ='true'=).
+									For checkboxes (=input= tags of type =checkbox=), the =checked= property of the node is set to =true= or =false= dependending on whether or not the value of the =valueSTRorNUMorBOOLorOBJ= parameter is equivalent to =true= (i.e. if it has the boolean value =true= or the string value ='true'=).
 
 								Radio Buttons
 									For radio buttons (=input= tags of type =radio=), the =checked= property of the radio button node in the set whose =value= property corresponds to the value of the =valueSTRorNUMorBOOLorOBJ= parameter is set to =true=, while the =checked= property of all other radio button nodes in the set is set to =false=.
@@ -1530,7 +1530,7 @@ Uize.module ({
 
 									The default empty string owner ID can be considered as the global wirings owner. Whenever the =Uize.Dom.Basics.wire= and =Uize.Dom.Basics.unwire= static methods are called and no =ownerIdSTR= is supplied, or if the value =''= (empty string) is explicitly specified for this parameter, then the wirings are assigned to the global pool.
 
-									With this default behavior, this method only unwires event handlers that have been wired by this module and will not unwire event handlers wired for a node by widget instances (ie. instances of a =Uize.Widget= subclass), even if the specified event name and handler match a wiring owned by a widget instance. Additionally, this method will not unwire event handlers wired for nodes using code that does not utilize the =Uize.Dom.Basics= module for DOM event management.
+									With this default behavior, this method only unwires event handlers that have been wired by this module and will not unwire event handlers wired for a node by widget instances (i.e. instances of a =Uize.Widget= subclass), even if the specified event name and handler match a wiring owned by a widget instance. Additionally, this method will not unwire event handlers wired for nodes using code that does not utilize the =Uize.Dom.Basics= module for DOM event management.
 
 								NOTES
 								- see the companion =Uize.Dom.Basics.wire= static method

@@ -12,7 +12,7 @@ Improve Table Support
 		- horizontal alignment for columns (left, center, right)
 		- logical (and limited) styling options for columns (that key into specific CSS classes)
 		- columns whose data is expected to be SimpleDoc formatted text (formatting, linking, etc.)
-		- ability to specify type for a column's data (eg. completion level, rating, time, etc.)
+		- ability to specify type for a column's data (e.g. completion level, rating, time, etc.)
 
 	Sorting
 		Allow tables to be sortable.
@@ -23,14 +23,14 @@ Improve Table Support
 		Add the ability to specify row data as objects, rather than an array, with named keys identifying columns.
 
 Improve Automatic Linking Behavior
-	- multiple branch disambiguation syntax (eg. Section : Section : Section)
+	- multiple branch disambiguation syntax (e.g. Section : Section : Section)
 	- warnings
 		- for any ambiguity in links to sections of same name
 			- could be a log of how such ambiguities were resolved
 				- link text
 				- link context (section identifier)
 				- resolved link (section identifier)
-		- for links to non-existent sections (ie. dead links)
+		- for links to non-existent sections (i.e. dead links)
 		- invalid / unrecognized types of object blocks
 	- should never link the same item more than once in the same paragraph
 	- should ideally never link to the same URL / anchor more than once in the same section (unless, perhaps there was at least one deeper section between the new occurrence and the last occurrence)

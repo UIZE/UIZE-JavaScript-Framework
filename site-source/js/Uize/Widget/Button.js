@@ -336,7 +336,7 @@ Uize.module ({
 									(m._framesNode = m.getNode ('frames'))
 								) {
 									/* NOTE:
-										optimized to avoid extra node lookup by id for buttons that are a single node (like a link tag) decorated only with CSS images, or a single node (like a link tag) containing only a single text child node (ie. a simple text button)
+										optimized to avoid extra node lookup by id for buttons that are a single node (like a link tag) decorated only with CSS images, or a single node (like a link tag) containing only a single text child node (i.e. a simple text button)
 									*/
 									m._mode = 'frames';
 									m._framesParentNodeDims = Uize.Dom.Pos.getDimensions (m._framesNode.parentNode);

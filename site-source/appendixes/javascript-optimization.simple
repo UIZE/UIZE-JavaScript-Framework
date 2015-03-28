@@ -30,7 +30,7 @@ General Code Size Optimization
 
 		WARNING
 
-		When using the compound var statement, be careful about how you use daisy chain assignments (eg. a &#61; b &#61; c). With daisy chain assignment in a var statement, the var declaration is not applied to "inner" identifiers.
+		When using the compound var statement, be careful about how you use daisy chain assignments (e.g. a &#61; b &#61; c). With daisy chain assignment in a var statement, the var declaration is not applied to "inner" identifiers.
 
 		So, for example...
 
@@ -434,7 +434,7 @@ General Code Size Optimization
 		....................................................
 
 	Delimiter Search, Defaulting to Length
-		When writing code to scan through a string, from one occurrence of a delimiter to the next, it is a common pattern to set the delimiter position variable to the length of the string (ie. after the last character of the string) when no more instance of the delimiter is found.
+		When writing code to scan through a string, from one occurrence of a delimiter to the next, it is a common pattern to set the delimiter position variable to the length of the string (i.e. after the last character of the string) when no more instance of the delimiter is found.
 
 		Consider the following snippet of code...
 

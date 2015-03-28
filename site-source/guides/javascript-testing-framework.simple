@@ -177,7 +177,7 @@ Expectation
 Asynchronous Tests
 	While many tests can be synchronous, there will be some tests that will be asynchronous out of necessity - either just some of the time, or all of the time.
 
-	A test being asynchronous means that the code inside the `test function` is asynchronous. This might be because timeouts are involved, or because the test may test some functionality that involves the use of asynchronous communication (eg. Ajax communication to a server).
+	A test being asynchronous means that the code inside the `test function` is asynchronous. This might be because timeouts are involved, or because the test may test some functionality that involves the use of asynchronous communication (e.g. Ajax communication to a server).
 
 	Test Result Callback Function
 		When a test is asynchronous, it cannot return the `test result` in a =return= statement inside the `test function`.
@@ -584,7 +584,7 @@ Test Module
 		For the modules that make up the UIZE JavaScript Framework, test modules are located under the =Uize.Test= namespace. So, for example, the test module for testing the =Uize.Data= module lives under the =Uize.Test= namespace as =Uize.Test.Uize.Data=. Essentially, the namespace hierarchy of the UIZE JavaScript Framework is replicated under the =Uize.Test= namespace - excepting, of course, the =Uize.Test= namespace hierarchy (or you would have video feedback style infinite recursion).
 
 		An Example
-			If you have created your own namespace for your application specific JavaScript modules (ie. non-UIZE modules), then you can create a test modules namespace under that namespace and place all your test modules under that namespace.
+			If you have created your own namespace for your application specific JavaScript modules (i.e. non-UIZE modules), then you can create a test modules namespace under that namespace and place all your test modules under that namespace.
 
 			For example, if your Web site was *www.mycompany.com* and you created the root namespace of =MyCompanySite= for your JavaScript, then you could create a testing namespace under that namespace called =MyCompanySite.Test=. Now, if your application had a custom JavaScript module called =MyCompanySite.CommonUtils=, then a test module for testing that module could be named =MyCompanySite.Test.MyCompanySite.CommonUtils=. It may seem redundant to repeat the "MyCompanySite" part, but your root namespace file may define some common functions that you may also wish to test separately, and the test module for testing the =MyCompanySite= module would be named =MyCompanySite.Test.MyCompanySite=.
 

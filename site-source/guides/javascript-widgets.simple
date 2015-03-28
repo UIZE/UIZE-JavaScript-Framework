@@ -69,7 +69,7 @@ Introduction
 			- useful context (such as environment variables)
 			- useful facilities (such as decorated alert/confirmation dialogs, methods for generating URLs for the site, localization resources, etc.)
 
-			Facilities provided by the page widget are available to child widgets via their =getInherited= and =callInherited= instance methods. The page widget base class also implements a `widget adoption` mechanism that allows child widgets to be declared in the page's markup using a purely declarative syntax (ie. requiring no JavaScript to be previously loaded).
+			Facilities provided by the page widget are available to child widgets via their =getInherited= and =callInherited= instance methods. The page widget base class also implements a `widget adoption` mechanism that allows child widgets to be declared in the page's markup using a purely declarative syntax (i.e. requiring no JavaScript to be previously loaded).
 
 		What Doesn't the Page Widget Do?
 			The page widget doesn't do a lot of things.
@@ -250,7 +250,7 @@ More on Widgets
 			The Shell Node
 				The optional =shell= implied node for a widget instance provides a "slot" in the document into which markup for that instance can be inserted.
 
-				The following example illustrates use of the =shell= implied node by showing some HTML before and after a widget instance is set up. The widget instance that is created is a plain vanilla widget (ie. an instance of the =Uize.Widget= base class), with its =idPrefix= set to the value ='myWidget'=.
+				The following example illustrates use of the =shell= implied node by showing some HTML before and after a widget instance is set up. The widget instance that is created is a plain vanilla widget (i.e. an instance of the =Uize.Widget= base class), with its =idPrefix= set to the value ='myWidget'=.
 
 				HTML BEFORE
 				.........................
@@ -1167,10 +1167,10 @@ Principles of Good Widget Design
 
 	Update Optimization
 		No Unnecessary DOM Updates
-			Calling uodateUi on a widget should not result in any DOM updates is the state that would be reflected in the UI has not changed since the last time the UI was updated (ie. update optimization code should be implemented, and perhaps a mechanism provided to facilitate this).
+			Calling uodateUi on a widget should not result in any DOM updates is the state that would be reflected in the UI has not changed since the last time the UI was updated (i.e. update optimization code should be implemented, and perhaps a mechanism provided to facilitate this).
 
 		Granular DOM Updates
-			Updating the UI should be optimized so that unnecessary redundant DOM updates are not performed for state that has not changed (ie. even if some state has changed, updating should be broken down into more granular units). A widget's UI generation code should be optimized such that subcomponents of the UI are only regenerated or refreshed if the state properties that relate to them have changed since the last time the UI was updated.
+			Updating the UI should be optimized so that unnecessary redundant DOM updates are not performed for state that has not changed (i.e. even if some state has changed, updating should be broken down into more granular units). A widget's UI generation code should be optimized such that subcomponents of the UI are only regenerated or refreshed if the state properties that relate to them have changed since the last time the UI was updated.
 
 		Deduplication of Updates
 			Setting a widget repeatedly to the same state should not result in repeated redundant refreshes.

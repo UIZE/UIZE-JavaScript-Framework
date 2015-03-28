@@ -8,7 +8,7 @@ Optimization
 Improve replaceByToken method
 	- add support for an array as the second param (where the tokens are of the form {elementNo})
 	- add support for an optional tokenNaming scheme param
-		- if its value is a string (eg. "[#KEY]", "{KEY}", "##KEY##"), the word KEY will be replaced with the key name
+		- if its value is a string (e.g. "[#KEY]", "{KEY}", "##KEY##"), the word KEY will be replaced with the key name
 		- if its value is a function, it will receive the key name and must return the token name. This allows complete flexibility in token name conventions, such as always camel-casing, uppercasing, crunching, etc.
 			eg. function (_keyName) {return '[' + _keyName.toUpperCase () + ']'}
 		- default value for this param is "{KEY}"

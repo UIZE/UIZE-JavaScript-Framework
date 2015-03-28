@@ -53,7 +53,7 @@ Uize.module ({
 				/*?
 					Static Methods
 						Uize.Str.Trim.hasPadding
-							Returns a boolean, indicidating whether or not the specified string has whitespace padding on either - or both - of its sides (ie. leading or trailing whitespace).
+							Returns a boolean, indicidating whether or not the specified string has whitespace padding on either - or both - of its sides (i.e. leading or trailing whitespace).
 
 							SYNTAX
 							......................................................
@@ -117,7 +117,7 @@ Uize.module ({
 				/*?
 					Static Methods
 						Uize.Str.Trim.trimLeft
-							Returns a string, that is the specified source string minus any whitespace padding to the left of the first non-whitespace character or the end of the string (ie. leading whitespace).
+							Returns a string, that is the specified source string minus any whitespace padding to the left of the first non-whitespace character or the end of the string (i.e. leading whitespace).
 
 							SYNTAX
 							....................................................
@@ -147,7 +147,7 @@ Uize.module ({
 				/*?
 					Static Methods
 						Uize.Str.Trim.trimRight
-							Returns a string, that is the specified source string minus any whitespace padding to the right of the last non-whitespace character or the start of the string (ie. trailing whitespace).
+							Returns a string, that is the specified source string minus any whitespace padding to the right of the last non-whitespace character or the start of the string (i.e. trailing whitespace).
 
 							SYNTAX
 							......................................................

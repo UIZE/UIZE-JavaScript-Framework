@@ -10,7 +10,7 @@ Fixes
 Improvements
 	The following minor improvements have been made to static methods of the =Uize.Date= module...
 
-	- The =Uize.Date.format= static method has been improved with the addition of support for invalid dates for all substitution tokens (eg. =Uize.Date.format (new Date (NaN),'{YYYY}-{MM}-{DD}')= now produces the result ='????-??-??'=).
+	- The =Uize.Date.format= static method has been improved with the addition of support for invalid dates for all substitution tokens (e.g. =Uize.Date.format (new Date (NaN),'{YYYY}-{MM}-{DD}')= now produces the result ='????-??-??'=).
 	- The =Uize.Date.resolve= static method has been improved with the addition of support for dates specified as a milliseconds integer number.
 
 In addition to the above fixes and improvements, the =Uize.Date= module is now thoroughly unit tested by the newly created =Uize.Test.Uize.Date= unit tests module.

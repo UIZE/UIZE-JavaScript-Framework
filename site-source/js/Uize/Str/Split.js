@@ -174,7 +174,7 @@ Uize.module ({
 									lines = Uize.Str.Split.split ('line 1\rline 2\nline 3\r\nline 4',/(\r\n|[\r\n])/);
 									..................................................................................
 
-									After the above statement has been executed, the value of the =lines= variable will be the array =['line 1','\r','line 2','\n','line 3','\r\n','line 4']=. Because the entire splitter regular expression is inside a capture (ie. the parentheses), the entire matched splitter is included in the returned array for each line of the multi-line string. When the =Uize.Str.Split.split= method builds up the result array, it follows the array element for each split part with elements for all the captures in the regular expression, in the order in which the captures occur in the regular expression.
+									After the above statement has been executed, the value of the =lines= variable will be the array =['line 1','\r','line 2','\n','line 3','\r\n','line 4']=. Because the entire splitter regular expression is inside a capture (i.e. the parentheses), the entire matched splitter is included in the returned array for each line of the multi-line string. When the =Uize.Str.Split.split= method builds up the result array, it follows the array element for each split part with elements for all the captures in the regular expression, in the order in which the captures occur in the regular expression.
 
 								Splitting Using a Regular Expression And Ignoring Captures
 									Because the =Uize.Str.Split.split= method includes captures from a regular expression splitter in the returned array, an extra step is needed if you wish to use parentheses for grouping in a regular expression but don't wish the captures to be included in the result array.
@@ -184,7 +184,7 @@ Uize.module ({
 									words = Uize.Str.Split.split ('solar<_-_>power<_-_-_>will<_-_-_-_>win',/<(?:-=)+->/);
 									.....................................................................................
 
-									After the above statement has been executed, the value of the =words= variable will be the array =['solar','power','will','win']=. The regular expression is using a group to allow matching of one or more of the substring ='-&#61;'=. However, we don't want those matched characters to pollute the result array - we only want the words that are split out from the string. To accomplish this, we use a feature of regular expressions that allows a group to not be treated as a capture, simply by prefixing the contents of the group expression (ie. the stuff inside the group's parentheses) with the special characters =?:= - this tells the regular expression engine to not capture the characters matched by the group.
+									After the above statement has been executed, the value of the =words= variable will be the array =['solar','power','will','win']=. The regular expression is using a group to allow matching of one or more of the substring ='-&#61;'=. However, we don't want those matched characters to pollute the result array - we only want the words that are split out from the string. To accomplish this, we use a feature of regular expressions that allows a group to not be treated as a capture, simply by prefixing the contents of the group expression (i.e. the stuff inside the group's parentheses) with the special characters =?:= - this tells the regular expression engine to not capture the characters matched by the group.
 
 							Splitter Ommitted From Result
 								The splitter string or regular expression match is not included in the string elements of the returned array.
@@ -196,7 +196,7 @@ Uize.module ({
 								The only way to include the substring matched by a splitter is to use a regular expression splitter and to enclose the entire regular expression in parentheses - this invokes the behavior of including regular expression captures in the result array. The matched substrings are still not included as part of the split values, but as separate elements of the result array - between the elements for the split values (see the example `Splitting Using a Regular Expression And Getting Captures`).
 
 							Compensates for Poor Implementations
-								The =Uize.Str.Split.split= method is implemented in strict accordance with the ECMA-262 specification (ie. the JavaScript language specification).
+								The =Uize.Str.Split.split= method is implemented in strict accordance with the ECMA-262 specification (i.e. the JavaScript language specification).
 
 								The =Uize.Str.Split.split= method addresses poor implementations of the =split= instance method of JavaScript's built-in =String= object in some JavaScript interpreters, such as Microsoft's JScript interpreter that is used by Internet Explorer and WSH (Windows Script Host). Specifically, the =Uize.Str.Split.split= method addresses two known issues when using a regular expression splitter: `incorrect dropping of empty split values` and `incorrect omission of captures in the result array`.
 
@@ -208,7 +208,7 @@ Uize.module ({
 									result = 'foo,,bar'.split (/,/);
 									................................
 
-									In the above example, a string is being split using a regular expression splitter that matches a single comma. In compliant JavaScript interpreters, the above statement would produce a result array with the value =['foo','','bar']= - exactly the same result as if you used a simple string splitter (ie. ='foo,,bar'.split (',')=).
+									In the above example, a string is being split using a regular expression splitter that matches a single comma. In compliant JavaScript interpreters, the above statement would produce a result array with the value =['foo','','bar']= - exactly the same result as if you used a simple string splitter (i.e. ='foo,,bar'.split (',')=).
 
 									For a reason that is hard to fathom, the JScript interpreter omits the second empty string element to produce, instead, the result =['foo','bar']=. It's hard to justify or defend this implementation choice, as it wreaks havoc with using the =split= instance method to parse lists of values that were serialized using the =Array= object's =join= instance method, and where some of the values were empty strings.
 

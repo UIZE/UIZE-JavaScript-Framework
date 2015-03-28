@@ -158,7 +158,7 @@ Uize.module ({
 
 										If the values of elements are identical between the arrays, then we go on to test the custom properties (if any exist). Most importantly, we don't use a for...in loop to iterate through both elements and custom properties, partly for performance reasons, but mostly because of an unfortunate behavior in Microsoft's JScript interpreter.
 
-										In several versions of Microsoft's JScript interpreter, if an array is initialized using the literal syntax (ie. ['value 1','value 2','value 3']), then any element whose value is initialized to undefined will not be encountered in a for...in loop.
+										In several versions of Microsoft's JScript interpreter, if an array is initialized using the literal syntax (i.e. ['value 1','value 2','value 3']), then any element whose value is initialized to undefined will not be encountered in a for...in loop.
 
 										EXAMPLE
 										.....................................

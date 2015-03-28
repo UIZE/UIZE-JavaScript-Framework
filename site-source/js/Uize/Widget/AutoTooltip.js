@@ -139,7 +139,7 @@ Uize.module ({
 							dataAttribute
 								A string, specifying the name of the node attribute that should be used for obtaining the tooltip data.
 
-								When this state property is set to the special value ='auto'=, then the instance will try to use the =title= attribute. If no value is set for the =title= attribute, then the instance will fall back on using the =alt= attribute. If you wish to explicitly force use of either the =title= or =alt= attribute, then specify the desired one as the value for the =dataAttribute= state property. If the data is stored in a custom attribute (eg. =tooltipData=), then simply specify that custom attribute's name.
+								When this state property is set to the special value ='auto'=, then the instance will try to use the =title= attribute. If no value is set for the =title= attribute, then the instance will fall back on using the =alt= attribute. If you wish to explicitly force use of either the =title= or =alt= attribute, then specify the desired one as the value for the =dataAttribute= state property. If the data is stored in a custom attribute (e.g. =tooltipData=), then simply specify that custom attribute's name.
 
 								NOTES
 								- the initial value is ='auto'=

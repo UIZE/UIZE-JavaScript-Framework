@@ -62,7 +62,7 @@
 			);
 			................................................................
 
-			In the above example, which demonstrates animation of the =text-shadow= property, we're fading the style of the DOM node with the =id= of "myNode". Along with values for the =color= and =backgroundColor= style properties, the style properties objects specified for the start and end values of the fade also contain values for the =textShadow= style property. In this simple case, our starting text shadow is a black drop shadow, offset =.3em= to the right and =.3em= down from the text. Furthermore, the drop shadow has a blur radius of =.3em=. By contrast, the ending text shadow is a white outer glow, which is aligned perfectly underneath the text (ie. horizontal and vertical offsets are both =0em=), and the blur radius is still =.3em=. Because the text shadow color is fading from black to white, the color of the text and the background are also fading in a complementary fashion, so that the text continues to be legible.
+			In the above example, which demonstrates animation of the =text-shadow= property, we're fading the style of the DOM node with the =id= of "myNode". Along with values for the =color= and =backgroundColor= style properties, the style properties objects specified for the start and end values of the fade also contain values for the =textShadow= style property. In this simple case, our starting text shadow is a black drop shadow, offset =.3em= to the right and =.3em= down from the text. Furthermore, the drop shadow has a blur radius of =.3em=. By contrast, the ending text shadow is a white outer glow, which is aligned perfectly underneath the text (i.e. horizontal and vertical offsets are both =0em=), and the blur radius is still =.3em=. Because the text shadow color is fading from black to white, the color of the text and the background are also fading in a complementary fashion, so that the text continues to be legible.
 
 	### No Public Methods or Properties
 		no public methods or properties added by this extension
@@ -73,7 +73,7 @@
 		Animates All Properties of a Shadow
 			Shadows in CSS3 are specified using four shadow properties: horizontal offset, vertical offset, blur radius, and color.
 
-			The horizontal and vertical offset properties specify the offset of the shadow relative to the object casting the shadow (ie. box or text). The blur radius controls the degree to which the shadow is blurred. The color specifies the color of the shadow (simple enough). Once the =Uize.Fx.xShadows= module has been loaded, the =Uize.Fx.fadeStyle= method can be used to fade/animate the values for all these shadow properties.
+			The horizontal and vertical offset properties specify the offset of the shadow relative to the object casting the shadow (i.e. box or text). The blur radius controls the degree to which the shadow is blurred. The color specifies the color of the shadow (simple enough). Once the =Uize.Fx.xShadows= module has been loaded, the =Uize.Fx.fadeStyle= method can be used to fade/animate the values for all these shadow properties.
 
 		### Animates All Components of a Color
 

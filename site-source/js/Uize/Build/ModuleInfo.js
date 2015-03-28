@@ -33,7 +33,7 @@
 			Direct Dependencies
 				Direct dependencies are defined as all those dependencies that are directly declared in the definition for a module as being required.
 
-				Unlike `package dependencies`, direct dependencies does not include all those modules that are required in turn by the module's direct dependencies. Direct dependencies includes all those modules specified in the optional =required= property in the module definition, the module specified in the optional =superclass= property in the module definition, and the "host" object for the module (eg. for the module =MyNamespace.MyModule=, the host would be =MyNamespace=).
+				Unlike `package dependencies`, direct dependencies does not include all those modules that are required in turn by the module's direct dependencies. Direct dependencies includes all those modules specified in the optional =required= property in the module definition, the module specified in the optional =superclass= property in the module definition, and the "host" object for the module (e.g. for the module =MyNamespace.MyModule=, the host would be =MyNamespace=).
 
 				Examples
 					To illustrate how the host, superclass, and required list affect the direct dependencies, consider the following examples...

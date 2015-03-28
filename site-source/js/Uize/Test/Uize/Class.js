@@ -1938,7 +1938,7 @@ Uize.module ({
 								},
 								{
 									title:
-										'A state property\'s onChange handler is only called for an instance of the class whose value for the property has changed (ie. no contamination across instances)',
+										'A state property\'s onChange handler is only called for an instance of the class whose value for the property has changed (i.e. no contamination across instances)',
 									test:function () {
 										var
 											_Subclass = Uize.Class.subclass (),
@@ -2040,7 +2040,7 @@ Uize.module ({
 								},
 								{
 									title:
-										'The execute-once optimization for onChange handlers shared across properties does not prevent an onChange handler from executing on subsequent sets (ie. cleanup occurs correctly)',
+										'The execute-once optimization for onChange handlers shared across properties does not prevent an onChange handler from executing on subsequent sets (i.e. cleanup occurs correctly)',
 									test:function () {
 										var
 											_Subclass = Uize.Class.subclass (),

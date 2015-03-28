@@ -320,7 +320,7 @@ Uize.module ({
 								sourceARRAY = Uize.Array.Sort.sortBy (sourceARRAY,undefined,directionINT);
 								.......................................................................................
 
-								By default, the sort direction of the =Uize.Array.Sort.sortBy= method is ascending. When the optional =directionINT= parameter is specified, the direction for a sort can be controlled. Specifying the value =-1= for the =directionINT= parameter will cause the sort direction to be descending (ie. reversed), while specifying the value =1= will cause the sort direction to be ascending (the default).
+								By default, the sort direction of the =Uize.Array.Sort.sortBy= method is ascending. When the optional =directionINT= parameter is specified, the direction for a sort can be controlled. Specifying the value =-1= for the =directionINT= parameter will cause the sort direction to be descending (i.e. reversed), while specifying the value =1= will cause the sort direction to be ascending (the default).
 
 								VARIATION 10
 								...................................................
@@ -387,7 +387,7 @@ Uize.module ({
 									It is assumed in this example that the hex formatted numbers are *not* prefixed with any kind of hex formatting indicator (such as "0x" for programming languages, or "#" for RGB color values in CSS). The hex numbers are coerced to decimal by prepending the "0x" and then coercing the resulting string to a number by prefixing the "+" (plus) operator in the `sort value generator expression`.
 
 								Sort an Array of Date Strings
-									An array of correctly formatted date strings can be sorted into chronological order, by specifying a `sort value generator expression` that transforms a date string value into a number, representing the date as the number of milliseconds elapsed since January 1st, 1970 (ie. POSIX time).
+									An array of correctly formatted date strings can be sorted into chronological order, by specifying a `sort value generator expression` that transforms a date string value into a number, representing the date as the number of milliseconds elapsed since January 1st, 1970 (i.e. POSIX time).
 
 									EXAMPLE
 									...........................................................
@@ -397,7 +397,7 @@ Uize.module ({
 									A date string value is transformed into a POSIX time number by first using JavaScript's built-in =Date= object to parse the date string and create a =Date= object instance. The =Date= object instance is then coerced to a number by using the "+" (plus) operator, which invokes the =Date= object's =valueOf Intrinsic Method=.
 
 								Sort an Array of Date Objects
-									An array of =Date= object instances can be sorted into chronological order, by specifying a `sort value generator expression` that transforms a =Date= object instance into a number, representing the date as the number of milliseconds elapsed since January 1st, 1970 (ie. POSIX time).
+									An array of =Date= object instances can be sorted into chronological order, by specifying a `sort value generator expression` that transforms a =Date= object instance into a number, representing the date as the number of milliseconds elapsed since January 1st, 1970 (i.e. POSIX time).
 
 									EXAMPLE
 									..............................................
@@ -429,7 +429,7 @@ Uize.module ({
 
 									Each value of the =rectangles= array is an object containing =width= and =height= properties that describe a rectangle's dimensions. A `sort value generator expression` can calculate the aspect ratio for an element of the =rectangles= array by dereferencing the =width= and =height= properties of the =value= variable and dividing the maximum axis dimension by the minimum axis dimension.
 
-									According to this calculation, a perfectly square rectangle will have an aspect ratio of =1=. The more unsquare a rectangle is, the higher the calculated aspect ratio value. By always dividing the maximum axis dimension by the minimum axis dimension, the aspect ratio is guaranteed to always be =1= or greater, rather than being less than =1= for rectangles whose =width= is smaller than their =height= (ie. where orientation is landscape rather than portrait). Now, sorting the generated sort values into ascending order, the elements of the =rectangles= array are sorted according to how close to square they are.
+									According to this calculation, a perfectly square rectangle will have an aspect ratio of =1=. The more unsquare a rectangle is, the higher the calculated aspect ratio value. By always dividing the maximum axis dimension by the minimum axis dimension, the aspect ratio is guaranteed to always be =1= or greater, rather than being less than =1= for rectangles whose =width= is smaller than their =height= (i.e. where orientation is landscape rather than portrait). Now, sorting the generated sort values into ascending order, the elements of the =rectangles= array are sorted according to how close to square they are.
 
 								Sort Array of Numbers By Closeness to a Reference Number
 									An array of numbers can be sorted according to how close they are to a reference number, from closest to furthest away, by specifying a `sort value generator expression` that calculates for a number its absolute distance from the reference number.

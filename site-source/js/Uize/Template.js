@@ -894,7 +894,7 @@ Uize.module ({
 								<%= dateIso8601STR -> !iso8601 %>
 								.................................
 
-								Using this encoding in the reverse direction (ie. decoding by using the "!" prefix) is equivalent to using the =Uize.Date.fromIso8601= static method of the =Uize.Date= module.
+								Using this encoding in the reverse direction (i.e. decoding by using the "!" prefix) is equivalent to using the =Uize.Date.fromIso8601= static method of the =Uize.Date= module.
 
 								EXAMPLE
 								...........................................
@@ -975,7 +975,7 @@ Uize.module ({
 								<%= jsonSTR -> !json %>
 								.......................
 
-								Using this encoding in the reverse direction (ie. decoding by using the "!" prefix) is equivalent to using the =Uize.Json.from= static method of the =Uize.Json= module.
+								Using this encoding in the reverse direction (i.e. decoding by using the "!" prefix) is equivalent to using the =Uize.Json.from= static method of the =Uize.Json= module.
 
 								EXAMPLE
 								........................................................
@@ -1034,7 +1034,7 @@ Uize.module ({
 								<%= jsonSTR -> !miniJson %>
 								...........................
 
-								Using this encoding in the reverse direction (ie. decoding by using the "!" prefix) is equivalent to using the =Uize.Json.from= static method of the =Uize.Json= module.
+								Using this encoding in the reverse direction (i.e. decoding by using the "!" prefix) is equivalent to using the =Uize.Json.from= static method of the =Uize.Json= module.
 
 								EXAMPLE
 								............................................................
@@ -1090,7 +1090,7 @@ Uize.module ({
 								<%= tagAttributesSTR -> !tagAttributes %>
 								.........................................
 
-								Using this encoding in the reverse direction (ie. decoding by using the "!" prefix) is equivalent to using the =Uize.Xml.fromAttributes= static method of the =Uize.Xml= module.
+								Using this encoding in the reverse direction (i.e. decoding by using the "!" prefix) is equivalent to using the =Uize.Xml.fromAttributes= static method of the =Uize.Xml= module.
 
 								EXAMPLE
 								.......................................................................................
@@ -1156,7 +1156,7 @@ Uize.module ({
 								<%= tagAttributeValueSTR -> !tagAttributeValue %>
 								.................................................
 
-								Using this encoding in the reverse direction (ie. decoding by using the "!" prefix) is equivalent to using the =Uize.Xml.fromAttributeValue= static method of the =Uize.Xml= module.
+								Using this encoding in the reverse direction (i.e. decoding by using the "!" prefix) is equivalent to using the =Uize.Xml.fromAttributeValue= static method of the =Uize.Xml= module.
 
 								EXAMPLE
 								................................................
@@ -1241,14 +1241,14 @@ Uize.module ({
 									.......................................
 
 							Decoding
-								When decoding, the value should be a URL string, and the decoded value will be an object containing properties that represent different logical components of the URL (eg. protocol, host, folder path, filename, file extension, query string, etc.).
+								When decoding, the value should be a URL string, and the decoded value will be an object containing properties that represent different logical components of the URL (e.g. protocol, host, folder path, filename, file extension, query string, etc.).
 
 								SYNTAX
 								.....................
 								<%= urlSTR -> !url %>
 								.....................
 
-								Using this encoding in the reverse direction (ie. decoding by using the "!" prefix) is equivalent to using the =Uize.Url.from= static method of the =Uize.Url= module.
+								Using this encoding in the reverse direction (i.e. decoding by using the "!" prefix) is equivalent to using the =Uize.Url.from= static method of the =Uize.Url= module.
 
 								EXAMPLE
 								..................................................................................
@@ -1321,7 +1321,7 @@ Uize.module ({
 								<%= urlParamsSTR -> !urlParams %>
 								.................................
 
-								Using this encoding in the reverse direction (ie. decoding by using the "!" prefix) is equivalent to using the =Uize.Url.fromParams= static method of the =Uize.Url= module.
+								Using this encoding in the reverse direction (i.e. decoding by using the "!" prefix) is equivalent to using the =Uize.Url.fromParams= static method of the =Uize.Url= module.
 
 								EXAMPLE
 								...........................................................................
@@ -1387,7 +1387,7 @@ Uize.module ({
 								<%= urlPieceSTR -> !urlPiece %>
 								...............................
 
-								Using this encoding in the reverse direction (ie. decoding by using the "!" prefix) is equivalent to using the =Uize.Url.fromPiece= static method of the =Uize.Url= module.
+								Using this encoding in the reverse direction (i.e. decoding by using the "!" prefix) is equivalent to using the =Uize.Url.fromPiece= static method of the =Uize.Url= module.
 
 								EXAMPLE
 								......................................

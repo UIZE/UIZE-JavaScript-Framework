@@ -439,7 +439,7 @@ Proposed Solution
 		- voice recording for grammatical variants
 		- grammatical variant selection at runtime
 		- multi-sentence prompt construction
-		- it should be possible for friendly versions of tokenized voice prompts to be recorded for specific values of substitution values, ideally without requiring the cooperation of code (eg. "You have two new messages." in place of "You have {count} new messages." when the value of =count= is =2=
+		- it should be possible for friendly versions of tokenized voice prompts to be recorded for specific values of substitution values, ideally without requiring the cooperation of code (e.g. "You have two new messages." in place of "You have {count} new messages." when the value of =count= is =2=
 
 	- recommendations
 		- make the translated resource string files the authority to drive the audio recording tasks
@@ -447,7 +447,7 @@ Proposed Solution
 			- don't do sentence construction with sentence fragments, since assumptions based on English grammar may not translate to all languages
 		- use the same token syntax for both dynanic substitution tokens as well as reusable sentence fragments
 		- use a single token syntax that can be easily parsed by translators and treated as non-translatable segments
-			- a simple curly braces syntax is recommended (eg. ={personName}=)
+			- a simple curly braces syntax is recommended (e.g. ={personName}=)
 			- for prompt / prompt segment sharing, a convention could be used for the token naming, such as ={@promptSegmentName}=, where =promptSegmentName= is the key name for another resource string.
 
 	- questions
@@ -521,7 +521,7 @@ Benefits
 
 		This can facilitate...
 
-		- previewing of voice prompt text transcripts in applications such as Service Web, in cases where the user has the ability to customize telco voice prompts (eg. "You have reached the voicemail box of {name}")
+		- previewing of voice prompt text transcripts in applications such as Service Web, in cases where the user has the ability to customize telco voice prompts (e.g. "You have reached the voicemail box of {name}")
 		- alternate or simultaneous presentation of audio IVR in text form on smart phones or desktop phone software ()
 
 	Easier Dedicated Voice Recordings for Special Cases

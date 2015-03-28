@@ -44,7 +44,7 @@
 
 			NOTES
 			- values for color style properties can be specified in single digit, three digit, or six digit hex RGB format - with or without the "#" (hash / pound sign) prefix
-			- values for position and dimension style properties can be specified as strings with the "px" suffix (eg. ='100px'=) or simply as numbers (eg. =100=)
+			- values for position and dimension style properties can be specified as strings with the "px" suffix (e.g. ='100px'=) or simply as numbers (e.g. =100=)
 
 			Configurable fade properties let you control the rate of the fade-in independently of the rate of the fade-out, and any other state properties of the =Uize.Fade= class (such as =curve=) can be specified for both the fade-in and fade-out.
 
@@ -78,7 +78,7 @@
 
 			In the above example, the =Uize.Widget.HoverFader= instance is being added as a child widget to a page widget instance, so the effect will be wired up when the page widget instance is wired. The value for the =nodes= state property specifies the nodes that should be wired up with the effect. The nodes being supplied in this case are obtained through a call to the =Uize.Dom.Basics.find= static method. Based on the options specified in the call, the =Uize.Dom.Basics.find= method will find all nodes with a class name of "menuLink" that are in a node tree with a node of the id "menu" at its root.
 
-			The =defaultStyle= state property specifies the color style property values for the default state of the nodes (ie. when not mousing over them), in this case light gray text on a black background with a dark gray border. The =hoverStyle= state property specifies the color style property values for the hover state of the nodes (ie. when mousing over them), in this case white text on a pastel blue background with a black border.
+			The =defaultStyle= state property specifies the color style property values for the default state of the nodes (i.e. when not mousing over them), in this case light gray text on a black background with a dark gray border. The =hoverStyle= state property specifies the color style property values for the hover state of the nodes (i.e. when mousing over them), in this case white text on a pastel blue background with a black border.
 
 			The =fadeIn= state property specifies properties for the fade process that is used to fade the node that is currently being moused over from the =defaultStyle= styling to the =hoverStyle= styling, in this case with a duration of =500= milliseconds and accelerating through the entire fade. The =fadeOut= state property specifies properties for the fade process that is used to fade the node that is currently being moused out of from the =hoverStyle= styling back to the =defaultStyle= styling, in this case with a duration of =750= milliseconds and accelerating through the entire fade. A greater duration for the fade-out will result in a lingering trail, and the acceleration will accentuate this quality.
 */
@@ -170,7 +170,7 @@ Uize.module ({
 								myInstance.tickle (fadePropertiesOBJ);
 								......................................
 
-								When the =fadePropertiesOBJ= parameter is specified in place of the =intervalINT= parameter, then an object containing fade properties (ie. state properties of the =Uize.Fade= class) can be specified to configure the fade that drives the tickling of the =nodes=.
+								When the =fadePropertiesOBJ= parameter is specified in place of the =intervalINT= parameter, then an object containing fade properties (i.e. state properties of the =Uize.Fade= class) can be specified to configure the fade that drives the tickling of the =nodes=.
 
 								Among other things, this allows one to specify a =curve= property for the fade, so that the timing of the triggering of the fade-outs for the different =nodes= of the instance is not uniform. In addition, one can use the =reverse= fade property to control the order in which the tickling occurs. Specifying the value =true= for the =reverse= fade property will cause the tickling to start with the last node and end at the first node.
 
@@ -248,7 +248,7 @@ Uize.module ({
 					/*?
 						State Properties
 							fadeIn
-								An object, specifying fade properties for the fade-in phase (ie. when mousing over a node) of the hover fade effect.
+								An object, specifying fade properties for the fade-in phase (i.e. when mousing over a node) of the hover fade effect.
 
 								If the default fade-in duration does not suit your needs, you should at least use this property to configure a suitable duration. Any valid state properties of the =Uize.Fade= class (such as =curve=) can be specified in the =fadeIn= object, and these values will be applied when the fade-in starts.
 
@@ -271,7 +271,7 @@ Uize.module ({
 					/*?
 						State Properties
 							fadeInOut
-								An object, specifying fade properties that are common to both the fade-in phase (ie. when mousing over a node) and the fade-out phase (ie. when mousing out of a node) of the hover fade effect.
+								An object, specifying fade properties that are common to both the fade-in phase (i.e. when mousing over a node) and the fade-out phase (i.e. when mousing out of a node) of the hover fade effect.
 
 								EXAMPLE
 								...................................................
@@ -324,7 +324,7 @@ Uize.module ({
 					/*?
 						State Properties
 							fadeOut
-								An object, specifying fade properties for the fade-out phase (ie. when mousing out of a node) of the hover fade effect.
+								An object, specifying fade properties for the fade-out phase (i.e. when mousing out of a node) of the hover fade effect.
 
 								If the default fade-out duration does not suit your needs, you should at least use this property to configure a suitable duration. Any valid state properties of the =Uize.Fade= class (such as =curve=) can be specified in the =fadeOut= object, and these values will be applied when the fade-out starts.
 

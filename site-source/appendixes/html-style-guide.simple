@@ -28,11 +28,11 @@ Introduction
 		- class and subclass sharing the same namespace prefix when scrunched (unanticipated namespace collisions)
 
 	- internal access to state properties
-		- use of internal names in set method (eg. this.set ({_myProperty:'myValue'}) )
+		- use of internal names in set method (e.g. this.set ({_myProperty:'myValue'}) )
 
 HTML
 	Use Valid XHTML
-		This means no incorrect case for tags, and all tags with no content (eg. hr, br) should be closed with a slash, as in...
+		This means no incorrect case for tags, and all tags with no content (e.g. hr, br) should be closed with a slash, as in...
 
 		.....
 		<hr/>
@@ -117,7 +117,7 @@ HTML
 
 CSS
 	Concise Color Values
-		For color values specified in hexadecimal RGB syntax (ie. =#ff0000=), CSS supports a more concise form where only one hex digit is specified per channel. When colors are written this way, the MSB (most significant byte) and LSB (least significant byte) for each channel are assumed to be identical in value. Using this concise form, =#ff0000= (pure red) can be written simply as =#f00=, =#000000= (black) can be written as =#000=, =#ffffff= (white) can be written as =#fff=, etc.
+		For color values specified in hexadecimal RGB syntax (i.e. =#ff0000=), CSS supports a more concise form where only one hex digit is specified per channel. When colors are written this way, the MSB (most significant byte) and LSB (least significant byte) for each channel are assumed to be identical in value. Using this concise form, =#ff0000= (pure red) can be written simply as =#f00=, =#000000= (black) can be written as =#000=, =#ffffff= (white) can be written as =#fff=, etc.
 
 		This concise form is convenient for gray values, primary colors, as well as a host of colors that don't need great precision. To reduce the size of CSS code, the concise form is recommended. You will likely find yourself using it quite often in CSS. If you have CSS code that uses the longer form, you might want to run a global search and replace on the code. With a text editor that supports regular expressions (like `jEdit`), you could replace the long form with the concise form as follows...
 

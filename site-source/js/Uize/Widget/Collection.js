@@ -989,7 +989,7 @@ Uize.module ({
 
 								Calling this method has the effect of setting the value of the =selected= state property of all collection item widgets within the specified range to =true=, and all collection item widgets outside of the specified range to =false=. The range is specified by the =itemWidgetAOBJ= and =itemWidgetBOBJ= parameters, and is inclusive of the two item widgets that are specified by these parameters. The order of the range bounds is unimportant - the item specified by =itemWidgetAOBJ= can be before or after the item specified by =itemWidgetBOBJ= in the =itemWidgets= array.
 
-								Calling this method will result in the values of the =allSelected=, =oneSelected=, =someSelected=, and =totalSelected= state properties being updated, upon which some of these properties may change value. Calling this method will have no effect if the values of either - or both - of the =itemWidgetAOBJ= or =itemWidgetBOBJ= parameters is =null= or =undefined=, or if the value of the =selectionMode= state property is ='single'= and the values of the =itemWidgetAOBJ= and =itemWidgetBOBJ= parameters are not identical (ie. you can only select a range of one item when =selectionMode= is set to ='single'=, and trying to select a range of more than one item will result in no action).
+								Calling this method will result in the values of the =allSelected=, =oneSelected=, =someSelected=, and =totalSelected= state properties being updated, upon which some of these properties may change value. Calling this method will have no effect if the values of either - or both - of the =itemWidgetAOBJ= or =itemWidgetBOBJ= parameters is =null= or =undefined=, or if the value of the =selectionMode= state property is ='single'= and the values of the =itemWidgetAOBJ= and =itemWidgetBOBJ= parameters are not identical (i.e. you can only select a range of one item when =selectionMode= is set to ='single'=, and trying to select a range of more than one item will result in no action).
 
 								NOTES
 								- see the related =selectAll= and =selectNone= instance methods
@@ -1043,7 +1043,7 @@ Uize.module ({
 					/*?
 						State Properties
 							isEmpty
-								A read-only boolean, indicating whether or not the collection is empty (ie. has no items).
+								A read-only boolean, indicating whether or not the collection is empty (i.e. has no items).
 
 								Whenever the value of the =totalItems= state property changes, the value of the =isEmpty= state property will be updated to be kept current and correct. When the =isEmpty= property is set to =true=, then the =selectAll Child Widget= will be disabled.
 

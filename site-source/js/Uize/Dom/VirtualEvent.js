@@ -32,7 +32,7 @@
 		What is a Virtual DOM Event?
 			Put quite simply, a `virtual DOM event` is an event for a DOM node that is not part of the standard set of DOM events, but that is implemented in supplemental JavaScript code.
 
-			While the DOM standard *does* provide a decent array of different events for different types of DOM nodes, there are still certain "events" that can occur during the user's interaction with a DOM node for which standard DOM events do not exist. A rather compelling and highly practical example is the `remain-in-state virtual DOM events`, which allow handlers to be executed when a node remains in a specific event state for a specified amount of time (eg. the user rests the mouse over a node for more than half a second).
+			While the DOM standard *does* provide a decent array of different events for different types of DOM nodes, there are still certain "events" that can occur during the user's interaction with a DOM node for which standard DOM events do not exist. A rather compelling and highly practical example is the `remain-in-state virtual DOM events`, which allow handlers to be executed when a node remains in a specific event state for a specified amount of time (e.g. the user rests the mouse over a node for more than half a second).
 
 			For a more technical discussion on what makes up virtual DOM events, see the section `virtual DOM event`.
 
@@ -112,7 +112,7 @@
 
 					- *More Versatile* - It's the only way to specify virtual DOM events when using the variation of the wiring and unwiring methods that take an =eventNamesToHandlersMapOBJ= parameter that specifies multiple wirings of events to handlers (for an example, see the section `Unique Parameters Translate To Unique Events`).
 
-					- *More Concise* - It's more elegant and concise than providing a call to the event maker (ie. =Uize.Dom.VirtualEvent.mouseRest (2000)=).
+					- *More Concise* - It's more elegant and concise than providing a call to the event maker (i.e. =Uize.Dom.VirtualEvent.mouseRest (2000)=).
 
 				Disadvantages
 					Specifying virtual DOM events by registered name has the following disadvantages...
@@ -128,7 +128,7 @@
 
 					- *Event Plus Parameters* - When specifying virtual DOM events by registered name, you're always specifying a registered name for a `virtual DOM event maker` along with parameters for the creation of a specific `virtual DOM event` object. For virtual DOM event types that don't support parameters, the parentheses at the end of the event name will simply be left empty (but must still be present).
 
-					- *Case and Space Insensitive* - When specifying a virtual DOM event by registered name, it is recommended that you omit spaces and maintain the same case as the registered name for the event. That said, the mechanism for resolving a virtual DOM event name to a `virtual DOM event maker` will forgive spaces and case differences (eg. ='mouseRest(500)'=, ='mouse rest (500)'=, ='Mouse Rest (500)'=, ='MOUSEREST(500)'=, etc. are all considered equivalent). The presence of spaces or a case mismatch between how the virtual DOM event name is specified when wiring or unwiring handlers and how it was specified when it was registered will incur an additional one time cost to resolve the specified name to a virtual DOM event maker.
+					- *Case and Space Insensitive* - When specifying a virtual DOM event by registered name, it is recommended that you omit spaces and maintain the same case as the registered name for the event. That said, the mechanism for resolving a virtual DOM event name to a `virtual DOM event maker` will forgive spaces and case differences (e.g. ='mouseRest(500)'=, ='mouse rest (500)'=, ='Mouse Rest (500)'=, ='MOUSEREST(500)'=, etc. are all considered equivalent). The presence of spaces or a case mismatch between how the virtual DOM event name is specified when wiring or unwiring handlers and how it was specified when it was registered will incur an additional one time cost to resolve the specified name to a virtual DOM event maker.
 
 					- *Must Be Registered* - In order to be able to specify virtual DOM events by registered name, they must actually be registered (see `Register Your Virtual DOM Event`). All the virtual DOM events implemented in the =Uize.Dom.VirtualEvent= module are registered, so this is more of a consideration when `implementing virtual DOM events`.
 
@@ -378,7 +378,7 @@
 					};
 					...........................................................
 
-					The code in the above example is only different from the code shown in the section `The Basic Skeleton` in that the =_duration= parameter is now being defaulted to the value =500= if its value is equivalent to =null= (ie. if its value is =null= or =undefined=). The defaulting is done in the statement just above the =return= statement. For performance reasons, it is best to do defaulting like this outside the wiring function. You *could*, of course, perform the defaulting logic inside the wiring function, but keep in mind that the same virtual DOM event instance could be wired against multiple different DOM nodes. Since the defaulting applies to the instance of the DOM node and is *not* unique to each individual wiring of a specific instance, one may as well perform the defaulting only once per instance, rather than every time an instance is wired for a node.
+					The code in the above example is only different from the code shown in the section `The Basic Skeleton` in that the =_duration= parameter is now being defaulted to the value =500= if its value is equivalent to =null= (i.e. if its value is =null= or =undefined=). The defaulting is done in the statement just above the =return= statement. For performance reasons, it is best to do defaulting like this outside the wiring function. You *could*, of course, perform the defaulting logic inside the wiring function, but keep in mind that the same virtual DOM event instance could be wired against multiple different DOM nodes. Since the defaulting applies to the instance of the DOM node and is *not* unique to each individual wiring of a specific instance, one may as well perform the defaulting only once per instance, rather than every time an instance is wired for a node.
 
 			State Management at the Wiring Level
 				Beyond `state management at the instance level`, wiring logic for more sophisticated virtual DOM events may involve state management at the wiring level.
@@ -416,7 +416,7 @@
 
 				In the implementation of our =myRemainFocused= event, we are maintaining state for a =_timeout= variable. This variable is declared inside the wiring function's scope - a scope that is common to the handlers that are wired for the =focus= and =blur= real DOM events of the node that is being wired for the =myRemainFocused= virtual DOM event. This allows the =blur= event handler to access and modify the same state that is shared by the =focus= event handler. So, they're both seeing the same =_timeout= variable.
 
-				Now, when the =myRemainFocused= virtual DOM event is wired for a specific node, the =focus= and =blur= real DOM events are wired for the node, so that focusing the node sets a timeout to execute the =myRemainFocused= event's handler once a period of time (specified by the =_duration= parameter) has elapsed. If the node loses its focus before that period of time has elapsed, then the timeout is canceled. One instance of the =myRemainFocused= virtual DOM event (eg. =MyVirtualDomEvents.myRemainFocused (1000)=) can be used in multiple different wirings, and each wiring will maintain its own state for the =_timeout= variable during user interaction with the wired node.
+				Now, when the =myRemainFocused= virtual DOM event is wired for a specific node, the =focus= and =blur= real DOM events are wired for the node, so that focusing the node sets a timeout to execute the =myRemainFocused= event's handler once a period of time (specified by the =_duration= parameter) has elapsed. If the node loses its focus before that period of time has elapsed, then the timeout is canceled. One instance of the =myRemainFocused= virtual DOM event (e.g. =MyVirtualDomEvents.myRemainFocused (1000)=) can be used in multiple different wirings, and each wiring will maintain its own state for the =_timeout= variable during user interaction with the wired node.
 
 				More complex virtual DOM event implementations may involve maintaining much more state at the wiring level than this simple example, but the fundamental principle remains the same.
 
@@ -518,7 +518,7 @@ Uize.module ({
 		return Uize.package ({
 			resolve:function (_eventName) {
 				/* NOTE:
-					This is a hook method that is used by Uize.Dom.Basics, when the name of an event being wired or unwired ends with a ")" (ie. looks like a virtual DOM event), and when the Uize.Dom.VirtualEvent module is loaded. This method is NOT a public method that is intended to be used by an application developer.
+					This is a hook method that is used by Uize.Dom.Basics, when the name of an event being wired or unwired ends with a ")" (i.e. looks like a virtual DOM event), and when the Uize.Dom.VirtualEvent module is loaded. This method is NOT a public method that is intended to be used by an application developer.
 				*/
 				var
 					_paramsStartDelimPos = _eventName.indexOf ('('),

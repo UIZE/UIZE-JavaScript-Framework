@@ -54,8 +54,8 @@
 					- =Uize.isNumber= - tests if a value is a number (and not =NaN=)
 					- =Uize.isObject= - tests if a value is non-null and an object
 					- =Uize.isPlainObject=- tests if a value is a plain object (an instance of JavaScript's built-in =Object= object)
-					- =Uize.isPrimitive= - tests if a value is a JavaScript primitive (ie. string, number, or boolean)
-					- =Uize.isRegExp=- tests if a value is a regular expression (ie. an instance of the =RegExp= object)
+					- =Uize.isPrimitive= - tests if a value is a JavaScript primitive (i.e. string, number, or boolean)
+					- =Uize.isRegExp=- tests if a value is a regular expression (i.e. an instance of the =RegExp= object)
 					- =Uize.isSameAs= - tests if two values are the same in a strict equality test, with support for =NaN= values
 					- =Uize.isString= - tests if a value is a string
 
@@ -71,7 +71,7 @@
 					- =Uize.findRecordNo= - returns the index of the first record in a records array that matches specified criteria
 					- =Uize.indexIn= - returns the index of a value in a values array or object
 					- =Uize.isIn= - tests if a value is in a specified array or object
-					- =Uize.keys= - returns an array containing the names of the properties (ie. keys) in an object
+					- =Uize.keys= - returns an array containing the names of the properties (i.e. keys) in an object
 					- =Uize.lookup= - creates a lookup object from an array of values
 					- =Uize.map= - iterates over an array or object and applies the specified value transformer to produce new values
 					- =Uize.max= - returns the largest value in a values array
@@ -98,7 +98,7 @@
 
 					- =Uize.capFirstChar= - capitalizes the first character of a string
 					- =Uize.constrain= - constrains a value to a specified range
-					- =Uize.defaultNully= - defaults a value to the specified default, if the value is nully (ie. =null= or =undefined=)
+					- =Uize.defaultNully= - defaults a value to the specified default, if the value is nully (i.e. =null= or =undefined=)
 					- =Uize.escapeRegExpLiteral= - escapes a string so that it can be used as a literal match portion of a regular expression string
 					- =Uize.substituteInto= - substitutes the specified values into the specified string using token replacement
 					- =Uize.toNumber= - coerces a value to a number, with defaulting if it cannot be coerced successfully
@@ -501,7 +501,7 @@ Uize = (function () {
 						;
 						if (_valueIsArray) _result.length = _value.length;
 							/* NOTE:
-								length is not an enumerable property, and non-zero length unpopulated arrays (eg. new Array (20)) have no enumerable properties for elements, so we have to explicitly assign the length on the cloned result as a safeguard
+								length is not an enumerable property, and non-zero length unpopulated arrays (e.g. new Array (20)) have no enumerable properties for elements, so we have to explicitly assign the length on the cloned result as a safeguard
 							*/
 						for (var _property in _value)
 							/* NOTE:
@@ -740,7 +740,7 @@ Uize = (function () {
 
 							The =Uize.copyInto= static method accepts an arbitrary number of parameters, so you can conveniently copy more than one source object into the target object.
 
-							All parameters after the =targetOBJ= parameter that are objects will have their properties copied into the target object, in the order in which those parameters appear in the arguments list (ie. left to right), so properties from source objects earlier in the list will be overwritten by values for those same properties from source objects later in the list.
+							All parameters after the =targetOBJ= parameter that are objects will have their properties copied into the target object, in the order in which those parameters appear in the arguments list (i.e. left to right), so properties from source objects earlier in the list will be overwritten by values for those same properties from source objects later in the list.
 
 							EXAMPLE
 							.........................................................
@@ -934,7 +934,7 @@ Uize = (function () {
 								targetOBJ = Uize.mergeInto (targetOBJ,source1OBJ,source2OBJ,...,sourceNOBJ);
 								............................................................................
 
-								When multiple source objects are specified, the contents of the source objects are merged into the target object in the order in which they are specified (ie. left to right in the arguments list). The contents of source objects are merged into the target object according to the =Uize.mergeInto= method's `merging rules`.
+								When multiple source objects are specified, the contents of the source objects are merged into the target object in the order in which they are specified (i.e. left to right in the arguments list). The contents of source objects are merged into the target object according to the =Uize.mergeInto= method's `merging rules`.
 
 								EXAMPLE
 								........................................................................
@@ -1646,7 +1646,7 @@ Uize = (function () {
 									.......................................................
 
 								When a Nully Transformer is Specified
-									When a nully value (ie. the value =null= or =undefined=) is specified for the =transformerANYTYPE= parameter, a function is produced that simply returns the value of its first argument unmodified.
+									When a nully value (i.e. the value =null= or =undefined=) is specified for the =transformerANYTYPE= parameter, a function is produced that simply returns the value of its first argument unmodified.
 
 									This behavior is useful for methods that want to offer an optional transformer and wish no transformation to be performed when the optional argument is not specified, or if the values =null= or =undefined= are explicitly specified.
 
@@ -1735,9 +1735,9 @@ Uize = (function () {
 									.............................................................................
 
 								When a Nully Matcher is Specified
-									When a nully value (ie. the value =null= or =undefined=) is specified for the =matcherANYTYPE= parameter, a function is produced that always returns the value =true=.
+									When a nully value (i.e. the value =null= or =undefined=) is specified for the =matcherANYTYPE= parameter, a function is produced that always returns the value =true=.
 
-									This behavior is useful for methods that want to offer an optional matcher and wish no filtering (ie. always matching) to be performed when the optional argument is not specified, or if the values =null= or =undefined= are explicitly specified.
+									This behavior is useful for methods that want to offer an optional matcher and wish no filtering (i.e. always matching) to be performed when the optional argument is not specified, or if the values =null= or =undefined= are explicitly specified.
 
 								When a Boolean Type Matcher is Specified
 									When a boolean value is specified for the =matcherANYTYPE= parameter, a function is produced that simply returns that boolean value, regardless of the argument values.
@@ -1866,17 +1866,17 @@ Uize = (function () {
 								targetARRAYorOBJorBOOL
 									Lets you specify where the result of the mapper should be packaged.
 
-									You can provide your own target array or object, you can specify to use the source array or object, or you can specify that the result should not be packaged (ie. discarded).
+									You can provide your own target array or object, you can specify to use the source array or object, or you can specify that the result should not be packaged (i.e. discarded).
 
 									VALUES
 
 									- =true= - When the *boolean* value =true= is specified (the default value for the =targetARRAYorOBJorBOOL= parameter if it is omitted), then the =Uize.map= method will package the result from the mapper into a new array or object.
 
-									- =false= - When the *boolean* value =false= is specified (not the same as not specifying a value), then the =Uize.map= method will package the result from the mapper into the source array or object specified by the =sourceARRAYorOBJorINT= parameter (ie. won't use a different target).
+									- =false= - When the *boolean* value =false= is specified (not the same as not specifying a value), then the =Uize.map= method will package the result from the mapper into the source array or object specified by the =sourceARRAYorOBJorINT= parameter (i.e. won't use a different target).
 
 									- =null= - When the special value =null= is specified (not the same as not specifying a value), then the =Uize.map= method will not package the result from the mapper into an array or object. This is useful if you just want to use this method as an iterator, without the memory expense of building an array or object.
 
-									- *object or array* - When an *object* or *array* is explicitly specified, then the =Uize.map= method will package the result from the mapper into that array or object. This is convenient if you already have an array or object into which you wish to package the mapped values, or if you want to repeatedly map multiple source arrays or objects into a common array or object so that the mapped values are merged together. Incidentally, specifying the array or object value of the =sourceARRAYorOBJorINT= parameter as the value for the =targetARRAYorOBJorBOOL= parameter has the same effect as specifying the value =false= for this parameter (ie. use the source as the target, don't use a different target).
+									- *object or array* - When an *object* or *array* is explicitly specified, then the =Uize.map= method will package the result from the mapper into that array or object. This is convenient if you already have an array or object into which you wish to package the mapped values, or if you want to repeatedly map multiple source arrays or objects into a common array or object so that the mapped values are merged together. Incidentally, specifying the array or object value of the =sourceARRAYorOBJorINT= parameter as the value for the =targetARRAYorOBJorBOOL= parameter has the same effect as specifying the value =false= for this parameter (i.e. use the source as the target, don't use a different target).
 
 							More Examples
 								Following are a bunch of examples, demonstrating just a sampling of what's possible using the =Uize.map= method...
@@ -1906,7 +1906,7 @@ Uize = (function () {
 									Uize.map (array,'"prefix_" + value',false);
 									...........................................
 
-								Create a cheap (ie. not deep) copy of an object...
+								Create a cheap (i.e. not deep) copy of an object...
 									.......................................
 									var copyOfFoo = Uize.map (foo,'value');
 									.......................................
@@ -2179,14 +2179,14 @@ Uize = (function () {
 				/*?
 					Static Methods
 						Uize.defaultNully
-							Returns the specified default value if the first argument is nully (ie. its value is =null= or =undefined=).
+							Returns the specified default value if the first argument is nully (i.e. its value is =null= or =undefined=).
 
 							SYNTAX
 							........................................................................
 							defaultedValueANYTYPE = Uize.defaultNully (valueANYTYPE,defaultANYTYPE);
 							........................................................................
 
-							In JavaScript, the values =null= and =undefined= are technically different, but in many instances in your code you may wish to treat them as equivalent, often when you are defaulting arguments of functions or properties of objects. While you can test to see if a value is either =null= or =undefined= by simply comparing the value to =undefined= in a loose equality (eg. =if (myValue &#61;&#61; undefined) {...}=), certain tools like =jslint= may complain about that, forcing you to do two explicit strict equality checks (as in =if (myValue &#61;&#61;&#61; null || myValue &#61;&#61;&#61; undefined) {...}=). The =Uize.defaultNully= method provides a convenient way to perform this type of test and defaulting.
+							In JavaScript, the values =null= and =undefined= are technically different, but in many instances in your code you may wish to treat them as equivalent, often when you are defaulting arguments of functions or properties of objects. While you can test to see if a value is either =null= or =undefined= by simply comparing the value to =undefined= in a loose equality (e.g. =if (myValue &#61;&#61; undefined) {...}=), certain tools like =jslint= may complain about that, forcing you to do two explicit strict equality checks (as in =if (myValue &#61;&#61;&#61; null || myValue &#61;&#61;&#61; undefined) {...}=). The =Uize.defaultNully= method provides a convenient way to perform this type of test and defaulting.
 
 							INSTEAD OF...
 							...........................................................
@@ -2315,7 +2315,7 @@ Uize = (function () {
 								indexINT = Uize.indexIn (sourceARRAY,valueANYTYPE,fromEndBOOL,strictEqualityBOOL);
 								..................................................................................
 
-								By default, the =Uize.indexIn= method tests for a match using strict equality. When the value =false= is specified for the optional =strictEqualityBOOL= parameter, then this method will test for a match using loose equality (ie. where the string value ='1'= would be considered equal to the number value =1=).
+								By default, the =Uize.indexIn= method tests for a match using strict equality. When the value =false= is specified for the optional =strictEqualityBOOL= parameter, then this method will test for a match using loose equality (i.e. where the string value ='1'= would be considered equal to the number value =1=).
 
 								EXAMPLES
 								..........................................................................................
@@ -3257,7 +3257,7 @@ Uize = (function () {
 
 							A value is considered an arguments object if, and only if, the value is a reference to an instance of JavaScript's built-in =Arguments= object. Arguments objects are created when calling functions in JavaScript and are referenced within a called function by the special =arguments= keyword.
 
-							While an arguments object is listy in nature (ie. it is an object having a =length= property whose value is a number), listy objects that are not instances of JavaScript's =Arguments= object are not considered arguments objects by the =Uize.isArguments= method. So, for example, the array =['foo','bar']= is not considered an arguments object, nor is the listy object ={0:'foo',1:'bar',length:2}=.
+							While an arguments object is listy in nature (i.e. it is an object having a =length= property whose value is a number), listy objects that are not instances of JavaScript's =Arguments= object are not considered arguments objects by the =Uize.isArguments= method. So, for example, the array =['foo','bar']= is not considered an arguments object, nor is the listy object ={0:'foo',1:'bar',length:2}=.
 
 							The =Uize.isArguments= method is useful when wanting to distinguish between an arguments object and other listy objects in order to conditionalize the behavior for a function.
 
@@ -3343,7 +3343,7 @@ Uize = (function () {
 							isNumberBOOL = Uize.isNumber (valueANYTYPE);
 							............................................
 
-							This method is a useful abstraction to deal with the fact that the division of zero by zero in JavaScript yields a special kind of value know as =NaN=. Unfortunately, in the implementation of this special value, the result chosen for when the =typeof= operator is applied to it is ='number'= (ie. =typeof NaN &#61;&#61; 'number'= produces =true=). The =Uize.isNumber= method checks that both the type of the parameter is ='number'= and also that the parameter is not =NaN=.
+							This method is a useful abstraction to deal with the fact that the division of zero by zero in JavaScript yields a special kind of value know as =NaN=. Unfortunately, in the implementation of this special value, the result chosen for when the =typeof= operator is applied to it is ='number'= (i.e. =typeof NaN &#61;&#61; 'number'= produces =true=). The =Uize.isNumber= method checks that both the type of the parameter is ='number'= and also that the parameter is not =NaN=.
 
 							Also note that this method tests if the specified value is a number primitive, so this method will return =false= if the value being tested is an instance of JavaScript's built-in =Number= object.
 
@@ -3441,7 +3441,7 @@ Uize = (function () {
 							isNullyBOOL = Uize.isNully (valueANYTYPE);
 							..........................................
 
-							In JavaScript, the values =null= and =undefined= are technically different, but in many instances in your code you may wish to treat them as equivalent, often when you are defaulting arguments of functions or properties of objects. Now, you can test to see if a value is either =null= or =undefined= by simply comparing the value to =undefined= in a loose equality (eg. =if (myValue &#61;&#61; undefined) {...}=), but certain tools like =jslint= may complain about that, forcing you to do two explicit strict equality checks (as in =if (myValue &#61;&#61;&#61; null || myValue &#61;&#61;&#61; undefined) {...}=). This can be tedious when you have a long deferencing, so the =Uize.isNully= method can be useful and more concise in such cases.
+							In JavaScript, the values =null= and =undefined= are technically different, but in many instances in your code you may wish to treat them as equivalent, often when you are defaulting arguments of functions or properties of objects. Now, you can test to see if a value is either =null= or =undefined= by simply comparing the value to =undefined= in a loose equality (e.g. =if (myValue &#61;&#61; undefined) {...}=), but certain tools like =jslint= may complain about that, forcing you to do two explicit strict equality checks (as in =if (myValue &#61;&#61;&#61; null || myValue &#61;&#61;&#61; undefined) {...}=). This can be tedious when you have a long deferencing, so the =Uize.isNully= method can be useful and more concise in such cases.
 
 							INSTEAD OF...
 							........................................................................................
@@ -3508,7 +3508,7 @@ Uize = (function () {
 				/*?
 					Static Methods
 						Uize.isRegExp
-							Returns a boolean, indicating whether or not the specified value is a regular expression (ie. an instance of JavaScript's built-in =RegExp= object).
+							Returns a boolean, indicating whether or not the specified value is a regular expression (i.e. an instance of JavaScript's built-in =RegExp= object).
 
 							SYNTAX
 							............................................
@@ -3558,7 +3558,7 @@ Uize = (function () {
 							isInBOOL = Uize.isIn (sourceARRAYorOBJ,valueANYTYPE,strictEqualityBOOL);
 							........................................................................
 
-							By default, this method tests for a match using strict equality. When the value =false= is specified for the optional =strictEqualityBOOL= parameter, then this method will test for a match using loose equality (ie. where the string value ='1'= would be considered equal to the number value =1=, or the number value =0= would be considered equal to the boolean value =false=).
+							By default, this method tests for a match using strict equality. When the value =false= is specified for the optional =strictEqualityBOOL= parameter, then this method will test for a match using loose equality (i.e. where the string value ='1'= would be considered equal to the number value =1=, or the number value =0= would be considered equal to the boolean value =false=).
 
 							EXAMPLE
 							.......................................................................................
@@ -3592,7 +3592,7 @@ Uize = (function () {
 							isEmptyBOOL = Uize.isEmpty (valueANYTYPE);
 							..........................................
 
-							The =valueANYTYPE= parameter can be an =Object= reference, an =Array= reference, a =Function= reference, or any other type. For object type values that are references to =Object= instances, the =Uize.isEmpty= method returns =true= if the object has no keys. For an array type value, =Uize.isEmpty= returns =true= if the array has no elements (ie. a length of =0=). For any other type of value, =Uize.isEmpty= returns =true= if the value is equivalent to =false=.
+							The =valueANYTYPE= parameter can be an =Object= reference, an =Array= reference, a =Function= reference, or any other type. For object type values that are references to =Object= instances, the =Uize.isEmpty= method returns =true= if the object has no keys. For an array type value, =Uize.isEmpty= returns =true= if the array has no elements (i.e. a length of =0=). For any other type of value, =Uize.isEmpty= returns =true= if the value is equivalent to =false=.
 
 							EXAMPLES
 							.....................................................
@@ -5126,7 +5126,7 @@ Uize = (function () {
 									..................
 
 								Example: Source is Not a String
-									When the source value to substitute into is not a string (eg. an object, array, number, boolean, etc.), then this value will be coerced to a string.
+									When the source value to substitute into is not a string (e.g. an object, array, number, boolean, etc.), then this value will be coerced to a string.
 
 									EXAMPLE
 									...............................................................................
@@ -5142,7 +5142,7 @@ Uize = (function () {
 
 							NOTES
 							- token names are case-sensitive
-							- token names are space-sensitive (ie. padding around key names is not ignored)
+							- token names are space-sensitive (i.e. padding around key names is not ignored)
 				*/
 			},
 

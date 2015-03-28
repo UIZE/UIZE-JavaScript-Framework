@@ -61,9 +61,9 @@ How Different Matcher Types are Resolved
 		.............................................................................
 
 	When a Nully Matcher is Specified
-		When a nully value (ie. the value =null= or =undefined=) is specified for the =matcherANYTYPE= parameter, a function is produced that always returns the value =true=.
+		When a nully value (i.e. the value =null= or =undefined=) is specified for the =matcherANYTYPE= parameter, a function is produced that always returns the value =true=.
 
-		This behavior is useful for methods that want to offer an optional matcher and wish no filtering (ie. always matching) to be performed when the optional argument is not specified, or if the values =null= or =undefined= are explicitly specified.
+		This behavior is useful for methods that want to offer an optional matcher and wish no filtering (i.e. always matching) to be performed when the optional argument is not specified, or if the values =null= or =undefined= are explicitly specified.
 
 	When a Boolean Type Matcher is Specified
 		When a boolean value is specified for the =matcherANYTYPE= parameter, a function is produced that simply returns that boolean value, regardless of the argument values.

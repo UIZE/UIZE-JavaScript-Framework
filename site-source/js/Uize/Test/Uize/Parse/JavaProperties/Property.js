@@ -85,7 +85,7 @@ Uize.module ({
 								}
 							),
 							Uize.Test.ParserTest.parserTest (
-								'The property name may contain whitespace (eg. space or tab) characters, as long as they are backslash escaped',
+								'The property name may contain whitespace (e.g. space or tab) characters, as long as they are backslash escaped',
 								['My\\ Property\\	Name PropertyValue'],
 								{
 									name:{

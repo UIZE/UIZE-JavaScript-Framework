@@ -138,54 +138,54 @@ The Left Pane
 			A wide variety of widget instance queries are provided for finding widgets in the document that match certain criteria.
 
 			All widgets on the page, as a tree
-				A hierarchical tree of all the widgets on the page, where each widget is listed only by its name (eg. just =option0= instead of =page.childred.tab.children.option0=).
+				A hierarchical tree of all the widgets on the page, where each widget is listed only by its name (e.g. just =option0= instead of =page.childred.tab.children.option0=).
 
 				This query provides an exact representation of the widget tree of the page, with the page widget (the root widget) as the top level item in the tree list. Progressively open up the various levels of the tree list to dig into the structure of the page's widget tree, or use the *expand all* action to lay bare the entire contents of the tree.
 
 			All widgets on the page
-				A flat list of all the widgets on the page, where each widget is listed with a fully qualified dereferencing path (eg. =page.childred.tab.children.option0=).
+				A flat list of all the widgets on the page, where each widget is listed with a fully qualified dereferencing path (e.g. =page.childred.tab.children.option0=).
 
 				This query is useful if you want to get a report listing all the widgets on the page, with their full dereferencing paths. Use the *as report* action to get the entire list of widget paths in a pop-up window, from where you can copy it to your clipboard and paste it into an e-mail, an implementation notes document, or wherever. Widget paths can then later be copied from that e-mail or document and pasted back into the `object entry input` in order to inspect the widget again (you must be back inspecting the same page, of course).
 
 			All widgets on the page, grouped by class
 				A two level tree of all the widgets on the page, grouped by widget class, where the top level is the widget classes, and where the items under each widget class is a list of all the instances of that widget class on the page.
 
-				Widget classes are sorted in order of the number of instances created, from those classes with the most instances created, to those with the least instances created. For classes with the same number of instances created, the classes are subsorted by name. The number of instances of a widget class created is indicated in parentheses after the widget class' name. Widget classes are listed with full dereferencing paths (eg. =Uize.Widget.Page=), and widget instances are listed under each class with fully qualified dereferencing paths (eg. =page.childred.tab.children.option0=).
+				Widget classes are sorted in order of the number of instances created, from those classes with the most instances created, to those with the least instances created. For classes with the same number of instances created, the classes are subsorted by name. The number of instances of a widget class created is indicated in parentheses after the widget class' name. Widget classes are listed with full dereferencing paths (e.g. =Uize.Widget.Page=), and widget instances are listed under each class with fully qualified dereferencing paths (e.g. =page.childred.tab.children.option0=).
 
 				This query is useful to get a quick glance at the prevalence of different widget classes in the widget tree. This information might be helpful when deciding what widget classes should be optimized for performance, or which classes should be more rigorously tested and/or code reviewed.
 
 			Widgets that are in the disabled state
-				A flat list of all the widgets on the page that are in the disabled state, where each widget is listed with a fully qualified dereferencing path (eg. =page.childred.tab.children.option0=).
+				A flat list of all the widgets on the page that are in the disabled state, where each widget is listed with a fully qualified dereferencing path (e.g. =page.childred.tab.children.option0=).
 
 				Disabled widgets are widgets where the value of the =enabledInherited= state property is =false=. This property will be =false= if the widget's =enabled= state property is set to =false=, or if its =enabled= property is set to ='inherit'= and the disabled state is inherited from its parent. It might be interesting to see just how many widgets on a page are in the disabled state at any one time in the use of the page.
 
 			Widgets that are not wired
-				A flat list of all the widgets on the page that are not yet wired, where each widget is listed with a fully qualified dereferencing path (eg. =page.childred.tab.children.option0=).
+				A flat list of all the widgets on the page that are not yet wired, where each widget is listed with a fully qualified dereferencing path (e.g. =page.childred.tab.children.option0=).
 
 				Any widgets that are not yet wired after the page widget has already been wired may be an indication of something important. It may be by design that some widgets create child widgets and don't immediately wire them up, or unwire them later for certain reasons. It is, however, not a common implementation choice, so lots of unwired widgets may be an indication of some issue, or an explanation for why some part of a page's UI is not functioning as expected.
 
 			Wired widgets that are missing some DOM nodes
-				A flat list of all the widgets on the page that are wired and that are missing some accessed DOM nodes, where each widget is listed with a fully qualified dereferencing path (eg. =page.childred.tab.children.option0=).
+				A flat list of all the widgets on the page that are wired and that are missing some accessed DOM nodes, where each widget is listed with a fully qualified dereferencing path (e.g. =page.childred.tab.children.option0=).
 
 				This query may be useful in troubleshooting situations where a widget is not functioning as expected. For a more in-depth discussion, consult the section `Issues With Missing DOM Nodes`.
 
 			Wired widgets that appear to missing all DOM nodes
-				A flat list of all the widgets on the page that are wired and that are missing all accessed DOM nodes, where each widget is listed with a fully qualified dereferencing path (eg. =page.childred.tab.children.option0=).
+				A flat list of all the widgets on the page that are wired and that are missing all accessed DOM nodes, where each widget is listed with a fully qualified dereferencing path (e.g. =page.childred.tab.children.option0=).
 
 				This query may be useful in troubleshooting situations where a widget is not functioning as expected. For a more in-depth discussion, consult the section `Issues With Missing DOM Nodes`. Widgets that are missing all DOM nodes are also considered to be missing some DOM nodes, so such widgets will also be listed in the results set for the =Wired widgets that are missing some DOM nodes= query.
 
 			Widgets for which localized strings are specified
-				A flat list of all the widgets on the page for which localized strings have been specified, where each widget is listed with a fully qualified dereferencing path (eg. =page.childred.tab.children.option0=).
+				A flat list of all the widgets on the page for which localized strings have been specified, where each widget is listed with a fully qualified dereferencing path (e.g. =page.childred.tab.children.option0=).
 
 				This query is useful when doing internationalization and localization work for a page, and provides one way of performing a casual audit of the page to see how extensively the widgets make use of localized strings. When selecting a widget from the query's results set, the actual localized strings can be viewed under the `LOCALIZED STRINGS` section in the `summary tab`. Also, the number of localized strings for a widget in the results set can be seen at a glance in the `object info tooltip`. The system of localization in the UIZE JavaScript Framework (see the [[javascript-localization.html][JavaScript Localization]] guide) allows a widget to "inherit" localized strings from up its parent chain, so keep that in mind when viewing the results set.
 
 			Widgets that have some remapped DOM nodes
-				A flat list of all the widgets on the page that have some remapped DOM nodes, where each widget is listed with a fully qualified dereferencing path (eg. =page.childred.tab.children.option0=).
+				A flat list of all the widgets on the page that have some remapped DOM nodes, where each widget is listed with a fully qualified dereferencing path (e.g. =page.childred.tab.children.option0=).
 
 				A widget is considered to have remapped DOM nodes when the value of its =nodeMap= state property is a non-empty object with one or more node name to remapped node mappings. This query might be useful when learning how node remapping works and how and where it used in widgets in real world applications (so, this query is probably of more academic than diagnostic value).
 
 			Widgets that implement the value interface
-				A flat list of all the widgets on the page that implement the value interface, where each widget is listed with a fully qualified dereferencing path (eg. =page.childred.tab.children.option0=).
+				A flat list of all the widgets on the page that implement the value interface, where each widget is listed with a fully qualified dereferencing path (e.g. =page.childred.tab.children.option0=).
 
 				A widget is considered to implement the value interface if the class of which it is an instance declares the =value= state property. Widgets that implement the value interface are fun to play around with, because they most often are the widgets used in a page for obtaining input from a user. When selecting a widget from the query's results set, the actual value for the widget can be viewed in the table of state properties displayed in the `state tab`. If you then click on the "set" action in the row for the =value= state property, you will get a setter expression that you can use to modify the value for the widget and see how the UI responds in the page being inspected.
 
@@ -193,42 +193,42 @@ The Left Pane
 			A number of module queries are provided for finding JavaScript modules that have been built for the page and that match certain criteria.
 
 			All built modules, as a tree
-				A hierarchical tree of all the JavaScript modules built for the page, where each module is listed only by its name (eg. just =Page= instead of =Uize.Widget.Page=).
+				A hierarchical tree of all the JavaScript modules built for the page, where each module is listed only by its name (e.g. just =Page= instead of =Uize.Widget.Page=).
 
 				This query provides an exact representation of the module hierarchy for the page. Progressively open up the various levels of the tree list to dig into the structure of the module hierarchy (and, to some extent, class hierarchy), or use the *expand all* action to lay bare the entire contents of the tree. Click on any of the modules listed in the tree to inspect the module further in the `summary tab`, to see its automatically detectable features in the `features tab`, or to read documentation for it in the `documentation tab`.
 
 			All built modules (listed in build order)
-				A flat list of all the modules built for the page, where each module is listed with a fully qualified dereferencing path (eg. =Uize.Widget.Page=).
+				A flat list of all the modules built for the page, where each module is listed with a fully qualified dereferencing path (e.g. =Uize.Widget.Page=).
 
-				Modules are listed in the order in which they are built, which is a good indication of the order in which they are needed (ie. dependency order). This query can be useful when creating JavaScript library files (see the [[javascript-libraries.html][JavaScript Libraries]] guide for more details). You can use the `as report` tree list action to get the list of built modules in plain text form in a pop-up window. From there, you can copy the list and then paste it into a library file you are creating or updating (make sure to leave out the =Uize.Class= base class, though, since that is usually loaded in with its own =script= tag).
+				Modules are listed in the order in which they are built, which is a good indication of the order in which they are needed (i.e. dependency order). This query can be useful when creating JavaScript library files (see the [[javascript-libraries.html][JavaScript Libraries]] guide for more details). You can use the `as report` tree list action to get the list of built modules in plain text form in a pop-up window. From there, you can copy the list and then paste it into a library file you are creating or updating (make sure to leave out the =Uize.Class= base class, though, since that is usually loaded in with its own =script= tag).
 
 			All widgets classes
-				A flat list of all the modules built for the page that are widget classes (ie. subclasses of the =Uize.Widget= base class), where each module is listed with a fully qualified dereferencing path (eg. =Uize.Widget.Page=).
+				A flat list of all the modules built for the page that are widget classes (i.e. subclasses of the =Uize.Widget= base class), where each module is listed with a fully qualified dereferencing path (e.g. =Uize.Widget.Page=).
 
 				Modules are listed in the order in which they are built. For any module listed in the results set for this query, the module can be inspected and the instances of the class on the page (if any) will be shown under the `INSTANCES OF THIS WIDGET CLASS` section in the `summary tab`. Also, the number of instances created for a class will be displayed in the `object info tooltip` when mousing over the class in the query results set.
 
 			Widget classes with instances created
-				A flat list of all the modules built for the page that are widget classes (ie. subclasses of the =Uize.Widget= base class) and of which instances have been created, where each module is listed with a fully qualified dereferencing path (eg. =Uize.Widget.Page=).
+				A flat list of all the modules built for the page that are widget classes (i.e. subclasses of the =Uize.Widget= base class) and of which instances have been created, where each module is listed with a fully qualified dereferencing path (e.g. =Uize.Widget.Page=).
 
 				Modules are listed in the order in which they are built. For any module listed in the results set for this query, the module can be inspected and the instances of the class on the page will be shown under the `INSTANCES OF THIS WIDGET CLASS` section in the `summary tab`. Also, the number of instances created for a class will be displayed in the `object info tooltip` when mousing over the class in the query results set.
 
 			Widget classes with no instances created
-				A flat list of all the modules built for the page that are widget classes (ie. subclasses of the =Uize.Widget= base class) and of which *no* instances have been created, where each module is listed with a fully qualified dereferencing path (eg. =Uize.Widget.Bar.Slider.Plus=).
+				A flat list of all the modules built for the page that are widget classes (i.e. subclasses of the =Uize.Widget= base class) and of which *no* instances have been created, where each module is listed with a fully qualified dereferencing path (e.g. =Uize.Widget.Bar.Slider.Plus=).
 
 				Modules are listed in the order in which they are built. A widget class built for a page may have no instances created if it is purely a base class for some other widget subclass of which instances *are* created, or the need to create instances may not yet have arisen due to the current state of the page and the user's interaction with it, or the widget class may be loaded unnecessarily (possibly in some JavaScript library). This query may, at a glance, provides hints as to how a page may be optimized to load less JavaScript code.
 
 			All non-widget built modules
-				A flat list of all the modules built for the page that are *not* widget classes (ie. *not* subclasses of the =Uize.Widget= base class), where each module is listed with a fully qualified dereferencing path (eg. =Uize.Util.Coupler=).
+				A flat list of all the modules built for the page that are *not* widget classes (i.e. *not* subclasses of the =Uize.Widget= base class), where each module is listed with a fully qualified dereferencing path (e.g. =Uize.Util.Coupler=).
 
 				Modules in the results set for this query may be all sorts of non widget class modules, including other kinds of class modules, package modules, extension modules, and any other kind of module (see [[javascript-modules.html][JavaScript Modules]]) that doesn't define a =Uize.Widget= subclass.
 
 			All UIZE built modules
-				A flat list of all the modules built for the page that are under the =Uize= namespace (ie. part of the UIZE JavaScript Framework), where each module is listed with a fully qualified dereferencing path (eg. =Uize.Widget.Page=).
+				A flat list of all the modules built for the page that are under the =Uize= namespace (i.e. part of the UIZE JavaScript Framework), where each module is listed with a fully qualified dereferencing path (e.g. =Uize.Widget.Page=).
 
 				This query may be useful in providing an at-a-glance sense of how extensively modules provided with the UIZE JavaScript Framework are utilized in a page, versus proprietary modules that are created specifically for a Web site or Web application. The query also provides clues as to which parts of the framework are being utilized most heavily.
 
 			All non-UIZE built modules
-				A flat list of all the modules built for the page that are *not* under the =Uize= namespace (ie. *not* part of the UIZE JavaScript Framework), where each module is listed with a fully qualified dereferencing path (eg. =MySite.MyPageWidgetClass=).
+				A flat list of all the modules built for the page that are *not* under the =Uize= namespace (i.e. *not* part of the UIZE JavaScript Framework), where each module is listed with a fully qualified dereferencing path (e.g. =MySite.MyPageWidgetClass=).
 
 				This query may be useful in providing an at-a-glance sense of how many proprietary modules are needed for a specific Web site or Web application (versus just using the modules that come bundled with the framework). This may provide some good direction on features that should be considered for addition to the framework. The query may also be helpful in narrowing down the list of modules if you're hunting specifically for a module that you know is proprietary and not part of the framework.
 
@@ -238,17 +238,17 @@ The Left Pane
 			All accessed widget DOM nodes
 				A flat list of all the accessed widget DOM nodes, where each node is listed by its ID with a prepended "#" (pound) character.
 
-				DOM nodes are considered accessed widget DOM nodes if some widget in the entire widget tree contains a mapping for it in its node cache (ie. the widget tried to access it). The results set for this query may contain listings for DOM nodes that are present as well as DOM nodes that are missing. For DOM nodes that are present, the ID used when listing a node in the results set will be the value of the node's =id= attribute. For DOM nodes that are *not* present, the ID used when listing a node will be constructed using the value of the =idPrefix= state property of the widget that owns it, and the listing will have the suffix "[MISSING]".
+				DOM nodes are considered accessed widget DOM nodes if some widget in the entire widget tree contains a mapping for it in its node cache (i.e. the widget tried to access it). The results set for this query may contain listings for DOM nodes that are present as well as DOM nodes that are missing. For DOM nodes that are present, the ID used when listing a node in the results set will be the value of the node's =id= attribute. For DOM nodes that are *not* present, the ID used when listing a node will be constructed using the value of the =idPrefix= state property of the widget that owns it, and the listing will have the suffix "[MISSING]".
 
 			All present accessed widget DOM nodes
 				A flat list of all the present accessed widget DOM nodes, where each node is listed by its ID with a prepended "#" (pound) character.
 
-				DOM nodes are considered present accessed widget DOM nodes if some widget in the entire widget tree contains a non-null mapping for it in its node cache (ie. the widget tried to access the node and the node existed at the time). The ID used when listing a node in the results set will be the value of the node's =id= attribute.
+				DOM nodes are considered present accessed widget DOM nodes if some widget in the entire widget tree contains a non-null mapping for it in its node cache (i.e. the widget tried to access the node and the node existed at the time). The ID used when listing a node in the results set will be the value of the node's =id= attribute.
 
 			All missing accessed widget DOM nodes
 				A flat list of all the missing accessed widget DOM nodes, where each node is listed by its ID with a prepended "#" (pound) character.
 
-				DOM nodes are considered missing accessed widget DOM nodes if some widget in the entire widget tree contains a null mapping for it in its node cache (ie. the widget tried to access the node and the node did not exist at the time). The ID used when listing a node will be constructed using the value of the =idPrefix= state property of the widget that owns it, and the listing will have the suffix "[MISSING]".
+				DOM nodes are considered missing accessed widget DOM nodes if some widget in the entire widget tree contains a null mapping for it in its node cache (i.e. the widget tried to access the node and the node did not exist at the time). The ID used when listing a node will be constructed using the value of the =idPrefix= state property of the widget that owns it, and the listing will have the suffix "[MISSING]".
 
 			All unaccessed widget DOM nodes
 				A flat list of all `widget DOM nodes` that have not been accessed by widgets (see `Unaccessed Widget DOM Nodes`), where each node is listed by its ID with a prepended "#" (pound) character.
@@ -330,7 +330,7 @@ The Left Pane
 			as report
 				The "as report" tree list action produces a report containing the `tree list query results` for the currently selected `tree list query`, in plain text form in a popup window.
 
-				Indentation is used in the plain text report to reflect the hierarchy of the items in the tree list. Also, some tree list queries don't display full dereferencing paths for results. An example of this is the `All widgets on the page, as a tree` query, where each widget is listed only by its name (eg. just =option0= instead of =page.childred.tab.children.option0=). For such queries, there is usually a corresponding flat list version of the query, where the tree will have no hierarchical structure and where the results *are* listed with full dereferencing paths. The `All widgets on the page` query, for instance, produces the same results set as the `All widgets on the page, as a tree` query, but there will be no indentation in the report that is produced when using the `as report` action, and items will have full dereferencing paths.
+				Indentation is used in the plain text report to reflect the hierarchy of the items in the tree list. Also, some tree list queries don't display full dereferencing paths for results. An example of this is the `All widgets on the page, as a tree` query, where each widget is listed only by its name (e.g. just =option0= instead of =page.childred.tab.children.option0=). For such queries, there is usually a corresponding flat list version of the query, where the tree will have no hierarchical structure and where the results *are* listed with full dereferencing paths. The `All widgets on the page` query, for instance, produces the same results set as the `All widgets on the page, as a tree` query, but there will be no indentation in the report that is produced when using the `as report` action, and items will have full dereferencing paths.
 
 			uber summary
 				The "uber summary" tree list action produces a summary for all of the available `tree list queries`, in plain text form in a popup window.
@@ -441,9 +441,9 @@ The Right Pane
 			When the expression entered in the `object entry input` is a valid dereferencing path for a =Uize.Class= subclass that is defined on the page being inspected, then the `summary tab` will contain the `INHERITANCE CHAIN` and `SUBCLASSES (ON THIS PAGE)` sections.
 
 			INHERITANCE CHAIN
-				The INHERITANCE CHAIN section displays in the `summary tab` for all objects that are =Uize.Class= subclasses, and displays the entire inheritance chain (ie. all superclasses) for the class being inspected.
+				The INHERITANCE CHAIN section displays in the `summary tab` for all objects that are =Uize.Class= subclasses, and displays the entire inheritance chain (i.e. all superclasses) for the class being inspected.
 
-				The inheritance chain for a class is displayed as a series of classes, separated by "->" (arrow) delimiters, starting on the left with the root class (ie. =Uize.Class=) and ending on the right with the class being inspected. Each one of the classes listed in the chain is an `object link` that links to the class, so you can navigate to anywhere in the inheritance chain for the class being inspected with a single click.
+				The inheritance chain for a class is displayed as a series of classes, separated by "->" (arrow) delimiters, starting on the left with the root class (i.e. =Uize.Class=) and ending on the right with the class being inspected. Each one of the classes listed in the chain is an `object link` that links to the class, so you can navigate to anywhere in the inheritance chain for the class being inspected with a single click.
 
 				Additionally, the inheritance depth for the class being inspected is displayed in the subtitle of the INHERITANCE CHAIN section's heading. This is the same value that would be displayed in the [[INHERITANCE DEPTH (all classes)][INHERITANCE DEPTH]] row of the `object info tooltip` that shows when `mousing over an object link` for a class.
 
@@ -455,7 +455,7 @@ The Right Pane
 				If the class being inspected is a widget class and it has no subclasses on the page, then it is not a base class for some other widget class. You might, therefore, expect there to be some instances of the class created on the page, which you would see listed in the `INSTANCES OF THIS WIDGET CLASS` section. If there are no instances created, it may just be that the situation has not yet arisen where it is appropriate for instances to be created, or it may be an indication of some problem with the code for the page, or an opportunity to optimize the page so that it's not loading in unused widget class modules.
 
 		Summary for Widget Classes
-			When the expression entered in the `object entry input` is a valid dereferencing path for a widget class (ie. a subclass of the =Uize.Widget= base class) that is defined on the page being inspected, then the `summary tab` will contain the `INSTANCES OF THIS WIDGET CLASS` section.
+			When the expression entered in the `object entry input` is a valid dereferencing path for a widget class (i.e. a subclass of the =Uize.Widget= base class) that is defined on the page being inspected, then the `summary tab` will contain the `INSTANCES OF THIS WIDGET CLASS` section.
 
 			INSTANCES OF THIS WIDGET CLASS
 				The INSTANCES OF THIS WIDGET CLASS section displays in the `summary tab` for all objects that are widget classes, and displays a list of all the instances of the widget class that are in the widget tree for the page.
@@ -463,10 +463,10 @@ The Right Pane
 				The instances of the widget class being inspected are displayed in a `widget instances table`. Additionally, the number of instances of the widget class is displayed in the subtitle of the INSTANCES OF THIS WIDGET CLASS section's heading. If a widget class has no instances in the page's widget tree, and if the widget class is not a base class for some other widget class (see `SUBCLASSES (ON THIS PAGE)`), then it may either be that the situation has not yet arisen where it is appropriate for instances to be created, or it may be an indication of some problem with the code for the page, or an opportunity to optimize the page so that it's not loading in unused widget class modules.
 
 		Summary for Widget Instances
-			When the expression entered in the `object entry input` is a valid dereferencing path for a widget instance (ie. an instance of a subclass of the =Uize.Widget= base class) that is defined on the page being inspected, then the `summary tab` will contain a number of sections providing more information about the widget, such as its relationship to other widgets on the page, its DOM nodes, localized strings, etc.
+			When the expression entered in the `object entry input` is a valid dereferencing path for a widget instance (i.e. an instance of a subclass of the =Uize.Widget= base class) that is defined on the page being inspected, then the `summary tab` will contain a number of sections providing more information about the widget, such as its relationship to other widgets on the page, its DOM nodes, localized strings, etc.
 
 			PARENTAGE
-				The PARENTAGE section displays in the `summary tab` for all objects that are widget instances, and displays a list of all the widget instances up the parent chain, from the widget's immediate parent widget, all the way to the root widget of the widget tree (ie. the page widget).
+				The PARENTAGE section displays in the `summary tab` for all objects that are widget instances, and displays a list of all the widget instances up the parent chain, from the widget's immediate parent widget, all the way to the root widget of the widget tree (i.e. the page widget).
 
 				The widgets in the parent chain for the widget being inspected are displayed in a `widget instances table`. Additionally, the number of widgets up the parent chain, from the widget's immediate parent to the root widget, is displayed in the subtitle of the PARENTAGE section's heading. For the page widget, which is at the root of the widget tree, no parentage list will be displayed - a message to the effect that the widget has no parents will be displayed in place of the `widget instances table`, and the number of widgets will be displayed as "0" in the subtitle of the PARENTAGE section's heading.
 
@@ -478,7 +478,7 @@ The Right Pane
 			SIBLINGS
 				The SIBLINGS section displays in the `summary tab` for all objects that are widget instances, and displays a list of all the siblings of the widget being inspected.
 
-				Siblings for a widget are defined as other children (ie. not including itself) of the widget's parent. The siblings of the widget being inspected are displayed in a `widget instances table`. Additionally, the number of siblings is displayed in the subtitle of the SIBLINGS section's heading. For widgets that don't have any siblings (either an only child, or a widget like the page widget that has no parent), no siblings list will be displayed - a message to the effect that the widget has no siblings will be displayed in place of the `widget instances table`, and the number of widgets will be displayed as "0" in the subtitle of the SIBLINGS section's heading.
+				Siblings for a widget are defined as other children (i.e. not including itself) of the widget's parent. The siblings of the widget being inspected are displayed in a `widget instances table`. Additionally, the number of siblings is displayed in the subtitle of the SIBLINGS section's heading. For widgets that don't have any siblings (either an only child, or a widget like the page widget that has no parent), no siblings list will be displayed - a message to the effect that the widget has no siblings will be displayed in place of the `widget instances table`, and the number of widgets will be displayed as "0" in the subtitle of the SIBLINGS section's heading.
 
 			DOM NODES
 				The DOM NODES section displays in the `summary tab` for all objects that are widget instances, and displays a list of all the `widget DOM nodes` for the widget being inspected.
@@ -488,7 +488,7 @@ The Right Pane
 				NODE NAME
 					The NODE NAME column of the `DOM NODES` table displays the name of the DOM node from its owner widget's perspective (sometimes referred to as the *implied node* name).
 
-					The node name displayed in this column is the name that would be used to specify the node when calling one of the many implied node methods (eg. =getNode=, =setNodeStyle=, =displayNode=, etc.) implemented in the =Uize.Widget= base class. For the special case of the root node for a widget, which is specified by the node name =''= (an ampty string), the name is displayed in this columne as *[ROOT NODE]*. Each node name in the NODE NAME column is an `object link`, where the `object link expression` is a call to the =getNode= instance method of the widget that would return a reference to the DOM node (eg. =page.children.colorPicker.children.sliderR.getNode ('')=). This means that clicking on a node name will let you further inspect the DOM node in the `summary tab`, where additional DOM node-specific information will be displayed (see `Summary for DOM Nodes`).
+					The node name displayed in this column is the name that would be used to specify the node when calling one of the many implied node methods (e.g. =getNode=, =setNodeStyle=, =displayNode=, etc.) implemented in the =Uize.Widget= base class. For the special case of the root node for a widget, which is specified by the node name =''= (an ampty string), the name is displayed in this columne as *[ROOT NODE]*. Each node name in the NODE NAME column is an `object link`, where the `object link expression` is a call to the =getNode= instance method of the widget that would return a reference to the DOM node (e.g. =page.children.colorPicker.children.sliderR.getNode ('')=). This means that clicking on a node name will let you further inspect the DOM node in the `summary tab`, where additional DOM node-specific information will be displayed (see `Summary for DOM Nodes`).
 
 				ACCESSED
 					The ACCESSED column of the `DOM NODES` table displays either the text "yes" or *"NO"*, indicating whether or not a DOM node has been accessed by the widget.
@@ -521,7 +521,7 @@ The Right Pane
 			HTML
 				The HTML section displays in the `summary tab` for all objects that are widget instances, and displays the HTML for the widget being inspected (provided that the widget's HTML can be discovered).
 
-				The HTML for the widget being inspected is determined by first checking if the widget has a non-null container node (ie. there's a valid node specified for the =container= state property of the widget). If there is no container node for the widget, then DELVE checks for the presence of a shell node for the widget (ie. the implied node with the name "shell"). If there is no shell node for the widget in the page, then DELVE checks for the presence of the root node for the widget (ie. the implied node with the empty string name). If a DOM node can be found for the widget in the page being inspected, then the outer HTML of that node is displayed in the HTML section.
+				The HTML for the widget being inspected is determined by first checking if the widget has a non-null container node (i.e. there's a valid node specified for the =container= state property of the widget). If there is no container node for the widget, then DELVE checks for the presence of a shell node for the widget (i.e. the implied node with the name "shell"). If there is no shell node for the widget in the page, then DELVE checks for the presence of the root node for the widget (i.e. the implied node with the empty string name). If a DOM node can be found for the widget in the page being inspected, then the outer HTML of that node is displayed in the HTML section.
 
 				If the HTML for the widget cannot be discovered by DELVE, then a message to the effect that the widget has no container node, shell node, or root node will be displayed. If DELVE can't discover the HTML for the widget being inspected, it might be that the widget's HTML is not in the page, or it might just be that the HTML is actually there but it has no shell or root node (not all widgets require that their HTML have a shell or root node) and there is no container node specified for the widget. It could also be that there is a mismatch between the =idPrefix= specified for the widget and the =idPrefix= used when generating the HTML intended for the widget.
 
@@ -531,12 +531,12 @@ The Right Pane
 			OWNER WIDGET
 				The OWNER WIDGET section displays in the `summary tab` for all objects that are DOM nodes, and displays the widget that owns the DOM node being inspected (if it can be discovered).
 
-				The owner widget for the DOM node being inspected is determined by traversing the entire widget tree for the page being inspected, until a widget is found whose =idPrefix= is consistent with the ID of the DOM node being inspected. If an owner widget can be discovered, then a `widget link` for that widget will be displayed. If the DOM node being inspected does not appear to belong to a widget (not all DOM nodes do belong to widgets, after all), then a message to this effect will be displayed (ie. you won't just see a blank line).
+				The owner widget for the DOM node being inspected is determined by traversing the entire widget tree for the page being inspected, until a widget is found whose =idPrefix= is consistent with the ID of the DOM node being inspected. If an owner widget can be discovered, then a `widget link` for that widget will be displayed. If the DOM node being inspected does not appear to belong to a widget (not all DOM nodes do belong to widgets, after all), then a message to this effect will be displayed (i.e. you won't just see a blank line).
 
 			ID
 				The ID section displays in the `summary tab` for all objects that are DOM nodes, and displays the value of the =id= attribute for the DOM node being inspected.
 
-				If the DOM node being inspected does not have an ID specified, then the ID section will display a message to this the effect (ie. you won't just see a blank line).
+				If the DOM node being inspected does not have an ID specified, then the ID section will display a message to this the effect (i.e. you won't just see a blank line).
 
 			TAG
 				The TAG section displays in the `summary tab` for all objects that are DOM nodes, and displays the value of the =tagName= property for the DOM node being inspected.
@@ -697,7 +697,7 @@ The Right Pane
 				How Introduced In Is Determined
 					The class in which a feature was first introduced is determined according to the `context` of the feature.
 
-					For static features, the class is determined by going up the inheritance chain towards the root class, finding the first class in which the feature is present in the class object. For instance features, the class is determined by going up the inheritance chain and finding the first class in which the feature is present in the class' =prototype= object. For state properties, the class is determined by going up the inheritance chain and finding the first class in which the feature is present in the object returned by a call to the =get= static method with no parameter specified (ie. a "get all").
+					For static features, the class is determined by going up the inheritance chain towards the root class, finding the first class in which the feature is present in the class object. For instance features, the class is determined by going up the inheritance chain and finding the first class in which the feature is present in the class' =prototype= object. For state properties, the class is determined by going up the inheritance chain and finding the first class in which the feature is present in the object returned by a call to the =get= static method with no parameter specified (i.e. a "get all").
 
 			Last Overridden In
 				The Last Overridden In column displays the last class in which the feature was overridden.
@@ -707,7 +707,7 @@ The Right Pane
 				How Last Overridden In Is Determined
 					The class in which a feature was last overridden is determined by going up the inheritance chain towards the root class, and finding the earliest class in which the feature is still present and has the same value / implementation as the class being inspected.
 
-					Upon each iteration up the inheritance chain, the feature's value / implementation is obtained according to the `context` of the feature: for static features, the feature is obtained from the class object; for instance features, the feature is obtained from the class' =prototype= object; for state properties, the feature is obtained by a call to the =get= static method with no parameter specified (ie. a "get all").
+					Upon each iteration up the inheritance chain, the feature's value / implementation is obtained according to the `context` of the feature: for static features, the feature is obtained from the class object; for instance features, the feature is obtained from the class' =prototype= object; for state properties, the feature is obtained by a call to the =get= static method with no parameter specified (i.e. a "get all").
 
 			When Introduced In and Last Overridden In Are the Same
 				The class that a feature was `Introduced In` can be the same as the class that the feature was `Last Overridden In`.
@@ -719,7 +719,7 @@ The Right Pane
 
 			To sort the table by a specific column, simply click on that column's header. When first selecting a new column to sort on, the values in that column are sorted in ascending order. To sort a column in descending order, first make sure the table is sorted by that column and then click on the column's header a second time to reverse the sort order. Every time you click on the header of the current sort column, the sort order for the column is reversed.
 
-			Sorting the `features table` by a column can be useful in a number of different cases. For example, if you're trying to find a specific feature quickly and you happen to know the name of that feature, then you can sort the table by its `Name` column, so that you can then scan your eyes down the column to the right place in the sorted names. Two other columns that can be useful to sort the table by are the `Introduced In` and `Last Overridden In` columns. Sorting either of these two columns in descending order (ie. clicking their headers twice) is an easy way to get a quick sense of which features are either unique to the class being inspected, or were recently introduced or overridden in the class' inheritance chain, because all such features will sort to the top.
+			Sorting the `features table` by a column can be useful in a number of different cases. For example, if you're trying to find a specific feature quickly and you happen to know the name of that feature, then you can sort the table by its `Name` column, so that you can then scan your eyes down the column to the right place in the sorted names. Two other columns that can be useful to sort the table by are the `Introduced In` and `Last Overridden In` columns. Sorting either of these two columns in descending order (i.e. clicking their headers twice) is an easy way to get a quick sense of which features are either unique to the class being inspected, or were recently introduced or overridden in the class' inheritance chain, because all such features will sort to the top.
 
 			The `features table` is not initially sorted by any particular column, but the features *are* sorted according to a multi-level `initial sort`.
 
@@ -765,12 +765,12 @@ The Right Pane
 
 			- If the object entered in the `object entry input` is a valid UIZE module (such as =Uize.Widget.Bar.Slider=), but that module is not loaded on the page being inspected, then the documentation for the specified UIZE module will still be shown. This behavior provides a convenient way for viewing `documentation for unloaded UIZE modules`.
 
-			- If the object entered in the `object entry input` is neither a =Uize.Class= subclass or instance of a =Uize.Class= subclass loaded on the page being inspected, nor a valid UIZE module that is not loaded on the page being inspected, then the documentation shown will be the `DELVE tool help documentation` (ie. this documentation).
+			- If the object entered in the `object entry input` is neither a =Uize.Class= subclass or instance of a =Uize.Class= subclass loaded on the page being inspected, nor a valid UIZE module that is not loaded on the page being inspected, then the documentation shown will be the `DELVE tool help documentation` (i.e. this documentation).
 
 		Documentation for Unloaded UIZE Modules
 			As mentioned in the section `How the Documentation Page is Determined`, the DELVE tool can be used to conveniently obtain documentation for any module that is known to be part of the UIZE JavaScript Framework.
 
-			Simply type in the fully qualified name of a valid UIZE module (eg. =Uize.Widget.Bar.Slider=) in the `object entry input`. The `documentation tab` will be automatically updated to show documentation for that module - even if the module is not loaded on the page being inspected.
+			Simply type in the fully qualified name of a valid UIZE module (e.g. =Uize.Widget.Bar.Slider=) in the `object entry input`. The `documentation tab` will be automatically updated to show documentation for that module - even if the module is not loaded on the page being inspected.
 
 		DELVE Tool Help Documentation
 			The DELVE Tool Help Documentation discusses the DELVE tool, explaining its purpose, uses, features, user interface, and providing tips on its use.
@@ -853,7 +853,7 @@ Universal Features
 		Object Link Text
 			The Object Link Text is the display text for an `object link`.
 
-			The Object Link Text may sometimes be shorter than or otherwise different from the `object link expression` (see `Object Link Expression vs Object Link Text`). For objects that are widget instances (ie. instances of =Uize.Widget=, or a subclass thereof), the text is formatted in a special way to make is easier to read (see `Widget Object Link Text Formatting`).
+			The Object Link Text may sometimes be shorter than or otherwise different from the `object link expression` (see `Object Link Expression vs Object Link Text`). For objects that are widget instances (i.e. instances of =Uize.Widget=, or a subclass thereof), the text is formatted in a special way to make is easier to read (see `Widget Object Link Text Formatting`).
 
 		Object Link Expression
 			The Object Link Expression is a valid expression that returns the object being inspected as the result of its evaluation.
@@ -904,12 +904,12 @@ Universal Features
 			Info items that may show up in the tooltip's data table include...
 
 			WHAT IT IS (all objects)
-				Shown for all objects, the text displayed will be one of: *"null"*, *"undefined"*, *"widget"* (for widget instances), *"class"* (for =Uize.Class= subclasses), *"DOM node"* (for DOM nodes), *"simple object"* (for instances of JavaScript's built-in =Object= object, or else the type of the object as reported by JavaScript's =typeof= operator (eg. *"number"*, *"string"*, *"boolean"*, etc.).
+				Shown for all objects, the text displayed will be one of: *"null"*, *"undefined"*, *"widget"* (for widget instances), *"class"* (for =Uize.Class= subclasses), *"DOM node"* (for DOM nodes), *"simple object"* (for instances of JavaScript's built-in =Object= object, or else the type of the object as reported by JavaScript's =typeof= operator (e.g. *"number"*, *"string"*, *"boolean"*, etc.).
 
 			INSTANCE OF (anything non-null)
 				Shown for any value that is not =null= or =undefined=, the text displayed will be the global name of the class of which the object is an instance.
 
-				For instances of =Uize.Class= subclasses, the text displayed will be the name of the module that implements the class (eg. *"Uize.Widget.Bar.Slider"*). For instances of other objects, it will be the name of the constructor function (eg. *"Number"*, *"String"*, *"Boolean"*, *"RegExp"*, etc.). For classes and functions, the text displayed will be *"Function"*. For DOM nodes, it will be the name of the DOM object of which the DOM node is an instance (eg. *"HTMLAnchorElement"*, *"HTMLDivElement"*, *"HTMLImageElement"*, etc.).
+				For instances of =Uize.Class= subclasses, the text displayed will be the name of the module that implements the class (e.g. *"Uize.Widget.Bar.Slider"*). For instances of other objects, it will be the name of the constructor function (e.g. *"Number"*, *"String"*, *"Boolean"*, *"RegExp"*, etc.). For classes and functions, the text displayed will be *"Function"*. For DOM nodes, it will be the name of the DOM object of which the DOM node is an instance (e.g. *"HTMLAnchorElement"*, *"HTMLDivElement"*, *"HTMLImageElement"*, etc.).
 
 			SUPERCLASS (all classes)
 				Shown only for objects that are =Uize.Class= subclasses, the text displayed will be the global name of the class' superclass.
@@ -927,32 +927,32 @@ Universal Features
 				So, for example, if only the class modules =Uize.Class=, =Uize.Widget=, and =Uize.Widget.Button= have been built for the page, then the text displayed for the =Uize.Class= class would be *"2"*. This is because both the =Uize.Widget= and =Uize.Widget.Button= classes inherit from =Uize.Class=. For classes that have no subclasses on the page that inherit from them, the text displayed will be *"no subclasses on this page"*. So, in our example, the text displayed for the =Uize.Widget.Button= class would be *"no subclasses on this page"*, since it is at the end of the inheritance chain.
 
 			WIDGET INSTANCES (all widget classes)
-				Shown only for objects that are widget classes (ie. =Uize.Widget=, or a subclass thereof), the text displayed will be the number of instances of the widget class that have been created on the page.
+				Shown only for objects that are widget classes (i.e. =Uize.Widget=, or a subclass thereof), the text displayed will be the number of instances of the widget class that have been created on the page.
 
 				For widget classes of which no instances have been created, the text displayed will be *"no instances of this class"*.
 
 			DEPTH IN TREE (all widget instances)
-				Shown only for objects that are widget instances (ie. instances of =Uize.Widget=, or a subclass thereof), the text displayed will be the depth of the widget instance in the widget tree.
+				Shown only for objects that are widget instances (i.e. instances of =Uize.Widget=, or a subclass thereof), the text displayed will be the depth of the widget instance in the widget tree.
 
 				Depth in tree is how deep the widget instance is in the widget tree of which the page widget is the root widget. Put another way, it's how many levels removed the instance is from the page widget. So, for example, for the widget instance =page.children.colorPicker.children.sliderR=, the text displayed would be *"2"*, since the =page.children.colorPicker.children.sliderR= widget is two levels removed from the =page= widget. For the page widget, itself, the text displayed will be *"this is the root widget"*.
 
 			CHILDREN (all widget instances)
-				Shown only for objects that are widget instances (ie. instances of =Uize.Widget=, or a subclass thereof), the text displayed will be a count of the number of child widgets that the widget has.
+				Shown only for objects that are widget instances (i.e. instances of =Uize.Widget=, or a subclass thereof), the text displayed will be a count of the number of child widgets that the widget has.
 
 				For widgets that do not have any child widgets, the text displayed will be *"no children"*.
 
 			SIBLINGS (all widget instances)
-				Shown only for objects that are widget instances (ie. instances of =Uize.Widget=, or a subclass thereof), the text displayed will be a count of the widget's sibling widgets.
+				Shown only for objects that are widget instances (i.e. instances of =Uize.Widget=, or a subclass thereof), the text displayed will be a count of the widget's sibling widgets.
 
-				The number of siblings of a widget will be the count of the number of children of that widget's parent widget, minus one. For widgets that do not have any sibling widgets (ie. only child widgets, or the page widget), the text displayed will be *"no siblings"*.
+				The number of siblings of a widget will be the count of the number of children of that widget's parent widget, minus one. For widgets that do not have any sibling widgets (i.e. only child widgets, or the page widget), the text displayed will be *"no siblings"*.
 
 			LOCALIZED STRINGS (all widget instances)
-				Shown only for objects that are widget instances (ie. instances of =Uize.Widget=, or a subclass thereof), the text displayed will be a count of the number of `specified localized strings` for the widget.
+				Shown only for objects that are widget instances (i.e. instances of =Uize.Widget=, or a subclass thereof), the text displayed will be a count of the number of `specified localized strings` for the widget.
 
 				For widgets for which no localized strings are specified, the text displayed will be *"no localized strings"*.
 
 			DOM NODES (all widget instances)
-				Shown only for objects that are widget instances (ie. instances of =Uize.Widget=, or a subclass thereof), the text displayed will be a summary of all the DOM nodes that belong to the widget.
+				Shown only for objects that are widget instances (i.e. instances of =Uize.Widget=, or a subclass thereof), the text displayed will be a summary of all the DOM nodes that belong to the widget.
 
 				The DOM nodes summary text displayed in the `object info tooltip` is the same text that is displayed in the header of the `DOM NODES` section in the `summary for widget instances` that is shown in the `summary tab` when the object being inspected is a widget instance. For a detailed description of the text displayed, see the section `Widget DOM Nodes Summary`.
 
@@ -980,7 +980,7 @@ Universal Features
 		Object Highlighting
 			Object Highlighting lets you see where widgets and DOM nodes are in the page being inspected.
 
-			Whenever `mousing over an object link` where that object is either a widget instance (ie. an instance of =Uize.Widget=, or a subclass thereof) or a DOM node, an attempt will be made to highlight the DOM in the page being inspected. The highlight that is shown in the page attempts to best indicate the object's position and dimensions, with a semi-opaque rectangle overlay that appears above the object being highlighted. Object Highlighting, along with the `object info tooltip` that is shown when mousing over object links, is part of the overall `object preview` that is shown for object links. Object Highighting is handled different between objects that are widgets (see `Widget Highlighting`) and DOM nodes (see `DOM Node Highlighting`).
+			Whenever `mousing over an object link` where that object is either a widget instance (i.e. an instance of =Uize.Widget=, or a subclass thereof) or a DOM node, an attempt will be made to highlight the DOM in the page being inspected. The highlight that is shown in the page attempts to best indicate the object's position and dimensions, with a semi-opaque rectangle overlay that appears above the object being highlighted. Object Highlighting, along with the `object info tooltip` that is shown when mousing over object links, is part of the overall `object preview` that is shown for object links. Object Highighting is handled different between objects that are widgets (see `Widget Highlighting`) and DOM nodes (see `DOM Node Highlighting`).
 
 			DOM Node Highlighting
 				For highlighting of a DOM node, the position and dimensions of the node are determined as accurately as possible, and then the highlight overlay is placed at the calculated coordinates.
@@ -1008,7 +1008,7 @@ Universal Features
 		Where You'll See the Widget DOM Nodes Summary
 			The Widget DOM Nodes Summary is shown in two places in the DELVE tool...
 
-			+. The `widget DOM nodes summary` is shown as the text for the `DOM NODES (all widget instances)` row of the `object info tooltip` that is displayed when mousing over an `object link` for an object that is a widget instance (ie. an instance of =Uize.Widget=, or a subclass thereof)
+			+. The `widget DOM nodes summary` is shown as the text for the `DOM NODES (all widget instances)` row of the `object info tooltip` that is displayed when mousing over an `object link` for an object that is a widget instance (i.e. an instance of =Uize.Widget=, or a subclass thereof)
 			+. The `widget DOM nodes summary` is shown as the subtitle in the header of the `DOM NODES` section in the `summary for widget instances` that is shown in the `summary tab` when the object being inspected is a widget instance
 
 		What the Widget DOM Nodes Summary Looks Like
@@ -1030,7 +1030,7 @@ Universal Features
 
 Definitions of Terms
 	Accessed Widget DOM Nodes
-		DOM nodes are considered accessed `widget DOM nodes` if some widget in the entire widget tree contains a mapping for such a node in its node cache (ie. the widget tried to access it).
+		DOM nodes are considered accessed `widget DOM nodes` if some widget in the entire widget tree contains a mapping for such a node in its node cache (i.e. the widget tried to access it).
 
 		The number of `accessed widget DOM nodes` for a widget is not necessarily an indication of the number of DOM nodes that the widget addresses in its implementation, since it may be that the widget has not yet gotten into certain states that would cause certain nodes to be accessed.
 
@@ -1090,7 +1090,7 @@ Issues That DELVE Helps To Troubleshoot
 
 		Widgets are considered to be missing DOM nodes if the node cache for the widget contains some mappings of DOM node names to =null= values, indicating that an attempt was made to access a node in the DOM and the node was not present in the DOM at the time of the access (leading to the cached =null= value). Widgets are considered to be missing *all* DOM nodes if the node cache for the widget contains *only* mappings of DOM node names to =null= values, indicating that, for every attempt to access a node in the DOM, the node was not present in the DOM at the time of the access (leading to the cached =null= value).
 
-		It may be that the widget is missing its DOM nodes because of a problem with putting its HTML into the page, or because of a mismatch between the IDs used for the nodes in the HTML and the =idPrefix= for the widget (ie. the DOM nodes are present in the page but the widget is not finding them). It may also be that the DOM nodes are absent by design, since widgets can be implemented to have optional DOM nodes. Even when missing DOM nodes is acceptable by design, the scale of missing DOM nodes may provide guidance on refactoring widget code for performance, since all DOM node accesses come with some small cost.
+		It may be that the widget is missing its DOM nodes because of a problem with putting its HTML into the page, or because of a mismatch between the IDs used for the nodes in the HTML and the =idPrefix= for the widget (i.e. the DOM nodes are present in the page but the widget is not finding them). It may also be that the DOM nodes are absent by design, since widgets can be implemented to have optional DOM nodes. Even when missing DOM nodes is acceptable by design, the scale of missing DOM nodes may provide guidance on refactoring widget code for performance, since all DOM node accesses come with some small cost.
 
 		To help you in locating widgets that are missing DOM nodes, the DELVE tool provides two `widget instance queries`: the `Wired widgets that are missing some DOM nodes` and `Wired widgets that appear to missing all DOM nodes` queries.
 

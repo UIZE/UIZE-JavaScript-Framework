@@ -1,4 +1,4 @@
-The new =Uize.String.hasPadding= static method of the =Uize.String= module returns a boolean, indicidating whether or not the specified string has whitespace padding on either - or both - of its sides (ie. leading or trailing whitespace).
+The new =Uize.String.hasPadding= static method of the =Uize.String= module returns a boolean, indicidating whether or not the specified string has whitespace padding on either - or both - of its sides (i.e. leading or trailing whitespace).
 
 EXAMPLES
 ...................................................................................

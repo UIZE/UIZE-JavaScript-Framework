@@ -77,7 +77,7 @@ Uize.module ({
 					}
 				},
 				{
-					title:'Test that equals instance method works with no parameters (ie. testing for empty string)',
+					title:'Test that equals instance method works with no parameters (i.e. testing for empty string)',
 					test:function () {
 						return (
 							this.expect (true,Uize.Str.Builder ().equals ()) &&

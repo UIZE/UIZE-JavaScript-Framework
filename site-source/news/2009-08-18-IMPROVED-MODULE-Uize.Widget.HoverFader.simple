@@ -1,7 +1,7 @@
 The =Uize.Widget.HoverFader= module has been improved with the addition of a new =fadeInOut= state property, special handling of the =reverse= fade property, and an improved =tickle= instance method that offers support for fade properties.
 
 New fadeInOut State Property
-	The new =fadeInOut= state property lets you specify fade properties that are common to both the fade-in phase (ie. when mousing over a node) and the fade-out phase (ie. when mousing out of a node) of the hover fade effect.
+	The new =fadeInOut= state property lets you specify fade properties that are common to both the fade-in phase (i.e. when mousing over a node) and the fade-out phase (i.e. when mousing out of a node) of the hover fade effect.
 
 Special Handling for reverse Fade Property
 	The =reverse= fade property now has special handling in the context of the =Uize.Widget.HoverFader= class.

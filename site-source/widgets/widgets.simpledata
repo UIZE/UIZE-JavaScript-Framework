@@ -17,7 +17,7 @@ widgets
 		ENTRY USING KEYBOARD: digits 0 through 9, "." (decimal point), "%" (percent operation), "*" (multiply), "/" (divide), "+" (add), "-" (subtract), "Enter" or "=" (calculate result), "Esc" or "Spacebar" (clear all), "m" (memory plus)
 		BUTTON HIGHLIGHTING: buttons that correspond to keys that are being pressed on the keyboard are highlighted, to simulate the buttons being clicked
 		KEYBOARD FILTERING: invalid keys are filtered out
-		OPERATION COMPOUNDING: by using the "=" operation repeatedly (eg. "2 x 3 = = =" is the same as "2 x 3 x 3 x 3 =")
+		OPERATION COMPOUNDING: by using the "=" operation repeatedly (e.g. "2 x 3 = = =" is the same as "2 x 3 x 3 x 3 =")
 		VERSATILE PERCENT FUNCTION: "85 % 50 =" (85 percent of 50), "50 x 85 %" (85 percent of 50), "15 + 12 %" (15 increased by 12 percent), "15 - 12 %" (15 decreased by 12 percent)
 		BUTTON STATE MANAGEMENT: buttons are disabled when their functions can't be used
 	author

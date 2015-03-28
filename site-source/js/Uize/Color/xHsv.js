@@ -73,7 +73,7 @@ Uize.module ({
 						/*?
 							Color Encodings
 								HSV array
-									An array, containing three elements for hue, saturation, and value components of the color, whose values may be floating point numbers (eg. the color chartreuse is encoded as =[90,100,100]=).
+									An array, containing three elements for hue, saturation, and value components of the color, whose values may be floating point numbers (e.g. the color chartreuse is encoded as =[90,100,100]=).
 
 									SYNTAX
 									...........................................................
@@ -120,7 +120,7 @@ Uize.module ({
 						/*?
 							Color Encodings
 								HSV object
-									An object, containing =hue=, =saturation=, and =value= properties, whose values may be floating point numbers (eg. the color chartreuse is encoded as ={hue:90,saturation:100,value:100}=).
+									An object, containing =hue=, =saturation=, and =value= properties, whose values may be floating point numbers (e.g. the color chartreuse is encoded as ={hue:90,saturation:100,value:100}=).
 
 									SYNTAX
 									................................................................................
@@ -176,7 +176,7 @@ Uize.module ({
 						/*?
 							Color Encodings
 								HSV string
-									An =Hsv(...)= formatted 3-tuple string (eg. the color chartreuse is encoded as ='hsv(90,100%,100%)'=).
+									An =Hsv(...)= formatted 3-tuple string (e.g. the color chartreuse is encoded as ='hsv(90,100%,100%)'=).
 
 									SYNTAX
 									...................................................
@@ -204,7 +204,7 @@ Uize.module ({
 										- because encoding as =HSV string= rounds the values for hue, saturation, and value, colors encoded as =HSV string= may not produce exactly the same original color when decoding the encoded =HSV string=
 
 									Decoding
-										When a color is decoded from =HSV string=, the string may contain separating spaces, may be in upper, lower, or mixed case (ie. *not* case sensitive), and the "%" (percent symbol) character for the saturation and value values may be omitted.
+										When a color is decoded from =HSV string=, the string may contain separating spaces, may be in upper, lower, or mixed case (i.e. *not* case sensitive), and the "%" (percent symbol) character for the saturation and value values may be omitted.
 
 										FUCHSIA
 										.........................

@@ -1,5 +1,5 @@
 Introduction
-	The flo object facilitates writing mixed synchronous/asynchronous code using control flow structures familiar to anyone who knows how to write synchronous code (ie. anyone who can program).
+	The flo object facilitates writing mixed synchronous/asynchronous code using control flow structures familiar to anyone who knows how to write synchronous code (i.e. anyone who can program).
 
 	The flo library provides a simple foundation for writing code that mixes synchronous and asynchronous execution, affording the benefits of synchronous coding control flow constructs to asynchronous code.
 

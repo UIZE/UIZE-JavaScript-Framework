@@ -185,7 +185,7 @@ Uize.module ({
 								myInstance.flushCache (requestUrlSTR);
 								......................................
 
-								As an alternative to specifying a request by request object, a request can be specified by its URL (ie. the value of the =url= property of the request object).
+								As an alternative to specifying a request by request object, a request can be specified by its URL (i.e. the value of the =url= property of the request object).
 
 								VARIATION 2
 								.........................

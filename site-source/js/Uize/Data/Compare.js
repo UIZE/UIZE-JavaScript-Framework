@@ -46,7 +46,7 @@ Uize.module ({
 							areIdenticalBOOL = Uize.Data.Compare.identical (object1OBJ,object2OBJ);
 							.......................................................................
 
-							This method recurses through the two objects specified by the =object1OBJ= and =object2OBJ= parameters, testing that they have the same structure and property values. The two parameters can be arbitrarily complex data trees, or simple type values (ie. string, number, boolean). In order to be considered identical, the two objects must have the same structure and the same values at all levels of their structure.
+							This method recurses through the two objects specified by the =object1OBJ= and =object2OBJ= parameters, testing that they have the same structure and property values. The two parameters can be arbitrarily complex data trees, or simple type values (i.e. string, number, boolean). In order to be considered identical, the two objects must have the same structure and the same values at all levels of their structure.
 
 							VARIATION
 							..................................................................................
@@ -105,7 +105,7 @@ Uize.module ({
 							.......................................................................
 
 							NOTES
-							- =Uize.Data.Compare.conjoined (myObjectOBJ,myObjectOBJ)= will return =true=, since they are one and the same (ie. conjoined at the root).
+							- =Uize.Data.Compare.conjoined (myObjectOBJ,myObjectOBJ)= will return =true=, since they are one and the same (i.e. conjoined at the root).
 				*/
 
 			clones:_Uize_Data.clones,

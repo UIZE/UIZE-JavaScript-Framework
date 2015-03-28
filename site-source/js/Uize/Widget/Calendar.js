@@ -67,7 +67,7 @@
 					page.addChild ('calendar',Uize.Widget.Calendar,Uize.Date.getRangeAround ('','week'));
 					.....................................................................................
 
-					In the above example, the user will be able to select a date in the current week (ie. the week of the date on which this calendar widget is instantiated). The result from the call to the =Uize.Date.getRangeAround= method is being supplied as the state property values for the =Uize.Widget.Calendar= instance. This works because the =Uize.Widget.Calendar= class implements =minValue= and =maxValue= state properties, and because the =dateRangeOBJ= value returned by the =Uize.Date.getRangeAround= method contains =minValue= and =maxValue= properties.
+					In the above example, the user will be able to select a date in the current week (i.e. the week of the date on which this calendar widget is instantiated). The result from the call to the =Uize.Date.getRangeAround= method is being supplied as the state property values for the =Uize.Widget.Calendar= instance. This works because the =Uize.Widget.Calendar= class implements =minValue= and =maxValue= state properties, and because the =dateRangeOBJ= value returned by the =Uize.Date.getRangeAround= method contains =minValue= and =maxValue= properties.
 
 			Boundless Date Ranges
 				The =minValue= and =maxValue= properties are nullable.
@@ -91,7 +91,7 @@
 					page.addChild ('calendar',Uize.Widget.Calendar,{minValue:new Date});
 					....................................................................
 
-					In the above example, the user will be able to select a date from today's date (ie. the date on which this calendar widget is instantiated) onwards.
+					In the above example, the user will be able to select a date from today's date (i.e. the date on which this calendar widget is instantiated) onwards.
 
 				Upper Bound Only
 					When only the =maxValue= property is set to a date and the =minValue= property is set to =null= or =''= (empty string), then there will be no lower bound to the `valid date range`.
@@ -110,7 +110,7 @@
 					page.addChild ('calendar',Uize.Widget.Calendar,{maxValue:new Date});
 					....................................................................
 
-					In the above example, the user will be able to select a date up until today's date (ie. the date on which this calendar widget is instantiated).
+					In the above example, the user will be able to select a date up until today's date (i.e. the date on which this calendar widget is instantiated).
 
 				No Lower or Upper Bounds
 					When both the =minValue= *and* =maxValue= properties are set to =null= or =''= (empty string), then there will be no restriction on the date that the user can select.
@@ -118,7 +118,7 @@
 					In this case, there will effectively be no valid date range constraint. Put another way, the valid date range will include all dates for all time - completely boundless.
 
 			Invalidation of value
-				The value of the =value= state property (ie. the selected date) may be set to =null=, effectively being invalidated, if the values of the =minValue= and/or =maxValue= state properties are modified and the selected date no longer falls within the newly set `valid date range`.
+				The value of the =value= state property (i.e. the selected date) may be set to =null=, effectively being invalidated, if the values of the =minValue= and/or =maxValue= state properties are modified and the selected date no longer falls within the newly set `valid date range`.
 
 		Specifying Date Values
 			The =Uize.Widget.Calendar= module uses the =Uize.Date.resolve= static method of the =Uize.Date= module to conform date values to instances of JavaScript's =Date= object.
@@ -226,7 +226,7 @@ Uize.module ({
 				/*?
 					Implied Nodes
 						month Implied Node
-							A node that is used to display the name of the current month in view (ie. the value of the =month= state property, displayed as a month name).
+							A node that is used to display the name of the current month in view (i.e. the value of the =month= state property, displayed as a month name).
 
 							This implied node can be of many types: =div=, =span=, =p=, =b=, =td=, =input=, etc. The month name is displayed in this implied node using the =setNodeValue= instance method of the =Uize.Widget= base class. Therefore, any features supported by the =setNodeValue= method are also supported for this implied node.
 
@@ -241,7 +241,7 @@ Uize.module ({
 				/*?
 					Implied Nodes
 						year Implied Node
-							A node that is used to display the current year in view (ie. the value of the =year= state property).
+							A node that is used to display the current year in view (i.e. the value of the =year= state property).
 
 							This implied node can be of many types: =div=, =span=, =p=, =b=, =td=, =input=, etc. The year is displayed in this implied node using the =setNodeValue= instance method of the =Uize.Widget= base class. Therefore, any features supported by the =setNodeValue= method are also supported for this implied node.
 
@@ -514,7 +514,7 @@ Uize.module ({
 					/*?
 						State Properties
 							maxValue
-								An instance of JavaScript's =Date= object, representing the latest date that can be selected by the user (ie. the maximum value for the =value= state property).
+								An instance of JavaScript's =Date= object, representing the latest date that can be selected by the user (i.e. the maximum value for the =value= state property).
 
 								The =maxValue= property specifies the end date of the valid date range represented by the =minValue= and =maxValue= properties combined (for more info, see the section `Valid Date Range`).
 
@@ -545,7 +545,7 @@ Uize.module ({
 					/*?
 						State Properties
 							minValue
-								An instance of JavaScript's =Date= object, representing the earliest date that can be selected by the user (ie. the minimum value for the =value= state property).
+								An instance of JavaScript's =Date= object, representing the earliest date that can be selected by the user (i.e. the minimum value for the =value= state property).
 
 								The =minValue= property specifies the start date of the valid date range represented by the =minValue= and =maxValue= properties combined (for more info, see the section `Valid Date Range`).
 

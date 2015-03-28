@@ -1,6 +1,6 @@
 The =Uize.Widget= module has been improved with the addition of the new =ajax= instance method.
 
-The new =ajax= instance method provides a concise and user friendly way for widget instances to execute ajax requests, without having to worry about the communication protocol used (eg. XHR or IFRAME), service URLs, or how service parameters are serialized in the request to the server.
+The new =ajax= instance method provides a concise and user friendly way for widget instances to execute ajax requests, without having to worry about the communication protocol used (e.g. XHR or IFRAME), service URLs, or how service parameters are serialized in the request to the server.
 
 EXAMPLE
 ......................................................................
@@ -18,7 +18,7 @@ myWidget.ajax (
 );
 ......................................................................
 
-In the above example, the widget =myWidget= is executing an Ajax request to obtain a set of search results. The call to the =ajax= method passes two parameters: the service parameters, and the callback function that should be executed when the Ajax request is successfully processed. A variation of the =ajax= method allows a request parameters object to be specified as the second parameter of the method (instead of just a callback function), which allows a callback to be specified along with other parameters for qualifying how the request is performed. Examples of request parameters are directives to control the HTTP method (ie. GET or POST), the caching behavior for the request, etc.
+In the above example, the widget =myWidget= is executing an Ajax request to obtain a set of search results. The call to the =ajax= method passes two parameters: the service parameters, and the callback function that should be executed when the Ajax request is successfully processed. A variation of the =ajax= method allows a request parameters object to be specified as the second parameter of the method (instead of just a callback function), which allows a callback to be specified along with other parameters for qualifying how the request is performed. Examples of request parameters are directives to control the HTTP method (i.e. GET or POST), the caching behavior for the request, etc.
 
 Bring Your Own Implementation
 	While individual widget classes do not need to bother with the mechanics of how Ajax communication is managed, you *will* want to provide the implementation of Ajax communication in your own page widget subclass.

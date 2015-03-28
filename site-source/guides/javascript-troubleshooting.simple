@@ -137,7 +137,7 @@ Tips for Troubleshooting in Firebug
 
 		By using the DOM inspector, you can traverse the JavaScript widget tree for a page that uses the UIZE JavaScript Framework. On a typical page you will have a page widget at the root of the widget hierarchy. Finding this in the DOM inspector, you can expand it and inspect its properties. In order to dig deeper into the widget tree, you can locate the =children= property of the page widget and expand it too. For each child widget of the page widget you can do the same. You can keep sleuthing like this, digging as deep as you need to, to ultimately find the "widget of interest" that is a suspect in the code crime you are investigating.
 
-		At any stage in this process, you can inspect the values of state properties for a widget instance. Note that the state properties will be represented using their private names (ie. prefixed with an underscore).
+		At any stage in this process, you can inspect the values of state properties for a widget instance. Note that the state properties will be represented using their private names (i.e. prefixed with an underscore).
 
 	Display of Types in Firebug's DOM Inspector
 		When using the DOM inspector in `Firebug` to peruse the widget tree, any property that is an instance of a =Uize.Class= subclass will have the module name for its class displayed to the right of the property.
@@ -345,7 +345,7 @@ Accidental Globals
 			Works in Source, Fails in Scrunched
 				In one scenario, two accidental globals have different names in source mode but get scrunched to the same identifier in scrunched mode.
 
-				Now they stomp on each other, and one of the variables gets assigned a value that wasn't intended for it. Strange things ensue. The fundamental laws of physics are compromised. The universe collapses. In this scenario, you don't notice the problem caused by the accidental globals until you switch to production code (ie. scrunched code).
+				Now they stomp on each other, and one of the variables gets assigned a value that wasn't intended for it. Strange things ensue. The fundamental laws of physics are compromised. The universe collapses. In this scenario, you don't notice the problem caused by the accidental globals until you switch to production code (i.e. scrunched code).
 
 			Fails in Source, Works in Scrunched
 				In another scenario, two accidental globals may "collide" when using source / unscrunched code, but may not collide when the scrunched version of the code is used.

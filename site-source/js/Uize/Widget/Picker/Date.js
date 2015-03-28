@@ -116,7 +116,7 @@ Uize.module ({
 						/*?
 							State Properties
 								minValue
-									A string or instance of JavaScript's =Date= object, representing the earliest date that can be selected by the user (ie. the minimum value for the =value= state property).
+									A string or instance of JavaScript's =Date= object, representing the earliest date that can be selected by the user (i.e. the minimum value for the =value= state property).
 
 									Values specified for this property can be of the =dateSTRorOBJ= value type supported by the =Uize.Date.resolve= method of the =Uize.Date= module.
 
@@ -129,7 +129,7 @@ Uize.module ({
 						/*?
 							State Properties
 								maxValue
-									A string or instance of JavaScript's =Date= object, representing the latest date that can be selected by the user (ie. the maximum value for the =value= state property).
+									A string or instance of JavaScript's =Date= object, representing the latest date that can be selected by the user (i.e. the maximum value for the =value= state property).
 
 									Values specified for this property can be of the =dateSTRorOBJ= value type supported by the =Uize.Date.resolve= method of the =Uize.Date= module.
 

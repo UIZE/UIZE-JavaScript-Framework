@@ -11,7 +11,7 @@ What's in the Uize.Node.VirtualEvent Module
 	At the highest level, the new =Uize.Node.VirtualEvent= module provides the following...
 
 	- a foundation and features (including static methods) to facilitate the creation of virtual DOM events
-	- a sizable selection of virtual DOM event implementations (eg. =ctrlClick=, =shiftClick=, =mouseRest=, =mouseRemainDown=, =remainFocused=, etc.)
+	- a sizable selection of virtual DOM event implementations (e.g. =ctrlClick=, =shiftClick=, =mouseRest=, =mouseRemainDown=, =remainFocused=, etc.)
 	- a namespace, under which further sets of virtual DOM event implementations can be organized into modules
 
 Changes to the mouserest Virtual DOM Event

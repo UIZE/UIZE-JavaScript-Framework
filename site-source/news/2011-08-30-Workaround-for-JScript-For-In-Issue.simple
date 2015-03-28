@@ -1,6 +1,6 @@
 An issue was discovered with the way that Microsoft's JScript interpreter, which is used in Internet Explorer and Windows Script Host, iterates through arrays in =for...in= loops.
 
-Essentially, when an array is populated using literal syntax (eg. =[0,1,2,3]=), and the value =undefined= is explicitly specified for some of the elements, then the elements whose values are set to =undefined= will not be encountered in a =for...in= loop.
+Essentially, when an array is populated using literal syntax (e.g. =[0,1,2,3]=), and the value =undefined= is explicitly specified for some of the elements, then the elements whose values are set to =undefined= will not be encountered in a =for...in= loop.
 
 EXAMPLE
 ........................................................................................

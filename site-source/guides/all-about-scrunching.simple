@@ -74,7 +74,7 @@ Writing Scruncher-ready Code
 		Subclasses
 			A classic case of this is one module that is a base class and another module that is a subclass of that base class.
 
-			Both modules may wish to set private properties on instances, so the private identifiers from two separate modules would share the same context - the instance. Now, because the modules are scrunched independently and the private identifier enumeration dictionaries are not shared across separate scrunch operations, there is a possibility that differently named private identifiers may be named the same in their scrunched form. This would lead to unexpected behavior (ie. bugs), since two functionally different properties of an object now share the same memory and, therefore, the two scrunched modules would tread on other's toes.
+			Both modules may wish to set private properties on instances, so the private identifiers from two separate modules would share the same context - the instance. Now, because the modules are scrunched independently and the private identifier enumeration dictionaries are not shared across separate scrunch operations, there is a possibility that differently named private identifiers may be named the same in their scrunched form. This would lead to unexpected behavior (i.e. bugs), since two functionally different properties of an object now share the same memory and, therefore, the two scrunched modules would tread on other's toes.
 
 			To avoid this conflict scenario, the =Mappings= Scruncher settings can be used to put the scrunched forms of identifiers under separate namespaces (scrunched identifier prefix) unique to each module. For example, the baseclass could register a Scruncher mapping of ="&#61;b"=, as in...
 
@@ -82,7 +82,7 @@ Writing Scruncher-ready Code
 			/*ScruncherSettings Mappings="=b"*/
 			...................................
 
-			The above mapping means that all identifiers that start with nothing before an underscore (eg. =_savingsFromRemovedWhitespace=) are flagged for scrunching and would be mapped to scrunched identifiers that start with "b" before an underscore (eg. =b_a3=).
+			The above mapping means that all identifiers that start with nothing before an underscore (e.g. =_savingsFromRemovedWhitespace=) are flagged for scrunching and would be mapped to scrunched identifiers that start with "b" before an underscore (e.g. =b_a3=).
 
 			Now, a subclass could avoid conflicts with the scrunched identifiers of the base class by registering the Scruncher mapping of ="&#61;c"=, as in...
 
@@ -157,14 +157,14 @@ Scruncher Settings
 			/*ScruncherSettings Mappings="=b"*/
 			...................................
 
-			The above mapping means that all identifiers that start with nothing before an underscore (eg. =_savingsFromRemovedWhitespace=) are flagged for scrunching and would be mapped to scrunched identifiers that start with "b" before an underscore (eg. =b_a3=).
+			The above mapping means that all identifiers that start with nothing before an underscore (e.g. =_savingsFromRemovedWhitespace=) are flagged for scrunching and would be mapped to scrunched identifiers that start with "b" before an underscore (e.g. =b_a3=).
 
 			EXAMPLE 2
 			.....................................................
 			/*ScruncherSettings Mappings="MyNamespace_MyModule"*/
 			.....................................................
 
-			The above mapping means that all identifiers that start with =MyNamespace_MyModule= before an underscore (eg. =MyNamespace_MyModule_globalInitializerEnabled=) are flagged for scrunching and would be mapped to scrunched identifiers that also start with =MyNamespace_MyModule= before an underscore (eg. =MyNamespace_MyModule_a3=). Basically, when the scrunched prefix part of a mapping is omitted, then it is assumed to be the same as the unscrunched prefix. This kind of mapping is useful for global identifiers, where you want to keep a sufficiently specific namespace "path" to avoid collisions in the global namespace.
+			The above mapping means that all identifiers that start with =MyNamespace_MyModule= before an underscore (e.g. =MyNamespace_MyModule_globalInitializerEnabled=) are flagged for scrunching and would be mapped to scrunched identifiers that also start with =MyNamespace_MyModule= before an underscore (e.g. =MyNamespace_MyModule_a3=). Basically, when the scrunched prefix part of a mapping is omitted, then it is assumed to be the same as the unscrunched prefix. This kind of mapping is useful for global identifiers, where you want to keep a sufficiently specific namespace "path" to avoid collisions in the global namespace.
 
 			No Mappings
 				If you don't specify any mappings, the Scruncher will not scrunch identifier names. You will still get the benefit of file size reduction from removing whitespace and comments, however. For code that has not been written with identifier scrunching in mind, this is the safe way to use the Scruncher to scrunch such files and get some size reduction.

@@ -555,7 +555,7 @@ Uize.module ({
 					/*?
 						State Properties
 							defaultTitle
-								A string, specifying the default text for the =title Implied Node= (ie. the title bar), should the =title= state property be set to =null=, =undefined=, or =''= (an empty string).
+								A string, specifying the default text for the =title Implied Node= (i.e. the title bar), should the =title= state property be set to =null=, =undefined=, or =''= (an empty string).
 
 								For a more detailed explanation of the title text fallback mechanism, see the reference for the =title= state property.
 
@@ -588,7 +588,7 @@ Uize.module ({
 					/*?
 						State Properties
 							height
-								An integer, specifying the height of the dialog (ie. the height of its =Root Node=).
+								An integer, specifying the height of the dialog (i.e. the height of its =Root Node=).
 
 								When a dialog is resizable (by using the =Uize.Widget.Dialog.xResizable= extension), the value of the =height= and state property will be updated when the user has completed resizing the dialog. Updating the value of this property programmatically while the dialog is shown will cause it to be resized. Leaving =height= set to its initial value of =undefined= will result in the dialog's height remaining as determined by its initial HTML markup and CSS.
 
@@ -888,7 +888,7 @@ Uize.module ({
 					/*?
 						State Properties
 							title
-								A string, specifying text that should be displayed in the dialog's =title Implied Node= (ie. the title bar).
+								A string, specifying text that should be displayed in the dialog's =title Implied Node= (i.e. the title bar).
 
 								Using this property, the title of a dialog can be changed at any time - even when the dialog is shown. Leaving =title= set to its initial value of =undefined= will result in the dialog's title being determined by the value of the =defaultTitle= state property. If the values for both the =title= and =defaultTitle= state properties are =undefined=, then the =title Implied Node= will retain whatever text was initially in its HTML markup.
 
@@ -906,7 +906,7 @@ Uize.module ({
 					/*?
 						State Properties
 							width
-								An integer, specifying the width of the dialog (ie. the width of its =Root Node=).
+								An integer, specifying the width of the dialog (i.e. the width of its =Root Node=).
 
 								When a dialog is resizable (by using the =Uize.Widget.Dialog.xResizable= extension), the value of the =width= and state property will be updated when the user has completed resizing the dialog. Updating the value of this property programmatically while the dialog is shown will cause it to be resized. Leaving =width= set to its initial value of =undefined= will result in the dialog's width remaining as determined by its initial HTML markup and CSS.
 
