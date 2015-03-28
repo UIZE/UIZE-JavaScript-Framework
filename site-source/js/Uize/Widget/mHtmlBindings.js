@@ -35,7 +35,13 @@ Uize.module ({
 				_pairUp = _Uize.pairUp,
 
 			/*** Variables for Performance Optimization ***/
-				_applyAll = _Uize.applyAll
+				_applyAll = _Uize.applyAll,
+
+			/*** General Variables ***/
+				_bindingTypeNormalizations = {
+					'':'value',
+					html:'innerHTML'
+				}
 		;
 
 		return function (_class) {
@@ -69,44 +75,52 @@ Uize.module ({
 										var
 											_nodeNameAndBindingType = _updater.split (':'),
 											_nodeName = _nodeNameAndBindingType [0],
-											_bindingType = _nodeNameAndBindingType [1] || 'value'
+											_bindingType = _nodeNameAndBindingType [1] || ''
 										;
-										if (_bindingType == 'value') {
-											_updater = function (_propertyValue) {
-												this.setNodeValue (
-													_nodeName,
-													_propertyValue == null ? '' : _propertyValue
-												);
-											};
-										} else if (_bindingType == 'html' || _bindingType == 'innerHTML') {
-											_updater = function (_propertyValue) {
-												this.setNodeInnerHtml (_nodeName,_propertyValue == null ? '' : _propertyValue);
-											};
-										} else if (_bindingType == '?') {
-											_updater = function (_propertyValue) {this.displayNode (_nodeName,!!_propertyValue)};
-										} else if (_bindingType == 'show' || _bindingType == 'hide') {
-											_updater = function (_propertyValue) {
-												this.setNodeStyle (
-													_nodeName,
-													{display:!!_propertyValue == (_bindingType == 'show') ? '' : 'none'}
-												);
-											};
-										} else if (_bindingType.charCodeAt (0) == 64) {
-											var _attributeName = _bindingType.slice (1);
-											_updater = function (_propertyValue) {
-												var _node = this.getNode (_nodeName);
-												_node && _node.setAttribute (_attributeName,_propertyValue);
-											};
-										} else if (_bindingType.slice (0,6) == 'style.') {
-											var _stylePropertyName = _bindingType.slice (6);
-											_updater = function (_propertyValue) {
-												this.setNodeStyle (_nodeName,_pairUp (_stylePropertyName,_propertyValue));
-											};
-										} else {
-											_updater = function (_propertyValue) {
-												this.setNodeProperties (_nodeName,_pairUp (_bindingType,_propertyValue));
-											};
-										}
+										if (_bindingTypeNormalizations.hasOwnProperty (_bindingType))
+											_bindingType = _bindingTypeNormalizations [_bindingType]
+										;
+
+										/*** generate updater function from binding type ***/
+											if (_bindingType == 'value') {
+												_updater = function (_propertyValue) {
+													this.setNodeValue (
+														_nodeName,
+														_propertyValue == null ? '' : _propertyValue
+													);
+												};
+											} else if (_bindingType == 'innerHTML') {
+												_updater = function (_propertyValue) {
+													this.setNodeInnerHtml (_nodeName,_propertyValue == null ? '' : _propertyValue);
+												};
+											} else if (_bindingType == '?') {
+												_updater = function (_propertyValue) {
+													this.displayNode (_nodeName,!!_propertyValue);
+												};
+											} else if (_bindingType == 'show' || _bindingType == 'hide') {
+												_updater = function (_propertyValue) {
+													this.setNodeStyle (
+														_nodeName,
+														{display:!!_propertyValue == (_bindingType == 'show') ? '' : 'none'}
+													);
+												};
+											} else if (_bindingType.charCodeAt (0) == 64) {
+												var _attributeName = _bindingType.slice (1);
+												_updater = function (_propertyValue) {
+													var _node = this.getNode (_nodeName);
+													_node && _node.setAttribute (_attributeName,_propertyValue);
+												};
+											} else if (_bindingType.slice (0,6) == 'style.') {
+												var _stylePropertyName = _bindingType.slice (6);
+												_updater = function (_propertyValue) {
+													this.setNodeStyle (_nodeName,_pairUp (_stylePropertyName,_propertyValue));
+												};
+											} else {
+												_updater = function (_propertyValue) {
+													this.setNodeProperties (_nodeName,_pairUp (_bindingType,_propertyValue));
+												};
+											}
+
 										_updater.propertyName = _property;
 										_updater.nodeName = _nodeName;
 										_updater.bindingType = _bindingType;
