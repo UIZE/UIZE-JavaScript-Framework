@@ -271,9 +271,14 @@ Uize.module ({
 														_helperFunctionCall ('_encodeAttributeValue',_bindingPropertyReference)
 													);
 												}
-											} else if (_bindingType == 'html' || _bindingType == 'innerHTML') {
+											} else if (_bindingType == 'innerHTML') {
 												_addInnerHtmlReplacement (_node,_bindingPropertyReference);
-											} else if (_bindingType == '?' || _bindingType == 'show') {
+											} else if (_bindingType == '?') {
+												_addStylePropertyReplacement (
+													'display',
+													'(' + _bindingPropertyReference + ' ? \'block\' : \'none\')'
+												);
+											} else if (_bindingType == 'show') {
 												_addStylePropertyReplacement (
 													'display',
 													'(' + _bindingPropertyReference + ' ? \'\' : \'none\')'
