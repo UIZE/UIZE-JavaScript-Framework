@@ -234,6 +234,91 @@ Uize.module ({
 							]
 						},
 						{
+							title:'The values of state properties can be bound to nodes to replace their inner HTML',
+							test:[
+								_htmlBindingsTest (
+									'A state property can be bound to replace the inner HTML of the root node',
+									{
+										stateProperties:{
+											foo:{value:'<div><span><b>bar</b></span></div>'}
+										},
+										htmlBindings:{
+											foo:':innerHTML'
+										}
+									},
+									'<div></div>',
+									'<div id="widget"><div><span><b>bar</b></span></div></div>'
+								),
+								_htmlBindingsTest (
+									'A state property can be bound to replace the inner HTML of a child node',
+									{
+										stateProperties:{
+											foo:{value:'<div><span><b>bar</b></span></div>'}
+										},
+										htmlBindings:{
+											foo:'foo:innerHTML'
+										}
+									},
+									'<div>' +
+										'<div id="foo"></div>' +
+									'</div>',
+									'<div id="widget">' +
+										'<div id="widget-foo"><div><span><b>bar</b></span></div></div>' +
+									'</div>'
+								),
+								_htmlBindingsTest (
+									'A state property can be bound to replace the inner HTML of multiple nodes',
+									{
+										stateProperties:{
+											foo:{value:'<div><span><b>bar</b></span></div>'}
+										},
+										htmlBindings:{
+											foo:['foo1:innerHTML','foo2:innerHTML','foo3:innerHTML']
+										}
+									},
+									'<div>' +
+										'<div id="foo1"></div>' +
+										'<div id="foo2"></div>' +
+										'<div>' +
+											'<div id="foo3"></div>' +
+										'</div>' +
+									'</div>',
+									'<div id="widget">' +
+										'<div id="widget-foo1"><div><span><b>bar</b></span></div></div>' +
+										'<div id="widget-foo2"><div><span><b>bar</b></span></div></div>' +
+										'<div>' +
+											'<div id="widget-foo3"><div><span><b>bar</b></span></div></div>' +
+										'</div>' +
+									'</div>'
+								),
+								_htmlBindingsTest (
+									'Replacement of the inner HTML of nodes is one pass only, so the replacement HTML content is not subsequently processed or affected by bindings',
+									{
+										stateProperties:{
+											foo:{
+												value:'<div id="foo2" class="foo2"><span id="widget-foo2"><b>bar</b></span></div>'
+											}
+										},
+										htmlBindings:{
+											foo:['foo1:innerHTML','foo2:innerHTML']
+										}
+									},
+									'<div>' +
+										'<div id="foo1" class="foo1"></div>' +
+										'<div id="foo2" class="foo2"></div>' +
+									'</div>',
+									'<div id="widget">' +
+										'<div id="widget-foo1" class="Widget-foo1">' +
+											'<div id="foo2" class="foo2"><span id="widget-foo2"><b>bar</b></span></div>' +
+										'</div>' +
+										'<div id="widget-foo2" class="Widget-foo2">' +
+											'<div id="foo2" class="foo2"><span id="widget-foo2"><b>bar</b></span></div>' +
+										'</div>' +
+									'</div>'
+								)
+							]
+						},
+						{
 							title:'The values of state properties can be bound to various types of form elements',
 							test:[
 								{
@@ -553,17 +638,21 @@ Uize.module ({
 						}
 					]]
 					/*
-						- test value bindings to form elements
-							- select (not yet supported)
 						- test various binding types...
-							- html, innerHTML
+							- ?
+							- show
+							- hide
 							- @attribute value bindings (@src, @href, @class)
 							- style.*
-							- ?, show
-							- hide
 							- className
 							- readOnly
 						- test child tag
+							- class, extraClasses - one or multiple extra classes
+							- name attribute
+							- surplus attributes passed as child state properties
+
+						- test value bindings to form elements
+							- select (not yet supported)
 					*/
 				])
 			]
