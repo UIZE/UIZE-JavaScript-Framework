@@ -109,7 +109,7 @@ Uize.module ({
 									'loc_' + _mode,'->' + _modeButtonName + '.text',
 									'sliderHeight','->' + _mode + '.sliderHeight'
 								),
-								htmlBindings:Uize.pairUp (_modeSelectedProperty,_mode + ':?')
+								htmlBindings:Uize.pairUp (_modeSelectedProperty,_mode + ':show')
 							});
 						}
 					);

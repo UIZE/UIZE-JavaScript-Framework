@@ -47,8 +47,8 @@ Uize.module ({
 			},
 
 			htmlBindings:{
-				heading:['heading:html','heading:?'],
-				body:['body:html','body:?']
+				heading:['heading:html','heading:show'],
+				body:['body:html','body:show']
 			}
 		});
 	}

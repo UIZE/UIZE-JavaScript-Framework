@@ -114,8 +114,8 @@ Uize.module ({
 			},
 
 			htmlBindings:{
-				sourceViewShown:'sourceView:?',
-				resultViewShown:'resultView:?',
+				sourceViewShown:'sourceView:show',
+				resultViewShown:'resultView:show',
 				resultViewReadOnly:'result:readOnly',
 				source:'source',
 				result:'result'
