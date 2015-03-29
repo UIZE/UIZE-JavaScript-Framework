@@ -901,6 +901,44 @@ Uize.module ({
 										'<div id="widget-foo" style="border-left-width:10px;"></div>' +
 									'</div>'
 								),
+								/*
+								_htmlBindingsTest (
+									'If state properties are bound to style properties of a node and those style properties already have values specified, then the style properties\' initial values are ignored and are replaced by the values from the state property bindings',
+									{
+										stateProperties:{
+											width:{value:'100%'},
+											height:{value:'100%'}
+										},
+										htmlBindings:{
+											width:'foo:style.width',
+											height:'foo:style.height'
+										}
+									},
+									'<div>' +
+										'<div id="foo" style="width:50%;height:50%;"></div>' +
+									'</div>',
+									'<div id="widget">' +
+										'<div id="widget-foo" style="width:100%;height:100%;"></div>' +
+									'</div>'
+								),
+								*/
+								_htmlBindingsTest (
+									'If a state property is bound to a style property of a node and that node already contains other style properties, those other style properties for which there are no bindings are retained',
+									{
+										stateProperties:{
+											foo:{value:'100%'}
+										},
+										htmlBindings:{
+											foo:'foo:style.width'
+										}
+									},
+									'<div>' +
+										'<div id="foo" style="left:0;top:0;"></div>' +
+									'</div>',
+									'<div id="widget">' +
+										'<div id="widget-foo" style="left:0;top:0;width:100%;"></div>' +
+									'</div>'
+								),
 								{
 									title:'Number type values for state properties are resolved to string values, with the "px" being appended in certain cases',
 									test:[
