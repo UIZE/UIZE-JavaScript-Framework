@@ -23,6 +23,25 @@
 		*DEVELOPERS:* `Chris van Rensburg`
 */
 
+/* TODO:
+	- test various binding types...
+		- @attribute value bindings (@src, @href, @class)
+		- className
+		- readOnly
+
+	- test child tag
+		- class, extraClasses - one or multiple extra classes
+		- name attribute
+		- surplus attributes passed as child state properties
+
+	- test value bindings to form elements
+		- select (not yet supported)
+
+	- combination tests
+		- test multiple different types of bindings to the same node
+		- test a complex mixture of bindings to multiple nodes
+*/
+
 Uize.module ({
 	name:'Uize.Test.Uize.Widget.HtmltCompiler',
 	builder:function () {
@@ -636,14 +655,11 @@ Uize.module ({
 								}
 							]
 						},
-						/*
-							- add tests for style bindings
-						*/
 						{
 							title:'The values of state properties can be bound to various style properties of nodes',
 							test:[
 								_htmlBindingsTest (
-									'A state property can be bound to the width style property of the root node',
+									'A state property can be bound to a style property of the root node',
 									{
 										stateProperties:{
 											foo:{value:'15px'}
@@ -656,18 +672,144 @@ Uize.module ({
 									'<div id="widget" style="width:15px;"></div>'
 								),
 								_htmlBindingsTest (
-									'When a state property with a number type value is bound to a style property that does\'t support pixel units, the "px" suffix is not appended by the binding',
+									'A state property can be bound to a style property of a child node',
 									{
 										stateProperties:{
-											foo:{value:1}
+											foo:{value:'15px'}
 										},
 										htmlBindings:{
-											foo:':style.zIndex'
+											foo:'foo:style.width'
 										}
 									},
-									'<div></div>',
-									'<div id="widget" style="z-index:1;"></div>'
-								)
+									'<div>' +
+										'<div id="foo"></div>' +
+									'</div>',
+									'<div id="widget">' +
+										'<div id="widget-foo" style="width:15px;"></div>' +
+									'</div>'
+								),
+								_htmlBindingsTest (
+									'A state property can be bound to a style property of multiple nodes',
+									{
+										stateProperties:{
+											foo:{value:'15px'}
+										},
+										htmlBindings:{
+											foo:['foo1:style.width','foo2:style.width','foo3:style.width']
+										}
+									},
+									'<div>' +
+										'<div id="foo1"></div>' +
+										'<div id="foo2"></div>' +
+										'<div>' +
+											'<div id="foo3"></div>' +
+										'</div>' +
+									'</div>',
+									'<div id="widget">' +
+										'<div id="widget-foo1" style="width:15px;"></div>' +
+										'<div id="widget-foo2" style="width:15px;"></div>' +
+										'<div>' +
+											'<div id="widget-foo3" style="width:15px;"></div>' +
+										'</div>' +
+									'</div>'
+								),
+								_htmlBindingsTest (
+									'When the name of a style property in a style binding uses the DOM camelCase naming convention, it is resolved to the appropriate hyphenated form for CSS style properties',
+									{
+										stateProperties:{
+											foo:{value:10}
+										},
+										htmlBindings:{
+											foo:'foo:style.borderLeftWidth'
+										}
+									},
+									'<div>' +
+										'<div id="foo"></div>' +
+									'</div>',
+									'<div id="widget">' +
+										'<div id="widget-foo" style="border-left-width:10px;"></div>' +
+									'</div>'
+								),
+								_htmlBindingsTest (
+									'When the name of a style property in a style binding uses the appropriate hyphenated form for CSS style properties, it is used as is',
+									{
+										stateProperties:{
+											foo:{value:10}
+										},
+										htmlBindings:{
+											foo:'foo:style.border-left-width'
+										}
+									},
+									'<div>' +
+										'<div id="foo"></div>' +
+									'</div>',
+									'<div id="widget">' +
+										'<div id="widget-foo" style="border-left-width:10px;"></div>' +
+									'</div>'
+								),
+								{
+									title:'Number type values for state properties are resolved to string values, with the "px" being appended in certain cases',
+									test:[
+										_htmlBindingsTest (
+											'When a state property with a number type value is bound to a style property that supports pixel units, the "px" suffix is appended by the binding',
+											{
+												stateProperties:{
+													foo:{value:100}
+												},
+												htmlBindings:{
+													foo:[
+														':style.width',
+														':style.height',
+														':style.left',
+														':style.top',
+														':style.right',
+														':style.bottom',
+														':style.borderWidth'
+													]
+												}
+											},
+											'<div></div>',
+											'<div id="widget" style="width:100px;height:100px;left:100px;top:100px;right:100px;bottom:100px;border-width:100px;"></div>'
+										),
+										_htmlBindingsTest (
+											'When a state property with a string type value is bound to a style property that supports pixel units, the "px" suffix is not appended by the binding',
+											{
+												stateProperties:{
+													foo:{value:'100%'}
+												},
+												htmlBindings:{
+													foo:[
+														':style.width',
+														':style.height',
+														':style.left',
+														':style.top',
+														':style.right',
+														':style.bottom',
+														':style.borderWidth'
+													]
+												}
+											},
+											'<div></div>',
+											'<div id="widget" style="width:100%;height:100%;left:100%;top:100%;right:100%;bottom:100%;border-width:100%;"></div>'
+										),
+										_htmlBindingsTest (
+											'When a state property with a number type value is bound to a style property that does\'t support pixel units, the "px" suffix is not appended by the binding',
+											{
+												stateProperties:{
+													foo:{value:1}
+												},
+												htmlBindings:{
+													foo:[
+														':style.zIndex',
+														':style.opacity'
+													]
+												}
+											},
+											'<div></div>',
+											'<div id="widget" style="z-index:1;opacity:1;"></div>'
+										)
+									]
+								}
 							]
 						},
 						{
@@ -822,6 +964,23 @@ Uize.module ({
 										'<div id="widget-foo4" style="display:none;"></div>' +
 										'<div id="widget-foo5" style="display:none;"></div>' +
 									'</div>'
+								),
+								_htmlBindingsTest (
+									'A state property can be bound to the display of a node together with other style bindings',
+									{
+										stateProperties:{
+											display:{value:true},
+											width:{value:'80%'},
+											height:{value:'100%'}
+										},
+										htmlBindings:{
+											display:':?',
+											width:':style.width',
+											height:':style.height'
+										}
+									},
+									'<div></div>',
+									'<div id="widget" style="display:block;width:80%;height:100%;"></div>'
 								)
 							]
 						},
@@ -977,6 +1136,23 @@ Uize.module ({
 										'<div id="widget-foo4" style="display:none;"></div>' +
 										'<div id="widget-foo5" style="display:none;"></div>' +
 									'</div>'
+								),
+								_htmlBindingsTest (
+									'A state property can be bound to show a node together with other style bindings',
+									{
+										stateProperties:{
+											show:{value:true},
+											width:{value:'80%'},
+											height:{value:'100%'}
+										},
+										htmlBindings:{
+											show:':show',
+											width:':style.width',
+											height:':style.height'
+										}
+									},
+									'<div></div>',
+									'<div id="widget" style="display:;width:80%;height:100%;"></div>'
 								)
 							]
 						},
@@ -1132,28 +1308,27 @@ Uize.module ({
 										'<div id="widget-foo4" style="display:;"></div>' +
 										'<div id="widget-foo5" style="display:;"></div>' +
 									'</div>'
+								),
+								_htmlBindingsTest (
+									'A state property can be bound to hide a node together with other style bindings',
+									{
+										stateProperties:{
+											hide:{value:true},
+											width:{value:'80%'},
+											height:{value:'100%'}
+										},
+										htmlBindings:{
+											hide:':hide',
+											width:':style.width',
+											height:':style.height'
+										}
+									},
+									'<div></div>',
+									'<div id="widget" style="display:none;width:80%;height:100%;"></div>'
 								)
 							]
 						}
 					]]
-					/*
-						- test various binding types...
-							- hide
-							- @attribute value bindings (@src, @href, @class)
-							- className
-							- readOnly
-						- test child tag
-							- class, extraClasses - one or multiple extra classes
-							- name attribute
-							- surplus attributes passed as child state properties
-
-						- test value bindings to form elements
-							- select (not yet supported)
-
-						- combination tests
-							- test multiple different types of bindings to the same node
-							- test a complex mixture of bindings to multiple nodes
-					*/
 				])
 			]
 		});
