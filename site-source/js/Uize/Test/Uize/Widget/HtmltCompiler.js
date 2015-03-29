@@ -824,11 +824,165 @@ Uize.module ({
 									'</div>'
 								)
 							]
+						},
+						{
+							title:'The values of state properties can be bound to show nodes using the "show" binding type',
+							test:[
+								_htmlBindingsTest (
+									'A state property can be bound to show the root node',
+									{
+										stateProperties:{
+											foo:{value:true}
+										},
+										htmlBindings:{
+											foo:':show'
+										}
+									},
+									'<div></div>',
+									'<div id="widget" style="display:;"></div>'
+								),
+								_htmlBindingsTest (
+									'A state property can be bound to show a child node',
+									{
+										stateProperties:{
+											foo:{value:true}
+										},
+										htmlBindings:{
+											foo:'foo:show'
+										}
+									},
+									'<div>' +
+										'<div id="foo"></div>' +
+									'</div>',
+									'<div id="widget">' +
+										'<div id="widget-foo" style="display:;"></div>' +
+									'</div>'
+								),
+								_htmlBindingsTest (
+									'A state property can be bound to show multiple nodes',
+									{
+										stateProperties:{
+											foo:{value:true}
+										},
+										htmlBindings:{
+											foo:['foo1:show','foo2:show','foo3:show']
+										}
+									},
+									'<div>' +
+										'<div id="foo1"></div>' +
+										'<div id="foo2"></div>' +
+										'<div>' +
+											'<div id="foo3"></div>' +
+										'</div>' +
+									'</div>',
+									'<div id="widget">' +
+										'<div id="widget-foo1" style="display:;"></div>' +
+										'<div id="widget-foo2" style="display:;"></div>' +
+										'<div>' +
+											'<div id="widget-foo3" style="display:;"></div>' +
+										'</div>' +
+									'</div>'
+								),
+								_htmlBindingsTest (
+									'Multiple state properties can be bound to the display of multiple respective nodes',
+									{
+										stateProperties:{
+											foo1:{value:true},
+											foo2:{value:false},
+											foo3:{value:true}
+										},
+										htmlBindings:{
+											foo1:'foo1:show',
+											foo2:'foo2:show',
+											foo3:'foo3:show'
+										}
+									},
+									'<div>' +
+										'<div id="foo1"></div>' +
+										'<div id="foo2"></div>' +
+										'<div>' +
+											'<div id="foo3"></div>' +
+										'</div>' +
+									'</div>',
+									'<div id="widget">' +
+										'<div id="widget-foo1" style="display:;"></div>' +
+										'<div id="widget-foo2" style="display:none;"></div>' +
+										'<div>' +
+											'<div id="widget-foo3" style="display:;"></div>' +
+										'</div>' +
+									'</div>'
+								),
+								_htmlBindingsTest (
+									'When the value of a state property that is bound to show a node is truthy, then the style "display:" will be used for showing the node',
+									{
+										stateProperties:{
+											foo1:{value:true},
+											foo2:{value:1},
+											foo3:{value:'foo'},
+											foo4:{value:[]},
+											foo5:{value:{}}
+										},
+										htmlBindings:{
+											foo1:'foo1:show',
+											foo2:'foo2:show',
+											foo3:'foo3:show',
+											foo4:'foo4:show',
+											foo5:'foo5:show'
+										}
+									},
+									'<div>' +
+										'<div id="foo1"></div>' +
+										'<div id="foo2"></div>' +
+										'<div id="foo3"></div>' +
+										'<div id="foo4"></div>' +
+										'<div id="foo5"></div>' +
+									'</div>',
+									'<div id="widget">' +
+										'<div id="widget-foo1" style="display:;"></div>' +
+										'<div id="widget-foo2" style="display:;"></div>' +
+										'<div id="widget-foo3" style="display:;"></div>' +
+										'<div id="widget-foo4" style="display:;"></div>' +
+										'<div id="widget-foo5" style="display:;"></div>' +
+									'</div>'
+								),
+								_htmlBindingsTest (
+									'When the value of a state property that is bound to show a node is falsy, then the style "display:none" will be used for not showing the node',
+									{
+										stateProperties:{
+											foo1:{value:false},
+											foo2:{value:0},
+											foo3:{value:''},
+											foo4:{value:null},
+											foo5:{value:undefined}
+										},
+										htmlBindings:{
+											foo1:'foo1:show',
+											foo2:'foo2:show',
+											foo3:'foo3:show',
+											foo4:'foo4:show',
+											foo5:'foo5:show'
+										}
+									},
+									'<div>' +
+										'<div id="foo1"></div>' +
+										'<div id="foo2"></div>' +
+										'<div id="foo3"></div>' +
+										'<div id="foo4"></div>' +
+										'<div id="foo5"></div>' +
+									'</div>',
+									'<div id="widget">' +
+										'<div id="widget-foo1" style="display:none;"></div>' +
+										'<div id="widget-foo2" style="display:none;"></div>' +
+										'<div id="widget-foo3" style="display:none;"></div>' +
+										'<div id="widget-foo4" style="display:none;"></div>' +
+										'<div id="widget-foo5" style="display:none;"></div>' +
+									'</div>'
+								)
+							]
 						}
 					]]
 					/*
 						- test various binding types...
-							- show
 							- hide
 							- @attribute value bindings (@src, @href, @class)
 							- className
