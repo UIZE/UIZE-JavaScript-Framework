@@ -635,6 +635,58 @@ Uize.module ({
 									]
 								}
 							]
+						},
+						/*
+							- add tests for style bindings
+						*/
+						{
+							title:'The values of state properties can be bound to various style properties of nodes',
+							test:[
+								_htmlBindingsTest (
+									'A state property can be bound to the width style property of the root node',
+									{
+										stateProperties:{
+											foo:{value:'15px'}
+										},
+										htmlBindings:{
+											foo:':style.width'
+										}
+									},
+									'<div></div>',
+									'<div id="widget" style="width:15px;"></div>'
+								),
+								_htmlBindingsTest (
+									'When a state property with a number type value is bound to a style property that does\'t support pixel units, the "px" suffix is not appended by the binding',
+									{
+										stateProperties:{
+											foo:{value:1}
+										},
+										htmlBindings:{
+											foo:':style.zIndex'
+										}
+									},
+									'<div></div>',
+									'<div id="widget" style="z-index:1;"></div>'
+								)
+							]
+						},
+						{
+							title:'The values of state properties can be bound to the display of nodes using the "?" binding type',
+							test:[
+								_htmlBindingsTest (
+									'A state property can be bound to the display of the root node',
+									{
+										stateProperties:{
+											foo:{value:true}
+										},
+										htmlBindings:{
+											foo:':?'
+										}
+									},
+									'<div></div>',
+									'<div id="widget" style="display:block;"></div>'
+								)
+							]
 						}
 					]]
 					/*
@@ -643,7 +695,6 @@ Uize.module ({
 							- show
 							- hide
 							- @attribute value bindings (@src, @href, @class)
-							- style.*
 							- className
 							- readOnly
 						- test child tag
@@ -653,6 +704,8 @@ Uize.module ({
 
 						- test value bindings to form elements
 							- select (not yet supported)
+
+						- test multiple different types of bindings to the same node
 					*/
 				])
 			]

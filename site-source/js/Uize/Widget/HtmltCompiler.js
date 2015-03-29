@@ -83,6 +83,9 @@ Uize.module ({
 						'_encodeAttributeValue':{
 							_source:'function _encodeAttributeValue (_value) {return Uize.Util.Html.Encode.encode (_value)}',
 							_required:['Uize.Util.Html.Encode']
+						},
+						'_resolveNonStringToPixel':{
+							_source:'function _resolveNonStringToPixel (_value) {return typeof _value == "string" ? _value : +_value + "px"}'
 						}
 					}
 				;
@@ -297,7 +300,13 @@ Uize.module ({
 														: _helperFunctionCall ('_encodeAttributeValue',_bindingPropertyReference)
 												);
 											} else if (_bindingType.slice (0,6) == 'style.') {
-												_addStylePropertyReplacement (_bindingType.slice (6),_bindingPropertyReference);
+												var _styleProperty = _bindingType.slice (6);
+												_addStylePropertyReplacement (
+													_styleProperty,
+													_styleProperty != 'opacity' && _styleProperty != 'zIndex'
+														? _helperFunctionCall ('_resolveNonStringToPixel',_bindingPropertyReference)
+														: _bindingPropertyReference
+												);
 											} else if (_bindingType == 'readOnly') {
 												_addWholeAttributeReplacement (
 													_node,
