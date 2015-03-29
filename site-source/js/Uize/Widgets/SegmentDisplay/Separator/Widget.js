@@ -52,9 +52,7 @@ Uize.module ({
 			stateProperties:{
 				/*** derived properties for HTML bindings ***/
 					colonHeight:{},
-					colonPos:{},
-					colonHeightPx:{derived:'colonHeight: colonHeight + "px"'},
-					colonPosPx:{derived:'colonPos: colonPos + "px"'}
+					colonPos:{}
 			},
 
 			htmlBindings:{
@@ -62,11 +60,11 @@ Uize.module ({
 					'colonTop:style.background',
 					'colonBottom:style.background'
 				],
-				colonHeightPx:[
+				colonHeight:[
 					'colonTop:style.height',
 					'colonBottom:style.height'
 				],
-				colonPosPx:[
+				colonPos:[
 					'colonTop:style.top',
 					'colonBottom:style.bottom'
 				]

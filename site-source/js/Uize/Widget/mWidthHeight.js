@@ -35,16 +35,12 @@ Uize.module ({
 
 				stateProperties:{
 					width:{},
-					height:{},
-
-					/*** derived properties for bindings ***/
-						mWidthHeight_widthResolved:{derived:'width: typeof width == "string" ? width : +width + "px"'},
-						mWidthHeight_heightResolved:{derived:'height: typeof height == "string" ? height : +height + "px"'}
+					height:{}
 				},
 
 				htmlBindings:{
-					mWidthHeight_widthResolved:':style.width',
-					mWidthHeight_heightResolved:':style.height'
+					width:':style.width',
+					height:':style.height'
 				}
 			});
 		};

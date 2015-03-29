@@ -82,13 +82,7 @@ Uize.module ({
 						m._settingSliders = false;
 					},
 					value:'000000'
-				},
-
-				/*** derived properties ***/
-					_sliderHeightPx:{
-						name:'sliderHeightPx',
-						derived:'sliderHeight: sliderHeight + "px"'
-					}
+				}
 			},
 
 			set:{
@@ -110,7 +104,7 @@ Uize.module ({
 			),
 
 			htmlBindings:{
-				sliderHeightPx:[
+				sliderHeight:[
 					'channel0:style.height',
 					'channel1:style.height',
 					'channel2:style.height'

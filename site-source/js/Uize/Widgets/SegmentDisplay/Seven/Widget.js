@@ -58,8 +58,8 @@ Uize.module ({
 		/*** build objects for HTML bindings declaration ***/
 			var
 				_segmentBgStyleHtmlBindings = [],
-				_segmentThicknessPxHtmlBindings = [],
-				_segmentThicknessDiv2PxHtmlBindings = []
+				_segmentThicknessHtmlBindings = [],
+				_segmentThicknessDiv2HtmlBindings = []
 			;
 			Uize.forEach (
 				{A:0,B:1,C:1,D:0,E:1,F:1,G:0},
@@ -70,8 +70,8 @@ Uize.module ({
 						_segmentName + 'EndA:style.border' + (_isVert ? 'Bottom' : 'Right') + 'Color',
 						_segmentName + 'EndB:style.border' + (_isVert ? 'Top' : 'Left') + 'Color'
 					);
-					_segmentThicknessPxHtmlBindings.push (_segmentName + ':style.' + (_isVert ? 'width' : 'height'));
-					_segmentThicknessDiv2PxHtmlBindings.push (
+					_segmentThicknessHtmlBindings.push (_segmentName + ':style.' + (_isVert ? 'width' : 'height'));
+					_segmentThicknessDiv2HtmlBindings.push (
 						_segmentName + 'EndA:style.borderWidth',
 						_segmentName + 'EndB:style.borderWidth'
 					);
@@ -119,65 +119,44 @@ Uize.module ({
 					},
 
 					/*** derived properties for HTML bindings ***/
-						segmentThicknessPx:{
-							derived:'segmentThickness: segmentThickness + "px"'
-						},
-						segmentGapPx:{
-							derived:'segmentGap: segmentGap + "px"'
-						},
 						horzSegmentEndPos:{
 							derived:'segmentGap,segmentAbutMode,segmentThickness: segmentGap - segmentAbutMode * segmentThickness'
 						},
-						horzSegmentEndPosPx:{
-							derived:'horzSegmentEndPos: horzSegmentEndPos + "px"'
-						},
-						horzSegmentBarPosPx:{
-							derived:'horzSegmentEndPos,segmentThickness: horzSegmentEndPos + segmentThickness + "px"'
+						horzSegmentBarPos:{
+							derived:'horzSegmentEndPos,segmentThickness: horzSegmentEndPos + segmentThickness'
 						},
 						vertSegmentTopEndPos:{
 							derived:'segmentGap,segmentStateA,segmentAbutMode,segmentThickness: segmentGap - !segmentStateA * segmentAbutMode * segmentThickness'
 						},
-						vertSegmentTopEndPosPx:{
-							derived:'vertSegmentTopEndPos: vertSegmentTopEndPos + "px"'
-						},
-						vertSegmentTopBarPosPx:{
-							derived:'vertSegmentTopEndPos,segmentThickness: vertSegmentTopEndPos + segmentThickness + "px"'
+						vertSegmentTopBarPos:{
+							derived:'vertSegmentTopEndPos,segmentThickness: vertSegmentTopEndPos + segmentThickness'
 						},
 						vertSegmentMiddleEndPos:{
 							derived:'segmentGap,segmentStateG,segmentAbutMode,segmentThicknessDiv2: segmentGap - segmentThicknessDiv2 - !segmentStateG * segmentAbutMode * segmentThicknessDiv2'
 						},
-						vertSegmentMiddleEndPosPx:{
-							derived:'vertSegmentMiddleEndPos: vertSegmentMiddleEndPos + "px"'
-						},
-						vertSegmentMiddleBarPosPx:{
-							derived:'vertSegmentMiddleEndPos,segmentThickness: vertSegmentMiddleEndPos + segmentThickness + "px"'
+						vertSegmentMiddleBarPos:{
+							derived:'vertSegmentMiddleEndPos,segmentThickness: vertSegmentMiddleEndPos + segmentThickness'
 						},
 						vertSegmentBottomEndPos:{
 							derived:'segmentGap,segmentStateD,segmentAbutMode,segmentThickness: segmentGap - !segmentStateD * segmentAbutMode * segmentThickness'
 						},
-						vertSegmentBottomEndPosPx:{
-							derived:'vertSegmentBottomEndPos: vertSegmentBottomEndPos + "px"'
+						vertSegmentBottomBarPos:{
+							derived:'vertSegmentBottomEndPos,segmentThickness: vertSegmentBottomEndPos + segmentThickness'
 						},
-						vertSegmentBottomBarPosPx:{
-							derived:'vertSegmentBottomEndPos,segmentThickness: vertSegmentBottomEndPos + segmentThickness + "px"'
-						},
-						segmentGTopPx:{
-							derived:'height,segmentThickness: height / 2 - segmentThickness / 2 + "px"'
+						segmentGTop:{
+							derived:'height,segmentThickness: height / 2 - segmentThickness / 2'
 						},
 						segmentThicknessDiv2:{
 							derived:'segmentThickness: segmentThickness / 2'
-						},
-						segmentThicknessDiv2Px:{
-							derived:'segmentThicknessDiv2: segmentThicknessDiv2 + "px"'
 						}
 				}
 			),
 
 			htmlBindings:{
 				segmentBgStyle:_segmentBgStyleHtmlBindings,
-				segmentThicknessPx:_segmentThicknessPxHtmlBindings,
-				segmentGTopPx:'segmentG:style.top',
-				horzSegmentEndPosPx:[
+				segmentThickness:_segmentThicknessHtmlBindings,
+				segmentGTop:'segmentG:style.top',
+				horzSegmentEndPos:[
 					'segmentAEndA:style.left',
 					'segmentAEndB:style.right',
 					'segmentDEndA:style.left',
@@ -185,24 +164,24 @@ Uize.module ({
 					'segmentGEndA:style.left',
 					'segmentGEndB:style.right'
 				],
-				vertSegmentTopEndPosPx:[
+				vertSegmentTopEndPos:[
 					'segmentBEndA:style.top',
 					'segmentFEndA:style.top'
 				],
-				vertSegmentTopBarPosPx:[
+				vertSegmentTopBarPos:[
 					'segmentBBar:style.top',
 					'segmentFBar:style.top'
 				],
-				vertSegmentBottomEndPosPx:[
+				vertSegmentBottomEndPos:[
 					'segmentCEndB:style.bottom',
 					'segmentEEndB:style.bottom'
 				],
-				vertSegmentBottomBarPosPx:[
+				vertSegmentBottomBarPos:[
 					'segmentCBar:style.bottom',
 					'segmentEBar:style.bottom'
 				],
-				segmentThicknessDiv2Px:_segmentThicknessDiv2PxHtmlBindings,
-				horzSegmentBarPosPx:[
+				segmentThicknessDiv2:_segmentThicknessDiv2HtmlBindings,
+				horzSegmentBarPos:[
 					'segmentABar:style.left',
 					'segmentABar:style.right',
 					'segmentDBar:style.left',
@@ -210,13 +189,13 @@ Uize.module ({
 					'segmentGBar:style.left',
 					'segmentGBar:style.right'
 				],
-				vertSegmentMiddleEndPosPx:[
+				vertSegmentMiddleEndPos:[
 					'segmentBEndB:style.bottom',
 					'segmentCEndA:style.top',
 					'segmentEEndA:style.top',
 					'segmentFEndB:style.bottom'
 				],
-				vertSegmentMiddleBarPosPx:[
+				vertSegmentMiddleBarPos:[
 					'segmentBBar:style.bottom',
 					'segmentCBar:style.top',
 					'segmentEBar:style.top',

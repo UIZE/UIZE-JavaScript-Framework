@@ -61,10 +61,10 @@ Uize.module ({
 					var _rowCol0LetterNo = _rowNo * 3;
 
 					_segmentStateProperties ['row' + _rowNo + 'Top'] = {
-						derived:'rowPositions: rowPositions [' + _rowNo + '].pos + "px"'
+						derived:'rowPositions: rowPositions [' + _rowNo + '].pos'
 					};
 					_segmentStateProperties ['row' + _rowNo + 'Height'] = {
-						derived:'rowPositions: rowPositions [' + _rowNo + '].dim + "px"'
+						derived:'rowPositions: rowPositions [' + _rowNo + '].dim'
 					};
 
 					_segmentHtmlBindings ['row' + _rowNo + 'Top'] = Uize.map (
@@ -87,10 +87,10 @@ Uize.module ({
 				_cols,
 				function (_value,_colNo) {
 					_segmentStateProperties ['col' + _colNo + 'Left'] = {
-						derived:'colPositions: colPositions [' + _colNo + '].pos + "px"'
+						derived:'colPositions: colPositions [' + _colNo + '].pos'
 					};
 					_segmentStateProperties ['col' + _colNo + 'Width'] = {
-						derived:'colPositions: colPositions [' + _colNo + '].dim + "px"'
+						derived:'colPositions: colPositions [' + _colNo + '].dim'
 					};
 
 					_segmentHtmlBindings ['col' + _colNo + 'Left'] = Uize.map (
