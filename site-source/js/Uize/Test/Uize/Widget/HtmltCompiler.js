@@ -979,6 +979,161 @@ Uize.module ({
 									'</div>'
 								)
 							]
+						},
+						{
+							title:'The values of state properties can be bound to hide nodes using the "hide" binding type',
+							test:[
+								_htmlBindingsTest (
+									'A state property can be bound to hide the root node',
+									{
+										stateProperties:{
+											foo:{value:true}
+										},
+										htmlBindings:{
+											foo:':hide'
+										}
+									},
+									'<div></div>',
+									'<div id="widget" style="display:none;"></div>'
+								),
+								_htmlBindingsTest (
+									'A state property can be bound to hide a child node',
+									{
+										stateProperties:{
+											foo:{value:true}
+										},
+										htmlBindings:{
+											foo:'foo:hide'
+										}
+									},
+									'<div>' +
+										'<div id="foo"></div>' +
+									'</div>',
+									'<div id="widget">' +
+										'<div id="widget-foo" style="display:none;"></div>' +
+									'</div>'
+								),
+								_htmlBindingsTest (
+									'A state property can be bound to hide multiple nodes',
+									{
+										stateProperties:{
+											foo:{value:true}
+										},
+										htmlBindings:{
+											foo:['foo1:hide','foo2:hide','foo3:hide']
+										}
+									},
+									'<div>' +
+										'<div id="foo1"></div>' +
+										'<div id="foo2"></div>' +
+										'<div>' +
+											'<div id="foo3"></div>' +
+										'</div>' +
+									'</div>',
+									'<div id="widget">' +
+										'<div id="widget-foo1" style="display:none;"></div>' +
+										'<div id="widget-foo2" style="display:none;"></div>' +
+										'<div>' +
+											'<div id="widget-foo3" style="display:none;"></div>' +
+										'</div>' +
+									'</div>'
+								),
+								_htmlBindingsTest (
+									'Multiple state properties can be bound to the display of multiple respective nodes',
+									{
+										stateProperties:{
+											foo1:{value:true},
+											foo2:{value:false},
+											foo3:{value:true}
+										},
+										htmlBindings:{
+											foo1:'foo1:hide',
+											foo2:'foo2:hide',
+											foo3:'foo3:hide'
+										}
+									},
+									'<div>' +
+										'<div id="foo1"></div>' +
+										'<div id="foo2"></div>' +
+										'<div>' +
+											'<div id="foo3"></div>' +
+										'</div>' +
+									'</div>',
+									'<div id="widget">' +
+										'<div id="widget-foo1" style="display:none;"></div>' +
+										'<div id="widget-foo2" style="display:;"></div>' +
+										'<div>' +
+											'<div id="widget-foo3" style="display:none;"></div>' +
+										'</div>' +
+									'</div>'
+								),
+								_htmlBindingsTest (
+									'When the value of a state property that is bound to hide a node is truthy, then the style "display:none" will be used for hideing the node',
+									{
+										stateProperties:{
+											foo1:{value:true},
+											foo2:{value:1},
+											foo3:{value:'foo'},
+											foo4:{value:[]},
+											foo5:{value:{}}
+										},
+										htmlBindings:{
+											foo1:'foo1:hide',
+											foo2:'foo2:hide',
+											foo3:'foo3:hide',
+											foo4:'foo4:hide',
+											foo5:'foo5:hide'
+										}
+									},
+									'<div>' +
+										'<div id="foo1"></div>' +
+										'<div id="foo2"></div>' +
+										'<div id="foo3"></div>' +
+										'<div id="foo4"></div>' +
+										'<div id="foo5"></div>' +
+									'</div>',
+									'<div id="widget">' +
+										'<div id="widget-foo1" style="display:none;"></div>' +
+										'<div id="widget-foo2" style="display:none;"></div>' +
+										'<div id="widget-foo3" style="display:none;"></div>' +
+										'<div id="widget-foo4" style="display:none;"></div>' +
+										'<div id="widget-foo5" style="display:none;"></div>' +
+									'</div>'
+								),
+								_htmlBindingsTest (
+									'When the value of a state property that is bound to hide a node is falsy, then the style "display:" will be used for not hideing the node',
+									{
+										stateProperties:{
+											foo1:{value:false},
+											foo2:{value:0},
+											foo3:{value:''},
+											foo4:{value:null},
+											foo5:{value:undefined}
+										},
+										htmlBindings:{
+											foo1:'foo1:hide',
+											foo2:'foo2:hide',
+											foo3:'foo3:hide',
+											foo4:'foo4:hide',
+											foo5:'foo5:hide'
+										}
+									},
+									'<div>' +
+										'<div id="foo1"></div>' +
+										'<div id="foo2"></div>' +
+										'<div id="foo3"></div>' +
+										'<div id="foo4"></div>' +
+										'<div id="foo5"></div>' +
+									'</div>',
+									'<div id="widget">' +
+										'<div id="widget-foo1" style="display:;"></div>' +
+										'<div id="widget-foo2" style="display:;"></div>' +
+										'<div id="widget-foo3" style="display:;"></div>' +
+										'<div id="widget-foo4" style="display:;"></div>' +
+										'<div id="widget-foo5" style="display:;"></div>' +
+									'</div>'
+								)
+							]
 						}
 					]]
 					/*
