@@ -25,7 +25,6 @@
 
 /* TODO:
 	- test various binding types...
-		- @attribute value bindings (@src, @href, @class)
 		- className
 		- readOnly
 
@@ -333,6 +332,138 @@ Uize.module ({
 										'<div id="widget-foo2" class="Widget-foo2">' +
 											'<div id="foo2" class="foo2"><span id="widget-foo2"><b>bar</b></span></div>' +
 										'</div>' +
+									'</div>'
+								)
+							]
+						},
+						{
+							title:'The values of state properties can be bound to various attributes of nodes',
+							test:[
+								_htmlBindingsTest (
+									'A state property can be bound to an attribute of the root node',
+									{
+										stateProperties:{
+											linkHref:{value:'http://www.uize.com'}
+										},
+										htmlBindings:{
+											linkHref:':@href'
+										}
+									},
+									'<a>uize.com</a>',
+									'<a id="widget" href="http://www.uize.com">uize.com</a>'
+								),
+								_htmlBindingsTest (
+									'A state property can be bound to an attribute of a child node',
+									{
+										stateProperties:{
+											linkHref:{value:'http://www.uize.com'}
+										},
+										htmlBindings:{
+											linkHref:'foo:@href'
+										}
+									},
+									'<div>' +
+										'<a id="foo">uize.com</a>' +
+									'</div>',
+									'<div id="widget">' +
+										'<a id="widget-foo" href="http://www.uize.com">uize.com</a>' +
+									'</div>'
+								),
+								_htmlBindingsTest (
+									'A state property can be bound to an attribute of multiple nodes',
+									{
+										stateProperties:{
+											linkHref:{value:'http://www.uize.com'}
+										},
+										htmlBindings:{
+											linkHref:['foo1:@href','foo2:@href','foo3:@href']
+										}
+									},
+									'<div>' +
+										'<a id="foo1">uize.com</a>' +
+										'<a id="foo2">uize.com</a>' +
+										'<div>' +
+											'<a id="foo3">uize.com</a>' +
+										'</div>' +
+									'</div>',
+									'<div id="widget">' +
+										'<a id="widget-foo1" href="http://www.uize.com">uize.com</a>' +
+										'<a id="widget-foo2" href="http://www.uize.com">uize.com</a>' +
+										'<div>' +
+											'<a id="widget-foo3" href="http://www.uize.com">uize.com</a>' +
+										'</div>' +
+									'</div>'
+								),
+								_htmlBindingsTest (
+									'Multiple state properties can be bound to multiple different attributes of the same node',
+									{
+										stateProperties:{
+											linkHref:{value:'http://www.uize.com'},
+											linkTitle:{value:'The UIZE Web site'},
+											linkTarget:{value:'_blank'}
+										},
+										htmlBindings:{
+											linkHref:'foo:@href',
+											linkTitle:'foo:@title',
+											linkTarget:'foo:@target'
+										}
+									},
+									'<div>' +
+										'<a id="foo">uize.com</a>' +
+									'</div>',
+									'<div id="widget">' +
+										'<a id="widget-foo" href="http://www.uize.com" title="The UIZE Web site" target="_blank">uize.com</a>' +
+									'</div>'
+								),
+								_htmlBindingsTest (
+									'If a state property is bound to an attribute of a node and that attribute already has a value specified, then the attribute\'s initial value is ignored and is replaced by the value from the state property binding',
+									{
+										stateProperties:{
+											linkHref:{value:'http://www.uize.com'}
+										},
+										htmlBindings:{
+											linkHref:'foo:@href',
+										}
+									},
+									'<div>' +
+										'<a id="foo" href="http://www.default.com">uize.com</a>' +
+									'</div>',
+									'<div id="widget">' +
+										'<a id="widget-foo" href="http://www.uize.com">uize.com</a>' +
+									'</div>'
+								),
+								_htmlBindingsTest (
+									'If a state property is bound to an attribute of a node and that node already contains other attributes, those other attributes for which there are no bindings are retained',
+									{
+										stateProperties:{
+											linkHref:{value:'http://www.uize.com'}
+										},
+										htmlBindings:{
+											linkHref:'foo:@href',
+										}
+									},
+									'<div>' +
+										'<a id="foo" title="The UIZE Web site" target="_blank">uize.com</a>' +
+									'</div>',
+									'<div id="widget">' +
+										'<a id="widget-foo" title="The UIZE Web site" target="_blank" href="http://www.uize.com">uize.com</a>' +
+									'</div>'
+								),
+								_htmlBindingsTest (
+									'The value of a state property is HTML encoded when it is bound to an attribute of a node',
+									{
+										stateProperties:{
+											linkTitle:{value:'The "<UIZE>" Web site'}
+										},
+										htmlBindings:{
+											linkTitle:'foo:@title',
+										}
+									},
+									'<div>' +
+										'<a id="foo" href="http://www.uize.com">uize.com</a>' +
+									'</div>',
+									'<div id="widget">' +
+										'<a id="widget-foo" href="http://www.uize.com" title="The &quot;&lt;UIZE&gt;&quot; Web site">uize.com</a>' +
 									'</div>'
 								)
 							]
@@ -711,6 +842,29 @@ Uize.module ({
 										'<div>' +
 											'<div id="widget-foo3" style="width:15px;"></div>' +
 										'</div>' +
+									'</div>'
+								),
+								_htmlBindingsTest (
+									'Multiple state properties can be bound to multiple different style properties of the same node',
+									{
+										stateProperties:{
+											left:{value:'5px'},
+											top:{value:'6px'},
+											right:{value:'7px'},
+											bottom:{value:'8px'}
+										},
+										htmlBindings:{
+											left:'foo:style.left',
+											top:'foo:style.top',
+											right:'foo:style.right',
+											bottom:'foo:style.bottom'
+										}
+									},
+									'<div>' +
+										'<div id="foo"></div>' +
+									'</div>',
+									'<div id="widget">' +
+										'<div id="widget-foo" style="left:5px;top:6px;right:7px;bottom:8px;"></div>' +
 									'</div>'
 								),
 								_htmlBindingsTest (
