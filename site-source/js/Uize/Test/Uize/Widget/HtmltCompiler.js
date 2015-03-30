@@ -25,7 +25,6 @@
 
 /* TODO:
 	- test various binding types...
-		- className
 		- readOnly
 
 	- test child tag
@@ -1519,7 +1518,40 @@ Uize.module ({
 									'<div id="widget" style="display:none;width:80%;height:100%;"></div>'
 								)
 							]
-						}
+						},
+						_htmlBindingsTest (
+							'The className binding type is remapped to the "@class" binding type (i.e. a binding to the class attribute)',
+							{
+								stateProperties:{
+									class1:{value:'enabled'},
+									class2:{value:'selected'}
+								},
+								htmlBindings:{
+									class1:[
+										':className',
+										'foo1:className'
+									],
+									class2:[
+										'foo2:className',
+										'foo3:className'
+									]
+								}
+							},
+							'<div>' +
+								'<div id="foo1"></div>' +
+								'<div id="foo2"></div>' +
+								'<div>' +
+									'<div id="foo3"></div>' +
+								'</div>' +
+							'</div>',
+							'<div id="widget" class="enabled">' +
+								'<div id="widget-foo1" class="enabled"></div>' +
+								'<div id="widget-foo2" class="selected"></div>' +
+								'<div>' +
+									'<div id="widget-foo3" class="selected"></div>' +
+								'</div>' +
+							'</div>'
+						)
 					]]
 				])
 			]

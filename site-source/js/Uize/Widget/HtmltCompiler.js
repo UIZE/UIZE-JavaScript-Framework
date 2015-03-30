@@ -210,6 +210,24 @@ Uize.module ({
 								_idAttribute = _findAttribute (_node,'id'),
 								_nodeId = _idAttribute && _idAttribute.value.value
 							;
+							if (_nodeId !== '') {
+								/* NOTE:
+									Process existing class attribute value before processing bindings, because there may be bindings to the class attribute, and we don't want to try to namespace the replacer token that would be set for the class attribute when there is a binding to it.
+								*/
+								var _classAttribute = _findAttribute (_node,'class');
+								if (_classAttribute) {
+									var _classTokens = [];
+									Uize.forEach (
+										_splitCssClasses (_classAttribute.value.value),
+										function (_cssClass) {
+											_classTokens.push (
+												_getReplacementTokenByValue (_classNamespacerExpression (_cssClass))
+											);
+										}
+									);
+									_classAttribute.value.value = _classTokens.join (' ');
+								}
+							}
 							if (_idAttribute) {
 								_addAttributeValueReplacement (
 									_idAttribute,
@@ -332,21 +350,6 @@ Uize.module ({
 											_styleExpressionParts.join (' + ')
 										);
 									}
-								}
-							}
-							if (_nodeId !== '') {
-								var _classAttribute = _findAttribute (_node,'class');
-								if (_classAttribute) {
-									var _classTokens = [];
-									Uize.forEach (
-										_splitCssClasses (_classAttribute.value.value),
-										function (_cssClass) {
-											_classTokens.push (
-												_getReplacementTokenByValue (_classNamespacerExpression (_cssClass))
-											);
-										}
-									);
-									_classAttribute.value.value = _classTokens.join (' ');
 								}
 							}
 						}
