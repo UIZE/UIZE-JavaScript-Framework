@@ -210,7 +210,8 @@ Uize.module ({
 								_idAttribute = _findAttribute (_node,'id'),
 								_nodeId = _idAttribute && _idAttribute.value.value
 							;
-							if (_nodeId !== '') {
+
+							/*** convert CSS classes into namespacer expressions ***/
 								/* NOTE:
 									Process existing class attribute value before processing bindings, because there may be bindings to the class attribute, and we don't want to try to namespace the replacer token that would be set for the class attribute when there is a binding to it.
 								*/
@@ -227,7 +228,7 @@ Uize.module ({
 									);
 									_classAttribute.value.value = _classTokens.join (' ');
 								}
-							}
+
 							if (_idAttribute) {
 								_addAttributeValueReplacement (
 									_idAttribute,
