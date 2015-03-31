@@ -24,9 +24,6 @@
 */
 
 /* TODO:
-	- test various binding types...
-		- readOnly
-
 	- test child tag
 		- class, extraClasses - one or multiple extra classes
 		- name attribute
@@ -1551,7 +1548,162 @@ Uize.module ({
 									'<div id="widget-foo3" class="selected"></div>' +
 								'</div>' +
 							'</div>'
-						)
+						),
+						{
+							title:'A special "readOnly" binding type is supported',
+							test:[
+								_htmlBindingsTest (
+									'A "readOnly" type binding can be applied to the root node',
+									{
+										stateProperties:{
+											foo:{value:true}
+										},
+										htmlBindings:{
+											foo:':readOnly'
+										}
+									},
+									'<div></div>',
+									'<div id="widget" readonly="readonly"></div>'
+								),
+								_htmlBindingsTest (
+									'A "readOnly" type binding can be applied to a child node',
+									{
+										stateProperties:{
+											foo:{value:true}
+										},
+										htmlBindings:{
+											foo:'foo:readOnly'
+										}
+									},
+									'<div>' +
+										'<div id="foo"></div>' +
+									'</div>',
+									'<div id="widget">' +
+										'<div id="widget-foo" readonly="readonly"></div>' +
+									'</div>'
+								),
+								_htmlBindingsTest (
+									'A "readOnly" type binding can be applied to multiple nodes',
+									{
+										stateProperties:{
+											foo:{value:true}
+										},
+										htmlBindings:{
+											foo:['foo1:readOnly','foo2:readOnly','foo3:readOnly']
+										}
+									},
+									'<div>' +
+										'<div id="foo1"></div>' +
+										'<div id="foo2"></div>' +
+										'<div>' +
+											'<div id="foo3"></div>' +
+										'</div>' +
+									'</div>',
+									'<div id="widget">' +
+										'<div id="widget-foo1" readonly="readonly"></div>' +
+										'<div id="widget-foo2" readonly="readonly"></div>' +
+										'<div>' +
+											'<div id="widget-foo3" readonly="readonly"></div>' +
+										'</div>' +
+									'</div>'
+								),
+								_htmlBindingsTest (
+									'Multiple "readOnly" type bindings can be applied to multiple respective nodes',
+									{
+										stateProperties:{
+											foo1:{value:true},
+											foo2:{value:false},
+											foo3:{value:true}
+										},
+										htmlBindings:{
+											foo1:'foo1:readOnly',
+											foo2:'foo2:readOnly',
+											foo3:'foo3:readOnly'
+										}
+									},
+									'<div>' +
+										'<div id="foo1"></div>' +
+										'<div id="foo2"></div>' +
+										'<div>' +
+											'<div id="foo3"></div>' +
+										'</div>' +
+									'</div>',
+									'<div id="widget">' +
+										'<div id="widget-foo1" readonly="readonly"></div>' +
+										'<div id="widget-foo2" ></div>' +
+										'<div>' +
+											'<div id="widget-foo3" readonly="readonly"></div>' +
+										'</div>' +
+									'</div>'
+								),
+								_htmlBindingsTest (
+									'When the value of a state property that is bound to a node using a "readOnly" type binding is truthy, then the "readonly" attribute is added to the node',
+									{
+										stateProperties:{
+											foo1:{value:true},
+											foo2:{value:1},
+											foo3:{value:'foo'},
+											foo4:{value:[]},
+											foo5:{value:{}}
+										},
+										htmlBindings:{
+											foo1:'foo1:readOnly',
+											foo2:'foo2:readOnly',
+											foo3:'foo3:readOnly',
+											foo4:'foo4:readOnly',
+											foo5:'foo5:readOnly'
+										}
+									},
+									'<div>' +
+										'<div id="foo1"></div>' +
+										'<div id="foo2"></div>' +
+										'<div id="foo3"></div>' +
+										'<div id="foo4"></div>' +
+										'<div id="foo5"></div>' +
+									'</div>',
+									'<div id="widget">' +
+										'<div id="widget-foo1" readonly="readonly"></div>' +
+										'<div id="widget-foo2" readonly="readonly"></div>' +
+										'<div id="widget-foo3" readonly="readonly"></div>' +
+										'<div id="widget-foo4" readonly="readonly"></div>' +
+										'<div id="widget-foo5" readonly="readonly"></div>' +
+									'</div>'
+								),
+								_htmlBindingsTest (
+									'When the value of a state property that is bound to a node using a "readOnly" type binding is falsy, then the "readonly" attribute is not added to the node',
+									{
+										stateProperties:{
+											foo1:{value:false},
+											foo2:{value:0},
+											foo3:{value:''},
+											foo4:{value:null},
+											foo5:{value:undefined}
+										},
+										htmlBindings:{
+											foo1:'foo1:readOnly',
+											foo2:'foo2:readOnly',
+											foo3:'foo3:readOnly',
+											foo4:'foo4:readOnly',
+											foo5:'foo5:readOnly'
+										}
+									},
+									'<div>' +
+										'<div id="foo1"></div>' +
+										'<div id="foo2"></div>' +
+										'<div id="foo3"></div>' +
+										'<div id="foo4"></div>' +
+										'<div id="foo5"></div>' +
+									'</div>',
+									'<div id="widget">' +
+										'<div id="widget-foo1" ></div>' +
+										'<div id="widget-foo2" ></div>' +
+										'<div id="widget-foo3" ></div>' +
+										'<div id="widget-foo4" ></div>' +
+										'<div id="widget-foo5" ></div>' +
+									'</div>'
+								)
+							]
+						}
 					]]
 				])
 			]
