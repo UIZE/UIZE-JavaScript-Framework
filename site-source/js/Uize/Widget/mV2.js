@@ -55,46 +55,6 @@ Uize.module ({
 					_Uize_Widget.mLoc
 				],
 
-				instanceMethods:{
-					childHtml:function (_properties) {
-						var
-							m = this,
-							_childName =
-								_properties.name ||
-								('generatedChildName' + (m.mV2_generatedChildNames = (m.mV2_generatedChildNames || 0) + 1)),
-							_widgetClass = _Uize.getModuleByName (_properties.widgetClass),
-							_child = m.children [_childName],
-							_html = ''
-						;
-						if (_child || _widgetClass) {
-							_properties = _Uize.copy (_properties);
-							delete _properties.name;
-							delete _properties.widgetClass;
-							_child
-								? _child.set (_properties)
-								: (_child = m.addChild (_childName,_widgetClass,_properties))
-							;
-							_html = _child.get ('built')
-								? _child.getHtml ()
-								: '<div id="' + m.nodeId (_childName) + '"></div>'
-							;
-						}
-						return _html;
-						/*?
-							Instance Methods
-								childHtml
-									Returns the HTML for a child widget that can then be inserted into the HTML for the widget.
-
-									SYNTAX
-									......................................................
-									childHtml = myInstance.childHtml (childPropertiesOBJ);
-									......................................................
-
-									The =childHtml= method is intended primarily for use within the HTML generator (usually a JST template) for a widget.
-						*/
-					}
-				},
-
 				treeInheritedStateProperties:{
 					size:{value:'medium'}
 				},
