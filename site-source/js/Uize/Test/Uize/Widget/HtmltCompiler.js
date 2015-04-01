@@ -25,9 +25,8 @@
 
 /* TODO:
 	- test child tag
+		- When the value of the name attribute in a child tag does not correspond to the name of an existing child widget, then no HTML content is inserted for the child
 		- class, extraClasses - one or multiple extra classes
-		- name attribute
-		- surplus attributes passed as child state properties
 
 	- test value bindings to form elements
 		- select (not yet supported)
@@ -1702,6 +1701,170 @@ Uize.module ({
 										'<div id="widget-foo5" ></div>' +
 									'</div>'
 								)
+							]
+						},
+						{
+							title:'HTML for child widgets can be inserted using the special "child" tag',
+							test:[
+								{
+									title:'HTML for a child widget can be inserted using the "child" tag',
+									test:function () {
+										var
+											_ChildWidgetClass = Uize.Widget.subclass ({
+												mixins:Uize.Widget.mHtmlBindings,
+												instanceMethods:{
+													cssClass:function (_class) {return 'ChildWidget-' + _class}
+												}
+											}),
+											_WidgetClass = Uize.Widget.subclass ({
+												mixins:Uize.Widget.mHtmlBindings,
+												instanceMethods:{
+													cssClass:function (_class) {return 'Widget-' + _class}
+												},
+												omegastructor:function () {
+													this.addChild ('foo',_ChildWidgetClass);
+												}
+											}),
+											_template = Uize.Widget.HtmltCompiler.compile (
+												'<div>' +
+													'<child name="foo"/>' +
+												'</div>',
+												{widgetClass:_WidgetClass}
+											)
+										;
+										_ChildWidgetClass.set ({
+											html:{
+												process:Uize.Widget.HtmltCompiler.compile (
+													'<div></div>',
+													{widgetClass:_ChildWidgetClass}
+												)
+											}
+										});
+										var _widgetInstance = _WidgetClass ({idPrefix:'widget'});
+										return this.expect (
+											'<div id="widget">' +
+												'<div id="widget_foo"></div>' +
+											'</div>',
+											_template.call (_widgetInstance,_widgetInstance.get ())
+										);
+									}
+								},
+								{
+									title:'When inserting HTML for a child widget using the "child" tag, values for the state properties of the child widget can be specified in attributes of the child tag that are named the same as the state properties',
+									test:function () {
+										var
+											_ChildWidgetClass = Uize.Widget.subclass ({
+												mixins:Uize.Widget.mHtmlBindings,
+												instanceMethods:{
+													cssClass:function (_class) {return 'ChildWidget-' + _class}
+												},
+												stateProperties:{
+													ptop1:{},
+													prop2:{}
+												},
+												htmlBindings:{
+													prop1:':@title',
+													prop2:':value'
+												}
+											}),
+											_WidgetClass = Uize.Widget.subclass ({
+												mixins:Uize.Widget.mHtmlBindings,
+												instanceMethods:{
+													cssClass:function (_class) {return 'Widget-' + _class}
+												},
+												omegastructor:function () {
+													this.addChild ('foo',_ChildWidgetClass);
+												}
+											}),
+											_template = Uize.Widget.HtmltCompiler.compile (
+												'<div>' +
+													'<child name="foo" prop1="fooProp1" prop2="fooProp2"/>' +
+												'</div>',
+												{widgetClass:_WidgetClass}
+											)
+										;
+										_ChildWidgetClass.set ({
+											html:{
+												process:Uize.Widget.HtmltCompiler.compile (
+													'<div></div>',
+													{widgetClass:_ChildWidgetClass}
+												)
+											}
+										});
+										var _widgetInstance = _WidgetClass ({idPrefix:'widget'});
+										return this.expect (
+											'<div id="widget">' +
+												'<div id="widget_foo" title="fooProp1">fooProp2</div>' +
+											'</div>',
+											_template.call (_widgetInstance,_widgetInstance.get ())
+										);
+									}
+								},
+								{
+									title:'HTML for multiple child widget instances can be inserted in different places in the template, using multiple "child" tags',
+									test:function () {
+										var
+											_ChildWidgetClass = Uize.Widget.subclass ({
+												mixins:Uize.Widget.mHtmlBindings,
+												instanceMethods:{
+													cssClass:function (_class) {return 'ChildWidget-' + _class}
+												},
+												stateProperties:{
+													ptop1:{},
+													prop2:{}
+												},
+												htmlBindings:{
+													prop1:':@title',
+													prop2:':value'
+												}
+											}),
+											_WidgetClass = Uize.Widget.subclass ({
+												mixins:Uize.Widget.mHtmlBindings,
+												instanceMethods:{
+													cssClass:function (_class) {return 'Widget-' + _class}
+												},
+												omegastructor:function () {
+													this.addChild ('foo',_ChildWidgetClass);
+													this.addChild ('bar',_ChildWidgetClass);
+													this.addChild ('baz',_ChildWidgetClass);
+												}
+											}),
+											_template = Uize.Widget.HtmltCompiler.compile (
+												'<div>' +
+													'<child name="foo" prop1="fooProp1" prop2="fooProp2"/>' +
+													'<div>' +
+														'<child name="bar" prop1="barProp1" prop2="barProp2"/>' +
+														'<div>' +
+															'<child name="baz" prop1="bazProp1" prop2="bazProp2"/>' +
+														'</div>' +
+													'</div>' +
+												'</div>',
+												{widgetClass:_WidgetClass}
+											)
+										;
+										_ChildWidgetClass.set ({
+											html:{
+												process:Uize.Widget.HtmltCompiler.compile (
+													'<div></div>',
+													{widgetClass:_ChildWidgetClass}
+												)
+											}
+										});
+										var _widgetInstance = _WidgetClass ({idPrefix:'widget'});
+										return this.expect (
+											'<div id="widget">' +
+												'<div id="widget_foo" title="fooProp1">fooProp2</div>' +
+												'<div>' +
+													'<div id="widget_bar" title="barProp1">barProp2</div>' +
+													'<div>' +
+														'<div id="widget_baz" title="bazProp1">bazProp2</div>' +
+													'</div>' +
+												'</div>' +
+											'</div>',
+											_template.call (_widgetInstance,_widgetInstance.get ())
+										);
+									}
+								}
 							]
 						}
 					]]
