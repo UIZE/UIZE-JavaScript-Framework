@@ -17,6 +17,71 @@ Localization
 			- they are defaulted using a cascade of fallback languages' values, which may include the primary language (e.g. fr-CA -> fr-FR -> fr-CH -> en-US)
 			- they are optionally wrapped with an indicator that they have been defaulted
 
+	System for Discouraging Concatenation
+		Develop an approach that discourages developers from concatenating resource strings together.
+
+		At the very least
+
+		- make it hard / uncomfortable to perform concatenations (force the developer to jump through some hoops)
+		- make it easy to scan for concatenations using static analysis
+		- produce warnings or errors at runtime when concatenations are performed in lazy ways
+
+		The basic principle of the proposed approach is that the binding logic that displays text to the user by binding data to the UI requires that the strings be "blessed" by localization code.
+
+		Resource strings, as obtained from the resource files, are "blessed".
+
+			Represented as functions, blessing the resource strings would involve assigning a special property on the functions that the UI binding code would check for.
+
+		Resource strings cannot be programmatically concatenated
+			This is accomplished by making the strings functions, so that concatenating the functions would invoke the toString implicit method to serialize the functions and it would be obvious immediately to the developer that they can't do that.
+
+			Similarly, attempting to call String methods on the resource strings would fail. The only way to fool the system would be to call the functions, concatenated the results, and then wrap the result in a function that returns that result and is blessed by assigning the special property on the function. This is something that would be easy to scan for in static analysis of the code, so it would be easy to audit the code for cheats.
+
+		Compile-to-objects Approach
+			When the resource strings are compiled, they are compiled to objects that implement the valueOf and toString methods in such a way as to throw an error when invoked - this is to discourage simple use of resource strings in expressions like concatenations.
+
+			In order to use a resource string in an expression, the developer would have to call a specially named method on the resource string, and such instances in the code would be easy to detect for during static analysis of the code. This makes it much easier to audit the code in order to review cases where resource strings are being used in ways that are recommended against.
+
+			EXAMPLE
+			....................................................................................
+			var resourceStringsInExpressionsBehavior = 'error'; // 'error' | 'warning' | ''
+
+			function ResourceString (value) {
+				this.value = value;
+			}
+
+			ResourceString.prototype.valueOf = ResourceString.prototype.toString = function () {
+				if (resourceStringsInExpressionsBehavior == 'error') {
+					throw new Error ('Resource strings must not be used directly in expressions.');
+				} else {
+					if (resourceStringsInExpressionsBehavior == 'warning') {
+						console.warn ('Resource strings must not be used directly in expressions.');
+					}
+					return this.value;
+				}
+			};
+
+			ResourceString.prototype.resolveResourceString = function () {
+				return this.value;
+			};
+
+			var
+				stringA = new ResourceString ('This is a '),
+				stringB = new ResourceString ('resource string')
+			;
+
+			stringA + stringB;
+			....................................................................................
+
+			Implications
+				There are two ways that a developer can use a resource string...
+
+				- they can pass a reference to the resource string to a method that will process the resource string by calling the appropriate method on the string object
+				- they can call the appropriate method on the string object themselves in order to resolve it
+
+				Generally, the developer should not often need to explicitly resolve resource strings themselves, since this should be centralized in the framework's binding mechanism.
+
+
 Eliminate All Extension Modules
 	Eliminate all extension modules and replace them with either helper objects containing purely static methods or mixin modules.
 
