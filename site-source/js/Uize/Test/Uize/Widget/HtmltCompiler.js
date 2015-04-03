@@ -24,10 +24,6 @@
 */
 
 /* TODO:
-	- test child tag
-		- When the value of the name attribute in a child tag does not correspond to the name of an existing child widget, then no HTML content is inserted for the child
-		- class, extraClasses - one or multiple extra classes
-
 	- test value bindings to form elements
 		- select (not yet supported)
 
@@ -1726,7 +1722,7 @@ Uize.module ({
 												}
 											}),
 											_template = Uize.Widget.HtmltCompiler.compile (
-												'<div>' +
+												'<div class="small">' +
 													'<child name="foo"/>' +
 												'</div>',
 												{widgetClass:_WidgetClass}
@@ -1735,16 +1731,40 @@ Uize.module ({
 										_ChildWidgetClass.set ({
 											html:{
 												process:Uize.Widget.HtmltCompiler.compile (
-													'<div></div>',
+													'<div class="small"></div>',
 													{widgetClass:_ChildWidgetClass}
 												)
 											}
 										});
 										var _widgetInstance = _WidgetClass ({idPrefix:'widget'});
 										return this.expect (
-											'<div id="widget">' +
-												'<div id="widget_foo"></div>' +
+											'<div class="Widget-small" id="widget">' +
+												'<div class="ChildWidget-small" id="widget_foo"></div>' +
 											'</div>',
+											_template.call (_widgetInstance,_widgetInstance.get ())
+										);
+									}
+								},
+								{
+									title:'When the value of the "name" attribute in a "child" tag does not correspond to the name of an existing child widget, then no HTML content is inserted for the child',
+									test:function () {
+										var
+											_WidgetClass = Uize.Widget.subclass ({
+												mixins:Uize.Widget.mHtmlBindings,
+												instanceMethods:{
+													cssClass:function (_class) {return 'Widget-' + _class}
+												}
+											}),
+											_template = Uize.Widget.HtmltCompiler.compile (
+												'<div class="small">' +
+													'<child name="foo"/>' +
+												'</div>',
+												{widgetClass:_WidgetClass}
+											),
+											_widgetInstance = _WidgetClass ({idPrefix:'widget'})
+										;
+										return this.expect (
+											'<div class="Widget-small" id="widget"></div>',
 											_template.call (_widgetInstance,_widgetInstance.get ())
 										);
 									}
@@ -1777,8 +1797,59 @@ Uize.module ({
 												}
 											}),
 											_template = Uize.Widget.HtmltCompiler.compile (
-												'<div>' +
+												'<div class="small">' +
 													'<child name="foo" prop1="fooProp1" prop2="fooProp2"/>' +
+												'</div>',
+												{widgetClass:_WidgetClass}
+											)
+										;
+										_ChildWidgetClass.set ({
+											html:{
+												process:Uize.Widget.HtmltCompiler.compile (
+													'<div class="small"></div>',
+													{widgetClass:_ChildWidgetClass}
+												)
+											}
+										});
+										var _widgetInstance = _WidgetClass ({idPrefix:'widget'});
+										return this.expect (
+											'<div class="Widget-small" id="widget">' +
+												'<div class="ChildWidget-small" id="widget_foo" title="fooProp1">fooProp2</div>' +
+											'</div>',
+											_template.call (_widgetInstance,_widgetInstance.get ())
+										);
+									}
+								},
+								{
+									title:'When a "child" tag contains a "class" or "extraClasses" attribute, the value of this attribute is split into separate class namespacer expressions (namespaced to the parent widget) and the concatenation of these is passed as the value of the "extraClasses" state property of the child widget',
+									test:function () {
+										var
+											_ChildWidgetClass = Uize.Widget.subclass ({
+												mixins:Uize.Widget.mHtmlBindings,
+												instanceMethods:{
+													cssClass:function (_class) {return 'ChildWidget-' + _class}
+												},
+												stateProperties:{
+													extraClasses:{value:''}
+												},
+												htmlBindings:{
+													extraClasses:':@class'
+												}
+											}),
+											_WidgetClass = Uize.Widget.subclass ({
+												mixins:Uize.Widget.mHtmlBindings,
+												instanceMethods:{
+													cssClass:function (_class) {return 'Widget-' + _class}
+												},
+												omegastructor:function () {
+													this.addChild ('foo',_ChildWidgetClass);
+													this.addChild ('bar',_ChildWidgetClass);
+												}
+											}),
+											_template = Uize.Widget.HtmltCompiler.compile (
+												'<div class="small">' +
+													'<child name="foo" class="foo bar baz qux"/>' +
+													'<child name="bar" extraClasses="foo bar baz qux"/>' +
 												'</div>',
 												{widgetClass:_WidgetClass}
 											)
@@ -1793,8 +1864,9 @@ Uize.module ({
 										});
 										var _widgetInstance = _WidgetClass ({idPrefix:'widget'});
 										return this.expect (
-											'<div id="widget">' +
-												'<div id="widget_foo" title="fooProp1">fooProp2</div>' +
+											'<div class="Widget-small" id="widget">' +
+												'<div id="widget_foo" class="Widget-foo Widget-bar Widget-baz Widget-qux"></div>' +
+												'<div id="widget_bar" class="Widget-foo Widget-bar Widget-baz Widget-qux"></div>' +
 											'</div>',
 											_template.call (_widgetInstance,_widgetInstance.get ())
 										);
@@ -1830,7 +1902,7 @@ Uize.module ({
 												}
 											}),
 											_template = Uize.Widget.HtmltCompiler.compile (
-												'<div>' +
+												'<div class="small">' +
 													'<child name="foo" prop1="fooProp1" prop2="fooProp2"/>' +
 													'<div>' +
 														'<child name="bar" prop1="barProp1" prop2="barProp2"/>' +
@@ -1845,19 +1917,25 @@ Uize.module ({
 										_ChildWidgetClass.set ({
 											html:{
 												process:Uize.Widget.HtmltCompiler.compile (
-													'<div></div>',
+													'<div class="small"></div>',
 													{widgetClass:_ChildWidgetClass}
 												)
 											}
 										});
 										var _widgetInstance = _WidgetClass ({idPrefix:'widget'});
 										return this.expect (
-											'<div id="widget">' +
-												'<div id="widget_foo" title="fooProp1">fooProp2</div>' +
+											'<div class="Widget-small" id="widget">' +
+												'<div class="ChildWidget-small" id="widget_foo" title="fooProp1">' +
+													'fooProp2' +
+												'</div>' +
 												'<div>' +
-													'<div id="widget_bar" title="barProp1">barProp2</div>' +
+													'<div class="ChildWidget-small" id="widget_bar" title="barProp1">' +
+														'barProp2' +
+													'</div>' +
 													'<div>' +
-														'<div id="widget_baz" title="bazProp1">bazProp2</div>' +
+														'<div class="ChildWidget-small" id="widget_baz" title="bazProp1">' +
+															'bazProp2' +
+														'</div>' +
 													'</div>' +
 												'</div>' +
 											'</div>',
