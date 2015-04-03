@@ -12,7 +12,7 @@
 /* Module Meta Data
 	type: Test
 	importance: 3
-	codeCompleteness: 1
+	codeCompleteness: 100
 	docCompleteness: 100
 */
 
@@ -26,10 +26,6 @@
 /* TODO:
 	- test value bindings to form elements
 		- select (not yet supported)
-
-	- combination tests
-		- test multiple different types of bindings to the same node
-		- test a complex mixture of bindings to multiple nodes
 */
 
 Uize.module ({
@@ -1511,6 +1507,31 @@ Uize.module ({
 								)
 							]
 						},
+						_htmlBindingsTest (
+							'There can be multiple different types of bindings to the same node',
+							{
+								stateProperties:{
+									prop1:{value:'someClass'},
+									title:{value:'Some Title'},
+									text:{value:'Some Text'},
+									color:{value:'#ccc'},
+									dispaly:{value:false}
+								},
+								htmlBindings:{
+									prop1:'foo:className',
+									title:['foo:@title','foo:@alt'],
+									text:'foo',
+									color:'foo:style.color',
+									display:'foo:?'
+								}
+							},
+							'<div>' +
+								'<a id="foo"></a>' +
+							'</div>',
+							'<div id="widget">' +
+								'<a id="widget-foo" class="someClass" title="Some Title" alt="Some Title" style="color:#ccc;display:none;">Some Text</a>' +
+							'</div>'
+						),
 						_htmlBindingsTest (
 							'The className binding type is remapped to the "@class" binding type (i.e. a binding to the class attribute)',
 							{
