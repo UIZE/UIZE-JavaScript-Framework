@@ -12,8 +12,10 @@
 	border-width: <%= _cssUtil.box.border.width %>px;
 	border-color: <%= _cssUtil.box.border.color %>;
 	border-style: solid;
+	border-radius: 3px;
 	box-sizing: border-box;
 	cursor: pointer;
+	width: 100%;
 }
 
 .`disabled` {
