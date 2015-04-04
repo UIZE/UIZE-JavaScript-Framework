@@ -33,59 +33,36 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
+		var
+			/*** General Variables ***/
+				_testValues = [
+					{
+						name:'option1',
+						displayName:'Option 1'
+					},
+					{
+						name:'option2',
+						displayName:'Option 2'
+					},
+					{
+						name:'option3',
+						displayName:'Option 3'
+					}
+				]
+		;
+
 		return _superclass.subclass ({
 			omegastructor:function () {
 				this.addStateCombinationTestCases ({
 					size:Uize.Widgets.StateValues.size,
-					values:[
-						[
-							{
-								name:'Option 1',
-								value:'option1'
-							},
-							{
-								name:'Option 2',
-								value:'option2'
-							},
-							{
-								name:'Option 3',
-								value:'option3'
-							}
-						]
-					]
+					values:[_testValues]
 				});
 				this.addStateTestCase ({
-					values:[
-						{
-							name:'Option 1',
-							value:'option1'
-						},
-						{
-							name:'Option 2',
-							value:'option2'
-						},
-						{
-							name:'Option 3',
-							value:'option3'
-						}
-					],
+					values:_testValues,
 					value:'Option 2'
 				});
 				this.addStateTestCase ({
-					values:[
-						{
-							name:'Option 1',
-							value:'option1'
-						},
-						{
-							name:'Option 2',
-							value:'option2'
-						},
-						{
-							name:'Option 3',
-							value:'option3'
-						}
-					],
+					values:_testValues,
 					enabled:false
 				});
 			},
