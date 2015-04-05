@@ -14,9 +14,16 @@ Achieve Parity for Bindings
 
 			One example is a radio button list, where the binding on one node ID is actually affecting multiple nodes in a group of related nodes. Another example is a select tag, where the binding to the select tag would actually need to be compiled to bindings to the select tag's various child option tags. In both such cases, the target of the binding is not a single node, and so replacement expressions would have to be injected into one or more associated nodes.
 
-			It may also just be that some runtime bindings will simply have no compiled htmls equivalent and will not be handled in the compiled templates. This may be ok if the runtime code synchronizes the UI state to the widget's state upon initial update of the UI.
+			It may also just be that some runtime bindings will simply have no compiled htmlt equivalent and will not be handled in the compiled templates. This may be ok if the runtime code synchronizes the UI state to the widget's state upon initial update of the UI.
 
 Issues
+	Improve Style Binding Support for Pre-existing Properties
+		The current implementation of the style binding type supports pre-existing style properties by concatenating any pre-existing values of style attributes to the style bindings expressions.
+
+		If a pre-existing value for a style attribute contains a particular style property and there is also a binding to that property, then the resulting generated HTML from the compiled htmlt template will contain two occurrences of the property - firstly, the pre-existing property value and, secondly, the value from the binding. This works because the second value overrides the first value.
+
+		While the current approach works, it is inelegant. A better approach would be to parse the pre-existing style properties from the style attribute of a node to which there is one or more style type bindings. Then, any pre-xisting stype property values for which there are bindings would be removed from the parsed set of style properties. The resulting set would then be re-serialized to be concatenated with the style bindings expressions.
+
 	Fix Encoding Issue
 		Fix the issue where HTML entities that are being decoded to extended characters are not being re-encoded to HTML entities when the XML is serialized.
 

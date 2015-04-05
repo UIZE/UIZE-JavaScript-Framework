@@ -340,11 +340,6 @@ Uize.module ({
 											_styleAttribute = _ensureNodeAttribute (_node,'style'),
 											_styleAttributeValue = _styleAttribute.value.value
 										;
-										/*
-											- TODO:
-												- parse style properties from the style attribute value, in order to remove style properties for which there are bindings
-												- re-serialize the existing style properties and update _styleAttributeValue
-										*/
 										_addAttributeValueReplacement (
 											_styleAttribute,
 											(_styleAttributeValue ? Uize.Json.to (_styleAttributeValue) + ' + ' : '') +
