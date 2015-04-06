@@ -31,7 +31,8 @@ Uize.module ({
 		'Uize.Parse.Xml.Text',
 		'Uize.Json',
 		'Uize.Str.Split',
-		'Uize.Str.Trim'
+		'Uize.Str.Trim',
+		'Uize.Str.Camel'
 	],
 	builder:function () {
 		'use strict';
@@ -43,6 +44,7 @@ Uize.module ({
 
 			/*** Variables for Performance Optimization ***/
 				_trim = Uize.Str.Trim.trim,
+				_camelToHyphenated = Uize.Str.Camel.from,
 
 			/*** General Variables ***/
 				_sacredEmptyObject = {},
@@ -243,16 +245,8 @@ Uize.module ({
 										function (_binding) {
 											function _addStylePropertyReplacement (_stylePropertyName,_replacementValue) {
 												_styleExpressionParts.push (
-													Uize.Json.to (
-														_stylePropertyName.replace (
-															/* TODO: put this into a separate Uize.Str.* module */
-															/([a-z])([A-Z])/g,
-															function (_match,_lowerCaseLetter,_upperCaseLetter) {
-																return _lowerCaseLetter + '-' + _upperCaseLetter.toLowerCase ();
-															}
-														) +
-														':'
-													) + ' + ' + _replacementValue + ' + \';\''
+													Uize.Json.to (_camelToHyphenated (_stylePropertyName) + ':') +
+													' + ' + _replacementValue + ' + \';\''
 												);
 											}
 
