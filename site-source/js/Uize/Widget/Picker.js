@@ -128,7 +128,8 @@ Uize.module ({
 									picker:m,
 									mooringNode:_mooringNode,
 									offsetX:_mooringNodeDims.width >> 1,
-									offsetY:_mooringNodeDims.height >> 1
+									offsetY: _mooringNodeDims.height >> 1,
+									preventPageScrollWhenShown: m._dialogPreventScrollWhenShown
 								},
 								m.getDialogWidgetProperties(),
 								m.get ((m._pipedProperties || []).concat ('value', 'valueDetails'))
@@ -185,6 +186,10 @@ Uize.module ({
 								NOTES
 								- the initial value is =undefined=
 					*/
+				_dialogPreventScrollWhenShown: {
+					name: 'dialogPreventScrollWhenShown',
+					value: false
+				},
 				_pipedProperties:'pipedProperties',
 					/*?
 						State Properties

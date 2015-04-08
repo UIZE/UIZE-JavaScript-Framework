@@ -24,86 +24,15 @@
 */
 
 Uize.module ({
-	name:'Uize.Widget.Dialog.Confirm',
+	name: 'Uize.Widget.Dialog.Confirm',
+	required: 'Uize.Widget.Dialog.mConfirm',
 	builder:function (_superclass) {
 		'use strict';
 
-		/*** Private Instance Methods ***/
-			function _updateUiState (m) {
-				m.isWired &&
-					m.setNodeProperties (
-						'icon',
-						{className:'dialogIcon dialog' + Uize.capFirstChar (m._state) + 'Icon'}
-					)
-				;
-			}
-
-			function _updateUiMessage (m) {
-				m.isWired && m._message != null && m.setNodeInnerHtml ('message',m._message);
-			}
-
-			function _updateUiMode (m) {
-				m.isWired && m.children.cancel.showNode ('',!m._mode.indexOf ('confirm'));
-			}
-
-		return _superclass.subclass ({
-			omegastructor:function () {
-				var m = this;
-
-				/*** add event handlers ***/
-					function _handleConfirm(_event) { m.handleConfirm(_event) }
-					m.wire ({
-						Ok:_handleConfirm,
-						Cancel:_handleConfirm,
-						Close:_handleConfirm
-					});
-			},
-
-			instanceMethods:{
-				handleConfirm:function (_event) {
-					this.fire ({name:'Submission Complete',result:_event.name == 'Ok'});
-				},
-
-				updateUi:function () {
-					var m = this;
-					_updateUiState (m);
-					_updateUiMessage (m);
-					_updateUiMode (m);
-					_superclass.doMy (m,'updateUi');
-				}
-			},
-
-			stateProperties:{
-				_message:{
-					name:'message',
-					onChange:function () {_updateUiMessage (this)},
-					value:''
-				},
-				_mode:{
-					name:'mode',
-					onChange:function () {
-						var m = this;
-						m._mode.indexOf ('Custom') < 0 &&
-							m.set ({defaultTitle:m.localize (m._mode == 'confirm' ? 'confirm' : 'attention')})
-						;
-						_updateUiMode (m);
-					},
-					value:'confirm'
-				},
-				_state:{
-					name:'state',
-					onChange:function () {_updateUiState (this)},
-					value:'info'
-					/* NOTES: states that are supported
-						- info (e.g. "i" in blue circle)
-						- warning (e.g. "!" in orange triangle)
-						- error (e.g. "!" in red triangle, or "x" in red circle)
-						- confirm (e.g. "?" in gray speech bubble)
-						- success (e.g. green check mark, or check mark in a circle)
-					*/
-				}
-			}
+		return _superclass.subclass({
+			mixins: Uize.Widget.Dialog.mConfirm
 		});
+		
 	}
 });
 

@@ -51,6 +51,12 @@ Uize.module ({
 					}
 				];
 			}
+			
+			function _updateUiMaxLength () {
+				this.isWired
+					&& this.setNodeProperties('input', {maxLength:this._maxLength})
+				;
+			}
 
 			function _updateUiPlaceholder () {
 				this.isWired
@@ -156,6 +162,7 @@ Uize.module ({
 
 				updateUi:function () {
 					if (this.isWired) {
+						_updateUiMaxLength.call (this);
 						_updateUiPlaceholder.call (this);
 						_superclass.doMy (this,'updateUi');
 					}
@@ -196,7 +203,10 @@ Uize.module ({
 				},
 				_maxLength:{
 					name:'maxLength',
-					onChange:_updateMoreValidators,
+					onChange:[
+						_updateUiMaxLength,
+						_updateMoreValidators
+					],
 					value:32767
 				}
 			}

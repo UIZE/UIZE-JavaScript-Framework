@@ -139,7 +139,7 @@ Uize.module ({
 											STR4:'{param}',
 											STR5:'{param1}{param2}'
 										}
-									},
+									}
 
 								},
 								{tokenSplitter:/\{[\w\d]+\}/}

@@ -235,7 +235,14 @@ Uize.module ({
 							/* NOTE:
 								Need to break synchronous execution of the page between HTML injection and child widget adoption so the browser has time to insert any widget data into the window object
 							*/
-							setTimeout (function () { _adoptChildWidgets (m,_callback) }, 0);
+							setTimeout(function () {
+							    try {
+							        _adoptChildWidgets(m, _callback);
+							    } catch (err) {
+							        _loaderDirectives.errorCallback && _loaderDirectives.errorCallback(err);
+							        throw err;
+							    }
+							}, 0);
 						}
 
 						_loaderDirectives.beforeInject
