@@ -99,6 +99,9 @@ Uize.module ({
 							........................................................................
 
 							Naturally, the optional =capFirstCharBOOL= parameter can also be used when the =stringSegmentsARRAY= parameter is specified.
+
+							NOTES
+							- compare to the companion `Uize.Str.Camel.from` static method
 				*/
 			},
 
@@ -126,6 +129,115 @@ Uize.module ({
 						);
 					}
 				);
+				/*?
+					Static Methods
+						Uize.Str.Camel.from
+							Returns a string, that is the specified source string converted from a camelCase formatted string to a delimited string.
+
+							DIFFERENT USAGES
+
+							`Convert a camelCased String to a Hyphenated String`
+							................................................
+							hyphenatedSTR = Uize.Str.Camel.from (sourceSTR);
+							................................................
+
+							`Convert a camelCased String to a Delimited String, With Options`
+							...........................................................
+							hyphenatedSTR = Uize.Str.Camel.from (sourceSTR,optionsOBJ);
+							...........................................................
+
+							`Convert a camelCased String to a Hyphenated String, Without Lowercasing`
+							...........................................................................
+							hyphenatedSTR = Uize.Str.Camel.from (sourceSTR,{lowerCaseFirstChar:false});
+							...........................................................................
+
+							`Convert a camelCased String to a Delimited String, Specifying a Custom Delimiter`
+							........................................................................
+							delimitedSTR = Uize.Str.Camel.from (sourceSTR,{delimiter:delimiterSTR});
+							........................................................................
+
+							Convert a camelCased String to a Hyphenated String
+								In the simplest use case, a camelCased string can be converted to a hyphenated string by specifying the camelCased source string as the first argument.
+
+								SYNTAX
+								................................................
+								hyphenatedSTR = Uize.Str.Camel.from (sourceSTR);
+								................................................
+
+								EXAMPLES
+								....................................................................
+								Uize.Str.Camel.to ('city');            // returns 'city'
+								Uize.Str.Camel.to ('cityStateZip');    // returns 'city-state-zip'
+								Uize.Str.Camel.to ('CityStateZip');    // returns 'city-state-zip'
+								Uize.Str.Camel.to ('propertyAValue');  // returns 'property-a-value'
+								....................................................................
+
+							Convert a camelCased String to a Delimited String, With Options
+								When the default behavior of the method is not suitable, the method's behavior can be customized by specifying the optional =optionsOBJ= second argument.
+
+								SYNTAX
+								...........................................................
+								hyphenatedSTR = Uize.Str.Camel.from (sourceSTR,optionsOBJ);
+								...........................................................
+
+								optionsOBJ
+									An object, containing properties for specifying conversion options.
+
+									SYNTAX
+									............................................
+									{
+										delimiter:delimiterSTR,
+										lowerCaseFirstChar:lowerCaseFirstCharBOOL
+									}
+									............................................
+
+									delimiter
+										A string, specifying a set of characters that should be used to delimit the words parsed from the camelCased source string.
+
+										The value of the =delimiter= property may be any string, containing zero or more characters. Typically, the value will be a single character, but multi-character delimiters are acceptable. If no value is specified for the =delimiter= property, or if the value =null= or =undefined= is specified, then the value for this property is defaulted to a ='-'= (hyphen) character.
+
+									lowerCaseFirstChar
+										A boolean, specifying whether or not the first character of each of the words parsed from the camelCased source string should be lowercased.
+
+										When the value =false= is specified for the =lowerCaseFirstChar= property, the first character of each word will not be lowercased and will be left as is. For words after the first word, this will mean that the characters will remain uppercased, although it is possible for the camelCased source string to also start with an uppercase letter. If no value is specified for the =lowerCaseFirstChar= property, or if the value =null= or =undefined= is specified, then the value for this property is defaulted to =true=.
+
+							Convert a camelCased String to a Hyphenated String, Without Lowercasing
+								A camelCased source string can be converted to a hyphenated string without lowercasing of the first letters of words by specifying the value =false= for the =lowerCaseFirstChar= option.
+
+								SYNTAX
+								...........................................................................
+								hyphenatedSTR = Uize.Str.Camel.from (sourceSTR,{lowerCaseFirstChar:false});
+								...........................................................................
+
+								EXAMPLES
+								...............................................................................................
+								Uize.Str.Camel.to ('city',{lowerCaseFirstChar:false});            // returns 'city'
+								Uize.Str.Camel.to ('cityStateZip',{lowerCaseFirstChar:false});    // returns 'city-State-Zip'
+								Uize.Str.Camel.to ('CityStateZip',{lowerCaseFirstChar:false});    // returns 'City-State-Zip'
+								Uize.Str.Camel.to ('propertyAValue',{lowerCaseFirstChar:false});  // returns 'property-A-Value'
+								...............................................................................................
+
+							Convert a camelCased String to a Delimited String, Specifying a Custom Delimiter
+								A camelCased source string can be converted to a delimited string with a custom delimiter, by specifying the custom delimiter for the =delimiter= option.
+
+								SYNTAX
+								........................................................................
+								delimitedSTR = Uize.Str.Camel.from (sourceSTR,{delimiter:delimiterSTR});
+								........................................................................
+
+								EXAMPLE
+								......................................................................................
+								Uize.Str.Camel.to ('cityStateZip',{delimiter:'-'});    // returns 'city-state-zip'
+								Uize.Str.Camel.to ('cityStateZip',{delimiter:'_'});    // returns 'city_state_zip'
+								Uize.Str.Camel.to ('cityStateZip',{delimiter:', '});   // returns 'city, state, zip'
+								Uize.Str.Camel.to ('cityStateZip',{delimiter:''});     // returns 'citystatezip'
+								Uize.Str.Camel.to ('cityStateZip',{delimiter:'#'});    // returns 'city#state#zip'
+								Uize.Str.Camel.to ('cityStateZip',{delimiter:' + '});  // returns 'city + state + zip'
+								......................................................................................
+
+							NOTES
+							- compare to the companion `Uize.Str.Camel.to` static method
+				*/
 			}
 		});
 	}
