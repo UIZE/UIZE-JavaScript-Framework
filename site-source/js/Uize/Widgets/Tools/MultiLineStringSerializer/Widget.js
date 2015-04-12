@@ -38,6 +38,7 @@ Uize.module ({
 	required:[
 		'Uize.Widgets.Tools.MultiLineStringSerializer.Html',
 		'Uize.Widgets.Tools.MultiLineStringSerializer.Css',
+		'Uize.Widgets.Form.Input.Select.Widget',
 		'Uize.Widgets.Tools.SourceVsResult.Widget',
 		'Uize.Json.MultiLineStringLiteral'
 	],
@@ -94,28 +95,29 @@ Uize.module ({
 			},
 
 			children:{
+				quoteChar:{
+					widgetClass:Uize.Widgets.Form.Input.Select.Widget,
+					values:[
+						{name:'\''},
+						{name:'"'}
+					]
+				},
 				sourceVsResult:{
 					widgetClass:Uize.Widgets.Tools.SourceVsResult.Widget,
 					twoWay:true
 				}
 			},
 
-			eventBindings:{
-				'#quoteChar:change':function (_event) {
-					this.set ({quoteChar:_event.target.value});
-				}
-			},
-
 			childBindings:{
 				loc_sourceViewButtonLabel:'->sourceVsResult.sourceViewButtonLabel',
 				loc_resultViewButtonLabel:'->sourceVsResult.resultViewButtonLabel',
+				quoteChar:'quoteChar.value',
 				source:'sourceVsResult.source',
 				result:'sourceVsResult.result'
 			},
 
 			htmlBindings:{
-				loc_quoteCharLabel:'quoteCharLabel',
-				quoteChar:'quoteChar'
+				loc_quoteCharLabel:'quoteCharLabel'
 			}
 		});
 	}

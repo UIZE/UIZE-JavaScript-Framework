@@ -2,12 +2,7 @@
 	<table class="settings">
 		<tr>
 			<td id="quoteCharLabel"></td>
-			<td>
-				<select id="quoteChar">
-					<option value="'">'</option>
-					<option value="&quot;">&quot;</option>
-				</select>
-			</td>
+			<td><child name="quoteChar"/></td>
 		</tr>
 	</table>
 	<child name="sourceVsResult"/>
