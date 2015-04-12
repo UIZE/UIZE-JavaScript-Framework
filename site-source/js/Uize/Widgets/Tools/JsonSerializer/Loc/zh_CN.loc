@@ -10,11 +10,5 @@ quoteCharLabel: 引号字符
 keyDelimiterLabel: 关键的分隔符
 padKeysLabel: 键填充
 keyAlignLabel: 关键对齐
-keyAlignLeft: 左
-keyAlignCenter: 中心
-keyAlignRight: 权
 whenToQuoteKeysLabel: 关键的报价模式
-whenToQuoteKeysAuto: 汽车
-whenToQuoteKeysAutoAll: 所有汽车
-whenToQuoteKeysAlways: 总
 sortKeysLabel: 关键排序

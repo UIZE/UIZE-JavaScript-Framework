@@ -10,11 +10,5 @@ quoteCharLabel: Guillemets
 keyDelimiterLabel: Séparateurs clés
 padKeysLabel: Padding clé
 keyAlignLabel: l'Alignement clé
-keyAlignLeft: Gauche
-keyAlignCenter: Centre
-keyAlignRight: Droit
 whenToQuoteKeysLabel: Mode de clé citant
-whenToQuoteKeysAuto: Automatique
-whenToQuoteKeysAutoAll: Tout, automatiquement
-whenToQuoteKeysAlways: Toujours
 sortKeysLabel: Tri des clés

@@ -10,11 +10,5 @@ quoteCharLabel:
 keyDelimiterLabel: 
 padKeysLabel: 
 keyAlignLabel: 
-keyAlignLeft: 
-keyAlignCenter: 
-keyAlignRight: 
 whenToQuoteKeysLabel: 
-whenToQuoteKeysAuto: 
-whenToQuoteKeysAutoAll: 
-whenToQuoteKeysAlways: 
 sortKeysLabel: 
