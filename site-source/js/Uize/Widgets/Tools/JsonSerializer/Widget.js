@@ -39,6 +39,7 @@ Uize.module ({
 		'Uize.Widgets.Tools.JsonSerializer.Html',
 		'Uize.Widgets.Tools.JsonSerializer.Css',
 		'Uize.Widgets.Form.Input.Text.Widget',
+		'Uize.Widgets.Button.Widget',
 		'Uize.Widgets.Button.Toggle.OnOff.Widget',
 		'Uize.Widgets.Form.Input.Select.Widget',
 		'Uize.Widgets.Tools.SourceVsResult.Widget',
@@ -126,7 +127,51 @@ Uize.module ({
 			},
 
 			children:{
-				sourceVsResult:{widgetClass:Uize.Widgets.Tools.SourceVsResult.Widget},
+				presetPretty:{
+					widgetClass:Uize.Widgets.Button.Widget,
+					action:function () {
+						this.parent.set ({
+							indentChars:'   ',
+							linebreakChars:'\n',
+							quoteChar:'\'',
+							keyDelimiter:': ',
+							padKeys:false,
+							keyAlign:'left',
+							whenToQuoteKeys:'auto',
+							sortKeys:false
+						});
+					}
+				},
+				presetCompact:{
+					widgetClass:Uize.Widgets.Button.Widget,
+					action:function () {
+						this.parent.set ({
+							indentChars:'',
+							linebreakChars:'',
+							quoteChar:'\'',
+							keyDelimiter:':',
+							padKeys:false,
+							keyAlign:'left',
+							whenToQuoteKeys:'auto',
+							sortKeys:false
+						});
+					}
+				},
+				presetPaddedAndSorted:{
+					widgetClass:Uize.Widgets.Button.Widget,
+					action:function () {
+						this.parent.set ({
+							indentChars:'   ',
+							linebreakChars:'\n',
+							quoteChar:'\'',
+							keyDelimiter:' : ',
+							padKeys:true,
+							keyAlign:'left',
+							whenToQuoteKeys:'auto all',
+							sortKeys:true
+						});
+					}
+				},
 				indentChars:{widgetClass:Uize.Widgets.Form.Input.Text.Widget},
 				quoteChar:{
 					widgetClass:Uize.Widgets.Form.Input.Select.Widget,
@@ -153,70 +198,35 @@ Uize.module ({
 						{name:'always'}
 					]
 				},
-				sortKeys:_onOffTogglerWidgetProperties
+				sortKeys:_onOffTogglerWidgetProperties,
+				sourceVsResult:{widgetClass:Uize.Widgets.Tools.SourceVsResult.Widget}
 			},
 
 			eventBindings:{
-				'#presetPretty:click':function () {
-					this.set ({
-						indentChars:'   ',
-						linebreakChars:'\n',
-						quoteChar:'\'',
-						keyDelimiter:': ',
-						padKeys:false,
-						keyAlign:'left',
-						whenToQuoteKeys:'auto',
-						sortKeys:false
-					});
-				},
-				'#presetCompact:click':function () {
-					this.set ({
-						indentChars:'',
-						linebreakChars:'',
-						quoteChar:'\'',
-						keyDelimiter:':',
-						padKeys:false,
-						keyAlign:'left',
-						whenToQuoteKeys:'auto',
-						sortKeys:false
-					});
-				},
-				'#presetPaddedAndSorted:click':function () {
-					this.set ({
-						indentChars:'   ',
-						linebreakChars:'\n',
-						quoteChar:'\'',
-						keyDelimiter:' : ',
-						padKeys:true,
-						keyAlign:'left',
-						whenToQuoteKeys:'auto all',
-						sortKeys:true
-					});
-				},
 				'#linebreakChars:keyup':function (_event) {
 					this.set ({linebreakChars:_event.target.value});
 				}
 			},
 
 			childBindings:{
-				loc_sourceViewButtonLabel:'->sourceVsResult.sourceViewButtonLabel',
-				loc_resultViewButtonLabel:'->sourceVsResult.resultViewButtonLabel',
-				source:'sourceVsResult.source',
-				result:'->sourceVsResult.result',
+				loc_presetPretty:'->presetPretty.text',
+				loc_presetCompact:'->presetCompact.text',
+				loc_presetPaddedAndSorted:'->presetPaddedAndSorted.text',
 				indentChars:'indentChars.value',
 				quoteChar:'quoteChar.value',
 				keyDelimiter:'keyDelimiter.value',
 				padKeys:'padKeys.selected',
 				keyAlign:'keyAlign.value',
 				whenToQuoteKeys:'whenToQuoteKeys.value',
-				sortKeys:'sortKeys.selected'
+				sortKeys:'sortKeys.selected',
+				loc_sourceViewButtonLabel:'->sourceVsResult.sourceViewButtonLabel',
+				loc_resultViewButtonLabel:'->sourceVsResult.resultViewButtonLabel',
+				source:'sourceVsResult.source',
+				result:'->sourceVsResult.result'
 			},
 
 			htmlBindings:{
 				loc_presetsLabel:'presetsLabel',
-				loc_presetPretty:'presetPretty',
-				loc_presetCompact:'presetCompact',
-				loc_presetPaddedAndSorted:'presetPaddedAndSorted',
 				loc_indentCharsLabel:'indentCharsLabel',
 				loc_linebreakCharsLabel:'linebreakCharsLabel',
 				linebreakChars:'linebreakChars',

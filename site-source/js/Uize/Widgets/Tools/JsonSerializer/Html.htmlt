@@ -3,11 +3,9 @@
 		<tr>
 			<td id="presetsLabel"></td>
 			<td>
-				<a id="presetPretty" href="javascript://"></a>
-				&nbsp;|&nbsp;
-				<a id="presetCompact" href="javascript://"></a>
-				&nbsp;|&nbsp;
-				<a id="presetPaddedAndSorted" href="javascript://"></a>
+				<child name="presetPretty"/>
+				<child name="presetCompact"/>
+				<child name="presetPaddedAndSorted"/>
 			</td>
 		</tr>
 		<tr>
