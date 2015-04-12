@@ -11,16 +11,7 @@ linebreakCharsLabel: Linebreak Characters
 quoteCharLabel: Quote Character
 keyDelimiterLabel: Key Delimiter
 padKeysLabel: Key Padding
-
 keyAlignLabel: Key Alignment
-keyAlignLeft: Left
-keyAlignCenter: Center
-keyAlignRight: Right
-
 whenToQuoteKeysLabel: Key Quoting Mode
-whenToQuoteKeysAuto: Auto
-whenToQuoteKeysAutoAll: Auto All
-whenToQuoteKeysAlways: Always
-
 sortKeysLabel: Key Sorting
 

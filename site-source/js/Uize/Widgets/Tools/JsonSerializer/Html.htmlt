@@ -20,12 +20,7 @@
 		</tr>
 		<tr>
 			<td id="quoteCharLabel"></td>
-			<td>
-				<select id="quoteChar">
-					<option value="'">'</option>
-					<option value="&quot;">&quot;</option>
-				</select>
-			</td>
+			<td><child name="quoteChar"/></td>
 		</tr>
 		<tr>
 			<td id="keyDelimiterLabel"></td>
@@ -37,23 +32,11 @@
 		</tr>
 		<tr>
 			<td id="keyAlignLabel"></td>
-			<td>
-				<select id="keyAlign">
-					<option id="keyAlignLeft" value="left"></option>
-					<option id="keyAlignCenter" value="center"></option>
-					<option id="keyAlignRight" value="right"></option>
-				</select>
-			</td>
+			<td><child name="keyAlign"/></td>
 		</tr>
 		<tr>
 			<td id="whenToQuoteKeysLabel"></td>
-			<td>
-				<select id="whenToQuoteKeys">
-					<option id="whenToQuoteKeysAuto" value="auto"></option>
-					<option id="whenToQuoteKeysAutoAll" value="auto all"></option>
-					<option id="whenToQuoteKeysAlways" value="always"></option>
-				</select>
-			</td>
+			<td><child name="whenToQuoteKeys"/></td>
 		</tr>
 		<tr>
 			<td id="sortKeysLabel"></td>

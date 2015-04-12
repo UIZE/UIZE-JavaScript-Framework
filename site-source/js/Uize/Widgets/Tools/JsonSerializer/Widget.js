@@ -40,6 +40,7 @@ Uize.module ({
 		'Uize.Widgets.Tools.JsonSerializer.Css',
 		'Uize.Widgets.Form.Input.Text.Widget',
 		'Uize.Widgets.Button.Toggle.OnOff.Widget',
+		'Uize.Widgets.Form.Input.Select.Widget',
 		'Uize.Widgets.Tools.SourceVsResult.Widget',
 		'Uize.Json'
 	],
@@ -127,8 +128,31 @@ Uize.module ({
 			children:{
 				sourceVsResult:{widgetClass:Uize.Widgets.Tools.SourceVsResult.Widget},
 				indentChars:{widgetClass:Uize.Widgets.Form.Input.Text.Widget},
+				quoteChar:{
+					widgetClass:Uize.Widgets.Form.Input.Select.Widget,
+					values:[
+						{name:'\''},
+						{name:'"'}
+					]
+				},
 				keyDelimiter:{widgetClass:Uize.Widgets.Form.Input.Text.Widget},
 				padKeys:_onOffTogglerWidgetProperties,
+				keyAlign:{
+					widgetClass:Uize.Widgets.Form.Input.Select.Widget,
+					values:[
+						{name:'left'},
+						{name:'center'},
+						{name:'right'}
+					]
+				},
+				whenToQuoteKeys:{
+					widgetClass:Uize.Widgets.Form.Input.Select.Widget,
+					values:[
+						{name:'auto'},
+						{name:'auto all'},
+						{name:'always'}
+					]
+				},
 				sortKeys:_onOffTogglerWidgetProperties
 			},
 
@@ -171,15 +195,6 @@ Uize.module ({
 				},
 				'#linebreakChars:keyup':function (_event) {
 					this.set ({linebreakChars:_event.target.value});
-				},
-				'#quoteChar:change':function (_event) {
-					this.set ({quoteChar:_event.target.value});
-				},
-				'#keyAlign:change':function (_event) {
-					this.set ({keyAlign:_event.target.value});
-				},
-				'#whenToQuoteKeys:change':function (_event) {
-					this.set ({whenToQuoteKeys:_event.target.value});
 				}
 			},
 
@@ -189,8 +204,11 @@ Uize.module ({
 				source:'sourceVsResult.source',
 				result:'->sourceVsResult.result',
 				indentChars:'indentChars.value',
+				quoteChar:'quoteChar.value',
 				keyDelimiter:'keyDelimiter.value',
 				padKeys:'padKeys.selected',
+				keyAlign:'keyAlign.value',
+				whenToQuoteKeys:'whenToQuoteKeys.value',
 				sortKeys:'sortKeys.selected'
 			},
 
@@ -207,14 +225,7 @@ Uize.module ({
 				loc_keyDelimiterLabel:'keyDelimiterLabel',
 				loc_padKeysLabel:'padKeysLabel',
 				loc_keyAlignLabel:'keyAlignLabel',
-				loc_keyAlignLeft:'keyAlignLeft',
-				loc_keyAlignCenter:'keyAlignCenter',
-				loc_keyAlignRight:'keyAlignRight',
-				keyAlign:'keyAlign',
 				loc_whenToQuoteKeysLabel:'whenToQuoteKeysLabel',
-				loc_whenToQuoteKeysAuto:'whenToQuoteKeysAuto',
-				loc_whenToQuoteKeysAutoAll:'whenToQuoteKeysAutoAll',
-				loc_whenToQuoteKeysAlways:'whenToQuoteKeysAlways',
 				loc_sortKeysLabel:'sortKeysLabel'
 			}
 		});
