@@ -165,12 +165,12 @@ Uize.module ({
 								................................................
 
 								EXAMPLES
-								....................................................................
-								Uize.Str.Camel.to ('city');            // returns 'city'
-								Uize.Str.Camel.to ('cityStateZip');    // returns 'city-state-zip'
-								Uize.Str.Camel.to ('CityStateZip');    // returns 'city-state-zip'
-								Uize.Str.Camel.to ('propertyAValue');  // returns 'property-a-value'
-								....................................................................
+								......................................................................
+								Uize.Str.Camel.from ('city');            // returns 'city'
+								Uize.Str.Camel.from ('cityStateZip');    // returns 'city-state-zip'
+								Uize.Str.Camel.from ('CityStateZip');    // returns 'city-state-zip'
+								Uize.Str.Camel.from ('propertyAValue');  // returns 'property-a-value'
+								......................................................................
 
 							Convert a camelCased String to a Delimited String, With Options
 								When the default behavior of the method is not suitable, the method's behavior can be customized by specifying the optional =optionsOBJ= second argument.
@@ -210,12 +210,12 @@ Uize.module ({
 								...........................................................................
 
 								EXAMPLES
-								...............................................................................................
-								Uize.Str.Camel.to ('city',{lowerCaseFirstChar:false});            // returns 'city'
-								Uize.Str.Camel.to ('cityStateZip',{lowerCaseFirstChar:false});    // returns 'city-State-Zip'
-								Uize.Str.Camel.to ('CityStateZip',{lowerCaseFirstChar:false});    // returns 'City-State-Zip'
-								Uize.Str.Camel.to ('propertyAValue',{lowerCaseFirstChar:false});  // returns 'property-A-Value'
-								...............................................................................................
+								.................................................................................................
+								Uize.Str.Camel.from ('city',{lowerCaseFirstChar:false});            // returns 'city'
+								Uize.Str.Camel.from ('cityStateZip',{lowerCaseFirstChar:false});    // returns 'city-State-Zip'
+								Uize.Str.Camel.from ('CityStateZip',{lowerCaseFirstChar:false});    // returns 'City-State-Zip'
+								Uize.Str.Camel.from ('propertyAValue',{lowerCaseFirstChar:false});  // returns 'property-A-Value'
+								.................................................................................................
 
 							Convert a camelCased String to a Delimited String, Specifying a Custom Delimiter
 								A camelCased source string can be converted to a delimited string with a custom delimiter, by specifying the custom delimiter for the =delimiter= option.
@@ -226,14 +226,14 @@ Uize.module ({
 								........................................................................
 
 								EXAMPLE
-								......................................................................................
-								Uize.Str.Camel.to ('cityStateZip',{delimiter:'-'});    // returns 'city-state-zip'
-								Uize.Str.Camel.to ('cityStateZip',{delimiter:'_'});    // returns 'city_state_zip'
-								Uize.Str.Camel.to ('cityStateZip',{delimiter:', '});   // returns 'city, state, zip'
-								Uize.Str.Camel.to ('cityStateZip',{delimiter:''});     // returns 'citystatezip'
-								Uize.Str.Camel.to ('cityStateZip',{delimiter:'#'});    // returns 'city#state#zip'
-								Uize.Str.Camel.to ('cityStateZip',{delimiter:' + '});  // returns 'city + state + zip'
-								......................................................................................
+								........................................................................................
+								Uize.Str.Camel.from ('cityStateZip',{delimiter:'-'});    // returns 'city-state-zip'
+								Uize.Str.Camel.from ('cityStateZip',{delimiter:'_'});    // returns 'city_state_zip'
+								Uize.Str.Camel.from ('cityStateZip',{delimiter:', '});   // returns 'city, state, zip'
+								Uize.Str.Camel.from ('cityStateZip',{delimiter:''});     // returns 'citystatezip'
+								Uize.Str.Camel.from ('cityStateZip',{delimiter:'#'});    // returns 'city#state#zip'
+								Uize.Str.Camel.from ('cityStateZip',{delimiter:' + '});  // returns 'city + state + zip'
+								........................................................................................
 
 							NOTES
 							- compare to the companion `Uize.Str.Camel.to` static method
