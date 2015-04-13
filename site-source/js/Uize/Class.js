@@ -598,7 +598,7 @@ Uize.module ({
 										]
 									;
 									if (_propertyProfile && _propertyPublicName != _propertyProfile._publicName)
-										// use the canonical public name, since a pseudonym could have been specified
+										// use the canonical public name, since an alias could have been specified
 										_eventName = 'Changed.' + (_propertyPublicName = _propertyProfile._publicName)
 									;
 									_wireUnwire (_eventName);
@@ -1634,9 +1634,9 @@ Uize.module ({
 								_propertyProfilesByPrivateName [_propertyPrivateName] = {_privateName:_propertyPrivateName}
 							;
 							if (_propertyPublicName.indexOf ('|') > -1) {
-								var _pseudonyms = _propertyPublicName.split ('|');
-								_propertyPrimaryPublicName = _pseudonyms [0];
-								_lookup (_pseudonyms,_propertyPrivateName,_propertyPrivateNameLookup);
+								var _aliases = _propertyPublicName.split ('|');
+								_propertyPrimaryPublicName = _aliases [0];
+								_lookup (_aliases,_propertyPrivateName,_propertyPrivateNameLookup);
 							} else {
 								_propertyPrivateNameLookup [_propertyPublicName] = _propertyPrivateName;
 							}
