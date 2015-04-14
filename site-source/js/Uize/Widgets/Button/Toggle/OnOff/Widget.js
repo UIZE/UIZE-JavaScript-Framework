@@ -52,6 +52,9 @@ Uize.module ({
 			stateProperties:{
 				text:{
 					derived:'selected: selected ? "On" : "Off"'
+				},
+				selected:{
+					name:'value'
 				}
 			},
 

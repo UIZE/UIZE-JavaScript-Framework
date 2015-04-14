@@ -118,7 +118,7 @@ Uize.module ({
 				loc_resultViewButtonLabel:'->sourceVsResult.resultViewButtonLabel',
 				source:'sourceVsResult.source',
 				result:'->sourceVsResult.result',
-				accenting:'accenting.selected',
+				accenting:'accenting.value',
 				wrapper:'wrapper.value',
 				expansion:'expansion.value',
 				expansionChar:'expansionChar.value'
