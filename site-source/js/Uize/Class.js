@@ -1621,26 +1621,29 @@ Uize.module ({
 							_rawPropertyProfile = _propertyProfiles [_propertyName],
 							_rawPropertyProfileIsObject = _isObject (_rawPropertyProfile),
 							_propertyPrivateName = _propertyPrivateNameLookup [_propertyName] || _propertyName,
-							_propertyPublicName =
-								(_rawPropertyProfileIsObject ? _rawPropertyProfile.name : _rawPropertyProfile) ||
-								_propertyName,
-							_propertyPrimaryPublicName = _propertyPublicName,
-							_propertyProfile = _propertyProfilesByPrivateName [_propertyPrivateName]
-								|| _propertyProfilesByPrivateName [_propertyPublicName] // if not found by private name, try public name in case the property was registered by public name first
+							_rawPropertyProfilePublicName =
+								_rawPropertyProfileIsObject ? _rawPropertyProfile.name : _rawPropertyProfile,
+							_propertyPublicName = _rawPropertyProfilePublicName || _propertyName,
+							_propertyProfile =
+								_propertyProfilesByPrivateName [_propertyPrivateName] ||
+								_propertyProfilesByPrivateName [_propertyPublicName] // if not found by private name, try public name in case the property was registered by public name first
 						;
 						_propertyPrivateNameLookup [_propertyPrivateName] = _propertyPrivateName;
-						if (!_propertyProfile) {
-							_propertyProfile =
-								_propertyProfilesByPrivateName [_propertyPrivateName] = {_privateName:_propertyPrivateName}
-							;
+						if (!_propertyProfile)
+							_propertyProfile = _propertyProfilesByPrivateName [_propertyPrivateName] = {
+								_privateName:_propertyPrivateName
+							}
+						;
+						var _propertyProfilePublicName = _propertyProfile._publicName;
+						if (!_propertyProfilePublicName || _rawPropertyProfilePublicName != _propertyProfilePublicName) {
 							if (_propertyPublicName.indexOf ('|') > -1) {
 								var _aliases = _propertyPublicName.split ('|');
-								_propertyPrimaryPublicName = _aliases [0];
 								_lookup (_aliases,_propertyPrivateName,_propertyPrivateNameLookup);
+								_propertyPublicName = _aliases [0];
 							} else {
 								_propertyPrivateNameLookup [_propertyPublicName] = _propertyPrivateName;
 							}
-							_propertyProfile._publicName = _propertyPrimaryPublicName;
+							_propertyProfilePublicName || (_propertyProfile._publicName = _propertyPublicName);
 						}
 						if (_rawPropertyProfileIsObject) {
 							var _rawPropertyProfileOnChange = _rawPropertyProfile.onChange;

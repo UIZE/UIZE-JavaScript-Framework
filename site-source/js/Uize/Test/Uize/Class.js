@@ -2962,6 +2962,31 @@ Uize.module ({
 											_changedDotStarEventObjectPropertiesLog
 										);
 									}
+								},
+								{
+									title:
+										'Aliases can be added for a previously declared state property in a subsequent declaration for the state property',
+									test:function () {
+										var _Subclass = Uize.Class.subclass ();
+										_Subclass.stateProperties ({
+											_myProperty:{
+												name:'myProperty|myPropertyAlias1',
+												value:'foo'
+											}
+										});
+										_Subclass.stateProperties ({
+											_myProperty:{
+												name:'myPropertyAlias2|myPropertyAlias3'
+											}
+										});
+										var _instance = new _Subclass;
+										return (
+											this.expect ('foo',_instance.get ('myProperty')) &&
+											this.expect ('foo',_instance.get ('myPropertyAlias1')) &&
+											this.expect ('foo',_instance.get ('myPropertyAlias2')) &&
+											this.expect ('foo',_instance.get ('myPropertyAlias3'))
+										);
+									}
 								}
 							]
 						},
