@@ -887,12 +887,6 @@ Test Improvements
 	Put Tests Into Separate Uize.Tests Namespace
 		It would be better for tests to exist under a different namespace than =Uize.Test=, so that the =Uize.Test= namespace can be reserved for test subclasses for special types of tests.
 
-	Make Unit Test Build Scripts Generic
-		Shareable Code to Dynamically Add Tests
-			Have shareable code that can take a list of module names, and dynamically add tests for modules for which no dedicated test modules have been created.
-
-			This code would be used in the UIZE Unit Tests example page, by supplying the list of modules from the =UizeSite.ModulesTree= module, and in the =Uize.Build.RunUnitTests= build script module which would obtain a list of modules using the =getFiles= method of the FileSystem service.
-
 	Clean Up Tests
 		Make Performance Tests Legit
 			Performance tests that aren't browser dependent should be turned into true test modules.
