@@ -1,7 +1,7 @@
 /*______________
 |       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
 |     /      /  |   ---------------------------------------------------
-|    /    O /   |    MODULE : Uize.Build.Deps Package
+|    /    O /   |    MODULE : UizeSite.Build.Deps Package
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
 | /____/ /__/_| | COPYRIGHT : (c)2014-2015 UIZE
@@ -18,13 +18,13 @@
 
 /*?
 	Introduction
-		The =Uize.Build.Deps= module implements a build script for analyzing the dependencies of a specified module and producing a detailed report.
+		The =UizeSite.Build.Deps= module implements a build script for analyzing the dependencies of a specified module and producing a detailed report.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 */
 
 Uize.module ({
-	name:'Uize.Build.Deps',
+	name:'UizeSite.Build.Deps',
 	required:[
 		'Uize.Util.Dependencies.Analyzer',
 		'Uize.Build.Files',
