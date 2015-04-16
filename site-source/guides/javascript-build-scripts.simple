@@ -120,8 +120,7 @@ The Built-in UIZE Build Scripts
 		- =Uize.Build.FolderOrganizeJsModules= - converts all the JavaScript modules under a specified namespace to being folder organized, to ease migration from flat organization
 		- =Uize.Build.ListJsModules= - outputs a log file that lists all the JavaScript modules in a project (a refactoring aid)
 		- =Uize.Build.NeatenJsFiles= - removes trailing whitespace from all the JavaScript files in a project
-		- =Uize.Build.RunUnitTest= - runs the specified unit tests module
-		- =Uize.Build.RunUnitTests= - runs the test suite that tests all modules
+		- =Uize.Build.Test= - runs the one or more specified unit tests
 		- =Uize.Build.Deps= - traces all the dependencies for the specified module and outputs the list to the console
 		- =Uize.Build.UpdateCopyrightNotices= - updates the copyright notices in the head comments for all JavaScript modules in a project
 		- =Uize.Build.WebServer= - runs the UIZE dev server
