@@ -64,7 +64,6 @@
 				EXAMPLES
 				...........
 				Uize
-				UizeSite
 				MyNamespace
 				...........
 

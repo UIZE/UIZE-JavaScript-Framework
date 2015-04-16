@@ -43,8 +43,8 @@ Uize.module ({
 							{Uize:0}
 						],
 						['A compact string containing multiple root paths is decoded to a paths tree object with multiple nodes at the root level',
-							'Uize|UizeSite',
-							{Uize:0,UizeSite:0}
+							'Uize|MyNamespace',
+							{Uize:0,MyNamespace:0}
 						],
 						['Test that a compact string for a paths tree containing only a root path and a subpath is decoded correctly',
 							'Uize[Widget]',
@@ -55,8 +55,8 @@ Uize.module ({
 							{Uize:{Node:0,Widget:{Bar:0,Form:0}}}
 						],
 						['A complex compact string is decoded to a paths tree object',
-							'Uize[Fade|Color|Node|Widget[Bar[Slider]|Form]]|UizeSite[Delve|Page]',
-							{Uize:{Fade:0,Color:0,Node:0,Widget:{Bar:{Slider:0},Form:0}},UizeSite:{Delve:0,Page:0}}
+							'Uize[Fade|Color|Node|Widget[Bar[Slider]|Form]]|MyNamespace[Foo|Bar]',
+							{Uize:{Fade:0,Color:0,Node:0,Widget:{Bar:{Slider:0},Form:0}},MyNamespace:{Foo:0,Bar:0}}
 						],
 						['Test that the omission of closers in a compact string is handled correctly',
 							'Uize[Node|Widget[Bar|Form',
@@ -84,8 +84,8 @@ Uize.module ({
 								{'':0,Uize:0}
 							],
 							['Test that an empty root path in the middle of a compact string is handled correctly',
-								'Uize||UizeSite',
-								{Uize:0,'':0,UizeSite:0}
+								'Uize||MyNamespace',
+								{Uize:0,'':0,MyNamespace:0}
 							],
 							['Test that an empty root path at the tail of a compact string is handled correctly',
 								'Uize|',
@@ -110,8 +110,8 @@ Uize.module ({
 							'Uize'
 						],
 						['Test that multiple nodes at the same level in a tree is encoded correctly and the default delimiter is used',
-							{Uize:0,UizeSite:0},
-							'Uize|UizeSite'
+							{Uize:0,MyNamespace:0},
+							'Uize|MyNamespace'
 						],
 						['Test that a node with a single child node is encoded correctly',
 							{Uize:{Widget:0}},
@@ -122,8 +122,8 @@ Uize.module ({
 							'Uize[Node|Widget[Bar|Form]]'
 						],
 						['A complex tree can be encoded',
-							{Uize:{Fade:0,Color:0,Node:0,Widget:{Bar:{Slider:0},Form:0}},UizeSite:{Delve:0,Page:0}},
-							'Uize[Fade|Color|Node|Widget[Bar[Slider]|Form]]|UizeSite[Delve|Page]'
+							{Uize:{Fade:0,Color:0,Node:0,Widget:{Bar:{Slider:0},Form:0}},MyNamespace:{Foo:0,Bar:0}},
+							'Uize[Fade|Color|Node|Widget[Bar[Slider]|Form]]|MyNamespace[Foo|Bar]'
 						],
 						['A custom opener, closer, and separator can be specified',
 							[{Uize:{Node:0,Widget:{Bar:0,Form:0}}},{opener:'<_',closer:'_>',separator:'::'}],
@@ -151,8 +151,8 @@ Uize.module ({
 								'|Uize'
 							],
 							['Test that an empty root path in the middle of several root paths is handled correctly',
-								{Uize:0,'':0,UizeSite:0},
-								'Uize||UizeSite'
+								{Uize:0,'':0,MyNamespace:0},
+								'Uize||MyNamespace'
 							],
 							['Test that an empty root path as the last root path is handled correctly',
 								{Uize:0,'':0},
