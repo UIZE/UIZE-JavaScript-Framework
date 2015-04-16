@@ -1,7 +1,7 @@
 /*______________
 |       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
 |     /      /  |   ---------------------------------------------------
-|    /    O /   |    MODULE : Uize.Build.TraceDependencies Package
+|    /    O /   |    MODULE : Uize.Build.Deps Package
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
 | /____/ /__/_| | COPYRIGHT : (c)2013-2015 UIZE
@@ -18,13 +18,13 @@
 
 /*?
 	Introduction
-		The =Uize.Build.TraceDependencies= package logs to the console all the dependencies for a specified JavaScript module.
+		The =Uize.Build.Deps= package logs to the console all the dependencies for a specified JavaScript module.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 */
 
 Uize.module ({
-	name:'Uize.Build.TraceDependencies',
+	name:'Uize.Build.Deps',
 	required:[
 		'Uize.Build.ModuleInfo',
 		'Uize.Json'
@@ -37,7 +37,7 @@ Uize.module ({
 				console.log (
 					Uize.Json.to (
 						Uize.Build.ModuleInfo.traceDependencies (
-							_params.moduleName,
+							_params.module || _params.moduleName,
 							_params.excludeModules && _params.excludeModules.split (',')
 						)
 					)
