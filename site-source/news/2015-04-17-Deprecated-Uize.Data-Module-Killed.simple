@@ -1,0 +1,23 @@
+The =Uize.Data= module that was deprecated back in April of 2014 has now finally been killed - =Uize.Data= now exists purely as a namespace for various other data utility modules.
+
+The =Uize.Data= module was superceded by the =Uize.Data.Compare= and =Uize.Data.Util= modules. The methods contained inside the defunct =Uize.Data= module were migrated to these two modules as follows...
+
+SUMMARY
+.....................................................................
+Uize.Data.clones        >> BECOMES >>  Uize.Data.Compare.clones
+Uize.Data.conjoined     >> BECOMES >>  Uize.Data.Compare.conjoined
+Uize.Data.identical     >> BECOMES >>  Uize.Data.Compare.identical
+Uize.Data.intersection  >> BECOMES >>  Uize.Data.Compare.intersection
+
+Uize.Data.filter        >> BECOMES >>  Uize.Data.Util.filter
+Uize.Data.findRecords   >> BECOMES >>  Uize.Data.Util.findRecords
+Uize.Data.getColumn     >> BECOMES >>  Uize.Data.Util.getColumn
+.....................................................................
+
+Because the =Uize.Data= module has been killed, attempts to call the defunct methods listed above will produce errors. If any code had not already been updated to account for the migration of those methods, such code will not be forced to be modified or may break after this latest update.
+
+....................................................................................
+<< metadata >>
+
+title: 2015-04-17 - Deprecated Uize.Data Module Killed
+....................................................................................
