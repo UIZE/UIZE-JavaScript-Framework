@@ -123,6 +123,20 @@ Uize.module ({
 
 				_data = [
 					_item ('Home','','index'),
+					{
+						title:'Latest News',
+						link:'latest-news.html',
+						items:[
+							_news (2014),
+							_news (2013),
+							_news (2012),
+							_news (2011),
+							_news (2010),
+							_news (2009),
+							_news (2008),
+							_news (2006)
+						]
+					},
 					_divider,
 					_item ('DOWNLOAD'),
 					{
@@ -211,20 +225,6 @@ Uize.module ({
 					_modulesReferenceItem,
 					_divider,
 					{
-						title:'Latest News',
-						link:'latest-news.html',
-						items:[
-							_news (2014),
-							_news (2013),
-							_news (2012),
-							_news (2011),
-							_news (2010),
-							_news (2009),
-							_news (2008),
-							_news (2006)
-						]
-					},
-					{
 						title:'Appendixes',
 						link:'appendixes.html',
 						items:[
@@ -240,6 +240,7 @@ Uize.module ({
 							_appendix ('JavaScript Optimization'),
 							_divider,
 							_item ('Index of JavaScript Modules','','javascript-modules-index'),
+							_item ('Widgets To Go','','javascript-widgets'),
 							_appendix ('SOTU (State of the UIZE)','sotu'),
 							_divider,
 							_appendix ('JavaScript Fun'),
@@ -301,11 +302,6 @@ Uize.module ({
 						items:[
 							_whitePaper ('Localization')
 						]
-					},
-					_divider,
-					{
-						title:'Widgets To Go',
-						link:'javascript-widgets.html'
 					},
 					_divider,
 					_item ('SUPPORT'),
