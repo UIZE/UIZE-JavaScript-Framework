@@ -83,7 +83,7 @@ Uize.module ({
 					test:function () {
 						var _regExpComposition = Uize.Util.RegExpComposition ({
 							$foo:/foo/,
-							_bar:/bar/,
+							'_bar':/bar/,
 							fooBar:/{$foo}{_bar}/
 						});
 						return this.expect (/foobar/g,_regExpComposition.get ('fooBar'));
