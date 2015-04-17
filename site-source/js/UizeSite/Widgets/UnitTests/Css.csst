@@ -1,0 +1,18 @@
+.`control` {
+	padding: 10px;
+	background: #becacd url(bg.gif) repeat-x left top;
+	border: 1px solid #899;
+	border-radius: 3px;
+	margin-bottom: 8px;
+}
+
+.`controlButtons` {
+	text-align: center;
+	padding-top: 8px;
+}
+
+.`testSelector` {
+	margin: 8px 0;
+	width: 100%;
+}
+

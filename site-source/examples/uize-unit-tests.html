@@ -3,41 +3,11 @@
 <head>
 	<title>UIZE Unit Tests | JavaScript Examples | UIZE JavaScript Framework</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-	<meta name="keywords" content="Uize.Test Uize.Widgets.Log.Widget"/>
+	<meta name="keywords" content="Uize.Test Uize.Widgets.Log.Widget UizeSite.Widgets.UnitTests.Widget"/>
 	<meta name="description" content="See how to run the various unit tests of the UIZE JavaScript Framework. Run a unit test and watch as the test runner chunks through its tests."/>
 	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
 	<link rel="stylesheet" href="../css/page.css"/>
 	<link rel="stylesheet" href="../css/page.example.css"/>
-	<style type="text/css">
-		.testControl {
-			width:740px;
-			margin:auto;
-			padding:10px;
-			background:#becacd url(../images/page-contents-bg.gif) repeat-x left top;
-			border:1px solid #899;
-			border-radius: 3px;
-		}
-		.testControlButton {
-			float:left;
-			margin:0 2px;
-		}
-
-		/*** progress bar ***/
-			.progressBarShell {
-				width:729px;
-				padding:3px;
-				border:1px solid #bcc;
-				margin:auto;
-				margin-top:10px;
-				background:#fff;
-			}
-
-		.logShell {
-			margin: 20px auto;
-			width:762px;
-		}
-
-	</style>
 </head>
 
 <body>
@@ -64,20 +34,9 @@
 		<p>This example lets you select and run any of the tests of the UIZE JavaScript Framework. Use the test selector to choose your test (an asterisk indicates a minimal load-module-and-build-it test that has been dynamically created because no dedicated test exists for a module). On selecting a test, the test will be loaded dynamically, during which time the <b>"START"</b> and <b>"STOP"</b> buttons will be disabled. After it has loaded, the buttons will be enabled again. Use the <b>"START"</b> button to start running the selected test. While the test is being performed, the progress bar will be updated to show how far you are through the test. Also, the log will be written to with details of the test's progress. You can stop the test at any time using the <b>"STOP"</b> button. If the test fails, test execution will be aborted and a synopsis of the failure will be displayed in a dialog. To run the entire test suite for the UIZE JavaScript Framework, select the <b>"RUN ALL MODULE TESTS"</b> option.</p>
 	</div>
 
-	<!-- button -->
+	<!-- unit tests UI -->
 
-	<div class="testControl">
-		<div style="float:left; line-height:22px; margin-right:5px;">SELECT A TEST:</div>
-		<select id="page-testSelector" style="float: left; margin-right: 15px; max-width: 484px;"></select>
-		<div id="page-startTests"></div>
-		<div id="page-stopTests"></div>
-		<br style="clear:left;"/>
-		<div id="page-progressBar" class="progressBarShell"></div>
-	</div>
-
-	<div style="height:4px;"></div>
-
-	<div id="page-log" class="logShell"></div>
+	<div id="page-unitTests"></div>
 </div>
 
 <!-- JavaScript code to make the HTML "come alive" -->
@@ -88,149 +47,26 @@ Uize.require (
 	[
 		'UizeSite.Page.Example.library',
 		'UizeSite.Page.Example',
-		'Uize.Widgets.Button.Widget',
-		'Uize.Widgets.ProgressBar.Widget',
-		'Uize.Widgets.Log.Widget',
-		'UizeSite.ModulesTree',
-		'Uize.Data.Matches',
-		'Uize.Data.PathsTree',
-		'Uize.Url',
-		'Uize.Test.Runner'
+		'UizeSite.Widgets.UnitTests.Widget'
 	],
 	function () {
 		'use strict';
 
-		var
-			_runAllModuleTests = 'RUN ALL MODULE TESTS',
-			_testSuite,
-			_currentTestNo = 0
-		;
-
-		/*** prepare list of all modules to test ***/
-			var
-				_modulesTree = UizeSite.ModulesTree (),
-				_modules = Uize.Data.PathsTree.toList (_modulesTree).sort (),
-				_modulesLookup = Uize.lookup (_modules)
-			;
-
 		/*** create the example page widget ***/
 			var _page = window.page = UizeSite.Page.Example ();
 
-		/*** add the progress bar widget ***/
-			var _progressBar = _page.addChild (
-				'progressBar',
-				Uize.Widgets.ProgressBar.Widget,
-				{
-					built:false,
-					statusText:function (_input) {
-						var _totalSteps = _input.totalSteps;
-						return _totalSteps ? _input.stepsCompleted + ' of ' + _totalSteps + ' tests completed' : '';
-					}
-				}
-			);
-
-		/*** add the start and stop buttons ***/
-			_page.addChildren (
-				{
-					startTests:{
-						text:'START',
-						flavor:'positive',
-						action:function () {
-							_prepareToRunTests ();
-							_testSuite.run ();
-						}
-					},
-					stopTests:{
-						text:'STOP',
-						flavor:'negative',
-						action:function () {_testSuite.stop ()}
-					}
-				},
-				{
-					widgetClass:Uize.Widgets.Button.Widget,
-					enabled:false,
-					built:false,
-					size:'small',
-					extraClasses:'testControlButton'
-				}
-			);
-
 		/*** add the log widget ***/
-			var _log = _page.addChild ('log',Uize.Widgets.Log.Widget,{built:false,title:'TEST LOG'});
+			_page.addChild (
+				'unitTests',
+				UizeSite.Widgets.UnitTests.Widget,
+				{
+					built:false,
+					test:Uize.Url.fromParams (location.href).runtest
+				}
+			);
 
 		/*** wire up the page widget ***/
 			_page.wireUi ();
-
-		/*** prepare to run tests ***/
-			function _prepareToRunTests () {
-				_progressBar.set ({value:_currentTestNo = 0});
-				_log.clear ();
-			}
-
-		/*** handle selection of test ***/
-			function _setWidgetsEnabled (_mustEnable) {
-				var _enabled = _mustEnable ? 'inherit' : false;
-				_page.children.startTests.set ({enabled:_enabled});
-				_page.children.stopTests.set ({enabled:_enabled});
-			}
-
-			function _selectTest (_callback) {
-				_testSuite && _testSuite.stop ();
-				_setWidgetsEnabled (false);
-				_prepareToRunTests ();
-
-				var _testName = _page.getNodeValue ('testSelector');
-				Uize.Test.Runner.resolve (
-					{
-						module:_testName == _runAllModuleTests ? '*' : _testName,
-						console:'verbose'
-					},
-					function () {return _modules},
-					function (_moduleName) {return _modulesLookup [_moduleName]},
-					function (_message) {_log.log (_message)},
-					function (_reasonForFailure) {_reasonForFailure && alert (_reasonForFailure)},
-					function (_test) {
-						_testSuite = _test;
-						_setWidgetsEnabled (true);
-						_progressBar.set ({maxValue:_testSuite.getTotalTests ()});
-						_prepareToRunTests ();
-						_testSuite.wire ({Done:function (e) {_progressBar.set ({value:++_currentTestNo})}});
-						_callback && _callback ();
-					}
-				);
-			}
-
-			_page.wireNode ('testSelector','change',function () {_selectTest ()});
-
-		/*** initialize ***/
-			/*** populate test selector ***/
-				var
-					_selectorOptions = _page.getNode ('testSelector').options,
-					_testModulesLookup = Uize.lookup (
-						Uize.Data.Matches.retain (_modules,Uize.Util.ModuleNaming.isTestModule)
-					)
-				;
-				_selectorOptions [0] = new Option (_runAllModuleTests,_runAllModuleTests);
-				Uize.forEach (
-					_modules,
-					function (_moduleName) {
-						if (
-							!Uize.Util.ModuleNaming.isTestModule (_moduleName) &&
-							!/\.library$/.test (_moduleName) // ignore .library modules
-						)
-							_selectorOptions [_selectorOptions.length] = new Option (
-								_moduleName +
-									(_testModulesLookup [Uize.Util.ModuleNaming.getTestModuleName (_moduleName)] ? '' : ' *'),
-								_moduleName
-							)
-						;
-					}
-				);
-
-			/*** initialize test selector, using runtest query param ***/
-				var _runTest = Uize.Url.fromParams (location.href).runtest;
-				_page.setNodeValue ('testSelector',_runTest || _runAllModuleTests);
-				_selectTest (function () {_runTest && _testSuite.run ()});
 	}
 );
 

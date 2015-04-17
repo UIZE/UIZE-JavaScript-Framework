@@ -1,0 +1,13 @@
+<div>
+	<div class="control">
+		<div class="testSelectorLabel">SELECT A TEST:</div>
+		<child name="testSelector" class="testSelector"/>
+		<child name="progressBar"/>
+		<div class="controlButtons">
+			<child name="startTests"/>
+			<child name="stopTests"/>
+		</div>
+	</div>
+	<child name="log" class="log"/>
+</div>
+
