@@ -43,7 +43,6 @@ Uize.module ({
 		var
 			/*** Variables for Scruncher Optimization ***/
 				_undefined,
-				_Uize_Util_ModuleNaming = Uize.Util.ModuleNaming,
 
 			/*** General Variables ***/
 				_fileSystem = Uize.Services.FileSystem.singleton (),
@@ -255,13 +254,6 @@ Uize.module ({
 					*/
 				},
 
-				getTestModuleName:_Uize_Util_ModuleNaming.getTestModuleName,
-					/*?
-						Static Methods
-							Uize.Build.Util.getTestModuleName
-								This method has been deprecated *(DEPRECATED 2014-02-02)* in favor of the newer =Uize.Util.ModuleNaming.getTestModuleName= method of the =Uize.Util.ModuleNaming= module.
-					*/
-
 				getJsModules:function (_params) {
 					var
 						_modulesPath = _params.sourcePath + '/' + _params.modulesFolder,
@@ -332,13 +324,6 @@ Uize.module ({
 								..................................................................
 					*/
 				},
-
-				getModuleNamespace:_Uize_Util_ModuleNaming.getNamespace,
-					/*?
-						Static Methods
-							Uize.Build.Util.getModuleNamespace
-								This method has been deprecated *(DEPRECATED 2014-02-02)* in favor of the newer =Uize.Util.ModuleNaming.getNamespace= method of the =Uize.Util.ModuleNaming= module.
-					*/
 
 				readSimpleDataFile:function (_simpleDataFilePath) {
 					return Uize.Data.Simple.parse ({
