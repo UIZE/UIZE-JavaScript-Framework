@@ -34,8 +34,21 @@ Uize.module ({
 		;
 
 		return Uize.package ({
-			getColumn:_Uize_Data.getColumn,
-				// implementation remains in the Uize.Data module until end of the deprecation grace period
+			getColumn:function (_rows,_columnName,_onlyUniques) {
+				var _result = [];
+				if (_rows) {
+					var _uniqueValuesMap = _onlyUniques ? {} : null;
+					for (var _rowNo = -1, _rowsLength = _rows.length; ++_rowNo < _rowsLength;) {
+						var _columnValueForRow = _rows [_rowNo] [_columnName];
+						if (
+							!_onlyUniques ||
+							(!_uniqueValuesMap [_columnValueForRow] && (_uniqueValuesMap [_columnValueForRow] = 1))
+						)
+							_result.push (_columnValueForRow)
+						;
+					}
+				}
+				return _result;
 				/*?
 					Static Methods
 						Uize.Data.Util.getColumn
@@ -101,9 +114,16 @@ Uize.module ({
 
 							In the above example, the variable =departments= would be an array with the value =['engineering','finance']=.
 				*/
+			},
 
-			findRecords:_Uize_Data.findRecords,
-				// implementation remains in the Uize.Data module until end of the deprecation grace period
+			findRecords:function (_records,_match) {
+				var _matchingRecords = [];
+				if (_records) {
+					for (var _recordNo = -1, _recordsLength = _records.length, _record; ++_recordNo < _recordsLength;)
+						Uize.recordMatches (_record = _records [_recordNo],_match) && _matchingRecords.push (_record)
+					;
+				}
+				return _matchingRecords;
 				/*?
 					Static Methods
 						Uize.Data.Util.findRecords
@@ -158,9 +178,22 @@ Uize.module ({
 							NOTES
 							- see also the =Uize.findRecord=, =Uize.findRecordNo=, and =Uize.recordMatches= static methods of the =Uize.Class= base class
 				*/
+			},
 
-			filter:_Uize_Data.filter
-				// implementation remains in the Uize.Data module until end of the deprecation grace period
+			filter:function (_object,_propertyNames) {
+				var _result = {};
+				if (_object && _propertyNames) {
+					for (
+						var _propertyNameNo = -1, _propertyNamesLength = _propertyNames.length;
+						++_propertyNameNo < _propertyNamesLength;
+					) {
+						var _propertyName = _propertyNames [_propertyNameNo];
+						if (_propertyName in _object)
+							_result [_propertyName] = _object [_propertyName]
+						;
+					}
+				}
+				return _result;
 				/*?
 					Static Methods
 						Uize.Data.Util.filter
@@ -205,6 +238,7 @@ Uize.module ({
 							);
 							.................................
 				*/
+			}
 		});
 	}
 });

@@ -30,12 +30,137 @@ Uize.module ({
 
 		var
 			/*** Variables for Scruncher Optimization ***/
-				_Uize_Data = Uize.Data
+				_package,
+				_false = false,
+				_Infinity = Infinity,
+				_Uize_totalKeys = Uize.totalKeys,
+
+			/*** General Variables ***/
+				_sacredEmptyObject = {}
 		;
 
-		return Uize.package ({
-			identical:_Uize_Data.identical,
-				// implementation remains in the Uize.Data module until end of the deprecation grace period
+		return _package = Uize.package ({
+			identical:function (_object1,_object2,_options) {
+				if (!_options) _options = _sacredEmptyObject;
+				var
+					_equality = _options.equality,
+					_looseEquality = _equality == 'loose',
+					_typeEquality = !_looseEquality && _equality == 'type',
+					_treeEquality = !_looseEquality && !_typeEquality && _equality == 'tree',
+					_strictEquality = !_looseEquality && !_typeEquality && !_treeEquality,
+					_allowConjoined = _options.allowConjoined !== _false
+				;
+				function _areIdentical (_object1,_object2) {
+					var
+						_identical,
+						_typeofObject1 = typeof _object1,
+						_typeofObject1IsObject = _typeofObject1 == 'object',
+						_object1IsObject = _typeofObject1IsObject && _object1,
+						_typesMatch = _typeofObject1 == typeof _object2
+					;
+					function _compareObjectsForIdentical () {
+						if (_identical = _Uize_totalKeys (_object1) == _Uize_totalKeys (_object2)) {
+							for (var _propertyName in _object1) {
+								if (
+									!(_propertyName in _object2) ||
+									!_areIdentical (_object1 [_propertyName],_object2 [_propertyName])
+								) {
+									_identical = _false;
+									break;
+								}
+							}
+						}
+					}
+					if (_typesMatch && _object1IsObject && _object2) {
+						var _object1Constructor = _object1.constructor;
+						if (_object1 == _object2) {
+							_identical = _allowConjoined;
+						} else if (_identical = _object1Constructor == _object2.constructor) {
+							if (
+								_object1Constructor == Date ||
+								_object1Constructor == String ||
+								_object1Constructor == Number ||
+								_object1Constructor == Boolean ||
+								_object1Constructor == RegExp
+							) {
+								_identical = _object1 + '' == _object2 + '';
+								/* NOTE:
+									Coercion to string invokes valueOf or toString, depending on the object type (toString for RegExp), which covers Date, String, Number, Boolean, and RegExp. Calling valueOf, while more performant for some object types, doesn't cover the case for RegExp (since valueOf returns a reference to the object), and it doesn't cover the case of two Number instances with the value NaN, since valueOf would return NaN and NaN is not equal to NaN (whereas, 'NaN' is equal to 'NaN')
+								*/
+							} else {
+								if (typeof _object1.splice == 'function' && typeof _object2.splice == 'function') {
+									/* NOTES:
+										To compare arrays for their contents being identical, we first test that their lengths are the same. If this test passes, we use a standard iterator to iterate through the arrays to compare their elements.
+
+										If the values of elements are identical between the arrays, then we go on to test the custom properties (if any exist). Most importantly, we don't use a for...in loop to iterate through both elements and custom properties, partly for performance reasons, but mostly because of an unfortunate behavior in Microsoft's JScript interpreter.
+
+										In several versions of Microsoft's JScript interpreter, if an array is initialized using the literal syntax (i.e. ['value 1','value 2','value 3']), then any element whose value is initialized to undefined will not be encountered in a for...in loop.
+
+										EXAMPLE
+										.....................................
+										var
+											keysHash = {},
+											myArray = ['foo',undefined,'bar']
+										;
+										for (key in myArray) {
+											keysHash [key] = true;
+										}
+										alert (keysHash [1]);
+										.....................................
+
+										In the above example, the alert statement would alert the value undefined in interpreters that exhibit the problematic behavior.
+
+										This behavior would cause a problem if we were using a for...in loop to compare arrays for identical elements and custom properties. So, instead, we compare elements and custom properties separately. In order to compare only custom properties, we splice out the elements of the arrays so we can do a for...in loop to compare the custom properties without encountering the array elements in the loop. After we've compared custom properties, we then restore the spliced elements.
+									*/
+									if (_identical = _object1.length == _object2.length) {
+										for (var _elementNo = _object1.length; --_elementNo >= 0;) {
+											if (!_areIdentical (_object1 [_elementNo],_object2 [_elementNo])) {
+												_identical = _false;
+												break;
+											}
+										}
+										if (_identical) {
+											/*** remove array elements and store ***/
+												var
+													_object1Elements = _object1.splice (0,_Infinity),
+													_object2Elements = _object2.splice (0,_Infinity)
+												;
+
+											_compareObjectsForIdentical ();
+
+											/*** restore removed elements to arrays ***/
+												Uize.push (_object1,_object1Elements);
+												Uize.push (_object2,_object2Elements);
+										}
+									}
+								} else {
+									_compareObjectsForIdentical ();
+								}
+							}
+						}
+					} else {
+						_identical = _treeEquality
+							? !_object1IsObject && !(typeof _object2 == 'object' && _object2)
+							: (
+								(
+									_looseEquality
+										? _object1 == _object2
+										: (
+											_typesMatch &&
+											(
+												_strictEquality
+													? _object1 === _object2
+													: (!_typeofObject1IsObject || !_object1 == !_object2)
+											)
+										)
+								) ||
+								(_typesMatch && _typeofObject1 == 'number' && _object1 != _object1 && _object2 != _object2)
+							)
+						;
+					}
+					return _identical;
+				}
+				return _areIdentical (_object1,_object2);
 				/*?
 					Static Methods
 						Uize.Data.Compare.identical
@@ -91,9 +216,34 @@ Uize.module ({
 							NOTES
 							- see also the =Uize.Data.Compare.clones= and =Uize.Data.Compare.conjoined= static methods
 				*/
+			},
 
-			conjoined:_Uize_Data.conjoined,
-				// implementation remains in the Uize.Data module until end of the deprecation grace period
+			conjoined:function (_object1,_object2) {
+				function _getObjectReferences (_object) {
+					var _objRefs = [];
+					function _accumulateObjRefs (_object) {
+						if (typeof _object == 'object') {
+							if (!Uize.isIn (_objRefs,_object)) {
+								_objRefs.push (_object);
+								for (var _propertyName in _object)
+									_accumulateObjRefs (_object [_propertyName])
+								;
+							}
+						}
+					}
+					_accumulateObjRefs (_object);
+					return _objRefs;
+				}
+				var
+					_conjoined = _false,
+					_object1ObjRefs = _getObjectReferences (_object1),
+					_object1ObjRefsLength = _object1ObjRefs.length,
+					_object2ObjRefs = _getObjectReferences (_object2)
+				;
+				for (var _object1ObjRefNo = -1; ++_object1ObjRefNo < _object1ObjRefsLength && !_conjoined;)
+					_conjoined = Uize.isIn (_object2ObjRefs,_object1ObjRefs [_object1ObjRefNo])
+				;
+				return _conjoined;
 				/*?
 					Static Methods
 						Uize.Data.Compare.conjoined
@@ -107,9 +257,13 @@ Uize.module ({
 							NOTES
 							- =Uize.Data.Compare.conjoined (myObjectOBJ,myObjectOBJ)= will return =true=, since they are one and the same (i.e. conjoined at the root).
 				*/
+			},
 
-			clones:_Uize_Data.clones,
-				// implementation remains in the Uize.Data module until end of the deprecation grace period
+			clones:function (_object1,_object2) {
+				return (
+					_package.identical (_object1,_object2,{allowConjoined:_false}) &&
+					!_package.conjoined (_object1,_object2)
+				);
 				/*?
 					Static Methods
 						Uize.Data.Compare.clones
@@ -125,9 +279,19 @@ Uize.module ({
 							NOTES
 							- =Uize.Data.Compare.clones (myObjectOBJ,myObjectOBJ)= will return =false=, since they are one and the same and not clones.
 				*/
+			},
 
-			intersection:_Uize_Data.intersection
-				// implementation remains in the Uize.Data module until end of the deprecation grace period
+			intersection:function (_object1,_object2) {
+				var _result = {};
+				if (_object1 && _object2) {
+					for (var _propertyName in _object1) {
+						var _propertyValue = _object1 [_propertyName];
+						if (_object2 [_propertyName] === _propertyValue)
+							_result [_propertyName] = _propertyValue
+						;
+					}
+				}
+				return _result;
 				/*?
 					Static Methods
 						Uize.Data.Compare.intersection
@@ -159,6 +323,7 @@ Uize.module ({
 
 							In the above example, the variable =employeeInCommon= would have the value ={firstName:'John',startYear:'2008'}=.
 				*/
+			}
 		});
 	}
 });
