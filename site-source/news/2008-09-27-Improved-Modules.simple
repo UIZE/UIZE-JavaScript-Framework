@@ -24,7 +24,7 @@ IMPROVED MODULE: Uize.Widget.Tree.List
 		Essentially, Safari is not consistent with other browsers in where meaningful values for =scrollLeft= and =scrollTop= are reflected.
 
 	IMPROVED MODULE: Uize.Widget.PopupPalette
-		The =palette= implied node of an instance of the =Uize.Widget.PopupPalette= widget class is now positioned to butt up against the =selector= child button's root node.
+		The =palette= DOM node of an instance of the =Uize.Widget.PopupPalette= widget class is now positioned to butt up against the =selector= child button's root node.
 
 		If the selector button is not visible at the time that the palette is shown, then the palette is positioned based upon the current mouse coordinates.
 

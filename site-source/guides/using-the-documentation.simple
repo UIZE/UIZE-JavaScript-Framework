@@ -96,7 +96,7 @@ General Documentation Tips
 		Contents List Tooltips
 			For any item in a document page's contents list, a tooltip is displayed when hovering over the item, that provides a snapshot / preview of the section by showing a portion of the first paragraph of the section (provided that the section has a first paragraph).
 
-			For module reference documents, the first paragraph is typically a one or two sentence summary of a method, property, event, implied node, etc., so you can use the contents tree as a kind of feature summary or cheat sheet.
+			For module reference documents, the first paragraph is typically a one or two sentence summary of a method, property, event, DOM node, etc., so you can use the contents tree as a kind of feature summary or cheat sheet.
 
 	Hyperlinked Section Numbering
 		A feature of the documentation that may come in handy on occasion and that is kind of buried is the hyperlinking of the section numbering.

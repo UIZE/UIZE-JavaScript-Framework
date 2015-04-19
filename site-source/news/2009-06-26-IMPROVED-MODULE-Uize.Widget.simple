@@ -1,7 +1,7 @@
 The =Uize.Widget= base class has been improved in a number of ways.
 
 +. Improvements have been made in the performance of the busy and enabled mechanisms.
-+. The newly added =injectNodeHtml= instance method lets you inject the specified HTML markup into the specified implied node, using the specified injection mode.
++. The newly added =injectNodeHtml= instance method lets you inject the specified HTML markup into the specified DOM node, using the specified injection mode.
 +. The =wired= instance method has been deprecated in favor of the =isWired= instance property, offering slightly better performance than using the =get= instance method to access the value of the =wired= state property.
 
 

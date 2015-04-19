@@ -146,22 +146,22 @@ Uize.module ({
 									}
 								);
 								/*?
-									Implied Nodes
+									DOM Nodes
 										previewZoom
 											A node that is used for displaying the zoomed in preview image.
 
-											If this node does not exist in the document at the time that the zoom in effect for the instance is to be initiated, then it will be automatically cloned from the =preview= implied node and injected into the =preview= implied node's parent node, so that it exists as a peer to the =preview= node.
+											If this node does not exist in the document at the time that the zoom in effect for the instance is to be initiated, then it will be automatically cloned from the =preview= DOM node and injected into the =preview= DOM node's parent node, so that it exists as a peer to the =preview= node.
 
 											NOTES
-											- see the companion =previewZoomLowRes= implied node
+											- see the companion =previewZoomLowRes= DOM node
 
 										previewZoomLowRes
 											A node that is used for displaying a low resolution version of the zoomed in preview image.
 
-											If this node does not exist in the document at the time that the zoom in effect for the instance is to be initiated, then it will be automatically cloned from the =preview= implied node and injected into the =preview= implied node's parent node, so that it exists as a peer to the =preview= node.
+											If this node does not exist in the document at the time that the zoom in effect for the instance is to be initiated, then it will be automatically cloned from the =preview= DOM node and injected into the =preview= DOM node's parent node, so that it exists as a peer to the =preview= node.
 
 											NOTES
-											- see the companion =previewZoom= implied node
+											- see the companion =previewZoom= DOM node
 								*/
 								_Uize_Dom_Basics.setStyle (
 									_previewZoomNode,
@@ -466,7 +466,7 @@ Uize.module ({
 							previewUrl
 								A string, specifying the URL for the preview image.
 
-								If the value of this property is =undefined=, =null=, or =''= (an empty string) at the time that the instance is wired up, then its value will be set automatically from the value of the =src= property of the =preview= implied node. When the value of this property is changed and the instance is wired, the UI of the instance will be updated to reflect the new value.
+								If the value of this property is =undefined=, =null=, or =''= (an empty string) at the time that the instance is wired up, then its value will be set automatically from the value of the =src= property of the =preview= DOM node. When the value of this property is changed and the instance is wired, the UI of the instance will be updated to reflect the new value.
 
 								NOTES
 								- the initial value is =undefined=

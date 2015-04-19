@@ -27,9 +27,9 @@
 
 			Among the range of possibilities for slideshows are...
 
-			- a simple image slideshow, with no transition effects and merely employing an implied node for the slide image
+			- a simple image slideshow, with no transition effects and merely employing a DOM node for the slide image
 			- an image slideshow with transition effects, employing helper widget classes (such as =Uize.Widget.ImageWipe=)
-			- an image slideshow with transition effects, and displaying slide meta data (such as rating, description, tags, etc.) through a combination of helper widgets and implied nodes
+			- an image slideshow with transition effects, and displaying slide meta data (such as rating, description, tags, etc.) through a combination of helper widgets and DOM nodes
 			- a slideshow of data, such as a bar chart representing different facets of data for different months of a year, and employing helper widget classes (such as =Uize.Widget.Bar=)
 			- a slideshow of slideshows, such as a slideshow of different houses - where each slide represents a house and itself presents its own sub-slideshow of different pictures of the house
 
@@ -56,7 +56,7 @@
 			The =Uize.Widget.SlideShow= base class does not provide or impose any specific transition effects, however, and acts primarily as a foundation / scaffolding upon which to build a slideshow user experience. Slideshows with elaborate transition effects can quite easily be configured by combining the =Uize.Widget.SlideShow= class with other widget classes from the UIZE JavaScript Framework - such as the =Uize.Widget.Swap.Image= and =Uize.Widget.ImageWipe= classes - or your own widget classes.
 
 		Slide Properties
-			The =Uize.Widget.SlideShow= class supports an arbitrary number of properties for slides, each of which can be bound - either implicitly or explicitly - to child widgets, implied nodes, =Uize.Class= subclass instances, or handler functions.
+			The =Uize.Widget.SlideShow= class supports an arbitrary number of properties for slides, each of which can be bound - either implicitly or explicitly - to child widgets, DOM nodes, =Uize.Class= subclass instances, or handler functions.
 
 			The system for binding slide properties so that they are represented in the user interface for a slideshow supports a wide range of possible applications for slideshows, where each slide may contain a rich set of data for display. For example, you may implement a slideshow with slides that contain =imageUrl=, =title=, =description=, =rating=, =author=, and =tags= properties. Or, you may implement a nutritional information slideshow - where each slide represents a different fruit and contains properties like =calories=, =totalFat=, =saturatedFat=, =cholesterol=, =sodium=, etc.
 
@@ -70,10 +70,10 @@
 
 			As mentioned earlier, the =Uize.Widget.SlideShow= class does not make assumptions about the content described by slides, and does also not presume to know how best to display that content. Instead, it is left to an individual application, a subclass of =Uize.Widget.SlideShow=, or some other widget class that uses the =Uize.Widget.SlideShow= class as a helper class to implement the presentation.
 
-			What the =Uize.Widget.SlideShow= class *does* provide is a mechanism for binding the values of slide properties - either implicitly to child widgets or implied nodes, or explicitly to registered =Uize.Class= subclass instances or handler functions.
+			What the =Uize.Widget.SlideShow= class *does* provide is a mechanism for binding the values of slide properties - either implicitly to child widgets or DOM nodes, or explicitly to registered =Uize.Class= subclass instances or handler functions.
 
 			Implicit Bindings
-				The =Uize.Widget.SlideShow= class implements a convenient facility for implicitly binding properties of the current slide to either child widgets of a =Uize.Widget.SlideShow= instance, or implied nodes of the instance.
+				The =Uize.Widget.SlideShow= class implements a convenient facility for implicitly binding properties of the current slide to either child widgets of a =Uize.Widget.SlideShow= instance, or DOM nodes of the instance.
 
 				Child Widget Bindings
 					One facility for implicit slide property binding involves testing for a child widget of a specific name.
@@ -84,21 +84,21 @@
 
 					Now, if a child widget instance is found that corresponds to a slide property, then the =value= state property for that child widget will be set to the value of the slide property for the current slide. This means that child widgets that are implicitly bound to slide properties must implement the `value interface` (i.e. provide a =value= state property). If the state property that logically represents the value in the child widget's class is not publicly named =value=, then one could modify the class to declare =value= as a public alias for that property (for more details, consult the guide [[../guides/state-properties.html][State Properties]]).
 
-					If the `child widget bindings` facility is not successful in implicitly binding a slide property to a child widget, then the `implied node bindings` facility will be employed.
+					If the `child widget bindings` facility is not successful in implicitly binding a slide property to a child widget, then the `DOM node bindings` facility will be employed.
 
-				Implied Node Bindings
-					Another facility for implicit slide property binding involves setting the value for an implied node.
+				DOM Node Bindings
+					Another facility for implicit slide property binding involves setting the value for a DOM node.
 
-					If the `child widget bindings` facility is not successful in implicitly binding a slide property to a child widget, then the slideshow instance will attempt to display the value of that slide property in an implied node of the instance, following the rule that an implied node that is intended to be bound to a slide property should be named =slide_[propertyName]=. So, for example, to have the =imageUrl= property for a slide implicitly bound to an implied node, an implied node named =slide_imageUrl= should exist in the DOM.
+					If the `child widget bindings` facility is not successful in implicitly binding a slide property to a child widget, then the slideshow instance will attempt to display the value of that slide property in a DOM node of the instance, following the rule that a DOM node that is intended to be bound to a slide property should be named =slide_[propertyName]=. So, for example, to have the =imageUrl= property for a slide implicitly bound to a DOM node, a DOM node named =slide_imageUrl= should exist in the DOM.
 
 					HOW IT'S DISPLAYED
 
-					To display the values of slide properties in corresponding implied nodes, the =setNodeValue= instance method of the =Uize.Widget= base class is used. This has the implication that values of slide properties can easily be represented in form elements (such as text input fields, textarea fields, radio buttons, checkboxes, etc.), image elements (=src= attribute will be set), or any HTML element (=innerHTML= will be set). If no node exists that corresponds to a slide property, then that slide property will simply not be represented in the user interface. Therefore, it is acceptable to have properties in the =slide= object that are either not meant to appear in the slideshow UI, or for which the UI is not yet implemented.
+					To display the values of slide properties in corresponding DOM nodes, the =setNodeValue= instance method of the =Uize.Widget= base class is used. This has the implication that values of slide properties can easily be represented in form elements (such as text input fields, textarea fields, radio buttons, checkboxes, etc.), image elements (=src= attribute will be set), or any HTML element (=innerHTML= will be set). If no node exists that corresponds to a slide property, then that slide property will simply not be represented in the user interface. Therefore, it is acceptable to have properties in the =slide= object that are either not meant to appear in the slideshow UI, or for which the UI is not yet implemented.
 
-					In the most simple usage of the =Uize.Widget.SlideShow= class, the `implied node bindings` facility provides a simple and lightweight way to reflect slide properties in the UI, simply by adding nodes to the DOM with correctly named id's.
+					In the most simple usage of the =Uize.Widget.SlideShow= class, the `DOM node bindings` facility provides a simple and lightweight way to reflect slide properties in the UI, simply by adding nodes to the DOM with correctly named id's.
 
-				Remapped Implied Node Bindings
-					In the event that the naming scheme employed by the `implied node bindings` facility does not suit your needs, you can use the implied node name remapping facility provided in the =Uize.Widget= base class to bind slide properties to arbitrarily named implied nodes.
+				Remapped DOM Node Bindings
+					In the event that the naming scheme employed by the `DOM node bindings` facility does not suit your needs, you can use the DOM node name remapping facility provided in the =Uize.Widget= base class to bind slide properties to arbitrarily named DOM nodes.
 
 					EXAMPLE
 					......................................
@@ -109,7 +109,7 @@
 					});
 					......................................
 
-					In the above example, the value of the =imageUrl= slide property - that would normally be bound by the `implied node bindings` facility to the implied node =slide_imageUrl= - is being remapped so that it is bound instead to the implied node =imageUrl=, using the =nodeMap= state property that is implemented in the =Uize.Widget= class.
+					In the above example, the value of the =imageUrl= slide property - that would normally be bound by the `DOM node bindings` facility to the DOM node =slide_imageUrl= - is being remapped so that it is bound instead to the DOM node =imageUrl=, using the =nodeMap= state property that is implemented in the =Uize.Widget= class.
 
 			Explicit Bindings
 				A facility is provided to explicitly declare a binding between a slide property and either an instance of a =Uize.Class= subclass that implements the `value interface` (i.e. provides a =value= state property), or an update handler function that will be executed when the value of the =slide= state property changes.
@@ -241,11 +241,11 @@ Uize.module ({
 
 								For example, a child widget that is intended to represent the value for a slide property named =imageUrl= should be named =slideImageUrl=. An arbitrary number of child widgets may be added to an instance of the =Uize.Widget.SlideShow= class, for the purpose of representing the values of slide properties through the `child widget bindings` facility.
 
-						Implied Nodes
+						DOM Nodes
 							slide_[propertyName]
 								An element node of any type, that will be used to represent the value for a corresponding slide property of the name =propertyName=.
 
-								For example, an implied node that is intended to represent the value for a slide property named =imageUrl= should be named =slide_imageUrl=. An arbitrary number of implied nodes may exist in the DOM for an instance of the =Uize.Widget.SlideShow= class, for the purpose of representing the values of slide properties through the `implied node bindings` facility.
+								For example, a DOM node that is intended to represent the value for a slide property named =imageUrl= should be named =slide_imageUrl=. An arbitrary number of DOM nodes may exist in the DOM for an instance of the =Uize.Widget.SlideShow= class, for the purpose of representing the values of slide properties through the `DOM node bindings` facility.
 					*/
 				;
 			}
@@ -403,7 +403,7 @@ Uize.module ({
 							slideBindings
 								An object, representing explicit bindings between slide properties and =Uize.Class= subclass instances or handler functions.
 
-								The name of each key in the =slideBindings= object should correspond to the name of a property in the =slide= object, and its value should be either a reference to an instance of a =Uize.Class= subclass that implements the `value interface` (i.e. provides a =value= state property), or an update handler function that will be executed when the value of the =slide= state property changes. It is not necessary to provide a binding for every slide property, and any slide property for which no explicit binding is provided will be bound implicitly to either a child widget or an implied mode.
+								The name of each key in the =slideBindings= object should correspond to the name of a property in the =slide= object, and its value should be either a reference to an instance of a =Uize.Class= subclass that implements the `value interface` (i.e. provides a =value= state property), or an update handler function that will be executed when the value of the =slide= state property changes. It is not necessary to provide a binding for every slide property, and any slide property for which no explicit binding is provided will be bound implicitly to either a child widget or a DOM node.
 
 								For more details on property bindings, consult the section `Slide Property Bindings`.
 

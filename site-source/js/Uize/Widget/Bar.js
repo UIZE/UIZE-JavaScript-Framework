@@ -141,54 +141,54 @@ Uize.module ({
 					if (!m.isWired) {
 						m._trackNode = m.getNode ('track');
 							/*?
-								Implied Nodes
+								DOM Nodes
 									track
-										The =track= implied node acts as a "guide" in which a bar's knob is to move. This node should be transparent when using the optional =full= and =empty= implied nodes, in order for those nodes to be visible to the user. When not using those nodes, the track image can be set in the CSS style for this node or can be a child node.
+										The =track= DOM node acts as a "guide" in which a bar's knob is to move. This node should be transparent when using the optional =full= and =empty= DOM nodes, in order for those nodes to be visible to the user. When not using those nodes, the track image can be set in the CSS style for this node or can be a child node.
 
 										NOTES
-										- this implied node is required
+										- this DOM node is required
 							*/
 						m._knobNode = m.getNode ('knob');
 							/*?
-								Implied Nodes
+								DOM Nodes
 									knob
-										The =knob= implied node acts as an indicator for a bar's current value and - for sliders - is wired up for drag-and-drop and provides the user a way to change the value. This node must be a child node of the =track= implied node.
+										The =knob= DOM node acts as an indicator for a bar's current value and - for sliders - is wired up for drag-and-drop and provides the user a way to change the value. This node must be a child node of the =track= DOM node.
 
 										NOTES
-										- this implied node is required
+										- this DOM node is required
 							*/
 						m._fullNode = m.getNode ('full');
 							/*?
-								Implied Nodes
+								DOM Nodes
 									full
-										The optional =full= implied node acts as an indicator for the "full" side of a bar. For vertical bars, the full side is on the bottom side of the knob. For horizontal bars, the full side is on the left side of the knob.
+										The optional =full= DOM node acts as an indicator for the "full" side of a bar. For vertical bars, the full side is on the bottom side of the knob. For horizontal bars, the full side is on the left side of the knob.
 
-										To display correctly, this node should occupy the same space in the layout as the optional =empty= implied node and must have the same dimension on the axis of the knob's motion (i.e. height for vertical bars, and width for horizontal bars) as the =track= implied node. It's not necessary that this node occupy the same space in the layout as the =track= implied node - the full/empty indicators could be off to the side, outside of the bar's track. However, in many cases you'll see bars with the full/empty indicators right over the track.
+										To display correctly, this node should occupy the same space in the layout as the optional =empty= DOM node and must have the same dimension on the axis of the knob's motion (i.e. height for vertical bars, and width for horizontal bars) as the =track= DOM node. It's not necessary that this node occupy the same space in the layout as the =track= DOM node - the full/empty indicators could be off to the side, outside of the bar's track. However, in many cases you'll see bars with the full/empty indicators right over the track.
 
 										NOTES
-										- this implied node is optional
-										- compare to the =empty= implied node
+										- this DOM node is optional
+										- compare to the =empty= DOM node
 							*/
 						m._emptyNode = m.getNode ('empty');
 							/*?
-								Implied Nodes
+								DOM Nodes
 									empty
-										The optional =empty= implied node acts as an indicator for the "empty" side of a bar. For vertical bars, the empty side is on the top side of the knob. For horizontal bars, the empty side is on the right side of the knob.
+										The optional =empty= DOM node acts as an indicator for the "empty" side of a bar. For vertical bars, the empty side is on the top side of the knob. For horizontal bars, the empty side is on the right side of the knob.
 
-										To display correctly, this node should occupy the same space in the layout as the optional =full= implied node and must have the same dimension on the axis of the knob's motion (i.e. height for vertical bars, and width for horizontal bars) as the =track= implied node. It's not necessary that this node occupy the same space in the layout as the =track= implied node - the full/empty indicators could be off to the side, outside of the bar's track. However, in many cases you'll see bars with the full/empty indicators right over the track.
+										To display correctly, this node should occupy the same space in the layout as the optional =full= DOM node and must have the same dimension on the axis of the knob's motion (i.e. height for vertical bars, and width for horizontal bars) as the =track= DOM node. It's not necessary that this node occupy the same space in the layout as the =track= DOM node - the full/empty indicators could be off to the side, outside of the bar's track. However, in many cases you'll see bars with the full/empty indicators right over the track.
 
 										NOTES
-										- this implied node is optional
-										- compare to the =full= implied node
+										- this DOM node is optional
+										- compare to the =full= DOM node
 							*/
 						m._valueNode = m.getNode ('value');
 							/*?
-								Implied Nodes
+								DOM Nodes
 									value
-										The optional =value= implied node provides a convenient way to display a bar's current value. When this node is present, its innerHTML will be set to the bar's value, every time it changes.
+										The optional =value= DOM node provides a convenient way to display a bar's current value. When this node is present, its innerHTML will be set to the bar's value, every time it changes.
 
 										NOTES
-										- this implied node is optional
+										- this DOM node is optional
 							*/
 
 						_superclass.doMy (m,'wireUi');

@@ -91,8 +91,8 @@ Uize.require (
 		/*** create the example page widget ***/
 			var page = window.page = UizeSite.Page.Example ();
 
-		function setNodeBgColorFromRgb (impliedNode,rgb) {
-			page.setNodeStyle (impliedNode,{backgroundColor:Uize.Color.to (rgb,'RGB string')});
+		function setNodeBgColorFromRgb (node,rgb) {
+			page.setNodeStyle (node,{backgroundColor:Uize.Color.to (rgb,'RGB string')});
 		}
 
 		function displayColorFaderPropertyAsJson (propertyName) {
@@ -121,10 +121,10 @@ Uize.require (
 				{
 					text:'RANDOMIZE AND FADE',
 					action:function () {
-						function makeRandomColorRgb (swatchImpliedNode) {
+						function makeRandomColorRgb (swatchNode) {
 							function getRandom0to255 () {return Math.round (Math.random () * 255)}
 							var rgb = {red:getRandom0to255 (),green:getRandom0to255 (),blue:getRandom0to255 ()};
-							setNodeBgColorFromRgb (swatchImpliedNode,rgb);
+							setNodeBgColorFromRgb (swatchNode,rgb);
 							return rgb;
 						}
 						colorFader.set ({

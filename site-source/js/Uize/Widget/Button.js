@@ -87,14 +87,14 @@ Uize.module ({
 				var m = this;
 				m._text != _undefined && m.isWired && m.setNodeInnerHtml ('text',m._text);
 				/*?
-					Implied Nodes
-						text Implied Node
+					DOM Nodes
+						text DOM Node
 							An optional node whose contents will be replaced with the value of the =text= state property, if this property's value is not =null= or =undefined=.
 
-							The =innerHTML= value of the =text Implied Node= will be updated to reflect the value of the =text= state property whenever the value of this property is changed, is not =null= or =undefined=, and the instance is wired up.
+							The =innerHTML= value of the =text DOM Node= will be updated to reflect the value of the =text= state property whenever the value of this property is changed, is not =null= or =undefined=, and the instance is wired up.
 
 							NOTES
-							- this implied node is optional
+							- this DOM node is optional
 				*/
 			}
 
@@ -115,14 +115,14 @@ Uize.module ({
 						_firstShownState = m._statePrecedenceMap [_stateCombinationNo]
 					;
 					/*?
-						Implied Nodes
+						DOM Nodes
 							Root Node
-								The root node is the implied node with the name =''= (empty string), and is required for this widget class.
+								The root node is the DOM node with the name =''= (empty string), and is required for this widget class.
 
 								If the =mode= state property is set to the value ='classes'=, then the =className= property of this node is updated to reflect the state of the instance's =playing=, =selected=, and =state= state properties. In such cases, the value used to set the =className= property is constructed by using the values of the =state=, =selected=, =playing=, =busyInherited=, =enabledInherited=, =classNamingForStates=, and =statePrecedenceMap= state properties.
 
 								NOTES
-								- this implied node is required
+								- this DOM node is required
 					*/
 					if (_firstShownState == _undefined) {
 						for (
@@ -639,9 +639,9 @@ Uize.module ({
 					/*?
 						State Properties
 							text
-								A string, whose value will be used to set the value of the =innerHTML= property of the =text Implied Node=.
+								A string, whose value will be used to set the value of the =innerHTML= property of the =text DOM Node=.
 
-								The =innerHTML= value of the =text Implied Node= will be updated to reflect the value of the =text= state property whenever the value of this property is changed, is not =null= or =undefined=, and the instance is wired up.
+								The =innerHTML= value of the =text DOM Node= will be updated to reflect the value of the =text= state property whenever the value of this property is changed, is not =null= or =undefined=, and the instance is wired up.
 
 								NOTES
 								- the initial value is =undefined=

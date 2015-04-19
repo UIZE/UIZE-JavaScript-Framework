@@ -210,7 +210,7 @@ Useful Troubleshooting Bookmarklets
 		### scrunched, but pre-XML encoded
 			javascript:(function(){function _a(_b){var _c=950,_d=700,_e=window.screen,_f=window.open('','reportPopup',['width='+_c,'height='+_d,'left='+Math.max((_e.width-_c-10)>>1,0),'top='+Math.max((_e.height-_d-40)>>1,0),'toolbar=no','location=no','directories=no','status=no','menubar=no','scrollbars=yes'].join(',')),_g=_f.document;_g.open('text/html');_g.writeln('<html><body><pre>'+_b.replace(/</g,'&lt;')+'</pre></body></html>');_g.close();_f.focus();}var _h=window.zPage||window.page;if(_h){var _i=prompt('Enter a DOM node id...','');if(_i){function _j(_k){if(_k.get('idPrefix')==_l){return _k;}else{var _m=_k.children;for(var _n in _m){var _o=_j(_m[_n]);if(_o)return _o;}}}function _p(_o){var _q=[];while(_o){_q.unshift(_o==_h?(_h==window.zPage?'zPage':'page'):_o.get('name'));_o=_o.parent}return _q.join('.children.');}var _r=_i.indexOf('-'),_l=_r> -1?_i.slice(0,_r):_i,_o=_j(_h),_k=_o.parent,_s=[];while(_k){_s.push(_p(_k)+'  --  WIDGET CLASS: '+_k.constructor.moduleName);_k=_k.parent;}if(_o){var _t='\n---------------------------------------------------------\n\n';_a('WIDGET PATH: '+_p(_o)+'\n'+'WIDGET CLASS: '+_o.constructor.moduleName+'\n'+_t+'WIDGET PARENTAGE:\n\n'+(_s.length?_s.join('\n')+'\n':'no parents\n')+_t+'WIDGET STATE SUMMARY:\n\n'+_o.toString());}else{alert('The DOM node with the ID "'+_i+'" does not appear belong to a widget.');}}}else{alert('This page doesn\'t have a page widget instance named "page" or "zPage".');}})();
 
-		You might be troubleshooting some issue on a page and you're digging through the HTML and find some node of interest. You can also use Firebug's Inspect Element feature to click on and select some node of interest. If the node has an =id= that makes it look like it's an implied node of some widget in the widget tree for the page, then you can use this bookmarklet to find the widget that owns the node.
+		You might be troubleshooting some issue on a page and you're digging through the HTML and find some node of interest. You can also use Firebug's Inspect Element feature to click on and select some node of interest. If the node has an =id= that makes it look like it's a DOM node of some widget in the widget tree for the page, then you can use this bookmarklet to find the widget that owns the node.
 
 		To use the bookmarklet, follow these simple steps...
 
@@ -286,8 +286,8 @@ Useful Troubleshooting Bookmarklets
 						return _widgetPath.join ('.children.');
 					}
 					var
-						_impliedNodePos = _nodeId.indexOf ('-'),
-						_idPrefix = _impliedNodePos > -1 ? _nodeId.slice (0,_impliedNodePos) : _nodeId,
+						_nodePos = _nodeId.indexOf ('-'),
+						_idPrefix = _nodePos > -1 ? _nodeId.slice (0,_nodePos) : _nodeId,
 						_widget = _findWidgetWithIdPrefix (_pageWidget),
 						_parent = _widget.parent,
 						_parents = []

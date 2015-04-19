@@ -25,7 +25,7 @@
 		###
 			- for value and values, discuss specific requirements for when the values are objects
 			- document child widgets
-			- document implied nodes
+			- document DOM nodes
 */
 
 Uize.module ({

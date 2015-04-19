@@ -910,11 +910,11 @@ Test Improvements
 		There might be numerous issues with testing arbitrary JavaScript files found spotted throughout a Web site's folders. For one thing, such JavaScript files may not be written as =Uize= JavaScript modules, and such files may not be able to be loaded without causing errors if they depend on other JavaScript code that they don't declare dependencies on.
 
 Node as a Widget
-	- a lot of widgets have to synchronize state to implied nodes
+	- a lot of widgets have to synchronize state to DOM nodes
 
-	- to make it easier for widgets to optimize their performance and minimize the number of times that they touch the DOM in performing UI updates, it might be helpful to provide a representation of the state of a DOM node in the form of a widget. In this approach, implied nodes are instead represented as node type child widgets. Instances of node type widgets can carry state for a node while the widget is not yet wired and while the node does not exist, to be synchronized with the node when the widget is wired up later.
+	- to make it easier for widgets to optimize their performance and minimize the number of times that they touch the DOM in performing UI updates, it might be helpful to provide a representation of the state of a DOM node in the form of a widget. In this approach, DOM nodes are instead represented as node type child widgets. Instances of node type widgets can carry state for a node while the widget is not yet wired and while the node does not exist, to be synchronized with the node when the widget is wired up later.
 
-	In what different ways do widgets touch implied nodes?
+	In what different ways do widgets touch DOM nodes?
 
 	- modifying the className to reflect state
 	- modifying position

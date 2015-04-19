@@ -423,7 +423,7 @@ Uize.module ({
 
 									/*** widgets & nodes ***/
 										'Child Widgets',
-										'Implied Nodes',
+										'DOM Nodes',
 
 									/*** misc ***/
 										'Deprecated Features'

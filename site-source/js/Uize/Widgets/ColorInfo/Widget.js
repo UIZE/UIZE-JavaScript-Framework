@@ -83,8 +83,8 @@ Uize.module ({
 					'asBackground:style.backgroundColor',
 					'asForeground:style.color'
 					/*?
-						Implied Nodes
-							heading Implied Node
+						DOM Nodes
+							heading DOM Node
 								.
 
 							swatch

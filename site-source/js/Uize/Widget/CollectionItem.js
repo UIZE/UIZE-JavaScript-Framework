@@ -54,14 +54,14 @@ Uize.module ({
 					var _title = m._title;
 					_title != _undefined && m.setNodeInnerHtml ('title',_title);
 					/*?
-						Implied Nodes
-							title Implied Node
+						DOM Nodes
+							title DOM Node
 								An optional node whose contents will be replaced with the value of the =title= state property, if this property's value is not =null= or =undefined=.
 
-								The =innerHTML= value of the =title Implied Node= will be updated to reflect the value of the =title= state property whenever the value of this property is changed, is not =null= or =undefined=, and the instance is wired up.
+								The =innerHTML= value of the =title DOM Node= will be updated to reflect the value of the =title= state property whenever the value of this property is changed, is not =null= or =undefined=, and the instance is wired up.
 
 								NOTES
-								- this implied node is optional
+								- this DOM node is optional
 					*/
 				}
 			}
@@ -74,14 +74,14 @@ Uize.module ({
 							['', m._cssClassOver, m._cssClassActive],
 							(m._selected ? 2 : m._over && 1) || 0
 							/*?
-								Implied Nodes
+								DOM Nodes
 									Root Node
-										The root node is the implied node with the name =''= (empty string), and is required for this widget class.
+										The root node is the DOM node with the name =''= (empty string), and is required for this widget class.
 
 										The =className= property of this node is updated to reflect the state of the instance's =selected= and =over= state properties. If the instance is selected (i.e. =selected= is =true=, then the =className= property of the node is updated to contain =cssClassActive=. If the instance is not selected, but the user is hovering over it (i.e. =over= is set to =true=), then the =className= property of the node is updated to contain =cssClassOver=. If both =selected= and =over= are both set to =false=, then the node's =className= property will not be updated.
 
 										NOTES
-										- this implied node is required
+										- this DOM node is required
 							*/
 						);
 
@@ -96,15 +96,15 @@ Uize.module ({
 								[_cssClassImage, _cssClassImageOver],
 								m._over
 								/*?
-									Implied Nodes
+									DOM Nodes
 										preview
 											An optional node that should provide a preview for the item that is represented by the instance, and whose =className= property is updated to reflect the state of the instance's =over= state property.
 
 											When =over= is set to =true=, the value of this node's =className= property will be set to the value of the =cssClassImageOver= state property. When =over= is set to =false=, the value of this node's =className= property will be set to the value of the =cssClassImage= state property. When either of the =cssClassImage= or =cssClassImageOver= state properties are set to =null= or are left =undefined=, then the =className= property of this node will not be updated.
 
 											NOTES
-											- this implied node is optional
-											- in a typical implementation this implied node will be an IMG tag, but it does not have to be
+											- this DOM node is optional
+											- in a typical implementation this DOM node will be an IMG tag, but it does not have to be
 								*/
 							)
 						;
@@ -120,9 +120,9 @@ Uize.module ({
 				/*?
 					Instance Events
 						Click Selected
-							An instance event that is fired when the user clicks on the optional =select= button, or when the user clicks on the =previewShell= implied node and the value of the =previewClickAction= state property is set to either ='Select'= or ='Toggle Selected'=.
+							An instance event that is fired when the user clicks on the optional =select= button, or when the user clicks on the =previewShell= DOM node and the value of the =previewClickAction= state property is set to either ='Select'= or ='Toggle Selected'=.
 
-							When this event is fired because the user clicks on the =previewShell= implied node and =previewClickAction= is set to ='Toggle Selected'=, then the event object will contain a =forceToggle= property that is set to =true=.
+							When this event is fired because the user clicks on the =previewShell= DOM node and =previewClickAction= is set to ='Toggle Selected'=, then the event object will contain a =forceToggle= property that is set to =true=.
 				*/
 			}
 
@@ -206,29 +206,29 @@ Uize.module ({
 							var
 								_previewShellNode = m.getNode ('previewShell') || 'imageLink',
 									/*?
-										Implied Nodes
+										DOM Nodes
 											previewShell
-												A node that serves as a shell around the =preview= implied node.
+												A node that serves as a shell around the =preview= DOM node.
 
 												Mouseover, mouseout, and click events are wired for this node in order to manage =over= and =selected= state for the instance, and in order to fire instance events, such as the ='Click Preview'=, ='Click Selected'=, and ='Item Mouse Down'= events.
 
 												NOTES
-												- this implied node is required, even if the optional =preview= implied node is omitted
+												- this DOM node is required, even if the optional =preview= DOM node is omitted
 
 											imageLink -- DEPRECATED 2009-07-28
-												The deprecated =imageLink= implied node is an alternate / legacy name for the =previewShell= implied node.
+												The deprecated =imageLink= DOM node is an alternate / legacy name for the =previewShell= DOM node.
 
-												If the =imageLink= implied node is used, it will behave in exactly the same way as the =previewShell= node. If you're writing new code, you should *not* use this implied node in your HTML markup.
+												If the =imageLink= DOM node is used, it will behave in exactly the same way as the =previewShell= node. If you're writing new code, you should *not* use this DOM node in your HTML markup.
 
 												NOTES
-												- this implied node is deprecated
+												- this DOM node is deprecated
 									*/
 								_fireItemMouseDownEvent = function (_event) {
 									m.fire ({name:'Item Mouse Down',domEvent:_event,bubble:_true});
 									/*?
 										Instance Events
 											Item Mouse Down
-												A bubbling instance event that is fired when the user mouses down on the =previewShell= implied node.
+												A bubbling instance event that is fired when the user mouses down on the =previewShell= DOM node.
 
 												As a bubbling event, a handler for this event can be wired by an instance of the =Uize.Widget.Collection= class (or subclass) - that owns the collection items as child widgets - on itself. This is the case with the =Uize.Widget.Collection.Dynamic= class, which manages drag-and-drop for reordering of items in a collection.
 
@@ -258,7 +258,7 @@ Uize.module ({
 												/*?
 													Instance Events
 														Click Preview
-															An instance event that is fired when the user clicks on the =previewShell= implied node and the =previewClickAction= state property is set to ='Preview'= or =null=, or left =undefined=.
+															An instance event that is fired when the user clicks on the =previewShell= DOM node and the =previewClickAction= state property is set to ='Preview'= or =null=, or left =undefined=.
 
 															As a bubbling event, a handler for this event can be wired by an instance of the =Uize.Widget.Collection= class (or subclass) - that owns the collection items as child widgets - on itself. When this event is fired, the event object contains a =bubble= property that is set to =true=.
 												*/
@@ -314,9 +314,9 @@ Uize.module ({
 					/*?
 						State Properties
 							cssClassImage
-								A string, specifying the value that should be set for the =className= property of the =preview= implied node when the user is not moused over the instance (i.e. the =over= state property is set to =false=).
+								A string, specifying the value that should be set for the =className= property of the =preview= DOM node when the user is not moused over the instance (i.e. the =over= state property is set to =false=).
 
-								For a more in-depth discussion of the interaction between this property and the companion =cssClassImageOver= property, consult the reference for the =preview= implied node.
+								For a more in-depth discussion of the interaction between this property and the companion =cssClassImageOver= property, consult the reference for the =preview= DOM node.
 
 								NOTES
 								- see the companion =cssClassImageOver= state property
@@ -327,9 +327,9 @@ Uize.module ({
 					/*?
 						State Properties
 							cssClassImageOver
-								A string, specifying the value that should be set for the =className= property of the =preview= implied node when the user mouses over the instance (i.e. the =over= state property is set to =true=).
+								A string, specifying the value that should be set for the =className= property of the =preview= DOM node when the user mouses over the instance (i.e. the =over= state property is set to =true=).
 
-								For a more in-depth discussion of the interaction between this property and the companion =cssClassImage= property, consult the reference for the =preview= implied node.
+								For a more in-depth discussion of the interaction between this property and the companion =cssClassImage= property, consult the reference for the =preview= DOM node.
 
 								NOTES
 								- see the companion =cssClassImage= state property
@@ -376,9 +376,9 @@ Uize.module ({
 					/*?
 						State Properties
 							over
-								A boolean, indicating whether or not the user is mousing over the =previewShell= implied node of the instance.
+								A boolean, indicating whether or not the user is mousing over the =previewShell= DOM node of the instance.
 
-								The value of this property is set to =true= when the user mouses over the instance's =previewShell= implied node, and is set to =false= when the user mouses out.
+								The value of this property is set to =true= when the user mouses over the instance's =previewShell= DOM node, and is set to =false= when the user mouses out.
 
 								NOTES
 								- the initial value is =false=
@@ -388,7 +388,7 @@ Uize.module ({
 					/*?
 						State Properties
 							previewClickAction
-								A string, specifying the desired action that should be performed when the =previewShell= implied node is clicked.
+								A string, specifying the desired action that should be performed when the =previewShell= DOM node is clicked.
 
 								VALUES
 
@@ -406,7 +406,7 @@ Uize.module ({
 							previewTooltip
 								An object reference to a DOM node, or a string whose value is the =id= for a DOM node, that should be displayed as a tooltip for the instance when the value of the =over= state property changes to =true= and the instance is wired.
 
-								Essentially, the =previewTooltip= state property can be used to specify a tooltip that should appear when the user mouses over the =previewShell= implied node.
+								Essentially, the =previewTooltip= state property can be used to specify a tooltip that should appear when the user mouses over the =previewShell= DOM node.
 
 								NOTES
 								- the initial value is =undefined=
@@ -465,9 +465,9 @@ Uize.module ({
 					/*?
 						State Properties
 							title
-								A string, whose value will be used to set the value of the =innerHTML= property of the =title Implied Node=.
+								A string, whose value will be used to set the value of the =innerHTML= property of the =title DOM Node=.
 
-								The =innerHTML= value of the =title Implied Node= will be updated to reflect the value of the =title= state property whenever the value of this property is changed, is not =null= or =undefined=, and the instance is wired up. When the value of the =properties= state property is changed, the value of the =title= state property is set from the "title" property of the =properties= object.
+								The =innerHTML= value of the =title DOM Node= will be updated to reflect the value of the =title= state property whenever the value of this property is changed, is not =null= or =undefined=, and the instance is wired up. When the value of the =properties= state property is changed, the value of the =title= state property is set from the "title" property of the =properties= object.
 
 								NOTES
 								- the initial value is =undefined=

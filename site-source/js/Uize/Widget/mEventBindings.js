@@ -18,7 +18,7 @@
 
 /*?
 	Introduction
-		The =Uize.Widget.mEventBindings= mixin implements features to provide a declarative approach to wiring Uize events on widgets and their children, as well as DOM events on implied nodes.
+		The =Uize.Widget.mEventBindings= mixin implements features to provide a declarative approach to wiring Uize events on widgets and their children, as well as DOM events on DOM nodes.
 
 		*DEVELOPERS:* `Ben Ilegbodu`, original code contributed by `Zazzle Inc.`
 */
@@ -37,7 +37,7 @@ Uize.module ({
 						/*?
 							Static Methods
 								Uize.Widget.mEventBindings.eventBindings
-									Lets you conveniently wire events on the widget instance, its children and its implied DOM nodes.
+									Lets you conveniently wire events on the widget instance, its children and its DOM nodes.
 
 									SYNTAX
 									.........................................

@@ -31,7 +31,7 @@
 			myLog.log ('This is my log message');
 			.....................................
 
-			Messages that are logged by calling the =log= instance method will be displayed in the =messages= implied node of the instance. If the =showTimestamp= state property is set to the value =true=, then `log message timestamping` will be enabled for logged messages. If a message is logged before the instance is wired, then the message will be added to the `queued log messages`.
+			Messages that are logged by calling the =log= instance method will be displayed in the =messages= DOM node of the instance. If the =showTimestamp= state property is set to the value =true=, then `log message timestamping` will be enabled for logged messages. If a message is logged before the instance is wired, then the message will be added to the `queued log messages`.
 
 			Log Messages Displayed Literally
 				The text of a log message is displayed literally / exactly.
@@ -105,7 +105,7 @@
 					The default timestamp format shows hours, minutes, seconds, and milliseconds. In this example we are adding year, month, and day of month to the timestamp by prepending the date format segment ={YYYY}-{MM}-{DD}=.
 
 		Clearing the Log
-			All logged messages that are displayed in the =messages= implied node can be easily cleared, either by the user clicking the clear button (the =clear Child Widget=), or by an application calling the =clear= instance method.
+			All logged messages that are displayed in the =messages= DOM node can be easily cleared, either by the user clicking the clear button (the =clear Child Widget=), or by an application calling the =clear= instance method.
 
 			EXAMPLE
 			...............
@@ -178,7 +178,7 @@ Uize.module ({
 					/*?
 						Instance Methods
 							clear
-								Clears the log messages displayed in the =messages= implied node.
+								Clears the log messages displayed in the =messages= DOM node.
 
 								SYNTAX
 								....................
@@ -204,11 +204,11 @@ Uize.module ({
 						m.injectNodeHtml ('messages',_messageHtml);
 						m.setNodeProperties ('messages',{scrollTop:1000000});
 						/*?
-							Implied Nodes
+							DOM Nodes
 								messages
 									A node that is used to display the messages being logged.
 
-									Whenever a new message is logged, the contents of the =messages= implied node is added to. This node may be a =div=, =span=, =p= tag, or any other type that may contain arbitrary HTML. When the =clear= instance method is called, either programmatically or as a result of the user clicking the =clear Child Widget=, the =innerHTML= of the =messages= node will be replaced with nothing.
+									Whenever a new message is logged, the contents of the =messages= DOM node is added to. This node may be a =div=, =span=, =p= tag, or any other type that may contain arbitrary HTML. When the =clear= instance method is called, either programmatically or as a result of the user clicking the =clear Child Widget=, the =innerHTML= of the =messages= node will be replaced with nothing.
 						*/
 					} else {
 						(m._queuedLogMessagesHtml || (m._queuedLogMessagesHtml = [])).push (_messageHtml);
@@ -217,7 +217,7 @@ Uize.module ({
 					/*?
 						Instance Methods
 							log
-								Logs the specified message by displaying it in the =messages= implied node.
+								Logs the specified message by displaying it in the =messages= DOM node.
 
 								SYNTAX
 								................................
@@ -248,7 +248,7 @@ Uize.module ({
 					/*?
 						State Properties
 							isEmpty
-								A read-only boolean, indicating whether or not the =messages= implied node contains any logged messages.
+								A read-only boolean, indicating whether or not the =messages= DOM node contains any logged messages.
 
 								When the value of this property is =true=, then the =clear Child Widget= will be disabled. When the value of this property is =false=, then the =clear Child Widget= will be enabled.
 

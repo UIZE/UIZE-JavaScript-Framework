@@ -82,8 +82,8 @@ Uize.module ({
 				;
 				m._lastMaximized = _maximized;
 				/*?
-					Implied Nodes
-						maximized Implied Node
+					DOM Nodes
+						maximized DOM Node
 							.
 
 						minimized
@@ -125,7 +125,7 @@ Uize.module ({
 								'click',
 								function () {m.set ({_maximized:_true})}
 								/*?
-									Implied Nodes
+									DOM Nodes
 										maximize
 											.
 								*/
@@ -135,7 +135,7 @@ Uize.module ({
 								'click',
 								function () {m.set ({_maximized:_false})}
 								/*?
-									Implied Nodes
+									DOM Nodes
 										minimize
 											.
 								*/

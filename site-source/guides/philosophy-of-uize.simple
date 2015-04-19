@@ -7,7 +7,7 @@ Key Precepts
 	Respect Global Namespace
 		What's in a namespace? Everything, as it turns out. The UIZE JavaScript Framework tucks away its features into a single =Uize= namespace (and if you create your own namespace for your site, you should do the same).
 
-		Global functions and properties are not provided, even though providing them might result in fewer keystrokes. UIZE has steered clear of the "battle of the dollar function". The holistic approach that the UIZE JavaScript Framework takes to the client code aspects of a Web application tends to make ad hoc access to the DOM by miscellaneous JavaScript code less necessary. Generally, if you're touching DOM nodes, those nodes are associated with widgets and they will usually be accessed as implied nodes using the facilities provided for this in the =Uize.Widget= class.
+		Global functions and properties are not provided, even though providing them might result in fewer keystrokes. UIZE has steered clear of the "battle of the dollar function". The holistic approach that the UIZE JavaScript Framework takes to the client code aspects of a Web application tends to make ad hoc access to the DOM by miscellaneous JavaScript code less necessary. Generally, if you're touching DOM nodes, those nodes are associated with widgets and they will usually be accessed using the facilities provided for this in the =Uize.Widget= class.
 
 	Don't Violate Standards
 		A conscious decision was made early on to not rely upon non-standard extensions of the DOM for registering attributes that client code may want to use for qualifying its behavior.

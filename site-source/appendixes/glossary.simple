@@ -61,10 +61,10 @@ Terms
 
 		At its heart, GLUE aims to aid the Web interface design process by decoupling the interface skin development from the interface functionality development. Widgets in the UIZE JavaScript Framework employ this core principle.
 
-	Implied Node
-		In the UIZE JavaScript Framework, all widgets can have a set of implied nodes - DOM nodes that are expected to be in the document for the widget and that will be wired up to represent state and potentially allow user control of state.
+	DOM Node
+		In the UIZE JavaScript Framework, all widgets can have a set of DOM nodes - DOM nodes that are expected to be in the document for the widget and that will be wired up to represent state and potentially allow user control of state.
 
-		This is part of the "contract" between a UIZE widget's JavaScript code and its markup in the document. (credit goes to Jan Borgersen for suggesting the term "implied node")
+		This is part of the "contract" between a UIZE widget's JavaScript code and its markup in the document.
 
 	JavaScript Library
 		In the UIZE JavaScript Framework, JavaScript libraries are bundles of JavaScript modules.

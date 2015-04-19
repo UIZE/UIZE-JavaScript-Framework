@@ -224,30 +224,30 @@ Uize.module ({
 				var m = this;
 				m.isWired && m.setNodeValue ('month',m._monthNames [m._month]);
 				/*?
-					Implied Nodes
-						month Implied Node
+					DOM Nodes
+						month DOM Node
 							A node that is used to display the name of the current month in view (i.e. the value of the =month= state property, displayed as a month name).
 
-							This implied node can be of many types: =div=, =span=, =p=, =b=, =td=, =input=, etc. The month name is displayed in this implied node using the =setNodeValue= instance method of the =Uize.Widget= base class. Therefore, any features supported by the =setNodeValue= method are also supported for this implied node.
+							This DOM node can be of many types: =div=, =span=, =p=, =b=, =td=, =input=, etc. The month name is displayed in this DOM node using the =setNodeValue= instance method of the =Uize.Widget= base class. Therefore, any features supported by the =setNodeValue= method are also supported for this DOM node.
 
 							NOTES
-							- the markup for this implied node is optional
-							- see the companion =year Implied Node=
+							- the markup for this DOM node is optional
+							- see the companion =year DOM Node=
 				*/
 			}
 
 			function _updateUiYearDisplay () {
 				this.isWired && this.setNodeValue ('year',this._year);
 				/*?
-					Implied Nodes
-						year Implied Node
+					DOM Nodes
+						year DOM Node
 							A node that is used to display the current year in view (i.e. the value of the =year= state property).
 
-							This implied node can be of many types: =div=, =span=, =p=, =b=, =td=, =input=, etc. The year is displayed in this implied node using the =setNodeValue= instance method of the =Uize.Widget= base class. Therefore, any features supported by the =setNodeValue= method are also supported for this implied node.
+							This DOM node can be of many types: =div=, =span=, =p=, =b=, =td=, =input=, etc. The year is displayed in this DOM node using the =setNodeValue= instance method of the =Uize.Widget= base class. Therefore, any features supported by the =setNodeValue= method are also supported for this DOM node.
 
 							NOTES
-							- the markup for this implied node is optional
-							- see the companion =month Implied Node=
+							- the markup for this DOM node is optional
+							- see the companion =month DOM Node=
 				*/
 			}
 
@@ -360,14 +360,14 @@ Uize.module ({
 							_gridStringChunks.push ('</table>');
 							m.setNodeInnerHtml ('grid',_gridStringChunks.join (''));
 								/*?
-									Implied Nodes
+									DOM Nodes
 										grid
 											A node, whose contents will be replaced with the dynamically generated grid HTML for the month of the year currently in view by the instance.
 
-											This implied node can be of any type that can accept HTML contents containing a table. The contents of this node will be replaced when the grid needs to be updated - as a result of the values of the =month= or =year= properties changing, as a result of the `valid date range` changing, or as a result of any other state change in the instance that would affect what is displayed in the grid. For more info, see the section `Date Grid`.
+											This DOM node can be of any type that can accept HTML contents containing a table. The contents of this node will be replaced when the grid needs to be updated - as a result of the values of the =month= or =year= properties changing, as a result of the `valid date range` changing, or as a result of any other state change in the instance that would affect what is displayed in the grid. For more info, see the section `Date Grid`.
 
 											NOTES
-											- see the related =day[dayNo]= implied node
+											- see the related =day[dayNo]= DOM node
 								*/
 
 						/*** wire the day selectors ***/
@@ -381,14 +381,14 @@ Uize.module ({
 											function () {m.set ({_value:new Date (_year,_month,_dayNo)})}
 										);
 										/*?
-											Implied Nodes
+											DOM Nodes
 												day[dayNo]
 													One of a number of nodes in the `date grid` that are used to indicate the days of the month of the year currently in view by the instance and that may be wired up to let the user select the corresponding date.
 
-													The HTML for these implied nodes are generated dynamically when the contents of the =grid= implied node is replaced with the updated date grid HTML. The specific =day[dayNo]= implied node that corresponds to the currently selected date will be highlighted. All =day[dayNo]= implied nodes that represent dates that are outside of the `valid date range` will be grayed out.
+													The HTML for these DOM nodes are generated dynamically when the contents of the =grid= DOM node is replaced with the updated date grid HTML. The specific =day[dayNo]= DOM node that corresponds to the currently selected date will be highlighted. All =day[dayNo]= DOM nodes that represent dates that are outside of the `valid date range` will be grayed out.
 
 													NOTES
-													- see the related =grid= implied node
+													- see the related =grid= DOM node
 										*/
 									}
 								;

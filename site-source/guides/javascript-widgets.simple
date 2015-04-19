@@ -93,44 +93,41 @@ Introduction
 			You may also find yourself creating subclasses of your page widget base class, for the pages of different sections of your Web site. If a lot of pages in a section share common functionality, then you can implement that functionality in a page widget subclass. This may involve adding and connecting up child widgets to support certain features for those pages. This provides an object oriented approach for designing the shared functionality of pages in different sections, rather than employing the typical ad hoc, source-in-shared-snippets approach.
 
 More on Widgets
-	Implied Nodes
+	DOM Nodes
 		At some point, a widget is going to want to touch the DOM - especially if it wants to be at all useful.
 
-		The UIZE JavaScript Framework provides a facility for associating DOM nodes in a document to corresponding widget instances. Using this facility in the design of widget classes allows multiple instances of such classes to coexist in the same page together, without stomping on each other's nodes (yes, it sounds painful, I know). This facility is referred to as the system of "implied nodes".
+		The UIZE JavaScript Framework provides a facility for associating DOM nodes in a document to corresponding widget instances. Using this facility in the design of widget classes allows multiple instances of such classes to coexist in the same page together, without stomping on each other's nodes (yes, it sounds painful, I know).
 
-		What are These Implied Node Thingies?
-			Implied nodes are DOM nodes that are expected by a widget class to exist in the document in order to support the functioning of instances of such a class.
-
-			They are "implied" because the implementation of a widget class implies their presence in the DOM. The vast majority of widget classes are implemented to expect the existence of certain nodes in the DOM. For example, the slider class (=Uize.Widget.Bar.Slider=) anticipates the presence of the =track=, =knob=, =empty=, =full=, and =value=, and root (blank) implied nodes.
+		Widget DOM nodes are DOM nodes that are expected by a widget class to exist in the document in order to support the functioning of instances of such a class. The vast majority of widget classes are implemented to expect the existence of certain nodes in the DOM. For example, the slider class (=Uize.Widget.Bar.Slider=) anticipates the presence of the =track=, =knob=, =empty=, =full=, and =value=, and root (blank) DOM nodes.
 
 		Need-to-Know Basis
 			The HTML markup for a widget instance may contain more DOM nodes than the widget's implementation knows - or cares - about.
 
-			To a widget class, all HTML outside of the implied nodes that its implementation cares about is like dark matter in the Universe. A widget class doesn't need to know about all the bells and whistles that may be added to the decoration of a widget through the addition of further extraneous layout HTML. This allows flexibility in the choice of layout implementation for widgets, since widgets don't presume an exact DOM structure for their HTML - they only expect certain implied nodes, to which they will attach behavior logic.
+			To a widget class, all HTML outside of the DOM nodes that its implementation cares about is like dark matter in the Universe. A widget class doesn't need to know about all the bells and whistles that may be added to the decoration of a widget through the addition of further extraneous layout HTML. This allows flexibility in the choice of layout implementation for widgets, since widgets don't presume an exact DOM structure for their HTML - they only expect certain DOM nodes, to which they will attach behavior logic.
 
 		In the Spirit of Unobtrusive JavaScript
 			When it comes to widgets, the UIZE JavaScript Framework is predicated on the notion of unobtrusive JavaScript.
 
 			The GLUE (Glue Logic Upon Elements) paradigm means that the HTML for widgets contains no inline event handlers. Instead, all the behavior logic for widgets is neatly consolidated into JavaScript modules. As external files, code for widget classes can be scrunched and is cacheable. This approach also frees up designers and Web developers to work on the HTML layout and CSS separately from an interaction programmer, and without having to worry about potentially breaking behavior logic. This design strategy is sometimes referred to as the [[http://en.wikipedia.org/wiki/Separation_of_concerns][separation of concerns]].
 
-			Now, when an instance of a widget class is created and its user interface is wired up, the implied nodes of the widget may be wired up with event handlers, and properties of these nodes might be modified in order to correctly reflect current state for the widget.
+			Now, when an instance of a widget class is created and its user interface is wired up, the DOM nodes of the widget may be wired up with event handlers, and properties of these nodes might be modified in order to correctly reflect current state for the widget.
 
-		How Are Implied Nodes Found?
-			By now you're probably wondering how an instance of a widget class finds its implied nodes so it can then have its way with them.
+		How Are DOM Nodes Found?
+			By now you're probably wondering how an instance of a widget class finds its DOM nodes so it can then have its way with them.
 
-			The UIZE JavaScript Framework relies upon node ids for identifying implied nodes of widgets. The =id= system is largely orthogonal to document structure and document styling. Although ids *are* used at times for narrowly selecting very specific nodes for styling, the rather compelling benefits of reusability means that CSS style sheets tend to rely more heavily on class names, tag names, and structure relationships for selecting nodes in their style rules. By using the =id= system, widgets can minimize competition with the interests of designers and Web devs. Since id-based wiring is a core tenet of the framework, CSS selectors are not necessary for finding nodes that belong to widget instances.
+			The UIZE JavaScript Framework relies upon node ids for identifying DOM nodes of widgets. The =id= system is largely orthogonal to document structure and document styling. Although ids *are* used at times for narrowly selecting very specific nodes for styling, the rather compelling benefits of reusability means that CSS style sheets tend to rely more heavily on class names, tag names, and structure relationships for selecting nodes in their style rules. By using the =id= system, widgets can minimize competition with the interests of designers and Web devs. Since id-based wiring is a core tenet of the framework, CSS selectors are not necessary for finding nodes that belong to widget instances.
 
 		Widget Namespaces and the idPrefix
-			The namespace for the implied nodes of a widget instance is controlled by the value of its =idPrefix= state property.
+			The namespace for the DOM nodes of a widget instance is controlled by the value of its =idPrefix= state property.
 
-			The =idPrefix= is just what it sounds like it is: it's the prefix for the ids of all implied nodes that the widget may have. The ids for implied nodes of a widget are named according to the following rule...
+			The =idPrefix= is just what it sounds like it is: it's the prefix for the ids of all DOM nodes that the widget may have. The id's for DOM nodes of a widget are named according to the following rule...
 
-			IMPLIED NODE ID SYNTAX
-			............................
-			[idPrefix]-[impliedNodeName]
-			............................
+			DOM NODE ID SYNTAX
+			.....................
+			[idPrefix]-[nodeName]
+			.....................
 
-			The =idPrefix= and implied node name are joined with a "-" (hyphen) character. For example, this means that an instance of the slider class (=Uize.Widget.Bar.Slider=) with its =idPrefix= set to the value ='mySlider'= would have the following ids for its implied nodes...
+			The =idPrefix= and DOM node name are joined with a "-" (hyphen) character. For example, this means that an instance of the slider class (=Uize.Widget.Bar.Slider=) with its =idPrefix= set to the value ='mySlider'= would have the following ids for its DOM nodes...
 
 			............................
 			mySlider        // root node
@@ -141,7 +138,7 @@ More on Widgets
 			mySlider-value
 			............................
 
-			The =idPrefix= acts as a namespace, allowing the same implied nodes to appear multiple times in the DOM for different instances of the same widget class. Setting different =idPrefix= values for the different instances of the widget prevents the ids for the implied nodes of those instances from having conflicts. For example, if you had two instances of the slider class, one with an =idPrefix= of ='mySlider1'=, and the other with an =idPrefix= of ='mySlider2'=, then the two instances would have the following ids for their implied nodes...
+			The =idPrefix= acts as a namespace, allowing the equivalent widget DOM nodes to appear multiple times in the DOM for different instances of the same widget class. Setting different =idPrefix= values for the different instances of the widget prevents the ids for the DOM nodes of those instances from having conflicts. For example, if you had two instances of the slider class, one with an =idPrefix= of ='mySlider1'=, and the other with an =idPrefix= of ='mySlider2'=, then the two instances would have the following ids for their DOM nodes...
 
 			..........................................
 			mySlider1        // root node of mySlider1
@@ -172,7 +169,7 @@ More on Widgets
 			[parentIdPrefix]_[childWidgetName]
 			..................................
 
-			The =idPrefix= of the parent widget and the name of the child widget are joined with a "_" (underscore) character to form an =idPrefix= for the child widget. For example, this means that an instance of the slider class that was added as a child widget to an instance of the page widget class (=Uize.Widget.Page=), where the =idPrefix= of the page widget instance is ='page'= and where the name of the slider child widget is ='mySlider'=, would have the following ids for its implied nodes...
+			The =idPrefix= of the parent widget and the name of the child widget are joined with a "_" (underscore) character to form an =idPrefix= for the child widget. For example, this means that an instance of the slider class that was added as a child widget to an instance of the page widget class (=Uize.Widget.Page=), where the =idPrefix= of the page widget instance is ='page'= and where the name of the slider child widget is ='mySlider'=, would have the following ids for its DOM nodes...
 
 			...........................................................
 			page_mySlider        // root node of page.children.mySlider
@@ -183,7 +180,7 @@ More on Widgets
 			page_mySlider-value
 			...........................................................
 
-			Looking at the ids in the HTML, you can tell what part of the id "path" is the implied node, and what part is the parent chain. Underscores separate the names of widgets along the parent chain, and the hyphen terminates the parent chain to indicate an implied node of the last child widget in that chain.
+			Looking at the ids in the HTML, you can tell what part of the id "path" is the DOM node, and what part is the parent chain. Underscores separate the names of widgets along the parent chain, and the hyphen terminates the parent chain to indicate a DOM node of the last child widget in that chain.
 
 			EXAMPLE
 			............................................................
@@ -200,7 +197,7 @@ More on Widgets
 			plainWidget.addChild ('slider',Uize.Widget.Bar.Slider);
 			............................................................
 
-			The above example would produce the following set of implied node ids for the four widgets involved...
+			The above example would produce the following set of DOM node ids for the four widgets involved...
 
 			.............................................................................
 			page                      // root node of page widget instance
@@ -221,20 +218,20 @@ More on Widgets
 
 			As you can see from the above example, different child widgets *can* have the same name, as long as they reside at different places on the widget tree. In this case, there are two slider instances with the name ='slider'=, but one is a child of the page widget, and the other is a child of the deeper plain vanilla widget.
 
-		Required vs. Optional Implied Nodes
-			Not all of a widget class' implied nodes are always required in order for an instance of the widget to function correctly.
+		Required vs. Optional DOM Nodes
+			Not all of a widget class' DOM nodes are always required in order for an instance of the widget to function correctly.
 
-			Some implied nodes may be deliberately implemented to be optional in the markup. For example, in the case of the slider widget class (=Uize.Widget.Bar.Slider=), the =track= and =knob= implied nodes are required, while the =empty=, =full=, and =value= implied nodes are optional. Widgets with optional implied nodes are implemented so that they fail gracefully when those nodes are not present in the markup. To find out which implied nodes are required and which ones are optional for a particular widget class, consult the reference documentation for the class.
+			Some DOM nodes may be deliberately implemented to be optional in the markup. For example, in the case of the slider widget class (=Uize.Widget.Bar.Slider=), the =track= and =knob= DOM nodes are required, while the =empty=, =full=, and =value= DOM nodes are optional. Widgets with optional DOM nodes are implemented so that they fail gracefully when those nodes are not present in the markup. To find out which DOM nodes are required and which ones are optional for a particular widget class, consult the reference documentation for the class.
 
-		Special Implied Nodes
-			Besides the implied nodes that are supported by subclasses of the =Uize.Widget= base class, the base class itself supports special implied nodes.
+		Special DOM Nodes
+			Besides the DOM nodes that are supported by subclasses of the =Uize.Widget= base class, the base class itself supports special DOM nodes.
 
 			The Root Node
-				The optional root node of a widget is the implied node with the name =''= (empty string).
+				The optional root node of a widget is the DOM node with the name =''= (empty string).
 
-				The =id= for the root node of a widget instance is the value of that instance's =idPrefix= state property - there is no "-" (hyphen) separating the =idPrefix= and the empty implied node name. So, for an instance of the slider class with its =idPrefix= set to the value ='mySlider'=, the id of that instance's root node would be just =mySlider=. If you're looking at an implied node in the HTML and there's no hyphen character in its id, then you know you're dealing with the root node for a widget instance.
+				The =id= for the root node of a widget instance is the value of that instance's =idPrefix= state property - there is no "-" (hyphen) separating the =idPrefix= and the empty DOM node name. So, for an instance of the slider class with its =idPrefix= set to the value ='mySlider'=, the id of that instance's root node would be just =mySlider=. If you're looking at a DOM node in the HTML and there's no hyphen character in its id, then you know you're dealing with the root node for a widget instance.
 
-				A reference to the root node can be obtained by either specifying the value =''= (empty string) or no =impliedNodeSTRorBLOB= parameter when calling the =getNode= instance method, as in...
+				A reference to the root node can be obtained by either specifying the value =''= (empty string) or no =nodeSTRorBLOB= parameter when calling the =getNode= instance method, as in...
 
 				............................................
 				var theRootNode = myWidget.getNode ();
@@ -248,9 +245,9 @@ More on Widgets
 				....................................................................................
 
 			The Shell Node
-				The optional =shell= implied node for a widget instance provides a "slot" in the document into which markup for that instance can be inserted.
+				The optional =shell= DOM node for a widget instance provides a "slot" in the document into which markup for that instance can be inserted.
 
-				The following example illustrates use of the =shell= implied node by showing some HTML before and after a widget instance is set up. The widget instance that is created is a plain vanilla widget (i.e. an instance of the =Uize.Widget= base class), with its =idPrefix= set to the value ='myWidget'=.
+				The following example illustrates use of the =shell= DOM node by showing some HTML before and after a widget instance is set up. The widget instance that is created is a plain vanilla widget (i.e. an instance of the =Uize.Widget= base class), with its =idPrefix= set to the value ='myWidget'=.
 
 				HTML BEFORE
 				.........................
@@ -277,15 +274,15 @@ More on Widgets
 				</div>
 				...................................................
 
-		Accessing Implied Nodes
-			References to the implied nodes of a widget instance can be obtained by calling the =getNode= instance method.
+		Accessing DOM Nodes
+			References to the DOM nodes of a widget instance can be obtained by calling the =getNode= instance method.
 
 			SYNTAX
-			..................................................
-			nodeOBJ = myWidget.getNode (impliedNodeSTRorBLOB);
-			..................................................
+			...........................................
+			nodeOBJ = myWidget.getNode (nodeSTRorBLOB);
+			...........................................
 
-			Additionally, the `node related instance methods` of the =Uize.Widget= class allow implied nodes to be specified by their name, so it is *not* necessary in most cases to even use the =getNode= method when using these node related instance methods. However, the =getNode= method *is* quite useful for other methods - possibly outside of the =Uize.Widget= class - that deal in node references. This is true of some of the static methods in the =Uize.Dom.Basics= module, since not all of the static methods of this module have analogs in the =Uize.Widget= class - only the most generally useful ones do.
+			Additionally, the `node related instance methods` of the =Uize.Widget= class allow DOM nodes to be specified by their name, so it is *not* necessary in most cases to even use the =getNode= method when using these node related instance methods. However, the =getNode= method *is* quite useful for other methods - possibly outside of the =Uize.Widget= class - that deal in node references. This is true of some of the static methods in the =Uize.Dom.Basics= module, since not all of the static methods of this module have analogs in the =Uize.Widget= class - only the most generally useful ones do.
 
 			EXAMPLE
 			.........................................................................
@@ -295,17 +292,17 @@ More on Widgets
 			// inject some HTML into the document for the widget instance
 			Uize.Dom.Basics.injectHtml (
 				document.body,
-				'<span id="myWidget-title">this is the title implied node</span>'
+				'<span id="myWidget-title">this is the title DOM node</span>'
 			);
 
 			// change the title's text color and background color to white over black
 			myWidget.setNodeStyle ('title',{color:'#fff',backgroudColor:'#000'});
 
-			// or, get a reference to the "title" implied node, to be used later
+			// or, get a reference to the "title" DOM node, to be used later
 			var myWidgetTitleNode = myWidget.getNode ('title');
 			.........................................................................
 
-			The above example illustrates both specifying an implied node by name when using the =setNodeStyle= node related instance method, as well as getting a reference to a node using the =getNode= method.
+			The above example illustrates both specifying a DOM node by name when using the =setNodeStyle= node related instance method, as well as getting a reference to a node using the =getNode= method.
 
 		Node Related Instance Methods
 			Various static methods of the =Uize.Dom.Basics= module are exposed as instance methods of the =Uize.Widget= class.
@@ -313,7 +310,7 @@ More on Widgets
 			The node related instance methods of the =Uize.Widget= class differ from their counterparts in the =Uize.Dom.Basics= module in the following key ways:
 
 			1) they are named differently
-			2) string values for nodes are implied node names, rather than node ids
+			2) string values for nodes are DOM node names, rather than node ids
 			3) some =Uize.Widget= class counterparts provide additional logic
 
 			Naming Scheme for Node Related Instance Methods
@@ -362,7 +359,7 @@ More on Widgets
 
 				A few of the instance methods, however, add additional logic not implemeted in the =Uize.Dom.Basics= module. Example of such methods include the =removeNode= and =wireNode= instance methods.
 
-				When removing a node from the DOM using the =removeNode= instance method, the cached reference to the removed implied node is cleared from `the node cache`. When wiring events on implied nodes using the =wireNode= instance method, an ID for the widget instance that owns the event wirings is provided to the =Uize.Dom.Basics.wire= static method, so that events can be unwired later by the widget by providing the same owner ID to the =Uize.Dom.Basics.unwire= static method.
+				When removing a node from the DOM using the =removeNode= instance method, the cached reference to the removed DOM node is cleared from `the node cache`. When wiring events on DOM nodes using the =wireNode= instance method, an ID for the widget instance that owns the event wirings is provided to the =Uize.Dom.Basics.wire= static method, so that events can be unwired later by the widget by providing the same owner ID to the =Uize.Dom.Basics.unwire= static method.
 
 				INCORRECT
 				................................................
@@ -382,12 +379,12 @@ More on Widgets
 				);
 				................................................
 
-				While the first snippet of code *will* wire up the =click= event of the =title= implied node of the widget instance =myWidget=, the wiring will not be associated to this widget instance. So, when at a later stage you might call the =unwireUi= instance method on the instance, that =click= event handler will not be unwired. With the second snippet of code, the =click= event *will* be unwired correctly when calling =myWidget.unwireUi ()=.
+				While the first snippet of code *will* wire up the =click= event of the =title= DOM node of the widget instance =myWidget=, the wiring will not be associated to this widget instance. So, when at a later stage you might call the =unwireUi= instance method on the instance, that =click= event handler will not be unwired. With the second snippet of code, the =click= event *will* be unwired correctly when calling =myWidget.unwireUi ()=.
 
-		Implied Node Names vs. Node Ids
-			While implied nodes are typically specified by name when using the node related instance methods, one can also use references to them.
+		Node Names vs. Node References
+			While DOM nodes are typically specified by name when using the node related instance methods, one can also use references to them.
 
-			The following statements are equivalent ways to replace the =innerHTML= for the =title= implied node of the widget instance =myWidget=...
+			The following statements are equivalent ways to replace the =innerHTML= for the =title= DOM node of the widget instance =myWidget=...
 
 			....................................................................
 			myWidget.setNodeInnerHtml ('title','THIS WORKS');
@@ -397,12 +394,12 @@ More on Widgets
 			myWidget.setNodeInnerHtml (_titleNode,'THIS WORKS');
 			....................................................................
 
-			Using a node reference for an implied node may be more convenient if one already has a reference to the node. Capturing a reference to an implied node in a private instance property or a local variable can offer a slight performance advantage, but not much since references to implied nodes are cached by the `the node cache`.
+			Using a node reference for a DOM node may be more convenient if one already has a reference to the node. Capturing a reference to a DOM node in a private instance property or a local variable can offer a slight performance advantage, but not much since references to DOM nodes are cached by the `the node cache`.
 
 		The Node Cache
-			The =Uize.Widget= base class implements a system for caching references to implied nodes when they are first accessed.
+			The =Uize.Widget= base class implements a system for caching references to DOM nodes when they are first accessed.
 
-			This caching mechanism improves performance on subsequent occasions when implied nodes that have already been cached are again accessed, and allows us to specify implied nodes by named without worrying about significant cost of repeated lookups in the DOM - something that can be quite slow with large or complex documents in certain browsers. While improving performance, this caching mechanism (like any caching mechanism) has some implications that should be considered when implementing more sophisticated widget classes.
+			This caching mechanism improves performance on subsequent occasions when DOM nodes that have already been cached are again accessed, and allows us to specify DOM nodes by named without worrying about significant cost of repeated lookups in the DOM - something that can be quite slow with large or complex documents in certain browsers. While improving performance, this caching mechanism (like any caching mechanism) has some implications that should be considered when implementing more sophisticated widget classes.
 
 			Don't Forget To Flush
 				Unlike with toilets, there are only a few rare instances where it is necessary to flush the node cache, and these typically involve more sophisticated widget implementations.
@@ -411,17 +408,17 @@ More on Widgets
 				Flushing the node cache for a widget instance is performed quite easily by calling the instance's =flushNodeCache= method.
 
 				SYNTAX
-				....................................................................................
-				myWidget.flushNodeCache (impliedNodeName);  // flush the cache for one implied node
-				myWidget.flushNodeCache ();                 // flush the cache for ALL implied nodes
-				....................................................................................
+				.........................................................................
+				myWidget.flushNodeCache (nodeName);  // flush the cache for one DOM node
+				myWidget.flushNodeCache ();          // flush the cache for ALL DOM nodes
+				.........................................................................
 
-				It is safe to flush the cache for implied nodes that have not already been cached. It is also safe to flush the entire cache at any time. This will not affect the functioning of a widget that has already been wired up, but may incur a very small performance cost the next time that operations on implied nodes are performed.
+				It is safe to flush the cache for DOM nodes that have not already been cached. It is also safe to flush the entire cache at any time. This will not affect the functioning of a widget that has already been wired up, but may incur a very small performance cost the next time that operations on DOM nodes are performed.
 
 			DOM Added Later
-				In some cases, an implied node - or several implied nodes - may be added at some point after a widget has been wired up.
+				In some cases, a DOM node - or several DOM nodes - may be added at some point after a widget has been wired up.
 
-				If an attempt is made to operate on or to get a reference to an implied node of a widget and that implied node does not exist in the DOM, then a =null= result *will be cached* for that node. This is an optimization for implied nodes that may be optional in a widget's implementation. So, if the widget anticipates that an implied node may be added at some later stage, after the widget has already been wired up and an attempt has already been made to access that node, then the cached reference can be flushed using the =flushNodeCache= method.
+				If an attempt is made to operate on or to get a reference to a DOM node of a widget and that DOM node does not exist in the DOM, then a =null= result *will be cached* for that node. This is an optimization for DOM nodes that may be optional in a widget's implementation. So, if the widget anticipates that a DOM node may be added at some later stage, after the widget has already been wired up and an attempt has already been made to access that node, then the cached reference can be flushed using the =flushNodeCache= method.
 
 				EXAMPLE
 				..............................................................................
@@ -429,16 +426,16 @@ More on Widgets
 				var myWidget = Uize.Widget ({idPrefix:'foo'});
 				myWidget.wireUi ();
 
-				// no DOM for "bar" implied node yet, so null value is cached for it
+				// no DOM for "bar" DOM node yet, so null value is cached for it
 				myWidget.setNodeInnerHtml ('bar','I fail silently [shhhhhh]');
 
-				// now we inject the HTML for the "bar" implied node into the body
+				// now we inject the HTML for the "bar" DOM node into the body
 				Uize.Dom.Basics.injectHtml (document.body,'<div id="foo-bar"></div>');
 
-				// now "bar" implied node exists, but null value is cached, so nothing happens
+				// now "bar" DOM node exists, but null value is cached, so nothing happens
 				myWidget.setNodeInnerHtml ('bar','D\'OH!');
 
-				// now we flush the node cache for the "bar" implied node
+				// now we flush the node cache for the "bar" DOM node
 				myWidget.flushNodeCache  ('bar');
 
 				// now a reference to the injected node is obtained, and "Woo Hoo!" shows up
@@ -449,7 +446,7 @@ More on Widgets
 				Null references are cached!!!
 
 			DOM Rebuilt
-				In some cases, one may wish to rebuild or otherwise modify the DOM for a widget, replacing one or more implied nodes for which references have already been cached.
+				In some cases, one may wish to rebuild or otherwise modify the DOM for a widget, replacing one or more DOM nodes for which references have already been cached.
 
 				In such cases, unless one flushes the node cache, attempts to access the replaced nodes will result in accessing the old nodes that have become orphaned from the DOM, since the node cache holds on to references to them. When significantly modifying the DOM for a widget that has been wired, it may be safest to flush the widget's entire node cache by specifying no parameter when calling the =flushNodeCache= method.
 

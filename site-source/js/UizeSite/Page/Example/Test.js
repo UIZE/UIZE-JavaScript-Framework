@@ -44,7 +44,7 @@ Uize.module ({
 											function (_testResults) {
 												m.setNodeInnerHtml ('testResults',_testResults);
 												/*?
-													Implied Nodes
+													DOM Nodes
 														testResults
 															A node whose innerHTML will be replaced with the test results HTML reported back from the call to the =performTest= instance method.
 												*/
@@ -103,7 +103,7 @@ Uize.module ({
 								performTest (reportResultsFUNC);
 								................................
 
-								This method's implementation should be overrided by a particular test page, to perform the test specific to that page. Your implementation should expect to receive one parameter, =reportResultsFUNC=, being a function that should be called to report back the results of the test once it has completed. The =reportResultsFUNC= callback function expects one string parameter, being a report of the test's results in HTML format, which will be placed into the =testResults= implied node.
+								This method's implementation should be overrided by a particular test page, to perform the test specific to that page. Your implementation should expect to receive one parameter, =reportResultsFUNC=, being a function that should be called to report back the results of the test once it has completed. The =reportResultsFUNC= callback function expects one string parameter, being a report of the test's results in HTML format, which will be placed into the =testResults= DOM node.
 					*/
 				},
 

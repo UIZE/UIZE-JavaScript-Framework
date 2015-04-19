@@ -2669,7 +2669,7 @@ Uize.module ({
 
 									The difference between =css('height')= and =contentHeight()= is that the latter returns a unit-less pixel value (i.e. =400=), while the former returns a value with the units (i.e. ="20%"=).
 
-									Calling =height()= (as opposed to =css('height')=) is recommended when an DOM node's height needs to be used in a mathematical calculation.
+									Calling =height()= (as opposed to =css('height')=) is recommended when a DOM node's height needs to be used in a mathematical calculation.
 
 									NOTES
 									- If =returnAllBOOL= is set to =true=, then the return value for each of the matched nodes is wrapped in an array (even if there's only one matched node). If =returnAllBOOL= is =false= or unspecified (=undefined=), only the value for the first matched node is returned. See `Dynamic Methods Return Values` for more info.
@@ -2712,7 +2712,7 @@ Uize.module ({
 
 									The difference between =css('width')= and =contentWidth()= is that the latter returns a unit-less pixel value (i.e. =400=), while the former returns a value with the units (i.e. ="20%"=).
 
-									Calling =width()= (as opposed to =css('width')=) is recommended when an DOM node's width needs to be used in a mathematical calculation.
+									Calling =width()= (as opposed to =css('width')=) is recommended when a DOM node's width needs to be used in a mathematical calculation.
 
 									NOTES
 									- If =returnAllBOOL= is set to =true=, then the return value for each of the matched nodes is wrapped in an array (even if there's only one matched node). If =returnAllBOOL= is =false= or unspecified (=undefined=), only the value for the first matched node is returned. See `Dynamic Methods Return Values` for more info.

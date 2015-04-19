@@ -41,7 +41,7 @@
 			You can specify the value =undefined=, =null=, or =''= (empty string) for either - or both - of the =minValue= and =maxValue= properties. In other words, the valid date range can have a start point but no end point, an end point but no start point, both a start point *and* an end point, or no bounds whatsoever.
 
 		Configurable Date Display Format
-			The way that the currently selected date is displayed in an instance's =input= implied node can be configured using the =displayFormat= state property.
+			The way that the currently selected date is displayed in an instance's =input= DOM node can be configured using the =displayFormat= state property.
 
 			This property lets you specify a format string - the same kind of format string that can be specified when using the =Uize.Date.format= static method of the =Uize.Date= module.
 
@@ -80,7 +80,7 @@ Uize.module ({
 					/*?
 						State Properties
 							displayFormat
-								A string, specifying the format for displaying the selected date value in the instance's =input= implied node.
+								A string, specifying the format for displaying the selected date value in the instance's =input= DOM node.
 
 								The default =valueFormatter= set for this class uses the =Uize.Date.Formatter.format= static method of the =Uize.Date.Formatter= module to format date values. Formatting options supported by the =displayFormat= property correspond to those supported by the =formatSTR= parameter of the =Uize.Date.Formatter.format= method. If you specify your own value for the =valueFormatter= state property that is inherited from the =Uize.Widget.Picker= base class, then the value of the =displayFormat= property will only be applicable if your custom value formatter actually uses it.
 

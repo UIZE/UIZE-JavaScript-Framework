@@ -22,7 +22,7 @@
 
 		*DEVELOPERS:* `Chris van Rensburg`
 
-		With the =Uize.Widget.Bar= superclass, the =knob= implied node acts purely as a value indicator, but with the =Uize.Widget.Bar.Slider= class, the knob is draggable by the user.
+		With the =Uize.Widget.Bar= superclass, the =knob= DOM node acts purely as a value indicator, but with the =Uize.Widget.Bar.Slider= class, the knob is draggable by the user.
 
 		###
 			- explain anatomy of a slider in Uize.Widget.Bar.Slider documentation

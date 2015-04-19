@@ -18,7 +18,7 @@
 
 /*?
 	Introduction
-		The =Uize.Class.mChildObjectEventBindings= mixin implements features to provide a declarative approach to wiring Uize events on instances and their child objects (such as widget and child widget events), as well as other types of events on other types of objects (such as DOM events on implied nodes for widgets).
+		The =Uize.Class.mChildObjectEventBindings= mixin implements features to provide a declarative approach to wiring Uize events on instances and their child objects (such as widget and child widget events), as well as other types of events on other types of objects (such as DOM events on DOM nodes for widgets).
 
 		*DEVELOPERS:* `Ben Ilegbodu`, original code contributed by `Zazzle Inc.`
 */

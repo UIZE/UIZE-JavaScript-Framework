@@ -38,14 +38,14 @@ Uize.module ({
 			function _updateUiText (m) {
 				m._text != _undefined && m.isWired && m.setNodeInnerHtml ('text',m._text);
 				/*?
-					Implied Nodes
-						text Implied Node
+					DOM Nodes
+						text DOM Node
 							An optional node whose contents will be replaced with the value of the =text= state property, if this property's value is not =null= or =undefined=.
 
-							The =innerHTML= value of the =text Implied Node= will be updated to reflect the value of the =text= state property whenever the value of this property is changed, is not =null= or =undefined=, and the instance is wired up.
+							The =innerHTML= value of the =text DOM Node= will be updated to reflect the value of the =text= state property whenever the value of this property is changed, is not =null= or =undefined=, and the instance is wired up.
 
 							NOTES
-							- this implied node is optional
+							- this DOM node is optional
 				*/
 			}
 
@@ -163,9 +163,9 @@ Uize.module ({
 					/*?
 						State Properties
 							text
-								A string, whose value will be used to set the value of the =innerHTML= property of the =text Implied Node=.
+								A string, whose value will be used to set the value of the =innerHTML= property of the =text DOM Node=.
 
-								The =innerHTML= value of the =text Implied Node= will be updated to reflect the value of the =text= state property whenever the value of this property is changed, is not =null= or =undefined=, and the instance is wired up.
+								The =innerHTML= value of the =text DOM Node= will be updated to reflect the value of the =text= state property whenever the value of this property is changed, is not =null= or =undefined=, and the instance is wired up.
 
 								NOTES
 								- the initial value is =undefined=

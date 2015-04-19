@@ -131,7 +131,7 @@ Basic Wireframe Documentation for *ALL* Modules
 	- static methods
 	- static properties
 	- state properties
-	- implied nodes (widgets)
+	- DOM nodes (widgets)
 	- instance events
 	- static events
 	- etc.
@@ -648,7 +648,7 @@ XHTML Validation Problems
 		.........................................................
 
 Design Philosophy (some ramblings)
-	DOM node related methods implemented in Uize.Widget are a reflection of static methods from the Uize.Dom.Basics package that are the most useful and frequently used in the context of widget implementations. If you need to use more esoteric methods, you can access those from the Uize.Dom.Basics package and use the getNode instance method to get references to implied nodes to supply to the methods of the Uize.Dom.Basics package.
+	DOM node related methods implemented in Uize.Widget are a reflection of static methods from the Uize.Dom.Basics package that are the most useful and frequently used in the context of widget implementations. If you need to use more esoteric methods, you can access those from the Uize.Dom.Basics package and use the getNode instance method to get references to DOM nodes to supply to the methods of the Uize.Dom.Basics package.
 
 	UIZE takes the approach of exposing abstractions for things for which it is useful to provide abstractions. Beyond these useful abstractions, UIZE does not attempt to provide a comprehensive abstraction of all DOM APIs. There's nothing wrong with using safe and consistently implemented methods of the standard DOM APIs.
 

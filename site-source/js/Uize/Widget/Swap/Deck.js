@@ -87,7 +87,7 @@
 				</div>
 				..............................................
 
-				The deck item nodes are contained directly inside the root node of the widget. In this case, the widget name is "swap", and its a child widget of the page widget. Notice the =item[itemNo]= naming scheme for the deck item implied nodes.
+				The deck item nodes are contained directly inside the root node of the widget. In this case, the widget name is "swap", and its a child widget of the page widget. Notice the =item[itemNo]= naming scheme for the deck item DOM nodes.
 
 				EXAMPLE WIDGET DECLARATION
 				..........................................
@@ -120,11 +120,11 @@ Uize.module ({
 			function _getItemNodeName (_itemNo) {
 				return _itemNo > -1 ? ('item' + _itemNo) : null;
 				/*?
-					Implied Nodes
+					DOM Nodes
 						item[itemNo]
-							One of the several implied nodes that comprise the items of the deck.
+							One of the several DOM nodes that comprise the items of the deck.
 
-							There is an implied node name for each item in the deck, named according to the naming scheme =item[itemNo]=, where =[itemNo]= represents the number for an item. For example, an instance whose =totalItems= state property is set to =5= will have the five implied nodes named =item0=, =item1=, =item2=, =item3=, and =item4=. When wiring up an instance of the =Uize.Widget.Swap.Deck= class, be sure that HTML exists in the document that supplies a corresponding implied node for each item in the deck.
+							There is a DOM node name for each item in the deck, named according to the naming scheme =item[itemNo]=, where =[itemNo]= represents the number for an item. For example, an instance whose =totalItems= state property is set to =5= will have the five DOM nodes named =item0=, =item1=, =item2=, =item3=, and =item4=. When wiring up an instance of the =Uize.Widget.Swap.Deck= class, be sure that HTML exists in the document that supplies a corresponding DOM node for each item in the deck.
 				*/
 			}
 

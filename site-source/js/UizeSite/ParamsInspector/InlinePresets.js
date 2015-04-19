@@ -11,7 +11,7 @@
 
 /*?
 	Introduction
-		A subclass of =UizeSite.ParamsInspector= that adds the ability to harvest the presets from an implied node whose inner HTML is formatted in the Simple Data format.
+		A subclass of =UizeSite.ParamsInspector= that adds the ability to harvest the presets from a DOM node whose inner HTML is formatted in the Simple Data format.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 */

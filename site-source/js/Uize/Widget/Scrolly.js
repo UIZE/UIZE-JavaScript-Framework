@@ -28,15 +28,15 @@
 			It supports horizontal scrolling, vertical scrolling, or both horiztonal and vertical scrolling together in the same instance. User interface and programmatic means are provided for controlling the scroll position of an instance.
 
 			Scrolling in Pages
-				Scroll position is expressed in pages, where one horizontal page is defined as the width of the =view= implied node, and one vertical page is defined as the height of the =view= implied node.
+				Scroll position is expressed in pages, where one horizontal page is defined as the width of the =view= DOM node, and one vertical page is defined as the height of the =view= DOM node.
 
 				A scrolly is scrollable horizontally if the value of its =scrollWidth= style property is greater than the value of its =offsetWidth= style property. Similarly, a scrolly is scrollable vertically if the value of its =scrollHeight= style property is greater than the value of its =offsetHeight= style property.
 
 			How Scrolling is Performed
-				Scrolling is achieved by setting the values of the =scrollLeft= and =scrollTop= properties of the =view= implied node.
+				Scrolling is achieved by setting the values of the =scrollLeft= and =scrollTop= properties of the =view= DOM node.
 
 				Animation
-					Whenever the values of either the =pageX= or =pageY= state properties are modified, a fade is initiated in order to animate the scroll position of the =view= implied node from its current position to the new position represented by the new =pageX= and =pageY= values.
+					Whenever the values of either the =pageX= or =pageY= state properties are modified, a fade is initiated in order to animate the scroll position of the =view= DOM node from its current position to the new position represented by the new =pageX= and =pageY= values.
 
 					The scrolly instance creates an instance of the =Uize.Fade= class in order to drive the scroll position fade. This fade instance is accessible through the =fade= instance property, so the properties of the scroll fade can be configured by setting values for the various state properties of this =fade= instance, such as its =curve=, =duration=, and other state properties.
 
@@ -94,7 +94,7 @@
 				</div>
 				....................................................................................
 
-				The above example HTML is for a scrolly instance that is attached as the child widget named "myScrolly" to the page widget instance with the =idPrefix= of ='page'=. Therefore, the =idPrefix= of the =left= child widget is ='page_myScrolly_left'=, and the =idPrefix= of the scrolly's =view= implied node is ='page_myScrolly-view'=.
+				The above example HTML is for a scrolly instance that is attached as the child widget named "myScrolly" to the page widget instance with the =idPrefix= of ='page'=. Therefore, the =idPrefix= of the =left= child widget is ='page_myScrolly_left'=, and the =idPrefix= of the scrolly's =view= DOM node is ='page_myScrolly-view'=.
 */
 
 Uize.module ({
@@ -165,7 +165,7 @@ Uize.module ({
 				if (m.isWired) {
 					var _viewNode = m.getNode ('view');
 						/*?
-							Implied Nodes
+							DOM Nodes
 								view
 									A node of any type, whose =scrollLeft= and =scrollTop= style properties are maintained by the =Uize.Widget.Scrolly= class as the values of the =pageX= and =pageY= state properties are modified.
 
@@ -200,7 +200,7 @@ Uize.module ({
 						/*?
 							Instance Properties
 								fade
-									An instance of the =Uize.Fade= class that is used to animate the scrolling of the contents of the =view= implied node.
+									An instance of the =Uize.Fade= class that is used to animate the scrolling of the contents of the =view= DOM node.
 
 									The =fade= instance is created during the construction of the =Uize.Widget.Scrolly= instance, so the fade properties can be modified immediately after the scrolly is created. The behavior of the animation can be controlled by setting values for the various state properties of the =fade= instance, such as its =curve=, =duration=, and other state properties.
 
@@ -244,9 +244,9 @@ Uize.module ({
 						/*?
 							Child Widgets
 								left
-									An instance of the =Uize.Widget.Button= class, that is wired up so that clicking on it will scroll the =view= implied node left by one page.
+									An instance of the =Uize.Widget.Button= class, that is wired up so that clicking on it will scroll the =view= DOM node left by one page.
 
-									Clicking this button has the effect of decrementing the value of the =pageX= state property. The markup for this button is optional. The enabled state of this button is managed by the =Uize.Widget.Scrolly= class, so that it is disabled whenever it is not possible to scroll left, such as when the =view= implied node is already scrolled all the way to the left (i.e. the value of =pageX= is =0=).
+									Clicking this button has the effect of decrementing the value of the =pageX= state property. The markup for this button is optional. The enabled state of this button is managed by the =Uize.Widget.Scrolly= class, so that it is disabled whenever it is not possible to scroll left, such as when the =view= DOM node is already scrolled all the way to the left (i.e. the value of =pageX= is =0=).
 
 									NOTES
 									- see the related =pageX= state property
@@ -256,9 +256,9 @@ Uize.module ({
 						/*?
 							Child Widgets
 								right
-									An instance of the =Uize.Widget.Button= class, that is wired up so that clicking on it will scroll the =view= implied node right by one page.
+									An instance of the =Uize.Widget.Button= class, that is wired up so that clicking on it will scroll the =view= DOM node right by one page.
 
-									Clicking this button has the effect of incrementing the value of the =pageX= state property. The markup for this button is optional. The enabled state of this button is managed by the =Uize.Widget.Scrolly= class, so that it is disabled whenever it is not possible to scroll right, such as when the =view= implied node is already scrolled all the way to the right (i.e. the value of =pageX= is equal to the value of =maxPageX=).
+									Clicking this button has the effect of incrementing the value of the =pageX= state property. The markup for this button is optional. The enabled state of this button is managed by the =Uize.Widget.Scrolly= class, so that it is disabled whenever it is not possible to scroll right, such as when the =view= DOM node is already scrolled all the way to the right (i.e. the value of =pageX= is equal to the value of =maxPageX=).
 
 									NOTES
 									- see the related =pageX= state property
@@ -268,9 +268,9 @@ Uize.module ({
 						/*?
 							Child Widgets
 								up
-									An instance of the =Uize.Widget.Button= class, that is wired up so that clicking on it will scroll the =view= implied node up by one page.
+									An instance of the =Uize.Widget.Button= class, that is wired up so that clicking on it will scroll the =view= DOM node up by one page.
 
-									Clicking this button has the effect of decrementing the value of the =pageY= state property. The markup for this button is optional. The enabled state of this button is managed by the =Uize.Widget.Scrolly= class, so that it is disabled whenever it is not possible to scroll up, such as when the =view= implied node is already scrolled all the way to the top (i.e. the value of =pageY= is =0=).
+									Clicking this button has the effect of decrementing the value of the =pageY= state property. The markup for this button is optional. The enabled state of this button is managed by the =Uize.Widget.Scrolly= class, so that it is disabled whenever it is not possible to scroll up, such as when the =view= DOM node is already scrolled all the way to the top (i.e. the value of =pageY= is =0=).
 
 									NOTES
 									- see the related =pageY= state property
@@ -280,9 +280,9 @@ Uize.module ({
 						/*?
 							Child Widgets
 								down
-									An instance of the =Uize.Widget.Button= class, that is wired up so that clicking on it will scroll the =view= implied node down by one page.
+									An instance of the =Uize.Widget.Button= class, that is wired up so that clicking on it will scroll the =view= DOM node down by one page.
 
-									Clicking this button has the effect of incrementing the value of the =pageY= state property. The markup for this button is optional. The enabled state of this button is managed by the =Uize.Widget.Scrolly= class, so that it is disabled whenever it is not possible to scroll down, such as when the =view= implied node is already scrolled all the way to the bottom (i.e. the value of =pageY= is equal to the value of =maxPageY=).
+									Clicking this button has the effect of incrementing the value of the =pageY= state property. The markup for this button is optional. The enabled state of this button is managed by the =Uize.Widget.Scrolly= class, so that it is disabled whenever it is not possible to scroll down, such as when the =view= DOM node is already scrolled all the way to the bottom (i.e. the value of =pageY= is equal to the value of =maxPageY=).
 
 									NOTES
 									- see the related =pageY= state property
@@ -305,7 +305,7 @@ Uize.module ({
 					/*?
 						State Properties
 							isScrollableX
-								A read-only boolean (whose value is managed by the =Uize.Widget.Scrolly= class), indicating whether or not the contents of the =view= implied node is wide enough to make it horizontally scrollable.
+								A read-only boolean (whose value is managed by the =Uize.Widget.Scrolly= class), indicating whether or not the contents of the =view= DOM node is wide enough to make it horizontally scrollable.
 
 								NOTES
 								- this property is read-only
@@ -320,7 +320,7 @@ Uize.module ({
 					/*?
 						State Properties
 							isScrollableY
-								A read-only boolean (whose value is managed by the =Uize.Widget.Scrolly= class), indicating whether or not the contents of the =view= implied node is tall enough to make it vertically scrollable.
+								A read-only boolean (whose value is managed by the =Uize.Widget.Scrolly= class), indicating whether or not the contents of the =view= DOM node is tall enough to make it vertically scrollable.
 
 								NOTES
 								- this property is read-only
@@ -344,7 +344,7 @@ Uize.module ({
 							maxPageX
 								A read-only integer (whose value is managed by the =Uize.Widget.Scrolly= class), indicating the maximum possible value for the =pageX= state property.
 
-								The value of this property can be used as an indication of the number of horizontal pages for the contents of the =view= implied node. For example, a value of =0= indicates that there is only one page horizontally (i.e. the maximum value for =pageX= is =0=). A value of =5=, on the other hand, indicates that there are six pages horizontally, where those six pages are represented by the values =0= through =5= for the =pageX= state property.
+								The value of this property can be used as an indication of the number of horizontal pages for the contents of the =view= DOM node. For example, a value of =0= indicates that there is only one page horizontally (i.e. the maximum value for =pageX= is =0=). A value of =5=, on the other hand, indicates that there are six pages horizontally, where those six pages are represented by the values =0= through =5= for the =pageX= state property.
 
 								NOTES
 								- this property is read-only
@@ -368,7 +368,7 @@ Uize.module ({
 							maxPageY
 								A read-only integer (whose value is managed by the =Uize.Widget.Scrolly= class), indicating the maximum possible value for the =pageY= state property.
 
-								The value of this property can be used as an indication of the number of vertical pages for the contents of the =view= implied node. For example, a value of =0= indicates that there is only one page vertically (i.e. the maximum value for =pageY= is =0=). A value of =5=, on the other hand, indicates that there are six pages vertically, where those six pages are represented by the values =0= through =5= for the =pageY= state property.
+								The value of this property can be used as an indication of the number of vertical pages for the contents of the =view= DOM node. For example, a value of =0= indicates that there is only one page vertically (i.e. the maximum value for =pageY= is =0=). A value of =5=, on the other hand, indicates that there are six pages vertically, where those six pages are represented by the values =0= through =5= for the =pageY= state property.
 
 								NOTES
 								- this property is read-only
@@ -384,7 +384,7 @@ Uize.module ({
 					/*?
 						State Properties
 							pageX
-								An integer, representing the current horizontal scroll position of the =view= implied node as a page number (see `Scrolling in Pages`) in the X-axis.
+								An integer, representing the current horizontal scroll position of the =view= DOM node as a page number (see `Scrolling in Pages`) in the X-axis.
 
 								Conformed
 									When setting the value for this property, the value is conformed in a number of ways.
@@ -406,7 +406,7 @@ Uize.module ({
 					/*?
 						State Properties
 							pageY
-								An integer, representing the current vertical scroll position of the =view= implied node as a page number (see `Scrolling in Pages`) in the Y-axis.
+								An integer, representing the current vertical scroll position of the =view= DOM node as a page number (see `Scrolling in Pages`) in the Y-axis.
 
 								Conformed
 									When setting the value for this property, the value is conformed in a number of ways.

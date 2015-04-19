@@ -26,9 +26,9 @@
 		The =Uize.Widget.ListEditor= class implements a widget that lets the user build and edit a simple list of string values.
 
 		Editing the List
-			The =Uize.Widget.ListEditor= class uses a number of child widgets and implied nodes to build a UI that lets the user edit the list.
+			The =Uize.Widget.ListEditor= class uses a number of child widgets and DOM nodes to build a UI that lets the user edit the list.
 
-			The =input= child widget, which is an instance of the =Uize.Widget.TextInput= class, lets the user enter text for a new item to be added to the =list= array. The =add= child widget, which is an instance of the =Uize.Widget.Button= class, lets the user add the currently entered text as a new item in the =list= array. The =list Implied Node=, which is a multiple select =select= tag (i.e. where the =multiple= attribute is set to the value ='multiple'=), displays the current list and lets the user select one or more items in the list to be removed. The =remove= child widget, which is an instance of the =Uize.Widget.Button= class, lets the user remove the items currently selected in the =list Implied Node= from the =list= array.
+			The =input= child widget, which is an instance of the =Uize.Widget.TextInput= class, lets the user enter text for a new item to be added to the =list= array. The =add= child widget, which is an instance of the =Uize.Widget.Button= class, lets the user add the currently entered text as a new item in the =list= array. The =list DOM Node=, which is a multiple select =select= tag (i.e. where the =multiple= attribute is set to the value ='multiple'=), displays the current list and lets the user select one or more items in the list to be removed. The =remove= child widget, which is an instance of the =Uize.Widget.Button= class, lets the user remove the items currently selected in the =list DOM Node= from the =list= array.
 
 			More on Adding Items
 				Conforming New Items
@@ -50,7 +50,7 @@
 					The =sort= property is sufficiently configurable to allow the =list= to be kept in a sorted state, or to be unsorted with new items added either at the beginning or the end of the =list=.
 
 				New Item Becomes Selected
-					An item that is added by the user immediately becomes the currently selected option in the =list Implied Node=.
+					An item that is added by the user immediately becomes the currently selected option in the =list DOM Node=.
 
 					This makes it easy for the user to immediately remove that item if they notice they entered it incorrectly. Removing the item then places it back in the =input= field.
 
@@ -61,7 +61,7 @@
 					This allows the item to be easily re-added, in case it was accidentally removed, or edited / modified first before being re-added. This behavior does not apply to removing multiple items.
 
 				Special Keys
-					Pressing the delete key when the =list Implied Node= is focused will remove any items that are selected at the time (pressing the delete key has the same effect as clicking the =remove= button).
+					Pressing the delete key when the =list DOM Node= is focused will remove any items that are selected at the time (pressing the delete key has the same effect as clicking the =remove= button).
 
 			Editing Items
 				The =Uize.Widget.ListEditor= class does not provide a dedicated way to edit existing items in the list, but the combination of the add and remove behaviors provides for a sufficiently intuitive way to make edits.
@@ -98,7 +98,7 @@
 				This typically occurs when the =input= child widget's value is =''= (an empty string), but could also occur if its value is non-empty but not valid according to a validator function specified by its =validator= state property.
 
 			Disabled Remove Button
-				When no options of the =list Implied Node= are selected, then the =remove= button will be disabled.
+				When no options of the =list DOM Node= are selected, then the =remove= button will be disabled.
 
 				This may happen when there are no items in the =list= array, when the user has just removed the previously selected items, or if the user uses ctrl-click to deselect all selected items.
 */
@@ -343,12 +343,12 @@ Uize.module ({
 								/*?
 									Child Widgets
 										remove
-											An instance of the =Uize.Widget.Button= class, that lets the user remove the items currently selected in the =list Implied Node= from the =list= array.
+											An instance of the =Uize.Widget.Button= class, that lets the user remove the items currently selected in the =list DOM Node= from the =list= array.
 
-											When no options of the =list Implied Node= are selected, then the =remove= button will be disabled. This may happen when there are no items in the =list= array, when the user has just removed the previously selected items, or if the user uses ctrl-click to deselect all selected items.
+											When no options of the =list DOM Node= are selected, then the =remove= button will be disabled. This may happen when there are no items in the =list= array, when the user has just removed the previously selected items, or if the user uses ctrl-click to deselect all selected items.
 
 											NOTES
-											- see the related =list Implied Node= and the =list= state property
+											- see the related =list DOM Node= and the =list= state property
 											- this child widget is added in the constructor
 								*/
 							}
@@ -382,11 +382,11 @@ Uize.module ({
 									function () {_updateUiRemoveButtonState (m)}
 							}
 							/*?
-								Implied Nodes
-									list Implied Node
+								DOM Nodes
+									list DOM Node
 										A multiple select =select= tag (i.e. where the =multiple= attribute is set to the value ='multiple'=), that is used to display the current items in the =list= array, and that allows the user to select one or more items to remove.
 
-										When the =list Implied Node= is focused and one or more options of the select tag are selected, then pressing the delete key will result in the selected items being removed from the list.
+										When the =list DOM Node= is focused and one or more options of the select tag are selected, then pressing the delete key will result in the selected items being removed from the list.
 
 										NOTES
 										- see the related =list= state property
@@ -476,7 +476,7 @@ Uize.module ({
 									Now, upon executing the first =set= statement, the value of the =list= property will change to =['a','b','c']= and the =Changed.list= event will fire. Upon executing the second =set= statement, the conformer for the =list= property will detect that there is no change in the list's contents - even though technically a new array reference is being supplied in the =set= statement. Consequently, there will be no =Changed.list= event fired. Finally, upon executing the third =set= statement, the contents of the list is different in its order. However, the sort mode will result in the list being conformed to =['a','b','c']=. Once again, there will be no change in the conformed list's contents and there will be no =Changed.list= event fired.
 
 								NOTES
-								- see the related =list Implied Node=
+								- see the related =list DOM Node=
 								- see the related =value= state property
 								- when the list is changed programmatically, the item conformer specified by the =itemConformer= state property is not applied to the items in the list - they must already be conformed correctly
 								- the initial value is =[]= (an empty array)

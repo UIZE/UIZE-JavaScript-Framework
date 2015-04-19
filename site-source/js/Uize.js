@@ -443,7 +443,7 @@ Uize = (function () {
 							});
 							.......................................................
 
-							In the above example, the instance method =displayPropertyValue= is being defined for a hypothetical widget class. This method accepts a string parameter, being the name of a state property whose value should be displayed in the page in an implied node of the widget, and where the implied node's name is constructed from the prefix ='valueOf'= and the name of the state property with its first letter capitalized. Using this method to display the value of a =width= state property, the value of this property would be displayed in the implied node named =valueOfWidth=.
+							In the above example, the instance method =displayPropertyValue= is being defined for a hypothetical widget class. This method accepts a string parameter, being the name of a state property whose value should be displayed in the page in a DOM node of the widget, and where the DOM node's name is constructed from the prefix ='valueOf'= and the name of the state property with its first letter capitalized. Using this method to display the value of a =width= state property, the value of this property would be displayed in the DOM node named =valueOfWidth=.
 
 							NOTES
 							- if the first character of the source string is already capitalized, then the returned value will be the same as the source string

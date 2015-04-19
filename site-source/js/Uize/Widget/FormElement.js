@@ -305,7 +305,7 @@ Uize.module ({
 								case 'checkbox':
 									break;
 
-								case 'radio':	// operates on a group of like-named radio buttons, but one has to have the implied node id
+								case 'radio':	// operates on a group of like-named radio buttons, but one has to have the DOM node id
 									m.set ({
 										nodeMap:_Uize.copyInto(
 											m.get('nodeMap') || {},
@@ -390,7 +390,7 @@ Uize.module ({
 								<input id="myWidget-input" type='button' name='foobar'/>
 								........................................................
 
-								For a =Uize.Widget.FormElement= instance with the =idPrefix= of ='myWidget'= and the above HTML for its =input= implied node, the value of the =elementName= state property will be ='foobar'=.
+								For a =Uize.Widget.FormElement= instance with the =idPrefix= of ='myWidget'= and the above HTML for its =input= DOM node, the value of the =elementName= state property will be ='foobar'=.
 					*/
 				_errorClassName:{
 					name:'errorClassName',
@@ -500,7 +500,7 @@ Uize.module ({
 								<input id="myWidget-input" type='button' name='foobar'/>
 								........................................................
 
-								For a =Uize.Widget.FormElement= instance with the =idPrefix= of ='myWidget'= and the above HTML for its =input= implied node, the value of the =type= state property will be ='button'=.
+								For a =Uize.Widget.FormElement= instance with the =idPrefix= of ='myWidget'= and the above HTML for its =input= DOM node, the value of the =type= state property will be ='button'=.
 					*/
 				_validateWhen:{
 					name:'validateWhen',

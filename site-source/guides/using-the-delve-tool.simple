@@ -8,10 +8,10 @@ Introduction
 
 		- see a tree or flattened list of all the widgets instantiated on a page
 		- see a tree or flattened list of all the modules built for a page
-		- see a list of all widgets that are in the disabled state, widgets that are not wired, widgets that are missing implied node DOM, all widget classes built for the page, only widget classes of which instances have been created, only widget classes of which instances *have not* been created, and many more different types of lists / reports of useful information
+		- see a list of all widgets that are in the disabled state, widgets that are not wired, widgets that are missing DOM node DOM, all widget classes built for the page, only widget classes of which instances have been created, only widget classes of which instances *have not* been created, and many more different types of lists / reports of useful information
 		- see a summary for various objects, such as widget instances, class or package modules, DOM nodes, functions and methods, etc.
 		- see a listing of all the features that can be automatically detected for a class or an instance's class, such as instance methods, static methods, instance properties, state properties, etc.
-		- for widgets, see a summary of the widget's parentage, child widgets, sibling widgets, implied nodes, etc.
+		- for widgets, see a summary of the widget's parentage, child widgets, sibling widgets, DOM nodes, etc.
 		- for widget classes, see a summary of all the instances of such classes on the page
 		- easily get documentation for a widget's class, or any UIZE module (whether loaded on the page or not)
 		- watch all the events for a specific widget on the page
@@ -486,9 +486,9 @@ The Right Pane
 				A `widget DOM nodes summary` is displayed in the subtitle of the DOM NODES section's heading. The `widget DOM nodes` for the widget being inspected are displayed in a table, with a row for each DOM node, and various columns used in describing each node, as described below...
 
 				NODE NAME
-					The NODE NAME column of the `DOM NODES` table displays the name of the DOM node from its owner widget's perspective (sometimes referred to as the *implied node* name).
+					The NODE NAME column of the `DOM NODES` table displays the name of the DOM node from its owner widget's perspective.
 
-					The node name displayed in this column is the name that would be used to specify the node when calling one of the many implied node methods (e.g. =getNode=, =setNodeStyle=, =displayNode=, etc.) implemented in the =Uize.Widget= base class. For the special case of the root node for a widget, which is specified by the node name =''= (an ampty string), the name is displayed in this columne as *[ROOT NODE]*. Each node name in the NODE NAME column is an `object link`, where the `object link expression` is a call to the =getNode= instance method of the widget that would return a reference to the DOM node (e.g. =page.children.colorPicker.children.sliderR.getNode ('')=). This means that clicking on a node name will let you further inspect the DOM node in the `summary tab`, where additional DOM node-specific information will be displayed (see `Summary for DOM Nodes`).
+					The node name displayed in this column is the name that would be used to specify the node when calling one of the many DOM node methods (e.g. =getNode=, =setNodeStyle=, =displayNode=, etc.) implemented in the =Uize.Widget= base class. For the special case of the root node for a widget, which is specified by the node name =''= (an ampty string), the name is displayed in this columne as *[ROOT NODE]*. Each node name in the NODE NAME column is an `object link`, where the `object link expression` is a call to the =getNode= instance method of the widget that would return a reference to the DOM node (e.g. =page.children.colorPicker.children.sliderR.getNode ('')=). This means that clicking on a node name will let you further inspect the DOM node in the `summary tab`, where additional DOM node-specific information will be displayed (see `Summary for DOM Nodes`).
 
 				ACCESSED
 					The ACCESSED column of the `DOM NODES` table displays either the text "yes" or *"NO"*, indicating whether or not a DOM node has been accessed by the widget.
@@ -521,7 +521,7 @@ The Right Pane
 			HTML
 				The HTML section displays in the `summary tab` for all objects that are widget instances, and displays the HTML for the widget being inspected (provided that the widget's HTML can be discovered).
 
-				The HTML for the widget being inspected is determined by first checking if the widget has a non-null container node (i.e. there's a valid node specified for the =container= state property of the widget). If there is no container node for the widget, then DELVE checks for the presence of a shell node for the widget (i.e. the implied node with the name "shell"). If there is no shell node for the widget in the page, then DELVE checks for the presence of the root node for the widget (i.e. the implied node with the empty string name). If a DOM node can be found for the widget in the page being inspected, then the outer HTML of that node is displayed in the HTML section.
+				The HTML for the widget being inspected is determined by first checking if the widget has a non-null container node (i.e. there's a valid node specified for the =container= state property of the widget). If there is no container node for the widget, then DELVE checks for the presence of a shell node for the widget (i.e. the DOM node with the name "shell"). If there is no shell node for the widget in the page, then DELVE checks for the presence of the root node for the widget (i.e. the DOM node with the empty string name). If a DOM node can be found for the widget in the page being inspected, then the outer HTML of that node is displayed in the HTML section.
 
 				If the HTML for the widget cannot be discovered by DELVE, then a message to the effect that the widget has no container node, shell node, or root node will be displayed. If DELVE can't discover the HTML for the widget being inspected, it might be that the widget's HTML is not in the page, or it might just be that the HTML is actually there but it has no shell or root node (not all widgets require that their HTML have a shell or root node) and there is no container node specified for the widget. It could also be that there is a mismatch between the =idPrefix= specified for the widget and the =idPrefix= used when generating the HTML intended for the widget.
 

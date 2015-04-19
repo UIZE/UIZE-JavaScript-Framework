@@ -6,10 +6,10 @@ Among other things, DELVE lets you...
 
 - see a tree or flattened list of all the widgets instantiated on a page
 - see a tree or flattened list of all the modules built for a page
-- see a list of all widgets that are in the disabled state, widgets that are not wired, widgets that are missing implied node DOM, all widget classes built for the page, only widget classes of which instances have been created, only widget classes of which instances *have not* been created, and many more different types of lists / reports of useful information
+- see a list of all widgets that are in the disabled state, widgets that are not wired, widgets that are missing DOM node DOM, all widget classes built for the page, only widget classes of which instances have been created, only widget classes of which instances *have not* been created, and many more different types of lists / reports of useful information
 - see a summary for various objects, such as widget instances, class or package modules, DOM nodes, functions and methods, etc.
 - see a listing of all the features that can be automatically detected for a class or an instance's class, such as instance methods, static methods, instance properties, state properties, etc.
-- for widgets, see a summary of the widget's parentage, child widgets, sibling widgets, implied nodes, etc.
+- for widgets, see a summary of the widget's parentage, child widgets, sibling widgets, DOM nodes, etc.
 - for widget classes, see a summary of all the instances of such classes on the page
 - easily get documentation for a widget's class, or any UIZE module (whether loaded on the page or not)
 - watch all the events for a specific widget on the page

@@ -476,25 +476,25 @@ Event Wiring Basics
 			- for interoperability / safety
 
 ### Widgets and DOM Events
-	Wiring Widget Implied Nodes
+	Wiring Widget DOM Nodes
 		.
 
-		Wiring Implied Nodes
+		Wiring DOM Nodes
 			.
 
-			Wiring Implied Nodes Inside wireUi
+			Wiring DOM Nodes Inside wireUi
 				.
 
-		Unwiring Implied Nodes
+		Unwiring DOM Nodes
 			.
 
 			Automatic Unwiring Inside unwireUi
 				.
 
-			Manually Unwiring Implied Nodes
+			Manually Unwiring DOM Nodes
 				.
 
-	Wiring Page Widget Implied Nodes
+	Wiring Page Widget DOM Nodes
 		.
 
 	###

@@ -46,11 +46,11 @@ Uize.module ({
 						/*?
 							Instance Methods
 								web
-									Returns a =Uize.Web= object reference, allowing for syntax-friendly manipulation and/or interrogation of the specified implied node(s) of the widget.
+									Returns a =Uize.Web= object reference, allowing for syntax-friendly manipulation and/or interrogation of the specified DOM node(s) of the widget.
 
 									SYNTAX
 									..................................................
-									webOBJ = widgetOBJ.web(impliedNodeSTRorBLOB);
+									webOBJ = widgetOBJ.web(nodeSTRorBLOB);
 									..................................................
 
 									EXAMPLE
@@ -58,7 +58,7 @@ Uize.module ({
 									var knob = this.web('knob');
 									...........................................
 
-									Returns a =Uize.Web= object that contains the "knob" implied node of the widget.
+									Returns a =Uize.Web= object that contains the "knob" DOM node of the widget.
 
 									EXAMPLE
 									.........................................
@@ -80,9 +80,9 @@ Uize.module ({
 									Returns a =Uize.Web= object that contains the `root node` node of the =foo= child widget.
 
 									NOTES
-									- The =impliedNodeSTRorBLOB= parameter can be a string specifying the name of the implied node, or an object reference to the implied node.
-									- When the =impliedNodeSTRorBLOB= parameter has a value of =null=, then an empty =Uize.Web= object is returned.
-									- When the =impliedNodeSTRorBLOB= parameter has a value of =undefined= or is not specified, then the root node of the widget is contained by the returned =Uize.Web= object. This has the same effect as specifying the empty string. (i.e. =web()= is equivalent to =web('')=)
+									- The =nodeSTRorBLOB= parameter can be a string specifying the name of the DOM node, or an object reference to the DOM node.
+									- When the =nodeSTRorBLOB= parameter has a value of =null=, then an empty =Uize.Web= object is returned.
+									- When the =nodeSTRorBLOB= parameter has a value of =undefined= or is not specified, then the root node of the widget is contained by the returned =Uize.Web= object. This has the same effect as specifying the empty string. (i.e. =web()= is equivalent to =web('')=)
 									- See related =getNode= instance method of =Uize.Widget=
 									- See also =Uize.Web= object
 						*/

@@ -108,13 +108,13 @@ Uize.module ({
 					(m.parent && m.parent.getNode (m._name))
 				);
 				/*?
-					Implied Nodes
+					DOM Nodes
 						Root Node
-							The optional `root node` of a widget is the implied node with the name =''= (empty string).
+							The optional `root node` of a widget is the DOM node with the name =''= (empty string).
 
-							The =id= for the root node of a widget instance is the value of that instance's =idPrefix= state property - there is no "-" (hyphen) separating the =idPrefix= and the empty implied node name. So, for an instance of the slider class with its =idPrefix= set to the value ='mySlider'=, the id of that instance's root node would be just =mySlider=.
+							The =id= for the root node of a widget instance is the value of that instance's =idPrefix= state property - there is no "-" (hyphen) separating the =idPrefix= and the empty DOM node name. So, for an instance of the slider class with its =idPrefix= set to the value ='mySlider'=, the id of that instance's root node would be just =mySlider=.
 
-							A reference to the root node can be obtained by either specifying the value =''= (empty string) or no =impliedNodeSTRorBLOB= parameter when calling the =getNode= instance method, as in...
+							A reference to the root node can be obtained by either specifying the value =''= (empty string) or no =nodeSTRorBLOB= parameter when calling the =getNode= instance method, as in...
 
 							............................................
 							var theRootNode = myWidget.getNode ();
@@ -128,7 +128,7 @@ Uize.module ({
 							....................................................................................
 
 						shell
-							The optional =shell= implied node for a widget instance provides a "slot" in the document into which markup for that instance can be inserted.
+							The optional =shell= DOM node for a widget instance provides a "slot" in the document into which markup for that instance can be inserted.
 				*/
 			}
 
@@ -221,19 +221,19 @@ Uize.module ({
 							/*?
 								Instance Methods
 									displayNode
-										Lets you display or hide the specified implied node, using the =display= CSS style property.
+										Lets you display or hide the specified DOM node, using the =display= CSS style property.
 
 										SYNTAX
-										...............................................................
-										myWidget.displayNode (impliedNodeSTRorBLOB,mustDisplayANYTYPE);
-										...............................................................
+										........................................................
+										myWidget.displayNode (nodeSTRorBLOB,mustDisplayANYTYPE);
+										........................................................
 
 										While typically a Boolean, the =mustDisplayANYTYPE= parameter can be of any type and the node will be displayed if it resolves to =true=, and hidden if it resolves to =false= - with the exception of =undefined=, when the node will be displayed (see explanation below).
 
 										VARIATIONS
-										............................................
-										myWidget.displayNode (impliedNodeSTRorBLOB);
-										............................................
+										.....................................
+										myWidget.displayNode (nodeSTRorBLOB);
+										.....................................
 
 										When no =mustDisplayANYTYPE= parameter is specified (or when its value is =undefined=), the node will be displayed.
 
@@ -246,17 +246,17 @@ Uize.module ({
 							/*?
 								Instance Methods
 									getNodeStyle
-										Returns the value of the specified style property (or style properties) for the specified implied node.
+										Returns the value of the specified style property (or style properties) for the specified DOM node.
 
 										SYNTAX
-										...............................................................................
-										propertyValueSTR = myWidget.getNodeStyle (impliedNodeSTRorOBJ,propertyNameSTR);
-										...............................................................................
+										........................................................................
+										propertyValueSTR = myWidget.getNodeStyle (nodeSTRorOBJ,propertyNameSTR);
+										........................................................................
 
 										VARIATION
-										....................................................................................
-										stylePropertiesOBJ = myWidget.getNodeStyle (impliedNodeSTRorOBJ,stylePropertiesOBJ);
-										....................................................................................
+										.............................................................................
+										stylePropertiesOBJ = myWidget.getNodeStyle (nodeSTRorOBJ,stylePropertiesOBJ);
+										.............................................................................
 
 										In order to get the values for multiple style properties in a single call, a style properties object can be specified using the =stylePropertiesOBJ= parameter. The value for this parameter should be an object, where each key is the name of a style property. The values for the individual properties in this object are not important - you can use any dummy values you like.
 
@@ -268,7 +268,7 @@ Uize.module ({
 										);
 										.................................................................
 
-										When provided with a =stylePropertiesOBJ= parameter, the =getNodeStyle= method returns a value that is a style properties object, and this object can then be supplied to the =setNodeStyle= instance method. In the above example, values of the =borderWidth= and =borderColor= CSS style properties are being "copied" from the "title" implied node of =myWidget1= to the "title" implied node of =myWidget2=.
+										When provided with a =stylePropertiesOBJ= parameter, the =getNodeStyle= method returns a value that is a style properties object, and this object can then be supplied to the =setNodeStyle= instance method. In the above example, values of the =borderWidth= and =borderColor= CSS style properties are being "copied" from the "title" DOM node of =myWidget1= to the "title" DOM node of =myWidget2=.
 
 										NOTES
 										- see also the companion =setNodeStyle= instance method
@@ -279,12 +279,12 @@ Uize.module ({
 							/*?
 								Instance Methods
 									getNodeValue
-										Returns a string or boolean value, representing the value of the specified implied node of the widget instance.
+										Returns a string or boolean value, representing the value of the specified DOM node of the widget instance.
 
 										SYNTAX
-										.................................................................
-										nodeValueSTRorBOOL = myWidget.getNodeValue (impliedNodeSTRorOBJ);
-										.................................................................
+										..........................................................
+										nodeValueSTRorBOOL = myWidget.getNodeValue (nodeSTRorOBJ);
+										..........................................................
 
 										This method uses the =Uize.Dom.Basics.getValue= static method in its implementation. For more details, consult the reference for the =Uize.Dom.Basics= module.
 
@@ -297,19 +297,19 @@ Uize.module ({
 							/*?
 								Instance Methods
 									injectNodeHtml
-										Lets you inject the specified HTML markup into the specified implied node, using the specified injection mode.
+										Lets you inject the specified HTML markup into the specified DOM node, using the specified injection mode.
 
 										SYNTAX
-										.....................................................................
-										myWidget.injectNodeHtml (impliedNodeSTRorBLOB,htmlSTR,injectModeSTR);
-										.....................................................................
+										..............................................................
+										myWidget.injectNodeHtml (nodeSTRorBLOB,htmlSTR,injectModeSTR);
+										..............................................................
 
 										This method uses the =Uize.Dom.Basics.injectHtml= static method in its implementation. For more details and for a more in-depth discussion of the supported injection modes and how they behave, consult the reference for the =Uize.Dom.Basics= module.
 
 										VARIATION
-										.......................................................
-										myWidget.injectNodeHtml (impliedNodeSTRorBLOB,htmlSTR);
-										.......................................................
+										................................................
+										myWidget.injectNodeHtml (nodeSTRorBLOB,htmlSTR);
+										................................................
 
 										When no =injectModeSTR= parameter is specified, then the default injection mode ='inner bottom'= will be used.
 
@@ -322,12 +322,12 @@ Uize.module ({
 							/*?
 								Instance Methods
 									setNodeClipRect
-										Sets the clip style property of the specified implied node (or =Node Blob=) of the widget instance, using the supplied rectangle coordinates.
+										Sets the clip style property of the specified DOM node (or =Node Blob=) of the widget instance, using the supplied rectangle coordinates.
 
 										SYNTAX
-										..................................................................................
-										myWidget.setNodeClipRect (impliedNodeSTRorBLOB,leftINT,topINT,rightINT,bottomINT);
-										..................................................................................
+										...........................................................................
+										myWidget.setNodeClipRect (nodeSTRorBLOB,leftINT,topINT,rightINT,bottomINT);
+										...........................................................................
 
 										- compare to the =Uize.Dom.Basics.setClipRect= static method
 							*/
@@ -336,12 +336,12 @@ Uize.module ({
 							/*?
 								Instance Methods
 									setNodeInnerHtml
-										Set the =innerHTML= property for the specified implied node (or =Node Blob=) to the specified HTML string.
+										Set the =innerHTML= property for the specified DOM node (or =Node Blob=) to the specified HTML string.
 
 										SYNTAX
-										.........................................................
-										myWidget.setNodeInnerHtml (impliedNodeSTRorBLOB,htmlSTR);
-										.........................................................
+										..................................................
+										myWidget.setNodeInnerHtml (nodeSTRorBLOB,htmlSTR);
+										..................................................
 
 										This method uses the =Uize.Dom.Basics.setInnerHtml= static method in its implementation. For more details, consult the reference for the =Uize.Dom.Basics= module.
 
@@ -362,12 +362,12 @@ Uize.module ({
 							/*?
 								Instance Methods
 									setNodeOpacity
-										Sets the opacity (and, therefore, the transparency) of the specified implied node (or nodes).
+										Sets the opacity (and, therefore, the transparency) of the specified DOM node (or nodes).
 
 										SYNTAX
-										.................................................................
-										myWidget.setNodeOpacity (impliedNodeSTRorBLOB,opacityFLOATorOBJ);
-										.................................................................
+										..........................................................
+										myWidget.setNodeOpacity (nodeSTRorBLOB,opacityFLOATorOBJ);
+										..........................................................
 
 										The value of the =opacityFLOATorOBJ= parameter should be a number in the range of =0= to =1=, where =0= represents completely invisible, =1= represents completely opaque, and any fractional values inbetween represent varying degrees of transparency / opacity. Alternatively, if an instance of a =Uize.Class= subclass is specified, then a value will be obtained by invoking the instance's =valueOf Intrinsic Method=.
 
@@ -379,12 +379,12 @@ Uize.module ({
 							/*?
 								Instance Methods
 									setNodeProperties
-										Sets the specified properties for the specified implied node (or nodes).
+										Sets the specified properties for the specified DOM node (or nodes).
 
 										SYNTAX
-										................................................................
-										myWidget.setNodeProperties (impliedNodeSTRorBLOB,propertiesOBJ);
-										................................................................
+										.........................................................
+										myWidget.setNodeProperties (nodeSTRorBLOB,propertiesOBJ);
+										.........................................................
 
 										EXAMPLE
 										............................
@@ -407,15 +407,15 @@ Uize.module ({
 							/*?
 								Instance Methods
 									setNodeStyle
-										Sets values for an arbitrary set of style attributes for the specified implied node (or nodes).
+										Sets values for an arbitrary set of style attributes for the specified DOM node (or nodes).
 
 										SYNTAX
-										..............................................................
-										myWidget.setNodeStyle (impliedNodeSTRorBLOB,propertyValueSTR);
-										..............................................................
+										.......................................................
+										myWidget.setNodeStyle (nodeSTRorBLOB,propertyValueSTR);
+										.......................................................
 
 										EXAMPLE
-										..................................................
+										...........................
 										myWidget.setNodeStyle (
 											'selector',
 											{
@@ -425,7 +425,7 @@ Uize.module ({
 												top:'100px'
 											}
 										);
-										..................................................
+										...........................
 
 										When number type values are specified for CSS style properties, those values will be converted to strings by appending the "px" unit. When string type values are specified, the unit should already be present in the value. Instances of =Uize.Class= subclasses can also be specified, and they will be converted to values by invoking their =valueOf Intrinsic Method=. For a more detailed discussion, consult the reference for the =Uize.Dom.Basics.setStyle= static method.
 
@@ -438,12 +438,12 @@ Uize.module ({
 							/*?
 								Instance Methods
 									setNodeValue
-										Sets the value of the specified implied node (or =Node Blob=) of the widget instance.
+										Sets the value of the specified DOM node (or =Node Blob=) of the widget instance.
 
 										SYNTAX
-										.................................................................
-										myWidget.setNodeValue (impliedNodeSTRorBLOB,valueSTRorBOOLorNUM);
-										.................................................................
+										..........................................................
+										myWidget.setNodeValue (nodeSTRorBLOB,valueSTRorBOOLorNUM);
+										..........................................................
 
 										This method uses the =Uize.Dom.Basics.setValue= static method in its implementation. For more details, consult the reference for the =Uize.Dom.Basics= module.
 
@@ -458,12 +458,12 @@ Uize.module ({
 							/*?
 								Instance Methods
 									showNode
-										Lets you show or hide the specified implied node, using the =visibility= CSS style property.
+										Lets you show or hide the specified DOM node, using the =visibility= CSS style property.
 
 										SYNTAX
-										.........................................................
-										myWidget.showNode (impliedNodeSTRorBLOB,mustShowANYTYPE);
-										.........................................................
+										..................................................
+										myWidget.showNode (nodeSTRorBLOB,mustShowANYTYPE);
+										..................................................
 
 										While typically a Boolean, the =mustShowANYTYPE= parameter can be of any type and the node will be shown if it resolves to =true=, and hidden if it resolves to =false= - with the exception of =undefined=, when the node will be shown (see explanation below).
 
@@ -945,7 +945,7 @@ Uize.module ({
 
 										The generator function can either return a string containing HTML markup, a DOM node, or an array of DOM nodes.
 
-										The generated HTML for the widget is inserted into a node in the document, according to a series of fallbacks. Priority is given to the =container= state property. If =container= is set to =null= or =undefined=, then the =shell= implied node is considered. If the =shell= implied node is not present, then the `root node` is considered. If no `root node` is present, then the HTML is inserted at the bottom of the document's body.
+										The generated HTML for the widget is inserted into a node in the document, according to a series of fallbacks. Priority is given to the =container= state property. If =container= is set to =null= or =undefined=, then the =shell= DOM node is considered. If the =shell= DOM node is not present, then the `root node` is considered. If no `root node` is present, then the HTML is inserted at the bottom of the document's body.
 
 										This method always builds the HTML for a widget instance and does not consider the value of the instance's =built= state property. Moreover, after this method has been called, the =built= state property will be set to =true=.
 
@@ -957,7 +957,7 @@ Uize.module ({
 										When the optional =alternateTemplateInputOBJ= parameter is specified, then the object specified by this parameter will be used as the input for the HTML generator, rather than the current state of the instance's state properties.
 
 										NOTES
-										- see also the =shell= and `root node` implied nodes
+										- see also the =shell= and `root node` DOM nodes
 										- compare to the =insertUi= and =insertOrWireUi= instance methods
 							*/
 						},
@@ -1046,19 +1046,19 @@ Uize.module ({
 							/*?
 								Instance Methods
 									getNode
-										Returns a reference to the specified implied node of the widget, or an array of references to the specified blob of implied nodes.
+										Returns a reference to the specified DOM node of the widget, or an array of references to the specified blob of DOM nodes.
 
 										SYNTAX
-										..................................................
-										nodeOBJ = myWidget.getNode (impliedNodeSTRorBLOB);
-										..................................................
+										...........................................
+										nodeOBJ = myWidget.getNode (nodeSTRorBLOB);
+										...........................................
 
 										EXAMPLE
 										...........................................
 										var sliderKnob = mySlider.getNode ('knob');
 										...........................................
 
-										Returns the "knob" implied node of the slider widget.
+										Returns the "knob" DOM node of the slider widget.
 
 										EXAMPLE
 										.........................................
@@ -1068,9 +1068,9 @@ Uize.module ({
 										Returns the `root node` of the slider widget.
 
 										NOTES
-										- The =impliedNodeSTRorBLOB= parameter can be a string specifying the name of the implied node, or an object reference to the implied node. When a reference is specified, it is simply returned.
-										- When the =impliedNodeSTRorBLOB= parameter has a value of =null=, then the value =null= is returned.
-										- When the =impliedNodeSTRorBLOB= parameter has a value of =undefined= or is not specified, then the root node of the widget is returned. This has the same effect as specifying the empty string. (i.e. =getNode ()= is equivalent to =getNode ('')=)
+										- The =nodeSTRorBLOB= parameter can be a string specifying the name of the DOM node, or an object reference to the DOM node. When a reference is specified, it is simply returned.
+										- When the =nodeSTRorBLOB= parameter has a value of =null=, then the value =null= is returned.
+										- When the =nodeSTRorBLOB= parameter has a value of =undefined= or is not specified, then the root node of the widget is returned. This has the same effect as specifying the empty string. (i.e. =getNode ()= is equivalent to =getNode ('')=)
 							*/
 						},
 
@@ -1078,36 +1078,36 @@ Uize.module ({
 							return _getContainer (this);
 						},
 
-						flushNodeCache:function (_impliedNodeName) {
+						flushNodeCache:function (_nodeName) {
 							if (this._nodeCache)
-								_impliedNodeName == _undefined ? (this._nodeCache = _null) : delete this._nodeCache [_impliedNodeName]
+								_nodeName == _undefined ? (this._nodeCache = _null) : delete this._nodeCache [_nodeName]
 							;
 							/*?
 								Instance Methods
 									flushNodeCache
-										Flushes the cached reference to the specified implied node, or all cached node references, from the widget instance's node cache.
+										Flushes the cached reference to the specified DOM node, or all cached node references, from the widget instance's node cache.
 
 										SYNTAX
-										.........................................
-										myWidget.flushNodeCache (impliedNodeSTR);
-										.........................................
+										..................................
+										myWidget.flushNodeCache (nodeSTR);
+										..................................
 
 										VARIATION
 										...........................
 										myWidget.flushNodeCache ();
 										...........................
 
-										When no =impliedNodeSTR= parameter is specified, the entire node cache for the widget instance will be flushed. This will not affect the functioning of a widget that has already been wired up, but may incur a very small performance cost the next time that operations on implied nodes are performed.
+										When no =nodeSTR= parameter is specified, the entire node cache for the widget instance will be flushed. This will not affect the functioning of a widget that has already been wired up, but may incur a very small performance cost the next time that operations on DOM nodes are performed.
 							*/
 						},
 
-						globalizeNode:function (_impliedNode) {
+						globalizeNode:function (_node) {
 							var
 								m = this,
 								_docBody = document.body
 							;
 							_doForAll (
-								m.getNode (_impliedNode),
+								m.getNode (_node),
 								function (_node) {
 									if (_node.parentNode != _docBody) {
 										(m._globalizedNodes || (m._globalizedNodes = [])).push (_node);
@@ -1120,45 +1120,45 @@ Uize.module ({
 								Instance Methods
 									globalizeNode
 										SYNTAX
-										..............................................
-										myWidget.globalizeNode (impliedNodeSTRorBLOB);
-										..............................................
+										.......................................
+										myWidget.globalizeNode (nodeSTRorBLOB);
+										.......................................
 							*/
 						},
 
-						removeNode:function (_impliedNode) {
-							_Uize_Dom_Basics.remove (this.getNode (_impliedNode));
-							this.flushNodeCache (_impliedNode);
+						removeNode:function (_node) {
+							_Uize_Dom_Basics.remove (this.getNode (_node));
+							this.flushNodeCache (_node);
 								/* TO DO!!!
-									if a node blob is specified for _impliedNode, the current implementation of flushNodeCache will not succeed in flushing the specified nodes
+									if a node blob is specified for _node, the current implementation of flushNodeCache will not succeed in flushing the specified nodes
 								*/
 							/*?
 								Instance Methods
 									removeNode
-										Removes the specified implied node (or nodes) from the DOM.
+										Removes the specified DOM node (or nodes) from the DOM.
 
 										SYNTAX
-										...........................................
-										myWidget.removeNode (impliedNodeSTRorBLOB);
-										...........................................
+										....................................
+										myWidget.removeNode (nodeSTRorBLOB);
+										....................................
 							*/
 						},
 
-						wireNode:function (_impliedNode,_eventNameOrEventsMap,_handler) {
+						wireNode:function (_node,_eventNameOrEventsMap,_handler) {
 							var m = this;
 							arguments.length == 3
-								? _Uize_Dom_Basics.wire (m.getNode (_impliedNode),_eventNameOrEventsMap,_handler,m.instanceId)
-								: _Uize_Dom_Basics.wire (m.getNode (_impliedNode),_eventNameOrEventsMap,m.instanceId)
+								? _Uize_Dom_Basics.wire (m.getNode (_node),_eventNameOrEventsMap,_handler,m.instanceId)
+								: _Uize_Dom_Basics.wire (m.getNode (_node),_eventNameOrEventsMap,m.instanceId)
 							;
 							/*?
 								Instance Methods
 									wireNode
-										Wires the specified handler function to the specified event, or the specified handlers to the specified events, of the specified implied node (or =Node Blob=) of the widget instance.
+										Wires the specified handler function to the specified event, or the specified handlers to the specified events, of the specified DOM node (or =Node Blob=) of the widget instance.
 
 										SYNTAX
-										.......................................................................
-										myWidget.wireNode (impliedNodeSTRorBLOB,eventNameSTR,eventHandlerFUNC);
-										.......................................................................
+										................................................................
+										myWidget.wireNode (nodeSTRorBLOB,eventNameSTR,eventHandlerFUNC);
+										................................................................
 
 										EXAMPLE
 										.....................
@@ -1174,9 +1174,9 @@ Uize.module ({
 										In the above example, a handler is being wired to the =click= event of the widget's `root node`.
 
 										VARIATION
-										....................................................................
-										myWidget.wireNode (impliedNodeSTRorBLOB,eventNamesToHandlersMapOBJ);
-										....................................................................
+										.............................................................
+										myWidget.wireNode (nodeSTRorBLOB,eventNamesToHandlersMapOBJ);
+										.............................................................
 
 										When the =eventNamesToHandlersMapOBJ= parameter is specified in place of the =eventNameSTR= and =eventHandlerFUNC= parameters, then this method has the effect of iterating through the event-name-to-handler mappings in the =eventNamesToHandlersMapOBJ= object and wiring the handler for each mapping.
 
@@ -1219,26 +1219,26 @@ Uize.module ({
 							*/
 						},
 
-						unwireNode:function (_impliedNode,_eventNameOrEventsMap,_handler) {
-							if (_impliedNode !== _undefined)
-								_impliedNode = this.getNode (_impliedNode)
+						unwireNode:function (_node,_eventNameOrEventsMap,_handler) {
+							if (_node !== _undefined)
+								_node = this.getNode (_node)
 							;
 							arguments.length == 2 &&
 							typeof _eventNameOrEventsMap == 'object' &&
 							_eventNameOrEventsMap &&
 							!_eventNameOrEventsMap.virtualDomEvent
-								? _Uize_Dom_Basics.unwire (_impliedNode,_eventNameOrEventsMap,this.instanceId)
-								: _Uize_Dom_Basics.unwire (_impliedNode,_eventNameOrEventsMap,_handler,this.instanceId)
+								? _Uize_Dom_Basics.unwire (_node,_eventNameOrEventsMap,this.instanceId)
+								: _Uize_Dom_Basics.unwire (_node,_eventNameOrEventsMap,_handler,this.instanceId)
 							;
 							/*?
 								Instance Methods
 									unwireNode
-										Lets you unwire one or more event handlers for the specified implied node.
+										Lets you unwire one or more event handlers for the specified DOM node.
 
 										SYNTAX
-										.........................................................................
-										myWidget.unwireNode (impliedNodeSTRorBLOB,eventNameSTR,eventHandlerFUNC);
-										.........................................................................
+										..................................................................
+										myWidget.unwireNode (nodeSTRorBLOB,eventNameSTR,eventHandlerFUNC);
+										..................................................................
 
 										EXAMPLE
 										...............................................
@@ -1254,11 +1254,11 @@ Uize.module ({
 										The above example would unwire only the =clickHandler1= handler for the =click= event of the =myWidget= instance's `root node`. So, after the above code has been executed, clicking on the root node of =myWidget= would produce only one alert dialog displaying the text "bar" (so long, foo).
 
 										VARIATION 1
-										........................................................
-										myWidget.unwireNode (impliedNodeSTRorBLOB,eventNameSTR);
-										.......................................................
+										.................................................
+										myWidget.unwireNode (nodeSTRorBLOB,eventNameSTR);
+										.................................................
 
-										When no =eventHandlerFUNC= parameter is specified, then all handlers wired for the specified event of the specified implied node of the widget instance will be unwired.
+										When no =eventHandlerFUNC= parameter is specified, then all handlers wired for the specified event of the specified DOM node of the widget instance will be unwired.
 
 										EXAMPLE
 										.................................
@@ -1268,9 +1268,9 @@ Uize.module ({
 										The above example would unwire all handlers for the =click= event of the =myWidget= instance's root node.
 
 										VARIATION 2
-										......................................................................
-										myWidget.unwireNode (impliedNodeSTRorBLOB,eventNamesToHandlersMapOBJ);
-										......................................................................
+										...............................................................
+										myWidget.unwireNode (nodeSTRorBLOB,eventNamesToHandlersMapOBJ);
+										...............................................................
 
 										When the =eventNamesToHandlersMapOBJ= parameter is specified in place of the =eventNameSTR= and =eventHandlerFUNC= parameters, then this method has the effect of iterating through the event-name-to-handler mappings in the =eventNamesToHandlersMapOBJ= object and unwiring the handler for each mapping.
 
@@ -1311,11 +1311,11 @@ Uize.module ({
 										In the above example, handlers are being wired to the =mouseover=, =mouseout=, and =click= events of the widget's `root node`. Then the handlers for the =mouseover= and =mouseout= events are being unwired, leaving only the handler that was wired to the =click= event.
 
 										VARIATION 3
-										...........................................
-										myWidget.unwireNode (impliedNodeSTRorBLOB);
-										...........................................
+										....................................
+										myWidget.unwireNode (nodeSTRorBLOB);
+										....................................
 
-										When no =eventNameSTR= or =eventHandlerFUNC= parameters are specified, then all handlers wired for all events of the specified implied node of the widget instance will be unwired.
+										When no =eventNameSTR= or =eventHandlerFUNC= parameters are specified, then all handlers wired for all events of the specified DOM node of the widget instance will be unwired.
 
 										EXAMPLE
 										.........................
@@ -1342,21 +1342,21 @@ Uize.module ({
 							*/
 						},
 
-						unwireNodeEventsByMatch:function (_impliedNode,_wiringMatch) {
+						unwireNodeEventsByMatch:function (_node,_wiringMatch) {
 							this.unwireNode (
-								_impliedNode,
+								_node,
 								(_wiringMatch || (_wiringMatch = {})).eventName,
 								_wiringMatch.handler
 							);
 							/*?
 								Instance Methods
 									unwireNodeEventsByMatch
-										Lets you unwire one or more event handlers for the specified implied node, using a wiring match object.
+										Lets you unwire one or more event handlers for the specified DOM node, using a wiring match object.
 
 										SYNTAX
-										........................................................................
-										myWidget.unwireNodeEventsByMatch (impliedNodeSTRorBLOB,wiringtMatchOBJ);
-										........................................................................
+										.................................................................
+										myWidget.unwireNodeEventsByMatch (nodeSTRorBLOB,wiringtMatchOBJ);
+										.................................................................
 
 										The =wiringtMatchOBJ= parameter is an object of the form...
 										.......................................................................................
@@ -1374,18 +1374,18 @@ Uize.module ({
 										The above example would unwire all handlers for the =click= event of the =myWidget= instance's `root node`.
 
 										VARIATION 1
-										........................................................
-										myWidget.unwireNodeEventsByMatch (impliedNodeSTRorBLOB);
-										........................................................
+										.................................................
+										myWidget.unwireNodeEventsByMatch (nodeSTRorBLOB);
+										.................................................
 
-										When no =wiringtMatchOBJ= parameter is specified, all handlers wired for all events of the specified implied node of the widget instance will be unwired.
+										When no =wiringtMatchOBJ= parameter is specified, all handlers wired for all events of the specified DOM node of the widget instance will be unwired.
 
 										EXAMPLE
 										.............................................
 										myWidget.unwireNodeEventsByMatch ('preview');
 										.............................................
 
-										The above example would unwire all handlers for all events of the =myWidget= instance's 'preview' implied node.
+										The above example would unwire all handlers for all events of the =myWidget= instance's 'preview' DOM node.
 
 										VARIATION 2
 										....................................
@@ -2070,7 +2070,7 @@ Uize.module ({
 					/*?
 						State Properties
 							idPrefix
-								A string, specifying the ID prefix to be used when resolving implied nodes and child widgets to DOM node references.
+								A string, specifying the ID prefix to be used when resolving DOM nodes and child widgets to DOM node references.
 
 								NOTES
 								- see the related =idPrefixConstruction= state property
@@ -2105,7 +2105,7 @@ Uize.module ({
 							insertionMode
 								A string, specifying the injection mode that should be used when inserting the HTML for a widget into the page.
 
-								This property works in conjunction with the =built=, =container=, and =html= state properties. If the value for the =built= property is =true= for a widget instance, then =insertionMode= is not applicable. But if the value for =built= is =false=, then the HTML generated using the =html= state property will be injected into a container node specified by the =container= state property (or the =shell= implied node, or the `root node` of the widget instance, or the document's body, whichever is non-null) using the mode specified by =insertionMode=.
+								This property works in conjunction with the =built=, =container=, and =html= state properties. If the value for the =built= property is =true= for a widget instance, then =insertionMode= is not applicable. But if the value for =built= is =false=, then the HTML generated using the =html= state property will be injected into a container node specified by the =container= state property (or the =shell= DOM node, or the `root node` of the widget instance, or the document's body, whichever is non-null) using the mode specified by =insertionMode=.
 
 								EXAMPLE
 								............................................................
@@ -2171,7 +2171,7 @@ Uize.module ({
 					/*?
 						State Properties
 							nodeMap
-								An object which, if defined, lets you provide override mappings for implied nodes. Each property's name-value pair is a single implied node mapping, where the property name is the natural name (as implemented in the widget subclass) for the implied node, and where the property value is the override (which can be either an alternate node name, or an actual node reference).
+								An object which, if defined, lets you provide override mappings for DOM nodes. Each property's name-value pair is a single DOM node mapping, where the property name is the natural name (as implemented in the widget subclass) for the DOM node, and where the property value is the override (which can be either an alternate node name, or an actual node reference).
 
 								NOTES
 								- the initial value is =undefined=

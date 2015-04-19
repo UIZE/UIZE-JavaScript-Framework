@@ -47,7 +47,7 @@ Uize.module ({
 					/*?
 						State Properties
 							displayFormat
-								A string, specifying the format for displaying the selected date value in the instance's =input= implied node.
+								A string, specifying the format for displaying the selected date value in the instance's =input= DOM node.
 
 								The default =valueFormatter= set for this class uses the =Uize.Date.Formatter.format= static method of the =Uize.Date.Formatter= module to format date values. Formatting options supported by the =displayFormat= property correspond to those supported by the =formatSTR= parameter of the =Uize.Date.Formatter.format= method. If you specify your own value for the =valueFormatter= state property that is inherited from the =Uize.Widget.Picker= base class, then the value of the =displayFormat= property will only be applicable if your custom value formatter actually uses it.
 

@@ -121,15 +121,15 @@ Uize.module ({
 			function _updateUiTotalItems (m) {
 				m.isWired && m.setNodeValue ('totalItems',m._totalItems);
 				/*?
-					Implied Nodes
-						totalItems Implied Node
+					DOM Nodes
+						totalItems DOM Node
 							A node that will be used to display the total number of items in the collection.
 
-							Whenever the value of the =totalItems= state property changes, this node will be updated using the =setNodeValue= instance method of the =Uize.Widget= class. Because the =setNodeValue= method is used for displaying the value of the =totalItems= property, the =totalItems Implied Node= can be of any type supported by the =setNodeValue= method - it can be a =div= tag, a =span= tag, a =p= tag, a text =input= tag, a =textarea= tag, etc.
+							Whenever the value of the =totalItems= state property changes, this node will be updated using the =setNodeValue= instance method of the =Uize.Widget= class. Because the =setNodeValue= method is used for displaying the value of the =totalItems= property, the =totalItems DOM Node= can be of any type supported by the =setNodeValue= method - it can be a =div= tag, a =span= tag, a =p= tag, a text =input= tag, a =textarea= tag, etc.
 
 							NOTES
 							- see the related =totalItems= state property
-							- the markup for this implied node is optional, and a given implementation of a collection widget's HTML does not need to offer this node
+							- the markup for this DOM node is optional, and a given implementation of a collection widget's HTML does not need to offer this node
 				*/
 			}
 
@@ -1240,7 +1240,7 @@ Uize.module ({
 							totalItems
 								A read-only integer, indicating the total number of items in the collection.
 
-								Whenever the total number of items in the collection changes, either as a result of adding new items or removing items, the value of the =isEmpty= state property will be updated to be kept current and correct, and the =totalItems Implied Node= will be updated to reflect the new number of items in the collection.
+								Whenever the total number of items in the collection changes, either as a result of adding new items or removing items, the value of the =isEmpty= state property will be updated to be kept current and correct, and the =totalItems DOM Node= will be updated to reflect the new number of items in the collection.
 
 								NOTES
 								- this property is read-only

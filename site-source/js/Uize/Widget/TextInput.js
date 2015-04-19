@@ -83,7 +83,7 @@ Uize.module ({
 					/*?
 						Instance Methods
 							blur
-								Blur the =input= implied node of the instance.
+								Blur the =input= DOM node of the instance.
 
 								SYNTAX
 								....................
@@ -100,7 +100,7 @@ Uize.module ({
 					/*?
 						Instance Methods
 							focus
-								Focuses the =input= implied node of the instance.
+								Focuses the =input= DOM node of the instance.
 
 								SYNTAX
 								.....................

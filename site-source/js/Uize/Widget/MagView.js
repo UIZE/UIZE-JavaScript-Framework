@@ -322,8 +322,8 @@ Uize.module ({
 					}
 				}
 				/*?
-					Implied Nodes
-						See the list of child widgets for other implied nodes that are not directly controlled by this widget.
+					DOM Nodes
+						See the list of child widgets for other DOM nodes that are not directly controlled by this widget.
 
 						The Root Node
 							The root node captures mouse events and tracks the mouse movements in order to determine the region within the main image that the user would like to magnify. The root node should contain the =image= node.

@@ -72,14 +72,14 @@ Uize.module ({
 					var _defaultedTitle = m._title || m._defaultTitle;
 					_defaultedTitle != _undefined && m.setNodeInnerHtml ('title',_defaultedTitle || '&nbsp;');
 						/*?
-							Implied Nodes
-								title Implied Node
+							DOM Nodes
+								title DOM Node
 									A node that acts as the title bar for the dialog and that is wired up by the =drag= child widget to enable drag-to-move for the dialog.
 
 									The text for the dialog's title bar can be controlled via the =title= and =defaultTitle= state properties.
 
 									NOTES
-									- if no =title Implied Node= is present in the dialog's HTML, then the dialog will not be movable
+									- if no =title DOM Node= is present in the dialog's HTML, then the dialog will not be movable
 									- see also the =defaultTitle= and =title= state properties
 						*/
 				}
@@ -110,7 +110,7 @@ Uize.module ({
 						/*?
 							Instance Properties
 								shieldFade
-									An instance of the =Uize.Fade= class, that is used to fade the opacity of the =shield= implied node when hiding it.
+									An instance of the =Uize.Fade= class, that is used to fade the opacity of the =shield= DOM node when hiding it.
 
 									This property lets you customize the qualities of the opacity fade for the dialog's =shield=, by letting you set values for the state properties of the =Uize.Fade= instance (such as =duration=, =curve=, etc.).
 						*/
@@ -206,7 +206,7 @@ Uize.module ({
 						/*?
 							Child Widgets
 								drag
-									An instance of the =Uize.Widget.Drag= class, that is wired up to the =title Implied Node= to enable drag-to-move for the dialog.
+									An instance of the =Uize.Widget.Drag= class, that is wired up to the =title DOM Node= to enable drag-to-move for the dialog.
 
 									Setting the =enabled= state property of this child widget to =false= will disable drag-to-move for the dialog.
 						*/
@@ -341,16 +341,16 @@ Uize.module ({
 					if (m.isWired && m._shown && !m._inDrag) {
 						_Uize_Widget_Drag.resizeShield (m.getNode ('shield'));
 						/*?
-							Implied Nodes
+							DOM Nodes
 								Root Node
-									A node that is the root for all of the dialog's HTML, excluding the =shield= implied node.
+									A node that is the root for all of the dialog's HTML, excluding the =shield= DOM node.
 
-									When a dialog is shown, its =Root Node= and =shield= implied nodes are displayed. Conversely, when a dialog is hidden, both its =Root Node= and =shield= implied nodes are hidden. When a dialog is dragged to a new position by the user, or if its position is programmatically changed, then the =Root Node= is repositioned through CSS. If the dialog is resized by the user, or if it is resized programmatically by setting values for its =width= and =height= state properties, the dimensions of the =Root Node= are modified through CSS. All chrome for the dialog should therefore be "pinned" to the =Root Node=, so that when the dialog is moved and resized, the chrome goes along for the ride.
+									When a dialog is shown, its =Root Node= and =shield= DOM nodes are displayed. Conversely, when a dialog is hidden, both its =Root Node= and =shield= DOM nodes are hidden. When a dialog is dragged to a new position by the user, or if its position is programmatically changed, then the =Root Node= is repositioned through CSS. If the dialog is resized by the user, or if it is resized programmatically by setting values for its =width= and =height= state properties, the dimensions of the =Root Node= are modified through CSS. All chrome for the dialog should therefore be "pinned" to the =Root Node=, so that when the dialog is moved and resized, the chrome goes along for the ride.
 
 								shield
 									A node that will be sized to fill the entire browser view port, in order to block events to the page behind the dialog.
 
-									When the dialog is shown, the =shield= implied node is shown along with the =Root Node=. The shield can be set to hide when the user drag or resizes the dialog by setting the =hideShieldOnDrag= state property to =true=. When the dialog is shown, the shield can be hidden by setting the =shieldShown= state property to =false=. Even though the shield won't be visible, it will still block events to the page behind the dialog.
+									When the dialog is shown, the =shield= DOM node is shown along with the =Root Node=. The shield can be set to hide when the user drag or resizes the dialog by setting the =hideShieldOnDrag= state property to =true=. When the dialog is shown, the shield can be hidden by setting the =shieldShown= state property to =false=. Even though the shield won't be visible, it will still block events to the page behind the dialog.
 
 									NOTES
 									- see also the =currentShieldOpacity=, =hideShieldOnDrag=, =shieldOpacity=, and =shieldShown= state properties
@@ -450,9 +450,9 @@ Uize.module ({
 						);
 
 						/*** fetch values for defaultTitle, defaultOkText, and defaultCancelText from markup ***/
-							var _initializeDefaultProperty = function (_defaultPropertyName,_widget,_impliedNodeName) {
+							var _initializeDefaultProperty = function (_defaultPropertyName,_widget,_nodeName) {
 								if (!m.get (_defaultPropertyName)) {
-									var _innerHtml = (_widget.getNode (_impliedNodeName) || _sacredEmptyObject).innerHTML;
+									var _innerHtml = (_widget.getNode (_nodeName) || _sacredEmptyObject).innerHTML;
 									_innerHtml && m.set (_defaultPropertyName,_innerHtml);
 								}
 							};
@@ -513,7 +513,7 @@ Uize.module ({
 
 								NOTES
 								- this property is read-only
-								- see the related =hideShieldOnDrag=, =shieldOpacity=, and =shieldShown= state properties, and the =shield= implied node
+								- see the related =hideShieldOnDrag=, =shieldOpacity=, and =shieldShown= state properties, and the =shield= DOM node
 								- the initial value is =undefined=
 					*/
 				},
@@ -555,7 +555,7 @@ Uize.module ({
 					/*?
 						State Properties
 							defaultTitle
-								A string, specifying the default text for the =title Implied Node= (i.e. the title bar), should the =title= state property be set to =null=, =undefined=, or =''= (an empty string).
+								A string, specifying the default text for the =title DOM Node= (i.e. the title bar), should the =title= state property be set to =null=, =undefined=, or =''= (an empty string).
 
 								For a more detailed explanation of the title text fallback mechanism, see the reference for the =title= state property.
 
@@ -573,7 +573,7 @@ Uize.module ({
 							dismissOnShieldClick
 								A boolean, specifying whether or not clicking the =shield= node should close the dialog, or a string, specifying a dialog dismissal event that should be fired when the dialog is dismissed by clicking on the =shield= node.
 
-								A "chromeless" dialog may be desired in some case in order to display a palette without the visual clutter of title and button bars. In this case, there may not be a =close= button, so clicking outside of the dialog (on the =shield= implied node) would be one way to close the dialog.
+								A "chromeless" dialog may be desired in some case in order to display a palette without the visual clutter of title and button bars. In this case, there may not be a =close= button, so clicking outside of the dialog (on the =shield= DOM node) would be one way to close the dialog.
 
 								NOTES
 								- the initial value is =false=
@@ -603,9 +603,9 @@ Uize.module ({
 					/*?
 						State Properties
 							hideShieldOnDrag
-								A boolean, specifying whether or not the =shield= implied node should be hidden when the dialog is dragged (moved or resized).
+								A boolean, specifying whether or not the =shield= DOM node should be hidden when the dialog is dragged (moved or resized).
 
-								When the user drags a dialog, it is considered that one possible reason is to see what is being obscured by it. This can be the case if the user wishes to reference what is on the page behind the dialog in order to inform what choices they make in the dialog's UI. Therefore, the =hideShieldOnDrag= state property is initially set to =true=. Setting this property to =false= means that the =shield= implied node will remain obscuring the page even when the user drags the dialog.
+								When the user drags a dialog, it is considered that one possible reason is to see what is being obscured by it. This can be the case if the user wishes to reference what is on the page behind the dialog in order to inform what choices they make in the dialog's UI. Therefore, the =hideShieldOnDrag= state property is initially set to =true=. Setting this property to =false= means that the =shield= DOM node will remain obscuring the page even when the user drags the dialog.
 
 								NOTES
 								- the initial value is =true=
@@ -747,10 +747,10 @@ Uize.module ({
 					/*?
 						State Properties
 							shieldOpacity
-								A floating point number in the range of =0= to =1=, specifying the opacity for the =shield= implied node when it is shown.
+								A floating point number in the range of =0= to =1=, specifying the opacity for the =shield= DOM node when it is shown.
 
 								NOTES
-								- see the related =currentShieldOpacity=, =hideShieldOnDrag=, and =shieldShown= state properties, and the =shield= implied node
+								- see the related =currentShieldOpacity=, =hideShieldOnDrag=, and =shieldShown= state properties, and the =shield= DOM node
 								- the initial value is =.3=
 					*/
 				},
@@ -784,12 +784,12 @@ Uize.module ({
 					/*?
 						State Properties
 							shieldShown
-								A boolean, specifying whether or not the =shield= implied node is shown.
+								A boolean, specifying whether or not the =shield= DOM node is shown.
 
-								Whenever this property is set to =true=, the =shield= implied node will be revealed. When it is set to =false=, the =shield= will be hidden. This property is set to =true= each time the dialog is shown, and it is set to =false= the first time the dialog is dragged after being shown (provided that the =hideShieldOnDrag= state property is set to =true=). You can also programmatically set =shieldShown= to =false= in your dialog code if some action requires that the user be able to see the page behind the dialog.
+								Whenever this property is set to =true=, the =shield= DOM node will be revealed. When it is set to =false=, the =shield= will be hidden. This property is set to =true= each time the dialog is shown, and it is set to =false= the first time the dialog is dragged after being shown (provided that the =hideShieldOnDrag= state property is set to =true=). You can also programmatically set =shieldShown= to =false= in your dialog code if some action requires that the user be able to see the page behind the dialog.
 
 								NOTES
-								- see the related =currentShieldOpacity=, =hideShieldOnDrag=, and =shieldOpacity= state properties, and the =shield= implied node
+								- see the related =currentShieldOpacity=, =hideShieldOnDrag=, and =shieldOpacity= state properties, and the =shield= DOM node
 								- the initial value is =false=
 					*/
 				},
@@ -888,9 +888,9 @@ Uize.module ({
 					/*?
 						State Properties
 							title
-								A string, specifying text that should be displayed in the dialog's =title Implied Node= (i.e. the title bar).
+								A string, specifying text that should be displayed in the dialog's =title DOM Node= (i.e. the title bar).
 
-								Using this property, the title of a dialog can be changed at any time - even when the dialog is shown. Leaving =title= set to its initial value of =undefined= will result in the dialog's title being determined by the value of the =defaultTitle= state property. If the values for both the =title= and =defaultTitle= state properties are =undefined=, then the =title Implied Node= will retain whatever text was initially in its HTML markup.
+								Using this property, the title of a dialog can be changed at any time - even when the dialog is shown. Leaving =title= set to its initial value of =undefined= will result in the dialog's title being determined by the value of the =defaultTitle= state property. If the values for both the =title= and =defaultTitle= state properties are =undefined=, then the =title DOM Node= will retain whatever text was initially in its HTML markup.
 
 								NOTES
 								- see the companion =defaultTitle= state property
