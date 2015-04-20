@@ -53,7 +53,7 @@ Uize.module ({
 				_doForAll = _Uize_Dom_Basics.doForAll,
 				_callOn = _Uize.callOn,
 				_substituteInto = _Uize.substituteInto,
-				_global = _Uize.global(),
+				_global = _Uize.global (),
 
 			/*** References for Performance Optimization ***/
 				_isNode = _Uize_Dom_Basics.isNode,
@@ -199,7 +199,7 @@ Uize.module ({
 									- see also the related =addedChildren= and =parent= instance properties
 						*/
 
-					m.addedChildren = m._addedChildren = _Uize.Class();
+					m.addedChildren = m._addedChildren = _Uize.Class ();
 						/*?
 							Instance Properties
 								addedChildren ~~ addedChildren Instance Property
@@ -1437,7 +1437,7 @@ Uize.module ({
 									_unappliedChildrenPropertiesForChild = _unappliedChildrenProperties [_childName]
 								;
 								if (_unappliedChildrenPropertiesForChild) {
-									_properties = Uize.copy(_properties, _unappliedChildrenPropertiesForChild);
+									_properties = Uize.copy (_properties,_unappliedChildrenPropertiesForChild);
 									delete _unappliedChildrenProperties [_childName];
 								}
 
@@ -1744,14 +1744,14 @@ Uize.module ({
 										Returns the ID prefix of a child widget with the specified =childNameSTR=.
 
 										SYNTAX
-										..................................................
-										childIdPrefixSTR = myWidget.childId(childNameSTR);
-										..................................................
+										...................................................
+										childIdPrefixSTR = myWidget.childId (childNameSTR);
+										...................................................
 
 										EXAMPLE
-										...........................................
-										var childIdPrefix = mySlider.childId('child');
-										...........................................
+										...............................................
+										var childIdPrefix = mySlider.childId ('child');
+										...............................................
 
 										Assuming an =idPrefix= of ="page_slider"=, the example would return ="page_slider_child"=.
 
