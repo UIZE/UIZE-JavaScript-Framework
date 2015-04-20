@@ -1437,7 +1437,7 @@ Uize.module ({
 									_unappliedChildrenPropertiesForChild = _unappliedChildrenProperties [_childName]
 								;
 								if (_unappliedChildrenPropertiesForChild) {
-									_copyInto (_properties,_unappliedChildrenPropertiesForChild);
+									_properties = Uize.copy(_properties, _unappliedChildrenPropertiesForChild);
 									delete _unappliedChildrenProperties [_childName];
 								}
 

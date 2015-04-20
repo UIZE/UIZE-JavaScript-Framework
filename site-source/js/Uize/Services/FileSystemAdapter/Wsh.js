@@ -120,7 +120,10 @@ Uize.module ({
 							_targetPath = _params.targetPath
 						;
 						m._makeFolder (_getParentFolderPath (_targetPath));
-						m._fileSystemObject.CopyFile (_params.path,_targetPath,true);
+						m._writeFile(
+							_targetPath,
+							m._readFile(_params.path)
+						);
 						_callback ();
 					},
 

@@ -271,9 +271,12 @@ Uize.module ({
 										_handleName,
 										_Uize_Widget_Drag,
 										{
-											cursor:_handleName == 'move'
-												? _handleName
-												: _handleName.charAt (0) + (_handleName.match (/[A-Z]|$/)) [0] + '-resize',
+											cursor: m._useDefaultCursors
+												? (_handleName == 'move'
+													? _handleName
+													: _handleName.charAt (0) + (_handleName.match (/[A-Z]|$/)) [0] + '-resize'
+													)
+												: false,
 											dragRestTime:m._dragRestTime,
 											node:m.getNode (_handleName),
 											resizerInfo:{
@@ -290,7 +293,7 @@ Uize.module ({
 												m._activeHandle = _event.source;
 												m.set ({_inDrag:_true});
 												_updateShellBoundsAndConformDims.call (m);
-												_bounds = m._bounds;
+												_bounds = m._bounds || [0, 0, 0, 0];
 												_shellCenter = [_bounds [2] / 2,_bounds [3] / 2];
 												_dragStartCoords = [
 													m._left,
@@ -534,6 +537,10 @@ Uize.module ({
 					name:'top',
 					onChange:_conformDimsAndUpdateUi,
 					value:0
+				},
+				_useDefaultCursors: {
+					name: 'useDefaultCursors',
+					value: _true
 				},
 				_width:{
 					name:'width',

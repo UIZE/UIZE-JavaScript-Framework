@@ -376,38 +376,18 @@ Uize.module ({
 										_mooringCoords = _Uize_Dom_Pos.getCoords(_mooringNode),
 										_rightAligned = m._offsetRegistrationCorner.indexOf('right') > -1,
 										_bottomAligned = m._offsetRegistrationCorner.indexOf('bottom') > -1,
-										_bodyDimensions = _Uize_Dom_Pos.getDimensions(document.body),
-										_stylesToSet = {}
+										_bodyDimensions = _Uize_Dom_Pos.getDimensions(document.body)
 									;
 
-									// horizontal alignment
-									if (_rightAligned)
-										Uize.copyInto(_stylesToSet, {
-											left: 'auto',
-											right: _bodyDimensions.width - _mooringCoords.left - _offsetX
-										});
-									else
-										Uize.copyInto(_stylesToSet, {
-											left: _mooringCoords.left + _offsetX,
-											right: 'auto'
-										});
-
-									// vertical alignment
-									if (_bottomAligned)
-										Uize.copyInto(_stylesToSet, {
-											top: 'auto',
-											bottom: _bodyDimensions.height - _mooringCoords.top - _offsetY
-										});
-									else
-										Uize.copyInto(_stylesToSet, {
-											top: _mooringCoords.top + _offsetY,
-											bottom: 'auto'
-										});
-
 									// set styles
-									_Uize_Dom_Basics.setStyle (
-										_rootNode,
-										_stylesToSet
+									m.setNodeStyle (
+										_rootNode, 
+										{
+											left: _rightAligned ? '' : (_mooringCoords.left + _offsetX),
+											right: _rightAligned ? (_bodyDimensions.width - _mooringCoords.left - _offsetX) : '',
+											top: _bottomAligned ? '' : (_mooringCoords.top + _offsetY),
+											bottom: _bottomAligned ? (_bodyDimensions.height - _mooringCoords.top - _offsetY) : ''
+										}
 									);
 								}
 							}

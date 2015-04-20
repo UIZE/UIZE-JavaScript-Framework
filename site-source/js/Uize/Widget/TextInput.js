@@ -293,6 +293,9 @@ Uize.module ({
 						if (m._filterType == 'LAN' && /[^a-z0-9]/.test (_value))
 							_value = _value.toLowerCase ().replace(/[^a-z0-9]/g,'')
 						;
+						if (m._filterType == 'NUM' && /[^0-9]/.test(_value))							
+							_value = _value.toLowerCase().replace(/[^0-9]/g, '')
+						;
 						if (_value.length > _maxLength)
 							_value = _value.slice (0,_maxLength)
 						;
@@ -308,6 +311,7 @@ Uize.module ({
 				_filterType:'filterType'
 					/***
 					LAN - lowerAlphaNumeric
+					NUM - numbers
 					***/
 			}
 		});

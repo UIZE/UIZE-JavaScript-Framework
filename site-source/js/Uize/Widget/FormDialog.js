@@ -26,70 +26,12 @@
 Uize.module ({
 	name:'Uize.Widget.FormDialog',
 	superclass:'Uize.Widget.Dialog',
-	required:'Uize.Widget.Form',
+	required: 'Uize.Widget.Dialog.mForm',
 	builder:function (_superclass) {
 		'use strict';
 
-		return _superclass.subclass ({
-			omegastructor:function () {
-				var
-					m = this,
-					_false = false,
-					_form = m.addChild(
-						'form',
-						m._formWidgetClass,
-						{useNormalSubmit:_false}
-					)
-				;
-
-				_form.wire({
-					'Changed.okToSubmit': function () {
-						_form.get('okToSubmit')
-							&& m.handleFormValue(
-								function (_info) {
-									m.fire ({
-										name:'Submission Complete',
-										result:_form.get('value'),
-										info:_info
-									});
-
-									m.set({shown:_false});
-								}
-							)
-						;
-					},
-					'Changed.numWarningsShown': function () {
-						// if the dialog changes height, update the position to prevent the case where the bottom of the dialog gets pushed out of view.
-						m.updateUiPositionIfShown();
-					}
-				});
-
-				m.wire({
-					Ok:function (_event) {
-						_form.submit();
-						_event.abort = true;
-					},
-					'Before Show':function () {
-						if (m._value)
-							_form.set({value:Uize.clone(m._value)})
-						;
-					},
-					'After Show':function () { _form.updateUi() },
-					'After Hide':function () { _form.reset() }
-				});
-			},
-
-			instanceMethods:{
-				handleFormValue:function (_callback) { _callback() }
-			},
-
-			stateProperties:{
-				_formWidgetClass:{
-					name:'formWidgetClass',
-					value:Uize.Widget.Form
-				},
-				_value:'value'
-			}
+		return _superclass.subclass({
+			mixins: Uize.Widget.Dialog.mForm
 		});
 	}
 });
