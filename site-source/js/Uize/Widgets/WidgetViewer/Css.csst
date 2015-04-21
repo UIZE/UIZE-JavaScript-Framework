@@ -1,5 +1,4 @@
 .`selectorControl` {
-	width: 740px;
 	margin: auto;
 	padding: 10px;
 	background: #becacd url(selector-bg.gif) repeat-x left top;
@@ -7,19 +6,12 @@
 	border-radius: 3px;
 }
 
-.`selectorControl` br {
-	clear: left;
+.`selector` {
+	width: 100%;
 }
 
 .`selectorLabel` {
-	float: left;
-	line-height: 22px;
-	margin-right: 5px;
-}
-
-.`selector` {
-	float: left;
-	margin-right: 15px;
+	margin-bottom: 4px;
 }
 
 .`viewer` {

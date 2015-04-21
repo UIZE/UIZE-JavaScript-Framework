@@ -140,20 +140,20 @@ Uize.module ({
 						}
 					}
 				},
-				displayedSelectorOptions:{
+				values:{
 					derived:{
 						properties:'visualSamplerNamespaces,loc_allNamespaces,loc_noSelectionText',
 						derivation:function (_visualSamplerNamespaces,_loc_allNamespaces,_loc_noSelectionText) {
 							var _visualSamplerModulesByNamespace = this._visualSamplerModulesByNamespace;
-							return [[_loc_noSelectionText || '','-']].concat (
+							return [{displayName:_loc_noSelectionText || '',name:'-'}].concat (
 								Uize.map (
 									_visualSamplerNamespaces,
 									function (_namespace) {
-										return [
-											(_namespace || _loc_allNamespaces || '') +
+										return {
+											displayName:(_namespace || _loc_allNamespaces || '') +
 											' (' + _visualSamplerModulesByNamespace [_namespace].length + ')',
-											_namespace
-										];
+											name:_namespace
+										};
 									}
 								)
 							);

@@ -1,8 +1,7 @@
 <div>
 	<div class="selectorControl">
 		<div id="selectorLabel" class="selectorLabel"></div>
-		<select id="selector" class="selector"></select>
-		<br/>
+		<child name="selector" class="selector"/>
 	</div>
 	<div id="viewer" class="viewer"></div>
 </div>

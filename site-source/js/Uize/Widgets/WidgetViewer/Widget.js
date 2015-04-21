@@ -28,7 +28,8 @@ Uize.module ({
 	superclass:'Uize.Widget.V2',
 	required:[
 		'Uize.Widgets.WidgetViewer.Html',
-		'Uize.Widgets.WidgetViewer.Css'
+		'Uize.Widgets.WidgetViewer.Css',
+		'Uize.Widgets.Form.Input.Select.Widget'
 	],
 	builder:function (_superclass) {
 		'use strict';
@@ -48,49 +49,30 @@ Uize.module ({
 
 			stateProperties:{
 				_modules:'modules',
-				_value:'value',
-				_displayedSelectorOptions:'displayedSelectorOptions'
+				_value:'value'
 			},
 
-			eventBindings:{
-				'#selector:change':function () {
-					this.set ({value:this.getNodeValue ('selector')});
+			children:{
+				selector:{
+					widgetClass:Uize.Widgets.Form.Input.Select.Widget
 				}
+			},
+
+			childBindings:{
+				value:'selector.value',
+				values:'->selector.values'
 			},
 
 			htmlBindings:{
 				loc_selectorLabel:'selectorLabel:value',
-				displayedSelectorOptions:function (_displayedSelectorOptions) {
-					var
-						m = this,
-						_selector = m.getNode ('selector'),
-						_selectorOptions = _selector.options
-					;
-					_selectorOptions.length = 0;
-					for (
-						var
-							_displayedSelectorOptionNo = -1,
-							_displayedSelectorOptionsLength = _displayedSelectorOptions.length
-						;
-						++_displayedSelectorOptionNo < _displayedSelectorOptionsLength;
-					) {
-						var _displayedSelectorOption = _displayedSelectorOptions [_displayedSelectorOptionNo];
-						_selectorOptions [_selectorOptions.length] = new Option (
-							_displayedSelectorOption [0],
-							_displayedSelectorOption [1]
-						);
-					}
-					m.setNodeValue (_selector,m.get ('value'));
-				},
 				value:[
-					'selector:value',
 					function (_value) {
 						var m = this;
 						if (m.children.viewer) {
 							m.removeChild ('viewer');
 							m.setNodeInnerHtml ('viewer','');
 						}
-						_value != undefined && _value != '-' && m.insertViewer (_value);
+						_value && _value != undefined && _value != '-' && m.insertViewer (_value);
 					}
 				]
 			}

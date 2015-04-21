@@ -69,12 +69,12 @@ Uize.module ({
 						}
 					}
 				},
-				displayedSelectorOptions:{
+				values:{
 					derived:{
 						properties:'widgetsWithVisualTests,loc_noSelectionText',
 						derivation:function (_widgetsWithVisualTests,_loc_noSelectionText) {
-							return [[_loc_noSelectionText || '','-']].concat (
-								Uize.map (_widgetsWithVisualTests,'[value,value]')
+							return [{displayName:_loc_noSelectionText || '',name:'-'}].concat (
+								Uize.map (_widgetsWithVisualTests,'{name:value}')
 							);
 						}
 					}
