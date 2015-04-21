@@ -43,8 +43,6 @@ Uize.module ({
 		'use strict';
 
 		return _superclass.subclass ({
-			hasLoc:true,
-
 			set:{
 				html:Uize.Widgets.FlavoredMessage.Html
 			},
