@@ -51,7 +51,7 @@ Uize.module ({
 						insertionMode:'inner bottom'
 					};
 					Uize.Flo.forEach (
-						function (_next) {_next (m._visualSamplerModulesByNamespace [_value])},
+						function (_next) {_next (m._visualSamplerModulesByNamespace [_value == '*' ? '' : _value])},
 						function (_next) {
 							Uize.require (
 								_next.flo.value,
@@ -83,7 +83,10 @@ Uize.module ({
 									_visualSamplerDirectNamespaces = Uize.Data.Matches.values (
 										_modules,
 										function (_moduleName) {
-											return _modulesLookup [_moduleName + '.Widget'] && _modulesLookup [_moduleName + '.VisualSampler'];
+											return (
+												_modulesLookup [_moduleName + '.Widget'] &&
+												_modulesLookup [_moduleName + '.VisualSampler']
+											);
 										}
 									),
 									_visualSamplerNamespaces = _visualSamplerDirectNamespaces.concat ()
@@ -152,7 +155,7 @@ Uize.module ({
 										return {
 											displayName:(_namespace || _loc_allNamespaces || '') +
 											' (' + _visualSamplerModulesByNamespace [_namespace].length + ')',
-											name:_namespace
+											name:_namespace || '*'
 										};
 									}
 								)
