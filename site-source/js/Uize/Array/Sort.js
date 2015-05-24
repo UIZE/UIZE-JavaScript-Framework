@@ -227,12 +227,13 @@ Uize.module ({
 				if (_elementsLength > 1) {
 					if (_sortValueGenerator != null) {
 						var _sortValue;
-						if (!Uize.isFunction (_sortValueGenerator)) {
-							if (typeof _sortValueGenerator == 'number')
-								_sortValueGenerator = 'value [' + _sortValueGenerator + ']'
-							;
-							_sortValueGenerator = Uize.resolveTransformer (_sortValueGenerator);
-						};
+						if (!Uize.isFunction (_sortValueGenerator))
+							_sortValueGenerator = Uize.resolveTransformer (
+								typeof _sortValueGenerator == 'number'
+									? 'value [' + _sortValueGenerator + ']'
+									: _sortValueGenerator
+							)
+						;
 						/*** build sortValues array ***/
 							for (var _elementNo = _sortValues.length = _elementsLength; --_elementNo >= 0;) {
 								(_sortValue = _sortValues [_elementNo] || (_sortValues [_elementNo] = {})).v =
