@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Array Spread | JavaScript Examples | UIZE JavaScript Framework</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<meta name="keywords" content="color Uize.Array.Sort"/>
+	<meta name="description" content=""/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.example.css"/>
+	<style type="text/css">
+		.spread {
+			position: relative;
+			width: 400px;
+			height: 400px;
+		}
+	</style>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="header">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	<a href="../index.html" class="homeLinkText" title="UIZE JavaScript Framework home">UIZE JavaScript Framework</a>
+</h1>
+
+<div class="main">
+	<h1 class="document-title">
+		<a href="../javascript-examples.html" class="breadcrumb breadcrumbWithArrow">JAVASCRIPT EXAMPLES</a>
+		Array Spread
+		<div class="pageActionsShell">
+			<div id="page-actions" class="pageActions"><a href="source-code/array-spread.html" class="buttonLink">SOURCE</a></div>
+		</div>
+	</h1>
+
+	<div id="page-spread" class="spread"></div>
+</div>
+
+<!-- JavaScript code to activate the image port functionality -->
+
+<script type="text/javascript">
+
+Uize.require (
+	[
+		'UizeSite.Page.Example.library',
+		'UizeSite.Page.Example',
+		'Uize.Array.Sort'
+	],
+	function () {
+		'use strict';
+
+		/*** create the example page widget ***/
+			var page = window.page = UizeSite.Page.Example ();
+
+		/*** wire up the page widget ***/
+			page.wireUi ();
+
+		/* generate random numbers and spread them ***/
+			//var _spread = Uize.map (400,'Math.round (Math.random () * 400)');
+			//var _spread = Uize.map (400,'Math.round (Math.random () * 400)').sort (function (a,b) {return a - b});
+			var _spread = Uize.map (400,'key');
+			//var _spread = Uize.map (400,'Math.round (Math.pow (key / 400,3) * 400)');
+
+			Uize.Array.Sort.spread (_spread,null,1);
+
+			page.setNodeInnerHtml (
+				'spread',
+				Uize.map (
+					_spread,
+					function (_value,_valueNo) {
+						return '<div style="position: absolute; top: ' + (400 - _value) + 'px; bottom: 0; width: 1px; left: ' + _valueNo + 'px; background: #f00;"></div>';
+					}
+				).join ('')
+			);
+	}
+);
+
+</script>
+
+</body>
+</html>
+

@@ -221,12 +221,13 @@ Uize.module ({
 				_descendingSimpleSort = _Function ('a,b','return a<b?1:a>b?-1:0')
 		;
 
-		return Uize.package ({
-			sortBy:function (_elements,_sortValueGenerator,_direction) {
+		/*** Utility Functions ***/
+			function _sortBy (_elements,_sortValueGenerator,_sort) {
 				var _elementsLength = _elements.length;
 				if (_elementsLength > 1) {
-					if (_sortValueGenerator != null) {
-						var _sortValue;
+					var _sortValue;
+
+					/*** resolve sort value generator ***/
 						if (!Uize.isFunction (_sortValueGenerator))
 							_sortValueGenerator = Uize.resolveTransformer (
 								typeof _sortValueGenerator == 'number'
@@ -234,30 +235,40 @@ Uize.module ({
 									: _sortValueGenerator
 							)
 						;
-						/*** build sortValues array ***/
-							for (var _elementNo = _sortValues.length = _elementsLength; --_elementNo >= 0;) {
-								(_sortValue = _sortValues [_elementNo] || (_sortValues [_elementNo] = {})).v =
-									_sortValueGenerator (
-										_sortValue._element = _elements [_sortValue._elementNo = _elementNo],
-										_elementNo
-									)
-								;
-							}
 
-						/*** sort sortValues array ***/
-							_sortValues.sort (_direction == -1 ? _descendingSort : _ascendingSort);
+					/*** build sortValues array ***/
+						for (var _elementNo = _sortValues.length = _elementsLength; --_elementNo >= 0;) {
+							(_sortValue = _sortValues [_elementNo] || (_sortValues [_elementNo] = {})).v =
+								_sortValueGenerator (
+									_sortValue._element = _elements [_sortValue._elementNo = _elementNo],
+									_elementNo
+								)
+							;
+						}
 
-						/*** re-populate array to be sorted, using sortValues array ***/
-							for (var _elementNo = _elementsLength; --_elementNo >= 0;) {
-								if (_elementNo != (_sortValue = _sortValues [_elementNo])._elementNo)
-									_elements [_elementNo] = _sortValue._element
-								;
-								_sortValue._element = _sortValue.v = null;
-							}
-					} else {
-						_elements.sort (_direction == -1 ? _descendingSimpleSort : _ascendingSimpleSort);
-					}
+					/*** sort sortValues array ***/
+						_sort ();
+
+					/*** re-populate array to be sorted, using sortValues array ***/
+						for (var _elementNo = _elementsLength; --_elementNo >= 0;) {
+							if (_elementNo != (_sortValue = _sortValues [_elementNo])._elementNo)
+								_elements [_elementNo] = _sortValue._element
+							;
+							_sortValue._element = _sortValue.v = null;
+						}
 				}
+			}
+
+		return Uize.package ({
+			sortBy:function (_elements,_sortValueGenerator,_order) {
+				_sortValueGenerator != null
+					? _sortBy (
+						_elements,
+						_sortValueGenerator,
+						function () {_sortValues.sort (_order == -1 ? _descendingSort : _ascendingSort)}
+					)
+					: _elements.sort (_order == -1 ? _descendingSimpleSort : _ascendingSimpleSort)
+				;
 				return _elements;
 				/*?
 					Static Methods
@@ -504,6 +515,31 @@ Uize.module ({
 
 									When we use the =directionINT= parameter to reverse the sort direction, we no longer need to use the array's length in the `sort value generator expression`. Instead, we can have a simpler expression that simply returns the key / index.
 				*/
+			},
+
+			spread:function (_elements,_sortValueGenerator,_order) {
+				_sortBy (
+					_elements,
+					_sortValueGenerator,
+					function () {
+						/*** sort sortValues array ***/
+							_sortValues.sort (_order == -1 ? _descendingSort : _ascendingSort);
+
+						/*** recalculate sort values for the spread distribution, and re-sort ***/
+							var _elementsLength = _elements.length;
+							function _spreadSegment (_stepSize,_start,_rangeMin,_rangeMax) {
+								if (_start < _elementsLength) {
+									var _rangeCenter = _sortValues [_start].v = (_rangeMin + _rangeMax) / 2;
+									_spreadSegment (_stepSize * 2,_start + _stepSize,_rangeMin,_rangeCenter);
+									_spreadSegment (_stepSize * 2,_start + _stepSize * 2,_rangeCenter,_rangeMax);
+								}
+							}
+							_spreadSegment (1,0,0,1);
+							_sortValues.sort (_order == 1 ? _descendingSort : _ascendingSort);
+								// NOTE: inverting the order here seems to produce a more "pleasing" spread
+					}
+				);
+				return _elements;
 			}
 		});
 	}

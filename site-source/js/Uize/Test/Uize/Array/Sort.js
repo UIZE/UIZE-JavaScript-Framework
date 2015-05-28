@@ -163,6 +163,68 @@ Uize.module ({
 						],
 						null,
 						{cloneArguments:true}
+					],
+					['Uize.Array.Sort.spread',
+						[
+							['Spreading an empty array produces an empty array',
+								[[]],
+								[]
+							],
+							['Spreading an array with only one element returns that same array',
+								[[1]],
+								[1]
+							],
+							['When the source array contains only a single minimum value element, then that element will be positioned in the center of the spread array',
+								[[9,9,9,9,9,9,9,9,1]],
+								[9,9,9,9,1,9,9,9,9]
+							],
+							['When the source array contains elements having three different values, those values are distributed evenly in the spread array, starting with the lowest value in the center',
+								[[9,9,9,9,9,9,9,9,1,2,2]],
+								[9,9,2,9,9,1,9,9,2,9,9]
+							],
+							['When the source array contains elements having four different values, those values are distributed evenly in the spread array, starting with the lowest value in the center',
+								[[9,9,9,9,9,9,9,9,1,2,2,3,3,3,3]],
+								[9,3,9,2,9,3,9,1,9,3,9,2,9,3,9]
+							],
+
+							/*** test the reverse order ***/
+								['When the value -1 is specified for the optional orderINT parameter and the source array contains only a single maximum value element, then that element will be positioned in the center of the spread array',
+									[[1,1,1,1,1,1,1,1,9],null,-1],
+									[1,1,1,1,9,1,1,1,1]
+								],
+								['When the value -1 is specified for the optional orderINT parameter and the source array contains three different values, those values are distributed evenly in the spread array, starting with the highest value in the center',
+									[[1,1,1,1,1,1,1,1,9,8,8],null,-1],
+									[1,1,8,1,1,9,1,1,8,1,1]
+								],
+								['When the value -1 is specified for the optional orderINT parameter and the source array contains four different values, those values are distributed evenly in the spread array, starting with the highest value in the center',
+									[[1,1,1,1,1,1,1,1,9,8,8,7,7,7,7],null,-1],
+									[1,7,1,8,1,7,1,9,1,7,1,8,1,7,1]
+								],
+								['When the value -1 is specified for the optional orderINT parameter and the source array contains a mix of different values, those values are distributed evenly in the spread array, starting with the highest value in the center',
+									[[1,1,1,1,1,2,2,2,3,3,4,4,4,4,5,5,6,7,7,7,7,7,7,8,9,9],null,-1],
+									[4,7,1,7,2,5,9,3,6,1,7,1,4,9,3,7,1,7,2,4,8,2,5,7,1,4]
+								],
+
+							/*** miscellaneous tests ***/
+								['When all elements of the source array have different values, those values are distributed evenly in the spread array, starting with the lowest value in the center',
+									[[1,2,3,4,5,6,7,8,9]],
+									[8,4,2,6,1,9,5,3,7]
+								],
+								['When the source array contains a mix of different values, those values are distributed evenly in the spread array, starting with the lowest value in the center',
+									[[1,1,1,1,1,2,2,2,3,3,4,4,4,4,5,5,6,7,7,7,7,7,7,8,9,9]],
+									[5,2,8,1,7,4,1,7,3,9,2,7,4,1,6,3,9,1,7,4,1,7,4,2,7,5]
+								],
+								['When all elements of the source array have the same value, then spreading the array will have no effect',
+									[[1,1,1,1,1,1,1,1,1]],
+									[1,1,1,1,1,1,1,1,1]
+								],
+								['An optional value mapper can be specified for generating the values by which the array should be spread',
+									[[{a:9},{a:9},{a:9},{a:9},{a:9},{a:9},{a:9},{a:9},{a:1},{a:2},{a:2}],'value.a'],
+									[{a:9},{a:9},{a:2},{a:9},{a:9},{a:1},{a:9},{a:9},{a:2},{a:9},{a:9}]
+								]
+						],
+						null,
+						{cloneArguments:true}
 					]
 				])
 			]
