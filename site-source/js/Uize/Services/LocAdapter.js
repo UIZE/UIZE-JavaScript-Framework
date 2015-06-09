@@ -1087,7 +1087,6 @@ Uize.module ({
 					var
 						m = this,
 						_project = m.project,
-						_rootFolderPath = _project.rootFolderPath,
 						_primaryLanguageResources = m.gatherResources ()
 					;
 
