@@ -543,7 +543,8 @@ Uize.module ({
 					_path = [],
 					_object1PropertyProfile = {},
 					_object2PropertyProfile = {},
-					_skeleton = _options.skeleton
+					_skeleton = _options.skeleton,
+					_dual = _options.dual !== false
 				;
 				function _compareNode (_object1,_object2) {
 					var
@@ -556,12 +557,13 @@ Uize.module ({
 						var
 							_propertyComparisonResult,
 							_object1PropertyValue = _object1 [_property],
-							_object2PropertyValue = _object2 [_property]
+							_object2PropertyValue = _object2 [_property],
+							_object2PropertyValueIsPlainObject = _isPlainObject (_object2PropertyValue)
 						;
-						if (_isPlainObject (_object1PropertyValue) || _isPlainObject (_object2PropertyValue)) {
+						if (_isPlainObject (_object1PropertyValue) || (_object2PropertyValueIsPlainObject && _dual)) {
 							var _subNodeComparison = _compareNode (
 								_object1PropertyValue || _sacredEmptyObject,
-								_object2PropertyValue || _sacredEmptyObject
+								((_dual || _object2PropertyValueIsPlainObject) && _object2PropertyValue) || _sacredEmptyObject
 							);
 							_propertyComparisonResult = !_isEmpty (_subNodeComparison)
 								? {value:_subNodeComparison}
@@ -575,12 +577,15 @@ Uize.module ({
 								_object2PropertyValueIsArray = _propertyInObject2 && _isArray (_object2PropertyValue)
 							;
 							if (
-								(_object1PropertyValueIsArray || !_propertyInObject1) &&
-								(_object2PropertyValueIsArray || !_propertyInObject2)
+								_dual
+									?
+										(_object1PropertyValueIsArray || !_propertyInObject1) &&
+										(_object2PropertyValueIsArray || !_propertyInObject2)
+									: _object1PropertyValueIsArray
 							) {
 								var _subNodeComparison = _compareNode (
 									_object1PropertyValue || _sacredEmptyArray,
-									_object2PropertyValue || _sacredEmptyArray
+									((_dual || _object2PropertyValueIsArray) && _object2PropertyValue) || _sacredEmptyArray
 								);
 								_propertyComparisonResult = !_isEmpty (_subNodeComparison)
 									? {value:_subNodeComparison}
@@ -607,15 +612,15 @@ Uize.module ({
 								_propertyComparisonResult.value
 						;
 					}
-					if (_isPlainObject (_object1) || _isPlainObject (_object2)) {
+					if (_isPlainObject (_object1) || (_isPlainObject (_object2) && _dual)) {
 						var _result = {};
-						for (var _property in Uize.copy (_object1,_object2))
+						for (var _property in _dual ? Uize.copy (_object1,_object2) : _object1)
 							_compareProperty (_property)
 						;
 					} else {
 						var _result = [];
 						for (
-							var _elementNo = -1, _totalElements = Math.max (_object1.length,_object2.length);
+							var _elementNo = -1, _totalElements = Math.max (_object1.length,_dual * _object2.length);
 							++_elementNo < _totalElements;
 						) {
 							_compareProperty (_elementNo);
