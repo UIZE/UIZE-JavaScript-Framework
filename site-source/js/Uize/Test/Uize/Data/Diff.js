@@ -321,7 +321,7 @@ Uize.module ({
 										prop7:['removed','removed']
 									}
 								],
-								['When a non-dual diff is performed, properties in object B whose values are not simple objects when the values of the corresponding properties in object A are simple objects are treated as being empty objects for the purpose of the diff recursion',
+								['When a non-dual diff is performed, properties in object B whose values are not plain objects when the values of the corresponding properties in object A are plain objects are treated as being empty objects for the purpose of the diff recursion',
 									[
 										{
 											prop1:{foo:'FOO',bar:'BAR'},
