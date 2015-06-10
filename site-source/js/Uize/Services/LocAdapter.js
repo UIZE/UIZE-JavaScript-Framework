@@ -1128,32 +1128,25 @@ Uize.module ({
 								var _languageResources = {};
 								Uize.forEach (
 									_primaryLanguageResources,
-									function (_resourceFileStrings,_resourceFileSubPath) {
+									function (_primaryLanguageResourceFileStrings,_resourceFileSubPath) {
 										var
 											_resourceFilePath = m.getLanguageResourcePath (_resourceFileSubPath,_language),
 											_resourceFileBrand = m.getResourceFileBrand (_resourceFileSubPath)
 										;
 										if (m.doesBrandSupportLanguage (_resourceFileBrand,_language)) {
-											_languageResources [_resourceFileSubPath] = Uize.Data.Diff.diff (
-												_parseResourceFile (m,_resourceFilePath,_language) || {},
-												_primaryLanguageResourcesDiff [_resourceFileSubPath],
-												function (_gatheredProperty,_propertyDiff,_path) {
-													return (
-														!_propertyDiff || _propertyDiff.value == 'removed' ||
-														!m.doesBrandSupportLanguage (
+											_languageResources [_resourceFileSubPath] =
+												m.Class.repairResourceFileStringsForTranslatableLanguage (
+													_parseResourceFile (m,_resourceFilePath,_language),
+													_primaryLanguageResourceFileStrings,
+													_primaryLanguageResourcesDiff [_resourceFileSubPath],
+													function (_path) {
+														return m.doesBrandSupportLanguage (
 															m.getStringBrand ([_resourceFileSubPath].concat (_path)),
 															_language
-														)
-															? _undefined
-															: {
-																value:_propertyDiff.value == 'modified'
-																	? ''
-																	: _gatheredProperty ? _gatheredProperty.value : ''
-															}
-													);
-												},
-												{skeleton:true}
-											);
+														);
+													}
+												)
+											;
 											m.stepCompleted ('Gathered resources from file: ' + _resourceFilePath);
 										} else {
 											m.stepCompleted (
@@ -1799,6 +1792,46 @@ Uize.module ({
 			},
 
 			staticMethods:{
+				repairResourceFileStringsForTranslatableLanguage:function (
+					_resourceFileStrings,
+					_primaryLanguageResourceFileStrings,
+					_primaryLanguageResourceFileStringsDiff,
+					_doesBrandSupportString
+				) {
+					return Uize.Data.Diff.diff (
+						Uize.Data.Diff.diff (
+							_primaryLanguageResourceFileStrings,
+							_resourceFileStrings,
+							function (_string,_stringExisting,_path) {
+								return (
+									!_doesBrandSupportString (_path)
+										? undefined
+										:
+											_stringExisting &&
+											!Uize.isArray (_stringExisting.value) &&
+											!Uize.isPlainObject (_stringExisting.value)
+												? _stringExisting
+												: {value:''}
+								);
+							},
+							{skeleton:true,dual:false}
+							/* NOTES:
+								- skeleton structure is based on structure of primary language resource strings object
+								- brand strings that are not supported for the language are omitted
+								- strings for which there are values in the translatable language resource strings object are populated, and all remaining are blank
+							*/
+						),
+						_primaryLanguageResourceFileStringsDiff,
+						function (_string,_stringDiff) {
+							return _stringDiff.value == 'modified' ? {value:''} : _string;
+						},
+						{skeleton:true,dual:false}
+						/* NOTES:
+							- strings for which the values have been modified in the primary language resource strings object (based upon the supplied diff) are blanked out
+						*/
+					);
+				},
+
 				resolveProjectLanguages:function (_project) {
 					_project.languagesSuperset = Uize.Array.Dupes.dedupe (
 						(_project.languages || (_project.languages = [])).concat (

@@ -235,6 +235,152 @@ Uize.module ({
 							],
 							false
 						]
+					]],
+					['Uize.Services.LocAdapter.repairResourceFileStringsForTranslatableLanguage',[
+						['When a property in the translatable language resource strings object has a string value but the value of the corresponding property in the primary language resource strings object is an array, then the property in the repaired translatable language resource strings object will be an array',
+							[
+								{foo:'[foo]'},
+								{foo:['bar','baz','qux']},
+								{foo:['unchanged','unchanged','unchanged']},
+								Uize.returnTrue
+							],
+							{foo:['','','']}
+						],
+						['When a property in the translatable language resource strings object has a string value but the value of the corresponding property in the primary language resource strings object is an object, then the property in the repaired translatable language resource strings object will be an object',
+							[
+								{foo:'[foo]'},
+								{foo:{bar:'bar',baz:'baz',qux:'qux'}},
+								{foo:{bar:'unchanged',baz:'unchanged',qux:'unchanged'}},
+								Uize.returnTrue
+							],
+							{foo:{bar:'',baz:'',qux:''}}
+						],
+						['When a property in the translatable language resource strings object is an array but the value of the corresponding property in the primary language resource strings object is a string, then the property in the repaired translatable language resource strings object will be a string',
+							[
+								{foo:['[bar]','[baz]','[qux]']},
+								{foo:'foo'},
+								{foo:'unchanged'},
+								Uize.returnTrue
+							],
+							{foo:''}
+						],
+						['When a property in the translatable language resource strings object is an object but the value of the corresponding property in the primary language resource strings object is a string, then the property in the repaired translatable language resource strings object will be a string',
+							[
+								{foo:{bar:'[bar]',baz:'[baz]',qux:'[qux]'}},
+								{foo:'foo'},
+								{foo:'unchanged'},
+								Uize.returnTrue
+							],
+							{foo:''}
+						],
+						['When the values for strings in the primary language resource strings object have been modified, then existing values for those strings in the repaired translatable language resource strings object are blanked out',
+							[
+								{foo:'[foo]',bar:'[bar]',baz:'[baz]',qux:'[qux]'},
+								{foo:'FOO',bar:'bar',baz:'baz',qux:'QUX'},
+								{foo:'modified',bar:'unchanged',baz:'unchanged',qux:'modified'},
+								Uize.returnTrue
+							],
+							{foo:'',bar:'[bar]',baz:'[baz]',qux:''}
+						],
+						['When the structure of the translatable language resource strings object does not match the structure of the primary language resource strings object',
+							[
+								{
+									foo:{
+										bar:'[bar]'
+									}
+								},
+								{
+									foo:{
+										bar:'bar'
+									},
+									baz:{
+										qux:['hello','world'],
+										zebra:'foxtrot'
+									},
+									tango:'echo'
+								},
+								{
+									foo:{
+										bar:'unchanged'
+									},
+									baz:{
+										qux:['unchanged','unchanged'],
+										zebra:'unchanged'
+									},
+									tango:'unchanged'
+								},
+								Uize.returnTrue
+							],
+							{
+								foo:{
+									bar:'[bar]'
+								},
+								baz:{
+									qux:['',''],
+									zebra:''
+								},
+								tango:''
+							}
+						],
+						['When a node in the translatable language resource strings object is an object but the corresponding node in the primary language resource strings object is an array, then the structure of the repaired translatable language resource strings object will be conformed to match the structure of the primary language resource strings object',
+							[
+								{foo:{bar:'[bar]',baz:'[baz]',qux:'[qux]'}},
+								{foo:['bar','baz','qux']},
+								{foo:['unchanged','unchanged','unchanged']},
+								Uize.returnTrue
+							],
+							{foo:['','','']}
+						],
+						['When a node in the translatable language resource strings object is an array but the corresponding node in the primary language resource strings object is an object, then the structure of the repaired translatable language resource strings object will be conformed to match the structure of the primary language resource strings object',
+							[
+								{foo:['[bar]','[baz]','[qux]']},
+								{foo:{bar:'bar',baz:'baz',qux:'qux'}},
+								{foo:{bar:'unchanged',baz:'unchanged',qux:'unchanged'}},
+								Uize.returnTrue
+							],
+							{foo:{bar:'',baz:'',qux:''}}
+						],
+						['Brand strings that are not supported for the translatable language are omitted in the repaired translatable language resource strings object',
+							[
+								{
+									unbranded:{
+										foo:'[foo]',
+										bar:'[bar]'
+									},
+									branded:{
+										baz:'[baz]'
+									}
+								},
+								{
+									unbranded:{
+										foo:'foo',
+										bar:'bar'
+									},
+									branded:{
+										baz:'baz',
+										qux:'qux'
+									}
+								},
+								{
+									unbranded:{
+										foo:'unchanged',
+										bar:'unchanged'
+									},
+									branded:{
+										baz:'modified',
+										qux:'modified'
+									}
+								},
+								function (_path) {return _path [0] != 'branded'}
+							],
+							{
+								unbranded:{
+									foo:'[foo]',
+									bar:'[bar]'
+								},
+								branded:{}
+							}
+						]
 					]]
 				])
 			]
