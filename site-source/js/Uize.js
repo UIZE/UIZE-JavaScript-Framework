@@ -407,17 +407,17 @@ Uize = (function (_UizeOverrides) {
 			return _target;
 		}
 
-		function _copySourceIntoTarget(_target, _source) {
+		function _copySourceIntoTarget (_target,_source) {
 			for (var _property in _source)
-				_target[_property] = _source[_property]
+				_target [_property] = _source [_property]
 			;
 			return _target;
 		}
-		function _copyNewFromSourceIntoTarget (_target, _source) {
+		function _copyNewFromSourceIntoTarget (_target,_source) {
 			for (var _property in _source) {
 				//Only copy if it is a new property
 				if (!(_property in _target)) {
-					_target[_property] = _source[_property];
+					_target [_property] = _source [_property];
 				}
 			}
 			return _target;
