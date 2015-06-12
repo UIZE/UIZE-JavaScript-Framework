@@ -6073,5 +6073,5 @@ Uize = (function (_UizeOverrides) {
 		_package.addFolderOrgNamespaces ('Uize');
 		_package.module ({name:'Uize',builder:function () {return _package}});
 
-		return _package;
+	return _package;
 }) ((function () {return this}) ().Uize);
