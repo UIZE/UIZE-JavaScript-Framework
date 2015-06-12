@@ -380,6 +380,24 @@ Uize.module ({
 								},
 								branded:{}
 							}
+						],
+						['When the value null is specified for the translatable language resource strings object, then it is treated as being an empty object',
+							[
+								null,
+								{foo:'bar'},
+								{foo:'unchanged'},
+								Uize.returnTrue
+							],
+							{foo:''}
+						],
+						['When the value null is specified for the primary language resource strings object, then it is treated as being an empty object',
+							[
+								{foo:'bar'},
+								null,
+								{},
+								Uize.returnTrue
+							],
+							{}
 						]
 					]]
 				])

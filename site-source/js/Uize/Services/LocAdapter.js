@@ -1800,8 +1800,8 @@ Uize.module ({
 				) {
 					return Uize.Data.Diff.diff (
 						Uize.Data.Diff.diff (
-							_primaryLanguageResourceFileStrings,
-							_resourceFileStrings,
+							_primaryLanguageResourceFileStrings || _sacredEmptyObject,
+							_resourceFileStrings || _sacredEmptyObject,
 							function (_string,_stringExisting,_path) {
 								return (
 									!_doesBrandSupportString (_path)
