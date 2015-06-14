@@ -34,19 +34,12 @@
 
 Uize.module ({
 	name:'Uize.Widgets.Buttons.Date.Widget',
-	superclass:'Uize.Widgets.Button.Square.Widget',
-	required:[
-		'Uize.Widgets.Buttons.Date.Html',
-		'Uize.Widgets.Buttons.Date.Css'
-	],
+	superclass:'Uize.Widgets.Button.Square.Icon.Widget',
+	required:'Uize.Widgets.Buttons.Date.Css',
 	builder:function (_superclass) {
 		'use strict';
 
 		return _superclass.subclass ({
-			set:{
-				html:Uize.Widgets.Buttons.Date.Html
-			},
-
 			staticProperties:{
 				cssModule:Uize.Widgets.Buttons.Date.Css
 			}
