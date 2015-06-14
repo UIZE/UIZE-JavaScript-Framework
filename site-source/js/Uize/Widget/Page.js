@@ -707,6 +707,36 @@ Uize.module ({
 					}
 				},
 
+				getPageInfo:function () {
+					function _getMetaTagContent (_metaTagName) {
+						var _metaTag = _Uize_Dom_Basics.find ({
+							tagName:'meta',
+							self:function () {
+								return this.name == _metaTagName
+								/* ISSUE:
+									Can't use name property in find object, because it doesn't seem to find the tags in FF. Perhaps getElementsByName is being used in Uize.Dom.Basics.find, or something, and that doesn't work with meta tags? Weird!
+								*/
+							}
+						}) [0];
+						return _metaTag ? _metaTag.content : '';
+					}
+					return (
+						typeof navigator != 'undefined'
+							? {
+								title:document.title,
+								url:window.location.href,
+								keywords:_getMetaTagContent ('keywords'),
+								description:_getMetaTagContent ('description')
+							}
+							: {
+								title:'',
+								url:'',
+								keywords:'',
+								description:''
+							}
+					);
+				},
+
 				/*** Hook Methods ***/
 					loadHtml:function (_htmlParams,_directives) {
 						_getCallbackFromDirectives (_directives) ('');
