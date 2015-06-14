@@ -20,7 +20,7 @@
 	Introduction
 		The =Uize.Widgets.Button.Square.Icon.Widget= module implements a widget class.
 
-		*DEVELOPERS:* 
+		*DEVELOPERS:* `Chris van Rensburg`
 
 		Visual Sampler
 			Below is a visual sampler of the =Uize.Widgets.Button.Square.Icon.Widget= class...

@@ -20,7 +20,7 @@
 	Introduction
 		The =Uize.Widgets.Button.Square.Icon.VisualSampler= class implements a visual sampler widget for the =Uize.Widgets.Button.Square.Icon.Widget= class.
 
-		*DEVELOPERS:*
+		*DEVELOPERS:* `Chris van Rensburg`
 */
 
 Uize.module ({

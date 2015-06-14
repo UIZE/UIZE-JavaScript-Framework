@@ -20,7 +20,7 @@
 	Introduction
 		The =Uize.Widgets.Button.Square.Icon.VisualTests= class implements a set of visual tests for the =Uize.Widgets.Button.Square.Icon.Widget= class.
 
-		*DEVELOPERS:*
+		*DEVELOPERS:* `Chris van Rensburg`
 */
 
 Uize.module ({
