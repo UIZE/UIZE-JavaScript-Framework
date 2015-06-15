@@ -45,28 +45,7 @@ Uize.module ({
 
 		return _superclass.subclass ({
 			omegastructor:function () {
-				var m = this;
-
-				if (typeof navigator != 'undefined') {
-					var _getMetaTagContent = function (_metaTagName) {
-						var _metaTag = Uize.Dom.Basics.find ({
-							tagName:'meta',
-							self:function () {
-								return this.name == _metaTagName
-								/* ISSUE:
-									Can't use name property in find object, because it doesn't seem to find the tags in FF. Perhaps getElementsByName is being used in Uize.Dom.Basics.find, or something, and that doesn't work with meta tags? Weird!
-								*/
-							}
-						}) [0];
-						return _metaTag ? _metaTag.content : '';
-					};
-					m.set ({
-						title:document.title.match (/^\s*(.*?)\s*(\||$)/) [1],
-						url:(this.callInherited ('getPublicUrl') || Uize.nop) () || '',
-						keywords:_getMetaTagContent ('keywords'),
-						description:_getMetaTagContent ('description')
-					});
-				}
+				this.set (this.callInherited ('getPageInfo') ());
 			},
 
 			set:{

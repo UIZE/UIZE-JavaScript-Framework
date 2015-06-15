@@ -39,9 +39,15 @@ Uize.module ({
 
 		return _superclass.subclass ({
 			instanceMethods:{
-				getPublicUrl:function () {
-					var _urlParts = Uize.Url.from (window.location.href);
-					return 'http://www.uize.com' + (_urlParts.protocol == 'file:' ? '' : _urlParts.pathname);
+				getPageInfo:function () {
+					var
+						_pageInfo = _superclass.doMy (this,'getPageInfo'),
+						_urlParts = Uize.Url.from (_pageInfo.url)
+					;
+					_pageInfo.title = _pageInfo.title.match (/^\s*(.*?)\s*(\||$)/) [1];
+					_pageInfo.url = 'http://www.uize.com' + (_urlParts.protocol == 'file:' ? '' : _urlParts.pathname);
+
+					return _pageInfo;
 				},
 
 				getPathToRoot:function () {

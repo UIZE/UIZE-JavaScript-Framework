@@ -44,7 +44,7 @@ Uize.module ({
 
 		return _superclass.subclass ({
 			omegastructor:function () {
-				this.set ({url:(this.callInherited ('getPublicUrl') || Uize.nop) () || ''});
+				this.set ({url:((this.callInherited ('getPageInfo') || Uize.nop) () || {}).url || ''});
 			},
 
 			set:{
