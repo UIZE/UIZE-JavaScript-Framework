@@ -1,0 +1,9 @@
+<div><
+	child name="shareViaFacebook" flavor="subdued"/><
+	child name="shareViaTwitter" flavor="subdued"/><
+	child name="shareViaStumbleUpon" flavor="subdued"/><
+	child name="shareViaReddit" flavor="subdued"/><
+	child name="shareViaDigg" flavor="subdued"/><
+	child name="shareViaDelicious" flavor="subdued"/><
+	child name="shareViaEmail" flavor="subdued"
+/></div>
