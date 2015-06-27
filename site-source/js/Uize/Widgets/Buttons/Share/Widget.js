@@ -37,9 +37,9 @@ Uize.module ({
 				},
 
 				share:function () {
-					this.callInherited ('launchPopup') ({
-						url:Uize.Url.resolve (this.getShareUrl (this.callInherited ('getPageInfo') ()))
-					});
+					var _pageInfo = Uize.copy (this.callInherited ('getPageInfo') ());
+					_pageInfo.url = _pageInfo.urlToShare || _pageInfo.url;
+					this.callInherited ('launchPopup') ({url:Uize.Url.resolve (this.getShareUrl (_pageInfo))});
 				}
 			},
 
