@@ -53,7 +53,7 @@ Uize.module ({
 					return [
 						'http://twitter.com/home',
 						{
-							status:'Check out ' + _pageInfo.title + ' over @' + _domainParts [_domainParts.length - 2] + ' ' + _pageInfo.url
+							status:'Check out ' + _pageInfo.title + ' @' + _domainParts [_domainParts.length - 2] + ' ' + _pageInfo.url
 						}
 					];
 				}
