@@ -41,7 +41,8 @@ Uize.module ({
 
 		return _superclass.subclass ({
 			staticProperties:{
-				cssModule:Uize.Widgets.Buttons.Share.Reddit.Css
+				cssModule:Uize.Widgets.Buttons.Share.Reddit.Css,
+				shareVia:'Reddit'
 			},
 
 			instanceMethods:{

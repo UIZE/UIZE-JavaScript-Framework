@@ -37,14 +37,21 @@ Uize.module ({
 				},
 
 				share:function () {
-					var _pageInfo = Uize.copy (this.callInherited ('getPageInfo') ());
+					var
+						m = this,
+						_pageInfo = Uize.copy (m.callInherited ('getPageInfo') ({shareVia:m.Class.shareVia}))
+					;
 					_pageInfo.url = _pageInfo.urlToShare || _pageInfo.url;
-					this.callInherited ('launchPopup') ({url:Uize.Url.resolve (this.getShareUrl (_pageInfo))});
+					m.callInherited ('launchPopup') ({url:Uize.Url.resolve (m.getShareUrl (_pageInfo))});
 				}
 			},
 
 			eventBindings:{
 				':Click':function () {this.share ()}
+			},
+
+			staticProperties:{
+				shareVia:''
 			}
 		});
 	}

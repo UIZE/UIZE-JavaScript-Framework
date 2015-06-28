@@ -44,7 +44,8 @@ Uize.module ({
 
 		return _superclass.subclass ({
 			staticProperties:{
-				cssModule:Uize.Widgets.Buttons.Share.Twitter.Css
+				cssModule:Uize.Widgets.Buttons.Share.Twitter.Css,
+				shareVia:'Twitter'
 			},
 
 			instanceMethods:{

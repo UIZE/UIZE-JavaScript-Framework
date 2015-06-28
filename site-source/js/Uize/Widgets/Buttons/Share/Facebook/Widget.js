@@ -41,7 +41,8 @@ Uize.module ({
 
 		return _superclass.subclass ({
 			staticProperties:{
-				cssModule:Uize.Widgets.Buttons.Share.Facebook.Css
+				cssModule:Uize.Widgets.Buttons.Share.Facebook.Css,
+				shareVia:'Facebook'
 			},
 
 			instanceMethods:{

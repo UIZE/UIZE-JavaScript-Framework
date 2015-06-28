@@ -41,7 +41,8 @@ Uize.module ({
 
 		return _superclass.subclass ({
 			staticProperties:{
-				cssModule:Uize.Widgets.Buttons.Share.Digg.Css
+				cssModule:Uize.Widgets.Buttons.Share.Digg.Css,
+				shareVia:'Digg'
 			},
 
 			instanceMethods:{
