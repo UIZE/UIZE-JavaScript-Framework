@@ -59,22 +59,28 @@ Uize.module ({
 			},
 
 			exitFullscreen:function () {
-				var _document = document;
-				return (
-					_document.exitFullscreen
-						? _document.exitFullscreen ()
-					: _document.msExitFullscreen
-						? _document.msExitFullscreen ()
-					: _document.mozCancelFullScreen
-						? _document.mozCancelFullScreen ()
-					: _document.webkitExitFullscreen
-						? _document.webkitExitFullscreen ()
-					: null
-				);
+				if (this.inFullscreen ()) {
+					var _document = document;
+					return (
+						_document.exitFullscreen
+							? _document.exitFullscreen ()
+						: _document.msExitFullscreen
+							? _document.msExitFullscreen ()
+						: _document.mozCancelFullScreen
+							? _document.mozCancelFullScreen ()
+						: _document.webkitExitFullscreen
+							? _document.webkitExitFullscreen ()
+						: null
+					);
+				}
 			},
 
 			toggleFullscreen:function () {
-				this.inFullscreen () ? this.exitFullscreen () : this.requestFullscreen ();
+				this.setFullscreen (!this.inFullscreen ());
+			},
+
+			setFullscreen:function (_inFullscreen) {
+				_inFullscreen ? this.requestFullscreen () : this.exitFullscreen ();
 			}
 		});
 	}
