@@ -33,8 +33,8 @@ Uize.module ({
 		'Uize.Widgets.Buttons.Share.Reddit.Widget',
 		'Uize.Widgets.Buttons.Share.Digg.Widget',
 		'Uize.Widgets.Buttons.Share.Delicious.Widget',
-		//'Uize.Widgets.Buttons.Share.GoogleBookmarks.Widget',
-		//'Uize.Widgets.Buttons.Share.LinkedIn.Widget',
+		'Uize.Widgets.Buttons.Share.LinkedIn.Widget',
+		'Uize.Widgets.Buttons.Share.GoogleBookmarks.Widget',
 		'Uize.Widgets.Buttons.Share.Email.Widget',
 	],
 	builder:function (_superclass) {
@@ -48,8 +48,8 @@ Uize.module ({
 				shareViaReddit:{widgetClass:Uize.Widgets.Buttons.Share.Reddit.Widget},
 				shareViaDigg:{widgetClass:Uize.Widgets.Buttons.Share.Digg.Widget},
 				shareViaDelicious:{widgetClass:Uize.Widgets.Buttons.Share.Delicious.Widget},
-				//shareViaGoogleBookmarks:{widgetClass:Uize.Widgets.Buttons.Share.GoogleBookmarks.Widget},
-				//shareViaLinkedIn:{widgetClass:Uize.Widgets.Buttons.Share.LinkedIn.Widget},
+				shareViaLinkedIn:{widgetClass:Uize.Widgets.Buttons.Share.LinkedIn.Widget},
+				shareViaGoogleBookmarks:{widgetClass:Uize.Widgets.Buttons.Share.GoogleBookmarks.Widget},
 				shareViaEmail:{widgetClass:Uize.Widgets.Buttons.Share.Email.Widget},
 			}
 		});

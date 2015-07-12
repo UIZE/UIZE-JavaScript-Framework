@@ -5,5 +5,7 @@
 	child name="shareViaReddit" flavor="subdued"/><
 	child name="shareViaDigg" flavor="subdued"/><
 	child name="shareViaDelicious" flavor="subdued"/><
+	child name="shareViaLinkedIn" flavor="subdued"/><
+	child name="shareViaGoogleBookmarks" flavor="subdued"/><
 	child name="shareViaEmail" flavor="subdued"
 /></div>
