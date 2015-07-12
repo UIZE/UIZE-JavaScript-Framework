@@ -1,8 +1,8 @@
 <%@
 	required (
 		'Uize.Widgets.BoxWithHeading.Widget',
-		'UizeSite.Widgets.Follow.Widget',
 		'UizeSite.Widgets.LikeThis.Widget',
+		'UizeSite.Widgets.Follow.Widget',
 		'UizeSite.Widgets.GetInvolved.Widget'
 	);
 %><%
@@ -17,8 +17,8 @@
 		%></div><%
 	}
 %><div id="<%. idPrefix %>" class="<%= m.rootNodeCssClasses () %>">
-	<% _boxedChildWidget ('FOLLOW','follow',UizeSite.Widgets.Follow.Widget); %>
 	<% _boxedChildWidget ('LIKE','likeThis',UizeSite.Widgets.LikeThis.Widget); %>
+	<% _boxedChildWidget ('FOLLOW','follow',UizeSite.Widgets.Follow.Widget); %>
 	<% _boxedChildWidget ('HELP','getInvolved',UizeSite.Widgets.GetInvolved.Widget); %>
 </div>
 
