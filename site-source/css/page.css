@@ -146,7 +146,7 @@
 			z-index: 1; /* needed for FF, or some things in document display above title */
 			left: 0;
 			top: 0;
-			width: 100%;
+			right: 0;
 			_width: auto; /* hack for IE6, because the z-index can't be overrided back to auto, and because the z-index seems to cause the homeLink icon to be overpainted */
 			font-family: Arial, Helvetica, Verdana;
 			font-size: 16px;
@@ -177,6 +177,11 @@
 		}
 		.header a.homeLinkText {
 			border: none;
+		}
+		.header .shareStrip {
+			position: absolute;
+			right: 4px;
+			top: 4px;
 		}
 
 		/*** home link ***/

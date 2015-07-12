@@ -23,6 +23,7 @@ Uize.module ({
 		'Uize.Dom.Basics',
 		'Uize.Dom.Pos',
 		'Uize.Url',
+		'Uize.Widgets.ShareStrip.Horz.Widget',
 		'UizeSite.Widgets.SiteNav.Widget',
 		'UizeSite.Widgets.SiteAssistant.Widget',
 		'UizeSite.Widgets.Footer.Widget'
@@ -143,6 +144,13 @@ Uize.module ({
 								);
 							};
 							m.wireNode ('homeLink','mouseover',_wireUpSiteMenu);
+
+						/*** insert share strip widget ***/
+							var _headerNode = _Uize_Dom_Basics.find ({tagName:'h1',className:/\bheader\b/}) [0];
+							if (_headerNode) {
+								_injectHtml (_headerNode,'<div id="page-shareStrip" class="shareStrip"></div>');
+								m.addChild ('shareStrip',Uize.Widgets.ShareStrip.Horz.Widget,{built:false});
+							}
 
 						var _mainNode = _Uize_Dom_Basics.find ({tagName:'div',className:/\bmain\b/}) [0];
 

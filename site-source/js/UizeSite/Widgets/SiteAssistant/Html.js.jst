@@ -1,10 +1,9 @@
 <%@
 	required (
 		'Uize.Widgets.BoxWithHeading.Widget',
-		'UizeSite.Widgets.GetInvolved.Widget',
-		'UizeSite.Widgets.LikeThis.Widget',
 		'UizeSite.Widgets.Follow.Widget',
-		'UizeSite.Widgets.ShareThis.Widget'
+		'UizeSite.Widgets.LikeThis.Widget',
+		'UizeSite.Widgets.GetInvolved.Widget'
 	);
 %><%
 	function _boxedChildWidget (_heading,_childName,_widgetClass) {%>
@@ -18,9 +17,8 @@
 		%></div><%
 	}
 %><div id="<%. idPrefix %>" class="<%= m.rootNodeCssClasses () %>">
-	<% _boxedChildWidget ('LIKE','likeThis',UizeSite.Widgets.LikeThis.Widget); %>
 	<% _boxedChildWidget ('FOLLOW','follow',UizeSite.Widgets.Follow.Widget); %>
-	<% _boxedChildWidget ('SHARE','shareThis',UizeSite.Widgets.ShareThis.Widget); %>
+	<% _boxedChildWidget ('LIKE','likeThis',UizeSite.Widgets.LikeThis.Widget); %>
 	<% _boxedChildWidget ('HELP','getInvolved',UizeSite.Widgets.GetInvolved.Widget); %>
 </div>
 
