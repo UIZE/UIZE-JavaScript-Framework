@@ -62,11 +62,11 @@ Uize.module ({
 						_fileSystem.deleteFile ({path:_ftpCommandsFilename});
 					}
 
-					function _ftpActions (_siteInfo,_actions) {
+					function _ftpActions (_site,_actions) {
 						_ftp ([
-							'open ' + _siteInfo.domain,
-							_siteInfo.user,
-							_siteInfo.password,
+							'open ' + _site.domain,
+							_site.user,
+							_site.password,
 							_actions.join ('\r\n'),
 							'quit'
 						]);
@@ -82,17 +82,17 @@ Uize.module ({
 						_fileSystem.deleteFile ({path:_sshCommandsPath});
 					}
 
-					function _sshActions (_siteInfo,_actions) {
+					function _sshActions (_site,_actions) {
 						_ssh ([
 							'# $language = "JScript"',
 							'# $interface = "1.0"',
 							'',
 							'crt.Session.Connect(\'/SSH2 ' +
-								'/L ' + _siteInfo.user + ' ' +
-								'/PASSWORD ' + _siteInfo.password + ' ' +
+								'/L ' + _site.user + ' ' +
+								'/PASSWORD ' + _site.password + ' ' +
 								'/C 3DES ' +
 								'/M MD5 ' +
-								_siteInfo.domain +
+								_site.domain +
 							'\');',
 							Uize.Array.Join.hugJoin (_actions,'crt.Screen.Send(\'','\\n\');'),
 							'crt.Screen.Send(\'exit\\n\');',
