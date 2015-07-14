@@ -163,6 +163,52 @@ Uize.module ({
 							],
 							['engineering','finance']
 						]
+					]],
+					['Uize.Data.Util.sortKeys',[
+						['When an empty source object is specified, an empty object is returned',
+							{},
+							{}
+						],
+						{
+							title:'The returned object is a fresh object and is not a reference to the source object',
+							test:function () {
+								var _sourceObject = {foo:'bar',baz:'qux'};
+								return this.expectNotSameAs (_sourceObject,Uize.Data.Util.sortKeys (_sourceObject));
+							}
+						},
+						{
+							title:'The source object is not modified',
+							test:function () {
+								var
+									_sourceObject = {hello:'world',foo:'bar',baz:'qux'},
+									_result = Uize.Data.Util.sortKeys (_sourceObject)
+								;
+								return this.expect (['hello','foo','baz'],Uize.keys (_sourceObject));
+							}
+						},
+						{
+							title:'When no custom comparator function is specified, the keys in the returned object are sorted using the default comparator function',
+							test:function () {
+								return this.expect (
+									['baz','foo','hello'],
+									Uize.keys (Uize.Data.Util.sortKeys ({hello:'world',foo:'bar',baz:'qux'}))
+								);
+							}
+						},
+						{
+							title:'When a custom comparator function is specified, then the keys in the returned object are sorted using the specified comparator function',
+							test:function () {
+								return this.expect (
+									['file1','file2','file15','file25'],
+									Uize.keys (
+										Uize.Data.Util.sortKeys (
+											{file25:'foo.txt',file15:'bar.txt',file2:'baz.txt',file1:'qux.txt'},
+											function (a,b) {return a.match (/\d+/) [0] - b.match (/\d+/) [0]}
+										)
+									)
+								);
+							}
+						}
 					]]
 				])
 			]

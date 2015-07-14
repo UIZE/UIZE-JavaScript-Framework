@@ -30,7 +30,7 @@ Uize.module ({
 
 		var
 			/*** Variables for Scruncher Optimization ***/
-				_Uize_Data = Uize.Data
+				_filter
 		;
 
 		return Uize.package ({
@@ -180,7 +180,7 @@ Uize.module ({
 				*/
 			},
 
-			filter:function (_object,_propertyNames) {
+			filter:_filter = function (_object,_propertyNames) {
 				var _result = {};
 				if (_object && _propertyNames) {
 					for (
@@ -200,9 +200,9 @@ Uize.module ({
 							Returns an object with only the properties of the source object that are specified by an array of property names.
 
 							SYNTAX
-							.........................................................................
-							filteredOBJ = Uize.Data.Util.filter (sourceObjectOBJ,propertyNamesARRAY);
-							.........................................................................
+							...................................................................
+							filteredOBJ = Uize.Data.Util.filter (sourceOBJ,propertyNamesARRAY);
+							...................................................................
 
 							This method can be useful when receiving an info package of which only a subset needs to be stored or passed on to a subsequent process.
 
@@ -237,6 +237,98 @@ Uize.module ({
 								}
 							);
 							.................................
+				*/
+			},
+
+			sortKeys:function (_object,_sortFunction) {
+				var _keys = Uize.keys (_object);
+				return _filter (_object,_sortFunction ? _keys.sort (_sortFunction) : _keys.sort ());
+				/*?
+					Static Methods
+						Uize.Data.Util.sortKeys
+							Returns an object that is a copy of the specified source object, but with keys that are sorted.
+
+							DIFFERENT USAGES
+
+							`Create a Sorted Keys Copy of an Object, Using the Default Comparator Function`
+							....................................................
+							sortedKeysOBJ = Uize.Data.Util.sortKeys (sourceOBJ);
+							....................................................
+
+							`Create a Sorted Keys Copy of an Object, Specifying a Custom Comparator Function`
+							...................................................................
+							sortedKeysOBJ = Uize.Data.Util.sortKeys (sourceOBJ,comparatorFUNC);
+							...................................................................
+
+							Create a Sorted Keys Copy of an Object, Using the Default Comparator Function
+								In the simplest use case, a copy of a source object but with sorted keys can be created by specifying the source object as the single argument.
+
+								SYNTAX
+								....................................................
+								sortedKeysOBJ = Uize.Data.Util.sortKeys (sourceOBJ);
+								....................................................
+
+								With this usage, the default comparator function will be used for sorting the keys. Consider the following example...
+
+								EXAMPLE
+								..........................
+								Uize.Data.Util.sortKeys ({
+									hello:'world',
+									foo:'bar',
+									baz:'qux'
+								});
+								..........................
+
+								With the above example, the following result would be produced...
+
+								RESULT
+								................
+								{
+									baz:'qux',
+									foo:'bar',
+									hello:'world'
+								}
+								................
+
+							Create a Sorted Keys Copy of an Object, Specifying a Custom Comparator Function
+								When the default comparator function is not suitable, a custom comparator function can be specified using the optional second argument.
+
+								SYNTAX
+								...................................................................
+								sortedKeysOBJ = Uize.Data.Util.sortKeys (sourceOBJ,comparatorFUNC);
+								...................................................................
+
+								The comparator function that is specified should follow the rules for a comparator function supplied to JavaScript's built-in =sort= instance method of the =Array= object. Consider the following example...
+
+								EXAMPLE
+								....................................................................
+								Uize.Data.Util.sortKeys (
+									{
+										file25:'foo.txt',
+										file15:'bar.txt',
+										file2:'baz.txt',
+										file1:'qux.txt'
+									},
+									function (a,b) {return a.match (/\d+/) [0] - b.match (/\d+/) [0]}
+								);
+								....................................................................
+
+								In the above example, the keys for the properties of the specified source object contain numerical suffixes. If we relied simply on the default comparator function, we would get a resulting object with ASCIIbetically sorted keys in the order "file1", "file15", "file2", "file25".
+
+								Since we want the keys to be sorted by the value of the numerical suffix, we specify a custom comparator function that performs a regular expression match on the keys in order to obtain the numerical portion and then compare those in an expression that produces a numerical result by coercing the numerical portions to numbers.
+
+								Using the custom comparator, this following result would be produced...
+
+								RESULT
+								....................
+								{
+									file1:'qux.txt',
+									file2:'baz.txt',
+									file15:'bar.txt',
+									file25:'foo.txt'
+								}
+								....................
+
 				*/
 			}
 		});
