@@ -31,6 +31,7 @@ Uize.module ({
 		'Uize.Data.Flatten',
 		'Uize.Data.Matches',
 		'Uize.Data.Mappings',
+		'Uize.Data.Util',
 		'Uize.Array.Dupes',
 		'Uize.Array.Util',
 		'Uize.Data.Csv',
@@ -323,7 +324,7 @@ Uize.module ({
 			function _writeLanguageResourcesFile (m,_language,_languageResources) {
 				_fileSystem.writeFile ({
 					path:_languageResourcesFilePath (m,_language),
-					contents:Uize.Json.to (_languageResources)
+					contents:Uize.Json.to (Uize.Data.Util.sortKeys (_languageResources))
 				});
 			}
 
