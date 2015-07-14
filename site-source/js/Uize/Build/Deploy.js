@@ -45,6 +45,7 @@ Uize.module ({
 					_fileSystem = Uize.Services.FileSystem.singleton (),
 					_deployConfig = Uize.Json.from (_fileSystem.readFile ({path:_params.deployConfigPath})),
 					_site = _deployConfig.site,
+					_siteRootFolder = _site.rootFolder || '',
 					_builtPath = _params.builtPath,
 					_tempPath = _params.tempPath,
 					_builtZipFilename = 'built.zip',
@@ -113,8 +114,9 @@ Uize.module ({
 						_ftpActions (
 							_site,
 							[
+								_siteRootFolder ? 'mkdir ' + _siteRootFolder : '',
 								'binary',
-								'put ' + _tempPath + '/' + _builtZipFilename + ' ' + _builtZipFilename
+								'put ' + _tempPath + '/' + _builtZipFilename + ' ' + _siteRootFolder + (_siteRootFolder && '/') + _builtZipFilename
 							]
 						);
 
@@ -122,12 +124,13 @@ Uize.module ({
 						_sshActions (
 							_site,
 							[
+								'cd ' + (_siteRootFolder || '.'),
 								'unzip --L ' + _builtZipFilename,
 								'rm ' + _builtZipFilename,
 								'rm *.* .htaccess',
 								'rm -r ' + _fileSystem.getFolders ({path:_builtPath}).join (' '),
-								'mv ' + _builtPath + '/* ~',
-								'mv ' + _builtPath + '/.htaccess ~/.htaccess',
+								'mv ' + _builtPath + '/* ~' + (_siteRootFolder && '/') + _siteRootFolder,
+								'mv ' + _builtPath + '/.htaccess ~' + (_siteRootFolder && '/') + _siteRootFolder + '/.htaccess',
 								'rm -rf ' + _builtPath
 							]
 						);
