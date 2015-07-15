@@ -55,19 +55,18 @@ Uize.module ({
 					mCssBindings_rootNodeClasses:{
 						derived:_cachedRootNodeClassesDerivations [_cachedDerivationKey] ||
 						(
-							_cachedRootNodeClassesDerivations [_cachedDerivationKey] = Function.apply (
-								0,
-								_bindingProperties.concat (
-									'extraClasses',
+							_cachedRootNodeClassesDerivations [_cachedDerivationKey] = {
+								properties:_bindingProperties.concat ('extraClasses'),
+								derivation:Function (
 									'var ' +
-										'm=this,c=m.Class,b=c.' + _mCssBindings_bindings +
+										'm=this,a=arguments,c=m.Class,b=c.' + _mCssBindings_bindings +
 										Uize.map (
 											_bindingProperties,
 											function (_property,_propertyNo) {
-												return ',p' + _propertyNo + '=b[\'' + _property + '\'](m.get(\'' + _property + '\')),c' + _propertyNo + '=p' + _propertyNo + '&&m.cssClass(p' + _propertyNo + ')';
+												return ',p' + _propertyNo + '=b[\'' + _property + '\'](a[' + _propertyNo + ']),c' + _propertyNo + '=p' + _propertyNo + '&&m.cssClass(p' + _propertyNo + ')';
 											}
 										).join ('') +
-										',e=m.extraClasses' +
+										',e=a[' + _bindingProperties.length + ']' +
 									';' +
 									'return ' +
 										'm.cssClass(\'\')' +
@@ -80,7 +79,7 @@ Uize.module ({
 										'+(e?\' \'+e:\'\')' +
 									';'
 								)
-							)
+							}
 						)
 					}
 				});
