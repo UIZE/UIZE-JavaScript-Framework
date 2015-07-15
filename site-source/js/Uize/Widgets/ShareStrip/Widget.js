@@ -51,6 +51,19 @@ Uize.module ({
 				shareViaLinkedIn:{widgetClass:Uize.Widgets.Buttons.Share.LinkedIn.Widget},
 				shareViaGoogleBookmarks:{widgetClass:Uize.Widgets.Buttons.Share.GoogleBookmarks.Widget},
 				shareViaEmail:{widgetClass:Uize.Widgets.Buttons.Share.Email.Widget},
+			},
+
+			stateProperties:{
+				comprehensive:{
+					value:true
+				}
+			},
+
+			htmlBindings:{
+				comprehensive:[
+					'shareViaLinkedIn:show',
+					'shareViaGoogleBookmarks:show'
+				]
 			}
 		});
 	}

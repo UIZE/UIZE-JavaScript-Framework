@@ -2,3 +2,7 @@
 	display: inline-block;
 	white-space: nowrap;
 }
+
+.`button` {
+	display: inline-block;
+}
