@@ -1,0 +1,21 @@
+This is a TO DO document for the =Uize.Oop.mTreeInheritamce= module.
+
+Improve Mechanism
+	The mechanism for tree-inherited state properties should be improved to produce concomitant updates to the value of the resolved / inherited state property of an instance when the master state properties are updated.
+
+	For, for example, when the value of the =size= inherited state property of a widget instance is updated, the value of the =sizeInherited= state property should be resolved and updated as part of the same =set= call. This can be achieved by making the =sizeInherited= property a derived property, as follows...
+
+	............................................................................
+	sizeInherited:{
+		derived:'size, sizeFromParent: size == "inherit" ? sizeFromParent : size'
+	}
+	............................................................................
+
+	With this approach, a new from-parent state property would be created for each tree-inherited property. Updates to the value of the resolved / inherited state property of an instance would be propagated to the from-parent properties of all the instance's children.
+
+	So, for example, with the =size= tree-inherited state property, the following properties would exist...
+
+	- =size=
+	- =sizeInherited=
+	- =sizeFromParent=
+
