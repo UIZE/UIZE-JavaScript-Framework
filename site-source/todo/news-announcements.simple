@@ -108,12 +108,12 @@ NEW MODULE: Uize.Math.LogicalPos
 	- write documentation
 	- write news announcement
 
-NEW MODULE: Uize.Oop.mTreeInheritance
+NEW MODULE: Uize.Class.mTreeInheritance
 	Still to do...
 
 	- write unit tests
 	- write documentation
-	- update documentation in Uize.Widget class to refer to reference for =Uize.Oop.mTreeInheritance= module
+	- update documentation in Uize.Widget class to refer to reference for =Uize.Class.mTreeInheritance= module
 	- write news announcement
 
 NEW METHOD: Uize.Array.Util.sum

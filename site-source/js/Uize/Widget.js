@@ -33,7 +33,7 @@ Uize.module ({
 	superclass:'Uize.Class',
 	required:[
 		'Uize.Dom.Basics',
-		'Uize.Oop.mTreeInheritance'
+		'Uize.Class.mTreeInheritance'
 	],
 	builder:function (_superclass) {
 		'use strict';
@@ -149,7 +149,7 @@ Uize.module ({
 			}
 
 		return _superclass.subclass ({
-			mixins:_Uize.Oop.mTreeInheritance,
+			mixins:_Uize.Class.mTreeInheritance,
 
 			alphastructor:function (_properties) {
 				var m = this;

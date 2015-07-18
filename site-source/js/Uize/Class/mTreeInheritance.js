@@ -1,7 +1,7 @@
 /*______________
 |       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
 |     /      /  |   ---------------------------------------------------
-|    /    O /   |    MODULE : Uize.Oop.mTreeInheritance Mixin
+|    /    O /   |    MODULE : Uize.Class.mTreeInheritance Mixin
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
 | /____/ /__/_| | COPYRIGHT : (c)2005-2015 UIZE
@@ -18,13 +18,13 @@
 
 /*?
 	Introduction
-		The =Uize.Oop.mTreeInheritance= module is a mixin module that provides an implementation for tree inheritance features that can be mixed in to classes.
+		The =Uize.Class.mTreeInheritance= module is a mixin module that provides an implementation for tree inheritance features that can be mixed in to classes.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 */
 
 Uize.module ({
-	name:'Uize.Oop.mTreeInheritance',
+	name:'Uize.Class.mTreeInheritance',
 	builder:function () {
 		'use strict';
 
