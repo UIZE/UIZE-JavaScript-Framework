@@ -196,7 +196,7 @@ Uize.module ({
 									NOTES
 									- the =children= object is read-only - its contents should not be directly modified
 									- see also the special `children state property`
-									- see also the related =addedChildren= and =parent= instance properties
+									- see also the related =addedChildren= instance property and the =parent= state property
 						*/
 
 					m.addedChildren = m._addedChildren = _Uize.Class ();
@@ -1469,17 +1469,6 @@ Uize.module ({
 										- a state property matching the child widget name is marked as *met* in the =addedChildren= instance property
 										- the value of the =childWidgetNameSTR= can be =null= or =undefined= if a value is specified for the =name= property in the =childWidgetPropertiesOBJ= parameter
 										- see also the =removeChild= instance method, and the `children instance property`
-
-								Instance Properties
-									parent
-										A read-only reference to the instance's parent, if the instance has been added as a child widget of another widget by calling the =addChild= instance method on that other widget.
-
-										The value of this property is set for an instance when the instance is added as a child widget of another widget instance. The value is read-only and is not intended to be set directly, but will be modified if the instance is removed from its parent by calling the =removeChild= instance method on the parent widget.
-
-										NOTES
-										- this property is read-only
-										- the initial value is =undefined=
-										- see also the related `children instance property`
 							*/
 						},
 
@@ -1636,7 +1625,7 @@ Uize.module ({
 							;
 							if (_child) {
 								_child.unwireUi ();
-								delete _child.parent;
+								_child.set ({parent:_undefined});
 								delete _children [_childName];
 								m._addedChildren.unmet (_childName);
 							}
@@ -1963,7 +1952,7 @@ Uize.module ({
 
 								NOTES
 								- see also the companion `children instance property`
-								- see also the related =parent= instance property
+								- see also the related =parent= state property
 					*/
 				},
 				_container:'container',
@@ -2211,6 +2200,19 @@ Uize.module ({
 								NOTES
 								- see also the =wired= state property
 					*/
+				},
+
+				parent:{
+					/*?
+						State Properties
+							parent
+								A reference to the instance's parent, if the instance has been added as a child widget of another widget by calling the =addChild= instance method on that other widget.
+
+								The value of this property is set for an instance when the instance is added as a child widget of another widget instance. The value is not intended to be set directly, but will be modified if the instance is removed from its parent by calling the =removeChild= instance method on the parent widget.
+
+								NOTES
+								- the initial value is =undefined=
+								- see also the related `children instance property`
 				}
 			},
 
