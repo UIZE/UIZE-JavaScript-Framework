@@ -44,35 +44,37 @@ Uize.module ({
 							var
 								_propertyPublicName = _propertyProfile.name || _propertyPrivateName,
 								_propertyInheritedName = _propertyPublicName + 'Inherited',
+								_propertyParentTickleName = _propertyPublicName + 'ParentTickle',
 								_defaultValue = _propertyProfile.value
 							;
-							function _checkInherited () {
-								var
-									m = this,
-									_value = m [_propertyPrivateName]
-								;
-								if (_value == 'inherit' || _value === _undefined)
-									_value = m.parent ? m.parent [_propertyInheritedName] : _defaultValue
-								;
-								if (_value === _undefined)
-									_value = _defaultValue
-								;
-								if (_value != m [_propertyInheritedName])
-									m.set (_propertyInheritedName,_value)
-								;
-							}
 							_class.stateProperties (
 								_Uize.pairUp (
-									_propertyPrivateName,
-									{
+									_propertyPrivateName,{
 										name:_propertyPublicName,
-										onChange:_checkInherited,
 										value:'inherit'
 									},
-									_propertyInheritedName,
-									{
-										onChange:function () {_Uize.callOn (this.children,_checkInherited)},
-										value:_defaultValue
+									_propertyParentTickleName,{
+										value:false
+									},
+									_propertyInheritedName,{
+										derived:{
+											properties:[_propertyPublicName,'parent',_propertyParentTickleName],
+											derivation:function (_propertyValue,_parent) {
+												return (
+													_propertyValue !== _undefined && _propertyValue != 'inherit'
+														? _propertyValue
+														: _parent
+															? _parent [_propertyInheritedName]
+															: _defaultValue
+												);
+											}
+										},
+										onChange:function () {
+											_Uize.forEach (
+												this.children,
+												function (_child) {_child.toggle (_propertyParentTickleName)}
+											);
+										},
 									}
 								)
 							);
