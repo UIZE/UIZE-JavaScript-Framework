@@ -2213,6 +2213,7 @@ Uize.module ({
 								NOTES
 								- the initial value is =undefined=
 								- see also the related `children instance property`
+					*/
 				}
 			},
 
