@@ -258,6 +258,13 @@ Improvements to Property Mechanism
 			- regular expression
 			- array of valid values
 
+			General ideas / principles for validators...
+
+			- a validator is a test
+			- a validator may run asynchronously
+			- a validator may compose other validators
+			- if a validation fails, there can be a summuary, and arbitrary details specific to the validation
+
 	- support for read-only properties (how would that work, exactly? Only settable through private name?)
 
 	- problem: there's currently no way to use the set method to set the value for a state property to undefined. This is lame. The original reason for this had to do with the optimizing performance for the very first set during construction. This behavior is beneficial for state properties that have no initial value (what percentage of the overall is that?).
