@@ -60,13 +60,11 @@ Uize.module ({
 										derived:{
 											properties:[_propertyPublicName,'parent',_propertyParentTickleName],
 											derivation:function (_propertyValue,_parent) {
-												return (
-													_propertyValue !== _undefined && _propertyValue != 'inherit'
-														? _propertyValue
-														: _parent
-															? _parent [_propertyInheritedName]
-															: _defaultValue
-												);
+												var _inheritedValue = _propertyValue !== _undefined && _propertyValue != 'inherit'
+													? _propertyValue
+													: _parent && _parent [_propertyInheritedName]
+												;
+												return _inheritedValue !== _undefined ? _inheritedValue : _defaultValue;
 											}
 										},
 										onChange:function () {
