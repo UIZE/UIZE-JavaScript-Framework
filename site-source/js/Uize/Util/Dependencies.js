@@ -57,7 +57,7 @@ Uize.module ({
 				;
 				function _traceDependencies (_dependencies) {
 					Uize.forEach (
-						_dependencies.sort (),
+						_dependencies.concat ().sort (),
 						function (_dependency) {
 							if (_excludeDependenciesLookup [_dependency] != _trueFlagValue) {
 								_excludeDependenciesLookup [_dependency] = _trueFlagValue;
