@@ -278,6 +278,23 @@ Uize.module ({
 											this.expect ('barbar',_actualPropertiesBeingSet.bar)
 										);
 									}
+								},
+								{
+									title:
+										'If the value "inherit" is specified for the tree-inherited property, and if the instance\'s parent doesn\'t support the tree-inherited property, then the inherited value for the instance will be the default value defined for the tree-inherited property',
+									test:function () {
+										var
+											_TestClass = _getTestClassWithTreeInheritedStateProperties ({
+												foo:{value:'default'}
+											}),
+											_ParentTestClass = _getTestClassWithTreeInheritedStateProperties (),
+											_testInstance = _TestClass (),
+											_testInstanceParent = _ParentTestClass ()
+										;
+										_testInstanceParent.addChild ('child',_testInstance);
+
+										return this.expect ('default',_testInstance.get ('fooInherited'));
+									}
 								}
 							]
 						}
@@ -289,32 +306,158 @@ Uize.module ({
 						{
 							title:'INSTANCE METHOD TEST: getProvider',
 							test:[
-								/*
-									'The instance property getProvider is a function',
-								*/
+								{
+									title:'The instance property getProvider is a function',
+									test:function () {
+										return this.expectFunction (_getTestClass () ().getProvider);
+									}
+								},
+								{
+									title:
+										'When the instance has no parent and does not itself provide the specified property, then the value undefined is returned',
+									test:function () {
+										var
+											_TestClass = _getTestClass (),
+											_instance = _TestClass ()
+										;
+										return this.expectSameAs (undefined,_instance.getProvider ('foo'));
+									}
+								},
+								{
+									title:
+										'When the instance has no parent and has the value "inherit" set for the state property, then the value undefined is returned',
+									test:function () {
+										var
+											_TestClass = _getTestClass ().declare ({stateProperties:{foo:{}}}),
+											_instance = _TestClass ({value:'inherit'})
+										;
+										return this.expectSameAs (undefined,_instance.getProvider ('foo'));
+									}
+								},
+								{
+									title:
+										'When the instance has no parent and has the value undefined set for the state property, then the value undefined is returned',
+									test:function () {
+										var
+											_TestClass = _getTestClass ().declare ({stateProperties:{foo:{}}}),
+											_instance = _TestClass ({value:undefined})
+										;
+										return this.expectSameAs (undefined,_instance.getProvider ('foo'));
+									}
+								},
+								{
+									title:
+										'When a value other than "inherit" or undefined is specified for the state property of the instance, then the instance is returned, even if it has a parent that also provides a value other than "inherit" or undefined for the state property',
+									test:function () {
+										var
+											_TestClass = _getTestClass ().declare ({stateProperties:{foo:{}}}),
+											_instance = _TestClass ({foo:'bar'}),
+											_instanceParent = _TestClass ({foo:'baz'})
+										;
+										_instanceParent.addChild ('child',_instance);
+
+										return this.expectSameAs (_instance,_instance.getProvider ('foo'));
+									}
+								},
+								{
+									title:
+										'When the instance does not have the state property, or has the value "inherit" or undefined set for the state property, but some parents in the parent chain provide the property, then the first parent in the parent chain that provides a value other than "inherit" or undefined will be returned',
+									test:function () {
+										var
+											_TestClass = _getTestClass ().declare ({stateProperties:{foo:{}}}),
+											_TestClassWithProperty = _getTestClass ().declare ({stateProperties:{foo:{}}}),
+											_instance1 = _getTestClass () (),
+											_instance2 = _TestClass ({foo:undefined}),
+											_instance3 = _TestClass ({foo:'inherit'}),
+											_instancesParent = _TestClassWithProperty (),
+											_instancesGrandparent = _TestClassWithProperty ({foo:'inherit'}),
+											_instancesGreatGrandparent = _TestClassWithProperty ({foo:'bar'}),
+											_instancesGreatGreatGrandparent = _TestClassWithProperty ({foo:'baz'})
+										;
+										_instancesGreatGreatGrandparent.addChild ('child',_instancesGreatGrandparent);
+										_instancesGreatGrandparent.addChild ('child',_instancesGrandparent);
+										_instancesGrandparent.addChild ('child',_instancesParent);
+										_instancesParent.addChild ('child1',_instance1);
+										_instancesParent.addChild ('child2',_instance2);
+										_instancesParent.addChild ('child3',_instance3);
+
+										return (
+											this.expectSameAs (_instancesGreatGrandparent,_instance1.getProvider ('foo')) &&
+											this.expectSameAs (_instancesGreatGrandparent,_instance2.getProvider ('foo')) &&
+											this.expectSameAs (_instancesGreatGrandparent,_instance3.getProvider ('foo'))
+										);
+									}
+								},
+								{
+									title:
+										'When the instance does not have the state property, or has the value "inherit" or undefined set for the state property, and no parents in the parent chain provide the property, then the value undefined is returned',
+									test:function () {
+										var
+											_TestClass = _getTestClass ().declare ({stateProperties:{foo:{}}}),
+											_TestClassWithProperty = _getTestClass ().declare ({stateProperties:{foo:{}}}),
+											_instance1 = _getTestClass () (),
+											_instance2 = _TestClass ({foo:undefined}),
+											_instance3 = _TestClass ({foo:'inherit'}),
+											_instancesParent = _TestClassWithProperty (),
+											_instancesGrandparent = _TestClassWithProperty ({foo:'inherit'}),
+											_instancesGreatGrandparent = _TestClassWithProperty ({foo:undefined}),
+											_instancesGreatGreatGrandparent = _TestClassWithProperty ({foo:'inherit'})
+										;
+										_instancesGreatGreatGrandparent.addChild ('child',_instancesGreatGrandparent);
+										_instancesGreatGrandparent.addChild ('child',_instancesGrandparent);
+										_instancesGrandparent.addChild ('child',_instancesParent);
+										_instancesParent.addChild ('child1',_instance1);
+										_instancesParent.addChild ('child2',_instance2);
+										_instancesParent.addChild ('child3',_instance3);
+
+										return (
+											this.expect (undefined,_instance1.getProvider ('foo')) &&
+											this.expect (undefined,_instance2.getProvider ('foo')) &&
+											this.expect (undefined,_instance3.getProvider ('foo'))
+										);
+									}
+								}
 							]
 						},
 						{
 							title:'INSTANCE METHOD TEST: getInherited',
 							test:[
+								{
+									title:'The instance property getInherited is a function',
+									test:function () {
+										return this.expectFunction (_getTestClass () ().getInherited);
+									}
+								}
 								/*
-									'The instance property getInherited is a function',
+
 								*/
 							]
 						},
 						{
 							title:'INSTANCE METHOD TEST: setInherited',
 							test:[
+								{
+									title:'The instance property setInherited is a function',
+									test:function () {
+										return this.expectFunction (_getTestClass () ().setInherited);
+									}
+								}
 								/*
-									'The instance property setInherited is a function',
+
 								*/
 							]
 						},
 						{
 							title:'INSTANCE METHOD TEST: callInherited',
 							test:[
+								{
+									title:'The instance property callInherited is a function',
+									test:function () {
+										return this.expectFunction (_getTestClass () ().callInherited);
+									}
+								}
 								/*
-									'The instance property callInherited is a function',
+
 								*/
 							]
 						}
