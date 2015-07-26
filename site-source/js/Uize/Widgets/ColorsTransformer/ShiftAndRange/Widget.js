@@ -117,7 +117,7 @@ Uize.module ({
 				sliderTrackLength:[
 					'->shiftSlider.trackLength',
 					'->rangeSlider.trackLength'
-				],
+				]
 			},
 
 			htmlBindings:{
