@@ -8,6 +8,10 @@
 	padding-right: 0;
 }
 
+.`body` table {
+	width: 100%;
+}
+
 .`topRightButton` {
 	position: absolute;
 	right: 2px;
