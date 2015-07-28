@@ -37,13 +37,13 @@ Other Possibles
 
 Semantics for Test vs Make Tester
 	Test
-		................................................................................
-		Uize.Is.inRange (0,100,value)
-		................................................................................
+		.............................
+		Uize.Is.inRange (value,0,100)
+		.............................
 
 	Make Tester
 		................................................................................
-		function (value) {return Uize.Is.inRange (0,100,value)}
+		function (value) {return Uize.Is.inRange (value,0,100)}
 
 		Uize.Is.inRange.fn (0,100)
 		Uize.Is.inRange.tester (0,100)
@@ -59,13 +59,64 @@ Semantics for Test vs Make Tester
 		Uize.Is.inRange._(0,100)
 		Uize.Is.inRange ['...'] (0,100)
 		Uize.Is.inRange ['?'] (0,100)
+		Uize.Is.inRange.x (0,100)
 		................................................................................
 
 	More Thoughts on Make Tester
 		................................................................................
-		Uize.Is.instanceOf (Uize.Widget.FormElement,myInstance)
+		Uize.Is.instanceOf (myInstance,Uize.Widget.FormElement)
 		Uize.Is.instanceOf (Uize.Widget.FormElement) (myInstance)
 		Uize.Is.instanceOf.tester (Uize.Widget.FormElement)
 		................................................................................
 
+Migration of Uize.Test Expectations
+	MAPPINGS
+	....................................................
+	expectNotIdentical     -->  Uize.Is.notIdenticalTo
+	expectSameAs           -->  Uize.Is.sameAs
+	expectNotSameAs        -->  Uize.Is.notSameAs
+	expectNonNull          -->  Uize.Is.nonNull
+	expectNully            -->  Uize.Is.nully
+	expectInstanceOf       -->  Uize.Is.anInstanceOf
+	expectType             -->  Uize.Is.ofType
+	expectArray            -->  Uize.Is.anArray
+	expectBoolean          -->  Uize.Is.aBoolean
+	expectFunction         -->  Uize.Is.aFunction
+	expectNumber           -->  Uize.Is.aNumber
+	expectObject           -->  Uize.Is.anObject
+	expectRegExp           -->  Uize.Is.aRegExp
+	expectString           -->  Uize.Is.aString
+	expectArrayLike        -->  Uize.Is.arrayLike
+	expectInRange          -->  Uize.Is.inRange
+	expectNumberInRange    -->  Uize.Is.aNumberInRange
+	expectLengthInRange    -->  Uize.Is.itsLengthInRange
+	expectEmpty            -->  Uize.Is.empty
+	expectNonEmpty         -->  Uize.Is.nonEmpty
+	expectInteger          -->  Uize.Is.anInteger
+	expectIntegerInRange   -->  Uize.Is.anIntegerInRange
+	expectNegativeInteger  -->  Uize.Is.aNegativeInteger
+	expectPositiveInteger  -->  Uize.Is.aPositiveInteger
+	expectNoRepeats        -->  Uize.Is.nonRepeating
+	expectEmptyArray       -->  Uize.Is.anEmptyArray
+	expectNonEmptyArray    -->  Uize.Is.aNonEmptyArray
+	expectEmptyObject      -->  Uize.Is.anEmptyObject
+	expectNonEmptyObject   -->  Uize.Is.aNonEmptyObject
+	expectEmptyString      -->  Uize.Is.anEmptyString
+	expectNonEmptyString   -->  Uize.Is.aNonEmptyString
+	....................................................
+
+	EXAMPLE USAGE
+	............................................................
+	var
+		is = Uize.Is,
+		aNumberOrString = is.anyOf (is.aNumber,is.aString)
+	;
+
+	var _test = Uize.Test.resolve ({
+		title:'Foo.bar is not a number or a string',
+		test:function () {
+			return this.expect (is.not (aNumberOrString),Foo.bar);
+		}
+	})
+	............................................................
 
