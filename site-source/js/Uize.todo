@@ -310,7 +310,7 @@ Uize.fox
 	Adds an =x= property to a function to allow "function of x" value transformers to be easily manufactured from the function with specific values for the function's non-x arguments.
 
 	IMPLEMENTATION
-	..................................................................................
+	...........................................................................................
 	Uize.wrap = function (_function) {
 		return function () {return _function.apply (this,arguments)};
 	};
@@ -319,11 +319,17 @@ Uize.fox
 		var _foxifiedFunc = _wrapOriginal ? Uize.wrap (_function) : _function;
 		_foxifiedFunc.x = function () {
 			var _arguments = Uize.copyList (arguments);
-			return function (x) {return _function.apply (this,[x].concat (_arguments))};
+			return Uize.copyInto (
+				function (x) {return _function.apply (this,[x].concat (_arguments))},
+				{
+					arguments:_arguments,
+					getDisplayName:function () {return _foxifiedFunc.displayName || _function.name}
+				}
+			);
 		};
 		return _foxifiedFunc;
 	};
-	..................................................................................
+	...........................................................................................
 
 	Example 1
 		DEFINE
@@ -366,6 +372,14 @@ Uize.fox
 		Uize.isNumber = Uize.isType.x ('number');
 		Uize.isString = Uize.isType.x ('string');
 		.........................................
+
+	Usage Examples
+		.............................................
+		function (x) {return Uize.Json.to (x,'mini')}
+		(x) => {Uize.Json.to (x,'mini')}
+		x => Uize.Json.to (x,'mini')
+		Uize.Json.to.x ('mini')
+		.............................................
 
 Uize.willCall
 	Lets you conveniently create a function / method caller, where you can specify context, function, and arguments.
