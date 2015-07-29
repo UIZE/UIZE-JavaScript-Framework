@@ -32,7 +32,11 @@ Uize.module ({
 		return Uize.Util.RegExpComposition ({
 			// https://en.wikipedia.org/wiki/Printf_format_string#Format_placeholder_specification
 			parameter:/\d+\$/,
-			flags:/[\+ \-#0]{0,5}/, // this isn't robust, since it shouldn't be possible to have 5 of the same flag
+			flags:/[\+ \-#0]{0,5}/,
+				/* NOTES
+					- this isn't robust, since it shouldn't be possible to have 5 of the same flag
+					- some flags are only applicable for numeric types, so the string "above 5% and" does not have the placeholder "% a" since this is not a valid placeholder
+				*/
 			width:/-?\d+/,
 			precision:/\d+/,
 			length:/hh?|ll?|[Lzjt]/,
