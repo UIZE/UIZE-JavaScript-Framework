@@ -120,3 +120,31 @@ Migration of Uize.Test Expectations
 	})
 	............................................................
 
+- when a test fails, it should be possible to obtain a summary of where it failed
+	- what is the implication of this for composition of tests?
+	- how can one support this capability while still making simple matcher type tests performant?
+
+
+Summarizing Test Compositions
+	The =summarize= method would attempt to serialize any function type arguments using a summarize method, if present on the functions.
+
+	COMPOSITION
+	............................................
+	is.anyOf (is.aNumber,is.aString,is.aBoolean)
+	............................................
+
+	SUMMARY
+	..............................................................................
+	Uize.Is.anyOf (x,Uize.Is.aNumber (x),Uize.Is.aString (x),Uize.Is.aBoolean (x))
+	..............................................................................
+
+	COMPOSITION
+	.......................................................
+	is.allOf (is.anObject,is.hasProperties (['foo','bar']))
+	.......................................................
+
+	SUMMARY
+	............................................................................
+	Uize.Is.allOf (x,Uize.Is.anObject (x),Uize.Is.hasProperties (x,'foo','bar'))
+	............................................................................
+
