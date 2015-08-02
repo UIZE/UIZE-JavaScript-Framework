@@ -24,8 +24,8 @@
 
 .`topRightButton` {
 	position: absolute;
-	right: 2px;
-	top: 2px;
+	right: 0;
+	top: 0;
 }
 
 .`body` {
