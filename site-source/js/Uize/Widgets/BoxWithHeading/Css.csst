@@ -16,12 +16,37 @@
 
 .`heading` {
 	font-weight: bold;
-	padding: 4px 5px 8px 5px;
+	box-sizing: border-box;
 	background: <%= _cssUtil.chrome.bgColor %>;
 }
 
 .`body` {
 	background: #fff;
-	padding: 8px;
 }
+
+/*** styling for different sizes ***/
+<%
+	Uize.forEach (
+		_cssUtil.sizes,
+		function (_size,_sizeName) {
+			var
+				_sizeFont = _size.font,
+				_sizeOuter = _size.outer,
+				_paddingLeft = 2 + _size.sizeNo * 2,
+				_paddingTop = Math.floor ((_sizeOuter - _sizeFont) / 2)
+			;
+%>	/*** <%= _sizeName %> ***/
+		.`<%= _sizeName %>` .`body` {
+			font-size: <%= _sizeFont %>px;
+			padding: <%= _paddingLeft %>px;
+		}
+		.`<%= _sizeName %>` .`heading` {
+			font-size: <%= _sizeFont %>px;
+			line-height: <%= _sizeFont %>px;
+			padding: <%= _paddingTop %>px 0 <%= _sizeOuter - _sizeFont - _paddingTop %>px <%= _paddingLeft %>px;
+			min-height: <%= _sizeOuter %>px;
+		}
+<%		}
+	);
+%>
 
