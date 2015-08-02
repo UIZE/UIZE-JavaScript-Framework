@@ -1,11 +1,10 @@
+<%@ required ('Uize.Widgets.CssUtil'); %>
+<%
+	var _cssUtil = Uize.Widgets.CssUtil;
+%>
 .`heading` {
 	position: relative;
 	height: 17px;
-}
-
-.`body` {
-	padding-left: 0;
-	padding-right: 0;
 }
 
 .`body` table {
@@ -14,18 +13,13 @@
 
 .`topRightButton` {
 	position: absolute;
-	right: 2px;
-	top: 2px;
+	right: 0;
+	top: 0;
 }
 
 .`sliderLabel` {
 	text-align: center;
-	font-size: 12px;
 	text-transform: uppercase;
-}
-
-.`sliderValueLabel` {
-	font-size: 11px;
 }
 
 .`sliderMinValue` {
@@ -35,4 +29,20 @@
 .`sliderMaxValue` {
 	text-align: right;
 }
+
+/*** styling for different sizes ***/
+<%
+	Uize.forEach (
+		_cssUtil.sizes,
+		function (_size,_sizeName) {
+			var
+				_sizeFont = _size.font
+			;
+%>	/*** <%= _sizeName %> ***/
+		.`<%= _sizeName %>` .`sliderLabel`, .`<%= _sizeName %>` .`sliderValueLabel` {
+			font-size: <%= Math.round (_sizeFont * .85) %>px;
+		}
+<%		}
+	);
+%>
 
