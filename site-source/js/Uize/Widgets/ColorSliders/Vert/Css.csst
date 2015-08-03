@@ -2,7 +2,8 @@
 <%
 	var
 		_cssUtil = Uize.Widgets.CssUtil,
-		_boxBorder = _cssUtil.box.border
+		_boxBorder = _cssUtil.box.border,
+		_boxBorderWidth = _boxBorder.width
 	;
 %>
 .`` {
@@ -28,11 +29,12 @@
 }
 
 .`channelLabel` {
-	border: <%= _boxBorder.width %>px solid <%= _boxBorder.color %>;
+	border: <%= _boxBorderWidth %>px solid <%= _boxBorder.color %>;
 	text-align: center;
 	font-weight: bold;
 	color: #000;
 	background: #eee;
+	box-sizing: border-box;
 }
 
 /*** different sizes ***/
@@ -43,7 +45,7 @@
 			var
 				_sizeOuter = _size.outer,
 				_sizeFont = _size.font,
-				_padding = _sizeOuter - _sizeFont,
+				_padding = _sizeOuter - _sizeFont - _boxBorderWidth * 2,
 				_paddingTop = Math.round (_padding / 2)
 			;
 			%>
@@ -51,7 +53,7 @@
 				.`<%= _sizeName %>` .`channelLabel` {
 					line-height: <%= _sizeFont %>px;
 					padding-top: <%= _paddingTop %>px;
-					padding-bottom: <%= _padding - _paddingTop %>px;
+					height: <%= _sizeOuter %>px;
 					font-size: <%= _sizeFont %>px;
 				}
 			<%

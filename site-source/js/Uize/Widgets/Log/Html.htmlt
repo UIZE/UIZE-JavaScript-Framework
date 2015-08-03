@@ -1,7 +1,7 @@
 <div>
 	<div class="contents">
 		<div class="heading">
-			<span id="title"/>
+			<span id="title"></span>
 			<child name="clear" class="topRightButton" flavor="subdued"/>
 		</div>
 		<div id="body" class="body"><div id="messages" class="messages"></div></div>

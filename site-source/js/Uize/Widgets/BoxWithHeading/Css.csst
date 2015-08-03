@@ -32,18 +32,18 @@
 			var
 				_sizeFont = _size.font,
 				_sizeOuter = _size.outer,
-				_paddingLeft = 2 + _size.sizeNo * 2,
+				_paddingSides = 2 + _size.sizeNo * 2,
 				_paddingTop = Math.floor ((_sizeOuter - _sizeFont) / 2)
 			;
 %>	/*** <%= _sizeName %> ***/
 		.`<%= _sizeName %>` .`body` {
 			font-size: <%= _sizeFont %>px;
-			padding: <%= _paddingLeft %>px;
+			padding: <%= _paddingSides %>px;
 		}
 		.`<%= _sizeName %>` .`heading` {
 			font-size: <%= _sizeFont %>px;
 			line-height: <%= _sizeFont %>px;
-			padding: <%= _paddingTop %>px 0 <%= _sizeOuter - _sizeFont - _paddingTop %>px <%= _paddingLeft %>px;
+			padding: <%= _paddingTop %>px <%= _paddingSides %>px <%= _sizeOuter - _sizeFont - _paddingTop %>px <%= _paddingSides %>px;
 			min-height: <%= _sizeOuter %>px;
 		}
 <%		}

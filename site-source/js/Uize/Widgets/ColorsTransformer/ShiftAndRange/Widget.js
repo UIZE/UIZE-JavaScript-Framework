@@ -67,7 +67,7 @@ Uize.module ({
 				shift:{value:0},
 				range:{value:50},
 				heading:{value:''},
-				sliderTrackLength:{value:400},
+				sliderTrackLength:{value:'100%'},
 
 				/*** derived properties ***/
 					_shiftSliderMinValue:{derived:'shiftExtent: -shiftExtent'},

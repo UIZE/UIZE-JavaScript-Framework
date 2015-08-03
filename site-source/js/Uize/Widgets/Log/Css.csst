@@ -1,3 +1,7 @@
+<%@ required ('Uize.Widgets.CssUtil'); %>
+<%
+	var _cssUtil = Uize.Widgets.CssUtil;
+%>
 .`` {
 	position: relative;
 	width: 100%;
@@ -15,11 +19,6 @@
 .`heading` {
 	position: relative;
 	text-align: center;
-	height: 17px;
-}
-
-.`heading` span {
-	letter-spacing: 2px;
 }
 
 .`topRightButton` {
@@ -32,7 +31,6 @@
 	position: absolute;
 	padding: 0;
 	left: 0;
-	top: 29px;
 	right: 0;
 	bottom: 0;
 }
@@ -52,4 +50,17 @@
 	padding: 4px;
 	overflow: auto;
 }
+
+/*** styling for different sizes ***/
+<%
+	Uize.forEach (
+		_cssUtil.sizes,
+		function (_size,_sizeName) {
+%>	/*** <%= _sizeName %> ***/
+		.`<%= _sizeName %>` .`body` {
+			top: <%= _size.outer %>px;
+		}
+<%		}
+	);
+%>
 

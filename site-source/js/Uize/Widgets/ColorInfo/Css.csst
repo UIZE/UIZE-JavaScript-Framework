@@ -1,3 +1,7 @@
+<%@ required ('Uize.Widgets.CssUtil'); %>
+<%
+	var _cssUtil = Uize.Widgets.CssUtil;
+%>
 .`` {
 	display: inline-block;
 	padding: 10px;
@@ -13,8 +17,6 @@
 	font-weight: bold;
 	text-transform: uppercase;
 	text-align: center;
-	font-size: 16px;
-	padding: 3px 0;
 }
 
 .`body` {
@@ -69,4 +71,24 @@
 	text-align: center;
 	padding-top: 4px;
 }
+
+/*** styling for different sizes ***/
+<%
+	Uize.forEach (
+		_cssUtil.sizes,
+		function (_size,_sizeName) {
+			var
+				_sizeOuter = _size.outer,
+				_sizeFont = Math.round (_sizeOuter * .5),
+				_paddingTop = Math.floor ((_sizeOuter - _sizeFont) / 2)
+			;
+%>	/*** <%= _sizeName %> ***/
+		.`<%= _sizeName %>` .`heading` {
+			font-size: <%= _sizeFont %>px;
+			line-height: <%= _sizeFont %>px;
+			padding: <%= _paddingTop %>px 0 <%= _sizeOuter - _sizeFont - _paddingTop %>px 0;
+		}
+<%		}
+	);
+%>
 
