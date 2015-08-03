@@ -1,4 +1,7 @@
 <%@ required ('Uize.Widgets.CssUtil'); %>
+<%
+	var _cssUtil = Uize.Widgets.CssUtil;
+%>
 .`track`, .`trackLighting`, .`borderOverlay` {
 	cursor: pointer;
 }
@@ -19,15 +22,6 @@
 }
 
 /*** different orientations ***/
-	<%
-		var
-			_sizes = Uize.Widgets.CssUtil.sizes,
-			_knobSizeTiny = Math.round (_sizes.tiny.outer * .8),
-			_knobSizeSmall = Math.round (_sizes.small.outer * .8),
-			_knobSizeMedium = Math.round (_sizes.medium.outer * .8),
-			_knobSizeLarge = Math.round (_sizes.large.outer * .8)
-		;
-	%>
 	/*** horizontal ***/
 		.`horizontal` .`knob` {
 			position: absolute;
@@ -49,38 +43,9 @@
 				filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#aaaaaa',GradientType=0 ); /* IE6-8 */
 		}
 
-		/*** different sizes ***/
-			/*** tiny ***/
-				.`horizontal`.`tiny` .`knob` {
-					width: <%= _knobSizeTiny %>px;
-				}
-				.`horizontal`.`tiny` .`knobTrack` {
-					right: <%= _knobSizeTiny %>px;
-				}
-
-			/*** small ***/
-				.`horizontal`.`small` .`knob` {
-					width: <%= _knobSizeSmall %>px;
-				}
-				.`horizontal`.`small` .`knobTrack` {
-					right: <%= _knobSizeSmall %>px;
-				}
-
-			/*** medium ***/
-				.`horizontal`.`medium` .`knob` {
-					width: <%= _knobSizeMedium %>px;
-				}
-				.`horizontal`.`medium` .`knobTrack` {
-					right: <%= _knobSizeMedium %>px;
-				}
-
-			/*** large ***/
-				.`horizontal`.`large` .`knob` {
-					width: <%= _knobSizeLarge %>px;
-				}
-				.`horizontal`.`large` .`knobTrack` {
-					right: <%= _knobSizeLarge %>px;
-				}
+		.`horizontal` .`knobTrack` {
+			left: 1px;
+		}
 
 	/*** vertical ***/
 		.`vertical` .`knob` {
@@ -103,36 +68,35 @@
 				filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#aaaaaa',GradientType=1 ); /* IE6-8 */
 		}
 
-		/*** different sizes ***/
-			/*** tiny ***/
-				.`vertical`.`tiny` .`knob` {
-					height: <%= _knobSizeTiny %>px;
-				}
-				.`vertical`.`tiny` .`knobTrack` {
-					top: <%= _knobSizeTiny %>px;
-				}
+		.`vertical` .`knobTrack` {
+			top: 1px;
+		}
 
-			/*** small ***/
-				.`vertical`.`small` .`knob` {
-					height: <%= _knobSizeSmall %>px;
-				}
-				.`vertical`.`small` .`knobTrack` {
-					top: <%= _knobSizeSmall %>px;
-				}
+/*** styling for different sizes ***/
+<%
+	Uize.forEach (
+		_cssUtil.sizes,
+		function (_size,_sizeName) {
+			var
+				_knobSize = Math.round (_size.outer * .8)
+			;
+%>	/*** <%= _sizeName %> ***/
+		/*** horizontal ***/
+			.`horizontal`.`<%= _sizeName %>` .`knob` {
+				width: <%= _knobSize %>px;
+			}
+			.`horizontal`.`<%= _sizeName %>` .`knobTrack` {
+				right: <%= _knobSize + 2 %>px;
+			}
 
-			/*** medium ***/
-				.`vertical`.`medium` .`knob` {
-					height: <%= _knobSizeMedium %>px;
-				}
-				.`vertical`.`medium` .`knobTrack` {
-					top: <%= _knobSizeMedium %>px;
-				}
-
-			/*** large ***/
-				.`vertical`.`large` .`knob` {
-					height: <%= _knobSizeLarge %>px;
-				}
-				.`vertical`.`large` .`knobTrack` {
-					top: <%= _knobSizeLarge %>px;
-				}
+		/*** vertical ***/
+			.`vertical`.`<%= _sizeName %>` .`knob` {
+				height: <%= _knobSize %>px;
+			}
+			.`vertical`.`<%= _sizeName %>` .`knobTrack` {
+				top: <%= _knobSize + 2 %>px;
+			}
+<%		}
+	);
+%>
 
