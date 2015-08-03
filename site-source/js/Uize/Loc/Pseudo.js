@@ -372,18 +372,31 @@ Uize.module ({
 							- see also the =Uize.Loc.Pseudo.pseudoLocalize= static method
 				*/
 
-			pseudoLocalize:function (_sourceStr,_options) {
+			pseudoLocalize:function (_source,_options) {
 				if (!_options)
 					_options = _sacredEmptyObject
 				;
 
-				/*** calculate total word char count (to be used in expansion) ***/
-					var
-						_stringSegments = _split (_sourceStr,_options.wordSplitter || _defaultWordSplitterRegExp),
-						_totalWordCharCount = 0
+				/*** normalize string source to array ***/
+					var _sourceIsString = typeof _source == 'string';
+					if (_sourceIsString)
+						_source = [_source]
 					;
-					for (var _stringSegmentNo = _stringSegments.length + 1; (_stringSegmentNo -= 2) >= 0;)
-						_totalWordCharCount += _stringSegments [_stringSegmentNo].length
+
+				/*** segment strings and calculate total word char count (to be used in expansion) ***/
+					var
+						_totalWordCharCount = 0,
+						_wordSplitter = _options.wordSplitter || _defaultWordSplitterRegExp,
+						_result = Uize.map (
+							_source,
+							function (_string) {
+								var _stringSegments = _split (_string,_wordSplitter);
+								for (var _stringSegmentNo = _stringSegments.length + 1; (_stringSegmentNo -= 2) >= 0;)
+									_totalWordCharCount += _stringSegments [_stringSegmentNo].length
+								;
+								return _stringSegments;
+							}
+						)
 					;
 
 				/*** perform pseudo-localization (on a word-by-word basis) and return result ***/
@@ -400,38 +413,48 @@ Uize.module ({
 						_expansionCharsAdded = 0,
 						_wordCharCount = 0
 					;
-					return (
-						(_totalWordCharCount ? _wrapperOpener : '') +
-						Uize.map (
-							_stringSegments,
-							function (_stringSegment,_stringSegmentNo) {
-								if (_stringSegmentNo % 2 == 0 && _stringSegment) {
-									if (_accent)
-										_stringSegment = _accentString (_stringSegment)
-									;
-									if (_expansionCharsToAdd) {
-										_wordCharCount += _stringSegment.length;
-										var _charsToAddToWord =
-											Math.round (_wordCharCount / _totalWordCharCount * _expansionCharsToAdd) -
-											_expansionCharsAdded
-										;
-										if (_charsToAddToWord) {
-											_stringSegment += _expansionCharLength > 1
-												? _repeat (_expansionChar,Math.ceil (_charsToAddToWord / _expansionCharLength))
-													.slice (0,_charsToAddToWord)
-												: _repeat (_expansionChar,_charsToAddToWord)
+					Uize.map (
+						_result,
+						function (_stringSegments) {
+							return (
+								(_totalWordCharCount ? _wrapperOpener : '') +
+								Uize.map (
+									_stringSegments,
+									function (_stringSegment,_stringSegmentNo) {
+										if (_stringSegmentNo % 2 == 0 && _stringSegment) {
+											if (_accent)
+												_stringSegment = _accentString (_stringSegment)
 											;
-											_expansionCharsAdded += _charsToAddToWord;
+											if (_expansionCharsToAdd) {
+												_wordCharCount += _stringSegment.length;
+												var _charsToAddToWord =
+													Math.round (_wordCharCount / _totalWordCharCount * _expansionCharsToAdd) -
+													_expansionCharsAdded
+												;
+												if (_charsToAddToWord) {
+													_stringSegment += _expansionCharLength > 1
+														? _repeat (
+															_expansionChar,Math.ceil (_charsToAddToWord / _expansionCharLength)
+														).slice (
+															0,_charsToAddToWord
+														)
+														: _repeat (_expansionChar,_charsToAddToWord)
+													;
+													_expansionCharsAdded += _charsToAddToWord;
+												}
+											}
 										}
-									}
-								}
-								return _stringSegment;
-							},
-							false
-						).join ('') +
-						(_totalWordCharCount ? _wrapperCloser : '')
+										return _stringSegment;
+									},
+									false
+								).join ('') +
+								(_totalWordCharCount ? _wrapperCloser : '')
+							);
+						},
+						_result
 					);
 
+				return _sourceIsString ? _result [0] : _result;
 				/*?
 					Static Methods
 						Uize.Loc.Pseudo.pseudoLocalize

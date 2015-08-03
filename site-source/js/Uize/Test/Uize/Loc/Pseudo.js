@@ -205,6 +205,15 @@ Uize.module ({
 									{wordSplitter:/((?:<.+?>|\{[^\}]+\}|\s|[\?!\.;,&=\(\)\[\]"])+)/g}
 								],
 								'[<div>Ţĥîš_ <b>þšéûðö-ļöçåļîžåţîöñ______</b> ţĥîñĝ_ îš_ þŕéţţý__ çööļ_!</div>]'
+							],
+
+						/*** test handling for specifying an array as source ***/
+							['When a string array is specified as the source, then all elements of the array are pseudo-localized, but the total expansion characters are calculated based upon the total word character count of all elements in the array, and the expansion characters are distributed appropriately across the elements',
+								[
+									['This','pseudo-localization','thing','is','pretty','cool!'],
+									{wrapper:''}
+								],
+								['Ţĥîš_','þšéûðö-ļöçåļîžåţîöñ______','ţĥîñĝ_','îš_','þŕéţţý__','çööļ_!']
 							]
 					]]
 				])
