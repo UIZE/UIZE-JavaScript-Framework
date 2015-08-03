@@ -205,7 +205,7 @@
 		/*** page actions (in header) ***/
 			.header .pageActions {
 				position: absolute;
-				right: 77px;
+				right: 7px;
 				_right: 7px; /* hack for IE6, because the title isn't fixed positioned for this browser */
 				top: 10px;
 				letter-spacing: 0;
