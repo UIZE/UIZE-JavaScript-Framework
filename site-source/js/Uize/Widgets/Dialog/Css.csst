@@ -31,9 +31,7 @@
 		width: 100%;
 		height: 100%;
 		border: 1px solid #000;
-		border-width: 29px 3px;
 		left: -3px;
-		top: -29px;
 		box-shadow: 0 0 20px 8px rgba(0,0,0,.3);
 	}
 
@@ -43,22 +41,14 @@
 			position: absolute;
 			left: 0;
 			width: 100%;
-			height: 27px;
 			text-align: center;
-			font-size: 14px;
-			font-family: Arial, Helvetica, Verdana;
-			margin: -1px;
 			background: <%= _chromeBgColor %> repeat left top;
 		}
 		/*** title bar ***/
-			.`titleBar` {
-				top: -26px;
-			}
 			.`title` {
 				width: 100%;
 				color: #000;
 				font-weight: bold;
-				line-height: 22px;
 				letter-spacing: 1px;
 				white-space: nowrap;
 				overflow: hidden;
@@ -66,24 +56,21 @@
 			.`closeButton` {
 				display: none;
 				position: absolute;
-				right: 2px;
+				right: 0;
 				top: 0;
 			}
 
 		/*** dialog status bar ***/
-			.`statusBar` {
-				bottom: -26px;
-			}
 			.`cancelButton`, .`okButton`
 			{
 				position: absolute;
 				bottom: 0;
 			}
 			.`cancelButton` {
-				left: 2px;
+				left: 0;
 			}
 			.`okButton` {
-				right: 2px;
+				right: 0;
 			}
 
 	/*** dialog corners / edges ***/
@@ -104,15 +91,11 @@
 		}
 		.`cornerCorner` {
 			position: absolute;
-			width: 31px;
-			height: 31px;
 			background: <%= _chromeBgColor %>;
 		}
 		/*** edge positioning ***/
 			.`edgeWest` {left: -5px;}
 			.`edgeEast` {right: -5px;}
-			.`edgeNorth` {top: -31px;}
-			.`edgeSouth` {bottom: -31px;}
 
 		/*** edge borders ***/
 			.`edgeNorth`.`edgeWest` {border-top-left-radius: 3px;}
@@ -123,7 +106,6 @@
 /*** contents ***/
 	.`contents` {
 		position: relative;
-		padding: 8px;
 	}
 
 	.`resizable` .`contents` {
@@ -131,4 +113,50 @@
 		height: 100%;
 		box-sizing: border-box;
 	}
+
+/*** styling for different sizes ***/
+<%
+	Uize.forEach (
+		_cssUtil.sizes,
+		function (_size,_sizeName) {
+			var
+				_sizeFont = _size.font,
+				_sizeOuter = _size.outer,
+				_paddingTop = Math.floor ((_sizeOuter - _sizeFont) / 2)
+			;
+%>	/*** <%= _sizeName %> ***/
+		.`<%= _sizeName %>` .`dialogShadow` {
+			top: -<%= _sizeOuter + 3 %>px;
+			border-width: <%= _sizeOuter + 3 %>px 3px;
+		}
+		.`<%= _sizeName %>` .`cornerCorner` {
+			width: <%= _sizeOuter + 5 %>px;
+			height: <%= _sizeOuter + 5 %>px;
+		}
+		.`<%= _sizeName %>` .`edgeNorth` {
+			top: -<%= _sizeOuter + 5 %>px;
+		}
+		.`<%= _sizeName %>` .`edgeSouth` {
+			bottom: -<%= _sizeOuter + 5 %>px;
+		}
+		.`<%= _sizeName %>` .`contents` {
+			padding: <%= 2 + _size.sizeNo * 2 %>px;
+		}
+		.`<%= _sizeName %>` .`bar` {
+			height: <%= _sizeOuter %>px;
+		}
+		.`<%= _sizeName %>` .`titleBar` {
+			top: -<%= _sizeOuter %>px;
+		}
+		.`<%= _sizeName %>` .`statusBar` {
+			bottom: -<%= _sizeOuter %>px;
+		}
+		.`<%= _sizeName %>` .`title` {
+			font-size: <%= _sizeFont %>px;
+			line-height: <%= _sizeFont %>px;
+			padding-top: <%= _paddingTop %>px;
+		}
+<%		}
+	);
+%>
 
