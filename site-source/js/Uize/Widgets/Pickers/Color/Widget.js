@@ -41,6 +41,7 @@ Uize.module ({
 
 		return _superclass.subclass ({
 			set:{
+				value:'000000',
 				dialogWidgetClass:'Uize.Widgets.Pickers.Dialogs.Color.Widget',
 					/*?
 						State Properties
