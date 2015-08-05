@@ -30,7 +30,7 @@ Uize.module ({
 		'Uize.Test',
 		'Uize.Data.Matches',
 		'Uize.Util.ModuleNaming',
-		'Uize.Util.ModuleNameMatcher'
+		'Uize.Util.Matchers.ModuleNameMatcher'
 	],
 	builder:function () {
 		'use strict';
@@ -101,7 +101,7 @@ Uize.module ({
 							_modulesToTest = [_Uize_Util_ModuleNaming.getModuleNameFromTestModuleName (_module)];
 						} else {
 							var
-								_moduleNameMatcher = _Uize.Util.ModuleNameMatcher.resolve (_module),
+								_moduleNameMatcher = _Uize.Util.Matchers.ModuleNameMatcher.resolve (_module),
 								_libraryModuleSuffixRegExp = /\.library$/i,
 								_modulesExcludingLibraryModules = _matchingValues (
 									_getJsModules ().sort (),

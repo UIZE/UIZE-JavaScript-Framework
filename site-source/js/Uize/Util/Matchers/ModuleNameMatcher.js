@@ -1,7 +1,7 @@
 /*______________
 |       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
 |     /      /  |   ---------------------------------------------------
-|    /    O /   |    MODULE : Uize.Util.ModuleNameMatcher Package
+|    /    O /   |    MODULE : Uize.Util.Matchers.ModuleNameMatcher Package
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
 | /____/ /__/_| | COPYRIGHT : (c)2014-2015 UIZE
@@ -18,13 +18,13 @@
 
 /*?
 	Introduction
-		The =Uize.Util.ModuleNameMatcher= package provides a way to resolve a module name matcher expression to a value matcher function that can be used in high performance filtering of module name lists.
+		The =Uize.Util.Matchers.ModuleNameMatcher= package provides a way to resolve a module name matcher expression to a value matcher function that can be used in high performance filtering of module name lists.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 */
 
 Uize.module ({
-	name:'Uize.Util.ModuleNameMatcher',
+	name:'Uize.Util.Matchers.ModuleNameMatcher',
 	required:[
 		'Uize.Data.Matches',
 		'Uize.Str.Split',

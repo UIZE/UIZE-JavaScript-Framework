@@ -81,7 +81,7 @@ NEW MODULE: Uize.Loc.Plurals.RuleParser
 	- write documentation
 	- write news announcement
 
-NEW MODULE: Uize.Util.ModuleNameMatcher
+NEW MODULE: Uize.Util.Matchers.ModuleNameMatcher
 	Still to do...
 
 	- write unit tests
