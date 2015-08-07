@@ -26,6 +26,7 @@
 Uize.module ({
 	name:'Uize.Util.Matchers.ModuleNameMatcher',
 	required:[
+		'Uize.Util.Matchers.Base',
 		'Uize.Data.Matches',
 		'Uize.Str.Split',
 		'Uize.Str.Has'
@@ -33,13 +34,8 @@ Uize.module ({
 	builder:function () {
 		'use strict';
 
-		var
-			/*** references to methods used internally ***/
-				_resolve
-		;
-
-		return Uize.package ({
-			resolve:_resolve = function (_matcher) {
+		return Uize.Util.Matchers.Base.extend ({
+			resolve:function (_matcher) {
 				var
 					_expressionChunks = [],
 					_expressionChunkMatchers = [],
@@ -103,10 +99,6 @@ Uize.module ({
 					}
 				);
 				return Function ('v','return ' + _matcherExpression);
-			},
-
-			test:function (_value,_matcher) {
-				return _resolve (_matcher) (_value);
 			}
 		});
 	}

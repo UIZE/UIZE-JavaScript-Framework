@@ -25,7 +25,10 @@
 
 Uize.module ({
 	name:'Uize.Util.Matchers.AttributeMatcher',
-	required:'Uize.Util.Matchers.ValueListMatcher',
+	required:[
+		'Uize.Util.Matchers.Base',
+		'Uize.Util.Matchers.ValueListMatcher'
+	],
 	builder:function () {
 		'use strict';
 
@@ -37,7 +40,7 @@ Uize.module ({
 				_resolve
 		;
 
-		return Uize.package ({
+		return Uize.Util.Matchers.Base.extend ({
 			resolve:_resolve = function (_matcher) {
 				var _resolvedMatcher = _matcher;
 				if (!_matcher) {
@@ -73,10 +76,6 @@ Uize.module ({
 					}
 				}
 				return _resolvedMatcher;
-			},
-
-			test:function (_value,_matcher) {
-				return _resolve (_matcher) (_value);
 			}
 		});
 	}

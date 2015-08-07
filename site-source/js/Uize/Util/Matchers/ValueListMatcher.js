@@ -25,17 +25,15 @@
 
 Uize.module ({
 	name:'Uize.Util.Matchers.ValueListMatcher',
-	required:'Uize.Str.Split',
+	required:[
+		'Uize.Util.Matchers.Base',
+		'Uize.Str.Split'
+	],
 	builder:function () {
 		'use strict';
 
-		var
-			/*** references to methods used internally ***/
-				_resolve
-		;
-
-		return Uize.package ({
-			resolve:_resolve = function (_matcher) {
+		return Uize.Util.Matchers.Base.extend ({
+			resolve:function (_matcher) {
 				var _resolvedMatcher = _matcher;
 				if (!_matcher) {
 					_resolvedMatcher = Uize.returnTrue;
@@ -58,10 +56,6 @@ Uize.module ({
 					}
 				}
 				return _resolvedMatcher;
-			},
-
-			test:function (_value,_matcher) {
-				return _resolve (_matcher) (_value);
 			}
 		});
 	}
