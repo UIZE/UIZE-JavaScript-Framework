@@ -33,8 +33,13 @@ Uize.module ({
 	builder:function () {
 		'use strict';
 
+		var
+			/*** references to methods used internally ***/
+				_resolve
+		;
+
 		return Uize.package ({
-			resolve:function (_matcherExpression) {
+			resolve:_resolve = function (_matcher) {
 				var
 					_expressionChunks = [],
 					_expressionChunkMatchers = [],
@@ -44,7 +49,7 @@ Uize.module ({
 					var
 						_partNo = -1,
 						_signAndMatcherList = Uize.Data.Matches.retain (
-							Uize.Str.Split.split (_matcherExpression,/(^|[\+\-])([^\+\-]+)/),
+							Uize.Str.Split.split (_matcher,/(^|[\+\-])([^\+\-]+)/),
 							function (_value,_key) {return _key % 3}
 						),
 						_totalParts = _signAndMatcherList.length / 2
@@ -53,7 +58,7 @@ Uize.module ({
 				) {
 					var
 						_sign = _signAndMatcherList [_partNo * 2] || '+',
-						_matcher = _signAndMatcherList [_partNo * 2 + 1]
+						_subMatcher = _signAndMatcherList [_partNo * 2 + 1]
 					;
 					if (_sign != _expressionChunkSign || _partNo == _totalParts) {
 						_expressionChunks.push (
@@ -79,7 +84,7 @@ Uize.module ({
 						_expressionChunkMatchers = [];
 
 					}
-					_expressionChunkMatchers.push (_matcher);
+					_expressionChunkMatchers.push (_subMatcher);
 				}
 				var _matcherExpression = '';
 				Uize.forEach (
@@ -98,6 +103,10 @@ Uize.module ({
 					}
 				);
 				return Function ('v','return ' + _matcherExpression);
+			},
+
+			test:function (_value,_matcher) {
+				return _resolve (_matcher) (_value);
 			}
 		});
 	}
