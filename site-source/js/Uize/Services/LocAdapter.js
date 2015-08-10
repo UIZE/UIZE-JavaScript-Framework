@@ -46,7 +46,8 @@ Uize.module ({
 		'Uize.Build.Util.Whitespace',
 		'Uize.Templates.Text.Tables.Breakdown',
 		'Uize.Templates.Text.Tables.YinYangBreakdown',
-		'Uize.Templates.Text.Tables.Histogram'
+		'Uize.Templates.Text.Tables.Histogram',
+		'Uize.Util.Html.Encode'
 	],
 	superclass:'Uize.Service.Adapter',
 	builder:function (_superclass) {
@@ -65,6 +66,7 @@ Uize.module ({
 				_getStringMetrics = _Uize_Loc_Strings.Metrics.getMetrics,
 				_hasNonWhitespace = Uize.Str.Whitespace.hasNonWhitespace,
 				_serializeStringPath = _Uize_Loc_Strings_Util.serializeStringPath,
+				_htmlEntityRegExp = Uize.Util.Html.Encode.entityRegExp,
 
 			/*** General Variables ***/
 				_fileSystem = Uize.Services.FileSystem.singleton (),
@@ -655,7 +657,13 @@ Uize.module ({
 				},
 
 				stringHasHtml:function (_stringPath,_value) {
-					return /<[^<]+>/.test (_value); // NOTE: this is not the most robust test, so probably RegExpComposition should be used
+					return (
+						/<[^<]+>/.test (_value) ||
+							/* NOTE:
+								this is not the most robust test for HTML tags, so probably RegExpComposition should be used
+							*/
+						_htmlEntityRegExp.test (_value)
+					);
 					/*?
 						Instance Methods
 							stringHasHtml
