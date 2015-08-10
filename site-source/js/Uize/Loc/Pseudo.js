@@ -390,7 +390,7 @@ Uize.module ({
 						_result = Uize.map (
 							_source,
 							function (_string) {
-								var _stringSegments = _split (_string,_wordSplitter);
+								var _stringSegments = _split (_string,_wordSplitter,null,'match');
 								for (var _stringSegmentNo = _stringSegments.length + 1; (_stringSegmentNo -= 2) >= 0;)
 									_totalWordCharCount += _stringSegments [_stringSegmentNo].length
 								;

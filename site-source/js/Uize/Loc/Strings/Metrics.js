@@ -77,7 +77,7 @@ Uize.module ({
 					for (
 						var
 							_stringSegmentNo = -2,
-							_stringSegments = _split (_sourceStr,_wordSplitter || _defaultWordSplitter),
+							_stringSegments = _split (_sourceStr,_wordSplitter || _defaultWordSplitter,null,'match'),
 							_stringSegmentsLength = _stringSegments.length,
 							_wordChars
 						;
