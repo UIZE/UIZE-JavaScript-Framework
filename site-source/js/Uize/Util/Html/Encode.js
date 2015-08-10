@@ -32,9 +32,17 @@ Uize.module ({
 	builder:function () {
 		'use strict';
 
-		var _entityNameToCharCodeLookup = Uize.Util.Html.Entities.entityNameToCharCodeLookup;
+		var
+			/*** Variables for Performance Optimization ***/
+				_entityNameToCharCodeLookup = Uize.Util.Html.Entities.entityNameToCharCodeLookup,
+
+			/*** General Variables ***/
+				_entityRegExp = /&(?:(\w+)|#(\d{1,4}|x[0-9a-fA-F]{1,4}));/g
+		;
 
 		return Uize.package ({
+			entityRegExp:_entityRegExp,
+
 			encode:Uize.Str.Replace.replacerByLookup ({
 				'&':'&amp;',
 				'"':'&quot;',
@@ -70,7 +78,7 @@ Uize.module ({
 				return (
 					(_toDecode += '') &&
 					_toDecode.replace (
-						/&(?:(\w+)|#(\d{1,4}|x[0-9a-fA-F]{1,4}));/g,
+						_entityRegExp,
 						function (_match,_entityName,_entityNumber) {
 							return String.fromCharCode (
 								_entityNumber
