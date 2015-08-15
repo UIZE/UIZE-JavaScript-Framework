@@ -61,16 +61,30 @@ Uize.module ({
 				_timeZone:'timeZone',
 				_hoursMode:{
 					name:'hoursMode',
-					value:'12'
+					value:'auto'
+				},
+				_hoursModeResolved:{
+					name:'hoursModeResolved',
+					derived:{
+						properties:'hoursMode',
+						derivation:function (_hoursMode) {
+							return (
+								_hoursMode == '24' ||
+								(_hoursMode == 'auto' && !/AM|PM/.test ((new Date).toLocaleTimeString ()))
+									? '24'
+									: '12'
+							);
+						}
+					}
 				},
 				_referenceTime:{
 					name:'referenceTime'
 				},
 				hhMmSs:{
 					derived:{
-						properties:'value,timeZone,hoursMode,referenceTime',
-						derivation:function (_value,_timeZone,_hoursMode,_referenceTime) {
-							if (_hoursMode == 'timer') {
+						properties:'value,timeZone,hoursModeResolved,referenceTime',
+						derivation:function (_value,_timeZone,_hoursModeResolved,_referenceTime) {
+							if (_hoursModeResolved == 'timer') {
 								var
 									_elapsed = _value - _referenceTime,
 									_minutesElapsed = Math.floor (_elapsed / 1000 / 60),
@@ -82,7 +96,7 @@ Uize.module ({
 									_timeZone != null
 										? (new Date (_value)).getTime () + (_timeZone - _machineTimeZone) * _msPerHour
 										: _value,
-									_hoursMode == '12' ? '{hh12}{mm}{ss}' : '{hh}{mm}{ss}'
+									_hoursModeResolved == '12' ? '{hh12}{mm}{ss}' : '{hh}{mm}{ss}'
 								);
 							}
 						}
