@@ -93,7 +93,7 @@ Update Header Comments
 		|    /    O /   |    MODULE : Uize.Widget.ListEditor Class
 		|   /    / /    |
 		|  /    / /  /| |    ONLINE : http://www.uize.com
-		| /____/ /__/_| | COPYRIGHT : (c)2006-2013 UIZE
+		| /____/ /__/_| | COPYRIGHT : (c)2006-2015 UIZE
 		|          /___ |   LICENSE : Available under MIT License or GNU General Public License
 		|_______________|             http://www.uize.com/license.html
 		*/
@@ -112,10 +112,10 @@ Update Header Comments
 			The Copyright Notice Comment Line is the line in the `module info comment` that provides a notice of copyright for the code contained inside the module, stating the `copyright date range` and the `copyright holder` for the module's code.
 
 			...............................................
-			| /____/ /__/_| | COPYRIGHT : (c)2006-2013 UIZE
+			| /____/ /__/_| | COPYRIGHT : (c)2006-2015 UIZE
 			...............................................
 
-			In the example `module info comment` shown above, the copyright notice comment line is the one with the text "COPYRIGHT : (c)2006-2013 UIZE". If you use an existing module as a starting point for creating a new module, be sure to update the date range in the copyright notice the correctly reflect the year in which the new module is being created.
+			In the example `module info comment` shown above, the copyright notice comment line is the one with the text "COPYRIGHT : (c)2006-2015 UIZE". If you use an existing module as a starting point for creating a new module, be sure to update the date range in the copyright notice the correctly reflect the year in which the new module is being created.
 
 			Copyright Date Range
 				The copyright date range must reflect when the code in the module was initially created - which is not necessarily the date when the actually JavaScript file that defines the module was created.
