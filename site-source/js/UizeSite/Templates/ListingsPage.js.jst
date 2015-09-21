@@ -57,7 +57,7 @@
 %>
 <div class="heading1"><%= listingNamePlusSubTitle %></div>
 <div class="infoRow">
-	<% if (moreInfoLink) { %><a href="<%= moreInfoLink %>" target="_blank" class="imageLink"><% } %><img src="<% .pathToRoot %>images/<%= imageFolder %>/<%= listingName.toLowerCase ().replace (/ /g,'-') %>.png" alt="<%= listingNamePlusSubTitle -> tagAttributeValue %>"/><% if (moreInfoLink) { %></a><% } %>
+	<% if (moreInfoLink) { %><a href="<%= moreInfoLink %>" target="_blank" class="imageLink"><% } %><img src="<% .pathToRoot %>images/<%= imageFolder %>/<%= listingName.toLowerCase ().replace (/[^a-zA-Z0-9_\-.]/g,'-') %>.png" alt="<%= listingNamePlusSubTitle -> tagAttributeValue %>"/><% if (moreInfoLink) { %></a><% } %>
 	<% for (
 		var lineNo = -1, lines = Uize.Str.Lines.split (listing.text), linesLength = lines.length;
 		++lineNo < linesLength;
