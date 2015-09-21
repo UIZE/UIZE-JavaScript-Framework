@@ -1,0 +1,11 @@
+<div><
+	div class="button"><child name="shareViaFacebook" flavor="subdued"/></div><
+	div class="button"><child name="shareViaTwitter" flavor="subdued"/></div><
+	div class="button"><child name="shareViaStumbleUpon" flavor="subdued"/></div><
+	div class="button"><child name="shareViaReddit" flavor="subdued"/></div><
+	div class="button"><child name="shareViaDigg" flavor="subdued"/></div><
+	div class="button"><child name="shareViaDelicious" flavor="subdued"/></div><
+	div id="shareViaLinkedIn" class="button"><child name="shareViaLinkedIn" flavor="subdued"/></div><
+	div id="shareViaGoogleBookmarks" class="button"><child name="shareViaGoogleBookmarks" flavor="subdued"/></div><
+	div class="button"><child name="shareViaEmail" flavor="subdued"/></div>
+</div>
