@@ -22,8 +22,7 @@ Uize.module ({
 		'Uize.Widget.HoverFader',
 		'Uize.Curve',
 		'Uize.Fx',
-		'UizeSite.Widgets.LikeThis.Widget',
-		'UizeSite.Widgets.Follow.Widget'
+		'Uize.Widgets.ShareStrip.Vert.Widget'
 	],
 	builder:function (_superclass) {
 		'use strict';
@@ -32,9 +31,8 @@ Uize.module ({
 			omegastructor:function () {
 				var m = this;
 
-				/*** add the social panel widgets ***/
-					m.addChild ('likeThis',UizeSite.Widgets.LikeThis.Widget,{built:false});
-					m.addChild ('follow',UizeSite.Widgets.Follow.Widget,{built:false});
+				/*** add the share strip widget ***/
+					m.addChild ('shareStrip',Uize.Widgets.ShareStrip.Vert.Widget,{built:false});
 
 				/*** add hover fader for demos items and pod sections highlight effect ***/
 					m.addChild (
