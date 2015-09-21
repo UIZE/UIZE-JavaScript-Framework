@@ -132,7 +132,7 @@
 				z-index: 0;
 			}
 			.introContent {
-				padding-top: 30px;
+				padding-top: 20px;
 				height: 420px;
 				border-bottom: 1px solid #aaa;
 				box-shadow: 0 5px 25px rgba(0,0,0,.2);
@@ -157,8 +157,6 @@
 				padding: 30px 20px;
 				text-align: center;
 				color: #444;
-				background: rgba(255,255,255,.5);
-				box-shadow: 0 0 50px #fff;
 			}
 			.introContent h1 .quote {
 				position: absolute;
@@ -200,24 +198,17 @@
 				border-bottom: 2px solid #ffa200;
 			}
 
-		/*** socialPanel ***/
-			.socialPanel {
+		/*** share strip ***/
+			.shareStrip {
 				position: fixed;
-				top: 154px;
+				top: 175px;
 				right: 20px;
-				padding: 10px;
-				border-radius: 3px;
-				box-shadow: 0 0 20px rgba(0,0,0,.2);
 				background: #eee;
-				width: 169px;
-			}
-			#page-likeThis {
-				margin-bottom: 30px;
 			}
 
 		/*** main ***/
 			.main {
-				padding-top: 600px;
+				padding-top: 590px;
 			}
 
 		/*** SimpleDoc overrides ***/
@@ -313,12 +304,22 @@
 	</div>
 </div>
 
-<div class="socialPanel">
-	<div id="page-likeThis"></div>
-	<div id="page-follow"></div>
-</div>
+<div id="page-shareStrip" class="shareStrip"></div>
 
 <div class="main">
+	<div class="heading1">NEW SHOWCASE: EVER:CLOCK</div>
+	<div class="contents1">
+		<a href="http://www.everclock.com">
+			<img src="images/showcase/ever-clock.png" title="EVER:CLOCK (The only clock you&apos;ll ever need.)" alt="EVER:CLOCK (The only clock you&apos;ll ever need.)" width="300" height="158" style="float: right; margin-left: 10px;"/>
+		</a>
+		<p><b>EVER:CLOCK</b> is a fun, themeable, online digital clock that can be loaded straight into your modern Web browser.</p>
+
+		<p>Several different clock types are available, and there are thousands upon thousands of interesting clock themes to choose from. Each clock type offers its own unique qualities and theming options.</p>
+
+		<p>The <b>EVER:CLOCK</b> Web app and its supporting Web site is built entirely using the UIZE JavaScript Framework.</p>
+
+		<p>Check it out at... <a href="http://www.everclock.com" class="externalSiteLink">http://www.everclock.com</a></p>
+	</div>
 <%. overviewOfFeatures %>
 </div>
 
