@@ -1,5 +1,15 @@
 listings
 :
+	fullName: EVER:CLOCK
+	subTitle: The only clock you'll ever need.
+	text::
+		<b>EVER:CLOCK</b> is a fun, themeable, online digital clock that can be loaded straight into your modern Web browser.
+
+		Several different clock types are available, and there are thousands upon thousands of interesting clock themes to choose from. Each clock type offers its own unique qualities and theming options.
+
+		The EVER:CLOCK Web app and its supporting Web site is built entirely using the UIZE JavaScript Framework.
+	link: http://www.everclock.com
+:
 	fullName: WardTog
 	subTitle: Hometown Pride T-Shirts, Mugs, and more!
 	text::
