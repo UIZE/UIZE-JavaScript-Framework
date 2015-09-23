@@ -1,8 +1,6 @@
 <%@
 	required (
 		'Uize.Array.Join',
-		'Uize.Json',
-		'Uize.Str.Lines',
 		'Uize.Str.Repeat'
 	);
 	input ({
@@ -69,7 +67,7 @@
 Uize.module ({
 	name:'<%= _widgetModuleName %>',
 	superclass:'<%= _input.superclass || 'Uize.Widget.V2' %>',
-	required:<%= Uize.Str.Lines.indent (Uize.Json.to (_required),1,'\t',false) %>,
+	required:<%= _required -> json -> indent{amount:1} %>,
 	builder:function (_superclass) {
 		'use strict';
 

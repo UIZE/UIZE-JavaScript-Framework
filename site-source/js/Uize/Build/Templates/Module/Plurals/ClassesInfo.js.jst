@@ -1,8 +1,6 @@
 <%@
 	required (
-		'Uize.Build.Templates.Module.HeadComment',
-		'Uize.Str.Lines',
-		'Uize.Json'
+		'Uize.Build.Templates.Module.HeadComment'
 	);
 	input ({
 		name:'string',
@@ -40,8 +38,7 @@ Uize.module ({
 
 		var
 			/*** General Variables ***/
-				_classesByLanguage = <%= Uize.Str.Lines.indent (Uize.Json.to (_input.classesByLanguage),4,'\t',false)
-%>
+				_classesByLanguage = <%. classesByLanguage -> json -> indent{amount:4} %>
 		;
 
 		return Uize.package ({

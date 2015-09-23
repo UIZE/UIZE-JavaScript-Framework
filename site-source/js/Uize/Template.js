@@ -100,7 +100,7 @@
 
 				EXAMPLE
 				..........................................................................................
-				Uize.Template.encoding.json = {
+				Uize.Template.encodings.json = {
 					to:{
 						required:'Uize.Json',
 						expansion:function (_valueStr,_optionsStr) {
@@ -1049,6 +1049,75 @@ Uize.module ({
 							NOTES
 							- the =miniJson= encoding is defined by the =Uize.Template.encodings.miniJson= static property
 							- compare this encoding to the similar =json= encoding
+				*/
+
+			_defineStandardEncoding ('indent','Uize.Str.Indented','to','from');
+				/*?
+					Static Properties
+						Uize.Template.encodings
+							Uize.Template.encodings.indent
+								An `encoding profile` for the =indent= encoding.
+
+					Encodings
+						indent
+							Encodes to an indented string, or from an indented string.
+
+							Encoding
+								When encoding, the value to encode will be coerced to a string.
+
+								SYNTAX
+								.................................................
+								<%= valueANYTYPE -> indent{encodingOptionsOBJ} %>
+								.................................................
+
+								Using this encoding in the forward direction is equivalent to using the =Uize.Str.Indented.to= static method of the =Uize.Str.Indented= module.
+
+								EXAMPLE
+								...............................................
+								top
+								<%= 'foo\nbar\nbaz\nqux' -> indent{amount:5} %>
+								bottom
+								...............................................
+
+								OUTPUT
+								..................
+								top
+													foo
+													bar
+													baz
+													qux
+								bottom
+								..................
+
+							Decoding
+								When decoding, the value to decode should be a string in JSON format, and the decoded value can be a string, boolean, number, object, array, =null=, =undefined=, or a regular expression.
+
+								SYNTAX
+								.............................................
+								<%= jsonSTR -> !indent{encodingOptionsOBJ} %>
+								.............................................
+
+								Using this encoding in the reverse direction (i.e. decoding by using the "!" prefix) is equivalent to using the =Uize.Str.Indented.from= static method of the =Uize.Str.Indented= module.
+
+								EXAMPLE
+								............................................................................
+								top
+								<%= '\t\tfoo\n\t\t\tbar\n\t\t\t\tbaz\n\t\t\t\t\tqux' -> !indent{amount:2} %>
+								bottom
+								............................................................................
+
+								OUTPUT
+								............
+								top
+								foo
+									bar
+										baz
+											qux
+								bottom
+								............
+
+							NOTES
+							- the =indent= encoding is defined by the =Uize.Template.encodings.indent= static property
 				*/
 
 			_defineStandardEncoding ('tagAttributes','Uize.Xml','toAttributes','fromAttributes');
