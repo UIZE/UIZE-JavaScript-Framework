@@ -827,7 +827,7 @@ Uize.module ({
 							tuple:[
 								{name:'red',min:0,max:255},
 								{name:'green',min:0,max:255},
-								{name:'green',min:0,max:255}
+								{name:'blue',min:0,max:255}
 							]
 							/*?
 								Color Spaces
