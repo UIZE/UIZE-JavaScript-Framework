@@ -40,7 +40,7 @@ NEW MODULE: Uize.Str.CharClass
 	- write documentation
 	- write news announcement
 
-NEW MODULE: Uize.Data.JavaProperties
+NEW MODULE: Uize.Loc.FileFormats.JavaProperties
 	Still to do...
 
 	- write unit tests
