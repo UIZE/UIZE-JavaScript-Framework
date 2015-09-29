@@ -37,6 +37,29 @@ Uize.module ({
 			},
 
 			{
+				subclass:function (_featuresByType) {
+					var
+						_superclass = this,
+						_class =
+							(_featuresByType || (_featuresByType = {})).hasOwnProperty ('constructor')
+								? _featuresByType.constructor
+								: function () {_superclass.apply (this,arguments)}
+					;
+					Uize.copyInto (
+						_class,
+						Uize.map (_superclass,Uize.clone),
+						_featuresByType.staticProperties,
+						_featuresByType.staticMethods
+					);
+					Uize.copyInto (
+						_class.prototype,
+						Uize.clone (_superclass.prototype),
+						_featuresByType.instanceProperties,
+						_featuresByType.instanceMethods
+					);
+					return _class;
+				},
+
 				itemTypes:{},
 
 				prototype:{

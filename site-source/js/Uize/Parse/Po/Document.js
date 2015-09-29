@@ -34,20 +34,15 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		var
-			/*** General Variables ***/
-				_class = function (_source,_index) {_superclass.call (this,_source,_index)}
-		;
-
-		_class.itemTypes = {
-			comment:Uize.Parse.Code.PoundComment,
-			nameValue:Uize.Parse.Po.NameValue,
-			whitespace:Uize.Parse.Code.Whitespace
-		};
-
-		Uize.copyInto (_class.prototype,_superclass.prototype);
-
-		return _class;
+		return _superclass.subclass ({
+			staticProperties:{
+				itemTypes:{
+					comment:Uize.Parse.Code.PoundComment,
+					nameValue:Uize.Parse.Po.NameValue,
+					whitespace:Uize.Parse.Code.Whitespace
+				}
+			}
+		});
 	}
 });
 

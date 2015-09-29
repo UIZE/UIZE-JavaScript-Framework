@@ -35,28 +35,20 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		var
-			/*** Variables for Scruncher Optimization ***/
-				_Uize_Parse_Xml = Uize.Parse.Xml,
-
-			/*** General Variables ***/
-				_class = function (_source,_index) {
-					var m = this;
-					_superclass.call (m,_source,_index);
-					m.nodes = m.items;
+		return _superclass.subclass ({
+			constructor:function () {
+				_superclass.apply (this,arguments);
+				this.nodes = this.items;
+			},
+			staticProperties:{
+				itemTypes:{
+					tag:Uize.Parse.Xml.Tag,
+					cdata:Uize.Parse.Xml.Cdata,
+					comment:Uize.Parse.Xml.Comment,
+					text:Uize.Parse.Xml.Text
 				}
-		;
-
-		_class.itemTypes = {
-			tag:_Uize_Parse_Xml.Tag,
-			cdata:_Uize_Parse_Xml.Cdata,
-			comment:_Uize_Parse_Xml.Comment,
-			text:_Uize_Parse_Xml.Text
-		};
-
-		Uize.copyInto (_class.prototype,_superclass.prototype);
-
-		return _class;
+			}
+		});
 	}
 });
 
