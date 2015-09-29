@@ -25,19 +25,18 @@
 
 Uize.module ({
 	name:'Uize.Parse.Xml.NodeList',
+	superclass:'Uize.Parse.Items',
 	required:[
-		'Uize.Parse.Items',
 		'Uize.Parse.Xml.Tag',
 		'Uize.Parse.Xml.Cdata',
 		'Uize.Parse.Xml.Comment',
 		'Uize.Parse.Xml.Text'
 	],
-	builder:function () {
+	builder:function (_superclass) {
 		'use strict';
 
 		var
 			/*** Variables for Scruncher Optimization ***/
-				_superclass = Uize.Parse.Items,
 				_Uize_Parse_Xml = Uize.Parse.Xml,
 
 			/*** General Variables ***/

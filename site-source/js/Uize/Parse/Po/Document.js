@@ -25,19 +25,16 @@
 
 Uize.module ({
 	name:'Uize.Parse.Po.Document',
+	superclass:'Uize.Parse.Items',
 	required:[
-		'Uize.Parse.Items',
 		'Uize.Parse.Po.NameValue',
 		'Uize.Parse.Code.PoundComment',
 		'Uize.Parse.Code.Whitespace'
 	],
-	builder:function () {
+	builder:function (_superclass) {
 		'use strict';
 
 		var
-			/*** Variables for Scruncher Optimization ***/
-				_superclass = Uize.Parse.Items,
-
 			/*** General Variables ***/
 				_class = function (_source,_index) {_superclass.call (this,_source,_index)}
 		;
