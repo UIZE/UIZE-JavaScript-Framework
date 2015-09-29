@@ -34,18 +34,17 @@ Uize.module ({
 
 		var
 			/*** Variables for Scruncher Optimization ***/
-				_Uize_Parse_JavaProperties = Uize.Parse.JavaProperties,
-
-			/*** Variables for Performance Optimization ***/
-				_Uize_Parse_JavaProperties_Document = _Uize_Parse_JavaProperties.Document,
-				_Uize_Parse_JavaProperties_Property = _Uize_Parse_JavaProperties.Property
+				_Uize_Parse_JavaProperties = Uize.Parse.JavaProperties
 		;
 
 		return Uize.package ({
+			documentParser:_Uize_Parse_JavaProperties.Document,
+			propertyParser:_Uize_Parse_JavaProperties.Property,
+
 			from:function (_javaPropertiesFileStr) {
 				var _properties = {};
 				Uize.forEach (
-					(new _Uize_Parse_JavaProperties_Document (_javaPropertiesFileStr)).items,
+					(new this.documentParser (_javaPropertiesFileStr)).items,
 					function (_property) {
 						if (_property.name && _property.value)
 							_properties [_property.name.name] = _property.value.value
@@ -70,13 +69,14 @@ Uize.module ({
 
 			to:function (_properties) {
 				var
-					_document = new _Uize_Parse_JavaProperties_Document (),
+					_document = new this.documentParser (),
+					_propertyParser = this.propertyParser,
 					_items = _document.items
 				;
 				Uize.forEach (
 					_properties,
 					function (_propertyValue,_propertyName) {
-						var _property = new _Uize_Parse_JavaProperties_Property ('key=value');
+						var _property = new _propertyParser ('key=value');
 						_property.name.name = _propertyName;
 						_property.value.value = _propertyValue;
 						_items.push (_property);

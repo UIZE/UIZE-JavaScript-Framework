@@ -64,6 +64,9 @@ Uize.module ({
 					isValid:false,
 					name:'',
 
+					unicodeEscape:Uize.Parse.JavaProperties.UnicodeEscaped.to,
+					unicodeUnescape:Uize.Parse.JavaProperties.UnicodeEscaped.from,
+
 					parse:function (_source,_index) {
 						var
 							m = this,
@@ -91,11 +94,8 @@ Uize.module ({
 					},
 
 					serialize:function () {
-						return (
-							this.isValid
-								? Uize.Parse.JavaProperties.UnicodeEscaped.to (_serializerEscaper (this.name))
-								: ''
-						);
+						var m = this;
+						return m.isValid ? m.unicodeEscape (_serializerEscaper (m.name)) : '';
 					}
 				}
 			}

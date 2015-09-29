@@ -35,10 +35,6 @@ Uize.module ({
 		'use strict';
 
 		var
-			/*** Variables for Performance Optimization ***/
-				_Uize_Parse_JavaProperties_PropertyName = Uize.Parse.JavaProperties.PropertyName,
-				_Uize_Parse_JavaProperties_PropertyValue = Uize.Parse.JavaProperties.PropertyValue,
-
 			/*** General Variables ***/
 				_separatorCharsLookup = _charsLookup ('=:'),
 				_inlineWhitespaceCharClass = Uize.Str.CharClass (Uize.Str.Whitespace.inlineWhitespaceCharCodes)
@@ -52,8 +48,8 @@ Uize.module ({
 		return Uize.mergeInto (
 			function (_source,_index) {
 				var m = this;
-				m.name = new _Uize_Parse_JavaProperties_PropertyName;
-				m.value = new _Uize_Parse_JavaProperties_PropertyValue;
+				m.name = new m.parserClassesByType.propertyName;
+				m.value = new m.parserClassesByType.propertyValue;
 				this.parse (_source,_index);
 			},
 			{
@@ -62,6 +58,10 @@ Uize.module ({
 					index:0,
 					length:0,
 					isValid:false,
+					parserClassesByType:{
+						propertyName:Uize.Parse.JavaProperties.PropertyName,
+						propertyValue:Uize.Parse.JavaProperties.PropertyValue
+					},
 
 					parse:function (_source,_index) {
 						function _eatInlineWhitespace () {

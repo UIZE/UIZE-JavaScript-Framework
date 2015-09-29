@@ -35,8 +35,6 @@ Uize.module ({
 
 		var
 			/*** Variables for Performance Optimization ***/
-				_unicodeUnescape = Uize.Parse.JavaProperties.UnicodeEscaped.from,
-				_unicodeEscape = Uize.Parse.JavaProperties.UnicodeEscaped.to,
 				_indexOfNonWhitespace = Uize.Str.Whitespace.indexOfNonWhitespace,
 
 			/*** General Variables ***/
@@ -79,6 +77,9 @@ Uize.module ({
 					isValid:false,
 					value:'',
 
+					unicodeEscape:Uize.Parse.JavaProperties.UnicodeEscaped.to,
+					unicodeUnescape:Uize.Parse.JavaProperties.UnicodeEscaped.from,
+
 					parse:function (_source,_index) {
 						function _eatWhitespace () {
 							_index = (_indexOfNonWhitespace (_source,_index) + 1 || _sourceLength + 1) - 1;
@@ -117,13 +118,14 @@ Uize.module ({
 							}
 						}
 						m.value =
-							_unicodeUnescape (_parserUnescaper (_chunks.join ('') + _source.slice (_chunkStartPos,_index)))
+							m.unicodeUnescape (_parserUnescaper (_chunks.join ('') + _source.slice (_chunkStartPos,_index)))
 						;
 						m.length = _index - m.index;
 					},
 
 					serialize:function () {
-						return this.isValid ? _unicodeEscape (_serializerEscaper (this.value)) : '';
+						var m = this;
+						return m.isValid ? m.unicodeEscape (_serializerEscaper (m.value)) : '';
 					}
 				}
 			}

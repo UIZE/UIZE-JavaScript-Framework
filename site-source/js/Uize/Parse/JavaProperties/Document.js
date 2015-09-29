@@ -36,13 +36,7 @@ Uize.module ({
 		var
 			/*** Variables for Performance Optimization ***/
 				_Uize_Parse = Uize.Parse,
-				_indexOfNonWhitespace = Uize.Str.Whitespace.indexOfNonWhitespace,
-
-			/*** General Variables ***/
-				_parserClassesByType = {
-					comment:_Uize_Parse.Code.PoundComment,
-					property:_Uize_Parse.JavaProperties.Property
-				}
+				_indexOfNonWhitespace = Uize.Str.Whitespace.indexOfNonWhitespace
 		;
 
 		return Uize.mergeInto (
@@ -59,12 +53,16 @@ Uize.module ({
 					index:0,
 					length:0,
 					isValid:true,
+					parserClassesByType:{
+						comment:_Uize_Parse.Code.PoundComment,
+						property:_Uize_Parse.JavaProperties.Property
+					},
 
 					parse:function (_source,_index) {
 						function _tryParseItem (_itemType) {
 							var _item =
 								m._currentItems [_itemType] ||
-								(m._currentItems [_itemType] = new _parserClassesByType [_itemType])
+								(m._currentItems [_itemType] = new m.parserClassesByType [_itemType])
 							;
 							_item.parse (_source,_index);
 							if (_item.isValid) {
