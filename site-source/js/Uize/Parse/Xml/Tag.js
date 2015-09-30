@@ -25,13 +25,14 @@
 
 Uize.module ({
 	name:'Uize.Parse.Xml.Tag',
+	superclass:'Uize.Parse.Base',
 	required:[
 		'Uize.Str.Whitespace',
 		'Uize.Parse.Xml.TagOrAttributeName',
 		'Uize.Parse.Xml.TagAttributes'
 		// 'Uize.Parse.Xml.NodeList'  // ISSUE: circular dependency
 	],
-	builder:function () {
+	builder:function (_superclass) {
 		'use strict';
 
 		var
@@ -41,107 +42,100 @@ Uize.module ({
 				_indexOfNonWhitespace = Uize.Str.Whitespace.indexOfNonWhitespace
 		;
 
-		return Uize.mergeInto (
-			function (_source,_index) {
+		return _superclass.subclass ({
+			constructor:function () {
 				var m = this;
 				m.tagName = new _Uize_Util_Xml.TagOrAttributeName;
 				m.tagAttributes = new _Uize_Util_Xml.TagAttributes;
 				m.childNodes = _undefined;
-				m.parse (_source,_index);
+				_superclass.apply (m,arguments);
 			},
 
-			{
-				prototype:{
-					source:'',
-					index:0,
-					length:0,
-					isValid:false,
-
-					parse:function (_source,_index) {
-						function _eatWhitespace () {
-							_index = (_indexOfNonWhitespace (_source,_index) + 1 || _sourceLength + 1) - 1;
-						}
-						var
-							m = this,
-							_sourceLength = (m.source = _source = _source || '').length
-						;
-						m.index = _index || (_index = 0);
-						m.isValid = false;
-						if (_source.charAt (_index) == '<') {
-							_index++;
+			instanceMethods:{
+				parse:function (_source,_index) {
+					function _eatWhitespace () {
+						_index = (_indexOfNonWhitespace (_source,_index) + 1 || _sourceLength + 1) - 1;
+					}
+					var
+						m = this,
+						_sourceLength = (m.source = _source = _source || '').length
+					;
+					m.index = _index || (_index = 0);
+					m.isValid = false;
+					if (_source.charAt (_index) == '<') {
+						_index++;
+						_eatWhitespace ();
+						m.tagName.parse (_source,_index);
+						if (m.tagName.isValid) {
+							_index += m.tagName.length;
 							_eatWhitespace ();
-							m.tagName.parse (_source,_index);
-							if (m.tagName.isValid) {
-								_index += m.tagName.length;
+							m.tagAttributes.parse (_source,_index);
+							_index += m.tagAttributes.length;
+							_eatWhitespace ();
+							if (_source.charAt (_index) == '>') {
+								m.childNodes = new _Uize_Util_Xml.NodeList (_source,++_index);
+								_index += m.childNodes.length;
 								_eatWhitespace ();
-								m.tagAttributes.parse (_source,_index);
-								_index += m.tagAttributes.length;
-								_eatWhitespace ();
-								if (_source.charAt (_index) == '>') {
-									m.childNodes = new _Uize_Util_Xml.NodeList (_source,++_index);
-									_index += m.childNodes.length;
+								if (_source.charAt (_index) == '<') {
+									_index++;
 									_eatWhitespace ();
-									if (_source.charAt (_index) == '<') {
+									if (_source.charAt (_index) == '/') {
 										_index++;
 										_eatWhitespace ();
-										if (_source.charAt (_index) == '/') {
-											_index++;
+										var
+											_tagNameSerialized = m.tagName.serialize (),
+											_tagNameSerializedLength = _tagNameSerialized.length
+										;
+										if (_source.substr (_index,_tagNameSerializedLength) == _tagNameSerialized) {
+											_index += _tagNameSerializedLength;
 											_eatWhitespace ();
-											var
-												_tagNameSerialized = m.tagName.serialize (),
-												_tagNameSerializedLength = _tagNameSerialized.length
-											;
-											if (_source.substr (_index,_tagNameSerializedLength) == _tagNameSerialized) {
-												_index += _tagNameSerializedLength;
-												_eatWhitespace ();
-												if (_source.charAt (_index) == '>') {
-													_index++;
-													m.isValid = true;
-												}
+											if (_source.charAt (_index) == '>') {
+												_index++;
+												m.isValid = true;
 											}
 										}
 									}
-								} else if (_source.charAt (_index) == '/') {
+								}
+							} else if (_source.charAt (_index) == '/') {
+								_index++;
+								_eatWhitespace ();
+								if (_source.charAt (_index) == '>') {
+									m.childNodes = _undefined;
 									_index++;
-									_eatWhitespace ();
-									if (_source.charAt (_index) == '>') {
-										m.childNodes = _undefined;
-										_index++;
-										m.isValid = true;
-									}
+									m.isValid = true;
 								}
 							}
 						}
-						if (!m.isValid)
-							_index = m.index
-						;
-						m.tag = _source.slice (m.index,_index);
-						m.length = _index - m.index;
-					},
+					}
+					if (!m.isValid)
+						_index = m.index
+					;
+					m.tag = _source.slice (m.index,_index);
+					m.length = _index - m.index;
+				},
 
-					serialize:function () {
-						var m = this;
-						if (m.isValid) {
-							var
-								_tagNameSerialized = m.tagName.serialize (),
-								_tagAttributesSerialized = m.tagAttributes.serialize (),
-								_childNodes = m.childNodes
-							;
-							return (
-								'<' +
-									_tagNameSerialized +
-									(_tagAttributesSerialized && ' ') + _tagAttributesSerialized +
-									(_childNodes ? '' : '/') +
-								'>' +
-								(_childNodes ? (_childNodes.serialize () + '</' + _tagNameSerialized + '>') : '')
-							);
-						} else {
-							return '';
-						}
+				serialize:function () {
+					var m = this;
+					if (m.isValid) {
+						var
+							_tagNameSerialized = m.tagName.serialize (),
+							_tagAttributesSerialized = m.tagAttributes.serialize (),
+							_childNodes = m.childNodes
+						;
+						return (
+							'<' +
+								_tagNameSerialized +
+								(_tagAttributesSerialized && ' ') + _tagAttributesSerialized +
+								(_childNodes ? '' : '/') +
+							'>' +
+							(_childNodes ? (_childNodes.serialize () + '</' + _tagNameSerialized + '>') : '')
+						);
+					} else {
+						return '';
 					}
 				}
 			}
-		);
+		});
 	}
 });
 

@@ -25,8 +25,9 @@
 
 Uize.module ({
 	name:'Uize.Parse.Po.Name',
+	superclass:'Uize.Parse.Base',
 	required:'Uize.Str.Whitespace',
-	builder:function () {
+	builder:function (_superclass) {
 		'use strict';
 
 		var
@@ -38,37 +39,30 @@ Uize.module ({
 				_indexOfWhitespace = _Uize_Str_Whitespace.indexOfWhitespace
 		;
 
-		return Uize.mergeInto (
-			function (_source,_index) {
-				this.parse (_source,_index);
+		return _superclass.subclass ({
+			instanceProperties:{
+				name:''
 			},
-			{
-				prototype:{
-					source:'',
-					index:0,
-					length:0,
-					isValid:false,
-					name:'',
 
-					parse:function (_source,_index) {
-						var
-							m = this,
-							_sourceLength = (m.source = _source = _source || '').length
-						;
-						m.index = _index || (_index = 0);
-						if (_isNonWhitespace (_source.charAt (_index)))
-							_index = ((_indexOfWhitespace (_source,_index) + 1) || _sourceLength + 1) - 1
-						;
-						m.name = _source.slice (m.index,_index);
-						m.isValid = !!(m.length = _index - m.index);
-					},
+			instanceMethods:{
+				parse:function (_source,_index) {
+					var
+						m = this,
+						_sourceLength = (m.source = _source = _source || '').length
+					;
+					m.index = _index || (_index = 0);
+					if (_isNonWhitespace (_source.charAt (_index)))
+						_index = ((_indexOfWhitespace (_source,_index) + 1) || _sourceLength + 1) - 1
+					;
+					m.name = _source.slice (m.index,_index);
+					m.isValid = !!(m.length = _index - m.index);
+				},
 
-					serialize:function () {
-						return this.isValid ? this.name : '';
-					}
+				serialize:function () {
+					return this.isValid ? this.name : '';
 				}
 			}
-		);
+		});
 	}
 });
 

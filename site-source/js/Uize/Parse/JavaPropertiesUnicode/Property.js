@@ -34,12 +34,11 @@ Uize.module ({
 		'use strict';
 
 		var
-			_class = function () {return _superclass.apply (this,arguments)},
-			_classPrototyoe = _class.prototype
+			_class = _superclass.subclass (),
+			_parserClassesByType = _class.prototype.parserClassesByType
 		;
-		Uize.copyInto (_classPrototyoe,Uize.clone (_superclass.prototype));
-		_classPrototyoe.parserClassesByType.propertyName = Uize.Parse.JavaPropertiesUnicode.PropertyName;
-		_classPrototyoe.parserClassesByType.propertyValue = Uize.Parse.JavaPropertiesUnicode.PropertyValue;
+		_parserClassesByType.propertyName = Uize.Parse.JavaPropertiesUnicode.PropertyName;
+		_parserClassesByType.propertyValue = Uize.Parse.JavaPropertiesUnicode.PropertyValue;
 
 		return _class;
 	}

@@ -25,13 +25,14 @@
 
 Uize.module ({
 	name:'Uize.Parse.JavaProperties.Property',
+	superclass:'Uize.Parse.Base',
 	required:[
 		'Uize.Str.Whitespace',
 		'Uize.Str.CharClass',
 		'Uize.Parse.JavaProperties.PropertyName',
 		'Uize.Parse.JavaProperties.PropertyValue'
 	],
-	builder:function () {
+	builder:function (_superclass) {
 		'use strict';
 
 		var
@@ -45,55 +46,52 @@ Uize.module ({
 				return Uize.lookup (_charsStr.split (''));
 			}
 
-		return Uize.mergeInto (
-			function (_source,_index) {
+		return _superclass.subclass ({
+			constructor:function () {
 				var m = this;
 				m.name = new m.parserClassesByType.propertyName;
 				m.value = new m.parserClassesByType.propertyValue;
-				this.parse (_source,_index);
+				_superclass.apply (m,arguments);
 			},
-			{
-				prototype:{
-					source:'',
-					index:0,
-					length:0,
-					isValid:false,
-					parserClassesByType:{
-						propertyName:Uize.Parse.JavaProperties.PropertyName,
-						propertyValue:Uize.Parse.JavaProperties.PropertyValue
-					},
 
-					parse:function (_source,_index) {
-						function _eatInlineWhitespace () {
-							_index =
-								(_inlineWhitespaceCharClass.indexOfNonClassChar (_source,_index) + 1 || _sourceLength + 1) - 1
-							;
-						}
-						var
-							m = this,
-							_sourceLength = (m.source = _source = _source || '').length
+			instanceProperties:{
+				parserClassesByType:{
+					propertyName:Uize.Parse.JavaProperties.PropertyName,
+					propertyValue:Uize.Parse.JavaProperties.PropertyValue
+				}
+			},
+
+			instanceMethods:{
+				parse:function (_source,_index) {
+					function _eatInlineWhitespace () {
+						_index =
+							(_inlineWhitespaceCharClass.indexOfNonClassChar (_source,_index) + 1 || _sourceLength + 1) - 1
 						;
-						m.index = _index || (_index = 0);
-						m.name.parse (_source,_index);
-						if (m.name.isValid) {
-							_index += m.name.length;
-							_eatInlineWhitespace ();
-							if (_separatorCharsLookup [_source.charAt (_index)]) {
-								_index++;
-								_eatInlineWhitespace ();
-							}
-							m.value.parse (_source,_index);
-							_index += m.value.length;
-						}
-						m.isValid = !!(m.length = _index - m.index);
-					},
-
-					serialize:function () {
-						return this.isValid ? this.name.serialize () + '=' + this.value.serialize () : '';
 					}
+					var
+						m = this,
+						_sourceLength = (m.source = _source = _source || '').length
+					;
+					m.index = _index || (_index = 0);
+					m.name.parse (_source,_index);
+					if (m.name.isValid) {
+						_index += m.name.length;
+						_eatInlineWhitespace ();
+						if (_separatorCharsLookup [_source.charAt (_index)]) {
+							_index++;
+							_eatInlineWhitespace ();
+						}
+						m.value.parse (_source,_index);
+						_index += m.value.length;
+					}
+					m.isValid = !!(m.length = _index - m.index);
+				},
+
+				serialize:function () {
+					return this.isValid ? this.name.serialize () + '=' + this.value.serialize () : '';
 				}
 			}
-		);
+		});
 	}
 });
 

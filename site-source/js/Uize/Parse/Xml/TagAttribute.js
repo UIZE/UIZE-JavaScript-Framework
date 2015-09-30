@@ -25,12 +25,13 @@
 
 Uize.module ({
 	name:'Uize.Parse.Xml.TagAttribute',
+	superclass:'Uize.Parse.Base',
 	required:[
 		'Uize.Str.Whitespace',
 		'Uize.Parse.Xml.TagOrAttributeName',
 		'Uize.Parse.Xml.TagAttributeValue'
 	],
-	builder:function () {
+	builder:function (_superclass) {
 		'use strict';
 
 		var
@@ -40,50 +41,43 @@ Uize.module ({
 				_indexOfNonWhitespace = Uize.Str.Whitespace.indexOfNonWhitespace
 		;
 
-		return Uize.mergeInto (
-			function (_source,_index) {
+		return _superclass.subclass ({
+			constructor:function () {
 				var m = this;
 				m.name = new _Uize_Util_Xml_TagOrAttributeName;
 				m.value = new _Uize_Util_Xml_TagAttributeValue;
-				m.parse (_source,_index);
+				_superclass.apply (m,arguments);
 			},
 
-			{
-				prototype:{
-					source:'',
-					index:0,
-					length:0,
-					isValid:false,
-
-					parse:function (_source,_index) {
-						function _eatWhitespace () {
-							_index = (_indexOfNonWhitespace (_source,_index) + 1 || _sourceLength + 1) - 1;
-						}
-						var
-							m = this,
-							_sourceLength = (m.source = _source = _source || '').length
-						;
-						m.index = _index || (_index = 0);
-						m.name.parse (_source,_index);
-						if (m.name.isValid) {
-							_index += m.name.length;
-							_eatWhitespace ();
-							if (_source.charAt (_index) == "=") {
-								_index++;
-								_eatWhitespace ();
-								m.value.parse (_source,_index);
-								_index += m.value.length;
-							}
-						}
-						m.isValid = !!(m.length = _index - m.index);
-					},
-
-					serialize:function () {
-						return this.isValid ? this.name.serialize () + '=' + this.value.serialize () : '';
+			instanceMethods:{
+				parse:function (_source,_index) {
+					function _eatWhitespace () {
+						_index = (_indexOfNonWhitespace (_source,_index) + 1 || _sourceLength + 1) - 1;
 					}
+					var
+						m = this,
+						_sourceLength = (m.source = _source = _source || '').length
+					;
+					m.index = _index || (_index = 0);
+					m.name.parse (_source,_index);
+					if (m.name.isValid) {
+						_index += m.name.length;
+						_eatWhitespace ();
+						if (_source.charAt (_index) == "=") {
+							_index++;
+							_eatWhitespace ();
+							m.value.parse (_source,_index);
+							_index += m.value.length;
+						}
+					}
+					m.isValid = !!(m.length = _index - m.index);
+				},
+
+				serialize:function () {
+					return this.isValid ? this.name.serialize () + '=' + this.value.serialize () : '';
 				}
 			}
-		);
+		});
 	}
 });
 

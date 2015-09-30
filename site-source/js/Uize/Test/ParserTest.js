@@ -29,6 +29,28 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
+		var
+			/*** Variables for Performance Optimization ***/
+				_isPlainObject = Uize.isPlainObject
+		;
+
+		/*** Utility Functions ***/
+			function _mergeSourceIntoTarget (_target,_source) {
+				var
+					_targetPropertyValue,
+					_sourcePropertyValue
+				;
+				for (var _property in _source)
+					(
+						_isPlainObject (_sourcePropertyValue = _source [_property]) &&
+						(_targetPropertyValue = _target [_property]) &&
+						typeof _targetPropertyValue == 'object'
+					)
+						? _mergeSourceIntoTarget (_targetPropertyValue,_sourcePropertyValue)
+						: (_target [_property] = _sourcePropertyValue)
+				;
+			}
+
 		return _superclass.subclass ({
 			staticMethods:{
 				parserTest:function (_title,_arguments,_expectedInstanceState) {
@@ -68,7 +90,7 @@ Uize.module ({
 							var _parser = new (Uize.getModuleByName (this.Class.parserClass));
 							typeof _instanceStateOrSourceText == 'string'
 								? _parser.parse (_instanceStateOrSourceText)
-								: Uize.mergeInto (_parser,_instanceStateOrSourceText)
+								: _mergeSourceIntoTarget (_parser,_instanceStateOrSourceText)
 							;
 							return this.expect (_expected,_parser.serialize ());
 						}

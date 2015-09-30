@@ -25,46 +25,39 @@
 
 Uize.module ({
 	name:'Uize.Parse.Xml.Cdata',
-	builder:function () {
+	superclass:'Uize.Parse.Base',
+	builder:function (_superclass) {
 		'use strict';
 
-		return Uize.mergeInto (
-			function (_source,_index) {
-				this.parse (_source,_index);
+		return _superclass.subclass ({
+			instanceProperties:{
+				cdata:''
 			},
 
-			{
-				prototype:{
-					source:'',
-					index:0,
-					length:0,
-					isValid:false,
-					cdata:'',
-
-					parse:function (_source,_index) {
-						var
-							m = this,
-							_sourceLength = (m.source = _source = _source || '').length
-						;
-						m.index = _index || (_index = 0);
-						m.cdata = '';
-						m.length = 0;
-						if (_source.substr (_index,9) == '<![CDATA[') {
-							var _endPos = _source.indexOf (']]>',_index += 9);
-							if (_endPos > -1) {
-								m.cdata = _source.slice (_index,_endPos);
-								m.length = _endPos - _index + 12;
-							}
+			instanceMethods:{
+				parse:function (_source,_index) {
+					var
+						m = this,
+						_sourceLength = (m.source = _source = _source || '').length
+					;
+					m.index = _index || (_index = 0);
+					m.cdata = '';
+					m.length = 0;
+					if (_source.substr (_index,9) == '<![CDATA[') {
+						var _endPos = _source.indexOf (']]>',_index += 9);
+						if (_endPos > -1) {
+							m.cdata = _source.slice (_index,_endPos);
+							m.length = _endPos - _index + 12;
 						}
-						m.isValid = !!m.length;
-					},
-
-					serialize:function () {
-						return this.isValid ? '<![CDATA[' + this.cdata + ']]>' : '';
 					}
+					m.isValid = !!m.length;
+				},
+
+				serialize:function () {
+					return this.isValid ? '<![CDATA[' + this.cdata + ']]>' : '';
 				}
 			}
-		);
+		});
 	}
 });
 

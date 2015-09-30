@@ -25,8 +25,9 @@
 
 Uize.module ({
 	name:'Uize.Parse.Code.Whitespace',
+	superclass:'Uize.Parse.Base',
 	required:'Uize.Str.Whitespace',
-	builder:function () {
+	builder:function (_superclass) {
 		'use strict';
 
 		var
@@ -34,32 +35,25 @@ Uize.module ({
 				_indexOfNonWhitespace = Uize.Str.Whitespace.indexOfNonWhitespace
 		;
 
-		return Uize.mergeInto (
-			function (_source,_index) {
-				this.parse (_source,_index);
+		return _superclass.subclass ({
+			instanceProperties:{
+				whitespace:''
 			},
-			{
-				prototype:{
-					source:'',
-					index:0,
-					length:0,
-					isValid:false,
-					whitespace:'',
 
-					parse:function (_source,_index) {
-						var m = this;
-						m.source = _source = _source || '';
-						m.index = _index || (_index = 0);
-						_index = (_indexOfNonWhitespace (_source,_index) + 1 || _source.length + 1) - 1;
-						m.whitespace = (m.isValid = !!(m.length = _index - m.index)) ? _source.slice (m.index,_index) : '';
-					},
+			instanceMethods:{
+				parse:function (_source,_index) {
+					var m = this;
+					m.source = _source = _source || '';
+					m.index = _index || (_index = 0);
+					_index = (_indexOfNonWhitespace (_source,_index) + 1 || _source.length + 1) - 1;
+					m.whitespace = (m.isValid = !!(m.length = _index - m.index)) ? _source.slice (m.index,_index) : '';
+				},
 
-					serialize:function () {
-						return this.whitespace;
-					}
+				serialize:function () {
+					return this.whitespace;
 				}
 			}
-		);
+		});
 	}
 });
 

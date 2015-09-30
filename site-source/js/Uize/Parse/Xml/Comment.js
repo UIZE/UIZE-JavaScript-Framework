@@ -25,46 +25,39 @@
 
 Uize.module ({
 	name:'Uize.Parse.Xml.Comment',
-	builder:function () {
+	superclass:'Uize.Parse.Base',
+	builder:function (_superclass) {
 		'use strict';
 
-		return Uize.mergeInto (
-			function (_source,_index) {
-				this.parse (_source,_index);
+		return _superclass.subclass ({
+			instanceProperties:{
+				comment:''
 			},
 
-			{
-				prototype:{
-					source:'',
-					index:0,
-					length:0,
-					isValid:false,
-					comment:'',
-
-					parse:function (_source,_index) {
-						var
-							m = this,
-							_sourceLength = (m.source = _source = _source || '').length
-						;
-						m.comment = '';
-						m.length = 0;
-						m.index = _index || (_index = 0);
-						if (_source.substr (_index,4) == '<!--') {
-							var _endPos = _source.indexOf ('-->',_index += 4);
-							if (_endPos > -1) {
-								m.comment = _source.slice (_index,_endPos);
-								m.length = _endPos - _index + 7;
-							}
+			instanceMethods:{
+				parse:function (_source,_index) {
+					var
+						m = this,
+						_sourceLength = (m.source = _source = _source || '').length
+					;
+					m.comment = '';
+					m.length = 0;
+					m.index = _index || (_index = 0);
+					if (_source.substr (_index,4) == '<!--') {
+						var _endPos = _source.indexOf ('-->',_index += 4);
+						if (_endPos > -1) {
+							m.comment = _source.slice (_index,_endPos);
+							m.length = _endPos - _index + 7;
 						}
-						m.isValid = !!m.length;
-					},
-
-					serialize:function () {
-						return this.isValid ? '<!--' + this.comment + '-->' : '';
 					}
+					m.isValid = !!m.length;
+				},
+
+				serialize:function () {
+					return this.isValid ? '<!--' + this.comment + '-->' : '';
 				}
 			}
-		);
+		});
 	}
 });
 

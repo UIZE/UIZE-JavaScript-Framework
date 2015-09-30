@@ -25,7 +25,8 @@
 
 Uize.module ({
 	name:'Uize.Parse.Xml.TagOrAttributeName',
-	builder:function () {
+	superclass:'Uize.Parse.Base',
+	builder:function (_superclass) {
 		'use strict';
 
 		var
@@ -40,57 +41,50 @@ Uize.module ({
 				return Uize.lookup (_charsStr.split (''));
 			}
 
-		return Uize.mergeInto (
-			function (_source,_index) {
-				this.parse (_source,_index);
+		return _superclass.subclass ({
+			instanceProperties:{
+				namespace:'',
+				name:''
 			},
-			{
-				prototype:{
-					source:'',
-					index:0,
-					length:0,
-					isValid:false,
-					namespace:'',
-					name:'',
 
-					parse:function (_source,_index) {
-						var
-							m = this,
-							_sourceLength = (m.source = _source = _source || '').length
+			instanceMethods:{
+				parse:function (_source,_index) {
+					var
+						m = this,
+						_sourceLength = (m.source = _source = _source || '').length
+					;
+					m.index = _index || (_index = 0);
+					m.namespace = m.name = '';
+					m.isValid = false;
+					if (_tagNameStartCharsLookup [_source.charAt (_index)]) {
+						m.isValid = true;
+						_index++;
+						while (_index < _sourceLength && _tagNameContinueCharsLookup [_source.charAt (_index)])
+							_index++
 						;
-						m.index = _index || (_index = 0);
-						m.namespace = m.name = '';
-						m.isValid = false;
-						if (_tagNameStartCharsLookup [_source.charAt (_index)]) {
-							m.isValid = true;
-							_index++;
-							while (_index < _sourceLength && _tagNameContinueCharsLookup [_source.charAt (_index)])
-								_index++
-							;
-							if (_source.charAt (_index) == ':') {
-								m.namespace = _source.slice (m.index,_index);
-								var _namePos = ++_index;
-								if (_tagNameStartCharsLookup [_source.charAt (_index)]) {
-									_index++;
-									while (_index < _sourceLength && _tagNameContinueCharsLookup [_source.charAt (_index)])
-										_index++
-									;
-									m.name = _source.slice (_namePos,_index);
-								}
-							} else {
-								m.name = _source.slice (m.index,_index);
+						if (_source.charAt (_index) == ':') {
+							m.namespace = _source.slice (m.index,_index);
+							var _namePos = ++_index;
+							if (_tagNameStartCharsLookup [_source.charAt (_index)]) {
+								_index++;
+								while (_index < _sourceLength && _tagNameContinueCharsLookup [_source.charAt (_index)])
+									_index++
+								;
+								m.name = _source.slice (_namePos,_index);
 							}
-							m.length = _index - m.index;
+						} else {
+							m.name = _source.slice (m.index,_index);
 						}
-					},
-
-					serialize:function () {
-						var m = this;
-						return m.isValid ? (m.namespace + (m.namespace && ':') + m.name) : '';
+						m.length = _index - m.index;
 					}
+				},
+
+				serialize:function () {
+					var m = this;
+					return m.isValid ? (m.namespace + (m.namespace && ':') + m.name) : '';
 				}
 			}
-		);
+		});
 	}
 });
 

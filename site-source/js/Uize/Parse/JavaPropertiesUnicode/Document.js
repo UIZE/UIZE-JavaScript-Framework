@@ -30,13 +30,8 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		var
-			_class = function () {return _superclass.apply (this,arguments)},
-			_classPrototyoe = _class.prototype
-		;
-		Uize.copyInto (_classPrototyoe,Uize.clone (_superclass.prototype));
-		_classPrototyoe.parserClassesByType.property = Uize.Parse.JavaPropertiesUnicode.Property;
-
+		var _class = _superclass.subclass ();
+		_class.prototype.parserClassesByType.property = Uize.Parse.JavaPropertiesUnicode.Property;
 		return _class;
 	}
 });

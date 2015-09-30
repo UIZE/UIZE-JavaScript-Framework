@@ -25,12 +25,13 @@
 
 Uize.module ({
 	name:'Uize.Parse.JavaProperties.PropertyValue',
+	superclass:'Uize.Parse.Base',
 	required:[
 		'Uize.Str.Whitespace',
 		'Uize.Str.Replace',
 		'Uize.Parse.JavaProperties.UnicodeEscaped'
 	],
-	builder:function () {
+	builder:function (_superclass) {
 		'use strict';
 
 		var
@@ -65,71 +66,64 @@ Uize.module ({
 				return Uize.lookup (_charsStr.split (''));
 			}
 
-		return Uize.mergeInto (
-			function (_source,_index) {
-				this.parse (_source,_index);
+		return _superclass.subclass ({
+			instanceProperties:{
+				value:''
 			},
-			{
-				prototype:{
-					source:'',
-					index:0,
-					length:0,
-					isValid:false,
-					value:'',
 
-					unicodeEscape:Uize.Parse.JavaProperties.UnicodeEscaped.to,
-					unicodeUnescape:Uize.Parse.JavaProperties.UnicodeEscaped.from,
+			instanceMethods:{
+				unicodeEscape:Uize.Parse.JavaProperties.UnicodeEscaped.to,
+				unicodeUnescape:Uize.Parse.JavaProperties.UnicodeEscaped.from,
 
-					parse:function (_source,_index) {
-						function _eatWhitespace () {
-							_index = (_indexOfNonWhitespace (_source,_index) + 1 || _sourceLength + 1) - 1;
-						}
-						var
-							m = this,
-							_sourceLength = (m.source = _source = _source || '').length
-						;
-						m.index = _index || (_index = 0);
-						m.isValid = true;
-						var
-							_inEscape = false,
-							_char,
-							_chunks = [],
-							_chunksLength = 0,
-							_chunkStartPos = _index
-						;
-						while (_index < _sourceLength) {
-							_char = _source.charAt (_index);
-							if (_inEscape) {
-								if (_linebreakLookup [_char]) {
-									_chunks [_chunksLength++] = _source.slice (_chunkStartPos,_index - 1);
-									_eatWhitespace ();
-									_chunkStartPos = _index;
-								} else {
-									_index++;
-								}
-								_inEscape = false;
+				parse:function (_source,_index) {
+					function _eatWhitespace () {
+						_index = (_indexOfNonWhitespace (_source,_index) + 1 || _sourceLength + 1) - 1;
+					}
+					var
+						m = this,
+						_sourceLength = (m.source = _source = _source || '').length
+					;
+					m.index = _index || (_index = 0);
+					m.isValid = true;
+					var
+						_inEscape = false,
+						_char,
+						_chunks = [],
+						_chunksLength = 0,
+						_chunkStartPos = _index
+					;
+					while (_index < _sourceLength) {
+						_char = _source.charAt (_index);
+						if (_inEscape) {
+							if (_linebreakLookup [_char]) {
+								_chunks [_chunksLength++] = _source.slice (_chunkStartPos,_index - 1);
+								_eatWhitespace ();
+								_chunkStartPos = _index;
 							} else {
-								if (_terminatingCharsLookup [_char]) {
-									break;
-								} else {
-									_inEscape = _char == '\\';
-									_index++;
-								}
+								_index++;
+							}
+							_inEscape = false;
+						} else {
+							if (_terminatingCharsLookup [_char]) {
+								break;
+							} else {
+								_inEscape = _char == '\\';
+								_index++;
 							}
 						}
-						m.value =
-							m.unicodeUnescape (_parserUnescaper (_chunks.join ('') + _source.slice (_chunkStartPos,_index)))
-						;
-						m.length = _index - m.index;
-					},
-
-					serialize:function () {
-						var m = this;
-						return m.isValid ? m.unicodeEscape (_serializerEscaper (m.value)) : '';
 					}
+					m.value =
+						m.unicodeUnescape (_parserUnescaper (_chunks.join ('') + _source.slice (_chunkStartPos,_index)))
+					;
+					m.length = _index - m.index;
+				},
+
+				serialize:function () {
+					var m = this;
+					return m.isValid ? m.unicodeEscape (_serializerEscaper (m.value)) : '';
 				}
 			}
-		);
+		});
 	}
 });
 

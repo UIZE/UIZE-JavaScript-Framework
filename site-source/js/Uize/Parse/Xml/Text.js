@@ -25,11 +25,12 @@
 
 Uize.module ({
 	name:'Uize.Parse.Xml.Text',
+	superclass:'Uize.Parse.Base',
 	required:[
 		'Uize.Str.Replace',
 		'Uize.Util.Html.Encode'
 	],
-	builder:function () {
+	builder:function (_superclass) {
 		'use strict';
 
 		var
@@ -41,41 +42,34 @@ Uize.module ({
 				}),
 				_htmlDecode = Uize.Util.Html.Encode.decode
 		;
-		return Uize.mergeInto (
-			function (_source,_index) {
-				this.parse (_source,_index);
+
+		return _superclass.subclass ({
+			instanceProperties:{
+				text:''
 			},
 
-			{
-				prototype:{
-					source:'',
-					index:0,
-					length:0,
-					isValid:false,
-					text:'',
-
-					parse:function (_source,_index) {
-						var
-							m = this,
-							_sourceLength = (m.source = _source = _source || '').length
-						;
-						m.index = _index || (_index = 0);
-						if (m.isValid = _source.charAt (_index) != '<') {
-							var _endPos = ((_source.indexOf ('<',_index + 1)) + 1 || _sourceLength + 1) - 1;
-							m.text = _htmlDecode (_source.slice (_index,_endPos));
-							m.length = _endPos - _index;
-						} else {
-							m.text = '';
-							m.length = 0;
-						}
-					},
-
-					serialize:function () {
-						return _htmlEncode (this.text);
+			instanceMethods:{
+				parse:function (_source,_index) {
+					var
+						m = this,
+						_sourceLength = (m.source = _source = _source || '').length
+					;
+					m.index = _index || (_index = 0);
+					if (m.isValid = _source.charAt (_index) != '<') {
+						var _endPos = ((_source.indexOf ('<',_index + 1)) + 1 || _sourceLength + 1) - 1;
+						m.text = _htmlDecode (_source.slice (_index,_endPos));
+						m.length = _endPos - _index;
+					} else {
+						m.text = '';
+						m.length = 0;
 					}
+				},
+
+				serialize:function () {
+					return _htmlEncode (this.text);
 				}
 			}
-		);
+		});
 	}
 });
 

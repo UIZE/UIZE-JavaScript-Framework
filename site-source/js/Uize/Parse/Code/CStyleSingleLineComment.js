@@ -25,48 +25,41 @@
 
 Uize.module ({
 	name:'Uize.Parse.Code.CStyleSingleLineComment',
-	builder:function () {
+	superclass:'Uize.Parse.Base',
+	builder:function (_superclass) {
 		'use strict';
 
-		return Uize.mergeInto (
-			function (_source,_index) {
-				this.parse (_source,_index);
+		return _superclass.subclass ({
+			instanceProperties:{
+				comment:''
 			},
 
-			{
-				prototype:{
-					source:'',
-					index:0,
-					length:0,
-					isValid:false,
-					comment:'',
-
-					parse:function (_source,_index) {
-						var
-							m = this,
-							_sourceLength = (m.source = _source = _source || '').length
-						;
-						m.index = _index || (_index = 0);
-						if (m.isValid = _source.substr (_index,2) == '//') {
-							var _commentBodyStartPos = _index + 2;
-							_index = Math.min (
-								(_source.indexOf ('\r',_commentBodyStartPos) + 1 || _sourceLength + 1) - 1,
-								(_source.indexOf ('\n',_commentBodyStartPos) + 1 || _sourceLength + 1) - 1
-							);
-							m.comment = _source.slice (_commentBodyStartPos,_index);
-							m.length = _index - m.index;
-						} else {
-							m.comment = '';
-							m.length = 0;
-						}
-					},
-
-					serialize:function () {
-						return this.isValid ? '//' + this.comment : '';
+			instanceMethods:{
+				parse:function (_source,_index) {
+					var
+						m = this,
+						_sourceLength = (m.source = _source = _source || '').length
+					;
+					m.index = _index || (_index = 0);
+					if (m.isValid = _source.substr (_index,2) == '//') {
+						var _commentBodyStartPos = _index + 2;
+						_index = Math.min (
+							(_source.indexOf ('\r',_commentBodyStartPos) + 1 || _sourceLength + 1) - 1,
+							(_source.indexOf ('\n',_commentBodyStartPos) + 1 || _sourceLength + 1) - 1
+						);
+						m.comment = _source.slice (_commentBodyStartPos,_index);
+						m.length = _index - m.index;
+					} else {
+						m.comment = '';
+						m.length = 0;
 					}
+				},
+
+				serialize:function () {
+					return this.isValid ? '//' + this.comment : '';
 				}
 			}
-		);
+		});
 	}
 });
 

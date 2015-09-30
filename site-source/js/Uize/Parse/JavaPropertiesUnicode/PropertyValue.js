@@ -29,18 +29,12 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		var _class = function () {return _superclass.apply (this,arguments)};
-
-		Uize.copyInto (
-			_class.prototype,
-			Uize.clone (_superclass.prototype),
-			{
+		return _superclass.subclass ({
+			instanceMethods:{
 				unicodeEscape:Uize.returnX,
 				unicodeUnescape:Uize.returnX
 			}
-		);
-
-		return _class;
+		});
 	}
 });
 

@@ -25,47 +25,40 @@
 
 Uize.module ({
 	name:'Uize.Parse.Code.CStyleMultiLineComment',
-	builder:function () {
+	superclass:'Uize.Parse.Base',
+	builder:function (_superclass) {
 		'use strict';
 
-		return Uize.mergeInto (
-			function (_source,_index) {
-				this.parse (_source,_index);
+		return _superclass.subclass ({
+			instanceProperties:{
+				comment:''
 			},
 
-			{
-				prototype:{
-					source:'',
-					index:0,
-					length:0,
-					isValid:false,
-					comment:'',
-
-					parse:function (_source,_index) {
-						var
-							m = this,
-							_sourceLength = (m.source = _source = _source || '').length
-						;
-						m.index = _index || (_index = 0);
-						if (
-							m.isValid =
-								_source.substr (_index,2) == '/*' &&
-								(_index = _source.indexOf ('*/',_index + 2)) > -1
-						) {
-							m.comment = _source.slice (m.index + 2,_index);
-							m.length = _index + 2 - m.index;
-						} else {
-							m.comment = '';
-							m.length = 0;
-						}
-					},
-
-					serialize:function () {
-						return this.isValid ? '/*' + this.comment + '*/' : '';
+			instanceMethods:{
+				parse:function (_source,_index) {
+					var
+						m = this,
+						_sourceLength = (m.source = _source = _source || '').length
+					;
+					m.index = _index || (_index = 0);
+					if (
+						m.isValid =
+							_source.substr (_index,2) == '/*' &&
+							(_index = _source.indexOf ('*/',_index + 2)) > -1
+					) {
+						m.comment = _source.slice (m.index + 2,_index);
+						m.length = _index + 2 - m.index;
+					} else {
+						m.comment = '';
+						m.length = 0;
 					}
+				},
+
+				serialize:function () {
+					return this.isValid ? '/*' + this.comment + '*/' : '';
 				}
 			}
-		);
+		});
 	}
 });
 

@@ -25,12 +25,13 @@
 
 Uize.module ({
 	name:'Uize.Parse.JavaProperties.PropertyName',
+	superclass:'Uize.Parse.Base',
 	required:[
 		'Uize.Str.Whitespace',
 		'Uize.Str.Replace',
 		'Uize.Parse.JavaProperties.UnicodeEscaped'
 	],
-	builder:function () {
+	builder:function (_superclass) {
 		'use strict';
 
 		var
@@ -52,54 +53,47 @@ Uize.module ({
 				return Uize.lookup (_charsStr.split (''));
 			}
 
-		return Uize.mergeInto (
-			function (_source,_index) {
-				this.parse (_source,_index);
+		return _superclass.subclass ({
+			instanceProperties:{
+				name:''
 			},
-			{
-				prototype:{
-					source:'',
-					index:0,
-					length:0,
-					isValid:false,
-					name:'',
 
-					unicodeEscape:Uize.Parse.JavaProperties.UnicodeEscaped.to,
-					unicodeUnescape:Uize.Parse.JavaProperties.UnicodeEscaped.from,
+			instanceMethods:{
+				unicodeEscape:Uize.Parse.JavaProperties.UnicodeEscaped.to,
+				unicodeUnescape:Uize.Parse.JavaProperties.UnicodeEscaped.from,
 
-					parse:function (_source,_index) {
+				parse:function (_source,_index) {
+					var
+						m = this,
+						_sourceLength = (m.source = _source = _source || '').length
+					;
+					m.index = _index || (_index = 0);
+					m.isValid = false;
+					if (_isNonWhitespace (_source.charAt (_index))) {
+						m.isValid = true;
+						_index++;
 						var
-							m = this,
-							_sourceLength = (m.source = _source = _source || '').length
+							_inEscape = false,
+							_char
 						;
-						m.index = _index || (_index = 0);
-						m.isValid = false;
-						if (_isNonWhitespace (_source.charAt (_index))) {
-							m.isValid = true;
+						while (
+							_index < _sourceLength &&
+							(_inEscape || !_terminatingCharsLookup [_char = _source.charAt (_index)])
+						) {
+							_inEscape = !_inEscape && _char == '\\';
 							_index++;
-							var
-								_inEscape = false,
-								_char
-							;
-							while (
-								_index < _sourceLength &&
-								(_inEscape || !_terminatingCharsLookup [_char = _source.charAt (_index)])
-							) {
-								_inEscape = !_inEscape && _char == '\\';
-								_index++;
-							}
-							m.name = _source.slice (m.index,_index).replace (/\\(.)/g,'$1');
-							m.length = _index - m.index;
 						}
-					},
-
-					serialize:function () {
-						var m = this;
-						return m.isValid ? m.unicodeEscape (_serializerEscaper (m.name)) : '';
+						m.name = _source.slice (m.index,_index).replace (/\\(.)/g,'$1');
+						m.length = _index - m.index;
 					}
+				},
+
+				serialize:function () {
+					var m = this;
+					return m.isValid ? m.unicodeEscape (_serializerEscaper (m.name)) : '';
 				}
 			}
-		);
+		});
 	}
 });
 
