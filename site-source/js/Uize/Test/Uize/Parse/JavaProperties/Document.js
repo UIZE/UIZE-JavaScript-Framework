@@ -246,39 +246,33 @@ Uize.module ({
 							)
 						]
 					},
-					{
-						title:'A Java properties document can be serialized',
-						test:function () {
-							return this.expect (
-								[
-									'Property1Name=Property1Value',
-									'#comment number 1',
-									'#comment number 2',
-									'Property2Name=Property2Value',
-									'#comment number 3',
-									'Property3Name=Property3Value'
-								].join ('\n'),
-								new Uize.Parse.JavaProperties.Document (
-									[
-										'',
-										'Property1Name=Property1Value',
-										'',
-										'#comment number 1',
-										'',
-										'#comment number 2',
-										'',
-										'',
-										'',
-										'Property2Name : Property2Value',
-										'!comment number 3',
-										'    Property3Name:Property3Value',
-										'',
-										''
-									].join ('\n')
-								).serialize ()
-							);
-						}
-					}
+					Uize.Test.ParserTest.serializerTest (
+						'A Java properties document can be serialized',
+						[
+							'',
+							'Property1Name=Property1Value',
+							'',
+							'#comment number 1',
+							'',
+							'#comment number 2',
+							'',
+							'',
+							'',
+							'Property2Name : Property2Value',
+							'!comment number 3',
+							'    Property3Name:Property3Value',
+							'',
+							''
+						].join ('\n'),
+						[
+							'Property1Name=Property1Value',
+							'#comment number 1',
+							'#comment number 2',
+							'Property2Name=Property2Value',
+							'#comment number 3',
+							'Property3Name=Property3Value'
+						].join ('\n')
+					)
 				]
 			}
 		});

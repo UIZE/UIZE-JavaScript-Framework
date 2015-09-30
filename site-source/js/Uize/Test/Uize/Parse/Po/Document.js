@@ -229,15 +229,11 @@ Uize.module ({
 							)
 						]
 					},
-					{
-						title:'A PO file properties document can be serialized',
-						test:function () {
-							return this.expect (
-								_poDocument,
-								new Uize.Parse.Po.Document (_poDocument).serialize ()
-							);
-						}
-					}
+					Uize.Test.ParserTest.serializerTest (
+						'A PO file properties document can be serialized',
+						_poDocument,
+						_poDocument
+					)
 				]
 			}
 		});
