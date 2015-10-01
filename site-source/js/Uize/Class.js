@@ -346,7 +346,8 @@ Uize.module ({
 	name:'Uize.Class',
 	required:[
 		'Uize.Util.Dependencies',
-		'Uize.Event.Bus'
+		'Uize.Event.Bus',
+		'Uize.mClassFeatureDeclaration'
 	],
 	builder:function () {
 		'use strict';
@@ -635,234 +636,176 @@ Uize.module ({
 			);
 
 			/*** Seed Feature Declaration Methods ***/
-				function _overrideMethods (_methodsHost,_methods) {
-					Uize.forEach (
-						_methods,
-						function (_method,_methodName) {
-							if (_method) {
-								var _former = _methodsHost [_methodName] || Uize.nop;
-								if (Uize.isArray (_method))
-									_method = _method [0] (_former)
-								;
-								_method.former = _former;
-							}
-							_methodsHost [_methodName] = _method;
-						}
-					);
-				}
+				Uize.mClassFeatureDeclaration (_class);
 
-				_class.instanceMethods = function (_instanceMethods) {
-					_overrideMethods (this.prototype,_instanceMethods);
-					/*?
-						Static Methods
-							Uize.Class.instanceMethods
-								Lets you conveniently declare one or more instance methods, by specifying the methods in an object.
+				/*?
+					Static Methods
+						Uize.Class.instanceMethods
+							Lets you conveniently declare one or more instance methods, by specifying the methods in an object.
 
-								SYNTAX
-								.............................................
-								MyClass.instanceMethods (instanceMethodsOBJ);
-								.............................................
+							SYNTAX
+							.............................................
+							MyClass.instanceMethods (instanceMethodsOBJ);
+							.............................................
 
-								EXAMPLE
-								...................................................
-								var MyWidgetClass = Uize.Widget.subclass ();
+							EXAMPLE
+							...................................................
+							var MyWidgetClass = Uize.Widget.subclass ();
 
-								MyWidgetClass.instanceMethods ({
-									wireUi:function () {
-										// implementation of wireUi instance method
-									},
+							MyWidgetClass.instanceMethods ({
+								wireUi:function () {
+									// implementation of wireUi instance method
+								},
 
-									updateUi:function () {
-										// implementation of updateUi instance method
-									}
-								});
-								...................................................
+								updateUi:function () {
+									// implementation of updateUi instance method
+								}
+							});
+							...................................................
 
-								In the above example, a widget class is being created by subclassing the =Uize.Widget= base class. Then, the =wireUi= and =updateUi= instance methods are being declared for the class by calling the =instanceMethods= method on the class.
+							In the above example, a widget class is being created by subclassing the =Uize.Widget= base class. Then, the =wireUi= and =updateUi= instance methods are being declared for the class by calling the =instanceMethods= method on the class.
 
-								NOTES
-								- this method may be called multiple times for a class to cumulatively define or override features
-								- see the other `feature declaration methods`
-					*/
-				};
+							NOTES
+							- this method may be called multiple times for a class to cumulatively define or override features
+							- see the other `feature declaration methods`
+				*/
 
-				_class.instanceProperties = function (_instanceProperties) {
-					_copyInto (this.prototype,_instanceProperties);
-					/*?
-						Static Methods
-							Uize.Class.instanceProperties
-								Lets you conveniently declare one or more instance properties, by specifying the properties and their initial values in an object.
+				/*?
+					Static Methods
+						Uize.Class.instanceProperties
+							Lets you conveniently declare one or more instance properties, by specifying the properties and their initial values in an object.
 
-								SYNTAX
-								...................................................
-								MyClass.instanceProperties (instancePropertiesOBJ);
-								...................................................
+							SYNTAX
+							...................................................
+							MyClass.instanceProperties (instancePropertiesOBJ);
+							...................................................
 
-								EXAMPLE
-								.............................
-								MyClass.instanceProperties ({
-									timeoutMs:2000,
-									retryAttempts:5
-								});
-								.............................
+							EXAMPLE
+							.............................
+							MyClass.instanceProperties ({
+								timeoutMs:2000,
+								retryAttempts:5
+							});
+							.............................
 
-								In the above example, the =Uize.Class.instanceProperties= method is being used to declare the =timeoutMs= and =retryAttempts= instance properties.
+							In the above example, the =Uize.Class.instanceProperties= method is being used to declare the =timeoutMs= and =retryAttempts= instance properties.
 
-								NOTES
-								- compare to the =Uize.Class.stateProperties= static method
-								- this method may be called multiple times for a class to cumulatively define or override features
-								- see the other `feature declaration methods`
-					*/
-				};
+							NOTES
+							- compare to the =Uize.Class.stateProperties= static method
+							- this method may be called multiple times for a class to cumulatively define or override features
+							- see the other `feature declaration methods`
+				*/
 
-				_class.staticMethods = function (_staticMethods) {
-					_overrideMethods (this,_staticMethods);
-					/*?
-						Static Methods
-							Uize.Class.staticMethods
-								Lets you conveniently declare one or more static methods, by specifying the methods in an object.
+				/*?
+					Static Methods
+						Uize.Class.staticMethods
+							Lets you conveniently declare one or more static methods, by specifying the methods in an object.
 
-								SYNTAX
-								.........................................
-								MyClass.staticMethods (staticMethodsOBJ);
-								.........................................
+							SYNTAX
+							.........................................
+							MyClass.staticMethods (staticMethodsOBJ);
+							.........................................
 
-								NOTES
-								- this method may be called multiple times for a class to cumulatively define or override features
-								- see the other `feature declaration methods`
-					*/
-				};
+							NOTES
+							- this method may be called multiple times for a class to cumulatively define or override features
+							- see the other `feature declaration methods`
+				*/
 
-				_class.staticProperties = function (_staticProperties) {
-					_copyInto (this,_staticProperties);
-					/*?
-						Static Methods
-							Uize.Class.staticProperties
-								Lets you conveniently declare one or more static properties, by specifying the properties and their initial values in an object.
+				/*?
+					Static Methods
+						Uize.Class.staticProperties
+							Lets you conveniently declare one or more static properties, by specifying the properties and their initial values in an object.
 
-								SYNTAX
-								............................................
-								MyClass.staticMethods (staticPropertiesOBJ);
-								............................................
+							SYNTAX
+							............................................
+							MyClass.staticMethods (staticPropertiesOBJ);
+							............................................
 
-								NOTES
-								- compare to the =Uize.Class.stateProperties= static method
-								- this method may be called multiple times for a class to cumulatively define or override features
-								- see the other `feature declaration methods`
-					*/
-				};
+							NOTES
+							- compare to the =Uize.Class.stateProperties= static method
+							- this method may be called multiple times for a class to cumulatively define or override features
+							- see the other `feature declaration methods`
+				*/
 
-				_class.dualContextMethods = _class.dualContextProperties = function (_dualContextFeatures) {
-					_copyInto (this,_dualContextFeatures);
-					_copyInto (this.prototype,_dualContextFeatures);
-					/*?
-						Static Methods
-							Uize.Class.dualContextMethods
-								Lets you conveniently declare one or more dual context methods, by specifying the methods in an object.
+				/*?
+					Static Methods
+						Uize.Class.dualContextMethods
+							Lets you conveniently declare one or more dual context methods, by specifying the methods in an object.
 
-								SYNTAX
-								...................................................
-								MyClass.dualContextMethods (dualContextMethodsOBJ);
-								...................................................
+							SYNTAX
+							...................................................
+							MyClass.dualContextMethods (dualContextMethodsOBJ);
+							...................................................
 
-								NOTES
-								- this method may be called multiple times for a class to cumulatively define or override features
-								- see the other `feature declaration methods`
+							NOTES
+							- this method may be called multiple times for a class to cumulatively define or override features
+							- see the other `feature declaration methods`
 
-							Uize.Class.dualContextProperties
-								Lets you conveniently declare one or more dual context properties, by specifying the properties and their initial values in an object.
+						Uize.Class.dualContextProperties
+							Lets you conveniently declare one or more dual context properties, by specifying the properties and their initial values in an object.
 
-								SYNTAX
-								......................................................
-								MyClass.dualContextMethods (dualContextPropertiesOBJ);
-								......................................................
+							SYNTAX
+							......................................................
+							MyClass.dualContextMethods (dualContextPropertiesOBJ);
+							......................................................
 
-								NOTES
-								- compare to the =Uize.Class.stateProperties= static method
-								- this method may be called multiple times for a class to cumulatively define or override features
-								- see the other `feature declaration methods`
-					*/
-				};
+							NOTES
+							- compare to the =Uize.Class.stateProperties= static method
+							- this method may be called multiple times for a class to cumulatively define or override features
+							- see the other `feature declaration methods`
+				*/
 
-				_class.declare = function (_featuresByType) {
-					for (var _featureType in _featuresByType)
-						this [_featureType] (_featuresByType [_featureType])
-					;
-					return this;
-					/*?
-						Static Methods
-							Uize.Class.declare
-								Lets you declare one or more features of one or more different feature types for the class.
+				/*?
+					Static Methods
+						Uize.Class.declare
+							Lets you declare one or more features of one or more different feature types for the class.
 
-								SYNTAX
-								....................................
-								MyClass.declare (featuresByTypeOBJ);
-								....................................
+							SYNTAX
+							....................................
+							MyClass.declare (featuresByTypeOBJ);
+							....................................
 
-								For convenience, the =Uize.Class.declare= method lets you declare features of various types, in the same way as they can be declared when using the variation of the =Uize.Class.subclass= method that supports specifying features in a =featuresByTypeOBJ= object. The =Uize.Class.declare= method lets you declare additional features at any time after first creating a class, using the same semantics as supported by the =Uize.Class.subclass= method.
+							For convenience, the =Uize.Class.declare= method lets you declare features of various types, in the same way as they can be declared when using the variation of the =Uize.Class.subclass= method that supports specifying features in a =featuresByTypeOBJ= object. The =Uize.Class.declare= method lets you declare additional features at any time after first creating a class, using the same semantics as supported by the =Uize.Class.subclass= method.
 
-								EXAMPLE
-								...................................
-								MyClass.declare ({
-									alphastructor:function () {
+							EXAMPLE
+							...................................
+							MyClass.declare ({
+								alphastructor:function () {
+									// implementation here
+								},
+								omegastructor:function () {
+									// implementation here
+								},
+								staticMethods:{
+									staticMethod1:function () {
 										// implementation here
 									},
-									omegastructor:function () {
+									staticMethod2:function () {
+										// implementation here
+									}
+								},
+								instanceMethods:{
+									instanceMethod1:function () {
 										// implementation here
 									},
-									staticMethods:{
-										staticMethod1:function () {
-											// implementation here
-										},
-										staticMethod2:function () {
-											// implementation here
-										}
-									},
-									instanceMethods:{
-										instanceMethod1:function () {
-											// implementation here
-										},
-										instanceMethod2:function () {
-											// implementation here
-										}
-									},
-									stateProperties:{
-										stateProperty1:{
-											// property profile
-										},
-										stateProperty2:{
-											// property profile
-										}
+									instanceMethod2:function () {
+										// implementation here
 									}
-								});
-								...................................
+								},
+								stateProperties:{
+									stateProperty1:{
+										// property profile
+									},
+									stateProperty2:{
+										// property profile
+									}
+								}
+							});
+							...................................
 
-								NOTES
-								- see the other `feature declaration methods`
-					*/
-				};
-
-				_class.mixins = function (_mixins) {
-					var
-						m = this,
-						_appliedMixins = m._appliedMixins || (m._appliedMixins = [])
-					;
-					function _applyMixins (_mixins) {
-						if (!_Uize.isIn (_appliedMixins,_mixins)) {
-							_appliedMixins.push (_mixins);
-							_isFunction (_mixins)
-								/* TODO:
-									What about the case where the mixin is a class, so that its type would be a function? Perhaps we should check for a method that performs the mixin of the features from the class, and where this method could be implemented in the Uize.Class base class with a base implementation that mixes in all the static and instance features.
-								*/
-								? _mixins (m)
-								: _isArray (_mixins)
-									? _forEach (_mixins,_applyMixins)
-									: m.declare (_mixins)
-							;
-						}
-					}
-					_applyMixins (_mixins);
-				};
+							NOTES
+							- see the other `feature declaration methods`
+				*/
 
 		/*** Property System Support Code ***/
 			function _getPropertyPrivateName (m,_propertyPublicOrPrivateName) {
