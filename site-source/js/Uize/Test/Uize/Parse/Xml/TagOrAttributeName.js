@@ -96,7 +96,7 @@ Uize.module ({
 						]
 					},
 					{
-						title:'Arguments passed to the parser object\'s constructor are used for initial parsing during construction',
+						title:'Arguments passed to the parser class\'s constructor are used for initial parsing during construction',
 						test:function () {
 							var
 								_classPrototype = Uize.Parse.Xml.TagOrAttributeName.prototype,

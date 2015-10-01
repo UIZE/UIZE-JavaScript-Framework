@@ -1,7 +1,7 @@
 /*______________
 |       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
 |     /      /  |   ---------------------------------------------------
-|    /    O /   |    MODULE : Uize.Parse.Items Object
+|    /    O /   |    MODULE : Uize.Parse.Items Class
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
 | /____/ /__/_| | COPYRIGHT : (c)2014-2015 UIZE
@@ -10,7 +10,7 @@
 */
 
 /* Module Meta Data
-	type: Object
+	type: Class
 	importance: 1
 	codeCompleteness: 100
 	docCompleteness: 2
@@ -18,7 +18,7 @@
 
 /*?
 	Introduction
-		The =Uize.Parse.Items= module implements an abstract base class for an items parser, where the parser object classes for one or more item types can be configured in subclasses.
+		The =Uize.Parse.Items= module implements an abstract base class for an items parser, where the parser classes for one or more item types can be configured in subclasses.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 */
