@@ -11,7 +11,7 @@
 
 /* Module Meta Data
 	type: Object
-	importance: 1
+	importance: 5
 	codeCompleteness: 100
 	docCompleteness: 2
 */
@@ -25,49 +25,25 @@
 
 Uize.module ({
 	name:'Uize.Parse.Base',
-	builder:function () {
+	superclass:'Uize.BasicClass',
+	builder:function (_superclass) {
 		'use strict';
 
-		return Uize.mergeInto (
-			function (_source,_index) {this.parse (_source,_index)},
+		return _superclass.subclass ({
+			constructor:function (_source,_index) {this.parse (_source,_index)},
 
-			{
-				subclass:function (_featuresByType) {
-					var
-						_superclass = this,
-						_class =
-							(_featuresByType || (_featuresByType = {})).hasOwnProperty ('constructor')
-								? _featuresByType.constructor
-								: function () {_superclass.apply (this,arguments)}
-					;
+			instanceProperties:{
+				source:'',
+				index:0,
+				length:0,
+				isValid:false
+			},
 
-					Uize.copyInto (
-						_class,
-						Uize.map (Uize.copy (_superclass),Uize.clone),
-						_featuresByType.staticProperties,
-						_featuresByType.staticMethods
-					);
-					Uize.copyInto (
-						_class.prototype,
-						Uize.clone (_superclass.prototype),
-						_featuresByType.instanceProperties,
-						_featuresByType.instanceMethods
-					);
-
-					return _class;
-				},
-
-				prototype:{
-					source:'',
-					index:0,
-					length:0,
-					isValid:false,
-
-					parse:Uize.nop,
-					serialize:function () {return ''}
-				}
+			instanceMethods:{
+				parse:Uize.nop,
+				serialize:function () {return ''}
 			}
-		);
+		});
 	}
 });
 
