@@ -1,7 +1,7 @@
 /*______________
 |       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
 |     /      /  |   ---------------------------------------------------
-|    /    O /   |    MODULE : Uize.Parse.Xml.Util Object
+|    /    O /   |    MODULE : Uize.Parse.Xml.Util Package
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
 | /____/ /__/_| | COPYRIGHT : (c)2014-2015 UIZE
@@ -10,7 +10,7 @@
 */
 
 /* Module Meta Data
-	type: Object
+	type: Package
 	importance: 2
 	codeCompleteness: 40
 	docCompleteness: 2
