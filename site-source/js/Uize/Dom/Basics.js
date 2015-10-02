@@ -192,25 +192,25 @@ Uize.module ({
 					);
 					/*?
 						Static Methodsdisplay
-							Uize.Dom.Basics.Basics.Basics.display
+							Uize.Dom.Basics.display
 								Displays or hides the specified `node blob`, using the "display" CSS property.
 
 								SYNTAX
-								...................................................................
-								Uize.Dom.Basics.Basics.Basics.display (nodeBLOB,mustDisplayANYTYPE);
-								...................................................................
+								......................................................
+								Uize.Dom.Basics.display (nodeBLOB,mustDisplayANYTYPE);
+								......................................................
 
 								While typically a Boolean, the =mustDisplayANYTYPE= parameter can be of any type and the node(s) will be displayed if it resolves to =true=, and hidden if it resolves to =false= - with the exception of =undefined=, when the node(s) will be displayed (see explanation below).
 
 								VARIATION
-								................................................
-								Uize.Dom.Basics.Basics.Basics.display (nodeBLOB);
-								................................................
+								...................................
+								Uize.Dom.Basics.display (nodeBLOB);
+								...................................
 
 								When no =mustDisplayANYTYPE= parameter is specified (or when its value is =undefined=), the node(s) will be displayed.
 
 								NOTES
-								- compare to the =Uize.Dom.Basics.Basics.Basics.show= static method
+								- compare to the =Uize.Dom.Basics.show= static method
 								- this method can operate on multiple nodes at a time. For more details, see the section on `node blob`
 					*/
 				},
@@ -937,30 +937,30 @@ Uize.module ({
 					}
 					/*?
 						Static Methods
-							Uize.Dom.Basics.Basics.doForAll
+							Uize.Dom.Basics.doForAll
 								Iterates through the specified `node blob`, calling the specified function for each node and passing the node reference as a parameter.
 
 								SYNTAX
-								......................................................
-								Uize.Dom.Basics.Basics.doForAll (nodeBLOB,actionFUNC);
-								......................................................
+								...............................................
+								Uize.Dom.Basics.doForAll (nodeBLOB,actionFUNC);
+								...............................................
 
 								EXAMPLE
 								.........................................................................................
-								Uize.Dom.Basics.Basics.doForAll (
+								Uize.Dom.Basics.doForAll (
 									['topLeftAddButton','topRightAddButton','bottomLeftAddButton','bottomRightAddButton'],
 									function (node) {
 										node.src = 'images/add-button.gif';
 										node.style.border = '1px solid #fff';
-										Uize.Dom.Basics.Basics.wire (node,'click',handleAddButtonClick);
+										Uize.Dom.Basics.wire (node,'click',handleAddButtonClick);
 									}
 								);
 								.........................................................................................
 
 								VARIATION
-								..................................................................
-								Uize.Dom.Basics.Basics.doForAll (nodeBLOB,actionFUNC,idPrefixSTR);
-								..................................................................
+								...........................................................
+								Uize.Dom.Basics.doForAll (nodeBLOB,actionFUNC,idPrefixSTR);
+								...........................................................
 
 								When the optional =idPrefixSTR= parameter is specified, then any nodes specified in the =nodeBLOB= using a string ID are resolved by first applying the ID prefix.
 					*/
