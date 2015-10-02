@@ -42,8 +42,7 @@ Uize.module ({
 			length:/hh?|ll?|[Lzjt]/,
 			type:/[diufFeEgGxXoscPaAn%]/,
 			specifier:/(?:{parameter})?(?:{flags})?(?:{width})?(?:\.{precision})?(?:{length})?{type}/,
-			placeholder:/%{specifier}/,
-			placeholderWithCapture:/%({specifier})/
+			placeholder:/%({specifier})/
 		});
 	}
 });

@@ -33,8 +33,7 @@ Uize.module ({
 			code:/[@%dDuUxXoOfeEgGcCsSPaAF]/,
 			lengthModifier:/hh?|ll?|[qLztj]/,
 			lengthModifierAndCode:/(?:{lengthModifier})?{code}/,
-			specifier:/%{lengthModifierAndCode}/,
-			specifierWithCapture:/%({lengthModifierAndCode})/
+			specifier:/%({lengthModifierAndCode})/
 		});
 	}
 });
