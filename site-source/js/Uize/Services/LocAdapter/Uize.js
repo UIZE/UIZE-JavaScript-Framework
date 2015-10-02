@@ -41,8 +41,7 @@ Uize.module ({
 				number:/\d+(?:\.\d+)?/,
 				whitespace:/\s+/,
 				tokenName:/[a-zA-Z_]+[0-9a-zA-Z_]*/,
-				token:/\[\[{tokenName}\]\]/,
-				tokenWithNameCapture:/\[\[({tokenName})\]\]/,
+				token:/\[\[({tokenName})\]\]/,
 				wordSplitter:/({whitespace}|{token}|{punctuation}|{number})/
 			})
 		;
@@ -88,7 +87,7 @@ Uize.module ({
 			},
 
 			instanceProperties:{
-				tokenRegExp:_wordSplitterRegExpComposition.get ('tokenWithNameCapture'),
+				tokenRegExp:_wordSplitterRegExpComposition.get ('token'),
 				wordSplitter:_wordSplitterRegExpComposition.get ('wordSplitter')
 			}
 		});
