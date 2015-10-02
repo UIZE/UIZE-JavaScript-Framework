@@ -37,7 +37,7 @@ Uize.module ({
 						_constructorProvided = _featuresByType && _featuresByType.hasOwnProperty ('constructor'),
 						_class = _constructorProvided
 							? _featuresByType.constructor
-							: function () {_superclass.apply (this,arguments)}
+							: function () {return _superclass.apply (this,arguments)}
 					;
 
 					Uize.copyInto (_class,Uize.map (Uize.copy (_superclass),Uize.clone));
