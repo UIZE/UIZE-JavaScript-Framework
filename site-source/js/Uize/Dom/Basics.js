@@ -191,7 +191,7 @@ Uize.module ({
 						}
 					);
 					/*?
-						Static Methodsdisplay
+						Static Methods
 							Uize.Dom.Basics.display
 								Displays or hides the specified `node blob`, using the "display" CSS property.
 
