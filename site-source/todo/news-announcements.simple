@@ -47,7 +47,7 @@ NEW MODULE: Uize.Loc.FileFormats.JavaProperties
 	- write documentation
 	- write news announcement
 
-NEW MODULE: Uize.Data.MacStrings
+NEW MODULE: Uize.Loc.FileFormats.MacStrings
 	Still to do...
 
 	- write documentation
