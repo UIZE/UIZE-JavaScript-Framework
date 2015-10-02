@@ -620,20 +620,6 @@ Uize.module ({
 
 											What you'll notice from the result is that none of the words that are part of the HTML tags have been pseudo-localized. Also, the non-word text that is matched by the word splitter regular expression has been ignored when computing the number of expansion characters that need to be added to the string.
 
-										A Single Capture
-											The regular expression specified for the =wordSplitter= option should contain a single capturing group that encloses the entire pattern.
-
-											This is important, as it allows the =Uize.Loc.Pseudo.pseudoLocalize= method to split the source string exactly into alternating words and non-words, allowing the method to apply the pseudo-localization transformations like `accenting` and `expansion` for only the word parts of the source string, leaving the non-word parts unaffected.
-
-											In cases where a word splitter regular expression needs to use grouping, the group sub-patterns should use the "?:" no-capture qualifier, as follows...
-
-											EXAMPLE
-											................................................................
-											/(\s+|\{[\da-zA-Z]+\}|[\?!\.;,&=\-\(\)\[\]"<>]+|\d+(?:\.\d+)?)/g
-											................................................................
-
-											In the above example, the word splitter regular expression is matching whitespace, substitution tokens of the form "{token}", various punctuation characters, and numbers. Specifically, the sub-pattern for numbers is =\d+(?:\.\d+)?=, which is using the "?:" no-capture qualifier for its optional decimal part group. This prevents the decimal part group from entering into the words and non-words array as a separate element if matched, which would throw off the pseudo-localization code.
-
 									wrapper
 										A string, specifying the characters that should be used to wrap the source string when performing pseudo-localization on it.
 
