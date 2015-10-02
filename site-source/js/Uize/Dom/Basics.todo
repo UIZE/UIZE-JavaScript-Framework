@@ -16,3 +16,122 @@ Factor Out Event Wiring Functionality
 
 	The size increase for current modules that need just the event wiring fundamentals should be considered, since the existing =Uize.Dom.Event= module, while not large, contains some slightly more esoteric functionality. As an alternative, the event wiring functionality could be factored out to a new =Uize.Dom.Wiring= module.
 
+Uize.Dom.Basics.getProperty
+	- should support string for property name, or object for properties
+
+Uize.Dom.Basics.find
+	- provide a way to search through a specified set of nodes (so that one can chain searches)
+	- think about supporting node blob for root, or test object for root (i.e. invoke find)
+	- think about testing...
+		- style properties
+		- calculated / computed style properties
+		- element attributes (as opposed to reflected properties)
+	- how would one do OR finds? (basically, merging multiple finds)
+	- idea: optimization for when tagName is non-simple type (could test tagName against a known list of tag names and perform successive getElementsByTagName on result set of tag names)
+
+Versatile Setter and Getter Signatures
+
+	Getting Values
+		`Get the Value for a Single Style Property`
+		..................................................................................
+		var stylePropertyValueSTR = Uize.Dom.Basics.style (nodeBLOB,stylePropertyNameSTR);
+		..................................................................................
+
+		`Get the Values for Multiple Style Properties as an Array`
+		............................................................................................
+		var stylePropertiesValuesARRAY = Uize.Dom.Basics.style (nodeBLOB,stylePropertiesNamesARRAY);
+		............................................................................................
+
+	Setting Values
+		`Set the Values for Multiple Style Properties as an Object`
+		....................................................
+		Uize.Dom.Basics.style (nodeBLOB,stylePropertiesOBJ);
+		....................................................
+
+		`Set the Values for Multiple Style Properties, Specifying Names And Values Separately`
+		......................................................................................
+		Uize.Dom.Basics.style (nodeBLOB,stylePropertiesNamesARRAY,stylePropertiesValuesARRAY);
+		......................................................................................
+
+		`Set the Same Value For Multiple Style Properties`
+		.......................................................................................
+		Uize.Dom.Basics.style (nodeBLOB,stylePropertiesNamesARRAY,stylePropertyValuePRIMITIVE);
+		.......................................................................................
+
+Shortened Method Names
+	.
+
+	- =Uize.Dom.Basics.style= - set the values for one or more style properties for all the nodes of a node blob, or get the value for a single style property
+	- =Uize.Dom.Basics.prop= - set the value for one or more properties, or get the value for a single property
+	- =Uize.Dom.Basics.attr= - set the value for one or more attributes, or get the value for a single attribute
+	- =Uize.Dom.Basics.on= - wire event handlers for one or more DOM events
+	- =Uize.Dom.Basics.text= - set the text of a DOM node, or get the text of a DOM node
+	- =Uize.Dom.Basics.value= - set the value for a DOM node, or get the value for a DOM node
+	- =Uize.Dom.Basics.html= - set the inner HTML for a node blob
+	- =Uize.Dom.Basics.clip= - set the clip rect for all the nodes of a node blob
+
+- methods that should coerce use of valueOf interface
+	- Uize.Dom.Basics.setProperties
+
+Uize.Dom.Basics.setStyle
+	When setting opacity, if opacity is 1, set opacity properties to '' (empty string).
+
+	Some browsers seem to still be processing opacity when set to 1, which is slowing down render time.
+
+Uize.Dom.Basics.getStyle
+	It would be useful to have a way to parse out a number from style attribute values that are denominated in px (e.g. 128px -> 128, empty string -> 0).
+
+Uize.Dom.Basics.injectHtml
+	Support a node reference, or document fragment for html parameter
+
+Uize.Dom.Basics.display
+	- IDEA: respecting initial non-none display value
+		................................................................................
+		var currentDisplay = Uize.Dom.Basics.getStyle (node,'display');
+		if (mustDisplay != (currentDisplay != 'none')) {
+			if (mustDisplay) {
+				node.style.display = node.OLDDISPLAY || 'block';
+			} else {
+				node.OLDDISPLAY = currentDisplay;
+				node.style.display = 'none';
+			}
+		}
+		................................................................................
+
+Convenience Event Wiring Methods
+	As a convenience for developers, short form wiring methods are provided for all the major DOM event types.
+
+	- =Uize.Dom.Basics.onclick=
+	- =Uize.Dom.Basics.onmouseover=
+	- =Uize.Dom.Basics.onmouseout=
+	- =Uize.Dom.Basics.onmousedown=
+	- =Uize.Dom.Basics.onmouseup=
+	- =Uize.Dom.Basics.ondblclick=
+	- =Uize.Dom.Basics.onchange=
+	- =Uize.Dom.Basics.onload=
+	- =Uize.Dom.Basics.onerror=
+
+Miscellaneous
+	- for Uize.Dom.Basics.isNode, is it possible to use instanceof in some way? What about the cross frames issue in FF?
+	- Uize.Dom.Basics.wire to support array for _eventName parameters (i.e. change to just _event)
+
+Proposed Shortenings
+	- Uize.Dom.Basics.getById -> Uize.Dom.Basics.byId or Uize.Dom.Basics.id or just Uize.Dom
+
+Uize.Dom.Basics.setValue & Uize.Dom.Basics.getValue
+	- respect disabled property?
+		- what about disabled select options, radios?
+		- browsers are not supposed to send values for disabled form elements to the form processor, so should getValue have special handling to mimic this behavior?
+
+New Wire Events Mechanism
+	Consider providing a way of unwiring wirings by specifying the wiring IDs, and returning wiring IDs from Uize.Dom.Basics.wire and myWidget.wire.
+
+	**** make sure that Uize.Dom.Basics.wire handles rewiring the same event for the same node
+		1) when is this likely to happen? what code might do this?
+		2) how would I accomplish this without Uize.Dom.wire becoming too slow?
+
+	- make changes so that wired nodes are only remembered by ID (make IDs on the fly for nodes without)
+	- for all widget classes...
+		- make sure no events are being wired in a way that they wouldn't get unwired
+		- look at moving more child widget creation into constructor rather than wireUi
+

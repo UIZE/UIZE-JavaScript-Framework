@@ -101,7 +101,7 @@ More Versatile wireNode Method
 	- returns the id of an implied node, built from its name (implied node doesn't have to exist in the DOM)
 	- should take into account nodeMap
 
-- getNodeProperty (to use Uize.Node.getProperty)
+- getNodeProperty (to use Uize.Dom.Basics.getProperty)
 
 - a way of easily binding any state property to either a child widget (or any widget) or an implied node
 	- the connection is bi-directional (changing the child widget's value or node's value updates state property, and changing state property value updates child widget's or node's value)
@@ -178,7 +178,7 @@ New Mode for Building HTML
 - provide a general way that a drag rest event can bubble up to the topmost parent
 - consider an alternative to bubble:true, that allows all events to bubble if any widget up the parent chain of a particular widget cares to listen to a specific event coming from deep within
 - a generic way for a widget to be informed if it is being revealed as a result of a parent node in the DOM changing its display state or something else
-- idea: provide a way to expose all Uize.Node methods through Uize.Widget, without having to create instance methods for each...
+- idea: provide a way to expose all Uize.Dom.Basics methods through Uize.Widget, without having to create instance methods for each...
 	eg.
 		..................................................
 		m.node (nodeName,'methodName',param1,param2,...)
@@ -194,18 +194,18 @@ New Mode for Building HTML
 
 	- benefits
 		- makes the code a tiny bit shorter
-		- reduces (and in many cases eliminates) the need for widget classes to require Uize.Node
-		- would eliminate many cases of having to capture Uize.Node as _Uize_Node
+		- reduces (and in many cases eliminates) the need for widget classes to require Uize.Dom.Basics
+		- would eliminate many cases of having to capture Uize.Dom.Basics as _Uize_Dom_Basics
 
-- expose more Uize.Node methods as node-related methods (in order of priority)
+- expose more Uize.Dom.* methods as node-related methods (in order of priority)
 	- keep in mind that more instance methods means more time copying when subclassing
 
-	- getCoords => getNodeCoords
-	- setCoords => setNodeCoords
-	- setAbsPos => setNodeAbsPos
-	- getDimensions => getNodeDimensions (maybe deprecate getDimensions -> getDims before exposing the widget method)
-	- centerInWindow => centerNodeInWindow
-	- getText => getNodeText
-	- injectHtml => injectNodeHtml
-	- showInLayoutFlow => showNodeInLayoutFlow
+	- Uize.Dom.Pos.getCoords => getNodeCoords
+	- Uize.Dom.Pos.setCoords => setNodeCoords
+	- Uize.Dom.Pos.setAbsPos => setNodeAbsPos
+	- Uize.Dom.Pos.getDimensions => getNodeDimensions (maybe deprecate getDimensions -> getDims before exposing the widget method)
+	- Uize.Dom.Pos.centerInWindow => centerNodeInWindow
+	- Uize.Dom.Text.getText => getNodeText
+	- Uize.Dom.Basics.injectHtml => injectNodeHtml
+	- Uize.Dom.Util.showInLayoutFlow => showNodeInLayoutFlow
 

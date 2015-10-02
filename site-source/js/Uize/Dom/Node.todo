@@ -1,0 +1,109 @@
+This is a TO DO document for the proposed =Uize.Dom.Node= module.
+
+Proposed Simplified Interface
+	The following proposed interface aims to address the desire amongst Web developers for easier and more concise ways to access and manipulate DOM elements.
+
+	The Uize.Dom.Node Object
+		A convenient proxy wrapper for DOM objects that allows methods to be called without always dereferencing the static methods on the =Uize.Dom.*= packages and having to specify the =node blob= in each call.
+
+		EXAMPLE
+		.........................................
+		var myNode = Uize.Dom.Node ('#myNodeId');
+		myNode.style ({
+			border:'1px',
+			background:'#ccc'
+		});
+		myNode.display (false);
+		myNode.on (
+			'click',
+			function () {
+				// do something
+			}
+		);
+		.........................................
+
+		EXAMPLE - WITH CHAINING
+		...........................
+		Uize.Dom.Node ('#myNodeId')
+			.style ({
+				border:'1px',
+				background:'#ccc'
+			})
+			.display (false)
+			.on (
+				'click',
+				function () {
+					// do something
+				}
+			)
+		;
+		...........................
+
+	Node Blob Management
+		The =Uize.Dom.Node= object provides methods for managing the set of nodes that make up the node blob that the object represents.
+
+		- =nodeBlobOBJ.addToBlob= - lets you add more nodes to a node blob
+		- =nodeBlobOBJ.clearBlob= - clears the node blob of all its contents
+		- =nodeBlobOBJ.removeFromBlob= - removes the specified nodes from the node blob
+		- =nodeBlobOBJ.setBlob= - lets you set the nodes that make up the node blob
+
+	Combo Setter and Getter Methods
+		.
+
+	Method Chaining
+		To appease developers who are fond of method chaining, all modify type methods that don't need to return a result will return a reference to the `node blob`.
+
+		EXAMPLE
+		................................................
+		Uize.Dom.Node ('#myNodeId')
+			.style ({display:'none',position:'absolute'})
+			.on (
+				'click',
+				function () {
+					// handle click event
+				}
+			)
+		;
+		................................................
+
+	Uize.Dom.Basics.style
+		Set or get style for a `node blob`.
+
+		BEFORE
+		.........................................................................
+		Uize.Dom.Basics.style ('#myNodeId','display','none');
+		Uize.Dom.Basics.style ('#myNodeId',{display:'none',position:'absolute'});
+		var nodeDisplay = Uize.Dom.Basics.style ('#myNodeId','display');
+		.........................................................................
+
+		AFTER
+		.........................................................................
+		Uize.Dom.Node ('#myNodeId').style ('display','none');
+		Uize.Dom.Node ('#myNodeId').style ({display:'none',position:'absolute'});
+		var nodeDisplay = Uize.Dom.Node ('#myNodeId').style ('display');
+		.........................................................................
+
+	Uize.Dom.Basics.on
+		A short form for the =wire= method.
+
+		BEFORE
+		...........................
+		Uize.Dom.Basics.on (
+			'#myNodeId',
+			'click',
+			function () {
+				// handle click event
+			}
+		);
+		...........................
+
+		AFTER
+		................................
+		Uize.Dom.Node ('#myNodeId').on (
+			'click',
+			function () {
+				// handle click event
+			}
+		);
+		................................
+

@@ -1,0 +1,7 @@
+This is a TO DO document for the =Uize.Dom.Pos= module.
+
+- for Uize.Dom.Pos.getCoords, consider deprecating some of the properties of the return object (e.g. right, bottom) to simplify the interface (first investigate extent of usage)
+- consider "fixing" Uize.Dom.doRectanglesOverlap method to be able to work as well for floating point and relative coordinates (i.e. not just pixels). Could it then be used in Ben's DT code?
+- rename: Uize.Dom.Pos.getDimensions -> Uize.Dom.Pos.getSize
+- new method: Uize.Dom.Pos.setSize
+
