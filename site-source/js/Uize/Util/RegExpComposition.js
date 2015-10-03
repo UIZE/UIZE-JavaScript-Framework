@@ -28,7 +28,7 @@ Uize.module ({
 	builder:function () {
 		'use strict';
 
-		return Uize.mergeInto (
+		var _constructor = Uize.mergeInto (
 			Uize.noNew (
 				function (_regExpLookup) {
 					this._regExpLookup = _regExpLookup;
@@ -60,10 +60,16 @@ Uize.module ({
 						_resolveRegularExpression (_name);
 
 						return _resolved [_name];
+					},
+
+					extend:function (_regExpLookup) {
+						return _constructor (Uize.copy (this._regExpLookup,_regExpLookup))
 					}
 				}
 			}
 		);
+
+		return _constructor;
 	}
 });
 
