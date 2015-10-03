@@ -28,7 +28,7 @@ Uize.module ({
 	required:[
 		'Uize.Data.Simple',
 		'Uize.Data.NameValueRecords',
-		'Uize.Util.RegExpComposition'
+		'Uize.Util.RegExpComposition.WordSplitter'
 	],
 	superclass:'Uize.Services.LocAdapter',
 	builder:function (_superclass) {
@@ -36,10 +36,7 @@ Uize.module ({
 
 		var
 			_resourceFilePathRegExp = /((?:^|\/)Loc\/)en_US(\.loc)$/,
-			_wordSplitterRegExpComposition = Uize.Util.RegExpComposition ({
-				punctuation:/[\?!\.;,&=\-\(\)\[\]"<>]+/,
-				number:/\d+(?:\.\d+)?/,
-				whitespace:/\s+/,
+			_wordSplitterRegExpComposition = Uize.Util.RegExpComposition.WordSplitter.extend ({
 				tokenName:/[a-zA-Z_]+[0-9a-zA-Z_]*/,
 				token:/\[\[({tokenName})\]\]/,
 				wordSplitter:/({whitespace}|{token}|{punctuation}|{number})/
