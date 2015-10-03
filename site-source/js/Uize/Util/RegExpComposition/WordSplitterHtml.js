@@ -18,7 +18,7 @@
 
 /*?
 	Introduction
-		The =Uize.Util.RegExpComposition.WordSpliiterHtml= package defines a regular expression composition object for matching non-word character sequences in strings that contains HTML tags and HTML entities.
+		The =Uize.Util.RegExpComposition.WordSplitterHtml= package defines a regular expression composition object for matching non-word character sequences in strings that contains HTML tags and HTML entities.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 */
@@ -26,13 +26,13 @@
 Uize.module ({
 	name:'Uize.Util.RegExpComposition.WordSplitterHtml',
 	required:[
-		'Uize.Util.RegExpComposition.WordSpliiter',
+		'Uize.Util.RegExpComposition.WordSplitter',
 		'Uize.Util.Html.Encode'
 	],
 	builder:function () {
 		'use strict';
 
-		return Uize.Util.RegExpComposition.WordSpliiter.extend ({
+		return Uize.Util.RegExpComposition.WordSplitter.extend ({
 			htmlEntity:Uize.Util.Html.Encode.entityRegExp,
 			htmlTag:/<(?:.|[\r\n\f])+?>/,
 			wordSplitter:/({htmlTag}|{htmlEntity}|{whitespace}|{punctuation}|{number})/
