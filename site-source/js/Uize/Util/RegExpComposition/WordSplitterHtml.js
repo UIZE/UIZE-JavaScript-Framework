@@ -36,7 +36,7 @@ Uize.module ({
 			punctuation:/[\?!\.;,&=\-\(\)\[\]"]+/,
 			htmlEntity:Uize.Util.Html.Encode.entityRegExp,
 			htmlTag:/<(?:.|[\r\n\f])+?>/,
-			wordSplitter:/({htmlTag}|{htmlEntity}|{whitespace}|{punctuation}|{number})/
+			wordSplitter:/{htmlTag}|{htmlEntity}|{whitespace}|{punctuation}|{number}/
 		});
 	}
 });

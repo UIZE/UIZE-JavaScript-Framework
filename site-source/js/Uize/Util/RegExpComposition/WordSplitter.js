@@ -33,7 +33,7 @@ Uize.module ({
 			punctuation:/[\?!\.;,&=\-\(\)\[\]"<>]+/,
 			number:/\d+(?:\.\d+)?/,
 			whitespace:/\s+/,
-			wordSplitter:/({whitespace}|{punctuation}|{number})/
+			wordSplitter:/{whitespace}|{punctuation}|{number}/
 		});
 	}
 });
