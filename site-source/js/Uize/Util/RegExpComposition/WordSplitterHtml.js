@@ -33,6 +33,7 @@ Uize.module ({
 		'use strict';
 
 		return Uize.Util.RegExpComposition.WordSplitter.extend ({
+			punctuation:/[\?!\.;,&=\-\(\)\[\]"]+/,
 			htmlEntity:Uize.Util.Html.Encode.entityRegExp,
 			htmlTag:/<(?:.|[\r\n\f])+?>/,
 			wordSplitter:/({htmlTag}|{htmlEntity}|{whitespace}|{punctuation}|{number})/
