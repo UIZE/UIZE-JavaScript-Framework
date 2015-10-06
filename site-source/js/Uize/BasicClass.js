@@ -41,7 +41,7 @@ Uize.module ({
 					;
 
 					Uize.copyInto (_class,Uize.map (Uize.copy (_superclass),Uize.clone));
-					Uize.copyInto (_class.prototype,Uize.clone (_superclass.prototype));
+					Uize.copyInto (_class.prototype,Uize.clone (_superclass.prototype),{Class:_class});
 
 					if (_featuresByType) {
 						if (_constructorProvided)
