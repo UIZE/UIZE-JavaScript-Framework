@@ -580,9 +580,14 @@ Uize.module ({
 			};
 
 			var _returnTupleComponentAsIs = Function ('tuple,componentNo','return tuple [componentNo]');
-			_object.sort = function (_colors,_referenceColor,_componentWeighting) {
+			_object.sort = function (_colors,_referenceColor,_componentWeighting,_encoding) {
 				if (_colors.length > 1) {
 					_componentWeighting = _ensureSettingIsTuple (_componentWeighting,1);
+					_dummyColor1.from (_referenceColor);
+					_encoding
+						? _dummyColor1.setEncoding (_encoding)
+						: (_encoding = _dummyColor1.encoding)
+					;
 					var
 						_getNormalizedComponent =
 							_componentWeighting [0] == 1 &&
@@ -596,7 +601,6 @@ Uize.module ({
 										(_tuple [_componentNo] - _componentMins [_componentNo]) / _componentRanges [_componentNo]
 									);
 								},
-						_encoding = _dummyColor1.from (_referenceColor).encoding,
 						_colorSpaceTuple = _object.colorSpaces [_object.encodings [_encoding].colorSpace].tuple,
 						_componentMins = [
 							_colorSpaceTuple [0].min,
