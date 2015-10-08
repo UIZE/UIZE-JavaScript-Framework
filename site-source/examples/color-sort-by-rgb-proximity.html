@@ -10,10 +10,10 @@
 	<link rel="stylesheet" href="../css/page.example.css"/>
 	<style tyle="text/css">
 		.colorSwatch {
-			width:1px;
-			height:340px;
-			float:left;
-			cursor:pointer;
+			width: 1px;
+			height: 340px;
+			float: left;
+			cursor: pointer;
 		}
 	</style>
 </head>
@@ -44,20 +44,20 @@
 
 	<!-- "wireframe" for the UI -->
 
-	<table border="0" cellspacing="0" cellpadding="0" style="margin:auto;">
+	<table border="0" cellspacing="0" cellpadding="0" style="margin: auto;">
 		<tr>
 			<td class="heading">Choose Color</td>
-			<td style="width:20px;"></td>
+			<td style="width: 20px;"></td>
 			<td class="heading">Your Desired Color</td>
-			<td style="width:20px;"></td>
+			<td style="width: 20px;"></td>
 			<td class="heading">Closest Matches From Available Colors (i.e. limited color palette)</td>
 		</tr>
 		<tr>
 			<td id="page_desiredColor"></td>
 			<td></td>
-			<td id="page-desiredColor" style="width:140px;"></td>
+			<td id="page-desiredColor" style="width: 140px;"></td>
 			<td></td>
-			<td id="page-colorSwatches" style="width:442px;"></td>
+			<td id="page-colorSwatches" style="width: 442px;"></td>
 		</tr>
 	</table>
 </div>
@@ -72,6 +72,7 @@ Uize.require (
 		'UizeSite.Page.Example',
 		'Uize.Color',
 		'Uize.Color.xUtil',
+		'Uize.Color.xSvgColors',
 		'Uize.Widgets.RgbSliders.Widget',
 		'Uize.Widgets.ColorInfo.Widget',
 		'Uize.Dom.Basics',
@@ -92,32 +93,50 @@ Uize.require (
 				page.setNodeStyle ('desiredColor',{backgroundColor:'#' + desiredColorValue});
 				Uize.Color.sort (colors,desiredColorValue);
 				for (var colorNo = -1; ++colorNo < totalColors;)
-					page.setNodeStyle ('colorSwatch' + colorNo,{backgroundColor:colors [colorNo].to ()})
+					page.setNodeStyle ('colorSwatch' + colorNo,{backgroundColor:colors [colorNo].to ('#hex')})
 				;
 			}
 
-		/*** randomize colors ***/
+		/*** initialize colors ***/
 			var
-				totalColors = 200,
-				colors = []
+				colorNames = Uize.values (Uize.reverseLookup (Uize.Color.colors)),
+					/* NOTE:
+						There are some colors that are listed twice, because there are spellings for both en-US and en-GB. Doing the reverse lookup is a simple way of removing dupes, because the duped colors will have the same color values and will overwrite each other in the reverse lookup.
+					*/
+				totalColors = colorNames.length,
+				colors = Uize.map (colorNames,function (colorName) {return Uize.Color (colorName)})
 			;
-			function randomizeColors () {
-				for (var colorNo = -1; ++colorNo < totalColors;)
-					(colors [colorNo] || (colors [colorNo] = Uize.Color ()).setEncoding ('RGB string')).random ()
+			/* for random colors...
+				var
+					totalColors = 200,
+					colors = Uize.map (
+						totalColors,
+						function () {return Uize.Color ().setEncoding ('RGB string').random ()}
+					)
 				;
-				sortColorSwatches ();
-			}
+			*/
 
 		/*** build the swatches HTML ***/
 			var
 				swatchesHtmlChunks = [],
 				swatchNodeName,
-				swatchNodeNames = []
+				swatchNodeNames = [],
+				colorSwatchesWidth = 442,
+				swatchWidths = Uize.map (totalColors,1),
+				remainerToDistribute = colorSwatchesWidth - totalColors,
+				midColorNo = totalColors - 1
 			;
+			while (remainerToDistribute) {
+				midColorNo = Math.floor (midColorNo * .67);
+				for (var colorNo = -1; remainerToDistribute && ++colorNo <= midColorNo;) {
+					swatchWidths [colorNo]++;
+					remainerToDistribute--;
+				}
+			}
 			for (var colorNo = -1; ++colorNo < totalColors;) {
 				swatchNodeNames.push (swatchNodeName = 'colorSwatch' + colorNo);
 				swatchesHtmlChunks.push (
-					'<div id="page-' + swatchNodeName + '" class="colorSwatch" style="width:' + (colorNo < 8 ? 16 : colorNo < 16 ? 6 : colorNo < 32 ? 4 : colorNo < 64 ? 2 : 1) + 'px;"></div>'
+					'<div id="page-' + swatchNodeName + '" class="colorSwatch" style="width: ' + swatchWidths [colorNo] + 'px;"></div>'
 				);
 			}
 
@@ -157,7 +176,7 @@ Uize.require (
 				);
 				page.wireNode (swatchNodeNames,'mouseover',updateColorInfo);
 
-			randomizeColors ();
+			sortColorSwatches ();
 	}
 );
 
