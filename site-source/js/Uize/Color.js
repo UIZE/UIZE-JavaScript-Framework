@@ -62,7 +62,7 @@
 			Methods for Manipulating Colors
 				Using the =Uize.Color= object, colors can be converted across color spaces and formats.
 
-				Further utilities for dealing with colors are available in extension module, such as the =Uize.Color.xUtil= module, which provides methods for blending between colors, mixing multiple colors together, testing for color equivalence, etc.
+				Further utilities for dealing with colors are available in extension modules, such as the =Uize.Color.xUtil= module, which provides methods for blending between colors, testing for color equivalence, etc.
 
 			A Framework for Defining Named Colors
 				`Named colors` can be defined, and these colors can then be used wherever colors can be specified using the methods of the =Uize.Color= object.

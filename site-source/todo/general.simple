@@ -312,7 +312,7 @@ Iterator Interface
 
 			- =Uize.Data.Combinations=
 			- =Uize.Str.Lines=
-			- =Uize.Color.xUtil=
+			- =Uize.Color.Util=
 			- =Uize.Curve=
 
 		Iterator Modifier Function
@@ -927,6 +927,7 @@ Test Modules to Implement Next...
 	- =Uize.Test.Uize=
 	- =Uize.Test.Uize.Json=
 	- =Uize.Test.Uize.Color=
+	- =Uize.Test.Uize.Color.Util=
 	- =Uize.Test.Uize.Color.xUtil=
 	- =Uize.Test.Uize.Curve=
 	- =Uize.Test.Uize.Build.Scruncher=

@@ -3,7 +3,7 @@
 <head>
 	<title>Color Sorting Techniques | JavaScript Examples | UIZE JavaScript Framework</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-	<meta name="keywords" content="Uize.Color.xUtil"/>
+	<meta name="keywords" content="Uize.Color.Util"/>
 	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
 	<link rel="stylesheet" href="../css/page.css"/>
 	<link rel="stylesheet" href="../css/page.example.css"/>
@@ -33,7 +33,7 @@
 			<div id="page-actions" class="pageActions"><a href="source-code/make-color-combinations.html" class="buttonLink">SOURCE</a></div>
 		</div>
 	</h1>
-	
+
 	<!-- explanation copy -->
 
 	<div class="explanation">
@@ -54,8 +54,7 @@ Uize.require (
 	[
 		'UizeSite.Page.Example.library',
 		'UizeSite.Page.Example',
-		'Uize.Color',
-		'Uize.Color.xUtil'
+		'Uize.Color.Util'
 	],
 	function () {
 		'use strict';
@@ -66,10 +65,9 @@ Uize.require (
 		/*** build the swatches HTML ***/
 			var swatchesHtmlChunks = [];
 
-			//var colors = Uize.Color.makeCombinations ('hsl(0,100,20)','hsl(20,70,70)',[6,6,6],[0,0,0]);
-			var colors = Uize.Color.makeCombinations ('rgb(255,100,50)','rgb(0,50,100)',[6,6,6],[0,0,0]);
+			//var colors = Uize.Color.Util.makeCombinations ('hsl(0,100,20)','hsl(20,70,70)',[6,6,6],[0,0,0]);
+			var colors = Uize.Color.Util.makeCombinations ('rgb(255,100,50)','rgb(0,50,100)',[6,6,6],[0,0,0]);
 
-			//Uize.Color.sort (colors,'HSL');
 			for (var colorNo = -1, colorsLength = colors.length; ++colorNo < colorsLength;) {
 				var colorHex = colors [colorNo].to ('#hex');
 				swatchesHtmlChunks.push (

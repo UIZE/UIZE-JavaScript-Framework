@@ -1,0 +1,35 @@
+This is a TO DO document for the =Uize.Color.Util= module.
+
+- proximity sort
+	- ability to use average of colors as starting point for proximity (i.e. center of clump) -- just add as note in example for sort method
+
+Uize.Color.Util.sort
+	- support 4-tuple color spaces
+	- should it be possible to do a primary,secondary,tertiary component-based subsort after a proximity sort?
+		- ability to specify component order (or can some weighting scheme apply here as well?)
+
+Uize.Color.Util.closest
+	- returns the closest match to a reference color, out of a specified array of colors
+		eg. closestColorANYTYPE = Uize.Color.closest (referenceColorANYTYPE,colorsARRAY);
+
+		- how does this relate to proximity sort? Can it share code with sort?
+
+Uize.Color.Util.makeCombinations
+	- support 4-tuple color spaces
+
+Uize.Color.Util.makeSeries
+	..........................................
+	colorsARRAY = Uize.Color.Util.makeSeries (
+		color1ANYTYPE,
+		color2ANYTYPE,
+		componentChaosFLOATorARRAY,
+		outputEncodingSTR
+	);
+	..........................................
+
+	eg. =Uize.Color.Util.makeSeries ('0','f',100)=
+	eg. =Uize.Color.Util.makeSeries ('0','f',100,0,'#hex')=
+
+	component chaos of 1 lets you create any number of random colors within a range
+
+

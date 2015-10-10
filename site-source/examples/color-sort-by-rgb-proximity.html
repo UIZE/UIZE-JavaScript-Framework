@@ -3,7 +3,7 @@
 <head>
 	<title>Color Sort by RGB Proximity | JavaScript Examples | UIZE JavaScript Framework</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-	<meta name="keywords" content="featured color Uize.Color.xUtil"/>
+	<meta name="keywords" content="featured color Uize.Color Uize.Color.Util Uize.Color.xSvgColors"/>
 	<meta name="description" content="When you have a limited palette of colors, how can you sort the colors to find the closest matches to a desired color? This example shows you how."/>
 	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
 	<link rel="stylesheet" href="../css/page.css"/>
@@ -39,7 +39,7 @@
 	<!-- explanation copy -->
 
 	<div class="explanation">
-		<p>This example demonstrates the proximity-based color sorting functionality of the UIZE JavaScript Framework, as implemented in the <a href="../reference/Uize.Color.xUtil.html"><code>Uize.Color.xUtil</code></a> module. On the right of the interface is a large rectangle, with a sorted array of colors. On the left of the interface is an RGB color picker, with sliders for selecting levels for the red, green, and blue color channels of an RGB color. As you use the sliders to change your desired color, the finite set of available colors is re-sorted so that the colors most like your desired color are rearranged to be on the left. Additionally, these better matching colors are displayed using wider bars so you can inspect them more closely to make a better choice between the candidates. Color sorting functionality is useful when assisting a user in finding a color from a fixed color palette that is closest to their preferred color.</p>
+		<p>This example demonstrates the proximity-based color sorting functionality of the UIZE JavaScript Framework, as implemented in the <a href="../reference/Uize.Color.Util.html"><code>Uize.Color.Util</code></a> module. On the right of the interface is a large rectangle, with a sorted array of colors. On the left of the interface is an RGB color picker, with sliders for selecting levels for the red, green, and blue color channels of an RGB color. As you use the sliders to change your desired color, the finite set of available colors is re-sorted so that the colors most like your desired color are rearranged to be on the left. Additionally, these better matching colors are displayed using wider bars so you can inspect them more closely to make a better choice between the candidates. Color sorting functionality is useful when assisting a user in finding a color from a fixed color palette that is closest to their preferred color.</p>
 	</div>
 
 	<!-- "wireframe" for the UI -->
@@ -71,7 +71,7 @@ Uize.require (
 		'UizeSite.Page.Example.library',
 		'UizeSite.Page.Example',
 		'Uize.Color',
-		'Uize.Color.xUtil',
+		'Uize.Color.Util',
 		'Uize.Color.xSvgColors',
 		'Uize.Widgets.RgbSliders.Widget',
 		'Uize.Widgets.ColorInfo.Widget',
@@ -91,7 +91,7 @@ Uize.require (
 			function sortColorSwatches () {
 				var desiredColorValue = page.children.desiredColor.get ('value');
 				page.setNodeStyle ('desiredColor',{backgroundColor:'#' + desiredColorValue});
-				Uize.Color.sort (colors,desiredColorValue);
+				Uize.Color.Util.sort (colors,desiredColorValue);
 				for (var colorNo = -1; ++colorNo < totalColors;)
 					page.setNodeStyle ('colorSwatch' + colorNo,{backgroundColor:colors [colorNo].to ('#hex')})
 				;
