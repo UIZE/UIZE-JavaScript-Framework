@@ -31,7 +31,6 @@ Uize.module ({
 		var
 			/*** Variables for Scruncher Optimization ***/
 				_undefined,
-				_classPrototype = _class.prototype,
 
 			/*** General Variables ***/
 				_dummyColor1 = new _class,
