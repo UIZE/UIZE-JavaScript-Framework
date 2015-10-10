@@ -153,7 +153,8 @@ Uize.module ({
 
 		var
 			/*** Variables for Scruncher Optimization ***/
-				_Uize_Dom_Basics = Uize.Dom.Basics
+				_Uize_Dom_Basics = Uize.Dom.Basics,
+				_blendValues = Uize.blendValues
 		;
 
 		return _superclass.subclass ({
@@ -308,9 +309,6 @@ Uize.module ({
 							}
 							return _result;
 						}
-						function _blendValues (_valueA,_valueB,_blendPercent) {
-							return _valueA + (_valueB - _valueA) * _blendPercent / 100;
-						}
 						var
 							_top = m._panes.length = 0,
 							_divisionNo,
@@ -331,10 +329,10 @@ Uize.module ({
 								var
 									_right = _left + _paneW [_xDivisionNo],
 									_bottom = _top + _paneH [_yDivisionNo],
-									_paneSeedContextL = _blendValues (_left,0,_currentPaneSeedContext),
-									_paneSeedContextT = _blendValues (_top,0,_currentPaneSeedContext),
-									_paneSeedContextR = _blendValues (_right,_imageDims [0],_currentPaneSeedContext),
-									_paneSeedContextB = _blendValues (_bottom,_imageDims [1],_currentPaneSeedContext),
+									_paneSeedContextL = _blendValues (_left,0,_currentPaneSeedContext / 100),
+									_paneSeedContextT = _blendValues (_top,0,_currentPaneSeedContext / 100),
+									_paneSeedContextR = _blendValues (_right,_imageDims [0],_currentPaneSeedContext / 100),
+									_paneSeedContextB = _blendValues (_bottom,_imageDims [1],_currentPaneSeedContext / 100),
 									_seedW = (_paneSeedContextR - _paneSeedContextL) * _currentPaneSeedSizeX / 100,
 									_seedH = (_paneSeedContextB - _paneSeedContextT) * _currentPaneSeedSizeY / 100,
 									_seedLeft = _paneSeedContextL + (_paneSeedContextR - _paneSeedContextL - _seedW) * _currentAlignX,
@@ -343,10 +341,10 @@ Uize.module ({
 									_seedBottom = _seedTop + _seedH,
 									_initCoords = [_seedLeft,_seedTop,_seedRight,_seedBottom],
 									_finalCoords = [
-										_blendValues (_left,0,_currentAllToFull),
-										_blendValues (_top,0,_currentAllToFull),
-										_blendValues (_right,_imageDims [0],_currentAllToFull),
-										_blendValues (_bottom,_imageDims [1],_currentAllToFull)
+										_blendValues (_left,0,_currentAllToFull / 100),
+										_blendValues (_top,0,_currentAllToFull / 100),
+										_blendValues (_right,_imageDims [0],_currentAllToFull / 100),
+										_blendValues (_bottom,_imageDims [1],_currentAllToFull / 100)
 									]
 								;
 								m._panes [_divisionNo] = {

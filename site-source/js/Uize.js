@@ -114,6 +114,7 @@
 				General Utilities
 					The =Uize= module provides the following general utility methods...
 
+					- =Uize.blendValues= - lets you blend two values, specifying a blend amount
 					- =Uize.eval= - lets you perform `quarantined code evaluation` of a JavaScript code string
 					- =Uize.getClass= - gets the class of which a specified value is an instance, or returns the value if it is a class or function
 					- =Uize.global= - returns a reference to the global object
@@ -550,6 +551,10 @@ Uize = (function () {
 							- The one exception to the conjoined rule is function references, which will be shared according to the current implementation.
 							- see also the other `basic data utilities`
 				*/
+			},
+
+			blendValues:function (_valueA,_valueB,_blendAmount) {
+				return +_valueA + (_valueB - _valueA) * _blendAmount;
 			},
 
 			constrain:_constrain = function (_value,_limitA,_limitB) {

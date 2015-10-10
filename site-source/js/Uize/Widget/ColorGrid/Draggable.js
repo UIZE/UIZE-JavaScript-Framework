@@ -35,6 +35,9 @@ Uize.module ({
 		'use strict';
 
 		var
+			/*** Variables for Scruncher Optimization ***/
+				_blendValues = Uize.blendValues,
+
 			/*** General Variables ***/
 				_dummyColor = Uize.Color ()
 		;
@@ -51,9 +54,6 @@ Uize.module ({
 					_colorBottomRightTuple = _cornerColors.colorBottomRight.tuple
 				;
 				function _blendColorComponent (_componentNo) {
-					function _blendValues (_value1,_value2,_blendLevel) {
-						return _value1 + (_value2 - _value1) * _blendLevel;
-					}
 					return (
 						_blendValues (
 							_blendValues (_colorTopLeftTuple [_componentNo],_colorTopRightTuple [_componentNo],_blendX),

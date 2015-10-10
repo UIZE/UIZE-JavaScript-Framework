@@ -167,15 +167,13 @@ Uize.module ({
 		var
 			/*** Variables for Scruncher Optimization ***/
 				_getOpacityProperties = Uize.Dom.Util.getOpacityProperties,
+				_blendValues = Uize.blendValues,
 
 			/*** General Variables ***/
 				_cropCoords = [],
 				_viewCoords = [],
 				_pos = []
 		;
-
-		/*** Utility Functions ***/
-			function _blendValues (_value1,_value2,_blend) {return _value1 + (_value2 - _value1) * _blend}
 
 		/*** Private Instance Methods ***/
 			function _updateItem (m,_item,_value,_updateAllProperties) {

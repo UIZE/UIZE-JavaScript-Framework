@@ -39,6 +39,7 @@ Uize.module ({
 
 		var
 			/*** Variables for Scruncher Optimization ***/
+				_blendValues = Uize.blendValues,
 				_getColumn = Uize.Data.Util.getColumn,
 				_Uize_Color = Uize.Color,
 				_min = Uize.min,
@@ -111,9 +112,6 @@ Uize.module ({
 							derivation:function (
 								_colorsAsTuples, _colorsMaxMin, _hueRange, _hueShift, _saturationRange, _saturationShift, _lightnessRange, _lightnessShift
 							) {
-								function _blendValues (_valueA,_valueB,_blendAmount) {
-									return _valueA + (_valueB - _valueA) * _blendAmount;
-								}
 								function _transformComponent (
 									_value,_minValue,_maxValue,_componentMin,_componentMax,_range,_shift,_shiftMode
 								) {

@@ -35,6 +35,7 @@ Uize.module ({
 		var
 			/*** Variables for Scruncher Optimization ***/
 				_undefined,
+				_blendValues = Uize.blendValues,
 				_Uize_Color = Uize.Color,
 
 			/*** General Variables ***/
@@ -44,10 +45,6 @@ Uize.module ({
 		;
 
 		/*** Utility Functions ***/
-			function _blendValues (_valueA,_valueB,_blendAmount) {
-				return _valueA + (_valueB - _valueA) * _blendAmount
-			}
-
 			function _ensureSettingIsTuple (_setting,_default) {
 				if (_setting == _undefined) _setting = _default;
 				return Uize.isArray (_setting) ? _setting : [_setting,_setting,_setting,_setting];

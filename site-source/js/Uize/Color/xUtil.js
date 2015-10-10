@@ -31,16 +31,12 @@ Uize.module ({
 		var
 			/*** Variables for Scruncher Optimization ***/
 				_undefined,
+				_blendValues = Uize.blendValues,
 
 			/*** General Variables ***/
 				_dummyColor1 = new _class,
 				_dummyColor2 = new _class
 		;
-
-		/*** Utility Functions ***/
-			function _blendValues (_valueA,_valueB,_blendAmount) {
-				return _valueA + (_valueB - _valueA) * _blendAmount
-			}
 
 		_class.declare ({
 			instanceMethods:{
