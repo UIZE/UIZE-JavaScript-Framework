@@ -32,7 +32,6 @@ Uize.module ({
 	superclass:'Uize.Class',
 	required:[
 		'Uize.Color',
-		'Uize.Color.xUtil',
 		'Uize.Data.Util'
 	],
 	builder:function (_superclass) {
