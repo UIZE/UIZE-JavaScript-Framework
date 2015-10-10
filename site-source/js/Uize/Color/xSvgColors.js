@@ -41,10 +41,10 @@
 
 Uize.module ({
 	name:'Uize.Color.xSvgColors',
-	builder:function (_Uize_Color) {
+	builder:function (_class) {
 		'use strict';
 
-		_Uize_Color.defineColors ({
+		_class.defineColors ({
 			aliceBlue:            15792383, // 0xf0f8ff
 			antiqueWhite:         16444375, // 0xfaebd7
 			aquamarine:            8388564, // 0x7fffd4

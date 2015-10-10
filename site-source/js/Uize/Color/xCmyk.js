@@ -30,13 +30,13 @@
 
 Uize.module ({
 	name:'Uize.Color.xCmyk',
-	builder:function (_Uize_Color) {
+	builder:function (_class) {
 		'use strict';
 
-		var _sRgbColorSpace = _Uize_Color.colorSpaces.sRGB;
+		var _sRgbColorSpace = _class.colorSpaces.sRGB;
 
 		/*** Color Profile ***/
-			_Uize_Color.colorSpaces.CMYK = {
+			_class.colorSpaces.CMYK = {
 				fromHsl:function (_tuple) {
 					// HSL to RGB first, then RGB to CMYK
 					_tuple = _sRgbColorSpace.fromHsl (_tuple);
@@ -70,12 +70,12 @@ Uize.module ({
 
 		/*** Color Encodings ***/
 			Uize.copyInto (
-				_Uize_Color.encodings,
+				_class.encodings,
 				{
 					'CMYK array':{
 						colorSpace:'CMYK',
-						from:_Uize_Color.setTupleFromArray,
-						to:_Uize_Color.cloneTuple
+						from:_class.setTupleFromArray,
+						to:_class.cloneTuple
 						/*?
 							Color Encodings
 								CMYK array
@@ -120,7 +120,7 @@ Uize.module ({
 					'CMYK object':{
 						colorSpace:'CMYK',
 						from:function (_cmykObject,_tuple) {
-							_Uize_Color.setTuple (
+							_class.setTuple (
 								_tuple,_cmykObject.cyan,_cmykObject.magenta,_cmykObject.yellow,_cmykObject.key
 							);
 						},
@@ -173,7 +173,7 @@ Uize.module ({
 					},
 					'CMYK string':{
 						colorSpace:'CMYK',
-						from:_Uize_Color.setTupleFromString,
+						from:_class.setTupleFromString,
 						to:function (_tuple) {
 							function _roundAndConstrainComponent (_componentNo) {
 								return Uize.constrain (Math.round (_tuple [_componentNo]),0,100);

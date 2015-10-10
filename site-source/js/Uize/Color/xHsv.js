@@ -30,11 +30,11 @@
 
 Uize.module ({
 	name:'Uize.Color.xHsv',
-	builder:function (_Uize_Color) {
+	builder:function (_class) {
 		'use strict';
 
 		/*** Color Profile ***/
-			_Uize_Color.colorSpaces.HSV = {
+			_class.colorSpaces.HSV = {
 				fromHsl:function (_tuple) {
 					// http://en.wikipedia.org/wiki/HSL_color_space
 					var
@@ -64,12 +64,12 @@ Uize.module ({
 
 		/*** Color Encodings ***/
 			Uize.copyInto (
-				_Uize_Color.encodings,
+				_class.encodings,
 				{
 					'HSV array':{
 						colorSpace:'HSV',
-						from:_Uize_Color.setTupleFromArray,
-						to:_Uize_Color.cloneTuple
+						from:_class.setTupleFromArray,
+						to:_class.cloneTuple
 						/*?
 							Color Encodings
 								HSV array
@@ -114,7 +114,7 @@ Uize.module ({
 					'HSV object':{
 						colorSpace:'HSV',
 						from:function (_hsvObject,_tuple) {
-							_Uize_Color.setTuple (_tuple,_hsvObject.hue,_hsvObject.saturation,_hsvObject.value);
+							_class.setTuple (_tuple,_hsvObject.hue,_hsvObject.saturation,_hsvObject.value);
 						},
 						to:function (_tuple) {return {hue:_tuple [0],saturation:_tuple [1],value:_tuple [2]}}
 						/*?
@@ -160,7 +160,7 @@ Uize.module ({
 					},
 					'HSV string':{
 						colorSpace:'HSV',
-						from:_Uize_Color.setTupleFromString,
+						from:_class.setTupleFromString,
 						to:function (_tuple) {
 							function _roundAndConstrainComponent (_componentNo,_minValue,_maxValue) {
 								return Uize.constrain (Math.round (_tuple [_componentNo]),_minValue,_maxValue);
