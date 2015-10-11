@@ -1475,7 +1475,7 @@ Uize.module ({
 						addChildren:function (_children,_commonProperties) {
 							for (var _childName in _children) {
 								var
-									_childProperties = _Uize.copy (_children [_childName],_commonProperties),
+									_childProperties = _Uize.copy (_commonProperties,_children [_childName]),
 									_widgetClass = _childProperties.widgetClass
 								;
 								delete _childProperties.widgetClass;
