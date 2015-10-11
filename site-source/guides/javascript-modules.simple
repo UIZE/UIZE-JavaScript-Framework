@@ -324,9 +324,9 @@ Types of Modules
 		Extension modules are modules of code that extend on the implementation of a class or package.
 
 		EXTENSION MODULE
-		....................................
+		..............................
 		Uize.module ({
-			name:'Uize.Widget.Bar.Slider.xSkin',
+			name:'Uize.Color.xUtil',
 			builder:function (_class) {
 				/*
 				...SOME CODE HERE...
@@ -335,11 +335,11 @@ Types of Modules
 				*/
 			}
 		});
-		....................................
+		..............................
 
-		In the above example, the module =Uize.Widget.Bar.Slider.xSkin= is extending the module =Uize.Widget.Bar.Slider=. The implementation of the module's builder function will use the =_class= parameter that is passed to it, which is a reference to the =Uize.Widget.Bar.Slider= class, and will assign new properties on it (or otherwise modify it).
+		In the above example, the module =Uize.Color.xUtil= is extending the module =Uize.Color=. The implementation of the module's builder function will use the =_class= parameter that is passed to it, which is a reference to the =Uize.Color= class, and will assign new properties on it (or otherwise modify it).
 
-		Since no valus is returned by the =builder= function, the value =function () {}= (a dummy function) will be assigned to the =xSkin= property of the =Uize.Widget.Bar.Slider= module, resulting in the valid object path of =Uize.Widget.Bar.Slider.xSkin=. This will ensure that if the module is required and has already been built, then the =Uize.module= method will detect this, because the property =xSkin= will exist on the =Uize.Widget.Bar.Slider= object and dereferencing the object path =Uize.Widget.Bar.Slider.xSkin= will resolve to something defined, and the =Uize.module= method won't attempt to load the module.
+		Since no valus is returned by the =builder= function, the value =function () {}= (a dummy function) will be assigned to the =xUtil= property of the =Uize.Color= module, resulting in the valid object path of =Uize.Color.xUtil=. This will ensure that if the module is required and has already been built, then the =Uize.module= method will detect this, because the property =xUtil= will exist on the =Uize.Color= object and dereferencing the object path =Uize.Color.xUtil= will resolve to something defined, and the =Uize.module= method won't attempt to load the module.
 
 		NOTES
 		- As a naming convention, the guest name of an extension is prefixed with a lowercase "x", but this is merely a convention and not a requirement.
@@ -357,12 +357,11 @@ Types of Modules
 			It is a common pattern to place page wiring code towards the bottom of the page. You could either ensure that all the modules needed by the page wiring code are already sourced in before the wiring code is encountered in the document, or you could place the wiring code inside an anonymous module declaration, as in the following example...
 
 			ANONYMOUS MODULE
-			..............................................
+			...................................
 			Uize.module ({
 				required:[
 					'Uize.Dom.Basics',
 					'Uize.Widget.ImagePort',
-					'Uize.Widget.Bar.Slider.xSkin',
 					'Uize.Widget.Resizer.Marquee'
 				],
 				builder:function () {
@@ -373,9 +372,9 @@ Types of Modules
 					*/
 				}
 			});
-			..............................................
+			...................................
 
-			In the above example, the page wiring code will only execute once the =Uize.Dom.Basics=, =Uize.Widget.ImagePort=, =Uize.Widget.Bar.Slider.xSkin=, and =Uize.Widget.Resizer.Marquee= modules, along with all of their required modules, have been loaded in and built.
+			In the above example, the page wiring code will only be executed once the =Uize.Dom.Basics=, =Uize.Widget.ImagePort=, and =Uize.Widget.Resizer.Marquee= modules, along with all of their required modules, have been loaded in and built.
 
 		Deferred Loading
 			It is also possible to use the =Uize.module= method to declare an anonymous module of code that is deeply nested inside the main module's implementation. This module of code can then require modules that aren't required by the main module.

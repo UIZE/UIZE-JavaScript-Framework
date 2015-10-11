@@ -162,10 +162,14 @@ Naming Conventions
 
 	Library Filenames
 		Classes and Packages
-			JavaScript module files that implement Classes and packages are named according to the class or package names, with the addition of the ".js" file extension. So, for example, the =Uize.Widget.Bar= class is implemented in the JavaScript file =Uize/Widget/Bar.js=. Similarly, the =Uize.Dom.Basics= package is implemented in the JavaScript file =Uize/Dom/Basics.js=.
+			JavaScript module files that implement Classes and packages are named according to the class or package names, with the addition of the ".js" file extension.
+
+			So, for example, the =Uize.Widget.Bar= class is implemented in the JavaScript file =Uize/Widget/Bar.js=. Similarly, the =Uize.Dom.Basics= package is implemented in the JavaScript file =Uize/Dom/Basics.js=.
 
 		Extensions
-			Extensions to UIZE classes are named as properties of the class name, with the addition of the extension descriptor prefix "x", of the form =[Class].x[Descriptor]=, where the descriptor denotes the type of functionality that is provided in the extension. So, for example, the extension to the =Uize.Widget.Bar.Slider= class that provides markup generation support for a basic skin is named =Uize.Widget.Bar.Slider.xSkin.js=.
+			Extensions to UIZE classes are named as properties of the class name, with the addition of the extension descriptor prefix "x", of the form =[Class].x[Descriptor]=, where the descriptor denotes the type of functionality that is provided in the extension.
+
+			So, for example, the extension to the =Uize.Color= class that adds extra utility methods is named =Uize.Color.xUtil.js=.
 
 Layout
 	Separating Code Sections
