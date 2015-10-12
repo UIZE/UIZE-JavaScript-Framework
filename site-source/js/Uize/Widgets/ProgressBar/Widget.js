@@ -35,10 +35,7 @@
 Uize.module ({
 	name:'Uize.Widgets.ProgressBar.Widget',
 	superclass:'Uize.Widgets.Bar.HorzWithStatusText.Widget',
-	required:[
-		'Uize.Widgets.ProgressBar.Html',
-		'Uize.Template'
-	],
+	required:'Uize.Template',
 	builder:function (_superclass) {
 		'use strict';
 
@@ -64,7 +61,6 @@ Uize.module ({
 						}
 					}
 				},
-
 				_statusText:{
 					name:'statusText',
 					value:'',
@@ -72,10 +68,6 @@ Uize.module ({
 						return _value && typeof _value == 'string' ? Uize.Template.compile (_value) : _value;
 					}
 				}
-			},
-
-			set:{
-				html:Uize.Widgets.ProgressBar.Html
 			},
 
 			htmlBindings:{

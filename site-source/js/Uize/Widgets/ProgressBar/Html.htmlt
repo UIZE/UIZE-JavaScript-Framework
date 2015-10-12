@@ -1,9 +1,0 @@
-<div>
-	<div id="track" class="track">
-		<div class="trackBg"></div>
-		<div id="full" class="trackFull"></div>
-		<div id="empty" class="trackEmpty"></div>
-		<div id="statusText" class="statusText"></div>
-	</div>
-</div>
-
