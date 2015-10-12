@@ -1,0 +1,35 @@
+<%@ required ('Uize.Widgets.CssUtil'); %>
+<%
+	var _cssUtil = Uize.Widgets.CssUtil;
+%>
+.`statusText` {
+	font-weight: bold;
+	letter-spacing: 1px;
+}
+
+.`usedText` {
+	position: absolute;
+}
+
+.`remainingText` {
+	position: absolute;
+}
+
+/*** styling for different sizes ***/
+<%
+	Uize.forEach (
+		_cssUtil.sizes,
+		function (_size,_sizeName) {
+			var _sidePadding = 4 + _size.sizeNo * 2;
+%>	/*** <%= _sizeName %> ***/
+		/*** horizontal ***/
+			.`<%= _sizeName %>` .`usedText` {
+				left: <%= _sidePadding %>px;
+			}
+			.`<%= _sizeName %>` .`remainingText` {
+				right: <%= _sidePadding %>px;
+			}
+<%		}
+	);
+%>
+

@@ -1,0 +1,13 @@
+<div>
+	<div id="track" class="track">
+		<div class="trackBg"></div>
+		<div id="full" class="trackFull"></div>
+		<div id="empty" class="trackEmpty"></div>
+		<div class="trackLighting"></div>
+		<div class="statusText">
+			<div id="usedText" class="usedText"></div>
+			<div id="remainingText" class="remainingText"></div>
+		</div>
+	</div>
+</div>
+
