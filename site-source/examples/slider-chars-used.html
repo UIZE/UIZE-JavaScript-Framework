@@ -3,7 +3,7 @@
 <head>
 	<title>Characters Used Indicator | JavaScript Examples | UIZE JavaScript Framework</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-	<meta name="keywords" content="form Uize.Widget.Bar.Slider"/>
+	<meta name="keywords" content="form Uize.Widgets.Bars.UsedAndRemaining.Widget"/>
 	<meta name="description" content="Among the creative uses of the bar widget is this characters used indicator for a textarea. As you type, the bar indicates chars used and remaining."/>
 	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
 	<link rel="stylesheet" href="../css/page.css"/>
@@ -11,70 +11,23 @@
 
 	<style type="text/css">
 		.fieldHeading {
-			position:relative;
-			width:400px;
-			height:18px;
-			font-weight:bold;
-			color:#fff;
-			background:#000 url(../images/heading-bg.gif) left top repeat-x;
+			position: relative;
+			width: 400px;
+			height: 23px;
+			line-height: 23px;
+			font-weight: bold;
+			color: #fff;
+			background: #000 url(../images/heading-bg.gif) left top repeat-x;
 		}
-		.charsUsedIndicator {
-			position:absolute;
-			left:0;
-			top:0;
-			width:400px;
-			height:20px;
-			visibility:hidden;
+		.charsUsedBar {
+			position: absolute;
+			left: 0;
+			top: 0;
+			width: 400px;
+			visibility: hidden;
 		}
-		.charsUsedSlider {
-			position:absolute;
-			left:0;
-			top:0;
-			width:400px;
-			height:18px;
-		}
-
-		.charsText {
-			position:absolute;
-			font-family:Arial, Helvetica, Verdana;
-			font-size:12px;
-			font-weight:bold;
-			letter-spacing:1px;
-			width:400px;
-			height:20px;
-			line-height:18px;
-			color:#fff;
-		}
-		.charsText div {
-			position:absolute;
-		}
-		.charsUsed div, .charsRemaining div {
-			width:100%;
-		}
-		.charsUsed {
-			left:5px;
-		}
-		.charsUsed div {
-			text-align:left;
-		}
-		.charsRemaining {
-			right:5px;
-		}
-		.charsRemaining div {
-			text-align:right;
-		}
-		.stroke {
-			color:#000;
-		}
-		.strokeLeft {left:-1px;}
-		.strokeCenterHorz {left:0;}
-		.strokeRight {left:1px;}
-		.strokeTop {top:-1px;}
-		.strokeCenterVert {top:0;}
-		.strokeBottom {top:1px;}
-
 		.explanation {
-			margin-bottom:20px;
+			margin-bottom: 20px;
 		}
 	</style>
 </head>
@@ -100,7 +53,7 @@
 	<!-- explanation copy -->
 
 	<div class="explanation">
-		<p>In this example, an instance of <a href="../reference/Uize.Widget.Bar.Slider"><code>Uize.Widget.Bar.Slider</code></a> is used to provide feedback - as you type - on how many characters are still permitted in the text input. When you focus the text input, the title for the field is replaced by a dynamically updated indicator that informs you of how many characters you've used and how many characters are remaining. As you type more characters, the slider that is displayed beneath the chars summary is advanced from left to right. As the bar gets closer to "full", its color becomes increasingly hotter, until it is finally solid red once all of the allotted characters are used.</p>
+		<p>In this example, an instance of <a href="../reference/Uize.Widgets.Bars.UsedAndRemaining.Widget"><code>Uize.Widgets.Bars.UsedAndRemaining.Widget</code></a> is used to provide feedback - as you type - on how many characters are still permitted in the text input. When you focus the text input, the title for the field is replaced by a dynamically updated indicator that informs you of how many characters you've used and how many characters are remaining. As you type more characters, the bar that is displayed beneath the chars summary is advanced from left to right. As the bar gets closer to "full", its color becomes increasingly hotter, until it is finally solid red once all of the allotted characters are used.</p>
 	</div>
 
 	<!-- slider UI -->
@@ -109,39 +62,9 @@
 		<form>
 			<div class="fieldHeading"">
 				Enter a Description (200 character maximum)
-				<div id="page-charsUsedIndicator" class="charsUsedIndicator">
-					<div id="page_charsUsedSlider" class="charsUsedSlider"></div>
-
-					<!-- the DIVs for the chars used text and its stroke -->
-
-					<div class="charsText charsUsed">
-						<div id="page-charsUsedStrokeTL" class="stroke strokeLeft strokeTop"></div>
-						<div id="page-charsUsedStrokeTC" class="stroke strokeCenterHorz strokeRight"></div>
-						<div id="page-charsUsedStrokeTR" class="stroke strokeRight strokeTop"></div>
-						<div id="page-charsUsedStrokeCL" class="stroke strokeLeft strokeCenterVert"></div>
-						<div id="page-charsUsedStrokeCR" class="stroke strokeRight strokeCenterVert"></div>
-						<div id="page-charsUsedStrokeBL" class="stroke strokeLeft strokeBottom"></div>
-						<div id="page-charsUsedStrokeBC" class="stroke strokeCenterHorz strokeBottom"></div>
-						<div id="page-charsUsedStrokeBR" class="stroke strokeRight strokeBottom"></div>
-						<div id="page-charsUsed" class="strokeCenterHorz strokeCenterVert"></div>
-					</div>
-
-					<!-- the DIVs for the chars remaining text and its stroke -->
-
-					<div class="charsText charsRemaining">
-						<div id="page-charsRemainingStrokeTL" class="stroke strokeLeft strokeTop"></div>
-						<div id="page-charsRemainingStrokeTC" class="stroke strokeCenterHorz strokeRight"></div>
-						<div id="page-charsRemainingStrokeTR" class="stroke strokeRight strokeTop"></div>
-						<div id="page-charsRemainingStrokeCL" class="stroke strokeLeft strokeCenterVert"></div>
-						<div id="page-charsRemainingStrokeCR" class="stroke strokeRight strokeCenterVert"></div>
-						<div id="page-charsRemainingStrokeBL" class="stroke strokeLeft strokeBottom"></div>
-						<div id="page-charsRemainingStrokeBC" class="stroke strokeCenterHorz strokeBottom"></div>
-						<div id="page-charsRemainingStrokeBR" class="stroke strokeRight strokeBottom"></div>
-						<div id="page-charsRemaining" class="strokeCenterHorz strokeCenterVert"></div>
-					</div>
-				</div>
+				<div id="page-charsUsedBar" class="charsUsedBar"></div>
 			</div>
-			<textarea id="page-textArea" style="width:396px; height:100px;" wrap="soft"></textarea><br/>
+			<textarea id="page-textArea" style="width: 396px; height: 100px;" wrap="soft"></textarea><br/>
 		</form>
 	</center>
 </div>
@@ -154,10 +77,7 @@ Uize.require (
 	[
 		'UizeSite.Page.Example.library',
 		'UizeSite.Page.Example',
-		'Uize.Widget.Bar.Slider',
-		'Uize.Widget.Bar.Slider.xSkin',
-		'Uize.Color',
-		'Uize.Color.xUtil'
+		'Uize.Widgets.Bars.UsedAndRemaining.Widget'
 	],
 	function () {
 		'use strict';
@@ -165,64 +85,33 @@ Uize.require (
 		/*** create the example page widget ***/
 			var page = window.page = UizeSite.Page.Example ();
 
-		/*** create the Uize.Widget.Bar.Slider object ***/
-			var charsUsedSlider = page.addChild (
-				'charsUsedSlider',
-				Uize.Widget.Bar.Slider,
+		/*** create the chars used bar widget ***/
+			var charsUsedBar = page.addChild (
+				'charsUsedBar',
+				Uize.Widgets.Bars.UsedAndRemaining.Widget,
 				{
-					minValue:0,
 					maxValue:200,
-					orientation:'horizontal',
-					knobSize:0,
-					fullTintColor:'#f00',
-					fullTintLevel:100,
-					emptyTintColor:'#000',
-					emptyTintLevel:100,
-					borderTintColor:'#888',
-					borderTintLevel:100,
-					borderThickness:1,
-					built:false,
-					extraClasses:'charsUsedSlider'
+					usedText:'<%. used %> chars used',
+					remainingText:'<%. remaining %> chars remaining',
+					size:'tiny',
+					trackLength:'100%',
+					built:false
 				}
 			);
 
 		/*** function to show/hide chars used indicator ***/
-			function showCharsUsedIndicator (mustShow) {
-				if (mustShow) updateCharsUsedSlider ();
-				page.showNode ('charsUsedIndicator',mustShow);
+			function showCharsUsedBar (mustShow) {
+				if (mustShow) updatecharsUsedBar ();
+				page.showNode ('charsUsedBar',mustShow);
 			}
 
 		/*** update slider as contents of textarea changes ***/
-			function updateCharsUsedSlider () {
-				charsUsedSlider.set ({value:page.getNodeValue ('textArea').length});
-				var maxChars = charsUsedSlider.get ('maxValue');
-				charsUsedSlider.setNodeStyle (
-					'full',
-					{background:Uize.Color.blend ('hsl(120,100,50)','hsl(0,100,50)',charsUsedSlider / maxChars,'#hex')}
-				);
-				function setCharsText (charsType,charsCount) {
-					var nodeNamePrefix = 'chars' + charsType;
-					page.setNodeInnerHtml (
-						[
-							nodeNamePrefix,
-							nodeNamePrefix + 'StrokeTL',
-							nodeNamePrefix + 'StrokeTC',
-							nodeNamePrefix + 'StrokeTR',
-							nodeNamePrefix + 'StrokeCL',
-							nodeNamePrefix + 'StrokeCR',
-							nodeNamePrefix + 'StrokeBL',
-							nodeNamePrefix + 'StrokeBC',
-							nodeNamePrefix + 'StrokeBR'
-						],
-						charsCount + ' chars ' + charsType.toLowerCase ()
-					);
-				}
-				setCharsText ('Used',charsUsedSlider);
-				setCharsText ('Remaining',maxChars - charsUsedSlider);
+			function updatecharsUsedBar () {
+				charsUsedBar.set ({used:page.getNodeValue ('textArea').length});
 			}
 
 		/*** initialize the slider's value to reflect any initial contents in the textarea ***/
-			updateCharsUsedSlider ();
+			updatecharsUsedBar ();
 
 		/*** wire up the page widget ***/
 			page.wireUi ();
@@ -231,9 +120,9 @@ Uize.require (
 			page.wireNode (
 				'textArea',
 				{
-					keyup:updateCharsUsedSlider,
-					focus:function () {showCharsUsedIndicator (true)},
-					blur:function () {showCharsUsedIndicator (false)}
+					keyup:updatecharsUsedBar,
+					focus:function () {showCharsUsedBar (true)},
+					blur:function () {showCharsUsedBar (false)}
 				}
 			);
 	}
