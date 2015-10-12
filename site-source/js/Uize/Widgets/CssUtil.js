@@ -71,14 +71,26 @@ Uize.module ({
 			pseudoStroke:function (_color) {
 				return (
 					'text-shadow:' +
-						'-1px -1px 0 ' + _color + ',' +
-						'-1px 0 0 ' + _color + ',' +
-						'-1px 1px 0 ' + _color + ',' +
-						'0 -1px 0 ' + _color + ',' +
-						'0 1px 0 ' + _color + ',' +
-						'1px -1px 0 ' + _color + ',' +
-						'1px 0 0 ' + _color + ',' +
-						'1px 1px 0 ' + _color +
+						[
+							'-1px -1px 0 ' + _color,
+							'0 -1px 0 ' + _color,
+							'1px -1px 0 ' + _color,
+							'-1px 0 0 ' + _color,
+							'1px 0 0 ' + _color,
+							'-1px 1px 0 ' + _color,
+							'0 1px 0 ' + _color,
+							'1px 1px 0 ' + _color,
+
+							// and once more, just to make it stronger
+							'-1px -1px 0 ' + _color,
+							'0 -1px 0 ' + _color,
+							'1px -1px 0 ' + _color,
+							'-1px 0 0 ' + _color,
+							'1px 0 0 ' + _color,
+							'-1px 1px 0 ' + _color,
+							'0 1px 0 ' + _color,
+							'1px 1px 0 ' + _color
+						].join (', ') +
 					';'
 				);
 			}
