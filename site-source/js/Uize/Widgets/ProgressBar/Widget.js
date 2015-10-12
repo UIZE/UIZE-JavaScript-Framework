@@ -34,19 +34,15 @@
 
 Uize.module ({
 	name:'Uize.Widgets.ProgressBar.Widget',
-	superclass:'Uize.Widget.Bar',
+	superclass:'Uize.Widgets.Bar.HorzWithStatusText.Widget',
 	required:[
-		'Uize.Widget.mV2',
 		'Uize.Widgets.ProgressBar.Html',
-		'Uize.Widgets.ProgressBar.Css',
 		'Uize.Template'
 	],
 	builder:function (_superclass) {
 		'use strict';
 
 		return _superclass.subclass ({
-			mixins:Uize.Widget.mV2,
-
 			stateProperties:{
 				_displayedStatusText:{
 					name:'displayedStatusText',
@@ -79,18 +75,11 @@ Uize.module ({
 			},
 
 			set:{
-				html:Uize.Widgets.ProgressBar.Html,
-				orientation:'horizontal',
-				minValue:0,
-				value:0
+				html:Uize.Widgets.ProgressBar.Html
 			},
 
 			htmlBindings:{
 				displayedStatusText:'statusText:html'
-			},
-
-			staticProperties:{
-				cssModule:Uize.Widgets.ProgressBar.Css
 			}
 		});
 	}
