@@ -196,15 +196,6 @@ Uize.module ({
 				}
 			},
 
-			staticProperties:{
-				presets:{}
-					/*?
-						Static Properties
-							Uize.Widget.Bar.presets
-								[DOCUMENT]
-					*/
-			},
-
 			stateProperties:{
 				_decimalPlacesToDisplay:'decimalPlacesToDisplay',
 					/*?
