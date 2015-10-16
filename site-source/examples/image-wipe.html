@@ -3,8 +3,8 @@
 <head>
 	<title>Uize.Widget.ImageWipe | JavaScript Examples | UIZE JavaScript Framework</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-	<meta name="keywords" content="featured animation Uize.Widget.ImageWipe.xPresets"/>
-	<meta name="description" content="See stunning image wipe animation effects you didn't believe possible with JavaScript. Choose from dozens of presets. Tweak values to make your own."/>
+	<meta name="keywords" content="featured animation Uize.Widget.ImageWipe Uize.Widget.ImageWipe.Themes"/>
+	<meta name="description" content="See stunning image wipe animation effects you didn't believe possible with JavaScript. Choose from dozens of themes. Tweak values to make your own."/>
 	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
 	<link rel="stylesheet" href="../css/page.css"/>
 	<link rel="stylesheet" href="../css/page.example.css"/>
@@ -40,7 +40,7 @@
 	<!-- explanation copy -->
 
 	<div class="explanation">
-		<p>In this example, an instance of the <a href="../reference/Uize.Widget.ImageWipe.html"><code>Uize.Widget.ImageWipe</code></a> class has been wired up to a <code>div</code> in the document. This class provides an elaborate and highly configurable JavaScript animation wipe effect to transition from one image to another. A list of links in the <b>"PRESETS"</b> tab lets you preview the effect presets defined in the <a href="../reference/Uize.Widget.ImageWipe.xPresets.html"><code>Uize.Widget.ImageWipe.xPresets</code></a> extension. Click away to experience some of the many effects this widget can achieve. To fool around with the settings for a preset, switch over to the <b>"PARAMS"</b> tab to tweak values and click the <b>"PERFORM WIPE EFFECT"</b> button to preview changes. To understand how the effect settings work, consult the reference for the <a href="../reference/Uize.Widget.ImageWipe.html"><code>Uize.Widget.ImageWipe</code></a> class.</p>
+		<p>In this example, an instance of the <a href="../reference/Uize.Widget.ImageWipe.html"><code>Uize.Widget.ImageWipe</code></a> class has been wired up to a <code>div</code> in the document. This class provides an elaborate and highly configurable JavaScript animation wipe effect to transition from one image to another. A list of links in the <b>"PRESETS"</b> tab lets you preview the effect themes defined in the <a href="../reference/Uize.Widget.ImageWipe.Themes.html"><code>Uize.Widget.ImageWipe.Themes</code></a> extension. Click away to experience some of the many effects this widget can achieve. To fool around with the settings for a theme, switch over to the <b>"PARAMS"</b> tab to tweak values and click the <b>"PERFORM WIPE EFFECT"</b> button to preview changes. To understand how the effect settings work, consult the reference for the <a href="../reference/Uize.Widget.ImageWipe.html"><code>Uize.Widget.ImageWipe</code></a> class.</p>
 	</div>
 
 	<!-- page layout's "wireframe" with slots for Uize.Widget.ImageWipe instance and params inspector -->
@@ -63,7 +63,8 @@ Uize.require (
 	[
 		'UizeSite.Page.Example.library',
 		'UizeSite.Page.Example',
-		'Uize.Widget.ImageWipe.xPresets',
+		'Uize.Widget.ImageWipe',
+		'Uize.Widget.ImageWipe.Themes',
 		'UizeSite.TestData.Photos',
 		'UizeSite.ParamsInspector'
 	],
@@ -101,7 +102,7 @@ Uize.require (
 						paneProgressDelay:{type:'number',minValue:0,maxValue:100},
 						paneOrderScheme:['normal','outside in','inside out','reverse','jumbled']
 					},
-					presets:Uize.Widget.ImageWipe.presets,
+					presets:Uize.Widget.ImageWipe.Themes (),
 					previewButtonText:'PERFORM WIPE EFFECT'
 				}
 			).wire (
