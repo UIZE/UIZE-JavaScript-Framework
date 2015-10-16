@@ -136,21 +136,22 @@
 				The value of the =cyclingPropertySets= property should be an array, where each element of the array is an object containing values for the state properties of the =Uize.Widget.Swap= class. Each time, upon transitioning from the current item to the next item, the current element of the =cyclingPropertySets= is used to set new effect values and the array counter is advanced. Upon using the last element of the array, the counter is then reset back to =0=, thereby starting again at the first element. Consider the following example...
 
 				EXAMPLE
-				...............................................................
+				.............................................
+				var themes = Uize.Widget.Swap.Themes ();
 				page.addChild (
 					'imageSwap',
 					Uize.Widget.Swap.Image,
 					{
 						cyclingPropertySets:[
-							Uize.Widget.Swap.presets.fadeOutPauseThenFadeIn,
-							Uize.Widget.Swap.presets.fadeWipeHorizontalFromCenter,
-							Uize.Widget.Swap.presets.fadeSlideInFromBottom,
-							Uize.Widget.Swap.presets.wipeOutWipeInLeft,
-							Uize.Widget.Swap.presets.centerOpenCloseCrossFade
+							themes.fadeOutPauseThenFadeIn,
+							themes.fadeWipeHorizontalFromCenter,
+							themes.fadeSlideInFromBottom,
+							themes.wipeOutWipeInLeft,
+							themes.centerOpenCloseCrossFade
 						]
 					}
 				);
-				...............................................................
+				.............................................
 
 				In the above example, an instance of the =Uize.Widget.Swap.Image= subclass is being added as a child widget to the a page widget instance (that we can assume to have already been created). The =cyclingPropertySets= state property is being set to an array containing a limited number of preset effect settings that have been cherry-picked from the presets defined in the =Uize.Widget.Swap.xPresets= extension module (which we can assume to have been previously loaded). Now, each time a new value is set for the =src= state property of the =imageSwap= instance (=src= is implemented in the =Uize.Widget.Swap.Image= subclass), the next effect settings will be picked from the =cyclingPropertySets= array and set on the =imageSwap= instance. So, in a nutshell, each transition will use different effect settings.
 */

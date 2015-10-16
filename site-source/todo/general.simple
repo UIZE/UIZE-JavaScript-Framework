@@ -126,7 +126,6 @@ Eliminate All Extension Modules
 		- =Uize.Widget.Collection.Dynamic.xDialogEditable=
 		- =Uize.Widget.Dialog.xResizable=
 		- =Uize.Widget.Page.xDeferredLinks=
-		- =Uize.Widget.Swap.xPresets=
 
 Code Size Optimization
 	Lightweight JSON Module

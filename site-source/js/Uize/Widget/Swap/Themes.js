@@ -1,7 +1,7 @@
 /*______________
 |       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
 |     /      /  |   ---------------------------------------------------
-|    /    O /   |    MODULE : Uize.Widget.Swap.xPresets Class Extension
+|    /    O /   |    MODULE : Uize.Widget.Swap.Themes Class Extension
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
 | /____/ /__/_| | COPYRIGHT : (c)2009-2015 UIZE
@@ -18,16 +18,16 @@
 
 /*?
 	Introduction
-		The =Uize.Widget.Swap.xPresets= module extends the =Uize.Widget.Swap= class by adding a wide assortment of very imaginative swap animation effect presets.
+		The =Uize.Widget.Swap.Themes= module defines themes for the =Uize.Widget.Swap= widget class.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 
-		Using the Presets
-			The =Uize.Widget.Swap.xPresets= module exposes its swap effect presets through the =Uize.Widget.Swap.presets= static property.
+		Using the Themes
+			The =Uize.Widget.Swap.Themes= module returns an object, being a lookup of theme names to theme settings objects.
 
-			Each property of the =Uize.Widget.Swap.presets= object is a swap effect preset, where the name of the property is the effect preset name, and where the value is an object containing values for various state properties of the =Uize.Widget.Swap= class.
+			Each property of the themes lookup object is an effect theme, where the name of the property is the effect theme name, and where the value is an object containing values for various state properties of the =Uize.Widget.Swap= class.
 
-			Consider the value of the =Uize.Widget.Swap.presets.fadeOutFadeIn= preset...
+			Consider the value of the =fadeOutFadeIn= theme...
 
 			............................
 			{
@@ -44,17 +44,17 @@
 			}
 			............................
 
-			To use this preset, simply use it to set the state properties of an instance of a =Uize.Widget.Swap= subclass using the =set= instance method, as follows...
+			To use this theme, simply use it to set the state properties of the =Uize.Widget.Swap= instance using the =set= instance method, as follows...
 
-			.........................................................
-			myImageSwap.set (Uize.Widget.Swap.presets.fadeOutFadeIn);
-			.........................................................
-
-			In the above example, =myImageSwap= is an instance of the =Uize.Widget.Swap.Image= class, which is a subclass of the =Uize.Widget.Swap= class.
+			........................................
+			var themes = Uize.Widget.Swap.Themes ();
+			mySwap.set (themes.fadeOutFadeIn);
+			........................................
 */
 
 Uize.module ({
-	name:'Uize.Widget.Swap.xPresets',
+	name:'Uize.Widget.Swap.Themes',
+	required:'Uize.Widget.Swap.ThemeValuePack',
 	builder:function (_class) {
 		'use strict';
 
@@ -65,16 +65,9 @@ Uize.module ({
 				_none = 'none'
 		;
 
-		/*** Public Static Properties ***/
-			var
-				_presetTables = {
-					/*?
-						Static Properties
-							Uize.Widget.Swap.presets
-								An object, containing a wide variety of interesting swap effect presets.
-
-								The full list of swap preset effects is listed below...
-					*/
+		return function () {
+			return Uize.map (
+				{
 					crossFade:[
 						/*         crossFade */ _false,
 						/*     crossFadeSize */ 0,
@@ -87,11 +80,10 @@ Uize.module ({
 						/*    viewSeedAlignX */ .5,
 						/*    viewSeedAlignY */ .5
 						/*?
-							Static Properties
-								Uize.Widget.Swap.presets
-									Uize.Widget.Swap.presets.crossFade
-										A classic crossfade effect, where the new item fades in on top of the current item.
-						*/
+							Themes
+								crossFade
+									A classic crossfade effect, where the new item fades in on top of the current item.
+					*/
 					],
 					fadeOutFadeIn:[
 						/*         crossFade */ _true,
@@ -105,10 +97,9 @@ Uize.module ({
 						/*    viewSeedAlignX */ .5,
 						/*    viewSeedAlignY */ .5
 						/*?
-							Static Properties
-								Uize.Widget.Swap.presets
-									Uize.Widget.Swap.presets.fadeOutFadeIn
-										The current item fades out fully before the new item fades in. Fade out time for the current item and fade in time for the new item are equal and are both half the overal duration for the swap effect.
+							Themes
+								fadeOutFadeIn
+									The current item fades out fully before the new item fades in. Fade out time for the current item and fade in time for the new item are equal and are both half the overal duration for the swap effect.
 						*/
 					],
 					fadeOutPauseThenFadeIn:[
@@ -123,10 +114,9 @@ Uize.module ({
 						/*    viewSeedAlignX */ 0,
 						/*    viewSeedAlignY */ 0
 						/*?
-							Static Properties
-								Uize.Widget.Swap.presets
-									Uize.Widget.Swap.presets.fadeOutPauseThenFadeIn
-										The current item fades out very quickly, there is a slight pause, and then the new item fades in (slower than the fade out of the current item, but still 4/10 the overal duration for the swap effect).
+							Themes
+								fadeOutPauseThenFadeIn
+									The current item fades out very quickly, there is a slight pause, and then the new item fades in (slower than the fade out of the current item, but still 4/10 the overal duration for the swap effect).
 						*/
 					],
 					fadeWipeFromLeft:[
@@ -141,10 +131,9 @@ Uize.module ({
 						/*    viewSeedAlignX */ 0,
 						/*    viewSeedAlignY */ 0
 						/*?
-							Static Properties
-								Uize.Widget.Swap.presets
-									Uize.Widget.Swap.presets.fadeWipeFromLeft
-										The new item is revealed with a horizontal wipe reveal that starts from the left edge and that also fades in as it progresses.
+							Themes
+								fadeWipeFromLeft
+									The new item is revealed with a horizontal wipe reveal that starts from the left edge and that also fades in as it progresses.
 						*/
 					],
 					fadeWipeFromRight:[
@@ -159,10 +148,9 @@ Uize.module ({
 						/*    viewSeedAlignX */ 1,
 						/*    viewSeedAlignY */ 0
 						/*?
-							Static Properties
-								Uize.Widget.Swap.presets
-									Uize.Widget.Swap.presets.fadeWipeFromRight
-										The new item is revealed with a horizontal wipe reveal that starts from the right edge and that also fades in as it progresses.
+							Themes
+								fadeWipeFromRight
+									The new item is revealed with a horizontal wipe reveal that starts from the right edge and that also fades in as it progresses.
 						*/
 					],
 					fadeWipeHorizontalFromCenter:[
@@ -177,10 +165,9 @@ Uize.module ({
 						/*    viewSeedAlignX */ .5,
 						/*    viewSeedAlignY */ 0
 						/*?
-							Static Properties
-								Uize.Widget.Swap.presets
-									Uize.Widget.Swap.presets.fadeWipeHorizontalFromCenter
-										The new item is revealed with a horizontal wipe reveal that starts from the center and that expands outwards towards the left and right edges and that also fades in as it progresses.
+							Themes
+								fadeWipeHorizontalFromCenter
+									The new item is revealed with a horizontal wipe reveal that starts from the center and that expands outwards towards the left and right edges and that also fades in as it progresses.
 						*/
 					],
 					fadeWipeFromTop:[
@@ -195,10 +182,9 @@ Uize.module ({
 						/*    viewSeedAlignX */ 0,
 						/*    viewSeedAlignY */ 0
 						/*?
-							Static Properties
-								Uize.Widget.Swap.presets
-									Uize.Widget.Swap.presets.fadeWipeFromTop
-										The new item is revealed with a horizontal wipe reveal that starts from the top edge and that also fades in as it progresses.
+							Themes
+								fadeWipeFromTop
+									The new item is revealed with a horizontal wipe reveal that starts from the top edge and that also fades in as it progresses.
 						*/
 					],
 					fadeWipeFromBottom:[
@@ -213,10 +199,9 @@ Uize.module ({
 						/*    viewSeedAlignX */ 0,
 						/*    viewSeedAlignY */ 1
 						/*?
-							Static Properties
-								Uize.Widget.Swap.presets
-									Uize.Widget.Swap.presets.fadeWipeFromBottom
-										The new item is revealed with a horizontal wipe reveal that starts from the bottom edge and that also fades in as it progresses.
+							Themes
+								fadeWipeFromBottom
+									The new item is revealed with a horizontal wipe reveal that starts from the bottom edge and that also fades in as it progresses.
 						*/
 					],
 					fadeWipeVerticalFromCenter:[
@@ -231,10 +216,9 @@ Uize.module ({
 						/*    viewSeedAlignX */ 0,
 						/*    viewSeedAlignY */ .5
 						/*?
-							Static Properties
-								Uize.Widget.Swap.presets
-									Uize.Widget.Swap.presets.fadeWipeVerticalFromCenter
-										The new item is revealed with a vertical wipe reveal that starts from the center and that expands outwards towards the top and bottom edges and that also fades in as it progresses.
+							Themes
+								fadeWipeVerticalFromCenter
+									The new item is revealed with a vertical wipe reveal that starts from the center and that expands outwards towards the top and bottom edges and that also fades in as it progresses.
 						*/
 					],
 					fadeSlideInFromLeft:[
@@ -249,10 +233,9 @@ Uize.module ({
 						/*    viewSeedAlignX */ 0,
 						/*    viewSeedAlignY */ 0
 						/*?
-							Static Properties
-								Uize.Widget.Swap.presets
-									Uize.Widget.Swap.presets.fadeSlideInFromLeft
-										The new item slides in from the left edge and also fades in as it slides into place to eventually fully cover the current item.
+							Themes
+								fadeSlideInFromLeft
+									The new item slides in from the left edge and also fades in as it slides into place to eventually fully cover the current item.
 						*/
 					],
 					fadeSlideInFromRight:[
@@ -267,10 +250,9 @@ Uize.module ({
 						/*    viewSeedAlignX */ 1,
 						/*    viewSeedAlignY */ 0
 						/*?
-							Static Properties
-								Uize.Widget.Swap.presets
-									Uize.Widget.Swap.presets.fadeSlideInFromRight
-										The new item slides in from the right edge and also fades in as it slides into place to eventually fully cover the current item.
+							Themes
+								fadeSlideInFromRight
+									The new item slides in from the right edge and also fades in as it slides into place to eventually fully cover the current item.
 						*/
 					],
 					fadeSlideInFromTop:[
@@ -285,10 +267,9 @@ Uize.module ({
 						/*    viewSeedAlignX */ 0,
 						/*    viewSeedAlignY */ 0
 						/*?
-							Static Properties
-								Uize.Widget.Swap.presets
-									Uize.Widget.Swap.presets.fadeSlideInFromTop
-										The new item slides in from the top edge and also fades in as it slides into place to eventually fully cover the current item.
+							Themes
+								fadeSlideInFromTop
+									The new item slides in from the top edge and also fades in as it slides into place to eventually fully cover the current item.
 						*/
 					],
 					fadeSlideInFromBottom:[
@@ -303,10 +284,9 @@ Uize.module ({
 						/*    viewSeedAlignX */ 0,
 						/*    viewSeedAlignY */ 1
 						/*?
-							Static Properties
-								Uize.Widget.Swap.presets
-									Uize.Widget.Swap.presets.fadeSlideInFromBottom
-										The new item slides in from the bottom edge and also fades in as it slides into place to eventually fully cover the current item.
+							Themes
+								fadeSlideInFromBottom
+									The new item slides in from the bottom edge and also fades in as it slides into place to eventually fully cover the current item.
 						*/
 					],
 					fadeSlideInFromTopLeft:[
@@ -321,10 +301,9 @@ Uize.module ({
 						/*    viewSeedAlignX */ 0,
 						/*    viewSeedAlignY */ 0
 						/*?
-							Static Properties
-								Uize.Widget.Swap.presets
-									Uize.Widget.Swap.presets.fadeSlideInFromTopLeft
-										The new item slides in from the top left corner and also fades in as it slides into place to eventually fully cover the current item.
+							Themes
+								fadeSlideInFromTopLeft
+									The new item slides in from the top left corner and also fades in as it slides into place to eventually fully cover the current item.
 						*/
 					],
 					fadeSlideInFromTopRight:[
@@ -339,10 +318,9 @@ Uize.module ({
 						/*    viewSeedAlignX */ 1,
 						/*    viewSeedAlignY */ 0
 						/*?
-							Static Properties
-								Uize.Widget.Swap.presets
-									Uize.Widget.Swap.presets.fadeSlideInFromTopRight
-										The new item slides in from the top right corner and also fades in as it slides into place to eventually fully cover the current item.
+							Themes
+								fadeSlideInFromTopRight
+									The new item slides in from the top right corner and also fades in as it slides into place to eventually fully cover the current item.
 						*/
 					],
 					fadeSlideInFromBottomLeft:[
@@ -357,10 +335,9 @@ Uize.module ({
 						/*    viewSeedAlignX */ 0,
 						/*    viewSeedAlignY */ 1
 						/*?
-							Static Properties
-								Uize.Widget.Swap.presets
-									Uize.Widget.Swap.presets.fadeSlideInFromBottomLeft
-										The new item slides in from the bottom left corner and also fades in as it slides into place to eventually fully cover the current item.
+							Themes
+								fadeSlideInFromBottomLeft
+									The new item slides in from the bottom left corner and also fades in as it slides into place to eventually fully cover the current item.
 						*/
 					],
 					fadeSlideInFromBottomRight:[
@@ -375,10 +352,9 @@ Uize.module ({
 						/*    viewSeedAlignX */ 1,
 						/*    viewSeedAlignY */ 1
 						/*?
-							Static Properties
-								Uize.Widget.Swap.presets
-									Uize.Widget.Swap.presets.fadeSlideInFromBottomRight
-										The new item slides in from the bottom right corner and also fades in as it slides into place to eventually fully cover the current item.
+							Themes
+								fadeSlideInFromBottomRight
+									The new item slides in from the bottom right corner and also fades in as it slides into place to eventually fully cover the current item.
 						*/
 					],
 					fadeSlideOutSlideInLeft:[
@@ -393,10 +369,9 @@ Uize.module ({
 						/*    viewSeedAlignX */ 0,
 						/*    viewSeedAlignY */ 0
 						/*?
-							Static Properties
-								Uize.Widget.Swap.presets
-									Uize.Widget.Swap.presets.fadeSlideOutSlideInLeft
-										The current item slides out towards the left edge, fading out as it goes, and then the new item slides in from the left edge, fading in as it goes. Slide out time for the current item and slide in time for the new item are equal and are both half the overal duration for the swap effect.
+							Themes
+								fadeSlideOutSlideInLeft
+									The current item slides out towards the left edge, fading out as it goes, and then the new item slides in from the left edge, fading in as it goes. Slide out time for the current item and slide in time for the new item are equal and are both half the overal duration for the swap effect.
 						*/
 					],
 					fadeSlideOutSlideInRight:[
@@ -411,10 +386,9 @@ Uize.module ({
 						/*    viewSeedAlignX */ 1,
 						/*    viewSeedAlignY */ 0
 						/*?
-							Static Properties
-								Uize.Widget.Swap.presets
-									Uize.Widget.Swap.presets.fadeSlideOutSlideInRight
-										The current item slides out towards the right edge, fading out as it goes, and then the new item slides in from the right edge, fading in as it goes. Slide out time for the current item and slide in time for the new item are equal and are both half the overal duration for the swap effect.
+							Themes
+								fadeSlideOutSlideInRight
+									The current item slides out towards the right edge, fading out as it goes, and then the new item slides in from the right edge, fading in as it goes. Slide out time for the current item and slide in time for the new item are equal and are both half the overal duration for the swap effect.
 						*/
 					],
 					fadeSlideOutSlideInTop:[
@@ -429,10 +403,9 @@ Uize.module ({
 						/*    viewSeedAlignX */ 0,
 						/*    viewSeedAlignY */ 0
 						/*?
-							Static Properties
-								Uize.Widget.Swap.presets
-									Uize.Widget.Swap.presets.fadeSlideOutSlideInTop
-										The current item slides out towards the top edge, fading out as it goes, and then the new item slides in from the top edge, fading in as it goes. Slide out time for the current item and slide in time for the new item are equal and are both half the overal duration for the swap effect.
+							Themes
+								fadeSlideOutSlideInTop
+									The current item slides out towards the top edge, fading out as it goes, and then the new item slides in from the top edge, fading in as it goes. Slide out time for the current item and slide in time for the new item are equal and are both half the overal duration for the swap effect.
 						*/
 					],
 					fadeSlideOutSlideInBottom:[
@@ -447,10 +420,9 @@ Uize.module ({
 						/*    viewSeedAlignX */ 0,
 						/*    viewSeedAlignY */ 1
 						/*?
-							Static Properties
-								Uize.Widget.Swap.presets
-									Uize.Widget.Swap.presets.fadeSlideOutSlideInBottom
-										The current item slides out towards the bottom edge, fading out as it goes, and then the new item slides in from the bottom edge, fading in as it goes. Slide out time for the current item and slide in time for the new item are equal and are both half the overal duration for the swap effect.
+							Themes
+								fadeSlideOutSlideInBottom
+									The current item slides out towards the bottom edge, fading out as it goes, and then the new item slides in from the bottom edge, fading in as it goes. Slide out time for the current item and slide in time for the new item are equal and are both half the overal duration for the swap effect.
 						*/
 					],
 					fadeSlideOutSlideInTopLeft:[
@@ -465,10 +437,9 @@ Uize.module ({
 						/*    viewSeedAlignX */ 0,
 						/*    viewSeedAlignY */ 0
 						/*?
-							Static Properties
-								Uize.Widget.Swap.presets
-									Uize.Widget.Swap.presets.fadeSlideOutSlideInTopLeft
-										The current item slides out towards the top left corner, fading out as it goes, and then the new item slides in from the top left corner, fading in as it goes. Slide out time for the current item and slide in time for the new item are equal and are both half the overal duration for the swap effect.
+							Themes
+								fadeSlideOutSlideInTopLeft
+									The current item slides out towards the top left corner, fading out as it goes, and then the new item slides in from the top left corner, fading in as it goes. Slide out time for the current item and slide in time for the new item are equal and are both half the overal duration for the swap effect.
 						*/
 					],
 					fadeSlideOutSlideInTopRight:[
@@ -483,10 +454,9 @@ Uize.module ({
 						/*    viewSeedAlignX */ 1,
 						/*    viewSeedAlignY */ 0
 						/*?
-							Static Properties
-								Uize.Widget.Swap.presets
-									Uize.Widget.Swap.presets.fadeSlideOutSlideInTopRight
-										The current item slides out towards the top right corner, fading out as it goes, and then the new item slides in from the top right corner, fading in as it goes. Slide out time for the current item and slide in time for the new item are equal and are both half the overal duration for the swap effect.
+							Themes
+								fadeSlideOutSlideInTopRight
+									The current item slides out towards the top right corner, fading out as it goes, and then the new item slides in from the top right corner, fading in as it goes. Slide out time for the current item and slide in time for the new item are equal and are both half the overal duration for the swap effect.
 						*/
 					],
 					fadeSlideOutSlideInBottomLeft:[
@@ -501,10 +471,9 @@ Uize.module ({
 						/*    viewSeedAlignX */ 0,
 						/*    viewSeedAlignY */ 1
 						/*?
-							Static Properties
-								Uize.Widget.Swap.presets
-									Uize.Widget.Swap.presets.fadeSlideOutSlideInBottomLeft
-										The current item slides out towards the bottom left corner, fading out as it goes, and then the new item slides in from the bottom left corner, fading in as it goes. Slide out time for the current item and slide in time for the new item are equal and are both half the overal duration for the swap effect.
+							Themes
+								fadeSlideOutSlideInBottomLeft
+									The current item slides out towards the bottom left corner, fading out as it goes, and then the new item slides in from the bottom left corner, fading in as it goes. Slide out time for the current item and slide in time for the new item are equal and are both half the overal duration for the swap effect.
 						*/
 					],
 					fadeSlideOutSlideInBottomRight:[
@@ -519,10 +488,9 @@ Uize.module ({
 						/*    viewSeedAlignX */ 1,
 						/*    viewSeedAlignY */ 1
 						/*?
-							Static Properties
-								Uize.Widget.Swap.presets
-									Uize.Widget.Swap.presets.fadeSlideOutSlideInBottomRight
-										The current item slides out towards the bottom right corner, fading out as it goes, and then the new item slides in from the bottom right corner, fading in as it goes. Slide out time for the current item and slide in time for the new item are equal and are both half the overal duration for the swap effect.
+							Themes
+								fadeSlideOutSlideInBottomRight
+									The current item slides out towards the bottom right corner, fading out as it goes, and then the new item slides in from the bottom right corner, fading in as it goes. Slide out time for the current item and slide in time for the new item are equal and are both half the overal duration for the swap effect.
 						*/
 					],
 					wipeOutWipeInLeft:[
@@ -537,10 +505,9 @@ Uize.module ({
 						/*    viewSeedAlignX */ 0,
 						/*    viewSeedAlignY */ 0
 						/*?
-							Static Properties
-								Uize.Widget.Swap.presets
-									Uize.Widget.Swap.presets.wipeOutWipeInLeft
-										The current item wipes out towards the left edge, and then the new item wipes in from the left edge. Wipe out time for the current item and wipe in time for the new item are equal and are both half the overal duration for the swap effect.
+							Themes
+								wipeOutWipeInLeft
+									The current item wipes out towards the left edge, and then the new item wipes in from the left edge. Wipe out time for the current item and wipe in time for the new item are equal and are both half the overal duration for the swap effect.
 						*/
 					],
 					wipeOutWipeInRight:[
@@ -555,10 +522,9 @@ Uize.module ({
 						/*    viewSeedAlignX */ 1,
 						/*    viewSeedAlignY */ 0
 						/*?
-							Static Properties
-								Uize.Widget.Swap.presets
-									Uize.Widget.Swap.presets.wipeOutWipeInRight
-										The current item wipes out towards the right edge, and then the new item wipes in from the right edge. Wipe out time for the current item and wipe in time for the new item are equal and are both half the overal duration for the swap effect.
+							Themes
+								wipeOutWipeInRight
+									The current item wipes out towards the right edge, and then the new item wipes in from the right edge. Wipe out time for the current item and wipe in time for the new item are equal and are both half the overal duration for the swap effect.
 						*/
 					],
 					wipeOutWipeInTop:[
@@ -573,10 +539,9 @@ Uize.module ({
 						/*    viewSeedAlignX */ 0,
 						/*    viewSeedAlignY */ 0
 						/*?
-							Static Properties
-								Uize.Widget.Swap.presets
-									Uize.Widget.Swap.presets.wipeOutWipeInTop
-										The current item wipes out towards the top edge, and then the new item wipes in from the top edge. Wipe out time for the current item and wipe in time for the new item are equal and are both half the overal duration for the swap effect.
+							Themes
+								wipeOutWipeInTop
+									The current item wipes out towards the top edge, and then the new item wipes in from the top edge. Wipe out time for the current item and wipe in time for the new item are equal and are both half the overal duration for the swap effect.
 						*/
 					],
 					wipeOutWipeInBottom:[
@@ -591,10 +556,9 @@ Uize.module ({
 						/*    viewSeedAlignX */ 0,
 						/*    viewSeedAlignY */ 1
 						/*?
-							Static Properties
-								Uize.Widget.Swap.presets
-									Uize.Widget.Swap.presets.wipeOutWipeInBottom
-										The current item wipes out towards the bottom edge, and then the new item wipes in from the bottom edge. Wipe out time for the current item and wipe in time for the new item are equal and are both half the overal duration for the swap effect.
+							Themes
+								wipeOutWipeInBottom
+									The current item wipes out towards the bottom edge, and then the new item wipes in from the bottom edge. Wipe out time for the current item and wipe in time for the new item are equal and are both half the overal duration for the swap effect.
 						*/
 					],
 					wipeOutWipeInTopLeft:[
@@ -609,10 +573,9 @@ Uize.module ({
 						/*    viewSeedAlignX */ 0,
 						/*    viewSeedAlignY */ 0
 						/*?
-							Static Properties
-								Uize.Widget.Swap.presets
-									Uize.Widget.Swap.presets.wipeOutWipeInTopLeft
-										The current item wipes out towards the top left corner, and then the new item wipes in from the top left corner. Wipe out time for the current item and wipe in time for the new item are equal and are both half the overal duration for the swap effect.
+							Themes
+								wipeOutWipeInTopLeft
+									The current item wipes out towards the top left corner, and then the new item wipes in from the top left corner. Wipe out time for the current item and wipe in time for the new item are equal and are both half the overal duration for the swap effect.
 						*/
 					],
 					wipeOutWipeInTopRight:[
@@ -627,10 +590,9 @@ Uize.module ({
 						/*    viewSeedAlignX */ 1,
 						/*    viewSeedAlignY */ 0
 						/*?
-							Static Properties
-								Uize.Widget.Swap.presets
-									Uize.Widget.Swap.presets.wipeOutWipeInTopRight
-										The current item wipes out towards the top right corner, and then the new item wipes in from the top right corner. Wipe out time for the current item and wipe in time for the new item are equal and are both half the overal duration for the swap effect.
+							Themes
+								wipeOutWipeInTopRight
+									The current item wipes out towards the top right corner, and then the new item wipes in from the top right corner. Wipe out time for the current item and wipe in time for the new item are equal and are both half the overal duration for the swap effect.
 						*/
 					],
 					wipeOutWipeInBottomLeft:[
@@ -645,10 +607,9 @@ Uize.module ({
 						/*    viewSeedAlignX */ 0,
 						/*    viewSeedAlignY */ 1
 						/*?
-							Static Properties
-								Uize.Widget.Swap.presets
-									Uize.Widget.Swap.presets.wipeOutWipeInBottomLeft
-										The current item wipes out towards the bottom left corner, and then the new item wipes in from the bottom left corner. Wipe out time for the current item and wipe in time for the new item are equal and are both half the overal duration for the swap effect.
+							Themes
+								wipeOutWipeInBottomLeft
+									The current item wipes out towards the bottom left corner, and then the new item wipes in from the bottom left corner. Wipe out time for the current item and wipe in time for the new item are equal and are both half the overal duration for the swap effect.
 						*/
 					],
 					wipeOutWipeInBottomRight:[
@@ -663,10 +624,9 @@ Uize.module ({
 						/*    viewSeedAlignX */ 1,
 						/*    viewSeedAlignY */ 1
 						/*?
-							Static Properties
-								Uize.Widget.Swap.presets
-									Uize.Widget.Swap.presets.wipeOutWipeInBottomRight
-										The current item wipes out towards the bottom right corner, and then the new item wipes in from the bottom right corner. Wipe out time for the current item and wipe in time for the new item are equal and are both half the overal duration for the swap effect.
+							Themes
+								wipeOutWipeInBottomRight
+									The current item wipes out towards the bottom right corner, and then the new item wipes in from the bottom right corner. Wipe out time for the current item and wipe in time for the new item are equal and are both half the overal duration for the swap effect.
 						*/
 					],
 					wipeOutWipeInHorizontalCenter:[
@@ -681,10 +641,9 @@ Uize.module ({
 						/*    viewSeedAlignX */ .5,
 						/*    viewSeedAlignY */ 0
 						/*?
-							Static Properties
-								Uize.Widget.Swap.presets
-									Uize.Widget.Swap.presets.wipeOutWipeInHorizontalCenter
-										The current item wipes out horizontally from the left and right edges towards a sliver in the center, and then the new item wipes in horizontally from the same sliver in the center and expands outwards towards the left and right edges.
+							Themes
+								wipeOutWipeInHorizontalCenter
+									The current item wipes out horizontally from the left and right edges towards a sliver in the center, and then the new item wipes in horizontally from the same sliver in the center and expands outwards towards the left and right edges.
 						*/
 					],
 					wipeOutWipeInVerticalCenter:[
@@ -699,10 +658,9 @@ Uize.module ({
 						/*    viewSeedAlignX */ 0,
 						/*    viewSeedAlignY */ .5
 						/*?
-							Static Properties
-								Uize.Widget.Swap.presets
-									Uize.Widget.Swap.presets.wipeOutWipeInVerticalCenter
-										The current item wipes out vertically from the top and bottom edges towards a sliver in the center, and then the new item wipes in vertically from the same sliver in the center and expands outwards towards the top and bottom edges.
+							Themes
+								wipeOutWipeInVerticalCenter
+									The current item wipes out vertically from the top and bottom edges towards a sliver in the center, and then the new item wipes in vertically from the same sliver in the center and expands outwards towards the top and bottom edges.
 						*/
 					],
 					horizontalCrossSlideFromLeft:[
@@ -717,10 +675,9 @@ Uize.module ({
 						/*    viewSeedAlignX */ .5,
 						/*    viewSeedAlignY */ 1
 						/*?
-							Static Properties
-								Uize.Widget.Swap.presets
-									Uize.Widget.Swap.presets.horizontalCrossSlideFromLeft
-										The new item slides in horizontally from the center towards the right edge at the same as it grows from a sliver to occupy the entire port, while the current item slides out towards the left edge as it shrinks down to a sliver, crossing paths as they go to produce a kind of sliding doors illusion.
+							Themes
+								horizontalCrossSlideFromLeft
+									The new item slides in horizontally from the center towards the right edge at the same as it grows from a sliver to occupy the entire port, while the current item slides out towards the left edge as it shrinks down to a sliver, crossing paths as they go to produce a kind of sliding doors illusion.
 						*/
 					],
 					horizontalCrossSlideFromRight:[
@@ -735,10 +692,9 @@ Uize.module ({
 						/*    viewSeedAlignX */ .5,
 						/*    viewSeedAlignY */ 1
 						/*?
-							Static Properties
-								Uize.Widget.Swap.presets
-									Uize.Widget.Swap.presets.horizontalCrossSlideFromRight
-										The new item slides in horizontally from the center towards the left edge at the same as it grows from a sliver to occupy the entire port, while the current item slides out towards the right edge as it shrinks down to a sliver, crossing paths as they go to produce a kind of sliding doors illusion.
+							Themes
+								horizontalCrossSlideFromRight
+									The new item slides in horizontally from the center towards the left edge at the same as it grows from a sliver to occupy the entire port, while the current item slides out towards the right edge as it shrinks down to a sliver, crossing paths as they go to produce a kind of sliding doors illusion.
 						*/
 					],
 					verticalCrossSlideFromTop:[
@@ -753,10 +709,9 @@ Uize.module ({
 						/*    viewSeedAlignX */ 1,
 						/*    viewSeedAlignY */ .5
 						/*?
-							Static Properties
-								Uize.Widget.Swap.presets
-									Uize.Widget.Swap.presets.verticalCrossSlideFromTop
-										The new item slides in vertically from the center towards the bottom edge at the same as it grows from a sliver to occupy the entire port, while the current item slides out towards the top edge as it shrinks down to a sliver, crossing paths as they go to produce a kind of sliding doors illusion.
+							Themes
+								verticalCrossSlideFromTop
+									The new item slides in vertically from the center towards the bottom edge at the same as it grows from a sliver to occupy the entire port, while the current item slides out towards the top edge as it shrinks down to a sliver, crossing paths as they go to produce a kind of sliding doors illusion.
 						*/
 					],
 					verticalCrossSlideFromBottom:[
@@ -771,10 +726,9 @@ Uize.module ({
 						/*    viewSeedAlignX */ 1,
 						/*    viewSeedAlignY */ .5
 						/*?
-							Static Properties
-								Uize.Widget.Swap.presets
-									Uize.Widget.Swap.presets.verticalCrossSlideFromBottom
-										The new item slides in vertically from the center towards the top edge at the same as it grows from a sliver to occupy the entire port, while the current item slides out towards the bottom edge as it shrinks down to a sliver, crossing paths as they go to produce a kind of sliding doors illusion.
+							Themes
+								verticalCrossSlideFromBottom
+									The new item slides in vertically from the center towards the top edge at the same as it grows from a sliver to occupy the entire port, while the current item slides out towards the bottom edge as it shrinks down to a sliver, crossing paths as they go to produce a kind of sliding doors illusion.
 						*/
 					],
 					closeToCenterOpenFromCenter:[
@@ -789,10 +743,9 @@ Uize.module ({
 						/*    viewSeedAlignX */ .5,
 						/*    viewSeedAlignY */ .5
 						/*?
-							Static Properties
-								Uize.Widget.Swap.presets
-									Uize.Widget.Swap.presets.closeToCenterOpenFromCenter
-										The current item wipes out to a point in the center, and then the new item wipes in from the same point in the center. Wipe out time for the current item and wipe in time for the new item are equal and are both half the overal duration for the swap effect.
+							Themes
+								closeToCenterOpenFromCenter
+									The current item wipes out to a point in the center, and then the new item wipes in from the same point in the center. Wipe out time for the current item and wipe in time for the new item are equal and are both half the overal duration for the swap effect.
 						*/
 					],
 					poofPauseThenOpenFromCenter:[
@@ -807,10 +760,9 @@ Uize.module ({
 						/*    viewSeedAlignX */ .5,
 						/*    viewSeedAlignY */ .5
 						/*?
-							Static Properties
-								Uize.Widget.Swap.presets
-									Uize.Widget.Swap.presets.poofPauseThenOpenFromCenter
-										The current item wipes out very quickly to a point in the center, fading out as it progresses, then there is a slight pause, and then the new item wipes in from the same point in the center (slower than the wipe out of the current item, but still less than half the overal duration for the swap effect), fading in as it progresses.
+							Themes
+								poofPauseThenOpenFromCenter
+									The current item wipes out very quickly to a point in the center, fading out as it progresses, then there is a slight pause, and then the new item wipes in from the same point in the center (slower than the wipe out of the current item, but still less than half the overal duration for the swap effect), fading in as it progresses.
 						*/
 					],
 					centerOpenCloseCrossFade:[
@@ -825,32 +777,15 @@ Uize.module ({
 						/*    viewSeedAlignX */ .5,
 						/*    viewSeedAlignY */ .5
 						/*?
-							Static Properties
-								Uize.Widget.Swap.presets
-									Uize.Widget.Swap.presets.centerOpenCloseCrossFade
-										The current item wipes out to a point in the center, fading out as it progresses, at the same time as the new item wipes in from the same point in the center, fading in as it progresses. The wipe out and wipe in cross over each other, producing a pleasing effect.
+							Themes
+								centerOpenCloseCrossFade
+									The current item wipes out to a point in the center, fading out as it progresses, at the same time as the new item wipes in from the same point in the center, fading in as it progresses. The wipe out and wipe in cross over each other, producing a pleasing effect.
 						*/
 					]
 				},
-				_presets = _class.presets = {}
-			;
-
-			/*** build preset objects from compact tables ***/
-				for (var _presetName in _presetTables) {
-					var _presetTable = _presetTables [_presetName];
-					_presets [_presetName] = {
-						crossFade:_presetTable [0],
-						crossFadeSize:_presetTable [1],
-						crossFadeAlign:_presetTable [2],
-						dissolve:_presetTable [3],
-						viewContentAlignX:_presetTable [4],
-						viewContentAlignY:_presetTable [5],
-						viewSeedSizeX:_presetTable [6],
-						viewSeedSizeY:_presetTable [7],
-						viewSeedAlignX:_presetTable [8],
-						viewSeedAlignY:_presetTable [9]
-					};
-				}
+				Uize.Widget.Swap.ThemeValuePack.from
+			);
+		};
 	}
 });
 

@@ -3,8 +3,8 @@
 <head>
 	<title>Uize.Widget.Swap.Image | JavaScript Examples | UIZE JavaScript Framework</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-	<meta name="keywords" content="animation widget Uize.Widget.Swap.Image"/>
-	<meta name="description" content="See some amazing possibilities for image transitions using lightweight JavaScript animation. Play with lots of effect presets, and even make your own."/>
+	<meta name="keywords" content="animation widget Uize.Widget.Swap.Image Uize.Widget.Swap.Themes"/>
+	<meta name="description" content="See some amazing possibilities for image transitions using lightweight JavaScript animation. Play with lots of effect themes, and even make your own."/>
 	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
 	<link rel="stylesheet" href="../css/page.css"/>
 	<link rel="stylesheet" href="../css/page.example.css"/>
@@ -40,7 +40,7 @@
 	<!-- explanation copy -->
 
 	<div class="explanation">
-		<p>In this example, an instance of <a href="../reference/Uize.Widget.Swap.Image.html"><code>Uize.Widget.Swap.Image</code></a> has been wired up to a <code>div</code> in the document. This class provides a highly configurable yet lightweight JavaScript animation effect to transition from one image to another. A list of links in the <b>"PRESETS"</b> tab lets you preview all the effect presets defined in the <a href="../reference/Uize.Widget.Swap.xPresets.html"><code>Uize.Widget.Swap.xPresets</code></a> extension. Click to experience some of the many effects that this widget supports. To fool around with the settings for a preset to create your own swap effects, switch over to the <b>"PARAMS"</b> tab to tweak values and click the <b>"PERFORM SWAP EFFECT"</b> button to preview changes. To understand how the effect settings work, consult the reference for the <a href="../reference/Uize.Widget.Swap.html"><code>Uize.Widget.Swap</code></a> class.</p>
+		<p>In this example, an instance of <a href="../reference/Uize.Widget.Swap.Image.html"><code>Uize.Widget.Swap.Image</code></a> has been wired up to a <code>div</code> in the document. This class provides a highly configurable yet lightweight JavaScript animation effect to transition from one image to another. A list of links in the <b>"PRESETS"</b> tab lets you preview all the effect themes defined in the <a href="../reference/Uize.Widget.Swap.Themes.html"><code>Uize.Widget.Swap.Themes</code></a> module. Click to experience some of the many effects that this widget supports. To fool around with the settings for a theme to create your own swap effects, switch over to the <b>"PARAMS"</b> tab to tweak values and click the <b>"PERFORM SWAP EFFECT"</b> button to preview changes. To understand how the effect settings work, consult the reference for the <a href="../reference/Uize.Widget.Swap.html"><code>Uize.Widget.Swap</code></a> class.</p>
 	</div>
 
 	<!-- page layout's "wireframe" with slots for Uize.Widget.Swap.Image instance and params inspector -->
@@ -64,7 +64,7 @@ Uize.require (
 		'UizeSite.Page.Example.library',
 		'UizeSite.Page.Example',
 		'Uize.Widget.Swap.Image',
-		'Uize.Widget.Swap.xPresets',
+		'Uize.Widget.Swap.Themes',
 		'UizeSite.TestData.Photos',
 		'UizeSite.ParamsInspector'
 	],
@@ -98,7 +98,7 @@ Uize.require (
 						viewSeedAlignX:'number',
 						viewSeedAlignY:'number'
 					},
-					presets:Uize.Widget.Swap.presets,
+					presets:Uize.Widget.Swap.Themes (),
 					previewButtonText:'PERFORM SWAP EFFECT'
 				}
 			).wire (

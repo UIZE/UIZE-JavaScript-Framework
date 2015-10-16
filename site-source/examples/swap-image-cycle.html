@@ -3,7 +3,7 @@
 <head>
 	<title>Image Cycle | JavaScript Examples | UIZE JavaScript Framework</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-	<meta name="keywords" content="animation Uize.Widget.Swap.Image.Cycle Uize.Widget.Swap.xPresets"/>
+	<meta name="keywords" content="animation Uize.Widget.Swap.Image.Cycle Uize.Widget.Swap.Themes"/>
 	<meta name="description" content="Create a simple JavaScript slideshow experience with the cycling image swap widget. Each image is revealed with a different swap / transition effect."/>
 	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
 	<link rel="stylesheet" href="../css/page.css"/>
@@ -31,7 +31,7 @@
 	<!-- explanation copy -->
 
 	<div class="explanation">
-		<p>In this example, an instance of <a href="../reference/Uize.Widget.Swap.Image.Cycle.html"><code>Uize.Widget.Swap.Image.Cycle</code></a> is wired up to provide a simple cycling slideshow of images, with no navigation. The <code>cycleSettings</code> state property is set to the <code>Uize.Widget.Swap.presets</code> property (defined in the <a href="../reference/Uize.Widget.Swap.xPresets.html"><code>Uize.Widget.Swap.xPresets</code></a> module), so each new image shows with a different JavaScript animation transition effect. The buttons below are wired up to call the <code>start</code> and <code>stop</code> instance methods. Click "Start".</p>
+		<p>In this example, an instance of <a href="../reference/Uize.Widget.Swap.Image.Cycle.html"><code>Uize.Widget.Swap.Image.Cycle</code></a> is wired up to provide a simple cycling slideshow of images, with no navigation. The <code>cycleSettings</code> state property is set to the themes defined by the <a href="../reference/Uize.Widget.Swap.Themes.html"><code>Uize.Widget.Swap.Themes</code></a> module, so each new image shows with a different JavaScript animation transition effect. The buttons below are wired up to call the <code>start</code> and <code>stop</code> instance methods. Click "Start".</p>
 	</div>
 
 	<!-- image cycle HTML layout with UI to be wired up -->
@@ -54,7 +54,7 @@ Uize.require (
 		'UizeSite.Page.Example.library',
 		'UizeSite.Page.Example',
 		'Uize.Widget.Swap.Image.Cycle',
-		'Uize.Widget.Swap.xPresets',
+		'Uize.Widget.Swap.Themes',
 		'Uize.Data.Util',
 		'UizeSite.TestData.Photos'
 	],
@@ -72,7 +72,7 @@ Uize.require (
 					background:'none',
 					images:Uize.Data.Util.getColumn (UizeSite.TestData.Photos (),'image'),
 					interval:3000,
-					cycleSettings:Uize.Widget.Swap.presets,
+					cycleSettings:Uize.Widget.Swap.Themes (),
 					crossFade:true,
 					viewContentAlignX:'none',
 					viewContentAlignY:'none',
