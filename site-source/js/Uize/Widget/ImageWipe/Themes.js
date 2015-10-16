@@ -25,7 +25,7 @@
 		Using the Themes
 			The =Uize.Widget.ImageWipe.Themes= module returns an object, being a lookup of theme names to theme settings objects.
 
-			Each property of the themes lookup object is a wipe effect theme, where the name of the property is the effect theme name, and where the value is an object containing values for various state properties of the =Uize.Widget.ImageWipe= class.
+			Each property of the themes lookup object is an effect theme, where the name of the property is the effect theme name, and where the value is an object containing values for various state properties of the =Uize.Widget.ImageWipe= class.
 
 			Consider the value of the =facetedFade= theme...
 
