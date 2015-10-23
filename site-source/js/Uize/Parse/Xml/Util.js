@@ -31,7 +31,8 @@ Uize.module ({
 
 		var
 			/*** references to methods used internally ***/
-				_isTag
+				_isTag,
+				_getAttribute
 		;
 
 		return Uize.package ({
@@ -58,11 +59,15 @@ Uize.module ({
 				);
 			},
 
-			getAttributeValue:function (_node,_attributeName) {
-				var _attribute = Uize.findRecord (
+			getAttribute:_getAttribute = function (_node,_attributeName) {
+				return Uize.findRecord (
 					_node.tagAttributes.attributes,
 					function (_attribute) {return _attribute.name.name == _attributeName}
 				);
+			},
+
+			getAttributeValue:function (_node,_attributeName) {
+				var _attribute = _getAttribute (_node,_attributeName);
 				return _attribute ? _attribute.value.value : '';
 			},
 
