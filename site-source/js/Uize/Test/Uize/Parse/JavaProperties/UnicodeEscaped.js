@@ -58,6 +58,10 @@ Uize.module ({
 							['When a string being escaped contains only non ISO-8859-1 characters, all characters in the string are escaped',
 								_char (317) + _char (605) + _char (993) + _char (2450),
 								'\\u013D\\u025D\\u03E1\\u0992'
+							],
+							['When a custom escaping threshold is specified in the optional encoding options argument, then the custom escaping threshold is respected - characters with character codes below the specified threshold are not escaped, while characters with character codes equal to or greater than the threshold are',
+								[_char (192) + _char (193) + _char (194) + _char (195),{escapingThreshold:194}],
+								'ÀÁ\\u00C2\\u00C3'
 							]
 						]],
 						['Uize.Parse.JavaProperties.UnicodeEscaped.from',[

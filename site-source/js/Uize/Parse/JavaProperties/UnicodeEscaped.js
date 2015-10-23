@@ -30,7 +30,8 @@ Uize.module ({
 
 		var
 			/*** General Variables ***/
-				_leadingZeros = '000000'
+				_leadingZeros = '000000',
+				_sacredEmptyObject = {}
 		;
 
 		return Uize.package ({
@@ -56,8 +57,12 @@ Uize.module ({
 				*/
 			},
 
-			to:function (_toEscape) {
-				var _chunks = [];
+			to:function (_toEscape,_encodingOptions) {
+				_encodingOptions || (_encodingOptions = _sacredEmptyObject);
+				var
+					_escapingThreshold = Uize.toNumber (_encodingOptions.escapingThreshold,256),
+					_chunks = []
+				;
 				for (
 					var
 						_charNo = -1,
@@ -68,7 +73,7 @@ Uize.module ({
 					;
 					++_charNo <= _toEscapeLength;
 				) {
-					if (_charNo == _toEscapeLength || (_charCode = _toEscape.charCodeAt (_charNo)) > 255) {
+					if (_charNo == _toEscapeLength || (_charCode = _toEscape.charCodeAt (_charNo)) >= _escapingThreshold) {
 						_chunks [_chunksLength++] = _toEscape.slice (_lastUnicodeCharPos + 1,_charNo);
 						_lastUnicodeCharPos = _charNo;
 						if (_charNo < _toEscapeLength) {
