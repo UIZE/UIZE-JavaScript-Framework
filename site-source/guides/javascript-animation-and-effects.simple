@@ -979,8 +979,8 @@ Curves
 
 ### Non-time Based Fades
 	- color gradients
-	- methods like =Uize.Math.Blend.blend=, =getSeries= and =Uize.Fade.getSeries= (from =Uize.Fade.xSeries= extension module)
-	- =Uize.Fade.xSeries= extension module
+	- methods like =Uize.Math.Blend.blend=, =getSeries= and =Uize.Fade.getSeries= (from =Uize.Fade.mSeries= mixin module)
+	- =Uize.Fade.mSeries= mixin module
 	- =Uize.Fx.fadeStyleAcrossNodes=
 	- provide some examples
 		- C:/~uize/UIZE-JavaScript-Framework/examples/fade-css-style-across-nodes.html

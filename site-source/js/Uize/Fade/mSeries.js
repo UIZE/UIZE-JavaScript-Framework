@@ -1,7 +1,7 @@
 /*______________
 |       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
 |     /      /  |   ---------------------------------------------------
-|    /    O /   |    MODULE : Uize.Fade.xSeries Class Extension
+|    /    O /   |    MODULE : Uize.Fade.mSeries Class Extension
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
 | /____/ /__/_| | COPYRIGHT : (c)2009-2015 UIZE
@@ -18,21 +18,21 @@
 
 /*?
 	Introduction
-		The =Uize.Fade.xSeries= module implements static and instance methods for interpolating a series of values between specified start and end values.
+		The =Uize.Fade.mSeries= mixin module lets you mix in static and instance methods for interpolating a series of values between specified start and end values, into =Uize.Fade= subclasses.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 
-		The =Uize.Fade.xSeries= module is an extension module that extends the =Uize.Fade= class.
-
 		In a Nutshell
-			The methods defined in the =Uize.Fade.xSeries= module utilize the =Uize.Fade= class to let you create arrays of interpolated values.
+			The methods defined in the =Uize.Fade.mSeries= module utilize the =Uize.Fade= class to let you create arrays of interpolated values.
 
-			Typically, the =Uize.Fade= class is used to produce time-based animations, but this class can also be used solely for its powerful value interpolation capabilities. The =getSeries= and =Uize.Fade.getSeries= methods defined in this extension module could be useful when using fades in non-time based applications, such as displaying values in a bar chart, fading colors over a series of elements, plotting positions for a series of elements, populating data sets, etc.
+			Typically, the =Uize.Fade= class is used to produce time-based animations, but this class can also be used solely for its powerful value interpolation capabilities. The =getSeries= and =Uize.Fade.getSeries= methods defined in this mixin module could be useful when using fades in non-time based applications, such as displaying values in a bar chart, fading colors over a series of elements, plotting positions for a series of elements, populating data sets, etc.
 
 			EXAMPLE
-			.................................................................
+			..................................................................
+			var MyFadeClass = Uize.Fade.subclass ({mixins:Uize.Fade.mSeries});
+
 			function fadeNodesBgColor (nodes,startColorStr,endColorStr) {
-				var colors = Uize.Fade.getSeries (
+				var colors = MyFadeClass.getSeries (
 					Uize.Color.to (startColorStr,'RGB array'),
 					Uize.Color.to (endColorStr,'RGB array'),
 					nodes.length
@@ -44,7 +44,7 @@
 					);
 				}
 			}
-			.................................................................
+			..................................................................
 
 			In the above example, a function is defined that will accept an array of DOM nodes, a start color, and an end color, and will then set the background color of all the nodes by fading from the start color to the end color.
 
@@ -54,7 +54,7 @@
 */
 
 Uize.module ({
-	name:'Uize.Fade.xSeries',
+	name:'Uize.Fade.mSeries',
 	builder:function (_class) {
 		'use strict';
 
@@ -104,23 +104,23 @@ Uize.module ({
 							Returns an array, representing a series - of the specified length - of the interpolated values that would be generated over the course of a fade's progress.
 
 							SYNTAX
-							........................................
-							valueSeriesARRAY = Uize.Fade.getSeries (
+							..........................................
+							valueSeriesARRAY = MyFadeClass.getSeries (
 								startValueNUMorARRAYorOBJ,
 								endValueNUMorARRAYorOBJ,
 								seriesLengthINT
 							);
-							........................................
+							..........................................
 
 							VARIATION
-							........................................
-							valueSeriesARRAY = Uize.Fade.getSeries (
+							..........................................
+							valueSeriesARRAY = MyFadeClass.getSeries (
 								startValueNUMorARRAYorOBJ,
 								endValueNUMorARRAYorOBJ,
 								seriesLengthINT,
 								fadePropertiesOBJ
 							);
-							........................................
+							..........................................
 
 							By default, the values in the series are interpolated linearly. However, by using the optional =fadePropertiesOBJ= parameter it is possible to control all the properties of a fade, such as =curve= and =quantization=.
 

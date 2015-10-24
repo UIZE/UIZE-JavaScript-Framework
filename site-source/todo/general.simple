@@ -121,7 +121,6 @@ Eliminate All Extension Modules
 		- =Uize.Color.xSvgColors=
 		- =Uize.Color.xUtil=
 		- =Uize.Fade.xFactory=
-		- =Uize.Fade.xSeries=
 		- =Uize.Fx.xShadows=
 		- =Uize.Widget.Collection.Dynamic.xDialogEditable=
 		- =Uize.Widget.Dialog.xResizable=

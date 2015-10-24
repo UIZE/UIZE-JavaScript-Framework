@@ -156,20 +156,6 @@ Update Header Comments
 			/*ScruncherSettings Mappings="=" LineCompacting="TRUE"*/
 			........................................................
 
-		Scruncher Mappings for Class Extension Modules
-			For class extension modules (not package extension modules), the convention is to use the letter used by the class that is being extended, with an underscore separated suffix appended that is unique to the extension module.
-
-			For example, both the =Uize.Fade.xFactory= and =Uize.Fade.xSeries= modules are class extension modules because they extend the =Uize.Fade= class. Now, the scrunch namespace used by the =Uize.Fade= class is "b". Therefore, by the convention used for class extension modules, the scrunch namespace for the =Uize.Fade.xFactory= module is "b_a", and the scrunch namespace for the =Uize.Fade.xSeries= module is "b_b".
-
-			Because these two class extension modules only extend the =Uize.Fade= class and don't create subclasses, we don't want to use the letter "c", since this should be reserved for any module that were to define a =Uize.Fade= subclass. Also, we don't want the two extension modules to use the same scrunch namespace, since they could both be used at the same time to extend the =Uize.Fade= class, and the scrunched names of any private properties or methods on instances of the =Uize.Fade= class that are added by these extensions should not accidentally collide with one another.
-
-			Therefore, what we do is we branch off of the scrunch namespace of the class being extended, using an added suffix that is unique to each extension module. This approach does have the drawback that there has to be cooperation across the various extension modules.
-
-			EXAMPLE
-			...........................................................
-			/*ScruncherSettings Mappings="=b_a" LineCompacting="TRUE"*/
-			...........................................................
-
 	Module Meta Data Comment
 		The module meta data comment is required for all UIZE modules and contains meta data information that is used on the [[../appendixes/sotu.html][SOTU (State of the UIZE)]] page.
 

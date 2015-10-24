@@ -1,0 +1,13 @@
+This is a TO DO document for the =Uize.Fade.mSeries= module.
+
+Specifying Decoder / Encoder
+	Provide an ability to specify decoder and encoder functions, so that you could do something like...
+
+	.............................................................................................................
+	Uize.Fade.getSeries ('#000000','#ffffff',20,{from:Uize.Color.encoder ('#hex'),to:Uize.Color.decoder ('#hex'))
+	Uize.Fade.getSeries ('#000000','#ffffff',20,Uize.Color.encodings ['#hex'])
+	Uize.Fade.getSeries (Uize.Color.from ('#000000'),Uize.Color.from ('#ffffff'),20) ???
+	.............................................................................................................
+
+	If there was a toNumerical and fromNumerical method for all objects, then something like the Uize.Fade class could use these methods for interpolating.
+
