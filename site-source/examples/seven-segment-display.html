@@ -3,7 +3,7 @@
 <head>
 	<title>Seven Segment Display | JavaScript Examples | UIZE JavaScript Framework</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-	<meta name="keywords" content="widget Uize.Widgets.SegmentDisplay.Seven.Widget"/>
+	<meta name="keywords" content="widget animation Uize.Widgets.SegmentDisplay.Seven.Widget Uize.Fade.Factory"/>
 	<meta name="description" content="See an interactive demonstration of a seven segment display widget, much like the classic LED / LCD digit displays on calculators and digital watches."/>
 	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
 	<link rel="stylesheet" href="../css/page.css"/>
@@ -207,8 +207,7 @@ Uize.require (
 		'UizeSite.Page.Example.library',
 		'UizeSite.Page.Example',
 		'Uize.Widgets.SegmentDisplay.Seven.Widget',
-		'Uize.Fade',
-		'Uize.Fade.xFactory',
+		'Uize.Fade.Factory',
 		'Uize.Curve'
 	],
 	function () {
@@ -342,7 +341,7 @@ Uize.require (
 					nodeName,
 					'click',
 					function () {
-						Uize.Fade.fade (
+						Uize.Fade.Factory.fade (
 							function (valueNo) {sevenSegmentDisplay.set ({value:values [valueNo]})},
 							0,
 							values.length - 1,
