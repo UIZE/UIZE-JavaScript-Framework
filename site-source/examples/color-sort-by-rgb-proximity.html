@@ -79,7 +79,7 @@ Uize.require (
 		'Uize.Dom.Basics',
 		'Uize.Dom.Event',
 		'Uize.Tooltip',
-		'Uize.Fade.xFactory',
+		'Uize.Fade.Factory',
 		'Uize.Curve'
 	],
 	function () {
@@ -164,7 +164,7 @@ Uize.require (
 						mouseout:function () {Uize.Tooltip.showTooltip (colorInfo.getNode (),false)},
 						click:function (event) {
 							var target = Uize.Dom.Event.target (event);
-							Uize.Fade.fade (
+							Uize.Fade.Factory.fade (
 								function (value) {page.children.desiredColor.set ({value:Uize.Color.to (value,'hex')})},
 								[Uize.Color.to (page.children.desiredColor + '','RGB array')],
 								[Uize.Color.to (Uize.Dom.Basics.getStyle (target,'backgroundColor'),'RGB array')],
