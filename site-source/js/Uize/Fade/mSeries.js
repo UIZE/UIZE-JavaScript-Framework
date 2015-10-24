@@ -1,7 +1,7 @@
 /*______________
 |       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
 |     /      /  |   ---------------------------------------------------
-|    /    O /   |    MODULE : Uize.Fade.mSeries Class Extension
+|    /    O /   |    MODULE : Uize.Fade.mSeries Class Mixin
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
 | /____/ /__/_| | COPYRIGHT : (c)2009-2015 UIZE
@@ -10,7 +10,7 @@
 */
 
 /* Module Meta Data
-	type: Extension
+	type: Mixin
 	importance: 2
 	codeCompleteness: 100
 	docCompleteness: 100
@@ -55,83 +55,87 @@
 
 Uize.module ({
 	name:'Uize.Fade.mSeries',
-	builder:function (_class) {
+	builder:function () {
 		'use strict';
 
-		/*** Public Instance Methods ***/
-			_class.prototype.getSeries = function (_valuesLength) {
-				var
-					m = this,
-					_values = [],
-					_valuesLengthMinus1 = Math.max (_valuesLength - 1,1)
-				;
-				for (var _valueNo = -1; ++_valueNo < _valuesLength;) {
-					m.set ({progress:_valueNo / _valuesLengthMinus1});
-					_values.push (Uize.clone (m.valueOf ()));
+		return function (_class) {
+			_class.declare ({
+				instanceMethods:{
+					getSeries:function (_valuesLength) {
+						var
+							m = this,
+							_values = [],
+							_valuesLengthMinus1 = Math.max (_valuesLength - 1,1)
+						;
+						for (var _valueNo = -1; ++_valueNo < _valuesLength;) {
+							m.set ({progress:_valueNo / _valuesLengthMinus1});
+							_values.push (Uize.clone (m.valueOf ()));
+						}
+						return _values;
+						/*?
+							Instance Methods
+								getSeries
+									Returns an array, representing a series - of the specified length - of the interpolated values that would be generated over the course of the fade's progress.
+
+									SYNTAX
+									..........................................................
+									valueSeriesARRAY = myInstance.getSeries (seriesLengthINT);
+									..........................................................
+
+									The value series is generated using the current values for the fade instance's state properties. This method could be useful when using fades in non-time based applications, such as displaying values in a bar chart, fading colors over a series of elements, plotting positions for a series of elements, populating data sets, etc.
+
+									NOTES
+									- if the value =0= is specified for the =seriesLengthINT= parameter, then this method will return an empty array
+									- if the value =1= is specified for the =seriesLengthINT= parameter, then this method will return an array containing one element whose value is the value of the fade's =startValue= state property
+									- if the value =2= is specified for the =seriesLengthINT= parameter, then this method will return an array containing two elements, where the value of the first element is the value of the fade's =startValue= state property, and the value of the second element is the value of the fade's =endValue= state property
+									- compare to the =Uize.Fade.getSeries= static method
+						*/
+					}
+				},
+
+				staticMethods:{
+					getSeries:function (_startValue,_endValue,_valuesLength,_fadeProperties) {
+						return this (
+							Uize.copyInto ({startValue:_startValue,endValue:_endValue},_fadeProperties)
+						).getSeries (
+							_valuesLength
+						);
+						/*?
+							Static Methods
+								Uize.Fade.getSeries
+									Returns an array, representing a series - of the specified length - of the interpolated values that would be generated over the course of a fade's progress.
+
+									SYNTAX
+									..........................................
+									valueSeriesARRAY = MyFadeClass.getSeries (
+										startValueNUMorARRAYorOBJ,
+										endValueNUMorARRAYorOBJ,
+										seriesLengthINT
+									);
+									..........................................
+
+									VARIATION
+									..........................................
+									valueSeriesARRAY = MyFadeClass.getSeries (
+										startValueNUMorARRAYorOBJ,
+										endValueNUMorARRAYorOBJ,
+										seriesLengthINT,
+										fadePropertiesOBJ
+									);
+									..........................................
+
+									By default, the values in the series are interpolated linearly. However, by using the optional =fadePropertiesOBJ= parameter it is possible to control all the properties of a fade, such as =curve= and =quantization=.
+
+									NOTES
+									- if the value =0= is specified for the =seriesLengthINT= parameter, then this method will return an empty array
+									- if the value =1= is specified for the =seriesLengthINT= parameter, then this method will return an array containing one element whose value is the value of the =startValueNUMorARRAYorOBJ= parameter
+									- if the value =2= is specified for the =seriesLengthINT= parameter, then this method will return an array containing two elements, where the value of the first element is the value of the =startValueNUMorARRAYorOBJ= parameter, and the value of the second element is the value of the =endValueNUMorARRAYorOBJ= parameter
+									- compare to the =getSeries= instance method
+						*/
+					}
 				}
-				return _values;
-				/*?
-					Instance Methods
-						getSeries
-							Returns an array, representing a series - of the specified length - of the interpolated values that would be generated over the course of the fade's progress.
-
-							SYNTAX
-							..........................................................
-							valueSeriesARRAY = myInstance.getSeries (seriesLengthINT);
-							..........................................................
-
-							The value series is generated using the current values for the fade instance's state properties. This method could be useful when using fades in non-time based applications, such as displaying values in a bar chart, fading colors over a series of elements, plotting positions for a series of elements, populating data sets, etc.
-
-							NOTES
-							- if the value =0= is specified for the =seriesLengthINT= parameter, then this method will return an empty array
-							- if the value =1= is specified for the =seriesLengthINT= parameter, then this method will return an array containing one element whose value is the value of the fade's =startValue= state property
-							- if the value =2= is specified for the =seriesLengthINT= parameter, then this method will return an array containing two elements, where the value of the first element is the value of the fade's =startValue= state property, and the value of the second element is the value of the fade's =endValue= state property
-							- compare to the =Uize.Fade.getSeries= static method
-				*/
-			};
-
-
-		/*** Public Static Methods ***/
-			_class.getSeries = function (_startValue,_endValue,_valuesLength,_fadeProperties) {
-				return (
-					new _class (
-						Uize.copyInto ({startValue:_startValue,endValue:_endValue},_fadeProperties)
-					).getSeries (_valuesLength)
-				);
-				/*?
-					Static Methods
-						Uize.Fade.getSeries
-							Returns an array, representing a series - of the specified length - of the interpolated values that would be generated over the course of a fade's progress.
-
-							SYNTAX
-							..........................................
-							valueSeriesARRAY = MyFadeClass.getSeries (
-								startValueNUMorARRAYorOBJ,
-								endValueNUMorARRAYorOBJ,
-								seriesLengthINT
-							);
-							..........................................
-
-							VARIATION
-							..........................................
-							valueSeriesARRAY = MyFadeClass.getSeries (
-								startValueNUMorARRAYorOBJ,
-								endValueNUMorARRAYorOBJ,
-								seriesLengthINT,
-								fadePropertiesOBJ
-							);
-							..........................................
-
-							By default, the values in the series are interpolated linearly. However, by using the optional =fadePropertiesOBJ= parameter it is possible to control all the properties of a fade, such as =curve= and =quantization=.
-
-							NOTES
-							- if the value =0= is specified for the =seriesLengthINT= parameter, then this method will return an empty array
-							- if the value =1= is specified for the =seriesLengthINT= parameter, then this method will return an array containing one element whose value is the value of the =startValueNUMorARRAYorOBJ= parameter
-							- if the value =2= is specified for the =seriesLengthINT= parameter, then this method will return an array containing two elements, where the value of the first element is the value of the =startValueNUMorARRAYorOBJ= parameter, and the value of the second element is the value of the =endValueNUMorARRAYorOBJ= parameter
-							- compare to the =getSeries= instance method
-				*/
-			};
-
+			});
+		};
 	}
 });
 
