@@ -87,11 +87,11 @@ Value Transformer
 			A Curve Function is a specialized kind of `value transformer` whose input value is expected to be a floating point number in the range of =0= to =1=, and where the returned transformed value should also be a floating point number in the range of =0= to =1=.
 
 			EXAMPLE
-			................................................................................
-			Uize.Fade.fade (scrollTo,[0,0],[0,200],800,{curve:Uize.Curve.easeInOutPow (4)});
-			................................................................................
+			........................................................................................
+			Uize.Fade.Factory.fade (scrollTo,[0,0],[0,200],800,{curve:Uize.Curve.easeInOutPow (4)});
+			........................................................................................
 
-			In the above example, the vertical scroll position of a browser window is being animated using the =Uize.Fade.fade= static method of the =Uize.Fade= class. A curve function (which is a `value transformer`) is being created using the statement =Uize.Curve.easeInOutPow (4)=, and this curve is being supplied to the =Uize.Fade.fade= method so that the animation isn't completely linear and lifeless - some non-linearity adds physical realism to the animation. The curve function is being used to bend / distort a =0= to =1= floating point number into a different =0= to =1= floating point number.
+			In the above example, the vertical scroll position of a browser window is being animated using the =Uize.Fade.Factory.fade= method of the =Uize.Fade.Factory= module. A curve function (which is a `value transformer`) is being created using the statement =Uize.Curve.easeInOutPow (4)=, and this curve is being supplied to the =Uize.Fade.Factory.fade= method so that the animation isn't completely linear and lifeless - some non-linearity adds physical realism to the animation. The curve function is being used to bend / distort a =0= to =1= floating point number into a different =0= to =1= floating point number.
 
 		Value Matchers Are Specialized Value Transformers
 			A `value matcher` is a specialized kind of `value transformer` that transforms a value to a boolean value.
@@ -123,7 +123,7 @@ Value Transformer
 		The Uize.Fade Class
 			The =Uize.Fade= class supports a `value transformer` with its =curve= state property.
 
-			Additionally, any of the factory methods that create instances of the =Uize.Fade= class will also support value transformers for the =curve= fade property. Examples of such factory methods are the =Uize.Fade.fade=, =Uize.Fade.fadeMethod=, =Uize.Fade.fadeProperty=, and =Uize.Fade.fadeProperties= methods implemented in the =Uize.Fade.xFactory= extension module, as well as the =Uize.Fx.fadeStyle= and =Uize.Fx.fadeStyleAcrossNodes= methods of the =Uize.Fx= module.
+			Additionally, any of the factory methods that create instances of the =Uize.Fade= class will also support value transformers for the =curve= fade property. Examples of such factory methods are the =Uize.Fade.Factory.fade=, =Uize.Fade.Factory.fadeMethod=, =Uize.Fade.Factory.fadeProperty=, and =Uize.Fade.Factory.fadeProperties= methods implemented in the =Uize.Fade.Factory= module, as well as the =Uize.Fx.fadeStyle= and =Uize.Fx.fadeStyleAcrossNodes= methods of the =Uize.Fx= module.
 
 			For a more in-depth discussion of curve functions, see the section `Curve Functions Are Specialized Value Transformers`.
 
