@@ -936,8 +936,8 @@ Value Transformer Function
 	- good candidates for methods to support value transformers...
 		- myInstance.set
 		- MyClass.set
-		- Uize.Fade.fadeProperty
-		- Uize.Fade.fadeProperties
+		- Uize.Fade.Factory.fadeProperty
+		- Uize.Fade.Factory.fadeProperties
 		- Uize.Fx.fadeStyle
 		- Uize.Dom.Basics.setStyle, myWidget.setNodeStyle
 		- Uize.Dom.Basics.setProperty, myWidget.setNodeProperty
