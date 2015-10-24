@@ -38,7 +38,7 @@
 Uize.module ({
 	name:'Uize.Fx',
 	required:[
-		'Uize.Fade.xFactory',
+		'Uize.Fade.Factory',
 		'Uize.Dom.Basics',
 		'Uize.Color'
 	],
@@ -248,7 +248,7 @@ Uize.module ({
 						;
 					}
 
-				return Uize.Fade.fade (
+				return Uize.Fade.Factory.fade (
 					{context:_node,handler:_updaterFunction},
 					_startValue,
 					_endValue,
@@ -324,7 +324,7 @@ Uize.module ({
 							);
 							.............................
 
-							By default, fades created using the =Uize.Fade.fadeStyle= method are started immediately. If you do not wish the fade to start immediately, but wish to initiate the fade at a later time by using the =start= instance method of the =Uize.Fade= instance returned from the =Uize.Fade.fadeStyle= method, then you can specify the value =false= for the optional =startNowBOOL= parameter. If you wish to use the =startNowBOOL= parameter but do not wish to specify any fade properties, then you should specify the value =null= for the =fadePropertiesOBJ= parameter.
+							By default, fades created using the =Uize.Fx.fadeStyle= method are started immediately. If you do not wish the fade to start immediately, but wish to initiate the fade at a later time by using the =start= instance method of the =Uize.Fade= instance returned from the =Uize.Fx.fadeStyle= method, then you can specify the value =false= for the optional =startNowBOOL= parameter. If you wish to use the =startNowBOOL= parameter but do not wish to specify any fade properties, then you should specify the value =null= for the =fadePropertiesOBJ= parameter.
 
 							Fading Clip Region
 								The =Uize.Fx.fadeStyle= method can be used to fade the value of the =clip= style property.
