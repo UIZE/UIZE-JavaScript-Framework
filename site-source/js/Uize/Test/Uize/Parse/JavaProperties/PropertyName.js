@@ -29,6 +29,11 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
+		/*** Utility Functions ***/
+			function _char (_charCode) {
+				return String.fromCharCode (_charCode);
+			}
+
 		return _superclass.subclass ({
 			staticProperties:{parserClass:'Uize.Parse.JavaProperties.PropertyName'},
 
@@ -88,10 +93,18 @@ Uize.module ({
 								}
 							),
 							Uize.Test.ParserTest.parserTest (
-								'A property name may contain ":" (colon), "=" (equals), or " " (space) characters, as long as they are escaped with a "\" (backslash) character',
-								['Foo\\:Bar\\=Baz\\ Qux=Value'],
+								'A property name may contain ":" (colon), "=" (equals), " " (space), or "\\" (backslash) characters, as long as they are escaped with a "\\" (backslash) character',
+								['Foo\\:Bar\\=Baz\\ \\\\Qux=Value'],
 								{
-									name:'Foo:Bar=Baz Qux',
+									name:'Foo:Bar=Baz \\Qux',
+									isValid:true
+								}
+							),
+							Uize.Test.ParserTest.parserTest (
+								'A property name may contain Unicode characters, as long as they are Unicode-escaped (e.g. \\u013D)',
+								['\\u013D\\u025D\\u03E1'],
+								{
+									name:_char (317) + _char (605) + _char (993),
 									isValid:true
 								}
 							),
@@ -133,12 +146,20 @@ Uize.module ({
 								'Property~!@#$%^&*()_+-`[]{}|;".,/?'
 							),
 							Uize.Test.ParserTest.serializerTest (
-								'When a property contains ":" (colon), "=" (equals), or " " (space) characters, they are escaped with a "\" (backslash) character when the property name is serizlied',
+								'When a property contains ":" (colon), "=" (equals), " " (space), or "\\" (backslash) characters, they are escaped with a "\\" (backslash) character when the property name is serialized',
 								{
-									name:'Foo:Bar=Baz Qux',
+									name:'Foo:Bar=Baz \\Qux',
 									isValid:true
 								},
-								'Foo\\:Bar\\=Baz\\ Qux'
+								'Foo\\:Bar\\=Baz\\ \\\\Qux'
+							),
+							Uize.Test.ParserTest.serializerTest (
+								'When a property contains Unicode characters, they are Unicode-escaped (e.g. \\u013D) when the property name is serialized',
+								{
+									name:_char (317) + _char (605) + _char (993),
+									isValid:true
+								},
+								'\\u013D\\u025D\\u03E1'
 							)
 						]
 					}

@@ -40,12 +40,14 @@ Uize.module ({
 
 			/*** General Variables ***/
 				_terminatingCharsLookup = _charsLookup (' :='),
-				_serializerEscaper = Uize.Str.Replace.replacerByLookup ({
+				_escapedCharsLookup = {
 					'\\':'\\\\',
 					':':'\\:',
 					'=':'\\=',
 					' ':'\\ '
-				})
+				},
+				_parserUnescaper = Uize.Str.Replace.replacerByLookup (Uize.reverseLookup (_escapedCharsLookup)),
+				_serializerEscaper = Uize.Str.Replace.replacerByLookup (_escapedCharsLookup)
 		;
 
 		/*** Utility Functions ***/
@@ -83,7 +85,7 @@ Uize.module ({
 							_inEscape = !_inEscape && _char == '\\';
 							_index++;
 						}
-						m.name = _source.slice (m.index,_index).replace (/\\(.)/g,'$1');
+						m.name = m.unicodeUnescape (_parserUnescaper (_source.slice (m.index,_index)));
 						m.length = _index - m.index;
 					}
 				},
