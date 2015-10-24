@@ -3,7 +3,7 @@
 <head>
 	<title>3D Rotation Viewer | JavaScript Examples | UIZE JavaScript Framework</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-	<meta name="keywords" content="animation drag-and-drop ipad touch Uize.Widget.Drag Uize.Widget.Fade.xFactory"/>
+	<meta name="keywords" content="animation drag-and-drop ipad touch Uize.Widget.Drag Uize.Fade.Factory"/>
 	<meta name="description" content="Easily create a 3D rotation viewer in UIZE that lets users rotate the view of an object a full 360 degrees using a mouse, or finger on the Apple iPad."/>
 	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
 	<link rel="stylesheet" href="../css/page.css"/>
@@ -71,7 +71,7 @@ Uize.require (
 		'UizeSite.Page.Example.library',
 		'UizeSite.Page.Example',
 		'Uize.Widget.Drag',
-		'Uize.Fade.xFactory',
+		'Uize.Fade.Factory',
 		'Uize.Curve.Rubber',
 		'Uize.Curve.Mod',
 		'Uize.Widgets.Container.Widget',
@@ -149,7 +149,7 @@ Uize.require (
 
 		/*** function for animating spin ***/
 			function spin (degrees,duration,curve) {
-				Uize.Fade.fade (updateRotation,rotation,rotation + degrees,duration,{quantization:1,curve:curve});
+				Uize.Fade.Factory.fade (updateRotation,rotation,rotation + degrees,duration,{quantization:1,curve:curve});
 			}
 
 		/*** add the buttons for triggering different spins ***/
