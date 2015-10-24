@@ -3,7 +3,7 @@
 <head>
 	<title>Basic Mask | JavaScript Examples | UIZE JavaScript Framework</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-	<meta name="keywords" content="animation widget Uize.Widget.Mask Uize.Fade.xFactory"/>
+	<meta name="keywords" content="animation widget Uize.Widget.Mask Uize.Fade.Factory"/>
 	<meta name="description" content="See a mask widget being used to highlight an image in a layout. Switching to highlighting a different image is accompanied by a JavaScript animation."/>
 	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
 	<link rel="stylesheet" href="../css/page.css"/>
@@ -70,7 +70,7 @@
 	<!-- explanation copy -->
 
 	<div class="explanation">
-		<p>In this example, an instance of <a href="../reference/Uize.Widget.Mask.html"><code>Uize.Widget.Mask</code></a> has been created and positioned over the layout of images below. When you move the mouse over the buttons above the layout, the mask's coordinates are set so that the highlight area is positioned over the corresponding image and everything outside the image is masked out. An instance of the <a href="../reference/Uize.Fade.html"><code>Uize.Fade</code></a> class is used to create a JavaScript animation for a smooth transition to the new coordinates.</p>
+		<p>In this example, an instance of <a href="../reference/Uize.Widget.Mask.html"><code>Uize.Widget.Mask</code></a> has been created and positioned over the layout of images below. When you move the mouse over the buttons above the layout, the mask's coordinates are set so that the highlight area is positioned over the corresponding image and everything outside the image is masked out. The <a href="../reference/Uize.Fade.Factory.html"><code>Uize.Fade.Factory</code></a> module is used to create a JavaScript animation for a smooth transition to the new coordinates.</p>
 	</div>
 
 	<center>
@@ -126,7 +126,8 @@ Uize.require (
 		'UizeSite.Page.Example.library',
 		'UizeSite.Page.Example',
 		'Uize.Dom.Basics',
-		'Uize.Fade.xFactory',
+		'Uize.Fade',
+		'Uize.Fade.Factory',
 		'Uize.Widget.Mask'
 	],
 	function () {
@@ -154,7 +155,9 @@ Uize.require (
 					linkId + 'Link',
 					'mouseover',
 					function () {
-						Uize.Fade.fadeProperties (mask,null,coords,750,{curve:Uize.Fade.celeration (0,1),quantization:1});
+						Uize.Fade.Factory.fadeProperties (
+							mask,null,coords,750,{curve:Uize.Fade.celeration (0,1),quantization:1}
+						);
 					}
 				);
 			}
