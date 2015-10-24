@@ -3,7 +3,7 @@
 <head>
 	<title>Basic Slider | JavaScript Examples | UIZE JavaScript Framework</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-	<meta name="keywords" content="animation Uize.Widget.Bar.Slider Uize.Fade.xFactory"/>
+	<meta name="keywords" content="animation Uize.Widget.Bar.Slider Uize.Fade.Factory"/>
 	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
 	<link rel="stylesheet" href="../css/page.css"/>
 	<link rel="stylesheet" href="../css/page.example.css"/>
@@ -49,17 +49,17 @@
 		<ul>
 			<li>Canonicalized to Equivalent Signature
 				<ul>
-					<li><a href="javascript://" class="linkedJs">Uize.Fade.fade (slider,0,200,2000)</a></li>
-					<li><a href="javascript://" class="linkedJs">Uize.Fade.fade ({context:slider,handler:'set'},{value:0},{value:200},2000)</a></li>
-					<li><a href="javascript://" class="linkedJs">Uize.Fade.fadeProperty (slider,'value',0,200,2000)</a></li>
-					<li><a href="javascript://" class="linkedJs">Uize.Fade.fadeProperties (slider,{value:0},{value:200},2000)</a></li>
-					<li><a href="javascript://" class="linkedJs">Uize.Fade.fadeMethod (slider,'set',{value:0},{value:200},2000)</a></li>
+					<li><a href="javascript://" class="linkedJs">Uize.Fade.Factory.fade (slider,0,200,2000)</a></li>
+					<li><a href="javascript://" class="linkedJs">Uize.Fade.Factory.fade ({context:slider,handler:'set'},{value:0},{value:200},2000)</a></li>
+					<li><a href="javascript://" class="linkedJs">Uize.Fade.Factory.fadeProperty (slider,'value',0,200,2000)</a></li>
+					<li><a href="javascript://" class="linkedJs">Uize.Fade.Factory.fadeProperties (slider,{value:0},{value:200},2000)</a></li>
+					<li><a href="javascript://" class="linkedJs">Uize.Fade.Factory.fadeMethod (slider,'set',{value:0},{value:200},2000)</a></li>
 				</ul>
 			</li>
 			<li>Equivalent, But Not Matching Above
 				<ul>
-					<li><a href="javascript://" class="linkedJs">Uize.Fade.fade (function (value) {slider.set ({value:value})},0,200,2000)</a></li>
-					<li><a href="javascript://" class="linkedJs">Uize.Fade.fade (function (properties) {slider.set (properties)},{value:0},{value:200},2000)</a></li>
+					<li><a href="javascript://" class="linkedJs">Uize.Fade.Factory.fade (function (value) {slider.set ({value:value})},0,200,2000)</a></li>
+					<li><a href="javascript://" class="linkedJs">Uize.Fade.Factory.fade (function (properties) {slider.set (properties)},{value:0},{value:200},2000)</a></li>
 				</ul>
 			</li>
 		</ul>
@@ -75,7 +75,7 @@ Uize.require (
 		'UizeSite.Page.Example.library',
 		'UizeSite.Page.Example',
 		'Uize.Widget.Bar.Slider',
-		'Uize.Fade.xFactory'
+		'Uize.Fade.Factory'
 	],
 	function () {
 		'use strict';
