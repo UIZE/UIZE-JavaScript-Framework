@@ -34,6 +34,8 @@
 		RedirectMatch 301 ^/(reference(/source-code)?)/Uize\.Cycle\.html$ http://www.uize.com/$1/Uize.Util.Cycle.html
 		RedirectMatch 301 ^/(reference(/source-code)?)/Uize\.Population\.html$ http://www.uize.com/$1/Uize.Widget.Population.html
 		RedirectMatch 301 ^(.*)/UizeDotCom\.(.*)$ http://www.uize.com/$1/UizeSite.$2
+		RedirectMatch 301 ^/(reference(/source-code)?)/Uize\.Fade\.x(Factory|Series)\.html$ http://www.uize.com/$1/Uize.Fade.m$3.html
+		RedirectMatch 301 ^/(reference(/source-code)?)/Uize\.Widget\.(ImageWipe|Swap)\.xPresets\.html$ http://www.uize.com/$1/Uize.Widget.$3.Themes.html
 
 		# renamed build modules
 			RedirectMatch 301 ^/(reference(/source-code)?)/Uize\.Scruncher\.html$ http://www.uize.com/$1/Uize.Build.Scruncher.html
