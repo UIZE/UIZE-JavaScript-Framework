@@ -51,10 +51,11 @@ Uize.module ({
 			function _fade (_target,_startValue,_endValue,_duration,_fadeStateProperties,_startNow) {
 				var
 					_object = this,
-					_objectPrototype = _object.prototype,
-					_fadeClass = _isFunction (_objectPrototype.start) && _isFunction (_objectPrototype.stop)
-						? _object
-						: _class || _host
+					_objectPrototype = _object && _object.prototype,
+					_fadeClass =
+						_objectPrototype && _isFunction (_objectPrototype.start) && _isFunction (_objectPrototype.stop)
+							? _object
+							: _class || _host
 				;
 
 				if (!_duration) _duration = 750;
