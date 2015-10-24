@@ -1,19 +1,23 @@
 This is a TO DO document for the =Uize.Fade.xFactory= module.
 
-- ability to chain fades
-- for Uize.Fade.fadeProperty, and Uize.Fade.fadeProperties, have a way to specify values that are to be relative to current value
-	eg.
-		................................................................................
-		Uize.Fade.fadeProperty (slider,'value',null,['+',10])
-		Uize.Fade.fadeProperty (slider,'value',null,['+',10])
-		Uize.Fade.fadeProperty (slider,'value',null,['+',incAmount])
-		Uize.Fade.fadeProperty (slider,'value',null,['-',10])
-		Uize.Fade.fadeProperty (slider,'value',null,['%',110])
-		Uize.Fade.fadeProperty (slider,'value',null,['*',1.1])
-		Uize.Fade.fadeProperty (slider,'value',null,['=',110])
-		Uize.Fade.fadeProperty (slider,'value',null,['=',function (value) {return value * 1.1}])
-		................................................................................
+Chaining
+	Add support for chaining fades.
 
-- for performance optimization, consider reusing spent fades rather than throwing them away for garbage collection
+Values Relative to Current
+	For Uize.Fade.fadeProperty, and Uize.Fade.fadeProperties, have a way to specify values that are to be relative to current value
 
+	EXAMPLE
+	........................................................................................
+	Uize.Fade.fadeProperty (slider,'value',null,['+',10])
+	Uize.Fade.fadeProperty (slider,'value',null,['+',10])
+	Uize.Fade.fadeProperty (slider,'value',null,['+',incAmount])
+	Uize.Fade.fadeProperty (slider,'value',null,['-',10])
+	Uize.Fade.fadeProperty (slider,'value',null,['%',110])
+	Uize.Fade.fadeProperty (slider,'value',null,['*',1.1])
+	Uize.Fade.fadeProperty (slider,'value',null,['=',110])
+	Uize.Fade.fadeProperty (slider,'value',null,['=',function (value) {return value * 1.1}])
+	........................................................................................
+
+Performance Optimization
+	For performance optimization, consider reusing spent fades rather than throwing them away for garbage collection
 
