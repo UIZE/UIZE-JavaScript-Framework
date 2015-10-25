@@ -33,15 +33,25 @@ Uize.module ({
 			staticMethods:{
 				subclass:function (_featuresByType) {
 					var
-						_superclass = this,
-						_constructorProvided = _featuresByType && _featuresByType.hasOwnProperty ('constructor'),
-						_class = _constructorProvided
-							? _featuresByType.constructor
-							: function () {return _superclass.apply (this,arguments)}
+						/*** Variables for Scruncher Optimization ***/
+							_clone = Uize.clone,
+
+						/*** General Variables ***/
+							_superclass = this,
+							_constructorProvided = _featuresByType && _featuresByType.hasOwnProperty ('constructor'),
+							_class = _constructorProvided
+								? _featuresByType.constructor
+								: function () {return _superclass.apply (this,arguments)}
 					;
 
-					Uize.copyInto (_class,Uize.map (Uize.copy (_superclass),Uize.clone));
-					Uize.copyInto (_class.prototype,Uize.clone (_superclass.prototype),{Class:_class});
+					/*** Inherit static properties (excluding prototype) and methods from base class ***/
+						for (var _property in _superclass)
+							if (_property != 'prototype') _class [_property] = _clone (_superclass [_property])
+						;
+
+					/*** Inherit instance properties and methods from base class ***/
+						Uize.map (_superclass.prototype,_clone,_class.prototype);
+						_class.prototype.Class = _class;
 
 					if (_featuresByType) {
 						if (_constructorProvided)
