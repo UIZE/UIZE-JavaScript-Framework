@@ -44,7 +44,8 @@ Uize.module ({
 					'\\':'\\\\',
 					':':'\\:',
 					'=':'\\=',
-					' ':'\\ '
+					' ':'\\ ',
+					'\t':'\\\t'
 				},
 				_parserUnescaper = Uize.Str.Replace.replacerByLookup (Uize.reverseLookup (_escapedCharsLookup)),
 				_serializerEscaper = Uize.Str.Replace.replacerByLookup (_escapedCharsLookup)
