@@ -28,7 +28,8 @@ Uize.module ({
 	required:[
 		'Uize.Dom.Basics',
 		'Uize.Dom.Pos',
-		'Uize.Dom.Event'
+		'Uize.Dom.Event',
+		'Uize.Fade.Factory'
 	],
 	builder:function  (_superclass) {
 		'use strict';
@@ -123,7 +124,7 @@ Uize.module ({
 			function _fadeDragMoveTo (_phasePropertyName,_endPos,_duration,_fadeProperties) {
 				m.set (_phasePropertyName,_true);
 				(
-					m._fade = Uize.Fade.fade (
+					m._fade = Uize.Fade.Factory.fade (
 						_dragMove,
 						[_eventPos [0],_eventPos [1]],
 						_endPos,
@@ -136,7 +137,7 @@ Uize.module ({
 			}
 
 			function _endDragWithPossibleReleaseTravel (_event) {
-				if (m._releaseTravel && Uize.Fade && Uize.Fade.fade) {
+				if (m._releaseTravel) {
 					/*
 						QUESTION: do we need to have state like dragCancelled that disables user interaction during release travel phase?
 					*/
@@ -211,7 +212,7 @@ Uize.module ({
 
 			function _cancelDrag (_event) {
 				m.set ({_dragCancelled:_true});
-				if (m._cancelFade && Uize.Fade && Uize.Fade.fade) {
+				if (m._cancelFade) {
 					_fadeDragMoveTo ('inCancel',_eventStartPos,500,m._cancelFade);
 				} else {
 					_dragMove (_eventStartPos [0],_eventStartPos [1]);
