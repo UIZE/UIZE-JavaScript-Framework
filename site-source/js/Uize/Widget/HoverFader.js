@@ -87,7 +87,7 @@ Uize.module ({
 	name:'Uize.Widget.HoverFader',
 	required:[
 		'Uize.Fx',
-		'Uize.Fade.xFactory',
+		'Uize.Fade.Factory',
 		'Uize.Dom.Basics'
 	],
 	builder:function (_superclass) {
@@ -128,7 +128,7 @@ Uize.module ({
 							_nodesLengthMinus1 = _nodes.length - 1,
 							_lastNodeNo
 						;
-						Uize.Fade.fade (
+						Uize.Fade.Factory.fade (
 							function (_nodeNo) {
 								if (_lastNodeNo == null)
 									_lastNodeNo = _nodeNo - 1
