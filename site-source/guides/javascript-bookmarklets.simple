@@ -429,10 +429,10 @@ Useful Troubleshooting Bookmarklets
 			(function () {
 				function _performBookmarkletAction () {
 					Uize.require (
-						['Uize.Fade','Uize.Fade.xFactory','Uize.Curve.Rubber'],
+						['Uize.Fade.Factory','Uize.Curve.Rubber'],
 						function () {
 							var _newTitle = document.title;
-							Uize.Fade.fade (
+							Uize.Fade.Factory.fade (
 								function (_value) {document.title = _newTitle.slice (0,_value)},
 								0,
 								_newTitle.length,
@@ -467,7 +467,7 @@ Useful Troubleshooting Bookmarklets
 
 			SCRUNCHED BOOKMARKLET
 			............................................................................
-			javascript:(function(){function _a(){Uize.module({required:['Uize.Fade','Uize.Fade.xFactory','Uize.Curve.Rubber'],builder:function(){var _b=document.title;Uize.Fade.fade(function(_c){document.title=_b.slice(0,_c)},0,_b.length,1000,{quantization:1,curve:Uize.Curve.Rubber.easeOutBounce(4,1.5)})}})}if(window.Uize)_a();else{var _d=document.createElement('script');_d.src='http://www.uize.com/js/Uize.js';if(_d.readyState)_d.onreadystatechange=function(){if(_d.readyState=='loaded'||_d.readyState=='complete')_d.onreadystatechange=_a();};else _d.onload=_a;document.body.appendChild(_d);}})();
+			javascript:(function(){function _a(){Uize.module({required:['Uize.Fade.Factory','Uize.Curve.Rubber'],builder:function(){var _b=document.title;Uize.Fade.Factory.fade(function(_c){document.title=_b.slice(0,_c)},0,_b.length,1000,{quantization:1,curve:Uize.Curve.Rubber.easeOutBounce(4,1.5)})}})}if(window.Uize)_a();else{var _d=document.createElement('script');_d.src='http://www.uize.com/js/Uize.js';if(_d.readyState)_d.onreadystatechange=function(){if(_d.readyState=='loaded'||_d.readyState=='complete')_d.onreadystatechange=_a();};else _d.onload=_a;document.body.appendChild(_d);}})();
 			............................................................................
 
 		More Examples
