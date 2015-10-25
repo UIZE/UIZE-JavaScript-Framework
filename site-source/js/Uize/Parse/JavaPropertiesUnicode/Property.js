@@ -33,14 +33,14 @@ Uize.module ({
 	builder:function (_superclass) {
 		'use strict';
 
-		var
-			_class = _superclass.subclass (),
-			_parserClassesByType = _class.prototype.parserClassesByType
-		;
-		_parserClassesByType.propertyName = Uize.Parse.JavaPropertiesUnicode.PropertyName;
-		_parserClassesByType.propertyValue = Uize.Parse.JavaPropertiesUnicode.PropertyValue;
-
-		return _class;
+		return _superclass.subclass ({
+			instanceProperties:{
+				parserClassesByType:{
+					propertyName:Uize.Parse.JavaPropertiesUnicode.PropertyName,
+					propertyValue:Uize.Parse.JavaPropertiesUnicode.PropertyValue
+				}
+			}
+		});
 	}
 });
 
