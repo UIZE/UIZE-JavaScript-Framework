@@ -1,0 +1,21 @@
+The =Uize.Fade.xFactory= module has been deprecated as an extension module that extends the =Uize.Fade= class, in favor of the new =Uize.Fade.Factory= pure package module containing static methods.
+
+All the static methods defined in the =Uize.Fade.xFactory= extension module have been migrated to the new =Uize.Fade.Factory= module as follows...
+
+SUMMARY
+.........................................................................
+Uize.Fade.fade            >> BECOMES >>  Uize.Fade.Factory.fade
+Uize.Fade.fadeMethod      >> BECOMES >>  Uize.Fade.Factory.fadeMethod
+Uize.Fade.fadeProperties  >> BECOMES >>  Uize.Fade.Factory.fadeProperties
+Uize.Fade.fadeProperty    >> BECOMES >>  Uize.Fade.Factory.fadeProperty
+.........................................................................
+
+BACKWARDS COMPATIBILITY
+
+Because the =Uize.Fade.xFactory= module has only been deprecated and has not yet been eliminated, code currently using it should continue to work. However, code that was previously using the methods defined in the =Uize.Fade.xFactory= module should be updated to use the equivalent methods from the new =Uize.Fade.Factory= module.
+
+....................................................................................
+<< metadata >>
+
+title: 2015-10-24 - DEPRECATED MODULE - Uize.Fade.xFactory
+....................................................................................
