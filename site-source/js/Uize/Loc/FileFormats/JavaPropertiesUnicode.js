@@ -33,14 +33,12 @@ Uize.module ({
 	builder:function () {
 		'use strict';
 
-		return Uize.copyInto (
-			Uize.package (),
-			Uize.Loc.FileFormats.JavaProperties,
-			{
-				documentParser:Uize.Parse.JavaPropertiesUnicode.Document,
-				propertyParser:Uize.Parse.JavaPropertiesUnicode.Property
-			}
-		);
+		return Uize.package ({
+			to:Uize.Loc.FileFormats.JavaProperties.to,
+			from:Uize.Loc.FileFormats.JavaProperties.from,
+			documentParser:Uize.Parse.JavaPropertiesUnicode.Document,
+			propertyParser:Uize.Parse.JavaPropertiesUnicode.Property
+		});
 	}
 });
 
