@@ -72,7 +72,7 @@ Some Examples
 	Using Animation In Your Widgets
 		- do you want to build a widget that incorporates animation?
 			- Uize.Fade
-			- Uize.Fade.xFactory
+			- Uize.Fade.Factory
 			- Uize.Fx
 
 	Widgets That Incorporate Animation
@@ -239,11 +239,11 @@ The Engine
 The Fade Factory
 	The UIZE JavaScript Framework provides a higher level construct for initiating fades without having to deal directly with the =Uize.Fade= class.
 
-	In the section `The Engine` we looked at the most atomic unit of animations: an instance of the =Uize.Fade= class. When using the =Uize.Fade= class directly, it is your responsibility to keep track of the fade instances you create, wire event handlers for them, start them and and stop them as desired, etc. For certain situations where you just want to quickly kick off an animation and where your code doesn't have a long-term interest in holding on to the =Uize.Fade= instance used to service the animation, the =Uize.Fade.xFactory= extension module comes in, providing a number of useful factory methods for initiating fades in a carefree manner.
+	In the section `The Engine` we looked at the most atomic unit of animations: an instance of the =Uize.Fade= class. When using the =Uize.Fade= class directly, it is your responsibility to keep track of the fade instances you create, wire event handlers for them, start them and and stop them as desired, etc. For certain situations where you just want to quickly kick off an animation and where your code doesn't have a long-term interest in holding on to the =Uize.Fade= instance used to service the animation, the =Uize.Fade.Factory= module comes in, providing a number of useful factory methods for initiating fades in a carefree manner.
 
 	EXAMPLE
 	............................................................................................
-	Uize.Fade.fade (
+	Uize.Fade.Factory.fade (
 		function (value) {Uize.Dom.Basics.setStyle ('myNode',value)},  // update handler function
 		{left:0,top:0,width:10,height:10},                             // start value
 		{left:100,top:100,width:200,height:200},                       // end value
@@ -252,7 +252,7 @@ The Fade Factory
 	);
 	............................................................................................
 
-	The above example is a reformulation of the first example shown in the `compound Value Interpolation` section, to now use the =Uize.Fade.fade= static method that is defined in the =Uize.Fade.xFactory= extension module. If you compare the two examples, you will notice that this one is shorter. It's still not as short as it could be, because we're not using the convenient =Uize.Fx.fadeStyle= static method that's defined in the =Uize.Fx= module and that's designed specifically for the purpose of making `animating CSS style properties` dead simple. It is, however, shorter than the example that directly uses the =Uize.Fade= class, because it leaves it to the =Uize.Fade.fade= method to create the =Uize.Fade= instance, wire event handlers, and start the fade.
+	The above example is a reformulation of the first example shown in the `compound Value Interpolation` section, to now use the =Uize.Fade.Factory.fade= static method that is defined in the =Uize.Fade.Factory= module. If you compare the two examples, you will notice that this one is shorter. It's still not as short as it could be, because we're not using the convenient =Uize.Fx.fadeStyle= static method that's defined in the =Uize.Fx= module and that's designed specifically for the purpose of making `animating CSS style properties` dead simple. It is, however, shorter than the example that directly uses the =Uize.Fade= class, because it leaves it to the =Uize.Fade.Factory.fade= method to create the =Uize.Fade= instance, wire event handlers, and start the fade.
 
 	Looking at the example, you should notice a few important things:
 
@@ -269,13 +269,13 @@ The Fade Factory
 		This particular behavior comes in handy when we want to interpolate an arguments array for a function call, between a start arguments array and an end arguments array. Consider the following example...
 
 		EXAMPLE
-		...........................................................................
-		Uize.Fade.fade (Uize.Dom.Basics.setOpacity,['myNode',1],['myNode',0],2000);
-		...........................................................................
+		...................................................................................
+		Uize.Fade.Factory.fade (Uize.Dom.Basics.setOpacity,['myNode',1],['myNode',0],2000);
+		...................................................................................
 
 		In the above example, we are animating calls to the =Uize.Dom.Basics.setOpacity= static method defined in the =Uize.Dom.Basics= module in order to fade the opacity of the node with the =id= of ='myNode'= from =1= to =0= over a period of =2000= milliseconds (2 seconds). The start and end values for the fade are arguments arrays for the function call, with the first argument specifying the DOM node and the second argument specifying the opacity level. What is interpolated for each update of the fade is an arguments array where the first element will always be ='myNode'=, and the second element will be an interpolated floating point number in the range of =1= to =0=.
 
-		This principle applies fundamentally to the way that the =Uize.Fade= class does interpolation, so we get the benefit of it in the =Uize.Fade.fade= static method - and all the other factory static methods that are implemented by the =Uize.Fade.xFactory= module - because the =Uize.Fade.xFactory= module is built on top of the =Uize.Fade= class.
+		This principle applies fundamentally to the way that the =Uize.Fade= class does interpolation, so we get the benefit of it in the =Uize.Fade.Factory.fade= static method - and all the other factory static methods that are implemented by the =Uize.Fade.Factory= module - because the =Uize.Fade.Factory= module is built around the =Uize.Fade= class.
 
 	### Fade Pool
 		there's more to the carefree initiation of fades than just wiring event handlers and calling start
@@ -288,201 +288,201 @@ The Fade Factory
 	Fading a Function Call
 		In the most basic case, you may wish to animate the calling of an update function.
 
-		In such cases, the generic =Uize.Fade.fade= static method will do the job. For this method, the start value can be an array that represents the values for the arguments of the function call at the start of the fade. Similarly, the end value can be an array for the arguments at the end of the fade. At every update, the =Uize.Fade= class will interpolate an arguments set, whose values are somewhere between the arguments' values at the start and end of the fade, and then supply that interpolated arguments set to the function when calling it. Consider the following example...
+		In such cases, the generic =Uize.Fade.Factory.fade= static method will do the job. For this method, the start value can be an array that represents the values for the arguments of the function call at the start of the fade. Similarly, the end value can be an array for the arguments at the end of the fade. At every update, the =Uize.Fade= class will interpolate an arguments set, whose values are somewhere between the arguments' values at the start and end of the fade, and then supply that interpolated arguments set to the function when calling it. Consider the following example...
 
 		EXAMPLE
-		............................................
-		Uize.Fade.fade (scrollTo,[0,0],[0,200],500);
-		............................................
+		....................................................
+		Uize.Fade.Factory.fade (scrollTo,[0,0],[0,200],500);
+		....................................................
 
 		In the above example, the vertical scroll position of the document will be faded from =0= to =200= over a half second.
 
-		The =scrollTo= function is a property of the =window= object - it really doesn't have to be called as a method on the =window= object. It takes two parameters: left scroll position, and top scroll position. Using the =Uize.Fade.fade= method to fade calls to this function, a start parameter list of =[0,0]= is specified, and an end parameter list of =[0,200]= is specified. This has the effect of fading the scroll position of the window from 0,0 to 0,200. In this example, the left scroll position is the same at the start and end of the fade, but there's no saying that it has to be.
+		The =scrollTo= function is a property of the =window= object - it really doesn't have to be called as a method on the =window= object. It takes two parameters: left scroll position, and top scroll position. Using the =Uize.Fade.Factory.fade= method to fade calls to this function, a start parameter list of =[0,0]= is specified, and an end parameter list of =[0,200]= is specified. This has the effect of fading the scroll position of the window from 0,0 to 0,200. In this example, the left scroll position is the same at the start and end of the fade, but there's no saying that it has to be.
 
-		Being able to easily fade function calls with interpolated argument lists is very powerful and makes it easy to do quite a lot in just a short statement. In another example, one could achieve a window roll down effect with a statement like =Uize.Fade.fade (resizeTo,[1024,0],[1024,768],1000)=.
+		Being able to easily fade function calls with interpolated argument lists is very powerful and makes it easy to do quite a lot in just a short statement. In another example, one could achieve a window roll down effect with a statement like =Uize.Fade.Factory.fade (resizeTo,[1024,0],[1024,768],1000)=.
 
 		Fading Anonymous Function Calls
-			There's no saying that a function that is being faded using the =Uize.Fade.fade= method has to be a named function - it could just as well be anonymous.
+			There's no saying that a function that is being faded using the =Uize.Fade.Factory.fade= method has to be a named function - it could just as well be anonymous.
 
 			For an example of this, refer back to the first example of the section `The Fade Factory`.
 
 		Fading Static Methods As Functions
-			For fading static methods, one can usually just use the =Uize.Fade.fade= method.
+			For fading static methods, one can usually just use the =Uize.Fade.Factory.fade= method.
 
 			This is because most static methods don't care about the context on which they are called and are really just static properties that happen to be references to functions. This is the case with most of the static methods defined in package modules, such as the =Uize.Dom.Basics.setOpacity= static method of the =Uize.Dom.Basics= module. So, the following two statements would be equivalent...
 
-			...................................................................................
-			Uize.Fade.fade (Uize.Dom.Basics.setOpacity,['myNode',1],['myNode',0],2000);
+			...........................................................................................
+			Uize.Fade.Factory.fade (Uize.Dom.Basics.setOpacity,['myNode',1],['myNode',0],2000);
 
-			Uize.Fade.fadeMethod (Uize.Dom.Basics,'setOpacity',['myNode',1],['myNode',0],2000);
-			...................................................................................
+			Uize.Fade.Factory.fadeMethod (Uize.Dom.Basics,'setOpacity',['myNode',1],['myNode',0],2000);
+			...........................................................................................
 
-			In the above example, both statements would have the effect of fading the opacity of the node with the =id= of ='myNode'= from =1= to =0= over a period of =2000= milliseconds (2 seconds). The first statement is animating calls to the function =Uize.Dom.Basics.setOpacity=, while the second statement is animating calling the method =setOpacity= on the context =Uize.Dom.Basics=. Now, the implementation of the =Uize.Dom.Basics.setOpacity= static method does not use the =this= keyword, so the context that it is called on does not affect its execution. So, one may as well just animate the opacity using the `fading a function call` approach. As you can see, in such cases the =Uize.Fade.fadeMethod= method does not even produce the most concise code.
+			In the above example, both statements would have the effect of fading the opacity of the node with the =id= of ='myNode'= from =1= to =0= over a period of =2000= milliseconds (2 seconds). The first statement is animating calls to the function =Uize.Dom.Basics.setOpacity=, while the second statement is animating calling the method =setOpacity= on the context =Uize.Dom.Basics=. Now, the implementation of the =Uize.Dom.Basics.setOpacity= static method does not use the =this= keyword, so the context that it is called on does not affect its execution. So, one may as well just animate the opacity using the `fading a function call` approach. As you can see, in such cases the =Uize.Fade.Factory.fadeMethod= method does not even produce the most concise code.
 
 			IMPORTANT
 
 			An exception to this rule would be certain class methods that behave differently, depending upon which class they're called on, or that modify or access properties specific to the class on which they're called. So, the following two examples would most certainly *NOT* be equivalent...
 
 			INCORRECT
-			.......................................................................
-			Uize.Fade.fade (Uize.Widget.Bar.Slider.set,{value:0},{value:100},2000);
-			.......................................................................
+			...............................................................................
+			Uize.Fade.Factory.fade (Uize.Widget.Bar.Slider.set,{value:0},{value:100},2000);
+			...............................................................................
 
 			CORRECT
-			...............................................................................
-			Uize.Fade.fadeMethod (Uize.Widget.Bar.Slider,'set',{value:0},{value:100},2000);
-			...............................................................................
+			.......................................................................................
+			Uize.Fade.Factory.fadeMethod (Uize.Widget.Bar.Slider,'set',{value:0},{value:100},2000);
+			.......................................................................................
 
-			The first example will simply not work - period. That's because the =Uize.Widget.Bar.Slider.set= method needs a class as a context, and by using the =Uize.Fade.fade= method it will simply be called as a function - without a context. The approach using the =Uize.Fade.fadeMethod= method works, because the context =Uize.Widget.Bar.Slider= is specified using the first parameter and this context is remembered for when the =set= method is to be called. Admittedly, you're not likely to want to fade the setting of the value for a state property on a class, but this example at least illustrates the point.
+			The first example will simply not work - period. That's because the =Uize.Widget.Bar.Slider.set= method needs a class as a context, and by using the =Uize.Fade.Factory.fade= method it will simply be called as a function - without a context. The approach using the =Uize.Fade.Factory.fadeMethod= method works, because the context =Uize.Widget.Bar.Slider= is specified using the first parameter and this context is remembered for when the =set= method is to be called. Admittedly, you're not likely to want to fade the setting of the value for a state property on a class, but this example at least illustrates the point.
 
-			In cases where you need to animate the calling of a particular method on a particular context, you can use the =Uize.Fade.fadeMethod= static method, as discussed in the section `Fading a Method Call`.
+			In cases where you need to animate the calling of a particular method on a particular context, you can use the =Uize.Fade.Factory.fadeMethod= static method, as discussed in the section `Fading a Method Call`.
 
 		Fading Uize.Dom.Basics Method Calls
-			The =Uize.Fade.fade= static method lets you animate calls to any arbitrary function, including static methods of the =Uize.Dom.Basics= module that don't need to be called with =Uize.Dom.Basics= as the context (see `Fading Static Methods As Functions`).
+			The =Uize.Fade.Factory.fade= static method lets you animate calls to any arbitrary function, including static methods of the =Uize.Dom.Basics= module that don't need to be called with =Uize.Dom.Basics= as the context (see `Fading Static Methods As Functions`).
 
 			EXAMPLE
-			...............................................................................
-			Uize.Fade.fade (Uize.Dom.Basics.setValue,['testNode',0],['testNode',100],5000);
-			...............................................................................
+			.......................................................................................
+			Uize.Fade.Factory.fade (Uize.Dom.Basics.setValue,['testNode',0],['testNode',100],5000);
+			.......................................................................................
 
 			In the above example, a value will be faded between =0= and =100= over a period of =5000= milliseconds (5 seconds) and this value will be displayed in the DOM node with the =id= of ='testNode'=. The =Uize.Dom.Basics.setValue= method takes two arguments - the first for the DOM node, and the second for the value. Because the value of the first parameter is the same between the start value arguments array and the end value arguments array, its value is not interpolated and is always ='testNode'=.
 
 	Fading a Method Call
 		There may be cases where you would like to animate the calling of a method - either on an instance or on a class.
 
-		Of course, in such cases, you could always use the generic =Uize.Fade.fade= static method for initiating a genertic fade and then specify an anonymous function as the update handler, and then your update function could call the method, relying on the fact that the context and method name are known in the enclosing scope of the anonymous function. Well, you could always do that, but you do not need to - the =Uize.Fade.xFactory= module implements a =Uize.Fade.fadeMethod= static method that does just the job.
+		Of course, in such cases, you could always use the generic =Uize.Fade.Factory.fade= static method for initiating a genertic fade and then specify an anonymous function as the update handler, and then your update function could call the method, relying on the fact that the context and method name are known in the enclosing scope of the anonymous function. Well, you could always do that, but you do not need to - the =Uize.Fade.Factory= module implements a =Uize.Fade.Factory.fadeMethod= static method that does just the job.
 
 		EXAMPLE
-		............................................................................
-		Uize.Fade.fadeMethod (marquee,'set',{left:0,top:0},{left:100,top:100},2000);
-		............................................................................
+		....................................................................................
+		Uize.Fade.Factory.fadeMethod (marquee,'set',{left:0,top:0},{left:100,top:100},2000);
+		....................................................................................
 
-		The above example animates the position of a marquee widget (an instance of the =Uize.Widget.Resizer.Marquee= class) from 0,0 to 100,100 over a period of =2000= milliseconds (2 seconds). With the =Uize.Fade.fadeMethod= method, the first parameter is the context or object on which the method should be called, and the second parameter is the name of the method to call, or a reference to the function that implements the method.
+		The above example animates the position of a marquee widget (an instance of the =Uize.Widget.Resizer.Marquee= class) from 0,0 to 100,100 over a period of =2000= milliseconds (2 seconds). With the =Uize.Fade.Factory.fadeMethod= method, the first parameter is the context or object on which the method should be called, and the second parameter is the name of the method to call, or a reference to the function that implements the method.
 
-		If you had to write the above code using the generic =Uize.Fade.fade= method, it would be a bit longer, as follows...
+		If you had to write the above code using the generic =Uize.Fade.Factory.fade= method, it would be a bit longer, as follows...
 
 		................................................................................
-		Uize.Fade.fade (
+		Uize.Fade.Factory.fade (
 			function (value) {marquee.set (value)},{left:0,top:0},{left:100,top:100},2000
 		);
 		................................................................................
 
 		Fading Static Methods
-			For fading static methods, it is not usually necessary to use the =Uize.Fade.fadeMethod= method.
+			For fading static methods, it is not usually necessary to use the =Uize.Fade.Factory.fadeMethod= method.
 
 			This is explained in more detail in the section `Fading Static Methods As Functions`.
 
 		Specifying Method to Fade
-			When using the =Uize.Fade.fadeMethod= method, you have flexibility in how you specify the method you wish to fade.
+			When using the =Uize.Fade.Factory.fadeMethod= method, you have flexibility in how you specify the method you wish to fade.
 
-			The value for the second parameter of the =Uize.Fade.fadeMethod= method can be a string, being the name of the method to call, or a reference to the method's function. When specifying a function reference for this parameter, the reference can be accessed from the prototype of the class of the instance (if it is an instance method), or it can be referenced from the instance (if it is an instance method), or it can be accessed from the class (if it is a class method), or it may be a function that is not a method of the instance but that one would like to be called as though it were a method of the instance, such as an anonymous function or a method of some other class.
+			The value for the second parameter of the =Uize.Fade.Factory.fadeMethod= method can be a string, being the name of the method to call, or a reference to the method's function. When specifying a function reference for this parameter, the reference can be accessed from the prototype of the class of the instance (if it is an instance method), or it can be referenced from the instance (if it is an instance method), or it can be accessed from the class (if it is a class method), or it may be a function that is not a method of the instance but that one would like to be called as though it were a method of the instance, such as an anonymous function or a method of some other class.
 
 			In the following example, where we wish to fade a call to the =set= instance method of the instance =slider=, any of the statements would do the trick...
 
 			EXAMPLE
-			.....................................................................................
+			.............................................................................................
 			// method specified using a string value
-			Uize.Fade.fadeMethod (slider,'set',{value:0},{value:100},2000);
+			Uize.Fade.Factory.fadeMethod (slider,'set',{value:0},{value:100},2000);
 
 
 			// method specified by function reference, accessing it from the instance
-			Uize.Fade.fadeMethod (slider,slider.set,{value:0},{value:100},2000);
+			Uize.Fade.Factory.fadeMethod (slider,slider.set,{value:0},{value:100},2000);
 
 
 			// method specified by function reference, accessed from instance's class' prototype
-			Uize.Fade.fadeMethod (slider,slider.Class.prototype.set,{value:0},{value:100},2000);
+			Uize.Fade.Factory.fadeMethod (slider,slider.Class.prototype.set,{value:0},{value:100},2000);
 
 
 			// method specified by function reference, accessed from instance's class' prototype
-			Uize.Fade.fadeMethod (
+			Uize.Fade.Factory.fadeMethod (
 				slider,Uize.Widget.Bar.Slider.prototype.set,{value:0},{value:100},2000
 			);
 
 
 			// method is an anonymous function that is called on the instance as a method
-			Uize.Fade.fadeMethod (slider,function (value) {this.set ({value:value})},0,100,2000);
-			.....................................................................................
+			Uize.Fade.Factory.fadeMethod (slider,function (value) {this.set ({value:value})},0,100,2000);
+			.............................................................................................
 
 			Naturally, the first statement of the above set is the most preferable, but who knows how you might get access to the method to be faded in your own code. This example simply illustrates that you have options, and flexibility.
 
 	Fading the value State Property
-		The =Uize.Fade.fade= static method that is implemented in the =Uize.Fade.xFactory= extension module supports special handling when the target of a fade is an instance of a =Uize.Class= subclass.
+		The =Uize.Fade.Factory.fade= static method that is implemented in the =Uize.Fade.Factory= module supports special handling when the target of a fade is an instance of a =Uize.Class= subclass.
 
-		What does it mean to fade an instance? When an instance is specified in place of an update function when calling the =Uize.Fade.fade= method, this method fades the value of the specified instance's =value= state property. So, if the class of your instance implements a =value= state property, then you can use this convenient shorthand. Consider the following example...
+		What does it mean to fade an instance? When an instance is specified in place of an update function when calling the =Uize.Fade.Factory.fade= method, this method fades the value of the specified instance's =value= state property. So, if the class of your instance implements a =value= state property, then you can use this convenient shorthand. Consider the following example...
 
 		EXAMPLE
-		...................................
-		Uize.Fade.fade (slider,0,100,2000);
-		...................................
+		...........................................
+		Uize.Fade.Factory.fade (slider,0,100,2000);
+		...........................................
 
 		In the above example, =slider= is an instance of the =Uize.Widget.Bar.Slider= class, and this class has a =value= state property. So, the statement will have the effect of fading the value of the slider widget from =0= to =100= over a period of =2000= milliseconds (2 seconds) - short 'n sweet. Of course, you could accomplish the same effect by `fading a method call` or by `fading a state property`, as in...
 
-		...............................................................
+		.......................................................................
 		// fading the slider value by fading a method call
-		Uize.Fade.fadeMethod (slider,'set',{value:0},{value:100},2000);
+		Uize.Fade.Factory.fadeMethod (slider,'set',{value:0},{value:100},2000);
 
 		// fading the slider value by fading a state property
-		Uize.Fade.fadeProperty (slider,'value',0,100,2000);
-		...............................................................
+		Uize.Fade.Factory.fadeProperty (slider,'value',0,100,2000);
+		.......................................................................
 
 		But, why would you want to write more code, if you could avoid it?
 
 	Fading a State Property
-		While the =Uize.Fade.fade= static method can be used for `fading the value state property`, fading a state property other than the =value= property can be accomplished using the =Uize.Fade.fadeProperty= static method.
+		While the =Uize.Fade.Factory.fade= static method can be used for `fading the value state property`, fading a state property other than the =value= property can be accomplished using the =Uize.Fade.Factory.fadeProperty= static method.
 
 		EXAMPLE
-		.....................................................
-		Uize.Fade.fadeProperty (marquee,'width',10,100,2000);
-		.....................................................
+		.............................................................
+		Uize.Fade.Factory.fadeProperty (marquee,'width',10,100,2000);
+		.............................................................
 
 		In the above example, =marquee= is an instance of the =Uize.Widget.Resizer.Marquee= class. The statement will fade the value of its =width= state property from =10= to =200= over a period of =2000= milliseconds (2 seconds).
 
 	Fading Many State Properties
-		While the =Uize.Fade.fadeProperty= static method can be used for `fading a state property`, fading values for multiple state properties of an instance in a single fade can be accomplished using the =Uize.Fade.fadeProperties= static method.
+		While the =Uize.Fade.Factory.fadeProperty= static method can be used for `fading a state property`, fading values for multiple state properties of an instance in a single fade can be accomplished using the =Uize.Fade.Factory.fadeProperties= static method.
 
 		EXAMPLE
-		....................................................................................
-		Uize.Fade.fadeProperties (marquee,{width:10,height:10},{width:100,height:100},2000);
-		....................................................................................
+		............................................................................................
+		Uize.Fade.Factory.fadeProperties (marquee,{width:10,height:10},{width:100,height:100},2000);
+		............................................................................................
 
 		In the above example, =marquee= is an instance of the =Uize.Widget.Resizer.Marquee= class. The statement will fade its dimensions (i.e. the values of its =width= and =height= state properties) from 10 x 10 to 100 x 100 over a period of =2000= milliseconds (2 seconds).
 
-		Now, for what it's worth, you could also accomplish the same effect using the =Uize.Fade.fadeMethod= method, as follows...
+		Now, for what it's worth, you could also accomplish the same effect using the =Uize.Fade.Factory.fadeMethod= method, as follows...
 
-		......................................................................................
-		Uize.Fade.fadeMethod (marquee,'set',{width:10,height:10},{width:100,height:100},2000);
-		......................................................................................
+		..............................................................................................
+		Uize.Fade.Factory.fadeMethod (marquee,'set',{width:10,height:10},{width:100,height:100},2000);
+		..............................................................................................
 
-		As you can see, using the =Uize.Fade.fadeProperties= method isn't that much shorter, so it's offered more as a semantic convenience - use whichever makes more sense to you.
+		As you can see, using the =Uize.Fade.Factory.fadeProperties= method isn't that much shorter, so it's offered more as a semantic convenience - use whichever makes more sense to you.
 
 		Fading From Current Values
-			To fade state properties from their current values to new values, simply specify the value =null= for the =Uize.Fade.fadeProperties= method's =propertiesStartValuesOBJ= parameter, as in...
+			To fade state properties from their current values to new values, simply specify the value =null= for the =Uize.Fade.Factory.fadeProperties= method's =propertiesStartValuesOBJ= parameter, as in...
 
 			EXAMPLE
-			....................................................................
-			Uize.Fade.fadeProperties (marquee,null,{width:100,height:100},2000);
-			....................................................................
+			............................................................................
+			Uize.Fade.Factory.fadeProperties (marquee,null,{width:100,height:100},2000);
+			............................................................................
 
 			The above example fades the dimensions of =marquee= from the current dimensions to 100 x 100 over a period of =2000= milliseconds (2 seconds).
 
 		Fading Back To Current Values
-			To fade state properties from new values back to their current values, simply specify the value =null= for the =Uize.Fade.fadeProperties= method's =propertiesEndValuesOBJ= parameter, as in...
+			To fade state properties from new values back to their current values, simply specify the value =null= for the =Uize.Fade.Factory.fadeProperties= method's =propertiesEndValuesOBJ= parameter, as in...
 
 			EXAMPLE
-			....................................................................
-			Uize.Fade.fadeProperties (marquee,{width:100,height:100},null,2000);
-			....................................................................
+			............................................................................
+			Uize.Fade.Factory.fadeProperties (marquee,{width:100,height:100},null,2000);
+			............................................................................
 
 			The above example fades the dimensions of =marquee= from 100 x 100 back to the current dimensions to over a period of =2000= milliseconds (2 seconds).
 
 		Mixed From / Back To Current
-			The =Uize.Fade.fadeProperties= method also supports fading certain state properties from their current values to new values, and other state properties from new values back to their current values - in the same fade process.
+			The =Uize.Fade.Factory.fadeProperties= method also supports fading certain state properties from their current values to new values, and other state properties from new values back to their current values - in the same fade process.
 
 			Basically, when specifying the values of state properties in either of the =propertiesStartValuesOBJ= or =propertiesEndValuesOBJ= parameters, specifying the value =null= for any property, or omitting that property when it is specified for the opposite end of the fade, will result in the current value of that property being used. Consider the following example...
 
-			.................................................................
-			Uize.Fade.fadeProperties (marquee,{width:100},{height:100},2000);
-			.................................................................
+			.........................................................................
+			Uize.Fade.Factory.fadeProperties (marquee,{width:100},{height:100},2000);
+			.........................................................................
 
 			In the above example, the =width= of the =marquee= instance is being faded from =100= back to its current value, while the =height= is being faded from its current value to =100=, over a period of =2000= milliseconds (2 seconds). Because a value is not specified for =width= in the =propertiesEndValuesOBJ= parameter, its current value is used as the end value. And because a value is not specified for =height= in the =propertiesStartValuesOBJ= parameter, its current value is used as the start value.
 
@@ -494,7 +494,7 @@ The Fade Factory
 		- ability to specify context and handler in target object
 
 Animating CSS Style Properties
-	While the =Uize.Fade.xFactory= extension module provides factory static methods for easily initiating generic kinds of animations, the UIZE JavaScript Framework also provides features specifically to ease the animation of CSS style properties.
+	While the =Uize.Fade.Factory= module provides factory static methods for easily initiating generic kinds of animations, the UIZE JavaScript Framework also provides features specifically to ease the animation of CSS style properties.
 
 	Arbitrary Properties
 		Many compelling effects can be achieved by animating the values of the wide array of CSS style properties that can be modified by JavaScript code.
@@ -533,7 +533,7 @@ Animating CSS Style Properties
 
 		- *From Current Values, Back To Current Values, and Mixed* - The =Uize.Fx.fadeStyle= method supports fades that start from the current style property values - as derived from the DOM node - and fade to specified values, fades that start from specified values and fade back to the current values, and fades where some properties fade from current to specified values and other properties fade from specified values to current values.
 
-		### builds upon Uize.Fade.xFactory
+		### builds upon Uize.Fade.Factory
 			- explain fade signature implications (link to `Fade Signature` section)
 
 	Animating CSS3 Style Properties
@@ -787,13 +787,13 @@ Curves
 		Controlling Effects
 			Because curve functions are supported by the =Uize.Fade= class, any modules that use instances of this class to drive fade effects can also use curve functions and permit curve functions to be used.
 
-			The Uize.Fade.xFactory Module
-				The various static methods defined in the =Uize.Fade.xFactory= extension module allow a curve function to be specified in the optional =fadePropertiesOBJ= parameter.
+			The Uize.Fade.Factory Module
+				The various static methods defined in the =Uize.Fade.Factory= module allow a curve function to be specified in the optional =fadePropertiesOBJ= parameter.
 
 				EXAMPLE
-				................................................................................
-				Uize.Fade.fade (scrollTo,[0,0],[0,200],800,{curve:Uize.Curve.easeInOutPow (4)});
-				................................................................................
+				........................................................................................
+				Uize.Fade.Factory.fade (scrollTo,[0,0],[0,200],800,{curve:Uize.Curve.easeInOutPow (4)});
+				........................................................................................
 
 			The Uize.Fx Module
 				The =Uize.Fx.fadeStyle= static method of the =Uize.Fx= module allows a curve function to be specified in its optional =fadePropertiesOBJ= parameter.
