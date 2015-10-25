@@ -120,7 +120,7 @@ Eliminate All Extension Modules
 		- =Uize.Color.xHsv=
 		- =Uize.Color.xSvgColors=
 		- =Uize.Color.xUtil=
-		- =Uize.Fade.xFactory=
+		- =Uize.Fx.xBorderRadius=
 		- =Uize.Fx.xShadows=
 		- =Uize.Widget.Collection.Dynamic.xDialogEditable=
 		- =Uize.Widget.Dialog.xResizable=
