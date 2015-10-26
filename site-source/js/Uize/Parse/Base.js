@@ -25,7 +25,7 @@
 
 Uize.module ({
 	name:'Uize.Parse.Base',
-	superclass:'Uize.BasicClass',
+	superclass:'Uize.Oop.BasicClass',
 	builder:function (_superclass) {
 		'use strict';
 

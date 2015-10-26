@@ -1,7 +1,7 @@
 /*______________
 |       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
 |     /      /  |   ---------------------------------------------------
-|    /    O /   |    MODULE : Uize.mClassFeatureDeclaration Mixin
+|    /    O /   |    MODULE : Uize.Oop.mClassFeatureDeclaration Mixin
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
 | /____/ /__/_| | COPYRIGHT : (c)2012-2015 UIZE
@@ -18,13 +18,13 @@
 
 /*?
 	Introduction
-		The =Uize.mClassFeatureDeclaration= mixin lets you mix in a feature declaration mechanism into class constructor functions.
+		The =Uize.Oop.mClassFeatureDeclaration= mixin lets you mix in a feature declaration mechanism into class constructor functions.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 */
 
 Uize.module ({
-	name:'Uize.mClassFeatureDeclaration',
+	name:'Uize.Oop.mClassFeatureDeclaration',
 	builder:function () {
 		'use strict';
 

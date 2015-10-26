@@ -347,7 +347,7 @@ Uize.module ({
 	required:[
 		'Uize.Util.Dependencies',
 		'Uize.Event.Bus',
-		'Uize.mClassFeatureDeclaration'
+		'Uize.Oop.mClassFeatureDeclaration'
 	],
 	builder:function () {
 		'use strict';
@@ -636,7 +636,7 @@ Uize.module ({
 			);
 
 			/*** Seed Feature Declaration Methods ***/
-				Uize.mClassFeatureDeclaration (_class);
+				Uize.Oop.mClassFeatureDeclaration (_class);
 
 				/*?
 					Static Methods

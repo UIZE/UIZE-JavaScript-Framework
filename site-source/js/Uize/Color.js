@@ -138,7 +138,7 @@
 
 Uize.module ({
 	name:'Uize.Color',
-	superclass:'Uize.BasicClass',
+	superclass:'Uize.Oop.BasicClass',
 	builder:function (_superclass) {
 		'use strict';
 

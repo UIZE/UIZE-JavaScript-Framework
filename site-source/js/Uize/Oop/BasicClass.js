@@ -1,7 +1,7 @@
 /*______________
 |       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
 |     /      /  |   ---------------------------------------------------
-|    /    O /   |    MODULE : Uize.BasicClass Class
+|    /    O /   |    MODULE : Uize.Oop.BasicClass Class
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
 | /____/ /__/_| | COPYRIGHT : (c)2015 UIZE
@@ -18,18 +18,18 @@
 
 /*?
 	Introduction
-		The =Uize.BasicClass= module implements an abstract base class for lightweight class modules.
+		The =Uize.Oop.BasicClass= module implements an abstract base class for lightweight class modules.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 */
 
 Uize.module ({
-	name:'Uize.BasicClass',
-	required:'Uize.mClassFeatureDeclaration',
+	name:'Uize.Oop.BasicClass',
+	required:'Uize.Oop.mClassFeatureDeclaration',
 	builder:function () {
 		'use strict';
 
-		return Uize.mClassFeatureDeclaration (function () {}).declare ({
+		return Uize.Oop.mClassFeatureDeclaration (function () {}).declare ({
 			staticMethods:{
 				subclass:function (_featuresByType) {
 					var
