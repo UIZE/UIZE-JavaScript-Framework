@@ -136,26 +136,6 @@ Basic Wireframe Documentation for *ALL* Modules
 	- static events
 	- etc.
 
-Restructure UIZE Web Site to be UIZE Application
-	Restructure the UIZE Web site project to be an application using the UIZE JavaScript Framework core.
-
-	POSSIBLE STRUCTURE
-	............................
-	UIZE-JavaScript-Framework
-		uize/
-			build.js
-			README
-			js/
-		uize-site/
-			.gitignore
-			uize-config.json
-			WSH-*.bat (build scripts triggers for Windows Script Host)
-			built/
-			logs/
-			source/
-			temp/
-	............................
-
 Improved Location of Source Code
 	For examples, modules, put source code into a peer folder, rather than child folder.
 
