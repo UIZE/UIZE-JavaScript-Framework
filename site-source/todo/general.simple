@@ -1,5 +1,27 @@
 This document lists to do tasks that relate to the UIZE JavaScript Framework in general - not relating to the documentation or the site (see [[documentation.html][TO DO - Documentation]]), or specific JavaScript modules (see [[modules.html][TO DO - Modules]]).
 
+Split UIZE Core and UIZE Web Site
+	Split out the UIZE core and UIZE Web site code into two separate repositories.
+
+	- the UIZE Web site will build like any other site that uses UIZE
+	- after the split, there will be two repos - one for the UIZE JavaScript Framework and one for the UIZE Web aite
+	- the split should be done in such a way as the full revision history is retained for files in both of the two new repos
+	- perhaps this would be the right time to create a new "uize" project for the core (as opposed to the current and slightly clumsy "UIZE-JavaScript-Framework"), so then we could have: uize and uize-site
+
+	Update Documentation
+		Documentation in the UIZE site should be updated appropriately to reflect the new structure, including...
+
+		- setup reference docs
+		- reference docs that mention that the repo contains a full Web site with examples
+
+	Improved Development Discipline
+		Creating a separate repo for the Web site would reinforce discipline around how changes to the UIZE core are made.
+
+		It would no longer be so easy to make changes across the core and Web site code in a single refactoring operation. So, treating the UIZE Web site as a true user of the framework, separate from the core code, will help to encourage more thoughtful evolutionary changes to the framework.
+
+	REFERENCE
+	- [[https://confluence.atlassian.com/bitbucket/split-a-repository-in-two-313464964.html]]
+
 Localization
 	Defaulting Missing Translations
 		Questions
