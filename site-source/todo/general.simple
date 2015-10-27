@@ -22,6 +22,15 @@ Split UIZE Core and UIZE Web Site
 	REFERENCE
 	- [[https://confluence.atlassian.com/bitbucket/split-a-repository-in-two-313464964.html]]
 
+Migrate Modules Into Deeper Namespaces
+	Migrate some modules at the root =Uize= namespace into deeper namespaces in order to tuck them away.
+
+	.....................
+	Uize.Cookie   ->  ???
+	Uize.Tooltip  ->  ???
+	Uize.Xml      ->  ???
+	.....................
+
 Localization
 	Defaulting Missing Translations
 		Questions

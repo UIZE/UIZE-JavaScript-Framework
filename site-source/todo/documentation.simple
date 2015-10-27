@@ -18,15 +18,8 @@ Site Nav Left Pane
 Scroll to Top
 	Implement animated scroll-to-top feature (arrow can be near bottom left in main content region.
 
-Improve Header
-	Make header be strictly a site header.
-
-	- to the header, add "UIZE JavaScript Framework" text that is linked to the homepage
-	- to the header, add a general search input box on the right side (as is typical in sites)
-	- move all contents that is currently in the header to within the main content region, at the top
-		- the page title
-		- the various buttons (possibly turn these into visually lighter weight pipe separated action links)
-	- adjust CSS to get rid of lines that separate the header from the gutter panes (it's a side effect of the drop shadows on the panes)
+Add Search to Header
+	Add a general search input box on the right side (as is typical in sites).
 
 Support External Code
 	Implement support for code that is external to the UIZE site.
@@ -225,15 +218,6 @@ gzipping Text Files
 
 	BACKGROUND
 	- [[http://httpd.apache.org/docs/2.0/mod/mod_deflate.html]]
-
-Migrate Modules Into Deeper Namespaces
-	Migrate some modules at the root =Uize= namespace into deeper namespaces in order to tuck them away.
-
-	.....................
-	Uize.Cookie   ->  ???
-	Uize.Tooltip  ->  ???
-	Uize.Xml      ->  ???
-	.....................
 
 Add Interview Questions
 	- the matrix
@@ -649,10 +633,6 @@ Site & Documentation (in order of priority)
 		A feature can be a side effect of an implementation by design.
 
 		In other words, an elegant design can have the intention of producing positive side effects. From a certain perspective, it might seem purely lucky or fortuitous that certain good things fall out of a particular implementation choice. But a good designer has their mind tuned to deliver positive knock-on effects from their design choices.
-
-UIZE guidelines
-	Development Practices
-		- only source in JavaScript files that are actually used on a page (same applies to CSS files)
 
 Overview
 	- mention Uize/uize/UIZE namespace considerations for developers
