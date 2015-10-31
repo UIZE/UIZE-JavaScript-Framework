@@ -29,7 +29,7 @@
 
 Uize.module ({
 	name:'Uize.Test',
-	superclass:'Uize.TestBase',
+	superclass:'Uize.Class.Test',
 	required:[
 		'Uize.Data.Compare',
 		'Uize.Json',
@@ -1375,7 +1375,7 @@ Uize.module ({
 								}
 								.............................
 
-								The value of the =propertyFullNameSTR= parameter should be a string that fully qualifies the path for referencing a property in the global context (e.g. ='Uize.TestBase.resolve'=). The =Uize.Test.splitHostAndProperty= method splits this string into host and property strings, and packages these two string values into an object. Supplied our example value of ='Uize.TestBase.resolve'=, the =Uize.Test.splitHostAndProperty= method would return the object ={host:'Uize.TestBase',property:'resolve'}=.
+								The value of the =propertyFullNameSTR= parameter should be a string that fully qualifies the path for referencing a property in the global context (e.g. ='Uize.Class.Test.resolve'=). The =Uize.Test.splitHostAndProperty= method splits this string into host and property strings, and packages these two string values into an object. Supplied our example value of ='Uize.Class.Test.resolve'=, the =Uize.Test.splitHostAndProperty= method would return the object ={host:'Uize.Class.Test',property:'resolve'}=.
 					*/
 				},
 
@@ -1461,12 +1461,12 @@ Uize.module ({
 									propertyFullNameSTR
 										A string, specifying the full name of the static property, including the full host path.
 
-										For example, with the "isAsync" property of the =Uize.TestBase= module, the value specified for the =propertyFullNameSTR= parameter would be ='Uize.TestBase.isAsync'=.
+										For example, with the "isAsync" property of the =Uize.Class.Test= module, the value specified for the =propertyFullNameSTR= parameter would be ='Uize.Class.Test.isAsync'=.
 
 									What Comprises a Static Property Test
 										The test class created by the =Uize.Test.staticPropertyTest= method has two child tests.
 
-										The first test tests whether or not the property's host is defined (with the value ='Uize.TestBase.isAsync'= specified for the =propertyFullNameSTR= parameter, that would test for =Uize.Test= to be defined). The second test tests that the specified property is of the specified type.
+										The first test tests whether or not the property's host is defined (with the value ='Uize.Class.Test.isAsync'= specified for the =propertyFullNameSTR= parameter, that would test for =Uize.Test= to be defined). The second test tests that the specified property is of the specified type.
 
 									An Example
 										The following example serves merely to illustrate the behavior of a static property test (typically static property tests won't be created in this way - they will typically be incorporated into a list of other tests, in a more concise declarative statement).
@@ -1475,7 +1475,7 @@ Uize.module ({
 										..................................................................
 										var
 											StaticPropertyTestClass = Uize.Test.staticPropertyTest (
-												'Uize.TestBase.isAsync','object'
+												'Uize.Class.Test.isAsync','object'
 											),
 											staticPropertyTest = new StaticPropertyTestClass
 										;
@@ -1486,7 +1486,7 @@ Uize.module ({
 										);
 										..................................................................
 
-										In the above example, a test class is being created to test for the =Uize.TestBase.isAsync= static property. The test class is assigned to the =StaticPropertyTestClass= variable. Then, an instance of that test class is created, assigned to the =staticPropertyTest= variable, and then run. Upon completion, the callback function is executed and the result of the test is reported in a JavaScript alert. The result is =true= (assuming something hasn't been broken in the =Uize.Test= module), since the =Uize.TestBase.isAsync= static property is of type ='object'=.
+										In the above example, a test class is being created to test for the =Uize.Class.Test.isAsync= static property. The test class is assigned to the =StaticPropertyTestClass= variable. Then, an instance of that test class is created, assigned to the =staticPropertyTest= variable, and then run. Upon completion, the callback function is executed and the result of the test is reported in a JavaScript alert. The result is =true= (assuming something hasn't been broken in the =Uize.Test= module), since the =Uize.Class.Test.isAsync= static property is of type ='object'=.
 
 									NOTES
 									- this method is one of the many available `test class factory methods`
@@ -1564,7 +1564,7 @@ Uize.module ({
 									methodFullNameSTR
 										A string, specifying the full name of the static method, including the full host path.
 
-										For example, with the "resolve" method of the =Uize.TestBase= module, the value specified for the =methodFullNameSTR= parameter would be ='Uize.TestBase.resolve'=.
+										For example, with the "resolve" method of the =Uize.Class.Test= module, the value specified for the =methodFullNameSTR= parameter would be ='Uize.Class.Test.resolve'=.
 
 									casesARRAY
 										An array, containing a sequence of test cases, all of which need to succeed in order for the static method test to succeed.

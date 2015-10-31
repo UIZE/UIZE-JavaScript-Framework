@@ -1,7 +1,7 @@
 /*______________
 |       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
 |     /      /  |   ---------------------------------------------------
-|    /    O /   |    MODULE : Uize.TestBase Class
+|    /    O /   |    MODULE : Uize.Class.Test Class
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
 | /____/ /__/_| | COPYRIGHT : (c)2010-2015 UIZE
@@ -18,13 +18,13 @@
 
 /*?
 	Introduction
-		The =Uize.TestBase= class provides a minimal base class for test classes of various types.
+		The =Uize.Class.Test= class provides a minimal base class for test classes of various types.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 */
 
 Uize.module ({
-	name:'Uize.TestBase',
+	name:'Uize.Class.Test',
 	superclass:'Uize.Class',
 	required:'Uize.Util.Oop',
 	builder:function (_superclass) {
@@ -56,10 +56,10 @@ Uize.module ({
 				isAsync:_isAsync = function () {
 					/*?
 						Static Properties
-							Uize.TestBase.isAsync
+							Uize.Class.Test.isAsync
 								A read-only special value that is used to indicate that running of a test instance's test(s) is asynchronous.
 
-								When a test instance is known to be asynchronous, the instance's =result= state property will be set to the value =Uize.TestBase.isAsync=. In this situation, the instance's =isAsync= state property will also be set to the value =true=. For a more in-depth discussion, see the section `Asynchronous Tests` in the [[../guides/javascript-testing-framework.html][JavaScript Testing Framework]] guide.
+								When a test instance is known to be asynchronous, the instance's =result= state property will be set to the value =Uize.Class.Test.isAsync=. In this situation, the instance's =isAsync= state property will also be set to the value =true=. For a more in-depth discussion, see the section `Asynchronous Tests` in the [[../guides/javascript-testing-framework.html][JavaScript Testing Framework]] guide.
 
 								NOTES
 								- see the related =isAsync= and =result= state properties
@@ -331,7 +331,7 @@ Uize.module ({
 								resultBOOL = myTest.run ();
 								...........................
 
-								In the event that running of the instance's test(s) is asynchronous, the =run= method will return the value =Uize.TestBase.isAsync=, and the instance's =isAsync= state property will be set to the value =true=. For a more in-depth discussion, see the section `Asynchronous Tests` in the [[../guides/javascript-testing-framework.html][JavaScript Testing Framework]] guide.
+								In the event that running of the instance's test(s) is asynchronous, the =run= method will return the value =Uize.Class.Test.isAsync=, and the instance's =isAsync= state property will be set to the value =true=. For a more in-depth discussion, see the section `Asynchronous Tests` in the [[../guides/javascript-testing-framework.html][JavaScript Testing Framework]] guide.
 
 								Callback Function For Asynchronous Tests
 									When the optional =callbackFUNC= parameter is specified, a callback function can be specified that will be called once running of the instance's test(s) is complete, in the event that running of the instance's test(s) is asynchronous.
@@ -373,13 +373,13 @@ Uize.module ({
 					return m;
 					/*?
 						Static Methods
-							Uize.TestBase.addTest
+							Uize.Class.Test.addTest
 								Adds the specified child test to the test class and returns a reference to the test class.
 
 								SYNTAX
-								................................
-								Uize.TestBase.addTest (testOBJ);
-								................................
+								..................................
+								Uize.Class.Test.addTest (testOBJ);
+								..................................
 					*/
 				},
 
@@ -405,53 +405,53 @@ Uize.module ({
 					return _Uize.Util.Oop.inheritsFrom (_test,_class) ? _test : this.subclass ({set:_test});
 					/*?
 						Static Methods
-							Uize.TestBase.resolve
-								Returns a =Uize.TestBase= subclass, being the specified test object resolved to a test class.
+							Uize.Class.Test.resolve
+								Returns a =Uize.Class.Test= subclass, being the specified test object resolved to a test class.
 
 								SYNTAX
-								............................................
-								testCLASS = Uize.TestBase.resolve (testOBJ);
-								............................................
+								..............................................
+								testCLASS = Uize.Class.Test.resolve (testOBJ);
+								..............................................
 
 								testOBJ
-									An object, being either a set of property values for the state properties of the =Uize.TestBase= class, or a reference to a =Uize.TestBase= subclass.
+									An object, being either a set of property values for the state properties of the =Uize.Class.Test= class, or a reference to a =Uize.Class.Test= subclass.
 
-									In the event that the =testOBJ= parameter's value is a set of property value, a new subclass of the =Uize.TestBase= class is created, and its state properties are initialized with the values contained in the =testOBJ= object. The value of the =test= property receives special handling (see `Resolving Subtests`).
+									In the event that the =testOBJ= parameter's value is a set of property value, a new subclass of the =Uize.Class.Test= class is created, and its state properties are initialized with the values contained in the =testOBJ= object. The value of the =test= property receives special handling (see `Resolving Subtests`).
 
 								More Concise and Declarative
-									The =Uize.TestBase.resolve= method allows for a more concise, declarative syntax for defining tests.
+									The =Uize.Class.Test.resolve= method allows for a more concise, declarative syntax for defining tests.
 
 									INSTEAD OF...
-									.........................................................
-									var My2Plus2Equals4TestClass = Uize.TestBase.subclass ();
+									...........................................................
+									var My2Plus2Equals4TestClass = Uize.Class.Test.subclass ();
 									My2Plus2Equals4TestClass.set ({
 										title:'2 + 2 equals 4',
 										test:function () {return 2 + 2 == 4}
 									});
-									.........................................................
+									...........................................................
 
 									USE...
 									.......................................
-									Uize.TestBase.resolve ({
+									Uize.Class.Test.resolve ({
 										title:'2 + 2 equals 4',
 										test:function () {return 2 + 2 == 4}
 									});
 									.......................................
 
 								Returns a Test Class
-									Because the =Uize.TestBase.resolve= method returns a =Uize.TestBase= subclass, it can be used for declaring a child test in an array of child tests, as with all the other `test class factory methods` (see `Example 2: A Set of Tests` for an illustration of this).
+									Because the =Uize.Class.Test.resolve= method returns a =Uize.Class.Test= subclass, it can be used for declaring a child test in an array of child tests, as with all the other `test class factory methods` (see `Example 2: A Set of Tests` for an illustration of this).
 
 								Resolving Subtests
-									If a test properties object is specified for the =testOBJ= parameter (rather than a =Uize.TestBase= subclass), then the value of that object's =test= property is further resolved.
+									If a test properties object is specified for the =testOBJ= parameter (rather than a =Uize.Class.Test= subclass), then the value of that object's =test= property is further resolved.
 
-									If the value of the =test= property is an array of child tests, then the elements of the child tests array are resolved to test classes by calling the =Uize.TestBase.resolve= method for each of them, where each element value becomes the value of the =Uize.TestBase.resolve= method's =testOBJ= parameter. For an example of this type of usage, see the `Example 2: A Set of Tests`.
+									If the value of the =test= property is an array of child tests, then the elements of the child tests array are resolved to test classes by calling the =Uize.Class.Test.resolve= method for each of them, where each element value becomes the value of the =Uize.Class.Test.resolve= method's =testOBJ= parameter. For an example of this type of usage, see the `Example 2: A Set of Tests`.
 
 								Example 1: A Single Test
-									In this example, a simple test class is being created using the =Uize.TestBase.resolve= method.
+									In this example, a simple test class is being created using the =Uize.Class.Test.resolve= method.
 
 									EXAMPLE
 									.......................................
-									Uize.TestBase.resolve ({
+									Uize.Class.Test.resolve ({
 										title:'2 + 2 equals 4',
 										test:function () {return 2 + 2 == 4}
 									});
@@ -464,14 +464,14 @@ Uize.module ({
 
 									EXAMPLE
 									........................................................................
-									Uize.TestBase.resolve ({
+									Uize.Class.Test.resolve ({
 										title:'Test a whole bunch of things',
 										test:[
 											{
 												title:'2 + 2 equals 4',
 												test:function () {return 2 + 2 == 4}
 											},
-											Uize.TestBase.resolve ({
+											Uize.Class.Test.resolve ({
 												title:'The value true is equal to 1 in a simple equality test',
 												test:function () {return 1 == true}
 											})
@@ -479,7 +479,7 @@ Uize.module ({
 									});
 									........................................................................
 
-									The value of the =test= state property in this case is an array, which contains a sequence of child tests. The elements of the child tests array are resolved to test classes (see `Resolving Subtests`). In this example, the child tests array contains a mix of child tests declared in different ways: the first child test is declared using the simple object syntax, while the second is declared by calling the =Uize.TestBase.resolve= method explicitly.
+									The value of the =test= state property in this case is an array, which contains a sequence of child tests. The elements of the child tests array are resolved to test classes (see `Resolving Subtests`). In this example, the child tests array contains a mix of child tests declared in different ways: the first child test is declared using the simple object syntax, while the second is declared by calling the =Uize.Class.Test.resolve= method explicitly.
 
 								NOTES
 								- this method is one of the many available `test class factory methods`
@@ -535,7 +535,7 @@ Uize.module ({
 								The value =undefined= is equivalent to the boolean value =false=. When a test is run in the browser context, the value of this property is coerced to =true=. For a more in-depth discussion, see the section `Asynchronous Tests` in the [[../guides/javascript-testing-framework.html][JavaScript Testing Framework]] guide.
 
 								NOTES
-								- see the related =Uize.TestBase.isAsync= static property
+								- see the related =Uize.Class.Test.isAsync= static property
 								- the initial value is =undefined=
 					*/
 				_log:'log',
@@ -588,11 +588,11 @@ Uize.module ({
 					/*?
 						State Properties
 							result
-								A boolean, indicating whether or not the test passed, or the value =undefined= or =Uize.TestBase.isAsync=.
+								A boolean, indicating whether or not the test passed, or the value =undefined= or =Uize.Class.Test.isAsync=.
 
-								A value of =true= indicates that the test was completed and passed, while a value of =false= indicates that the test was completed and failed or was aborted with a catastrophic failure. A value of =undefined= indicates that the test result has not yet been determined, while a value of =Uize.TestBase.isAsync= indicates that determination of the result is waiting upon the completion of asynchronous code.
+								A value of =true= indicates that the test was completed and passed, while a value of =false= indicates that the test was completed and failed or was aborted with a catastrophic failure. A value of =undefined= indicates that the test result has not yet been determined, while a value of =Uize.Class.Test.isAsync= indicates that determination of the result is waiting upon the completion of asynchronous code.
 
-								Before a test instance has been run for the first time, the value of this property will be =undefined=. The value will also be reset to =undefined= each time the test is started, and will remain =undefined= until the result is determined, or will be set to the constant value =Uize.TestBase.isAsync= if the test is known to be asynchronous.
+								Before a test instance has been run for the first time, the value of this property will be =undefined=. The value will also be reset to =undefined= each time the test is started, and will remain =undefined= until the result is determined, or will be set to the constant value =Uize.Class.Test.isAsync= if the test is known to be asynchronous.
 
 								NOTES
 								- see also the related =reasonForFailure= state property
@@ -636,7 +636,7 @@ Uize.module ({
 							/*?
 								Instance Properties
 									children
-										An array of child tests where each element is an instance of a =Uize.TestBase= subclass.
+										An array of child tests where each element is an instance of a =Uize.Class.Test= subclass.
 
 										A test instance contains children when its =test= state property is an array. When its =test= state property is not an array, =children= will be =undefined=.
 
@@ -650,7 +650,7 @@ Uize.module ({
 					/*?
 						State Properties
 							test
-								A test function, or an array of child tests where each element is an instance of a =Uize.TestBase= subclass.
+								A test function, or an array of child tests where each element is an instance of a =Uize.Class.Test= subclass.
 
 								The Simple Test Case
 									In the case of a simple test that has no child tests, the value of the =test= property should be a reference to the function that performs the test action.
