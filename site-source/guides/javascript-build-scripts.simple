@@ -300,7 +300,7 @@ UIZE Config Options
 			UIZE modules that are *NOT* compatible with Windows Script Host are those modules that assume a browser context, and include such modules as...
 
 			- =Uize.Comm= (and all submodules)
-			- =Uize.Cookie=
+			- =Uize.Util.Browser.Cookies=
 			- =Uize.Fx= (and all submodules)
 			- =Uize.Dom= (and all submodules)
 			- =Uize.Tooltip=

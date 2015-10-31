@@ -28,7 +28,7 @@ Uize.module ({
 	required:[
 		'Uize.Fx',
 		'Uize.Fade',
-		'Uize.Cookie',
+		'Uize.Util.Browser.Cookies',
 		'Uize.Dom.Pos'
 	],
 	builder:function (_superclass) {
@@ -93,7 +93,7 @@ Uize.module ({
 
 			function _updateCookie (m) {
 				m._cookieName &&
-					Uize.Cookie.setCookie (m._cookieName,m._contentId + '|' + +m._maximized,m._cookiePath)
+					Uize.Util.Browser.Cookies.setCookie (m._cookieName,m._contentId + '|' + +m._maximized,m._cookiePath)
 				;
 			}
 
@@ -107,7 +107,7 @@ Uize.module ({
 						/*** read cookie, if configured to store state in cookie ***/
 							if (m._cookieName) {
 								var
-									_cookieValue = Uize.Cookie.getCookie (m._cookieName),
+									_cookieValue = Uize.Util.Browser.Cookies.getCookie (m._cookieName),
 									_cookieValueParts = _cookieValue.split ('|'),
 									_maximizedFromCookie = _cookieValueParts [1] != '0'
 								;

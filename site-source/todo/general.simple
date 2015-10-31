@@ -26,7 +26,6 @@ Migrate Modules Into Deeper Namespaces
 	Migrate some modules at the root =Uize= namespace into deeper namespaces in order to tuck them away.
 
 	.....................
-	Uize.Cookie   ->  ???
 	Uize.Tooltip  ->  ???
 	Uize.Xml      ->  ???
 	.....................

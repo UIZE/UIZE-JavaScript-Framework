@@ -1,0 +1,17 @@
+The =Uize.Cookie= module has been migrated to under the new =Uize.Util.Browser= namespace as =Uize.Util.Browser.Cookies=.
+
+MIGRATED
+.....................................................
+Uize.Cookie  >> BECOMES >>  Uize.Util.Browser.Cookies
+.....................................................
+
+IMPORTANT: THIS IS A BREAKING CHANGE
+	Because of the somewhat esoteric nature of the =Uize.Cookie= module, it was deemed acceptable to migrate this module into its new namespace without leaving an alias module for backwards compatibility.
+
+	This means that this change is technically a breaking change, although utilization of the =Uize.Cookie= module was found to be very low. The single affected module in the UIZE codebase has been updated to reflect the change. In the unlikely event that you *did* happen to be using the =Uize.Cookie= module in your code, then you will have to update your code to require the module by its new name. Besides the change in location, the interface and behavior of the module remain unchanged.
+
+....................................................................................
+<< metadata >>
+
+title: 2015-10-31 - MIGRATED MODULE: Uize.Cookie
+....................................................................................

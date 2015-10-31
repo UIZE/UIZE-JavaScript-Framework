@@ -1,7 +1,7 @@
 /*______________
 |       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
 |     /      /  |   ---------------------------------------------------
-|    /    O /   |    MODULE : Uize.Cookie Package
+|    /    O /   |    MODULE : Uize.Util.Browser.Cookies Package
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
 | /____/ /__/_| | COPYRIGHT : (c)2005-2015 UIZE
@@ -18,13 +18,13 @@
 
 /*?
 	Introduction
-		The =Uize.Cookie= module is a package under the =Uize= namespace, and provides a couple of methods for managing browser cookies.
+		The =Uize.Util.Browser.Cookies= module is a package under the =Uize= namespace, and provides a couple of methods for managing browser cookies.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 */
 
 Uize.module ({
-	name:'Uize.Cookie',
+	name:'Uize.Util.Browser.Cookies',
 	builder:function () {
 		'use strict';
 
@@ -49,29 +49,29 @@ Uize.module ({
 				document.cookie = escape (_name) + '=' + escape (_value) + ';' + ((_path !== _undefined && _path != _null) ? ('path=' + _path + ';') : '') + ((_expiration !== _null) ? ('expires=' + _expiration + ';') : '');
 				/*?
 					Static Methods
-						Uize.Cookie.setCookie
+						Uize.Util.Browser.Cookies.setCookie
 							SYNTAX
-							...........................................................................
-							Uize.Cookie.setCookie (cookieNameSTR,cookieValueSTR,pathSTR,expirationSTR);
-							...........................................................................
+							.........................................................................................
+							Uize.Util.Browser.Cookies.setCookie (cookieNameSTR,cookieValueSTR,pathSTR,expirationSTR);
+							.........................................................................................
 
 							VARIATIONS
 
-							.............................................................
-							Uize.Cookie.setCookie (cookieNameSTR,cookieValueSTR,pathSTR);
-							.............................................................
+							...........................................................................
+							Uize.Util.Browser.Cookies.setCookie (cookieNameSTR,cookieValueSTR,pathSTR);
+							...........................................................................
 
 							When no =expirationSTR= parameter is specified, the expiration will be set to one year from the time that the cookie value is set.
 
-							.....................................................
-							Uize.Cookie.setCookie (cookieNameSTR,cookieValueSTR);
-							.....................................................
+							...................................................................
+							Uize.Util.Browser.Cookies.setCookie (cookieNameSTR,cookieValueSTR);
+							...................................................................
 
 							When no =pathSTR= parameter is specified, then the path of the current page being used.
 
-							......................................
-							Uize.Cookie.setCookie (cookieNameSTR);
-							......................................
+							....................................................
+							Uize.Util.Browser.Cookies.setCookie (cookieNameSTR);
+							....................................................
 
 							When only a =cookieNameSTR= parameter is specified, the cookie specified by that parameter will be cleared.
 				*/
@@ -98,11 +98,11 @@ Uize.module ({
 				return _value;
 				/*?
 					Static Methods
-						Uize.Cookie.getCookie
+						Uize.Util.Browser.Cookies.getCookie
 							SYNTAX
-							.......................................................
-							cookieValueSTR = Uize.Cookie.getCookie (cookieNameSTR);
-							.......................................................
+							.....................................................................
+							cookieValueSTR = Uize.Util.Browser.Cookies.getCookie (cookieNameSTR);
+							.....................................................................
 
 							NOTES
 							- if there is no cookie stored by the specified name, then an empty string will be returned
