@@ -1734,7 +1734,7 @@ Uize.module ({
 											_Subclass = Uize.Class.subclass (),
 											_onChangeCount = 0
 										;
-										_Subclass.prototype.someMethod = function () {_onChangeCount++};
+										_Subclass.instanceMethods ({someMethod:function () {_onChangeCount++}});
 										_Subclass.stateProperties ({
 											myProperty:{
 												value:'initial value',
@@ -1779,12 +1779,10 @@ Uize.module ({
 											_Subclass = Uize.Class.subclass (),
 											_coverageAndOrder = []
 										;
-										_Subclass.prototype.someMethod1 = function () {
-											_coverageAndOrder.push ('onChangeHandlerSpecifiedByString1');
-										};
-										_Subclass.prototype.someMethod2 = function () {
-											_coverageAndOrder.push ('onChangeHandlerSpecifiedByString2');
-										};
+										_Subclass.instanceMethods ({
+											someMethod1:function () {_coverageAndOrder.push ('onChangeHandlerSpecifiedByString1')},
+											someMethod2:function () {_coverageAndOrder.push ('onChangeHandlerSpecifiedByString2')}
+										});
 										_Subclass.stateProperties ({
 											myProperty:{
 												value:'initial value',
@@ -2001,7 +1999,9 @@ Uize.module ({
 											_onChangeHandlerSpecifiedByStringCount = 0,
 											_onChangeHandlerSpecifiedByFunctionCount = 0
 										;
-										_Subclass.prototype.someMethod = function () {_onChangeHandlerSpecifiedByStringCount++};
+										_Subclass.instanceMethods ({
+											someMethod:function () {_onChangeHandlerSpecifiedByStringCount++}
+										});
 										function _onChangeHandlerFunction () {_onChangeHandlerSpecifiedByFunctionCount++}
 										_Subclass.stateProperties ({
 											myProperty1:{
