@@ -1,7 +1,7 @@
 /*______________
 |       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
 |     /      /  |   ---------------------------------------------------
-|    /    O /   |    MODULE : Uize.Str.CharClass Package
+|    /    O /   |    MODULE : Uize.Str.CharClass Class
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
 | /____/ /__/_| | COPYRIGHT : (c)2014-2015 UIZE
@@ -10,7 +10,7 @@
 */
 
 /* Module Meta Data
-	type: Package
+	type: Class
 	importance: 1
 	codeCompleteness: 100
 	docCompleteness: 100
@@ -18,14 +18,15 @@
 
 /*?
 	Introduction
-		The =Uize.Str.CharClass= module provides methods for working with strings that may contain chars of a specific character class.
+		The =Uize.Str.CharClass= module defines a simple class that provides methods for working with strings that may contain chars of a specific character class.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 */
 
 Uize.module ({
 	name:'Uize.Str.CharClass',
-	builder:function () {
+	superclass:'Uize.Oop.BasicClass',
+	builder:function (_superclass) {
 		'use strict';
 
 		var
@@ -66,58 +67,56 @@ Uize.module ({
 				return -1;
 			}
 
-		return Uize.copyInto (
-			Uize.noNew (function (_chars) {this.setChars (_chars)}),
+		return _superclass.subclass ({
+			constructor:Uize.noNew (function (_chars) {this.setChars (_chars)}),
 
-			{
-				prototype:{
-					setChars:function (_chars) {
-						this._charsLookup = _chars
-							? Uize.lookup (
-								Uize.map (
-									_chars,
-									function (_char) {return typeof _char == 'string' ? _char : String.fromCharCode (+_char)}
-								),
-								_trueFlag
-							)
-							: {}
-						;
-					},
+			instanceMethods:{
+				setChars:function (_chars) {
+					this._charsLookup = _chars
+						? Uize.lookup (
+							Uize.map (
+								_chars,
+								function (_char) {return typeof _char == 'string' ? _char : String.fromCharCode (+_char)}
+							),
+							_trueFlag
+						)
+						: {}
+					;
+				},
 
-					isClassChars:function (_sourceStr) {
-						return !!_sourceStr && _indexOfClassCharOrNon (this,_sourceStr,_false,-1) == -1;
-					},
+				isClassChars:function (_sourceStr) {
+					return !!_sourceStr && _indexOfClassCharOrNon (this,_sourceStr,_false,-1) == -1;
+				},
 
-					isNonClassChars:function (_sourceStr) {
-						return !!_sourceStr && _indexOfClassCharOrNon (this,_sourceStr,_true,-1) == -1;
-					},
+				isNonClassChars:function (_sourceStr) {
+					return !!_sourceStr && _indexOfClassCharOrNon (this,_sourceStr,_true,-1) == -1;
+				},
 
-					hasClassChars:function (_sourceStr) {
-						return !!_sourceStr && _indexOfClassCharOrNon (this,_sourceStr,_true,-1) > -1;
-					},
+				hasClassChars:function (_sourceStr) {
+					return !!_sourceStr && _indexOfClassCharOrNon (this,_sourceStr,_true,-1) > -1;
+				},
 
-					hasNonClassChars:function (_sourceStr) {
-						return !!_sourceStr && _indexOfClassCharOrNon (this,_sourceStr,_false,-1) > -1;
-					},
+				hasNonClassChars:function (_sourceStr) {
+					return !!_sourceStr && _indexOfClassCharOrNon (this,_sourceStr,_false,-1) > -1;
+				},
 
-					indexOfClassChar:function (_sourceStr,_startPos) {
-						return _indexOfClassCharOrNon (this,_sourceStr,_true,1,_startPos);
-					},
+				indexOfClassChar:function (_sourceStr,_startPos) {
+					return _indexOfClassCharOrNon (this,_sourceStr,_true,1,_startPos);
+				},
 
-					lastIndexOfClassChar:function (_sourceStr,_startPos) {
-						return _indexOfClassCharOrNon (this,_sourceStr,_true,-1,_startPos);
-					},
+				lastIndexOfClassChar:function (_sourceStr,_startPos) {
+					return _indexOfClassCharOrNon (this,_sourceStr,_true,-1,_startPos);
+				},
 
-					indexOfNonClassChar:function (_sourceStr,_startPos) {
-						return _indexOfClassCharOrNon (this,_sourceStr,_false,1,_startPos);
-					},
+				indexOfNonClassChar:function (_sourceStr,_startPos) {
+					return _indexOfClassCharOrNon (this,_sourceStr,_false,1,_startPos);
+				},
 
-					lastIndexOfNonClassChar:function (_sourceStr,_startPos) {
-						return _indexOfClassCharOrNon (this,_sourceStr,_false,-1,_startPos);
-					}
+				lastIndexOfNonClassChar:function (_sourceStr,_startPos) {
+					return _indexOfClassCharOrNon (this,_sourceStr,_false,-1,_startPos);
 				}
 			}
-		);
+		});
 	}
 });
 
