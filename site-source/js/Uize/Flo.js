@@ -553,7 +553,6 @@ Uize.module ({
 					this.next ();
 				}
 
-
 		return _superclass.subclass ({
 			constructor:function (_creationFlo,_invokationFlo) {
 				this.statementNo = -1;
