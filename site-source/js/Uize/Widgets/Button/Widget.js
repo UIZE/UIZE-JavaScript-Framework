@@ -213,13 +213,17 @@ Uize.module ({
 								In order for the above syntax to work, the =Uize.Widgets.Button.Widget.addChildButton= function would first need to be "stitched in" as an instance method of the class of which =myWidgetInstance= is an instance. This can be done with a statement such as...
 
 								STITCHING IN
-								....................................................................................
+								............................................................
 								// stitching in as a public method
-								MyWidgetClass.prototype.addChildButton = Uize.Widgets.Button.Widget.addChildButton;
+								MyWidgetClass.instanceMethods ({
+									addChildButton:Uize.Widgets.Button.Widget.addChildButton
+								});
 
 								// stitching in as a private method
-								MyWidgetClass.prototype._addChildButton = Uize.Widgets.Button.Widget.addChildButton;
-								....................................................................................
+								MyWidgetClass.instanceMethods ({
+									_addChildButton:Uize.Widgets.Button.Widget.addChildButton
+								});
+								............................................................
 
 								VARIATION 1
 								........................................................................

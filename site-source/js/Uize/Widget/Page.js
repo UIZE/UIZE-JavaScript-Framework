@@ -786,25 +786,27 @@ Uize.module ({
 										Example Implementation
 
 											EXAMPLE
-											..................................................................................
-											MySite.MyPageWidgetClass.prototype.loadHtml = function (_htmlParams,_directives) {
-												var m = this;
-												if (typeof _directives != 'object' || !_directives)
-													_directives = {callback:_directives}
-												;
-												m.ajax (
-													Uize.copyInto ({service:'getcontrol'},_htmlParams),
-													{
-														cache:'cache' in _directives ? _directives.cache : 'never',
-														callbackSuccess:function (_responseJson) {
-															_responseJson.success &&
-																(_directives.callback || Object) (responseJson.componentData)
-															;
+											...............................................................................
+											MySite.MyPageWidgetClass.instanceMethods ({
+												loadHtml:function (_htmlParams,_directives) {
+													var m = this;
+													if (typeof _directives != 'object' || !_directives)
+														_directives = {callback:_directives}
+													;
+													m.ajax (
+														Uize.copyInto ({service:'getcontrol'},_htmlParams),
+														{
+															cache:'cache' in _directives ? _directives.cache : 'never',
+															callbackSuccess:function (_responseJson) {
+																_responseJson.success &&
+																	(_directives.callback || Object) (responseJson.componentData)
+																;
+															}
 														}
-													}
-												);
-											};
-											..................................................................................
+													);
+												}
+											});
+											...............................................................................
 
 									NOTES
 									- this method is one of several `hook methods`
