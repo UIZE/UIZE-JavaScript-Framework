@@ -1026,7 +1026,7 @@ Uize.module ({
 				},
 
 				'try':function (_try,_catch) {
-					return _block (this,[_block (_flo,[_try],{isTry:true}),_abortStatement,_catch]);
+					return _block (this,[_block (this,[_try],{isTry:true}),_abortStatement,_catch]);
 					/*?
 						Instance Methods
 							try
