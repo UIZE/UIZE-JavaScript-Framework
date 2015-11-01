@@ -31,53 +31,55 @@ Uize.module ({
 	builder:function (_class) {
 		'use strict';
 
-		_class.prototype.wireDeferredLinks = function () {
-			var
-				m = this,
-				_links = m.deferredLinks,
-				_numLinks = _links.length,
-				_linkNo = 0
-			;
-
-			(function _wireLinks() {
-				function _wireLink(_link) {
+		_class.declare ({
+			instanceMethods:{
+				wireDeferredLinks:function () {
 					var
-						_linkNode = Uize.Dom.Basics.getById(_link[0]),
-						_linkInfo = _link[1]
+						m = this,
+						_links = m.deferredLinks,
+						_numLinks = _links.length,
+						_linkNo = 0
 					;
 
-					if (typeof _linkInfo == 'string')
-						m.setNodeProperties(_linkNode, {href:_linkInfo});
-					else
-						m.wireNode(
-							_linkNode,
-							'click',
-							function () {
-								m.launchPopup(
-									Uize.copyInto(
-										{
-											url:_linkInfo.href,
-											name:_linkInfo.target
-										},
-										_linkInfo.popupParams
-									)
-								)
-							}
-						);
+					(function _wireLinks() {
+						function _wireLink(_link) {
+							var
+								_linkNode = Uize.Dom.Basics.getById(_link[0]),
+								_linkInfo = _link[1]
+							;
+
+							if (typeof _linkInfo == 'string')
+								m.setNodeProperties(_linkNode, {href:_linkInfo});
+							else
+								m.wireNode(
+									_linkNode,
+									'click',
+									function () {
+										m.launchPopup(
+											Uize.copyInto(
+												{
+													url:_linkInfo.href,
+													name:_linkInfo.target
+												},
+												_linkInfo.popupParams
+											)
+										)
+									}
+								);
+						}
+
+						for (var _endNo = Math.min(_numLinks, _linkNo + m.linkBatchSize); _linkNo < _endNo; _linkNo++)
+							_wireLink(_links[_linkNo])
+						;
+
+						if (_linkNo < _numLinks)
+							setTimeout(_wireLinks, 0)
+						;
+					}) ();
 				}
+			},
 
-				for (var _endNo = Math.min(_numLinks, _linkNo + m.linkBatchSize); _linkNo < _endNo; _linkNo++)
-					_wireLink(_links[_linkNo])
-				;
-
-				if (_linkNo < _numLinks)
-					setTimeout(_wireLinks, 0)
-				;
-			}) ();
-		};
-
-		/*** State Properties ***/
-			_class.stateProperties ({
+			stateProperties:{
 				deferredLinks:{
 					name:'deferredLinks',
 					value:[]
@@ -86,6 +88,7 @@ Uize.module ({
 					name:'linkBatchSize',
 					value:25
 				}
-			});
+			}
+		});
 	}
 });
