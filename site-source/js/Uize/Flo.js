@@ -368,10 +368,14 @@ Uize.module ({
 				_arraySlice = [].slice,
 				_loopProperties = {isBreakable:true,isContinuable:true},
 				_sacredEmptyObject = {},
-				_class
+				_isFloClass = function () {}
 		;
 
 		/*** Utility Functions ***/
+			function _isFloInstance (_object) {
+				return _object && _object.constructor._isFloClass == _isFloClass;
+			}
+
 			function _block (_creationFlo,_statements,_properties) {
 				var _floInvoker = function () {
 					var
@@ -385,7 +389,9 @@ Uize.module ({
 								: {callback:_lastArgument}
 						,
 						_callback = _invokationProperties.callback,
-						_flo = new _class (_creationFlo,(_callback && _callback.flo) || this),
+						_flo = new (_isFloInstance (_creationFlo) ? _creationFlo.Class : _creationFlo) (
+							_creationFlo,(_callback && _callback.flo) || this
+						),
 						_floNext = _flo.floNext = function () {
 							arguments.length ? _next.apply (_flo,arguments) : _flo.next ();
 						}
@@ -548,12 +554,12 @@ Uize.module ({
 				}
 
 
-		return _class = _superclass.subclass ({
+		return _superclass.subclass ({
 			constructor:function (_creationFlo,_invokationFlo) {
 				this.statementNo = -1;
-				this.parent = _creationFlo && _creationFlo.constructor == _class
+				this.parent = _isFloInstance (_creationFlo)
 					? _creationFlo
-					: _invokationFlo && _invokationFlo.constructor == _class
+					: _isFloInstance (_invokationFlo)
 						? _invokationFlo
 						: _undefined
 				;
@@ -1134,6 +1140,10 @@ Uize.module ({
 								- see also the related =return= instance method
 					*/
 				}
+			},
+
+			staticProperties:{
+				_isFloClass:_isFloClass
 			}
 		});
 	}
