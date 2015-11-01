@@ -1,7 +1,7 @@
 /*______________
 |       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
 |     /      /  |   ---------------------------------------------------
-|    /    O /   |    MODULE : Uize.Flo Class Module
+|    /    O /   |    MODULE : Uize.Flo Class
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
 | /____/ /__/_| | COPYRIGHT : (c)2013-2015 UIZE
@@ -352,15 +352,23 @@
 
 Uize.module ({
 	name:'Uize.Flo',
-	builder:function () {
+	superclass:'Uize.Oop.BasicClass',
+	builder:function (_superclass) {
 		'use strict';
 
 		var
-			_isArray = Uize.isArray,
-			_isFunction = Uize.isFunction,
-			_arraySlice = [].slice,
-			_loopProperties = {isBreakable:true,isContinuable:true},
-			_sacredEmptyObject = {}
+			/*** Variables for Scruncher Optimization ***/
+				_undefined,
+
+			/*** Variables for Performance Optimization ***/
+				_isArray = Uize.isArray,
+				_isFunction = Uize.isFunction,
+
+			/*** General Variables ***/
+				_arraySlice = [].slice,
+				_loopProperties = {isBreakable:true,isContinuable:true},
+				_sacredEmptyObject = {},
+				_class
 		;
 
 		/*** Utility Functions ***/
@@ -539,9 +547,9 @@ Uize.module ({
 					this.next ();
 				}
 
-		var
-			_undefined,
-			_class = function (_creationFlo,_invokationFlo) {
+
+		return _class = _superclass.subclass ({
+			constructor:function (_creationFlo,_invokationFlo) {
 				this.statementNo = -1;
 				this.parent = _creationFlo && _creationFlo.constructor == _class
 					? _creationFlo
@@ -550,7 +558,190 @@ Uize.module ({
 						: _undefined
 				;
 			},
-			_instanceStaticMethods = {
+
+			instanceMethods:{
+				abort:function () {
+					this.statementNo = Infinity;
+					this.next ();
+					/*?
+						Instance Methods
+							abort
+								Aborts execution of the `flo statements` in the flo on which the method is called.
+
+								SYNTAX
+								.....................
+								floInstance.abort ();
+								.....................
+
+								EXAMPLE
+								...
+								...
+					*/
+				},
+
+				next:_next,
+					/*?
+						Instance Methods
+							next
+								Continues execution of the flo on which the method is called, optionally passing back a result value.
+
+								DIFFERENT USAGES
+
+								`Advance to the Next Statement`
+								............
+								flo.next ();
+								............
+
+								`Advance to the Next Statement, Passing a Result Value`
+								.........................
+								flo.next (resultANYTYPE);
+								.........................
+					*/
+
+				'continue':function () {
+					_findApplicableFloUpFloChain (
+						this,
+						'isContinuable',
+						function (_flo) {
+							_flo.statementNo = 3; // this is the iteration statement in the foundational for loop, so the next call will take control to the modify count statement
+							_flo.next ();
+						},
+						'Can\'t call continue outside of a continuable flo'
+					);
+					/*?
+						Instance Methods
+							continue
+								.
+
+								SYNTAX
+								................
+								flo.continue ();
+								................
+
+								NOTES
+								- see also the related =break= instance method
+					*/
+				},
+
+				'break':function () {
+					_findApplicableFloUpFloChain (
+						this,
+						'isBreakable',
+						function (_flo) {_flo.abort ()},
+						'Can\'t call break outside of a breakable flo'
+					);
+					/*?
+						Instance Methods
+							break
+								Breaks execution of the nearest loop up the flo chain.
+
+								SYNTAX
+								.....................
+								floInstance.break ();
+								.....................
+
+								EXAMPLE
+								...
+								flo.forIn (
+									fs.dir,
+									function (next) {
+										if (next.flo.value) {
+											next.flo.break ();
+										}
+									}
+								) (function () {console.log ('finished with asynchronous for')});
+								...
+
+								Must be Within a Loop or Switch Flo
+									If the =break= method is called on a flo and there is no breakable flo up the parent chain, then an error will be thrown.
+
+									A breakable flo is defined as either a loop flo (created by methods like =do=, =for=, =forIn=, and =while=) or a switch flow (created by the =switch= method).
+
+									EXAMPLE
+									...
+									...
+					*/
+				},
+
+				'return':function (_result) {
+					var _arguments = arguments;
+					_findApplicableFloUpFloChain (
+						this,
+						'isFunction',
+						function (_flo) {
+							if (_arguments.length) _flo.result = _result;
+							_flo.abort ();
+						},
+						'Can\'t call return outside of a function flo'
+					);
+					/*?
+						Instance Methods
+							return
+								Returns from the nearest function flo up the flo chain.
+
+								DIFFERENT USAGES
+
+								`Return from a Function Flo`
+								.............
+								flo.return ()
+								.............
+
+								Must be Within a Function Flo
+									If the =return= method is called on a flo and there is no function flo up the parent chain, then an error will be thrown.
+
+									EXAMPLE
+									...
+									...
+					*/
+				},
+
+				'throw':function (_error) {
+					_error = _resolveError (_error);
+					_findApplicableFloUpFloChain (
+						this,
+						'isTry',
+						function (_flo) {
+							_flo = _flo.parent;
+							_flo.statementNo = 1; // this is the abort statement between the try and catch in the try-catch block, so the next call will catch the error
+							_flo.result = _error;
+							_flo.next ();
+						},
+						_error
+					);
+					/*?
+						Instance Methods
+							throw
+								.
+
+								SYNTAX
+								..........................
+								flo.throw (errorSTRorOBJ);
+								..........................
+
+								NOTES
+								- see also the related =try= instance method
+					*/
+				}
+			},
+
+			staticMethods:{
+				abort:_abortStatement,
+				async:function (_function) {
+					return function () {
+						var
+							m = this,
+							_arguments = arguments
+						;
+						setTimeout (function () {_function.apply (m,_arguments)},0);
+					};
+				},
+				'break':function () {this ['break'] ()},
+				breathe:function (duration) {return function (next) {setTimeout (next,duration)}},
+				'continue':function () {this ['continue'] ()},
+				next:function () {this.next ()}
+			},
+
+			dualContextMethods:{
 				block:function () {
 					return _block (this,arguments);
 					/*?
@@ -944,201 +1135,7 @@ Uize.module ({
 					*/
 				}
 			}
-		;
-
-		Uize.copyInto (
-			_class,
-			_instanceStaticMethods,
-			{
-				abort:_abortStatement,
-				async:function (_function) {
-					return function () {
-						var
-							m = this,
-							_arguments = arguments
-						;
-						setTimeout (function () {_function.apply (m,_arguments)},0);
-					};
-				},
-				'break':function () {this ['break'] ()},
-				breathe:function (duration) {
-					return function (next) {setTimeout (next,duration)}
-				},
-				'continue':function () {this ['continue'] ()},
-				next:function () {this.next ()}
-			}
-		);
-
-		Uize.copyInto (
-			_class.prototype,
-			_instanceStaticMethods,
-			{
-				abort:function () {
-					this.statementNo = Infinity;
-					this.next ();
-					/*?
-						Instance Methods
-							abort
-								Aborts execution of the `flo statements` in the flo on which the method is called.
-
-								SYNTAX
-								.....................
-								floInstance.abort ();
-								.....................
-
-								EXAMPLE
-								...
-								...
-					*/
-				},
-
-				next:_next,
-					/*?
-						Instance Methods
-							next
-								Continues execution of the flo on which the method is called, optionally passing back a result value.
-
-								DIFFERENT USAGES
-
-								`Advance to the Next Statement`
-								............
-								flo.next ();
-								............
-
-								`Advance to the Next Statement, Passing a Result Value`
-								.........................
-								flo.next (resultANYTYPE);
-								.........................
-					*/
-
-				'continue':function () {
-					_findApplicableFloUpFloChain (
-						this,
-						'isContinuable',
-						function (_flo) {
-							_flo.statementNo = 3; // this is the iteration statement in the foundational for loop, so the next call will take control to the modify count statement
-							_flo.next ();
-						},
-						'Can\'t call continue outside of a continuable flo'
-					);
-					/*?
-						Instance Methods
-							continue
-								.
-
-								SYNTAX
-								................
-								flo.continue ();
-								................
-
-								NOTES
-								- see also the related =break= instance method
-					*/
-				},
-
-				'break':function () {
-					_findApplicableFloUpFloChain (
-						this,
-						'isBreakable',
-						function (_flo) {_flo.abort ()},
-						'Can\'t call break outside of a breakable flo'
-					);
-					/*?
-						Instance Methods
-							break
-								Breaks execution of the nearest loop up the flo chain.
-
-								SYNTAX
-								.....................
-								floInstance.break ();
-								.....................
-
-								EXAMPLE
-								...
-								flo.forIn (
-									fs.dir,
-									function (next) {
-										if (next.flo.value) {
-											next.flo.break ();
-										}
-									}
-								) (function () {console.log ('finished with asynchronous for')});
-								...
-
-								Must be Within a Loop or Switch Flo
-									If the =break= method is called on a flo and there is no breakable flo up the parent chain, then an error will be thrown.
-
-									A breakable flo is defined as either a loop flo (created by methods like =do=, =for=, =forIn=, and =while=) or a switch flow (created by the =switch= method).
-
-									EXAMPLE
-									...
-									...
-					*/
-				},
-
-				'return':function (_result) {
-					var _arguments = arguments;
-					_findApplicableFloUpFloChain (
-						this,
-						'isFunction',
-						function (_flo) {
-							if (_arguments.length) _flo.result = _result;
-							_flo.abort ();
-						},
-						'Can\'t call return outside of a function flo'
-					);
-					/*?
-						Instance Methods
-							return
-								Returns from the nearest function flo up the flo chain.
-
-								DIFFERENT USAGES
-
-								`Return from a Function Flo`
-								.............
-								flo.return ()
-								.............
-
-								Must be Within a Function Flo
-									If the =return= method is called on a flo and there is no function flo up the parent chain, then an error will be thrown.
-
-									EXAMPLE
-									...
-									...
-					*/
-				},
-
-				'throw':function (_error) {
-					_error = _resolveError (_error);
-					_findApplicableFloUpFloChain (
-						this,
-						'isTry',
-						function (_flo) {
-							_flo = _flo.parent;
-							_flo.statementNo = 1; // this is the abort statement between the try and catch in the try-catch block, so the next call will catch the error
-							_flo.result = _error;
-							_flo.next ();
-						},
-						_error
-					);
-					/*?
-						Instance Methods
-							throw
-								.
-
-								SYNTAX
-								..........................
-								flo.throw (errorSTRorOBJ);
-								..........................
-
-								NOTES
-								- see also the related =try= instance method
-					*/
-				}
-			}
-		);
-
-		return _class;
+		});
 	}
 });
 
