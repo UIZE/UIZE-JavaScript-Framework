@@ -237,13 +237,13 @@ Uize.module ({
 				};
 				/*?
 					Static Methods
-						Uize.Loc.Strings.Util.getStringsMetrics
+						Uize.Loc.Strings.Metrics.getStringsMetrics
 							Returns a strings metrics object, containing metrics information produced by an analysis of the specified strings info array.
 
 							SYNTAX
-							...............................................................................
-							stringsMetricsOBJ = Uize.Loc.Strings.Util.getStringsMetrics (stringsInfoARRAY);
-							...............................................................................
+							..................................................................................
+							stringsMetricsOBJ = Uize.Loc.Strings.Metrics.getStringsMetrics (stringsInfoARRAY);
+							..................................................................................
 				*/
 			}
 		});
