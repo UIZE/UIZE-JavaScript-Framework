@@ -47,7 +47,7 @@ Uize.module ({
 		;
 
 		return Uize.package ({
-			getMetrics:function (_sourceStr,_wordSplitter,_tokenRegExp) {
+			getStringMetrics:function (_sourceStr,_wordSplitter,_tokenRegExp) {
 				var
 					_words = 0,
 					_chars = 0,

@@ -33,7 +33,7 @@ Uize.module ({
 			test:[
 				Uize.Test.requiredModulesTest ('Uize.Loc.Strings.Metrics'),
 				Uize.Test.staticMethodsTest ([
-					['Uize.Loc.Strings.Metrics.getMetrics',[
+					['Uize.Loc.Strings.Metrics.getStringMetrics',[
 						['When the source string is an empty string, the word count is zero, the character count it zero, and there are no tokens.',
 							[''],
 							{
