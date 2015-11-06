@@ -38,6 +38,7 @@ Uize.module ({
 		'Uize.Loc.FileFormats.ProjectStrings.Xliff',
 		'Uize.Loc.FileFormats.ProjectStrings.Csv',
 		'Uize.Loc.Pseudo',
+		'Uize.Loc.Strings.StringPath',
 		'Uize.Loc.Strings.Metrics',
 		'Uize.Loc.Strings.Util',
 		'Uize.Loc.Strings.PluralUtils',
@@ -65,7 +66,7 @@ Uize.module ({
 			/*** Variables for Performance Optimization ***/
 				_getStringMetrics = _Uize_Loc_Strings.Metrics.getStringMetrics,
 				_hasNonWhitespace = Uize.Str.Whitespace.hasNonWhitespace,
-				_serializeStringPath = _Uize_Loc_Strings_Util.serializeStringPath,
+				_toStringPath = _Uize_Loc_Strings.StringPath.to,
 				_htmlEntityRegExp = Uize.Util.Html.Encode.entityRegExp,
 
 			/*** General Variables ***/
@@ -210,7 +211,7 @@ Uize.module ({
 										_path [_path.length - 1],
 										_stringInfo.value,
 										_path [0],
-										_serializeStringPath (_path),
+										_toStringPath (_path),
 										_stringInfo.isBrandSpecific,
 										_stringInfo.brand,
 										_stringInfo.hasHtml,

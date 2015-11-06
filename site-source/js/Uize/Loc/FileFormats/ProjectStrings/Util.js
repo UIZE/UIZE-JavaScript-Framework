@@ -27,7 +27,7 @@ Uize.module ({
 	name:'Uize.Loc.FileFormats.ProjectStrings.Util',
 	required:[
 		'Uize.Data.Flatten',
-		'Uize.Loc.Strings.Util'
+		'Uize.Loc.Strings.StringPath'
 	],
 	builder:function () {
 		'use strict';
@@ -36,7 +36,7 @@ Uize.module ({
 			flatten:function (_unflattenedStrings) {
 				return Uize.Data.Flatten.flatten (
 					_unflattenedStrings,
-					Uize.Loc.Strings.Util.serializeStringPath,
+					Uize.Loc.Strings.StringPath.to,
 					false,
 					true
 				);
@@ -45,7 +45,7 @@ Uize.module ({
 			unflatten:function (_flattenedStrings) {
 				return Uize.Data.Flatten.unflatten (
 					_flattenedStrings,
-					Uize.Loc.Strings.Util.parseStringPath,
+					Uize.Loc.Strings.StringPath.from,
 					true
 				);
 			}

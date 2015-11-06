@@ -28,14 +28,14 @@ Uize.module ({
 	required:[
 		'Uize.Data.Diff',
 		'Uize.Data.Csv',
-		'Uize.Json'
+		'Uize.Loc.Strings.StringPath'
 	],
 	builder:function () {
 		'use strict';
 
 		var
 			/*** references to methods used internally ***/
-				_serializeStringPath,
+				_toStringPath = Uize.Loc.Strings.StringPath.to,
 				_initValues,
 
 			/*** General Variables ***/
@@ -143,38 +143,6 @@ Uize.module ({
 				*/
 			},
 
-			serializeStringPath:_serializeStringPath = function (_path) {
-				return Uize.Json.to (_path,'mini');
-				/*?
-					Static Methods
-						Uize.Loc.Strings.Util.serializeStringPath
-							Returns a string, representing the serialized form of the specified string path array.
-
-							SYNTAX
-							......................................................................................
-							serializedStringPathSTR = Uize.Loc.Strings.Util.serializeStringPath (stringPathARRAY);
-							......................................................................................
-
-							NOTES
-							- see the companion =Uize.Loc.Strings.Util.parseStringPath= static method
-				*/
-			},
-
-			parseStringPath:Uize.Json.from,
-				/*?
-					Static Methods
-						Uize.Loc.Strings.Util.parseStringPath
-							Returns an array, representing the string path array parsed from the specified serialized string path.
-
-							SYNTAX
-							..................................................................................
-							stringPathARRAY = Uize.Loc.Strings.Util.parseStringPath (serializedStringPathSTR);
-							..................................................................................
-
-							NOTES
-							- see the companion =Uize.Loc.Strings.Util.serializeStringPath= static method
-				*/
-
 			removeEmptyStrings:function (_strings) {
 				return Uize.Data.Diff.diff (
 					_strings,
@@ -273,7 +241,7 @@ Uize.module ({
 							return [
 								_path [0],
 								_stringDiff.key,
-								_serializeStringPath (_path),
+								_toStringPath (_path),
 								_stringDiff.difference,
 								_stringDiff.valueInA,
 								_stringDiff.valueInB

@@ -28,7 +28,7 @@ Uize.module ({
 	required:[
 		'Uize.Str.Split',
 		'Uize.Util.RegExpComposition',
-		'Uize.Loc.Strings.Util'
+		'Uize.Loc.Strings.StringPath'
 	],
 	builder:function () {
 		'use strict';
@@ -36,7 +36,7 @@ Uize.module ({
 		var
 			/*** Variables for Performance Optimization ***/
 				_split = Uize.Str.Split.split,
-				_serializeStringPath = Uize.Loc.Strings.Util.serializeStringPath,
+				_toStringPath = Uize.Loc.Strings.StringPath.to,
 
 			/*** General Variables ***/
 				_wordSplitterRegExpComposition = Uize.Util.RegExpComposition ({
@@ -132,7 +132,7 @@ Uize.module ({
 						function (_stringInfo) {
 							var
 								_value = _stringInfo.value,
-								_stringFullPath = _serializeStringPath (_stringInfo.path)
+								_stringFullPath = _toStringPath (_stringInfo.path)
 							;
 
 							/*** update information on duplicates ***/
