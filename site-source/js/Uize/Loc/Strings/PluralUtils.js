@@ -33,32 +33,30 @@ Uize.module ({
 			/*** Variables for Scruncher Optimization ***/
 				_getPluralClasses = Uize.Loc.Plurals.ClassesInfo.getPluralClasses,
 
-			/*** General Variables ***/
-				_pluralClasses = ['zero','one','two','few','many','other']
+			/*** References to Statics Used Internally ***/
+				_pluralClasses,
+				_isPluralString,
+				_processPluralStrings
 		;
 
-		/*** Utility Functions ***/
-			function _isPluralString (_string) {
+		return Uize.package ({
+			pluralClasses:_pluralClasses = ['zero','one','two','few','many','other'],
+
+			isPluralString:_isPluralString = function (_string) {
 				return (
 					typeof _string == 'object' && _string &&
 					_string.hasOwnProperty ('other') && typeof _string.other == 'string'
 				);
-			}
+			},
 
-			function _processPluralStrings (_languageResources,_processor) {
+			processPluralStrings:_processPluralStrings = function (_languageResources,_processor) {
 				function _processStringsNode (_node) {
 					if (typeof _node == 'object' && _node)
 						_isPluralString (_node) ? _processor (_node) : Uize.forEach (_node,_processStringsNode)
 					;
 				}
 				Uize.forEach (_languageResources,_processStringsNode);
-			}
-
-		return Uize.package ({
-			pluralClasses:_pluralClasses,
-
-			isPluralString:_isPluralString,
-			processPluralStrings:_processPluralStrings,
+			},
 
 			normalizePluralStringsForPrimaryLanguage:function (_primaryLanguageResources) {
 				/* NOTE:
