@@ -1220,20 +1220,16 @@ Uize.module ({
 							/*** determine strings that need translation ***/
 								var
 									_languageResourcesFromResourcesFile = _readLanguageResourcesFile (m,_language) || {},
-									_languageResources =
-										(
-											_project.plurals &&
-											(_filterIsAll || _filterIsTranslated)
-										)
-											/* NOTE:
-												Remove plural classes not supported for language.
+									_languageResources = _project.plurals && (_filterIsAll || _filterIsTranslated)
+										/* NOTE:
+											Remove plural classes not supported for language.
 
-												There are dummy non-empty values for the unsupported plurals for a language, and these values won't make it through the "missing" filter. Therefore, this removal process only needs to be performed when the filter is not "missing".
-											*/
-											? _Uize_Loc_Strings_PluralUtils.removeUnsupportedPluralsForTranslatableLanguage (
-												_languageResourcesFromResourcesFile,_language
-											)
-											: _languageResourcesFromResourcesFile
+											There are dummy non-empty values for the unsupported plurals for a language, and these values won't make it through the "missing" filter. Therefore, this removal process only needs to be performed when the filter is not "missing".
+										*/
+										? _Uize_Loc_Strings_PluralUtils.removeUnsupportedPluralsForTranslatableLanguage (
+											_languageResourcesFromResourcesFile,_language
+										)
+										: _languageResourcesFromResourcesFile
 									,
 									_translationJobStrings = Uize.Data.Diff.diff (
 										_languageResources,
