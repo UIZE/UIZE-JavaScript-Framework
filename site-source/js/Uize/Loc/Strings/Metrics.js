@@ -27,7 +27,7 @@ Uize.module ({
 	name:'Uize.Loc.Strings.Metrics',
 	required:[
 		'Uize.Str.Split',
-		'Uize.Util.RegExpComposition',
+		'Uize.Util.RegExpComposition.WordSplitter',
 		'Uize.Loc.Strings.StringPath',
 		'Uize.Array.Sort'
 	],
@@ -40,13 +40,7 @@ Uize.module ({
 				_toStringPath = Uize.Loc.Strings.StringPath.to,
 
 			/*** General Variables ***/
-				_wordSplitterRegExpComposition = Uize.Util.RegExpComposition ({
-					punctuation:/[\?!\.:;,&=\-\(\)\[\]"<>]/,
-					number:/\d+(?:\.\d+)?/,
-					whitespace:/\s+/,
-					wordSplitter:/({whitespace}|{punctuation}|{number})/
-				}),
-				_defaultWordSplitter = _wordSplitterRegExpComposition.get ('wordSplitter')
+				_defaultWordSplitter = Uize.Util.RegExpComposition.WordSplitter.get ('wordSplitter')
 		;
 
 		return Uize.package ({
