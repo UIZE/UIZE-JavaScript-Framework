@@ -28,7 +28,8 @@ Uize.module ({
 	required:[
 		'Uize.Str.Split',
 		'Uize.Util.RegExpComposition',
-		'Uize.Loc.Strings.StringPath'
+		'Uize.Loc.Strings.StringPath',
+		'Uize.Array.Sort'
 	],
 	builder:function () {
 		'use strict';
@@ -121,6 +122,7 @@ Uize.module ({
 					_valuesLookup = {},
 					_dupedResourceStringsDetails = {},
 					_tokenUsage = {},
+					_tokenUsageSummary,
 					_tokenHistogram = {},
 					_wordCountHistogram = {},
 					_charCountHistogram = {}
@@ -205,6 +207,23 @@ Uize.module ({
 						}
 					);
 
+				/*** build token usage summary ***/
+					_tokenUsageSummary = Uize.Array.Sort.sortBy (
+						Uize.map (
+							Uize.keys (_tokenUsage),
+							function (_tokenName) {
+								var _stringsFoundInCount = _tokenUsage [_tokenName].length;
+								return {
+									name:_tokenName,
+									stringsFoundInCount:_stringsFoundInCount,
+									stringsFoundInPercent:_stringsFoundInCount / _totalResourceStrings * 100
+								};
+							}
+						),
+						'value.stringsFoundInCount',
+						-1
+					);
+
 				return {
 					resourceStrings:{
 						all:_totalResourceStrings,
@@ -231,6 +250,7 @@ Uize.module ({
 					tokens:_totalTokens,
 					dupedResourceStringsDetails:_dupedResourceStringsDetails,
 					tokenUsage:_tokenUsage,
+					tokenUsageSummary:_tokenUsageSummary,
 					tokenHistogram:_tokenHistogram,
 					wordCountHistogram:_wordCountHistogram,
 					charCountHistogram:_charCountHistogram

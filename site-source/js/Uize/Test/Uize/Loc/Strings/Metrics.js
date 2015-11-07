@@ -200,6 +200,7 @@ Uize.module ({
 								tokens:0,
 								dupedResourceStringsDetails:{},
 								tokenUsage:{},
+								tokenUsageSummary:[],
 								tokenHistogram:{
 									0:2
 								},
