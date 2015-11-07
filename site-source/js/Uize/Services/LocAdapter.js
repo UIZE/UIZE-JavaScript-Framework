@@ -31,6 +31,7 @@ Uize.module ({
 		'Uize.Data.Flatten',
 		'Uize.Data.Matches',
 		'Uize.Data.Mappings',
+		'Uize.Data.NameValueRecords',
 		'Uize.Data.Util',
 		'Uize.Array.Dupes',
 		'Uize.Array.Util',
@@ -1448,6 +1449,17 @@ Uize.module ({
 									total:'Total Tokens'
 								},
 								occurrencesByValue:_metrics.tokenHistogram
+							}) + '\n' +
+							_breakdownTable ({
+								title:'Token Usage Summary',
+								countByCategory:Uize.copyInto (
+									{'ALL STRINGS':_metrics.resourceStrings.all},
+									Uize.Data.NameValueRecords.toHash (
+										_metrics.tokenUsageSummary,
+										function (_value) {return 'Strings using... ' + _value.name},
+										'stringsFoundInCount'
+									)
+								)
 							})
 						);
 
