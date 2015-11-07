@@ -59,12 +59,13 @@ Uize.module ({
 				_undefined,
 				_Uize_Loc_Strings = Uize.Loc.Strings,
 				_Uize_Loc_Strings_Util = _Uize_Loc_Strings.Util,
+				_Uize_Loc_Strings_Metrics = _Uize_Loc_Strings.Metrics,
 				_Uize_Loc_Strings_PluralUtils = _Uize_Loc_Strings.PluralUtils,
 				_breakdownTable = Uize.Templates.Text.Tables.Breakdown.process,
 				_removeEmptyStrings = _Uize_Loc_Strings_Util.removeEmptyStrings,
 
 			/*** Variables for Performance Optimization ***/
-				_getStringMetrics = _Uize_Loc_Strings.Metrics.getStringMetrics,
+				_getStringMetrics = _Uize_Loc_Strings_Metrics.getStringMetrics,
 				_hasNonWhitespace = Uize.Str.Whitespace.hasNonWhitespace,
 				_toStringPath = _Uize_Loc_Strings.StringPath.to,
 				_htmlEntityRegExp = Uize.Util.Html.Encode.entityRegExp,
@@ -281,7 +282,7 @@ Uize.module ({
 								perBrand:_totalResourceFilesPerBrand
 							}
 						},
-						_Uize_Loc_Strings_Util.stringsMetricsFromStringsInfo (
+						_Uize_Loc_Strings_Metrics.getStringsMetrics (
 							_calculateStringsInfoForLanguage (m,_language,_languageResources,_subFolder)
 						)
 					);
