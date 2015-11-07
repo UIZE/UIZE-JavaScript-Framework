@@ -30,7 +30,7 @@ Uize.module ({
 		'use strict';
 
 		return Uize.Util.RegExpComposition ({
-			punctuation:/[\?!\.;,&=\-\(\)\[\]"<>]+/,
+			punctuation:/[\?!\.;:,&=\-\(\)\[\]"<>]+/,
 			number:/\d+(?:\.\d+)?/,
 			whitespace:/\s+/,
 			wordSplitter:/{whitespace}|{punctuation}|{number}/
