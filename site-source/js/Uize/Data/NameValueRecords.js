@@ -566,24 +566,34 @@ Uize.module ({
 				*/
 			},
 
-			toHash:function (_records,_nameProperty,_valueProperty) {
+			toHash:function (_records,_nameIndexer,_valueIndexer) {
 				var
 					_result = {},
 					_recordsLength = Uize.isArray (_records) && _records.length
 				;
+
+				function _resolveIndexer (_indexer,_default) {
+					if (!Uize.isFunction (_indexer)) {
+						var _property = _Uize_defaultNully (_indexer,_default);
+						_indexer = function (_value) {return _value [_property]};
+					}
+					return _indexer;
+				}
+
 				if (_recordsLength) {
-					/*** default _nameProperty and _valueProperty params ***/
+					/*** resolve _nameIndexer and _valueIndexer params ***/
 						var _recordTypeIsArray = Uize.isArray (_records [0]);
-						_nameProperty = _Uize_defaultNully (_nameProperty,_recordTypeIsArray ? 0 : 'name');
-						_valueProperty = _Uize_defaultNully (_valueProperty,_recordTypeIsArray ? 1 : 'value');
+						_nameIndexer = _resolveIndexer (_nameIndexer,_recordTypeIsArray ? 0 : 'name');
+						_valueIndexer = _resolveIndexer (_valueIndexer,_recordTypeIsArray ? 1 : 'value');
 
 						for (var _recordNo = -1, _record, _name; ++_recordNo < _recordsLength;) {
-							_name = (_record = _records [_recordNo]) [_nameProperty];
+							_name = _nameIndexer (_record = _records [_recordNo]);
 							if (_name != _undefined)
-								_result [_name] = _record [_valueProperty]
+								_result [_name] = _valueIndexer (_record)
 							;
 						}
 				}
+
 				return _result;
 				/*?
 					Static Methods
