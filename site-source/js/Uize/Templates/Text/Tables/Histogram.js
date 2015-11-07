@@ -76,7 +76,39 @@ Uize.module ({
 						}
 					);
 				}
-				var _maxOccurrences = Uize.max (Uize.Data.Util.getColumn (_rows,1));
+
+				var
+					_totals = Uize.Data.Util.getColumn (_rows,2),
+					_maxOccurrences = Uize.max (Uize.Data.Util.getColumn (_rows,1)),
+					_maxTotals = Uize.max (_totals),
+					_trackLength = Uize.constrain (_maxOccurrences,20,50)
+				;
+
+				function _barFormatter (_max) {
+					return function (_value) {
+						return (
+							_value != undefined
+								? (
+									_value +
+									(
+										Uize.isNumber (_value)
+											? (
+												' ' +
+												Uize.Templates.Text.ProgressBar.process ({
+													trackLength:_trackLength,
+													endsChar:'',
+													fullHeadChar:'',
+													progress:_value / _max
+												})
+											)
+											: ''
+									)
+								)
+								: ''
+						);
+					}
+				}
+
 				return Uize.Templates.Text.Table.process ({
 					title:_input.title,
 					columns:[
@@ -84,32 +116,19 @@ Uize.module ({
 						{
 							title:_columnTitles.occurrences,
 							align:'right',
-							formatter:function (_value) {
-								return (
-									_value != undefined
-										? (
-											_value + ' ' +
-											Uize.Templates.Text.ProgressBar.process ({
-												trackLength:Uize.constrain (_maxOccurrences,20,50),
-												endsChar:'',
-												fullHeadChar:'',
-												progress:_value / _maxOccurrences
-											})
-										)
-										: ''
-								);
-							}
+							formatter:_barFormatter (_maxOccurrences)
 						},
 						{
 							title:_columnTitles.total,
-							align:'right'
+							align:'right',
+							formatter:_barFormatter (_maxTotals)
 						}
 					],
 					rows:_rows.concat ([
 						[
 							'All (' + _minValue + '-' + _maxValue + ')',
 							undefined,
-							Uize.Array.Util.sum (Uize.Data.Util.getColumn (_rows,2))
+							Uize.Array.Util.sum (_totals) + ''
 						]
 					])
 				});
