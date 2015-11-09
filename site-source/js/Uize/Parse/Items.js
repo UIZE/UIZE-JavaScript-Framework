@@ -45,7 +45,7 @@ Uize.module ({
 				parse:function (_source,_index) {
 					var
 						m = this,
-						_sourceLength = (m.source = _source = _source || '').length,
+						_sourceLength = (m.source = _source).length,
 						_items = m.items,
 						_workingItems = m.workingItems,
 						_itemTypes = m.constructor.itemTypes,

@@ -60,7 +60,7 @@ Uize.module ({
 					}
 					var
 						m = this,
-						_sourceLength = (m.source = _source = _source || '').length
+						_sourceLength = (m.source = _source).length
 					;
 					m.index = _index || (_index = 0);
 					m.isValid = true;

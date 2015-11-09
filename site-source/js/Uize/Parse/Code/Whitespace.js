@@ -43,7 +43,7 @@ Uize.module ({
 			instanceMethods:{
 				parse:function (_source,_index) {
 					var m = this;
-					m.source = _source = _source || '';
+					m.source = _source;
 					m.index = _index || (_index = 0);
 					_index = (_indexOfNonWhitespace (_source,_index) + 1 || _source.length + 1) - 1;
 					m.whitespace = (m.isValid = !!(m.length = _index - m.index)) ? _source.slice (m.index,_index) : '';

@@ -55,7 +55,7 @@ Uize.module ({
 						m = this,
 						_attributes = m._attributes,
 						_attribute,
-						_sourceLength = (m.source = _source = _source || '').length
+						_sourceLength = (m.source = _source).length
 					;
 					m.isValid = true;
 					m.index = _index || (_index = 0);

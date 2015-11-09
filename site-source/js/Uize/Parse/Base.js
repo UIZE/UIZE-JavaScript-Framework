@@ -30,7 +30,7 @@ Uize.module ({
 		'use strict';
 
 		return _superclass.subclass ({
-			constructor:function (_source,_index) {this.parse (_source,_index)},
+			constructor:function (_source,_index) {this.parse (_source || '',_index)},
 
 			instanceProperties:{
 				source:'',
