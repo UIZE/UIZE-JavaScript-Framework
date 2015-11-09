@@ -83,7 +83,7 @@ Uize.module ({
 				},
 
 				serialize:function () {
-					return this.isValid ? this.stringKey.serialize () + ' = ' + this.stringValue.serialize () : '';
+					return this.isValid ? this.stringKey.serialize () + ' = ' + this.stringValue.serialize () + ';' : '';
 				}
 			}
 		});
