@@ -27,6 +27,8 @@ Uize.module ({
 	name:'Uize.Widgets.ShareStrip.Widget',
 	superclass:'Uize.Widget.V2',
 	required:[
+		'Uize.Widgets.ShareStrip.Html',
+		'Uize.Widgets.ShareStrip.Css',
 		'Uize.Widgets.Buttons.Share.Twitter.Widget',
 		'Uize.Widgets.Buttons.Share.Facebook.Widget',
 		'Uize.Widgets.Buttons.Share.StumbleUpon.Widget',
@@ -57,6 +59,14 @@ Uize.module ({
 				comprehensive:{
 					value:true
 				}
+			},
+
+			set:{
+				html:Uize.Widgets.ShareStrip.Html
+			},
+
+			staticProperties:{
+				cssModule:Uize.Widgets.ShareStrip.Css
 			},
 
 			htmlBindings:{

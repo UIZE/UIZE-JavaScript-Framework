@@ -35,18 +35,11 @@
 Uize.module ({
 	name:'Uize.Widgets.ShareStrip.Vert.Widget',
 	superclass:'Uize.Widgets.ShareStrip.Widget',
-	required:[
-		'Uize.Widgets.ShareStrip.Vert.Html',
-		'Uize.Widgets.ShareStrip.Vert.Css'
-	],
+	required:'Uize.Widgets.ShareStrip.Vert.Css',
 	builder:function (_superclass) {
 		'use strict';
 
 		return _superclass.subclass ({
-			set:{
-				html:Uize.Widgets.ShareStrip.Vert.Html
-			},
-
 			staticProperties:{
 				cssModule:Uize.Widgets.ShareStrip.Vert.Css
 			}
