@@ -76,15 +76,17 @@ Uize.module ({
 											name:{name:'Property1Name',isValid:true},
 											value:{value:'Property1Value',isValid:true}
 										},
-										1:{
+										1:{whitespace:'\n'},
+										2:{
 											name:{name:'Property2Name',isValid:true},
 											value:{value:'Property2Value',isValid:true}
 										},
-										2:{
+										3:{whitespace:'\n'},
+										4:{
 											name:{name:'Property3Name',isValid:true},
 											value:{value:'Property3Value',isValid:true}
 										},
-										length:3
+										length:5
 									},
 									isValid:true
 								}
@@ -103,25 +105,28 @@ Uize.module ({
 											name:{name:'Property1Name',isValid:true},
 											value:{value:'Property1Value',isValid:true}
 										},
-										1:{
+										1:{whitespace:'\n'},
+										2:{
 											name:{name:'Property2Name',isValid:true},
 											value:{value:'Property2Value',isValid:true}
 										},
-										2:{
+										3:{whitespace:'\r\n'},
+										4:{
 											name:{name:'Property3Name',isValid:true},
 											value:{value:'Property3Value',isValid:true}
 										},
-										3:{
+										5:{whitespace:'\r'},
+										6:{
 											name:{name:'Property4Name',isValid:true},
 											value:{value:'Property4Value',isValid:true}
 										},
-										length:4
+										length:7
 									},
 									isValid:true
 								}
 							),
 							Uize.Test.ParserTest.parserTest (
-								'Blank lines between properties are ignored',
+								'Multiple blank lines between properties are collapsed into items of contiguous whitespace',
 								[
 									[
 										'',
@@ -139,19 +144,23 @@ Uize.module ({
 								],
 								{
 									items:{
-										0:{
+										0:{whitespace:'\n'},
+										1:{
 											name:{name:'Property1Name',isValid:true},
 											value:{value:'Property1Value',isValid:true}
 										},
-										1:{
+										2:{whitespace:'\n\n\n'},
+										3:{
 											name:{name:'Property2Name',isValid:true},
 											value:{value:'Property2Value',isValid:true}
 										},
-										2:{
+										4:{whitespace:'\n\n\n\n'},
+										5:{
 											name:{name:'Property3Name',isValid:true},
 											value:{value:'Property3Value',isValid:true}
 										},
-										length:3
+										6:{whitespace:'\n\n'},
+										length:7
 									},
 									isValid:true
 								}
@@ -168,15 +177,17 @@ Uize.module ({
 								{
 									items:{
 										0:{comment:'comment number 1',isValid:true},
-										1:{comment:'comment number 2',isValid:true},
-										2:{comment:'comment number 3',isValid:true},
-										length:3
+										1:{whitespace:'\n'},
+										2:{comment:'comment number 2',isValid:true},
+										3:{whitespace:'\n'},
+										4:{comment:'comment number 3',isValid:true},
+										length:5
 									},
 									isValid:true
 								}
 							),
 							Uize.Test.ParserTest.parserTest (
-								'Blank lines around comments are ignored',
+								'Multiple blank lines between comments are collapsed into items of contiguous whitespace',
 								[
 									[
 										'',
@@ -194,10 +205,14 @@ Uize.module ({
 								],
 								{
 									items:{
-										0:{comment:'comment number 1',isValid:true},
-										1:{comment:'comment number 2',isValid:true},
-										2:{comment:'comment number 3',isValid:true},
-										length:3
+										0:{whitespace:'\n\n'},
+										1:{comment:'comment number 1',isValid:true},
+										2:{whitespace:'\n\n'},
+										3:{comment:'comment number 2',isValid:true},
+										4:{whitespace:'\n\n\n\n'},
+										5:{comment:'comment number 3',isValid:true},
+										6:{whitespace:'\n\n'},
+										length:7
 									},
 									isValid:true
 								}
@@ -224,22 +239,29 @@ Uize.module ({
 								],
 								{
 									items:{
-										0:{
+										0:{whitespace:'\n'},
+										1:{
 											name:{name:'Property1Name',isValid:true},
 											value:{value:'Property1Value',isValid:true}
 										},
-										1:{comment:'comment number 1',isValid:true},
-										2:{comment:'comment number 2',isValid:true},
-										3:{
+										2:{whitespace:'\n\n'},
+										3:{comment:'comment number 1',isValid:true},
+										4:{whitespace:'\n\n'},
+										5:{comment:'comment number 2',isValid:true},
+										6:{whitespace:'\n\n\n\n'},
+										7:{
 											name:{name:'Property2Name',isValid:true},
 											value:{value:'Property2Value',isValid:true}
 										},
-										4:{comment:'comment number 3',isValid:true},
-										5:{
+										8:{whitespace:'\n'},
+										9:{comment:'comment number 3',isValid:true},
+										10:{whitespace:'\n    '},
+										11:{
 											name:{name:'Property3Name',isValid:true},
 											value:{value:'Property3Value',isValid:true}
 										},
-										length:6
+										12:{whitespace:'\n\n'},
+										length:13
 									},
 									isValid:true
 								}
@@ -265,12 +287,20 @@ Uize.module ({
 							''
 						].join ('\n'),
 						[
+							'',
 							'Property1Name=Property1Value',
+							'',
 							'#comment number 1',
+							'',
 							'#comment number 2',
+							'',
+							'',
+							'',
 							'Property2Name=Property2Value',
 							'#comment number 3',
-							'Property3Name=Property3Value'
+							'    Property3Name=Property3Value',
+							'',
+							''
 						].join ('\n')
 					)
 				]

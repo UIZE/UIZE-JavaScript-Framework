@@ -31,7 +31,7 @@ Uize.module ({
 		'use strict';
 
 		var _class = _superclass.subclass ();
-		_class.prototype.parserClassesByType.property = Uize.Parse.JavaPropertiesAscii.Property;
+		_class.itemTypes.property = Uize.Parse.JavaPropertiesAscii.Property;
 		return _class;
 	}
 });

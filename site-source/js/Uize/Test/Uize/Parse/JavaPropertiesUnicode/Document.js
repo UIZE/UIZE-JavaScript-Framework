@@ -48,7 +48,7 @@ Uize.module ({
 						'A Unicode Java properties document can be parsed',
 						[_unicodeJavaPropertiesDocument],
 						{
-							items:{length:5},
+							items:{length:9},
 							isValid:true
 						}
 					),

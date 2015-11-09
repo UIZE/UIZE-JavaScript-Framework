@@ -25,76 +25,21 @@
 
 Uize.module ({
 	name:'Uize.Parse.JavaProperties.Document',
-	superclass:'Uize.Parse.Base',
+	superclass:'Uize.Parse.Items',
 	required:[
-		'Uize.Str.Whitespace',
+		'Uize.Parse.Code.PoundComment',
 		'Uize.Parse.JavaProperties.Property',
-		'Uize.Parse.Code.PoundComment'
+		'Uize.Parse.Code.Whitespace'
 	],
 	builder:function (_superclass) {
 		'use strict';
 
-		var
-			/*** Variables for Performance Optimization ***/
-				_Uize_Parse = Uize.Parse,
-				_indexOfNonWhitespace = Uize.Str.Whitespace.indexOfNonWhitespace
-		;
-
 		return _superclass.subclass ({
-			constructor:function () {
-				var m = this;
-				m._items = m.items = [];
-				m._currentItems = {};
-				_superclass.apply (m,arguments);
-			},
-
-			instanceProperties:{
-				parserClassesByType:{
-					comment:_Uize_Parse.Code.PoundComment,
-					property:_Uize_Parse.JavaProperties.Property
-				}
-			},
-
-			instanceMethods:{
-				parse:function (_source,_index) {
-					function _tryParseItem (_itemType) {
-						var _item =
-							m._currentItems [_itemType] ||
-							(m._currentItems [_itemType] = new m.parserClassesByType [_itemType])
-						;
-						_item.parse (_source,_index);
-						if (_item.isValid) {
-							_items.push (_item);
-							m._currentItems [_itemType] = null;
-							_index += _item.length;
-						}
-						return _item.isValid;
-					}
-					function _eatWhitespace () {
-						_index = (_indexOfNonWhitespace (_source,_index) + 1 || _sourceLength + 1) - 1;
-					}
-					var
-						m = this,
-						_sourceLength = (m.source = _source = _source || '').length,
-						_items = m._items
-					;
-					_items.length = 0;
-					m.isValid = true;
-					m.index = _index || (_index = 0);
-					while (
-						_index < _sourceLength &&
-						(
-							_tryParseItem ('comment') ||
-							_tryParseItem ('property') ||
-							_eatWhitespace () ||
-							true
-						)
-					);
-					m.length = _index - m.index;
-				},
-
-				serialize:function () {
-					return this.isValid ? Uize.map (this._items,'value.serialize ()').join ('\n') : '';
+			staticProperties:{
+				itemTypes:{
+					comment:Uize.Parse.Code.PoundComment,
+					property:Uize.Parse.JavaProperties.Property,
+					whitespace:Uize.Parse.Code.Whitespace
 				}
 			}
 		});

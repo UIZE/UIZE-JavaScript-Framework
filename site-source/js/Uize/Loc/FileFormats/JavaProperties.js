@@ -27,7 +27,8 @@ Uize.module ({
 	name:'Uize.Loc.FileFormats.JavaProperties',
 	required:[
 		'Uize.Parse.JavaProperties.Document',
-		'Uize.Parse.JavaProperties.Property'
+		'Uize.Parse.JavaProperties.Property',
+		'Uize.Parse.Code.Whitespace'
 	],
 	builder:function () {
 		'use strict';
@@ -79,6 +80,7 @@ Uize.module ({
 						var _property = new _propertyParser ('key=value');
 						_property.name.name = _propertyName;
 						_property.value.value = _propertyValue;
+						_items.length && _items.push (new Uize.Parse.Code.Whitespace ('\n'));
 						_items.push (_property);
 					}
 				);
