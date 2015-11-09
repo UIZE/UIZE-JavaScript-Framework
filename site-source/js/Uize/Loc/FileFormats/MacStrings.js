@@ -26,96 +26,25 @@
 Uize.module ({
 	name:'Uize.Loc.FileFormats.MacStrings',
 	required:[
-		'Uize.Str.Whitespace',
-		'Uize.Parse.Code.CStyleSingleLineComment',
-		'Uize.Parse.Code.CStyleMultiLineComment',
-		'Uize.Parse.Code.StringLiteral',
-		'Uize.Parse.MacStrings.String'
+		'Uize.Parse.MacStrings.Document',
+		'Uize.Parse.MacStrings.String',
+		'Uize.Parse.Code.Whitespace'
 	],
 	builder:function () {
 		'use strict';
 
 		var
 			/*** Variables for Scruncher Optimization ***/
-				_undefined,
-				_indexOfNonWhitespace = Uize.Str.Whitespace.indexOfNonWhitespace,
-				_Uize_Parse_Code_StringLiteral = Uize.Parse.Code.StringLiteral
+				_Uize_Parse_MacStrings_Document = Uize.Parse.MacStrings.Document
 		;
-
-		/*** Utility Functions ***/
-			function _parserClass (_constructor,_instanceMethods) {
-				Uize.copyInto (_constructor.prototype,_instanceMethods);
-				return _constructor;
-			}
-
-		/*** Parser Objects ***/
-			var
-				_currentItems = {},
-				_ItemsList = _parserClass (
-					function () {
-						this._items = this.items = [];
-					},
-					{
-						parse:function (_source,_index) {
-							function _eatWhitespace () {
-								_index = (_indexOfNonWhitespace (_source,_index) + 1 || _sourceLength + 1) - 1;
-							}
-							var
-								m = this,
-								_sourceLength = (m.source = _source).length,
-								_items = m._items
-							;
-							m.isValid = true;
-							m.index = _index || (_index = 0);
-							m.length = _items.length = 0;
-
-							function _tryParseItem (_itemType,_itemClass) {
-								var _item = _currentItems [_itemType] || (_currentItems [_itemType] = new _itemClass);
-								_item.parse (_source,_index);
-								if (_item.isValid) {
-									_items.push (_item);
-									_currentItems [_itemType] = null;
-									_index += _item.length;
-								}
-								return _item.isValid;
-							}
-							while (m.isValid && _index < _sourceLength) {
-								_eatWhitespace ();
-								if (_index < _sourceLength)
-									m.isValid =
-										_tryParseItem ('SingleLineComment',_SingleLineComment) ||
-										_tryParseItem ('MultiLineComment',_MultiLineComment) ||
-										_tryParseItem ('String',_String)
-									;
-								;
-							}
-							if (m.isValid)
-								m.length = _index - m.index
-							;
-						},
-
-						serialize:function () {
-							return this.isValid ? Uize.map (this._items,'value.serialize ()').join ('\n') : '';
-						}
-					}
-				),
-
-				_SingleLineComment = Uize.Parse.Code.CStyleSingleLineComment,
-				_MultiLineComment = Uize.Parse.Code.CStyleMultiLineComment,
-				_String = Uize.Parse.MacStrings.String
-			;
 
 		return Uize.package ({
 			from:function (_toDecode) {
-				var
-					_itemsList = new _ItemsList,
-					_strings = {}
-				;
-				_itemsList.parse (_toDecode);
+				var _strings = {};
 				Uize.forEach (
-					_itemsList.items,
+					(new _Uize_Parse_MacStrings_Document (_toDecode)).items,
 					function (_item) {
-						if (_item.constructor == _String)
+						if (_item.stringKey && _item.stringValue)
 							_strings [_item.stringKey.value] = _item.stringValue.value
 						;
 					}
@@ -137,20 +66,22 @@ Uize.module ({
 			},
 
 			to:function (_toEncode) {
-				function _getQuotedStr (_value) {
-					_stringLiteralParser.value = _value;
-					_stringLiteralParser.isValid = true;
-					return _stringLiteralParser.serialize ();
-				}
 				var
-					_lines = [],
-					_stringLiteralParser = new _Uize_Parse_Code_StringLiteral
+					_document = new _Uize_Parse_MacStrings_Document,
+					_itemParser = Uize.Parse.MacStrings.String,
+					_items = _document.items
 				;
 				Uize.forEach (
 					_toEncode,
-					function (_value,_key) {_lines.push (_getQuotedStr (_key) + ' = ' + _getQuotedStr (_value) + ';')}
+					function (_stringValue,_stringKey) {
+						var _item = new _itemParser ('"key" = "value";');
+						_item.stringKey.value = _stringKey;
+						_item.stringValue.value = _stringValue;
+						_items.length && _items.push (new Uize.Parse.Code.Whitespace ('\n'));
+						_items.push (_item);
+					}
 				);
-				return _lines.join ('\n');
+				return _document.serialize ();
 				/*?
 					Static Methods
 						Uize.Loc.FileFormats.MacStrings.to
