@@ -46,9 +46,9 @@ Uize.module ({
 				var _properties = {};
 				Uize.forEach (
 					(new this.documentParser (_javaPropertiesFileStr)).items,
-					function (_property) {
-						if (_property.name && _property.value)
-							_properties [_property.name.name] = _property.value.value
+					function (_item) {
+						if (_item.name && _item.value)
+							_properties [_item.name.name] = _item.value.value
 						;
 					}
 				);
@@ -71,17 +71,17 @@ Uize.module ({
 			to:function (_properties) {
 				var
 					_document = new this.documentParser (),
-					_propertyParser = this.propertyParser,
+					_itemParser = this.propertyParser,
 					_items = _document.items
 				;
 				Uize.forEach (
 					_properties,
 					function (_propertyValue,_propertyName) {
-						var _property = new _propertyParser ('key=value');
-						_property.name.name = _propertyName;
-						_property.value.value = _propertyValue;
+						var _item = new _itemParser ('key=value');
+						_item.name.name = _propertyName;
+						_item.value.value = _propertyValue;
 						_items.length && _items.push (new Uize.Parse.Code.Whitespace ('\n'));
-						_items.push (_property);
+						_items.push (_item);
 					}
 				);
 				return _document.serialize ();
