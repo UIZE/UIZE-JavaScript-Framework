@@ -1,5 +1,65 @@
 This is a TO DO document for the =Uize.Widget.HtmltCompiler= module.
 
+Add Support for Subclassing
+	Provide a mechanism whereby htmlt templates can extend other htmlt templates.
+
+	Consider the following widget classes...
+
+	- MyNamespace.Widgets.MyWidget.Html
+	- MyNamespace.Widgets.MyWidgetSubclass.Html
+
+	SUPERCLASS
+	.......................
+	<div>
+		<div id="foo"></div>
+		<div id="bar"></div>
+	</div>
+	.......................
+
+	SUBCLASS
+	..................................................
+	<extend class="MyNamespace.Widgets.MyWidget.Html">
+		<inject where="foo" how="outer replace">
+			<div id="foo">
+				<div id="qux"/>
+			</div>
+		</inject>
+	</extend>
+	..................................................
+
+	Injection Modes
+		Content can be injected into the DOM of the superclass using any of the following injection modes...
+
+		- inner bottom (default) | bottom
+		- inner top | top
+		- outer bottom | after
+		- outer top | before
+		- inner replace | content
+		- outer replace | replace
+
+	Challenges
+		Supporting subclassing presents a few challenges, including...
+
+		Testability of the Compiler
+			A special provision needs to be put in place in order for the HtmltCompiler module to be testable in unit tests, since the module can't on its own resolve loading of the superclass htmlt.
+
+			An appropriate way needs to be devised to structure the code in order to maintain a clean / clear interface and appropriate demarcation of responsibilities. In a way, this problem is similar to the problem of bindings and class features. The compiler expects the widget class with which the htmlt is associated to be supplied at the time the template is compiled. Therefore, it might be reasonable as well to supply the compiler with the htmlt markup for the superclass' template.
+
+		Determining the Template to Extend
+			The file builder for htmlt templates should ideally be able to determine the superclass htmlt template that is being extended without having to parse or compile an htmlt template.
+
+			This requirement is at odds with an approach where the superclass template that is to be extended by an htmlt template is declared inside the markup of the template. For one thing, this would require first parsing the htmlt template, discovering that it extends another htmlt template, then loading that template and proceeding with the compilation. Furthermore, the file builder should be able to determine the dependencies for a template with less computation and ideally without fully parsing the template, for the sake of the currentness determination for the template.
+
+		Refactoring Robustness
+			Theoretically, it should be possible to simply define an htmlt template for a widget class and not be concerned about which class in the inheritance chain actually explicitly defines the htmlt that would be extended.
+
+			Furthermore, the subclass should not be affected by changes in the class hierarchy up the inheritance chain.
+
+		Multiple Subclassing
+			It should be possible for an htmlt template to extend an htmlt template that is, itself, extending some other htmlt template.
+
+			In other words, it should be possible to have multiple levels of htmlt subclassing.
+
 Improve Child Widget Syntax
 	Provide a more versatile syntax for declaring child widgets that allows the values of state properties to be specified using JSON formatted data...
 
