@@ -844,9 +844,9 @@ Uize.module ({
 								When the optional =injectModeSTR= parameter is specified, the manner in which the HTML is injected can be controlled. The default value for this parameter, ='inner bottom'=, results in the HTML being appended to the existing contents. However, if the value ='inner top'= is specified, then the HTML will be injected before the existing contents.
 
 								Injection Modes
-									- ='inner bottom'= - HTML will be injected inside the node, after all of its contents
+									- ='inner bottom'= (the default) - HTML will be injected inside the node, after all of its contents
 									- ='inner top'= - HTML will be injected inside the node, before all of its contents
-									- ='outer bottom'= (the default) - HTML will be injected outside the node, right after the node
+									- ='outer bottom'= - HTML will be injected outside the node, right after the node
 									- ='outer top'= - HTML will be injected outside the node, right before the node
 									- ='inner replace'= - HTML will replace the contents in the node (equivalent to innerHTML replacement)
 									- ='outer replace'= - HTML will replace the node itself (equivalent to IE's outerHTML replacement)
