@@ -1,5 +1,55 @@
 This is a TO DO document for the =Uize.Widget.HtmltCompiler= module.
 
+Improve Child Widget Syntax
+	Provide a more versatile syntax for declaring child widgets that allows the values of state properties to be specified using JSON formatted data...
+
+	TYPICAL
+	......................................................
+	<child prop1Name="prop1Value" prop2Name="prop2Value"/>
+	......................................................
+
+	JSON
+	..........................
+	<child>
+	{
+		prop1Name:'prop1Value',
+		prop2Name:'prop2Value'
+	}
+	</child>
+	..........................
+
+	PROPERTY TAGS
+	..................................................
+	<child>
+		<property name="prop1Name" value="prop1Value"/>
+		<property name="prop2Name" value="prop2Value"/>
+	</child>
+	..................................................
+
+	PROPERTY TAGS CONTAINING JSON
+	.....................................................
+	<child>
+		<property name="prop1Name">"prop1Value"</property>
+		<property name="prop2Name">"prop2Value"</property>
+	</child>
+	.....................................................
+
+	CUSTOM PROPERTY TAGS
+	..................................
+	<child>
+		<prop1Name value="prop1Value"/>
+		<prop2Name value="prop2Value"/>
+	</child>
+	..................................
+
+	CUSTOM PROPERTY TAGS CONTAINING JSON
+	......................................
+	<child>
+		<prop1Name>"prop1Value"</prop1Name>
+		<prop2Name>"prop2Value"</prop2Name>
+	</child>
+	......................................
+
 Achieve Parity for Bindings
 	Achieve parity for style bindings compiled to template code.
 
@@ -40,7 +90,4 @@ Miscellaneous
 	- attribute bindings vs. property bindings
 		- reconcile attribute bindings and property bindings (is this possible?)
 		- will need to map property bindings to attribute binding equivalents
-
-Child Widgets
-	- support JSON for specifying properties of child widgets
 
