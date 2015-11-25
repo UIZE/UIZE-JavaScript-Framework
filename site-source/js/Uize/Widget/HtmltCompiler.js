@@ -111,7 +111,7 @@ Uize.module ({
 					}
 				}
 
-				function _ensureNodeAttribute (_node,_attributeName,_attributeValue) {
+				function _setTagAttribute (_node,_attributeName,_attributeValue) {
 					var _attribute = _getAttribute (_node,_attributeName);
 					_attribute ||
 						_node.tagAttributes.attributes.push (
@@ -126,7 +126,7 @@ Uize.module ({
 
 				/*** find root tag node and give it special treatment for id attribute ***/
 					var _rootNode = _Uize_Parse_Xml_Util.getTagById (_nodeListParser.nodes,Uize.returnTrue);
-					_rootNode && _ensureNodeAttribute (_rootNode,'id','');
+					_rootNode && _setTagAttribute (_rootNode,'id','');
 
 				/*** build a lookup of HTML bindings by node ID ***/
 					var
@@ -184,7 +184,7 @@ Uize.module ({
 						}
 
 						function _addWholeAttributeReplacement (_node,_attributeName,_replacementValue) {
-							_ensureNodeAttribute (_node,_attributeName).serialize = function () {
+							_setTagAttribute (_node,_attributeName).serialize = function () {
 								return _getReplacementTokenByValue (_replacementValue);
 							};
 						}
@@ -255,7 +255,7 @@ Uize.module ({
 														var _inputType = _getAttributeValue (_node,'type');
 														if (_inputType == 'text') {
 															_addAttributeValueReplacement (
-																_ensureNodeAttribute (_node,'value'),
+																_setTagAttribute (_node,'value'),
 																_helperFunctionCall ('_encodeAttributeValue',_bindingPropertyReference)
 															);
 														} else if (_inputType == 'checkbox') {
@@ -296,7 +296,7 @@ Uize.module ({
 											} else if (_bindingType.charCodeAt (0) == 64) {
 												var _attributeName = _bindingType.slice (1);
 												_addAttributeValueReplacement (
-													_ensureNodeAttribute (_node,_attributeName),
+													_setTagAttribute (_node,_attributeName),
 													_attributeName == 'class'
 														? _bindingPropertyReference
 														: _helperFunctionCall ('_encodeAttributeValue',_bindingPropertyReference)
@@ -320,7 +320,7 @@ Uize.module ({
 									);
 									if (_styleExpressionParts.length) {
 										var
-											_styleAttribute = _ensureNodeAttribute (_node,'style'),
+											_styleAttribute = _setTagAttribute (_node,'style'),
 											_styleAttributeValue = _styleAttribute.value.value
 										;
 										_addAttributeValueReplacement (
