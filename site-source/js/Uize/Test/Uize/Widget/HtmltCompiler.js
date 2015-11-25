@@ -87,6 +87,12 @@ Uize.module ({
 									'<div id="widget"></div>'
 								),
 								_htmlBindingsTest (
+									'If the actual root node in the DOM has an id attribute that is not empty, then that node is not regarded as the widget root node and its existing id is preserved',
+									{},
+									'<div id="foo"></div>',
+									'<div id="widget-foo"></div>'
+								),
+								_htmlBindingsTest (
 									'The values of all id attributes are prefixed with the idPrefix of the widget',
 									{},
 									'<div>' +
