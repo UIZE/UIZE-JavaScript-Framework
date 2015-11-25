@@ -29,6 +29,7 @@ Uize.module ({
 		'Uize.Parse.Xml.NodeList',
 		'Uize.Parse.Xml.TagAttribute',
 		'Uize.Parse.Xml.Text',
+		'Uize.Parse.Xml.Util',
 		'Uize.Json',
 		'Uize.Str.Split',
 		'Uize.Str.Trim',
@@ -41,8 +42,11 @@ Uize.module ({
 			/*** Variables for Scruncher Optimization ***/
 				_undefined,
 				_split = Uize.Str.Split.split,
+				_Uize_Parse_Xml_Util = Uize.Parse.Xml.Util,
 
 			/*** Variables for Performance Optimization ***/
+				_getAttribute = _Uize_Parse_Xml_Util.getAttribute,
+				_getAttributeValue = _Uize_Parse_Xml_Util.getAttributeValue,
 				_trim = Uize.Str.Trim.trim,
 				_camelToHyphenated = Uize.Str.Camel.from,
 
@@ -108,7 +112,7 @@ Uize.module ({
 				}
 
 				function _ensureNodeAttribute (_node,_attributeName,_attributeValue) {
-					var _attribute = _findAttribute (_node,_attributeName);
+					var _attribute = _getAttribute (_node,_attributeName);
 					_attribute ||
 						_node.tagAttributes.attributes.push (
 							_attribute = new Uize.Parse.Xml.TagAttribute (_attributeName + '=""')
@@ -121,22 +125,7 @@ Uize.module ({
 				}
 
 				/*** find root tag node and give it special treatment for id attribute ***/
-					function _findAttribute (_node,_attributeName) {
-						return Uize.findRecord (
-							_node.tagAttributes.attributes,
-							function (_attribute) {return _attribute.name.name == _attributeName}
-						);
-					}
-
-					function _getAttributeValue (_node,_attributeName) {
-						var _attribute = _findAttribute (_node,_attributeName);
-						return _attribute && _attribute.value.value;
-					}
-
-					var _rootNode = Uize.findRecord (
-						_nodeListParser.nodes,
-						function (_node) {return !!_node.tagName && !_getAttributeValue (_node,'id')}
-					);
+					var _rootNode = _Uize_Parse_Xml_Util.getTagById (_nodeListParser.nodes,Uize.returnTrue);
 					_rootNode && _ensureNodeAttribute (_rootNode,'id','');
 
 				/*** build a lookup of HTML bindings by node ID ***/
@@ -209,7 +198,7 @@ Uize.module ({
 						var _tagName = (_node.tagName || _sacredEmptyObject).name;
 						if (_tagName) {
 							var
-								_idAttribute = _findAttribute (_node,'id'),
+								_idAttribute = _getAttribute (_node,'id'),
 								_nodeId = _idAttribute && _idAttribute.value.value
 							;
 
@@ -217,7 +206,7 @@ Uize.module ({
 								/* NOTE:
 									Process existing class attribute value before processing bindings, because there may be bindings to the class attribute, and we don't want to try to namespace the replacer token that would be set for the class attribute when there is a binding to it.
 								*/
-								var _classAttribute = _findAttribute (_node,'class');
+								var _classAttribute = _getAttribute (_node,'class');
 								if (_classAttribute) {
 									var _classTokens = [];
 									Uize.forEach (

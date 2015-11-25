@@ -32,7 +32,8 @@ Uize.module ({
 		var
 			/*** references to methods used internally ***/
 				_isTag,
-				_getAttribute
+				_getAttribute,
+				_getAttributeValue
 		;
 
 		return Uize.package ({
@@ -42,6 +43,17 @@ Uize.module ({
 
 			isTag:_isTag = function (_node,_tagName) {
 				return _node.tagName && _node.tagName.serialize () == _tagName;
+			},
+
+			getTagById:function (_nodeList,_id) {
+				var _idMatcher = typeof _id == 'string'
+					? function (_nodeId) {return _nodeId == _id}
+					: Uize.resolveMatcher (_id)
+				;
+				return Uize.findRecord (
+					_nodeList,
+					function (_node) {return !!_node.tagName && _idMatcher (_getAttributeValue (_node,'id'))}
+				);
 			},
 
 			getText:function (_node) {
@@ -66,7 +78,7 @@ Uize.module ({
 				);
 			},
 
-			getAttributeValue:function (_node,_attributeName) {
+			getAttributeValue:_getAttributeValue = function (_node,_attributeName) {
 				var _attribute = _getAttribute (_node,_attributeName);
 				return _attribute ? _attribute.value.value : '';
 			},
