@@ -25,7 +25,10 @@
 
 Uize.module ({
 	name:'Uize.Parse.Xml.Util',
-	required:'Uize.Data.Matches',
+	required:[
+		'Uize.Data.Matches',
+		'Uize.Parse.Xml.TagAttribute'
+	],
 	builder:function () {
 		'use strict';
 
@@ -81,6 +84,19 @@ Uize.module ({
 			getAttributeValue:_getAttributeValue = function (_node,_attributeName) {
 				var _attribute = _getAttribute (_node,_attributeName);
 				return _attribute ? _attribute.value.value : '';
+			},
+
+			setAttributeValue:function (_node,_attributeName,_attributeValue) {
+				var _attribute = _getAttribute (_node,_attributeName);
+				_attribute ||
+					_node.tagAttributes.attributes.push (
+						_attribute = new Uize.Parse.Xml.TagAttribute (_attributeName + '=""')
+					)
+				;
+				if (_attributeValue != undefined)
+					_attribute.value.value = _attributeValue
+				;
+				return _attribute;
 			},
 
 			recurseNodes:function (_node,_nodeHandler) {

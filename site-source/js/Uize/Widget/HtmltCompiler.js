@@ -27,7 +27,6 @@ Uize.module ({
 	name:'Uize.Widget.HtmltCompiler',
 	required:[
 		'Uize.Parse.Xml.NodeList',
-		'Uize.Parse.Xml.TagAttribute',
 		'Uize.Parse.Xml.Text',
 		'Uize.Parse.Xml.Util',
 		'Uize.Json',
@@ -47,6 +46,7 @@ Uize.module ({
 			/*** Variables for Performance Optimization ***/
 				_getAttribute = _Uize_Parse_Xml_Util.getAttribute,
 				_getAttributeValue = _Uize_Parse_Xml_Util.getAttributeValue,
+				_setAttributeValue = _Uize_Parse_Xml_Util.setAttributeValue,
 				_trim = Uize.Str.Trim.trim,
 				_camelToHyphenated = Uize.Str.Camel.from,
 
@@ -111,22 +111,9 @@ Uize.module ({
 					}
 				}
 
-				function _setTagAttribute (_node,_attributeName,_attributeValue) {
-					var _attribute = _getAttribute (_node,_attributeName);
-					_attribute ||
-						_node.tagAttributes.attributes.push (
-							_attribute = new Uize.Parse.Xml.TagAttribute (_attributeName + '=""')
-						)
-					;
-					if (_attributeValue != _undefined)
-						_attribute.value.value = _attributeValue
-					;
-					return _attribute;
-				}
-
 				/*** find root tag node and give it special treatment for id attribute ***/
 					var _rootNode = _Uize_Parse_Xml_Util.getTagById (_nodeListParser.nodes,Uize.isEmpty);
-					_rootNode && _setTagAttribute (_rootNode,'id','');
+					_rootNode && _setAttributeValue (_rootNode,'id','');
 
 				/*** build a lookup of HTML bindings by node ID ***/
 					var
@@ -183,7 +170,7 @@ Uize.module ({
 					}
 
 					function _addWholeAttributeReplacement (_node,_attributeName,_replacementValue) {
-						_setTagAttribute (_node,_attributeName).serialize = function () {
+						_setAttributeValue (_node,_attributeName).serialize = function () {
 							return _getReplacementTokenByValue (_replacementValue);
 						};
 					}
@@ -295,7 +282,7 @@ Uize.module ({
 															var _inputType = _getAttributeValue (_node,'type');
 															if (_inputType == 'text') {
 																_addAttributeValueReplacement (
-																	_setTagAttribute (_node,'value'),
+																	_setAttributeValue (_node,'value'),
 																	_helperFunctionCall ('_encodeAttributeValue',_bindingPropertyReference)
 																);
 															} else if (_inputType == 'checkbox') {
@@ -336,7 +323,7 @@ Uize.module ({
 												} else if (_bindingType.charCodeAt (0) == 64) {
 													var _attributeName = _bindingType.slice (1);
 													_addAttributeValueReplacement (
-														_setTagAttribute (_node,_attributeName),
+														_setAttributeValue (_node,_attributeName),
 														_attributeName == 'class'
 															? _bindingPropertyReference
 															: _helperFunctionCall ('_encodeAttributeValue',_bindingPropertyReference)
@@ -363,7 +350,7 @@ Uize.module ({
 										);
 										if (_styleExpressionParts.length) {
 											var
-												_styleAttribute = _setTagAttribute (_node,'style'),
+												_styleAttribute = _setAttributeValue (_node,'style'),
 												_styleAttributeValue = _styleAttribute.value.value
 											;
 											_addAttributeValueReplacement (
