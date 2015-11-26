@@ -84,8 +84,8 @@ Uize.module ({
 			},
 
 			recurseNodes:function (_node,_nodeHandler) {
-				function _processNode (_node) {
-					_nodeHandler (_node);
+				function _processNode (_node,_nodeNo,_nodes) {
+					_nodeHandler (_node,_nodeNo,_nodes);
 					var _childNodes = _node.childNodes;
 					_childNodes && Uize.forEach (_childNodes.nodes,_processNode);
 				}
