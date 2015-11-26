@@ -388,50 +388,52 @@ Uize.module ({
 						)
 					;
 
-				var
-					_fragmentNo = 0,
-					_varChunks = [
-						'm = this',
-						'i = arguments [0]',
-						'_idPrefix = i.idPrefix'
-					]
-				;
+				/*** for optimization, determine fragments that should be captured in local variables ***/
+					var
+						_fragmentNo = 0,
+						_varChunks = [
+							'm = this',
+							'i = arguments [0]',
+							'_idPrefix = i.idPrefix'
+						]
+					;
 
-				Uize.forEach (
-					_fragmentsToVarize,
-					function (_true,_fragmentToCapture) {
-						var _fragmentVar = '_fragment' + _fragmentNo++;
-						_varChunks.push (_fragmentVar + ' = ' + _fragmentToCapture);
-						_fragmentsToVarize [_fragmentToCapture] = _fragmentVar;
-					}
-				);
+					Uize.forEach (
+						_fragmentsToVarize,
+						function (_true,_fragmentToCapture) {
+							var _fragmentVar = '_fragment' + _fragmentNo++;
+							_varChunks.push (_fragmentVar + ' = ' + _fragmentToCapture);
+							_fragmentsToVarize [_fragmentToCapture] = _fragmentVar;
+						}
+					);
 
-				var
-					_templateFunctionCode =
-						Uize.map (
-							Uize.keys (_helperFunctions),
-							function (_helperFunctionName) {
-								var _helperFunction = _helperFunctions [_helperFunctionName];
-								if (_helperFunction._totalCalls) {
-									_addRequired (_helperFunction._required);
-									return _helperFunction._source + '\n';
-								} else {
-									return '';
-								}
-							}
-						).join ('') +
-						'var\n' +
-							'\t' + _varChunks.join (',\n\t') + '\n' +
-						';\n' +
-						'return (\n' +
-							'\t' +
+				/*** construct template function ***/
+					var
+						_templateFunctionCode =
 							Uize.map (
-								_fragments,
-								function (_fragment) {return _fragmentsToVarize [_fragment] || _fragment}
-							).join (' + ') +
-						'\n);\n',
-					_templateFunction = Function (_templateFunctionCode)
-				;
+								Uize.keys (_helperFunctions),
+								function (_helperFunctionName) {
+									var _helperFunction = _helperFunctions [_helperFunctionName];
+									if (_helperFunction._totalCalls) {
+										_addRequired (_helperFunction._required);
+										return _helperFunction._source + '\n';
+									} else {
+										return '';
+									}
+								}
+							).join ('') +
+							'var\n' +
+								'\t' + _varChunks.join (',\n\t') + '\n' +
+							';\n' +
+							'return (\n' +
+								'\t' +
+								Uize.map (
+									_fragments,
+									function (_fragment) {return _fragmentsToVarize [_fragment] || _fragment}
+								).join (' + ') +
+							'\n);\n',
+						_templateFunction = Function (_templateFunctionCode)
+					;
 
 				return (
 					_templateOptions.result == 'full'
