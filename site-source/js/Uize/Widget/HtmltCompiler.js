@@ -125,7 +125,7 @@ Uize.module ({
 				}
 
 				/*** find root tag node and give it special treatment for id attribute ***/
-					var _rootNode = _Uize_Parse_Xml_Util.getTagById (_nodeListParser.nodes,Uize.returnTrue);
+					var _rootNode = _Uize_Parse_Xml_Util.getTagById (_nodeListParser.nodes,Uize.isEmpty);
 					_rootNode && _setTagAttribute (_rootNode,'id','');
 
 				/*** build a lookup of HTML bindings by node ID ***/
@@ -149,243 +149,234 @@ Uize.module ({
 					);
 
 				/*** recurse parser object tree, process tag nodes and build replacements lookup ***/
-					function _processNode (_node) {
-						function _helperFunctionCall (_helperFunctionName,_serializedArguments) {
-							var _helperFunction = _helperFunctions [_helperFunctionName];
-							_helperFunction._totalCalls = (_helperFunction._totalCalls || 0) + 1;
-							return _helperFunctionName + ' (' + _serializedArguments + ')';
-						}
+					function _helperFunctionCall (_helperFunctionName,_serializedArguments) {
+						var _helperFunction = _helperFunctions [_helperFunctionName];
+						_helperFunction._totalCalls = (_helperFunction._totalCalls || 0) + 1;
+						return _helperFunctionName + ' (' + _serializedArguments + ')';
+					}
 
-						function _splitCssClasses (_classes) {
-							return _split (_trim (_classes),/\s+/);
-						}
+					function _splitCssClasses (_classes) {
+						return _split (_trim (_classes),/\s+/);
+					}
 
-						function _classNamespacerExpression (_class) {
-							return _helperFunctionCall ('_cssClass','\'' + _class + '\'');
-						}
+					function _classNamespacerExpression (_class) {
+						return _helperFunctionCall ('_cssClass','\'' + _class + '\'');
+					}
 
-						function _propertyReference (_propertyName) {
-							return 'i[' + Uize.Json.to (_propertyName) + ']';
-						}
+					function _propertyReference (_propertyName) {
+						return 'i[' + Uize.Json.to (_propertyName) + ']';
+					}
 
-						function _getReplacementTokenByValue (_replacementValue) {
-							var _replacementName = _replacementNamesByValue [_replacementValue];
-							if (!_replacementName)
-								_replacements [
-									_replacementName = _replacementNamesByValue [_replacementValue] =
-										'r' + _totalGeneratedReplacementNames++
-								] = _replacementValue
-							;
-							return _replacementTokenOpener + _replacementName + _replacementTokenCloser;
-						}
+					function _getReplacementTokenByValue (_replacementValue) {
+						var _replacementName = _replacementNamesByValue [_replacementValue];
+						if (!_replacementName)
+							_replacements [
+								_replacementName = _replacementNamesByValue [_replacementValue] =
+									'r' + _totalGeneratedReplacementNames++
+							] = _replacementValue
+						;
+						return _replacementTokenOpener + _replacementName + _replacementTokenCloser;
+					}
 
-						function _addAttributeValueReplacement (_attribute,_replacementValue) {
-							_attribute.value.value = _getReplacementTokenByValue (_replacementValue);
-						}
+					function _addAttributeValueReplacement (_attribute,_replacementValue) {
+						_attribute.value.value = _getReplacementTokenByValue (_replacementValue);
+					}
 
-						function _addWholeAttributeReplacement (_node,_attributeName,_replacementValue) {
-							_setTagAttribute (_node,_attributeName).serialize = function () {
-								return _getReplacementTokenByValue (_replacementValue);
-							};
-						}
+					function _addWholeAttributeReplacement (_node,_attributeName,_replacementValue) {
+						_setTagAttribute (_node,_attributeName).serialize = function () {
+							return _getReplacementTokenByValue (_replacementValue);
+						};
+					}
 
-						function _addInnerHtmlReplacement (_node,_replacementValue) {
-							(_node.childNodes || (_node.childNodes = new Uize.Parse.Xml.NodeList)).parse (
-								_getReplacementTokenByValue (_replacementValue)
-							);
-						}
+					function _addInnerHtmlReplacement (_node,_replacementValue) {
+						(_node.childNodes || (_node.childNodes = new Uize.Parse.Xml.NodeList)).parse (
+							_getReplacementTokenByValue (_replacementValue)
+						);
+					}
 
-						var _tagName = (_node.tagName || _sacredEmptyObject).name;
-						if (_tagName) {
-							var
-								_idAttribute = _getAttribute (_node,'id'),
-								_nodeId = _idAttribute && _idAttribute.value.value
-							;
+					_Uize_Parse_Xml_Util.recurseNodes (
+						{childNodes:_nodeListParser},
+						function (_node,_nodeNo,_nodeList) {
+							var _tagName = (_node.tagName || _sacredEmptyObject).name;
+							if (!_tagName) return;
 
-							/*** convert CSS classes into namespacer expressions ***/
-								/* NOTE:
-									Process existing class attribute value before processing bindings, because there may be bindings to the class attribute, and we don't want to try to namespace the replacer token that would be set for the class attribute when there is a binding to it.
-								*/
-								var _classAttribute = _getAttribute (_node,'class');
-								if (_classAttribute) {
-									var _classTokens = [];
+							if (_tagName == 'child') {
+								/*** build lookup of attributes, to be used for child widget properties ***/
+									var _attributesLookup = {};
 									Uize.forEach (
-										_splitCssClasses (_classAttribute.value.value),
-										function (_cssClass) {
-											_classTokens.push (
-												_getReplacementTokenByValue (_classNamespacerExpression (_cssClass))
-											);
+										_node.tagAttributes.attributes,
+										function (_attribute) {
+											_attributesLookup [_attribute.name.name] = _attribute.value.value;
 										}
 									);
-									_classAttribute.value.value = _classTokens.join (' ');
-								}
 
-							if (_idAttribute) {
-								_addAttributeValueReplacement (
-									_idAttribute,
-									'_idPrefix' + (_nodeId && ' + \'-' + _nodeId + '\'')
-								);
+								/*** special handling for the extraClasses (or class) property ***/
+									var _extraClasses = _attributesLookup.extraClasses || _attributesLookup ['class'];
+									delete _attributesLookup ['class'];
+									if (_extraClasses) {
+										_extraClasses = Uize.map (
+											_splitCssClasses (_extraClasses),
+											_classNamespacerExpression
+										).join (' + \' \' + ');
+										_attributesLookup.extraClasses = _extraClassesToken;
+									}
 
-								var _bindings = _bindingsById [_nodeId];
-								if (_bindings) {
-									var _styleExpressionParts = [];
-									Uize.forEach (
-										_bindings,
-										function (_binding) {
-											function _addStylePropertyReplacement (_stylePropertyName,_replacementValue) {
-												_styleExpressionParts.push (
-													Uize.Json.to (_camelToHyphenated (_stylePropertyName) + ':') +
-													' + ' + _replacementValue + ' + \';\''
+								/*** add replacement and replace child tag node with text node ***/
+									var _serializedProperties = Uize.Json.to (_attributesLookup,'mini');
+									_nodeList [_nodeNo] = new Uize.Parse.Xml.Text (
+										_getReplacementTokenByValue (
+											_helperFunctionCall (
+												'_childHtml',
+												_extraClasses
+													? _serializedProperties.replace (
+														'\'' + _extraClassesToken + '\'',
+														_extraClasses
+													)
+													: _serializedProperties
+											)
+										)
+									);
+							} else {
+								var
+									_idAttribute = _getAttribute (_node,'id'),
+									_nodeId = _idAttribute && _idAttribute.value.value
+								;
+
+								/*** convert CSS classes into namespacer expressions ***/
+									/* NOTE:
+										Process existing class attribute value before processing bindings, because there may be bindings to the class attribute, and we don't want to try to namespace the replacer token that would be set for the class attribute when there is a binding to it.
+									*/
+									var _classAttribute = _getAttribute (_node,'class');
+									if (_classAttribute) {
+										var _classTokens = [];
+										Uize.forEach (
+											_splitCssClasses (_classAttribute.value.value),
+											function (_cssClass) {
+												_classTokens.push (
+													_getReplacementTokenByValue (_classNamespacerExpression (_cssClass))
 												);
 											}
+										);
+										_classAttribute.value.value = _classTokens.join (' ');
+									}
 
-											var
-												_bindingType = _binding.bindingType,
-												_bindingProperty = _binding.propertyName,
-												_bindingPropertyReference = _propertyReference (_bindingProperty)
-											;
-											/*** remap binding types ***/
-												if (_bindingType == 'className') {
-													_bindingType = '@class';
-												}
+								if (_idAttribute) {
+									_addAttributeValueReplacement (
+										_idAttribute,
+										'_idPrefix' + (_nodeId && ' + \'-' + _nodeId + '\'')
+									);
 
-											if (_bindingType == 'value') {
-												if (_tagsThatSupportValueLookup [_tagName] == _trueFlag) {
-													if (_tagName == 'input') {
-														var _inputType = _getAttributeValue (_node,'type');
-														if (_inputType == 'text') {
-															_addAttributeValueReplacement (
-																_setTagAttribute (_node,'value'),
-																_helperFunctionCall ('_encodeAttributeValue',_bindingPropertyReference)
-															);
-														} else if (_inputType == 'checkbox') {
-															_addWholeAttributeReplacement (
-																_node,
-																'checked',
-																'(' + _bindingPropertyReference + ' ? \'checked="checked"\' : \'\')'
-															);
-														}
-													} else if (_tagName == 'select') {
-														/*
-															- must iterate over child nodes to find option nodes and add replacement expression for selected attribute
-														*/
-													}
-												} else {
-													_addInnerHtmlReplacement (
-														_node,
-														_helperFunctionCall ('_encodeAttributeValue',_bindingPropertyReference)
+									var _bindings = _bindingsById [_nodeId];
+									if (_bindings) {
+										var _styleExpressionParts = [];
+										Uize.forEach (
+											_bindings,
+											function (_binding) {
+												function _addStylePropertyReplacement (_stylePropertyName,_replacementValue) {
+													_styleExpressionParts.push (
+														Uize.Json.to (_camelToHyphenated (_stylePropertyName) + ':') +
+														' + ' + _replacementValue + ' + \';\''
 													);
 												}
-											} else if (_bindingType == 'innerHTML') {
-												_addInnerHtmlReplacement (_node,_bindingPropertyReference);
-											} else if (_bindingType == '?') {
-												_addStylePropertyReplacement (
-													'display',
-													'(' + _bindingPropertyReference + ' ? \'block\' : \'none\')'
-												);
-											} else if (_bindingType == 'show') {
-												_addStylePropertyReplacement (
-													'display',
-													'(' + _bindingPropertyReference + ' ? \'\' : \'none\')'
-												);
-											} else if (_bindingType == 'hide') {
-												_addStylePropertyReplacement (
-													'display',
-													'(' + _bindingPropertyReference + ' ? \'none\' : \'\')'
-												);
-											} else if (_bindingType.charCodeAt (0) == 64) {
-												var _attributeName = _bindingType.slice (1);
-												_addAttributeValueReplacement (
-													_setTagAttribute (_node,_attributeName),
-													_attributeName == 'class'
-														? _bindingPropertyReference
-														: _helperFunctionCall ('_encodeAttributeValue',_bindingPropertyReference)
-												);
-											} else if (_bindingType.slice (0,6) == 'style.') {
-												var _styleProperty = _bindingType.slice (6);
-												_addStylePropertyReplacement (
-													_styleProperty,
-													_styleProperty != 'opacity' && _styleProperty != 'zIndex'
-														? _helperFunctionCall ('_resolveNonStringToPixel',_bindingPropertyReference)
-														: _bindingPropertyReference
-												);
-											} else if (_bindingType == 'readOnly') {
-												_addWholeAttributeReplacement (
-													_node,
-													'readonly',
-													'(' + _bindingPropertyReference + ' ? \'readonly="readonly"\' : \'\')'
-												);
+
+												var
+													_bindingType = _binding.bindingType,
+													_bindingProperty = _binding.propertyName,
+													_bindingPropertyReference = _propertyReference (_bindingProperty)
+												;
+												/*** remap binding types ***/
+													if (_bindingType == 'className') {
+														_bindingType = '@class';
+													}
+
+												if (_bindingType == 'value') {
+													if (_tagsThatSupportValueLookup [_tagName] == _trueFlag) {
+														if (_tagName == 'input') {
+															var _inputType = _getAttributeValue (_node,'type');
+															if (_inputType == 'text') {
+																_addAttributeValueReplacement (
+																	_setTagAttribute (_node,'value'),
+																	_helperFunctionCall ('_encodeAttributeValue',_bindingPropertyReference)
+																);
+															} else if (_inputType == 'checkbox') {
+																_addWholeAttributeReplacement (
+																	_node,
+																	'checked',
+																	'(' + _bindingPropertyReference + ' ? \'checked="checked"\' : \'\')'
+																);
+															}
+														} else if (_tagName == 'select') {
+															/*
+																- must iterate over child nodes to find option nodes and add replacement expression for selected attribute
+															*/
+														}
+													} else {
+														_addInnerHtmlReplacement (
+															_node,
+															_helperFunctionCall ('_encodeAttributeValue',_bindingPropertyReference)
+														);
+													}
+												} else if (_bindingType == 'innerHTML') {
+													_addInnerHtmlReplacement (_node,_bindingPropertyReference);
+												} else if (_bindingType == '?') {
+													_addStylePropertyReplacement (
+														'display',
+														'(' + _bindingPropertyReference + ' ? \'block\' : \'none\')'
+													);
+												} else if (_bindingType == 'show') {
+													_addStylePropertyReplacement (
+														'display',
+														'(' + _bindingPropertyReference + ' ? \'\' : \'none\')'
+													);
+												} else if (_bindingType == 'hide') {
+													_addStylePropertyReplacement (
+														'display',
+														'(' + _bindingPropertyReference + ' ? \'none\' : \'\')'
+													);
+												} else if (_bindingType.charCodeAt (0) == 64) {
+													var _attributeName = _bindingType.slice (1);
+													_addAttributeValueReplacement (
+														_setTagAttribute (_node,_attributeName),
+														_attributeName == 'class'
+															? _bindingPropertyReference
+															: _helperFunctionCall ('_encodeAttributeValue',_bindingPropertyReference)
+													);
+												} else if (_bindingType.slice (0,6) == 'style.') {
+													var _styleProperty = _bindingType.slice (6);
+													_addStylePropertyReplacement (
+														_styleProperty,
+														_styleProperty != 'opacity' && _styleProperty != 'zIndex'
+															? _helperFunctionCall (
+																'_resolveNonStringToPixel',
+																_bindingPropertyReference
+															)
+															: _bindingPropertyReference
+													);
+												} else if (_bindingType == 'readOnly') {
+													_addWholeAttributeReplacement (
+														_node,
+														'readonly',
+														'(' + _bindingPropertyReference + ' ? \'readonly="readonly"\' : \'\')'
+													);
+												}
 											}
-										}
-									);
-									if (_styleExpressionParts.length) {
-										var
-											_styleAttribute = _setTagAttribute (_node,'style'),
-											_styleAttributeValue = _styleAttribute.value.value
-										;
-										_addAttributeValueReplacement (
-											_styleAttribute,
-											(_styleAttributeValue ? Uize.Json.to (_styleAttributeValue) + ' + ' : '') +
-											_styleExpressionParts.join (' + ')
 										);
+										if (_styleExpressionParts.length) {
+											var
+												_styleAttribute = _setTagAttribute (_node,'style'),
+												_styleAttributeValue = _styleAttribute.value.value
+											;
+											_addAttributeValueReplacement (
+												_styleAttribute,
+												(_styleAttributeValue ? Uize.Json.to (_styleAttributeValue) + ' + ' : '') +
+												_styleExpressionParts.join (' + ')
+											);
+										}
 									}
 								}
 							}
 						}
-						var _childNodes = _node.childNodes;
-						if (_childNodes) {
-							var _nodes = _childNodes.nodes;
-							Uize.forEach (
-								_nodes,
-								function (_node,_nodeNo) {
-									var _tagName = _node.tagName;
-									if (_tagName) {
-										if (_tagName.name == 'child') {
-											/*** build lookup of attributes, to be used for child widget properties ***/
-												var _attributesLookup = {};
-												Uize.forEach (
-													_node.tagAttributes.attributes,
-													function (_attribute) {
-														_attributesLookup [_attribute.name.name] = _attribute.value.value;
-													}
-												);
-												var _childName = _attributesLookup.name;
-
-											/*** special handling for the extraClasses (or class) property ***/
-												var _extraClasses = _attributesLookup.extraClasses || _attributesLookup ['class'];
-												delete _attributesLookup ['class'];
-												if (_extraClasses) {
-													_extraClasses = Uize.map (
-														_splitCssClasses (_extraClasses),
-														_classNamespacerExpression
-													).join (' + \' \' + ');
-													_attributesLookup.extraClasses = _extraClassesToken;
-												}
-
-											/*** add replacement and replace child tag node with text node ***/
-												var _serializedProperties = Uize.Json.to (_attributesLookup,'mini');
-												_nodes [_nodeNo] = new Uize.Parse.Xml.Text (
-													_getReplacementTokenByValue (
-														_helperFunctionCall (
-															'_childHtml',
-															_extraClasses
-																? _serializedProperties.replace (
-																	'\'' + _extraClassesToken + '\'',
-																	_extraClasses
-																)
-																: _serializedProperties
-														)
-													)
-												);
-										} else {
-											_processNode (_node);
-										}
-									}
-								}
-							);
-						}
-					}
-					_processNode ({childNodes:_nodeListParser});
+					);
 
 				/*** split re-serialized HTML by replacement tokens and resolve all fragments to expressions ***/
 					var
