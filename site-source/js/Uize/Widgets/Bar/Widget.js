@@ -185,7 +185,8 @@ Uize.module ({
 
 			htmlBindings:{
 				displayedStyleWidth:':style.width',
-				displayedStyleHeight:':style.height'
+				displayedStyleHeight:':style.height',
+				value:'knob:title'
 			}
 		});
 	}
