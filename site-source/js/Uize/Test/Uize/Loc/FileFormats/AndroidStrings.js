@@ -173,6 +173,35 @@ Uize.module ({
 								}
 							],
 
+						/*** test support for CDATA sections inside string values ***/
+							['String values inside string tags may contain CDATA sections for wrapping content that has XML-style tags that should be treated literally and not parsed as XML',
+								'<?xml version="1.0" encoding="utf-8"?>\n' +
+								'<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">\n' +
+								'	<string name="foo">This <![CDATA[<b>string</b>]]> contains <![CDATA[<b>HTML</b>]]> tags.</string>\n' +
+								'	<string name="bar"><![CDATA[This <b>string</b> also contains <b>HTML</b> tags.]]></string>\n' +
+								'	<string-array name="baz">\n' +
+								'		<item>This <![CDATA[<b>string</b>]]> contains <![CDATA[<b>HTML</b>]]> tags.</item>\n' +
+								'		<item><![CDATA[This <b>string</b> also contains <b>HTML</b> tags.]]></item>\n' +
+								'	</string-array>\n' +
+								'	<plurals name="qux">\n' +
+								'		<item quantity="one">Delete <![CDATA[<b>the</b>]]> selected <![CDATA[<b>file</b>]]>?</item>\n' +
+								'		<item quantity="other"><![CDATA[Delete <b>the</b> selected {count} <b>files</b>?]]></item>\n' +
+								'	</plurals>\n' +
+								'</resources>\n',
+								{
+									foo:'This <b>string</b> contains <b>HTML</b> tags.',
+									bar:'This <b>string</b> also contains <b>HTML</b> tags.',
+									baz:[
+										'This <b>string</b> contains <b>HTML</b> tags.',
+										'This <b>string</b> also contains <b>HTML</b> tags.',
+									],
+									qux:{
+										one:'Delete <b>the</b> selected <b>file</b>?',
+										other:'Delete <b>the</b> selected {count} <b>files</b>?'
+									}
+								}
+							],
+
 						/*** test special handling of limited HTML formatting tags and xliff:g tags ***/
 							['A string tag may contain bold, underline, and italics HTML tags for inline formatting.',
 								'<?xml version="1.0" encoding="utf-8"?>\n' +

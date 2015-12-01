@@ -62,6 +62,8 @@ Uize.module ({
 								function (_node) {
 									if ('text' in _node) {
 										_node.serialize = function () {return this.text};
+									} else if ('cdata' in _node) {
+										_node.serialize = function () {return this.cdata};
 									} else if (_isTag (_node,'xliff:g')) {
 										_node.serialize = function () {return this.childNodes.nodes [0].text};
 									}
