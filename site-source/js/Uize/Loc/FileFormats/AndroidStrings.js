@@ -43,7 +43,22 @@ Uize.module ({
 				_findNodeByTagName = _Uize_Parse_Xml_Util.findNodeByTagName,
 				_getAttributeValue = _Uize_Parse_Xml_Util.getAttributeValue,
 				_isTag = _Uize_Parse_Xml_Util.isTag,
-				_recurseNodes = _Uize_Parse_Xml_Util.recurseNodes
+				_recurseNodes = _Uize_Parse_Xml_Util.recurseNodes,
+
+			/*** General Variables ***/
+				_encodeString = Uize.Str.Replace.replacerByLookup ({
+					// characters that need to be backslash-escaped for Android's peculiar resource file format
+					'"':'\\\"',
+					'\'':'\\\'',
+					'\\':'\\\\',
+					'\r':'\\r',
+					'\n':'\\n',
+
+					// characters that need to be XML-escaped using XML character entities
+					'&':'&amp;',
+					'<':'&lt;',
+					'>':'&gt;'
+				})
 		;
 
 		return Uize.package ({
@@ -63,7 +78,7 @@ Uize.module ({
 									if ('text' in _node) {
 										_node.serialize = function () {return this.text};
 									} else if ('cdata' in _node) {
-										_node.serialize = function () {return this.cdata};
+										_node.serialize = function () {return this.cdata.replace (/"/g,'\\"')};
 									} else if (_isTag (_node,'xliff:g')) {
 										_node.serialize = function () {return this.childNodes.nodes [0].text};
 									}
@@ -125,19 +140,6 @@ Uize.module ({
 			},
 
 			to:function (_strings) {
-				var _encodeString = Uize.Str.Replace.replacerByLookup ({
-					// characters that need to be backslash-escaped for Android's peculiar resource file format
-					'"':'\\\"',
-					'\'':'\\\'',
-					'\\':'\\\\',
-					'\r':'\\r',
-					'\n':'\\n',
-
-					// characters that need to be XML-escaped using XML character entities
-					'&':'&amp;',
-					'<':'&lt;',
-					'>':'&gt;'
-				});
 				return (
 					[
 						'<?xml version="1.0" encoding="utf-8"?>',

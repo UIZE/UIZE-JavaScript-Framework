@@ -201,6 +201,15 @@ Uize.module ({
 									}
 								}
 							],
+							['When a string value inside a string tag contains CDATA sections, and when the contents of those CDATA sections contains double quotes, those double quotes are first escaped so they are not confused with terminating quotes of the string',
+								'<?xml version="1.0" encoding="utf-8"?>\n' +
+								'<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">\n' +
+								'	<string name="foo">This <![CDATA[<b class="foo">string</b>]]> contains <![CDATA[<b class="bar">HTML</b>]]> tags.</string>\n' +
+								'</resources>\n',
+								{
+									foo:'This <b class="foo">string</b> contains <b class="bar">HTML</b> tags.'
+								}
+							],
 
 						/*** test special handling of limited HTML formatting tags and xliff:g tags ***/
 							['A string tag may contain bold, underline, and italics HTML tags for inline formatting.',
