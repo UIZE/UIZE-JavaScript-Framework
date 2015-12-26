@@ -33,8 +33,8 @@
 		'UizeSite.Build.Files.IndexPages'
 	],
 	testSequence:[
-		'build.js Uize.Build.RunUnitTests silent=true',
-		'build.js Uize.Build.RunUnitTests useSource=false silent=true'
+		'build.js Uize.Build.Test silent=true',
+		'build.js Uize.Build.Test useSource=false silent=true'
 	],
 	moduleConfigs:{
 		'Uize.Build.Loc':{
