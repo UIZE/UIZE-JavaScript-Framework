@@ -45,6 +45,7 @@ Uize.module ({
 		'Uize.Loc.Strings.PluralUtils',
 		'Uize.Data.Diff',
 		'Uize.Str.Whitespace',
+		'Uize.Str.Has',
 		'Uize.Build.Util.Whitespace',
 		'Uize.Templates.Text.Tables.Breakdown',
 		'Uize.Templates.Text.Tables.YinYangBreakdown',
@@ -70,6 +71,8 @@ Uize.module ({
 				_hasNonWhitespace = Uize.Str.Whitespace.hasNonWhitespace,
 				_toStringPath = _Uize_Loc_Strings.StringPath.to,
 				_htmlEntityRegExp = Uize.Util.Html.Encode.entityRegExp,
+				_hasPrefix = Uize.Str.Has.hasPrefix,
+				_hasSuffix = Uize.Str.Has.hasSuffix,
 
 			/*** General Variables ***/
 				_fileSystem = Uize.Services.FileSystem.singleton (),
@@ -1077,21 +1080,57 @@ Uize.module ({
 						m = this,
 						_project = m.project,
 						_importPrimary = _project.importPrimary,
+						_stubMissing = _project.stubMissing || _sacredEmptyObject,
+						_stubMissingPrefix = _stubMissing.prefix || '',
+						_stubMissingSuffix = _stubMissing.suffix || '',
+						_stubMissingEnabled =
+							_stubMissing.enabled && (_stubMissingPrefix || _stubMissingSuffix),
+						_primaryLanguage = _project.primaryLanguage,
+						_primaryLanguageResources =
+							_stubMissingEnabled && _readLanguageResourcesFile (m,_primaryLanguage),
 						_languagesForOperation = _getLanguagesForOperation (m,_params),
-						_mustImportPseudoLocale = _mustPerformOperationForPseudoLocale (m,_params)
+						_mustImportPseudoLocale = _mustPerformOperationForPseudoLocale (m,_params),
+						_pseudoLocale = _project.pseudoLocale
 					;
 					function _importLanguage (_language) {
 						var _resources = _readLanguageResourcesFile (m,_language);
 						m.stepCompleted (_language + ': read language resources file');
-						_resources && m.distributeResources (_resources,_language);
+						if (_resources) {
+							/*** stub missing translations (if enabled) ***/
+								if (_stubMissingEnabled && _language != _primaryLanguage && _language != _pseudoLocale)
+									_resources = Uize.Data.Diff.diff (
+										_resources,
+										_primaryLanguageResources,
+										function (_languageString,_primaryLanguageString) {
+											/* TODO:
+												Technically, this process should not be applied to non-translatable strings, although initially this feature may not be used with projects that have non-translatable strings.
+											*/
+											return (
+												_languageString &&
+												{
+													value:
+														_languageString.value ||
+														(
+															_primaryLanguageString &&
+															(_stubMissingPrefix + _primaryLanguageString.value + _stubMissingSuffix)
+														) ||
+														''
+												}
+											);
+										}
+									)
+								;
+
+							m.distributeResources (_resources,_language);
+						}
 						m.stepCompleted (_language + ': distributed strings to individual resource files');
 					}
 					m.prepareToExecuteMethod (
 						(_languagesForOperation.length + _mustImportPseudoLocale + !!_importPrimary) * 2
 					);
-					_importPrimary && _importLanguage (_project.primaryLanguage);
+					_importPrimary && _importLanguage (_primaryLanguage);
 					Uize.forEach (_languagesForOperation,_importLanguage);
-					_mustImportPseudoLocale && _importLanguage (_project.pseudoLocale);
+					_mustImportPseudoLocale && _importLanguage (_pseudoLocale);
 					_callback ();
 				},
 
@@ -1099,6 +1138,11 @@ Uize.module ({
 					var
 						m = this,
 						_project = m.project,
+						_stubMissing = _project.stubMissing || _sacredEmptyObject,
+						_stubMissingPrefix = _stubMissing.prefix || '',
+						_stubMissingSuffix = _stubMissing.suffix || '',
+						_stubMissingEnabled =
+							_stubMissing.enabled && (_stubMissingPrefix || _stubMissingSuffix),
 						_primaryLanguageResources = m.gatherResources ()
 					;
 
@@ -1167,6 +1211,27 @@ Uize.module ({
 										}
 									}
 								);
+
+								/*** blank stubbed missing translations (if enabled) ***/
+									if (_stubMissingEnabled)
+										_languageResources = Uize.Data.Diff.diff (
+											_languageResources,
+											{},
+											function (_string) {
+												/* TODO:
+													Technically, this process should not be applied to non-translatable strings, although initially this feature may not be used with projects that have non-translatable strings.
+												*/
+												return (
+													(
+														_hasPrefix (_string.value,_stubMissingPrefix) &&
+														_hasSuffix (_string.value,_stubMissingSuffix)
+													)
+														? {value:''}
+														: _string
+												);
+											}
+										)
+									;
 
 								/*** normalize plural forms ***/
 									_project.plurals &&
