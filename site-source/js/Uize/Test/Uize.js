@@ -3901,6 +3901,10 @@ Uize.module ({
 							[['foo','bar']],
 							{foo:true,bar:true}
 						],
+						['Any value can be specified as a value for the lookupValue paramter',
+							[['foo','bar'],5],
+							{foo:5,bar:5}
+						],
 						['The value undefined can be specified as a value for the lookupValue paramter',
 							[['foo','bar'],undefined],
 							{foo:undefined,bar:undefined}
@@ -4316,4 +4320,3 @@ Uize.module ({
 		return _class;
 	}
 });
-
