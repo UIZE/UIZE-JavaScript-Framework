@@ -255,6 +255,10 @@ Uize.module ({
 						]
 					]],
 					['Uize.Url.resolve',[
+						['Calling with no parameters produces an empty string',
+							[],
+							''
+						],
 						['Calling with just an empty string produces an empty string',
 							'',
 							''
@@ -275,12 +279,12 @@ Uize.module ({
 							['',{param1Name:'param1Value',param2Name:'param2Value',param3Name:'param3Value'}],
 							'?param1Name=param1Value&param2Name=param2Value&param3Name=param3Value'
 						],
-						['Test that specifying a non-empty URL and a query params object is handled correctly',
+						['Test that specifying null values in query params object removes params from URL',
 							[
-								'http://www.uize.com',
-								{param1Name:'param1Value',param2Name:'param2Value',param3Name:'param3Value'}
+								'http://www.benmvp.com/search?sort=recent&results=20&pg=1',
+								{sort:null,category:null,type:'all',results:null}
 							],
-							'http://www.uize.com?param1Name=param1Value&param2Name=param2Value&param3Name=param3Value'
+							'http://www.uize.com/search?pg=1&type=all'
 						],
 						['Test that specifying a URL and an array of query params objects is handled correctly',
 							[
@@ -345,6 +349,13 @@ Uize.module ({
 								{p2:'biofuel',p4:'geothermal',p5:'tidal'}
 							],
 							'http://www.uize.com?p1=wind&p2=biofuel&p3=solar&p4=geothermal&p5=tidal'
+						],
+						['Test that specifying a non-empty URL and a query params object is handled correctly',
+							[
+								'http://www.uize.com',
+								{param1Name:'param1Value',param2Name:'param2Value',param3Name:'param3Value'}
+							],
+							'http://www.uize.com?param1Name=param1Value&param2Name=param2Value&param3Name=param3Value'
 						]
 					]],
 					['Uize.Url.from',[
@@ -1501,4 +1512,3 @@ Uize.module ({
 		});
 	}
 });
-
