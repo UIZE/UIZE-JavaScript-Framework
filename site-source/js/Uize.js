@@ -2951,7 +2951,7 @@ Uize = (function () {
 								var
 									fruits = ['apple','apricot','orange','peach','pear','watermelon'],
 									vegetables = ['beet','broccoli','cauliflower','onion','potato','squash'],
-									grains = ['barley','maize','oats','quinoa','rice','sorghum','wheat']
+									grains = ['barley','maize','oats','quinoa','rice','sorghum','wheat'],
 									foodLookup = Uize.lookup (fruits,'fruit')
 								;
 								Uize.lookup (vegetables,'vegetable',foodLookup); // stitch in keys for vegetables
@@ -2962,7 +2962,7 @@ Uize = (function () {
 								alert (foodLookup ['quinoa']);    // alerts "grain"
 								.................................................................................
 
-								In the above example, a food lookup object is created initially from the =fruits= array. Then, entries are added to the =foodLookup= lookup object by specifying it as the target in two additional calls to the =Uize.lookup= method: one to stirch in lookup entries for the =vegetables= values array, and the other to stitch in entries for the =grains= values array. Also note that different lookup values are being used in each case, allowing the =foodLookup= lookup object to be used to look up the food type from the food name.
+								In the above example, a food lookup object is created initially from the =fruits= array. Then, entries are added to the =foodLookup= lookup object by specifying it as the target in two additional calls to the =Uize.lookup= method: one to stitch in lookup entries for the =vegetables= values array, and the other to stitch in entries for the =grains= values array. Also note that different lookup values are being used in each case, allowing the =foodLookup= lookup object to be used to look up the food type from the food name.
 
 							Create an Empty Safe Lookup Object
 								An empty safe lookup object can be created by specifying the value =null= for the =valuesARRAY= parameter, the value =1= for the =lookupValueANYTYPE= second parameter, and the value =true= for the =safeBOOL= third parameter.
@@ -2992,7 +2992,7 @@ Uize = (function () {
 								}
 								............................................................
 
-								In the above example, a =getValuesInMasterList= function is being defined. This function accepts two parameters: an array of values, and a master list of values. The function returns an array, containing all the values from the values array that are present in the master list of values. The way it's implemented, on each iteration of the loop through the values array the =Uize.isIn= static method is being used to determined if the current value is in the master list array. This provides less than optimal performance, since the complexity is O(n2).
+								In the above example, a =getValuesInMasterList= function is being defined. This function accepts two parameters: an array of values, and a master list of values. The function returns an array, containing all the values from the values array that are present in the master list of values. The way it's implemented, on each iteration of the loop through the values array the =Uize.isIn= static method is being used to determined if the current value is in the master list array. This provides less than optimal performance, since the complexity is O(n^2).
 
 								Using the =Uize.lookup= static method, a more efficient solution can be fashioned, as follows...
 
