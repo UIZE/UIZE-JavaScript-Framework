@@ -4,7 +4,7 @@
 |    /    O /   |    MODULE : Uize.Str.Discombobulator Package
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
-| /____/ /__/_| | COPYRIGHT : (c)1997-2015 UIZE
+| /____/ /__/_| | COPYRIGHT : (c)1997-2016 UIZE
 |          /___ |   LICENSE : Available under MIT License or GNU General Public License
 |_______________|             http://www.uize.com/license.html
 */
