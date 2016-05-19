@@ -50,7 +50,7 @@ Uize.module ({
 		'Uize.Templates.Text.Tables.Breakdown',
 		'Uize.Templates.Text.Tables.YinYangBreakdown',
 		'Uize.Templates.Text.Tables.Histogram',
-		'Uize.Util.Html.Encode'
+		'Uize.Util.Html.Has'
 	],
 	superclass:'Uize.Service.Adapter',
 	builder:function (_superclass) {
@@ -67,10 +67,10 @@ Uize.module ({
 				_removeEmptyStrings = _Uize_Loc_Strings_Util.removeEmptyStrings,
 
 			/*** Variables for Performance Optimization ***/
+				_hasHtml = Uize.Util.Html.Has.hasHtml,
 				_getStringMetrics = _Uize_Loc_Strings_Metrics.getStringMetrics,
 				_hasNonWhitespace = Uize.Str.Whitespace.hasNonWhitespace,
 				_toStringPath = _Uize_Loc_Strings.StringPath.to,
-				_htmlEntityRegExp = Uize.Util.Html.Encode.entityRegExp,
 				_hasPrefix = Uize.Str.Has.hasPrefix,
 				_hasSuffix = Uize.Str.Has.hasSuffix,
 
@@ -663,13 +663,7 @@ Uize.module ({
 				},
 
 				stringHasHtml:function (_stringPath,_value) {
-					return (
-						/<[^<]+>/.test (_value) ||
-							/* NOTE:
-								this is not the most robust test for HTML tags, so probably RegExpComposition should be used
-							*/
-						_htmlEntityRegExp.test (_value)
-					);
+					return _hasHtml (_value);
 					/*?
 						Instance Methods
 							stringHasHtml
