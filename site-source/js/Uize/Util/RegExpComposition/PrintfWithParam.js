@@ -37,11 +37,11 @@ Uize.module ({
 					- this isn't robust, since it shouldn't be possible to have 5 of the same flag
 					- some flags are only applicable for numeric types, so the string "above 5% and" does not have the placeholder "% a" since this is not a valid placeholder
 				*/
-			width:/-?\d+/,
+			width:/\d+/,
 			precision:/\d+/,
 			length:/hh?|ll?|[Lzjt]/,
-			type:/[diufFeEgGxXoscPaAn%]/,
-			specifier:/(?:{parameter})?(?:{flags})?(?:{width})?(?:\.{precision})?(?:{length})?{type}/,
+			formattableType:/[diufFeEgGxXoscPaAn]/,
+			specifier:/(?:{parameter})?(?:{flags})?(?:{width})?(?:\.{precision})?(?:{length})?{formattableType}|%/,
 			placeholder:/%({specifier})/
 		});
 	}
