@@ -29,6 +29,7 @@ Uize.module ({
 		'Uize.Parse.Xml.NodeList',
 		'Uize.Parse.Xml.Util',
 		'Uize.Str.Replace',
+		'Uize.Util.Html.Encode',
 		'Uize.Data.NameValueRecords',
 		'Uize.Parse.Code.StringLiteral'
 	],
@@ -40,13 +41,14 @@ Uize.module ({
 				_Uize_Parse_Xml_Util = Uize.Parse.Xml.Util,
 
 			/*** Variables for Performance Optimization ***/
+				_htmlEncode = Uize.Util.Html.Encode.encode,
 				_findNodeByTagName = _Uize_Parse_Xml_Util.findNodeByTagName,
 				_getAttributeValue = _Uize_Parse_Xml_Util.getAttributeValue,
 				_isTag = _Uize_Parse_Xml_Util.isTag,
 				_recurseNodes = _Uize_Parse_Xml_Util.recurseNodes,
 
 			/*** General Variables ***/
-				_encodeString = Uize.Str.Replace.replacerByLookup ({
+				_plainEncodeString = Uize.Str.Replace.replacerByLookup ({
 					// characters that need to be backslash-escaped for Android's peculiar resource file format
 					'"':'\\\"',
 					'\'':'\\\'',
@@ -155,22 +157,22 @@ Uize.module ({
 								return (
 									Uize.isArray (_value)
 										? (
-											'\t<string-array name="' + _encodeString (_name) + '">\n' +
+											'\t<string-array name="' + _htmlEncode (_name) + '">\n' +
 											Uize.map (
 												_value,
-												function (_value) {return '\t\t<item>' + _encodeString (_value) + '</item>\n'}
+												function (_value) {return '\t\t<item>' + _plainEncodeString (_value) + '</item>\n'}
 											).join ('') +
 											'\t</string-array>'
 										)
 										: Uize.isPlainObject (_value)
 											? (
-												'\t<plurals name="' + _encodeString (_name) + '">\n' +
+												'\t<plurals name="' + _htmlEncode (_name) + '">\n' +
 												Uize.map (
 													Uize.keys (_value),
 													function (_key) {
 														return (
-															'\t\t<item quantity="' + _encodeString (_key) + '">' +
-															_encodeString (_value [_key]) +
+															'\t\t<item quantity="' + _htmlEncode (_key) + '">' +
+															_plainEncodeString (_value [_key]) +
 															'</item>\n'
 														);
 													}
@@ -178,8 +180,8 @@ Uize.module ({
 												'\t</plurals>'
 											)
 											: (
-												'\t<string name="' + _encodeString (_name) + '">' +
-												_encodeString (_value) +
+												'\t<string name="' + _htmlEncode (_name) + '">' +
+												_plainEncodeString (_value) +
 												'</string>'
 											)
 								);
