@@ -281,7 +281,7 @@ Uize.module ({
 						],
 						['Test that specifying null values in query params object removes params from URL',
 							[
-								'http://www.benmvp.com/search?sort=recent&results=20&pg=1',
+								'http://www.uize.com/search?sort=recent&results=20&pg=1',
 								{sort:null,category:null,type:'all',results:null}
 							],
 							'http://www.uize.com/search?pg=1&type=all'
