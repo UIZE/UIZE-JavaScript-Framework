@@ -845,6 +845,7 @@ Uize.module ({
 			},
 
 			resolve:function (_url,_urlParams) {
+				if (_url == _undefined) _url = '';
 				if (_isArray (_url)) {
 					_urlParams = _url.slice (1).concat (_urlParams || _sacredEmptyArray);
 					_url = _url [0];
