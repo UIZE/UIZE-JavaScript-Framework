@@ -31,7 +31,9 @@ Uize.module ({
 		'Uize.Str.Replace',
 		'Uize.Util.Html.Encode',
 		'Uize.Data.NameValueRecords',
-		'Uize.Parse.Code.StringLiteral'
+		'Uize.Parse.Code.StringLiteral',
+		'Uize.Util.Html.Has',
+		'Uize.Util.RegExpComposition'
 	],
 	builder:function () {
 		'use strict';
@@ -39,15 +41,23 @@ Uize.module ({
 		var
 			/*** Variables for Scruncher Optimization ***/
 				_Uize_Parse_Xml_Util = Uize.Parse.Xml.Util,
+				_Uize_Util_Html_Encode = Uize.Util.Html.Encode,
 
 			/*** Variables for Performance Optimization ***/
 				_htmlEncode = Uize.Util.Html.Encode.encode,
+				_hasHtml = Uize.Util.Html.Has.hasHtml,
 				_findNodeByTagName = _Uize_Parse_Xml_Util.findNodeByTagName,
 				_getAttributeValue = _Uize_Parse_Xml_Util.getAttributeValue,
 				_isTag = _Uize_Parse_Xml_Util.isTag,
 				_recurseNodes = _Uize_Parse_Xml_Util.recurseNodes,
 
 			/*** General Variables ***/
+				_stylingTagsAndEntitiesRegExpComposition = Uize.Util.RegExpComposition ({
+					stylingTag:/<\s*(\/\s*)?[biu]\s*>/g,
+					entity:_Uize_Util_Html_Encode.entityRegExp,
+					stylingTagsAndEntities:/{stylingTag}|{entity}/
+				}),
+				_stylingTagsAndEntitiesRegExp = _stylingTagsAndEntitiesRegExpComposition.get ('stylingTagsAndEntities'),
 				_plainEncodeString = Uize.Str.Replace.replacerByLookup ({
 					// characters that need to be backslash-escaped for Android's peculiar resource file format
 					'"':'\\\"',
@@ -63,7 +73,43 @@ Uize.module ({
 				})
 		;
 
+		/*** Utility Functions ***/
+			function _cdataWrapString (_string) {
+				return '<![CDATA[' + _string + ']]>';
+			}
+
+			function _stringHasNonStylingHtml (_string) {
+				return _hasHtml (_string.replace (_stylingTagsAndEntitiesRegExp,''));
+			}
+
+			function _encodeStringUsingEncodingMode (_string,_encodingMode) {
+				/*
+					Supported modes are...
+
+					- htmlEncodeAlways - always HTML encode (regard values as literal)
+					- cdataWrapAlways - always use CDATA to wrap values (regard values as literal)
+					- cdataWrapIfAnyHtml - use CDATA to wrap value if it contains any HTML tags
+					- cdataWrapIfNonStylingHtml - use CDATA to wrap value if it contains HTML tags other than the limited set of inline styling tags that are supported for Android resource strings
+				*/
+				return (
+					_encodingMode == 'htmlEncodeAlways'
+						? _plainEncodeString (_string)
+						: _encodingMode == 'cdataWrapAlways'
+							? _cdataWrapString (_string)
+							: _hasHtml (_string)
+								? (
+									_encodingMode == 'cdataWrapIfAnyHtml' || _stringHasNonStylingHtml (_string)
+										? _cdataWrapString (_string)
+										: _string
+								)
+								: _plainEncodeString (_string)
+				);
+			}
+
 		return Uize.package ({
+			stringHasNonStylingHtml:_stringHasNonStylingHtml,
+			encodeStringUsingEncodingMode:_encodeStringUsingEncodingMode,
+
 			from:function (_stringsFileStr) {
 				var
 					_xliffNodeList = new Uize.Parse.Xml.NodeList (_stringsFileStr.replace (/<\?.*?\?>/,'')),
@@ -141,7 +187,14 @@ Uize.module ({
 				*/
 			},
 
-			to:function (_strings) {
+			to:function (_strings,_encodingOptions) {
+				_encodingOptions || (_encodingOptions = {});
+				var _encodingMode = _encodingOptions.encodingMode || 'cdataWrapIfNonStylingHtml';
+
+				function _encodeString (_string) {
+					return _encodeStringUsingEncodingMode (_string,_encodingMode);
+				}
+
 				return (
 					[
 						'<?xml version="1.0" encoding="utf-8"?>',
@@ -160,7 +213,7 @@ Uize.module ({
 											'\t<string-array name="' + _htmlEncode (_name) + '">\n' +
 											Uize.map (
 												_value,
-												function (_value) {return '\t\t<item>' + _plainEncodeString (_value) + '</item>\n'}
+												function (_value) {return '\t\t<item>' + _encodeString (_value) + '</item>\n'}
 											).join ('') +
 											'\t</string-array>'
 										)
@@ -172,7 +225,7 @@ Uize.module ({
 													function (_key) {
 														return (
 															'\t\t<item quantity="' + _htmlEncode (_key) + '">' +
-															_plainEncodeString (_value [_key]) +
+															_encodeString (_value [_key]) +
 															'</item>\n'
 														);
 													}
@@ -181,7 +234,7 @@ Uize.module ({
 											)
 											: (
 												'\t<string name="' + _htmlEncode (_name) + '">' +
-												_plainEncodeString (_value) +
+												_encodeString (_value) +
 												'</string>'
 											)
 								);

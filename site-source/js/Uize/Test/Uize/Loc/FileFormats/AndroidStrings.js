@@ -118,6 +118,81 @@ Uize.module ({
 			test:[
 				Uize.Test.requiredModulesTest ('Uize.Loc.FileFormats.AndroidStrings'),
 				Uize.Test.staticMethodsTest ([
+					['Uize.Loc.FileFormats.AndroidStrings.stringHasNonStylingHtml',[
+						['An empty string is not considered to contain non-styling HTML',
+							'',
+							false
+						],
+						['When a string does not contain HTML, it is not considered to contain non-styling HTML',
+							'foo bar',
+							false
+						],
+						['When a string contains only the supported styling HTML tags, it is not considered to contain non-styling HTML',
+							'<b>foo</b> &amp;&#38;&#x26; <u>bar</u> <i>baz</i>',
+							false
+						],
+						['When a string contains HTML tags besides the supported styling HTML tags, it is considered to contain non-styling HTML',
+							'<div><b>foo</b> &amp;&#38;&#x26; <u>bar</u> <i>baz</i></div>',
+							true
+						]
+					]],
+					['Uize.Loc.FileFormats.AndroidStrings.encodeStringUsingEncodingMode',[
+						/*** test when the encoding mode is "htmlEncodeAlways" ***/
+							['When the string contains no HTML and the encoding mode is "htmlEncodeAlways", then it will be HTML encoded',
+								['foo & bar','htmlEncodeAlways'],
+								'foo &amp; bar'
+							],
+							['When the string contains only the supported styling HTML tags and the encoding mode is "htmlEncodeAlways", then it will be HTML encoded',
+								['<i><u><b>foo &amp; bar</b></u></i>','htmlEncodeAlways'],
+								'&lt;i&gt;&lt;u&gt;&lt;b&gt;foo &amp;amp; bar&lt;/b&gt;&lt;/u&gt;&lt;/i&gt;'
+							],
+							['When the string contains HTML tags beyond the supported styling tags and the encoding mode is "htmlEncodeAlways", then it will be HTML encoded',
+								['<div><i><u><b>foo &amp; bar</b></u></i></div>','htmlEncodeAlways'],
+								'&lt;div&gt;&lt;i&gt;&lt;u&gt;&lt;b&gt;foo &amp;amp; bar&lt;/b&gt;&lt;/u&gt;&lt;/i&gt;&lt;/div&gt;'
+							],
+
+						/*** test when the encoding mode is "cdataWrapAlways" ***/
+							['When the string contains no HTML and the encoding mode is "cdataWrapAlways", then it will be CDATA wrapped',
+								['foo & bar','cdataWrapAlways'],
+								'<![CDATA[foo & bar]]>'
+							],
+							['When the string contains only the supported styling HTML tags and the encoding mode is "cdataWrapAlways", then it will be CDATA wrapped',
+								['<i><u><b>foo &amp; bar</b></u></i>','cdataWrapAlways'],
+								'<![CDATA[<i><u><b>foo &amp; bar</b></u></i>]]>'
+							],
+							['When the string contains HTML tags beyond the supported styling tags and the encoding mode is "cdataWrapAlways", then it will be CDATA wrapped',
+								['<div><i><u><b>foo &amp; bar</b></u></i></div>','cdataWrapAlways'],
+								'<![CDATA[<div><i><u><b>foo &amp; bar</b></u></i></div>]]>'
+							],
+
+						/*** test when the encoding mode is "cdataWrapIfAnyHtml" ***/
+							['When the string contains no HTML and the encoding mode is "cdataWrapIfAnyHtml", then it will be HTML encoded',
+								['foo & bar','cdataWrapIfAnyHtml'],
+								'foo &amp; bar'
+							],
+							['When the string contains only the supported styling HTML tags and the encoding mode is "cdataWrapIfAnyHtml", then it will be CDATA wrapped',
+								['<i><u><b>foo &amp; bar</b></u></i>','cdataWrapIfAnyHtml'],
+								'<![CDATA[<i><u><b>foo &amp; bar</b></u></i>]]>'
+							],
+							['When the string contains HTML tags beyond the supported styling tags and the encoding mode is "cdataWrapIfAnyHtml", then it will be CDATA wrapped',
+								['<div><i><u><b>foo &amp; bar</b></u></i></div>','cdataWrapIfAnyHtml'],
+								'<![CDATA[<div><i><u><b>foo &amp; bar</b></u></i></div>]]>'
+							],
+
+						/*** test when the encoding mode is "cdataWrapIfNonStylingHtml" ***/
+							['When the string contains no HTML and the encoding mode is "cdataWrapIfNonStylingHtml", then it will be HTML encoded',
+								['foo & bar','cdataWrapIfNonStylingHtml'],
+								'foo &amp; bar'
+							],
+							['When the string contains only the supported styling HTML tags and the encoding mode is "cdataWrapIfNonStylingHtml", then it will be left as is',
+								['<i><u><b>foo &amp; bar</b></u></i>','cdataWrapIfNonStylingHtml'],
+								'<i><u><b>foo &amp; bar</b></u></i>'
+							],
+							['When the string contains HTML tags beyond the supported styling tags and the encoding mode is "cdataWrapIfNonStylingHtml", then it will be CDATA wrapped',
+								['<div><i><u><b>foo &amp; bar</b></u></i></div>','cdataWrapIfNonStylingHtml'],
+								'<![CDATA[<div><i><u><b>foo &amp; bar</b></u></i></div>]]>'
+							]
+					]],
 					['Uize.Loc.FileFormats.AndroidStrings.from',[
 						['Parsing an empty resource strings file produces an empty strings object',
 							_fileNoStrings,
@@ -331,6 +406,19 @@ Uize.module ({
 						['Serializing a strings object with object values representing strings with plural forms produces a resource strings file containing <plurals> tags representing the strings with plural forms',
 							Uize.clone (_stringsPluralForms),
 							_filePluralForms
+						],
+						['When serializing a strings object, strings are encoded by default with the "cdataWrapIfNonStylingHtml" encoding mode',
+							{
+								stringWithNoHtml:'foo & bar',
+								stringWithSupportedStylingHtmlTags:'<i><u><b>foo &amp; bar</b></u></i>',
+								stringWithUnsupportedHtmlTags:'<div><i><u><b>foo &amp; bar</b></u></i></div>'
+							},
+							'<?xml version="1.0" encoding="utf-8"?>\n' +
+							'<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">\n' +
+							'	<string name="stringWithNoHtml">foo &amp; bar</string>\n' +
+							'	<string name="stringWithSupportedStylingHtmlTags"><i><u><b>foo &amp; bar</b></u></i></string>\n' +
+							'	<string name="stringWithUnsupportedHtmlTags"><![CDATA[<div><i><u><b>foo &amp; bar</b></u></i></div>]]></string>\n' +
+							'</resources>\n',
 						]
 					]]
 				])
