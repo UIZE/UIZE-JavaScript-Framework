@@ -32,16 +32,17 @@ Uize.module ({
 		return Uize.Util.RegExpComposition ({
 			// https://en.wikipedia.org/wiki/Printf_format_string#Format_placeholder_specification
 			parameter:/\d+\$/,
-			flags:/[\+ \-#0]{0,5}/,
-				/* NOTES
-					- this isn't robust, since it shouldn't be possible to have 5 of the same flag
-					- some flags are only applicable for numeric types, so the string "above 5% and" does not have the placeholder "% a" since this is not a valid placeholder
-				*/
+			numberFlagsPositive:/[ +]/,
+			numberFlagsOther:/-?0?#?|-?#?0?|0?-?#?|0?#?-?|#?0?-?|#?-?0?/,
+			numberTypeFlags:/(?:{numberFlagsPositive}{numberFlagsOther})|(?:{numberFlagsOther}{numberFlagsPositive})/,
 			width:/\d+/,
-			precision:/\d+/,
+			precision:/\.\d+/,
 			length:/hh?|ll?|[Lzjt]/,
-			formattableType:/[diufFeEgGxXoscPaAn]/,
-			specifier:/(?:{parameter})?(?:{flags})?(?:{width})?(?:\.{precision})?(?:{length})?{formattableType}|%/,
+			numberType:/[diufFeEgGxXocPaA]/,
+			nonNumberType:/[sn]/,
+			numberFormatter:/(?:{numberTypeFlags})?(?:{width})?(?:{precision})?(?:{length})?{numberType}/,
+			nonNumberFormatter:/-?(?:{width})?(?:{precision})?{nonNumberType}/,
+			specifier:/(?:(?:{parameter})?(?:{numberFormatter}|{nonNumberFormatter}))|%/,
 			placeholder:/%({specifier})/
 		});
 	}
