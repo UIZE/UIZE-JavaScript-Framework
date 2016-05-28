@@ -43,6 +43,50 @@ Uize.module ({
 								'foo bar baz & qux ; <span',
 								false
 							],
+							['A string that contains an HTML tag that is empty is not considered to have HTML',
+								'<>',
+								false
+							],
+							['A string that contains an HTML tag with a slash both at the start and at the end is not considered to have HTML',
+								'</div/>',
+								false
+							],
+							['A string that contains a closing HTML tag with attributes is not considered to have HTML',
+								'</div foo="bar">',
+								false
+							],
+							['A string that contains an HTML tag with invalid characters is not considered to have HTML',
+								'<div ^$%:foo="bar":>',
+								false
+							],
+							['A string that contains an HTML tag with only attributes but no tag name is not considered to have HTML',
+								'< foo="bar" baz>',
+								false
+							],
+							['A string that contains an HTML tag with an attribute that has mismatching quotes is not considered to have HTML',
+								'<img src="foo.jpg\'>',
+								false
+							],
+							['A string that contains an HTML tag with an attribute that has mismatching quotes is not considered to have HTML',
+								'<img src=\'foo.jpg">',
+								false
+							],
+							['A string that contains an HTML tag with an attribute that is missing a closing quote is not considered to have HTML',
+								'<img src="foo.jpg>',
+								false
+							],
+							['A string that contains an HTML tag that is missing its opening "<" character is not considered to have HTML',
+								'img src="foo.jpg">',
+								false
+							],
+							['A string that contains an HTML tag that is missing its closing ">" character is not considered to have HTML',
+								'<img src="foo.jpg"',
+								false
+							],
+							['A string that contains an HTML tag that has no whitespace separating multiple attributes is not considered to have HTML',
+								'<img src="foo"bar="baz">',
+								false
+							],
 
 						/*** tests for strings that do contain HTML ***/
 							['A string containing a named HTML entity is considered to have HTML',
@@ -77,8 +121,21 @@ Uize.module ({
 								'<span class="foo bar" style="font-size: 12px;">foo bar</span>',
 								true
 							],
+							['A string containing a self-closing HTML tag with attributes is considered to have HTML',
+								'<img src="http://www.foo.com/pic.gif" style="width: 100px; height: 200px;"/>',
+								true
+							],
 							['A string containing an HTML tag with whitespace padding is considered to have HTML',
 								'< span  class = "foo bar" style = "font-size: 12px;" >foo bar< / span >',
+								true
+							],
+							['A string containing an HTML tag that is spread across multiple lines is considered to have HTML',
+								[
+									'<img ',
+									'	src="http://www.foo.com/pic.gif"',
+									'	style="width: 100px; height: 200px;"',
+									'/>'
+								].join ('\n'),
 								true
 							]
 					]]
