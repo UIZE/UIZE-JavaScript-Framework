@@ -25,25 +25,46 @@
 
 Uize.module ({
 	name:'Uize.Util.Html.Has',
-	required:'Uize.Util.Html.Encode',
+	required:[
+		'Uize.Util.Html.Encode',
+		'Uize.Util.RegExpComposition'
+	],
 	builder:function () {
 		'use strict';
 
 		var
 			/*** Variables for Performance Optimization ***/
-				_htmlEntityRegExp = Uize.Util.Html.Encode.entityRegExp
+				_htmlEntityRegExp = Uize.Util.Html.Encode.entityRegExp,
+				_htmlTagRegExp = Uize.Util.RegExpComposition ({
+					singleQuotedAttributeValue:/'[^']*?'/,
+					doubleQuotedAttributeValue:/"[^"]*?"/,
+					unquotedAttributeValue:/[^'">\s]+/,
+					attributeValue:/{doubleQuotedAttributeValue}|{singleQuotedAttributeValue}|{unquotedAttributeValue}/,
+					tagName:/\w+/,
+					attributeName:/\w+/,
+					attribute:/{attributeName}(\s*=\s*(?:{attributeValue}))?/,
+					closingTag:/<\s*\/\s*{tagName}\s*>/,
+					openingOrSelfClosingTag:/<\s*{tagName}((\s+{attribute})+\s*|\s*)\/?\s*>/,
+					htmlTag:/{closingTag}|{openingOrSelfClosingTag}/
+				}).get ('htmlTag')
 		;
 
-		return Uize.package ({
-			hasHtml:function (_string) {
-				return (
-					/<[^<]+>/.test (_string) ||
-						/* NOTE:
-							this is not the most robust test for HTML tags, so probably RegExpComposition should be used
-						*/
-					!!(_string + '').match (_htmlEntityRegExp)
-				);
+		console.log (_htmlTagRegExp);
+
+		/*** Utility Functions ***/
+			function _hasHtmlTag (_string) {
+				return !!(_string + '').match (_htmlTagRegExp);
 			}
+
+			function _hasHtmlEntity (_string) {
+				return !!(_string + '').match (_htmlEntityRegExp)
+			}
+
+		return Uize.package ({
+			tagRegExp:_htmlTagRegExp,
+			hasHtmlTag:_hasHtmlTag,
+			hasHtmlEntity:_hasHtmlEntity,
+			hasHtml:function (_string) {return _hasHtmlTag (_string) || _hasHtmlEntity (_string)}
 		});
 	}
 });
