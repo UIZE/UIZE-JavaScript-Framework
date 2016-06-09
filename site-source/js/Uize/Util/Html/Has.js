@@ -49,8 +49,6 @@ Uize.module ({
 				}).get ('htmlTag')
 		;
 
-		console.log (_htmlTagRegExp);
-
 		/*** Utility Functions ***/
 			function _hasHtmlTag (_string) {
 				return !!(_string + '').match (_htmlTagRegExp);
