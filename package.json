@@ -1,0 +1,13 @@
+{
+  "name": "uize",
+  "version": "1.16.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/UIZE/UIZE-JavaScript-Framework"
+  },
+  "author": "UIZE",
+  "license": "(MIT OR GPL-3.0)",
+  "dependencies": {
+  }
+}
+
