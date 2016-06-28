@@ -244,9 +244,58 @@ function _eval (_toEval) {
 				),
 				_params
 			);
-			if (_params.staleBefore == 'now')
-				_params.staleBefore = +new Date
-			;
+
+			/*** stitch in override params ***/
+				for (var _paramName in _params) {
+					if (_paramName.slice (0,7) == 'config.') {
+						var _paramValue = _params [_paramName];
+						delete _params [_paramName];
+						if (_paramName.indexOf ('[') > -1)
+							_paramName = _paramName.replace (
+								/\[([^\]]+)\]/g,
+								function (_match,_paramNamePart) {return _paramNamePart.replace (/\./g,'•')}
+							)
+						;
+						for (
+							var
+								_node = _params,
+								_paramNameParts = _paramName.split ('.'),
+								_paramNamePartsLength = _paramNameParts.length,
+								_paramNamePart,
+								_paramNamePartNo = 0
+							;
+							++_paramNamePartNo < _paramNamePartsLength;
+						) {
+							_paramNamePart = _paramNameParts [_paramNamePartNo];
+							if (_paramNamePart.indexOf ('•') > -1)
+								_paramNamePart = _paramNamePart.replace (/•/g,'.')
+							;
+							if (_paramNamePartNo == _paramNamePartsLength - 1) {
+								if (_paramValue == 'true') {
+									_paramValue = true;
+								} else if (_paramValue == 'false') {
+									_paramValue = false;
+								} else {
+									var _paramValueAsNumber = +_paramValue;
+									if (_paramValueAsNumber == _paramValueAsNumber)
+										_paramValue = _paramValueAsNumber
+									;
+								}
+								_node [_paramNamePart] = _paramValue;
+							} else {
+								_node = _node [_paramNamePart];
+								if (_node == null || typeof _node != 'object')
+									_node = _node [_paramNamePart] = {}
+								;
+							}
+						}
+					}
+				}
+
+			/*** resolve staleBefore param ***/
+				if (_params.staleBefore == 'now')
+					_params.staleBefore = +new Date
+				;
 
 		/*** load Uize base class and set up with module loader ***/
 			function _modulePathResolver (_moduleName) {
