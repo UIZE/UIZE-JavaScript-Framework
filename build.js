@@ -235,15 +235,17 @@ function _eval (_toEval) {
 				};
 			}
 
-		/*** load build environment properties ***/
-			var _env = (function () {return this}) ().env = eval ('(' + _readFile ('uize-config.json') + ')');
+		/*** load config and copy in params ***/
+			var _config = eval ('(' + _readFile (_params.configFile || 'uize-config.json') + ')');
+			delete _params.configFile;
 			_params = _copyInto (
 				_copyInto (
-					_copyInto ({},_env),
-					{logFilePath:(_env.logsPath || 'logs') + '/' + _buildModuleName + '.log'}
+					_copyInto ({},_config),
+					{logFilePath:(_config.logsPath || 'logs') + '/' + _buildModuleName + '.log'}
 				),
 				_params
 			);
+			(function () {return this}) ().env = _params;
 
 			/*** stitch in override params ***/
 				for (var _paramName in _params) {
@@ -312,7 +314,7 @@ function _eval (_toEval) {
 						_moduleSourcePath =
 							(
 								/^Uize(\.|$)/.test (_moduleName)
-									? env.uizePath + '/' + (_params.uizeModulesFolder || 'js')
+									? _params.uizePath + '/' + (_params.uizeModulesFolder || 'js')
 									: _params.sourcePath + '/' + _modulesFolder
 							) + _moduleFilePath,
 						_moduleBuiltPath = _params.builtPath + '/' + _modulesFolder + _moduleFilePath,
