@@ -82,14 +82,14 @@ function _eval (_toEval) {
 			if (_isWsh) {
 				_fileSystem = new ActiveXObject ('Scripting.FileSystemObject');
 				_fileExists = function (_path) {
-					return _fileSystem.FileExists (_path);
+					return _fileSystem.FileExists (_pathToRoot + _path);
 				};
 				_folderExists = function (_path) {
-					return _fileSystem.FolderExists (_path);
+					return _fileSystem.FolderExists (_pathToRoot + _path);
 				};
-				_readFile = function (_filePath) {
+				_readFile = function (_path) {
 					var
-						_file = _fileSystem.OpenTextFile (_pathToRoot + _filePath,1),
+						_file = _fileSystem.OpenTextFile (_pathToRoot + _path,1),
 						_fileText = _file.ReadAll ()
 					;
 					_file.Close();
@@ -109,7 +109,7 @@ function _eval (_toEval) {
 				_fileSystem = require ('fs');
 				var _pathExists = function (_path,_mustBeFolder) {
 					try {
-						var _stat = _fileSystem.statSync (_path);
+						var _stat = _fileSystem.statSync (_pathToRoot + _path);
 						return _mustBeFolder == undefined || !!(_stat.mode & (1 << 14)) == _mustBeFolder;
 					} catch (_error) {
 						return false;
@@ -121,8 +121,8 @@ function _eval (_toEval) {
 				_folderExists = function (_path) {
 					return _pathExists (_path,true);
 				};
-				_readFile = function (_filePath) {
-					return _fileSystem.readFileSync (_pathToRoot + _filePath,'utf8');
+				_readFile = function (_path) {
+					return _fileSystem.readFileSync (_pathToRoot + _path,'utf8');
 				};
 			}
 
