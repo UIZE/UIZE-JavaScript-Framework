@@ -67,29 +67,29 @@ function _eval (_toEval) {
 			return _target;
 		}
 		_copyInto (_params,_paramOverrides);
-		var
-			_pathToRoot = _params.pathToRoot || '',
-			_useSource = _params.useSource + '' != 'false'
-		;
 
 		/*** minimal file system functions ***/
 			var
+				_pathToRoot = _params.pathToRoot || '',
 				_fileSystem,
 				_readFile,
 				_fileExists,
 				_folderExists
 			;
+			function _resolvePath (_path) {
+				return _path.charAt (0) == '/' ? _path : _pathToRoot + _path;
+			}
 			if (_isWsh) {
 				_fileSystem = new ActiveXObject ('Scripting.FileSystemObject');
 				_fileExists = function (_path) {
-					return _fileSystem.FileExists (_pathToRoot + _path);
+					return _fileSystem.FileExists (_resolvePath (_path));
 				};
 				_folderExists = function (_path) {
-					return _fileSystem.FolderExists (_pathToRoot + _path);
+					return _fileSystem.FolderExists (_resolvePath (_path));
 				};
 				_readFile = function (_path) {
 					var
-						_file = _fileSystem.OpenTextFile (_pathToRoot + _path,1),
+						_file = _fileSystem.OpenTextFile (_resolvePath (_path),1),
 						_fileText = _file.ReadAll ()
 					;
 					_file.Close();
@@ -109,7 +109,7 @@ function _eval (_toEval) {
 				_fileSystem = require ('fs');
 				var _pathExists = function (_path,_mustBeFolder) {
 					try {
-						var _stat = _fileSystem.statSync (_pathToRoot + _path);
+						var _stat = _fileSystem.statSync (_resolvePath (_path));
 						return _mustBeFolder == undefined || !!(_stat.mode & (1 << 14)) == _mustBeFolder;
 					} catch (_error) {
 						return false;
@@ -122,7 +122,7 @@ function _eval (_toEval) {
 					return _pathExists (_path,true);
 				};
 				_readFile = function (_path) {
-					return _fileSystem.readFileSync (_pathToRoot + _path,'utf8');
+					return _fileSystem.readFileSync (_resolvePath (_path),'utf8');
 				};
 			}
 
@@ -300,6 +300,7 @@ function _eval (_toEval) {
 				;
 
 		/*** load Uize base class and set up with module loader ***/
+			var _useSource = _params.useSource + '' != 'false';
 			function _modulePathResolver (_moduleName) {
 				return _moduleName;
 			}
