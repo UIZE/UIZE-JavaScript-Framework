@@ -238,13 +238,7 @@ function _eval (_toEval) {
 		/*** load config and copy in params ***/
 			var _config = eval ('(' + _readFile (_params.configFile || 'uize-config.json') + ')');
 			delete _params.configFile;
-			_params = _copyInto (
-				_copyInto (
-					_copyInto ({},_config),
-					{logFilePath:(_config.logsPath || 'logs') + '/' + _buildModuleName + '.log'}
-				),
-				_params
-			);
+			_params = _copyInto (_copyInto ({},_config),_params);
 			(function () {return this}) ().env = _params;
 
 			/*** stitch in override params ***/
@@ -293,6 +287,11 @@ function _eval (_toEval) {
 						}
 					}
 				}
+
+			/*** set logFilePath ***/
+				if (_params.logFilePath == null)
+					_params.logFilePath = (_params.logsPath || 'logs') + '/' + _buildModuleName + '.log'
+				;
 
 			/*** resolve staleBefore param ***/
 				if (_params.staleBefore == 'now')
