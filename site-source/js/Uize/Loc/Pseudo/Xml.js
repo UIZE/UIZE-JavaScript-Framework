@@ -53,7 +53,8 @@ Uize.module ({
 					var
 						_strings = [],
 						_stringOrigins = [],
-						_attributeMatcher = _resolveAttributeMatcher (_options.attributeMatcher || Uize.returnFalse)
+						_attributeMatcher = _resolveAttributeMatcher (_options.attributeMatcher || Uize.returnFalse),
+						_tagNameMatcher = Uize.resolveMatcher (_options.tagNameMatcher)
 					;
 					Uize.Parse.Xml.Util.recurseNodes (
 						{childNodes:_nodeListParser},
@@ -64,6 +65,8 @@ Uize.module ({
 							}
 							if ('text' in _node) {
 								_addPseudoLocalizableString (_node,'text');
+							} else if (('tagName' in _node) && !_tagNameMatcher (_node.tagName.name)) {
+								return false;
 							} else if ('tagAttributes' in _node) {
 								Uize.forEach (
 									_node.tagAttributes.attributes,

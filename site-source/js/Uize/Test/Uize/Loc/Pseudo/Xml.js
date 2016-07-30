@@ -117,6 +117,68 @@ Uize.module ({
 								'</div>' +
 								'<div class="footer">(ç) Çöþýŕîĝĥţ___ 3001_</div>' +
 							'</div>'
+						],
+						['When an optional tag name matcher is specified, only those tags whose names match against the tag name matcher will have their contents pseudo-localized',
+							[
+								[
+									'<html xmlns="http://www.w3.org/1999/xhtml">',
+									'	<head>',
+									'		<title>Foo Page</title>',
+									'		<style type="text/css">',
+									'			/* this is some CSS that should not be pseudo-localized */',
+									'			div {',
+									'				margin: 0;',
+									'				font-family: Arial, Helvetica, Verdana;',
+									'				font-size: 12px;',
+									'			}',
+									'		</style>',
+									'	</head>',
+									'	<body>',
+									'		<script type="text/javascript">',
+									'			/* this is some JavaScript code that should not be pseudo-localized */',
+									'			function double (argument) {',
+									'				return argument * 2;',
+									'			}',
+									'		</script>',
+									'		<div>',
+									'			This is some <b>pseudo-localizable</b> content.',
+									'		</div>',
+									'	</body>',
+									'</html>'
+								].join ('\n'),
+								{
+									tagNameMatcher:function (_tagName) {
+										return _tagName != 'style' && _tagName != 'script';
+									},
+									wrapper:''
+								}
+							],
+							[
+								'<html xmlns="http://www.w3.org/1999/xhtml">',
+								'	<head>',
+								'		<title>Ƒöö_ Þåĝé_</title>',
+								'		<style type="text/css">',
+								'			/* this is some CSS that should not be pseudo-localized */',
+								'			div {',
+								'				margin: 0;',
+								'				font-family: Arial, Helvetica, Verdana;',
+								'				font-size: 12px;',
+								'			}',
+								'		</style>',
+								'	</head>',
+								'	<body>',
+								'		<script type="text/javascript">',
+								'			/* this is some JavaScript code that should not be pseudo-localized */',
+								'			function double (argument) {',
+								'				return argument * 2;',
+								'			}',
+								'		</script>',
+								'		<div>',
+								'			Ţĥîš_ îš_ šöɱé_ <b>þšéûðö-ļöçåļîžåƀļé______</b> çöñţéñţ__.',
+								'		</div>',
+								'	</body>',
+								'</html>'
+							].join ('\n')
 						]
 					]]
 				])
