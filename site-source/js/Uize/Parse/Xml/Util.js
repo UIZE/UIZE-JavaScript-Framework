@@ -101,9 +101,11 @@ Uize.module ({
 
 			recurseNodes:function (_node,_nodeHandler) {
 				function _processNode (_node,_nodeNo,_nodes) {
-					_nodeHandler (_node,_nodeNo,_nodes);
-					var _childNodes = _node.childNodes;
-					_childNodes && Uize.forEach (_childNodes.nodes,_processNode);
+					var _result = _nodeHandler (_node,_nodeNo,_nodes);
+					if (_result !== false) {
+						var _childNodes = _node.childNodes;
+						_childNodes && Uize.forEach (_childNodes.nodes,_processNode);
+					}
 				}
 				_processNode (_node);
 			}
