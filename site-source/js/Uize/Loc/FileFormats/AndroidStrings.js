@@ -44,7 +44,7 @@ Uize.module ({
 				_Uize_Util_Html_Encode = Uize.Util.Html.Encode,
 
 			/*** Variables for Performance Optimization ***/
-				_htmlEncode = Uize.Util.Html.Encode.encode,
+				_htmlEncode = _Uize_Util_Html_Encode.encode,
 				_hasHtml = Uize.Util.Html.Has.hasHtml,
 				_findNodeByTagName = _Uize_Parse_Xml_Util.findNodeByTagName,
 				_getAttributeValue = _Uize_Parse_Xml_Util.getAttributeValue,
