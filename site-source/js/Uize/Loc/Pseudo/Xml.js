@@ -12,7 +12,7 @@
 /* Module Meta Data
 	type: Package
 	importance: 2
-	codeCompleteness: 5
+	codeCompleteness: 100
 	docCompleteness: 5
 */
 
