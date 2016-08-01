@@ -25,23 +25,9 @@
 
 Uize.module ({
 	name:'Uize.Services.LocAdapter.mHtmlPseudoLocalization',
-	required:[
-		'Uize.Util.Matchers.AttributeMatcher',
-		'Uize.Loc.Pseudo.Xml'
-	],
+	required:'Uize.Loc.Pseudo.Html',
 	builder:function () {
 		'use strict';
-
-		var
-			/*** General Variables ***/
-				_xmlPseudoLocalizeOptions = {
-					attributeMatcher:Uize.Util.Matchers.AttributeMatcher.resolve ([
-						'title',
-						'img@alt',
-						'[input|textarea]@placeholder'
-					])
-				}
-		;
 
 		return function (_class) {
 			_class.declare ({
@@ -49,23 +35,12 @@ Uize.module ({
 					pseudoLocalizeString:function _method (_stringInfo,_pseudoLocalizeOptions) {
 						var
 							m = this,
-							_stringValue = _stringInfo.value,
-							_pseudoLocalized =
-								m.stringHasHtml (_stringInfo.path,_stringValue) &&
-								Uize.Loc.Pseudo.Xml.pseudoLocalize (
-									_stringValue
-										.replace (/(<(?:img|input|meta)\s+[^>]+[^\/])>/gi,'$1/>')
-										.replace (/<br>/gi,'<br/>'),
-									Uize.copyInto (_xmlPseudoLocalizeOptions,_pseudoLocalizeOptions)
-								)
+							_stringValue = _stringInfo.value
 						;
 						return (
-							!_pseudoLocalized ||
-								// the string hasn't been pseudo-localized yet (because it didn't contain HTML)
-							_pseudoLocalized.length < _stringValue.length * .8
-								// there must be some other errors in the HTML that prevent it from being parsed correctly
-								? _method.former.apply (m,arguments)
-								: _pseudoLocalized
+							m.stringHasHtml (_stringInfo.path,_stringValue)
+								? Uize.Loc.Pseudo.Html.pseudoLocalize (_stringValue,_pseudoLocalizeOptions)
+								: _method.former.apply (m,arguments)
 						);
 					}
 				}
