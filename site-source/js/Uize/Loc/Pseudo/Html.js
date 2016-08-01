@@ -57,16 +57,19 @@ Uize.module ({
 		return Uize.package ({
 			pseudoLocalize:function (_sourceStr,_options) {
 				_options = Uize.copy (_xmlPseudoLocalizeOptions,_options,{wrapper:''});
-				var
+				var _pseudoLocalized = _hasHtml (_sourceStr);
+				if (_pseudoLocalized) {
+					var _startPos = (_sourceStr.match (/<html[\s>]/) || {}).index || 0;
 					_pseudoLocalized =
-						_hasHtml (_sourceStr) &&
+						_sourceStr.slice (0,_startPos) +
 						Uize.Loc.Pseudo.Xml.pseudoLocalize (
-							_sourceStr
+							_sourceStr.slice (_startPos)
 								.replace (/(<(?:img|input|meta)\s+[^>]+[^\/])>/gi,'$1/>')
 								.replace (/<br>/gi,'<br/>'),
 							_options
 						)
-				;
+					;
+				}
 				return (
 					!_pseudoLocalized ||
 						// the string hasn't been pseudo-localized yet (because it didn't contain HTML)

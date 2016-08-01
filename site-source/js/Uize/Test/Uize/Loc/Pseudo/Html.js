@@ -227,6 +227,42 @@ Uize.module ({
 							['A string that contains HTML that is not well formed and that cannot be repaired will be pseudo-localized using a more rudimentary process where the HTML tag pattern is part of the word splitter',
 								'<foo title="bad HTML">This is some <b>pseudo-localizable</b> content.</bar>',
 								'<foo title="bad HTML">Ţĥîš_ îš_ šöɱé_ <b>þšéûðö__-ļöçåļîžåƀļé___</b> çöñţéñţ__.</bar>'
+							],
+
+						/*** miscellaneous tests ***/
+							['A string may be a complete HTML document with a prolog containing XML and DOCTYPE declarations, and the prolog declarations are ignored during pseudo-localization',
+								[
+									'<?xml version="1.0" encoding="UTF-8"?>',
+									'<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">',
+									'<html xmlns="http://www.w3.org/1999/xhtml">',
+									'	<head>',
+									'		<title>Foo Page</title>',
+									'	</head>',
+									'	<body>',
+									'		<div>',
+									'			This is some <b>pseudo-localizable</b> content.',
+									'			<img src="http://foo.com/img.jpg" title="This is an image"/>',
+									'			<input type="text" placeholder="This is an input placeholder"/>',
+									'		</div>',
+									'	</body>',
+									'</html>'
+								].join ('\n'),
+								[
+									'<?xml version="1.0" encoding="UTF-8"?>',
+									'<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">',
+									'<html xmlns="http://www.w3.org/1999/xhtml">',
+									'	<head>',
+									'		<title>Ƒöö_ Þåĝé_</title>',
+									'	</head>',
+									'	<body>',
+									'		<div>',
+									'			Ţĥîš_ îš_ šöɱé_ <b>þšéûðö__-ļöçåļîžåƀļé___</b> çöñţéñţ__.',
+									'			<img src="http://foo.com/img.jpg" title="Ţĥîš__ îš åñ_ îɱåĝé_"/>',
+									'			<input type="text" placeholder="Ţĥîš_ îš_ åñ_ îñþûţ_ þļåçéĥöļðéŕ___"/>',
+									'		</div>',
+									'	</body>',
+									'</html>'
+								].join ('\n')
 							]
 					]]
 				])
