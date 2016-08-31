@@ -1479,7 +1479,7 @@ Uize.module ({
 							_brandSpecificBreakdownTable ('Word Count',_metrics.wordCount) + '\n' +
 							_brandSpecificBreakdownTable ('Character Count',_metrics.charCount) + '\n' +
 							Uize.Templates.Text.Tables.YinYangBreakdown.process ({
-								title:'Resource Strings',
+								title:'Resource Strings by Qualities',
 								countByCategory:{
 									'All,None':_metrics.resourceStrings.all,
 									'Brand-specific,Brand-neutral':_metrics.resourceStrings.brandSpecific,
