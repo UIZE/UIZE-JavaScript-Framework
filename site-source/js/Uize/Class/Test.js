@@ -401,6 +401,23 @@ Uize.module ({
 					_superclass.set.apply (m,arguments);
 				},
 
+				setTest:function (_test) {
+					this.set ({test:_test});
+					return this;
+					/*?
+						Static Methods
+							Uize.Class.Test.setTest
+								Sets the initial value of the =test= state property to the value specified by the =testOBJ= parameter.
+
+								SYNTAX
+								..............................................
+								testCLASS = Uize.Class.Test.setTest (testOBJ);
+								..............................................
+
+								This method returns a reference to the test class on which it is called.
+					*/
+				},
+
 				resolve:function (_test) {
 					return _Uize.Util.Oop.inheritsFrom (_test,_class) ? _test : this.subclass ({set:_test});
 					/*?
