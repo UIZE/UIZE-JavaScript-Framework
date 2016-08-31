@@ -577,10 +577,7 @@ Uize.module ({
 					*/
 
 				moduleToTest:function(_moduleToTest) {
-					this.set({
-						title:'Test for ' + _moduleToTest,
-						_moduleToTest:_moduleToTest
-					});
+					this.set({_moduleToTest:_moduleToTest});
 				},
 				propertyConformerTest:function(_testParams) {
 					return _makeDeclarativeCasesPropertyTest.call(
@@ -716,7 +713,10 @@ Uize.module ({
 
 			stateProperties:{
 				_instance:'instance',
-				_moduleToTest:'moduleToTest'
+				_moduleToTest:'moduleToTest',
+				title:{
+					derived:'moduleToTest: "Test for " + moduleToTest + " class"'
+				}
 			}
 		});
 	}
