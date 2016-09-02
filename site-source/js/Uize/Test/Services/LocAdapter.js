@@ -26,7 +26,10 @@
 Uize.module ({
 	name:'Uize.Test.Services.LocAdapter',
 	superclass:'Uize.Test.Class',
-	required:'Uize.Str.Split',
+	required:[
+		'Uize.Str.Split',
+		'Uize.Loc.Strings.Metrics'
+	],
 	builder:function (_superclass) {
 		'use strict';
 
@@ -38,34 +41,67 @@ Uize.module ({
 				_split = _Uize.Str.Split.split
 		;
 
+		/*** Utility Functions ***/
+			function _getCasesTest (m,_title,_cases,_arrayCaseTestFunctionResolver) {
+				function _getCaseTest (_case) {
+					var
+						_caseIsArray = _Uize.isArray (_case),
+						_caseTest = _caseIsArray
+							? {
+								title:_case [0],
+								test:_arrayCaseTestFunctionResolver (_case.slice (1))
+							}
+							: _case
+					;
+					if (!_caseIsArray && _Uize.isArray (_case.test))
+						_case.test = _Uize.map (_case.test,_getCaseTest)
+					;
+					return _caseTest;
+				}
+				return m.resolve ({
+					title:_title,
+					test:_Uize.map (_cases,_getCaseTest)
+				});;
+			}
+
 		return _superclass.subclass ({
 			staticMethods:{
 				wordSplitterTest:function (_cases) {
 					var m = this;
-					function _getCaseTest (_case) {
-						var
-							_caseIsArray = _Uize.isArray (_case),
-							_caseTest = _caseIsArray
-								? {
-									title:_case [0],
-									test:function () {
-										return this.expect (
-											_case [2],
-											_split (_case [1],m.getModule ().prototype.wordSplitter,null,'none')
-										);
-									}
-								}
-								: _case
-						;
-						if (!_caseIsArray && _Uize.isArray (_case.test))
-							_case.test = _Uize.map (_case.test,_getCaseTest)
-						;
-						return _caseTest;
-					}
-					return m.resolve ({
-						title:'Word Splitter Test',
-						test:_Uize.map (_cases,_getCaseTest)
-					});;
+					return _getCasesTest (
+						m,
+						'Word Splitter Test',
+						_cases,
+						function (_caseArgs) {
+							return function () {
+								return this.expect (
+									_caseArgs [1],
+									_split (_caseArgs [0],m.getModule ().prototype.wordSplitter,null,'none')
+								);
+							}
+						}
+					);
+				},
+
+				tokenRegExpTest:function (_cases) {
+					var m = this;
+					return _getCasesTest (
+						m,
+						'Token Regular Expression Test',
+						_cases,
+						function (_caseArgs) {
+							return function () {
+								var _tokenRegExp = m.getModule ().prototype.tokenRegExp;
+								_tokenRegExp.lastIndex = 0;
+								var _match = _tokenRegExp.exec (_caseArgs [0]);
+								return (
+									this.expect (true,!!_match) &&
+									this.expect (_caseArgs [0].length,_match [0].length) &&
+									this.expect (_caseArgs [1],Uize.Loc.Strings.Metrics.getTokenNameFromMatch (_match))
+								);
+							}
+						}
+					);
 				}
 			}
 		});

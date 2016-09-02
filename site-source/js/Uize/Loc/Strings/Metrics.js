@@ -43,7 +43,20 @@ Uize.module ({
 				_defaultWordSplitter = Uize.Util.RegExpComposition.WordSplitter.get ('wordSplitter')
 		;
 
+		/*** Utility Functions ***/
+			function _getTokenNameFromMatch (_match) {
+				var _tokenName;
+				if (_match && !(_tokenName = _match [1])) {
+					for (var _matchSegmentNo = _match.length; !_tokenName && --_matchSegmentNo >= 0;)
+						_tokenName = _match [_matchSegmentNo]
+					;
+				}
+				return _tokenName;
+			}
+
 		return Uize.package ({
+			getTokenNameFromMatch:_getTokenNameFromMatch,
+
 			getStringMetrics:function (_sourceStr,_wordSplitter,_tokenRegExp) {
 				var
 					_words = 0,
@@ -55,19 +68,15 @@ Uize.module ({
 					if (_tokenRegExp) {
 						var
 							_match,
-							_tokenName,
-							_tokenAdded = {}
+							_tokenAdded = {},
+							_trueFlag = {}
 						;
 						_tokenRegExp.lastIndex = 0;
 						while (_match = _tokenRegExp.exec (_sourceStr)) {
-							if (!(_tokenName = _match [1])) {
-								for (var _matchSegmentNo = _match.length; !_tokenName && --_matchSegmentNo >= 0;)
-									_tokenName = _match [_matchSegmentNo]
-								;
-							}
-							if (!_tokenAdded [_tokenName]) {
+							var _tokenName = _getTokenNameFromMatch (_match);
+							if (_tokenAdded [_tokenName] != _trueFlag) {
 								_tokens.push (_tokenName);
-								_tokenAdded [_tokenName] = 1;
+								_tokenAdded [_tokenName] = _trueFlag;
 							}
 						}
 					}
