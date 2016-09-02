@@ -42,7 +42,6 @@ Uize.module ({
 			staticMethods:{
 				wordSplitterTest:function (_cases) {
 					var m = this;
-					console.log (m.get ('moduleToTest'));
 					function _getCaseTest (_case) {
 						var
 							_caseIsArray = _Uize.isArray (_case),
