@@ -95,9 +95,13 @@ Uize.module ({
 								_tokenRegExp.lastIndex = 0;
 								var _match = _tokenRegExp.exec (_caseArgs [0]);
 								return (
-									this.expect (true,!!_match) &&
-									this.expect (_caseArgs [0].length,_match [0].length) &&
-									this.expect (_caseArgs [1],Uize.Loc.Strings.Metrics.getTokenNameFromMatch (_match))
+									_caseArgs [1]
+										? (
+											this.expect (true,!!_match) &&
+											this.expect (_caseArgs [0],_match [0]) &&
+											this.expect (_caseArgs [1],Uize.Loc.Strings.Metrics.getTokenNameFromMatch (_match))
+										)
+										: this.expect (false,!!_match && _caseArgs [0] === _match [0])
 								);
 							}
 						}
