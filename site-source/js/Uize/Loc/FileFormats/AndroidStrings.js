@@ -120,26 +120,31 @@ Uize.module ({
 					_findNodeByTagName (_xliffNodeList,'resources').childNodes.nodes,
 					function (_node) {
 						function _getStringText (_node) {
-							_recurseNodes (
-								_node,
-								function (_node) {
-									if ('text' in _node) {
-										_node.serialize = function () {return this.text};
-									} else if ('cdata' in _node) {
-										_node.serialize = function () {return this.cdata.replace (/"/g,'\\"')};
-									} else if (_isTag (_node,'xliff:g')) {
-										_node.serialize = function () {return this.childNodes.nodes [0].text};
+							var _childNodes = _node.childNodes;
+							if (_childNodes) {
+								_recurseNodes (
+									_node,
+									function (_node) {
+										if ('text' in _node) {
+											_node.serialize = function () {return this.text};
+										} else if ('cdata' in _node) {
+											_node.serialize = function () {return this.cdata.replace (/"/g,'\\"')};
+										} else if (_isTag (_node,'xliff:g')) {
+											_node.serialize = function () {return this.childNodes.nodes [0].text};
+										}
 									}
-								}
-							);
-							var
-								_string = _node.childNodes.serialize (),
-								_stringFirstChar = _string.charAt (0)
-							;
-							_stringLiteralParser.parse (
-								_stringFirstChar == '\'' || _stringFirstChar == '"' ? _string : '"' + _string + '"'
-							);
-							return _stringLiteralParser.value;
+								);
+								var
+									_string = _childNodes.serialize (),
+									_stringFirstChar = _string.charAt (0)
+								;
+								_stringLiteralParser.parse (
+									_stringFirstChar == '\'' || _stringFirstChar == '"' ? _string : '"' + _string + '"'
+								);
+								return _stringLiteralParser.value;
+							} else {
+								return '';
+							}
 						}
 
 						var _stringValue;

@@ -380,6 +380,15 @@ Uize.module ({
 										other:'Delete the selected <i><u><b>{count}</b></u></i> files?'
 									}
 								}
+							],
+							['A string tag can be self-closing, and a self-closing string tag is treated as having an empty value',
+								'<?xml version="1.0" encoding="utf-8"?>\n' +
+								'<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">\n' +
+								'	<string name="foo"/>\n' +
+								'</resources>\n',
+								{
+									foo:''
+								}
 							]
 					]],
 					['Uize.Loc.FileFormats.AndroidStrings.to',[
