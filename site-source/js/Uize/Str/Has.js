@@ -31,6 +31,7 @@ Uize.module ({
 		/*** Utility Functions ***/
 			function _stringHasPrefixOrSuffix (_sourceStr,_subStr,_isSuffixTest) {
 				if (!_subStr) return true;
+				if (!_sourceStr) return false;
 				var
 					_sourceStrLength = _sourceStr.length,
 					_subStrLength = _subStr.length,
