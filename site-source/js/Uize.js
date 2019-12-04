@@ -26,6 +26,21 @@
 			Utility Belt Methods
 				The =Uize= module provides a slew of utility belt methods that can be divided into the following categories...
 
+				Uize Overrides
+					=Uize= functions can be overriden by defining a =Uize= function before loading of the Uize module. For example...
+
+					....................................................................................
+					window.Uize = window.Uize || function(){};
+					Uize.moduleUrlResolver = function (_moduleName) {
+						var _modulePath = Uize.modulePathResolver (_moduleName);
+						return (
+							moduleName.indexOf ('MyDomain.') == 0
+								? '/js/' + _modulePath + '.js'
+								: 'http://www.some-cdn.com/uize-js/' + _modulePath + '.js'
+						);
+					};
+					....................................................................................
+
 				Module Mechanism Methods
 					The =Uize= module provides static methods for declaring your own JavaScript modules, requiring modules, and configuring the `module loader mechanism` to suit your application environment.
 
@@ -300,12 +315,12 @@
 						This is just like immediate invokation of an anonymous function, except with the additional wrapper of the =Uize.quarantine= call.
 */
 
-Uize = (function () {
+Uize = (function (_UizeOverrides) {
 	'use strict';
 
 		var
 			/*** Variables for Scruncher Optimization ***/
-				_package = function () {},
+				_package = _UizeOverrides || function () { },
 				_undefined,
 				_typeString = 'string',
 				_typeObject = 'object',
@@ -399,6 +414,15 @@ Uize = (function () {
 			;
 			return _target;
 		}
+		function _copyNewFromSourceIntoTarget (_target,_source) {
+			for (var _property in _source) {
+				//Only copy if it is a new property
+				if (!(_property in _target)) {
+					_target [_property] = _source [_property];
+				}
+			}
+			return _target;
+		}
 
 		function _mergeSourceIntoTarget (_target,_source) {
 			var
@@ -415,7 +439,7 @@ Uize = (function () {
 			;
 		}
 
-	_copySourceIntoTarget (
+	_copyNewFromSourceIntoTarget (
 		_package,
 		{
 			capFirstChar:function (_sourceStr) {
@@ -5405,7 +5429,7 @@ Uize = (function () {
 			);
 		}
 
-		_copySourceIntoTarget (
+		_copyNewFromSourceIntoTarget(
 			_package,
 			{
 				getModuleByName:_getModuleByName = function (_moduleName) {
@@ -6055,4 +6079,4 @@ Uize = (function () {
 		_package.module ({name:'Uize',builder:function () {return _package}});
 
 	return _package;
-}) ();
+}) ((function () {return this}) ().Uize);
