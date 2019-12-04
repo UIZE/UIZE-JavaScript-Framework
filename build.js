@@ -77,7 +77,7 @@ function _eval (_toEval) {
 				_folderExists
 			;
 			function _resolvePath (_path) {
-				return /^\.?\//.test (_path) ? _path : _pathToRoot + _path;
+				return /^(\.?\/|[a-z]:|\\)/i.test (_path) ? _path : _pathToRoot + _path;
 			}
 			if (_isWsh) {
 				_fileSystem = new ActiveXObject ('Scripting.FileSystemObject');
